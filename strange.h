@@ -25,7 +25,7 @@ public:
 	{
 		std::vector<Ptr>* const v = new std::vector<Ptr>;
 		variadic_(*v, args...);
-		return thing(Iterator::mut_(v));
+		return thing(Iterator<const std::vector<Ptr>>::mut_(v));
 	}
 
 	static inline void variadic_(std::vector<Ptr>& vec)
@@ -694,14 +694,13 @@ protected:
 	const Ptr _decorated;
 };
 
+template <typename C>
 class Iterator : public Mutable
 {
-	typedef const std::vector<Ptr> const_std_vector_ptr;
-
 public:
 	virtual inline const Ptr next_()
 	{
-		if (_iterator == _vector->cend())
+		if (_iterator == _collection->cend())
 		{
 			return end_();
 		}
@@ -712,14 +711,14 @@ public:
 	{
 		const Ptr result = mut_(0);
 		Iterator* const iterator = static_cast<Iterator*>(result.get());
-		iterator->_vector = _vector;
+		iterator->_collection = _collection;
 		iterator->_iterator = _iterator;
 		return result;
 	}
 
-	static inline const Ptr mut_(const_std_vector_ptr* const vec)
+	static inline const Ptr mut_(C* const collection)
 	{
-		return Ptr(new Iterator(vec));
+		return Ptr(new Iterator(collection));
 	}
 
 	virtual inline const Ptr type_() const
@@ -731,15 +730,15 @@ public:
 	virtual inline const Ptr cats_() const;
 
 private:
-	inline Iterator(const_std_vector_ptr* const vec)
+	inline Iterator(C* const collection)
 		: Mutable()
-		, _vector(vec)
-		, _iterator(vec->cbegin())
+		, _collection(collection)
+		, _iterator(collection->cbegin())
 	{
 	}
 
-	std::shared_ptr<const_std_vector_ptr> _vector;
-	const_std_vector_ptr::const_iterator _iterator;
+	std::shared_ptr<C> _collection;
+	typename C::const_iterator _iterator;
 };
 
 class Flock : public Mutable, public Me
@@ -1077,6 +1076,17 @@ private:
 	};
 };
 
+class Stream : public Mutable, public Me
+{
+	typedef std::unique_ptr<std::iostream> std_unique_iostream;
+public:
+
+private:
+	Stream() = default;
+
+	std_unique_iostream _stream;
+};
+
 inline const Thing::Ptr Thing::cats_() const
 {
 	static const Ptr CATS = []()
@@ -1134,7 +1144,8 @@ inline const Thing::Ptr Index::It::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Iterator::cats_() const
+template<typename C>
+inline const Thing::Ptr Iterator<C>::cats_() const
 {
 	static const Ptr CATS = []()
 	{
