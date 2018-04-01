@@ -1175,6 +1175,104 @@ public:
 	}
 };
 
+class Fence : public Mutable
+{
+public:
+	static inline const Ptr mut(const Ptr it)
+	{
+		return mut_(it->next_());
+	}
+
+	static inline const Ptr mut_(const Ptr ptr)
+	{
+		return Ptr(new Fence(ptr));
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(_ptr);
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_cast<Index*>(pub.get());
+			index->update_("mut", Static::fin_(&Fence::mut));
+			index->update_("give", Member<Fence>::fin_(&Fence::give));
+			index->update_("take", Member<Fence>::fin_(&Fence::take));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	inline const bool give_(const Ptr ptr)
+	{
+		if (_fence.load(std::memory_order_acquire))
+		{
+			return false;
+		}
+		_ptr = ptr;
+		_fence.store(true, std::memory_order_release);
+		return true;
+	}
+
+	inline const Ptr give(const Ptr it)
+	{
+		return boolean_(give_(it->next_()));
+	}
+
+	inline const Ptr take_()
+	{
+		if (_fence.load(std::memory_order_acquire))
+		{
+			_fence.store(false, std::memory_order_release);
+			return _ptr;
+		}
+		return nothing_();
+	}
+
+	inline const Ptr take(const Ptr ignore)
+	{
+		return take_();
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Bit");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_cast<Herd*>(cats.get());
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Concurrent");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+private:
+	inline Fence(const Ptr ptr)
+		: Mutable()
+		, _fence()
+		, _ptr(ptr)
+	{
+		_fence.store(false, std::memory_order_release);
+	}
+
+	std::atomic<bool> _fence;
+	Ptr _ptr;
+};
+
 class Stream : public Mutable, public Me
 {
 	typedef const std::unique_ptr<std::iostream> const_std_unique_iostream;
