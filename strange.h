@@ -697,6 +697,8 @@ protected:
 template <typename C>
 class Iterator : public Mutable
 {
+	typedef const std::shared_ptr<C> const_std_shared_ptr_collection;
+
 public:
 	virtual inline const Ptr next_()
 	{
@@ -709,14 +711,18 @@ public:
 
 	virtual inline const Ptr copy_() const
 	{
-		const Ptr result = mut_(0);
+		const Ptr result = mut_(_collection);
 		Iterator* const iterator = static_cast<Iterator*>(result.get());
-		iterator->_collection = _collection;
 		iterator->_iterator = _iterator;
 		return result;
 	}
 
 	static inline const Ptr mut_(C* const collection)
+	{
+		return mut_(const_std_shared_ptr_collection(collection));
+	}
+
+	static inline const Ptr mut_(const_std_shared_ptr_collection collection)
 	{
 		return Ptr(new Iterator(collection));
 	}
@@ -730,14 +736,14 @@ public:
 	virtual inline const Ptr cats_() const;
 
 private:
-	inline Iterator(C* const collection)
+	inline Iterator(const_std_shared_ptr_collection collection)
 		: Mutable()
 		, _collection(collection)
 		, _iterator(collection->cbegin())
 	{
 	}
 
-	std::shared_ptr<C> _collection;
+	const_std_shared_ptr_collection _collection;
 	typename C::const_iterator _iterator;
 };
 
@@ -828,7 +834,7 @@ private:
 	public:
 		virtual const Ptr next_()
 		{
-			if (_iterator == static_cast<Flock*>(_flock.get())->_vector.end())
+			if (_iterator == static_cast<Flock*>(_flock.get())->_vector.cend())
 			{
 				return end_();
 			}
@@ -870,7 +876,7 @@ private:
 
 inline const Thing::Ptr Index::It::next_()
 {
-	if (_iterator == static_cast<Index*>(_index.get())->_map.end())
+	if (_iterator == static_cast<Index*>(_index.get())->_map.cend())
 	{
 		return end_();
 	}
@@ -1023,7 +1029,7 @@ private:
 	public:
 		virtual inline const Ptr next_()
 		{
-			if (_iterator == static_cast<Herd*>(_herd.get())->_set.end())
+			if (_iterator == static_cast<Herd*>(_herd.get())->_set.cend())
 			{
 				return end_();
 			}
