@@ -358,7 +358,7 @@ private:
 	const function _function;
 };
 
-template <typename T>
+template<typename T>
 class Member : public Thing, public Me
 {
 	typedef const Ptr(T::* member)(const Ptr);
@@ -405,7 +405,7 @@ private:
 	const member _function;
 };
 
-template <typename T>
+template<typename T>
 class Const : public Thing, public Me
 {
 	typedef const Ptr(T::* member)(const Ptr) const;
@@ -694,7 +694,7 @@ protected:
 	const Ptr _decorated;
 };
 
-template <typename C>
+template<typename C>
 class Iterator : public Mutable
 {
 	typedef const std::shared_ptr<C> const_std_shared_ptr_collection;
@@ -1082,52 +1082,23 @@ private:
 	};
 };
 
-class Bit : public Mutable
+template<typename D>
+class Data : public Mutable
 {
 public:
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut_(const D& data = D())
 	{
-		return mut_(!it->next_()->is_("0"));
-	}
-
-	static inline const Ptr mut_(const bool b = false)
-	{
-		return Ptr(new Bit(b));
+		return Ptr(new Data(data));
 	}
 
 	virtual inline const Ptr copy_() const override
 	{
-		return mut_(_bool);
-	}
-
-	virtual inline const Ptr pub_() const override
-	{
-		static const Ptr PUB = [this]()
-		{
-			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_cast<Index*>(pub.get());
-			index->update_("mut", Static::fin_(&Bit::mut));
-			index->update_("toggle", Member<Bit>::fin_(&Bit::toggle));
-			index->finalize_();
-			return pub;
-		}();
-		return PUB;
-	}
-
-	inline void toggle_()
-	{
-		_bool = !_bool;
-	}
-
-	inline const Ptr toggle(const Ptr ignore)
-	{
-		toggle_();
-		return nothing_();
+		return mut_(_data);
 	}
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Bit");
+		static const Ptr TYPE = sym_("strange::Data");
 		return TYPE;
 	}
 
@@ -1147,13 +1118,61 @@ public:
 	}
 
 private:
-	Bit(const bool b)
+	Data(const D& data)
 		: Mutable()
-		, _bool(b)
+		, _data(data)
 	{
 	}
 
-	bool _bool;
+	D _data;
+};
+
+class Bit : public Data<bool>
+{
+public:
+	static inline const Ptr mut(const Ptr it)
+	{
+		return mut_(!it->next_()->is_("0"));
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_cast<Index*>(pub.get());
+			index->update_("mut", Static::fin_(&Bit::mut));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Bit");
+		return TYPE;
+	}
+};
+
+class Byte : public Data<unsigned char>
+{
+public:
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Byte");
+		return TYPE;
+	}
+};
+
+class Buffer : public Data<std::string>
+{
+public:
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Buffer");
+		return TYPE;
+	}
 };
 
 class Stream : public Mutable, public Me
