@@ -1087,21 +1087,66 @@ class Bit : public Mutable
 public:
 	static inline const Ptr mut(const Ptr it)
 	{
-		return Ptr(new Bit(it));
+		return mut_(!it->next_()->is_("0"));
+	}
+
+	static inline const Ptr mut_(const bool b = false)
+	{
+		return Ptr(new Bit(b));
 	}
 
 	virtual inline const Ptr copy_() const override
 	{
+		return mut_(_bool);
+	}
 
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_cast<Index*>(pub.get());
+			index->update_("mut", Static::fin_(&Bit::mut));
+			index->update_("toggle", Member<Bit>::fin_(&Bit::toggle));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	inline void toggle_()
+	{
+		_bool = !_bool;
+	}
+
+	inline const Ptr toggle(const Ptr ignore)
+	{
+		toggle_();
+		return nothing_();
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Bit");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_cast<Herd*>(cats.get());
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
 	}
 
 private:
-	Bit(const Ptr it)
-		: Mutable()
-		, _bool(!it->next_()->is_("0"))
-	{
-	}
-
 	Bit(const bool b)
 		: Mutable()
 		, _bool(b)
