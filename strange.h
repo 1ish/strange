@@ -1084,13 +1084,18 @@ private:
 
 class Stream : public Mutable, public Me
 {
-	typedef std::unique_ptr<std::iostream> std_unique_iostream;
+	typedef const std::unique_ptr<std::iostream> const_std_unique_iostream;
+
 public:
 
 private:
-	Stream() = default;
+	Stream(std::iostream* const stream)
+		: Mutable()
+		, _stream(stream)
+	{
+	}
 
-	std_unique_iostream _stream;
+	const_std_unique_iostream _stream;
 };
 
 inline const Thing::Ptr Thing::cats_() const
