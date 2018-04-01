@@ -241,12 +241,12 @@ private:
 class Symbol : public Thing, public Me
 {
 public:
-	virtual inline size_t hash_() const
+	virtual inline size_t hash_() const override
 	{
 		return _hash;
 	}
 
-	virtual inline const bool same_(const Thing& other) const
+	virtual inline const bool same_(const Thing& other) const override
 	{
 		return other.is_(_symbol);
 	}
@@ -256,7 +256,7 @@ public:
 		return _symbol;
 	}
 
-	virtual inline const Ptr copy_() const
+	virtual inline const Ptr copy_() const override
 	{
 		return me_();
 	}
@@ -266,16 +266,16 @@ public:
 		return me_<Symbol>(new Symbol(symbol));
 	}
 
-	virtual inline const Ptr type_() const
+	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Symbol");
 		return TYPE;
 	}
 
-	virtual inline const Ptr cats_() const;
+	virtual inline const Ptr cats_() const override;
 
 protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it)
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
 		return me_();
 	}
@@ -331,19 +331,19 @@ public:
 		return me_<Static>(new Static(fun));
 	}
 
-	virtual inline const Ptr copy_() const
+	virtual inline const Ptr copy_() const override
 	{
 		return me_();
 	}
 
-	virtual inline const Ptr type_() const
+	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Static");
 		return TYPE;
 	}
 
 protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it)
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
 		return _function(it);
 	}
@@ -369,19 +369,19 @@ public:
 		return me_<Member>(new Member(fun));
 	}
 
-	virtual inline const Ptr copy_() const
+	virtual inline const Ptr copy_() const override
 	{
 		return me_();
 	}
 
-	virtual inline const Ptr type_() const
+	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Member");
 		return TYPE;
 	}
 
 protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it)
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
@@ -416,19 +416,19 @@ public:
 		return me_<Const>(new Const(fun));
 	}
 
-	virtual inline const Ptr copy_() const
+	virtual inline const Ptr copy_() const override
 	{
 		return me_();
 	}
 
-	virtual inline const Ptr type_() const
+	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Const");
 		return TYPE;
 	}
 
 protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it)
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
@@ -451,17 +451,17 @@ private:
 class Mutable : public Thing
 {
 public:
-	virtual inline void finalize_()
+	virtual inline void finalize_() override
 	{
 		_finalized = true;
 	}
 
-	virtual inline const bool finalized_() const
+	virtual inline const bool finalized_() const override
 	{
 		return _finalized;
 	}
 
-	virtual inline const Ptr type_() const
+	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Mutable");
 		return TYPE;
@@ -501,14 +501,14 @@ class Index : public Mutable, public Me
 	typedef std::unordered_map<Ptr, Ptr, Hash, Pred> std_unordered_map_ptr_ptr;
 
 public:
-	virtual inline const Ptr copy_() const
+	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
 		static_cast<Index*>(result.get())->_map = _map;
 		return result;
 	}
 
-	virtual inline const Ptr pub_() const
+	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
 		{
@@ -571,15 +571,15 @@ public:
 		return iterator_();
 	}
 
-	virtual inline const Ptr type_() const
+	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Index");
 		return TYPE;
 	}
 
-	virtual inline const Ptr cats_() const;
+	virtual inline const Ptr cats_() const override;
 
-	virtual const Ptr visit(const Ptr it)
+	virtual const Ptr visit(const Ptr it) override
 	{
 		const Ptr visitor = it->next_();
 		const Ptr member = it->next_();
@@ -603,9 +603,9 @@ private:
 	class It : public Mutable
 	{
 	public:
-		virtual inline const Ptr next_();
+		virtual inline const Ptr next_() override;
 
-		virtual inline const Ptr copy_() const
+		virtual inline const Ptr copy_() const override
 		{
 			const Ptr result = mut_(_index);
 			static_cast<It*>(result.get())->_iterator = _iterator;
@@ -617,13 +617,13 @@ private:
 			return Ptr(new It(index));
 		}
 
-		virtual inline const Ptr type_() const
+		virtual inline const Ptr type_() const override
 		{
 			static const Ptr TYPE = sym_("strange::Index:It");
 			return TYPE;
 		}
 
-		virtual inline const Ptr cats_() const;
+		virtual inline const Ptr cats_() const override;
 
 	private:
 		inline It(const Ptr index)
@@ -680,7 +680,7 @@ protected:
 	{
 	}
 
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it)
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
 		const Ptr cit = it->copy_();
 		const Ptr member = static_cast<Index*>(pub_().get())->find(it);
@@ -700,7 +700,7 @@ class Iterator : public Mutable
 	typedef const std::shared_ptr<C> const_std_shared_ptr_collection;
 
 public:
-	virtual inline const Ptr next_()
+	virtual inline const Ptr next_() override
 	{
 		if (_iterator == _collection->cend())
 		{
@@ -709,7 +709,7 @@ public:
 		return *_iterator++;
 	}
 
-	virtual inline const Ptr copy_() const
+	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_(_collection);
 		Iterator* const iterator = static_cast<Iterator*>(result.get());
@@ -727,13 +727,13 @@ public:
 		return Ptr(new Iterator(collection));
 	}
 
-	virtual inline const Ptr type_() const
+	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Iterator");
 		return TYPE;
 	}
 
-	virtual inline const Ptr cats_() const;
+	virtual inline const Ptr cats_() const override;
 
 private:
 	inline Iterator(const_std_shared_ptr_collection collection)
@@ -752,14 +752,14 @@ class Flock : public Mutable, public Me
 	typedef std::vector<Ptr> std_vector_ptr;
 
 public:
-	virtual inline const Ptr copy_() const
+	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
 		static_cast<Flock*>(result.get())->_vector = _vector;
 		return result;
 	}
 
-	virtual inline const Ptr pub_() const
+	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
 		{
@@ -801,15 +801,15 @@ public:
 		return iterator_();
 	}
 
-	virtual inline const Ptr type_() const
+	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Flock");
 		return TYPE;
 	}
 
-	virtual inline const Ptr cats_() const;
+	virtual inline const Ptr cats_() const override;
 
-	virtual const Ptr visit(const Ptr it)
+	virtual const Ptr visit(const Ptr it) override
 	{
 		const Ptr visitor = it->next_();
 		const Ptr member = it->next_();
@@ -832,7 +832,7 @@ private:
 	class It : public Mutable
 	{
 	public:
-		virtual const Ptr next_()
+		virtual const Ptr next_() override
 		{
 			if (_iterator == static_cast<Flock*>(_flock.get())->_vector.cend())
 			{
@@ -841,7 +841,7 @@ private:
 			return *_iterator++;
 		}
 
-		virtual inline const Ptr copy_() const
+		virtual inline const Ptr copy_() const override
 		{
 			const Ptr result = mut_(_flock);
 			static_cast<It*>(result.get())->_iterator = _iterator;
@@ -853,13 +853,13 @@ private:
 			return Ptr(new It(flock));
 		}
 
-		virtual inline const Ptr type_() const
+		virtual inline const Ptr type_() const override
 		{
 			static const Ptr TYPE = sym_("strange::Flock::It");
 			return TYPE;
 		}
 
-		virtual inline const Ptr cats_() const;
+		virtual inline const Ptr cats_() const override;
 
 	private:
 		inline It(const Ptr flock)
@@ -912,14 +912,14 @@ class Herd : public Mutable, public Me
 	typedef std::unordered_set<Ptr, Hash, Pred> std_unordered_set_ptr;
 
 public:
-	virtual inline const Ptr copy_() const
+	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
 		static_cast<Herd*>(result.get())->_set = _set;
 		return result;
 	}
 
-	virtual inline const Ptr pub_() const
+	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
 		{
@@ -976,13 +976,13 @@ public:
 		return iterator_();
 	}
 
-	virtual inline const Ptr type_() const
+	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Herd");
 		return TYPE;
 	}
 
-	virtual inline const Ptr cats_() const
+	virtual inline const Ptr cats_() const override
 	{
 		static const Ptr CATS = []()
 		{
@@ -998,7 +998,7 @@ public:
 		return CATS;
 	}
 
-	virtual const Ptr visit(const Ptr it)
+	virtual const Ptr visit(const Ptr it) override
 	{
 		const Ptr visitor = it->next_();
 		const Ptr member = it->next_();
@@ -1027,7 +1027,7 @@ private:
 	class It : public Mutable
 	{
 	public:
-		virtual inline const Ptr next_()
+		virtual inline const Ptr next_() override
 		{
 			if (_iterator == static_cast<Herd*>(_herd.get())->_set.cend())
 			{
@@ -1036,7 +1036,7 @@ private:
 			return *_iterator++;
 		}
 
-		virtual inline const Ptr copy_() const
+		virtual inline const Ptr copy_() const override
 		{
 			const Ptr result = mut_(_herd);
 			static_cast<It*>(result.get())->_iterator = _iterator;
@@ -1048,13 +1048,13 @@ private:
 			return Ptr(new It(herd));
 		}
 
-		virtual inline const Ptr type_() const
+		virtual inline const Ptr type_() const override
 		{
 			static const Ptr TYPE = sym_("strange::Herd::It");
 			return TYPE;
 		}
 
-		virtual inline const Ptr cats_() const
+		virtual inline const Ptr cats_() const override
 		{
 			static const Ptr CATS = []()
 			{
@@ -1080,6 +1080,35 @@ private:
 		const Ptr _herd;
 		std_unordered_set_ptr::const_iterator _iterator;
 	};
+};
+
+class Bit : public Mutable
+{
+public:
+	static inline const Ptr mut(const Ptr it)
+	{
+		return Ptr(new Bit(it));
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+
+	}
+
+private:
+	Bit(const Ptr it)
+		: Mutable()
+		, _bool(!it->next_()->is_("0"))
+	{
+	}
+
+	Bit(const bool b)
+		: Mutable()
+		, _bool(b)
+	{
+	}
+
+	bool _bool;
 };
 
 class Stream : public Mutable, public Me
