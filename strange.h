@@ -10,6 +10,8 @@
 #include <unordered_map>
 #include <string>
 #include <sstream>
+#include <cstdint>
+#include <type_traits>
 
 namespace strange
 {
@@ -171,6 +173,10 @@ public:
 		return nothing_();
 	}
 
+	virtual inline const Ptr to_buffer_() const;
+
+	virtual inline void from_buffer_(const Ptr buffer);
+	
 	virtual inline const Ptr type_() const
 	{
 		static const Ptr TYPE = sym_("strange::Thing");
@@ -265,6 +271,10 @@ public:
 	{
 		return me_<Symbol>(new Symbol(symbol));
 	}
+
+	static inline const Ptr buf(const Ptr it);
+
+	virtual inline const Ptr to_buffer_() const override;
 
 	virtual inline const Ptr type_() const override
 	{
@@ -1091,9 +1101,26 @@ public:
 		return Ptr(new Data(data));
 	}
 
+	static inline const Ptr buf(const Ptr it)
+	{
+		const Ptr ptr = mut_();
+		ptr->from_buffer_(it->next());
+		return ptr;
+	}
+
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(_data);
+	}
+
+	inline void set_(const D& data)
+	{
+		_data = data;
+	}
+
+	inline const D& get_() const
+	{
+		return _data;
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1127,6 +1154,58 @@ private:
 	D _data;
 };
 
+class Buffer : public Data<std::string>
+{
+public:
+	virtual inline const Ptr to_buffer_() const override
+	{
+		return copy_();
+	}
+
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		if (!buf)
+		{
+			log_("Buffer::from_buffer_ called with wrong type of thing");
+			return;
+		}
+		set_(buf->get_());
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Buffer");
+		return TYPE;
+	}
+};
+
+inline const Thing::Ptr Thing::to_buffer_() const
+{
+	return Buffer::mut_(std::string());
+}
+
+inline void Thing::from_buffer_(const Thing::Ptr buffer)
+{
+}
+
+inline const Thing::Ptr Symbol::buf(const Thing::Ptr it)
+{
+	const Ptr buffer = it->next_();
+	Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+	if (!buf)
+	{
+		log_("Symbol::buf called with wrong type of thing");
+		return nothing_();
+	}
+	return fin_(buf->get_().c_str());
+}
+
+inline const Thing::Ptr Symbol::to_buffer_() const
+{
+	return Buffer::mut_(std::string(_symbol));
+}
+
 class Bit : public Data<bool>
 {
 public:
@@ -1148,6 +1227,22 @@ public:
 		return PUB;
 	}
 
+	virtual inline const Ptr to_buffer_() const override
+	{
+		return Buffer::mut_(std::string(1, get_() ? char(1) : char(0)));
+	}
+
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		if (!buf)
+		{
+			log_("Bit::from_buffer_ called with wrong type of thing");
+			return;
+		}
+		set_(buf->get_() != "0");
+	}
+
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Bit");
@@ -1158,6 +1253,22 @@ public:
 class Byte : public Data<unsigned char>
 {
 public:
+	virtual inline const Ptr to_buffer_() const override
+	{
+		return Buffer::mut_(std::string(1, *reinterpret_cast<const char*>(&get_())));
+	}
+
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		if (!buf)
+		{
+			log_("Byte::from_buffer_ called with wrong type of thing");
+			return;
+		}
+		set_(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0])));
+	}
+
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Byte");
@@ -1165,12 +1276,196 @@ public:
 	}
 };
 
-class Buffer : public Data<std::string>
+class Int16 : public Data<int16_t>
 {
 public:
+	virtual inline const Ptr to_buffer_() const override
+	{
+		std::string str(2, 0);
+		str[0] = get_() & 0xFF;
+		str[1] = (get_() >> 8) & 0xFF;
+		return Buffer::mut_(str);
+	}
+
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		if (!buf)
+		{
+			log_("Int16::from_buffer_ called with wrong type of thing");
+			return;
+		}
+		set_(
+			uint16_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
+			uint16_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8
+			);
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Buffer");
+		static const Ptr TYPE = sym_("strange::Int16");
+		return TYPE;
+	}
+};
+
+class Int32 : public Data<int32_t>
+{
+public:
+	virtual inline const Ptr to_buffer_() const override
+	{
+		std::string str(4, 0);
+		str[0] = get_() & 0xFF;
+		str[1] = (get_() >> 8) & 0xFF;
+		str[2] = (get_() >> 16) & 0xFF;
+		str[3] = (get_() >> 24) & 0xFF;
+		return Buffer::mut_(str);
+	}
+
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		if (!buf)
+		{
+			log_("Int32::from_buffer_ called with wrong type of thing");
+			return;
+		}
+		set_(
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24
+			);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Int32");
+		return TYPE;
+	}
+};
+
+class Int64 : public Data<int64_t>
+{
+public:
+	virtual inline const Ptr to_buffer_() const override
+	{
+		std::string str(8, 0);
+		str[0] = get_() & 0xFF;
+		str[1] = (get_() >> 8) & 0xFF;
+		str[2] = (get_() >> 16) & 0xFF;
+		str[3] = (get_() >> 24) & 0xFF;
+		str[4] = (get_() >> 32) & 0xFF;
+		str[5] = (get_() >> 40) & 0xFF;
+		str[6] = (get_() >> 48) & 0xFF;
+		str[7] = (get_() >> 56) & 0xFF;
+		return Buffer::mut_(str);
+	}
+
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		if (!buf)
+		{
+			log_("Int64::from_buffer_ called with wrong type of thing");
+			return;
+		}
+		set_(
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[4]))) << 32 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[5]))) << 40 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[6]))) << 48 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[7]))) << 56
+			);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Int64");
+		return TYPE;
+	}
+};
+
+class Float32 : public Data<float>
+{
+public:
+	virtual inline const Ptr to_buffer_() const override
+	{
+		std::string str(4, 0);
+		uint32_t i = *reinterpret_cast<const uint32_t*>(&get_());
+		str[0] = i & 0xFF;
+		str[1] = (i >> 8) & 0xFF;
+		str[2] = (i >> 16) & 0xFF;
+		str[3] = (i >> 24) & 0xFF;
+		return Buffer::mut_(str);
+	}
+
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		if (!buf)
+		{
+			log_("Float32::from_buffer_ called with wrong type of thing");
+			return;
+		}
+		const uint32_t i =
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24;
+		set_(*reinterpret_cast<const float*>(&i));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Float32");
+		return TYPE;
+	}
+};
+
+class Float64 : public Data<double>
+{
+public:
+	virtual inline const Ptr to_buffer_() const override
+	{
+		std::string str(8, 0);
+		uint64_t i = *reinterpret_cast<const uint64_t*>(&get_());
+		str[0] = i & 0xFF;
+		str[1] = (i >> 8) & 0xFF;
+		str[2] = (i >> 16) & 0xFF;
+		str[3] = (i >> 24) & 0xFF;
+		str[4] = (i >> 32) & 0xFF;
+		str[5] = (i >> 40) & 0xFF;
+		str[6] = (i >> 48) & 0xFF;
+		str[7] = (i >> 56) & 0xFF;
+		return Buffer::mut_(str);
+	}
+
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		if (!buf)
+		{
+			log_("Float64::from_buffer_ called with wrong type of thing");
+			return;
+		}
+		const uint64_t i =
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[4]))) << 32 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[5]))) << 40 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[6]))) << 48 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[7]))) << 56;
+			set_(*reinterpret_cast<const double*>(&i));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Float64");
 		return TYPE;
 	}
 };
