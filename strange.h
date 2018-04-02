@@ -135,7 +135,7 @@ public:
 		return boolean_(!it->next_()->is_("0"));
 	}
 
-	static inline const Ptr factory(const Ptr it);
+	static inline const Ptr factory_();
 
 	virtual inline const Ptr pub_() const;
 
@@ -546,7 +546,17 @@ public:
 
 	inline const Ptr find(const Ptr it) const
 	{
-		const std_unordered_map_ptr_ptr::const_iterator mit = _map.find(it->next_());
+		return find_(it->next_());
+	}
+
+	inline const Ptr find_(const char* const symbol) const
+	{
+		return find_(sym_(symbol));
+	}
+
+	inline const Ptr find_(const Ptr key) const
+	{
+		const std_unordered_map_ptr_ptr::const_iterator mit = _map.find(key);
 		if (mit == _map.end())
 		{
 			return nothing_();
@@ -661,7 +671,6 @@ inline const Thing::Ptr Thing::pub_() const
 		index->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
 		index->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
 		index->update_("boolean", Static::fin_(&Thing::boolean));
-		index->update_("factory", Static::fin_(&Thing::factory));
 		index->update_("pub", Const<Thing>::fin_(&Thing::pub));
 		index->update_(nothing_(), nothing_());
 		index->update_(one_(), one_());
@@ -1101,11 +1110,16 @@ public:
 		return Ptr(new Data(data));
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr buf_(const Ptr buffer)
 	{
 		const Ptr ptr = mut_();
-		ptr->from_buffer_(it->next());
+		ptr->from_buffer_(buffer);
 		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1662,6 +1676,65 @@ class Stream : public Mutable, public Me
 	typedef const std::unique_ptr<std::iostream> const_std_unique_iostream;
 
 public:
+	static inline const Ptr mut_(std::iostream* const stream)
+	{
+		return me_<Stream>(new Stream(stream));
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return me_();
+	}
+
+	inline void push_back_(const Ptr ptr)
+	{
+		const Ptr type = ptr->type_();
+		const Ptr buffer = ptr->to_buffer_();
+		Buffer* const buf = static_cast<Buffer*>(buffer.get());
+		write_(Bit::mut_(buf->finalized_()));
+		write_(Int16::mut_(int16_t(strlen(static_cast<Symbol*>(type.get())->symbol_()))));
+		write_(type);
+		write_(Int64::mut_(buf->get_().length()));
+		write_(buffer);
+	}
+
+	inline void write_(const Ptr ptr)
+	{
+		const Ptr buffer = ptr->to_buffer_();
+		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		if (buf)
+		{
+			const std::string& str = buf->get_();
+			_stream->write(str.data(), str.length());
+		}
+	}
+
+	inline const Ptr pop_front_()
+	{
+		const Ptr bit = Bit::buf(read_(1));
+		const Ptr int16 = Int16::buf(read_(2));
+		const std::string function = static_cast<Buffer*>(read_(static_cast<Int16*>(int16.get())->get_()).get())->get_() + "::buf";
+		const Ptr fun = static_cast<Index*>(factory_().get())->find_(function.c_str());
+		if (fun->is_("0"))
+		{
+			log_("Stream::pop_front_ read unknown type");
+			return fun;
+		}
+		const Ptr int64 = Int64::buf_(read_(8));
+		const Ptr result = fun->call_(read_(size_t(static_cast<Int64*>(int64.get())->get_())));
+		if (static_cast<Bit*>(bit.get())->get_())
+		{
+			result->finalize_();
+		}
+		return result;
+	}
+
+	inline const Ptr read_(const size_t length)
+	{
+		std::string str(length, 0);
+		_stream->read(const_cast<char*>(str.data()), length);
+		return Buffer::mut_(str);
+	}
 
 private:
 	Stream(std::iostream* const stream)
@@ -1777,7 +1850,7 @@ inline const Thing::Ptr Flock::It::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Thing::factory(const Ptr it)
+inline const Thing::Ptr Thing::factory_()
 {
 	static const Ptr FACTORY = []()
 	{
@@ -1786,6 +1859,14 @@ inline const Thing::Ptr Thing::factory(const Ptr it)
 		index->update_("strange::Index::mut", Static::fin_(&Index::mut));
 		index->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
 		index->update_("strange::Herd::mut", Static::fin_(&Herd::mut));
+		index->update_("strange::Buffer::buf", Static::fin_(&Buffer::buf));
+		index->update_("strange::Bit::buf", Static::fin_(&Bit::buf));
+		index->update_("strange::Byte::buf", Static::fin_(&Byte::buf));
+		index->update_("strange::Int16::buf", Static::fin_(&Int16::buf));
+		index->update_("strange::Int32::buf", Static::fin_(&Int32::buf));
+		index->update_("strange::Int64::buf", Static::fin_(&Int64::buf));
+		index->update_("strange::Float32::buf", Static::fin_(&Float32::buf));
+		index->update_("strange::Float64::buf", Static::fin_(&Float64::buf));
 		index->finalize_();
 		return factory;
 	}();
