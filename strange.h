@@ -1159,7 +1159,12 @@ class Buffer : public Data<std::string>
 public:
 	virtual inline const Ptr to_buffer_() const override
 	{
-		return copy_();
+		const Ptr buffer = copy_();
+		if (finalized_())
+		{
+			buffer->finalize_();
+		}
+		return buffer;
 	}
 
 	virtual inline void from_buffer_(const Ptr buffer) override
@@ -1171,6 +1176,10 @@ public:
 			return;
 		}
 		set_(buf->get_());
+		if (buf->finalized_())
+		{
+			finalize_();
+		}
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1182,11 +1191,26 @@ public:
 
 inline const Thing::Ptr Thing::to_buffer_() const
 {
-	return Buffer::mut_(std::string());
+	const Ptr buffer = Buffer::mut_(std::string());
+	if (finalized_())
+	{
+		buffer->finalize_();
+	}
+	return buffer;
 }
 
 inline void Thing::from_buffer_(const Thing::Ptr buffer)
 {
+	Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+	if (!buf)
+	{
+		log_("Thing::from_buffer_ called with wrong type of thing");
+		return;
+	}
+	if (buf->finalized_())
+	{
+		finalize_();
+	}
 }
 
 inline const Thing::Ptr Symbol::buf(const Thing::Ptr it)
@@ -1203,7 +1227,9 @@ inline const Thing::Ptr Symbol::buf(const Thing::Ptr it)
 
 inline const Thing::Ptr Symbol::to_buffer_() const
 {
-	return Buffer::mut_(std::string(_symbol));
+	const Ptr buffer = Buffer::mut_(std::string(_symbol));
+	buffer->finalize_();
+	return buffer;
 }
 
 class Bit : public Data<bool>
@@ -1229,7 +1255,12 @@ public:
 
 	virtual inline const Ptr to_buffer_() const override
 	{
-		return Buffer::mut_(std::string(1, get_() ? char(1) : char(0)));
+		const Ptr buffer = Buffer::mut_(std::string(1, get_() ? char(1) : char(0)));
+		if (finalized_())
+		{
+			buffer->finalize_();
+		}
+		return buffer;
 	}
 
 	virtual inline void from_buffer_(const Ptr buffer) override
@@ -1241,6 +1272,10 @@ public:
 			return;
 		}
 		set_(buf->get_() != "0");
+		if (buf->finalized_())
+		{
+			finalize_();
+		}
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1255,7 +1290,12 @@ class Byte : public Data<unsigned char>
 public:
 	virtual inline const Ptr to_buffer_() const override
 	{
-		return Buffer::mut_(std::string(1, *reinterpret_cast<const char*>(&get_())));
+		const Ptr buffer = Buffer::mut_(std::string(1, *reinterpret_cast<const char*>(&get_())));
+		if (finalized_())
+		{
+			buffer->finalize_();
+		}
+		return buffer;
 	}
 
 	virtual inline void from_buffer_(const Ptr buffer) override
@@ -1267,6 +1307,10 @@ public:
 			return;
 		}
 		set_(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0])));
+		if (buf->finalized_())
+		{
+			finalize_();
+		}
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1284,7 +1328,12 @@ public:
 		std::string str(2, 0);
 		str[0] = get_() & 0xFF;
 		str[1] = (get_() >> 8) & 0xFF;
-		return Buffer::mut_(str);
+		const Ptr buffer = Buffer::mut_(str);
+		if (finalized_())
+		{
+			buffer->finalize_();
+		}
+		return buffer;
 	}
 
 	virtual inline void from_buffer_(const Ptr buffer) override
@@ -1299,6 +1348,10 @@ public:
 			uint16_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
 			uint16_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8
 			);
+		if (buf->finalized_())
+		{
+			finalize_();
+		}
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1318,7 +1371,12 @@ public:
 		str[1] = (get_() >> 8) & 0xFF;
 		str[2] = (get_() >> 16) & 0xFF;
 		str[3] = (get_() >> 24) & 0xFF;
-		return Buffer::mut_(str);
+		const Ptr buffer = Buffer::mut_(str);
+		if (finalized_())
+		{
+			buffer->finalize_();
+		}
+		return buffer;
 	}
 
 	virtual inline void from_buffer_(const Ptr buffer) override
@@ -1335,6 +1393,10 @@ public:
 			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
 			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24
 			);
+		if (buf->finalized_())
+		{
+			finalize_();
+		}
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1358,7 +1420,12 @@ public:
 		str[5] = (get_() >> 40) & 0xFF;
 		str[6] = (get_() >> 48) & 0xFF;
 		str[7] = (get_() >> 56) & 0xFF;
-		return Buffer::mut_(str);
+		const Ptr buffer = Buffer::mut_(str);
+		if (finalized_())
+		{
+			buffer->finalize_();
+		}
+		return buffer;
 	}
 
 	virtual inline void from_buffer_(const Ptr buffer) override
@@ -1379,6 +1446,10 @@ public:
 			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[6]))) << 48 |
 			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[7]))) << 56
 			);
+		if (buf->finalized_())
+		{
+			finalize_();
+		}
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1399,7 +1470,12 @@ public:
 		str[1] = (i >> 8) & 0xFF;
 		str[2] = (i >> 16) & 0xFF;
 		str[3] = (i >> 24) & 0xFF;
-		return Buffer::mut_(str);
+		const Ptr buffer = Buffer::mut_(str);
+		if (finalized_())
+		{
+			buffer->finalize_();
+		}
+		return buffer;
 	}
 
 	virtual inline void from_buffer_(const Ptr buffer) override
@@ -1416,6 +1492,10 @@ public:
 			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
 			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24;
 		set_(*reinterpret_cast<const float*>(&i));
+		if (buf->finalized_())
+		{
+			finalize_();
+		}
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1440,7 +1520,12 @@ public:
 		str[5] = (i >> 40) & 0xFF;
 		str[6] = (i >> 48) & 0xFF;
 		str[7] = (i >> 56) & 0xFF;
-		return Buffer::mut_(str);
+		const Ptr buffer = Buffer::mut_(str);
+		if (finalized_())
+		{
+			buffer->finalize_();
+		}
+		return buffer;
 	}
 
 	virtual inline void from_buffer_(const Ptr buffer) override
@@ -1460,7 +1545,11 @@ public:
 			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[5]))) << 40 |
 			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[6]))) << 48 |
 			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[7]))) << 56;
-			set_(*reinterpret_cast<const double*>(&i));
+		set_(*reinterpret_cast<const double*>(&i));
+		if (buf->finalized_())
+		{
+			finalize_();
+		}
 	}
 
 	virtual inline const Ptr type_() const override
