@@ -38,7 +38,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_(std::vector<Ptr>& vec, const char* const symbol, Args&&... args)
 	{
-		vec.emplace_back(sym_(symbol));
+		vec.push_back(sym_(symbol));
 		variadic_(vec, std::forward<Args>(args)...);
 	}
 
@@ -47,7 +47,7 @@ public:
 	{
 		for (Ptr p = thing.next_(); !p->is_("end"); p = thing.next_())
 		{
-			vec.emplace_back(p);
+			vec.push_back(p);
 		}
 		variadic_(vec, std::forward<Args>(args)...);
 	}
@@ -55,7 +55,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_(std::vector<Ptr>& vec, const Ptr ptr, Args&&... args)
 	{
-		vec.emplace_back(ptr);
+		vec.push_back(ptr);
 		variadic_(vec, std::forward<Args>(args)...);
 	}
 
