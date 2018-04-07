@@ -102,6 +102,16 @@ public:
 		return copy_();
 	}
 
+	virtual inline const Ptr clone_() const
+	{
+		return copy_();
+	}
+
+	inline const Ptr clone(const Ptr ignore) const
+	{
+		return clone_();
+	}
+
 	virtual inline void finalize_()
 	{
 	}
@@ -138,12 +148,22 @@ public:
 		return value ? one_() : nothing_();
 	}
 
+	static inline const Ptr boolean_(const Ptr ptr)
+	{
+		return boolean_(!ptr->is_("0"));
+	}
+
 	static inline const Ptr boolean(const Ptr it)
 	{
-		return boolean_(!it->next_()->is_("0"));
+		return boolean_(it->next_());
 	}
 
 	static inline const Ptr factory_();
+
+	static inline const Ptr factory(const Ptr ignore)
+	{
+		return factory_();
+	}
 
 	virtual inline const Ptr pub_() const;
 
@@ -153,6 +173,13 @@ public:
 	}
 
 	static inline const Ptr sym_(const char* const symbol);
+
+	static inline const Ptr sym_(const Ptr buffer);
+
+	static inline const Ptr sym(const Ptr it)
+	{
+		return sym_(it->next_());
+	}
 
 	static inline const Ptr nothing_();
 
@@ -175,15 +202,33 @@ public:
 		return end_();
 	}
 
-	static inline const Ptr log_(const char* const message)
+	static inline void log_(const char* const message)
 	{
 		std::cout << message;
+	}
+
+	static inline void log_(const Ptr ptr);
+
+	static inline const Ptr log(const Ptr it)
+	{
+		log_(it->next_());
 		return nothing_();
 	}
 
 	virtual inline const Ptr to_buffer_() const;
 
+	inline const Ptr to_buffer(const Ptr ignore) const
+	{
+		return to_buffer_();
+	}
+
 	virtual inline void from_buffer_(const Ptr buffer);
+
+	inline const Ptr from_buffer(const Ptr it)
+	{
+		from_buffer_(it->next_());
+		return nothing_();
+	}
 	
 	virtual inline const Ptr type_() const
 	{
@@ -419,11 +464,13 @@ protected:
 		{
 			if (t->finalized_())
 			{
-				return log_("ERROR: Member passed finalized thing\n");
+				log_("ERROR: Member passed finalized thing\n");
+				return nothing_();
 			}
 			return (t->*_function)(it);
 		}
-		return log_("ERROR: Member passed wrong type of thing\n");
+		log_("ERROR: Member passed wrong type of thing\n");
+		return nothing_();
 	}
 
 private:
@@ -466,7 +513,8 @@ protected:
 		{
 			return (t->*_function)(it);
 		}
-		return log_("ERROR: Const passed wrong type of thing\n");
+		log_("ERROR: Const passed wrong type of thing\n");
+		return nothing_();
 	}
 
 private:
@@ -683,14 +731,20 @@ inline const Thing::Ptr Thing::pub_() const
 		index->update_("next", Member<Thing>::fin_(&Thing::next));
 		index->update_("is", Const<Thing>::fin_(&Thing::is));
 		index->update_("copy", Const<Thing>::fin_(&Thing::copy));
+		index->update_("clone", Const<Thing>::fin_(&Thing::clone));
 		index->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
 		index->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
 		index->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
 		index->update_("boolean", Static::fin_(&Thing::boolean));
+		index->update_("factory", Static::fin_(&Thing::factory));
 		index->update_("pub", Const<Thing>::fin_(&Thing::pub));
+		index->update_("sym", Static::fin_(&Thing::sym));
 		index->update_(nothing_(), nothing_());
 		index->update_(one_(), one_());
 		index->update_(end_(), end_());
+		index->update_("log", Static::fin_(&Thing::log));
+		index->update_("to_buffer", Const<Thing>::fin_(&Thing::to_buffer));
+		index->update_("from_buffer", Member<Thing>::fin_(&Thing::from_buffer));
 		index->update_("type", Const<Thing>::fin_(&Thing::type));
 		index->update_("cats", Const<Thing>::fin_(&Thing::cats));
 		index->update_("visit", Member<Thing>::fin_(&Thing::visit));
@@ -1212,6 +1266,23 @@ public:
 		return TYPE;
 	}
 };
+
+inline const Thing::Ptr Thing::sym_(const Ptr buffer)
+{
+	const Buffer* const buf = dynamic_cast<const Buffer*>(buffer.get());
+	if (buf)
+	{
+		return sym_(buf->get_().c_str());
+	}
+	return nothing_();
+}
+
+inline void Thing::log_(const Thing::Ptr ptr)
+{
+	const Ptr buffer = ptr->to_buffer_();
+	log_(static_cast<const Buffer*>(ptr.get())->get_().c_str());
+}
+
 
 inline const Thing::Ptr Thing::to_buffer_() const
 {
