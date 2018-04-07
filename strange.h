@@ -528,12 +528,6 @@ public:
 		return _finalized;
 	}
 
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::Mutable");
-		return TYPE;
-	}
-
 protected:
 	inline Mutable()
 		: Thing()
@@ -1755,6 +1749,27 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return me_();
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Stream");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_cast<Herd*>(cats.get());
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stream");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
 	}
 
 	inline void push_back_(const Ptr ptr)
