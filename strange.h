@@ -593,6 +593,8 @@ public:
 
 	virtual inline const Ptr to_buffer_() const override;
 
+	virtual inline void from_buffer_(const Ptr buffer);
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -600,6 +602,7 @@ public:
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_cast<Index*>(pub.get());
 			index->update_("mut", Static::fin_(&Index::mut));
+			index->update_("buf", Static::fin_(&Index::buf));
 			index->update_("find", Const<Index>::fin_(&Index::find));
 			index->update_("update", Member<Index>::fin_(&Index::update));
 			index->update_("iterator", Const<Index>::fin_(&Index::iterator));
@@ -617,6 +620,18 @@ public:
 	static inline const Ptr mut(const Ptr ignore)
 	{
 		return mut_();
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		ptr->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
 	}
 
 	inline const Ptr find(const Ptr it) const
@@ -1877,6 +1892,29 @@ inline const Thing::Ptr Index::to_buffer_() const
 	return buffer;
 }
 
+inline void Index::from_buffer_(const Thing::Ptr buffer)
+{
+	Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+	if (!buf)
+	{
+		log_("Index::from_buffer_ called with wrong type of thing");
+		return;
+	}
+	const Ptr stream = Stream::mut_(new std::stringstream(buf->get_()));
+	Stream* const str = static_cast<Stream*>(stream.get());
+	const Ptr int64 = Int64::buf_(str->read_(8));
+	for (int64_t i = static_cast<Int64*>(int64.get())->get_(); i > 0; --i)
+	{
+		const Ptr first = str->pop_front_();
+		const Ptr second = str->pop_front_();
+		update_(first, second);
+	}
+	if (buf->finalized_())
+	{
+		finalize_();
+	}
+}
+
 inline const Thing::Ptr Thing::cats_() const
 {
 	static const Ptr CATS = []()
@@ -1988,6 +2026,7 @@ inline const Thing::Ptr Thing::factory_()
 		const Ptr factory = Index::mut_();
 		Index* const index = static_cast<Index*>(factory.get());
 		index->update_("strange::Index::mut", Static::fin_(&Index::mut));
+		index->update_("strange::Index::buf", Static::fin_(&Index::buf));
 		index->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
 		index->update_("strange::Herd::mut", Static::fin_(&Herd::mut));
 		index->update_("strange::Buffer::buf", Static::fin_(&Buffer::buf));
