@@ -181,13 +181,6 @@ public:
 
 	static inline const Ptr sym_(const char* const symbol);
 
-	static inline const Ptr sym_(const Ptr buffer);
-
-	static inline const Ptr sym(const Ptr it)
-	{
-		return sym_(it->next_());
-	}
-
 	static inline const Ptr nothing_();
 
 	static inline const Ptr nothing(const Ptr ignore)
@@ -339,8 +332,6 @@ public:
 	{
 		return make_(symbol);
 	}
-
-	static inline const Ptr buf(const Ptr it);
 
 	virtual inline const Ptr to_buffer_() const override;
 
@@ -747,7 +738,6 @@ inline const Thing::Ptr Thing::pub_() const
 		index->update_("boolean", Static::fin_(&Thing::boolean));
 		index->update_("factory", Static::fin_(&Thing::factory));
 		index->update_("pub", Const<Thing>::fin_(&Thing::pub));
-		index->update_("sym", Static::fin_(&Thing::sym));
 		index->update_(nothing_(), nothing_());
 		index->update_(one_(), one_());
 		index->update_(end_(), end_());
@@ -1283,22 +1273,11 @@ public:
 	}
 };
 
-inline const Thing::Ptr Thing::sym_(const Ptr buffer)
-{
-	const Buffer* const buf = dynamic_cast<const Buffer*>(buffer.get());
-	if (buf)
-	{
-		return sym_(buf->get_().c_str());
-	}
-	return nothing_();
-}
-
 inline void Thing::log_(const Thing::Ptr ptr)
 {
 	const Ptr buffer = ptr->to_buffer_();
 	log_(static_cast<const Buffer*>(ptr.get())->get_().c_str());
 }
-
 
 inline const Thing::Ptr Thing::to_buffer_() const
 {
@@ -1322,18 +1301,6 @@ inline void Thing::from_buffer_(const Thing::Ptr buffer)
 	{
 		finalize_();
 	}
-}
-
-inline const Thing::Ptr Symbol::buf(const Thing::Ptr it)
-{
-	const Ptr buffer = it->next_();
-	Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
-	if (!buf)
-	{
-		log_("Symbol::buf called with wrong type of thing");
-		return nothing_();
-	}
-	return fin_(buf->get_().c_str());
 }
 
 inline const Thing::Ptr Symbol::to_buffer_() const
