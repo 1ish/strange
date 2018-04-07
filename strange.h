@@ -22,11 +22,11 @@ public:
 	typedef std::shared_ptr<Thing> Ptr;
 	typedef std::weak_ptr<Thing> Weak;
 
-	template<typename... Args>
-	inline const Ptr call_(Args... args)
+	template <typename... Args>
+	inline const Ptr call_(Args&&... args)
 	{
 		std::vector<Ptr>* const v = new std::vector<Ptr>;
-		variadic_(*v, args...);
+		variadic_(*v, std::forward<Args>(args)...);
 		return thing(Iterator<const std::vector<Ptr>>::mut_(v));
 	}
 
@@ -34,28 +34,28 @@ public:
 	{
 	}
 
-	template<typename... Args>
-	static inline void variadic_(std::vector<Ptr>& vec, const char* const symbol, Args... args)
+	template <typename... Args>
+	static inline void variadic_(std::vector<Ptr>& vec, const char* const symbol, Args&&... args)
 	{
-		vec.push_back(sym_(symbol));
-		variadic_(vec, args...);
+		vec.emplace_back(sym_(symbol));
+		variadic_(vec, std::forward<Args>(args)...);
 	}
 
-	template<typename... Args>
-	static inline void variadic_(std::vector<Ptr>& vec, Thing& thing, Args... args)
+	template <typename... Args>
+	static inline void variadic_(std::vector<Ptr>& vec, Thing& thing, Args&&... args)
 	{
 		for (Ptr p = thing.next_(); !p->is_("end"); p = thing.next_())
 		{
-			vec.push_back(p);
+			vec.emplace_back(p);
 		}
-		variadic_(vec, args...);
+		variadic_(vec, std::forward<Args>(args)...);
 	}
 
-	template<typename... Args>
-	static inline void variadic_(std::vector<Ptr>& vec, const Ptr ptr, Args... args)
+	template <typename... Args>
+	static inline void variadic_(std::vector<Ptr>& vec, const Ptr ptr, Args&&... args)
 	{
-		vec.push_back(ptr);
-		variadic_(vec, args...);
+		vec.emplace_back(ptr);
+		variadic_(vec, std::forward<Args>(args)...);
 	}
 
 	inline const Ptr thing(const Ptr it)
@@ -217,16 +217,17 @@ private:
 	Thing& operator=(const Thing& thing) = delete;
 };
 
+template <typename T>
 class Me
 {
 protected:
 	Me() = default;
 
-	template<typename T>
-	static inline const Thing::Ptr me_(T* const thing)
+	template <typename... Args>
+	static inline const Thing::Ptr make_(Args&&... args)
 	{
-		const Thing::Ptr result = Thing::Ptr(thing);
-		thing->_me = result;
+		const Thing::Ptr result = std::make_shared<T>(std::forward<Args>(args)...);
+		static_cast<T*>(result.get())->_me = result;
 		return result;
 	}
 
@@ -244,9 +245,16 @@ private:
 	Thing::Weak _me;
 };
 
-class Symbol : public Thing, public Me
+class Symbol : public Thing, public Me<Symbol>
 {
 public:
+	inline Symbol(const char* const symbol)
+		: Me()
+		, _symbol(symbol)
+		, _hash(std::hash<std::string>()(symbol))
+	{
+	}
+
 	virtual inline size_t hash_() const override
 	{
 		return _hash;
@@ -269,7 +277,7 @@ public:
 
 	static inline const Ptr fin_(const char* const symbol)
 	{
-		return me_<Symbol>(new Symbol(symbol));
+		return make_(symbol);
 	}
 
 	static inline const Ptr buf(const Ptr it);
@@ -291,13 +299,6 @@ protected:
 	}
 
 private:
-	inline Symbol(const char* const symbol)
-		: Me()
-		, _symbol(symbol)
-		, _hash(std::hash<std::string>()(symbol))
-	{
-	}
-
 	const char* const _symbol;
 	const size_t _hash;
 };
@@ -331,14 +332,20 @@ inline const Thing::Ptr Thing::end_()
 	return END;
 }
 
-class Static : public Thing, public Me
+class Static : public Thing, public Me<Static>
 {
 	typedef const Ptr(*function)(const Ptr);
 
 public:
+	Static(const function fun)
+		: Me()
+		, _function(fun)
+	{
+	}
+
 	static inline const Ptr fin_(const function fun)
 	{
-		return me_<Static>(new Static(fun));
+		return make_(fun);
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -359,24 +366,24 @@ protected:
 	}
 
 private:
-	Static(const function fun)
-		: Me()
-		, _function(fun)
-	{
-	}
-
 	const function _function;
 };
 
-template<typename T>
-class Member : public Thing, public Me
+template <typename T>
+class Member : public Thing, public Me<Member<T>>
 {
 	typedef const Ptr(T::* member)(const Ptr);
 
 public:
+	Member(const member fun)
+		: Me<Member<T>>()
+		, _function(fun)
+	{
+	}
+
 	static inline const Ptr fin_(const member fun)
 	{
-		return me_<Member>(new Member(fun));
+		return make_(fun);
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -406,24 +413,24 @@ protected:
 	}
 
 private:
-	Member(const member fun)
-		: Me()
-		, _function(fun)
-	{
-	}
-
 	const member _function;
 };
 
-template<typename T>
-class Const : public Thing, public Me
+template <typename T>
+class Const : public Thing, public Me<Const<T>>
 {
 	typedef const Ptr(T::* member)(const Ptr) const;
 
 public:
+	Const(const member fun)
+		: Me<Const<T>>()
+		, _function(fun)
+	{
+	}
+
 	static inline const Ptr fin_(const member fun)
 	{
-		return me_<Const>(new Const(fun));
+		return make_(fun);
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -449,12 +456,6 @@ protected:
 	}
 
 private:
-	Const(const member fun)
-		: Me()
-		, _function(fun)
-	{
-	}
-
 	const member _function;
 };
 
@@ -488,7 +489,7 @@ private:
 	bool _finalized;
 };
 
-class Index : public Mutable, public Me
+class Index : public Mutable, public Me<Index>
 {
 	class Hash
 	{
@@ -511,6 +512,8 @@ class Index : public Mutable, public Me
 	typedef std::unordered_map<Ptr, Ptr, Hash, Pred> std_unordered_map_ptr_ptr;
 
 public:
+	Index() = default;
+
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
@@ -536,7 +539,7 @@ public:
 
 	static inline const Ptr mut_()
 	{
-		return me_<Index>(new Index);
+		return make_();
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -616,13 +619,18 @@ public:
 	}
 
 private:
-	Index() = default;
-
 	std_unordered_map_ptr_ptr _map;
 
 	class It : public Mutable
 	{
 	public:
+		inline It(const Ptr index)
+			: Mutable()
+			, _index(index)
+			, _iterator(static_cast<Index*>(_index.get())->_map.begin())
+		{
+		}
+
 		virtual inline const Ptr next_() override;
 
 		virtual inline const Ptr copy_() const override
@@ -634,7 +642,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr index)
 		{
-			return Ptr(new It(index));
+			return std::make_shared<It>(index);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -646,13 +654,6 @@ private:
 		virtual inline const Ptr cats_() const override;
 
 	private:
-		inline It(const Ptr index)
-			: Mutable()
-			, _index(index)
-			, _iterator(static_cast<Index*>(_index.get())->_map.begin())
-		{
-		}
-
 		const Ptr _index;
 		std_unordered_map_ptr_ptr::const_iterator _iterator;
 	};
@@ -713,12 +714,19 @@ protected:
 	const Ptr _decorated;
 };
 
-template<typename C>
+template <typename C>
 class Iterator : public Mutable
 {
 	typedef const std::shared_ptr<C> const_std_shared_ptr_collection;
 
 public:
+	inline Iterator(const_std_shared_ptr_collection collection)
+		: Mutable()
+		, _collection(collection)
+		, _iterator(collection->cbegin())
+	{
+	}
+
 	virtual inline const Ptr next_() override
 	{
 		if (_iterator == _collection->cend())
@@ -743,7 +751,7 @@ public:
 
 	static inline const Ptr mut_(const_std_shared_ptr_collection collection)
 	{
-		return Ptr(new Iterator(collection));
+		return std::make_shared<Iterator>(collection);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -755,22 +763,17 @@ public:
 	virtual inline const Ptr cats_() const override;
 
 private:
-	inline Iterator(const_std_shared_ptr_collection collection)
-		: Mutable()
-		, _collection(collection)
-		, _iterator(collection->cbegin())
-	{
-	}
-
 	const_std_shared_ptr_collection _collection;
 	typename C::const_iterator _iterator;
 };
 
-class Flock : public Mutable, public Me
+class Flock : public Mutable, public Me<Flock>
 {
 	typedef std::vector<Ptr> std_vector_ptr;
 
 public:
+	Flock() = default;
+
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
@@ -795,7 +798,7 @@ public:
 
 	static inline const Ptr mut_()
 	{
-		return me_<Flock>(new Flock);
+		return make_();
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -844,13 +847,18 @@ public:
 	}
 
 private:
-	Flock() = default;
-
 	std_vector_ptr _vector;
 
 	class It : public Mutable
 	{
 	public:
+		inline It(const Ptr flock)
+			: Mutable()
+			, _flock(flock)
+			, _iterator(static_cast<Flock*>(_flock.get())->_vector.begin())
+		{
+		}
+
 		virtual const Ptr next_() override
 		{
 			if (_iterator == static_cast<Flock*>(_flock.get())->_vector.cend())
@@ -869,7 +877,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr flock)
 		{
-			return Ptr(new It(flock));
+			return std::make_shared<It>(flock);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -881,13 +889,6 @@ private:
 		virtual inline const Ptr cats_() const override;
 
 	private:
-		inline It(const Ptr flock)
-			: Mutable()
-			, _flock(flock)
-			, _iterator(static_cast<Flock*>(_flock.get())->_vector.begin())
-		{
-		}
-
 		const Ptr _flock;
 		std_vector_ptr::const_iterator _iterator;
 	};
@@ -908,7 +909,7 @@ inline const Thing::Ptr Index::It::next_()
 	return result;
 }
 
-class Herd : public Mutable, public Me
+class Herd : public Mutable, public Me<Herd>
 {
 	class Hash
 	{
@@ -931,6 +932,8 @@ class Herd : public Mutable, public Me
 	typedef std::unordered_set<Ptr, Hash, Pred> std_unordered_set_ptr;
 
 public:
+	Herd() = default;
+
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
@@ -957,7 +960,7 @@ public:
 
 	static inline const Ptr mut_()
 	{
-		return me_<Herd>(new Herd);
+		return make_();
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -1039,13 +1042,18 @@ public:
 	}
 
 private:
-	Herd() = default;
-
 	std_unordered_set_ptr _set;
 
 	class It : public Mutable
 	{
 	public:
+		inline It(const Ptr herd)
+			: Mutable()
+			, _herd(herd)
+			, _iterator(static_cast<Herd*>(_herd.get())->_set.begin())
+		{
+		}
+
 		virtual inline const Ptr next_() override
 		{
 			if (_iterator == static_cast<Herd*>(_herd.get())->_set.cend())
@@ -1064,7 +1072,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr herd)
 		{
-			return Ptr(new It(herd));
+			return std::make_shared<It>(herd);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -1089,25 +1097,24 @@ private:
 		}
 
 	private:
-		inline It(const Ptr herd)
-			: Mutable()
-			, _herd(herd)
-			, _iterator(static_cast<Herd*>(_herd.get())->_set.begin())
-		{
-		}
-
 		const Ptr _herd;
 		std_unordered_set_ptr::const_iterator _iterator;
 	};
 };
 
-template<typename D>
+template <typename D>
 class Data : public Mutable
 {
 public:
+	Data(const D& data)
+		: Mutable()
+		, _data(data)
+	{
+	}
+
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return Ptr(new Data(data));
+		return std::make_shared<Data>(data);
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -1159,12 +1166,6 @@ public:
 	}
 
 private:
-	Data(const D& data)
-		: Mutable()
-		, _data(data)
-	{
-	}
-
 	D _data;
 };
 
@@ -1576,6 +1577,14 @@ public:
 class Fence : public Mutable
 {
 public:
+	inline Fence(const Ptr ptr)
+		: Mutable()
+		, _fence()
+		, _ptr(ptr)
+	{
+		_fence.store(false, std::memory_order_release);
+	}
+
 	static inline const Ptr mut(const Ptr it)
 	{
 		return mut_(it->next_());
@@ -1583,7 +1592,7 @@ public:
 
 	static inline const Ptr mut_(const Ptr ptr)
 	{
-		return Ptr(new Fence(ptr));
+		return std::make_shared<Fence>(ptr);
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1659,26 +1668,24 @@ public:
 	}
 
 private:
-	inline Fence(const Ptr ptr)
-		: Mutable()
-		, _fence()
-		, _ptr(ptr)
-	{
-		_fence.store(false, std::memory_order_release);
-	}
-
 	std::atomic<bool> _fence;
 	Ptr _ptr;
 };
 
-class Stream : public Mutable, public Me
+class Stream : public Mutable, public Me<Stream>
 {
 	typedef const std::unique_ptr<std::iostream> const_std_unique_iostream;
 
 public:
+	Stream(std::iostream* const stream)
+		: Mutable()
+		, _stream(stream)
+	{
+	}
+
 	static inline const Ptr mut_(std::iostream* const stream)
 	{
-		return me_<Stream>(new Stream(stream));
+		return make_(stream);
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1737,12 +1744,6 @@ public:
 	}
 
 private:
-	Stream(std::iostream* const stream)
-		: Mutable()
-		, _stream(stream)
-	{
-	}
-
 	const_std_unique_iostream _stream;
 };
 
@@ -1803,7 +1804,7 @@ inline const Thing::Ptr Index::It::cats_() const
 	return CATS;
 }
 
-template<typename C>
+template <typename C>
 inline const Thing::Ptr Iterator<C>::cats_() const
 {
 	static const Ptr CATS = []()
