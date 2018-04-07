@@ -611,7 +611,7 @@ public:
 		{
 			return visitor;
 		}
-		for (auto visited : _map)
+		for (const auto& visited : _map)
 		{
 			visited.first->call_("visit", visitor, member, visited.first);
 			visited.second->call_("visit", visitor, member, visited.second);
@@ -832,7 +832,7 @@ public:
 		{
 			return visitor;
 		}
-		for (auto visited : _vector)
+		for (const auto& visited : _vector)
 		{
 			visited->call_("visit", visitor, member, visited);
 		}
@@ -1021,7 +1021,7 @@ public:
 		{
 			return visitor;
 		}
-		for (auto visited : _set)
+		for (const auto& visited : _set)
 		{
 			visited->call_("visit", visitor, member, visited);
 		}
