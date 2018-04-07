@@ -25,9 +25,9 @@ public:
 	template <typename... Args>
 	inline const Ptr call_(Args&&... args)
 	{
-		std::vector<Ptr>* const v = new std::vector<Ptr>;
-		variadic_(*v, std::forward<Args>(args)...);
-		return thing(Iterator<const std::vector<Ptr>>::mut_(v));
+		const std::shared_ptr<std::vector<Ptr>> v = std::make_shared<std::vector<Ptr>>();
+		variadic_(*(v.get()), std::forward<Args>(args)...);
+		return thing(Iterator<std::vector<Ptr>>::mut_(v));
 	}
 
 	static inline void variadic_(std::vector<Ptr>& vec)
@@ -739,14 +739,8 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_(_collection);
-		Iterator* const iterator = static_cast<Iterator*>(result.get());
-		iterator->_iterator = _iterator;
+		static_cast<Iterator*>(result.get())->_iterator = _iterator;
 		return result;
-	}
-
-	static inline const Ptr mut_(C* const collection)
-	{
-		return mut_(const_std_shared_ptr_collection(collection));
 	}
 
 	static inline const Ptr mut_(const_std_shared_ptr_collection collection)
