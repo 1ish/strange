@@ -78,6 +78,13 @@ public:
 
 	inline const bool is_(const char* const symbol) const;
 
+	inline const bool is_(const Ptr symbol) const;
+
+	inline const Ptr is(const Ptr it) const
+	{
+		return boolean_(is_(it->next_()));
+	}
+
 	virtual inline size_t hash_() const
 	{
 		return (size_t)(this);
@@ -308,6 +315,12 @@ inline const bool Thing::is_(const char* const symbol) const
 {
 	const Symbol* const sym = dynamic_cast<const Symbol*>(this);
 	return (sym && (strcmp(symbol, sym->symbol_()) == 0));
+}
+
+inline const bool Thing::is_(const Thing::Ptr symbol) const
+{
+	const Symbol* const sym = dynamic_cast<const Symbol*>(symbol.get());
+	return (sym && is_(sym->symbol_()));
 }
 
 inline const Thing::Ptr Thing::sym_(const char* const symbol)
@@ -668,6 +681,7 @@ inline const Thing::Ptr Thing::pub_() const
 		Index* const index = static_cast<Index*>(pub.get());
 		index->update_("thing", Member<Thing>::fin_(&Thing::thing));
 		index->update_("next", Member<Thing>::fin_(&Thing::next));
+		index->update_("is", Const<Thing>::fin_(&Thing::is));
 		index->update_("copy", Const<Thing>::fin_(&Thing::copy));
 		index->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
 		index->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
