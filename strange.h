@@ -719,9 +719,10 @@ template <typename C>
 class Iterator : public Mutable
 {
 public:
-	inline Iterator(C&& collection)
+	template <typename F>
+	inline Iterator(F&& collection)
 		: Mutable()
-		, _collection(std::move(collection))
+		, _collection(std::forward<F>(collection))
 		, _iterator(_collection.cbegin())
 	{
 	}
@@ -742,9 +743,10 @@ public:
 		return result;
 	}
 
-	static inline const Ptr mut_(C&& collection)
+	template <typename F>
+	static inline const Ptr mut_(F&& collection)
 	{
-		return std::make_shared<Iterator>(std::move(collection));
+		return std::make_shared<Iterator>(std::forward<F>(collection));
 	}
 
 	virtual inline const Ptr type_() const override
