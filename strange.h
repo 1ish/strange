@@ -90,9 +90,16 @@ public:
 		return (size_t)(this);
 	}
 
-	virtual inline const bool same_(const Thing& other) const
+	inline const Ptr hash(const Ptr ignore) const;
+
+	virtual inline const bool same_(const Ptr other) const
 	{
-		return (this == &other);
+		return (this == other.get());
+	}
+
+	inline const Ptr same(const Ptr it) const
+	{
+		return boolean_(same_(it->next_()));
 	}
 
 	virtual inline const Ptr copy_() const = 0;
@@ -313,9 +320,9 @@ public:
 		return _hash;
 	}
 
-	virtual inline const bool same_(const Thing& other) const override
+	virtual inline const bool same_(const Ptr other) const override
 	{
-		return other.is_(_symbol);
+		return other->is_(_symbol);
 	}
 
 	inline const char* const symbol_() const
@@ -567,7 +574,7 @@ class Index : public Mutable, public Me<Index>
 	public:
 		inline const bool operator()(const Ptr& lhs, const Ptr& rhs) const
 		{
-			return lhs->same_(*rhs);
+			return lhs->same_(rhs);
 		}
 	};
 
@@ -730,6 +737,8 @@ inline const Thing::Ptr Thing::pub_() const
 		index->update_("thing", Member<Thing>::fin_(&Thing::thing));
 		index->update_("next", Member<Thing>::fin_(&Thing::next));
 		index->update_("is", Const<Thing>::fin_(&Thing::is));
+		index->update_("hash", Const<Thing>::fin_(&Thing::hash));
+		index->update_("same", Const<Thing>::fin_(&Thing::same));
 		index->update_("copy", Const<Thing>::fin_(&Thing::copy));
 		index->update_("clone", Const<Thing>::fin_(&Thing::clone));
 		index->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
@@ -988,7 +997,7 @@ class Herd : public Mutable, public Me<Herd>
 	public:
 		inline const bool operator()(const Ptr& lhs, const Ptr& rhs) const
 		{
-			return lhs->same_(*rhs);
+			return lhs->same_(rhs);
 		}
 	};
 
@@ -1178,6 +1187,13 @@ public:
 	static inline const Ptr mut_(const D& data = D())
 	{
 		return std::make_shared<Data>(data);
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -1553,6 +1569,11 @@ public:
 		return TYPE;
 	}
 };
+
+inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
+{
+	return Int64::fin_(hash_());
+}
 
 class Float32 : public Data<float>
 {
