@@ -25,9 +25,10 @@ public:
 	template <typename... Args>
 	inline const Ptr call_(Args&&... args)
 	{
-		const std::shared_ptr<std::vector<Ptr>> v = std::make_shared<std::vector<Ptr>>();
-		variadic_(*(v.get()), std::forward<Args>(args)...);
-		return thing(Iterator<std::vector<Ptr>>::mut_(v));
+		std::vector<Ptr> v;
+		v.reserve(sizeof...(Args));
+		variadic_(v, std::forward<Args>(args)...);
+		return thing(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
 	}
 
 	static inline void variadic_(std::vector<Ptr>& vec)
@@ -717,19 +718,17 @@ protected:
 template <typename C>
 class Iterator : public Mutable
 {
-	typedef const std::shared_ptr<C> const_std_shared_ptr_collection;
-
 public:
-	inline Iterator(const_std_shared_ptr_collection collection)
+	inline Iterator(C&& collection)
 		: Mutable()
-		, _collection(collection)
-		, _iterator(collection->cbegin())
+		, _collection(std::move(collection))
+		, _iterator(_collection.cbegin())
 	{
 	}
 
 	virtual inline const Ptr next_() override
 	{
-		if (_iterator == _collection->cend())
+		if (_iterator == _collection.cend())
 		{
 			return end_();
 		}
@@ -738,14 +737,14 @@ public:
 
 	virtual inline const Ptr copy_() const override
 	{
-		const Ptr result = mut_(_collection);
-		static_cast<Iterator*>(result.get())->_iterator = _iterator;
+		const Ptr result = mut_(C(_collection));
+		static_cast<Iterator*>(result.get())->_iterator += (_iterator - _collection.cbegin());
 		return result;
 	}
 
-	static inline const Ptr mut_(const_std_shared_ptr_collection collection)
+	static inline const Ptr mut_(C&& collection)
 	{
-		return std::make_shared<Iterator>(collection);
+		return std::make_shared<Iterator>(std::move(collection));
 	}
 
 	virtual inline const Ptr type_() const override
@@ -757,7 +756,7 @@ public:
 	virtual inline const Ptr cats_() const override;
 
 private:
-	const_std_shared_ptr_collection _collection;
+	const C _collection;
 	typename C::const_iterator _iterator;
 };
 
