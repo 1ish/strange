@@ -19,8 +19,8 @@ namespace strange
 class Thing
 {
 public:
-	typedef std::shared_ptr<Thing> Ptr;
-	typedef std::weak_ptr<Thing> Weak;
+	using Ptr = std::shared_ptr<Thing>;
+	using Weak = std::weak_ptr<Thing>;
 
 	template <typename... Args>
 	inline const Ptr call_(Args&&... args)
@@ -387,7 +387,7 @@ inline const Thing::Ptr Thing::end_()
 
 class Static : public Thing, public Me<Static>
 {
-	typedef const Ptr(*function)(const Ptr);
+	using function = const Ptr(*)(const Ptr);
 
 public:
 	Static(const function fun)
@@ -425,7 +425,7 @@ private:
 template <typename T>
 class Member : public Thing, public Me<Member<T>>
 {
-	typedef const Ptr(T::* member)(const Ptr);
+	using member = const Ptr(T::*)(const Ptr);
 
 public:
 	Member(const member fun)
@@ -474,7 +474,7 @@ private:
 template <typename T>
 class Const : public Thing, public Me<Const<T>>
 {
-	typedef const Ptr(T::* member)(const Ptr) const;
+	using member = const Ptr(T::*)(const Ptr) const;
 
 public:
 	Const(const member fun)
@@ -565,7 +565,7 @@ class Index : public Mutable, public Me<Index>
 		}
 	};
 
-	typedef std::unordered_map<Ptr, Ptr, Hash, Pred> std_unordered_map_ptr_ptr;
+	using std_unordered_map_ptr_ptr = std::unordered_map<Ptr, Ptr, Hash, Pred>;
 
 public:
 	Index() = default;
@@ -827,7 +827,7 @@ private:
 
 class Flock : public Mutable, public Me<Flock>
 {
-	typedef std::vector<Ptr> std_vector_ptr;
+	using std_vector_ptr = std::vector<Ptr>;
 
 public:
 	Flock() = default;
@@ -987,7 +987,7 @@ class Herd : public Mutable, public Me<Herd>
 		}
 	};
 
-	typedef std::unordered_set<Ptr, Hash, Pred> std_unordered_set_ptr;
+	using std_unordered_set_ptr = std::unordered_set<Ptr, Hash, Pred>;
 
 public:
 	Herd() = default;
@@ -1738,7 +1738,7 @@ private:
 
 class Stream : public Mutable, public Me<Stream>
 {
-	typedef const std::unique_ptr<std::iostream> const_std_unique_iostream;
+	using const_std_unique_iostream = const std::unique_ptr<std::iostream>;
 
 public:
 	Stream(std::iostream* const stream)
