@@ -571,6 +571,28 @@ public:
 		return result;
 	}
 
+	virtual inline const Ptr clone_() const override
+	{
+		const Ptr result = mut_();
+		Index* index = static_cast<Index*>(result.get());
+		for (const auto& i : _map)
+		{
+			index->update_(i.first->clone_(), i.second->clone_());
+		}
+		return result;
+	}
+
+	virtual inline void freeze_() override
+	{
+		for (const auto& i : _map)
+		{
+			i.first->freeze_();
+			i.second->freeze_();
+		}
+	}
+
+	virtual inline const Ptr to_buffer_() const override;
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -1751,6 +1773,17 @@ public:
 		return me_();
 	}
 
+	virtual inline const Ptr to_buffer_() const override
+	{
+		const std::stringstream* const str = dynamic_cast<const std::stringstream*>(_stream.get());
+		const Ptr result = Buffer::mut_(str ? str->str() : std::string());
+		if (finalized_())
+		{
+			result->finalize_();
+		}
+		return result;
+	}
+
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Stream");
@@ -1825,6 +1858,24 @@ public:
 private:
 	const_std_unique_iostream _stream;
 };
+
+inline const Thing::Ptr Index::to_buffer_() const
+{
+	const Ptr stream = Stream::mut_(new std::stringstream());
+	Stream* const str = static_cast<Stream*>(stream.get());
+	str->write_(Int64::fin_(_map.size()));
+	for (const auto& i : _map)
+	{
+		str->push_back_(i.first);
+		str->push_back_(i.second);
+	}
+	const Ptr buffer = str->to_buffer_();
+	if (finalized_())
+	{
+		buffer->finalize_();
+	}
+	return buffer;
+}
 
 inline const Thing::Ptr Thing::cats_() const
 {
