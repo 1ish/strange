@@ -230,11 +230,7 @@ public:
 		return nothing_();
 	}
 	
-	virtual inline const Ptr type_() const
-	{
-		static const Ptr TYPE = sym_("strange::Thing");
-		return TYPE;
-	}
+	virtual inline const Ptr type_() const = 0;
 
 	inline const Ptr type(const Ptr ignore) const
 	{
