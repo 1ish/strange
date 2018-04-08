@@ -15,6 +15,31 @@
 
 namespace strange
 {
+	// Categories:
+	// private typedefs
+	// protected typedefs
+	// public typedefs
+	// public static utility functions
+	// public static factory functions
+	// public static symbols
+	// public construction/destruction/assignment
+	// public pure virtual member functions and adapters
+	// public impure virtual member functions and adapters
+	// public non-virtual member functions and adapters
+	// protected static utility functions
+	// protected static factory functions
+	// protected static symbols
+	// protected construction/destruction/assignment
+	// protected pure virtual member functions and adapters
+	// protected impure virtual member functions and adapters
+	// protected non-virtual member functions and adapters
+	// private static utility functions
+	// private static factory functions
+	// private static symbols
+	// private construction/destruction/assignment
+	// private pure virtual member functions and adapters
+	// private impure virtual member functions and adapters
+	// private non-virtual member functions and adapters
 
 class Thing
 {
@@ -225,18 +250,18 @@ public:
 		return nothing_();
 	}
 
-	virtual inline const Ptr cats_() const;
-
-	inline const Ptr cats(const Ptr ignore) const
-	{
-		return cats_();
-	}
-
 	virtual inline const Ptr visit(const Ptr it)
 	{
 		const Ptr visitor = it->next_();
 		visitor->thing(it);
 		return visitor;
+	}
+
+	virtual inline const Ptr cats_() const;
+
+	inline const Ptr cats(const Ptr ignore) const
+	{
+		return cats_();
 	}
 
 	// public non-virtual member functions and adapters
@@ -700,7 +725,7 @@ public:
 
 	virtual inline const Ptr cats_() const override;
 
-	virtual const Ptr visit(const Ptr it) override
+	virtual inline const Ptr visit(const Ptr it) override
 	{
 		const Ptr visitor = it->next_();
 		const Ptr member = it->next_();
@@ -931,7 +956,7 @@ public:
 
 	virtual inline const Ptr cats_() const override;
 
-	virtual const Ptr visit(const Ptr it) override
+	virtual inline const Ptr visit(const Ptr it) override
 	{
 		const Ptr visitor = it->next_();
 		const Ptr member = it->next_();
@@ -1120,7 +1145,7 @@ public:
 		return CATS;
 	}
 
-	virtual const Ptr visit(const Ptr it) override
+	virtual inline const Ptr visit(const Ptr it) override
 	{
 		const Ptr visitor = it->next_();
 		const Ptr member = it->next_();
