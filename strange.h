@@ -19,18 +19,11 @@ namespace strange
 class Thing
 {
 public:
+	// public typedefs
 	using Ptr = std::shared_ptr<Thing>;
 	using Weak = std::weak_ptr<Thing>;
 
-	template <typename... Args>
-	inline const Ptr call_(Args&&... args)
-	{
-		std::vector<Ptr> v;
-		v.reserve(sizeof...(Args));
-		variadic_(v, std::forward<Args>(args)...);
-		return thing(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
-	}
-
+	// public static utility functions
 	static inline void variadic_(std::vector<Ptr>& vec)
 	{
 	}
@@ -59,47 +52,86 @@ public:
 		variadic_(vec, std::forward<Args>(args)...);
 	}
 
-	inline const Ptr thing(const Ptr it)
+	static inline const Ptr boolean_(const bool value)
 	{
-		return operator()(this, it);
+		return value ? one_() : nothing_();
 	}
 
-	virtual ~Thing() = default;
+	static inline const Ptr boolean_(const Ptr ptr)
+	{
+		return boolean_(!ptr->is_("0"));
+	}
 
-	virtual inline const Ptr next_()
+	static inline const Ptr boolean(const Ptr it)
+	{
+		return boolean_(it->next_());
+	}
+
+	static inline void log_(const char* const message)
+	{
+		std::cout << message;
+	}
+
+	static inline void log_(const Ptr ptr);
+
+	static inline const Ptr log(const Ptr it)
+	{
+		log_(it->next_());
+		return nothing_();
+	}
+
+	// public static factory functions
+	static inline const Ptr factory_();
+
+	static inline const Ptr factory(const Ptr ignore)
+	{
+		return factory_();
+	}
+
+	virtual inline const Ptr pub_() const;
+
+	inline const Ptr pub(const Ptr ignore) const
+	{
+		return pub_();
+	}
+
+	static inline const Ptr sym_(const char* const symbol);
+
+	// public static symbols
+	static inline const Ptr nothing_();
+
+	static inline const Ptr nothing(const Ptr ignore)
+	{
+		return nothing_();
+	}
+
+	static inline const Ptr one_();
+
+	static inline const Ptr one(const Ptr ignore)
+	{
+		return one_();
+	}
+
+	static inline const Ptr end_();
+
+	static inline const Ptr end(const Ptr ignore)
 	{
 		return end_();
 	}
 
-	inline const Ptr next(const Ptr ignore)
+	// public construction/destruction/assignment
+	Thing(const Thing&) = delete;
+
+	Thing& operator=(const Thing& thing) = delete;
+
+	virtual ~Thing() = default;
+
+	// public pure virtual member functions and adapters
+	virtual inline const Ptr type_() const = 0;
+
+	inline const Ptr type(const Ptr ignore) const
 	{
-		return next_();
-	}
-
-	inline const bool is_(const char* const symbol) const;
-
-	inline const bool is_(const Ptr symbol) const;
-
-	inline const Ptr is(const Ptr it) const
-	{
-		return boolean_(is_(it->next_()));
-	}
-
-	virtual inline size_t hash_() const
-	{
-		return (size_t)(this);
-	}
-
-	inline const Ptr hash(const Ptr ignore) const;
-
-	virtual inline const bool same_(const Ptr other) const
-	{
-		return (this == other.get());
-	}
-
-	inline const Ptr same(const Ptr it) const
-	{
-		return boolean_(same_(it->next_()));
+		return type_();
 	}
 
 	virtual inline const Ptr copy_() const = 0;
@@ -109,6 +141,7 @@ public:
 		return copy_();
 	}
 
+	// public impure virtual member functions and adapters
 	virtual inline const Ptr clone_() const
 	{
 		return copy_();
@@ -150,69 +183,31 @@ public:
 		return nothing_();
 	}
 
-	static inline const Ptr boolean_(const bool value)
-	{
-		return value ? one_() : nothing_();
-	}
-
-	static inline const Ptr boolean_(const Ptr ptr)
-	{
-		return boolean_(!ptr->is_("0"));
-	}
-
-	static inline const Ptr boolean(const Ptr it)
-	{
-		return boolean_(it->next_());
-	}
-
-	static inline const Ptr factory_();
-
-	static inline const Ptr factory(const Ptr ignore)
-	{
-		return factory_();
-	}
-
-	virtual inline const Ptr pub_() const;
-
-	inline const Ptr pub(const Ptr ignore) const
-	{
-		return pub_();
-	}
-
-	static inline const Ptr sym_(const char* const symbol);
-
-	static inline const Ptr nothing_();
-
-	static inline const Ptr nothing(const Ptr ignore)
-	{
-		return nothing_();
-	}
-
-	static inline const Ptr one_();
-
-	static inline const Ptr one(const Ptr ignore)
-	{
-		return one_();
-	}
-
-	static inline const Ptr end_();
-
-	static inline const Ptr end(const Ptr ignore)
+	virtual inline const Ptr next_()
 	{
 		return end_();
 	}
 
-	static inline void log_(const char* const message)
+	inline const Ptr next(const Ptr ignore)
 	{
-		std::cout << message;
+		return next_();
 	}
 
-	static inline void log_(const Ptr ptr);
-
-	static inline const Ptr log(const Ptr it)
+	virtual inline size_t hash_() const
 	{
-		log_(it->next_());
-		return nothing_();
+		return (size_t)(this);
+	}
+
+	inline const Ptr hash(const Ptr ignore) const;
+
+	virtual inline const bool same_(const Ptr other) const
+	{
+		return (this == other.get());
+	}
+
+	inline const Ptr same(const Ptr it) const
+	{
+		return boolean_(same_(it->next_()));
 	}
 
 	virtual inline const Ptr to_buffer_() const;
@@ -229,13 +224,6 @@ public:
 		from_buffer_(it->next_());
 		return nothing_();
 	}
-	
-	virtual inline const Ptr type_() const = 0;
-
-	inline const Ptr type(const Ptr ignore) const
-	{
-		return type_();
-	}
 
 	virtual inline const Ptr cats_() const;
 
@@ -244,26 +232,49 @@ public:
 		return cats_();
 	}
 
-	virtual const Ptr visit(const Ptr it)
+	virtual inline const Ptr visit(const Ptr it)
 	{
 		const Ptr visitor = it->next_();
 		visitor->thing(it);
 		return visitor;
 	}
 
-protected:
-	Thing() = default;
+	// public non-virtual member functions and adapters
+	template <typename... Args>
+	inline const Ptr call_(Args&&... args)
+	{
+		std::vector<Ptr> v;
+		v.reserve(sizeof...(Args));
+		variadic_(v, std::forward<Args>(args)...);
+		return thing(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
+	}
 
+	inline const Ptr thing(const Ptr it)
+	{
+		return operator()(this, it);
+	}
+
+	inline const bool is_(const char* const symbol) const;
+
+	inline const bool is_(const Ptr symbol) const;
+
+	inline const Ptr is(const Ptr it) const
+	{
+		return boolean_(is_(it->next_()));
+	}
+
+protected:
+	// protected static utility functions
 	static inline const Ptr thing_(Thing* const thing, const Ptr member, const Ptr it)
 	{
 		return member->operator()(thing, it);
 	}
 
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it);
+	// protected construction/destruction/assignment
+	Thing() = default;
 
-private:
-	Thing(const Thing&) = delete;
-	Thing& operator=(const Thing& thing) = delete;
+	// protected impure virtual member functions and adapters
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr it);
 };
 
 template <typename T>
@@ -574,7 +585,7 @@ public:
 	virtual inline const Ptr clone_() const override
 	{
 		const Ptr result = mut_();
-		Index* index = static_cast<Index*>(result.get());
+		Index* const index = static_cast<Index*>(result.get());
 		for (const auto& i : _map)
 		{
 			index->update_(i.first->clone_(), i.second->clone_());
