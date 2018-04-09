@@ -49,12 +49,24 @@ public:
 	using Weak = std::weak_ptr<Thing>;
 
 	// public static utility functions
+	template <typename T>
+	static inline T* const static_(const Ptr ptr)
+	{
+		return static_cast<T*>(ptr.get());
+	}
+
+	template <typename T>
+	static inline T* const dynamic_(const Ptr ptr)
+	{
+		return dynamic_cast<T*>(ptr.get());
+	}
+
 	static inline void variadic_(std::vector<Ptr>& vec)
 	{
 	}
 
 	template <typename... Args>
-	static inline void variadic_(std::vector<Ptr>& vec, const char* const symbol, Args&&... args)
+	static inline void variadic_(std::vector<Ptr>& vec, const std::string& symbol, Args&&... args)
 	{
 		vec.push_back(sym_(symbol));
 		variadic_(vec, std::forward<Args>(args)...);
@@ -92,9 +104,10 @@ public:
 		return boolean_(it->next_());
 	}
 
-	static inline void log_(const char* const message)
+	template <typename F>
+	static inline void log_(F&& message)
 	{
-		std::cout << message;
+		std::cout << std::forward<F>(message);
 	}
 
 	static inline void log_(const Ptr ptr);
@@ -120,7 +133,8 @@ public:
 		return pub_();
 	}
 
-	static inline const Ptr sym_(const char* const symbol);
+	template <typename F>
+	static inline const Ptr sym_(F&& symbol);
 
 	// public static symbols
 	static inline const Ptr nothing_();
@@ -220,7 +234,7 @@ public:
 
 	virtual inline size_t hash_() const
 	{
-		return (size_t)(this);
+		return std::hash<uint64_t>()(reinterpret_cast<uint64_t>(this));
 	}
 
 	inline const Ptr hash(const Ptr ignore) const;
@@ -242,13 +256,31 @@ public:
 		return to_buffer_();
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer);
+	virtual inline void from_buffer_(const Ptr buffer)
+	{
+		if (buffer->finalized_())
+		{
+			finalize_();
+		}
+	}
 
 	inline const Ptr from_buffer(const Ptr it)
 	{
 		from_buffer_(it->next_());
 		return nothing_();
 	}
+
+	virtual inline void to_stream_(const Ptr stream) const
+	{
+		to_buffer_()->to_stream_(stream);
+	}
+
+	inline const Ptr to_stream(const Ptr it) const
+	{
+		to_stream_(it->next_());
+	}
+
+	virtual inline void from_stream_(const Ptr stream);
 
 	virtual inline const Ptr visit(const Ptr it)
 	{
@@ -279,7 +311,8 @@ public:
 		return operator()(this, it);
 	}
 
-	inline const bool is_(const char* const symbol) const;
+	template <typename F>
+	inline const bool is_(F&& symbol) const;
 
 	inline const bool is_(const Ptr symbol) const;
 
@@ -300,6 +333,9 @@ protected:
 
 	// protected impure virtual member functions and adapters
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it);
+
+	// protected non-virtual member functions and adapters
+	inline const Ptr to_buffer_from_stream_() const;
 };
 
 template <typename T>
@@ -312,7 +348,7 @@ protected:
 	static inline const Thing::Ptr make_(Args&&... args)
 	{
 		const Thing::Ptr result = std::make_shared<T>(std::forward<Args>(args)...);
-		static_cast<T*>(result.get())->_me = result;
+		Thing::static_<T>(result)->_me = result;
 		return result;
 	}
 
@@ -333,10 +369,11 @@ private:
 class Symbol : public Thing, public Me<Symbol>
 {
 public:
-	inline Symbol(const char* const symbol)
+	template <typename F>
+	inline Symbol(F&& symbol)
 		: Me()
-		, _symbol(symbol)
-		, _hash(std::hash<std::string>()(symbol))
+		, _symbol(std::forward<F>(symbol))
+		, _hash(std::hash<std::string>()(_symbol))
 	{
 	}
 
@@ -350,7 +387,7 @@ public:
 		return other->is_(_symbol);
 	}
 
-	inline const char* const symbol_() const
+	inline const std::string& symbol_() const
 	{
 		return _symbol;
 	}
@@ -360,9 +397,17 @@ public:
 		return me_();
 	}
 
-	static inline const Ptr fin_(const char* const symbol)
+	template <typename F>
+	static inline const Ptr fin_(F&& symbol)
 	{
-		return make_(symbol);
+		return make_(std::forward<F>(symbol));
+	}
+
+	static inline const Ptr buf_(const Ptr buffer);
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
 	}
 
 	virtual inline const Ptr to_buffer_() const override;
@@ -382,25 +427,27 @@ protected:
 	}
 
 private:
-	const char* const _symbol;
+	const std::string _symbol;
 	const size_t _hash;
 };
 
-inline const bool Thing::is_(const char* const symbol) const
+template <typename F>
+inline const bool Thing::is_(F&& symbol) const
 {
 	const Symbol* const sym = dynamic_cast<const Symbol*>(this);
-	return (sym && (strcmp(symbol, sym->symbol_()) == 0));
+	return (sym && sym->symbol_() == std::forward<F>(symbol));
 }
 
 inline const bool Thing::is_(const Thing::Ptr symbol) const
 {
-	const Symbol* const sym = dynamic_cast<const Symbol*>(symbol.get());
+	const Symbol* const sym = dynamic_<const Symbol>(symbol);
 	return (sym && is_(sym->symbol_()));
 }
 
-inline const Thing::Ptr Thing::sym_(const char* const symbol)
+template <typename F>
+inline const Thing::Ptr Thing::sym_(F&& symbol)
 {
-	return Symbol::fin_(symbol);
+	return Symbol::fin_(std::forward<F>(symbol));
 }
 
 inline const Thing::Ptr Thing::nothing_()
@@ -580,7 +627,7 @@ class Index : public Mutable, public Me<Index>
 	class Hash
 	{
 	public:
-		inline size_t operator()(const Ptr& ptr) const
+		inline size_t operator()(const Ptr ptr) const
 		{
 			return ptr->hash_();
 		}
@@ -589,7 +636,7 @@ class Index : public Mutable, public Me<Index>
 	class Pred
 	{
 	public:
-		inline const bool operator()(const Ptr& lhs, const Ptr& rhs) const
+		inline const bool operator()(const Ptr lhs, const Ptr rhs) const
 		{
 			return lhs->same_(rhs);
 		}
@@ -603,17 +650,17 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
-		static_cast<Index*>(result.get())->_map = _map;
+		static_<Index>(result)->_map = _map;
 		return result;
 	}
 
 	virtual inline const Ptr clone_() const override
 	{
 		const Ptr result = mut_();
-		Index* const index = static_cast<Index*>(result.get());
+		std_unordered_map_ptr_ptr& clone = static_<Index>(result)->_map;
 		for (const auto& i : _map)
 		{
-			index->update_(i.first->clone_(), i.second->clone_());
+			clone[i.first->clone_()] = i.second->clone_();
 		}
 		return result;
 	}
@@ -636,7 +683,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_cast<Index*>(pub.get());
+			Index* const index = static_<Index>(pub);
 			index->update_("mut", Static::fin_(&Index::mut));
 			index->update_("buf", Static::fin_(&Index::buf));
 			index->update_("find", Const<Index>::fin_(&Index::find));
@@ -670,31 +717,31 @@ public:
 		return buf_(it->next_());
 	}
 
-	inline const Ptr find(const Ptr it) const
+	template <typename F>
+	inline const Ptr find_(F&& symbol) const
 	{
-		return find_(it->next_());
-	}
-
-	inline const Ptr find_(const char* const symbol) const
-	{
-		return find_(sym_(symbol));
+		return find_(sym_(std::forward<F>(symbol)));
 	}
 
 	inline const Ptr find_(const Ptr key) const
 	{
 		const std_unordered_map_ptr_ptr::const_iterator mit = _map.find(key);
-		if (mit == _map.end())
+		if (mit == _map.cend())
 		{
 			return nothing_();
 		}
 		return mit->second;
 	}
 
-	inline const Ptr update(const Ptr it)
+	inline const Ptr find(const Ptr it) const
 	{
-		const Ptr key = it->next_();
-		const Ptr value = it->next_();
-		return update_(key, value);
+		return find_(it->next_());
+	}
+
+	template <typename F>
+	inline const Ptr update_(F&& key, const Ptr value)
+	{
+		return update_(sym_(std::forward<F>(key)), value);
 	}
 
 	inline const Ptr update_(const Ptr key, const Ptr value)
@@ -702,9 +749,11 @@ public:
 		return _map[key] = value;
 	}
 
-	inline const Ptr update_(const char* const key, const Ptr value)
+	inline const Ptr update(const Ptr it)
 	{
-		return update_(sym_(key), value);
+		const Ptr key = it->next_();
+		const Ptr value = it->next_();
+		return update_(key, value);
 	}
 
 	inline const Ptr iterator_() const
@@ -750,7 +799,7 @@ private:
 		inline It(const Ptr index)
 			: Mutable()
 			, _index(index)
-			, _iterator(static_cast<Index*>(_index.get())->_map.begin())
+			, _iterator(static_<Index>(_index)->_map.cbegin())
 		{
 		}
 
@@ -759,7 +808,7 @@ private:
 		virtual inline const Ptr copy_() const override
 		{
 			const Ptr result = mut_(_index);
-			static_cast<It*>(result.get())->_iterator = _iterator;
+			static_<It>(result)->_iterator = _iterator;
 			return result;
 		}
 
@@ -787,7 +836,7 @@ inline const Thing::Ptr Thing::pub_() const
 	static const Ptr PUB = []()
 	{
 		const Ptr pub = Index::mut_();
-		Index* const index = static_cast<Index*>(pub.get());
+		Index* const index = static_<Index>(pub);
 		index->update_("thing", Member<Thing>::fin_(&Thing::thing));
 		index->update_("next", Member<Thing>::fin_(&Thing::next));
 		index->update_("is", Const<Thing>::fin_(&Thing::is));
@@ -818,7 +867,7 @@ inline const Thing::Ptr Thing::pub_() const
 
 inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr it)
 {
-	const Ptr member = static_cast<Index*>(pub_().get())->find(it);
+	const Ptr member = static_<Index>(pub_())->find(it);
 	return thing_(thing, member, it);
 }
 
@@ -834,7 +883,7 @@ protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
 		const Ptr cit = it->copy_();
-		const Ptr member = static_cast<Index*>(pub_().get())->find(it);
+		const Ptr member = static_<Index>(pub_())->find(it);
 		if (member->is_("0"))
 		{
 			return _decorated->thing(cit);
@@ -869,7 +918,7 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_(C(_collection));
-		static_cast<Iterator*>(result.get())->_iterator += (_iterator - _collection.cbegin());
+		static_<Iterator>(result)->_iterator += (_iterator - _collection.cbegin());
 		return result;
 	}
 
@@ -902,7 +951,7 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
-		static_cast<Flock*>(result.get())->_vector = _vector;
+		static_<Flock>(result)->_vector = _vector;
 		return result;
 	}
 
@@ -911,7 +960,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_cast<Index*>(pub.get());
+			Index* const index = static_<Index>(pub);
 			index->update_("mut", Static::fin_(&Flock::mut));
 			index->update_("push_back", Member<Flock>::fin_(&Flock::push_back));
 			index->update_("iterator", Const<Flock>::fin_(&Flock::iterator));
@@ -964,7 +1013,7 @@ public:
 		{
 			return visitor;
 		}
-		for (const auto& visited : _vector)
+		for (const auto visited : _vector)
 		{
 			visited->call_("visit", visitor, member, visited);
 		}
@@ -980,13 +1029,13 @@ private:
 		inline It(const Ptr flock)
 			: Mutable()
 			, _flock(flock)
-			, _iterator(static_cast<Flock*>(_flock.get())->_vector.begin())
+			, _iterator(static_<Flock>(_flock)->_vector.cbegin())
 		{
 		}
 
 		virtual const Ptr next_() override
 		{
-			if (_iterator == static_cast<Flock*>(_flock.get())->_vector.cend())
+			if (_iterator == static_<Flock>(_flock)->_vector.cend())
 			{
 				return end_();
 			}
@@ -996,7 +1045,7 @@ private:
 		virtual inline const Ptr copy_() const override
 		{
 			const Ptr result = mut_(_flock);
-			static_cast<It*>(result.get())->_iterator = _iterator;
+			static_<It>(result)->_iterator = _iterator;
 			return result;
 		}
 
@@ -1021,12 +1070,12 @@ private:
 
 inline const Thing::Ptr Index::It::next_()
 {
-	if (_iterator == static_cast<Index*>(_index.get())->_map.cend())
+	if (_iterator == static_<Index>(_index)->_map.cend())
 	{
 		return end_();
 	}
 	const Ptr result = Flock::mut_();
-	Flock* const flock = static_cast<Flock*>(result.get());
+	Flock* const flock = static_<Flock>(result);
 	flock->push_back(_iterator->first);
 	flock->push_back(_iterator->second);
 	flock->finalize_();
@@ -1039,7 +1088,7 @@ class Herd : public Mutable, public Me<Herd>
 	class Hash
 	{
 	public:
-		inline size_t operator()(const Ptr& ptr) const
+		inline size_t operator()(const Ptr ptr) const
 		{
 			return ptr->hash_();
 		}
@@ -1048,7 +1097,7 @@ class Herd : public Mutable, public Me<Herd>
 	class Pred
 	{
 	public:
-		inline const bool operator()(const Ptr& lhs, const Ptr& rhs) const
+		inline const bool operator()(const Ptr lhs, const Ptr rhs) const
 		{
 			return lhs->same_(rhs);
 		}
@@ -1062,7 +1111,7 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
-		static_cast<Herd*>(result.get())->_set = _set;
+		static_<Herd>(result)->_set = _set;
 		return result;
 	}
 
@@ -1071,7 +1120,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_cast<Index*>(pub.get());
+			Index* const index = static_<Index>(pub);
 			index->update_("mut", Static::fin_(&Herd::mut));
 			index->update_("find", Const<Herd>::fin_(&Herd::find));
 			index->update_("insert", Member<Herd>::fin_(&Herd::insert));
@@ -1093,24 +1142,41 @@ public:
 		return mut_();
 	}
 
-	inline const Ptr find(const Ptr it) const
+	template <typename F>
+	inline const Ptr find_(F&& item)
 	{
-		const std_unordered_set_ptr::const_iterator sit = _set.find(it->next_());
-		if (sit == _set.end())
+		return find_(sym_(std::forward<F>(item)));
+	}
+
+	inline const Ptr find_(const Ptr item) const
+	{
+		const std_unordered_set_ptr::const_iterator sit = _set.find(item);
+		if (sit == _set.cend())
 		{
 			return nothing_();
 		}
 		return *sit;
 	}
 
-	inline const Ptr insert(const Ptr it)
+	inline const Ptr find(const Ptr it) const
 	{
-		return boolean_(_set.insert(it->next_()).second);
+		return find_(it->next_());
 	}
 
-	inline const Ptr insert_(const char* const key)
+	template <typename F>
+	inline const bool insert_(F&& key)
 	{
-		return insert(sym_(key));
+		return insert_(sym_(std::forward<F>(key)));
+	}
+
+	inline const bool insert_(const Ptr item)
+	{
+		return _set.insert(item).second;
+	}
+
+	inline const Ptr insert(const Ptr it)
+	{
+		return boolean_(insert_(it->next_()));
 	}
 
 	inline const Ptr iterator_() const
@@ -1134,7 +1200,7 @@ public:
 		static const Ptr CATS = []()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_cast<Herd*>(cats.get());
+			Herd* const herd = static_<Herd>(cats);
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Iterable");
 			herd->insert_("strange::Herd");
@@ -1153,7 +1219,7 @@ public:
 		{
 			return visitor;
 		}
-		for (const auto& visited : _set)
+		for (const auto visited : _set)
 		{
 			visited->call_("visit", visitor, member, visited);
 		}
@@ -1175,13 +1241,13 @@ private:
 		inline It(const Ptr herd)
 			: Mutable()
 			, _herd(herd)
-			, _iterator(static_cast<Herd*>(_herd.get())->_set.begin())
+			, _iterator(static_<Herd>(_herd)->_set.cbegin())
 		{
 		}
 
 		virtual inline const Ptr next_() override
 		{
-			if (_iterator == static_cast<Herd*>(_herd.get())->_set.cend())
+			if (_iterator == static_<Herd>(_herd)->_set.cend())
 			{
 				return end_();
 			}
@@ -1191,7 +1257,7 @@ private:
 		virtual inline const Ptr copy_() const override
 		{
 			const Ptr result = mut_(_herd);
-			static_cast<It*>(result.get())->_iterator = _iterator;
+			static_<It>(result)->_iterator = _iterator;
 			return result;
 		}
 
@@ -1211,7 +1277,7 @@ private:
 			static const Ptr CATS = []()
 			{
 				const Ptr cats = Herd::mut_();
-				Herd* const herd = static_cast<Herd*>(cats.get());
+				Herd* const herd = static_<Herd>(cats);
 				herd->insert_("strange::Mutable");
 				herd->insert_("strange::Iterator");
 				herd->insert_("strange::Thing");
@@ -1287,7 +1353,7 @@ public:
 		static const Ptr CATS = []()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_cast<Herd*>(cats.get());
+			Herd* const herd = static_<Herd>(cats);
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Data");
 			herd->insert_("strange::Thing");
@@ -1316,7 +1382,7 @@ public:
 
 	virtual inline void from_buffer_(const Ptr buffer) override
 	{
-		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
 			log_("Buffer::from_buffer_ called with wrong type of thing");
@@ -1329,6 +1395,10 @@ public:
 		}
 	}
 
+	virtual inline void to_stream_(const Ptr stream) const override;
+
+	virtual inline void from_stream_(const Ptr stream) override;
+
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Buffer");
@@ -1339,7 +1409,7 @@ public:
 inline void Thing::log_(const Thing::Ptr ptr)
 {
 	const Ptr buffer = ptr->to_buffer_();
-	log_(static_cast<const Buffer*>(ptr.get())->get_().c_str());
+	log_(static_<const Buffer>(ptr)->get_().c_str());
 }
 
 inline const Thing::Ptr Thing::to_buffer_() const
@@ -1352,23 +1422,27 @@ inline const Thing::Ptr Thing::to_buffer_() const
 	return buffer;
 }
 
-inline void Thing::from_buffer_(const Thing::Ptr buffer)
+inline void Thing::from_stream_(const Thing::Ptr stream)
 {
-	Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+	const Ptr buffer = Buffer::mut_();
+	buffer->from_stream_(stream);
+	from_buffer_(buffer);
+}
+
+inline const Thing::Ptr Symbol::buf_(const Thing::Ptr buffer)
+{
+	Buffer* const buf = dynamic_<Buffer>(buffer);
 	if (!buf)
 	{
-		log_("Thing::from_buffer_ called with wrong type of thing");
-		return;
+		log_("Symbol::buf_ called with wrong type of thing");
+		return sym_("");
 	}
-	if (buf->finalized_())
-	{
-		finalize_();
-	}
+	return fin_(buf->get_());
 }
 
 inline const Thing::Ptr Symbol::to_buffer_() const
 {
-	const Ptr buffer = Buffer::mut_(std::string(_symbol));
+	const Ptr buffer = Buffer::mut_(_symbol);
 	buffer->finalize_();
 	return buffer;
 }
@@ -1386,7 +1460,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_cast<Index*>(pub.get());
+			Index* const index = static_<Index>(pub);
 			index->update_("mut", Static::fin_(&Bit::mut));
 			index->finalize_();
 			return pub;
@@ -1406,7 +1480,7 @@ public:
 
 	virtual inline void from_buffer_(const Ptr buffer) override
 	{
-		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
 			log_("Bit::from_buffer_ called with wrong type of thing");
@@ -1431,7 +1505,7 @@ class Byte : public Data<unsigned char>
 public:
 	virtual inline const Ptr to_buffer_() const override
 	{
-		const Ptr buffer = Buffer::mut_(std::string(1, *reinterpret_cast<const char*>(&get_())));
+		const Ptr buffer = Buffer::mut_(std::string(1, *reinterpret_cast<const char*>(&(get_()))));
 		if (finalized_())
 		{
 			buffer->finalize_();
@@ -1441,7 +1515,7 @@ public:
 
 	virtual inline void from_buffer_(const Ptr buffer) override
 	{
-		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
 			log_("Byte::from_buffer_ called with wrong type of thing");
@@ -1479,7 +1553,7 @@ public:
 
 	virtual inline void from_buffer_(const Ptr buffer) override
 	{
-		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
 			log_("Int16::from_buffer_ called with wrong type of thing");
@@ -1522,7 +1596,7 @@ public:
 
 	virtual inline void from_buffer_(const Ptr buffer) override
 	{
-		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
 			log_("Int32::from_buffer_ called with wrong type of thing");
@@ -1571,7 +1645,7 @@ public:
 
 	virtual inline void from_buffer_(const Ptr buffer) override
 	{
-		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
 			log_("Int64::from_buffer_ called with wrong type of thing");
@@ -1611,7 +1685,7 @@ public:
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(4, 0);
-		uint32_t i = *reinterpret_cast<const uint32_t*>(&get_());
+		uint32_t i = *reinterpret_cast<const uint32_t*>(&(get_()));
 		str[0] = i & 0xFF;
 		str[1] = (i >> 8) & 0xFF;
 		str[2] = (i >> 16) & 0xFF;
@@ -1626,7 +1700,7 @@ public:
 
 	virtual inline void from_buffer_(const Ptr buffer) override
 	{
-		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
 			log_("Float32::from_buffer_ called with wrong type of thing");
@@ -1657,7 +1731,7 @@ public:
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(8, 0);
-		uint64_t i = *reinterpret_cast<const uint64_t*>(&get_());
+		uint64_t i = *reinterpret_cast<const uint64_t*>(&(get_()));
 		str[0] = i & 0xFF;
 		str[1] = (i >> 8) & 0xFF;
 		str[2] = (i >> 16) & 0xFF;
@@ -1676,7 +1750,7 @@ public:
 
 	virtual inline void from_buffer_(const Ptr buffer) override
 	{
-		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
+		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
 			log_("Float64::from_buffer_ called with wrong type of thing");
@@ -1704,6 +1778,200 @@ public:
 		return TYPE;
 	}
 };
+
+class Stream : public Mutable, public Me<Stream>
+{
+	using const_std_unique_iostream = const std::unique_ptr<std::iostream>;
+
+public:
+	Stream(std::iostream* const stream)
+		: Mutable()
+		, _stream(stream)
+	{
+	}
+
+	static inline const Ptr mut_(std::iostream* const stream)
+	{
+		return make_(stream);
+	}
+
+	static inline const Ptr mut_(const std::string& str = std::string())
+	{
+		return mut_(new std::stringstream(str));
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return me_();
+	}
+
+	virtual inline const Ptr to_buffer_() const override
+	{
+		const std::stringstream* const str = dynamic_cast<const std::stringstream*>(_stream.get());
+		const Ptr result = Buffer::mut_(str ? str->str() : std::string());
+		if (finalized_())
+		{
+			result->finalize_();
+		}
+		return result;
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Stream");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stream");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+	inline void push_back_(const Ptr ptr)
+	{
+		const Ptr type = ptr->type_();
+		const Ptr buffer = ptr->to_buffer_();
+		Buffer* const buf = static_<Buffer>(buffer);
+		write_(Bit::mut_(buf->finalized_()));
+		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
+		write_(type);
+		write_(Int64::mut_(buf->get_().length()));
+		write_(buffer);
+	}
+
+	inline void write_(const std::string& str)
+	{
+		_stream->write(str.data(), str.length());
+	}
+
+	inline void write_(const Ptr ptr)
+	{
+		write_(static_<Buffer>(ptr->to_buffer_())->get_());
+	}
+
+	inline const Ptr write(const Ptr it)
+	{
+		write_(it->next_());
+	}
+
+	inline const Ptr pop_front_()
+	{
+		const Ptr bit = Bit::buf(read_(1));
+		const Ptr int16 = Int16::buf(read_(2));
+		const std::string function = static_<Buffer>(read_(static_<Int16>(int16)->get_()))->get_() + "::buf";
+		const Ptr fun = static_<Index>(factory_())->find_(function.c_str());
+		if (fun->is_("0"))
+		{
+			log_("Stream::pop_front_ read unknown type");
+			return fun;
+		}
+		const Ptr int64 = Int64::buf_(read_(8));
+		const Ptr result = fun->call_(read_(size_t(static_<Int64>(int64)->get_())));
+		if (static_<Bit>(bit)->get_())
+		{
+			result->finalize_();
+		}
+		return result;
+	}
+
+	inline const Ptr read_(const size_t length)
+	{
+		std::string str(length, 0);
+		_stream->read(const_cast<char*>(str.data()), length);
+		return Buffer::mut_(str);
+	}
+
+private:
+	const_std_unique_iostream _stream;
+};
+
+inline const Thing::Ptr Thing::to_buffer_from_stream_() const
+{
+	const Ptr stream = Stream::mut_();
+	to_stream_(stream);
+	return stream->to_buffer_();
+}
+
+inline const Thing::Ptr Index::to_buffer_() const
+{
+	const Ptr stream = Stream::mut_();
+	Stream* const str = static_<Stream>(stream);
+	str->write_(Int64::fin_(_map.size()));
+	for (const auto& i : _map)
+	{
+		str->push_back_(i.first);
+		str->push_back_(i.second);
+	}
+	const Ptr buffer = str->to_buffer_();
+	if (finalized_())
+	{
+		buffer->finalize_();
+	}
+	return buffer;
+}
+
+inline void Index::from_buffer_(const Thing::Ptr buffer)
+{
+	Buffer* const buf = dynamic_<Buffer>(buffer);
+	if (!buf)
+	{
+		log_("Index::from_buffer_ called with wrong type of thing");
+		return;
+	}
+	const Ptr stream = Stream::mut_(buf->get_());
+	Stream* const str = static_<Stream>(stream);
+	const Ptr int64 = Int64::buf_(str->read_(8));
+	for (int64_t i = static_<Int64>(int64)->get_(); i > 0; --i)
+	{
+		const Ptr first = str->pop_front_();
+		const Ptr second = str->pop_front_();
+		update_(first, second);
+	}
+	if (buf->finalized_())
+	{
+		finalize_();
+	}
+}
+
+inline void Buffer::to_stream_(const Thing::Ptr stream) const
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Buffer::to_stream_ called with wrong type of thing");
+		return;
+	}
+	strm->write_(static_<Buffer>(Bit::fin_(finalized_())->to_buffer_())->get_());
+	strm->write_(static_<Buffer>(Int64::fin_(get_().length())->to_buffer_())->get_());
+	strm->write_(get_());
+}
+
+inline void Buffer::from_stream_(const Thing::Ptr stream)
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Buffer::from_stream_ called with wrong type of thing");
+		return;
+	}
+	const bool bit = static_<Bit>(Bit::buf_(strm->read_(1)))->get_();
+	const int64_t int64 = static_<Int64>(Int64::buf_(strm->read_(8)))->get_();
+	set_(static_<Buffer>(strm->read_(size_t(int64)))->get_());
+	if (bit)
+	{
+		finalize_();
+	}
+}
 
 class Fence : public Mutable
 {
@@ -1736,7 +2004,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_cast<Index*>(pub.get());
+			Index* const index = static_<Index>(pub);
 			index->update_("mut", Static::fin_(&Fence::mut));
 			index->update_("give", Member<Fence>::fin_(&Fence::give));
 			index->update_("take", Member<Fence>::fin_(&Fence::take));
@@ -1788,7 +2056,7 @@ public:
 		static const Ptr CATS = []()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_cast<Herd*>(cats.get());
+			Herd* const herd = static_<Herd>(cats);
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Concurrent");
 			herd->insert_("strange::Thing");
@@ -1802,154 +2070,6 @@ private:
 	std::atomic<bool> _fence;
 	Ptr _ptr;
 };
-
-class Stream : public Mutable, public Me<Stream>
-{
-	using const_std_unique_iostream = const std::unique_ptr<std::iostream>;
-
-public:
-	Stream(std::iostream* const stream)
-		: Mutable()
-		, _stream(stream)
-	{
-	}
-
-	static inline const Ptr mut_(std::iostream* const stream)
-	{
-		return make_(stream);
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return me_();
-	}
-
-	virtual inline const Ptr to_buffer_() const override
-	{
-		const std::stringstream* const str = dynamic_cast<const std::stringstream*>(_stream.get());
-		const Ptr result = Buffer::mut_(str ? str->str() : std::string());
-		if (finalized_())
-		{
-			result->finalize_();
-		}
-		return result;
-	}
-
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::Stream");
-		return TYPE;
-	}
-
-	virtual inline const Ptr cats_() const override
-	{
-		static const Ptr CATS = []()
-		{
-			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_cast<Herd*>(cats.get());
-			herd->insert_("strange::Mutable");
-			herd->insert_("strange::Stream");
-			herd->insert_("strange::Thing");
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
-	}
-
-	inline void push_back_(const Ptr ptr)
-	{
-		const Ptr type = ptr->type_();
-		const Ptr buffer = ptr->to_buffer_();
-		Buffer* const buf = static_cast<Buffer*>(buffer.get());
-		write_(Bit::mut_(buf->finalized_()));
-		write_(Int16::mut_(int16_t(strlen(static_cast<Symbol*>(type.get())->symbol_()))));
-		write_(type);
-		write_(Int64::mut_(buf->get_().length()));
-		write_(buffer);
-	}
-
-	inline void write_(const Ptr ptr)
-	{
-		const Ptr buffer = ptr->to_buffer_();
-		Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
-		if (buf)
-		{
-			const std::string& str = buf->get_();
-			_stream->write(str.data(), str.length());
-		}
-	}
-
-	inline const Ptr pop_front_()
-	{
-		const Ptr bit = Bit::buf(read_(1));
-		const Ptr int16 = Int16::buf(read_(2));
-		const std::string function = static_cast<Buffer*>(read_(static_cast<Int16*>(int16.get())->get_()).get())->get_() + "::buf";
-		const Ptr fun = static_cast<Index*>(factory_().get())->find_(function.c_str());
-		if (fun->is_("0"))
-		{
-			log_("Stream::pop_front_ read unknown type");
-			return fun;
-		}
-		const Ptr int64 = Int64::buf_(read_(8));
-		const Ptr result = fun->call_(read_(size_t(static_cast<Int64*>(int64.get())->get_())));
-		if (static_cast<Bit*>(bit.get())->get_())
-		{
-			result->finalize_();
-		}
-		return result;
-	}
-
-	inline const Ptr read_(const size_t length)
-	{
-		std::string str(length, 0);
-		_stream->read(const_cast<char*>(str.data()), length);
-		return Buffer::mut_(str);
-	}
-
-private:
-	const_std_unique_iostream _stream;
-};
-
-inline const Thing::Ptr Index::to_buffer_() const
-{
-	const Ptr stream = Stream::mut_(new std::stringstream());
-	Stream* const str = static_cast<Stream*>(stream.get());
-	str->write_(Int64::fin_(_map.size()));
-	for (const auto& i : _map)
-	{
-		str->push_back_(i.first);
-		str->push_back_(i.second);
-	}
-	const Ptr buffer = str->to_buffer_();
-	if (finalized_())
-	{
-		buffer->finalize_();
-	}
-	return buffer;
-}
-
-inline void Index::from_buffer_(const Thing::Ptr buffer)
-{
-	Buffer* const buf = dynamic_cast<Buffer*>(buffer.get());
-	if (!buf)
-	{
-		log_("Index::from_buffer_ called with wrong type of thing");
-		return;
-	}
-	const Ptr stream = Stream::mut_(new std::stringstream(buf->get_()));
-	Stream* const str = static_cast<Stream*>(stream.get());
-	const Ptr int64 = Int64::buf_(str->read_(8));
-	for (int64_t i = static_cast<Int64*>(int64.get())->get_(); i > 0; --i)
-	{
-		const Ptr first = str->pop_front_();
-		const Ptr second = str->pop_front_();
-		update_(first, second);
-	}
-	if (buf->finalized_())
-	{
-		finalize_();
-	}
-}
 
 inline const Thing::Ptr Thing::cats_() const
 {
@@ -1967,7 +2087,7 @@ inline const Thing::Ptr Symbol::cats_() const
 	static const Ptr CATS = []()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_cast<Herd*>(cats.get());
+		Herd* const herd = static_<Herd>(cats);
 		herd->insert_("strange::Final");
 		herd->insert_("strange::Symbol");
 		herd->insert_("strange::Thing");
@@ -1982,7 +2102,7 @@ inline const Thing::Ptr Index::cats_() const
 	static const Ptr CATS = []()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_cast<Herd*>(cats.get());
+		Herd* const herd = static_<Herd>(cats);
 		herd->insert_("strange::Mutable");
 		herd->insert_("strange::Iterable");
 		herd->insert_("strange::Index");
@@ -1998,7 +2118,7 @@ inline const Thing::Ptr Index::It::cats_() const
 	static const Ptr CATS = []()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_cast<Herd*>(cats.get());
+		Herd* const herd = static_<Herd>(cats);
 		herd->insert_("strange::Mutable");
 		herd->insert_("strange::Iterator");
 		herd->insert_("strange::Thing");
@@ -2014,7 +2134,7 @@ inline const Thing::Ptr Iterator<C>::cats_() const
 	static const Ptr CATS = []()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_cast<Herd*>(cats.get());
+		Herd* const herd = static_<Herd>(cats);
 		herd->insert_("strange::Mutable");
 		herd->insert_("strange::Iterator");
 		herd->insert_("strange::Thing");
@@ -2029,7 +2149,7 @@ inline const Thing::Ptr Flock::cats_() const
 	static const Ptr CATS = []()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_cast<Herd*>(cats.get());
+		Herd* const herd = static_<Herd>(cats);
 		herd->insert_("strange::Mutable");
 		herd->insert_("strange::Iterable");
 		herd->insert_("strange::Flock");
@@ -2045,7 +2165,7 @@ inline const Thing::Ptr Flock::It::cats_() const
 	static const Ptr CATS = []()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_cast<Herd*>(cats.get());
+		Herd* const herd = static_<Herd>(cats);
 		herd->insert_("strange::Mutable");
 		herd->insert_("strange::Iterator");
 		herd->insert_("strange::Thing");
@@ -2060,7 +2180,8 @@ inline const Thing::Ptr Thing::factory_()
 	static const Ptr FACTORY = []()
 	{
 		const Ptr factory = Index::mut_();
-		Index* const index = static_cast<Index*>(factory.get());
+		Index* const index = static_<Index>(factory);
+		index->update_("strange::Symbol::buf", Static::fin_(&Symbol::buf));
 		index->update_("strange::Index::mut", Static::fin_(&Index::mut));
 		index->update_("strange::Index::buf", Static::fin_(&Index::buf));
 		index->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
