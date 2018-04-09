@@ -61,34 +61,6 @@ public:
 		return dynamic_cast<T*>(ptr.get());
 	}
 
-	static inline void variadic_(std::vector<Ptr>& vec)
-	{
-	}
-
-	template <typename... Args>
-	static inline void variadic_(std::vector<Ptr>& vec, const std::string& symbol, Args&&... args)
-	{
-		vec.push_back(sym_(symbol));
-		variadic_(vec, std::forward<Args>(args)...);
-	}
-
-	template <typename... Args>
-	static inline void variadic_(std::vector<Ptr>& vec, Thing& thing, Args&&... args)
-	{
-		for (Ptr p = thing.next_(); !p->is_("end"); p = thing.next_())
-		{
-			vec.push_back(p);
-		}
-		variadic_(vec, std::forward<Args>(args)...);
-	}
-
-	template <typename... Args>
-	static inline void variadic_(std::vector<Ptr>& vec, const Ptr ptr, Args&&... args)
-	{
-		vec.push_back(ptr);
-		variadic_(vec, std::forward<Args>(args)...);
-	}
-
 	static inline const Ptr boolean_(const bool value)
 	{
 		return value ? one_() : nothing_();
@@ -302,7 +274,7 @@ public:
 	{
 		std::vector<Ptr> v;
 		v.reserve(sizeof...(Args));
-		variadic_(v, std::forward<Args>(args)...);
+		Variadic::variadic_(v, std::forward<Args>(args)...);
 		return thing(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
 	}
 
@@ -336,6 +308,42 @@ protected:
 
 	// protected non-virtual member functions and adapters
 	inline const Ptr to_buffer_from_stream_() const;
+};
+
+class Variadic
+{
+public:
+	// public typedefs
+	using Ptr = Thing::Ptr;
+
+	// public static utility functions
+	static inline void variadic_(std::vector<Ptr>& vec)
+	{
+	}
+
+	template <typename... Args>
+	static inline void variadic_(std::vector<Ptr>& vec, const std::string& symbol, Args&&... args)
+	{
+		vec.push_back(Thing::sym_(symbol));
+		variadic_(vec, std::forward<Args>(args)...);
+	}
+
+	template <typename... Args>
+	static inline void variadic_(std::vector<Ptr>& vec, Thing& thing, Args&&... args)
+	{
+		for (Ptr p = thing.next_(); !p->is_("end"); p = thing.next_())
+		{
+			vec.push_back(p);
+		}
+		variadic_(vec, std::forward<Args>(args)...);
+	}
+
+	template <typename... Args>
+	static inline void variadic_(std::vector<Ptr>& vec, const Ptr ptr, Args&&... args)
+	{
+		vec.push_back(ptr);
+		variadic_(vec, std::forward<Args>(args)...);
+	}
 };
 
 template <typename T>
