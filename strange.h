@@ -206,7 +206,7 @@ public:
 
 	virtual inline size_t hash_() const
 	{
-		return std::hash<uint64_t>()(reinterpret_cast<uint64_t>(this));
+		return std::hash<const Thing*>()(this);
 	}
 
 	inline const Ptr hash(const Ptr ignore) const;
@@ -220,39 +220,6 @@ public:
 	{
 		return boolean_(same_(it->next_()));
 	}
-
-	virtual inline const Ptr to_buffer_() const;
-
-	inline const Ptr to_buffer(const Ptr ignore) const
-	{
-		return to_buffer_();
-	}
-
-	virtual inline void from_buffer_(const Ptr buffer)
-	{
-		if (buffer->finalized_())
-		{
-			finalize_();
-		}
-	}
-
-	inline const Ptr from_buffer(const Ptr it)
-	{
-		from_buffer_(it->next_());
-		return nothing_();
-	}
-
-	virtual inline void to_stream_(const Ptr stream) const
-	{
-		to_buffer_()->to_stream_(stream);
-	}
-
-	inline const Ptr to_stream(const Ptr it) const
-	{
-		to_stream_(it->next_());
-	}
-
-	virtual inline void from_stream_(const Ptr stream);
 
 	virtual inline const Ptr visit(const Ptr it)
 	{
@@ -305,9 +272,6 @@ protected:
 
 	// protected impure virtual member functions and adapters
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it);
-
-	// protected non-virtual member functions and adapters
-	inline const Ptr to_buffer_from_stream_() const;
 };
 
 class Variadic
@@ -374,7 +338,52 @@ private:
 	Thing::Weak _me;
 };
 
-class Symbol : public Thing, public Me<Symbol>
+class Serializable
+{
+public:
+	// public pure virtual member functions and adapters
+	virtual inline const Thing::Ptr to_buffer_() const = 0;
+
+	inline const Thing::Ptr to_buffer(const Thing::Ptr ignore) const
+	{
+		return to_buffer_();
+	}
+
+	// public impure virtual member functions and adapters
+
+	virtual inline void from_buffer_(const Thing::Ptr buffer)
+	{
+	}
+
+	inline const Thing::Ptr from_buffer(const Thing::Ptr it)
+	{
+		from_buffer_(it->next_());
+		return Thing::nothing_();
+	}
+
+	virtual inline void to_stream_(const Thing::Ptr stream) const;
+
+	inline const Thing::Ptr to_stream(const Thing::Ptr it) const
+	{
+		to_stream_(it->next_());
+	}
+
+	virtual inline void from_stream_(const Thing::Ptr stream);
+
+	inline const Thing::Ptr from_stream(const Thing::Ptr it)
+	{
+		from_stream_(it->next_());
+		return Thing::nothing_();
+	}
+
+protected:
+	// protected non-virtual member functions and adapters
+	inline const Thing::Ptr to_buffer_via_stream_() const;
+
+	inline void from_buffer_via_stream_(const Thing::Ptr buffer);
+};
+
+class Symbol : public Thing, public Me<Symbol>, public Serializable
 {
 public:
 	template <typename F>
@@ -630,7 +639,7 @@ private:
 	bool _finalized;
 };
 
-class Index : public Mutable, public Me<Index>
+class Index : public Mutable, public Me<Index>, public Serializable
 {
 	class Hash
 	{
@@ -682,9 +691,19 @@ public:
 		}
 	}
 
-	virtual inline const Ptr to_buffer_() const override;
+	virtual inline const Ptr to_buffer_() const override
+	{
+		return to_buffer_via_stream_();
+	}
 
-	virtual inline void from_buffer_(const Ptr buffer);
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		from_buffer_via_stream_(buffer);
+	}
+
+	virtual inline void to_stream_(const Thing::Ptr stream) const override;
+
+	virtual inline void from_stream_(const Thing::Ptr stream) override;
 
 	virtual inline const Ptr pub_() const override
 	{
@@ -716,7 +735,7 @@ public:
 	static inline const Ptr buf_(const Ptr buffer)
 	{
 		const Ptr ptr = mut_();
-		ptr->from_buffer_(buffer);
+		static_<Index>(ptr)->from_buffer_(buffer);
 		return ptr;
 	}
 
@@ -862,8 +881,6 @@ inline const Thing::Ptr Thing::pub_() const
 		index->update_(one_(), one_());
 		index->update_(end_(), end_());
 		index->update_("log", Static::fin_(&Thing::log));
-		index->update_("to_buffer", Const<Thing>::fin_(&Thing::to_buffer));
-		index->update_("from_buffer", Member<Thing>::fin_(&Thing::from_buffer));
 		index->update_("type", Const<Thing>::fin_(&Thing::type));
 		index->update_("cats", Const<Thing>::fin_(&Thing::cats));
 		index->update_("visit", Member<Thing>::fin_(&Thing::visit));
@@ -1302,42 +1319,12 @@ private:
 };
 
 template <typename D>
-class Data : public Mutable
+class Data
 {
 public:
 	Data(const D& data)
-		: Mutable()
-		, _data(data)
+		: _data(data)
 	{
-	}
-
-	static inline const Ptr mut_(const D& data = D())
-	{
-		return std::make_shared<Data>(data);
-	}
-
-	static inline const Ptr fin_(const D& data = D())
-	{
-		const Ptr result = mut_(data);
-		result->finalize_();
-		return result;
-	}
-
-	static inline const Ptr buf_(const Ptr buffer)
-	{
-		const Ptr ptr = mut_();
-		ptr->from_buffer_(buffer);
-		return ptr;
-	}
-
-	static inline const Ptr buf(const Ptr it)
-	{
-		return buf_(it->next_());
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return mut_(_data);
 	}
 
 	inline void set_(const D& data)
@@ -1350,34 +1337,58 @@ public:
 		return _data;
 	}
 
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::Data");
-		return TYPE;
-	}
-
-	virtual inline const Ptr cats_() const override
-	{
-		static const Ptr CATS = []()
-		{
-			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
-	}
+	virtual inline const int64_t size_() const = 0;
 
 private:
 	D _data;
 };
 
-class Buffer : public Data<std::string>
+class Buffer : public Mutable, public Serializable, public Data<std::string>
 {
 public:
+	using D = std::string;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return std::make_shared<Buffer>(data);
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		static_<Buffer>(ptr)->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
+	}
+
+	inline Buffer(const D& data)
+		: Mutable()
+		, Serializable()
+		, Data(data)
+	{
+	}
+
+	virtual inline const int64_t size_() const override
+	{
+		return get_().length();
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		const Ptr buffer = copy_();
@@ -1416,24 +1427,22 @@ public:
 
 inline void Thing::log_(const Thing::Ptr ptr)
 {
-	const Ptr buffer = ptr->to_buffer_();
-	log_(static_<const Buffer>(ptr)->get_().c_str());
-}
-
-inline const Thing::Ptr Thing::to_buffer_() const
-{
-	const Ptr buffer = Buffer::mut_(std::string());
-	if (finalized_())
+	Serializable* const ser = dynamic_<Serializable>(ptr);
+	if (ser)
 	{
-		buffer->finalize_();
+		log_(static_<const Buffer>(ser->to_buffer_())->get_());
 	}
-	return buffer;
 }
 
-inline void Thing::from_stream_(const Thing::Ptr stream)
+inline void Serializable::to_stream_(const Thing::Ptr stream) const
 {
-	const Ptr buffer = Buffer::mut_();
-	buffer->from_stream_(stream);
+	Thing::static_<Buffer>(to_buffer_())->to_stream_(stream);
+}
+
+inline void Serializable::from_stream_(const Thing::Ptr stream)
+{
+	const Thing::Ptr buffer = Buffer::mut_();
+	Thing::static_<Buffer>(buffer)->from_stream_(stream);
 	from_buffer_(buffer);
 }
 
@@ -1443,7 +1452,7 @@ inline const Thing::Ptr Symbol::buf_(const Thing::Ptr buffer)
 	if (!buf)
 	{
 		log_("Symbol::buf_ called with wrong type of thing");
-		return sym_("");
+		return fin_("");
 	}
 	return fin_(buf->get_());
 }
@@ -1455,12 +1464,55 @@ inline const Thing::Ptr Symbol::to_buffer_() const
 	return buffer;
 }
 
-class Bit : public Data<bool>
+class Bit : public Mutable, public Serializable, public Data<bool>
 {
 public:
+	using D = bool;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return std::make_shared<Bit>(data);
+	}
+
 	static inline const Ptr mut(const Ptr it)
 	{
 		return mut_(!it->next_()->is_("0"));
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		static_<Bit>(ptr)->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
+	}
+
+	inline Bit(const D& data)
+		: Mutable()
+		, Serializable()
+		, Data(data)
+	{
+	}
+
+	virtual inline const int64_t size_() const override
+	{
+		return 1;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -1508,9 +1560,52 @@ public:
 	}
 };
 
-class Byte : public Data<unsigned char>
+class Byte : public Mutable, public Serializable, public Data<unsigned char>
 {
 public:
+	using D = unsigned char;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return std::make_shared<Byte>(data);
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		static_<Byte>(ptr)->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
+	}
+
+	inline Byte(const D& data)
+		: Mutable()
+		, Serializable()
+		, Data(data)
+	{
+	}
+
+	virtual inline const int64_t size_() const override
+	{
+		return 1;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		const Ptr buffer = Buffer::mut_(std::string(1, *reinterpret_cast<const char*>(&(get_()))));
@@ -1543,9 +1638,52 @@ public:
 	}
 };
 
-class Int16 : public Data<int16_t>
+class Int16 : public Mutable, public Serializable, public Data<int16_t>
 {
 public:
+	using D = int16_t;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return std::make_shared<Int16>(data);
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		static_<Int16>(ptr)->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
+	}
+
+	inline Int16(const D& data)
+		: Mutable()
+		, Serializable()
+		, Data(data)
+	{
+	}
+
+	virtual inline const int64_t size_() const override
+	{
+		return 2;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(2, 0);
@@ -1584,9 +1722,52 @@ public:
 	}
 };
 
-class Int32 : public Data<int32_t>
+class Int32 : public Mutable, public Serializable, public Data<int32_t>
 {
 public:
+	using D = int32_t;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return std::make_shared<Int32>(data);
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		static_<Int32>(ptr)->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
+	}
+
+	inline Int32(const D& data)
+		: Mutable()
+		, Serializable()
+		, Data(data)
+	{
+	}
+
+	virtual inline const int64_t size_() const override
+	{
+		return 4;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(4, 0);
@@ -1629,9 +1810,52 @@ public:
 	}
 };
 
-class Int64 : public Data<int64_t>
+class Int64 : public Mutable, public Serializable, public Data<int64_t>
 {
 public:
+	using D = int64_t;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return std::make_shared<Int64>(data);
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		static_<Int64>(ptr)->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
+	}
+
+	inline Int64(const D& data)
+		: Mutable()
+		, Serializable()
+		, Data(data)
+	{
+	}
+
+	virtual inline const int64_t size_() const override
+	{
+		return 8;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(8, 0);
@@ -1684,12 +1908,55 @@ public:
 
 inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
 {
-	return Int64::fin_(hash_());
+	return Int64::fin_(int64_t(hash_()));
 }
 
-class Float32 : public Data<float>
+class Float32 : public Mutable, public Serializable, public Data<float>
 {
 public:
+	using D = float;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return std::make_shared<Float32>(data);
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		static_<Float32>(ptr)->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
+	}
+
+	inline Float32(const D& data)
+		: Mutable()
+		, Serializable()
+		, Data(data)
+	{
+	}
+
+	virtual inline const int64_t size_() const override
+	{
+		return 4;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(4, 0);
@@ -1733,9 +2000,52 @@ public:
 	}
 };
 
-class Float64 : public Data<double>
+class Float64 : public Mutable, public Serializable, public Data<double>
 {
 public:
+	using D = double;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return std::make_shared<Float64>(data);
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		static_<Float64>(ptr)->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
+	}
+
+	inline Float64(const D& data)
+		: Mutable()
+		, Serializable()
+		, Data(data)
+	{
+	}
+
+	virtual inline const int64_t size_() const override
+	{
+		return 8;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(8, 0);
@@ -1813,17 +2123,6 @@ public:
 		return me_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override
-	{
-		const std::stringstream* const str = dynamic_cast<const std::stringstream*>(_stream.get());
-		const Ptr result = Buffer::mut_(str ? str->str() : std::string());
-		if (finalized_())
-		{
-			result->finalize_();
-		}
-		return result;
-	}
-
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Stream");
@@ -1847,14 +2146,18 @@ public:
 
 	inline void push_back_(const Ptr ptr)
 	{
-		const Ptr type = ptr->type_();
-		const Ptr buffer = ptr->to_buffer_();
-		Buffer* const buf = static_<Buffer>(buffer);
-		write_(Bit::mut_(buf->finalized_()));
-		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
-		write_(type);
-		write_(Int64::mut_(buf->get_().length()));
-		write_(buffer);
+		Serializable* const ser = dynamic_<Serializable>(ptr);
+		if (ser)
+		{
+			const Ptr type = ptr->type_();
+			const Ptr buffer = ser->to_buffer_();
+			Buffer* const buf = static_<Buffer>(buffer);
+			write_(Bit::mut_(buf->finalized_()));
+			write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
+			write_(type);
+			write_(Int64::mut_(buf->get_().length()));
+			write_(buffer);
+		}
 	}
 
 	inline void write_(const std::string& str)
@@ -1864,7 +2167,11 @@ public:
 
 	inline void write_(const Ptr ptr)
 	{
-		write_(static_<Buffer>(ptr->to_buffer_())->get_());
+		Serializable* const ser = dynamic_<Serializable>(ptr);
+		if (ser)
+		{
+			write_(static_<Buffer>(ser->to_buffer_())->get_());
+		}
 	}
 
 	inline const Ptr write(const Ptr it)
@@ -1903,51 +2210,58 @@ private:
 	const_std_unique_iostream _stream;
 };
 
-inline const Thing::Ptr Thing::to_buffer_from_stream_() const
+inline const Thing::Ptr Serializable::to_buffer_via_stream_() const
 {
-	const Ptr stream = Stream::mut_();
+	const Thing::Ptr stream = Stream::mut_();
 	to_stream_(stream);
-	return stream->to_buffer_();
-}
-
-inline const Thing::Ptr Index::to_buffer_() const
-{
-	const Ptr stream = Stream::mut_();
-	Stream* const str = static_<Stream>(stream);
-	str->write_(Int64::fin_(_map.size()));
-	for (const auto& i : _map)
-	{
-		str->push_back_(i.first);
-		str->push_back_(i.second);
-	}
-	const Ptr buffer = str->to_buffer_();
-	if (finalized_())
-	{
-		buffer->finalize_();
-	}
+	const Thing::Ptr buffer = Buffer::mut_();
+	Thing::static_<Buffer>(buffer)->from_stream_(stream);
 	return buffer;
 }
 
-inline void Index::from_buffer_(const Thing::Ptr buffer)
+inline void Serializable::from_buffer_via_stream_(const Thing::Ptr buffer)
 {
-	Buffer* const buf = dynamic_<Buffer>(buffer);
+	Buffer* const buf = Thing::dynamic_<Buffer>(buffer);
 	if (!buf)
 	{
-		log_("Index::from_buffer_ called with wrong type of thing");
+		Thing::log_("Serializable::from_buffer_via_stream_ called with wrong type of thing");
 		return;
 	}
-	const Ptr stream = Stream::mut_(buf->get_());
-	Stream* const str = static_<Stream>(stream);
-	const Ptr int64 = Int64::buf_(str->read_(8));
+	const Thing::Ptr stream = Stream::mut_();
+	buf->to_stream_(stream);
+	from_stream_(stream);
+}
+
+inline void Index::to_stream_(const Thing::Ptr stream) const
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Index::to_stream_ called with wrong type of thing");
+		return;
+	}
+	strm->write_(Int64::fin_(_map.size()));
+	for (const auto& i : _map)
+	{
+		strm->push_back_(i.first);
+		strm->push_back_(i.second);
+	}
+}
+
+inline void Index::from_stream_(const Thing::Ptr stream)
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Index::from_stream_ called with wrong type of thing");
+		return;
+	}
+	const Ptr int64 = Int64::buf_(strm->read_(8));
 	for (int64_t i = static_<Int64>(int64)->get_(); i > 0; --i)
 	{
-		const Ptr first = str->pop_front_();
-		const Ptr second = str->pop_front_();
-		update_(first, second);
-	}
-	if (buf->finalized_())
-	{
-		finalize_();
+		const Ptr first = strm->pop_front_();
+		const Ptr second = strm->pop_front_();
+		_map[first] = second;
 	}
 }
 
@@ -1959,8 +2273,8 @@ inline void Buffer::to_stream_(const Thing::Ptr stream) const
 		log_("Buffer::to_stream_ called with wrong type of thing");
 		return;
 	}
-	strm->write_(static_<Buffer>(Bit::fin_(finalized_())->to_buffer_())->get_());
-	strm->write_(static_<Buffer>(Int64::fin_(get_().length())->to_buffer_())->get_());
+	strm->write_(static_<Buffer>(static_<Bit>(Bit::fin_(finalized_()))->to_buffer_())->get_());
+	strm->write_(static_<Buffer>(static_<Int64>(Int64::fin_(get_().length()))->to_buffer_())->get_());
 	strm->write_(get_());
 }
 
