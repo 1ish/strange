@@ -1142,7 +1142,7 @@ inline const Thing::Ptr Index::It::next_()
 	return result;
 }
 
-class Herd : public Mutable, public Me<Herd>
+class Herd : public Mutable, public Me<Herd>, public Serializable
 {
 	class Hash
 	{
@@ -1173,6 +1173,39 @@ public:
 		static_<Herd>(result)->_set = _set;
 		return result;
 	}
+
+	virtual inline const Ptr clone_() const override
+	{
+		const Ptr result = mut_();
+		std_unordered_set_ptr& clone = static_<Herd>(result)->_set;
+		for (const auto i : _set)
+		{
+			clone.insert(i->clone_());
+		}
+		return result;
+	}
+
+	virtual inline void freeze_() override
+	{
+		for (const auto i : _set)
+		{
+			i->freeze_();
+		}
+	}
+
+	virtual inline const Ptr to_buffer_() const override
+	{
+		return to_buffer_via_stream_();
+	}
+
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		from_buffer_via_stream_(buffer);
+	}
+
+	virtual inline void to_stream_(const Thing::Ptr stream) const override;
+
+	virtual inline void from_stream_(const Thing::Ptr stream) override;
 
 	virtual inline const Ptr pub_() const override
 	{
@@ -2323,9 +2356,41 @@ inline void Flock::from_stream_(const Thing::Ptr stream)
 		return;
 	}
 	const Ptr int64 = Int64::buf_(strm->read_(8));
-	for (int64_t i = static_<Int64>(int64)->get_(); i > 0; --i)
+	const int64_t size = static_<Int64>(int64)->get_();
+	_vector.reserve(size);
+	for (int64_t i = size; i > 0; --i)
 	{
 		_vector.push_back(strm->pop_front_());
+	}
+}
+
+inline void Herd::to_stream_(const Thing::Ptr stream) const
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Herd::to_stream_ called with wrong type of thing");
+		return;
+	}
+	strm->write_(Int64::fin_(_set.size()));
+	for (const auto i : _set)
+	{
+		strm->push_back_(i);
+	}
+}
+
+inline void Herd::from_stream_(const Thing::Ptr stream)
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Herd::from_stream_ called with wrong type of thing");
+		return;
+	}
+	const Ptr int64 = Int64::buf_(strm->read_(8));
+	for (int64_t i = static_<Int64>(int64)->get_(); i > 0; --i)
+	{
+		_set.insert(strm->pop_front_());
 	}
 }
 
