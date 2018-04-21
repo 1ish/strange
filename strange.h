@@ -966,7 +966,7 @@ private:
 	typename C::const_iterator _iterator;
 };
 
-class Flock : public Mutable, public Me<Flock>
+class Flock : public Mutable, public Me<Flock>, public Serializable
 {
 	using std_vector_ptr = std::vector<Ptr>;
 
@@ -979,6 +979,40 @@ public:
 		static_<Flock>(result)->_vector = _vector;
 		return result;
 	}
+
+	virtual inline const Ptr clone_() const override
+	{
+		const Ptr result = mut_();
+		std_vector_ptr& clone = static_<Flock>(result)->_vector;
+		clone.reserve(_vector.size());
+		for (const auto i : _vector)
+		{
+			clone.push_back(i->clone_());
+		}
+		return result;
+	}
+
+	virtual inline void freeze_() override
+	{
+		for (const auto i : _vector)
+		{
+			i->freeze_();
+		}
+	}
+
+	virtual inline const Ptr to_buffer_() const override
+	{
+		return to_buffer_via_stream_();
+	}
+
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		from_buffer_via_stream_(buffer);
+	}
+
+	virtual inline void to_stream_(const Thing::Ptr stream) const override;
+
+	virtual inline void from_stream_(const Thing::Ptr stream) override;
 
 	virtual inline const Ptr pub_() const override
 	{
@@ -2262,6 +2296,36 @@ inline void Index::from_stream_(const Thing::Ptr stream)
 		const Ptr first = strm->pop_front_();
 		const Ptr second = strm->pop_front_();
 		_map[first] = second;
+	}
+}
+
+inline void Flock::to_stream_(const Thing::Ptr stream) const
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Flock::to_stream_ called with wrong type of thing");
+		return;
+	}
+	strm->write_(Int64::fin_(_vector.size()));
+	for (const auto i : _vector)
+	{
+		strm->push_back_(i);
+	}
+}
+
+inline void Flock::from_stream_(const Thing::Ptr stream)
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Flock::from_stream_ called with wrong type of thing");
+		return;
+	}
+	const Ptr int64 = Int64::buf_(strm->read_(8));
+	for (int64_t i = static_<Int64>(int64)->get_(); i > 0; --i)
+	{
+		_vector.push_back(strm->pop_front_());
 	}
 }
 
