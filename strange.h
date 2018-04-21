@@ -2250,8 +2250,9 @@ public:
 
 	inline const Ptr read_(const int64_t length)
 	{
-		std::string str(size_t(length), 0);
-		_stream->read(const_cast<char*>(str.data()), str.length());
+		std::string str;
+		str.resize(size_t(length));
+		_stream->read(&str[0], str.length());
 		return Buffer::mut_(str);
 	}
 
