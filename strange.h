@@ -1021,6 +1021,7 @@ public:
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
 			index->update_("mut", Static::fin_(&Flock::mut));
+			index->update_("buf", Static::fin_(&Flock::buf));
 			index->update_("push_back", Member<Flock>::fin_(&Flock::push_back));
 			index->update_("iterator", Const<Flock>::fin_(&Flock::iterator));
 			index->finalize_();
@@ -1037,6 +1038,18 @@ public:
 	static inline const Ptr mut(const Ptr ignore)
 	{
 		return mut_();
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		static_<Flock>(ptr)->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
 	}
 
 	inline const Ptr push_back(const Ptr it)
@@ -1214,6 +1227,7 @@ public:
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
 			index->update_("mut", Static::fin_(&Herd::mut));
+			index->update_("buf", Static::fin_(&Herd::buf));
 			index->update_("find", Const<Herd>::fin_(&Herd::find));
 			index->update_("insert", Member<Herd>::fin_(&Herd::insert));
 			index->update_("iterator", Const<Herd>::fin_(&Herd::iterator));
@@ -1232,6 +1246,18 @@ public:
 	static inline const Ptr mut(const Ptr ignore)
 	{
 		return mut_();
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		static_<Herd>(ptr)->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
 	}
 
 	template <typename F>
@@ -2636,7 +2662,9 @@ inline const Thing::Ptr Thing::factory_()
 		index->update_("strange::Index::mut", Static::fin_(&Index::mut));
 		index->update_("strange::Index::buf", Static::fin_(&Index::buf));
 		index->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
+		index->update_("strange::Flock::buf", Static::fin_(&Flock::buf));
 		index->update_("strange::Herd::mut", Static::fin_(&Herd::mut));
+		index->update_("strange::Herd::buf", Static::fin_(&Herd::buf));
 		index->update_("strange::Buffer::buf", Static::fin_(&Buffer::buf));
 		index->update_("strange::Bit::buf", Static::fin_(&Bit::buf));
 		index->update_("strange::Byte::buf", Static::fin_(&Byte::buf));
