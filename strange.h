@@ -206,7 +206,7 @@ public:
 
 	virtual inline size_t hash_() const
 	{
-		return std::hash<const Thing*>()(this);
+		return std::hash<const Thing*>{}(this);
 	}
 
 	inline const Ptr hash(const Ptr ignore) const;
@@ -388,9 +388,9 @@ class Symbol : public Thing, public Me<Symbol>, public Serializable
 public:
 	template <typename F>
 	inline Symbol(F&& symbol)
-		: Me()
-		, _symbol(std::forward<F>(symbol))
-		, _hash(std::hash<std::string>()(_symbol))
+		: Me{}
+		, _symbol{ std::forward<F>(symbol) }
+		, _hash{ std::hash<std::string>()(_symbol) }
 	{
 	}
 
@@ -469,19 +469,19 @@ inline const Thing::Ptr Thing::sym_(F&& symbol)
 
 inline const Thing::Ptr Thing::nothing_()
 {
-	static const Ptr NOTHING(sym_("0"));
+	static const Ptr NOTHING = sym_("0");
 	return NOTHING;
 }
 
 inline const Thing::Ptr Thing::one_()
 {
-	static const Ptr ONE(sym_("1"));
+	static const Ptr ONE = sym_("1");
 	return ONE;
 }
 
 inline const Thing::Ptr Thing::end_()
 {
-	static const Ptr END(sym_("end"));
+	static const Ptr END = sym_("end");
 	return END;
 }
 
@@ -491,8 +491,8 @@ class Static : public Thing, public Me<Static>
 
 public:
 	Static(const function fun)
-		: Me()
-		, _function(fun)
+		: Me{}
+		, _function{ fun }
 	{
 	}
 
@@ -529,8 +529,8 @@ class Member : public Thing, public Me<Member<T>>
 
 public:
 	Member(const member fun)
-		: Me<Member<T>>()
-		, _function(fun)
+		: Me<Member<T>>{}
+		, _function{ fun }
 	{
 	}
 
@@ -578,8 +578,8 @@ class Const : public Thing, public Me<Const<T>>
 
 public:
 	Const(const member fun)
-		: Me<Const<T>>()
-		, _function(fun)
+		: Me<Const<T>>{}
+		, _function{ fun }
 	{
 	}
 
@@ -630,8 +630,8 @@ public:
 
 protected:
 	inline Mutable()
-		: Thing()
-		, _finalized(false)
+		: Thing{}
+		, _finalized{ false }
 	{
 	}
 
@@ -824,9 +824,9 @@ private:
 	{
 	public:
 		inline It(const Ptr index)
-			: Mutable()
-			, _index(index)
-			, _iterator(static_<Index>(_index)->_map.cbegin())
+			: Mutable{}
+			, _index{ index }
+			, _iterator{ static_<Index>(_index)->_map.cbegin() }
 		{
 		}
 
@@ -900,8 +900,8 @@ class Decorator : public Thing
 {
 protected:
 	inline Decorator(const Ptr decorated)
-		: Thing()
-		, _decorated(decorated)
+		: Thing{}
+		, _decorated{ decorated }
 	{
 	}
 
@@ -925,9 +925,9 @@ class Iterator : public Mutable
 public:
 	template <typename F>
 	inline Iterator(F&& collection)
-		: Mutable()
-		, _collection(std::forward<F>(collection))
-		, _iterator(_collection.cbegin())
+		: Mutable{}
+		, _collection{ std::forward<F>(collection) }
+		, _iterator{ _collection.cbegin() }
 	{
 	}
 
@@ -942,7 +942,7 @@ public:
 
 	virtual inline const Ptr copy_() const override
 	{
-		const Ptr result = mut_(C(_collection));
+		const Ptr result = mut_(C{ _collection });
 		static_<Iterator>(result)->_iterator += (_iterator - _collection.cbegin());
 		return result;
 	}
@@ -1052,9 +1052,9 @@ private:
 	{
 	public:
 		inline It(const Ptr flock)
-			: Mutable()
-			, _flock(flock)
-			, _iterator(static_<Flock>(_flock)->_vector.cbegin())
+			: Mutable{}
+			, _flock{ flock }
+			, _iterator{ static_<Flock>(_flock)->_vector.cbegin() }
 		{
 		}
 
@@ -1264,9 +1264,9 @@ private:
 	{
 	public:
 		inline It(const Ptr herd)
-			: Mutable()
-			, _herd(herd)
-			, _iterator(static_<Herd>(_herd)->_set.cbegin())
+			: Mutable{}
+			, _herd{ herd }
+			, _iterator{ static_<Herd>(_herd)->_set.cbegin() }
 		{
 		}
 
@@ -1323,7 +1323,7 @@ class Data
 {
 public:
 	Data(const D& data)
-		: _data(data)
+		: _data{ data }
 	{
 	}
 
@@ -1373,9 +1373,9 @@ public:
 	}
 
 	inline Buffer(const D& data)
-		: Mutable()
-		, Serializable()
-		, Data(data)
+		: Mutable{}
+		, Serializable{}
+		, Data{ data }
 	{
 	}
 
@@ -1499,9 +1499,9 @@ public:
 	}
 
 	inline Bit(const D& data)
-		: Mutable()
-		, Serializable()
-		, Data(data)
+		: Mutable{}
+		, Serializable{}
+		, Data{ data }
 	{
 	}
 
@@ -1590,9 +1590,9 @@ public:
 	}
 
 	inline Byte(const D& data)
-		: Mutable()
-		, Serializable()
-		, Data(data)
+		: Mutable{}
+		, Serializable{}
+		, Data{ data }
 	{
 	}
 
@@ -1668,9 +1668,9 @@ public:
 	}
 
 	inline Int16(const D& data)
-		: Mutable()
-		, Serializable()
-		, Data(data)
+		: Mutable{}
+		, Serializable{}
+		, Data{ data }
 	{
 	}
 
@@ -1752,9 +1752,9 @@ public:
 	}
 
 	inline Int32(const D& data)
-		: Mutable()
-		, Serializable()
-		, Data(data)
+		: Mutable{}
+		, Serializable{}
+		, Data{ data }
 	{
 	}
 
@@ -1840,9 +1840,9 @@ public:
 	}
 
 	inline Int64(const D& data)
-		: Mutable()
-		, Serializable()
-		, Data(data)
+		: Mutable{}
+		, Serializable{}
+		, Data{ data }
 	{
 	}
 
@@ -1908,7 +1908,7 @@ public:
 
 inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
 {
-	return Int64::fin_(int64_t(hash_()));
+	return Int64::fin_(int64_t{ hash_() });
 }
 
 class Float32 : public Mutable, public Serializable, public Data<float>
@@ -1941,9 +1941,9 @@ public:
 	}
 
 	inline Float32(const D& data)
-		: Mutable()
-		, Serializable()
-		, Data(data)
+		: Mutable{}
+		, Serializable{}
+		, Data{ data }
 	{
 	}
 
@@ -2030,9 +2030,9 @@ public:
 	}
 
 	inline Float64(const D& data)
-		: Mutable()
-		, Serializable()
-		, Data(data)
+		: Mutable{}
+		, Serializable{}
+		, Data{ data }
 	{
 	}
 
@@ -2103,8 +2103,8 @@ class Stream : public Mutable, public Me<Stream>
 
 public:
 	Stream(std::iostream* const stream)
-		: Mutable()
-		, _stream(stream)
+		: Mutable{}
+		, _stream{ stream }
 	{
 	}
 
@@ -2299,9 +2299,9 @@ class Fence : public Mutable
 {
 public:
 	inline Fence(const Ptr ptr)
-		: Mutable()
-		, _fence()
-		, _ptr(ptr)
+		: Mutable{}
+		, _fence{}
+		, _ptr{ ptr }
 	{
 		_fence.store(false, std::memory_order_release);
 	}
