@@ -711,6 +711,10 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Index>::fin_(&Index::to_buffer));
+			index->update_("from_buffer", Member<Index>::fin_(&Index::from_buffer));
+			index->update_("to_stream", Const<Index>::fin_(&Index::to_buffer));
+			index->update_("from_stream", Member<Index>::fin_(&Index::from_buffer));
 			index->update_("mut", Static::fin_(&Index::mut));
 			index->update_("buf", Static::fin_(&Index::buf));
 			index->update_("find", Const<Index>::fin_(&Index::find));
@@ -1020,6 +1024,10 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Flock>::fin_(&Flock::to_buffer));
+			index->update_("from_buffer", Member<Flock>::fin_(&Flock::from_buffer));
+			index->update_("to_stream", Const<Flock>::fin_(&Flock::to_buffer));
+			index->update_("from_stream", Member<Flock>::fin_(&Flock::from_buffer));
 			index->update_("mut", Static::fin_(&Flock::mut));
 			index->update_("buf", Static::fin_(&Flock::buf));
 			index->update_("push_back", Member<Flock>::fin_(&Flock::push_back));
@@ -1226,6 +1234,10 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Herd>::fin_(&Herd::to_buffer));
+			index->update_("from_buffer", Member<Herd>::fin_(&Herd::from_buffer));
+			index->update_("to_stream", Const<Herd>::fin_(&Herd::to_buffer));
+			index->update_("from_stream", Member<Herd>::fin_(&Herd::from_buffer));
 			index->update_("mut", Static::fin_(&Herd::mut));
 			index->update_("buf", Static::fin_(&Herd::buf));
 			index->update_("find", Const<Herd>::fin_(&Herd::find));
@@ -1473,6 +1485,23 @@ public:
 		return mut_(get_());
 	}
 
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Buffer>::fin_(&Buffer::to_buffer));
+			index->update_("from_buffer", Member<Buffer>::fin_(&Buffer::from_buffer));
+			index->update_("to_stream", Const<Buffer>::fin_(&Buffer::to_buffer));
+			index->update_("from_stream", Member<Buffer>::fin_(&Buffer::from_buffer));
+			index->update_("buf", Static::fin_(&Buffer::buf));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		const Ptr buffer = copy_();
@@ -1506,6 +1535,23 @@ public:
 	{
 		static const Ptr TYPE = sym_("strange::Buffer");
 		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::Buffer");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
 	}
 };
 
@@ -1570,6 +1616,13 @@ public:
 		return result;
 	}
 
+	static inline const Ptr fin(const Ptr it)
+	{
+		const Ptr result = mut(it);
+		result->finalize_();
+		return result;
+	}
+
 	static inline const Ptr buf_(const Ptr buffer)
 	{
 		const Ptr ptr = mut_();
@@ -1600,7 +1653,13 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Bit>::fin_(&Bit::to_buffer));
+			index->update_("from_buffer", Member<Bit>::fin_(&Bit::from_buffer));
+			index->update_("to_stream", Const<Bit>::fin_(&Bit::to_buffer));
+			index->update_("from_stream", Member<Bit>::fin_(&Bit::from_buffer));
 			index->update_("mut", Static::fin_(&Bit::mut));
+			index->update_("fin", Static::fin_(&Bit::fin));
+			index->update_("buf", Static::fin_(&Bit::buf));
 			index->finalize_();
 			return pub;
 		}();
@@ -1636,6 +1695,23 @@ public:
 	{
 		static const Ptr TYPE = sym_("strange::Bit");
 		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::Bit");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
 	}
 };
 
@@ -1680,6 +1756,23 @@ public:
 		return mut_(get_());
 	}
 
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Byte>::fin_(&Byte::to_buffer));
+			index->update_("from_buffer", Member<Byte>::fin_(&Byte::from_buffer));
+			index->update_("to_stream", Const<Byte>::fin_(&Byte::to_buffer));
+			index->update_("from_stream", Member<Byte>::fin_(&Byte::from_buffer));
+			index->update_("buf", Static::fin_(&Byte::buf));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		const Ptr buffer = Buffer::mut_(std::string(1, *reinterpret_cast<const char*>(&(get_()))));
@@ -1709,6 +1802,23 @@ public:
 	{
 		static const Ptr TYPE = sym_("strange::Byte");
 		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::Byte");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
 	}
 };
 
@@ -1753,6 +1863,23 @@ public:
 		return mut_(get_());
 	}
 
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Int16>::fin_(&Int16::to_buffer));
+			index->update_("from_buffer", Member<Int16>::fin_(&Int16::from_buffer));
+			index->update_("to_stream", Const<Int16>::fin_(&Int16::to_buffer));
+			index->update_("from_stream", Member<Int16>::fin_(&Int16::from_buffer));
+			index->update_("buf", Static::fin_(&Int16::buf));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(2, 0);
@@ -1788,6 +1915,23 @@ public:
 	{
 		static const Ptr TYPE = sym_("strange::Int16");
 		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::Int16");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
 	}
 };
 
@@ -1832,6 +1976,23 @@ public:
 		return mut_(get_());
 	}
 
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Int32>::fin_(&Int32::to_buffer));
+			index->update_("from_buffer", Member<Int32>::fin_(&Int32::from_buffer));
+			index->update_("to_stream", Const<Int32>::fin_(&Int32::to_buffer));
+			index->update_("from_stream", Member<Int32>::fin_(&Int32::from_buffer));
+			index->update_("buf", Static::fin_(&Int32::buf));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(4, 0);
@@ -1871,6 +2032,23 @@ public:
 	{
 		static const Ptr TYPE = sym_("strange::Int32");
 		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::Int32");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
 	}
 };
 
@@ -1913,6 +2091,23 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Int64>::fin_(&Int64::to_buffer));
+			index->update_("from_buffer", Member<Int64>::fin_(&Int64::from_buffer));
+			index->update_("to_stream", Const<Int64>::fin_(&Int64::to_buffer));
+			index->update_("from_stream", Member<Int64>::fin_(&Int64::from_buffer));
+			index->update_("buf", Static::fin_(&Int64::buf));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -1963,6 +2158,23 @@ public:
 		static const Ptr TYPE = sym_("strange::Int64");
 		return TYPE;
 	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::Int64");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
 };
 
 inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
@@ -2011,6 +2223,23 @@ public:
 		return mut_(get_());
 	}
 
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Float32>::fin_(&Float32::to_buffer));
+			index->update_("from_buffer", Member<Float32>::fin_(&Float32::from_buffer));
+			index->update_("to_stream", Const<Float32>::fin_(&Float32::to_buffer));
+			index->update_("from_stream", Member<Float32>::fin_(&Float32::from_buffer));
+			index->update_("buf", Static::fin_(&Float32::buf));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(4, 0);
@@ -2051,6 +2280,23 @@ public:
 	{
 		static const Ptr TYPE = sym_("strange::Float32");
 		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::Float32");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
 	}
 };
 
@@ -2093,6 +2339,23 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Float64>::fin_(&Float64::to_buffer));
+			index->update_("from_buffer", Member<Float64>::fin_(&Float64::from_buffer));
+			index->update_("to_stream", Const<Float64>::fin_(&Float64::to_buffer));
+			index->update_("from_stream", Member<Float64>::fin_(&Float64::from_buffer));
+			index->update_("buf", Static::fin_(&Float64::buf));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -2144,6 +2407,23 @@ public:
 		static const Ptr TYPE = sym_("strange::Float64");
 		return TYPE;
 	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::Float64");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
 };
 
 class Stream : public Mutable, public Me<Stream>
@@ -2170,6 +2450,21 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return me_();
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_<Index>(pub);
+			index->update_("push_back", Member<Stream>::fin_(&Stream::push_back));
+			index->update_("write", Member<Stream>::fin_(&Stream::write));
+			index->update_("pop_front", Member<Stream>::fin_(&Stream::pop_front));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
 	}
 
 	virtual inline const Ptr type_() const override
@@ -2209,6 +2504,12 @@ public:
 		}
 	}
 
+	inline const Ptr push_back(const Ptr it)
+	{
+		push_back_(it->next_());
+		return nothing_();
+	}
+
 	inline void write_(const std::string& str)
 	{
 		_stream->write(str.data(), str.length());
@@ -2246,6 +2547,11 @@ public:
 			result->finalize_();
 		}
 		return result;
+	}
+
+	inline const Ptr pop_front(const Ptr ignore)
+	{
+		return pop_front_();
 	}
 
 	inline const Ptr read_(const int64_t length)
