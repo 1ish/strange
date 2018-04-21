@@ -1430,8 +1430,6 @@ public:
 		return _data;
 	}
 
-	virtual inline const int64_t size_() const = 0;
-
 private:
 	D _data;
 };
@@ -1439,14 +1437,12 @@ private:
 class Buffer : public Mutable, public Serializable, public Data<std::string>
 {
 public:
-	using D = std::string;
-
-	static inline const Ptr mut_(const D& data = D())
+	static inline const Ptr mut_(const std::string& data = std::string())
 	{
 		return std::make_shared<Buffer>(data);
 	}
 
-	static inline const Ptr fin_(const D& data = D())
+	static inline const Ptr fin_(const std::string& data = std::string())
 	{
 		const Ptr result = mut_(data);
 		result->finalize_();
@@ -1465,16 +1461,11 @@ public:
 		return buf_(it->next_());
 	}
 
-	inline Buffer(const D& data)
+	inline Buffer(const std::string& data)
 		: Mutable{}
 		, Serializable{}
 		, Data{ data }
 	{
-	}
-
-	virtual inline const int64_t size_() const override
-	{
-		return get_().length();
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1598,11 +1589,6 @@ public:
 	{
 	}
 
-	virtual inline const int64_t size_() const override
-	{
-		return 1;
-	}
-
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
@@ -1689,11 +1675,6 @@ public:
 	{
 	}
 
-	virtual inline const int64_t size_() const override
-	{
-		return 1;
-	}
-
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
@@ -1765,11 +1746,6 @@ public:
 		, Serializable{}
 		, Data{ data }
 	{
-	}
-
-	virtual inline const int64_t size_() const override
-	{
-		return 2;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1849,11 +1825,6 @@ public:
 		, Serializable{}
 		, Data{ data }
 	{
-	}
-
-	virtual inline const int64_t size_() const override
-	{
-		return 4;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1937,11 +1908,6 @@ public:
 		, Serializable{}
 		, Data{ data }
 	{
-	}
-
-	virtual inline const int64_t size_() const override
-	{
-		return 8;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -2040,11 +2006,6 @@ public:
 	{
 	}
 
-	virtual inline const int64_t size_() const override
-	{
-		return 4;
-	}
-
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
@@ -2127,11 +2088,6 @@ public:
 		, Serializable{}
 		, Data{ data }
 	{
-	}
-
-	virtual inline const int64_t size_() const override
-	{
-		return 8;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -2274,29 +2230,35 @@ public:
 
 	inline const Ptr pop_front_()
 	{
-		const Ptr bit = Bit::buf(read_(1));
-		const Ptr int16 = Int16::buf(read_(2));
-		const std::string function = static_<Buffer>(read_(static_<Int16>(int16)->get_()))->get_() + "::buf";
+		const bool bit = read_<Bit>();
+		const int16_t int16 = read_<Int16>();
+		const std::string function = static_<Buffer>(read_(int16))->get_() + "::buf";
 		const Ptr fun = static_<Index>(factory_())->find_(function.c_str());
 		if (fun->is_("0"))
 		{
 			log_("Stream::pop_front_ read unknown type");
 			return fun;
 		}
-		const Ptr int64 = Int64::buf_(read_(8));
-		const Ptr result = fun->call_(read_(size_t(static_<Int64>(int64)->get_())));
-		if (static_<Bit>(bit)->get_())
+		const int64_t int64 = read_<Int64>();
+		const Ptr result = fun->call_(read_(int64));
+		if (bit)
 		{
 			result->finalize_();
 		}
 		return result;
 	}
 
-	inline const Ptr read_(const size_t length)
+	inline const Ptr read_(const int64_t length)
 	{
-		std::string str(length, 0);
-		_stream->read(const_cast<char*>(str.data()), length);
+		std::string str(size_t(length), 0);
+		_stream->read(const_cast<char*>(str.data()), str.length());
 		return Buffer::mut_(str);
+	}
+
+	template <typename T>
+	const typename T::D read_()
+	{
+		return static_<T>(T::buf_(read_(int64_t(sizeof(T::D)))))->get_();
 	}
 
 private:
@@ -2333,7 +2295,8 @@ inline void Index::to_stream_(const Thing::Ptr stream) const
 		log_("Index::to_stream_ called with wrong type of thing");
 		return;
 	}
-	strm->write_(Int64::fin_(_map.size()));
+	strm->write_(Bit::fin_(finalized_()));
+	strm->write_(Int64::fin_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
 		strm->push_back_(i.first);
@@ -2349,12 +2312,16 @@ inline void Index::from_stream_(const Thing::Ptr stream)
 		log_("Index::from_stream_ called with wrong type of thing");
 		return;
 	}
-	const Ptr int64 = Int64::buf_(strm->read_(8));
-	for (int64_t i = static_<Int64>(int64)->get_(); i > 0; --i)
+	const bool bit = strm->read_<Bit>();
+	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
 	{
 		const Ptr first = strm->pop_front_();
 		const Ptr second = strm->pop_front_();
 		_map[first] = second;
+	}
+	if (bit)
+	{
+		finalize_();
 	}
 }
 
@@ -2366,7 +2333,8 @@ inline void Flock::to_stream_(const Thing::Ptr stream) const
 		log_("Flock::to_stream_ called with wrong type of thing");
 		return;
 	}
-	strm->write_(Int64::fin_(_vector.size()));
+	strm->write_(Bit::fin_(finalized_()));
+	strm->write_(Int64::fin_(int64_t(_vector.size())));
 	for (const auto i : _vector)
 	{
 		strm->push_back_(i);
@@ -2381,12 +2349,16 @@ inline void Flock::from_stream_(const Thing::Ptr stream)
 		log_("Flock::from_stream_ called with wrong type of thing");
 		return;
 	}
-	const Ptr int64 = Int64::buf_(strm->read_(8));
-	const int64_t size = static_<Int64>(int64)->get_();
-	_vector.reserve(size);
-	for (int64_t i = size; i > 0; --i)
+	const bool bit = strm->read_<Bit>();
+	const int64_t int64 = strm->read_<Int64>();
+	_vector.reserve(size_t(int64));
+	for (int64_t i = int64; i > 0; --i)
 	{
 		_vector.push_back(strm->pop_front_());
+	}
+	if (bit)
+	{
+		finalize_();
 	}
 }
 
@@ -2398,7 +2370,8 @@ inline void Herd::to_stream_(const Thing::Ptr stream) const
 		log_("Herd::to_stream_ called with wrong type of thing");
 		return;
 	}
-	strm->write_(Int64::fin_(_set.size()));
+	strm->write_(Bit::fin_(finalized_()));
+	strm->write_(Int64::fin_(int64_t(_set.size())));
 	for (const auto i : _set)
 	{
 		strm->push_back_(i);
@@ -2413,10 +2386,14 @@ inline void Herd::from_stream_(const Thing::Ptr stream)
 		log_("Herd::from_stream_ called with wrong type of thing");
 		return;
 	}
-	const Ptr int64 = Int64::buf_(strm->read_(8));
-	for (int64_t i = static_<Int64>(int64)->get_(); i > 0; --i)
+	const bool bit = strm->read_<Bit>();
+	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
 	{
 		_set.insert(strm->pop_front_());
+	}
+	if (bit)
+	{
+		finalize_();
 	}
 }
 
@@ -2428,8 +2405,8 @@ inline void Buffer::to_stream_(const Thing::Ptr stream) const
 		log_("Buffer::to_stream_ called with wrong type of thing");
 		return;
 	}
-	strm->write_(static_<Buffer>(static_<Bit>(Bit::fin_(finalized_()))->to_buffer_())->get_());
-	strm->write_(static_<Buffer>(static_<Int64>(Int64::fin_(get_().length()))->to_buffer_())->get_());
+	strm->write_(Bit::fin_(finalized_()));
+	strm->write_(Int64::fin_(int64_t(get_().length())));
 	strm->write_(get_());
 }
 
@@ -2441,9 +2418,9 @@ inline void Buffer::from_stream_(const Thing::Ptr stream)
 		log_("Buffer::from_stream_ called with wrong type of thing");
 		return;
 	}
-	const bool bit = static_<Bit>(Bit::buf_(strm->read_(1)))->get_();
-	const int64_t int64 = static_<Int64>(Int64::buf_(strm->read_(8)))->get_();
-	set_(static_<Buffer>(strm->read_(size_t(int64)))->get_());
+	const bool bit = strm->read_<Bit>();
+	const int64_t int64 = strm->read_<Int64>();
+	set_(static_<Buffer>(strm->read_(int64))->get_());
 	if (bit)
 	{
 		finalize_();
