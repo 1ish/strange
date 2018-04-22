@@ -719,7 +719,10 @@ public:
 			index->update_("buf", Static::fin_(&Index::buf));
 			index->update_("find", Const<Index>::fin_(&Index::find));
 			index->update_("update", Member<Index>::fin_(&Index::update));
+			index->update_("insert", Member<Index>::fin_(&Index::insert));
 			index->update_("iterator", Const<Index>::fin_(&Index::iterator));
+			index->update_("itemize", Member<Index>::fin_(&Index::itemize));
+			index->update_("gather", Member<Index>::fin_(&Index::gather));
 			index->finalize_();
 			return pub;
 		}();
@@ -770,21 +773,40 @@ public:
 	}
 
 	template <typename F>
-	inline const Ptr update_(F&& key, const Ptr value)
+	inline void update_(F&& key, const Ptr value)
 	{
-		return update_(sym_(std::forward<F>(key)), value);
+		update_(sym_(std::forward<F>(key)), value);
 	}
 
-	inline const Ptr update_(const Ptr key, const Ptr value)
+	inline void update_(const Ptr key, const Ptr value)
 	{
-		return _map[key] = value;
+		_map[key] = value;
 	}
 
 	inline const Ptr update(const Ptr it)
 	{
 		const Ptr key = it->next_();
 		const Ptr value = it->next_();
-		return update_(key, value);
+		update_(key, value);
+		return value;
+	}
+
+	template <typename F>
+	inline const bool insert_(F&& key, const Ptr value)
+	{
+		return insert_(sym_(std::forward<F>(key)), value);
+	}
+
+	inline const bool insert_(const Ptr key, const Ptr value)
+	{
+		return _map.emplace(std::make_pair(key, value)).second;
+	}
+
+	inline const Ptr insert(const Ptr it)
+	{
+		const Ptr key = it->next_();
+		const Ptr value = it->next_();
+		return boolean_(insert_(key, value));
 	}
 
 	inline const Ptr iterator_() const
@@ -809,16 +831,39 @@ public:
 	{
 		const Ptr visitor = it->next_();
 		const Ptr member = it->next_();
-		if (visitor->call_(member, it->next_())->is_("0"))
+		const Ptr self = it->next_();
+		const Ptr rest = it->copy_();
+		if (visitor->call_(member, self, *it)->is_("0"))
 		{
 			return visitor;
 		}
 		for (const auto& visited : _map)
 		{
-			visited.first->call_("visit", visitor, member, visited.first);
-			visited.second->call_("visit", visitor, member, visited.second);
+			visited.first->call_("visit", visitor, member, visited.first, *(rest->copy_()));
+			visited.second->call_("visit", visitor, member, visited.second, *(rest->copy_()));
 		}
 		return visitor;
+	}
+
+	inline const bool itemize_(const Ptr key)
+	{
+		const Ptr size = sym_(std::to_string(_map.size()));
+		return insert_(key, size);
+	}
+
+	inline const Ptr itemize(const Ptr it)
+	{
+		return boolean_(itemize_(it->next_()));
+	}
+
+	inline const Ptr gather_(const Ptr item)
+	{
+		return item->call_("visit", me_(), "itemize", item);
+	}
+
+	inline const Ptr gather(const Ptr it)
+	{
+		return gather_(it->next_());
 	}
 
 private:
@@ -1089,13 +1134,15 @@ public:
 	{
 		const Ptr visitor = it->next_();
 		const Ptr member = it->next_();
-		if (visitor->call_(member, it->next_())->is_("0"))
+		const Ptr self = it->next_();
+		const Ptr rest = it->copy_();
+		if (visitor->call_(member, self, *it)->is_("0"))
 		{
 			return visitor;
 		}
 		for (const auto visited : _vector)
 		{
-			visited->call_("visit", visitor, member, visited);
+			visited->call_("visit", visitor, member, visited, *(rest->copy_()));
 		}
 		return visitor;
 	}
@@ -1356,10 +1403,14 @@ public:
 		return visitor;
 	}
 
+	inline const Ptr gather_(const Ptr item)
+	{
+		return item->call_("visit", me_(), "insert", item);
+	}
+
 	inline const Ptr gather(const Ptr it)
 	{
-		const Ptr visited = it->next_();
-		return visited->call_("visit", me_(), "insert", visited);
+		return gather_(it->next_());
 	}
 
 private:
@@ -1449,12 +1500,14 @@ private:
 class Buffer : public Mutable, public Serializable, public Data<std::string>
 {
 public:
-	static inline const Ptr mut_(const std::string& data = std::string())
+	using S = std::string;
+
+	static inline const Ptr mut_(const S& data = S())
 	{
 		return std::make_shared<Buffer>(data);
 	}
 
-	static inline const Ptr fin_(const std::string& data = std::string())
+	static inline const Ptr fin_(const S& data = S())
 	{
 		const Ptr result = mut_(data);
 		result->finalize_();
@@ -1473,7 +1526,7 @@ public:
 		return buf_(it->next_());
 	}
 
-	inline Buffer(const std::string& data)
+	inline Buffer(const S& data)
 		: Mutable{}
 		, Serializable{}
 		, Data{ data }
