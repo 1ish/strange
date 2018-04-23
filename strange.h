@@ -365,15 +365,44 @@ public:
 
 	inline const Thing::Ptr to_stream(const Thing::Ptr it) const
 	{
-		to_stream_(it->next_());
+		const Thing::Ptr stream = it->next_();
+		to_stream_(stream);
+		return stream;
 	}
 
 	virtual inline void from_stream_(const Thing::Ptr stream);
 
 	inline const Thing::Ptr from_stream(const Thing::Ptr it)
 	{
-		from_stream_(it->next_());
-		return Thing::nothing_();
+		const Thing::Ptr stream = it->next_();
+		from_stream_(stream);
+		return stream;
+	}
+
+	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const
+	{
+		to_stream_(stream);
+	}
+
+	static inline void serialize_(const Thing::Ptr thing, const Thing::Ptr stream);
+
+	static inline const Thing::Ptr serialize(const Thing::Ptr it)
+	{
+		const Thing::Ptr thing = it->next_();
+		const Thing::Ptr stream = it->next_();
+		serialize_(thing, stream);
+		return stream;
+	}
+
+	virtual inline void replace_links_(const Thing::Ptr index)
+	{
+	}
+
+	static inline const Thing::Ptr deserialize_(const Thing::Ptr stream);
+
+	static inline const Thing::Ptr deserialize(const Thing::Ptr it)
+	{
+		return deserialize_(it->next_());
 	}
 
 protected:
@@ -425,6 +454,13 @@ public:
 	static inline const Ptr buf(const Ptr it)
 	{
 		return buf_(it->next_());
+	}
+
+	static inline const Ptr str_(const Ptr stream);
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
 	}
 
 	virtual inline const Ptr to_buffer_() const override;
@@ -705,6 +741,10 @@ public:
 
 	virtual inline void from_stream_(const Thing::Ptr stream) override;
 
+	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const override;
+
+	virtual inline void replace_links_(const Thing::Ptr index) override;
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -713,10 +753,11 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Index>::fin_(&Index::to_buffer));
 			index->update_("from_buffer", Member<Index>::fin_(&Index::from_buffer));
-			index->update_("to_stream", Const<Index>::fin_(&Index::to_buffer));
-			index->update_("from_stream", Member<Index>::fin_(&Index::from_buffer));
+			index->update_("to_stream", Const<Index>::fin_(&Index::to_stream));
+			index->update_("from_stream", Member<Index>::fin_(&Index::from_stream));
 			index->update_("mut", Static::fin_(&Index::mut));
 			index->update_("buf", Static::fin_(&Index::buf));
+			index->update_("str", Static::fin_(&Index::str));
 			index->update_("find", Const<Index>::fin_(&Index::find));
 			index->update_("update", Member<Index>::fin_(&Index::update));
 			index->update_("insert", Member<Index>::fin_(&Index::insert));
@@ -749,6 +790,18 @@ public:
 	static inline const Ptr buf(const Ptr it)
 	{
 		return buf_(it->next_());
+	}
+
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Index>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
 	}
 
 	template <typename F>
@@ -799,7 +852,7 @@ public:
 
 	inline const bool insert_(const Ptr key, const Ptr value)
 	{
-		return _map.emplace(std::make_pair(key, value)).second;
+		return _map.emplace(key, value).second;
 	}
 
 	inline const Ptr insert(const Ptr it)
@@ -831,12 +884,12 @@ public:
 	{
 		const Ptr visitor = it->next_();
 		const Ptr member = it->next_();
-		const Ptr self = it->next_();
 		const Ptr rest = it->copy_();
-		if (visitor->call_(member, self, *it)->is_("0"))
+		if (visitor->call_(member, *it)->is_("0"))
 		{
 			return visitor;
 		}
+		rest->next_();
 		for (const auto& visited : _map)
 		{
 			visited.first->call_("visit", visitor, member, visited.first, *(rest->copy_()));
@@ -865,6 +918,10 @@ public:
 	{
 		return gather_(it->next_());
 	}
+
+	inline void gather_to_stream_(const Ptr thing, const Ptr stream);
+
+	inline const Ptr gather_from_stream_(const Ptr stream);
 
 private:
 	std_unordered_map_ptr_ptr _map;
@@ -943,6 +1000,16 @@ inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr i
 {
 	const Ptr member = static_<Index>(pub_())->find(it);
 	return thing_(thing, member, it);
+}
+
+inline void Serializable::serialize_(const Thing::Ptr thing, const Thing::Ptr stream)
+{
+	Thing::static_<Index>(Index::mut_())->gather_to_stream_(thing, stream);
+}
+
+inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr stream)
+{
+	return Thing::static_<Index>(Index::mut_())->gather_from_stream_(stream);
 }
 
 class Decorator : public Thing
@@ -1063,6 +1130,10 @@ public:
 
 	virtual inline void from_stream_(const Thing::Ptr stream) override;
 
+	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const override;
+
+	virtual inline void replace_links_(const Thing::Ptr index) override;
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -1071,10 +1142,11 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Flock>::fin_(&Flock::to_buffer));
 			index->update_("from_buffer", Member<Flock>::fin_(&Flock::from_buffer));
-			index->update_("to_stream", Const<Flock>::fin_(&Flock::to_buffer));
-			index->update_("from_stream", Member<Flock>::fin_(&Flock::from_buffer));
+			index->update_("to_stream", Const<Flock>::fin_(&Flock::to_stream));
+			index->update_("from_stream", Member<Flock>::fin_(&Flock::from_stream));
 			index->update_("mut", Static::fin_(&Flock::mut));
 			index->update_("buf", Static::fin_(&Flock::buf));
+			index->update_("str", Static::fin_(&Flock::str));
 			index->update_("push_back", Member<Flock>::fin_(&Flock::push_back));
 			index->update_("iterator", Const<Flock>::fin_(&Flock::iterator));
 			index->finalize_();
@@ -1103,6 +1175,18 @@ public:
 	static inline const Ptr buf(const Ptr it)
 	{
 		return buf_(it->next_());
+	}
+
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Flock>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
 	}
 
 	inline const Ptr push_back(const Ptr it)
@@ -1134,12 +1218,12 @@ public:
 	{
 		const Ptr visitor = it->next_();
 		const Ptr member = it->next_();
-		const Ptr self = it->next_();
 		const Ptr rest = it->copy_();
-		if (visitor->call_(member, self, *it)->is_("0"))
+		if (visitor->call_(member, *it)->is_("0"))
 		{
 			return visitor;
 		}
+		rest->next_();
 		for (const auto visited : _vector)
 		{
 			visited->call_("visit", visitor, member, visited, *(rest->copy_()));
@@ -1275,6 +1359,10 @@ public:
 
 	virtual inline void from_stream_(const Thing::Ptr stream) override;
 
+	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const override;
+
+	virtual inline void replace_links_(const Thing::Ptr index) override;
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -1283,10 +1371,11 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Herd>::fin_(&Herd::to_buffer));
 			index->update_("from_buffer", Member<Herd>::fin_(&Herd::from_buffer));
-			index->update_("to_stream", Const<Herd>::fin_(&Herd::to_buffer));
-			index->update_("from_stream", Member<Herd>::fin_(&Herd::from_buffer));
+			index->update_("to_stream", Const<Herd>::fin_(&Herd::to_stream));
+			index->update_("from_stream", Member<Herd>::fin_(&Herd::from_stream));
 			index->update_("mut", Static::fin_(&Herd::mut));
 			index->update_("buf", Static::fin_(&Herd::buf));
+			index->update_("str", Static::fin_(&Herd::str));
 			index->update_("find", Const<Herd>::fin_(&Herd::find));
 			index->update_("insert", Member<Herd>::fin_(&Herd::insert));
 			index->update_("iterator", Const<Herd>::fin_(&Herd::iterator));
@@ -1317,6 +1406,18 @@ public:
 	static inline const Ptr buf(const Ptr it)
 	{
 		return buf_(it->next_());
+	}
+
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Herd>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
 	}
 
 	template <typename F>
@@ -1392,13 +1493,15 @@ public:
 	{
 		const Ptr visitor = it->next_();
 		const Ptr member = it->next_();
-		if (visitor->call_(member, it->next_())->is_("0"))
+		const Ptr rest = it->copy_();
+		if (visitor->call_(member, *it)->is_("0"))
 		{
 			return visitor;
 		}
+		rest->next_();
 		for (const auto visited : _set)
 		{
-			visited->call_("visit", visitor, member, visited);
+			visited->call_("visit", visitor, member, visited, *(rest->copy_()));
 		}
 		return visitor;
 	}
@@ -1526,6 +1629,18 @@ public:
 		return buf_(it->next_());
 	}
 
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Buffer>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
+	}
+
 	inline Buffer(const S& data)
 		: Mutable{}
 		, Serializable{}
@@ -1546,9 +1661,10 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Buffer>::fin_(&Buffer::to_buffer));
 			index->update_("from_buffer", Member<Buffer>::fin_(&Buffer::from_buffer));
-			index->update_("to_stream", Const<Buffer>::fin_(&Buffer::to_buffer));
-			index->update_("from_stream", Member<Buffer>::fin_(&Buffer::from_buffer));
+			index->update_("to_stream", Const<Buffer>::fin_(&Buffer::to_stream));
+			index->update_("from_stream", Member<Buffer>::fin_(&Buffer::from_stream));
 			index->update_("buf", Static::fin_(&Buffer::buf));
+			index->update_("str", Static::fin_(&Buffer::str));
 			index->finalize_();
 			return pub;
 		}();
@@ -1640,6 +1756,11 @@ inline const Thing::Ptr Symbol::buf_(const Thing::Ptr buffer)
 	return fin_(buf->get_());
 }
 
+inline const Thing::Ptr Symbol::str_(const Thing::Ptr stream)
+{
+	return fin_(static_<Buffer>(Buffer::str_(stream))->get_());
+}
+
 inline const Thing::Ptr Symbol::to_buffer_() const
 {
 	const Ptr buffer = Buffer::mut_(_symbol);
@@ -1688,6 +1809,18 @@ public:
 		return buf_(it->next_());
 	}
 
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Bit>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
+	}
+
 	inline Bit(const D& data)
 		: Mutable{}
 		, Serializable{}
@@ -1708,11 +1841,12 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Bit>::fin_(&Bit::to_buffer));
 			index->update_("from_buffer", Member<Bit>::fin_(&Bit::from_buffer));
-			index->update_("to_stream", Const<Bit>::fin_(&Bit::to_buffer));
-			index->update_("from_stream", Member<Bit>::fin_(&Bit::from_buffer));
+			index->update_("to_stream", Const<Bit>::fin_(&Bit::to_stream));
+			index->update_("from_stream", Member<Bit>::fin_(&Bit::from_stream));
 			index->update_("mut", Static::fin_(&Bit::mut));
 			index->update_("fin", Static::fin_(&Bit::fin));
 			index->update_("buf", Static::fin_(&Bit::buf));
+			index->update_("str", Static::fin_(&Bit::str));
 			index->finalize_();
 			return pub;
 		}();
@@ -1797,6 +1931,18 @@ public:
 		return buf_(it->next_());
 	}
 
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Byte>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
+	}
+
 	inline Byte(const D& data)
 		: Mutable{}
 		, Serializable{}
@@ -1817,9 +1963,10 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Byte>::fin_(&Byte::to_buffer));
 			index->update_("from_buffer", Member<Byte>::fin_(&Byte::from_buffer));
-			index->update_("to_stream", Const<Byte>::fin_(&Byte::to_buffer));
-			index->update_("from_stream", Member<Byte>::fin_(&Byte::from_buffer));
+			index->update_("to_stream", Const<Byte>::fin_(&Byte::to_stream));
+			index->update_("from_stream", Member<Byte>::fin_(&Byte::from_stream));
 			index->update_("buf", Static::fin_(&Byte::buf));
+			index->update_("str", Static::fin_(&Byte::str));
 			index->finalize_();
 			return pub;
 		}();
@@ -1904,6 +2051,18 @@ public:
 		return buf_(it->next_());
 	}
 
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Int16>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
+	}
+
 	inline Int16(const D& data)
 		: Mutable{}
 		, Serializable{}
@@ -1924,9 +2083,10 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Int16>::fin_(&Int16::to_buffer));
 			index->update_("from_buffer", Member<Int16>::fin_(&Int16::from_buffer));
-			index->update_("to_stream", Const<Int16>::fin_(&Int16::to_buffer));
-			index->update_("from_stream", Member<Int16>::fin_(&Int16::from_buffer));
+			index->update_("to_stream", Const<Int16>::fin_(&Int16::to_stream));
+			index->update_("from_stream", Member<Int16>::fin_(&Int16::from_stream));
 			index->update_("buf", Static::fin_(&Int16::buf));
+			index->update_("str", Static::fin_(&Int16::str));
 			index->finalize_();
 			return pub;
 		}();
@@ -2017,6 +2177,18 @@ public:
 		return buf_(it->next_());
 	}
 
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Int32>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
+	}
+
 	inline Int32(const D& data)
 		: Mutable{}
 		, Serializable{}
@@ -2037,9 +2209,10 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Int32>::fin_(&Int32::to_buffer));
 			index->update_("from_buffer", Member<Int32>::fin_(&Int32::from_buffer));
-			index->update_("to_stream", Const<Int32>::fin_(&Int32::to_buffer));
-			index->update_("from_stream", Member<Int32>::fin_(&Int32::from_buffer));
+			index->update_("to_stream", Const<Int32>::fin_(&Int32::to_stream));
+			index->update_("from_stream", Member<Int32>::fin_(&Int32::from_stream));
 			index->update_("buf", Static::fin_(&Int32::buf));
+			index->update_("str", Static::fin_(&Int32::str));
 			index->finalize_();
 			return pub;
 		}();
@@ -2134,6 +2307,18 @@ public:
 		return buf_(it->next_());
 	}
 
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Int64>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
+	}
+
 	inline Int64(const D& data)
 		: Mutable{}
 		, Serializable{}
@@ -2154,9 +2339,10 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Int64>::fin_(&Int64::to_buffer));
 			index->update_("from_buffer", Member<Int64>::fin_(&Int64::from_buffer));
-			index->update_("to_stream", Const<Int64>::fin_(&Int64::to_buffer));
-			index->update_("from_stream", Member<Int64>::fin_(&Int64::from_buffer));
+			index->update_("to_stream", Const<Int64>::fin_(&Int64::to_stream));
+			index->update_("from_stream", Member<Int64>::fin_(&Int64::from_stream));
 			index->update_("buf", Static::fin_(&Int64::buf));
+			index->update_("str", Static::fin_(&Int64::str));
 			index->finalize_();
 			return pub;
 		}();
@@ -2264,6 +2450,18 @@ public:
 		return buf_(it->next_());
 	}
 
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Float32>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
+	}
+
 	inline Float32(const D& data)
 		: Mutable{}
 		, Serializable{}
@@ -2284,9 +2482,10 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Float32>::fin_(&Float32::to_buffer));
 			index->update_("from_buffer", Member<Float32>::fin_(&Float32::from_buffer));
-			index->update_("to_stream", Const<Float32>::fin_(&Float32::to_buffer));
-			index->update_("from_stream", Member<Float32>::fin_(&Float32::from_buffer));
+			index->update_("to_stream", Const<Float32>::fin_(&Float32::to_stream));
+			index->update_("from_stream", Member<Float32>::fin_(&Float32::from_stream));
 			index->update_("buf", Static::fin_(&Float32::buf));
+			index->update_("str", Static::fin_(&Float32::str));
 			index->finalize_();
 			return pub;
 		}();
@@ -2382,6 +2581,18 @@ public:
 		return buf_(it->next_());
 	}
 
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Float64>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
+	}
+
 	inline Float64(const D& data)
 		: Mutable{}
 		, Serializable{}
@@ -2402,9 +2613,10 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Float64>::fin_(&Float64::to_buffer));
 			index->update_("from_buffer", Member<Float64>::fin_(&Float64::from_buffer));
-			index->update_("to_stream", Const<Float64>::fin_(&Float64::to_buffer));
-			index->update_("from_stream", Member<Float64>::fin_(&Float64::from_buffer));
+			index->update_("to_stream", Const<Float64>::fin_(&Float64::to_stream));
+			index->update_("from_stream", Member<Float64>::fin_(&Float64::from_stream));
 			index->update_("buf", Static::fin_(&Float64::buf));
+			index->update_("str", Static::fin_(&Float64::str));
 			index->finalize_();
 			return pub;
 		}();
@@ -2541,26 +2753,38 @@ public:
 		return CATS;
 	}
 
-	inline void push_back_(const Ptr ptr)
+	inline const bool push_back_(const Ptr ptr)
 	{
 		Serializable* const ser = dynamic_<Serializable>(ptr);
-		if (ser)
+		if (!ser)
 		{
-			const Ptr type = ptr->type_();
-			const Ptr buffer = ser->to_buffer_();
-			Buffer* const buf = static_<Buffer>(buffer);
-			write_(Bit::mut_(buf->finalized_()));
-			write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
-			write_(type);
-			write_(Int64::mut_(buf->get_().length()));
-			write_(buffer);
+			return false;
 		}
+		const Ptr type = ptr->type_();
+		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
+		write_(type);
+		ser->to_stream_(me_());
+		return true;
 	}
 
 	inline const Ptr push_back(const Ptr it)
 	{
 		push_back_(it->next_());
 		return nothing_();
+	}
+
+	inline const bool push_back_with_links_(const Ptr ptr, const Ptr index)
+	{
+		Serializable* const ser = dynamic_<Serializable>(ptr);
+		if (!ser)
+		{
+			return false;
+		}
+		const Ptr type = ptr->type_();
+		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
+		write_(type);
+		ser->to_stream_with_links_(index, me_());
+		return true;
 	}
 
 	inline void write_(const std::string& str)
@@ -2584,22 +2808,15 @@ public:
 
 	inline const Ptr pop_front_()
 	{
-		const bool bit = read_<Bit>();
 		const int16_t int16 = read_<Int16>();
-		const std::string function = static_<Buffer>(read_(int16))->get_() + "::buf";
-		const Ptr fun = static_<Index>(factory_())->find_(function.c_str());
+		const std::string function = static_<Buffer>(read_(int16))->get_() + "::str";
+		const Ptr fun = static_<Index>(factory_())->find_(function);
 		if (fun->is_("0"))
 		{
 			log_("Stream::pop_front_ read unknown type");
 			return fun;
 		}
-		const int64_t int64 = read_<Int64>();
-		const Ptr result = fun->call_(read_(int64));
-		if (bit)
-		{
-			result->finalize_();
-		}
-		return result;
+		return fun->call_(me_());
 	}
 
 	inline const Ptr pop_front(const Ptr ignore)
@@ -2685,6 +2902,84 @@ inline void Index::from_stream_(const Thing::Ptr stream)
 	}
 }
 
+inline void Index::to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const
+{
+	Index* const ind = dynamic_<Index>(index);
+	if (!ind)
+	{
+		log_("Index::to_stream_with_links_ called with wrong type of index thing");
+		return;
+	}
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Index::to_stream_with_links_ called with wrong type of stream thing");
+		return;
+	}
+	strm->write_(Bit::fin_(finalized_()));
+	strm->write_(Int64::fin_(int64_t(_map.size())));
+	for (const auto& i : _map)
+	{
+		static_<Symbol>(ind->find_(i.first))->to_stream_(stream);
+		static_<Symbol>(ind->find_(i.second))->to_stream_(stream);
+	}
+}
+
+inline void Index::replace_links_(const Thing::Ptr index)
+{
+	std_unordered_map_ptr_ptr replacement;
+	Index* const ind = static_<Index>(index);
+	for (const auto& i : _map)
+	{
+		replacement.emplace(ind->find_(i.first), ind->find_(i.second));
+	}
+	_map.swap(replacement);
+}
+
+inline void Index::gather_to_stream_(const Thing::Ptr thing, const Thing::Ptr stream)
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Index::gather_to_stream_ called with wrong type of stream thing");
+		return;
+	}
+	gather_(thing);
+	strm->write_(Int64::fin_(int64_t(_map.size())));
+	for (const auto& i : _map)
+	{
+		if (strm->push_back_with_links_(i.first, me_()))
+		{
+			static_<Symbol>(i.second)->to_stream_(stream);
+		}
+	}
+}
+
+inline const Thing::Ptr Index::gather_from_stream_(const Thing::Ptr stream)
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Index::gather_from_stream_ called with wrong type of stream thing");
+		return nothing_();
+	}
+	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
+	{
+		const Ptr thing = strm->pop_front_();
+		const Ptr symbol = Symbol::str_(stream);
+		_map.emplace(symbol, thing);
+	}
+	for (const auto& i : _map)
+	{
+		Serializable* const ser = dynamic_<Serializable>(i.second);
+		if (ser)
+		{
+			ser->replace_links_(me_());
+		}
+	}
+	return find_(nothing_());
+}
+
 inline void Flock::to_stream_(const Thing::Ptr stream) const
 {
 	Stream* const strm = dynamic_<Stream>(stream);
@@ -2722,6 +3017,37 @@ inline void Flock::from_stream_(const Thing::Ptr stream)
 	}
 }
 
+inline void Flock::to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const
+{
+	Index* const ind = dynamic_<Index>(index);
+	if (!ind)
+	{
+		log_("Flock::to_stream_with_links_ called with wrong type of index thing");
+		return;
+	}
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Flock::to_stream_with_links_ called with wrong type of stream thing");
+		return;
+	}
+	strm->write_(Bit::fin_(finalized_()));
+	strm->write_(Int64::fin_(int64_t(_vector.size())));
+	for (const auto i : _vector)
+	{
+		static_<Symbol>(ind->find_(i))->to_stream_(stream);
+	}
+}
+
+inline void Flock::replace_links_(const Thing::Ptr index)
+{
+	Index* const ind = static_<Index>(index);
+	for (std_vector_ptr::iterator i = _vector.begin(); i != _vector.end(); ++i)
+	{
+		*i = ind->find_(*i);
+	}
+}
+
 inline void Herd::to_stream_(const Thing::Ptr stream) const
 {
 	Stream* const strm = dynamic_<Stream>(stream);
@@ -2755,6 +3081,39 @@ inline void Herd::from_stream_(const Thing::Ptr stream)
 	{
 		finalize_();
 	}
+}
+
+inline void Herd::to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const
+{
+	Index* const ind = dynamic_<Index>(index);
+	if (!ind)
+	{
+		log_("Herd::to_stream_with_links_ called with wrong type of index thing");
+		return;
+	}
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Herd::to_stream_with_links_ called with wrong type of stream thing");
+		return;
+	}
+	strm->write_(Bit::fin_(finalized_()));
+	strm->write_(Int64::fin_(int64_t(_set.size())));
+	for (const auto i : _set)
+	{
+		static_<Symbol>(ind->find_(i))->to_stream_(stream);
+	}
+}
+
+inline void Herd::replace_links_(const Thing::Ptr index)
+{
+	std_unordered_set_ptr replacement;
+	Index* const ind = static_<Index>(index);
+	for (const auto i : _set)
+	{
+		replacement.insert(ind->find_(i));
+	}
+	_set.swap(replacement);
 }
 
 inline void Buffer::to_stream_(const Thing::Ptr stream) const
@@ -2996,20 +3355,32 @@ inline const Thing::Ptr Thing::factory_()
 		const Ptr factory = Index::mut_();
 		Index* const index = static_<Index>(factory);
 		index->update_("strange::Symbol::buf", Static::fin_(&Symbol::buf));
+		index->update_("strange::Symbol::str", Static::fin_(&Symbol::str));
 		index->update_("strange::Index::mut", Static::fin_(&Index::mut));
 		index->update_("strange::Index::buf", Static::fin_(&Index::buf));
+		index->update_("strange::Index::str", Static::fin_(&Index::str));
 		index->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
 		index->update_("strange::Flock::buf", Static::fin_(&Flock::buf));
+		index->update_("strange::Flock::str", Static::fin_(&Flock::str));
 		index->update_("strange::Herd::mut", Static::fin_(&Herd::mut));
 		index->update_("strange::Herd::buf", Static::fin_(&Herd::buf));
+		index->update_("strange::Herd::str", Static::fin_(&Herd::str));
 		index->update_("strange::Buffer::buf", Static::fin_(&Buffer::buf));
+		index->update_("strange::Buffer::str", Static::fin_(&Buffer::str));
 		index->update_("strange::Bit::buf", Static::fin_(&Bit::buf));
+		index->update_("strange::Bit::str", Static::fin_(&Bit::str));
 		index->update_("strange::Byte::buf", Static::fin_(&Byte::buf));
+		index->update_("strange::Byte::str", Static::fin_(&Byte::str));
 		index->update_("strange::Int16::buf", Static::fin_(&Int16::buf));
+		index->update_("strange::Int16::str", Static::fin_(&Int16::str));
 		index->update_("strange::Int32::buf", Static::fin_(&Int32::buf));
+		index->update_("strange::Int32::str", Static::fin_(&Int32::str));
 		index->update_("strange::Int64::buf", Static::fin_(&Int64::buf));
+		index->update_("strange::Int64::str", Static::fin_(&Int64::str));
 		index->update_("strange::Float32::buf", Static::fin_(&Float32::buf));
+		index->update_("strange::Float32::str", Static::fin_(&Float32::str));
 		index->update_("strange::Float64::buf", Static::fin_(&Float64::buf));
+		index->update_("strange::Float64::str", Static::fin_(&Float64::str));
 		index->finalize_();
 		return factory;
 	}();
