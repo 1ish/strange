@@ -2418,7 +2418,7 @@ public:
 
 inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
 {
-	return Int64::fin_(int64_t{ hash_() });
+	return Int64::fin_(int64_t(hash_()));
 }
 
 class Float32 : public Mutable, public Serializable, public Data<float>
