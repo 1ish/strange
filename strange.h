@@ -274,6 +274,18 @@ protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it);
 };
 
+class Iterable
+{
+public:
+	// public pure virtual member functions and adapters
+	virtual inline const Thing::Ptr iterator_() const = 0;
+
+	inline const Thing::Ptr iterator(const Thing::Ptr ignore) const
+	{
+		return iterator_();
+	}
+};
+
 class Variadic
 {
 public:
@@ -675,7 +687,7 @@ private:
 	bool _finalized;
 };
 
-class Index : public Mutable, public Me<Index>, public Serializable
+class Index : public Mutable, public Me<Index>, public Serializable, public Iterable
 {
 	class Hash
 	{
@@ -862,14 +874,9 @@ public:
 		return boolean_(insert_(key, value));
 	}
 
-	inline const Ptr iterator_() const
+	virtual inline const Ptr iterator_() const override
 	{
 		return It::mut_(me_());
-	}
-
-	inline const Ptr iterator(const Ptr ignore) const
-	{
-		return iterator_();
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1082,7 +1089,7 @@ private:
 	typename C::const_iterator _iterator;
 };
 
-class Flock : public Mutable, public Me<Flock>, public Serializable
+class Flock : public Mutable, public Me<Flock>, public Serializable, public Iterable
 {
 	using std_vector_ptr = std::vector<Ptr>;
 
@@ -1196,14 +1203,9 @@ public:
 		return item;
 	}
 
-	inline const Ptr iterator_() const
+	virtual inline const Ptr iterator_() const override
 	{
 		return It::mut_(me_());
-	}
-
-	inline const Ptr iterator(const Ptr ignore) const
-	{
-		return iterator_();
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1294,7 +1296,7 @@ inline const Thing::Ptr Index::It::next_()
 	return result;
 }
 
-class Herd : public Mutable, public Me<Herd>, public Serializable
+class Herd : public Mutable, public Me<Herd>, public Serializable, public Iterable
 {
 	class Hash
 	{
@@ -1457,14 +1459,9 @@ public:
 		return boolean_(insert_(it->next_()));
 	}
 
-	inline const Ptr iterator_() const
+	virtual inline const Ptr iterator_() const override
 	{
 		return It::mut_(me_());
-	}
-
-	inline const Ptr iterator(const Ptr ignore) const
-	{
-		return iterator_();
 	}
 
 	virtual inline const Ptr type_() const override
