@@ -73,7 +73,7 @@ public:
 
 	static inline const Ptr boolean(const Ptr it)
 	{
-		return boolean_(it->next_());
+		return boolean_(it->call_("next"));
 	}
 
 	template <typename F>
@@ -86,7 +86,7 @@ public:
 
 	static inline const Ptr log(const Ptr it)
 	{
-		log_(it->next_());
+		log_(it->call_("next"));
 		return nothing_();
 	}
 
@@ -96,13 +96,6 @@ public:
 	static inline const Ptr factory(const Ptr ignore)
 	{
 		return factory_();
-	}
-
-	virtual inline const Ptr pub_() const;
-
-	inline const Ptr pub(const Ptr ignore) const
-	{
-		return pub_();
 	}
 
 	template <typename F>
@@ -155,7 +148,7 @@ public:
 	// public impure virtual member functions and adapters
 	virtual inline const Ptr clone_() const
 	{
-		return copy_();
+		return const_cast<Thing*>(this)->call_("copy");
 	}
 
 	inline const Ptr clone(const Ptr ignore) const
@@ -185,7 +178,7 @@ public:
 
 	virtual inline void freeze_()
 	{
-		finalize_();
+		call_("finalize");
 	}
 
 	inline const Ptr freeze(const Ptr ignore)
@@ -218,14 +211,13 @@ public:
 
 	inline const Ptr same(const Ptr it) const
 	{
-		return boolean_(same_(it->next_()));
+		return boolean_(same_(it->call_("next")));
 	}
 
 	virtual inline const Ptr visit(const Ptr it)
 	{
-		const Ptr visitor = it->next_();
-		visitor->thing(it);
-		return visitor;
+		const Ptr visitor = it->call_("next");
+		return visitor->thing(it);
 	}
 
 	virtual inline const Ptr cats_() const;
@@ -233,6 +225,13 @@ public:
 	inline const Ptr cats(const Ptr ignore) const
 	{
 		return cats_();
+	}
+
+	virtual inline const Ptr pub_() const;
+
+	inline const Ptr pub(const Ptr ignore) const
+	{
+		return pub_();
 	}
 
 	// public non-virtual member functions and adapters
@@ -257,7 +256,7 @@ public:
 
 	inline const Ptr is(const Ptr it) const
 	{
-		return boolean_(is_(it->next_()));
+		return boolean_(is_(it->call_("next")));
 	}
 
 protected:
@@ -307,7 +306,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_(std::vector<Ptr>& vec, Thing& thing, Args&&... args)
 	{
-		for (Ptr p = thing.next_(); !p->is_("end"); p = thing.next_())
+		for (Ptr p = thing.call_("next"); !p->is_("end"); p = thing.call_("next_"))
 		{
 			vec.push_back(p);
 		}
@@ -369,7 +368,7 @@ public:
 
 	inline const Thing::Ptr from_buffer(const Thing::Ptr it)
 	{
-		from_buffer_(it->next_());
+		from_buffer_(it->call_("next"));
 		return Thing::nothing_();
 	}
 
@@ -377,7 +376,7 @@ public:
 
 	inline const Thing::Ptr to_stream(const Thing::Ptr it) const
 	{
-		const Thing::Ptr stream = it->next_();
+		const Thing::Ptr stream = it->call_("next");
 		to_stream_(stream);
 		return stream;
 	}
@@ -386,22 +385,34 @@ public:
 
 	inline const Thing::Ptr from_stream(const Thing::Ptr it)
 	{
-		const Thing::Ptr stream = it->next_();
+		const Thing::Ptr stream = it->call_("next");
 		from_stream_(stream);
 		return stream;
 	}
 
 	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const
 	{
-		to_stream_(stream);
+		const Thing* thing = dynamic_cast<const Thing*>(this);
+		if (thing)
+		{
+			const_cast<Thing*>(thing)->call_("to_stream", stream);
+		}
+	}
+
+	inline const Thing::Ptr to_stream_with_links(const Thing::Ptr it)
+	{
+		const Thing::Ptr index = it->call_("next");
+		const Thing::Ptr stream = it->call_("next");
+		to_stream_with_links_(index, stream);
+		return stream;
 	}
 
 	static inline void serialize_(const Thing::Ptr thing, const Thing::Ptr stream);
 
 	static inline const Thing::Ptr serialize(const Thing::Ptr it)
 	{
-		const Thing::Ptr thing = it->next_();
-		const Thing::Ptr stream = it->next_();
+		const Thing::Ptr thing = it->call_("next");
+		const Thing::Ptr stream = it->call_("next");
 		serialize_(thing, stream);
 		return stream;
 	}
@@ -410,18 +421,34 @@ public:
 	{
 	}
 
+	inline const Thing::Ptr replace_links(const Thing::Ptr it)
+	{
+		replace_links_(it->call_("next"));
+		return Thing::nothing_();
+	}
+
 	static inline const Thing::Ptr deserialize_(const Thing::Ptr stream);
 
 	static inline const Thing::Ptr deserialize(const Thing::Ptr it)
 	{
-		return deserialize_(it->next_());
+		return deserialize_(it->call_("next"));
 	}
 
-protected:
-	// protected non-virtual member functions and adapters
+	// public non-virtual member functions and adapters
 	inline const Thing::Ptr to_buffer_via_stream_() const;
 
+	inline const Thing::Ptr to_buffer_via_stream(const Thing::Ptr ignore) const
+	{
+		return to_buffer_via_stream_();
+	}
+
 	inline void from_buffer_via_stream_(const Thing::Ptr buffer);
+
+	inline const Thing::Ptr from_buffer_via_stream(const Thing::Ptr it)
+	{
+		from_buffer_via_stream_(it->call_("next"));
+		return Thing::nothing_();
+	}
 };
 
 class Symbol : public Thing, public Me<Symbol>, public Serializable
@@ -465,14 +492,14 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream);
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
 	}
 
 	virtual inline const Ptr to_buffer_() const override;
@@ -484,12 +511,6 @@ public:
 	}
 
 	virtual inline const Ptr cats_() const override;
-
-protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
-	{
-		return me_();
-	}
 
 private:
 	const std::string _symbol;
@@ -505,7 +526,7 @@ inline const bool Thing::is_(F&& symbol) const
 
 inline const bool Thing::is_(const Thing::Ptr symbol) const
 {
-	const Symbol* const sym = dynamic_<const Symbol>(symbol);
+	Symbol* const sym = dynamic_<Symbol>(symbol);
 	return (sym && is_(sym->symbol_()));
 }
 
@@ -604,7 +625,7 @@ protected:
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
 		{
-			if (t->finalized_())
+			if (!t->call_("finalized")->is_("0"))
 			{
 				log_("ERROR: Member passed finalized thing\n");
 				return nothing_();
@@ -692,10 +713,7 @@ class Index : public Mutable, public Me<Index>, public Serializable, public Iter
 	class Hash
 	{
 	public:
-		inline size_t operator()(const Ptr ptr) const
-		{
-			return ptr->hash_();
-		}
+		inline size_t operator()(const Ptr ptr) const;
 	};
 
 	class Pred
@@ -703,7 +721,7 @@ class Index : public Mutable, public Me<Index>, public Serializable, public Iter
 	public:
 		inline const bool operator()(const Ptr lhs, const Ptr rhs) const
 		{
-			return lhs->same_(rhs);
+			return !lhs->call_("same", rhs)->is_("0");
 		}
 	};
 
@@ -725,7 +743,7 @@ public:
 		std_unordered_map_ptr_ptr& clone = static_<Index>(result)->_map;
 		for (const auto& i : _map)
 		{
-			clone[i.first->clone_()] = i.second->clone_();
+			clone[i.first->call_("clone")] = i.second->call_("clone");
 		}
 		return result;
 	}
@@ -734,8 +752,8 @@ public:
 	{
 		for (const auto& i : _map)
 		{
-			i.first->freeze_();
-			i.second->freeze_();
+			i.first->call_("freeze");
+			i.second->call_("freeze");
 		}
 	}
 
@@ -801,7 +819,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -813,7 +831,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
 	}
 
 	template <typename F>
@@ -834,7 +852,7 @@ public:
 
 	inline const Ptr find(const Ptr it) const
 	{
-		return find_(it->next_());
+		return find_(it->call_("next"));
 	}
 
 	template <typename F>
@@ -850,8 +868,8 @@ public:
 
 	inline const Ptr update(const Ptr it)
 	{
-		const Ptr key = it->next_();
-		const Ptr value = it->next_();
+		const Ptr key = it->call_("next");
+		const Ptr value = it->call_("next");
 		update_(key, value);
 		return value;
 	}
@@ -869,8 +887,8 @@ public:
 
 	inline const Ptr insert(const Ptr it)
 	{
-		const Ptr key = it->next_();
-		const Ptr value = it->next_();
+		const Ptr key = it->call_("next");
+		const Ptr value = it->call_("next");
 		return boolean_(insert_(key, value));
 	}
 
@@ -889,20 +907,20 @@ public:
 
 	virtual inline const Ptr visit(const Ptr it) override
 	{
-		const Ptr visitor = it->next_();
-		const Ptr member = it->next_();
-		const Ptr rest = it->copy_();
-		if (visitor->call_(member, *it)->is_("0"))
+		const Ptr rest = it->call_("copy");
+		const Ptr result = Thing::visit(it);
+		if (!result->is_("0"))
 		{
-			return visitor;
+			const Ptr visitor = rest->call_("next");
+			const Ptr member = rest->call_("next");
+			rest->call_("next");
+			for (const auto& visited : _map)
+			{
+				visited.first->call_("visit", visitor, member, visited.first, *(rest->call_("copy")));
+				visited.second->call_("visit", visitor, member, visited.second, *(rest->call_("copy")));
+			}
 		}
-		rest->next_();
-		for (const auto& visited : _map)
-		{
-			visited.first->call_("visit", visitor, member, visited.first, *(rest->copy_()));
-			visited.second->call_("visit", visitor, member, visited.second, *(rest->copy_()));
-		}
-		return visitor;
+		return result;
 	}
 
 	inline const bool itemize_(const Ptr key)
@@ -913,17 +931,18 @@ public:
 
 	inline const Ptr itemize(const Ptr it)
 	{
-		return boolean_(itemize_(it->next_()));
+		return boolean_(itemize_(it->call_("next")));
 	}
 
-	inline const Ptr gather_(const Ptr item)
+	inline void gather_(const Ptr item)
 	{
-		return item->call_("visit", me_(), "itemize", item);
+		item->call_("visit", me_(), "itemize", item);
 	}
 
 	inline const Ptr gather(const Ptr it)
 	{
-		return gather_(it->next_());
+		gather_(it->call_("next"));
+		return nothing_();
 	}
 
 	inline void gather_to_stream_(const Ptr thing, const Ptr stream);
@@ -990,9 +1009,9 @@ inline const Thing::Ptr Thing::pub_() const
 		index->update_("boolean", Static::fin_(&Thing::boolean));
 		index->update_("factory", Static::fin_(&Thing::factory));
 		index->update_("pub", Const<Thing>::fin_(&Thing::pub));
-		index->update_(nothing_(), nothing_());
-		index->update_(one_(), one_());
-		index->update_(end_(), end_());
+		index->update_(nothing_(), Static::fin_(&Thing::nothing));
+		index->update_(one_(), Static::fin_(&Thing::one));
+		index->update_(end_(), Static::fin_(&Thing::end));
 		index->update_("log", Static::fin_(&Thing::log));
 		index->update_("type", Const<Thing>::fin_(&Thing::type));
 		index->update_("cats", Const<Thing>::fin_(&Thing::cats));
@@ -1005,7 +1024,11 @@ inline const Thing::Ptr Thing::pub_() const
 
 inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr it)
 {
-	const Ptr member = static_<Index>(pub_())->find(it);
+	const Ptr member = static_<Index>(pub_())->find_(it->call_("next"));
+	if (member->is_("0"))
+	{
+		return member;
+	}
 	return thing_(thing, member, it);
 }
 
@@ -1030,11 +1053,11 @@ protected:
 
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
-		const Ptr cit = it->copy_();
-		const Ptr member = static_<Index>(pub_())->find(it);
+		const Ptr name = it->call_("next");
+		const Ptr member = static_<Index>(pub_())->find_(name);
 		if (member->is_("0"))
 		{
-			return _decorated->thing(cit);
+			return _decorated->call_(name, *it);
 		}
 		return thing_(thing, member, it);
 	}
@@ -1065,7 +1088,7 @@ public:
 
 	virtual inline const Ptr copy_() const override
 	{
-		const Ptr result = mut_(C{ _collection });
+		const Ptr result = mut_(_collection);
 		static_<Iterator>(result)->_iterator += (_iterator - _collection.cbegin());
 		return result;
 	}
@@ -1083,6 +1106,17 @@ public:
 	}
 
 	virtual inline const Ptr cats_() const override;
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
+	{
+		const Ptr member = static_<Index>(pub_())->find_(it->next_());
+		if (member->is_("0"))
+		{
+			return member;
+		}
+		return thing_(thing, member, it);
+	}
 
 private:
 	const C _collection;
@@ -1110,7 +1144,7 @@ public:
 		clone.reserve(_vector.size());
 		for (const auto i : _vector)
 		{
-			clone.push_back(i->clone_());
+			clone.push_back(i->call_("clone"));
 		}
 		return result;
 	}
@@ -1119,7 +1153,7 @@ public:
 	{
 		for (const auto i : _vector)
 		{
-			i->freeze_();
+			i->call_("freeze");
 		}
 	}
 
@@ -1181,7 +1215,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -1193,14 +1227,38 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
+	}
+
+	inline void push_back_(const Ptr item)
+	{
+		_vector.push_back(item);
 	}
 
 	inline const Ptr push_back(const Ptr it)
 	{
-		const Ptr item = it->next_();
-		_vector.push_back(item);
+		const Ptr item = it->call_("next");
+		push_back_(item);
 		return item;
+	}
+
+	inline const int64_t size_() const
+	{
+		return int64_t(_vector.size());
+	}
+
+	inline const Ptr size(const Ptr ignore) const;
+
+	inline const Ptr at_(const int64_t index) const
+	{
+		return _vector.at(size_t(index));
+	}
+
+	inline const Ptr at_(const Ptr index) const;
+
+	inline const Ptr at(const Ptr it) const
+	{
+		return at(it->call_("next"));
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -1218,19 +1276,19 @@ public:
 
 	virtual inline const Ptr visit(const Ptr it) override
 	{
-		const Ptr visitor = it->next_();
-		const Ptr member = it->next_();
-		const Ptr rest = it->copy_();
-		if (visitor->call_(member, *it)->is_("0"))
+		const Ptr rest = it->call_("copy");
+		const Ptr result = Thing::visit(it);
+		if (!result->is_("0"))
 		{
-			return visitor;
+			const Ptr visitor = rest->call_("next");
+			const Ptr member = rest->call_("next");
+			rest->call_("next");
+			for (const auto visited : _vector)
+			{
+				visited->call_("visit", visitor, member, visited, *(rest->call_("copy")));
+			}
 		}
-		rest->next_();
-		for (const auto visited : _vector)
-		{
-			visited->call_("visit", visitor, member, visited, *(rest->copy_()));
-		}
-		return visitor;
+		return result;
 	}
 
 private:
@@ -1301,10 +1359,7 @@ class Herd : public Mutable, public Me<Herd>, public Serializable, public Iterab
 	class Hash
 	{
 	public:
-		inline size_t operator()(const Ptr ptr) const
-		{
-			return ptr->hash_();
-		}
+		inline size_t operator()(const Ptr ptr) const;
 	};
 
 	class Pred
@@ -1312,7 +1367,7 @@ class Herd : public Mutable, public Me<Herd>, public Serializable, public Iterab
 	public:
 		inline const bool operator()(const Ptr lhs, const Ptr rhs) const
 		{
-			return lhs->same_(rhs);
+			return !lhs->call_("same", rhs)->is_("0");
 		}
 	};
 
@@ -1334,7 +1389,7 @@ public:
 		std_unordered_set_ptr& clone = static_<Herd>(result)->_set;
 		for (const auto i : _set)
 		{
-			clone.insert(i->clone_());
+			clone.insert(i->call_("clone"));
 		}
 		return result;
 	}
@@ -1343,7 +1398,7 @@ public:
 	{
 		for (const auto i : _set)
 		{
-			i->freeze_();
+			i->call_("freeze");
 		}
 	}
 
@@ -1407,7 +1462,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -1419,7 +1474,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
 	}
 
 	template <typename F>
@@ -1440,7 +1495,7 @@ public:
 
 	inline const Ptr find(const Ptr it) const
 	{
-		return find_(it->next_());
+		return find_(it->call_("next"));
 	}
 
 	template <typename F>
@@ -1456,7 +1511,7 @@ public:
 
 	inline const Ptr insert(const Ptr it)
 	{
-		return boolean_(insert_(it->next_()));
+		return boolean_(insert_(it->call_("next")));
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -1488,29 +1543,30 @@ public:
 
 	virtual inline const Ptr visit(const Ptr it) override
 	{
-		const Ptr visitor = it->next_();
-		const Ptr member = it->next_();
-		const Ptr rest = it->copy_();
-		if (visitor->call_(member, *it)->is_("0"))
+		const Ptr rest = it->call_("copy");
+		const Ptr result = Thing::visit(it);
+		if (!result->is_("0"))
 		{
-			return visitor;
+			const Ptr visitor = rest->call_("next");
+			const Ptr member = rest->call_("next");
+			rest->call_("next");
+			for (const auto visited : _set)
+			{
+				visited->call_("visit", visitor, member, visited, *(rest->call_("copy")));
+			}
 		}
-		rest->next_();
-		for (const auto visited : _set)
-		{
-			visited->call_("visit", visitor, member, visited, *(rest->copy_()));
-		}
-		return visitor;
+		return result;
 	}
 
-	inline const Ptr gather_(const Ptr item)
+	inline void gather_(const Ptr item)
 	{
-		return item->call_("visit", me_(), "insert", item);
+		item->call_("visit", me_(), "insert", item);
 	}
 
 	inline const Ptr gather(const Ptr it)
 	{
-		return gather_(it->next_());
+		gather_(it->call_("next"));
+		return nothing_();
 	}
 
 private:
@@ -1623,7 +1679,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -1635,7 +1691,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
 	}
 
 	inline Buffer(const S& data)
@@ -1723,23 +1779,35 @@ public:
 
 inline void Thing::log_(const Thing::Ptr ptr)
 {
-	Serializable* const ser = dynamic_<Serializable>(ptr);
-	if (ser)
+	const Buffer* const buffer = dynamic_<Buffer>(ptr->call_("to_buffer"));
+	if (buffer)
 	{
-		log_(static_<const Buffer>(ser->to_buffer_())->get_());
+		log_(buffer->get_());
 	}
 }
 
 inline void Serializable::to_stream_(const Thing::Ptr stream) const
 {
-	Thing::static_<Buffer>(to_buffer_())->to_stream_(stream);
+	const Thing* const thing = dynamic_cast<const Thing*>(this);
+	if (thing)
+	{
+		Buffer* const buffer = Thing::dynamic_<Buffer>(const_cast<Thing*>(thing)->call_("to_buffer"));
+		if (buffer)
+		{
+			buffer->to_stream_(stream);
+		}
+	}
 }
 
 inline void Serializable::from_stream_(const Thing::Ptr stream)
 {
 	const Thing::Ptr buffer = Buffer::mut_();
 	Thing::static_<Buffer>(buffer)->from_stream_(stream);
-	from_buffer_(buffer);
+	Thing* const thing = dynamic_cast<Thing*>(this);
+	if (thing)
+	{
+		thing->call_("from_buffer", buffer);
+	}
 }
 
 inline const Thing::Ptr Symbol::buf_(const Thing::Ptr buffer)
@@ -1765,7 +1833,87 @@ inline const Thing::Ptr Symbol::to_buffer_() const
 	return buffer;
 }
 
-class Bit : public Mutable, public Serializable, public Data<bool>
+class Number : public Mutable, public Serializable
+{
+public:
+	Number() = default;
+
+	virtual inline int64_t to_int64_() const
+	{
+		return int64_t(std::llround(to_float64_()));
+	}
+
+	inline const Ptr to_int64(const Ptr ignore) const;
+
+	virtual inline void from_int64_(const int64_t int64)
+	{
+		from_float64_(double(int64));
+	}
+
+	inline void from_int64_(const Ptr ptr);
+
+	inline const Ptr from_int64(const Ptr it)
+	{
+		from_int64_(it->call_("next"));
+		return nothing_();
+	}
+
+	virtual inline double to_float64_() const
+	{
+		return double(to_int64_());
+	}
+
+	inline const Ptr to_float64(const Ptr ignore) const;
+
+	virtual inline void from_float64_(const double float64)
+	{
+		from_int64_(int64_t(std::llround(float64)));
+	}
+
+	inline void from_float64_(const Ptr ptr);
+
+	inline const Ptr from_float64(const Ptr it)
+	{
+		from_float64_(it->call_("next"));
+		return nothing_();
+	}
+
+	virtual inline double to_imaginary64_() const
+	{
+		return 0.0;
+	}
+
+	inline const Ptr to_imaginary64(const Ptr ignore) const;
+
+	virtual inline void from_imaginary64_(const double imaginary64)
+	{
+	}
+
+	inline void from_imaginary64_(const Ptr ptr);
+
+	inline const Ptr from_imaginary64(const Ptr it)
+	{
+		from_imaginary64_(it->call_("next"));
+		return nothing_();
+	}
+
+	virtual inline const Ptr to_symbol_() const = 0;
+
+	inline const Ptr to_symbol(const Ptr ignore) const
+	{
+		return to_symbol_();
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) = 0;
+
+	inline const Ptr from_symbol(const Ptr it)
+	{
+		from_symbol_(it->call_("next"));
+		return nothing_();
+	}
+};
+
+class Bit : public Number, public Data<bool>
 {
 public:
 	using D = bool;
@@ -1777,7 +1925,7 @@ public:
 
 	static inline const Ptr mut(const Ptr it)
 	{
-		return mut_(!it->next_()->is_("0"));
+		return mut_(!it->call_("next")->is_("0"));
 	}
 
 	static inline const Ptr fin_(const D& data = D())
@@ -1803,7 +1951,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -1815,12 +1963,11 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
 	}
 
 	inline Bit(const D& data)
-		: Mutable{}
-		, Serializable{}
+		: Number{}
 		, Data{ data }
 	{
 	}
@@ -1868,7 +2015,7 @@ public:
 			log_("Bit::from_buffer_ called with wrong type of thing");
 			return;
 		}
-		set_(buf->get_() != "0");
+		set_(bool(buf->get_()[0]));
 		if (buf->finalized_())
 		{
 			finalize_();
@@ -1897,9 +2044,33 @@ public:
 		}();
 		return CATS;
 	}
+
+	virtual inline int64_t to_int64_() const override
+	{
+		return int64_t(get_());
+	}
+
+	virtual inline void from_int64_(const int64_t int64) override
+	{
+		set_(D(int64));
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_()));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			set_(D(std::stoll(symbol->symbol_())));
+		}
+	}
 };
 
-class Byte : public Mutable, public Serializable, public Data<unsigned char>
+class Byte : public Number, public Data<unsigned char>
 {
 public:
 	using D = unsigned char;
@@ -1925,7 +2096,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -1937,12 +2108,11 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
 	}
 
 	inline Byte(const D& data)
-		: Mutable{}
-		, Serializable{}
+		: Number{}
 		, Data{ data }
 	{
 	}
@@ -2017,9 +2187,33 @@ public:
 		}();
 		return CATS;
 	}
+
+	virtual inline int64_t to_int64_() const override
+	{
+		return int64_t(get_());
+	}
+
+	virtual inline void from_int64_(const int64_t int64) override
+	{
+		set_(D(int64));
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_()));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			set_(D(std::stoll(symbol->symbol_())));
+		}
+	}
 };
 
-class Int16 : public Mutable, public Serializable, public Data<int16_t>
+class Int16 : public Number, public Data<int16_t>
 {
 public:
 	using D = int16_t;
@@ -2045,7 +2239,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -2057,12 +2251,11 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
 	}
 
 	inline Int16(const D& data)
-		: Mutable{}
-		, Serializable{}
+		: Number{}
 		, Data{ data }
 	{
 	}
@@ -2143,9 +2336,33 @@ public:
 		}();
 		return CATS;
 	}
+
+	virtual inline int64_t to_int64_() const override
+	{
+		return int64_t(get_());
+	}
+
+	virtual inline void from_int64_(const int64_t int64) override
+	{
+		set_(D(int64));
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_()));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			set_(D(std::stoll(symbol->symbol_())));
+		}
+	}
 };
 
-class Int32 : public Mutable, public Serializable, public Data<int32_t>
+class Int32 : public Number, public Data<int32_t>
 {
 public:
 	using D = int32_t;
@@ -2171,7 +2388,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -2183,12 +2400,11 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
 	}
 
 	inline Int32(const D& data)
-		: Mutable{}
-		, Serializable{}
+		: Number{}
 		, Data{ data }
 	{
 	}
@@ -2273,9 +2489,33 @@ public:
 		}();
 		return CATS;
 	}
+
+	virtual inline int64_t to_int64_() const override
+	{
+		return int64_t(get_());
+	}
+
+	virtual inline void from_int64_(const int64_t int64) override
+	{
+		set_(D(int64));
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_()));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			set_(D(std::stoll(symbol->symbol_())));
+		}
+	}
 };
 
-class Int64 : public Mutable, public Serializable, public Data<int64_t>
+class Int64 : public Number, public Data<int64_t>
 {
 public:
 	using D = int64_t;
@@ -2301,7 +2541,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -2313,12 +2553,11 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
 	}
 
 	inline Int64(const D& data)
-		: Mutable{}
-		, Serializable{}
+		: Number{}
 		, Data{ data }
 	{
 	}
@@ -2411,14 +2650,33 @@ public:
 		}();
 		return CATS;
 	}
+
+	virtual inline int64_t to_int64_() const override
+	{
+		return get_();
+	}
+
+	virtual inline void from_int64_(const int64_t int64) override
+	{
+		set_(int64);
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_()));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			set_(D(std::stoll(symbol->symbol_())));
+		}
+	}
 };
 
-inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
-{
-	return Int64::fin_(int64_t(hash_()));
-}
-
-class Float32 : public Mutable, public Serializable, public Data<float>
+class Float32 : public Number, public Data<float>
 {
 public:
 	using D = float;
@@ -2444,7 +2702,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -2456,12 +2714,11 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
 	}
 
 	inline Float32(const D& data)
-		: Mutable{}
-		, Serializable{}
+		: Number{}
 		, Data{ data }
 	{
 	}
@@ -2547,9 +2804,33 @@ public:
 		}();
 		return CATS;
 	}
+
+	virtual inline double to_float64_() const override
+	{
+		return double(get_());
+	}
+
+	virtual inline void from_float64_(const double float64) override
+	{
+		set_(D(float64));
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_()));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			set_(std::stof(symbol->symbol_()));
+		}
+	}
 };
 
-class Float64 : public Mutable, public Serializable, public Data<double>
+class Float64 : public Number, public Data<double>
 {
 public:
 	using D = double;
@@ -2575,7 +2856,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->next_());
+		return buf_(it->call_("next"));
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -2587,12 +2868,11 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->next_());
+		return str_(it->call_("next"));
 	}
 
 	inline Float64(const D& data)
-		: Mutable{}
-		, Serializable{}
+		: Number{}
 		, Data{ data }
 	{
 	}
@@ -2686,7 +2966,103 @@ public:
 		}();
 		return CATS;
 	}
+
+	virtual inline double to_float64_() const override
+	{
+		return get_();
+	}
+
+	virtual inline void from_float64_(const double float64) override
+	{
+		set_(float64);
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_()));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			set_(std::stod(symbol->symbol_()));
+		}
+	}
 };
+
+inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
+{
+	return Int64::mut_(int64_t(hash_()));
+}
+
+inline size_t Index::Hash::operator()(const Ptr ptr) const
+{
+	return size_t(static_<Int64>(ptr->call_("hash"))->get_());
+}
+
+inline const Thing::Ptr Flock::size(const Thing::Ptr ignore) const
+{
+	return Int64::mut_(size_());
+}
+
+inline const Thing::Ptr Flock::at_(const Thing::Ptr index) const
+{
+	Number* const number = dynamic_<Number>(index);
+	if (number)
+	{
+		return at_(number->to_int64_());
+	}
+	return nothing_();
+}
+
+inline size_t Herd::Hash::operator()(const Ptr ptr) const
+{
+	return size_t(static_<Int64>(ptr->call_("hash"))->get_());
+}
+
+inline const Thing::Ptr Number::to_int64(const Thing::Ptr ignore) const
+{
+	return Int64::mut_(to_int64_());
+}
+
+inline void Number::from_int64_(const Thing::Ptr ptr)
+{
+	Int64* const int64 = dynamic_<Int64>(ptr);
+	if (int64)
+	{
+		from_int64_(int64->get_());
+	}
+}
+
+inline const Thing::Ptr Number::to_float64(const Thing::Ptr ignore) const
+{
+	return Float64::mut_(to_float64_());
+}
+
+inline void Number::from_float64_(const Thing::Ptr ptr)
+{
+	Float64* const float64 = dynamic_<Float64>(ptr);
+	if (float64)
+	{
+		from_float64_(float64->get_());
+	}
+}
+
+inline const Thing::Ptr Number::to_imaginary64(const Thing::Ptr ignore) const
+{
+	return Float64::mut_(to_imaginary64_());
+}
+
+inline void Number::from_imaginary64_(const Thing::Ptr ptr)
+{
+	Float64* const float64 = dynamic_<Float64>(ptr);
+	if (float64)
+	{
+		from_imaginary64_(float64->get_());
+	}
+}
 
 class Stream : public Mutable, public Me<Stream>
 {
@@ -2752,35 +3128,25 @@ public:
 
 	inline const bool push_back_(const Ptr ptr)
 	{
-		Serializable* const ser = dynamic_<Serializable>(ptr);
-		if (!ser)
-		{
-			return false;
-		}
-		const Ptr type = ptr->type_();
+		const Ptr type = ptr->call_("type");
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
-		ser->to_stream_(me_());
+		ptr->call_("to_stream", me_());
 		return true;
 	}
 
 	inline const Ptr push_back(const Ptr it)
 	{
-		push_back_(it->next_());
+		push_back_(it->call_("next"));
 		return nothing_();
 	}
 
 	inline const bool push_back_with_links_(const Ptr ptr, const Ptr index)
 	{
-		Serializable* const ser = dynamic_<Serializable>(ptr);
-		if (!ser)
-		{
-			return false;
-		}
-		const Ptr type = ptr->type_();
+		const Ptr type = ptr->call_("type");
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
-		ser->to_stream_with_links_(index, me_());
+		ptr->call_("to_stream_with_links", index, me_());
 		return true;
 	}
 
@@ -2791,16 +3157,16 @@ public:
 
 	inline void write_(const Ptr ptr)
 	{
-		Serializable* const ser = dynamic_<Serializable>(ptr);
-		if (ser)
+		Buffer* const buffer = dynamic_<Buffer>(ptr->call_("to_buffer"));
+		if (buffer)
 		{
-			write_(static_<Buffer>(ser->to_buffer_())->get_());
+			write_(buffer->get_());
 		}
 	}
 
 	inline const Ptr write(const Ptr it)
 	{
-		write_(it->next_());
+		write_(it->call_("next"));
 	}
 
 	inline const Ptr pop_front_()
@@ -2841,11 +3207,16 @@ private:
 
 inline const Thing::Ptr Serializable::to_buffer_via_stream_() const
 {
-	const Thing::Ptr stream = Stream::mut_();
-	to_stream_(stream);
-	const Thing::Ptr buffer = Buffer::mut_();
-	Thing::static_<Buffer>(buffer)->from_stream_(stream);
-	return buffer;
+	const Thing* const thing = dynamic_cast<const Thing*>(this);
+	if (thing)
+	{
+		const Thing::Ptr stream = Stream::mut_();
+		const_cast<Thing*>(thing)->call_("to_stream", stream);
+		const Thing::Ptr buffer = Buffer::mut_();
+		Thing::static_<Buffer>(buffer)->from_stream_(stream);
+		return buffer;
+	}
+	return Thing::nothing_();
 }
 
 inline void Serializable::from_buffer_via_stream_(const Thing::Ptr buffer)
@@ -2858,7 +3229,11 @@ inline void Serializable::from_buffer_via_stream_(const Thing::Ptr buffer)
 	}
 	const Thing::Ptr stream = Stream::mut_();
 	buf->to_stream_(stream);
-	from_stream_(stream);
+	Thing* const thing = dynamic_cast<Thing*>(this);
+	if (thing)
+	{
+		thing->call_("from_stream", stream);
+	}
 }
 
 inline void Index::to_stream_(const Thing::Ptr stream) const
@@ -2869,8 +3244,8 @@ inline void Index::to_stream_(const Thing::Ptr stream) const
 		log_("Index::to_stream_ called with wrong type of thing");
 		return;
 	}
-	strm->write_(Bit::fin_(finalized_()));
-	strm->write_(Int64::fin_(int64_t(_map.size())));
+	strm->write_(Bit::mut_(finalized_()));
+	strm->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
 		strm->push_back_(i.first);
@@ -2913,8 +3288,8 @@ inline void Index::to_stream_with_links_(const Thing::Ptr index, const Thing::Pt
 		log_("Index::to_stream_with_links_ called with wrong type of stream thing");
 		return;
 	}
-	strm->write_(Bit::fin_(finalized_()));
-	strm->write_(Int64::fin_(int64_t(_map.size())));
+	strm->write_(Bit::mut_(finalized_()));
+	strm->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
 		static_<Symbol>(ind->find_(i.first))->to_stream_(stream);
@@ -2942,7 +3317,7 @@ inline void Index::gather_to_stream_(const Thing::Ptr thing, const Thing::Ptr st
 		return;
 	}
 	gather_(thing);
-	strm->write_(Int64::fin_(int64_t(_map.size())));
+	strm->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
 		if (strm->push_back_with_links_(i.first, me_()))
@@ -2968,11 +3343,7 @@ inline const Thing::Ptr Index::gather_from_stream_(const Thing::Ptr stream)
 	}
 	for (const auto& i : _map)
 	{
-		Serializable* const ser = dynamic_<Serializable>(i.second);
-		if (ser)
-		{
-			ser->replace_links_(me_());
-		}
+		i.second->call_("replace_links", me_());
 	}
 	return find_(nothing_());
 }
@@ -2985,8 +3356,8 @@ inline void Flock::to_stream_(const Thing::Ptr stream) const
 		log_("Flock::to_stream_ called with wrong type of thing");
 		return;
 	}
-	strm->write_(Bit::fin_(finalized_()));
-	strm->write_(Int64::fin_(int64_t(_vector.size())));
+	strm->write_(Bit::mut_(finalized_()));
+	strm->write_(Int64::mut_(int64_t(_vector.size())));
 	for (const auto i : _vector)
 	{
 		strm->push_back_(i);
@@ -3028,8 +3399,8 @@ inline void Flock::to_stream_with_links_(const Thing::Ptr index, const Thing::Pt
 		log_("Flock::to_stream_with_links_ called with wrong type of stream thing");
 		return;
 	}
-	strm->write_(Bit::fin_(finalized_()));
-	strm->write_(Int64::fin_(int64_t(_vector.size())));
+	strm->write_(Bit::mut_(finalized_()));
+	strm->write_(Int64::mut_(int64_t(_vector.size())));
 	for (const auto i : _vector)
 	{
 		static_<Symbol>(ind->find_(i))->to_stream_(stream);
@@ -3053,8 +3424,8 @@ inline void Herd::to_stream_(const Thing::Ptr stream) const
 		log_("Herd::to_stream_ called with wrong type of thing");
 		return;
 	}
-	strm->write_(Bit::fin_(finalized_()));
-	strm->write_(Int64::fin_(int64_t(_set.size())));
+	strm->write_(Bit::mut_(finalized_()));
+	strm->write_(Int64::mut_(int64_t(_set.size())));
 	for (const auto i : _set)
 	{
 		strm->push_back_(i);
@@ -3094,8 +3465,8 @@ inline void Herd::to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr
 		log_("Herd::to_stream_with_links_ called with wrong type of stream thing");
 		return;
 	}
-	strm->write_(Bit::fin_(finalized_()));
-	strm->write_(Int64::fin_(int64_t(_set.size())));
+	strm->write_(Bit::mut_(finalized_()));
+	strm->write_(Int64::mut_(int64_t(_set.size())));
 	for (const auto i : _set)
 	{
 		static_<Symbol>(ind->find_(i))->to_stream_(stream);
@@ -3121,8 +3492,8 @@ inline void Buffer::to_stream_(const Thing::Ptr stream) const
 		log_("Buffer::to_stream_ called with wrong type of thing");
 		return;
 	}
-	strm->write_(Bit::fin_(finalized_()));
-	strm->write_(Int64::fin_(int64_t(get_().length())));
+	strm->write_(Bit::mut_(finalized_()));
+	strm->write_(Int64::mut_(int64_t(get_().length())));
 	strm->write_(get_());
 }
 
@@ -3156,7 +3527,7 @@ public:
 
 	static inline const Ptr mut(const Ptr it)
 	{
-		return mut_(it->next_());
+		return mut_(it->call_("next"));
 	}
 
 	static inline const Ptr mut_(const Ptr ptr)
@@ -3197,7 +3568,7 @@ public:
 
 	inline const Ptr give(const Ptr it)
 	{
-		return boolean_(give_(it->next_()));
+		return boolean_(give_(it->call_("next")));
 	}
 
 	inline const Ptr take_()
@@ -3217,7 +3588,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Bit");
+		static const Ptr TYPE = sym_("strange::Fence");
 		return TYPE;
 	}
 
