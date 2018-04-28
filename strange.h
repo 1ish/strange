@@ -266,6 +266,11 @@ protected:
 		return member->operator()(thing, it);
 	}
 
+	static inline const Ptr thing_(Thing* const thing, const Ptr member)
+	{
+		return thing_(thing, member, nothing_());
+	}
+
 	// protected construction/destruction/assignment
 	Thing() = default;
 
@@ -456,7 +461,9 @@ class Symbol : public Thing, public Me<Symbol>, public Serializable
 public:
 	template <typename F>
 	inline Symbol(F&& symbol)
-		: Me{}
+		: Thing{}
+		, Me{}
+		, Serializable{}
 		, _symbol{ std::forward<F>(symbol) }
 		, _hash{ std::hash<std::string>()(_symbol) }
 	{
@@ -560,7 +567,8 @@ class Static : public Thing, public Me<Static>
 
 public:
 	Static(const function fun)
-		: Me{}
+		: Thing{}
+		, Me {}
 		, _function{ fun }
 	{
 	}
@@ -598,7 +606,8 @@ class Member : public Thing, public Me<Member<T>>
 
 public:
 	Member(const member fun)
-		: Me<Member<T>>{}
+		: Thing{}
+		, Me<Member<T>>{}
 		, _function{ fun }
 	{
 	}
@@ -647,7 +656,8 @@ class Const : public Thing, public Me<Const<T>>
 
 public:
 	Const(const member fun)
-		: Me<Const<T>>{}
+		: Thing{}
+		, Me<Const<T>>{}
 		, _function{ fun }
 	{
 	}
@@ -3071,6 +3081,7 @@ class Stream : public Mutable, public Me<Stream>
 public:
 	Stream(std::iostream* const stream)
 		: Mutable{}
+		, Me{}
 		, _stream{ stream }
 	{
 	}
@@ -3128,7 +3139,7 @@ public:
 
 	inline const bool push_back_(const Ptr ptr)
 	{
-		const Ptr type = ptr->call_("type");
+		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
 		ptr->call_("to_stream", me_());
@@ -3143,7 +3154,7 @@ public:
 
 	inline const bool push_back_with_links_(const Ptr ptr, const Ptr index)
 	{
-		const Ptr type = ptr->call_("type");
+		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
 		ptr->call_("to_stream_with_links", index, me_());
@@ -3754,6 +3765,48 @@ inline const Thing::Ptr Thing::factory_()
 	}();
 	return FACTORY;
 }
+
+class Class : public Mutable, public Me<Class>
+{
+public:
+	inline Class()
+		: Mutable{}
+		, Me{}
+		, _pub{ Index::mut_() }
+	{
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		const Ptr over = static_<Index>(_pub)->find_("type");
+		if (!over->is_("0"))
+		{
+			return thing_(const_cast<Class*>(this), over);
+		}
+		static const Ptr TYPE = sym_("strange::Class");
+		return TYPE;
+	}
+
+protected:
+	// protected impure virtual member functions and adapters
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
+	{
+		const Ptr name = it->call_("next");
+		const Ptr over = static_<Index>(_pub)->find_(name);
+		if (!over->is_("0"))
+		{
+			return thing_(thing, over, it);
+		}
+		const Ptr member = static_<Index>(pub_())->find_(name);
+		if (member->is_("0"))
+		{
+			return member;
+		}
+		return thing_(thing, member, it);
+	}
+
+	const Ptr _pub;
+};
 
 } // namespace strange
 
