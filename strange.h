@@ -413,6 +413,22 @@ public:
 		return stream;
 	}
 
+	virtual inline void from_stream_with_links_(const Thing::Ptr stream)
+	{
+		Thing* thing = dynamic_cast<Thing*>(this);
+		if (thing)
+		{
+			thing->call_("from_stream", stream);
+		}
+	}
+
+	inline const Thing::Ptr from_stream_with_links(const Thing::Ptr it)
+	{
+		const Thing::Ptr stream = it->next_();
+		from_stream_with_links_(stream);
+		return stream;
+	}
+
 	static inline void serialize_(const Thing::Ptr thing, const Thing::Ptr stream);
 
 	static inline const Thing::Ptr serialize(const Thing::Ptr it)
@@ -508,6 +524,13 @@ public:
 	static inline const Ptr str(const Ptr it)
 	{
 		return str_(it->next_());
+	}
+
+	static inline const Ptr swl_(const Ptr stream);
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
 	}
 
 	virtual inline const Ptr to_buffer_() const override;
@@ -787,6 +810,8 @@ public:
 
 	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const override;
 
+	virtual inline void from_stream_with_links_(const Thing::Ptr stream) override;
+
 	virtual inline void replace_links_(const Thing::Ptr index) override;
 
 	virtual inline const Ptr pub_() const override
@@ -846,6 +871,18 @@ public:
 	static inline const Ptr str(const Ptr it)
 	{
 		return str_(it->next_());
+	}
+
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Index>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
 	}
 
 	template <typename F>
@@ -1187,6 +1224,8 @@ public:
 
 	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const override;
 
+	virtual inline void from_stream_with_links_(const Thing::Ptr stream) override;
+
 	virtual inline void replace_links_(const Thing::Ptr index) override;
 
 	virtual inline const Ptr pub_() const override
@@ -1242,6 +1281,18 @@ public:
 	static inline const Ptr str(const Ptr it)
 	{
 		return str_(it->next_());
+	}
+
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Flock>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
 	}
 
 	inline void push_back_(const Ptr item)
@@ -1435,6 +1486,8 @@ public:
 
 	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const override;
 
+	virtual inline void from_stream_with_links_(const Thing::Ptr stream) override;
+
 	virtual inline void replace_links_(const Thing::Ptr index) override;
 
 	virtual inline const Ptr pub_() const override
@@ -1492,6 +1545,18 @@ public:
 	static inline const Ptr str(const Ptr it)
 	{
 		return str_(it->next_());
+	}
+
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Herd>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
 	}
 
 	template <typename F>
@@ -1711,6 +1776,18 @@ public:
 		return str_(it->next_());
 	}
 
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Buffer>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
+	}
+
 	inline Buffer(const S& data)
 		: Mutable{}
 		, Serializable{}
@@ -1841,6 +1918,11 @@ inline const Thing::Ptr Symbol::buf_(const Thing::Ptr buffer)
 inline const Thing::Ptr Symbol::str_(const Thing::Ptr stream)
 {
 	return fin_(static_<Buffer>(Buffer::str_(stream))->get_());
+}
+
+inline const Thing::Ptr Symbol::swl_(const Thing::Ptr stream)
+{
+	return fin_(static_<Buffer>(Buffer::swl_(stream))->get_());
 }
 
 inline const Thing::Ptr Symbol::to_buffer_() const
@@ -2025,6 +2107,18 @@ public:
 		return str_(it->next_());
 	}
 
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Bit>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
+	}
+
 	inline Bit(const D& data)
 		: Number{}
 		, Data{ data }
@@ -2171,6 +2265,18 @@ public:
 		return str_(it->next_());
 	}
 
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Byte>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
+	}
+
 	inline Byte(const D& data)
 		: Number{}
 		, Data{ data }
@@ -2313,6 +2419,18 @@ public:
 	static inline const Ptr str(const Ptr it)
 	{
 		return str_(it->next_());
+	}
+
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Int16>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
 	}
 
 	inline Int16(const D& data)
@@ -2463,6 +2581,18 @@ public:
 	static inline const Ptr str(const Ptr it)
 	{
 		return str_(it->next_());
+	}
+
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Int32>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
 	}
 
 	inline Int32(const D& data)
@@ -2617,6 +2747,18 @@ public:
 	static inline const Ptr str(const Ptr it)
 	{
 		return str_(it->next_());
+	}
+
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Int64>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
 	}
 
 	inline Int64(const D& data)
@@ -2781,6 +2923,18 @@ public:
 		return str_(it->next_());
 	}
 
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Float32>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
+	}
+
 	inline Float32(const D& data)
 		: Number{}
 		, Data{ data }
@@ -2934,6 +3088,18 @@ public:
 	static inline const Ptr str(const Ptr it)
 	{
 		return str_(it->next_());
+	}
+
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Float64>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
 	}
 
 	inline Float64(const D& data)
@@ -3099,6 +3265,18 @@ public:
 	static inline const Ptr str(const Ptr it)
 	{
 		return str_(it->next_());
+	}
+
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Complex32>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
 	}
 
 	inline Complex32(const D& data)
@@ -3293,6 +3471,18 @@ public:
 	static inline const Ptr str(const Ptr it)
 	{
 		return str_(it->next_());
+	}
+
+	static inline const Ptr swl_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Complex64>(ptr)->from_stream_with_links_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr swl(const Ptr it)
+	{
+		return swl_(it->next_());
 	}
 
 	inline Complex64(const D& data)
@@ -3662,6 +3852,19 @@ public:
 		return pop_front_();
 	}
 
+	inline const Ptr pop_front_with_links_()
+	{
+		const int16_t int16 = read_<Int16>();
+		const std::string function = static_<Buffer>(read_(int16))->get_() + "::swl";
+		const Ptr fun = static_<Index>(factory_())->find_(function);
+		if (fun->is_("0"))
+		{
+			log_("Stream::pop_front_with_links_ read unknown type");
+			return fun;
+		}
+		return fun->call_(me_());
+	}
+
 	inline const Ptr read_(const int64_t length)
 	{
 		std::string str;
@@ -3772,6 +3975,27 @@ inline void Index::to_stream_with_links_(const Thing::Ptr index, const Thing::Pt
 	}
 }
 
+inline void Index::from_stream_with_links_(const Thing::Ptr stream)
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Index::from_stream_with_links_ called with wrong type of thing");
+		return;
+	}
+	const bool bit = strm->read_<Bit>();
+	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
+	{
+		const Ptr first = Symbol::str_(stream);
+		const Ptr second = Symbol::str_(stream);
+		_map[first] = second;
+	}
+	if (bit)
+	{
+		finalize_();
+	}
+}
+
 inline void Index::replace_links_(const Thing::Ptr index)
 {
 	std_unordered_map_ptr_ptr replacement;
@@ -3812,7 +4036,7 @@ inline const Thing::Ptr Index::gather_from_stream_(const Thing::Ptr stream)
 	}
 	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
 	{
-		const Ptr thing = strm->pop_front_();
+		const Ptr thing = strm->pop_front_with_links_();
 		const Ptr symbol = Symbol::str_(stream);
 		_map.emplace(symbol, thing);
 	}
@@ -3882,6 +4106,27 @@ inline void Flock::to_stream_with_links_(const Thing::Ptr index, const Thing::Pt
 	}
 }
 
+inline void Flock::from_stream_with_links_(const Thing::Ptr stream)
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Flock::from_stream_with_links_ called with wrong type of thing");
+		return;
+	}
+	const bool bit = strm->read_<Bit>();
+	const int64_t int64 = strm->read_<Int64>();
+	_vector.reserve(size_t(int64));
+	for (int64_t i = int64; i > 0; --i)
+	{
+		_vector.push_back(Symbol::str_(stream));
+	}
+	if (bit)
+	{
+		finalize_();
+	}
+}
+
 inline void Flock::replace_links_(const Thing::Ptr index)
 {
 	Index* const ind = static_<Index>(index);
@@ -3945,6 +4190,25 @@ inline void Herd::to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr
 	for (const auto i : _set)
 	{
 		static_<Symbol>(ind->find_(i))->to_stream_(stream);
+	}
+}
+
+inline void Herd::from_stream_with_links_(const Thing::Ptr stream)
+{
+	Stream* const strm = dynamic_<Stream>(stream);
+	if (!strm)
+	{
+		log_("Herd::from_stream_with_links_ called with wrong type of thing");
+		return;
+	}
+	const bool bit = strm->read_<Bit>();
+	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
+	{
+		_set.insert(Symbol::str_(stream));
+	}
+	if (bit)
+	{
+		finalize_();
 	}
 }
 
@@ -4199,35 +4463,49 @@ inline const Thing::Ptr Thing::factory_()
 		Index* const index = static_<Index>(factory);
 		index->update_("strange::Symbol::buf", Static::fin_(&Symbol::buf));
 		index->update_("strange::Symbol::str", Static::fin_(&Symbol::str));
+		index->update_("strange::Symbol::swl", Static::fin_(&Symbol::swl));
 		index->update_("strange::Index::mut", Static::fin_(&Index::mut));
 		index->update_("strange::Index::buf", Static::fin_(&Index::buf));
 		index->update_("strange::Index::str", Static::fin_(&Index::str));
+		index->update_("strange::Index::swl", Static::fin_(&Index::swl));
 		index->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
 		index->update_("strange::Flock::buf", Static::fin_(&Flock::buf));
 		index->update_("strange::Flock::str", Static::fin_(&Flock::str));
+		index->update_("strange::Flock::swl", Static::fin_(&Flock::swl));
 		index->update_("strange::Herd::mut", Static::fin_(&Herd::mut));
 		index->update_("strange::Herd::buf", Static::fin_(&Herd::buf));
 		index->update_("strange::Herd::str", Static::fin_(&Herd::str));
+		index->update_("strange::Herd::swl", Static::fin_(&Herd::swl));
 		index->update_("strange::Buffer::buf", Static::fin_(&Buffer::buf));
 		index->update_("strange::Buffer::str", Static::fin_(&Buffer::str));
+		index->update_("strange::Buffer::swl", Static::fin_(&Buffer::swl));
 		index->update_("strange::Bit::buf", Static::fin_(&Bit::buf));
 		index->update_("strange::Bit::str", Static::fin_(&Bit::str));
+		index->update_("strange::Bit::swl", Static::fin_(&Bit::swl));
 		index->update_("strange::Byte::buf", Static::fin_(&Byte::buf));
 		index->update_("strange::Byte::str", Static::fin_(&Byte::str));
+		index->update_("strange::Byte::swl", Static::fin_(&Byte::swl));
 		index->update_("strange::Int16::buf", Static::fin_(&Int16::buf));
 		index->update_("strange::Int16::str", Static::fin_(&Int16::str));
+		index->update_("strange::Int16::swl", Static::fin_(&Int16::swl));
 		index->update_("strange::Int32::buf", Static::fin_(&Int32::buf));
 		index->update_("strange::Int32::str", Static::fin_(&Int32::str));
+		index->update_("strange::Int32::swl", Static::fin_(&Int32::swl));
 		index->update_("strange::Int64::buf", Static::fin_(&Int64::buf));
 		index->update_("strange::Int64::str", Static::fin_(&Int64::str));
+		index->update_("strange::Int64::swl", Static::fin_(&Int64::swl));
 		index->update_("strange::Float32::buf", Static::fin_(&Float32::buf));
 		index->update_("strange::Float32::str", Static::fin_(&Float32::str));
+		index->update_("strange::Float32::swl", Static::fin_(&Float32::swl));
 		index->update_("strange::Float64::buf", Static::fin_(&Float64::buf));
 		index->update_("strange::Float64::str", Static::fin_(&Float64::str));
+		index->update_("strange::Float64::swl", Static::fin_(&Float64::swl));
 		index->update_("strange::Complex32::buf", Static::fin_(&Complex32::buf));
 		index->update_("strange::Complex32::str", Static::fin_(&Complex32::str));
+		index->update_("strange::Complex32::swl", Static::fin_(&Complex32::swl));
 		index->update_("strange::Complex64::buf", Static::fin_(&Complex64::buf));
 		index->update_("strange::Complex64::str", Static::fin_(&Complex64::str));
+		index->update_("strange::Complex64::swl", Static::fin_(&Complex64::swl));
 		index->finalize_();
 		return factory;
 	}();
