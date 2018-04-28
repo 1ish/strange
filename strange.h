@@ -3864,6 +3864,36 @@ public:
 		return Thing::same_(other);
 	}
 
+	virtual inline const Ptr visit(const Ptr it) override
+	{
+		const Ptr over = static_<Index>(_pub)->find_("visit");
+		if (!over->is_("0"))
+		{
+			return thing_(this, over, it);
+		}
+		return Thing::visit(it);
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		const Ptr over = static_<Index>(_pub)->find_("cats");
+		if (!over->is_("0"))
+		{
+			return thing_(const_cast<Class*>(this), over);
+		}
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Class");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
 protected:
 	// protected impure virtual member functions and adapters
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
