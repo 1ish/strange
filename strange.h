@@ -330,6 +330,17 @@ public:
 template <typename T>
 class Me
 {
+public:
+	inline const Thing::Ptr me_() const
+	{
+		const Thing::Ptr ptr = _me.lock();
+		if (ptr)
+		{
+			return ptr;
+		}
+		return Thing::nothing_();
+	}
+
 protected:
 	Me() = default;
 
@@ -339,16 +350,6 @@ protected:
 		const Thing::Ptr result = std::make_shared<T>(std::forward<Args>(args)...);
 		Thing::static_<T>(result)->_me = result;
 		return result;
-	}
-
-	inline const Thing::Ptr me_() const
-	{
-		const Thing::Ptr ptr = _me.lock();
-		if (ptr)
-		{
-			return ptr;
-		}
-		return Thing::nothing_();
 	}
 
 private:
@@ -4675,28 +4676,33 @@ public:
 	{
 	}
 
-	static inline Ptr evaluate_(const Ptr ptr)
+	static inline Ptr eval_(const Ptr exp, const Ptr local)
 	{
-		Flock* const flock = dynamic_<Flock>(ptr);
+		Flock* const flock = dynamic_<Flock>(exp);
 		if (!flock)
 		{
-			return ptr;
+			return exp;
 		}
 		const int64_t size = flock->size_();
 		if (size == 0)
 		{
-			return nothing_();
+			return local;
 		}
 		if (size == 1)
 		{
 			return flock->at_(0);
 		}
-		const Ptr it = It::mut_(ptr);
+		const Ptr it = It::mut_(exp, local);
 		const Ptr thing = it->next_();
 		return thing->thing(it);
 	}
 
-	static inline Ptr evaluate(const Ptr it)
+	inline Ptr evaluate_(const Ptr local) const
+	{
+		return eval_(_exp, local);
+	}
+
+	inline Ptr evaluate(const Ptr it) const
 	{
 		return evaluate_(it->next_());
 	}
@@ -4707,9 +4713,10 @@ private:
 	class It : public Mutable
 	{
 	public:
-		inline It(const Ptr flock)
+		inline It(const Ptr flock, const Ptr local)
 			: Mutable{}
 			, _flock{ flock }
+			, _local{ local }
 			, _pos{ 0 }
 		{
 		}
@@ -4720,19 +4727,19 @@ private:
 			{
 				return end_();
 			}
-			return evaluate_(static_<Flock>(_flock)->at_(_pos++));
+			return eval_(static_<Flock>(_flock)->at_(_pos++), _local);
 		}
 
 		virtual inline const Ptr copy_() const override
 		{
-			const Ptr result = mut_(_flock);
+			const Ptr result = mut_(_flock, _local);
 			static_<It>(result)->_pos = _pos;
 			return result;
 		}
 
-		static inline const Ptr mut_(const Ptr flock)
+		static inline const Ptr mut_(const Ptr flock, const Ptr local)
 		{
-			return std::make_shared<It>(flock);
+			return std::make_shared<It>(flock, local);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -4758,8 +4765,52 @@ private:
 
 	private:
 		const Ptr _flock;
+		const Ptr _local;
 		int64_t _pos;
 	};
+};
+
+class Function : public Thing, public Me<Function>
+{
+public:
+	Function(const Ptr expression)
+		: Thing{}
+		, Me{}
+		, _expression{ expression }
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr expression)
+	{
+		return make_(expression);
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return me_();
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Function");
+		return TYPE;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
+	{
+		const Ptr local = Index::mut_();
+		Me<Class>* const me = dynamic_cast<Me<Class>*>(thing);
+		if (me)
+		{
+			static_<Index>(local)->insert_("me", me->me_());
+		}
+		static_<Index>(local)->insert_("it", it);
+		return static_<Expression>(_expression)->evaluate_(local);
+	}
+
+private:
+	const Ptr _expression;
 };
 
 } // namespace strange
