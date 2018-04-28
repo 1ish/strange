@@ -4728,7 +4728,7 @@ private:
 			for (int64_t i = 0; i < size; ++i)
 			{
 				const Ptr result = eval_(at_(i), local);
-				if (result->is_("break"))
+				if (result->is_("break") || result->is_("continue"))
 				{
 					return result;
 				}
@@ -4748,7 +4748,7 @@ private:
 				if (!eval_(at_(0), local)->is_("0"))
 				{
 					const Ptr result = eval_(at_(1), local);
-					if (result->is_("break"))
+					if (result->is_("break") || result->is_("continue"))
 					{
 						return result;
 					}
@@ -4759,7 +4759,7 @@ private:
 				if (!eval_(at_(0), local)->is_("0"))
 				{
 					const Ptr result = eval_(at_(1), local);
-					if (result->is_("break"))
+					if (result->is_("break") || result->is_("continue"))
 					{
 						return result;
 					}
@@ -4767,7 +4767,7 @@ private:
 				else
 				{
 					const Ptr result = eval_(at_(2), local);
-					if (result->is_("break"))
+					if (result->is_("break") || result->is_("continue"))
 					{
 						return result;
 					}
@@ -4814,6 +4814,10 @@ private:
 						{
 							return nothing_();
 						}
+						else if (result->is_("continue"))
+						{
+							break;
+						}
 					}
 				}
 			}
@@ -4838,6 +4842,10 @@ private:
 						{
 							return nothing_();
 						}
+						else if (result->is_("continue"))
+						{
+							break;
+						}
 					}
 				} while (!eval_(at_(size - 1), local)->is_("0"));
 			}
@@ -4861,6 +4869,10 @@ private:
 						if (result->is_("break"))
 						{
 							return nothing_();
+						}
+						else if (result->is_("continue"))
+						{
+							break;
 						}
 					}
 				}
