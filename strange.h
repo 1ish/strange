@@ -3768,13 +3768,13 @@ public:
 	inline Class()
 		: Mutable{}
 		, Me{}
-		, _pub{ Index::mut_() }
+		, _override{ Index::mut_() }
 	{
 	}
 
 	virtual inline const Ptr type_() const override
 	{
-		const Ptr over = static_<Index>(_pub)->find_("type");
+		const Ptr over = static_<Index>(_override)->find_("type");
 		if (!over->is_("0"))
 		{
 			return thing_(const_cast<Class*>(this), over);
@@ -3785,7 +3785,7 @@ public:
 
 	virtual inline const Ptr copy_() const override
 	{
-		const Ptr over = static_<Index>(_pub)->find_("copy");
+		const Ptr over = static_<Index>(_override)->find_("copy");
 		if (!over->is_("0"))
 		{
 			return thing_(const_cast<Class*>(this), over);
@@ -3795,7 +3795,7 @@ public:
 
 	virtual inline const Ptr clone_() const override
 	{
-		const Ptr over = static_<Index>(_pub)->find_("clone");
+		const Ptr over = static_<Index>(_override)->find_("clone");
 		if (!over->is_("0"))
 		{
 			return thing_(const_cast<Class*>(this), over);
@@ -3805,7 +3805,7 @@ public:
 
 	virtual inline void finalize_() override
 	{
-		const Ptr over = static_<Index>(_pub)->find_("finalize");
+		const Ptr over = static_<Index>(_override)->find_("finalize");
 		if (!over->is_("0"))
 		{
 			thing_(this, over);
@@ -3815,7 +3815,7 @@ public:
 
 	virtual inline const bool finalized_() const override
 	{
-		const Ptr over = static_<Index>(_pub)->find_("finalized");
+		const Ptr over = static_<Index>(_override)->find_("finalized");
 		if (!over->is_("0"))
 		{
 			return !thing_(const_cast<Class*>(this), over)->is_("0");
@@ -3825,7 +3825,7 @@ public:
 
 	virtual inline void freeze_() override
 	{
-		const Ptr over = static_<Index>(_pub)->find_("freeze");
+		const Ptr over = static_<Index>(_override)->find_("freeze");
 		if (!over->is_("0"))
 		{
 			thing_(this, over);
@@ -3835,7 +3835,7 @@ public:
 
 	virtual inline const Ptr next_() override
 	{
-		const Ptr over = static_<Index>(_pub)->find_("next");
+		const Ptr over = static_<Index>(_override)->find_("next");
 		if (!over->is_("0"))
 		{
 			thing_(this, over);
@@ -3845,7 +3845,7 @@ public:
 
 	virtual inline size_t hash_() const override
 	{
-		const Ptr over = static_<Index>(_pub)->find_("hash");
+		const Ptr over = static_<Index>(_override)->find_("hash");
 		if (!over->is_("0"))
 		{
 			return size_t(static_<Int64>(thing_(const_cast<Class*>(this), over))->get_());
@@ -3855,7 +3855,7 @@ public:
 
 	virtual inline const bool same_(const Ptr other) const override
 	{
-		const Ptr over = static_<Index>(_pub)->find_("same");
+		const Ptr over = static_<Index>(_override)->find_("same");
 		if (!over->is_("0"))
 		{
 			std::vector<Ptr> vec(1, other);
@@ -3866,7 +3866,7 @@ public:
 
 	virtual inline const Ptr visit(const Ptr it) override
 	{
-		const Ptr over = static_<Index>(_pub)->find_("visit");
+		const Ptr over = static_<Index>(_override)->find_("visit");
 		if (!over->is_("0"))
 		{
 			return thing_(this, over, it);
@@ -3876,7 +3876,7 @@ public:
 
 	virtual inline const Ptr cats_() const override
 	{
-		const Ptr over = static_<Index>(_pub)->find_("cats");
+		const Ptr over = static_<Index>(_override)->find_("cats");
 		if (!over->is_("0"))
 		{
 			return thing_(const_cast<Class*>(this), over);
@@ -3899,7 +3899,7 @@ protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
 		const Ptr name = it->next_();
-		const Ptr over = static_<Index>(_pub)->find_(name);
+		const Ptr over = static_<Index>(_override)->find_(name);
 		if (!over->is_("0"))
 		{
 			return thing_(thing, over, it);
@@ -3912,7 +3912,7 @@ protected:
 		return thing_(thing, member, it);
 	}
 
-	const Ptr _pub;
+	const Ptr _override;
 };
 
 } // namespace strange
