@@ -73,7 +73,7 @@ public:
 
 	static inline const Ptr boolean(const Ptr it)
 	{
-		return boolean_(it->call_("next"));
+		return boolean_(it->next_());
 	}
 
 	template <typename F>
@@ -86,7 +86,7 @@ public:
 
 	static inline const Ptr log(const Ptr it)
 	{
-		log_(it->call_("next"));
+		log_(it->next_());
 		return nothing_();
 	}
 
@@ -211,12 +211,12 @@ public:
 
 	inline const Ptr same(const Ptr it) const
 	{
-		return boolean_(same_(it->call_("next")));
+		return boolean_(same_(it->next_()));
 	}
 
 	virtual inline const Ptr visit(const Ptr it)
 	{
-		const Ptr visitor = it->call_("next");
+		const Ptr visitor = it->next_();
 		return visitor->thing(it);
 	}
 
@@ -256,7 +256,7 @@ public:
 
 	inline const Ptr is(const Ptr it) const
 	{
-		return boolean_(is_(it->call_("next")));
+		return boolean_(is_(it->next_()));
 	}
 
 protected:
@@ -311,7 +311,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_(std::vector<Ptr>& vec, Thing& thing, Args&&... args)
 	{
-		for (Ptr p = thing.call_("next"); !p->is_("end"); p = thing.call_("next_"))
+		for (Ptr p = thing.next_(); !p->is_("end"); p = thing.next_())
 		{
 			vec.push_back(p);
 		}
@@ -373,7 +373,7 @@ public:
 
 	inline const Thing::Ptr from_buffer(const Thing::Ptr it)
 	{
-		from_buffer_(it->call_("next"));
+		from_buffer_(it->next_());
 		return Thing::nothing_();
 	}
 
@@ -381,7 +381,7 @@ public:
 
 	inline const Thing::Ptr to_stream(const Thing::Ptr it) const
 	{
-		const Thing::Ptr stream = it->call_("next");
+		const Thing::Ptr stream = it->next_();
 		to_stream_(stream);
 		return stream;
 	}
@@ -390,7 +390,7 @@ public:
 
 	inline const Thing::Ptr from_stream(const Thing::Ptr it)
 	{
-		const Thing::Ptr stream = it->call_("next");
+		const Thing::Ptr stream = it->next_();
 		from_stream_(stream);
 		return stream;
 	}
@@ -406,8 +406,8 @@ public:
 
 	inline const Thing::Ptr to_stream_with_links(const Thing::Ptr it)
 	{
-		const Thing::Ptr index = it->call_("next");
-		const Thing::Ptr stream = it->call_("next");
+		const Thing::Ptr index = it->next_();
+		const Thing::Ptr stream = it->next_();
 		to_stream_with_links_(index, stream);
 		return stream;
 	}
@@ -416,8 +416,8 @@ public:
 
 	static inline const Thing::Ptr serialize(const Thing::Ptr it)
 	{
-		const Thing::Ptr thing = it->call_("next");
-		const Thing::Ptr stream = it->call_("next");
+		const Thing::Ptr thing = it->next_();
+		const Thing::Ptr stream = it->next_();
 		serialize_(thing, stream);
 		return stream;
 	}
@@ -428,7 +428,7 @@ public:
 
 	inline const Thing::Ptr replace_links(const Thing::Ptr it)
 	{
-		replace_links_(it->call_("next"));
+		replace_links_(it->next_());
 		return Thing::nothing_();
 	}
 
@@ -436,7 +436,7 @@ public:
 
 	static inline const Thing::Ptr deserialize(const Thing::Ptr it)
 	{
-		return deserialize_(it->call_("next"));
+		return deserialize_(it->next_());
 	}
 
 	// public non-virtual member functions and adapters
@@ -451,7 +451,7 @@ public:
 
 	inline const Thing::Ptr from_buffer_via_stream(const Thing::Ptr it)
 	{
-		from_buffer_via_stream_(it->call_("next"));
+		from_buffer_via_stream_(it->next_());
 		return Thing::nothing_();
 	}
 };
@@ -499,14 +499,14 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream);
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	virtual inline const Ptr to_buffer_() const override;
@@ -762,8 +762,8 @@ public:
 	{
 		for (const auto& i : _map)
 		{
-			i.first->call_("freeze");
-			i.second->call_("freeze");
+			i.first->freeze_();
+			i.second->freeze_();
 		}
 	}
 
@@ -829,7 +829,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -841,7 +841,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	template <typename F>
@@ -862,7 +862,7 @@ public:
 
 	inline const Ptr find(const Ptr it) const
 	{
-		return find_(it->call_("next"));
+		return find_(it->next_());
 	}
 
 	template <typename F>
@@ -878,8 +878,8 @@ public:
 
 	inline const Ptr update(const Ptr it)
 	{
-		const Ptr key = it->call_("next");
-		const Ptr value = it->call_("next");
+		const Ptr key = it->next_();
+		const Ptr value = it->next_();
 		update_(key, value);
 		return value;
 	}
@@ -897,8 +897,8 @@ public:
 
 	inline const Ptr insert(const Ptr it)
 	{
-		const Ptr key = it->call_("next");
-		const Ptr value = it->call_("next");
+		const Ptr key = it->next_();
+		const Ptr value = it->next_();
 		return boolean_(insert_(key, value));
 	}
 
@@ -921,9 +921,9 @@ public:
 		const Ptr result = Thing::visit(it);
 		if (!result->is_("0"))
 		{
-			const Ptr visitor = rest->call_("next");
-			const Ptr member = rest->call_("next");
-			rest->call_("next");
+			const Ptr visitor = rest->next_();
+			const Ptr member = rest->next_();
+			rest->next_();
 			for (const auto& visited : _map)
 			{
 				visited.first->call_("visit", visitor, member, visited.first, *(rest->copy_()));
@@ -941,7 +941,7 @@ public:
 
 	inline const Ptr itemize(const Ptr it)
 	{
-		return boolean_(itemize_(it->call_("next")));
+		return boolean_(itemize_(it->next_()));
 	}
 
 	inline void gather_(const Ptr item)
@@ -951,7 +951,7 @@ public:
 
 	inline const Ptr gather(const Ptr it)
 	{
-		gather_(it->call_("next"));
+		gather_(it->next_());
 		return nothing_();
 	}
 
@@ -1034,7 +1034,7 @@ inline const Thing::Ptr Thing::pub_() const
 
 inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr it)
 {
-	const Ptr member = static_<Index>(pub_())->find_(it->call_("next"));
+	const Ptr member = static_<Index>(pub_())->find_(it->next_());
 	if (member->is_("0"))
 	{
 		return member;
@@ -1063,7 +1063,7 @@ protected:
 
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
-		const Ptr name = it->call_("next");
+		const Ptr name = it->next_();
 		const Ptr member = static_<Index>(pub_())->find_(name);
 		if (member->is_("0"))
 		{
@@ -1163,7 +1163,7 @@ public:
 	{
 		for (const auto i : _vector)
 		{
-			i->call_("freeze");
+			i->freeze_();
 		}
 	}
 
@@ -1225,7 +1225,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -1237,7 +1237,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	inline void push_back_(const Ptr item)
@@ -1247,7 +1247,7 @@ public:
 
 	inline const Ptr push_back(const Ptr it)
 	{
-		const Ptr item = it->call_("next");
+		const Ptr item = it->next_();
 		push_back_(item);
 		return item;
 	}
@@ -1268,7 +1268,7 @@ public:
 
 	inline const Ptr at(const Ptr it) const
 	{
-		return at(it->call_("next"));
+		return at(it->next_());
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -1290,9 +1290,9 @@ public:
 		const Ptr result = Thing::visit(it);
 		if (!result->is_("0"))
 		{
-			const Ptr visitor = rest->call_("next");
-			const Ptr member = rest->call_("next");
-			rest->call_("next");
+			const Ptr visitor = rest->next_();
+			const Ptr member = rest->next_();
+			rest->next_();
 			for (const auto visited : _vector)
 			{
 				visited->call_("visit", visitor, member, visited, *(rest->copy_()));
@@ -1408,7 +1408,7 @@ public:
 	{
 		for (const auto i : _set)
 		{
-			i->call_("freeze");
+			i->freeze_();
 		}
 	}
 
@@ -1472,7 +1472,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -1484,7 +1484,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	template <typename F>
@@ -1505,7 +1505,7 @@ public:
 
 	inline const Ptr find(const Ptr it) const
 	{
-		return find_(it->call_("next"));
+		return find_(it->next_());
 	}
 
 	template <typename F>
@@ -1521,7 +1521,7 @@ public:
 
 	inline const Ptr insert(const Ptr it)
 	{
-		return boolean_(insert_(it->call_("next")));
+		return boolean_(insert_(it->next_()));
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -1557,9 +1557,9 @@ public:
 		const Ptr result = Thing::visit(it);
 		if (!result->is_("0"))
 		{
-			const Ptr visitor = rest->call_("next");
-			const Ptr member = rest->call_("next");
-			rest->call_("next");
+			const Ptr visitor = rest->next_();
+			const Ptr member = rest->next_();
+			rest->next_();
 			for (const auto visited : _set)
 			{
 				visited->call_("visit", visitor, member, visited, *(rest->copy_()));
@@ -1575,7 +1575,7 @@ public:
 
 	inline const Ptr gather(const Ptr it)
 	{
-		gather_(it->call_("next"));
+		gather_(it->next_());
 		return nothing_();
 	}
 
@@ -1689,7 +1689,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -1701,7 +1701,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	inline Buffer(const S& data)
@@ -1864,7 +1864,7 @@ public:
 
 	inline const Ptr from_int64(const Ptr it)
 	{
-		from_int64_(it->call_("next"));
+		from_int64_(it->next_());
 		return nothing_();
 	}
 
@@ -1884,7 +1884,7 @@ public:
 
 	inline const Ptr from_float64(const Ptr it)
 	{
-		from_float64_(it->call_("next"));
+		from_float64_(it->next_());
 		return nothing_();
 	}
 
@@ -1903,7 +1903,7 @@ public:
 
 	inline const Ptr from_imaginary64(const Ptr it)
 	{
-		from_imaginary64_(it->call_("next"));
+		from_imaginary64_(it->next_());
 		return nothing_();
 	}
 
@@ -1918,7 +1918,7 @@ public:
 
 	inline const Ptr from_symbol(const Ptr it)
 	{
-		from_symbol_(it->call_("next"));
+		from_symbol_(it->next_());
 		return nothing_();
 	}
 };
@@ -1935,7 +1935,7 @@ public:
 
 	static inline const Ptr mut(const Ptr it)
 	{
-		return mut_(!it->call_("next")->is_("0"));
+		return mut_(!it->next_()->is_("0"));
 	}
 
 	static inline const Ptr fin_(const D& data = D())
@@ -1961,7 +1961,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -1973,7 +1973,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	inline Bit(const D& data)
@@ -2106,7 +2106,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -2118,7 +2118,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	inline Byte(const D& data)
@@ -2249,7 +2249,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -2261,7 +2261,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	inline Int16(const D& data)
@@ -2398,7 +2398,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -2410,7 +2410,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	inline Int32(const D& data)
@@ -2551,7 +2551,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -2563,7 +2563,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	inline Int64(const D& data)
@@ -2712,7 +2712,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -2724,7 +2724,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	inline Float32(const D& data)
@@ -2866,7 +2866,7 @@ public:
 
 	static inline const Ptr buf(const Ptr it)
 	{
-		return buf_(it->call_("next"));
+		return buf_(it->next_());
 	}
 
 	static inline const Ptr str_(const Ptr stream)
@@ -2878,7 +2878,7 @@ public:
 
 	static inline const Ptr str(const Ptr it)
 	{
-		return str_(it->call_("next"));
+		return str_(it->next_());
 	}
 
 	inline Float64(const D& data)
@@ -3148,7 +3148,7 @@ public:
 
 	inline const Ptr push_back(const Ptr it)
 	{
-		push_back_(it->call_("next"));
+		push_back_(it->next_());
 		return nothing_();
 	}
 
@@ -3177,7 +3177,7 @@ public:
 
 	inline const Ptr write(const Ptr it)
 	{
-		write_(it->call_("next"));
+		write_(it->next_());
 	}
 
 	inline const Ptr pop_front_()
@@ -3538,7 +3538,7 @@ public:
 
 	static inline const Ptr mut(const Ptr it)
 	{
-		return mut_(it->call_("next"));
+		return mut_(it->next_());
 	}
 
 	static inline const Ptr mut_(const Ptr ptr)
@@ -3579,7 +3579,7 @@ public:
 
 	inline const Ptr give(const Ptr it)
 	{
-		return boolean_(give_(it->call_("next")));
+		return boolean_(give_(it->next_()));
 	}
 
 	inline const Ptr take_()
@@ -3827,11 +3827,31 @@ public:
 		return Mutable::finalized_();
 	}
 
+	virtual inline void freeze_() override
+	{
+		const Ptr over = static_<Index>(_pub)->find_("freeze");
+		if (!over->is_("0"))
+		{
+			thing_(this, over);
+		}
+		finalize_();
+	}
+
+	virtual inline const Ptr next_() override
+	{
+		const Ptr over = static_<Index>(_pub)->find_("next");
+		if (!over->is_("0"))
+		{
+			thing_(this, over);
+		}
+		return end_();
+	}
+
 protected:
 	// protected impure virtual member functions and adapters
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
-		const Ptr name = it->call_("next");
+		const Ptr name = it->next_();
 		const Ptr over = static_<Index>(_pub)->find_(name);
 		if (!over->is_("0"))
 		{
