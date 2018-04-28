@@ -148,7 +148,7 @@ public:
 	// public impure virtual member functions and adapters
 	virtual inline const Ptr clone_() const
 	{
-		return const_cast<Thing*>(this)->call_("copy");
+		return copy_();
 	}
 
 	inline const Ptr clone(const Ptr ignore) const
@@ -178,7 +178,7 @@ public:
 
 	virtual inline void freeze_()
 	{
-		call_("finalize");
+		finalize_();
 	}
 
 	inline const Ptr freeze(const Ptr ignore)
@@ -634,7 +634,7 @@ protected:
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
 		{
-			if (!t->call_("finalized")->is_("0"))
+			if (t->finalized_())
 			{
 				log_("ERROR: Member passed finalized thing\n");
 				return nothing_();
@@ -753,7 +753,7 @@ public:
 		std_unordered_map_ptr_ptr& clone = static_<Index>(result)->_map;
 		for (const auto& i : _map)
 		{
-			clone[i.first->call_("clone")] = i.second->call_("clone");
+			clone[i.first->clone_()] = i.second->clone_();
 		}
 		return result;
 	}
@@ -917,7 +917,7 @@ public:
 
 	virtual inline const Ptr visit(const Ptr it) override
 	{
-		const Ptr rest = it->call_("copy");
+		const Ptr rest = it->copy_();
 		const Ptr result = Thing::visit(it);
 		if (!result->is_("0"))
 		{
@@ -926,8 +926,8 @@ public:
 			rest->call_("next");
 			for (const auto& visited : _map)
 			{
-				visited.first->call_("visit", visitor, member, visited.first, *(rest->call_("copy")));
-				visited.second->call_("visit", visitor, member, visited.second, *(rest->call_("copy")));
+				visited.first->call_("visit", visitor, member, visited.first, *(rest->copy_()));
+				visited.second->call_("visit", visitor, member, visited.second, *(rest->copy_()));
 			}
 		}
 		return result;
@@ -1154,7 +1154,7 @@ public:
 		clone.reserve(_vector.size());
 		for (const auto i : _vector)
 		{
-			clone.push_back(i->call_("clone"));
+			clone.push_back(i->clone_());
 		}
 		return result;
 	}
@@ -1286,7 +1286,7 @@ public:
 
 	virtual inline const Ptr visit(const Ptr it) override
 	{
-		const Ptr rest = it->call_("copy");
+		const Ptr rest = it->copy_();
 		const Ptr result = Thing::visit(it);
 		if (!result->is_("0"))
 		{
@@ -1295,7 +1295,7 @@ public:
 			rest->call_("next");
 			for (const auto visited : _vector)
 			{
-				visited->call_("visit", visitor, member, visited, *(rest->call_("copy")));
+				visited->call_("visit", visitor, member, visited, *(rest->copy_()));
 			}
 		}
 		return result;
@@ -1399,7 +1399,7 @@ public:
 		std_unordered_set_ptr& clone = static_<Herd>(result)->_set;
 		for (const auto i : _set)
 		{
-			clone.insert(i->call_("clone"));
+			clone.insert(i->clone_());
 		}
 		return result;
 	}
@@ -1553,7 +1553,7 @@ public:
 
 	virtual inline const Ptr visit(const Ptr it) override
 	{
-		const Ptr rest = it->call_("copy");
+		const Ptr rest = it->copy_();
 		const Ptr result = Thing::visit(it);
 		if (!result->is_("0"))
 		{
@@ -1562,7 +1562,7 @@ public:
 			rest->call_("next");
 			for (const auto visited : _set)
 			{
-				visited->call_("visit", visitor, member, visited, *(rest->call_("copy")));
+				visited->call_("visit", visitor, member, visited, *(rest->copy_()));
 			}
 		}
 		return result;
@@ -3785,6 +3785,46 @@ public:
 		}
 		static const Ptr TYPE = sym_("strange::Class");
 		return TYPE;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		const Ptr over = static_<Index>(_pub)->find_("copy");
+		if (!over->is_("0"))
+		{
+			return thing_(const_cast<Class*>(this), over);
+		}
+		return me_();
+	}
+
+	virtual inline const Ptr clone_() const override
+	{
+		const Ptr over = static_<Index>(_pub)->find_("clone");
+		if (!over->is_("0"))
+		{
+			return thing_(const_cast<Class*>(this), over);
+		}
+		return copy_();
+	}
+
+	virtual inline void finalize_() override
+	{
+		const Ptr over = static_<Index>(_pub)->find_("finalize");
+		if (!over->is_("0"))
+		{
+			thing_(this, over);
+		}
+		Mutable::finalize_();
+	}
+
+	virtual inline const bool finalized_() const override
+	{
+		const Ptr over = static_<Index>(_pub)->find_("finalized");
+		if (!over->is_("0"))
+		{
+			return !thing_(const_cast<Class*>(this), over)->is_("0");
+		}
+		return Mutable::finalized_();
 	}
 
 protected:
