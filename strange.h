@@ -723,7 +723,10 @@ class Index : public Mutable, public Me<Index>, public Serializable, public Iter
 	class Hash
 	{
 	public:
-		inline size_t operator()(const Ptr ptr) const;
+		inline size_t operator()(const Ptr ptr) const
+		{
+			return ptr->hash_();
+		}
 	};
 
 	class Pred
@@ -731,7 +734,7 @@ class Index : public Mutable, public Me<Index>, public Serializable, public Iter
 	public:
 		inline const bool operator()(const Ptr lhs, const Ptr rhs) const
 		{
-			return !lhs->call_("same", rhs)->is_("0");
+			return lhs->same_(rhs);
 		}
 	};
 
@@ -1369,7 +1372,10 @@ class Herd : public Mutable, public Me<Herd>, public Serializable, public Iterab
 	class Hash
 	{
 	public:
-		inline size_t operator()(const Ptr ptr) const;
+		inline size_t operator()(const Ptr ptr) const
+		{
+			return ptr->hash_();
+		}
 	};
 
 	class Pred
@@ -1377,7 +1383,7 @@ class Herd : public Mutable, public Me<Herd>, public Serializable, public Iterab
 	public:
 		inline const bool operator()(const Ptr lhs, const Ptr rhs) const
 		{
-			return !lhs->call_("same", rhs)->is_("0");
+			return lhs->same_(rhs);
 		}
 	};
 
@@ -3007,11 +3013,6 @@ inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
 	return Int64::mut_(int64_t(hash_()));
 }
 
-inline size_t Index::Hash::operator()(const Ptr ptr) const
-{
-	return size_t(static_<Int64>(ptr->call_("hash"))->get_());
-}
-
 inline const Thing::Ptr Flock::size(const Thing::Ptr ignore) const
 {
 	return Int64::mut_(size_());
@@ -3025,11 +3026,6 @@ inline const Thing::Ptr Flock::at_(const Thing::Ptr index) const
 		return at_(number->to_int64_());
 	}
 	return nothing_();
-}
-
-inline size_t Herd::Hash::operator()(const Ptr ptr) const
-{
-	return size_t(static_<Int64>(ptr->call_("hash"))->get_());
 }
 
 inline const Thing::Ptr Number::to_int64(const Thing::Ptr ignore) const
@@ -3804,7 +3800,7 @@ public:
 		{
 			return thing_(const_cast<Class*>(this), over);
 		}
-		return copy_();
+		return Thing::clone_();
 	}
 
 	virtual inline void finalize_() override
@@ -3834,7 +3830,7 @@ public:
 		{
 			thing_(this, over);
 		}
-		finalize_();
+		Thing::freeze_();
 	}
 
 	virtual inline const Ptr next_() override
@@ -3844,7 +3840,28 @@ public:
 		{
 			thing_(this, over);
 		}
-		return end_();
+		return Thing::next_();
+	}
+
+	virtual inline size_t hash_() const override
+	{
+		const Ptr over = static_<Index>(_pub)->find_("hash");
+		if (!over->is_("0"))
+		{
+			return size_t(static_<Int64>(thing_(const_cast<Class*>(this), over))->get_());
+		}
+		return Thing::hash_();
+	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		const Ptr over = static_<Index>(_pub)->find_("same");
+		if (!over->is_("0"))
+		{
+			std::vector<Ptr> vec(1, other);
+			return !thing_(const_cast<Class*>(this), over, Iterator<std::vector<Ptr>>::mut_(vec))->is_("0");
+		}
+		return Thing::same_(other);
 	}
 
 protected:
