@@ -4683,18 +4683,7 @@ public:
 		{
 			return exp;
 		}
-		const int64_t size = statement->size_();
-		if (size == 0)
-		{
-			return local;
-		}
-		if (size == 1)
-		{
-			return statement->at_(0);
-		}
-		const Ptr it = It::mut_(exp, local);
-		const Ptr thing = it->next_();
-		return thing->thing(it);
+		return statement->exec_(exp, local);
 	}
 
 	inline Ptr evaluate_(const Ptr local) const
@@ -4712,6 +4701,172 @@ private:
 
 	class Statement : public Flock
 	{
+	public:
+		virtual inline const Ptr exec_(const Ptr exp, const Ptr local)
+		{
+			const int64_t size = size_();
+			if (size == 0)
+			{
+				return local;
+			}
+			if (size == 1)
+			{
+				return at_(0);
+			}
+			const Ptr it = Expression::It::mut_(exp, local);
+			const Ptr thing = it->next_();
+			return thing->thing(it);
+		}
+	};
+
+	class Block : public Statement
+	{
+	public:
+		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
+		{
+			const int64_t size = size_();
+			for (int64_t i = 0; i < size; ++i)
+			{
+				const Ptr result = eval_(at_(i), local);
+				if (result->is_("break"))
+				{
+					return result;
+				}
+			}
+			return nothing_();
+		}
+	};
+
+	class If : public Statement
+	{
+	public:
+		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
+		{
+			const int64_t size = size_();
+			if (size == 2)
+			{
+				if (!eval_(at_(0), local)->is_("0"))
+				{
+					const Ptr result = eval_(at_(1), local);
+					if (result->is_("break"))
+					{
+						return result;
+					}
+				}
+			}
+			else if (size == 3)
+			{
+				if (!eval_(at_(0), local)->is_("0"))
+				{
+					const Ptr result = eval_(at_(1), local);
+					if (result->is_("break"))
+					{
+						return result;
+					}
+				}
+				else
+				{
+					const Ptr result = eval_(at_(2), local);
+					if (result->is_("break"))
+					{
+						return result;
+					}
+				}
+			}
+			return nothing_();
+		}
+	};
+
+	class Question : public Statement
+	{
+	public:
+		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
+		{
+			if (size_() == 3)
+			{
+				if (!eval_(at_(0), local)->is_("0"))
+				{
+					return eval_(at_(1), local);
+				}
+				else
+				{
+					return eval_(at_(2), local);
+				}
+			}
+			return nothing_();
+		}
+	};
+
+	class While : public Statement
+	{
+	public:
+		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
+		{
+			const int64_t size = size_();
+			if (size >= 1)
+			{
+				while (!eval_(at_(0), local)->is_("0"))
+				{
+					for (int64_t i = 1; i < size; ++i)
+					{
+						const Ptr result = eval_(at_(i), local);
+						if (result->is_("break"))
+						{
+							return nothing_();
+						}
+					}
+				}
+			}
+			return nothing_();
+		}
+	};
+
+	class Do : public Statement
+	{
+	public:
+		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
+		{
+			const int64_t size = size_();
+			if (size >= 1)
+			{
+				do
+				{
+					for (int64_t i = 0; i < size - 1; ++i)
+					{
+						const Ptr result = eval_(at_(i), local);
+						if (result->is_("break"))
+						{
+							return nothing_();
+						}
+					}
+				} while (!eval_(at_(size - 1), local)->is_("0"));
+			}
+			return nothing_();
+		}
+	};
+
+	class For : public Statement
+	{
+	public:
+		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
+		{
+			const int64_t size = size_();
+			if (size >= 3)
+			{
+				for (eval_(at_(0), local); !eval_(at_(1), local)->is_("0"); eval_(at_(2), local))
+				{
+					for (int64_t i = 3; i < size; ++i)
+					{
+						const Ptr result = eval_(at_(i), local);
+						if (result->is_("break"))
+						{
+							return nothing_();
+						}
+					}
+				}
+			}
+			return nothing_();
+		}
 	};
 
 	class It : public Mutable
