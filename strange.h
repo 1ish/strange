@@ -1314,12 +1314,12 @@ public:
 
 	inline const Ptr size(const Ptr ignore) const;
 
-	inline const Ptr at_(const int64_t index) const
+	inline const Ptr at_(const int64_t pos) const
 	{
-		return _vector.at(size_t(index));
+		return _vector.at(size_t(pos));
 	}
 
-	inline const Ptr at_(const Ptr index) const;
+	inline const Ptr at_(const Ptr pos) const;
 
 	inline const Ptr at(const Ptr it) const
 	{
@@ -3662,9 +3662,9 @@ inline const Thing::Ptr Flock::size(const Thing::Ptr ignore) const
 	return Int64::mut_(size_());
 }
 
-inline const Thing::Ptr Flock::at_(const Thing::Ptr index) const
+inline const Thing::Ptr Flock::at_(const Thing::Ptr pos) const
 {
-	Number* const number = dynamic_<Number>(index);
+	Number* const number = dynamic_<Number>(pos);
 	if (number)
 	{
 		return at_(number->to_int64_());
@@ -4664,6 +4664,102 @@ protected:
 
 private:
 	const Ptr _override;
+};
+
+class Expression : public Mutable
+{
+public:
+	inline Expression()
+		: Mutable{}
+		, _exp{ Flock::mut_() }
+	{
+	}
+
+	static inline Ptr evaluate_(const Ptr ptr)
+	{
+		Flock* const flock = dynamic_<Flock>(ptr);
+		if (!flock)
+		{
+			return ptr;
+		}
+		const int64_t size = flock->size_();
+		if (size == 0)
+		{
+			return nothing_();
+		}
+		if (size == 1)
+		{
+			return flock->at_(0);
+		}
+		const Ptr it = It::mut_(ptr);
+		const Ptr thing = it->next_();
+		return thing->thing(it);
+	}
+
+	static inline Ptr evaluate(const Ptr it)
+	{
+		return evaluate_(it->next_());
+	}
+
+private:
+	const Ptr _exp;
+
+	class It : public Mutable
+	{
+	public:
+		inline It(const Ptr flock)
+			: Mutable{}
+			, _flock{ flock }
+			, _pos{ 0 }
+		{
+		}
+
+		virtual const Ptr next_() override
+		{
+			if (_pos >= static_<Flock>(_flock)->size_())
+			{
+				return end_();
+			}
+			return evaluate_(static_<Flock>(_flock)->at_(_pos++));
+		}
+
+		virtual inline const Ptr copy_() const override
+		{
+			const Ptr result = mut_(_flock);
+			static_<It>(result)->_pos = _pos;
+			return result;
+		}
+
+		static inline const Ptr mut_(const Ptr flock)
+		{
+			return std::make_shared<It>(flock);
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Expression::It");
+			return TYPE;
+		}
+
+		virtual inline const Ptr cats_() const override
+		{
+			static const Ptr CATS = []()
+			{
+				const Ptr cats = Herd::mut_();
+				Herd* const herd = static_<Herd>(cats);
+				herd->insert_("strange::Mutable");
+				herd->insert_("strange::Iterator");
+				herd->insert_("strange::Thing");
+				herd->finalize_();
+				return cats;
+			}();
+			return CATS;
+		}
+
+	private:
+		const Ptr _flock;
+		int64_t _pos;
+	};
 };
 
 } // namespace strange
