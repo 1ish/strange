@@ -4672,25 +4672,25 @@ class Expression : public Mutable
 public:
 	inline Expression()
 		: Mutable{}
-		, _exp{ Flock::mut_() }
+		, _exp{ Statement::mut_() }
 	{
 	}
 
 	static inline Ptr eval_(const Ptr exp, const Ptr local)
 	{
-		Flock* const flock = dynamic_<Flock>(exp);
-		if (!flock)
+		Statement* const statement = dynamic_<Statement>(exp);
+		if (!statement)
 		{
 			return exp;
 		}
-		const int64_t size = flock->size_();
+		const int64_t size = statement->size_();
 		if (size == 0)
 		{
 			return local;
 		}
 		if (size == 1)
 		{
-			return flock->at_(0);
+			return statement->at_(0);
 		}
 		const Ptr it = It::mut_(exp, local);
 		const Ptr thing = it->next_();
@@ -4710,12 +4710,16 @@ public:
 private:
 	const Ptr _exp;
 
+	class Statement : public Flock
+	{
+	};
+
 	class It : public Mutable
 	{
 	public:
-		inline It(const Ptr flock, const Ptr local)
+		inline It(const Ptr statement, const Ptr local)
 			: Mutable{}
-			, _flock{ flock }
+			, _statement{ statement }
 			, _local{ local }
 			, _pos{ 0 }
 		{
@@ -4723,23 +4727,23 @@ private:
 
 		virtual const Ptr next_() override
 		{
-			if (_pos >= static_<Flock>(_flock)->size_())
+			if (_pos >= static_<Statement>(_statement)->size_())
 			{
 				return end_();
 			}
-			return eval_(static_<Flock>(_flock)->at_(_pos++), _local);
+			return eval_(static_<Statement>(_statement)->at_(_pos++), _local);
 		}
 
 		virtual inline const Ptr copy_() const override
 		{
-			const Ptr result = mut_(_flock, _local);
+			const Ptr result = mut_(_statement, _local);
 			static_<It>(result)->_pos = _pos;
 			return result;
 		}
 
-		static inline const Ptr mut_(const Ptr flock, const Ptr local)
+		static inline const Ptr mut_(const Ptr statement, const Ptr local)
 		{
-			return std::make_shared<It>(flock, local);
+			return std::make_shared<It>(statement, local);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -4764,7 +4768,7 @@ private:
 		}
 
 	private:
-		const Ptr _flock;
+		const Ptr _statement;
 		const Ptr _local;
 		int64_t _pos;
 	};
