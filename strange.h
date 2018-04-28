@@ -1913,6 +1913,26 @@ public:
 		return nothing_();
 	}
 
+	virtual inline std::pair<double, double> to_complex64_() const
+	{
+		return std::make_pair(to_float64_(), 0.0);
+	}
+
+	inline const Ptr to_complex64(const Ptr ignore) const;
+
+	virtual inline void from_complex64_(const std::pair<double, double>& complex64)
+	{
+		from_float64_(complex64.first);
+	}
+
+	inline void from_complex64_(const Ptr ptr);
+
+	inline const Ptr from_complex64(const Ptr it)
+	{
+		from_complex64_(it->next_());
+		return nothing_();
+	}
+
 	virtual inline const Ptr to_symbol_() const = 0;
 
 	inline const Ptr to_symbol(const Ptr ignore) const
@@ -1926,6 +1946,28 @@ public:
 	{
 		from_symbol_(it->next_());
 		return nothing_();
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_<Index>(pub);
+			index->update_("to_int64", Const<Number>::fin_(&Number::to_int64));
+			index->update_("from_int64", Member<Number>::fin_(&Number::from_int64));
+			index->update_("to_float64", Const<Number>::fin_(&Number::to_float64));
+			index->update_("from_float64", Member<Number>::fin_(&Number::from_float64));
+			index->update_("to_imaginary64", Const<Number>::fin_(&Number::to_imaginary64));
+			index->update_("from_imaginary64", Member<Number>::fin_(&Number::from_imaginary64));
+			index->update_("to_complex64", Const<Number>::fin_(&Number::to_complex64));
+			index->update_("from_complex64", Member<Number>::fin_(&Number::from_complex64));
+			index->update_("to_symbol", Const<Number>::fin_(&Number::to_symbol));
+			index->update_("from_symbol", Member<Number>::fin_(&Number::from_symbol));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
 	}
 };
 
@@ -1997,7 +2039,7 @@ public:
 	{
 		static const Ptr PUB = [this]()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
+			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Bit>::fin_(&Bit::to_buffer));
 			index->update_("from_buffer", Member<Bit>::fin_(&Bit::from_buffer));
@@ -2053,6 +2095,7 @@ public:
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Bit");
+			herd->insert_("strange::Number");
 			herd->insert_("strange::Data");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -2142,7 +2185,7 @@ public:
 	{
 		static const Ptr PUB = [this]()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
+			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Byte>::fin_(&Byte::to_buffer));
 			index->update_("from_buffer", Member<Byte>::fin_(&Byte::from_buffer));
@@ -2196,6 +2239,7 @@ public:
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Byte");
+			herd->insert_("strange::Number");
 			herd->insert_("strange::Data");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -2285,7 +2329,7 @@ public:
 	{
 		static const Ptr PUB = [this]()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
+			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Int16>::fin_(&Int16::to_buffer));
 			index->update_("from_buffer", Member<Int16>::fin_(&Int16::from_buffer));
@@ -2345,6 +2389,7 @@ public:
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Int16");
+			herd->insert_("strange::Number");
 			herd->insert_("strange::Data");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -2434,7 +2479,7 @@ public:
 	{
 		static const Ptr PUB = [this]()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
+			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Int32>::fin_(&Int32::to_buffer));
 			index->update_("from_buffer", Member<Int32>::fin_(&Int32::from_buffer));
@@ -2498,6 +2543,7 @@ public:
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Int32");
+			herd->insert_("strange::Number");
 			herd->insert_("strange::Data");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -2587,7 +2633,7 @@ public:
 	{
 		static const Ptr PUB = [this]()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
+			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Int64>::fin_(&Int64::to_buffer));
 			index->update_("from_buffer", Member<Int64>::fin_(&Int64::from_buffer));
@@ -2659,6 +2705,7 @@ public:
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Int64");
+			herd->insert_("strange::Number");
 			herd->insert_("strange::Data");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -2748,7 +2795,7 @@ public:
 	{
 		static const Ptr PUB = [this]()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
+			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Float32>::fin_(&Float32::to_buffer));
 			index->update_("from_buffer", Member<Float32>::fin_(&Float32::from_buffer));
@@ -2765,7 +2812,7 @@ public:
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(4, 0);
-		uint32_t i = *reinterpret_cast<const uint32_t*>(&(get_()));
+		const uint32_t i = *reinterpret_cast<const uint32_t*>(&(get_()));
 		str[0] = i & 0xFF;
 		str[1] = (i >> 8) & 0xFF;
 		str[2] = (i >> 16) & 0xFF;
@@ -2813,6 +2860,7 @@ public:
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Float32");
+			herd->insert_("strange::Number");
 			herd->insert_("strange::Data");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -2902,7 +2950,7 @@ public:
 	{
 		static const Ptr PUB = [this]()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
+			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Float64>::fin_(&Float64::to_buffer));
 			index->update_("from_buffer", Member<Float64>::fin_(&Float64::from_buffer));
@@ -2919,7 +2967,7 @@ public:
 	virtual inline const Ptr to_buffer_() const override
 	{
 		std::string str(8, 0);
-		uint64_t i = *reinterpret_cast<const uint64_t*>(&(get_()));
+		const uint64_t i = *reinterpret_cast<const uint64_t*>(&(get_()));
 		str[0] = i & 0xFF;
 		str[1] = (i >> 8) & 0xFF;
 		str[2] = (i >> 16) & 0xFF;
@@ -2975,6 +3023,7 @@ public:
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Float64");
+			herd->insert_("strange::Number");
 			herd->insert_("strange::Data");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -3004,6 +3053,214 @@ public:
 		if (symbol)
 		{
 			set_(std::stod(symbol->symbol_()));
+		}
+	}
+};
+
+class Complex64 : public Number, public Data<std::pair<double, double>>
+{
+	static const char delim = '|';
+
+public:
+	using D = std::pair<double, double>;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return std::make_shared<Complex64>(data);
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr buf_(const Ptr buffer)
+	{
+		const Ptr ptr = mut_();
+		static_<Complex64>(ptr)->from_buffer_(buffer);
+		return ptr;
+	}
+
+	static inline const Ptr buf(const Ptr it)
+	{
+		return buf_(it->next_());
+	}
+
+	static inline const Ptr str_(const Ptr stream)
+	{
+		const Ptr ptr = mut_();
+		static_<Complex64>(ptr)->from_stream_(stream);
+		return ptr;
+	}
+
+	static inline const Ptr str(const Ptr it)
+	{
+		return str_(it->next_());
+	}
+
+	inline Complex64(const D& data)
+		: Number{}
+		, Data{ data }
+	{
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Number::pub_()->copy_();
+			Index* const index = static_<Index>(pub);
+			index->update_("to_buffer", Const<Complex64>::fin_(&Complex64::to_buffer));
+			index->update_("from_buffer", Member<Complex64>::fin_(&Complex64::from_buffer));
+			index->update_("to_stream", Const<Complex64>::fin_(&Complex64::to_stream));
+			index->update_("from_stream", Member<Complex64>::fin_(&Complex64::from_stream));
+			index->update_("buf", Static::fin_(&Complex64::buf));
+			index->update_("str", Static::fin_(&Complex64::str));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	virtual inline const Ptr to_buffer_() const override
+	{
+		std::string str(16, 0);
+		const uint64_t r = *reinterpret_cast<const uint64_t*>(&(get_().first));
+		str[0] = r & 0xFF;
+		str[1] = (r >> 8) & 0xFF;
+		str[2] = (r >> 16) & 0xFF;
+		str[3] = (r >> 24) & 0xFF;
+		str[4] = (r >> 32) & 0xFF;
+		str[5] = (r >> 40) & 0xFF;
+		str[6] = (r >> 48) & 0xFF;
+		str[7] = (r >> 56) & 0xFF;
+		const uint64_t i = *reinterpret_cast<const uint64_t*>(&(get_().second));
+		str[8] = i & 0xFF;
+		str[9] = (i >> 8) & 0xFF;
+		str[10] = (i >> 16) & 0xFF;
+		str[11] = (i >> 24) & 0xFF;
+		str[12] = (i >> 32) & 0xFF;
+		str[13] = (i >> 40) & 0xFF;
+		str[14] = (i >> 48) & 0xFF;
+		str[15] = (i >> 56) & 0xFF;
+		const Ptr buffer = Buffer::mut_(str);
+		if (finalized_())
+		{
+			buffer->finalize_();
+		}
+		return buffer;
+	}
+
+	virtual inline void from_buffer_(const Ptr buffer) override
+	{
+		Buffer* const buf = dynamic_<Buffer>(buffer);
+		if (!buf)
+		{
+			log_("Complex64::from_buffer_ called with wrong type of thing");
+			return;
+		}
+		const uint64_t r =
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[4]))) << 32 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[5]))) << 40 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[6]))) << 48 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[7]))) << 56;
+		const uint64_t i =
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[8]))) |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[9]))) << 8 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[10]))) << 16 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[11]))) << 24 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[12]))) << 32 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[13]))) << 40 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[14]))) << 48 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[15]))) << 56;
+		set_(std::make_pair(*reinterpret_cast<const double*>(&r), *reinterpret_cast<const double*>(&i)));
+		if (buf->finalized_())
+		{
+			finalize_();
+		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Complex64");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::Complex64");
+			herd->insert_("strange::Number");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+	virtual inline double to_float64_() const override
+	{
+		return get_().first;
+	}
+
+	virtual inline void from_float64_(const double float64) override
+	{
+		set_(std::make_pair(float64, get_().second));
+	}
+
+	virtual inline double to_imaginary64_() const override
+	{
+		return get_().second;
+	}
+
+	virtual inline void from_imaginary64_(const double float64) override
+	{
+		set_(std::make_pair(get_().first, float64));
+	}
+
+	virtual inline std::pair<double, double> to_complex64_() const override
+	{
+		return get_();
+	}
+
+	virtual inline void from_complex64_(const std::pair<double, double>& complex64) override
+	{
+		set_(complex64);
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_().first) + std::string(1, delim) + std::to_string(get_().second));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			std::stringstream str(symbol->symbol_());
+			std::string first;
+			std::string second;
+			std::getline(str, first, delim);
+			std::getline(str, second, delim);
+			set_(std::make_pair(std::stod(first), std::stod(second)));
 		}
 	}
 };
@@ -3067,6 +3324,20 @@ inline void Number::from_imaginary64_(const Thing::Ptr ptr)
 	if (float64)
 	{
 		from_imaginary64_(float64->get_());
+	}
+}
+
+inline const Thing::Ptr Number::to_complex64(const Thing::Ptr ignore) const
+{
+	return Complex64::mut_(to_complex64_());
+}
+
+inline void Number::from_complex64_(const Thing::Ptr ptr)
+{
+	Complex64* const complex64 = dynamic_<Complex64>(ptr);
+	if (complex64)
+	{
+		from_complex64_(complex64->get_());
 	}
 }
 
