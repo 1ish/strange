@@ -3912,6 +3912,7 @@ protected:
 		return thing_(thing, member, it);
 	}
 
+private:
 	const Ptr _override;
 };
 
