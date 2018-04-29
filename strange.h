@@ -91,6 +91,34 @@ public:
 		return nothing_();
 	}
 
+	template <typename... Args>
+	static inline const Ptr invoke_(Args&&... args)
+	{
+		std::vector<Ptr> v;
+		v.reserve(sizeof...(Args));
+		Variadic::variadic_(v, std::forward<Args>(args)...);
+		const Ptr it = Iterator<std::vector<Ptr>>::mut_(std::move(v));
+		const Ptr type = it->next_();
+		const Ptr function = it->next_();
+		const Ptr stat = static_<Index>(stats_())->find_(type);
+		if (stat->is_("0"))
+		{
+			log_("invoke_ passed unknown type:");
+			log_(type);
+			log_(function);
+			return stat;
+		}
+		const Ptr fun = static_<Index>(stat->thing(nothing_()))->find_(function);
+		if (fun->is_("0"))
+		{
+			log_("invoke_ passed unknown function:");
+			log_(type);
+			log_(function);
+			return fun;
+		}
+		return fun->thing(it);
+	}
+
 	// public static factory functions
 	static inline const Ptr stats_();
 
@@ -4363,19 +4391,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Buffer>(read_(int16))->get_();
-		const Ptr stat = static_<Index>(stats_())->find_(type);
-		if (stat->is_("0"))
-		{
-			log_("Stream::pop_front_ read unknown type");
-			return stat;
-		}
-		const Ptr fun = static_<Index>(stat->thing(nothing_()))->find_("str");
-		if (fun->is_("0"))
-		{
-			log_("Stream::pop_front_ read type with no str function");
-			return fun;
-		}
-		return fun->call_(me_());
+		return invoke_(type, "str", me_());
 	}
 
 	inline const Ptr pop_front(const Ptr ignore)
@@ -4387,19 +4403,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Buffer>(read_(int16))->get_();
-		const Ptr stat = static_<Index>(stats_())->find_(type);
-		if (stat->is_("0"))
-		{
-			log_("Stream::pop_front_with_links_ read unknown type");
-			return stat;
-		}
-		const Ptr fun = static_<Index>(stat->thing(nothing_()))->find_("swl");
-		if (fun->is_("0"))
-		{
-			log_("Stream::pop_front_with_links_ read type with no swl function");
-			return fun;
-		}
-		return fun->call_(me_());
+		return invoke_(type, "swl", me_());
 	}
 
 	inline const Ptr read_(const int64_t length)
