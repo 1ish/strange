@@ -97,27 +97,10 @@ public:
 		std::vector<Ptr> v;
 		v.reserve(sizeof...(Args));
 		Variadic::variadic_(v, std::forward<Args>(args)...);
-		const Ptr it = Iterator<std::vector<Ptr>>::mut_(std::move(v));
-		const Ptr type = it->next_();
-		const Ptr function = it->next_();
-		const Ptr stat = static_<Index>(stats_())->find_(type);
-		if (stat->is_("0"))
-		{
-			log_("invoke_ passed unknown type:");
-			log_(type);
-			log_(function);
-			return stat;
-		}
-		const Ptr fun = static_<Index>(stat->thing(nothing_()))->find_(function);
-		if (fun->is_("0"))
-		{
-			log_("invoke_ passed unknown function:");
-			log_(type);
-			log_(function);
-			return fun;
-		}
-		return fun->thing(it);
+		return invoke(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
 	}
+
+	static inline const Ptr invoke(const Ptr it);
 
 	// public static factory functions
 	static inline const Ptr stats_();
@@ -1110,6 +1093,29 @@ private:
 	};
 };
 
+inline const Thing::Ptr Thing::invoke(const Thing::Ptr it)
+{
+	const Ptr type = it->next_();
+	const Ptr function = it->next_();
+	const Ptr stat = static_<Index>(stats_())->find_(type);
+	if (stat->is_("0"))
+	{
+		log_("invoke passed unknown type:");
+		log_(type);
+		log_(function);
+		return stat;
+	}
+	const Ptr fun = static_<Index>(stat->thing(nothing_()))->find_(function);
+	if (fun->is_("0"))
+	{
+		log_("invoke passed unknown function:");
+		log_(type);
+		log_(function);
+		return fun;
+	}
+	return fun->thing(it);
+}
+
 inline const Thing::Ptr Thing::pub_() const
 {
 	static const Ptr PUB = []()
@@ -1126,6 +1132,7 @@ inline const Thing::Ptr Thing::pub_() const
 		index->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
 		index->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
 		index->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
+		index->update_("invoke", Static::fin_(&Thing::invoke));
 		index->update_("stats", Static::fin_(&Thing::stats));
 		index->update_("stat", Static::fin_(&Thing::stat));
 		index->update_("boolean", Static::fin_(&Thing::boolean));
