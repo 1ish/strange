@@ -236,7 +236,7 @@ public:
 	virtual inline const Ptr visit(const Ptr it)
 	{
 		const Ptr visitor = it->next_();
-		return visitor->thing(it);
+		return visitor->call(it);
 	}
 
 	virtual inline const Ptr cats_() const;
@@ -260,10 +260,10 @@ public:
 		std::vector<Ptr> v;
 		v.reserve(sizeof...(Args));
 		Variadic::variadic_(v, std::forward<Args>(args)...);
-		return thing(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
+		return call(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
 	}
 
-	inline const Ptr thing(const Ptr it)
+	inline const Ptr call(const Ptr it)
 	{
 		return operator()(this, it);
 	}
@@ -1105,7 +1105,7 @@ inline const Thing::Ptr Thing::invoke(const Thing::Ptr it)
 		log_(function);
 		return stat;
 	}
-	const Ptr fun = static_<Index>(stat->thing(nothing_()))->find_(function);
+	const Ptr fun = static_<Index>(stat->call(nothing_()))->find_(function);
 	if (fun->is_("0"))
 	{
 		log_("invoke passed unknown function:");
@@ -1113,7 +1113,7 @@ inline const Thing::Ptr Thing::invoke(const Thing::Ptr it)
 		log_(function);
 		return fun;
 	}
-	return fun->thing(it);
+	return fun->call(it);
 }
 
 inline const Thing::Ptr Thing::pub_() const
@@ -1122,7 +1122,7 @@ inline const Thing::Ptr Thing::pub_() const
 	{
 		const Ptr pub = Index::mut_();
 		Index* const index = static_<Index>(pub);
-		index->update_("thing", Member<Thing>::fin_(&Thing::thing));
+		index->update_("call", Member<Thing>::fin_(&Thing::call));
 		index->update_("next", Member<Thing>::fin_(&Thing::next));
 		index->update_("is", Const<Thing>::fin_(&Thing::is));
 		index->update_("hash", Const<Thing>::fin_(&Thing::hash));
@@ -5225,7 +5225,7 @@ private:
 			}
 			const Ptr it = Expression::It::mut_(exp, local);
 			const Ptr thing = it->next_();
-			return thing->thing(it);
+			return thing->call(it);
 		}
 	};
 
