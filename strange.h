@@ -5177,6 +5177,10 @@ private:
 	const Ptr _override;
 };
 
+class Command : public Symbol
+{
+};
+
 class Expression : public Mutable
 {
 public:
@@ -5238,7 +5242,8 @@ private:
 			for (int64_t i = 0; i < size; ++i)
 			{
 				const Ptr result = eval_(at_(i), local);
-				if (result->is_("break") || result->is_("continue"))
+				if (dynamic_<Command>(result) &&
+					(result->is_("break") || result->is_("continue")))
 				{
 					return result;
 				}
@@ -5258,7 +5263,8 @@ private:
 				if (!eval_(at_(0), local)->is_("0"))
 				{
 					const Ptr result = eval_(at_(1), local);
-					if (result->is_("break") || result->is_("continue"))
+					if (dynamic_<Command>(result) &&
+						(result->is_("break") || result->is_("continue")))
 					{
 						return result;
 					}
@@ -5269,7 +5275,8 @@ private:
 				if (!eval_(at_(0), local)->is_("0"))
 				{
 					const Ptr result = eval_(at_(1), local);
-					if (result->is_("break") || result->is_("continue"))
+					if (dynamic_<Command>(result) &&
+						(result->is_("break") || result->is_("continue")))
 					{
 						return result;
 					}
@@ -5277,7 +5284,8 @@ private:
 				else
 				{
 					const Ptr result = eval_(at_(2), local);
-					if (result->is_("break") || result->is_("continue"))
+					if (dynamic_<Command>(result) &&
+						(result->is_("break") || result->is_("continue")))
 					{
 						return result;
 					}
@@ -5320,13 +5328,16 @@ private:
 					for (int64_t i = 1; i < size; ++i)
 					{
 						const Ptr result = eval_(at_(i), local);
-						if (result->is_("break"))
+						if (dynamic_<Command>(result))
 						{
-							return nothing_();
-						}
-						else if (result->is_("continue"))
-						{
-							break;
+							if (result->is_("break"))
+							{
+								return nothing_();
+							}
+							else if (result->is_("continue"))
+							{
+								break;
+							}
 						}
 					}
 				}
@@ -5348,13 +5359,16 @@ private:
 					for (int64_t i = 0; i < size - 1; ++i)
 					{
 						const Ptr result = eval_(at_(i), local);
-						if (result->is_("break"))
+						if (dynamic_<Command>(result))
 						{
-							return nothing_();
-						}
-						else if (result->is_("continue"))
-						{
-							break;
+							if (result->is_("break"))
+							{
+								return nothing_();
+							}
+							else if (result->is_("continue"))
+							{
+								break;
+							}
 						}
 					}
 				} while (!eval_(at_(size - 1), local)->is_("0"));
@@ -5376,13 +5390,16 @@ private:
 					for (int64_t i = 3; i < size; ++i)
 					{
 						const Ptr result = eval_(at_(i), local);
-						if (result->is_("break"))
+						if (dynamic_<Command>(result))
 						{
-							return nothing_();
-						}
-						else if (result->is_("continue"))
-						{
-							break;
+							if (result->is_("break"))
+							{
+								return nothing_();
+							}
+							else if (result->is_("continue"))
+							{
+								break;
+							}
 						}
 					}
 				}
