@@ -5475,6 +5475,7 @@ public:
 		: Thing{}
 		, Me{}
 		, _expression{ expression }
+		, _static{ Index::mut_() }
 	{
 	}
 
@@ -5498,17 +5499,20 @@ protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
 		const Ptr local = Index::mut_();
+		Index* const loc = static_<Index>(local);
+		loc->insert_("static", _static);
 		Me<Class>* const me = dynamic_cast<Me<Class>*>(thing);
 		if (me)
 		{
-			static_<Index>(local)->insert_("me", me->me_());
+			loc->insert_("me", me->me_());
 		}
-		static_<Index>(local)->insert_("it", it);
+		loc->insert_("it", it);
 		return static_<Expression>(_expression)->evaluate_(local);
 	}
 
 private:
 	const Ptr _expression;
+	const Ptr _static;
 };
 
 inline const Thing::Ptr Thing::stats_()
