@@ -5478,7 +5478,7 @@ public:
 		: Thing{}
 		, Me{}
 		, _expression{ expression }
-		, _static{ Index::mut_() }
+		, _static{ Index::mut_() } //TODO make thread safe
 	{
 	}
 
