@@ -92,11 +92,18 @@ public:
 	}
 
 	// public static factory functions
-	static inline const Ptr factory_();
+	static inline const Ptr stats_();
 
-	static inline const Ptr factory(const Ptr ignore)
+	static inline const Ptr stats(const Ptr ignore)
 	{
-		return factory_();
+		return stats_();
+	}
+
+	static inline const Ptr stat_();
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	template <typename F>
@@ -534,6 +541,13 @@ public:
 		return swl_(it->next_());
 	}
 
+	static inline const Ptr stat_();
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
+	}
+
 	virtual inline const Ptr to_buffer_() const override;
 
 	virtual inline const Ptr type_() const override
@@ -543,6 +557,8 @@ public:
 	}
 
 	virtual inline const Ptr cats_() const override;
+
+	virtual inline const Ptr pub_() const override;
 
 private:
 	const std::string _symbol;
@@ -825,9 +841,11 @@ public:
 			index->update_("from_buffer", Member<Index>::fin_(&Index::from_buffer));
 			index->update_("to_stream", Const<Index>::fin_(&Index::to_stream));
 			index->update_("from_stream", Member<Index>::fin_(&Index::from_stream));
+			index->update_("stat", Static::fin_(&Index::stat));
 			index->update_("mut", Static::fin_(&Index::mut));
 			index->update_("buf", Static::fin_(&Index::buf));
 			index->update_("str", Static::fin_(&Index::str));
+			index->update_("swl", Static::fin_(&Index::swl));
 			index->update_("find", Const<Index>::fin_(&Index::find));
 			index->update_("update", Member<Index>::fin_(&Index::update));
 			index->update_("insert", Member<Index>::fin_(&Index::insert));
@@ -838,6 +856,28 @@ public:
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Index::stat));
+			index->update_("mut", Static::fin_(&Index::mut));
+			index->update_("buf", Static::fin_(&Index::buf));
+			index->update_("str", Static::fin_(&Index::str));
+			index->update_("swl", Static::fin_(&Index::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	static inline const Ptr mut_()
@@ -1058,9 +1098,9 @@ inline const Thing::Ptr Thing::pub_() const
 		index->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
 		index->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
 		index->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
+		index->update_("stats", Static::fin_(&Thing::stats));
+		index->update_("stat", Static::fin_(&Thing::stat));
 		index->update_("boolean", Static::fin_(&Thing::boolean));
-		index->update_("factory", Static::fin_(&Thing::factory));
-		index->update_("pub", Const<Thing>::fin_(&Thing::pub));
 		index->update_(nothing_(), Static::fin_(&Thing::nothing));
 		index->update_(one_(), Static::fin_(&Thing::one));
 		index->update_(end_(), Static::fin_(&Thing::end));
@@ -1068,10 +1108,30 @@ inline const Thing::Ptr Thing::pub_() const
 		index->update_("type", Const<Thing>::fin_(&Thing::type));
 		index->update_("cats", Const<Thing>::fin_(&Thing::cats));
 		index->update_("visit", Member<Thing>::fin_(&Thing::visit));
+		index->update_("pub", Const<Thing>::fin_(&Thing::pub));
 		index->finalize_();
 		return pub;
 	}();
 	return PUB;
+}
+
+inline const Thing::Ptr Thing::stat_()
+{
+	static const Ptr STAT = []()
+	{
+		const Ptr stat = Index::mut_();
+		Index* const index = static_<Index>(stat);
+		index->update_("stats", Static::fin_(&Thing::stats));
+		index->update_("stat", Static::fin_(&Thing::stat));
+		index->update_("boolean", Static::fin_(&Thing::boolean));
+		index->update_(nothing_(), Static::fin_(&Thing::nothing));
+		index->update_(one_(), Static::fin_(&Thing::one));
+		index->update_(end_(), Static::fin_(&Thing::end));
+		index->update_("log", Static::fin_(&Thing::log));
+		index->finalize_();
+		return stat;
+	}();
+	return STAT;
 }
 
 inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr it)
@@ -1092,6 +1152,40 @@ inline void Serializable::serialize_(const Thing::Ptr thing, const Thing::Ptr st
 inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr stream)
 {
 	return Thing::static_<Index>(Index::mut_())->gather_from_stream_(stream);
+}
+
+inline const Thing::Ptr Symbol::pub_() const
+{
+	static const Ptr PUB = [this]()
+	{
+		const Ptr pub = Thing::pub_()->copy_();
+		Index* const index = static_<Index>(pub);
+		index->update_("to_buffer", Const<Index>::fin_(&Index::to_buffer));
+		index->update_("to_stream", Const<Index>::fin_(&Index::to_stream));
+		index->update_("stat", Static::fin_(&Symbol::stat));
+		index->update_("buf", Static::fin_(&Symbol::buf));
+		index->update_("str", Static::fin_(&Symbol::str));
+		index->update_("swl", Static::fin_(&Symbol::swl));
+		index->finalize_();
+		return pub;
+	}();
+	return PUB;
+}
+
+inline const Thing::Ptr Symbol::stat_()
+{
+	static const Ptr STAT = []()
+	{
+		const Ptr stat = Index::mut_();
+		Index* const index = static_<Index>(stat);
+		index->update_("stat", Static::fin_(&Symbol::stat));
+		index->update_("buf", Static::fin_(&Symbol::buf));
+		index->update_("str", Static::fin_(&Symbol::str));
+		index->update_("swl", Static::fin_(&Symbol::swl));
+		index->finalize_();
+		return stat;
+	}();
+	return STAT;
 }
 
 class Decorator : public Thing
@@ -1239,15 +1333,39 @@ public:
 			index->update_("from_buffer", Member<Flock>::fin_(&Flock::from_buffer));
 			index->update_("to_stream", Const<Flock>::fin_(&Flock::to_stream));
 			index->update_("from_stream", Member<Flock>::fin_(&Flock::from_stream));
+			index->update_("stat", Static::fin_(&Flock::stat));
 			index->update_("mut", Static::fin_(&Flock::mut));
 			index->update_("buf", Static::fin_(&Flock::buf));
 			index->update_("str", Static::fin_(&Flock::str));
+			index->update_("swl", Static::fin_(&Flock::swl));
 			index->update_("push_back", Member<Flock>::fin_(&Flock::push_back));
 			index->update_("iterator", Const<Flock>::fin_(&Flock::iterator));
 			index->finalize_();
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Flock::stat));
+			index->update_("mut", Static::fin_(&Flock::mut));
+			index->update_("buf", Static::fin_(&Flock::buf));
+			index->update_("str", Static::fin_(&Flock::str));
+			index->update_("swl", Static::fin_(&Flock::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	static inline const Ptr mut_()
@@ -1501,9 +1619,11 @@ public:
 			index->update_("from_buffer", Member<Herd>::fin_(&Herd::from_buffer));
 			index->update_("to_stream", Const<Herd>::fin_(&Herd::to_stream));
 			index->update_("from_stream", Member<Herd>::fin_(&Herd::from_stream));
+			index->update_("stat", Static::fin_(&Herd::stat));
 			index->update_("mut", Static::fin_(&Herd::mut));
 			index->update_("buf", Static::fin_(&Herd::buf));
 			index->update_("str", Static::fin_(&Herd::str));
+			index->update_("swl", Static::fin_(&Herd::swl));
 			index->update_("find", Const<Herd>::fin_(&Herd::find));
 			index->update_("insert", Member<Herd>::fin_(&Herd::insert));
 			index->update_("iterator", Const<Herd>::fin_(&Herd::iterator));
@@ -1512,6 +1632,28 @@ public:
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Herd::stat));
+			index->update_("mut", Static::fin_(&Herd::mut));
+			index->update_("buf", Static::fin_(&Herd::buf));
+			index->update_("str", Static::fin_(&Herd::str));
+			index->update_("swl", Static::fin_(&Herd::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	static inline const Ptr mut_()
@@ -1746,11 +1888,21 @@ public:
 		return std::make_shared<Buffer>(data);
 	}
 
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
 	static inline const Ptr fin_(const S& data = S())
 	{
 		const Ptr result = mut_(data);
 		result->finalize_();
 		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -1811,12 +1963,39 @@ public:
 			index->update_("from_buffer", Member<Buffer>::fin_(&Buffer::from_buffer));
 			index->update_("to_stream", Const<Buffer>::fin_(&Buffer::to_stream));
 			index->update_("from_stream", Member<Buffer>::fin_(&Buffer::from_stream));
+			index->update_("stat", Static::fin_(&Buffer::stat));
+			index->update_("mut", Static::fin_(&Buffer::mut));
+			index->update_("fin", Static::fin_(&Buffer::fin));
 			index->update_("buf", Static::fin_(&Buffer::buf));
 			index->update_("str", Static::fin_(&Buffer::str));
+			index->update_("swl", Static::fin_(&Buffer::swl));
 			index->finalize_();
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Buffer::stat));
+			index->update_("mut", Static::fin_(&Buffer::mut));
+			index->update_("fin", Static::fin_(&Buffer::fin));
+			index->update_("buf", Static::fin_(&Buffer::buf));
+			index->update_("str", Static::fin_(&Buffer::str));
+			index->update_("swl", Static::fin_(&Buffer::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -2065,9 +2244,9 @@ public:
 		return std::make_shared<Bit>(data);
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr ignore)
 	{
-		return mut_(!it->next_()->is_("0"));
+		return mut_();
 	}
 
 	static inline const Ptr fin_(const D& data = D())
@@ -2077,11 +2256,9 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr it)
+	static inline const Ptr fin(const Ptr ignore)
 	{
-		const Ptr result = mut(it);
-		result->finalize_();
-		return result;
+		return fin_();
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -2141,14 +2318,39 @@ public:
 			index->update_("from_buffer", Member<Bit>::fin_(&Bit::from_buffer));
 			index->update_("to_stream", Const<Bit>::fin_(&Bit::to_stream));
 			index->update_("from_stream", Member<Bit>::fin_(&Bit::from_stream));
+			index->update_("stat", Static::fin_(&Bit::stat));
 			index->update_("mut", Static::fin_(&Bit::mut));
 			index->update_("fin", Static::fin_(&Bit::fin));
 			index->update_("buf", Static::fin_(&Bit::buf));
 			index->update_("str", Static::fin_(&Bit::str));
+			index->update_("swl", Static::fin_(&Bit::swl));
 			index->finalize_();
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Bit::stat));
+			index->update_("mut", Static::fin_(&Bit::mut));
+			index->update_("fin", Static::fin_(&Bit::fin));
+			index->update_("buf", Static::fin_(&Bit::buf));
+			index->update_("str", Static::fin_(&Bit::str));
+			index->update_("swl", Static::fin_(&Bit::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -2235,11 +2437,21 @@ public:
 		return std::make_shared<Byte>(data);
 	}
 
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
 	static inline const Ptr fin_(const D& data = D())
 	{
 		const Ptr result = mut_(data);
 		result->finalize_();
 		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -2299,12 +2511,39 @@ public:
 			index->update_("from_buffer", Member<Byte>::fin_(&Byte::from_buffer));
 			index->update_("to_stream", Const<Byte>::fin_(&Byte::to_stream));
 			index->update_("from_stream", Member<Byte>::fin_(&Byte::from_stream));
+			index->update_("stat", Static::fin_(&Byte::stat));
+			index->update_("mut", Static::fin_(&Byte::mut));
+			index->update_("fin", Static::fin_(&Byte::fin));
 			index->update_("buf", Static::fin_(&Byte::buf));
 			index->update_("str", Static::fin_(&Byte::str));
+			index->update_("swl", Static::fin_(&Byte::swl));
 			index->finalize_();
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Byte::stat));
+			index->update_("mut", Static::fin_(&Byte::mut));
+			index->update_("fin", Static::fin_(&Byte::fin));
+			index->update_("buf", Static::fin_(&Byte::buf));
+			index->update_("str", Static::fin_(&Byte::str));
+			index->update_("swl", Static::fin_(&Byte::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -2391,11 +2630,21 @@ public:
 		return std::make_shared<Int16>(data);
 	}
 
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
 	static inline const Ptr fin_(const D& data = D())
 	{
 		const Ptr result = mut_(data);
 		result->finalize_();
 		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -2455,12 +2704,39 @@ public:
 			index->update_("from_buffer", Member<Int16>::fin_(&Int16::from_buffer));
 			index->update_("to_stream", Const<Int16>::fin_(&Int16::to_stream));
 			index->update_("from_stream", Member<Int16>::fin_(&Int16::from_stream));
+			index->update_("stat", Static::fin_(&Int16::stat));
+			index->update_("mut", Static::fin_(&Int16::mut));
+			index->update_("fin", Static::fin_(&Int16::fin));
 			index->update_("buf", Static::fin_(&Int16::buf));
 			index->update_("str", Static::fin_(&Int16::str));
+			index->update_("swl", Static::fin_(&Int16::swl));
 			index->finalize_();
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Int16::stat));
+			index->update_("mut", Static::fin_(&Int16::mut));
+			index->update_("fin", Static::fin_(&Int16::fin));
+			index->update_("buf", Static::fin_(&Int16::buf));
+			index->update_("str", Static::fin_(&Int16::str));
+			index->update_("swl", Static::fin_(&Int16::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -2553,11 +2829,21 @@ public:
 		return std::make_shared<Int32>(data);
 	}
 
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
 	static inline const Ptr fin_(const D& data = D())
 	{
 		const Ptr result = mut_(data);
 		result->finalize_();
 		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -2617,12 +2903,39 @@ public:
 			index->update_("from_buffer", Member<Int32>::fin_(&Int32::from_buffer));
 			index->update_("to_stream", Const<Int32>::fin_(&Int32::to_stream));
 			index->update_("from_stream", Member<Int32>::fin_(&Int32::from_stream));
+			index->update_("stat", Static::fin_(&Int32::stat));
+			index->update_("mut", Static::fin_(&Int32::mut));
+			index->update_("fin", Static::fin_(&Int32::fin));
 			index->update_("buf", Static::fin_(&Int32::buf));
 			index->update_("str", Static::fin_(&Int32::str));
+			index->update_("swl", Static::fin_(&Int32::swl));
 			index->finalize_();
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Int32::stat));
+			index->update_("mut", Static::fin_(&Int32::mut));
+			index->update_("fin", Static::fin_(&Int32::fin));
+			index->update_("buf", Static::fin_(&Int32::buf));
+			index->update_("str", Static::fin_(&Int32::str));
+			index->update_("swl", Static::fin_(&Int32::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -2719,11 +3032,21 @@ public:
 		return std::make_shared<Int64>(data);
 	}
 
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
 	static inline const Ptr fin_(const D& data = D())
 	{
 		const Ptr result = mut_(data);
 		result->finalize_();
 		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -2783,12 +3106,39 @@ public:
 			index->update_("from_buffer", Member<Int64>::fin_(&Int64::from_buffer));
 			index->update_("to_stream", Const<Int64>::fin_(&Int64::to_stream));
 			index->update_("from_stream", Member<Int64>::fin_(&Int64::from_stream));
+			index->update_("stat", Static::fin_(&Int64::stat));
+			index->update_("mut", Static::fin_(&Int64::mut));
+			index->update_("fin", Static::fin_(&Int64::fin));
 			index->update_("buf", Static::fin_(&Int64::buf));
 			index->update_("str", Static::fin_(&Int64::str));
+			index->update_("swl", Static::fin_(&Int64::swl));
 			index->finalize_();
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Int64::stat));
+			index->update_("mut", Static::fin_(&Int64::mut));
+			index->update_("fin", Static::fin_(&Int64::fin));
+			index->update_("buf", Static::fin_(&Int64::buf));
+			index->update_("str", Static::fin_(&Int64::str));
+			index->update_("swl", Static::fin_(&Int64::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -2893,11 +3243,21 @@ public:
 		return std::make_shared<Float32>(data);
 	}
 
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
 	static inline const Ptr fin_(const D& data = D())
 	{
 		const Ptr result = mut_(data);
 		result->finalize_();
 		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -2957,12 +3317,39 @@ public:
 			index->update_("from_buffer", Member<Float32>::fin_(&Float32::from_buffer));
 			index->update_("to_stream", Const<Float32>::fin_(&Float32::to_stream));
 			index->update_("from_stream", Member<Float32>::fin_(&Float32::from_stream));
+			index->update_("stat", Static::fin_(&Float32::stat));
+			index->update_("mut", Static::fin_(&Float32::mut));
+			index->update_("fin", Static::fin_(&Float32::fin));
 			index->update_("buf", Static::fin_(&Float32::buf));
 			index->update_("str", Static::fin_(&Float32::str));
+			index->update_("swl", Static::fin_(&Float32::swl));
 			index->finalize_();
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Float32::stat));
+			index->update_("mut", Static::fin_(&Float32::mut));
+			index->update_("fin", Static::fin_(&Float32::fin));
+			index->update_("buf", Static::fin_(&Float32::buf));
+			index->update_("str", Static::fin_(&Float32::str));
+			index->update_("swl", Static::fin_(&Float32::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -3060,11 +3447,21 @@ public:
 		return std::make_shared<Float64>(data);
 	}
 
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
 	static inline const Ptr fin_(const D& data = D())
 	{
 		const Ptr result = mut_(data);
 		result->finalize_();
 		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -3124,12 +3521,39 @@ public:
 			index->update_("from_buffer", Member<Float64>::fin_(&Float64::from_buffer));
 			index->update_("to_stream", Const<Float64>::fin_(&Float64::to_stream));
 			index->update_("from_stream", Member<Float64>::fin_(&Float64::from_stream));
+			index->update_("stat", Static::fin_(&Float64::stat));
+			index->update_("mut", Static::fin_(&Float64::mut));
+			index->update_("fin", Static::fin_(&Float64::fin));
 			index->update_("buf", Static::fin_(&Float64::buf));
 			index->update_("str", Static::fin_(&Float64::str));
+			index->update_("swl", Static::fin_(&Float64::swl));
 			index->finalize_();
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Float64::stat));
+			index->update_("mut", Static::fin_(&Float64::mut));
+			index->update_("fin", Static::fin_(&Float64::fin));
+			index->update_("buf", Static::fin_(&Float64::buf));
+			index->update_("str", Static::fin_(&Float64::str));
+			index->update_("swl", Static::fin_(&Float64::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -3237,11 +3661,21 @@ public:
 		return std::make_shared<Complex32>(data);
 	}
 
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
 	static inline const Ptr fin_(const D& data = D())
 	{
 		const Ptr result = mut_(data);
 		result->finalize_();
 		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -3301,12 +3735,39 @@ public:
 			index->update_("from_buffer", Member<Complex32>::fin_(&Complex32::from_buffer));
 			index->update_("to_stream", Const<Complex32>::fin_(&Complex32::to_stream));
 			index->update_("from_stream", Member<Complex32>::fin_(&Complex32::from_stream));
+			index->update_("stat", Static::fin_(&Complex32::stat));
+			index->update_("mut", Static::fin_(&Complex32::mut));
+			index->update_("fin", Static::fin_(&Complex32::fin));
 			index->update_("buf", Static::fin_(&Complex32::buf));
 			index->update_("str", Static::fin_(&Complex32::str));
+			index->update_("swl", Static::fin_(&Complex32::swl));
 			index->finalize_();
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Complex32::stat));
+			index->update_("mut", Static::fin_(&Complex32::mut));
+			index->update_("fin", Static::fin_(&Complex32::fin));
+			index->update_("buf", Static::fin_(&Complex32::buf));
+			index->update_("str", Static::fin_(&Complex32::str));
+			index->update_("swl", Static::fin_(&Complex32::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -3443,11 +3904,21 @@ public:
 		return std::make_shared<Complex64>(data);
 	}
 
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
 	static inline const Ptr fin_(const D& data = D())
 	{
 		const Ptr result = mut_(data);
 		result->finalize_();
 		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
 	}
 
 	static inline const Ptr buf_(const Ptr buffer)
@@ -3507,12 +3978,39 @@ public:
 			index->update_("from_buffer", Member<Complex64>::fin_(&Complex64::from_buffer));
 			index->update_("to_stream", Const<Complex64>::fin_(&Complex64::to_stream));
 			index->update_("from_stream", Member<Complex64>::fin_(&Complex64::from_stream));
+			index->update_("stat", Static::fin_(&Complex64::stat));
+			index->update_("mut", Static::fin_(&Complex64::mut));
+			index->update_("fin", Static::fin_(&Complex64::fin));
 			index->update_("buf", Static::fin_(&Complex64::buf));
 			index->update_("str", Static::fin_(&Complex64::str));
+			index->update_("swl", Static::fin_(&Complex64::swl));
 			index->finalize_();
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Complex64::stat));
+			index->update_("mut", Static::fin_(&Complex64::mut));
+			index->update_("fin", Static::fin_(&Complex64::fin));
+			index->update_("buf", Static::fin_(&Complex64::buf));
+			index->update_("str", Static::fin_(&Complex64::str));
+			index->update_("swl", Static::fin_(&Complex64::swl));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	virtual inline const Ptr to_buffer_() const override
@@ -3751,6 +4249,11 @@ public:
 		return mut_(new std::stringstream(str));
 	}
 
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
 	virtual inline const Ptr copy_() const override
 	{
 		return me_();
@@ -3762,6 +4265,8 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
+			index->update_("stat", Static::fin_(&Stream::stat));
+			index->update_("mut", Static::fin_(&Stream::mut));
 			index->update_("push_back", Member<Stream>::fin_(&Stream::push_back));
 			index->update_("write", Member<Stream>::fin_(&Stream::write));
 			index->update_("pop_front", Member<Stream>::fin_(&Stream::pop_front));
@@ -3769,6 +4274,25 @@ public:
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Stream::stat));
+			index->update_("mut", Static::fin_(&Stream::mut));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	virtual inline const Ptr type_() const override
@@ -3838,11 +4362,17 @@ public:
 	inline const Ptr pop_front_()
 	{
 		const int16_t int16 = read_<Int16>();
-		const std::string function = static_<Buffer>(read_(int16))->get_() + "::str";
-		const Ptr fun = static_<Index>(factory_())->find_(function);
-		if (fun->is_("0"))
+		const std::string type = static_<Buffer>(read_(int16))->get_();
+		const Ptr stat = static_<Index>(stats_())->find_(type);
+		if (stat->is_("0"))
 		{
 			log_("Stream::pop_front_ read unknown type");
+			return stat;
+		}
+		const Ptr fun = static_<Index>(stat->thing(nothing_()))->find_("str");
+		if (fun->is_("0"))
+		{
+			log_("Stream::pop_front_ read type with no str function");
 			return fun;
 		}
 		return fun->call_(me_());
@@ -3856,11 +4386,17 @@ public:
 	inline const Ptr pop_front_with_links_()
 	{
 		const int16_t int16 = read_<Int16>();
-		const std::string function = static_<Buffer>(read_(int16))->get_() + "::swl";
-		const Ptr fun = static_<Index>(factory_())->find_(function);
-		if (fun->is_("0"))
+		const std::string type = static_<Buffer>(read_(int16))->get_();
+		const Ptr stat = static_<Index>(stats_())->find_(type);
+		if (stat->is_("0"))
 		{
 			log_("Stream::pop_front_with_links_ read unknown type");
+			return stat;
+		}
+		const Ptr fun = static_<Index>(stat->thing(nothing_()))->find_("swl");
+		if (fun->is_("0"))
+		{
+			log_("Stream::pop_front_with_links_ read type with no swl function");
 			return fun;
 		}
 		return fun->call_(me_());
@@ -4286,6 +4822,7 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
+			index->update_("stat", Static::fin_(&Fence::stat));
 			index->update_("mut", Static::fin_(&Fence::mut));
 			index->update_("give", Member<Fence>::fin_(&Fence::give));
 			index->update_("take", Member<Fence>::fin_(&Fence::take));
@@ -4293,6 +4830,25 @@ public:
 			return pub;
 		}();
 		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Fence::stat));
+			index->update_("mut", Static::fin_(&Fence::mut));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
 	}
 
 	inline const bool give_(const Ptr ptr)
@@ -4454,63 +5010,6 @@ inline const Thing::Ptr Flock::It::cats_() const
 		return cats;
 	}();
 	return CATS;
-}
-
-inline const Thing::Ptr Thing::factory_()
-{
-	static const Ptr FACTORY = []()
-	{
-		const Ptr factory = Index::mut_();
-		Index* const index = static_<Index>(factory);
-		index->update_("strange::Symbol::buf", Static::fin_(&Symbol::buf));
-		index->update_("strange::Symbol::str", Static::fin_(&Symbol::str));
-		index->update_("strange::Symbol::swl", Static::fin_(&Symbol::swl));
-		index->update_("strange::Index::mut", Static::fin_(&Index::mut));
-		index->update_("strange::Index::buf", Static::fin_(&Index::buf));
-		index->update_("strange::Index::str", Static::fin_(&Index::str));
-		index->update_("strange::Index::swl", Static::fin_(&Index::swl));
-		index->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
-		index->update_("strange::Flock::buf", Static::fin_(&Flock::buf));
-		index->update_("strange::Flock::str", Static::fin_(&Flock::str));
-		index->update_("strange::Flock::swl", Static::fin_(&Flock::swl));
-		index->update_("strange::Herd::mut", Static::fin_(&Herd::mut));
-		index->update_("strange::Herd::buf", Static::fin_(&Herd::buf));
-		index->update_("strange::Herd::str", Static::fin_(&Herd::str));
-		index->update_("strange::Herd::swl", Static::fin_(&Herd::swl));
-		index->update_("strange::Buffer::buf", Static::fin_(&Buffer::buf));
-		index->update_("strange::Buffer::str", Static::fin_(&Buffer::str));
-		index->update_("strange::Buffer::swl", Static::fin_(&Buffer::swl));
-		index->update_("strange::Bit::buf", Static::fin_(&Bit::buf));
-		index->update_("strange::Bit::str", Static::fin_(&Bit::str));
-		index->update_("strange::Bit::swl", Static::fin_(&Bit::swl));
-		index->update_("strange::Byte::buf", Static::fin_(&Byte::buf));
-		index->update_("strange::Byte::str", Static::fin_(&Byte::str));
-		index->update_("strange::Byte::swl", Static::fin_(&Byte::swl));
-		index->update_("strange::Int16::buf", Static::fin_(&Int16::buf));
-		index->update_("strange::Int16::str", Static::fin_(&Int16::str));
-		index->update_("strange::Int16::swl", Static::fin_(&Int16::swl));
-		index->update_("strange::Int32::buf", Static::fin_(&Int32::buf));
-		index->update_("strange::Int32::str", Static::fin_(&Int32::str));
-		index->update_("strange::Int32::swl", Static::fin_(&Int32::swl));
-		index->update_("strange::Int64::buf", Static::fin_(&Int64::buf));
-		index->update_("strange::Int64::str", Static::fin_(&Int64::str));
-		index->update_("strange::Int64::swl", Static::fin_(&Int64::swl));
-		index->update_("strange::Float32::buf", Static::fin_(&Float32::buf));
-		index->update_("strange::Float32::str", Static::fin_(&Float32::str));
-		index->update_("strange::Float32::swl", Static::fin_(&Float32::swl));
-		index->update_("strange::Float64::buf", Static::fin_(&Float64::buf));
-		index->update_("strange::Float64::str", Static::fin_(&Float64::str));
-		index->update_("strange::Float64::swl", Static::fin_(&Float64::swl));
-		index->update_("strange::Complex32::buf", Static::fin_(&Complex32::buf));
-		index->update_("strange::Complex32::str", Static::fin_(&Complex32::str));
-		index->update_("strange::Complex32::swl", Static::fin_(&Complex32::swl));
-		index->update_("strange::Complex64::buf", Static::fin_(&Complex64::buf));
-		index->update_("strange::Complex64::str", Static::fin_(&Complex64::str));
-		index->update_("strange::Complex64::swl", Static::fin_(&Complex64::swl));
-		index->finalize_();
-		return factory;
-	}();
-	return FACTORY;
 }
 
 class Class : public Mutable, public Me<Class>
@@ -4983,6 +5482,35 @@ protected:
 private:
 	const Ptr _expression;
 };
+
+inline const Thing::Ptr Thing::stats_()
+{
+	static const Ptr STATS = []()
+	{
+		const Ptr stats = Index::mut_();
+		Index* const index = static_<Index>(stats);
+		index->update_("strange::Thing", Static::fin_(&Thing::stat));
+		index->update_("strange::Symbol", Static::fin_(&Symbol::stat));
+		index->update_("strange::Index", Static::fin_(&Index::stat));
+		index->update_("strange::Flock", Static::fin_(&Flock::stat));
+		index->update_("strange::Herd", Static::fin_(&Herd::stat));
+		index->update_("strange::Buffer", Static::fin_(&Buffer::stat));
+		index->update_("strange::Bit", Static::fin_(&Bit::stat));
+		index->update_("strange::Byte", Static::fin_(&Byte::stat));
+		index->update_("strange::Int16", Static::fin_(&Int16::stat));
+		index->update_("strange::Int32", Static::fin_(&Int32::stat));
+		index->update_("strange::Int64", Static::fin_(&Int64::stat));
+		index->update_("strange::Float32", Static::fin_(&Float32::stat));
+		index->update_("strange::Float64", Static::fin_(&Float64::stat));
+		index->update_("strange::Complex32", Static::fin_(&Complex32::stat));
+		index->update_("strange::Complex64", Static::fin_(&Complex64::stat));
+		index->update_("strange::Stream", Static::fin_(&Stream::stat));
+		index->update_("strange::Fence", Static::fin_(&Fence::stat));
+		index->finalize_();
+		return stats;
+	}();
+	return STATS;
+}
 
 } // namespace strange
 
