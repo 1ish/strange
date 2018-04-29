@@ -280,14 +280,14 @@ public:
 
 protected:
 	// protected static utility functions
-	static inline const Ptr thing_(Thing* const thing, const Ptr member, const Ptr it)
+	static inline const Ptr operate_(Thing* const thing, const Ptr member, const Ptr it)
 	{
 		return member->operator()(thing, it);
 	}
 
-	static inline const Ptr thing_(Thing* const thing, const Ptr member)
+	static inline const Ptr operate_(Thing* const thing, const Ptr member)
 	{
-		return thing_(thing, member, nothing_());
+		return operate_(thing, member, nothing_());
 	}
 
 	// protected construction/destruction/assignment
@@ -1176,7 +1176,7 @@ inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr i
 	{
 		return member;
 	}
-	return thing_(thing, member, it);
+	return operate_(thing, member, it);
 }
 
 inline void Serializable::serialize_(const Thing::Ptr thing, const Thing::Ptr stream)
@@ -1240,7 +1240,7 @@ protected:
 		{
 			return _decorated->invoke_(name, *it);
 		}
-		return thing_(thing, member, it);
+		return operate_(thing, member, it);
 	}
 
 	const Ptr _decorated;
@@ -1296,7 +1296,7 @@ protected:
 		{
 			return member;
 		}
-		return thing_(thing, member, it);
+		return operate_(thing, member, it);
 	}
 
 private:
@@ -5038,7 +5038,7 @@ public:
 		const Ptr over = static_<Index>(_override)->find_("type");
 		if (!over->is_("0"))
 		{
-			return thing_(const_cast<Class*>(this), over);
+			return operate_(const_cast<Class*>(this), over);
 		}
 		static const Ptr TYPE = sym_("strange::Class");
 		return TYPE;
@@ -5049,7 +5049,7 @@ public:
 		const Ptr over = static_<Index>(_override)->find_("copy");
 		if (!over->is_("0"))
 		{
-			return thing_(const_cast<Class*>(this), over);
+			return operate_(const_cast<Class*>(this), over);
 		}
 		return me_();
 	}
@@ -5059,7 +5059,7 @@ public:
 		const Ptr over = static_<Index>(_override)->find_("clone");
 		if (!over->is_("0"))
 		{
-			return thing_(const_cast<Class*>(this), over);
+			return operate_(const_cast<Class*>(this), over);
 		}
 		return Thing::clone_();
 	}
@@ -5069,7 +5069,7 @@ public:
 		const Ptr over = static_<Index>(_override)->find_("finalize");
 		if (!over->is_("0"))
 		{
-			thing_(this, over);
+			operate_(this, over);
 		}
 		Mutable::finalize_();
 	}
@@ -5079,7 +5079,7 @@ public:
 		const Ptr over = static_<Index>(_override)->find_("finalized");
 		if (!over->is_("0"))
 		{
-			return !thing_(const_cast<Class*>(this), over)->is_("0");
+			return !operate_(const_cast<Class*>(this), over)->is_("0");
 		}
 		return Mutable::finalized_();
 	}
@@ -5089,7 +5089,7 @@ public:
 		const Ptr over = static_<Index>(_override)->find_("freeze");
 		if (!over->is_("0"))
 		{
-			thing_(this, over);
+			operate_(this, over);
 		}
 		Thing::freeze_();
 	}
@@ -5099,7 +5099,7 @@ public:
 		const Ptr over = static_<Index>(_override)->find_("next");
 		if (!over->is_("0"))
 		{
-			thing_(this, over);
+			operate_(this, over);
 		}
 		return Thing::next_();
 	}
@@ -5109,7 +5109,7 @@ public:
 		const Ptr over = static_<Index>(_override)->find_("hash");
 		if (!over->is_("0"))
 		{
-			return size_t(static_<Int64>(thing_(const_cast<Class*>(this), over))->get_());
+			return size_t(static_<Int64>(operate_(const_cast<Class*>(this), over))->get_());
 		}
 		return Thing::hash_();
 	}
@@ -5120,7 +5120,7 @@ public:
 		if (!over->is_("0"))
 		{
 			std::vector<Ptr> vec(1, other);
-			return !thing_(const_cast<Class*>(this), over, Iterator<std::vector<Ptr>>::mut_(vec))->is_("0");
+			return !operate_(const_cast<Class*>(this), over, Iterator<std::vector<Ptr>>::mut_(vec))->is_("0");
 		}
 		return Thing::same_(other);
 	}
@@ -5130,7 +5130,7 @@ public:
 		const Ptr over = static_<Index>(_override)->find_("visit");
 		if (!over->is_("0"))
 		{
-			return thing_(this, over, it);
+			return operate_(this, over, it);
 		}
 		return Thing::visit(it);
 	}
@@ -5140,7 +5140,7 @@ public:
 		const Ptr over = static_<Index>(_override)->find_("cats");
 		if (!over->is_("0"))
 		{
-			return thing_(const_cast<Class*>(this), over);
+			return operate_(const_cast<Class*>(this), over);
 		}
 		static const Ptr CATS = []()
 		{
@@ -5163,14 +5163,14 @@ protected:
 		const Ptr over = static_<Index>(_override)->find_(name);
 		if (!over->is_("0"))
 		{
-			return thing_(thing, over, it);
+			return operate_(thing, over, it);
 		}
 		const Ptr member = static_<Index>(pub_())->find_(name);
 		if (member->is_("0"))
 		{
 			return member;
 		}
-		return thing_(thing, member, it);
+		return operate_(thing, member, it);
 	}
 
 private:
