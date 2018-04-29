@@ -92,15 +92,15 @@ public:
 	}
 
 	template <typename... Args>
-	static inline const Ptr invoke_(Args&&... args)
+	static inline const Ptr call_(Args&&... args)
 	{
 		std::vector<Ptr> v;
 		v.reserve(sizeof...(Args));
 		Variadic::variadic_(v, std::forward<Args>(args)...);
-		return invoke(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
+		return call(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
 	}
 
-	static inline const Ptr invoke(const Ptr it);
+	static inline const Ptr call(const Ptr it);
 
 	// public static factory functions
 	static inline const Ptr stats_();
@@ -236,7 +236,7 @@ public:
 	virtual inline const Ptr visit(const Ptr it)
 	{
 		const Ptr visitor = it->next_();
-		return visitor->call(it);
+		return visitor->invoke(it);
 	}
 
 	virtual inline const Ptr cats_() const;
@@ -255,15 +255,15 @@ public:
 
 	// public non-virtual member functions and adapters
 	template <typename... Args>
-	inline const Ptr call_(Args&&... args)
+	inline const Ptr invoke_(Args&&... args)
 	{
 		std::vector<Ptr> v;
 		v.reserve(sizeof...(Args));
 		Variadic::variadic_(v, std::forward<Args>(args)...);
-		return call(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
+		return invoke(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
 	}
 
-	inline const Ptr call(const Ptr it)
+	inline const Ptr invoke(const Ptr it)
 	{
 		return operator()(this, it);
 	}
@@ -420,7 +420,7 @@ public:
 		const Thing* thing = dynamic_cast<const Thing*>(this);
 		if (thing)
 		{
-			const_cast<Thing*>(thing)->call_("to_stream", stream);
+			const_cast<Thing*>(thing)->invoke_("to_stream", stream);
 		}
 	}
 
@@ -437,7 +437,7 @@ public:
 		Thing* thing = dynamic_cast<Thing*>(this);
 		if (thing)
 		{
-			thing->call_("from_stream", stream);
+			thing->invoke_("from_stream", stream);
 		}
 	}
 
@@ -1019,8 +1019,8 @@ public:
 			rest->next_();
 			for (const auto& visited : _map)
 			{
-				visited.first->call_("visit", visitor, member, visited.first, *(rest->copy_()));
-				visited.second->call_("visit", visitor, member, visited.second, *(rest->copy_()));
+				visited.first->invoke_("visit", visitor, member, visited.first, *(rest->copy_()));
+				visited.second->invoke_("visit", visitor, member, visited.second, *(rest->copy_()));
 			}
 		}
 		return result;
@@ -1039,7 +1039,7 @@ public:
 
 	inline void gather_(const Ptr item)
 	{
-		item->call_("visit", me_(), "itemize", item);
+		item->invoke_("visit", me_(), "itemize", item);
 	}
 
 	inline const Ptr gather(const Ptr it)
@@ -1093,27 +1093,27 @@ private:
 	};
 };
 
-inline const Thing::Ptr Thing::invoke(const Thing::Ptr it)
+inline const Thing::Ptr Thing::call(const Thing::Ptr it)
 {
 	const Ptr type = it->next_();
 	const Ptr function = it->next_();
 	const Ptr stat = static_<Index>(stats_())->find_(type);
 	if (stat->is_("0"))
 	{
-		log_("invoke passed unknown type:");
+		log_("call passed unknown type:");
 		log_(type);
 		log_(function);
 		return stat;
 	}
-	const Ptr fun = static_<Index>(stat->call(nothing_()))->find_(function);
+	const Ptr fun = static_<Index>(stat->invoke(nothing_()))->find_(function);
 	if (fun->is_("0"))
 	{
-		log_("invoke passed unknown function:");
+		log_("call passed unknown function:");
 		log_(type);
 		log_(function);
 		return fun;
 	}
-	return fun->call(it);
+	return fun->invoke(it);
 }
 
 inline const Thing::Ptr Thing::pub_() const
@@ -1122,7 +1122,7 @@ inline const Thing::Ptr Thing::pub_() const
 	{
 		const Ptr pub = Index::mut_();
 		Index* const index = static_<Index>(pub);
-		index->update_("call", Member<Thing>::fin_(&Thing::call));
+		index->update_("invoke", Member<Thing>::fin_(&Thing::invoke));
 		index->update_("next", Member<Thing>::fin_(&Thing::next));
 		index->update_("is", Const<Thing>::fin_(&Thing::is));
 		index->update_("hash", Const<Thing>::fin_(&Thing::hash));
@@ -1132,7 +1132,7 @@ inline const Thing::Ptr Thing::pub_() const
 		index->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
 		index->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
 		index->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
-		index->update_("invoke", Static::fin_(&Thing::invoke));
+		index->update_("call", Static::fin_(&Thing::call));
 		index->update_("stats", Static::fin_(&Thing::stats));
 		index->update_("stat", Static::fin_(&Thing::stat));
 		index->update_("boolean", Static::fin_(&Thing::boolean));
@@ -1238,7 +1238,7 @@ protected:
 		const Ptr member = static_<Index>(pub_())->find_(name);
 		if (member->is_("0"))
 		{
-			return _decorated->call_(name, *it);
+			return _decorated->invoke_(name, *it);
 		}
 		return thing_(thing, member, it);
 	}
@@ -1504,7 +1504,7 @@ public:
 			rest->next_();
 			for (const auto visited : _vector)
 			{
-				visited->call_("visit", visitor, member, visited, *(rest->copy_()));
+				visited->invoke_("visit", visitor, member, visited, *(rest->copy_()));
 			}
 		}
 		return result;
@@ -1812,7 +1812,7 @@ public:
 			rest->next_();
 			for (const auto visited : _set)
 			{
-				visited->call_("visit", visitor, member, visited, *(rest->copy_()));
+				visited->invoke_("visit", visitor, member, visited, *(rest->copy_()));
 			}
 		}
 		return result;
@@ -1820,7 +1820,7 @@ public:
 
 	inline void gather_(const Ptr item)
 	{
-		item->call_("visit", me_(), "insert", item);
+		item->invoke_("visit", me_(), "insert", item);
 	}
 
 	inline const Ptr gather(const Ptr it)
@@ -2048,7 +2048,7 @@ public:
 		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
-			log_("Buffer::from_buffer_ called with wrong type of thing");
+			log_("Buffer::from_buffer_ passed wrong type of thing");
 			return;
 		}
 		set_(buf->get_());
@@ -2088,7 +2088,7 @@ public:
 
 inline void Thing::log_(const Thing::Ptr ptr)
 {
-	const Buffer* const buffer = dynamic_<Buffer>(ptr->call_("to_buffer"));
+	const Buffer* const buffer = dynamic_<Buffer>(ptr->invoke_("to_buffer"));
 	if (buffer)
 	{
 		log_(buffer->get_());
@@ -2100,7 +2100,7 @@ inline void Serializable::to_stream_(const Thing::Ptr stream) const
 	const Thing* const thing = dynamic_cast<const Thing*>(this);
 	if (thing)
 	{
-		Buffer* const buffer = Thing::dynamic_<Buffer>(const_cast<Thing*>(thing)->call_("to_buffer"));
+		Buffer* const buffer = Thing::dynamic_<Buffer>(const_cast<Thing*>(thing)->invoke_("to_buffer"));
 		if (buffer)
 		{
 			buffer->to_stream_(stream);
@@ -2115,7 +2115,7 @@ inline void Serializable::from_stream_(const Thing::Ptr stream)
 	Thing* const thing = dynamic_cast<Thing*>(this);
 	if (thing)
 	{
-		thing->call_("from_buffer", buffer);
+		thing->invoke_("from_buffer", buffer);
 	}
 }
 
@@ -2124,7 +2124,7 @@ inline const Thing::Ptr Symbol::buf_(const Thing::Ptr buffer)
 	Buffer* const buf = dynamic_<Buffer>(buffer);
 	if (!buf)
 	{
-		log_("Symbol::buf_ called with wrong type of thing");
+		log_("Symbol::buf_ passed wrong type of thing");
 		return fin_("");
 	}
 	return fin_(buf->get_());
@@ -2403,7 +2403,7 @@ public:
 		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
-			log_("Bit::from_buffer_ called with wrong type of thing");
+			log_("Bit::from_buffer_ passed wrong type of thing");
 			return;
 		}
 		set_(bool(buf->get_()[0]));
@@ -2596,7 +2596,7 @@ public:
 		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
-			log_("Byte::from_buffer_ called with wrong type of thing");
+			log_("Byte::from_buffer_ passed wrong type of thing");
 			return;
 		}
 		set_(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0])));
@@ -2792,7 +2792,7 @@ public:
 		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
-			log_("Int16::from_buffer_ called with wrong type of thing");
+			log_("Int16::from_buffer_ passed wrong type of thing");
 			return;
 		}
 		set_(
@@ -2993,7 +2993,7 @@ public:
 		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
-			log_("Int32::from_buffer_ called with wrong type of thing");
+			log_("Int32::from_buffer_ passed wrong type of thing");
 			return;
 		}
 		set_(
@@ -3200,7 +3200,7 @@ public:
 		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
-			log_("Int64::from_buffer_ called with wrong type of thing");
+			log_("Int64::from_buffer_ passed wrong type of thing");
 			return;
 		}
 		set_(
@@ -3408,7 +3408,7 @@ public:
 		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
-			log_("Float32::from_buffer_ called with wrong type of thing");
+			log_("Float32::from_buffer_ passed wrong type of thing");
 			return;
 		}
 		const uint32_t i =
@@ -3616,7 +3616,7 @@ public:
 		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
-			log_("Float64::from_buffer_ called with wrong type of thing");
+			log_("Float64::from_buffer_ passed wrong type of thing");
 			return;
 		}
 		const uint64_t i =
@@ -3833,7 +3833,7 @@ public:
 		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
-			log_("Complex32::from_buffer_ called with wrong type of thing");
+			log_("Complex32::from_buffer_ passed wrong type of thing");
 			return;
 		}
 		const uint32_t r =
@@ -4084,7 +4084,7 @@ public:
 		Buffer* const buf = dynamic_<Buffer>(buffer);
 		if (!buf)
 		{
-			log_("Complex64::from_buffer_ called with wrong type of thing");
+			log_("Complex64::from_buffer_ passed wrong type of thing");
 			return;
 		}
 		const uint64_t r =
@@ -4356,7 +4356,7 @@ public:
 		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
-		ptr->call_("to_stream", me_());
+		ptr->invoke_("to_stream", me_());
 		return true;
 	}
 
@@ -4371,7 +4371,7 @@ public:
 		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
-		ptr->call_("to_stream_with_links", index, me_());
+		ptr->invoke_("to_stream_with_links", index, me_());
 		return true;
 	}
 
@@ -4382,7 +4382,7 @@ public:
 
 	inline void write_(const Ptr ptr)
 	{
-		Buffer* const buffer = dynamic_<Buffer>(ptr->call_("to_buffer"));
+		Buffer* const buffer = dynamic_<Buffer>(ptr->invoke_("to_buffer"));
 		if (buffer)
 		{
 			write_(buffer->get_());
@@ -4398,7 +4398,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Buffer>(read_(int16))->get_();
-		return invoke_(type, "str", me_());
+		return call_(type, "str", me_());
 	}
 
 	inline const Ptr pop_front(const Ptr ignore)
@@ -4410,7 +4410,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Buffer>(read_(int16))->get_();
-		return invoke_(type, "swl", me_());
+		return call_(type, "swl", me_());
 	}
 
 	inline const Ptr read_(const int64_t length)
@@ -4437,7 +4437,7 @@ inline const Thing::Ptr Serializable::to_buffer_via_stream_() const
 	if (thing)
 	{
 		const Thing::Ptr stream = Stream::mut_();
-		const_cast<Thing*>(thing)->call_("to_stream", stream);
+		const_cast<Thing*>(thing)->invoke_("to_stream", stream);
 		const Thing::Ptr buffer = Buffer::mut_();
 		Thing::static_<Buffer>(buffer)->from_stream_(stream);
 		return buffer;
@@ -4450,7 +4450,7 @@ inline void Serializable::from_buffer_via_stream_(const Thing::Ptr buffer)
 	Buffer* const buf = Thing::dynamic_<Buffer>(buffer);
 	if (!buf)
 	{
-		Thing::log_("Serializable::from_buffer_via_stream_ called with wrong type of thing");
+		Thing::log_("Serializable::from_buffer_via_stream_ passed wrong type of thing");
 		return;
 	}
 	const Thing::Ptr stream = Stream::mut_();
@@ -4458,7 +4458,7 @@ inline void Serializable::from_buffer_via_stream_(const Thing::Ptr buffer)
 	Thing* const thing = dynamic_cast<Thing*>(this);
 	if (thing)
 	{
-		thing->call_("from_stream", stream);
+		thing->invoke_("from_stream", stream);
 	}
 }
 
@@ -4467,7 +4467,7 @@ inline void Index::to_stream_(const Thing::Ptr stream) const
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Index::to_stream_ called with wrong type of thing");
+		log_("Index::to_stream_ passed wrong type of thing");
 		return;
 	}
 	strm->write_(Bit::mut_(finalized_()));
@@ -4484,7 +4484,7 @@ inline void Index::from_stream_(const Thing::Ptr stream)
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Index::from_stream_ called with wrong type of thing");
+		log_("Index::from_stream_ passed wrong type of thing");
 		return;
 	}
 	const bool bit = strm->read_<Bit>();
@@ -4505,13 +4505,13 @@ inline void Index::to_stream_with_links_(const Thing::Ptr index, const Thing::Pt
 	Index* const ind = dynamic_<Index>(index);
 	if (!ind)
 	{
-		log_("Index::to_stream_with_links_ called with wrong type of index thing");
+		log_("Index::to_stream_with_links_ passed wrong type of index thing");
 		return;
 	}
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Index::to_stream_with_links_ called with wrong type of stream thing");
+		log_("Index::to_stream_with_links_ passed wrong type of stream thing");
 		return;
 	}
 	strm->write_(Bit::mut_(finalized_()));
@@ -4528,7 +4528,7 @@ inline void Index::from_stream_with_links_(const Thing::Ptr stream)
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Index::from_stream_with_links_ called with wrong type of thing");
+		log_("Index::from_stream_with_links_ passed wrong type of thing");
 		return;
 	}
 	const bool bit = strm->read_<Bit>();
@@ -4560,7 +4560,7 @@ inline void Index::gather_to_stream_(const Thing::Ptr thing, const Thing::Ptr st
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Index::gather_to_stream_ called with wrong type of stream thing");
+		log_("Index::gather_to_stream_ passed wrong type of stream thing");
 		return;
 	}
 	gather_(thing);
@@ -4579,7 +4579,7 @@ inline const Thing::Ptr Index::gather_from_stream_(const Thing::Ptr stream)
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Index::gather_from_stream_ called with wrong type of stream thing");
+		log_("Index::gather_from_stream_ passed wrong type of stream thing");
 		return nothing_();
 	}
 	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
@@ -4590,7 +4590,7 @@ inline const Thing::Ptr Index::gather_from_stream_(const Thing::Ptr stream)
 	}
 	for (const auto& i : _map)
 	{
-		i.second->call_("replace_links", me_());
+		i.second->invoke_("replace_links", me_());
 	}
 	return find_(nothing_());
 }
@@ -4600,7 +4600,7 @@ inline void Flock::to_stream_(const Thing::Ptr stream) const
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Flock::to_stream_ called with wrong type of thing");
+		log_("Flock::to_stream_ passed wrong type of thing");
 		return;
 	}
 	strm->write_(Bit::mut_(finalized_()));
@@ -4616,7 +4616,7 @@ inline void Flock::from_stream_(const Thing::Ptr stream)
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Flock::from_stream_ called with wrong type of thing");
+		log_("Flock::from_stream_ passed wrong type of thing");
 		return;
 	}
 	const bool bit = strm->read_<Bit>();
@@ -4637,13 +4637,13 @@ inline void Flock::to_stream_with_links_(const Thing::Ptr index, const Thing::Pt
 	Index* const ind = dynamic_<Index>(index);
 	if (!ind)
 	{
-		log_("Flock::to_stream_with_links_ called with wrong type of index thing");
+		log_("Flock::to_stream_with_links_ passed wrong type of index thing");
 		return;
 	}
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Flock::to_stream_with_links_ called with wrong type of stream thing");
+		log_("Flock::to_stream_with_links_ passed wrong type of stream thing");
 		return;
 	}
 	strm->write_(Bit::mut_(finalized_()));
@@ -4659,7 +4659,7 @@ inline void Flock::from_stream_with_links_(const Thing::Ptr stream)
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Flock::from_stream_with_links_ called with wrong type of thing");
+		log_("Flock::from_stream_with_links_ passed wrong type of thing");
 		return;
 	}
 	const bool bit = strm->read_<Bit>();
@@ -4689,7 +4689,7 @@ inline void Herd::to_stream_(const Thing::Ptr stream) const
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Herd::to_stream_ called with wrong type of thing");
+		log_("Herd::to_stream_ passed wrong type of thing");
 		return;
 	}
 	strm->write_(Bit::mut_(finalized_()));
@@ -4705,7 +4705,7 @@ inline void Herd::from_stream_(const Thing::Ptr stream)
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Herd::from_stream_ called with wrong type of thing");
+		log_("Herd::from_stream_ passed wrong type of thing");
 		return;
 	}
 	const bool bit = strm->read_<Bit>();
@@ -4724,13 +4724,13 @@ inline void Herd::to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr
 	Index* const ind = dynamic_<Index>(index);
 	if (!ind)
 	{
-		log_("Herd::to_stream_with_links_ called with wrong type of index thing");
+		log_("Herd::to_stream_with_links_ passed wrong type of index thing");
 		return;
 	}
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Herd::to_stream_with_links_ called with wrong type of stream thing");
+		log_("Herd::to_stream_with_links_ passed wrong type of stream thing");
 		return;
 	}
 	strm->write_(Bit::mut_(finalized_()));
@@ -4746,7 +4746,7 @@ inline void Herd::from_stream_with_links_(const Thing::Ptr stream)
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Herd::from_stream_with_links_ called with wrong type of thing");
+		log_("Herd::from_stream_with_links_ passed wrong type of thing");
 		return;
 	}
 	const bool bit = strm->read_<Bit>();
@@ -4776,7 +4776,7 @@ inline void Buffer::to_stream_(const Thing::Ptr stream) const
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Buffer::to_stream_ called with wrong type of thing");
+		log_("Buffer::to_stream_ passed wrong type of thing");
 		return;
 	}
 	strm->write_(Bit::mut_(finalized_()));
@@ -4789,7 +4789,7 @@ inline void Buffer::from_stream_(const Thing::Ptr stream)
 	Stream* const strm = dynamic_<Stream>(stream);
 	if (!strm)
 	{
-		log_("Buffer::from_stream_ called with wrong type of thing");
+		log_("Buffer::from_stream_ passed wrong type of thing");
 		return;
 	}
 	const bool bit = strm->read_<Bit>();
@@ -5225,7 +5225,7 @@ private:
 			}
 			const Ptr it = Expression::It::mut_(exp, local);
 			const Ptr thing = it->next_();
-			return thing->call(it);
+			return thing->invoke(it);
 		}
 	};
 
