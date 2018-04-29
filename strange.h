@@ -5029,13 +5029,14 @@ public:
 	inline Class()
 		: Mutable{}
 		, Me{}
-		, _override{ Index::mut_() }
+		, _public{ Index::mut_() }
+		, _private{ Index::mut_() }
 	{
 	}
 
 	virtual inline const Ptr type_() const override
 	{
-		const Ptr over = static_<Index>(_override)->find_("type");
+		const Ptr over = static_<Index>(_public)->find_("type");
 		if (!over->is_("0"))
 		{
 			return operate_(const_cast<Class*>(this), over);
@@ -5046,7 +5047,7 @@ public:
 
 	virtual inline const Ptr copy_() const override
 	{
-		const Ptr over = static_<Index>(_override)->find_("copy");
+		const Ptr over = static_<Index>(_public)->find_("copy");
 		if (!over->is_("0"))
 		{
 			return operate_(const_cast<Class*>(this), over);
@@ -5056,7 +5057,7 @@ public:
 
 	virtual inline const Ptr clone_() const override
 	{
-		const Ptr over = static_<Index>(_override)->find_("clone");
+		const Ptr over = static_<Index>(_public)->find_("clone");
 		if (!over->is_("0"))
 		{
 			return operate_(const_cast<Class*>(this), over);
@@ -5066,7 +5067,7 @@ public:
 
 	virtual inline void finalize_() override
 	{
-		const Ptr over = static_<Index>(_override)->find_("finalize");
+		const Ptr over = static_<Index>(_public)->find_("finalize");
 		if (!over->is_("0"))
 		{
 			operate_(this, over);
@@ -5076,7 +5077,7 @@ public:
 
 	virtual inline const bool finalized_() const override
 	{
-		const Ptr over = static_<Index>(_override)->find_("finalized");
+		const Ptr over = static_<Index>(_public)->find_("finalized");
 		if (!over->is_("0"))
 		{
 			return !operate_(const_cast<Class*>(this), over)->is_("0");
@@ -5086,7 +5087,7 @@ public:
 
 	virtual inline void freeze_() override
 	{
-		const Ptr over = static_<Index>(_override)->find_("freeze");
+		const Ptr over = static_<Index>(_public)->find_("freeze");
 		if (!over->is_("0"))
 		{
 			operate_(this, over);
@@ -5096,7 +5097,7 @@ public:
 
 	virtual inline const Ptr next_() override
 	{
-		const Ptr over = static_<Index>(_override)->find_("next");
+		const Ptr over = static_<Index>(_public)->find_("next");
 		if (!over->is_("0"))
 		{
 			operate_(this, over);
@@ -5106,7 +5107,7 @@ public:
 
 	virtual inline size_t hash_() const override
 	{
-		const Ptr over = static_<Index>(_override)->find_("hash");
+		const Ptr over = static_<Index>(_public)->find_("hash");
 		if (!over->is_("0"))
 		{
 			return size_t(static_<Int64>(operate_(const_cast<Class*>(this), over))->get_());
@@ -5116,7 +5117,7 @@ public:
 
 	virtual inline const bool same_(const Ptr other) const override
 	{
-		const Ptr over = static_<Index>(_override)->find_("same");
+		const Ptr over = static_<Index>(_public)->find_("same");
 		if (!over->is_("0"))
 		{
 			std::vector<Ptr> vec(1, other);
@@ -5127,7 +5128,7 @@ public:
 
 	virtual inline const Ptr visit(const Ptr it) override
 	{
-		const Ptr over = static_<Index>(_override)->find_("visit");
+		const Ptr over = static_<Index>(_public)->find_("visit");
 		if (!over->is_("0"))
 		{
 			return operate_(this, over, it);
@@ -5137,7 +5138,7 @@ public:
 
 	virtual inline const Ptr cats_() const override
 	{
-		const Ptr over = static_<Index>(_override)->find_("cats");
+		const Ptr over = static_<Index>(_public)->find_("cats");
 		if (!over->is_("0"))
 		{
 			return operate_(const_cast<Class*>(this), over);
@@ -5160,7 +5161,7 @@ protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
 		const Ptr name = it->next_();
-		const Ptr over = static_<Index>(_override)->find_(name);
+		const Ptr over = static_<Index>(_public)->find_(name);
 		if (!over->is_("0"))
 		{
 			return operate_(thing, over, it);
@@ -5174,7 +5175,9 @@ protected:
 	}
 
 private:
-	const Ptr _override;
+	friend class Function;
+	const Ptr _public;
+	const Ptr _private;
 };
 
 class Command : public Symbol
@@ -5501,10 +5504,14 @@ protected:
 		const Ptr local = Index::mut_();
 		Index* const loc = static_<Index>(local);
 		loc->insert_("static", _static);
-		Me<Class>* const me = dynamic_cast<Me<Class>*>(thing);
-		if (me)
+		Me<Class>* const me_class = dynamic_cast<Me<Class>*>(thing);
+		if (me_class)
 		{
-			loc->insert_("me", me->me_());
+			const Ptr me = me_class->me_();
+			Class* const instance = static_<Class>(me);
+			loc->insert_("me", me);
+			loc->insert_("public", instance->_public);
+			loc->insert_("private", instance->_private);
 		}
 		loc->insert_("it", it);
 		return static_<Expression>(_expression)->evaluate_(local);
