@@ -379,22 +379,22 @@ class Serializable
 {
 public:
 	// public pure virtual member functions and adapters
-	virtual inline const Thing::Ptr to_buffer_() const = 0;
+	virtual inline const Thing::Ptr to_lake_() const = 0;
 
-	inline const Thing::Ptr to_buffer(const Thing::Ptr ignore) const
+	inline const Thing::Ptr to_lake(const Thing::Ptr ignore) const
 	{
-		return to_buffer_();
+		return to_lake_();
 	}
 
 	// public impure virtual member functions and adapters
 
-	virtual inline void from_buffer_(const Thing::Ptr buffer)
+	virtual inline void from_lake_(const Thing::Ptr lake)
 	{
 	}
 
-	inline const Thing::Ptr from_buffer(const Thing::Ptr it)
+	inline const Thing::Ptr from_lake(const Thing::Ptr it)
 	{
-		from_buffer_(it->next_());
+		from_lake_(it->next_());
 		return Thing::nothing_();
 	}
 
@@ -477,18 +477,18 @@ public:
 	}
 
 	// public non-virtual member functions and adapters
-	inline const Thing::Ptr to_buffer_via_river_() const;
+	inline const Thing::Ptr to_lake_via_river_() const;
 
-	inline const Thing::Ptr to_buffer_via_river(const Thing::Ptr ignore) const
+	inline const Thing::Ptr to_lake_via_river(const Thing::Ptr ignore) const
 	{
-		return to_buffer_via_river_();
+		return to_lake_via_river_();
 	}
 
-	inline void from_buffer_via_river_(const Thing::Ptr buffer);
+	inline void from_lake_via_river_(const Thing::Ptr lake);
 
-	inline const Thing::Ptr from_buffer_via_river(const Thing::Ptr it)
+	inline const Thing::Ptr from_lake_via_river(const Thing::Ptr it)
 	{
-		from_buffer_via_river_(it->next_());
+		from_lake_via_river_(it->next_());
 		return Thing::nothing_();
 	}
 };
@@ -532,11 +532,11 @@ public:
 		return make_(std::forward<F>(symbol));
 	}
 
-	static inline const Ptr buf_(const Ptr buffer);
+	static inline const Ptr lak_(const Ptr lake);
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river);
@@ -560,7 +560,7 @@ public:
 		return stat_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override;
+	virtual inline const Ptr to_lake_() const override;
 
 	virtual inline const Ptr type_() const override
 	{
@@ -823,14 +823,14 @@ public:
 		}
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
-		return to_buffer_via_river_();
+		return to_lake_via_river_();
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		from_buffer_via_river_(buffer);
+		from_lake_via_river_(lake);
 	}
 
 	virtual inline void to_river_(const Thing::Ptr river) const override;
@@ -849,13 +849,13 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Index>::fin_(&Index::to_buffer));
-			index->update_("from_buffer", Member<Index>::fin_(&Index::from_buffer));
+			index->update_("to_lake", Const<Index>::fin_(&Index::to_lake));
+			index->update_("from_lake", Member<Index>::fin_(&Index::from_lake));
 			index->update_("to_river", Const<Index>::fin_(&Index::to_river));
 			index->update_("from_river", Member<Index>::fin_(&Index::from_river));
 			index->update_("stat", Static::fin_(&Index::stat));
 			index->update_("mut", Static::fin_(&Index::mut));
-			index->update_("buf", Static::fin_(&Index::buf));
+			index->update_("lak", Static::fin_(&Index::lak));
 			index->update_("riv", Static::fin_(&Index::riv));
 			index->update_("rwl", Static::fin_(&Index::rwl));
 			index->update_("find", Const<Index>::fin_(&Index::find));
@@ -878,7 +878,7 @@ public:
 			Index* const index = static_<Index>(stat);
 			index->update_("stat", Static::fin_(&Index::stat));
 			index->update_("mut", Static::fin_(&Index::mut));
-			index->update_("buf", Static::fin_(&Index::buf));
+			index->update_("lak", Static::fin_(&Index::lak));
 			index->update_("riv", Static::fin_(&Index::riv));
 			index->update_("rwl", Static::fin_(&Index::rwl));
 			index->finalize_();
@@ -902,16 +902,16 @@ public:
 		return mut_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Index>(ptr)->from_buffer_(buffer);
+		static_<Index>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -1196,10 +1196,10 @@ inline const Thing::Ptr Symbol::pub_() const
 	{
 		const Ptr pub = Thing::pub_()->copy_();
 		Index* const index = static_<Index>(pub);
-		index->update_("to_buffer", Const<Index>::fin_(&Index::to_buffer));
+		index->update_("to_lake", Const<Index>::fin_(&Index::to_lake));
 		index->update_("to_river", Const<Index>::fin_(&Index::to_river));
 		index->update_("stat", Static::fin_(&Symbol::stat));
-		index->update_("buf", Static::fin_(&Symbol::buf));
+		index->update_("lak", Static::fin_(&Symbol::lak));
 		index->update_("riv", Static::fin_(&Symbol::riv));
 		index->update_("rwl", Static::fin_(&Symbol::rwl));
 		index->finalize_();
@@ -1215,7 +1215,7 @@ inline const Thing::Ptr Symbol::stat_()
 		const Ptr stat = Index::mut_();
 		Index* const index = static_<Index>(stat);
 		index->update_("stat", Static::fin_(&Symbol::stat));
-		index->update_("buf", Static::fin_(&Symbol::buf));
+		index->update_("lak", Static::fin_(&Symbol::lak));
 		index->update_("riv", Static::fin_(&Symbol::riv));
 		index->update_("rwl", Static::fin_(&Symbol::rwl));
 		index->finalize_();
@@ -1339,14 +1339,14 @@ public:
 		}
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
-		return to_buffer_via_river_();
+		return to_lake_via_river_();
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		from_buffer_via_river_(buffer);
+		from_lake_via_river_(lake);
 	}
 
 	virtual inline void to_river_(const Thing::Ptr river) const override;
@@ -1365,13 +1365,13 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Flock>::fin_(&Flock::to_buffer));
-			index->update_("from_buffer", Member<Flock>::fin_(&Flock::from_buffer));
+			index->update_("to_lake", Const<Flock>::fin_(&Flock::to_lake));
+			index->update_("from_lake", Member<Flock>::fin_(&Flock::from_lake));
 			index->update_("to_river", Const<Flock>::fin_(&Flock::to_river));
 			index->update_("from_river", Member<Flock>::fin_(&Flock::from_river));
 			index->update_("stat", Static::fin_(&Flock::stat));
 			index->update_("mut", Static::fin_(&Flock::mut));
-			index->update_("buf", Static::fin_(&Flock::buf));
+			index->update_("lak", Static::fin_(&Flock::lak));
 			index->update_("riv", Static::fin_(&Flock::riv));
 			index->update_("rwl", Static::fin_(&Flock::rwl));
 			index->update_("push_back", Member<Flock>::fin_(&Flock::push_back));
@@ -1390,7 +1390,7 @@ public:
 			Index* const index = static_<Index>(stat);
 			index->update_("stat", Static::fin_(&Flock::stat));
 			index->update_("mut", Static::fin_(&Flock::mut));
-			index->update_("buf", Static::fin_(&Flock::buf));
+			index->update_("lak", Static::fin_(&Flock::lak));
 			index->update_("riv", Static::fin_(&Flock::riv));
 			index->update_("rwl", Static::fin_(&Flock::rwl));
 			index->finalize_();
@@ -1414,16 +1414,16 @@ public:
 		return mut_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Flock>(ptr)->from_buffer_(buffer);
+		static_<Flock>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -1625,14 +1625,14 @@ public:
 		}
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
-		return to_buffer_via_river_();
+		return to_lake_via_river_();
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		from_buffer_via_river_(buffer);
+		from_lake_via_river_(lake);
 	}
 
 	virtual inline void to_river_(const Thing::Ptr river) const override;
@@ -1651,13 +1651,13 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Herd>::fin_(&Herd::to_buffer));
-			index->update_("from_buffer", Member<Herd>::fin_(&Herd::from_buffer));
+			index->update_("to_lake", Const<Herd>::fin_(&Herd::to_lake));
+			index->update_("from_lake", Member<Herd>::fin_(&Herd::from_lake));
 			index->update_("to_river", Const<Herd>::fin_(&Herd::to_river));
 			index->update_("from_river", Member<Herd>::fin_(&Herd::from_river));
 			index->update_("stat", Static::fin_(&Herd::stat));
 			index->update_("mut", Static::fin_(&Herd::mut));
-			index->update_("buf", Static::fin_(&Herd::buf));
+			index->update_("lak", Static::fin_(&Herd::lak));
 			index->update_("riv", Static::fin_(&Herd::riv));
 			index->update_("rwl", Static::fin_(&Herd::rwl));
 			index->update_("find", Const<Herd>::fin_(&Herd::find));
@@ -1678,7 +1678,7 @@ public:
 			Index* const index = static_<Index>(stat);
 			index->update_("stat", Static::fin_(&Herd::stat));
 			index->update_("mut", Static::fin_(&Herd::mut));
-			index->update_("buf", Static::fin_(&Herd::buf));
+			index->update_("lak", Static::fin_(&Herd::lak));
 			index->update_("riv", Static::fin_(&Herd::riv));
 			index->update_("rwl", Static::fin_(&Herd::rwl));
 			index->finalize_();
@@ -1702,16 +1702,16 @@ public:
 		return mut_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Herd>(ptr)->from_buffer_(buffer);
+		static_<Herd>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -1914,14 +1914,14 @@ private:
 	D _data;
 };
 
-class Buffer : public Mutable, public Serializable, public Data<std::string>
+class Lake : public Mutable, public Serializable, public Data<std::string>
 {
 public:
 	using S = std::string;
 
 	static inline const Ptr mut_(const S& data = S())
 	{
-		return std::make_shared<Buffer>(data);
+		return std::make_shared<Lake>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -1941,22 +1941,22 @@ public:
 		return fin_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Buffer>(ptr)->from_buffer_(buffer);
+		static_<Lake>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Buffer>(ptr)->from_river_(river);
+		static_<Lake>(ptr)->from_river_(river);
 		return ptr;
 	}
 
@@ -1968,7 +1968,7 @@ public:
 	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Buffer>(ptr)->from_river_with_links_(river);
+		static_<Lake>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
@@ -1977,7 +1977,7 @@ public:
 		return rwl_(it->next_());
 	}
 
-	inline Buffer(const S& data)
+	inline Lake(const S& data)
 		: Mutable{}
 		, Serializable{}
 		, Data{ data }
@@ -1995,16 +1995,16 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Buffer>::fin_(&Buffer::to_buffer));
-			index->update_("from_buffer", Member<Buffer>::fin_(&Buffer::from_buffer));
-			index->update_("to_river", Const<Buffer>::fin_(&Buffer::to_river));
-			index->update_("from_river", Member<Buffer>::fin_(&Buffer::from_river));
-			index->update_("stat", Static::fin_(&Buffer::stat));
-			index->update_("mut", Static::fin_(&Buffer::mut));
-			index->update_("fin", Static::fin_(&Buffer::fin));
-			index->update_("buf", Static::fin_(&Buffer::buf));
-			index->update_("riv", Static::fin_(&Buffer::riv));
-			index->update_("rwl", Static::fin_(&Buffer::rwl));
+			index->update_("to_lake", Const<Lake>::fin_(&Lake::to_lake));
+			index->update_("from_lake", Member<Lake>::fin_(&Lake::from_lake));
+			index->update_("to_river", Const<Lake>::fin_(&Lake::to_river));
+			index->update_("from_river", Member<Lake>::fin_(&Lake::from_river));
+			index->update_("stat", Static::fin_(&Lake::stat));
+			index->update_("mut", Static::fin_(&Lake::mut));
+			index->update_("fin", Static::fin_(&Lake::fin));
+			index->update_("lak", Static::fin_(&Lake::lak));
+			index->update_("riv", Static::fin_(&Lake::riv));
+			index->update_("rwl", Static::fin_(&Lake::rwl));
 			index->finalize_();
 			return pub;
 		}();
@@ -2017,12 +2017,12 @@ public:
 		{
 			const Ptr stat = Index::mut_();
 			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Buffer::stat));
-			index->update_("mut", Static::fin_(&Buffer::mut));
-			index->update_("fin", Static::fin_(&Buffer::fin));
-			index->update_("buf", Static::fin_(&Buffer::buf));
-			index->update_("riv", Static::fin_(&Buffer::riv));
-			index->update_("rwl", Static::fin_(&Buffer::rwl));
+			index->update_("stat", Static::fin_(&Lake::stat));
+			index->update_("mut", Static::fin_(&Lake::mut));
+			index->update_("fin", Static::fin_(&Lake::fin));
+			index->update_("lak", Static::fin_(&Lake::lak));
+			index->update_("riv", Static::fin_(&Lake::riv));
+			index->update_("rwl", Static::fin_(&Lake::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -2034,26 +2034,26 @@ public:
 		return stat_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
-		const Ptr buffer = copy_();
+		const Ptr lake = copy_();
 		if (finalized_())
 		{
-			buffer->finalize_();
+			lake->finalize_();
 		}
-		return buffer;
+		return lake;
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		Buffer* const buf = dynamic_<Buffer>(buffer);
-		if (!buf)
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
 		{
-			log_("Buffer::from_buffer_ passed wrong type of thing");
+			log_("Lake::from_lake_ passed wrong type of thing");
 			return;
 		}
-		set_(buf->get_());
-		if (buf->finalized_())
+		set_(lak->get_());
+		if (lak->finalized_())
 		{
 			finalize_();
 		}
@@ -2065,7 +2065,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Buffer");
+		static const Ptr TYPE = sym_("strange::Lake");
 		return TYPE;
 	}
 
@@ -2077,7 +2077,7 @@ public:
 			Herd* const herd = static_<Herd>(cats);
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Buffer");
+			herd->insert_("strange::Lake");
 			herd->insert_("strange::Data");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -2089,10 +2089,10 @@ public:
 
 inline void Thing::log_(const Thing::Ptr ptr)
 {
-	const Buffer* const buffer = dynamic_<Buffer>(ptr->invoke_("to_buffer"));
-	if (buffer)
+	const Lake* const lake = dynamic_<Lake>(ptr->invoke_("to_lake"));
+	if (lake)
 	{
-		log_(buffer->get_());
+		log_(lake->get_());
 	}
 }
 
@@ -2101,51 +2101,51 @@ inline void Serializable::to_river_(const Thing::Ptr river) const
 	const Thing* const thing = dynamic_cast<const Thing*>(this);
 	if (thing)
 	{
-		Buffer* const buffer = Thing::dynamic_<Buffer>(const_cast<Thing*>(thing)->invoke_("to_buffer"));
-		if (buffer)
+		Lake* const lake = Thing::dynamic_<Lake>(const_cast<Thing*>(thing)->invoke_("to_lake"));
+		if (lake)
 		{
-			buffer->to_river_(river);
+			lake->to_river_(river);
 		}
 	}
 }
 
 inline void Serializable::from_river_(const Thing::Ptr river)
 {
-	const Thing::Ptr buffer = Buffer::mut_();
-	Thing::static_<Buffer>(buffer)->from_river_(river);
+	const Thing::Ptr lake = Lake::mut_();
+	Thing::static_<Lake>(lake)->from_river_(river);
 	Thing* const thing = dynamic_cast<Thing*>(this);
 	if (thing)
 	{
-		thing->invoke_("from_buffer", buffer);
+		thing->invoke_("from_lake", lake);
 	}
 }
 
-inline const Thing::Ptr Symbol::buf_(const Thing::Ptr buffer)
+inline const Thing::Ptr Symbol::lak_(const Thing::Ptr lake)
 {
-	Buffer* const buf = dynamic_<Buffer>(buffer);
-	if (!buf)
+	Lake* const lak = dynamic_<Lake>(lake);
+	if (!lak)
 	{
-		log_("Symbol::buf_ passed wrong type of thing");
+		log_("Symbol::lak_ passed wrong type of thing");
 		return fin_("");
 	}
-	return fin_(buf->get_());
+	return fin_(lak->get_());
 }
 
 inline const Thing::Ptr Symbol::riv_(const Thing::Ptr river)
 {
-	return fin_(static_<Buffer>(Buffer::riv_(river))->get_());
+	return fin_(static_<Lake>(Lake::riv_(river))->get_());
 }
 
 inline const Thing::Ptr Symbol::rwl_(const Thing::Ptr river)
 {
-	return fin_(static_<Buffer>(Buffer::rwl_(river))->get_());
+	return fin_(static_<Lake>(Lake::rwl_(river))->get_());
 }
 
-inline const Thing::Ptr Symbol::to_buffer_() const
+inline const Thing::Ptr Symbol::to_lake_() const
 {
-	const Ptr buffer = Buffer::mut_(_symbol);
-	buffer->finalize_();
-	return buffer;
+	const Ptr lake = Lake::mut_(_symbol);
+	lake->finalize_();
+	return lake;
 }
 
 class Number : public Mutable, public Serializable
@@ -2297,16 +2297,16 @@ public:
 		return fin_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Bit>(ptr)->from_buffer_(buffer);
+		static_<Bit>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -2350,14 +2350,14 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Bit>::fin_(&Bit::to_buffer));
-			index->update_("from_buffer", Member<Bit>::fin_(&Bit::from_buffer));
+			index->update_("to_lake", Const<Bit>::fin_(&Bit::to_lake));
+			index->update_("from_lake", Member<Bit>::fin_(&Bit::from_lake));
 			index->update_("to_river", Const<Bit>::fin_(&Bit::to_river));
 			index->update_("from_river", Member<Bit>::fin_(&Bit::from_river));
 			index->update_("stat", Static::fin_(&Bit::stat));
 			index->update_("mut", Static::fin_(&Bit::mut));
 			index->update_("fin", Static::fin_(&Bit::fin));
-			index->update_("buf", Static::fin_(&Bit::buf));
+			index->update_("lak", Static::fin_(&Bit::lak));
 			index->update_("riv", Static::fin_(&Bit::riv));
 			index->update_("rwl", Static::fin_(&Bit::rwl));
 			index->finalize_();
@@ -2375,7 +2375,7 @@ public:
 			index->update_("stat", Static::fin_(&Bit::stat));
 			index->update_("mut", Static::fin_(&Bit::mut));
 			index->update_("fin", Static::fin_(&Bit::fin));
-			index->update_("buf", Static::fin_(&Bit::buf));
+			index->update_("lak", Static::fin_(&Bit::lak));
 			index->update_("riv", Static::fin_(&Bit::riv));
 			index->update_("rwl", Static::fin_(&Bit::rwl));
 			index->finalize_();
@@ -2389,26 +2389,26 @@ public:
 		return stat_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
-		const Ptr buffer = Buffer::mut_(std::string(1, get_() ? char(1) : char(0)));
+		const Ptr lake = Lake::mut_(std::string(1, get_() ? char(1) : char(0)));
 		if (finalized_())
 		{
-			buffer->finalize_();
+			lake->finalize_();
 		}
-		return buffer;
+		return lake;
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		Buffer* const buf = dynamic_<Buffer>(buffer);
-		if (!buf)
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
 		{
-			log_("Bit::from_buffer_ passed wrong type of thing");
+			log_("Bit::from_lake_ passed wrong type of thing");
 			return;
 		}
-		set_(bool(buf->get_()[0]));
-		if (buf->finalized_())
+		set_(bool(lak->get_()[0]));
+		if (lak->finalized_())
 		{
 			finalize_();
 		}
@@ -2490,16 +2490,16 @@ public:
 		return fin_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Byte>(ptr)->from_buffer_(buffer);
+		static_<Byte>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -2543,14 +2543,14 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Byte>::fin_(&Byte::to_buffer));
-			index->update_("from_buffer", Member<Byte>::fin_(&Byte::from_buffer));
+			index->update_("to_lake", Const<Byte>::fin_(&Byte::to_lake));
+			index->update_("from_lake", Member<Byte>::fin_(&Byte::from_lake));
 			index->update_("to_river", Const<Byte>::fin_(&Byte::to_river));
 			index->update_("from_river", Member<Byte>::fin_(&Byte::from_river));
 			index->update_("stat", Static::fin_(&Byte::stat));
 			index->update_("mut", Static::fin_(&Byte::mut));
 			index->update_("fin", Static::fin_(&Byte::fin));
-			index->update_("buf", Static::fin_(&Byte::buf));
+			index->update_("lak", Static::fin_(&Byte::lak));
 			index->update_("riv", Static::fin_(&Byte::riv));
 			index->update_("rwl", Static::fin_(&Byte::rwl));
 			index->finalize_();
@@ -2568,7 +2568,7 @@ public:
 			index->update_("stat", Static::fin_(&Byte::stat));
 			index->update_("mut", Static::fin_(&Byte::mut));
 			index->update_("fin", Static::fin_(&Byte::fin));
-			index->update_("buf", Static::fin_(&Byte::buf));
+			index->update_("lak", Static::fin_(&Byte::lak));
 			index->update_("riv", Static::fin_(&Byte::riv));
 			index->update_("rwl", Static::fin_(&Byte::rwl));
 			index->finalize_();
@@ -2582,26 +2582,26 @@ public:
 		return stat_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
-		const Ptr buffer = Buffer::mut_(std::string(1, *reinterpret_cast<const char*>(&(get_()))));
+		const Ptr lake = Lake::mut_(std::string(1, *reinterpret_cast<const char*>(&(get_()))));
 		if (finalized_())
 		{
-			buffer->finalize_();
+			lake->finalize_();
 		}
-		return buffer;
+		return lake;
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		Buffer* const buf = dynamic_<Buffer>(buffer);
-		if (!buf)
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
 		{
-			log_("Byte::from_buffer_ passed wrong type of thing");
+			log_("Byte::from_lake_ passed wrong type of thing");
 			return;
 		}
-		set_(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0])));
-		if (buf->finalized_())
+		set_(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0])));
+		if (lak->finalized_())
 		{
 			finalize_();
 		}
@@ -2683,16 +2683,16 @@ public:
 		return fin_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Int16>(ptr)->from_buffer_(buffer);
+		static_<Int16>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -2736,14 +2736,14 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Int16>::fin_(&Int16::to_buffer));
-			index->update_("from_buffer", Member<Int16>::fin_(&Int16::from_buffer));
+			index->update_("to_lake", Const<Int16>::fin_(&Int16::to_lake));
+			index->update_("from_lake", Member<Int16>::fin_(&Int16::from_lake));
 			index->update_("to_river", Const<Int16>::fin_(&Int16::to_river));
 			index->update_("from_river", Member<Int16>::fin_(&Int16::from_river));
 			index->update_("stat", Static::fin_(&Int16::stat));
 			index->update_("mut", Static::fin_(&Int16::mut));
 			index->update_("fin", Static::fin_(&Int16::fin));
-			index->update_("buf", Static::fin_(&Int16::buf));
+			index->update_("lak", Static::fin_(&Int16::lak));
 			index->update_("riv", Static::fin_(&Int16::riv));
 			index->update_("rwl", Static::fin_(&Int16::rwl));
 			index->finalize_();
@@ -2761,7 +2761,7 @@ public:
 			index->update_("stat", Static::fin_(&Int16::stat));
 			index->update_("mut", Static::fin_(&Int16::mut));
 			index->update_("fin", Static::fin_(&Int16::fin));
-			index->update_("buf", Static::fin_(&Int16::buf));
+			index->update_("lak", Static::fin_(&Int16::lak));
 			index->update_("riv", Static::fin_(&Int16::riv));
 			index->update_("rwl", Static::fin_(&Int16::rwl));
 			index->finalize_();
@@ -2775,32 +2775,32 @@ public:
 		return stat_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
 		std::string str(2, 0);
 		str[0] = get_() & 0xFF;
 		str[1] = (get_() >> 8) & 0xFF;
-		const Ptr buffer = Buffer::mut_(str);
+		const Ptr lake = Lake::mut_(str);
 		if (finalized_())
 		{
-			buffer->finalize_();
+			lake->finalize_();
 		}
-		return buffer;
+		return lake;
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		Buffer* const buf = dynamic_<Buffer>(buffer);
-		if (!buf)
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
 		{
-			log_("Int16::from_buffer_ passed wrong type of thing");
+			log_("Int16::from_lake_ passed wrong type of thing");
 			return;
 		}
 		set_(
-			uint16_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
-			uint16_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8
+			uint16_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
+			uint16_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8
 			);
-		if (buf->finalized_())
+		if (lak->finalized_())
 		{
 			finalize_();
 		}
@@ -2882,16 +2882,16 @@ public:
 		return fin_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Int32>(ptr)->from_buffer_(buffer);
+		static_<Int32>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -2935,14 +2935,14 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Int32>::fin_(&Int32::to_buffer));
-			index->update_("from_buffer", Member<Int32>::fin_(&Int32::from_buffer));
+			index->update_("to_lake", Const<Int32>::fin_(&Int32::to_lake));
+			index->update_("from_lake", Member<Int32>::fin_(&Int32::from_lake));
 			index->update_("to_river", Const<Int32>::fin_(&Int32::to_river));
 			index->update_("from_river", Member<Int32>::fin_(&Int32::from_river));
 			index->update_("stat", Static::fin_(&Int32::stat));
 			index->update_("mut", Static::fin_(&Int32::mut));
 			index->update_("fin", Static::fin_(&Int32::fin));
-			index->update_("buf", Static::fin_(&Int32::buf));
+			index->update_("lak", Static::fin_(&Int32::lak));
 			index->update_("riv", Static::fin_(&Int32::riv));
 			index->update_("rwl", Static::fin_(&Int32::rwl));
 			index->finalize_();
@@ -2960,7 +2960,7 @@ public:
 			index->update_("stat", Static::fin_(&Int32::stat));
 			index->update_("mut", Static::fin_(&Int32::mut));
 			index->update_("fin", Static::fin_(&Int32::fin));
-			index->update_("buf", Static::fin_(&Int32::buf));
+			index->update_("lak", Static::fin_(&Int32::lak));
 			index->update_("riv", Static::fin_(&Int32::riv));
 			index->update_("rwl", Static::fin_(&Int32::rwl));
 			index->finalize_();
@@ -2974,36 +2974,36 @@ public:
 		return stat_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
 		std::string str(4, 0);
 		str[0] = get_() & 0xFF;
 		str[1] = (get_() >> 8) & 0xFF;
 		str[2] = (get_() >> 16) & 0xFF;
 		str[3] = (get_() >> 24) & 0xFF;
-		const Ptr buffer = Buffer::mut_(str);
+		const Ptr lake = Lake::mut_(str);
 		if (finalized_())
 		{
-			buffer->finalize_();
+			lake->finalize_();
 		}
-		return buffer;
+		return lake;
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		Buffer* const buf = dynamic_<Buffer>(buffer);
-		if (!buf)
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
 		{
-			log_("Int32::from_buffer_ passed wrong type of thing");
+			log_("Int32::from_lake_ passed wrong type of thing");
 			return;
 		}
 		set_(
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24
 			);
-		if (buf->finalized_())
+		if (lak->finalized_())
 		{
 			finalize_();
 		}
@@ -3085,16 +3085,16 @@ public:
 		return fin_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Int64>(ptr)->from_buffer_(buffer);
+		static_<Int64>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -3138,14 +3138,14 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Int64>::fin_(&Int64::to_buffer));
-			index->update_("from_buffer", Member<Int64>::fin_(&Int64::from_buffer));
+			index->update_("to_lake", Const<Int64>::fin_(&Int64::to_lake));
+			index->update_("from_lake", Member<Int64>::fin_(&Int64::from_lake));
 			index->update_("to_river", Const<Int64>::fin_(&Int64::to_river));
 			index->update_("from_river", Member<Int64>::fin_(&Int64::from_river));
 			index->update_("stat", Static::fin_(&Int64::stat));
 			index->update_("mut", Static::fin_(&Int64::mut));
 			index->update_("fin", Static::fin_(&Int64::fin));
-			index->update_("buf", Static::fin_(&Int64::buf));
+			index->update_("lak", Static::fin_(&Int64::lak));
 			index->update_("riv", Static::fin_(&Int64::riv));
 			index->update_("rwl", Static::fin_(&Int64::rwl));
 			index->finalize_();
@@ -3163,7 +3163,7 @@ public:
 			index->update_("stat", Static::fin_(&Int64::stat));
 			index->update_("mut", Static::fin_(&Int64::mut));
 			index->update_("fin", Static::fin_(&Int64::fin));
-			index->update_("buf", Static::fin_(&Int64::buf));
+			index->update_("lak", Static::fin_(&Int64::lak));
 			index->update_("riv", Static::fin_(&Int64::riv));
 			index->update_("rwl", Static::fin_(&Int64::rwl));
 			index->finalize_();
@@ -3177,7 +3177,7 @@ public:
 		return stat_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
 		std::string str(8, 0);
 		str[0] = get_() & 0xFF;
@@ -3188,33 +3188,33 @@ public:
 		str[5] = (get_() >> 40) & 0xFF;
 		str[6] = (get_() >> 48) & 0xFF;
 		str[7] = (get_() >> 56) & 0xFF;
-		const Ptr buffer = Buffer::mut_(str);
+		const Ptr lake = Lake::mut_(str);
 		if (finalized_())
 		{
-			buffer->finalize_();
+			lake->finalize_();
 		}
-		return buffer;
+		return lake;
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		Buffer* const buf = dynamic_<Buffer>(buffer);
-		if (!buf)
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
 		{
-			log_("Int64::from_buffer_ passed wrong type of thing");
+			log_("Int64::from_lake_ passed wrong type of thing");
 			return;
 		}
 		set_(
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[4]))) << 32 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[5]))) << 40 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[6]))) << 48 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[7]))) << 56
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[4]))) << 32 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[5]))) << 40 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[6]))) << 48 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[7]))) << 56
 			);
-		if (buf->finalized_())
+		if (lak->finalized_())
 		{
 			finalize_();
 		}
@@ -3296,16 +3296,16 @@ public:
 		return fin_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Float32>(ptr)->from_buffer_(buffer);
+		static_<Float32>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -3349,14 +3349,14 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Float32>::fin_(&Float32::to_buffer));
-			index->update_("from_buffer", Member<Float32>::fin_(&Float32::from_buffer));
+			index->update_("to_lake", Const<Float32>::fin_(&Float32::to_lake));
+			index->update_("from_lake", Member<Float32>::fin_(&Float32::from_lake));
 			index->update_("to_river", Const<Float32>::fin_(&Float32::to_river));
 			index->update_("from_river", Member<Float32>::fin_(&Float32::from_river));
 			index->update_("stat", Static::fin_(&Float32::stat));
 			index->update_("mut", Static::fin_(&Float32::mut));
 			index->update_("fin", Static::fin_(&Float32::fin));
-			index->update_("buf", Static::fin_(&Float32::buf));
+			index->update_("lak", Static::fin_(&Float32::lak));
 			index->update_("riv", Static::fin_(&Float32::riv));
 			index->update_("rwl", Static::fin_(&Float32::rwl));
 			index->finalize_();
@@ -3374,7 +3374,7 @@ public:
 			index->update_("stat", Static::fin_(&Float32::stat));
 			index->update_("mut", Static::fin_(&Float32::mut));
 			index->update_("fin", Static::fin_(&Float32::fin));
-			index->update_("buf", Static::fin_(&Float32::buf));
+			index->update_("lak", Static::fin_(&Float32::lak));
 			index->update_("riv", Static::fin_(&Float32::riv));
 			index->update_("rwl", Static::fin_(&Float32::rwl));
 			index->finalize_();
@@ -3388,7 +3388,7 @@ public:
 		return stat_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
 		std::string str(4, 0);
 		const uint32_t i = *reinterpret_cast<const uint32_t*>(&(get_()));
@@ -3396,29 +3396,29 @@ public:
 		str[1] = (i >> 8) & 0xFF;
 		str[2] = (i >> 16) & 0xFF;
 		str[3] = (i >> 24) & 0xFF;
-		const Ptr buffer = Buffer::mut_(str);
+		const Ptr lake = Lake::mut_(str);
 		if (finalized_())
 		{
-			buffer->finalize_();
+			lake->finalize_();
 		}
-		return buffer;
+		return lake;
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		Buffer* const buf = dynamic_<Buffer>(buffer);
-		if (!buf)
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
 		{
-			log_("Float32::from_buffer_ passed wrong type of thing");
+			log_("Float32::from_lake_ passed wrong type of thing");
 			return;
 		}
 		const uint32_t i =
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24;
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24;
 		set_(*reinterpret_cast<const float*>(&i));
-		if (buf->finalized_())
+		if (lak->finalized_())
 		{
 			finalize_();
 		}
@@ -3500,16 +3500,16 @@ public:
 		return fin_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Float64>(ptr)->from_buffer_(buffer);
+		static_<Float64>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -3553,14 +3553,14 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Float64>::fin_(&Float64::to_buffer));
-			index->update_("from_buffer", Member<Float64>::fin_(&Float64::from_buffer));
+			index->update_("to_lake", Const<Float64>::fin_(&Float64::to_lake));
+			index->update_("from_lake", Member<Float64>::fin_(&Float64::from_lake));
 			index->update_("to_river", Const<Float64>::fin_(&Float64::to_river));
 			index->update_("from_river", Member<Float64>::fin_(&Float64::from_river));
 			index->update_("stat", Static::fin_(&Float64::stat));
 			index->update_("mut", Static::fin_(&Float64::mut));
 			index->update_("fin", Static::fin_(&Float64::fin));
-			index->update_("buf", Static::fin_(&Float64::buf));
+			index->update_("lak", Static::fin_(&Float64::lak));
 			index->update_("riv", Static::fin_(&Float64::riv));
 			index->update_("rwl", Static::fin_(&Float64::rwl));
 			index->finalize_();
@@ -3578,7 +3578,7 @@ public:
 			index->update_("stat", Static::fin_(&Float64::stat));
 			index->update_("mut", Static::fin_(&Float64::mut));
 			index->update_("fin", Static::fin_(&Float64::fin));
-			index->update_("buf", Static::fin_(&Float64::buf));
+			index->update_("lak", Static::fin_(&Float64::lak));
 			index->update_("riv", Static::fin_(&Float64::riv));
 			index->update_("rwl", Static::fin_(&Float64::rwl));
 			index->finalize_();
@@ -3592,7 +3592,7 @@ public:
 		return stat_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
 		std::string str(8, 0);
 		const uint64_t i = *reinterpret_cast<const uint64_t*>(&(get_()));
@@ -3604,33 +3604,33 @@ public:
 		str[5] = (i >> 40) & 0xFF;
 		str[6] = (i >> 48) & 0xFF;
 		str[7] = (i >> 56) & 0xFF;
-		const Ptr buffer = Buffer::mut_(str);
+		const Ptr lake = Lake::mut_(str);
 		if (finalized_())
 		{
-			buffer->finalize_();
+			lake->finalize_();
 		}
-		return buffer;
+		return lake;
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		Buffer* const buf = dynamic_<Buffer>(buffer);
-		if (!buf)
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
 		{
-			log_("Float64::from_buffer_ passed wrong type of thing");
+			log_("Float64::from_lake_ passed wrong type of thing");
 			return;
 		}
 		const uint64_t i =
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[4]))) << 32 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[5]))) << 40 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[6]))) << 48 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[7]))) << 56;
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[4]))) << 32 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[5]))) << 40 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[6]))) << 48 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[7]))) << 56;
 		set_(*reinterpret_cast<const double*>(&i));
-		if (buf->finalized_())
+		if (lak->finalized_())
 		{
 			finalize_();
 		}
@@ -3714,16 +3714,16 @@ public:
 		return fin_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Complex32>(ptr)->from_buffer_(buffer);
+		static_<Complex32>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -3767,14 +3767,14 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Complex32>::fin_(&Complex32::to_buffer));
-			index->update_("from_buffer", Member<Complex32>::fin_(&Complex32::from_buffer));
+			index->update_("to_lake", Const<Complex32>::fin_(&Complex32::to_lake));
+			index->update_("from_lake", Member<Complex32>::fin_(&Complex32::from_lake));
 			index->update_("to_river", Const<Complex32>::fin_(&Complex32::to_river));
 			index->update_("from_river", Member<Complex32>::fin_(&Complex32::from_river));
 			index->update_("stat", Static::fin_(&Complex32::stat));
 			index->update_("mut", Static::fin_(&Complex32::mut));
 			index->update_("fin", Static::fin_(&Complex32::fin));
-			index->update_("buf", Static::fin_(&Complex32::buf));
+			index->update_("lak", Static::fin_(&Complex32::lak));
 			index->update_("riv", Static::fin_(&Complex32::riv));
 			index->update_("rwl", Static::fin_(&Complex32::rwl));
 			index->finalize_();
@@ -3792,7 +3792,7 @@ public:
 			index->update_("stat", Static::fin_(&Complex32::stat));
 			index->update_("mut", Static::fin_(&Complex32::mut));
 			index->update_("fin", Static::fin_(&Complex32::fin));
-			index->update_("buf", Static::fin_(&Complex32::buf));
+			index->update_("lak", Static::fin_(&Complex32::lak));
 			index->update_("riv", Static::fin_(&Complex32::riv));
 			index->update_("rwl", Static::fin_(&Complex32::rwl));
 			index->finalize_();
@@ -3806,7 +3806,7 @@ public:
 		return stat_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
 		std::string str(8, 0);
 		const float real = get_().real();
@@ -3821,34 +3821,34 @@ public:
 		str[5] = (i >> 8) & 0xFF;
 		str[6] = (i >> 16) & 0xFF;
 		str[7] = (i >> 24) & 0xFF;
-		const Ptr buffer = Buffer::mut_(str);
+		const Ptr lake = Lake::mut_(str);
 		if (finalized_())
 		{
-			buffer->finalize_();
+			lake->finalize_();
 		}
-		return buffer;
+		return lake;
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		Buffer* const buf = dynamic_<Buffer>(buffer);
-		if (!buf)
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
 		{
-			log_("Complex32::from_buffer_ passed wrong type of thing");
+			log_("Complex32::from_lake_ passed wrong type of thing");
 			return;
 		}
 		const uint32_t r =
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24;
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24;
 		const uint32_t i =
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[4]))) |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[5]))) << 8 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[6]))) << 16 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[7]))) << 24;
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[4]))) |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[5]))) << 8 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[6]))) << 16 |
+			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[7]))) << 24;
 		set_(D(*reinterpret_cast<const float*>(&r), *reinterpret_cast<const float*>(&i)));
-		if (buf->finalized_())
+		if (lak->finalized_())
 		{
 			finalize_();
 		}
@@ -3957,16 +3957,16 @@ public:
 		return fin_();
 	}
 
-	static inline const Ptr buf_(const Ptr buffer)
+	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Complex64>(ptr)->from_buffer_(buffer);
+		static_<Complex64>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr buf(const Ptr it)
+	static inline const Ptr lak(const Ptr it)
 	{
-		return buf_(it->next_());
+		return lak_(it->next_());
 	}
 
 	static inline const Ptr riv_(const Ptr river)
@@ -4010,14 +4010,14 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("to_buffer", Const<Complex64>::fin_(&Complex64::to_buffer));
-			index->update_("from_buffer", Member<Complex64>::fin_(&Complex64::from_buffer));
+			index->update_("to_lake", Const<Complex64>::fin_(&Complex64::to_lake));
+			index->update_("from_lake", Member<Complex64>::fin_(&Complex64::from_lake));
 			index->update_("to_river", Const<Complex64>::fin_(&Complex64::to_river));
 			index->update_("from_river", Member<Complex64>::fin_(&Complex64::from_river));
 			index->update_("stat", Static::fin_(&Complex64::stat));
 			index->update_("mut", Static::fin_(&Complex64::mut));
 			index->update_("fin", Static::fin_(&Complex64::fin));
-			index->update_("buf", Static::fin_(&Complex64::buf));
+			index->update_("lak", Static::fin_(&Complex64::lak));
 			index->update_("riv", Static::fin_(&Complex64::riv));
 			index->update_("rwl", Static::fin_(&Complex64::rwl));
 			index->finalize_();
@@ -4035,7 +4035,7 @@ public:
 			index->update_("stat", Static::fin_(&Complex64::stat));
 			index->update_("mut", Static::fin_(&Complex64::mut));
 			index->update_("fin", Static::fin_(&Complex64::fin));
-			index->update_("buf", Static::fin_(&Complex64::buf));
+			index->update_("lak", Static::fin_(&Complex64::lak));
 			index->update_("riv", Static::fin_(&Complex64::riv));
 			index->update_("rwl", Static::fin_(&Complex64::rwl));
 			index->finalize_();
@@ -4049,7 +4049,7 @@ public:
 		return stat_();
 	}
 
-	virtual inline const Ptr to_buffer_() const override
+	virtual inline const Ptr to_lake_() const override
 	{
 		std::string str(16, 0);
 		const double real = get_().real();
@@ -4072,42 +4072,42 @@ public:
 		str[13] = (i >> 40) & 0xFF;
 		str[14] = (i >> 48) & 0xFF;
 		str[15] = (i >> 56) & 0xFF;
-		const Ptr buffer = Buffer::mut_(str);
+		const Ptr lake = Lake::mut_(str);
 		if (finalized_())
 		{
-			buffer->finalize_();
+			lake->finalize_();
 		}
-		return buffer;
+		return lake;
 	}
 
-	virtual inline void from_buffer_(const Ptr buffer) override
+	virtual inline void from_lake_(const Ptr lake) override
 	{
-		Buffer* const buf = dynamic_<Buffer>(buffer);
-		if (!buf)
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
 		{
-			log_("Complex64::from_buffer_ passed wrong type of thing");
+			log_("Complex64::from_lake_ passed wrong type of thing");
 			return;
 		}
 		const uint64_t r =
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[0]))) |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[1]))) << 8 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[2]))) << 16 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[3]))) << 24 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[4]))) << 32 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[5]))) << 40 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[6]))) << 48 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[7]))) << 56;
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[4]))) << 32 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[5]))) << 40 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[6]))) << 48 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[7]))) << 56;
 		const uint64_t i =
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[8]))) |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[9]))) << 8 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[10]))) << 16 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[11]))) << 24 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[12]))) << 32 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[13]))) << 40 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[14]))) << 48 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(buf->get_()[15]))) << 56;
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[8]))) |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[9]))) << 8 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[10]))) << 16 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[11]))) << 24 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[12]))) << 32 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[13]))) << 40 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[14]))) << 48 |
+			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[15]))) << 56;
 		set_(D(*reinterpret_cast<const double*>(&r), *reinterpret_cast<const double*>(&i)));
-		if (buf->finalized_())
+		if (lak->finalized_())
 		{
 			finalize_();
 		}
@@ -4383,10 +4383,10 @@ public:
 
 	inline void write_(const Ptr ptr)
 	{
-		Buffer* const buffer = dynamic_<Buffer>(ptr->invoke_("to_buffer"));
-		if (buffer)
+		Lake* const lake = dynamic_<Lake>(ptr->invoke_("to_lake"));
+		if (lake)
 		{
-			write_(buffer->get_());
+			write_(lake->get_());
 		}
 	}
 
@@ -4398,7 +4398,7 @@ public:
 	inline const Ptr pop_front_()
 	{
 		const int16_t int16 = read_<Int16>();
-		const std::string type = static_<Buffer>(read_(int16))->get_();
+		const std::string type = static_<Lake>(read_(int16))->get_();
 		return call_(type, "riv", me_());
 	}
 
@@ -4410,7 +4410,7 @@ public:
 	inline const Ptr pop_front_with_links_()
 	{
 		const int16_t int16 = read_<Int16>();
-		const std::string type = static_<Buffer>(read_(int16))->get_();
+		const std::string type = static_<Lake>(read_(int16))->get_();
 		return call_(type, "rwl", me_());
 	}
 
@@ -4419,43 +4419,43 @@ public:
 		std::string str;
 		str.resize(size_t(length));
 		_stream->read(&str[0], str.length());
-		return Buffer::mut_(str);
+		return Lake::mut_(str);
 	}
 
 	template <typename T>
 	const typename T::D read_()
 	{
-		return static_<T>(T::buf_(read_(int64_t(sizeof(T::D)))))->get_();
+		return static_<T>(T::lak_(read_(int64_t(sizeof(T::D)))))->get_();
 	}
 
 private:
 	const_std_unique_iostream _stream;
 };
 
-inline const Thing::Ptr Serializable::to_buffer_via_river_() const
+inline const Thing::Ptr Serializable::to_lake_via_river_() const
 {
 	const Thing* const thing = dynamic_cast<const Thing*>(this);
 	if (thing)
 	{
 		const Thing::Ptr river = River::mut_();
 		const_cast<Thing*>(thing)->invoke_("to_river", river);
-		const Thing::Ptr buffer = Buffer::mut_();
-		Thing::static_<Buffer>(buffer)->from_river_(river);
-		return buffer;
+		const Thing::Ptr lake = Lake::mut_();
+		Thing::static_<Lake>(lake)->from_river_(river);
+		return lake;
 	}
 	return Thing::nothing_();
 }
 
-inline void Serializable::from_buffer_via_river_(const Thing::Ptr buffer)
+inline void Serializable::from_lake_via_river_(const Thing::Ptr lake)
 {
-	Buffer* const buf = Thing::dynamic_<Buffer>(buffer);
-	if (!buf)
+	Lake* const lak = Thing::dynamic_<Lake>(lake);
+	if (!lak)
 	{
-		Thing::log_("Serializable::from_buffer_via_river_ passed wrong type of thing");
+		Thing::log_("Serializable::from_lake_via_river_ passed wrong type of thing");
 		return;
 	}
 	const Thing::Ptr river = River::mut_();
-	buf->to_river_(river);
+	lak->to_river_(river);
 	Thing* const thing = dynamic_cast<Thing*>(this);
 	if (thing)
 	{
@@ -4772,12 +4772,12 @@ inline void Herd::replace_links_(const Thing::Ptr index)
 	_set.swap(replacement);
 }
 
-inline void Buffer::to_river_(const Thing::Ptr river) const
+inline void Lake::to_river_(const Thing::Ptr river) const
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Buffer::to_river_ passed wrong type of thing");
+		log_("Lake::to_river_ passed wrong type of thing");
 		return;
 	}
 	riv->write_(Bit::mut_(finalized_()));
@@ -4785,17 +4785,17 @@ inline void Buffer::to_river_(const Thing::Ptr river) const
 	riv->write_(get_());
 }
 
-inline void Buffer::from_river_(const Thing::Ptr river)
+inline void Lake::from_river_(const Thing::Ptr river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Buffer::from_river_ passed wrong type of thing");
+		log_("Lake::from_river_ passed wrong type of thing");
 		return;
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
-	set_(static_<Buffer>(riv->read_(int64))->get_());
+	set_(static_<Lake>(riv->read_(int64))->get_());
 	if (bit)
 	{
 		finalize_();
@@ -5650,7 +5650,7 @@ inline const Thing::Ptr Thing::stats_()
 		index->update_("strange::Index", Static::fin_(&Index::stat));
 		index->update_("strange::Flock", Static::fin_(&Flock::stat));
 		index->update_("strange::Herd", Static::fin_(&Herd::stat));
-		index->update_("strange::Buffer", Static::fin_(&Buffer::stat));
+		index->update_("strange::Lake", Static::fin_(&Lake::stat));
 		index->update_("strange::Bit", Static::fin_(&Bit::stat));
 		index->update_("strange::Byte", Static::fin_(&Byte::stat));
 		index->update_("strange::Int16", Static::fin_(&Int16::stat));
