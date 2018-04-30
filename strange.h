@@ -398,65 +398,65 @@ public:
 		return Thing::nothing_();
 	}
 
-	virtual inline void to_stream_(const Thing::Ptr stream) const;
+	virtual inline void to_river_(const Thing::Ptr river) const;
 
-	inline const Thing::Ptr to_stream(const Thing::Ptr it) const
+	inline const Thing::Ptr to_river(const Thing::Ptr it) const
 	{
-		const Thing::Ptr stream = it->next_();
-		to_stream_(stream);
-		return stream;
+		const Thing::Ptr river = it->next_();
+		to_river_(river);
+		return river;
 	}
 
-	virtual inline void from_stream_(const Thing::Ptr stream);
+	virtual inline void from_river_(const Thing::Ptr river);
 
-	inline const Thing::Ptr from_stream(const Thing::Ptr it)
+	inline const Thing::Ptr from_river(const Thing::Ptr it)
 	{
-		const Thing::Ptr stream = it->next_();
-		from_stream_(stream);
-		return stream;
+		const Thing::Ptr river = it->next_();
+		from_river_(river);
+		return river;
 	}
 
-	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const
+	virtual inline void to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const
 	{
 		const Thing* thing = dynamic_cast<const Thing*>(this);
 		if (thing)
 		{
-			const_cast<Thing*>(thing)->invoke_("to_stream", stream);
+			const_cast<Thing*>(thing)->invoke_("to_river", river);
 		}
 	}
 
-	inline const Thing::Ptr to_stream_with_links(const Thing::Ptr it)
+	inline const Thing::Ptr to_river_with_links(const Thing::Ptr it)
 	{
 		const Thing::Ptr index = it->next_();
-		const Thing::Ptr stream = it->next_();
-		to_stream_with_links_(index, stream);
-		return stream;
+		const Thing::Ptr river = it->next_();
+		to_river_with_links_(index, river);
+		return river;
 	}
 
-	virtual inline void from_stream_with_links_(const Thing::Ptr stream)
+	virtual inline void from_river_with_links_(const Thing::Ptr river)
 	{
 		Thing* thing = dynamic_cast<Thing*>(this);
 		if (thing)
 		{
-			thing->invoke_("from_stream", stream);
+			thing->invoke_("from_river", river);
 		}
 	}
 
-	inline const Thing::Ptr from_stream_with_links(const Thing::Ptr it)
+	inline const Thing::Ptr from_river_with_links(const Thing::Ptr it)
 	{
-		const Thing::Ptr stream = it->next_();
-		from_stream_with_links_(stream);
-		return stream;
+		const Thing::Ptr river = it->next_();
+		from_river_with_links_(river);
+		return river;
 	}
 
-	static inline void serialize_(const Thing::Ptr thing, const Thing::Ptr stream);
+	static inline void serialize_(const Thing::Ptr thing, const Thing::Ptr river);
 
 	static inline const Thing::Ptr serialize(const Thing::Ptr it)
 	{
 		const Thing::Ptr thing = it->next_();
-		const Thing::Ptr stream = it->next_();
-		serialize_(thing, stream);
-		return stream;
+		const Thing::Ptr river = it->next_();
+		serialize_(thing, river);
+		return river;
 	}
 
 	virtual inline void replace_links_(const Thing::Ptr index)
@@ -469,7 +469,7 @@ public:
 		return Thing::nothing_();
 	}
 
-	static inline const Thing::Ptr deserialize_(const Thing::Ptr stream);
+	static inline const Thing::Ptr deserialize_(const Thing::Ptr river);
 
 	static inline const Thing::Ptr deserialize(const Thing::Ptr it)
 	{
@@ -477,18 +477,18 @@ public:
 	}
 
 	// public non-virtual member functions and adapters
-	inline const Thing::Ptr to_buffer_via_stream_() const;
+	inline const Thing::Ptr to_buffer_via_river_() const;
 
-	inline const Thing::Ptr to_buffer_via_stream(const Thing::Ptr ignore) const
+	inline const Thing::Ptr to_buffer_via_river(const Thing::Ptr ignore) const
 	{
-		return to_buffer_via_stream_();
+		return to_buffer_via_river_();
 	}
 
-	inline void from_buffer_via_stream_(const Thing::Ptr buffer);
+	inline void from_buffer_via_river_(const Thing::Ptr buffer);
 
-	inline const Thing::Ptr from_buffer_via_stream(const Thing::Ptr it)
+	inline const Thing::Ptr from_buffer_via_river(const Thing::Ptr it)
 	{
-		from_buffer_via_stream_(it->next_());
+		from_buffer_via_river_(it->next_());
 		return Thing::nothing_();
 	}
 };
@@ -539,18 +539,18 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream);
+	static inline const Ptr riv_(const Ptr river);
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream);
+	static inline const Ptr rwl_(const Ptr river);
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	static inline const Ptr stat_();
@@ -825,21 +825,21 @@ public:
 
 	virtual inline const Ptr to_buffer_() const override
 	{
-		return to_buffer_via_stream_();
+		return to_buffer_via_river_();
 	}
 
 	virtual inline void from_buffer_(const Ptr buffer) override
 	{
-		from_buffer_via_stream_(buffer);
+		from_buffer_via_river_(buffer);
 	}
 
-	virtual inline void to_stream_(const Thing::Ptr stream) const override;
+	virtual inline void to_river_(const Thing::Ptr river) const override;
 
-	virtual inline void from_stream_(const Thing::Ptr stream) override;
+	virtual inline void from_river_(const Thing::Ptr river) override;
 
-	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const override;
+	virtual inline void to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const override;
 
-	virtual inline void from_stream_with_links_(const Thing::Ptr stream) override;
+	virtual inline void from_river_with_links_(const Thing::Ptr river) override;
 
 	virtual inline void replace_links_(const Thing::Ptr index) override;
 
@@ -851,13 +851,13 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Index>::fin_(&Index::to_buffer));
 			index->update_("from_buffer", Member<Index>::fin_(&Index::from_buffer));
-			index->update_("to_stream", Const<Index>::fin_(&Index::to_stream));
-			index->update_("from_stream", Member<Index>::fin_(&Index::from_stream));
+			index->update_("to_river", Const<Index>::fin_(&Index::to_river));
+			index->update_("from_river", Member<Index>::fin_(&Index::from_river));
 			index->update_("stat", Static::fin_(&Index::stat));
 			index->update_("mut", Static::fin_(&Index::mut));
 			index->update_("buf", Static::fin_(&Index::buf));
-			index->update_("str", Static::fin_(&Index::str));
-			index->update_("swl", Static::fin_(&Index::swl));
+			index->update_("riv", Static::fin_(&Index::riv));
+			index->update_("rwl", Static::fin_(&Index::rwl));
 			index->update_("find", Const<Index>::fin_(&Index::find));
 			index->update_("update", Member<Index>::fin_(&Index::update));
 			index->update_("insert", Member<Index>::fin_(&Index::insert));
@@ -879,8 +879,8 @@ public:
 			index->update_("stat", Static::fin_(&Index::stat));
 			index->update_("mut", Static::fin_(&Index::mut));
 			index->update_("buf", Static::fin_(&Index::buf));
-			index->update_("str", Static::fin_(&Index::str));
-			index->update_("swl", Static::fin_(&Index::swl));
+			index->update_("riv", Static::fin_(&Index::riv));
+			index->update_("rwl", Static::fin_(&Index::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -914,28 +914,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Index>(ptr)->from_stream_(stream);
+		static_<Index>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Index>(ptr)->from_stream_with_links_(stream);
+		static_<Index>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	template <typename F>
@@ -1049,9 +1049,9 @@ public:
 		return nothing_();
 	}
 
-	inline void gather_to_stream_(const Ptr thing, const Ptr stream);
+	inline void gather_to_river_(const Ptr thing, const Ptr river);
 
-	inline const Ptr gather_from_stream_(const Ptr stream);
+	inline const Ptr gather_from_river_(const Ptr river);
 
 private:
 	std_unordered_map_ptr_ptr _map;
@@ -1180,14 +1180,14 @@ inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr i
 	return operate_(thing, member, it);
 }
 
-inline void Serializable::serialize_(const Thing::Ptr thing, const Thing::Ptr stream)
+inline void Serializable::serialize_(const Thing::Ptr thing, const Thing::Ptr river)
 {
-	Thing::static_<Index>(Index::mut_())->gather_to_stream_(thing, stream);
+	Thing::static_<Index>(Index::mut_())->gather_to_river_(thing, river);
 }
 
-inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr stream)
+inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr river)
 {
-	return Thing::static_<Index>(Index::mut_())->gather_from_stream_(stream);
+	return Thing::static_<Index>(Index::mut_())->gather_from_river_(river);
 }
 
 inline const Thing::Ptr Symbol::pub_() const
@@ -1197,11 +1197,11 @@ inline const Thing::Ptr Symbol::pub_() const
 		const Ptr pub = Thing::pub_()->copy_();
 		Index* const index = static_<Index>(pub);
 		index->update_("to_buffer", Const<Index>::fin_(&Index::to_buffer));
-		index->update_("to_stream", Const<Index>::fin_(&Index::to_stream));
+		index->update_("to_river", Const<Index>::fin_(&Index::to_river));
 		index->update_("stat", Static::fin_(&Symbol::stat));
 		index->update_("buf", Static::fin_(&Symbol::buf));
-		index->update_("str", Static::fin_(&Symbol::str));
-		index->update_("swl", Static::fin_(&Symbol::swl));
+		index->update_("riv", Static::fin_(&Symbol::riv));
+		index->update_("rwl", Static::fin_(&Symbol::rwl));
 		index->finalize_();
 		return pub;
 	}();
@@ -1216,8 +1216,8 @@ inline const Thing::Ptr Symbol::stat_()
 		Index* const index = static_<Index>(stat);
 		index->update_("stat", Static::fin_(&Symbol::stat));
 		index->update_("buf", Static::fin_(&Symbol::buf));
-		index->update_("str", Static::fin_(&Symbol::str));
-		index->update_("swl", Static::fin_(&Symbol::swl));
+		index->update_("riv", Static::fin_(&Symbol::riv));
+		index->update_("rwl", Static::fin_(&Symbol::rwl));
 		index->finalize_();
 		return stat;
 	}();
@@ -1341,21 +1341,21 @@ public:
 
 	virtual inline const Ptr to_buffer_() const override
 	{
-		return to_buffer_via_stream_();
+		return to_buffer_via_river_();
 	}
 
 	virtual inline void from_buffer_(const Ptr buffer) override
 	{
-		from_buffer_via_stream_(buffer);
+		from_buffer_via_river_(buffer);
 	}
 
-	virtual inline void to_stream_(const Thing::Ptr stream) const override;
+	virtual inline void to_river_(const Thing::Ptr river) const override;
 
-	virtual inline void from_stream_(const Thing::Ptr stream) override;
+	virtual inline void from_river_(const Thing::Ptr river) override;
 
-	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const override;
+	virtual inline void to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const override;
 
-	virtual inline void from_stream_with_links_(const Thing::Ptr stream) override;
+	virtual inline void from_river_with_links_(const Thing::Ptr river) override;
 
 	virtual inline void replace_links_(const Thing::Ptr index) override;
 
@@ -1367,13 +1367,13 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Flock>::fin_(&Flock::to_buffer));
 			index->update_("from_buffer", Member<Flock>::fin_(&Flock::from_buffer));
-			index->update_("to_stream", Const<Flock>::fin_(&Flock::to_stream));
-			index->update_("from_stream", Member<Flock>::fin_(&Flock::from_stream));
+			index->update_("to_river", Const<Flock>::fin_(&Flock::to_river));
+			index->update_("from_river", Member<Flock>::fin_(&Flock::from_river));
 			index->update_("stat", Static::fin_(&Flock::stat));
 			index->update_("mut", Static::fin_(&Flock::mut));
 			index->update_("buf", Static::fin_(&Flock::buf));
-			index->update_("str", Static::fin_(&Flock::str));
-			index->update_("swl", Static::fin_(&Flock::swl));
+			index->update_("riv", Static::fin_(&Flock::riv));
+			index->update_("rwl", Static::fin_(&Flock::rwl));
 			index->update_("push_back", Member<Flock>::fin_(&Flock::push_back));
 			index->update_("iterator", Const<Flock>::fin_(&Flock::iterator));
 			index->finalize_();
@@ -1391,8 +1391,8 @@ public:
 			index->update_("stat", Static::fin_(&Flock::stat));
 			index->update_("mut", Static::fin_(&Flock::mut));
 			index->update_("buf", Static::fin_(&Flock::buf));
-			index->update_("str", Static::fin_(&Flock::str));
-			index->update_("swl", Static::fin_(&Flock::swl));
+			index->update_("riv", Static::fin_(&Flock::riv));
+			index->update_("rwl", Static::fin_(&Flock::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -1426,28 +1426,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Flock>(ptr)->from_stream_(stream);
+		static_<Flock>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Flock>(ptr)->from_stream_with_links_(stream);
+		static_<Flock>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	inline void push_back_(const Ptr item)
@@ -1627,21 +1627,21 @@ public:
 
 	virtual inline const Ptr to_buffer_() const override
 	{
-		return to_buffer_via_stream_();
+		return to_buffer_via_river_();
 	}
 
 	virtual inline void from_buffer_(const Ptr buffer) override
 	{
-		from_buffer_via_stream_(buffer);
+		from_buffer_via_river_(buffer);
 	}
 
-	virtual inline void to_stream_(const Thing::Ptr stream) const override;
+	virtual inline void to_river_(const Thing::Ptr river) const override;
 
-	virtual inline void from_stream_(const Thing::Ptr stream) override;
+	virtual inline void from_river_(const Thing::Ptr river) override;
 
-	virtual inline void to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const override;
+	virtual inline void to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const override;
 
-	virtual inline void from_stream_with_links_(const Thing::Ptr stream) override;
+	virtual inline void from_river_with_links_(const Thing::Ptr river) override;
 
 	virtual inline void replace_links_(const Thing::Ptr index) override;
 
@@ -1653,13 +1653,13 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Herd>::fin_(&Herd::to_buffer));
 			index->update_("from_buffer", Member<Herd>::fin_(&Herd::from_buffer));
-			index->update_("to_stream", Const<Herd>::fin_(&Herd::to_stream));
-			index->update_("from_stream", Member<Herd>::fin_(&Herd::from_stream));
+			index->update_("to_river", Const<Herd>::fin_(&Herd::to_river));
+			index->update_("from_river", Member<Herd>::fin_(&Herd::from_river));
 			index->update_("stat", Static::fin_(&Herd::stat));
 			index->update_("mut", Static::fin_(&Herd::mut));
 			index->update_("buf", Static::fin_(&Herd::buf));
-			index->update_("str", Static::fin_(&Herd::str));
-			index->update_("swl", Static::fin_(&Herd::swl));
+			index->update_("riv", Static::fin_(&Herd::riv));
+			index->update_("rwl", Static::fin_(&Herd::rwl));
 			index->update_("find", Const<Herd>::fin_(&Herd::find));
 			index->update_("insert", Member<Herd>::fin_(&Herd::insert));
 			index->update_("iterator", Const<Herd>::fin_(&Herd::iterator));
@@ -1679,8 +1679,8 @@ public:
 			index->update_("stat", Static::fin_(&Herd::stat));
 			index->update_("mut", Static::fin_(&Herd::mut));
 			index->update_("buf", Static::fin_(&Herd::buf));
-			index->update_("str", Static::fin_(&Herd::str));
-			index->update_("swl", Static::fin_(&Herd::swl));
+			index->update_("riv", Static::fin_(&Herd::riv));
+			index->update_("rwl", Static::fin_(&Herd::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -1714,28 +1714,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Herd>(ptr)->from_stream_(stream);
+		static_<Herd>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Herd>(ptr)->from_stream_with_links_(stream);
+		static_<Herd>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	template <typename F>
@@ -1953,28 +1953,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Buffer>(ptr)->from_stream_(stream);
+		static_<Buffer>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Buffer>(ptr)->from_stream_with_links_(stream);
+		static_<Buffer>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	inline Buffer(const S& data)
@@ -1997,14 +1997,14 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Buffer>::fin_(&Buffer::to_buffer));
 			index->update_("from_buffer", Member<Buffer>::fin_(&Buffer::from_buffer));
-			index->update_("to_stream", Const<Buffer>::fin_(&Buffer::to_stream));
-			index->update_("from_stream", Member<Buffer>::fin_(&Buffer::from_stream));
+			index->update_("to_river", Const<Buffer>::fin_(&Buffer::to_river));
+			index->update_("from_river", Member<Buffer>::fin_(&Buffer::from_river));
 			index->update_("stat", Static::fin_(&Buffer::stat));
 			index->update_("mut", Static::fin_(&Buffer::mut));
 			index->update_("fin", Static::fin_(&Buffer::fin));
 			index->update_("buf", Static::fin_(&Buffer::buf));
-			index->update_("str", Static::fin_(&Buffer::str));
-			index->update_("swl", Static::fin_(&Buffer::swl));
+			index->update_("riv", Static::fin_(&Buffer::riv));
+			index->update_("rwl", Static::fin_(&Buffer::rwl));
 			index->finalize_();
 			return pub;
 		}();
@@ -2021,8 +2021,8 @@ public:
 			index->update_("mut", Static::fin_(&Buffer::mut));
 			index->update_("fin", Static::fin_(&Buffer::fin));
 			index->update_("buf", Static::fin_(&Buffer::buf));
-			index->update_("str", Static::fin_(&Buffer::str));
-			index->update_("swl", Static::fin_(&Buffer::swl));
+			index->update_("riv", Static::fin_(&Buffer::riv));
+			index->update_("rwl", Static::fin_(&Buffer::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -2059,9 +2059,9 @@ public:
 		}
 	}
 
-	virtual inline void to_stream_(const Ptr stream) const override;
+	virtual inline void to_river_(const Ptr river) const override;
 
-	virtual inline void from_stream_(const Ptr stream) override;
+	virtual inline void from_river_(const Ptr river) override;
 
 	virtual inline const Ptr type_() const override
 	{
@@ -2096,7 +2096,7 @@ inline void Thing::log_(const Thing::Ptr ptr)
 	}
 }
 
-inline void Serializable::to_stream_(const Thing::Ptr stream) const
+inline void Serializable::to_river_(const Thing::Ptr river) const
 {
 	const Thing* const thing = dynamic_cast<const Thing*>(this);
 	if (thing)
@@ -2104,15 +2104,15 @@ inline void Serializable::to_stream_(const Thing::Ptr stream) const
 		Buffer* const buffer = Thing::dynamic_<Buffer>(const_cast<Thing*>(thing)->invoke_("to_buffer"));
 		if (buffer)
 		{
-			buffer->to_stream_(stream);
+			buffer->to_river_(river);
 		}
 	}
 }
 
-inline void Serializable::from_stream_(const Thing::Ptr stream)
+inline void Serializable::from_river_(const Thing::Ptr river)
 {
 	const Thing::Ptr buffer = Buffer::mut_();
-	Thing::static_<Buffer>(buffer)->from_stream_(stream);
+	Thing::static_<Buffer>(buffer)->from_river_(river);
 	Thing* const thing = dynamic_cast<Thing*>(this);
 	if (thing)
 	{
@@ -2131,14 +2131,14 @@ inline const Thing::Ptr Symbol::buf_(const Thing::Ptr buffer)
 	return fin_(buf->get_());
 }
 
-inline const Thing::Ptr Symbol::str_(const Thing::Ptr stream)
+inline const Thing::Ptr Symbol::riv_(const Thing::Ptr river)
 {
-	return fin_(static_<Buffer>(Buffer::str_(stream))->get_());
+	return fin_(static_<Buffer>(Buffer::riv_(river))->get_());
 }
 
-inline const Thing::Ptr Symbol::swl_(const Thing::Ptr stream)
+inline const Thing::Ptr Symbol::rwl_(const Thing::Ptr river)
 {
-	return fin_(static_<Buffer>(Buffer::swl_(stream))->get_());
+	return fin_(static_<Buffer>(Buffer::rwl_(river))->get_());
 }
 
 inline const Thing::Ptr Symbol::to_buffer_() const
@@ -2309,28 +2309,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Bit>(ptr)->from_stream_(stream);
+		static_<Bit>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Bit>(ptr)->from_stream_with_links_(stream);
+		static_<Bit>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	inline Bit(const D& data)
@@ -2352,14 +2352,14 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Bit>::fin_(&Bit::to_buffer));
 			index->update_("from_buffer", Member<Bit>::fin_(&Bit::from_buffer));
-			index->update_("to_stream", Const<Bit>::fin_(&Bit::to_stream));
-			index->update_("from_stream", Member<Bit>::fin_(&Bit::from_stream));
+			index->update_("to_river", Const<Bit>::fin_(&Bit::to_river));
+			index->update_("from_river", Member<Bit>::fin_(&Bit::from_river));
 			index->update_("stat", Static::fin_(&Bit::stat));
 			index->update_("mut", Static::fin_(&Bit::mut));
 			index->update_("fin", Static::fin_(&Bit::fin));
 			index->update_("buf", Static::fin_(&Bit::buf));
-			index->update_("str", Static::fin_(&Bit::str));
-			index->update_("swl", Static::fin_(&Bit::swl));
+			index->update_("riv", Static::fin_(&Bit::riv));
+			index->update_("rwl", Static::fin_(&Bit::rwl));
 			index->finalize_();
 			return pub;
 		}();
@@ -2376,8 +2376,8 @@ public:
 			index->update_("mut", Static::fin_(&Bit::mut));
 			index->update_("fin", Static::fin_(&Bit::fin));
 			index->update_("buf", Static::fin_(&Bit::buf));
-			index->update_("str", Static::fin_(&Bit::str));
-			index->update_("swl", Static::fin_(&Bit::swl));
+			index->update_("riv", Static::fin_(&Bit::riv));
+			index->update_("rwl", Static::fin_(&Bit::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -2502,28 +2502,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Byte>(ptr)->from_stream_(stream);
+		static_<Byte>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Byte>(ptr)->from_stream_with_links_(stream);
+		static_<Byte>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	inline Byte(const D& data)
@@ -2545,14 +2545,14 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Byte>::fin_(&Byte::to_buffer));
 			index->update_("from_buffer", Member<Byte>::fin_(&Byte::from_buffer));
-			index->update_("to_stream", Const<Byte>::fin_(&Byte::to_stream));
-			index->update_("from_stream", Member<Byte>::fin_(&Byte::from_stream));
+			index->update_("to_river", Const<Byte>::fin_(&Byte::to_river));
+			index->update_("from_river", Member<Byte>::fin_(&Byte::from_river));
 			index->update_("stat", Static::fin_(&Byte::stat));
 			index->update_("mut", Static::fin_(&Byte::mut));
 			index->update_("fin", Static::fin_(&Byte::fin));
 			index->update_("buf", Static::fin_(&Byte::buf));
-			index->update_("str", Static::fin_(&Byte::str));
-			index->update_("swl", Static::fin_(&Byte::swl));
+			index->update_("riv", Static::fin_(&Byte::riv));
+			index->update_("rwl", Static::fin_(&Byte::rwl));
 			index->finalize_();
 			return pub;
 		}();
@@ -2569,8 +2569,8 @@ public:
 			index->update_("mut", Static::fin_(&Byte::mut));
 			index->update_("fin", Static::fin_(&Byte::fin));
 			index->update_("buf", Static::fin_(&Byte::buf));
-			index->update_("str", Static::fin_(&Byte::str));
-			index->update_("swl", Static::fin_(&Byte::swl));
+			index->update_("riv", Static::fin_(&Byte::riv));
+			index->update_("rwl", Static::fin_(&Byte::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -2695,28 +2695,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Int16>(ptr)->from_stream_(stream);
+		static_<Int16>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Int16>(ptr)->from_stream_with_links_(stream);
+		static_<Int16>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	inline Int16(const D& data)
@@ -2738,14 +2738,14 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Int16>::fin_(&Int16::to_buffer));
 			index->update_("from_buffer", Member<Int16>::fin_(&Int16::from_buffer));
-			index->update_("to_stream", Const<Int16>::fin_(&Int16::to_stream));
-			index->update_("from_stream", Member<Int16>::fin_(&Int16::from_stream));
+			index->update_("to_river", Const<Int16>::fin_(&Int16::to_river));
+			index->update_("from_river", Member<Int16>::fin_(&Int16::from_river));
 			index->update_("stat", Static::fin_(&Int16::stat));
 			index->update_("mut", Static::fin_(&Int16::mut));
 			index->update_("fin", Static::fin_(&Int16::fin));
 			index->update_("buf", Static::fin_(&Int16::buf));
-			index->update_("str", Static::fin_(&Int16::str));
-			index->update_("swl", Static::fin_(&Int16::swl));
+			index->update_("riv", Static::fin_(&Int16::riv));
+			index->update_("rwl", Static::fin_(&Int16::rwl));
 			index->finalize_();
 			return pub;
 		}();
@@ -2762,8 +2762,8 @@ public:
 			index->update_("mut", Static::fin_(&Int16::mut));
 			index->update_("fin", Static::fin_(&Int16::fin));
 			index->update_("buf", Static::fin_(&Int16::buf));
-			index->update_("str", Static::fin_(&Int16::str));
-			index->update_("swl", Static::fin_(&Int16::swl));
+			index->update_("riv", Static::fin_(&Int16::riv));
+			index->update_("rwl", Static::fin_(&Int16::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -2894,28 +2894,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Int32>(ptr)->from_stream_(stream);
+		static_<Int32>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Int32>(ptr)->from_stream_with_links_(stream);
+		static_<Int32>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	inline Int32(const D& data)
@@ -2937,14 +2937,14 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Int32>::fin_(&Int32::to_buffer));
 			index->update_("from_buffer", Member<Int32>::fin_(&Int32::from_buffer));
-			index->update_("to_stream", Const<Int32>::fin_(&Int32::to_stream));
-			index->update_("from_stream", Member<Int32>::fin_(&Int32::from_stream));
+			index->update_("to_river", Const<Int32>::fin_(&Int32::to_river));
+			index->update_("from_river", Member<Int32>::fin_(&Int32::from_river));
 			index->update_("stat", Static::fin_(&Int32::stat));
 			index->update_("mut", Static::fin_(&Int32::mut));
 			index->update_("fin", Static::fin_(&Int32::fin));
 			index->update_("buf", Static::fin_(&Int32::buf));
-			index->update_("str", Static::fin_(&Int32::str));
-			index->update_("swl", Static::fin_(&Int32::swl));
+			index->update_("riv", Static::fin_(&Int32::riv));
+			index->update_("rwl", Static::fin_(&Int32::rwl));
 			index->finalize_();
 			return pub;
 		}();
@@ -2961,8 +2961,8 @@ public:
 			index->update_("mut", Static::fin_(&Int32::mut));
 			index->update_("fin", Static::fin_(&Int32::fin));
 			index->update_("buf", Static::fin_(&Int32::buf));
-			index->update_("str", Static::fin_(&Int32::str));
-			index->update_("swl", Static::fin_(&Int32::swl));
+			index->update_("riv", Static::fin_(&Int32::riv));
+			index->update_("rwl", Static::fin_(&Int32::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -3097,28 +3097,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Int64>(ptr)->from_stream_(stream);
+		static_<Int64>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Int64>(ptr)->from_stream_with_links_(stream);
+		static_<Int64>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	inline Int64(const D& data)
@@ -3140,14 +3140,14 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Int64>::fin_(&Int64::to_buffer));
 			index->update_("from_buffer", Member<Int64>::fin_(&Int64::from_buffer));
-			index->update_("to_stream", Const<Int64>::fin_(&Int64::to_stream));
-			index->update_("from_stream", Member<Int64>::fin_(&Int64::from_stream));
+			index->update_("to_river", Const<Int64>::fin_(&Int64::to_river));
+			index->update_("from_river", Member<Int64>::fin_(&Int64::from_river));
 			index->update_("stat", Static::fin_(&Int64::stat));
 			index->update_("mut", Static::fin_(&Int64::mut));
 			index->update_("fin", Static::fin_(&Int64::fin));
 			index->update_("buf", Static::fin_(&Int64::buf));
-			index->update_("str", Static::fin_(&Int64::str));
-			index->update_("swl", Static::fin_(&Int64::swl));
+			index->update_("riv", Static::fin_(&Int64::riv));
+			index->update_("rwl", Static::fin_(&Int64::rwl));
 			index->finalize_();
 			return pub;
 		}();
@@ -3164,8 +3164,8 @@ public:
 			index->update_("mut", Static::fin_(&Int64::mut));
 			index->update_("fin", Static::fin_(&Int64::fin));
 			index->update_("buf", Static::fin_(&Int64::buf));
-			index->update_("str", Static::fin_(&Int64::str));
-			index->update_("swl", Static::fin_(&Int64::swl));
+			index->update_("riv", Static::fin_(&Int64::riv));
+			index->update_("rwl", Static::fin_(&Int64::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -3308,28 +3308,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Float32>(ptr)->from_stream_(stream);
+		static_<Float32>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Float32>(ptr)->from_stream_with_links_(stream);
+		static_<Float32>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	inline Float32(const D& data)
@@ -3351,14 +3351,14 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Float32>::fin_(&Float32::to_buffer));
 			index->update_("from_buffer", Member<Float32>::fin_(&Float32::from_buffer));
-			index->update_("to_stream", Const<Float32>::fin_(&Float32::to_stream));
-			index->update_("from_stream", Member<Float32>::fin_(&Float32::from_stream));
+			index->update_("to_river", Const<Float32>::fin_(&Float32::to_river));
+			index->update_("from_river", Member<Float32>::fin_(&Float32::from_river));
 			index->update_("stat", Static::fin_(&Float32::stat));
 			index->update_("mut", Static::fin_(&Float32::mut));
 			index->update_("fin", Static::fin_(&Float32::fin));
 			index->update_("buf", Static::fin_(&Float32::buf));
-			index->update_("str", Static::fin_(&Float32::str));
-			index->update_("swl", Static::fin_(&Float32::swl));
+			index->update_("riv", Static::fin_(&Float32::riv));
+			index->update_("rwl", Static::fin_(&Float32::rwl));
 			index->finalize_();
 			return pub;
 		}();
@@ -3375,8 +3375,8 @@ public:
 			index->update_("mut", Static::fin_(&Float32::mut));
 			index->update_("fin", Static::fin_(&Float32::fin));
 			index->update_("buf", Static::fin_(&Float32::buf));
-			index->update_("str", Static::fin_(&Float32::str));
-			index->update_("swl", Static::fin_(&Float32::swl));
+			index->update_("riv", Static::fin_(&Float32::riv));
+			index->update_("rwl", Static::fin_(&Float32::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -3512,28 +3512,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Float64>(ptr)->from_stream_(stream);
+		static_<Float64>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Float64>(ptr)->from_stream_with_links_(stream);
+		static_<Float64>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	inline Float64(const D& data)
@@ -3555,14 +3555,14 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Float64>::fin_(&Float64::to_buffer));
 			index->update_("from_buffer", Member<Float64>::fin_(&Float64::from_buffer));
-			index->update_("to_stream", Const<Float64>::fin_(&Float64::to_stream));
-			index->update_("from_stream", Member<Float64>::fin_(&Float64::from_stream));
+			index->update_("to_river", Const<Float64>::fin_(&Float64::to_river));
+			index->update_("from_river", Member<Float64>::fin_(&Float64::from_river));
 			index->update_("stat", Static::fin_(&Float64::stat));
 			index->update_("mut", Static::fin_(&Float64::mut));
 			index->update_("fin", Static::fin_(&Float64::fin));
 			index->update_("buf", Static::fin_(&Float64::buf));
-			index->update_("str", Static::fin_(&Float64::str));
-			index->update_("swl", Static::fin_(&Float64::swl));
+			index->update_("riv", Static::fin_(&Float64::riv));
+			index->update_("rwl", Static::fin_(&Float64::rwl));
 			index->finalize_();
 			return pub;
 		}();
@@ -3579,8 +3579,8 @@ public:
 			index->update_("mut", Static::fin_(&Float64::mut));
 			index->update_("fin", Static::fin_(&Float64::fin));
 			index->update_("buf", Static::fin_(&Float64::buf));
-			index->update_("str", Static::fin_(&Float64::str));
-			index->update_("swl", Static::fin_(&Float64::swl));
+			index->update_("riv", Static::fin_(&Float64::riv));
+			index->update_("rwl", Static::fin_(&Float64::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -3726,28 +3726,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Complex32>(ptr)->from_stream_(stream);
+		static_<Complex32>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Complex32>(ptr)->from_stream_with_links_(stream);
+		static_<Complex32>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	inline Complex32(const D& data)
@@ -3769,14 +3769,14 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Complex32>::fin_(&Complex32::to_buffer));
 			index->update_("from_buffer", Member<Complex32>::fin_(&Complex32::from_buffer));
-			index->update_("to_stream", Const<Complex32>::fin_(&Complex32::to_stream));
-			index->update_("from_stream", Member<Complex32>::fin_(&Complex32::from_stream));
+			index->update_("to_river", Const<Complex32>::fin_(&Complex32::to_river));
+			index->update_("from_river", Member<Complex32>::fin_(&Complex32::from_river));
 			index->update_("stat", Static::fin_(&Complex32::stat));
 			index->update_("mut", Static::fin_(&Complex32::mut));
 			index->update_("fin", Static::fin_(&Complex32::fin));
 			index->update_("buf", Static::fin_(&Complex32::buf));
-			index->update_("str", Static::fin_(&Complex32::str));
-			index->update_("swl", Static::fin_(&Complex32::swl));
+			index->update_("riv", Static::fin_(&Complex32::riv));
+			index->update_("rwl", Static::fin_(&Complex32::rwl));
 			index->finalize_();
 			return pub;
 		}();
@@ -3793,8 +3793,8 @@ public:
 			index->update_("mut", Static::fin_(&Complex32::mut));
 			index->update_("fin", Static::fin_(&Complex32::fin));
 			index->update_("buf", Static::fin_(&Complex32::buf));
-			index->update_("str", Static::fin_(&Complex32::str));
-			index->update_("swl", Static::fin_(&Complex32::swl));
+			index->update_("riv", Static::fin_(&Complex32::riv));
+			index->update_("rwl", Static::fin_(&Complex32::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -3969,28 +3969,28 @@ public:
 		return buf_(it->next_());
 	}
 
-	static inline const Ptr str_(const Ptr stream)
+	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Complex64>(ptr)->from_stream_(stream);
+		static_<Complex64>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr str(const Ptr it)
+	static inline const Ptr riv(const Ptr it)
 	{
-		return str_(it->next_());
+		return riv_(it->next_());
 	}
 
-	static inline const Ptr swl_(const Ptr stream)
+	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Complex64>(ptr)->from_stream_with_links_(stream);
+		static_<Complex64>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr swl(const Ptr it)
+	static inline const Ptr rwl(const Ptr it)
 	{
-		return swl_(it->next_());
+		return rwl_(it->next_());
 	}
 
 	inline Complex64(const D& data)
@@ -4012,14 +4012,14 @@ public:
 			Index* const index = static_<Index>(pub);
 			index->update_("to_buffer", Const<Complex64>::fin_(&Complex64::to_buffer));
 			index->update_("from_buffer", Member<Complex64>::fin_(&Complex64::from_buffer));
-			index->update_("to_stream", Const<Complex64>::fin_(&Complex64::to_stream));
-			index->update_("from_stream", Member<Complex64>::fin_(&Complex64::from_stream));
+			index->update_("to_river", Const<Complex64>::fin_(&Complex64::to_river));
+			index->update_("from_river", Member<Complex64>::fin_(&Complex64::from_river));
 			index->update_("stat", Static::fin_(&Complex64::stat));
 			index->update_("mut", Static::fin_(&Complex64::mut));
 			index->update_("fin", Static::fin_(&Complex64::fin));
 			index->update_("buf", Static::fin_(&Complex64::buf));
-			index->update_("str", Static::fin_(&Complex64::str));
-			index->update_("swl", Static::fin_(&Complex64::swl));
+			index->update_("riv", Static::fin_(&Complex64::riv));
+			index->update_("rwl", Static::fin_(&Complex64::rwl));
 			index->finalize_();
 			return pub;
 		}();
@@ -4036,8 +4036,8 @@ public:
 			index->update_("mut", Static::fin_(&Complex64::mut));
 			index->update_("fin", Static::fin_(&Complex64::fin));
 			index->update_("buf", Static::fin_(&Complex64::buf));
-			index->update_("str", Static::fin_(&Complex64::str));
-			index->update_("swl", Static::fin_(&Complex64::swl));
+			index->update_("riv", Static::fin_(&Complex64::riv));
+			index->update_("rwl", Static::fin_(&Complex64::rwl));
 			index->finalize_();
 			return stat;
 		}();
@@ -4263,12 +4263,12 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 	}
 }
 
-class Stream : public Mutable, public Me<Stream>
+class River : public Mutable, public Me<River>
 {
 	using const_std_unique_iostream = const std::unique_ptr<std::iostream>;
 
 public:
-	Stream(std::iostream* const stream)
+	River(std::iostream* const stream)
 		: Mutable{}
 		, Me{}
 		, _stream{ stream }
@@ -4301,11 +4301,11 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Index* const index = static_<Index>(pub);
-			index->update_("stat", Static::fin_(&Stream::stat));
-			index->update_("mut", Static::fin_(&Stream::mut));
-			index->update_("push_back", Member<Stream>::fin_(&Stream::push_back));
-			index->update_("write", Member<Stream>::fin_(&Stream::write));
-			index->update_("pop_front", Member<Stream>::fin_(&Stream::pop_front));
+			index->update_("stat", Static::fin_(&River::stat));
+			index->update_("mut", Static::fin_(&River::mut));
+			index->update_("push_back", Member<River>::fin_(&River::push_back));
+			index->update_("write", Member<River>::fin_(&River::write));
+			index->update_("pop_front", Member<River>::fin_(&River::pop_front));
 			index->finalize_();
 			return pub;
 		}();
@@ -4318,8 +4318,8 @@ public:
 		{
 			const Ptr stat = Index::mut_();
 			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Stream::stat));
-			index->update_("mut", Static::fin_(&Stream::mut));
+			index->update_("stat", Static::fin_(&River::stat));
+			index->update_("mut", Static::fin_(&River::mut));
 			index->finalize_();
 			return stat;
 		}();
@@ -4333,7 +4333,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Stream");
+		static const Ptr TYPE = sym_("strange::River");
 		return TYPE;
 	}
 
@@ -4344,7 +4344,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->insert_("strange::Mutable");
-			herd->insert_("strange::Stream");
+			herd->insert_("strange::River");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
 			return cats;
@@ -4357,7 +4357,7 @@ public:
 		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
-		ptr->invoke_("to_stream", me_());
+		ptr->invoke_("to_river", me_());
 		return true;
 	}
 
@@ -4372,7 +4372,7 @@ public:
 		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
-		ptr->invoke_("to_stream_with_links", index, me_());
+		ptr->invoke_("to_river_with_links", index, me_());
 		return true;
 	}
 
@@ -4399,7 +4399,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Buffer>(read_(int16))->get_();
-		return call_(type, "str", me_());
+		return call_(type, "riv", me_());
 	}
 
 	inline const Ptr pop_front(const Ptr ignore)
@@ -4411,7 +4411,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Buffer>(read_(int16))->get_();
-		return call_(type, "swl", me_());
+		return call_(type, "rwl", me_());
 	}
 
 	inline const Ptr read_(const int64_t length)
@@ -4432,67 +4432,67 @@ private:
 	const_std_unique_iostream _stream;
 };
 
-inline const Thing::Ptr Serializable::to_buffer_via_stream_() const
+inline const Thing::Ptr Serializable::to_buffer_via_river_() const
 {
 	const Thing* const thing = dynamic_cast<const Thing*>(this);
 	if (thing)
 	{
-		const Thing::Ptr stream = Stream::mut_();
-		const_cast<Thing*>(thing)->invoke_("to_stream", stream);
+		const Thing::Ptr river = River::mut_();
+		const_cast<Thing*>(thing)->invoke_("to_river", river);
 		const Thing::Ptr buffer = Buffer::mut_();
-		Thing::static_<Buffer>(buffer)->from_stream_(stream);
+		Thing::static_<Buffer>(buffer)->from_river_(river);
 		return buffer;
 	}
 	return Thing::nothing_();
 }
 
-inline void Serializable::from_buffer_via_stream_(const Thing::Ptr buffer)
+inline void Serializable::from_buffer_via_river_(const Thing::Ptr buffer)
 {
 	Buffer* const buf = Thing::dynamic_<Buffer>(buffer);
 	if (!buf)
 	{
-		Thing::log_("Serializable::from_buffer_via_stream_ passed wrong type of thing");
+		Thing::log_("Serializable::from_buffer_via_river_ passed wrong type of thing");
 		return;
 	}
-	const Thing::Ptr stream = Stream::mut_();
-	buf->to_stream_(stream);
+	const Thing::Ptr river = River::mut_();
+	buf->to_river_(river);
 	Thing* const thing = dynamic_cast<Thing*>(this);
 	if (thing)
 	{
-		thing->invoke_("from_stream", stream);
+		thing->invoke_("from_river", river);
 	}
 }
 
-inline void Index::to_stream_(const Thing::Ptr stream) const
+inline void Index::to_river_(const Thing::Ptr river) const
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Index::to_stream_ passed wrong type of thing");
+		log_("Index::to_river_ passed wrong type of thing");
 		return;
 	}
-	strm->write_(Bit::mut_(finalized_()));
-	strm->write_(Int64::mut_(int64_t(_map.size())));
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
-		strm->push_back_(i.first);
-		strm->push_back_(i.second);
+		riv->push_back_(i.first);
+		riv->push_back_(i.second);
 	}
 }
 
-inline void Index::from_stream_(const Thing::Ptr stream)
+inline void Index::from_river_(const Thing::Ptr river)
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Index::from_stream_ passed wrong type of thing");
+		log_("Index::from_river_ passed wrong type of thing");
 		return;
 	}
-	const bool bit = strm->read_<Bit>();
-	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
+	const bool bit = riv->read_<Bit>();
+	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
 	{
-		const Ptr first = strm->pop_front_();
-		const Ptr second = strm->pop_front_();
+		const Ptr first = riv->pop_front_();
+		const Ptr second = riv->pop_front_();
 		_map[first] = second;
 	}
 	if (bit)
@@ -4501,42 +4501,42 @@ inline void Index::from_stream_(const Thing::Ptr stream)
 	}
 }
 
-inline void Index::to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const
+inline void Index::to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const
 {
 	Index* const ind = dynamic_<Index>(index);
 	if (!ind)
 	{
-		log_("Index::to_stream_with_links_ passed wrong type of index thing");
+		log_("Index::to_river_with_links_ passed wrong type of index thing");
 		return;
 	}
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Index::to_stream_with_links_ passed wrong type of stream thing");
+		log_("Index::to_river_with_links_ passed wrong type of river thing");
 		return;
 	}
-	strm->write_(Bit::mut_(finalized_()));
-	strm->write_(Int64::mut_(int64_t(_map.size())));
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
-		static_<Symbol>(ind->find_(i.first))->to_stream_(stream);
-		static_<Symbol>(ind->find_(i.second))->to_stream_(stream);
+		static_<Symbol>(ind->find_(i.first))->to_river_(river);
+		static_<Symbol>(ind->find_(i.second))->to_river_(river);
 	}
 }
 
-inline void Index::from_stream_with_links_(const Thing::Ptr stream)
+inline void Index::from_river_with_links_(const Thing::Ptr river)
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Index::from_stream_with_links_ passed wrong type of thing");
+		log_("Index::from_river_with_links_ passed wrong type of thing");
 		return;
 	}
-	const bool bit = strm->read_<Bit>();
-	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
+	const bool bit = riv->read_<Bit>();
+	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
 	{
-		const Ptr first = Symbol::str_(stream);
-		const Ptr second = Symbol::str_(stream);
+		const Ptr first = Symbol::riv_(river);
+		const Ptr second = Symbol::riv_(river);
 		_map[first] = second;
 	}
 	if (bit)
@@ -4556,37 +4556,37 @@ inline void Index::replace_links_(const Thing::Ptr index)
 	_map.swap(replacement);
 }
 
-inline void Index::gather_to_stream_(const Thing::Ptr thing, const Thing::Ptr stream)
+inline void Index::gather_to_river_(const Thing::Ptr thing, const Thing::Ptr river)
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Index::gather_to_stream_ passed wrong type of stream thing");
+		log_("Index::gather_to_river_ passed wrong type of river thing");
 		return;
 	}
 	gather_(thing);
-	strm->write_(Int64::mut_(int64_t(_map.size())));
+	riv->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
-		if (strm->push_back_with_links_(i.first, me_()))
+		if (riv->push_back_with_links_(i.first, me_()))
 		{
-			static_<Symbol>(i.second)->to_stream_(stream);
+			static_<Symbol>(i.second)->to_river_(river);
 		}
 	}
 }
 
-inline const Thing::Ptr Index::gather_from_stream_(const Thing::Ptr stream)
+inline const Thing::Ptr Index::gather_from_river_(const Thing::Ptr river)
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Index::gather_from_stream_ passed wrong type of stream thing");
+		log_("Index::gather_from_river_ passed wrong type of river thing");
 		return nothing_();
 	}
-	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
+	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
 	{
-		const Ptr thing = strm->pop_front_with_links_();
-		const Ptr symbol = Symbol::str_(stream);
+		const Ptr thing = riv->pop_front_with_links_();
+		const Ptr symbol = Symbol::riv_(river);
 		_map.emplace(symbol, thing);
 	}
 	for (const auto& i : _map)
@@ -4596,36 +4596,36 @@ inline const Thing::Ptr Index::gather_from_stream_(const Thing::Ptr stream)
 	return find_(nothing_());
 }
 
-inline void Flock::to_stream_(const Thing::Ptr stream) const
+inline void Flock::to_river_(const Thing::Ptr river) const
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Flock::to_stream_ passed wrong type of thing");
+		log_("Flock::to_river_ passed wrong type of thing");
 		return;
 	}
-	strm->write_(Bit::mut_(finalized_()));
-	strm->write_(Int64::mut_(int64_t(_vector.size())));
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_vector.size())));
 	for (const auto i : _vector)
 	{
-		strm->push_back_(i);
+		riv->push_back_(i);
 	}
 }
 
-inline void Flock::from_stream_(const Thing::Ptr stream)
+inline void Flock::from_river_(const Thing::Ptr river)
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Flock::from_stream_ passed wrong type of thing");
+		log_("Flock::from_river_ passed wrong type of thing");
 		return;
 	}
-	const bool bit = strm->read_<Bit>();
-	const int64_t int64 = strm->read_<Int64>();
+	const bool bit = riv->read_<Bit>();
+	const int64_t int64 = riv->read_<Int64>();
 	_vector.reserve(size_t(int64));
 	for (int64_t i = int64; i > 0; --i)
 	{
-		_vector.push_back(strm->pop_front_());
+		_vector.push_back(riv->pop_front_());
 	}
 	if (bit)
 	{
@@ -4633,42 +4633,42 @@ inline void Flock::from_stream_(const Thing::Ptr stream)
 	}
 }
 
-inline void Flock::to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const
+inline void Flock::to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const
 {
 	Index* const ind = dynamic_<Index>(index);
 	if (!ind)
 	{
-		log_("Flock::to_stream_with_links_ passed wrong type of index thing");
+		log_("Flock::to_river_with_links_ passed wrong type of index thing");
 		return;
 	}
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Flock::to_stream_with_links_ passed wrong type of stream thing");
+		log_("Flock::to_river_with_links_ passed wrong type of river thing");
 		return;
 	}
-	strm->write_(Bit::mut_(finalized_()));
-	strm->write_(Int64::mut_(int64_t(_vector.size())));
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_vector.size())));
 	for (const auto i : _vector)
 	{
-		static_<Symbol>(ind->find_(i))->to_stream_(stream);
+		static_<Symbol>(ind->find_(i))->to_river_(river);
 	}
 }
 
-inline void Flock::from_stream_with_links_(const Thing::Ptr stream)
+inline void Flock::from_river_with_links_(const Thing::Ptr river)
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Flock::from_stream_with_links_ passed wrong type of thing");
+		log_("Flock::from_river_with_links_ passed wrong type of thing");
 		return;
 	}
-	const bool bit = strm->read_<Bit>();
-	const int64_t int64 = strm->read_<Int64>();
+	const bool bit = riv->read_<Bit>();
+	const int64_t int64 = riv->read_<Int64>();
 	_vector.reserve(size_t(int64));
 	for (int64_t i = int64; i > 0; --i)
 	{
-		_vector.push_back(Symbol::str_(stream));
+		_vector.push_back(Symbol::riv_(river));
 	}
 	if (bit)
 	{
@@ -4685,34 +4685,34 @@ inline void Flock::replace_links_(const Thing::Ptr index)
 	}
 }
 
-inline void Herd::to_stream_(const Thing::Ptr stream) const
+inline void Herd::to_river_(const Thing::Ptr river) const
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Herd::to_stream_ passed wrong type of thing");
+		log_("Herd::to_river_ passed wrong type of thing");
 		return;
 	}
-	strm->write_(Bit::mut_(finalized_()));
-	strm->write_(Int64::mut_(int64_t(_set.size())));
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_set.size())));
 	for (const auto i : _set)
 	{
-		strm->push_back_(i);
+		riv->push_back_(i);
 	}
 }
 
-inline void Herd::from_stream_(const Thing::Ptr stream)
+inline void Herd::from_river_(const Thing::Ptr river)
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Herd::from_stream_ passed wrong type of thing");
+		log_("Herd::from_river_ passed wrong type of thing");
 		return;
 	}
-	const bool bit = strm->read_<Bit>();
-	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
+	const bool bit = riv->read_<Bit>();
+	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
 	{
-		_set.insert(strm->pop_front_());
+		_set.insert(riv->pop_front_());
 	}
 	if (bit)
 	{
@@ -4720,40 +4720,40 @@ inline void Herd::from_stream_(const Thing::Ptr stream)
 	}
 }
 
-inline void Herd::to_stream_with_links_(const Thing::Ptr index, const Thing::Ptr stream) const
+inline void Herd::to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const
 {
 	Index* const ind = dynamic_<Index>(index);
 	if (!ind)
 	{
-		log_("Herd::to_stream_with_links_ passed wrong type of index thing");
+		log_("Herd::to_river_with_links_ passed wrong type of index thing");
 		return;
 	}
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Herd::to_stream_with_links_ passed wrong type of stream thing");
+		log_("Herd::to_river_with_links_ passed wrong type of river thing");
 		return;
 	}
-	strm->write_(Bit::mut_(finalized_()));
-	strm->write_(Int64::mut_(int64_t(_set.size())));
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_set.size())));
 	for (const auto i : _set)
 	{
-		static_<Symbol>(ind->find_(i))->to_stream_(stream);
+		static_<Symbol>(ind->find_(i))->to_river_(river);
 	}
 }
 
-inline void Herd::from_stream_with_links_(const Thing::Ptr stream)
+inline void Herd::from_river_with_links_(const Thing::Ptr river)
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Herd::from_stream_with_links_ passed wrong type of thing");
+		log_("Herd::from_river_with_links_ passed wrong type of thing");
 		return;
 	}
-	const bool bit = strm->read_<Bit>();
-	for (int64_t i = strm->read_<Int64>(); i > 0; --i)
+	const bool bit = riv->read_<Bit>();
+	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
 	{
-		_set.insert(Symbol::str_(stream));
+		_set.insert(Symbol::riv_(river));
 	}
 	if (bit)
 	{
@@ -4772,30 +4772,30 @@ inline void Herd::replace_links_(const Thing::Ptr index)
 	_set.swap(replacement);
 }
 
-inline void Buffer::to_stream_(const Thing::Ptr stream) const
+inline void Buffer::to_river_(const Thing::Ptr river) const
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Buffer::to_stream_ passed wrong type of thing");
+		log_("Buffer::to_river_ passed wrong type of thing");
 		return;
 	}
-	strm->write_(Bit::mut_(finalized_()));
-	strm->write_(Int64::mut_(int64_t(get_().length())));
-	strm->write_(get_());
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(get_().length())));
+	riv->write_(get_());
 }
 
-inline void Buffer::from_stream_(const Thing::Ptr stream)
+inline void Buffer::from_river_(const Thing::Ptr river)
 {
-	Stream* const strm = dynamic_<Stream>(stream);
-	if (!strm)
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
 	{
-		log_("Buffer::from_stream_ passed wrong type of thing");
+		log_("Buffer::from_river_ passed wrong type of thing");
 		return;
 	}
-	const bool bit = strm->read_<Bit>();
-	const int64_t int64 = strm->read_<Int64>();
-	set_(static_<Buffer>(strm->read_(int64))->get_());
+	const bool bit = riv->read_<Bit>();
+	const int64_t int64 = riv->read_<Int64>();
+	set_(static_<Buffer>(riv->read_(int64))->get_());
 	if (bit)
 	{
 		finalize_();
@@ -5660,7 +5660,7 @@ inline const Thing::Ptr Thing::stats_()
 		index->update_("strange::Float64", Static::fin_(&Float64::stat));
 		index->update_("strange::Complex32", Static::fin_(&Complex32::stat));
 		index->update_("strange::Complex64", Static::fin_(&Complex64::stat));
-		index->update_("strange::Stream", Static::fin_(&Stream::stat));
+		index->update_("strange::River", Static::fin_(&River::stat));
 		index->update_("strange::Fence", Static::fin_(&Fence::stat));
 		index->finalize_();
 		return stats;
