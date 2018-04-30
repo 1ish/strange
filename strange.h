@@ -13,6 +13,7 @@
 #include <cstdint>
 #include <type_traits>
 #include <complex>
+#include <shared_mutex>
 
 namespace strange
 {
@@ -1523,7 +1524,7 @@ private:
 		{
 		}
 
-		virtual const Ptr next_() override
+		virtual inline const Ptr next_() override
 		{
 			if (_iterator == static_<Flock>(_flock)->_vector.cend())
 			{
@@ -5023,10 +5024,116 @@ inline const Thing::Ptr Flock::It::cats_() const
 	return CATS;
 }
 
-class Class : public Mutable, public Me<Class>
+class Manifest : public Mutable, public Me<Manifest>
 {
 public:
-	inline Class()
+	inline Manifest()
+		: Mutable{}
+		, Me{}
+		, _index{ Index::mut_() }
+		, _mutex{}
+	{
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Index* const index = static_<Index>(pub);
+			index->update_("stat", Static::fin_(&Manifest::stat));
+			index->update_("find", Const<Manifest>::fin_(&Manifest::find));
+			index->update_("update", Member<Manifest>::fin_(&Manifest::update));
+			index->update_("insert", Member<Manifest>::fin_(&Manifest::insert));
+			index->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Index::mut_();
+			Index* const index = static_<Index>(stat);
+			index->update_("stat", Static::fin_(&Manifest::stat));
+			index->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
+	}
+
+	static inline const Ptr mut_()
+	{
+		return make_();
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return me_();
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Manifest");
+		return TYPE;
+	}
+
+	inline const Ptr find(const Ptr it) const
+	{
+		std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+		return static_<Index>(_index)->find(it);
+	}
+
+	inline void update_(const Ptr key, const Ptr value)
+	{
+		if (key->finalized_() && value->finalized_())
+		{
+			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+			static_<Index>(_index)->update_(key, value);
+		}
+	}
+
+	inline const Ptr update(const Ptr it)
+	{
+		const Ptr key = it->next_();
+		const Ptr value = it->next_();
+		update_(key, value);
+		return value;
+	}
+
+	inline void insert_(const Ptr key, const Ptr value)
+	{
+		if (key->finalized_() && value->finalized_())
+		{
+			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+			static_<Index>(_index)->insert_(key, value);
+		}
+	}
+
+	inline const Ptr insert(const Ptr it)
+	{
+		const Ptr key = it->next_();
+		const Ptr value = it->next_();
+		insert_(key, value);
+		return value;
+	}
+
+private:
+	const Ptr _index;
+	mutable std::shared_timed_mutex _mutex;
+};
+
+class Creature : public Mutable, public Me<Creature>
+{
+public:
+	inline Creature()
 		: Mutable{}
 		, Me{}
 		, _public{ Index::mut_() }
@@ -5039,9 +5146,9 @@ public:
 		const Ptr over = static_<Index>(_public)->find_("type");
 		if (!over->is_("0"))
 		{
-			return operate_(const_cast<Class*>(this), over);
+			return operate_(const_cast<Creature*>(this), over);
 		}
-		static const Ptr TYPE = sym_("strange::Class");
+		static const Ptr TYPE = sym_("strange::Creature");
 		return TYPE;
 	}
 
@@ -5050,7 +5157,7 @@ public:
 		const Ptr over = static_<Index>(_public)->find_("copy");
 		if (!over->is_("0"))
 		{
-			return operate_(const_cast<Class*>(this), over);
+			return operate_(const_cast<Creature*>(this), over);
 		}
 		return me_();
 	}
@@ -5060,7 +5167,7 @@ public:
 		const Ptr over = static_<Index>(_public)->find_("clone");
 		if (!over->is_("0"))
 		{
-			return operate_(const_cast<Class*>(this), over);
+			return operate_(const_cast<Creature*>(this), over);
 		}
 		return Thing::clone_();
 	}
@@ -5080,7 +5187,7 @@ public:
 		const Ptr over = static_<Index>(_public)->find_("finalized");
 		if (!over->is_("0"))
 		{
-			return !operate_(const_cast<Class*>(this), over)->is_("0");
+			return !operate_(const_cast<Creature*>(this), over)->is_("0");
 		}
 		return Mutable::finalized_();
 	}
@@ -5110,7 +5217,7 @@ public:
 		const Ptr over = static_<Index>(_public)->find_("hash");
 		if (!over->is_("0"))
 		{
-			return size_t(static_<Int64>(operate_(const_cast<Class*>(this), over))->get_());
+			return size_t(static_<Int64>(operate_(const_cast<Creature*>(this), over))->get_());
 		}
 		return Thing::hash_();
 	}
@@ -5121,7 +5228,7 @@ public:
 		if (!over->is_("0"))
 		{
 			std::vector<Ptr> vec(1, other);
-			return !operate_(const_cast<Class*>(this), over, Iterator<std::vector<Ptr>>::mut_(vec))->is_("0");
+			return !operate_(const_cast<Creature*>(this), over, Iterator<std::vector<Ptr>>::mut_(vec))->is_("0");
 		}
 		return Thing::same_(other);
 	}
@@ -5141,14 +5248,14 @@ public:
 		const Ptr over = static_<Index>(_public)->find_("cats");
 		if (!over->is_("0"))
 		{
-			return operate_(const_cast<Class*>(this), over);
+			return operate_(const_cast<Creature*>(this), over);
 		}
 		static const Ptr CATS = []()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->insert_("strange::Mutable");
-			herd->insert_("strange::Class");
+			herd->insert_("strange::Creature");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
 			return cats;
@@ -5187,25 +5294,13 @@ class Command : public Symbol
 class Expression : public Mutable
 {
 public:
-	inline Expression()
-		: Mutable{}
-		, _exp{ Statement::mut_() }
-	{
-	}
+	inline Expression();
 
-	static inline Ptr eval_(const Ptr exp, const Ptr local)
-	{
-		Statement* const statement = dynamic_<Statement>(exp);
-		if (!statement)
-		{
-			return exp;
-		}
-		return statement->exec_(exp, local);
-	}
+	static inline Ptr eval_(const Ptr ptr, const Ptr local);
 
 	inline Ptr evaluate_(const Ptr local) const
 	{
-		return eval_(_exp, local);
+		return eval_(_ptr, local);
 	}
 
 	inline Ptr evaluate(const Ptr it) const
@@ -5213,203 +5308,13 @@ public:
 		return evaluate_(it->next_());
 	}
 
+	static inline const Ptr iterator_(const Ptr statement, const Ptr local)
+	{
+		return It::mut_(statement, local);
+	}
+
 private:
-	const Ptr _exp;
-
-	class Statement : public Flock
-	{
-	public:
-		virtual inline const Ptr exec_(const Ptr exp, const Ptr local)
-		{
-			const int64_t size = size_();
-			if (size == 0)
-			{
-				return local;
-			}
-			if (size == 1)
-			{
-				return at_(0);
-			}
-			const Ptr it = Expression::It::mut_(exp, local);
-			const Ptr thing = it->next_();
-			return thing->invoke(it);
-		}
-	};
-
-	class Block : public Statement
-	{
-	public:
-		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
-		{
-			const int64_t size = size_();
-			for (int64_t i = 0; i < size; ++i)
-			{
-				const Ptr result = eval_(at_(i), local);
-				if (dynamic_<Command>(result) &&
-					(result->is_("break") || result->is_("continue")))
-				{
-					return result;
-				}
-			}
-			return nothing_();
-		}
-	};
-
-	class If : public Statement
-	{
-	public:
-		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
-		{
-			const int64_t size = size_();
-			if (size == 2)
-			{
-				if (!eval_(at_(0), local)->is_("0"))
-				{
-					const Ptr result = eval_(at_(1), local);
-					if (dynamic_<Command>(result) &&
-						(result->is_("break") || result->is_("continue")))
-					{
-						return result;
-					}
-				}
-			}
-			else if (size == 3)
-			{
-				if (!eval_(at_(0), local)->is_("0"))
-				{
-					const Ptr result = eval_(at_(1), local);
-					if (dynamic_<Command>(result) &&
-						(result->is_("break") || result->is_("continue")))
-					{
-						return result;
-					}
-				}
-				else
-				{
-					const Ptr result = eval_(at_(2), local);
-					if (dynamic_<Command>(result) &&
-						(result->is_("break") || result->is_("continue")))
-					{
-						return result;
-					}
-				}
-			}
-			return nothing_();
-		}
-	};
-
-	class Question : public Statement
-	{
-	public:
-		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
-		{
-			if (size_() == 3)
-			{
-				if (!eval_(at_(0), local)->is_("0"))
-				{
-					return eval_(at_(1), local);
-				}
-				else
-				{
-					return eval_(at_(2), local);
-				}
-			}
-			return nothing_();
-		}
-	};
-
-	class While : public Statement
-	{
-	public:
-		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
-		{
-			const int64_t size = size_();
-			if (size >= 1)
-			{
-				while (!eval_(at_(0), local)->is_("0"))
-				{
-					for (int64_t i = 1; i < size; ++i)
-					{
-						const Ptr result = eval_(at_(i), local);
-						if (dynamic_<Command>(result))
-						{
-							if (result->is_("break"))
-							{
-								return nothing_();
-							}
-							else if (result->is_("continue"))
-							{
-								break;
-							}
-						}
-					}
-				}
-			}
-			return nothing_();
-		}
-	};
-
-	class Do : public Statement
-	{
-	public:
-		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
-		{
-			const int64_t size = size_();
-			if (size >= 1)
-			{
-				do
-				{
-					for (int64_t i = 0; i < size - 1; ++i)
-					{
-						const Ptr result = eval_(at_(i), local);
-						if (dynamic_<Command>(result))
-						{
-							if (result->is_("break"))
-							{
-								return nothing_();
-							}
-							else if (result->is_("continue"))
-							{
-								break;
-							}
-						}
-					}
-				} while (!eval_(at_(size - 1), local)->is_("0"));
-			}
-			return nothing_();
-		}
-	};
-
-	class For : public Statement
-	{
-	public:
-		virtual inline const Ptr exec_(const Ptr exp, const Ptr local) override
-		{
-			const int64_t size = size_();
-			if (size >= 3)
-			{
-				for (eval_(at_(0), local); !eval_(at_(1), local)->is_("0"); eval_(at_(2), local))
-				{
-					for (int64_t i = 3; i < size; ++i)
-					{
-						const Ptr result = eval_(at_(i), local);
-						if (dynamic_<Command>(result))
-						{
-							if (result->is_("break"))
-							{
-								return nothing_();
-							}
-							else if (result->is_("continue"))
-							{
-								break;
-							}
-						}
-					}
-				}
-			}
-			return nothing_();
-		}
-	};
+	const Ptr _ptr;
 
 	class It : public Mutable
 	{
@@ -5422,14 +5327,7 @@ private:
 		{
 		}
 
-		virtual const Ptr next_() override
-		{
-			if (_pos >= static_<Statement>(_statement)->size_())
-			{
-				return end_();
-			}
-			return eval_(static_<Statement>(_statement)->at_(_pos++), _local);
-		}
+		virtual inline const Ptr next_() override;
 
 		virtual inline const Ptr copy_() const override
 		{
@@ -5478,7 +5376,7 @@ public:
 		: Thing{}
 		, Me{}
 		, _expression{ expression }
-		, _static{ Index::mut_() } //TODO make thread safe
+		, _static{ Manifest::mut_() }
 	{
 	}
 
@@ -5504,14 +5402,13 @@ protected:
 		const Ptr local = Index::mut_();
 		Index* const loc = static_<Index>(local);
 		loc->insert_("static", _static);
-		Me<Class>* const me_class = dynamic_cast<Me<Class>*>(thing);
-		if (me_class)
+		Me<Creature>* const me = dynamic_cast<Me<Creature>*>(thing);
+		if (me)
 		{
-			const Ptr me = me_class->me_();
-			Class* const instance = static_<Class>(me);
-			loc->insert_("me", me);
-			loc->insert_("public", instance->_public);
-			loc->insert_("private", instance->_private);
+			Creature* const creature = static_cast<Creature*>(thing);
+			loc->insert_("me", me->me_());
+			loc->insert_("public", creature->_public);
+			loc->insert_("private", creature->_private);
 		}
 		loc->insert_("it", it);
 		return static_<Expression>(_expression)->evaluate_(local);
@@ -5521,6 +5418,226 @@ private:
 	const Ptr _expression;
 	const Ptr _static;
 };
+
+class Statement : public Flock
+{
+public:
+	virtual inline const Ptr exec_(const Ptr statement, const Ptr local)
+	{
+		const int64_t size = size_();
+		if (size == 0)
+		{
+			return local;
+		}
+		if (size == 1)
+		{
+			return at_(0);
+		}
+		const Ptr it = Expression::iterator_(statement, local);
+		const Ptr thing = it->next_();
+		return thing->invoke(it);
+	}
+};
+
+class Block : public Statement
+{
+public:
+	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	{
+		const int64_t size = size_();
+		for (int64_t i = 0; i < size; ++i)
+		{
+			const Ptr result = Expression::eval_(at_(i), local);
+			if (dynamic_<Command>(result) &&
+				(result->is_("break") || result->is_("continue")))
+			{
+				return result;
+			}
+		}
+		return nothing_();
+	}
+};
+
+class If : public Statement
+{
+public:
+	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	{
+		const int64_t size = size_();
+		if (size == 2)
+		{
+			if (!Expression::eval_(at_(0), local)->is_("0"))
+			{
+				const Ptr result = Expression::eval_(at_(1), local);
+				if (dynamic_<Command>(result) &&
+					(result->is_("break") || result->is_("continue")))
+				{
+					return result;
+				}
+			}
+		}
+		else if (size == 3)
+		{
+			if (!Expression::eval_(at_(0), local)->is_("0"))
+			{
+				const Ptr result = Expression::eval_(at_(1), local);
+				if (dynamic_<Command>(result) &&
+					(result->is_("break") || result->is_("continue")))
+				{
+					return result;
+				}
+			}
+			else
+			{
+				const Ptr result = Expression::eval_(at_(2), local);
+				if (dynamic_<Command>(result) &&
+					(result->is_("break") || result->is_("continue")))
+				{
+					return result;
+				}
+			}
+		}
+		return nothing_();
+	}
+};
+
+class Question : public Statement
+{
+public:
+	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	{
+		if (size_() == 3)
+		{
+			if (!Expression::eval_(at_(0), local)->is_("0"))
+			{
+				return Expression::eval_(at_(1), local);
+			}
+			else
+			{
+				return Expression::eval_(at_(2), local);
+			}
+		}
+		return nothing_();
+	}
+};
+
+class While : public Statement
+{
+public:
+	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	{
+		const int64_t size = size_();
+		if (size >= 1)
+		{
+			while (!Expression::eval_(at_(0), local)->is_("0"))
+			{
+				for (int64_t i = 1; i < size; ++i)
+				{
+					const Ptr result = Expression::eval_(at_(i), local);
+					if (dynamic_<Command>(result))
+					{
+						if (result->is_("break"))
+						{
+							return nothing_();
+						}
+						else if (result->is_("continue"))
+						{
+							break;
+						}
+					}
+				}
+			}
+		}
+		return nothing_();
+	}
+};
+
+class Do : public Statement
+{
+public:
+	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	{
+		const int64_t size = size_();
+		if (size >= 1)
+		{
+			do
+			{
+				for (int64_t i = 0; i < size - 1; ++i)
+				{
+					const Ptr result = Expression::eval_(at_(i), local);
+					if (dynamic_<Command>(result))
+					{
+						if (result->is_("break"))
+						{
+							return nothing_();
+						}
+						else if (result->is_("continue"))
+						{
+							break;
+						}
+					}
+				}
+			} while (!Expression::eval_(at_(size - 1), local)->is_("0"));
+		}
+		return nothing_();
+	}
+};
+
+class For : public Statement
+{
+public:
+	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	{
+		const int64_t size = size_();
+		if (size >= 3)
+		{
+			for (Expression::eval_(at_(0), local); !Expression::eval_(at_(1), local)->is_("0"); Expression::eval_(at_(2), local))
+			{
+				for (int64_t i = 3; i < size; ++i)
+				{
+					const Ptr result = Expression::eval_(at_(i), local);
+					if (dynamic_<Command>(result))
+					{
+						if (result->is_("break"))
+						{
+							return nothing_();
+						}
+						else if (result->is_("continue"))
+						{
+							break;
+						}
+					}
+				}
+			}
+		}
+		return nothing_();
+	}
+};
+
+inline Expression::Expression()
+	: Mutable{}
+	, _ptr{ Statement::mut_() }
+{
+}
+
+inline Thing::Ptr Expression::eval_(const Thing::Ptr ptr, const Thing::Ptr local)
+{
+	Statement* const statement = dynamic_<Statement>(ptr);
+	if (statement)
+	{
+		return statement->exec_(ptr, local);
+	}
+	return ptr;
+}
+
+inline const Thing::Ptr Expression::It::next_()
+{
+	if (_pos >= static_<Statement>(_statement)->size_())
+	{
+		return end_();
+	}
+	return eval_(static_<Statement>(_statement)->at_(_pos++), _local);
+}
 
 inline const Thing::Ptr Thing::stats_()
 {
