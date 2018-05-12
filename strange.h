@@ -178,6 +178,7 @@ public:
 
 	virtual inline void finalize_()
 	{
+		_finalized_().store(true, std::memory_order_release);
 	}
 
 	inline const Ptr finalize(const Ptr ignore)
@@ -188,7 +189,7 @@ public:
 
 	virtual inline const bool finalized_() const
 	{
-		return true;
+		return _finalized_().load(std::memory_order_acquire);
 	}
 
 	inline const Ptr finalized(const Ptr ignore) const
@@ -306,6 +307,14 @@ protected:
 
 	// protected impure virtual member functions and adapters
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it);
+
+private:
+	// private static utility functions
+	static std::atomic<bool>& _finalized_()
+	{
+		static std::atomic<bool> FINALIZED(true);
+		return FINALIZED;
+	}
 };
 
 class Iterable
@@ -539,7 +548,9 @@ public:
 	template <typename F>
 	static inline const Ptr fin_(F&& symbol)
 	{
-		return make_(std::forward<F>(symbol));
+		const Ptr result = make_(std::forward<F>(symbol));
+		result->finalize_();
+		return result;
 	}
 
 	static inline const Ptr lak_(const Ptr lake);
@@ -638,7 +649,9 @@ public:
 
 	static inline const Ptr fin_(const function fun)
 	{
-		return make_(fun);
+		const Ptr result = make_(fun);
+		result->finalize_();
+		return result;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -677,7 +690,9 @@ public:
 
 	static inline const Ptr fin_(const member fun)
 	{
-		return make_(fun);
+		const Ptr result = make_(fun);
+		result->finalize_();
+		return result;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -727,7 +742,9 @@ public:
 
 	static inline const Ptr fin_(const member fun)
 	{
-		return make_(fun);
+		const Ptr result = make_(fun);
+		result->finalize_();
+		return result;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -762,23 +779,24 @@ class Mutable : public Thing
 public:
 	virtual inline void finalize_() override
 	{
-		_finalized = true;
+		_finalized.store(true, std::memory_order_release);
 	}
 
 	virtual inline const bool finalized_() const override
 	{
-		return _finalized;
+		return _finalized.load(std::memory_order_acquire);
 	}
 
 protected:
 	inline Mutable()
 		: Thing{}
-		, _finalized{ false }
+		, _finalized{}
 	{
+		_finalized.store(false, std::memory_order_release);
 	}
 
 private:
-	bool _finalized;
+	std::atomic<bool> _finalized;
 };
 
 class Shoal : public Mutable, public Me<Shoal>, public Serializable, public Iterable
@@ -5456,7 +5474,9 @@ public:
 
 	static inline const Ptr fin_(const Ptr expression)
 	{
-		return make_(expression);
+		const Ptr result = make_(expression);
+		result->finalize_();
+		return result;
 	}
 
 	virtual inline const Ptr copy_() const override
