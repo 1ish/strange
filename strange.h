@@ -207,6 +207,16 @@ public:
 		return nothing_();
 	}
 
+	virtual inline const bool frozen_() const
+	{
+		return finalized_();
+	}
+
+	inline const Ptr frozen(const Ptr ignore) const
+	{
+		return boolean_(frozen_());
+	}
+
 	virtual inline const Ptr next_()
 	{
 		return end_();
@@ -794,7 +804,15 @@ class Index : public Mutable, public Me<Index>, public Serializable, public Iter
 	using std_unordered_map_ptr_ptr = std::unordered_map<Ptr, Ptr, Hash, Pred>;
 
 public:
-	Index() = default;
+	inline Index()
+		: Mutable{}
+		, Me{}
+		, Serializable{}
+		, Iterable{}
+		, _map{}
+		, _frozen{ false }
+	{
+	}
 
 	virtual inline const Ptr copy_() const override
 	{
@@ -816,11 +834,20 @@ public:
 
 	virtual inline void freeze_() override
 	{
-		for (const auto& i : _map)
+		if (!_frozen)
 		{
-			i.first->freeze_();
-			i.second->freeze_();
+			for (const auto& i : _map)
+			{
+				i.first->freeze_();
+				i.second->freeze_();
+			}
+			_frozen = true;
 		}
+	}
+
+	virtual inline const bool frozen_() const override
+	{
+		return _frozen;
 	}
 
 	virtual inline const Ptr to_lake_() const override
@@ -1055,6 +1082,7 @@ public:
 
 private:
 	std_unordered_map_ptr_ptr _map;
+	bool _frozen;
 
 	class It : public Mutable
 	{
@@ -1310,7 +1338,15 @@ class Flock : public Mutable, public Me<Flock>, public Serializable, public Iter
 	using std_vector_ptr = std::vector<Ptr>;
 
 public:
-	Flock() = default;
+	inline Flock()
+		: Mutable{}
+		, Me{}
+		, Serializable{}
+		, Iterable{}
+		, _vector{}
+		, _frozen{ false }
+	{
+	}
 
 	virtual inline const Ptr copy_() const override
 	{
@@ -1333,10 +1369,19 @@ public:
 
 	virtual inline void freeze_() override
 	{
-		for (const auto i : _vector)
+		if (!_frozen)
 		{
-			i->freeze_();
+			for (const auto i : _vector)
+			{
+				i->freeze_();
+			}
+			_frozen = true;
 		}
+	}
+
+	virtual inline const bool frozen_() const override
+	{
+		return _frozen;
 	}
 
 	virtual inline const Ptr to_lake_() const override
@@ -1513,6 +1558,7 @@ public:
 
 private:
 	std_vector_ptr _vector;
+	bool _frozen;
 
 	class It : public Mutable
 	{
@@ -1597,7 +1643,15 @@ class Herd : public Mutable, public Me<Herd>, public Serializable, public Iterab
 	using std_unordered_set_ptr = std::unordered_set<Ptr, Hash, Pred>;
 
 public:
-	Herd() = default;
+	inline Herd()
+		: Mutable{}
+		, Me{}
+		, Serializable{}
+		, Iterable{}
+		, _set{}
+		, _frozen{ false }
+	{
+	}
 
 	virtual inline const Ptr copy_() const override
 	{
@@ -1619,10 +1673,19 @@ public:
 
 	virtual inline void freeze_() override
 	{
-		for (const auto i : _set)
+		if (!_frozen)
 		{
-			i->freeze_();
+			for (const auto i : _set)
+			{
+				i->freeze_();
+			}
+			_frozen = true;
 		}
+	}
+
+	virtual inline const bool frozen_() const override
+	{
+		return _frozen;
 	}
 
 	virtual inline const Ptr to_lake_() const override
@@ -1832,6 +1895,7 @@ public:
 
 private:
 	std_unordered_set_ptr _set;
+	bool _frozen;
 
 	class It : public Mutable
 	{
@@ -5200,6 +5264,16 @@ public:
 			operate_(this, over);
 		}
 		Thing::freeze_();
+	}
+
+	virtual inline const bool frozen_() const override
+	{
+		const Ptr over = static_<Index>(_public)->find_("frozen");
+		if (!over->is_("0"))
+		{
+			return !operate_(const_cast<Creature*>(this), over)->is_("0");
+		}
+		return Mutable::frozen_();
 	}
 
 	virtual inline const Ptr next_() override
