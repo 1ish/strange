@@ -426,7 +426,7 @@ public:
 		return river;
 	}
 
-	virtual inline void to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const
+	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
 	{
 		const Thing* thing = dynamic_cast<const Thing*>(this);
 		if (thing)
@@ -437,9 +437,9 @@ public:
 
 	inline const Thing::Ptr to_river_with_links(const Thing::Ptr it)
 	{
-		const Thing::Ptr index = it->next_();
+		const Thing::Ptr shoal = it->next_();
 		const Thing::Ptr river = it->next_();
-		to_river_with_links_(index, river);
+		to_river_with_links_(shoal, river);
 		return river;
 	}
 
@@ -469,7 +469,7 @@ public:
 		return river;
 	}
 
-	virtual inline void replace_links_(const Thing::Ptr index)
+	virtual inline void replace_links_(const Thing::Ptr shoal)
 	{
 	}
 
@@ -781,7 +781,7 @@ private:
 	bool _finalized;
 };
 
-class Index : public Mutable, public Me<Index>, public Serializable, public Iterable
+class Shoal : public Mutable, public Me<Shoal>, public Serializable, public Iterable
 {
 	class Hash
 	{
@@ -804,7 +804,7 @@ class Index : public Mutable, public Me<Index>, public Serializable, public Iter
 	using std_unordered_map_ptr_ptr = std::unordered_map<Ptr, Ptr, Hash, Pred>;
 
 public:
-	inline Index()
+	inline Shoal()
 		: Mutable{}
 		, Me{}
 		, Serializable{}
@@ -817,14 +817,14 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
-		static_<Index>(result)->_map = _map;
+		static_<Shoal>(result)->_map = _map;
 		return result;
 	}
 
 	virtual inline const Ptr clone_() const override
 	{
 		const Ptr result = mut_();
-		std_unordered_map_ptr_ptr& clone = static_<Index>(result)->_map;
+		std_unordered_map_ptr_ptr& clone = static_<Shoal>(result)->_map;
 		for (const auto& i : _map)
 		{
 			clone[i.first->clone_()] = i.second->clone_();
@@ -864,34 +864,34 @@ public:
 
 	virtual inline void from_river_(const Thing::Ptr river) override;
 
-	virtual inline void to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const override;
+	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const override;
 
 	virtual inline void from_river_with_links_(const Thing::Ptr river) override;
 
-	virtual inline void replace_links_(const Thing::Ptr index) override;
+	virtual inline void replace_links_(const Thing::Ptr shoal) override;
 
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Index>::fin_(&Index::to_lake));
-			index->update_("from_lake", Member<Index>::fin_(&Index::from_lake));
-			index->update_("to_river", Const<Index>::fin_(&Index::to_river));
-			index->update_("from_river", Member<Index>::fin_(&Index::from_river));
-			index->update_("stat", Static::fin_(&Index::stat));
-			index->update_("mut", Static::fin_(&Index::mut));
-			index->update_("lak", Static::fin_(&Index::lak));
-			index->update_("riv", Static::fin_(&Index::riv));
-			index->update_("rwl", Static::fin_(&Index::rwl));
-			index->update_("find", Const<Index>::fin_(&Index::find));
-			index->update_("update", Member<Index>::fin_(&Index::update));
-			index->update_("insert", Member<Index>::fin_(&Index::insert));
-			index->update_("iterator", Const<Index>::fin_(&Index::iterator));
-			index->update_("itemize", Member<Index>::fin_(&Index::itemize));
-			index->update_("gather", Member<Index>::fin_(&Index::gather));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Shoal>::fin_(&Shoal::to_lake));
+			shoal->update_("from_lake", Member<Shoal>::fin_(&Shoal::from_lake));
+			shoal->update_("to_river", Const<Shoal>::fin_(&Shoal::to_river));
+			shoal->update_("from_river", Member<Shoal>::fin_(&Shoal::from_river));
+			shoal->update_("stat", Static::fin_(&Shoal::stat));
+			shoal->update_("mut", Static::fin_(&Shoal::mut));
+			shoal->update_("lak", Static::fin_(&Shoal::lak));
+			shoal->update_("riv", Static::fin_(&Shoal::riv));
+			shoal->update_("rwl", Static::fin_(&Shoal::rwl));
+			shoal->update_("find", Const<Shoal>::fin_(&Shoal::find));
+			shoal->update_("update", Member<Shoal>::fin_(&Shoal::update));
+			shoal->update_("insert", Member<Shoal>::fin_(&Shoal::insert));
+			shoal->update_("iterator", Const<Shoal>::fin_(&Shoal::iterator));
+			shoal->update_("itemize", Member<Shoal>::fin_(&Shoal::itemize));
+			shoal->update_("gather", Member<Shoal>::fin_(&Shoal::gather));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -901,14 +901,14 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Index::stat));
-			index->update_("mut", Static::fin_(&Index::mut));
-			index->update_("lak", Static::fin_(&Index::lak));
-			index->update_("riv", Static::fin_(&Index::riv));
-			index->update_("rwl", Static::fin_(&Index::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Shoal::stat));
+			shoal->update_("mut", Static::fin_(&Shoal::mut));
+			shoal->update_("lak", Static::fin_(&Shoal::lak));
+			shoal->update_("riv", Static::fin_(&Shoal::riv));
+			shoal->update_("rwl", Static::fin_(&Shoal::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -932,7 +932,7 @@ public:
 	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Index>(ptr)->from_lake_(lake);
+		static_<Shoal>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
@@ -944,7 +944,7 @@ public:
 	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Index>(ptr)->from_river_(river);
+		static_<Shoal>(ptr)->from_river_(river);
 		return ptr;
 	}
 
@@ -956,7 +956,7 @@ public:
 	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Index>(ptr)->from_river_with_links_(river);
+		static_<Shoal>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
@@ -1030,7 +1030,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Index");
+		static const Ptr TYPE = sym_("strange::Shoal");
 		return TYPE;
 	}
 
@@ -1087,10 +1087,10 @@ private:
 	class It : public Mutable
 	{
 	public:
-		inline It(const Ptr index)
+		inline It(const Ptr shoal)
 			: Mutable{}
-			, _index{ index }
-			, _iterator{ static_<Index>(_index)->_map.cbegin() }
+			, _shoal{ shoal }
+			, _iterator{ static_<Shoal>(_shoal)->_map.cbegin() }
 		{
 		}
 
@@ -1098,26 +1098,26 @@ private:
 
 		virtual inline const Ptr copy_() const override
 		{
-			const Ptr result = mut_(_index);
+			const Ptr result = mut_(_shoal);
 			static_<It>(result)->_iterator = _iterator;
 			return result;
 		}
 
-		static inline const Ptr mut_(const Ptr index)
+		static inline const Ptr mut_(const Ptr shoal)
 		{
-			return std::make_shared<It>(index);
+			return std::make_shared<It>(shoal);
 		}
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Index:It");
+			static const Ptr TYPE = sym_("strange::Shoal:It");
 			return TYPE;
 		}
 
 		virtual inline const Ptr cats_() const override;
 
 	private:
-		const Ptr _index;
+		const Ptr _shoal;
 		std_unordered_map_ptr_ptr::const_iterator _iterator;
 	};
 };
@@ -1126,7 +1126,7 @@ inline const Thing::Ptr Thing::call(const Thing::Ptr it)
 {
 	const Ptr type = it->next_();
 	const Ptr function = it->next_();
-	const Ptr stat = static_<Index>(stats_())->find_(type);
+	const Ptr stat = static_<Shoal>(stats_())->find_(type);
 	if (stat->is_("0"))
 	{
 		log_("call passed unknown type:");
@@ -1134,7 +1134,7 @@ inline const Thing::Ptr Thing::call(const Thing::Ptr it)
 		log_(function);
 		return stat;
 	}
-	const Ptr fun = static_<Index>(stat->invoke(nothing_()))->find_(function);
+	const Ptr fun = static_<Shoal>(stat->invoke(nothing_()))->find_(function);
 	if (fun->is_("0"))
 	{
 		log_("call passed unknown function:");
@@ -1149,31 +1149,31 @@ inline const Thing::Ptr Thing::pub_() const
 {
 	static const Ptr PUB = []()
 	{
-		const Ptr pub = Index::mut_();
-		Index* const index = static_<Index>(pub);
-		index->update_("invoke", Member<Thing>::fin_(&Thing::invoke));
-		index->update_("next", Member<Thing>::fin_(&Thing::next));
-		index->update_("is", Const<Thing>::fin_(&Thing::is));
-		index->update_("hash", Const<Thing>::fin_(&Thing::hash));
-		index->update_("same", Const<Thing>::fin_(&Thing::same));
-		index->update_("copy", Const<Thing>::fin_(&Thing::copy));
-		index->update_("clone", Const<Thing>::fin_(&Thing::clone));
-		index->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
-		index->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
-		index->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
-		index->update_("call", Static::fin_(&Thing::call));
-		index->update_("stats", Static::fin_(&Thing::stats));
-		index->update_("stat", Static::fin_(&Thing::stat));
-		index->update_("boolean", Static::fin_(&Thing::boolean));
-		index->update_(nothing_(), Static::fin_(&Thing::nothing));
-		index->update_(one_(), Static::fin_(&Thing::one));
-		index->update_(end_(), Static::fin_(&Thing::end));
-		index->update_("log", Static::fin_(&Thing::log));
-		index->update_("type", Const<Thing>::fin_(&Thing::type));
-		index->update_("cats", Const<Thing>::fin_(&Thing::cats));
-		index->update_("visit", Member<Thing>::fin_(&Thing::visit));
-		index->update_("pub", Const<Thing>::fin_(&Thing::pub));
-		index->finalize_();
+		const Ptr pub = Shoal::mut_();
+		Shoal* const shoal = static_<Shoal>(pub);
+		shoal->update_("invoke", Member<Thing>::fin_(&Thing::invoke));
+		shoal->update_("next", Member<Thing>::fin_(&Thing::next));
+		shoal->update_("is", Const<Thing>::fin_(&Thing::is));
+		shoal->update_("hash", Const<Thing>::fin_(&Thing::hash));
+		shoal->update_("same", Const<Thing>::fin_(&Thing::same));
+		shoal->update_("copy", Const<Thing>::fin_(&Thing::copy));
+		shoal->update_("clone", Const<Thing>::fin_(&Thing::clone));
+		shoal->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
+		shoal->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
+		shoal->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
+		shoal->update_("call", Static::fin_(&Thing::call));
+		shoal->update_("stats", Static::fin_(&Thing::stats));
+		shoal->update_("stat", Static::fin_(&Thing::stat));
+		shoal->update_("boolean", Static::fin_(&Thing::boolean));
+		shoal->update_(nothing_(), Static::fin_(&Thing::nothing));
+		shoal->update_(one_(), Static::fin_(&Thing::one));
+		shoal->update_(end_(), Static::fin_(&Thing::end));
+		shoal->update_("log", Static::fin_(&Thing::log));
+		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
+		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
+		shoal->update_("visit", Member<Thing>::fin_(&Thing::visit));
+		shoal->update_("pub", Const<Thing>::fin_(&Thing::pub));
+		shoal->finalize_();
 		return pub;
 	}();
 	return PUB;
@@ -1183,16 +1183,16 @@ inline const Thing::Ptr Thing::stat_()
 {
 	static const Ptr STAT = []()
 	{
-		const Ptr stat = Index::mut_();
-		Index* const index = static_<Index>(stat);
-		index->update_("stats", Static::fin_(&Thing::stats));
-		index->update_("stat", Static::fin_(&Thing::stat));
-		index->update_("boolean", Static::fin_(&Thing::boolean));
-		index->update_(nothing_(), Static::fin_(&Thing::nothing));
-		index->update_(one_(), Static::fin_(&Thing::one));
-		index->update_(end_(), Static::fin_(&Thing::end));
-		index->update_("log", Static::fin_(&Thing::log));
-		index->finalize_();
+		const Ptr stat = Shoal::mut_();
+		Shoal* const shoal = static_<Shoal>(stat);
+		shoal->update_("stats", Static::fin_(&Thing::stats));
+		shoal->update_("stat", Static::fin_(&Thing::stat));
+		shoal->update_("boolean", Static::fin_(&Thing::boolean));
+		shoal->update_(nothing_(), Static::fin_(&Thing::nothing));
+		shoal->update_(one_(), Static::fin_(&Thing::one));
+		shoal->update_(end_(), Static::fin_(&Thing::end));
+		shoal->update_("log", Static::fin_(&Thing::log));
+		shoal->finalize_();
 		return stat;
 	}();
 	return STAT;
@@ -1200,7 +1200,7 @@ inline const Thing::Ptr Thing::stat_()
 
 inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr it)
 {
-	const Ptr member = static_<Index>(pub_())->find_(it->next_());
+	const Ptr member = static_<Shoal>(pub_())->find_(it->next_());
 	if (member->is_("0"))
 	{
 		return member;
@@ -1210,12 +1210,12 @@ inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr i
 
 inline void Serializable::serialize_(const Thing::Ptr thing, const Thing::Ptr river)
 {
-	Thing::static_<Index>(Index::mut_())->gather_to_river_(thing, river);
+	Thing::static_<Shoal>(Shoal::mut_())->gather_to_river_(thing, river);
 }
 
 inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr river)
 {
-	return Thing::static_<Index>(Index::mut_())->gather_from_river_(river);
+	return Thing::static_<Shoal>(Shoal::mut_())->gather_from_river_(river);
 }
 
 inline const Thing::Ptr Symbol::pub_() const
@@ -1223,14 +1223,14 @@ inline const Thing::Ptr Symbol::pub_() const
 	static const Ptr PUB = [this]()
 	{
 		const Ptr pub = Thing::pub_()->copy_();
-		Index* const index = static_<Index>(pub);
-		index->update_("to_lake", Const<Index>::fin_(&Index::to_lake));
-		index->update_("to_river", Const<Index>::fin_(&Index::to_river));
-		index->update_("stat", Static::fin_(&Symbol::stat));
-		index->update_("lak", Static::fin_(&Symbol::lak));
-		index->update_("riv", Static::fin_(&Symbol::riv));
-		index->update_("rwl", Static::fin_(&Symbol::rwl));
-		index->finalize_();
+		Shoal* const shoal = static_<Shoal>(pub);
+		shoal->update_("to_lake", Const<Symbol>::fin_(&Symbol::to_lake));
+		shoal->update_("to_river", Const<Symbol>::fin_(&Symbol::to_river));
+		shoal->update_("stat", Static::fin_(&Symbol::stat));
+		shoal->update_("lak", Static::fin_(&Symbol::lak));
+		shoal->update_("riv", Static::fin_(&Symbol::riv));
+		shoal->update_("rwl", Static::fin_(&Symbol::rwl));
+		shoal->finalize_();
 		return pub;
 	}();
 	return PUB;
@@ -1240,13 +1240,13 @@ inline const Thing::Ptr Symbol::stat_()
 {
 	static const Ptr STAT = []()
 	{
-		const Ptr stat = Index::mut_();
-		Index* const index = static_<Index>(stat);
-		index->update_("stat", Static::fin_(&Symbol::stat));
-		index->update_("lak", Static::fin_(&Symbol::lak));
-		index->update_("riv", Static::fin_(&Symbol::riv));
-		index->update_("rwl", Static::fin_(&Symbol::rwl));
-		index->finalize_();
+		const Ptr stat = Shoal::mut_();
+		Shoal* const shoal = static_<Shoal>(stat);
+		shoal->update_("stat", Static::fin_(&Symbol::stat));
+		shoal->update_("lak", Static::fin_(&Symbol::lak));
+		shoal->update_("riv", Static::fin_(&Symbol::riv));
+		shoal->update_("rwl", Static::fin_(&Symbol::rwl));
+		shoal->finalize_();
 		return stat;
 	}();
 	return STAT;
@@ -1264,7 +1264,7 @@ protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
 		const Ptr name = it->next_();
-		const Ptr member = static_<Index>(pub_())->find_(name);
+		const Ptr member = static_<Shoal>(pub_())->find_(name);
 		if (member->is_("0"))
 		{
 			return _decorated->invoke_(name, *it);
@@ -1320,7 +1320,7 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
-		const Ptr member = static_<Index>(pub_())->find_(it->next_());
+		const Ptr member = static_<Shoal>(pub_())->find_(it->next_());
 		if (member->is_("0"))
 		{
 			return member;
@@ -1398,30 +1398,30 @@ public:
 
 	virtual inline void from_river_(const Thing::Ptr river) override;
 
-	virtual inline void to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const override;
+	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const override;
 
 	virtual inline void from_river_with_links_(const Thing::Ptr river) override;
 
-	virtual inline void replace_links_(const Thing::Ptr index) override;
+	virtual inline void replace_links_(const Thing::Ptr shoal) override;
 
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Flock>::fin_(&Flock::to_lake));
-			index->update_("from_lake", Member<Flock>::fin_(&Flock::from_lake));
-			index->update_("to_river", Const<Flock>::fin_(&Flock::to_river));
-			index->update_("from_river", Member<Flock>::fin_(&Flock::from_river));
-			index->update_("stat", Static::fin_(&Flock::stat));
-			index->update_("mut", Static::fin_(&Flock::mut));
-			index->update_("lak", Static::fin_(&Flock::lak));
-			index->update_("riv", Static::fin_(&Flock::riv));
-			index->update_("rwl", Static::fin_(&Flock::rwl));
-			index->update_("push_back", Member<Flock>::fin_(&Flock::push_back));
-			index->update_("iterator", Const<Flock>::fin_(&Flock::iterator));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Flock>::fin_(&Flock::to_lake));
+			shoal->update_("from_lake", Member<Flock>::fin_(&Flock::from_lake));
+			shoal->update_("to_river", Const<Flock>::fin_(&Flock::to_river));
+			shoal->update_("from_river", Member<Flock>::fin_(&Flock::from_river));
+			shoal->update_("stat", Static::fin_(&Flock::stat));
+			shoal->update_("mut", Static::fin_(&Flock::mut));
+			shoal->update_("lak", Static::fin_(&Flock::lak));
+			shoal->update_("riv", Static::fin_(&Flock::riv));
+			shoal->update_("rwl", Static::fin_(&Flock::rwl));
+			shoal->update_("push_back", Member<Flock>::fin_(&Flock::push_back));
+			shoal->update_("iterator", Const<Flock>::fin_(&Flock::iterator));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -1431,14 +1431,14 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Flock::stat));
-			index->update_("mut", Static::fin_(&Flock::mut));
-			index->update_("lak", Static::fin_(&Flock::lak));
-			index->update_("riv", Static::fin_(&Flock::riv));
-			index->update_("rwl", Static::fin_(&Flock::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Flock::stat));
+			shoal->update_("mut", Static::fin_(&Flock::mut));
+			shoal->update_("lak", Static::fin_(&Flock::lak));
+			shoal->update_("riv", Static::fin_(&Flock::riv));
+			shoal->update_("rwl", Static::fin_(&Flock::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -1605,9 +1605,9 @@ private:
 	};
 };
 
-inline const Thing::Ptr Index::It::next_()
+inline const Thing::Ptr Shoal::It::next_()
 {
-	if (_iterator == static_<Index>(_index)->_map.cend())
+	if (_iterator == static_<Shoal>(_shoal)->_map.cend())
 	{
 		return end_();
 	}
@@ -1702,32 +1702,32 @@ public:
 
 	virtual inline void from_river_(const Thing::Ptr river) override;
 
-	virtual inline void to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const override;
+	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const override;
 
 	virtual inline void from_river_with_links_(const Thing::Ptr river) override;
 
-	virtual inline void replace_links_(const Thing::Ptr index) override;
+	virtual inline void replace_links_(const Thing::Ptr shoal) override;
 
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Herd>::fin_(&Herd::to_lake));
-			index->update_("from_lake", Member<Herd>::fin_(&Herd::from_lake));
-			index->update_("to_river", Const<Herd>::fin_(&Herd::to_river));
-			index->update_("from_river", Member<Herd>::fin_(&Herd::from_river));
-			index->update_("stat", Static::fin_(&Herd::stat));
-			index->update_("mut", Static::fin_(&Herd::mut));
-			index->update_("lak", Static::fin_(&Herd::lak));
-			index->update_("riv", Static::fin_(&Herd::riv));
-			index->update_("rwl", Static::fin_(&Herd::rwl));
-			index->update_("find", Const<Herd>::fin_(&Herd::find));
-			index->update_("insert", Member<Herd>::fin_(&Herd::insert));
-			index->update_("iterator", Const<Herd>::fin_(&Herd::iterator));
-			index->update_("gather", Member<Herd>::fin_(&Herd::gather));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Herd>::fin_(&Herd::to_lake));
+			shoal->update_("from_lake", Member<Herd>::fin_(&Herd::from_lake));
+			shoal->update_("to_river", Const<Herd>::fin_(&Herd::to_river));
+			shoal->update_("from_river", Member<Herd>::fin_(&Herd::from_river));
+			shoal->update_("stat", Static::fin_(&Herd::stat));
+			shoal->update_("mut", Static::fin_(&Herd::mut));
+			shoal->update_("lak", Static::fin_(&Herd::lak));
+			shoal->update_("riv", Static::fin_(&Herd::riv));
+			shoal->update_("rwl", Static::fin_(&Herd::rwl));
+			shoal->update_("find", Const<Herd>::fin_(&Herd::find));
+			shoal->update_("insert", Member<Herd>::fin_(&Herd::insert));
+			shoal->update_("iterator", Const<Herd>::fin_(&Herd::iterator));
+			shoal->update_("gather", Member<Herd>::fin_(&Herd::gather));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -1737,14 +1737,14 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Herd::stat));
-			index->update_("mut", Static::fin_(&Herd::mut));
-			index->update_("lak", Static::fin_(&Herd::lak));
-			index->update_("riv", Static::fin_(&Herd::riv));
-			index->update_("rwl", Static::fin_(&Herd::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Herd::stat));
+			shoal->update_("mut", Static::fin_(&Herd::mut));
+			shoal->update_("lak", Static::fin_(&Herd::lak));
+			shoal->update_("riv", Static::fin_(&Herd::riv));
+			shoal->update_("rwl", Static::fin_(&Herd::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -2058,18 +2058,18 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Lake>::fin_(&Lake::to_lake));
-			index->update_("from_lake", Member<Lake>::fin_(&Lake::from_lake));
-			index->update_("to_river", Const<Lake>::fin_(&Lake::to_river));
-			index->update_("from_river", Member<Lake>::fin_(&Lake::from_river));
-			index->update_("stat", Static::fin_(&Lake::stat));
-			index->update_("mut", Static::fin_(&Lake::mut));
-			index->update_("fin", Static::fin_(&Lake::fin));
-			index->update_("lak", Static::fin_(&Lake::lak));
-			index->update_("riv", Static::fin_(&Lake::riv));
-			index->update_("rwl", Static::fin_(&Lake::rwl));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Lake>::fin_(&Lake::to_lake));
+			shoal->update_("from_lake", Member<Lake>::fin_(&Lake::from_lake));
+			shoal->update_("to_river", Const<Lake>::fin_(&Lake::to_river));
+			shoal->update_("from_river", Member<Lake>::fin_(&Lake::from_river));
+			shoal->update_("stat", Static::fin_(&Lake::stat));
+			shoal->update_("mut", Static::fin_(&Lake::mut));
+			shoal->update_("fin", Static::fin_(&Lake::fin));
+			shoal->update_("lak", Static::fin_(&Lake::lak));
+			shoal->update_("riv", Static::fin_(&Lake::riv));
+			shoal->update_("rwl", Static::fin_(&Lake::rwl));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -2079,15 +2079,15 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Lake::stat));
-			index->update_("mut", Static::fin_(&Lake::mut));
-			index->update_("fin", Static::fin_(&Lake::fin));
-			index->update_("lak", Static::fin_(&Lake::lak));
-			index->update_("riv", Static::fin_(&Lake::riv));
-			index->update_("rwl", Static::fin_(&Lake::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Lake::stat));
+			shoal->update_("mut", Static::fin_(&Lake::mut));
+			shoal->update_("fin", Static::fin_(&Lake::fin));
+			shoal->update_("lak", Static::fin_(&Lake::lak));
+			shoal->update_("riv", Static::fin_(&Lake::riv));
+			shoal->update_("rwl", Static::fin_(&Lake::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -2316,18 +2316,18 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_int64", Const<Number>::fin_(&Number::to_int64));
-			index->update_("from_int64", Member<Number>::fin_(&Number::from_int64));
-			index->update_("to_float64", Const<Number>::fin_(&Number::to_float64));
-			index->update_("from_float64", Member<Number>::fin_(&Number::from_float64));
-			index->update_("to_imaginary64", Const<Number>::fin_(&Number::to_imaginary64));
-			index->update_("from_imaginary64", Member<Number>::fin_(&Number::from_imaginary64));
-			index->update_("to_complex64", Const<Number>::fin_(&Number::to_complex64));
-			index->update_("from_complex64", Member<Number>::fin_(&Number::from_complex64));
-			index->update_("to_symbol", Const<Number>::fin_(&Number::to_symbol));
-			index->update_("from_symbol", Member<Number>::fin_(&Number::from_symbol));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_int64", Const<Number>::fin_(&Number::to_int64));
+			shoal->update_("from_int64", Member<Number>::fin_(&Number::from_int64));
+			shoal->update_("to_float64", Const<Number>::fin_(&Number::to_float64));
+			shoal->update_("from_float64", Member<Number>::fin_(&Number::from_float64));
+			shoal->update_("to_imaginary64", Const<Number>::fin_(&Number::to_imaginary64));
+			shoal->update_("from_imaginary64", Member<Number>::fin_(&Number::from_imaginary64));
+			shoal->update_("to_complex64", Const<Number>::fin_(&Number::to_complex64));
+			shoal->update_("from_complex64", Member<Number>::fin_(&Number::from_complex64));
+			shoal->update_("to_symbol", Const<Number>::fin_(&Number::to_symbol));
+			shoal->update_("from_symbol", Member<Number>::fin_(&Number::from_symbol));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -2413,18 +2413,18 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Bit>::fin_(&Bit::to_lake));
-			index->update_("from_lake", Member<Bit>::fin_(&Bit::from_lake));
-			index->update_("to_river", Const<Bit>::fin_(&Bit::to_river));
-			index->update_("from_river", Member<Bit>::fin_(&Bit::from_river));
-			index->update_("stat", Static::fin_(&Bit::stat));
-			index->update_("mut", Static::fin_(&Bit::mut));
-			index->update_("fin", Static::fin_(&Bit::fin));
-			index->update_("lak", Static::fin_(&Bit::lak));
-			index->update_("riv", Static::fin_(&Bit::riv));
-			index->update_("rwl", Static::fin_(&Bit::rwl));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Bit>::fin_(&Bit::to_lake));
+			shoal->update_("from_lake", Member<Bit>::fin_(&Bit::from_lake));
+			shoal->update_("to_river", Const<Bit>::fin_(&Bit::to_river));
+			shoal->update_("from_river", Member<Bit>::fin_(&Bit::from_river));
+			shoal->update_("stat", Static::fin_(&Bit::stat));
+			shoal->update_("mut", Static::fin_(&Bit::mut));
+			shoal->update_("fin", Static::fin_(&Bit::fin));
+			shoal->update_("lak", Static::fin_(&Bit::lak));
+			shoal->update_("riv", Static::fin_(&Bit::riv));
+			shoal->update_("rwl", Static::fin_(&Bit::rwl));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -2434,15 +2434,15 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Bit::stat));
-			index->update_("mut", Static::fin_(&Bit::mut));
-			index->update_("fin", Static::fin_(&Bit::fin));
-			index->update_("lak", Static::fin_(&Bit::lak));
-			index->update_("riv", Static::fin_(&Bit::riv));
-			index->update_("rwl", Static::fin_(&Bit::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Bit::stat));
+			shoal->update_("mut", Static::fin_(&Bit::mut));
+			shoal->update_("fin", Static::fin_(&Bit::fin));
+			shoal->update_("lak", Static::fin_(&Bit::lak));
+			shoal->update_("riv", Static::fin_(&Bit::riv));
+			shoal->update_("rwl", Static::fin_(&Bit::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -2606,18 +2606,18 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Byte>::fin_(&Byte::to_lake));
-			index->update_("from_lake", Member<Byte>::fin_(&Byte::from_lake));
-			index->update_("to_river", Const<Byte>::fin_(&Byte::to_river));
-			index->update_("from_river", Member<Byte>::fin_(&Byte::from_river));
-			index->update_("stat", Static::fin_(&Byte::stat));
-			index->update_("mut", Static::fin_(&Byte::mut));
-			index->update_("fin", Static::fin_(&Byte::fin));
-			index->update_("lak", Static::fin_(&Byte::lak));
-			index->update_("riv", Static::fin_(&Byte::riv));
-			index->update_("rwl", Static::fin_(&Byte::rwl));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Byte>::fin_(&Byte::to_lake));
+			shoal->update_("from_lake", Member<Byte>::fin_(&Byte::from_lake));
+			shoal->update_("to_river", Const<Byte>::fin_(&Byte::to_river));
+			shoal->update_("from_river", Member<Byte>::fin_(&Byte::from_river));
+			shoal->update_("stat", Static::fin_(&Byte::stat));
+			shoal->update_("mut", Static::fin_(&Byte::mut));
+			shoal->update_("fin", Static::fin_(&Byte::fin));
+			shoal->update_("lak", Static::fin_(&Byte::lak));
+			shoal->update_("riv", Static::fin_(&Byte::riv));
+			shoal->update_("rwl", Static::fin_(&Byte::rwl));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -2627,15 +2627,15 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Byte::stat));
-			index->update_("mut", Static::fin_(&Byte::mut));
-			index->update_("fin", Static::fin_(&Byte::fin));
-			index->update_("lak", Static::fin_(&Byte::lak));
-			index->update_("riv", Static::fin_(&Byte::riv));
-			index->update_("rwl", Static::fin_(&Byte::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Byte::stat));
+			shoal->update_("mut", Static::fin_(&Byte::mut));
+			shoal->update_("fin", Static::fin_(&Byte::fin));
+			shoal->update_("lak", Static::fin_(&Byte::lak));
+			shoal->update_("riv", Static::fin_(&Byte::riv));
+			shoal->update_("rwl", Static::fin_(&Byte::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -2799,18 +2799,18 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Int16>::fin_(&Int16::to_lake));
-			index->update_("from_lake", Member<Int16>::fin_(&Int16::from_lake));
-			index->update_("to_river", Const<Int16>::fin_(&Int16::to_river));
-			index->update_("from_river", Member<Int16>::fin_(&Int16::from_river));
-			index->update_("stat", Static::fin_(&Int16::stat));
-			index->update_("mut", Static::fin_(&Int16::mut));
-			index->update_("fin", Static::fin_(&Int16::fin));
-			index->update_("lak", Static::fin_(&Int16::lak));
-			index->update_("riv", Static::fin_(&Int16::riv));
-			index->update_("rwl", Static::fin_(&Int16::rwl));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Int16>::fin_(&Int16::to_lake));
+			shoal->update_("from_lake", Member<Int16>::fin_(&Int16::from_lake));
+			shoal->update_("to_river", Const<Int16>::fin_(&Int16::to_river));
+			shoal->update_("from_river", Member<Int16>::fin_(&Int16::from_river));
+			shoal->update_("stat", Static::fin_(&Int16::stat));
+			shoal->update_("mut", Static::fin_(&Int16::mut));
+			shoal->update_("fin", Static::fin_(&Int16::fin));
+			shoal->update_("lak", Static::fin_(&Int16::lak));
+			shoal->update_("riv", Static::fin_(&Int16::riv));
+			shoal->update_("rwl", Static::fin_(&Int16::rwl));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -2820,15 +2820,15 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Int16::stat));
-			index->update_("mut", Static::fin_(&Int16::mut));
-			index->update_("fin", Static::fin_(&Int16::fin));
-			index->update_("lak", Static::fin_(&Int16::lak));
-			index->update_("riv", Static::fin_(&Int16::riv));
-			index->update_("rwl", Static::fin_(&Int16::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Int16::stat));
+			shoal->update_("mut", Static::fin_(&Int16::mut));
+			shoal->update_("fin", Static::fin_(&Int16::fin));
+			shoal->update_("lak", Static::fin_(&Int16::lak));
+			shoal->update_("riv", Static::fin_(&Int16::riv));
+			shoal->update_("rwl", Static::fin_(&Int16::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -2998,18 +2998,18 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Int32>::fin_(&Int32::to_lake));
-			index->update_("from_lake", Member<Int32>::fin_(&Int32::from_lake));
-			index->update_("to_river", Const<Int32>::fin_(&Int32::to_river));
-			index->update_("from_river", Member<Int32>::fin_(&Int32::from_river));
-			index->update_("stat", Static::fin_(&Int32::stat));
-			index->update_("mut", Static::fin_(&Int32::mut));
-			index->update_("fin", Static::fin_(&Int32::fin));
-			index->update_("lak", Static::fin_(&Int32::lak));
-			index->update_("riv", Static::fin_(&Int32::riv));
-			index->update_("rwl", Static::fin_(&Int32::rwl));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Int32>::fin_(&Int32::to_lake));
+			shoal->update_("from_lake", Member<Int32>::fin_(&Int32::from_lake));
+			shoal->update_("to_river", Const<Int32>::fin_(&Int32::to_river));
+			shoal->update_("from_river", Member<Int32>::fin_(&Int32::from_river));
+			shoal->update_("stat", Static::fin_(&Int32::stat));
+			shoal->update_("mut", Static::fin_(&Int32::mut));
+			shoal->update_("fin", Static::fin_(&Int32::fin));
+			shoal->update_("lak", Static::fin_(&Int32::lak));
+			shoal->update_("riv", Static::fin_(&Int32::riv));
+			shoal->update_("rwl", Static::fin_(&Int32::rwl));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -3019,15 +3019,15 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Int32::stat));
-			index->update_("mut", Static::fin_(&Int32::mut));
-			index->update_("fin", Static::fin_(&Int32::fin));
-			index->update_("lak", Static::fin_(&Int32::lak));
-			index->update_("riv", Static::fin_(&Int32::riv));
-			index->update_("rwl", Static::fin_(&Int32::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Int32::stat));
+			shoal->update_("mut", Static::fin_(&Int32::mut));
+			shoal->update_("fin", Static::fin_(&Int32::fin));
+			shoal->update_("lak", Static::fin_(&Int32::lak));
+			shoal->update_("riv", Static::fin_(&Int32::riv));
+			shoal->update_("rwl", Static::fin_(&Int32::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -3201,18 +3201,18 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Int64>::fin_(&Int64::to_lake));
-			index->update_("from_lake", Member<Int64>::fin_(&Int64::from_lake));
-			index->update_("to_river", Const<Int64>::fin_(&Int64::to_river));
-			index->update_("from_river", Member<Int64>::fin_(&Int64::from_river));
-			index->update_("stat", Static::fin_(&Int64::stat));
-			index->update_("mut", Static::fin_(&Int64::mut));
-			index->update_("fin", Static::fin_(&Int64::fin));
-			index->update_("lak", Static::fin_(&Int64::lak));
-			index->update_("riv", Static::fin_(&Int64::riv));
-			index->update_("rwl", Static::fin_(&Int64::rwl));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Int64>::fin_(&Int64::to_lake));
+			shoal->update_("from_lake", Member<Int64>::fin_(&Int64::from_lake));
+			shoal->update_("to_river", Const<Int64>::fin_(&Int64::to_river));
+			shoal->update_("from_river", Member<Int64>::fin_(&Int64::from_river));
+			shoal->update_("stat", Static::fin_(&Int64::stat));
+			shoal->update_("mut", Static::fin_(&Int64::mut));
+			shoal->update_("fin", Static::fin_(&Int64::fin));
+			shoal->update_("lak", Static::fin_(&Int64::lak));
+			shoal->update_("riv", Static::fin_(&Int64::riv));
+			shoal->update_("rwl", Static::fin_(&Int64::rwl));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -3222,15 +3222,15 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Int64::stat));
-			index->update_("mut", Static::fin_(&Int64::mut));
-			index->update_("fin", Static::fin_(&Int64::fin));
-			index->update_("lak", Static::fin_(&Int64::lak));
-			index->update_("riv", Static::fin_(&Int64::riv));
-			index->update_("rwl", Static::fin_(&Int64::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Int64::stat));
+			shoal->update_("mut", Static::fin_(&Int64::mut));
+			shoal->update_("fin", Static::fin_(&Int64::fin));
+			shoal->update_("lak", Static::fin_(&Int64::lak));
+			shoal->update_("riv", Static::fin_(&Int64::riv));
+			shoal->update_("rwl", Static::fin_(&Int64::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -3412,18 +3412,18 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Float32>::fin_(&Float32::to_lake));
-			index->update_("from_lake", Member<Float32>::fin_(&Float32::from_lake));
-			index->update_("to_river", Const<Float32>::fin_(&Float32::to_river));
-			index->update_("from_river", Member<Float32>::fin_(&Float32::from_river));
-			index->update_("stat", Static::fin_(&Float32::stat));
-			index->update_("mut", Static::fin_(&Float32::mut));
-			index->update_("fin", Static::fin_(&Float32::fin));
-			index->update_("lak", Static::fin_(&Float32::lak));
-			index->update_("riv", Static::fin_(&Float32::riv));
-			index->update_("rwl", Static::fin_(&Float32::rwl));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Float32>::fin_(&Float32::to_lake));
+			shoal->update_("from_lake", Member<Float32>::fin_(&Float32::from_lake));
+			shoal->update_("to_river", Const<Float32>::fin_(&Float32::to_river));
+			shoal->update_("from_river", Member<Float32>::fin_(&Float32::from_river));
+			shoal->update_("stat", Static::fin_(&Float32::stat));
+			shoal->update_("mut", Static::fin_(&Float32::mut));
+			shoal->update_("fin", Static::fin_(&Float32::fin));
+			shoal->update_("lak", Static::fin_(&Float32::lak));
+			shoal->update_("riv", Static::fin_(&Float32::riv));
+			shoal->update_("rwl", Static::fin_(&Float32::rwl));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -3433,15 +3433,15 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Float32::stat));
-			index->update_("mut", Static::fin_(&Float32::mut));
-			index->update_("fin", Static::fin_(&Float32::fin));
-			index->update_("lak", Static::fin_(&Float32::lak));
-			index->update_("riv", Static::fin_(&Float32::riv));
-			index->update_("rwl", Static::fin_(&Float32::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Float32::stat));
+			shoal->update_("mut", Static::fin_(&Float32::mut));
+			shoal->update_("fin", Static::fin_(&Float32::fin));
+			shoal->update_("lak", Static::fin_(&Float32::lak));
+			shoal->update_("riv", Static::fin_(&Float32::riv));
+			shoal->update_("rwl", Static::fin_(&Float32::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -3616,18 +3616,18 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Float64>::fin_(&Float64::to_lake));
-			index->update_("from_lake", Member<Float64>::fin_(&Float64::from_lake));
-			index->update_("to_river", Const<Float64>::fin_(&Float64::to_river));
-			index->update_("from_river", Member<Float64>::fin_(&Float64::from_river));
-			index->update_("stat", Static::fin_(&Float64::stat));
-			index->update_("mut", Static::fin_(&Float64::mut));
-			index->update_("fin", Static::fin_(&Float64::fin));
-			index->update_("lak", Static::fin_(&Float64::lak));
-			index->update_("riv", Static::fin_(&Float64::riv));
-			index->update_("rwl", Static::fin_(&Float64::rwl));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Float64>::fin_(&Float64::to_lake));
+			shoal->update_("from_lake", Member<Float64>::fin_(&Float64::from_lake));
+			shoal->update_("to_river", Const<Float64>::fin_(&Float64::to_river));
+			shoal->update_("from_river", Member<Float64>::fin_(&Float64::from_river));
+			shoal->update_("stat", Static::fin_(&Float64::stat));
+			shoal->update_("mut", Static::fin_(&Float64::mut));
+			shoal->update_("fin", Static::fin_(&Float64::fin));
+			shoal->update_("lak", Static::fin_(&Float64::lak));
+			shoal->update_("riv", Static::fin_(&Float64::riv));
+			shoal->update_("rwl", Static::fin_(&Float64::rwl));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -3637,15 +3637,15 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Float64::stat));
-			index->update_("mut", Static::fin_(&Float64::mut));
-			index->update_("fin", Static::fin_(&Float64::fin));
-			index->update_("lak", Static::fin_(&Float64::lak));
-			index->update_("riv", Static::fin_(&Float64::riv));
-			index->update_("rwl", Static::fin_(&Float64::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Float64::stat));
+			shoal->update_("mut", Static::fin_(&Float64::mut));
+			shoal->update_("fin", Static::fin_(&Float64::fin));
+			shoal->update_("lak", Static::fin_(&Float64::lak));
+			shoal->update_("riv", Static::fin_(&Float64::riv));
+			shoal->update_("rwl", Static::fin_(&Float64::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -3830,18 +3830,18 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Complex32>::fin_(&Complex32::to_lake));
-			index->update_("from_lake", Member<Complex32>::fin_(&Complex32::from_lake));
-			index->update_("to_river", Const<Complex32>::fin_(&Complex32::to_river));
-			index->update_("from_river", Member<Complex32>::fin_(&Complex32::from_river));
-			index->update_("stat", Static::fin_(&Complex32::stat));
-			index->update_("mut", Static::fin_(&Complex32::mut));
-			index->update_("fin", Static::fin_(&Complex32::fin));
-			index->update_("lak", Static::fin_(&Complex32::lak));
-			index->update_("riv", Static::fin_(&Complex32::riv));
-			index->update_("rwl", Static::fin_(&Complex32::rwl));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Complex32>::fin_(&Complex32::to_lake));
+			shoal->update_("from_lake", Member<Complex32>::fin_(&Complex32::from_lake));
+			shoal->update_("to_river", Const<Complex32>::fin_(&Complex32::to_river));
+			shoal->update_("from_river", Member<Complex32>::fin_(&Complex32::from_river));
+			shoal->update_("stat", Static::fin_(&Complex32::stat));
+			shoal->update_("mut", Static::fin_(&Complex32::mut));
+			shoal->update_("fin", Static::fin_(&Complex32::fin));
+			shoal->update_("lak", Static::fin_(&Complex32::lak));
+			shoal->update_("riv", Static::fin_(&Complex32::riv));
+			shoal->update_("rwl", Static::fin_(&Complex32::rwl));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -3851,15 +3851,15 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Complex32::stat));
-			index->update_("mut", Static::fin_(&Complex32::mut));
-			index->update_("fin", Static::fin_(&Complex32::fin));
-			index->update_("lak", Static::fin_(&Complex32::lak));
-			index->update_("riv", Static::fin_(&Complex32::riv));
-			index->update_("rwl", Static::fin_(&Complex32::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Complex32::stat));
+			shoal->update_("mut", Static::fin_(&Complex32::mut));
+			shoal->update_("fin", Static::fin_(&Complex32::fin));
+			shoal->update_("lak", Static::fin_(&Complex32::lak));
+			shoal->update_("riv", Static::fin_(&Complex32::riv));
+			shoal->update_("rwl", Static::fin_(&Complex32::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -4073,18 +4073,18 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("to_lake", Const<Complex64>::fin_(&Complex64::to_lake));
-			index->update_("from_lake", Member<Complex64>::fin_(&Complex64::from_lake));
-			index->update_("to_river", Const<Complex64>::fin_(&Complex64::to_river));
-			index->update_("from_river", Member<Complex64>::fin_(&Complex64::from_river));
-			index->update_("stat", Static::fin_(&Complex64::stat));
-			index->update_("mut", Static::fin_(&Complex64::mut));
-			index->update_("fin", Static::fin_(&Complex64::fin));
-			index->update_("lak", Static::fin_(&Complex64::lak));
-			index->update_("riv", Static::fin_(&Complex64::riv));
-			index->update_("rwl", Static::fin_(&Complex64::rwl));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Complex64>::fin_(&Complex64::to_lake));
+			shoal->update_("from_lake", Member<Complex64>::fin_(&Complex64::from_lake));
+			shoal->update_("to_river", Const<Complex64>::fin_(&Complex64::to_river));
+			shoal->update_("from_river", Member<Complex64>::fin_(&Complex64::from_river));
+			shoal->update_("stat", Static::fin_(&Complex64::stat));
+			shoal->update_("mut", Static::fin_(&Complex64::mut));
+			shoal->update_("fin", Static::fin_(&Complex64::fin));
+			shoal->update_("lak", Static::fin_(&Complex64::lak));
+			shoal->update_("riv", Static::fin_(&Complex64::riv));
+			shoal->update_("rwl", Static::fin_(&Complex64::rwl));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -4094,15 +4094,15 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Complex64::stat));
-			index->update_("mut", Static::fin_(&Complex64::mut));
-			index->update_("fin", Static::fin_(&Complex64::fin));
-			index->update_("lak", Static::fin_(&Complex64::lak));
-			index->update_("riv", Static::fin_(&Complex64::riv));
-			index->update_("rwl", Static::fin_(&Complex64::rwl));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Complex64::stat));
+			shoal->update_("mut", Static::fin_(&Complex64::mut));
+			shoal->update_("fin", Static::fin_(&Complex64::fin));
+			shoal->update_("lak", Static::fin_(&Complex64::lak));
+			shoal->update_("riv", Static::fin_(&Complex64::riv));
+			shoal->update_("rwl", Static::fin_(&Complex64::rwl));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -4364,13 +4364,13 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("stat", Static::fin_(&River::stat));
-			index->update_("mut", Static::fin_(&River::mut));
-			index->update_("push_back", Member<River>::fin_(&River::push_back));
-			index->update_("write", Member<River>::fin_(&River::write));
-			index->update_("pop_front", Member<River>::fin_(&River::pop_front));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("stat", Static::fin_(&River::stat));
+			shoal->update_("mut", Static::fin_(&River::mut));
+			shoal->update_("push_back", Member<River>::fin_(&River::push_back));
+			shoal->update_("write", Member<River>::fin_(&River::write));
+			shoal->update_("pop_front", Member<River>::fin_(&River::pop_front));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -4380,11 +4380,11 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&River::stat));
-			index->update_("mut", Static::fin_(&River::mut));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&River::stat));
+			shoal->update_("mut", Static::fin_(&River::mut));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -4431,12 +4431,12 @@ public:
 		return nothing_();
 	}
 
-	inline const bool push_back_with_links_(const Ptr ptr, const Ptr index)
+	inline const bool push_back_with_links_(const Ptr ptr, const Ptr shoal)
 	{
 		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
-		ptr->invoke_("to_river_with_links", index, me_());
+		ptr->invoke_("to_river_with_links", shoal, me_());
 		return true;
 	}
 
@@ -4527,12 +4527,12 @@ inline void Serializable::from_lake_via_river_(const Thing::Ptr lake)
 	}
 }
 
-inline void Index::to_river_(const Thing::Ptr river) const
+inline void Shoal::to_river_(const Thing::Ptr river) const
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Index::to_river_ passed wrong type of thing");
+		log_("Shoal::to_river_ passed wrong type of thing");
 		return;
 	}
 	riv->write_(Bit::mut_(finalized_()));
@@ -4544,12 +4544,12 @@ inline void Index::to_river_(const Thing::Ptr river) const
 	}
 }
 
-inline void Index::from_river_(const Thing::Ptr river)
+inline void Shoal::from_river_(const Thing::Ptr river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Index::from_river_ passed wrong type of thing");
+		log_("Shoal::from_river_ passed wrong type of thing");
 		return;
 	}
 	const bool bit = riv->read_<Bit>();
@@ -4565,35 +4565,35 @@ inline void Index::from_river_(const Thing::Ptr river)
 	}
 }
 
-inline void Index::to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const
+inline void Shoal::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
 {
-	Index* const ind = dynamic_<Index>(index);
-	if (!ind)
+	Shoal* const sho = dynamic_<Shoal>(shoal);
+	if (!sho)
 	{
-		log_("Index::to_river_with_links_ passed wrong type of index thing");
+		log_("Shoal::to_river_with_links_ passed wrong type of shoal thing");
 		return;
 	}
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Index::to_river_with_links_ passed wrong type of river thing");
+		log_("Shoal::to_river_with_links_ passed wrong type of river thing");
 		return;
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
-		static_<Symbol>(ind->find_(i.first))->to_river_(river);
-		static_<Symbol>(ind->find_(i.second))->to_river_(river);
+		static_<Symbol>(sho->find_(i.first))->to_river_(river);
+		static_<Symbol>(sho->find_(i.second))->to_river_(river);
 	}
 }
 
-inline void Index::from_river_with_links_(const Thing::Ptr river)
+inline void Shoal::from_river_with_links_(const Thing::Ptr river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Index::from_river_with_links_ passed wrong type of thing");
+		log_("Shoal::from_river_with_links_ passed wrong type of thing");
 		return;
 	}
 	const bool bit = riv->read_<Bit>();
@@ -4609,23 +4609,23 @@ inline void Index::from_river_with_links_(const Thing::Ptr river)
 	}
 }
 
-inline void Index::replace_links_(const Thing::Ptr index)
+inline void Shoal::replace_links_(const Thing::Ptr shoal)
 {
 	std_unordered_map_ptr_ptr replacement;
-	Index* const ind = static_<Index>(index);
+	Shoal* const sho = static_<Shoal>(shoal);
 	for (const auto& i : _map)
 	{
-		replacement.emplace(ind->find_(i.first), ind->find_(i.second));
+		replacement.emplace(sho->find_(i.first), sho->find_(i.second));
 	}
 	_map.swap(replacement);
 }
 
-inline void Index::gather_to_river_(const Thing::Ptr thing, const Thing::Ptr river)
+inline void Shoal::gather_to_river_(const Thing::Ptr thing, const Thing::Ptr river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Index::gather_to_river_ passed wrong type of river thing");
+		log_("Shoal::gather_to_river_ passed wrong type of river thing");
 		return;
 	}
 	gather_(thing);
@@ -4639,12 +4639,12 @@ inline void Index::gather_to_river_(const Thing::Ptr thing, const Thing::Ptr riv
 	}
 }
 
-inline const Thing::Ptr Index::gather_from_river_(const Thing::Ptr river)
+inline const Thing::Ptr Shoal::gather_from_river_(const Thing::Ptr river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Index::gather_from_river_ passed wrong type of river thing");
+		log_("Shoal::gather_from_river_ passed wrong type of river thing");
 		return nothing_();
 	}
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -4697,12 +4697,12 @@ inline void Flock::from_river_(const Thing::Ptr river)
 	}
 }
 
-inline void Flock::to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const
+inline void Flock::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
 {
-	Index* const ind = dynamic_<Index>(index);
-	if (!ind)
+	Shoal* const sho = dynamic_<Shoal>(shoal);
+	if (!sho)
 	{
-		log_("Flock::to_river_with_links_ passed wrong type of index thing");
+		log_("Flock::to_river_with_links_ passed wrong type of shoal thing");
 		return;
 	}
 	River* const riv = dynamic_<River>(river);
@@ -4715,7 +4715,7 @@ inline void Flock::to_river_with_links_(const Thing::Ptr index, const Thing::Ptr
 	riv->write_(Int64::mut_(int64_t(_vector.size())));
 	for (const auto i : _vector)
 	{
-		static_<Symbol>(ind->find_(i))->to_river_(river);
+		static_<Symbol>(sho->find_(i))->to_river_(river);
 	}
 }
 
@@ -4740,12 +4740,12 @@ inline void Flock::from_river_with_links_(const Thing::Ptr river)
 	}
 }
 
-inline void Flock::replace_links_(const Thing::Ptr index)
+inline void Flock::replace_links_(const Thing::Ptr shoal)
 {
-	Index* const ind = static_<Index>(index);
+	Shoal* const sho = static_<Shoal>(shoal);
 	for (std_vector_ptr::iterator i = _vector.begin(); i != _vector.end(); ++i)
 	{
-		*i = ind->find_(*i);
+		*i = sho->find_(*i);
 	}
 }
 
@@ -4784,12 +4784,12 @@ inline void Herd::from_river_(const Thing::Ptr river)
 	}
 }
 
-inline void Herd::to_river_with_links_(const Thing::Ptr index, const Thing::Ptr river) const
+inline void Herd::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
 {
-	Index* const ind = dynamic_<Index>(index);
-	if (!ind)
+	Shoal* const sho = dynamic_<Shoal>(shoal);
+	if (!sho)
 	{
-		log_("Herd::to_river_with_links_ passed wrong type of index thing");
+		log_("Herd::to_river_with_links_ passed wrong type of shoal thing");
 		return;
 	}
 	River* const riv = dynamic_<River>(river);
@@ -4802,7 +4802,7 @@ inline void Herd::to_river_with_links_(const Thing::Ptr index, const Thing::Ptr 
 	riv->write_(Int64::mut_(int64_t(_set.size())));
 	for (const auto i : _set)
 	{
-		static_<Symbol>(ind->find_(i))->to_river_(river);
+		static_<Symbol>(sho->find_(i))->to_river_(river);
 	}
 }
 
@@ -4825,13 +4825,13 @@ inline void Herd::from_river_with_links_(const Thing::Ptr river)
 	}
 }
 
-inline void Herd::replace_links_(const Thing::Ptr index)
+inline void Herd::replace_links_(const Thing::Ptr shoal)
 {
 	std_unordered_set_ptr replacement;
-	Index* const ind = static_<Index>(index);
+	Shoal* const sho = static_<Shoal>(shoal);
 	for (const auto i : _set)
 	{
-		replacement.insert(ind->find_(i));
+		replacement.insert(sho->find_(i));
 	}
 	_set.swap(replacement);
 }
@@ -4897,12 +4897,12 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("stat", Static::fin_(&Fence::stat));
-			index->update_("mut", Static::fin_(&Fence::mut));
-			index->update_("give", Member<Fence>::fin_(&Fence::give));
-			index->update_("take", Member<Fence>::fin_(&Fence::take));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("stat", Static::fin_(&Fence::stat));
+			shoal->update_("mut", Static::fin_(&Fence::mut));
+			shoal->update_("give", Member<Fence>::fin_(&Fence::give));
+			shoal->update_("take", Member<Fence>::fin_(&Fence::take));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -4912,11 +4912,11 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Fence::stat));
-			index->update_("mut", Static::fin_(&Fence::mut));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Fence::stat));
+			shoal->update_("mut", Static::fin_(&Fence::mut));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -5010,7 +5010,7 @@ inline const Thing::Ptr Symbol::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Index::cats_() const
+inline const Thing::Ptr Shoal::cats_() const
 {
 	static const Ptr CATS = []()
 	{
@@ -5018,7 +5018,7 @@ inline const Thing::Ptr Index::cats_() const
 		Herd* const herd = static_<Herd>(cats);
 		herd->insert_("strange::Mutable");
 		herd->insert_("strange::Iterable");
-		herd->insert_("strange::Index");
+		herd->insert_("strange::Shoal");
 		herd->insert_("strange::Thing");
 		herd->finalize_();
 		return cats;
@@ -5026,7 +5026,7 @@ inline const Thing::Ptr Index::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Index::It::cats_() const
+inline const Thing::Ptr Shoal::It::cats_() const
 {
 	static const Ptr CATS = []()
 	{
@@ -5094,7 +5094,7 @@ public:
 	inline Manifest()
 		: Mutable{}
 		, Me{}
-		, _index{ Index::mut_() }
+		, _shoal{ Shoal::mut_() }
 		, _mutex{}
 	{
 	}
@@ -5104,12 +5104,12 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Index* const index = static_<Index>(pub);
-			index->update_("stat", Static::fin_(&Manifest::stat));
-			index->update_("find", Const<Manifest>::fin_(&Manifest::find));
-			index->update_("update", Member<Manifest>::fin_(&Manifest::update));
-			index->update_("insert", Member<Manifest>::fin_(&Manifest::insert));
-			index->finalize_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("stat", Static::fin_(&Manifest::stat));
+			shoal->update_("find", Const<Manifest>::fin_(&Manifest::find));
+			shoal->update_("update", Member<Manifest>::fin_(&Manifest::update));
+			shoal->update_("insert", Member<Manifest>::fin_(&Manifest::insert));
+			shoal->finalize_();
 			return pub;
 		}();
 		return PUB;
@@ -5119,10 +5119,10 @@ public:
 	{
 		static const Ptr STAT = []()
 		{
-			const Ptr stat = Index::mut_();
-			Index* const index = static_<Index>(stat);
-			index->update_("stat", Static::fin_(&Manifest::stat));
-			index->finalize_();
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Manifest::stat));
+			shoal->finalize_();
 			return stat;
 		}();
 		return STAT;
@@ -5152,7 +5152,7 @@ public:
 	inline const Ptr find(const Ptr it) const
 	{
 		std::shared_lock<std::shared_timed_mutex> lock(_mutex);
-		return static_<Index>(_index)->find(it);
+		return static_<Shoal>(_shoal)->find(it);
 	}
 
 	inline void update_(const Ptr key, const Ptr value)
@@ -5160,7 +5160,7 @@ public:
 		if (key->finalized_() && value->finalized_())
 		{
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-			static_<Index>(_index)->update_(key, value);
+			static_<Shoal>(_shoal)->update_(key, value);
 		}
 	}
 
@@ -5177,7 +5177,7 @@ public:
 		if (key->finalized_() && value->finalized_())
 		{
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-			static_<Index>(_index)->insert_(key, value);
+			static_<Shoal>(_shoal)->insert_(key, value);
 		}
 	}
 
@@ -5190,7 +5190,7 @@ public:
 	}
 
 private:
-	const Ptr _index;
+	const Ptr _shoal;
 	mutable std::shared_timed_mutex _mutex;
 };
 
@@ -5200,14 +5200,14 @@ public:
 	inline Creature()
 		: Mutable{}
 		, Me{}
-		, _public{ Index::mut_() }
-		, _private{ Index::mut_() }
+		, _public{ Shoal::mut_() }
+		, _private{ Shoal::mut_() }
 	{
 	}
 
 	virtual inline const Ptr type_() const override
 	{
-		const Ptr over = static_<Index>(_public)->find_("type");
+		const Ptr over = static_<Shoal>(_public)->find_("type");
 		if (!over->is_("0"))
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -5218,7 +5218,7 @@ public:
 
 	virtual inline const Ptr copy_() const override
 	{
-		const Ptr over = static_<Index>(_public)->find_("copy");
+		const Ptr over = static_<Shoal>(_public)->find_("copy");
 		if (!over->is_("0"))
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -5228,7 +5228,7 @@ public:
 
 	virtual inline const Ptr clone_() const override
 	{
-		const Ptr over = static_<Index>(_public)->find_("clone");
+		const Ptr over = static_<Shoal>(_public)->find_("clone");
 		if (!over->is_("0"))
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -5238,7 +5238,7 @@ public:
 
 	virtual inline void finalize_() override
 	{
-		const Ptr over = static_<Index>(_public)->find_("finalize");
+		const Ptr over = static_<Shoal>(_public)->find_("finalize");
 		if (!over->is_("0"))
 		{
 			operate_(this, over);
@@ -5248,7 +5248,7 @@ public:
 
 	virtual inline const bool finalized_() const override
 	{
-		const Ptr over = static_<Index>(_public)->find_("finalized");
+		const Ptr over = static_<Shoal>(_public)->find_("finalized");
 		if (!over->is_("0"))
 		{
 			return !operate_(const_cast<Creature*>(this), over)->is_("0");
@@ -5258,7 +5258,7 @@ public:
 
 	virtual inline void freeze_() override
 	{
-		const Ptr over = static_<Index>(_public)->find_("freeze");
+		const Ptr over = static_<Shoal>(_public)->find_("freeze");
 		if (!over->is_("0"))
 		{
 			operate_(this, over);
@@ -5268,7 +5268,7 @@ public:
 
 	virtual inline const bool frozen_() const override
 	{
-		const Ptr over = static_<Index>(_public)->find_("frozen");
+		const Ptr over = static_<Shoal>(_public)->find_("frozen");
 		if (!over->is_("0"))
 		{
 			return !operate_(const_cast<Creature*>(this), over)->is_("0");
@@ -5278,7 +5278,7 @@ public:
 
 	virtual inline const Ptr next_() override
 	{
-		const Ptr over = static_<Index>(_public)->find_("next");
+		const Ptr over = static_<Shoal>(_public)->find_("next");
 		if (!over->is_("0"))
 		{
 			operate_(this, over);
@@ -5288,7 +5288,7 @@ public:
 
 	virtual inline size_t hash_() const override
 	{
-		const Ptr over = static_<Index>(_public)->find_("hash");
+		const Ptr over = static_<Shoal>(_public)->find_("hash");
 		if (!over->is_("0"))
 		{
 			return size_t(static_<Int64>(operate_(const_cast<Creature*>(this), over))->get_());
@@ -5298,7 +5298,7 @@ public:
 
 	virtual inline const bool same_(const Ptr other) const override
 	{
-		const Ptr over = static_<Index>(_public)->find_("same");
+		const Ptr over = static_<Shoal>(_public)->find_("same");
 		if (!over->is_("0"))
 		{
 			std::vector<Ptr> vec(1, other);
@@ -5309,7 +5309,7 @@ public:
 
 	virtual inline const Ptr visit(const Ptr it) override
 	{
-		const Ptr over = static_<Index>(_public)->find_("visit");
+		const Ptr over = static_<Shoal>(_public)->find_("visit");
 		if (!over->is_("0"))
 		{
 			return operate_(this, over, it);
@@ -5319,7 +5319,7 @@ public:
 
 	virtual inline const Ptr cats_() const override
 	{
-		const Ptr over = static_<Index>(_public)->find_("cats");
+		const Ptr over = static_<Shoal>(_public)->find_("cats");
 		if (!over->is_("0"))
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -5342,12 +5342,12 @@ protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
 		const Ptr name = it->next_();
-		const Ptr over = static_<Index>(_public)->find_(name);
+		const Ptr over = static_<Shoal>(_public)->find_(name);
 		if (!over->is_("0"))
 		{
 			return operate_(thing, over, it);
 		}
-		const Ptr member = static_<Index>(pub_())->find_(name);
+		const Ptr member = static_<Shoal>(pub_())->find_(name);
 		if (member->is_("0"))
 		{
 			return member;
@@ -5473,8 +5473,8 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
-		const Ptr local = Index::mut_();
-		Index* const loc = static_<Index>(local);
+		const Ptr local = Shoal::mut_();
+		Shoal* const loc = static_<Shoal>(local);
 		loc->insert_("static", _static);
 		Me<Creature>* const me = dynamic_cast<Me<Creature>*>(thing);
 		if (me)
@@ -5717,26 +5717,26 @@ inline const Thing::Ptr Thing::stats_()
 {
 	static const Ptr STATS = []()
 	{
-		const Ptr stats = Index::mut_();
-		Index* const index = static_<Index>(stats);
-		index->update_("strange::Thing", Static::fin_(&Thing::stat));
-		index->update_("strange::Symbol", Static::fin_(&Symbol::stat));
-		index->update_("strange::Index", Static::fin_(&Index::stat));
-		index->update_("strange::Flock", Static::fin_(&Flock::stat));
-		index->update_("strange::Herd", Static::fin_(&Herd::stat));
-		index->update_("strange::Lake", Static::fin_(&Lake::stat));
-		index->update_("strange::Bit", Static::fin_(&Bit::stat));
-		index->update_("strange::Byte", Static::fin_(&Byte::stat));
-		index->update_("strange::Int16", Static::fin_(&Int16::stat));
-		index->update_("strange::Int32", Static::fin_(&Int32::stat));
-		index->update_("strange::Int64", Static::fin_(&Int64::stat));
-		index->update_("strange::Float32", Static::fin_(&Float32::stat));
-		index->update_("strange::Float64", Static::fin_(&Float64::stat));
-		index->update_("strange::Complex32", Static::fin_(&Complex32::stat));
-		index->update_("strange::Complex64", Static::fin_(&Complex64::stat));
-		index->update_("strange::River", Static::fin_(&River::stat));
-		index->update_("strange::Fence", Static::fin_(&Fence::stat));
-		index->finalize_();
+		const Ptr stats = Shoal::mut_();
+		Shoal* const shoal = static_<Shoal>(stats);
+		shoal->update_("strange::Thing", Static::fin_(&Thing::stat));
+		shoal->update_("strange::Symbol", Static::fin_(&Symbol::stat));
+		shoal->update_("strange::Shoal", Static::fin_(&Shoal::stat));
+		shoal->update_("strange::Flock", Static::fin_(&Flock::stat));
+		shoal->update_("strange::Herd", Static::fin_(&Herd::stat));
+		shoal->update_("strange::Lake", Static::fin_(&Lake::stat));
+		shoal->update_("strange::Bit", Static::fin_(&Bit::stat));
+		shoal->update_("strange::Byte", Static::fin_(&Byte::stat));
+		shoal->update_("strange::Int16", Static::fin_(&Int16::stat));
+		shoal->update_("strange::Int32", Static::fin_(&Int32::stat));
+		shoal->update_("strange::Int64", Static::fin_(&Int64::stat));
+		shoal->update_("strange::Float32", Static::fin_(&Float32::stat));
+		shoal->update_("strange::Float64", Static::fin_(&Float64::stat));
+		shoal->update_("strange::Complex32", Static::fin_(&Complex32::stat));
+		shoal->update_("strange::Complex64", Static::fin_(&Complex64::stat));
+		shoal->update_("strange::River", Static::fin_(&River::stat));
+		shoal->update_("strange::Fence", Static::fin_(&Fence::stat));
+		shoal->finalize_();
 		return stats;
 	}();
 	return STATS;
