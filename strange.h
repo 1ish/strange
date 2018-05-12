@@ -1080,6 +1080,112 @@ public:
 
 	inline const Ptr gather_from_river_(const Ptr river);
 
+	class Concurrent : public Mutable, public Me<Concurrent>
+	{
+	public:
+		inline Concurrent()
+			: Mutable{}
+			, Me{}
+			, _shoal{ Shoal::mut_() }
+			, _mutex{}
+		{
+		}
+
+		virtual inline const Ptr pub_() const override
+		{
+			static const Ptr PUB = [this]()
+			{
+				const Ptr pub = Thing::pub_()->copy_();
+				Shoal* const shoal = static_<Shoal>(pub);
+				shoal->update_("stat", Static::fin_(&Concurrent::stat));
+				shoal->update_("find", Const<Concurrent>::fin_(&Concurrent::find));
+				shoal->update_("update", Member<Concurrent>::fin_(&Concurrent::update));
+				shoal->update_("insert", Member<Concurrent>::fin_(&Concurrent::insert));
+				shoal->finalize_();
+				return pub;
+			}();
+			return PUB;
+		}
+
+		static inline const Ptr stat_()
+		{
+			static const Ptr STAT = []()
+			{
+				const Ptr stat = Shoal::mut_();
+				Shoal* const shoal = static_<Shoal>(stat);
+				shoal->update_("stat", Static::fin_(&Concurrent::stat));
+				shoal->finalize_();
+				return stat;
+			}();
+			return STAT;
+		}
+
+		static inline const Ptr stat(const Ptr ignore)
+		{
+			return stat_();
+		}
+
+		static inline const Ptr mut_()
+		{
+			return make_();
+		}
+
+		virtual inline const Ptr copy_() const override
+		{
+			return me_();
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Shoal::Concurrent");
+			return TYPE;
+		}
+
+		inline const Ptr find(const Ptr it) const
+		{
+			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+			return static_<Shoal>(_shoal)->find(it);
+		}
+
+		inline void update_(const Ptr key, const Ptr value)
+		{
+			if (key->finalized_() && value->finalized_())
+			{
+				std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+				static_<Shoal>(_shoal)->update_(key, value);
+			}
+		}
+
+		inline const Ptr update(const Ptr it)
+		{
+			const Ptr key = it->next_();
+			const Ptr value = it->next_();
+			update_(key, value);
+			return value;
+		}
+
+		inline void insert_(const Ptr key, const Ptr value)
+		{
+			if (key->finalized_() && value->finalized_())
+			{
+				std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+				static_<Shoal>(_shoal)->insert_(key, value);
+			}
+		}
+
+		inline const Ptr insert(const Ptr it)
+		{
+			const Ptr key = it->next_();
+			const Ptr value = it->next_();
+			insert_(key, value);
+			return value;
+		}
+
+	private:
+		const Ptr _shoal;
+		mutable std::shared_timed_mutex _mutex;
+	};
+
 private:
 	std_unordered_map_ptr_ptr _map;
 	bool _frozen;
@@ -5088,112 +5194,6 @@ inline const Thing::Ptr Flock::It::cats_() const
 	return CATS;
 }
 
-class Manifest : public Mutable, public Me<Manifest>
-{
-public:
-	inline Manifest()
-		: Mutable{}
-		, Me{}
-		, _shoal{ Shoal::mut_() }
-		, _mutex{}
-	{
-	}
-
-	virtual inline const Ptr pub_() const override
-	{
-		static const Ptr PUB = [this]()
-		{
-			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
-			shoal->update_("stat", Static::fin_(&Manifest::stat));
-			shoal->update_("find", Const<Manifest>::fin_(&Manifest::find));
-			shoal->update_("update", Member<Manifest>::fin_(&Manifest::update));
-			shoal->update_("insert", Member<Manifest>::fin_(&Manifest::insert));
-			shoal->finalize_();
-			return pub;
-		}();
-		return PUB;
-	}
-
-	static inline const Ptr stat_()
-	{
-		static const Ptr STAT = []()
-		{
-			const Ptr stat = Shoal::mut_();
-			Shoal* const shoal = static_<Shoal>(stat);
-			shoal->update_("stat", Static::fin_(&Manifest::stat));
-			shoal->finalize_();
-			return stat;
-		}();
-		return STAT;
-	}
-
-	static inline const Ptr stat(const Ptr ignore)
-	{
-		return stat_();
-	}
-
-	static inline const Ptr mut_()
-	{
-		return make_();
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return me_();
-	}
-
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::Manifest");
-		return TYPE;
-	}
-
-	inline const Ptr find(const Ptr it) const
-	{
-		std::shared_lock<std::shared_timed_mutex> lock(_mutex);
-		return static_<Shoal>(_shoal)->find(it);
-	}
-
-	inline void update_(const Ptr key, const Ptr value)
-	{
-		if (key->finalized_() && value->finalized_())
-		{
-			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-			static_<Shoal>(_shoal)->update_(key, value);
-		}
-	}
-
-	inline const Ptr update(const Ptr it)
-	{
-		const Ptr key = it->next_();
-		const Ptr value = it->next_();
-		update_(key, value);
-		return value;
-	}
-
-	inline void insert_(const Ptr key, const Ptr value)
-	{
-		if (key->finalized_() && value->finalized_())
-		{
-			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-			static_<Shoal>(_shoal)->insert_(key, value);
-		}
-	}
-
-	inline const Ptr insert(const Ptr it)
-	{
-		const Ptr key = it->next_();
-		const Ptr value = it->next_();
-		insert_(key, value);
-		return value;
-	}
-
-private:
-	const Ptr _shoal;
-	mutable std::shared_timed_mutex _mutex;
-};
-
 class Creature : public Mutable, public Me<Creature>
 {
 public:
@@ -5450,7 +5450,7 @@ public:
 		: Thing{}
 		, Me{}
 		, _expression{ expression }
-		, _static{ Manifest::mut_() }
+		, _static{ Shoal::Concurrent::mut_() }
 	{
 	}
 
