@@ -1159,10 +1159,15 @@ public:
 			return TYPE;
 		}
 
-		inline const Ptr find(const Ptr it) const
+		inline const Ptr find_(const Ptr key) const
 		{
 			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
-			return static_<Shoal>(_shoal)->find(it);
+			return static_<Shoal>(_shoal)->find_(key);
+		}
+
+		inline const Ptr find(const Ptr it) const
+		{
+			return find_(it->next_());
 		}
 
 		inline void update_(const Ptr key, const Ptr value)
@@ -1182,21 +1187,21 @@ public:
 			return value;
 		}
 
-		inline void insert_(const Ptr key, const Ptr value)
+		inline const bool insert_(const Ptr key, const Ptr value)
 		{
 			if (key->finalized_() && value->finalized_())
 			{
 				std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-				static_<Shoal>(_shoal)->insert_(key, value);
+				return static_<Shoal>(_shoal)->insert_(key, value);
 			}
+			return false;
 		}
 
 		inline const Ptr insert(const Ptr it)
 		{
 			const Ptr key = it->next_();
 			const Ptr value = it->next_();
-			insert_(key, value);
-			return value;
+			return boolean_(insert_(key, value));
 		}
 
 	private:
@@ -1679,6 +1684,106 @@ public:
 		}
 		return result;
 	}
+
+	class Concurrent : public Mutable, public Me<Concurrent>
+	{
+	public:
+		inline Concurrent()
+			: Mutable{}
+			, Me{}
+			, _flock{ Flock::mut_() }
+			, _mutex{}
+		{
+		}
+
+		virtual inline const Ptr pub_() const override
+		{
+			static const Ptr PUB = [this]()
+			{
+				const Ptr pub = Thing::pub_()->copy_();
+				Shoal* const shoal = static_<Shoal>(pub);
+				shoal->update_("stat", Static::fin_(&Concurrent::stat));
+				shoal->update_("push_back", Member<Concurrent>::fin_(&Concurrent::push_back));
+				shoal->update_("size", Const<Concurrent>::fin_(&Concurrent::size));
+				shoal->update_("at", Const<Concurrent>::fin_(&Concurrent::at));
+				shoal->finalize_();
+				return pub;
+			}();
+			return PUB;
+		}
+
+		static inline const Ptr stat_()
+		{
+			static const Ptr STAT = []()
+			{
+				const Ptr stat = Shoal::mut_();
+				Shoal* const shoal = static_<Shoal>(stat);
+				shoal->update_("stat", Static::fin_(&Concurrent::stat));
+				shoal->finalize_();
+				return stat;
+			}();
+			return STAT;
+		}
+
+		static inline const Ptr stat(const Ptr ignore)
+		{
+			return stat_();
+		}
+
+		static inline const Ptr mut_()
+		{
+			return make_();
+		}
+
+		virtual inline const Ptr copy_() const override
+		{
+			return me_();
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Flock::Concurrent");
+			return TYPE;
+		}
+
+		inline void push_back_(const Ptr item)
+		{
+			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+			static_<Flock>(_flock)->push_back_(item);
+		}
+
+		inline const Ptr push_back(const Ptr it)
+		{
+			const Ptr item = it->next_();
+			push_back_(item);
+			return item;
+		}
+
+		inline const int64_t size_() const
+		{
+			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+			return static_<Flock>(_flock)->size_();
+		}
+
+		inline const Ptr size(const Ptr ignore) const;
+
+		inline const Ptr at_(const int64_t pos) const
+		{
+			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+			return static_<Flock>(_flock)->at_(pos);
+		}
+
+		inline const Ptr at_(const Ptr pos) const;
+
+		inline const Ptr at(const Ptr it) const
+		{
+			return at(it->next_());
+		}
+
+	private:
+		const Ptr _flock;
+		mutable std::shared_timed_mutex _mutex;
+	};
 
 private:
 	std_vector_ptr _vector;
@@ -4390,7 +4495,31 @@ inline const Thing::Ptr Flock::at_(const Thing::Ptr pos) const
 	Number* const number = dynamic_<Number>(pos);
 	if (number)
 	{
-		return at_(number->to_int64_());
+		const int64_t p = number->to_int64_();
+		if (p >= 0 && p < size_())
+		{
+			return at_(p);
+		}
+	}
+	return nothing_();
+}
+
+inline const Thing::Ptr Flock::Concurrent::size(const Thing::Ptr ignore) const
+{
+	return Int64::mut_(size_());
+}
+
+inline const Thing::Ptr Flock::Concurrent::at_(const Thing::Ptr pos) const
+{
+	Number* const number = dynamic_<Number>(pos);
+	if (number)
+	{
+		const int64_t p = number->to_int64_();
+		std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+		if (p >= 0 && p < static_<Flock>(_flock)->size_())
+		{
+			return static_<Flock>(_flock)->at_(p);
+		}
 	}
 	return nothing_();
 }
