@@ -136,11 +136,11 @@ public:
 		return one_();
 	}
 
-	static inline const Ptr end_();
+	static inline const Ptr stop_();
 
-	static inline const Ptr end(const Ptr ignore)
+	static inline const Ptr stop(const Ptr ignore)
 	{
-		return end_();
+		return stop_();
 	}
 
 	// public construction/destruction/assignment
@@ -220,7 +220,7 @@ public:
 
 	virtual inline const Ptr next_()
 	{
-		return end_();
+		return stop_();
 	}
 
 	inline const Ptr next(const Ptr ignore)
@@ -350,7 +350,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_(std::vector<Ptr>& vec, Thing& thing, Args&&... args)
 	{
-		for (Ptr p = thing.next_(); !p->is_("end"); p = thing.next_())
+		for (Ptr p = thing.next_(); !p->is_("."); p = thing.next_())
 		{
 			vec.push_back(p);
 		}
@@ -629,10 +629,10 @@ inline const Thing::Ptr Thing::one_()
 	return ONE;
 }
 
-inline const Thing::Ptr Thing::end_()
+inline const Thing::Ptr Thing::stop_()
 {
-	static const Ptr END = sym_("end");
-	return END;
+	static const Ptr STOP = sym_(".");
+	return STOP;
 }
 
 class Static : public Thing, public Me<Static>
@@ -1296,7 +1296,7 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("boolean", Static::fin_(&Thing::boolean));
 		shoal->update_(nothing_(), Static::fin_(&Thing::nothing));
 		shoal->update_(one_(), Static::fin_(&Thing::one));
-		shoal->update_(end_(), Static::fin_(&Thing::end));
+		shoal->update_(stop_(), Static::fin_(&Thing::stop));
 		shoal->update_("log", Static::fin_(&Thing::log));
 		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
 		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
@@ -1319,7 +1319,7 @@ inline const Thing::Ptr Thing::stat_()
 		shoal->update_("boolean", Static::fin_(&Thing::boolean));
 		shoal->update_(nothing_(), Static::fin_(&Thing::nothing));
 		shoal->update_(one_(), Static::fin_(&Thing::one));
-		shoal->update_(end_(), Static::fin_(&Thing::end));
+		shoal->update_(stop_(), Static::fin_(&Thing::stop));
 		shoal->update_("log", Static::fin_(&Thing::log));
 		shoal->finalize_();
 		return stat;
@@ -1420,7 +1420,7 @@ public:
 	{
 		if (_iterator == _collection.cend())
 		{
-			return end_();
+			return stop_();
 		}
 		return *_iterator++;
 	}
@@ -1803,7 +1803,7 @@ private:
 		{
 			if (_iterator == static_<Flock>(_flock)->_vector.cend())
 			{
-				return end_();
+				return stop_();
 			}
 			return *_iterator++;
 		}
@@ -1838,7 +1838,7 @@ inline const Thing::Ptr Shoal::It::next_()
 {
 	if (_iterator == static_<Shoal>(_shoal)->_map.cend())
 	{
-		return end_();
+		return stop_();
 	}
 	const Ptr result = Flock::mut_();
 	Flock* const flock = static_<Flock>(result);
@@ -2231,7 +2231,7 @@ private:
 		{
 			if (_iterator == static_<Herd>(_herd)->_set.cend())
 			{
-				return end_();
+				return stop_();
 			}
 			return *_iterator++;
 		}
@@ -5948,7 +5948,7 @@ inline const Thing::Ptr Expression::It::next_()
 {
 	if (_pos >= static_<Statement>(_statement)->size_())
 	{
-		return end_();
+		return stop_();
 	}
 	return eval_(static_<Statement>(_statement)->at_(_pos++), _local);
 }
