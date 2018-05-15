@@ -2031,7 +2031,7 @@ public:
 	}
 
 	template <typename F>
-	inline const Ptr find_(F&& item)
+	inline const Ptr find_(F&& item) const
 	{
 		return find_(sym_(std::forward<F>(item)));
 	}
@@ -2121,6 +2121,97 @@ public:
 		gather_(it->next_());
 		return nothing_();
 	}
+
+	class Concurrent : public Mutable, public Me<Concurrent>
+	{
+	public:
+		inline Concurrent()
+			: Mutable{}
+			, Me{}
+			, _herd{ Herd::mut_() }
+			, _mutex{}
+		{
+		}
+
+		virtual inline const Ptr pub_() const override
+		{
+			static const Ptr PUB = [this]()
+			{
+				const Ptr pub = Thing::pub_()->copy_();
+				Shoal* const shoal = static_<Shoal>(pub);
+				shoal->update_("stat", Static::fin_(&Concurrent::stat));
+				shoal->update_("find", Const<Concurrent>::fin_(&Concurrent::find));
+				shoal->update_("insert", Member<Concurrent>::fin_(&Concurrent::insert));
+				shoal->finalize_();
+				return pub;
+			}();
+			return PUB;
+		}
+
+		static inline const Ptr stat_()
+		{
+			static const Ptr STAT = []()
+			{
+				const Ptr stat = Shoal::mut_();
+				Shoal* const shoal = static_<Shoal>(stat);
+				shoal->update_("stat", Static::fin_(&Concurrent::stat));
+				shoal->finalize_();
+				return stat;
+			}();
+			return STAT;
+		}
+
+		static inline const Ptr stat(const Ptr ignore)
+		{
+			return stat_();
+		}
+
+		static inline const Ptr mut_()
+		{
+			return make_();
+		}
+
+		virtual inline const Ptr copy_() const override
+		{
+			return me_();
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Herd::Concurrent");
+			return TYPE;
+		}
+
+		inline const Ptr find_(const Ptr item) const
+		{
+			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+			return static_<Herd>(_herd)->find_(item);
+		}
+
+		inline const Ptr find(const Ptr it) const
+		{
+			return find_(it->next_());
+		}
+
+		inline const bool insert_(const Ptr item)
+		{
+			if (item->finalized_())
+			{
+				std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+				return static_<Herd>(_herd)->insert_(item);
+			}
+			return false;
+		}
+
+		inline const Ptr insert(const Ptr it)
+		{
+			return boolean_(insert_(it->next_()));
+		}
+
+	private:
+		const Ptr _herd;
+		mutable std::shared_timed_mutex _mutex;
+	};
 
 private:
 	std_unordered_set_ptr _set;
