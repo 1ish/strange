@@ -5452,7 +5452,7 @@ inline const Thing::Ptr Flock::It::cats_() const
 	return CATS;
 }
 
-class Creature : public Mutable, public Me<Creature>
+class Creature : public Mutable, public Me<Creature>, public Serializable
 {
 public:
 	inline Creature()
@@ -5539,7 +5539,7 @@ public:
 		const Ptr over = static_<Shoal>(_public)->find_("next");
 		if (!over->is_("0"))
 		{
-			operate_(this, over);
+			return operate_(this, over);
 		}
 		return Thing::next_();
 	}
@@ -5559,8 +5559,8 @@ public:
 		const Ptr over = static_<Shoal>(_public)->find_("same");
 		if (!over->is_("0"))
 		{
-			std::vector<Ptr> vec(1, other);
-			return !operate_(const_cast<Creature*>(this), over, Iterator<std::vector<Ptr>>::mut_(vec))->is_("0");
+			return !operate_(const_cast<Creature*>(this), over,
+				Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ other }))->is_("0");
 		}
 		return Thing::same_(other);
 	}
@@ -5593,6 +5593,99 @@ public:
 			return cats;
 		}();
 		return CATS;
+	}
+
+	virtual inline const Ptr to_lake_() const override
+	{
+		const Ptr over = static_<Shoal>(_public)->find_("to_lake");
+		if (!over->is_("0"))
+		{
+			return operate_(const_cast<Creature*>(this), over);
+		}
+		return to_lake_via_river_();
+	}
+
+	virtual inline void from_lake_(const Ptr lake) override
+	{
+		const Ptr over = static_<Shoal>(_public)->find_("from_lake");
+		if (!over->is_("0"))
+		{
+			operate_(this, over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ lake }));
+		}
+		else
+		{
+			from_lake_via_river_(lake);
+		}
+	}
+
+	virtual inline void to_river_(const Thing::Ptr river) const override
+	{
+		const Ptr over = static_<Shoal>(_public)->find_("to_river");
+		if (!over->is_("0"))
+		{
+			operate_(const_cast<Creature*>(this), over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
+		}
+		else
+		{
+			static_<Shoal>(_public)->to_river_(river);
+			static_<Shoal>(_private)->to_river_(river);
+		}
+	}
+
+	virtual inline void from_river_(const Thing::Ptr river) override
+	{
+		const Ptr over = static_<Shoal>(_public)->find_("from_river");
+		if (!over->is_("0"))
+		{
+			operate_(this, over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
+		}
+		else
+		{
+			static_<Shoal>(_public)->from_river_(river);
+			static_<Shoal>(_private)->from_river_(river);
+		}
+	}
+
+	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const override
+	{
+		const Ptr over = static_<Shoal>(_public)->find_("to_river_with_links");
+		if (!over->is_("0"))
+		{
+			operate_(const_cast<Creature*>(this), over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ shoal, river }));
+		}
+		else
+		{
+			static_<Shoal>(_public)->to_river_with_links_(shoal, river);
+			static_<Shoal>(_private)->to_river_with_links_(shoal, river);
+		}
+	}
+
+	virtual inline void from_river_with_links_(const Thing::Ptr river) override
+	{
+		const Ptr over = static_<Shoal>(_public)->find_("from_river_with_links");
+		if (!over->is_("0"))
+		{
+			operate_(this, over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
+		}
+		else
+		{
+			static_<Shoal>(_public)->from_river_with_links_(river);
+			static_<Shoal>(_private)->from_river_with_links_(river);
+		}
+	}
+
+	virtual inline void replace_links_(const Thing::Ptr shoal) override
+	{
+		const Ptr over = static_<Shoal>(_public)->find_("replace_links");
+		if (!over->is_("0"))
+		{
+			operate_(this, over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ shoal }));
+		}
+		else
+		{
+			static_<Shoal>(_public)->replace_links_(shoal);
+			static_<Shoal>(_private)->replace_links_(shoal);
+		}
 	}
 
 protected:
