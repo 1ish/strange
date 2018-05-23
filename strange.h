@@ -10,6 +10,7 @@
 #include <unordered_map>
 #include <string>
 #include <sstream>
+#include <fstream>
 #include <cstdint>
 #include <type_traits>
 #include <complex>
@@ -4688,14 +4689,33 @@ public:
 		return make_(stream);
 	}
 
-	static inline const Ptr mut_(const std::string& str = std::string())
+	static inline const Ptr mut_(const std::string& str = std::string(), const bool file = false)
 	{
+		if (file)
+		{
+			return mut_(new std::fstream(str, std::fstream::binary | std::fstream::in | std::fstream::out));
+		}
 		return mut_(new std::stringstream(str));
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr it)
 	{
-		return mut_();
+		const Ptr str = it->next_();
+		if (str->is_("."))
+		{
+			return mut_();
+		}
+		const Lake* const lake = dynamic_<Lake>(str->invoke_("to_lake"));
+		if (!lake)
+		{
+			return mut_();
+		}
+		const Ptr file = it->next_();
+		if (file->is_("."))
+		{
+			return mut_(lake->get_());
+		}
+		return mut_(lake->get_(), !file->is_("0"));
 	}
 
 	virtual inline const Ptr copy_() const override
