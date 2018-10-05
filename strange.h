@@ -18,6 +18,47 @@
 
 namespace strange
 {
+	class Thing;
+	class Iterable;
+	class Variadic;
+	template <typename T> class Me;
+	class Serializable;
+	class Symbol;
+	class Static;
+	template <typename T> class Member;
+	template <typename T> class Const;
+	class Mutable;
+	class Shoal;
+	class Decorator;
+	template <typename C> class Iterator;
+	class Flock;
+	class Herd;
+	template <typename D> class Data;
+	class Lake;
+	class Number;
+	class Bit;
+	class Byte;
+	class Int16;
+	class Int32;
+	class Int64;
+	class Float32;
+	class Float64;
+	class Complex32;
+	class Complex64;
+	class River;
+	class Fence;
+	class Creature;
+	class Command;
+	class Expression;
+	class Function;
+	class Statement;
+	class Block;
+	class If;
+	class Question;
+	class While;
+	class Do;
+	class For;
+
 	// Categories:
 	// private typedefs
 	// protected typedefs
@@ -44,7 +85,9 @@ namespace strange
 	// private impure virtual member functions and adapters
 	// private non-virtual member functions and adapters
 
+//----------------------------------------------------------------------
 class Thing
+//----------------------------------------------------------------------
 {
 public:
 	// public typedefs
@@ -306,7 +349,9 @@ private:
 	}
 };
 
+//----------------------------------------------------------------------
 class Iterable
+//----------------------------------------------------------------------
 {
 public:
 	// public pure virtual member functions and adapters
@@ -318,7 +363,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Variadic
+//----------------------------------------------------------------------
 {
 public:
 	// public typedefs
@@ -355,7 +402,9 @@ public:
 };
 
 template <typename T>
+//----------------------------------------------------------------------
 class Me
+//----------------------------------------------------------------------
 {
 public:
 	inline const Thing::Ptr me_() const
@@ -383,7 +432,9 @@ private:
 	Thing::Weak _me;
 };
 
+//----------------------------------------------------------------------
 class Serializable
+//----------------------------------------------------------------------
 {
 public:
 	// public pure virtual member functions and adapters
@@ -501,7 +552,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Symbol : public Thing, public Me<Symbol>, public Serializable
+//----------------------------------------------------------------------
 {
 public:
 	template <typename F>
@@ -587,44 +640,9 @@ private:
 	const size_t _hash;
 };
 
-template <typename F>
-inline const bool Thing::is_(F&& symbol) const
-{
-	const Symbol* const sym = dynamic_cast<const Symbol*>(this);
-	return (sym && sym->symbol_() == std::forward<F>(symbol));
-}
-
-inline const bool Thing::is_(const Thing::Ptr symbol) const
-{
-	Symbol* const sym = dynamic_<Symbol>(symbol);
-	return (sym && is_(sym->symbol_()));
-}
-
-template <typename F>
-inline const Thing::Ptr Thing::sym_(F&& symbol)
-{
-	return Symbol::fin_(std::forward<F>(symbol));
-}
-
-inline const Thing::Ptr Thing::nothing_()
-{
-	static const Ptr NOTHING = sym_("0");
-	return NOTHING;
-}
-
-inline const Thing::Ptr Thing::one_()
-{
-	static const Ptr ONE = sym_("1");
-	return ONE;
-}
-
-inline const Thing::Ptr Thing::stop_()
-{
-	static const Ptr STOP = sym_(".");
-	return STOP;
-}
-
+//----------------------------------------------------------------------
 class Static : public Thing, public Me<Static>
+//----------------------------------------------------------------------
 {
 	using function = const Ptr(*)(const Ptr);
 
@@ -665,7 +683,9 @@ private:
 };
 
 template <typename T>
+//----------------------------------------------------------------------
 class Member : public Thing, public Me<Member<T>>
+//----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr);
 
@@ -717,7 +737,9 @@ private:
 };
 
 template <typename T>
+//----------------------------------------------------------------------
 class Const : public Thing, public Me<Const<T>>
+//----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr) const;
 
@@ -763,7 +785,9 @@ private:
 	const member _function;
 };
 
+//----------------------------------------------------------------------
 class Mutable : public Thing
+//----------------------------------------------------------------------
 {
 public:
 	virtual inline void finalize_() override
@@ -788,7 +812,9 @@ private:
 	std::atomic<bool> _finalized;
 };
 
+//----------------------------------------------------------------------
 class Shoal : public Mutable, public Me<Shoal>, public Serializable, public Iterable
+//----------------------------------------------------------------------
 {
 	class Hash
 	{
@@ -1240,137 +1266,9 @@ private:
 	};
 };
 
-inline const Thing::Ptr Thing::call(const Thing::Ptr it)
-{
-	const Ptr type = it->next_();
-	const Ptr function = it->next_();
-	const Ptr stat = static_<Shoal>(stats_())->find_(type);
-	if (stat->is_("0"))
-	{
-		log_("call passed unknown type:");
-		log_(type);
-		log_(function);
-		return stat;
-	}
-	const Ptr fun = static_<Shoal>(stat->invoke(nothing_()))->find_(function);
-	if (fun->is_("0"))
-	{
-		log_("call passed unknown function:");
-		log_(type);
-		log_(function);
-		return fun;
-	}
-	return fun->invoke(it);
-}
-
-inline const Thing::Ptr Thing::pub_() const
-{
-	static const Ptr PUB = []()
-	{
-		const Ptr pub = Shoal::mut_();
-		Shoal* const shoal = static_<Shoal>(pub);
-		shoal->update_("invoke", Member<Thing>::fin_(&Thing::invoke));
-		shoal->update_("next", Member<Thing>::fin_(&Thing::next));
-		shoal->update_("is", Const<Thing>::fin_(&Thing::is));
-		shoal->update_("hash", Const<Thing>::fin_(&Thing::hash));
-		shoal->update_("same", Const<Thing>::fin_(&Thing::same));
-		shoal->update_("copy", Const<Thing>::fin_(&Thing::copy));
-		shoal->update_("clone", Const<Thing>::fin_(&Thing::clone));
-		shoal->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
-		shoal->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
-		shoal->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
-		shoal->update_("call", Static::fin_(&Thing::call));
-		shoal->update_("stats", Static::fin_(&Thing::stats));
-		shoal->update_("stat", Static::fin_(&Thing::stat));
-		shoal->update_("boolean", Static::fin_(&Thing::boolean));
-		shoal->update_(nothing_(), Static::fin_(&Thing::nothing));
-		shoal->update_(one_(), Static::fin_(&Thing::one));
-		shoal->update_(stop_(), Static::fin_(&Thing::stop));
-		shoal->update_("log", Static::fin_(&Thing::log));
-		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
-		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
-		shoal->update_("visit", Member<Thing>::fin_(&Thing::visit));
-		shoal->update_("pub", Const<Thing>::fin_(&Thing::pub));
-		shoal->finalize_();
-		return pub;
-	}();
-	return PUB;
-}
-
-inline const Thing::Ptr Thing::stat_()
-{
-	static const Ptr STAT = []()
-	{
-		const Ptr stat = Shoal::mut_();
-		Shoal* const shoal = static_<Shoal>(stat);
-		shoal->update_("stats", Static::fin_(&Thing::stats));
-		shoal->update_("stat", Static::fin_(&Thing::stat));
-		shoal->update_("boolean", Static::fin_(&Thing::boolean));
-		shoal->update_(nothing_(), Static::fin_(&Thing::nothing));
-		shoal->update_(one_(), Static::fin_(&Thing::one));
-		shoal->update_(stop_(), Static::fin_(&Thing::stop));
-		shoal->update_("log", Static::fin_(&Thing::log));
-		shoal->finalize_();
-		return stat;
-	}();
-	return STAT;
-}
-
-inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr it)
-{
-	const Ptr member = static_<Shoal>(pub_())->find_(it->next_());
-	if (member->is_("0"))
-	{
-		return member;
-	}
-	return operate_(thing, member, it);
-}
-
-inline void Serializable::serialize_(const Thing::Ptr thing, const Thing::Ptr river)
-{
-	Thing::static_<Shoal>(Shoal::mut_())->gather_to_river_(thing, river);
-}
-
-inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr river)
-{
-	return Thing::static_<Shoal>(Shoal::mut_())->gather_from_river_(river);
-}
-
-inline const Thing::Ptr Symbol::pub_() const
-{
-	static const Ptr PUB = [this]()
-	{
-		const Ptr pub = Thing::pub_()->copy_();
-		Shoal* const shoal = static_<Shoal>(pub);
-		shoal->update_("to_lake", Const<Symbol>::fin_(&Symbol::to_lake));
-		shoal->update_("to_river", Const<Symbol>::fin_(&Symbol::to_river));
-		shoal->update_("stat", Static::fin_(&Symbol::stat));
-		shoal->update_("lak", Static::fin_(&Symbol::lak));
-		shoal->update_("riv", Static::fin_(&Symbol::riv));
-		shoal->update_("rwl", Static::fin_(&Symbol::rwl));
-		shoal->finalize_();
-		return pub;
-	}();
-	return PUB;
-}
-
-inline const Thing::Ptr Symbol::stat_()
-{
-	static const Ptr STAT = []()
-	{
-		const Ptr stat = Shoal::mut_();
-		Shoal* const shoal = static_<Shoal>(stat);
-		shoal->update_("stat", Static::fin_(&Symbol::stat));
-		shoal->update_("lak", Static::fin_(&Symbol::lak));
-		shoal->update_("riv", Static::fin_(&Symbol::riv));
-		shoal->update_("rwl", Static::fin_(&Symbol::rwl));
-		shoal->finalize_();
-		return stat;
-	}();
-	return STAT;
-}
-
+//----------------------------------------------------------------------
 class Decorator : public Thing
+//----------------------------------------------------------------------
 {
 protected:
 	inline Decorator(const Ptr decorated)
@@ -1394,7 +1292,9 @@ protected:
 };
 
 template <typename C>
+//----------------------------------------------------------------------
 class Iterator : public Mutable
+//----------------------------------------------------------------------
 {
 public:
 	template <typename F>
@@ -1451,7 +1351,9 @@ private:
 	typename C::const_iterator _iterator;
 };
 
+//----------------------------------------------------------------------
 class Flock : public Mutable, public Me<Flock>, public Serializable, public Iterable
+//----------------------------------------------------------------------
 {
 	using std_vector_ptr = std::vector<Ptr>;
 
@@ -1838,7 +1740,9 @@ inline const Thing::Ptr Shoal::It::next_()
 	return result;
 }
 
+//----------------------------------------------------------------------
 class Herd : public Mutable, public Me<Herd>, public Serializable, public Iterable
+//----------------------------------------------------------------------
 {
 	class Hash
 	{
@@ -2265,7 +2169,9 @@ private:
 };
 
 template <typename D>
+//----------------------------------------------------------------------
 class Data
+//----------------------------------------------------------------------
 {
 public:
 	Data(const D& data)
@@ -2287,7 +2193,9 @@ private:
 	D _data;
 };
 
+//----------------------------------------------------------------------
 class Lake : public Mutable, public Serializable, public Data<std::string>
+//----------------------------------------------------------------------
 {
 public:
 	using S = std::string;
@@ -2460,86 +2368,9 @@ public:
 	}
 };
 
-inline void Thing::log_(const Thing::Ptr ptr)
-{
-	const Lake* const lake = dynamic_<Lake>(ptr->invoke_("to_lake"));
-	if (lake)
-	{
-		log_(lake->get_());
-	}
-}
-
-template <typename... Args>
-inline const Thing::Ptr Thing::call_(Args&&... args)
-{
-	std::vector<Thing::Ptr> v;
-	v.reserve(sizeof...(Args));
-	Variadic::variadic_(v, std::forward<Args>(args)...);
-	return call(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
-}
-
-template <typename... Args>
-inline const Thing::Ptr Thing::invoke_(Args&&... args)
-{
-	std::vector<Thing::Ptr> v;
-	v.reserve(sizeof...(Args));
-	Variadic::variadic_(v, std::forward<Args>(args)...);
-	return invoke(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
-}
-
-inline void Serializable::to_river_(const Thing::Ptr river) const
-{
-	const Thing* const thing = dynamic_cast<const Thing*>(this);
-	if (thing)
-	{
-		Lake* const lake = Thing::dynamic_<Lake>(const_cast<Thing*>(thing)->invoke_("to_lake"));
-		if (lake)
-		{
-			lake->to_river_(river);
-		}
-	}
-}
-
-inline void Serializable::from_river_(const Thing::Ptr river)
-{
-	const Thing::Ptr lake = Lake::mut_();
-	Thing::static_<Lake>(lake)->from_river_(river);
-	Thing* const thing = dynamic_cast<Thing*>(this);
-	if (thing)
-	{
-		thing->invoke_("from_lake", lake);
-	}
-}
-
-inline const Thing::Ptr Symbol::lak_(const Thing::Ptr lake)
-{
-	Lake* const lak = dynamic_<Lake>(lake);
-	if (!lak)
-	{
-		log_("Symbol::lak_ passed wrong type of thing");
-		return fin_("");
-	}
-	return fin_(lak->get_());
-}
-
-inline const Thing::Ptr Symbol::riv_(const Thing::Ptr river)
-{
-	return fin_(static_<Lake>(Lake::riv_(river))->get_());
-}
-
-inline const Thing::Ptr Symbol::rwl_(const Thing::Ptr river)
-{
-	return fin_(static_<Lake>(Lake::rwl_(river))->get_());
-}
-
-inline const Thing::Ptr Symbol::to_lake_() const
-{
-	const Ptr lake = Lake::mut_(_symbol);
-	lake->finalize_();
-	return lake;
-}
-
+//----------------------------------------------------------------------
 class Number : public Mutable, public Serializable
+//----------------------------------------------------------------------
 {
 public:
 	Number() = default;
@@ -2661,7 +2492,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Bit : public Number, public Data<bool>
+//----------------------------------------------------------------------
 {
 public:
 	using D = bool;
@@ -2854,7 +2687,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Byte : public Number, public Data<unsigned char>
+//----------------------------------------------------------------------
 {
 public:
 	using D = unsigned char;
@@ -3047,7 +2882,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Int16 : public Number, public Data<int16_t>
+//----------------------------------------------------------------------
 {
 public:
 	using D = int16_t;
@@ -3246,7 +3083,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Int32 : public Number, public Data<int32_t>
+//----------------------------------------------------------------------
 {
 public:
 	using D = int32_t;
@@ -3449,7 +3288,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Int64 : public Number, public Data<int64_t>
+//----------------------------------------------------------------------
 {
 public:
 	using D = int64_t;
@@ -3660,7 +3501,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Float32 : public Number, public Data<float>
+//----------------------------------------------------------------------
 {
 public:
 	using D = float;
@@ -3864,7 +3707,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Float64 : public Number, public Data<double>
+//----------------------------------------------------------------------
 {
 public:
 	using D = double;
@@ -4076,7 +3921,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Complex32 : public Number, public Data<std::complex<float>>
+//----------------------------------------------------------------------
 {
 	static const char delim = '|';
 
@@ -4319,7 +4166,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Complex64 : public Number, public Data<std::complex<double>>
+//----------------------------------------------------------------------
 {
 	static const char delim = '|';
 
@@ -4578,107 +4427,9 @@ public:
 	}
 };
 
-inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
-{
-	return Int64::mut_(int64_t(hash_()));
-}
-
-inline const Thing::Ptr Flock::size(const Thing::Ptr ignore) const
-{
-	return Int64::mut_(size_());
-}
-
-inline const Thing::Ptr Flock::at_(const Thing::Ptr pos) const
-{
-	Number* const number = dynamic_<Number>(pos);
-	if (number)
-	{
-		const int64_t p = number->to_int64_();
-		if (p >= 0 && p < size_())
-		{
-			return at_(p);
-		}
-	}
-	return nothing_();
-}
-
-inline const Thing::Ptr Flock::Concurrent::size(const Thing::Ptr ignore) const
-{
-	return Int64::mut_(size_());
-}
-
-inline const Thing::Ptr Flock::Concurrent::at_(const Thing::Ptr pos) const
-{
-	Number* const number = dynamic_<Number>(pos);
-	if (number)
-	{
-		const int64_t p = number->to_int64_();
-		std::shared_lock<std::shared_timed_mutex> lock(_mutex);
-		if (p >= 0 && p < static_<Flock>(_flock)->size_())
-		{
-			return static_<Flock>(_flock)->at_(p);
-		}
-	}
-	return nothing_();
-}
-
-inline const Thing::Ptr Number::to_int64(const Thing::Ptr ignore) const
-{
-	return Int64::mut_(to_int64_());
-}
-
-inline void Number::from_int64_(const Thing::Ptr ptr)
-{
-	Int64* const int64 = dynamic_<Int64>(ptr);
-	if (int64)
-	{
-		from_int64_(int64->get_());
-	}
-}
-
-inline const Thing::Ptr Number::to_float64(const Thing::Ptr ignore) const
-{
-	return Float64::mut_(to_float64_());
-}
-
-inline void Number::from_float64_(const Thing::Ptr ptr)
-{
-	Float64* const float64 = dynamic_<Float64>(ptr);
-	if (float64)
-	{
-		from_float64_(float64->get_());
-	}
-}
-
-inline const Thing::Ptr Number::to_imaginary64(const Thing::Ptr ignore) const
-{
-	return Float64::mut_(to_imaginary64_());
-}
-
-inline void Number::from_imaginary64_(const Thing::Ptr ptr)
-{
-	Float64* const float64 = dynamic_<Float64>(ptr);
-	if (float64)
-	{
-		from_imaginary64_(float64->get_());
-	}
-}
-
-inline const Thing::Ptr Number::to_complex64(const Thing::Ptr ignore) const
-{
-	return Complex64::mut_(to_complex64_());
-}
-
-inline void Number::from_complex64_(const Thing::Ptr ptr)
-{
-	Complex64* const complex64 = dynamic_<Complex64>(ptr);
-	if (complex64)
-	{
-		from_complex64_(complex64->get_());
-	}
-}
-
+//----------------------------------------------------------------------
 class River : public Mutable, public Me<River>
+//----------------------------------------------------------------------
 {
 	using const_std_unique_iostream = const std::unique_ptr<std::iostream>;
 
@@ -4866,377 +4617,9 @@ private:
 	const_std_unique_iostream _stream;
 };
 
-inline const Thing::Ptr Serializable::to_lake_via_river_() const
-{
-	const Thing* const thing = dynamic_cast<const Thing*>(this);
-	if (thing)
-	{
-		const Thing::Ptr river = River::mut_();
-		const_cast<Thing*>(thing)->invoke_("to_river", river);
-		const Thing::Ptr lake = Lake::mut_();
-		Thing::static_<Lake>(lake)->from_river_(river);
-		return lake;
-	}
-	return Thing::nothing_();
-}
-
-inline void Serializable::from_lake_via_river_(const Thing::Ptr lake)
-{
-	Lake* const lak = Thing::dynamic_<Lake>(lake);
-	if (!lak)
-	{
-		Thing::log_("Serializable::from_lake_via_river_ passed wrong type of thing");
-		return;
-	}
-	const Thing::Ptr river = River::mut_();
-	lak->to_river_(river);
-	Thing* const thing = dynamic_cast<Thing*>(this);
-	if (thing)
-	{
-		thing->invoke_("from_river", river);
-	}
-}
-
-inline void Shoal::to_river_(const Thing::Ptr river) const
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Shoal::to_river_ passed wrong type of thing");
-		return;
-	}
-	riv->write_(Bit::mut_(finalized_()));
-	riv->write_(Int64::mut_(int64_t(_map.size())));
-	for (const auto& i : _map)
-	{
-		riv->push_back_(i.first);
-		riv->push_back_(i.second);
-	}
-}
-
-inline void Shoal::from_river_(const Thing::Ptr river)
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Shoal::from_river_ passed wrong type of thing");
-		return;
-	}
-	const bool bit = riv->read_<Bit>();
-	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
-	{
-		const Ptr first = riv->pop_front_();
-		const Ptr second = riv->pop_front_();
-		_map[first] = second;
-	}
-	if (bit)
-	{
-		finalize_();
-	}
-}
-
-inline void Shoal::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
-{
-	Shoal* const sho = dynamic_<Shoal>(shoal);
-	if (!sho)
-	{
-		log_("Shoal::to_river_with_links_ passed wrong type of shoal thing");
-		return;
-	}
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Shoal::to_river_with_links_ passed wrong type of river thing");
-		return;
-	}
-	riv->write_(Bit::mut_(finalized_()));
-	riv->write_(Int64::mut_(int64_t(_map.size())));
-	for (const auto& i : _map)
-	{
-		static_<Symbol>(sho->find_(i.first))->to_river_(river);
-		static_<Symbol>(sho->find_(i.second))->to_river_(river);
-	}
-}
-
-inline void Shoal::from_river_with_links_(const Thing::Ptr river)
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Shoal::from_river_with_links_ passed wrong type of thing");
-		return;
-	}
-	const bool bit = riv->read_<Bit>();
-	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
-	{
-		const Ptr first = Symbol::riv_(river);
-		const Ptr second = Symbol::riv_(river);
-		_map[first] = second;
-	}
-	if (bit)
-	{
-		finalize_();
-	}
-}
-
-inline void Shoal::replace_links_(const Thing::Ptr shoal)
-{
-	std_unordered_map_ptr_ptr replacement;
-	Shoal* const sho = static_<Shoal>(shoal);
-	for (const auto& i : _map)
-	{
-		replacement.emplace(sho->find_(i.first), sho->find_(i.second));
-	}
-	_map.swap(replacement);
-}
-
-inline void Shoal::gather_to_river_(const Thing::Ptr thing, const Thing::Ptr river)
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Shoal::gather_to_river_ passed wrong type of river thing");
-		return;
-	}
-	gather_(thing);
-	riv->write_(Int64::mut_(int64_t(_map.size())));
-	for (const auto& i : _map)
-	{
-		if (riv->push_back_with_links_(i.first, Me<Shoal>::me_()))
-		{
-			static_<Symbol>(i.second)->to_river_(river);
-		}
-	}
-}
-
-inline const Thing::Ptr Shoal::gather_from_river_(const Thing::Ptr river)
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Shoal::gather_from_river_ passed wrong type of river thing");
-		return nothing_();
-	}
-	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
-	{
-		const Ptr thing = riv->pop_front_with_links_();
-		const Ptr symbol = Symbol::riv_(river);
-		_map.emplace(symbol, thing);
-	}
-	for (const auto& i : _map)
-	{
-		i.second->invoke_("replace_links", Me<Shoal>::me_());
-	}
-	return find_(nothing_());
-}
-
-inline void Flock::to_river_(const Thing::Ptr river) const
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Flock::to_river_ passed wrong type of thing");
-		return;
-	}
-	riv->write_(Bit::mut_(finalized_()));
-	riv->write_(Int64::mut_(int64_t(_vector.size())));
-	for (const auto i : _vector)
-	{
-		riv->push_back_(i);
-	}
-}
-
-inline void Flock::from_river_(const Thing::Ptr river)
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Flock::from_river_ passed wrong type of thing");
-		return;
-	}
-	const bool bit = riv->read_<Bit>();
-	const int64_t int64 = riv->read_<Int64>();
-	_vector.reserve(size_t(int64));
-	for (int64_t i = int64; i > 0; --i)
-	{
-		_vector.push_back(riv->pop_front_());
-	}
-	if (bit)
-	{
-		finalize_();
-	}
-}
-
-inline void Flock::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
-{
-	Shoal* const sho = dynamic_<Shoal>(shoal);
-	if (!sho)
-	{
-		log_("Flock::to_river_with_links_ passed wrong type of shoal thing");
-		return;
-	}
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Flock::to_river_with_links_ passed wrong type of river thing");
-		return;
-	}
-	riv->write_(Bit::mut_(finalized_()));
-	riv->write_(Int64::mut_(int64_t(_vector.size())));
-	for (const auto i : _vector)
-	{
-		static_<Symbol>(sho->find_(i))->to_river_(river);
-	}
-}
-
-inline void Flock::from_river_with_links_(const Thing::Ptr river)
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Flock::from_river_with_links_ passed wrong type of thing");
-		return;
-	}
-	const bool bit = riv->read_<Bit>();
-	const int64_t int64 = riv->read_<Int64>();
-	_vector.reserve(size_t(int64));
-	for (int64_t i = int64; i > 0; --i)
-	{
-		_vector.push_back(Symbol::riv_(river));
-	}
-	if (bit)
-	{
-		finalize_();
-	}
-}
-
-inline void Flock::replace_links_(const Thing::Ptr shoal)
-{
-	Shoal* const sho = static_<Shoal>(shoal);
-	for (std_vector_ptr::iterator i = _vector.begin(); i != _vector.end(); ++i)
-	{
-		*i = sho->find_(*i);
-	}
-}
-
-inline void Herd::to_river_(const Thing::Ptr river) const
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Herd::to_river_ passed wrong type of thing");
-		return;
-	}
-	riv->write_(Bit::mut_(finalized_()));
-	riv->write_(Int64::mut_(int64_t(_set.size())));
-	for (const auto i : _set)
-	{
-		riv->push_back_(i);
-	}
-}
-
-inline void Herd::from_river_(const Thing::Ptr river)
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Herd::from_river_ passed wrong type of thing");
-		return;
-	}
-	const bool bit = riv->read_<Bit>();
-	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
-	{
-		_set.insert(riv->pop_front_());
-	}
-	if (bit)
-	{
-		finalize_();
-	}
-}
-
-inline void Herd::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
-{
-	Shoal* const sho = dynamic_<Shoal>(shoal);
-	if (!sho)
-	{
-		log_("Herd::to_river_with_links_ passed wrong type of shoal thing");
-		return;
-	}
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Herd::to_river_with_links_ passed wrong type of river thing");
-		return;
-	}
-	riv->write_(Bit::mut_(finalized_()));
-	riv->write_(Int64::mut_(int64_t(_set.size())));
-	for (const auto i : _set)
-	{
-		static_<Symbol>(sho->find_(i))->to_river_(river);
-	}
-}
-
-inline void Herd::from_river_with_links_(const Thing::Ptr river)
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Herd::from_river_with_links_ passed wrong type of thing");
-		return;
-	}
-	const bool bit = riv->read_<Bit>();
-	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
-	{
-		_set.insert(Symbol::riv_(river));
-	}
-	if (bit)
-	{
-		finalize_();
-	}
-}
-
-inline void Herd::replace_links_(const Thing::Ptr shoal)
-{
-	std_unordered_set_ptr replacement;
-	Shoal* const sho = static_<Shoal>(shoal);
-	for (const auto i : _set)
-	{
-		replacement.insert(sho->find_(i));
-	}
-	_set.swap(replacement);
-}
-
-inline void Lake::to_river_(const Thing::Ptr river) const
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Lake::to_river_ passed wrong type of thing");
-		return;
-	}
-	riv->write_(Bit::mut_(finalized_()));
-	riv->write_(Int64::mut_(int64_t(get_().length())));
-	riv->write_(get_());
-}
-
-inline void Lake::from_river_(const Thing::Ptr river)
-{
-	River* const riv = dynamic_<River>(river);
-	if (!riv)
-	{
-		log_("Lake::from_river_ passed wrong type of thing");
-		return;
-	}
-	const bool bit = riv->read_<Bit>();
-	const int64_t int64 = riv->read_<Int64>();
-	set_(static_<Lake>(riv->read_(int64))->get_());
-	if (bit)
-	{
-		finalize_();
-	}
-}
-
+//----------------------------------------------------------------------
 class Fence : public Mutable
+//----------------------------------------------------------------------
 {
 public:
 	inline Fence(const Ptr ptr)
@@ -5354,111 +4737,9 @@ private:
 	Ptr _ptr;
 };
 
-inline const Thing::Ptr Thing::cats_() const
-{
-	static const Ptr CATS = []()
-	{
-		const Ptr cats = Herd::mut_();
-		cats->finalize_();
-		return cats;
-	}();
-	return CATS;
-}
-
-inline const Thing::Ptr Symbol::cats_() const
-{
-	static const Ptr CATS = []()
-	{
-		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Final");
-		herd->insert_("strange::Symbol");
-		herd->insert_("strange::Thing");
-		herd->finalize_();
-		return cats;
-	}();
-	return CATS;
-}
-
-inline const Thing::Ptr Shoal::cats_() const
-{
-	static const Ptr CATS = []()
-	{
-		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
-		herd->insert_("strange::Iterable");
-		herd->insert_("strange::Shoal");
-		herd->insert_("strange::Thing");
-		herd->finalize_();
-		return cats;
-	}();
-	return CATS;
-}
-
-inline const Thing::Ptr Shoal::It::cats_() const
-{
-	static const Ptr CATS = []()
-	{
-		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
-		herd->insert_("strange::Iterator");
-		herd->insert_("strange::Thing");
-		herd->finalize_();
-		return cats;
-	}();
-	return CATS;
-}
-
-template <typename C>
-inline const Thing::Ptr Iterator<C>::cats_() const
-{
-	static const Ptr CATS = []()
-	{
-		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
-		herd->insert_("strange::Iterator");
-		herd->insert_("strange::Thing");
-		herd->finalize_();
-		return cats;
-	}();
-	return CATS;
-}
-
-inline const Thing::Ptr Flock::cats_() const
-{
-	static const Ptr CATS = []()
-	{
-		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
-		herd->insert_("strange::Iterable");
-		herd->insert_("strange::Flock");
-		herd->insert_("strange::Thing");
-		herd->finalize_();
-		return cats;
-	}();
-	return CATS;
-}
-
-inline const Thing::Ptr Flock::It::cats_() const
-{
-	static const Ptr CATS = []()
-	{
-		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
-		herd->insert_("strange::Iterator");
-		herd->insert_("strange::Thing");
-		herd->finalize_();
-		return cats;
-	}();
-	return CATS;
-}
-
+//----------------------------------------------------------------------
 class Creature : public Mutable, public Me<Creature>, public Serializable
+//----------------------------------------------------------------------
 {
 public:
 	inline Creature()
@@ -5718,11 +4999,15 @@ private:
 	const Ptr _private;
 };
 
+//----------------------------------------------------------------------
 class Command : public Symbol
+//----------------------------------------------------------------------
 {
 };
 
+//----------------------------------------------------------------------
 class Expression : public Mutable
+//----------------------------------------------------------------------
 {
 public:
 	inline Expression();
@@ -5800,7 +5085,9 @@ private:
 	};
 };
 
+//----------------------------------------------------------------------
 class Function : public Thing, public Me<Function>
+//----------------------------------------------------------------------
 {
 public:
 	Function(const Ptr expression)
@@ -5852,7 +5139,9 @@ private:
 	const Ptr _static;
 };
 
+//----------------------------------------------------------------------
 class Statement : public Flock
+//----------------------------------------------------------------------
 {
 public:
 	virtual inline const Ptr exec_(const Ptr statement, const Ptr local)
@@ -5872,7 +5161,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Block : public Statement
+//----------------------------------------------------------------------
 {
 public:
 	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
@@ -5891,7 +5182,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class If : public Statement
+//----------------------------------------------------------------------
 {
 public:
 	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
@@ -5934,7 +5227,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Question : public Statement
+//----------------------------------------------------------------------
 {
 public:
 	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
@@ -5954,7 +5249,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class While : public Statement
+//----------------------------------------------------------------------
 {
 public:
 	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
@@ -5985,7 +5282,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class Do : public Statement
+//----------------------------------------------------------------------
 {
 public:
 	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
@@ -6016,7 +5315,9 @@ public:
 	}
 };
 
+//----------------------------------------------------------------------
 class For : public Statement
+//----------------------------------------------------------------------
 {
 public:
 	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
@@ -6047,29 +5348,173 @@ public:
 	}
 };
 
-inline Expression::Expression()
-	: Mutable{}
-	, _ptr{ Statement::mut_() }
+//======================================================================
+// class Thing
+//======================================================================
+template <typename F>
+inline const bool Thing::is_(F&& symbol) const
 {
+	const Symbol* const sym = dynamic_cast<const Symbol*>(this);
+	return (sym && sym->symbol_() == std::forward<F>(symbol));
 }
 
-inline Thing::Ptr Expression::eval_(const Thing::Ptr ptr, const Thing::Ptr local)
+inline const bool Thing::is_(const Thing::Ptr symbol) const
 {
-	Statement* const statement = dynamic_<Statement>(ptr);
-	if (statement)
-	{
-		return statement->exec_(ptr, local);
-	}
-	return ptr;
+	Symbol* const sym = dynamic_<Symbol>(symbol);
+	return (sym && is_(sym->symbol_()));
 }
 
-inline const Thing::Ptr Expression::It::next_()
+template <typename F>
+inline const Thing::Ptr Thing::sym_(F&& symbol)
 {
-	if (_pos >= static_<Statement>(_statement)->size_())
+	return Symbol::fin_(std::forward<F>(symbol));
+}
+
+inline const Thing::Ptr Thing::nothing_()
+{
+	static const Ptr NOTHING = sym_("0");
+	return NOTHING;
+}
+
+inline const Thing::Ptr Thing::one_()
+{
+	static const Ptr ONE = sym_("1");
+	return ONE;
+}
+
+inline const Thing::Ptr Thing::stop_()
+{
+	static const Ptr STOP = sym_(".");
+	return STOP;
+}
+
+inline const Thing::Ptr Thing::call(const Thing::Ptr it)
+{
+	const Ptr type = it->next_();
+	const Ptr function = it->next_();
+	const Ptr stat = static_<Shoal>(stats_())->find_(type);
+	if (stat->is_("0"))
 	{
-		return stop_();
+		log_("call passed unknown type:");
+		log_(type);
+		log_(function);
+		return stat;
 	}
-	return eval_(static_<Statement>(_statement)->at_(_pos++), _local);
+	const Ptr fun = static_<Shoal>(stat->invoke(nothing_()))->find_(function);
+	if (fun->is_("0"))
+	{
+		log_("call passed unknown function:");
+		log_(type);
+		log_(function);
+		return fun;
+	}
+	return fun->invoke(it);
+}
+
+inline const Thing::Ptr Thing::pub_() const
+{
+	static const Ptr PUB = []()
+	{
+		const Ptr pub = Shoal::mut_();
+		Shoal* const shoal = static_<Shoal>(pub);
+		shoal->update_("invoke", Member<Thing>::fin_(&Thing::invoke));
+		shoal->update_("next", Member<Thing>::fin_(&Thing::next));
+		shoal->update_("is", Const<Thing>::fin_(&Thing::is));
+		shoal->update_("hash", Const<Thing>::fin_(&Thing::hash));
+		shoal->update_("same", Const<Thing>::fin_(&Thing::same));
+		shoal->update_("copy", Const<Thing>::fin_(&Thing::copy));
+		shoal->update_("clone", Const<Thing>::fin_(&Thing::clone));
+		shoal->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
+		shoal->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
+		shoal->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
+		shoal->update_("call", Static::fin_(&Thing::call));
+		shoal->update_("stats", Static::fin_(&Thing::stats));
+		shoal->update_("stat", Static::fin_(&Thing::stat));
+		shoal->update_("boolean", Static::fin_(&Thing::boolean));
+		shoal->update_(nothing_(), Static::fin_(&Thing::nothing));
+		shoal->update_(one_(), Static::fin_(&Thing::one));
+		shoal->update_(stop_(), Static::fin_(&Thing::stop));
+		shoal->update_("log", Static::fin_(&Thing::log));
+		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
+		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
+		shoal->update_("visit", Member<Thing>::fin_(&Thing::visit));
+		shoal->update_("pub", Const<Thing>::fin_(&Thing::pub));
+		shoal->finalize_();
+		return pub;
+	}();
+	return PUB;
+}
+
+inline const Thing::Ptr Thing::stat_()
+{
+	static const Ptr STAT = []()
+	{
+		const Ptr stat = Shoal::mut_();
+		Shoal* const shoal = static_<Shoal>(stat);
+		shoal->update_("stats", Static::fin_(&Thing::stats));
+		shoal->update_("stat", Static::fin_(&Thing::stat));
+		shoal->update_("boolean", Static::fin_(&Thing::boolean));
+		shoal->update_(nothing_(), Static::fin_(&Thing::nothing));
+		shoal->update_(one_(), Static::fin_(&Thing::one));
+		shoal->update_(stop_(), Static::fin_(&Thing::stop));
+		shoal->update_("log", Static::fin_(&Thing::log));
+		shoal->finalize_();
+		return stat;
+	}();
+	return STAT;
+}
+
+inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr it)
+{
+	const Ptr member = static_<Shoal>(pub_())->find_(it->next_());
+	if (member->is_("0"))
+	{
+		return member;
+	}
+	return operate_(thing, member, it);
+}
+
+inline void Thing::log_(const Thing::Ptr ptr)
+{
+	const Lake* const lake = dynamic_<Lake>(ptr->invoke_("to_lake"));
+	if (lake)
+	{
+		log_(lake->get_());
+	}
+}
+
+template <typename... Args>
+inline const Thing::Ptr Thing::call_(Args&&... args)
+{
+	std::vector<Thing::Ptr> v;
+	v.reserve(sizeof...(Args));
+	Variadic::variadic_(v, std::forward<Args>(args)...);
+	return call(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
+}
+
+template <typename... Args>
+inline const Thing::Ptr Thing::invoke_(Args&&... args)
+{
+	std::vector<Thing::Ptr> v;
+	v.reserve(sizeof...(Args));
+	Variadic::variadic_(v, std::forward<Args>(args)...);
+	return invoke(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
+}
+
+inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
+{
+	return Int64::mut_(int64_t(hash_()));
+}
+
+inline const Thing::Ptr Thing::cats_() const
+{
+	static const Ptr CATS = []()
+	{
+		const Ptr cats = Herd::mut_();
+		cats->finalize_();
+		return cats;
+	}();
+	return CATS;
 }
 
 inline const Thing::Ptr Thing::stats_()
@@ -6100,6 +5545,841 @@ inline const Thing::Ptr Thing::stats_()
 	}();
 	return STATS;
 }
+
+//======================================================================
+// class Iterable
+//======================================================================
+
+//======================================================================
+// class Variadic
+//======================================================================
+
+//======================================================================
+// class Me
+//======================================================================
+
+//======================================================================
+// class Serializable
+//======================================================================
+
+inline void Serializable::serialize_(const Thing::Ptr thing, const Thing::Ptr river)
+{
+	Thing::static_<Shoal>(Shoal::mut_())->gather_to_river_(thing, river);
+}
+
+inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr river)
+{
+	return Thing::static_<Shoal>(Shoal::mut_())->gather_from_river_(river);
+}
+
+inline void Serializable::to_river_(const Thing::Ptr river) const
+{
+	const Thing* const thing = dynamic_cast<const Thing*>(this);
+	if (thing)
+	{
+		Lake* const lake = Thing::dynamic_<Lake>(const_cast<Thing*>(thing)->invoke_("to_lake"));
+		if (lake)
+		{
+			lake->to_river_(river);
+		}
+	}
+}
+
+inline void Serializable::from_river_(const Thing::Ptr river)
+{
+	const Thing::Ptr lake = Lake::mut_();
+	Thing::static_<Lake>(lake)->from_river_(river);
+	Thing* const thing = dynamic_cast<Thing*>(this);
+	if (thing)
+	{
+		thing->invoke_("from_lake", lake);
+	}
+}
+
+inline const Thing::Ptr Serializable::to_lake_via_river_() const
+{
+	const Thing* const thing = dynamic_cast<const Thing*>(this);
+	if (thing)
+	{
+		const Thing::Ptr river = River::mut_();
+		const_cast<Thing*>(thing)->invoke_("to_river", river);
+		const Thing::Ptr lake = Lake::mut_();
+		Thing::static_<Lake>(lake)->from_river_(river);
+		return lake;
+	}
+	return Thing::nothing_();
+}
+
+inline void Serializable::from_lake_via_river_(const Thing::Ptr lake)
+{
+	Lake* const lak = Thing::dynamic_<Lake>(lake);
+	if (!lak)
+	{
+		Thing::log_("Serializable::from_lake_via_river_ passed wrong type of thing");
+		return;
+	}
+	const Thing::Ptr river = River::mut_();
+	lak->to_river_(river);
+	Thing* const thing = dynamic_cast<Thing*>(this);
+	if (thing)
+	{
+		thing->invoke_("from_river", river);
+	}
+}
+
+//======================================================================
+// class Symbol
+//======================================================================
+
+inline const Thing::Ptr Symbol::pub_() const
+{
+	static const Ptr PUB = [this]()
+	{
+		const Ptr pub = Thing::pub_()->copy_();
+		Shoal* const shoal = static_<Shoal>(pub);
+		shoal->update_("to_lake", Const<Symbol>::fin_(&Symbol::to_lake));
+		shoal->update_("to_river", Const<Symbol>::fin_(&Symbol::to_river));
+		shoal->update_("stat", Static::fin_(&Symbol::stat));
+		shoal->update_("lak", Static::fin_(&Symbol::lak));
+		shoal->update_("riv", Static::fin_(&Symbol::riv));
+		shoal->update_("rwl", Static::fin_(&Symbol::rwl));
+		shoal->finalize_();
+		return pub;
+	}();
+	return PUB;
+}
+
+inline const Thing::Ptr Symbol::stat_()
+{
+	static const Ptr STAT = []()
+	{
+		const Ptr stat = Shoal::mut_();
+		Shoal* const shoal = static_<Shoal>(stat);
+		shoal->update_("stat", Static::fin_(&Symbol::stat));
+		shoal->update_("lak", Static::fin_(&Symbol::lak));
+		shoal->update_("riv", Static::fin_(&Symbol::riv));
+		shoal->update_("rwl", Static::fin_(&Symbol::rwl));
+		shoal->finalize_();
+		return stat;
+	}();
+	return STAT;
+}
+
+inline const Thing::Ptr Symbol::lak_(const Thing::Ptr lake)
+{
+	Lake* const lak = dynamic_<Lake>(lake);
+	if (!lak)
+	{
+		log_("Symbol::lak_ passed wrong type of thing");
+		return fin_("");
+	}
+	return fin_(lak->get_());
+}
+
+inline const Thing::Ptr Symbol::riv_(const Thing::Ptr river)
+{
+	return fin_(static_<Lake>(Lake::riv_(river))->get_());
+}
+
+inline const Thing::Ptr Symbol::rwl_(const Thing::Ptr river)
+{
+	return fin_(static_<Lake>(Lake::rwl_(river))->get_());
+}
+
+inline const Thing::Ptr Symbol::to_lake_() const
+{
+	const Ptr lake = Lake::mut_(_symbol);
+	lake->finalize_();
+	return lake;
+}
+
+inline const Thing::Ptr Symbol::cats_() const
+{
+	static const Ptr CATS = []()
+	{
+		const Ptr cats = Herd::mut_();
+		Herd* const herd = static_<Herd>(cats);
+		herd->insert_("strange::Final");
+		herd->insert_("strange::Symbol");
+		herd->insert_("strange::Thing");
+		herd->finalize_();
+		return cats;
+	}();
+	return CATS;
+}
+
+//======================================================================
+// class Static
+//======================================================================
+
+//======================================================================
+// class Member
+//======================================================================
+
+//======================================================================
+// class Const
+//======================================================================
+
+//======================================================================
+// class Mutable
+//======================================================================
+
+//======================================================================
+// class Shoal
+//======================================================================
+
+inline void Shoal::to_river_(const Thing::Ptr river) const
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Shoal::to_river_ passed wrong type of thing");
+		return;
+	}
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_map.size())));
+	for (const auto& i : _map)
+	{
+		riv->push_back_(i.first);
+		riv->push_back_(i.second);
+	}
+}
+
+inline void Shoal::from_river_(const Thing::Ptr river)
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Shoal::from_river_ passed wrong type of thing");
+		return;
+	}
+	const bool bit = riv->read_<Bit>();
+	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
+	{
+		const Ptr first = riv->pop_front_();
+		const Ptr second = riv->pop_front_();
+		_map[first] = second;
+	}
+	if (bit)
+	{
+		finalize_();
+	}
+}
+
+inline void Shoal::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
+{
+	Shoal* const sho = dynamic_<Shoal>(shoal);
+	if (!sho)
+	{
+		log_("Shoal::to_river_with_links_ passed wrong type of shoal thing");
+		return;
+	}
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Shoal::to_river_with_links_ passed wrong type of river thing");
+		return;
+	}
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_map.size())));
+	for (const auto& i : _map)
+	{
+		static_<Symbol>(sho->find_(i.first))->to_river_(river);
+		static_<Symbol>(sho->find_(i.second))->to_river_(river);
+	}
+}
+
+inline void Shoal::from_river_with_links_(const Thing::Ptr river)
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Shoal::from_river_with_links_ passed wrong type of thing");
+		return;
+	}
+	const bool bit = riv->read_<Bit>();
+	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
+	{
+		const Ptr first = Symbol::riv_(river);
+		const Ptr second = Symbol::riv_(river);
+		_map[first] = second;
+	}
+	if (bit)
+	{
+		finalize_();
+	}
+}
+
+inline void Shoal::replace_links_(const Thing::Ptr shoal)
+{
+	std_unordered_map_ptr_ptr replacement;
+	Shoal* const sho = static_<Shoal>(shoal);
+	for (const auto& i : _map)
+	{
+		replacement.emplace(sho->find_(i.first), sho->find_(i.second));
+	}
+	_map.swap(replacement);
+}
+
+inline void Shoal::gather_to_river_(const Thing::Ptr thing, const Thing::Ptr river)
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Shoal::gather_to_river_ passed wrong type of river thing");
+		return;
+	}
+	gather_(thing);
+	riv->write_(Int64::mut_(int64_t(_map.size())));
+	for (const auto& i : _map)
+	{
+		if (riv->push_back_with_links_(i.first, Me<Shoal>::me_()))
+		{
+			static_<Symbol>(i.second)->to_river_(river);
+		}
+	}
+}
+
+inline const Thing::Ptr Shoal::gather_from_river_(const Thing::Ptr river)
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Shoal::gather_from_river_ passed wrong type of river thing");
+		return nothing_();
+	}
+	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
+	{
+		const Ptr thing = riv->pop_front_with_links_();
+		const Ptr symbol = Symbol::riv_(river);
+		_map.emplace(symbol, thing);
+	}
+	for (const auto& i : _map)
+	{
+		i.second->invoke_("replace_links", Me<Shoal>::me_());
+	}
+	return find_(nothing_());
+}
+
+inline const Thing::Ptr Shoal::cats_() const
+{
+	static const Ptr CATS = []()
+	{
+		const Ptr cats = Herd::mut_();
+		Herd* const herd = static_<Herd>(cats);
+		herd->insert_("strange::Mutable");
+		herd->insert_("strange::Iterable");
+		herd->insert_("strange::Shoal");
+		herd->insert_("strange::Thing");
+		herd->finalize_();
+		return cats;
+	}();
+	return CATS;
+}
+
+inline const Thing::Ptr Shoal::It::cats_() const
+{
+	static const Ptr CATS = []()
+	{
+		const Ptr cats = Herd::mut_();
+		Herd* const herd = static_<Herd>(cats);
+		herd->insert_("strange::Mutable");
+		herd->insert_("strange::Iterator");
+		herd->insert_("strange::Thing");
+		herd->finalize_();
+		return cats;
+	}();
+	return CATS;
+}
+
+//======================================================================
+// class Decorator
+//======================================================================
+
+//======================================================================
+// class Iterator
+//======================================================================
+
+template <typename C>
+inline const Thing::Ptr Iterator<C>::cats_() const
+{
+	static const Ptr CATS = []()
+	{
+		const Ptr cats = Herd::mut_();
+		Herd* const herd = static_<Herd>(cats);
+		herd->insert_("strange::Mutable");
+		herd->insert_("strange::Iterator");
+		herd->insert_("strange::Thing");
+		herd->finalize_();
+		return cats;
+	}();
+	return CATS;
+}
+
+//======================================================================
+// class Flock
+//======================================================================
+
+inline const Thing::Ptr Flock::size(const Thing::Ptr ignore) const
+{
+	return Int64::mut_(size_());
+}
+
+inline const Thing::Ptr Flock::at_(const Thing::Ptr pos) const
+{
+	Number* const number = dynamic_<Number>(pos);
+	if (number)
+	{
+		const int64_t p = number->to_int64_();
+		if (p >= 0 && p < size_())
+		{
+			return at_(p);
+		}
+	}
+	return nothing_();
+}
+
+inline const Thing::Ptr Flock::Concurrent::size(const Thing::Ptr ignore) const
+{
+	return Int64::mut_(size_());
+}
+
+inline const Thing::Ptr Flock::Concurrent::at_(const Thing::Ptr pos) const
+{
+	Number* const number = dynamic_<Number>(pos);
+	if (number)
+	{
+		const int64_t p = number->to_int64_();
+		std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+		if (p >= 0 && p < static_<Flock>(_flock)->size_())
+		{
+			return static_<Flock>(_flock)->at_(p);
+		}
+	}
+	return nothing_();
+}
+
+inline void Flock::to_river_(const Thing::Ptr river) const
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Flock::to_river_ passed wrong type of thing");
+		return;
+	}
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_vector.size())));
+	for (const auto i : _vector)
+	{
+		riv->push_back_(i);
+	}
+}
+
+inline void Flock::from_river_(const Thing::Ptr river)
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Flock::from_river_ passed wrong type of thing");
+		return;
+	}
+	const bool bit = riv->read_<Bit>();
+	const int64_t int64 = riv->read_<Int64>();
+	_vector.reserve(size_t(int64));
+	for (int64_t i = int64; i > 0; --i)
+	{
+		_vector.push_back(riv->pop_front_());
+	}
+	if (bit)
+	{
+		finalize_();
+	}
+}
+
+inline void Flock::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
+{
+	Shoal* const sho = dynamic_<Shoal>(shoal);
+	if (!sho)
+	{
+		log_("Flock::to_river_with_links_ passed wrong type of shoal thing");
+		return;
+	}
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Flock::to_river_with_links_ passed wrong type of river thing");
+		return;
+	}
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_vector.size())));
+	for (const auto i : _vector)
+	{
+		static_<Symbol>(sho->find_(i))->to_river_(river);
+	}
+}
+
+inline void Flock::from_river_with_links_(const Thing::Ptr river)
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Flock::from_river_with_links_ passed wrong type of thing");
+		return;
+	}
+	const bool bit = riv->read_<Bit>();
+	const int64_t int64 = riv->read_<Int64>();
+	_vector.reserve(size_t(int64));
+	for (int64_t i = int64; i > 0; --i)
+	{
+		_vector.push_back(Symbol::riv_(river));
+	}
+	if (bit)
+	{
+		finalize_();
+	}
+}
+
+inline void Flock::replace_links_(const Thing::Ptr shoal)
+{
+	Shoal* const sho = static_<Shoal>(shoal);
+	for (std_vector_ptr::iterator i = _vector.begin(); i != _vector.end(); ++i)
+	{
+		*i = sho->find_(*i);
+	}
+}
+
+inline const Thing::Ptr Flock::cats_() const
+{
+	static const Ptr CATS = []()
+	{
+		const Ptr cats = Herd::mut_();
+		Herd* const herd = static_<Herd>(cats);
+		herd->insert_("strange::Mutable");
+		herd->insert_("strange::Iterable");
+		herd->insert_("strange::Flock");
+		herd->insert_("strange::Thing");
+		herd->finalize_();
+		return cats;
+	}();
+	return CATS;
+}
+
+inline const Thing::Ptr Flock::It::cats_() const
+{
+	static const Ptr CATS = []()
+	{
+		const Ptr cats = Herd::mut_();
+		Herd* const herd = static_<Herd>(cats);
+		herd->insert_("strange::Mutable");
+		herd->insert_("strange::Iterator");
+		herd->insert_("strange::Thing");
+		herd->finalize_();
+		return cats;
+	}();
+	return CATS;
+}
+
+//======================================================================
+// class Herd
+//======================================================================
+
+inline void Herd::to_river_(const Thing::Ptr river) const
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Herd::to_river_ passed wrong type of thing");
+		return;
+	}
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_set.size())));
+	for (const auto i : _set)
+	{
+		riv->push_back_(i);
+	}
+}
+
+inline void Herd::from_river_(const Thing::Ptr river)
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Herd::from_river_ passed wrong type of thing");
+		return;
+	}
+	const bool bit = riv->read_<Bit>();
+	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
+	{
+		_set.insert(riv->pop_front_());
+	}
+	if (bit)
+	{
+		finalize_();
+	}
+}
+
+inline void Herd::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
+{
+	Shoal* const sho = dynamic_<Shoal>(shoal);
+	if (!sho)
+	{
+		log_("Herd::to_river_with_links_ passed wrong type of shoal thing");
+		return;
+	}
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Herd::to_river_with_links_ passed wrong type of river thing");
+		return;
+	}
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(_set.size())));
+	for (const auto i : _set)
+	{
+		static_<Symbol>(sho->find_(i))->to_river_(river);
+	}
+}
+
+inline void Herd::from_river_with_links_(const Thing::Ptr river)
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Herd::from_river_with_links_ passed wrong type of thing");
+		return;
+	}
+	const bool bit = riv->read_<Bit>();
+	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
+	{
+		_set.insert(Symbol::riv_(river));
+	}
+	if (bit)
+	{
+		finalize_();
+	}
+}
+
+inline void Herd::replace_links_(const Thing::Ptr shoal)
+{
+	std_unordered_set_ptr replacement;
+	Shoal* const sho = static_<Shoal>(shoal);
+	for (const auto i : _set)
+	{
+		replacement.insert(sho->find_(i));
+	}
+	_set.swap(replacement);
+}
+
+//======================================================================
+// class Data
+//======================================================================
+
+//======================================================================
+// class Lake
+//======================================================================
+
+inline void Lake::to_river_(const Thing::Ptr river) const
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Lake::to_river_ passed wrong type of thing");
+		return;
+	}
+	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Int64::mut_(int64_t(get_().length())));
+	riv->write_(get_());
+}
+
+inline void Lake::from_river_(const Thing::Ptr river)
+{
+	River* const riv = dynamic_<River>(river);
+	if (!riv)
+	{
+		log_("Lake::from_river_ passed wrong type of thing");
+		return;
+	}
+	const bool bit = riv->read_<Bit>();
+	const int64_t int64 = riv->read_<Int64>();
+	set_(static_<Lake>(riv->read_(int64))->get_());
+	if (bit)
+	{
+		finalize_();
+	}
+}
+
+//======================================================================
+// class Number
+//======================================================================
+
+inline const Thing::Ptr Number::to_int64(const Thing::Ptr ignore) const
+{
+	return Int64::mut_(to_int64_());
+}
+
+inline void Number::from_int64_(const Thing::Ptr ptr)
+{
+	Int64* const int64 = dynamic_<Int64>(ptr);
+	if (int64)
+	{
+		from_int64_(int64->get_());
+	}
+}
+
+inline const Thing::Ptr Number::to_float64(const Thing::Ptr ignore) const
+{
+	return Float64::mut_(to_float64_());
+}
+
+inline void Number::from_float64_(const Thing::Ptr ptr)
+{
+	Float64* const float64 = dynamic_<Float64>(ptr);
+	if (float64)
+	{
+		from_float64_(float64->get_());
+	}
+}
+
+inline const Thing::Ptr Number::to_imaginary64(const Thing::Ptr ignore) const
+{
+	return Float64::mut_(to_imaginary64_());
+}
+
+inline void Number::from_imaginary64_(const Thing::Ptr ptr)
+{
+	Float64* const float64 = dynamic_<Float64>(ptr);
+	if (float64)
+	{
+		from_imaginary64_(float64->get_());
+	}
+}
+
+inline const Thing::Ptr Number::to_complex64(const Thing::Ptr ignore) const
+{
+	return Complex64::mut_(to_complex64_());
+}
+
+inline void Number::from_complex64_(const Thing::Ptr ptr)
+{
+	Complex64* const complex64 = dynamic_<Complex64>(ptr);
+	if (complex64)
+	{
+		from_complex64_(complex64->get_());
+	}
+}
+
+//======================================================================
+// class Bit
+//======================================================================
+
+//======================================================================
+// class Byte
+//======================================================================
+
+//======================================================================
+// class Int16
+//======================================================================
+
+//======================================================================
+// class Int32
+//======================================================================
+
+//======================================================================
+// class Int64
+//======================================================================
+
+//======================================================================
+// class Float32
+//======================================================================
+
+//======================================================================
+// class Float64
+//======================================================================
+
+//======================================================================
+// class Complex32
+//======================================================================
+
+//======================================================================
+// class Complex64
+//======================================================================
+
+//======================================================================
+// class River
+//======================================================================
+
+//======================================================================
+// class Fence
+//======================================================================
+
+//======================================================================
+// class Creature
+//======================================================================
+
+//======================================================================
+// class Command
+//======================================================================
+
+//======================================================================
+// class Expression
+//======================================================================
+
+inline Expression::Expression()
+	: Mutable{}
+	, _ptr{ Statement::mut_() }
+{
+}
+
+inline Thing::Ptr Expression::eval_(const Thing::Ptr ptr, const Thing::Ptr local)
+{
+	Statement* const statement = dynamic_<Statement>(ptr);
+	if (statement)
+	{
+		return statement->exec_(ptr, local);
+	}
+	return ptr;
+}
+
+inline const Thing::Ptr Expression::It::next_()
+{
+	if (_pos >= static_<Statement>(_statement)->size_())
+	{
+		return stop_();
+	}
+	return eval_(static_<Statement>(_statement)->at_(_pos++), _local);
+}
+
+//======================================================================
+// class Function
+//======================================================================
+
+//======================================================================
+// class Statement
+//======================================================================
+
+//======================================================================
+// class Block
+//======================================================================
+
+//======================================================================
+// class If
+//======================================================================
+
+//======================================================================
+// class Question
+//======================================================================
+
+//======================================================================
+// class While
+//======================================================================
+
+//======================================================================
+// class Do
+//======================================================================
+
+//======================================================================
+// class For
+//======================================================================
 
 } // namespace strange
 
