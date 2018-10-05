@@ -94,13 +94,7 @@ public:
 	}
 
 	template <typename... Args>
-	static inline const Ptr call_(Args&&... args)
-	{
-		std::vector<Ptr> v;
-		v.reserve(sizeof...(Args));
-		Variadic::variadic_(v, std::forward<Args>(args)...);
-		return call(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
-	}
+	static inline const Ptr call_(Args&&... args);
 
 	static inline const Ptr call(const Ptr it);
 
@@ -268,13 +262,7 @@ public:
 
 	// public non-virtual member functions and adapters
 	template <typename... Args>
-	inline const Ptr invoke_(Args&&... args)
-	{
-		std::vector<Ptr> v;
-		v.reserve(sizeof...(Args));
-		Variadic::variadic_(v, std::forward<Args>(args)...);
-		return invoke(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
-	}
+	inline const Ptr invoke_(Args&&... args);
 
 	inline const Ptr invoke(const Ptr it)
 	{
@@ -543,13 +531,13 @@ public:
 
 	virtual inline const Ptr copy_() const override
 	{
-		return me_();
+		return Me<Symbol>::me_();
 	}
 
 	template <typename F>
 	static inline const Ptr fin_(F&& symbol)
 	{
-		const Ptr result = make_(std::forward<F>(symbol));
+		const Ptr result = Me<Symbol>::make_(std::forward<F>(symbol));
 		result->finalize_();
 		return result;
 	}
@@ -650,14 +638,14 @@ public:
 
 	static inline const Ptr fin_(const function fun)
 	{
-		const Ptr result = make_(fun);
+		const Ptr result = Me<Static>::make_(fun);
 		result->finalize_();
 		return result;
 	}
 
 	virtual inline const Ptr copy_() const override
 	{
-		return me_();
+		return Me<Static>::me_();
 	}
 
 	virtual inline const Ptr type_() const override
@@ -691,14 +679,14 @@ public:
 
 	static inline const Ptr fin_(const member fun)
 	{
-		const Ptr result = make_(fun);
+		const Ptr result = Me<Member<T>>::make_(fun);
 		result->finalize_();
 		return result;
 	}
 
 	virtual inline const Ptr copy_() const override
 	{
-		return me_();
+		return Me<Member<T>>::me_();
 	}
 
 	virtual inline const Ptr type_() const override
@@ -743,14 +731,14 @@ public:
 
 	static inline const Ptr fin_(const member fun)
 	{
-		const Ptr result = make_(fun);
+		const Ptr result = Me<Const<T>>::make_(fun);
 		result->finalize_();
 		return result;
 	}
 
 	virtual inline const Ptr copy_() const override
 	{
-		return me_();
+		return Me<Const<T>>::me_();
 	}
 
 	virtual inline const Ptr type_() const override
@@ -940,7 +928,7 @@ public:
 
 	static inline const Ptr mut_()
 	{
-		return make_();
+		return Me<Shoal>::make_();
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -1086,7 +1074,7 @@ public:
 
 	inline void gather_(const Ptr item)
 	{
-		item->invoke_("visit", me_(), "itemize", item);
+		item->invoke_("visit", Me<Shoal>::me_(), "itemize", item);
 	}
 
 	inline const Ptr gather(const Ptr it)
@@ -1146,12 +1134,12 @@ public:
 
 		static inline const Ptr mut_()
 		{
-			return make_();
+			return Me<Concurrent>::make_();
 		}
 
 		virtual inline const Ptr copy_() const override
 		{
-			return me_();
+			return Me<Concurrent>::me_();
 		}
 
 		virtual inline const Ptr type_() const override
@@ -1581,7 +1569,7 @@ public:
 
 	static inline const Ptr mut_()
 	{
-		return make_();
+		return Me<Flock>::make_();
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -1733,12 +1721,12 @@ public:
 
 		static inline const Ptr mut_()
 		{
-			return make_();
+			return Me<Concurrent>::make_();
 		}
 
 		virtual inline const Ptr copy_() const override
 		{
-			return me_();
+			return Me<Concurrent>::me_();
 		}
 
 		virtual inline const Ptr type_() const override
@@ -1987,7 +1975,7 @@ public:
 
 	static inline const Ptr mut_()
 	{
-		return make_();
+		return Me<Herd>::make_();
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -2114,7 +2102,7 @@ public:
 
 	inline void gather_(const Ptr item)
 	{
-		item->invoke_("visit", me_(), "insert", item);
+		item->invoke_("visit", Me<Herd>::me_(), "insert", item);
 	}
 
 	inline const Ptr gather(const Ptr it)
@@ -2169,12 +2157,12 @@ public:
 
 		static inline const Ptr mut_()
 		{
-			return make_();
+			return Me<Concurrent>::make_();
 		}
 
 		virtual inline const Ptr copy_() const override
 		{
-			return me_();
+			return Me<Concurrent>::me_();
 		}
 
 		virtual inline const Ptr type_() const override
@@ -2479,6 +2467,24 @@ inline void Thing::log_(const Thing::Ptr ptr)
 	{
 		log_(lake->get_());
 	}
+}
+
+template <typename... Args>
+inline const Thing::Ptr Thing::call_(Args&&... args)
+{
+	std::vector<Thing::Ptr> v;
+	v.reserve(sizeof...(Args));
+	Variadic::variadic_(v, std::forward<Args>(args)...);
+	return call(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
+}
+
+template <typename... Args>
+inline const Thing::Ptr Thing::invoke_(Args&&... args)
+{
+	std::vector<Thing::Ptr> v;
+	v.reserve(sizeof...(Args));
+	Variadic::variadic_(v, std::forward<Args>(args)...);
+	return invoke(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
 }
 
 inline void Serializable::to_river_(const Thing::Ptr river) const
@@ -4686,7 +4692,7 @@ public:
 
 	static inline const Ptr mut_(std::iostream* const stream)
 	{
-		return make_(stream);
+		return Me<River>::make_(stream);
 	}
 
 	static inline const Ptr mut_(const std::string& str = std::string(), const bool file = false)
@@ -4720,7 +4726,7 @@ public:
 
 	virtual inline const Ptr copy_() const override
 	{
-		return me_();
+		return Me<River>::me_();
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4785,7 +4791,7 @@ public:
 		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
-		ptr->invoke_("to_river", me_());
+		ptr->invoke_("to_river", Me<River>::me_());
 		return true;
 	}
 
@@ -4800,7 +4806,7 @@ public:
 		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
-		ptr->invoke_("to_river_with_links", shoal, me_());
+		ptr->invoke_("to_river_with_links", shoal, Me<River>::me_());
 		return true;
 	}
 
@@ -4827,7 +4833,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Lake>(read_(int16))->get_();
-		return call_(type, "riv", me_());
+		return call_(type, "riv", Me<River>::me_());
 	}
 
 	inline const Ptr pop_front(const Ptr ignore)
@@ -4839,7 +4845,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Lake>(read_(int16))->get_();
-		return call_(type, "rwl", me_());
+		return call_(type, "rwl", Me<River>::me_());
 	}
 
 	inline const Ptr read_(const int64_t length)
@@ -4996,7 +5002,7 @@ inline void Shoal::gather_to_river_(const Thing::Ptr thing, const Thing::Ptr riv
 	riv->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
-		if (riv->push_back_with_links_(i.first, me_()))
+		if (riv->push_back_with_links_(i.first, Me<Shoal>::me_()))
 		{
 			static_<Symbol>(i.second)->to_river_(river);
 		}
@@ -5019,7 +5025,7 @@ inline const Thing::Ptr Shoal::gather_from_river_(const Thing::Ptr river)
 	}
 	for (const auto& i : _map)
 	{
-		i.second->invoke_("replace_links", me_());
+		i.second->invoke_("replace_links", Me<Shoal>::me_());
 	}
 	return find_(nothing_());
 }
@@ -5481,7 +5487,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return me_();
+		return Me<Creature>::me_();
 	}
 
 	virtual inline const Ptr clone_() const override
@@ -5807,14 +5813,14 @@ public:
 
 	static inline const Ptr fin_(const Ptr expression)
 	{
-		const Ptr result = make_(expression);
+		const Ptr result = Me<Function>::make_(expression);
 		result->finalize_();
 		return result;
 	}
 
 	virtual inline const Ptr copy_() const override
 	{
-		return me_();
+		return Me<Function>::me_();
 	}
 
 	virtual inline const Ptr type_() const override
