@@ -4745,6 +4745,7 @@ public:
 	inline Creature()
 		: Mutable{}
 		, Me{}
+		, Serializable{}
 		, _public{ Shoal::mut_() }
 		, _private{ Shoal::mut_() }
 	{
