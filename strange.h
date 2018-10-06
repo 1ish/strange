@@ -5091,17 +5091,17 @@ class Function : public Thing, public Me<Function>
 //----------------------------------------------------------------------
 {
 public:
-	Function(const Ptr expression)
+	Function(const Ptr expression, const Ptr stat)
 		: Thing{}
 		, Me{}
 		, _expression{ expression }
-		, _static{ Shoal::Concurrent::mut_() }
+		, _static{ stat }
 	{
 	}
 
-	static inline const Ptr fin_(const Ptr expression)
+	static inline const Ptr fin_(const Ptr expression, const Ptr stat = Shoal::mut_())
 	{
-		const Ptr result = Me<Function>::make_(expression);
+		const Ptr result = Me<Function>::make_(expression, stat);
 		result->finalize_();
 		return result;
 	}
