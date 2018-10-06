@@ -47,6 +47,7 @@ namespace strange
 	class Complex64;
 	class River;
 	class Fence;
+	class Creator;
 	class Creature;
 	class Command;
 	class Expression;
@@ -4738,17 +4739,38 @@ private:
 };
 
 //----------------------------------------------------------------------
+class Creator : public Mutable
+//----------------------------------------------------------------------
+{
+};
+
+//----------------------------------------------------------------------
 class Creature : public Mutable, public Me<Creature>, public Serializable
 //----------------------------------------------------------------------
 {
 public:
-	inline Creature()
+	inline Creature(const Ptr creator, const Ptr stat)
 		: Mutable{}
 		, Me{}
 		, Serializable{}
+		, _creator{ creator }
+		, _static{ stat }
 		, _public{ Shoal::mut_() }
 		, _private{ Shoal::mut_() }
 	{
+		//TODO creator initializes creature
+	}
+
+	static inline const Ptr mut_(const Ptr creator, const Ptr stat = Shoal::mut_())
+	{
+		return Me<Creature>::make_(creator, stat);
+	}
+
+	static inline const Ptr fin_(const Ptr creator, const Ptr stat = Shoal::mut_())
+	{
+		const Ptr result = mut_(creator, stat);
+		result->finalize_();
+		return result;
 	}
 
 	virtual inline const Ptr type_() const override
@@ -4996,6 +5018,8 @@ protected:
 
 private:
 	friend class Function;
+	const Ptr _creator;
+	const Ptr _static;
 	const Ptr _public;
 	const Ptr _private;
 };
@@ -6311,6 +6335,10 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 
 //======================================================================
 // class Fence
+//======================================================================
+
+//======================================================================
+// class Creator
 //======================================================================
 
 //======================================================================
