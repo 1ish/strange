@@ -4492,6 +4492,9 @@ public:
 			shoal->update_("push_back", Member<River>::fin_(&River::push_back));
 			shoal->update_("write", Member<River>::fin_(&River::write));
 			shoal->update_("pop_front", Member<River>::fin_(&River::pop_front));
+			shoal->update_("eof", Const<River>::fin_(&River::eof));
+			shoal->update_("get", Member<River>::fin_(&River::get));
+			shoal->update_("peek", Member<River>::fin_(&River::peek));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -4609,9 +4612,39 @@ public:
 	}
 
 	template <typename T>
-	const typename T::D read_()
+	inline const typename T::D read_()
 	{
 		return static_<T>(T::lak_(read_(int64_t(sizeof(T::D)))))->get_();
+	}
+
+	inline const bool eof_() const
+	{
+		return _stream->eof();
+	}
+
+	inline const Ptr eof(const Ptr ignore) const
+	{
+		return boolean_(eof_());
+	}
+
+	inline const int get_()
+	{
+		return _stream->get();
+	}
+
+	inline const Ptr get(const Ptr ignore)
+	{
+		return Byte::fin_(get_());
+	}
+
+	inline const int peek_()
+	{
+		return _stream->peek();
+	}
+
+	inline const Ptr peek(const Ptr ignore)
+	{
+		return Byte::fin_(peek_());
 	}
 
 private:
