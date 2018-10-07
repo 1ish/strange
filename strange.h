@@ -4832,6 +4832,25 @@ public:
 		return stat_();
 	}
 
+	inline const bool eof_()
+	{
+		return !eof(nothing_())->is_("0");
+	}
+
+	inline const Ptr eof(const Ptr ignore)
+	{
+		return _river->invoke_("eof");
+	}
+
+	virtual inline const Ptr next_() override
+	{
+		if (eof_())
+		{
+			return stop_();
+		}
+		//TODO symbolize!
+	}
+
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Symbolizer");
