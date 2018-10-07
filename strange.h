@@ -4749,26 +4749,25 @@ class Creature : public Mutable, public Me<Creature>, public Serializable
 //----------------------------------------------------------------------
 {
 public:
-	inline Creature(const Ptr creator, const Ptr stat)
+	inline Creature(const Ptr creator, const Ptr stat, const Ptr pub, const Ptr priv)
 		: Mutable{}
 		, Me{}
 		, Serializable{}
 		, _creator{ creator }
 		, _static{ stat }
-		, _public{ Shoal::mut_() }
-		, _private{ Shoal::mut_() }
+		, _public{ pub }
+		, _private{ priv }
 	{
-		//TODO creator initializes creature
 	}
 
-	static inline const Ptr mut_(const Ptr creator, const Ptr stat = Shoal::mut_())
+	static inline const Ptr mut_(const Ptr creator, const Ptr stat, const Ptr pub, const Ptr priv)
 	{
-		return Me<Creature>::make_(creator, stat);
+		return Me<Creature>::make_(creator, stat, pub, priv);
 	}
 
-	static inline const Ptr fin_(const Ptr creator, const Ptr stat = Shoal::mut_())
+	static inline const Ptr fin_(const Ptr creator, const Ptr stat, const Ptr pub, const Ptr priv)
 	{
-		const Ptr result = mut_(creator, stat);
+		const Ptr result = mut_(creator, stat, pub, priv);
 		result->finalize_();
 		return result;
 	}
