@@ -47,6 +47,7 @@ namespace strange
 	class Complex64;
 	class River;
 	class Fence;
+	class Symbolizer;
 	class Creator;
 	class Creature;
 	class Command;
@@ -4772,6 +4773,91 @@ private:
 };
 
 //----------------------------------------------------------------------
+class Symbolizer : public Mutable, public Me<Symbolizer>
+//----------------------------------------------------------------------
+{
+public:
+	inline Symbolizer(const Ptr river)
+		: Mutable{}
+		, Me{}
+		, _river{ river }
+	{
+	}
+
+	static inline const Ptr mut(const Ptr it)
+	{
+		return mut_(it->next_());
+	}
+
+	static inline const Ptr mut_(const Ptr river)
+	{
+		return std::make_shared<Symbolizer>(river);
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return Me<Symbolizer>::me_();
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("stat", Static::fin_(&Symbolizer::stat));
+			shoal->update_("mut", Static::fin_(&Symbolizer::mut));
+			shoal->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Symbolizer::stat));
+			shoal->update_("mut", Static::fin_(&Symbolizer::mut));
+			shoal->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Symbolizer");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Symbolizer");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+private:
+	const Ptr _river;
+};
+
+//----------------------------------------------------------------------
 class Creator : public Mutable
 //----------------------------------------------------------------------
 {
@@ -6367,6 +6453,10 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 
 //======================================================================
 // class Fence
+//======================================================================
+
+//======================================================================
+// class Symbolizer
 //======================================================================
 
 //======================================================================
