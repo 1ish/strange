@@ -4844,11 +4844,31 @@ public:
 
 	virtual inline const Ptr next_() override
 	{
-		if (eof_())
+		while (true)
 		{
-			return stop_();
+			if (eof_())
+			{
+				break;
+			}
+			Byte* const byte1 = dynamic_<Byte>(_river->invoke_("get"));
+			if (!byte1)
+			{
+				break;
+			}
+			Byte* const byte2 = eof_() ? 0 : dynamic_<Byte>(_river->invoke_("peek"));
+			const char char1 = byte1->get_();
+			const char char2 = byte2 ? byte2->get_() : 0;
+			switch (char1)
+			{
+			// skip whitespace
+			case ' ':
+				break;
+			// single character symbol
+			default:
+				return sym_(std::string(&char1, 1));
+			}
 		}
-		//TODO symbolize!
+		return stop_();
 	}
 
 	virtual inline const Ptr type_() const override
