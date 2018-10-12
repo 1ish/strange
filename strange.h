@@ -4855,6 +4855,11 @@ public:
 	virtual inline const Ptr next_() override
 	{
 		River* const river = dynamic_<River>(_river);
+		int x = 0;
+		int y = 0;
+		bool alphanum = false;
+		bool numeric = false;
+		std::string token;
 		while (true)
 		{
 			char char1;
@@ -4885,15 +4890,80 @@ public:
 			}
 			switch (char1)
 			{
-				// skip whitespace
+			case '\n':
+				++y;
 			case ' ':
+			case '\t':
+			case '\r':
+				// skip whitespace
 				break;
-				// single character symbol
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+				if (!alphanum && !numeric)
+				{
+					numeric = true;
+				}
+			case 'a':
+			case 'b':
+			case 'c':
+			case '_':
+				if (!alphanum && !numeric)
+				{
+					alphanum = true;
+				}
+				token += char1;
+				switch (char2)
+				{
+				case 'a':
+				case 'b':
+				case 'c':
+				case '_':
+					// end if numeric
+					if (numeric)
+					{
+						return sym_(token);
+					}
+				case '0':
+				case '1':
+				case '2':
+				case '3':
+				case '4':
+				case '5':
+				case '6':
+				case '7':
+				case '8':
+				case '9':
+					// carry on reading alphanum or numeric
+					break;
+				case '.':
+					// only carry on reading if numeric
+					if (numeric)
+					{
+						break;
+					}
+				default:
+					// end of alphanum
+					return sym_(token);
+				}
+				break;
 			default:
+				// single character symbol
 				return sym_(std::string(&char1, 1));
 			}
 		}
-		return stop_();
+		if (token.empty())
+		{
+			return stop_();
+		}
+		return sym_(token);
 	}
 
 	virtual inline const Ptr type_() const override
