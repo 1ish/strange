@@ -4834,36 +4834,61 @@ public:
 
 	inline const bool eof_()
 	{
-		return !eof(nothing_())->is_("0");
+		River* const river = dynamic_<River>(_river);
+		if (river)
+		{
+			return river->eof_();
+		}
+		return !_river->invoke_("eof")->is_("0");
 	}
 
 	inline const Ptr eof(const Ptr ignore)
 	{
+		River* const river = dynamic_<River>(_river);
+		if (river)
+		{
+			return river->eof(ignore);
+		}
 		return _river->invoke_("eof");
 	}
 
 	virtual inline const Ptr next_() override
 	{
+		River* const river = dynamic_<River>(_river);
 		while (true)
 		{
-			if (eof_())
+			char char1;
+			char char2;
+			if (river)
 			{
-				break;
+				if (river->eof_())
+				{
+					break;
+				}
+				char1 = river->get_();
+				char2 = river->eof_() ? 0 : river->peek_();
 			}
-			Byte* const byte1 = dynamic_<Byte>(_river->invoke_("get"));
-			if (!byte1)
+			else
 			{
-				break;
+				if (eof_())
+				{
+					break;
+				}
+				Byte* const byte1 = dynamic_<Byte>(_river->invoke_("get"));
+				if (!byte1)
+				{
+					break;
+				}
+				Byte* const byte2 = eof_() ? 0 : dynamic_<Byte>(_river->invoke_("peek"));
+				char1 = byte1->get_();
+				char2 = byte2 ? byte2->get_() : 0;
 			}
-			Byte* const byte2 = eof_() ? 0 : dynamic_<Byte>(_river->invoke_("peek"));
-			const char char1 = byte1->get_();
-			const char char2 = byte2 ? byte2->get_() : 0;
 			switch (char1)
 			{
-			// skip whitespace
+				// skip whitespace
 			case ' ':
 				break;
-			// single character symbol
+				// single character symbol
 			default:
 				return sym_(std::string(&char1, 1));
 			}
