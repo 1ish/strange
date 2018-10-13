@@ -4951,7 +4951,7 @@ public:
 				}
 				else
 				{
-					return operator_(token + char1);
+					return punctuation_(token + char1);
 				}
 			}
 			else if (singlequote && char1 == '\'')
@@ -5008,7 +5008,7 @@ public:
 				{
 					break;
 				}
-				return operator_(token);
+				return punctuation_(token);
 			case '&':
 				token = char1;
 				if (char2 == '&')
@@ -5016,7 +5016,7 @@ public:
 					second = true;
 					break;
 				}
-				return operator_(token);
+				return punctuation_(token);
 			case '|':
 				token = char1;
 				if (char2 == '|')
@@ -5024,7 +5024,7 @@ public:
 					second = true;
 					break;
 				}
-				return operator_(token);
+				return punctuation_(token);
 			case '%':
 				token = char1;
 				if (char2 == '%' || char2 == '!')
@@ -5032,7 +5032,7 @@ public:
 					second = true;
 					break;
 				}
-				return operator_(token);
+				return punctuation_(token);
 			case '?':
 				token = char1;
 				if (char2 == '?' || char2 == '|' || char2 == '!')
@@ -5040,7 +5040,7 @@ public:
 					second = true;
 					break;
 				}
-				return operator_(token);
+				return punctuation_(token);
 			case '@':
 				token = char1;
 				if (char2 == '@')
@@ -5048,7 +5048,7 @@ public:
 					second = true;
 					break;
 				}
-				return operator_(token);
+				return punctuation_(token);
 			case '#':
 				token = char1;
 				if (char2 == '#')
@@ -5056,7 +5056,7 @@ public:
 					second = true;
 					break;
 				}
-				return operator_(token);
+				return punctuation_(token);
 			case ':':
 				token = char1;
 				if (char2 == ':')
@@ -5064,7 +5064,7 @@ public:
 					second = true;
 					break;
 				}
-				return operator_(token);
+				return punctuation_(token);
 			case '/':
 				token = char1;
 				if (char2 == '*')
@@ -5077,7 +5077,7 @@ public:
 					commentline = true;
 					break;
 				}
-				return operator_(token);
+				return punctuation_(token);
 			default:
 			{
 				const bool alpha1 = alpha_(char1);
@@ -5116,7 +5116,11 @@ public:
 						(!exp2 || (exp2 && exponent)) &&
 						(!neg2 || (neg2 && !exp1)))
 					{
-						return number_(token);
+						if (point)
+						{
+							return float_(token);
+						}
+						return integer_(token);
 					}
 				}
 				else if (alphanumeric)
@@ -5129,8 +5133,8 @@ public:
 				}
 				else
 				{
-					// single character operator
-					return operator_(std::string(&char1, 1));
+					// single character punctuation
+					return punctuation_(std::string(&char1, 1));
 				}
 			}
 			}
@@ -5140,7 +5144,7 @@ public:
 		{
 			return stop_();
 		}
-		return invalid_(token);
+		return error_(token);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -5179,32 +5183,75 @@ private:
 
 	static inline const Ptr symbol_(const std::string& s)
 	{
-		return sym_(s);
+		const Ptr flock = Flock::mut_();
+		Flock* const flk = static_<Flock>(flock);
+		flk->push_back_(Byte::fin_('S'));
+		flk->push_back_(sym_(s));
+		flk->push_back_(sym_(s.substr(1, s.length() - 2)));
+		return flock;
 	}
 
 	static inline const Ptr lake_(const std::string& s)
 	{
-		return sym_(s);
+		const Ptr flock = Flock::mut_();
+		Flock* const flk = static_<Flock>(flock);
+		flk->push_back_(Byte::fin_('L'));
+		flk->push_back_(sym_(s));
+		flk->push_back_(Lake::fin_(s.substr(1, s.length() - 2)));
+		return flock;
 	}
 
 	static inline const Ptr name_(const std::string& s)
 	{
-		return sym_(s);
+		const Ptr flock = Flock::mut_();
+		Flock* const flk = static_<Flock>(flock);
+		flk->push_back_(Byte::fin_('N'));
+		flk->push_back_(sym_(s));
+		return flock;
 	}
 
-	static inline const Ptr number_(const std::string& s)
+	static inline const Ptr integer_(const std::string& s)
 	{
-		return sym_(s);
+		const Ptr flock = Flock::mut_();
+		Flock* const flk = static_<Flock>(flock);
+		flk->push_back_(Byte::fin_('I'));
+		const Ptr symbol = sym_(s);
+		flk->push_back_(symbol);
+		const Ptr int64 = Int64::mut_();
+		static_<Int64>(int64)->from_symbol_(symbol);
+		flk->push_back_(int64);
+		return flock;
 	}
 
-	static inline const Ptr operator_(const std::string& s)
+	static inline const Ptr float_(const std::string& s)
 	{
-		return sym_(s);
+		const Ptr flock = Flock::mut_();
+		Flock* const flk = static_<Flock>(flock);
+		flk->push_back_(Byte::fin_('F'));
+		const Ptr symbol = sym_(s);
+		flk->push_back_(symbol);
+		const Ptr float64 = Float64::mut_();
+		static_<Float64>(float64)->from_symbol_(symbol);
+		flk->push_back_(float64);
+		return flock;
 	}
 
-	static inline const Ptr invalid_(const std::string& s)
+	static inline const Ptr punctuation_(const std::string& s)
 	{
-		return sym_(s);
+		const Ptr flock = Flock::mut_();
+		Flock* const flk = static_<Flock>(flock);
+		flk->push_back_(Byte::fin_('P'));
+		flk->push_back_(sym_(s));
+		return flock;
+	}
+
+	static inline const Ptr error_(const std::string& s)
+	{
+		const Ptr flock = Flock::mut_();
+		Flock* const flk = static_<Flock>(flock);
+		flk->push_back_(Byte::fin_('E'));
+		flk->push_back_(sym_(s));
+		return flock;
 	}
 };
 
