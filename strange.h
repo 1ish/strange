@@ -4774,7 +4774,7 @@ private:
 
 //----------------------------------------------------------------------
 class Symbolizer : public Mutable, public Me<Symbolizer>
-	//----------------------------------------------------------------------
+//----------------------------------------------------------------------
 {
 public:
 	inline Symbolizer(const Ptr river)
@@ -4861,6 +4861,9 @@ public:
 		bool numeric = false;
 		bool point = false;
 		bool second = false;
+		bool singlequote = false;
+		bool doublequote = false;
+		bool escape = false;
 		std::string token;
 		while (true)
 		{
@@ -4873,10 +4876,6 @@ public:
 					break;
 				}
 				char1 = river->get_();
-				if (second)
-				{
-					return sym_(token + char1);
-				}
 				char2 = river->eof_() ? 0 : river->peek_();
 			}
 			else
@@ -4891,15 +4890,56 @@ public:
 					break;
 				}
 				char1 = byte1->get_();
-				if (second)
-				{
-					return sym_(token + char1);
-				}
 				Byte* const byte2 = eof_() ? 0 : dynamic_<Byte>(_river->invoke_("peek"));
 				char2 = byte2 ? byte2->get_() : 0;
 			}
 
-			switch (char1)
+			if (escape)
+			{
+				switch (char1)
+				{
+				case '\a':
+					token += '\a';
+					break;
+				case '\b':
+					token += '\b';
+					break;
+				case '\f':
+					token += '\f';
+					break;
+				case '\n':
+					token += '\n';
+					break;
+				case '\r':
+					token += '\r';
+					break;
+				case '\t':
+					token += '\t';
+					break;
+				case '\v':
+					token += '\v';
+					break;
+				default:
+					token += char1;
+				}
+				escape = false;
+			}
+			else if (second || (singlequote && char1 == '\'') || (doublequote && char1 == '\"'))
+			{
+				return sym_(token + char1);
+			}
+			else if (singlequote || doublequote)
+			{
+				if (char1 == '\\')
+				{
+					escape = true;
+				}
+				else
+				{
+					token += char1;
+				}
+			}
+			else switch (char1)
 			{
 			case '\n':
 				x = 0;
@@ -4908,6 +4948,14 @@ public:
 			case '\t':
 			case '\r':
 				// skip whitespace
+				break;
+			case '\'':
+				token = char1;
+				singlequote = true;
+				break;
+			case '\"':
+				token = char1;
+				doublequote = true;
 				break;
 			case '!':
 				if (char2 == '&' || char2 == '|')
@@ -4992,26 +5040,24 @@ public:
 						alphanumeric = true;
 					}
 				}
-				if (numeric || alphanumeric)
+				if (numeric)
 				{
 					token += char1;
-					if (numeric)
+					if (char1 == '.')
 					{
-						if (char1 == '.')
-						{
-							point = true;
-						}
-						if (!num2 && (char2 != '.' || (point && char2 == '.')))
-						{
-							return sym_(token);
-						}
+						point = true;
 					}
-					else // alphanumeric
+					if (!num2 && (char2 != '.' || (point && char2 == '.')))
 					{
-						if (!alpha2 && !num2)
-						{
-							return sym_(token);
-						}
+						return sym_(token);
+					}
+				}
+				else if (alphanumeric)
+				{
+					token += char1;
+					if (!alpha2 && !num2)
+					{
+						return sym_(token);
 					}
 				}
 				else
