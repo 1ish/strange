@@ -4774,7 +4774,7 @@ private:
 
 //----------------------------------------------------------------------
 class Symbolizer : public Mutable, public Me<Symbolizer>
-//----------------------------------------------------------------------
+	//----------------------------------------------------------------------
 {
 public:
 	inline Symbolizer(const Ptr river)
@@ -4857,8 +4857,10 @@ public:
 		River* const river = dynamic_<River>(_river);
 		int x = 0;
 		int y = 0;
-		bool alphanum = false;
+		bool alphanumeric = false;
 		bool numeric = false;
+		bool point = false;
+		bool second = false;
 		std::string token;
 		while (true)
 		{
@@ -4871,6 +4873,10 @@ public:
 					break;
 				}
 				char1 = river->get_();
+				if (second)
+				{
+					return sym_(token + char1);
+				}
 				char2 = river->eof_() ? 0 : river->peek_();
 			}
 			else
@@ -4884,80 +4890,138 @@ public:
 				{
 					break;
 				}
-				Byte* const byte2 = eof_() ? 0 : dynamic_<Byte>(_river->invoke_("peek"));
 				char1 = byte1->get_();
+				if (second)
+				{
+					return sym_(token + char1);
+				}
+				Byte* const byte2 = eof_() ? 0 : dynamic_<Byte>(_river->invoke_("peek"));
 				char2 = byte2 ? byte2->get_() : 0;
 			}
+
 			switch (char1)
 			{
 			case '\n':
+				x = 0;
 				++y;
 			case ' ':
 			case '\t':
 			case '\r':
 				// skip whitespace
 				break;
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
-				if (!alphanum && !numeric)
+			case '!':
+				if (char2 == '&' || char2 == '|')
 				{
-					numeric = true;
+					second = true;
 				}
-			case 'a':
-			case 'b':
-			case 'c':
-			case '_':
-				if (!alphanum && !numeric)
+			case '=':
+			case '<':
+			case '>':
+				if (char2 == '=')
 				{
-					alphanum = true;
+					second = true;
 				}
-				token += char1;
-				switch (char2)
+				token = char1;
+				if (second)
 				{
-				case 'a':
-				case 'b':
-				case 'c':
-				case '_':
-					// end if numeric
-					if (numeric)
-					{
-						return sym_(token);
-					}
-				case '0':
-				case '1':
-				case '2':
-				case '3':
-				case '4':
-				case '5':
-				case '6':
-				case '7':
-				case '8':
-				case '9':
-					// carry on reading alphanum or numeric
 					break;
-				case '.':
-					// only carry on reading if numeric
+				}
+				return sym_(token);
+			case '&':
+				token = char1;
+				if (char2 == '&')
+				{
+					second = true;
+					break;
+				}
+				return sym_(token);
+			case '|':
+				token = char1;
+				if (char2 == '|')
+				{
+					second = true;
+					break;
+				}
+				return sym_(token);
+			case '%':
+				token = char1;
+				if (char2 == '%' || char2 == '!')
+				{
+					second = true;
+					break;
+				}
+				return sym_(token);
+			case '?':
+				token = char1;
+				if (char2 == '?' || char2 == '|' || char2 == '!')
+				{
+					second = true;
+					break;
+				}
+				return sym_(token);
+			case '@':
+				token = char1;
+				if (char2 == '@')
+				{
+					second = true;
+					break;
+				}
+				return sym_(token);
+			case '#':
+				token = char1;
+				if (char2 == '#')
+				{
+					second = true;
+					break;
+				}
+				return sym_(token);
+			default:
+			{
+				const bool alpha1 = _alpha(char1);
+				const bool num1 = _numeric(char1);
+				const bool alpha2 = _alpha(char2);
+				const bool num2 = _numeric(char2);
+				if (!alphanumeric && !numeric)
+				{
+					if (num1 || char1 == '-' && num2)
+					{
+						numeric = true;
+					}
+					else if (alpha1)
+					{
+						alphanumeric = true;
+					}
+				}
+				if (numeric || alphanumeric)
+				{
+					token += char1;
 					if (numeric)
 					{
-						break;
+						if (char1 == '.')
+						{
+							point = true;
+						}
+						if (!num2 && (char2 != '.' || (point && char2 == '.')))
+						{
+							return sym_(token);
+						}
 					}
-				default:
-					// end of alphanum
-					return sym_(token);
+					else // alphanumeric
+					{
+						if (!alpha2 && !num2)
+						{
+							return sym_(token);
+						}
+					}
 				}
-				break;
-			default:
-				// single character symbol
-				return sym_(std::string(&char1, 1));
+				else
+				{
+					// single character symbol
+					return sym_(std::string(&char1, 1));
+				}
 			}
+			}
+			++x;
 		}
 		if (token.empty())
 		{
@@ -4989,6 +5053,16 @@ public:
 
 private:
 	const Ptr _river;
+
+	static inline const bool _alpha(const char c)
+	{
+		return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_';
+	}
+
+	static inline const bool _numeric(const char c)
+	{
+		return c >= '0' && c <= '9';
+	}
 };
 
 //----------------------------------------------------------------------
