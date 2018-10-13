@@ -47,7 +47,7 @@ namespace strange
 	class Complex64;
 	class River;
 	class Fence;
-	class Symbolizer;
+	class Tokenizer;
 	class Creator;
 	class Creature;
 	class Command;
@@ -4773,11 +4773,11 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Symbolizer : public Mutable, public Me<Symbolizer>
+class Tokenizer : public Mutable, public Me<Tokenizer>
 //----------------------------------------------------------------------
 {
 public:
-	inline Symbolizer(const Ptr river)
+	inline Tokenizer(const Ptr river)
 		: Mutable{}
 		, Me{}
 		, _river{ river }
@@ -4791,12 +4791,12 @@ public:
 
 	static inline const Ptr mut_(const Ptr river)
 	{
-		return std::make_shared<Symbolizer>(river);
+		return std::make_shared<Tokenizer>(river);
 	}
 
 	virtual inline const Ptr copy_() const override
 	{
-		return Me<Symbolizer>::me_();
+		return Me<Tokenizer>::me_();
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4805,8 +4805,8 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
-			shoal->update_("stat", Static::fin_(&Symbolizer::stat));
-			shoal->update_("mut", Static::fin_(&Symbolizer::mut));
+			shoal->update_("stat", Static::fin_(&Tokenizer::stat));
+			shoal->update_("mut", Static::fin_(&Tokenizer::mut));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -4819,8 +4819,8 @@ public:
 		{
 			const Ptr stat = Shoal::mut_();
 			Shoal* const shoal = static_<Shoal>(stat);
-			shoal->update_("stat", Static::fin_(&Symbolizer::stat));
-			shoal->update_("mut", Static::fin_(&Symbolizer::mut));
+			shoal->update_("stat", Static::fin_(&Tokenizer::stat));
+			shoal->update_("mut", Static::fin_(&Tokenizer::mut));
 			shoal->finalize_();
 			return stat;
 		}();
@@ -5149,7 +5149,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Symbolizer");
+		static const Ptr TYPE = sym_("strange::Tokenizer");
 		return TYPE;
 	}
 
@@ -5160,7 +5160,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->insert_("strange::Mutable");
-			herd->insert_("strange::Symbolizer");
+			herd->insert_("strange::Tokenizer");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
 			return cats;
@@ -6854,7 +6854,7 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 //======================================================================
 
 //======================================================================
-// class Symbolizer
+// class Tokenizer
 //======================================================================
 
 //======================================================================
