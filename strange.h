@@ -4860,6 +4860,7 @@ public:
 		bool alphanumeric = false;
 		bool numeric = false;
 		bool point = false;
+		bool exponent = false;
 		bool second = false;
 		bool singlequote = false;
 		bool doublequote = false;
@@ -5023,6 +5024,14 @@ public:
 					break;
 				}
 				return sym_(token);
+			case ':':
+				token = char1;
+				if (char2 == ':')
+				{
+					second = true;
+					break;
+				}
+				return sym_(token);
 			default:
 			{
 				const bool alpha1 = _alpha(char1);
@@ -5043,11 +5052,23 @@ public:
 				if (numeric)
 				{
 					token += char1;
-					if (char1 == '.')
+					const bool exp1 = (char1 == 'E' || char1 == 'e');
+					if (exp1)
+					{
+						exponent = true;
+						point = true;
+					}
+					else if (char1 == '.')
 					{
 						point = true;
 					}
-					if (!num2 && (char2 != '.' || (point && char2 == '.')))
+					const bool pnt2 = (char2 == '.');
+					const bool exp2 = (char2 == 'E' || char2 == 'e');
+					const bool neg2 = (char2 == '-');
+					if (!num2 &&
+						(!pnt2 || (pnt2 && point)) &&
+						(!exp2 || (exp2 && exponent)) &&
+						(!neg2 || (neg2 && !exp1)))
 					{
 						return sym_(token);
 					}
