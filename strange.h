@@ -4865,6 +4865,8 @@ public:
 		bool singlequote = false;
 		bool doublequote = false;
 		bool escape = false;
+		bool commentblock = false;
+		bool commentline = false;
 		std::string token;
 		while (true)
 		{
@@ -4895,7 +4897,22 @@ public:
 				char2 = byte2 ? byte2->get_() : 0;
 			}
 
-			if (escape)
+			if (commentblock)
+			{
+				if (second && char1 == '/')
+				{
+					commentblock = false;
+				}
+				second = (char1 == '*');
+			}
+			else if (commentline)
+			{
+				if (char1 == '\n')
+				{
+					commentline = false;
+				}
+			}
+			else if (escape)
 			{
 				switch (char1)
 				{
@@ -4925,9 +4942,25 @@ public:
 				}
 				escape = false;
 			}
-			else if (second || (singlequote && char1 == '\'') || (doublequote && char1 == '\"'))
+			else if (second)
 			{
-				return sym_(token + char1);
+				if (char1 == '*')
+				{
+					commentblock = true;
+					second = false;
+				}
+				else
+				{
+					return operator_(token + char1);
+				}
+			}
+			else if (singlequote && char1 == '\'')
+			{
+				return symbol_(token + char1);
+			}
+			else if (doublequote && char1 == '\"')
+			{
+				return lake_(token + char1);
 			}
 			else if (singlequote || doublequote)
 			{
@@ -4975,7 +5008,7 @@ public:
 				{
 					break;
 				}
-				return sym_(token);
+				return operator_(token);
 			case '&':
 				token = char1;
 				if (char2 == '&')
@@ -4983,7 +5016,7 @@ public:
 					second = true;
 					break;
 				}
-				return sym_(token);
+				return operator_(token);
 			case '|':
 				token = char1;
 				if (char2 == '|')
@@ -4991,7 +5024,7 @@ public:
 					second = true;
 					break;
 				}
-				return sym_(token);
+				return operator_(token);
 			case '%':
 				token = char1;
 				if (char2 == '%' || char2 == '!')
@@ -4999,7 +5032,7 @@ public:
 					second = true;
 					break;
 				}
-				return sym_(token);
+				return operator_(token);
 			case '?':
 				token = char1;
 				if (char2 == '?' || char2 == '|' || char2 == '!')
@@ -5007,7 +5040,7 @@ public:
 					second = true;
 					break;
 				}
-				return sym_(token);
+				return operator_(token);
 			case '@':
 				token = char1;
 				if (char2 == '@')
@@ -5015,7 +5048,7 @@ public:
 					second = true;
 					break;
 				}
-				return sym_(token);
+				return operator_(token);
 			case '#':
 				token = char1;
 				if (char2 == '#')
@@ -5023,7 +5056,7 @@ public:
 					second = true;
 					break;
 				}
-				return sym_(token);
+				return operator_(token);
 			case ':':
 				token = char1;
 				if (char2 == ':')
@@ -5031,13 +5064,26 @@ public:
 					second = true;
 					break;
 				}
-				return sym_(token);
+				return operator_(token);
+			case '/':
+				token = char1;
+				if (char2 == '*')
+				{
+					second = true;
+					break;
+				}
+				if (char2 == '/')
+				{
+					commentline = true;
+					break;
+				}
+				return operator_(token);
 			default:
 			{
-				const bool alpha1 = _alpha(char1);
-				const bool num1 = _numeric(char1);
-				const bool alpha2 = _alpha(char2);
-				const bool num2 = _numeric(char2);
+				const bool alpha1 = alpha_(char1);
+				const bool num1 = numeric_(char1);
+				const bool alpha2 = alpha_(char2);
+				const bool num2 = numeric_(char2);
 				if (!alphanumeric && !numeric)
 				{
 					if (num1 || char1 == '-' && num2)
@@ -5070,7 +5116,7 @@ public:
 						(!exp2 || (exp2 && exponent)) &&
 						(!neg2 || (neg2 && !exp1)))
 					{
-						return sym_(token);
+						return number_(token);
 					}
 				}
 				else if (alphanumeric)
@@ -5078,23 +5124,23 @@ public:
 					token += char1;
 					if (!alpha2 && !num2)
 					{
-						return sym_(token);
+						return name_(token);
 					}
 				}
 				else
 				{
-					// single character symbol
-					return sym_(std::string(&char1, 1));
+					// single character operator
+					return operator_(std::string(&char1, 1));
 				}
 			}
 			}
 			++x;
 		}
-		if (token.empty())
+		if (commentline || token.empty())
 		{
 			return stop_();
 		}
-		return sym_(token);
+		return invalid_(token);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -5121,14 +5167,44 @@ public:
 private:
 	const Ptr _river;
 
-	static inline const bool _alpha(const char c)
+	static inline const bool alpha_(const char c)
 	{
 		return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_';
 	}
 
-	static inline const bool _numeric(const char c)
+	static inline const bool numeric_(const char c)
 	{
 		return c >= '0' && c <= '9';
+	}
+
+	static inline const Ptr symbol_(const std::string& s)
+	{
+		return sym_(s);
+	}
+
+	static inline const Ptr lake_(const std::string& s)
+	{
+		return sym_(s);
+	}
+
+	static inline const Ptr name_(const std::string& s)
+	{
+		return sym_(s);
+	}
+
+	static inline const Ptr number_(const std::string& s)
+	{
+		return sym_(s);
+	}
+
+	static inline const Ptr operator_(const std::string& s)
+	{
+		return sym_(s);
+	}
+
+	static inline const Ptr invalid_(const std::string& s)
+	{
+		return sym_(s);
 	}
 };
 
