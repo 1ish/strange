@@ -4855,8 +4855,6 @@ public:
 	virtual inline const Ptr next_() override
 	{
 		River* const river = dynamic_<River>(_river);
-		int x = 0;
-		int y = 0;
 		bool alphanumeric = false;
 		bool numeric = false;
 		bool point = false;
@@ -4897,8 +4895,15 @@ public:
 				char2 = byte2 ? byte2->get_() : 0;
 			}
 
+			if (char1 == '\n')
+			{
+				_x = 0;
+				++_y;
+			}
+
 			if (commentblock)
 			{
+				if (char1 )
 				if (second && char1 == '/')
 				{
 					commentblock = false;
@@ -4975,10 +4980,8 @@ public:
 			}
 			else switch (char1)
 			{
-			case '\n':
-				x = 0;
-				++y;
 			case ' ':
+			case '\n':
 			case '\t':
 			case '\r':
 				// skip whitespace
@@ -5138,7 +5141,7 @@ public:
 				}
 			}
 			}
-			++x;
+			++_x;
 		}
 		if (commentline || token.empty())
 		{
@@ -5170,6 +5173,8 @@ public:
 
 private:
 	const Ptr _river;
+	int64_t _x = 0;
+	int64_t _y = 0;
 
 	static inline const bool alpha_(const char c)
 	{
@@ -5181,40 +5186,48 @@ private:
 		return c >= '0' && c <= '9';
 	}
 
-	static inline const Ptr symbol_(const std::string& s)
+	inline const Ptr symbol_(const std::string& s)
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
 		flk->push_back_(Byte::fin_('S'));
+		flk->push_back_(Int64::fin_(_x));
+		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
 		flk->push_back_(sym_(s.substr(1, s.length() - 2)));
 		return flock;
 	}
 
-	static inline const Ptr lake_(const std::string& s)
+	inline const Ptr lake_(const std::string& s)
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
 		flk->push_back_(Byte::fin_('L'));
+		flk->push_back_(Int64::fin_(_x));
+		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
 		flk->push_back_(Lake::fin_(s.substr(1, s.length() - 2)));
 		return flock;
 	}
 
-	static inline const Ptr name_(const std::string& s)
+	inline const Ptr name_(const std::string& s)
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
 		flk->push_back_(Byte::fin_('N'));
+		flk->push_back_(Int64::fin_(_x));
+		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
 		return flock;
 	}
 
-	static inline const Ptr integer_(const std::string& s)
+	inline const Ptr integer_(const std::string& s)
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
 		flk->push_back_(Byte::fin_('I'));
+		flk->push_back_(Int64::fin_(_x));
+		flk->push_back_(Int64::fin_(_y));
 		const Ptr symbol = sym_(s);
 		flk->push_back_(symbol);
 		const Ptr int64 = Int64::mut_();
@@ -5223,11 +5236,13 @@ private:
 		return flock;
 	}
 
-	static inline const Ptr float_(const std::string& s)
+	inline const Ptr float_(const std::string& s)
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
 		flk->push_back_(Byte::fin_('F'));
+		flk->push_back_(Int64::fin_(_x));
+		flk->push_back_(Int64::fin_(_y));
 		const Ptr symbol = sym_(s);
 		flk->push_back_(symbol);
 		const Ptr float64 = Float64::mut_();
@@ -5236,20 +5251,24 @@ private:
 		return flock;
 	}
 
-	static inline const Ptr punctuation_(const std::string& s)
+	inline const Ptr punctuation_(const std::string& s)
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
 		flk->push_back_(Byte::fin_('P'));
+		flk->push_back_(Int64::fin_(_x));
+		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
 		return flock;
 	}
 
-	static inline const Ptr error_(const std::string& s)
+	inline const Ptr error_(const std::string& s)
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
 		flk->push_back_(Byte::fin_('E'));
+		flk->push_back_(Int64::fin_(_x));
+		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
 		return flock;
 	}
