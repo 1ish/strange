@@ -277,7 +277,7 @@ public:
 
 	virtual inline const bool same_(const Ptr other) const
 	{
-		return (this == other.get());
+		return identical_(other);
 	}
 
 	inline const Ptr same(const Ptr it) const
@@ -312,6 +312,23 @@ public:
 	inline const Ptr invoke(const Ptr it)
 	{
 		return operator()(this, it);
+	}
+
+	inline const int64_t identity_() const
+	{
+		return int64_t(this);
+	}
+
+	inline const Ptr identity(const Ptr ignore) const;
+
+	inline const bool identical_(const Ptr other) const
+	{
+		return identity_() == other->identity_();
+	}
+
+	inline const Ptr identical(const Ptr it) const
+	{
+		return boolean_(identical_(it->next_()));
 	}
 
 	template <typename F>
@@ -6059,6 +6076,11 @@ inline const Thing::Ptr Thing::invoke_(Args&&... args)
 	v.reserve(sizeof...(Args));
 	Variadic::variadic_(v, std::forward<Args>(args)...);
 	return invoke(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
+}
+
+inline const Thing::Ptr Thing::identity(const Thing::Ptr ignore) const
+{
+	return Int64::fin_(identity_());
 }
 
 inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
