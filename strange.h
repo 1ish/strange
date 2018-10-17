@@ -4893,7 +4893,20 @@ public:
 				{
 					break;
 				}
-				char1 = river->get_();
+				if (_dot)
+				{
+					char1 = '.';
+					_dot = false;
+				}
+				else if (_exp)
+				{
+					char1 = _exp;
+					_exp = 0;
+				}
+				else
+				{
+					char1 = river->get_();
+				}
 				char2 = river->eof_() ? 0 : river->peek_();
 			}
 			else
@@ -4902,12 +4915,25 @@ public:
 				{
 					break;
 				}
-				Byte* const byte1 = dynamic_<Byte>(_river->invoke_("get"));
-				if (!byte1)
+				if (_dot)
 				{
-					break;
+					char1 = '.';
+					_dot = false;
 				}
-				char1 = byte1->get_();
+				else if (_exp)
+				{
+					char1 = _exp;
+					_exp = 0;
+				}
+				else
+				{
+					Byte* const byte1 = dynamic_<Byte>(_river->invoke_("get"));
+					if (!byte1)
+					{
+						break;
+					}
+					char1 = byte1->get_();
+				}
 				Byte* const byte2 = eof_() ? 0 : dynamic_<Byte>(_river->invoke_("peek"));
 				char2 = byte2 ? byte2->get_() : 0;
 			}
@@ -5119,12 +5145,13 @@ public:
 				{
 					token += char1;
 					const bool exp1 = (char1 == 'E' || char1 == 'e');
+					const bool pnt1 = (char1 == '.');
 					if (exp1)
 					{
 						exponent = true;
 						point = true;
 					}
-					else if (char1 == '.')
+					else if (pnt1)
 					{
 						point = true;
 					}
@@ -5136,8 +5163,27 @@ public:
 						(!exp2 || (exp2 && exponent)) &&
 						(!sig2 || (sig2 && !exp1)))
 					{
-						if (point)
+						if (point || exponent)
 						{
+							if (pnt1)
+							{
+								_dot = true;
+								return integer_(token.substr(0, token.length() - 1));
+							}
+							if (exp1)
+							{
+								_exp = char1;
+								if (point)
+								{
+									if (token[token.length() - 2] == '.')
+									{
+										_dot = true;
+										return integer_(token.substr(0, token.length() - 2));
+									}
+									return float_(token.substr(0, token.length() - 1));
+								}
+								return integer_(token.substr(0, token.length() - 1));
+							}
 							return float_(token);
 						}
 						return integer_(token);
@@ -5192,6 +5238,8 @@ private:
 	const Ptr _river;
 	int64_t _x = 0;
 	int64_t _y = 0;
+	bool _dot = false;
+	char _exp = 0;
 
 	static inline const bool alpha_(const char c)
 	{
