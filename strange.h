@@ -5130,11 +5130,11 @@ public:
 					}
 					const bool pnt2 = (char2 == '.');
 					const bool exp2 = (char2 == 'E' || char2 == 'e');
-					const bool neg2 = (char2 == '-');
+					const bool sig2 = (char2 == '+' || char2 == '-');
 					if (!num2 &&
 						(!pnt2 || (pnt2 && point)) &&
 						(!exp2 || (exp2 && exponent)) &&
-						(!neg2 || (neg2 && !exp1)))
+						(!sig2 || (sig2 && !exp1)))
 					{
 						if (point)
 						{
