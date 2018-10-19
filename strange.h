@@ -1742,52 +1742,6 @@ private:
 		const Ptr _flock;
 		std_vector_ptr::const_iterator _iterator;
 	};
-
-	class Evaluator : public Mutable
-	{
-	public:
-		inline Evaluator(const Ptr flock, const Ptr local)
-			: Mutable{}
-			, _flock{ flock }
-			, _local{ local }
-			, _pos{ 0 }
-		{
-		}
-
-		virtual inline const Ptr next_() override
-		{
-			if (_pos >= static_<Flock>(_flock)->_vector.size())
-			{
-				return stop_();
-			}
-			return static_<Flock>(_flock)->_vector.at(_pos++); //TODO _local
-		}
-
-		virtual inline const Ptr copy_() const override
-		{
-			const Ptr result = mut_(_flock, _local);
-			static_<Evaluator>(result)->_pos = _pos;
-			return result;
-		}
-
-		static inline const Ptr mut_(const Ptr flock, const Ptr local)
-		{
-			return std::make_shared<Evaluator>(flock, local);
-		}
-
-		virtual inline const Ptr type_() const override
-		{
-			static const Ptr TYPE = sym_("strange::Flock::Evaluator");
-			return TYPE;
-		}
-
-		virtual inline const Ptr cats_() const override;
-
-	private:
-		const Ptr _flock;
-		const Ptr _local;
-		size_t _pos;
-	};
 };
 
 inline const Thing::Ptr Shoal::It::next_()
@@ -6736,21 +6690,6 @@ inline const Thing::Ptr Flock::cats_() const
 }
 
 inline const Thing::Ptr Flock::It::cats_() const
-{
-	static const Ptr CATS = []()
-	{
-		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
-		herd->insert_("strange::Iterator");
-		herd->insert_("strange::Thing");
-		herd->finalize_();
-		return cats;
-	}();
-	return CATS;
-}
-
-inline const Thing::Ptr Flock::Evaluator::cats_() const
 {
 	static const Ptr CATS = []()
 	{
