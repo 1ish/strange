@@ -5774,11 +5774,12 @@ private:
 
 class Instruction : public Thing
 {
+	enum class Action { _none, _break, _continue, _return };
+
 public:
 	inline const Ptr break_(const Ptr statement, const Ptr local)
 	{
-		_reset_();
-		_break = true;
+		_action = Action::_break;
 		Flock* const flock = static_<Flock>(_flock);
 		if (flock->size_())
 		{
@@ -5789,8 +5790,7 @@ public:
 
 	inline const Ptr continue_(const Ptr statement, const Ptr local)
 	{
-		_reset_();
-		_continue = true;
+		_action = Action::_continue;
 		Flock* const flock = static_<Flock>(_flock);
 		if (flock->size_())
 		{
@@ -5801,8 +5801,7 @@ public:
 
 	inline const Ptr return_(const Ptr statement, const Ptr local)
 	{
-		_reset_();
-		_return = true;
+		_action = Action::_return;
 		Flock* const flock = static_<Flock>(_flock);
 		if (flock->size_())
 		{
@@ -5813,7 +5812,7 @@ public:
 
 	inline const Ptr block_(const Ptr statement, const Ptr local)
 	{
-		_reset_();
+		_action = Action::_none;
 		Ptr result = nothing_();
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -5822,23 +5821,10 @@ public:
 			const Ptr exp = flock->at_(i);
 			result = Expression::eval_(exp, local);
 			Instruction* const instruction = dynamic_<Instruction>(exp);
-			if (instruction)
+			if (instruction && instruction->_action != Action::_none)
 			{
-				if (instruction->_break)
-				{
-					_break = true;
-					return result;
-				}
-				if (instruction->_continue)
-				{
-					_continue = true;
-					return result;
-				}
-				if (instruction->_return)
-				{
-					_return = true;
-					return result;
-				}
+				_action = instruction->_action;
+				return result;
 			}
 		}
 		return result;
@@ -5846,7 +5832,7 @@ public:
 
 	inline const Ptr if_(const Ptr statement, const Ptr local)
 	{
-		_reset_();
+		_action = Action::_none;
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		if (size == 2)
@@ -5856,23 +5842,10 @@ public:
 				const Ptr exp = flock->at_(1);
 				const Ptr result = Expression::eval_(exp, local);
 				Instruction* const instruction = dynamic_<Instruction>(exp);
-				if (instruction)
+				if (instruction && instruction->_action != Action::_none)
 				{
-					if (instruction->_break)
-					{
-						_break = true;
-						return result;
-					}
-					if (instruction->_continue)
-					{
-						_continue = true;
-						return result;
-					}
-					if (instruction->_return)
-					{
-						_return = true;
-						return result;
-					}
+					_action = instruction->_action;
+					return result;
 				}
 			}
 		}
@@ -5883,23 +5856,10 @@ public:
 				const Ptr exp = flock->at_(1);
 				const Ptr result = Expression::eval_(exp, local);
 				Instruction* const instruction = dynamic_<Instruction>(exp);
-				if (instruction)
+				if (instruction && instruction->_action != Action::_none)
 				{
-					if (instruction->_break)
-					{
-						_break = true;
-						return result;
-					}
-					if (instruction->_continue)
-					{
-						_continue = true;
-						return result;
-					}
-					if (instruction->_return)
-					{
-						_return = true;
-						return result;
-					}
+					_action = instruction->_action;
+					return result;
 				}
 			}
 			else
@@ -5907,23 +5867,10 @@ public:
 				const Ptr exp = flock->at_(2);
 				const Ptr result = Expression::eval_(exp, local);
 				Instruction* const instruction = dynamic_<Instruction>(exp);
-				if (instruction)
+				if (instruction && instruction->_action != Action::_none)
 				{
-					if (instruction->_break)
-					{
-						_break = true;
-						return result;
-					}
-					if (instruction->_continue)
-					{
-						_continue = true;
-						return result;
-					}
-					if (instruction->_return)
-					{
-						_return = true;
-						return result;
-					}
+					_action = instruction->_action;
+					return result;
 				}
 			}
 		}
@@ -5932,7 +5879,7 @@ public:
 
 	inline const Ptr question_(const Ptr statement, const Ptr local)
 	{
-		_reset_();
+		_action = Action::_none;
 		Flock* const flock = static_<Flock>(_flock);
 		if (flock->size_() == 3)
 		{
@@ -5950,7 +5897,7 @@ public:
 
 	inline const Ptr while_(const Ptr statement, const Ptr local)
 	{
-		_reset_();
+		_action = Action::_none;
 		Ptr result = nothing_();
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -5965,18 +5912,13 @@ public:
 					Instruction* const instruction = dynamic_<Instruction>(exp);
 					if (instruction)
 					{
-						if (instruction->_break)
-						{
-							_break = true;
-							return result;
-						}
-						if (instruction->_continue)
+						if (instruction->_action == Action::_continue)
 						{
 							break;
 						}
-						if (instruction->_return)
+						else if (instruction->_action != Action::_none)
 						{
-							_return = true;
+							_action = instruction->_action;
 							return result;
 						}
 					}
@@ -5988,7 +5930,7 @@ public:
 
 	inline const Ptr do_(const Ptr statement, const Ptr local)
 	{
-		_reset_();
+		_action = Action::_none;
 		Ptr result = nothing_();
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -6003,18 +5945,13 @@ public:
 					Instruction* const instruction = dynamic_<Instruction>(exp);
 					if (instruction)
 					{
-						if (instruction->_break)
-						{
-							_break = true;
-							return result;
-						}
-						if (instruction->_continue)
+						if (instruction->_action == Action::_continue)
 						{
 							break;
 						}
-						if (instruction->_return)
+						else if (instruction->_action != Action::_none)
 						{
-							_return = true;
+							_action = instruction->_action;
 							return result;
 						}
 					}
@@ -6026,7 +5963,7 @@ public:
 
 	inline const Ptr for_(const Ptr statement, const Ptr local)
 	{
-		_reset_();
+		_action = Action::_none;
 		Ptr result = nothing_();
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -6043,18 +5980,13 @@ public:
 					Instruction* const instruction = dynamic_<Instruction>(exp);
 					if (instruction)
 					{
-						if (instruction->_break)
-						{
-							_break = true;
-							return result;
-						}
-						if (instruction->_continue)
+						if (instruction->_action == Action::_continue)
 						{
 							break;
 						}
-						if (instruction->_return)
+						else if (instruction->_action != Action::_none)
 						{
-							_return = true;
+							_action = instruction->_action;
 							return result;
 						}
 					}
@@ -6066,16 +5998,7 @@ public:
 
 private:
 	const Ptr _flock;
-	bool _break = false;
-	bool _continue = false;
-	bool _return = false;
-
-	inline void _reset_()
-	{
-		_break = false;
-		_continue = false;
-		_return = false;
-	}
+	Action _action = Action::_none;
 };
 
 //======================================================================
