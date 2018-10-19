@@ -50,7 +50,6 @@ namespace strange
 	class Tokenizer;
 	class Creator;
 	class Creature;
-	class Command;
 	class Expression;
 	class Function;
 	class Statement;
@@ -5615,12 +5614,6 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Command : public Symbol
-//----------------------------------------------------------------------
-{
-};
-
-//----------------------------------------------------------------------
 class Expression : public Mutable
 //----------------------------------------------------------------------
 {
@@ -5782,35 +5775,104 @@ private:
 class Instruction : public Thing
 {
 public:
-	inline const Ptr block_(const Ptr statement, const Ptr local)
+	inline const Ptr break_(const Ptr statement, const Ptr local)
 	{
+		_reset_();
+		_break = true;
 		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		for (int64_t i = 0; i < size; ++i)
+		if (flock->size_())
 		{
-			const Ptr result = Expression::eval_(flock->at_(i), local);
-			if (dynamic_<Command>(result) &&
-				(result->is_("break") || result->is_("continue")))
-			{
-				return result;
-			}
+			return Expression::eval_(flock->at_(0), local);
 		}
 		return nothing_();
 	}
 
+	inline const Ptr continue_(const Ptr statement, const Ptr local)
+	{
+		_reset_();
+		_continue = true;
+		Flock* const flock = static_<Flock>(_flock);
+		if (flock->size_())
+		{
+			return Expression::eval_(flock->at_(0), local);
+		}
+		return nothing_();
+	}
+
+	inline const Ptr return_(const Ptr statement, const Ptr local)
+	{
+		_reset_();
+		_return = true;
+		Flock* const flock = static_<Flock>(_flock);
+		if (flock->size_())
+		{
+			return Expression::eval_(flock->at_(0), local);
+		}
+		return nothing_();
+	}
+
+	inline const Ptr block_(const Ptr statement, const Ptr local)
+	{
+		_reset_();
+		Ptr result = nothing_();
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		for (int64_t i = 0; i < size; ++i)
+		{
+			const Ptr exp = flock->at_(i);
+			result = Expression::eval_(exp, local);
+			Instruction* const instruction = dynamic_<Instruction>(exp);
+			if (instruction)
+			{
+				if (instruction->_break)
+				{
+					_break = true;
+					return result;
+				}
+				if (instruction->_continue)
+				{
+					_continue = true;
+					return result;
+				}
+				if (instruction->_return)
+				{
+					_return = true;
+					return result;
+				}
+			}
+		}
+		return result;
+	}
+
 	inline const Ptr if_(const Ptr statement, const Ptr local)
 	{
+		_reset_();
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		if (size == 2)
 		{
 			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
 			{
-				const Ptr result = Expression::eval_(flock->at_(1), local);
-				if (dynamic_<Command>(result) &&
-					(result->is_("break") || result->is_("continue")))
+				const Ptr exp = flock->at_(1);
+				const Ptr result = Expression::eval_(exp, local);
+				Instruction* const instruction = dynamic_<Instruction>(exp);
+				if (instruction)
 				{
-					return result;
+					if (instruction->_break)
+					{
+						_break = true;
+						return result;
+					}
+					if (instruction->_continue)
+					{
+						_continue = true;
+						return result;
+					}
+					if (instruction->_return)
+					{
+						_return = true;
+						return result;
+					}
 				}
 			}
 		}
@@ -5818,20 +5880,50 @@ public:
 		{
 			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
 			{
-				const Ptr result = Expression::eval_(flock->at_(1), local);
-				if (dynamic_<Command>(result) &&
-					(result->is_("break") || result->is_("continue")))
+				const Ptr exp = flock->at_(1);
+				const Ptr result = Expression::eval_(exp, local);
+				Instruction* const instruction = dynamic_<Instruction>(exp);
+				if (instruction)
 				{
-					return result;
+					if (instruction->_break)
+					{
+						_break = true;
+						return result;
+					}
+					if (instruction->_continue)
+					{
+						_continue = true;
+						return result;
+					}
+					if (instruction->_return)
+					{
+						_return = true;
+						return result;
+					}
 				}
 			}
 			else
 			{
-				const Ptr result = Expression::eval_(flock->at_(2), local);
-				if (dynamic_<Command>(result) &&
-					(result->is_("break") || result->is_("continue")))
+				const Ptr exp = flock->at_(2);
+				const Ptr result = Expression::eval_(exp, local);
+				Instruction* const instruction = dynamic_<Instruction>(exp);
+				if (instruction)
 				{
-					return result;
+					if (instruction->_break)
+					{
+						_break = true;
+						return result;
+					}
+					if (instruction->_continue)
+					{
+						_continue = true;
+						return result;
+					}
+					if (instruction->_return)
+					{
+						_return = true;
+						return result;
+					}
 				}
 			}
 		}
@@ -5840,6 +5932,7 @@ public:
 
 	inline const Ptr question_(const Ptr statement, const Ptr local)
 	{
+		_reset_();
 		Flock* const flock = static_<Flock>(_flock);
 		if (flock->size_() == 3)
 		{
@@ -5857,6 +5950,8 @@ public:
 
 	inline const Ptr while_(const Ptr statement, const Ptr local)
 	{
+		_reset_();
+		Ptr result = nothing_();
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		if (size >= 1)
@@ -5865,26 +5960,36 @@ public:
 			{
 				for (int64_t i = 1; i < size; ++i)
 				{
-					const Ptr result = Expression::eval_(flock->at_(i), local);
-					if (dynamic_<Command>(result))
+					const Ptr exp = flock->at_(i);
+					result = Expression::eval_(exp, local);
+					Instruction* const instruction = dynamic_<Instruction>(exp);
+					if (instruction)
 					{
-						if (result->is_("break"))
+						if (instruction->_break)
 						{
-							return nothing_();
+							_break = true;
+							return result;
 						}
-						else if (result->is_("continue"))
+						if (instruction->_continue)
 						{
 							break;
+						}
+						if (instruction->_return)
+						{
+							_return = true;
+							return result;
 						}
 					}
 				}
 			}
 		}
-		return nothing_();
+		return result;
 	}
 
 	inline const Ptr do_(const Ptr statement, const Ptr local)
 	{
+		_reset_();
+		Ptr result = nothing_();
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		if (size >= 1)
@@ -5893,26 +5998,36 @@ public:
 			{
 				for (int64_t i = 0; i < size - 1; ++i)
 				{
-					const Ptr result = Expression::eval_(flock->at_(i), local);
-					if (dynamic_<Command>(result))
+					const Ptr exp = flock->at_(i);
+					result = Expression::eval_(exp, local);
+					Instruction* const instruction = dynamic_<Instruction>(exp);
+					if (instruction)
 					{
-						if (result->is_("break"))
+						if (instruction->_break)
 						{
-							return nothing_();
+							_break = true;
+							return result;
 						}
-						else if (result->is_("continue"))
+						if (instruction->_continue)
 						{
 							break;
+						}
+						if (instruction->_return)
+						{
+							_return = true;
+							return result;
 						}
 					}
 				}
 			} while (!Expression::eval_(flock->at_(size - 1), local)->is_("0"));
 		}
-		return nothing_();
+		return result;
 	}
 
 	inline const Ptr for_(const Ptr statement, const Ptr local)
 	{
+		_reset_();
+		Ptr result = nothing_();
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		if (size >= 3)
@@ -5923,26 +6038,44 @@ public:
 			{
 				for (int64_t i = 3; i < size; ++i)
 				{
-					const Ptr result = Expression::eval_(flock->at_(i), local);
-					if (dynamic_<Command>(result))
+					const Ptr exp = flock->at_(i);
+					result = Expression::eval_(exp, local);
+					Instruction* const instruction = dynamic_<Instruction>(exp);
+					if (instruction)
 					{
-						if (result->is_("break"))
+						if (instruction->_break)
 						{
-							return nothing_();
+							_break = true;
+							return result;
 						}
-						else if (result->is_("continue"))
+						if (instruction->_continue)
 						{
 							break;
+						}
+						if (instruction->_return)
+						{
+							_return = true;
+							return result;
 						}
 					}
 				}
 			}
 		}
-		return nothing_();
+		return result;
 	}
 
 private:
 	const Ptr _flock;
+	bool _break = false;
+	bool _continue = false;
+	bool _return = false;
+
+	inline void _reset_()
+	{
+		_break = false;
+		_continue = false;
+		_return = false;
+	}
 };
 
 //======================================================================
@@ -6924,10 +7057,6 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 
 //======================================================================
 // class Creature
-//======================================================================
-
-//======================================================================
-// class Command
 //======================================================================
 
 //======================================================================
