@@ -5645,65 +5645,8 @@ public:
 		return evaluate_(it->next_());
 	}
 
-	static inline const Ptr iterator_(const Ptr statement, const Ptr local)
-	{
-		return It::mut_(statement, local);
-	}
-
 private:
 	const Ptr _ptr;
-
-	class It : public Mutable
-	{
-	public:
-		inline It(const Ptr statement, const Ptr local)
-			: Mutable{}
-			, _statement{ statement }
-			, _local{ local }
-			, _pos{ 0 }
-		{
-		}
-
-		virtual inline const Ptr next_() override;
-
-		virtual inline const Ptr copy_() const override
-		{
-			const Ptr result = mut_(_statement, _local);
-			static_<It>(result)->_pos = _pos;
-			return result;
-		}
-
-		static inline const Ptr mut_(const Ptr statement, const Ptr local)
-		{
-			return std::make_shared<It>(statement, local);
-		}
-
-		virtual inline const Ptr type_() const override
-		{
-			static const Ptr TYPE = sym_("strange::Expression::It");
-			return TYPE;
-		}
-
-		virtual inline const Ptr cats_() const override
-		{
-			static const Ptr CATS = []()
-			{
-				const Ptr cats = Herd::mut_();
-				Herd* const herd = static_<Herd>(cats);
-				herd->insert_("strange::Mutable");
-				herd->insert_("strange::Iterator");
-				herd->insert_("strange::Thing");
-				herd->finalize_();
-				return cats;
-			}();
-			return CATS;
-		}
-
-	private:
-		const Ptr _statement;
-		const Ptr _local;
-		int64_t _pos;
-	};
 };
 
 //----------------------------------------------------------------------
@@ -5760,38 +5703,100 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Statement : public Flock
+class Statement : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	virtual inline const Ptr exec_(const Ptr statement, const Ptr local)
+	inline const Ptr exec_(const Ptr statement, const Ptr local)
 	{
-		const int64_t size = size_();
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
 		if (size == 0)
 		{
 			return local;
 		}
 		if (size == 1)
 		{
-			return at_(0);
+			return flock->at_(0);
 		}
-		const Ptr it = Expression::iterator_(statement, local);
+		const Ptr it = Statement::iterator_(statement, local);
 		const Ptr thing = it->next_();
 		return thing->invoke(it);
 	}
+
+	static inline const Ptr iterator_(const Ptr statement, const Ptr local)
+	{
+		return It::mut_(statement, local);
+	}
+
+private:
+	const Ptr _flock;
+
+	class It : public Mutable
+	{
+	public:
+		inline It(const Ptr flock, const Ptr local)
+			: Mutable{}
+			, _components{ flock }
+			, _local{ local }
+			, _pos{ 0 }
+		{
+		}
+
+		virtual inline const Ptr next_() override;
+
+		virtual inline const Ptr copy_() const override
+		{
+			const Ptr result = mut_(_components, _local);
+			static_<It>(result)->_pos = _pos;
+			return result;
+		}
+
+		static inline const Ptr mut_(const Ptr flock, const Ptr local)
+		{
+			return std::make_shared<It>(flock, local);
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Statement::It");
+			return TYPE;
+		}
+
+		virtual inline const Ptr cats_() const override
+		{
+			static const Ptr CATS = []()
+			{
+				const Ptr cats = Herd::mut_();
+				Herd* const herd = static_<Herd>(cats);
+				herd->insert_("strange::Mutable");
+				herd->insert_("strange::Iterator");
+				herd->insert_("strange::Thing");
+				herd->finalize_();
+				return cats;
+			}();
+			return CATS;
+		}
+
+	private:
+		const Ptr _components;
+		const Ptr _local;
+		int64_t _pos;
+	};
 };
 
 //----------------------------------------------------------------------
-class Block : public Statement
+class Block : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	inline const Ptr exec_(const Ptr statement, const Ptr local)
 	{
-		const int64_t size = size_();
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
 		for (int64_t i = 0; i < size; ++i)
 		{
-			const Ptr result = Expression::eval_(at_(i), local);
+			const Ptr result = Expression::eval_(flock->at_(i), local);
 			if (dynamic_<Command>(result) &&
 				(result->is_("break") || result->is_("continue")))
 			{
@@ -5800,21 +5805,25 @@ public:
 		}
 		return nothing_();
 	}
+
+private:
+	const Ptr _flock;
 };
 
 //----------------------------------------------------------------------
-class If : public Statement
+class If : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	inline const Ptr exec_(const Ptr statement, const Ptr local)
 	{
-		const int64_t size = size_();
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
 		if (size == 2)
 		{
-			if (!Expression::eval_(at_(0), local)->is_("0"))
+			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
 			{
-				const Ptr result = Expression::eval_(at_(1), local);
+				const Ptr result = Expression::eval_(flock->at_(1), local);
 				if (dynamic_<Command>(result) &&
 					(result->is_("break") || result->is_("continue")))
 				{
@@ -5824,9 +5833,9 @@ public:
 		}
 		else if (size == 3)
 		{
-			if (!Expression::eval_(at_(0), local)->is_("0"))
+			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
 			{
-				const Ptr result = Expression::eval_(at_(1), local);
+				const Ptr result = Expression::eval_(flock->at_(1), local);
 				if (dynamic_<Command>(result) &&
 					(result->is_("break") || result->is_("continue")))
 				{
@@ -5835,7 +5844,7 @@ public:
 			}
 			else
 			{
-				const Ptr result = Expression::eval_(at_(2), local);
+				const Ptr result = Expression::eval_(flock->at_(2), local);
 				if (dynamic_<Command>(result) &&
 					(result->is_("break") || result->is_("continue")))
 				{
@@ -5845,45 +5854,53 @@ public:
 		}
 		return nothing_();
 	}
+
+private:
+	const Ptr _flock;
 };
 
 //----------------------------------------------------------------------
-class Question : public Statement
+class Question : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	inline const Ptr exec_(const Ptr statement, const Ptr local)
 	{
-		if (size_() == 3)
+		Flock* const flock = static_<Flock>(_flock);
+		if (flock->size_() == 3)
 		{
-			if (!Expression::eval_(at_(0), local)->is_("0"))
+			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
 			{
-				return Expression::eval_(at_(1), local);
+				return Expression::eval_(flock->at_(1), local);
 			}
 			else
 			{
-				return Expression::eval_(at_(2), local);
+				return Expression::eval_(flock->at_(2), local);
 			}
 		}
 		return nothing_();
 	}
+
+private:
+	const Ptr _flock;
 };
 
 //----------------------------------------------------------------------
-class While : public Statement
+class While : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	inline const Ptr exec_(const Ptr statement, const Ptr local)
 	{
-		const int64_t size = size_();
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
 		if (size >= 1)
 		{
-			while (!Expression::eval_(at_(0), local)->is_("0"))
+			while (!Expression::eval_(flock->at_(0), local)->is_("0"))
 			{
 				for (int64_t i = 1; i < size; ++i)
 				{
-					const Ptr result = Expression::eval_(at_(i), local);
+					const Ptr result = Expression::eval_(flock->at_(i), local);
 					if (dynamic_<Command>(result))
 					{
 						if (result->is_("break"))
@@ -5900,23 +5917,27 @@ public:
 		}
 		return nothing_();
 	}
+
+private:
+	const Ptr _flock;
 };
 
 //----------------------------------------------------------------------
-class Do : public Statement
+class Do : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	inline const Ptr exec_(const Ptr statement, const Ptr local)
 	{
-		const int64_t size = size_();
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
 		if (size >= 1)
 		{
 			do
 			{
 				for (int64_t i = 0; i < size - 1; ++i)
 				{
-					const Ptr result = Expression::eval_(at_(i), local);
+					const Ptr result = Expression::eval_(flock->at_(i), local);
 					if (dynamic_<Command>(result))
 					{
 						if (result->is_("break"))
@@ -5929,27 +5950,33 @@ public:
 						}
 					}
 				}
-			} while (!Expression::eval_(at_(size - 1), local)->is_("0"));
+			} while (!Expression::eval_(flock->at_(size - 1), local)->is_("0"));
 		}
 		return nothing_();
 	}
+
+private:
+	const Ptr _flock;
 };
 
 //----------------------------------------------------------------------
-class For : public Statement
+class For : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	virtual inline const Ptr exec_(const Ptr statement, const Ptr local) override
+	inline const Ptr exec_(const Ptr statement, const Ptr local)
 	{
-		const int64_t size = size_();
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
 		if (size >= 3)
 		{
-			for (Expression::eval_(at_(0), local); !Expression::eval_(at_(1), local)->is_("0"); Expression::eval_(at_(2), local))
+			for (Expression::eval_(flock->at_(0), local);
+				!Expression::eval_(flock->at_(1), local)->is_("0");
+				Expression::eval_(flock->at_(2), local))
 			{
 				for (int64_t i = 3; i < size; ++i)
 				{
-					const Ptr result = Expression::eval_(at_(i), local);
+					const Ptr result = Expression::eval_(flock->at_(i), local);
 					if (dynamic_<Command>(result))
 					{
 						if (result->is_("break"))
@@ -5966,6 +5993,9 @@ public:
 		}
 		return nothing_();
 	}
+
+private:
+	const Ptr _flock;
 };
 
 //======================================================================
@@ -6959,7 +6989,7 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 
 inline Expression::Expression()
 	: Mutable{}
-	, _ptr{ Statement::mut_() }
+	, _ptr{ nothing_() }
 {
 }
 
@@ -6973,15 +7003,6 @@ inline Thing::Ptr Expression::eval_(const Thing::Ptr ptr, const Thing::Ptr local
 	return ptr;
 }
 
-inline const Thing::Ptr Expression::It::next_()
-{
-	if (_pos >= static_<Statement>(_statement)->size_())
-	{
-		return stop_();
-	}
-	return eval_(static_<Statement>(_statement)->at_(_pos++), _local);
-}
-
 //======================================================================
 // class Function
 //======================================================================
@@ -6989,6 +7010,15 @@ inline const Thing::Ptr Expression::It::next_()
 //======================================================================
 // class Statement
 //======================================================================
+
+inline const Thing::Ptr Statement::It::next_()
+{
+	if (_pos >= static_<Flock>(_components)->size_())
+	{
+		return stop_();
+	}
+	return Expression::eval_(static_<Flock>(_components)->at_(_pos++), _local);
+}
 
 //======================================================================
 // class Block
