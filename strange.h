@@ -54,12 +54,6 @@ namespace strange
 	class Expression;
 	class Function;
 	class Statement;
-	class Block;
-	class If;
-	class Question;
-	class While;
-	class Do;
-	class For;
 
 	// Categories:
 	// private typedefs
@@ -5707,7 +5701,7 @@ class Statement : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	inline const Ptr exec_(const Ptr statement, const Ptr local)
+	inline const Ptr evaluate_(const Ptr statement, const Ptr local)
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -5785,12 +5779,10 @@ private:
 	};
 };
 
-//----------------------------------------------------------------------
-class Block : public Thing
-//----------------------------------------------------------------------
+class Instruction : public Thing
 {
 public:
-	inline const Ptr exec_(const Ptr statement, const Ptr local)
+	inline const Ptr block_(const Ptr statement, const Ptr local)
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -5806,16 +5798,7 @@ public:
 		return nothing_();
 	}
 
-private:
-	const Ptr _flock;
-};
-
-//----------------------------------------------------------------------
-class If : public Thing
-//----------------------------------------------------------------------
-{
-public:
-	inline const Ptr exec_(const Ptr statement, const Ptr local)
+	inline const Ptr if_(const Ptr statement, const Ptr local)
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -5855,16 +5838,7 @@ public:
 		return nothing_();
 	}
 
-private:
-	const Ptr _flock;
-};
-
-//----------------------------------------------------------------------
-class Question : public Thing
-//----------------------------------------------------------------------
-{
-public:
-	inline const Ptr exec_(const Ptr statement, const Ptr local)
+	inline const Ptr question_(const Ptr statement, const Ptr local)
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		if (flock->size_() == 3)
@@ -5881,16 +5855,7 @@ public:
 		return nothing_();
 	}
 
-private:
-	const Ptr _flock;
-};
-
-//----------------------------------------------------------------------
-class While : public Thing
-//----------------------------------------------------------------------
-{
-public:
-	inline const Ptr exec_(const Ptr statement, const Ptr local)
+	inline const Ptr while_(const Ptr statement, const Ptr local)
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -5918,16 +5883,7 @@ public:
 		return nothing_();
 	}
 
-private:
-	const Ptr _flock;
-};
-
-//----------------------------------------------------------------------
-class Do : public Thing
-//----------------------------------------------------------------------
-{
-public:
-	inline const Ptr exec_(const Ptr statement, const Ptr local)
+	inline const Ptr do_(const Ptr statement, const Ptr local)
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -5955,16 +5911,7 @@ public:
 		return nothing_();
 	}
 
-private:
-	const Ptr _flock;
-};
-
-//----------------------------------------------------------------------
-class For : public Thing
-//----------------------------------------------------------------------
-{
-public:
-	inline const Ptr exec_(const Ptr statement, const Ptr local)
+	inline const Ptr for_(const Ptr statement, const Ptr local)
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -6998,7 +6945,7 @@ inline Thing::Ptr Expression::eval_(const Thing::Ptr ptr, const Thing::Ptr local
 	Statement* const statement = dynamic_<Statement>(ptr);
 	if (statement)
 	{
-		return statement->exec_(ptr, local);
+		return statement->evaluate_(ptr, local);
 	}
 	return ptr;
 }
@@ -7019,30 +6966,6 @@ inline const Thing::Ptr Statement::It::next_()
 	}
 	return Expression::eval_(static_<Flock>(_components)->at_(_pos++), _local);
 }
-
-//======================================================================
-// class Block
-//======================================================================
-
-//======================================================================
-// class If
-//======================================================================
-
-//======================================================================
-// class Question
-//======================================================================
-
-//======================================================================
-// class While
-//======================================================================
-
-//======================================================================
-// class Do
-//======================================================================
-
-//======================================================================
-// class For
-//======================================================================
 
 } // namespace strange
 
