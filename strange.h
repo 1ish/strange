@@ -5693,8 +5693,24 @@ private:
 class Statement : public Thing
 //----------------------------------------------------------------------
 {
+	typedef const Ptr (Statement::*MemberPtr)(const Ptr, const Ptr);
+
 public:
 	inline const Ptr evaluate_(const Ptr statement, const Ptr local)
+	{
+		return (this->*_member)(statement, local);
+	}
+
+	static inline const Ptr iterator_(const Ptr statement, const Ptr local)
+	{
+		return It::mut_(statement, local);
+	}
+
+private:
+	const Ptr _flock;
+	const MemberPtr _member = &Statement::_instruction_;
+
+	inline const Ptr _instruction_(const Ptr statement, const Ptr local)
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -5711,13 +5727,203 @@ public:
 		return thing->invoke(it);
 	}
 
-	static inline const Ptr iterator_(const Ptr statement, const Ptr local)
+	inline const Ptr _break_(const Ptr statement, const Ptr local)
 	{
-		return It::mut_(statement, local);
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_('b');
+		Flock* const flock = static_<Flock>(_flock);
+		if (flock->size_())
+		{
+			return Expression::eval_(flock->at_(0), local);
+		}
+		return nothing_();
 	}
 
-private:
-	const Ptr _flock;
+	inline const Ptr _continue_(const Ptr statement, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_('c');
+		Flock* const flock = static_<Flock>(_flock);
+		if (flock->size_())
+		{
+			return Expression::eval_(flock->at_(0), local);
+		}
+		return nothing_();
+	}
+
+	inline const Ptr _return_(const Ptr statement, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_('r');
+		Flock* const flock = static_<Flock>(_flock);
+		if (flock->size_())
+		{
+			return Expression::eval_(flock->at_(0), local);
+		}
+		return nothing_();
+	}
+
+	inline const Ptr _block_(const Ptr statement, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_(0);
+		Ptr result = nothing_();
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		for (int64_t i = 0; i < size; ++i)
+		{
+			result = Expression::eval_(flock->at_(i), local);
+			if (action->get_())
+			{
+				return result;
+			}
+		}
+		return result;
+	}
+
+	inline const Ptr _if_(const Ptr statement, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_(0);
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		if (size == 2)
+		{
+			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
+			{
+				const Ptr result = Expression::eval_(flock->at_(1), local);
+				if (action->get_())
+				{
+					return result;
+				}
+			}
+		}
+		else if (size == 3)
+		{
+			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
+			{
+				const Ptr result = Expression::eval_(flock->at_(1), local);
+				if (action->get_())
+				{
+					return result;
+				}
+			}
+			else
+			{
+				const Ptr result = Expression::eval_(flock->at_(2), local);
+				if (action->get_())
+				{
+					return result;
+				}
+			}
+		}
+		return nothing_();
+	}
+
+	inline const Ptr _question_(const Ptr statement, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_(0);
+		Flock* const flock = static_<Flock>(_flock);
+		if (flock->size_() == 3)
+		{
+			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
+			{
+				return Expression::eval_(flock->at_(1), local);
+			}
+			else
+			{
+				return Expression::eval_(flock->at_(2), local);
+			}
+		}
+		return nothing_();
+	}
+
+	inline const Ptr _while_(const Ptr statement, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_(0);
+		Ptr result = nothing_();
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		if (size >= 1)
+		{
+			while (!Expression::eval_(flock->at_(0), local)->is_("0"))
+			{
+				for (int64_t i = 1; i < size; ++i)
+				{
+					result = Expression::eval_(flock->at_(i), local);
+					if (action->get_())
+					{
+						if (action->get_() == 'c')
+						{
+							break;
+						}
+						return result;
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	inline const Ptr _do_(const Ptr statement, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_(0);
+		Ptr result = nothing_();
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		if (size >= 1)
+		{
+			do
+			{
+				for (int64_t i = 0; i < size - 1; ++i)
+				{
+					result = Expression::eval_(flock->at_(i), local);
+					if (action->get_())
+					{
+						if (action->get_() == 'c')
+						{
+							break;
+						}
+						return result;
+					}
+				}
+			} while (!Expression::eval_(flock->at_(size - 1), local)->is_("0"));
+		}
+		return result;
+	}
+
+	inline const Ptr _for_(const Ptr statement, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_(0);
+		Ptr result = nothing_();
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		if (size >= 3)
+		{
+			for (Expression::eval_(flock->at_(0), local);
+				!Expression::eval_(flock->at_(1), local)->is_("0");
+				Expression::eval_(flock->at_(2), local))
+			{
+				for (int64_t i = 3; i < size; ++i)
+				{
+					result = Expression::eval_(flock->at_(i), local);
+					if (action->get_())
+					{
+						if (action->get_() == 'c')
+						{
+							break;
+						}
+						return result;
+					}
+				}
+			}
+		}
+		return result;
+	}
 
 	class It : public Mutable
 	{
@@ -5770,235 +5976,6 @@ private:
 		const Ptr _local;
 		int64_t _pos;
 	};
-};
-
-class Instruction : public Thing
-{
-	enum class Action { _none, _break, _continue, _return };
-
-public:
-	inline const Ptr break_(const Ptr statement, const Ptr local)
-	{
-		_action = Action::_break;
-		Flock* const flock = static_<Flock>(_flock);
-		if (flock->size_())
-		{
-			return Expression::eval_(flock->at_(0), local);
-		}
-		return nothing_();
-	}
-
-	inline const Ptr continue_(const Ptr statement, const Ptr local)
-	{
-		_action = Action::_continue;
-		Flock* const flock = static_<Flock>(_flock);
-		if (flock->size_())
-		{
-			return Expression::eval_(flock->at_(0), local);
-		}
-		return nothing_();
-	}
-
-	inline const Ptr return_(const Ptr statement, const Ptr local)
-	{
-		_action = Action::_return;
-		Flock* const flock = static_<Flock>(_flock);
-		if (flock->size_())
-		{
-			return Expression::eval_(flock->at_(0), local);
-		}
-		return nothing_();
-	}
-
-	inline const Ptr block_(const Ptr statement, const Ptr local)
-	{
-		_action = Action::_none;
-		Ptr result = nothing_();
-		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		for (int64_t i = 0; i < size; ++i)
-		{
-			const Ptr exp = flock->at_(i);
-			result = Expression::eval_(exp, local);
-			Instruction* const instruction = dynamic_<Instruction>(exp);
-			if (instruction && instruction->_action != Action::_none)
-			{
-				_action = instruction->_action;
-				return result;
-			}
-		}
-		return result;
-	}
-
-	inline const Ptr if_(const Ptr statement, const Ptr local)
-	{
-		_action = Action::_none;
-		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		if (size == 2)
-		{
-			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
-			{
-				const Ptr exp = flock->at_(1);
-				const Ptr result = Expression::eval_(exp, local);
-				Instruction* const instruction = dynamic_<Instruction>(exp);
-				if (instruction && instruction->_action != Action::_none)
-				{
-					_action = instruction->_action;
-					return result;
-				}
-			}
-		}
-		else if (size == 3)
-		{
-			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
-			{
-				const Ptr exp = flock->at_(1);
-				const Ptr result = Expression::eval_(exp, local);
-				Instruction* const instruction = dynamic_<Instruction>(exp);
-				if (instruction && instruction->_action != Action::_none)
-				{
-					_action = instruction->_action;
-					return result;
-				}
-			}
-			else
-			{
-				const Ptr exp = flock->at_(2);
-				const Ptr result = Expression::eval_(exp, local);
-				Instruction* const instruction = dynamic_<Instruction>(exp);
-				if (instruction && instruction->_action != Action::_none)
-				{
-					_action = instruction->_action;
-					return result;
-				}
-			}
-		}
-		return nothing_();
-	}
-
-	inline const Ptr question_(const Ptr statement, const Ptr local)
-	{
-		_action = Action::_none;
-		Flock* const flock = static_<Flock>(_flock);
-		if (flock->size_() == 3)
-		{
-			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
-			{
-				return Expression::eval_(flock->at_(1), local);
-			}
-			else
-			{
-				return Expression::eval_(flock->at_(2), local);
-			}
-		}
-		return nothing_();
-	}
-
-	inline const Ptr while_(const Ptr statement, const Ptr local)
-	{
-		_action = Action::_none;
-		Ptr result = nothing_();
-		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		if (size >= 1)
-		{
-			while (!Expression::eval_(flock->at_(0), local)->is_("0"))
-			{
-				for (int64_t i = 1; i < size; ++i)
-				{
-					const Ptr exp = flock->at_(i);
-					result = Expression::eval_(exp, local);
-					Instruction* const instruction = dynamic_<Instruction>(exp);
-					if (instruction)
-					{
-						if (instruction->_action == Action::_continue)
-						{
-							break;
-						}
-						else if (instruction->_action != Action::_none)
-						{
-							_action = instruction->_action;
-							return result;
-						}
-					}
-				}
-			}
-		}
-		return result;
-	}
-
-	inline const Ptr do_(const Ptr statement, const Ptr local)
-	{
-		_action = Action::_none;
-		Ptr result = nothing_();
-		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		if (size >= 1)
-		{
-			do
-			{
-				for (int64_t i = 0; i < size - 1; ++i)
-				{
-					const Ptr exp = flock->at_(i);
-					result = Expression::eval_(exp, local);
-					Instruction* const instruction = dynamic_<Instruction>(exp);
-					if (instruction)
-					{
-						if (instruction->_action == Action::_continue)
-						{
-							break;
-						}
-						else if (instruction->_action != Action::_none)
-						{
-							_action = instruction->_action;
-							return result;
-						}
-					}
-				}
-			} while (!Expression::eval_(flock->at_(size - 1), local)->is_("0"));
-		}
-		return result;
-	}
-
-	inline const Ptr for_(const Ptr statement, const Ptr local)
-	{
-		_action = Action::_none;
-		Ptr result = nothing_();
-		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		if (size >= 3)
-		{
-			for (Expression::eval_(flock->at_(0), local);
-				!Expression::eval_(flock->at_(1), local)->is_("0");
-				Expression::eval_(flock->at_(2), local))
-			{
-				for (int64_t i = 3; i < size; ++i)
-				{
-					const Ptr exp = flock->at_(i);
-					result = Expression::eval_(exp, local);
-					Instruction* const instruction = dynamic_<Instruction>(exp);
-					if (instruction)
-					{
-						if (instruction->_action == Action::_continue)
-						{
-							break;
-						}
-						else if (instruction->_action != Action::_none)
-						{
-							_action = instruction->_action;
-							return result;
-						}
-					}
-				}
-			}
-		}
-		return result;
-	}
-
-private:
-	const Ptr _flock;
-	Action _action = Action::_none;
 };
 
 //======================================================================
