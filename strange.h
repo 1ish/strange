@@ -5672,15 +5672,15 @@ protected:
 	{
 		const Ptr local = Shoal::mut_();
 		Shoal* const loc = static_<Shoal>(local);
-		loc->insert_("static", _static);
+		loc->insert_("$", _static);
 		Me<Creature>* const me = dynamic_cast<Me<Creature>*>(thing);
 		if (me)
 		{
 			Creature* const creature = static_cast<Creature*>(thing);
-			loc->insert_("me", me->me_());
-			loc->insert_("members", creature->_members);
+			loc->insert_("|", me->me_());
+			loc->insert_("#", creature->_members);
 		}
-		loc->insert_("it", it);
+		loc->insert_("&", it);
 		loc->insert_("@", Byte::mut_());
 		return static_<Expression>(_expression)->evaluate_(local);
 	}
