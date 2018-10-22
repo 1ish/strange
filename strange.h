@@ -5617,23 +5617,307 @@ private:
 class Expression : public Mutable
 //----------------------------------------------------------------------
 {
+	typedef const Ptr(Expression::*MemberPtr)(const Ptr, const Ptr);
+
 public:
-	inline Expression();
+	inline Expression()
+		: Mutable{}
+		, _flock{ Flock::mut_() }
+		, _member{ &Expression::_instruction_ }
+	{
+	}
+
+	inline const Ptr evaluate_(const Ptr expression, const Ptr local)
+	{
+		return (this->*_member)(expression, local);
+	}
 
 	static inline Ptr eval_(const Ptr ptr, const Ptr local);
 
-	inline Ptr evaluate_(const Ptr local) const
+	static inline const Ptr iterator_(const Ptr expression, const Ptr local)
 	{
-		return eval_(_ptr, local);
-	}
-
-	inline Ptr evaluate(const Ptr it) const
-	{
-		return evaluate_(it->next_());
+		return It::mut_(expression, local);
 	}
 
 private:
-	const Ptr _ptr;
+	const Ptr _flock;
+	const MemberPtr _member = &Expression::_instruction_;
+
+	inline const Ptr _instruction_(const Ptr expression, const Ptr local)
+	{
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		if (size == 0)
+		{
+			return local;
+		}
+		if (size == 1)
+		{
+			return flock->at_(0);
+		}
+		const Ptr it = Expression::iterator_(expression, local);
+		const Ptr thing = it->next_();
+		return thing->invoke(it);
+	}
+
+	inline const Ptr _break_(const Ptr expression, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_('b');
+		return nothing_();
+	}
+
+	inline const Ptr _continue_(const Ptr expression, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_('c');
+		return nothing_();
+	}
+
+	inline const Ptr _return_(const Ptr expression, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		action->set_('r');
+		Flock* const flock = static_<Flock>(_flock);
+		if (flock->size_())
+		{
+			return Expression::eval_(flock->at_(0), local);
+		}
+		return nothing_();
+	}
+
+	inline const Ptr _block_(const Ptr expression, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		for (int64_t i = 0; i < size; ++i)
+		{
+			const Ptr result = Expression::eval_(flock->at_(i), local);
+			if (action->get_())
+			{
+				return result;
+			}
+		}
+		return nothing_();
+	}
+
+	inline const Ptr _if_(const Ptr expression, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		if (size == 2)
+		{
+			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
+			{
+				action->set_(0);
+				const Ptr result = Expression::eval_(flock->at_(1), local);
+				if (action->get_())
+				{
+					return result;
+				}
+			}
+		}
+		else if (size == 3)
+		{
+			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
+			{
+				action->set_(0);
+				const Ptr result = Expression::eval_(flock->at_(1), local);
+				if (action->get_())
+				{
+					return result;
+				}
+			}
+			else
+			{
+				action->set_(0);
+				const Ptr result = Expression::eval_(flock->at_(2), local);
+				if (action->get_())
+				{
+					return result;
+				}
+			}
+		}
+		return nothing_();
+	}
+
+	inline const Ptr _question_(const Ptr expression, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		if (flock->size_() == 3)
+		{
+			if (!Expression::eval_(flock->at_(0), local)->is_("0"))
+			{
+				const Ptr result = Expression::eval_(flock->at_(1), local);
+				action->set_(0);
+				return result;
+			}
+			else
+			{
+				const Ptr result = Expression::eval_(flock->at_(2), local);
+				action->set_(0);
+				return result;
+			}
+		}
+		return nothing_();
+	}
+
+	inline const Ptr _while_(const Ptr expression, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		if (size >= 1)
+		{
+			while (!Expression::eval_(flock->at_(0), local)->is_("0"))
+			{
+				action->set_(0);
+				for (int64_t i = 1; i < size; ++i)
+				{
+					const Ptr result = Expression::eval_(flock->at_(i), local);
+					const Byte::D a = action->get_();
+					if (a)
+					{
+						if (a == 'r')
+						{
+							return result;
+						}
+						action->set_(0);
+						if (a == 'c')
+						{
+							break;
+						}
+						return result;
+					}
+				}
+			}
+		}
+		return nothing_();
+	}
+
+	inline const Ptr _do_(const Ptr expression, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		if (size >= 1)
+		{
+			do
+			{
+				action->set_(0);
+				for (int64_t i = 0; i < size - 1; ++i)
+				{
+					const Ptr result = Expression::eval_(flock->at_(i), local);
+					const Byte::D a = action->get_();
+					if (a)
+					{
+						if (a == 'r')
+						{
+							return result;
+						}
+						action->set_(0);
+						if (a == 'c')
+						{
+							break;
+						}
+						return result;
+					}
+				}
+			} while (!Expression::eval_(flock->at_(size - 1), local)->is_("0"));
+			action->set_(0);
+		}
+		return nothing_();
+	}
+
+	inline const Ptr _for_(const Ptr expression, const Ptr local)
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		if (size >= 3)
+		{
+			for (Expression::eval_(flock->at_(0), local);
+				!Expression::eval_(flock->at_(1), local)->is_("0");
+				Expression::eval_(flock->at_(2), local))
+			{
+				action->set_(0);
+				for (int64_t i = 3; i < size; ++i)
+				{
+					const Ptr result = Expression::eval_(flock->at_(i), local);
+					const Byte::D a = action->get_();
+					if (a)
+					{
+						if (a == 'r')
+						{
+							return result;
+						}
+						action->set_(0);
+						if (a == 'c')
+						{
+							break;
+						}
+						return result;
+					}
+				}
+			}
+		}
+		return nothing_();
+	}
+
+	class It : public Mutable
+	{
+	public:
+		inline It(const Ptr flock, const Ptr local)
+			: Mutable{}
+			, _components{ flock }
+			, _local{ local }
+			, _pos{ 0 }
+		{
+		}
+
+		virtual inline const Ptr next_() override;
+
+		virtual inline const Ptr copy_() const override
+		{
+			const Ptr result = mut_(_components, _local);
+			static_<It>(result)->_pos = _pos;
+			return result;
+		}
+
+		static inline const Ptr mut_(const Ptr flock, const Ptr local)
+		{
+			return std::make_shared<It>(flock, local);
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Expression::It");
+			return TYPE;
+		}
+
+		virtual inline const Ptr cats_() const override
+		{
+			static const Ptr CATS = []()
+			{
+				const Ptr cats = Herd::mut_();
+				Herd* const herd = static_<Herd>(cats);
+				herd->insert_("strange::Mutable");
+				herd->insert_("strange::Iterator");
+				herd->insert_("strange::Thing");
+				herd->finalize_();
+				return cats;
+			}();
+			return CATS;
+		}
+
+	private:
+		const Ptr _components;
+		const Ptr _local;
+		int64_t _pos;
+	};
 };
 
 //----------------------------------------------------------------------
@@ -5682,7 +5966,7 @@ protected:
 		}
 		loc->insert_("&", it);
 		loc->insert_("@", Byte::mut_());
-		return static_<Expression>(_expression)->evaluate_(local);
+		return static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
 
 private:
@@ -6973,18 +7257,12 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 // class Expression
 //======================================================================
 
-inline Expression::Expression()
-	: Mutable{}
-	, _ptr{ nothing_() }
-{
-}
-
 inline Thing::Ptr Expression::eval_(const Thing::Ptr ptr, const Thing::Ptr local)
 {
-	Statement* const statement = dynamic_<Statement>(ptr);
-	if (statement)
+	Expression* const expression = dynamic_<Expression>(ptr);
+	if (expression)
 	{
-		return statement->evaluate_(ptr, local);
+		return expression->evaluate_(ptr, local);
 	}
 	return ptr;
 }
