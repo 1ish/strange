@@ -5619,11 +5619,68 @@ class Expression : public Mutable
 	typedef const Ptr(Expression::*MemberPtr)(const Ptr, const Ptr);
 
 public:
-	inline Expression()
+	inline Expression(const MemberPtr member, const Ptr flock)
 		: Mutable{}
-		, _flock{ Flock::mut_() }
-		, _member{ &Expression::_instruction_ }
+		, _member{ member }
+		, _flock{ flock }
 	{
+	}
+
+	static inline const Ptr fin_(const MemberPtr member, const Ptr flock)
+	{
+		return std::make_shared<Expression>(member, flock);
+	}
+
+	static inline const Ptr fin_(const Ptr statement, const Ptr flock)
+	{
+		if (statement->is_("dispatch"))
+		{
+			return fin_(&Expression::_dispatch_, flock);
+		}
+		else if (statement->is_("break"))
+		{
+			return fin_(&Expression::_break_, flock);
+		}
+		else if (statement->is_("continue"))
+		{
+			return fin_(&Expression::_continue_, flock);
+		}
+		else if (statement->is_("return"))
+		{
+			return fin_(&Expression::_return_, flock);
+		}
+		else if (statement->is_("block"))
+		{
+			return fin_(&Expression::_block_, flock);
+		}
+		else if (statement->is_("if"))
+		{
+			return fin_(&Expression::_if_, flock);
+		}
+		else if (statement->is_("question"))
+		{
+			return fin_(&Expression::_question_, flock);
+		}
+		else if (statement->is_("while"))
+		{
+			return fin_(&Expression::_while_, flock);
+		}
+		else if (statement->is_("do"))
+		{
+			return fin_(&Expression::_do_, flock);
+		}
+		else if (statement->is_("for"))
+		{
+			return fin_(&Expression::_for_, flock);
+		}
+		return nothing_();
+	}
+
+	static inline const Ptr fin(const Ptr it)
+	{
+		const Ptr statement = it->next_();
+		const Ptr flock = it->next_();
+		return fin_(statement, flock);
 	}
 
 	static inline const Ptr evaluate_(const Ptr expression, const Ptr local)
@@ -5637,11 +5694,22 @@ public:
 		return It::mut_(expression, local);
 	}
 
-private:
-	const Ptr _flock;
-	const MemberPtr _member = &Expression::_instruction_;
+	virtual inline const Ptr copy_() const override
+	{
+		return fin_(_member, _flock);
+	}
 
-	inline const Ptr _instruction_(const Ptr expression, const Ptr local)
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Expression");
+		return TYPE;
+	}
+
+private:
+	const MemberPtr _member;
+	const Ptr _flock;
+
+	inline const Ptr _dispatch_(const Ptr expression, const Ptr local)
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
