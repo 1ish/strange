@@ -8,6 +8,7 @@
 #include <vector>
 #include <unordered_set>
 #include <unordered_map>
+#include <deque>
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -6043,13 +6044,15 @@ private:
 
 //----------------------------------------------------------------------
 class Parser : public Mutable, public Me<Parser>
-	//----------------------------------------------------------------------
+//----------------------------------------------------------------------
 {
 public:
 	inline Parser(const Ptr tokenizer)
 		: Mutable{}
 		, Me{}
 		, _tokenizer{ tokenizer }
+		, _deque{}
+		, _ahead{ 0 }
 	{
 	}
 
@@ -6121,6 +6124,11 @@ public:
 		return _tokenizer->invoke_("eof");
 	}
 
+	inline const Ptr parse_()
+	{
+		
+	}
+
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Parser");
@@ -6144,6 +6152,29 @@ public:
 
 private:
 	const Ptr _tokenizer;
+	std::deque<Ptr> _deque;
+	int64_t _ahead;
+
+	inline const Ptr _token_(const int64_t lookahead = 0)
+	{
+		while (int64_t(_deque.size()) <= lookahead)
+		{
+			_deque.push_back(_tokenizer->next_());
+		}
+		return _deque.at(lookahead);
+	}
+
+	inline const void _next_()
+	{
+		if (_deque.empty())
+		{
+			_tokenizer->next_();
+		}
+		else
+		{
+			_deque.pop_front();
+		}
+	}
 };
 
 //======================================================================
