@@ -6136,7 +6136,7 @@ public:
 		const char tag = char(static_<Byte>(tok->at_(0))->get_());
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
-		Symbol* const symbol = static_<Symbol>(tok->at_(3));
+		const Ptr symbol = tok->at_(3);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F' ) // literal
 		{
 			const Ptr lit = tok->at_(4);
@@ -6169,7 +6169,7 @@ public:
 		const char tag = char(static_<Byte>(tok->at_(0))->get_());
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
-		Symbol* const symbol = static_<Symbol>(tok->at_(3));
+		const Ptr symbol = tok->at_(3);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
 			log_("parser error: literal literal");
@@ -6198,26 +6198,64 @@ public:
 		const Ptr token = _token_();
 		if (token->is_("."))
 		{
+			log_("parser error: dot eof");
 			return;
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = char(static_<Byte>(tok->at_(0))->get_());
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
-		Symbol* const symbol = static_<Symbol>(tok->at_(3));
+		const Ptr symbol = tok->at_(3);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
-			log_("parser error: literal dot literal");
+			log_("parser error: dot literal");
 		}
 		else if (tag == 'N') // name
 		{
-
+			flock.push_back_(symbol);
+			_next_();
+			member_(flock);
 		}
 		else if (tag == 'P') // punctuation
 		{
 			if (symbol->is_("."))
 			{
-				log_("parser error: literal dot dot");
+				log_("parser error: dot dot");
+			}
+		}
+		else if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+		}
+		return;
+	}
+
+	inline void member_(Flock& flock)
+	{
+		const Ptr token = _token_();
+		if (token->is_("."))
+		{
+			//TODO member eof
+			return;
+		}
+		Flock* const tok = static_<Flock>(token);
+		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const int64_t x = static_<Int64>(tok->at_(1))->get_();
+		const int64_t y = static_<Int64>(tok->at_(2))->get_();
+		const Ptr symbol = tok->at_(3);
+		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
+		{
+			log_("parser error: member literal");
+		}
+		else if (tag == 'N') // name
+		{
+			log_("parser error: member name");
+		}
+		else if (tag == 'P') // punctuation
+		{
+			if (symbol->is_("."))
+			{
+				//TODO member dot
 			}
 		}
 		else if (tag == 'E') // error
