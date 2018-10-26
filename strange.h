@@ -6051,6 +6051,7 @@ public:
 		: Mutable{}
 		, Me{}
 		, _tokenizer{ tokenizer }
+		, _flock{ Flock::mut_() }
 		, _deque{}
 		, _ahead{ 0 }
 	{
@@ -6124,9 +6125,106 @@ public:
 		return _tokenizer->invoke_("eof");
 	}
 
-	inline const Ptr parse_()
+	inline void parse_(Flock& flock)
 	{
-		
+		const Ptr token = _token_();
+		if (token->is_("."))
+		{
+			return;
+		}
+		Flock* const tok = static_<Flock>(token);
+		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const int64_t x = static_<Int64>(tok->at_(1))->get_();
+		const int64_t y = static_<Int64>(tok->at_(2))->get_();
+		Symbol* const symbol = static_<Symbol>(tok->at_(3));
+		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F' ) // literal
+		{
+			const Ptr lit = tok->at_(4);
+			flock.push_back_(lit);
+			_next_();
+			literal_(flock);
+		}
+		else if (tag == 'N') // name
+		{
+
+		}
+		else if (tag == 'P') // punctuation
+		{
+
+		}
+		else if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+		}
+	}
+
+	inline void literal_(Flock& flock)
+	{
+		const Ptr token = _token_();
+		if (token->is_("."))
+		{
+			return;
+		}
+		Flock* const tok = static_<Flock>(token);
+		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const int64_t x = static_<Int64>(tok->at_(1))->get_();
+		const int64_t y = static_<Int64>(tok->at_(2))->get_();
+		Symbol* const symbol = static_<Symbol>(tok->at_(3));
+		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
+		{
+			log_("parser error: literal literal");
+		}
+		else if (tag == 'N') // name
+		{
+			log_("parser error: literal name");
+		}
+		else if (tag == 'P') // punctuation
+		{
+			if (symbol->is_("."))
+			{
+				_next_();
+				dot_(flock);
+			}
+		}
+		else if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+		}
+		return;
+	}
+
+	inline void dot_(Flock& flock)
+	{
+		const Ptr token = _token_();
+		if (token->is_("."))
+		{
+			return;
+		}
+		Flock* const tok = static_<Flock>(token);
+		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const int64_t x = static_<Int64>(tok->at_(1))->get_();
+		const int64_t y = static_<Int64>(tok->at_(2))->get_();
+		Symbol* const symbol = static_<Symbol>(tok->at_(3));
+		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
+		{
+			log_("parser error: literal dot literal");
+		}
+		else if (tag == 'N') // name
+		{
+
+		}
+		else if (tag == 'P') // punctuation
+		{
+			if (symbol->is_("."))
+			{
+				log_("parser error: literal dot dot");
+			}
+		}
+		else if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+		}
+		return;
 	}
 
 	virtual inline const Ptr type_() const override
@@ -6152,6 +6250,7 @@ public:
 
 private:
 	const Ptr _tokenizer;
+	Ptr _flock;
 	std::deque<Ptr> _deque;
 	int64_t _ahead;
 
