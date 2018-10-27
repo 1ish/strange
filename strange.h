@@ -279,6 +279,11 @@ public:
 		return boolean_(same_(it->next_()));
 	}
 
+	inline const Ptr different(const Ptr it) const
+	{
+		return boolean_(!same_(it->next_()));
+	}
+
 	virtual inline const Ptr visit(const Ptr it)
 	{
 		const Ptr visitor = it->next_();
@@ -333,6 +338,11 @@ public:
 	inline const Ptr is(const Ptr it) const
 	{
 		return boolean_(is_(it->next_()));
+	}
+
+	inline const Ptr is_not(const Ptr it) const
+	{
+		return boolean_(!is_(it->next_()));
 	}
 
 protected:
@@ -5487,7 +5497,6 @@ protected:
 		{
 			Creature* const creature = static_cast<Creature*>(thing);
 			loc->insert_("|", me->me_());
-			loc->insert_("#", creature->_members); //TODO
 		}
 		loc->insert_("&", it);
 		loc->insert_("@", Byte::mut_());
@@ -6151,7 +6160,7 @@ public:
 			const Ptr flock = Flock::mut_();
 			static_<Flock>(flock)->push_back_(lit);
 			_next_();
-			_literal_(statement, flock);
+			_thing_(statement, flock);
 			return Expression::fin_(statement, flock);
 		}
 		else if (tag == 'N') // name
@@ -6217,7 +6226,7 @@ private:
 		}
 	}
 
-	inline void _literal_(const Ptr statement, const Ptr flock)
+	inline void _thing_(const Ptr statement, const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -6244,6 +6253,190 @@ private:
 			{
 				_next_();
 				_dot_(statement, flock);
+			}
+			else if (symbol->is_("["))
+			{
+				_next_();
+				_list_(statement, flock, symbol, sym_("]"));
+			}
+			else if (symbol->is_("("))
+			{
+				_next_();
+				_list_(statement, flock, symbol, sym_(")"));
+			}
+			else if (symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(","))
+			{
+				return;
+			}
+			else if (symbol->is_("%"))
+			{
+				flk->push_back_(sym_("modulo"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("%="))
+			{
+				flk->push_back_(sym_("self_modulo"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("%%"))
+			{
+				flk->push_back_(sym_("xor"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("!%"))
+			{
+				flk->push_back_(sym_("xnor"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("+"))
+			{
+				flk->push_back_(sym_("add"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("+="))
+			{
+				flk->push_back_(sym_("self_add"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("++"))
+			{
+				flk->push_back_(sym_("increment"));
+				_next_();
+			}
+			else if (symbol->is_("-"))
+			{
+				flk->push_back_(sym_("subtract"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("-="))
+			{
+				flk->push_back_(sym_("self_subtract"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("--"))
+			{
+				flk->push_back_(sym_("decrement"));
+				_next_();
+			}
+			else if (symbol->is_("*"))
+			{
+				flk->push_back_(sym_("multiply"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("*="))
+			{
+				flk->push_back_(sym_("self_multiply"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("/"))
+			{
+				flk->push_back_(sym_("divide"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("/="))
+			{
+				flk->push_back_(sym_("self_divide"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("="))
+			{
+				flk->push_back_(sym_("same"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("!="))
+			{
+				flk->push_back_(sym_("different"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("@"))
+			{
+				flk->push_back_(sym_("at"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("&"))
+			{
+				flk->push_back_(sym_("iterator"));
+				_next_();
+			}
+			else if (symbol->is_("&&"))
+			{
+				flk->push_back_(sym_("and"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("!&"))
+			{
+				flk->push_back_(sym_("nand"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("||"))
+			{
+				flk->push_back_(sym_("or"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("!|"))
+			{
+				flk->push_back_(sym_("nor"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("^"))
+			{
+				flk->push_back_(sym_("next"));
+				_next_();
+			}
+			else if (symbol->is_("~"))
+			{
+				flk->push_back_(sym_("copy"));
+				_next_();
+			}
+			else if (symbol->is_("~~"))
+			{
+				flk->push_back_(sym_("clone"));
+				_next_();
+			}
+			else if (symbol->is_("#"))
+			{
+				flk->push_back_(sym_("finalize"));
+				_next_();
+			}
+			else if (symbol->is_("##"))
+			{
+				flk->push_back_(sym_("freeze"));
+				_next_();
+			}
+			else if (symbol->is_("!"))
+			{
+				flk->push_back_(sym_("is"));
+				flk->push_back_(sym_("0"));
+				_next_();
+			}
+			else if (symbol->is_("?"))
+			{
+				flk->push_back_(sym_("is_not"));
+				flk->push_back_(sym_("0"));
+				_next_();
+			}
+			else
+			{
+				log_("parser error: literal punctuation");
 			}
 		}
 		else if (tag == 'E') // error
@@ -6278,10 +6471,7 @@ private:
 		}
 		else if (tag == 'P') // punctuation
 		{
-			if (symbol->is_("."))
-			{
-				log_("parser error: dot dot");
-			}
+			log_("parser error: dot punctuation");
 		}
 		else if (tag == 'E') // error
 		{
@@ -6294,7 +6484,6 @@ private:
 		const Ptr token = _token_();
 		if (token->is_("."))
 		{
-			//TODO member eof
 			return;
 		}
 		Flock* const tok = static_<Flock>(token);
@@ -6302,7 +6491,7 @@ private:
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
-		Flock* const flk = static_<Flock>(flock);
+		// Flock* const flk = static_<Flock>(flock);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
 			log_("parser error: member literal");
@@ -6315,7 +6504,8 @@ private:
 		{
 			if (symbol->is_("."))
 			{
-				//TODO member dot
+				_next_();
+				_dot_(statement, flock);
 			}
 			else if (symbol->is_("["))
 			{
@@ -6329,7 +6519,7 @@ private:
 			}
 			else
 			{
-				log_("parser error: member name");
+				log_("parser error: member punctuation");
 			}
 		}
 		else if (tag == 'E') // error
@@ -6474,8 +6664,10 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("invoke", Member<Thing>::fin_(&Thing::invoke));
 		shoal->update_("next", Member<Thing>::fin_(&Thing::next));
 		shoal->update_("is", Const<Thing>::fin_(&Thing::is));
+		shoal->update_("is_not", Const<Thing>::fin_(&Thing::is_not));
 		shoal->update_("hash", Const<Thing>::fin_(&Thing::hash));
 		shoal->update_("same", Const<Thing>::fin_(&Thing::same));
+		shoal->update_("different", Const<Thing>::fin_(&Thing::different));
 		shoal->update_("copy", Const<Thing>::fin_(&Thing::copy));
 		shoal->update_("clone", Const<Thing>::fin_(&Thing::clone));
 		shoal->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
