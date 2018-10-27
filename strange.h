@@ -5487,7 +5487,7 @@ protected:
 		{
 			Creature* const creature = static_cast<Creature*>(thing);
 			loc->insert_("|", me->me_());
-			loc->insert_("#", creature->_members);
+			loc->insert_("#", creature->_members); //TODO
 		}
 		loc->insert_("&", it);
 		loc->insert_("@", Byte::mut_());
@@ -6320,7 +6320,16 @@ private:
 			else if (symbol->is_("["))
 			{
 				_next_();
-				_flock_(statement, flock);
+				_list_(statement, flock, symbol, sym_("]"));
+			}
+			else if (symbol->is_("("))
+			{
+				_next_();
+				_list_(statement, flock, symbol, sym_(")"));
+			}
+			else
+			{
+				log_("parser error: member name");
 			}
 		}
 		else if (tag == 'E') // error
@@ -6329,7 +6338,7 @@ private:
 		}
 	}
 
-	inline void _flock_(const Ptr statement, const Ptr flock)
+	inline void _list_(const Ptr statement, const Ptr flock, const Ptr open, const Ptr close)
 	{
 		bool first = true;
 		for (;;first = false)
@@ -6337,8 +6346,7 @@ private:
 			const Ptr token = _token_();
 			if (token->is_("."))
 			{
-				//TODO member eof
-				log_("parser error: [ without matching ]");
+				log_("parser error: open without close");
 				return;
 			}
 			Flock* const tok = static_<Flock>(token);
@@ -6349,7 +6357,7 @@ private:
 			Flock* const flk = static_<Flock>(flock);
 			if (tag == 'P') // punctuation
 			{
-				if (symbol->is_("]"))
+				if (symbol->is_(close))
 				{
 					_next_();
 					return;
@@ -6358,7 +6366,7 @@ private:
 				{
 					if (symbol->is_(","))
 					{
-						log_("parser error: [ followed immediately by ,");
+						log_("parser error: open followed immediately by ,");
 						return;
 					}
 				}
@@ -6368,7 +6376,7 @@ private:
 				}
 				else
 				{
-					log_("parser error: [ expecting ,");
+					log_("parser error: open expecting ,");
 					return;
 				}
 			}
@@ -6379,10 +6387,17 @@ private:
 			}
 			else if (!first)
 			{
-				log_("parser error: [ expecting ,");
+				log_("parser error: open expecting ,");
 				return;
 			}
-			flk->push_back_(parse_());
+			if (open->is_("("))
+			{
+				flk->push_back_(parse_());
+			}
+			else
+			{
+				flk->push_back_(Function::fin_(parse_())->invoke_());
+			}
 		}
 	}
 };
