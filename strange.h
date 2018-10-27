@@ -6317,10 +6317,72 @@ private:
 			{
 				//TODO member dot
 			}
+			else if (symbol->is_("["))
+			{
+				_next_();
+				_flock_(statement, flock);
+			}
 		}
 		else if (tag == 'E') // error
 		{
 			log_("tokenizer error");
+		}
+	}
+
+	inline void _flock_(const Ptr statement, const Ptr flock)
+	{
+		bool first = true;
+		for (;;first = false)
+		{
+			const Ptr token = _token_();
+			if (token->is_("."))
+			{
+				//TODO member eof
+				log_("parser error: [ without matching ]");
+				return;
+			}
+			Flock* const tok = static_<Flock>(token);
+			const char tag = char(static_<Byte>(tok->at_(0))->get_());
+			const int64_t x = static_<Int64>(tok->at_(1))->get_();
+			const int64_t y = static_<Int64>(tok->at_(2))->get_();
+			const Ptr symbol = tok->at_(3);
+			Flock* const flk = static_<Flock>(flock);
+			if (tag == 'P') // punctuation
+			{
+				if (symbol->is_("]"))
+				{
+					_next_();
+					return;
+				}
+				if (first)
+				{
+					if (symbol->is_(","))
+					{
+						log_("parser error: [ followed immediately by ,");
+						return;
+					}
+				}
+				else if (symbol->is_(","))
+				{
+					_next_();
+				}
+				else
+				{
+					log_("parser error: [ expecting ,");
+					return;
+				}
+			}
+			else if (tag == 'E') // error
+			{
+				log_("tokenizer error");
+				return;
+			}
+			else if (!first)
+			{
+				log_("parser error: [ expecting ,");
+				return;
+			}
+			flk->push_back_(parse_());
 		}
 	}
 };
