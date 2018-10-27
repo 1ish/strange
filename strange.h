@@ -5085,9 +5085,9 @@ public:
 
 	static inline const Ptr fin_(const Ptr statement, const Ptr flock)
 	{
-		if (statement->is_("dispatch"))
+		if (statement->is_("invoke"))
 		{
-			return fin_(&Expression::_dispatch_, flock);
+			return fin_(&Expression::_invoke_, flock);
 		}
 		else if (statement->is_("break"))
 		{
@@ -5125,7 +5125,14 @@ public:
 		{
 			return fin_(&Expression::_for_, flock);
 		}
-		return nothing_();
+		const Ptr none = Flock::mut_();
+		static_<Flock>(none)->push_back_(nothing_());
+		return fin_(&Expression::_invoke_, none);
+	}
+
+	static inline const Ptr fin_()
+	{
+		return fin_(nothing_(), nothing_());
 	}
 
 	static inline const Ptr fin(const Ptr it)
@@ -5161,7 +5168,7 @@ private:
 	const MemberPtr _member;
 	const Ptr _flock;
 
-	inline const Ptr _dispatch_(const Ptr expression, const Ptr local)
+	inline const Ptr _invoke_(const Ptr expression, const Ptr local)
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
@@ -6125,12 +6132,12 @@ public:
 		return _tokenizer->invoke_("eof");
 	}
 
-	inline void parse_(Flock& flock)
+	inline const Ptr parse_()
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
 		{
-			return;
+			return Expression::fin_();
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = char(static_<Byte>(tok->at_(0))->get_());
@@ -6140,9 +6147,12 @@ public:
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F' ) // literal
 		{
 			const Ptr lit = tok->at_(4);
-			flock.push_back_(lit);
+			const Ptr statement = sym_("invoke");
+			const Ptr flock = Flock::mut_();
+			static_<Flock>(flock)->push_back_(lit);
 			_next_();
-			literal_(flock);
+			_literal_(statement, flock);
+			return Expression::fin_(statement, flock);
 		}
 		else if (tag == 'N') // name
 		{
@@ -6156,113 +6166,7 @@ public:
 		{
 			log_("tokenizer error");
 		}
-	}
-
-	inline void literal_(Flock& flock)
-	{
-		const Ptr token = _token_();
-		if (token->is_("."))
-		{
-			return;
-		}
-		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<Byte>(tok->at_(0))->get_());
-		const int64_t x = static_<Int64>(tok->at_(1))->get_();
-		const int64_t y = static_<Int64>(tok->at_(2))->get_();
-		const Ptr symbol = tok->at_(3);
-		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
-		{
-			log_("parser error: literal literal");
-		}
-		else if (tag == 'N') // name
-		{
-			log_("parser error: literal name");
-		}
-		else if (tag == 'P') // punctuation
-		{
-			if (symbol->is_("."))
-			{
-				_next_();
-				dot_(flock);
-			}
-		}
-		else if (tag == 'E') // error
-		{
-			log_("tokenizer error");
-		}
-		return;
-	}
-
-	inline void dot_(Flock& flock)
-	{
-		const Ptr token = _token_();
-		if (token->is_("."))
-		{
-			log_("parser error: dot eof");
-			return;
-		}
-		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<Byte>(tok->at_(0))->get_());
-		const int64_t x = static_<Int64>(tok->at_(1))->get_();
-		const int64_t y = static_<Int64>(tok->at_(2))->get_();
-		const Ptr symbol = tok->at_(3);
-		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
-		{
-			log_("parser error: dot literal");
-		}
-		else if (tag == 'N') // name
-		{
-			flock.push_back_(symbol);
-			_next_();
-			member_(flock);
-		}
-		else if (tag == 'P') // punctuation
-		{
-			if (symbol->is_("."))
-			{
-				log_("parser error: dot dot");
-			}
-		}
-		else if (tag == 'E') // error
-		{
-			log_("tokenizer error");
-		}
-		return;
-	}
-
-	inline void member_(Flock& flock)
-	{
-		const Ptr token = _token_();
-		if (token->is_("."))
-		{
-			//TODO member eof
-			return;
-		}
-		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<Byte>(tok->at_(0))->get_());
-		const int64_t x = static_<Int64>(tok->at_(1))->get_();
-		const int64_t y = static_<Int64>(tok->at_(2))->get_();
-		const Ptr symbol = tok->at_(3);
-		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
-		{
-			log_("parser error: member literal");
-		}
-		else if (tag == 'N') // name
-		{
-			log_("parser error: member name");
-		}
-		else if (tag == 'P') // punctuation
-		{
-			if (symbol->is_("."))
-			{
-				//TODO member dot
-			}
-		}
-		else if (tag == 'E') // error
-		{
-			log_("tokenizer error");
-		}
-		return;
+		return Expression::fin_();
 	}
 
 	virtual inline const Ptr type_() const override
@@ -6310,6 +6214,113 @@ private:
 		else
 		{
 			_deque.pop_front();
+		}
+	}
+
+	inline void _literal_(const Ptr statement, const Ptr flock)
+	{
+		const Ptr token = _token_();
+		if (token->is_("."))
+		{
+			return;
+		}
+		Flock* const tok = static_<Flock>(token);
+		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const int64_t x = static_<Int64>(tok->at_(1))->get_();
+		const int64_t y = static_<Int64>(tok->at_(2))->get_();
+		const Ptr symbol = tok->at_(3);
+		Flock* const flk = static_<Flock>(flock);
+		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
+		{
+			log_("parser error: literal literal");
+		}
+		else if (tag == 'N') // name
+		{
+			log_("parser error: literal name");
+		}
+		else if (tag == 'P') // punctuation
+		{
+			if (symbol->is_("."))
+			{
+				_next_();
+				_dot_(statement, flock);
+			}
+		}
+		else if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+		}
+	}
+
+	inline void _dot_(const Ptr statement, const Ptr flock)
+	{
+		const Ptr token = _token_();
+		if (token->is_("."))
+		{
+			log_("parser error: dot eof");
+			return;
+		}
+		Flock* const tok = static_<Flock>(token);
+		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const int64_t x = static_<Int64>(tok->at_(1))->get_();
+		const int64_t y = static_<Int64>(tok->at_(2))->get_();
+		const Ptr symbol = tok->at_(3);
+		Flock* const flk = static_<Flock>(flock);
+		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
+		{
+			log_("parser error: dot literal");
+		}
+		else if (tag == 'N') // name
+		{
+			flk->push_back_(symbol);
+			_next_();
+			_member_(statement, flock);
+		}
+		else if (tag == 'P') // punctuation
+		{
+			if (symbol->is_("."))
+			{
+				log_("parser error: dot dot");
+			}
+		}
+		else if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+		}
+	}
+
+	inline void _member_(const Ptr statement, const Ptr flock)
+	{
+		const Ptr token = _token_();
+		if (token->is_("."))
+		{
+			//TODO member eof
+			return;
+		}
+		Flock* const tok = static_<Flock>(token);
+		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const int64_t x = static_<Int64>(tok->at_(1))->get_();
+		const int64_t y = static_<Int64>(tok->at_(2))->get_();
+		const Ptr symbol = tok->at_(3);
+		Flock* const flk = static_<Flock>(flock);
+		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
+		{
+			log_("parser error: member literal");
+		}
+		else if (tag == 'N') // name
+		{
+			log_("parser error: member name");
+		}
+		else if (tag == 'P') // punctuation
+		{
+			if (symbol->is_("."))
+			{
+				//TODO member dot
+			}
+		}
+		else if (tag == 'E') // error
+		{
+			log_("tokenizer error");
 		}
 	}
 };
