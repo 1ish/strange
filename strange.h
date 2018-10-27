@@ -6366,7 +6366,7 @@ private:
 			{
 				flk->push_back_(sym_("at"));
 				_next_();
-				_member_(statement, flock);
+				_at_(statement, flock);
 			}
 			else if (symbol->is_("&"))
 			{
@@ -6588,6 +6588,69 @@ private:
 			{
 				flk->push_back_(Function::fin_(parse_())->invoke_());
 			}
+		}
+	}
+
+	inline void _at_(const Ptr statement, const Ptr flock)
+	{
+		const Ptr token = _token_();
+		if (token->is_("."))
+		{
+			log_("parser error: at eof");
+			return;
+		}
+		Flock* const tok = static_<Flock>(token);
+		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const int64_t x = static_<Int64>(tok->at_(1))->get_();
+		const int64_t y = static_<Int64>(tok->at_(2))->get_();
+		const Ptr symbol = tok->at_(3);
+		Flock* const flk = static_<Flock>(flock);
+		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
+		{
+			flk->push_back_(tok->at_(4));
+		}
+		else if (tag == 'N') // name
+		{
+			flk->push_back_(symbol);
+		}
+		else if (tag == 'P') // punctuation
+		{
+			log_("parser error: at punctuation");
+			return;
+		}
+		else if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+			return;
+		}
+		_next_();
+		_update_(statement, flock);
+	}
+
+	inline void _update_(const Ptr statement, const Ptr flock)
+	{
+		const Ptr token = _token_();
+		if (token->is_("."))
+		{
+			return;
+		}
+		Flock* const tok = static_<Flock>(token);
+		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const int64_t x = static_<Int64>(tok->at_(1))->get_();
+		const int64_t y = static_<Int64>(tok->at_(2))->get_();
+		const Ptr symbol = tok->at_(3);
+		Flock* const flk = static_<Flock>(flock);
+		if (tag == 'P') // punctuation
+		{
+			if (symbol->is_(":"))
+			{
+				_next_();
+				flk->push_back_(parse_());
+			}
+		}
+		else if (tag == 'E') // error
+		{
+			log_("tokenizer error");
 		}
 	}
 };
