@@ -1464,6 +1464,10 @@ public:
 			shoal->update_("rwl", Static::fin_(&Flock::rwl));
 			shoal->update_("push_back", Member<Flock>::fin_(&Flock::push_back));
 			shoal->update_("iterator", Const<Flock>::fin_(&Flock::iterator));
+			shoal->update_("size", Const<Flock>::fin_(&Flock::size));
+			shoal->update_("empty", Const<Flock>::fin_(&Flock::empty));
+			shoal->update_("at", Const<Flock>::fin_(&Flock::at));
+			shoal->update_("update", Member<Flock>::fin_(&Flock::update));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -1557,16 +1561,49 @@ public:
 
 	inline const Ptr size(const Ptr ignore) const;
 
+	inline const bool empty_() const
+	{
+		return _vector.empty();
+	}
+
+	inline const Ptr empty(const Ptr ignore) const
+	{
+		return boolean_(empty_());
+	}
+
 	inline const Ptr at_(const int64_t pos) const
 	{
-		return _vector.at(size_t(pos));
+		if (pos >= 0 && pos < size_())
+		{
+			return _vector[size_t(pos)];
+		}
+		return nothing_();
 	}
 
 	inline const Ptr at_(const Ptr pos) const;
 
 	inline const Ptr at(const Ptr it) const
 	{
-		return at(it->next_());
+		return at_(it->next_());
+	}
+
+	inline const Ptr update_(const int64_t pos, const Ptr value)
+	{
+		if (pos >= 0 && pos < size_())
+		{
+			_vector[size_t(pos)] = value;
+			return value;
+		}
+		return nothing_();
+	}
+
+	inline const Ptr update_(const Ptr pos, const Ptr value);
+
+	inline const Ptr update(const Ptr it)
+	{
+		const Ptr index = it->next_();
+		const Ptr value = it->next_();
+		return update_(index, value);
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -6644,6 +6681,7 @@ private:
 		{
 			if (symbol->is_(":"))
 			{
+				flk->update_(flk->size_() - 2, sym_("update"));
 				_next_();
 				flk->push_back_(parse_());
 			}
@@ -7244,11 +7282,17 @@ inline const Thing::Ptr Flock::at_(const Thing::Ptr pos) const
 	Number* const number = dynamic_<Number>(pos);
 	if (number)
 	{
-		const int64_t p = number->to_int64_();
-		if (p >= 0 && p < size_())
-		{
-			return at_(p);
-		}
+		return at_(number->to_int64_());
+	}
+	return nothing_();
+}
+
+inline const Thing::Ptr Flock::update_(const Thing::Ptr pos, const Thing::Ptr value)
+{
+	Number* const number = dynamic_<Number>(pos);
+	if (number)
+	{
+		return update_(number->to_int64_(), value);
 	}
 	return nothing_();
 }
