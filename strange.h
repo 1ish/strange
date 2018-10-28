@@ -6180,16 +6180,16 @@ public:
 			const Ptr symbol = tok->at_(3);
 			const Ptr flock = Flock::mut_();
 			Flock* const flk = static_<Flock>(flock);
+			const Ptr invoke = sym_("invoke");
 			if (first)
 			{
 				if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 				{
 					const Ptr lit = tok->at_(4);
-					const Ptr statement = sym_("invoke");
 					flk->push_back_(lit);
 					_next_();
-					_thing_(statement, flock);
-					result = Expression::fin_(statement, flock);
+					_thing_(invoke, flock);
+					result = Expression::fin_(invoke, flock);
 					continue;
 				}
 				else if (tag == 'N') // name
@@ -6274,53 +6274,63 @@ public:
 				}
 				else if (tag == 'P') // punctuation
 				{
-					if (symbol->is_("{")) // shoal
+					const Ptr at = sym_("at");
+					if (symbol->is_("$")) // static
 					{
-						_next_();
-						//TODO
-					}
-					else if (symbol->is_("$")) // static
-					{
-						const Ptr statement = sym_("invoke");
-						const Ptr at = sym_("at");
-
 						const Ptr nested = Flock::mut_();
 						Flock* const nest = static_<Flock>(nested);
-						nest->push_back_(Expression::fin_(statement, Flock::mut_())); // local
+						nest->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
 						nest->push_back_(at);
 						nest->push_back_(symbol);
 
-						flk->push_back_(Expression::fin_(statement, nested));
+						flk->push_back_(Expression::fin_(invoke, nested));
 						flk->push_back_(at);
 						_next_();
-						_at_(statement, flock);
-						result = Expression::fin_(statement, flock);
+						_at_(invoke, flock);
+						result = Expression::fin_(invoke, flock);
 						continue;
 					}
 					else if (symbol->is_("|") || symbol->is_("&")) // me or it
 					{
-						const Ptr statement = sym_("invoke");
-						const Ptr at = sym_("at");
-
 						const Ptr nested = Flock::mut_();
 						Flock* const nest = static_<Flock>(nested);
-						nest->push_back_(Expression::fin_(statement, Flock::mut_())); // local
+						nest->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
 						nest->push_back_(at);
 						nest->push_back_(symbol);
 
-						flk->push_back_(Expression::fin_(statement, nested));
+						flk->push_back_(Expression::fin_(invoke, nested));
 						_next_();
-						_thing_(statement, flock);
-						result = Expression::fin_(statement, flock);
+						_thing_(invoke, flock);
+						result = Expression::fin_(invoke, flock);
 						continue;
 					}
 					else if (symbol->is_("@")) // local at
 					{
-						const Ptr statement = sym_("invoke");
-						flk->push_back_(Expression::fin_(statement, Flock::mut_())); // local
-						_thing_(statement, flock);
-						result = Expression::fin_(statement, flock);
+						flk->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
+						_thing_(invoke, flock);
+						result = Expression::fin_(invoke, flock);
 						continue;
+					}
+					else if (symbol->is_("(")) // expression
+					{
+						//TODO
+						_next_();
+						_list_(invoke, flock, symbol, sym_(")"));
+						result = Expression::fin_(invoke, flock);
+						continue;
+					}
+					else if (symbol->is_("[")) // flock
+					{
+						//TODO
+						_next_();
+						_list_(invoke, flock, symbol, sym_("]"));
+						result = Expression::fin_(invoke, flock);
+						continue;
+					}
+					else if (symbol->is_("{")) // shoal
+					{
+						//TODO
+						_next_();
 					}
 				}
 				else if (tag == 'E') // error
@@ -6342,10 +6352,9 @@ public:
 						symbol->is_("~~") || symbol->is_("[") || symbol->is_("^") || symbol->is_("||") ||
 						symbol->is_("!|"))
 					{
-						const Ptr statement = sym_("invoke");
 						flk->push_back_(result);
-						_thing_(statement, flock);
-						result = Expression::fin_(statement, flock);
+						_thing_(invoke, flock);
+						result = Expression::fin_(invoke, flock);
 						continue;
 					}
 				}
