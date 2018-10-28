@@ -5195,6 +5195,11 @@ public:
 		return (exp->*(exp->_member))(expression, local);
 	}
 
+	static inline const Ptr immediate_(const Ptr expression)
+	{
+		return evaluate_(expression, Shoal::mut_());
+	}
+
 	static inline const Ptr iterator_(const Ptr expression, const Ptr local)
 	{
 		return It::mut_(expression, local);
@@ -6196,39 +6201,50 @@ public:
 
 	inline const Ptr parse_()
 	{
-		const Ptr token = _token_();
-		if (token->is_("."))
+		for (bool first = true; true; first = false)
 		{
-			return Expression::fin_();
-		}
-		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<Byte>(tok->at_(0))->get_());
-		const int64_t x = static_<Int64>(tok->at_(1))->get_();
-		const int64_t y = static_<Int64>(tok->at_(2))->get_();
-		const Ptr symbol = tok->at_(3);
-		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F' ) // literal
-		{
-			const Ptr lit = tok->at_(4);
-			const Ptr statement = sym_("invoke");
-			const Ptr flock = Flock::mut_();
-			static_<Flock>(flock)->push_back_(lit);
-			_next_();
-			_thing_(statement, flock);
-			return Expression::fin_(statement, flock);
-		}
-		else if (tag == 'N') // name
-		{
+			const Ptr token = _token_();
+			if (token->is_("."))
+			{
+				return Expression::fin_();
+			}
+			Flock* const tok = static_<Flock>(token);
+			const char tag = char(static_<Byte>(tok->at_(0))->get_());
+			const int64_t x = static_<Int64>(tok->at_(1))->get_();
+			const int64_t y = static_<Int64>(tok->at_(2))->get_();
+			const Ptr symbol = tok->at_(3);
+			if (first)
+			{
+				if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
+				{
+					const Ptr lit = tok->at_(4);
+					const Ptr statement = sym_("invoke");
+					const Ptr flock = Flock::mut_();
+					static_<Flock>(flock)->push_back_(lit);
+					_next_();
+					_thing_(statement, flock);
+					return Expression::fin_(statement, flock);
+				}
+				else if (tag == 'N') // name
+				{
 
-		}
-		else if (tag == 'P') // punctuation
-		{
+				}
+				else if (tag == 'P') // punctuation
+				{
 
+				}
+				else if (tag == 'E') // error
+				{
+					log_("tokenizer error");
+				}
+				return Expression::fin_();
+			}
+			else
+			{
+
+			}
 		}
-		else if (tag == 'E') // error
-		{
-			log_("tokenizer error");
-		}
-		return Expression::fin_();
+		//TODO
 	}
 
 	virtual inline const Ptr type_() const override
@@ -6583,8 +6599,7 @@ private:
 
 	inline void _list_(const Ptr statement, const Ptr flock, const Ptr open, const Ptr close)
 	{
-		bool first = true;
-		for (;;first = false)
+		for (bool first = true; true; first = false)
 		{
 			const Ptr token = _token_();
 			if (token->is_("."))
@@ -6598,48 +6613,72 @@ private:
 			const int64_t y = static_<Int64>(tok->at_(2))->get_();
 			const Ptr symbol = tok->at_(3);
 			Flock* const flk = static_<Flock>(flock);
-			if (tag == 'P') // punctuation
+			if (first)
 			{
-				if (symbol->is_(close))
+				if (tag == 'P') // punctuation
 				{
-					_next_();
-					return;
-				}
-				if (first)
-				{
+					if (symbol->is_(close))
+					{
+						_next_();
+						return;
+					}
 					if (symbol->is_(","))
 					{
 						log_("parser error: open followed immediately by ,");
 						return;
 					}
 				}
-				else if (symbol->is_(","))
+				else if (tag == 'E') // error
 				{
-					_next_();
+					log_("tokenizer error");
+					return;
+				}
+				if (open->is_("("))
+				{
+					flk->push_back_(parse_());
+				}
+				else
+				{
+					flk->push_back_(Expression::immediate_(parse_()));
+				}
+			}
+			else
+			{
+				if (tag == 'P') // punctuation
+				{
+					if (symbol->is_(close))
+					{
+						_next_();
+						return;
+					}
+					if (symbol->is_(","))
+					{
+						_next_();
+					}
+					else
+					{
+						log_("parser error: open expecting ,");
+						return;
+					}
+				}
+				else if (tag == 'E') // error
+				{
+					log_("tokenizer error");
+					return;
 				}
 				else
 				{
 					log_("parser error: open expecting ,");
 					return;
 				}
-			}
-			else if (tag == 'E') // error
-			{
-				log_("tokenizer error");
-				return;
-			}
-			else if (!first)
-			{
-				log_("parser error: open expecting ,");
-				return;
-			}
-			if (open->is_("("))
-			{
-				flk->push_back_(parse_());
-			}
-			else
-			{
-				flk->push_back_(Function::fin_(parse_())->invoke_());
+				if (open->is_("("))
+				{
+					flk->push_back_(parse_());
+				}
+				else
+				{
+					flk->push_back_(Expression::immediate_(parse_()));
+				}
 			}
 		}
 	}
