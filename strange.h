@@ -6273,12 +6273,12 @@ public:
 				}
 				else if (tag == 'P') // punctuation
 				{
-					if (symbol->is_("{"))
+					if (symbol->is_("{")) // shoal
 					{
 						_next_();
 						//TODO
 					}
-					else if (symbol->is_("$"))
+					else if (symbol->is_("$")) // static
 					{
 						const Ptr statement = sym_("invoke");
 						const Ptr at = sym_("at");
@@ -6296,7 +6296,24 @@ public:
 						result = Expression::fin_(statement, flock);
 						continue;
 					}
-					else if (symbol->is_("@"))
+					else if (symbol->is_("|") || symbol->is_("&")) // me or it
+					{
+						const Ptr statement = sym_("invoke");
+						const Ptr at = sym_("at");
+
+						const Ptr nested = Flock::mut_();
+						Flock* const nest = static_<Flock>(nested);
+						nest->push_back_(Expression::fin_(statement, Flock::mut_())); // local
+						nest->push_back_(at);
+						nest->push_back_(symbol);
+
+						flk->push_back_(Expression::fin_(statement, nested));
+						_next_();
+						_thing_(statement, flock);
+						result = Expression::fin_(statement, flock);
+						continue;
+					}
+					else if (symbol->is_("@")) // local at
 					{
 						const Ptr statement = sym_("invoke");
 						flk->push_back_(Expression::fin_(statement, Flock::mut_())); // local
