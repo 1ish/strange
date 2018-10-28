@@ -6177,14 +6177,15 @@ public:
 			const int64_t x = static_<Int64>(tok->at_(1))->get_();
 			const int64_t y = static_<Int64>(tok->at_(2))->get_();
 			const Ptr symbol = tok->at_(3);
+			const Ptr flock = Flock::mut_();
+			Flock* const flk = static_<Flock>(flock);
 			if (first)
 			{
 				if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 				{
 					const Ptr lit = tok->at_(4);
 					const Ptr statement = sym_("invoke");
-					const Ptr flock = Flock::mut_();
-					static_<Flock>(flock)->push_back_(lit);
+					flk->push_back_(lit);
 					_next_();
 					_thing_(statement, flock);
 					result = Expression::fin_(statement, flock);
@@ -6192,7 +6193,6 @@ public:
 				}
 				else if (tag == 'N') // name
 				{
-					const Ptr flock = Flock::mut_();
 					if (symbol->is_("break") || symbol->is_("continue"))
 					{
 						_next_();
@@ -6201,14 +6201,14 @@ public:
 					else if (symbol->is_("return"))
 					{
 						_next_();
-						static_<Flock>(flock)->push_back_(parse_());
+						flk->push_back_(parse_());
 						result = Expression::fin_(symbol, flock);
 					}
 					else if (symbol->is_("if"))
 					{
 						_next_();
 						_statement_(symbol, flock);
-						const int64_t size = static_<Flock>(flock)->size_();
+						const int64_t size = flk->size_();
 						if (size >= 2 && size <= 3)
 						{
 							result = Expression::fin_(symbol, flock);
@@ -6222,7 +6222,7 @@ public:
 					{
 						_next_();
 						_statement_(symbol, flock);
-						const int64_t size = static_<Flock>(flock)->size_();
+						const int64_t size = flk->size_();
 						if (size == 3)
 						{
 							result = Expression::fin_(symbol, flock);
@@ -6236,7 +6236,7 @@ public:
 					{
 						_next_();
 						_statement_(symbol, flock);
-						const int64_t size = static_<Flock>(flock)->size_();
+						const int64_t size = flk->size_();
 						if (size >= 1)
 						{
 							result = Expression::fin_(symbol, flock);
@@ -6250,7 +6250,7 @@ public:
 					{
 						_next_();
 						_statement_(symbol, flock);
-						const int64_t size = static_<Flock>(flock)->size_();
+						const int64_t size = flk->size_();
 						if (size >= 3)
 						{
 							result = Expression::fin_(symbol, flock);
@@ -6273,7 +6273,37 @@ public:
 				}
 				else if (tag == 'P') // punctuation
 				{
+					if (symbol->is_("{"))
+					{
+						_next_();
+						//TODO
+					}
+					else if (symbol->is_("$"))
+					{
+						const Ptr statement = sym_("invoke");
+						const Ptr at = sym_("at");
 
+						const Ptr nested = Flock::mut_();
+						Flock* const nest = static_<Flock>(nested);
+						nest->push_back_(Expression::fin_(statement, Flock::mut_())); // local
+						nest->push_back_(at);
+						nest->push_back_(symbol);
+
+						flk->push_back_(Expression::fin_(statement, nested));
+						flk->push_back_(at);
+						_next_();
+						_at_(statement, flock);
+						result = Expression::fin_(statement, flock);
+						continue;
+					}
+					else if (symbol->is_("@"))
+					{
+						const Ptr statement = sym_("invoke");
+						flk->push_back_(Expression::fin_(statement, Flock::mut_())); // local
+						_thing_(statement, flock);
+						result = Expression::fin_(statement, flock);
+						continue;
+					}
 				}
 				else if (tag == 'E') // error
 				{
@@ -6295,8 +6325,7 @@ public:
 						symbol->is_("!|"))
 					{
 						const Ptr statement = sym_("invoke");
-						const Ptr flock = Flock::mut_();
-						static_<Flock>(flock)->push_back_(result);
+						flk->push_back_(result);
 						_thing_(statement, flock);
 						result = Expression::fin_(statement, flock);
 						continue;
