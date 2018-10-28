@@ -6201,12 +6201,13 @@ public:
 
 	inline const Ptr parse_()
 	{
+		Ptr result;
 		for (bool first = true; true; first = false)
 		{
 			const Ptr token = _token_();
 			if (token->is_("."))
 			{
-				return Expression::fin_();
+				break;
 			}
 			Flock* const tok = static_<Flock>(token);
 			const char tag = char(static_<Byte>(tok->at_(0))->get_());
@@ -6223,7 +6224,8 @@ public:
 					static_<Flock>(flock)->push_back_(lit);
 					_next_();
 					_thing_(statement, flock);
-					return Expression::fin_(statement, flock);
+					result = Expression::fin_(statement, flock);
+					continue;
 				}
 				else if (tag == 'N') // name
 				{
@@ -6237,14 +6239,41 @@ public:
 				{
 					log_("tokenizer error");
 				}
-				return Expression::fin_();
 			}
 			else
 			{
-
+				if (tag == 'P') // punctuation
+				{
+					if (symbol->is_(".") || symbol->is_("!") || symbol->is_("#") || symbol->is_("##") ||
+						symbol->is_("%") || symbol->is_("%%") || symbol->is_("%=") || symbol->is_("!%") ||
+						symbol->is_("&") || symbol->is_("&&") || symbol->is_("!&") || symbol->is_("(") ||
+						symbol->is_("*") || symbol->is_("**") || symbol->is_("*=") || symbol->is_("+") ||
+						symbol->is_("++") || symbol->is_("+=") || symbol->is_("-") || symbol->is_("--") ||
+						symbol->is_("-=") || symbol->is_("/") || symbol->is_("/=") || symbol->is_("=") ||
+						symbol->is_("!=") || symbol->is_("?") || symbol->is_("@") || symbol->is_("~") ||
+						symbol->is_("~~") || symbol->is_("[") || symbol->is_("^") || symbol->is_("||") ||
+						symbol->is_("!|"))
+					{
+						const Ptr statement = sym_("invoke");
+						const Ptr flock = Flock::mut_();
+						static_<Flock>(flock)->push_back_(result);
+						_thing_(statement, flock);
+						result = Expression::fin_(statement, flock);
+						continue;
+					}
+				}
+				else if (tag == 'E') // error
+				{
+					log_("tokenizer error");
+				}
 			}
+			break;
 		}
-		//TODO
+		if (result.get())
+		{
+			return result;
+		}
+		return Expression::fin_();
 	}
 
 	virtual inline const Ptr type_() const override
@@ -6398,6 +6427,12 @@ private:
 			else if (symbol->is_("*"))
 			{
 				flk->push_back_(sym_("multiply"));
+				_next_();
+				_member_(statement, flock);
+			}
+			else if (symbol->is_("**"))
+			{
+				flk->push_back_(sym_("power"));
 				_next_();
 				_member_(statement, flock);
 			}
