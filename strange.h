@@ -6015,7 +6015,23 @@ private:
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
-		flk->push_back_(sym_(s.substr(1, s.length() - 2)));
+		const Ptr symbol = sym_(s.substr(1, s.length() - 2));
+		if (symbol->is_("0"))
+		{
+			flk->push_back_(nothing_());
+		}
+		else if (symbol->is_("1"))
+		{
+			flk->push_back_(one_());
+		}
+		else if (symbol->is_("."))
+		{
+			flk->push_back_(stop_());
+		}
+		else
+		{
+			flk->push_back_(symbol);
+		}
 		return flock;
 	}
 
