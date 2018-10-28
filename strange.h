@@ -6204,7 +6204,72 @@ public:
 						static_<Flock>(flock)->push_back_(parse_());
 						result = Expression::fin_(symbol, flock);
 					}
-
+					else if (symbol->is_("if"))
+					{
+						_next_();
+						_statement_(symbol, flock);
+						const int64_t size = static_<Flock>(flock)->size_();
+						if (size >= 2 && size <= 3)
+						{
+							result = Expression::fin_(symbol, flock);
+						}
+						else
+						{
+							log_("parser error: invalid if");
+						}
+					}
+					else if (symbol->is_("question"))
+					{
+						_next_();
+						_statement_(symbol, flock);
+						const int64_t size = static_<Flock>(flock)->size_();
+						if (size == 3)
+						{
+							result = Expression::fin_(symbol, flock);
+						}
+						else
+						{
+							log_("parser error: invalid question");
+						}
+					}
+					else if (symbol->is_("while") || symbol->is_("do"))
+					{
+						_next_();
+						_statement_(symbol, flock);
+						const int64_t size = static_<Flock>(flock)->size_();
+						if (size >= 1)
+						{
+							result = Expression::fin_(symbol, flock);
+						}
+						else
+						{
+							log_("parser error: invalid while/do");
+						}
+					}
+					else if (symbol->is_("for"))
+					{
+						_next_();
+						_statement_(symbol, flock);
+						const int64_t size = static_<Flock>(flock)->size_();
+						if (size >= 3)
+						{
+							result = Expression::fin_(symbol, flock);
+						}
+						else
+						{
+							log_("parser error: invalid for");
+						}
+					}
+					else if (symbol->is_("block"))
+					{
+						_next_();
+						_statement_(symbol, flock);
+						result = Expression::fin_(symbol, flock);
+					}
+					else
+					{
+						log_("parser error: invalid statement");
+					}
 				}
 				else if (tag == 'P') // punctuation
 				{
@@ -6598,6 +6663,45 @@ private:
 			else
 			{
 				log_("parser error: member punctuation");
+			}
+		}
+		else if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+		}
+	}
+
+	inline void _statement_(const Ptr statement, const Ptr flock)
+	{
+		const Ptr token = _token_();
+		if (token->is_("."))
+		{
+			log_("parser error: statement eof");
+			return;
+		}
+		Flock* const tok = static_<Flock>(token);
+		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const int64_t x = static_<Int64>(tok->at_(1))->get_();
+		const int64_t y = static_<Int64>(tok->at_(2))->get_();
+		const Ptr symbol = tok->at_(3);
+		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
+		{
+			log_("parser error: statement literal");
+		}
+		else if (tag == 'N') // name
+		{
+			log_("parser error: statement name");
+		}
+		else if (tag == 'P') // punctuation
+		{
+			if (symbol->is_("("))
+			{
+				_next_();
+				_list_(statement, flock, symbol, sym_(")"));
+			}
+			else
+			{
+				log_("parser error: statement punctuation");
 			}
 		}
 		else if (tag == 'E') // error
