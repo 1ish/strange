@@ -5799,14 +5799,17 @@ public:
 				doublequote = true;
 				break;
 			case '!':
-				if (char2 == '&' || char2 == '|')
+				if (char2 == '&' || char2 == '|' || char2 == '%')
 				{
 					second = true;
 				}
-			case '=':
 			case '<':
 			case '>':
-				if (char2 == '=')
+			case '+':
+			case '-':
+			case '*':
+			case '%':
+				if (char2 == '=' || char1 == char2)
 				{
 					second = true;
 				}
@@ -5817,56 +5820,16 @@ public:
 				}
 				return punctuation_(token);
 			case '&':
-				token = char1;
-				if (char2 == '&')
-				{
-					second = true;
-					break;
-				}
-				return punctuation_(token);
 			case '|':
-				token = char1;
-				if (char2 == '|')
-				{
-					second = true;
-					break;
-				}
-				return punctuation_(token);
-			case '%':
-				token = char1;
-				if (char2 == '%' || char2 == '!')
-				{
-					second = true;
-					break;
-				}
-				return punctuation_(token);
 			case '?':
-				token = char1;
-				if (char2 == '?' || char2 == '|' || char2 == '!')
-				{
-					second = true;
-					break;
-				}
-				return punctuation_(token);
 			case '@':
-				token = char1;
-				if (char2 == '@')
-				{
-					second = true;
-					break;
-				}
-				return punctuation_(token);
+			case '$':
 			case '#':
-				token = char1;
-				if (char2 == '#')
-				{
-					second = true;
-					break;
-				}
-				return punctuation_(token);
+			case '~':
 			case ':':
+			case '.':
 				token = char1;
-				if (char2 == ':')
+				if (char1 == char2)
 				{
 					second = true;
 					break;
@@ -5874,7 +5837,7 @@ public:
 				return punctuation_(token);
 			case '/':
 				token = char1;
-				if (char2 == '*')
+				if (char2 == '*' || char2 == '=')
 				{
 					second = true;
 					break;
