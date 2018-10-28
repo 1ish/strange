@@ -6633,14 +6633,6 @@ private:
 					log_("tokenizer error");
 					return;
 				}
-				if (open->is_("("))
-				{
-					flk->push_back_(parse_());
-				}
-				else
-				{
-					flk->push_back_(Expression::immediate_(parse_()));
-				}
 			}
 			else
 			{
@@ -6657,7 +6649,7 @@ private:
 					}
 					else
 					{
-						log_("parser error: open expecting ,");
+						log_("parser error: open expecting , or close");
 						return;
 					}
 				}
@@ -6668,17 +6660,17 @@ private:
 				}
 				else
 				{
-					log_("parser error: open expecting ,");
+					log_("parser error: open expecting , or close");
 					return;
 				}
-				if (open->is_("("))
-				{
-					flk->push_back_(parse_());
-				}
-				else
-				{
-					flk->push_back_(Expression::immediate_(parse_()));
-				}
+			}
+			if (open->is_("["))
+			{
+				flk->push_back_(Expression::immediate_(parse_()));
+			}
+			else
+			{
+				flk->push_back_(parse_());
 			}
 		}
 	}
