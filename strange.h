@@ -6313,17 +6313,21 @@ public:
 					}
 					else if (symbol->is_("(")) // expression
 					{
-						//TODO
+						const Ptr nested = Flock::mut_();
 						_next_();
 						_list_(invoke, flock, symbol, sym_(")"));
+						flk->push_back_(nested);
+						_thing_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
 						continue;
 					}
 					else if (symbol->is_("[")) // flock
 					{
-						//TODO
+						const Ptr nested = Flock::mut_();
 						_next_();
-						_list_(invoke, flock, symbol, sym_("]"));
+						_list_(invoke, nested, symbol, sym_("]"));
+						flk->push_back_(nested);
+						_thing_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
 						continue;
 					}
