@@ -6192,6 +6192,18 @@ public:
 				}
 				else if (tag == 'N') // name
 				{
+					const Ptr flock = Flock::mut_();
+					if (symbol->is_("break") || symbol->is_("continue"))
+					{
+						_next_();
+						result = Expression::fin_(symbol, flock);
+					}
+					else if (symbol->is_("return"))
+					{
+						_next_();
+						static_<Flock>(flock)->push_back_(parse_());
+						result = Expression::fin_(symbol, flock);
+					}
 
 				}
 				else if (tag == 'P') // punctuation
@@ -6302,11 +6314,11 @@ private:
 		Flock* const flk = static_<Flock>(flock);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
-			log_("parser error: literal literal");
+			log_("parser error: thing literal");
 		}
 		else if (tag == 'N') // name
 		{
-			log_("parser error: literal name");
+			log_("parser error: thing name");
 		}
 		else if (tag == 'P') // punctuation
 		{
@@ -6503,7 +6515,7 @@ private:
 			}
 			else
 			{
-				log_("parser error: literal punctuation");
+				log_("parser error: thing punctuation");
 			}
 		}
 		else if (tag == 'E') // error
@@ -6558,7 +6570,6 @@ private:
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
-		// Flock* const flk = static_<Flock>(flock);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
 			log_("parser error: member literal");
