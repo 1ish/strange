@@ -5324,7 +5324,17 @@ private:
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
-		if (flock->size_() == 3)
+		const int64_t size = flock->size_();
+		if (size == 2)
+		{
+			if (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
+			{
+				const Ptr result = Expression::evaluate_(flock->at_(1), local);
+				action->set_(0);
+				return result;
+			}
+		}
+		else if (size == 3)
 		{
 			if (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
 			{
@@ -6202,85 +6212,113 @@ public:
 				}
 				else if (tag == 'N') // name
 				{
+					_next_();
 					if (symbol->is_("break") || symbol->is_("continue"))
 					{
-						_next_();
-						result = Expression::fin_(symbol, flock);
+						if (_statement_(symbol, flock))
+						{
+							const int64_t size = flk->size_();
+							if (size == 0)
+							{
+								result = Expression::fin_(symbol, flock);
+							}
+							else
+							{
+								log_("parser error: invalid break/continue");
+							}
+							break;
+						}
 					}
 					else if (symbol->is_("return"))
 					{
-						_next_();
-						flk->push_back_(parse_());
-						result = Expression::fin_(symbol, flock);
-					}
-					else if (symbol->is_("if"))
-					{
-						_next_();
-						_statement_(symbol, flock);
-						const int64_t size = flk->size_();
-						if (size >= 2 && size <= 3)
+						if (_statement_(symbol, flock))
 						{
-							result = Expression::fin_(symbol, flock);
-						}
-						else
-						{
-							log_("parser error: invalid if");
+							const int64_t size = flk->size_();
+							if (size == 0 || size == 1)
+							{
+								result = Expression::fin_(symbol, flock);
+							}
+							else
+							{
+								log_("parser error: invalid return");
+							}
+							break;
 						}
 					}
-					else if (symbol->is_("question"))
+					else if (symbol->is_("if") || symbol->is_("question"))
 					{
-						_next_();
-						_statement_(symbol, flock);
-						const int64_t size = flk->size_();
-						if (size == 3)
+						if (_statement_(symbol, flock))
 						{
-							result = Expression::fin_(symbol, flock);
-						}
-						else
-						{
-							log_("parser error: invalid question");
+							const int64_t size = flk->size_();
+							if (size >= 2 && size <= 3)
+							{
+								result = Expression::fin_(symbol, flock);
+							}
+							else
+							{
+								log_("parser error: invalid if/question");
+							}
+							break;
 						}
 					}
 					else if (symbol->is_("while") || symbol->is_("do"))
 					{
-						_next_();
-						_statement_(symbol, flock);
-						const int64_t size = flk->size_();
-						if (size >= 1)
+						if (_statement_(symbol, flock))
 						{
-							result = Expression::fin_(symbol, flock);
-						}
-						else
-						{
-							log_("parser error: invalid while/do");
+							const int64_t size = flk->size_();
+							if (size >= 1)
+							{
+								result = Expression::fin_(symbol, flock);
+							}
+							else
+							{
+								log_("parser error: invalid while/do");
+							}
+							break;
 						}
 					}
 					else if (symbol->is_("for"))
 					{
-						_next_();
-						_statement_(symbol, flock);
-						const int64_t size = flk->size_();
-						if (size >= 3)
+						if (_statement_(symbol, flock))
 						{
-							result = Expression::fin_(symbol, flock);
-						}
-						else
-						{
-							log_("parser error: invalid for");
+							const int64_t size = flk->size_();
+							if (size >= 3)
+							{
+								result = Expression::fin_(symbol, flock);
+							}
+							else
+							{
+								log_("parser error: invalid for");
+							}
+							break;
 						}
 					}
 					else if (symbol->is_("block"))
 					{
-						_next_();
-						_statement_(symbol, flock);
-						result = Expression::fin_(symbol, flock);
+						if (_statement_(symbol, flock))
+						{
+							result = Expression::fin_(symbol, flock);
+							break;
+						}
 					}
-					else
+					else // local at name
 					{
-						log_("parser error: invalid statement");
+						flk->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
+						flk->push_back_(sym_("at"));
+						flk->push_back_(symbol);
+						const bool update = _update_(invoke, flock); //TODO continue?
+						result = Expression::fin_(invoke, flock);
+						if (update)
+						{
+							break;
+						}
+						else
+						{
+							continue;
+						}
 					}
 				}
-				else if (tag == 'P') // punctuation
+				else if (tag == 'P') //TODO punctuation
 				{
 					const Ptr at = sym_("at");
 					if (symbol->is_("$")) // static
@@ -6294,7 +6332,7 @@ public:
 						flk->push_back_(Expression::fin_(invoke, nested));
 						flk->push_back_(at);
 						_next_();
-						_at_(invoke, flock);
+						_at_(invoke, flock); //TODO continue?
 						result = Expression::fin_(invoke, flock);
 						continue;
 					}
@@ -6350,7 +6388,7 @@ public:
 					log_("tokenizer error");
 				}
 			}
-			else
+			else // not first
 			{
 				if (tag == 'P') // punctuation
 				{
@@ -6578,7 +6616,7 @@ private:
 			{
 				flk->push_back_(sym_("at"));
 				_next_();
-				_at_(statement, flock);
+				_at_(statement, flock); //TODO continue?
 			}
 			else if (symbol->is_("&"))
 			{
@@ -6739,43 +6777,25 @@ private:
 		}
 	}
 
-	inline void _statement_(const Ptr statement, const Ptr flock)
+	inline const bool _statement_(const Ptr statement, const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
 		{
-			log_("parser error: statement eof");
-			return;
+			return false;
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = char(static_<Byte>(tok->at_(0))->get_());
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
-		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
+		if (tag == 'P' && symbol->is_("("))
 		{
-			log_("parser error: statement literal");
+			_next_();
+			_list_(statement, flock, symbol, sym_(")"));
+			return true;
 		}
-		else if (tag == 'N') // name
-		{
-			log_("parser error: statement name");
-		}
-		else if (tag == 'P') // punctuation
-		{
-			if (symbol->is_("("))
-			{
-				_next_();
-				_list_(statement, flock, symbol, sym_(")"));
-			}
-			else
-			{
-				log_("parser error: statement punctuation");
-			}
-		}
-		else if (tag == 'E') // error
-		{
-			log_("tokenizer error");
-		}
+		return false;
 	}
 
 	inline void _list_(const Ptr statement, const Ptr flock, const Ptr open, const Ptr close)
@@ -6856,7 +6876,7 @@ private:
 		}
 	}
 
-	inline void _at_(const Ptr statement, const Ptr flock)
+	inline void _at_(const Ptr statement, const Ptr flock) //TODO continue?
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -6892,12 +6912,12 @@ private:
 		_update_(statement, flock);
 	}
 
-	inline void _update_(const Ptr statement, const Ptr flock)
+	inline const bool _update_(const Ptr statement, const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
 		{
-			return;
+			return false;
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = char(static_<Byte>(tok->at_(0))->get_());
@@ -6905,19 +6925,14 @@ private:
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
 		Flock* const flk = static_<Flock>(flock);
-		if (tag == 'P') // punctuation
+		if (tag == 'P' && symbol->is_(":"))
 		{
-			if (symbol->is_(":"))
-			{
-				flk->update_(flk->size_() - 2, sym_("update"));
-				_next_();
-				flk->push_back_(parse_());
-			}
+			flk->update_(flk->size_() - 2, sym_("update"));
+			_next_();
+			flk->push_back_(parse_());
+			return true;
 		}
-		else if (tag == 'E') // error
-		{
-			log_("tokenizer error");
-		}
+		return false;
 	}
 };
 
