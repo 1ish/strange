@@ -6199,6 +6199,7 @@ public:
 			const Ptr flock = Flock::mut_();
 			Flock* const flk = static_<Flock>(flock);
 			const Ptr invoke = sym_("invoke");
+			bool cont = true;
 			if (first)
 			{
 				if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
@@ -6206,9 +6207,8 @@ public:
 					const Ptr lit = tok->at_(4);
 					flk->push_back_(lit);
 					_next_();
-					_thing_(invoke, flock);
+					cont = _thing_(invoke, flock);
 					result = Expression::fin_(invoke, flock);
-					continue;
 				}
 				else if (tag == 'N') // name
 				{
@@ -6226,7 +6226,6 @@ public:
 							{
 								log_("parser error: invalid break/continue");
 							}
-							break;
 						}
 					}
 					else if (symbol->is_("return"))
@@ -6242,7 +6241,6 @@ public:
 							{
 								log_("parser error: invalid return");
 							}
-							break;
 						}
 					}
 					else if (symbol->is_("if") || symbol->is_("question"))
@@ -6258,7 +6256,6 @@ public:
 							{
 								log_("parser error: invalid if/question");
 							}
-							break;
 						}
 					}
 					else if (symbol->is_("while") || symbol->is_("do"))
@@ -6274,7 +6271,6 @@ public:
 							{
 								log_("parser error: invalid while/do");
 							}
-							break;
 						}
 					}
 					else if (symbol->is_("for"))
@@ -6290,7 +6286,6 @@ public:
 							{
 								log_("parser error: invalid for");
 							}
-							break;
 						}
 					}
 					else if (symbol->is_("block"))
@@ -6298,7 +6293,6 @@ public:
 						if (_statement_(symbol, flock))
 						{
 							result = Expression::fin_(symbol, flock);
-							break;
 						}
 					}
 					else // local at name
@@ -6306,16 +6300,8 @@ public:
 						flk->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
 						flk->push_back_(sym_("at"));
 						flk->push_back_(symbol);
-						const bool update = _update_(invoke, flock); //TODO continue?
+						cont = _update_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
-						if (update)
-						{
-							break;
-						}
-						else
-						{
-							continue;
-						}
 					}
 				}
 				else if (tag == 'P') //TODO punctuation
@@ -6332,9 +6318,8 @@ public:
 						flk->push_back_(Expression::fin_(invoke, nested));
 						flk->push_back_(at);
 						_next_();
-						_at_(invoke, flock); //TODO continue?
+						cont = _at_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
-						continue;
 					}
 					else if (symbol->is_("|") || symbol->is_("&")) // me or it
 					{
@@ -6346,16 +6331,14 @@ public:
 
 						flk->push_back_(Expression::fin_(invoke, nested));
 						_next_();
-						_thing_(invoke, flock);
+						cont = _thing_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
-						continue;
 					}
 					else if (symbol->is_("@")) // local at
 					{
 						flk->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
-						_thing_(invoke, flock);
+						cont = _thing_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
-						continue;
 					}
 					else if (symbol->is_("(")) // expression
 					{
@@ -6363,9 +6346,8 @@ public:
 						_next_();
 						_list_(invoke, flock, symbol, sym_(")"));
 						flk->push_back_(nested);
-						_thing_(invoke, flock);
+						cont = _thing_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
-						continue;
 					}
 					else if (symbol->is_("[")) // flock
 					{
@@ -6373,9 +6355,8 @@ public:
 						_next_();
 						_list_(invoke, nested, symbol, sym_("]"));
 						flk->push_back_(nested);
-						_thing_(invoke, flock);
+						cont = _thing_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
-						continue;
 					}
 					else if (symbol->is_("{")) // shoal
 					{
@@ -6403,9 +6384,12 @@ public:
 						symbol->is_("!|"))
 					{
 						flk->push_back_(result);
-						_thing_(invoke, flock);
+						cont = _thing_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
-						continue;
+					}
+					else if (symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(","))
+					{
+						cont = false;
 					}
 				}
 				else if (tag == 'E') // error
@@ -6413,7 +6397,10 @@ public:
 					log_("tokenizer error");
 				}
 			}
-			break;
+			if (!cont)
+			{
+				break;
+			}
 		}
 		if (result.get())
 		{
@@ -6470,12 +6457,12 @@ private:
 		}
 	}
 
-	inline void _thing_(const Ptr statement, const Ptr flock)
+	inline const bool _thing_(const Ptr statement, const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
 		{
-			return;
+			return false; // break
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = char(static_<Byte>(tok->at_(0))->get_());
@@ -6510,7 +6497,7 @@ private:
 			}
 			else if (symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(","))
 			{
-				return;
+				return false; // break
 			}
 			else if (symbol->is_("%"))
 			{
@@ -6616,7 +6603,7 @@ private:
 			{
 				flk->push_back_(sym_("at"));
 				_next_();
-				_at_(statement, flock); //TODO continue?
+				return _at_(statement, flock); // break/continue
 			}
 			else if (symbol->is_("&"))
 			{
@@ -6693,6 +6680,7 @@ private:
 		{
 			log_("tokenizer error");
 		}
+		return true; // continue
 	}
 
 	inline void _dot_(const Ptr statement, const Ptr flock)
@@ -6782,7 +6770,7 @@ private:
 		const Ptr token = _token_();
 		if (token->is_("."))
 		{
-			return false;
+			return false; // not a statement
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = char(static_<Byte>(tok->at_(0))->get_());
@@ -6793,9 +6781,9 @@ private:
 		{
 			_next_();
 			_list_(statement, flock, symbol, sym_(")"));
-			return true;
+			return true; // is a statement
 		}
-		return false;
+		return false; // not a statement
 	}
 
 	inline void _list_(const Ptr statement, const Ptr flock, const Ptr open, const Ptr close)
@@ -6876,13 +6864,13 @@ private:
 		}
 	}
 
-	inline void _at_(const Ptr statement, const Ptr flock) //TODO continue?
+	inline const bool _at_(const Ptr statement, const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
 		{
 			log_("parser error: at eof");
-			return;
+			return false; // break
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = char(static_<Byte>(tok->at_(0))->get_());
@@ -6901,15 +6889,15 @@ private:
 		else if (tag == 'P') // punctuation
 		{
 			log_("parser error: at punctuation");
-			return;
+			return true; // continue
 		}
 		else if (tag == 'E') // error
 		{
 			log_("tokenizer error");
-			return;
+			return true; // continue
 		}
 		_next_();
-		_update_(statement, flock);
+		return _update_(statement, flock); // continue/break
 	}
 
 	inline const bool _update_(const Ptr statement, const Ptr flock)
@@ -6917,7 +6905,7 @@ private:
 		const Ptr token = _token_();
 		if (token->is_("."))
 		{
-			return false;
+			return false; // break
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = char(static_<Byte>(tok->at_(0))->get_());
@@ -6930,9 +6918,9 @@ private:
 			flk->update_(flk->size_() - 2, sym_("update"));
 			_next_();
 			flk->push_back_(parse_());
-			return true;
+			return false; // break
 		}
-		return false;
+		return true; // continue
 	}
 };
 
