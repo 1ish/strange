@@ -6304,7 +6304,7 @@ public:
 						result = Expression::fin_(invoke, flock);
 					}
 				}
-				else if (tag == 'P') //TODO punctuation
+				else if (tag == 'P') // punctuation
 				{
 					const Ptr at = sym_("at");
 					if (symbol->is_("$")) // static at
@@ -6367,7 +6367,7 @@ public:
 						cont = _thing_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
 					}
-					else if (symbol->is_("(")) // expression
+					else if (symbol->is_("(")) //TODO expression
 					{
 						const Ptr nested = Flock::mut_();
 						_next_();
@@ -6398,7 +6398,7 @@ public:
 			}
 			else // not first
 			{
-				if (tag == 'P') // punctuation
+				if (tag == 'P') //TODO punctuation
 				{
 					if (symbol->is_(".") || symbol->is_("!") || symbol->is_("#") || symbol->is_("##") ||
 						symbol->is_("%") || symbol->is_("%%") || symbol->is_("%=") || symbol->is_("!%") ||
