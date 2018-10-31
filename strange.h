@@ -6307,7 +6307,7 @@ public:
 				else if (tag == 'P') //TODO punctuation
 				{
 					const Ptr at = sym_("at");
-					if (symbol->is_("$")) // static
+					if (symbol->is_("$")) // static at
 					{
 						const Ptr nested = Flock::mut_();
 						Flock* const nest = static_<Flock>(nested);
@@ -6321,7 +6321,7 @@ public:
 						cont = _at_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
 					}
-					else if (symbol->is_("|") || symbol->is_("&")) // me or it
+					else if (symbol->is_("|")) // me dot
 					{
 						const Ptr nested = Flock::mut_();
 						Flock* const nest = static_<Flock>(nested);
@@ -6331,12 +6331,39 @@ public:
 
 						flk->push_back_(Expression::fin_(invoke, nested));
 						_next_();
+						_dot_(invoke, flock);
+						result = Expression::fin_(invoke, flock);
+					}
+					else if (symbol->is_("&")) // iterator next
+					{
+						const Ptr nested = Flock::mut_();
+						Flock* const nest = static_<Flock>(nested);
+						nest->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
+						nest->push_back_(at);
+						nest->push_back_(symbol);
+
+						flk->push_back_(Expression::fin_(invoke, nested));
+						flk->push_back_(sym_("next"));
+						_next_();
+						result = Expression::fin_(invoke, flock);
+					}
+					else if (symbol->is_("@$") || symbol->is_("@|") || symbol->is_("@&")) // static or me or it
+					{
+						const Ptr nested = Flock::mut_();
+						Flock* const nest = static_<Flock>(nested);
+						nest->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
+						nest->push_back_(at);
+						nest->push_back_(sym_(static_<Symbol>(symbol)->symbol_().substr(1)));
+
+						flk->push_back_(Expression::fin_(invoke, nested));
+						_next_();
 						cont = _thing_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
 					}
-					else if (symbol->is_("@")) // local at
+					else if (symbol->is_("@@")) // local
 					{
 						flk->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
+						_next_();
 						cont = _thing_(invoke, flock);
 						result = Expression::fin_(invoke, flock);
 					}
