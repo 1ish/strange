@@ -5707,12 +5707,11 @@ public:
 
 			if (commentblock)
 			{
-				if (char1)
-					if (second && char1 == '/')
-					{
-						commentblock = false;
-					}
-				second = (char1 == '*');
+				if (second)
+				{
+					commentblock = false;
+				}
+				second = (char1 == '*' && char2 == '/');
 			}
 			else if (commentline)
 			{
@@ -5753,15 +5752,7 @@ public:
 			}
 			else if (second)
 			{
-				if (char1 == '*')
-				{
-					commentblock = true;
-					second = false;
-				}
-				else
-				{
-					return punctuation_(token + char1);
-				}
+				return punctuation_(token + char1);
 			}
 			else if (singlequote && char1 == '\'')
 			{
@@ -5803,13 +5794,18 @@ public:
 				{
 					second = true;
 				}
-			case '<':
-			case '>':
 			case '+':
 			case '-':
 			case '*':
 			case '%':
-				if (char2 == '=' || char1 == char2)
+				if (char1 == char2)
+				{
+					second = true;
+				}
+			case '<':
+			case '>':
+			case '=':
+				if (char2 == '=')
 				{
 					second = true;
 				}
@@ -5819,10 +5815,17 @@ public:
 					break;
 				}
 				return punctuation_(token);
+			case '@':
+				token = char1;
+				if (char1 == char2 || char2 == '$' || char2 == '|' || char2 == '&')
+				{
+					second = true;
+					break;
+				}
+				return punctuation_(token);
 			case '&':
 			case '|':
 			case '?':
-			case '@':
 			case '^':
 			case '$':
 			case '#':
@@ -5838,9 +5841,14 @@ public:
 				return punctuation_(token);
 			case '/':
 				token = char1;
-				if (char2 == '*' || char2 == '=')
+				if (char2 == '=')
 				{
 					second = true;
+					break;
+				}
+				if (char2 == '*')
+				{
+					commentblock = true;
 					break;
 				}
 				if (char2 == '/')
