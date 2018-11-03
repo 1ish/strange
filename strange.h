@@ -5131,6 +5131,7 @@ private:
 				}
 			}
 		}
+		result->finalize_();
 		return result;
 	}
 };
@@ -5156,20 +5157,61 @@ public:
 
 	static inline const Ptr fin_(const Ptr statement, const Ptr flock)
 	{
-		if (statement->is_("invoke"))
+		const int64_t size = static_<Flock>(flock)->size_();
+		if (statement->is_("local"))
 		{
+			if (size != 0)
+			{
+				log_("expression of wrong size");
+			}
+			return fin_(&Expression::_local_, flock);
+		}
+		else if (statement->is_("thing"))
+		{
+			if (size != 1)
+			{
+				log_("expression of wrong size");
+				if (size == 0)
+				{
+					return fin_(&Expression::_local_, flock);
+				}
+			}
+			return fin_(&Expression::_thing_, flock);
+		}
+		else if (statement->is_("invoke"))
+		{
+			if (size == 0)
+			{
+				return fin_(&Expression::_local_, flock);
+			}
+			else if (size == 1)
+			{
+				return fin_(&Expression::_thing_, flock);
+			}
 			return fin_(&Expression::_invoke_, flock);
 		}
 		else if (statement->is_("break"))
 		{
+			if (size != 0)
+			{
+				log_("expression of wrong size");
+			}
 			return fin_(&Expression::_break_, flock);
 		}
 		else if (statement->is_("continue"))
 		{
+			if (size != 0)
+			{
+				log_("expression of wrong size");
+			}
 			return fin_(&Expression::_continue_, flock);
 		}
 		else if (statement->is_("return"))
 		{
+			if (size != 0 && size != 1)
+			{
+				log_("expression of wrong size");
+			}
 			return fin_(&Expression::_return_, flock);
 		}
 		else if (statement->is_("block"))
@@ -5178,27 +5220,47 @@ public:
 		}
 		else if (statement->is_("if"))
 		{
+			if (size != 2 && size != 3)
+			{
+				log_("expression of wrong size");
+			}
 			return fin_(&Expression::_if_, flock);
 		}
 		else if (statement->is_("question"))
 		{
+			if (size != 2 && size != 3)
+			{
+				log_("expression of wrong size");
+			}
 			return fin_(&Expression::_question_, flock);
 		}
 		else if (statement->is_("while"))
 		{
+			if (size < 1)
+			{
+				log_("expression of wrong size");
+			}
 			return fin_(&Expression::_while_, flock);
 		}
 		else if (statement->is_("do"))
 		{
+			if (size < 1)
+			{
+				log_("expression of wrong size");
+			}
 			return fin_(&Expression::_do_, flock);
 		}
 		else if (statement->is_("for"))
 		{
+			if (size < 3)
+			{
+				log_("expression of wrong size");
+			}
 			return fin_(&Expression::_for_, flock);
 		}
 		const Ptr none = Flock::mut_();
 		static_<Flock>(none)->push_back_(nothing_());
-		return fin_(&Expression::_invoke_, none);
+		return fin_(&Expression::_thing_, none);
 	}
 
 	static inline const Ptr fin_()
@@ -5244,18 +5306,18 @@ private:
 	const MemberPtr _member;
 	const Ptr _flock;
 
+	inline const Ptr _local_(const Ptr expression, const Ptr local)
+	{
+		return local;
+	}
+
+	inline const Ptr _thing_(const Ptr expression, const Ptr local)
+	{
+		return static_<Flock>(_flock)->at_(0);
+	}
+
 	inline const Ptr _invoke_(const Ptr expression, const Ptr local)
 	{
-		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		if (size == 0)
-		{
-			return local;
-		}
-		if (size == 1)
-		{
-			return flock->at_(0);
-		}
 		const Ptr it = Expression::iterator_(expression, local);
 		const Ptr thing = it->next_();
 		return thing->invoke(it);
