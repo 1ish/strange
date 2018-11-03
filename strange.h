@@ -705,6 +705,48 @@ private:
 	const function _function;
 };
 
+//----------------------------------------------------------------------
+class Method : public Thing, public Me<Method>
+//----------------------------------------------------------------------
+{
+public:
+	Method(const Ptr thing, const Ptr member)
+		: Thing{}
+		, Me{}
+		, _thing{ thing }
+		, _member{ member }
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr thing, const Ptr member)
+	{
+		const Ptr result = Me<Method>::make_(thing, member);
+		result->finalize_();
+		return result;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return Me<Method>::me_();
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Method");
+		return TYPE;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
+	{
+		return operate_(_thing.get(), _member, it);
+	}
+
+private:
+	const Ptr _thing;
+	const Ptr _member;
+};
+
 template <typename T>
 //----------------------------------------------------------------------
 class Member : public Thing, public Me<Member<T>>
@@ -5100,35 +5142,21 @@ private:
 		Shoal* const r = static_<Shoal>(result);
 		Shoal* const p = static_<Shoal>(pub);
 		Shoal* const m = static_<Shoal>(members);
+		Ptr it = p->iterator_();
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
-			const Ptr it = p->iterator_();
-			for (;;)
-			{
-				const Ptr i = it->next_();
-				if (i->is_("."))
-				{
-					break;
-				}
-				Flock* const flock = static_<Flock>(i);
-				r->update_(flock->at_(0), flock->at_(1));
-			}
+			Flock* const flock = static_<Flock>(i);
+			r->update_(flock->at_(0), flock->at_(1));
 		}
+		it = m->iterator_();
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
-			const Ptr it = m->iterator_();
-			for (;;)
+			Flock* const flock = static_<Flock>(i);
+			const Ptr first = flock->at_(0);
+			Symbol* const symbol = dynamic_<Symbol>(first);
+			if (symbol && symbol->symbol_()[0] != '_')
 			{
-				const Ptr i = it->next_();
-				if (i->is_("."))
-				{
-					break;
-				}
-				Flock* const flock = static_<Flock>(i);
-				const Ptr first = flock->at_(0);
-				Symbol* const symbol = dynamic_<Symbol>(first);
-				if (symbol && symbol->symbol_()[0] != '_')
-				{
-					r->update_(first, flock->at_(1));
-				}
+				r->update_(first, flock->at_(1));
 			}
 		}
 		result->finalize_();
