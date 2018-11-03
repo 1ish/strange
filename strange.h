@@ -5104,17 +5104,10 @@ private:
 
 	static inline const Ptr _public_(const Ptr pub, const Ptr members)
 	{
-		const Ptr result = Shoal::mut_();
+		const Ptr result = pub->copy_();
 		Shoal* const r = static_<Shoal>(result);
-		Shoal* const p = static_<Shoal>(pub);
 		Shoal* const m = static_<Shoal>(members);
-		Ptr it = p->iterator_();
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
-		{
-			Flock* const flock = static_<Flock>(i);
-			r->update_(flock->at_(0), flock->at_(1));
-		}
-		it = m->iterator_();
+		const Ptr it = m->iterator_();
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
 			Flock* const flock = static_<Flock>(i);
