@@ -31,7 +31,6 @@ namespace strange
 	template <typename T> class Const;
 	class Mutable;
 	class Shoal;
-	class Decorator;
 	template <typename C> class Iterator;
 	class Flock;
 	class Herd;
@@ -1334,31 +1333,6 @@ private:
 	};
 };
 
-//----------------------------------------------------------------------
-class Decorator : public Thing
-//----------------------------------------------------------------------
-{
-protected:
-	inline Decorator(const Ptr decorated)
-		: Thing{}
-		, _decorated{ decorated }
-	{
-	}
-
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
-	{
-		const Ptr name = it->next_();
-		const Ptr member = static_<Shoal>(pub_())->find_(name);
-		if (member->is_("0"))
-		{
-			return _decorated->invoke_(name, *it);
-		}
-		return operate_(thing, member, it);
-	}
-
-	const Ptr _decorated;
-};
-
 template <typename C>
 //----------------------------------------------------------------------
 class Iterator : public Mutable
@@ -1402,17 +1376,6 @@ public:
 	}
 
 	virtual inline const Ptr cats_() const override;
-
-protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
-	{
-		const Ptr member = static_<Shoal>(pub_())->find_(it->next_());
-		if (member->is_("0"))
-		{
-			return member;
-		}
-		return operate_(thing, member, it);
-	}
 
 private:
 	const C _collection;
@@ -5422,6 +5385,15 @@ private:
 		return Method::with_name_(Expression::evaluate_(flock->at_(0), local), Expression::evaluate_(flock->at_(1), local));
 	}
 
+	inline const Ptr _operate_iterator_(const Ptr expression, const Ptr local) const
+	{
+		Flock* const flock = static_<Flock>(_flock);
+		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
+		return operate_(thing.get(),
+			static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local)),
+			Expression::evaluate_(flock->at_(2), local));
+	}
+
 	inline const Ptr _break_(const Ptr expression, const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
@@ -5732,7 +5704,6 @@ protected:
 		Me<Creature>* const me = dynamic_cast<Me<Creature>*>(thing);
 		if (me)
 		{
-			Creature* const creature = static_cast<Creature*>(thing);
 			loc->insert_("|", me->me_());
 		}
 		loc->insert_("&", it);
@@ -7256,7 +7227,7 @@ inline const Thing::Ptr Thing::stat_()
 
 inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr it)
 {
-	const Ptr member = static_<Shoal>(pub_())->find_(it->next_());
+	const Ptr member = static_<Shoal>(thing->pub_())->find_(it->next_());
 	if (member->is_("0"))
 	{
 		return member;
@@ -7695,10 +7666,6 @@ inline const Thing::Ptr Shoal::It::cats_() const
 	}();
 	return CATS;
 }
-
-//======================================================================
-// class Decorator
-//======================================================================
 
 //======================================================================
 // class Iterator
