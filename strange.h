@@ -26,6 +26,7 @@ namespace strange
 	class Serializable;
 	class Symbol;
 	class Static;
+	class Method;
 	template <typename T> class Member;
 	template <typename T> class Const;
 	class Mutable;
@@ -710,7 +711,7 @@ class Method : public Thing, public Me<Method>
 //----------------------------------------------------------------------
 {
 public:
-	Method(const Ptr thing, const Ptr member)
+	Method(const Ptr thing, const Ptr member) // member is a functor, not a name
 		: Thing{}
 		, Me{}
 		, _thing{ thing }
@@ -718,12 +719,14 @@ public:
 	{
 	}
 
-	static inline const Ptr fin_(const Ptr thing, const Ptr member)
+	static inline const Ptr fin_(const Ptr thing, const Ptr member) // member is functor, not a name
 	{
 		const Ptr result = Me<Method>::make_(thing, member);
 		result->finalize_();
 		return result;
 	}
+
+	static inline const Ptr with_name_(const Ptr thing, const Ptr name);
 
 	virtual inline const Ptr copy_() const override
 	{
@@ -7435,6 +7438,15 @@ inline const Thing::Ptr Symbol::cats_() const
 //======================================================================
 // class Static
 //======================================================================
+
+//======================================================================
+// class Method
+//======================================================================
+
+inline const Thing::Ptr Method::with_name_(const Thing::Ptr thing, const Thing::Ptr name)
+{
+	return fin_(thing, static_<Shoal>(thing->pub_())->find_(name));
+}
 
 //======================================================================
 // class Member
