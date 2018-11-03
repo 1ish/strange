@@ -5168,14 +5168,14 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Expression : public Mutable
+class Expression : public Thing
 //----------------------------------------------------------------------
 {
-	typedef const Ptr(Expression::*MemberPtr)(const Ptr, const Ptr);
+	typedef const Ptr(Expression::*MemberPtr)(const Ptr, const Ptr) const;
 
 public:
 	inline Expression(const MemberPtr member, const Ptr flock)
-		: Mutable{}
+		: Thing{}
 		, _member{ member }
 		, _flock{ flock }
 	{
@@ -5183,6 +5183,7 @@ public:
 
 	static inline const Ptr fin_(const MemberPtr member, const Ptr flock)
 	{
+		flock->freeze_();
 		return std::make_shared<Expression>(member, flock);
 	}
 
@@ -5213,13 +5214,29 @@ public:
 		{
 			if (size == 0)
 			{
+				log_("expression of wrong size");
 				return fin_(&Expression::_local_, flock);
 			}
 			else if (size == 1)
 			{
+				log_("expression of wrong size");
 				return fin_(&Expression::_thing_, flock);
 			}
 			return fin_(&Expression::_invoke_, flock);
+		}
+		else if (statement->is_("invoke_iterator"))
+		{
+			if (size == 0)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_local_, flock);
+			}
+			else if (size == 1)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_thing_, flock);
+			}
+			return fin_(&Expression::_invoke_iterator_, flock);
 		}
 		else if (statement->is_("break"))
 		{
@@ -5337,38 +5354,44 @@ private:
 	const MemberPtr _member;
 	const Ptr _flock;
 
-	inline const Ptr _local_(const Ptr expression, const Ptr local)
+	inline const Ptr _local_(const Ptr expression, const Ptr local) const
 	{
 		return local;
 	}
 
-	inline const Ptr _thing_(const Ptr expression, const Ptr local)
+	inline const Ptr _thing_(const Ptr expression, const Ptr local) const
 	{
 		return static_<Flock>(_flock)->at_(0);
 	}
 
-	inline const Ptr _invoke_(const Ptr expression, const Ptr local)
+	inline const Ptr _invoke_(const Ptr expression, const Ptr local) const
 	{
 		const Ptr it = Expression::iterator_(expression, local);
 		const Ptr thing = it->next_();
 		return thing->invoke(it);
 	}
 
-	inline const Ptr _break_(const Ptr expression, const Ptr local)
+	inline const Ptr _invoke_iterator_(const Ptr expression, const Ptr local) const
+	{
+		Flock* const flock = static_<Flock>(_flock);
+		return flock->at_(0)->invoke(flock->at_(1));
+	}
+
+	inline const Ptr _break_(const Ptr expression, const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		action->set_('b');
 		return nothing_();
 	}
 
-	inline const Ptr _continue_(const Ptr expression, const Ptr local)
+	inline const Ptr _continue_(const Ptr expression, const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		action->set_('c');
 		return nothing_();
 	}
 
-	inline const Ptr _return_(const Ptr expression, const Ptr local)
+	inline const Ptr _return_(const Ptr expression, const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		action->set_('r');
@@ -5380,7 +5403,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _block_(const Ptr expression, const Ptr local)
+	inline const Ptr _block_(const Ptr expression, const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -5396,7 +5419,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _if_(const Ptr expression, const Ptr local)
+	inline const Ptr _if_(const Ptr expression, const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -5437,7 +5460,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _question_(const Ptr expression, const Ptr local)
+	inline const Ptr _question_(const Ptr expression, const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -5469,7 +5492,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _while_(const Ptr expression, const Ptr local)
+	inline const Ptr _while_(const Ptr expression, const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -5502,7 +5525,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _do_(const Ptr expression, const Ptr local)
+	inline const Ptr _do_(const Ptr expression, const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -5536,7 +5559,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _for_(const Ptr expression, const Ptr local)
+	inline const Ptr _for_(const Ptr expression, const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
