@@ -6231,7 +6231,7 @@ public:
 					const Ptr lit = tok->at_(4);
 					flk->push_back_(lit);
 					_next_();
-					cont = _thing_(invoke, flock);
+					cont = _thing_(flock);
 					result = Expression::fin_(invoke, flock);
 				}
 				else if (tag == 'N') // name
@@ -6239,7 +6239,7 @@ public:
 					_next_();
 					if (symbol->is_("break") || symbol->is_("continue"))
 					{
-						if (_statement_(symbol, flock))
+						if (_statement_(flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0)
@@ -6254,7 +6254,7 @@ public:
 					}
 					else if (symbol->is_("return"))
 					{
-						if (_statement_(symbol, flock))
+						if (_statement_(flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0 || size == 1)
@@ -6269,7 +6269,7 @@ public:
 					}
 					else if (symbol->is_("if") || symbol->is_("question"))
 					{
-						if (_statement_(symbol, flock))
+						if (_statement_(flock))
 						{
 							const int64_t size = flk->size_();
 							if (size >= 2 && size <= 3)
@@ -6284,7 +6284,7 @@ public:
 					}
 					else if (symbol->is_("while") || symbol->is_("do"))
 					{
-						if (_statement_(symbol, flock))
+						if (_statement_(flock))
 						{
 							const int64_t size = flk->size_();
 							if (size >= 1)
@@ -6299,7 +6299,7 @@ public:
 					}
 					else if (symbol->is_("for"))
 					{
-						if (_statement_(symbol, flock))
+						if (_statement_(flock))
 						{
 							const int64_t size = flk->size_();
 							if (size >= 3)
@@ -6314,7 +6314,7 @@ public:
 					}
 					else if (symbol->is_("block"))
 					{
-						if (_statement_(symbol, flock))
+						if (_statement_(flock))
 						{
 							result = Expression::fin_(symbol, flock);
 						}
@@ -6324,7 +6324,7 @@ public:
 						flk->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
 						flk->push_back_(sym_("at"));
 						flk->push_back_(symbol);
-						cont = _update_(invoke, flock);
+						cont = _update_(flock);
 						result = Expression::fin_(invoke, flock);
 					}
 				}
@@ -6342,7 +6342,7 @@ public:
 						flk->push_back_(Expression::fin_(invoke, nested));
 						flk->push_back_(at);
 						_next_();
-						cont = _at_(invoke, flock);
+						cont = _at_(flock);
 						result = Expression::fin_(invoke, flock);
 					}
 					else if (symbol->is_("|")) // me dot
@@ -6355,7 +6355,7 @@ public:
 
 						flk->push_back_(Expression::fin_(invoke, nested));
 						_next_();
-						_dot_(invoke, flock);
+						_dot_(flock);
 						result = Expression::fin_(invoke, flock);
 					}
 					else if (symbol->is_("&")) // iterator next
@@ -6381,32 +6381,32 @@ public:
 
 						flk->push_back_(Expression::fin_(invoke, nested));
 						_next_();
-						cont = _thing_(invoke, flock);
+						cont = _thing_(flock);
 						result = Expression::fin_(invoke, flock);
 					}
 					else if (symbol->is_("@@")) // local
 					{
 						flk->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
 						_next_();
-						cont = _thing_(invoke, flock);
+						cont = _thing_(flock);
 						result = Expression::fin_(invoke, flock);
 					}
 					else if (symbol->is_("(")) //TODO expression
 					{
 						const Ptr nested = Flock::mut_();
 						_next_();
-						_list_(invoke, flock, symbol, sym_(")"));
+						_list_(flock, symbol, sym_(")"));
 						flk->push_back_(nested);
-						cont = _thing_(invoke, flock);
+						cont = _thing_(flock);
 						result = Expression::fin_(invoke, flock);
 					}
 					else if (symbol->is_("[")) // flock
 					{
 						const Ptr nested = Flock::mut_();
 						_next_();
-						_list_(invoke, nested, symbol, sym_("]"));
+						_list_(nested, symbol, sym_("]"));
 						flk->push_back_(nested);
-						cont = _thing_(invoke, flock);
+						cont = _thing_(flock);
 						result = Expression::fin_(invoke, flock);
 					}
 					else if (symbol->is_("{")) // shoal
@@ -6435,7 +6435,7 @@ public:
 						symbol->is_("!|"))
 					{
 						flk->push_back_(result);
-						cont = _thing_(invoke, flock);
+						cont = _thing_(flock);
 						result = Expression::fin_(invoke, flock);
 					}
 					else if (symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(","))
@@ -6508,7 +6508,7 @@ private:
 		}
 	}
 
-	inline const bool _thing_(const Ptr statement, const Ptr flock)
+	inline const bool _thing_(const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -6534,17 +6534,17 @@ private:
 			if (symbol->is_("."))
 			{
 				_next_();
-				_dot_(statement, flock);
+				_dot_(flock);
 			}
 			else if (symbol->is_("["))
 			{
 				_next_();
-				_list_(statement, flock, symbol, sym_("]"));
+				_list_(flock, symbol, sym_("]"));
 			}
 			else if (symbol->is_("("))
 			{
 				_next_();
-				_list_(statement, flock, symbol, sym_(")"));
+				_list_(flock, symbol, sym_(")"));
 			}
 			else if (symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(","))
 			{
@@ -6554,37 +6554,37 @@ private:
 			{
 				flk->push_back_(sym_("modulo"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("%="))
 			{
 				flk->push_back_(sym_("self_modulo"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("%%"))
 			{
 				flk->push_back_(sym_("xor"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("!%"))
 			{
 				flk->push_back_(sym_("xnor"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("+"))
 			{
 				flk->push_back_(sym_("add"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("+="))
 			{
 				flk->push_back_(sym_("self_add"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("++"))
 			{
@@ -6595,13 +6595,13 @@ private:
 			{
 				flk->push_back_(sym_("subtract"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("-="))
 			{
 				flk->push_back_(sym_("self_subtract"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("--"))
 			{
@@ -6612,49 +6612,49 @@ private:
 			{
 				flk->push_back_(sym_("multiply"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("**"))
 			{
 				flk->push_back_(sym_("power"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("*="))
 			{
 				flk->push_back_(sym_("self_multiply"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("/"))
 			{
 				flk->push_back_(sym_("divide"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("/="))
 			{
 				flk->push_back_(sym_("self_divide"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("="))
 			{
 				flk->push_back_(sym_("same"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("!="))
 			{
 				flk->push_back_(sym_("different"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("@"))
 			{
 				flk->push_back_(sym_("at"));
 				_next_();
-				return _at_(statement, flock); // break/continue
+				return _at_(flock); // break/continue
 			}
 			else if (symbol->is_("&"))
 			{
@@ -6665,25 +6665,25 @@ private:
 			{
 				flk->push_back_(sym_("and"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("!&"))
 			{
 				flk->push_back_(sym_("nand"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("||"))
 			{
 				flk->push_back_(sym_("or"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("!|"))
 			{
 				flk->push_back_(sym_("nor"));
 				_next_();
-				_member_(statement, flock);
+				_member_(flock);
 			}
 			else if (symbol->is_("^"))
 			{
@@ -6734,7 +6734,7 @@ private:
 		return true; // continue
 	}
 
-	inline void _dot_(const Ptr statement, const Ptr flock)
+	inline void _dot_(const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -6756,7 +6756,7 @@ private:
 		{
 			flk->push_back_(symbol);
 			_next_();
-			_member_(statement, flock);
+			_member_(flock);
 		}
 		else if (tag == 'P') // punctuation
 		{
@@ -6768,7 +6768,7 @@ private:
 		}
 	}
 
-	inline void _member_(const Ptr statement, const Ptr flock)
+	inline void _member_(const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -6793,17 +6793,17 @@ private:
 			if (symbol->is_("."))
 			{
 				_next_();
-				_dot_(statement, flock);
+				_dot_(flock);
 			}
 			else if (symbol->is_("["))
 			{
 				_next_();
-				_list_(statement, flock, symbol, sym_("]"));
+				_list_(flock, symbol, sym_("]"));
 			}
 			else if (symbol->is_("("))
 			{
 				_next_();
-				_list_(statement, flock, symbol, sym_(")"));
+				_list_(flock, symbol, sym_(")"));
 			}
 			else
 			{
@@ -6816,7 +6816,7 @@ private:
 		}
 	}
 
-	inline const bool _statement_(const Ptr statement, const Ptr flock)
+	inline const bool _statement_(const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -6831,13 +6831,13 @@ private:
 		if (tag == 'P' && symbol->is_("("))
 		{
 			_next_();
-			_list_(statement, flock, symbol, sym_(")"));
+			_list_(flock, symbol, sym_(")"));
 			return true; // is a statement
 		}
 		return false; // not a statement
 	}
 
-	inline void _list_(const Ptr statement, const Ptr flock, const Ptr open, const Ptr close)
+	inline void _list_(const Ptr flock, const Ptr open, const Ptr close)
 	{
 		for (bool first = true; true; first = false)
 		{
@@ -6915,7 +6915,7 @@ private:
 		}
 	}
 
-	inline const bool _at_(const Ptr statement, const Ptr flock)
+	inline const bool _at_(const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -6948,10 +6948,10 @@ private:
 			return true; // continue
 		}
 		_next_();
-		return _update_(statement, flock); // continue/break
+		return _update_(flock); // continue/break
 	}
 
-	inline const bool _update_(const Ptr statement, const Ptr flock)
+	inline const bool _update_(const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
