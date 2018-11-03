@@ -5229,6 +5229,25 @@ public:
 			}
 			return fin_(&Expression::_method_, flock);
 		}
+		else if (statement->is_("operate_iterator"))
+		{
+			if (size == 0)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_local_, flock);
+			}
+			else if (size == 1)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_thing_, flock);
+			}
+			else if (size == 2)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_invoke_iterator_, flock);
+			}
+			return fin_(&Expression::_operate_iterator_, flock);
+		}
 		else if (statement->is_("break"))
 		{
 			if (size != 0)
