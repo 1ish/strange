@@ -5238,6 +5238,20 @@ public:
 			}
 			return fin_(&Expression::_invoke_iterator_, flock);
 		}
+		else if (statement->is_("invoke_iterable"))
+		{
+			if (size == 0)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_local_, flock);
+			}
+			else if (size == 1)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_thing_, flock);
+			}
+			return fin_(&Expression::_invoke_iterable_, flock);
+		}
 		else if (statement->is_("break"))
 		{
 			if (size != 0)
@@ -5375,6 +5389,19 @@ private:
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		return flock->at_(0)->invoke(flock->at_(1));
+	}
+
+	inline const Ptr _invoke_iterable_(const Ptr expression, const Ptr local) const
+	{
+		Flock* const flock = static_<Flock>(_flock);
+		const Ptr thing = flock->at_(0);
+		const Ptr iterable = flock->at_(1);
+		Iterable* const it = dynamic_<Iterable>(iterable);
+		if (it)
+		{
+			return thing->invoke(it->iterator_()); //TODO pass parameter list to iterator_()
+		}
+		return thing->invoke_();
 	}
 
 	inline const Ptr _break_(const Ptr expression, const Ptr local) const
