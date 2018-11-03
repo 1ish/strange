@@ -5248,6 +5248,25 @@ public:
 			}
 			return fin_(&Expression::_operate_iterator_, flock);
 		}
+		else if (statement->is_("operate_iterable"))
+		{
+			if (size == 0)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_local_, flock);
+			}
+			else if (size == 1)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_thing_, flock);
+			}
+			else if (size == 2)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_invoke_iterable_, flock);
+			}
+			return fin_(&Expression::_operate_iterable_, flock);
+		}
 		else if (statement->is_("break"))
 		{
 			if (size != 0)
@@ -5411,6 +5430,19 @@ private:
 		return operate_(thing.get(),
 			static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local)),
 			Expression::evaluate_(flock->at_(2), local));
+	}
+
+	inline const Ptr _operate_iterable_(const Ptr expression, const Ptr local) const
+	{
+		Flock* const flock = static_<Flock>(_flock);
+		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
+		const Ptr member = static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local));
+		Iterable* const it = dynamic_<Iterable>(Expression::evaluate_(flock->at_(2), local));
+		if (it)
+		{
+			return operate_(thing.get(), member, it->iterator_()); //TODO pass parameter list to iterator_()
+		}
+		return operate_(thing.get(), member, static_<Flock>(Flock::mut_())->iterator_());
 	}
 
 	inline const Ptr _break_(const Ptr expression, const Ptr local) const
