@@ -4847,6 +4847,7 @@ public:
 		, Serializable{}
 		, _creator{ creator }
 		, _members{ members }
+		, _public{ _public_(Mutable::pub_(), _members) }
 	{
 	}
 
@@ -4890,7 +4891,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return Thing::clone_();
+		return Mutable::clone_();
 	}
 
 	virtual inline void finalize_() override
@@ -4920,7 +4921,7 @@ public:
 		{
 			operate_(this, over);
 		}
-		Thing::freeze_();
+		Mutable::freeze_();
 	}
 
 	virtual inline const bool frozen_() const override
@@ -4940,7 +4941,7 @@ public:
 		{
 			return operate_(this, over);
 		}
-		return Thing::next_();
+		return Mutable::next_();
 	}
 
 	virtual inline size_t hash_() const override
@@ -4950,7 +4951,7 @@ public:
 		{
 			return size_t(static_<Int64>(operate_(const_cast<Creature*>(this), over))->get_());
 		}
-		return Thing::hash_();
+		return Mutable::hash_();
 	}
 
 	virtual inline const bool same_(const Ptr other) const override
@@ -4961,7 +4962,7 @@ public:
 			return !operate_(const_cast<Creature*>(this), over,
 				Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ other }))->is_("0");
 		}
-		return Thing::same_(other);
+		return Mutable::same_(other);
 	}
 
 	virtual inline const Ptr visit(const Ptr it) override
@@ -4971,7 +4972,7 @@ public:
 		{
 			return operate_(this, over, it);
 		}
-		return Thing::visit(it);
+		return Mutable::visit(it);
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -4992,6 +4993,11 @@ public:
 			return cats;
 		}();
 		return CATS;
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		return _public;
 	}
 
 	virtual inline const Ptr to_lake_() const override
@@ -5082,33 +5088,51 @@ public:
 		}
 	}
 
-protected:
-	// protected impure virtual member functions and adapters
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
-	{
-		const Ptr name = it->next_();
-		Symbol* const symbol = dynamic_<Symbol>(name);
-		if (symbol && symbol->symbol_()[0] == '_')
-		{
-			return nothing_();
-		}
-		const Ptr over = static_<Shoal>(_members)->find_(name);
-		if (!over->is_("0"))
-		{
-			return operate_(thing, over, it);
-		}
-		const Ptr member = static_<Shoal>(pub_())->find_(name);
-		if (member->is_("0"))
-		{
-			return member;
-		}
-		return operate_(thing, member, it);
-	}
-
 private:
 	friend class Function;
 	const Ptr _creator;
 	const Ptr _members;
+	const Ptr _public;
+
+	static inline const Ptr _public_(const Ptr pub, const Ptr members)
+	{
+		const Ptr result = Shoal::mut_();
+		Shoal* const r = static_<Shoal>(result);
+		Shoal* const p = static_<Shoal>(pub);
+		Shoal* const m = static_<Shoal>(members);
+		{
+			const Ptr it = p->iterator_();
+			for (;;)
+			{
+				const Ptr i = it->next_();
+				if (i->is_("."))
+				{
+					break;
+				}
+				Flock* const flock = static_<Flock>(i);
+				r->update_(flock->at_(0), flock->at_(1));
+			}
+		}
+		{
+			const Ptr it = m->iterator_();
+			for (;;)
+			{
+				const Ptr i = it->next_();
+				if (i->is_("."))
+				{
+					break;
+				}
+				Flock* const flock = static_<Flock>(i);
+				const Ptr first = flock->at_(0);
+				Symbol* const symbol = dynamic_<Symbol>(first);
+				if (symbol && symbol->symbol_()[0] != '_')
+				{
+					r->update_(first, flock->at_(1));
+				}
+			}
+		}
+		return result;
+	}
 };
 
 //----------------------------------------------------------------------
