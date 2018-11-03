@@ -5252,6 +5252,20 @@ public:
 			}
 			return fin_(&Expression::_invoke_iterable_, flock);
 		}
+		else if (statement->is_("method"))
+		{
+			if (size == 0)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_local_, flock);
+			}
+			else if (size == 1)
+			{
+				log_("expression of wrong size");
+				return fin_(&Expression::_thing_, flock);
+			}
+			return fin_(&Expression::_method_, flock);
+		}
 		else if (statement->is_("break"))
 		{
 			if (size != 0)
@@ -5381,27 +5395,31 @@ private:
 	inline const Ptr _invoke_(const Ptr expression, const Ptr local) const
 	{
 		const Ptr it = Expression::iterator_(expression, local);
-		const Ptr thing = it->next_();
-		return thing->invoke(it);
+		return it->next_()->invoke(it);
 	}
 
 	inline const Ptr _invoke_iterator_(const Ptr expression, const Ptr local) const
 	{
 		Flock* const flock = static_<Flock>(_flock);
-		return flock->at_(0)->invoke(flock->at_(1));
+		return Expression::evaluate_(flock->at_(0), local)->invoke(Expression::evaluate_(flock->at_(1), local));
 	}
 
 	inline const Ptr _invoke_iterable_(const Ptr expression, const Ptr local) const
 	{
 		Flock* const flock = static_<Flock>(_flock);
-		const Ptr thing = flock->at_(0);
-		const Ptr iterable = flock->at_(1);
-		Iterable* const it = dynamic_<Iterable>(iterable);
+		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
+		Iterable* const it = dynamic_<Iterable>(Expression::evaluate_(flock->at_(1), local));
 		if (it)
 		{
 			return thing->invoke(it->iterator_()); //TODO pass parameter list to iterator_()
 		}
 		return thing->invoke_();
+	}
+
+	inline const Ptr _method_(const Ptr expression, const Ptr local) const
+	{
+		Flock* const flock = static_<Flock>(_flock);
+		return Method::with_name_(Expression::evaluate_(flock->at_(0), local), Expression::evaluate_(flock->at_(1), local));
 	}
 
 	inline const Ptr _break_(const Ptr expression, const Ptr local) const
