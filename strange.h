@@ -727,9 +727,10 @@ class Method : public Thing, public Me<Method>, public Iterable
 //----------------------------------------------------------------------
 {
 public:
-	Method(const Ptr thing, const Ptr member) // member is a functor, not a name
+	inline Method(const Ptr thing, const Ptr member) // member is a functor, not a name
 		: Thing{}
 		, Me{}
+		, Iterable{}
 		, _thing{ thing }
 		, _member{ member }
 	{
