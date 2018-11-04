@@ -2343,7 +2343,7 @@ class Data
 //----------------------------------------------------------------------
 {
 public:
-	Data(const D& data)
+	inline Data(const D& data)
 		: _data{ data }
 	{
 	}
@@ -4603,7 +4603,7 @@ class River : public Mutable, public Me<River>
 	using const_std_unique_iostream = const std::unique_ptr<std::iostream>;
 
 public:
-	River(std::iostream* const stream)
+	inline River(std::iostream* const stream)
 		: Mutable{}
 		, Me{}
 		, _stream{ stream }
@@ -5778,7 +5778,7 @@ class Function : public Thing, public Me<Function>
 //----------------------------------------------------------------------
 {
 public:
-	Function(const Ptr expression, const Ptr stat)
+	inline Function(const Ptr expression, const Ptr stat)
 		: Thing{}
 		, Me{}
 		, _expression{ expression }
