@@ -664,24 +664,37 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Static : public Thing, public Me<Static>
+class Static : public Thing, public Me<Static>, public Iterable
 //----------------------------------------------------------------------
 {
 	using function = const Ptr(*)(const Ptr);
 
 public:
-	Static(const function fun)
+	template <typename F>
+	inline Static(const function fun, F&& params)
 		: Thing{}
-		, Me {}
+		, Me{}
+		, Iterable{}
 		, _function{ fun }
+		, _params{ std::forward<F>(params) }
 	{
 	}
 
-	static inline const Ptr fin_(const function fun)
+	template <typename F>
+	static inline const Ptr with_params_(const function fun, F&& params)
 	{
-		const Ptr result = Me<Static>::make_(fun);
+		const Ptr result = Me<Static>::make_(fun, std::forward<F>(params));
 		result->finalize_();
 		return result;
+	}
+
+	template <typename... Args>
+	static inline const Ptr fin_(const function fun, Args&&... args)
+	{
+		std::vector<Thing::Ptr> v;
+		v.reserve(sizeof...(Args));
+		Variadic::variadic_(v, std::forward<Args>(args)...);
+		return with_params_(fun, std::move(v));
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -695,6 +708,8 @@ public:
 		return TYPE;
 	}
 
+	virtual inline const Ptr iterator_() const override;
+
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
 	{
@@ -703,6 +718,7 @@ protected:
 
 private:
 	const function _function;
+	std::vector<Thing::Ptr> _params;
 };
 
 //----------------------------------------------------------------------
@@ -7521,6 +7537,11 @@ inline const Thing::Ptr Symbol::cats_() const
 //======================================================================
 // class Static
 //======================================================================
+
+inline const Thing::Ptr Static::iterator_() const
+{
+	return Iterator<std::vector<Ptr>>::mut_(_params);
+}
 
 //======================================================================
 // class Method
