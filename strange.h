@@ -7447,14 +7447,10 @@ inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr river)
 
 inline void Serializable::to_river_(const Thing::Ptr river) const
 {
-	const Thing* const thing = dynamic_cast<const Thing*>(this);
-	if (thing)
+	Lake* const lake = Thing::dynamic_<Lake>(to_lake_());
+	if (lake)
 	{
-		Lake* const lake = Thing::dynamic_<Lake>(const_cast<Thing*>(thing)->invoke_("to_lake"));
-		if (lake)
-		{
-			lake->to_river_(river);
-		}
+		lake->to_river_(river);
 	}
 }
 
@@ -7462,25 +7458,16 @@ inline void Serializable::from_river_(const Thing::Ptr river)
 {
 	const Thing::Ptr lake = Lake::mut_();
 	Thing::static_<Lake>(lake)->from_river_(river);
-	Thing* const thing = dynamic_cast<Thing*>(this);
-	if (thing)
-	{
-		thing->invoke_("from_lake", lake);
-	}
+	from_lake_(lake);
 }
 
 inline const Thing::Ptr Serializable::to_lake_via_river_() const
 {
-	const Thing* const thing = dynamic_cast<const Thing*>(this);
-	if (thing)
-	{
-		const Thing::Ptr river = River::mut_();
-		const_cast<Thing*>(thing)->invoke_("to_river", river);
-		const Thing::Ptr lake = Lake::mut_();
-		Thing::static_<Lake>(lake)->from_river_(river);
-		return lake;
-	}
-	return Thing::nothing_();
+	const Thing::Ptr river = River::mut_();
+	to_river_(river);
+	const Thing::Ptr lake = Lake::mut_();
+	Thing::static_<Lake>(lake)->from_river_(river);
+	return lake;
 }
 
 inline void Serializable::from_lake_via_river_(const Thing::Ptr lake)
@@ -7493,11 +7480,7 @@ inline void Serializable::from_lake_via_river_(const Thing::Ptr lake)
 	}
 	const Thing::Ptr river = River::mut_();
 	lak->to_river_(river);
-	Thing* const thing = dynamic_cast<Thing*>(this);
-	if (thing)
-	{
-		thing->invoke_("from_river", river);
-	}
+	from_river_(river);
 }
 
 //======================================================================
