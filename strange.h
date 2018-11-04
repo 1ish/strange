@@ -723,7 +723,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Method : public Thing, public Me<Method>
+class Method : public Thing, public Me<Method>, public Iterable
 //----------------------------------------------------------------------
 {
 public:
@@ -754,6 +754,8 @@ public:
 		static const Ptr TYPE = sym_("strange::Method");
 		return TYPE;
 	}
+
+	virtual inline const Ptr iterator_() const override;
 
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
@@ -7601,6 +7603,16 @@ inline const Thing::Ptr Static::iterator_() const
 inline const Thing::Ptr Method::with_name_(const Thing::Ptr thing, const Thing::Ptr name)
 {
 	return fin_(thing, static_<Shoal>(thing->pub_())->find_(name));
+}
+
+inline const Thing::Ptr Method::iterator_() const
+{
+	Iterable* const iterable = dynamic_<Iterable>(_member);
+	if (iterable)
+	{
+		return iterable->iterator_();
+	}
+	return IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>());
 }
 
 //======================================================================
