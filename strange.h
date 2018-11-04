@@ -719,7 +719,7 @@ protected:
 
 private:
 	const function _function;
-	std::vector<Thing::Ptr> _params;
+	std::vector<Ptr> _params;
 };
 
 //----------------------------------------------------------------------
@@ -770,24 +770,37 @@ private:
 
 template <typename T>
 //----------------------------------------------------------------------
-class Member : public Thing, public Me<Member<T>>
+class Member : public Thing, public Me<Member<T>>, public Iterable
 //----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr);
 
 public:
-	Member(const member fun)
+	template <typename F>
+	inline Member(const member fun, F&& params)
 		: Thing{}
 		, Me<Member<T>>{}
+		, Iterable{}
 		, _function{ fun }
+		, _params{ std::forward<F>(params) }
 	{
 	}
 
-	static inline const Ptr fin_(const member fun)
+	template <typename F>
+	static inline const Ptr with_params_(const member fun, F&& params)
 	{
-		const Ptr result = Me<Member<T>>::make_(fun);
+		const Ptr result = Me<Member<T>>::make_(fun, std::forward<F>(params));
 		result->finalize_();
 		return result;
+	}
+
+	template <typename... Args>
+	static inline const Ptr fin_(const member fun, Args&&... args)
+	{
+		std::vector<Thing::Ptr> v;
+		v.reserve(sizeof...(Args));
+		Variadic::variadic_(v, std::forward<Args>(args)...);
+		return with_params_(fun, std::move(v));
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -800,6 +813,8 @@ public:
 		static const Ptr TYPE = sym_("strange::Member");
 		return TYPE;
 	}
+
+	virtual inline const Ptr iterator_() const override;
 
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
@@ -820,6 +835,7 @@ protected:
 
 private:
 	const member _function;
+	std::vector<Ptr> _params;
 };
 
 template <typename T>
@@ -7582,6 +7598,12 @@ inline const Thing::Ptr Method::iterator_() const
 //======================================================================
 // class Member
 //======================================================================
+
+template <typename T>
+inline const Thing::Ptr Member<T>::iterator_() const
+{
+	return IteratorRef<std::vector<Ptr>>::mut_(_params);
+}
 
 //======================================================================
 // class Const
