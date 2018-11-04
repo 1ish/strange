@@ -5216,23 +5216,19 @@ public:
 		const int64_t size = static_<Flock>(flock)->size_();
 		if (statement->is_("local"))
 		{
-			if (size != 0)
+			if (size == 0)
 			{
-				log_("expression of wrong size");
+				return fin_(&Expression::_local_, flock);
 			}
-			return fin_(&Expression::_local_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("thing"))
 		{
-			if (size != 1)
+			if (size == 1)
 			{
-				log_("expression of wrong size");
-				if (size == 0)
-				{
-					return fin_(&Expression::_local_, flock);
-				}
+				return fin_(&Expression::_thing_, flock);
 			}
-			return fin_(&Expression::_thing_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("invoke"))
 		{
@@ -5241,116 +5237,80 @@ public:
 				log_("expression of wrong size");
 				return fin_(&Expression::_local_, flock);
 			}
-			else if (size == 1)
+			if (size == 1)
 			{
 				log_("expression of wrong size");
 				return fin_(&Expression::_thing_, flock);
 			}
-			return fin_(&Expression::_invoke_, flock);
+			if (size >= 2)
+			{
+				return fin_(&Expression::_invoke_, flock);
+			}
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("invoke_iterator"))
 		{
-			if (size == 0)
+			if (size == 2)
 			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_local_, flock);
+				return fin_(&Expression::_invoke_iterator_, flock);
 			}
-			else if (size == 1)
-			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_thing_, flock);
-			}
-			return fin_(&Expression::_invoke_iterator_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("invoke_iterable"))
 		{
-			if (size == 0)
+			if (size == 2)
 			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_local_, flock);
+				return fin_(&Expression::_invoke_iterable_, flock);
 			}
-			else if (size == 1)
-			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_thing_, flock);
-			}
-			return fin_(&Expression::_invoke_iterable_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("method"))
 		{
-			if (size == 0)
+			if (size == 2)
 			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_local_, flock);
+				return fin_(&Expression::_method_, flock);
 			}
-			else if (size == 1)
-			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_thing_, flock);
-			}
-			return fin_(&Expression::_method_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("operate_iterator"))
 		{
-			if (size == 0)
+			if (size == 3)
 			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_local_, flock);
+				return fin_(&Expression::_operate_iterator_, flock);
 			}
-			else if (size == 1)
-			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_thing_, flock);
-			}
-			else if (size == 2)
-			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_invoke_iterator_, flock);
-			}
-			return fin_(&Expression::_operate_iterator_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("operate_iterable"))
 		{
-			if (size == 0)
+			if (size == 3)
 			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_local_, flock);
+				return fin_(&Expression::_operate_iterable_, flock);
 			}
-			else if (size == 1)
-			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_thing_, flock);
-			}
-			else if (size == 2)
-			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_invoke_iterable_, flock);
-			}
-			return fin_(&Expression::_operate_iterable_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("break"))
 		{
-			if (size != 0)
+			if (size == 0)
 			{
-				log_("expression of wrong size");
+				return fin_(&Expression::_break_, flock);
 			}
-			return fin_(&Expression::_break_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("continue"))
 		{
-			if (size != 0)
+			if (size == 0)
 			{
-				log_("expression of wrong size");
+				return fin_(&Expression::_continue_, flock);
 			}
-			return fin_(&Expression::_continue_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("return"))
 		{
-			if (size != 0 && size != 1)
+			if (size <= 1)
 			{
-				log_("expression of wrong size");
+				return fin_(&Expression::_return_, flock);
 			}
-			return fin_(&Expression::_return_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("block"))
 		{
@@ -5358,43 +5318,47 @@ public:
 		}
 		else if (statement->is_("if"))
 		{
-			if (size != 2 && size != 3)
+			if (size == 2 || size == 3)
 			{
-				log_("expression of wrong size");
+				return fin_(&Expression::_if_, flock);
 			}
-			return fin_(&Expression::_if_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("question"))
 		{
-			if (size != 2 && size != 3)
+			if (size == 2 || size == 3)
 			{
-				log_("expression of wrong size");
+				return fin_(&Expression::_question_, flock);
 			}
-			return fin_(&Expression::_question_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("while"))
 		{
-			if (size < 1)
+			if (size >= 1)
 			{
-				log_("expression of wrong size");
+				return fin_(&Expression::_while_, flock);
 			}
-			return fin_(&Expression::_while_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("do"))
 		{
-			if (size < 1)
+			if (size >= 1)
 			{
-				log_("expression of wrong size");
+				return fin_(&Expression::_do_, flock);
 			}
-			return fin_(&Expression::_do_, flock);
+			log_("expression of wrong size");
 		}
 		else if (statement->is_("for"))
 		{
-			if (size < 3)
+			if (size >= 3)
 			{
-				log_("expression of wrong size");
+				return fin_(&Expression::_for_, flock);
 			}
-			return fin_(&Expression::_for_, flock);
+			log_("expression of wrong size");
+		}
+		else if (!statement->is_("0"))
+		{
+			log_("expression with unexpected statement");
 		}
 		const Ptr none = Flock::mut_();
 		static_<Flock>(none)->push_back_(nothing_());
@@ -5463,7 +5427,8 @@ private:
 	inline const Ptr _invoke_iterator_(const Ptr expression, const Ptr local) const
 	{
 		Flock* const flock = static_<Flock>(_flock);
-		return Expression::evaluate_(flock->at_(0), local)->invoke(Expression::evaluate_(flock->at_(1), local));
+		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
+		return thing->invoke(Expression::evaluate_(flock->at_(1), local));
 	}
 
 	inline const Ptr _invoke_iterable_(const Ptr expression, const Ptr local) const
@@ -5475,7 +5440,7 @@ private:
 		{
 			return thing->invoke(it->iterator_()); //TODO pass parameter list to iterator_()
 		}
-		return thing->invoke_();
+		return nothing_();
 	}
 
 	inline const Ptr _method_(const Ptr expression, const Ptr local) const
@@ -5488,9 +5453,8 @@ private:
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
-		return operate_(thing.get(),
-			static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local)),
-			Expression::evaluate_(flock->at_(2), local));
+		const Ptr member = static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local));
+		return operate_(thing.get(), member, Expression::evaluate_(flock->at_(2), local));
 	}
 
 	inline const Ptr _operate_iterable_(const Ptr expression, const Ptr local) const
@@ -5503,7 +5467,7 @@ private:
 		{
 			return operate_(thing.get(), member, it->iterator_()); //TODO pass parameter list to iterator_()
 		}
-		return operate_(thing.get(), member, static_<Flock>(Flock::mut_())->iterator_());
+		return nothing_();
 	}
 
 	inline const Ptr _break_(const Ptr expression, const Ptr local) const
