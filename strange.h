@@ -7298,14 +7298,14 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
 		shoal->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
 		shoal->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
-		shoal->update_("call", Static::fin_(&Thing::call));
+		shoal->update_("call", Static::fin_(&Thing::call, "&"));
 		shoal->update_("stats", Static::fin_(&Thing::stats));
 		shoal->update_("stat", Static::fin_(&Thing::stat));
-		shoal->update_("boolean", Static::fin_(&Thing::boolean));
+		shoal->update_("boolean", Static::fin_(&Thing::boolean, "thing"));
 		shoal->update_(nothing_(), Static::fin_(&Thing::nothing));
 		shoal->update_(one_(), Static::fin_(&Thing::one));
 		shoal->update_(stop_(), Static::fin_(&Thing::stop));
-		shoal->update_("log", Static::fin_(&Thing::log));
+		shoal->update_("log", Static::fin_(&Thing::log, "message"));
 		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
 		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
 		shoal->update_("visit", Member<Thing>::fin_(&Thing::visit));
@@ -7322,13 +7322,14 @@ inline const Thing::Ptr Thing::stat_()
 	{
 		const Ptr stat = Shoal::mut_();
 		Shoal* const shoal = static_<Shoal>(stat);
+		shoal->update_("call", Static::fin_(&Thing::call, "&"));
 		shoal->update_("stats", Static::fin_(&Thing::stats));
 		shoal->update_("stat", Static::fin_(&Thing::stat));
-		shoal->update_("boolean", Static::fin_(&Thing::boolean));
+		shoal->update_("boolean", Static::fin_(&Thing::boolean, "thing"));
 		shoal->update_(nothing_(), Static::fin_(&Thing::nothing));
 		shoal->update_(one_(), Static::fin_(&Thing::one));
 		shoal->update_(stop_(), Static::fin_(&Thing::stop));
-		shoal->update_("log", Static::fin_(&Thing::log));
+		shoal->update_("log", Static::fin_(&Thing::log, "message"));
 		shoal->finalize_();
 		return stat;
 	}();
