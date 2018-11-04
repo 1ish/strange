@@ -4938,7 +4938,7 @@ class Creator : public Mutable
 };
 
 //----------------------------------------------------------------------
-class Creature : public Mutable, public Me<Creature>, public Serializable
+class Creature : public Mutable, public Me<Creature>, public Serializable //TODO public Iterable
 //----------------------------------------------------------------------
 {
 public:
