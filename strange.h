@@ -501,11 +501,7 @@ public:
 
 	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
 	{
-		const Thing* thing = dynamic_cast<const Thing*>(this);
-		if (thing)
-		{
-			const_cast<Thing*>(thing)->invoke_("to_river", river);
-		}
+		to_river_(river);
 	}
 
 	inline const Thing::Ptr to_river_with_links(const Thing::Ptr it)
@@ -518,11 +514,7 @@ public:
 
 	virtual inline void from_river_with_links_(const Thing::Ptr river)
 	{
-		Thing* thing = dynamic_cast<Thing*>(this);
-		if (thing)
-		{
-			thing->invoke_("from_river", river);
-		}
+		from_river_(river);
 	}
 
 	inline const Thing::Ptr from_river_with_links(const Thing::Ptr it)
