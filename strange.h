@@ -5463,7 +5463,12 @@ private:
 		Iterable* const it = dynamic_<Iterable>(Expression::evaluate_(flock->at_(1), local));
 		if (it)
 		{
-			return thing->invoke(it->iterator_()); //TODO pass parameter list to iterator_()
+			Iterable* const iterable = dynamic_<Iterable>(thing);
+			if (iterable)
+			{
+				return thing->invoke(it->iterator(iterable->iterator_()));
+			}
+			return thing->invoke(it->iterator_());
 		}
 		return nothing_();
 	}
