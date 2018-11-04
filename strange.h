@@ -840,24 +840,37 @@ private:
 
 template <typename T>
 //----------------------------------------------------------------------
-class Const : public Thing, public Me<Const<T>>
+class Const : public Thing, public Me<Const<T>>, public Iterable
 //----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr) const;
 
 public:
-	Const(const member fun)
+	template <typename F>
+	inline Const(const member fun, F&& params)
 		: Thing{}
 		, Me<Const<T>>{}
+		, Iterable{}
 		, _function{ fun }
+		, _params{ std::forward<F>(params) }
 	{
 	}
 
-	static inline const Ptr fin_(const member fun)
+	template <typename F>
+	static inline const Ptr with_params_(const member fun, F&& params)
 	{
-		const Ptr result = Me<Const<T>>::make_(fun);
+		const Ptr result = Me<Const<T>>::make_(fun, std::forward<F>(params));
 		result->finalize_();
 		return result;
+	}
+
+	template <typename... Args>
+	static inline const Ptr fin_(const member fun, Args&&... args)
+	{
+		std::vector<Thing::Ptr> v;
+		v.reserve(sizeof...(Args));
+		Variadic::variadic_(v, std::forward<Args>(args)...);
+		return with_params_(fun, std::move(v));
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -870,6 +883,8 @@ public:
 		static const Ptr TYPE = sym_("strange::Const");
 		return TYPE;
 	}
+
+	virtual inline const Ptr iterator_() const override;
 
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
@@ -885,6 +900,7 @@ protected:
 
 private:
 	const member _function;
+	std::vector<Ptr> _params;
 };
 
 //----------------------------------------------------------------------
@@ -7613,6 +7629,12 @@ inline const Thing::Ptr Member<T>::iterator_() const
 //======================================================================
 // class Const
 //======================================================================
+
+template <typename T>
+inline const Thing::Ptr Const<T>::iterator_() const
+{
+	return IteratorRef<std::vector<Ptr>>::mut_(_params);
+}
 
 //======================================================================
 // class Mutable
