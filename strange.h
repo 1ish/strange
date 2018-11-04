@@ -381,7 +381,7 @@ public:
 	// public pure virtual member functions and adapters
 	virtual inline const Thing::Ptr iterator_() const = 0;
 
-	inline const Thing::Ptr iterator(const Thing::Ptr ignore) const
+	virtual inline const Thing::Ptr iterator(const Thing::Ptr ignore) const
 	{
 		return iterator_();
 	}
@@ -5490,7 +5490,12 @@ private:
 		Iterable* const it = dynamic_<Iterable>(Expression::evaluate_(flock->at_(2), local));
 		if (it)
 		{
-			return operate_(thing.get(), member, it->iterator_()); //TODO pass parameter list to iterator_()
+			Iterable* const iterable = dynamic_<Iterable>(member);
+			if (iterable)
+			{
+				return operate_(thing.get(), member, it->iterator(iterable->iterator_()));
+			}
+			return operate_(thing.get(), member, it->iterator_());
 		}
 		return nothing_();
 	}
