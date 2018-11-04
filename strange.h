@@ -31,7 +31,8 @@ namespace strange
 	template <typename T> class Const;
 	class Mutable;
 	class Shoal;
-	template <typename C> class Iterator;
+	template <typename C> class IteratorCopy;
+	template <typename C> class IteratorRef;
 	class Flock;
 	class Herd;
 	template <typename D> class Data;
@@ -1351,12 +1352,12 @@ private:
 
 template <typename C>
 //----------------------------------------------------------------------
-class Iterator : public Mutable
+class IteratorCopy : public Mutable
 //----------------------------------------------------------------------
 {
 public:
 	template <typename F>
-	inline Iterator(F&& collection)
+	inline IteratorCopy(F&& collection)
 		: Mutable{}
 		, _collection{ std::forward<F>(collection) }
 		, _iterator{ _collection.cbegin() }
@@ -1375,19 +1376,19 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_(_collection);
-		static_<Iterator>(result)->_iterator += (_iterator - _collection.cbegin());
+		static_<IteratorCopy>(result)->_iterator += (_iterator - _collection.cbegin());
 		return result;
 	}
 
 	template <typename F>
 	static inline const Ptr mut_(F&& collection)
 	{
-		return std::make_shared<Iterator>(std::forward<F>(collection));
+		return std::make_shared<IteratorCopy>(std::forward<F>(collection));
 	}
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Iterator");
+		static const Ptr TYPE = sym_("strange::IteratorCopy");
 		return TYPE;
 	}
 
@@ -1395,6 +1396,55 @@ public:
 
 private:
 	const C _collection;
+	typename C::const_iterator _iterator;
+};
+
+template <typename C>
+//----------------------------------------------------------------------
+class IteratorRef : public Mutable
+//----------------------------------------------------------------------
+{
+public:
+	template <typename F>
+	inline IteratorRef(F&& collection)
+		: Mutable{}
+		, _collection{ std::forward<F>(collection) }
+		, _iterator{ _collection.cbegin() }
+	{
+	}
+
+	virtual inline const Ptr next_() override
+	{
+		if (_iterator == _collection.cend())
+		{
+			return stop_();
+		}
+		return *_iterator++;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		const Ptr result = mut_(_collection);
+		static_<IteratorRef>(result)->_iterator += (_iterator - _collection.cbegin());
+		return result;
+	}
+
+	template <typename F>
+	static inline const Ptr mut_(F&& collection)
+	{
+		return std::make_shared<IteratorRef>(std::forward<F>(collection));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::IteratorRef");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override;
+
+private:
+	const C& _collection;
 	typename C::const_iterator _iterator;
 };
 
@@ -4984,7 +5034,7 @@ public:
 		if (!over->is_("0"))
 		{
 			return !operate_(const_cast<Creature*>(this), over,
-				Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ other }))->is_("0");
+				IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ other }))->is_("0");
 		}
 		return Mutable::same_(other);
 	}
@@ -5039,7 +5089,7 @@ public:
 		const Ptr over = static_<Shoal>(_members)->find_("from_lake");
 		if (!over->is_("0"))
 		{
-			operate_(this, over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ lake }));
+			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ lake }));
 		}
 		else
 		{
@@ -5052,7 +5102,7 @@ public:
 		const Ptr over = static_<Shoal>(_members)->find_("to_river");
 		if (!over->is_("0"))
 		{
-			operate_(const_cast<Creature*>(this), over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
+			operate_(const_cast<Creature*>(this), over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
 		}
 		else
 		{
@@ -5065,7 +5115,7 @@ public:
 		const Ptr over = static_<Shoal>(_members)->find_("from_river");
 		if (!over->is_("0"))
 		{
-			operate_(this, over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
+			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
 		}
 		else
 		{
@@ -5078,7 +5128,7 @@ public:
 		const Ptr over = static_<Shoal>(_members)->find_("to_river_with_links");
 		if (!over->is_("0"))
 		{
-			operate_(const_cast<Creature*>(this), over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ shoal, river }));
+			operate_(const_cast<Creature*>(this), over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ shoal, river }));
 		}
 		else
 		{
@@ -5091,7 +5141,7 @@ public:
 		const Ptr over = static_<Shoal>(_members)->find_("from_river_with_links");
 		if (!over->is_("0"))
 		{
-			operate_(this, over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
+			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
 		}
 		else
 		{
@@ -5104,7 +5154,7 @@ public:
 		const Ptr over = static_<Shoal>(_members)->find_("replace_links");
 		if (!over->is_("0"))
 		{
-			operate_(this, over, Iterator<std::vector<Ptr>>::mut_(std::vector<Ptr>{ shoal }));
+			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ shoal }));
 		}
 		else
 		{
@@ -7310,7 +7360,7 @@ inline const Thing::Ptr Thing::call_(Args&&... args)
 	std::vector<Thing::Ptr> v;
 	v.reserve(sizeof...(Args));
 	Variadic::variadic_(v, std::forward<Args>(args)...);
-	return call(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
+	return call(IteratorCopy<std::vector<Ptr>>::mut_(std::move(v)));
 }
 
 template <typename... Args>
@@ -7319,7 +7369,7 @@ inline const Thing::Ptr Thing::invoke_(Args&&... args)
 	std::vector<Thing::Ptr> v;
 	v.reserve(sizeof...(Args));
 	Variadic::variadic_(v, std::forward<Args>(args)...);
-	return invoke(Iterator<std::vector<Ptr>>::mut_(std::move(v)));
+	return invoke(IteratorCopy<std::vector<Ptr>>::mut_(std::move(v)));
 }
 
 inline const Thing::Ptr Thing::identity(const Thing::Ptr ignore) const
@@ -7540,7 +7590,7 @@ inline const Thing::Ptr Symbol::cats_() const
 
 inline const Thing::Ptr Static::iterator_() const
 {
-	return Iterator<std::vector<Ptr>>::mut_(_params);
+	return IteratorRef<std::vector<Ptr>>::mut_(_params);
 }
 
 //======================================================================
@@ -7733,18 +7783,38 @@ inline const Thing::Ptr Shoal::It::cats_() const
 }
 
 //======================================================================
-// class Iterator
+// class IteratorCopy
 //======================================================================
 
 template <typename C>
-inline const Thing::Ptr Iterator<C>::cats_() const
+inline const Thing::Ptr IteratorCopy<C>::cats_() const
 {
 	static const Ptr CATS = []()
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
 		herd->insert_("strange::Mutable");
-		herd->insert_("strange::Iterator");
+		herd->insert_("strange::IteratorCopy");
+		herd->insert_("strange::Thing");
+		herd->finalize_();
+		return cats;
+	}();
+	return CATS;
+}
+
+//======================================================================
+// class IteratorRef
+//======================================================================
+
+template <typename C>
+inline const Thing::Ptr IteratorRef<C>::cats_() const
+{
+	static const Ptr CATS = []()
+	{
+		const Ptr cats = Herd::mut_();
+		Herd* const herd = static_<Herd>(cats);
+		herd->insert_("strange::Mutable");
+		herd->insert_("strange::IteratorRef");
 		herd->insert_("strange::Thing");
 		herd->finalize_();
 		return cats;
