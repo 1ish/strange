@@ -51,6 +51,7 @@ namespace strange
 	class Complex64;
 	class River;
 	class Fence;
+	class Reference;
 	class Creator;
 	class Creature;
 	class Expression;
@@ -5001,6 +5002,113 @@ private:
 };
 
 //----------------------------------------------------------------------
+class Reference : public Mutable
+//----------------------------------------------------------------------
+{
+public:
+	inline Reference(const Ptr ptr)
+		: Mutable{}
+		, _ptr{ ptr }
+	{
+	}
+
+	static inline const Ptr mut(const Ptr it)
+	{
+		return mut_(it->next_());
+	}
+
+	static inline const Ptr mut_(const Ptr ptr)
+	{
+		return std::make_shared<Reference>(ptr);
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(_ptr);
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("stat", Static::fin_(&Reference::stat));
+			shoal->update_("mut", Static::fin_(&Reference::mut, "thing"));
+			shoal->update_("set", Member<Reference>::fin_(&Reference::set));
+			shoal->update_("get", Const<Reference>::fin_(&Reference::get));
+			shoal->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Reference::stat));
+			shoal->update_("mut", Static::fin_(&Reference::mut, "thing"));
+			shoal->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
+	}
+
+	inline void set_(const Ptr ptr)
+	{
+		_ptr = ptr;
+	}
+
+	inline const Ptr set(const Ptr it)
+	{
+		const Ptr ptr = it->next_();
+		set_(ptr);
+		return ptr;
+	}
+
+	inline const Ptr get_() const
+	{
+		return _ptr;
+	}
+
+	inline const Ptr get(const Ptr ignore) const
+	{
+		return get_();
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Reference");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+private:
+	Ptr _ptr;
+};
+
+//----------------------------------------------------------------------
 class Creator : public Mutable
 //----------------------------------------------------------------------
 {
@@ -7501,6 +7609,7 @@ inline const Thing::Ptr Thing::stats_()
 		shoal->update_("strange::Complex64", Static::fin_(&Complex64::stat));
 		shoal->update_("strange::River", Static::fin_(&River::stat));
 		shoal->update_("strange::Fence", Static::fin_(&Fence::stat));
+		shoal->update_("strange::Reference", Static::fin_(&Reference::stat));
 		shoal->update_("strange::Creature", Static::fin_(&Creature::stat));
 		shoal->update_("strange::Expression", Static::fin_(&Expression::stat));
 		shoal->update_("strange::Function", Static::fin_(&Function::stat));
@@ -8340,6 +8449,10 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 
 //======================================================================
 // class Fence
+//======================================================================
+
+//======================================================================
+// class Reference
 //======================================================================
 
 //======================================================================
