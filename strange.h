@@ -5527,18 +5527,27 @@ private:
 
 	inline const Ptr _invoke_iterable_(const Ptr expression, const Ptr local) const
 	{
-		//TODO get member from @'0' and use ParamFeeder and ParamEater
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
-		Iterable* const it = dynamic_<Iterable>(Expression::evaluate_(flock->at_(1), local));
-		if (it)
+		const Ptr it = Expression::evaluate_(flock->at_(1), local);
+		ParamFeeder* const feeder = dynamic_<ParamFeeder>(it);
+		if (feeder)
 		{
-			Iterable* const iterable = dynamic_<Iterable>(thing);
-			if (iterable)
+			static const std::vector<Ptr> NOTHING{ nothing_() };
+			const Ptr nothing_eater = IteratorRef<std::vector<Ptr>>::mut_(NOTHING);
+			const Ptr nothing_feeder = feeder->feeder(nothing_eater);
+			const Ptr name = nothing_feeder->next_();
+			const Ptr member = static_<Shoal>(thing->pub_())->find_(name);
+			ParamEater* const eater = dynamic_<ParamEater>(member);
+			if (eater)
 			{
-				return thing->invoke(it->iterator(iterable->iterator_()));
+				return operate_(thing.get(), member, feeder->feeder(eater->eater_()));
 			}
-			return thing->invoke(it->iterator_());
+		}
+		Iterable* const iterable = dynamic_<Iterable>(it);
+		if (iterable)
+		{
+			return thing->invoke(iterable->iterator_());
 		}
 		return nothing_();
 	}
