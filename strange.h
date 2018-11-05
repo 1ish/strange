@@ -6075,13 +6075,13 @@ public:
 			case '-':
 			case '*':
 			case '%':
+			case ':':
 				if (char1 == char2)
 				{
 					second = true;
 				}
 			case '<':
 			case '>':
-			case '=':
 				if (char2 == '=')
 				{
 					second = true;
@@ -6107,7 +6107,6 @@ public:
 			case '$':
 			case '#':
 			case '~':
-			case ':':
 			case '.':
 				token = char1;
 				if (char1 == char2)
