@@ -21,6 +21,8 @@ namespace strange
 {
 	class Thing;
 	class Iterable;
+	class ParamEater;
+	class ParamFeeder;
 	class Variadic;
 	template <typename T> class Me;
 	class Serializable;
@@ -381,10 +383,28 @@ public:
 	// public pure virtual member functions and adapters
 	virtual inline const Thing::Ptr iterator_() const = 0;
 
-	virtual inline const Thing::Ptr iterator(const Thing::Ptr ignore) const
+	inline const Thing::Ptr iterator(const Thing::Ptr ignore) const
 	{
 		return iterator_();
 	}
+};
+
+//----------------------------------------------------------------------
+class ParamEater
+//----------------------------------------------------------------------
+{
+public:
+	// public pure virtual member functions and adapters
+	virtual inline const Thing::Ptr eater_() const = 0;
+};
+
+//----------------------------------------------------------------------
+class ParamFeeder
+//----------------------------------------------------------------------
+{
+public:
+	// public pure virtual member functions and adapters
+	virtual inline const Thing::Ptr feeder(const Thing::Ptr eater) const = 0;
 };
 
 //----------------------------------------------------------------------
@@ -657,7 +677,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Static : public Thing, public Me<Static>, public Iterable
+class Static : public Thing, public Me<Static>, public ParamEater
 //----------------------------------------------------------------------
 {
 	using function = const Ptr(*)(const Ptr);
@@ -667,7 +687,7 @@ public:
 	inline Static(const function fun, F&& params)
 		: Thing{}
 		, Me{}
-		, Iterable{}
+		, ParamEater{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
 	{
@@ -701,7 +721,7 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr iterator_() const override;
+	virtual inline const Ptr eater_() const override;
 
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
@@ -715,14 +735,14 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Method : public Thing, public Me<Method>, public Iterable
+class Method : public Thing, public Me<Method>, public ParamEater
 //----------------------------------------------------------------------
 {
 public:
 	inline Method(const Ptr thing, const Ptr member) // member is a functor, not a name
 		: Thing{}
 		, Me{}
-		, Iterable{}
+		, ParamEater{}
 		, _thing{ thing }
 		, _member{ member }
 	{
@@ -748,7 +768,7 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr iterator_() const override;
+	virtual inline const Ptr eater_() const override;
 
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
@@ -763,7 +783,7 @@ private:
 
 template <typename T>
 //----------------------------------------------------------------------
-class Member : public Thing, public Me<Member<T>>, public Iterable
+class Member : public Thing, public Me<Member<T>>, public ParamEater
 //----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr);
@@ -773,7 +793,7 @@ public:
 	inline Member(const member fun, F&& params)
 		: Thing{}
 		, Me<Member<T>>{}
-		, Iterable{}
+		, ParamEater{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
 	{
@@ -807,7 +827,7 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr iterator_() const override;
+	virtual inline const Ptr eater_() const override;
 
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
@@ -833,7 +853,7 @@ private:
 
 template <typename T>
 //----------------------------------------------------------------------
-class Const : public Thing, public Me<Const<T>>, public Iterable
+class Const : public Thing, public Me<Const<T>>, public ParamEater
 //----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr) const;
@@ -843,7 +863,7 @@ public:
 	inline Const(const member fun, F&& params)
 		: Thing{}
 		, Me<Const<T>>{}
-		, Iterable{}
+		, ParamEater{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
 	{
@@ -877,7 +897,7 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr iterator_() const override;
+	virtual inline const Ptr eater_() const override;
 
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
@@ -924,7 +944,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Shoal : public Mutable, public Me<Shoal>, public Serializable, public Iterable
+class Shoal : public Mutable, public Me<Shoal>, public Serializable, public Iterable, public ParamFeeder
 //----------------------------------------------------------------------
 {
 	class Hash
@@ -1033,6 +1053,7 @@ public:
 			shoal->update_("update", Member<Shoal>::fin_(&Shoal::update));
 			shoal->update_("insert", Member<Shoal>::fin_(&Shoal::insert));
 			shoal->update_("iterator", Const<Shoal>::fin_(&Shoal::iterator));
+			shoal->update_("feeder", Const<Shoal>::fin_(&Shoal::feeder));
 			shoal->update_("itemize", Member<Shoal>::fin_(&Shoal::itemize));
 			shoal->update_("gather", Member<Shoal>::fin_(&Shoal::gather));
 			shoal->finalize_();
@@ -1170,6 +1191,11 @@ public:
 	virtual inline const Ptr iterator_() const override
 	{
 		return It::mut_(me_());
+	}
+
+	virtual inline const Ptr feeder(const Ptr eater) const override
+	{
+		return Feeder::mut_(me_(), eater);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1374,6 +1400,49 @@ private:
 	private:
 		const Ptr _shoal;
 		std_unordered_map_ptr_ptr::const_iterator _iterator;
+	};
+
+	class Feeder : public Mutable
+	{
+	public:
+		inline Feeder(const Ptr shoal, const Ptr eater)
+			: Mutable{}
+			, _shoal{ shoal }
+			, _eater{ eater }
+		{
+		}
+
+		virtual inline const Ptr next_() override
+		{
+			const Ptr n = _eater->next_();
+			if (n->is_("."))
+			{
+				return n;
+			}
+			return static_<Shoal>(_shoal)->find_(n);
+		}
+
+		virtual inline const Ptr copy_() const override
+		{
+			return mut_(_shoal, _eater);
+		}
+
+		static inline const Ptr mut_(const Ptr shoal, const Ptr eater)
+		{
+			return std::make_shared<Feeder>(shoal, eater);
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Shoal:Feeder");
+			return TYPE;
+		}
+
+		virtual inline const Ptr cats_() const override;
+
+	private:
+		const Ptr _shoal;
+		const Ptr _eater;
 	};
 };
 
@@ -5458,6 +5527,7 @@ private:
 
 	inline const Ptr _invoke_iterable_(const Ptr expression, const Ptr local) const
 	{
+		//TODO get member from @'0' and use ParamFeeder and ParamEater
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
 		Iterable* const it = dynamic_<Iterable>(Expression::evaluate_(flock->at_(1), local));
@@ -5492,17 +5562,22 @@ private:
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
 		const Ptr member = static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local));
-		Iterable* const it = dynamic_<Iterable>(Expression::evaluate_(flock->at_(2), local));
-		if (it)
+		const Ptr it = Expression::evaluate_(flock->at_(2), local);
+		ParamFeeder* const feeder = dynamic_<ParamFeeder>(it);
+		if (feeder)
 		{
-			Iterable* const iterable = dynamic_<Iterable>(member);
-			if (iterable)
+			ParamEater* const eater = dynamic_<ParamEater>(member);
+			if (eater)
 			{
-				return operate_(thing.get(), member, it->iterator(iterable->iterator_()));
+				return operate_(thing.get(), member, feeder->feeder(eater->eater_()));
 			}
-			return operate_(thing.get(), member, it->iterator_());
 		}
-		return nothing_();
+		Iterable* const iterable = dynamic_<Iterable>(it);
+		if (iterable)
+		{
+			return operate_(thing.get(), member, iterable->iterator_());
+		}
+		return operate_(thing.get(), member);
 	}
 
 	inline const Ptr _break_(const Ptr expression, const Ptr local) const
@@ -7433,6 +7508,14 @@ inline const Thing::Ptr Thing::stats_()
 //======================================================================
 
 //======================================================================
+// class ParamEater
+//======================================================================
+
+//======================================================================
+// class ParamFeeder
+//======================================================================
+
+//======================================================================
 // class Variadic
 //======================================================================
 
@@ -7577,7 +7660,7 @@ inline const Thing::Ptr Symbol::cats_() const
 // class Static
 //======================================================================
 
-inline const Thing::Ptr Static::iterator_() const
+inline const Thing::Ptr Static::eater_() const
 {
 	return IteratorRef<std::vector<Ptr>>::mut_(_params);
 }
@@ -7591,12 +7674,12 @@ inline const Thing::Ptr Method::with_name_(const Thing::Ptr thing, const Thing::
 	return fin_(thing, static_<Shoal>(thing->pub_())->find_(name));
 }
 
-inline const Thing::Ptr Method::iterator_() const
+inline const Thing::Ptr Method::eater_() const
 {
-	Iterable* const iterable = dynamic_<Iterable>(_member);
-	if (iterable)
+	ParamEater* const eater = dynamic_<ParamEater>(_member);
+	if (eater)
 	{
-		return iterable->iterator_();
+		return eater->eater_();
 	}
 	return IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>());
 }
@@ -7606,7 +7689,7 @@ inline const Thing::Ptr Method::iterator_() const
 //======================================================================
 
 template <typename T>
-inline const Thing::Ptr Member<T>::iterator_() const
+inline const Thing::Ptr Member<T>::eater_() const
 {
 	return IteratorRef<std::vector<Ptr>>::mut_(_params);
 }
@@ -7616,7 +7699,7 @@ inline const Thing::Ptr Member<T>::iterator_() const
 //======================================================================
 
 template <typename T>
-inline const Thing::Ptr Const<T>::iterator_() const
+inline const Thing::Ptr Const<T>::eater_() const
 {
 	return IteratorRef<std::vector<Ptr>>::mut_(_params);
 }
@@ -7779,6 +7862,21 @@ inline const Thing::Ptr Shoal::cats_() const
 }
 
 inline const Thing::Ptr Shoal::It::cats_() const
+{
+	static const Ptr CATS = []()
+	{
+		const Ptr cats = Herd::mut_();
+		Herd* const herd = static_<Herd>(cats);
+		herd->insert_("strange::Mutable");
+		herd->insert_("strange::Iterator");
+		herd->insert_("strange::Thing");
+		herd->finalize_();
+		return cats;
+	}();
+	return CATS;
+}
+
+inline const Thing::Ptr Shoal::Feeder::cats_() const
 {
 	static const Ptr CATS = []()
 	{
