@@ -6642,7 +6642,7 @@ public:
 	inline const Ptr parse_()
 	{
 		Ptr result;
-		for (bool first = true; true; first = false)
+		for (bool first = true, cont = true; cont; first = false)
 		{
 			const Ptr token = _token_();
 			if (token->is_("."))
@@ -6656,8 +6656,11 @@ public:
 			const Ptr symbol = tok->at_(3);
 			const Ptr flock = Flock::mut_();
 			Flock* const flk = static_<Flock>(flock);
-			const Ptr invoke = sym_("invoke");
-			bool cont = true;
+			static const Ptr local = sym_("local");
+			static const Ptr thing = sym_("thing");
+			static const Ptr invoke = sym_("invoke");
+			const Ptr statement = Reference::mut_(nothing_());
+			Reference* const smt = static_<Reference>(statement);
 			if (first)
 			{
 				if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
@@ -6665,8 +6668,19 @@ public:
 					const Ptr lit = tok->at_(4);
 					flk->push_back_(lit);
 					_next_();
-					cont = _thing_(flock);
-					result = Expression::fin_(invoke, flock);
+					cont = _thing_(statement, flock);
+					if (flk->size_() == 1)
+					{
+						result = Expression::fin_(smt->get_(), flock);
+					}
+					else
+					{
+						const Ptr nested = Flock::mut_();
+						Flock* const nest = static_<Flock>(nested);
+						nest->push_back_(lit);
+						flk->update_(0, Expression::fin_(thing, nested));
+						result = Expression::fin_(smt->get_(), flock);
+					}
 				}
 				else if (tag == 'N') // name
 				{
@@ -6684,6 +6698,7 @@ public:
 							{
 								log_("parser error: invalid break/continue");
 							}
+							continue;
 						}
 					}
 					else if (symbol->is_("return"))
@@ -6699,6 +6714,7 @@ public:
 							{
 								log_("parser error: invalid return");
 							}
+							continue;
 						}
 					}
 					else if (symbol->is_("if") || symbol->is_("question"))
@@ -6706,7 +6722,7 @@ public:
 						if (_statement_(flock))
 						{
 							const int64_t size = flk->size_();
-							if (size >= 2 && size <= 3)
+							if (size == 2 || size == 3)
 							{
 								result = Expression::fin_(symbol, flock);
 							}
@@ -6714,6 +6730,7 @@ public:
 							{
 								log_("parser error: invalid if/question");
 							}
+							continue;
 						}
 					}
 					else if (symbol->is_("while") || symbol->is_("do"))
@@ -6729,6 +6746,7 @@ public:
 							{
 								log_("parser error: invalid while/do");
 							}
+							continue;
 						}
 					}
 					else if (symbol->is_("for"))
@@ -6744,6 +6762,7 @@ public:
 							{
 								log_("parser error: invalid for");
 							}
+							continue;
 						}
 					}
 					else if (symbol->is_("block"))
@@ -6751,16 +6770,15 @@ public:
 						if (_statement_(flock))
 						{
 							result = Expression::fin_(symbol, flock);
+							continue;
 						}
 					}
-					else // local at name
-					{
-						flk->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
-						flk->push_back_(sym_("at"));
-						flk->push_back_(symbol);
-						cont = _update_(flock);
-						result = Expression::fin_(invoke, flock);
-					}
+					// local at name
+					flk->push_back_(Expression::fin_(local, Flock::mut_())); // local
+					flk->push_back_(sym_("at"));
+					flk->push_back_(symbol);
+					cont = _update_(flock);
+					result = Expression::fin_(invoke, flock);
 				}
 				else if (tag == 'P') // punctuation
 				{
@@ -6769,7 +6787,7 @@ public:
 					{
 						const Ptr nested = Flock::mut_();
 						Flock* const nest = static_<Flock>(nested);
-						nest->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
+						nest->push_back_(Expression::fin_(local, Flock::mut_())); // local
 						nest->push_back_(at);
 						nest->push_back_(symbol);
 
@@ -6783,20 +6801,20 @@ public:
 					{
 						const Ptr nested = Flock::mut_();
 						Flock* const nest = static_<Flock>(nested);
-						nest->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
+						nest->push_back_(Expression::fin_(local, Flock::mut_())); // local
 						nest->push_back_(at);
 						nest->push_back_(symbol);
 
 						flk->push_back_(Expression::fin_(invoke, nested));
 						_next_();
-						_dot_(flock);
-						result = Expression::fin_(invoke, flock);
+						_dot_(statement, flock);
+						result = Expression::fin_(smt->get_(), flock);
 					}
 					else if (symbol->is_("&")) // iterator next
 					{
 						const Ptr nested = Flock::mut_();
 						Flock* const nest = static_<Flock>(nested);
-						nest->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
+						nest->push_back_(Expression::fin_(local, Flock::mut_())); // local
 						nest->push_back_(at);
 						nest->push_back_(symbol);
 
@@ -6809,21 +6827,21 @@ public:
 					{
 						const Ptr nested = Flock::mut_();
 						Flock* const nest = static_<Flock>(nested);
-						nest->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
+						nest->push_back_(Expression::fin_(local, Flock::mut_())); // local
 						nest->push_back_(at);
 						nest->push_back_(sym_(static_<Symbol>(symbol)->symbol_().substr(1)));
 
 						flk->push_back_(Expression::fin_(invoke, nested));
 						_next_();
-						cont = _thing_(flock);
-						result = Expression::fin_(invoke, flock);
+						cont = _thing_(statement, flock);
+						result = Expression::fin_(smt->get_(), flock);
 					}
 					else if (symbol->is_("@@")) // local
 					{
-						flk->push_back_(Expression::fin_(invoke, Flock::mut_())); // local
+						flk->push_back_(Expression::fin_(local, Flock::mut_())); // local
 						_next_();
-						cont = _thing_(flock);
-						result = Expression::fin_(invoke, flock);
+						cont = _thing_(statement, flock);
+						result = Expression::fin_(smt->get_(), flock);
 					}
 					else if (symbol->is_("(")) //TODO expression
 					{
@@ -6831,8 +6849,8 @@ public:
 						_next_();
 						_list_(flock, symbol, sym_(")"));
 						flk->push_back_(nested);
-						cont = _thing_(flock);
-						result = Expression::fin_(invoke, flock);
+						cont = _thing_(statement, flock);
+						result = Expression::fin_(smt->get_(), flock);
 					}
 					else if (symbol->is_("[")) // flock
 					{
@@ -6840,8 +6858,8 @@ public:
 						_next_();
 						_list_(nested, symbol, sym_("]"));
 						flk->push_back_(nested);
-						cont = _thing_(flock);
-						result = Expression::fin_(invoke, flock);
+						cont = _thing_(statement, flock);
+						result = Expression::fin_(smt->get_(), flock);
 					}
 					else if (symbol->is_("{")) // shoal
 					{
@@ -6869,8 +6887,8 @@ public:
 						symbol->is_("!|"))
 					{
 						flk->push_back_(result);
-						cont = _thing_(flock);
-						result = Expression::fin_(invoke, flock);
+						cont = _thing_(statement, flock);
+						result = Expression::fin_(smt->get_(), flock);
 					}
 					else if (symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(","))
 					{
@@ -6881,10 +6899,6 @@ public:
 				{
 					log_("tokenizer error");
 				}
-			}
-			if (!cont)
-			{
-				break;
 			}
 		}
 		if (result.get())
@@ -6942,7 +6956,7 @@ private:
 		}
 	}
 
-	inline const bool _thing_(const Ptr flock)
+	inline const bool _thing_(const Ptr statement, const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -6955,6 +6969,7 @@ private:
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
 		Flock* const flk = static_<Flock>(flock);
+		Reference* const smt = static_<Reference>(statement);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
 			log_("parser error: thing literal");
@@ -6968,17 +6983,19 @@ private:
 			if (symbol->is_("."))
 			{
 				_next_();
-				_dot_(flock);
+				_dot_(flock, statement);
 			}
 			else if (symbol->is_("["))
 			{
 				_next_();
 				_list_(flock, symbol, sym_("]"));
+				smt->set_(sym_("invoke"));
 			}
-			else if (symbol->is_("("))
+			else if (symbol->is_("<"))
 			{
 				_next_();
-				_list_(flock, symbol, sym_(")"));
+				_list_(flock, symbol, sym_(">"));
+				smt->set_(sym_("invoke_iterator"));
 			}
 			else if (symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(","))
 			{
@@ -6988,37 +7005,37 @@ private:
 			{
 				flk->push_back_(sym_("modulo"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("%="))
 			{
 				flk->push_back_(sym_("self_modulo"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("%%"))
 			{
 				flk->push_back_(sym_("xor"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("!%"))
 			{
 				flk->push_back_(sym_("xnor"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("+"))
 			{
 				flk->push_back_(sym_("add"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("+="))
 			{
 				flk->push_back_(sym_("self_add"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("++"))
 			{
@@ -7029,13 +7046,13 @@ private:
 			{
 				flk->push_back_(sym_("subtract"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("-="))
 			{
 				flk->push_back_(sym_("self_subtract"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("--"))
 			{
@@ -7046,43 +7063,43 @@ private:
 			{
 				flk->push_back_(sym_("multiply"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("**"))
 			{
 				flk->push_back_(sym_("power"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("*="))
 			{
 				flk->push_back_(sym_("self_multiply"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("/"))
 			{
 				flk->push_back_(sym_("divide"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("/="))
 			{
 				flk->push_back_(sym_("self_divide"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("="))
 			{
 				flk->push_back_(sym_("same"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("!="))
 			{
 				flk->push_back_(sym_("different"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("@"))
 			{
@@ -7099,25 +7116,25 @@ private:
 			{
 				flk->push_back_(sym_("and"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("!&"))
 			{
 				flk->push_back_(sym_("nand"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("||"))
 			{
 				flk->push_back_(sym_("or"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("!|"))
 			{
 				flk->push_back_(sym_("nor"));
 				_next_();
-				_member_(flock);
+				_member_(statement, flock);
 			}
 			else if (symbol->is_("^"))
 			{
@@ -7168,7 +7185,7 @@ private:
 		return true; // continue
 	}
 
-	inline void _dot_(const Ptr flock)
+	inline void _dot_(const Ptr statement, const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -7190,7 +7207,7 @@ private:
 		{
 			flk->push_back_(symbol);
 			_next_();
-			_member_(flock);
+			_member_(statement, flock);
 		}
 		else if (tag == 'P') // punctuation
 		{
@@ -7202,7 +7219,7 @@ private:
 		}
 	}
 
-	inline void _member_(const Ptr flock)
+	inline void _member_(const Ptr statement, const Ptr flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -7227,7 +7244,7 @@ private:
 			if (symbol->is_("."))
 			{
 				_next_();
-				_dot_(flock);
+				_dot_(statement, flock);
 			}
 			else if (symbol->is_("["))
 			{
