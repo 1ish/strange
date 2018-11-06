@@ -5434,16 +5434,6 @@ public:
 		}
 		else if (statement->is_("invoke"))
 		{
-			if (size == 0)
-			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_local_, flock);
-			}
-			if (size == 1)
-			{
-				log_("expression of wrong size");
-				return fin_(&Expression::_thing_, flock);
-			}
 			if (size >= 2)
 			{
 				return fin_(&Expression::_invoke_, flock);
@@ -6659,7 +6649,7 @@ public:
 			static const Ptr local = sym_("local");
 			static const Ptr thing = sym_("thing");
 			static const Ptr invoke = sym_("invoke");
-			const Ptr statement = Reference::mut_(nothing_());
+			const Ptr statement = Reference::mut_(invoke);
 			Reference* const smt = static_<Reference>(statement);
 			if (first)
 			{
@@ -6810,7 +6800,7 @@ public:
 						_dot_(statement, flock);
 						result = Expression::fin_(smt->get_(), flock);
 					}
-					else if (symbol->is_("&")) // iterator next
+					else if (symbol->is_("..")) // iterator next
 					{
 						const Ptr nested = Flock::mut_();
 						Flock* const nest = static_<Flock>(nested);
@@ -6989,15 +6979,20 @@ private:
 			{
 				_next_();
 				_list_(flock, symbol, sym_("]"));
-				smt->set_(sym_("invoke"));
 			}
-			else if (symbol->is_("<"))
+			else if (symbol->is_("("))
 			{
 				_next_();
-				_list_(flock, symbol, sym_(">"));
+				_list_(flock, symbol, sym_(")"));
 				smt->set_(sym_("invoke_iterator"));
 			}
-			else if (symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(","))
+			else if (symbol->is_("{"))
+			{
+				_next_();
+				//TODO _list_(flock, symbol, sym_("}"));
+				smt->set_(sym_("invoke_iterable"));
+			}
+			else if (symbol->is_("]") || symbol->is_(")") || symbol->is_("}") || symbol->is_(","))
 			{
 				return false; // break
 			}
@@ -7231,6 +7226,7 @@ private:
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
+		Reference* const smt = static_<Reference>(statement);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
 			log_("parser error: member literal");
@@ -7255,6 +7251,13 @@ private:
 			{
 				_next_();
 				_list_(flock, symbol, sym_(")"));
+				smt->set_(sym_("operate_iterator"));
+			}
+			else if (symbol->is_("{"))
+			{
+				_next_();
+				//TODO _list_(flock, symbol, sym_("}"));
+				smt->set_(sym_("operate_iterable"));
 			}
 			else
 			{
