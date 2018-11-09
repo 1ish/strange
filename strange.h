@@ -5653,7 +5653,8 @@ private:
 	inline const Ptr _method_(const Ptr expression, const Ptr local) const
 	{
 		Flock* const flock = static_<Flock>(_flock);
-		return Method::with_name_(Expression::evaluate_(flock->at_(0), local), Expression::evaluate_(flock->at_(1), local));
+		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
+		return Method::with_name_(thing, Expression::evaluate_(flock->at_(1), local));
 	}
 
 	inline const Ptr _operate_iterator_(const Ptr expression, const Ptr local) const
@@ -7200,7 +7201,10 @@ private:
 		}
 		else if (tag == 'N') // name
 		{
-			flk->push_back_(symbol);
+			const Ptr nested = Flock::mut_();
+			Flock* const nest = static_<Flock>(nested);
+			nest->push_back_(symbol);
+			flk->push_back_(Expression::fin_(sym_("thing"), nested));
 			_next_();
 			_member_(statement, flock);
 		}
@@ -7217,8 +7221,10 @@ private:
 	inline void _member_(const Ptr statement, const Ptr flock)
 	{
 		const Ptr token = _token_();
+		Reference* const smt = static_<Reference>(statement);
 		if (token->is_("."))
 		{
+			smt->set_(sym_("method"));
 			return;
 		}
 		Flock* const tok = static_<Flock>(token);
@@ -7226,14 +7232,13 @@ private:
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
-		Reference* const smt = static_<Reference>(statement);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
-			log_("parser error: member literal");
+			smt->set_(sym_("method"));
 		}
 		else if (tag == 'N') // name
 		{
-			log_("parser error: member name");
+			smt->set_(sym_("method"));
 		}
 		else if (tag == 'P') // punctuation
 		{
@@ -7247,10 +7252,10 @@ private:
 				_next_();
 				_list_(flock, symbol, sym_("]"));
 			}
-			else if (symbol->is_("("))
+			else if (symbol->is_("<<"))
 			{
 				_next_();
-				_list_(flock, symbol, sym_(")"));
+				_list_(flock, symbol, sym_(">>"));
 				smt->set_(sym_("operate_iterator"));
 			}
 			else if (symbol->is_("{"))
@@ -7261,12 +7266,13 @@ private:
 			}
 			else
 			{
-				log_("parser error: member punctuation");
+				smt->set_(sym_("method"));
 			}
 		}
 		else if (tag == 'E') // error
 		{
 			log_("tokenizer error");
+			smt->set_(sym_("method"));
 		}
 	}
 
