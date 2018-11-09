@@ -5999,7 +5999,7 @@ protected:
 		{
 			loc->insert_("|", me->me_());
 		}
-		loc->insert_("&", it);
+		loc->insert_("..", it);
 		loc->insert_("@", Byte::mut_());
 		return static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
@@ -6276,7 +6276,7 @@ public:
 				return punctuation_(token);
 			case '@':
 				token = char1;
-				if (char1 == char2 || char2 == '$' || char2 == '|' || char2 == '&')
+				if (char1 == char2 || char2 == '$' || char2 == '|')
 				{
 					second = true;
 					break;
@@ -7510,7 +7510,7 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
 		shoal->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
 		shoal->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
-		shoal->update_("call", Static::fin_(&Thing::call, "&"));
+		shoal->update_("call", Static::fin_(&Thing::call, ".."));
 		shoal->update_("stats", Static::fin_(&Thing::stats));
 		shoal->update_("stat", Static::fin_(&Thing::stat));
 		shoal->update_("boolean", Static::fin_(&Thing::boolean, "thing"));
@@ -7534,7 +7534,7 @@ inline const Thing::Ptr Thing::stat_()
 	{
 		const Ptr stat = Shoal::mut_();
 		Shoal* const shoal = static_<Shoal>(stat);
-		shoal->update_("call", Static::fin_(&Thing::call, "&"));
+		shoal->update_("call", Static::fin_(&Thing::call, ".."));
 		shoal->update_("stats", Static::fin_(&Thing::stats));
 		shoal->update_("stat", Static::fin_(&Thing::stat));
 		shoal->update_("boolean", Static::fin_(&Thing::boolean, "thing"));
