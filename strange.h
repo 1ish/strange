@@ -6667,8 +6667,7 @@ public:
 					else
 					{
 						const Ptr nested = Flock::mut_();
-						Flock* const nest = static_<Flock>(nested);
-						nest->push_back_(lit);
+						static_<Flock>(nested)->push_back_(lit);
 						flk->update_(0, Expression::fin_(thing, nested));
 						result = Expression::fin_(smt->get_(), flock);
 					}
@@ -6838,7 +6837,7 @@ public:
 					{
 						const Ptr nested = Flock::mut_();
 						_next_();
-						_list_(flock, symbol, sym_(")"));
+						_list_(nested, symbol, sym_(")"));
 						flk->push_back_(nested);
 						cont = _thing_(statement, flock);
 						result = Expression::fin_(smt->get_(), flock);
@@ -6945,6 +6944,13 @@ private:
 		{
 			_deque.pop_front();
 		}
+	}
+
+	static inline void _wrap_(const Ptr thing, const Ptr flock)
+	{
+		const Ptr nested = Flock::mut_();
+		static_<Flock>(nested)->push_back_(thing);
+		static_<Flock>(flock)->push_back_(Expression::fin_(sym_("thing"), nested));
 	}
 
 	inline const bool _thing_(const Ptr statement, const Ptr flock)
@@ -7201,10 +7207,7 @@ private:
 		}
 		else if (tag == 'N') // name
 		{
-			const Ptr nested = Flock::mut_();
-			Flock* const nest = static_<Flock>(nested);
-			nest->push_back_(symbol);
-			flk->push_back_(Expression::fin_(sym_("thing"), nested));
+			_wrap_(symbol, flock);
 			_next_();
 			_member_(statement, flock);
 		}
