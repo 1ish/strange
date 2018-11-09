@@ -6657,17 +6657,8 @@ public:
 			{
 				if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 				{
-					const Ptr lit = tok->at_(4);
-					flk->push_back_(lit);
-					_next_();
-					cont = _thing_(statement, flock);
-					if (flk->size_() != 1)
-					{
-						const Ptr nested = Flock::mut_();
-						static_<Flock>(nested)->push_back_(lit);
-						flk->update_(0, Expression::fin_(thing, nested));
-					}
-					result = Expression::fin_(smt->get_(), flock);
+					flk->push_back_(tok->at_(4));
+					result = Expression::fin_(thing, flock);
 				}
 				else if (tag == 'N') // name
 				{
@@ -6891,12 +6882,6 @@ public:
 				{
 					flk->push_back_(result);
 					cont = _thing_(statement, flock);
-					if (flk->size_() != 1)
-					{
-						const Ptr nested = Flock::mut_();
-						static_<Flock>(nested)->push_back_(result);
-						flk->update_(0, Expression::fin_(thing, nested));
-					}
 					result = Expression::fin_(smt->get_(), flock);
 				}
 			}
