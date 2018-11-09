@@ -6661,17 +6661,13 @@ public:
 					flk->push_back_(lit);
 					_next_();
 					cont = _thing_(statement, flock);
-					if (flk->size_() == 1)
-					{
-						result = Expression::fin_(smt->get_(), flock);
-					}
-					else
+					if (flk->size_() != 1)
 					{
 						const Ptr nested = Flock::mut_();
 						static_<Flock>(nested)->push_back_(lit);
 						flk->update_(0, Expression::fin_(thing, nested));
-						result = Expression::fin_(smt->get_(), flock);
 					}
+					result = Expression::fin_(smt->get_(), flock);
 				}
 				else if (tag == 'N') // name
 				{
@@ -6837,6 +6833,10 @@ public:
 						cont = _thing_(statement, flock);
 						result = Expression::fin_(smt->get_(), flock);
 					}
+					else if (symbol->is_("$$")) //TODO super static
+					{
+						
+					}
 					else if (symbol->is_("(")) //TODO expression
 					{
 						const Ptr nested = Flock::mut_();
@@ -6878,30 +6878,26 @@ public:
 			}
 			else // not first
 			{
-				if (tag == 'P') //TODO punctuation
+				if (tag == 'P' &&
+					(symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(",")))
 				{
-					if (symbol->is_(".") || symbol->is_("!") || symbol->is_("#") || symbol->is_("##") ||
-						symbol->is_("%") || symbol->is_("%%") || symbol->is_("%=") || symbol->is_("!%") ||
-						symbol->is_("&") || symbol->is_("&&") || symbol->is_("!&") || symbol->is_("(") ||
-						symbol->is_("*") || symbol->is_("**") || symbol->is_("*=") || symbol->is_("+") ||
-						symbol->is_("++") || symbol->is_("+=") || symbol->is_("-") || symbol->is_("--") ||
-						symbol->is_("-=") || symbol->is_("/") || symbol->is_("/=") || symbol->is_("=") ||
-						symbol->is_("!=") || symbol->is_("?") || symbol->is_("@") || symbol->is_("~") ||
-						symbol->is_("~~") || symbol->is_("[") || symbol->is_("^") || symbol->is_("||") ||
-						symbol->is_("!|"))
-					{
-						flk->push_back_(result);
-						cont = _thing_(statement, flock);
-						result = Expression::fin_(smt->get_(), flock);
-					}
-					else if (symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(","))
-					{
-						cont = false;
-					}
+					cont = false;
 				}
 				else if (tag == 'E') // error
 				{
 					log_("tokenizer error");
+				}
+				else
+				{
+					flk->push_back_(result);
+					cont = _thing_(statement, flock);
+					if (flk->size_() != 1)
+					{
+						const Ptr nested = Flock::mut_();
+						static_<Flock>(nested)->push_back_(result);
+						flk->update_(0, Expression::fin_(thing, nested));
+					}
+					result = Expression::fin_(smt->get_(), flock);
 				}
 			}
 		}
