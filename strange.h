@@ -5999,7 +5999,7 @@ protected:
 		{
 			loc->insert_("|", me->me_());
 		}
-		loc->insert_("..", it);
+		loc->insert_("&", it);
 		loc->insert_("@", Byte::mut_());
 		return static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
