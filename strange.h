@@ -6258,12 +6258,12 @@ public:
 			case '*':
 			case '%':
 			case ':':
+			case '<':
+			case '>':
 				if (char1 == char2)
 				{
 					second = true;
 				}
-			case '<':
-			case '>':
 				if (char2 == '=')
 				{
 					second = true;
