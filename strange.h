@@ -6650,6 +6650,7 @@ public:
 			static const Ptr local = sym_("local");
 			static const Ptr thing = sym_("thing");
 			static const Ptr invoke = sym_("invoke");
+			static const Ptr at = sym_("at");
 			const Ptr statement = Reference::mut_(invoke);
 			Reference* const smt = static_<Reference>(statement);
 			if (first)
@@ -6765,24 +6766,22 @@ public:
 					}
 					// local at name
 					flk->push_back_(Expression::fin_(local, Flock::mut_())); // local
-					flk->push_back_(sym_("at"));
-					flk->push_back_(symbol);
+					_wrap_(at, flock);
+					_wrap_(symbol, flock);
 					cont = _update_(flock);
 					result = Expression::fin_(invoke, flock);
 				}
 				else if (tag == 'P') // punctuation
 				{
-					const Ptr at = sym_("at");
 					if (symbol->is_("$")) // static at
 					{
 						const Ptr nested = Flock::mut_();
-						Flock* const nest = static_<Flock>(nested);
-						nest->push_back_(Expression::fin_(local, Flock::mut_())); // local
-						nest->push_back_(at);
-						nest->push_back_(symbol);
+						static_<Flock>(nested)->push_back_(Expression::fin_(local, Flock::mut_())); // local
+						_wrap_(at, nested);
+						_wrap_(symbol, nested);
 
 						flk->push_back_(Expression::fin_(invoke, nested));
-						flk->push_back_(at);
+						_wrap_(at, flock);
 						_next_();
 						cont = _at_(flock);
 						result = Expression::fin_(invoke, flock);
@@ -6790,36 +6789,41 @@ public:
 					else if (symbol->is_("|")) // me dot
 					{
 						const Ptr nested = Flock::mut_();
-						Flock* const nest = static_<Flock>(nested);
-						nest->push_back_(Expression::fin_(local, Flock::mut_())); // local
-						nest->push_back_(at);
-						nest->push_back_(symbol);
+						static_<Flock>(nested)->push_back_(Expression::fin_(local, Flock::mut_())); // local
+						_wrap_(at, nested);
+						_wrap_(symbol, nested);
 
 						flk->push_back_(Expression::fin_(invoke, nested));
 						_next_();
 						_dot_(statement, flock);
 						result = Expression::fin_(smt->get_(), flock);
 					}
-					else if (symbol->is_("..")) // iterator next
+					else if (symbol->is_("..")) // iterator
 					{
-						const Ptr nested = Flock::mut_();
-						Flock* const nest = static_<Flock>(nested);
-						nest->push_back_(Expression::fin_(local, Flock::mut_())); // local
-						nest->push_back_(at);
-						nest->push_back_(symbol);
-
-						flk->push_back_(Expression::fin_(invoke, nested));
-						flk->push_back_(sym_("next"));
+						flk->push_back_(Expression::fin_(local, Flock::mut_())); // local
+						_wrap_(at, flock);
+						_wrap_(sym_("&"), flock);
 						_next_();
 						result = Expression::fin_(invoke, flock);
 					}
-					else if (symbol->is_("@$") || symbol->is_("@|") || symbol->is_("@&")) // static or me or it
+					else if (symbol->is_("^^")) // iterator next
 					{
 						const Ptr nested = Flock::mut_();
-						Flock* const nest = static_<Flock>(nested);
-						nest->push_back_(Expression::fin_(local, Flock::mut_())); // local
-						nest->push_back_(at);
-						nest->push_back_(sym_(static_<Symbol>(symbol)->symbol_().substr(1)));
+						static_<Flock>(nested)->push_back_(Expression::fin_(local, Flock::mut_())); // local
+						_wrap_(at, nested);
+						_wrap_(sym_("&"), nested);
+
+						flk->push_back_(Expression::fin_(invoke, nested));
+						_wrap_(sym_("next"), flock);
+						_next_();
+						result = Expression::fin_(invoke, flock);
+					}
+					else if (symbol->is_("@$") || symbol->is_("@|")) // static or me
+					{
+						const Ptr nested = Flock::mut_();
+						static_<Flock>(nested)->push_back_(Expression::fin_(local, Flock::mut_())); // local
+						_wrap_(at, nested);
+						_wrap_(sym_(static_<Symbol>(symbol)->symbol_().substr(1)), nested);
 
 						flk->push_back_(Expression::fin_(invoke, nested));
 						_next_();
@@ -6844,12 +6848,22 @@ public:
 					}
 					else if (symbol->is_("[")) // flock
 					{
-						const Ptr nested = Flock::mut_();
+						const Ptr list = Flock::mut_();
 						_next_();
-						_list_(nested, symbol, sym_("]"));
-						flk->push_back_(nested);
+						_list_(list, symbol, sym_("]"));
+						flk->push_back_(list);
 						cont = _thing_(statement, flock);
-						result = Expression::fin_(smt->get_(), flock);
+						if (flk->size_() == 1)
+						{
+							result = Expression::fin_(smt->get_(), flock);
+						}
+						else
+						{
+							const Ptr nested = Flock::mut_();
+							static_<Flock>(nested)->push_back_(list);
+							flk->update_(0, Expression::fin_(thing, nested));
+							result = Expression::fin_(smt->get_(), flock);
+						}
 					}
 					else if (symbol->is_("{")) // shoal
 					{
