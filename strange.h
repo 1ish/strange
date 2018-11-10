@@ -21,8 +21,8 @@ namespace strange
 {
 	class Thing;
 	class Iterable;
-	class ParamEater;
-	class ParamFeeder;
+	class Eaterable;
+	class Feederable;
 	class Variadic;
 	template <typename T> class Me;
 	class Serializable;
@@ -391,7 +391,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class ParamEater
+class Eaterable
 //----------------------------------------------------------------------
 {
 public:
@@ -400,7 +400,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class ParamFeeder
+class Feederable
 //----------------------------------------------------------------------
 {
 public:
@@ -678,7 +678,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Static : public Thing, public Me<Static>, public ParamEater
+class Static : public Thing, public Me<Static>, public Eaterable
 //----------------------------------------------------------------------
 {
 	using function = const Ptr(*)(const Ptr);
@@ -688,7 +688,7 @@ public:
 	inline Static(const function fun, F&& params)
 		: Thing{}
 		, Me{}
-		, ParamEater{}
+		, Eaterable{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
 	{
@@ -736,14 +736,14 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Method : public Thing, public Me<Method>, public ParamEater
+class Method : public Thing, public Me<Method>, public Eaterable
 //----------------------------------------------------------------------
 {
 public:
 	inline Method(const Ptr thing, const Ptr member) // member is a functor, not a name
 		: Thing{}
 		, Me{}
-		, ParamEater{}
+		, Eaterable{}
 		, _thing{ thing }
 		, _member{ member }
 	{
@@ -784,7 +784,7 @@ private:
 
 template <typename T>
 //----------------------------------------------------------------------
-class Member : public Thing, public Me<Member<T>>, public ParamEater
+class Member : public Thing, public Me<Member<T>>, public Eaterable
 //----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr);
@@ -794,7 +794,7 @@ public:
 	inline Member(const member fun, F&& params)
 		: Thing{}
 		, Me<Member<T>>{}
-		, ParamEater{}
+		, Eaterable{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
 	{
@@ -854,7 +854,7 @@ private:
 
 template <typename T>
 //----------------------------------------------------------------------
-class Const : public Thing, public Me<Const<T>>, public ParamEater
+class Const : public Thing, public Me<Const<T>>, public Eaterable
 //----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr) const;
@@ -864,7 +864,7 @@ public:
 	inline Const(const member fun, F&& params)
 		: Thing{}
 		, Me<Const<T>>{}
-		, ParamEater{}
+		, Eaterable{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
 	{
@@ -945,7 +945,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Shoal : public Mutable, public Me<Shoal>, public Serializable, public Iterable, public ParamFeeder
+class Shoal : public Mutable, public Me<Shoal>, public Serializable, public Iterable, public Feederable
 //----------------------------------------------------------------------
 {
 	class Hash
@@ -5628,18 +5628,18 @@ private:
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
 		const Ptr it = Expression::evaluate_(flock->at_(1), local);
-		ParamFeeder* const feeder = dynamic_<ParamFeeder>(it);
-		if (feeder)
+		Feederable* const feederable = dynamic_<Feederable>(it);
+		if (feederable)
 		{
 			static const std::vector<Ptr> NOTHING{ nothing_() };
 			const Ptr nothing_eater = IteratorRef<std::vector<Ptr>>::mut_(NOTHING);
-			const Ptr nothing_feeder = feeder->feeder(nothing_eater);
+			const Ptr nothing_feeder = feederable->feeder(nothing_eater);
 			const Ptr name = nothing_feeder->next_();
 			const Ptr member = static_<Shoal>(thing->pub_())->find_(name);
-			ParamEater* const eater = dynamic_<ParamEater>(member);
-			if (eater)
+			Eaterable* const eaterable = dynamic_<Eaterable>(member);
+			if (eaterable)
 			{
-				return operate_(thing.get(), member, feeder->feeder(eater->eater_()));
+				return operate_(thing.get(), member, feederable->feeder(eaterable->eater_()));
 			}
 		}
 		Iterable* const iterable = dynamic_<Iterable>(it);
@@ -5671,13 +5671,13 @@ private:
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
 		const Ptr member = static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local));
 		const Ptr it = Expression::evaluate_(flock->at_(2), local);
-		ParamFeeder* const feeder = dynamic_<ParamFeeder>(it);
-		if (feeder)
+		Feederable* const feederable = dynamic_<Feederable>(it);
+		if (feederable)
 		{
-			ParamEater* const eater = dynamic_<ParamEater>(member);
-			if (eater)
+			Eaterable* const eaterable = dynamic_<Eaterable>(member);
+			if (eaterable)
 			{
-				return operate_(thing.get(), member, feeder->feeder(eater->eater_()));
+				return operate_(thing.get(), member, feederable->feeder(eaterable->eater_()));
 			}
 		}
 		Iterable* const iterable = dynamic_<Iterable>(it);
@@ -7650,11 +7650,11 @@ inline const Thing::Ptr Thing::stats_()
 //======================================================================
 
 //======================================================================
-// class ParamEater
+// class Eaterable
 //======================================================================
 
 //======================================================================
-// class ParamFeeder
+// class Feederable
 //======================================================================
 
 //======================================================================
@@ -7818,10 +7818,10 @@ inline const Thing::Ptr Method::with_name_(const Thing::Ptr thing, const Thing::
 
 inline const Thing::Ptr Method::eater_() const
 {
-	ParamEater* const eater = dynamic_<ParamEater>(_member);
-	if (eater)
+	Eaterable* const eaterable = dynamic_<Eaterable>(_member);
+	if (eaterable)
 	{
-		return eater->eater_();
+		return eaterable->eater_();
 	}
 	return IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>());
 }
