@@ -5585,6 +5585,20 @@ public:
 		return It::mut_(expression, local);
 	}
 
+	static inline void generate_(const Ptr expression, const Ptr language, const Ptr river)
+	{
+		River* const riv = dynamic_<River>(river);
+		if (!riv)
+		{
+			return;
+		}
+		Expression* const exp = static_<Expression>(expression);
+		if (language->is_("strange"))
+		{
+			exp->_generate_strange_(riv);
+		}
+	}
+
 	virtual inline const Ptr copy_() const override
 	{
 		return fin_(_member, _flock);
@@ -5600,9 +5614,22 @@ private:
 	const MemberPtr _member;
 	const Ptr _flock;
 
+	inline void _generate_strange_(River* const river)
+	{
+		if (_member == &Expression::_local_)
+		{
+			_generate_strange_local_(river);
+		}
+	}
+
 	inline const Ptr _local_(const Ptr expression, const Ptr local) const
 	{
 		return local;
+	}
+
+	inline void _generate_strange_local_(River* const river)
+	{
+		river->write_("@@");
 	}
 
 	inline const Ptr _thing_(const Ptr expression, const Ptr local) const
