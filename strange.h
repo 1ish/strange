@@ -5422,7 +5422,7 @@ public:
 			{
 				return fin_(&Expression::_local_, flock);
 			}
-			log_("expression of wrong size");
+			log_("local expression of wrong size");
 		}
 		else if (statement->is_("thing"))
 		{
@@ -5430,7 +5430,7 @@ public:
 			{
 				return fin_(&Expression::_thing_, flock);
 			}
-			log_("expression of wrong size");
+			log_("thing expression of wrong size");
 		}
 		else if (statement->is_("invoke"))
 		{
@@ -5438,7 +5438,7 @@ public:
 			{
 				return fin_(&Expression::_invoke_, flock);
 			}
-			log_("expression of wrong size");
+			log_("invoke expression of wrong size");
 		}
 		else if (statement->is_("invoke_iterator"))
 		{
@@ -5446,7 +5446,7 @@ public:
 			{
 				return fin_(&Expression::_invoke_iterator_, flock);
 			}
-			log_("expression of wrong size");
+			log_("invoke_iterator expression of wrong size");
 		}
 		else if (statement->is_("invoke_iterable"))
 		{
@@ -5454,7 +5454,7 @@ public:
 			{
 				return fin_(&Expression::_invoke_iterable_, flock);
 			}
-			log_("expression of wrong size");
+			log_("invoke_iterable expression of wrong size");
 		}
 		else if (statement->is_("method"))
 		{
@@ -5462,7 +5462,7 @@ public:
 			{
 				return fin_(&Expression::_method_, flock);
 			}
-			log_("expression of wrong size");
+			log_("method expression of wrong size");
 		}
 		else if (statement->is_("operate_iterator"))
 		{
@@ -5470,7 +5470,7 @@ public:
 			{
 				return fin_(&Expression::_operate_iterator_, flock);
 			}
-			log_("expression of wrong size");
+			log_("operate_iterator expression of wrong size");
 		}
 		else if (statement->is_("operate_iterable"))
 		{
@@ -5478,7 +5478,19 @@ public:
 			{
 				return fin_(&Expression::_operate_iterable_, flock);
 			}
-			log_("expression of wrong size");
+			log_("operate_iterable expression of wrong size");
+		}
+		else if (statement->is_("lambda"))
+		{
+			if (size >= 1)
+			{
+				return fin_(&Expression::_lambda_, flock);
+			}
+			log_("lambda expression of wrong size");
+		}
+		else if (statement->is_("flock"))
+		{
+			return fin_(&Expression::_flock_, flock);
 		}
 		else if (statement->is_("break"))
 		{
@@ -5486,7 +5498,7 @@ public:
 			{
 				return fin_(&Expression::_break_, flock);
 			}
-			log_("expression of wrong size");
+			log_("break expression of wrong size");
 		}
 		else if (statement->is_("continue"))
 		{
@@ -5494,7 +5506,7 @@ public:
 			{
 				return fin_(&Expression::_continue_, flock);
 			}
-			log_("expression of wrong size");
+			log_("continue expression of wrong size");
 		}
 		else if (statement->is_("return"))
 		{
@@ -5502,15 +5514,11 @@ public:
 			{
 				return fin_(&Expression::_return_, flock);
 			}
-			log_("expression of wrong size");
+			log_("return expression of wrong size");
 		}
 		else if (statement->is_("block"))
 		{
 			return fin_(&Expression::_block_, flock);
-		}
-		else if (statement->is_("flock"))
-		{
-			return fin_(&Expression::_flock_, flock);
 		}
 		else if (statement->is_("if"))
 		{
@@ -5518,7 +5526,7 @@ public:
 			{
 				return fin_(&Expression::_if_, flock);
 			}
-			log_("expression of wrong size");
+			log_("if expression of wrong size");
 		}
 		else if (statement->is_("question"))
 		{
@@ -5526,7 +5534,7 @@ public:
 			{
 				return fin_(&Expression::_question_, flock);
 			}
-			log_("expression of wrong size");
+			log_("question expression of wrong size");
 		}
 		else if (statement->is_("while"))
 		{
@@ -5534,7 +5542,7 @@ public:
 			{
 				return fin_(&Expression::_while_, flock);
 			}
-			log_("expression of wrong size");
+			log_("while expression of wrong size");
 		}
 		else if (statement->is_("do"))
 		{
@@ -5542,7 +5550,7 @@ public:
 			{
 				return fin_(&Expression::_do_, flock);
 			}
-			log_("expression of wrong size");
+			log_("do expression of wrong size");
 		}
 		else if (statement->is_("for"))
 		{
@@ -5550,7 +5558,7 @@ public:
 			{
 				return fin_(&Expression::_for_, flock);
 			}
-			log_("expression of wrong size");
+			log_("for expression of wrong size");
 		}
 		else if (!statement->is_("0"))
 		{
@@ -5810,6 +5818,42 @@ private:
 		return operate_(thing.get(), member);
 	}
 
+	inline const Ptr _lambda_(const Ptr expression, const Ptr local) const
+	{
+		Shoal* const shoal = static_<Shoal>(local);
+		Byte* const action = static_<Byte>(shoal->find_("@"));
+		const Ptr it = shoal->find_("&");
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size_1 = flock->size_() - 1;
+		for (int64_t i = 0; i < size_1; ++i)
+		{
+			const Ptr param = Expression::evaluate_(flock->at_(i), local);
+			action->set_(0);
+			const Ptr next = it->next_();
+			if (next->is_("."))
+			{
+				break;
+			}
+			shoal->update_(param, next);
+		}
+		return Expression::evaluate_(flock->at_(size_1), local);
+	}
+
+	inline const Ptr _flock_(const Ptr expression, const Ptr local) const
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		const Ptr result = Flock::mut_();
+		Flock* const res = static_<Flock>(result);
+		for (int64_t i = 0; i < size; ++i)
+		{
+			res->push_back_(Expression::evaluate_(flock->at_(i), local));
+			action->set_(0);
+		}
+		return result;
+	}
+
 	inline const Ptr _break_(const Ptr expression, const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
@@ -5850,21 +5894,6 @@ private:
 			}
 		}
 		return nothing_();
-	}
-
-	inline const Ptr _flock_(const Ptr expression, const Ptr local) const
-	{
-		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
-		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		const Ptr result = Flock::mut_();
-		Flock* const res = static_<Flock>(result);
-		for (int64_t i = 0; i < size; ++i)
-		{
-			res->push_back_(Expression::evaluate_(flock->at_(i), local));
-			action->set_(0);
-		}
-		return result;
 	}
 
 	inline const Ptr _if_(const Ptr expression, const Ptr local) const
@@ -6965,9 +6994,12 @@ public:
 					{
 						_next_();
 					}
-					else if (symbol->is_("(")) //TODO expression
+					else if (symbol->is_("(")) // lambda
 					{
 						_next_();
+						_list_(flock, symbol, sym_(")"));
+						flk->push_back_(parse_());
+						result = Expression::fin_(sym_("lambda"), flock);
 					}
 					else if (symbol->is_("[")) // flock
 					{
