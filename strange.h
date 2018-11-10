@@ -5620,6 +5620,14 @@ private:
 		{
 			_generate_strange_local_(river);
 		}
+		else if (_member == &Expression::_thing_)
+		{
+			_generate_strange_thing_(river);
+		}
+		else if (_member == &Expression::_invoke_)
+		{
+			_generate_strange_invoke_(river);
+		}
 	}
 
 	inline const Ptr _local_(const Ptr expression, const Ptr local) const
@@ -5637,10 +5645,36 @@ private:
 		return static_<Flock>(_flock)->at_(0);
 	}
 
+	inline void _generate_strange_thing_(River* const river)
+	{
+		river->write_("£"); //TODO write literals
+	}
+
 	inline const Ptr _invoke_(const Ptr expression, const Ptr local) const
 	{
 		const Ptr it = Expression::iterator_(expression, local);
 		return it->next_()->invoke(it);
+	}
+
+	inline void _generate_strange_invoke_(River* const river)
+	{
+		const Ptr it = static_<Flock>(_flock)->iterator_();
+		static_<Expression>(it->next_())->_generate_strange_(river);
+		river->write_("[");
+		bool first = true;
+		for (Ptr exp = it->next_(); !exp->is_("."); exp = it->next_())
+		{
+			if (first)
+			{
+				first = false;
+			}
+			else
+			{
+				river->write_(",");
+			}
+			static_<Expression>(exp)->_generate_strange_(river);
+		}
+		river->write_("]");
 	}
 
 	inline const Ptr _invoke_iterator_(const Ptr expression, const Ptr local) const
