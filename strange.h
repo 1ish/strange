@@ -5508,6 +5508,10 @@ public:
 		{
 			return fin_(&Expression::_block_, flock);
 		}
+		else if (statement->is_("flock"))
+		{
+			return fin_(&Expression::_flock_, flock);
+		}
 		else if (statement->is_("if"))
 		{
 			if (size == 2 || size == 3)
@@ -5846,6 +5850,21 @@ private:
 			}
 		}
 		return nothing_();
+	}
+
+	inline const Ptr _flock_(const Ptr expression, const Ptr local) const
+	{
+		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		const Ptr result = Flock::mut_();
+		Flock* const res = static_<Flock>(result);
+		for (int64_t i = 0; i < size; ++i)
+		{
+			res->push_back_(Expression::evaluate_(flock->at_(i), local));
+			action->set_(0);
+		}
+		return result;
 	}
 
 	inline const Ptr _if_(const Ptr expression, const Ptr local) const
@@ -6944,39 +6963,24 @@ public:
 					}
 					else if (symbol->is_("$$")) //TODO super static
 					{
-						
+						_next_();
 					}
 					else if (symbol->is_("(")) //TODO expression
 					{
-						const Ptr nested = Flock::mut_();
 						_next_();
-						_list_(nested, symbol, sym_(")"));
-						flk->push_back_(nested);
-						cont = _thing_(statement, flock);
-						result = Expression::fin_(smt->get_(), flock);
 					}
 					else if (symbol->is_("[")) // flock
 					{
-						const Ptr list = Flock::mut_();
 						_next_();
-						_list_(list, symbol, sym_("]"));
-						flk->push_back_(list);
-						cont = _thing_(statement, flock);
-						if (flk->size_() == 1)
-						{
-							result = Expression::fin_(smt->get_(), flock);
-						}
-						else
-						{
-							const Ptr nested = Flock::mut_();
-							static_<Flock>(nested)->push_back_(list);
-							flk->update_(0, Expression::fin_(thing, nested));
-							result = Expression::fin_(smt->get_(), flock);
-						}
+						_list_(flock, symbol, sym_("]"));
+						result = Expression::fin_(sym_("flock"), flock);
 					}
-					else if (symbol->is_("{")) // shoal
+					else if (symbol->is_("{")) //TODO shoal? block?
 					{
-						//TODO
+						_next_();
+					}
+					else if (symbol->is_("<<")) //TODO iterator - for each?
+					{
 						_next_();
 					}
 				}
@@ -6988,7 +6992,7 @@ public:
 			else // not first
 			{
 				if (tag == 'P' &&
-					(symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(",")))
+					(symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(">>") || symbol->is_(",")))
 				{
 					cont = false;
 				}
@@ -7480,14 +7484,7 @@ private:
 					return;
 				}
 			}
-			if (open->is_("["))
-			{
-				flk->push_back_(Expression::immediate_(parse_()));
-			}
-			else
-			{
-				flk->push_back_(parse_());
-			}
+			flk->push_back_(parse_());
 		}
 	}
 
