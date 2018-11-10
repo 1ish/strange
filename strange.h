@@ -5632,14 +5632,20 @@ private:
 		if (feederable)
 		{
 			static const std::vector<Ptr> NOTHING{ nothing_() };
-			const Ptr nothing_eater = IteratorRef<std::vector<Ptr>>::mut_(NOTHING);
-			const Ptr nothing_feeder = feederable->feeder(nothing_eater);
-			const Ptr name = nothing_feeder->next_();
-			const Ptr member = static_<Shoal>(thing->pub_())->find_(name);
-			Eaterable* const eaterable = dynamic_<Eaterable>(member);
-			if (eaterable)
+			const Ptr member = static_<Shoal>(thing->pub_())->find_(feederable->feeder(IteratorRef<std::vector<Ptr>>::mut_(NOTHING))->next_());
+			if (!member->is_("0"))
 			{
-				return operate_(thing.get(), member, feederable->feeder(eaterable->eater_()));
+				Eaterable* const eaterable = dynamic_<Eaterable>(member);
+				if (eaterable)
+				{
+					return operate_(thing.get(), member, feederable->feeder(eaterable->eater_()));
+				}
+				Iterable* const iterable = dynamic_<Iterable>(it);
+				if (iterable)
+				{
+					return operate_(thing.get(), member, iterable->iterator_());
+				}
+				return operate_(thing.get(), member);
 			}
 		}
 		Iterable* const iterable = dynamic_<Iterable>(it);
