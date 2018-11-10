@@ -5597,6 +5597,10 @@ public:
 		{
 			exp->_generate_strange_(riv);
 		}
+		else if (language->is_("c++"))
+		{
+			exp->_generate_cpp_(riv);
+		}
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -5614,7 +5618,7 @@ private:
 	const MemberPtr _member;
 	const Ptr _flock;
 
-	inline void _generate_strange_(River* const river)
+	inline void _generate_strange_(River* const river) const
 	{
 		if (_member == &Expression::_local_)
 		{
@@ -5630,14 +5634,35 @@ private:
 		}
 	}
 
+	inline void _generate_cpp_(River* const river) const
+	{
+		if (_member == &Expression::_local_)
+		{
+			_generate_cpp_local_(river);
+		}
+		else if (_member == &Expression::_thing_)
+		{
+			_generate_cpp_thing_(river);
+		}
+		else if (_member == &Expression::_invoke_)
+		{
+			_generate_cpp_invoke_(river);
+		}
+	}
+
 	inline const Ptr _local_(const Ptr expression, const Ptr local) const
 	{
 		return local;
 	}
 
-	inline void _generate_strange_local_(River* const river)
+	inline void _generate_strange_local_(River* const river) const
 	{
 		river->write_("@@");
+	}
+
+	inline void _generate_cpp_local_(River* const river) const
+	{
+		river->write_("__local__");
 	}
 
 	inline const Ptr _thing_(const Ptr expression, const Ptr local) const
@@ -5645,9 +5670,14 @@ private:
 		return static_<Flock>(_flock)->at_(0);
 	}
 
-	inline void _generate_strange_thing_(River* const river)
+	inline void _generate_strange_thing_(River* const river) const
 	{
-		river->write_("£"); //TODO write literals
+		river->write_("£"); //TODO write strange literals
+	}
+
+	inline void _generate_cpp_thing_(River* const river) const
+	{
+		river->write_("£"); //TODO write cpp literals
 	}
 
 	inline const Ptr _invoke_(const Ptr expression, const Ptr local) const
@@ -5656,7 +5686,7 @@ private:
 		return it->next_()->invoke(it);
 	}
 
-	inline void _generate_strange_invoke_(River* const river)
+	inline void _generate_strange_invoke_(River* const river) const
 	{
 		const Ptr it = static_<Flock>(_flock)->iterator_();
 		static_<Expression>(it->next_())->_generate_strange_(river);
@@ -5675,6 +5705,27 @@ private:
 			static_<Expression>(exp)->_generate_strange_(river);
 		}
 		river->write_("]");
+	}
+
+	inline void _generate_cpp_invoke_(River* const river) const
+	{
+		const Ptr it = static_<Flock>(_flock)->iterator_();
+		static_<Expression>(it->next_())->_generate_cpp_(river);
+		river->write_("->invoke_(");
+		bool first = true;
+		for (Ptr exp = it->next_(); !exp->is_("."); exp = it->next_())
+		{
+			if (first)
+			{
+				first = false;
+			}
+			else
+			{
+				river->write_(",");
+			}
+			static_<Expression>(exp)->_generate_cpp_(river);
+		}
+		river->write_(")");
 	}
 
 	inline const Ptr _invoke_iterator_(const Ptr expression, const Ptr local) const
