@@ -20,7 +20,6 @@
 namespace strange
 {
 	class Thing;
-	class Iterable;
 	class Eaterable;
 	class Feederable;
 	class Variadic;
@@ -256,6 +255,16 @@ public:
 		return boolean_(frozen_());
 	}
 
+	virtual inline const Ptr iterator_() const
+	{
+		return stop_();
+	}
+
+	inline const Ptr iterator(const Ptr ignore) const
+	{
+		return iterator_();
+	}
+
 	virtual inline const Ptr next_()
 	{
 		return stop_();
@@ -373,20 +382,6 @@ private:
 	{
 		static std::atomic<bool> FINALIZED(true);
 		return FINALIZED;
-	}
-};
-
-//----------------------------------------------------------------------
-class Iterable
-//----------------------------------------------------------------------
-{
-public:
-	// public pure virtual member functions and adapters
-	virtual inline const Thing::Ptr iterator_() const = 0;
-
-	inline const Thing::Ptr iterator(const Thing::Ptr ignore) const
-	{
-		return iterator_();
 	}
 };
 
@@ -945,7 +940,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Shoal : public Mutable, public Me<Shoal>, public Serializable, public Iterable, public Feederable
+class Shoal : public Mutable, public Me<Shoal>, public Serializable, public Feederable
 //----------------------------------------------------------------------
 {
 	class Hash
@@ -973,7 +968,6 @@ public:
 		: Mutable{}
 		, Me{}
 		, Serializable{}
-		, Iterable{}
 		, _map{}
 		, _frozen{ false }
 	{
@@ -1053,7 +1047,6 @@ public:
 			shoal->update_("find", Const<Shoal>::fin_(&Shoal::find));
 			shoal->update_("update", Member<Shoal>::fin_(&Shoal::update));
 			shoal->update_("insert", Member<Shoal>::fin_(&Shoal::insert));
-			shoal->update_("iterator", Const<Shoal>::fin_(&Shoal::iterator));
 			shoal->update_("feeder", Const<Shoal>::fin_(&Shoal::feeder));
 			shoal->update_("itemize", Member<Shoal>::fin_(&Shoal::itemize));
 			shoal->update_("gather", Member<Shoal>::fin_(&Shoal::gather));
@@ -1546,7 +1539,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Flock : public Mutable, public Me<Flock>, public Serializable, public Iterable
+class Flock : public Mutable, public Me<Flock>, public Serializable
 //----------------------------------------------------------------------
 {
 	using std_vector_ptr = std::vector<Ptr>;
@@ -1556,7 +1549,6 @@ public:
 		: Mutable{}
 		, Me{}
 		, Serializable{}
-		, Iterable{}
 		, _vector{}
 		, _frozen{ false }
 	{
@@ -1634,7 +1626,6 @@ public:
 			shoal->update_("riv", Static::fin_(&Flock::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Flock::rwl, "river"));
 			shoal->update_("push_back", Member<Flock>::fin_(&Flock::push_back));
-			shoal->update_("iterator", Const<Flock>::fin_(&Flock::iterator));
 			shoal->update_("size", Const<Flock>::fin_(&Flock::size));
 			shoal->update_("empty", Const<Flock>::fin_(&Flock::empty));
 			shoal->update_("at", Const<Flock>::fin_(&Flock::at));
@@ -1972,7 +1963,7 @@ inline const Thing::Ptr Shoal::It::next_()
 }
 
 //----------------------------------------------------------------------
-class Herd : public Mutable, public Me<Herd>, public Serializable, public Iterable
+class Herd : public Mutable, public Me<Herd>, public Serializable
 //----------------------------------------------------------------------
 {
 	class Hash
@@ -2000,7 +1991,6 @@ public:
 		: Mutable{}
 		, Me{}
 		, Serializable{}
-		, Iterable{}
 		, _set{}
 		, _frozen{ false }
 	{
@@ -2078,7 +2068,6 @@ public:
 			shoal->update_("rwl", Static::fin_(&Herd::rwl, "river"));
 			shoal->update_("find", Const<Herd>::fin_(&Herd::find));
 			shoal->update_("insert", Member<Herd>::fin_(&Herd::insert));
-			shoal->update_("iterator", Const<Herd>::fin_(&Herd::iterator));
 			shoal->update_("gather", Member<Herd>::fin_(&Herd::gather));
 			shoal->finalize_();
 			return pub;
@@ -2209,7 +2198,6 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->insert_("strange::Mutable");
-			herd->insert_("strange::Iterable");
 			herd->insert_("strange::Herd");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -5115,7 +5103,7 @@ class Creator : public Mutable
 };
 
 //----------------------------------------------------------------------
-class Creature : public Mutable, public Me<Creature>, public Serializable //TODO public Iterable
+class Creature : public Mutable, public Me<Creature>, public Serializable
 //----------------------------------------------------------------------
 {
 public:
@@ -5210,6 +5198,16 @@ public:
 			return !operate_(const_cast<Creature*>(this), over)->is_("0");
 		}
 		return Mutable::frozen_();
+	}
+
+	virtual inline const Ptr iterator_() const override
+	{
+		const Ptr over = static_<Shoal>(_members)->find_("iterator");
+		if (!over->is_("0"))
+		{
+			return operate_(const_cast<Creature*>(this), over);
+		}
+		return Mutable::iterator_();
 	}
 
 	virtual inline const Ptr next_() override
@@ -5751,8 +5749,8 @@ private:
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
-		const Ptr it = Expression::evaluate_(flock->at_(1), local);
-		Feederable* const feederable = dynamic_<Feederable>(it);
+		const Ptr iterable = Expression::evaluate_(flock->at_(1), local);
+		Feederable* const feederable = dynamic_<Feederable>(iterable);
 		if (feederable)
 		{
 			static const std::vector<Ptr> NOTHING{ nothing_() };
@@ -5764,20 +5762,10 @@ private:
 				{
 					return operate_(thing.get(), member, feederable->feeder(eaterable->eater_()));
 				}
-				Iterable* const iterable = dynamic_<Iterable>(it);
-				if (iterable)
-				{
-					return operate_(thing.get(), member, iterable->iterator_());
-				}
-				return operate_(thing.get(), member);
+				return operate_(thing.get(), member, iterable->iterator_());
 			}
 		}
-		Iterable* const iterable = dynamic_<Iterable>(it);
-		if (iterable)
-		{
-			return thing->invoke(iterable->iterator_());
-		}
-		return nothing_();
+		return thing->invoke(iterable->iterator_());
 	}
 
 	inline const Ptr _method_(const Ptr expression, const Ptr local) const
@@ -5800,8 +5788,8 @@ private:
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
 		const Ptr member = static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local));
-		const Ptr it = Expression::evaluate_(flock->at_(2), local);
-		Feederable* const feederable = dynamic_<Feederable>(it);
+		const Ptr iterable = Expression::evaluate_(flock->at_(2), local);
+		Feederable* const feederable = dynamic_<Feederable>(iterable);
 		if (feederable)
 		{
 			Eaterable* const eaterable = dynamic_<Eaterable>(member);
@@ -5810,12 +5798,7 @@ private:
 				return operate_(thing.get(), member, feederable->feeder(eaterable->eater_()));
 			}
 		}
-		Iterable* const iterable = dynamic_<Iterable>(it);
-		if (iterable)
-		{
-			return operate_(thing.get(), member, iterable->iterator_());
-		}
-		return operate_(thing.get(), member);
+		return operate_(thing.get(), member, iterable->iterator_());
 	}
 
 	inline const Ptr _lambda_(const Ptr expression, const Ptr local) const
@@ -7793,10 +7776,6 @@ inline const Thing::Ptr Thing::stats_()
 }
 
 //======================================================================
-// class Iterable
-//======================================================================
-
-//======================================================================
 // class Eaterable
 //======================================================================
 
@@ -8141,7 +8120,6 @@ inline const Thing::Ptr Shoal::cats_() const
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
 		herd->insert_("strange::Mutable");
-		herd->insert_("strange::Iterable");
 		herd->insert_("strange::Shoal");
 		herd->insert_("strange::Thing");
 		herd->finalize_();
@@ -8365,7 +8343,6 @@ inline const Thing::Ptr Flock::cats_() const
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
 		herd->insert_("strange::Mutable");
-		herd->insert_("strange::Iterable");
 		herd->insert_("strange::Flock");
 		herd->insert_("strange::Thing");
 		herd->finalize_();
