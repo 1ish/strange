@@ -2525,12 +2525,13 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Reference : public Mutable
+class Reference : public Mutable, public Me<Reference>
 //----------------------------------------------------------------------
 {
 public:
 	inline Reference(const Ptr ptr)
 		: Mutable{}
+		, Me{}
 		, _ptr{ ptr }
 	{
 	}
@@ -2542,7 +2543,7 @@ public:
 
 	static inline const Ptr mut_(const Ptr ptr)
 	{
-		return std::make_shared<Reference>(ptr);
+		return Me<Reference>::make_(ptr);
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -2552,7 +2553,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(_ptr);
+		return It::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -2634,6 +2635,109 @@ public:
 
 private:
 	Ptr _ptr;
+
+	class It : public Mutable, public Me<It>
+	{
+	public:
+		inline It(const Ptr reference)
+			: Mutable{}
+			, Me{}
+			, _reference{ reference }
+			, _iterated{ false }
+		{
+		}
+
+		static inline const Ptr mut(const Ptr it)
+		{
+			return mut_(it->next_());
+		}
+
+		static inline const Ptr mut_(const Ptr reference)
+		{
+			Me<It>::make_(reference);
+		}
+
+		virtual inline const Ptr copy_() const override
+		{
+			const Ptr copy = mut_(_reference);
+			static_<It>(copy)->_iterated = _iterated;
+			return copy;
+		}
+
+		virtual inline const Ptr iterator_() const override
+		{
+			return IteratorPtr::mut_(me_());
+		}
+
+		virtual inline const Ptr next_() override
+		{
+			if (_iterated)
+			{
+				return stop_();
+			}
+			_iterated = true;
+			const Ptr ptr = static_<Reference>(_reference)->get_();
+			_reference = nothing_();
+			return ptr;
+		}
+
+		virtual inline const Ptr pub_() const override
+		{
+			static const Ptr PUB = [this]()
+			{
+				const Ptr pub = Thing::pub_()->copy_();
+				Shoal* const shoal = static_<Shoal>(pub);
+				shoal->update_("stat", Static::fin_(&It::stat));
+				shoal->update_("mut", Static::fin_(&It::mut, "thing"));
+				shoal->finalize_();
+				return pub;
+			}();
+			return PUB;
+		}
+
+		static inline const Ptr stat_()
+		{
+			static const Ptr STAT = []()
+			{
+				const Ptr stat = Shoal::mut_();
+				Shoal* const shoal = static_<Shoal>(stat);
+				shoal->update_("stat", Static::fin_(&It::stat));
+				shoal->update_("mut", Static::fin_(&It::mut, "thing"));
+				shoal->finalize_();
+				return stat;
+			}();
+			return STAT;
+		}
+
+		static inline const Ptr stat(const Ptr ignore)
+		{
+			return stat_();
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Reference::It");
+			return TYPE;
+		}
+
+		virtual inline const Ptr cats_() const override
+		{
+			static const Ptr CATS = []()
+			{
+				const Ptr cats = Herd::mut_();
+				Herd* const herd = static_<Herd>(cats);
+				herd->insert_("strange::Mutable");
+				herd->insert_("strange::Thing");
+				herd->finalize_();
+				return cats;
+			}();
+			return CATS;
+		}
+
+	private:
+		Ptr _reference;
+		bool _iterated;
+	};
 };
 
 template <typename D>
