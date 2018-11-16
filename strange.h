@@ -1821,20 +1821,18 @@ private:
 	std_vector_ptr _vector;
 	bool _frozen;
 
-	class It : public Mutable
+	class It : public Mutable, public Me<It>
 	{
 	public:
 		inline It(const Ptr flock)
 			: Mutable{}
+			, Me{}
 			, _flock{ flock }
 			, _iterator{ static_<Flock>(_flock)->_vector.cbegin() }
 		{
 		}
 
-		virtual inline const Ptr iterator_() const override
-		{
-			return mut_(_flock);
-		}
+		virtual inline const Ptr iterator_() const override;
 
 		virtual inline const Ptr next_() override
 		{
@@ -1854,7 +1852,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr flock)
 		{
-			return std::make_shared<It>(flock);
+			return Me<It>::make_(flock);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -1870,21 +1868,6 @@ private:
 		std_vector_ptr::const_iterator _iterator;
 	};
 };
-
-inline const Thing::Ptr Shoal::It::next_()
-{
-	if (_iterator == static_<Shoal>(_shoal)->_map.cend())
-	{
-		return stop_();
-	}
-	const Ptr result = Flock::mut_();
-	Flock* const flock = static_<Flock>(result);
-	flock->push_back(_iterator->first);
-	flock->push_back(_iterator->second);
-	flock->finalize_();
-	++_iterator;
-	return result;
-}
 
 //----------------------------------------------------------------------
 class Herd : public Mutable, public Me<Herd>, public Serializable
@@ -2255,20 +2238,18 @@ private:
 	std_unordered_set_ptr _set;
 	bool _frozen;
 
-	class It : public Mutable
+	class It : public Mutable, public Me<It>
 	{
 	public:
 		inline It(const Ptr herd)
 			: Mutable{}
+			, Me{}
 			, _herd{ herd }
 			, _iterator{ static_<Herd>(_herd)->_set.cbegin() }
 		{
 		}
 
-		virtual inline const Ptr iterator_() const override
-		{
-			return mut_(_herd);
-		}
+		virtual inline const Ptr iterator_() const override;
 
 		virtual inline const Ptr next_() override
 		{
@@ -2288,7 +2269,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr herd)
 		{
-			return std::make_shared<It>(herd);
+			return Me<It>::make_(herd);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -8531,7 +8512,22 @@ inline const Thing::Ptr Shoal::It::cats_() const
 
 inline const Thing::Ptr Shoal::It::iterator_() const
 {
-	return IteratorPtr::mut_(me_());
+	return IteratorPtr::mut_(Me<It>::me_());
+}
+
+inline const Thing::Ptr Shoal::It::next_()
+{
+	if (_iterator == static_<Shoal>(_shoal)->_map.cend())
+	{
+		return stop_();
+	}
+	const Ptr result = Flock::mut_();
+	Flock* const flock = static_<Flock>(result);
+	flock->push_back(_iterator->first);
+	flock->push_back(_iterator->second);
+	flock->finalize_();
+	++_iterator;
+	return result;
 }
 
 inline const Thing::Ptr Shoal::Feeder::iterator_() const
@@ -8712,6 +8708,11 @@ inline const Thing::Ptr Flock::cats_() const
 	return CATS;
 }
 
+inline const Thing::Ptr Flock::It::iterator_() const
+{
+	return IteratorPtr::mut_(Me<It>::me_());
+}
+
 inline const Thing::Ptr Flock::It::cats_() const
 {
 	static const Ptr CATS = []()
@@ -8821,6 +8822,11 @@ inline void Herd::replace_links_(const Thing::Ptr shoal)
 inline const Thing::Ptr Herd::Concurrent::iterator_() const
 {
 	return IteratorPtr::mut_(Me<Concurrent>::me_());
+}
+
+inline const Thing::Ptr Herd::It::iterator_() const
+{
+	return IteratorPtr::mut_(Me<It>::me_());
 }
 
 //======================================================================
