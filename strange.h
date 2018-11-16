@@ -2643,7 +2643,6 @@ private:
 			: Mutable{}
 			, Me{}
 			, _reference{ reference }
-			, _iterated{ false }
 		{
 		}
 
@@ -2659,9 +2658,7 @@ private:
 
 		virtual inline const Ptr copy_() const override
 		{
-			const Ptr copy = mut_(_reference);
-			static_<It>(copy)->_iterated = _iterated;
-			return copy;
+			return mut_(_reference);
 		}
 
 		virtual inline const Ptr iterator_() const override
@@ -2671,13 +2668,12 @@ private:
 
 		virtual inline const Ptr next_() override
 		{
-			if (_iterated)
+			if (_reference->is_("."))
 			{
-				return stop_();
+				return _reference;
 			}
-			_iterated = true;
 			const Ptr ptr = static_<Reference>(_reference)->get_();
-			_reference = nothing_();
+			_reference = stop_();
 			return ptr;
 		}
 
@@ -2736,7 +2732,6 @@ private:
 
 	private:
 		Ptr _reference;
-		bool _iterated;
 	};
 };
 
