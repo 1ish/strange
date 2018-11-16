@@ -5123,7 +5123,14 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ mut_(_ptr) });
+		return mut_(_ptr);
+	}
+
+	virtual inline const Ptr next_() override
+	{
+		const Ptr ptr = _ptr;
+		_ptr = stop_();
+		return ptr;
 	}
 
 	virtual inline const Ptr pub_() const override
