@@ -2768,7 +2768,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Lake : public Mutable, public Serializable, public Data<std::string>
+class Lake : public Mutable, public Me<Lake>, public Serializable, public Data<std::string>
 //----------------------------------------------------------------------
 {
 public:
@@ -2776,7 +2776,7 @@ public:
 
 	static inline const Ptr mut_(const S& data = S())
 	{
-		return std::make_shared<Lake>(data);
+		return Me<Lake>::make_(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -2834,6 +2834,7 @@ public:
 
 	inline Lake(const S& data)
 		: Mutable{}
+		, Me{}
 		, Serializable{}
 		, Data{ data }
 	{
@@ -2846,7 +2847,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(mut_(get_()));
+		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3072,7 +3073,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Bit : public Number, public Data<bool>
+class Bit : public Number, public Me<Bit>, public Data<bool>
 //----------------------------------------------------------------------
 {
 public:
@@ -3080,7 +3081,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return std::make_shared<Bit>(data);
+		return Me<Bit>::make_(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -3138,6 +3139,7 @@ public:
 
 	inline Bit(const D& data)
 		: Number{}
+		, Me{}
 		, Data{ data }
 	{
 	}
@@ -3149,7 +3151,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(mut_(get_()));
+		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3272,7 +3274,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Byte : public Number, public Data<unsigned char>
+class Byte : public Number, public Me<Byte>, public Data<unsigned char>
 //----------------------------------------------------------------------
 {
 public:
@@ -3280,7 +3282,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return std::make_shared<Byte>(data);
+		return Me<Byte>::make_(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -3338,6 +3340,7 @@ public:
 
 	inline Byte(const D& data)
 		: Number{}
+		, Me{}
 		, Data{ data }
 	{
 	}
@@ -3349,7 +3352,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(mut_(get_()));
+		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3472,7 +3475,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Int16 : public Number, public Data<int16_t>
+class Int16 : public Number, public Me<Int16>, public Data<int16_t>
 //----------------------------------------------------------------------
 {
 public:
@@ -3480,7 +3483,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return std::make_shared<Int16>(data);
+		return Me<Int16>::make_(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -3538,6 +3541,7 @@ public:
 
 	inline Int16(const D& data)
 		: Number{}
+		, Me{}
 		, Data{ data }
 	{
 	}
@@ -3549,7 +3553,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(mut_(get_()));
+		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3678,7 +3682,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Int32 : public Number, public Data<int32_t>
+class Int32 : public Number, public Me<Int32>, public Data<int32_t>
 //----------------------------------------------------------------------
 {
 public:
@@ -3686,7 +3690,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return std::make_shared<Int32>(data);
+		return Me<Int32>::make_(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -3744,6 +3748,7 @@ public:
 
 	inline Int32(const D& data)
 		: Number{}
+		, Me{}
 		, Data{ data }
 	{
 	}
@@ -3755,7 +3760,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(mut_(get_()));
+		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3888,7 +3893,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Int64 : public Number, public Data<int64_t>
+class Int64 : public Number, public Me<Int64>, public Data<int64_t>
 //----------------------------------------------------------------------
 {
 public:
@@ -3896,7 +3901,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return std::make_shared<Int64>(data);
+		return Me<Int64>::make_(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -3954,6 +3959,7 @@ public:
 
 	inline Int64(const D& data)
 		: Number{}
+		, Me{}
 		, Data{ data }
 	{
 	}
@@ -3965,7 +3971,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(mut_(get_()));
+		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4106,7 +4112,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Float32 : public Number, public Data<float>
+class Float32 : public Number, public Me<Float32>, public Data<float>
 //----------------------------------------------------------------------
 {
 public:
@@ -4114,7 +4120,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return std::make_shared<Float32>(data);
+		return Me<Float32>::make_(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -4172,6 +4178,7 @@ public:
 
 	inline Float32(const D& data)
 		: Number{}
+		, Me{}
 		, Data{ data }
 	{
 	}
@@ -4183,7 +4190,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(mut_(get_()));
+		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4317,7 +4324,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Float64 : public Number, public Data<double>
+class Float64 : public Number, public Me<Float64>, public Data<double>
 //----------------------------------------------------------------------
 {
 public:
@@ -4325,7 +4332,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return std::make_shared<Float64>(data);
+		return Me<Float64>::make_(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -4383,6 +4390,7 @@ public:
 
 	inline Float64(const D& data)
 		: Number{}
+		, Me{}
 		, Data{ data }
 	{
 	}
@@ -4394,7 +4402,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(mut_(get_()));
+		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4536,7 +4544,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Complex32 : public Number, public Data<std::complex<float>>
+class Complex32 : public Number, public Me<Complex32>, public Data<std::complex<float>>
 //----------------------------------------------------------------------
 {
 	static const char delim = '|';
@@ -4546,7 +4554,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return std::make_shared<Complex32>(data);
+		return Me<Complex32>::make_(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -4604,6 +4612,7 @@ public:
 
 	inline Complex32(const D& data)
 		: Number{}
+		, Me{}
 		, Data{ data }
 	{
 	}
@@ -4615,7 +4624,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(mut_(get_()));
+		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4786,7 +4795,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Complex64 : public Number, public Data<std::complex<double>>
+class Complex64 : public Number, public Me<Complex64>, public Data<std::complex<double>>
 //----------------------------------------------------------------------
 {
 	static const char delim = '|';
@@ -4796,7 +4805,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return std::make_shared<Complex64>(data);
+		return Me<Complex64>::make_(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -4854,6 +4863,7 @@ public:
 
 	inline Complex64(const D& data)
 		: Number{}
+		, Me{}
 		, Data{ data }
 	{
 	}
@@ -4865,7 +4875,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(mut_(get_()));
+		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
