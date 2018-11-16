@@ -2670,7 +2670,7 @@ private:
 
 		virtual inline const Ptr iterator_() const override
 		{
-			return IteratorPtr::mut_(me_());
+			return IteratorPtr::mut_(Me<It>::me_());
 		}
 
 		virtual inline const Ptr next_() override
