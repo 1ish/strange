@@ -36,6 +36,7 @@ namespace strange
 	template <typename C> class IteratorRef;
 	class Flock;
 	class Herd;
+	class IteratorPtr;
 	class Reference;
 	template <typename D> class Data;
 	class Lake;
@@ -2428,6 +2429,102 @@ private:
 };
 
 //----------------------------------------------------------------------
+class IteratorPtr : public Mutable, public Me<IteratorPtr>
+//----------------------------------------------------------------------
+{
+public:
+	inline IteratorPtr(const Ptr ptr)
+		: Mutable{}
+		, Me{}
+		, _ptr{ ptr }
+	{
+	}
+
+	static inline const Ptr mut(const Ptr it)
+	{
+		return mut_(it->next_());
+	}
+
+	static inline const Ptr mut_(const Ptr ptr)
+	{
+		Me<IteratorPtr>::make_(ptr);
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(_ptr);
+	}
+
+	virtual inline const Ptr iterator_() const override
+	{
+		return mut_(me_());
+	}
+
+	virtual inline const Ptr next_() override
+	{
+		const Ptr ptr = _ptr;
+		_ptr = stop_();
+		return ptr;
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Thing::pub_()->copy_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("stat", Static::fin_(&IteratorPtr::stat));
+			shoal->update_("mut", Static::fin_(&IteratorPtr::mut, "thing"));
+			shoal->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&IteratorPtr::stat));
+			shoal->update_("mut", Static::fin_(&IteratorPtr::mut, "thing"));
+			shoal->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::IteratorPtr");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+private:
+	Ptr _ptr;
+};
+
+//----------------------------------------------------------------------
 class Reference : public Mutable
 //----------------------------------------------------------------------
 {
@@ -2455,14 +2552,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return mut_(_ptr);
-	}
-
-	virtual inline const Ptr next_() override
-	{
-		const Ptr ptr = _ptr;
-		_ptr = stop_();
-		return ptr;
+		return IteratorPtr::mut_(_ptr);
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -2650,7 +2740,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(mut_(get_()));
+		return IteratorPtr::mut_(mut_(get_()));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -2953,7 +3043,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(mut_(get_()));
+		return IteratorPtr::mut_(mut_(get_()));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3153,7 +3243,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(mut_(get_()));
+		return IteratorPtr::mut_(mut_(get_()));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3353,7 +3443,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(mut_(get_()));
+		return IteratorPtr::mut_(mut_(get_()));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3559,7 +3649,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(mut_(get_()));
+		return IteratorPtr::mut_(mut_(get_()));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3769,7 +3859,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(mut_(get_()));
+		return IteratorPtr::mut_(mut_(get_()));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3987,7 +4077,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(mut_(get_()));
+		return IteratorPtr::mut_(mut_(get_()));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4198,7 +4288,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(mut_(get_()));
+		return IteratorPtr::mut_(mut_(get_()));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4419,7 +4509,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(mut_(get_()));
+		return IteratorPtr::mut_(mut_(get_()));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4669,7 +4759,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(mut_(get_()));
+		return IteratorPtr::mut_(mut_(get_()));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4910,7 +5000,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(Me<River>::me_());
+		return IteratorPtr::mut_(Me<River>::me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -5113,7 +5203,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(mut_(_ptr));
+		return IteratorPtr::mut_(mut_(_ptr));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -5319,7 +5409,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return Reference::mut_(Me<Creature>::me_());
+		return IteratorPtr::mut_(Me<Creature>::me_());
 	}
 
 	virtual inline const Ptr next_() override
@@ -5732,7 +5822,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(fin_(_member, _flock));
+		return IteratorPtr::mut_(fin_(_member, _flock));
 	}
 
 	virtual inline const Ptr type_() const override
@@ -6256,7 +6346,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(Me<Function>::me_());
+		return IteratorPtr::mut_(Me<Function>::me_());
 	}
 
 	virtual inline const Ptr type_() const override
@@ -6315,7 +6405,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(Me<Tokenizer>::me_());
+		return IteratorPtr::mut_(Me<Tokenizer>::me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -6860,7 +6950,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Reference::mut_(Me<Parser>::me_());
+		return IteratorPtr::mut_(Me<Parser>::me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -7889,6 +7979,8 @@ inline const Thing::Ptr Thing::stats_()
 		shoal->update_("strange::Shoal", Static::fin_(&Shoal::stat));
 		shoal->update_("strange::Flock", Static::fin_(&Flock::stat));
 		shoal->update_("strange::Herd", Static::fin_(&Herd::stat));
+		shoal->update_("strange::IteratorPtr", Static::fin_(&IteratorPtr::stat));
+		shoal->update_("strange::Reference", Static::fin_(&Reference::stat));
 		shoal->update_("strange::Lake", Static::fin_(&Lake::stat));
 		shoal->update_("strange::Bit", Static::fin_(&Bit::stat));
 		shoal->update_("strange::Byte", Static::fin_(&Byte::stat));
@@ -7901,7 +7993,6 @@ inline const Thing::Ptr Thing::stats_()
 		shoal->update_("strange::Complex64", Static::fin_(&Complex64::stat));
 		shoal->update_("strange::River", Static::fin_(&River::stat));
 		shoal->update_("strange::Fence", Static::fin_(&Fence::stat));
-		shoal->update_("strange::Reference", Static::fin_(&Reference::stat));
 		shoal->update_("strange::Creature", Static::fin_(&Creature::stat));
 		shoal->update_("strange::Expression", Static::fin_(&Expression::stat));
 		shoal->update_("strange::Function", Static::fin_(&Function::stat));
@@ -8049,7 +8140,7 @@ inline const Thing::Ptr Symbol::to_lake_() const
 
 inline const Thing::Ptr Symbol::iterator_() const
 {
-	return Reference::mut_(Me<Symbol>::me_());
+	return IteratorPtr::mut_(Me<Symbol>::me_());
 }
 
 inline const Thing::Ptr Symbol::cats_() const
@@ -8073,7 +8164,7 @@ inline const Thing::Ptr Symbol::cats_() const
 
 inline const Thing::Ptr Static::iterator_() const
 {
-	return Reference::mut_(Me<Static>::me_());
+	return IteratorPtr::mut_(Me<Static>::me_());
 }
 
 inline const Thing::Ptr Static::eater_() const
@@ -8092,7 +8183,7 @@ inline const Thing::Ptr Method::with_name_(const Thing::Ptr thing, const Thing::
 
 inline const Thing::Ptr Method::iterator_() const
 {
-	return Reference::mut_(Me<Method>::me_());
+	return IteratorPtr::mut_(Me<Method>::me_());
 }
 
 inline const Thing::Ptr Method::eater_() const
@@ -8112,7 +8203,7 @@ inline const Thing::Ptr Method::eater_() const
 template <typename T>
 inline const Thing::Ptr Member<T>::iterator_() const
 {
-	return Reference::mut_(Me<Member<T>>::me_());
+	return IteratorPtr::mut_(Me<Member<T>>::me_());
 }
 
 template <typename T>
@@ -8128,7 +8219,7 @@ inline const Thing::Ptr Member<T>::eater_() const
 template <typename T>
 inline const Thing::Ptr Const<T>::iterator_() const
 {
-	return Reference::mut_(Me<Const<T>>::me_());
+	return IteratorPtr::mut_(Me<Const<T>>::me_());
 }
 
 template <typename T>
@@ -8295,7 +8386,7 @@ inline const Thing::Ptr Shoal::cats_() const
 
 inline const Thing::Ptr Shoal::Concurrent::iterator_() const
 {
-	return Reference::mut_(Me<Shoal::Concurrent>::me_());
+	return IteratorPtr::mut_(Me<Shoal::Concurrent>::me_());
 }
 
 inline const Thing::Ptr Shoal::It::cats_() const
@@ -8315,7 +8406,7 @@ inline const Thing::Ptr Shoal::It::cats_() const
 
 inline const Thing::Ptr Shoal::Feeder::iterator_() const
 {
-	return Reference::mut_(mut_(_shoal, _eater));
+	return IteratorPtr::mut_(mut_(_shoal, _eater));
 }
 
 inline const Thing::Ptr Shoal::Feeder::cats_() const
@@ -8424,7 +8515,7 @@ inline const Thing::Ptr Flock::Concurrent::at_(const Thing::Ptr pos) const
 
 inline const Thing::Ptr Flock::Concurrent::iterator_() const
 {
-	return Reference::mut_(Me<Concurrent>::me_());
+	return IteratorPtr::mut_(Me<Concurrent>::me_());
 }
 
 inline void Flock::to_river_(const Thing::Ptr river) const
@@ -8639,8 +8730,12 @@ inline void Herd::replace_links_(const Thing::Ptr shoal)
 
 inline const Thing::Ptr Herd::Concurrent::iterator_() const
 {
-	return Reference::mut_(Me<Concurrent>::me_());
+	return IteratorPtr::mut_(Me<Concurrent>::me_());
 }
+
+//======================================================================
+// class IteratorPtr
+//======================================================================
 
 //======================================================================
 // class Reference
