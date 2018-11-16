@@ -32,11 +32,11 @@ namespace strange
 	template <typename T> class Const;
 	class Mutable;
 	class Shoal;
-	template <typename C> class IteratorCopy;
-	template <typename C> class IteratorRef;
 	class Flock;
 	class Herd;
 	class IteratorPtr;
+	template <typename C> class IteratorCopy;
+	template <typename C> class IteratorRef;
 	class Reference;
 	template <typename D> class Data;
 	class Lake;
@@ -1369,20 +1369,18 @@ private:
 	std_unordered_map_ptr_ptr _map;
 	bool _frozen;
 
-	class It : public Mutable
+	class It : public Mutable, public Me<It>
 	{
 	public:
 		inline It(const Ptr shoal)
 			: Mutable{}
+			, Me{}
 			, _shoal{ shoal }
 			, _iterator{ static_<Shoal>(_shoal)->_map.cbegin() }
 		{
 		}
 
-		virtual inline const Ptr iterator_() const override
-		{
-			return mut_(_shoal);
-		}
+		virtual inline const Ptr iterator_() const override;
 
 		virtual inline const Ptr next_() override;
 
@@ -1395,7 +1393,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr shoal)
 		{
-			return std::make_shared<It>(shoal);
+			return Me<It>::make_(shoal);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -1455,114 +1453,6 @@ private:
 		const Ptr _shoal;
 		const Ptr _eater;
 	};
-};
-
-template <typename C>
-//----------------------------------------------------------------------
-class IteratorCopy : public Mutable
-//----------------------------------------------------------------------
-{
-public:
-	template <typename F>
-	inline IteratorCopy(F&& collection)
-		: Mutable{}
-		, _collection{ std::forward<F>(collection) }
-		, _iterator{ _collection.cbegin() }
-	{
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return mut_(_collection);
-	}
-
-	virtual inline const Ptr next_() override
-	{
-		if (_iterator == _collection.cend())
-		{
-			return stop_();
-		}
-		return *_iterator++;
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		const Ptr result = mut_(_collection);
-		static_<IteratorCopy>(result)->_iterator += (_iterator - _collection.cbegin());
-		return result;
-	}
-
-	template <typename F>
-	static inline const Ptr mut_(F&& collection)
-	{
-		return std::make_shared<IteratorCopy>(std::forward<F>(collection));
-	}
-
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::IteratorCopy");
-		return TYPE;
-	}
-
-	virtual inline const Ptr cats_() const override;
-
-private:
-	const C _collection;
-	typename C::const_iterator _iterator;
-};
-
-template <typename C>
-//----------------------------------------------------------------------
-class IteratorRef : public Mutable
-//----------------------------------------------------------------------
-{
-public:
-	template <typename F>
-	inline IteratorRef(F&& collection)
-		: Mutable{}
-		, _collection{ std::forward<F>(collection) }
-		, _iterator{ _collection.cbegin() }
-	{
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return mut_(_collection);
-	}
-
-	virtual inline const Ptr next_() override
-	{
-		if (_iterator == _collection.cend())
-		{
-			return stop_();
-		}
-		return *_iterator++;
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		const Ptr result = mut_(_collection);
-		static_<IteratorRef>(result)->_iterator += (_iterator - _collection.cbegin());
-		return result;
-	}
-
-	template <typename F>
-	static inline const Ptr mut_(F&& collection)
-	{
-		return std::make_shared<IteratorRef>(std::forward<F>(collection));
-	}
-
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::IteratorRef");
-		return TYPE;
-	}
-
-	virtual inline const Ptr cats_() const override;
-
-private:
-	const C& _collection;
-	typename C::const_iterator _iterator;
 };
 
 //----------------------------------------------------------------------
@@ -2522,6 +2412,142 @@ public:
 
 private:
 	Ptr _ptr;
+};
+
+template <typename C>
+//----------------------------------------------------------------------
+class IteratorCopy : public Mutable, public Me<IteratorCopy<C>>
+//----------------------------------------------------------------------
+{
+public:
+	template <typename F>
+	inline IteratorCopy(F&& collection)
+		: Mutable{}
+		, Me<IteratorCopy<C>>{}
+		, _collection{ std::forward<F>(collection) }
+		, _iterator{ _collection.cbegin() }
+	{
+	}
+
+	virtual inline const Ptr iterator_() const override
+	{
+		return IteratorPtr::mut_(Me<IteratorCopy<C>>::me_());
+	}
+
+	virtual inline const Ptr next_() override
+	{
+		if (_iterator == _collection.cend())
+		{
+			return stop_();
+		}
+		return *_iterator++;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		const Ptr result = mut_(_collection);
+		static_<IteratorCopy<C>>(result)->_iterator += (_iterator - _collection.cbegin());
+		return result;
+	}
+
+	template <typename F>
+	static inline const Ptr mut_(F&& collection)
+	{
+		return Me<IteratorCopy<C>>::make_(std::forward<F>(collection));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::IteratorCopy");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::IteratorCopy");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+private:
+	const C _collection;
+	typename C::const_iterator _iterator;
+};
+
+template <typename C>
+//----------------------------------------------------------------------
+class IteratorRef : public Mutable, public Me<IteratorRef<C>>
+//----------------------------------------------------------------------
+{
+public:
+	template <typename F>
+	inline IteratorRef(F&& collection)
+		: Mutable{}
+		, Me<IteratorRef<C>>{}
+		, _collection{ std::forward<F>(collection) }
+		, _iterator{ _collection.cbegin() }
+	{
+	}
+
+	virtual inline const Ptr iterator_() const override
+	{
+		return IteratorPtr::mut_(Me<IteratorRef<C>>::me_());
+	}
+
+	virtual inline const Ptr next_() override
+	{
+		if (_iterator == _collection.cend())
+		{
+			return stop_();
+		}
+		return *_iterator++;
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		const Ptr result = mut_(_collection);
+		static_<IteratorRef<C>>(result)->_iterator += (_iterator - _collection.cbegin());
+		return result;
+	}
+
+	template <typename F>
+	static inline const Ptr mut_(F&& collection)
+	{
+		return Me<IteratorRef<C>>::make_(std::forward<F>(collection));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::IteratorRef");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::IteratorRef");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+private:
+	const C& _collection;
+	typename C::const_iterator _iterator;
 };
 
 //----------------------------------------------------------------------
@@ -8503,6 +8529,11 @@ inline const Thing::Ptr Shoal::It::cats_() const
 	return CATS;
 }
 
+inline const Thing::Ptr Shoal::It::iterator_() const
+{
+	return IteratorPtr::mut_(me_());
+}
+
 inline const Thing::Ptr Shoal::Feeder::iterator_() const
 {
 	return IteratorPtr::mut_(mut_(_shoal, _eater));
@@ -8516,46 +8547,6 @@ inline const Thing::Ptr Shoal::Feeder::cats_() const
 		Herd* const herd = static_<Herd>(cats);
 		herd->insert_("strange::Mutable");
 		herd->insert_("strange::Iterator");
-		herd->insert_("strange::Thing");
-		herd->finalize_();
-		return cats;
-	}();
-	return CATS;
-}
-
-//======================================================================
-// class IteratorCopy
-//======================================================================
-
-template <typename C>
-inline const Thing::Ptr IteratorCopy<C>::cats_() const
-{
-	static const Ptr CATS = []()
-	{
-		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
-		herd->insert_("strange::IteratorCopy");
-		herd->insert_("strange::Thing");
-		herd->finalize_();
-		return cats;
-	}();
-	return CATS;
-}
-
-//======================================================================
-// class IteratorRef
-//======================================================================
-
-template <typename C>
-inline const Thing::Ptr IteratorRef<C>::cats_() const
-{
-	static const Ptr CATS = []()
-	{
-		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
-		herd->insert_("strange::IteratorRef");
 		herd->insert_("strange::Thing");
 		herd->finalize_();
 		return cats;
@@ -8834,6 +8825,14 @@ inline const Thing::Ptr Herd::Concurrent::iterator_() const
 
 //======================================================================
 // class IteratorPtr
+//======================================================================
+
+//======================================================================
+// class IteratorCopy
+//======================================================================
+
+//======================================================================
+// class IteratorRef
 //======================================================================
 
 //======================================================================
