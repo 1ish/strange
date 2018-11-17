@@ -1409,11 +1409,12 @@ private:
 		std_unordered_map_ptr_ptr::const_iterator _iterator;
 	};
 
-	class Feeder : public Mutable
+	class Feeder : public Mutable, public Me<Feeder>
 	{
 	public:
 		inline Feeder(const Ptr shoal, const Ptr eater)
 			: Mutable{}
+			, Me{}
 			, _shoal{ shoal }
 			, _eater{ eater }
 		{
@@ -1438,7 +1439,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr shoal, const Ptr eater)
 		{
-			return std::make_shared<Feeder>(shoal, eater);
+			return Me<Feeder>::make_(shoal, eater);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -8556,7 +8557,7 @@ inline const Thing::Ptr Shoal::It::next_()
 
 inline const Thing::Ptr Shoal::Feeder::iterator_() const
 {
-	return IteratorPtr::mut_(mut_(_shoal, _eater));
+	return IteratorPtr::mut_(me_());
 }
 
 inline const Thing::Ptr Shoal::Feeder::cats_() const
