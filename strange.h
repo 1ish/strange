@@ -91,7 +91,7 @@ class Thing
 public:
 	// public typedefs
 	using Ptr = std::shared_ptr<Thing>;
-	using Weak = std::weak_ptr<Thing>;
+	using WeakPtr = std::weak_ptr<Thing>;
 
 	// public static utility functions
 	template <typename T>
@@ -404,7 +404,7 @@ protected:
 	}
 
 private:
-	Weak _me;
+	WeakPtr _me;
 
 	// private static utility functions
 	static std::atomic<bool>& _finalized_()
