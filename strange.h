@@ -23,7 +23,6 @@ namespace strange
 	class Eaterable;
 	class Feederable;
 	class Variadic;
-	template <typename T> class Me;
 	class Serializable;
 	class Symbol;
 	class Static;
@@ -196,7 +195,10 @@ public:
 		return type_();
 	}
 
-	virtual inline const Ptr copy_() const = 0;
+	virtual inline const Ptr copy_() const
+	{
+		return me_();
+	}
 
 	inline const Ptr copy(const Ptr ignore) const
 	{
@@ -256,7 +258,7 @@ public:
 		return boolean_(frozen_());
 	}
 
-	virtual inline const Ptr iterator_() const = 0;
+	virtual inline const Ptr iterator_() const;
 
 	inline const Ptr iterator(const Ptr ignore) const
 	{
@@ -368,13 +370,42 @@ protected:
 		return operate_(thing, member, nothing_());
 	}
 
+	template <typename T, typename... Args>
+	static inline const Ptr make_(Args&&... args)
+	{
+		const Ptr result = std::make_shared<T>(std::forward<Args>(args)...);
+		result->_me = result;
+		return result;
+	}
+
+	template <typename T, typename... Args>
+	static inline const Ptr fake_(Args&&... args)
+	{
+		const Ptr result = make_<T>(std::forward<Args>(args)...);
+		result->finalize_();
+		return result;
+	}
+
 	// protected construction/destruction/assignment
 	Thing() = default;
 
 	// protected impure virtual member functions and adapters
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it);
 
+	// protected non-virtual member functions and adapters
+	inline const Ptr me_() const
+	{
+		const Ptr ptr = _me.lock();
+		if (ptr)
+		{
+			return ptr;
+		}
+		return nothing_();
+	}
+
 private:
+	Weak _me;
+
 	// private static utility functions
 	static std::atomic<bool>& _finalized_()
 	{
@@ -437,37 +468,6 @@ public:
 		vec.push_back(ptr);
 		variadic_(vec, std::forward<Args>(args)...);
 	}
-};
-
-template <typename T>
-//----------------------------------------------------------------------
-class Me
-//----------------------------------------------------------------------
-{
-public:
-	inline const Thing::Ptr me_() const
-	{
-		const Thing::Ptr ptr = _me.lock();
-		if (ptr)
-		{
-			return ptr;
-		}
-		return Thing::nothing_();
-	}
-
-protected:
-	Me() = default;
-
-	template <typename... Args>
-	static inline const Thing::Ptr make_(Args&&... args)
-	{
-		const Thing::Ptr result = std::make_shared<T>(std::forward<Args>(args)...);
-		Thing::static_<T>(result)->_me = result;
-		return result;
-	}
-
-private:
-	Thing::Weak _me;
 };
 
 //----------------------------------------------------------------------
@@ -583,14 +583,13 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Symbol : public Thing, public Me<Symbol>, public Serializable
+class Symbol : public Thing, public Serializable
 //----------------------------------------------------------------------
 {
 public:
 	template <typename F>
 	inline Symbol(F&& symbol)
 		: Thing{}
-		, Me{}
 		, Serializable{}
 		, _symbol{ std::forward<F>(symbol) }
 		, _hash{ std::hash<std::string>()(_symbol) }
@@ -612,17 +611,10 @@ public:
 		return _symbol;
 	}
 
-	virtual inline const Ptr copy_() const override
-	{
-		return Me<Symbol>::me_();
-	}
-
 	template <typename F>
 	static inline const Ptr fin_(F&& symbol)
 	{
-		const Ptr result = Me<Symbol>::make_(std::forward<F>(symbol));
-		result->finalize_();
-		return result;
+		return fake_<Symbol>(std::forward<F>(symbol));
 	}
 
 	static inline const Ptr lak_(const Ptr lake);
@@ -661,8 +653,6 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr iterator_() const override;
-
 	virtual inline const Ptr cats_() const override;
 
 	virtual inline const Ptr pub_() const override;
@@ -673,7 +663,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Static : public Thing, public Me<Static>, public Eaterable
+class Static : public Thing, public Eaterable
 //----------------------------------------------------------------------
 {
 	using function = const Ptr(*)(const Ptr);
@@ -682,7 +672,6 @@ public:
 	template <typename F>
 	inline Static(const function fun, F&& params)
 		: Thing{}
-		, Me{}
 		, Eaterable{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
@@ -692,9 +681,7 @@ public:
 	template <typename F>
 	static inline const Ptr with_params_(const function fun, F&& params)
 	{
-		const Ptr result = Me<Static>::make_(fun, std::forward<F>(params));
-		result->finalize_();
-		return result;
+		return fake_<Static>(fun, std::forward<F>(params));
 	}
 
 	template <typename... Args>
@@ -706,18 +693,11 @@ public:
 		return with_params_(fun, std::move(v));
 	}
 
-	virtual inline const Ptr copy_() const override
-	{
-		return Me<Static>::me_();
-	}
-
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Static");
 		return TYPE;
 	}
-
-	virtual inline const Ptr iterator_() const override;
 
 	virtual inline const Ptr eater_() const override;
 
@@ -733,13 +713,12 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Method : public Thing, public Me<Method>, public Eaterable
+class Method : public Thing, public Eaterable
 //----------------------------------------------------------------------
 {
 public:
 	inline Method(const Ptr thing, const Ptr member) // member is a functor, not a name
 		: Thing{}
-		, Me{}
 		, Eaterable{}
 		, _thing{ thing }
 		, _member{ member }
@@ -748,25 +727,16 @@ public:
 
 	static inline const Ptr fin_(const Ptr thing, const Ptr member) // member is functor, not a name
 	{
-		const Ptr result = Me<Method>::make_(thing, member);
-		result->finalize_();
-		return result;
+		return fake_<Method>(thing, member);
 	}
 
 	static inline const Ptr with_name_(const Ptr thing, const Ptr name);
-
-	virtual inline const Ptr copy_() const override
-	{
-		return Me<Method>::me_();
-	}
 
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Method");
 		return TYPE;
 	}
-
-	virtual inline const Ptr iterator_() const override;
 
 	virtual inline const Ptr eater_() const override;
 
@@ -783,7 +753,7 @@ private:
 
 template <typename T>
 //----------------------------------------------------------------------
-class Member : public Thing, public Me<Member<T>>, public Eaterable
+class Member : public Thing, public Eaterable
 //----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr);
@@ -792,7 +762,6 @@ public:
 	template <typename F>
 	inline Member(const member fun, F&& params)
 		: Thing{}
-		, Me<Member<T>>{}
 		, Eaterable{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
@@ -802,9 +771,7 @@ public:
 	template <typename F>
 	static inline const Ptr with_params_(const member fun, F&& params)
 	{
-		const Ptr result = Me<Member<T>>::make_(fun, std::forward<F>(params));
-		result->finalize_();
-		return result;
+		return fake_<Member<T>>(fun, std::forward<F>(params));
 	}
 
 	template <typename... Args>
@@ -816,18 +783,11 @@ public:
 		return with_params_(fun, std::move(v));
 	}
 
-	virtual inline const Ptr copy_() const override
-	{
-		return Me<Member<T>>::me_();
-	}
-
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Member");
 		return TYPE;
 	}
-
-	virtual inline const Ptr iterator_() const override;
 
 	virtual inline const Ptr eater_() const override;
 
@@ -855,7 +815,7 @@ private:
 
 template <typename T>
 //----------------------------------------------------------------------
-class Const : public Thing, public Me<Const<T>>, public Eaterable
+class Const : public Thing, public Eaterable
 //----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr) const;
@@ -864,7 +824,6 @@ public:
 	template <typename F>
 	inline Const(const member fun, F&& params)
 		: Thing{}
-		, Me<Const<T>>{}
 		, Eaterable{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
@@ -874,9 +833,7 @@ public:
 	template <typename F>
 	static inline const Ptr with_params_(const member fun, F&& params)
 	{
-		const Ptr result = Me<Const<T>>::make_(fun, std::forward<F>(params));
-		result->finalize_();
-		return result;
+		return fake_<Const<T>>(fun, std::forward<F>(params));
 	}
 
 	template <typename... Args>
@@ -888,18 +845,11 @@ public:
 		return with_params_(fun, std::move(v));
 	}
 
-	virtual inline const Ptr copy_() const override
-	{
-		return Me<Const<T>>::me_();
-	}
-
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Const");
 		return TYPE;
 	}
-
-	virtual inline const Ptr iterator_() const override;
 
 	virtual inline const Ptr eater_() const override;
 
@@ -948,7 +898,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Shoal : public Mutable, public Me<Shoal>, public Serializable, public Feederable
+class Shoal : public Mutable, public Serializable, public Feederable
 //----------------------------------------------------------------------
 {
 	class Hash
@@ -974,7 +924,6 @@ class Shoal : public Mutable, public Me<Shoal>, public Serializable, public Feed
 public:
 	inline Shoal()
 		: Mutable{}
-		, Me{}
 		, Serializable{}
 		, _map{}
 		, _frozen{ false }
@@ -1088,7 +1037,7 @@ public:
 
 	static inline const Ptr mut_()
 	{
-		return Me<Shoal>::make_();
+		return make_<Shoal>();
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -1239,7 +1188,7 @@ public:
 
 	inline void gather_(const Ptr item)
 	{
-		item->invoke_("visit", Me<Shoal>::me_(), "itemize", item);
+		item->invoke_("visit", me_(), "itemize", item);
 	}
 
 	inline const Ptr gather(const Ptr it)
@@ -1252,13 +1201,12 @@ public:
 
 	inline const Ptr gather_from_river_(const Ptr river);
 
-	class Concurrent : public Mutable, public Me<Concurrent>
+	class Concurrent : public Mutable
 	{
 	public:
-		inline Concurrent()
+		inline Concurrent(const Ptr shoal)
 			: Mutable{}
-			, Me{}
-			, _shoal{ Shoal::mut_() }
+			, _shoal{ shoal }
 			, _mutex{}
 		{
 		}
@@ -1297,17 +1245,16 @@ public:
 			return stat_();
 		}
 
-		static inline const Ptr mut_()
+		static inline const Ptr mut_(const Ptr shoal)
 		{
-			return Me<Concurrent>::make_();
+			return make_<Concurrent>(shoal);
 		}
 
 		virtual inline const Ptr copy_() const override
 		{
-			return Me<Concurrent>::me_();
+			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+			return mut_(_shoal->copy_());
 		}
-
-		virtual inline const Ptr iterator_() const override;
 
 		virtual inline const Ptr type_() const override
 		{
@@ -1369,18 +1316,15 @@ private:
 	std_unordered_map_ptr_ptr _map;
 	bool _frozen;
 
-	class It : public Mutable, public Me<It>
+	class It : public Mutable
 	{
 	public:
 		inline It(const Ptr shoal)
 			: Mutable{}
-			, Me{}
 			, _shoal{ shoal }
 			, _iterator{ static_<Shoal>(_shoal)->_map.cbegin() }
 		{
 		}
-
-		virtual inline const Ptr iterator_() const override;
 
 		virtual inline const Ptr next_() override;
 
@@ -1393,7 +1337,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr shoal)
 		{
-			return Me<It>::make_(shoal);
+			return make_<It>(shoal);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -1409,18 +1353,15 @@ private:
 		std_unordered_map_ptr_ptr::const_iterator _iterator;
 	};
 
-	class Feeder : public Mutable, public Me<Feeder>
+	class Feeder : public Thing
 	{
 	public:
 		inline Feeder(const Ptr shoal, const Ptr eater)
-			: Mutable{}
-			, Me{}
+			: Thing{}
 			, _shoal{ shoal }
 			, _eater{ eater }
 		{
 		}
-
-		virtual inline const Ptr iterator_() const override;
 
 		virtual inline const Ptr next_() override
 		{
@@ -1432,14 +1373,9 @@ private:
 			return static_<Shoal>(_shoal)->find_(n);
 		}
 
-		virtual inline const Ptr copy_() const override
-		{
-			return mut_(_shoal, _eater);
-		}
-
 		static inline const Ptr mut_(const Ptr shoal, const Ptr eater)
 		{
-			return Me<Feeder>::make_(shoal, eater);
+			return make_<Feeder>(shoal, eater);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -1457,7 +1393,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Flock : public Mutable, public Me<Flock>, public Serializable
+class Flock : public Mutable, public Serializable
 //----------------------------------------------------------------------
 {
 	using std_vector_ptr = std::vector<Ptr>;
@@ -1465,7 +1401,6 @@ class Flock : public Mutable, public Me<Flock>, public Serializable
 public:
 	inline Flock()
 		: Mutable{}
-		, Me{}
 		, Serializable{}
 		, _vector{}
 		, _frozen{ false }
@@ -1578,7 +1513,7 @@ public:
 
 	static inline const Ptr mut_()
 	{
-		return Me<Flock>::make_();
+		return make_<Flock>();
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -1716,13 +1651,12 @@ public:
 		return result;
 	}
 
-	class Concurrent : public Mutable, public Me<Concurrent>
+	class Concurrent : public Mutable
 	{
 	public:
-		inline Concurrent()
+		inline Concurrent(const Ptr flock)
 			: Mutable{}
-			, Me{}
-			, _flock{ Flock::mut_() }
+			, _flock{ flock }
 			, _mutex{}
 		{
 		}
@@ -1761,17 +1695,16 @@ public:
 			return stat_();
 		}
 
-		static inline const Ptr mut_()
+		static inline const Ptr mut_(const Ptr flock)
 		{
-			return Me<Concurrent>::make_();
+			return make_<Concurrent>(flock);
 		}
 
 		virtual inline const Ptr copy_() const override
 		{
-			return Me<Concurrent>::me_();
+			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+			return mut_(_flock->copy_());
 		}
-
-		virtual inline const Ptr iterator_() const override;
 
 		virtual inline const Ptr type_() const override
 		{
@@ -1822,18 +1755,15 @@ private:
 	std_vector_ptr _vector;
 	bool _frozen;
 
-	class It : public Mutable, public Me<It>
+	class It : public Mutable
 	{
 	public:
 		inline It(const Ptr flock)
 			: Mutable{}
-			, Me{}
 			, _flock{ flock }
 			, _iterator{ static_<Flock>(_flock)->_vector.cbegin() }
 		{
 		}
-
-		virtual inline const Ptr iterator_() const override;
 
 		virtual inline const Ptr next_() override
 		{
@@ -1853,7 +1783,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr flock)
 		{
-			return Me<It>::make_(flock);
+			return make_<It>(flock);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -1871,7 +1801,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Herd : public Mutable, public Me<Herd>, public Serializable
+class Herd : public Mutable, public Serializable
 //----------------------------------------------------------------------
 {
 	class Hash
@@ -1897,7 +1827,6 @@ class Herd : public Mutable, public Me<Herd>, public Serializable
 public:
 	inline Herd()
 		: Mutable{}
-		, Me{}
 		, Serializable{}
 		, _set{}
 		, _frozen{ false }
@@ -2007,7 +1936,7 @@ public:
 
 	static inline const Ptr mut_()
 	{
-		return Me<Herd>::make_();
+		return make_<Herd>();
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -2133,7 +2062,7 @@ public:
 
 	inline void gather_(const Ptr item)
 	{
-		item->invoke_("visit", Me<Herd>::me_(), "insert", item);
+		item->invoke_("visit", me_(), "insert", item);
 	}
 
 	inline const Ptr gather(const Ptr it)
@@ -2142,13 +2071,12 @@ public:
 		return nothing_();
 	}
 
-	class Concurrent : public Mutable, public Me<Concurrent>
+	class Concurrent : public Mutable
 	{
 	public:
-		inline Concurrent()
+		inline Concurrent(const Ptr herd)
 			: Mutable{}
-			, Me{}
-			, _herd{ Herd::mut_() }
+			, _herd{ herd }
 			, _mutex{}
 		{
 		}
@@ -2186,17 +2114,16 @@ public:
 			return stat_();
 		}
 
-		static inline const Ptr mut_()
+		static inline const Ptr mut_(const Ptr herd)
 		{
-			return Me<Concurrent>::make_();
+			return make_<Concurrent>(herd);
 		}
 
 		virtual inline const Ptr copy_() const override
 		{
-			return Me<Concurrent>::me_();
+			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+			return mut_(_herd->copy_());
 		}
-
-		virtual inline const Ptr iterator_() const override;
 
 		virtual inline const Ptr type_() const override
 		{
@@ -2239,18 +2166,15 @@ private:
 	std_unordered_set_ptr _set;
 	bool _frozen;
 
-	class It : public Mutable, public Me<It>
+	class It : public Mutable
 	{
 	public:
 		inline It(const Ptr herd)
 			: Mutable{}
-			, Me{}
 			, _herd{ herd }
 			, _iterator{ static_<Herd>(_herd)->_set.cbegin() }
 		{
 		}
-
-		virtual inline const Ptr iterator_() const override;
 
 		virtual inline const Ptr next_() override
 		{
@@ -2270,7 +2194,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr herd)
 		{
-			return Me<It>::make_(herd);
+			return make_<It>(herd);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -2301,13 +2225,12 @@ private:
 };
 
 //----------------------------------------------------------------------
-class IteratorPtr : public Mutable, public Me<IteratorPtr>
+class IteratorPtr : public Mutable
 //----------------------------------------------------------------------
 {
 public:
 	inline IteratorPtr(const Ptr ptr)
 		: Mutable{}
-		, Me{}
 		, _ptr{ ptr }
 	{
 	}
@@ -2319,17 +2242,12 @@ public:
 
 	static inline const Ptr mut_(const Ptr ptr)
 	{
-		Me<IteratorPtr>::make_(ptr);
+		return make_<IteratorPtr>(ptr);
 	}
 
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(_ptr);
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return mut_(me_());
 	}
 
 	virtual inline const Ptr next_() override
@@ -2398,22 +2316,16 @@ private:
 
 template <typename C>
 //----------------------------------------------------------------------
-class IteratorCopy : public Mutable, public Me<IteratorCopy<C>>
+class IteratorCopy : public Mutable
 //----------------------------------------------------------------------
 {
 public:
 	template <typename F>
 	inline IteratorCopy(F&& collection)
 		: Mutable{}
-		, Me<IteratorCopy<C>>{}
 		, _collection{ std::forward<F>(collection) }
 		, _iterator{ _collection.cbegin() }
 	{
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(Me<IteratorCopy<C>>::me_());
 	}
 
 	virtual inline const Ptr next_() override
@@ -2435,7 +2347,7 @@ public:
 	template <typename F>
 	static inline const Ptr mut_(F&& collection)
 	{
-		return Me<IteratorCopy<C>>::make_(std::forward<F>(collection));
+		return make_<IteratorCopy<C>>(std::forward<F>(collection));
 	}
 
 	virtual inline const Ptr type_() const override
@@ -2466,22 +2378,16 @@ private:
 
 template <typename C>
 //----------------------------------------------------------------------
-class IteratorRef : public Mutable, public Me<IteratorRef<C>>
+class IteratorRef : public Mutable
 //----------------------------------------------------------------------
 {
 public:
 	template <typename F>
 	inline IteratorRef(F&& collection)
 		: Mutable{}
-		, Me<IteratorRef<C>>{}
 		, _collection{ std::forward<F>(collection) }
 		, _iterator{ _collection.cbegin() }
 	{
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(Me<IteratorRef<C>>::me_());
 	}
 
 	virtual inline const Ptr next_() override
@@ -2503,7 +2409,7 @@ public:
 	template <typename F>
 	static inline const Ptr mut_(F&& collection)
 	{
-		return Me<IteratorRef<C>>::make_(std::forward<F>(collection));
+		return make_<IteratorRef<C>>(std::forward<F>(collection));
 	}
 
 	virtual inline const Ptr type_() const override
@@ -2533,13 +2439,12 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Reference : public Mutable, public Me<Reference>
+class Reference : public Mutable
 //----------------------------------------------------------------------
 {
 public:
 	inline Reference(const Ptr ptr)
 		: Mutable{}
-		, Me{}
 		, _ptr{ ptr }
 	{
 	}
@@ -2551,7 +2456,7 @@ public:
 
 	static inline const Ptr mut_(const Ptr ptr)
 	{
-		return Me<Reference>::make_(ptr);
+		return make_<Reference>(ptr);
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -2644,12 +2549,11 @@ public:
 private:
 	Ptr _ptr;
 
-	class It : public Mutable, public Me<It>
+	class It : public Mutable
 	{
 	public:
 		inline It(const Ptr reference)
 			: Mutable{}
-			, Me{}
 			, _reference{ reference }
 		{
 		}
@@ -2661,17 +2565,12 @@ private:
 
 		static inline const Ptr mut_(const Ptr reference)
 		{
-			Me<It>::make_(reference);
+			make_<It>(reference);
 		}
 
 		virtual inline const Ptr copy_() const override
 		{
 			return mut_(_reference);
-		}
-
-		virtual inline const Ptr iterator_() const override
-		{
-			return IteratorPtr::mut_(Me<It>::me_());
 		}
 
 		virtual inline const Ptr next_() override
@@ -2769,7 +2668,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Lake : public Mutable, public Me<Lake>, public Serializable, public Data<std::string>
+class Lake : public Mutable, public Serializable, public Data<std::string>
 //----------------------------------------------------------------------
 {
 public:
@@ -2777,7 +2676,7 @@ public:
 
 	static inline const Ptr mut_(const S& data = S())
 	{
-		return Me<Lake>::make_(data);
+		return make_<Lake>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -2835,7 +2734,6 @@ public:
 
 	inline Lake(const S& data)
 		: Mutable{}
-		, Me{}
 		, Serializable{}
 		, Data{ data }
 	{
@@ -2844,11 +2742,6 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3074,7 +2967,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Bit : public Number, public Me<Bit>, public Data<bool>
+class Bit : public Number, public Data<bool>
 //----------------------------------------------------------------------
 {
 public:
@@ -3082,7 +2975,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return Me<Bit>::make_(data);
+		return make_<Bit>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -3140,7 +3033,6 @@ public:
 
 	inline Bit(const D& data)
 		: Number{}
-		, Me{}
 		, Data{ data }
 	{
 	}
@@ -3148,11 +3040,6 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3275,7 +3162,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Byte : public Number, public Me<Byte>, public Data<unsigned char>
+class Byte : public Number, public Data<unsigned char>
 //----------------------------------------------------------------------
 {
 public:
@@ -3283,7 +3170,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return Me<Byte>::make_(data);
+		return make_<Byte>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -3341,7 +3228,6 @@ public:
 
 	inline Byte(const D& data)
 		: Number{}
-		, Me{}
 		, Data{ data }
 	{
 	}
@@ -3349,11 +3235,6 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3476,7 +3357,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Int16 : public Number, public Me<Int16>, public Data<int16_t>
+class Int16 : public Number, public Data<int16_t>
 //----------------------------------------------------------------------
 {
 public:
@@ -3484,7 +3365,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return Me<Int16>::make_(data);
+		return make_<Int16>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -3542,7 +3423,6 @@ public:
 
 	inline Int16(const D& data)
 		: Number{}
-		, Me{}
 		, Data{ data }
 	{
 	}
@@ -3550,11 +3430,6 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3683,7 +3558,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Int32 : public Number, public Me<Int32>, public Data<int32_t>
+class Int32 : public Number, public Data<int32_t>
 //----------------------------------------------------------------------
 {
 public:
@@ -3691,7 +3566,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return Me<Int32>::make_(data);
+		return make_<Int32>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -3749,7 +3624,6 @@ public:
 
 	inline Int32(const D& data)
 		: Number{}
-		, Me{}
 		, Data{ data }
 	{
 	}
@@ -3757,11 +3631,6 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3894,7 +3763,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Int64 : public Number, public Me<Int64>, public Data<int64_t>
+class Int64 : public Number, public Data<int64_t>
 //----------------------------------------------------------------------
 {
 public:
@@ -3902,7 +3771,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return Me<Int64>::make_(data);
+		return make_<Int64>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -3960,7 +3829,6 @@ public:
 
 	inline Int64(const D& data)
 		: Number{}
-		, Me{}
 		, Data{ data }
 	{
 	}
@@ -3968,11 +3836,6 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4113,7 +3976,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Float32 : public Number, public Me<Float32>, public Data<float>
+class Float32 : public Number, public Data<float>
 //----------------------------------------------------------------------
 {
 public:
@@ -4121,7 +3984,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return Me<Float32>::make_(data);
+		return make_<Float32>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -4179,7 +4042,6 @@ public:
 
 	inline Float32(const D& data)
 		: Number{}
-		, Me{}
 		, Data{ data }
 	{
 	}
@@ -4187,11 +4049,6 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4325,7 +4182,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Float64 : public Number, public Me<Float64>, public Data<double>
+class Float64 : public Number, public Data<double>
 //----------------------------------------------------------------------
 {
 public:
@@ -4333,7 +4190,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return Me<Float64>::make_(data);
+		return make_<Float64>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -4391,7 +4248,6 @@ public:
 
 	inline Float64(const D& data)
 		: Number{}
-		, Me{}
 		, Data{ data }
 	{
 	}
@@ -4399,11 +4255,6 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4545,7 +4396,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Complex32 : public Number, public Me<Complex32>, public Data<std::complex<float>>
+class Complex32 : public Number, public Data<std::complex<float>>
 //----------------------------------------------------------------------
 {
 	static const char delim = '|';
@@ -4555,7 +4406,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return Me<Complex32>::make_(data);
+		return make_<Complex32>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -4613,7 +4464,6 @@ public:
 
 	inline Complex32(const D& data)
 		: Number{}
-		, Me{}
 		, Data{ data }
 	{
 	}
@@ -4621,11 +4471,6 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -4796,7 +4641,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Complex64 : public Number, public Me<Complex64>, public Data<std::complex<double>>
+class Complex64 : public Number, public Data<std::complex<double>>
 //----------------------------------------------------------------------
 {
 	static const char delim = '|';
@@ -4806,7 +4651,7 @@ public:
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return Me<Complex64>::make_(data);
+		return make_<Complex64>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -4864,7 +4709,6 @@ public:
 
 	inline Complex64(const D& data)
 		: Number{}
-		, Me{}
 		, Data{ data }
 	{
 	}
@@ -4872,11 +4716,6 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(get_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -5063,7 +4902,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class River : public Mutable, public Me<River>
+class River : public Mutable
 //----------------------------------------------------------------------
 {
 	using const_std_unique_iostream = const std::unique_ptr<std::iostream>;
@@ -5071,14 +4910,13 @@ class River : public Mutable, public Me<River>
 public:
 	inline River(std::iostream* const stream)
 		: Mutable{}
-		, Me{}
 		, _stream{ stream }
 	{
 	}
 
 	static inline const Ptr mut_(std::iostream* const stream)
 	{
-		return Me<River>::make_(stream);
+		return make_<River>(stream);
 	}
 
 	static inline const Ptr mut_(const std::string& str = std::string(), const bool file = false)
@@ -5108,16 +4946,6 @@ public:
 			return mut_(lake->get_());
 		}
 		return mut_(lake->get_(), !file->is_("0"));
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return Me<River>::me_();
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(Me<River>::me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -5185,7 +5013,7 @@ public:
 		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
-		ptr->invoke_("to_river", Me<River>::me_());
+		ptr->invoke_("to_river", me_());
 		return true;
 	}
 
@@ -5200,7 +5028,7 @@ public:
 		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
 		write_(type);
-		ptr->invoke_("to_river_with_links", shoal, Me<River>::me_());
+		ptr->invoke_("to_river_with_links", shoal, me_());
 		return true;
 	}
 
@@ -5227,7 +5055,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Lake>(read_(int16))->get_();
-		return call_(type, "riv", Me<River>::me_());
+		return call_(type, "riv", me_());
 	}
 
 	inline const Ptr pop_front(const Ptr ignore)
@@ -5239,7 +5067,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Lake>(read_(int16))->get_();
-		return call_(type, "rwl", Me<River>::me_());
+		return call_(type, "rwl", me_());
 	}
 
 	inline const Ptr read_(const int64_t length)
@@ -5291,13 +5119,12 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Fence : public Mutable, public Me<Fence>
+class Fence : public Mutable
 //----------------------------------------------------------------------
 {
 public:
 	inline Fence(const Ptr ptr)
 		: Mutable{}
-		, Me{}
 		, _fence{}
 		, _ptr{ ptr }
 	{
@@ -5311,17 +5138,12 @@ public:
 
 	static inline const Ptr mut_(const Ptr ptr)
 	{
-		return Me<Fence>::make_(ptr);
+		return make_<Fence>(ptr);
 	}
 
 	virtual inline const Ptr copy_() const override
 	{
 		return mut_(_ptr);
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -5423,13 +5245,12 @@ class Creator : public Mutable
 };
 
 //----------------------------------------------------------------------
-class Creature : public Mutable, public Me<Creature>, public Serializable
+class Creature : public Mutable, public Serializable
 //----------------------------------------------------------------------
 {
 public:
 	inline Creature(const Ptr creator, const Ptr members)
 		: Mutable{}
-		, Me{}
 		, Serializable{}
 		, _creator{ creator }
 		, _members{ members }
@@ -5439,7 +5260,7 @@ public:
 
 	static inline const Ptr mut_(const Ptr creator, const Ptr members)
 	{
-		return Me<Creature>::make_(creator, members);
+		return make_<Creature>(creator, members);
 	}
 
 	static inline const Ptr fin_(const Ptr creator, const Ptr members)
@@ -5467,7 +5288,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return Me<Creature>::me_();
+		return Mutable::copy_();
 	}
 
 	virtual inline const Ptr clone_() const override
@@ -5527,7 +5348,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return IteratorPtr::mut_(Me<Creature>::me_());
+		return Mutable::iterator_();
 	}
 
 	virtual inline const Ptr next_() override
@@ -5712,7 +5533,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Expression : public Thing, public Me<Expression>
+class Expression : public Thing
 //----------------------------------------------------------------------
 {
 	typedef const Ptr(Expression::*MemberPtr)(const Ptr) const;
@@ -5720,7 +5541,6 @@ class Expression : public Thing, public Me<Expression>
 public:
 	inline Expression(const MemberPtr member, const Ptr flock)
 		: Thing{}
-		, Me{}
 		, _member{ member }
 		, _flock{ flock }
 	{
@@ -5729,9 +5549,7 @@ public:
 	static inline const Ptr fin_(const MemberPtr member, const Ptr flock)
 	{
 		flock->freeze_();
-		const Ptr result = Me<Expression>::make_(member, flock);
-		result->finalize_();
-		return result;
+		return fake_<Expression>(member, flock);
 	}
 
 	static inline const Ptr fin_(const Ptr statement, const Ptr flock)
@@ -5929,16 +5747,6 @@ public:
 		{
 			exp->_generate_cpp_(riv);
 		}
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return me_();
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(me_());
 	}
 
 	inline const Ptr iterator_(const Ptr local) const
@@ -6383,21 +6191,15 @@ private:
 		return nothing_();
 	}
 
-	class It : public Mutable, public Me<It>
+	class It : public Mutable
 	{
 	public:
 		inline It(const Ptr flock, const Ptr local)
 			: Mutable{}
-			, Me{}
 			, _components{ flock }
 			, _local{ local }
 			, _pos{ 0 }
 		{
-		}
-
-		virtual inline const Ptr iterator_() const override
-		{
-			return IteratorPtr::mut_(me_());
 		}
 
 		virtual inline const Ptr next_() override
@@ -6419,7 +6221,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr flock, const Ptr local)
 		{
-			return Me<It>::make_(flock, local);
+			return make_<It>(flock, local);
 		}
 
 		virtual inline const Ptr type_() const override
@@ -6451,13 +6253,12 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Function : public Thing, public Me<Function>
+class Function : public Thing
 //----------------------------------------------------------------------
 {
 public:
 	inline Function(const Ptr expression, const Ptr stat)
 		: Thing{}
-		, Me{}
 		, _expression{ expression }
 		, _static{ stat }
 	{
@@ -6465,19 +6266,7 @@ public:
 
 	static inline const Ptr fin_(const Ptr expression, const Ptr stat = Shoal::mut_())
 	{
-		const Ptr result = Me<Function>::make_(expression, stat);
-		result->finalize_();
-		return result;
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return Me<Function>::me_();
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(Me<Function>::me_());
+		return fake_<Function>(expression, stat);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -6492,10 +6281,10 @@ protected:
 		const Ptr local = Shoal::mut_();
 		Shoal* const loc = static_<Shoal>(local);
 		loc->insert_("$", _static);
-		Me<Creature>* const me = dynamic_cast<Me<Creature>*>(thing);
-		if (me)
+		Creature* const creature = dynamic_cast<Creature*>(thing);
+		if (creature)
 		{
-			loc->insert_("|", me->me_());
+			loc->insert_("|", creature->me_());
 		}
 		loc->insert_("&", it);
 		loc->insert_("@", Byte::mut_());
@@ -6508,13 +6297,12 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Tokenizer : public Mutable, public Me<Tokenizer>
+class Tokenizer : public Mutable
 //----------------------------------------------------------------------
 {
 public:
 	inline Tokenizer(const Ptr river)
 		: Mutable{}
-		, Me{}
 		, _river{ river }
 	{
 	}
@@ -6526,17 +6314,7 @@ public:
 
 	static inline const Ptr mut_(const Ptr river)
 	{
-		return Me<Tokenizer>::make_(river);
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return Me<Tokenizer>::me_();
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(Me<Tokenizer>::me_());
+		return make_<Tokenizer>(river);
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -7050,13 +6828,12 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Parser : public Mutable, public Me<Parser>
+class Parser : public Mutable
 //----------------------------------------------------------------------
 {
 public:
 	inline Parser(const Ptr tokenizer)
 		: Mutable{}
-		, Me{}
 		, _tokenizer{ tokenizer }
 		, _flock{ Flock::mut_() }
 		, _deque{}
@@ -7071,17 +6848,7 @@ public:
 
 	static inline const Ptr mut_(const Ptr tokenizer)
 	{
-		return Me<Parser>::make_(tokenizer);
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return Me<Parser>::me_();
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return IteratorPtr::mut_(Me<Parser>::me_());
+		return make_<Parser>(tokenizer);
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -7924,6 +7691,12 @@ private:
 //======================================================================
 // class Thing
 //======================================================================
+
+inline const Thing::Ptr Thing::iterator_() const
+{
+	return IteratorPtr::mut_(me_());
+}
+
 template <typename F>
 inline const bool Thing::is_(F&& symbol) const
 {
@@ -8148,10 +7921,6 @@ inline const Thing::Ptr Thing::stats_()
 //======================================================================
 
 //======================================================================
-// class Me
-//======================================================================
-
-//======================================================================
 // class Serializable
 //======================================================================
 
@@ -8269,11 +8038,6 @@ inline const Thing::Ptr Symbol::to_lake_() const
 	return lake;
 }
 
-inline const Thing::Ptr Symbol::iterator_() const
-{
-	return IteratorPtr::mut_(Me<Symbol>::me_());
-}
-
 inline const Thing::Ptr Symbol::cats_() const
 {
 	static const Ptr CATS = []()
@@ -8293,11 +8057,6 @@ inline const Thing::Ptr Symbol::cats_() const
 // class Static
 //======================================================================
 
-inline const Thing::Ptr Static::iterator_() const
-{
-	return IteratorPtr::mut_(Me<Static>::me_());
-}
-
 inline const Thing::Ptr Static::eater_() const
 {
 	return IteratorRef<std::vector<Ptr>>::mut_(_params);
@@ -8310,11 +8069,6 @@ inline const Thing::Ptr Static::eater_() const
 inline const Thing::Ptr Method::with_name_(const Thing::Ptr thing, const Thing::Ptr name)
 {
 	return fin_(thing, static_<Shoal>(thing->pub_())->find_(name));
-}
-
-inline const Thing::Ptr Method::iterator_() const
-{
-	return IteratorPtr::mut_(Me<Method>::me_());
 }
 
 inline const Thing::Ptr Method::eater_() const
@@ -8332,12 +8086,6 @@ inline const Thing::Ptr Method::eater_() const
 //======================================================================
 
 template <typename T>
-inline const Thing::Ptr Member<T>::iterator_() const
-{
-	return IteratorPtr::mut_(Me<Member<T>>::me_());
-}
-
-template <typename T>
 inline const Thing::Ptr Member<T>::eater_() const
 {
 	return IteratorRef<std::vector<Ptr>>::mut_(_params);
@@ -8346,12 +8094,6 @@ inline const Thing::Ptr Member<T>::eater_() const
 //======================================================================
 // class Const
 //======================================================================
-
-template <typename T>
-inline const Thing::Ptr Const<T>::iterator_() const
-{
-	return IteratorPtr::mut_(Me<Const<T>>::me_());
-}
 
 template <typename T>
 inline const Thing::Ptr Const<T>::eater_() const
@@ -8472,7 +8214,7 @@ inline void Shoal::gather_to_river_(const Thing::Ptr thing, const Thing::Ptr riv
 	riv->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
-		if (riv->push_back_with_links_(i.first, Me<Shoal>::me_()))
+		if (riv->push_back_with_links_(i.first, me_()))
 		{
 			static_<Symbol>(i.second)->to_river_(river);
 		}
@@ -8495,7 +8237,7 @@ inline const Thing::Ptr Shoal::gather_from_river_(const Thing::Ptr river)
 	}
 	for (const auto& i : _map)
 	{
-		i.second->invoke_("replace_links", Me<Shoal>::me_());
+		i.second->invoke_("replace_links", me_());
 	}
 	return find_(nothing_());
 }
@@ -8515,11 +8257,6 @@ inline const Thing::Ptr Shoal::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Shoal::Concurrent::iterator_() const
-{
-	return IteratorPtr::mut_(Me<Shoal::Concurrent>::me_());
-}
-
 inline const Thing::Ptr Shoal::It::cats_() const
 {
 	static const Ptr CATS = []()
@@ -8535,11 +8272,6 @@ inline const Thing::Ptr Shoal::It::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Shoal::It::iterator_() const
-{
-	return IteratorPtr::mut_(Me<It>::me_());
-}
-
 inline const Thing::Ptr Shoal::It::next_()
 {
 	if (_iterator == static_<Shoal>(_shoal)->_map.cend())
@@ -8553,11 +8285,6 @@ inline const Thing::Ptr Shoal::It::next_()
 	flock->finalize_();
 	++_iterator;
 	return result;
-}
-
-inline const Thing::Ptr Shoal::Feeder::iterator_() const
-{
-	return IteratorPtr::mut_(me_());
 }
 
 inline const Thing::Ptr Shoal::Feeder::cats_() const
@@ -8622,11 +8349,6 @@ inline const Thing::Ptr Flock::Concurrent::at_(const Thing::Ptr pos) const
 		}
 	}
 	return nothing_();
-}
-
-inline const Thing::Ptr Flock::Concurrent::iterator_() const
-{
-	return IteratorPtr::mut_(Me<Concurrent>::me_());
 }
 
 inline void Flock::to_river_(const Thing::Ptr river) const
@@ -8733,11 +8455,6 @@ inline const Thing::Ptr Flock::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Flock::It::iterator_() const
-{
-	return IteratorPtr::mut_(Me<It>::me_());
-}
-
 inline const Thing::Ptr Flock::It::cats_() const
 {
 	static const Ptr CATS = []()
@@ -8842,16 +8559,6 @@ inline void Herd::replace_links_(const Thing::Ptr shoal)
 		replacement.insert(sho->find_(i));
 	}
 	_set.swap(replacement);
-}
-
-inline const Thing::Ptr Herd::Concurrent::iterator_() const
-{
-	return IteratorPtr::mut_(Me<Concurrent>::me_());
-}
-
-inline const Thing::Ptr Herd::It::iterator_() const
-{
-	return IteratorPtr::mut_(Me<It>::me_());
 }
 
 //======================================================================
