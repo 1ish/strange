@@ -5711,14 +5711,15 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Expression : public Thing
+class Expression : public Thing, public Me<Expression>
 //----------------------------------------------------------------------
 {
-	typedef const Ptr(Expression::*MemberPtr)(const Ptr, const Ptr) const;
+	typedef const Ptr(Expression::*MemberPtr)(const Ptr) const;
 
 public:
 	inline Expression(const MemberPtr member, const Ptr flock)
 		: Thing{}
+		, Me{}
 		, _member{ member }
 		, _flock{ flock }
 	{
@@ -5727,7 +5728,9 @@ public:
 	static inline const Ptr fin_(const MemberPtr member, const Ptr flock)
 	{
 		flock->freeze_();
-		return std::make_shared<Expression>(member, flock);
+		const Ptr result = Me<Expression>::make_(member, flock);
+		result->finalize_();
+		return result;
 	}
 
 	static inline const Ptr fin_(const Ptr statement, const Ptr flock)
@@ -5901,17 +5904,12 @@ public:
 	static inline const Ptr evaluate_(const Ptr expression, const Ptr local)
 	{
 		Expression* const exp = static_<Expression>(expression);
-		return (exp->*(exp->_member))(expression, local);
+		return (exp->*(exp->_member))(local);
 	}
 
 	static inline const Ptr immediate_(const Ptr expression)
 	{
 		return evaluate_(expression, Shoal::mut_());
-	}
-
-	static inline const Ptr iterator_(const Ptr expression, const Ptr local)
-	{
-		return It::mut_(expression, local);
 	}
 
 	static inline void generate_(const Ptr expression, const Ptr language, const Ptr river)
@@ -5934,12 +5932,17 @@ public:
 
 	virtual inline const Ptr copy_() const override
 	{
-		return fin_(_member, _flock);
+		return me_();
 	}
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(fin_(_member, _flock));
+		return IteratorPtr::mut_(me_());
+	}
+
+	inline const Ptr iterator_(const Ptr local) const
+	{
+		return It::mut_(_flock, local);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -5984,7 +5987,7 @@ private:
 		}
 	}
 
-	inline const Ptr _local_(const Ptr expression, const Ptr local) const
+	inline const Ptr _local_(const Ptr local) const
 	{
 		return local;
 	}
@@ -5999,7 +6002,7 @@ private:
 		river->write_("__local__");
 	}
 
-	inline const Ptr _thing_(const Ptr expression, const Ptr local) const
+	inline const Ptr _thing_(const Ptr local) const
 	{
 		return static_<Flock>(_flock)->at_(0);
 	}
@@ -6014,10 +6017,11 @@ private:
 		river->write_("£"); //TODO write cpp literals
 	}
 
-	inline const Ptr _invoke_(const Ptr expression, const Ptr local) const
+	inline const Ptr _invoke_(const Ptr local) const
 	{
-		const Ptr it = Expression::iterator_(expression, local);
-		return it->next_()->invoke(it);
+		const Ptr it = iterator_(local);
+		const Ptr thing = it->next_();
+		return thing->invoke(it);
 	}
 
 	inline void _generate_strange_invoke_(River* const river) const
@@ -6062,14 +6066,14 @@ private:
 		river->write_(")");
 	}
 
-	inline const Ptr _invoke_iterator_(const Ptr expression, const Ptr local) const
+	inline const Ptr _invoke_iterator_(const Ptr local) const
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
 		return thing->invoke(Expression::evaluate_(flock->at_(1), local));
 	}
 
-	inline const Ptr _invoke_iterable_(const Ptr expression, const Ptr local) const
+	inline const Ptr _invoke_iterable_(const Ptr local) const
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
@@ -6092,14 +6096,14 @@ private:
 		return thing->invoke(iterable->iterator_());
 	}
 
-	inline const Ptr _method_(const Ptr expression, const Ptr local) const
+	inline const Ptr _method_(const Ptr local) const
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
 		return Method::with_name_(thing, Expression::evaluate_(flock->at_(1), local));
 	}
 
-	inline const Ptr _operate_iterator_(const Ptr expression, const Ptr local) const
+	inline const Ptr _operate_iterator_(const Ptr local) const
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
@@ -6107,7 +6111,7 @@ private:
 		return operate_(thing.get(), member, Expression::evaluate_(flock->at_(2), local));
 	}
 
-	inline const Ptr _operate_iterable_(const Ptr expression, const Ptr local) const
+	inline const Ptr _operate_iterable_(const Ptr local) const
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
@@ -6125,7 +6129,7 @@ private:
 		return operate_(thing.get(), member, iterable->iterator_());
 	}
 
-	inline const Ptr _lambda_(const Ptr expression, const Ptr local) const
+	inline const Ptr _lambda_(const Ptr local) const
 	{
 		Shoal* const shoal = static_<Shoal>(local);
 		Byte* const action = static_<Byte>(shoal->find_("@"));
@@ -6146,7 +6150,7 @@ private:
 		return Expression::evaluate_(flock->at_(size_1), local);
 	}
 
-	inline const Ptr _flock_(const Ptr expression, const Ptr local) const
+	inline const Ptr _flock_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -6161,21 +6165,21 @@ private:
 		return result;
 	}
 
-	inline const Ptr _break_(const Ptr expression, const Ptr local) const
+	inline const Ptr _break_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		action->set_('b');
 		return nothing_();
 	}
 
-	inline const Ptr _continue_(const Ptr expression, const Ptr local) const
+	inline const Ptr _continue_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		action->set_('c');
 		return nothing_();
 	}
 
-	inline const Ptr _return_(const Ptr expression, const Ptr local) const
+	inline const Ptr _return_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		action->set_('r');
@@ -6187,7 +6191,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _block_(const Ptr expression, const Ptr local) const
+	inline const Ptr _block_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -6203,7 +6207,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _if_(const Ptr expression, const Ptr local) const
+	inline const Ptr _if_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -6244,7 +6248,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _question_(const Ptr expression, const Ptr local) const
+	inline const Ptr _question_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -6276,7 +6280,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _while_(const Ptr expression, const Ptr local) const
+	inline const Ptr _while_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -6309,7 +6313,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _do_(const Ptr expression, const Ptr local) const
+	inline const Ptr _do_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -6343,7 +6347,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _for_(const Ptr expression, const Ptr local) const
+	inline const Ptr _for_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
@@ -6378,11 +6382,12 @@ private:
 		return nothing_();
 	}
 
-	class It : public Mutable
+	class It : public Mutable, public Me<It>
 	{
 	public:
 		inline It(const Ptr flock, const Ptr local)
 			: Mutable{}
+			, Me{}
 			, _components{ flock }
 			, _local{ local }
 			, _pos{ 0 }
@@ -6391,10 +6396,18 @@ private:
 
 		virtual inline const Ptr iterator_() const override
 		{
-			return mut_(_components, _local);
+			return IteratorPtr::mut_(me_());
 		}
 
-		virtual inline const Ptr next_() override;
+		virtual inline const Ptr next_() override
+		{
+			Flock* const flk = static_<Flock>(_components);
+			if (_pos >= flk->size_())
+			{
+				return stop_();
+			}
+			return Expression::evaluate_(flk->at_(_pos++), _local);
+		}
 
 		virtual inline const Ptr copy_() const override
 		{
@@ -6405,7 +6418,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr flock, const Ptr local)
 		{
-			return std::make_shared<It>(flock, local);
+			return Me<It>::make_(flock, local);
 		}
 
 		virtual inline const Ptr type_() const override
