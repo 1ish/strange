@@ -1141,7 +1141,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return It::mut_(me_());
+		return Iterator::mut_(me_());
 	}
 
 	virtual inline const Ptr feeder(const Ptr eater) const override
@@ -1316,10 +1316,10 @@ private:
 	std_unordered_map_ptr_ptr _map;
 	bool _frozen;
 
-	class It : public Mutable
+	class Iterator : public Mutable
 	{
 	public:
-		inline It(const Ptr shoal)
+		inline Iterator(const Ptr shoal)
 			: Mutable{}
 			, _shoal{ shoal }
 			, _iterator{ static_<Shoal>(_shoal)->_map.cbegin() }
@@ -1331,18 +1331,18 @@ private:
 		virtual inline const Ptr copy_() const override
 		{
 			const Ptr result = mut_(_shoal);
-			static_<It>(result)->_iterator = _iterator;
+			static_<Iterator>(result)->_iterator = _iterator;
 			return result;
 		}
 
 		static inline const Ptr mut_(const Ptr shoal)
 		{
-			return make_<It>(shoal);
+			return make_<Iterator>(shoal);
 		}
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Shoal:It");
+			static const Ptr TYPE = sym_("strange::Shoal:Iterator");
 			return TYPE;
 		}
 
@@ -1623,7 +1623,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return It::mut_(me_());
+		return Iterator::mut_(me_());
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1755,10 +1755,10 @@ private:
 	std_vector_ptr _vector;
 	bool _frozen;
 
-	class It : public Mutable
+	class Iterator : public Mutable
 	{
 	public:
-		inline It(const Ptr flock)
+		inline Iterator(const Ptr flock)
 			: Mutable{}
 			, _flock{ flock }
 			, _iterator{ static_<Flock>(_flock)->_vector.cbegin() }
@@ -1777,18 +1777,18 @@ private:
 		virtual inline const Ptr copy_() const override
 		{
 			const Ptr result = mut_(_flock);
-			static_<It>(result)->_iterator = _iterator;
+			static_<Iterator>(result)->_iterator = _iterator;
 			return result;
 		}
 
 		static inline const Ptr mut_(const Ptr flock)
 		{
-			return make_<It>(flock);
+			return make_<Iterator>(flock);
 		}
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Flock::It");
+			static const Ptr TYPE = sym_("strange::Flock::Iterator");
 			return TYPE;
 		}
 
@@ -2019,7 +2019,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return It::mut_(me_());
+		return Iterator::mut_(me_());
 	}
 
 	virtual inline const Ptr type_() const override
@@ -2166,10 +2166,10 @@ private:
 	std_unordered_set_ptr _set;
 	bool _frozen;
 
-	class It : public Mutable
+	class Iterator : public Mutable
 	{
 	public:
-		inline It(const Ptr herd)
+		inline Iterator(const Ptr herd)
 			: Mutable{}
 			, _herd{ herd }
 			, _iterator{ static_<Herd>(_herd)->_set.cbegin() }
@@ -2188,18 +2188,18 @@ private:
 		virtual inline const Ptr copy_() const override
 		{
 			const Ptr result = mut_(_herd);
-			static_<It>(result)->_iterator = _iterator;
+			static_<Iterator>(result)->_iterator = _iterator;
 			return result;
 		}
 
 		static inline const Ptr mut_(const Ptr herd)
 		{
-			return make_<It>(herd);
+			return make_<Iterator>(herd);
 		}
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Herd::It");
+			static const Ptr TYPE = sym_("strange::Herd::Iterator");
 			return TYPE;
 		}
 
@@ -2466,7 +2466,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return It::mut_(me_());
+		return Iterator::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -2549,10 +2549,10 @@ public:
 private:
 	Ptr _ptr;
 
-	class It : public Mutable
+	class Iterator : public Mutable
 	{
 	public:
-		inline It(const Ptr reference)
+		inline Iterator(const Ptr reference)
 			: Mutable{}
 			, _reference{ reference }
 		{
@@ -2565,7 +2565,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr reference)
 		{
-			make_<It>(reference);
+			make_<Iterator>(reference);
 		}
 
 		virtual inline const Ptr copy_() const override
@@ -2590,8 +2590,8 @@ private:
 			{
 				const Ptr pub = Thing::pub_()->copy_();
 				Shoal* const shoal = static_<Shoal>(pub);
-				shoal->update_("stat", Static::fin_(&It::stat));
-				shoal->update_("mut", Static::fin_(&It::mut, "thing"));
+				shoal->update_("stat", Static::fin_(&Iterator::stat));
+				shoal->update_("mut", Static::fin_(&Iterator::mut, "thing"));
 				shoal->finalize_();
 				return pub;
 			}();
@@ -2604,8 +2604,8 @@ private:
 			{
 				const Ptr stat = Shoal::mut_();
 				Shoal* const shoal = static_<Shoal>(stat);
-				shoal->update_("stat", Static::fin_(&It::stat));
-				shoal->update_("mut", Static::fin_(&It::mut, "thing"));
+				shoal->update_("stat", Static::fin_(&Iterator::stat));
+				shoal->update_("mut", Static::fin_(&Iterator::mut, "thing"));
 				shoal->finalize_();
 				return stat;
 			}();
@@ -2619,7 +2619,7 @@ private:
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Reference::It");
+			static const Ptr TYPE = sym_("strange::Reference::Iterator");
 			return TYPE;
 		}
 
@@ -5751,7 +5751,7 @@ public:
 
 	inline const Ptr iterator_(const Ptr local) const
 	{
-		return It::mut_(_flock, local);
+		return Iterator::mut_(_flock, local);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -6191,10 +6191,10 @@ private:
 		return nothing_();
 	}
 
-	class It : public Mutable
+	class Iterator : public Mutable
 	{
 	public:
-		inline It(const Ptr flock, const Ptr local)
+		inline Iterator(const Ptr flock, const Ptr local)
 			: Mutable{}
 			, _components{ flock }
 			, _local{ local }
@@ -6215,18 +6215,18 @@ private:
 		virtual inline const Ptr copy_() const override
 		{
 			const Ptr result = mut_(_components, _local);
-			static_<It>(result)->_pos = _pos;
+			static_<Iterator>(result)->_pos = _pos;
 			return result;
 		}
 
 		static inline const Ptr mut_(const Ptr flock, const Ptr local)
 		{
-			return make_<It>(flock, local);
+			return make_<Iterator>(flock, local);
 		}
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Expression::It");
+			static const Ptr TYPE = sym_("strange::Expression::Iterator");
 			return TYPE;
 		}
 
@@ -8257,7 +8257,7 @@ inline const Thing::Ptr Shoal::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Shoal::It::cats_() const
+inline const Thing::Ptr Shoal::Iterator::cats_() const
 {
 	static const Ptr CATS = []()
 	{
@@ -8272,7 +8272,7 @@ inline const Thing::Ptr Shoal::It::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Shoal::It::next_()
+inline const Thing::Ptr Shoal::Iterator::next_()
 {
 	if (_iterator == static_<Shoal>(_shoal)->_map.cend())
 	{
@@ -8455,7 +8455,7 @@ inline const Thing::Ptr Flock::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Flock::It::cats_() const
+inline const Thing::Ptr Flock::Iterator::cats_() const
 {
 	static const Ptr CATS = []()
 	{
