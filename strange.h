@@ -20,8 +20,6 @@
 namespace strange
 {
 	class Thing;
-	class Eaterable;
-	class Feederable;
 	class Variadic;
 	class Serializable;
 	class Symbol;
@@ -317,6 +315,16 @@ public:
 		return pub_();
 	}
 
+	virtual inline const Ptr eater_() const
+	{
+		return nothing_();
+	}
+
+	virtual inline const Ptr feeder(const Ptr eater) const
+	{
+		return nothing_();
+	}
+
 	// public non-virtual member functions and adapters
 	template <typename... Args>
 	inline const Ptr invoke_(Args&&... args);
@@ -412,24 +420,6 @@ private:
 		static std::atomic<bool> FINALIZED(true);
 		return FINALIZED;
 	}
-};
-
-//----------------------------------------------------------------------
-class Eaterable
-//----------------------------------------------------------------------
-{
-public:
-	// public pure virtual member functions and adapters
-	virtual inline const Thing::Ptr eater_() const = 0;
-};
-
-//----------------------------------------------------------------------
-class Feederable
-//----------------------------------------------------------------------
-{
-public:
-	// public pure virtual member functions and adapters
-	virtual inline const Thing::Ptr feeder(const Thing::Ptr eater) const = 0;
 };
 
 //----------------------------------------------------------------------
@@ -663,7 +653,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Static : public Thing, public Eaterable
+class Static : public Thing
 //----------------------------------------------------------------------
 {
 	using function = const Ptr(*)(const Ptr);
@@ -672,7 +662,6 @@ public:
 	template <typename F>
 	inline Static(const function fun, F&& params)
 		: Thing{}
-		, Eaterable{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
 	{
@@ -713,13 +702,12 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Method : public Thing, public Eaterable
+class Method : public Thing
 //----------------------------------------------------------------------
 {
 public:
 	inline Method(const Ptr thing, const Ptr member) // member is a functor, not a name
 		: Thing{}
-		, Eaterable{}
 		, _thing{ thing }
 		, _member{ member }
 	{
@@ -738,7 +726,10 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr eater_() const override;
+	virtual inline const Ptr eater_() const override
+	{
+		return _member->eater_();
+	}
 
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
@@ -753,7 +744,7 @@ private:
 
 template <typename T>
 //----------------------------------------------------------------------
-class Member : public Thing, public Eaterable
+class Member : public Thing
 //----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr);
@@ -762,7 +753,6 @@ public:
 	template <typename F>
 	inline Member(const member fun, F&& params)
 		: Thing{}
-		, Eaterable{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
 	{
@@ -815,7 +805,7 @@ private:
 
 template <typename T>
 //----------------------------------------------------------------------
-class Const : public Thing, public Eaterable
+class Const : public Thing
 //----------------------------------------------------------------------
 {
 	using member = const Ptr(T::*)(const Ptr) const;
@@ -824,7 +814,6 @@ public:
 	template <typename F>
 	inline Const(const member fun, F&& params)
 		: Thing{}
-		, Eaterable{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
 	{
@@ -898,7 +887,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Shoal : public Mutable, public Serializable, public Feederable
+class Shoal : public Mutable, public Serializable
 //----------------------------------------------------------------------
 {
 	class Hash
@@ -5392,6 +5381,26 @@ public:
 		return Mutable::visit(it);
 	}
 
+	virtual inline const Ptr eater_() const override
+	{
+		const Ptr over = static_<Shoal>(_members)->find_("eater");
+		if (!over->is_("0"))
+		{
+			return operate_(const_cast<Creature*>(this), over);
+		}
+		return Mutable::eater_();
+	}
+
+	virtual inline const Ptr feeder(const Ptr eater) const override
+	{
+		const Ptr over = static_<Shoal>(_members)->find_("feeder");
+		if (!over->is_("0"))
+		{
+			return operate_(const_cast<Creature*>(this), over, eater);
+		}
+		return Mutable::feeder(eater);
+	}
+
 	virtual inline const Ptr cats_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("cats");
@@ -5887,19 +5896,13 @@ private:
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
 		const Ptr iterable = Expression::evaluate_(flock->at_(1), local);
-		Feederable* const feederable = dynamic_<Feederable>(iterable);
-		if (feederable)
+		const Ptr eater = thing->eater_();
+		if (!eater->is_("0"))
 		{
-			static const std::vector<Ptr> NOTHING{ nothing_() };
-			const Ptr member = static_<Shoal>(thing->pub_())->find_(feederable->feeder(IteratorRef<std::vector<Ptr>>::mut_(NOTHING))->next_());
-			if (!member->is_("0"))
+			const Ptr feeder = iterable->feeder(eater);
+			if (!feeder->is_("0"))
 			{
-				Eaterable* const eaterable = dynamic_<Eaterable>(member);
-				if (eaterable)
-				{
-					return operate_(thing.get(), member, feederable->feeder(eaterable->eater_()));
-				}
-				return operate_(thing.get(), member, iterable->iterator_());
+				return thing->invoke(feeder);
 			}
 		}
 		return thing->invoke(iterable->iterator_());
@@ -5926,13 +5929,13 @@ private:
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
 		const Ptr member = static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local));
 		const Ptr iterable = Expression::evaluate_(flock->at_(2), local);
-		Feederable* const feederable = dynamic_<Feederable>(iterable);
-		if (feederable)
+		const Ptr eater = member->eater_();
+		if (!eater->is_("0"))
 		{
-			Eaterable* const eaterable = dynamic_<Eaterable>(member);
-			if (eaterable)
+			const Ptr feeder = iterable->feeder(eater);
+			if (!feeder->is_("0"))
 			{
-				return operate_(thing.get(), member, feederable->feeder(eaterable->eater_()));
+				return operate_(thing.get(), member, feeder);
 			}
 		}
 		return operate_(thing.get(), member, iterable->iterator_());
@@ -7909,14 +7912,6 @@ inline const Thing::Ptr Thing::stats_()
 }
 
 //======================================================================
-// class Eaterable
-//======================================================================
-
-//======================================================================
-// class Feederable
-//======================================================================
-
-//======================================================================
 // class Variadic
 //======================================================================
 
@@ -8069,16 +8064,6 @@ inline const Thing::Ptr Static::eater_() const
 inline const Thing::Ptr Method::with_name_(const Thing::Ptr thing, const Thing::Ptr name)
 {
 	return fin_(thing, static_<Shoal>(thing->pub_())->find_(name));
-}
-
-inline const Thing::Ptr Method::eater_() const
-{
-	Eaterable* const eaterable = dynamic_<Eaterable>(_member);
-	if (eaterable)
-	{
-		return eaterable->eater_();
-	}
-	return IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>());
 }
 
 //======================================================================
