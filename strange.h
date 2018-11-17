@@ -5290,12 +5290,13 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Fence : public Mutable
+class Fence : public Mutable, public Me<Fence>
 //----------------------------------------------------------------------
 {
 public:
 	inline Fence(const Ptr ptr)
 		: Mutable{}
+		, Me{}
 		, _fence{}
 		, _ptr{ ptr }
 	{
@@ -5309,7 +5310,7 @@ public:
 
 	static inline const Ptr mut_(const Ptr ptr)
 	{
-		return std::make_shared<Fence>(ptr);
+		return Me<Fence>::make_(ptr);
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -5319,7 +5320,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return IteratorPtr::mut_(mut_(_ptr));
+		return IteratorPtr::mut_(me_());
 	}
 
 	virtual inline const Ptr pub_() const override
