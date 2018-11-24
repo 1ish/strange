@@ -6756,11 +6756,16 @@ public:
 			case '#':
 			case '~':
 			case '.':
+			case '=':
 				token = char1;
 				if (char1 == char2)
 				{
 					second = true;
 					break;
+				}
+				if (char1 == '=')
+				{
+					return error_(token);
 				}
 				return punctuation_(token);
 			case '/':
@@ -7516,7 +7521,7 @@ private:
 				_next_();
 				_member_(statement, flock);
 			}
-			else if (symbol->is_("="))
+			else if (symbol->is_("=="))
 			{
 				flk->push_back_(sym_("same"));
 				_next_();
@@ -7851,7 +7856,7 @@ private:
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
 		Flock* const flk = static_<Flock>(flock);
-		if (tag == 'P' && symbol->is_(":"))
+		if (tag == 'P' && symbol->is_(":="))
 		{
 			flk->update_(flk->size_() - 2, sym_("update"));
 			_next_();
