@@ -7395,35 +7395,22 @@ private:
 		const Ptr symbol = tok->at_(3);
 		Flock* const flk = static_<Flock>(flock);
 		Reference* const smt = static_<Reference>(statement);
-		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
-		{
-			log_("parser error: thing literal");
-		}
-		else if (tag == 'N') // name
-		{
-			log_("parser error: thing name");
-		}
-		else if (tag == 'P') // punctuation
+		if (tag == 'P') // punctuation
 		{
 			if (symbol->is_("."))
 			{
 				_next_();
 				_dot_(flock, statement);
 			}
-			else if (symbol->is_("(")) //TODO block
+			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
-				_next_();
-				_list_(flock, symbol, sym_(")"));
+				flk->push_back_(parse_());
+				smt->set_(sym_("invoke_iterable"));
 			}
 			else if (symbol->is_("[")) // flock
 			{
 				_next_();
 				_list_(flock, symbol, sym_("]"));
-			}
-			else if (symbol->is_("{")) //TODO shoal
-			{
-				_next_();
-				smt->set_(sym_("invoke_iterable"));
 			}
 			else if (symbol->is_("<<")) // iterator
 			{
@@ -7616,6 +7603,11 @@ private:
 		{
 			log_("tokenizer error");
 		}
+		else
+		{
+			flk->push_back_(parse_());
+			smt->set_(sym_("invoke_iterable"));
+		}
 		return true; // continue
 	}
 
@@ -7667,35 +7659,23 @@ private:
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
-		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
-		{
-			smt->set_(sym_("method"));
-		}
-		else if (tag == 'N') // name
-		{
-			smt->set_(sym_("method"));
-		}
-		else if (tag == 'P') // punctuation
+		Flock* const flk = static_<Flock>(flock);
+		if (tag == 'P') // punctuation
 		{
 			if (symbol->is_("."))
 			{
 				_next_();
 				_dot_(statement, flock);
 			}
-			else if (symbol->is_("(")) //TODO block
+			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
-				_next_();
-				_list_(flock, symbol, sym_(")"));
+				flk->push_back_(parse_());
+				smt->set_(sym_("operate_iterable"));
 			}
 			else if (symbol->is_("[")) // flock
 			{
 				_next_();
 				_list_(flock, symbol, sym_("]"));
-			}
-			else if (symbol->is_("{")) //TODO shoal
-			{
-				_next_();
-				smt->set_(sym_("operate_iterable"));
 			}
 			else if (symbol->is_("<<")) // iterator
 			{
@@ -7711,7 +7691,11 @@ private:
 		else if (tag == 'E') // error
 		{
 			log_("tokenizer error");
-			smt->set_(sym_("method"));
+		}
+		else
+		{
+			flk->push_back_(parse_());
+			smt->set_(sym_("operate_iterable"));
 		}
 	}
 
