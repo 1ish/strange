@@ -6174,13 +6174,13 @@ private:
 		const int64_t size_1 = flock->size_() - 1;
 		for (int64_t i = 0; i < size_1; ++i)
 		{
-			const Ptr param = Expression::evaluate_(flock->at_(i), local);
-			action->set_(0);
 			const Ptr next = it->next_();
 			if (next->is_("."))
 			{
 				break;
 			}
+			const Ptr param = Expression::evaluate_(flock->at_(i), local);
+			action->set_(0);
 			shoal->update_(param, next);
 		}
 		return Expression::evaluate_(flock->at_(size_1), local);
@@ -7164,7 +7164,16 @@ public:
 				else if (tag == 'N') // name
 				{
 					_next_();
-					if (symbol->is_("break") || symbol->is_("continue"))
+					if (symbol->is_("lambda"))
+					{
+						if (_statement_(flock))
+						{
+							flk->push_back_(parse_());
+							result = Expression::fin_(symbol, flock);
+							continue;
+						}
+					}
+					else if (symbol->is_("break") || symbol->is_("continue"))
 					{
 						if (_statement_(flock))
 						{
@@ -7241,14 +7250,6 @@ public:
 							{
 								log_("parser error: invalid for");
 							}
-							continue;
-						}
-					}
-					else if (symbol->is_("block"))
-					{
-						if (_statement_(flock))
-						{
-							result = Expression::fin_(symbol, flock);
 							continue;
 						}
 					}
@@ -7329,12 +7330,11 @@ public:
 					{
 						_next_();
 					}
-					else if (symbol->is_("(")) // lambda
+					else if (symbol->is_("(")) // block
 					{
 						_next_();
 						_list_(flock, symbol, sym_(")"));
-						flk->push_back_(parse_());
-						result = Expression::fin_(sym_("lambda"), flock);
+						result = Expression::fin_(sym_("block"), flock);
 					}
 					else if (symbol->is_("[")) // flock
 					{
