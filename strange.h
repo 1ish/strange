@@ -8,7 +8,7 @@
 #include <vector>
 #include <unordered_set>
 #include <unordered_map>
-#include <deque>
+//#include <deque>
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -7021,8 +7021,8 @@ public:
 		: Mutable{}
 		, _tokenizer{ tokenizer }
 		, _flock{ Flock::mut_() }
-		, _deque{}
-		, _ahead{ 0 }
+		//, _deque{}
+		, _next{ _tokenizer->next_() }
 	{
 	}
 
@@ -7350,20 +7350,24 @@ public:
 private:
 	const Ptr _tokenizer;
 	Ptr _flock;
-	std::deque<Ptr> _deque;
-	int64_t _ahead;
+	//std::deque<Ptr> _deque;
+	Ptr _next;
 
-	inline const Ptr _token_(const int64_t lookahead = 0)
+	inline const Ptr _token_(/*const int64_t lookahead = 0*/)
 	{
+		/*
 		while (int64_t(_deque.size()) <= lookahead)
 		{
 			_deque.push_back(_tokenizer->next_());
 		}
 		return _deque.at(lookahead);
+		*/
+		return _next;
 	}
 
 	inline const void _next_()
 	{
+		/*
 		if (_deque.empty())
 		{
 			_tokenizer->next_();
@@ -7372,6 +7376,8 @@ private:
 		{
 			_deque.pop_front();
 		}
+		*/
+		_next = _tokenizer->next_();
 	}
 
 	static inline void _wrap_(const Ptr thing, const Ptr flock)
