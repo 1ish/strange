@@ -5866,7 +5866,7 @@ public:
 		}
 		else if (statement->is_("break"))
 		{
-			if (size == 0)
+			if (size <= 1)
 			{
 				return fin_(&Expression::_break_, flock);
 			}
@@ -5874,7 +5874,7 @@ public:
 		}
 		else if (statement->is_("continue"))
 		{
-			if (size == 0)
+			if (size <= 1)
 			{
 				return fin_(&Expression::_continue_, flock);
 			}
@@ -5900,17 +5900,9 @@ public:
 			}
 			log_("if expression of wrong size");
 		}
-		else if (statement->is_("question"))
-		{
-			if (size == 2 || size == 3)
-			{
-				return fin_(&Expression::_question_, flock);
-			}
-			log_("question expression of wrong size");
-		}
 		else if (statement->is_("while"))
 		{
-			if (size >= 1)
+			if (size == 2)
 			{
 				return fin_(&Expression::_while_, flock);
 			}
@@ -5918,7 +5910,7 @@ public:
 		}
 		else if (statement->is_("do"))
 		{
-			if (size >= 1)
+			if (size == 2)
 			{
 				return fin_(&Expression::_do_, flock);
 			}
@@ -5926,7 +5918,7 @@ public:
 		}
 		else if (statement->is_("for"))
 		{
-			if (size >= 3)
+			if (size == 4)
 			{
 				return fin_(&Expression::_for_, flock);
 			}
@@ -6183,7 +6175,9 @@ private:
 			action->set_(0);
 			shoal->update_(param, next);
 		}
-		return Expression::evaluate_(flock->at_(size_1), local);
+		const Ptr result = Expression::evaluate_(flock->at_(size_1), local);
+		action->set_(0);
+		return result;
 	}
 
 	inline const Ptr _flock_(const Ptr local) const
@@ -6204,27 +6198,40 @@ private:
 	inline const Ptr _break_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		Ptr result = nothing_();
+		if (flock->size_())
+		{
+			result = Expression::evaluate_(flock->at_(0), local);
+		}
 		action->set_('b');
-		return nothing_();
+		return result;
 	}
 
 	inline const Ptr _continue_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		Ptr result = nothing_();
+		if (flock->size_())
+		{
+			result = Expression::evaluate_(flock->at_(0), local);
+		}
 		action->set_('c');
-		return nothing_();
+		return result;
 	}
 
 	inline const Ptr _return_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
-		action->set_('r');
 		Flock* const flock = static_<Flock>(_flock);
+		Ptr result = nothing_();
 		if (flock->size_())
 		{
-			return Expression::evaluate_(flock->at_(0), local);
+			result = Expression::evaluate_(flock->at_(0), local);
 		}
-		return nothing_();
+		action->set_('r');
+		return result;
 	}
 
 	inline const Ptr _block_(const Ptr local) const
@@ -6232,15 +6239,16 @@ private:
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
+		Ptr result = nothing_();
 		for (int64_t i = 0; i < size; ++i)
 		{
-			const Ptr result = Expression::evaluate_(flock->at_(i), local);
+			result = Expression::evaluate_(flock->at_(i), local);
 			if (action->get_())
 			{
-				return result;
+				break;
 			}
 		}
-		return nothing_();
+		return result;
 	}
 
 	inline const Ptr _if_(const Ptr local) const
@@ -6253,66 +6261,23 @@ private:
 			if (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
 			{
 				action->set_(0);
-				const Ptr result = Expression::evaluate_(flock->at_(1), local);
-				if (action->get_())
-				{
-					return result;
-				}
+				return Expression::evaluate_(flock->at_(1), local);
 			}
 		}
-		else if (size == 3)
+		else
 		{
 			if (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
 			{
 				action->set_(0);
-				const Ptr result = Expression::evaluate_(flock->at_(1), local);
-				if (action->get_())
-				{
-					return result;
-				}
+				return Expression::evaluate_(flock->at_(1), local);
 			}
 			else
 			{
 				action->set_(0);
-				const Ptr result = Expression::evaluate_(flock->at_(2), local);
-				if (action->get_())
-				{
-					return result;
-				}
+				return Expression::evaluate_(flock->at_(2), local);
 			}
 		}
-		return nothing_();
-	}
-
-	inline const Ptr _question_(const Ptr local) const
-	{
-		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
-		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		if (size == 2)
-		{
-			if (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
-			{
-				const Ptr result = Expression::evaluate_(flock->at_(1), local);
-				action->set_(0);
-				return result;
-			}
-		}
-		else if (size == 3)
-		{
-			if (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
-			{
-				const Ptr result = Expression::evaluate_(flock->at_(1), local);
-				action->set_(0);
-				return result;
-			}
-			else
-			{
-				const Ptr result = Expression::evaluate_(flock->at_(2), local);
-				action->set_(0);
-				return result;
-			}
-		}
+		action->set_(0);
 		return nothing_();
 	}
 
@@ -6320,102 +6285,95 @@ private:
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		if (size >= 1)
+		Ptr result = nothing_();
+		while (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
 		{
-			while (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
+			action->set_(0);
+			result = Expression::evaluate_(flock->at_(1), local);
+			const Byte::D a = action->get_();
+			if (a)
 			{
-				action->set_(0);
-				for (int64_t i = 1; i < size; ++i)
+				if (a == 'r')
 				{
-					const Ptr result = Expression::evaluate_(flock->at_(i), local);
-					const Byte::D a = action->get_();
-					if (a)
-					{
-						if (a == 'r')
-						{
-							return result;
-						}
-						action->set_(0);
-						if (a == 'c')
-						{
-							break;
-						}
-						return result;
-					}
+					return result;
+				}
+				action->set_(0);
+				if (a == 'c')
+				{
+					continue;
+				}
+				if (a == 'b')
+				{
+					break;
 				}
 			}
 		}
-		return nothing_();
+		action->set_(0);
+		return result;
 	}
 
 	inline const Ptr _do_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		if (size >= 1)
+		Ptr result = nothing_();
+		do
 		{
-			do
-			{
-				action->set_(0);
-				for (int64_t i = 0; i < size - 1; ++i)
-				{
-					const Ptr result = Expression::evaluate_(flock->at_(i), local);
-					const Byte::D a = action->get_();
-					if (a)
-					{
-						if (a == 'r')
-						{
-							return result;
-						}
-						action->set_(0);
-						if (a == 'c')
-						{
-							break;
-						}
-						return result;
-					}
-				}
-			} while (!Expression::evaluate_(flock->at_(size - 1), local)->is_("0"));
 			action->set_(0);
-		}
-		return nothing_();
+			result = Expression::evaluate_(flock->at_(1), local);
+			const Byte::D a = action->get_();
+			if (a)
+			{
+				if (a == 'r')
+				{
+					return result;
+				}
+				action->set_(0);
+				if (a == 'c')
+				{
+					continue;
+				}
+				if (a == 'b')
+				{
+					break;
+				}
+			}
+		} while (!Expression::evaluate_(flock->at_(0), local)->is_("0"));
+		action->set_(0);
+		return result;
 	}
 
 	inline const Ptr _for_(const Ptr local) const
 	{
 		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		if (size >= 3)
+		Ptr result = nothing_();
+		for (Expression::evaluate_(flock->at_(0), local);
+			!Expression::evaluate_(flock->at_(1), local)->is_("0");
+			Expression::evaluate_(flock->at_(2), local))
 		{
-			for (Expression::evaluate_(flock->at_(0), local);
-				!Expression::evaluate_(flock->at_(1), local)->is_("0");
-				Expression::evaluate_(flock->at_(2), local))
+			action->set_(0);
+			result = Expression::evaluate_(flock->at_(3), local);
+			const Byte::D a = action->get_();
+			if (a)
 			{
-				action->set_(0);
-				for (int64_t i = 3; i < size; ++i)
+				if (a == 'r')
 				{
-					const Ptr result = Expression::evaluate_(flock->at_(i), local);
-					const Byte::D a = action->get_();
-					if (a)
-					{
-						if (a == 'r')
-						{
-							return result;
-						}
-						action->set_(0);
-						if (a == 'c')
-						{
-							break;
-						}
-						return result;
-					}
+					return result;
+				}
+				action->set_(0);
+				if (a == 'c')
+				{
+					continue;
+				}
+				if (a == 'b')
+				{
+					break;
 				}
 			}
 		}
-		return nothing_();
+		action->set_(0);
+		return result;
 	}
 
 	class Iterator : public Mutable
@@ -7173,23 +7131,7 @@ public:
 							continue;
 						}
 					}
-					else if (symbol->is_("break") || symbol->is_("continue"))
-					{
-						if (_statement_(flock))
-						{
-							const int64_t size = flk->size_();
-							if (size == 0)
-							{
-								result = Expression::fin_(symbol, flock);
-							}
-							else
-							{
-								log_("parser error: invalid break/continue");
-							}
-							continue;
-						}
-					}
-					else if (symbol->is_("return"))
+					else if (symbol->is_("break") || symbol->is_("continue") || symbol->is_("return"))
 					{
 						if (_statement_(flock))
 						{
@@ -7200,12 +7142,12 @@ public:
 							}
 							else
 							{
-								log_("parser error: invalid return");
+								log_("parser error: invalid break/continue/return");
 							}
 							continue;
 						}
 					}
-					else if (symbol->is_("if") || symbol->is_("question"))
+					else if (symbol->is_("if"))
 					{
 						if (_statement_(flock))
 						{
@@ -7216,7 +7158,7 @@ public:
 							}
 							else
 							{
-								log_("parser error: invalid if/question");
+								log_("parser error: invalid if");
 							}
 							continue;
 						}
@@ -7226,8 +7168,9 @@ public:
 						if (_statement_(flock))
 						{
 							const int64_t size = flk->size_();
-							if (size >= 1)
+							if (size == 1)
 							{
+								flk->push_back_(parse_());
 								result = Expression::fin_(symbol, flock);
 							}
 							else
@@ -7242,8 +7185,9 @@ public:
 						if (_statement_(flock))
 						{
 							const int64_t size = flk->size_();
-							if (size >= 3)
+							if (size == 3)
 							{
+								flk->push_back_(parse_());
 								result = Expression::fin_(symbol, flock);
 							}
 							else
