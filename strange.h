@@ -7286,7 +7286,7 @@ public:
 						_list_(flock, symbol, sym_("]"));
 						result = Expression::fin_(sym_("flock"), flock);
 					}
-					else if (symbol->is_("{")) //TODO shoal? block?
+					else if (symbol->is_("{")) //TODO shoal
 					{
 						_next_();
 					}
@@ -7303,7 +7303,7 @@ public:
 			else // not first
 			{
 				if (tag == 'P' &&
-					(symbol->is_("}") || symbol->is_(")") || symbol->is_("]") || symbol->is_(">>") || symbol->is_(",")))
+					(symbol->is_(")") || symbol->is_("]") || symbol->is_("}") || symbol->is_(">>") || symbol->is_(",")))
 				{
 					cont = false;
 				}
@@ -7410,24 +7410,28 @@ private:
 				_next_();
 				_dot_(flock, statement);
 			}
-			else if (symbol->is_("["))
+			else if (symbol->is_("(")) //TODO block
+			{
+				_next_();
+				_list_(flock, symbol, sym_(")"));
+			}
+			else if (symbol->is_("[")) // flock
 			{
 				_next_();
 				_list_(flock, symbol, sym_("]"));
 			}
-			else if (symbol->is_("("))
+			else if (symbol->is_("{")) //TODO shoal
 			{
 				_next_();
-				_list_(flock, symbol, sym_(")"));
-				smt->set_(sym_("invoke_iterator"));
-			}
-			else if (symbol->is_("{"))
-			{
-				_next_();
-				//TODO _list_(flock, symbol, sym_("}"));
 				smt->set_(sym_("invoke_iterable"));
 			}
-			else if (symbol->is_("]") || symbol->is_(")") || symbol->is_("}") || symbol->is_(","))
+			else if (symbol->is_("<<")) // iterator
+			{
+				_next_();
+				_list_(flock, symbol, sym_(">>"));
+				smt->set_(sym_("invoke_iterator"));
+			}
+			else if (symbol->is_(")") || symbol->is_("]") || symbol->is_("}") || symbol->is_(">>") || symbol->is_(","))
 			{
 				return false; // break
 			}
@@ -7678,22 +7682,26 @@ private:
 				_next_();
 				_dot_(statement, flock);
 			}
-			else if (symbol->is_("["))
+			else if (symbol->is_("(")) //TODO block
+			{
+				_next_();
+				_list_(flock, symbol, sym_(")"));
+			}
+			else if (symbol->is_("[")) // flock
 			{
 				_next_();
 				_list_(flock, symbol, sym_("]"));
 			}
-			else if (symbol->is_("<<"))
+			else if (symbol->is_("{")) //TODO shoal
+			{
+				_next_();
+				smt->set_(sym_("operate_iterable"));
+			}
+			else if (symbol->is_("<<")) // iterator
 			{
 				_next_();
 				_list_(flock, symbol, sym_(">>"));
 				smt->set_(sym_("operate_iterator"));
-			}
-			else if (symbol->is_("{"))
-			{
-				_next_();
-				//TODO _list_(flock, symbol, sym_("}"));
-				smt->set_(sym_("operate_iterable"));
 			}
 			else
 			{
@@ -7776,6 +7784,11 @@ private:
 					}
 					if (symbol->is_(","))
 					{
+						if (close->is_(">>"))
+						{
+							log_("parser error: open expecting single item then close");
+							return;
+						}
 						_next_();
 					}
 					else
