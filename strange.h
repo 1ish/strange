@@ -5506,7 +5506,7 @@ public:
 
 	inline const Ptr get(const Ptr ignore)
 	{
-		return UInt8::fin_(get_());
+		return Int8::fin_(get_());
 	}
 
 	inline const int peek_()
@@ -5516,7 +5516,7 @@ public:
 
 	inline const Ptr peek(const Ptr ignore)
 	{
-		return UInt8::fin_(peek_());
+		return Int8::fin_(peek_());
 	}
 
 private:
@@ -6356,7 +6356,7 @@ private:
 	inline const Ptr _lambda_(const Ptr local) const
 	{
 		Shoal* const shoal = static_<Shoal>(local);
-		UInt8* const action = static_<UInt8>(shoal->find_("@"));
+		Int8* const action = static_<Int8>(shoal->find_("@"));
 		const Ptr it = shoal->find_("&");
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size_1 = flock->size_() - 1;
@@ -6378,7 +6378,7 @@ private:
 
 	inline const Ptr _flock_(const Ptr local) const
 	{
-		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		const Ptr result = Flock::mut_();
@@ -6393,7 +6393,7 @@ private:
 
 	inline const Ptr _break_(const Ptr local) const
 	{
-		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		if (flock->size_())
@@ -6406,7 +6406,7 @@ private:
 
 	inline const Ptr _continue_(const Ptr local) const
 	{
-		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		if (flock->size_())
@@ -6419,7 +6419,7 @@ private:
 
 	inline const Ptr _return_(const Ptr local) const
 	{
-		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		if (flock->size_())
@@ -6432,7 +6432,7 @@ private:
 
 	inline const Ptr _block_(const Ptr local) const
 	{
-		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		Ptr result = nothing_();
@@ -6449,7 +6449,7 @@ private:
 
 	inline const Ptr _if_(const Ptr local) const
 	{
-		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		if (size == 2)
@@ -6479,14 +6479,14 @@ private:
 
 	inline const Ptr _while_(const Ptr local) const
 	{
-		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		while (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
 		{
 			action->set_(0);
 			result = Expression::evaluate_(flock->at_(1), local);
-			const UInt8::D a = action->get_();
+			const Int8::D a = action->get_();
 			if (a)
 			{
 				if (a == 'r')
@@ -6510,14 +6510,14 @@ private:
 
 	inline const Ptr _do_(const Ptr local) const
 	{
-		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		do
 		{
 			action->set_(0);
 			result = Expression::evaluate_(flock->at_(1), local);
-			const UInt8::D a = action->get_();
+			const Int8::D a = action->get_();
 			if (a)
 			{
 				if (a == 'r')
@@ -6541,7 +6541,7 @@ private:
 
 	inline const Ptr _for_(const Ptr local) const
 	{
-		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		for (Expression::evaluate_(flock->at_(0), local);
@@ -6550,7 +6550,7 @@ private:
 		{
 			action->set_(0);
 			result = Expression::evaluate_(flock->at_(3), local);
-			const UInt8::D a = action->get_();
+			const Int8::D a = action->get_();
 			if (a)
 			{
 				if (a == 'r')
@@ -6668,7 +6668,7 @@ protected:
 			loc->insert_("|", creature->me_());
 		}
 		loc->insert_("&", it);
-		loc->insert_("@", UInt8::mut_());
+		loc->insert_("@", Int8::mut_());
 		return static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
 
@@ -6809,14 +6809,14 @@ public:
 				}
 				else
 				{
-					UInt8* const byte1 = dynamic_<UInt8>(_river->invoke_("get"));
+					Int8* const byte1 = dynamic_<Int8>(_river->invoke_("get"));
 					if (!byte1)
 					{
 						break;
 					}
 					char1 = byte1->get_();
 				}
-				UInt8* const byte2 = eof_() ? 0 : dynamic_<UInt8>(_river->invoke_("peek"));
+				Int8* const byte2 = eof_() ? 0 : dynamic_<Int8>(_river->invoke_("peek"));
 				char2 = byte2 ? byte2->get_() : 0;
 			}
 
@@ -7124,7 +7124,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(UInt8::fin_('S'));
+		flk->push_back_(Int8::fin_('S'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
@@ -7152,7 +7152,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(UInt8::fin_('L'));
+		flk->push_back_(Int8::fin_('L'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
@@ -7164,7 +7164,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(UInt8::fin_('N'));
+		flk->push_back_(Int8::fin_('N'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
@@ -7175,7 +7175,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(UInt8::fin_('I'));
+		flk->push_back_(Int8::fin_('I'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		const Ptr symbol = sym_(s);
@@ -7190,7 +7190,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(UInt8::fin_('F'));
+		flk->push_back_(Int8::fin_('F'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		const Ptr symbol = sym_(s);
@@ -7205,7 +7205,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(UInt8::fin_('P'));
+		flk->push_back_(Int8::fin_('P'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
@@ -7216,7 +7216,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(UInt8::fin_('E'));
+		flk->push_back_(Int8::fin_('E'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
@@ -7312,7 +7312,7 @@ public:
 				break;
 			}
 			Flock* const tok = static_<Flock>(token);
-			const char tag = char(static_<UInt8>(tok->at_(0))->get_());
+			const char tag = static_<Int8>(tok->at_(0))->get_();
 			const int64_t x = static_<Int64>(tok->at_(1))->get_();
 			const int64_t y = static_<Int64>(tok->at_(2))->get_();
 			const Ptr symbol = tok->at_(3);
@@ -7607,7 +7607,7 @@ private:
 			return false; // break
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
+		const char tag = static_<Int8>(tok->at_(0))->get_();
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7838,7 +7838,7 @@ private:
 			return;
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
+		const char tag = static_<Int8>(tok->at_(0))->get_();
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7873,7 +7873,7 @@ private:
 			return;
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
+		const char tag = static_<Int8>(tok->at_(0))->get_();
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7925,7 +7925,7 @@ private:
 			return false; // not a statement
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
+		const char tag = static_<Int8>(tok->at_(0))->get_();
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7949,7 +7949,7 @@ private:
 				return;
 			}
 			Flock* const tok = static_<Flock>(token);
-			const char tag = char(static_<UInt8>(tok->at_(0))->get_());
+			const char tag = static_<Int8>(tok->at_(0))->get_();
 			const int64_t x = static_<Int64>(tok->at_(1))->get_();
 			const int64_t y = static_<Int64>(tok->at_(2))->get_();
 			const Ptr symbol = tok->at_(3);
@@ -8023,7 +8023,7 @@ private:
 			return false; // break
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
+		const char tag = static_<Int8>(tok->at_(0))->get_();
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -8058,7 +8058,7 @@ private:
 			return false; // break
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
+		const char tag = static_<Int8>(tok->at_(0))->get_();
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -8273,6 +8273,7 @@ inline const Thing::Ptr Thing::stats_()
 		shoal->update_("strange::Reference", Static::fin_(&Reference::stat));
 		shoal->update_("strange::Lake", Static::fin_(&Lake::stat));
 		shoal->update_("strange::Bit", Static::fin_(&Bit::stat));
+		shoal->update_("strange::Int8", Static::fin_(&Int8::stat));
 		shoal->update_("strange::UInt8", Static::fin_(&UInt8::stat));
 		shoal->update_("strange::Int16", Static::fin_(&Int16::stat));
 		shoal->update_("strange::Int32", Static::fin_(&Int32::stat));
@@ -9049,6 +9050,10 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 
 //======================================================================
 // class Bit
+//======================================================================
+
+//======================================================================
+// class Int8
 //======================================================================
 
 //======================================================================
