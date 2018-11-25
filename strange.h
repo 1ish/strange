@@ -6353,7 +6353,7 @@ private:
 		return operate_(thing.get(), member, iterable->iterator_());
 	}
 
-	inline const Ptr _lambda_(const Ptr local) const
+	inline const Ptr _lambda_(const Ptr local) const //TODO return closure/Expression/Function?
 	{
 		Shoal* const shoal = static_<Shoal>(local);
 		Int8* const action = static_<Int8>(shoal->find_("@"));
