@@ -40,6 +40,7 @@ namespace strange
 	class Lake;
 	class Number;
 	class Bit;
+	class Int8;
 	class UInt8;
 	class Int16;
 	class Int32;
@@ -3336,6 +3337,201 @@ public:
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Bit");
+			herd->insert_("strange::Number");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+	virtual inline int64_t to_int64_() const override
+	{
+		return int64_t(get_());
+	}
+
+	virtual inline void from_int64_(const int64_t int64) override
+	{
+		set_(D(int64));
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_()));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			set_(D(std::stoll(symbol->symbol_())));
+		}
+	}
+};
+
+//----------------------------------------------------------------------
+class Int8 : public Number, public Data<int8_t>
+//----------------------------------------------------------------------
+{
+public:
+	using D = int8_t;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return make_<Int8>(data);
+	}
+
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
+	}
+
+	static inline const Ptr lak_(const Ptr lake)
+	{
+		const Ptr ptr = mut_();
+		static_<Int8>(ptr)->from_lake_(lake);
+		return ptr;
+	}
+
+	static inline const Ptr lak(const Ptr it)
+	{
+		return lak_(it->next_());
+	}
+
+	static inline const Ptr riv_(const Ptr river)
+	{
+		const Ptr ptr = mut_();
+		static_<Int8>(ptr)->from_river_(river);
+		return ptr;
+	}
+
+	static inline const Ptr riv(const Ptr it)
+	{
+		return riv_(it->next_());
+	}
+
+	static inline const Ptr rwl_(const Ptr river)
+	{
+		const Ptr ptr = mut_();
+		static_<Int8>(ptr)->from_river_with_links_(river);
+		return ptr;
+	}
+
+	static inline const Ptr rwl(const Ptr it)
+	{
+		return rwl_(it->next_());
+	}
+
+	inline Int8(const D& data)
+		: Number{}
+		, Data{ data }
+	{
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Number::pub_()->copy_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<Int8>::fin_(&Int8::to_lake));
+			shoal->update_("from_lake", Member<Int8>::fin_(&Int8::from_lake));
+			shoal->update_("to_river", Const<Int8>::fin_(&Int8::to_river));
+			shoal->update_("from_river", Member<Int8>::fin_(&Int8::from_river));
+			shoal->update_("stat", Static::fin_(&Int8::stat));
+			shoal->update_("mut", Static::fin_(&Int8::mut));
+			shoal->update_("fin", Static::fin_(&Int8::fin));
+			shoal->update_("lak", Static::fin_(&Int8::lak, "lake"));
+			shoal->update_("riv", Static::fin_(&Int8::riv, "river"));
+			shoal->update_("rwl", Static::fin_(&Int8::rwl, "river"));
+			shoal->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	static inline const Ptr stat_()
+	{
+		static const Ptr STAT = []()
+		{
+			const Ptr stat = Shoal::mut_();
+			Shoal* const shoal = static_<Shoal>(stat);
+			shoal->update_("stat", Static::fin_(&Int8::stat));
+			shoal->update_("mut", Static::fin_(&Int8::mut));
+			shoal->update_("fin", Static::fin_(&Int8::fin));
+			shoal->update_("lak", Static::fin_(&Int8::lak, "lake"));
+			shoal->update_("riv", Static::fin_(&Int8::riv, "river"));
+			shoal->update_("rwl", Static::fin_(&Int8::rwl, "river"));
+			shoal->finalize_();
+			return stat;
+		}();
+		return STAT;
+	}
+
+	static inline const Ptr stat(const Ptr ignore)
+	{
+		return stat_();
+	}
+
+	virtual inline const Ptr to_lake_() const override
+	{
+		const Ptr lake = Lake::mut_(std::string(1, get_()));
+		if (finalized_())
+		{
+			lake->finalize_();
+		}
+		return lake;
+	}
+
+	virtual inline void from_lake_(const Ptr lake) override
+	{
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
+		{
+			log_("Int8::from_lake_ passed wrong type of thing");
+			return;
+		}
+		set_(lak->get_()[0]);
+		if (lak->finalized_())
+		{
+			finalize_();
+		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Int8");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::Int8");
 			herd->insert_("strange::Number");
 			herd->insert_("strange::Data");
 			herd->insert_("strange::Thing");
