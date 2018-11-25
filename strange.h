@@ -1398,6 +1398,18 @@ public:
 	{
 	}
 
+	inline Flock(const Ptr it)
+		: Mutable{}
+		, Serializable{}
+		, _vector{}
+		, _frozen{ false }
+	{
+		for (Ptr n = it->next_(); !n->is_("."); n = it->next_())
+		{
+			_vector.push_back(n);
+		}
+	}
+
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
@@ -1507,9 +1519,9 @@ public:
 		return make_<Flock>();
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr it)
 	{
-		return mut_();
+		return make_<Flock>(it);
 	}
 
 	static inline const Ptr lak_(const Ptr lake)
@@ -6060,6 +6072,14 @@ public:
 		{
 			return fin_(&Expression::_flock_, flock);
 		}
+		else if (statement->is_("flock_iterator"))
+		{
+			if (size == 1)
+			{
+				return fin_(&Expression::_flock_iterator_, flock);
+			}
+			log_("flock_iterator expression of wrong size");
+		}
 		else if (statement->is_("break"))
 		{
 			if (size <= 1)
@@ -6389,6 +6409,15 @@ private:
 			action->set_(0);
 		}
 		return result;
+	}
+
+	inline const Ptr _flock_iterator_(const Ptr local) const
+	{
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		const Ptr it = Expression::evaluate_(flock->at_(0), local);
+		action->set_(0);
+		return Flock::mut(it);
 	}
 
 	inline const Ptr _break_(const Ptr local) const
@@ -7502,9 +7531,15 @@ public:
 					{
 						_next_();
 					}
-					else if (symbol->is_("<<")) //TODO iterator - for each?
+					else if (symbol->is_("<<")) // iterator
 					{
 						_next_();
+						_list_(flock, symbol, sym_(">>"));
+						result = Expression::fin_(sym_("flock_iterator"), flock);
+					}
+					else
+					{
+						log_("parser error: unexpected initial punctuation");
 					}
 				}
 				else if (tag == 'E') // error
