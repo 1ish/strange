@@ -40,7 +40,7 @@ namespace strange
 	class Lake;
 	class Number;
 	class Bit;
-	class Byte;
+	class UInt8;
 	class Int16;
 	class Int32;
 	class Int64;
@@ -3371,15 +3371,15 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Byte : public Number, public Data<unsigned char>
+class UInt8 : public Number, public Data<uint8_t>
 //----------------------------------------------------------------------
 {
 public:
-	using D = unsigned char;
+	using D = uint8_t;
 
 	static inline const Ptr mut_(const D& data = D())
 	{
-		return make_<Byte>(data);
+		return make_<UInt8>(data);
 	}
 
 	static inline const Ptr mut(const Ptr ignore)
@@ -3402,7 +3402,7 @@ public:
 	static inline const Ptr lak_(const Ptr lake)
 	{
 		const Ptr ptr = mut_();
-		static_<Byte>(ptr)->from_lake_(lake);
+		static_<UInt8>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
@@ -3414,7 +3414,7 @@ public:
 	static inline const Ptr riv_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Byte>(ptr)->from_river_(river);
+		static_<UInt8>(ptr)->from_river_(river);
 		return ptr;
 	}
 
@@ -3426,7 +3426,7 @@ public:
 	static inline const Ptr rwl_(const Ptr river)
 	{
 		const Ptr ptr = mut_();
-		static_<Byte>(ptr)->from_river_with_links_(river);
+		static_<UInt8>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
@@ -3435,7 +3435,7 @@ public:
 		return rwl_(it->next_());
 	}
 
-	inline Byte(const D& data)
+	inline UInt8(const D& data)
 		: Number{}
 		, Data{ data }
 	{
@@ -3452,16 +3452,16 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
-			shoal->update_("to_lake", Const<Byte>::fin_(&Byte::to_lake));
-			shoal->update_("from_lake", Member<Byte>::fin_(&Byte::from_lake));
-			shoal->update_("to_river", Const<Byte>::fin_(&Byte::to_river));
-			shoal->update_("from_river", Member<Byte>::fin_(&Byte::from_river));
-			shoal->update_("stat", Static::fin_(&Byte::stat));
-			shoal->update_("mut", Static::fin_(&Byte::mut));
-			shoal->update_("fin", Static::fin_(&Byte::fin));
-			shoal->update_("lak", Static::fin_(&Byte::lak, "lake"));
-			shoal->update_("riv", Static::fin_(&Byte::riv, "river"));
-			shoal->update_("rwl", Static::fin_(&Byte::rwl, "river"));
+			shoal->update_("to_lake", Const<UInt8>::fin_(&UInt8::to_lake));
+			shoal->update_("from_lake", Member<UInt8>::fin_(&UInt8::from_lake));
+			shoal->update_("to_river", Const<UInt8>::fin_(&UInt8::to_river));
+			shoal->update_("from_river", Member<UInt8>::fin_(&UInt8::from_river));
+			shoal->update_("stat", Static::fin_(&UInt8::stat));
+			shoal->update_("mut", Static::fin_(&UInt8::mut));
+			shoal->update_("fin", Static::fin_(&UInt8::fin));
+			shoal->update_("lak", Static::fin_(&UInt8::lak, "lake"));
+			shoal->update_("riv", Static::fin_(&UInt8::riv, "river"));
+			shoal->update_("rwl", Static::fin_(&UInt8::rwl, "river"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -3474,12 +3474,12 @@ public:
 		{
 			const Ptr stat = Shoal::mut_();
 			Shoal* const shoal = static_<Shoal>(stat);
-			shoal->update_("stat", Static::fin_(&Byte::stat));
-			shoal->update_("mut", Static::fin_(&Byte::mut));
-			shoal->update_("fin", Static::fin_(&Byte::fin));
-			shoal->update_("lak", Static::fin_(&Byte::lak, "lake"));
-			shoal->update_("riv", Static::fin_(&Byte::riv, "river"));
-			shoal->update_("rwl", Static::fin_(&Byte::rwl, "river"));
+			shoal->update_("stat", Static::fin_(&UInt8::stat));
+			shoal->update_("mut", Static::fin_(&UInt8::mut));
+			shoal->update_("fin", Static::fin_(&UInt8::fin));
+			shoal->update_("lak", Static::fin_(&UInt8::lak, "lake"));
+			shoal->update_("riv", Static::fin_(&UInt8::riv, "river"));
+			shoal->update_("rwl", Static::fin_(&UInt8::rwl, "river"));
 			shoal->finalize_();
 			return stat;
 		}();
@@ -3506,10 +3506,10 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("Byte::from_lake_ passed wrong type of thing");
+			log_("UInt8::from_lake_ passed wrong type of thing");
 			return;
 		}
-		set_(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0])));
+		set_(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0])));
 		if (lak->finalized_())
 		{
 			finalize_();
@@ -3518,7 +3518,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Byte");
+		static const Ptr TYPE = sym_("strange::UInt8");
 		return TYPE;
 	}
 
@@ -3530,7 +3530,7 @@ public:
 			Herd* const herd = static_<Herd>(cats);
 			herd->insert_("strange::Mutable");
 			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Byte");
+			herd->insert_("strange::UInt8");
 			herd->insert_("strange::Number");
 			herd->insert_("strange::Data");
 			herd->insert_("strange::Thing");
@@ -3708,8 +3708,8 @@ public:
 			return;
 		}
 		set_(
-			uint16_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
-			uint16_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8
+			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
+			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8
 			);
 		if (lak->finalized_())
 		{
@@ -3911,10 +3911,10 @@ public:
 			return;
 		}
 		set_(
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8 |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[2]))) << 16 |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[3]))) << 24
 			);
 		if (lak->finalized_())
 		{
@@ -4120,14 +4120,14 @@ public:
 			return;
 		}
 		set_(
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[4]))) << 32 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[5]))) << 40 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[6]))) << 48 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[7]))) << 56
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[2]))) << 16 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[3]))) << 24 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[4]))) << 32 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[5]))) << 40 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[6]))) << 48 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[7]))) << 56
 			);
 		if (lak->finalized_())
 		{
@@ -4330,10 +4330,10 @@ public:
 			return;
 		}
 		const uint32_t i =
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24;
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8 |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[2]))) << 16 |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[3]))) << 24;
 		set_(*reinterpret_cast<const float*>(&i));
 		if (lak->finalized_())
 		{
@@ -4540,14 +4540,14 @@ public:
 			return;
 		}
 		const uint64_t i =
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[4]))) << 32 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[5]))) << 40 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[6]))) << 48 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[7]))) << 56;
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[2]))) << 16 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[3]))) << 24 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[4]))) << 32 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[5]))) << 40 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[6]))) << 48 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[7]))) << 56;
 		set_(*reinterpret_cast<const double*>(&i));
 		if (lak->finalized_())
 		{
@@ -4759,15 +4759,15 @@ public:
 			return;
 		}
 		const uint32_t r =
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24;
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8 |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[2]))) << 16 |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[3]))) << 24;
 		const uint32_t i =
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[4]))) |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[5]))) << 8 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[6]))) << 16 |
-			uint32_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[7]))) << 24;
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[4]))) |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[5]))) << 8 |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[6]))) << 16 |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[7]))) << 24;
 		set_(D(*reinterpret_cast<const float*>(&r), *reinterpret_cast<const float*>(&i)));
 		if (lak->finalized_())
 		{
@@ -5012,23 +5012,23 @@ public:
 			return;
 		}
 		const uint64_t r =
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[0]))) |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[1]))) << 8 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[2]))) << 16 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[3]))) << 24 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[4]))) << 32 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[5]))) << 40 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[6]))) << 48 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[7]))) << 56;
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[2]))) << 16 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[3]))) << 24 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[4]))) << 32 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[5]))) << 40 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[6]))) << 48 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[7]))) << 56;
 		const uint64_t i =
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[8]))) |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[9]))) << 8 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[10]))) << 16 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[11]))) << 24 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[12]))) << 32 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[13]))) << 40 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[14]))) << 48 |
-			uint64_t(*reinterpret_cast<const unsigned char*>(&(lak->get_()[15]))) << 56;
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[8]))) |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[9]))) << 8 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[10]))) << 16 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[11]))) << 24 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[12]))) << 32 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[13]))) << 40 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[14]))) << 48 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[15]))) << 56;
 		set_(D(*reinterpret_cast<const double*>(&r), *reinterpret_cast<const double*>(&i)));
 		if (lak->finalized_())
 		{
@@ -5310,7 +5310,7 @@ public:
 
 	inline const Ptr get(const Ptr ignore)
 	{
-		return Byte::fin_(get_());
+		return UInt8::fin_(get_());
 	}
 
 	inline const int peek_()
@@ -5320,7 +5320,7 @@ public:
 
 	inline const Ptr peek(const Ptr ignore)
 	{
-		return Byte::fin_(peek_());
+		return UInt8::fin_(peek_());
 	}
 
 private:
@@ -6160,7 +6160,7 @@ private:
 	inline const Ptr _lambda_(const Ptr local) const
 	{
 		Shoal* const shoal = static_<Shoal>(local);
-		Byte* const action = static_<Byte>(shoal->find_("@"));
+		UInt8* const action = static_<UInt8>(shoal->find_("@"));
 		const Ptr it = shoal->find_("&");
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size_1 = flock->size_() - 1;
@@ -6182,7 +6182,7 @@ private:
 
 	inline const Ptr _flock_(const Ptr local) const
 	{
-		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		const Ptr result = Flock::mut_();
@@ -6197,7 +6197,7 @@ private:
 
 	inline const Ptr _break_(const Ptr local) const
 	{
-		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		if (flock->size_())
@@ -6210,7 +6210,7 @@ private:
 
 	inline const Ptr _continue_(const Ptr local) const
 	{
-		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		if (flock->size_())
@@ -6223,7 +6223,7 @@ private:
 
 	inline const Ptr _return_(const Ptr local) const
 	{
-		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		if (flock->size_())
@@ -6236,7 +6236,7 @@ private:
 
 	inline const Ptr _block_(const Ptr local) const
 	{
-		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		Ptr result = nothing_();
@@ -6253,7 +6253,7 @@ private:
 
 	inline const Ptr _if_(const Ptr local) const
 	{
-		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		if (size == 2)
@@ -6283,14 +6283,14 @@ private:
 
 	inline const Ptr _while_(const Ptr local) const
 	{
-		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		while (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
 		{
 			action->set_(0);
 			result = Expression::evaluate_(flock->at_(1), local);
-			const Byte::D a = action->get_();
+			const UInt8::D a = action->get_();
 			if (a)
 			{
 				if (a == 'r')
@@ -6314,14 +6314,14 @@ private:
 
 	inline const Ptr _do_(const Ptr local) const
 	{
-		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		do
 		{
 			action->set_(0);
 			result = Expression::evaluate_(flock->at_(1), local);
-			const Byte::D a = action->get_();
+			const UInt8::D a = action->get_();
 			if (a)
 			{
 				if (a == 'r')
@@ -6345,7 +6345,7 @@ private:
 
 	inline const Ptr _for_(const Ptr local) const
 	{
-		Byte* const action = static_<Byte>(static_<Shoal>(local)->find_("@"));
+		UInt8* const action = static_<UInt8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		for (Expression::evaluate_(flock->at_(0), local);
@@ -6354,7 +6354,7 @@ private:
 		{
 			action->set_(0);
 			result = Expression::evaluate_(flock->at_(3), local);
-			const Byte::D a = action->get_();
+			const UInt8::D a = action->get_();
 			if (a)
 			{
 				if (a == 'r')
@@ -6472,7 +6472,7 @@ protected:
 			loc->insert_("|", creature->me_());
 		}
 		loc->insert_("&", it);
-		loc->insert_("@", Byte::mut_());
+		loc->insert_("@", UInt8::mut_());
 		return static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
 
@@ -6613,14 +6613,14 @@ public:
 				}
 				else
 				{
-					Byte* const byte1 = dynamic_<Byte>(_river->invoke_("get"));
+					UInt8* const byte1 = dynamic_<UInt8>(_river->invoke_("get"));
 					if (!byte1)
 					{
 						break;
 					}
 					char1 = byte1->get_();
 				}
-				Byte* const byte2 = eof_() ? 0 : dynamic_<Byte>(_river->invoke_("peek"));
+				UInt8* const byte2 = eof_() ? 0 : dynamic_<UInt8>(_river->invoke_("peek"));
 				char2 = byte2 ? byte2->get_() : 0;
 			}
 
@@ -6928,7 +6928,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(Byte::fin_('S'));
+		flk->push_back_(UInt8::fin_('S'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
@@ -6956,7 +6956,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(Byte::fin_('L'));
+		flk->push_back_(UInt8::fin_('L'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
@@ -6968,7 +6968,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(Byte::fin_('N'));
+		flk->push_back_(UInt8::fin_('N'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
@@ -6979,7 +6979,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(Byte::fin_('I'));
+		flk->push_back_(UInt8::fin_('I'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		const Ptr symbol = sym_(s);
@@ -6994,7 +6994,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(Byte::fin_('F'));
+		flk->push_back_(UInt8::fin_('F'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		const Ptr symbol = sym_(s);
@@ -7009,7 +7009,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(Byte::fin_('P'));
+		flk->push_back_(UInt8::fin_('P'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
@@ -7020,7 +7020,7 @@ private:
 	{
 		const Ptr flock = Flock::mut_();
 		Flock* const flk = static_<Flock>(flock);
-		flk->push_back_(Byte::fin_('E'));
+		flk->push_back_(UInt8::fin_('E'));
 		flk->push_back_(Int64::fin_(_x));
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
@@ -7116,7 +7116,7 @@ public:
 				break;
 			}
 			Flock* const tok = static_<Flock>(token);
-			const char tag = char(static_<Byte>(tok->at_(0))->get_());
+			const char tag = char(static_<UInt8>(tok->at_(0))->get_());
 			const int64_t x = static_<Int64>(tok->at_(1))->get_();
 			const int64_t y = static_<Int64>(tok->at_(2))->get_();
 			const Ptr symbol = tok->at_(3);
@@ -7411,7 +7411,7 @@ private:
 			return false; // break
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7642,7 +7642,7 @@ private:
 			return;
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7677,7 +7677,7 @@ private:
 			return;
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7729,7 +7729,7 @@ private:
 			return false; // not a statement
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7753,7 +7753,7 @@ private:
 				return;
 			}
 			Flock* const tok = static_<Flock>(token);
-			const char tag = char(static_<Byte>(tok->at_(0))->get_());
+			const char tag = char(static_<UInt8>(tok->at_(0))->get_());
 			const int64_t x = static_<Int64>(tok->at_(1))->get_();
 			const int64_t y = static_<Int64>(tok->at_(2))->get_();
 			const Ptr symbol = tok->at_(3);
@@ -7827,7 +7827,7 @@ private:
 			return false; // break
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7862,7 +7862,7 @@ private:
 			return false; // break
 		}
 		Flock* const tok = static_<Flock>(token);
-		const char tag = char(static_<Byte>(tok->at_(0))->get_());
+		const char tag = char(static_<UInt8>(tok->at_(0))->get_());
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -8077,7 +8077,7 @@ inline const Thing::Ptr Thing::stats_()
 		shoal->update_("strange::Reference", Static::fin_(&Reference::stat));
 		shoal->update_("strange::Lake", Static::fin_(&Lake::stat));
 		shoal->update_("strange::Bit", Static::fin_(&Bit::stat));
-		shoal->update_("strange::Byte", Static::fin_(&Byte::stat));
+		shoal->update_("strange::UInt8", Static::fin_(&UInt8::stat));
 		shoal->update_("strange::Int16", Static::fin_(&Int16::stat));
 		shoal->update_("strange::Int32", Static::fin_(&Int32::stat));
 		shoal->update_("strange::Int64", Static::fin_(&Int64::stat));
@@ -8856,7 +8856,7 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 //======================================================================
 
 //======================================================================
-// class Byte
+// class UInt8
 //======================================================================
 
 //======================================================================
