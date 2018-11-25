@@ -6624,6 +6624,12 @@ public:
 				char2 = byte2 ? byte2->get_() : 0;
 			}
 
+			if (_different)
+			{
+				_different = false;
+				return punctuation_("==");
+			}
+
 			if (char1 == '\n')
 			{
 				_x = 0;
@@ -6677,6 +6683,11 @@ public:
 			}
 			else if (second)
 			{
+				if (char1 == '=' && char2 == '=' && token == "!")
+				{
+					_different = true;
+					return punctuation_(token);
+				}
 				return punctuation_(token + char1);
 			}
 			else if (singlequote && char1 == '\'')
@@ -6726,7 +6737,7 @@ public:
 			case ':':
 			case '<':
 			case '>':
-				if (char1 == char2)
+				if (char1 == char2 && char1 != '!')
 				{
 					second = true;
 				}
@@ -6750,7 +6761,6 @@ public:
 				return punctuation_(token);
 			case '&':
 			case '|':
-			case '?':
 			case '^':
 			case '$':
 			case '#':
@@ -6902,6 +6912,7 @@ private:
 	int64_t _y = 0;
 	bool _dot = false;
 	char _exp = 0;
+	bool _different = false;
 
 	static inline const bool alpha_(const char c)
 	{
