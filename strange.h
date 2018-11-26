@@ -5472,7 +5472,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Lake>(read_(int16))->get_();
-		return call_(type, "riv", me_());
+		return call_(type, "$riv", me_());
 	}
 
 	inline const Ptr pop_front(const Ptr ignore)
@@ -5484,7 +5484,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Lake>(read_(int16))->get_();
-		return call_(type, "rwl", me_());
+		return call_(type, "$rwl", me_());
 	}
 
 	inline const Ptr read_(const int64_t length)
@@ -6080,6 +6080,18 @@ public:
 			}
 			log_("flock_iterator expression of wrong size");
 		}
+		else if (statement->is_("shoal"))
+		{
+			if (size % 2 == 0)
+			{
+				return fin_(&Expression::_shoal_, flock);
+			}
+			log_("shoal expression of odd size");
+		}
+		else if (statement->is_("herd"))
+		{
+			return fin_(&Expression::_herd_, flock);
+		}
 		else if (statement->is_("break"))
 		{
 			if (size <= 1)
@@ -6418,6 +6430,44 @@ private:
 		const Ptr it = Expression::evaluate_(flock->at_(0), local);
 		action->set_(0);
 		return Flock::mut(it);
+	}
+
+	inline const Ptr _shoal_(const Ptr local) const
+	{
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		const Ptr result = Shoal::mut_();
+		Shoal* const res = static_<Shoal>(result);
+		Ptr key;
+		for (int64_t i = 0; i < size; ++i)
+		{
+			if (i % 2 == 0)
+			{
+				key = Expression::evaluate_(flock->at_(i), local);
+			}
+			else
+			{
+				res->update_(key, Expression::evaluate_(flock->at_(i), local));
+			}
+			action->set_(0);
+		}
+		return result;
+	}
+
+	inline const Ptr _herd_(const Ptr local) const
+	{
+		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size = flock->size_();
+		const Ptr result = Herd::mut_();
+		Herd* const res = static_<Herd>(result);
+		for (int64_t i = 0; i < size; ++i)
+		{
+			res->insert_(Expression::evaluate_(flock->at_(i), local));
+			action->set_(0);
+		}
+		return result;
 	}
 
 	inline const Ptr _break_(const Ptr local) const
@@ -7342,6 +7392,11 @@ public:
 			}
 			Flock* const tok = static_<Flock>(token);
 			const char tag = static_<Int8>(tok->at_(0))->get_();
+			if (tag == 'E') // error
+			{
+				log_("tokenizer error");
+				return Expression::fin_();
+			}
 			const int64_t x = static_<Int64>(tok->at_(1))->get_();
 			const int64_t y = static_<Int64>(tok->at_(2))->get_();
 			const Ptr symbol = tok->at_(3);
@@ -7527,9 +7582,17 @@ public:
 						_list_(flock, symbol, sym_("]"));
 						result = Expression::fin_(sym_("flock"), flock);
 					}
-					else if (symbol->is_("{")) //TODO shoal
+					else if (symbol->is_("{")) // shoal or herd
 					{
 						_next_();
+						if (_map_(flock))
+						{
+							result = Expression::fin_(sym_("shoal"), flock);
+						}
+						else
+						{
+							result = Expression::fin_(sym_("herd"), flock);
+						}
 					}
 					else if (symbol->is_("<<")) // iterator
 					{
@@ -7542,10 +7605,6 @@ public:
 						log_("parser error: unexpected initial punctuation");
 					}
 				}
-				else if (tag == 'E') // error
-				{
-					log_("tokenizer error");
-				}
 			}
 			else // not first
 			{
@@ -7553,10 +7612,6 @@ public:
 					(symbol->is_(")") || symbol->is_("]") || symbol->is_("}") || symbol->is_(">>") || symbol->is_(",")))
 				{
 					cont = false;
-				}
-				else if (tag == 'E') // error
-				{
-					log_("tokenizer error");
 				}
 				else
 				{
@@ -7643,6 +7698,11 @@ private:
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = static_<Int8>(tok->at_(0))->get_();
+		if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+			return false; // break
+		}
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7852,10 +7912,6 @@ private:
 				log_("parser error: thing punctuation");
 			}
 		}
-		else if (tag == 'E') // error
-		{
-			log_("tokenizer error");
-		}
 		else
 		{
 			flk->push_back_(parse_());
@@ -7874,6 +7930,11 @@ private:
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = static_<Int8>(tok->at_(0))->get_();
+		if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+			return;
+		}
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7892,10 +7953,6 @@ private:
 		{
 			log_("parser error: dot punctuation");
 		}
-		else if (tag == 'E') // error
-		{
-			log_("tokenizer error");
-		}
 	}
 
 	inline void _member_(const Ptr statement, const Ptr flock)
@@ -7909,6 +7966,11 @@ private:
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = static_<Int8>(tok->at_(0))->get_();
+		if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+			return;
+		}
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7941,10 +8003,6 @@ private:
 				smt->set_(sym_("method"));
 			}
 		}
-		else if (tag == 'E') // error
-		{
-			log_("tokenizer error");
-		}
 		else
 		{
 			flk->push_back_(parse_());
@@ -7961,6 +8019,11 @@ private:
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = static_<Int8>(tok->at_(0))->get_();
+		if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+			return false;
+		}
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -7985,6 +8048,11 @@ private:
 			}
 			Flock* const tok = static_<Flock>(token);
 			const char tag = static_<Int8>(tok->at_(0))->get_();
+			if (tag == 'E') // error
+			{
+				log_("tokenizer error");
+				return;
+			}
 			const int64_t x = static_<Int64>(tok->at_(1))->get_();
 			const int64_t y = static_<Int64>(tok->at_(2))->get_();
 			const Ptr symbol = tok->at_(3);
@@ -8003,11 +8071,6 @@ private:
 						log_("parser error: open followed immediately by ,");
 						return;
 					}
-				}
-				else if (tag == 'E') // error
-				{
-					log_("tokenizer error");
-					return;
 				}
 			}
 			else
@@ -8034,11 +8097,6 @@ private:
 						return;
 					}
 				}
-				else if (tag == 'E') // error
-				{
-					log_("tokenizer error");
-					return;
-				}
 				else
 				{
 					log_("parser error: open expecting , or close");
@@ -8047,6 +8105,147 @@ private:
 			}
 			flk->push_back_(parse_());
 		}
+	}
+
+	inline const bool _map_(const Ptr flock)
+	{
+		bool is_map = false;
+		bool not_map = false;
+		bool empty = false;
+		bool key = true;
+		bool punctuation = false;
+		for (bool first = true; true; first = false)
+		{
+			const Ptr token = _token_();
+			if (token->is_("."))
+			{
+				log_("parser error: { without }");
+				return is_map;
+			}
+			Flock* const tok = static_<Flock>(token);
+			const char tag = static_<Int8>(tok->at_(0))->get_();
+			if (tag == 'E') // error
+			{
+				log_("tokenizer error");
+				return is_map;
+			}
+			const int64_t x = static_<Int64>(tok->at_(1))->get_();
+			const int64_t y = static_<Int64>(tok->at_(2))->get_();
+			const Ptr symbol = tok->at_(3);
+			Flock* const flk = static_<Flock>(flock);
+			if (first)
+			{
+				if (tag == 'P') // punctuation
+				{
+					if (symbol->is_("}"))
+					{
+						_next_();
+						return is_map;
+					}
+					else if (symbol->is_(":"))
+					{
+						_next_();
+						empty = true;
+						continue;
+					}
+					else if (symbol->is_(","))
+					{
+						log_("parser error: { followed immediately by ,");
+						return false;
+					}
+				}
+			}
+			else if (empty)
+			{
+				if (tag == 'P' && symbol->is_("}"))
+				{
+					_next_();
+					return is_map;
+				}
+				log_("parser error: {: not followed immediately by }");
+				return false;
+			}
+			else if (key)
+			{
+				if (punctuation)
+				{
+					if (tag == 'P') // punctuation
+					{
+						if (symbol->is_("}"))
+						{
+							if (is_map)
+							{
+								log_("parser error: last key with missing value");
+								return false;
+							}
+							_next_();
+							return is_map;
+						}
+						else if (symbol->is_(":"))
+						{
+							if (not_map)
+							{
+								log_("parser error: key with unexpected value");
+								return false;
+							}
+							_next_();
+							is_map = true;
+							key = false;
+							punctuation = false;
+							continue;
+						}
+						else if (symbol->is_(","))
+						{
+							if (is_map)
+							{
+								log_("parser error: key with missing value");
+								return false;
+							}
+							_next_();
+							not_map = true;
+							key = false;
+							punctuation = false;
+							continue;
+						}
+						else
+						{
+							log_("parser error: key followed by unexpected punctuation");
+							return false;
+						}
+					}
+					log_("parser error: key not followed by punctuation");
+					return false;
+				}
+			}
+			else if (punctuation)
+			{
+				if (tag == 'P') // punctuation
+				{
+					if (symbol->is_("}"))
+					{
+						_next_();
+						return is_map;
+					}
+					else if (symbol->is_(","))
+					{
+						_next_();
+						key = true;
+						punctuation = false;
+						continue;
+					}
+					else
+					{
+						log_("parser error: value followed by unexpected punctuation");
+						return false;
+					}
+				}
+				log_("parser error: value not followed by punctuation");
+				return false;
+			}
+			flk->push_back_(parse_());
+			punctuation = true;
+		}
+		return is_map;
 	}
 
 	inline const bool _at_(const Ptr flock)
@@ -8059,6 +8258,11 @@ private:
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = static_<Int8>(tok->at_(0))->get_();
+		if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+			return true; // continue
+		}
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -8076,11 +8280,6 @@ private:
 			log_("parser error: at punctuation");
 			return true; // continue
 		}
-		else if (tag == 'E') // error
-		{
-			log_("tokenizer error");
-			return true; // continue
-		}
 		_next_();
 		return _update_(flock); // continue/break
 	}
@@ -8094,6 +8293,11 @@ private:
 		}
 		Flock* const tok = static_<Flock>(token);
 		const char tag = static_<Int8>(tok->at_(0))->get_();
+		if (tag == 'E') // error
+		{
+			log_("tokenizer error");
+			return false; // break
+		}
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
@@ -8197,7 +8401,7 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("~finalize", Member<Thing>::fin_(&Thing::finalize));
 		shoal->update_("#finalized", Const<Thing>::fin_(&Thing::finalized));
 		shoal->update_("~freeze", Member<Thing>::fin_(&Thing::freeze));
-		shoal->update_("$call", Static::fin_(&Thing::call, ".."));
+		shoal->update_("$call", Static::fin_(&Thing::call));
 		shoal->update_("$stats", Static::fin_(&Thing::stats));
 		shoal->update_("$stat", Static::fin_(&Thing::stat));
 		shoal->update_("$boolean", Static::fin_(&Thing::boolean, "thing"));
@@ -8221,7 +8425,7 @@ inline const Thing::Ptr Thing::stat_()
 	{
 		const Ptr stat = Shoal::mut_();
 		Shoal* const shoal = static_<Shoal>(stat);
-		shoal->update_("$call", Static::fin_(&Thing::call, ".."));
+		shoal->update_("$call", Static::fin_(&Thing::call));
 		shoal->update_("$stats", Static::fin_(&Thing::stats));
 		shoal->update_("$stat", Static::fin_(&Thing::stat));
 		shoal->update_("$boolean", Static::fin_(&Thing::boolean, "thing"));
