@@ -7012,11 +7012,7 @@ public:
 			case ':':
 			case '<':
 			case '>':
-				if (char1 == char2 && char1 != '!')
-				{
-					second = true;
-				}
-				if (char2 == '=')
+				if ((char1 != '!' && char1 == char2) || char2 == '=')
 				{
 					second = true;
 				}
@@ -7047,10 +7043,6 @@ public:
 				{
 					second = true;
 					break;
-				}
-				if (char1 == '=')
-				{
-					return error_(token);
 				}
 				return punctuation_(token);
 			case '/':
