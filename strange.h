@@ -8349,7 +8349,7 @@ private:
 			else
 			{
 				const Ptr new_scope = scope->copy_();
-				static_<Flock>(new_scope)->push_back_(Expression::immediate_(add_scope));
+				static_<Flock>(new_scope)->push_back_(Expression::immediate_(add_scope)); //TODO make scope a recursive shoal?
 				flk->push_back_(parse_(new_scope));
 			}
 			punctuation = true;
