@@ -5996,161 +5996,169 @@ public:
 	static inline const Ptr fin_(const Ptr statement, const Ptr flock)
 	{
 		const int64_t size = static_<Flock>(flock)->size_();
-		if (statement->is_("local"))
+		if (statement->is_("local_"))
 		{
 			if (size == 0)
 			{
 				return fin_(&Expression::_local_, flock);
 			}
-			log_("local expression of wrong size");
+			log_("local_ expression of wrong size");
 		}
-		else if (statement->is_("thing"))
+		else if (statement->is_("thing_"))
 		{
 			if (size == 1)
 			{
 				return fin_(&Expression::_thing_, flock);
 			}
-			log_("thing expression of wrong size");
+			log_("thing_ expression of wrong size");
 		}
-		else if (statement->is_("invoke"))
+		else if (statement->is_("invoke_"))
 		{
 			if (size >= 2)
 			{
 				return fin_(&Expression::_invoke_, flock);
 			}
-			log_("invoke expression of wrong size");
+			log_("invoke_ expression of wrong size");
 		}
-		else if (statement->is_("invoke_iterator"))
+		else if (statement->is_("invoke_iterator_"))
 		{
 			if (size == 2)
 			{
 				return fin_(&Expression::_invoke_iterator_, flock);
 			}
-			log_("invoke_iterator expression of wrong size");
+			log_("invoke_iterator_ expression of wrong size");
 		}
-		else if (statement->is_("invoke_iterable"))
+		else if (statement->is_("invoke_iterable_"))
 		{
 			if (size == 2)
 			{
 				return fin_(&Expression::_invoke_iterable_, flock);
 			}
-			log_("invoke_iterable expression of wrong size");
+			log_("invoke_iterable_ expression of wrong size");
 		}
-		else if (statement->is_("method"))
+		else if (statement->is_("method_"))
 		{
 			if (size == 2)
 			{
 				return fin_(&Expression::_method_, flock);
 			}
-			log_("method expression of wrong size");
+			log_("method_ expression of wrong size");
 		}
-		else if (statement->is_("operate_iterator"))
+		else if (statement->is_("operate_iterator_"))
 		{
 			if (size == 3)
 			{
 				return fin_(&Expression::_operate_iterator_, flock);
 			}
-			log_("operate_iterator expression of wrong size");
+			log_("operate_iterator_ expression of wrong size");
 		}
-		else if (statement->is_("operate_iterable"))
+		else if (statement->is_("operate_iterable_"))
 		{
 			if (size == 3)
 			{
 				return fin_(&Expression::_operate_iterable_, flock);
 			}
-			log_("operate_iterable expression of wrong size");
+			log_("operate_iterable_ expression of wrong size");
 		}
-		else if (statement->is_("lambda"))
+		else if (statement->is_("lambda_"))
 		{
 			if (size >= 1)
 			{
 				return fin_(&Expression::_lambda_, flock);
 			}
-			log_("lambda expression of wrong size");
+			log_("lambda_ expression of wrong size");
 		}
-		else if (statement->is_("flock"))
+		else if (statement->is_("regional_"))
+		{
+			if (size >= 1)
+			{
+				return fin_(&Expression::_regional_, flock);
+			}
+			log_("regional_ expression of wrong size");
+		}
+		else if (statement->is_("flock_"))
 		{
 			return fin_(&Expression::_flock_, flock);
 		}
-		else if (statement->is_("flock_iterator"))
+		else if (statement->is_("flock_iterator_"))
 		{
 			if (size == 1)
 			{
 				return fin_(&Expression::_flock_iterator_, flock);
 			}
-			log_("flock_iterator expression of wrong size");
+			log_("flock_iterator_ expression of wrong size");
 		}
-		else if (statement->is_("shoal"))
+		else if (statement->is_("shoal_"))
 		{
 			if (size % 2 == 0)
 			{
 				return fin_(&Expression::_shoal_, flock);
 			}
-			log_("shoal expression of odd size");
+			log_("shoal_ expression of odd size");
 		}
-		else if (statement->is_("herd"))
+		else if (statement->is_("herd_"))
 		{
 			return fin_(&Expression::_herd_, flock);
 		}
-		else if (statement->is_("break"))
+		else if (statement->is_("break_"))
 		{
 			if (size <= 1)
 			{
 				return fin_(&Expression::_break_, flock);
 			}
-			log_("break expression of wrong size");
+			log_("break_ expression of wrong size");
 		}
-		else if (statement->is_("continue"))
+		else if (statement->is_("continue_"))
 		{
 			if (size <= 1)
 			{
 				return fin_(&Expression::_continue_, flock);
 			}
-			log_("continue expression of wrong size");
+			log_("continue_ expression of wrong size");
 		}
-		else if (statement->is_("return"))
+		else if (statement->is_("return_"))
 		{
 			if (size <= 1)
 			{
 				return fin_(&Expression::_return_, flock);
 			}
-			log_("return expression of wrong size");
+			log_("return_ expression of wrong size");
 		}
-		else if (statement->is_("block"))
+		else if (statement->is_("block_"))
 		{
 			return fin_(&Expression::_block_, flock);
 		}
-		else if (statement->is_("if"))
+		else if (statement->is_("if_"))
 		{
 			if (size == 2 || size == 3)
 			{
 				return fin_(&Expression::_if_, flock);
 			}
-			log_("if expression of wrong size");
+			log_("if_ expression of wrong size");
 		}
-		else if (statement->is_("while"))
+		else if (statement->is_("while_"))
 		{
 			if (size == 2)
 			{
 				return fin_(&Expression::_while_, flock);
 			}
-			log_("while expression of wrong size");
+			log_("while_ expression of wrong size");
 		}
-		else if (statement->is_("do"))
+		else if (statement->is_("do_"))
 		{
 			if (size == 2)
 			{
 				return fin_(&Expression::_do_, flock);
 			}
-			log_("do expression of wrong size");
+			log_("do_ expression of wrong size");
 		}
-		else if (statement->is_("for"))
+		else if (statement->is_("for_"))
 		{
 			if (size == 4)
 			{
 				return fin_(&Expression::_for_, flock);
 			}
-			log_("for expression of wrong size");
+			log_("for_ expression of wrong size");
 		}
 		else if (!statement->is_("0"))
 		{
@@ -6386,6 +6394,29 @@ private:
 	}
 
 	inline const Ptr _lambda_(const Ptr local) const //TODO return closure/Expression/Function?
+	{
+		Shoal* const shoal = static_<Shoal>(local);
+		Int8* const action = static_<Int8>(shoal->find_("@"));
+		const Ptr it = shoal->find_("&");
+		Flock* const flock = static_<Flock>(_flock);
+		const int64_t size_1 = flock->size_() - 1;
+		for (int64_t i = 0; i < size_1; ++i)
+		{
+			const Ptr next = it->next_();
+			if (next->is_("."))
+			{
+				break;
+			}
+			const Ptr param = Expression::evaluate_(flock->at_(i), local);
+			action->set_(0);
+			shoal->update_(param, next);
+		}
+		const Ptr result = Expression::evaluate_(flock->at_(size_1), local);
+		action->set_(0);
+		return result;
+	}
+
+	inline const Ptr _regional_(const Ptr local) const
 	{
 		Shoal* const shoal = static_<Shoal>(local);
 		Int8* const action = static_<Int8>(shoal->find_("@"));
@@ -7394,9 +7425,9 @@ public:
 			const Ptr symbol = tok->at_(3);
 			const Ptr flock = Flock::mut_();
 			Flock* const flk = static_<Flock>(flock);
-			static const Ptr local = sym_("local");
-			static const Ptr thing = sym_("thing");
-			static const Ptr invoke = sym_("invoke");
+			static const Ptr local = sym_("local_");
+			static const Ptr thing = sym_("thing_");
+			static const Ptr invoke = sym_("invoke_");
 			static const Ptr at = sym_("at");
 			const Ptr statement = Reference::mut_(invoke);
 			Reference* const smt = static_<Reference>(statement);
@@ -7410,7 +7441,7 @@ public:
 				else if (tag == 'N') // name
 				{
 					_next_();
-					if (symbol->is_("lambda"))
+					if (symbol->is_("lambda_"))
 					{
 						if (_statement_(scope, flock))
 						{
@@ -7419,7 +7450,16 @@ public:
 							continue;
 						}
 					}
-					else if (symbol->is_("break") || symbol->is_("continue") || symbol->is_("return"))
+					else if (symbol->is_("regional_"))
+					{
+						if (_statement_(scope, flock))
+						{
+							flk->push_back_(parse_(scope));
+							result = Expression::fin_(symbol, flock);
+							continue;
+						}
+					}
+					else if (symbol->is_("break_") || symbol->is_("continue_") || symbol->is_("return_"))
 					{
 						if (_statement_(scope, flock))
 						{
@@ -7430,12 +7470,12 @@ public:
 							}
 							else
 							{
-								log_("parser error: invalid break/continue/return");
+								log_("parser error: invalid break_/continue_/return_");
 							}
 							continue;
 						}
 					}
-					else if (symbol->is_("if"))
+					else if (symbol->is_("if_"))
 					{
 						if (_statement_(scope, flock))
 						{
@@ -7446,12 +7486,12 @@ public:
 							}
 							else
 							{
-								log_("parser error: invalid if");
+								log_("parser error: invalid if_");
 							}
 							continue;
 						}
 					}
-					else if (symbol->is_("while") || symbol->is_("do"))
+					else if (symbol->is_("while_") || symbol->is_("do_"))
 					{
 						if (_statement_(scope, flock))
 						{
@@ -7463,12 +7503,12 @@ public:
 							}
 							else
 							{
-								log_("parser error: invalid while/do");
+								log_("parser error: invalid while_/do_");
 							}
 							continue;
 						}
 					}
-					else if (symbol->is_("for"))
+					else if (symbol->is_("for_"))
 					{
 						if (_statement_(scope, flock))
 						{
@@ -7480,7 +7520,7 @@ public:
 							}
 							else
 							{
-								log_("parser error: invalid for");
+								log_("parser error: invalid for_");
 							}
 							continue;
 						}
@@ -7566,31 +7606,31 @@ public:
 					{
 						_next_();
 						_list_(scope, flock, symbol, sym_(")"));
-						result = Expression::fin_(sym_("block"), flock);
+						result = Expression::fin_(sym_("block_"), flock);
 					}
 					else if (symbol->is_("[")) // flock
 					{
 						_next_();
 						_list_(scope, flock, symbol, sym_("]"));
-						result = Expression::fin_(sym_("flock"), flock);
+						result = Expression::fin_(sym_("flock_"), flock);
 					}
 					else if (symbol->is_("{")) // shoal or herd
 					{
 						_next_();
 						if (_map_(scope, flock))
 						{
-							result = Expression::fin_(sym_("shoal"), flock);
+							result = Expression::fin_(sym_("shoal_"), flock);
 						}
 						else
 						{
-							result = Expression::fin_(sym_("herd"), flock);
+							result = Expression::fin_(sym_("herd_"), flock);
 						}
 					}
 					else if (symbol->is_("<<")) // iterator
 					{
 						_next_();
 						_list_(scope, flock, symbol, sym_(">>"));
-						result = Expression::fin_(sym_("flock_iterator"), flock);
+						result = Expression::fin_(sym_("flock_iterator_"), flock);
 					}
 					else
 					{
@@ -7678,7 +7718,7 @@ private:
 	{
 		const Ptr nested = Flock::mut_();
 		static_<Flock>(nested)->push_back_(thing);
-		static_<Flock>(flock)->push_back_(Expression::fin_(sym_("thing"), nested));
+		static_<Flock>(flock)->push_back_(Expression::fin_(sym_("thing_"), nested));
 	}
 
 	inline const bool _thing_(const Ptr scope, const Ptr statement, const Ptr flock)
@@ -7710,7 +7750,7 @@ private:
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
 				flk->push_back_(parse_(scope));
-				smt->set_(sym_("invoke_iterable"));
+				smt->set_(sym_("invoke_iterable_"));
 			}
 			else if (symbol->is_("[")) // flock
 			{
@@ -7721,7 +7761,7 @@ private:
 			{
 				_next_();
 				_list_(scope, flock, symbol, sym_(">>"));
-				smt->set_(sym_("invoke_iterator"));
+				smt->set_(sym_("invoke_iterator_"));
 			}
 			else if (symbol->is_(")") || symbol->is_("]") || symbol->is_("}") || symbol->is_(">>") || symbol->is_(","))
 			{
@@ -7907,7 +7947,7 @@ private:
 		else
 		{
 			flk->push_back_(parse_(scope));
-			smt->set_(sym_("invoke_iterable"));
+			smt->set_(sym_("invoke_iterable_"));
 		}
 		return true; // continue
 	}
@@ -7953,7 +7993,7 @@ private:
 		Reference* const smt = static_<Reference>(statement);
 		if (token->is_("."))
 		{
-			smt->set_(sym_("method"));
+			smt->set_(sym_("method_"));
 			return;
 		}
 		Flock* const tok = static_<Flock>(token);
@@ -7977,7 +8017,7 @@ private:
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
 				flk->push_back_(parse_(scope));
-				smt->set_(sym_("operate_iterable"));
+				smt->set_(sym_("operate_iterable_"));
 			}
 			else if (symbol->is_("[")) // flock
 			{
@@ -7988,17 +8028,17 @@ private:
 			{
 				_next_();
 				_list_(scope, flock, symbol, sym_(">>"));
-				smt->set_(sym_("operate_iterator"));
+				smt->set_(sym_("operate_iterator_"));
 			}
 			else
 			{
-				smt->set_(sym_("method"));
+				smt->set_(sym_("method_"));
 			}
 		}
 		else
 		{
 			flk->push_back_(parse_(scope));
-			smt->set_(sym_("operate_iterable"));
+			smt->set_(sym_("operate_iterable_"));
 		}
 	}
 
