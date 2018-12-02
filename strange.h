@@ -6189,7 +6189,9 @@ public:
 
 	static inline const Ptr immediate_(const Ptr expression)
 	{
-		return evaluate_(expression, Shoal::mut_());
+		const Ptr local = Shoal::mut_();
+		static_<Shoal>(local)->update_("@", Int8::mut_());
+		return evaluate_(expression, local);
 	}
 
 	static inline void generate_(const Ptr expression, const Ptr language, const Ptr river)
@@ -7465,6 +7467,7 @@ public:
 							{
 								flk->push_back_(parse_(scope));
 								result = Expression::fin_(symbol, flock);
+								//TODO register in the current scope
 							}
 							else
 							{
@@ -8346,7 +8349,7 @@ private:
 			else
 			{
 				const Ptr new_scope = scope->copy_();
-				static_<Flock>(new_scope)->push_back_(add_scope);
+				static_<Flock>(new_scope)->push_back_(Expression::immediate_(add_scope));
 				flk->push_back_(parse_(new_scope));
 			}
 			punctuation = true;
