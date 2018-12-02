@@ -6070,7 +6070,7 @@ public:
 		}
 		else if (statement->is_("regional_"))
 		{
-			if (size >= 1)
+			if (size % 2 == 1)
 			{
 				return fin_(&Expression::_regional_, flock);
 			}
@@ -6423,15 +6423,21 @@ private:
 		const Ptr it = shoal->find_("&");
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size_1 = flock->size_() - 1;
+		Ptr param;
 		for (int64_t i = 0; i < size_1; ++i)
 		{
+			if (i % 2 == 0)
+			{
+				param = flock->at_(i);
+				continue;
+			}
 			const Ptr next = it->next_();
 			if (next->is_("."))
 			{
-				break;
+				shoal->update_(param, Expression::evaluate_(flock->at_(i), local)); // default
+				action->set_(0);
+				continue;
 			}
-			const Ptr param = Expression::evaluate_(flock->at_(i), local);
-			action->set_(0);
 			shoal->update_(param, next);
 		}
 		const Ptr result = Expression::evaluate_(flock->at_(size_1), local);
@@ -7452,10 +7458,18 @@ public:
 					}
 					else if (symbol->is_("regional_"))
 					{
-						if (_statement_(scope, flock))
+						if (_statement_(scope, flock, true)) // parameters
 						{
-							flk->push_back_(parse_(scope));
-							result = Expression::fin_(symbol, flock);
+							const int64_t size = flk->size_();
+							if (size % 2 == 0)
+							{
+								flk->push_back_(parse_(scope));
+								result = Expression::fin_(symbol, flock);
+							}
+							else
+							{
+								log_("parser error: invalid regional_");
+							}
 							continue;
 						}
 					}
@@ -8042,7 +8056,7 @@ private:
 		}
 	}
 
-	inline const bool _statement_(const Ptr scope, const Ptr flock)
+	inline const bool _statement_(const Ptr scope, const Ptr flock, const bool parameters = false)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -8062,14 +8076,16 @@ private:
 		if (tag == 'P' && symbol->is_("("))
 		{
 			_next_();
-			_list_(scope, flock, symbol, sym_(")"));
+			_list_(scope, flock, symbol, sym_(")"), parameters);
 			return true; // is a statement
 		}
 		return false; // not a statement
 	}
 
-	inline void _list_(const Ptr scope, const Ptr flock, const Ptr open, const Ptr close)
+	inline void _list_(const Ptr scope, const Ptr flock, const Ptr open, const Ptr close, const bool parameters = false)
 	{
+		bool parameter = parameters;
+		bool punctuation = false;
 		for (bool first = true; true; first = false)
 		{
 			const Ptr token = _token_();
@@ -8105,16 +8121,20 @@ private:
 					}
 				}
 			}
-			else
+			else if (punctuation)
 			{
 				if (tag == 'P') // punctuation
 				{
 					if (symbol->is_(close))
 					{
 						_next_();
+						if (parameter)
+						{
+							flk->push_back_(Expression::fin_());
+						}
 						return;
 					}
-					if (symbol->is_(","))
+					else if (symbol->is_(","))
 					{
 						if (close->is_(">>"))
 						{
@@ -8122,6 +8142,26 @@ private:
 							return;
 						}
 						_next_();
+						if (parameter)
+						{
+							flk->push_back_(Expression::fin_());
+						}
+						else
+						{
+							parameter = parameters;
+						}
+					}
+					else if (parameter)
+					{
+						if (symbol->is_("="))
+						{
+							parameter = false;
+						}
+						else
+						{
+							log_("parser error: open expecting , = or close");
+							return;
+						}
 					}
 					else
 					{
@@ -8129,13 +8169,36 @@ private:
 						return;
 					}
 				}
+				else if (parameter)
+				{
+					log_("parser error: open expecting , = or close");
+					return;
+				}
 				else
 				{
 					log_("parser error: open expecting , or close");
 					return;
 				}
+				punctuation = false;
+				continue;
 			}
-			flk->push_back_(parse_(scope));
+			if (parameter)
+			{
+				if (tag == 'N') // name
+				{
+					flk->push_back_(symbol);
+				}
+				else
+				{
+					log_("parser error: open expecting parameter name");
+					return;
+				}
+			}
+			else
+			{
+				flk->push_back_(parse_(scope));
+			}
+			punctuation = true;
 		}
 	}
 
