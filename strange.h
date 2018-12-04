@@ -6426,6 +6426,7 @@ private:
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size_1 = flock->size_() - 1;
 		Ptr param;
+		Ptr value;
 		for (int64_t i = 0; i < size_1; ++i)
 		{
 			if (i % 2 == 0)
@@ -6433,14 +6434,16 @@ private:
 				param = flock->at_(i);
 				continue;
 			}
-			const Ptr next = it->next_();
-			if (next->is_("."))
+			value = it->next_();
+			if (value->is_("."))
 			{
-				shoal->update_(param, Expression::evaluate_(flock->at_(i), local)); // default
+				value = Expression::evaluate_(flock->at_(i), local); // default
 				action->set_(0);
-				continue;
 			}
-			shoal->update_(param, next);
+			if (!value->is_("0"))
+			{
+				shoal->update_(param, value);
+			}
 		}
 		const Ptr result = Expression::evaluate_(flock->at_(size_1), local);
 		action->set_(0);
