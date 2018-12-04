@@ -8223,6 +8223,7 @@ private:
 		bool empty = false;
 		bool key = true;
 		bool punctuation = false;
+		bool add_shoal = false;
 		Ptr add_scope = nothing_();
 		for (bool first = true; true; first = false)
 		{
@@ -8291,7 +8292,7 @@ private:
 							_next_();
 							return is_map;
 						}
-						else if (symbol->is_(":"))
+						else if (symbol->is_(":") || symbol->is_("::"))
 						{
 							if (not_map)
 							{
@@ -8302,6 +8303,7 @@ private:
 							is_map = true;
 							key = false;
 							punctuation = false;
+							add_shoal = symbol->is_("::");
 							continue;
 						}
 						else if (symbol->is_(","))
@@ -8373,7 +8375,10 @@ private:
 				// Shoal
 				const Ptr value = parse_(new_scope, shoal);
 				flk->push_back_(value);
-				static_<Shoal>(shoal)->update_(new_scope, value);
+				if (add_shoal)
+				{
+					static_<Shoal>(shoal)->update_(new_scope, value);
+				}
 			}
 			punctuation = true;
 		}
