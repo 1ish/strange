@@ -1101,7 +1101,14 @@ public:
 
 	inline void update_(const Ptr key, const Ptr value)
 	{
-		_map[key] = value;
+		if (value->is_("0"))
+		{
+			_map.erase(key);
+		}
+		else
+		{
+			_map[key] = value;
+		}
 	}
 
 	inline const Ptr update(const Ptr it)
@@ -2012,6 +2019,10 @@ public:
 
 	inline const bool insert_(const Ptr item)
 	{
+		if (item->is_("0"))
+		{
+			return false;
+		}
 		return _set.insert(item).second;
 	}
 
@@ -6440,10 +6451,7 @@ private:
 				value = Expression::evaluate_(flock->at_(i), local); // default
 				action->set_(0);
 			}
-			if (!value->is_("0"))
-			{
-				shoal->update_(param, value);
-			}
+			shoal->update_(param, value);
 		}
 		const Ptr result = Expression::evaluate_(flock->at_(size_1), local);
 		action->set_(0);
