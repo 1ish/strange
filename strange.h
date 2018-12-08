@@ -113,7 +113,7 @@ public:
 
 	static inline const Ptr boolean_(const Ptr ptr)
 	{
-		return boolean_(!ptr->is_("0"));
+		return boolean_(!ptr->is_(""));
 	}
 
 	static inline const Ptr boolean(const Ptr it)
@@ -1101,7 +1101,7 @@ public:
 
 	inline void update_(const Ptr key, const Ptr value)
 	{
-		if (value->is_("0"))
+		if (value->is_(""))
 		{
 			_map.erase(key);
 		}
@@ -1159,7 +1159,7 @@ public:
 	{
 		const Ptr rest = it->copy_();
 		const Ptr result = Thing::visit(it);
-		if (!result->is_("0"))
+		if (!result->is_(""))
 		{
 			const Ptr visitor = rest->next_();
 			const Ptr member = rest->next_();
@@ -1648,7 +1648,7 @@ public:
 	{
 		const Ptr rest = it->copy_();
 		const Ptr result = Thing::visit(it);
-		if (!result->is_("0"))
+		if (!result->is_(""))
 		{
 			const Ptr visitor = rest->next_();
 			const Ptr member = rest->next_();
@@ -2019,7 +2019,7 @@ public:
 
 	inline const bool insert_(const Ptr item)
 	{
-		if (item->is_("0"))
+		if (item->is_(""))
 		{
 			return false;
 		}
@@ -2061,7 +2061,7 @@ public:
 	{
 		const Ptr rest = it->copy_();
 		const Ptr result = Thing::visit(it);
-		if (!result->is_("0"))
+		if (!result->is_(""))
 		{
 			const Ptr visitor = rest->next_();
 			const Ptr member = rest->next_();
@@ -5373,7 +5373,7 @@ public:
 		{
 			return mut_(lake->get_());
 		}
-		return mut_(lake->get_(), !file->is_("0"));
+		return mut_(lake->get_(), !file->is_(""));
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -5705,7 +5705,7 @@ public:
 	virtual inline const Ptr type_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("type");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
@@ -5716,7 +5716,7 @@ public:
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("copy");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
@@ -5726,7 +5726,7 @@ public:
 	virtual inline const Ptr clone_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("clone");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
@@ -5736,7 +5736,7 @@ public:
 	virtual inline void finalize_() override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("finalize");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			operate_(this, over);
 		}
@@ -5746,9 +5746,9 @@ public:
 	virtual inline const bool finalized_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("finalized");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
-			return !operate_(const_cast<Creature*>(this), over)->is_("0");
+			return !operate_(const_cast<Creature*>(this), over)->is_("");
 		}
 		return Mutable::finalized_();
 	}
@@ -5756,7 +5756,7 @@ public:
 	virtual inline void freeze_() override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("freeze");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			operate_(this, over);
 		}
@@ -5766,9 +5766,9 @@ public:
 	virtual inline const bool frozen_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("frozen");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
-			return !operate_(const_cast<Creature*>(this), over)->is_("0");
+			return !operate_(const_cast<Creature*>(this), over)->is_("");
 		}
 		return Mutable::frozen_();
 	}
@@ -5776,7 +5776,7 @@ public:
 	virtual inline const Ptr iterator_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("iterator");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
@@ -5786,7 +5786,7 @@ public:
 	virtual inline const Ptr next_() override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("next");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return operate_(this, over);
 		}
@@ -5796,7 +5796,7 @@ public:
 	virtual inline size_t hash_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("hash");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return size_t(static_<Int64>(operate_(const_cast<Creature*>(this), over))->get_());
 		}
@@ -5806,10 +5806,10 @@ public:
 	virtual inline const bool same_(const Ptr other) const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("same");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return !operate_(const_cast<Creature*>(this), over,
-				IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ other }))->is_("0");
+				IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ other }))->is_("");
 		}
 		return Mutable::same_(other);
 	}
@@ -5817,7 +5817,7 @@ public:
 	virtual inline const Ptr visit(const Ptr it) override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("visit");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return operate_(this, over, it);
 		}
@@ -5827,7 +5827,7 @@ public:
 	virtual inline const Ptr eater_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("eater");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
@@ -5837,7 +5837,7 @@ public:
 	virtual inline const Ptr feeder(const Ptr eater) const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("feeder");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return operate_(const_cast<Creature*>(this), over, eater);
 		}
@@ -5847,7 +5847,7 @@ public:
 	virtual inline const Ptr cats_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("cats");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
@@ -5872,7 +5872,7 @@ public:
 	virtual inline const Ptr to_lake_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("to_lake");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
@@ -5882,7 +5882,7 @@ public:
 	virtual inline void from_lake_(const Ptr lake) override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("from_lake");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ lake }));
 		}
@@ -5895,7 +5895,7 @@ public:
 	virtual inline void to_river_(const Thing::Ptr river) const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("to_river");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			operate_(const_cast<Creature*>(this), over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
 		}
@@ -5908,7 +5908,7 @@ public:
 	virtual inline void from_river_(const Thing::Ptr river) override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("from_river");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
 		}
@@ -5921,7 +5921,7 @@ public:
 	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("to_river_with_links");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			operate_(const_cast<Creature*>(this), over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ shoal, river }));
 		}
@@ -5934,7 +5934,7 @@ public:
 	virtual inline void from_river_with_links_(const Thing::Ptr river) override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("from_river_with_links");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
 		}
@@ -5947,7 +5947,7 @@ public:
 	virtual inline void replace_links_(const Thing::Ptr shoal) override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("replace_links");
-		if (!over->is_("0"))
+		if (!over->is_(""))
 		{
 			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ shoal }));
 		}
@@ -6087,6 +6087,22 @@ public:
 			}
 			log_("regional_ expression of wrong size");
 		}
+		else if (statement->is_("shared_scope_"))
+		{
+			if (size == 2)
+			{
+				return fin_(&Expression::_shared_scope_, flock);
+			}
+			log_("shared_scope_ expression of wrong size");
+		}
+		else if (statement->is_("relative_scope_"))
+		{
+			if (size == 3)
+			{
+				return fin_(&Expression::_relative_scope_, flock);
+			}
+			log_("relative_scope_ expression of wrong size");
+		}
 		else if (statement->is_("flock_"))
 		{
 			return fin_(&Expression::_flock_, flock);
@@ -6171,7 +6187,7 @@ public:
 			}
 			log_("for_ expression of wrong size");
 		}
-		else if (!statement->is_("0"))
+		else if (!statement->is_(""))
 		{
 			log_("expression with unexpected statement");
 		}
@@ -6362,10 +6378,10 @@ private:
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
 		const Ptr iterable = Expression::evaluate_(flock->at_(1), local);
 		const Ptr eater = thing->eater_();
-		if (!eater->is_("0"))
+		if (!eater->is_(""))
 		{
 			const Ptr feeder = iterable->feeder(eater);
-			if (!feeder->is_("0"))
+			if (!feeder->is_(""))
 			{
 				return thing->invoke(feeder);
 			}
@@ -6395,10 +6411,10 @@ private:
 		const Ptr member = static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local));
 		const Ptr iterable = Expression::evaluate_(flock->at_(2), local);
 		const Ptr eater = member->eater_();
-		if (!eater->is_("0"))
+		if (!eater->is_(""))
 		{
 			const Ptr feeder = iterable->feeder(eater);
-			if (!feeder->is_("0"))
+			if (!feeder->is_(""))
 			{
 				return operate_(thing.get(), member, feeder);
 			}
@@ -6456,6 +6472,44 @@ private:
 		const Ptr result = Expression::evaluate_(flock->at_(size_1), local);
 		action->set_(0);
 		return result;
+	}
+
+	inline const Ptr _shared_scope_(const Ptr local) const
+	{
+		Flock* const flk = static_<Flock>(_flock);
+		return static_<Shoal>(flk->at_(0))->find_(flk->at_(1));
+	}
+	
+	inline const Ptr _relative_scope_(const Ptr local) const
+	{
+		// search scope from bottom to top
+		Flock* const flk = static_<Flock>(_flock);
+		Shoal* const shoal = static_<Shoal>(flk->at_(0));
+		const Ptr key = flk->at_(1);
+		const std::string& key_str = static_<Symbol>(key)->symbol_();
+		std::string scope = static_<Symbol>(flk->at_(2))->symbol_();
+		for (;;)
+		{
+			if (scope.empty())
+			{
+				return shoal->find_(key);
+			}
+			const Ptr result = shoal->find_(scope + "::" + key_str);
+			if (!result->is_(""))
+			{
+				return result;
+			}
+			const size_t pos = scope.find_last_of("::");
+			if (pos == std::string::npos)
+			{
+				scope = "";
+			}
+			else
+			{
+				scope = scope.substr(0, pos);
+			}
+		}
+		return nothing_();
 	}
 
 	inline const Ptr _flock_(const Ptr local) const
@@ -6583,7 +6637,7 @@ private:
 		const int64_t size = flock->size_();
 		if (size == 2)
 		{
-			if (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
+			if (!Expression::evaluate_(flock->at_(0), local)->is_(""))
 			{
 				action->set_(0);
 				return Expression::evaluate_(flock->at_(1), local);
@@ -6591,7 +6645,7 @@ private:
 		}
 		else
 		{
-			if (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
+			if (!Expression::evaluate_(flock->at_(0), local)->is_(""))
 			{
 				action->set_(0);
 				return Expression::evaluate_(flock->at_(1), local);
@@ -6611,7 +6665,7 @@ private:
 		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
-		while (!Expression::evaluate_(flock->at_(0), local)->is_("0"))
+		while (!Expression::evaluate_(flock->at_(0), local)->is_(""))
 		{
 			action->set_(0);
 			result = Expression::evaluate_(flock->at_(1), local);
@@ -6663,7 +6717,7 @@ private:
 					break;
 				}
 			}
-		} while (!Expression::evaluate_(flock->at_(0), local)->is_("0"));
+		} while (!Expression::evaluate_(flock->at_(0), local)->is_(""));
 		action->set_(0);
 		return result;
 	}
@@ -6674,7 +6728,7 @@ private:
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		for (Expression::evaluate_(flock->at_(0), local);
-			!Expression::evaluate_(flock->at_(1), local)->is_("0");
+			!Expression::evaluate_(flock->at_(1), local)->is_("");
 			Expression::evaluate_(flock->at_(2), local))
 		{
 			action->set_(0);
@@ -6867,7 +6921,7 @@ public:
 		{
 			return river->eof_();
 		}
-		return !_river->invoke_("eof")->is_("0");
+		return !_river->invoke_("eof")->is_("");
 	}
 
 	inline const Ptr eof(const Ptr ignore)
@@ -7250,7 +7304,7 @@ private:
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
 		const Ptr symbol = sym_(s.substr(1, s.length() - 2));
-		if (symbol->is_("0"))
+		if (symbol->is_(""))
 		{
 			flk->push_back_(nothing_());
 		}
@@ -7409,7 +7463,7 @@ public:
 		{
 			return tokenizer->eof_();
 		}
-		return !_tokenizer->invoke_("eof")->is_("0");
+		return !_tokenizer->invoke_("eof")->is_("");
 	}
 
 	inline const Ptr eof(const Ptr ignore)
@@ -7562,7 +7616,7 @@ public:
 				}
 				else if (tag == 'P') // punctuation
 				{
-					if (symbol->is_("$")) // static at
+					if (symbol->is_("$")) // shared at
 					{
 						const Ptr nested = Flock::mut_();
 						static_<Flock>(nested)->push_back_(Expression::fin_(local, Flock::mut_())); // local
@@ -7607,7 +7661,7 @@ public:
 						_next_();
 						result = Expression::fin_(invoke, flock);
 					}
-					else if (symbol->is_("@$") || symbol->is_("@|")) // static or me
+					else if (symbol->is_("@$") || symbol->is_("@|")) // shared or me
 					{
 						const Ptr nested = Flock::mut_();
 						static_<Flock>(nested)->push_back_(Expression::fin_(local, Flock::mut_())); // local
@@ -7626,9 +7680,12 @@ public:
 						cont = _thing_(scope, shoal, statement, flock);
 						result = Expression::fin_(smt->get_(), flock);
 					}
-					else if (symbol->is_("$$")) //TODO super static
+					else if (symbol->is_("$$") || symbol->is_("**")) // shared/relative scope
 					{
 						_next_();
+						_shared_scope_(scope, shoal, flock, symbol->is_("**"));
+						cont = _thing_(scope, shoal, statement, flock);
+						result = Expression::fin_(smt->get_(), flock);
 					}
 					else if (symbol->is_("(")) // block
 					{
@@ -7756,6 +7813,7 @@ private:
 		{
 			return false; // break
 		}
+		Flock* const flk = static_<Flock>(flock);
 		Flock* const tok = static_<Flock>(token);
 		const char tag = static_<Int8>(tok->at_(0))->get_();
 		if (tag == 'E') // error
@@ -7766,7 +7824,6 @@ private:
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
-		Flock* const flk = static_<Flock>(flock);
 		Reference* const smt = static_<Reference>(statement);
 		if (tag == 'P') // punctuation
 		{
@@ -7856,12 +7913,6 @@ private:
 			else if (symbol->is_("*"))
 			{
 				flk->push_back_(sym_("multiply"));
-				_next_();
-				_member_(scope, shoal, statement, flock);
-			}
-			else if (symbol->is_("**"))
-			{
-				flk->push_back_(sym_("power"));
 				_next_();
 				_member_(scope, shoal, statement, flock);
 			}
@@ -7958,13 +8009,13 @@ private:
 			else if (symbol->is_("!"))
 			{
 				flk->push_back_(sym_("is"));
-				flk->push_back_(sym_("0"));
+				flk->push_back_(sym_(""));
 				_next_();
 			}
 			else if (symbol->is_("?"))
 			{
 				flk->push_back_(sym_("is_not"));
-				flk->push_back_(sym_("0"));
+				flk->push_back_(sym_(""));
 				_next_();
 			}
 			else
@@ -7988,6 +8039,7 @@ private:
 			log_("parser error: dot eof");
 			return;
 		}
+		Flock* const flk = static_<Flock>(flock);
 		Flock* const tok = static_<Flock>(token);
 		const char tag = static_<Int8>(tok->at_(0))->get_();
 		if (tag == 'E') // error
@@ -7998,7 +8050,6 @@ private:
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
-		Flock* const flk = static_<Flock>(flock);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
 			log_("parser error: dot literal");
@@ -8024,6 +8075,7 @@ private:
 			smt->set_(sym_("method_"));
 			return;
 		}
+		Flock* const flk = static_<Flock>(flock);
 		Flock* const tok = static_<Flock>(token);
 		const char tag = static_<Int8>(tok->at_(0))->get_();
 		if (tag == 'E') // error
@@ -8034,7 +8086,6 @@ private:
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
-		Flock* const flk = static_<Flock>(flock);
 		if (tag == 'P') // punctuation
 		{
 			if (symbol->is_("."))
@@ -8098,6 +8149,7 @@ private:
 
 	inline void _list_(const Ptr scope, const Ptr shoal, const Ptr flock, const Ptr open, const Ptr close, const bool parameters = false)
 	{
+		Flock* const flk = static_<Flock>(flock);
 		bool parameter = parameters;
 		bool punctuation = false;
 		for (bool first = true; true; first = false)
@@ -8118,7 +8170,6 @@ private:
 			const int64_t x = static_<Int64>(tok->at_(1))->get_();
 			const int64_t y = static_<Int64>(tok->at_(2))->get_();
 			const Ptr symbol = tok->at_(3);
-			Flock* const flk = static_<Flock>(flock);
 			if (first)
 			{
 				if (tag == 'P') // punctuation
@@ -8218,6 +8269,7 @@ private:
 
 	inline const bool _map_(const Ptr scope, const Ptr shoal, const Ptr flock)
 	{
+		Flock* const flk = static_<Flock>(flock);
 		bool is_map = false;
 		bool not_map = false;
 		bool empty = false;
@@ -8243,7 +8295,6 @@ private:
 			const int64_t x = static_<Int64>(tok->at_(1))->get_();
 			const int64_t y = static_<Int64>(tok->at_(2))->get_();
 			const Ptr symbol = tok->at_(3);
-			Flock* const flk = static_<Flock>(flock);
 			if (first)
 			{
 				if (tag == 'P') // punctuation
@@ -8377,6 +8428,81 @@ private:
 		return is_map;
 	}
 
+	inline void _shared_scope_(const Ptr scope, const Ptr shoal, const Ptr flock, const bool relative)
+	{
+		Ptr key = nothing_();
+		bool punctuation = false;
+		for (bool first = true; true; first = false)
+		{
+			const Ptr token = _token_();
+			if (token->is_("."))
+			{
+				break;
+			}
+			Flock* const tok = static_<Flock>(token);
+			const char tag = static_<Int8>(tok->at_(0))->get_();
+			if (tag == 'E') // error
+			{
+				log_("tokenizer error");
+				return;
+			}
+			const int64_t x = static_<Int64>(tok->at_(1))->get_();
+			const int64_t y = static_<Int64>(tok->at_(2))->get_();
+			const Ptr symbol = tok->at_(3);
+			if (first)
+			{
+				if (tag == 'N') // name
+				{
+					key = symbol;
+				}
+				else
+				{
+					break;
+				}
+			}
+			else if (punctuation)
+			{
+				if (tag == 'P' && symbol->is_("::"))
+				{
+					_next_();
+					punctuation = false;
+					continue;
+				}
+				else
+				{
+					break;
+				}
+			}
+			else
+			{
+				if (tag == 'N') // name
+				{
+					key = sym_(static_<Symbol>(key)->symbol_() + "::" + static_<Symbol>(symbol)->symbol_());
+				}
+				else
+				{
+					log_("parser error: shared scope :: not followed by name");
+					break;
+				}
+			}
+			_next_();
+			punctuation = true;
+		}
+		const Ptr key_flock = Flock::mut_();
+		Flock* const key_flk = static_<Flock>(key_flock);
+		key_flk->push_back_(shoal);
+		key_flk->push_back_(key);
+		if (relative)
+		{
+			key_flk->push_back_(scope);
+			static_<Flock>(flock)->push_back_(Expression::fin_(sym_("relative_scope_"), key_flock));
+		}
+		else
+		{
+			static_<Flock>(flock)->push_back_(Expression::fin_(sym_("shared_scope_"), key_flock));
+		}
+	}
+	
 	inline const bool _at_(const Ptr scope, const Ptr shoal, const Ptr flock)
 	{
 		const Ptr token = _token_();
@@ -8385,6 +8511,7 @@ private:
 			log_("parser error: at eof");
 			return false; // break
 		}
+		Flock* const flk = static_<Flock>(flock);
 		Flock* const tok = static_<Flock>(token);
 		const char tag = static_<Int8>(tok->at_(0))->get_();
 		if (tag == 'E') // error
@@ -8395,7 +8522,6 @@ private:
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
-		Flock* const flk = static_<Flock>(flock);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
 			flk->push_back_(tok->at_(4));
@@ -8420,6 +8546,7 @@ private:
 		{
 			return false; // break
 		}
+		Flock* const flk = static_<Flock>(flock);
 		Flock* const tok = static_<Flock>(token);
 		const char tag = static_<Int8>(tok->at_(0))->get_();
 		if (tag == 'E') // error
@@ -8430,7 +8557,6 @@ private:
 		const int64_t x = static_<Int64>(tok->at_(1))->get_();
 		const int64_t y = static_<Int64>(tok->at_(2))->get_();
 		const Ptr symbol = tok->at_(3);
-		Flock* const flk = static_<Flock>(flock);
 		if (tag == 'P' && symbol->is_(":="))
 		{
 			flk->update_(flk->size_() - 2, sym_("update"));
@@ -8472,7 +8598,7 @@ inline const Thing::Ptr Thing::sym_(F&& symbol)
 
 inline const Thing::Ptr Thing::nothing_()
 {
-	static const Ptr NOTHING = sym_("0");
+	static const Ptr NOTHING = sym_("");
 	return NOTHING;
 }
 
@@ -8493,7 +8619,7 @@ inline const Thing::Ptr Thing::call(const Thing::Ptr it)
 	const Ptr type = it->next_();
 	const Ptr function = it->next_();
 	const Ptr stat = static_<Shoal>(stats_())->find_(type);
-	if (stat->is_("0"))
+	if (stat->is_(""))
 	{
 		log_("call passed unknown type:");
 		log_(type);
@@ -8501,7 +8627,7 @@ inline const Thing::Ptr Thing::call(const Thing::Ptr it)
 		return stat;
 	}
 	const Ptr fun = static_<Shoal>(stat->invoke(nothing_()))->find_(function);
-	if (fun->is_("0"))
+	if (fun->is_(""))
 	{
 		log_("call passed unknown function:");
 		log_(type);
@@ -8571,7 +8697,7 @@ inline const Thing::Ptr Thing::stat_()
 inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr it)
 {
 	const Ptr member = static_<Shoal>(thing->pub_())->find_(it->next_());
-	if (member->is_("0"))
+	if (member->is_(""))
 	{
 		return member;
 	}
