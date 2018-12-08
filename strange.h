@@ -8361,23 +8361,15 @@ private:
 			}
 			else
 			{
-				// Flock
-				//const Ptr new_scope = scope->copy_();
-				//static_<Flock>(new_scope)->push_back_(Expression::immediate_(add_scope));
-				//flk->push_back_(value);
-
-				// Symbol
 				Symbol* const add_scope_symbol = dynamic_<Symbol>(Expression::immediate_(add_scope));
 				const Ptr new_scope = add_scope_symbol
 					? sym_(static_<Symbol>(scope)->symbol_() + "::" + add_scope_symbol->symbol_())
 					: scope;
-
-				// Shoal
 				const Ptr value = parse_(new_scope, shoal);
 				flk->push_back_(value);
 				if (add_shoal)
 				{
-					static_<Shoal>(shoal)->update_(new_scope, value);
+					static_<Shoal>(shoal)->update_(new_scope, Function::fin_(value));
 				}
 			}
 			punctuation = true;
