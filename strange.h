@@ -7115,6 +7115,10 @@ public:
 			case '%':
 			case ':':
 			case '<':
+				if (char2 == '>')
+				{
+					second = true;
+				}
 			case '>':
 				if ((char1 != '!' && char1 == char2) || char2 == '=')
 				{
