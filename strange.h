@@ -7536,7 +7536,6 @@ public:
 							{
 								flk->push_back_(parse_(scope, shoal));
 								result = Expression::fin_(symbol, flock);
-								//TODO register in the current scope
 							}
 							else
 							{
