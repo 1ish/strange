@@ -6187,7 +6187,7 @@ public:
 			}
 			log_("for_ expression of wrong size");
 		}
-		else if (!statement->is_(""))
+		else
 		{
 			log_("expression with unexpected statement");
 		}
@@ -6196,9 +6196,11 @@ public:
 		return fin_(&Expression::_thing_, none);
 	}
 
-	static inline const Ptr fin_()
+	static inline const Ptr fin_(const Ptr thing = nothing_())
 	{
-		return fin_(nothing_(), nothing_());
+		const Ptr flock = Flock::mut_();
+		static_<Flock>(flock)->push_back_(thing);
+		return Expression::fin_(sym_("thing_"), flock);
 	}
 
 	static inline const Ptr fin(const Ptr it)
@@ -7770,9 +7772,7 @@ private:
 
 	static inline void _wrap_(const Ptr thing, const Ptr flock)
 	{
-		const Ptr nested = Flock::mut_();
-		static_<Flock>(nested)->push_back_(thing);
-		static_<Flock>(flock)->push_back_(Expression::fin_(sym_("thing_"), nested));
+		static_<Flock>(flock)->push_back_(Expression::fin_(thing));
 	}
 
 	inline const bool _thing_(const Ptr scope, const Ptr shoal, const Ptr statement, const Ptr flock)
