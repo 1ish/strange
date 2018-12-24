@@ -141,6 +141,10 @@ public:
 	static inline const Ptr call(const Ptr it);
 
 	// public static factory functions
+	static inline void share_(const Ptr shoal);
+
+	static inline const Ptr shared_();
+
 	static inline const Ptr stats_();
 
 	static inline const Ptr stats(const Ptr ignore)
@@ -630,6 +634,8 @@ public:
 		return rwl_(it->next_());
 	}
 
+	static inline void share_(const Ptr shoal);
+
 	static inline const Ptr stat_();
 
 	static inline const Ptr stat(const Ptr ignore)
@@ -1004,6 +1010,8 @@ public:
 		return PUB;
 	}
 
+	static inline void share_(const Ptr shoal);
+
 	static inline const Ptr stat_()
 	{
 		static const Ptr STAT = []()
@@ -1225,6 +1233,8 @@ public:
 			return PUB;
 		}
 
+		static inline void share_(const Ptr shoal);
+
 		static inline const Ptr stat_()
 		{
 			static const Ptr STAT = []()
@@ -1246,6 +1256,11 @@ public:
 		static inline const Ptr mut_(const Ptr shoal)
 		{
 			return make_<Concurrent>(shoal);
+		}
+
+		static inline const Ptr mut(const Ptr it)
+		{
+			return mut_(it->next_());
 		}
 
 		virtual inline const Ptr copy_() const override
@@ -1499,6 +1514,8 @@ public:
 		return PUB;
 	}
 
+	static inline void share_(const Ptr shoal);
+
 	static inline const Ptr stat_()
 	{
 		static const Ptr STAT = []()
@@ -1687,6 +1704,8 @@ public:
 			return PUB;
 		}
 
+		static inline void share_(const Ptr shoal);
+
 		static inline const Ptr stat_()
 		{
 			static const Ptr STAT = []()
@@ -1708,6 +1727,11 @@ public:
 		static inline const Ptr mut_(const Ptr flock)
 		{
 			return make_<Concurrent>(flock);
+		}
+
+		static inline const Ptr mut(const Ptr it)
+		{
+			return mut_(it->next_());
 		}
 
 		virtual inline const Ptr copy_() const override
@@ -1922,6 +1946,8 @@ public:
 		return PUB;
 	}
 
+	static inline void share_(const Ptr shoal);
+
 	static inline const Ptr stat_()
 	{
 		static const Ptr STAT = []()
@@ -2110,6 +2136,8 @@ public:
 			return PUB;
 		}
 
+		static inline void share_(const Ptr shoal);
+
 		static inline const Ptr stat_()
 		{
 			static const Ptr STAT = []()
@@ -2131,6 +2159,11 @@ public:
 		static inline const Ptr mut_(const Ptr herd)
 		{
 			return make_<Concurrent>(herd);
+		}
+
+		static inline const Ptr mut(const Ptr it)
+		{
+			return mut_(it->next_());
 		}
 
 		virtual inline const Ptr copy_() const override
@@ -5483,7 +5516,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Lake>(read_(int16))->get_();
-		return call_(type, "riv", me_());
+		return call_(type + "::riv", me_());
 	}
 
 	inline const Ptr pop_front(const Ptr ignore)
@@ -5495,7 +5528,7 @@ public:
 	{
 		const int16_t int16 = read_<Int16>();
 		const std::string type = static_<Lake>(read_(int16))->get_();
-		return call_(type, "rwl", me_());
+		return call_(type + "::rwl", me_());
 	}
 
 	inline const Ptr read_(const int64_t length)
@@ -8389,7 +8422,6 @@ private:
 				flk->push_back_(value);
 				if (add_shoal)
 				{
-					//TODO static_<Shoal>(shoal)->update_(new_scope, Function::fin_(value));
 					static_<Shoal>(shoal)->update_(new_scope, value);
 				}
 			}
@@ -8586,25 +8618,15 @@ inline const Thing::Ptr Thing::stop_()
 
 inline const Thing::Ptr Thing::call(const Thing::Ptr it)
 {
-	const Ptr type = it->next_();
 	const Ptr function = it->next_();
-	const Ptr stat = static_<Shoal>(stats_())->find_(type);
-	if (stat->is_(""))
-	{
-		log_("call passed unknown type:");
-		log_(type);
-		log_(function);
-		return stat;
-	}
-	const Ptr fun = static_<Shoal>(stat->invoke(nothing_()))->find_(function);
+	const Ptr fun = static_<Shoal>(shared_())->find_(function);
 	if (fun->is_(""))
 	{
 		log_("call passed unknown function:");
-		log_(type);
 		log_(function);
 		return fun;
 	}
-	return fun->invoke(it);
+	return Expression::immediate_(fun)->invoke(it);
 }
 
 inline const Thing::Ptr Thing::pub_() const
@@ -8722,6 +8744,56 @@ inline const Thing::Ptr Thing::cats_() const
 	return CATS;
 }
 
+inline void Thing::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Thing::boolean", Expression::fin_(Static::fin_(&Thing::boolean, "value")));
+	s->update_("strange::Thing::log", Expression::fin_(Static::fin_(&Thing::log, "message")));
+	s->update_("strange::Thing::call", Expression::fin_(Static::fin_(&Thing::call, "function")));
+	s->update_("strange::Thing::nothing", Expression::fin_(Static::fin_(&Thing::nothing)));
+	s->update_("strange::Thing::one", Expression::fin_(Static::fin_(&Thing::one)));
+	s->update_("strange::Thing::stop", Expression::fin_(Static::fin_(&Thing::stop)));
+
+	Symbol::share_(shoal);
+	Shoal::share_(shoal);
+	Shoal::Concurrent::share_(shoal);
+	Flock::share_(shoal);
+	Flock::Concurrent::share_(shoal);
+	Herd::share_(shoal);
+	Herd::Concurrent::share_(shoal);
+	IteratorPtr::share_(shoal);
+	Reference::share_(shoal);
+	Lake::share_(shoal);
+	Bit::share_(shoal);
+	Int8::share_(shoal);
+	UInt8::share_(shoal);
+	Int16::share_(shoal);
+	Int32::share_(shoal);
+	Int64::share_(shoal);
+	Float32::share_(shoal);
+	Float64::share_(shoal);
+	Complex32::share_(shoal);
+	Complex64::share_(shoal);
+	River::share_(shoal);
+	Fence::share_(shoal);
+	Creature::share_(shoal);
+	Expression::share_(shoal);
+	Function::share_(shoal);
+	Tokenizer::share_(shoal);
+	Parser::share_(shoal);
+}
+
+inline const Thing::Ptr Thing::shared_()
+{
+	static const Ptr SHARED = []()
+	{
+		const Ptr shoal = Shoal::mut_();
+		share_(shoal);
+		return shoal;
+	}();
+	return SHARED;
+}
+
 inline const Thing::Ptr Thing::stats_()
 {
 	static const Ptr STATS = []()
@@ -8835,6 +8907,14 @@ inline const Thing::Ptr Symbol::pub_() const
 		return pub;
 	}();
 	return PUB;
+}
+
+inline void Symbol::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Symbol::lak", Expression::fin_(Static::fin_(&Symbol::lak, "lake")));
+	s->update_("strange::Symbol::riv", Expression::fin_(Static::fin_(&Symbol::riv, "river")));
+	s->update_("strange::Symbol::rwl", Expression::fin_(Static::fin_(&Symbol::rwl, "river")));
 }
 
 inline const Thing::Ptr Symbol::stat_()
@@ -9090,6 +9170,21 @@ inline const Thing::Ptr Shoal::cats_() const
 	return CATS;
 }
 
+inline void Shoal::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Shoal::mut", Expression::fin_(Static::fin_(&Shoal::mut)));
+	s->update_("strange::Shoal::lak", Expression::fin_(Static::fin_(&Shoal::lak, "lake")));
+	s->update_("strange::Shoal::riv", Expression::fin_(Static::fin_(&Shoal::riv, "river")));
+	s->update_("strange::Shoal::rwl", Expression::fin_(Static::fin_(&Shoal::rwl, "river")));
+}
+
+inline void Shoal::Concurrent::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Shoal::Concurrent::mut", Expression::fin_(Static::fin_(&Shoal::Concurrent::mut, "shoal")));
+}
+
 inline const Thing::Ptr Shoal::Iterator::cats_() const
 {
 	static const Ptr CATS = []()
@@ -9303,6 +9398,21 @@ inline const Thing::Ptr Flock::Iterator::cats_() const
 	return CATS;
 }
 
+inline void Flock::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Flock::mut", Expression::fin_(Static::fin_(&Flock::mut)));
+	s->update_("strange::Flock::lak", Expression::fin_(Static::fin_(&Flock::lak, "lake")));
+	s->update_("strange::Flock::riv", Expression::fin_(Static::fin_(&Flock::riv, "river")));
+	s->update_("strange::Flock::rwl", Expression::fin_(Static::fin_(&Flock::rwl, "river")));
+}
+
+inline void Flock::Concurrent::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Flock::Concurrent::mut", Expression::fin_(Static::fin_(&Flock::Concurrent::mut, "flock")));
+}
+
 //======================================================================
 // class Herd
 //======================================================================
@@ -9392,6 +9502,21 @@ inline void Herd::replace_links_(const Thing::Ptr shoal)
 		replacement.insert(sho->find_(i));
 	}
 	_set.swap(replacement);
+}
+
+inline void Herd::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Herd::mut", Expression::fin_(Static::fin_(&Herd::mut)));
+	s->update_("strange::Herd::lak", Expression::fin_(Static::fin_(&Herd::lak, "lake")));
+	s->update_("strange::Herd::riv", Expression::fin_(Static::fin_(&Herd::riv, "river")));
+	s->update_("strange::Herd::rwl", Expression::fin_(Static::fin_(&Herd::rwl, "river")));
+}
+
+inline void Herd::Concurrent::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Herd::Concurrent::mut", Expression::fin_(Static::fin_(&Herd::Concurrent::mut, "herd")));
 }
 
 //======================================================================
@@ -9581,7 +9706,6 @@ inline const Thing::Ptr Expression::_shared_scope_(const Thing::Ptr local) const
 		return Function::fin_(exp);
 	}
 	return nothing_();
-	//TODO return static_<Shoal>(flk->at_(0))->find_(flk->at_(1));//Function::fin_(value)
 }
 
 inline const Thing::Ptr Expression::_relative_scope_(const Thing::Ptr local) const
@@ -9603,14 +9727,6 @@ inline const Thing::Ptr Expression::_relative_scope_(const Thing::Ptr local) con
 		{
 			return Function::fin_(exp);
 		}
-		//TODO
-		/*
-		const Ptr result = shoal->find_(scope + "::" + key_str);
-		if (!result->is_(""))
-		{
-			return result;
-		}
-		*/
 		const size_t pos = scope.find_last_of("::");
 		if (pos == std::string::npos)
 		{
