@@ -2537,6 +2537,8 @@ public:
 		return PUB;
 	}
 
+	static inline void share_(const Ptr shoal);
+
 	static inline const Ptr stat_()
 	{
 		static const Ptr STAT = []()
@@ -2745,6 +2747,8 @@ public:
 		}();
 		return PUB;
 	}
+
+	static inline void share_(const Ptr shoal);
 
 	static inline const Ptr stat_()
 	{
@@ -8761,8 +8765,8 @@ inline void Thing::share_(const Thing::Ptr shoal)
 	Flock::Concurrent::share_(shoal);
 	Herd::share_(shoal);
 	Herd::Concurrent::share_(shoal);
-	IteratorPtr::share_(shoal);
 	Reference::share_(shoal);
+	Weak::share_(shoal);
 	Lake::share_(shoal);
 	Bit::share_(shoal);
 	Int8::share_(shoal);
@@ -9535,9 +9539,21 @@ inline void Herd::Concurrent::share_(const Thing::Ptr shoal)
 // class Reference
 //======================================================================
 
+inline void Reference::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Reference::mut", Expression::fin_(Static::fin_(&Reference::mut, "thing")));
+}
+
 //======================================================================
 // class Weak
 //======================================================================
+
+inline void Weak::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Weak::mut", Expression::fin_(Static::fin_(&Weak::mut, "thing")));
+}
 
 //======================================================================
 // class Data
