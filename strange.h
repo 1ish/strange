@@ -6474,43 +6474,9 @@ private:
 		return result;
 	}
 
-	inline const Ptr _shared_scope_(const Ptr local) const
-	{
-		Flock* const flk = static_<Flock>(_flock);
-		return static_<Shoal>(flk->at_(0))->find_(flk->at_(1));
-	}
+	inline const Ptr _shared_scope_(const Ptr local) const;
 	
-	inline const Ptr _relative_scope_(const Ptr local) const
-	{
-		// search scope from bottom to top
-		Flock* const flk = static_<Flock>(_flock);
-		Shoal* const shoal = static_<Shoal>(flk->at_(0));
-		const Ptr key = flk->at_(1);
-		const std::string& key_str = static_<Symbol>(key)->symbol_();
-		std::string scope = static_<Symbol>(flk->at_(2))->symbol_();
-		for (;;)
-		{
-			if (scope.empty())
-			{
-				return shoal->find_(key);
-			}
-			const Ptr result = shoal->find_(scope + "::" + key_str);
-			if (!result->is_(""))
-			{
-				return result;
-			}
-			const size_t pos = scope.find_last_of("::");
-			if (pos == std::string::npos)
-			{
-				scope = "";
-			}
-			else
-			{
-				scope = scope.substr(0, pos);
-			}
-		}
-		return nothing_();
-	}
+	inline const Ptr _relative_scope_(const Ptr local) const;
 
 	inline const Ptr _flock_(const Ptr local) const
 	{
@@ -7686,7 +7652,7 @@ public:
 					else if (symbol->is_("$$") || symbol->is_("**")) // shared/relative scope
 					{
 						_next_();
-						_shared_scope_(scope, shoal, flock, symbol->is_("**"));
+						_scope_(scope, shoal, flock, symbol->is_("**"));
 						cont = _thing_(scope, shoal, statement, flock);
 						result = Expression::fin_(smt->get_(), flock);
 					}
@@ -8423,7 +8389,8 @@ private:
 				flk->push_back_(value);
 				if (add_shoal)
 				{
-					static_<Shoal>(shoal)->update_(new_scope, Function::fin_(value));
+					//TODO static_<Shoal>(shoal)->update_(new_scope, Function::fin_(value));
+					static_<Shoal>(shoal)->update_(new_scope, value);
 				}
 			}
 			punctuation = true;
@@ -8431,7 +8398,7 @@ private:
 		return is_map;
 	}
 
-	inline void _shared_scope_(const Ptr scope, const Ptr shoal, const Ptr flock, const bool relative)
+	inline void _scope_(const Ptr scope, const Ptr shoal, const Ptr flock, const bool relative)
 	{
 		Ptr key = nothing_();
 		bool punctuation = false;
@@ -9604,6 +9571,58 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 //======================================================================
 // class Expression
 //======================================================================
+
+inline const Thing::Ptr Expression::_shared_scope_(const Thing::Ptr local) const
+{
+	Flock* const flk = static_<Flock>(_flock);
+	const Ptr exp = static_<Shoal>(flk->at_(0))->find_(flk->at_(1));
+	if (!exp->is_(""))
+	{
+		return Function::fin_(exp);
+	}
+	return nothing_();
+	//TODO return static_<Shoal>(flk->at_(0))->find_(flk->at_(1));//Function::fin_(value)
+}
+
+inline const Thing::Ptr Expression::_relative_scope_(const Thing::Ptr local) const
+{
+	// search scope from bottom to top
+	Flock* const flk = static_<Flock>(_flock);
+	Shoal* const shoal = static_<Shoal>(flk->at_(0));
+	const Ptr key = flk->at_(1);
+	const std::string& key_str = static_<Symbol>(key)->symbol_();
+	std::string scope = static_<Symbol>(flk->at_(2))->symbol_();
+	for (;;)
+	{
+		if (scope.empty())
+		{
+			return shoal->find_(key);
+		}
+		const Ptr exp = shoal->find_(scope + "::" + key_str);
+		if (!exp->is_(""))
+		{
+			return Function::fin_(exp);
+		}
+		//TODO
+		/*
+		const Ptr result = shoal->find_(scope + "::" + key_str);
+		if (!result->is_(""))
+		{
+			return result;
+		}
+		*/
+		const size_t pos = scope.find_last_of("::");
+		if (pos == std::string::npos)
+		{
+			scope = "";
+		}
+		else
+		{
+			scope = scope.substr(0, pos);
+		}
+	}
+	return nothing_();
+}
 
 //======================================================================
 // class Function
