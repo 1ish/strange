@@ -3036,6 +3036,8 @@ public:
 		return PUB;
 	}
 
+	static inline void share_(const Ptr shoal);
+
 	static inline const Ptr stat_()
 	{
 		static const Ptr STAT = []()
@@ -3334,6 +3336,8 @@ public:
 		return PUB;
 	}
 
+	static inline void share_(const Ptr shoal);
+
 	static inline const Ptr stat_()
 	{
 		static const Ptr STAT = []()
@@ -3528,6 +3532,8 @@ public:
 		}();
 		return PUB;
 	}
+
+	static inline void share_(const Ptr shoal);
 
 	static inline const Ptr stat_()
 	{
@@ -3724,6 +3730,8 @@ public:
 		return PUB;
 	}
 
+	static inline void share_(const Ptr shoal);
+
 	static inline const Ptr stat_()
 	{
 		static const Ptr STAT = []()
@@ -3918,6 +3926,8 @@ public:
 		}();
 		return PUB;
 	}
+
+	static inline void share_(const Ptr shoal);
 
 	static inline const Ptr stat_()
 	{
@@ -4119,6 +4129,8 @@ public:
 		}();
 		return PUB;
 	}
+
+	static inline void share_(const Ptr shoal);
 
 	static inline const Ptr stat_()
 	{
@@ -4324,6 +4336,8 @@ public:
 		}();
 		return PUB;
 	}
+
+	static inline void share_(const Ptr shoal);
 
 	static inline const Ptr stat_()
 	{
@@ -4538,6 +4552,8 @@ public:
 		return PUB;
 	}
 
+	static inline void share_(const Ptr shoal);
+
 	static inline const Ptr stat_()
 	{
 		static const Ptr STAT = []()
@@ -4743,6 +4759,8 @@ public:
 		}();
 		return PUB;
 	}
+
+	static inline void share_(const Ptr shoal);
 
 	static inline const Ptr stat_()
 	{
@@ -4959,6 +4977,8 @@ public:
 		}();
 		return PUB;
 	}
+
+	static inline void share_(const Ptr shoal);
 
 	static inline const Ptr stat_()
 	{
@@ -5204,6 +5224,8 @@ public:
 		}();
 		return PUB;
 	}
+
+	static inline void share_(const Ptr shoal);
 
 	static inline const Ptr stat_()
 	{
@@ -9593,6 +9615,16 @@ inline void Lake::from_river_(const Thing::Ptr river)
 	}
 }
 
+inline void Lake::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Lake::mut", Expression::fin_(Static::fin_(&Lake::mut)));
+	s->update_("strange::Lake::fin", Expression::fin_(Static::fin_(&Lake::fin)));
+	s->update_("strange::Lake::lak", Expression::fin_(Static::fin_(&Lake::lak, "lake")));
+	s->update_("strange::Lake::riv", Expression::fin_(Static::fin_(&Lake::riv, "river")));
+	s->update_("strange::Lake::rwl", Expression::fin_(Static::fin_(&Lake::rwl, "river")));
+}
+
 //======================================================================
 // class Number
 //======================================================================
@@ -9657,41 +9689,141 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 // class Bit
 //======================================================================
 
+inline void Bit::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Bit::mut", Expression::fin_(Static::fin_(&Bit::mut)));
+	s->update_("strange::Bit::fin", Expression::fin_(Static::fin_(&Bit::fin)));
+	s->update_("strange::Bit::lak", Expression::fin_(Static::fin_(&Bit::lak, "lake")));
+	s->update_("strange::Bit::riv", Expression::fin_(Static::fin_(&Bit::riv, "river")));
+	s->update_("strange::Bit::rwl", Expression::fin_(Static::fin_(&Bit::rwl, "river")));
+}
+
 //======================================================================
 // class Int8
 //======================================================================
+
+inline void Int8::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Int8::mut", Expression::fin_(Static::fin_(&Int8::mut)));
+	s->update_("strange::Int8::fin", Expression::fin_(Static::fin_(&Int8::fin)));
+	s->update_("strange::Int8::lak", Expression::fin_(Static::fin_(&Int8::lak, "lake")));
+	s->update_("strange::Int8::riv", Expression::fin_(Static::fin_(&Int8::riv, "river")));
+	s->update_("strange::Int8::rwl", Expression::fin_(Static::fin_(&Int8::rwl, "river")));
+}
 
 //======================================================================
 // class UInt8
 //======================================================================
 
+inline void UInt8::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::UInt8::mut", Expression::fin_(Static::fin_(&UInt8::mut)));
+	s->update_("strange::UInt8::fin", Expression::fin_(Static::fin_(&UInt8::fin)));
+	s->update_("strange::UInt8::lak", Expression::fin_(Static::fin_(&UInt8::lak, "lake")));
+	s->update_("strange::UInt8::riv", Expression::fin_(Static::fin_(&UInt8::riv, "river")));
+	s->update_("strange::UInt8::rwl", Expression::fin_(Static::fin_(&UInt8::rwl, "river")));
+}
+
 //======================================================================
 // class Int16
 //======================================================================
+
+inline void Int16::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Int16::mut", Expression::fin_(Static::fin_(&Int16::mut)));
+	s->update_("strange::Int16::fin", Expression::fin_(Static::fin_(&Int16::fin)));
+	s->update_("strange::Int16::lak", Expression::fin_(Static::fin_(&Int16::lak, "lake")));
+	s->update_("strange::Int16::riv", Expression::fin_(Static::fin_(&Int16::riv, "river")));
+	s->update_("strange::Int16::rwl", Expression::fin_(Static::fin_(&Int16::rwl, "river")));
+}
 
 //======================================================================
 // class Int32
 //======================================================================
 
+inline void Int32::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Int32::mut", Expression::fin_(Static::fin_(&Int32::mut)));
+	s->update_("strange::Int32::fin", Expression::fin_(Static::fin_(&Int32::fin)));
+	s->update_("strange::Int32::lak", Expression::fin_(Static::fin_(&Int32::lak, "lake")));
+	s->update_("strange::Int32::riv", Expression::fin_(Static::fin_(&Int32::riv, "river")));
+	s->update_("strange::Int32::rwl", Expression::fin_(Static::fin_(&Int32::rwl, "river")));
+}
+
 //======================================================================
 // class Int64
 //======================================================================
+
+inline void Int64::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Int64::mut", Expression::fin_(Static::fin_(&Int64::mut)));
+	s->update_("strange::Int64::fin", Expression::fin_(Static::fin_(&Int64::fin)));
+	s->update_("strange::Int64::lak", Expression::fin_(Static::fin_(&Int64::lak, "lake")));
+	s->update_("strange::Int64::riv", Expression::fin_(Static::fin_(&Int64::riv, "river")));
+	s->update_("strange::Int64::rwl", Expression::fin_(Static::fin_(&Int64::rwl, "river")));
+}
 
 //======================================================================
 // class Float32
 //======================================================================
 
+inline void Float32::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Float32::mut", Expression::fin_(Static::fin_(&Float32::mut)));
+	s->update_("strange::Float32::fin", Expression::fin_(Static::fin_(&Float32::fin)));
+	s->update_("strange::Float32::lak", Expression::fin_(Static::fin_(&Float32::lak, "lake")));
+	s->update_("strange::Float32::riv", Expression::fin_(Static::fin_(&Float32::riv, "river")));
+	s->update_("strange::Float32::rwl", Expression::fin_(Static::fin_(&Float32::rwl, "river")));
+}
+
 //======================================================================
 // class Float64
 //======================================================================
+
+inline void Float64::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Float64::mut", Expression::fin_(Static::fin_(&Float64::mut)));
+	s->update_("strange::Float64::fin", Expression::fin_(Static::fin_(&Float64::fin)));
+	s->update_("strange::Float64::lak", Expression::fin_(Static::fin_(&Float64::lak, "lake")));
+	s->update_("strange::Float64::riv", Expression::fin_(Static::fin_(&Float64::riv, "river")));
+	s->update_("strange::Float64::rwl", Expression::fin_(Static::fin_(&Float64::rwl, "river")));
+}
 
 //======================================================================
 // class Complex32
 //======================================================================
 
+inline void Complex32::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Complex32::mut", Expression::fin_(Static::fin_(&Complex32::mut)));
+	s->update_("strange::Complex32::fin", Expression::fin_(Static::fin_(&Complex32::fin)));
+	s->update_("strange::Complex32::lak", Expression::fin_(Static::fin_(&Complex32::lak, "lake")));
+	s->update_("strange::Complex32::riv", Expression::fin_(Static::fin_(&Complex32::riv, "river")));
+	s->update_("strange::Complex32::rwl", Expression::fin_(Static::fin_(&Complex32::rwl, "river")));
+}
+
 //======================================================================
 // class Complex64
 //======================================================================
+
+inline void Complex64::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Complex64::mut", Expression::fin_(Static::fin_(&Complex64::mut)));
+	s->update_("strange::Complex64::fin", Expression::fin_(Static::fin_(&Complex64::fin)));
+	s->update_("strange::Complex64::lak", Expression::fin_(Static::fin_(&Complex64::lak, "lake")));
+	s->update_("strange::Complex64::riv", Expression::fin_(Static::fin_(&Complex64::riv, "river")));
+	s->update_("strange::Complex64::rwl", Expression::fin_(Static::fin_(&Complex64::rwl, "river")));
+}
 
 //======================================================================
 // class River
