@@ -5455,6 +5455,8 @@ public:
 		return PUB;
 	}
 
+	static inline void share_(const Ptr shoal);
+
 	static inline const Ptr stat_()
 	{
 		static const Ptr STAT = []()
@@ -5648,6 +5650,8 @@ public:
 		}();
 		return PUB;
 	}
+
+	static inline void share_(const Ptr shoal);
 
 	static inline const Ptr stat_()
 	{
@@ -8819,11 +8823,6 @@ inline void Thing::share_(const Thing::Ptr shoal)
 	Complex64::share_(shoal);
 	River::share_(shoal);
 	Fence::share_(shoal);
-	Creature::share_(shoal);
-	Expression::share_(shoal);
-	Function::share_(shoal);
-	Tokenizer::share_(shoal);
-	Parser::share_(shoal);
 }
 
 inline const Thing::Ptr Thing::shared_()
@@ -9846,9 +9845,21 @@ inline void Complex64::share_(const Thing::Ptr shoal)
 // class River
 //======================================================================
 
+inline void River::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::River::mut", Static::fin_(&River::mut, "lake", "is_file"));
+}
+
 //======================================================================
 // class Fence
 //======================================================================
+
+inline void Fence::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Fence::mut", Static::fin_(&Fence::mut, "thing"));
+}
 
 //======================================================================
 // class Creator
