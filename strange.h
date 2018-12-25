@@ -6132,7 +6132,7 @@ public:
 		}
 		else if (statement->is_("lambda_"))
 		{
-			if (size >= 1)
+			if (size % 2 == 1)
 			{
 				return fin_(&Expression::_lambda_, flock);
 			}
@@ -6278,7 +6278,9 @@ public:
 	static inline const Ptr immediate_(const Ptr expression)
 	{
 		const Ptr local = Shoal::mut_();
-		static_<Shoal>(local)->update_("@", Int8::mut_());
+		Shoal* const loc = static_<Shoal>(local);
+		loc->update_("$", Shoal::mut_());
+		loc->update_("@", Int8::mut_());
 		return evaluate_(expression, local);
 	}
 
@@ -6483,23 +6485,24 @@ private:
 		return operate_(thing.get(), member, iterable->iterator_());
 	}
 
-	inline const Ptr _lambda_(const Ptr local) const //TODO return closure/Expression/Function?
+	inline const Ptr _lambda_(const Ptr local) const
 	{
 		Shoal* const shoal = static_<Shoal>(local);
 		Int8* const action = static_<Int8>(shoal->find_("@"));
-		const Ptr it = shoal->find_("&");
+		Shoal* const shared = static_<Shoal>(shoal->find_("$"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size_1 = flock->size_() - 1;
+		Ptr param;
 		for (int64_t i = 0; i < size_1; ++i)
 		{
-			const Ptr next = it->next_();
-			if (next->is_("."))
+			if (i % 2 == 0)
 			{
-				break;
+				param = flock->at_(i);
+				continue;
 			}
-			const Ptr param = Expression::evaluate_(flock->at_(i), local);
+			const Ptr value = Expression::evaluate_(flock->at_(i), local);
 			action->set_(0);
-			shoal->update_(param, next);
+			shared->update_(param, value);
 		}
 		const Ptr result = Expression::evaluate_(flock->at_(size_1), local);
 		action->set_(0);
@@ -6848,16 +6851,16 @@ class Function : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	inline Function(const Ptr expression, const Ptr stat)
+	inline Function(const Ptr expression, const Ptr shared)
 		: Thing{}
 		, _expression{ expression }
-		, _static{ stat }
+		, _shared{ shared }
 	{
 	}
 
-	static inline const Ptr fin_(const Ptr expression, const Ptr stat = Shoal::mut_())
+	static inline const Ptr fin_(const Ptr expression, const Ptr shared = Shoal::mut_())
 	{
-		return fake_<Function>(expression, stat);
+		return fake_<Function>(expression, shared);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -6871,7 +6874,7 @@ protected:
 	{
 		const Ptr local = Shoal::mut_();
 		Shoal* const loc = static_<Shoal>(local);
-		loc->insert_("$", _static);
+		loc->insert_("$", _shared);
 		Creature* const creature = dynamic_cast<Creature*>(thing);
 		if (creature)
 		{
@@ -6884,7 +6887,7 @@ protected:
 
 private:
 	const Ptr _expression;
-	const Ptr _static;
+	const Ptr _shared;
 };
 
 //----------------------------------------------------------------------
@@ -7545,18 +7548,9 @@ public:
 				else if (tag == 'N') // name
 				{
 					_next_();
-					if (symbol->is_("lambda_"))
+					if (symbol->is_("lambda_") || symbol->is_("function_"))
 					{
-						if (_statement_(scope, shoal, flock))
-						{
-							flk->push_back_(parse_(scope, shoal));
-							result = Expression::fin_(symbol, flock);
-							continue;
-						}
-					}
-					else if (symbol->is_("function_"))
-					{
-						if (_statement_(scope, shoal, flock, true)) // parameters
+						if (_statement_(scope, shoal, flock, true, symbol->is_("lambda_"))) // parameters/capture
 						{
 							const int64_t size = flk->size_();
 							if (size % 2 == 0)
@@ -7566,7 +7560,7 @@ public:
 							}
 							else
 							{
-								log_("parser error: invalid function_");
+								log_("parser error: invalid lambda_/function_");
 							}
 							continue;
 						}
@@ -8149,7 +8143,7 @@ private:
 		}
 	}
 
-	inline const bool _statement_(const Ptr scope, const Ptr shoal, const Ptr flock, const bool parameters = false)
+	inline const bool _statement_(const Ptr scope, const Ptr shoal, const Ptr flock, const bool parameters = false, const bool capture = false)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -8169,16 +8163,17 @@ private:
 		if (tag == 'P' && symbol->is_("("))
 		{
 			_next_();
-			_list_(scope, shoal, flock, symbol, sym_(")"), parameters);
+			_list_(scope, shoal, flock, symbol, sym_(")"), parameters, capture);
 			return true; // is a statement
 		}
 		return false; // not a statement
 	}
 
-	inline void _list_(const Ptr scope, const Ptr shoal, const Ptr flock, const Ptr open, const Ptr close, const bool parameters = false)
+	inline void _list_(const Ptr scope, const Ptr shoal, const Ptr flock, const Ptr open, const Ptr close, const bool parameters = false, const bool capture = false)
 	{
 		Flock* const flk = static_<Flock>(flock);
 		bool parameter = parameters;
+		Ptr captured;
 		bool punctuation = false;
 		for (bool first = true; true; first = false)
 		{
@@ -8223,7 +8218,14 @@ private:
 						_next_();
 						if (parameter)
 						{
-							flk->push_back_(Expression::fin_());
+							if (capture)
+							{
+								flk->push_back_(captured);
+							}
+							else
+							{
+								flk->push_back_(Expression::fin_());
+							}
 						}
 						return;
 					}
@@ -8234,10 +8236,16 @@ private:
 							log_("parser error: open expecting single item then close");
 							return;
 						}
-						_next_();
 						if (parameter)
 						{
-							flk->push_back_(Expression::fin_());
+							if (capture)
+							{
+								flk->push_back_(captured);
+							}
+							else
+							{
+								flk->push_back_(Expression::fin_());
+							}
 						}
 						else
 						{
@@ -8272,6 +8280,7 @@ private:
 					log_("parser error: open expecting , or close");
 					return;
 				}
+				_next_();
 				punctuation = false;
 				continue;
 			}
@@ -8280,6 +8289,14 @@ private:
 				if (tag == 'N') // name
 				{
 					flk->push_back_(symbol);
+					if (capture)
+					{
+						captured = parse_(scope, shoal);
+					}
+					else
+					{
+						_next_();
+					}
 				}
 				else
 				{
@@ -8652,7 +8669,7 @@ inline const Thing::Ptr Thing::call(const Thing::Ptr it)
 		log_(function);
 		return fun;
 	}
-	return Expression::immediate_(fun)->invoke(it);
+	return fun->invoke(it);
 }
 
 inline const Thing::Ptr Thing::pub_() const
