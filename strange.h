@@ -2369,7 +2369,11 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Reference::mut", Static::fin_(&Reference::mut, "thing"));
+	}
 
 	inline void set_(const Ptr ptr)
 	{
@@ -2540,7 +2544,11 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Weak::mut", Static::fin_(&Weak::mut, "thing"));
+	}
 
 	inline void set_(const Ptr ptr)
 	{
@@ -2788,7 +2796,15 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Lake::mut", Static::fin_(&Lake::mut));
+		s->update_("strange::Lake::fin", Static::fin_(&Lake::fin));
+		s->update_("strange::Lake::lak", Static::fin_(&Lake::lak, "lake"));
+		s->update_("strange::Lake::riv", Static::fin_(&Lake::riv, "river"));
+		s->update_("strange::Lake::rwl", Static::fin_(&Lake::rwl, "river"));
+	}
 
 	virtual inline const Ptr to_lake_() const override
 	{
@@ -3064,7 +3080,15 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Bit::mut", Static::fin_(&Bit::mut));
+		s->update_("strange::Bit::fin", Static::fin_(&Bit::fin));
+		s->update_("strange::Bit::lak", Static::fin_(&Bit::lak, "lake"));
+		s->update_("strange::Bit::riv", Static::fin_(&Bit::riv, "river"));
+		s->update_("strange::Bit::rwl", Static::fin_(&Bit::rwl, "river"));
+	}
 
 	virtual inline const Ptr to_lake_() const override
 	{
@@ -3237,7 +3261,15 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Int8::mut", Static::fin_(&Int8::mut));
+		s->update_("strange::Int8::fin", Static::fin_(&Int8::fin));
+		s->update_("strange::Int8::lak", Static::fin_(&Int8::lak, "lake"));
+		s->update_("strange::Int8::riv", Static::fin_(&Int8::riv, "river"));
+		s->update_("strange::Int8::rwl", Static::fin_(&Int8::rwl, "river"));
+	}
 
 	virtual inline const Ptr to_lake_() const override
 	{
@@ -3410,7 +3442,15 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::UInt8::mut", Static::fin_(&UInt8::mut));
+		s->update_("strange::UInt8::fin", Static::fin_(&UInt8::fin));
+		s->update_("strange::UInt8::lak", Static::fin_(&UInt8::lak, "lake"));
+		s->update_("strange::UInt8::riv", Static::fin_(&UInt8::riv, "river"));
+		s->update_("strange::UInt8::rwl", Static::fin_(&UInt8::rwl, "river"));
+	}
 
 	virtual inline const Ptr to_lake_() const override
 	{
@@ -3583,7 +3623,15 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Int16::mut", Static::fin_(&Int16::mut));
+		s->update_("strange::Int16::fin", Static::fin_(&Int16::fin));
+		s->update_("strange::Int16::lak", Static::fin_(&Int16::lak, "lake"));
+		s->update_("strange::Int16::riv", Static::fin_(&Int16::riv, "river"));
+		s->update_("strange::Int16::rwl", Static::fin_(&Int16::rwl, "river"));
+	}
 
 	virtual inline const Ptr to_lake_() const override
 	{
@@ -3762,7 +3810,15 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Int32::mut", Static::fin_(&Int32::mut));
+		s->update_("strange::Int32::fin", Static::fin_(&Int32::fin));
+		s->update_("strange::Int32::lak", Static::fin_(&Int32::lak, "lake"));
+		s->update_("strange::Int32::riv", Static::fin_(&Int32::riv, "river"));
+		s->update_("strange::Int32::rwl", Static::fin_(&Int32::rwl, "river"));
+	}
 
 	virtual inline const Ptr to_lake_() const override
 	{
@@ -3945,7 +4001,15 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Int64::mut", Static::fin_(&Int64::mut));
+		s->update_("strange::Int64::fin", Static::fin_(&Int64::fin));
+		s->update_("strange::Int64::lak", Static::fin_(&Int64::lak, "lake"));
+		s->update_("strange::Int64::riv", Static::fin_(&Int64::riv, "river"));
+		s->update_("strange::Int64::rwl", Static::fin_(&Int64::rwl, "river"));
+	}
 
 	virtual inline const Ptr to_lake_() const override
 	{
@@ -4136,7 +4200,15 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Float32::mut", Static::fin_(&Float32::mut));
+		s->update_("strange::Float32::fin", Static::fin_(&Float32::fin));
+		s->update_("strange::Float32::lak", Static::fin_(&Float32::lak, "lake"));
+		s->update_("strange::Float32::riv", Static::fin_(&Float32::riv, "river"));
+		s->update_("strange::Float32::rwl", Static::fin_(&Float32::rwl, "river"));
+	}
 
 	virtual inline const Ptr to_lake_() const override
 	{
@@ -4320,7 +4392,15 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Float64::mut", Static::fin_(&Float64::mut));
+		s->update_("strange::Float64::fin", Static::fin_(&Float64::fin));
+		s->update_("strange::Float64::lak", Static::fin_(&Float64::lak, "lake"));
+		s->update_("strange::Float64::riv", Static::fin_(&Float64::riv, "river"));
+		s->update_("strange::Float64::rwl", Static::fin_(&Float64::rwl, "river"));
+	}
 
 	virtual inline const Ptr to_lake_() const override
 	{
@@ -4514,7 +4594,15 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Complex32::mut", Static::fin_(&Complex32::mut));
+		s->update_("strange::Complex32::fin", Static::fin_(&Complex32::fin));
+		s->update_("strange::Complex32::lak", Static::fin_(&Complex32::lak, "lake"));
+		s->update_("strange::Complex32::riv", Static::fin_(&Complex32::riv, "river"));
+		s->update_("strange::Complex32::rwl", Static::fin_(&Complex32::rwl, "river"));
+	}
 
 	virtual inline const Ptr to_lake_() const override
 	{
@@ -4737,7 +4825,15 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Complex64::mut", Static::fin_(&Complex64::mut));
+		s->update_("strange::Complex64::fin", Static::fin_(&Complex64::fin));
+		s->update_("strange::Complex64::lak", Static::fin_(&Complex64::lak, "lake"));
+		s->update_("strange::Complex64::riv", Static::fin_(&Complex64::riv, "river"));
+		s->update_("strange::Complex64::rwl", Static::fin_(&Complex64::rwl, "river"));
+	}
 
 	virtual inline const Ptr to_lake_() const override
 	{
@@ -4943,7 +5039,11 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::River::mut", Static::fin_(&River::mut, "lake", "is_file"));
+	}
 
 	virtual inline const Ptr type_() const override
 	{
@@ -5119,7 +5219,11 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Fence::mut", Static::fin_(&Fence::mut, "thing"));
+	}
 
 	inline const bool give_(const Ptr ptr)
 	{
@@ -8910,21 +9014,9 @@ inline void Herd::Concurrent::share_(const Thing::Ptr shoal)
 // class Reference
 //======================================================================
 
-inline void Reference::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Reference::mut", Static::fin_(&Reference::mut, "thing"));
-}
-
 //======================================================================
 // class Weak
 //======================================================================
-
-inline void Weak::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Weak::mut", Static::fin_(&Weak::mut, "thing"));
-}
 
 //======================================================================
 // class Data
@@ -8962,16 +9054,6 @@ inline void Lake::from_river_(const Thing::Ptr river)
 	{
 		finalize_();
 	}
-}
-
-inline void Lake::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Lake::mut", Static::fin_(&Lake::mut));
-	s->update_("strange::Lake::fin", Static::fin_(&Lake::fin));
-	s->update_("strange::Lake::lak", Static::fin_(&Lake::lak, "lake"));
-	s->update_("strange::Lake::riv", Static::fin_(&Lake::riv, "river"));
-	s->update_("strange::Lake::rwl", Static::fin_(&Lake::rwl, "river"));
 }
 
 //======================================================================
@@ -9038,161 +9120,49 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 // class Bit
 //======================================================================
 
-inline void Bit::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Bit::mut", Static::fin_(&Bit::mut));
-	s->update_("strange::Bit::fin", Static::fin_(&Bit::fin));
-	s->update_("strange::Bit::lak", Static::fin_(&Bit::lak, "lake"));
-	s->update_("strange::Bit::riv", Static::fin_(&Bit::riv, "river"));
-	s->update_("strange::Bit::rwl", Static::fin_(&Bit::rwl, "river"));
-}
-
 //======================================================================
 // class Int8
 //======================================================================
-
-inline void Int8::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Int8::mut", Static::fin_(&Int8::mut));
-	s->update_("strange::Int8::fin", Static::fin_(&Int8::fin));
-	s->update_("strange::Int8::lak", Static::fin_(&Int8::lak, "lake"));
-	s->update_("strange::Int8::riv", Static::fin_(&Int8::riv, "river"));
-	s->update_("strange::Int8::rwl", Static::fin_(&Int8::rwl, "river"));
-}
 
 //======================================================================
 // class UInt8
 //======================================================================
 
-inline void UInt8::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::UInt8::mut", Static::fin_(&UInt8::mut));
-	s->update_("strange::UInt8::fin", Static::fin_(&UInt8::fin));
-	s->update_("strange::UInt8::lak", Static::fin_(&UInt8::lak, "lake"));
-	s->update_("strange::UInt8::riv", Static::fin_(&UInt8::riv, "river"));
-	s->update_("strange::UInt8::rwl", Static::fin_(&UInt8::rwl, "river"));
-}
-
 //======================================================================
 // class Int16
 //======================================================================
-
-inline void Int16::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Int16::mut", Static::fin_(&Int16::mut));
-	s->update_("strange::Int16::fin", Static::fin_(&Int16::fin));
-	s->update_("strange::Int16::lak", Static::fin_(&Int16::lak, "lake"));
-	s->update_("strange::Int16::riv", Static::fin_(&Int16::riv, "river"));
-	s->update_("strange::Int16::rwl", Static::fin_(&Int16::rwl, "river"));
-}
 
 //======================================================================
 // class Int32
 //======================================================================
 
-inline void Int32::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Int32::mut", Static::fin_(&Int32::mut));
-	s->update_("strange::Int32::fin", Static::fin_(&Int32::fin));
-	s->update_("strange::Int32::lak", Static::fin_(&Int32::lak, "lake"));
-	s->update_("strange::Int32::riv", Static::fin_(&Int32::riv, "river"));
-	s->update_("strange::Int32::rwl", Static::fin_(&Int32::rwl, "river"));
-}
-
 //======================================================================
 // class Int64
 //======================================================================
-
-inline void Int64::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Int64::mut", Static::fin_(&Int64::mut));
-	s->update_("strange::Int64::fin", Static::fin_(&Int64::fin));
-	s->update_("strange::Int64::lak", Static::fin_(&Int64::lak, "lake"));
-	s->update_("strange::Int64::riv", Static::fin_(&Int64::riv, "river"));
-	s->update_("strange::Int64::rwl", Static::fin_(&Int64::rwl, "river"));
-}
 
 //======================================================================
 // class Float32
 //======================================================================
 
-inline void Float32::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Float32::mut", Static::fin_(&Float32::mut));
-	s->update_("strange::Float32::fin", Static::fin_(&Float32::fin));
-	s->update_("strange::Float32::lak", Static::fin_(&Float32::lak, "lake"));
-	s->update_("strange::Float32::riv", Static::fin_(&Float32::riv, "river"));
-	s->update_("strange::Float32::rwl", Static::fin_(&Float32::rwl, "river"));
-}
-
 //======================================================================
 // class Float64
 //======================================================================
-
-inline void Float64::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Float64::mut", Static::fin_(&Float64::mut));
-	s->update_("strange::Float64::fin", Static::fin_(&Float64::fin));
-	s->update_("strange::Float64::lak", Static::fin_(&Float64::lak, "lake"));
-	s->update_("strange::Float64::riv", Static::fin_(&Float64::riv, "river"));
-	s->update_("strange::Float64::rwl", Static::fin_(&Float64::rwl, "river"));
-}
 
 //======================================================================
 // class Complex32
 //======================================================================
 
-inline void Complex32::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Complex32::mut", Static::fin_(&Complex32::mut));
-	s->update_("strange::Complex32::fin", Static::fin_(&Complex32::fin));
-	s->update_("strange::Complex32::lak", Static::fin_(&Complex32::lak, "lake"));
-	s->update_("strange::Complex32::riv", Static::fin_(&Complex32::riv, "river"));
-	s->update_("strange::Complex32::rwl", Static::fin_(&Complex32::rwl, "river"));
-}
-
 //======================================================================
 // class Complex64
 //======================================================================
-
-inline void Complex64::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Complex64::mut", Static::fin_(&Complex64::mut));
-	s->update_("strange::Complex64::fin", Static::fin_(&Complex64::fin));
-	s->update_("strange::Complex64::lak", Static::fin_(&Complex64::lak, "lake"));
-	s->update_("strange::Complex64::riv", Static::fin_(&Complex64::riv, "river"));
-	s->update_("strange::Complex64::rwl", Static::fin_(&Complex64::rwl, "river"));
-}
 
 //======================================================================
 // class River
 //======================================================================
 
-inline void River::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::River::mut", Static::fin_(&River::mut, "lake", "is_file"));
-}
-
 //======================================================================
 // class Fence
 //======================================================================
-
-inline void Fence::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Fence::mut", Static::fin_(&Fence::mut, "thing"));
-}
 
 //======================================================================
 // class Creator
