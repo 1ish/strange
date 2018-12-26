@@ -149,21 +149,33 @@ public:
 	static inline const Ptr sym_(F&& symbol);
 
 	// public static symbols
-	static inline const Ptr nothing_();
+	static inline const Ptr nothing_()
+	{
+		static const Ptr NOTHING = sym_("");
+		return NOTHING;
+	}
 
 	static inline const Ptr nothing(const Ptr ignore)
 	{
 		return nothing_();
 	}
 
-	static inline const Ptr one_();
+	static inline const Ptr one_()
+	{
+		static const Ptr ONE = sym_("1");
+		return ONE;
+	}
 
 	static inline const Ptr one(const Ptr ignore)
 	{
 		return one_();
 	}
 
-	static inline const Ptr stop_();
+	static inline const Ptr stop_()
+	{
+		static const Ptr STOP = sym_(".");
+		return STOP;
+	}
 
 	static inline const Ptr stop(const Ptr ignore)
 	{
@@ -988,7 +1000,14 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Shoal::mut", Static::fin_(&Shoal::mut));
+		s->update_("strange::Shoal::lak", Static::fin_(&Shoal::lak, "lake"));
+		s->update_("strange::Shoal::riv", Static::fin_(&Shoal::riv, "river"));
+		s->update_("strange::Shoal::rwl", Static::fin_(&Shoal::rwl, "river"));
+	}
 
 	static inline const Ptr mut_()
 	{
@@ -1188,7 +1207,11 @@ public:
 			return PUB;
 		}
 
-		static inline void share_(const Ptr shoal);
+		static inline void share_(const Ptr shoal)
+		{
+			Shoal* const s = static_<Shoal>(shoal);
+			s->update_("strange::Shoal::Concurrent::mut", Static::fin_(&Shoal::Concurrent::mut, "shoal"));
+		}
 
 		static inline const Ptr mut_(const Ptr shoal)
 		{
@@ -1450,7 +1473,14 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
+		s->update_("strange::Flock::lak", Static::fin_(&Flock::lak, "lake"));
+		s->update_("strange::Flock::riv", Static::fin_(&Flock::riv, "river"));
+		s->update_("strange::Flock::rwl", Static::fin_(&Flock::rwl, "river"));
+	}
 
 	static inline const Ptr mut_()
 	{
@@ -1617,7 +1647,11 @@ public:
 			return PUB;
 		}
 
-		static inline void share_(const Ptr shoal);
+		static inline void share_(const Ptr shoal)
+		{
+			Shoal* const s = static_<Shoal>(shoal);
+			s->update_("strange::Flock::Concurrent::mut", Static::fin_(&Flock::Concurrent::mut, "flock"));
+		}
 
 		static inline const Ptr mut_(const Ptr flock)
 		{
@@ -1840,7 +1874,14 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Herd::mut", Static::fin_(&Herd::mut));
+		s->update_("strange::Herd::lak", Static::fin_(&Herd::lak, "lake"));
+		s->update_("strange::Herd::riv", Static::fin_(&Herd::riv, "river"));
+		s->update_("strange::Herd::rwl", Static::fin_(&Herd::rwl, "river"));
+	}
 
 	static inline const Ptr mut_()
 	{
@@ -2007,7 +2048,11 @@ public:
 			return PUB;
 		}
 
-		static inline void share_(const Ptr shoal);
+		static inline void share_(const Ptr shoal)
+		{
+			Shoal* const s = static_<Shoal>(shoal);
+			s->update_("strange::Herd::Concurrent::mut", Static::fin_(&Herd::Concurrent::mut, "herd"));
+		}
 
 		static inline const Ptr mut_(const Ptr herd)
 		{
@@ -6095,9 +6140,43 @@ private:
 		return result;
 	}
 
-	inline const Ptr _shared_scope_(const Ptr local) const;
+	inline const Ptr _shared_scope_(const Ptr local) const
+	{
+		Flock* const flk = static_<Flock>(_flock);
+		return static_<Shoal>(flk->at_(0))->find_(flk->at_(1));
+	}
 	
-	inline const Ptr _relative_scope_(const Ptr local) const;
+	inline const Ptr _relative_scope_(const Ptr local) const
+	{
+		// search scope from bottom to top
+		Flock* const flk = static_<Flock>(_flock);
+		Shoal* const shoal = static_<Shoal>(flk->at_(0));
+		const Ptr key = flk->at_(1);
+		const std::string& key_str = static_<Symbol>(key)->symbol_();
+		std::string scope = static_<Symbol>(flk->at_(2))->symbol_();
+		for (;;)
+		{
+			if (scope.empty())
+			{
+				return shoal->find_(key);
+			}
+			const Ptr result = shoal->find_(scope + "::" + key_str);
+			if (!result->is_(""))
+			{
+				return result;
+			}
+			const size_t pos = scope.find_last_of("::");
+			if (pos == std::string::npos)
+			{
+				scope = "";
+			}
+			else
+			{
+				scope = scope.substr(0, pos);
+			}
+		}
+		return nothing_();
+	}
 
 	inline const Ptr _flock_(const Ptr local) const
 	{
@@ -8158,24 +8237,6 @@ inline const Thing::Ptr Thing::sym_(F&& symbol)
 	return Symbol::fin_(std::forward<F>(symbol));
 }
 
-inline const Thing::Ptr Thing::nothing_()
-{
-	static const Ptr NOTHING = sym_("");
-	return NOTHING;
-}
-
-inline const Thing::Ptr Thing::one_()
-{
-	static const Ptr ONE = sym_("1");
-	return ONE;
-}
-
-inline const Thing::Ptr Thing::stop_()
-{
-	static const Ptr STOP = sym_(".");
-	return STOP;
-}
-
 inline const Thing::Ptr Thing::call(const Thing::Ptr it)
 {
 	const Ptr function = it->next_();
@@ -8649,21 +8710,6 @@ inline const Thing::Ptr Shoal::cats_() const
 	return CATS;
 }
 
-inline void Shoal::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Shoal::mut", Static::fin_(&Shoal::mut));
-	s->update_("strange::Shoal::lak", Static::fin_(&Shoal::lak, "lake"));
-	s->update_("strange::Shoal::riv", Static::fin_(&Shoal::riv, "river"));
-	s->update_("strange::Shoal::rwl", Static::fin_(&Shoal::rwl, "river"));
-}
-
-inline void Shoal::Concurrent::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Shoal::Concurrent::mut", Static::fin_(&Shoal::Concurrent::mut, "shoal"));
-}
-
 inline const Thing::Ptr Shoal::Iterator::cats_() const
 {
 	static const Ptr CATS = []()
@@ -8877,21 +8923,6 @@ inline const Thing::Ptr Flock::Iterator::cats_() const
 	return CATS;
 }
 
-inline void Flock::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
-	s->update_("strange::Flock::lak", Static::fin_(&Flock::lak, "lake"));
-	s->update_("strange::Flock::riv", Static::fin_(&Flock::riv, "river"));
-	s->update_("strange::Flock::rwl", Static::fin_(&Flock::rwl, "river"));
-}
-
-inline void Flock::Concurrent::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Flock::Concurrent::mut", Static::fin_(&Flock::Concurrent::mut, "flock"));
-}
-
 //======================================================================
 // class Herd
 //======================================================================
@@ -8981,21 +9012,6 @@ inline void Herd::replace_links_(const Thing::Ptr shoal)
 		replacement.insert(sho->find_(i));
 	}
 	_set.swap(replacement);
-}
-
-inline void Herd::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Herd::mut", Static::fin_(&Herd::mut));
-	s->update_("strange::Herd::lak", Static::fin_(&Herd::lak, "lake"));
-	s->update_("strange::Herd::riv", Static::fin_(&Herd::riv, "river"));
-	s->update_("strange::Herd::rwl", Static::fin_(&Herd::rwl, "river"));
-}
-
-inline void Herd::Concurrent::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Herd::Concurrent::mut", Static::fin_(&Herd::Concurrent::mut, "herd"));
 }
 
 //======================================================================
@@ -9175,44 +9191,6 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 //======================================================================
 // class Expression
 //======================================================================
-
-inline const Thing::Ptr Expression::_shared_scope_(const Thing::Ptr local) const
-{
-	Flock* const flk = static_<Flock>(_flock);
-	return static_<Shoal>(flk->at_(0))->find_(flk->at_(1));
-}
-
-inline const Thing::Ptr Expression::_relative_scope_(const Thing::Ptr local) const
-{
-	// search scope from bottom to top
-	Flock* const flk = static_<Flock>(_flock);
-	Shoal* const shoal = static_<Shoal>(flk->at_(0));
-	const Ptr key = flk->at_(1);
-	const std::string& key_str = static_<Symbol>(key)->symbol_();
-	std::string scope = static_<Symbol>(flk->at_(2))->symbol_();
-	for (;;)
-	{
-		if (scope.empty())
-		{
-			return shoal->find_(key);
-		}
-		const Ptr result = shoal->find_(scope + "::" + key_str);
-		if (!result->is_(""))
-		{
-			return result;
-		}
-		const size_t pos = scope.find_last_of("::");
-		if (pos == std::string::npos)
-		{
-			scope = "";
-		}
-		else
-		{
-			scope = scope.substr(0, pos);
-		}
-	}
-	return nothing_();
-}
 
 //======================================================================
 // class Function
