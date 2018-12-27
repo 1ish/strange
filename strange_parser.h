@@ -272,17 +272,13 @@ public:
 					}
 					else if (symbol->is_("@@")) // local
 					{
-						flk->push_back_(Expression::fin_(local, Flock::mut_())); // local
 						_next_();
-						cont = _thing_(scope, shoal, statement, flock);
-						result = Expression::fin_(smt->get_(), flock);
+						result = Expression::fin_(local, Flock::mut_()); // local
 					}
 					else if (symbol->is_("$$") || symbol->is_("**")) // shared/relative scope
 					{
 						_next_();
-						_scope_(scope, shoal, flock, symbol->is_("**"));
-						cont = _thing_(scope, shoal, statement, flock);
-						result = Expression::fin_(smt->get_(), flock);
+						result = _scope_(scope, shoal, flock, symbol->is_("**"));
 					}
 					else if (symbol->is_("(")) // block
 					{
@@ -1046,7 +1042,7 @@ private:
 		return is_map;
 	}
 
-	inline void _scope_(const Ptr scope, const Ptr shoal, const Ptr flock, const bool relative)
+	inline const Ptr _scope_(const Ptr scope, const Ptr shoal, const Ptr flock, const bool relative)
 	{
 		Ptr key = nothing_();
 		bool punctuation = false;
@@ -1062,7 +1058,7 @@ private:
 			if (tag == 'E') // error
 			{
 				log_("tokenizer error");
-				return;
+				return Expression::fin_();
 			}
 			const int64_t x = static_<Int64>(tok->at_(1))->get_();
 			const int64_t y = static_<Int64>(tok->at_(2))->get_();
@@ -1113,12 +1109,9 @@ private:
 		if (relative)
 		{
 			key_flk->push_back_(scope);
-			static_<Flock>(flock)->push_back_(Expression::fin_(sym_("relative_scope_"), key_flock));
+			return Expression::fin_(sym_("relative_scope_"), key_flock);
 		}
-		else
-		{
-			static_<Flock>(flock)->push_back_(Expression::fin_(sym_("shared_scope_"), key_flock));
-		}
+		return Expression::fin_(sym_("shared_scope_"), key_flock);
 	}
 	
 	inline const bool _at_(const Ptr scope, const Ptr shoal, const Ptr flock)
