@@ -280,9 +280,11 @@ public:
 						_next_();
 						result = _scope_(scope, shoal, flock, symbol->is_("**"));
 					}
-					else if (symbol->is_("<>")) //TODO container
+					else if (symbol->is_("<>")) // container
 					{
-
+						flk->push_back_(shoal);
+						flk->push_back_(scope);
+						result = Expression::fin_(sym_("shared_scope_"), flock);
 					}
 					else if (symbol->is_("(")) // block
 					{
