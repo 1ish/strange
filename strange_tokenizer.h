@@ -286,13 +286,6 @@ public:
 				}
 				return punctuation_(token);
 			case '@':
-				token = char1;
-				if (char1 == char2 || char2 == '$' || char2 == '|')
-				{
-					second = true;
-					break;
-				}
-				return punctuation_(token);
 			case '&':
 			case '|':
 			case '^':

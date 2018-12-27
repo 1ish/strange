@@ -270,18 +270,6 @@ public:
 						_next_();
 						result = Expression::fin_(invoke, flock);
 					}
-					else if (symbol->is_("@$") || symbol->is_("@|")) // shared or me
-					{
-						const Ptr nested = Flock::mut_();
-						static_<Flock>(nested)->push_back_(Expression::fin_(local, Flock::mut_())); // local
-						_wrap_(at, nested);
-						_wrap_(sym_(static_<Symbol>(symbol)->symbol_().substr(1)), nested);
-
-						flk->push_back_(Expression::fin_(invoke, nested));
-						_next_();
-						cont = _thing_(scope, shoal, statement, flock);
-						result = Expression::fin_(smt->get_(), flock);
-					}
 					else if (symbol->is_("@@")) // local
 					{
 						flk->push_back_(Expression::fin_(local, Flock::mut_())); // local
