@@ -46,7 +46,6 @@ public:
 	inline Parser(const Ptr tokenizer)
 		: Mutable{}
 		, _tokenizer{ tokenizer }
-		, _flock{ Flock::mut_() }
 		, _next{ _tokenizer->next_() }
 	{
 	}
@@ -94,7 +93,54 @@ public:
 		return _tokenizer->invoke_("eof");
 	}
 
-	inline const Ptr parse_(const Ptr scope, const Ptr shoal)
+	inline const Ptr parse_()
+	{
+		const Ptr shoal = Shoal::mut_();
+		Thing::share_(shoal);
+		return _parse_(nothing_(), shoal);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Parser");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Parser");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+private:
+	const Ptr _tokenizer;
+	Ptr _next;
+
+	inline const Ptr _token_()
+	{
+		return _next;
+	}
+
+	inline const void _next_()
+	{
+		_next = _tokenizer->next_();
+	}
+
+	static inline void _wrap_(const Ptr thing, const Ptr flock)
+	{
+		static_<Flock>(flock)->push_back_(Expression::fin_(thing));
+	}
+
+	inline const Ptr _parse_(const Ptr scope, const Ptr shoal)
 	{
 		Ptr result;
 		for (bool first = true, cont = true; cont; first = false)
@@ -138,7 +184,7 @@ public:
 							const int64_t size = flk->size_();
 							if (size % 2 == 0)
 							{
-								flk->push_back_(parse_(scope, shoal));
+								flk->push_back_(_parse_(scope, shoal));
 								result = Expression::fin_(symbol, flock);
 							}
 							else
@@ -187,7 +233,7 @@ public:
 							const int64_t size = flk->size_();
 							if (size == 1)
 							{
-								flk->push_back_(parse_(scope, shoal));
+								flk->push_back_(_parse_(scope, shoal));
 								result = Expression::fin_(symbol, flock);
 							}
 							else
@@ -204,7 +250,7 @@ public:
 							const int64_t size = flk->size_();
 							if (size == 3)
 							{
-								flk->push_back_(parse_(scope, shoal));
+								flk->push_back_(_parse_(scope, shoal));
 								result = Expression::fin_(symbol, flock);
 							}
 							else
@@ -342,47 +388,6 @@ public:
 		return Expression::fin_();
 	}
 
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::Parser");
-		return TYPE;
-	}
-
-	virtual inline const Ptr cats_() const override
-	{
-		static const Ptr CATS = []()
-		{
-			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
-			herd->insert_("strange::Parser");
-			herd->insert_("strange::Thing");
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
-	}
-
-private:
-	const Ptr _tokenizer;
-	Ptr _flock;
-	Ptr _next;
-
-	inline const Ptr _token_()
-	{
-		return _next;
-	}
-
-	inline const void _next_()
-	{
-		_next = _tokenizer->next_();
-	}
-
-	static inline void _wrap_(const Ptr thing, const Ptr flock)
-	{
-		static_<Flock>(flock)->push_back_(Expression::fin_(thing));
-	}
-
 	inline const bool _thing_(const Ptr scope, const Ptr shoal, const Ptr statement, const Ptr flock)
 	{
 		const Ptr token = _token_();
@@ -411,7 +416,7 @@ private:
 			}
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
-				flk->push_back_(parse_(scope, shoal));
+				flk->push_back_(_parse_(scope, shoal));
 				smt->set_(sym_("invoke_iterable_"));
 			}
 			else if (symbol->is_("[")) // flock
@@ -626,7 +631,7 @@ private:
 		}
 		else
 		{
-			flk->push_back_(parse_(scope, shoal));
+			flk->push_back_(_parse_(scope, shoal));
 			smt->set_(sym_("invoke_iterable_"));
 		}
 		return true; // continue
@@ -696,7 +701,7 @@ private:
 			}
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
-				flk->push_back_(parse_(scope, shoal));
+				flk->push_back_(_parse_(scope, shoal));
 				smt->set_(sym_("operate_iterable_"));
 			}
 			else if (symbol->is_("[")) // flock
@@ -717,7 +722,7 @@ private:
 		}
 		else
 		{
-			flk->push_back_(parse_(scope, shoal));
+			flk->push_back_(_parse_(scope, shoal));
 			smt->set_(sym_("operate_iterable_"));
 		}
 	}
@@ -870,7 +875,7 @@ private:
 					flk->push_back_(symbol);
 					if (capture)
 					{
-						captured = parse_(scope, shoal);
+						captured = _parse_(scope, shoal);
 					}
 					else
 					{
@@ -885,7 +890,7 @@ private:
 			}
 			else
 			{
-				flk->push_back_(parse_(scope, shoal));
+				flk->push_back_(_parse_(scope, shoal));
 			}
 			punctuation = true;
 		}
@@ -1031,16 +1036,20 @@ private:
 			}
 			if (key)
 			{
-				add_scope = parse_(scope, shoal);
+				add_scope = _parse_(scope, shoal);
 				flk->push_back_(add_scope);
 			}
 			else
 			{
-				Symbol* const add_scope_symbol = dynamic_<Symbol>(Expression::immediate_(add_scope));
-				const Ptr new_scope = add_scope_symbol
-					? sym_(static_<Symbol>(scope)->symbol_() + "::" + add_scope_symbol->symbol_())
+				const Ptr add_scope_symbol = Expression::immediate_(add_scope);
+				Symbol* const add_scope_sym = dynamic_<Symbol>(add_scope_symbol);
+				const Ptr new_scope = add_scope_sym
+					? ( scope->is_("")
+						? add_scope_symbol
+						: sym_(static_<Symbol>(scope)->symbol_() + "::" + add_scope_sym->symbol_())
+					)
 					: scope;
-				const Ptr value = parse_(new_scope, shoal);
+				const Ptr value = _parse_(new_scope, shoal);
 				flk->push_back_(value);
 				if (add_shoal)
 				{
@@ -1182,7 +1191,7 @@ private:
 		{
 			_next_();
 			flk->update_(flk->size_() - 2, Expression::fin_(sym_("update")));
-			flk->push_back_(parse_(scope, shoal));
+			flk->push_back_(_parse_(scope, shoal));
 			return false; // break
 		}
 		return true; // continue
