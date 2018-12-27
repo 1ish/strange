@@ -117,7 +117,6 @@ public:
 			const Ptr flock = Flock::mut_();
 			Flock* const flk = static_<Flock>(flock);
 			static const Ptr local = sym_("local_");
-			static const Ptr thing = sym_("thing_");
 			static const Ptr invoke = sym_("invoke_");
 			static const Ptr at = sym_("at");
 			const Ptr statement = Reference::mut_(invoke);
@@ -127,7 +126,7 @@ public:
 				if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 				{
 					flk->push_back_(tok->at_(4));
-					result = Expression::fin_(thing, flock);
+					result = Expression::fin_(sym_("thing_"), flock);
 				}
 				else if (tag == 'N') // name
 				{
