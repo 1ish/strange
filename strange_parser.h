@@ -47,7 +47,6 @@ public:
 		: Mutable{}
 		, _tokenizer{ tokenizer }
 		, _flock{ Flock::mut_() }
-		//, _deque{}
 		, _next{ _tokenizer->next_() }
 	{
 	}
@@ -368,33 +367,15 @@ public:
 private:
 	const Ptr _tokenizer;
 	Ptr _flock;
-	//std::deque<Ptr> _deque;
 	Ptr _next;
 
-	inline const Ptr _token_(/*const int64_t lookahead = 0*/)
+	inline const Ptr _token_()
 	{
-		/*
-		while (int64_t(_deque.size()) <= lookahead)
-		{
-			_deque.push_back(_tokenizer->next_());
-		}
-		return _deque.at(lookahead);
-		*/
 		return _next;
 	}
 
 	inline const void _next_()
 	{
-		/*
-		if (_deque.empty())
-		{
-			_tokenizer->next_();
-		}
-		else
-		{
-			_deque.pop_front();
-		}
-		*/
 		_next = _tokenizer->next_();
 	}
 

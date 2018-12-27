@@ -3,8 +3,6 @@
 
 #include "strange_core.h"
 
-//#include <deque>
-
 namespace strange
 {
 	class Tokenizer;
