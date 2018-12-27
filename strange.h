@@ -2,6 +2,10 @@
 #define COM_ONEISH_STRANGE_H
 
 #include "strange_core.h"
+#include "strange_method.h"
+#include "strange_reference.h"
+#include "strange_weak.h"
+#include "strange_fence.h"
 #include "strange_creature.h"
 #include "strange_expression.h"
 #include "strange_function.h"
@@ -35,6 +39,47 @@ namespace strange
 	// private pure virtual member functions and adapters
 	// private impure virtual member functions and adapters
 	// private non-virtual member functions and adapters
+
+inline void Thing::share_(const Thing::Ptr shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Thing::boolean", Static::fin_(&Thing::boolean, "value"));
+	s->update_("strange::Thing::log", Static::fin_(&Thing::log, "message"));
+	s->update_("strange::Thing::call", Static::fin_(&Thing::call, "function"));
+	s->update_("strange::Thing::nothing", Static::fin_(&Thing::nothing));
+	s->update_("strange::Thing::one", Static::fin_(&Thing::one));
+	s->update_("strange::Thing::stop", Static::fin_(&Thing::stop));
+
+	// strange_core
+	Symbol::share_(shoal);
+	Shoal::share_(shoal);
+	Shoal::Concurrent::share_(shoal);
+	Flock::share_(shoal);
+	Flock::Concurrent::share_(shoal);
+	Herd::share_(shoal);
+	Herd::Concurrent::share_(shoal);
+	Lake::share_(shoal);
+	Bit::share_(shoal);
+	Int8::share_(shoal);
+	UInt8::share_(shoal);
+	Int16::share_(shoal);
+	Int32::share_(shoal);
+	Int64::share_(shoal);
+	Float32::share_(shoal);
+	Float64::share_(shoal);
+	Complex32::share_(shoal);
+	Complex64::share_(shoal);
+	River::share_(shoal);
+
+	// strange_reference
+	Reference::share_(shoal);
+
+	// strange_weak
+	Weak::share_(shoal);
+
+	// strange_fence
+	Fence::share_(shoal);
+}
 
 } // namespace strange
 

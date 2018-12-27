@@ -23,7 +23,6 @@ namespace strange
 	class Serializable;
 	class Symbol;
 	class Static;
-	class Method;
 	template <typename T> class Member;
 	template <typename T> class Const;
 	class Mutable;
@@ -33,8 +32,6 @@ namespace strange
 	class IteratorPtr;
 	template <typename C> class IteratorCopy;
 	template <typename C> class IteratorRef;
-	class Reference;
-	class Weak;
 	template <typename D> class Data;
 	class Lake;
 	class Number;
@@ -49,7 +46,6 @@ namespace strange
 	class Complex32;
 	class Complex64;
 	class River;
-	class Fence;
 
 	// Categories:
 	// private typedefs
@@ -691,47 +687,6 @@ protected:
 private:
 	const function _function;
 	std::vector<Ptr> _params;
-};
-
-//----------------------------------------------------------------------
-class Method : public Thing
-//----------------------------------------------------------------------
-{
-public:
-	inline Method(const Ptr thing, const Ptr member) // member is a functor, not a name
-		: Thing{}
-		, _thing{ thing }
-		, _member{ member }
-	{
-	}
-
-	static inline const Ptr fin_(const Ptr thing, const Ptr member) // member is functor, not a name
-	{
-		return fake_<Method>(thing, member);
-	}
-
-	static inline const Ptr with_name_(const Ptr thing, const Ptr name);
-
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::Method");
-		return TYPE;
-	}
-
-	virtual inline const Ptr eater_() const override
-	{
-		return _member->eater_();
-	}
-
-protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
-	{
-		return operate_(_thing.get(), _member, it);
-	}
-
-private:
-	const Ptr _thing;
-	const Ptr _member;
 };
 
 template <typename T>
@@ -2354,361 +2309,6 @@ public:
 private:
 	const C& _collection;
 	typename C::const_iterator _iterator;
-};
-
-//----------------------------------------------------------------------
-class Reference : public Mutable
-//----------------------------------------------------------------------
-{
-public:
-	inline Reference(const Ptr ptr)
-		: Mutable{}
-		, _ptr{ ptr }
-	{
-	}
-
-	static inline const Ptr mut(const Ptr it)
-	{
-		return mut_(it->next_());
-	}
-
-	static inline const Ptr mut_(const Ptr ptr)
-	{
-		return make_<Reference>(ptr);
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return mut_(_ptr);
-	}
-
-	virtual inline const Ptr clone_() const override
-	{
-		return mut_(_ptr->copy_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return Iterator::mut_(me_());
-	}
-
-	virtual inline const Ptr pub_() const override
-	{
-		static const Ptr PUB = [this]()
-		{
-			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
-			shoal->update_("mut", Static::fin_(&Reference::mut, "thing"));
-			shoal->update_("set", Member<Reference>::fin_(&Reference::set));
-			shoal->update_("get", Const<Reference>::fin_(&Reference::get));
-			shoal->finalize_();
-			return pub;
-		}();
-		return PUB;
-	}
-
-	static inline void share_(const Ptr shoal)
-	{
-		Shoal* const s = static_<Shoal>(shoal);
-		s->update_("strange::Reference::mut", Static::fin_(&Reference::mut, "thing"));
-	}
-
-	inline void set_(const Ptr ptr)
-	{
-		_ptr = ptr;
-	}
-
-	inline const Ptr set(const Ptr it)
-	{
-		const Ptr ptr = it->next_();
-		set_(ptr);
-		return ptr;
-	}
-
-	inline const Ptr get_() const
-	{
-		return _ptr;
-	}
-
-	inline const Ptr get(const Ptr ignore) const
-	{
-		return get_();
-	}
-
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::Reference");
-		return TYPE;
-	}
-
-	virtual inline const Ptr cats_() const override
-	{
-		static const Ptr CATS = []()
-		{
-			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
-			herd->insert_("strange::Thing");
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
-	}
-
-private:
-	Ptr _ptr;
-
-	class Iterator : public Mutable
-	{
-	public:
-		inline Iterator(const Ptr reference)
-			: Mutable{}
-			, _reference{ reference }
-		{
-		}
-
-		static inline const Ptr mut(const Ptr it)
-		{
-			return mut_(it->next_());
-		}
-
-		static inline const Ptr mut_(const Ptr reference)
-		{
-			make_<Iterator>(reference);
-		}
-
-		virtual inline const Ptr copy_() const override
-		{
-			return mut_(_reference);
-		}
-
-		virtual inline const Ptr next_() override
-		{
-			if (_reference->is_("."))
-			{
-				return _reference;
-			}
-			const Ptr ptr = static_<Reference>(_reference)->get_();
-			_reference = stop_();
-			return ptr;
-		}
-
-		virtual inline const Ptr pub_() const override
-		{
-			static const Ptr PUB = [this]()
-			{
-				const Ptr pub = Thing::pub_()->copy_();
-				Shoal* const shoal = static_<Shoal>(pub);
-				shoal->update_("mut", Static::fin_(&Iterator::mut, "thing"));
-				shoal->finalize_();
-				return pub;
-			}();
-			return PUB;
-		}
-
-		virtual inline const Ptr type_() const override
-		{
-			static const Ptr TYPE = sym_("strange::Reference::Iterator");
-			return TYPE;
-		}
-
-		virtual inline const Ptr cats_() const override
-		{
-			static const Ptr CATS = []()
-			{
-				const Ptr cats = Herd::mut_();
-				Herd* const herd = static_<Herd>(cats);
-				herd->insert_("strange::Mutable");
-				herd->insert_("strange::Thing");
-				herd->finalize_();
-				return cats;
-			}();
-			return CATS;
-		}
-
-	private:
-		Ptr _reference;
-	};
-};
-
-//----------------------------------------------------------------------
-class Weak : public Mutable
-//----------------------------------------------------------------------
-{
-public:
-	inline Weak(const Ptr ptr)
-		: Mutable{}
-		, _ptr{ ptr }
-	{
-	}
-
-	static inline const Ptr mut(const Ptr it)
-	{
-		return mut_(it->next_());
-	}
-
-	static inline const Ptr mut_(const Ptr ptr)
-	{
-		return make_<Weak>(ptr);
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return mut_(get_());
-	}
-
-	virtual inline const Ptr clone_() const override
-	{
-		return mut_(get_()->copy_());
-	}
-
-	virtual inline const Ptr iterator_() const override
-	{
-		return Iterator::mut_(me_());
-	}
-
-	virtual inline const Ptr pub_() const override
-	{
-		static const Ptr PUB = [this]()
-		{
-			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
-			shoal->update_("mut", Static::fin_(&Weak::mut, "thing"));
-			shoal->update_("set", Member<Weak>::fin_(&Weak::set));
-			shoal->update_("get", Const<Weak>::fin_(&Weak::get));
-			shoal->finalize_();
-			return pub;
-		}();
-		return PUB;
-	}
-
-	static inline void share_(const Ptr shoal)
-	{
-		Shoal* const s = static_<Shoal>(shoal);
-		s->update_("strange::Weak::mut", Static::fin_(&Weak::mut, "thing"));
-	}
-
-	inline void set_(const Ptr ptr)
-	{
-		_ptr = ptr;
-	}
-
-	inline const Ptr set(const Ptr it)
-	{
-		const Ptr ptr = it->next_();
-		set_(ptr);
-		return ptr;
-	}
-
-	inline const Ptr get_() const
-	{
-		const Ptr ptr = _ptr.lock();
-		if (ptr)
-		{
-			return ptr;
-		}
-		return nothing_();
-	}
-
-	inline const Ptr get(const Ptr ignore) const
-	{
-		return get_();
-	}
-
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::Weak");
-		return TYPE;
-	}
-
-	virtual inline const Ptr cats_() const override
-	{
-		static const Ptr CATS = []()
-		{
-			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
-			herd->insert_("strange::Thing");
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
-	}
-
-private:
-	WeakPtr _ptr;
-
-	class Iterator : public Mutable
-	{
-	public:
-		inline Iterator(const Ptr weak)
-			: Mutable{}
-			, _weak{ weak }
-		{
-		}
-
-		static inline const Ptr mut(const Ptr it)
-		{
-			return mut_(it->next_());
-		}
-
-		static inline const Ptr mut_(const Ptr weak)
-		{
-			make_<Iterator>(weak);
-		}
-
-		virtual inline const Ptr copy_() const override
-		{
-			return mut_(_weak);
-		}
-
-		virtual inline const Ptr next_() override
-		{
-			if (_weak->is_("."))
-			{
-				return _weak;
-			}
-			const Ptr ptr = static_<Weak>(_weak)->get_();
-			_weak = stop_();
-			return ptr;
-		}
-
-		virtual inline const Ptr pub_() const override
-		{
-			static const Ptr PUB = [this]()
-			{
-				const Ptr pub = Thing::pub_()->copy_();
-				Shoal* const shoal = static_<Shoal>(pub);
-				shoal->update_("mut", Static::fin_(&Iterator::mut, "thing"));
-				shoal->finalize_();
-				return pub;
-			}();
-			return PUB;
-		}
-
-		virtual inline const Ptr type_() const override
-		{
-			static const Ptr TYPE = sym_("strange::Weak::Iterator");
-			return TYPE;
-		}
-
-		virtual inline const Ptr cats_() const override
-		{
-			static const Ptr CATS = []()
-			{
-				const Ptr cats = Herd::mut_();
-				Herd* const herd = static_<Herd>(cats);
-				herd->insert_("strange::Mutable");
-				herd->insert_("strange::Thing");
-				herd->finalize_();
-				return cats;
-			}();
-			return CATS;
-		}
-
-	private:
-		Ptr _weak;
-	};
 };
 
 template <typename D>
@@ -5214,112 +4814,6 @@ private:
 	const_std_unique_iostream _stream;
 };
 
-//----------------------------------------------------------------------
-class Fence : public Mutable
-//----------------------------------------------------------------------
-{
-public:
-	inline Fence(const Ptr ptr)
-		: Mutable{}
-		, _fence{}
-		, _ptr{ ptr }
-	{
-		_fence.store(false, std::memory_order_release);
-	}
-
-	static inline const Ptr mut(const Ptr it)
-	{
-		return mut_(it->next_());
-	}
-
-	static inline const Ptr mut_(const Ptr ptr)
-	{
-		return make_<Fence>(ptr);
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return mut_(_ptr);
-	}
-
-	virtual inline const Ptr pub_() const override
-	{
-		static const Ptr PUB = [this]()
-		{
-			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
-			shoal->update_("mut", Static::fin_(&Fence::mut, "thing"));
-			shoal->update_("give", Member<Fence>::fin_(&Fence::give));
-			shoal->update_("take", Member<Fence>::fin_(&Fence::take));
-			shoal->finalize_();
-			return pub;
-		}();
-		return PUB;
-	}
-
-	static inline void share_(const Ptr shoal)
-	{
-		Shoal* const s = static_<Shoal>(shoal);
-		s->update_("strange::Fence::mut", Static::fin_(&Fence::mut, "thing"));
-	}
-
-	inline const bool give_(const Ptr ptr)
-	{
-		if (_fence.load(std::memory_order_acquire))
-		{
-			return false;
-		}
-		_ptr = ptr;
-		_fence.store(true, std::memory_order_release);
-		return true;
-	}
-
-	inline const Ptr give(const Ptr it)
-	{
-		return boolean_(give_(it->next_()));
-	}
-
-	inline const Ptr take_()
-	{
-		if (_fence.load(std::memory_order_acquire))
-		{
-			_fence.store(false, std::memory_order_release);
-			return _ptr;
-		}
-		return nothing_();
-	}
-
-	inline const Ptr take(const Ptr ignore)
-	{
-		return take_();
-	}
-
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::Fence");
-		return TYPE;
-	}
-
-	virtual inline const Ptr cats_() const override
-	{
-		static const Ptr CATS = []()
-		{
-			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
-			herd->insert_("strange::Concurrent");
-			herd->insert_("strange::Thing");
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
-	}
-
-private:
-	std::atomic<bool> _fence;
-	Ptr _ptr;
-};
-
 //======================================================================
 // class Thing
 //======================================================================
@@ -5452,40 +4946,6 @@ inline const Thing::Ptr Thing::cats_() const
 		return cats;
 	}();
 	return CATS;
-}
-
-inline void Thing::share_(const Thing::Ptr shoal)
-{
-	Shoal* const s = static_<Shoal>(shoal);
-	s->update_("strange::Thing::boolean", Static::fin_(&Thing::boolean, "value"));
-	s->update_("strange::Thing::log", Static::fin_(&Thing::log, "message"));
-	s->update_("strange::Thing::call", Static::fin_(&Thing::call, "function"));
-	s->update_("strange::Thing::nothing", Static::fin_(&Thing::nothing));
-	s->update_("strange::Thing::one", Static::fin_(&Thing::one));
-	s->update_("strange::Thing::stop", Static::fin_(&Thing::stop));
-
-	Symbol::share_(shoal);
-	Shoal::share_(shoal);
-	Shoal::Concurrent::share_(shoal);
-	Flock::share_(shoal);
-	Flock::Concurrent::share_(shoal);
-	Herd::share_(shoal);
-	Herd::Concurrent::share_(shoal);
-	Reference::share_(shoal);
-	Weak::share_(shoal);
-	Lake::share_(shoal);
-	Bit::share_(shoal);
-	Int8::share_(shoal);
-	UInt8::share_(shoal);
-	Int16::share_(shoal);
-	Int32::share_(shoal);
-	Int64::share_(shoal);
-	Float32::share_(shoal);
-	Float64::share_(shoal);
-	Complex32::share_(shoal);
-	Complex64::share_(shoal);
-	River::share_(shoal);
-	Fence::share_(shoal);
 }
 
 inline const Thing::Ptr Thing::shared_()
@@ -5634,15 +5094,6 @@ inline const Thing::Ptr Symbol::cats_() const
 inline const Thing::Ptr Static::eater_() const
 {
 	return IteratorRef<std::vector<Ptr>>::mut_(_params);
-}
-
-//======================================================================
-// class Method
-//======================================================================
-
-inline const Thing::Ptr Method::with_name_(const Thing::Ptr thing, const Thing::Ptr name)
-{
-	return fin_(thing, static_<Shoal>(thing->pub_())->find_(name));
 }
 
 //======================================================================
@@ -6138,14 +5589,6 @@ inline void Herd::replace_links_(const Thing::Ptr shoal)
 //======================================================================
 
 //======================================================================
-// class Reference
-//======================================================================
-
-//======================================================================
-// class Weak
-//======================================================================
-
-//======================================================================
 // class Data
 //======================================================================
 
@@ -6285,10 +5728,6 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 
 //======================================================================
 // class River
-//======================================================================
-
-//======================================================================
-// class Fence
 //======================================================================
 
 } // namespace strange

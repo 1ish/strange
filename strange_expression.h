@@ -2,6 +2,7 @@
 #define COM_ONEISH_STRANGE_EXPRESSION_H
 
 #include "strange_core.h"
+#include "strange_method.h"
 #include "strange_creature.h"
 
 namespace strange
@@ -271,6 +272,7 @@ public:
 		const Ptr local = Shoal::mut_();
 		Shoal* const loc = static_<Shoal>(local);
 		loc->update_("$", Shoal::mut_());
+		loc->update_("&", stop_());
 		loc->update_("@", Int8::mut_());
 		return evaluate_(expression, local);
 	}
