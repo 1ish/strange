@@ -270,7 +270,7 @@ public:
 			case '%':
 			case ':':
 			case '<':
-				if (char2 == '>')
+				if (char1 == '<' && char2 == '>')
 				{
 					second = true;
 				}

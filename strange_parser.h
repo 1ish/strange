@@ -280,6 +280,10 @@ public:
 						_next_();
 						result = _scope_(scope, shoal, flock, symbol->is_("**"));
 					}
+					else if (symbol->is_("<>")) //TODO container
+					{
+
+					}
 					else if (symbol->is_("(")) // block
 					{
 						_next_();
