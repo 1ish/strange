@@ -432,169 +432,193 @@ private:
 			}
 			else if (symbol->is_("%"))
 			{
-				flk->push_back_(sym_("modulo"));
 				_next_();
+				_wrap_(sym_("modulo"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("%="))
 			{
-				flk->push_back_(sym_("self_modulo"));
 				_next_();
+				_wrap_(sym_("self_modulo"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("%%"))
 			{
-				flk->push_back_(sym_("xor"));
 				_next_();
+				_wrap_(sym_("xor"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("!%"))
 			{
-				flk->push_back_(sym_("xnor"));
 				_next_();
+				_wrap_(sym_("xnor"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("+"))
 			{
-				flk->push_back_(sym_("add"));
 				_next_();
+				_wrap_(sym_("add"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("+="))
 			{
-				flk->push_back_(sym_("self_add"));
 				_next_();
+				_wrap_(sym_("self_add"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("++"))
 			{
-				flk->push_back_(sym_("increment"));
 				_next_();
+				_wrap_(sym_("increment"), flock);
 			}
 			else if (symbol->is_("-"))
 			{
-				flk->push_back_(sym_("subtract"));
 				_next_();
+				_wrap_(sym_("subtract"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("-="))
 			{
-				flk->push_back_(sym_("self_subtract"));
 				_next_();
+				_wrap_(sym_("self_subtract"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("--"))
 			{
-				flk->push_back_(sym_("decrement"));
 				_next_();
+				_wrap_(sym_("decrement"), flock);
 			}
 			else if (symbol->is_("*"))
 			{
-				flk->push_back_(sym_("multiply"));
 				_next_();
+				_wrap_(sym_("multiply"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("*="))
 			{
-				flk->push_back_(sym_("self_multiply"));
 				_next_();
+				_wrap_(sym_("self_multiply"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("/"))
 			{
-				flk->push_back_(sym_("divide"));
 				_next_();
+				_wrap_(sym_("divide"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("/="))
 			{
-				flk->push_back_(sym_("self_divide"));
 				_next_();
+				_wrap_(sym_("self_divide"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("=="))
 			{
-				flk->push_back_(sym_("same"));
 				_next_();
+				_wrap_(sym_("same"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("!="))
 			{
-				flk->push_back_(sym_("different"));
 				_next_();
+				_wrap_(sym_("different"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("@"))
 			{
-				flk->push_back_(sym_("at"));
 				_next_();
+				_wrap_(sym_("at"), flock);
 				return _at_(scope, shoal, flock); // break/continue
 			}
 			else if (symbol->is_("&"))
 			{
-				flk->push_back_(sym_("iterator"));
 				_next_();
+				_wrap_(sym_("iterator"), flock);
 			}
 			else if (symbol->is_("&&"))
 			{
-				flk->push_back_(sym_("and"));
 				_next_();
+				_wrap_(sym_("and"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("!&"))
 			{
-				flk->push_back_(sym_("nand"));
 				_next_();
+				_wrap_(sym_("nand"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("||"))
 			{
-				flk->push_back_(sym_("or"));
 				_next_();
+				_wrap_(sym_("or"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("!|"))
 			{
-				flk->push_back_(sym_("nor"));
 				_next_();
+				_wrap_(sym_("nor"), flock);
 				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("^"))
 			{
-				flk->push_back_(sym_("next"));
 				_next_();
+				_wrap_(sym_("next"), flock);
 			}
 			else if (symbol->is_("~"))
 			{
-				flk->push_back_(sym_("copy"));
 				_next_();
+				_wrap_(sym_("copy"), flock);
 			}
 			else if (symbol->is_("~~"))
 			{
-				flk->push_back_(sym_("clone"));
 				_next_();
+				_wrap_(sym_("clone"), flock);
 			}
 			else if (symbol->is_("#"))
 			{
-				flk->push_back_(sym_("finalize"));
 				_next_();
+				_wrap_(sym_("finalize"), flock);
 			}
 			else if (symbol->is_("##"))
 			{
-				flk->push_back_(sym_("freeze"));
 				_next_();
+				_wrap_(sym_("freeze"), flock);
 			}
 			else if (symbol->is_("!"))
 			{
-				flk->push_back_(sym_("is"));
-				flk->push_back_(sym_(""));
 				_next_();
+				_wrap_(sym_("is"), flock);
+				_wrap_(nothing_(), flock);
 			}
 			else if (symbol->is_("?"))
 			{
-				flk->push_back_(sym_("is_not"));
-				flk->push_back_(sym_(""));
 				_next_();
+				_wrap_(sym_("is_not"), flock);
+				_wrap_(nothing_(), flock);
+			}
+			else if (symbol->is_("<"))
+			{
+				_next_();
+				_wrap_(sym_("less_than"), flock);
+				_member_(scope, shoal, statement, flock);
+			}
+			else if (symbol->is_(">"))
+			{
+				_next_();
+				_wrap_(sym_("greater_than"), flock);
+				_member_(scope, shoal, statement, flock);
+			}
+			else if (symbol->is_("<="))
+			{
+				_next_();
+				_wrap_(sym_("less_or_equal"), flock);
+				_member_(scope, shoal, statement, flock);
+			}
+			else if (symbol->is_(">="))
+			{
+				_next_();
+				_wrap_(sym_("greater_or_equal"), flock);
+				_member_(scope, shoal, statement, flock);
 			}
 			else
 			{
@@ -634,8 +658,8 @@ private:
 		}
 		else if (tag == 'N') // name
 		{
-			_wrap_(symbol, flock);
 			_next_();
+			_wrap_(symbol, flock);
 			_member_(scope, shoal, statement, flock);
 		}
 		else if (tag == 'P') // punctuation
@@ -1122,11 +1146,11 @@ private:
 		const Ptr symbol = tok->at_(3);
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
-			flk->push_back_(tok->at_(4));
+			_wrap_(tok->at_(4), flock);
 		}
 		else if (tag == 'N') // name
 		{
-			flk->push_back_(symbol);
+			_wrap_(symbol, flock);
 		}
 		else if (tag == 'P') // punctuation
 		{
@@ -1157,8 +1181,8 @@ private:
 		const Ptr symbol = tok->at_(3);
 		if (tag == 'P' && symbol->is_(":="))
 		{
-			flk->update_(flk->size_() - 2, sym_("update"));
 			_next_();
+			flk->update_(flk->size_() - 2, Expression::fin_(sym_("update")));
 			flk->push_back_(parse_(scope, shoal));
 			return false; // break
 		}
