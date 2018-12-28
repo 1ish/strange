@@ -194,23 +194,7 @@ private:
 							continue;
 						}
 					}
-					else if (symbol->is_("break_") || symbol->is_("continue_") || symbol->is_("return_"))
-					{
-						if (_statement_(scope, shoal, flock))
-						{
-							const int64_t size = flk->size_();
-							if (size == 0 || size == 1)
-							{
-								result = Expression::fin_(symbol, flock);
-							}
-							else
-							{
-								log_("parser error: invalid break_/continue_/return_");
-							}
-							continue;
-						}
-					}
-					else if (symbol->is_("throw_"))
+					else if (symbol->is_("break_") || symbol->is_("continue_") || symbol->is_("return_") || symbol->is_("throw_"))
 					{
 						if (_statement_(scope, shoal, flock))
 						{
@@ -221,7 +205,7 @@ private:
 							}
 							else if (size != 1)
 							{
-								log_("parser error: invalid throw_");
+								log_("parser error: invalid break_/continue_/return_/throw_");
 							}
 							result = Expression::fin_(symbol, flock);
 							continue;

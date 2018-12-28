@@ -180,7 +180,7 @@ public:
 		}
 		else if (statement->is_("break_"))
 		{
-			if (size <= 1)
+			if (size == 1)
 			{
 				return fin_(&Expression::_break_, flock);
 			}
@@ -188,7 +188,7 @@ public:
 		}
 		else if (statement->is_("continue_"))
 		{
-			if (size <= 1)
+			if (size == 1)
 			{
 				return fin_(&Expression::_continue_, flock);
 			}
@@ -196,7 +196,7 @@ public:
 		}
 		else if (statement->is_("return_"))
 		{
-			if (size <= 1)
+			if (size == 1)
 			{
 				return fin_(&Expression::_return_, flock);
 			}
@@ -650,12 +650,7 @@ private:
 	inline const Ptr _break_(const Ptr local) const
 	{
 		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
-		Flock* const flock = static_<Flock>(_flock);
-		Ptr result = nothing_();
-		if (!flock->empty_())
-		{
-			result = Expression::evaluate_(flock->at_(0), local);
-		}
+		const Ptr result = Expression::evaluate_(static_<Flock>(_flock)->at_(0), local);
 		action->set_('b');
 		return result;
 	}
@@ -663,12 +658,7 @@ private:
 	inline const Ptr _continue_(const Ptr local) const
 	{
 		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
-		Flock* const flock = static_<Flock>(_flock);
-		Ptr result = nothing_();
-		if (!flock->empty_())
-		{
-			result = Expression::evaluate_(flock->at_(0), local);
-		}
+		const Ptr result = Expression::evaluate_(static_<Flock>(_flock)->at_(0), local);
 		action->set_('c');
 		return result;
 	}
@@ -676,12 +666,7 @@ private:
 	inline const Ptr _return_(const Ptr local) const
 	{
 		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
-		Flock* const flock = static_<Flock>(_flock);
-		Ptr result = nothing_();
-		if (!flock->empty_())
-		{
-			result = Expression::evaluate_(flock->at_(0), local);
-		}
+		const Ptr result = Expression::evaluate_(static_<Flock>(_flock)->at_(0), local);
 		action->set_('r');
 		return result;
 	}
@@ -908,6 +893,23 @@ private:
 		const Ptr _components;
 		const Ptr _local;
 		int64_t _pos;
+	};
+
+	class Return
+	{
+	public:
+		inline Return(const Ptr thing)
+			:_thing(thing)
+		{
+		}
+
+		inline const Ptr thing_() const
+		{
+			return _thing;
+		}
+
+	private:
+		const Ptr _thing;
 	};
 };
 
