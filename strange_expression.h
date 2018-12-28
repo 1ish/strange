@@ -636,7 +636,7 @@ private:
 		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
-		if (flock->size_())
+		if (!flock->empty_())
 		{
 			result = Expression::evaluate_(flock->at_(0), local);
 		}
@@ -649,7 +649,7 @@ private:
 		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
-		if (flock->size_())
+		if (!flock->empty_())
 		{
 			result = Expression::evaluate_(flock->at_(0), local);
 		}
@@ -662,7 +662,7 @@ private:
 		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
-		if (flock->size_())
+		if (!flock->empty_())
 		{
 			result = Expression::evaluate_(flock->at_(0), local);
 		}
