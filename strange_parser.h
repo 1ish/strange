@@ -66,7 +66,7 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
-			shoal->update_("mut", Static::fin_(&Parser::mut));
+			shoal->update_("mut", Static::fin_(&Parser::mut, "tokenizer"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -80,7 +80,7 @@ public:
 		{
 			return tokenizer->eof_();
 		}
-		return !_tokenizer->invoke_("eof")->is_("");
+		return !_tokenizer->invoke_("eof")->is_nothing_();
 	}
 
 	inline const Ptr eof(const Ptr ignore)
@@ -607,14 +607,12 @@ private:
 			else if (symbol->is_("!"))
 			{
 				_next_();
-				_wrap_(sym_("is"), flock);
-				_wrap_(nothing_(), flock);
+				_wrap_(sym_("is_nothing"), flock);
 			}
 			else if (symbol->is_("?"))
 			{
 				_next_();
-				_wrap_(sym_("is_not"), flock);
-				_wrap_(nothing_(), flock);
+				_wrap_(sym_("is_not_nothing"), flock);
 			}
 			else if (symbol->is_("<"))
 			{
@@ -1060,7 +1058,7 @@ private:
 				const Ptr add_scope_symbol = Expression::immediate_(add_scope);
 				Symbol* const add_scope_sym = dynamic_<Symbol>(add_scope_symbol);
 				const Ptr new_scope = add_scope_sym
-					? ( scope->is_("")
+					? ( scope->is_nothing_()
 						? add_scope_symbol
 						: sym_(static_<Symbol>(scope)->symbol_() + "::" + add_scope_sym->symbol_())
 					)

@@ -453,10 +453,10 @@ private:
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
 		const Ptr iterable = Expression::evaluate_(flock->at_(1), local);
 		const Ptr eater = thing->eater_();
-		if (!eater->is_(""))
+		if (!eater->is_nothing_())
 		{
 			const Ptr feeder = iterable->feeder(eater);
-			if (!feeder->is_(""))
+			if (!feeder->is_nothing_())
 			{
 				return thing->invoke(feeder);
 			}
@@ -486,10 +486,10 @@ private:
 		const Ptr member = static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local));
 		const Ptr iterable = Expression::evaluate_(flock->at_(2), local);
 		const Ptr eater = member->eater_();
-		if (!eater->is_(""))
+		if (!eater->is_nothing_())
 		{
 			const Ptr feeder = iterable->feeder(eater);
-			if (!feeder->is_(""))
+			if (!feeder->is_nothing_())
 			{
 				return operate_(thing.get(), member, feeder);
 			}
@@ -569,7 +569,7 @@ private:
 				return shoal->find_(key);
 			}
 			const Ptr result = shoal->find_(scope + "::" + key_str);
-			if (!result->is_(""))
+			if (!result->is_nothing_())
 			{
 				return result;
 			}
@@ -667,7 +667,7 @@ private:
 		}
 		catch (const Ptr thing)
 		{
-			if (!thing->is_(""))
+			if (!thing->is_nothing_())
 			{
 				static_<Shoal>(local)->update_("%", thing);
 			}
@@ -690,7 +690,7 @@ private:
 	inline const Ptr _if_(const Ptr local) const
 	{
 		Flock* const flock = static_<Flock>(_flock);
-		if (!Expression::evaluate_(flock->at_(0), local)->is_(""))
+		if (!Expression::evaluate_(flock->at_(0), local)->is_nothing_())
 		{
 			return Expression::evaluate_(flock->at_(1), local);
 		}
@@ -700,7 +700,7 @@ private:
 	inline const Ptr _if_else_(const Ptr local) const
 	{
 		Flock* const flock = static_<Flock>(_flock);
-		if (!Expression::evaluate_(flock->at_(0), local)->is_(""))
+		if (!Expression::evaluate_(flock->at_(0), local)->is_nothing_())
 		{
 			return Expression::evaluate_(flock->at_(1), local);
 		}
@@ -711,7 +711,7 @@ private:
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
-		while (!Expression::evaluate_(flock->at_(0), local)->is_(""))
+		while (!Expression::evaluate_(flock->at_(0), local)->is_nothing_())
 		{
 			try
 			{
@@ -749,7 +749,7 @@ private:
 				}
 				break;
 			}
-		} while (!Expression::evaluate_(flock->at_(0), local)->is_(""));
+		} while (!Expression::evaluate_(flock->at_(0), local)->is_nothing_());
 		return result;
 	}
 
@@ -758,7 +758,7 @@ private:
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		for (Expression::evaluate_(flock->at_(0), local);
-			!Expression::evaluate_(flock->at_(1), local)->is_("");
+			!Expression::evaluate_(flock->at_(1), local)->is_nothing_();
 			Expression::evaluate_(flock->at_(2), local))
 		{
 			try

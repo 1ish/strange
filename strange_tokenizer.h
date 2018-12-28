@@ -60,7 +60,7 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
-			shoal->update_("mut", Static::fin_(&Tokenizer::mut));
+			shoal->update_("mut", Static::fin_(&Tokenizer::mut, "river"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -74,7 +74,7 @@ public:
 		{
 			return river->eof_();
 		}
-		return !_river->invoke_("eof")->is_("");
+		return !_river->invoke_("eof")->is_nothing_();
 	}
 
 	inline const Ptr eof(const Ptr ignore)
@@ -454,7 +454,7 @@ private:
 		flk->push_back_(Int64::fin_(_y));
 		flk->push_back_(sym_(s));
 		const Ptr symbol = sym_(s.substr(1, s.length() - 2));
-		if (symbol->is_(""))
+		if (symbol->is_nothing_())
 		{
 			flk->push_back_(nothing_());
 		}
