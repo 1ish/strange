@@ -224,9 +224,13 @@ public:
 		}
 		else if (statement->is_("if_"))
 		{
-			if (size == 2 || size == 3)
+			if (size == 2)
 			{
 				return fin_(&Expression::_if_, flock);
+			}
+			if (size == 3)
+			{
+				return fin_(&Expression::_if_else_, flock);
 			}
 			log_("if_ expression of wrong size");
 		}
@@ -289,7 +293,6 @@ public:
 		Shoal* const loc = static_<Shoal>(local);
 		loc->update_("$", Shoal::mut_());
 		loc->update_("&", stop_());
-		loc->update_("@", Int8::mut_());
 		return evaluate_(expression, local);
 	}
 
@@ -497,7 +500,6 @@ private:
 	inline const Ptr _lambda_(const Ptr local) const
 	{
 		Shoal* const shoal = static_<Shoal>(local);
-		Int8* const action = static_<Int8>(shoal->find_("@"));
 		Shoal* const shared = static_<Shoal>(shoal->find_("$"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size_1 = flock->size_() - 1;
@@ -509,19 +511,14 @@ private:
 				param = flock->at_(i);
 				continue;
 			}
-			const Ptr value = Expression::evaluate_(flock->at_(i), local);
-			action->set_(0);
-			shared->update_(param, value);
+			shared->update_(param, Expression::evaluate_(flock->at_(i), local));
 		}
-		const Ptr result = Expression::evaluate_(flock->at_(size_1), local);
-		action->set_(0);
-		return result;
+		return Expression::evaluate_(flock->at_(size_1), local);
 	}
 
 	inline const Ptr _function_(const Ptr local) const
 	{
 		Shoal* const shoal = static_<Shoal>(local);
-		Int8* const action = static_<Int8>(shoal->find_("@"));
 		const Ptr it = shoal->find_("&");
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size_1 = flock->size_() - 1;
@@ -538,13 +535,17 @@ private:
 			if (value->is_("."))
 			{
 				value = Expression::evaluate_(flock->at_(i), local); // default
-				action->set_(0);
 			}
 			shoal->update_(param, value);
 		}
-		const Ptr result = Expression::evaluate_(flock->at_(size_1), local);
-		action->set_(0);
-		return result;
+		try
+		{
+			return Expression::evaluate_(flock->at_(size_1), local);
+		}
+		catch (const Return& r)
+		{
+			return r.thing_();
+		}
 	}
 
 	inline const Ptr _shared_scope_(const Ptr local) const
@@ -587,7 +588,6 @@ private:
 
 	inline const Ptr _flock_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		const Ptr result = Flock::mut_();
@@ -595,23 +595,17 @@ private:
 		for (int64_t i = 0; i < size; ++i)
 		{
 			res->push_back_(Expression::evaluate_(flock->at_(i), local));
-			action->set_(0);
 		}
 		return result;
 	}
 
 	inline const Ptr _flock_iterator_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
-		Flock* const flock = static_<Flock>(_flock);
-		const Ptr it = Expression::evaluate_(flock->at_(0), local);
-		action->set_(0);
-		return Flock::mut(it);
+		return Flock::mut(Expression::evaluate_(static_<Flock>(_flock)->at_(0), local));
 	}
 
 	inline const Ptr _shoal_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		const Ptr result = Shoal::mut_();
@@ -627,14 +621,12 @@ private:
 			{
 				res->update_(key, Expression::evaluate_(flock->at_(i), local));
 			}
-			action->set_(0);
 		}
 		return result;
 	}
 
 	inline const Ptr _herd_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		const Ptr result = Herd::mut_();
@@ -642,33 +634,23 @@ private:
 		for (int64_t i = 0; i < size; ++i)
 		{
 			res->insert_(Expression::evaluate_(flock->at_(i), local));
-			action->set_(0);
 		}
 		return result;
 	}
 
 	inline const Ptr _break_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
-		const Ptr result = Expression::evaluate_(static_<Flock>(_flock)->at_(0), local);
-		action->set_('b');
-		return result;
+		throw Break(Expression::evaluate_(static_<Flock>(_flock)->at_(0), local), false);
 	}
 
 	inline const Ptr _continue_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
-		const Ptr result = Expression::evaluate_(static_<Flock>(_flock)->at_(0), local);
-		action->set_('c');
-		return result;
+		throw Break(Expression::evaluate_(static_<Flock>(_flock)->at_(0), local), true);
 	}
 
 	inline const Ptr _return_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
-		const Ptr result = Expression::evaluate_(static_<Flock>(_flock)->at_(0), local);
-		action->set_('r');
-		return result;
+		throw Return(Expression::evaluate_(static_<Flock>(_flock)->at_(0), local));
 	}
 
 	inline const Ptr _throw_(const Ptr local) const
@@ -695,143 +677,104 @@ private:
 
 	inline const Ptr _block_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size = flock->size_();
 		Ptr result = nothing_();
 		for (int64_t i = 0; i < size; ++i)
 		{
 			result = Expression::evaluate_(flock->at_(i), local);
-			if (action->get_())
-			{
-				break;
-			}
 		}
 		return result;
 	}
 
 	inline const Ptr _if_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		if (size == 2)
+		if (!Expression::evaluate_(flock->at_(0), local)->is_(""))
 		{
-			if (!Expression::evaluate_(flock->at_(0), local)->is_(""))
-			{
-				action->set_(0);
-				return Expression::evaluate_(flock->at_(1), local);
-			}
+			return Expression::evaluate_(flock->at_(1), local);
 		}
-		else
-		{
-			if (!Expression::evaluate_(flock->at_(0), local)->is_(""))
-			{
-				action->set_(0);
-				return Expression::evaluate_(flock->at_(1), local);
-			}
-			else
-			{
-				action->set_(0);
-				return Expression::evaluate_(flock->at_(2), local);
-			}
-		}
-		action->set_(0);
 		return nothing_();
+	}
+
+	inline const Ptr _if_else_(const Ptr local) const
+	{
+		Flock* const flock = static_<Flock>(_flock);
+		if (!Expression::evaluate_(flock->at_(0), local)->is_(""))
+		{
+			return Expression::evaluate_(flock->at_(1), local);
+		}
+		return Expression::evaluate_(flock->at_(2), local);
 	}
 
 	inline const Ptr _while_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		while (!Expression::evaluate_(flock->at_(0), local)->is_(""))
 		{
-			action->set_(0);
-			result = Expression::evaluate_(flock->at_(1), local);
-			const Int8::D a = action->get_();
-			if (a)
+			try
 			{
-				if (a == 'r')
-				{
-					return result;
-				}
-				action->set_(0);
-				if (a == 'c')
+				result = Expression::evaluate_(flock->at_(1), local);
+			}
+			catch (const Break& b)
+			{
+				result = b.thing_();
+				if (b.continue_())
 				{
 					continue;
 				}
-				if (a == 'b')
-				{
-					break;
-				}
+				break;
 			}
 		}
-		action->set_(0);
 		return result;
 	}
 
 	inline const Ptr _do_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		do
 		{
-			action->set_(0);
-			result = Expression::evaluate_(flock->at_(1), local);
-			const Int8::D a = action->get_();
-			if (a)
+			try
 			{
-				if (a == 'r')
-				{
-					return result;
-				}
-				action->set_(0);
-				if (a == 'c')
+				result = Expression::evaluate_(flock->at_(1), local);
+			}
+			catch (const Break& b)
+			{
+				result = b.thing_();
+				if (b.continue_())
 				{
 					continue;
 				}
-				if (a == 'b')
-				{
-					break;
-				}
+				break;
 			}
 		} while (!Expression::evaluate_(flock->at_(0), local)->is_(""));
-		action->set_(0);
 		return result;
 	}
 
 	inline const Ptr _for_(const Ptr local) const
 	{
-		Int8* const action = static_<Int8>(static_<Shoal>(local)->find_("@"));
 		Flock* const flock = static_<Flock>(_flock);
 		Ptr result = nothing_();
 		for (Expression::evaluate_(flock->at_(0), local);
 			!Expression::evaluate_(flock->at_(1), local)->is_("");
 			Expression::evaluate_(flock->at_(2), local))
 		{
-			action->set_(0);
-			result = Expression::evaluate_(flock->at_(3), local);
-			const Int8::D a = action->get_();
-			if (a)
+			try
 			{
-				if (a == 'r')
-				{
-					return result;
-				}
-				action->set_(0);
-				if (a == 'c')
+				result = Expression::evaluate_(flock->at_(3), local);
+			}
+			catch (const Break& b)
+			{
+				result = b.thing_();
+				if (b.continue_())
 				{
 					continue;
 				}
-				if (a == 'b')
-				{
-					break;
-				}
+				break;
 			}
 		}
-		action->set_(0);
 		return result;
 	}
 
@@ -893,6 +836,30 @@ private:
 		const Ptr _components;
 		const Ptr _local;
 		int64_t _pos;
+	};
+
+	class Break
+	{
+	public:
+		inline Break(const Ptr thing, const bool cont)
+			:_thing(thing)
+			,_continue(cont)
+		{
+		}
+
+		inline const Ptr thing_() const
+		{
+			return _thing;
+		}
+
+		inline const bool continue_() const
+		{
+			return _continue;
+		}
+
+	private:
+		const Ptr _thing;
+		const bool _continue;
 	};
 
 	class Return

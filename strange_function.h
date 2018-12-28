@@ -70,7 +70,6 @@ protected:
 			loc->insert_("|", creature->me_());
 		}
 		loc->insert_("&", it);
-		loc->insert_("@", Int8::mut_());
 		return static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
 
