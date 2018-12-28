@@ -202,6 +202,22 @@ public:
 			}
 			log_("return_ expression of wrong size");
 		}
+		else if (statement->is_("throw_"))
+		{
+			if (size == 1)
+			{
+				return fin_(&Expression::_throw_, flock);
+			}
+			log_("throw_ expression of wrong size");
+		}
+		else if (statement->is_("catch_"))
+		{
+			if (size == 2)
+			{
+				return fin_(&Expression::_catch_, flock);
+			}
+			log_("catch_ expression of wrong size");
+		}
 		else if (statement->is_("block_"))
 		{
 			return fin_(&Expression::_block_, flock);
@@ -668,6 +684,28 @@ private:
 		}
 		action->set_('r');
 		return result;
+	}
+
+	inline const Ptr _throw_(const Ptr local) const
+	{
+		throw Expression::evaluate_(static_<Flock>(_flock)->at_(0), local);
+	}
+
+	inline const Ptr _catch_(const Ptr local) const
+	{
+		Flock* const flock = static_<Flock>(_flock);
+		try
+		{
+			return Expression::evaluate_(flock->at_(0), local);
+		}
+		catch (const Ptr thing)
+		{
+			if (!thing->is_(""))
+			{
+				static_<Shoal>(local)->update_("%", thing);
+			}
+			return Expression::evaluate_(flock->at_(1), local);
+		}
 	}
 
 	inline const Ptr _block_(const Ptr local) const

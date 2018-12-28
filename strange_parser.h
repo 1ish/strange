@@ -210,6 +210,38 @@ private:
 							continue;
 						}
 					}
+					else if (symbol->is_("throw_"))
+					{
+						if (_statement_(scope, shoal, flock))
+						{
+							const int64_t size = flk->size_();
+							if (size == 0)
+							{
+								_wrap_(nothing_(), flock);
+							}
+							else if (size != 1)
+							{
+								log_("parser error: invalid throw_");
+							}
+							result = Expression::fin_(symbol, flock);
+							continue;
+						}
+					}
+					else if (symbol->is_("catch_"))
+					{
+						if (_statement_(scope, shoal, flock))
+						{
+							if (flk->size_() == 2)
+							{
+								result = Expression::fin_(symbol, flock);
+							}
+							else
+							{
+								log_("parser error: invalid catch_");
+							}
+							continue;
+						}
+					}
 					else if (symbol->is_("if_"))
 					{
 						if (_statement_(scope, shoal, flock))
