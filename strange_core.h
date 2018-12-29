@@ -2737,6 +2737,26 @@ public:
 		return add_(it->next_());
 	}
 
+	virtual inline void self_subtract_(const Ptr other) = 0;
+
+	inline const Ptr self_subtract(const Ptr it)
+	{
+		self_subtract_(it->next_());
+		return me_();
+	}
+
+	inline const Ptr subtract_(const Ptr other) const
+	{
+		const Ptr result = copy_();
+		static_<Number>(result)->self_subtract_(other);
+		return result;
+	}
+
+	inline const Ptr subtract(const Ptr it) const
+	{
+		return subtract_(it->next_());
+	}
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -2753,8 +2773,10 @@ public:
 			shoal->update_("from_complex64", Member<Number>::fin_(&Number::from_complex64, "complex64"));
 			shoal->update_("to_symbol", Const<Number>::fin_(&Number::to_symbol));
 			shoal->update_("from_symbol", Member<Number>::fin_(&Number::from_symbol, "symbol"));
-			shoal->update_("self_add", Member<Number>::fin_(&Number::self_add, "other"));
-			shoal->update_("add", Const<Number>::fin_(&Number::add, "other"));
+			shoal->update_("self_add", Member<Number>::fin_(&Number::self_add, "number"));
+			shoal->update_("add", Const<Number>::fin_(&Number::add, "number"));
+			shoal->update_("self_subtract", Member<Number>::fin_(&Number::self_subtract, "number"));
+			shoal->update_("subtract", Const<Number>::fin_(&Number::subtract, "number"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -2950,6 +2972,15 @@ public:
 			set_(get_() != bool(number->to_int64_() & 1));
 		}
 	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number && (number->to_int64_() & 1))
+		{
+			set_(!get_());
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3140,6 +3171,15 @@ public:
 			from_int64_(to_int64_() + number->to_int64_());
 		}
 	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() - number->to_int64_());
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3328,6 +3368,15 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() + number->to_int64_());
+		}
+	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() - number->to_int64_());
 		}
 	}
 };
@@ -3524,6 +3573,15 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() + number->to_int64_());
+		}
+	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() - number->to_int64_());
 		}
 	}
 };
@@ -3724,6 +3782,15 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() + number->to_int64_());
+		}
+	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() - number->to_int64_());
 		}
 	}
 };
@@ -3934,6 +4001,15 @@ public:
 			set_(get_() + number->to_int64_());
 		}
 	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() - number->to_int64_());
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -4133,6 +4209,15 @@ public:
 		if (number)
 		{
 			from_float64_(to_float64_() + number->to_float64_());
+		}
+	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_float64_(to_float64_() - number->to_float64_());
 		}
 	}
 };
@@ -4342,6 +4427,15 @@ public:
 		if (number)
 		{
 			set_(get_() + number->to_float64_());
+		}
+	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() - number->to_float64_());
 		}
 	}
 };
@@ -4582,6 +4676,15 @@ public:
 		if (number)
 		{
 			from_complex64_(to_complex64_() + number->to_complex64_());
+		}
+	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_complex64_(to_complex64_() - number->to_complex64_());
 		}
 	}
 };
@@ -4838,6 +4941,15 @@ public:
 		if (number)
 		{
 			set_(get_() + number->to_complex64_());
+		}
+	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() - number->to_complex64_());
 		}
 	}
 };
