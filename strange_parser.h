@@ -342,8 +342,18 @@ private:
 					}
 					else if (symbol->is_("<>")) // container
 					{
+						std::string container = static_<Symbol>(scope)->symbol_();
+						const size_t pos = container.find_last_of("::");
+						if (pos == std::string::npos)
+						{
+							container = "";
+						}
+						else
+						{
+							container = container.substr(0, pos);
+						}
 						flk->push_back_(shoal);
-						flk->push_back_(scope);
+						flk->push_back_(sym_(container));
 						result = Expression::fin_(sym_("shared_scope_"), flock);
 					}
 					else if (symbol->is_("(")) // block
