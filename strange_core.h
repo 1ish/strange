@@ -2455,6 +2455,58 @@ private:
 	D _data;
 };
 
+template<>
+class Data<float>
+{
+public:
+	inline Data(const float& data)
+		: _data{ std::isfinite(data) ? data : 0.0f }
+	{
+	}
+
+	inline void set_(const float& data)
+	{
+		if (std::isfinite(data))
+		{
+			_data = data;
+		}
+	}
+
+	inline const float& get_() const
+	{
+		return _data;
+	}
+
+private:
+	float _data;
+};
+
+template<>
+class Data<double>
+{
+public:
+	inline Data(const double& data)
+		: _data{ std::isfinite(data) ? data : 0.0 }
+	{
+	}
+
+	inline void set_(const double& data)
+	{
+		if (std::isfinite(data))
+		{
+			_data = data;
+		}
+	}
+
+	inline const double& get_() const
+	{
+		return _data;
+	}
+
+private:
+	double _data;
+};
+
 //----------------------------------------------------------------------
 class Lake : public Mutable, public Serializable, public Data<std::string>
 //----------------------------------------------------------------------
@@ -2777,6 +2829,26 @@ public:
 		return multiply_(it->next_());
 	}
 
+	virtual inline void self_divide_(const Ptr other) = 0;
+
+	inline const Ptr self_divide(const Ptr it)
+	{
+		self_divide_(it->next_());
+		return me_();
+	}
+
+	inline const Ptr divide_(const Ptr other) const
+	{
+		const Ptr result = copy_();
+		static_<Number>(result)->self_divide_(other);
+		return result;
+	}
+
+	inline const Ptr divide(const Ptr it) const
+	{
+		return divide_(it->next_());
+	}
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -2799,6 +2871,8 @@ public:
 			shoal->update_("subtract", Const<Number>::fin_(&Number::subtract, "number"));
 			shoal->update_("self_multiply", Member<Number>::fin_(&Number::self_multiply, "number"));
 			shoal->update_("multiply", Const<Number>::fin_(&Number::multiply, "number"));
+			shoal->update_("self_divide", Member<Number>::fin_(&Number::self_divide, "number"));
+			shoal->update_("divide", Const<Number>::fin_(&Number::divide, "number"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -3012,6 +3086,10 @@ public:
 			set_(get_() && (number->to_int64_() & 1));
 		}
 	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3220,6 +3298,19 @@ public:
 			from_int64_(to_int64_() * number->to_int64_());
 		}
 	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0 && divisor != 1)
+			{
+				from_int64_(to_int64_() / divisor);
+			}
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3426,6 +3517,19 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
+		}
+	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0 && divisor != 1)
+			{
+				from_int64_(to_int64_() / divisor);
+			}
 		}
 	}
 };
@@ -3640,6 +3744,19 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
+		}
+	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0 && divisor != 1)
+			{
+				from_int64_(to_int64_() / divisor);
+			}
 		}
 	}
 };
@@ -3858,6 +3975,19 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
+		}
+	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0 && divisor != 1)
+			{
+				from_int64_(to_int64_() / divisor);
+			}
 		}
 	}
 };
@@ -4086,6 +4216,19 @@ public:
 			set_(get_() * number->to_int64_());
 		}
 	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0 && divisor != 1)
+			{
+				set_(get_() / divisor);
+			}
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -4303,6 +4446,15 @@ public:
 		if (number)
 		{
 			from_float64_(to_float64_() * number->to_float64_());
+		}
+	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_float64_(to_float64_() / number->to_float64_());
 		}
 	}
 };
@@ -4530,6 +4682,15 @@ public:
 		if (number)
 		{
 			set_(get_() * number->to_float64_());
+		}
+	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() / number->to_float64_());
 		}
 	}
 };
@@ -4788,6 +4949,15 @@ public:
 		if (number)
 		{
 			from_complex64_(to_complex64_() * number->to_complex64_());
+		}
+	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_complex64_(to_complex64_() / number->to_complex64_());
 		}
 	}
 };
@@ -5062,6 +5232,15 @@ public:
 		if (number)
 		{
 			set_(get_() * number->to_complex64_());
+		}
+	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() / number->to_complex64_());
 		}
 	}
 };
