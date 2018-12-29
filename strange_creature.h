@@ -38,25 +38,39 @@ class Creature : public Mutable, public Serializable
 //----------------------------------------------------------------------
 {
 public:
-	inline Creature(const Ptr creator)
+	inline Creature(const Ptr creator, const Ptr members)
 		: Mutable{}
 		, Serializable{}
 		, _creator{ dynamic_<Shoal>(creator) ? creator : Shoal::mut_() }
-		, _members{ _creator->replicate_() }
+		, _members{ dynamic_<Shoal>(members) ? members : _creator->replicate_()}
 		, _public{ _public_(Mutable::pub_(), _members) }
 	{
 	}
 
-	static inline const Ptr mut_(const Ptr creator)
+	static inline const Ptr mut_(const Ptr creator, const Ptr members)
 	{
-		return make_<Creature>(creator);
+		return make_<Creature>(creator, members);
 	}
 
-	static inline const Ptr fin_(const Ptr creator)
+	static inline const Ptr mut(const Ptr it)
 	{
-		const Ptr result = mut_(creator);
+		const Ptr creator = it->next_();
+		const Ptr members = it->next_();
+		return mut_(creator, members);
+	}
+
+	static inline const Ptr fin_(const Ptr creator, const Ptr members)
+	{
+		const Ptr result = mut_(creator, members);
 		result->finalize_();
 		return result;
+	}
+
+	static inline const Ptr fin(const Ptr it)
+	{
+		const Ptr creator = it->next_();
+		const Ptr members = it->next_();
+		return fin_(creator, members);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -77,17 +91,20 @@ public:
 		{
 			operate_(this, over);
 		}
+		_members->finalize_();
 		Mutable::finalize_();
 	}
 
 	virtual inline const bool finalized_() const override
 	{
+		bool fin = Mutable::finalized_();
+		fin = _members->finalized_() && fin;
 		const Ptr over = static_<Shoal>(_members)->find_("finalized");
 		if (!over->is_nothing_())
 		{
-			return !operate_(const_cast<Creature*>(this), over)->is_nothing_();
+			return (!operate_(const_cast<Creature*>(this), over)->is_nothing_()) && fin;
 		}
-		return Mutable::finalized_();
+		return fin;
 	}
 
 	virtual inline void freeze_() override
@@ -97,17 +114,20 @@ public:
 		{
 			operate_(this, over);
 		}
+		_members->freeze_();
 		Mutable::freeze_();
 	}
 
 	virtual inline const bool frozen_() const override
 	{
+		bool froz = Mutable::frozen_();
+		froz = _members->frozen_() && froz;
 		const Ptr over = static_<Shoal>(_members)->find_("frozen");
 		if (!over->is_nothing_())
 		{
-			return !operate_(const_cast<Creature*>(this), over)->is_nothing_();
+			return (!operate_(const_cast<Creature*>(this), over)->is_nothing_()) && froz;
 		}
-		return Mutable::frozen_();
+		return froz;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -117,7 +137,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return Mutable::copy_();
+		return mut_(_creator, _members->copy_());
 	}
 
 	virtual inline const Ptr clone_() const override
@@ -127,7 +147,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return Mutable::clone_();
+		return mut_(_creator, _members->clone_());
 	}
 
 	virtual inline const Ptr replicate_() const override
@@ -137,7 +157,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return Mutable::replicate_();
+		return mut_(_creator, _members->replicate_());
 	}
 
 	virtual inline const Ptr iterator_() const override
