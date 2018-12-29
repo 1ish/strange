@@ -81,26 +81,6 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr copy_() const override
-	{
-		const Ptr over = static_<Shoal>(_members)->find_("copy");
-		if (!over->is_nothing_())
-		{
-			return operate_(const_cast<Creature*>(this), over);
-		}
-		return Mutable::copy_();
-	}
-
-	virtual inline const Ptr clone_() const override
-	{
-		const Ptr over = static_<Shoal>(_members)->find_("clone");
-		if (!over->is_nothing_())
-		{
-			return operate_(const_cast<Creature*>(this), over);
-		}
-		return Mutable::clone_();
-	}
-
 	virtual inline void finalize_() override
 	{
 		const Ptr over = static_<Shoal>(_members)->find_("finalize");
@@ -139,6 +119,36 @@ public:
 			return !operate_(const_cast<Creature*>(this), over)->is_nothing_();
 		}
 		return Mutable::frozen_();
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		const Ptr over = static_<Shoal>(_members)->find_("copy");
+		if (!over->is_nothing_())
+		{
+			return operate_(const_cast<Creature*>(this), over);
+		}
+		return Mutable::copy_();
+	}
+
+	virtual inline const Ptr clone_() const override
+	{
+		const Ptr over = static_<Shoal>(_members)->find_("clone");
+		if (!over->is_nothing_())
+		{
+			return operate_(const_cast<Creature*>(this), over);
+		}
+		return Mutable::clone_();
+	}
+
+	virtual inline const Ptr replicate_() const override
+	{
+		const Ptr over = static_<Shoal>(_members)->find_("replicate");
+		if (!over->is_nothing_())
+		{
+			return operate_(const_cast<Creature*>(this), over);
+		}
+		return Mutable::replicate_();
 	}
 
 	virtual inline const Ptr iterator_() const override

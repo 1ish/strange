@@ -186,27 +186,7 @@ public:
 		return type_();
 	}
 
-	virtual inline const Ptr copy_() const
-	{
-		return me_();
-	}
-
-	inline const Ptr copy(const Ptr ignore) const
-	{
-		return copy_();
-	}
-
 	// public impure virtual member functions and adapters
-	virtual inline const Ptr clone_() const
-	{
-		return copy_();
-	}
-
-	inline const Ptr clone(const Ptr ignore) const
-	{
-		return clone_();
-	}
-
 	virtual inline void finalize_()
 	{
 		_finalized_().store(true, std::memory_order_release);
@@ -247,6 +227,40 @@ public:
 	inline const Ptr frozen(const Ptr ignore) const
 	{
 		return boolean_(frozen_());
+	}
+
+	virtual inline const Ptr copy_() const
+	{
+		return me_();
+	}
+
+	inline const Ptr copy(const Ptr ignore) const
+	{
+		return copy_();
+	}
+
+	virtual inline const Ptr clone_() const
+	{
+		return copy_();
+	}
+
+	inline const Ptr clone(const Ptr ignore) const
+	{
+		return clone_();
+	}
+
+	virtual inline const Ptr replicate_() const
+	{
+		if (finalized_())
+		{
+			return me_();
+		}
+		return copy_();
+	}
+
+	inline const Ptr replicate(const Ptr ignore) const
+	{
+		return replicate_();
 	}
 
 	virtual inline const Ptr iterator_() const;
@@ -881,6 +895,24 @@ public:
 	{
 	}
 
+	virtual inline void freeze_() override
+	{
+		if (!_frozen)
+		{
+			for (const auto& i : _map)
+			{
+				i.first->freeze_();
+				i.second->freeze_();
+			}
+			_frozen = true;
+		}
+	}
+
+	virtual inline const bool frozen_() const override
+	{
+		return _frozen;
+	}
+
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
@@ -899,22 +931,23 @@ public:
 		return result;
 	}
 
-	virtual inline void freeze_() override
+	virtual inline const Ptr replicate_() const override
 	{
-		if (!_frozen)
+		if (frozen_())
 		{
-			for (const auto& i : _map)
-			{
-				i.first->freeze_();
-				i.second->freeze_();
-			}
-			_frozen = true;
+			return me_();
 		}
-	}
-
-	virtual inline const bool frozen_() const override
-	{
-		return _frozen;
+		const Ptr result = mut_();
+		std_unordered_map_ptr_ptr& replicant = static_<Shoal>(result)->_map;
+		for (const auto& i : _map)
+		{
+			replicant[i.first->replicate_()] = i.second->replicate_();
+		}
+		if (finalized_())
+		{
+			result->finalize_();
+		}
+		return result;
 	}
 
 	virtual inline const Ptr to_lake_() const override
@@ -1356,6 +1389,23 @@ public:
 		}
 	}
 
+	virtual inline void freeze_() override
+	{
+		if (!_frozen)
+		{
+			for (const auto i : _vector)
+			{
+				i->freeze_();
+			}
+			_frozen = true;
+		}
+	}
+
+	virtual inline const bool frozen_() const override
+	{
+		return _frozen;
+	}
+
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
@@ -1375,21 +1425,24 @@ public:
 		return result;
 	}
 
-	virtual inline void freeze_() override
+	virtual inline const Ptr replicate_() const override
 	{
-		if (!_frozen)
+		if (frozen_())
 		{
-			for (const auto i : _vector)
-			{
-				i->freeze_();
-			}
-			_frozen = true;
+			return me_();
 		}
-	}
-
-	virtual inline const bool frozen_() const override
-	{
-		return _frozen;
+		const Ptr result = mut_();
+		std_vector_ptr& replicant = static_<Flock>(result)->_vector;
+		replicant.reserve(_vector.size());
+		for (const auto i : _vector)
+		{
+			replicant.push_back(i->replicate_());
+		}
+		if (finalized_())
+		{
+			result->finalize_();
+		}
+		return result;
 	}
 
 	virtual inline const Ptr to_lake_() const override
@@ -1761,6 +1814,23 @@ public:
 	{
 	}
 
+	virtual inline void freeze_() override
+	{
+		if (!_frozen)
+		{
+			for (const auto i : _set)
+			{
+				i->freeze_();
+			}
+			_frozen = true;
+		}
+	}
+
+	virtual inline const bool frozen_() const override
+	{
+		return _frozen;
+	}
+
 	virtual inline const Ptr copy_() const override
 	{
 		const Ptr result = mut_();
@@ -1779,21 +1849,23 @@ public:
 		return result;
 	}
 
-	virtual inline void freeze_() override
+	virtual inline const Ptr replicate_() const override
 	{
-		if (!_frozen)
+		if (frozen_())
 		{
-			for (const auto i : _set)
-			{
-				i->freeze_();
-			}
-			_frozen = true;
+			return me_();
 		}
-	}
-
-	virtual inline const bool frozen_() const override
-	{
-		return _frozen;
+		const Ptr result = mut_();
+		std_unordered_set_ptr& replicant = static_<Herd>(result)->_set;
+		for (const auto i : _set)
+		{
+			replicant.insert(i->replicate_());
+		}
+		if (finalized_())
+		{
+			result->finalize_();
+		}
+		return result;
 	}
 
 	virtual inline const Ptr to_lake_() const override
@@ -4889,11 +4961,13 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("hash", Const<Thing>::fin_(&Thing::hash));
 		shoal->update_("same", Const<Thing>::fin_(&Thing::same, "other"));
 		shoal->update_("different", Const<Thing>::fin_(&Thing::different, "other"));
-		shoal->update_("copy", Const<Thing>::fin_(&Thing::copy));
-		shoal->update_("clone", Const<Thing>::fin_(&Thing::clone));
 		shoal->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
 		shoal->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
 		shoal->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
+		shoal->update_("frozen", Const<Thing>::fin_(&Thing::frozen));
+		shoal->update_("copy", Const<Thing>::fin_(&Thing::copy));
+		shoal->update_("clone", Const<Thing>::fin_(&Thing::clone));
+		shoal->update_("replicate", Const<Thing>::fin_(&Thing::replicate));
 		shoal->update_("call", Static::fin_(&Thing::call, "function", ".."));
 		shoal->update_("boolean", Static::fin_(&Thing::boolean, "thing"));
 		shoal->update_("nothing", Static::fin_(&Thing::nothing));
