@@ -2849,6 +2849,26 @@ public:
 		return divide_(it->next_());
 	}
 
+	virtual inline void self_modulo_(const Ptr other) = 0;
+
+	inline const Ptr self_modulo(const Ptr it)
+	{
+		self_modulo_(it->next_());
+		return me_();
+	}
+
+	inline const Ptr modulo_(const Ptr other) const
+	{
+		const Ptr result = copy_();
+		static_<Number>(result)->self_modulo_(other);
+		return result;
+	}
+
+	inline const Ptr modulo(const Ptr it) const
+	{
+		return modulo_(it->next_());
+	}
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -2873,6 +2893,8 @@ public:
 			shoal->update_("multiply", Const<Number>::fin_(&Number::multiply, "number"));
 			shoal->update_("self_divide", Member<Number>::fin_(&Number::self_divide, "number"));
 			shoal->update_("divide", Const<Number>::fin_(&Number::divide, "number"));
+			shoal->update_("self_modulo", Member<Number>::fin_(&Number::self_modulo, "number"));
+			shoal->update_("modulo", Const<Number>::fin_(&Number::modulo, "number"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -3088,6 +3110,10 @@ public:
 	}
 
 	virtual inline void self_divide_(const Ptr other) override
+	{
+	}
+
+	virtual inline void self_modulo_(const Ptr other) override
 	{
 	}
 };
@@ -3311,6 +3337,19 @@ public:
 			}
 		}
 	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0)
+			{
+				from_int64_(to_int64_() % divisor);
+			}
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3529,6 +3568,19 @@ public:
 			if (divisor != 0 && divisor != 1)
 			{
 				from_int64_(to_int64_() / divisor);
+			}
+		}
+	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0)
+			{
+				from_int64_(to_int64_() % divisor);
 			}
 		}
 	}
@@ -3756,6 +3808,19 @@ public:
 			if (divisor != 0 && divisor != 1)
 			{
 				from_int64_(to_int64_() / divisor);
+			}
+		}
+	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0)
+			{
+				from_int64_(to_int64_() % divisor);
 			}
 		}
 	}
@@ -3987,6 +4052,19 @@ public:
 			if (divisor != 0 && divisor != 1)
 			{
 				from_int64_(to_int64_() / divisor);
+			}
+		}
+	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0)
+			{
+				from_int64_(to_int64_() % divisor);
 			}
 		}
 	}
@@ -4229,6 +4307,19 @@ public:
 			}
 		}
 	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0)
+			{
+				set_(get_() % divisor);
+			}
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -4454,7 +4545,24 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			from_float64_(to_float64_() / number->to_float64_());
+			const double divisor = number->to_float64_();
+			if (std::isnormal(divisor))
+			{
+				from_float64_(to_float64_() / divisor);
+			}
+		}
+	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const double divisor = number->to_float64_();
+			if (std::isnormal(divisor))
+			{
+				from_float64_(std::fmod(to_float64_(), divisor));
+			}
 		}
 	}
 };
@@ -4690,7 +4798,24 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() / number->to_float64_());
+			const double divisor = number->to_float64_();
+			if (std::isnormal(divisor))
+			{
+				set_(get_() / divisor);
+			}
+		}
+	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const double divisor = number->to_float64_();
+			if (std::isnormal(divisor))
+			{
+				set_(std::fmod(get_(), divisor));
+			}
 		}
 	}
 };
@@ -4959,6 +5084,10 @@ public:
 		{
 			from_complex64_(to_complex64_() / number->to_complex64_());
 		}
+	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
 	}
 };
 
@@ -5242,6 +5371,10 @@ public:
 		{
 			set_(get_() / number->to_complex64_());
 		}
+	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
 	}
 };
 
