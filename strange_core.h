@@ -2666,6 +2666,12 @@ public:
 		}();
 		return CATS;
 	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Lake* const lake = dynamic_<Lake>(other);
+		return lake && (get_() == lake->get_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3144,6 +3150,12 @@ public:
 	virtual inline void self_modulo_(const Ptr other) override
 	{
 	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() == number->to_int64_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3388,6 +3400,12 @@ public:
 			}
 		}
 	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() == number->to_int64_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3631,6 +3649,12 @@ public:
 				from_int64_(to_int64_() % divisor);
 			}
 		}
+	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() == number->to_int64_());
 	}
 };
 
@@ -3881,6 +3905,12 @@ public:
 				from_int64_(to_int64_() % divisor);
 			}
 		}
+	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() == number->to_int64_());
 	}
 };
 
@@ -4135,6 +4165,12 @@ public:
 				from_int64_(to_int64_() % divisor);
 			}
 		}
+	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() == number->to_int64_());
 	}
 };
 
@@ -4398,6 +4434,12 @@ public:
 			}
 		}
 	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (get_() == number->to_int64_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -4652,6 +4694,12 @@ public:
 				from_float64_(std::fmod(to_float64_(), divisor));
 			}
 		}
+	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_float64_() == number->to_float64_());
 	}
 };
 
@@ -4915,6 +4963,12 @@ public:
 				set_(std::fmod(get_(), divisor));
 			}
 		}
+	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (get_() == number->to_float64_());
 	}
 };
 
@@ -5196,6 +5250,12 @@ public:
 
 	virtual inline void self_modulo_(const Ptr other) override
 	{
+	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_complex64_() == number->to_complex64_());
 	}
 };
 
@@ -5493,6 +5553,12 @@ public:
 
 	virtual inline void self_modulo_(const Ptr other) override
 	{
+	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (get_() == number->to_complex64_());
 	}
 };
 
