@@ -2757,6 +2757,26 @@ public:
 		return subtract_(it->next_());
 	}
 
+	virtual inline void self_multiply_(const Ptr other) = 0;
+
+	inline const Ptr self_multiply(const Ptr it)
+	{
+		self_multiply_(it->next_());
+		return me_();
+	}
+
+	inline const Ptr multiply_(const Ptr other) const
+	{
+		const Ptr result = copy_();
+		static_<Number>(result)->self_multiply_(other);
+		return result;
+	}
+
+	inline const Ptr multiply(const Ptr it) const
+	{
+		return multiply_(it->next_());
+	}
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -2777,6 +2797,8 @@ public:
 			shoal->update_("add", Const<Number>::fin_(&Number::add, "number"));
 			shoal->update_("self_subtract", Member<Number>::fin_(&Number::self_subtract, "number"));
 			shoal->update_("subtract", Const<Number>::fin_(&Number::subtract, "number"));
+			shoal->update_("self_multiply", Member<Number>::fin_(&Number::self_multiply, "number"));
+			shoal->update_("multiply", Const<Number>::fin_(&Number::multiply, "number"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -2981,6 +3003,15 @@ public:
 			set_(!get_());
 		}
 	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() && (number->to_int64_() & 1));
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3180,6 +3211,15 @@ public:
 			from_int64_(to_int64_() - number->to_int64_());
 		}
 	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() * number->to_int64_());
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3377,6 +3417,15 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() - number->to_int64_());
+		}
+	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() * number->to_int64_());
 		}
 	}
 };
@@ -3582,6 +3631,15 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() - number->to_int64_());
+		}
+	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() * number->to_int64_());
 		}
 	}
 };
@@ -3791,6 +3849,15 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() - number->to_int64_());
+		}
+	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() * number->to_int64_());
 		}
 	}
 };
@@ -4010,6 +4077,15 @@ public:
 			set_(get_() - number->to_int64_());
 		}
 	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() * number->to_int64_());
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -4218,6 +4294,15 @@ public:
 		if (number)
 		{
 			from_float64_(to_float64_() - number->to_float64_());
+		}
+	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_float64_(to_float64_() * number->to_float64_());
 		}
 	}
 };
@@ -4436,6 +4521,15 @@ public:
 		if (number)
 		{
 			set_(get_() - number->to_float64_());
+		}
+	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() * number->to_float64_());
 		}
 	}
 };
@@ -4685,6 +4779,15 @@ public:
 		if (number)
 		{
 			from_complex64_(to_complex64_() - number->to_complex64_());
+		}
+	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_complex64_(to_complex64_() * number->to_complex64_());
 		}
 	}
 };
@@ -4950,6 +5053,15 @@ public:
 		if (number)
 		{
 			set_(get_() - number->to_complex64_());
+		}
+	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() * number->to_complex64_());
 		}
 	}
 };
