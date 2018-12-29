@@ -2769,6 +2769,22 @@ public:
 		return nothing_();
 	}
 
+	virtual inline void increment_() = 0;
+
+	inline const Ptr increment(const Ptr ignore)
+	{
+		increment_();
+		return me_();
+	}
+
+	virtual inline void decrement_() = 0;
+
+	inline const Ptr decrement(const Ptr ignore)
+	{
+		decrement_();
+		return me_();
+	}
+
 	virtual inline void self_add_(const Ptr other) = 0;
 
 	inline const Ptr self_add(const Ptr it)
@@ -2885,6 +2901,8 @@ public:
 			shoal->update_("from_complex64", Member<Number>::fin_(&Number::from_complex64, "complex64"));
 			shoal->update_("to_symbol", Const<Number>::fin_(&Number::to_symbol));
 			shoal->update_("from_symbol", Member<Number>::fin_(&Number::from_symbol, "symbol"));
+			shoal->update_("increment", Member<Number>::fin_(&Number::increment));
+			shoal->update_("decrement", Member<Number>::fin_(&Number::decrement));
 			shoal->update_("self_add", Member<Number>::fin_(&Number::self_add, "number"));
 			shoal->update_("add", Const<Number>::fin_(&Number::add, "number"));
 			shoal->update_("self_subtract", Member<Number>::fin_(&Number::self_subtract, "number"));
@@ -3080,6 +3098,16 @@ public:
 		{
 			set_(std::stoll(symbol->symbol_()) & 1);
 		}
+	}
+
+	virtual inline void increment_() override
+	{
+		set_(!get_());
+	}
+
+	virtual inline void decrement_() override
+	{
+		set_(!get_());
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -3296,6 +3324,16 @@ public:
 		{
 			set_(D(std::stoll(symbol->symbol_())));
 		}
+	}
+
+	virtual inline void increment_() override
+	{
+		set_(get_() + 1);
+	}
+
+	virtual inline void decrement_() override
+	{
+		set_(get_() - 1);
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -3530,6 +3568,16 @@ public:
 		{
 			set_(D(std::stoll(symbol->symbol_())));
 		}
+	}
+
+	virtual inline void increment_() override
+	{
+		set_(get_() + 1);
+	}
+
+	virtual inline void decrement_() override
+	{
+		set_(get_() - 1);
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -3770,6 +3818,16 @@ public:
 		{
 			set_(D(std::stoll(symbol->symbol_())));
 		}
+	}
+
+	virtual inline void increment_() override
+	{
+		set_(get_() + 1);
+	}
+
+	virtual inline void decrement_() override
+	{
+		set_(get_() - 1);
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -4014,6 +4072,16 @@ public:
 		{
 			set_(D(std::stoll(symbol->symbol_())));
 		}
+	}
+
+	virtual inline void increment_() override
+	{
+		set_(get_() + 1);
+	}
+
+	virtual inline void decrement_() override
+	{
+		set_(get_() - 1);
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -4268,6 +4336,16 @@ public:
 		}
 	}
 
+	virtual inline void increment_() override
+	{
+		set_(get_() + 1);
+	}
+
+	virtual inline void decrement_() override
+	{
+		set_(get_() - 1);
+	}
+
 	virtual inline void self_add_(const Ptr other) override
 	{
 		Number* const number = dynamic_<Number>(other);
@@ -4511,6 +4589,16 @@ public:
 		{
 			set_(std::stof(symbol->symbol_()));
 		}
+	}
+
+	virtual inline void increment_() override
+	{
+		from_int64_(to_int64_() + 1);
+	}
+
+	virtual inline void decrement_() override
+	{
+		from_int64_(to_int64_() - 1);
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -4764,6 +4852,16 @@ public:
 		{
 			set_(std::stod(symbol->symbol_()));
 		}
+	}
+
+	virtual inline void increment_() override
+	{
+		from_int64_(to_int64_() + 1);
+	}
+
+	virtual inline void decrement_() override
+	{
+		from_int64_(to_int64_() - 1);
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -5048,6 +5146,16 @@ public:
 			std::getline(str, second, delim);
 			set_(D(std::stof(first), std::stof(second)));
 		}
+	}
+
+	virtual inline void increment_() override
+	{
+		from_int64_(to_int64_() + 1);
+	}
+
+	virtual inline void decrement_() override
+	{
+		from_int64_(to_int64_() - 1);
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -5335,6 +5443,16 @@ public:
 			std::getline(str, second, delim);
 			set_(D(std::stod(first), std::stod(second)));
 		}
+	}
+
+	virtual inline void increment_() override
+	{
+		from_int64_(to_int64_() + 1);
+	}
+
+	virtual inline void decrement_() override
+	{
+		from_int64_(to_int64_() - 1);
 	}
 
 	virtual inline void self_add_(const Ptr other) override
