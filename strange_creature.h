@@ -5,7 +5,6 @@
 
 namespace strange
 {
-	class Creator;
 	class Creature;
 
 	// Categories:
@@ -35,37 +34,27 @@ namespace strange
 	// private non-virtual member functions and adapters
 
 //----------------------------------------------------------------------
-class Creator : public Mutable
-//----------------------------------------------------------------------
-{
-public:
-
-private:
-	const Ptr _shoal;
-};
-
-//----------------------------------------------------------------------
 class Creature : public Mutable, public Serializable
 //----------------------------------------------------------------------
 {
 public:
-	inline Creature(const Ptr creator, const Ptr members)
+	inline Creature(const Ptr creator)
 		: Mutable{}
 		, Serializable{}
-		, _creator{ creator }
-		, _members{ members }
+		, _creator{ dynamic_<Shoal>(creator) ? creator : Shoal::mut_() }
+		, _members{ _creator->replicate_() }
 		, _public{ _public_(Mutable::pub_(), _members) }
 	{
 	}
 
-	static inline const Ptr mut_(const Ptr creator, const Ptr members)
+	static inline const Ptr mut_(const Ptr creator)
 	{
-		return make_<Creature>(creator, members);
+		return make_<Creature>(creator);
 	}
 
-	static inline const Ptr fin_(const Ptr creator, const Ptr members)
+	static inline const Ptr fin_(const Ptr creator)
 	{
-		const Ptr result = mut_(creator, members);
+		const Ptr result = mut_(creator);
 		result->finalize_();
 		return result;
 	}
@@ -336,7 +325,6 @@ public:
 	}
 
 private:
-	friend class Function;
 	const Ptr _creator;
 	const Ptr _members;
 	const Ptr _public;

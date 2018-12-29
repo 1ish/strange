@@ -229,6 +229,16 @@ public:
 		return boolean_(frozen_());
 	}
 
+	inline const Ptr me_() const
+	{
+		const Ptr ptr = _me.lock();
+		if (ptr)
+		{
+			return ptr;
+		}
+		return nothing_();
+	}
+
 	virtual inline const Ptr copy_() const
 	{
 		return me_();
@@ -421,17 +431,6 @@ protected:
 
 	// protected impure virtual member functions and adapters
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr it);
-
-	// protected non-virtual member functions and adapters
-	inline const Ptr me_() const
-	{
-		const Ptr ptr = _me.lock();
-		if (ptr)
-		{
-			return ptr;
-		}
-		return nothing_();
-	}
 
 private:
 	WeakPtr _me;
