@@ -2717,6 +2717,26 @@ public:
 		return nothing_();
 	}
 
+	virtual inline void self_add_(const Ptr other) = 0;
+
+	inline const Ptr self_add(const Ptr it)
+	{
+		self_add_(it->next_());
+		return me_();
+	}
+
+	inline const Ptr add_(const Ptr other) const
+	{
+		const Ptr result = copy_();
+		static_<Number>(result)->self_add_(other);
+		return result;
+	}
+
+	inline const Ptr add(const Ptr it) const
+	{
+		return add_(it->next_());
+	}
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -2733,6 +2753,8 @@ public:
 			shoal->update_("from_complex64", Member<Number>::fin_(&Number::from_complex64, "complex64"));
 			shoal->update_("to_symbol", Const<Number>::fin_(&Number::to_symbol));
 			shoal->update_("from_symbol", Member<Number>::fin_(&Number::from_symbol, "symbol"));
+			shoal->update_("self_add", Member<Number>::fin_(&Number::self_add, "other"));
+			shoal->update_("add", Const<Number>::fin_(&Number::add, "other"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -2898,17 +2920,17 @@ public:
 
 	virtual inline int64_t to_int64_() const override
 	{
-		return int64_t(get_());
+		return get_() ? 1 : 0;
 	}
 
 	virtual inline void from_int64_(const int64_t int64) override
 	{
-		set_(D(int64));
+		set_(int64 & 1);
 	}
 
 	virtual inline const Ptr to_symbol_() const override
 	{
-		return sym_(std::to_string(get_()));
+		return sym_(get_() ? "1" : "0");
 	}
 
 	virtual inline void from_symbol_(const Ptr ptr) override
@@ -2916,7 +2938,16 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(D(std::stoll(symbol->symbol_())));
+			set_(std::stoll(symbol->symbol_()) & 1);
+		}
+	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() != bool(number->to_int64_() & 1));
 		}
 	}
 };
@@ -3100,6 +3131,15 @@ public:
 			set_(D(std::stoll(symbol->symbol_())));
 		}
 	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() + number->to_int64_());
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3279,6 +3319,15 @@ public:
 		if (symbol)
 		{
 			set_(D(std::stoll(symbol->symbol_())));
+		}
+	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() + number->to_int64_());
 		}
 	}
 };
@@ -3466,6 +3515,15 @@ public:
 		if (symbol)
 		{
 			set_(D(std::stoll(symbol->symbol_())));
+		}
+	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() + number->to_int64_());
 		}
 	}
 };
@@ -3657,6 +3715,15 @@ public:
 		if (symbol)
 		{
 			set_(D(std::stoll(symbol->symbol_())));
+		}
+	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() + number->to_int64_());
 		}
 	}
 };
@@ -3858,6 +3925,15 @@ public:
 			set_(D(std::stoll(symbol->symbol_())));
 		}
 	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() + number->to_int64_());
+		}
+	}
 };
 
 //----------------------------------------------------------------------
@@ -4048,6 +4124,15 @@ public:
 		if (symbol)
 		{
 			set_(std::stof(symbol->symbol_()));
+		}
+	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_float64_(to_float64_() + number->to_float64_());
 		}
 	}
 };
@@ -4248,6 +4333,15 @@ public:
 		if (symbol)
 		{
 			set_(std::stod(symbol->symbol_()));
+		}
+	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() + number->to_float64_());
 		}
 	}
 };
@@ -4479,6 +4573,15 @@ public:
 			std::getline(str, first, delim);
 			std::getline(str, second, delim);
 			set_(D(std::stof(first), std::stof(second)));
+		}
+	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_complex64_(to_complex64_() + number->to_complex64_());
 		}
 	}
 };
@@ -4726,6 +4829,15 @@ public:
 			std::getline(str, first, delim);
 			std::getline(str, second, delim);
 			set_(D(std::stod(first), std::stod(second)));
+		}
+	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			set_(get_() + number->to_complex64_());
 		}
 	}
 };
