@@ -398,6 +398,36 @@ public:
 		return boolean_(!is_nothing_());
 	}
 
+	inline const Ptr and_op(const Ptr it) const
+	{
+		return boolean_((!is_nothing_()) && (!it->next_()->is_nothing_()));
+	}
+	
+	inline const Ptr or_op(const Ptr it) const
+	{
+		return boolean_((!is_nothing_()) || (!it->next_()->is_nothing_()));
+	}
+
+	inline const Ptr xor_op(const Ptr it) const
+	{
+		return boolean_(is_nothing_() != it->next_()->is_nothing_());
+	}
+
+	inline const Ptr nand_op(const Ptr it) const
+	{
+		return boolean_(is_nothing_() || it->next_()->is_nothing_());
+	}
+
+	inline const Ptr nor_op(const Ptr it) const
+	{
+		return boolean_(is_nothing_() && it->next_()->is_nothing_());
+	}
+
+	inline const Ptr xnor_op(const Ptr it) const
+	{
+		return boolean_(is_nothing_() == it->next_()->is_nothing_());
+	}
+
 protected:
 	// protected static utility functions
 	static inline const Ptr operate_(Thing* const thing, const Ptr member, const Ptr it)
@@ -4957,6 +4987,12 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("is_not", Const<Thing>::fin_(&Thing::is_not, "symbol"));
 		shoal->update_("is_nothing", Const<Thing>::fin_(&Thing::is_nothing));
 		shoal->update_("is_not_nothing", Const<Thing>::fin_(&Thing::is_not_nothing));
+		shoal->update_("and", Const<Thing>::fin_(&Thing::and_op, "other"));
+		shoal->update_("or", Const<Thing>::fin_(&Thing::or_op, "other"));
+		shoal->update_("xor", Const<Thing>::fin_(&Thing::xor_op, "other"));
+		shoal->update_("nand", Const<Thing>::fin_(&Thing::nand_op, "other"));
+		shoal->update_("nor", Const<Thing>::fin_(&Thing::nor_op, "other"));
+		shoal->update_("xnor", Const<Thing>::fin_(&Thing::xnor_op, "other"));
 		shoal->update_("hash", Const<Thing>::fin_(&Thing::hash));
 		shoal->update_("same", Const<Thing>::fin_(&Thing::same, "other"));
 		shoal->update_("different", Const<Thing>::fin_(&Thing::different, "other"));
