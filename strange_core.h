@@ -1619,23 +1619,22 @@ public:
 		return at_(it->next_());
 	}
 
-	inline const Ptr update_(const int64_t pos, const Ptr value)
+	inline void update_(const int64_t pos, const Ptr value)
 	{
 		if (pos >= 0 && pos < size_())
 		{
 			_vector[size_t(pos)] = value;
-			return value;
 		}
-		return nothing_();
 	}
 
-	inline const Ptr update_(const Ptr pos, const Ptr value);
+	inline void update_(const Ptr pos, const Ptr value);
 
 	inline const Ptr update(const Ptr it)
 	{
 		const Ptr index = it->next_();
 		const Ptr value = it->next_();
-		return update_(index, value);
+		update_(index, value);
+		return value;
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -2451,6 +2450,11 @@ public:
 		return _data;
 	}
 
+	inline D& ref_()
+	{
+		return _data;
+	}
+
 private:
 	D _data;
 };
@@ -2477,6 +2481,11 @@ public:
 		return _data;
 	}
 
+	inline float& ref_()
+	{
+		return _data;
+	}
+
 private:
 	float _data;
 };
@@ -2499,6 +2508,11 @@ public:
 	}
 
 	inline const double& get_() const
+	{
+		return _data;
+	}
+
+	inline double& ref_()
 	{
 		return _data;
 	}
@@ -2599,6 +2613,10 @@ public:
 			shoal->update_("lak", Static::fin_(&Lake::lak, "lake"));
 			shoal->update_("riv", Static::fin_(&Lake::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Lake::rwl, "river"));
+			shoal->update_("self_add", Member<Lake>::fin_(&Lake::self_add, "lake"));
+			shoal->update_("add", Const<Lake>::fin_(&Lake::add, "lake"));
+			shoal->update_("at", Const<Lake>::fin_(&Lake::at, "index"));
+			shoal->update_("update", Member<Lake>::fin_(&Lake::update, "index", "byte"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -2667,6 +2685,33 @@ public:
 		return CATS;
 	}
 
+	inline void self_add_(const Ptr other)
+	{
+		Lake* const lake = dynamic_<Lake>(other);
+		if (lake)
+		{
+			ref_() += lake->get_();
+		}
+	}
+
+	inline const Ptr self_add(const Ptr it)
+	{
+		self_add_(it->next_());
+		return me_();
+	}
+
+	inline const Ptr add_(const Ptr other) const
+	{
+		const Ptr result = copy_();
+		static_<Lake>(result)->self_add_(other);
+		return result;
+	}
+
+	inline const Ptr add(const Ptr it) const
+	{
+		return add_(it->next_());
+	}
+
 	virtual inline const bool same_(const Ptr other) const override
 	{
 		Lake* const lake = dynamic_<Lake>(other);
@@ -2676,6 +2721,39 @@ public:
 	virtual inline size_t hash_() const override
 	{
 		return std::hash<S>()(get_());
+	}
+
+	inline const char at_(const int64_t index) const
+	{
+		const S& s = get_();
+		if (size_t(index) < s.length())
+		{
+			return s[index];
+		}
+		return 0;
+	}
+
+	inline const char at_(const Ptr index) const;
+
+	inline const Ptr at(const Ptr it) const;
+
+	inline void update_(const int64_t index, const int64_t byte)
+	{
+		S& s = ref_();
+		if (size_t(index) < s.length())
+		{
+			s[index] = char(byte);
+		}
+	}
+
+	inline void update_(const Ptr index, const Ptr byte);
+
+	inline const Ptr update(const Ptr it)
+	{
+		const Ptr index = it->next_();
+		const Ptr byte = it->next_();
+		update_(index, byte);
+		return byte;
 	}
 };
 
@@ -3113,12 +3191,14 @@ public:
 
 	virtual inline void increment_() override
 	{
-		set_(!get_());
+		bool& b = ref_();
+		b = !b;
 	}
 
 	virtual inline void decrement_() override
 	{
-		set_(!get_());
+		bool& b = ref_();
+		b = !b;
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -3126,7 +3206,8 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() != bool(number->to_int64_() & 1));
+			bool& b = ref_();
+			b = (b != bool(number->to_int64_() & 1));
 		}
 	}
 
@@ -3135,7 +3216,8 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number && (number->to_int64_() & 1))
 		{
-			set_(!get_());
+			bool& b = ref_();
+			b = !b;
 		}
 	}
 
@@ -3144,7 +3226,8 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() && (number->to_int64_() & 1));
+			bool& b = ref_();
+			b = (b && (number->to_int64_() & 1));
 		}
 	}
 
@@ -3368,12 +3451,12 @@ public:
 
 	virtual inline void increment_() override
 	{
-		set_(get_() + 1);
+		++ref_();
 	}
 
 	virtual inline void decrement_() override
 	{
-		set_(get_() - 1);
+		--ref_();
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -3623,12 +3706,12 @@ public:
 
 	virtual inline void increment_() override
 	{
-		set_(get_() + 1);
+		++ref_();
 	}
 
 	virtual inline void decrement_() override
 	{
-		set_(get_() - 1);
+		--ref_();
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -3884,12 +3967,12 @@ public:
 
 	virtual inline void increment_() override
 	{
-		set_(get_() + 1);
+		++ref_();
 	}
 
 	virtual inline void decrement_() override
 	{
-		set_(get_() - 1);
+		--ref_();
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -4149,12 +4232,12 @@ public:
 
 	virtual inline void increment_() override
 	{
-		set_(get_() + 1);
+		++ref_();
 	}
 
 	virtual inline void decrement_() override
 	{
-		set_(get_() - 1);
+		--ref_();
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -4422,12 +4505,12 @@ public:
 
 	virtual inline void increment_() override
 	{
-		set_(get_() + 1);
+		++ref_();
 	}
 
 	virtual inline void decrement_() override
 	{
-		set_(get_() - 1);
+		--ref_();
 	}
 
 	virtual inline void self_add_(const Ptr other) override
@@ -4435,7 +4518,7 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() + number->to_int64_());
+			ref_() += number->to_int64_();
 		}
 	}
 
@@ -4444,7 +4527,7 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() - number->to_int64_());
+			ref_() -= number->to_int64_();
 		}
 	}
 
@@ -4453,7 +4536,7 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() * number->to_int64_());
+			ref_() *= number->to_int64_();
 		}
 	}
 
@@ -4465,7 +4548,7 @@ public:
 			const int64_t divisor = number->to_int64_();
 			if (divisor != 0 && divisor != 1)
 			{
-				set_(get_() / divisor);
+				ref_() /= divisor;
 			}
 		}
 	}
@@ -4478,7 +4561,7 @@ public:
 			const int64_t divisor = number->to_int64_();
 			if (divisor != 0)
 			{
-				set_(get_() % divisor);
+				ref_() %= divisor;
 			}
 		}
 	}
@@ -4975,7 +5058,7 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() + number->to_float64_());
+			ref_() += number->to_float64_();
 		}
 	}
 
@@ -4984,7 +5067,7 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() - number->to_float64_());
+			ref_() -= number->to_float64_();
 		}
 	}
 
@@ -4993,7 +5076,7 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() * number->to_float64_());
+			ref_() *= number->to_float64_();
 		}
 	}
 
@@ -5005,7 +5088,7 @@ public:
 			const double divisor = number->to_float64_();
 			if (std::isnormal(divisor))
 			{
-				set_(get_() / divisor);
+				ref_() /= divisor;
 			}
 		}
 	}
@@ -5018,7 +5101,8 @@ public:
 			const double divisor = number->to_float64_();
 			if (std::isnormal(divisor))
 			{
-				set_(std::fmod(get_(), divisor));
+				double& d = ref_();
+				d = std::fmod(d, divisor);
 			}
 		}
 	}
@@ -5593,7 +5677,7 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() + number->to_complex64_());
+			ref_() += number->to_complex64_();
 		}
 	}
 
@@ -5602,7 +5686,7 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() - number->to_complex64_());
+			ref_() -= number->to_complex64_();
 		}
 	}
 
@@ -5611,7 +5695,7 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() * number->to_complex64_());
+			ref_() *= number->to_complex64_();
 		}
 	}
 
@@ -5620,7 +5704,7 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		if (number)
 		{
-			set_(get_() / number->to_complex64_());
+			ref_() /= number->to_complex64_();
 		}
 	}
 
@@ -6378,14 +6462,13 @@ inline const Thing::Ptr Flock::at_(const Thing::Ptr pos) const
 	return nothing_();
 }
 
-inline const Thing::Ptr Flock::update_(const Thing::Ptr pos, const Thing::Ptr value)
+inline void Flock::update_(const Thing::Ptr pos, const Thing::Ptr value)
 {
 	Number* const number = dynamic_<Number>(pos);
 	if (number)
 	{
-		return update_(number->to_int64_(), value);
+		update_(number->to_int64_(), value);
 	}
-	return nothing_();
 }
 
 inline const Thing::Ptr Flock::Concurrent::size(const Thing::Ptr ignore) const
@@ -6665,6 +6748,34 @@ inline void Lake::from_river_(const Thing::Ptr river)
 	if (bit)
 	{
 		finalize_();
+	}
+}
+
+inline const char Lake::at_(const Thing::Ptr index) const
+{
+	Number* const ind = dynamic_<Number>(index);
+	if (ind)
+	{
+		return at_(ind->to_int64_());
+	}
+	return 0;
+}
+
+inline const Thing::Ptr Lake::at(const Thing::Ptr it) const
+{
+	return UInt8::mut_(at_(it->next_()));
+}
+
+inline void Lake::update_(const Thing::Ptr index, const Thing::Ptr byte)
+{
+	Number* const ind = dynamic_<Number>(index);
+	if (ind)
+	{
+		Number* const byt = dynamic_<Number>(byte);
+		if (byt)
+		{
+			update_(ind->to_int64_(), byt->to_int64_());
+		}
 	}
 }
 
