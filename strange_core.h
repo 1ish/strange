@@ -2672,6 +2672,11 @@ public:
 		Lake* const lake = dynamic_<Lake>(other);
 		return lake && (get_() == lake->get_());
 	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<S>()(get_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3145,16 +3150,39 @@ public:
 
 	virtual inline void self_divide_(const Ptr other) override
 	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0 && divisor != 1)
+			{
+				from_int64_(to_int64_() / divisor);
+			}
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr other) override
 	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0)
+			{
+				from_int64_(to_int64_() % divisor);
+			}
+		}
 	}
 
 	virtual inline const bool same_(const Ptr other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
+	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<int64_t>()(to_int64_());
 	}
 };
 
@@ -3406,6 +3434,11 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
 	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<int64_t>()(to_int64_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3655,6 +3688,11 @@ public:
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
+	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<int64_t>()(to_int64_());
 	}
 };
 
@@ -3911,6 +3949,11 @@ public:
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
+	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<int64_t>()(to_int64_());
 	}
 };
 
@@ -4171,6 +4214,11 @@ public:
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
+	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<int64_t>()(to_int64_());
 	}
 };
 
@@ -4440,6 +4488,11 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() == number->to_int64_());
 	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<int64_t>()(get_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -4700,6 +4753,11 @@ public:
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_float64_() == number->to_float64_());
+	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<double>()(to_float64_());
 	}
 };
 
@@ -4970,6 +5028,11 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() == number->to_float64_());
 	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<double>()(get_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -5056,6 +5119,7 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("self_modulo", nothing_());
 			shoal->update_("to_lake", Const<Complex32>::fin_(&Complex32::to_lake));
 			shoal->update_("from_lake", Member<Complex32>::fin_(&Complex32::from_lake, "lake"));
 			shoal->update_("to_river", Const<Complex32>::fin_(&Complex32::to_river, "river"));
@@ -5257,6 +5321,14 @@ public:
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_complex64_() == number->to_complex64_());
 	}
+
+	virtual inline size_t hash_() const override
+	{
+		const std::complex<double> c = to_complex64_();
+		const size_t i = std::hash<double>()(c.imag());
+		const size_t s = sizeof(i) * 4;
+		return std::hash<double>()(c.real()) ^ ((i << s) | (i >> s));
+	}
 };
 
 //----------------------------------------------------------------------
@@ -5343,6 +5415,7 @@ public:
 		{
 			const Ptr pub = Number::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("self_modulo", nothing_());
 			shoal->update_("to_lake", Const<Complex64>::fin_(&Complex64::to_lake));
 			shoal->update_("from_lake", Member<Complex64>::fin_(&Complex64::from_lake, "lake"));
 			shoal->update_("to_river", Const<Complex64>::fin_(&Complex64::to_river, "river"));
@@ -5559,6 +5632,14 @@ public:
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() == number->to_complex64_());
+	}
+
+	virtual inline size_t hash_() const override
+	{
+		const std::complex<double> c = get_();
+		const size_t i = std::hash<double>()(c.imag());
+		const size_t s = sizeof(i) * 4;
+		return std::hash<double>()(c.real()) ^ ((i << s) | (i >> s));
 	}
 };
 
