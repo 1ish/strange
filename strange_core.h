@@ -759,7 +759,7 @@ public:
 	template <typename F>
 	inline const Ptr add_(F&& s) const
 	{
-		return fin_(_symbol + s);
+		return fin_(_symbol + std::forward<F>(s));
 	}
 
 	inline const Ptr add_(const Ptr other) const;
