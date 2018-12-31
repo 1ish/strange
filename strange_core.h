@@ -1176,6 +1176,8 @@ public:
 			shoal->update_("insert", Member<Shoal>::fin_(&Shoal::insert, "key", "value"));
 			shoal->update_("self_add", Member<Shoal>::fin_(&Shoal::self_add, "shoal"));
 			shoal->update_("add", Const<Shoal>::fin_(&Shoal::add, "shoal"));
+			shoal->update_("self_subtract", Member<Shoal>::fin_(&Shoal::self_subtract, "shoal"));
+			shoal->update_("subtract", Const<Shoal>::fin_(&Shoal::subtract, "shoal"));
 			shoal->update_("feeder", Const<Shoal>::fin_(&Shoal::feeder, ".."));
 			shoal->update_("itemize", Member<Shoal>::fin_(&Shoal::itemize, "key"));
 			shoal->update_("gather", Member<Shoal>::fin_(&Shoal::gather, "key"));
@@ -1305,17 +1307,7 @@ public:
 		return boolean_(insert_(key, value));
 	}
 
-	inline void self_add_(const Ptr other)
-	{
-		Shoal* const shoal = dynamic_<Shoal>(other);
-		if (shoal)
-		{
-			for (const auto& i : shoal->_map)
-			{
-				_map[i.first] = i.second;
-			}
-		}
-	}
+	inline void self_add_(const Ptr other);
 
 	inline const Ptr self_add(const Ptr it)
 	{
@@ -1333,6 +1325,26 @@ public:
 	inline const Ptr add(const Ptr it) const
 	{
 		return add_(it->next_());
+	}
+
+	inline void self_subtract_(const Ptr other);
+
+	inline const Ptr self_subtract(const Ptr it)
+	{
+		self_subtract_(it->next_());
+		return me_();
+	}
+
+	inline const Ptr subtract_(const Ptr other) const
+	{
+		const Ptr result = copy_();
+		static_<Shoal>(result)->self_subtract_(other);
+		return result;
+	}
+
+	inline const Ptr subtract(const Ptr it) const
+	{
+		return subtract_(it->next_());
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -1396,6 +1408,11 @@ public:
 	inline void gather_to_river_(const Ptr thing, const Ptr river);
 
 	inline const Ptr gather_from_river_(const Ptr river);
+
+	inline const std_unordered_map_ptr_ptr& get_() const
+	{
+		return _map;
+	}
 
 	class Concurrent : public Mutable
 	{
@@ -1858,6 +1875,11 @@ public:
 		return result;
 	}
 
+	inline const std_vector_ptr& get_() const
+	{
+		return _vector;
+	}
+
 	class Concurrent : public Mutable
 	{
 	public:
@@ -2279,6 +2301,11 @@ public:
 	{
 		gather_(it->next_());
 		return nothing_();
+	}
+
+	inline const std_unordered_set_ptr& get_() const
+	{
+		return _set;
 	}
 
 	class Concurrent : public Mutable
@@ -7966,6 +7993,52 @@ inline const Thing::Ptr Shoal::gather_from_river_(const Thing::Ptr river)
 		i.second->invoke_("replace_links", me_());
 	}
 	return at_(nothing_());
+}
+
+inline void Shoal::self_add_(const Thing::Ptr other)
+{
+	Shoal* const shoal = dynamic_<Shoal>(other);
+	if (shoal)
+	{
+		for (const auto& i : shoal->_map)
+		{
+			_map[i.first] = i.second;
+		}
+	}
+	else
+	{
+		Herd* const herd = dynamic_<Herd>(other);
+		if (herd)
+		{
+			for (auto i : herd->get_())
+			{
+				_map[i] = one_();
+			}
+		}
+	}
+}
+
+inline void Shoal::self_subtract_(const Thing::Ptr other)
+{
+	Shoal* const shoal = dynamic_<Shoal>(other);
+	if (shoal)
+	{
+		for (const auto& i : shoal->_map)
+		{
+			_map.erase(i.first);
+		}
+	}
+	else
+	{
+		Herd* const herd = dynamic_<Herd>(other);
+		if (herd)
+		{
+			for (auto i : herd->get_())
+			{
+				_map.erase(i);
+			}
+		}
+	}
 }
 
 inline const Thing::Ptr Shoal::cats_() const
