@@ -475,7 +475,7 @@ private:
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
-		const Ptr member = static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local));
+		const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(flock->at_(1), local));
 		return operate_(thing.get(), member, Expression::evaluate_(flock->at_(2), local));
 	}
 
@@ -483,7 +483,7 @@ private:
 	{
 		Flock* const flock = static_<Flock>(_flock);
 		const Ptr thing = Expression::evaluate_(flock->at_(0), local);
-		const Ptr member = static_<Shoal>(thing->pub_())->find_(Expression::evaluate_(flock->at_(1), local));
+		const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(flock->at_(1), local));
 		const Ptr iterable = Expression::evaluate_(flock->at_(2), local);
 		const Ptr eater = member->eater_();
 		if (!eater->is_nothing_())
@@ -500,7 +500,7 @@ private:
 	inline const Ptr _lambda_(const Ptr local) const
 	{
 		Shoal* const shoal = static_<Shoal>(local);
-		Shoal* const shared = static_<Shoal>(shoal->find_("$"));
+		Shoal* const shared = static_<Shoal>(shoal->at_("$"));
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size_1 = flock->size_() - 1;
 		Ptr param;
@@ -519,7 +519,7 @@ private:
 	inline const Ptr _function_(const Ptr local) const
 	{
 		Shoal* const shoal = static_<Shoal>(local);
-		const Ptr it = shoal->find_("&");
+		const Ptr it = shoal->at_("&");
 		Flock* const flock = static_<Flock>(_flock);
 		const int64_t size_1 = flock->size_() - 1;
 		Ptr param;
@@ -551,7 +551,7 @@ private:
 	inline const Ptr _shared_scope_(const Ptr local) const
 	{
 		Flock* const flk = static_<Flock>(_flock);
-		return static_<Shoal>(flk->at_(0))->find_(flk->at_(1));
+		return static_<Shoal>(flk->at_(0))->at_(flk->at_(1));
 	}
 	
 	inline const Ptr _relative_scope_(const Ptr local) const
@@ -566,9 +566,9 @@ private:
 		{
 			if (scope.empty())
 			{
-				return shoal->find_(key);
+				return shoal->at_(key);
 			}
-			const Ptr result = shoal->find_(scope + "::" + key_str);
+			const Ptr result = shoal->at_(scope + "::" + key_str);
 			if (!result->is_nothing_())
 			{
 				return result;

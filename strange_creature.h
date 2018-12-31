@@ -75,7 +75,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("type");
+		const Ptr over = static_<Shoal>(_members)->at_("type");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -86,7 +86,7 @@ public:
 
 	virtual inline void finalize_() override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("finalize");
+		const Ptr over = static_<Shoal>(_members)->at_("finalize");
 		if (!over->is_nothing_())
 		{
 			operate_(this, over);
@@ -99,7 +99,7 @@ public:
 	{
 		bool fin = Mutable::finalized_();
 		fin = _members->finalized_() && fin;
-		const Ptr over = static_<Shoal>(_members)->find_("finalized");
+		const Ptr over = static_<Shoal>(_members)->at_("finalized");
 		if (!over->is_nothing_())
 		{
 			return (!operate_(const_cast<Creature*>(this), over)->is_nothing_()) && fin;
@@ -109,7 +109,7 @@ public:
 
 	virtual inline void freeze_() override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("freeze");
+		const Ptr over = static_<Shoal>(_members)->at_("freeze");
 		if (!over->is_nothing_())
 		{
 			operate_(this, over);
@@ -122,7 +122,7 @@ public:
 	{
 		bool froz = Mutable::frozen_();
 		froz = _members->frozen_() && froz;
-		const Ptr over = static_<Shoal>(_members)->find_("frozen");
+		const Ptr over = static_<Shoal>(_members)->at_("frozen");
 		if (!over->is_nothing_())
 		{
 			return (!operate_(const_cast<Creature*>(this), over)->is_nothing_()) && froz;
@@ -132,7 +132,7 @@ public:
 
 	virtual inline const Ptr copy_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("copy");
+		const Ptr over = static_<Shoal>(_members)->at_("copy");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -142,7 +142,7 @@ public:
 
 	virtual inline const Ptr clone_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("clone");
+		const Ptr over = static_<Shoal>(_members)->at_("clone");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -152,7 +152,7 @@ public:
 
 	virtual inline const Ptr replicate_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("replicate");
+		const Ptr over = static_<Shoal>(_members)->at_("replicate");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -162,7 +162,7 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("iterator");
+		const Ptr over = static_<Shoal>(_members)->at_("iterator");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -172,7 +172,7 @@ public:
 
 	virtual inline const Ptr next_() override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("next");
+		const Ptr over = static_<Shoal>(_members)->at_("next");
 		if (!over->is_nothing_())
 		{
 			return operate_(this, over);
@@ -182,7 +182,7 @@ public:
 
 	virtual inline size_t hash_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("hash");
+		const Ptr over = static_<Shoal>(_members)->at_("hash");
 		if (!over->is_nothing_())
 		{
 			return size_t(static_<Int64>(operate_(const_cast<Creature*>(this), over))->get_());
@@ -192,7 +192,7 @@ public:
 
 	virtual inline const bool same_(const Ptr other) const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("same");
+		const Ptr over = static_<Shoal>(_members)->at_("same");
 		if (!over->is_nothing_())
 		{
 			return !operate_(const_cast<Creature*>(this), over,
@@ -203,7 +203,7 @@ public:
 
 	virtual inline const Ptr visit(const Ptr it) override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("visit");
+		const Ptr over = static_<Shoal>(_members)->at_("visit");
 		if (!over->is_nothing_())
 		{
 			return operate_(this, over, it);
@@ -213,7 +213,7 @@ public:
 
 	virtual inline const Ptr eater_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("eater");
+		const Ptr over = static_<Shoal>(_members)->at_("eater");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -223,7 +223,7 @@ public:
 
 	virtual inline const Ptr feeder(const Ptr eater) const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("feeder");
+		const Ptr over = static_<Shoal>(_members)->at_("feeder");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over, eater);
@@ -233,7 +233,7 @@ public:
 
 	virtual inline const Ptr cats_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("cats");
+		const Ptr over = static_<Shoal>(_members)->at_("cats");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -258,7 +258,7 @@ public:
 
 	virtual inline const Ptr to_lake_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("to_lake");
+		const Ptr over = static_<Shoal>(_members)->at_("to_lake");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -268,7 +268,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr lake) override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("from_lake");
+		const Ptr over = static_<Shoal>(_members)->at_("from_lake");
 		if (!over->is_nothing_())
 		{
 			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ lake }));
@@ -281,7 +281,7 @@ public:
 
 	virtual inline void to_river_(const Thing::Ptr river) const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("to_river");
+		const Ptr over = static_<Shoal>(_members)->at_("to_river");
 		if (!over->is_nothing_())
 		{
 			operate_(const_cast<Creature*>(this), over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
@@ -294,7 +294,7 @@ public:
 
 	virtual inline void from_river_(const Thing::Ptr river) override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("from_river");
+		const Ptr over = static_<Shoal>(_members)->at_("from_river");
 		if (!over->is_nothing_())
 		{
 			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
@@ -307,7 +307,7 @@ public:
 
 	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("to_river_with_links");
+		const Ptr over = static_<Shoal>(_members)->at_("to_river_with_links");
 		if (!over->is_nothing_())
 		{
 			operate_(const_cast<Creature*>(this), over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ shoal, river }));
@@ -320,7 +320,7 @@ public:
 
 	virtual inline void from_river_with_links_(const Thing::Ptr river) override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("from_river_with_links");
+		const Ptr over = static_<Shoal>(_members)->at_("from_river_with_links");
 		if (!over->is_nothing_())
 		{
 			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ river }));
@@ -333,7 +333,7 @@ public:
 
 	virtual inline void replace_links_(const Thing::Ptr shoal) override
 	{
-		const Ptr over = static_<Shoal>(_members)->find_("replace_links");
+		const Ptr over = static_<Shoal>(_members)->at_("replace_links");
 		if (!over->is_nothing_())
 		{
 			operate_(this, over, IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ shoal }));

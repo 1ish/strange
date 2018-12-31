@@ -1171,7 +1171,7 @@ public:
 			shoal->update_("lak", Static::fin_(&Shoal::lak, "lake"));
 			shoal->update_("riv", Static::fin_(&Shoal::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Shoal::rwl, "river"));
-			shoal->update_("find", Const<Shoal>::fin_(&Shoal::find, "key"));
+			shoal->update_("at", Const<Shoal>::fin_(&Shoal::at, "key"));
 			shoal->update_("update", Member<Shoal>::fin_(&Shoal::update, "key", "value"));
 			shoal->update_("insert", Member<Shoal>::fin_(&Shoal::insert, "key", "value"));
 			shoal->update_("feeder", Const<Shoal>::fin_(&Shoal::feeder, ".."));
@@ -1239,12 +1239,12 @@ public:
 	}
 
 	template <typename F>
-	inline const Ptr find_(F&& symbol) const
+	inline const Ptr at_(F&& symbol) const
 	{
-		return find_(sym_(std::forward<F>(symbol)));
+		return at_(sym_(std::forward<F>(symbol)));
 	}
 
-	inline const Ptr find_(const Ptr key) const
+	inline const Ptr at_(const Ptr key) const
 	{
 		const std_unordered_map_ptr_ptr::const_iterator mit = _map.find(key);
 		if (mit == _map.cend())
@@ -1254,9 +1254,9 @@ public:
 		return mit->second;
 	}
 
-	inline const Ptr find(const Ptr it) const
+	inline const Ptr at(const Ptr it) const
 	{
-		return find_(it->next_());
+		return at_(it->next_());
 	}
 
 	template <typename F>
@@ -1381,7 +1381,7 @@ public:
 			{
 				const Ptr pub = Thing::pub_()->copy_();
 				Shoal* const shoal = static_<Shoal>(pub);
-				shoal->update_("find", Const<Concurrent>::fin_(&Concurrent::find, "key"));
+				shoal->update_("at", Const<Concurrent>::fin_(&Concurrent::at, "key"));
 				shoal->update_("update", Member<Concurrent>::fin_(&Concurrent::update, "key", "value"));
 				shoal->update_("insert", Member<Concurrent>::fin_(&Concurrent::insert, "key", "value"));
 				shoal->update_("mut", Static::fin_(&Concurrent::mut, "shoal"));
@@ -1419,15 +1419,15 @@ public:
 			return TYPE;
 		}
 
-		inline const Ptr find_(const Ptr key) const
+		inline const Ptr at_(const Ptr key) const
 		{
 			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
-			return static_<Shoal>(_shoal)->find_(key);
+			return static_<Shoal>(_shoal)->at_(key);
 		}
 
-		inline const Ptr find(const Ptr it) const
+		inline const Ptr at(const Ptr it) const
 		{
-			return find_(it->next_());
+			return at_(it->next_());
 		}
 
 		inline void update_(const Ptr key, const Ptr value)
@@ -1527,7 +1527,7 @@ private:
 			{
 				return n;
 			}
-			return static_<Shoal>(_shoal)->find_(n);
+			return static_<Shoal>(_shoal)->at_(n);
 		}
 
 		static inline const Ptr mut_(const Ptr shoal, const Ptr eater)
@@ -2090,7 +2090,7 @@ public:
 			shoal->update_("lak", Static::fin_(&Herd::lak, "lake"));
 			shoal->update_("riv", Static::fin_(&Herd::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Herd::rwl, "river"));
-			shoal->update_("find", Const<Herd>::fin_(&Herd::find, "key"));
+			shoal->update_("at", Const<Herd>::fin_(&Herd::at, "key"));
 			shoal->update_("insert", Member<Herd>::fin_(&Herd::insert, "key"));
 			shoal->update_("gather", Member<Herd>::fin_(&Herd::gather, "key"));
 			shoal->finalize_();
@@ -2155,12 +2155,12 @@ public:
 	}
 
 	template <typename F>
-	inline const Ptr find_(F&& item) const
+	inline const Ptr at_(F&& item) const
 	{
-		return find_(sym_(std::forward<F>(item)));
+		return at_(sym_(std::forward<F>(item)));
 	}
 
-	inline const Ptr find_(const Ptr item) const
+	inline const Ptr at_(const Ptr item) const
 	{
 		const std_unordered_set_ptr::const_iterator sit = _set.find(item);
 		if (sit == _set.cend())
@@ -2170,9 +2170,9 @@ public:
 		return *sit;
 	}
 
-	inline const Ptr find(const Ptr it) const
+	inline const Ptr at(const Ptr it) const
 	{
-		return find_(it->next_());
+		return at_(it->next_());
 	}
 
 	template <typename F>
@@ -2265,7 +2265,7 @@ public:
 			{
 				const Ptr pub = Thing::pub_()->copy_();
 				Shoal* const shoal = static_<Shoal>(pub);
-				shoal->update_("find", Const<Concurrent>::fin_(&Concurrent::find, "key"));
+				shoal->update_("at", Const<Concurrent>::fin_(&Concurrent::at, "key"));
 				shoal->update_("insert", Member<Concurrent>::fin_(&Concurrent::insert, "key"));
 				shoal->update_("mut", Static::fin_(&Concurrent::mut, "herd"));
 				shoal->finalize_();
@@ -2302,15 +2302,15 @@ public:
 			return TYPE;
 		}
 
-		inline const Ptr find_(const Ptr item) const
+		inline const Ptr at_(const Ptr item) const
 		{
 			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
-			return static_<Herd>(_herd)->find_(item);
+			return static_<Herd>(_herd)->at_(item);
 		}
 
-		inline const Ptr find(const Ptr it) const
+		inline const Ptr at(const Ptr it) const
 		{
-			return find_(it->next_());
+			return at_(it->next_());
 		}
 
 		inline const bool insert_(const Ptr item)
@@ -7478,7 +7478,7 @@ inline const Thing::Ptr Thing::sym_(F&& symbol)
 inline const Thing::Ptr Thing::call(const Thing::Ptr it)
 {
 	const Ptr function = it->next_();
-	const Ptr fun = static_<Shoal>(shared_())->find_(function);
+	const Ptr fun = static_<Shoal>(shared_())->at_(function);
 	if (fun->is_nothing_())
 	{
 		log_("call passed unknown function:");
@@ -7535,7 +7535,7 @@ inline const Thing::Ptr Thing::pub_() const
 
 inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr it)
 {
-	const Ptr member = static_<Shoal>(thing->pub_())->find_(it->next_());
+	const Ptr member = static_<Shoal>(thing->pub_())->at_(it->next_());
 	if (member->is_nothing_())
 	{
 		return member;
@@ -7859,8 +7859,8 @@ inline void Shoal::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr
 	riv->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
-		static_<Symbol>(sho->find_(i.first))->to_river_(river);
-		static_<Symbol>(sho->find_(i.second))->to_river_(river);
+		static_<Symbol>(sho->at_(i.first))->to_river_(river);
+		static_<Symbol>(sho->at_(i.second))->to_river_(river);
 	}
 }
 
@@ -7891,7 +7891,7 @@ inline void Shoal::replace_links_(const Thing::Ptr shoal)
 	Shoal* const sho = static_<Shoal>(shoal);
 	for (const auto& i : _map)
 	{
-		replacement.emplace(sho->find_(i.first), sho->find_(i.second));
+		replacement.emplace(sho->at_(i.first), sho->at_(i.second));
 	}
 	_map.swap(replacement);
 }
@@ -7933,7 +7933,7 @@ inline const Thing::Ptr Shoal::gather_from_river_(const Thing::Ptr river)
 	{
 		i.second->invoke_("replace_links", me_());
 	}
-	return find_(nothing_());
+	return at_(nothing_());
 }
 
 inline const Thing::Ptr Shoal::cats_() const
@@ -8099,7 +8099,7 @@ inline void Flock::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr
 	riv->write_(Int64::mut_(int64_t(_vector.size())));
 	for (const auto i : _vector)
 	{
-		static_<Symbol>(sho->find_(i))->to_river_(river);
+		static_<Symbol>(sho->at_(i))->to_river_(river);
 	}
 }
 
@@ -8129,7 +8129,7 @@ inline void Flock::replace_links_(const Thing::Ptr shoal)
 	Shoal* const sho = static_<Shoal>(shoal);
 	for (std_vector_ptr::iterator i = _vector.begin(); i != _vector.end(); ++i)
 	{
-		*i = sho->find_(*i);
+		*i = sho->at_(*i);
 	}
 }
 
@@ -8220,7 +8220,7 @@ inline void Herd::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr 
 	riv->write_(Int64::mut_(int64_t(_set.size())));
 	for (const auto i : _set)
 	{
-		static_<Symbol>(sho->find_(i))->to_river_(river);
+		static_<Symbol>(sho->at_(i))->to_river_(river);
 	}
 }
 
@@ -8249,7 +8249,7 @@ inline void Herd::replace_links_(const Thing::Ptr shoal)
 	Shoal* const sho = static_<Shoal>(shoal);
 	for (const auto i : _set)
 	{
-		replacement.insert(sho->find_(i));
+		replacement.insert(sho->at_(i));
 	}
 	_set.swap(replacement);
 }
