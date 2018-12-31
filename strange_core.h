@@ -2145,7 +2145,9 @@ public:
 			shoal->update_("riv", Static::fin_(&Herd::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Herd::rwl, "river"));
 			shoal->update_("at", Const<Herd>::fin_(&Herd::at, "key"));
+			shoal->update_("update", Member<Herd>::fin_(&Herd::update, "key", "insert"));
 			shoal->update_("insert", Member<Herd>::fin_(&Herd::insert, "key"));
+			shoal->update_("erase", Member<Herd>::fin_(&Herd::erase, "key"));
 			shoal->update_("gather", Member<Herd>::fin_(&Herd::gather, "key"));
 			shoal->finalize_();
 			return pub;
@@ -2209,24 +2211,50 @@ public:
 	}
 
 	template <typename F>
-	inline const Ptr at_(F&& item) const
+	inline const bool at_(F&& key) const
 	{
-		return at_(sym_(std::forward<F>(item)));
+		return at_(sym_(std::forward<F>(key)));
 	}
 
-	inline const Ptr at_(const Ptr item) const
+	inline const bool at_(const Ptr key) const
 	{
-		const std_unordered_set_ptr::const_iterator sit = _set.find(item);
-		if (sit == _set.cend())
-		{
-			return nothing_();
-		}
-		return *sit;
+		return _set.find(key) != _set.cend();
 	}
 
 	inline const Ptr at(const Ptr it) const
 	{
-		return at_(it->next_());
+		return boolean_(at_(it->next_()));
+	}
+
+	template <typename F>
+	inline void update_(F&& key, const bool insert)
+	{
+		update_(sym_(std::forward<F>(key)), insert);
+	}
+
+	inline void update_(const Ptr key, const bool insert)
+	{
+		if (insert)
+		{
+			_set.insert(key);
+		}
+		else
+		{
+			_set.erase(key);
+		}
+	}
+
+	inline void update_(const Ptr key, const Ptr insert)
+	{
+		update_(key, !insert->is_nothing_());
+	}
+
+	inline const Ptr update(const Ptr it)
+	{
+		const Ptr key = it->next_();
+		const Ptr insert = it->next_();
+		update_(key, insert);
+		return insert;
 	}
 
 	template <typename F>
@@ -2235,18 +2263,30 @@ public:
 		return insert_(sym_(std::forward<F>(key)));
 	}
 
-	inline const bool insert_(const Ptr item)
+	inline const bool insert_(const Ptr key)
 	{
-		if (item->is_nothing_())
-		{
-			return false;
-		}
-		return _set.insert(item).second;
+		return _set.insert(key).second;
 	}
 
 	inline const Ptr insert(const Ptr it)
 	{
 		return boolean_(insert_(it->next_()));
+	}
+
+	template <typename F>
+	inline const bool erase_(F&& key)
+	{
+		return erase_(sym_(std::forward<F>(key)));
+	}
+
+	inline const bool erase_(const Ptr item)
+	{
+		return _set.erase(item);
+	}
+
+	inline const Ptr erase(const Ptr it)
+	{
+		return boolean_(erase_(it->next_()));
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -2361,7 +2401,7 @@ public:
 			return TYPE;
 		}
 
-		inline const Ptr at_(const Ptr item) const
+		inline const bool at_(const Ptr item) const
 		{
 			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
 			return static_<Herd>(_herd)->at_(item);
@@ -2369,7 +2409,7 @@ public:
 
 		inline const Ptr at(const Ptr it) const
 		{
-			return at_(it->next_());
+			return boolean_(at_(it->next_()));
 		}
 
 		inline const bool insert_(const Ptr item)
