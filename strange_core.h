@@ -2169,6 +2169,10 @@ public:
 			shoal->update_("update", Member<Herd>::fin_(&Herd::update, "key", "insert"));
 			shoal->update_("insert", Member<Herd>::fin_(&Herd::insert, "key"));
 			shoal->update_("erase", Member<Herd>::fin_(&Herd::erase, "key"));
+			shoal->update_("self_add", Member<Herd>::fin_(&Herd::self_add, "herd"));
+			shoal->update_("add", Const<Herd>::fin_(&Herd::add, "herd"));
+			shoal->update_("self_subtract", Member<Herd>::fin_(&Herd::self_subtract, "herd"));
+			shoal->update_("subtract", Const<Herd>::fin_(&Herd::subtract, "herd"));
 			shoal->update_("gather", Member<Herd>::fin_(&Herd::gather, "key"));
 			shoal->finalize_();
 			return pub;
@@ -2308,6 +2312,88 @@ public:
 	inline const Ptr erase(const Ptr it)
 	{
 		return boolean_(erase_(it->next_()));
+	}
+
+	inline void self_add_(const Ptr other)
+	{
+		Herd* const herd = dynamic_<Herd>(other);
+		if (herd)
+		{
+			for (auto i : herd->_set)
+			{
+				insert_(i);
+			}
+		}
+		else
+		{
+			Shoal* const shoal = dynamic_<Shoal>(other);
+			if (shoal)
+			{
+				for (const auto& i : shoal->get_())
+				{
+					update_(i.first, i.second);
+				}
+			}
+		}
+	}
+
+	inline const Ptr self_add(const Ptr it)
+	{
+		self_add_(it->next_());
+		return me_();
+	}
+
+	inline const Ptr add_(const Ptr other) const
+	{
+		const Ptr result = copy_();
+		static_<Herd>(result)->self_add_(other);
+		return result;
+	}
+
+	inline const Ptr add(const Ptr it) const
+	{
+		return add_(it->next_());
+	}
+
+	inline void self_subtract_(const Ptr other)
+	{
+		Herd* const herd = dynamic_<Herd>(other);
+		if (herd)
+		{
+			for (auto i : herd->_set)
+			{
+				erase_(i);
+			}
+		}
+		else
+		{
+			Shoal* const shoal = dynamic_<Shoal>(other);
+			if (shoal)
+			{
+				for (const auto& i : shoal->get_())
+				{
+					erase_(i.first);
+				}
+			}
+		}
+	}
+
+	inline const Ptr self_subtract(const Ptr it)
+	{
+		self_subtract_(it->next_());
+		return me_();
+	}
+
+	inline const Ptr subtract_(const Ptr other) const
+	{
+		const Ptr result = copy_();
+		static_<Herd>(result)->self_subtract_(other);
+		return result;
+	}
+
+	inline const Ptr subtract(const Ptr it) const
+	{
+		return subtract_(it->next_());
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -8063,7 +8149,7 @@ inline void Shoal::self_add_(const Thing::Ptr other)
 	{
 		for (const auto& i : shoal->_map)
 		{
-			_map[i.first] = i.second;
+			update_(i.first, i.second);
 		}
 	}
 	else
@@ -8073,7 +8159,7 @@ inline void Shoal::self_add_(const Thing::Ptr other)
 		{
 			for (auto i : herd->get_())
 			{
-				_map[i] = one_();
+				update_(i, one_());
 			}
 		}
 	}
@@ -8086,7 +8172,7 @@ inline void Shoal::self_subtract_(const Thing::Ptr other)
 	{
 		for (const auto& i : shoal->_map)
 		{
-			_map.erase(i.first);
+			erase_(i.first);
 		}
 	}
 	else
@@ -8096,7 +8182,7 @@ inline void Shoal::self_subtract_(const Thing::Ptr other)
 		{
 			for (auto i : herd->get_())
 			{
-				_map.erase(i);
+				erase_(i);
 			}
 		}
 	}
