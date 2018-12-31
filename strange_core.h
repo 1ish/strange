@@ -1175,10 +1175,10 @@ public:
 			shoal->update_("update", Member<Shoal>::fin_(&Shoal::update, "key", "value"));
 			shoal->update_("insert", Member<Shoal>::fin_(&Shoal::insert, "key", "value"));
 			shoal->update_("erase", Member<Shoal>::fin_(&Shoal::erase, "key"));
-			shoal->update_("self_add", Member<Shoal>::fin_(&Shoal::self_add, "shoal"));
-			shoal->update_("add", Const<Shoal>::fin_(&Shoal::add, "shoal"));
-			shoal->update_("self_subtract", Member<Shoal>::fin_(&Shoal::self_subtract, "shoal"));
-			shoal->update_("subtract", Const<Shoal>::fin_(&Shoal::subtract, "shoal"));
+			shoal->update_("self_add", Member<Shoal>::fin_(&Shoal::self_add, "shoal", ".."));
+			shoal->update_("add", Const<Shoal>::fin_(&Shoal::add, "shoal", ".."));
+			shoal->update_("self_subtract", Member<Shoal>::fin_(&Shoal::self_subtract, "shoal", ".."));
+			shoal->update_("subtract", Const<Shoal>::fin_(&Shoal::subtract, "shoal", ".."));
 			shoal->update_("feeder", Const<Shoal>::fin_(&Shoal::feeder, ".."));
 			shoal->update_("itemize", Member<Shoal>::fin_(&Shoal::itemize, "key"));
 			shoal->update_("gather", Member<Shoal>::fin_(&Shoal::gather, "key"));
@@ -1332,7 +1332,10 @@ public:
 
 	inline const Ptr self_add(const Ptr it)
 	{
-		self_add_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			self_add_(i);
+		}
 		return me_();
 	}
 
@@ -1345,14 +1348,19 @@ public:
 
 	inline const Ptr add(const Ptr it) const
 	{
-		return add_(it->next_());
+		const Ptr result = copy_();
+		static_<Shoal>(result)->self_add(it);
+		return result;
 	}
 
 	inline void self_subtract_(const Ptr other);
 
 	inline const Ptr self_subtract(const Ptr it)
 	{
-		self_subtract_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			self_subtract_(i);
+		}
 		return me_();
 	}
 
@@ -1365,7 +1373,9 @@ public:
 
 	inline const Ptr subtract(const Ptr it) const
 	{
-		return subtract_(it->next_());
+		const Ptr result = copy_();
+		static_<Shoal>(result)->self_subtract(it);
+		return result;
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -2169,10 +2179,10 @@ public:
 			shoal->update_("update", Member<Herd>::fin_(&Herd::update, "key", "insert"));
 			shoal->update_("insert", Member<Herd>::fin_(&Herd::insert, "key"));
 			shoal->update_("erase", Member<Herd>::fin_(&Herd::erase, "key"));
-			shoal->update_("self_add", Member<Herd>::fin_(&Herd::self_add, "herd"));
-			shoal->update_("add", Const<Herd>::fin_(&Herd::add, "herd"));
-			shoal->update_("self_subtract", Member<Herd>::fin_(&Herd::self_subtract, "herd"));
-			shoal->update_("subtract", Const<Herd>::fin_(&Herd::subtract, "herd"));
+			shoal->update_("self_add", Member<Herd>::fin_(&Herd::self_add, "herd", ".."));
+			shoal->update_("add", Const<Herd>::fin_(&Herd::add, "herd", ".."));
+			shoal->update_("self_subtract", Member<Herd>::fin_(&Herd::self_subtract, "herd", ".."));
+			shoal->update_("subtract", Const<Herd>::fin_(&Herd::subtract, "herd", ".."));
 			shoal->update_("gather", Member<Herd>::fin_(&Herd::gather, "key"));
 			shoal->finalize_();
 			return pub;
@@ -2339,7 +2349,10 @@ public:
 
 	inline const Ptr self_add(const Ptr it)
 	{
-		self_add_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			self_add_(i);
+		}
 		return me_();
 	}
 
@@ -2352,7 +2365,9 @@ public:
 
 	inline const Ptr add(const Ptr it) const
 	{
-		return add_(it->next_());
+		const Ptr result = copy_();
+		static_<Herd>(result)->self_add(it);
+		return result;
 	}
 
 	inline void self_subtract_(const Ptr other)
@@ -2380,7 +2395,10 @@ public:
 
 	inline const Ptr self_subtract(const Ptr it)
 	{
-		self_subtract_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			self_subtract_(i);
+		}
 		return me_();
 	}
 
@@ -2393,7 +2411,9 @@ public:
 
 	inline const Ptr subtract(const Ptr it) const
 	{
-		return subtract_(it->next_());
+		const Ptr result = copy_();
+		static_<Herd>(result)->self_subtract(it);
+		return result;
 	}
 
 	virtual inline const Ptr iterator_() const override
