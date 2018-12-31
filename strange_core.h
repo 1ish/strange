@@ -756,6 +756,19 @@ public:
 
 	virtual inline const Ptr pub_() const override;
 
+	inline const char at_(const int64_t index) const
+	{
+		if (size_t(index) < _symbol.length())
+		{
+			return _symbol[index];
+		}
+		return 0;
+	}
+
+	inline const char at_(const Ptr index) const;
+
+	inline const Ptr at(const Ptr it) const;
+
 private:
 	const std::string _symbol;
 	const size_t _hash;
@@ -7568,6 +7581,7 @@ inline const Thing::Ptr Symbol::pub_() const
 		shoal->update_("lak", Static::fin_(&Symbol::lak, "lake"));
 		shoal->update_("riv", Static::fin_(&Symbol::riv, "river"));
 		shoal->update_("rwl", Static::fin_(&Symbol::rwl, "river"));
+		shoal->update_("at", Const<Symbol>::fin_(&Symbol::at, "index"));
 		shoal->finalize_();
 		return pub;
 	}();
@@ -7623,6 +7637,21 @@ inline const Thing::Ptr Symbol::cats_() const
 		return cats;
 	}();
 	return CATS;
+}
+
+inline const char Symbol::at_(const Thing::Ptr index) const
+{
+	Number* const ind = dynamic_<Number>(index);
+	if (ind)
+	{
+		return at_(ind->to_int64_());
+	}
+	return 0;
+}
+
+inline const Thing::Ptr Symbol::at(const Thing::Ptr it) const
+{
+	return UInt8::mut_(at_(it->next_()));
 }
 
 //======================================================================
