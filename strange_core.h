@@ -756,6 +756,19 @@ public:
 
 	virtual inline const Ptr pub_() const override;
 
+	template <typename F>
+	inline const Ptr add_(F&& s) const
+	{
+		return fin_(_symbol + s);
+	}
+
+	inline const Ptr add_(const Ptr other) const;
+
+	inline const Ptr add(const Ptr it) const
+	{
+		return add_(it->next_());
+	}
+
 	inline const char at_(const int64_t index) const
 	{
 		if (size_t(index) < _symbol.length())
@@ -2777,6 +2790,14 @@ public:
 		if (lake)
 		{
 			self_add_(lake->get_());
+		}
+		else
+		{
+			Symbol* const symbol = dynamic_<Symbol>(other);
+			if (symbol)
+			{
+				self_add_(symbol->symbol_());
+			}
 		}
 	}
 
@@ -7581,6 +7602,7 @@ inline const Thing::Ptr Symbol::pub_() const
 		shoal->update_("lak", Static::fin_(&Symbol::lak, "lake"));
 		shoal->update_("riv", Static::fin_(&Symbol::riv, "river"));
 		shoal->update_("rwl", Static::fin_(&Symbol::rwl, "river"));
+		shoal->update_("add", Const<Symbol>::fin_(&Symbol::add, "symbol", ".."));
 		shoal->update_("at", Const<Symbol>::fin_(&Symbol::at, "index"));
 		shoal->finalize_();
 		return pub;
@@ -7637,6 +7659,21 @@ inline const Thing::Ptr Symbol::cats_() const
 		return cats;
 	}();
 	return CATS;
+}
+
+inline const Thing::Ptr Symbol::add_(const Thing::Ptr other) const
+{
+	Symbol* const symbol = dynamic_<Symbol>(other);
+	if (symbol)
+	{
+		return add_(symbol->_symbol);
+	}
+	Lake* const lake = dynamic_<Lake>(other);
+	if (lake)
+	{
+		return add_(lake->get_());
+	}
+	return me_();
 }
 
 inline const char Symbol::at_(const Thing::Ptr index) const
