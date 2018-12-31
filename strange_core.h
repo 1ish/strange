@@ -2673,8 +2673,8 @@ public:
 			shoal->update_("lak", Static::fin_(&Lake::lak, "lake"));
 			shoal->update_("riv", Static::fin_(&Lake::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Lake::rwl, "river"));
-			shoal->update_("self_add", Member<Lake>::fin_(&Lake::self_add, "lake"));
-			shoal->update_("add", Const<Lake>::fin_(&Lake::add, "lake"));
+			shoal->update_("self_add", Member<Lake>::fin_(&Lake::self_add, "lake", ".."));
+			shoal->update_("add", Const<Lake>::fin_(&Lake::add, "lake", ".."));
 			shoal->update_("at", Const<Lake>::fin_(&Lake::at, "index"));
 			shoal->update_("update", Member<Lake>::fin_(&Lake::update, "index", "byte"));
 			shoal->finalize_();
@@ -2745,18 +2745,27 @@ public:
 		return CATS;
 	}
 
+	template <typename F>
+	inline void self_add_(F&& s)
+	{
+		ref_() += std::forward<F>(s);
+	}
+
 	inline void self_add_(const Ptr other)
 	{
 		Lake* const lake = dynamic_<Lake>(other);
 		if (lake)
 		{
-			ref_() += lake->get_();
+			self_add_(lake->get_());
 		}
 	}
 
 	inline const Ptr self_add(const Ptr it)
 	{
-		self_add_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			self_add_(i);
+		}
 		return me_();
 	}
 
@@ -2769,7 +2778,9 @@ public:
 
 	inline const Ptr add(const Ptr it) const
 	{
-		return add_(it->next_());
+		const Ptr result = copy_();
+		static_<Lake>(result)->self_add(it);
+		return result;
 	}
 
 	virtual inline const bool same_(const Ptr other) const override
@@ -2938,7 +2949,10 @@ public:
 
 	inline const Ptr self_add(const Ptr it)
 	{
-		self_add_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			self_add_(i);
+		}
 		return me_();
 	}
 
@@ -2951,14 +2965,19 @@ public:
 
 	inline const Ptr add(const Ptr it) const
 	{
-		return add_(it->next_());
+		const Ptr result = copy_();
+		static_<Number>(result)->self_add(it);
+		return result;
 	}
 
 	virtual inline void self_subtract_(const Ptr other) = 0;
 
 	inline const Ptr self_subtract(const Ptr it)
 	{
-		self_subtract_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			self_subtract_(i);
+		}
 		return me_();
 	}
 
@@ -2971,14 +2990,19 @@ public:
 
 	inline const Ptr subtract(const Ptr it) const
 	{
-		return subtract_(it->next_());
+		const Ptr result = copy_();
+		static_<Number>(result)->self_subtract(it);
+		return result;
 	}
 
 	virtual inline void self_multiply_(const Ptr other) = 0;
 
 	inline const Ptr self_multiply(const Ptr it)
 	{
-		self_multiply_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			self_multiply_(i);
+		}
 		return me_();
 	}
 
@@ -2991,14 +3015,19 @@ public:
 
 	inline const Ptr multiply(const Ptr it) const
 	{
-		return multiply_(it->next_());
+		const Ptr result = copy_();
+		static_<Number>(result)->self_multiply(it);
+		return result;
 	}
 
 	virtual inline void self_divide_(const Ptr other) = 0;
 
 	inline const Ptr self_divide(const Ptr it)
 	{
-		self_divide_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			self_divide_(i);
+		}
 		return me_();
 	}
 
@@ -3011,14 +3040,19 @@ public:
 
 	inline const Ptr divide(const Ptr it) const
 	{
-		return divide_(it->next_());
+		const Ptr result = copy_();
+		static_<Number>(result)->self_divide(it);
+		return result;
 	}
 
 	virtual inline void self_modulo_(const Ptr other) = 0;
 
 	inline const Ptr self_modulo(const Ptr it)
 	{
-		self_modulo_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			self_modulo_(i);
+		}
 		return me_();
 	}
 
@@ -3031,7 +3065,9 @@ public:
 
 	inline const Ptr modulo(const Ptr it) const
 	{
-		return modulo_(it->next_());
+		const Ptr result = copy_();
+		static_<Number>(result)->self_modulo(it);
+		return result;
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -3052,16 +3088,16 @@ public:
 			shoal->update_("from_symbol", Member<Number>::fin_(&Number::from_symbol, "symbol"));
 			shoal->update_("increment", Member<Number>::fin_(&Number::increment));
 			shoal->update_("decrement", Member<Number>::fin_(&Number::decrement));
-			shoal->update_("self_add", Member<Number>::fin_(&Number::self_add, "number"));
-			shoal->update_("add", Const<Number>::fin_(&Number::add, "number"));
-			shoal->update_("self_subtract", Member<Number>::fin_(&Number::self_subtract, "number"));
-			shoal->update_("subtract", Const<Number>::fin_(&Number::subtract, "number"));
-			shoal->update_("self_multiply", Member<Number>::fin_(&Number::self_multiply, "number"));
-			shoal->update_("multiply", Const<Number>::fin_(&Number::multiply, "number"));
-			shoal->update_("self_divide", Member<Number>::fin_(&Number::self_divide, "number"));
-			shoal->update_("divide", Const<Number>::fin_(&Number::divide, "number"));
-			shoal->update_("self_modulo", Member<Number>::fin_(&Number::self_modulo, "number"));
-			shoal->update_("modulo", Const<Number>::fin_(&Number::modulo, "number"));
+			shoal->update_("self_add", Member<Number>::fin_(&Number::self_add, "number", ".."));
+			shoal->update_("add", Const<Number>::fin_(&Number::add, "number", ".."));
+			shoal->update_("self_subtract", Member<Number>::fin_(&Number::self_subtract, "number", ".."));
+			shoal->update_("subtract", Const<Number>::fin_(&Number::subtract, "number", ".."));
+			shoal->update_("self_multiply", Member<Number>::fin_(&Number::self_multiply, "number", ".."));
+			shoal->update_("multiply", Const<Number>::fin_(&Number::multiply, "number", ".."));
+			shoal->update_("self_divide", Member<Number>::fin_(&Number::self_divide, "number", ".."));
+			shoal->update_("divide", Const<Number>::fin_(&Number::divide, "number", ".."));
+			shoal->update_("self_modulo", Member<Number>::fin_(&Number::self_modulo, "number", ".."));
+			shoal->update_("modulo", Const<Number>::fin_(&Number::modulo, "number", ".."));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -6044,12 +6080,12 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("is_not", Const<Thing>::fin_(&Thing::is_not, "symbol"));
 		shoal->update_("is_nothing", Const<Thing>::fin_(&Thing::is_nothing));
 		shoal->update_("is_not_nothing", Const<Thing>::fin_(&Thing::is_not_nothing));
-		shoal->update_("and", Const<Thing>::fin_(&Thing::and_op, "other"));
-		shoal->update_("or", Const<Thing>::fin_(&Thing::or_op, "other"));
-		shoal->update_("xor", Const<Thing>::fin_(&Thing::xor_op, "other"));
-		shoal->update_("nand", Const<Thing>::fin_(&Thing::nand_op, "other"));
-		shoal->update_("nor", Const<Thing>::fin_(&Thing::nor_op, "other"));
-		shoal->update_("xnor", Const<Thing>::fin_(&Thing::xnor_op, "other"));
+		shoal->update_("and", Const<Thing>::fin_(&Thing::and_op, "other", ".."));
+		shoal->update_("or", Const<Thing>::fin_(&Thing::or_op, "other", ".."));
+		shoal->update_("xor", Const<Thing>::fin_(&Thing::xor_op, "other", ".."));
+		shoal->update_("nand", Const<Thing>::fin_(&Thing::nand_op, "other", ".."));
+		shoal->update_("nor", Const<Thing>::fin_(&Thing::nor_op, "other", ".."));
+		shoal->update_("xnor", Const<Thing>::fin_(&Thing::xnor_op, "other", ".."));
 		shoal->update_("hash", Const<Thing>::fin_(&Thing::hash));
 		shoal->update_("same", Const<Thing>::fin_(&Thing::same, "other"));
 		shoal->update_("different", Const<Thing>::fin_(&Thing::different, "other"));
