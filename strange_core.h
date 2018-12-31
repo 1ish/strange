@@ -3142,6 +3142,34 @@ public:
 		return result;
 	}
 
+	virtual inline const bool less_than_(const Ptr other) const = 0;
+
+	inline const Ptr less_than(const Ptr it) const
+	{
+		return boolean_(less_than_(it->next_()));
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const = 0;
+
+	inline const Ptr greater_than(const Ptr it) const
+	{
+		return boolean_(greater_than_(it->next_()));
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const = 0;
+
+	inline const Ptr less_or_equal(const Ptr it) const
+	{
+		return boolean_(less_or_equal_(it->next_()));
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const = 0;
+
+	inline const Ptr greater_or_equal(const Ptr it) const
+	{
+		return boolean_(greater_or_equal_(it->next_()));
+	}
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -3170,6 +3198,10 @@ public:
 			shoal->update_("divide", Const<Number>::fin_(&Number::divide, "number", ".."));
 			shoal->update_("self_modulo", Member<Number>::fin_(&Number::self_modulo, "number", ".."));
 			shoal->update_("modulo", Const<Number>::fin_(&Number::modulo, "number", ".."));
+			shoal->update_("less_than", Const<Number>::fin_(&Number::less_than, "number"));
+			shoal->update_("greater_than", Const<Number>::fin_(&Number::greater_than, "number"));
+			shoal->update_("less_or_equal", Const<Number>::fin_(&Number::less_or_equal, "number"));
+			shoal->update_("greater_or_equal", Const<Number>::fin_(&Number::greater_or_equal, "number"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -3435,6 +3467,30 @@ public:
 	{
 		return std::hash<int64_t>()(to_int64_());
 	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() < number->to_int64_());
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() > number->to_int64_());
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() <= number->to_int64_());
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() >= number->to_int64_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3690,6 +3746,30 @@ public:
 	{
 		return std::hash<int64_t>()(to_int64_());
 	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() < number->to_int64_());
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() > number->to_int64_());
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() <= number->to_int64_());
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() >= number->to_int64_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3944,6 +4024,30 @@ public:
 	virtual inline size_t hash_() const override
 	{
 		return std::hash<int64_t>()(to_int64_());
+	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() < number->to_int64_());
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() > number->to_int64_());
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() <= number->to_int64_());
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() >= number->to_int64_());
 	}
 };
 
@@ -4205,6 +4309,30 @@ public:
 	virtual inline size_t hash_() const override
 	{
 		return std::hash<int64_t>()(to_int64_());
+	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() < number->to_int64_());
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() > number->to_int64_());
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() <= number->to_int64_());
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() >= number->to_int64_());
 	}
 };
 
@@ -4470,6 +4598,30 @@ public:
 	virtual inline size_t hash_() const override
 	{
 		return std::hash<int64_t>()(to_int64_());
+	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() < number->to_int64_());
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() > number->to_int64_());
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() <= number->to_int64_());
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() >= number->to_int64_());
 	}
 };
 
@@ -4744,6 +4896,30 @@ public:
 	{
 		return std::hash<int64_t>()(get_());
 	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (get_() < number->to_int64_());
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (get_() > number->to_int64_());
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (get_() <= number->to_int64_());
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (get_() >= number->to_int64_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -5009,6 +5185,30 @@ public:
 	virtual inline size_t hash_() const override
 	{
 		return std::hash<double>()(to_float64_());
+	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_float64_() < number->to_float64_());
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_float64_() > number->to_float64_());
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_float64_() <= number->to_float64_());
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_float64_() >= number->to_float64_());
 	}
 };
 
@@ -5285,6 +5485,30 @@ public:
 	{
 		return std::hash<double>()(get_());
 	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (get_() < number->to_float64_());
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (get_() > number->to_float64_());
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (get_() <= number->to_float64_());
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (get_() >= number->to_float64_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -5372,6 +5596,10 @@ public:
 			const Ptr pub = Number::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
 			shoal->update_("self_modulo", nothing_());
+			shoal->update_("less_than", nothing_());
+			shoal->update_("greater_than", nothing_());
+			shoal->update_("less_or_equal", nothing_());
+			shoal->update_("greater_or_equal", nothing_());
 			shoal->update_("to_lake", Const<Complex32>::fin_(&Complex32::to_lake));
 			shoal->update_("from_lake", Member<Complex32>::fin_(&Complex32::from_lake, "lake"));
 			shoal->update_("to_river", Const<Complex32>::fin_(&Complex32::to_river, "river"));
@@ -5581,6 +5809,26 @@ public:
 		const size_t s = sizeof(i) * 4;
 		return std::hash<double>()(c.real()) ^ ((i << s) | (i >> s));
 	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		return false;
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		return false;
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		return false;
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		return false;
+	}
 };
 
 //----------------------------------------------------------------------
@@ -5668,6 +5916,10 @@ public:
 			const Ptr pub = Number::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
 			shoal->update_("self_modulo", nothing_());
+			shoal->update_("less_than", nothing_());
+			shoal->update_("greater_than", nothing_());
+			shoal->update_("less_or_equal", nothing_());
+			shoal->update_("greater_or_equal", nothing_());
 			shoal->update_("to_lake", Const<Complex64>::fin_(&Complex64::to_lake));
 			shoal->update_("from_lake", Member<Complex64>::fin_(&Complex64::from_lake, "lake"));
 			shoal->update_("to_river", Const<Complex64>::fin_(&Complex64::to_river, "river"));
@@ -5892,6 +6144,26 @@ public:
 		const size_t i = std::hash<double>()(c.imag());
 		const size_t s = sizeof(i) * 4;
 		return std::hash<double>()(c.real()) ^ ((i << s) | (i >> s));
+	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		return false;
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		return false;
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		return false;
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		return false;
 	}
 };
 
