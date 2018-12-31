@@ -1174,6 +1174,7 @@ public:
 			shoal->update_("at", Const<Shoal>::fin_(&Shoal::at, "key"));
 			shoal->update_("update", Member<Shoal>::fin_(&Shoal::update, "key", "value"));
 			shoal->update_("insert", Member<Shoal>::fin_(&Shoal::insert, "key", "value"));
+			shoal->update_("erase", Member<Shoal>::fin_(&Shoal::erase, "key"));
 			shoal->update_("self_add", Member<Shoal>::fin_(&Shoal::self_add, "shoal"));
 			shoal->update_("add", Const<Shoal>::fin_(&Shoal::add, "shoal"));
 			shoal->update_("self_subtract", Member<Shoal>::fin_(&Shoal::self_subtract, "shoal"));
@@ -1297,6 +1298,10 @@ public:
 
 	inline const bool insert_(const Ptr key, const Ptr value)
 	{
+		if (value->is_nothing_())
+		{
+			return false;
+		}
 		return _map.emplace(key, value).second;
 	}
 
@@ -1305,6 +1310,22 @@ public:
 		const Ptr key = it->next_();
 		const Ptr value = it->next_();
 		return boolean_(insert_(key, value));
+	}
+
+	template <typename F>
+	inline const bool erase_(F&& key)
+	{
+		return erase_(sym_(std::forward<F>(key)));
+	}
+
+	inline const bool erase_(const Ptr key)
+	{
+		return _map.erase(key);
+	}
+
+	inline const Ptr erase(const Ptr it)
+	{
+		return boolean_(erase_(it->next_()));
 	}
 
 	inline void self_add_(const Ptr other);
