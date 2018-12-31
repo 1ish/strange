@@ -1174,6 +1174,8 @@ public:
 			shoal->update_("at", Const<Shoal>::fin_(&Shoal::at, "key"));
 			shoal->update_("update", Member<Shoal>::fin_(&Shoal::update, "key", "value"));
 			shoal->update_("insert", Member<Shoal>::fin_(&Shoal::insert, "key", "value"));
+			shoal->update_("self_add", Member<Shoal>::fin_(&Shoal::self_add, "shoal"));
+			shoal->update_("add", Const<Shoal>::fin_(&Shoal::add, "shoal"));
 			shoal->update_("feeder", Const<Shoal>::fin_(&Shoal::feeder, ".."));
 			shoal->update_("itemize", Member<Shoal>::fin_(&Shoal::itemize, "key"));
 			shoal->update_("gather", Member<Shoal>::fin_(&Shoal::gather, "key"));
@@ -1239,9 +1241,9 @@ public:
 	}
 
 	template <typename F>
-	inline const Ptr at_(F&& symbol) const
+	inline const Ptr at_(F&& key) const
 	{
-		return at_(sym_(std::forward<F>(symbol)));
+		return at_(sym_(std::forward<F>(key)));
 	}
 
 	inline const Ptr at_(const Ptr key) const
@@ -1301,6 +1303,36 @@ public:
 		const Ptr key = it->next_();
 		const Ptr value = it->next_();
 		return boolean_(insert_(key, value));
+	}
+
+	inline void self_add_(const Ptr other)
+	{
+		Shoal* const shoal = dynamic_<Shoal>(other);
+		if (shoal)
+		{
+			for (const auto& i : shoal->_map)
+			{
+				_map[i.first] = i.second;
+			}
+		}
+	}
+
+	inline const Ptr self_add(const Ptr it)
+	{
+		self_add_(it->next_());
+		return me_();
+	}
+
+	inline const Ptr add_(const Ptr other) const
+	{
+		const Ptr result = copy_();
+		static_<Shoal>(result)->self_add_(other);
+		return result;
+	}
+
+	inline const Ptr add(const Ptr it) const
+	{
+		return add_(it->next_());
 	}
 
 	virtual inline const Ptr iterator_() const override
