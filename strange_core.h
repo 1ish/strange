@@ -400,32 +400,92 @@ public:
 
 	inline const Ptr and_op(const Ptr it) const
 	{
-		return boolean_((!is_nothing_()) && (!it->next_()->is_nothing_()));
+		if (is_nothing_())
+		{
+			return nothing_();
+		}
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			if (i->is_nothing_())
+			{
+				return nothing_();
+			}
+		}
+		return one_();
 	}
 	
 	inline const Ptr or_op(const Ptr it) const
 	{
-		return boolean_((!is_nothing_()) || (!it->next_()->is_nothing_()));
+		if (!is_nothing_())
+		{
+			return one_();
+		}
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			if (!i->is_nothing_())
+			{
+				return one_();
+			}
+		}
+		return nothing_();
 	}
 
 	inline const Ptr xor_op(const Ptr it) const
 	{
-		return boolean_(is_nothing_() != it->next_()->is_nothing_());
+		int64_t count = is_nothing_() ? 0 : 1;
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			if (!i->is_nothing_())
+			{
+				++count;
+			}
+		}
+		return boolean_(count == 1);
 	}
 
 	inline const Ptr nand_op(const Ptr it) const
 	{
-		return boolean_(is_nothing_() || it->next_()->is_nothing_());
+		if (is_nothing_())
+		{
+			return one_();
+		}
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			if (i->is_nothing_())
+			{
+				return one_();
+			}
+		}
+		return nothing_();
 	}
 
 	inline const Ptr nor_op(const Ptr it) const
 	{
-		return boolean_(is_nothing_() && it->next_()->is_nothing_());
+		if (!is_nothing_())
+		{
+			return nothing_();
+		}
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			if (!i->is_nothing_())
+			{
+				return nothing_();
+			}
+		}
+		return one_();
 	}
 
 	inline const Ptr xnor_op(const Ptr it) const
 	{
-		return boolean_(is_nothing_() == it->next_()->is_nothing_());
+		int64_t count = is_nothing_() ? 0 : 1;
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			if (!i->is_nothing_())
+			{
+				++count;
+			}
+		}
+		return boolean_(count != 1);
 	}
 
 protected:
