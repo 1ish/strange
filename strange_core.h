@@ -1092,11 +1092,12 @@ public:
 			}
 			_frozen = true;
 		}
+		finalize_();
 	}
 
 	virtual inline const bool frozen_() const override
 	{
-		return _frozen;
+		return finalized_() && _frozen;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1585,11 +1586,12 @@ public:
 			}
 			_frozen = true;
 		}
+		finalize_();
 	}
 
 	virtual inline const bool frozen_() const override
 	{
-		return _frozen;
+		return finalized_() && _frozen;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -2009,11 +2011,12 @@ public:
 			}
 			_frozen = true;
 		}
+		finalize_();
 	}
 
 	virtual inline const bool frozen_() const override
 	{
-		return _frozen;
+		return finalized_() && _frozen;
 	}
 
 	virtual inline const Ptr copy_() const override
