@@ -782,6 +782,74 @@ public:
 
 	inline const Ptr at(const Ptr it) const;
 
+	template <typename F>
+	inline const bool less_than_(F&& s) const
+	{
+		return symbol_() < std::forward<F>(s);
+	}
+
+	inline const bool less_than_(const Ptr other) const
+	{
+		Symbol* const symbol = dynamic_<Symbol>(other);
+		return symbol && less_than_(symbol->symbol_());
+	}
+
+	inline const Ptr less_than(const Ptr it) const
+	{
+		return boolean_(less_than_(it->next_()));
+	}
+
+	template <typename F>
+	inline const bool greater_than_(F&& s) const
+	{
+		return symbol_() > std::forward<F>(s);
+	}
+
+	inline const bool greater_than_(const Ptr other) const
+	{
+		Symbol* const symbol = dynamic_<Symbol>(other);
+		return symbol && greater_than_(symbol->symbol_());
+	}
+
+	inline const Ptr greater_than(const Ptr it) const
+	{
+		return boolean_(greater_than_(it->next_()));
+	}
+
+	template <typename F>
+	inline const bool less_or_equal_(F&& s) const
+	{
+		return symbol_() <= std::forward<F>(s);
+	}
+
+	inline const bool less_or_equal_(const Ptr other) const
+	{
+		Symbol* const symbol = dynamic_<Symbol>(other);
+		return symbol && less_or_equal_(symbol->symbol_());
+	}
+
+	inline const Ptr less_or_equal(const Ptr it) const
+	{
+		return boolean_(less_or_equal_(it->next_()));
+	}
+
+	template <typename F>
+	inline const bool greater_or_equal_(F&& s) const
+	{
+		return symbol_() >= std::forward<F>(s);
+	}
+
+	inline const bool greater_or_equal_(const Ptr other) const
+	{
+		Symbol* const symbol = dynamic_<Symbol>(other);
+		return symbol && greater_or_equal_(symbol->symbol_());
+	}
+
+	inline const Ptr greater_or_equal(const Ptr it) const
+	{
+		return boolean_(greater_or_equal_(it->next_()));
+	}
+
 private:
 	const std::string _symbol;
 	const size_t _hash;
@@ -7604,6 +7672,10 @@ inline const Thing::Ptr Symbol::pub_() const
 		shoal->update_("rwl", Static::fin_(&Symbol::rwl, "river"));
 		shoal->update_("add", Const<Symbol>::fin_(&Symbol::add, "symbol", ".."));
 		shoal->update_("at", Const<Symbol>::fin_(&Symbol::at, "index"));
+		shoal->update_("less_than", Const<Symbol>::fin_(&Symbol::less_than, "symbol"));
+		shoal->update_("greater_than", Const<Symbol>::fin_(&Symbol::greater_than, "symbol"));
+		shoal->update_("less_or_equal", Const<Symbol>::fin_(&Symbol::less_or_equal, "symbol"));
+		shoal->update_("greater_or_equal", Const<Symbol>::fin_(&Symbol::greater_or_equal, "symbol"));
 		shoal->finalize_();
 		return pub;
 	}();
