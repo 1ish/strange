@@ -2677,6 +2677,10 @@ public:
 			shoal->update_("add", Const<Lake>::fin_(&Lake::add, "lake", ".."));
 			shoal->update_("at", Const<Lake>::fin_(&Lake::at, "index"));
 			shoal->update_("update", Member<Lake>::fin_(&Lake::update, "index", "byte"));
+			shoal->update_("less_than", Const<Lake>::fin_(&Lake::less_than, "lake"));
+			shoal->update_("greater_than", Const<Lake>::fin_(&Lake::greater_than, "lake"));
+			shoal->update_("less_or_equal", Const<Lake>::fin_(&Lake::less_or_equal, "lake"));
+			shoal->update_("greater_or_equal", Const<Lake>::fin_(&Lake::greater_or_equal, "lake"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -2825,6 +2829,74 @@ public:
 		const Ptr byte = it->next_();
 		update_(index, byte);
 		return byte;
+	}
+
+	template <typename F>
+	inline const bool less_than_(F&& s) const
+	{
+		return get_() < std::forward<F>(s);
+	}
+
+	inline const bool less_than_(const Ptr other) const
+	{
+		Lake* const lake = dynamic_<Lake>(other);
+		return lake && less_than_(lake->get_());
+	}
+
+	inline const Ptr less_than(const Ptr it) const
+	{
+		return boolean_(less_than_(it->next_()));
+	}
+
+	template <typename F>
+	inline const bool greater_than_(F&& s) const
+	{
+		return get_() > std::forward<F>(s);
+	}
+
+	inline const bool greater_than_(const Ptr other) const
+	{
+		Lake* const lake = dynamic_<Lake>(other);
+		return lake && greater_than_(lake->get_());
+	}
+
+	inline const Ptr greater_than(const Ptr it) const
+	{
+		return boolean_(greater_than_(it->next_()));
+	}
+
+	template <typename F>
+	inline const bool less_or_equal_(F&& s) const
+	{
+		return get_() <= std::forward<F>(s);
+	}
+
+	inline const bool less_or_equal_(const Ptr other) const
+	{
+		Lake* const lake = dynamic_<Lake>(other);
+		return lake && less_or_equal_(lake->get_());
+	}
+
+	inline const Ptr less_or_equal(const Ptr it) const
+	{
+		return boolean_(less_or_equal_(it->next_()));
+	}
+
+	template <typename F>
+	inline const bool greater_or_equal_(F&& s) const
+	{
+		return get_() >= std::forward<F>(s);
+	}
+
+	inline const bool greater_or_equal_(const Ptr other) const
+	{
+		Lake* const lake = dynamic_<Lake>(other);
+		return lake && greater_or_equal_(lake->get_());
+	}
+
+	inline const Ptr greater_or_equal(const Ptr it) const
+	{
+		return boolean_(greater_or_equal_(it->next_()));
 	}
 };
 
