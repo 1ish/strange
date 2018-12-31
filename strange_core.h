@@ -39,8 +39,11 @@ namespace strange
 	class Int8;
 	class UInt8;
 	class Int16;
+	class UInt16;
 	class Int32;
+	class UInt32;
 	class Int64;
+	class UInt64;
 	class Float32;
 	class Float64;
 	class Complex32;
@@ -3385,7 +3388,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(std::stoll(symbol->symbol_()) & 1);
+			set_(std::stoull(symbol->symbol_()) & 1);
 		}
 	}
 
@@ -3948,7 +3951,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(D(std::stoll(symbol->symbol_())));
+			set_(D(std::stoull(symbol->symbol_())));
 		}
 	}
 
@@ -4337,6 +4340,291 @@ public:
 };
 
 //----------------------------------------------------------------------
+class UInt16 : public Number, public Data<uint16_t>
+//----------------------------------------------------------------------
+{
+public:
+	using D = uint16_t;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return make_<UInt16>(data);
+	}
+
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
+	}
+
+	static inline const Ptr lak_(const Ptr lake)
+	{
+		const Ptr ptr = mut_();
+		static_<UInt16>(ptr)->from_lake_(lake);
+		return ptr;
+	}
+
+	static inline const Ptr lak(const Ptr it)
+	{
+		return lak_(it->next_());
+	}
+
+	static inline const Ptr riv_(const Ptr river)
+	{
+		const Ptr ptr = mut_();
+		static_<UInt16>(ptr)->from_river_(river);
+		return ptr;
+	}
+
+	static inline const Ptr riv(const Ptr it)
+	{
+		return riv_(it->next_());
+	}
+
+	static inline const Ptr rwl_(const Ptr river)
+	{
+		const Ptr ptr = mut_();
+		static_<UInt16>(ptr)->from_river_with_links_(river);
+		return ptr;
+	}
+
+	static inline const Ptr rwl(const Ptr it)
+	{
+		return rwl_(it->next_());
+	}
+
+	inline UInt16(const D& data)
+		: Number{}
+		, Data{ data }
+	{
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Number::pub_()->copy_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<UInt16>::fin_(&UInt16::to_lake));
+			shoal->update_("from_lake", Member<UInt16>::fin_(&UInt16::from_lake, "lake"));
+			shoal->update_("to_river", Const<UInt16>::fin_(&UInt16::to_river, "river"));
+			shoal->update_("from_river", Member<UInt16>::fin_(&UInt16::from_river, "river"));
+			shoal->update_("mut", Static::fin_(&UInt16::mut));
+			shoal->update_("fin", Static::fin_(&UInt16::fin));
+			shoal->update_("lak", Static::fin_(&UInt16::lak, "lake"));
+			shoal->update_("riv", Static::fin_(&UInt16::riv, "river"));
+			shoal->update_("rwl", Static::fin_(&UInt16::rwl, "river"));
+			shoal->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::UInt16::mut", Static::fin_(&UInt16::mut));
+		s->update_("strange::UInt16::fin", Static::fin_(&UInt16::fin));
+		s->update_("strange::UInt16::lak", Static::fin_(&UInt16::lak, "lake"));
+		s->update_("strange::UInt16::riv", Static::fin_(&UInt16::riv, "river"));
+		s->update_("strange::UInt16::rwl", Static::fin_(&UInt16::rwl, "river"));
+	}
+
+	virtual inline const Ptr to_lake_() const override
+	{
+		std::string str(2, 0);
+		str[0] = get_() & 0xFF;
+		str[1] = (get_() >> 8) & 0xFF;
+		const Ptr lake = Lake::mut_(str);
+		if (finalized_())
+		{
+			lake->finalize_();
+		}
+		return lake;
+	}
+
+	virtual inline void from_lake_(const Ptr lake) override
+	{
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
+		{
+			log_("UInt16::from_lake_ passed wrong type of thing");
+			return;
+		}
+		set_(
+			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
+			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8
+		);
+		if (lak->finalized_())
+		{
+			finalize_();
+		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::UInt16");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::UInt16");
+			herd->insert_("strange::Number");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+	virtual inline int64_t to_int64_() const override
+	{
+		return int64_t(get_());
+	}
+
+	virtual inline void from_int64_(const int64_t int64) override
+	{
+		set_(D(int64));
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_()));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			set_(D(std::stoull(symbol->symbol_())));
+		}
+	}
+
+	virtual inline void increment_() override
+	{
+		++ref_();
+	}
+
+	virtual inline void decrement_() override
+	{
+		--ref_();
+	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() + number->to_int64_());
+		}
+	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() - number->to_int64_());
+		}
+	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() * number->to_int64_());
+		}
+	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0 && divisor != 1)
+			{
+				from_int64_(to_int64_() / divisor);
+			}
+		}
+	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0)
+			{
+				from_int64_(to_int64_() % divisor);
+			}
+		}
+	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() == number->to_int64_());
+	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<int64_t>()(to_int64_());
+	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() < number->to_int64_());
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() > number->to_int64_());
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() <= number->to_int64_());
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() >= number->to_int64_());
+	}
+};
+
+//----------------------------------------------------------------------
 class Int32 : public Number, public Data<int32_t>
 //----------------------------------------------------------------------
 {
@@ -4523,6 +4811,295 @@ public:
 		if (symbol)
 		{
 			set_(D(std::stoll(symbol->symbol_())));
+		}
+	}
+
+	virtual inline void increment_() override
+	{
+		++ref_();
+	}
+
+	virtual inline void decrement_() override
+	{
+		--ref_();
+	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() + number->to_int64_());
+		}
+	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() - number->to_int64_());
+		}
+	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			from_int64_(to_int64_() * number->to_int64_());
+		}
+	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0 && divisor != 1)
+			{
+				from_int64_(to_int64_() / divisor);
+			}
+		}
+	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t divisor = number->to_int64_();
+			if (divisor != 0)
+			{
+				from_int64_(to_int64_() % divisor);
+			}
+		}
+	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() == number->to_int64_());
+	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<int64_t>()(to_int64_());
+	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() < number->to_int64_());
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() > number->to_int64_());
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() <= number->to_int64_());
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		Number* const number = dynamic_<Number>(other);
+		return number && (to_int64_() >= number->to_int64_());
+	}
+};
+
+//----------------------------------------------------------------------
+class UInt32 : public Number, public Data<uint32_t>
+//----------------------------------------------------------------------
+{
+public:
+	using D = uint32_t;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return make_<UInt32>(data);
+	}
+
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
+	}
+
+	static inline const Ptr lak_(const Ptr lake)
+	{
+		const Ptr ptr = mut_();
+		static_<UInt32>(ptr)->from_lake_(lake);
+		return ptr;
+	}
+
+	static inline const Ptr lak(const Ptr it)
+	{
+		return lak_(it->next_());
+	}
+
+	static inline const Ptr riv_(const Ptr river)
+	{
+		const Ptr ptr = mut_();
+		static_<UInt32>(ptr)->from_river_(river);
+		return ptr;
+	}
+
+	static inline const Ptr riv(const Ptr it)
+	{
+		return riv_(it->next_());
+	}
+
+	static inline const Ptr rwl_(const Ptr river)
+	{
+		const Ptr ptr = mut_();
+		static_<UInt32>(ptr)->from_river_with_links_(river);
+		return ptr;
+	}
+
+	static inline const Ptr rwl(const Ptr it)
+	{
+		return rwl_(it->next_());
+	}
+
+	inline UInt32(const D& data)
+		: Number{}
+		, Data{ data }
+	{
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Number::pub_()->copy_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<UInt32>::fin_(&UInt32::to_lake));
+			shoal->update_("from_lake", Member<UInt32>::fin_(&UInt32::from_lake, "lake"));
+			shoal->update_("to_river", Const<UInt32>::fin_(&UInt32::to_river, "river"));
+			shoal->update_("from_river", Member<UInt32>::fin_(&UInt32::from_river, "river"));
+			shoal->update_("mut", Static::fin_(&UInt32::mut));
+			shoal->update_("fin", Static::fin_(&UInt32::fin));
+			shoal->update_("lak", Static::fin_(&UInt32::lak, "lake"));
+			shoal->update_("riv", Static::fin_(&UInt32::riv, "river"));
+			shoal->update_("rwl", Static::fin_(&UInt32::rwl, "river"));
+			shoal->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::UInt32::mut", Static::fin_(&UInt32::mut));
+		s->update_("strange::UInt32::fin", Static::fin_(&UInt32::fin));
+		s->update_("strange::UInt32::lak", Static::fin_(&UInt32::lak, "lake"));
+		s->update_("strange::UInt32::riv", Static::fin_(&UInt32::riv, "river"));
+		s->update_("strange::UInt32::rwl", Static::fin_(&UInt32::rwl, "river"));
+	}
+
+	virtual inline const Ptr to_lake_() const override
+	{
+		std::string str(4, 0);
+		str[0] = get_() & 0xFF;
+		str[1] = (get_() >> 8) & 0xFF;
+		str[2] = (get_() >> 16) & 0xFF;
+		str[3] = (get_() >> 24) & 0xFF;
+		const Ptr lake = Lake::mut_(str);
+		if (finalized_())
+		{
+			lake->finalize_();
+		}
+		return lake;
+	}
+
+	virtual inline void from_lake_(const Ptr lake) override
+	{
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
+		{
+			log_("UInt32::from_lake_ passed wrong type of thing");
+			return;
+		}
+		set_(
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8 |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[2]))) << 16 |
+			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[3]))) << 24
+		);
+		if (lak->finalized_())
+		{
+			finalize_();
+		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::UInt32");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::UInt32");
+			herd->insert_("strange::Number");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+	virtual inline int64_t to_int64_() const override
+	{
+		return int64_t(get_());
+	}
+
+	virtual inline void from_int64_(const int64_t int64) override
+	{
+		set_(D(int64));
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_()));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			set_(D(std::stoull(symbol->symbol_())));
 		}
 	}
 
@@ -4919,6 +5496,401 @@ public:
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() >= number->to_int64_());
+	}
+};
+
+//----------------------------------------------------------------------
+class UInt64 : public Number, public Data<uint64_t>
+//----------------------------------------------------------------------
+{
+public:
+	using D = uint64_t;
+
+	static inline const Ptr mut_(const D& data = D())
+	{
+		return make_<UInt64>(data);
+	}
+
+	static inline const Ptr mut(const Ptr ignore)
+	{
+		return mut_();
+	}
+
+	static inline const Ptr fin_(const D& data = D())
+	{
+		const Ptr result = mut_(data);
+		result->finalize_();
+		return result;
+	}
+
+	static inline const Ptr fin(const Ptr ignore)
+	{
+		return fin_();
+	}
+
+	static inline const Ptr lak_(const Ptr lake)
+	{
+		const Ptr ptr = mut_();
+		static_<UInt64>(ptr)->from_lake_(lake);
+		return ptr;
+	}
+
+	static inline const Ptr lak(const Ptr it)
+	{
+		return lak_(it->next_());
+	}
+
+	static inline const Ptr riv_(const Ptr river)
+	{
+		const Ptr ptr = mut_();
+		static_<UInt64>(ptr)->from_river_(river);
+		return ptr;
+	}
+
+	static inline const Ptr riv(const Ptr it)
+	{
+		return riv_(it->next_());
+	}
+
+	static inline const Ptr rwl_(const Ptr river)
+	{
+		const Ptr ptr = mut_();
+		static_<UInt64>(ptr)->from_river_with_links_(river);
+		return ptr;
+	}
+
+	static inline const Ptr rwl(const Ptr it)
+	{
+		return rwl_(it->next_());
+	}
+
+	inline UInt64(const D& data)
+		: Number{}
+		, Data{ data }
+	{
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return mut_(get_());
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = [this]()
+		{
+			const Ptr pub = Number::pub_()->copy_();
+			Shoal* const shoal = static_<Shoal>(pub);
+			shoal->update_("to_lake", Const<UInt64>::fin_(&UInt64::to_lake));
+			shoal->update_("from_lake", Member<UInt64>::fin_(&UInt64::from_lake, "lake"));
+			shoal->update_("to_river", Const<UInt64>::fin_(&UInt64::to_river, "river"));
+			shoal->update_("from_river", Member<UInt64>::fin_(&UInt64::from_river, "river"));
+			shoal->update_("mut", Static::fin_(&UInt64::mut));
+			shoal->update_("fin", Static::fin_(&UInt64::fin));
+			shoal->update_("lak", Static::fin_(&UInt64::lak, "lake"));
+			shoal->update_("riv", Static::fin_(&UInt64::riv, "river"));
+			shoal->update_("rwl", Static::fin_(&UInt64::rwl, "river"));
+			shoal->finalize_();
+			return pub;
+		}();
+		return PUB;
+	}
+
+	static inline void share_(const Ptr shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::UInt64::mut", Static::fin_(&UInt64::mut));
+		s->update_("strange::UInt64::fin", Static::fin_(&UInt64::fin));
+		s->update_("strange::UInt64::lak", Static::fin_(&UInt64::lak, "lake"));
+		s->update_("strange::UInt64::riv", Static::fin_(&UInt64::riv, "river"));
+		s->update_("strange::UInt64::rwl", Static::fin_(&UInt64::rwl, "river"));
+	}
+
+	virtual inline const Ptr to_lake_() const override
+	{
+		std::string str(8, 0);
+		str[0] = get_() & 0xFF;
+		str[1] = (get_() >> 8) & 0xFF;
+		str[2] = (get_() >> 16) & 0xFF;
+		str[3] = (get_() >> 24) & 0xFF;
+		str[4] = (get_() >> 32) & 0xFF;
+		str[5] = (get_() >> 40) & 0xFF;
+		str[6] = (get_() >> 48) & 0xFF;
+		str[7] = (get_() >> 56) & 0xFF;
+		const Ptr lake = Lake::mut_(str);
+		if (finalized_())
+		{
+			lake->finalize_();
+		}
+		return lake;
+	}
+
+	virtual inline void from_lake_(const Ptr lake) override
+	{
+		Lake* const lak = dynamic_<Lake>(lake);
+		if (!lak)
+		{
+			log_("UInt64::from_lake_ passed wrong type of thing");
+			return;
+		}
+		set_(
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[2]))) << 16 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[3]))) << 24 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[4]))) << 32 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[5]))) << 40 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[6]))) << 48 |
+			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[7]))) << 56
+		);
+		if (lak->finalized_())
+		{
+			finalize_();
+		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::UInt64");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = []()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Serializable");
+			herd->insert_("strange::UInt64");
+			herd->insert_("strange::Number");
+			herd->insert_("strange::Data");
+			herd->insert_("strange::Thing");
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
+
+	virtual inline int64_t to_int64_() const override
+	{
+		return int64_t(get_());
+	}
+
+	virtual inline void from_int64_(const int64_t int64) override
+	{
+		set_(D(int64));
+	}
+
+	virtual inline const Ptr to_symbol_() const override
+	{
+		return sym_(std::to_string(get_()));
+	}
+
+	virtual inline void from_symbol_(const Ptr ptr) override
+	{
+		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		if (symbol)
+		{
+			set_(D(std::stoull(symbol->symbol_())));
+		}
+	}
+
+	virtual inline void increment_() override
+	{
+		++ref_();
+	}
+
+	virtual inline void decrement_() override
+	{
+		--ref_();
+	}
+
+	virtual inline void self_add_(const Ptr other) override
+	{
+		UInt64* const uint64 = dynamic_<UInt64>(other);
+		if (uint64)
+		{
+			ref_() += uint64->get_();
+		}
+		else
+		{
+			Number* const number = dynamic_<Number>(other);
+			if (number)
+			{
+				ref_() += number->to_int64_();
+			}
+		}
+	}
+
+	virtual inline void self_subtract_(const Ptr other) override
+	{
+		UInt64* const uint64 = dynamic_<UInt64>(other);
+		if (uint64)
+		{
+			ref_() -= uint64->get_();
+		}
+		else
+		{
+			Number* const number = dynamic_<Number>(other);
+			if (number)
+			{
+				ref_() -= number->to_int64_();
+			}
+		}
+	}
+
+	virtual inline void self_multiply_(const Ptr other) override
+	{
+		UInt64* const uint64 = dynamic_<UInt64>(other);
+		if (uint64)
+		{
+			ref_() *= uint64->get_();
+		}
+		else
+		{
+			Number* const number = dynamic_<Number>(other);
+			if (number)
+			{
+				ref_() *= number->to_int64_();
+			}
+		}
+	}
+
+	virtual inline void self_divide_(const Ptr other) override
+	{
+		UInt64* const uint64 = dynamic_<UInt64>(other);
+		if (uint64)
+		{
+			const D divisor = uint64->get_();
+			if (divisor != 0 && divisor != 1)
+			{
+				ref_() /= divisor;
+			}
+		}
+		else
+		{
+			Number* const number = dynamic_<Number>(other);
+			if (number)
+			{
+				const int64_t divisor = number->to_int64_();
+				if (divisor != 0 && divisor != 1)
+				{
+					ref_() /= divisor;
+				}
+			}
+		}
+	}
+
+	virtual inline void self_modulo_(const Ptr other) override
+	{
+		UInt64* const uint64 = dynamic_<UInt64>(other);
+		if (uint64)
+		{
+			const D divisor = uint64->get_();
+			if (divisor != 0 && divisor != 1)
+			{
+				ref_() %= divisor;
+			}
+		}
+		else
+		{
+			Number* const number = dynamic_<Number>(other);
+			if (number)
+			{
+				const int64_t divisor = number->to_int64_();
+				if (divisor != 0)
+				{
+					ref_() %= divisor;
+				}
+			}
+		}
+	}
+
+	virtual inline const bool same_(const Ptr other) const override
+	{
+		UInt64* const uint64 = dynamic_<UInt64>(other);
+		if (uint64)
+		{
+			return (get_() == uint64->get_());
+		}
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t int64 = number->to_int64_();
+			return int64 >= 0 && get_() == D(int64);
+		}
+		return false;
+	}
+
+	virtual inline size_t hash_() const override
+	{
+		return std::hash<int64_t>()(get_());
+	}
+
+	virtual inline const bool less_than_(const Ptr other) const override
+	{
+		UInt64* const uint64 = dynamic_<UInt64>(other);
+		if (uint64)
+		{
+			return (get_() < uint64->get_());
+		}
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t int64 = number->to_int64_();
+			return int64 > 0 && get_() < D(int64);
+		}
+		return false;
+	}
+
+	virtual inline const bool greater_than_(const Ptr other) const override
+	{
+		UInt64* const uint64 = dynamic_<UInt64>(other);
+		if (uint64)
+		{
+			return (get_() > uint64->get_());
+		}
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t int64 = number->to_int64_();
+			return int64 < 0 || get_() > D(int64);
+		}
+		return false;
+	}
+
+	virtual inline const bool less_or_equal_(const Ptr other) const override
+	{
+		UInt64* const uint64 = dynamic_<UInt64>(other);
+		if (uint64)
+		{
+			return (get_() <= uint64->get_());
+		}
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t int64 = number->to_int64_();
+			return int64 >= 0 && get_() <= D(int64);
+		}
+		return false;
+	}
+
+	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	{
+		UInt64* const uint64 = dynamic_<UInt64>(other);
+		if (uint64)
+		{
+			return (get_() >= uint64->get_());
+		}
+		Number* const number = dynamic_<Number>(other);
+		if (number)
+		{
+			const int64_t int64 = number->to_int64_();
+			return int64 <= 0 || get_() >= D(int64);
+		}
+		return false;
 	}
 };
 
@@ -7296,11 +8268,23 @@ inline void Number::from_complex64_(const Thing::Ptr ptr)
 //======================================================================
 
 //======================================================================
+// class UInt16
+//======================================================================
+
+//======================================================================
 // class Int32
 //======================================================================
 
 //======================================================================
+// class UInt32
+//======================================================================
+
+//======================================================================
 // class Int64
+//======================================================================
+
+//======================================================================
+// class UInt64
 //======================================================================
 
 //======================================================================

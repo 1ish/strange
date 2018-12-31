@@ -63,8 +63,11 @@ inline void Thing::share_(const Thing::Ptr shoal)
 	Int8::share_(shoal);
 	UInt8::share_(shoal);
 	Int16::share_(shoal);
+	UInt16::share_(shoal);
 	Int32::share_(shoal);
+	UInt32::share_(shoal);
 	Int64::share_(shoal);
+	UInt64::share_(shoal);
 	Float32::share_(shoal);
 	Float64::share_(shoal);
 	Complex32::share_(shoal);
