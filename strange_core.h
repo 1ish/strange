@@ -1820,9 +1820,11 @@ public:
 
 	inline const Ptr push_back(const Ptr it)
 	{
-		const Ptr item = it->next_();
-		push_back_(item);
-		return item;
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			push_back_(i);
+		}
+		return me_();
 	}
 
 	inline const int64_t size_() const
@@ -1860,8 +1862,12 @@ public:
 
 	inline void update_(const int64_t pos, const Ptr value)
 	{
-		if (pos >= 0 && pos < size_())
+		if (pos >= 0)
 		{
+			if (pos >= size_())
+			{
+				_vector.resize(size_t(pos) + 1, nothing_());
+			}
 			_vector[size_t(pos)] = value;
 		}
 	}
@@ -1973,9 +1979,8 @@ public:
 
 		inline const Ptr push_back(const Ptr it)
 		{
-			const Ptr item = it->next_();
-			push_back_(item);
-			return item;
+			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+			return static_<Flock>(_flock)->push_back(it);
 		}
 
 		inline const int64_t size_() const
@@ -7574,8 +7579,11 @@ public:
 
 	inline const Ptr push_back(const Ptr it)
 	{
-		push_back_(it->next_());
-		return nothing_();
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			push_back_(i);
+		}
+		return me_();
 	}
 
 	inline const bool push_back_with_links_(const Ptr ptr, const Ptr shoal)
@@ -7603,7 +7611,11 @@ public:
 
 	inline const Ptr write(const Ptr it)
 	{
-		write_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			write_(i);
+		}
+		return me_();
 	}
 
 	inline const Ptr pop_front_()
