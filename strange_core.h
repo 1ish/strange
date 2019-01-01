@@ -1992,22 +1992,7 @@ public:
 		return me_();
 	}
 
-	inline void self_add_(const Ptr other)
-	{
-		Flock* const flock = dynamic_<Flock>(other);
-		if (flock)
-		{
-			if (&_vector == &flock->_vector)
-			{
-				const std_vector_ptr copy = _vector;
-				_vector.insert(_vector.end(), copy.cbegin(), copy.cend());
-			}
-			else
-			{
-				_vector.insert(_vector.end(), flock->_vector.cbegin(), flock->_vector.cend());
-			}
-		}
-	}
+	inline void self_add_(const Ptr other);
 
 	inline const Ptr self_add(const Ptr it)
 	{
@@ -2541,6 +2526,17 @@ public:
 					update_(i.first, i.second);
 				}
 			}
+			else
+			{
+				Flock* const flock = dynamic_<Flock>(other);
+				if (flock)
+				{
+					for (auto i : flock->get_())
+					{
+						insert_(i);
+					}
+				}
+			}
 		}
 	}
 
@@ -2585,6 +2581,17 @@ public:
 				for (const auto& i : shoal->get_())
 				{
 					erase_(i.first);
+				}
+			}
+			else
+			{
+				Flock* const flock = dynamic_<Flock>(other);
+				if (flock)
+				{
+					for (auto i : flock->get_())
+					{
+						erase_(i);
+					}
 				}
 			}
 		}
@@ -8402,6 +8409,20 @@ inline void Shoal::self_add_(const Thing::Ptr other)
 				update_(i, one_());
 			}
 		}
+		else
+		{
+			Flock* const flock = dynamic_<Flock>(other);
+			if (flock)
+			{
+				const Ptr index = Int64::mut_();
+				Int64* const ind = static_<Int64>(index);
+				for (auto i : flock->get_())
+				{
+					update_(ind->copy_(), i);
+					ind->increment_();
+				}
+			}
+		}
 	}
 }
 
@@ -8430,6 +8451,17 @@ inline void Shoal::self_subtract_(const Thing::Ptr other)
 			for (auto i : herd->get_())
 			{
 				erase_(i);
+			}
+		}
+		else
+		{
+			Flock* const flock = dynamic_<Flock>(other);
+			if (flock)
+			{
+				for (auto i : flock->get_())
+				{
+					erase_(i);
+				}
 			}
 		}
 	}
@@ -8538,6 +8570,42 @@ inline void Flock::erase_(const Thing::Ptr pos)
 	if (number)
 	{
 		erase_(number->to_int64_());
+	}
+}
+
+inline void Flock::self_add_(const Thing::Ptr other)
+{
+	Flock* const flock = dynamic_<Flock>(other);
+	if (flock)
+	{
+		if (&_vector == &flock->_vector)
+		{
+			const std_vector_ptr copy = _vector;
+			_vector.insert(_vector.end(), copy.cbegin(), copy.cend());
+		}
+		else
+		{
+			_vector.insert(_vector.end(), flock->_vector.cbegin(), flock->_vector.cend());
+		}
+	}
+	else
+	{
+		Herd* const herd = dynamic_<Herd>(other);
+		if (herd)
+		{
+			_vector.insert(_vector.end(), herd->get_().cbegin(), herd->get_().cend());
+		}
+		else
+		{
+			Shoal* const shoal = dynamic_<Shoal>(other);
+			if (shoal)
+			{
+				for (const auto& i : shoal->get_())
+				{
+					_vector.push_back(i.second);
+				}
+			}
+		}
 	}
 }
 
