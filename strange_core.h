@@ -1081,6 +1081,28 @@ public:
 	{
 	}
 
+	inline Shoal(const Ptr it)
+		: Mutable{}
+		, Serializable{}
+		, _map{}
+		, _frozen{ false }
+	{
+		Ptr key;
+		int64_t index = 0;
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			if (index % 2 == 0)
+			{
+				key = i;
+			}
+			else
+			{
+				update_(key, i);
+			}
+			++index;
+		}
+	}
+
 	virtual inline void freeze_() override
 	{
 		if (!_frozen)
@@ -1167,7 +1189,8 @@ public:
 			shoal->update_("from_lake", Member<Shoal>::fin_(&Shoal::from_lake, "lake"));
 			shoal->update_("to_river", Const<Shoal>::fin_(&Shoal::to_river, "river"));
 			shoal->update_("from_river", Member<Shoal>::fin_(&Shoal::from_river, "river"));
-			shoal->update_("mut", Static::fin_(&Shoal::mut));
+			shoal->update_("mut", Static::fin_(&Shoal::mut, "key", "value", ".."));
+			shoal->update_("fin", Static::fin_(&Shoal::fin, "key", "value", ".."));
 			shoal->update_("lak", Static::fin_(&Shoal::lak, "lake"));
 			shoal->update_("riv", Static::fin_(&Shoal::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Shoal::rwl, "river"));
@@ -1205,9 +1228,16 @@ public:
 		return make_<Shoal>();
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr it)
 	{
-		return mut_();
+		return make_<Shoal>(it);
+	}
+
+	static inline const Ptr fin(const Ptr it)
+	{
+		const Ptr result = mut(it);
+		result->finalize_();
+		return result;
 	}
 
 	static inline const Ptr lak_(const Ptr lake)
@@ -1681,9 +1711,9 @@ public:
 		, _vector{}
 		, _frozen{ false }
 	{
-		for (Ptr n = it->next_(); !n->is_("."); n = it->next_())
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
-			_vector.push_back(n);
+			push_back_(i);
 		}
 	}
 
@@ -1774,7 +1804,8 @@ public:
 			shoal->update_("from_lake", Member<Flock>::fin_(&Flock::from_lake, "lake"));
 			shoal->update_("to_river", Const<Flock>::fin_(&Flock::to_river, "river"));
 			shoal->update_("from_river", Member<Flock>::fin_(&Flock::from_river, "river"));
-			shoal->update_("mut", Static::fin_(&Flock::mut));
+			shoal->update_("mut", Static::fin_(&Flock::mut, "value", ".."));
+			shoal->update_("fin", Static::fin_(&Flock::fin, "value", ".."));
 			shoal->update_("lak", Static::fin_(&Flock::lak, "lake"));
 			shoal->update_("riv", Static::fin_(&Flock::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Flock::rwl, "river"));
@@ -1811,6 +1842,13 @@ public:
 	static inline const Ptr mut(const Ptr it)
 	{
 		return make_<Flock>(it);
+	}
+
+	static inline const Ptr fin(const Ptr it)
+	{
+		const Ptr result = mut(it);
+		result->finalize_();
+		return result;
 	}
 
 	static inline const Ptr lak_(const Ptr lake)
@@ -2226,6 +2264,18 @@ public:
 	{
 	}
 
+	inline Herd(const Ptr it)
+		: Mutable{}
+		, Serializable{}
+		, _set{}
+		, _frozen{ false }
+	{
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			insert_(i);
+		}
+	}
+
 	virtual inline void freeze_() override
 	{
 		if (!_frozen)
@@ -2311,7 +2361,8 @@ public:
 			shoal->update_("from_lake", Member<Herd>::fin_(&Herd::from_lake, "lake"));
 			shoal->update_("to_river", Const<Herd>::fin_(&Herd::to_river, "river"));
 			shoal->update_("from_river", Member<Herd>::fin_(&Herd::from_river, "river"));
-			shoal->update_("mut", Static::fin_(&Herd::mut));
+			shoal->update_("mut", Static::fin_(&Herd::mut, "key", ".."));
+			shoal->update_("fin", Static::fin_(&Herd::fin, "key", ".."));
 			shoal->update_("lak", Static::fin_(&Herd::lak, "lake"));
 			shoal->update_("riv", Static::fin_(&Herd::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Herd::rwl, "river"));
@@ -2347,9 +2398,16 @@ public:
 		return make_<Herd>();
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr it)
 	{
-		return mut_();
+		return make_<Herd>(it);
+	}
+
+	static inline const Ptr fin(const Ptr it)
+	{
+		const Ptr result = mut(it);
+		result->finalize_();
+		return result;
 	}
 
 	static inline const Ptr lak_(const Ptr lake)

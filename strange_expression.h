@@ -588,15 +588,7 @@ private:
 
 	inline const Ptr _flock_(const Ptr local) const
 	{
-		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		const Ptr result = Flock::mut_();
-		Flock* const res = static_<Flock>(result);
-		for (int64_t i = 0; i < size; ++i)
-		{
-			res->push_back_(Expression::evaluate_(flock->at_(i), local));
-		}
-		return result;
+		return Flock::mut(iterator_(local));
 	}
 
 	inline const Ptr _flock_iterator_(const Ptr local) const
@@ -606,36 +598,12 @@ private:
 
 	inline const Ptr _shoal_(const Ptr local) const
 	{
-		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		const Ptr result = Shoal::mut_();
-		Shoal* const res = static_<Shoal>(result);
-		Ptr key;
-		for (int64_t i = 0; i < size; ++i)
-		{
-			if (i % 2 == 0)
-			{
-				key = Expression::evaluate_(flock->at_(i), local);
-			}
-			else
-			{
-				res->update_(key, Expression::evaluate_(flock->at_(i), local));
-			}
-		}
-		return result;
+		return Shoal::mut(iterator_(local));
 	}
 
 	inline const Ptr _herd_(const Ptr local) const
 	{
-		Flock* const flock = static_<Flock>(_flock);
-		const int64_t size = flock->size_();
-		const Ptr result = Herd::mut_();
-		Herd* const res = static_<Herd>(result);
-		for (int64_t i = 0; i < size; ++i)
-		{
-			res->insert_(Expression::evaluate_(flock->at_(i), local));
-		}
-		return result;
+		return Herd::mut(iterator_(local));
 	}
 
 	inline const Ptr _break_(const Ptr local) const
