@@ -1752,6 +1752,8 @@ public:
 			shoal->update_("empty", Const<Flock>::fin_(&Flock::empty));
 			shoal->update_("at", Const<Flock>::fin_(&Flock::at, "index"));
 			shoal->update_("update", Member<Flock>::fin_(&Flock::update, "index", "value"));
+			shoal->update_("insert", Member<Flock>::fin_(&Flock::insert, "index", "value"));
+			shoal->update_("erase", Member<Flock>::fin_(&Flock::erase, "index"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -1864,11 +1866,19 @@ public:
 	{
 		if (pos >= 0)
 		{
-			if (pos >= size_())
+			const int64_t size = size_();
+			if (pos == size)
 			{
-				_vector.resize(size_t(pos) + 1, nothing_());
+				push_back_(value);
 			}
-			_vector[size_t(pos)] = value;
+			else
+			{
+				if (pos > size)
+				{
+					_vector.resize(size_t(pos) + 1, nothing_());
+				}
+				_vector[size_t(pos)] = value;
+			}
 		}
 	}
 
@@ -1880,6 +1890,61 @@ public:
 		const Ptr value = it->next_();
 		update_(index, value);
 		return value;
+	}
+
+	inline void insert_(const int64_t pos, const Ptr value)
+	{
+		if (pos >= 0)
+		{
+			const int64_t size = size_();
+			if (pos == size)
+			{
+				push_back_(value);
+			}
+			else
+			{
+				if (pos > size)
+				{
+					_vector.resize(size_t(pos) + 1, nothing_());
+					_vector[size_t(pos)] = value;
+				}
+				else
+				{
+					_vector.insert(_vector.begin() + pos, value);
+				}
+			}
+		}
+	}
+
+	inline void insert_(const Ptr pos, const Ptr value);
+
+	inline const Ptr insert(const Ptr it)
+	{
+		const Ptr index = it->next_();
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			insert_(index, i);
+		}
+		return me_();
+	}
+
+	inline void erase_(const int64_t pos)
+	{
+		if (pos >= 0 && pos < size_())
+		{
+			_vector.erase(_vector.begin() + pos);
+		}
+	}
+
+	inline void erase_(const Ptr pos);
+
+	inline const Ptr erase(const Ptr it)
+	{
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			erase_(i);
+		}
+		return me_();
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -8305,6 +8370,24 @@ inline void Flock::update_(const Thing::Ptr pos, const Thing::Ptr value)
 	if (number)
 	{
 		update_(number->to_int64_(), value);
+	}
+}
+
+inline void Flock::insert_(const Thing::Ptr pos, const Thing::Ptr value)
+{
+	Number* const number = dynamic_<Number>(pos);
+	if (number)
+	{
+		insert_(number->to_int64_(), value);
+	}
+}
+
+inline void Flock::erase_(const Thing::Ptr pos)
+{
+	Number* const number = dynamic_<Number>(pos);
+	if (number)
+	{
+		erase_(number->to_int64_());
 	}
 }
 
