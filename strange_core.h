@@ -1175,6 +1175,9 @@ public:
 			shoal->update_("update", Member<Shoal>::fin_(&Shoal::update, "key", "value"));
 			shoal->update_("insert", Member<Shoal>::fin_(&Shoal::insert, "key", "value"));
 			shoal->update_("erase", Member<Shoal>::fin_(&Shoal::erase, "key"));
+			shoal->update_("clear", Member<Shoal>::fin_(&Shoal::clear));
+			shoal->update_("size", Const<Shoal>::fin_(&Shoal::size));
+			shoal->update_("empty", Const<Shoal>::fin_(&Shoal::empty));
 			shoal->update_("self_add", Member<Shoal>::fin_(&Shoal::self_add, "shoal", ".."));
 			shoal->update_("add", Const<Shoal>::fin_(&Shoal::add, "shoal", ".."));
 			shoal->update_("self_subtract", Member<Shoal>::fin_(&Shoal::self_subtract, "shoal", ".."));
@@ -1326,6 +1329,34 @@ public:
 	inline const Ptr erase(const Ptr it)
 	{
 		return boolean_(erase_(it->next_()));
+	}
+
+	inline void clear_()
+	{
+		_map.clear();
+	}
+
+	inline const Ptr clear(const Ptr ignore)
+	{
+		clear_();
+		return me_();
+	}
+
+	inline const int64_t size_() const
+	{
+		return int64_t(_map.size());
+	}
+
+	inline const Ptr size(const Ptr ignore) const;
+
+	inline const bool empty_() const
+	{
+		return _map.empty();
+	}
+
+	inline const Ptr empty(const Ptr ignore) const
+	{
+		return boolean_(empty_());
 	}
 
 	inline void self_add_(const Ptr other);
@@ -1754,6 +1785,9 @@ public:
 			shoal->update_("update", Member<Flock>::fin_(&Flock::update, "index", "value"));
 			shoal->update_("insert", Member<Flock>::fin_(&Flock::insert, "index", "value"));
 			shoal->update_("erase", Member<Flock>::fin_(&Flock::erase, "index"));
+			shoal->update_("clear", Member<Flock>::fin_(&Flock::clear));
+			shoal->update_("self_add", Member<Flock>::fin_(&Flock::self_add, "flock", ".."));
+			shoal->update_("add", Const<Flock>::fin_(&Flock::add, "flock", ".."));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -1945,6 +1979,57 @@ public:
 			erase_(i);
 		}
 		return me_();
+	}
+
+	inline void clear_()
+	{
+		_vector.clear();
+	}
+
+	inline const Ptr clear(const Ptr ignore)
+	{
+		clear_();
+		return me_();
+	}
+
+	inline void self_add_(const Ptr other)
+	{
+		Flock* const flock = dynamic_<Flock>(other);
+		if (flock)
+		{
+			if (&_vector == &flock->_vector)
+			{
+				const std_vector_ptr copy = _vector;
+				_vector.insert(_vector.end(), copy.cbegin(), copy.cend());
+			}
+			else
+			{
+				_vector.insert(_vector.end(), flock->_vector.cbegin(), flock->_vector.cend());
+			}
+		}
+	}
+
+	inline const Ptr self_add(const Ptr it)
+	{
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			self_add_(i);
+		}
+		return me_();
+	}
+
+	inline const Ptr add_(const Ptr other) const
+	{
+		const Ptr result = copy_();
+		static_<Flock>(result)->self_add_(other);
+		return result;
+	}
+
+	inline const Ptr add(const Ptr it) const
+	{
+		const Ptr result = copy_();
+		static_<Flock>(result)->self_add(it);
+		return result;
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -2249,6 +2334,9 @@ public:
 			shoal->update_("update", Member<Herd>::fin_(&Herd::update, "key", "insert"));
 			shoal->update_("insert", Member<Herd>::fin_(&Herd::insert, "key"));
 			shoal->update_("erase", Member<Herd>::fin_(&Herd::erase, "key"));
+			shoal->update_("clear", Member<Herd>::fin_(&Herd::clear));
+			shoal->update_("size", Const<Herd>::fin_(&Herd::size));
+			shoal->update_("empty", Const<Herd>::fin_(&Herd::empty));
 			shoal->update_("self_add", Member<Herd>::fin_(&Herd::self_add, "herd", ".."));
 			shoal->update_("add", Const<Herd>::fin_(&Herd::add, "herd", ".."));
 			shoal->update_("self_subtract", Member<Herd>::fin_(&Herd::self_subtract, "herd", ".."));
@@ -2394,14 +2482,53 @@ public:
 		return boolean_(erase_(it->next_()));
 	}
 
+	inline void clear_()
+	{
+		_set.clear();
+	}
+
+	inline const Ptr clear(const Ptr ignore)
+	{
+		clear_();
+		return me_();
+	}
+
+	inline const int64_t size_() const
+	{
+		return int64_t(_set.size());
+	}
+
+	inline const Ptr size(const Ptr ignore) const;
+
+	inline const bool empty_() const
+	{
+		return _set.empty();
+	}
+
+	inline const Ptr empty(const Ptr ignore) const
+	{
+		return boolean_(empty_());
+	}
+
 	inline void self_add_(const Ptr other)
 	{
 		Herd* const herd = dynamic_<Herd>(other);
 		if (herd)
 		{
-			for (auto i : herd->_set)
+			if (&_set == &herd->_set)
 			{
-				insert_(i);
+				const std_unordered_set_ptr copy = _set;
+				for (auto i : copy)
+				{
+					insert_(i);
+				}
+			}
+			else
+			{
+				for (auto i : herd->_set)
+				{
+					insert_(i);
+				}
 			}
 		}
 		else
@@ -7875,7 +8002,7 @@ inline const Thing::Ptr Thing::invoke_(Args&&... args)
 
 inline const Thing::Ptr Thing::identity(const Thing::Ptr ignore) const
 {
-	return Int64::fin_(identity_());
+	return Int64::mut_(identity_());
 }
 
 inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
@@ -8239,14 +8366,30 @@ inline const Thing::Ptr Shoal::gather_from_river_(const Thing::Ptr river)
 	return at_(nothing_());
 }
 
+inline const Thing::Ptr Shoal::size(const Thing::Ptr ignore) const
+{
+	return Int64::mut_(size_());
+}
+
 inline void Shoal::self_add_(const Thing::Ptr other)
 {
 	Shoal* const shoal = dynamic_<Shoal>(other);
 	if (shoal)
 	{
-		for (const auto& i : shoal->_map)
+		if (&_map == &shoal->_map)
 		{
-			update_(i.first, i.second);
+			const std_unordered_map_ptr_ptr copy = _map;
+			for (const auto& i : copy)
+			{
+				update_(i.first, i.second);
+			}
+		}
+		else
+		{
+			for (const auto& i : shoal->_map)
+			{
+				update_(i.first, i.second);
+			}
 		}
 	}
 	else
@@ -8267,9 +8410,16 @@ inline void Shoal::self_subtract_(const Thing::Ptr other)
 	Shoal* const shoal = dynamic_<Shoal>(other);
 	if (shoal)
 	{
-		for (const auto& i : shoal->_map)
+		if (&_map == &shoal->_map)
 		{
-			erase_(i.first);
+			clear_();
+		}
+		else
+		{
+			for (const auto& i : shoal->_map)
+			{
+				erase_(i.first);
+			}
 		}
 	}
 	else
@@ -8619,6 +8769,11 @@ inline void Herd::replace_links_(const Thing::Ptr shoal)
 		replacement.insert(sho->at_(i));
 	}
 	_set.swap(replacement);
+}
+
+inline const Thing::Ptr Herd::size(const Thing::Ptr ignore) const
+{
+	return Int64::mut_(size_());
 }
 
 //======================================================================
