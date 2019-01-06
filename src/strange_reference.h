@@ -151,7 +151,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr reference)
 		{
-			make_<Iterator>(reference);
+			return make_<Iterator>(reference);
 		}
 
 		virtual inline const Ptr copy_() const override

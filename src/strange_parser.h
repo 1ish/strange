@@ -169,6 +169,7 @@ private:
 			Reference* const smt = static_<Reference>(statement);
 			if (first)
 			{
+				_next_();
 				if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 				{
 					flk->push_back_(tok->at_(4));
@@ -176,7 +177,6 @@ private:
 				}
 				else if (tag == 'N') // name
 				{
-					_next_();
 					if (symbol->is_("lambda_") || symbol->is_("function_"))
 					{
 						if (_statement_(scope, shoal, flock, true, symbol->is_("lambda_"))) // parameters/capture
@@ -294,7 +294,6 @@ private:
 
 						flk->push_back_(Expression::fin_(invoke, nested));
 						_wrap_(at, flock);
-						_next_();
 						cont = _at_(scope, shoal, flock);
 						result = Expression::fin_(invoke, flock);
 					}
@@ -306,7 +305,6 @@ private:
 						_wrap_(symbol, nested);
 
 						flk->push_back_(Expression::fin_(invoke, nested));
-						_next_();
 						_dot_(scope, shoal, statement, flock);
 						result = Expression::fin_(smt->get_(), flock);
 					}
@@ -315,7 +313,6 @@ private:
 						flk->push_back_(Expression::fin_(local, Flock::mut_())); // local
 						_wrap_(at, flock);
 						_wrap_(sym_("&"), flock);
-						_next_();
 						result = Expression::fin_(invoke, flock);
 					}
 					else if (symbol->is_("^^")) // iterator next
@@ -327,17 +324,14 @@ private:
 
 						flk->push_back_(Expression::fin_(invoke, nested));
 						_wrap_(sym_("next"), flock);
-						_next_();
 						result = Expression::fin_(invoke, flock);
 					}
 					else if (symbol->is_("@@")) // local
 					{
-						_next_();
 						result = Expression::fin_(local, Flock::mut_()); // local
 					}
 					else if (symbol->is_("$$") || symbol->is_("**")) // shared/relative scope
 					{
-						_next_();
 						result = _scope_(scope, shoal, flock, symbol->is_("**"));
 					}
 					else if (symbol->is_("<>")) // container
@@ -358,19 +352,16 @@ private:
 					}
 					else if (symbol->is_("(")) // block
 					{
-						_next_();
 						_list_(scope, shoal, flock, symbol, sym_(")"));
 						result = Expression::fin_(sym_("block_"), flock);
 					}
 					else if (symbol->is_("[")) // flock
 					{
-						_next_();
 						_list_(scope, shoal, flock, symbol, sym_("]"));
 						result = Expression::fin_(sym_("flock_"), flock);
 					}
 					else if (symbol->is_("{")) // shoal or herd
 					{
-						_next_();
 						if (_map_(scope, shoal, flock))
 						{
 							result = Expression::fin_(sym_("shoal_"), flock);
@@ -382,7 +373,6 @@ private:
 					}
 					else if (symbol->is_("<<")) // iterator
 					{
-						_next_();
 						_list_(scope, shoal, flock, symbol, sym_(">>"));
 						result = Expression::fin_(sym_("flock_iterator_"), flock);
 					}

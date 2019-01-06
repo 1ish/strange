@@ -2174,7 +2174,7 @@ public:
 
 		inline const Ptr at(const Ptr it) const
 		{
-			return at(it->next_());
+			return at_(it->next_());
 		}
 
 	private:
@@ -7743,6 +7743,10 @@ public:
 		: Mutable{}
 		, _stream{ stream }
 	{
+		if (!_stream->good())
+		{
+			throw sym_("bad stream");
+		}
 	}
 
 	static inline const Ptr mut_(std::iostream* const stream)
@@ -7766,7 +7770,8 @@ public:
 		{
 			return mut_();
 		}
-		const Lake* const lake = dynamic_<Lake>(str->invoke_("to_lake"));
+		const Ptr str_to_lake = str->invoke_("to_lake");
+		const Lake* const lake = dynamic_<Lake>(str_to_lake);
 		if (!lake)
 		{
 			return mut_();
@@ -7859,7 +7864,8 @@ public:
 
 	inline void write_(const Ptr ptr)
 	{
-		Lake* const lake = dynamic_<Lake>(ptr->invoke_("to_lake"));
+		const Ptr ptr_to_lake = ptr->invoke_("to_lake");
+		Lake* const lake = dynamic_<Lake>(ptr_to_lake);
 		if (lake)
 		{
 			write_(lake->get_());
@@ -8040,7 +8046,8 @@ inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr i
 
 inline void Thing::log_(const Thing::Ptr ptr)
 {
-	const Lake* const lake = dynamic_<Lake>(ptr->invoke_("to_lake"));
+	const Ptr ptr_to_lake = ptr->invoke_("to_lake");
+	const Lake* const lake = dynamic_<Lake>(ptr_to_lake);
 	if (lake)
 	{
 		log_(lake->get_());
@@ -8117,7 +8124,8 @@ inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr river)
 
 inline void Serializable::to_river_(const Thing::Ptr river) const
 {
-	Lake* const lake = Thing::dynamic_<Lake>(to_lake_());
+	const Thing::Ptr to_lake = to_lake_();
+	Lake* const lake = Thing::dynamic_<Lake>(to_lake);
 	if (lake)
 	{
 		lake->to_river_(river);

@@ -145,14 +145,16 @@ public:
 				}
 				else
 				{
-					Int8* const byte1 = dynamic_<Int8>(_river->invoke_("get"));
+					const Ptr river_get = _river->invoke_("get");
+					Int8* const byte1 = dynamic_<Int8>(river_get);
 					if (!byte1)
 					{
 						break;
 					}
 					char1 = byte1->get_();
 				}
-				Int8* const byte2 = eof_() ? 0 : dynamic_<Int8>(_river->invoke_("peek"));
+				const Ptr river_peek = _river->invoke_("peek");
+				Int8* const byte2 = eof_() ? 0 : dynamic_<Int8>(river_peek);
 				char2 = byte2 ? byte2->get_() : 0;
 			}
 

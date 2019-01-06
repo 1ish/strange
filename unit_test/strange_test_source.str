@@ -1,0 +1,3 @@
+(
+	$$strange::Thing::log["hello world\n"]
+)

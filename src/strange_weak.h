@@ -156,7 +156,7 @@ private:
 
 		static inline const Ptr mut_(const Ptr weak)
 		{
-			make_<Iterator>(weak);
+			return make_<Iterator>(weak);
 		}
 
 		virtual inline const Ptr copy_() const override
