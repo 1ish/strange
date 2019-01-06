@@ -73,24 +73,24 @@ public:
 		return PUB;
 	}
 
-	inline const bool eof_()
+	inline const bool good_()
 	{
 		Tokenizer* const tokenizer = dynamic_<Tokenizer>(_tokenizer);
 		if (tokenizer)
 		{
-			return tokenizer->eof_();
+			return tokenizer->good_();
 		}
-		return !_tokenizer->invoke_("eof")->is_nothing_();
+		return !_tokenizer->invoke_("good")->is_nothing_();
 	}
 
-	inline const Ptr eof(const Ptr ignore)
+	inline const Ptr good(const Ptr ignore)
 	{
 		Tokenizer* const tokenizer = dynamic_<Tokenizer>(_tokenizer);
 		if (tokenizer)
 		{
-			return tokenizer->eof(ignore);
+			return tokenizer->good(ignore);
 		}
-		return _tokenizer->invoke_("eof");
+		return _tokenizer->invoke_("good");
 	}
 
 	inline const Ptr parse_()
@@ -656,7 +656,7 @@ private:
 		const Ptr token = _token_();
 		if (token->is_("."))
 		{
-			log_("parser error: dot eof");
+			log_("parser error: dot stop");
 			return;
 		}
 		Flock* const flk = static_<Flock>(flock);
@@ -1152,7 +1152,7 @@ private:
 		const Ptr token = _token_();
 		if (token->is_("."))
 		{
-			log_("parser error: at eof");
+			log_("parser error: at stop");
 			return false; // break
 		}
 		Flock* const flk = static_<Flock>(flock);

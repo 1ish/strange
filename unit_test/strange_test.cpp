@@ -19,8 +19,8 @@ TEST(StrangeRiver, Get) {
 	const Ptr river = River::mut_(test_dir + "strange_test_source.str", true);
 	River* const r = Thing::dynamic_<River>(river);
 	ASSERT_NE(r, (River*)(0));
-	EXPECT_EQ(r->eof_(), false);
-	while (!r->eof_())
+	EXPECT_EQ(r->good_(), true);
+	while (r->good_())
 	{
 		const int c = r->get_();
 		std::cout << "got:" << c << std::endl; //TODO got: -1
@@ -32,7 +32,7 @@ TEST(StrangeTokenizer, Next) {
 	const Ptr tokenizer = Tokenizer::mut_(river);
 	Tokenizer* const t = Thing::dynamic_<Tokenizer>(tokenizer);
 	ASSERT_NE(t, (Tokenizer*)(0));
-	EXPECT_EQ(t->eof_(), false);
+	EXPECT_EQ(t->good_(), true);
 	for (Ptr n = tokenizer->next_(); !n->is_("."); n = tokenizer->next_())
 	{
 		Flock* const flock = Thing::dynamic_<Flock>(n);

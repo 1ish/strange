@@ -67,24 +67,24 @@ public:
 		return PUB;
 	}
 
-	inline const bool eof_()
+	inline const bool good_()
 	{
 		River* const river = dynamic_<River>(_river);
 		if (river)
 		{
-			return river->eof_();
+			return river->good_();
 		}
-		return !_river->invoke_("eof")->is_nothing_();
+		return !_river->invoke_("good")->is_nothing_();
 	}
 
-	inline const Ptr eof(const Ptr ignore)
+	inline const Ptr good(const Ptr ignore)
 	{
 		River* const river = dynamic_<River>(_river);
 		if (river)
 		{
-			return river->eof(ignore);
+			return river->good(ignore);
 		}
-		return _river->invoke_("eof");
+		return _river->invoke_("good");
 	}
 
 	virtual inline const Ptr next_() override
@@ -107,7 +107,7 @@ public:
 			char char2;
 			if (river)
 			{
-				if (river->eof_())
+				if (!river->good_())
 				{
 					break;
 				}
@@ -125,11 +125,11 @@ public:
 				{
 					char1 = river->get_();
 				}
-				char2 = river->eof_() ? 0 : river->peek_();
+				char2 = !river->good_() ? 0 : river->peek_();
 			}
 			else
 			{
-				if (eof_())
+				if (!good_())
 				{
 					break;
 				}
@@ -154,7 +154,7 @@ public:
 					char1 = byte1->get_();
 				}
 				const Ptr river_peek = _river->invoke_("peek");
-				Int8* const byte2 = eof_() ? 0 : dynamic_<Int8>(river_peek);
+				Int8* const byte2 = !good_() ? 0 : dynamic_<Int8>(river_peek);
 				char2 = byte2 ? byte2->get_() : 0;
 			}
 

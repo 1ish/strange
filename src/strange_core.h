@@ -7794,7 +7794,7 @@ public:
 			shoal->update_("push_back", Member<River>::fin_(&River::push_back, "thing"));
 			shoal->update_("write", Member<River>::fin_(&River::write, "thing"));
 			shoal->update_("pop_front", Member<River>::fin_(&River::pop_front));
-			shoal->update_("eof", Const<River>::fin_(&River::eof));
+			shoal->update_("good", Const<River>::fin_(&River::good));
 			shoal->update_("get", Member<River>::fin_(&River::get));
 			shoal->update_("peek", Member<River>::fin_(&River::peek));
 			shoal->finalize_();
@@ -7914,14 +7914,14 @@ public:
 		return static_<T>(T::lak_(read_(int64_t(sizeof(T::D)))))->get_();
 	}
 
-	inline const bool eof_() const
+	inline const bool good_() const
 	{
-		return _stream->eof();
+		return _stream->good();
 	}
 
-	inline const Ptr eof(const Ptr ignore) const
+	inline const Ptr good(const Ptr ignore) const
 	{
-		return boolean_(eof_());
+		return boolean_(good_());
 	}
 
 	inline const int get_()
