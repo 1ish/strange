@@ -7743,10 +7743,6 @@ public:
 		: Mutable{}
 		, _stream{ stream }
 	{
-		if (!_stream->good())
-		{
-			throw sym_("bad stream");
-		}
 	}
 
 	static inline const Ptr mut_(std::iostream* const stream)

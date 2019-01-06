@@ -23,7 +23,11 @@ TEST(StrangeRiver, Get) {
 	while (r->good_())
 	{
 		const int c = r->get_();
-		std::cout << "got:" << c << std::endl; //TODO got: -1
+		if (!r->good_())
+		{
+			break;
+		}
+		std::cout << "got:" << c << std::endl;
 	}
 }
 

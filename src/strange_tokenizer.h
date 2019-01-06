@@ -124,8 +124,16 @@ public:
 				else
 				{
 					char1 = river->get_();
+					if (!river->good_())
+					{
+						break;
+					}
 				}
-				char2 = !river->good_() ? 0 : river->peek_();
+				char2 = river->good_() ? river->peek_() : 0;
+				if (!river->good_())
+				{
+					char2 = 0;
+				}
 			}
 			else
 			{
@@ -146,6 +154,10 @@ public:
 				else
 				{
 					const Ptr river_get = _river->invoke_("get");
+					if (!good_())
+					{
+						break;
+					}
 					Int8* const byte1 = dynamic_<Int8>(river_get);
 					if (!byte1)
 					{
@@ -154,7 +166,7 @@ public:
 					char1 = byte1->get_();
 				}
 				const Ptr river_peek = _river->invoke_("peek");
-				Int8* const byte2 = !good_() ? 0 : dynamic_<Int8>(river_peek);
+				Int8* const byte2 = good_() ? dynamic_<Int8>(river_peek) : 0;
 				char2 = byte2 ? byte2->get_() : 0;
 			}
 
