@@ -201,25 +201,25 @@ public:
 			{
 				switch (char1)
 				{
-				case '\a':
+				case 'a':
 					token += '\a';
 					break;
-				case '\b':
+				case 'b':
 					token += '\b';
 					break;
-				case '\f':
+				case 'f':
 					token += '\f';
 					break;
-				case '\n':
+				case 'n':
 					token += '\n';
 					break;
-				case '\r':
+				case 'r':
 					token += '\r';
 					break;
-				case '\t':
+				case 't':
 					token += '\t';
 					break;
-				case '\v':
+				case 'v':
 					token += '\v';
 					break;
 				default:
