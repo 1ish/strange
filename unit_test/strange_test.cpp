@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 
-#include <strange.h>
+#include "../src/strange.h"
 
 TEST(TestCaseName, TestName) {
   EXPECT_EQ(1, 1);
