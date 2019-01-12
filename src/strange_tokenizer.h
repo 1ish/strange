@@ -38,18 +38,18 @@ class Tokenizer : public Mutable
 //----------------------------------------------------------------------
 {
 public:
-	inline Tokenizer(const Ptr river)
+	inline Tokenizer(const Ptr& river)
 		: Mutable{}
 		, _river{ river }
 	{
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr& it)
 	{
 		return mut_(it->next_());
 	}
 
-	static inline const Ptr mut_(const Ptr river)
+	static inline const Ptr mut_(const Ptr& river)
 	{
 		return make_<Tokenizer>(river);
 	}
@@ -77,7 +77,7 @@ public:
 		return !_river->invoke_("good")->is_nothing_();
 	}
 
-	inline const Ptr good(const Ptr ignore)
+	inline const Ptr good(const Ptr& ignore)
 	{
 		River* const river = dynamic_<River>(_river);
 		if (river)

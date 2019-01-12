@@ -38,18 +38,18 @@ class Weak : public Mutable
 //----------------------------------------------------------------------
 {
 public:
-	inline Weak(const Ptr ptr)
+	inline Weak(const Ptr& ptr)
 		: Mutable{}
 		, _ptr{ ptr }
 	{
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr& it)
 	{
 		return mut_(it->next_());
 	}
 
-	static inline const Ptr mut_(const Ptr ptr)
+	static inline const Ptr mut_(const Ptr& ptr)
 	{
 		return make_<Weak>(ptr);
 	}
@@ -84,18 +84,18 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Weak::mut", Static::fin_(&Weak::mut, "thing"));
 	}
 
-	inline void set_(const Ptr ptr)
+	inline void set_(const Ptr& ptr)
 	{
 		_ptr = ptr;
 	}
 
-	inline const Ptr set(const Ptr it)
+	inline const Ptr set(const Ptr& it)
 	{
 		const Ptr ptr = it->next_();
 		set_(ptr);
@@ -112,7 +112,7 @@ public:
 		return nothing_();
 	}
 
-	inline const Ptr get(const Ptr ignore) const
+	inline const Ptr get(const Ptr& ignore) const
 	{
 		return get_();
 	}
@@ -143,18 +143,18 @@ private:
 	class Iterator : public Mutable
 	{
 	public:
-		inline Iterator(const Ptr weak)
+		inline Iterator(const Ptr& weak)
 			: Mutable{}
 			, _weak{ weak }
 		{
 		}
 
-		static inline const Ptr mut(const Ptr it)
+		static inline const Ptr mut(const Ptr& it)
 		{
 			return mut_(it->next_());
 		}
 
-		static inline const Ptr mut_(const Ptr weak)
+		static inline const Ptr mut_(const Ptr& weak)
 		{
 			return make_<Iterator>(weak);
 		}

@@ -38,7 +38,7 @@ class Fence : public Mutable
 //----------------------------------------------------------------------
 {
 public:
-	inline Fence(const Ptr ptr)
+	inline Fence(const Ptr& ptr)
 		: Mutable{}
 		, _fence{}
 		, _ptr{ ptr }
@@ -46,12 +46,12 @@ public:
 		_fence.store(false, std::memory_order_release);
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr& it)
 	{
 		return mut_(it->next_());
 	}
 
-	static inline const Ptr mut_(const Ptr ptr)
+	static inline const Ptr mut_(const Ptr& ptr)
 	{
 		return make_<Fence>(ptr);
 	}
@@ -76,13 +76,13 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Fence::mut", Static::fin_(&Fence::mut, "thing"));
 	}
 
-	inline const bool give_(const Ptr ptr)
+	inline const bool give_(const Ptr& ptr)
 	{
 		if (_fence.load(std::memory_order_acquire))
 		{
@@ -93,7 +93,7 @@ public:
 		return true;
 	}
 
-	inline const Ptr give(const Ptr it)
+	inline const Ptr give(const Ptr& it)
 	{
 		return boolean_(give_(it->next_()));
 	}
@@ -108,7 +108,7 @@ public:
 		return nothing_();
 	}
 
-	inline const Ptr take(const Ptr ignore)
+	inline const Ptr take(const Ptr& ignore)
 	{
 		return take_();
 	}

@@ -87,89 +87,91 @@ public:
 
 	// public static utility functions
 	template <typename T>
-	static inline T* const static_(const Ptr ptr)
+	static inline T* const static_(const Ptr& ptr)
 	{
 		return static_cast<T*>(ptr.get());
 	}
 
 	template <typename T>
-	static inline T* const dynamic_(const Ptr ptr)
+	static inline T* const dynamic_(const Ptr& ptr)
 	{
 		return dynamic_cast<T*>(ptr.get());
 	}
 
-	static inline const Ptr boolean_(const bool value)
+	static inline const Ptr& boolean_(const bool value)
 	{
 		return value ? one_() : nothing_();
 	}
 
-	static inline const Ptr boolean_(const Ptr ptr)
+	static inline const Ptr& boolean_(const Ptr& ptr)
 	{
 		return boolean_(!ptr->is_nothing_());
 	}
 
-	static inline const Ptr boolean(const Ptr it)
+	static inline const Ptr boolean(const Ptr& it)
 	{
 		return boolean_(it->next_());
 	}
 
-	template <typename F>
-	static inline void log_(F&& message)
+	static inline void log_(const std::string& message)
 	{
-		std::cout << std::forward<F>(message);
+		std::cout << message;
 	}
 
-	static inline void log_(const Ptr ptr);
+	static inline void log_(const Ptr& ptr);
 
-	static inline const Ptr log(const Ptr it)
+	static inline const Ptr log(const Ptr& it)
 	{
-		log_(it->next_());
+		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		{
+			log_(i);
+		}
 		return nothing_();
 	}
 
 	template <typename... Args>
 	static inline const Ptr call_(Args&&... args);
 
-	static inline const Ptr call(const Ptr it);
+	static inline const Ptr call(const Ptr& it);
 
 	// public static factory functions
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr& shoal);
 
-	static inline const Ptr shared_();
+	static inline const Ptr& shared_();
 
 	template <typename F>
 	static inline const Ptr sym_(F&& symbol);
 
 	// public static symbols
-	static inline const Ptr nothing_()
+	static inline const Ptr& nothing_()
 	{
 		static const Ptr NOTHING = sym_("");
 		return NOTHING;
 	}
 
-	static inline const Ptr nothing(const Ptr ignore)
+	static inline const Ptr nothing(const Ptr& ignore)
 	{
 		return nothing_();
 	}
 
-	static inline const Ptr one_()
+	static inline const Ptr& one_()
 	{
 		static const Ptr ONE = sym_("1");
 		return ONE;
 	}
 
-	static inline const Ptr one(const Ptr ignore)
+	static inline const Ptr one(const Ptr& ignore)
 	{
 		return one_();
 	}
 
-	static inline const Ptr stop_()
+	static inline const Ptr& stop_()
 	{
 		static const Ptr STOP = sym_(".");
 		return STOP;
 	}
 
-	static inline const Ptr stop(const Ptr ignore)
+	static inline const Ptr stop(const Ptr& ignore)
 	{
 		return stop_();
 	}
@@ -184,7 +186,7 @@ public:
 	// public pure virtual member functions and adapters
 	virtual inline const Ptr type_() const = 0;
 
-	inline const Ptr type(const Ptr ignore) const
+	inline const Ptr type(const Ptr& ignore) const
 	{
 		return type_();
 	}
@@ -195,7 +197,7 @@ public:
 		_finalized_().store(true, std::memory_order_release);
 	}
 
-	inline const Ptr finalize(const Ptr ignore)
+	inline const Ptr finalize(const Ptr& ignore)
 	{
 		finalize_();
 		return nothing_();
@@ -206,7 +208,7 @@ public:
 		return _finalized_().load(std::memory_order_acquire);
 	}
 
-	inline const Ptr finalized(const Ptr ignore) const
+	inline const Ptr finalized(const Ptr& ignore) const
 	{
 		return boolean_(finalized_());
 	}
@@ -216,7 +218,7 @@ public:
 		finalize_();
 	}
 
-	inline const Ptr freeze(const Ptr ignore)
+	inline const Ptr freeze(const Ptr& ignore)
 	{
 		freeze_();
 		return nothing_();
@@ -227,7 +229,7 @@ public:
 		return finalized_();
 	}
 
-	inline const Ptr frozen(const Ptr ignore) const
+	inline const Ptr frozen(const Ptr& ignore) const
 	{
 		return boolean_(frozen_());
 	}
@@ -247,7 +249,7 @@ public:
 		return me_();
 	}
 
-	inline const Ptr copy(const Ptr ignore) const
+	inline const Ptr copy(const Ptr& ignore) const
 	{
 		return copy_();
 	}
@@ -257,7 +259,7 @@ public:
 		return copy_();
 	}
 
-	inline const Ptr clone(const Ptr ignore) const
+	inline const Ptr clone(const Ptr& ignore) const
 	{
 		return clone_();
 	}
@@ -271,14 +273,14 @@ public:
 		return copy_();
 	}
 
-	inline const Ptr replicate(const Ptr ignore) const
+	inline const Ptr replicate(const Ptr& ignore) const
 	{
 		return replicate_();
 	}
 
 	virtual inline const Ptr iterator_() const;
 
-	inline const Ptr iterator(const Ptr ignore) const
+	inline const Ptr iterator(const Ptr& ignore) const
 	{
 		return iterator_();
 	}
@@ -288,7 +290,7 @@ public:
 		return stop_();
 	}
 
-	inline const Ptr next(const Ptr ignore)
+	inline const Ptr next(const Ptr& ignore)
 	{
 		return next_();
 	}
@@ -298,24 +300,24 @@ public:
 		return std::hash<const Thing*>{}(this);
 	}
 
-	inline const Ptr hash(const Ptr ignore) const;
+	inline const Ptr hash(const Ptr& ignore) const;
 
-	virtual inline const bool same_(const Ptr other) const
+	virtual inline const bool same_(const Ptr& other) const
 	{
 		return identical_(other);
 	}
 
-	inline const Ptr same(const Ptr it) const
+	inline const Ptr same(const Ptr& it) const
 	{
 		return boolean_(same_(it->next_()));
 	}
 
-	inline const Ptr different(const Ptr it) const
+	inline const Ptr different(const Ptr& it) const
 	{
 		return boolean_(!same_(it->next_()));
 	}
 
-	virtual inline const Ptr visit(const Ptr it)
+	virtual inline const Ptr visit(const Ptr& it)
 	{
 		const Ptr visitor = it->next_();
 		return visitor->invoke(it);
@@ -323,14 +325,14 @@ public:
 
 	virtual inline const Ptr cats_() const;
 
-	inline const Ptr cats(const Ptr ignore) const
+	inline const Ptr cats(const Ptr& ignore) const
 	{
 		return cats_();
 	}
 
 	virtual inline const Ptr pub_() const;
 
-	inline const Ptr pub(const Ptr ignore) const
+	inline const Ptr pub(const Ptr& ignore) const
 	{
 		return pub_();
 	}
@@ -340,7 +342,7 @@ public:
 		return nothing_();
 	}
 
-	virtual inline const Ptr feeder(const Ptr eater) const
+	virtual inline const Ptr feeder(const Ptr& eater) const
 	{
 		return nothing_();
 	}
@@ -349,7 +351,7 @@ public:
 	template <typename... Args>
 	inline const Ptr invoke_(Args&&... args);
 
-	inline const Ptr invoke(const Ptr it)
+	inline const Ptr invoke(const Ptr& it)
 	{
 		return operator()(this, it);
 	}
@@ -359,29 +361,28 @@ public:
 		return int64_t(this);
 	}
 
-	inline const Ptr identity(const Ptr ignore) const;
+	inline const Ptr identity(const Ptr& ignore) const;
 
-	inline const bool identical_(const Ptr other) const
+	inline const bool identical_(const Ptr& other) const
 	{
 		return identity_() == other->identity_();
 	}
 
-	inline const Ptr identical(const Ptr it) const
+	inline const Ptr identical(const Ptr& it) const
 	{
 		return boolean_(identical_(it->next_()));
 	}
 
-	template <typename F>
-	inline const bool is_(F&& symbol) const;
+	inline const bool is_(const std::string& symbol) const;
 
-	inline const bool is_(const Ptr symbol) const;
+	inline const bool is_(const Ptr& symbol) const;
 
-	inline const Ptr is(const Ptr it) const
+	inline const Ptr is(const Ptr& it) const
 	{
 		return boolean_(is_(it->next_()));
 	}
 
-	inline const Ptr is_not(const Ptr it) const
+	inline const Ptr is_not(const Ptr& it) const
 	{
 		return boolean_(!is_(it->next_()));
 	}
@@ -391,17 +392,17 @@ public:
 		return is_("");
 	}
 
-	inline const Ptr is_nothing(const Ptr ignore) const
+	inline const Ptr is_nothing(const Ptr& ignore) const
 	{
 		return boolean_(is_nothing_());
 	}
 
-	inline const Ptr is_not_nothing(const Ptr ignore) const
+	inline const Ptr is_not_nothing(const Ptr& ignore) const
 	{
 		return boolean_(!is_nothing_());
 	}
 
-	inline const Ptr and_op(const Ptr it) const
+	inline const Ptr and_op(const Ptr& it) const
 	{
 		if (is_nothing_())
 		{
@@ -417,7 +418,7 @@ public:
 		return one_();
 	}
 	
-	inline const Ptr or_op(const Ptr it) const
+	inline const Ptr or_op(const Ptr& it) const
 	{
 		if (!is_nothing_())
 		{
@@ -433,7 +434,7 @@ public:
 		return nothing_();
 	}
 
-	inline const Ptr xor_op(const Ptr it) const
+	inline const Ptr xor_op(const Ptr& it) const
 	{
 		int64_t count = is_nothing_() ? 0 : 1;
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
@@ -446,7 +447,7 @@ public:
 		return boolean_(count == 1);
 	}
 
-	inline const Ptr nand_op(const Ptr it) const
+	inline const Ptr nand_op(const Ptr& it) const
 	{
 		if (is_nothing_())
 		{
@@ -462,7 +463,7 @@ public:
 		return nothing_();
 	}
 
-	inline const Ptr nor_op(const Ptr it) const
+	inline const Ptr nor_op(const Ptr& it) const
 	{
 		if (!is_nothing_())
 		{
@@ -478,7 +479,7 @@ public:
 		return one_();
 	}
 
-	inline const Ptr xnor_op(const Ptr it) const
+	inline const Ptr xnor_op(const Ptr& it) const
 	{
 		int64_t count = is_nothing_() ? 0 : 1;
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
@@ -493,12 +494,12 @@ public:
 
 protected:
 	// protected static utility functions
-	static inline const Ptr operate_(Thing* const thing, const Ptr member, const Ptr it)
+	static inline const Ptr operate_(Thing* const thing, const Ptr& member, const Ptr& it)
 	{
 		return member->operator()(thing, it);
 	}
 
-	static inline const Ptr operate_(Thing* const thing, const Ptr member)
+	static inline const Ptr operate_(Thing* const thing, const Ptr& member)
 	{
 		return operate_(thing, member, nothing_());
 	}
@@ -523,7 +524,7 @@ protected:
 	Thing() = default;
 
 	// protected impure virtual member functions and adapters
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it);
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it);
 
 private:
 	WeakPtr _me;
@@ -567,7 +568,7 @@ public:
 	}
 
 	template <typename... Args>
-	static inline void variadic_(std::vector<Ptr>& vec, const Ptr ptr, Args&&... args)
+	static inline void variadic_(std::vector<Ptr>& vec, const Ptr& ptr, Args&&... args)
 	{
 		vec.push_back(ptr);
 		variadic_(vec, std::forward<Args>(args)...);
@@ -582,47 +583,47 @@ public:
 	// public pure virtual member functions and adapters
 	virtual inline const Thing::Ptr to_lake_() const = 0;
 
-	inline const Thing::Ptr to_lake(const Thing::Ptr ignore) const
+	inline const Thing::Ptr to_lake(const Thing::Ptr& ignore) const
 	{
 		return to_lake_();
 	}
 
 	// public impure virtual member functions and adapters
 
-	virtual inline void from_lake_(const Thing::Ptr lake)
+	virtual inline void from_lake_(const Thing::Ptr& lake)
 	{
 	}
 
-	inline const Thing::Ptr from_lake(const Thing::Ptr it)
+	inline const Thing::Ptr from_lake(const Thing::Ptr& it)
 	{
 		from_lake_(it->next_());
 		return Thing::nothing_();
 	}
 
-	virtual inline void to_river_(const Thing::Ptr river) const;
+	virtual inline void to_river_(const Thing::Ptr& river) const;
 
-	inline const Thing::Ptr to_river(const Thing::Ptr it) const
+	inline const Thing::Ptr to_river(const Thing::Ptr& it) const
 	{
 		const Thing::Ptr river = it->next_();
 		to_river_(river);
 		return river;
 	}
 
-	virtual inline void from_river_(const Thing::Ptr river);
+	virtual inline void from_river_(const Thing::Ptr& river);
 
-	inline const Thing::Ptr from_river(const Thing::Ptr it)
+	inline const Thing::Ptr from_river(const Thing::Ptr& it)
 	{
 		const Thing::Ptr river = it->next_();
 		from_river_(river);
 		return river;
 	}
 
-	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
+	virtual inline void to_river_with_links_(const Thing::Ptr& shoal, const Thing::Ptr& river) const
 	{
 		to_river_(river);
 	}
 
-	inline const Thing::Ptr to_river_with_links(const Thing::Ptr it)
+	inline const Thing::Ptr to_river_with_links(const Thing::Ptr& it)
 	{
 		const Thing::Ptr shoal = it->next_();
 		const Thing::Ptr river = it->next_();
@@ -630,21 +631,21 @@ public:
 		return river;
 	}
 
-	virtual inline void from_river_with_links_(const Thing::Ptr river)
+	virtual inline void from_river_with_links_(const Thing::Ptr& river)
 	{
 		from_river_(river);
 	}
 
-	inline const Thing::Ptr from_river_with_links(const Thing::Ptr it)
+	inline const Thing::Ptr from_river_with_links(const Thing::Ptr& it)
 	{
 		const Thing::Ptr river = it->next_();
 		from_river_with_links_(river);
 		return river;
 	}
 
-	static inline void serialize_(const Thing::Ptr thing, const Thing::Ptr river);
+	static inline void serialize_(const Thing::Ptr& thing, const Thing::Ptr& river);
 
-	static inline const Thing::Ptr serialize(const Thing::Ptr it)
+	static inline const Thing::Ptr serialize(const Thing::Ptr& it)
 	{
 		const Thing::Ptr thing = it->next_();
 		const Thing::Ptr river = it->next_();
@@ -652,19 +653,19 @@ public:
 		return river;
 	}
 
-	virtual inline void replace_links_(const Thing::Ptr shoal)
+	virtual inline void replace_links_(const Thing::Ptr& shoal)
 	{
 	}
 
-	inline const Thing::Ptr replace_links(const Thing::Ptr it)
+	inline const Thing::Ptr replace_links(const Thing::Ptr& it)
 	{
 		replace_links_(it->next_());
 		return Thing::nothing_();
 	}
 
-	static inline const Thing::Ptr deserialize_(const Thing::Ptr river);
+	static inline const Thing::Ptr deserialize_(const Thing::Ptr& river);
 
-	static inline const Thing::Ptr deserialize(const Thing::Ptr it)
+	static inline const Thing::Ptr deserialize(const Thing::Ptr& it)
 	{
 		return deserialize_(it->next_());
 	}
@@ -672,14 +673,14 @@ public:
 	// public non-virtual member functions and adapters
 	inline const Thing::Ptr to_lake_via_river_() const;
 
-	inline const Thing::Ptr to_lake_via_river(const Thing::Ptr ignore) const
+	inline const Thing::Ptr to_lake_via_river(const Thing::Ptr& ignore) const
 	{
 		return to_lake_via_river_();
 	}
 
-	inline void from_lake_via_river_(const Thing::Ptr lake);
+	inline void from_lake_via_river_(const Thing::Ptr& lake);
 
-	inline const Thing::Ptr from_lake_via_river(const Thing::Ptr it)
+	inline const Thing::Ptr from_lake_via_river(const Thing::Ptr& it)
 	{
 		from_lake_via_river_(it->next_());
 		return Thing::nothing_();
@@ -705,7 +706,7 @@ public:
 		return _hash;
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		return other->is_(_symbol);
 	}
@@ -721,28 +722,28 @@ public:
 		return fake_<Symbol>(std::forward<F>(symbol));
 	}
 
-	static inline const Ptr lak_(const Ptr lake);
+	static inline const Ptr lak_(const Ptr& lake);
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river);
+	static inline const Ptr riv_(const Ptr& river);
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river);
+	static inline const Ptr rwl_(const Ptr& river);
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
 
-	static inline void share_(const Ptr shoal);
+	static inline void share_(const Ptr& shoal);
 
 	virtual inline const Ptr to_lake_() const override;
 
@@ -756,15 +757,14 @@ public:
 
 	virtual inline const Ptr pub_() const override;
 
-	template <typename F>
-	inline const Ptr add_(F&& s) const
+	inline const Ptr add_(const std::string& s) const
 	{
-		return fin_(_symbol + std::forward<F>(s));
+		return fin_(_symbol + s);
 	}
 
-	inline const Ptr add_(const Ptr other) const;
+	inline const Ptr add_(const Ptr& other) const;
 
-	inline const Ptr add(const Ptr it) const
+	inline const Ptr add(const Ptr& it) const
 	{
 		return add_(it->next_());
 	}
@@ -778,74 +778,70 @@ public:
 		return 0;
 	}
 
-	inline const char at_(const Ptr index) const;
+	inline const char at_(const Ptr& index) const;
 
-	inline const Ptr at(const Ptr it) const;
+	inline const Ptr at(const Ptr& it) const;
 
-	template <typename F>
-	inline const bool less_than_(F&& s) const
+	inline const bool less_than_(const std::string& s) const
 	{
-		return symbol_() < std::forward<F>(s);
+		return symbol_() < s;
 	}
 
-	inline const bool less_than_(const Ptr other) const
+	inline const bool less_than_(const Ptr& other) const
 	{
 		Symbol* const symbol = dynamic_<Symbol>(other);
 		return symbol && less_than_(symbol->symbol_());
 	}
 
-	inline const Ptr less_than(const Ptr it) const
+	inline const Ptr less_than(const Ptr& it) const
 	{
 		return boolean_(less_than_(it->next_()));
 	}
 
-	template <typename F>
-	inline const bool greater_than_(F&& s) const
+	inline const bool greater_than_(const std::string& s) const
 	{
-		return symbol_() > std::forward<F>(s);
+		return symbol_() > s;
 	}
 
-	inline const bool greater_than_(const Ptr other) const
+	inline const bool greater_than_(const Ptr& other) const
 	{
 		Symbol* const symbol = dynamic_<Symbol>(other);
 		return symbol && greater_than_(symbol->symbol_());
 	}
 
-	inline const Ptr greater_than(const Ptr it) const
+	inline const Ptr greater_than(const Ptr& it) const
 	{
 		return boolean_(greater_than_(it->next_()));
 	}
 
-	template <typename F>
-	inline const bool less_or_equal_(F&& s) const
+	inline const bool less_or_equal_(const std::string& s) const
 	{
-		return symbol_() <= std::forward<F>(s);
+		return symbol_() <= s;
 	}
 
-	inline const bool less_or_equal_(const Ptr other) const
+	inline const bool less_or_equal_(const Ptr& other) const
 	{
 		Symbol* const symbol = dynamic_<Symbol>(other);
 		return symbol && less_or_equal_(symbol->symbol_());
 	}
 
-	inline const Ptr less_or_equal(const Ptr it) const
+	inline const Ptr less_or_equal(const Ptr& it) const
 	{
 		return boolean_(less_or_equal_(it->next_()));
 	}
 
-	template <typename F>
-	inline const bool greater_or_equal_(F&& s) const
+	inline const bool greater_or_equal_(const std::string& s) const
 	{
-		return symbol_() >= std::forward<F>(s);
+		return symbol_() >= s;
 	}
 
-	inline const bool greater_or_equal_(const Ptr other) const
+	inline const bool greater_or_equal_(const Ptr& other) const
 	{
 		Symbol* const symbol = dynamic_<Symbol>(other);
 		return symbol && greater_or_equal_(symbol->symbol_());
 	}
 
-	inline const Ptr greater_or_equal(const Ptr it) const
+	inline const Ptr greater_or_equal(const Ptr& it) const
 	{
 		return boolean_(greater_or_equal_(it->next_()));
 	}
@@ -859,7 +855,7 @@ private:
 class Static : public Thing
 //----------------------------------------------------------------------
 {
-	using function = const Ptr(*)(const Ptr);
+	using function = const Ptr(*)(const Ptr&);
 
 public:
 	template <typename F>
@@ -894,7 +890,7 @@ public:
 	virtual inline const Ptr eater_() const override;
 
 protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
 		return _function(it);
 	}
@@ -909,7 +905,7 @@ template <typename T>
 class Member : public Thing
 //----------------------------------------------------------------------
 {
-	using member = const Ptr(T::*)(const Ptr);
+	using member = const Ptr(T::*)(const Ptr&);
 
 public:
 	template <typename F>
@@ -944,7 +940,7 @@ public:
 	virtual inline const Ptr eater_() const override;
 
 protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
@@ -970,7 +966,7 @@ template <typename T>
 class Const : public Thing
 //----------------------------------------------------------------------
 {
-	using member = const Ptr(T::*)(const Ptr) const;
+	using member = const Ptr(T::*)(const Ptr&) const;
 
 public:
 	template <typename F>
@@ -1005,7 +1001,7 @@ public:
 	virtual inline const Ptr eater_() const override;
 
 protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
@@ -1055,7 +1051,7 @@ class Shoal : public Mutable, public Serializable
 	class Hash
 	{
 	public:
-		inline size_t operator()(const Ptr ptr) const
+		inline size_t operator()(const Ptr& ptr) const
 		{
 			return ptr->hash_();
 		}
@@ -1064,7 +1060,7 @@ class Shoal : public Mutable, public Serializable
 	class Pred
 	{
 	public:
-		inline const bool operator()(const Ptr lhs, const Ptr rhs) const
+		inline const bool operator()(const Ptr& lhs, const Ptr& rhs) const
 		{
 			return lhs->same_(rhs);
 		}
@@ -1081,7 +1077,7 @@ public:
 	{
 	}
 
-	inline Shoal(const Ptr it)
+	inline Shoal(const Ptr& it)
 		: Mutable{}
 		, Serializable{}
 		, _map{}
@@ -1164,20 +1160,20 @@ public:
 		return to_lake_via_river_();
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		from_lake_via_river_(lake);
 	}
 
-	virtual inline void to_river_(const Thing::Ptr river) const override;
+	virtual inline void to_river_(const Ptr& river) const override;
 
-	virtual inline void from_river_(const Thing::Ptr river) override;
+	virtual inline void from_river_(const Ptr& river) override;
 
-	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const override;
+	virtual inline void to_river_with_links_(const Ptr& shoal, const Ptr& river) const override;
 
-	virtual inline void from_river_with_links_(const Thing::Ptr river) override;
+	virtual inline void from_river_with_links_(const Ptr& river) override;
 
-	virtual inline void replace_links_(const Thing::Ptr shoal) override;
+	virtual inline void replace_links_(const Ptr& shoal) override;
 
 	virtual inline const Ptr pub_() const override
 	{
@@ -1214,7 +1210,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Shoal::mut", Static::fin_(&Shoal::mut));
@@ -1228,61 +1224,60 @@ public:
 		return make_<Shoal>();
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr& it)
 	{
 		return make_<Shoal>(it);
 	}
 
-	static inline const Ptr fin(const Ptr it)
+	static inline const Ptr fin(const Ptr& it)
 	{
 		const Ptr result = mut(it);
 		result->finalize_();
 		return result;
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Shoal>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Shoal>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Shoal>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
 
-	template <typename F>
-	inline const Ptr at_(F&& key) const
+	inline const Ptr at_(const std::string& key) const
 	{
-		return at_(sym_(std::forward<F>(key)));
+		return at_(sym_(key));
 	}
 
-	inline const Ptr at_(const Ptr key) const
+	inline const Ptr at_(const Ptr& key) const
 	{
 		const std_unordered_map_ptr_ptr::const_iterator mit = _map.find(key);
 		if (mit == _map.cend())
@@ -1292,18 +1287,17 @@ public:
 		return mit->second;
 	}
 
-	inline const Ptr at(const Ptr it) const
+	inline const Ptr at(const Ptr& it) const
 	{
 		return at_(it->next_());
 	}
 
-	template <typename F>
-	inline void update_(F&& key, const Ptr value)
+	inline void update_(const std::string& key, const Ptr& value)
 	{
-		update_(sym_(std::forward<F>(key)), value);
+		update_(sym_(key), value);
 	}
 
-	inline void update_(const Ptr key, const Ptr value)
+	inline void update_(const Ptr& key, const Ptr& value)
 	{
 		if (value->is_nothing_())
 		{
@@ -1315,7 +1309,7 @@ public:
 		}
 	}
 
-	inline const Ptr update(const Ptr it)
+	inline const Ptr update(const Ptr& it)
 	{
 		const Ptr key = it->next_();
 		const Ptr value = it->next_();
@@ -1323,13 +1317,12 @@ public:
 		return value;
 	}
 
-	template <typename F>
-	inline const bool insert_(F&& key, const Ptr value)
+	inline const bool insert_(const std::string& key, const Ptr& value)
 	{
-		return insert_(sym_(std::forward<F>(key)), value);
+		return insert_(sym_(key), value);
 	}
 
-	inline const bool insert_(const Ptr key, const Ptr value)
+	inline const bool insert_(const Ptr& key, const Ptr& value)
 	{
 		if (value->is_nothing_())
 		{
@@ -1338,25 +1331,24 @@ public:
 		return _map.emplace(key, value).second;
 	}
 
-	inline const Ptr insert(const Ptr it)
+	inline const Ptr insert(const Ptr& it)
 	{
 		const Ptr key = it->next_();
 		const Ptr value = it->next_();
 		return boolean_(insert_(key, value));
 	}
 
-	template <typename F>
-	inline const bool erase_(F&& key)
+	inline const bool erase_(const std::string& key)
 	{
-		return erase_(sym_(std::forward<F>(key)));
+		return erase_(sym_(key));
 	}
 
-	inline const bool erase_(const Ptr key)
+	inline const bool erase_(const Ptr& key)
 	{
 		return _map.erase(key);
 	}
 
-	inline const Ptr erase(const Ptr it)
+	inline const Ptr erase(const Ptr& it)
 	{
 		return boolean_(erase_(it->next_()));
 	}
@@ -1366,7 +1358,7 @@ public:
 		_map.clear();
 	}
 
-	inline const Ptr clear(const Ptr ignore)
+	inline const Ptr clear(const Ptr& ignore)
 	{
 		clear_();
 		return me_();
@@ -1377,21 +1369,21 @@ public:
 		return int64_t(_map.size());
 	}
 
-	inline const Ptr size(const Ptr ignore) const;
+	inline const Ptr size(const Ptr& ignore) const;
 
 	inline const bool empty_() const
 	{
 		return _map.empty();
 	}
 
-	inline const Ptr empty(const Ptr ignore) const
+	inline const Ptr empty(const Ptr& ignore) const
 	{
 		return boolean_(empty_());
 	}
 
-	inline void self_add_(const Ptr other);
+	inline void self_add_(const Ptr& other);
 
-	inline const Ptr self_add(const Ptr it)
+	inline const Ptr self_add(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -1400,23 +1392,23 @@ public:
 		return me_();
 	}
 
-	inline const Ptr add_(const Ptr other) const
+	inline const Ptr add_(const Ptr& other) const
 	{
 		const Ptr result = copy_();
 		static_<Shoal>(result)->self_add_(other);
 		return result;
 	}
 
-	inline const Ptr add(const Ptr it) const
+	inline const Ptr add(const Ptr& it) const
 	{
 		const Ptr result = copy_();
 		static_<Shoal>(result)->self_add(it);
 		return result;
 	}
 
-	inline void self_subtract_(const Ptr other);
+	inline void self_subtract_(const Ptr& other);
 
-	inline const Ptr self_subtract(const Ptr it)
+	inline const Ptr self_subtract(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -1425,14 +1417,14 @@ public:
 		return me_();
 	}
 
-	inline const Ptr subtract_(const Ptr other) const
+	inline const Ptr subtract_(const Ptr& other) const
 	{
 		const Ptr result = copy_();
 		static_<Shoal>(result)->self_subtract_(other);
 		return result;
 	}
 
-	inline const Ptr subtract(const Ptr it) const
+	inline const Ptr subtract(const Ptr& it) const
 	{
 		const Ptr result = copy_();
 		static_<Shoal>(result)->self_subtract(it);
@@ -1444,7 +1436,7 @@ public:
 		return Iterator::mut_(me_());
 	}
 
-	virtual inline const Ptr feeder(const Ptr eater) const override
+	virtual inline const Ptr feeder(const Ptr& eater) const override
 	{
 		return Feeder::mut_(me_(), eater);
 	}
@@ -1457,7 +1449,7 @@ public:
 
 	virtual inline const Ptr cats_() const override;
 
-	virtual inline const Ptr visit(const Ptr it) override
+	virtual inline const Ptr visit(const Ptr& it) override
 	{
 		const Ptr rest = it->copy_();
 		const Ptr result = Thing::visit(it);
@@ -1475,31 +1467,31 @@ public:
 		return result;
 	}
 
-	inline const bool itemize_(const Ptr key)
+	inline const bool itemize_(const Ptr& key)
 	{
 		const Ptr size = sym_(std::to_string(_map.size()));
 		return insert_(key, size);
 	}
 
-	inline const Ptr itemize(const Ptr it)
+	inline const Ptr itemize(const Ptr& it)
 	{
 		return boolean_(itemize_(it->next_()));
 	}
 
-	inline void gather_(const Ptr item)
+	inline void gather_(const Ptr& item)
 	{
 		item->invoke_("visit", me_(), "itemize", item);
 	}
 
-	inline const Ptr gather(const Ptr it)
+	inline const Ptr gather(const Ptr& it)
 	{
 		gather_(it->next_());
 		return nothing_();
 	}
 
-	inline void gather_to_river_(const Ptr thing, const Ptr river);
+	inline void gather_to_river_(const Ptr& thing, const Ptr& river);
 
-	inline const Ptr gather_from_river_(const Ptr river);
+	inline const Ptr gather_from_river_(const Ptr& river);
 
 	inline const std_unordered_map_ptr_ptr& get_() const
 	{
@@ -1509,7 +1501,7 @@ public:
 	class Concurrent : public Mutable
 	{
 	public:
-		inline Concurrent(const Ptr shoal)
+		inline Concurrent(const Ptr& shoal)
 			: Mutable{}
 			, _shoal{ shoal }
 			, _mutex{}
@@ -1532,18 +1524,18 @@ public:
 			return PUB;
 		}
 
-		static inline void share_(const Ptr shoal)
+		static inline void share_(const Ptr& shoal)
 		{
 			Shoal* const s = static_<Shoal>(shoal);
 			s->update_("strange::Shoal::Concurrent::mut", Static::fin_(&Shoal::Concurrent::mut, "shoal"));
 		}
 
-		static inline const Ptr mut_(const Ptr shoal)
+		static inline const Ptr mut_(const Ptr& shoal)
 		{
 			return make_<Concurrent>(shoal);
 		}
 
-		static inline const Ptr mut(const Ptr it)
+		static inline const Ptr mut(const Ptr& it)
 		{
 			return mut_(it->next_());
 		}
@@ -1560,18 +1552,18 @@ public:
 			return TYPE;
 		}
 
-		inline const Ptr at_(const Ptr key) const
+		inline const Ptr at_(const Ptr& key) const
 		{
 			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
 			return static_<Shoal>(_shoal)->at_(key);
 		}
 
-		inline const Ptr at(const Ptr it) const
+		inline const Ptr at(const Ptr& it) const
 		{
 			return at_(it->next_());
 		}
 
-		inline void update_(const Ptr key, const Ptr value)
+		inline void update_(const Ptr& key, const Ptr& value)
 		{
 			if (key->finalized_() && value->finalized_())
 			{
@@ -1580,7 +1572,7 @@ public:
 			}
 		}
 
-		inline const Ptr update(const Ptr it)
+		inline const Ptr update(const Ptr& it)
 		{
 			const Ptr key = it->next_();
 			const Ptr value = it->next_();
@@ -1588,7 +1580,7 @@ public:
 			return value;
 		}
 
-		inline const bool insert_(const Ptr key, const Ptr value)
+		inline const bool insert_(const Ptr& key, const Ptr& value)
 		{
 			if (key->finalized_() && value->finalized_())
 			{
@@ -1598,7 +1590,7 @@ public:
 			return false;
 		}
 
-		inline const Ptr insert(const Ptr it)
+		inline const Ptr insert(const Ptr& it)
 		{
 			const Ptr key = it->next_();
 			const Ptr value = it->next_();
@@ -1617,7 +1609,7 @@ private:
 	class Iterator : public Mutable
 	{
 	public:
-		inline Iterator(const Ptr shoal)
+		inline Iterator(const Ptr& shoal)
 			: Mutable{}
 			, _shoal{ shoal }
 			, _iterator{ static_<Shoal>(_shoal)->_map.cbegin() }
@@ -1633,7 +1625,7 @@ private:
 			return result;
 		}
 
-		static inline const Ptr mut_(const Ptr shoal)
+		static inline const Ptr mut_(const Ptr& shoal)
 		{
 			return make_<Iterator>(shoal);
 		}
@@ -1654,7 +1646,7 @@ private:
 	class Feeder : public Thing
 	{
 	public:
-		inline Feeder(const Ptr shoal, const Ptr eater)
+		inline Feeder(const Ptr& shoal, const Ptr& eater)
 			: Thing{}
 			, _shoal{ shoal }
 			, _eater{ eater }
@@ -1671,7 +1663,7 @@ private:
 			return static_<Shoal>(_shoal)->at_(n);
 		}
 
-		static inline const Ptr mut_(const Ptr shoal, const Ptr eater)
+		static inline const Ptr mut_(const Ptr& shoal, const Ptr& eater)
 		{
 			return make_<Feeder>(shoal, eater);
 		}
@@ -1705,7 +1697,7 @@ public:
 	{
 	}
 
-	inline Flock(const Ptr it)
+	inline Flock(const Ptr& it)
 		: Mutable{}
 		, Serializable{}
 		, _vector{}
@@ -1779,20 +1771,20 @@ public:
 		return to_lake_via_river_();
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		from_lake_via_river_(lake);
 	}
 
-	virtual inline void to_river_(const Thing::Ptr river) const override;
+	virtual inline void to_river_(const Ptr& river) const override;
 
-	virtual inline void from_river_(const Thing::Ptr river) override;
+	virtual inline void from_river_(const Ptr& river) override;
 
-	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const override;
+	virtual inline void to_river_with_links_(const Ptr& shoal, const Ptr& river) const override;
 
-	virtual inline void from_river_with_links_(const Thing::Ptr river) override;
+	virtual inline void from_river_with_links_(const Ptr& river) override;
 
-	virtual inline void replace_links_(const Thing::Ptr shoal) override;
+	virtual inline void replace_links_(const Ptr& shoal) override;
 
 	virtual inline const Ptr pub_() const override
 	{
@@ -1825,7 +1817,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
@@ -1839,60 +1831,60 @@ public:
 		return make_<Flock>();
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr& it)
 	{
 		return make_<Flock>(it);
 	}
 
-	static inline const Ptr fin(const Ptr it)
+	static inline const Ptr fin(const Ptr& it)
 	{
 		const Ptr result = mut(it);
 		result->finalize_();
 		return result;
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Flock>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Flock>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Flock>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
 
-	inline void push_back_(const Ptr item)
+	inline void push_back_(const Ptr& item)
 	{
 		_vector.push_back(item);
 	}
 
-	inline const Ptr push_back(const Ptr it)
+	inline const Ptr push_back(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -1906,14 +1898,14 @@ public:
 		return int64_t(_vector.size());
 	}
 
-	inline const Ptr size(const Ptr ignore) const;
+	inline const Ptr size(const Ptr& ignore) const;
 
 	inline const bool empty_() const
 	{
 		return _vector.empty();
 	}
 
-	inline const Ptr empty(const Ptr ignore) const
+	inline const Ptr empty(const Ptr& ignore) const
 	{
 		return boolean_(empty_());
 	}
@@ -1927,14 +1919,14 @@ public:
 		return nothing_();
 	}
 
-	inline const Ptr at_(const Ptr pos) const;
+	inline const Ptr at_(const Ptr& pos) const;
 
-	inline const Ptr at(const Ptr it) const
+	inline const Ptr at(const Ptr& it) const
 	{
 		return at_(it->next_());
 	}
 
-	inline void update_(const int64_t pos, const Ptr value)
+	inline void update_(const int64_t pos, const Ptr& value)
 	{
 		if (pos >= 0)
 		{
@@ -1954,9 +1946,9 @@ public:
 		}
 	}
 
-	inline void update_(const Ptr pos, const Ptr value);
+	inline void update_(const Ptr& pos, const Ptr& value);
 
-	inline const Ptr update(const Ptr it)
+	inline const Ptr update(const Ptr& it)
 	{
 		const Ptr index = it->next_();
 		const Ptr value = it->next_();
@@ -1964,7 +1956,7 @@ public:
 		return value;
 	}
 
-	inline void insert_(const int64_t pos, const Ptr value)
+	inline void insert_(const int64_t pos, const Ptr& value)
 	{
 		if (pos >= 0)
 		{
@@ -1988,9 +1980,9 @@ public:
 		}
 	}
 
-	inline void insert_(const Ptr pos, const Ptr value);
+	inline void insert_(const Ptr& pos, const Ptr& value);
 
-	inline const Ptr insert(const Ptr it)
+	inline const Ptr insert(const Ptr& it)
 	{
 		const Ptr index = it->next_();
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
@@ -2008,9 +2000,9 @@ public:
 		}
 	}
 
-	inline void erase_(const Ptr pos);
+	inline void erase_(const Ptr& pos);
 
-	inline const Ptr erase(const Ptr it)
+	inline const Ptr erase(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -2024,15 +2016,15 @@ public:
 		_vector.clear();
 	}
 
-	inline const Ptr clear(const Ptr ignore)
+	inline const Ptr clear(const Ptr& ignore)
 	{
 		clear_();
 		return me_();
 	}
 
-	inline void self_add_(const Ptr other);
+	inline void self_add_(const Ptr& other);
 
-	inline const Ptr self_add(const Ptr it)
+	inline const Ptr self_add(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -2041,14 +2033,14 @@ public:
 		return me_();
 	}
 
-	inline const Ptr add_(const Ptr other) const
+	inline const Ptr add_(const Ptr& other) const
 	{
 		const Ptr result = copy_();
 		static_<Flock>(result)->self_add_(other);
 		return result;
 	}
 
-	inline const Ptr add(const Ptr it) const
+	inline const Ptr add(const Ptr& it) const
 	{
 		const Ptr result = copy_();
 		static_<Flock>(result)->self_add(it);
@@ -2068,7 +2060,7 @@ public:
 
 	virtual inline const Ptr cats_() const override;
 
-	virtual inline const Ptr visit(const Ptr it) override
+	virtual inline const Ptr visit(const Ptr& it) override
 	{
 		const Ptr rest = it->copy_();
 		const Ptr result = Thing::visit(it);
@@ -2093,7 +2085,7 @@ public:
 	class Concurrent : public Mutable
 	{
 	public:
-		inline Concurrent(const Ptr flock)
+		inline Concurrent(const Ptr& flock)
 			: Mutable{}
 			, _flock{ flock }
 			, _mutex{}
@@ -2116,18 +2108,18 @@ public:
 			return PUB;
 		}
 
-		static inline void share_(const Ptr shoal)
+		static inline void share_(const Ptr& shoal)
 		{
 			Shoal* const s = static_<Shoal>(shoal);
 			s->update_("strange::Flock::Concurrent::mut", Static::fin_(&Flock::Concurrent::mut, "flock"));
 		}
 
-		static inline const Ptr mut_(const Ptr flock)
+		static inline const Ptr mut_(const Ptr& flock)
 		{
 			return make_<Concurrent>(flock);
 		}
 
-		static inline const Ptr mut(const Ptr it)
+		static inline const Ptr mut(const Ptr& it)
 		{
 			return mut_(it->next_());
 		}
@@ -2144,13 +2136,13 @@ public:
 			return TYPE;
 		}
 
-		inline void push_back_(const Ptr item)
+		inline void push_back_(const Ptr& item)
 		{
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
 			static_<Flock>(_flock)->push_back_(item);
 		}
 
-		inline const Ptr push_back(const Ptr it)
+		inline const Ptr push_back(const Ptr& it)
 		{
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
 			return static_<Flock>(_flock)->push_back(it);
@@ -2162,7 +2154,7 @@ public:
 			return static_<Flock>(_flock)->size_();
 		}
 
-		inline const Ptr size(const Ptr ignore) const;
+		inline const Ptr size(const Ptr& ignore) const;
 
 		inline const Ptr at_(const int64_t pos) const
 		{
@@ -2170,9 +2162,9 @@ public:
 			return static_<Flock>(_flock)->at_(pos);
 		}
 
-		inline const Ptr at_(const Ptr pos) const;
+		inline const Ptr at_(const Ptr& pos) const;
 
-		inline const Ptr at(const Ptr it) const
+		inline const Ptr at(const Ptr& it) const
 		{
 			return at_(it->next_());
 		}
@@ -2189,7 +2181,7 @@ private:
 	class Iterator : public Mutable
 	{
 	public:
-		inline Iterator(const Ptr flock)
+		inline Iterator(const Ptr& flock)
 			: Mutable{}
 			, _flock{ flock }
 			, _iterator{ static_<Flock>(_flock)->_vector.cbegin() }
@@ -2212,7 +2204,7 @@ private:
 			return result;
 		}
 
-		static inline const Ptr mut_(const Ptr flock)
+		static inline const Ptr mut_(const Ptr& flock)
 		{
 			return make_<Iterator>(flock);
 		}
@@ -2238,7 +2230,7 @@ class Herd : public Mutable, public Serializable
 	class Hash
 	{
 	public:
-		inline size_t operator()(const Ptr ptr) const
+		inline size_t operator()(const Ptr& ptr) const
 		{
 			return ptr->hash_();
 		}
@@ -2247,7 +2239,7 @@ class Herd : public Mutable, public Serializable
 	class Pred
 	{
 	public:
-		inline const bool operator()(const Ptr lhs, const Ptr rhs) const
+		inline const bool operator()(const Ptr& lhs, const Ptr& rhs) const
 		{
 			return lhs->same_(rhs);
 		}
@@ -2264,7 +2256,7 @@ public:
 	{
 	}
 
-	inline Herd(const Ptr it)
+	inline Herd(const Ptr& it)
 		: Mutable{}
 		, Serializable{}
 		, _set{}
@@ -2336,20 +2328,20 @@ public:
 		return to_lake_via_river_();
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		from_lake_via_river_(lake);
 	}
 
-	virtual inline void to_river_(const Thing::Ptr river) const override;
+	virtual inline void to_river_(const Ptr& river) const override;
 
-	virtual inline void from_river_(const Thing::Ptr river) override;
+	virtual inline void from_river_(const Ptr& river) override;
 
-	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const override;
+	virtual inline void to_river_with_links_(const Ptr& shoal, const Ptr& river) const override;
 
-	virtual inline void from_river_with_links_(const Thing::Ptr river) override;
+	virtual inline void from_river_with_links_(const Ptr& river) override;
 
-	virtual inline void replace_links_(const Thing::Ptr shoal) override;
+	virtual inline void replace_links_(const Ptr& shoal) override;
 
 	virtual inline const Ptr pub_() const override
 	{
@@ -2384,7 +2376,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Herd::mut", Static::fin_(&Herd::mut));
@@ -2398,77 +2390,75 @@ public:
 		return make_<Herd>();
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr& it)
 	{
 		return make_<Herd>(it);
 	}
 
-	static inline const Ptr fin(const Ptr it)
+	static inline const Ptr fin(const Ptr& it)
 	{
 		const Ptr result = mut(it);
 		result->finalize_();
 		return result;
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Herd>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Herd>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Herd>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
 
-	template <typename F>
-	inline const bool at_(F&& key) const
+	inline const bool at_(const std::string& key) const
 	{
-		return at_(sym_(std::forward<F>(key)));
+		return at_(sym_(key));
 	}
 
-	inline const bool at_(const Ptr key) const
+	inline const bool at_(const Ptr& key) const
 	{
 		return _set.find(key) != _set.cend();
 	}
 
-	inline const Ptr at(const Ptr it) const
+	inline const Ptr at(const Ptr& it) const
 	{
 		return boolean_(at_(it->next_()));
 	}
 
-	template <typename F>
-	inline void update_(F&& key, const bool insert)
+	inline void update_(const std::string& key, const bool insert)
 	{
-		update_(sym_(std::forward<F>(key)), insert);
+		update_(sym_(key), insert);
 	}
 
-	inline void update_(const Ptr key, const bool insert)
+	inline void update_(const Ptr& key, const bool insert)
 	{
 		if (insert)
 		{
@@ -2480,12 +2470,12 @@ public:
 		}
 	}
 
-	inline void update_(const Ptr key, const Ptr insert)
+	inline void update_(const Ptr& key, const Ptr& insert)
 	{
 		update_(key, !insert->is_nothing_());
 	}
 
-	inline const Ptr update(const Ptr it)
+	inline const Ptr update(const Ptr& it)
 	{
 		const Ptr key = it->next_();
 		const Ptr insert = it->next_();
@@ -2493,34 +2483,32 @@ public:
 		return insert;
 	}
 
-	template <typename F>
-	inline const bool insert_(F&& key)
+	inline const bool insert_(const std::string& key)
 	{
-		return insert_(sym_(std::forward<F>(key)));
+		return insert_(sym_(key));
 	}
 
-	inline const bool insert_(const Ptr key)
+	inline const bool insert_(const Ptr& key)
 	{
 		return _set.insert(key).second;
 	}
 
-	inline const Ptr insert(const Ptr it)
+	inline const Ptr insert(const Ptr& it)
 	{
 		return boolean_(insert_(it->next_()));
 	}
 
-	template <typename F>
-	inline const bool erase_(F&& key)
+	inline const bool erase_(const std::string& key)
 	{
-		return erase_(sym_(std::forward<F>(key)));
+		return erase_(sym_(key));
 	}
 
-	inline const bool erase_(const Ptr item)
+	inline const bool erase_(const Ptr& item)
 	{
 		return _set.erase(item);
 	}
 
-	inline const Ptr erase(const Ptr it)
+	inline const Ptr erase(const Ptr& it)
 	{
 		return boolean_(erase_(it->next_()));
 	}
@@ -2530,7 +2518,7 @@ public:
 		_set.clear();
 	}
 
-	inline const Ptr clear(const Ptr ignore)
+	inline const Ptr clear(const Ptr& ignore)
 	{
 		clear_();
 		return me_();
@@ -2541,19 +2529,19 @@ public:
 		return int64_t(_set.size());
 	}
 
-	inline const Ptr size(const Ptr ignore) const;
+	inline const Ptr size(const Ptr& ignore) const;
 
 	inline const bool empty_() const
 	{
 		return _set.empty();
 	}
 
-	inline const Ptr empty(const Ptr ignore) const
+	inline const Ptr empty(const Ptr& ignore) const
 	{
 		return boolean_(empty_());
 	}
 
-	inline void self_add_(const Ptr other)
+	inline void self_add_(const Ptr& other)
 	{
 		Herd* const herd = dynamic_<Herd>(other);
 		if (herd)
@@ -2598,7 +2586,7 @@ public:
 		}
 	}
 
-	inline const Ptr self_add(const Ptr it)
+	inline const Ptr self_add(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -2607,21 +2595,21 @@ public:
 		return me_();
 	}
 
-	inline const Ptr add_(const Ptr other) const
+	inline const Ptr add_(const Ptr& other) const
 	{
 		const Ptr result = copy_();
 		static_<Herd>(result)->self_add_(other);
 		return result;
 	}
 
-	inline const Ptr add(const Ptr it) const
+	inline const Ptr add(const Ptr& it) const
 	{
 		const Ptr result = copy_();
 		static_<Herd>(result)->self_add(it);
 		return result;
 	}
 
-	inline void self_subtract_(const Ptr other)
+	inline void self_subtract_(const Ptr& other)
 	{
 		Herd* const herd = dynamic_<Herd>(other);
 		if (herd)
@@ -2655,7 +2643,7 @@ public:
 		}
 	}
 
-	inline const Ptr self_subtract(const Ptr it)
+	inline const Ptr self_subtract(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -2664,14 +2652,14 @@ public:
 		return me_();
 	}
 
-	inline const Ptr subtract_(const Ptr other) const
+	inline const Ptr subtract_(const Ptr& other) const
 	{
 		const Ptr result = copy_();
 		static_<Herd>(result)->self_subtract_(other);
 		return result;
 	}
 
-	inline const Ptr subtract(const Ptr it) const
+	inline const Ptr subtract(const Ptr& it) const
 	{
 		const Ptr result = copy_();
 		static_<Herd>(result)->self_subtract(it);
@@ -2704,7 +2692,7 @@ public:
 		return CATS;
 	}
 
-	virtual inline const Ptr visit(const Ptr it) override
+	virtual inline const Ptr visit(const Ptr& it) override
 	{
 		const Ptr rest = it->copy_();
 		const Ptr result = Thing::visit(it);
@@ -2721,12 +2709,12 @@ public:
 		return result;
 	}
 
-	inline void gather_(const Ptr item)
+	inline void gather_(const Ptr& item)
 	{
 		item->invoke_("visit", me_(), "insert", item);
 	}
 
-	inline const Ptr gather(const Ptr it)
+	inline const Ptr gather(const Ptr& it)
 	{
 		gather_(it->next_());
 		return nothing_();
@@ -2740,7 +2728,7 @@ public:
 	class Concurrent : public Mutable
 	{
 	public:
-		inline Concurrent(const Ptr herd)
+		inline Concurrent(const Ptr& herd)
 			: Mutable{}
 			, _herd{ herd }
 			, _mutex{}
@@ -2762,18 +2750,18 @@ public:
 			return PUB;
 		}
 
-		static inline void share_(const Ptr shoal)
+		static inline void share_(const Ptr& shoal)
 		{
 			Shoal* const s = static_<Shoal>(shoal);
 			s->update_("strange::Herd::Concurrent::mut", Static::fin_(&Herd::Concurrent::mut, "herd"));
 		}
 
-		static inline const Ptr mut_(const Ptr herd)
+		static inline const Ptr mut_(const Ptr& herd)
 		{
 			return make_<Concurrent>(herd);
 		}
 
-		static inline const Ptr mut(const Ptr it)
+		static inline const Ptr mut(const Ptr& it)
 		{
 			return mut_(it->next_());
 		}
@@ -2790,18 +2778,18 @@ public:
 			return TYPE;
 		}
 
-		inline const bool at_(const Ptr item) const
+		inline const bool at_(const Ptr& item) const
 		{
 			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
 			return static_<Herd>(_herd)->at_(item);
 		}
 
-		inline const Ptr at(const Ptr it) const
+		inline const Ptr at(const Ptr& it) const
 		{
 			return boolean_(at_(it->next_()));
 		}
 
-		inline const bool insert_(const Ptr item)
+		inline const bool insert_(const Ptr& item)
 		{
 			if (item->finalized_())
 			{
@@ -2811,7 +2799,7 @@ public:
 			return false;
 		}
 
-		inline const Ptr insert(const Ptr it)
+		inline const Ptr insert(const Ptr& it)
 		{
 			return boolean_(insert_(it->next_()));
 		}
@@ -2828,7 +2816,7 @@ private:
 	class Iterator : public Mutable
 	{
 	public:
-		inline Iterator(const Ptr herd)
+		inline Iterator(const Ptr& herd)
 			: Mutable{}
 			, _herd{ herd }
 			, _iterator{ static_<Herd>(_herd)->_set.cbegin() }
@@ -2851,7 +2839,7 @@ private:
 			return result;
 		}
 
-		static inline const Ptr mut_(const Ptr herd)
+		static inline const Ptr mut_(const Ptr& herd)
 		{
 			return make_<Iterator>(herd);
 		}
@@ -2888,18 +2876,18 @@ class IteratorPtr : public Mutable
 //----------------------------------------------------------------------
 {
 public:
-	inline IteratorPtr(const Ptr ptr)
+	inline IteratorPtr(const Ptr& ptr)
 		: Mutable{}
 		, _ptr{ ptr }
 	{
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr& it)
 	{
 		return mut_(it->next_());
 	}
 
-	static inline const Ptr mut_(const Ptr ptr)
+	static inline const Ptr mut_(const Ptr& ptr)
 	{
 		return make_<IteratorPtr>(ptr);
 	}
@@ -3181,7 +3169,7 @@ public:
 		return make_<Lake>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -3193,43 +3181,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Lake>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Lake>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Lake>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -3275,7 +3263,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Lake::mut", Static::fin_(&Lake::mut));
@@ -3295,7 +3283,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -3310,9 +3298,9 @@ public:
 		}
 	}
 
-	virtual inline void to_river_(const Ptr river) const override;
+	virtual inline void to_river_(const Ptr& river) const override;
 
-	virtual inline void from_river_(const Ptr river) override;
+	virtual inline void from_river_(const Ptr& river) override;
 
 	virtual inline const Ptr type_() const override
 	{
@@ -3337,13 +3325,12 @@ public:
 		return CATS;
 	}
 
-	template <typename F>
-	inline void self_add_(F&& s)
+	inline void self_add_(const std::string& s)
 	{
-		ref_() += std::forward<F>(s);
+		ref_() += s;
 	}
 
-	inline void self_add_(const Ptr other)
+	inline void self_add_(const Ptr& other)
 	{
 		Lake* const lake = dynamic_<Lake>(other);
 		if (lake)
@@ -3360,7 +3347,7 @@ public:
 		}
 	}
 
-	inline const Ptr self_add(const Ptr it)
+	inline const Ptr self_add(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -3369,21 +3356,21 @@ public:
 		return me_();
 	}
 
-	inline const Ptr add_(const Ptr other) const
+	inline const Ptr add_(const Ptr& other) const
 	{
 		const Ptr result = copy_();
 		static_<Lake>(result)->self_add_(other);
 		return result;
 	}
 
-	inline const Ptr add(const Ptr it) const
+	inline const Ptr add(const Ptr& it) const
 	{
 		const Ptr result = copy_();
 		static_<Lake>(result)->self_add(it);
 		return result;
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Lake* const lake = dynamic_<Lake>(other);
 		return lake && (get_() == lake->get_());
@@ -3404,9 +3391,9 @@ public:
 		return 0;
 	}
 
-	inline const char at_(const Ptr index) const;
+	inline const char at_(const Ptr& index) const;
 
-	inline const Ptr at(const Ptr it) const;
+	inline const Ptr at(const Ptr& it) const;
 
 	inline void update_(const int64_t index, const int64_t byte)
 	{
@@ -3417,9 +3404,9 @@ public:
 		}
 	}
 
-	inline void update_(const Ptr index, const Ptr byte);
+	inline void update_(const Ptr& index, const Ptr& byte);
 
-	inline const Ptr update(const Ptr it)
+	inline const Ptr update(const Ptr& it)
 	{
 		const Ptr index = it->next_();
 		const Ptr byte = it->next_();
@@ -3427,70 +3414,66 @@ public:
 		return byte;
 	}
 
-	template <typename F>
-	inline const bool less_than_(F&& s) const
+	inline const bool less_than_(const std::string& s) const
 	{
-		return get_() < std::forward<F>(s);
+		return get_() < s;
 	}
 
-	inline const bool less_than_(const Ptr other) const
+	inline const bool less_than_(const Ptr& other) const
 	{
 		Lake* const lake = dynamic_<Lake>(other);
 		return lake && less_than_(lake->get_());
 	}
 
-	inline const Ptr less_than(const Ptr it) const
+	inline const Ptr less_than(const Ptr& it) const
 	{
 		return boolean_(less_than_(it->next_()));
 	}
 
-	template <typename F>
-	inline const bool greater_than_(F&& s) const
+	inline const bool greater_than_(const std::string& s) const
 	{
-		return get_() > std::forward<F>(s);
+		return get_() > s;
 	}
 
-	inline const bool greater_than_(const Ptr other) const
+	inline const bool greater_than_(const Ptr& other) const
 	{
 		Lake* const lake = dynamic_<Lake>(other);
 		return lake && greater_than_(lake->get_());
 	}
 
-	inline const Ptr greater_than(const Ptr it) const
+	inline const Ptr greater_than(const Ptr& it) const
 	{
 		return boolean_(greater_than_(it->next_()));
 	}
 
-	template <typename F>
-	inline const bool less_or_equal_(F&& s) const
+	inline const bool less_or_equal_(const std::string& s) const
 	{
-		return get_() <= std::forward<F>(s);
+		return get_() <= s;
 	}
 
-	inline const bool less_or_equal_(const Ptr other) const
+	inline const bool less_or_equal_(const Ptr& other) const
 	{
 		Lake* const lake = dynamic_<Lake>(other);
 		return lake && less_or_equal_(lake->get_());
 	}
 
-	inline const Ptr less_or_equal(const Ptr it) const
+	inline const Ptr less_or_equal(const Ptr& it) const
 	{
 		return boolean_(less_or_equal_(it->next_()));
 	}
 
-	template <typename F>
-	inline const bool greater_or_equal_(F&& s) const
+	inline const bool greater_or_equal_(const std::string& s) const
 	{
-		return get_() >= std::forward<F>(s);
+		return get_() >= s;
 	}
 
-	inline const bool greater_or_equal_(const Ptr other) const
+	inline const bool greater_or_equal_(const Ptr& other) const
 	{
 		Lake* const lake = dynamic_<Lake>(other);
 		return lake && greater_or_equal_(lake->get_());
 	}
 
-	inline const Ptr greater_or_equal(const Ptr it) const
+	inline const Ptr greater_or_equal(const Ptr& it) const
 	{
 		return boolean_(greater_or_equal_(it->next_()));
 	}
@@ -3508,16 +3491,16 @@ public:
 		return int64_t(std::llround(to_float64_()));
 	}
 
-	inline const Ptr to_int64(const Ptr ignore) const;
+	inline const Ptr to_int64(const Ptr& ignore) const;
 
 	virtual inline void from_int64_(const int64_t int64)
 	{
 		from_float64_(double(int64));
 	}
 
-	inline void from_int64_(const Ptr ptr);
+	inline void from_int64_(const Ptr& ptr);
 
-	inline const Ptr from_int64(const Ptr it)
+	inline const Ptr from_int64(const Ptr& it)
 	{
 		from_int64_(it->next_());
 		return nothing_();
@@ -3528,16 +3511,16 @@ public:
 		return double(to_int64_());
 	}
 
-	inline const Ptr to_float64(const Ptr ignore) const;
+	inline const Ptr to_float64(const Ptr& ignore) const;
 
 	virtual inline void from_float64_(const double float64)
 	{
 		from_int64_(int64_t(std::llround(float64)));
 	}
 
-	inline void from_float64_(const Ptr ptr);
+	inline void from_float64_(const Ptr& ptr);
 
-	inline const Ptr from_float64(const Ptr it)
+	inline const Ptr from_float64(const Ptr& it)
 	{
 		from_float64_(it->next_());
 		return nothing_();
@@ -3548,15 +3531,15 @@ public:
 		return 0.0;
 	}
 
-	inline const Ptr to_imaginary64(const Ptr ignore) const;
+	inline const Ptr to_imaginary64(const Ptr& ignore) const;
 
 	virtual inline void from_imaginary64_(const double imaginary64)
 	{
 	}
 
-	inline void from_imaginary64_(const Ptr ptr);
+	inline void from_imaginary64_(const Ptr& ptr);
 
-	inline const Ptr from_imaginary64(const Ptr it)
+	inline const Ptr from_imaginary64(const Ptr& it)
 	{
 		from_imaginary64_(it->next_());
 		return nothing_();
@@ -3567,16 +3550,16 @@ public:
 		return std::complex<double>(to_float64_(), 0.0);
 	}
 
-	inline const Ptr to_complex64(const Ptr ignore) const;
+	inline const Ptr to_complex64(const Ptr& ignore) const;
 
 	virtual inline void from_complex64_(const std::complex<double>& complex64)
 	{
 		from_float64_(complex64.real());
 	}
 
-	inline void from_complex64_(const Ptr ptr);
+	inline void from_complex64_(const Ptr& ptr);
 
-	inline const Ptr from_complex64(const Ptr it)
+	inline const Ptr from_complex64(const Ptr& it)
 	{
 		from_complex64_(it->next_());
 		return nothing_();
@@ -3584,14 +3567,14 @@ public:
 
 	virtual inline const Ptr to_symbol_() const = 0;
 
-	inline const Ptr to_symbol(const Ptr ignore) const
+	inline const Ptr to_symbol(const Ptr& ignore) const
 	{
 		return to_symbol_();
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) = 0;
+	virtual inline void from_symbol_(const Ptr& ptr) = 0;
 
-	inline const Ptr from_symbol(const Ptr it)
+	inline const Ptr from_symbol(const Ptr& it)
 	{
 		from_symbol_(it->next_());
 		return nothing_();
@@ -3599,7 +3582,7 @@ public:
 
 	virtual inline void increment_() = 0;
 
-	inline const Ptr increment(const Ptr ignore)
+	inline const Ptr increment(const Ptr& ignore)
 	{
 		increment_();
 		return me_();
@@ -3607,15 +3590,15 @@ public:
 
 	virtual inline void decrement_() = 0;
 
-	inline const Ptr decrement(const Ptr ignore)
+	inline const Ptr decrement(const Ptr& ignore)
 	{
 		decrement_();
 		return me_();
 	}
 
-	virtual inline void self_add_(const Ptr other) = 0;
+	virtual inline void self_add_(const Ptr& other) = 0;
 
-	inline const Ptr self_add(const Ptr it)
+	inline const Ptr self_add(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -3624,23 +3607,23 @@ public:
 		return me_();
 	}
 
-	inline const Ptr add_(const Ptr other) const
+	inline const Ptr add_(const Ptr& other) const
 	{
 		const Ptr result = copy_();
 		static_<Number>(result)->self_add_(other);
 		return result;
 	}
 
-	inline const Ptr add(const Ptr it) const
+	inline const Ptr add(const Ptr& it) const
 	{
 		const Ptr result = copy_();
 		static_<Number>(result)->self_add(it);
 		return result;
 	}
 
-	virtual inline void self_subtract_(const Ptr other) = 0;
+	virtual inline void self_subtract_(const Ptr& other) = 0;
 
-	inline const Ptr self_subtract(const Ptr it)
+	inline const Ptr self_subtract(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -3649,23 +3632,23 @@ public:
 		return me_();
 	}
 
-	inline const Ptr subtract_(const Ptr other) const
+	inline const Ptr subtract_(const Ptr& other) const
 	{
 		const Ptr result = copy_();
 		static_<Number>(result)->self_subtract_(other);
 		return result;
 	}
 
-	inline const Ptr subtract(const Ptr it) const
+	inline const Ptr subtract(const Ptr& it) const
 	{
 		const Ptr result = copy_();
 		static_<Number>(result)->self_subtract(it);
 		return result;
 	}
 
-	virtual inline void self_multiply_(const Ptr other) = 0;
+	virtual inline void self_multiply_(const Ptr& other) = 0;
 
-	inline const Ptr self_multiply(const Ptr it)
+	inline const Ptr self_multiply(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -3674,23 +3657,23 @@ public:
 		return me_();
 	}
 
-	inline const Ptr multiply_(const Ptr other) const
+	inline const Ptr multiply_(const Ptr& other) const
 	{
 		const Ptr result = copy_();
 		static_<Number>(result)->self_multiply_(other);
 		return result;
 	}
 
-	inline const Ptr multiply(const Ptr it) const
+	inline const Ptr multiply(const Ptr& it) const
 	{
 		const Ptr result = copy_();
 		static_<Number>(result)->self_multiply(it);
 		return result;
 	}
 
-	virtual inline void self_divide_(const Ptr other) = 0;
+	virtual inline void self_divide_(const Ptr& other) = 0;
 
-	inline const Ptr self_divide(const Ptr it)
+	inline const Ptr self_divide(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -3699,23 +3682,23 @@ public:
 		return me_();
 	}
 
-	inline const Ptr divide_(const Ptr other) const
+	inline const Ptr divide_(const Ptr& other) const
 	{
 		const Ptr result = copy_();
 		static_<Number>(result)->self_divide_(other);
 		return result;
 	}
 
-	inline const Ptr divide(const Ptr it) const
+	inline const Ptr divide(const Ptr& it) const
 	{
 		const Ptr result = copy_();
 		static_<Number>(result)->self_divide(it);
 		return result;
 	}
 
-	virtual inline void self_modulo_(const Ptr other) = 0;
+	virtual inline void self_modulo_(const Ptr& other) = 0;
 
-	inline const Ptr self_modulo(const Ptr it)
+	inline const Ptr self_modulo(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -3724,44 +3707,44 @@ public:
 		return me_();
 	}
 
-	inline const Ptr modulo_(const Ptr other) const
+	inline const Ptr modulo_(const Ptr& other) const
 	{
 		const Ptr result = copy_();
 		static_<Number>(result)->self_modulo_(other);
 		return result;
 	}
 
-	inline const Ptr modulo(const Ptr it) const
+	inline const Ptr modulo(const Ptr& it) const
 	{
 		const Ptr result = copy_();
 		static_<Number>(result)->self_modulo(it);
 		return result;
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const = 0;
+	virtual inline const bool less_than_(const Ptr& other) const = 0;
 
-	inline const Ptr less_than(const Ptr it) const
+	inline const Ptr less_than(const Ptr& it) const
 	{
 		return boolean_(less_than_(it->next_()));
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const = 0;
+	virtual inline const bool greater_than_(const Ptr& other) const = 0;
 
-	inline const Ptr greater_than(const Ptr it) const
+	inline const Ptr greater_than(const Ptr& it) const
 	{
 		return boolean_(greater_than_(it->next_()));
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const = 0;
+	virtual inline const bool less_or_equal_(const Ptr& other) const = 0;
 
-	inline const Ptr less_or_equal(const Ptr it) const
+	inline const Ptr less_or_equal(const Ptr& it) const
 	{
 		return boolean_(less_or_equal_(it->next_()));
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const = 0;
+	virtual inline const bool greater_or_equal_(const Ptr& other) const = 0;
 
-	inline const Ptr greater_or_equal(const Ptr it) const
+	inline const Ptr greater_or_equal(const Ptr& it) const
 	{
 		return boolean_(greater_or_equal_(it->next_()));
 	}
@@ -3817,7 +3800,7 @@ public:
 		return make_<Bit>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -3829,43 +3812,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Bit>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Bit>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Bit>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -3902,7 +3885,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Bit::mut", Static::fin_(&Bit::mut));
@@ -3922,7 +3905,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -3976,7 +3959,7 @@ public:
 		return sym_(get_() ? "1" : "0");
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -3997,7 +3980,7 @@ public:
 		b = !b;
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4007,7 +3990,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number && (number->to_int64_() & 1))
@@ -4017,7 +4000,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4027,7 +4010,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4040,7 +4023,7 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4053,7 +4036,7 @@ public:
 		}
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
@@ -4064,25 +4047,25 @@ public:
 		return std::hash<int64_t>()(to_int64_());
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() < number->to_int64_());
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() > number->to_int64_());
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() <= number->to_int64_());
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() >= number->to_int64_());
@@ -4101,7 +4084,7 @@ public:
 		return make_<Int8>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -4113,43 +4096,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Int8>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Int8>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Int8>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -4186,7 +4169,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Int8::mut", Static::fin_(&Int8::mut));
@@ -4206,7 +4189,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -4260,7 +4243,7 @@ public:
 		return sym_(std::to_string(get_()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -4279,7 +4262,7 @@ public:
 		--ref_();
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4288,7 +4271,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4297,7 +4280,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4306,7 +4289,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4319,7 +4302,7 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4332,7 +4315,7 @@ public:
 		}
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
@@ -4343,25 +4326,25 @@ public:
 		return std::hash<int64_t>()(to_int64_());
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() < number->to_int64_());
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() > number->to_int64_());
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() <= number->to_int64_());
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() >= number->to_int64_());
@@ -4380,7 +4363,7 @@ public:
 		return make_<UInt8>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -4392,43 +4375,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt8>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt8>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt8>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -4465,7 +4448,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::UInt8::mut", Static::fin_(&UInt8::mut));
@@ -4485,7 +4468,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -4539,7 +4522,7 @@ public:
 		return sym_(std::to_string(get_()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -4558,7 +4541,7 @@ public:
 		--ref_();
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4567,7 +4550,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4576,7 +4559,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4585,7 +4568,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4598,7 +4581,7 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4611,7 +4594,7 @@ public:
 		}
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
@@ -4622,25 +4605,25 @@ public:
 		return std::hash<int64_t>()(to_int64_());
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() < number->to_int64_());
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() > number->to_int64_());
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() <= number->to_int64_());
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() >= number->to_int64_());
@@ -4659,7 +4642,7 @@ public:
 		return make_<Int16>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -4671,43 +4654,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Int16>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Int16>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Int16>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -4744,7 +4727,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Int16::mut", Static::fin_(&Int16::mut));
@@ -4767,7 +4750,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -4824,7 +4807,7 @@ public:
 		return sym_(std::to_string(get_()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -4843,7 +4826,7 @@ public:
 		--ref_();
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4852,7 +4835,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4861,7 +4844,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4870,7 +4853,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4883,7 +4866,7 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -4896,7 +4879,7 @@ public:
 		}
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
@@ -4907,25 +4890,25 @@ public:
 		return std::hash<int64_t>()(to_int64_());
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() < number->to_int64_());
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() > number->to_int64_());
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() <= number->to_int64_());
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() >= number->to_int64_());
@@ -4944,7 +4927,7 @@ public:
 		return make_<UInt16>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -4956,43 +4939,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt16>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt16>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt16>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -5029,7 +5012,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::UInt16::mut", Static::fin_(&UInt16::mut));
@@ -5052,7 +5035,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -5109,7 +5092,7 @@ public:
 		return sym_(std::to_string(get_()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -5128,7 +5111,7 @@ public:
 		--ref_();
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5137,7 +5120,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5146,7 +5129,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5155,7 +5138,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5168,7 +5151,7 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5181,7 +5164,7 @@ public:
 		}
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
@@ -5192,25 +5175,25 @@ public:
 		return std::hash<int64_t>()(to_int64_());
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() < number->to_int64_());
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() > number->to_int64_());
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() <= number->to_int64_());
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() >= number->to_int64_());
@@ -5229,7 +5212,7 @@ public:
 		return make_<Int32>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -5241,43 +5224,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Int32>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Int32>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Int32>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -5314,7 +5297,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Int32::mut", Static::fin_(&Int32::mut));
@@ -5339,7 +5322,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -5398,7 +5381,7 @@ public:
 		return sym_(std::to_string(get_()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -5417,7 +5400,7 @@ public:
 		--ref_();
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5426,7 +5409,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5435,7 +5418,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5444,7 +5427,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5457,7 +5440,7 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5470,7 +5453,7 @@ public:
 		}
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
@@ -5481,25 +5464,25 @@ public:
 		return std::hash<int64_t>()(to_int64_());
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() < number->to_int64_());
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() > number->to_int64_());
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() <= number->to_int64_());
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() >= number->to_int64_());
@@ -5518,7 +5501,7 @@ public:
 		return make_<UInt32>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -5530,43 +5513,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt32>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt32>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt32>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -5603,7 +5586,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::UInt32::mut", Static::fin_(&UInt32::mut));
@@ -5628,7 +5611,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -5687,7 +5670,7 @@ public:
 		return sym_(std::to_string(get_()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -5706,7 +5689,7 @@ public:
 		--ref_();
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5715,7 +5698,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5724,7 +5707,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5733,7 +5716,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5746,7 +5729,7 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -5759,7 +5742,7 @@ public:
 		}
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
@@ -5770,25 +5753,25 @@ public:
 		return std::hash<int64_t>()(to_int64_());
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() < number->to_int64_());
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() > number->to_int64_());
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() <= number->to_int64_());
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_int64_() >= number->to_int64_());
@@ -5807,7 +5790,7 @@ public:
 		return make_<Int64>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -5819,43 +5802,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Int64>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Int64>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Int64>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -5892,7 +5875,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Int64::mut", Static::fin_(&Int64::mut));
@@ -5921,7 +5904,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -5984,7 +5967,7 @@ public:
 		return sym_(std::to_string(get_()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -6003,7 +5986,7 @@ public:
 		--ref_();
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -6012,7 +5995,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -6021,7 +6004,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -6030,7 +6013,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -6043,7 +6026,7 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -6056,7 +6039,7 @@ public:
 		}
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() == number->to_int64_());
@@ -6067,25 +6050,25 @@ public:
 		return std::hash<int64_t>()(get_());
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() < number->to_int64_());
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() > number->to_int64_());
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() <= number->to_int64_());
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() >= number->to_int64_());
@@ -6104,7 +6087,7 @@ public:
 		return make_<UInt64>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -6116,43 +6099,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt64>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt64>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<UInt64>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -6189,7 +6172,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::UInt64::mut", Static::fin_(&UInt64::mut));
@@ -6218,7 +6201,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -6281,7 +6264,7 @@ public:
 		return sym_(std::to_string(get_()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -6300,7 +6283,7 @@ public:
 		--ref_();
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		UInt64* const uint64 = dynamic_<UInt64>(other);
 		if (uint64)
@@ -6317,7 +6300,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		UInt64* const uint64 = dynamic_<UInt64>(other);
 		if (uint64)
@@ -6334,7 +6317,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		UInt64* const uint64 = dynamic_<UInt64>(other);
 		if (uint64)
@@ -6351,7 +6334,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		UInt64* const uint64 = dynamic_<UInt64>(other);
 		if (uint64)
@@ -6376,7 +6359,7 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 		UInt64* const uint64 = dynamic_<UInt64>(other);
 		if (uint64)
@@ -6401,7 +6384,7 @@ public:
 		}
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		UInt64* const uint64 = dynamic_<UInt64>(other);
 		if (uint64)
@@ -6422,7 +6405,7 @@ public:
 		return std::hash<int64_t>()(get_());
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		UInt64* const uint64 = dynamic_<UInt64>(other);
 		if (uint64)
@@ -6438,7 +6421,7 @@ public:
 		return false;
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		UInt64* const uint64 = dynamic_<UInt64>(other);
 		if (uint64)
@@ -6454,7 +6437,7 @@ public:
 		return false;
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		UInt64* const uint64 = dynamic_<UInt64>(other);
 		if (uint64)
@@ -6470,7 +6453,7 @@ public:
 		return false;
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		UInt64* const uint64 = dynamic_<UInt64>(other);
 		if (uint64)
@@ -6499,7 +6482,7 @@ public:
 		return make_<Float32>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -6511,43 +6494,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Float32>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Float32>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Float32>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -6584,7 +6567,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Float32::mut", Static::fin_(&Float32::mut));
@@ -6610,7 +6593,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -6669,7 +6652,7 @@ public:
 		return sym_(std::to_string(get_()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -6688,7 +6671,7 @@ public:
 		from_int64_(to_int64_() - 1);
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -6697,7 +6680,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -6706,7 +6689,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -6715,7 +6698,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -6728,7 +6711,7 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -6741,7 +6724,7 @@ public:
 		}
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_float64_() == number->to_float64_());
@@ -6752,25 +6735,25 @@ public:
 		return std::hash<double>()(to_float64_());
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_float64_() < number->to_float64_());
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_float64_() > number->to_float64_());
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_float64_() <= number->to_float64_());
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_float64_() >= number->to_float64_());
@@ -6789,7 +6772,7 @@ public:
 		return make_<Float64>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -6801,43 +6784,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Float64>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Float64>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Float64>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -6874,7 +6857,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Float64::mut", Static::fin_(&Float64::mut));
@@ -6904,7 +6887,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -6967,7 +6950,7 @@ public:
 		return sym_(std::to_string(get_()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -6986,7 +6969,7 @@ public:
 		from_int64_(to_int64_() - 1);
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -6995,7 +6978,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7004,7 +6987,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7013,7 +6996,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7026,7 +7009,7 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7040,7 +7023,7 @@ public:
 		}
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() == number->to_float64_());
@@ -7051,25 +7034,25 @@ public:
 		return std::hash<double>()(get_());
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() < number->to_float64_());
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() > number->to_float64_());
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() <= number->to_float64_());
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() >= number->to_float64_());
@@ -7090,7 +7073,7 @@ public:
 		return make_<Complex32>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -7102,43 +7085,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Complex32>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Complex32>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Complex32>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -7180,7 +7163,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Complex32::mut", Static::fin_(&Complex32::mut));
@@ -7213,7 +7196,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -7297,7 +7280,7 @@ public:
 		return sym_(std::to_string(get_().real()) + std::string(1, delim) + std::to_string(get_().imag()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -7321,7 +7304,7 @@ public:
 		from_int64_(to_int64_() - 1);
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7330,7 +7313,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7339,7 +7322,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7348,7 +7331,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7357,11 +7340,11 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (to_complex64_() == number->to_complex64_());
@@ -7375,22 +7358,22 @@ public:
 		return std::hash<double>()(c.real()) ^ ((i << s) | (i >> s));
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		return false;
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		return false;
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		return false;
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		return false;
 	}
@@ -7410,7 +7393,7 @@ public:
 		return make_<Complex64>(data);
 	}
 
-	static inline const Ptr mut(const Ptr ignore)
+	static inline const Ptr mut(const Ptr& ignore)
 	{
 		return mut_();
 	}
@@ -7422,43 +7405,43 @@ public:
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr ignore)
+	static inline const Ptr fin(const Ptr& ignore)
 	{
 		return fin_();
 	}
 
-	static inline const Ptr lak_(const Ptr lake)
+	static inline const Ptr lak_(const Ptr& lake)
 	{
 		const Ptr ptr = mut_();
 		static_<Complex64>(ptr)->from_lake_(lake);
 		return ptr;
 	}
 
-	static inline const Ptr lak(const Ptr it)
+	static inline const Ptr lak(const Ptr& it)
 	{
 		return lak_(it->next_());
 	}
 
-	static inline const Ptr riv_(const Ptr river)
+	static inline const Ptr riv_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Complex64>(ptr)->from_river_(river);
 		return ptr;
 	}
 
-	static inline const Ptr riv(const Ptr it)
+	static inline const Ptr riv(const Ptr& it)
 	{
 		return riv_(it->next_());
 	}
 
-	static inline const Ptr rwl_(const Ptr river)
+	static inline const Ptr rwl_(const Ptr& river)
 	{
 		const Ptr ptr = mut_();
 		static_<Complex64>(ptr)->from_river_with_links_(river);
 		return ptr;
 	}
 
-	static inline const Ptr rwl(const Ptr it)
+	static inline const Ptr rwl(const Ptr& it)
 	{
 		return rwl_(it->next_());
 	}
@@ -7500,7 +7483,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Complex64::mut", Static::fin_(&Complex64::mut));
@@ -7541,7 +7524,7 @@ public:
 		return lake;
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
@@ -7633,7 +7616,7 @@ public:
 		return sym_(std::to_string(get_().real()) + std::string(1, delim) + std::to_string(get_().imag()));
 	}
 
-	virtual inline void from_symbol_(const Ptr ptr) override
+	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
@@ -7657,7 +7640,7 @@ public:
 		from_int64_(to_int64_() - 1);
 	}
 
-	virtual inline void self_add_(const Ptr other) override
+	virtual inline void self_add_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7666,7 +7649,7 @@ public:
 		}
 	}
 
-	virtual inline void self_subtract_(const Ptr other) override
+	virtual inline void self_subtract_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7675,7 +7658,7 @@ public:
 		}
 	}
 
-	virtual inline void self_multiply_(const Ptr other) override
+	virtual inline void self_multiply_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7684,7 +7667,7 @@ public:
 		}
 	}
 
-	virtual inline void self_divide_(const Ptr other) override
+	virtual inline void self_divide_(const Ptr& other) override
 	{
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -7693,11 +7676,11 @@ public:
 		}
 	}
 
-	virtual inline void self_modulo_(const Ptr other) override
+	virtual inline void self_modulo_(const Ptr& other) override
 	{
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
 		return number && (get_() == number->to_complex64_());
@@ -7711,22 +7694,22 @@ public:
 		return std::hash<double>()(c.real()) ^ ((i << s) | (i >> s));
 	}
 
-	virtual inline const bool less_than_(const Ptr other) const override
+	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		return false;
 	}
 
-	virtual inline const bool greater_than_(const Ptr other) const override
+	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		return false;
 	}
 
-	virtual inline const bool less_or_equal_(const Ptr other) const override
+	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		return false;
 	}
 
-	virtual inline const bool greater_or_equal_(const Ptr other) const override
+	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		return false;
 	}
@@ -7759,7 +7742,7 @@ public:
 		return mut_(new std::stringstream(str));
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr& it)
 	{
 		const Ptr str = it->next_();
 		if (str->is_("."))
@@ -7799,7 +7782,7 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::River::mut", Static::fin_(&River::mut, "lake", "is_file"));
@@ -7826,7 +7809,7 @@ public:
 		return CATS;
 	}
 
-	inline const bool push_back_(const Ptr ptr)
+	inline const bool push_back_(const Ptr& ptr)
 	{
 		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
@@ -7835,7 +7818,7 @@ public:
 		return true;
 	}
 
-	inline const Ptr push_back(const Ptr it)
+	inline const Ptr push_back(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -7844,7 +7827,7 @@ public:
 		return me_();
 	}
 
-	inline const bool push_back_with_links_(const Ptr ptr, const Ptr shoal)
+	inline const bool push_back_with_links_(const Ptr& ptr, const Ptr& shoal)
 	{
 		const Ptr type = ptr->type_();
 		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
@@ -7858,7 +7841,7 @@ public:
 		_stream->write(str.data(), str.length());
 	}
 
-	inline void write_(const Ptr ptr)
+	inline void write_(const Ptr& ptr)
 	{
 		const Ptr ptr_to_lake = ptr->invoke_("to_lake");
 		Lake* const lake = dynamic_<Lake>(ptr_to_lake);
@@ -7868,7 +7851,7 @@ public:
 		}
 	}
 
-	inline const Ptr write(const Ptr it)
+	inline const Ptr write(const Ptr& it)
 	{
 		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 		{
@@ -7884,7 +7867,7 @@ public:
 		return call_(type + "::riv", me_());
 	}
 
-	inline const Ptr pop_front(const Ptr ignore)
+	inline const Ptr pop_front(const Ptr& ignore)
 	{
 		return pop_front_();
 	}
@@ -7915,7 +7898,7 @@ public:
 		return _stream->good();
 	}
 
-	inline const Ptr good(const Ptr ignore) const
+	inline const Ptr good(const Ptr& ignore) const
 	{
 		return boolean_(good_());
 	}
@@ -7925,7 +7908,7 @@ public:
 		return _stream->get();
 	}
 
-	inline const Ptr get(const Ptr ignore)
+	inline const Ptr get(const Ptr& ignore)
 	{
 		return Int8::fin_(get_());
 	}
@@ -7935,7 +7918,7 @@ public:
 		return _stream->peek();
 	}
 
-	inline const Ptr peek(const Ptr ignore)
+	inline const Ptr peek(const Ptr& ignore)
 	{
 		return Int8::fin_(peek_());
 	}
@@ -7953,14 +7936,13 @@ inline const Thing::Ptr Thing::iterator_() const
 	return IteratorPtr::mut_(me_());
 }
 
-template <typename F>
-inline const bool Thing::is_(F&& symbol) const
+inline const bool Thing::is_(const std::string& symbol) const
 {
 	const Symbol* const sym = dynamic_cast<const Symbol*>(this);
-	return (sym && sym->symbol_() == std::forward<F>(symbol));
+	return (sym && sym->symbol_() == symbol);
 }
 
-inline const bool Thing::is_(const Thing::Ptr symbol) const
+inline const bool Thing::is_(const Ptr& symbol) const
 {
 	Symbol* const sym = dynamic_<Symbol>(symbol);
 	return (sym && is_(sym->symbol_()));
@@ -7972,7 +7954,7 @@ inline const Thing::Ptr Thing::sym_(F&& symbol)
 	return Symbol::fin_(std::forward<F>(symbol));
 }
 
-inline const Thing::Ptr Thing::call(const Thing::Ptr it)
+inline const Thing::Ptr Thing::call(const Ptr& it)
 {
 	const Ptr function = it->next_();
 	const Ptr fun = static_<Shoal>(shared_())->at_(function);
@@ -8030,7 +8012,7 @@ inline const Thing::Ptr Thing::pub_() const
 	return PUB;
 }
 
-inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr it)
+inline const Thing::Ptr Thing::operator()(Thing* const thing, const Ptr& it)
 {
 	const Ptr member = static_<Shoal>(thing->pub_())->at_(it->next_());
 	if (member->is_nothing_())
@@ -8040,7 +8022,7 @@ inline const Thing::Ptr Thing::operator()(Thing* const thing, const Thing::Ptr i
 	return operate_(thing, member, it);
 }
 
-inline void Thing::log_(const Thing::Ptr ptr)
+inline void Thing::log_(const Ptr& ptr)
 {
 	const Ptr ptr_to_lake = ptr->invoke_("to_lake");
 	const Lake* const lake = dynamic_<Lake>(ptr_to_lake);
@@ -8068,12 +8050,12 @@ inline const Thing::Ptr Thing::invoke_(Args&&... args)
 	return invoke(IteratorCopy<std::vector<Ptr>>::mut_(std::move(v)));
 }
 
-inline const Thing::Ptr Thing::identity(const Thing::Ptr ignore) const
+inline const Thing::Ptr Thing::identity(const Ptr& ignore) const
 {
 	return Int64::mut_(identity_());
 }
 
-inline const Thing::Ptr Thing::hash(const Thing::Ptr ignore) const
+inline const Thing::Ptr Thing::hash(const Ptr& ignore) const
 {
 	return Int64::mut_(int64_t(hash_()));
 }
@@ -8089,7 +8071,7 @@ inline const Thing::Ptr Thing::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Thing::shared_()
+inline const Thing::Ptr& Thing::shared_()
 {
 	static const Ptr SHARED = []()
 	{
@@ -8108,17 +8090,17 @@ inline const Thing::Ptr Thing::shared_()
 // class Serializable
 //======================================================================
 
-inline void Serializable::serialize_(const Thing::Ptr thing, const Thing::Ptr river)
+inline void Serializable::serialize_(const Thing::Ptr& thing, const Thing::Ptr& river)
 {
 	Thing::static_<Shoal>(Shoal::mut_())->gather_to_river_(thing, river);
 }
 
-inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr river)
+inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr& river)
 {
 	return Thing::static_<Shoal>(Shoal::mut_())->gather_from_river_(river);
 }
 
-inline void Serializable::to_river_(const Thing::Ptr river) const
+inline void Serializable::to_river_(const Thing::Ptr& river) const
 {
 	const Thing::Ptr to_lake = to_lake_();
 	Lake* const lake = Thing::dynamic_<Lake>(to_lake);
@@ -8128,7 +8110,7 @@ inline void Serializable::to_river_(const Thing::Ptr river) const
 	}
 }
 
-inline void Serializable::from_river_(const Thing::Ptr river)
+inline void Serializable::from_river_(const Thing::Ptr& river)
 {
 	const Thing::Ptr lake = Lake::mut_();
 	Thing::static_<Lake>(lake)->from_river_(river);
@@ -8144,7 +8126,7 @@ inline const Thing::Ptr Serializable::to_lake_via_river_() const
 	return lake;
 }
 
-inline void Serializable::from_lake_via_river_(const Thing::Ptr lake)
+inline void Serializable::from_lake_via_river_(const Thing::Ptr& lake)
 {
 	Lake* const lak = Thing::dynamic_<Lake>(lake);
 	if (!lak)
@@ -8184,7 +8166,7 @@ inline const Thing::Ptr Symbol::pub_() const
 	return PUB;
 }
 
-inline void Symbol::share_(const Thing::Ptr shoal)
+inline void Symbol::share_(const Ptr& shoal)
 {
 	Shoal* const s = static_<Shoal>(shoal);
 	s->update_("strange::Symbol::lak", Static::fin_(&Symbol::lak, "lake"));
@@ -8192,7 +8174,7 @@ inline void Symbol::share_(const Thing::Ptr shoal)
 	s->update_("strange::Symbol::rwl", Static::fin_(&Symbol::rwl, "river"));
 }
 
-inline const Thing::Ptr Symbol::lak_(const Thing::Ptr lake)
+inline const Thing::Ptr Symbol::lak_(const Ptr& lake)
 {
 	Lake* const lak = dynamic_<Lake>(lake);
 	if (!lak)
@@ -8203,12 +8185,12 @@ inline const Thing::Ptr Symbol::lak_(const Thing::Ptr lake)
 	return fin_(lak->get_());
 }
 
-inline const Thing::Ptr Symbol::riv_(const Thing::Ptr river)
+inline const Thing::Ptr Symbol::riv_(const Ptr& river)
 {
 	return fin_(static_<Lake>(Lake::riv_(river))->get_());
 }
 
-inline const Thing::Ptr Symbol::rwl_(const Thing::Ptr river)
+inline const Thing::Ptr Symbol::rwl_(const Ptr& river)
 {
 	return fin_(static_<Lake>(Lake::rwl_(river))->get_());
 }
@@ -8235,7 +8217,7 @@ inline const Thing::Ptr Symbol::cats_() const
 	return CATS;
 }
 
-inline const Thing::Ptr Symbol::add_(const Thing::Ptr other) const
+inline const Thing::Ptr Symbol::add_(const Ptr& other) const
 {
 	Symbol* const symbol = dynamic_<Symbol>(other);
 	if (symbol)
@@ -8250,7 +8232,7 @@ inline const Thing::Ptr Symbol::add_(const Thing::Ptr other) const
 	return me_();
 }
 
-inline const char Symbol::at_(const Thing::Ptr index) const
+inline const char Symbol::at_(const Ptr& index) const
 {
 	Number* const ind = dynamic_<Number>(index);
 	if (ind)
@@ -8260,7 +8242,7 @@ inline const char Symbol::at_(const Thing::Ptr index) const
 	return 0;
 }
 
-inline const Thing::Ptr Symbol::at(const Thing::Ptr it) const
+inline const Thing::Ptr Symbol::at(const Ptr& it) const
 {
 	return UInt8::mut_(at_(it->next_()));
 }
@@ -8302,7 +8284,7 @@ inline const Thing::Ptr Const<T>::eater_() const
 // class Shoal
 //======================================================================
 
-inline void Shoal::to_river_(const Thing::Ptr river) const
+inline void Shoal::to_river_(const Ptr& river) const
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8319,7 +8301,7 @@ inline void Shoal::to_river_(const Thing::Ptr river) const
 	}
 }
 
-inline void Shoal::from_river_(const Thing::Ptr river)
+inline void Shoal::from_river_(const Ptr& river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8340,7 +8322,7 @@ inline void Shoal::from_river_(const Thing::Ptr river)
 	}
 }
 
-inline void Shoal::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
+inline void Shoal::to_river_with_links_(const Ptr& shoal, const Ptr& river) const
 {
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
@@ -8363,7 +8345,7 @@ inline void Shoal::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr
 	}
 }
 
-inline void Shoal::from_river_with_links_(const Thing::Ptr river)
+inline void Shoal::from_river_with_links_(const Ptr& river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8384,7 +8366,7 @@ inline void Shoal::from_river_with_links_(const Thing::Ptr river)
 	}
 }
 
-inline void Shoal::replace_links_(const Thing::Ptr shoal)
+inline void Shoal::replace_links_(const Ptr& shoal)
 {
 	std_unordered_map_ptr_ptr replacement;
 	Shoal* const sho = static_<Shoal>(shoal);
@@ -8395,7 +8377,7 @@ inline void Shoal::replace_links_(const Thing::Ptr shoal)
 	_map.swap(replacement);
 }
 
-inline void Shoal::gather_to_river_(const Thing::Ptr thing, const Thing::Ptr river)
+inline void Shoal::gather_to_river_(const Ptr& thing, const Ptr& river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8414,7 +8396,7 @@ inline void Shoal::gather_to_river_(const Thing::Ptr thing, const Thing::Ptr riv
 	}
 }
 
-inline const Thing::Ptr Shoal::gather_from_river_(const Thing::Ptr river)
+inline const Thing::Ptr Shoal::gather_from_river_(const Ptr& river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8435,12 +8417,12 @@ inline const Thing::Ptr Shoal::gather_from_river_(const Thing::Ptr river)
 	return at_(nothing_());
 }
 
-inline const Thing::Ptr Shoal::size(const Thing::Ptr ignore) const
+inline const Thing::Ptr Shoal::size(const Ptr& ignore) const
 {
 	return Int64::mut_(size_());
 }
 
-inline void Shoal::self_add_(const Thing::Ptr other)
+inline void Shoal::self_add_(const Ptr& other)
 {
 	Shoal* const shoal = dynamic_<Shoal>(other);
 	if (shoal)
@@ -8488,7 +8470,7 @@ inline void Shoal::self_add_(const Thing::Ptr other)
 	}
 }
 
-inline void Shoal::self_subtract_(const Thing::Ptr other)
+inline void Shoal::self_subtract_(const Ptr& other)
 {
 	Shoal* const shoal = dynamic_<Shoal>(other);
 	if (shoal)
@@ -8593,12 +8575,12 @@ inline const Thing::Ptr Shoal::Feeder::cats_() const
 // class Flock
 //======================================================================
 
-inline const Thing::Ptr Flock::size(const Thing::Ptr ignore) const
+inline const Thing::Ptr Flock::size(const Ptr& ignore) const
 {
 	return Int64::mut_(size_());
 }
 
-inline const Thing::Ptr Flock::at_(const Thing::Ptr pos) const
+inline const Thing::Ptr Flock::at_(const Ptr& pos) const
 {
 	Number* const number = dynamic_<Number>(pos);
 	if (number)
@@ -8608,7 +8590,7 @@ inline const Thing::Ptr Flock::at_(const Thing::Ptr pos) const
 	return nothing_();
 }
 
-inline void Flock::update_(const Thing::Ptr pos, const Thing::Ptr value)
+inline void Flock::update_(const Ptr& pos, const Ptr& value)
 {
 	Number* const number = dynamic_<Number>(pos);
 	if (number)
@@ -8617,7 +8599,7 @@ inline void Flock::update_(const Thing::Ptr pos, const Thing::Ptr value)
 	}
 }
 
-inline void Flock::insert_(const Thing::Ptr pos, const Thing::Ptr value)
+inline void Flock::insert_(const Ptr& pos, const Ptr& value)
 {
 	Number* const number = dynamic_<Number>(pos);
 	if (number)
@@ -8626,7 +8608,7 @@ inline void Flock::insert_(const Thing::Ptr pos, const Thing::Ptr value)
 	}
 }
 
-inline void Flock::erase_(const Thing::Ptr pos)
+inline void Flock::erase_(const Ptr& pos)
 {
 	Number* const number = dynamic_<Number>(pos);
 	if (number)
@@ -8635,7 +8617,7 @@ inline void Flock::erase_(const Thing::Ptr pos)
 	}
 }
 
-inline void Flock::self_add_(const Thing::Ptr other)
+inline void Flock::self_add_(const Ptr& other)
 {
 	Flock* const flock = dynamic_<Flock>(other);
 	if (flock)
@@ -8671,12 +8653,12 @@ inline void Flock::self_add_(const Thing::Ptr other)
 	}
 }
 
-inline const Thing::Ptr Flock::Concurrent::size(const Thing::Ptr ignore) const
+inline const Thing::Ptr Flock::Concurrent::size(const Ptr& ignore) const
 {
 	return Int64::mut_(size_());
 }
 
-inline const Thing::Ptr Flock::Concurrent::at_(const Thing::Ptr pos) const
+inline const Thing::Ptr Flock::Concurrent::at_(const Ptr& pos) const
 {
 	Number* const number = dynamic_<Number>(pos);
 	if (number)
@@ -8691,7 +8673,7 @@ inline const Thing::Ptr Flock::Concurrent::at_(const Thing::Ptr pos) const
 	return nothing_();
 }
 
-inline void Flock::to_river_(const Thing::Ptr river) const
+inline void Flock::to_river_(const Ptr& river) const
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8707,7 +8689,7 @@ inline void Flock::to_river_(const Thing::Ptr river) const
 	}
 }
 
-inline void Flock::from_river_(const Thing::Ptr river)
+inline void Flock::from_river_(const Ptr& river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8728,7 +8710,7 @@ inline void Flock::from_river_(const Thing::Ptr river)
 	}
 }
 
-inline void Flock::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
+inline void Flock::to_river_with_links_(const Ptr& shoal, const Ptr& river) const
 {
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
@@ -8750,7 +8732,7 @@ inline void Flock::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr
 	}
 }
 
-inline void Flock::from_river_with_links_(const Thing::Ptr river)
+inline void Flock::from_river_with_links_(const Ptr& river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8771,7 +8753,7 @@ inline void Flock::from_river_with_links_(const Thing::Ptr river)
 	}
 }
 
-inline void Flock::replace_links_(const Thing::Ptr shoal)
+inline void Flock::replace_links_(const Ptr& shoal)
 {
 	Shoal* const sho = static_<Shoal>(shoal);
 	for (std_vector_ptr::iterator i = _vector.begin(); i != _vector.end(); ++i)
@@ -8814,7 +8796,7 @@ inline const Thing::Ptr Flock::Iterator::cats_() const
 // class Herd
 //======================================================================
 
-inline void Herd::to_river_(const Thing::Ptr river) const
+inline void Herd::to_river_(const Ptr& river) const
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8830,7 +8812,7 @@ inline void Herd::to_river_(const Thing::Ptr river) const
 	}
 }
 
-inline void Herd::from_river_(const Thing::Ptr river)
+inline void Herd::from_river_(const Ptr& river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8849,7 +8831,7 @@ inline void Herd::from_river_(const Thing::Ptr river)
 	}
 }
 
-inline void Herd::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const
+inline void Herd::to_river_with_links_(const Ptr& shoal, const Ptr& river) const
 {
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
@@ -8871,7 +8853,7 @@ inline void Herd::to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr 
 	}
 }
 
-inline void Herd::from_river_with_links_(const Thing::Ptr river)
+inline void Herd::from_river_with_links_(const Ptr& river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8890,7 +8872,7 @@ inline void Herd::from_river_with_links_(const Thing::Ptr river)
 	}
 }
 
-inline void Herd::replace_links_(const Thing::Ptr shoal)
+inline void Herd::replace_links_(const Ptr& shoal)
 {
 	std_unordered_set_ptr replacement;
 	Shoal* const sho = static_<Shoal>(shoal);
@@ -8901,7 +8883,7 @@ inline void Herd::replace_links_(const Thing::Ptr shoal)
 	_set.swap(replacement);
 }
 
-inline const Thing::Ptr Herd::size(const Thing::Ptr ignore) const
+inline const Thing::Ptr Herd::size(const Ptr& ignore) const
 {
 	return Int64::mut_(size_());
 }
@@ -8926,7 +8908,7 @@ inline const Thing::Ptr Herd::size(const Thing::Ptr ignore) const
 // class Lake
 //======================================================================
 
-inline void Lake::to_river_(const Thing::Ptr river) const
+inline void Lake::to_river_(const Ptr& river) const
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8939,7 +8921,7 @@ inline void Lake::to_river_(const Thing::Ptr river) const
 	riv->write_(get_());
 }
 
-inline void Lake::from_river_(const Thing::Ptr river)
+inline void Lake::from_river_(const Ptr& river)
 {
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
@@ -8956,7 +8938,7 @@ inline void Lake::from_river_(const Thing::Ptr river)
 	}
 }
 
-inline const char Lake::at_(const Thing::Ptr index) const
+inline const char Lake::at_(const Ptr& index) const
 {
 	Number* const ind = dynamic_<Number>(index);
 	if (ind)
@@ -8966,12 +8948,12 @@ inline const char Lake::at_(const Thing::Ptr index) const
 	return 0;
 }
 
-inline const Thing::Ptr Lake::at(const Thing::Ptr it) const
+inline const Thing::Ptr Lake::at(const Ptr& it) const
 {
 	return UInt8::mut_(at_(it->next_()));
 }
 
-inline void Lake::update_(const Thing::Ptr index, const Thing::Ptr byte)
+inline void Lake::update_(const Ptr& index, const Ptr& byte)
 {
 	Number* const ind = dynamic_<Number>(index);
 	if (ind)
@@ -8988,12 +8970,12 @@ inline void Lake::update_(const Thing::Ptr index, const Thing::Ptr byte)
 // class Number
 //======================================================================
 
-inline const Thing::Ptr Number::to_int64(const Thing::Ptr ignore) const
+inline const Thing::Ptr Number::to_int64(const Ptr& ignore) const
 {
 	return Int64::mut_(to_int64_());
 }
 
-inline void Number::from_int64_(const Thing::Ptr ptr)
+inline void Number::from_int64_(const Ptr& ptr)
 {
 	Int64* const int64 = dynamic_<Int64>(ptr);
 	if (int64)
@@ -9002,12 +8984,12 @@ inline void Number::from_int64_(const Thing::Ptr ptr)
 	}
 }
 
-inline const Thing::Ptr Number::to_float64(const Thing::Ptr ignore) const
+inline const Thing::Ptr Number::to_float64(const Ptr& ignore) const
 {
 	return Float64::mut_(to_float64_());
 }
 
-inline void Number::from_float64_(const Thing::Ptr ptr)
+inline void Number::from_float64_(const Ptr& ptr)
 {
 	Float64* const float64 = dynamic_<Float64>(ptr);
 	if (float64)
@@ -9016,12 +8998,12 @@ inline void Number::from_float64_(const Thing::Ptr ptr)
 	}
 }
 
-inline const Thing::Ptr Number::to_imaginary64(const Thing::Ptr ignore) const
+inline const Thing::Ptr Number::to_imaginary64(const Ptr& ignore) const
 {
 	return Float64::mut_(to_imaginary64_());
 }
 
-inline void Number::from_imaginary64_(const Thing::Ptr ptr)
+inline void Number::from_imaginary64_(const Ptr& ptr)
 {
 	Float64* const float64 = dynamic_<Float64>(ptr);
 	if (float64)
@@ -9030,12 +9012,12 @@ inline void Number::from_imaginary64_(const Thing::Ptr ptr)
 	}
 }
 
-inline const Thing::Ptr Number::to_complex64(const Thing::Ptr ignore) const
+inline const Thing::Ptr Number::to_complex64(const Ptr& ignore) const
 {
 	return Complex64::mut_(to_complex64_());
 }
 
-inline void Number::from_complex64_(const Thing::Ptr ptr)
+inline void Number::from_complex64_(const Ptr& ptr)
 {
 	Complex64* const complex64 = dynamic_<Complex64>(ptr);
 	if (complex64)

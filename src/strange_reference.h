@@ -38,18 +38,18 @@ class Reference : public Mutable
 //----------------------------------------------------------------------
 {
 public:
-	inline Reference(const Ptr ptr)
+	inline Reference(const Ptr& ptr)
 		: Mutable{}
 		, _ptr{ ptr }
 	{
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr& it)
 	{
 		return mut_(it->next_());
 	}
 
-	static inline const Ptr mut_(const Ptr ptr)
+	static inline const Ptr mut_(const Ptr& ptr)
 	{
 		return make_<Reference>(ptr);
 	}
@@ -84,18 +84,18 @@ public:
 		return PUB;
 	}
 
-	static inline void share_(const Ptr shoal)
+	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::Reference::mut", Static::fin_(&Reference::mut, "thing"));
 	}
 
-	inline void set_(const Ptr ptr)
+	inline void set_(const Ptr& ptr)
 	{
 		_ptr = ptr;
 	}
 
-	inline const Ptr set(const Ptr it)
+	inline const Ptr set(const Ptr& it)
 	{
 		const Ptr ptr = it->next_();
 		set_(ptr);
@@ -107,7 +107,7 @@ public:
 		return _ptr;
 	}
 
-	inline const Ptr get(const Ptr ignore) const
+	inline const Ptr get(const Ptr& ignore) const
 	{
 		return get_();
 	}
@@ -138,18 +138,18 @@ private:
 	class Iterator : public Mutable
 	{
 	public:
-		inline Iterator(const Ptr reference)
+		inline Iterator(const Ptr& reference)
 			: Mutable{}
 			, _reference{ reference }
 		{
 		}
 
-		static inline const Ptr mut(const Ptr it)
+		static inline const Ptr mut(const Ptr& it)
 		{
 			return mut_(it->next_());
 		}
 
-		static inline const Ptr mut_(const Ptr reference)
+		static inline const Ptr mut_(const Ptr& reference)
 		{
 			return make_<Iterator>(reference);
 		}

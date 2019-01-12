@@ -38,19 +38,19 @@ class Method : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	inline Method(const Ptr thing, const Ptr member) // member is a functor, not a name
+	inline Method(const Ptr& thing, const Ptr& member) // member is a functor, not a name
 		: Thing{}
 		, _thing{ thing }
 		, _member{ member }
 	{
 	}
 
-	static inline const Ptr fin_(const Ptr thing, const Ptr member) // member is functor, not a name
+	static inline const Ptr fin_(const Ptr& thing, const Ptr& member) // member is functor, not a name
 	{
 		return fake_<Method>(thing, member);
 	}
 
-	static inline const Ptr with_name_(const Ptr thing, const Ptr name)
+	static inline const Ptr with_name_(const Ptr& thing, const Ptr& name)
 	{
 		return fin_(thing, static_<Shoal>(thing->pub_())->at_(name));
 	}
@@ -67,7 +67,7 @@ public:
 	}
 
 protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
 		return operate_(_thing.get(), _member, it);
 	}

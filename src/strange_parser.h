@@ -43,19 +43,19 @@ class Parser : public Mutable
 //----------------------------------------------------------------------
 {
 public:
-	inline Parser(const Ptr tokenizer)
+	inline Parser(const Ptr& tokenizer)
 		: Mutable{}
 		, _tokenizer{ tokenizer }
 		, _next{ _tokenizer->next_() }
 	{
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr& it)
 	{
 		return mut_(it->next_());
 	}
 
-	static inline const Ptr mut_(const Ptr tokenizer)
+	static inline const Ptr mut_(const Ptr& tokenizer)
 	{
 		return make_<Parser>(tokenizer);
 	}
@@ -83,7 +83,7 @@ public:
 		return !_tokenizer->invoke_("good")->is_nothing_();
 	}
 
-	inline const Ptr good(const Ptr ignore)
+	inline const Ptr good(const Ptr& ignore)
 	{
 		Tokenizer* const tokenizer = dynamic_<Tokenizer>(_tokenizer);
 		if (tokenizer)
@@ -135,12 +135,12 @@ private:
 		_next = _tokenizer->next_();
 	}
 
-	static inline void _wrap_(const Ptr thing, const Ptr flock)
+	static inline void _wrap_(const Ptr& thing, const Ptr& flock)
 	{
 		static_<Flock>(flock)->push_back_(Expression::fin_(thing));
 	}
 
-	inline const Ptr _parse_(const Ptr scope, const Ptr shoal)
+	inline const Ptr _parse_(const Ptr& scope, const Ptr& shoal)
 	{
 		Ptr result;
 		for (bool first = true, cont = true; cont; first = false)
@@ -404,7 +404,7 @@ private:
 		return Expression::fin_();
 	}
 
-	inline const bool _thing_(const Ptr scope, const Ptr shoal, const Ptr statement, const Ptr flock)
+	inline const bool _thing_(const Ptr& scope, const Ptr& shoal, const Ptr& statement, const Ptr& flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -651,7 +651,7 @@ private:
 		return true; // continue
 	}
 
-	inline void _dot_(const Ptr scope, const Ptr shoal, const Ptr statement, const Ptr flock)
+	inline void _dot_(const Ptr& scope, const Ptr& shoal, const Ptr& statement, const Ptr& flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -686,7 +686,7 @@ private:
 		}
 	}
 
-	inline void _member_(const Ptr scope, const Ptr shoal, const Ptr statement, const Ptr flock)
+	inline void _member_(const Ptr& scope, const Ptr& shoal, const Ptr& statement, const Ptr& flock)
 	{
 		const Ptr token = _token_();
 		Reference* const smt = static_<Reference>(statement);
@@ -741,7 +741,7 @@ private:
 		}
 	}
 
-	inline const bool _statement_(const Ptr scope, const Ptr shoal, const Ptr flock, const bool parameters = false, const bool capture = false)
+	inline const bool _statement_(const Ptr& scope, const Ptr& shoal, const Ptr& flock, const bool parameters = false, const bool capture = false)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -767,7 +767,7 @@ private:
 		return false; // not a statement
 	}
 
-	inline void _list_(const Ptr scope, const Ptr shoal, const Ptr flock, const Ptr open, const Ptr close, const bool parameters = false, const bool capture = false)
+	inline void _list_(const Ptr& scope, const Ptr& shoal, const Ptr& flock, const Ptr& open, const Ptr& close, const bool parameters = false, const bool capture = false)
 	{
 		Flock* const flk = static_<Flock>(flock);
 		bool parameter = parameters;
@@ -910,7 +910,7 @@ private:
 		}
 	}
 
-	inline const bool _map_(const Ptr scope, const Ptr shoal, const Ptr flock)
+	inline const bool _map_(const Ptr& scope, const Ptr& shoal, const Ptr& flock)
 	{
 		Flock* const flk = static_<Flock>(flock);
 		bool is_map = false;
@@ -1075,7 +1075,7 @@ private:
 		return is_map;
 	}
 
-	inline const Ptr _scope_(const Ptr scope, const Ptr shoal, const Ptr flock, const bool relative)
+	inline const Ptr _scope_(const Ptr& scope, const Ptr& shoal, const Ptr& flock, const bool relative)
 	{
 		Ptr key = nothing_();
 		bool punctuation = false;
@@ -1147,7 +1147,7 @@ private:
 		return Expression::fin_(sym_("shared_scope_"), key_flock);
 	}
 	
-	inline const bool _at_(const Ptr scope, const Ptr shoal, const Ptr flock)
+	inline const bool _at_(const Ptr& scope, const Ptr& shoal, const Ptr& flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -1183,7 +1183,7 @@ private:
 		return _update_(scope, flock, shoal); // continue/break
 	}
 
-	inline const bool _update_(const Ptr scope, const Ptr shoal, const Ptr flock)
+	inline const bool _update_(const Ptr& scope, const Ptr& shoal, const Ptr& flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))

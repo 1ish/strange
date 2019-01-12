@@ -40,14 +40,14 @@ class Function : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	inline Function(const Ptr expression, const Ptr shared)
+	inline Function(const Ptr& expression, const Ptr& shared)
 		: Thing{}
 		, _expression{ expression }
 		, _shared{ shared }
 	{
 	}
 
-	static inline const Ptr fin_(const Ptr expression, const Ptr shared = Shoal::mut_())
+	static inline const Ptr fin_(const Ptr& expression, const Ptr& shared = Shoal::mut_())
 	{
 		return fake_<Function>(expression, shared);
 	}
@@ -59,7 +59,7 @@ public:
 	}
 
 protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr it) override
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
 		const Ptr local = Shoal::mut_();
 		Shoal* const loc = static_<Shoal>(local);

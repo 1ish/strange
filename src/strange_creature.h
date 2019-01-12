@@ -38,7 +38,7 @@ class Creature : public Mutable, public Serializable
 //----------------------------------------------------------------------
 {
 public:
-	inline Creature(const Ptr creator, const Ptr members)
+	inline Creature(const Ptr& creator, const Ptr& members)
 		: Mutable{}
 		, Serializable{}
 		, _creator{ dynamic_<Shoal>(creator) ? creator : Shoal::mut_() }
@@ -47,26 +47,26 @@ public:
 	{
 	}
 
-	static inline const Ptr mut_(const Ptr creator, const Ptr members)
+	static inline const Ptr mut_(const Ptr& creator, const Ptr& members)
 	{
 		return make_<Creature>(creator, members);
 	}
 
-	static inline const Ptr mut(const Ptr it)
+	static inline const Ptr mut(const Ptr& it)
 	{
 		const Ptr creator = it->next_();
 		const Ptr members = it->next_();
 		return mut_(creator, members);
 	}
 
-	static inline const Ptr fin_(const Ptr creator, const Ptr members)
+	static inline const Ptr fin_(const Ptr& creator, const Ptr& members)
 	{
 		const Ptr result = mut_(creator, members);
 		result->finalize_();
 		return result;
 	}
 
-	static inline const Ptr fin(const Ptr it)
+	static inline const Ptr fin(const Ptr& it)
 	{
 		const Ptr creator = it->next_();
 		const Ptr members = it->next_();
@@ -190,7 +190,7 @@ public:
 		return Mutable::hash_();
 	}
 
-	virtual inline const bool same_(const Ptr other) const override
+	virtual inline const bool same_(const Ptr& other) const override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("same");
 		if (!over->is_nothing_())
@@ -201,7 +201,7 @@ public:
 		return Mutable::same_(other);
 	}
 
-	virtual inline const Ptr visit(const Ptr it) override
+	virtual inline const Ptr visit(const Ptr& it) override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("visit");
 		if (!over->is_nothing_())
@@ -221,7 +221,7 @@ public:
 		return Mutable::eater_();
 	}
 
-	virtual inline const Ptr feeder(const Ptr eater) const override
+	virtual inline const Ptr feeder(const Ptr& eater) const override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("feeder");
 		if (!over->is_nothing_())
@@ -266,7 +266,7 @@ public:
 		return to_lake_via_river_();
 	}
 
-	virtual inline void from_lake_(const Ptr lake) override
+	virtual inline void from_lake_(const Ptr& lake) override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("from_lake");
 		if (!over->is_nothing_())
@@ -279,7 +279,7 @@ public:
 		}
 	}
 
-	virtual inline void to_river_(const Thing::Ptr river) const override
+	virtual inline void to_river_(const Ptr& river) const override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("to_river");
 		if (!over->is_nothing_())
@@ -292,7 +292,7 @@ public:
 		}
 	}
 
-	virtual inline void from_river_(const Thing::Ptr river) override
+	virtual inline void from_river_(const Ptr& river) override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("from_river");
 		if (!over->is_nothing_())
@@ -305,7 +305,7 @@ public:
 		}
 	}
 
-	virtual inline void to_river_with_links_(const Thing::Ptr shoal, const Thing::Ptr river) const override
+	virtual inline void to_river_with_links_(const Ptr& shoal, const Ptr& river) const override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("to_river_with_links");
 		if (!over->is_nothing_())
@@ -318,7 +318,7 @@ public:
 		}
 	}
 
-	virtual inline void from_river_with_links_(const Thing::Ptr river) override
+	virtual inline void from_river_with_links_(const Ptr& river) override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("from_river_with_links");
 		if (!over->is_nothing_())
@@ -331,7 +331,7 @@ public:
 		}
 	}
 
-	virtual inline void replace_links_(const Thing::Ptr shoal) override
+	virtual inline void replace_links_(const Ptr& shoal) override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("replace_links");
 		if (!over->is_nothing_())
@@ -349,7 +349,7 @@ private:
 	const Ptr _members;
 	const Ptr _public;
 
-	static inline const Ptr _public_(const Ptr pub, const Ptr members)
+	static inline const Ptr _public_(const Ptr& pub, const Ptr& members)
 	{
 		const Ptr result = pub->copy_();
 		Shoal* const r = static_<Shoal>(result);
