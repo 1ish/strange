@@ -84,12 +84,12 @@ public:
 		return TYPE;
 	}
 
-	virtual inline void finalize_() override
+	virtual inline void finalize_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("finalize");
 		if (!over->is_nothing_())
 		{
-			operate_(this, over);
+			operate_(const_cast<Creature*>(this), over);
 		}
 		_members->finalize_();
 		Mutable::finalize_();
@@ -107,12 +107,12 @@ public:
 		return fin;
 	}
 
-	virtual inline void freeze_() override
+	virtual inline void freeze_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("freeze");
 		if (!over->is_nothing_())
 		{
-			operate_(this, over);
+			operate_(const_cast<Creature*>(this), over);
 		}
 		_members->freeze_();
 		Mutable::freeze_();

@@ -192,12 +192,12 @@ public:
 	}
 
 	// public impure virtual member functions and adapters
-	virtual inline void finalize_()
+	virtual inline void finalize_() const
 	{
 		_finalized_().store(true, std::memory_order_release);
 	}
 
-	inline const Ptr finalize(const Ptr& ignore)
+	inline const Ptr finalize(const Ptr& ignore) const
 	{
 		finalize_();
 		return nothing_();
@@ -213,12 +213,12 @@ public:
 		return boolean_(finalized_());
 	}
 
-	virtual inline void freeze_()
+	virtual inline void freeze_() const
 	{
 		finalize_();
 	}
 
-	inline const Ptr freeze(const Ptr& ignore)
+	inline const Ptr freeze(const Ptr& ignore) const
 	{
 		freeze_();
 		return nothing_();
@@ -1070,7 +1070,7 @@ class Mutable : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	virtual inline void finalize_() override
+	virtual inline void finalize_() const override
 	{
 		_finalized.store(true, std::memory_order_release);
 	}
@@ -1089,7 +1089,7 @@ protected:
 	}
 
 private:
-	std::atomic<bool> _finalized;
+	mutable std::atomic<bool> _finalized;
 };
 
 //----------------------------------------------------------------------
@@ -1147,7 +1147,7 @@ public:
 		}
 	}
 
-	virtual inline void freeze_() override
+	virtual inline void freeze_() const override
 	{
 		if (!_frozen)
 		{
@@ -1652,7 +1652,7 @@ public:
 
 private:
 	std_unordered_map_ptr_ptr _map;
-	bool _frozen;
+	mutable bool _frozen;
 
 	class Iterator : public Mutable
 	{
@@ -1757,7 +1757,7 @@ public:
 		}
 	}
 
-	virtual inline void freeze_() override
+	virtual inline void freeze_() const override
 	{
 		if (!_frozen)
 		{
@@ -2224,7 +2224,7 @@ public:
 
 private:
 	std_vector_ptr _vector;
-	bool _frozen;
+	mutable bool _frozen;
 
 	class Iterator : public Mutable
 	{
@@ -2316,7 +2316,7 @@ public:
 		}
 	}
 
-	virtual inline void freeze_() override
+	virtual inline void freeze_() const override
 	{
 		if (!_frozen)
 		{
@@ -2859,7 +2859,7 @@ public:
 
 private:
 	std_unordered_set_ptr _set;
-	bool _frozen;
+	mutable bool _frozen;
 
 	class Iterator : public Mutable
 	{
@@ -8037,9 +8037,9 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("hash", Const<Thing>::fin_(&Thing::hash));
 		shoal->update_("same", Const<Thing>::fin_(&Thing::same, "other"));
 		shoal->update_("different", Const<Thing>::fin_(&Thing::different, "other"));
-		shoal->update_("finalize", Member<Thing>::fin_(&Thing::finalize));
+		shoal->update_("finalize", Const<Thing>::fin_(&Thing::finalize));
 		shoal->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
-		shoal->update_("freeze", Member<Thing>::fin_(&Thing::freeze));
+		shoal->update_("freeze", Const<Thing>::fin_(&Thing::freeze));
 		shoal->update_("frozen", Const<Thing>::fin_(&Thing::frozen));
 		shoal->update_("copy", Const<Thing>::fin_(&Thing::copy));
 		shoal->update_("clone", Const<Thing>::fin_(&Thing::clone));

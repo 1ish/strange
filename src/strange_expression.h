@@ -328,6 +328,7 @@ public:
 private:
 	const MemberPtr _member;
 	const Ptr _flock;
+	//TODO store a reference to the flock vector
 
 	inline void _generate_strange_(River* const river) const
 	{
