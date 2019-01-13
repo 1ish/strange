@@ -524,6 +524,23 @@ public:
 		const Ptr _member;
 	};
 
+	class Mutation
+	{
+	public:
+		inline Mutation(const Ptr& type)
+			:_type(type)
+		{
+		}
+
+		inline const Ptr type_() const
+		{
+			return _type;
+		}
+
+	private:
+		const Ptr _type;
+	};
+
 protected:
 	// protected static utility functions
 	static inline const Ptr operate_(Thing* const thing, const Ptr& member, const Ptr& it)
@@ -979,8 +996,7 @@ protected:
 		{
 			if (t->finalized_())
 			{
-				log_("ERROR: Member passed finalized thing\n");
-				return nothing_();
+				throw Mutation(thing->type_());
 			}
 			return (t->*_function)(it);
 		}
