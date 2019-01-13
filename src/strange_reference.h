@@ -61,7 +61,7 @@ public:
 
 	virtual inline const Ptr clone_() const override
 	{
-		return mut_(_ptr->copy_());
+		return mut_(_ptr->clone_());
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -76,7 +76,7 @@ public:
 			const Ptr pub = Thing::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
 			shoal->update_("mut", Static::fin_(&Reference::mut, "thing"));
-			shoal->update_("set", Member<Reference>::fin_(&Reference::set));
+			shoal->update_("set", Member<Reference>::fin_(&Reference::set, "thing"));
 			shoal->update_("get", Const<Reference>::fin_(&Reference::get));
 			shoal->finalize_();
 			return pub;

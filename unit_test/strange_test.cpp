@@ -53,16 +53,15 @@ TEST(StrangeTokenizer, Next) {
 	EXPECT_EQ(t->good_(), true);
 	for (Ptr n = tokenizer->next_(); !n->is_("."); n = tokenizer->next_())
 	{
-		Flock* const flock = Thing::dynamic_<Flock>(n);
-		ASSERT_NE(flock, (Flock*)(0));
-		Symbol* const symbol = Thing::dynamic_<Symbol>(flock->at_(3));
+		Token* const token = Thing::dynamic_<Token>(n);
+		ASSERT_NE(token, (Token*)(0));
+		Symbol* const symbol = Thing::dynamic_<Symbol>(token->symbol_());
 		ASSERT_NE(symbol, (Symbol*)(0));
 		std::cout << "got: " << symbol->symbol_() << std::endl;
 	}
 }
 
 TEST(StrangeParser, Execute) {
-	std::cout << "executing" << std::endl;
 	const Ptr river = River::mut_(test_dir + "strange_test_source.str", true);
 	const Ptr tokenizer = Tokenizer::mut_(river);
 	const Ptr parser = Parser::mut_(tokenizer);
@@ -70,6 +69,5 @@ TEST(StrangeParser, Execute) {
 	Expression* const exp = Thing::dynamic_<Expression>(expression);
 	ASSERT_NE(exp, (Expression*)(0));
 	const Ptr result = Expression::immediate_(expression);
-	std::cout << "executed" << std::endl;
 	EXPECT_NE(result.get(), (Thing*)(0));
 }

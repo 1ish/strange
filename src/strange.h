@@ -9,6 +9,7 @@
 #include "strange_creature.h"
 #include "strange_expression.h"
 #include "strange_function.h"
+#include "strange_token.h"
 #include "strange_tokenizer.h"
 #include "strange_parser.h"
 
