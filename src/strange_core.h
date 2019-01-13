@@ -3334,8 +3334,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("Lake::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("Lake::from_lake_ passed wrong type of thing");
 		}
 		set_(lak->get_());
 		if (lak->finalized_())
@@ -3956,8 +3955,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("Bit::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("Bit::from_lake_ passed wrong type of thing");
 		}
 		set_(bool(lak->get_()[0]));
 		if (lak->finalized_())
@@ -4240,8 +4238,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("Int8::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("Int8::from_lake_ passed wrong type of thing");
 		}
 		set_(lak->get_()[0]);
 		if (lak->finalized_())
@@ -4519,8 +4516,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("UInt8::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("UInt8::from_lake_ passed wrong type of thing");
 		}
 		set_(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0])));
 		if (lak->finalized_())
@@ -4801,8 +4797,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("Int16::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("Int16::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -5086,8 +5081,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("UInt16::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("UInt16::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -5373,8 +5367,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("Int32::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("Int32::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -5662,8 +5655,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("UInt32::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("UInt32::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -5955,8 +5947,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("Int64::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("Int64::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -6252,8 +6243,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("UInt64::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("UInt64::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -6644,8 +6634,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("Float32::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("Float32::from_lake_ passed wrong type of thing");
 		}
 		const uint32_t i =
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -6938,8 +6927,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("Float64::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("Float64::from_lake_ passed wrong type of thing");
 		}
 		const uint64_t i =
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -7247,8 +7235,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("Complex32::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("Complex32::from_lake_ passed wrong type of thing");
 		}
 		const uint32_t r =
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -7575,8 +7562,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			log_("Complex64::from_lake_ passed wrong type of thing");
-			return;
+			throw std::invalid_argument("Complex64::from_lake_ passed wrong type of thing");
 		}
 		const uint64_t r =
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -8006,9 +7992,7 @@ inline const Thing::Ptr Thing::call(const Ptr& it)
 	const Ptr fun = static_<Shoal>(shared_())->at_(function);
 	if (fun->is_nothing_())
 	{
-		log_("call passed unknown function:");
-		log_(function);
-		return fun;
+		throw Dismemberment(nothing_(), shared_(), function);
 	}
 	return fun->invoke(it);
 }
@@ -8060,12 +8044,11 @@ inline const Thing::Ptr Thing::pub_() const
 
 inline const Thing::Ptr Thing::operator()(Thing* const thing, const Ptr& it)
 {
-	const Ptr pub = thing->pub_();
 	const Ptr name = it->next_();
-	const Ptr member = static_<Shoal>(pub)->at_(name);
+	const Ptr member = static_<Shoal>(thing->pub_())->at_(name);
 	if (member->is_nothing_())
 	{
-		throw Dismemberment(thing->type_(), pub, name);
+		throw Dismemberment(thing->type_(), thing->pub_(), name);
 	}
 	return operate_(thing, member, it);
 }
@@ -8179,8 +8162,7 @@ inline void Serializable::from_lake_via_river_(const Thing::Ptr& lake)
 	Lake* const lak = Thing::dynamic_<Lake>(lake);
 	if (!lak)
 	{
-		Thing::log_("Serializable::from_lake_via_river_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Serializable::from_lake_via_river_ passed wrong type of thing");
 	}
 	const Thing::Ptr river = River::mut_();
 	lak->to_river_(river);
@@ -8227,8 +8209,7 @@ inline const Thing::Ptr Symbol::lak_(const Ptr& lake)
 	Lake* const lak = dynamic_<Lake>(lake);
 	if (!lak)
 	{
-		log_("Symbol::lak_ passed wrong type of thing");
-		return fin_("");
+		throw std::invalid_argument("Symbol::lak_ passed wrong type of thing");
 	}
 	return fin_(lak->get_());
 }
@@ -8337,8 +8318,7 @@ inline void Shoal::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Shoal::to_river_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Shoal::to_river_ passed wrong type of thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_map.size())));
@@ -8354,8 +8334,7 @@ inline void Shoal::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Shoal::from_river_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Shoal::from_river_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -8375,14 +8354,12 @@ inline void Shoal::to_river_with_links_(const Ptr& shoal, const Ptr& river) cons
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
-		log_("Shoal::to_river_with_links_ passed wrong type of shoal thing");
-		return;
+		throw std::invalid_argument("Shoal::to_river_with_links_ passed wrong type of shoal thing");
 	}
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Shoal::to_river_with_links_ passed wrong type of river thing");
-		return;
+		throw std::invalid_argument("Shoal::to_river_with_links_ passed wrong type of river thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_map.size())));
@@ -8398,8 +8375,7 @@ inline void Shoal::from_river_with_links_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Shoal::from_river_with_links_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Shoal::from_river_with_links_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -8430,8 +8406,7 @@ inline void Shoal::gather_to_river_(const Ptr& thing, const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Shoal::gather_to_river_ passed wrong type of river thing");
-		return;
+		throw std::invalid_argument("Shoal::gather_to_river_ passed wrong type of river thing");
 	}
 	gather_(thing);
 	riv->write_(Int64::mut_(int64_t(_map.size())));
@@ -8449,8 +8424,7 @@ inline const Thing::Ptr Shoal::gather_from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Shoal::gather_from_river_ passed wrong type of river thing");
-		return nothing_();
+		throw std::invalid_argument("Shoal::gather_from_river_ passed wrong type of river thing");
 	}
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
 	{
@@ -8726,8 +8700,7 @@ inline void Flock::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Flock::to_river_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Flock::to_river_ passed wrong type of thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_vector.size())));
@@ -8742,8 +8715,7 @@ inline void Flock::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Flock::from_river_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Flock::from_river_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
@@ -8763,14 +8735,12 @@ inline void Flock::to_river_with_links_(const Ptr& shoal, const Ptr& river) cons
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
-		log_("Flock::to_river_with_links_ passed wrong type of shoal thing");
-		return;
+		throw std::invalid_argument("Flock::to_river_with_links_ passed wrong type of shoal thing");
 	}
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Flock::to_river_with_links_ passed wrong type of river thing");
-		return;
+		throw std::invalid_argument("Flock::to_river_with_links_ passed wrong type of river thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_vector.size())));
@@ -8785,8 +8755,7 @@ inline void Flock::from_river_with_links_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Flock::from_river_with_links_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Flock::from_river_with_links_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
@@ -8849,8 +8818,7 @@ inline void Herd::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Herd::to_river_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Herd::to_river_ passed wrong type of thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_set.size())));
@@ -8865,8 +8833,7 @@ inline void Herd::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Herd::from_river_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Herd::from_river_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -8884,14 +8851,12 @@ inline void Herd::to_river_with_links_(const Ptr& shoal, const Ptr& river) const
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
-		log_("Herd::to_river_with_links_ passed wrong type of shoal thing");
-		return;
+		throw std::invalid_argument("Herd::to_river_with_links_ passed wrong type of shoal thing");
 	}
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Herd::to_river_with_links_ passed wrong type of river thing");
-		return;
+		throw std::invalid_argument("Herd::to_river_with_links_ passed wrong type of river thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_set.size())));
@@ -8906,8 +8871,7 @@ inline void Herd::from_river_with_links_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Herd::from_river_with_links_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Herd::from_river_with_links_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -8961,8 +8925,7 @@ inline void Lake::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Lake::to_river_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Lake::to_river_ passed wrong type of thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(get_().length())));
@@ -8974,8 +8937,7 @@ inline void Lake::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		log_("Lake::from_river_ passed wrong type of thing");
-		return;
+		throw std::invalid_argument("Lake::from_river_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
