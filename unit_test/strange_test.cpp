@@ -15,6 +15,13 @@ TEST(TestCaseName, TestName) {
   EXPECT_TRUE(true);
 }
 
+TEST(StrangeThing, Dismemberment) {
+	EXPECT_THROW({
+		const Ptr symbol = Thing::sym_("symbol");
+		symbol->invoke_("nonexistent");
+	}, Thing::Dismemberment);
+}
+
 TEST(StrangeRiver, Get) {
 	const Ptr river = River::mut_(test_dir + "strange_test_source.str", true);
 	River* const r = Thing::dynamic_<River>(river);

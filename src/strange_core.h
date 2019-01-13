@@ -492,6 +492,38 @@ public:
 		return boolean_(count != 1);
 	}
 
+	// public nested classes
+	class Dismemberment
+	{
+	public:
+		inline Dismemberment(const Ptr& type, const Ptr& pub, const Ptr& member)
+			:_type(type)
+			,_pub(pub)
+			,_member(member)
+		{
+		}
+
+		inline const Ptr type_() const
+		{
+			return _type;
+		}
+
+		inline const Ptr pub_() const
+		{
+			return _pub;
+		}
+
+		inline const Ptr member_() const
+		{
+			return _member;
+		}
+
+	private:
+		const Ptr _type;
+		const Ptr _pub;
+		const Ptr _member;
+	};
+
 protected:
 	// protected static utility functions
 	static inline const Ptr operate_(Thing* const thing, const Ptr& member, const Ptr& it)
@@ -8014,10 +8046,12 @@ inline const Thing::Ptr Thing::pub_() const
 
 inline const Thing::Ptr Thing::operator()(Thing* const thing, const Ptr& it)
 {
-	const Ptr member = static_<Shoal>(thing->pub_())->at_(it->next_());
+	const Ptr pub = thing->pub_();
+	const Ptr name = it->next_();
+	const Ptr member = static_<Shoal>(pub)->at_(name);
 	if (member->is_nothing_())
 	{
-		return member;
+		throw Dismemberment(thing->type_(), pub, name);
 	}
 	return operate_(thing, member, it);
 }
