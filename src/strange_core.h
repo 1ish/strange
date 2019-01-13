@@ -493,15 +493,10 @@ public:
 	}
 
 	// public nested classes
-	class Dismemberment
+	class Dismemberment : public std::logic_error
 	{
 	public:
-		inline Dismemberment(const Ptr& type, const Ptr& pub, const Ptr& member)
-			:_type(type)
-			,_pub(pub)
-			,_member(member)
-		{
-		}
+		inline Dismemberment(const Ptr& type, const Ptr& pub, const Ptr& member);
 
 		inline const Ptr type_() const
 		{
@@ -524,13 +519,10 @@ public:
 		const Ptr _member;
 	};
 
-	class Mutation
+	class Mutation : public std::logic_error
 	{
 	public:
-		inline Mutation(const Ptr& type)
-			:_type(type)
-		{
-		}
+		inline Mutation(const Ptr& type);
 
 		inline const Ptr type_() const
 		{
@@ -1000,7 +992,7 @@ protected:
 			}
 			return (t->*_function)(it);
 		}
-		throw "ERROR: Member passed wrong type of thing";
+		throw std::invalid_argument("ERROR: Member passed wrong type of thing");
 	}
 
 private:
@@ -1055,7 +1047,7 @@ protected:
 		{
 			return (t->*_function)(it);
 		}
-		throw "ERROR: Const passed wrong type of thing";
+		throw std::invalid_argument("ERROR: Const passed wrong type of thing");
 	}
 
 private:
@@ -8111,6 +8103,23 @@ inline const Thing::Ptr& Thing::shared_()
 		return shoal;
 	}();
 	return SHARED;
+}
+
+inline Thing::Dismemberment::Dismemberment(const Ptr& type, const Ptr& pub, const Ptr& member)
+	:std::logic_error(std::string("Dismemberment ")
+		+ static_<Symbol>(type)->symbol_() + " "
+		+ static_<Symbol>(member)->symbol_())
+	,_type(type)
+	,_pub(pub)
+	,_member(member)
+{
+}
+
+inline Thing::Mutation::Mutation(const Ptr& type)
+	:std::logic_error("Mutation "
+		+ static_<Symbol>(type)->symbol_())
+	,_type(type)
+{
 }
 
 //======================================================================
