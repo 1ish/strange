@@ -1000,8 +1000,7 @@ protected:
 			}
 			return (t->*_function)(it);
 		}
-		log_("ERROR: Member passed wrong type of thing\n");
-		return nothing_();
+		throw "ERROR: Member passed wrong type of thing";
 	}
 
 private:
@@ -1056,8 +1055,7 @@ protected:
 		{
 			return (t->*_function)(it);
 		}
-		log_("ERROR: Const passed wrong type of thing\n");
-		return nothing_();
+		throw "ERROR: Const passed wrong type of thing";
 	}
 
 private:
