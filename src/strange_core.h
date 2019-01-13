@@ -496,41 +496,13 @@ public:
 	class Dismemberment : public std::logic_error
 	{
 	public:
-		inline Dismemberment(const Ptr& type, const Ptr& pub, const Ptr& member);
-
-		inline const Ptr type_() const
-		{
-			return _type;
-		}
-
-		inline const Ptr pub_() const
-		{
-			return _pub;
-		}
-
-		inline const Ptr member_() const
-		{
-			return _member;
-		}
-
-	private:
-		const Ptr _type;
-		const Ptr _pub;
-		const Ptr _member;
+		inline Dismemberment(const Ptr& type, const Ptr& member);
 	};
 
 	class Mutation : public std::logic_error
 	{
 	public:
 		inline Mutation(const Ptr& type);
-
-		inline const Ptr type_() const
-		{
-			return _type;
-		}
-
-	private:
-		const Ptr _type;
 	};
 
 protected:
@@ -7984,7 +7956,7 @@ inline const Thing::Ptr Thing::call(const Ptr& it)
 	const Ptr fun = static_<Shoal>(shared_())->at_(function);
 	if (fun->is_nothing_())
 	{
-		throw Dismemberment(nothing_(), shared_(), function);
+		throw Dismemberment(nothing_(), function);
 	}
 	return fun->invoke(it);
 }
@@ -8040,7 +8012,7 @@ inline const Thing::Ptr Thing::operator()(Thing* const thing, const Ptr& it)
 	const Ptr member = static_<Shoal>(thing->pub_())->at_(name);
 	if (member->is_nothing_())
 	{
-		throw Dismemberment(thing->type_(), thing->pub_(), name);
+		throw Dismemberment(thing->type_(), name);
 	}
 	return operate_(thing, member, it);
 }
@@ -8105,20 +8077,16 @@ inline const Thing::Ptr& Thing::shared_()
 	return SHARED;
 }
 
-inline Thing::Dismemberment::Dismemberment(const Ptr& type, const Ptr& pub, const Ptr& member)
+inline Thing::Dismemberment::Dismemberment(const Ptr& type, const Ptr& member)
 	:std::logic_error(std::string("Dismemberment ")
 		+ static_<Symbol>(type)->symbol_() + " "
 		+ static_<Symbol>(member)->symbol_())
-	,_type(type)
-	,_pub(pub)
-	,_member(member)
 {
 }
 
 inline Thing::Mutation::Mutation(const Ptr& type)
 	:std::logic_error("Mutation "
 		+ static_<Symbol>(type)->symbol_())
-	,_type(type)
 {
 }
 
