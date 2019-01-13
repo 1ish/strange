@@ -57,7 +57,7 @@ TEST(StrangeTokenizer, Next) {
 		ASSERT_NE(flock, (Flock*)(0));
 		Symbol* const symbol = Thing::dynamic_<Symbol>(flock->at_(3));
 		ASSERT_NE(symbol, (Symbol*)(0));
-		std::cout << "got: " << symbol->symbol_() << std::endl; //TODO got: hello worldn
+		std::cout << "got: " << symbol->symbol_() << std::endl;
 	}
 }
 
