@@ -301,13 +301,13 @@ public:
 		}
 		catch (const Ptr& thing)
 		{
-			Token* const t = dynamic_<Token>(thing);
-			Serializable* const s = dynamic_<Serializable>(t ? t->get_() : thing);
-			if (s)
+			const Ptr to_lake = thing->invoke_("to_lake");
+			Lake* const lake = dynamic_<Lake>(to_lake);
+			if (lake)
 			{
-				throw std::runtime_error(static_<Lake>(s->to_lake_())->get_());
+				throw std::runtime_error(lake->get_());
 			}
-			throw std::runtime_error("unexpected thing thrown");
+			throw std::runtime_error("unexpected");
 		}
 	}
 

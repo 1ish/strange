@@ -7775,6 +7775,21 @@ public:
 		return err_();
 	}
 
+	inline const Ptr to_lake_() const
+	{
+		std::stringstream* const str = dynamic_cast<std::stringstream*>(_stream.get());
+		if (str)
+		{
+			return Lake::mut_(str->str());
+		}
+		return Lake::mut_();
+	}
+
+	inline const Ptr to_lake(const Ptr& ignore) const
+	{
+		return to_lake_();
+	}
+
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = [this]()
@@ -7791,6 +7806,7 @@ public:
 			shoal->update_("good", Const<River>::fin_(&River::good));
 			shoal->update_("get", Member<River>::fin_(&River::get));
 			shoal->update_("peek", Member<River>::fin_(&River::peek));
+			shoal->update_("to_lake", Const<River>::fin_(&River::to_lake));
 			shoal->finalize_();
 			return pub;
 		}();

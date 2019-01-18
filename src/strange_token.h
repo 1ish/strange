@@ -38,25 +38,41 @@ class Token : public Mutable
 //----------------------------------------------------------------------
 {
 public:
-	inline Token(const Ptr& tag, const Ptr& x, const Ptr& y, const Ptr& symbol, const Ptr& value, const Ptr& ptr)
+	inline Token(const Ptr& tag, const Ptr& x, const Ptr& y, const Ptr& symbol, const Ptr& value, const Ptr& river)
 		: Mutable{}
 		, _tag{ tag }
 		, _x{ x }
 		, _y{ y }
 		, _symbol{ symbol }
 		, _value{ value }
-		, _ptr{ ptr }
+		, _river{ river }
 	{
 	}
 
-	static inline const Ptr mut_(const char tag, const int64_t x, const int64_t y, const Ptr& symbol, const Ptr& value = nothing_(), const Ptr& ptr = nothing_())
+	static inline const Ptr mut_(const char tag, const int64_t x, const int64_t y, const Ptr& symbol, const Ptr& value = nothing_(), const Ptr& river = nothing_())
 	{
-		return mut_(Int8::fin_(tag), Int64::fin_(x), Int64::fin_(y), symbol, value, ptr);
+		Ptr init;
+		River* const riv = dynamic_<River>(river);
+		if (!riv)
+		{
+			init = River::mut_();
+			River* const r = static_<River>(init);
+			r->write_("token tag:");
+			r->write_(std::string() + tag);
+			r->write_(" x:");
+			r->write_(std::to_string(x));
+			r->write_(" y:");
+			r->write_(std::to_string(y));
+			r->write_(" symbol:");
+			r->write_(symbol);
+			r->write_("\n");
+		}
+		return mut_(Int8::fin_(tag), Int64::fin_(x), Int64::fin_(y), symbol, value, riv ? river : init);
 	}
 
-	static inline const Ptr mut_(const Ptr& tag, const Ptr& x, const Ptr& y, const Ptr& symbol, const Ptr& value, const Ptr& ptr)
+	static inline const Ptr mut_(const Ptr& tag, const Ptr& x, const Ptr& y, const Ptr& symbol, const Ptr& value, const Ptr& river)
 	{
-		return make_<Token>(tag, x, y, symbol, value, ptr);
+		return make_<Token>(tag, x, y, symbol, value, river);
 	}
 
 	static inline const Ptr mut(const Ptr& it)
@@ -66,8 +82,8 @@ public:
 		const Ptr y = it->next_();
 		const Ptr symbol = it->next_();
 		const Ptr value = it->next_();
-		const Ptr ptr = it->next_();
-		return mut_(tag, x, y, symbol, value, ptr);
+		const Ptr river = it->next_();
+		return mut_(tag, x, y, symbol, value, river);
 	}
 
 	static inline const Ptr symbol_(const int64_t x, const int64_t y, const std::string& str)
@@ -113,12 +129,12 @@ public:
 
 	virtual inline const Ptr copy_() const override
 	{
-		return mut_(_tag, _x, _y, _symbol, _value, _ptr);
+		return mut_(_tag, _x, _y, _symbol, _value, _river);
 	}
 
 	virtual inline const Ptr clone_() const override
 	{
-		return mut_(_tag->clone_(), _x->clone_(), _y->clone_(), _symbol->clone_(), _value->clone_(), _ptr->clone_());
+		return mut_(_tag->clone_(), _x->clone_(), _y->clone_(), _symbol->clone_(), _value->clone_(), _river->clone_());
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -127,15 +143,14 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
-			shoal->update_("mut", Static::fin_(&Token::mut, "tag", "x", "y", "symbol", "value", "thing"));
+			shoal->update_("mut", Static::fin_(&Token::mut, "tag", "x", "y", "symbol", "value", "river"));
 			shoal->update_("tag", Const<Token>::fin_(&Token::tag));
 			shoal->update_("x", Const<Token>::fin_(&Token::x));
 			shoal->update_("y", Const<Token>::fin_(&Token::y));
 			shoal->update_("symbol", Const<Token>::fin_(&Token::symbol));
 			shoal->update_("value", Const<Token>::fin_(&Token::value));
-			shoal->update_("set", Member<Token>::fin_(&Token::set, "thing"));
-			shoal->update_("get", Const<Token>::fin_(&Token::get));
 			shoal->update_("error", Const<Token>::fin_(&Token::error, "message"));
+			shoal->update_("to_lake", Const<Token>::fin_(&Token::to_lake));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -145,7 +160,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
-		s->update_("strange::Token::mut", Static::fin_(&Token::mut, "tag", "x", "y", "symbol", "value", "thing"));
+		s->update_("strange::Token::mut", Static::fin_(&Token::mut, "tag", "x", "y", "symbol", "value", "river"));
 	}
 
 	inline const char tag_() const
@@ -198,38 +213,10 @@ public:
 		return value_();
 	}
 
-	inline void set_(const std::string& str)
-	{
-		set_(sym_(str));
-	}
-
-	inline void set_(const Ptr& ptr)
-	{
-		_ptr = ptr;
-	}
-
-	inline const Ptr set(const Ptr& it)
-	{
-		const Ptr ptr = it->next_();
-		set_(ptr);
-		return ptr;
-	}
-
-	inline const Ptr get_() const
-	{
-		return _ptr;
-	}
-
-	inline const Ptr get(const Ptr& ignore) const
-	{
-		return get_();
-	}
-
 	inline const Ptr error_(const std::string& err) const
 	{
-		const Ptr result = copy_();
-		static_<Token>(result)->set_(err);
-		return result;
+		static_<River>(_river)->write_(err + '\n');
+		return me_();
 	}
 
 	inline const Ptr error_(const Ptr& err) const
@@ -246,6 +233,11 @@ public:
 	inline const Ptr error(const Ptr& it) const
 	{
 		return error_(it->next_());
+	}
+
+	inline const Ptr to_lake(const Ptr& ignore) const
+	{
+		return static_<River>(_river)->to_lake_();
 	}
 
 	virtual inline const Ptr type_() const override
@@ -274,7 +266,7 @@ private:
 	const Ptr _y;
 	const Ptr _symbol;
 	const Ptr _value;
-	Ptr _ptr;
+	const Ptr _river;
 
 	static inline const Ptr _symbol_(const std::string& str)
 	{
