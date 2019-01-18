@@ -412,7 +412,14 @@ private:
 	{
 		const Ptr it = iterator_(local);
 		const Ptr thing = it->next_();
-		return thing->invoke(it);
+		try
+		{
+			return thing->invoke(it);
+		}
+		catch (const std::logic_error& err)
+		{
+			throw static_<Token>(_token)->error_(err.what());
+		}
 	}
 
 	inline void _generate_strange_invoke_(River* const river) const
@@ -563,7 +570,7 @@ private:
 		const Ptr result = static_<Shoal>(_vector[0])->at_(_vector[1]);
 		if (result->is_nothing_())
 		{
-			throw static_<Token>(_token)->set_("not found in shared scope");
+			throw static_<Token>(_token)->error_("not found in shared scope");
 		}
 		return result;
 	}
@@ -596,7 +603,7 @@ private:
 				scope = scope.substr(0, pos);
 			}
 		}
-		throw static_<Token>(_token)->set_("not found in relative scope");
+		throw static_<Token>(_token)->error_("not found in relative scope");
 	}
 
 	inline const Ptr _flock_(const Ptr& local) const

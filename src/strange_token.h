@@ -225,6 +225,11 @@ public:
 		return get_();
 	}
 
+	inline const Ptr error_(const std::string& err)
+	{
+		return static_<Token>(copy_())->set_(err);
+	}
+
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Token");
