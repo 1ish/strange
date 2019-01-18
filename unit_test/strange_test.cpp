@@ -45,6 +45,14 @@ TEST(StrangeRiver, Get) {
 	}
 }
 
+TEST(StrangeRiver, Out) {
+	const Ptr river = River::out_();
+	River* const r = Thing::dynamic_<River>(river);
+	ASSERT_NE(r, (River*)(0));
+	EXPECT_EQ(r->good_(), true);
+	r->write_("river out\n");
+}
+
 TEST(StrangeTokenizer, Next) {
 	const Ptr river = River::mut_(test_dir + "strange_test_source.str", true);
 	const Ptr tokenizer = Tokenizer::mut_(river);

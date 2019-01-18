@@ -7715,27 +7715,29 @@ public:
 class River : public Mutable
 //----------------------------------------------------------------------
 {
-	using const_std_unique_iostream = const std::unique_ptr<std::iostream>;
+	using const_std_unique_ios_base = const std::unique_ptr<std::ios_base>;
 
 public:
-	inline River(std::iostream* const stream)
+	inline River(std::ios_base* const stream, const bool del)
 		: Mutable{}
-		, _stream{ stream }
+		, _stream{ del ? stream : 0 }
+		, _in{ dynamic_cast<std::istream*>(stream) }
+		, _out{ dynamic_cast<std::ostream*>(stream) }
 	{
 	}
 
-	static inline const Ptr mut_(std::iostream* const stream)
+	static inline const Ptr mut_(std::ios_base* const stream, const bool del)
 	{
-		return make_<River>(stream);
+		return make_<River>(stream, del);
 	}
 
 	static inline const Ptr mut_(const std::string& str = std::string(), const bool file = false)
 	{
 		if (file)
 		{
-			return mut_(new std::fstream(str, std::fstream::binary | std::fstream::in | std::fstream::out));
+			return mut_(new std::fstream(str, std::fstream::binary | std::fstream::in | std::fstream::out), true);
 		}
-		return mut_(new std::stringstream(str));
+		return mut_(new std::stringstream(str), true);
 	}
 
 	static inline const Ptr mut(const Ptr& it)
@@ -7757,6 +7759,21 @@ public:
 			return mut_(lake->get_());
 		}
 		return mut_(lake->get_(), !file->is_nothing_());
+	}
+
+	static inline const Ptr in_()
+	{
+		return make_<River>(&std::cin, false);
+	}
+
+	static inline const Ptr out_()
+	{
+		return make_<River>(&std::cout, false);
+	}
+
+	static inline const Ptr err_()
+	{
+		return make_<River>(&std::cerr, false);
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -7834,7 +7851,11 @@ public:
 
 	inline void write_(const std::string& str)
 	{
-		_stream->write(str.data(), str.length());
+		if (!_out)
+		{
+			throw sym_("cannot write to input");
+		}
+		_out->write(str.data(), str.length());
 	}
 
 	inline void write_(const Ptr& ptr)
@@ -7877,9 +7898,13 @@ public:
 
 	inline const Ptr read_(const int64_t length)
 	{
+		if (!_in)
+		{
+			throw sym_("cannot read from output");
+		}
 		std::string str;
 		str.resize(size_t(length));
-		_stream->read(&str[0], str.length());
+		_in->read(&str[0], str.length());
 		return Lake::mut_(str);
 	}
 
@@ -7891,7 +7916,15 @@ public:
 
 	inline const bool good_() const
 	{
-		return _stream->good();
+		if (_in)
+		{
+			return _in->good();
+		}
+		if (_out)
+		{
+			return _out->good();
+		}
+		return false;
 	}
 
 	inline const Ptr good(const Ptr& ignore) const
@@ -7901,7 +7934,11 @@ public:
 
 	inline const int get_()
 	{
-		return _stream->get();
+		if (!_in)
+		{
+			throw sym_("cannot get from output");
+		}
+		return _in->get();
 	}
 
 	inline const Ptr get(const Ptr& ignore)
@@ -7911,7 +7948,11 @@ public:
 
 	inline const int peek_()
 	{
-		return _stream->peek();
+		if (!_in)
+		{
+			throw sym_("cannot peek at output");
+		}
+		return _in->peek();
 	}
 
 	inline const Ptr peek(const Ptr& ignore)
@@ -7920,7 +7961,9 @@ public:
 	}
 
 private:
-	const_std_unique_iostream _stream;
+	const_std_unique_ios_base _stream;
+	std::istream* const _in;
+	std::ostream* const _out;
 };
 
 //======================================================================
