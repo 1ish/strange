@@ -147,44 +147,44 @@ public:
 		s->update_("strange::Token::mut", Static::fin_(&Token::mut, "tag", "x", "y", "symbol", "value", "thing"));
 	}
 
-	inline const Ptr tag_() const
+	inline const char tag_() const
+	{
+		return static_<Int8>(_tag)->get_();
+	}
+
+	inline const Ptr tag(const Ptr& ignore = nothing_()) const
 	{
 		return _tag;
 	}
 
-	inline const Ptr tag(const Ptr& ignore) const
+	inline const int64_t x_() const
 	{
-		return tag_();
+		return static_<Int64>(_x)->get_();
 	}
 
-	inline const Ptr x_() const
+	inline const Ptr x(const Ptr& ignore = nothing_()) const
 	{
 		return _x;
 	}
 
-	inline const Ptr x(const Ptr& ignore) const
+	inline const int64_t y_() const
 	{
-		return x_();
+		return static_<Int64>(_y)->get_();
 	}
 
-	inline const Ptr y_() const
+	inline const Ptr y(const Ptr& ignore = nothing_()) const
 	{
 		return _y;
 	}
 
-	inline const Ptr y(const Ptr& ignore) const
+	inline const std::string symbol_() const
 	{
-		return y_();
+		return static_<Symbol>(_symbol)->symbol_();
 	}
 
-	inline const Ptr symbol_() const
+	inline const Ptr symbol(const Ptr& ignore = nothing_()) const
 	{
 		return _symbol;
-	}
-
-	inline const Ptr symbol(const Ptr& ignore) const
-	{
-		return symbol_();
 	}
 
 	inline const Ptr value_() const

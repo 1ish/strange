@@ -55,7 +55,7 @@ TEST(StrangeTokenizer, Next) {
 	{
 		Token* const token = Thing::dynamic_<Token>(n);
 		ASSERT_NE(token, (Token*)(0));
-		Symbol* const symbol = Thing::dynamic_<Symbol>(token->symbol_());
+		Symbol* const symbol = Thing::dynamic_<Symbol>(token->symbol());
 		ASSERT_NE(symbol, (Symbol*)(0));
 		std::cout << "got: " << symbol->symbol_() << std::endl;
 	}

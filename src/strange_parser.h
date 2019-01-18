@@ -152,13 +152,13 @@ private:
 				break;
 			}
 			Token* const tok = static_<Token>(token);
-			const char tag = static_<Int8>(tok->tag_())->get_();
+			const char tag = tok->tag_();
 			if (tag == 'E') // error
 			{
 				log_("tokenizer error");
 				return Expression::fin_(token);
 			}
-			const Ptr symbol = tok->symbol_();
+			const Ptr symbol = tok->symbol();
 			const Ptr flock = Flock::mut_();
 			Flock* const flk = static_<Flock>(flock);
 			static const Ptr local = sym_("local_");
@@ -412,13 +412,13 @@ private:
 		}
 		Flock* const flk = static_<Flock>(flock);
 		Token* const tok = static_<Token>(token);
-		const char tag = static_<Int8>(tok->tag_())->get_();
+		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
 			log_("tokenizer error");
 			return false; // break
 		}
-		const Ptr symbol = tok->symbol_();
+		const Ptr symbol = tok->symbol();
 		Reference* const smt = static_<Reference>(statement);
 		if (tag == 'P') // punctuation
 		{
@@ -658,13 +658,13 @@ private:
 		}
 		Flock* const flk = static_<Flock>(flock);
 		Token* const tok = static_<Token>(token);
-		const char tag = static_<Int8>(tok->tag_())->get_();
+		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
 			log_("tokenizer error");
 			return;
 		}
-		const Ptr symbol = tok->symbol_();
+		const Ptr symbol = tok->symbol();
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
 			log_("parser error: dot literal");
@@ -692,13 +692,13 @@ private:
 		}
 		Flock* const flk = static_<Flock>(flock);
 		Token* const tok = static_<Token>(token);
-		const char tag = static_<Int8>(tok->tag_())->get_();
+		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
 			log_("tokenizer error");
 			return;
 		}
-		const Ptr symbol = tok->symbol_();
+		const Ptr symbol = tok->symbol();
 		if (tag == 'P') // punctuation
 		{
 			if (symbol->is_("."))
@@ -742,13 +742,13 @@ private:
 			return false; // not a statement
 		}
 		Token* const tok = static_<Token>(token);
-		const char tag = static_<Int8>(tok->tag_())->get_();
+		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
 			log_("tokenizer error");
 			return false;
 		}
-		const Ptr symbol = tok->symbol_();
+		const Ptr symbol = tok->symbol();
 		if (tag == 'P' && symbol->is_("("))
 		{
 			_next_();
@@ -773,13 +773,13 @@ private:
 				return;
 			}
 			Token* const tok = static_<Token>(token);
-			const char tag = static_<Int8>(tok->tag_())->get_();
+			const char tag = tok->tag_();
 			if (tag == 'E') // error
 			{
 				log_("tokenizer error");
 				return;
 			}
-			const Ptr symbol = tok->symbol_();
+			const Ptr symbol = tok->symbol();
 			if (first)
 			{
 				if (tag == 'P') // punctuation
@@ -918,13 +918,13 @@ private:
 				return is_map;
 			}
 			Token* const tok = static_<Token>(token);
-			const char tag = static_<Int8>(tok->tag_())->get_();
+			const char tag = tok->tag_();
 			if (tag == 'E') // error
 			{
 				log_("tokenizer error");
 				return is_map;
 			}
-			const Ptr symbol = tok->symbol_();
+			const Ptr symbol = tok->symbol();
 			if (first)
 			{
 				if (tag == 'P') // punctuation
@@ -1075,13 +1075,13 @@ private:
 				break;
 			}
 			Token* const tok = static_<Token>(token);
-			const char tag = static_<Int8>(tok->tag_())->get_();
+			const char tag = tok->tag_();
 			if (tag == 'E') // error
 			{
 				log_("tokenizer error");
 				return Expression::fin_(token);
 			}
-			const Ptr symbol = tok->symbol_();
+			const Ptr symbol = tok->symbol();
 			if (first)
 			{
 				if (tag == 'N') // name
@@ -1143,13 +1143,13 @@ private:
 		}
 		Flock* const flk = static_<Flock>(flock);
 		Token* const tok = static_<Token>(token);
-		const char tag = static_<Int8>(tok->tag_())->get_();
+		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
 			log_("tokenizer error");
 			return true; // continue
 		}
-		const Ptr symbol = tok->symbol_();
+		const Ptr symbol = tok->symbol();
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
 			_wrap_(token, tok->value_(), flock);
@@ -1176,13 +1176,13 @@ private:
 		}
 		Flock* const flk = static_<Flock>(flock);
 		Token* const tok = static_<Token>(token);
-		const char tag = static_<Int8>(tok->tag_())->get_();
+		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
 			log_("tokenizer error");
 			return false; // break
 		}
-		const Ptr symbol = tok->symbol_();
+		const Ptr symbol = tok->symbol();
 		if (tag == 'P' && symbol->is_(":="))
 		{
 			_next_();
