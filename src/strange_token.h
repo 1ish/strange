@@ -197,9 +197,15 @@ public:
 		return value_();
 	}
 
-	inline void set_(const Ptr& ptr)
+	inline const Ptr set_(const std::string& str)
+	{
+		return set_(sym_(str));
+	}
+
+	inline const Ptr set_(const Ptr& ptr)
 	{
 		_ptr = ptr;
+		return me_();
 	}
 
 	inline const Ptr set(const Ptr& it)
