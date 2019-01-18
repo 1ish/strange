@@ -499,10 +499,10 @@ public:
 		inline Dismemberment(const Ptr& type, const Ptr& member);
 	};
 
-	class Mutation : public std::logic_error
+	class Mutilation : public std::logic_error
 	{
 	public:
-		inline Mutation(const Ptr& type);
+		inline Mutilation(const Ptr& type);
 	};
 
 protected:
@@ -960,7 +960,7 @@ protected:
 		{
 			if (t->finalized_())
 			{
-				throw Mutation(thing->type_());
+				throw Mutilation(thing->type_());
 			}
 			return (t->*_function)(it);
 		}
@@ -8084,8 +8084,8 @@ inline Thing::Dismemberment::Dismemberment(const Ptr& type, const Ptr& member)
 {
 }
 
-inline Thing::Mutation::Mutation(const Ptr& type)
-	:std::logic_error("Mutation "
+inline Thing::Mutilation::Mutilation(const Ptr& type)
+	:std::logic_error("Mutilation "
 		+ static_<Symbol>(type)->get_())
 {
 }

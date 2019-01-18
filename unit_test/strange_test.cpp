@@ -22,11 +22,11 @@ TEST(StrangeThing, Dismemberment) {
 	}, Thing::Dismemberment);
 }
 
-TEST(StrangeThing, Mutation) {
+TEST(StrangeThing, Mutilation) {
 	EXPECT_THROW({
 		const Ptr symbol = Thing::sym_("symbol");
 		symbol->invoke_("next");
-	}, Thing::Mutation);
+	}, Thing::Mutilation);
 }
 
 TEST(StrangeRiver, Get) {
