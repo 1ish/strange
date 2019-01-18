@@ -135,6 +135,7 @@ public:
 			shoal->update_("value", Const<Token>::fin_(&Token::value));
 			shoal->update_("set", Member<Token>::fin_(&Token::set, "thing"));
 			shoal->update_("get", Const<Token>::fin_(&Token::get));
+			shoal->update_("error", Const<Token>::fin_(&Token::error, "message"));
 			shoal->finalize_();
 			return pub;
 		}();
@@ -197,15 +198,14 @@ public:
 		return value_();
 	}
 
-	inline const Ptr set_(const std::string& str)
+	inline void set_(const std::string& str)
 	{
-		return set_(sym_(str));
+		set_(sym_(str));
 	}
 
-	inline const Ptr set_(const Ptr& ptr)
+	inline void set_(const Ptr& ptr)
 	{
 		_ptr = ptr;
-		return me_();
 	}
 
 	inline const Ptr set(const Ptr& it)
@@ -225,9 +225,27 @@ public:
 		return get_();
 	}
 
-	inline const Ptr error_(const std::string& err)
+	inline const Ptr error_(const std::string& err) const
 	{
-		return static_<Token>(copy_())->set_(err);
+		const Ptr result = copy_();
+		static_<Token>(result)->set_(err);
+		return result;
+	}
+
+	inline const Ptr error_(const Ptr& err) const
+	{
+		const Ptr to_lake = err->invoke_("to_lake");
+		Lake* const lake = dynamic_<Lake>(to_lake);
+		if (lake)
+		{
+			return error_(lake->get_());
+		}
+		return error_("unknown");
+	}
+
+	inline const Ptr error(const Ptr& it) const
+	{
+		return error_(it->next_());
 	}
 
 	virtual inline const Ptr type_() const override
