@@ -113,22 +113,6 @@ public:
 		return boolean_(it->next_());
 	}
 
-	static inline void log_(const std::string& message)
-	{
-		std::cout << message;
-	}
-
-	static inline void log_(const Ptr& ptr);
-
-	static inline const Ptr log(const Ptr& it)
-	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
-		{
-			log_(i);
-		}
-		return nothing_();
-	}
-
 	template <typename... Args>
 	static inline const Ptr call_(Args&&... args);
 
@@ -7766,14 +7750,29 @@ public:
 		return make_<River>(&std::cin, false);
 	}
 
+	static inline const Ptr in(const Ptr& ignore)
+	{
+		return in_();
+	}
+
 	static inline const Ptr out_()
 	{
 		return make_<River>(&std::cout, false);
 	}
 
+	static inline const Ptr out(const Ptr& ignore)
+	{
+		return out_();
+	}
+
 	static inline const Ptr err_()
 	{
 		return make_<River>(&std::cerr, false);
+	}
+
+	static inline const Ptr err(const Ptr& ignore)
+	{
+		return err_();
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -7783,6 +7782,9 @@ public:
 			const Ptr pub = Thing::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
 			shoal->update_("mut", Static::fin_(&River::mut, "lake", "is_file"));
+			shoal->update_("in", Static::fin_(&River::in));
+			shoal->update_("out", Static::fin_(&River::out));
+			shoal->update_("err", Static::fin_(&River::err));
 			shoal->update_("push_back", Member<River>::fin_(&River::push_back, "thing"));
 			shoal->update_("write", Member<River>::fin_(&River::write, "thing"));
 			shoal->update_("pop_front", Member<River>::fin_(&River::pop_front));
@@ -7799,6 +7801,9 @@ public:
 	{
 		Shoal* const s = static_<Shoal>(shoal);
 		s->update_("strange::River::mut", Static::fin_(&River::mut, "lake", "is_file"));
+		s->update_("strange::River::in", Static::fin_(&River::in));
+		s->update_("strange::River::out", Static::fin_(&River::out));
+		s->update_("strange::River::err", Static::fin_(&River::err));
 	}
 
 	virtual inline const Ptr type_() const override
@@ -8038,7 +8043,6 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("nothing", Static::fin_(&Thing::nothing));
 		shoal->update_("one", Static::fin_(&Thing::one));
 		shoal->update_("stop", Static::fin_(&Thing::stop));
-		shoal->update_("log", Static::fin_(&Thing::log, "message"));
 		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
 		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
 		shoal->update_("visit", Member<Thing>::fin_(&Thing::visit, "visitor", "member", ".."));
@@ -8058,16 +8062,6 @@ inline const Thing::Ptr Thing::operator()(Thing* const thing, const Ptr& it)
 		throw Dismemberment(thing->type_(), name);
 	}
 	return operate_(thing, member, it);
-}
-
-inline void Thing::log_(const Ptr& ptr)
-{
-	const Ptr ptr_to_lake = ptr->invoke_("to_lake");
-	const Lake* const lake = dynamic_<Lake>(ptr_to_lake);
-	if (lake)
-	{
-		log_(lake->get_());
-	}
 }
 
 template <typename... Args>

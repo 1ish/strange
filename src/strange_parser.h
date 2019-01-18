@@ -423,7 +423,7 @@ private:
 			if (symbol->is_("."))
 			{
 				_next_();
-				_dot_(scope, shoal, flock, statement);
+				_dot_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{

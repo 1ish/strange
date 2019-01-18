@@ -2,6 +2,7 @@
 #define COM_ONEISH_STRANGE_EXPRESSION_H
 
 #include "strange_core.h"
+#include "strange_token.h"
 #include "strange_method.h"
 #include "strange_creature.h"
 
@@ -78,7 +79,7 @@ public:
 		}
 		else if (statement->is_("invoke_"))
 		{
-			if (size >= 2)
+			if (size >= 1)
 			{
 				return fin_(token, &Expression::_invoke_, flock);
 			}
@@ -294,7 +295,20 @@ public:
 		Shoal* const loc = static_<Shoal>(local);
 		loc->update_("$", Shoal::mut_());
 		loc->update_("&", stop_());
-		return evaluate_(expression, local);
+		try
+		{
+			return evaluate_(expression, local);
+		}
+		catch (const Ptr& thing)
+		{
+			Token* const t = dynamic_<Token>(thing);
+			Serializable* const s = dynamic_<Serializable>(t ? t->get_() : thing);
+			if (s)
+			{
+				throw std::runtime_error(static_<Lake>(s->to_lake_())->get_());
+			}
+			throw std::runtime_error("unexpected thing thrown");
+		}
 	}
 
 	static inline void generate_(const Ptr& expression, const Ptr& language, const Ptr& river)
@@ -546,7 +560,12 @@ private:
 
 	inline const Ptr _shared_scope_(const Ptr& local) const
 	{
-		return static_<Shoal>(_vector[0])->at_(_vector[1]);
+		const Ptr result = static_<Shoal>(_vector[0])->at_(_vector[1]);
+		if (result->is_nothing_())
+		{
+			throw static_<Token>(_token)->set_("not found in shared scope");
+		}
+		return result;
 	}
 	
 	inline const Ptr _relative_scope_(const Ptr& local) const
@@ -577,7 +596,7 @@ private:
 				scope = scope.substr(0, pos);
 			}
 		}
-		return nothing_();
+		throw static_<Token>(_token)->set_("not found in relative scope");
 	}
 
 	inline const Ptr _flock_(const Ptr& local) const
