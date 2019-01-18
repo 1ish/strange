@@ -724,7 +724,7 @@ public:
 		return other->is_(_symbol);
 	}
 
-	inline const std::string& symbol_() const
+	inline const std::string& get_() const
 	{
 		return _symbol;
 	}
@@ -797,13 +797,13 @@ public:
 
 	inline const bool less_than_(const std::string& s) const
 	{
-		return symbol_() < s;
+		return get_() < s;
 	}
 
 	inline const bool less_than_(const Ptr& other) const
 	{
 		Symbol* const symbol = dynamic_<Symbol>(other);
-		return symbol && less_than_(symbol->symbol_());
+		return symbol && less_than_(symbol->get_());
 	}
 
 	inline const Ptr less_than(const Ptr& it) const
@@ -813,13 +813,13 @@ public:
 
 	inline const bool greater_than_(const std::string& s) const
 	{
-		return symbol_() > s;
+		return get_() > s;
 	}
 
 	inline const bool greater_than_(const Ptr& other) const
 	{
 		Symbol* const symbol = dynamic_<Symbol>(other);
-		return symbol && greater_than_(symbol->symbol_());
+		return symbol && greater_than_(symbol->get_());
 	}
 
 	inline const Ptr greater_than(const Ptr& it) const
@@ -829,13 +829,13 @@ public:
 
 	inline const bool less_or_equal_(const std::string& s) const
 	{
-		return symbol_() <= s;
+		return get_() <= s;
 	}
 
 	inline const bool less_or_equal_(const Ptr& other) const
 	{
 		Symbol* const symbol = dynamic_<Symbol>(other);
-		return symbol && less_or_equal_(symbol->symbol_());
+		return symbol && less_or_equal_(symbol->get_());
 	}
 
 	inline const Ptr less_or_equal(const Ptr& it) const
@@ -845,13 +845,13 @@ public:
 
 	inline const bool greater_or_equal_(const std::string& s) const
 	{
-		return symbol_() >= s;
+		return get_() >= s;
 	}
 
 	inline const bool greater_or_equal_(const Ptr& other) const
 	{
 		Symbol* const symbol = dynamic_<Symbol>(other);
-		return symbol && greater_or_equal_(symbol->symbol_());
+		return symbol && greater_or_equal_(symbol->get_());
 	}
 
 	inline const Ptr greater_or_equal(const Ptr& it) const
@@ -3351,7 +3351,7 @@ public:
 			Symbol* const symbol = dynamic_<Symbol>(other);
 			if (symbol)
 			{
-				self_add_(symbol->symbol_());
+				self_add_(symbol->get_());
 			}
 		}
 	}
@@ -3972,7 +3972,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(std::stoull(symbol->symbol_()) & 1);
+			set_(std::stoull(symbol->get_()) & 1);
 		}
 	}
 
@@ -4255,7 +4255,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(D(std::stoll(symbol->symbol_())));
+			set_(D(std::stoll(symbol->get_())));
 		}
 	}
 
@@ -4533,7 +4533,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(D(std::stoull(symbol->symbol_())));
+			set_(D(std::stoull(symbol->get_())));
 		}
 	}
 
@@ -4817,7 +4817,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(D(std::stoll(symbol->symbol_())));
+			set_(D(std::stoll(symbol->get_())));
 		}
 	}
 
@@ -5101,7 +5101,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(D(std::stoull(symbol->symbol_())));
+			set_(D(std::stoull(symbol->get_())));
 		}
 	}
 
@@ -5389,7 +5389,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(D(std::stoll(symbol->symbol_())));
+			set_(D(std::stoll(symbol->get_())));
 		}
 	}
 
@@ -5677,7 +5677,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(D(std::stoull(symbol->symbol_())));
+			set_(D(std::stoull(symbol->get_())));
 		}
 	}
 
@@ -5973,7 +5973,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(D(std::stoll(symbol->symbol_())));
+			set_(D(std::stoll(symbol->get_())));
 		}
 	}
 
@@ -6269,7 +6269,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(D(std::stoull(symbol->symbol_())));
+			set_(D(std::stoull(symbol->get_())));
 		}
 	}
 
@@ -6656,7 +6656,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(std::stof(symbol->symbol_()));
+			set_(std::stof(symbol->get_()));
 		}
 	}
 
@@ -6953,7 +6953,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			set_(std::stod(symbol->symbol_()));
+			set_(std::stod(symbol->get_()));
 		}
 	}
 
@@ -7282,7 +7282,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			std::stringstream str(symbol->symbol_());
+			std::stringstream str(symbol->get_());
 			std::string first;
 			std::string second;
 			std::getline(str, first, delim);
@@ -7617,7 +7617,7 @@ public:
 		Symbol* const symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
-			std::stringstream str(symbol->symbol_());
+			std::stringstream str(symbol->get_());
 			std::string first;
 			std::string second;
 			std::getline(str, first, delim);
@@ -7808,7 +7808,7 @@ public:
 	inline const bool push_back_(const Ptr& ptr)
 	{
 		const Ptr type = ptr->type_();
-		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
+		write_(Int16::mut_(int16_t(static_<Symbol>(type)->get_().length())));
 		write_(type);
 		ptr->invoke_("to_river", me_());
 		return true;
@@ -7826,7 +7826,7 @@ public:
 	inline const bool push_back_with_links_(const Ptr& ptr, const Ptr& shoal)
 	{
 		const Ptr type = ptr->type_();
-		write_(Int16::mut_(int16_t(static_<Symbol>(type)->symbol_().length())));
+		write_(Int16::mut_(int16_t(static_<Symbol>(type)->get_().length())));
 		write_(type);
 		ptr->invoke_("to_river_with_links", shoal, me_());
 		return true;
@@ -7935,13 +7935,13 @@ inline const Thing::Ptr Thing::iterator_() const
 inline const bool Thing::is_(const std::string& symbol) const
 {
 	const Symbol* const sym = dynamic_cast<const Symbol*>(this);
-	return (sym && sym->symbol_() == symbol);
+	return (sym && sym->get_() == symbol);
 }
 
 inline const bool Thing::is_(const Ptr& symbol) const
 {
 	Symbol* const sym = dynamic_<Symbol>(symbol);
-	return (sym && is_(sym->symbol_()));
+	return (sym && is_(sym->get_()));
 }
 
 template <typename F>
@@ -8079,14 +8079,14 @@ inline const Thing::Ptr& Thing::shared_()
 
 inline Thing::Dismemberment::Dismemberment(const Ptr& type, const Ptr& member)
 	:std::logic_error(std::string("Dismemberment ")
-		+ static_<Symbol>(type)->symbol_() + " "
-		+ static_<Symbol>(member)->symbol_())
+		+ static_<Symbol>(type)->get_() + " "
+		+ static_<Symbol>(member)->get_())
 {
 }
 
 inline Thing::Mutation::Mutation(const Ptr& type)
 	:std::logic_error("Mutation "
-		+ static_<Symbol>(type)->symbol_())
+		+ static_<Symbol>(type)->get_())
 {
 }
 

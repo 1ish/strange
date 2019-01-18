@@ -360,7 +360,7 @@ private:
 			Flock* const flock = static_<Flock>(i);
 			const Ptr first = flock->at_(0);
 			Symbol* const symbol = dynamic_<Symbol>(first);
-			if (symbol && symbol->symbol_()[0] != '_')
+			if (symbol && symbol->get_()[0] != '_')
 			{
 				r->update_(first, flock->at_(1));
 			}

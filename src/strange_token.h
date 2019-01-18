@@ -179,7 +179,7 @@ public:
 
 	inline const std::string symbol_() const
 	{
-		return static_<Symbol>(_symbol)->symbol_();
+		return static_<Symbol>(_symbol)->get_();
 	}
 
 	inline const Ptr symbol(const Ptr& ignore = nothing_()) const

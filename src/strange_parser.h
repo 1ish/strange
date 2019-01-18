@@ -335,7 +335,7 @@ private:
 					}
 					else if (symbol->is_("<>")) // container
 					{
-						std::string container = static_<Symbol>(scope)->symbol_();
+						std::string container = static_<Symbol>(scope)->get_();
 						const size_t pos = container.find_last_of("::");
 						if (pos == std::string::npos)
 						{
@@ -1047,7 +1047,7 @@ private:
 				const Ptr new_scope = add_scope_sym
 					? ( scope->is_nothing_()
 						? add_scope_symbol
-						: sym_(static_<Symbol>(scope)->symbol_() + "::" + add_scope_sym->symbol_())
+						: sym_(static_<Symbol>(scope)->get_() + "::" + add_scope_sym->get_())
 					)
 					: scope;
 				const Ptr value = _parse_(new_scope, shoal);
@@ -1110,7 +1110,7 @@ private:
 			{
 				if (tag == 'N') // name
 				{
-					key = sym_(static_<Symbol>(key)->symbol_() + "::" + static_<Symbol>(symbol)->symbol_());
+					key = sym_(static_<Symbol>(key)->get_() + "::" + static_<Symbol>(symbol)->get_());
 				}
 				else
 				{

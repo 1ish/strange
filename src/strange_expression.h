@@ -554,8 +554,8 @@ private:
 		// search scope from bottom to top
 		Shoal* const shoal = static_<Shoal>(_vector[0]);
 		const Ptr key = _vector[1];
-		const std::string& key_str = static_<Symbol>(key)->symbol_();
-		std::string scope = static_<Symbol>(_vector[2])->symbol_();
+		const std::string& key_str = static_<Symbol>(key)->get_();
+		std::string scope = static_<Symbol>(_vector[2])->get_();
 		for (;;)
 		{
 			if (scope.empty())
