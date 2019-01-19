@@ -93,7 +93,7 @@ public:
 		Thing* const thing = ptr.get();
 		if (!dynamic_cast<T*>(thing))
 		{
-			throw std::runtime_error("bad static cast");
+			throw std::invalid_argument("bad static cast");
 		}
 		return static_cast<T*>(thing);
 #else
@@ -948,6 +948,7 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
+#ifdef _DEBUG
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
 		{
@@ -958,6 +959,14 @@ protected:
 			return (t->*_function)(it);
 		}
 		throw std::invalid_argument("ERROR: Member passed wrong type of thing");
+#else
+		T* const t = static_cast<T*>(thing);
+		if (t->finalized_())
+		{
+			throw Mutilation(thing->type_());
+		}
+		return (t->*_function)(it);
+#endif
 	}
 
 private:
@@ -1007,12 +1016,16 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
+#ifdef _DEBUG
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
 		{
 			return (t->*_function)(it);
 		}
 		throw std::invalid_argument("ERROR: Const passed wrong type of thing");
+#else
+		return static_cast<T*>(thing)->*_function)(it);
+#endif
 	}
 
 private:
@@ -3989,6 +4002,10 @@ public:
 			bool& b = ref_();
 			b = (b != bool(number->to_int64_() & 1));
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Bit::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -3999,6 +4016,10 @@ public:
 			bool& b = ref_();
 			b = !b;
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Bit::self_subtract_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_multiply_(const Ptr& other) override
@@ -4008,6 +4029,10 @@ public:
 		{
 			bool& b = ref_();
 			b = (b && (number->to_int64_() & 1));
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Bit::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -4022,6 +4047,10 @@ public:
 				from_int64_(to_int64_() / divisor);
 			}
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Bit::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
@@ -4034,6 +4063,10 @@ public:
 			{
 				from_int64_(to_int64_() % divisor);
 			}
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Bit::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -4269,6 +4302,10 @@ public:
 		{
 			from_int64_(to_int64_() + number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int8::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -4278,6 +4315,10 @@ public:
 		{
 			from_int64_(to_int64_() - number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int8::self_subtract_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_multiply_(const Ptr& other) override
@@ -4286,6 +4327,10 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Int8::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -4300,6 +4345,10 @@ public:
 				from_int64_(to_int64_() / divisor);
 			}
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int8::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
@@ -4312,6 +4361,10 @@ public:
 			{
 				from_int64_(to_int64_() % divisor);
 			}
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Int8::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -4547,6 +4600,10 @@ public:
 		{
 			from_int64_(to_int64_() + number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt8::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -4556,6 +4613,10 @@ public:
 		{
 			from_int64_(to_int64_() - number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt8::self_subtract_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_multiply_(const Ptr& other) override
@@ -4564,6 +4625,10 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
+		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt8::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -4578,6 +4643,10 @@ public:
 				from_int64_(to_int64_() / divisor);
 			}
 		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt8::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
@@ -4590,6 +4659,10 @@ public:
 			{
 				from_int64_(to_int64_() % divisor);
 			}
+		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt8::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -4831,6 +4904,10 @@ public:
 		{
 			from_int64_(to_int64_() + number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int16::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -4840,6 +4917,10 @@ public:
 		{
 			from_int64_(to_int64_() - number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int16::self_subtract_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_multiply_(const Ptr& other) override
@@ -4848,6 +4929,10 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Int16::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -4862,6 +4947,10 @@ public:
 				from_int64_(to_int64_() / divisor);
 			}
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int16::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
@@ -4874,6 +4963,10 @@ public:
 			{
 				from_int64_(to_int64_() % divisor);
 			}
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Int16::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -5115,6 +5208,10 @@ public:
 		{
 			from_int64_(to_int64_() + number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt16::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -5124,6 +5221,10 @@ public:
 		{
 			from_int64_(to_int64_() - number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt16::self_subtract_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_multiply_(const Ptr& other) override
@@ -5132,6 +5233,10 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
+		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt16::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -5146,6 +5251,10 @@ public:
 				from_int64_(to_int64_() / divisor);
 			}
 		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt16::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
@@ -5158,6 +5267,10 @@ public:
 			{
 				from_int64_(to_int64_() % divisor);
 			}
+		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt16::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -5403,6 +5516,10 @@ public:
 		{
 			from_int64_(to_int64_() + number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int32::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -5412,6 +5529,10 @@ public:
 		{
 			from_int64_(to_int64_() - number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int32::self_subtract_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_multiply_(const Ptr& other) override
@@ -5420,6 +5541,10 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Int32::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -5434,6 +5559,10 @@ public:
 				from_int64_(to_int64_() / divisor);
 			}
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int32::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
@@ -5446,6 +5575,10 @@ public:
 			{
 				from_int64_(to_int64_() % divisor);
 			}
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Int32::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -5691,6 +5824,10 @@ public:
 		{
 			from_int64_(to_int64_() + number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt32::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -5700,6 +5837,10 @@ public:
 		{
 			from_int64_(to_int64_() - number->to_int64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt32::self_subtract_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_multiply_(const Ptr& other) override
@@ -5708,6 +5849,10 @@ public:
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
+		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt32::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -5722,6 +5867,10 @@ public:
 				from_int64_(to_int64_() / divisor);
 			}
 		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt32::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
@@ -5734,6 +5883,10 @@ public:
 			{
 				from_int64_(to_int64_() % divisor);
 			}
+		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt32::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -5987,6 +6140,10 @@ public:
 		{
 			ref_() += number->to_int64_();
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int64::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -5996,6 +6153,10 @@ public:
 		{
 			ref_() -= number->to_int64_();
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int64::self_subtract_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_multiply_(const Ptr& other) override
@@ -6004,6 +6165,10 @@ public:
 		if (number)
 		{
 			ref_() *= number->to_int64_();
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Int64::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -6018,6 +6183,10 @@ public:
 				ref_() /= divisor;
 			}
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int64::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
@@ -6030,6 +6199,10 @@ public:
 			{
 				ref_() %= divisor;
 			}
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Int64::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -6290,6 +6463,10 @@ public:
 			{
 				ref_() += number->to_int64_();
 			}
+			else
+			{
+				throw std::invalid_argument("strange::UInt64::self_add_ passed invalid Number");
+			}
 		}
 	}
 
@@ -6307,6 +6484,10 @@ public:
 			{
 				ref_() -= number->to_int64_();
 			}
+			else
+			{
+				throw std::invalid_argument("strange::UInt64::self_subtract_ passed invalid Number");
+			}
 		}
 	}
 
@@ -6323,6 +6504,10 @@ public:
 			if (number)
 			{
 				ref_() *= number->to_int64_();
+			}
+			else
+			{
+				throw std::invalid_argument("strange::UInt64::self_multiply_ passed invalid Number");
 			}
 		}
 	}
@@ -6349,6 +6534,10 @@ public:
 					ref_() /= divisor;
 				}
 			}
+			else
+			{
+				throw std::invalid_argument("strange::UInt64::self_divide_ passed invalid Number");
+			}
 		}
 	}
 
@@ -6373,6 +6562,10 @@ public:
 				{
 					ref_() %= divisor;
 				}
+			}
+			else
+			{
+				throw std::invalid_argument("strange::UInt64::self_modulo_ passed invalid Number");
 			}
 		}
 	}
@@ -6670,6 +6863,10 @@ public:
 		{
 			from_float64_(to_float64_() + number->to_float64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Float32::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -6679,6 +6876,10 @@ public:
 		{
 			from_float64_(to_float64_() - number->to_float64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Float32::self_subtract_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_multiply_(const Ptr& other) override
@@ -6687,6 +6888,10 @@ public:
 		if (number)
 		{
 			from_float64_(to_float64_() * number->to_float64_());
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Float32::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -6701,6 +6906,10 @@ public:
 				from_float64_(to_float64_() / divisor);
 			}
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Float32::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
@@ -6713,6 +6922,10 @@ public:
 			{
 				from_float64_(std::fmod(to_float64_(), divisor));
 			}
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Float32::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -6967,6 +7180,10 @@ public:
 		{
 			ref_() += number->to_float64_();
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Float64::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -6976,6 +7193,10 @@ public:
 		{
 			ref_() -= number->to_float64_();
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Float64::self_subtract_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_multiply_(const Ptr& other) override
@@ -6984,6 +7205,10 @@ public:
 		if (number)
 		{
 			ref_() *= number->to_float64_();
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Float64::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -6998,6 +7223,10 @@ public:
 				ref_() /= divisor;
 			}
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Float64::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
@@ -7011,6 +7240,10 @@ public:
 				double& d = ref_();
 				d = std::fmod(d, divisor);
 			}
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Float64::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -7301,6 +7534,10 @@ public:
 		{
 			from_complex64_(to_complex64_() + number->to_complex64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Complex32::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -7309,6 +7546,10 @@ public:
 		if (number)
 		{
 			from_complex64_(to_complex64_() - number->to_complex64_());
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Complex32::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -7319,6 +7560,10 @@ public:
 		{
 			from_complex64_(to_complex64_() * number->to_complex64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Complex32::self_multiply_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_divide_(const Ptr& other) override
@@ -7328,10 +7573,15 @@ public:
 		{
 			from_complex64_(to_complex64_() / number->to_complex64_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Complex32::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
+		throw std::logic_error("strange::Complex32::self_modulo_ called");
 	}
 
 	virtual inline const bool same_(const Ptr& other) const override
@@ -7636,6 +7886,10 @@ public:
 		{
 			ref_() += number->to_complex64_();
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Complex64::self_add_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_subtract_(const Ptr& other) override
@@ -7644,6 +7898,10 @@ public:
 		if (number)
 		{
 			ref_() -= number->to_complex64_();
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Complex64::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -7654,6 +7912,10 @@ public:
 		{
 			ref_() *= number->to_complex64_();
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Complex64::self_multiply_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_divide_(const Ptr& other) override
@@ -7663,10 +7925,15 @@ public:
 		{
 			ref_() /= number->to_complex64_();
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Complex64::self_divide_ passed invalid Number");
+		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
+		throw std::logic_error("strange::Complex64::self_modulo_ called");
 	}
 
 	virtual inline const bool same_(const Ptr& other) const override
@@ -8177,6 +8444,10 @@ inline void Serializable::to_river_(const Thing::Ptr& river) const
 	if (lake)
 	{
 		lake->to_river_(river);
+	}
+	else
+	{
+		throw std::invalid_argument("Serializable::to_river_ passed wrong type of thing");
 	}
 }
 
