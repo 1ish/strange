@@ -446,7 +446,7 @@ public:
 
 private:
 	const Ptr _river;
-	const std::string _filename;
+	const Ptr _filename;
 	int64_t _x = 0;
 	int64_t _y = 1;
 	bool _dot = false;

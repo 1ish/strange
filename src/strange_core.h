@@ -8177,14 +8177,14 @@ public:
 		return CATS;
 	}
 
-	inline const std::string filename_() const
-	{
-		return static_<Symbol>(_filename)->get_();
-	}
-
-	inline const Ptr filename(const Ptr& ignore = nothing_()) const
+	inline const Ptr filename_() const
 	{
 		return _filename;
+	}
+
+	inline const Ptr filename(const Ptr& ignore) const
+	{
+		return filename_();
 	}
 
 	inline const bool push_back_(const Ptr& ptr)
