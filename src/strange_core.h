@@ -3359,6 +3359,10 @@ public:
 			{
 				self_add_(symbol->get_());
 			}
+			else
+			{
+				throw std::invalid_argument("strange::Lake::self_add_ passed invalid argument");
+			}
 		}
 	}
 
@@ -3980,6 +3984,10 @@ public:
 		{
 			set_(std::stoull(symbol->get_()) & 1);
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Bit::from_symbol_ passed invalid Symbol");
+		}
 	}
 
 	virtual inline void increment_() override
@@ -4283,6 +4291,10 @@ public:
 		{
 			set_(D(std::stoll(symbol->get_())));
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int8::from_symbol_ passed invalid Symbol");
+		}
 	}
 
 	virtual inline void increment_() override
@@ -4580,6 +4592,10 @@ public:
 		if (symbol)
 		{
 			set_(D(std::stoull(symbol->get_())));
+		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt8::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -4885,6 +4901,10 @@ public:
 		{
 			set_(D(std::stoll(symbol->get_())));
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int16::from_symbol_ passed invalid Symbol");
+		}
 	}
 
 	virtual inline void increment_() override
@@ -5188,6 +5208,10 @@ public:
 		if (symbol)
 		{
 			set_(D(std::stoull(symbol->get_())));
+		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt16::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -5497,6 +5521,10 @@ public:
 		{
 			set_(D(std::stoll(symbol->get_())));
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int32::from_symbol_ passed invalid Symbol");
+		}
 	}
 
 	virtual inline void increment_() override
@@ -5804,6 +5832,10 @@ public:
 		if (symbol)
 		{
 			set_(D(std::stoull(symbol->get_())));
+		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt32::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -6121,6 +6153,10 @@ public:
 		{
 			set_(D(std::stoll(symbol->get_())));
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Int64::from_symbol_ passed invalid Symbol");
+		}
 	}
 
 	virtual inline void increment_() override
@@ -6436,6 +6472,10 @@ public:
 		if (symbol)
 		{
 			set_(D(std::stoull(symbol->get_())));
+		}
+		else
+		{
+			throw std::invalid_argument("strange::UInt64::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -6844,6 +6884,10 @@ public:
 		{
 			set_(std::stof(symbol->get_()));
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Float32::from_symbol_ passed invalid Symbol");
+		}
 	}
 
 	virtual inline void increment_() override
@@ -7160,6 +7204,10 @@ public:
 		if (symbol)
 		{
 			set_(std::stod(symbol->get_()));
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Float64::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -7515,6 +7563,10 @@ public:
 			std::getline(str, second, delim);
 			set_(D(std::stof(first), std::stof(second)));
 		}
+		else
+		{
+			throw std::invalid_argument("strange::Complex32::from_symbol_ passed invalid Symbol");
+		}
 	}
 
 	virtual inline void increment_() override
@@ -7866,6 +7918,10 @@ public:
 			std::getline(str, first, delim);
 			std::getline(str, second, delim);
 			set_(D(std::stod(first), std::stod(second)));
+		}
+		else
+		{
+			throw std::invalid_argument("strange::Complex64::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -8567,6 +8623,10 @@ inline const Thing::Ptr Symbol::add_(const Ptr& other) const
 	if (lake)
 	{
 		return add_(lake->get_());
+	}
+	else
+	{
+		throw std::invalid_argument("strange::Symbol::add_ passed invalid argument");
 	}
 	return me_();
 }
