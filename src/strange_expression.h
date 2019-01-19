@@ -368,7 +368,7 @@ private:
 
 	inline const Ptr _error_(const std::string& str, const int64_t stack = 1) const
 	{
-		const std::string message = str.empty() ? str : ("ERROR: " + str);
+		const std::string message = str.empty() ? str : ("Expression ERROR: " + str);
 		const Ptr river = static_<Token>(_token)->error_(message + '\n' +
 			std::to_string(stack) + ": " + static_<Symbol>(_statement)->get_());
 		const Ptr parent = static_<Weak>(_parent)->get_();

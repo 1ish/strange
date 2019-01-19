@@ -155,7 +155,7 @@ private:
 			const char tag = tok->tag_();
 			if (tag == 'E') // error
 			{
-				throw tok->error_("tokenizer error");
+				throw tok->error_("Tokenizer ERROR");
 			}
 			const Ptr symbol = tok->symbol();
 			const Ptr flock = Flock::mut_();
@@ -187,7 +187,7 @@ private:
 							}
 							else
 							{
-								throw tok->error_("parser error: invalid lambda_/function_");
+								throw tok->error_("Parser ERROR: invalid lambda_/function_");
 							}
 							continue;
 						}
@@ -203,7 +203,7 @@ private:
 							}
 							else if (size != 1)
 							{
-								throw tok->error_("parser error: invalid break_/continue_/return_/throw_");
+								throw tok->error_("Parser ERROR: invalid break_/continue_/return_/throw_");
 							}
 							result = Expression::fin_(token, symbol, flock);
 							continue;
@@ -219,7 +219,7 @@ private:
 							}
 							else
 							{
-								throw tok->error_("parser error: invalid catch_");
+								throw tok->error_("Parser ERROR: invalid catch_");
 							}
 							continue;
 						}
@@ -235,7 +235,7 @@ private:
 							}
 							else
 							{
-								throw tok->error_("parser error: invalid if_");
+								throw tok->error_("Parser ERROR: invalid if_");
 							}
 							continue;
 						}
@@ -252,7 +252,7 @@ private:
 							}
 							else
 							{
-								throw tok->error_("parser error: invalid while_/do_");
+								throw tok->error_("Parser ERROR: invalid while_/do_");
 							}
 							continue;
 						}
@@ -269,7 +269,7 @@ private:
 							}
 							else
 							{
-								throw tok->error_("parser error: invalid for_");
+								throw tok->error_("Parser ERROR: invalid for_");
 							}
 							continue;
 						}
@@ -376,7 +376,7 @@ private:
 					}
 					else
 					{
-						throw tok->error_("parser error: unexpected initial punctuation");
+						throw tok->error_("Parser ERROR: unexpected initial punctuation");
 					}
 				}
 			}
@@ -414,7 +414,7 @@ private:
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
-			throw tok->error_("tokenizer error");
+			throw tok->error_("Tokenizer ERROR");
 		}
 		const Ptr symbol = tok->symbol();
 		Reference* const smt = static_<Reference>(statement);
@@ -635,7 +635,7 @@ private:
 			}
 			else
 			{
-				throw tok->error_("parser error: thing punctuation");
+				throw tok->error_("Parser ERROR: thing punctuation");
 			}
 		}
 		else
@@ -652,18 +652,18 @@ private:
 		Token* const tok = static_<Token>(token);
 		if (token->is_("."))
 		{
-			throw tok->error_("parser error: dot stop");
+			throw tok->error_("Parser ERROR: dot stop");
 		}
 		Flock* const flk = static_<Flock>(flock);
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
-			throw tok->error_("tokenizer error");
+			throw tok->error_("Tokenizer ERROR");
 		}
 		const Ptr symbol = tok->symbol();
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
-			throw tok->error_("parser error: dot literal");
+			throw tok->error_("Parser ERROR: dot literal");
 		}
 		else if (tag == 'N') // name
 		{
@@ -673,7 +673,7 @@ private:
 		}
 		else if (tag == 'P') // punctuation
 		{
-			throw tok->error_("parser error: dot punctuation");
+			throw tok->error_("Parser ERROR: dot punctuation");
 		}
 	}
 
@@ -691,7 +691,7 @@ private:
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
-			throw tok->error_("tokenizer error");
+			throw tok->error_("Tokenizer ERROR");
 		}
 		const Ptr symbol = tok->symbol();
 		if (tag == 'P') // punctuation
@@ -740,7 +740,7 @@ private:
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
-			throw tok->error_("tokenizer error");
+			throw tok->error_("Tokenizer ERROR");
 		}
 		const Ptr symbol = tok->symbol();
 		if (tag == 'P' && symbol->is_("("))
@@ -764,12 +764,12 @@ private:
 			Token* const tok = static_<Token>(token);
 			if (token->is_("."))
 			{
-				throw tok->error_("parser error: open without close");
+				throw tok->error_("Parser ERROR: open without close");
 			}
 			const char tag = tok->tag_();
 			if (tag == 'E') // error
 			{
-				throw tok->error_("tokenizer error");
+				throw tok->error_("Tokenizer ERROR");
 			}
 			const Ptr symbol = tok->symbol();
 			if (first)
@@ -783,7 +783,7 @@ private:
 					}
 					if (symbol->is_(","))
 					{
-						throw tok->error_("parser error: open followed immediately by ,");
+						throw tok->error_("Parser ERROR: open followed immediately by ,");
 					}
 				}
 			}
@@ -811,7 +811,7 @@ private:
 					{
 						if (close->is_(">>"))
 						{
-							throw tok->error_("parser error: open expecting single item then close");
+							throw tok->error_("Parser ERROR: open expecting single item then close");
 						}
 						if (parameter)
 						{
@@ -837,21 +837,21 @@ private:
 						}
 						else
 						{
-							throw tok->error_("parser error: open expecting , = or close");
+							throw tok->error_("Parser ERROR: open expecting , = or close");
 						}
 					}
 					else
 					{
-						throw tok->error_("parser error: open expecting , or close");
+						throw tok->error_("Parser ERROR: open expecting , or close");
 					}
 				}
 				else if (parameter)
 				{
-					throw tok->error_("parser error: open expecting , = or close");
+					throw tok->error_("Parser ERROR: open expecting , = or close");
 				}
 				else
 				{
-					throw tok->error_("parser error: open expecting , or close");
+					throw tok->error_("Parser ERROR: open expecting , or close");
 				}
 				_next_();
 				punctuation = false;
@@ -873,7 +873,7 @@ private:
 				}
 				else
 				{
-					throw tok->error_("parser error: open expecting parameter name");
+					throw tok->error_("Parser ERROR: open expecting parameter name");
 				}
 			}
 			else
@@ -900,12 +900,12 @@ private:
 			Token* const tok = static_<Token>(token);
 			if (token->is_("."))
 			{
-				throw tok->error_("parser error: { without }");
+				throw tok->error_("Parser ERROR: { without }");
 			}
 			const char tag = tok->tag_();
 			if (tag == 'E') // error
 			{
-				throw tok->error_("tokenizer error");
+				throw tok->error_("Tokenizer ERROR");
 			}
 			const Ptr symbol = tok->symbol();
 			if (first)
@@ -925,7 +925,7 @@ private:
 					}
 					else if (symbol->is_(","))
 					{
-						throw tok->error_("parser error: { followed immediately by ,");
+						throw tok->error_("Parser ERROR: { followed immediately by ,");
 					}
 				}
 			}
@@ -936,7 +936,7 @@ private:
 					_next_();
 					return is_map;
 				}
-				throw tok->error_("parser error: {: not followed immediately by }");
+				throw tok->error_("Parser ERROR: {: not followed immediately by }");
 			}
 			else if (key)
 			{
@@ -948,7 +948,7 @@ private:
 						{
 							if (is_map)
 							{
-								throw tok->error_("parser error : last key with missing value");
+								throw tok->error_("Parser ERROR : last key with missing value");
 							}
 							_next_();
 							return is_map;
@@ -957,7 +957,7 @@ private:
 						{
 							if (not_map)
 							{
-								throw tok->error_("parser error: key with unexpected value");
+								throw tok->error_("Parser ERROR: key with unexpected value");
 							}
 							_next_();
 							is_map = true;
@@ -970,7 +970,7 @@ private:
 						{
 							if (is_map)
 							{
-								throw tok->error_("parser error: key with missing value");
+								throw tok->error_("Parser ERROR: key with missing value");
 							}
 							_next_();
 							not_map = true;
@@ -980,10 +980,10 @@ private:
 						}
 						else
 						{
-							throw tok->error_("parser error: key followed by unexpected punctuation");
+							throw tok->error_("Parser ERROR: key followed by unexpected punctuation");
 						}
 					}
-					throw tok->error_("parser error: key not followed by punctuation");
+					throw tok->error_("Parser ERROR: key not followed by punctuation");
 				}
 			}
 			else if (punctuation)
@@ -1004,10 +1004,10 @@ private:
 					}
 					else
 					{
-						throw tok->error_("parser error: value followed by unexpected punctuation");
+						throw tok->error_("Parser ERROR: value followed by unexpected punctuation");
 					}
 				}
-				throw tok->error_("parser error: value not followed by punctuation");
+				throw tok->error_("Parser ERROR: value not followed by punctuation");
 			}
 			if (key)
 			{
@@ -1052,7 +1052,7 @@ private:
 			const char tag = tok->tag_();
 			if (tag == 'E') // error
 			{
-				throw tok->error_("tokenizer error");
+				throw tok->error_("Tokenizer ERROR");
 			}
 			const Ptr symbol = tok->symbol();
 			if (first)
@@ -1087,7 +1087,7 @@ private:
 				}
 				else
 				{
-					throw tok->error_("parser error: shared scope :: not followed by name");
+					throw tok->error_("Parser ERROR: shared scope :: not followed by name");
 				}
 			}
 			_next_();
@@ -1111,13 +1111,13 @@ private:
 		Token* const tok = static_<Token>(token);
 		if (token->is_("."))
 		{
-			throw tok->error_("parser error: at stop");
+			throw tok->error_("Parser ERROR: at stop");
 		}
 		Flock* const flk = static_<Flock>(flock);
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
-			throw tok->error_("tokenizer error");
+			throw tok->error_("Tokenizer ERROR");
 		}
 		const Ptr symbol = tok->symbol();
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
@@ -1130,7 +1130,7 @@ private:
 		}
 		else if (tag == 'P') // punctuation
 		{
-			throw tok->error_("parser error: at punctuation");
+			throw tok->error_("Parser ERROR: at punctuation");
 		}
 		_next_();
 		return _update_(scope, flock, shoal); // continue/break
@@ -1148,7 +1148,7 @@ private:
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
-			throw tok->error_("tokenizer error");
+			throw tok->error_("Tokenizer ERROR");
 		}
 		const Ptr symbol = tok->symbol();
 		if (tag == 'P' && symbol->is_(":="))

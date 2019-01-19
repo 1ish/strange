@@ -38,83 +38,75 @@ class Token : public Mutable
 //----------------------------------------------------------------------
 {
 public:
-	inline Token(const Ptr& tag, const Ptr& x, const Ptr& y, const Ptr& symbol, const Ptr& value)
+	inline Token(const Ptr& filename, const Ptr& x, const Ptr& y, const Ptr& tag, const Ptr& symbol, const Ptr& value)
 		: Mutable{}
-		, _tag{ tag }
+		, _filename{ filename }
 		, _x{ x }
 		, _y{ y }
+		, _tag{ tag }
 		, _symbol{ symbol }
 		, _value{ value }
 	{
 	}
 
-	static inline const Ptr mut_(const char tag, const int64_t x, const int64_t y, const std::string& str, const Ptr& value = nothing_())
+	static inline const Ptr mut_(const std::string& filename, const int64_t x, const int64_t y, const char tag, const std::string& str, const Ptr& value = nothing_())
 	{
-		return mut_(Int8::fin_(tag), Int64::fin_(x), Int64::fin_(y), sym_(str), value);
+		return mut_(sym_(filename), Int64::fin_(x), Int64::fin_(y), Int8::fin_(tag), sym_(str), value);
 	}
 
-	static inline const Ptr mut_(const Ptr& tag, const Ptr& x, const Ptr& y, const Ptr& symbol, const Ptr& value)
+	static inline const Ptr mut_(const Ptr& filename, const Ptr& x, const Ptr& y, const Ptr& tag, const Ptr& symbol, const Ptr& value)
 	{
-		return make_<Token>(tag, x, y, symbol, value);
+		return make_<Token>(filename, x, y, tag, symbol, value);
 	}
 
 	static inline const Ptr mut(const Ptr& it)
 	{
-		const Ptr tag = it->next_();
+		const Ptr filename = it->next_();
 		const Ptr x = it->next_();
 		const Ptr y = it->next_();
+		const Ptr tag = it->next_();
 		const Ptr symbol = it->next_();
 		const Ptr value = it->next_();
-		return mut_(tag, x, y, symbol, value);
+		return mut_(filename, x, y, tag, symbol, value);
 	}
 
-	static inline const Ptr symbol_(const int64_t x, const int64_t y, const std::string& str)
+	static inline const Ptr symbol_(const std::string& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		return mut_('S', x, y, str, _symbol_(str));
+		return mut_(filename, x, y, 'S', str, _symbol_(str));
 	}
 
-	static inline const Ptr lake_(const int64_t x, const int64_t y, const std::string& str)
+	static inline const Ptr lake_(const std::string& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		return mut_('L', x, y, str, Lake::fin_(str.substr(1, str.length() - 2)));
+		return mut_(filename, x, y, 'L', str, Lake::fin_(str.substr(1, str.length() - 2)));
 	}
 
-	static inline const Ptr integer_(const int64_t x, const int64_t y, const std::string& str)
+	static inline const Ptr integer_(const std::string& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
 		const Ptr int64 = Int64::mut_();
 		static_<Int64>(int64)->from_symbol_(sym_(str));
-		return mut_('I', x, y, str, int64);
+		return mut_(filename, x, y, 'I', str, int64);
 	}
 
-	static inline const Ptr float_(const int64_t x, const int64_t y, const std::string& str)
+	static inline const Ptr float_(const std::string& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
 		const Ptr float64 = Float64::mut_();
 		static_<Float64>(float64)->from_symbol_(sym_(str));
-		return mut_('F', x, y, str, float64);
+		return mut_(filename, x, y, 'F', str, float64);
 	}
 
-	static inline const Ptr name_(const int64_t x, const int64_t y, const std::string& str)
+	static inline const Ptr name_(const std::string& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		return mut_('N', x, y, str);
+		return mut_(filename, x, y, 'N', str);
 	}
 
-	static inline const Ptr punctuation_(const int64_t x, const int64_t y, const std::string& str)
+	static inline const Ptr punctuation_(const std::string& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		return mut_('P', x, y, str);
+		return mut_(filename, x, y, 'P', str);
 	}
 
-	static inline const Ptr error_(const int64_t x, const int64_t y, const std::string& str)
+	static inline const Ptr error_(const std::string& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		return mut_('E', x, y, str);
-	}
-
-	virtual inline const Ptr copy_() const override
-	{
-		return mut_(_tag, _x, _y, _symbol, _value);
-	}
-
-	virtual inline const Ptr clone_() const override
-	{
-		return mut_(_tag->clone_(), _x->clone_(), _y->clone_(), _symbol->clone_(), _value->clone_());
+		return mut_(filename, x, y, 'E', str);
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -123,10 +115,11 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			Shoal* const shoal = static_<Shoal>(pub);
-			shoal->update_("mut", Static::fin_(&Token::mut, "tag", "x", "y", "symbol", "value"));
-			shoal->update_("tag", Const<Token>::fin_(&Token::tag));
+			shoal->update_("mut", Static::fin_(&Token::mut, "filename", "x", "y", "tag", "symbol", "value"));
+			shoal->update_("filename", Const<Token>::fin_(&Token::filename));
 			shoal->update_("x", Const<Token>::fin_(&Token::x));
 			shoal->update_("y", Const<Token>::fin_(&Token::y));
+			shoal->update_("tag", Const<Token>::fin_(&Token::tag));
 			shoal->update_("symbol", Const<Token>::fin_(&Token::symbol));
 			shoal->update_("value", Const<Token>::fin_(&Token::value));
 			shoal->update_("error", Const<Token>::fin_(&Token::error, "message"));
@@ -139,17 +132,17 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		Shoal* const s = static_<Shoal>(shoal);
-		s->update_("strange::Token::mut", Static::fin_(&Token::mut, "tag", "x", "y", "symbol", "value"));
+		s->update_("strange::Token::mut", Static::fin_(&Token::mut, "filename", "x", "y", "tag", "symbol", "value"));
 	}
 
-	inline const char tag_() const
+	inline const std::string filename_() const
 	{
-		return static_<Int8>(_tag)->get_();
+		return static_<Symbol>(_filename)->get_();
 	}
 
-	inline const Ptr tag(const Ptr& ignore = nothing_()) const
+	inline const Ptr filename(const Ptr& ignore = nothing_()) const
 	{
-		return _tag;
+		return _filename;
 	}
 
 	inline const int64_t x_() const
@@ -170,6 +163,16 @@ public:
 	inline const Ptr y(const Ptr& ignore = nothing_()) const
 	{
 		return _y;
+	}
+
+	inline const char tag_() const
+	{
+		return static_<Int8>(_tag)->get_();
+	}
+
+	inline const Ptr tag(const Ptr& ignore = nothing_()) const
+	{
+		return _tag;
 	}
 
 	inline const std::string symbol_() const
@@ -197,12 +200,17 @@ public:
 		const Ptr river = River::mut_();
 		River* const r = static_<River>(river);
 		r->write_(err);
-		r->write_(" tag:");
-		r->write_(std::string() + tag_());
+		const std::string filename = filename_();
+		if (!filename.empty())
+		{
+			r->write_(" " + filename);
+		}
 		r->write_(" x:");
 		r->write_(std::to_string(x_()));
 		r->write_(" y:");
 		r->write_(std::to_string(y_()));
+		r->write_(" tag:");
+		r->write_(std::string() + tag_());
 		r->write_(" symbol:");
 		r->write_(symbol_());
 		return river;
@@ -245,9 +253,10 @@ public:
 	}
 
 private:
-	const Ptr _tag;
+	const Ptr _filename;
 	const Ptr _x;
 	const Ptr _y;
+	const Ptr _tag;
 	const Ptr _symbol;
 	const Ptr _value;
 

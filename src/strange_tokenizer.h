@@ -182,7 +182,7 @@ public:
 			if (_different)
 			{
 				_different = false;
-				return Token::punctuation_(_x, _y, "==");
+				return Token::punctuation_(_filename, _x, _y, "==");
 			}
 
 			if (commentblock)
@@ -235,17 +235,17 @@ public:
 				if (char1 == '=' && char2 == '=' && token == "!")
 				{
 					_different = true;
-					return Token::punctuation_(_x, _y, token);
+					return Token::punctuation_(_filename, _x, _y, token);
 				}
-				return Token::punctuation_(_x, _y, token + char1);
+				return Token::punctuation_(_filename, _x, _y, token + char1);
 			}
 			else if (singlequote && char1 == '\'')
 			{
-				return Token::symbol_(_x, _y, token + char1);
+				return Token::symbol_(_filename, _x, _y, token + char1);
 			}
 			else if (doublequote && char1 == '\"')
 			{
-				return Token::lake_(_x, _y, token + char1);
+				return Token::lake_(_filename, _x, _y, token + char1);
 			}
 			else if (singlequote || doublequote)
 			{
@@ -299,7 +299,7 @@ public:
 				{
 					break;
 				}
-				return Token::punctuation_(_x, _y, token);
+				return Token::punctuation_(_filename, _x, _y, token);
 			case '@':
 			case '&':
 			case '|':
@@ -315,7 +315,7 @@ public:
 					second = true;
 					break;
 				}
-				return Token::punctuation_(_x, _y, token);
+				return Token::punctuation_(_filename, _x, _y, token);
 			case '/':
 				token = char1;
 				if (char2 == '=')
@@ -333,7 +333,7 @@ public:
 					commentline = true;
 					break;
 				}
-				return Token::punctuation_(_x, _y, token);
+				return Token::punctuation_(_filename, _x, _y, token);
 			default:
 			{
 				const bool alpha1 = alpha_(char1);
@@ -378,7 +378,7 @@ public:
 							if (pnt1)
 							{
 								_dot = true;
-								return Token::integer_(_x, _y, token.substr(0, token.length() - 1));
+								return Token::integer_(_filename, _x, _y, token.substr(0, token.length() - 1));
 							}
 							if (exp1)
 							{
@@ -388,15 +388,15 @@ public:
 									if (token[token.length() - 2] == '.')
 									{
 										_dot = true;
-										return Token::integer_(_x, _y, token.substr(0, token.length() - 2));
+										return Token::integer_(_filename, _x, _y, token.substr(0, token.length() - 2));
 									}
-									return Token::float_(_x, _y, token.substr(0, token.length() - 1));
+									return Token::float_(_filename, _x, _y, token.substr(0, token.length() - 1));
 								}
-								return Token::integer_(_x, _y, token.substr(0, token.length() - 1));
+								return Token::integer_(_filename, _x, _y, token.substr(0, token.length() - 1));
 							}
-							return Token::float_(_x, _y, token);
+							return Token::float_(_filename, _x, _y, token);
 						}
-						return Token::integer_(_x, _y, token);
+						return Token::integer_(_filename, _x, _y, token);
 					}
 				}
 				else if (alphanumeric)
@@ -404,13 +404,13 @@ public:
 					token += char1;
 					if (!alpha2 && !num2)
 					{
-						return Token::name_(_x, _y, token);
+						return Token::name_(_filename, _x, _y, token);
 					}
 				}
 				else
 				{
 					// single character punctuation
-					return Token::punctuation_(_x, _y, std::string(&char1, 1));
+					return Token::punctuation_(_filename, _x, _y, std::string(&char1, 1));
 				}
 			}
 			}
@@ -419,7 +419,7 @@ public:
 		{
 			return stop_();
 		}
-		return Token::error_(_x, _y, token);
+		return Token::error_(_filename, _x, _y, token);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -445,6 +445,7 @@ public:
 
 private:
 	const Ptr _river;
+	std::string _filename;
 	int64_t _x = 0;
 	int64_t _y = 1;
 	bool _dot = false;
