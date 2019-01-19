@@ -8642,7 +8642,7 @@ inline const char Symbol::at_(const Ptr& index) const
 	{
 		return at_(ind->to_int64_());
 	}
-	return 0;
+	throw std::invalid_argument("strange::Symbol::at_ passed wrong type of Number");
 }
 
 inline const Thing::Ptr Symbol::at(const Ptr& it) const
@@ -8983,7 +8983,7 @@ inline const Thing::Ptr Flock::at_(const Ptr& pos) const
 	{
 		return at_(number->to_int64_());
 	}
-	return nothing_();
+	throw std::invalid_argument("strange::Flock::at_ passed wrong type of Number");
 }
 
 inline void Flock::update_(const Ptr& pos, const Ptr& value)
@@ -8992,6 +8992,10 @@ inline void Flock::update_(const Ptr& pos, const Ptr& value)
 	if (number)
 	{
 		update_(number->to_int64_(), value);
+	}
+	else
+	{
+		throw std::invalid_argument("strange::Flock::update_ passed wrong type of Number");
 	}
 }
 
@@ -9002,6 +9006,10 @@ inline void Flock::insert_(const Ptr& pos, const Ptr& value)
 	{
 		insert_(number->to_int64_(), value);
 	}
+	else
+	{
+		throw std::invalid_argument("strange::Flock::insert_ passed wrong type of Number");
+	}
 }
 
 inline void Flock::erase_(const Ptr& pos)
@@ -9010,6 +9018,10 @@ inline void Flock::erase_(const Ptr& pos)
 	if (number)
 	{
 		erase_(number->to_int64_());
+	}
+	else
+	{
+		throw std::invalid_argument("strange::Flock::erase_ passed wrong type of Number");
 	}
 }
 
@@ -9045,6 +9057,10 @@ inline void Flock::self_add_(const Ptr& other)
 					_vector.push_back(i.second);
 				}
 			}
+			else
+			{
+				throw std::invalid_argument("strange::Flock::self_add_ passed wrong type of collection");
+			}
 		}
 	}
 }
@@ -9065,6 +9081,10 @@ inline const Thing::Ptr Flock::Concurrent::at_(const Ptr& pos) const
 		{
 			return static_<Flock>(_flock)->at_(p);
 		}
+	}
+	else
+	{
+		throw std::invalid_argument("strange::Flock::Concurrent::at_ passed wrong type of Number");
 	}
 	return nothing_();
 }
@@ -9329,7 +9349,7 @@ inline const char Lake::at_(const Ptr& index) const
 	{
 		return at_(ind->to_int64_());
 	}
-	return 0;
+	throw std::invalid_argument("strange::Lake::at_ passed wrong type of Number");
 }
 
 inline const Thing::Ptr Lake::at(const Ptr& it) const
@@ -9347,6 +9367,10 @@ inline void Lake::update_(const Ptr& index, const Ptr& byte)
 		{
 			update_(ind->to_int64_(), byt->to_int64_());
 		}
+	}
+	else
+	{
+		throw std::invalid_argument("strange::Lake::update_ passed wrong type of Number");
 	}
 }
 
@@ -9366,6 +9390,10 @@ inline void Number::from_int64_(const Ptr& ptr)
 	{
 		from_int64_(int64->get_());
 	}
+	else
+	{
+		throw std::invalid_argument("strange::Number::from_int64_ passed wrong type of thing");
+	}
 }
 
 inline const Thing::Ptr Number::to_float64(const Ptr& ignore) const
@@ -9379,6 +9407,10 @@ inline void Number::from_float64_(const Ptr& ptr)
 	if (float64)
 	{
 		from_float64_(float64->get_());
+	}
+	else
+	{
+		throw std::invalid_argument("strange::Number::from_float64_ passed wrong type of thing");
 	}
 }
 
@@ -9394,6 +9426,10 @@ inline void Number::from_imaginary64_(const Ptr& ptr)
 	{
 		from_imaginary64_(float64->get_());
 	}
+	else
+	{
+		throw std::invalid_argument("strange::Number::from_imaginary64_ passed wrong type of thing");
+	}
 }
 
 inline const Thing::Ptr Number::to_complex64(const Ptr& ignore) const
@@ -9407,6 +9443,10 @@ inline void Number::from_complex64_(const Ptr& ptr)
 	if (complex64)
 	{
 		from_complex64_(complex64->get_());
+	}
+	else
+	{
+		throw std::invalid_argument("strange::Number::from_complex64_ passed wrong type of thing");
 	}
 }
 
