@@ -69,7 +69,27 @@ TEST(StrangeTokenizer, Next) {
 	}
 }
 
-TEST(StrangeParser, Execute) {
+TEST(StrangeParser, HelloWorld) {
+	const Ptr river = River::mut_(test_dir + "strange_test_hello_world.str", true);
+	const Ptr tokenizer = Tokenizer::mut_(river);
+	const Ptr parser = Parser::mut_(tokenizer);
+	const Ptr expression = Thing::dynamic_<Parser>(parser)->parse_();
+	Expression* const exp = Thing::dynamic_<Expression>(expression);
+	ASSERT_NE(exp, (Expression*)(0));
+	std::string error;
+	try
+	{
+		const Ptr result = Expression::immediate_(expression);
+	}
+	catch (const std::exception& err)
+	{
+		error = err.what();
+		std::cout << error << std::endl;
+	}
+	EXPECT_EQ(error, "");
+}
+
+TEST(StrangeParser, Evaluate) {
 	const Ptr river = River::mut_(test_dir + "strange_test_source.str", true);
 	const Ptr tokenizer = Tokenizer::mut_(river);
 	const Ptr parser = Parser::mut_(tokenizer);
@@ -84,7 +104,47 @@ TEST(StrangeParser, Execute) {
 	catch (const std::exception& err)
 	{
 		error = err.what();
+		std::cout << error << std::endl;
+	}
+	EXPECT_EQ(error, "");
+}
+
+TEST(StrangeParser, ParseError) {
+	const Ptr river = River::mut_(test_dir + "strange_test_parse_error.str", true);
+	const Ptr tokenizer = Tokenizer::mut_(river);
+	const Ptr parser = Parser::mut_(tokenizer);
+	std::string error;
+	try
+	{
+		const Ptr expression = Thing::dynamic_<Parser>(parser)->parse_();
+	}
+	catch (const Ptr& err)
+	{
+		const Ptr to_lake = err->invoke_("to_lake");
+		Lake* const lake = Thing::dynamic_<Lake>(to_lake);
+		ASSERT_NE(lake, (Lake*)(0));
+		error = lake->get_();
+		std::cout << error << std::endl;
 	}
 	EXPECT_NE(error, "");
-	std::cout << error << std::endl;
+}
+
+TEST(StrangeParser, EvaluateError) {
+	const Ptr river = River::mut_(test_dir + "strange_test_evaluate_error.str", true);
+	const Ptr tokenizer = Tokenizer::mut_(river);
+	const Ptr parser = Parser::mut_(tokenizer);
+	const Ptr expression = Thing::dynamic_<Parser>(parser)->parse_();
+	Expression* const exp = Thing::dynamic_<Expression>(expression);
+	ASSERT_NE(exp, (Expression*)(0));
+	std::string error;
+	try
+	{
+		const Ptr result = Expression::immediate_(expression);
+	}
+	catch (const std::exception& err)
+	{
+		error = err.what();
+		std::cout << error << std::endl;
+	}
+	EXPECT_NE(error, "");
 }
