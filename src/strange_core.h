@@ -89,7 +89,16 @@ public:
 	template <typename T>
 	static inline T* const static_(const Ptr& ptr)
 	{
+#ifdef _DEBUG
+		Thing* const thing = ptr.get();
+		if (!dynamic_cast<T*>(thing))
+		{
+			throw std::runtime_error("bad static cast");
+		}
+		return static_cast<T*>(thing);
+#else
 		return static_cast<T*>(ptr.get());
+#endif
 	}
 
 	template <typename T>
