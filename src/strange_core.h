@@ -8034,24 +8034,25 @@ class River : public Mutable
 	using const_std_unique_ios_base = const std::unique_ptr<std::ios_base>;
 
 public:
-	inline River(std::ios_base* const stream, const bool del)
+	inline River(std::ios_base* const stream, const bool del, const Ptr& filename = nothing_())
 		: Mutable{}
 		, _stream{ del ? stream : 0 }
 		, _in{ dynamic_cast<std::istream*>(stream) }
 		, _out{ dynamic_cast<std::ostream*>(stream) }
+		, _filename{ filename }
 	{
 	}
 
-	static inline const Ptr mut_(std::ios_base* const stream, const bool del)
+	static inline const Ptr mut_(std::ios_base* const stream, const bool del, const Ptr& filename = nothing_())
 	{
-		return make_<River>(stream, del);
+		return make_<River>(stream, del, filename);
 	}
 
 	static inline const Ptr mut_(const std::string& str = std::string(), const bool file = false)
 	{
 		if (file)
 		{
-			return mut_(new std::fstream(str, std::fstream::binary | std::fstream::in | std::fstream::out), true);
+			return mut_(new std::fstream(str, std::fstream::binary | std::fstream::in | std::fstream::out), true, sym_(str));
 		}
 		return mut_(new std::stringstream(str), true);
 	}
@@ -8132,6 +8133,7 @@ public:
 			shoal->update_("in", Static::fin_(&River::in));
 			shoal->update_("out", Static::fin_(&River::out));
 			shoal->update_("err", Static::fin_(&River::err));
+			shoal->update_("filename", Const<River>::fin_(&River::filename));
 			shoal->update_("push_back", Member<River>::fin_(&River::push_back, "thing"));
 			shoal->update_("write", Member<River>::fin_(&River::write, "thing"));
 			shoal->update_("pop_front", Member<River>::fin_(&River::pop_front));
@@ -8173,6 +8175,16 @@ public:
 			return cats;
 		}();
 		return CATS;
+	}
+
+	inline const std::string filename_() const
+	{
+		return static_<Symbol>(_filename)->get_();
+	}
+
+	inline const Ptr filename(const Ptr& ignore = nothing_()) const
+	{
+		return _filename;
 	}
 
 	inline const bool push_back_(const Ptr& ptr)
@@ -8321,6 +8333,7 @@ private:
 	const_std_unique_ios_base _stream;
 	std::istream* const _in;
 	std::ostream* const _out;
+	const Ptr _filename;
 };
 
 //======================================================================

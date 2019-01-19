@@ -42,6 +42,7 @@ public:
 	inline Tokenizer(const Ptr& river)
 		: Mutable{}
 		, _river{ river }
+		, _filename{ static_<River>(river)->filename_() }
 	{
 	}
 
@@ -445,7 +446,7 @@ public:
 
 private:
 	const Ptr _river;
-	std::string _filename;
+	const std::string _filename;
 	int64_t _x = 0;
 	int64_t _y = 1;
 	bool _dot = false;
