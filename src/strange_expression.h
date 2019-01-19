@@ -43,19 +43,20 @@ class Expression : public Thing
 	typedef const Ptr(Expression::*MemberPtr)(const Ptr&) const;
 
 public:
-	inline Expression(const Ptr& token, const MemberPtr member, const Ptr& flock)
+	inline Expression(const Ptr& token, const Ptr& statement, const MemberPtr member, const Ptr& flock)
 		: Thing{}
 		, _token(token)
+		, _statement{ statement }
 		, _member{ member }
 		, _flock{ flock }
 		, _vector( static_<Flock>(_flock)->get_() )
 	{
 	}
 
-	static inline const Ptr fin_(const Ptr& token, const MemberPtr member, const Ptr& flock)
+	static inline const Ptr fin_(const Ptr& token, const Ptr& statement, const MemberPtr member, const Ptr& flock)
 	{
 		flock->freeze_();
-		return fake_<Expression>(token, member, flock);
+		return fake_<Expression>(token, statement, member, flock);
 	}
 
 	static inline const Ptr fin_(const Ptr& token, const Ptr& statement, const Ptr& flock)
@@ -65,7 +66,7 @@ public:
 		{
 			if (size == 0)
 			{
-				return fin_(token, &Expression::_local_, flock);
+				return fin_(token, statement, &Expression::_local_, flock);
 			}
 			throw std::length_error("local_ expression of wrong size");
 		}
@@ -73,7 +74,7 @@ public:
 		{
 			if (size == 1)
 			{
-				return fin_(token, &Expression::_thing_, flock);
+				return fin_(token, statement, &Expression::_thing_, flock);
 			}
 			throw std::length_error("thing_ expression of wrong size");
 		}
@@ -81,7 +82,7 @@ public:
 		{
 			if (size >= 1)
 			{
-				return fin_(token, &Expression::_invoke_, flock);
+				return fin_(token, statement, &Expression::_invoke_, flock);
 			}
 			throw std::length_error("invoke_ expression of wrong size");
 		}
@@ -89,7 +90,7 @@ public:
 		{
 			if (size == 2)
 			{
-				return fin_(token, &Expression::_invoke_iterator_, flock);
+				return fin_(token, statement, &Expression::_invoke_iterator_, flock);
 			}
 			throw std::length_error("invoke_iterator_ expression of wrong size");
 		}
@@ -97,7 +98,7 @@ public:
 		{
 			if (size == 2)
 			{
-				return fin_(token, &Expression::_invoke_iterable_, flock);
+				return fin_(token, statement, &Expression::_invoke_iterable_, flock);
 			}
 			throw std::length_error("invoke_iterable_ expression of wrong size");
 		}
@@ -105,7 +106,7 @@ public:
 		{
 			if (size == 2)
 			{
-				return fin_(token, &Expression::_method_, flock);
+				return fin_(token, statement, &Expression::_method_, flock);
 			}
 			throw std::length_error("method_ expression of wrong size");
 		}
@@ -113,7 +114,7 @@ public:
 		{
 			if (size == 3)
 			{
-				return fin_(token, &Expression::_operate_iterator_, flock);
+				return fin_(token, statement, &Expression::_operate_iterator_, flock);
 			}
 			throw std::length_error("operate_iterator_ expression of wrong size");
 		}
@@ -121,7 +122,7 @@ public:
 		{
 			if (size == 3)
 			{
-				return fin_(token, &Expression::_operate_iterable_, flock);
+				return fin_(token, statement, &Expression::_operate_iterable_, flock);
 			}
 			throw std::length_error("operate_iterable_ expression of wrong size");
 		}
@@ -129,7 +130,7 @@ public:
 		{
 			if (size % 2 == 1)
 			{
-				return fin_(token, &Expression::_lambda_, flock);
+				return fin_(token, statement, &Expression::_lambda_, flock);
 			}
 			throw std::length_error("lambda_ expression of wrong size");
 		}
@@ -137,7 +138,7 @@ public:
 		{
 			if (size % 2 == 1)
 			{
-				return fin_(token, &Expression::_function_, flock);
+				return fin_(token, statement, &Expression::_function_, flock);
 			}
 			throw std::length_error("function_ expression of wrong size");
 		}
@@ -145,7 +146,7 @@ public:
 		{
 			if (size == 2)
 			{
-				return fin_(token, &Expression::_shared_scope_, flock);
+				return fin_(token, statement, &Expression::_shared_scope_, flock);
 			}
 			throw std::length_error("shared_scope_ expression of wrong size");
 		}
@@ -153,19 +154,19 @@ public:
 		{
 			if (size == 3)
 			{
-				return fin_(token, &Expression::_relative_scope_, flock);
+				return fin_(token, statement, &Expression::_relative_scope_, flock);
 			}
 			throw std::length_error("relative_scope_ expression of wrong size");
 		}
 		else if (statement->is_("flock_"))
 		{
-			return fin_(token, &Expression::_flock_, flock);
+			return fin_(token, statement, &Expression::_flock_, flock);
 		}
 		else if (statement->is_("flock_iterator_"))
 		{
 			if (size == 1)
 			{
-				return fin_(token, &Expression::_flock_iterator_, flock);
+				return fin_(token, statement, &Expression::_flock_iterator_, flock);
 			}
 			throw std::length_error("flock_iterator_ expression of wrong size");
 		}
@@ -173,19 +174,19 @@ public:
 		{
 			if (size % 2 == 0)
 			{
-				return fin_(token, &Expression::_shoal_, flock);
+				return fin_(token, statement, &Expression::_shoal_, flock);
 			}
 			throw std::length_error("shoal_ expression of odd size");
 		}
 		else if (statement->is_("herd_"))
 		{
-			return fin_(token, &Expression::_herd_, flock);
+			return fin_(token, statement, &Expression::_herd_, flock);
 		}
 		else if (statement->is_("break_"))
 		{
 			if (size == 1)
 			{
-				return fin_(token, &Expression::_break_, flock);
+				return fin_(token, statement, &Expression::_break_, flock);
 			}
 			throw std::length_error("break_ expression of wrong size");
 		}
@@ -193,7 +194,7 @@ public:
 		{
 			if (size == 1)
 			{
-				return fin_(token, &Expression::_continue_, flock);
+				return fin_(token, statement, &Expression::_continue_, flock);
 			}
 			throw std::length_error("continue_ expression of wrong size");
 		}
@@ -201,7 +202,7 @@ public:
 		{
 			if (size == 1)
 			{
-				return fin_(token, &Expression::_return_, flock);
+				return fin_(token, statement, &Expression::_return_, flock);
 			}
 			throw std::length_error("return_ expression of wrong size");
 		}
@@ -209,7 +210,7 @@ public:
 		{
 			if (size == 1)
 			{
-				return fin_(token, &Expression::_throw_, flock);
+				return fin_(token, statement, &Expression::_throw_, flock);
 			}
 			throw std::length_error("throw_ expression of wrong size");
 		}
@@ -217,23 +218,23 @@ public:
 		{
 			if (size == 2)
 			{
-				return fin_(token, &Expression::_catch_, flock);
+				return fin_(token, statement, &Expression::_catch_, flock);
 			}
 			throw std::length_error("catch_ expression of wrong size");
 		}
 		else if (statement->is_("block_"))
 		{
-			return fin_(token, &Expression::_block_, flock);
+			return fin_(token, statement, &Expression::_block_, flock);
 		}
 		else if (statement->is_("if_"))
 		{
 			if (size == 2)
 			{
-				return fin_(token, &Expression::_if_, flock);
+				return fin_(token, statement, &Expression::_if_, flock);
 			}
 			if (size == 3)
 			{
-				return fin_(token, &Expression::_if_else_, flock);
+				return fin_(token, statement, &Expression::_if_else_, flock);
 			}
 			throw std::length_error("if_ expression of wrong size");
 		}
@@ -241,7 +242,7 @@ public:
 		{
 			if (size == 2)
 			{
-				return fin_(token, &Expression::_while_, flock);
+				return fin_(token, statement, &Expression::_while_, flock);
 			}
 			throw std::length_error("while_ expression of wrong size");
 		}
@@ -249,7 +250,7 @@ public:
 		{
 			if (size == 2)
 			{
-				return fin_(token, &Expression::_do_, flock);
+				return fin_(token, statement, &Expression::_do_, flock);
 			}
 			throw std::length_error("do_ expression of wrong size");
 		}
@@ -257,7 +258,7 @@ public:
 		{
 			if (size == 4)
 			{
-				return fin_(token, &Expression::_for_, flock);
+				return fin_(token, statement, &Expression::_for_, flock);
 			}
 			throw std::length_error("for_ expression of wrong size");
 		}
@@ -272,7 +273,7 @@ public:
 	{
 		const Ptr flock = Flock::mut_();
 		static_<Flock>(flock)->push_back_(thing);
-		return Expression::fin_(token, &Expression::_thing_, flock);
+		return Expression::fin_(token, nothing_(), &Expression::_thing_, flock);
 	}
 
 	static inline const Ptr fin(const Ptr& it)
@@ -342,13 +343,14 @@ public:
 
 private:
 	const Ptr _token;
+	const Ptr _statement;
 	const MemberPtr _member;
 	const Ptr _flock;
 	const std::vector<Ptr>& _vector;
 
 	inline const Ptr _error_(const std::exception& err) const
 	{
-		return static_<Token>(_token)->error_(err.what());
+		return static_<Token>(_token)->error_(static_<Symbol>(_statement)->get_() + " " + err.what());
 	}
 
 	inline void _generate_strange_(River* const river) const
