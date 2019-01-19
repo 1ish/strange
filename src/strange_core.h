@@ -8219,6 +8219,10 @@ public:
 		{
 			write_(lake->get_());
 		}
+		else
+		{
+			throw std::invalid_argument("strange::River::write_ passed wrong type of thing");
+		}
 	}
 
 	inline const Ptr write(const Ptr& it)
