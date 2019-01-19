@@ -109,6 +109,26 @@ TEST(StrangeParser, Evaluate) {
 	EXPECT_EQ(error, "");
 }
 
+TEST(StrangeParser, TokenError) {
+	const Ptr river = River::mut_(test_dir + "strange_test_token_error.str", true);
+	const Ptr tokenizer = Tokenizer::mut_(river);
+	const Ptr parser = Parser::mut_(tokenizer);
+	std::string error;
+	try
+	{
+		const Ptr expression = Thing::dynamic_<Parser>(parser)->parse_();
+	}
+	catch (const Ptr& err)
+	{
+		const Ptr to_lake = err->invoke_("to_lake");
+		Lake* const lake = Thing::dynamic_<Lake>(to_lake);
+		ASSERT_NE(lake, (Lake*)(0));
+		error = lake->get_();
+		std::cout << error << std::endl;
+	}
+	EXPECT_NE(error, "");
+}
+
 TEST(StrangeParser, ParseError) {
 	const Ptr river = River::mut_(test_dir + "strange_test_parse_error.str", true);
 	const Ptr tokenizer = Tokenizer::mut_(river);
