@@ -76,6 +76,15 @@ TEST(StrangeParser, Execute) {
 	const Ptr expression = Thing::dynamic_<Parser>(parser)->parse_();
 	Expression* const exp = Thing::dynamic_<Expression>(expression);
 	ASSERT_NE(exp, (Expression*)(0));
-	const Ptr result = Expression::immediate_(expression);
-	EXPECT_NE(result.get(), (Thing*)(0));
+	std::string error;
+	try
+	{
+		const Ptr result = Expression::immediate_(expression);
+	}
+	catch (const std::exception& err)
+	{
+		error = err.what();
+	}
+	EXPECT_NE(error, "");
+	std::cout << error << std::endl;
 }

@@ -1,3 +1,4 @@
 (
 	$$strange::River::out[].write["hello world\n"]
+,	$$strange::River::out[].wrong["hello world\n"]
 )

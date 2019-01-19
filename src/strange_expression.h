@@ -346,6 +346,11 @@ private:
 	const Ptr _flock;
 	const std::vector<Ptr>& _vector;
 
+	inline const Ptr _error_(const std::exception& err) const
+	{
+		return static_<Token>(_token)->error_(err.what());
+	}
+
 	inline void _generate_strange_(River* const river) const
 	{
 		if (_member == &Expression::_local_)
@@ -416,9 +421,9 @@ private:
 		{
 			return thing->invoke(it);
 		}
-		catch (const std::logic_error& err)
+		catch (const std::exception& err)
 		{
-			throw static_<Token>(_token)->error_(err.what());
+			throw _error_(err);
 		}
 	}
 
@@ -466,102 +471,151 @@ private:
 
 	inline const Ptr _invoke_iterator_(const Ptr& local) const
 	{
-		const Ptr thing = Expression::evaluate_(_vector[0], local);
-		return thing->invoke(Expression::evaluate_(_vector[1], local));
+		try
+		{
+			const Ptr thing = Expression::evaluate_(_vector[0], local);
+			return thing->invoke(Expression::evaluate_(_vector[1], local));
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _invoke_iterable_(const Ptr& local) const
 	{
-		const Ptr thing = Expression::evaluate_(_vector[0], local);
-		const Ptr iterable = Expression::evaluate_(_vector[1], local);
-		const Ptr eater = thing->eater_();
-		if (!eater->is_nothing_())
+		try
 		{
-			const Ptr feeder = iterable->feeder(eater);
-			if (!feeder->is_nothing_())
+			const Ptr thing = Expression::evaluate_(_vector[0], local);
+			const Ptr iterable = Expression::evaluate_(_vector[1], local);
+			const Ptr eater = thing->eater_();
+			if (!eater->is_nothing_())
 			{
-				return thing->invoke(feeder);
+				const Ptr feeder = iterable->feeder(eater);
+				if (!feeder->is_nothing_())
+				{
+					return thing->invoke(feeder);
+				}
 			}
+			return thing->invoke(iterable->iterator_());
 		}
-		return thing->invoke(iterable->iterator_());
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _method_(const Ptr& local) const
 	{
-		const Ptr thing = Expression::evaluate_(_vector[0], local);
-		return Method::with_name_(thing, Expression::evaluate_(_vector[1], local));
+		try
+		{
+			const Ptr thing = Expression::evaluate_(_vector[0], local);
+			return Method::with_name_(thing, Expression::evaluate_(_vector[1], local));
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _operate_iterator_(const Ptr& local) const
 	{
-		const Ptr thing = Expression::evaluate_(_vector[0], local);
-		const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(_vector[1], local));
-		return operate_(thing.get(), member, Expression::evaluate_(_vector[2], local));
+		try
+		{
+			const Ptr thing = Expression::evaluate_(_vector[0], local);
+			const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(_vector[1], local));
+			return operate_(thing.get(), member, Expression::evaluate_(_vector[2], local));
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _operate_iterable_(const Ptr& local) const
 	{
-		const Ptr thing = Expression::evaluate_(_vector[0], local);
-		const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(_vector[1], local));
-		const Ptr iterable = Expression::evaluate_(_vector[2], local);
-		const Ptr eater = member->eater_();
-		if (!eater->is_nothing_())
+		try
 		{
-			const Ptr feeder = iterable->feeder(eater);
-			if (!feeder->is_nothing_())
+			const Ptr thing = Expression::evaluate_(_vector[0], local);
+			const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(_vector[1], local));
+			const Ptr iterable = Expression::evaluate_(_vector[2], local);
+			const Ptr eater = member->eater_();
+			if (!eater->is_nothing_())
 			{
-				return operate_(thing.get(), member, feeder);
+				const Ptr feeder = iterable->feeder(eater);
+				if (!feeder->is_nothing_())
+				{
+					return operate_(thing.get(), member, feeder);
+				}
 			}
+			return operate_(thing.get(), member, iterable->iterator_());
 		}
-		return operate_(thing.get(), member, iterable->iterator_());
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _lambda_(const Ptr& local) const
 	{
-		Shoal* const shoal = static_<Shoal>(local);
-		Shoal* const shared = static_<Shoal>(shoal->at_("$"));
-		const size_t size_1 = _vector.size() - 1;
-		Ptr param;
-		for (size_t i = 0; i < size_1; ++i)
+		try
 		{
-			if (i % 2 == 0)
+			Shoal* const shoal = static_<Shoal>(local);
+			Shoal* const shared = static_<Shoal>(shoal->at_("$"));
+			const size_t size_1 = _vector.size() - 1;
+			Ptr param;
+			for (size_t i = 0; i < size_1; ++i)
 			{
-				param = _vector[i];
-				continue;
+				if (i % 2 == 0)
+				{
+					param = _vector[i];
+					continue;
+				}
+				shared->update_(param, Expression::evaluate_(_vector[i], local));
 			}
-			shared->update_(param, Expression::evaluate_(_vector[i], local));
+			return Expression::evaluate_(_vector[size_1], local);
 		}
-		return Expression::evaluate_(_vector[size_1], local);
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _function_(const Ptr& local) const
 	{
-		Shoal* const shoal = static_<Shoal>(local);
-		const Ptr it = shoal->at_("&");
-		const size_t size_1 = _vector.size() - 1;
-		Ptr param;
-		Ptr value;
-		for (size_t i = 0; i < size_1; ++i)
-		{
-			if (i % 2 == 0)
-			{
-				param = _vector[i];
-				continue;
-			}
-			value = it->next_();
-			if (value->is_("."))
-			{
-				value = Expression::evaluate_(_vector[i], local); // default
-			}
-			shoal->update_(param, value);
-		}
 		try
 		{
-			return Expression::evaluate_(_vector[size_1], local);
+			Shoal* const shoal = static_<Shoal>(local);
+			const Ptr it = shoal->at_("&");
+			const size_t size_1 = _vector.size() - 1;
+			Ptr param;
+			Ptr value;
+			for (size_t i = 0; i < size_1; ++i)
+			{
+				if (i % 2 == 0)
+				{
+					param = _vector[i];
+					continue;
+				}
+				value = it->next_();
+				if (value->is_("."))
+				{
+					value = Expression::evaluate_(_vector[i], local); // default
+				}
+				shoal->update_(param, value);
+			}
+			try
+			{
+				return Expression::evaluate_(_vector[size_1], local);
+			}
+			catch (const Return& r)
+			{
+				return r.thing_();
+			}
 		}
-		catch (const Return& r)
+		catch (const std::exception& err)
 		{
-			return r.thing_();
+			throw _error_(err);
 		}
 	}
 
@@ -570,7 +624,7 @@ private:
 		const Ptr result = static_<Shoal>(_vector[0])->at_(_vector[1]);
 		if (result->is_nothing_())
 		{
-			throw static_<Token>(_token)->error_("not found in shared scope");
+			throw _error_(std::runtime_error("not found in shared scope"));
 		}
 		return result;
 	}
@@ -603,47 +657,103 @@ private:
 				scope = scope.substr(0, pos);
 			}
 		}
-		throw static_<Token>(_token)->error_("not found in relative scope");
+		throw _error_(std::runtime_error("not found in relative scope"));
 	}
 
 	inline const Ptr _flock_(const Ptr& local) const
 	{
-		return Flock::mut(iterator_(local));
+		try
+		{
+			return Flock::mut(iterator_(local));
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _flock_iterator_(const Ptr& local) const
 	{
-		return Flock::mut(Expression::evaluate_(_vector[0], local));
+		try
+		{
+			return Flock::mut(Expression::evaluate_(_vector[0], local));
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _shoal_(const Ptr& local) const
 	{
-		return Shoal::mut(iterator_(local));
+		try
+		{
+			return Shoal::mut(iterator_(local));
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _herd_(const Ptr& local) const
 	{
-		return Herd::mut(iterator_(local));
+		try
+		{
+			return Herd::mut(iterator_(local));
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _break_(const Ptr& local) const
 	{
-		throw Break(Expression::evaluate_(_vector[0], local), false);
+		try
+		{
+			throw Break(Expression::evaluate_(_vector[0], local), false);
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _continue_(const Ptr& local) const
 	{
-		throw Break(Expression::evaluate_(_vector[0], local), true);
+		try
+		{
+			throw Break(Expression::evaluate_(_vector[0], local), true);
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _return_(const Ptr& local) const
 	{
-		throw Return(Expression::evaluate_(_vector[0], local));
+		try
+		{
+			throw Return(Expression::evaluate_(_vector[0], local));
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _throw_(const Ptr& local) const
 	{
-		throw Expression::evaluate_(_vector[0], local);
+		try
+		{
+			throw Expression::evaluate_(_vector[0], local);
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _catch_(const Ptr& local) const
@@ -660,103 +770,150 @@ private:
 			}
 			return Expression::evaluate_(_vector[1], local);
 		}
+		catch (const std::exception& err)
+		{
+			static_<Shoal>(local)->update_("%", _error_(err));
+			return Expression::evaluate_(_vector[1], local);
+		}
 	}
 
 	inline const Ptr _block_(const Ptr& local) const
 	{
-		const size_t size = _vector.size();
-		Ptr result = nothing_();
-		for (size_t i = 0; i < size; ++i)
+		try
 		{
-			result = Expression::evaluate_(_vector[i], local);
+			const size_t size = _vector.size();
+			Ptr result = nothing_();
+			for (size_t i = 0; i < size; ++i)
+			{
+				result = Expression::evaluate_(_vector[i], local);
+			}
+			return result;
 		}
-		return result;
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _if_(const Ptr& local) const
 	{
-		if (!Expression::evaluate_(_vector[0], local)->is_nothing_())
+		try
 		{
-			return Expression::evaluate_(_vector[1], local);
+			if (!Expression::evaluate_(_vector[0], local)->is_nothing_())
+			{
+				return Expression::evaluate_(_vector[1], local);
+			}
+			return nothing_();
 		}
-		return nothing_();
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _if_else_(const Ptr& local) const
 	{
-		if (!Expression::evaluate_(_vector[0], local)->is_nothing_())
+		try
 		{
-			return Expression::evaluate_(_vector[1], local);
+			if (!Expression::evaluate_(_vector[0], local)->is_nothing_())
+			{
+				return Expression::evaluate_(_vector[1], local);
+			}
+			return Expression::evaluate_(_vector[2], local);
 		}
-		return Expression::evaluate_(_vector[2], local);
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _while_(const Ptr& local) const
 	{
-		Ptr result = nothing_();
-		while (!Expression::evaluate_(_vector[0], local)->is_nothing_())
+		try
 		{
-			try
+			Ptr result = nothing_();
+			while (!Expression::evaluate_(_vector[0], local)->is_nothing_())
 			{
-				result = Expression::evaluate_(_vector[1], local);
-			}
-			catch (const Break& b)
-			{
-				result = b.thing_();
-				if (b.continue_())
+				try
 				{
-					continue;
+					result = Expression::evaluate_(_vector[1], local);
 				}
-				break;
+				catch (const Break& b)
+				{
+					result = b.thing_();
+					if (b.continue_())
+					{
+						continue;
+					}
+					break;
+				}
 			}
+			return result;
 		}
-		return result;
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _do_(const Ptr& local) const
 	{
-		Ptr result = nothing_();
-		do
+		try
 		{
-			try
+			Ptr result = nothing_();
+			do
 			{
-				result = Expression::evaluate_(_vector[1], local);
-			}
-			catch (const Break& b)
-			{
-				result = b.thing_();
-				if (b.continue_())
+				try
 				{
-					continue;
+					result = Expression::evaluate_(_vector[1], local);
 				}
-				break;
-			}
-		} while (!Expression::evaluate_(_vector[0], local)->is_nothing_());
-		return result;
+				catch (const Break& b)
+				{
+					result = b.thing_();
+					if (b.continue_())
+					{
+						continue;
+					}
+					break;
+				}
+			} while (!Expression::evaluate_(_vector[0], local)->is_nothing_());
+			return result;
+		}
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	inline const Ptr _for_(const Ptr& local) const
 	{
-		Ptr result = nothing_();
-		for (Expression::evaluate_(_vector[0], local);
-			!Expression::evaluate_(_vector[1], local)->is_nothing_();
-			Expression::evaluate_(_vector[2], local))
+		try
 		{
-			try
+			Ptr result = nothing_();
+			for (Expression::evaluate_(_vector[0], local);
+				!Expression::evaluate_(_vector[1], local)->is_nothing_();
+				Expression::evaluate_(_vector[2], local))
 			{
-				result = Expression::evaluate_(_vector[3], local);
-			}
-			catch (const Break& b)
-			{
-				result = b.thing_();
-				if (b.continue_())
+				try
 				{
-					continue;
+					result = Expression::evaluate_(_vector[3], local);
 				}
-				break;
+				catch (const Break& b)
+				{
+					result = b.thing_();
+					if (b.continue_())
+					{
+						continue;
+					}
+					break;
+				}
 			}
+			return result;
 		}
-		return result;
+		catch (const std::exception& err)
+		{
+			throw _error_(err);
+		}
 	}
 
 	class Iterator : public Mutable
