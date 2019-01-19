@@ -274,6 +274,35 @@ private:
 							continue;
 						}
 					}
+					else if (symbol->is_("import_"))
+					{
+						if (_statement_(scope, shoal, flock))
+						{
+							if (flk->size_() >= 1)
+							{
+								const Ptr it = flock->iterator_();
+								for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+								{
+									Lake* const lake = dynamic_<Lake>(i->invoke_("to_lake"));
+									if (!lake)
+									{
+										throw tok->error_("Parser ERROR: invalid import_ filename");
+									}
+									const Ptr river = River::mut_(lake->get_(), true);
+									if (!static_<River>(river)->good_())
+									{
+										throw tok->error_("Parser ERROR: invalid import_ file: " + lake->get_());
+									}
+									result = static_<Parser>(Parser::mut_(Tokenizer::mut_(river)))->_parse_(nothing_(), shoal);
+								}
+							}
+							else
+							{
+								throw tok->error_("Parser ERROR: invalid import_");
+							}
+							continue;
+						}
+					}
 					// local at name
 					flk->push_back_(Expression::fin_(token, local, Flock::mut_())); // local
 					_wrap_(token, at, flock);
