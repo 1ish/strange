@@ -129,6 +129,7 @@ public:
 					{
 						break;
 					}
+					++_x;
 				}
 				char2 = river->good_() ? river->peek_() : 0;
 				if (!river->good_())
@@ -165,22 +166,23 @@ public:
 						break;
 					}
 					char1 = byte1->get_();
+					++_x;
 				}
 				const Ptr river_peek = _river->invoke_("peek");
 				Int8* const byte2 = good_() ? dynamic_<Int8>(river_peek) : 0;
 				char2 = byte2 ? byte2->get_() : 0;
 			}
 
-			if (_different)
-			{
-				_different = false;
-				return Token::punctuation_(_x, _y, "==");
-			}
-
 			if (char1 == '\n')
 			{
 				_x = 0;
 				++_y;
+			}
+
+			if (_different)
+			{
+				_different = false;
+				return Token::punctuation_(_x, _y, "==");
 			}
 
 			if (commentblock)
@@ -412,7 +414,6 @@ public:
 				}
 			}
 			}
-			++_x;
 		}
 		if (commentline || token.empty())
 		{
@@ -445,7 +446,7 @@ public:
 private:
 	const Ptr _river;
 	int64_t _x = 0;
-	int64_t _y = 0;
+	int64_t _y = 1;
 	bool _dot = false;
 	char _exp = 0;
 	bool _different = false;

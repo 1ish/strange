@@ -8468,7 +8468,7 @@ inline const Thing::Ptr& Thing::shared_()
 
 inline Thing::Dismemberment::Dismemberment(const Ptr& type, const Ptr& member)
 	:std::logic_error(std::string("Dismemberment ")
-		+ static_<Symbol>(type)->get_() + " "
+		+ static_<Symbol>(type)->get_() + "."
 		+ static_<Symbol>(member)->get_())
 {
 }

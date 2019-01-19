@@ -3,6 +3,7 @@
 
 #include "strange_core.h"
 #include "strange_token.h"
+#include "strange_weak.h"
 #include "strange_method.h"
 #include "strange_creature.h"
 
@@ -49,14 +50,25 @@ public:
 		, _statement{ statement }
 		, _member{ member }
 		, _flock{ flock }
-		, _vector( static_<Flock>(_flock)->get_() )
+		, _vector{ static_<Flock>(_flock)->get_() }
+		, _parent{ Weak::mut_(nothing_()) }
 	{
 	}
 
 	static inline const Ptr fin_(const Ptr& token, const Ptr& statement, const MemberPtr member, const Ptr& flock)
 	{
+		const Ptr exp = fake_<Expression>(token, statement, member, flock);
+		const Ptr it = flock->iterator_();
+		for (Ptr sub = it->next_(); !sub->is_("."); sub = it->next_())
+		{
+			Expression* const e = dynamic_<Expression>(sub);
+			if (e)
+			{
+				e->parent_(exp);
+			}
+		}
 		flock->freeze_();
-		return fake_<Expression>(token, statement, member, flock);
+		return exp;
 	}
 
 	static inline const Ptr fin_(const Ptr& token, const Ptr& statement, const Ptr& flock)
@@ -341,16 +353,31 @@ public:
 		return TYPE;
 	}
 
+	inline void parent_(const Ptr& parent)
+	{
+		static_<Weak>(_parent)->set_(parent);
+	}
+
 private:
 	const Ptr _token;
 	const Ptr _statement;
 	const MemberPtr _member;
 	const Ptr _flock;
 	const std::vector<Ptr>& _vector;
+	const Ptr _parent;
 
-	inline const Ptr _error_(const std::exception& err) const
+	inline const Ptr _error_(const std::string& str, const int64_t stack = 1) const
 	{
-		return static_<Token>(_token)->error_(static_<Symbol>(_statement)->get_() + " " + err.what());
+		const std::string message = str.empty() ? str : ("ERROR: " + str);
+		const Ptr river = static_<Token>(_token)->error_(message + '\n' +
+			std::to_string(stack) + ": " + static_<Symbol>(_statement)->get_());
+		const Ptr parent = static_<Weak>(_parent)->get_();
+		Expression* const p = dynamic_<Expression>(parent);
+		if (p)
+		{
+			static_<River>(river)->write_(p->_error_("", stack + 1));
+		}
+		return river;
 	}
 
 	inline void _generate_strange_(River* const river) const
@@ -425,7 +452,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -480,7 +507,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -503,7 +530,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -516,7 +543,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -530,7 +557,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -554,7 +581,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -579,7 +606,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -617,7 +644,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -626,7 +653,7 @@ private:
 		const Ptr result = static_<Shoal>(_vector[0])->at_(_vector[1]);
 		if (result->is_nothing_())
 		{
-			throw _error_(std::runtime_error("not found in shared scope"));
+			throw _error_("not found in shared scope");
 		}
 		return result;
 	}
@@ -659,7 +686,7 @@ private:
 				scope = scope.substr(0, pos);
 			}
 		}
-		throw _error_(std::runtime_error("not found in relative scope"));
+		throw _error_("not found in relative scope");
 	}
 
 	inline const Ptr _flock_(const Ptr& local) const
@@ -670,7 +697,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -682,7 +709,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -694,7 +721,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -706,7 +733,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -718,7 +745,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -730,7 +757,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -742,7 +769,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -754,7 +781,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -774,7 +801,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			static_<Shoal>(local)->update_("%", _error_(err));
+			static_<Shoal>(local)->update_("%", _error_(err.what()));
 			return Expression::evaluate_(_vector[1], local);
 		}
 	}
@@ -793,7 +820,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -809,7 +836,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -825,7 +852,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -854,7 +881,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -883,7 +910,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
@@ -914,7 +941,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err);
+			throw _error_(err.what());
 		}
 	}
 
