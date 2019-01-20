@@ -486,13 +486,22 @@ public:
 	}
 
 	// public nested classes
-	class Dismemberment : public std::logic_error
+	class Disagreement : public std::logic_error
+	{
+	public:
+		inline Disagreement(const std::string& description)
+			: std::logic_error(description)
+		{
+		}
+	};
+
+	class Dismemberment : public Disagreement
 	{
 	public:
 		inline Dismemberment(const Ptr& type, const Ptr& member);
 	};
 
-	class Mutilation : public std::logic_error
+	class Mutilation : public Disagreement
 	{
 	public:
 		inline Mutilation(const Ptr& type);
@@ -8480,14 +8489,14 @@ inline const Thing::Ptr& Thing::shared_()
 }
 
 inline Thing::Dismemberment::Dismemberment(const Ptr& type, const Ptr& member)
-	:std::logic_error(std::string("Dismemberment ")
+	:Disagreement("Dismemberment "
 		+ static_<Symbol>(type)->get_() + "."
 		+ static_<Symbol>(member)->get_())
 {
 }
 
 inline Thing::Mutilation::Mutilation(const Ptr& type)
-	:std::logic_error("Mutilation "
+	:Disagreement("Mutilation "
 		+ static_<Symbol>(type)->get_())
 {
 }
