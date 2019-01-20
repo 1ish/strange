@@ -2,6 +2,7 @@
 #define COM_ONEISH_STRANGE_EXPRESSION_H
 
 #include "strange_core.h"
+#include "strange_misunderstanding.h"
 #include "strange_token.h"
 #include "strange_weak.h"
 #include "strange_method.h"
@@ -357,16 +358,17 @@ private:
 	const std::vector<Ptr>& _vector;
 	const Ptr _parent;
 
-	inline const Ptr _stack_(const std::string& str, const int64_t stack = 1) const
+	inline const Ptr _stack_(const std::string& str, const int64_t stack = 1, const Ptr& misunderstanding = Misunderstanding::mut_()) const
 	{
 		const std::string message = str.empty() ? str : ("Expression ERROR: " + str);
-		const Ptr misunderstanding = static_<Token>(_token)->error_(message + '\n' +
-			std::to_string(stack) + ": " + static_<Symbol>(_statement)->get_());
+		static_<Token>(_token)->error_(message + '\n' +
+			std::to_string(stack) + ": " + static_<Symbol>(_statement)->get_(),
+			misunderstanding);
 		const Ptr parent = static_<Weak>(_parent)->get_();
 		Expression* const p = dynamic_<Expression>(parent);
 		if (p)
 		{
-			static_<Misunderstanding>(misunderstanding)->self_add_(p->_stack_("", stack + 1));
+			p->_stack_("", stack + 1, misunderstanding);
 		}
 		return misunderstanding;
 	}
