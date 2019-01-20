@@ -83,6 +83,11 @@ public:
 		s->update_("strange::Misunderstanding::mut", Static::fin_(&Misunderstanding::mut, "thing", ".."));
 	}
 
+	inline void self_add_(const std::string& str)
+	{
+		static_<River>(_river)->write_(str);
+	}
+
 	inline void self_add_(const Ptr& thing)
 	{
 		static_<River>(_river)->write_(thing);

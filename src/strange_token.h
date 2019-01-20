@@ -195,25 +195,24 @@ public:
 		return value_();
 	}
 
-	inline const Ptr error_(const std::string& err) const
+	inline const Ptr error_(const std::string& err, const Ptr& misunderstanding = Misunderstanding::mut_()) const
 	{
-		const Ptr river = River::mut_();
-		River* const r = static_<River>(river);
-		r->write_(err);
+		Misunderstanding* const m = static_<Misunderstanding>(misunderstanding);
+		m->self_add_(err);
 		const std::string filename = filename_();
 		if (!filename.empty())
 		{
-			r->write_(" " + filename);
+			m->self_add_(" " + filename);
 		}
-		r->write_(" (");
-		r->write_(std::to_string(x_()));
-		r->write_(",");
-		r->write_(std::to_string(y_()));
-		r->write_(") ");
-		r->write_(std::string() + tag_());
-		r->write_(" ");
-		r->write_(symbol_());
-		return river;
+		m->self_add_(" (");
+		m->self_add_(std::to_string(x_()));
+		m->self_add_(",");
+		m->self_add_(std::to_string(y_()));
+		m->self_add_(") ");
+		m->self_add_(std::string() + tag_());
+		m->self_add_(" ");
+		m->self_add_(symbol_());
+		return misunderstanding;
 	}
 
 	inline const Ptr error_(const Ptr& err) const

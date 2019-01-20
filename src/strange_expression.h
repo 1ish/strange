@@ -360,15 +360,15 @@ private:
 	inline const Ptr _stack_(const std::string& str, const int64_t stack = 1) const
 	{
 		const std::string message = str.empty() ? str : ("Expression ERROR: " + str);
-		const Ptr river = static_<Token>(_token)->error_(message + '\n' +
+		const Ptr misunderstanding = static_<Token>(_token)->error_(message + '\n' +
 			std::to_string(stack) + ": " + static_<Symbol>(_statement)->get_());
 		const Ptr parent = static_<Weak>(_parent)->get_();
 		Expression* const p = dynamic_<Expression>(parent);
 		if (p)
 		{
-			static_<River>(river)->write_(p->_stack_("", stack + 1));
+			static_<Misunderstanding>(misunderstanding)->self_add_(p->_stack_("", stack + 1));
 		}
-		return river;
+		return misunderstanding;
 	}
 
 	inline void _generate_strange_(River* const river) const
