@@ -3,6 +3,7 @@
 
 #include "strange_core.h"
 #include "strange_method.h"
+#include "strange_misunderstanding.h"
 #include "strange_reference.h"
 #include "strange_weak.h"
 #include "strange_fence.h"
@@ -73,6 +74,9 @@ inline void Thing::share_(const Ptr& shoal)
 	Complex32::share_(shoal);
 	Complex64::share_(shoal);
 	River::share_(shoal);
+
+	// strange_misunderstanding
+	Misunderstanding::share_(shoal);
 
 	// strange_reference
 	Reference::share_(shoal);
