@@ -93,7 +93,7 @@ public:
 		Thing* const thing = ptr.get();
 		if (!dynamic_cast<T*>(thing))
 		{
-			throw std::invalid_argument("bad static cast");
+			throw Disagreement("bad static cast");
 		}
 		return static_cast<T*>(thing);
 #else
@@ -967,7 +967,7 @@ protected:
 			}
 			return (t->*_function)(it);
 		}
-		throw std::invalid_argument("ERROR: Member passed wrong type of thing");
+		throw Disagreement("ERROR: Member passed wrong type of thing");
 #else
 		T* const t = static_cast<T*>(thing);
 		if (t->finalized_())
@@ -1031,7 +1031,7 @@ protected:
 		{
 			return (t->*_function)(it);
 		}
-		throw std::invalid_argument("ERROR: Const passed wrong type of thing");
+		throw Disagreement("ERROR: Const passed wrong type of thing");
 #else
 		return static_cast<T*>(thing)->*_function)(it);
 #endif
@@ -3313,7 +3313,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("Lake::from_lake_ passed wrong type of thing");
+			throw Disagreement("Lake::from_lake_ passed wrong type of thing");
 		}
 		set_(lak->get_());
 		if (lak->finalized_())
@@ -3370,7 +3370,7 @@ public:
 			}
 			else
 			{
-				throw std::invalid_argument("strange::Lake::self_add_ passed invalid argument");
+				throw Disagreement("strange::Lake::self_add_ passed invalid argument");
 			}
 		}
 	}
@@ -3938,7 +3938,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("Bit::from_lake_ passed wrong type of thing");
+			throw Disagreement("Bit::from_lake_ passed wrong type of thing");
 		}
 		set_(bool(lak->get_()[0]));
 		if (lak->finalized_())
@@ -3995,7 +3995,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Bit::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::Bit::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -4021,7 +4021,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Bit::self_add_ passed invalid Number");
+			throw Disagreement("strange::Bit::self_add_ passed invalid Number");
 		}
 	}
 
@@ -4035,7 +4035,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Bit::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::Bit::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -4049,7 +4049,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Bit::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::Bit::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -4066,7 +4066,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Bit::self_divide_ passed invalid Number");
+			throw Disagreement("strange::Bit::self_divide_ passed invalid Number");
 		}
 	}
 
@@ -4083,7 +4083,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Bit::self_modulo_ passed invalid Number");
+			throw Disagreement("strange::Bit::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -4245,7 +4245,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("Int8::from_lake_ passed wrong type of thing");
+			throw Disagreement("Int8::from_lake_ passed wrong type of thing");
 		}
 		set_(lak->get_()[0]);
 		if (lak->finalized_())
@@ -4302,7 +4302,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int8::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::Int8::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -4325,7 +4325,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int8::self_add_ passed invalid Number");
+			throw Disagreement("strange::Int8::self_add_ passed invalid Number");
 		}
 	}
 
@@ -4338,7 +4338,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int8::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::Int8::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -4351,7 +4351,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int8::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::Int8::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -4368,7 +4368,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int8::self_divide_ passed invalid Number");
+			throw Disagreement("strange::Int8::self_divide_ passed invalid Number");
 		}
 	}
 
@@ -4385,7 +4385,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int8::self_modulo_ passed invalid Number");
+			throw Disagreement("strange::Int8::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -4547,7 +4547,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("UInt8::from_lake_ passed wrong type of thing");
+			throw Disagreement("UInt8::from_lake_ passed wrong type of thing");
 		}
 		set_(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0])));
 		if (lak->finalized_())
@@ -4604,7 +4604,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt8::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::UInt8::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -4627,7 +4627,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt8::self_add_ passed invalid Number");
+			throw Disagreement("strange::UInt8::self_add_ passed invalid Number");
 		}
 	}
 
@@ -4640,7 +4640,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt8::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::UInt8::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -4653,7 +4653,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt8::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::UInt8::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -4670,7 +4670,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt8::self_divide_ passed invalid Number");
+			throw Disagreement("strange::UInt8::self_divide_ passed invalid Number");
 		}
 	}
 
@@ -4687,7 +4687,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt8::self_modulo_ passed invalid Number");
+			throw Disagreement("strange::UInt8::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -4852,7 +4852,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("Int16::from_lake_ passed wrong type of thing");
+			throw Disagreement("Int16::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -4912,7 +4912,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int16::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::Int16::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -4935,7 +4935,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int16::self_add_ passed invalid Number");
+			throw Disagreement("strange::Int16::self_add_ passed invalid Number");
 		}
 	}
 
@@ -4948,7 +4948,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int16::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::Int16::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -4961,7 +4961,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int16::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::Int16::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -4978,7 +4978,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int16::self_divide_ passed invalid Number");
+			throw Disagreement("strange::Int16::self_divide_ passed invalid Number");
 		}
 	}
 
@@ -4995,7 +4995,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int16::self_modulo_ passed invalid Number");
+			throw Disagreement("strange::Int16::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -5160,7 +5160,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("UInt16::from_lake_ passed wrong type of thing");
+			throw Disagreement("UInt16::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -5220,7 +5220,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt16::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::UInt16::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -5243,7 +5243,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt16::self_add_ passed invalid Number");
+			throw Disagreement("strange::UInt16::self_add_ passed invalid Number");
 		}
 	}
 
@@ -5256,7 +5256,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt16::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::UInt16::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -5269,7 +5269,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt16::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::UInt16::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -5286,7 +5286,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt16::self_divide_ passed invalid Number");
+			throw Disagreement("strange::UInt16::self_divide_ passed invalid Number");
 		}
 	}
 
@@ -5303,7 +5303,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt16::self_modulo_ passed invalid Number");
+			throw Disagreement("strange::UInt16::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -5470,7 +5470,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("Int32::from_lake_ passed wrong type of thing");
+			throw Disagreement("Int32::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -5532,7 +5532,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int32::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::Int32::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -5555,7 +5555,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int32::self_add_ passed invalid Number");
+			throw Disagreement("strange::Int32::self_add_ passed invalid Number");
 		}
 	}
 
@@ -5568,7 +5568,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int32::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::Int32::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -5581,7 +5581,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int32::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::Int32::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -5598,7 +5598,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int32::self_divide_ passed invalid Number");
+			throw Disagreement("strange::Int32::self_divide_ passed invalid Number");
 		}
 	}
 
@@ -5615,7 +5615,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int32::self_modulo_ passed invalid Number");
+			throw Disagreement("strange::Int32::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -5782,7 +5782,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("UInt32::from_lake_ passed wrong type of thing");
+			throw Disagreement("UInt32::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -5844,7 +5844,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt32::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::UInt32::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -5867,7 +5867,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt32::self_add_ passed invalid Number");
+			throw Disagreement("strange::UInt32::self_add_ passed invalid Number");
 		}
 	}
 
@@ -5880,7 +5880,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt32::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::UInt32::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -5893,7 +5893,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt32::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::UInt32::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -5910,7 +5910,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt32::self_divide_ passed invalid Number");
+			throw Disagreement("strange::UInt32::self_divide_ passed invalid Number");
 		}
 	}
 
@@ -5927,7 +5927,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt32::self_modulo_ passed invalid Number");
+			throw Disagreement("strange::UInt32::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -6098,7 +6098,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("Int64::from_lake_ passed wrong type of thing");
+			throw Disagreement("Int64::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -6164,7 +6164,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int64::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::Int64::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -6187,7 +6187,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int64::self_add_ passed invalid Number");
+			throw Disagreement("strange::Int64::self_add_ passed invalid Number");
 		}
 	}
 
@@ -6200,7 +6200,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int64::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::Int64::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -6213,7 +6213,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int64::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::Int64::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -6230,7 +6230,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int64::self_divide_ passed invalid Number");
+			throw Disagreement("strange::Int64::self_divide_ passed invalid Number");
 		}
 	}
 
@@ -6247,7 +6247,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Int64::self_modulo_ passed invalid Number");
+			throw Disagreement("strange::Int64::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -6418,7 +6418,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("UInt64::from_lake_ passed wrong type of thing");
+			throw Disagreement("UInt64::from_lake_ passed wrong type of thing");
 		}
 		set_(
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -6484,7 +6484,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::UInt64::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::UInt64::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -6514,7 +6514,7 @@ public:
 			}
 			else
 			{
-				throw std::invalid_argument("strange::UInt64::self_add_ passed invalid Number");
+				throw Disagreement("strange::UInt64::self_add_ passed invalid Number");
 			}
 		}
 	}
@@ -6535,7 +6535,7 @@ public:
 			}
 			else
 			{
-				throw std::invalid_argument("strange::UInt64::self_subtract_ passed invalid Number");
+				throw Disagreement("strange::UInt64::self_subtract_ passed invalid Number");
 			}
 		}
 	}
@@ -6556,7 +6556,7 @@ public:
 			}
 			else
 			{
-				throw std::invalid_argument("strange::UInt64::self_multiply_ passed invalid Number");
+				throw Disagreement("strange::UInt64::self_multiply_ passed invalid Number");
 			}
 		}
 	}
@@ -6585,7 +6585,7 @@ public:
 			}
 			else
 			{
-				throw std::invalid_argument("strange::UInt64::self_divide_ passed invalid Number");
+				throw Disagreement("strange::UInt64::self_divide_ passed invalid Number");
 			}
 		}
 	}
@@ -6614,7 +6614,7 @@ public:
 			}
 			else
 			{
-				throw std::invalid_argument("strange::UInt64::self_modulo_ passed invalid Number");
+				throw Disagreement("strange::UInt64::self_modulo_ passed invalid Number");
 			}
 		}
 	}
@@ -6833,7 +6833,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("Float32::from_lake_ passed wrong type of thing");
+			throw Disagreement("Float32::from_lake_ passed wrong type of thing");
 		}
 		const uint32_t i =
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -6895,7 +6895,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float32::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::Float32::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -6918,7 +6918,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float32::self_add_ passed invalid Number");
+			throw Disagreement("strange::Float32::self_add_ passed invalid Number");
 		}
 	}
 
@@ -6931,7 +6931,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float32::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::Float32::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -6944,7 +6944,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float32::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::Float32::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -6961,7 +6961,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float32::self_divide_ passed invalid Number");
+			throw Disagreement("strange::Float32::self_divide_ passed invalid Number");
 		}
 	}
 
@@ -6978,7 +6978,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float32::self_modulo_ passed invalid Number");
+			throw Disagreement("strange::Float32::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -7150,7 +7150,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("Float64::from_lake_ passed wrong type of thing");
+			throw Disagreement("Float64::from_lake_ passed wrong type of thing");
 		}
 		const uint64_t i =
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -7216,7 +7216,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float64::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::Float64::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -7239,7 +7239,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float64::self_add_ passed invalid Number");
+			throw Disagreement("strange::Float64::self_add_ passed invalid Number");
 		}
 	}
 
@@ -7252,7 +7252,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float64::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::Float64::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -7265,7 +7265,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float64::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::Float64::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -7282,7 +7282,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float64::self_divide_ passed invalid Number");
+			throw Disagreement("strange::Float64::self_divide_ passed invalid Number");
 		}
 	}
 
@@ -7300,7 +7300,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Float64::self_modulo_ passed invalid Number");
+			throw Disagreement("strange::Float64::self_modulo_ passed invalid Number");
 		}
 	}
 
@@ -7482,7 +7482,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("Complex32::from_lake_ passed wrong type of thing");
+			throw Disagreement("Complex32::from_lake_ passed wrong type of thing");
 		}
 		const uint32_t r =
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -7574,7 +7574,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Complex32::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::Complex32::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -7597,7 +7597,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Complex32::self_add_ passed invalid Number");
+			throw Disagreement("strange::Complex32::self_add_ passed invalid Number");
 		}
 	}
 
@@ -7610,7 +7610,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Complex32::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::Complex32::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -7623,7 +7623,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Complex32::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::Complex32::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -7636,13 +7636,13 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Complex32::self_divide_ passed invalid Number");
+			throw Disagreement("strange::Complex32::self_divide_ passed invalid Number");
 		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		throw std::logic_error("strange::Complex32::self_modulo_ called");
+		throw Disagreement("strange::Complex32::self_modulo_ called");
 	}
 
 	virtual inline const bool same_(const Ptr& other) const override
@@ -7830,7 +7830,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw std::invalid_argument("Complex64::from_lake_ passed wrong type of thing");
+			throw Disagreement("Complex64::from_lake_ passed wrong type of thing");
 		}
 		const uint64_t r =
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -7930,7 +7930,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Complex64::from_symbol_ passed invalid Symbol");
+			throw Disagreement("strange::Complex64::from_symbol_ passed invalid Symbol");
 		}
 	}
 
@@ -7953,7 +7953,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Complex64::self_add_ passed invalid Number");
+			throw Disagreement("strange::Complex64::self_add_ passed invalid Number");
 		}
 	}
 
@@ -7966,7 +7966,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Complex64::self_subtract_ passed invalid Number");
+			throw Disagreement("strange::Complex64::self_subtract_ passed invalid Number");
 		}
 	}
 
@@ -7979,7 +7979,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Complex64::self_multiply_ passed invalid Number");
+			throw Disagreement("strange::Complex64::self_multiply_ passed invalid Number");
 		}
 	}
 
@@ -7992,13 +7992,13 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::Complex64::self_divide_ passed invalid Number");
+			throw Disagreement("strange::Complex64::self_divide_ passed invalid Number");
 		}
 	}
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		throw std::logic_error("strange::Complex64::self_modulo_ called");
+		throw Disagreement("strange::Complex64::self_modulo_ called");
 	}
 
 	virtual inline const bool same_(const Ptr& other) const override
@@ -8227,7 +8227,7 @@ public:
 	{
 		if (!_out)
 		{
-			throw sym_("cannot write to input");
+			throw Disagreement("strange::River::write_ cannot write to input");
 		}
 		_out->write(str.data(), str.length());
 	}
@@ -8242,7 +8242,7 @@ public:
 		}
 		else
 		{
-			throw std::invalid_argument("strange::River::write_ passed wrong type of thing");
+			throw Disagreement("strange::River::write_ passed wrong type of thing");
 		}
 	}
 
@@ -8278,7 +8278,7 @@ public:
 	{
 		if (!_in)
 		{
-			throw sym_("cannot read from output");
+			throw Disagreement("strange::River::read_ cannot read from output");
 		}
 		std::string str;
 		str.resize(size_t(length));
@@ -8314,7 +8314,7 @@ public:
 	{
 		if (!_in)
 		{
-			throw sym_("cannot get from output");
+			throw Disagreement("strange::River::get_ cannot read from output");
 		}
 		return _in->get();
 	}
@@ -8328,7 +8328,7 @@ public:
 	{
 		if (!_in)
 		{
-			throw sym_("cannot peek at output");
+			throw Disagreement("strange::River::peek_ cannot read from output");
 		}
 		return _in->peek();
 	}
@@ -8529,7 +8529,7 @@ inline void Serializable::to_river_(const Thing::Ptr& river) const
 	}
 	else
 	{
-		throw std::invalid_argument("Serializable::to_river_ passed wrong type of thing");
+		throw Thing::Disagreement("Serializable::to_river_ passed wrong type of thing");
 	}
 }
 
@@ -8554,7 +8554,7 @@ inline void Serializable::from_lake_via_river_(const Thing::Ptr& lake)
 	Lake* const lak = Thing::dynamic_<Lake>(lake);
 	if (!lak)
 	{
-		throw std::invalid_argument("Serializable::from_lake_via_river_ passed wrong type of thing");
+		throw Thing::Disagreement("Serializable::from_lake_via_river_ passed wrong type of thing");
 	}
 	const Thing::Ptr river = River::mut_();
 	lak->to_river_(river);
@@ -8601,7 +8601,7 @@ inline const Thing::Ptr Symbol::lak_(const Ptr& lake)
 	Lake* const lak = dynamic_<Lake>(lake);
 	if (!lak)
 	{
-		throw std::invalid_argument("Symbol::lak_ passed wrong type of thing");
+		throw Disagreement("Symbol::lak_ passed wrong type of thing");
 	}
 	return fin_(lak->get_());
 }
@@ -8652,7 +8652,7 @@ inline const Thing::Ptr Symbol::add_(const Ptr& other) const
 	}
 	else
 	{
-		throw std::invalid_argument("strange::Symbol::add_ passed invalid argument");
+		throw Disagreement("strange::Symbol::add_ passed invalid argument");
 	}
 	return me_();
 }
@@ -8664,7 +8664,7 @@ inline const char Symbol::at_(const Ptr& index) const
 	{
 		return at_(ind->to_int64_());
 	}
-	throw std::invalid_argument("strange::Symbol::at_ passed wrong type of Number");
+	throw Disagreement("strange::Symbol::at_ passed wrong type of Number");
 }
 
 inline const Thing::Ptr Symbol::at(const Ptr& it) const
@@ -8714,7 +8714,7 @@ inline void Shoal::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Shoal::to_river_ passed wrong type of thing");
+		throw Disagreement("Shoal::to_river_ passed wrong type of thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_map.size())));
@@ -8730,7 +8730,7 @@ inline void Shoal::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Shoal::from_river_ passed wrong type of thing");
+		throw Disagreement("Shoal::from_river_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -8750,12 +8750,12 @@ inline void Shoal::to_river_with_links_(const Ptr& shoal, const Ptr& river) cons
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
-		throw std::invalid_argument("Shoal::to_river_with_links_ passed wrong type of shoal thing");
+		throw Disagreement("Shoal::to_river_with_links_ passed wrong type of shoal thing");
 	}
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Shoal::to_river_with_links_ passed wrong type of river thing");
+		throw Disagreement("Shoal::to_river_with_links_ passed wrong type of river thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_map.size())));
@@ -8771,7 +8771,7 @@ inline void Shoal::from_river_with_links_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Shoal::from_river_with_links_ passed wrong type of thing");
+		throw Disagreement("Shoal::from_river_with_links_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -8802,7 +8802,7 @@ inline void Shoal::gather_to_river_(const Ptr& thing, const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Shoal::gather_to_river_ passed wrong type of river thing");
+		throw Disagreement("Shoal::gather_to_river_ passed wrong type of river thing");
 	}
 	gather_(thing);
 	riv->write_(Int64::mut_(int64_t(_map.size())));
@@ -8820,7 +8820,7 @@ inline const Thing::Ptr Shoal::gather_from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Shoal::gather_from_river_ passed wrong type of river thing");
+		throw Disagreement("Shoal::gather_from_river_ passed wrong type of river thing");
 	}
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
 	{
@@ -9005,7 +9005,7 @@ inline const Thing::Ptr Flock::at_(const Ptr& pos) const
 	{
 		return at_(number->to_int64_());
 	}
-	throw std::invalid_argument("strange::Flock::at_ passed wrong type of Number");
+	throw Disagreement("strange::Flock::at_ passed wrong type of Number");
 }
 
 inline void Flock::update_(const Ptr& pos, const Ptr& value)
@@ -9017,7 +9017,7 @@ inline void Flock::update_(const Ptr& pos, const Ptr& value)
 	}
 	else
 	{
-		throw std::invalid_argument("strange::Flock::update_ passed wrong type of Number");
+		throw Disagreement("strange::Flock::update_ passed wrong type of Number");
 	}
 }
 
@@ -9030,7 +9030,7 @@ inline void Flock::insert_(const Ptr& pos, const Ptr& value)
 	}
 	else
 	{
-		throw std::invalid_argument("strange::Flock::insert_ passed wrong type of Number");
+		throw Disagreement("strange::Flock::insert_ passed wrong type of Number");
 	}
 }
 
@@ -9043,7 +9043,7 @@ inline void Flock::erase_(const Ptr& pos)
 	}
 	else
 	{
-		throw std::invalid_argument("strange::Flock::erase_ passed wrong type of Number");
+		throw Disagreement("strange::Flock::erase_ passed wrong type of Number");
 	}
 }
 
@@ -9081,7 +9081,7 @@ inline void Flock::self_add_(const Ptr& other)
 			}
 			else
 			{
-				throw std::invalid_argument("strange::Flock::self_add_ passed wrong type of collection");
+				throw Disagreement("strange::Flock::self_add_ passed wrong type of collection");
 			}
 		}
 	}
@@ -9106,7 +9106,7 @@ inline const Thing::Ptr Flock::Concurrent::at_(const Ptr& pos) const
 	}
 	else
 	{
-		throw std::invalid_argument("strange::Flock::Concurrent::at_ passed wrong type of Number");
+		throw Disagreement("strange::Flock::Concurrent::at_ passed wrong type of Number");
 	}
 	return nothing_();
 }
@@ -9116,7 +9116,7 @@ inline void Flock::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Flock::to_river_ passed wrong type of thing");
+		throw Disagreement("Flock::to_river_ passed wrong type of thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_vector.size())));
@@ -9131,7 +9131,7 @@ inline void Flock::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Flock::from_river_ passed wrong type of thing");
+		throw Disagreement("Flock::from_river_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
@@ -9151,12 +9151,12 @@ inline void Flock::to_river_with_links_(const Ptr& shoal, const Ptr& river) cons
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
-		throw std::invalid_argument("Flock::to_river_with_links_ passed wrong type of shoal thing");
+		throw Disagreement("Flock::to_river_with_links_ passed wrong type of shoal thing");
 	}
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Flock::to_river_with_links_ passed wrong type of river thing");
+		throw Disagreement("Flock::to_river_with_links_ passed wrong type of river thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_vector.size())));
@@ -9171,7 +9171,7 @@ inline void Flock::from_river_with_links_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Flock::from_river_with_links_ passed wrong type of thing");
+		throw Disagreement("Flock::from_river_with_links_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
@@ -9234,7 +9234,7 @@ inline void Herd::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Herd::to_river_ passed wrong type of thing");
+		throw Disagreement("Herd::to_river_ passed wrong type of thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_set.size())));
@@ -9249,7 +9249,7 @@ inline void Herd::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Herd::from_river_ passed wrong type of thing");
+		throw Disagreement("Herd::from_river_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -9267,12 +9267,12 @@ inline void Herd::to_river_with_links_(const Ptr& shoal, const Ptr& river) const
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
-		throw std::invalid_argument("Herd::to_river_with_links_ passed wrong type of shoal thing");
+		throw Disagreement("Herd::to_river_with_links_ passed wrong type of shoal thing");
 	}
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Herd::to_river_with_links_ passed wrong type of river thing");
+		throw Disagreement("Herd::to_river_with_links_ passed wrong type of river thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(_set.size())));
@@ -9287,7 +9287,7 @@ inline void Herd::from_river_with_links_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Herd::from_river_with_links_ passed wrong type of thing");
+		throw Disagreement("Herd::from_river_with_links_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -9341,7 +9341,7 @@ inline void Lake::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Lake::to_river_ passed wrong type of thing");
+		throw Disagreement("Lake::to_river_ passed wrong type of thing");
 	}
 	riv->write_(Bit::mut_(finalized_()));
 	riv->write_(Int64::mut_(int64_t(get_().length())));
@@ -9353,7 +9353,7 @@ inline void Lake::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw std::invalid_argument("Lake::from_river_ passed wrong type of thing");
+		throw Disagreement("Lake::from_river_ passed wrong type of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
@@ -9371,7 +9371,7 @@ inline const char Lake::at_(const Ptr& index) const
 	{
 		return at_(ind->to_int64_());
 	}
-	throw std::invalid_argument("strange::Lake::at_ passed wrong type of Number");
+	throw Disagreement("strange::Lake::at_ passed wrong type of Number");
 }
 
 inline const Thing::Ptr Lake::at(const Ptr& it) const
@@ -9392,7 +9392,7 @@ inline void Lake::update_(const Ptr& index, const Ptr& byte)
 	}
 	else
 	{
-		throw std::invalid_argument("strange::Lake::update_ passed wrong type of Number");
+		throw Disagreement("strange::Lake::update_ passed wrong type of Number");
 	}
 }
 
@@ -9414,7 +9414,7 @@ inline void Number::from_int64_(const Ptr& ptr)
 	}
 	else
 	{
-		throw std::invalid_argument("strange::Number::from_int64_ passed wrong type of thing");
+		throw Disagreement("strange::Number::from_int64_ passed wrong type of thing");
 	}
 }
 
@@ -9432,7 +9432,7 @@ inline void Number::from_float64_(const Ptr& ptr)
 	}
 	else
 	{
-		throw std::invalid_argument("strange::Number::from_float64_ passed wrong type of thing");
+		throw Disagreement("strange::Number::from_float64_ passed wrong type of thing");
 	}
 }
 
@@ -9450,7 +9450,7 @@ inline void Number::from_imaginary64_(const Ptr& ptr)
 	}
 	else
 	{
-		throw std::invalid_argument("strange::Number::from_imaginary64_ passed wrong type of thing");
+		throw Disagreement("strange::Number::from_imaginary64_ passed wrong type of thing");
 	}
 }
 
@@ -9468,7 +9468,7 @@ inline void Number::from_complex64_(const Ptr& ptr)
 	}
 	else
 	{
-		throw std::invalid_argument("strange::Number::from_complex64_ passed wrong type of thing");
+		throw Disagreement("strange::Number::from_complex64_ passed wrong type of thing");
 	}
 }
 

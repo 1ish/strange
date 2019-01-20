@@ -192,7 +192,7 @@ private:
 							continue;
 						}
 					}
-					else if (symbol->is_("break_") || symbol->is_("continue_") || symbol->is_("return_") || symbol->is_("throw_"))
+					else if (symbol->is_("break_") || symbol->is_("continue_") || symbol->is_("return_") || symbol->is_("throw_")) //TODO "error_"
 					{
 						if (_statement_(scope, shoal, flock))
 						{

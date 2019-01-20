@@ -80,7 +80,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_local_, flock);
 			}
-			throw std::length_error("local_ expression of wrong size");
+			throw Disagreement("local_ expression of wrong size");
 		}
 		else if (statement->is_("thing_"))
 		{
@@ -88,7 +88,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_thing_, flock);
 			}
-			throw std::length_error("thing_ expression of wrong size");
+			throw Disagreement("thing_ expression of wrong size");
 		}
 		else if (statement->is_("invoke_"))
 		{
@@ -96,7 +96,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_invoke_, flock);
 			}
-			throw std::length_error("invoke_ expression of wrong size");
+			throw Disagreement("invoke_ expression of wrong size");
 		}
 		else if (statement->is_("invoke_iterator_"))
 		{
@@ -104,7 +104,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_invoke_iterator_, flock);
 			}
-			throw std::length_error("invoke_iterator_ expression of wrong size");
+			throw Disagreement("invoke_iterator_ expression of wrong size");
 		}
 		else if (statement->is_("invoke_iterable_"))
 		{
@@ -112,7 +112,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_invoke_iterable_, flock);
 			}
-			throw std::length_error("invoke_iterable_ expression of wrong size");
+			throw Disagreement("invoke_iterable_ expression of wrong size");
 		}
 		else if (statement->is_("method_"))
 		{
@@ -120,7 +120,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_method_, flock);
 			}
-			throw std::length_error("method_ expression of wrong size");
+			throw Disagreement("method_ expression of wrong size");
 		}
 		else if (statement->is_("operate_iterator_"))
 		{
@@ -128,7 +128,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_operate_iterator_, flock);
 			}
-			throw std::length_error("operate_iterator_ expression of wrong size");
+			throw Disagreement("operate_iterator_ expression of wrong size");
 		}
 		else if (statement->is_("operate_iterable_"))
 		{
@@ -136,7 +136,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_operate_iterable_, flock);
 			}
-			throw std::length_error("operate_iterable_ expression of wrong size");
+			throw Disagreement("operate_iterable_ expression of wrong size");
 		}
 		else if (statement->is_("lambda_"))
 		{
@@ -144,7 +144,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_lambda_, flock);
 			}
-			throw std::length_error("lambda_ expression of wrong size");
+			throw Disagreement("lambda_ expression of wrong size");
 		}
 		else if (statement->is_("function_"))
 		{
@@ -152,7 +152,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_function_, flock);
 			}
-			throw std::length_error("function_ expression of wrong size");
+			throw Disagreement("function_ expression of wrong size");
 		}
 		else if (statement->is_("shared_scope_"))
 		{
@@ -160,7 +160,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_shared_scope_, flock);
 			}
-			throw std::length_error("shared_scope_ expression of wrong size");
+			throw Disagreement("shared_scope_ expression of wrong size");
 		}
 		else if (statement->is_("relative_scope_"))
 		{
@@ -168,7 +168,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_relative_scope_, flock);
 			}
-			throw std::length_error("relative_scope_ expression of wrong size");
+			throw Disagreement("relative_scope_ expression of wrong size");
 		}
 		else if (statement->is_("flock_"))
 		{
@@ -180,7 +180,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_flock_iterator_, flock);
 			}
-			throw std::length_error("flock_iterator_ expression of wrong size");
+			throw Disagreement("flock_iterator_ expression of wrong size");
 		}
 		else if (statement->is_("shoal_"))
 		{
@@ -188,7 +188,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_shoal_, flock);
 			}
-			throw std::length_error("shoal_ expression of odd size");
+			throw Disagreement("shoal_ expression of odd size");
 		}
 		else if (statement->is_("herd_"))
 		{
@@ -200,7 +200,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_break_, flock);
 			}
-			throw std::length_error("break_ expression of wrong size");
+			throw Disagreement("break_ expression of wrong size");
 		}
 		else if (statement->is_("continue_"))
 		{
@@ -208,7 +208,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_continue_, flock);
 			}
-			throw std::length_error("continue_ expression of wrong size");
+			throw Disagreement("continue_ expression of wrong size");
 		}
 		else if (statement->is_("return_"))
 		{
@@ -216,7 +216,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_return_, flock);
 			}
-			throw std::length_error("return_ expression of wrong size");
+			throw Disagreement("return_ expression of wrong size");
 		}
 		else if (statement->is_("throw_"))
 		{
@@ -224,7 +224,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_throw_, flock);
 			}
-			throw std::length_error("throw_ expression of wrong size");
+			throw Disagreement("throw_ expression of wrong size");
 		}
 		else if (statement->is_("catch_"))
 		{
@@ -232,7 +232,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_catch_, flock);
 			}
-			throw std::length_error("catch_ expression of wrong size");
+			throw Disagreement("catch_ expression of wrong size");
 		}
 		else if (statement->is_("block_"))
 		{
@@ -248,7 +248,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_if_else_, flock);
 			}
-			throw std::length_error("if_ expression of wrong size");
+			throw Disagreement("if_ expression of wrong size");
 		}
 		else if (statement->is_("while_"))
 		{
@@ -256,7 +256,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_while_, flock);
 			}
-			throw std::length_error("while_ expression of wrong size");
+			throw Disagreement("while_ expression of wrong size");
 		}
 		else if (statement->is_("do_"))
 		{
@@ -264,7 +264,7 @@ public:
 			{
 				return fin_(token, statement, &Expression::_do_, flock);
 			}
-			throw std::length_error("do_ expression of wrong size");
+			throw Disagreement("do_ expression of wrong size");
 		}
 		else if (statement->is_("for_"))
 		{
@@ -272,11 +272,11 @@ public:
 			{
 				return fin_(token, statement, &Expression::_for_, flock);
 			}
-			throw std::length_error("for_ expression of wrong size");
+			throw Disagreement("for_ expression of wrong size");
 		}
 		else
 		{
-			throw std::invalid_argument("expression with unexpected statement");
+			throw Disagreement("expression with unexpected statement");
 		}
 		return fin_(token);
 	}
@@ -318,9 +318,9 @@ public:
 			Lake* const lake = dynamic_<Lake>(to_lake);
 			if (lake)
 			{
-				throw std::runtime_error(lake->get_());
+				throw std::runtime_error(lake->get_()); //TODO ?
 			}
-			throw std::runtime_error("unexpected");
+			throw std::runtime_error("unexpected"); //TODO ?
 		}
 	}
 
@@ -777,7 +777,7 @@ private:
 	{
 		try
 		{
-			throw Expression::evaluate_(_vector[0], local);
+			throw Expression::evaluate_(_vector[0], local); //TODO optionally call _error_ or make error_ a full statement
 		}
 		catch (const std::exception& err)
 		{
