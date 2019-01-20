@@ -353,7 +353,7 @@ private:
 	const std::vector<Ptr>& _vector;
 	const Ptr _parent;
 
-	inline const Ptr _error_(const std::string& str, const int64_t stack = 1) const
+	inline const Ptr _stack_(const std::string& str, const int64_t stack = 1) const
 	{
 		const std::string message = str.empty() ? str : ("Expression ERROR: " + str);
 		const Ptr river = static_<Token>(_token)->error_(message + '\n' +
@@ -362,7 +362,7 @@ private:
 		Expression* const p = dynamic_<Expression>(parent);
 		if (p)
 		{
-			static_<River>(river)->write_(p->_error_("", stack + 1));
+			static_<River>(river)->write_(p->_stack_("", stack + 1));
 		}
 		return river;
 	}
@@ -439,7 +439,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -494,7 +494,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -517,7 +517,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -530,7 +530,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -544,7 +544,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -568,7 +568,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -593,7 +593,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -631,7 +631,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -640,7 +640,7 @@ private:
 		const Ptr result = static_<Shoal>(_vector[0])->at_(_vector[1]);
 		if (result->is_nothing_())
 		{
-			throw _error_("not found in shared scope");
+			throw _stack_("not found in shared scope");
 		}
 		return result;
 	}
@@ -673,7 +673,7 @@ private:
 				scope = scope.substr(0, pos);
 			}
 		}
-		throw _error_("not found in relative scope");
+		throw _stack_("not found in relative scope");
 	}
 
 	inline const Ptr _flock_(const Ptr& local) const
@@ -684,7 +684,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -696,7 +696,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -708,7 +708,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -720,7 +720,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -732,7 +732,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -744,7 +744,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -756,7 +756,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -764,11 +764,11 @@ private:
 	{
 		try
 		{
-			throw Expression::evaluate_(_vector[0], local); //TODO optionally call _error_ or make error_ a full statement
+			throw Expression::evaluate_(_vector[0], local); //TODO optionally call _stack_ or make error_ a full statement
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -788,7 +788,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			static_<Shoal>(local)->update_("%", _error_(err.what()));
+			static_<Shoal>(local)->update_("%", _stack_(err.what()));
 			return Expression::evaluate_(_vector[1], local);
 		}
 	}
@@ -807,7 +807,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -823,7 +823,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -839,7 +839,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -868,7 +868,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -897,7 +897,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
@@ -928,7 +928,7 @@ private:
 		}
 		catch (const std::exception& err)
 		{
-			throw _error_(err.what());
+			throw _stack_(err.what());
 		}
 	}
 
