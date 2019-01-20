@@ -192,7 +192,15 @@ private:
 							continue;
 						}
 					}
-					else if (symbol->is_("break_") || symbol->is_("continue_") || symbol->is_("return_") || symbol->is_("throw_")) //TODO "error_"
+					else if (symbol->is_("error_"))
+					{
+						if (_statement_(scope, shoal, flock))
+						{
+							result = Expression::fin_(token, symbol, flock);
+							continue;
+						}
+					}
+					else if (symbol->is_("break_") || symbol->is_("continue_") || symbol->is_("return_") || symbol->is_("throw_"))
 					{
 						if (_statement_(scope, shoal, flock))
 						{

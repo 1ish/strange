@@ -218,6 +218,10 @@ public:
 			}
 			throw Disagreement("return_ expression of wrong size");
 		}
+		else if (statement->is_("error_"))
+		{
+			return fin_(token, statement, &Expression::_error_, flock);
+		}
 		else if (statement->is_("throw_"))
 		{
 			if (size == 1)
@@ -760,11 +764,35 @@ private:
 		}
 	}
 
+	inline const Ptr _error_(const Ptr& local) const
+	{
+		std::string error;
+		try
+		{
+			const size_t size = _vector.size();
+			for (size_t i = 0; i < size; ++i)
+			{
+				const Ptr thing = Expression::evaluate_(_vector[i], local);
+				const Ptr to_lake = thing->invoke_("to_lake");
+				Lake* const lake = Thing::dynamic_<Lake>(to_lake);
+				if (lake)
+				{
+					error += lake->get_();
+				}
+			}
+		}
+		catch (const std::exception& err)
+		{
+			error = err.what();
+		}
+		throw _stack_(error);
+	}
+
 	inline const Ptr _throw_(const Ptr& local) const
 	{
 		try
 		{
-			throw Expression::evaluate_(_vector[0], local); //TODO optionally call _stack_ or make error_ a full statement
+			throw Expression::evaluate_(_vector[0], local);
 		}
 		catch (const std::exception& err)
 		{
