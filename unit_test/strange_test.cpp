@@ -161,6 +161,16 @@ TEST(StrangeParser, EvaluateError) {
 	{
 		const Ptr result = Expression::immediate_(expression);
 	}
+	catch (const Ptr& thing)
+	{
+		const Ptr to_lake = thing->invoke_("to_lake");
+		Lake* const lake = Thing::dynamic_<Lake>(to_lake);
+		if (lake)
+		{
+			error = lake->get_();
+			std::cout << error << std::endl;
+		}
+	}
 	catch (const std::exception& err)
 	{
 		error = err.what();

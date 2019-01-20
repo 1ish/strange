@@ -308,20 +308,7 @@ public:
 		Shoal* const loc = static_<Shoal>(local);
 		loc->update_("$", Shoal::mut_());
 		loc->update_("&", stop_());
-		try
-		{
-			return evaluate_(expression, local);
-		}
-		catch (const Ptr& thing)
-		{
-			const Ptr to_lake = thing->invoke_("to_lake");
-			Lake* const lake = dynamic_<Lake>(to_lake);
-			if (lake)
-			{
-				throw std::runtime_error(lake->get_()); //TODO ?
-			}
-			throw std::runtime_error("unexpected"); //TODO ?
-		}
+		return evaluate_(expression, local);
 	}
 
 	static inline void generate_(const Ptr& expression, const Ptr& language, const Ptr& river)
