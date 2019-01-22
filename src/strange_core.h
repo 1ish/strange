@@ -752,10 +752,7 @@ public:
 		return _hash;
 	}
 
-	virtual inline const bool same_(const Ptr& other) const override
-	{
-		return other->is_(_symbol);
-	}
+	virtual inline const bool same_(const Ptr& other) const override;
 
 	inline const std::string& get_() const
 	{
@@ -8392,24 +8389,14 @@ inline const Thing::Ptr Thing::iterator_() const
 
 inline const bool Thing::is_(const std::string& str) const
 {
-	const Symbol* const sym = dynamic_cast<const Symbol*>(this);
-	if (sym)
-	{
-		return sym->get_() == str;
-	}
-	const Lake* const lake = dynamic_cast<const Lake*>(this);
-	return lake && (lake->get_() == str);
+	const Symbol* const symbol = dynamic_cast<const Symbol*>(this);
+	return symbol && (symbol->get_() == str);
 }
 
-inline const bool Thing::is_(const Ptr& str) const
+inline const bool Thing::is_(const Ptr& symbol) const
 {
-	Symbol* const sym = dynamic_<Symbol>(str);
-	if (sym)
-	{
-		return is_(sym->get_());
-	}
-	Lake* const lake = dynamic_<Lake>(str);
-	return lake && is_(lake->get_());
+	Symbol* const sym = dynamic_<Symbol>(symbol);
+	return sym && is_(sym->get_());
 }
 
 template <typename F>
@@ -8612,6 +8599,17 @@ inline void Serializable::from_lake_via_river_(const Thing::Ptr& lake)
 //======================================================================
 // class Symbol
 //======================================================================
+
+inline const bool Symbol::same_(const Ptr& other) const
+{
+	Symbol* const symbol = dynamic_<Symbol>(other);
+	if (symbol)
+	{
+		return get_() == symbol->get_();
+	}
+	Lake* const lake = dynamic_<Lake>(other);
+	return lake && (get_() == lake->get_());
+}
 
 inline const Thing::Ptr Symbol::pub_() const
 {
