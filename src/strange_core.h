@@ -4062,25 +4062,41 @@ public:
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() < number->to_int64_());
+		if (number)
+		{
+			return to_int64_() < number->to_int64_();
+		}
+		throw Disagreement("strange::Bit::less_than_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() > number->to_int64_());
+		if (number)
+		{
+			return to_int64_() > number->to_int64_();
+		}
+		throw Disagreement("strange::Bit::greater_than_ passed invalid Number");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() <= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() <= number->to_int64_();
+		}
+		throw Disagreement("strange::Bit::less_or_equal_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() >= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() >= number->to_int64_();
+		}
+		throw Disagreement("strange::Bit::greater_or_equal_ passed invalid Number");
 	}
 };
 
@@ -4364,25 +4380,41 @@ public:
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() < number->to_int64_());
+		if (number)
+		{
+			return to_int64_() < number->to_int64_();
+		}
+		throw Disagreement("strange::Int8::less_than_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() > number->to_int64_());
+		if (number)
+		{
+			return to_int64_() > number->to_int64_();
+		}
+		throw Disagreement("strange::Int8::greater_than_ passed invalid Number");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() <= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() <= number->to_int64_();
+		}
+		throw Disagreement("strange::Int8::less_or_equal_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() >= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() >= number->to_int64_();
+		}
+		throw Disagreement("strange::Int8::greater_or_equal_ passed invalid Number");
 	}
 };
 
@@ -4666,25 +4698,41 @@ public:
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() < number->to_int64_());
+		if (number)
+		{
+			return to_int64_() < number->to_int64_();
+		}
+		throw Disagreement("strange::UInt8::less_than_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() > number->to_int64_());
+		if (number)
+		{
+			return to_int64_() > number->to_int64_();
+		}
+		throw Disagreement("strange::UInt8::greater_than_ passed invalid Number");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() <= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() <= number->to_int64_();
+		}
+		throw Disagreement("strange::UInt8::less_or_equal_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() >= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() >= number->to_int64_();
+		}
+		throw Disagreement("strange::UInt8::greater_or_equal_ passed invalid Number");
 	}
 };
 
@@ -4974,25 +5022,41 @@ public:
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() < number->to_int64_());
+		if (number)
+		{
+			return to_int64_() < number->to_int64_();
+		}
+		throw Disagreement("strange::Int16::less_than_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() > number->to_int64_());
+		if (number)
+		{
+			return to_int64_() > number->to_int64_();
+		}
+		throw Disagreement("strange::Int16::greater_than_ passed invalid Number");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() <= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() <= number->to_int64_();
+		}
+		throw Disagreement("strange::Int16::less_or_equal_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() >= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() >= number->to_int64_();
+		}
+		throw Disagreement("strange::Int16::greater_or_equal_ passed invalid Number");
 	}
 };
 
@@ -5282,25 +5346,41 @@ public:
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() < number->to_int64_());
+		if (number)
+		{
+			return to_int64_() < number->to_int64_();
+		}
+		throw Disagreement("strange::UInt16::less_than_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() > number->to_int64_());
+		if (number)
+		{
+			return to_int64_() > number->to_int64_();
+		}
+		throw Disagreement("strange::UInt16::greater_than_ passed invalid Number");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() <= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() <= number->to_int64_();
+		}
+		throw Disagreement("strange::UInt16::less_or_equal_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() >= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() >= number->to_int64_();
+		}
+		throw Disagreement("strange::UInt16::greater_or_equal_ passed invalid Number");
 	}
 };
 
@@ -5594,25 +5674,41 @@ public:
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() < number->to_int64_());
+		if (number)
+		{
+			return to_int64_() < number->to_int64_();
+		}
+		throw Disagreement("strange::Int32::less_than_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() > number->to_int64_());
+		if (number)
+		{
+			return to_int64_() > number->to_int64_();
+		}
+		throw Disagreement("strange::Int32::greater_than_ passed invalid Number");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() <= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() <= number->to_int64_();
+		}
+		throw Disagreement("strange::Int32::less_or_equal_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() >= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() >= number->to_int64_();
+		}
+		throw Disagreement("strange::Int32::greater_or_equal_ passed invalid Number");
 	}
 };
 
@@ -5906,25 +6002,41 @@ public:
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() < number->to_int64_());
+		if (number)
+		{
+			return to_int64_() < number->to_int64_();
+		}
+		throw Disagreement("strange::UInt32::less_than_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() > number->to_int64_());
+		if (number)
+		{
+			return to_int64_() > number->to_int64_();
+		}
+		throw Disagreement("strange::UInt32::greater_than_ passed invalid Number");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() <= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() <= number->to_int64_();
+		}
+		throw Disagreement("strange::UInt32::less_or_equal_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_int64_() >= number->to_int64_());
+		if (number)
+		{
+			return to_int64_() >= number->to_int64_();
+		}
+		throw Disagreement("strange::UInt32::greater_or_equal_ passed invalid Number");
 	}
 };
 
@@ -6226,25 +6338,41 @@ public:
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (get_() < number->to_int64_());
+		if (number)
+		{
+			return get_() < number->to_int64_();
+		}
+		throw Disagreement("strange::Int64::less_than_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (get_() > number->to_int64_());
+		if (number)
+		{
+			return get_() > number->to_int64_();
+		}
+		throw Disagreement("strange::Int64::greater_than_ passed invalid Number");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (get_() <= number->to_int64_());
+		if (number)
+		{
+			return get_() <= number->to_int64_();
+		}
+		throw Disagreement("strange::Int64::less_or_equal_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (get_() >= number->to_int64_());
+		if (number)
+		{
+			return get_() >= number->to_int64_();
+		}
+		throw Disagreement("strange::Int64::greater_or_equal_ passed invalid Number");
 	}
 };
 
@@ -6614,7 +6742,7 @@ public:
 			const int64_t int64 = number->to_int64_();
 			return int64 > 0 && get_() < D(int64);
 		}
-		return false;
+		throw Disagreement("strange::UInt64::less_than_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
@@ -6630,7 +6758,7 @@ public:
 			const int64_t int64 = number->to_int64_();
 			return int64 < 0 || get_() > D(int64);
 		}
-		return false;
+		throw Disagreement("strange::UInt64::greater_than_ passed invalid Number");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
@@ -6646,7 +6774,7 @@ public:
 			const int64_t int64 = number->to_int64_();
 			return int64 >= 0 && get_() <= D(int64);
 		}
-		return false;
+		throw Disagreement("strange::UInt64::less_or_equal_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
@@ -6662,7 +6790,7 @@ public:
 			const int64_t int64 = number->to_int64_();
 			return int64 <= 0 || get_() >= D(int64);
 		}
-		return false;
+		throw Disagreement("strange::UInt64::greater_or_equal_ passed invalid Number");
 	}
 };
 
@@ -6957,25 +7085,41 @@ public:
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_float64_() < number->to_float64_());
+		if (number)
+		{
+			return to_float64_() < number->to_float64_();
+		}
+		throw Disagreement("strange::Float32::less_than_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_float64_() > number->to_float64_());
+		if (number)
+		{
+			return to_float64_() > number->to_float64_();
+		}
+		throw Disagreement("strange::Float32::greater_than_ passed invalid Number");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_float64_() <= number->to_float64_());
+		if (number)
+		{
+			return to_float64_() <= number->to_float64_();
+		}
+		throw Disagreement("strange::Float32::less_or_equal_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (to_float64_() >= number->to_float64_());
+		if (number)
+		{
+			return to_float64_() >= number->to_float64_();
+		}
+		throw Disagreement("strange::Float32::greater_or_equal_ passed invalid Number");
 	}
 };
 
@@ -7279,25 +7423,41 @@ public:
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (get_() < number->to_float64_());
+		if (number)
+		{
+			return get_() < number->to_float64_();
+		}
+		throw Disagreement("strange::Float64::less_than_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (get_() > number->to_float64_());
+		if (number)
+		{
+			return get_() > number->to_float64_();
+		}
+		throw Disagreement("strange::Float64::greater_than_ passed invalid Number");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (get_() <= number->to_float64_());
+		if (number)
+		{
+			return get_() <= number->to_float64_();
+		}
+		throw Disagreement("strange::Float64::less_or_equal_ passed invalid Number");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
 		Number* const number = dynamic_<Number>(other);
-		return number && (get_() >= number->to_float64_());
+		if (number)
+		{
+			return get_() >= number->to_float64_();
+		}
+		throw Disagreement("strange::Float64::greater_or_equal_ passed invalid Number");
 	}
 };
 
@@ -7622,22 +7782,22 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		return false;
+		throw Disagreement("strange::Complex32::less_than_ called");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		return false;
+		throw Disagreement("strange::Complex32::greater_than_ called");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		return false;
+		throw Disagreement("strange::Complex32::less_or_equal_ called");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		return false;
+		throw Disagreement("strange::Complex32::greater_or_equal_ called");
 	}
 };
 
@@ -7978,22 +8138,22 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		return false;
+		throw Disagreement("strange::Complex64::less_than_ called");
 	}
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		return false;
+		throw Disagreement("strange::Complex64::greater_than_ called");
 	}
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		return false;
+		throw Disagreement("strange::Complex64::less_or_equal_ called");
 	}
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		return false;
+		throw Disagreement("strange::Complex64::greater_or_equal_ called");
 	}
 };
 
