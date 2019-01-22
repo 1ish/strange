@@ -825,64 +825,28 @@ public:
 
 	inline const Ptr at(const Ptr& it) const;
 
-	inline const bool less_than_(const std::string& s) const
-	{
-		return get_() < s;
-	}
-
-	inline const bool less_than_(const Ptr& other) const
-	{
-		Symbol* const symbol = dynamic_<Symbol>(other);
-		return symbol && less_than_(symbol->get_());
-	}
+	inline const bool less_than_(const Ptr& other) const;
 
 	inline const Ptr less_than(const Ptr& it) const
 	{
 		return boolean_(less_than_(it->next_()));
 	}
 
-	inline const bool greater_than_(const std::string& s) const
-	{
-		return get_() > s;
-	}
-
-	inline const bool greater_than_(const Ptr& other) const
-	{
-		Symbol* const symbol = dynamic_<Symbol>(other);
-		return symbol && greater_than_(symbol->get_());
-	}
+	inline const bool greater_than_(const Ptr& other) const;
 
 	inline const Ptr greater_than(const Ptr& it) const
 	{
 		return boolean_(greater_than_(it->next_()));
 	}
 
-	inline const bool less_or_equal_(const std::string& s) const
-	{
-		return get_() <= s;
-	}
-
-	inline const bool less_or_equal_(const Ptr& other) const
-	{
-		Symbol* const symbol = dynamic_<Symbol>(other);
-		return symbol && less_or_equal_(symbol->get_());
-	}
+	inline const bool less_or_equal_(const Ptr& other) const;
 
 	inline const Ptr less_or_equal(const Ptr& it) const
 	{
 		return boolean_(less_or_equal_(it->next_()));
 	}
 
-	inline const bool greater_or_equal_(const std::string& s) const
-	{
-		return get_() >= s;
-	}
-
-	inline const bool greater_or_equal_(const Ptr& other) const
-	{
-		Symbol* const symbol = dynamic_<Symbol>(other);
-		return symbol && greater_or_equal_(symbol->get_());
-	}
+	inline const bool greater_or_equal_(const Ptr& other) const;
 
 	inline const Ptr greater_or_equal(const Ptr& it) const
 	{
@@ -3475,64 +3439,28 @@ public:
 		return byte;
 	}
 
-	inline const bool less_than_(const std::string& s) const
-	{
-		return get_() < s;
-	}
-
-	inline const bool less_than_(const Ptr& other) const
-	{
-		Lake* const lake = dynamic_<Lake>(other);
-		return lake && less_than_(lake->get_());
-	}
+	inline const bool less_than_(const Ptr& other) const;
 
 	inline const Ptr less_than(const Ptr& it) const
 	{
 		return boolean_(less_than_(it->next_()));
 	}
 
-	inline const bool greater_than_(const std::string& s) const
-	{
-		return get_() > s;
-	}
-
-	inline const bool greater_than_(const Ptr& other) const
-	{
-		Lake* const lake = dynamic_<Lake>(other);
-		return lake && greater_than_(lake->get_());
-	}
+	inline const bool greater_than_(const Ptr& other) const;
 
 	inline const Ptr greater_than(const Ptr& it) const
 	{
 		return boolean_(greater_than_(it->next_()));
 	}
 
-	inline const bool less_or_equal_(const std::string& s) const
-	{
-		return get_() <= s;
-	}
-
-	inline const bool less_or_equal_(const Ptr& other) const
-	{
-		Lake* const lake = dynamic_<Lake>(other);
-		return lake && less_or_equal_(lake->get_());
-	}
+	inline const bool less_or_equal_(const Ptr& other) const;
 
 	inline const Ptr less_or_equal(const Ptr& it) const
 	{
 		return boolean_(less_or_equal_(it->next_()));
 	}
 
-	inline const bool greater_or_equal_(const std::string& s) const
-	{
-		return get_() >= s;
-	}
-
-	inline const bool greater_or_equal_(const Ptr& other) const
-	{
-		Lake* const lake = dynamic_<Lake>(other);
-		return lake && greater_or_equal_(lake->get_());
-	}
+	inline const bool greater_or_equal_(const Ptr& other) const;
 
 	inline const Ptr greater_or_equal(const Ptr& it) const
 	{
@@ -8611,6 +8539,66 @@ inline const bool Symbol::same_(const Ptr& other) const
 	return lake && (get_() == lake->get_());
 }
 
+inline const bool Symbol::less_than_(const Ptr& other) const
+{
+	Symbol* const symbol = dynamic_<Symbol>(other);
+	if (symbol)
+	{
+		return get_() < symbol->get_();
+	}
+	Lake* const lake = dynamic_<Lake>(other);
+	if (lake)
+	{
+		return get_() < lake->get_();
+	}
+	throw Disagreement("Symbol::less_than_ passed wrong type of thing");
+}
+
+inline const bool Symbol::greater_than_(const Ptr& other) const
+{
+	Symbol* const symbol = dynamic_<Symbol>(other);
+	if (symbol)
+	{
+		return get_() > symbol->get_();
+	}
+	Lake* const lake = dynamic_<Lake>(other);
+	if (lake)
+	{
+		return get_() > lake->get_();
+	}
+	throw Disagreement("Symbol::greater_than_ passed wrong type of thing");
+}
+
+inline const bool Symbol::less_or_equal_(const Ptr& other) const
+{
+	Symbol* const symbol = dynamic_<Symbol>(other);
+	if (symbol)
+	{
+		return get_() <= symbol->get_();
+	}
+	Lake* const lake = dynamic_<Lake>(other);
+	if (lake)
+	{
+		return get_() <= lake->get_();
+	}
+	throw Disagreement("Symbol::less_or_equal_ passed wrong type of thing");
+}
+
+inline const bool Symbol::greater_or_equal_(const Ptr& other) const
+{
+	Symbol* const symbol = dynamic_<Symbol>(other);
+	if (symbol)
+	{
+		return get_() >= symbol->get_();
+	}
+	Lake* const lake = dynamic_<Lake>(other);
+	if (lake)
+	{
+		return get_() >= lake->get_();
+	}
+	throw Disagreement("Symbol::greater_or_equal_ passed wrong type of thing");
+}
+
 inline const Thing::Ptr Symbol::pub_() const
 {
 	static const Ptr PUB = [this]()
@@ -9440,6 +9428,66 @@ inline void Lake::update_(const Ptr& index, const Ptr& byte)
 	{
 		throw Disagreement("strange::Lake::update_ passed wrong type of Number");
 	}
+}
+
+inline const bool Lake::less_than_(const Ptr& other) const
+{
+	Lake* const lake = dynamic_<Lake>(other);
+	if (lake)
+	{
+		return get_() < lake->get_();
+	}
+	Symbol* const symbol = dynamic_<Symbol>(other);
+	if (symbol)
+	{
+		return get_() < symbol->get_();
+	}
+	throw Disagreement("Lake::less_than_ passed wrong type of thing");
+}
+
+inline const bool Lake::greater_than_(const Ptr& other) const
+{
+	Lake* const lake = dynamic_<Lake>(other);
+	if (lake)
+	{
+		return get_() > lake->get_();
+	}
+	Symbol* const symbol = dynamic_<Symbol>(other);
+	if (symbol)
+	{
+		return get_() > symbol->get_();
+	}
+	throw Disagreement("Lake::greater_than_ passed wrong type of thing");
+}
+
+inline const bool Lake::less_or_equal_(const Ptr& other) const
+{
+	Lake* const lake = dynamic_<Lake>(other);
+	if (lake)
+	{
+		return get_() <= lake->get_();
+	}
+	Symbol* const symbol = dynamic_<Symbol>(other);
+	if (symbol)
+	{
+		return get_() <= symbol->get_();
+	}
+	throw Disagreement("Lake::less_or_equal_ passed wrong type of thing");
+}
+
+inline const bool Lake::greater_or_equal_(const Ptr& other) const
+{
+	Lake* const lake = dynamic_<Lake>(other);
+	if (lake)
+	{
+		return get_() >= lake->get_();
+	}
+	Symbol* const symbol = dynamic_<Symbol>(other);
+	if (symbol)
+	{
+		return get_() >= symbol->get_();
+	}
+	throw Disagreement("Lake::greater_or_equal_ passed wrong type of thing");
 }
 
 //======================================================================
