@@ -412,7 +412,7 @@ private:
 
 	inline void _generate_strange_local_(River* const river) const
 	{
-		river->write_("@@");
+		river->write_("£"); //TODO write strange local
 	}
 
 	inline void _generate_cpp_local_(River* const river) const

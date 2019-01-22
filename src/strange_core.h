@@ -193,7 +193,7 @@ public:
 	inline const Ptr finalize(const Ptr& ignore) const
 	{
 		finalize_();
-		return nothing_();
+		return me_();
 	}
 
 	virtual inline const bool finalized_() const
@@ -214,7 +214,7 @@ public:
 	inline const Ptr freeze(const Ptr& ignore) const
 	{
 		freeze_();
-		return nothing_();
+		return me_();
 	}
 
 	virtual inline const bool frozen_() const
@@ -255,6 +255,38 @@ public:
 	inline const Ptr clone(const Ptr& ignore) const
 	{
 		return clone_();
+	}
+
+	inline const Ptr copy_finalize_() const
+	{
+		if (finalized_())
+		{
+			return me_();
+		}
+		const Ptr result = copy_();
+		result->finalize_();
+		return result;
+	}
+
+	inline const Ptr copy_finalize(const Ptr& ignore) const
+	{
+		return copy_finalize_();
+	}
+
+	inline const Ptr clone_freeze_() const
+	{
+		if (frozen_())
+		{
+			return me_();
+		}
+		const Ptr result = clone_();
+		result->freeze_();
+		return result;
+	}
+
+	inline const Ptr clone_freeze(const Ptr& ignore) const
+	{
+		return clone_freeze_();
 	}
 
 	virtual inline const Ptr replicate_() const
@@ -8411,6 +8443,8 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("frozen", Const<Thing>::fin_(&Thing::frozen));
 		shoal->update_("copy", Const<Thing>::fin_(&Thing::copy));
 		shoal->update_("clone", Const<Thing>::fin_(&Thing::clone));
+		shoal->update_("copy_finalize", Const<Thing>::fin_(&Thing::copy_finalize));
+		shoal->update_("clone_freeze", Const<Thing>::fin_(&Thing::clone_freeze));
 		shoal->update_("replicate", Const<Thing>::fin_(&Thing::replicate));
 		shoal->update_("call", Static::fin_(&Thing::call, "function", ".."));
 		shoal->update_("boolean", Static::fin_(&Thing::boolean, "thing"));

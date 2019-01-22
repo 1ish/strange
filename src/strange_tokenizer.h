@@ -102,6 +102,7 @@ public:
 		bool escape = false;
 		bool commentblock = false;
 		bool commentline = false;
+		bool clone = false;
 		std::string token;
 		while (true)
 		{
@@ -109,19 +110,19 @@ public:
 			char char2;
 			if (river)
 			{
-				if (!river->good_())
-				{
-					break;
-				}
 				if (_dot)
 				{
 					char1 = '.';
 					_dot = false;
 				}
-				else if (_exp)
+				else if (_use)
 				{
-					char1 = _exp;
-					_exp = 0;
+					char1 = _use;
+					_use = 0;
+				}
+				else if (!river->good_())
+				{
+					break;
 				}
 				else
 				{
@@ -140,19 +141,19 @@ public:
 			}
 			else
 			{
-				if (!good_())
-				{
-					break;
-				}
 				if (_dot)
 				{
 					char1 = '.';
 					_dot = false;
 				}
-				else if (_exp)
+				else if (_use)
 				{
-					char1 = _exp;
-					_exp = 0;
+					char1 = _use;
+					_use = 0;
+				}
+				else if (!good_())
+				{
+					break;
 				}
 				else
 				{
@@ -180,10 +181,21 @@ public:
 				++_y;
 			}
 
-			if (_different)
+			if (clone)
 			{
-				_different = false;
-				return Token::punctuation_(_filename, _x, _y, "==");
+				if (token == "~~")
+				{
+					if (char2 == '#') // ~~##
+					{
+						token += char1; // ~~#
+						continue;
+					}
+					// ~~#.
+					_use = char1; // #
+					return Token::punctuation_(_filename, _x, _y, token); // ~~
+				}
+				// ~~##.
+				return Token::punctuation_(_filename, _x, _y, token + char1); // ~~##
 			}
 
 			if (commentblock)
@@ -233,10 +245,16 @@ public:
 			}
 			else if (second)
 			{
-				if (char1 == '=' && char2 == '=' && token == "!")
+				if (char1 == '=' && char2 == '=' && token == "!") // !==
 				{
-					_different = true;
-					return Token::punctuation_(_filename, _x, _y, token);
+					_use = char1; // =
+					return Token::punctuation_(_filename, _x, _y, token); // !
+				}
+				if (char1 == '~' && char2 == '#' && token == "~") // ~~#
+				{
+					token += char1; // ~~
+					clone = true;
+					continue;
 				}
 				return Token::punctuation_(_filename, _x, _y, token + char1);
 			}
@@ -383,7 +401,7 @@ public:
 							}
 							if (exp1)
 							{
-								_exp = char1;
+								_use = char1;
 								if (point)
 								{
 									if (token[token.length() - 2] == '.')
@@ -450,8 +468,7 @@ private:
 	int64_t _x = 0;
 	int64_t _y = 1;
 	bool _dot = false;
-	char _exp = 0;
-	bool _different = false;
+	char _use = 0;
 
 	static inline const bool alpha_(const char c)
 	{

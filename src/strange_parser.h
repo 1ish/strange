@@ -361,10 +361,6 @@ private:
 						_wrap_(token, sym_("next"), flock);
 						result = Expression::fin_(token, invoke, flock);
 					}
-					else if (symbol->is_("@@")) // local
-					{
-						result = Expression::fin_(token, local, Flock::mut_()); // local
-					}
 					else if (symbol->is_("$$") || symbol->is_("**")) // shared/relative scope
 					{
 						result = _scope_(scope, shoal, flock, symbol->is_("**"));
@@ -616,6 +612,12 @@ private:
 				_next_();
 				_wrap_(token, sym_("next"), flock);
 			}
+			else if (symbol->is_("="))
+			{
+				_next_();
+				_wrap_(token, sym_("assign"), flock);
+				_member_(scope, shoal, statement, flock);
+			}
 			else if (symbol->is_("~"))
 			{
 				_next_();
@@ -635,6 +637,21 @@ private:
 			{
 				_next_();
 				_wrap_(token, sym_("freeze"), flock);
+			}
+			else if (symbol->is_("~#"))
+			{
+				_next_();
+				_wrap_(token, sym_("copy_finalize"), flock);
+			}
+			else if (symbol->is_("~~##"))
+			{
+				_next_();
+				_wrap_(token, sym_("clone_freeze"), flock);
+			}
+			else if (symbol->is_("@@"))
+			{
+				_next_();
+				_wrap_(token, sym_("replicate"), flock);
 			}
 			else if (symbol->is_("!"))
 			{
@@ -868,13 +885,13 @@ private:
 					}
 					else if (parameter)
 					{
-						if (symbol->is_("="))
+						if (symbol->is_(":="))
 						{
 							parameter = false;
 						}
 						else
 						{
-							throw tok->error_("Parser ERROR: open expecting , = or close");
+							throw tok->error_("Parser ERROR: open expecting , := or close");
 						}
 					}
 					else
@@ -884,7 +901,7 @@ private:
 				}
 				else if (parameter)
 				{
-					throw tok->error_("Parser ERROR: open expecting , = or close");
+					throw tok->error_("Parser ERROR: open expecting , := or close");
 				}
 				else
 				{
