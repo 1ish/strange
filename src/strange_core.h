@@ -636,7 +636,6 @@ public:
 	}
 
 	// public impure virtual member functions and adapters
-
 	virtual inline void from_lake_(const Thing::Ptr& lake)
 	{
 	}
@@ -3433,7 +3432,12 @@ public:
 	virtual inline const bool same_(const Ptr& other) const override
 	{
 		Lake* const lake = dynamic_<Lake>(other);
-		return lake && (get_() == lake->get_());
+		if (lake)
+		{
+			return get_() == lake->get_();
+		}
+		Symbol* const symbol = dynamic_<Symbol>(other);
+		return symbol && (get_() == symbol->get_());
 	}
 
 	virtual inline size_t hash_() const override
@@ -6656,7 +6660,7 @@ public:
 		UInt64* const uint64 = dynamic_<UInt64>(other);
 		if (uint64)
 		{
-			return (get_() == uint64->get_());
+			return get_() == uint64->get_();
 		}
 		Number* const number = dynamic_<Number>(other);
 		if (number)
@@ -8386,16 +8390,26 @@ inline const Thing::Ptr Thing::iterator_() const
 	return IteratorPtr::mut_(me_());
 }
 
-inline const bool Thing::is_(const std::string& symbol) const
+inline const bool Thing::is_(const std::string& str) const
 {
 	const Symbol* const sym = dynamic_cast<const Symbol*>(this);
-	return (sym && sym->get_() == symbol);
+	if (sym)
+	{
+		return sym->get_() == str;
+	}
+	const Lake* const lake = dynamic_cast<const Lake*>(this);
+	return lake && (lake->get_() == str);
 }
 
-inline const bool Thing::is_(const Ptr& symbol) const
+inline const bool Thing::is_(const Ptr& str) const
 {
-	Symbol* const sym = dynamic_<Symbol>(symbol);
-	return (sym && is_(sym->get_()));
+	Symbol* const sym = dynamic_<Symbol>(str);
+	if (sym)
+	{
+		return is_(sym->get_());
+	}
+	Lake* const lake = dynamic_<Lake>(str);
+	return lake && is_(lake->get_());
 }
 
 template <typename F>
