@@ -510,14 +510,10 @@ private:
 		{
 			const Ptr thing = Expression::evaluate_(_vector[0], local);
 			const Ptr iterable = Expression::evaluate_(_vector[1], local);
-			const Ptr eater = thing->eater_();
-			if (!eater->is_nothing_())
+			const Ptr feeder = iterable->feeder(thing->eater_());
+			if (!feeder->is_nothing_())
 			{
-				const Ptr feeder = iterable->feeder(eater);
-				if (!feeder->is_nothing_())
-				{
-					return thing->invoke(feeder);
-				}
+				return thing->invoke(feeder);
 			}
 			return thing->invoke(iterable->iterator_());
 		}
@@ -561,14 +557,10 @@ private:
 			const Ptr thing = Expression::evaluate_(_vector[0], local);
 			const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(_vector[1], local));
 			const Ptr iterable = Expression::evaluate_(_vector[2], local);
-			const Ptr eater = member->eater_();
-			if (!eater->is_nothing_())
+			const Ptr feeder = iterable->feeder(member->eater_());
+			if (!feeder->is_nothing_())
 			{
-				const Ptr feeder = iterable->feeder(eater);
-				if (!feeder->is_nothing_())
-				{
-					return operate_(thing.get(), member, feeder);
-				}
+				return operate_(thing.get(), member, feeder);
 			}
 			return operate_(thing.get(), member, iterable->iterator_());
 		}

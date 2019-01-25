@@ -1455,6 +1455,10 @@ public:
 
 	virtual inline const Ptr feeder(const Ptr& eater) const override
 	{
+		if (eater->is_nothing_())
+		{
+			return eater;
+		}
 		return Feeder::mut_(me_(), eater);
 	}
 
