@@ -291,7 +291,7 @@ private:
 								const Ptr it = flock->iterator_();
 								for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 								{
-									Lake* const lake = dynamic_<Lake>(i->invoke_("to_lake"));
+									Lake* const lake = dynamic_<Lake>(i->invoke_("to_lake")); //TODO immediate?
 									if (!lake)
 									{
 										throw tok->error_("Parser ERROR: invalid import_ filename");
