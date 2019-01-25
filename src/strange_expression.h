@@ -51,7 +51,6 @@ public:
 		, _statement{ statement }
 		, _member{ member }
 		, _flock{ flock }
-		, _vector{ static_<Flock>(_flock)->get_() }
 		, _parent{ Weak::mut_(nothing_()) }
 	{
 	}
@@ -334,11 +333,6 @@ public:
 		}
 	}
 
-	inline const Ptr iterator_(const Ptr& local) const
-	{
-		return Iterator::mut_(_vector, local);
-	}
-
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Expression");
@@ -355,7 +349,6 @@ private:
 	const Ptr _statement;
 	const MemberPtr _member;
 	const Ptr _flock;
-	const std::vector<Ptr>& _vector;
 	const Ptr _parent;
 
 	inline const Ptr _stack_(const std::string& str, const int64_t stack = 1, const Ptr& misunderstanding = Misunderstanding::mut_()) const
@@ -422,7 +415,7 @@ private:
 
 	inline const Ptr _thing_(const Ptr& local) const
 	{
-		return _vector[0];
+		return static_<Flock>(_flock)->get_()[0];
 	}
 
 	inline void _generate_strange_thing_(River* const river) const
@@ -495,8 +488,9 @@ private:
 	{
 		try
 		{
-			const Ptr thing = Expression::evaluate_(_vector[0], local);
-			return thing->invoke(Expression::evaluate_(_vector[1], local));
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = Expression::evaluate_(vec[0], local);
+			return thing->invoke(Expression::evaluate_(vec[1], local));
 		}
 		catch (const std::exception& err)
 		{
@@ -508,8 +502,9 @@ private:
 	{
 		try
 		{
-			const Ptr thing = Expression::evaluate_(_vector[0], local);
-			const Ptr iterable = Expression::evaluate_(_vector[1], local);
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = Expression::evaluate_(vec[0], local);
+			const Ptr iterable = Expression::evaluate_(vec[1], local);
 			const Ptr feeder = iterable->feeder(thing->eater_());
 			if (!feeder->is_nothing_())
 			{
@@ -527,8 +522,9 @@ private:
 	{
 		try
 		{
-			const Ptr thing = Expression::evaluate_(_vector[0], local);
-			return Method::with_name_(thing, Expression::evaluate_(_vector[1], local));
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = Expression::evaluate_(vec[0], local);
+			return Method::with_name_(thing, Expression::evaluate_(vec[1], local));
 		}
 		catch (const std::exception& err)
 		{
@@ -540,9 +536,10 @@ private:
 	{
 		try
 		{
-			const Ptr thing = Expression::evaluate_(_vector[0], local);
-			const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(_vector[1], local));
-			return operate_(thing.get(), member, Expression::evaluate_(_vector[2], local));
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = Expression::evaluate_(vec[0], local);
+			const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(vec[1], local));
+			return operate_(thing.get(), member, Expression::evaluate_(vec[2], local));
 		}
 		catch (const std::exception& err)
 		{
@@ -554,9 +551,10 @@ private:
 	{
 		try
 		{
-			const Ptr thing = Expression::evaluate_(_vector[0], local);
-			const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(_vector[1], local));
-			const Ptr iterable = Expression::evaluate_(_vector[2], local);
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = Expression::evaluate_(vec[0], local);
+			const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(vec[1], local));
+			const Ptr iterable = Expression::evaluate_(vec[2], local);
 			const Ptr feeder = iterable->feeder(member->eater_());
 			if (!feeder->is_nothing_())
 			{
@@ -574,20 +572,21 @@ private:
 	{
 		try
 		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			Shoal* const shoal = static_<Shoal>(local);
 			Shoal* const shared = static_<Shoal>(shoal->at_("$"));
-			const size_t size_1 = _vector.size() - 1;
+			const size_t size_1 = vec.size() - 1;
 			Ptr param;
 			for (size_t i = 0; i < size_1; ++i)
 			{
 				if (i % 2 == 0)
 				{
-					param = _vector[i];
+					param = vec[i];
 					continue;
 				}
-				shared->update_(param, Expression::evaluate_(_vector[i], local));
+				shared->update_(param, Expression::evaluate_(vec[i], local));
 			}
-			return Expression::evaluate_(_vector[size_1], local);
+			return Expression::evaluate_(vec[size_1], local);
 		}
 		catch (const std::exception& err)
 		{
@@ -599,28 +598,29 @@ private:
 	{
 		try
 		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			Shoal* const shoal = static_<Shoal>(local);
 			const Ptr it = shoal->at_("&");
-			const size_t size_1 = _vector.size() - 1;
+			const size_t size_1 = vec.size() - 1;
 			Ptr param;
 			Ptr value;
 			for (size_t i = 0; i < size_1; ++i)
 			{
 				if (i % 2 == 0)
 				{
-					param = _vector[i];
+					param = vec[i];
 					continue;
 				}
 				value = it->next_();
 				if (value->is_("."))
 				{
-					value = Expression::evaluate_(_vector[i], local); // default
+					value = Expression::evaluate_(vec[i], local); // default
 				}
 				shoal->update_(param, value);
 			}
 			try
 			{
-				return Expression::evaluate_(_vector[size_1], local);
+				return Expression::evaluate_(vec[size_1], local);
 			}
 			catch (const Return& r)
 			{
@@ -635,7 +635,8 @@ private:
 
 	inline const Ptr _shared_scope_(const Ptr& local) const
 	{
-		const Ptr result = static_<Shoal>(_vector[0])->at_(_vector[1]);
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+		const Ptr result = static_<Shoal>(vec[0])->at_(vec[1]);
 		if (result->is_nothing_())
 		{
 			throw _stack_("not found in shared scope");
@@ -646,10 +647,11 @@ private:
 	inline const Ptr _relative_scope_(const Ptr& local) const
 	{
 		// search scope from bottom to top
-		Shoal* const shoal = static_<Shoal>(_vector[0]);
-		const Ptr key = _vector[1];
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+		Shoal* const shoal = static_<Shoal>(vec[0]);
+		const Ptr key = vec[1];
 		const std::string& key_str = static_<Symbol>(key)->get_();
-		std::string scope = static_<Symbol>(_vector[2])->get_();
+		std::string scope = static_<Symbol>(vec[2])->get_();
 		for (;;)
 		{
 			if (scope.empty())
@@ -690,7 +692,7 @@ private:
 	{
 		try
 		{
-			return Flock::mut(Expression::evaluate_(_vector[0], local));
+			return Flock::mut(Expression::evaluate_(static_<Flock>(_flock)->get_()[0], local));
 		}
 		catch (const std::exception& err)
 		{
@@ -726,7 +728,7 @@ private:
 	{
 		try
 		{
-			throw Break(Expression::evaluate_(_vector[0], local), false);
+			throw Break(Expression::evaluate_(static_<Flock>(_flock)->get_()[0], local), false);
 		}
 		catch (const std::exception& err)
 		{
@@ -738,7 +740,7 @@ private:
 	{
 		try
 		{
-			throw Break(Expression::evaluate_(_vector[0], local), true);
+			throw Break(Expression::evaluate_(static_<Flock>(_flock)->get_()[0], local), true);
 		}
 		catch (const std::exception& err)
 		{
@@ -750,7 +752,7 @@ private:
 	{
 		try
 		{
-			throw Return(Expression::evaluate_(_vector[0], local));
+			throw Return(Expression::evaluate_(static_<Flock>(_flock)->get_()[0], local));
 		}
 		catch (const std::exception& err)
 		{
@@ -763,10 +765,11 @@ private:
 		std::string error;
 		try
 		{
-			const size_t size = _vector.size();
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const size_t size = vec.size();
 			for (size_t i = 0; i < size; ++i)
 			{
-				const Ptr thing = Expression::evaluate_(_vector[i], local);
+				const Ptr thing = Expression::evaluate_(vec[i], local);
 				const Ptr to_lake = thing->invoke_("to_lake");
 				Lake* const lake = Thing::dynamic_<Lake>(to_lake);
 				if (lake)
@@ -786,7 +789,7 @@ private:
 	{
 		try
 		{
-			throw Expression::evaluate_(_vector[0], local);
+			throw Expression::evaluate_(static_<Flock>(_flock)->get_()[0], local);
 		}
 		catch (const std::exception& err)
 		{
@@ -796,9 +799,10 @@ private:
 
 	inline const Ptr _catch_(const Ptr& local) const
 	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 		try
 		{
-			return Expression::evaluate_(_vector[0], local);
+			return Expression::evaluate_(vec[0], local);
 		}
 		catch (const Ptr& thing)
 		{
@@ -806,12 +810,12 @@ private:
 			{
 				static_<Shoal>(local)->update_("%", thing);
 			}
-			return Expression::evaluate_(_vector[1], local);
+			return Expression::evaluate_(vec[1], local);
 		}
 		catch (const std::exception& err)
 		{
 			static_<Shoal>(local)->update_("%", _stack_(err.what()));
-			return Expression::evaluate_(_vector[1], local);
+			return Expression::evaluate_(vec[1], local);
 		}
 	}
 
@@ -819,11 +823,12 @@ private:
 	{
 		try
 		{
-			const size_t size = _vector.size();
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const size_t size = vec.size();
 			Ptr result = nothing_();
 			for (size_t i = 0; i < size; ++i)
 			{
-				result = Expression::evaluate_(_vector[i], local);
+				result = Expression::evaluate_(vec[i], local);
 			}
 			return result;
 		}
@@ -837,9 +842,10 @@ private:
 	{
 		try
 		{
-			if (!Expression::evaluate_(_vector[0], local)->is_nothing_())
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			if (!Expression::evaluate_(vec[0], local)->is_nothing_())
 			{
-				return Expression::evaluate_(_vector[1], local);
+				return Expression::evaluate_(vec[1], local);
 			}
 			return nothing_();
 		}
@@ -853,11 +859,12 @@ private:
 	{
 		try
 		{
-			if (!Expression::evaluate_(_vector[0], local)->is_nothing_())
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			if (!Expression::evaluate_(vec[0], local)->is_nothing_())
 			{
-				return Expression::evaluate_(_vector[1], local);
+				return Expression::evaluate_(vec[1], local);
 			}
-			return Expression::evaluate_(_vector[2], local);
+			return Expression::evaluate_(vec[2], local);
 		}
 		catch (const std::exception& err)
 		{
@@ -869,12 +876,13 @@ private:
 	{
 		try
 		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			Ptr result = nothing_();
-			while (!Expression::evaluate_(_vector[0], local)->is_nothing_())
+			while (!Expression::evaluate_(vec[0], local)->is_nothing_())
 			{
 				try
 				{
-					result = Expression::evaluate_(_vector[1], local);
+					result = Expression::evaluate_(vec[1], local);
 				}
 				catch (const Break& b)
 				{
@@ -898,12 +906,13 @@ private:
 	{
 		try
 		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			Ptr result = nothing_();
 			do
 			{
 				try
 				{
-					result = Expression::evaluate_(_vector[1], local);
+					result = Expression::evaluate_(vec[1], local);
 				}
 				catch (const Break& b)
 				{
@@ -914,7 +923,7 @@ private:
 					}
 					break;
 				}
-			} while (!Expression::evaluate_(_vector[0], local)->is_nothing_());
+			} while (!Expression::evaluate_(vec[0], local)->is_nothing_());
 			return result;
 		}
 		catch (const std::exception& err)
@@ -927,14 +936,15 @@ private:
 	{
 		try
 		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			Ptr result = nothing_();
-			for (Expression::evaluate_(_vector[0], local);
-				!Expression::evaluate_(_vector[1], local)->is_nothing_();
-				Expression::evaluate_(_vector[2], local))
+			for (Expression::evaluate_(vec[0], local);
+				!Expression::evaluate_(vec[1], local)->is_nothing_();
+				Expression::evaluate_(vec[2], local))
 			{
 				try
 				{
-					result = Expression::evaluate_(_vector[3], local);
+					result = Expression::evaluate_(vec[3], local);
 				}
 				catch (const Break& b)
 				{
@@ -952,6 +962,11 @@ private:
 		{
 			throw _stack_(err.what());
 		}
+	}
+
+	inline const Ptr iterator_(const Ptr& local) const
+	{
+		return Iterator::mut_(static_<Flock>(_flock)->get_(), local);
 	}
 
 	class Iterator : public Mutable
