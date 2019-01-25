@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 
+//#define STRANGE_TEST_VERBOSE 1
+
 #include "../src/strange.h"
 
 namespace
@@ -41,7 +43,9 @@ TEST(StrangeRiver, Get) {
 		{
 			break;
 		}
+#ifdef STRANGE_TEST_VERBOSE
 		std::cout << "got:" << c << std::endl;
+#endif
 	}
 }
 
@@ -65,7 +69,9 @@ TEST(StrangeTokenizer, Next) {
 		ASSERT_NE(token, (Token*)(0));
 		Symbol* const symbol = Thing::dynamic_<Symbol>(token->symbol());
 		ASSERT_NE(symbol, (Symbol*)(0));
+#ifdef STRANGE_TEST_VERBOSE
 		std::cout << "got: " << symbol->get_() << std::endl;
+#endif
 	}
 }
 
