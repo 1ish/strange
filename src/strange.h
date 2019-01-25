@@ -9,6 +9,7 @@
 #include "strange_fence.h"
 #include "strange_creature.h"
 #include "strange_expression.h"
+#include "strange_generator.h"
 #include "strange_function.h"
 #include "strange_token.h"
 #include "strange_tokenizer.h"
@@ -86,6 +87,9 @@ inline void Thing::share_(const Ptr& shoal)
 
 	// strange_fence
 	Fence::share_(shoal);
+
+	// strange_generator
+	Generator::share_(shoal);
 }
 
 } // namespace strange
