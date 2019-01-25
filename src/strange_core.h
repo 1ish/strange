@@ -89,7 +89,7 @@ public:
 	template <typename T>
 	static inline T* const static_(const Ptr& ptr)
 	{
-#ifdef _DEBUG
+#ifdef STRANGE_CHECK_STATIC_CASTS
 		Thing* const thing = ptr.get();
 		if (!dynamic_cast<T*>(thing))
 		{
@@ -949,7 +949,7 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-#ifdef _DEBUG
+#ifdef STRANGE_CHECK_OPERATOR_THING
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
 		{
@@ -1017,7 +1017,7 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-#ifdef _DEBUG
+#ifdef STRANGE_CHECK_OPERATOR_THING
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
 		{
