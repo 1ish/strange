@@ -311,53 +311,33 @@ private:
 							continue;
 						}
 					}
-					// local at name
-					flk->push_back_(Expression::fin_(token, local, Flock::mut_())); // local
-					_wrap_(token, at, flock);
-					_wrap_(token, symbol, flock);
+					// local at/update name
+					flk->push_back_(symbol);
 					cont = _update_(scope, shoal, flock);
-					result = Expression::fin_(token, invoke, flock);
+					result = Expression::fin_(token, local, flock);
 				}
 				else if (tag == 'P') // punctuation
 				{
-					if (symbol->is_("$")) // shared at
+					if (symbol->is_("$")) // shared at/update
 					{
-						const Ptr nested = Flock::mut_();
-						static_<Flock>(nested)->push_back_(Expression::fin_(token, local, Flock::mut_())); // local
-						_wrap_(token, at, nested);
-						_wrap_(token, symbol, nested);
-
-						flk->push_back_(Expression::fin_(token, invoke, nested));
-						_wrap_(token, at, flock);
-						cont = _at_(scope, shoal, flock);
-						result = Expression::fin_(token, invoke, flock);
+						_shared_(flock);
+						cont = _update_(scope, shoal, flock);
+						result = Expression::fin_(token, sym_("shared_"), flock);
 					}
-					else if (symbol->is_("|")) // me dot
+					else if (symbol->is_("|")) // me
 					{
-						const Ptr nested = Flock::mut_();
-						static_<Flock>(nested)->push_back_(Expression::fin_(token, local, Flock::mut_())); // local
-						_wrap_(token, at, nested);
-						_wrap_(token, symbol, nested);
-
-						flk->push_back_(Expression::fin_(token, invoke, nested));
-						_dot_(scope, shoal, statement, flock);
-						result = Expression::fin_(token, smt->get_(), flock);
+						result = Expression::fin_(token, sym_("me_"), flock);
 					}
 					else if (symbol->is_("..")) // iterator
 					{
-						flk->push_back_(Expression::fin_(token, local, Flock::mut_())); // local
-						_wrap_(token, at, flock);
-						_wrap_(token, sym_("&"), flock);
-						result = Expression::fin_(token, invoke, flock);
+						flk->push_back_(sym_("&"));
+						result = Expression::fin_(token, local, flock);
 					}
 					else if (symbol->is_("^^")) // iterator next
 					{
 						const Ptr nested = Flock::mut_();
-						static_<Flock>(nested)->push_back_(Expression::fin_(token, local, Flock::mut_())); // local
-						_wrap_(token, at, nested);
-						_wrap_(token, sym_("&"), nested);
-
-						flk->push_back_(Expression::fin_(token, invoke, nested));
+						static_<Flock>(nested)->push_back_(sym_("&"));
+						flk->push_back_(Expression::fin_(token, local, nested));
 						_wrap_(token, sym_("next"), flock);
 						result = Expression::fin_(token, invoke, flock);
 					}
@@ -708,26 +688,26 @@ private:
 		{
 			throw tok->error_("Parser ERROR: dot stop");
 		}
-		Flock* const flk = static_<Flock>(flock);
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
 			throw tok->error_("Tokenizer ERROR");
 		}
-		const Ptr symbol = tok->symbol();
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
 			throw tok->error_("Parser ERROR: dot literal");
 		}
-		else if (tag == 'N') // name
+		if (tag == 'P') // punctuation
+		{
+			throw tok->error_("Parser ERROR: dot punctuation");
+		}
+		const Ptr symbol = tok->symbol();
+		Flock* const flk = static_<Flock>(flock);
+		if (tag == 'N') // name
 		{
 			_next_();
 			_wrap_(token, symbol, flock);
 			_member_(scope, shoal, statement, flock);
-		}
-		else if (tag == 'P') // punctuation
-		{
-			throw tok->error_("Parser ERROR: dot punctuation");
 		}
 	}
 
@@ -1090,6 +1070,34 @@ private:
 		return is_map;
 	}
 
+	inline void _shared_(const Ptr& flock)
+	{
+		const Ptr token = _token_();
+		Token* const tok = static_<Token>(token);
+		if (token->is_("."))
+		{
+			throw tok->error_("Parser ERROR: shared stop");
+		}
+		const char tag = tok->tag_();
+		if (tag == 'E') // error
+		{
+			throw tok->error_("Tokenizer ERROR");
+		}
+		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
+		{
+			throw tok->error_("Parser ERROR: shared literal");
+		}
+		if (tag == 'P') // punctuation
+		{
+			throw tok->error_("Parser ERROR: shared punctuation");
+		}
+		if (tag == 'N') // name
+		{
+			_next_();
+			static_<Flock>(flock)->push_back_(tok->symbol());
+		}
+	}
+
 	inline const Ptr _scope_(const Ptr& scope, const Ptr& shoal, const Ptr& flock, const bool relative)
 	{
 		Ptr token;
@@ -1208,7 +1216,11 @@ private:
 		if (tag == 'P' && symbol->is_(":="))
 		{
 			_next_();
-			flk->update_(flk->size_() - 2, Expression::fin_(token, sym_("update")));
+			const int64_t size = flk->size_();
+			if (size >= 2)
+			{
+				flk->update_(size - 2, Expression::fin_(token, sym_("update")));
+			}
 			flk->push_back_(_parse_(scope, shoal));
 			return false; // break
 		}

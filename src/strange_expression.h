@@ -76,11 +76,35 @@ public:
 		const int64_t size = static_<Flock>(flock)->size_();
 		if (statement->is_("local_"))
 		{
-			if (size == 0)
+			if (size == 1)
 			{
-				return fin_(token, statement, &Expression::_local_, flock);
+				return fin_(token, statement, &Expression::_local_at_, flock);
+			}
+			if (size == 2)
+			{
+				return fin_(token, statement, &Expression::_local_update_, flock);
 			}
 			throw Disagreement("local_ expression of wrong size");
+		}
+		else if (statement->is_("shared_"))
+		{
+			if (size == 1)
+			{
+				return fin_(token, statement, &Expression::_shared_at_, flock);
+			}
+			if (size == 2)
+			{
+				return fin_(token, statement, &Expression::_shared_update_, flock);
+			}
+			throw Disagreement("shared_ expression of wrong size");
+		}
+		else if (statement->is_("me_"))
+		{
+			if (size == 0)
+			{
+				return fin_(token, statement, &Expression::_me_, flock);
+			}
+			throw Disagreement("me_ expression of wrong size");
 		}
 		else if (statement->is_("thing_"))
 		{
@@ -353,9 +377,54 @@ private:
 		return misunderstanding;
 	}
 
-	inline const Ptr _local_(const Ptr& local) const
+	inline const Ptr _local_at_(const Ptr& local) const
 	{
-		return local;
+		return static_<Shoal>(local)->at_(static_<Flock>(_flock)->get_()[0]);
+	}
+
+	inline const Ptr _local_update_(const Ptr& local) const
+	{
+		try
+		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr value = Expression::evaluate_(vec[1], local);
+			static_<Shoal>(local)->update_(vec[0], value);
+			return value;
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
+	inline const Ptr _shared_at_(const Ptr& local) const
+	{
+		return static_<Shoal>(static_<Shoal>(local)->at_("$"))->at_(static_<Flock>(_flock)->get_()[0]);
+	}
+
+	inline const Ptr _shared_update_(const Ptr& local) const
+	{
+		try
+		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr value = Expression::evaluate_(vec[1], local);
+			static_<Shoal>(static_<Shoal>(local)->at_("$"))->update_(vec[0], value);
+			return value;
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
+	inline const Ptr _me_(const Ptr& local) const
+	{
+		const Ptr thing = static_<Shoal>(local)->at_("|");
+		if (thing->is_nothing_())
+		{
+			throw _stack_("me accessed without a creature");
+		}
+		return thing;
 	}
 
 	inline const Ptr _thing_(const Ptr& local) const
@@ -365,10 +434,10 @@ private:
 
 	inline const Ptr _invoke_(const Ptr& local) const
 	{
-		const Ptr it = iterator_(local);
-		const Ptr thing = it->next_();
 		try
 		{
+			const Ptr it = iterator_(local);
+			const Ptr thing = it->next_();
 			return thing->invoke(it);
 		}
 		catch (const std::exception& err)
