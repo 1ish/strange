@@ -1586,11 +1586,10 @@ public:
 
 		inline void update_(const Ptr& key, const Ptr& value)
 		{
-			if (key->finalized_() && value->finalized_())
-			{
-				std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-				static_<Shoal>(_shoal)->update_(key, value);
-			}
+			key->freeze_();
+			value->freeze_();
+			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+			static_<Shoal>(_shoal)->update_(key, value);
 		}
 
 		inline const Ptr update(const Ptr& it)
@@ -1603,19 +1602,16 @@ public:
 
 		inline const bool insert_(const Ptr& key, const Ptr& value)
 		{
-			if (key->finalized_() && value->finalized_())
-			{
-				std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-				return static_<Shoal>(_shoal)->insert_(key, value);
-			}
-			return false;
+			key->freeze_();
+			value->freeze_();
+			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+			return static_<Shoal>(_shoal)->insert_(key, value);
 		}
 
 		inline const Ptr insert(const Ptr& it)
 		{
 			const Ptr key = it->next_();
-			const Ptr value = it->next_();
-			return boolean_(insert_(key, value));
+			return boolean_(insert_(key, it->next_()));
 		}
 
 	private:
@@ -2159,14 +2155,18 @@ public:
 
 		inline void push_back_(const Ptr& item)
 		{
+			item->freeze_();
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
 			static_<Flock>(_flock)->push_back_(item);
 		}
 
 		inline const Ptr push_back(const Ptr& it)
 		{
-			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-			return static_<Flock>(_flock)->push_back(it);
+			for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+			{
+				push_back_(i);
+			}
+			return me_();
 		}
 
 		inline const int64_t size_() const
@@ -2812,12 +2812,9 @@ public:
 
 		inline const bool insert_(const Ptr& item)
 		{
-			if (item->finalized_())
-			{
-				std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-				return static_<Herd>(_herd)->insert_(item);
-			}
-			return false;
+			item->freeze_();
+			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+			return static_<Herd>(_herd)->insert_(item);
 		}
 
 		inline const Ptr insert(const Ptr& it)
