@@ -494,7 +494,7 @@ private:
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			const Ptr thing = Expression::evaluate_(vec[0], local);
-			return Method::with_name_(thing, Expression::evaluate_(vec[1], local));
+			return Method::with_name_(thing, vec[1]);
 		}
 		catch (const std::exception& err)
 		{
