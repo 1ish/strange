@@ -403,7 +403,10 @@ private:
 				{
 					flk->push_back_(result);
 					cont = _thing_(scope, shoal, statement, flock);
-					result = Expression::fin_(token, smt->get_(), flock);
+					if (cont)
+					{
+						result = Expression::fin_(token, smt->get_(), flock);
+					}
 				}
 			}
 		}
@@ -453,6 +456,7 @@ private:
 				_list_(scope, shoal, flock, symbol, sym_(">>"));
 				smt->set_(sym_("invoke_iterator_"));
 			}
+			//TODO remove?
 			else if (symbol->is_(")") || symbol->is_("]") || symbol->is_("}") || symbol->is_(">>") || symbol->is_(","))
 			{
 				return false; // break
@@ -681,7 +685,8 @@ private:
 			}
 			else
 			{
-				throw tok->error_("Parser ERROR: thing punctuation");
+				smt->set_(sym_("thing_")); //TODO remove?
+				return false; // break
 			}
 		}
 		else

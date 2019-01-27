@@ -1,3 +1,9 @@
-(
-	$$strange::River::out[].write["hello world\n"]
+(	out := $$strange::River::out
+,	out[].write["hello world\n"]
+,	x := 3
+,	{
+		'f'::function_(a := 1)(a+2)
+	}
+,	y := $$f[x+10]
+,	out[].write[y.to_symbol[], "\n"]
 )
