@@ -349,7 +349,7 @@ public:
 
 	inline void generate_(const Ptr& generator)
 	{
-		generator->invoke_("generate_" + static_<Symbol>(_statement)->get_() + "code", _flock);
+		generator->invoke_("generate_" + static_<Symbol>(_statement)->get_() + "code", _token, _flock);
 	}
 
 	virtual inline const Ptr type_() const override

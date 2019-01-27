@@ -101,32 +101,34 @@ public:
 		return get_();
 	}
 
-	virtual inline const Ptr generate_local_code(const Ptr& it)
+	virtual inline void generate_local_code_(const Token& tok, const std::vector<Ptr>& vec, const Ptr& me, River& riv)
 	{
-		River* const riv = static_<River>(_river);
-		const std::vector<Ptr>& vec = static_<Flock>(it->next_())->get_();
-		const Ptr me = me_();
 
+	}
+
+	inline const Ptr generate_local_code(const Ptr& it)
+	{
+		const Token& tok = *static_<Token>(it->next_());
+		generate_local_code_(tok, static_<Flock>(it->next_())->get_(), me_(), *static_<River>(_river));
 		return _river;
 	}
 
-	virtual inline const Ptr generate_thing_code(const Ptr& it)
+	virtual inline void generate_thing_code_(const Token& tok, const std::vector<Ptr>& vec, const Ptr& me, River& riv)
 	{
-		River* const riv = static_<River>(_river);
-		const std::vector<Ptr>& vec = static_<Flock>(it->next_())->get_();
-		const Ptr me = me_();
 
+	}
+
+	inline const Ptr generate_thing_code(const Ptr& it)
+	{
+		const Token& tok = *static_<Token>(it->next_());
+		generate_thing_code_(tok, static_<Flock>(it->next_())->get_(), me_(), *static_<River>(_river));
 		return _river;
 	}
 
-	virtual inline const Ptr generate_invoke_code(const Ptr& it)
+	virtual inline void generate_invoke_code_(const Token& tok, const std::vector<Ptr>& vec, const Ptr& me, River& riv)
 	{
-		River* const riv = static_<River>(_river);
-		const std::vector<Ptr>& vec = static_<Flock>(it->next_())->get_();
-		const Ptr me = me_();
-
 		static_<Expression>(vec[0])->generate_(me);
-		riv->write_("[");
+		riv.write_("[");
 		bool first = true;
 		for (size_t i = 1; i < vec.size(); ++i)
 		{
@@ -136,11 +138,17 @@ public:
 			}
 			else
 			{
-				riv->write_(",");
+				riv.write_(",");
 			}
 			static_<Expression>(vec[i])->generate_(me);
 		}
-		riv->write_("]");
+		riv.write_("]");
+	}
+
+	inline const Ptr generate_invoke_code(const Ptr& it)
+	{
+		const Token& tok = *static_<Token>(it->next_());
+		generate_thing_code_(tok, static_<Flock>(it->next_())->get_(), me_(), *static_<River>(_river));
 		return _river;
 	}
 
