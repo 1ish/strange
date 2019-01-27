@@ -146,6 +146,14 @@ public:
 			}
 			throw Disagreement("method_ expression of wrong size");
 		}
+		else if (statement->is_("operate_"))
+		{
+			if (size >= 2)
+			{
+				return fin_(token, statement, &Expression::_operate_, flock);
+			}
+			throw Disagreement("operate_ expression of wrong size");
+		}
 		else if (statement->is_("operate_iterator_"))
 		{
 			if (size == 3)
@@ -436,7 +444,7 @@ private:
 	{
 		try
 		{
-			const Ptr it = iterator_(local);
+			const Ptr it = _iterator_(local);
 			const Ptr thing = it->next_();
 			return thing->invoke(it);
 		}
@@ -494,13 +502,36 @@ private:
 		}
 	}
 
+	inline const Ptr _operate_(const Ptr& local) const
+	{
+		try
+		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = Expression::evaluate_(vec[0], local);
+			const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
+			if (member->is_nothing_())
+			{
+				throw Dismemberment(thing->type_(), vec[1]);
+			}
+			return operate_(thing.get(), member, _iterator_(local, 2));
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
 	inline const Ptr _operate_iterator_(const Ptr& local) const
 	{
 		try
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			const Ptr thing = Expression::evaluate_(vec[0], local);
-			const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(vec[1], local));
+			const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
+			if (member->is_nothing_())
+			{
+				throw Dismemberment(thing->type_(), vec[1]);
+			}
 			return operate_(thing.get(), member, Expression::evaluate_(vec[2], local));
 		}
 		catch (const std::exception& err)
@@ -515,7 +546,11 @@ private:
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			const Ptr thing = Expression::evaluate_(vec[0], local);
-			const Ptr member = static_<Shoal>(thing->pub_())->at_(Expression::evaluate_(vec[1], local));
+			const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
+			if (member->is_nothing_())
+			{
+				throw Dismemberment(thing->type_(), vec[1]);
+			}
 			const Ptr iterable = Expression::evaluate_(vec[2], local);
 			const Ptr feeder = iterable->feeder(member->eater_());
 			if (!feeder->is_nothing_())
@@ -642,7 +677,7 @@ private:
 	{
 		try
 		{
-			return Flock::mut(iterator_(local));
+			return Flock::mut(_iterator_(local));
 		}
 		catch (const std::exception& err)
 		{
@@ -666,7 +701,7 @@ private:
 	{
 		try
 		{
-			return Shoal::mut(iterator_(local));
+			return Shoal::mut(_iterator_(local));
 		}
 		catch (const std::exception& err)
 		{
@@ -678,7 +713,7 @@ private:
 	{
 		try
 		{
-			return Herd::mut(iterator_(local));
+			return Herd::mut(_iterator_(local));
 		}
 		catch (const std::exception& err)
 		{
@@ -926,19 +961,19 @@ private:
 		}
 	}
 
-	inline const Ptr iterator_(const Ptr& local) const
+	inline const Ptr _iterator_(const Ptr& local, const int64_t pos = 0) const
 	{
-		return Iterator::mut_(static_<Flock>(_flock)->get_(), local);
+		return Iterator::mut_(static_<Flock>(_flock)->get_(), local, pos);
 	}
 
 	class Iterator : public Mutable
 	{
 	public:
-		inline Iterator(const std::vector<Ptr>& vec, const Ptr& local)
+		inline Iterator(const std::vector<Ptr>& vec, const Ptr& local, const int64_t pos)
 			: Mutable{}
 			, _elements{ vec }
 			, _local{ local }
-			, _pos{ 0 }
+			, _pos{ pos }
 		{
 		}
 
@@ -953,14 +988,12 @@ private:
 
 		virtual inline const Ptr copy_() const override
 		{
-			const Ptr result = mut_(_elements, _local);
-			static_<Iterator>(result)->_pos = _pos;
-			return result;
+			return mut_(_elements, _local, _pos);
 		}
 
-		static inline const Ptr mut_(const std::vector<Ptr>& vec, const Ptr& local)
+		static inline const Ptr mut_(const std::vector<Ptr>& vec, const Ptr& local, const int64_t pos)
 		{
-			return make_<Iterator>(vec, local);
+			return make_<Iterator>(vec, local, pos);
 		}
 
 		virtual inline const Ptr type_() const override
