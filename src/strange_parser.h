@@ -97,7 +97,9 @@ public:
 	{
 		const Ptr shoal = Shoal::mut_();
 		Thing::share_(shoal);
-		return _parse_(nothing_(), shoal);
+		const Ptr expression = _parse_(nothing_(), shoal);
+		shoal->finalize_();
+		return expression;
 	}
 
 	virtual inline const Ptr type_() const override
