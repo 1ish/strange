@@ -64,9 +64,9 @@ public:
 			shoal->update_("mut", Static::fin_(&Generator::mut, "river"));
 			shoal->update_("set", Member<Generator>::fin_(&Generator::set, "river"));
 			shoal->update_("get", Const<Generator>::fin_(&Generator::get));
-			shoal->update_("generate_local_code", Member<Generator>::fin_(&Generator::generate_local_code, "flock"));
-			shoal->update_("generate_thing_code", Member<Generator>::fin_(&Generator::generate_thing_code, "flock"));
-			shoal->update_("generate_invoke_code", Member<Generator>::fin_(&Generator::generate_invoke_code, "flock"));
+			shoal->update_("generate_local_code", Member<Generator>::fin_(&Generator::generate_local_code, "token", "flock"));
+			shoal->update_("generate_thing_code", Member<Generator>::fin_(&Generator::generate_thing_code, "token", "flock"));
+			shoal->update_("generate_invoke_code", Member<Generator>::fin_(&Generator::generate_invoke_code, "token", "flock"));
 			shoal->finalize_();
 			return pub;
 		}();
