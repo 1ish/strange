@@ -181,8 +181,7 @@ private:
 					{
 						if (_statement_(scope, shoal, flock, true, symbol->is_("lambda_"))) // parameters/capture
 						{
-							const int64_t size = flk->size_();
-							if (size % 2 == 0)
+							if (flk->size_() % 2 == 0)
 							{
 								flk->push_back_(_parse_(scope, shoal));
 								result = Expression::fin_(token, symbol, flock);
@@ -254,8 +253,7 @@ private:
 					{
 						if (_statement_(scope, shoal, flock))
 						{
-							const int64_t size = flk->size_();
-							if (size == 1)
+							if (flk->size_() == 1)
 							{
 								flk->push_back_(_parse_(scope, shoal));
 								result = Expression::fin_(token, symbol, flock);
@@ -271,8 +269,7 @@ private:
 					{
 						if (_statement_(scope, shoal, flock))
 						{
-							const int64_t size = flk->size_();
-							if (size == 3)
+							if (flk->size_() == 3)
 							{
 								flk->push_back_(_parse_(scope, shoal));
 								result = Expression::fin_(token, symbol, flock);

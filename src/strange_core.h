@@ -1551,7 +1551,7 @@ public:
 			s->update_("strange::Shoal::Concurrent::mut", Static::fin_(&Shoal::Concurrent::mut, "shoal"));
 		}
 
-		static inline const Ptr mut_(const Ptr& shoal)
+		static inline const Ptr mut_(const Ptr& shoal = Shoal::mut_())
 		{
 			return make_<Concurrent>(shoal);
 		}
@@ -2131,7 +2131,7 @@ public:
 			s->update_("strange::Flock::Concurrent::mut", Static::fin_(&Flock::Concurrent::mut, "flock"));
 		}
 
-		static inline const Ptr mut_(const Ptr& flock)
+		static inline const Ptr mut_(const Ptr& flock = Flock::mut_())
 		{
 			return make_<Concurrent>(flock);
 		}
@@ -2777,7 +2777,7 @@ public:
 			s->update_("strange::Herd::Concurrent::mut", Static::fin_(&Herd::Concurrent::mut, "herd"));
 		}
 
-		static inline const Ptr mut_(const Ptr& herd)
+		static inline const Ptr mut_(const Ptr& herd = Herd::mut_())
 		{
 			return make_<Concurrent>(herd);
 		}

@@ -342,7 +342,7 @@ public:
 	{
 		const Ptr local = Shoal::mut_();
 		Shoal* const loc = static_<Shoal>(local);
-		loc->update_("$", Shoal::mut_());
+		loc->update_("$", Shoal::Concurrent::mut_());
 		loc->update_("&", stop_());
 		return evaluate_(expression, local);
 	}
@@ -407,7 +407,7 @@ private:
 
 	inline const Ptr _shared_at_(const Ptr& local) const
 	{
-		return static_<Shoal>(static_<Shoal>(local)->at_("$"))->at_(static_<Flock>(_flock)->get_()[0]);
+		return static_<Shoal::Concurrent>(static_<Shoal>(local)->at_("$"))->at_(static_<Flock>(_flock)->get_()[0]);
 	}
 
 	inline const Ptr _shared_update_(const Ptr& local) const
@@ -416,7 +416,7 @@ private:
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			const Ptr value = Expression::evaluate_(vec[1], local);
-			static_<Shoal>(static_<Shoal>(local)->at_("$"))->update_(vec[0], value);
+			static_<Shoal::Concurrent>(static_<Shoal>(local)->at_("$"))->update_(vec[0], value);
 			return value;
 		}
 		catch (const std::exception& err)
@@ -570,8 +570,7 @@ private:
 		try
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			Shoal* const shoal = static_<Shoal>(local);
-			Shoal* const shared = static_<Shoal>(shoal->at_("$"));
+			Shoal::Concurrent* const shared = static_<Shoal::Concurrent>(static_<Shoal>(local)->at_("$"));
 			const size_t size_1 = vec.size() - 1;
 			Ptr param;
 			for (size_t i = 0; i < size_1; ++i)

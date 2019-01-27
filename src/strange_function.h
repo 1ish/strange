@@ -47,9 +47,9 @@ public:
 	{
 	}
 
-	static inline const Ptr fin_(const Ptr& expression, const Ptr& shared = Shoal::mut_())
+	static inline const Ptr fin_(const Ptr& expression)
 	{
-		return fake_<Function>(expression, shared);
+		return fake_<Function>(expression, Shoal::Concurrent::mut_());
 	}
 
 	virtual inline const Ptr type_() const override
