@@ -183,7 +183,7 @@ private:
 						{
 							if (flk->size_() % 2 == 0)
 							{
-								flk->push_back_(_parse_(scope, shoal, finalized));
+								flk->push_back_(_parse_(scope, shoal, Herd::mut_())); // create new 'finalized' scope
 								result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
 							}
 							else
