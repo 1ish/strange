@@ -1450,7 +1450,11 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Iterator::mut_(me_());
+		if (final_())
+		{
+			return Iterator::mut_(me_());
+		}
+		return Iterator::mut_(copy_());
 	}
 
 	virtual inline const Ptr feeder(const Ptr& eater) const override
@@ -2205,23 +2209,24 @@ private:
 		inline Iterator(const Ptr& flock)
 			: Mutable{}
 			, _flock{ flock }
-			, _iterator{ static_<Flock>(_flock)->_vector.cbegin() }
+			, _pos{ 0 }
 		{
 		}
 
 		virtual inline const Ptr next_() override
 		{
-			if (_iterator == static_<Flock>(_flock)->_vector.cend())
+			const std_vector_ptr& vec = static_<Flock>(_flock)->_vector;
+			if (_pos >= vec.size())
 			{
 				return stop_();
 			}
-			return *_iterator++;
+			return vec[_pos++];
 		}
 
 		virtual inline const Ptr copy_() const override
 		{
 			const Ptr result = mut_(_flock);
-			static_<Iterator>(result)->_iterator = _iterator;
+			static_<Iterator>(result)->_pos = _pos;
 			return result;
 		}
 
@@ -2240,7 +2245,7 @@ private:
 
 	private:
 		const Ptr _flock;
-		std_vector_ptr::const_iterator _iterator;
+		size_t _pos;
 	};
 };
 
@@ -2689,7 +2694,11 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		return Iterator::mut_(me_());
+		if (final_())
+		{
+			return Iterator::mut_(me_());
+		}
+		return Iterator::mut_(copy_());
 	}
 
 	virtual inline const Ptr type_() const override
