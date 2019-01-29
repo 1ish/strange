@@ -187,7 +187,7 @@ public:
 	// public impure virtual member functions and adapters
 	virtual inline void finalize_() const
 	{
-		_finalized_().store(true, std::memory_order_release);
+		_final_().store(true, std::memory_order_release);
 	}
 
 	inline const Ptr finalize(const Ptr& ignore) const
@@ -196,14 +196,14 @@ public:
 		return me_();
 	}
 
-	virtual inline const bool finalized_() const
+	virtual inline const bool final_() const
 	{
-		return _finalized_().load(std::memory_order_acquire);
+		return _final_().load(std::memory_order_acquire);
 	}
 
-	inline const Ptr finalized(const Ptr& ignore) const
+	inline const Ptr final(const Ptr& ignore) const
 	{
-		return boolean_(finalized_());
+		return boolean_(final_());
 	}
 
 	virtual inline void freeze_() const
@@ -219,7 +219,7 @@ public:
 
 	virtual inline const bool frozen_() const
 	{
-		return finalized_();
+		return final_();
 	}
 
 	inline const Ptr frozen(const Ptr& ignore) const
@@ -259,7 +259,7 @@ public:
 
 	inline const Ptr copy_finalize_() const
 	{
-		if (finalized_())
+		if (final_())
 		{
 			return me_();
 		}
@@ -291,7 +291,7 @@ public:
 
 	virtual inline const Ptr replicate_() const
 	{
-		if (finalized_())
+		if (final_())
 		{
 			return me_();
 		}
@@ -577,7 +577,7 @@ private:
 	WeakPtr _me;
 
 	// private static utility functions
-	static std::atomic<bool>& _finalized_()
+	static std::atomic<bool>& _final_()
 	{
 		static std::atomic<bool> FINALIZED(true);
 		return FINALIZED;
@@ -953,7 +953,7 @@ protected:
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
 		{
-			if (t->finalized_())
+			if (t->final_())
 			{
 				throw Mutilation(thing->type_());
 			}
@@ -962,7 +962,7 @@ protected:
 		throw Disagreement("ERROR: Member passed wrong type of thing");
 #else
 		T* const t = static_cast<T*>(thing);
-		if (t->finalized_())
+		if (t->final_())
 		{
 			throw Mutilation(thing->type_());
 		}
@@ -1041,24 +1041,24 @@ class Mutable : public Thing
 public:
 	virtual inline void finalize_() const override
 	{
-		_finalized.store(true, std::memory_order_release);
+		_final.store(true, std::memory_order_release);
 	}
 
-	virtual inline const bool finalized_() const override
+	virtual inline const bool final_() const override
 	{
-		return _finalized.load(std::memory_order_acquire);
+		return _final.load(std::memory_order_acquire);
 	}
 
 protected:
 	inline Mutable()
 		: Thing{}
-		, _finalized{}
+		, _final{}
 	{
-		_finalized.store(false, std::memory_order_release);
+		_final.store(false, std::memory_order_release);
 	}
 
 private:
-	mutable std::atomic<bool> _finalized;
+	mutable std::atomic<bool> _final;
 };
 
 //----------------------------------------------------------------------
@@ -1132,7 +1132,7 @@ public:
 
 	virtual inline const bool frozen_() const override
 	{
-		return finalized_() && _frozen;
+		return final_() && _frozen;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1165,7 +1165,7 @@ public:
 		{
 			replicant[i.first->replicate_()] = i.second->replicate_();
 		}
-		if (finalized_())
+		if (final_())
 		{
 			result->finalize_();
 		}
@@ -1741,7 +1741,7 @@ public:
 
 	virtual inline const bool frozen_() const override
 	{
-		return finalized_() && _frozen;
+		return final_() && _frozen;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1776,7 +1776,7 @@ public:
 		{
 			replicant.push_back(i->replicate_());
 		}
-		if (finalized_())
+		if (final_())
 		{
 			result->finalize_();
 		}
@@ -2304,7 +2304,7 @@ public:
 
 	virtual inline const bool frozen_() const override
 	{
-		return finalized_() && _frozen;
+		return final_() && _frozen;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -2337,7 +2337,7 @@ public:
 		{
 			replicant.insert(i->replicate_());
 		}
-		if (finalized_())
+		if (final_())
 		{
 			result->finalize_();
 		}
@@ -3294,7 +3294,7 @@ public:
 	virtual inline const Ptr to_lake_() const override
 	{
 		const Ptr lake = copy_();
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -3309,7 +3309,7 @@ public:
 			throw Disagreement("Lake::from_lake_ passed wrong type of thing");
 		}
 		set_(lak->get_());
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -3888,7 +3888,7 @@ public:
 	virtual inline const Ptr to_lake_() const override
 	{
 		const Ptr lake = Lake::mut_(std::string(1, get_() ? char(1) : char(0)));
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -3903,7 +3903,7 @@ public:
 			throw Disagreement("Bit::from_lake_ passed wrong type of thing");
 		}
 		set_(bool(lak->get_()[0]));
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -4211,7 +4211,7 @@ public:
 	virtual inline const Ptr to_lake_() const override
 	{
 		const Ptr lake = Lake::mut_(std::string(1, get_()));
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -4226,7 +4226,7 @@ public:
 			throw Disagreement("Int8::from_lake_ passed wrong type of thing");
 		}
 		set_(lak->get_()[0]);
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -4529,7 +4529,7 @@ public:
 	virtual inline const Ptr to_lake_() const override
 	{
 		const Ptr lake = Lake::mut_(std::string(1, *reinterpret_cast<const char*>(&(get_()))));
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -4544,7 +4544,7 @@ public:
 			throw Disagreement("UInt8::from_lake_ passed wrong type of thing");
 		}
 		set_(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0])));
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -4850,7 +4850,7 @@ public:
 		str[0] = get_() & 0xFF;
 		str[1] = (get_() >> 8) & 0xFF;
 		const Ptr lake = Lake::mut_(str);
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -4868,7 +4868,7 @@ public:
 			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
 			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8
 			);
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -5174,7 +5174,7 @@ public:
 		str[0] = get_() & 0xFF;
 		str[1] = (get_() >> 8) & 0xFF;
 		const Ptr lake = Lake::mut_(str);
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -5192,7 +5192,7 @@ public:
 			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
 			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[1]))) << 8
 		);
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -5500,7 +5500,7 @@ public:
 		str[2] = (get_() >> 16) & 0xFF;
 		str[3] = (get_() >> 24) & 0xFF;
 		const Ptr lake = Lake::mut_(str);
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -5520,7 +5520,7 @@ public:
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[2]))) << 16 |
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[3]))) << 24
 			);
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -5828,7 +5828,7 @@ public:
 		str[2] = (get_() >> 16) & 0xFF;
 		str[3] = (get_() >> 24) & 0xFF;
 		const Ptr lake = Lake::mut_(str);
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -5848,7 +5848,7 @@ public:
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[2]))) << 16 |
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[3]))) << 24
 		);
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -6160,7 +6160,7 @@ public:
 		str[6] = (get_() >> 48) & 0xFF;
 		str[7] = (get_() >> 56) & 0xFF;
 		const Ptr lake = Lake::mut_(str);
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -6184,7 +6184,7 @@ public:
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[6]))) << 48 |
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[7]))) << 56
 			);
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -6496,7 +6496,7 @@ public:
 		str[6] = (get_() >> 48) & 0xFF;
 		str[7] = (get_() >> 56) & 0xFF;
 		const Ptr lake = Lake::mut_(str);
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -6520,7 +6520,7 @@ public:
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[6]))) << 48 |
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[7]))) << 56
 		);
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -6911,7 +6911,7 @@ public:
 		str[2] = (i >> 16) & 0xFF;
 		str[3] = (i >> 24) & 0xFF;
 		const Ptr lake = Lake::mut_(str);
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -6931,7 +6931,7 @@ public:
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[2]))) << 16 |
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[3]))) << 24;
 		set_(*reinterpret_cast<const float*>(&i));
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -7244,7 +7244,7 @@ public:
 		str[6] = (i >> 48) & 0xFF;
 		str[7] = (i >> 56) & 0xFF;
 		const Ptr lake = Lake::mut_(str);
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -7268,7 +7268,7 @@ public:
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[6]))) << 48 |
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[7]))) << 56;
 		set_(*reinterpret_cast<const double*>(&i));
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -7592,7 +7592,7 @@ public:
 		str[6] = (i >> 16) & 0xFF;
 		str[7] = (i >> 24) & 0xFF;
 		const Ptr lake = Lake::mut_(str);
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -7617,7 +7617,7 @@ public:
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[6]))) << 16 |
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[7]))) << 24;
 		set_(D(*reinterpret_cast<const float*>(&r), *reinterpret_cast<const float*>(&i)));
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -7940,7 +7940,7 @@ public:
 		str[14] = (i >> 48) & 0xFF;
 		str[15] = (i >> 56) & 0xFF;
 		const Ptr lake = Lake::mut_(str);
-		if (finalized_())
+		if (final_())
 		{
 			lake->finalize_();
 		}
@@ -7973,7 +7973,7 @@ public:
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[14]))) << 48 |
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[15]))) << 56;
 		set_(D(*reinterpret_cast<const double*>(&r), *reinterpret_cast<const double*>(&i)));
-		if (lak->finalized_())
+		if (lak->final_())
 		{
 			finalize_();
 		}
@@ -8528,7 +8528,7 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("same", Const<Thing>::fin_(&Thing::same, "other"));
 		shoal->update_("different", Const<Thing>::fin_(&Thing::different, "other"));
 		shoal->update_("finalize", Const<Thing>::fin_(&Thing::finalize));
-		shoal->update_("finalized", Const<Thing>::fin_(&Thing::finalized));
+		shoal->update_("final", Const<Thing>::fin_(&Thing::final));
 		shoal->update_("freeze", Const<Thing>::fin_(&Thing::freeze));
 		shoal->update_("frozen", Const<Thing>::fin_(&Thing::frozen));
 		shoal->update_("copy", Const<Thing>::fin_(&Thing::copy));
@@ -8911,7 +8911,7 @@ inline void Shoal::to_river_(const Ptr& river) const
 	{
 		throw Disagreement("Shoal::to_river_ passed wrong type of thing");
 	}
-	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
@@ -8952,7 +8952,7 @@ inline void Shoal::to_river_with_links_(const Ptr& shoal, const Ptr& river) cons
 	{
 		throw Disagreement("Shoal::to_river_with_links_ passed wrong type of river thing");
 	}
-	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_map.size())));
 	for (const auto& i : _map)
 	{
@@ -9313,7 +9313,7 @@ inline void Flock::to_river_(const Ptr& river) const
 	{
 		throw Disagreement("Flock::to_river_ passed wrong type of thing");
 	}
-	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_vector.size())));
 	for (const auto i : _vector)
 	{
@@ -9353,7 +9353,7 @@ inline void Flock::to_river_with_links_(const Ptr& shoal, const Ptr& river) cons
 	{
 		throw Disagreement("Flock::to_river_with_links_ passed wrong type of river thing");
 	}
-	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_vector.size())));
 	for (const auto i : _vector)
 	{
@@ -9431,7 +9431,7 @@ inline void Herd::to_river_(const Ptr& river) const
 	{
 		throw Disagreement("Herd::to_river_ passed wrong type of thing");
 	}
-	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_set.size())));
 	for (const auto i : _set)
 	{
@@ -9469,7 +9469,7 @@ inline void Herd::to_river_with_links_(const Ptr& shoal, const Ptr& river) const
 	{
 		throw Disagreement("Herd::to_river_with_links_ passed wrong type of river thing");
 	}
-	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_set.size())));
 	for (const auto i : _set)
 	{
@@ -9538,7 +9538,7 @@ inline void Lake::to_river_(const Ptr& river) const
 	{
 		throw Disagreement("Lake::to_river_ passed wrong type of thing");
 	}
-	riv->write_(Bit::mut_(finalized_()));
+	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(get_().length())));
 	riv->write_(get_());
 }

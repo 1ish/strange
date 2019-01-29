@@ -95,11 +95,11 @@ public:
 		Mutable::finalize_();
 	}
 
-	virtual inline const bool finalized_() const override
+	virtual inline const bool final_() const override
 	{
-		bool fin = Mutable::finalized_();
-		fin = _members->finalized_() && fin;
-		const Ptr over = static_<Shoal>(_members)->at_("finalized");
+		bool fin = Mutable::final_();
+		fin = _members->final_() && fin;
+		const Ptr over = static_<Shoal>(_members)->at_("final");
 		if (!over->is_nothing_())
 		{
 			return (!operate_(const_cast<Creature*>(this), over)->is_nothing_()) && fin;
