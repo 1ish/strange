@@ -86,17 +86,29 @@ public:
 			}
 			throw Disagreement("local_ expression of wrong size");
 		}
-		else if (statement->is_("shared_"))
+		else if (statement->is_("shared_at_"))
 		{
 			if (size == 1)
 			{
 				return fin_(token, statement, &Expression::_shared_at_, flock);
 			}
+			throw Disagreement("shared_at_ expression of wrong size");
+		}
+		else if (statement->is_("shared_update_"))
+		{
 			if (size == 2)
 			{
 				return fin_(token, statement, &Expression::_shared_update_, flock);
 			}
-			throw Disagreement("shared_ expression of wrong size");
+			throw Disagreement("shared_update_ expression of wrong size");
+		}
+		else if (statement->is_("shared_insert_"))
+		{
+			if (size == 2)
+			{
+				return fin_(token, statement, &Expression::_shared_insert_, flock);
+			}
+			throw Disagreement("shared_insert_ expression of wrong size");
 		}
 		else if (statement->is_("me_"))
 		{
@@ -427,6 +439,31 @@ private:
 			const Ptr value = Expression::evaluate_(vec[1], local);
 			static_<Shoal::Concurrent>(static_<Shoal>(local)->at_("$"))->update_(vec[0], value);
 			return value;
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
+	inline const Ptr _shared_insert_(const Ptr& local) const
+	{
+		try
+		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			Shoal::Concurrent* const shared = static_<Shoal::Concurrent>(static_<Shoal>(local)->at_("$"));
+			const Ptr key = vec[0];
+			const Ptr existing = shared->at_(key);
+			if (existing->is_nothing_())
+			{
+				const Ptr value = Expression::evaluate_(vec[1], local);
+				if (!shared->insert_(key, value))
+				{
+					return shared->at_(key);
+				}
+				return value;
+			}
+			return existing;
 		}
 		catch (const std::exception& err)
 		{

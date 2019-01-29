@@ -312,7 +312,8 @@ private:
 					}
 					// local at/update name
 					flk->push_back_(symbol);
-					cont = _update_(scope, shoal, finalized, flock, symbol);
+					bool insert = false;
+					cont = _update_(scope, shoal, finalized, flock, symbol, insert);
 					result = Expression::fin_(token, local, flock);
 				}
 				else if (tag == 'P') // punctuation
@@ -320,8 +321,20 @@ private:
 					if (symbol->is_("$")) // shared at/update
 					{
 						_shared_(flock);
-						cont = _update_(scope, shoal, finalized, flock, static_<Symbol>(symbol)->add_(flk->at_(0)));
-						result = Expression::fin_(token, sym_("shared_"), flock);
+						bool insert = false;
+						cont = _update_(scope, shoal, finalized, flock, static_<Symbol>(symbol)->add_(flk->at_(0)), insert);
+						if (cont)
+						{
+							result = Expression::fin_(token, sym_("shared_at_"), flock);
+						}
+						else if (insert)
+						{
+							result = Expression::fin_(token, sym_("shared_insert_"), flock);
+						}
+						else
+						{
+							result = Expression::fin_(token, sym_("shared_update_"), flock);
+						}
 					}
 					else if (symbol->is_("|")) // me
 					{
@@ -1223,7 +1236,7 @@ private:
 		return Expression::fin_(token, sym_("shared_scope_"), key_flock);
 	}
 	
-	inline const bool _update_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& flock, const Ptr& name)
+	inline const bool _update_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& flock, const Ptr& name, bool& insert)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -1246,8 +1259,9 @@ private:
 				flk->push_back_(_parse_(scope, shoal, finalized));
 				return false; // break
 			}
-			if (symbol->is_("#=")) //TODO #=
+			if (symbol->is_("#="))
 			{
+				insert = true;
 				if (!static_<Herd>(finalized)->insert_(name))
 				{
 					throw tok->error_("Parser ERROR: attempt to reassign final name");
