@@ -555,12 +555,6 @@ private:
 				flk->push_back_(sym_("different"));
 				_member_(scope, shoal, statement, flock);
 			}
-			else if (symbol->is_("@"))
-			{
-				_next_();
-				flk->push_back_(sym_("at"));
-				_member_(scope, shoal, statement, flock);
-			}
 			else if (symbol->is_("&"))
 			{
 				_next_();
@@ -644,6 +638,54 @@ private:
 				_next_();
 				flk->push_back_(sym_("replicate"));
 				smt->set_(sym_("operate_"));
+			}
+			else if (symbol->is_("@"))
+			{
+				_next_();
+				flk->push_back_(sym_("at"));
+				_member_(scope, shoal, statement, flock);
+			}
+			else if (symbol->is_("@>"))
+			{
+				_next_();
+				flk->push_back_(sym_("pop_back"));
+				smt->set_(sym_("operate_"));
+			}
+			else if (symbol->is_("<@"))
+			{
+				_next_();
+				flk->push_back_(sym_("pop_front"));
+				smt->set_(sym_("operate_"));
+			}
+			else if (symbol->is_("@<"))
+			{
+				_next_();
+				flk->push_back_(sym_("push_back"));
+				_member_(scope, shoal, statement, flock);
+			}
+			else if (symbol->is_(">@"))
+			{
+				_next_();
+				flk->push_back_(sym_("push_front"));
+				_member_(scope, shoal, statement, flock);
+			}
+			else if (symbol->is_("@="))
+			{
+				_next_();
+				flk->push_back_(sym_("update"));
+				_member_(scope, shoal, statement, flock);
+			}
+			else if (symbol->is_("@+"))
+			{
+				_next_();
+				flk->push_back_(sym_("insert"));
+				_member_(scope, shoal, statement, flock);
+			}
+			else if (symbol->is_("@-"))
+			{
+				_next_();
+				flk->push_back_(sym_("erase"));
+				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("!"))
 			{
