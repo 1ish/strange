@@ -290,7 +290,7 @@ private:
 								const Ptr it = flock->iterator_();
 								for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
 								{
-									Lake* const lake = dynamic_<Lake>(i->invoke_("to_lake")); //TODO immediate?
+									Lake* const lake = dynamic_<Lake>(Expression::immediate_(i)->invoke_("to_lake"));
 									if (!lake)
 									{
 										throw tok->error_("Parser ERROR: invalid import_ filename");
@@ -402,10 +402,13 @@ private:
 				else
 				{
 					flk->push_back_(result);
-					cont = _thing_(scope, shoal, statement, flock);
-					if (cont)
+					if (_thing_(scope, shoal, statement, flock))
 					{
 						result = Expression::fin_(token, smt->get_(), flock);
+					}
+					else
+					{
+						cont = false;
 					}
 				}
 			}
@@ -455,11 +458,6 @@ private:
 				_next_();
 				_list_(scope, shoal, flock, symbol, sym_(">>"));
 				smt->set_(sym_("invoke_iterator_"));
-			}
-			//TODO remove?
-			else if (symbol->is_(")") || symbol->is_("]") || symbol->is_("}") || symbol->is_(">>") || symbol->is_(","))
-			{
-				return false; // break
 			}
 			else if (symbol->is_("%"))
 			{
@@ -560,8 +558,8 @@ private:
 			else if (symbol->is_("@"))
 			{
 				_next_();
-				_wrap_(token, sym_("at"), flock);
-				return _at_(scope, shoal, flock); // break/continue
+				flk->push_back_(sym_("at"));
+				_member_(scope, shoal, statement, flock);
 			}
 			else if (symbol->is_("&"))
 			{
@@ -685,7 +683,6 @@ private:
 			}
 			else
 			{
-				smt->set_(sym_("thing_")); //TODO remove?
 				return false; // break
 			}
 		}
