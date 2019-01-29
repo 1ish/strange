@@ -245,12 +245,11 @@ public:
 			}
 			else if (second)
 			{
-				if (char1 == '=' && char2 == '=' && token == "!") // !==
+				if (char1 == '=' && char2 == '=' && (token == "!" || token == "#")) // !== or #==
 				{
 					_use = char1; // =
-					return Token::punctuation_(_filename, _x, _y, token); // !
+					return Token::punctuation_(_filename, _x, _y, token); // ! or #
 				}
-				//TODO #==
 				if (char1 == '~' && char2 == '#' && token == "~") // ~~#
 				{
 					token += char1; // ~~
@@ -304,6 +303,7 @@ public:
 			case '*':
 			case '%':
 			case ':':
+			case '#':
 			case '<':
 				if (char1 == '<' && char2 == '>')
 				{
@@ -325,7 +325,6 @@ public:
 			case '|':
 			case '^':
 			case '$':
-			case '#': //TODO #=
 			case '~':
 			case '.':
 			case '=':
