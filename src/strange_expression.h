@@ -363,6 +363,15 @@ public:
 		static_<Weak>(_parent)->set_(parent);
 	}
 
+	inline const Ptr get_() const
+	{
+		if (_member == &Expression::_thing_)
+		{
+			return static_<Flock>(_flock)->get_()[0];
+		}
+		return nothing_();
+	}
+
 private:
 	const Ptr _token;
 	const Ptr _statement;

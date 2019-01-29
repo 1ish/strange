@@ -2,8 +2,8 @@
 ,	out[].write["hello world\n"]
 ,	x := 3
 ,	{
-		'f'::function_(a := 1)(a+2)
+		'f'::function_(a)(a+2)
 	}
-,	y := $$f[x+10]
+,	y := $$f[x+1]
 ,	out[].write[y.to_symbol[], "\n"]
 )

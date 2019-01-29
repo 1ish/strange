@@ -184,7 +184,7 @@ private:
 							if (flk->size_() % 2 == 0)
 							{
 								flk->push_back_(_parse_(scope, shoal));
-								result = Expression::fin_(token, symbol, flock);
+								result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
 							}
 							else
 							{
@@ -1072,7 +1072,11 @@ private:
 				flk->push_back_(value);
 				if (add_shoal)
 				{
-					static_<Shoal>(shoal)->update_(new_scope, Function::fin_(value));
+					const Ptr thing = static_<Expression>(value)->get_();
+					if (!thing->is_nothing_())
+					{
+						static_<Shoal>(shoal)->update_(new_scope, thing);
+					}
 				}
 			}
 			punctuation = true;
