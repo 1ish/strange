@@ -87,7 +87,7 @@ public:
 		static_<Expression>(vec[0])->generate_(me);
 		riv.write_("->invoke_(");
 		bool first = true;
-		for (size_t i = 1; i < vec.size(); ++i)
+		for (std::size_t i = 1; i < vec.size(); ++i)
 		{
 			if (first)
 			{

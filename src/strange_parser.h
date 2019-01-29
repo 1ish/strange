@@ -360,7 +360,7 @@ private:
 					else if (symbol->is_("<>")) // container
 					{
 						std::string container = static_<Symbol>(scope)->get_();
-						const size_t pos = container.find_last_of("::");
+						const std::size_t pos = container.find_last_of("::");
 						if (pos == std::string::npos)
 						{
 							container = "";

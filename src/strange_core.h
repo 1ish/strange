@@ -320,7 +320,7 @@ public:
 		return next_();
 	}
 
-	virtual inline size_t hash_() const
+	virtual inline std::size_t hash_() const
 	{
 		return std::hash<const Thing*>{}(this);
 	}
@@ -747,7 +747,7 @@ public:
 	{
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return _hash;
 	}
@@ -814,7 +814,7 @@ public:
 
 	inline const char at_(const int64_t index) const
 	{
-		if (size_t(index) < _symbol.length())
+		if (std::size_t(index) < _symbol.length())
 		{
 			return _symbol[index];
 		}
@@ -855,7 +855,7 @@ public:
 
 private:
 	const std::string _symbol;
-	const size_t _hash;
+	const std::size_t _hash;
 };
 
 //----------------------------------------------------------------------
@@ -1068,7 +1068,7 @@ class Shoal : public Mutable, public Serializable
 	class Hash
 	{
 	public:
-		inline size_t operator()(const Ptr& ptr) const
+		inline std::size_t operator()(const Ptr& ptr) const
 		{
 			return ptr->hash_();
 		}
@@ -1935,7 +1935,7 @@ public:
 	{
 		if (pos >= 0 && pos < size_())
 		{
-			return _vector[size_t(pos)];
+			return _vector[std::size_t(pos)];
 		}
 		return nothing_();
 	}
@@ -1960,9 +1960,9 @@ public:
 			{
 				if (pos > size)
 				{
-					_vector.resize(size_t(pos) + 1, nothing_());
+					_vector.resize(std::size_t(pos) + 1, nothing_());
 				}
-				_vector[size_t(pos)] = value;
+				_vector[std::size_t(pos)] = value;
 			}
 		}
 	}
@@ -1990,8 +1990,8 @@ public:
 			{
 				if (pos > size)
 				{
-					_vector.resize(size_t(pos) + 1, nothing_());
-					_vector[size_t(pos)] = value;
+					_vector.resize(std::size_t(pos) + 1, nothing_());
+					_vector[std::size_t(pos)] = value;
 				}
 				else
 				{
@@ -2245,7 +2245,7 @@ private:
 
 	private:
 		const Ptr _flock;
-		size_t _pos;
+		std::size_t _pos;
 	};
 };
 
@@ -2256,7 +2256,7 @@ class Herd : public Mutable, public Serializable
 	class Hash
 	{
 	public:
-		inline size_t operator()(const Ptr& ptr) const
+		inline std::size_t operator()(const Ptr& ptr) const
 		{
 			return ptr->hash_();
 		}
@@ -3411,7 +3411,7 @@ public:
 		return symbol && (get_() == symbol->get_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<S>()(get_());
 	}
@@ -3419,7 +3419,7 @@ public:
 	inline const char at_(const int64_t index) const
 	{
 		const S& s = get_();
-		if (size_t(index) < s.length())
+		if (std::size_t(index) < s.length())
 		{
 			return s[index];
 		}
@@ -3433,7 +3433,7 @@ public:
 	inline void update_(const int64_t index, const int64_t byte)
 	{
 		S& s = ref_();
-		if (size_t(index) < s.length())
+		if (std::size_t(index) < s.length())
 		{
 			s[index] = char(byte);
 		}
@@ -4064,7 +4064,7 @@ public:
 		return number && (to_int64_() == number->to_int64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<int64_t>()(to_int64_());
 	}
@@ -4382,7 +4382,7 @@ public:
 		return number && (to_int64_() == number->to_int64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<int64_t>()(to_int64_());
 	}
@@ -4700,7 +4700,7 @@ public:
 		return number && (to_int64_() == number->to_int64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<int64_t>()(to_int64_());
 	}
@@ -5024,7 +5024,7 @@ public:
 		return number && (to_int64_() == number->to_int64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<int64_t>()(to_int64_());
 	}
@@ -5348,7 +5348,7 @@ public:
 		return number && (to_int64_() == number->to_int64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<int64_t>()(to_int64_());
 	}
@@ -5676,7 +5676,7 @@ public:
 		return number && (to_int64_() == number->to_int64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<int64_t>()(to_int64_());
 	}
@@ -6004,7 +6004,7 @@ public:
 		return number && (to_int64_() == number->to_int64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<int64_t>()(to_int64_());
 	}
@@ -6340,7 +6340,7 @@ public:
 		return number && (get_() == number->to_int64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<int64_t>()(get_());
 	}
@@ -6734,7 +6734,7 @@ public:
 		return false;
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<int64_t>()(get_());
 	}
@@ -7087,7 +7087,7 @@ public:
 		return number && (to_float64_() == number->to_float64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<double>()(to_float64_());
 	}
@@ -7425,7 +7425,7 @@ public:
 		return number && (get_() == number->to_float64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		return std::hash<double>()(get_());
 	}
@@ -7782,11 +7782,11 @@ public:
 		return number && (to_complex64_() == number->to_complex64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		const std::complex<double> c = to_complex64_();
-		const size_t i = std::hash<double>()(c.imag());
-		const size_t s = sizeof(i) * 4;
+		const std::size_t i = std::hash<double>()(c.imag());
+		const std::size_t s = sizeof(i) * 4;
 		return std::hash<double>()(c.real()) ^ ((i << s) | (i >> s));
 	}
 
@@ -8138,11 +8138,11 @@ public:
 		return number && (get_() == number->to_complex64_());
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		const std::complex<double> c = get_();
-		const size_t i = std::hash<double>()(c.imag());
-		const size_t s = sizeof(i) * 4;
+		const std::size_t i = std::hash<double>()(c.imag());
+		const std::size_t s = sizeof(i) * 4;
 		return std::hash<double>()(c.real()) ^ ((i << s) | (i >> s));
 	}
 
@@ -8412,7 +8412,7 @@ public:
 			throw Disagreement("strange::River::read_ cannot read from output");
 		}
 		std::string str;
-		str.resize(size_t(length));
+		str.resize(std::size_t(length));
 		_in->read(&str[0], str.length());
 		return Lake::mut_(str);
 	}
@@ -9339,7 +9339,7 @@ inline void Flock::from_river_(const Ptr& river)
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
-	_vector.reserve(size_t(int64));
+	_vector.reserve(std::size_t(int64));
 	for (int64_t i = int64; i > 0; --i)
 	{
 		_vector.push_back(riv->pop_front_());
@@ -9379,7 +9379,7 @@ inline void Flock::from_river_with_links_(const Ptr& river)
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
-	_vector.reserve(size_t(int64));
+	_vector.reserve(std::size_t(int64));
 	for (int64_t i = int64; i > 0; --i)
 	{
 		_vector.push_back(Symbol::riv_(river));

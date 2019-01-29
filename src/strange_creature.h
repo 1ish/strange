@@ -180,12 +180,12 @@ public:
 		return Mutable::next_();
 	}
 
-	virtual inline size_t hash_() const override
+	virtual inline std::size_t hash_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("hash");
 		if (!over->is_nothing_())
 		{
-			return size_t(static_<Int64>(operate_(const_cast<Creature*>(this), over))->get_());
+			return std::size_t(static_<Int64>(operate_(const_cast<Creature*>(this), over))->get_());
 		}
 		return Mutable::hash_();
 	}

@@ -617,9 +617,9 @@ private:
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			Shoal::Concurrent* const shared = static_<Shoal::Concurrent>(static_<Shoal>(local)->at_("$"));
-			const size_t size_1 = vec.size() - 1;
+			const std::size_t size_1 = vec.size() - 1;
 			Ptr param;
-			for (size_t i = 0; i < size_1; ++i)
+			for (std::size_t i = 0; i < size_1; ++i)
 			{
 				if (i % 2 == 0)
 				{
@@ -643,10 +643,10 @@ private:
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			Shoal* const shoal = static_<Shoal>(local);
 			const Ptr it = shoal->at_("&");
-			const size_t size_1 = vec.size() - 1;
+			const std::size_t size_1 = vec.size() - 1;
 			Ptr param;
 			Ptr value;
-			for (size_t i = 0; i < size_1; ++i)
+			for (std::size_t i = 0; i < size_1; ++i)
 			{
 				if (i % 2 == 0)
 				{
@@ -705,7 +705,7 @@ private:
 			{
 				return result;
 			}
-			const size_t pos = scope.find_last_of("::");
+			const std::size_t pos = scope.find_last_of("::");
 			if (pos == std::string::npos)
 			{
 				scope = "";
@@ -808,8 +808,8 @@ private:
 		try
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			const size_t size = vec.size();
-			for (size_t i = 0; i < size; ++i)
+			const std::size_t size = vec.size();
+			for (std::size_t i = 0; i < size; ++i)
 			{
 				const Ptr thing = Expression::evaluate_(vec[i], local);
 				const Ptr to_lake = thing->invoke_("to_lake");
@@ -866,9 +866,9 @@ private:
 		try
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			const size_t size = vec.size();
+			const std::size_t size = vec.size();
 			Ptr result = nothing_();
-			for (size_t i = 0; i < size; ++i)
+			for (std::size_t i = 0; i < size; ++i)
 			{
 				result = Expression::evaluate_(vec[i], local);
 			}
