@@ -250,6 +250,7 @@ public:
 					_use = char1; // =
 					return Token::punctuation_(_filename, _x, _y, token); // !
 				}
+				//TODO #==
 				if (char1 == '~' && char2 == '#' && token == "~") // ~~#
 				{
 					token += char1; // ~~
@@ -324,7 +325,7 @@ public:
 			case '|':
 			case '^':
 			case '$':
-			case '#':
+			case '#': //TODO #=
 			case '~':
 			case '.':
 			case '=':

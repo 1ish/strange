@@ -1181,37 +1181,6 @@ private:
 		return Expression::fin_(token, sym_("shared_scope_"), key_flock);
 	}
 	
-	inline const bool _at_(const Ptr& scope, const Ptr& shoal, const Ptr& flock)
-	{
-		const Ptr token = _token_();
-		Token* const tok = static_<Token>(token);
-		if (token->is_("."))
-		{
-			throw tok->error_("Parser ERROR: at stop");
-		}
-		Flock* const flk = static_<Flock>(flock);
-		const char tag = tok->tag_();
-		if (tag == 'E') // error
-		{
-			throw tok->error_("Tokenizer ERROR");
-		}
-		const Ptr symbol = tok->symbol();
-		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
-		{
-			_wrap_(token, tok->value_(), flock);
-		}
-		else if (tag == 'N') // name
-		{
-			_wrap_(token, symbol, flock);
-		}
-		else if (tag == 'P') // punctuation
-		{
-			throw tok->error_("Parser ERROR: at punctuation");
-		}
-		_next_();
-		return _update_(scope, flock, shoal); // continue/break
-	}
-
 	inline const bool _update_(const Ptr& scope, const Ptr& shoal, const Ptr& flock)
 	{
 		const Ptr token = _token_();
@@ -1227,14 +1196,9 @@ private:
 			throw tok->error_("Tokenizer ERROR");
 		}
 		const Ptr symbol = tok->symbol();
-		if (tag == 'P' && symbol->is_(":="))
+		if (tag == 'P' && symbol->is_(":=")) //TODO #=
 		{
 			_next_();
-			const int64_t size = flk->size_();
-			if (size >= 2)
-			{
-				flk->update_(size - 2, Expression::fin_(token, sym_("update")));
-			}
 			flk->push_back_(_parse_(scope, shoal));
 			return false; // break
 		}
