@@ -183,6 +183,38 @@ public:
 			}
 			throw Disagreement("operate_iterable_ expression of wrong size");
 		}
+		else if (statement->is_("private_"))
+		{
+			if (size == 1)
+			{
+				return fin_(token, statement, &Expression::_private_, flock);
+			}
+			throw Disagreement("private_ expression of wrong size");
+		}
+		else if (statement->is_("intimate_"))
+		{
+			if (size >= 1)
+			{
+				return fin_(token, statement, &Expression::_intimate_, flock);
+			}
+			throw Disagreement("intimate_ expression of wrong size");
+		}
+		else if (statement->is_("intimate_iterator_"))
+		{
+			if (size == 2)
+			{
+				return fin_(token, statement, &Expression::_intimate_iterator_, flock);
+			}
+			throw Disagreement("intimate_iterator_ expression of wrong size");
+		}
+		else if (statement->is_("intimate_iterable_"))
+		{
+			if (size == 2)
+			{
+				return fin_(token, statement, &Expression::_intimate_iterable_, flock);
+			}
+			throw Disagreement("intimate_iterable_ expression of wrong size");
+		}
 		else if (statement->is_("lambda_"))
 		{
 			if (size % 2 == 1)
@@ -599,6 +631,98 @@ private:
 				throw Dismemberment(thing->type_(), vec[1]);
 			}
 			const Ptr iterable = Expression::evaluate_(vec[2], local);
+			const Ptr feeder = iterable->feeder(member->eater_());
+			if (!feeder->is_nothing_())
+			{
+				return operate_(thing.get(), member, feeder);
+			}
+			return operate_(thing.get(), member, iterable->iterator_());
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
+	inline const Ptr _private_(const Ptr& local) const
+	{
+		try
+		{
+			const Ptr thing = static_<Shoal>(local)->at_("|");
+			if (thing->is_nothing_())
+			{
+				throw _stack_("me accessed without a creature");
+			}
+			return Method::with_name_(thing, static_<Flock>(_flock)->get_()[0]);
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
+	inline const Ptr _intimate_(const Ptr& local) const
+	{
+		try
+		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = static_<Shoal>(local)->at_("|");
+			if (thing->is_nothing_())
+			{
+				throw _stack_("me accessed without a creature");
+			}
+			const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+			if (member->is_nothing_())
+			{
+				throw Dismemberment(thing->type_(), vec[0]);
+			}
+			return operate_(thing.get(), member, _iterator_(local, 1));
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
+	inline const Ptr _intimate_iterator_(const Ptr& local) const
+	{
+		try
+		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = static_<Shoal>(local)->at_("|");
+			if (thing->is_nothing_())
+			{
+				throw _stack_("me accessed without a creature");
+			}
+			const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+			if (member->is_nothing_())
+			{
+				throw Dismemberment(thing->type_(), vec[0]);
+			}
+			return operate_(thing.get(), member, Expression::evaluate_(vec[1], local));
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
+	inline const Ptr _intimate_iterable_(const Ptr& local) const
+	{
+		try
+		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = static_<Shoal>(local)->at_("|");
+			if (thing->is_nothing_())
+			{
+				throw _stack_("me accessed without a creature");
+			}
+			const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+			if (member->is_nothing_())
+			{
+				throw Dismemberment(thing->type_(), vec[0]);
+			}
+			const Ptr iterable = Expression::evaluate_(vec[1], local);
 			const Ptr feeder = iterable->feeder(member->eater_());
 			if (!feeder->is_nothing_())
 			{
@@ -1117,12 +1241,12 @@ protected:
 		const Ptr local = Shoal::mut_();
 		Shoal* const loc = static_<Shoal>(local);
 		loc->insert_("$", _shared);
+		loc->insert_("&", it);
 		Creature* const creature = dynamic_cast<Creature*>(thing);
 		if (creature)
 		{
 			loc->insert_("|", creature->me_());
 		}
-		loc->insert_("&", it);
 		return static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
 

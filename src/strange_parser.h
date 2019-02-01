@@ -369,6 +369,12 @@ private:
 					{
 						result = Expression::fin_(token, sym_("me_"), flock);
 					}
+					else if (symbol->is_("|.")) // me dot
+					{
+						_next_();
+						_dot_(scope, shoal, finalized, statement, flock, true);
+						result = Expression::fin_(token, statement, flock);
+					}
 					else if (symbol->is_("..")) // iterator
 					{
 						flk->push_back_(sym_("&"));
@@ -483,7 +489,7 @@ private:
 			if (symbol->is_("."))
 			{
 				_next_();
-				_dot_(scope, shoal, finalized, statement, flock);
+				_dot_(scope, shoal, finalized, statement, flock, false);
 			}
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
@@ -778,7 +784,7 @@ private:
 		return true; // continue
 	}
 
-	inline void _dot_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& statement, const Ptr& flock)
+	inline void _dot_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& statement, const Ptr& flock, const bool me_dot)
 	{
 		const Ptr token = _token_();
 		Token* const tok = static_<Token>(token);
@@ -805,17 +811,17 @@ private:
 		{
 			_next_();
 			flk->push_back_(symbol);
-			_member_(scope, shoal, finalized, statement, flock);
+			_member_(scope, shoal, finalized, statement, flock, me_dot);
 		}
 	}
 
-	inline void _member_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& statement, const Ptr& flock)
+	inline void _member_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& statement, const Ptr& flock, const bool me_dot = false)
 	{
 		const Ptr token = _token_();
 		Reference* const smt = static_<Reference>(statement);
 		if (token->is_("."))
 		{
-			smt->set_(sym_("method_"));
+			smt->set_(sym_(me_dot ? "private_" : "method_"));
 			return;
 		}
 		Flock* const flk = static_<Flock>(flock);
@@ -832,28 +838,28 @@ private:
 			{
 				_next_();
 				_list_(scope, shoal, finalized, flock, symbol, sym_("]"));
-				smt->set_(sym_("operate_"));
+				smt->set_(sym_(me_dot ? "intimate_" : "operate_"));
 			}
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
 				flk->push_back_(_parse_(scope, shoal, finalized));
-				smt->set_(sym_("operate_iterable_"));
+				smt->set_(sym_(me_dot ? "intimate_iterable_" : "operate_iterable_"));
 			}
 			else if (symbol->is_("<<")) // iterator
 			{
 				_next_();
 				_list_(scope, shoal, finalized, flock, symbol, sym_(">>"));
-				smt->set_(sym_("operate_iterator_"));
+				smt->set_(sym_(me_dot ? "intimate_iterator_" : "operate_iterator_"));
 			}
 			else
 			{
-				smt->set_(sym_("method_"));
+				smt->set_(sym_(me_dot ? "private_" : "method_"));
 			}
 		}
 		else
 		{
 			flk->push_back_(_parse_(scope, shoal, finalized));
-			smt->set_(sym_("operate_iterable_"));
+			smt->set_(sym_(me_dot ? "intimate_iterable_" : "operate_iterable_"));
 		}
 	}
 

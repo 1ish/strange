@@ -256,6 +256,11 @@ public:
 		return _public;
 	}
 
+	inline const Ptr members_() const
+	{
+		return _members;
+	}
+
 	virtual inline const Ptr to_lake_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("to_lake");
