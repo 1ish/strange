@@ -331,8 +331,15 @@ public:
 					break;
 				}
 				return Token::punctuation_(_filename, _x, _y, token);
-			case '&':
 			case '|':
+				token = char1;
+				if (char1 == char2 || char2 == '.')
+				{
+					second = true;
+					break;
+				}
+				return Token::punctuation_(_filename, _x, _y, token);
+			case '&':
 			case '^':
 			case '$':
 			case '~':
