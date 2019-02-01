@@ -11,6 +11,7 @@
 namespace strange
 {
 	class Expression;
+	class Function;
 
 	// Categories:
 	// private typedefs
@@ -611,30 +612,7 @@ private:
 		}
 	}
 
-	inline const Ptr _lambda_(const Ptr& local) const
-	{
-		try
-		{
-			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			Shoal::Concurrent* const shared = static_<Shoal::Concurrent>(static_<Shoal>(local)->at_("$"));
-			const std::size_t size_1 = vec.size() - 1;
-			Ptr param;
-			for (std::size_t i = 0; i < size_1; ++i)
-			{
-				if (i % 2 == 0)
-				{
-					param = vec[i];
-					continue;
-				}
-				shared->update_(param, Expression::evaluate_(vec[i], local));
-			}
-			return Expression::evaluate_(vec[size_1], local);
-		}
-		catch (const std::exception& err)
-		{
-			throw _stack_(err.what());
-		}
-	}
+	inline const Ptr _lambda_(const Ptr& local) const;
 
 	inline const Ptr _function_(const Ptr& local) const
 	{
@@ -1110,8 +1088,81 @@ private:
 	};
 };
 
+//----------------------------------------------------------------------
+class Function : public Thing
+//----------------------------------------------------------------------
+{
+public:
+	inline Function(const Ptr& expression, const Ptr& shared)
+		: Thing{}
+		, _expression{ expression }
+		, _shared{ shared }
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr& expression, const Ptr& capture = Shoal::mut_())
+	{
+		return fake_<Function>(expression, Shoal::Concurrent::mut_(capture));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Function");
+		return TYPE;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		const Ptr local = Shoal::mut_();
+		Shoal* const loc = static_<Shoal>(local);
+		loc->insert_("$", _shared);
+		Creature* const creature = dynamic_cast<Creature*>(thing);
+		if (creature)
+		{
+			loc->insert_("|", creature->me_());
+		}
+		loc->insert_("&", it);
+		return static_<Expression>(_expression)->evaluate_(_expression, local);
+	}
+
+private:
+	const Ptr _expression;
+	const Ptr _shared;
+};
+
 //======================================================================
 // class Expression
+//======================================================================
+
+inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
+{
+	try
+	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+		const Ptr capture = Shoal::mut_();
+		Shoal* const shoal = static_<Shoal>(capture);
+		const std::size_t size_1 = vec.size() - 1;
+		Ptr param;
+		for (std::size_t i = 0; i < size_1; ++i)
+		{
+			if (i % 2 == 0)
+			{
+				param = vec[i];
+				continue;
+			}
+			shoal->update_(param, Expression::evaluate_(vec[i], local));
+		}
+		return Function::fin_(vec[size_1], capture);
+	}
+	catch (const std::exception& err)
+	{
+		throw _stack_(err.what());
+	}
+}
+
+//======================================================================
+// class Function
 //======================================================================
 
 } // namespace strange

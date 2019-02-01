@@ -16,7 +16,6 @@
 #include "strange_expression.h"
 #include "strange_generator.h"
 #include "strange_cpp_generator.h"
-#include "strange_function.h"
 #include "strange_token.h"
 #include "strange_tokenizer.h"
 #include "strange_parser.h"

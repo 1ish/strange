@@ -5,7 +5,6 @@
 #include "strange_reference.h"
 #include "strange_creature.h"
 #include "strange_expression.h"
-#include "strange_function.h"
 #include "strange_tokenizer.h"
 
 namespace strange
@@ -177,9 +176,39 @@ private:
 				}
 				else if (tag == 'N') // name
 				{
-					if (symbol->is_("lambda_") || symbol->is_("function_"))
+					if (symbol->is_("lambda_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock, true, symbol->is_("lambda_"))) // parameters/capture
+						if (_statement_(scope, shoal, finalized, flock, true, true)) // parameters/capture
+						{
+							if (flk->size_() % 2 == 0)
+							{
+								const Ptr nested = Flock::mut_();
+								Flock* const nst = static_<Flock>(nested);
+								if (_statement_(scope, shoal, finalized, nested, true)) // parameters
+								{
+									if (nst->size_() % 2 == 0)
+									{
+										nst->push_back_(_parse_(scope, shoal, Herd::mut_())); // create new 'finalized' scope
+										flk->push_back_(Expression::fin_(token, symbol, nested));
+										result = Expression::fin_(token, symbol, flock);
+									}
+									else
+									{
+										throw tok->error_("Parser ERROR: invalid lambda_ function_");
+									}
+									continue;
+								}
+							}
+							else
+							{
+								throw tok->error_("Parser ERROR: invalid lambda_");
+							}
+							continue;
+						}
+					}
+					if (symbol->is_("function_"))
+					{
+						if (_statement_(scope, shoal, finalized, flock, true)) // parameters
 						{
 							if (flk->size_() % 2 == 0)
 							{
@@ -188,7 +217,7 @@ private:
 							}
 							else
 							{
-								throw tok->error_("Parser ERROR: invalid lambda_/function_");
+								throw tok->error_("Parser ERROR: invalid function_");
 							}
 							continue;
 						}
