@@ -189,7 +189,7 @@ private:
 									if (nst->size_() % 2 == 0)
 									{
 										nst->push_back_(_parse_(scope, shoal, Herd::mut_())); // create new 'finalized' scope
-										flk->push_back_(Expression::fin_(token, symbol, nested));
+										flk->push_back_(Expression::fin_(token, sym_("closure_"), nested));
 										result = Expression::fin_(token, symbol, flock);
 									}
 									else
@@ -206,18 +206,18 @@ private:
 							continue;
 						}
 					}
-					if (symbol->is_("function_"))
+					if (symbol->is_("function_") || symbol->is_("mutation_") || symbol->is_("extraction_"))
 					{
 						if (_statement_(scope, shoal, finalized, flock, true)) // parameters
 						{
 							if (flk->size_() % 2 == 0)
 							{
 								flk->push_back_(_parse_(scope, shoal, Herd::mut_())); // create new 'finalized' scope
-								result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
+								result = Expression::fin_(token, symbol, flock);
 							}
 							else
 							{
-								throw tok->error_("Parser ERROR: invalid function_");
+								throw tok->error_("Parser ERROR: invalid function_/mutation_/extraction_");
 							}
 							continue;
 						}

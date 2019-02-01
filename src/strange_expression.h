@@ -12,6 +12,9 @@ namespace strange
 {
 	class Expression;
 	class Function;
+	class Closure;
+	class Mutation;
+	class Extraction;
 
 	// Categories:
 	// private typedefs
@@ -72,295 +75,7 @@ public:
 		return exp;
 	}
 
-	static inline const Ptr fin_(const Ptr& token, const Ptr& statement, const Ptr& flock)
-	{
-		const int64_t size = static_<Flock>(flock)->size_();
-		if (statement->is_("local_"))
-		{
-			if (size == 1)
-			{
-				return fin_(token, statement, &Expression::_local_at_, flock);
-			}
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_local_update_, flock);
-			}
-			throw Disagreement("local_ expression of wrong size");
-		}
-		else if (statement->is_("shared_at_"))
-		{
-			if (size == 1)
-			{
-				return fin_(token, statement, &Expression::_shared_at_, flock);
-			}
-			throw Disagreement("shared_at_ expression of wrong size");
-		}
-		else if (statement->is_("shared_update_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_shared_update_, flock);
-			}
-			throw Disagreement("shared_update_ expression of wrong size");
-		}
-		else if (statement->is_("shared_insert_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_shared_insert_, flock);
-			}
-			throw Disagreement("shared_insert_ expression of wrong size");
-		}
-		else if (statement->is_("me_"))
-		{
-			if (size == 0)
-			{
-				return fin_(token, statement, &Expression::_me_, flock);
-			}
-			throw Disagreement("me_ expression of wrong size");
-		}
-		else if (statement->is_("thing_"))
-		{
-			if (size == 1)
-			{
-				return fin_(token, statement, &Expression::_thing_, flock);
-			}
-			throw Disagreement("thing_ expression of wrong size");
-		}
-		else if (statement->is_("invoke_"))
-		{
-			if (size >= 1)
-			{
-				return fin_(token, statement, &Expression::_invoke_, flock);
-			}
-			throw Disagreement("invoke_ expression of wrong size");
-		}
-		else if (statement->is_("invoke_iterator_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_invoke_iterator_, flock);
-			}
-			throw Disagreement("invoke_iterator_ expression of wrong size");
-		}
-		else if (statement->is_("invoke_iterable_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_invoke_iterable_, flock);
-			}
-			throw Disagreement("invoke_iterable_ expression of wrong size");
-		}
-		else if (statement->is_("method_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_method_, flock);
-			}
-			throw Disagreement("method_ expression of wrong size");
-		}
-		else if (statement->is_("operate_"))
-		{
-			if (size >= 2)
-			{
-				return fin_(token, statement, &Expression::_operate_, flock);
-			}
-			throw Disagreement("operate_ expression of wrong size");
-		}
-		else if (statement->is_("operate_iterator_"))
-		{
-			if (size == 3)
-			{
-				return fin_(token, statement, &Expression::_operate_iterator_, flock);
-			}
-			throw Disagreement("operate_iterator_ expression of wrong size");
-		}
-		else if (statement->is_("operate_iterable_"))
-		{
-			if (size == 3)
-			{
-				return fin_(token, statement, &Expression::_operate_iterable_, flock);
-			}
-			throw Disagreement("operate_iterable_ expression of wrong size");
-		}
-		else if (statement->is_("private_"))
-		{
-			if (size == 1)
-			{
-				return fin_(token, statement, &Expression::_private_, flock);
-			}
-			throw Disagreement("private_ expression of wrong size");
-		}
-		else if (statement->is_("intimate_"))
-		{
-			if (size >= 1)
-			{
-				return fin_(token, statement, &Expression::_intimate_, flock);
-			}
-			throw Disagreement("intimate_ expression of wrong size");
-		}
-		else if (statement->is_("intimate_iterator_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_intimate_iterator_, flock);
-			}
-			throw Disagreement("intimate_iterator_ expression of wrong size");
-		}
-		else if (statement->is_("intimate_iterable_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_intimate_iterable_, flock);
-			}
-			throw Disagreement("intimate_iterable_ expression of wrong size");
-		}
-		else if (statement->is_("lambda_"))
-		{
-			if (size % 2 == 1)
-			{
-				return fin_(token, statement, &Expression::_lambda_, flock);
-			}
-			throw Disagreement("lambda_ expression of wrong size");
-		}
-		else if (statement->is_("function_"))
-		{
-			if (size % 2 == 1)
-			{
-				return fin_(token, statement, &Expression::_function_, flock);
-			}
-			throw Disagreement("function_ expression of wrong size");
-		}
-		else if (statement->is_("shared_scope_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_shared_scope_, flock);
-			}
-			throw Disagreement("shared_scope_ expression of wrong size");
-		}
-		else if (statement->is_("relative_scope_"))
-		{
-			if (size == 3)
-			{
-				return fin_(token, statement, &Expression::_relative_scope_, flock);
-			}
-			throw Disagreement("relative_scope_ expression of wrong size");
-		}
-		else if (statement->is_("flock_"))
-		{
-			return fin_(token, statement, &Expression::_flock_, flock);
-		}
-		else if (statement->is_("flock_iterator_"))
-		{
-			if (size == 1)
-			{
-				return fin_(token, statement, &Expression::_flock_iterator_, flock);
-			}
-			throw Disagreement("flock_iterator_ expression of wrong size");
-		}
-		else if (statement->is_("shoal_"))
-		{
-			if (size % 2 == 0)
-			{
-				return fin_(token, statement, &Expression::_shoal_, flock);
-			}
-			throw Disagreement("shoal_ expression of odd size");
-		}
-		else if (statement->is_("herd_"))
-		{
-			return fin_(token, statement, &Expression::_herd_, flock);
-		}
-		else if (statement->is_("break_"))
-		{
-			if (size == 1)
-			{
-				return fin_(token, statement, &Expression::_break_, flock);
-			}
-			throw Disagreement("break_ expression of wrong size");
-		}
-		else if (statement->is_("continue_"))
-		{
-			if (size == 1)
-			{
-				return fin_(token, statement, &Expression::_continue_, flock);
-			}
-			throw Disagreement("continue_ expression of wrong size");
-		}
-		else if (statement->is_("return_"))
-		{
-			if (size == 1)
-			{
-				return fin_(token, statement, &Expression::_return_, flock);
-			}
-			throw Disagreement("return_ expression of wrong size");
-		}
-		else if (statement->is_("error_"))
-		{
-			return fin_(token, statement, &Expression::_error_, flock);
-		}
-		else if (statement->is_("throw_"))
-		{
-			if (size == 1)
-			{
-				return fin_(token, statement, &Expression::_throw_, flock);
-			}
-			throw Disagreement("throw_ expression of wrong size");
-		}
-		else if (statement->is_("catch_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_catch_, flock);
-			}
-			throw Disagreement("catch_ expression of wrong size");
-		}
-		else if (statement->is_("block_"))
-		{
-			return fin_(token, statement, &Expression::_block_, flock);
-		}
-		else if (statement->is_("if_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_if_, flock);
-			}
-			if (size == 3)
-			{
-				return fin_(token, statement, &Expression::_if_else_, flock);
-			}
-			throw Disagreement("if_ expression of wrong size");
-		}
-		else if (statement->is_("while_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_while_, flock);
-			}
-			throw Disagreement("while_ expression of wrong size");
-		}
-		else if (statement->is_("do_"))
-		{
-			if (size == 2)
-			{
-				return fin_(token, statement, &Expression::_do_, flock);
-			}
-			throw Disagreement("do_ expression of wrong size");
-		}
-		else if (statement->is_("for_"))
-		{
-			if (size == 4)
-			{
-				return fin_(token, statement, &Expression::_for_, flock);
-			}
-			throw Disagreement("for_ expression of wrong size");
-		}
-		else
-		{
-			throw Disagreement("expression with unexpected statement");
-		}
-		return fin_(token);
-	}
+	static inline const Ptr fin_(const Ptr& token, const Ptr& statement, const Ptr& flock);
 
 	static inline const Ptr fin_(const Ptr& token, const Ptr& thing = nothing_())
 	{
@@ -1217,16 +932,16 @@ class Function : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	inline Function(const Ptr& expression, const Ptr& shared)
+	inline Function(const Ptr& expression)
 		: Thing{}
 		, _expression{ expression }
-		, _shared{ shared }
+		, _shared{ Shoal::Concurrent::mut_() }
 	{
 	}
 
-	static inline const Ptr fin_(const Ptr& expression, const Ptr& capture = Shoal::mut_())
+	static inline const Ptr fin_(const Ptr& expression)
 	{
-		return fake_<Function>(expression, Shoal::Concurrent::mut_(capture));
+		return fake_<Function>(expression);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1242,11 +957,126 @@ protected:
 		Shoal* const loc = static_<Shoal>(local);
 		loc->insert_("$", _shared);
 		loc->insert_("&", it);
-		Creature* const creature = dynamic_cast<Creature*>(thing);
-		if (creature)
+		return static_<Expression>(_expression)->evaluate_(_expression, local);
+	}
+
+private:
+	const Ptr _expression;
+	const Ptr _shared;
+};
+
+//----------------------------------------------------------------------
+class Closure : public Thing
+//----------------------------------------------------------------------
+{
+public:
+	inline Closure(const Ptr& expression, const Ptr& shared)
+		: Thing{}
+		, _expression{ expression }
+		, _shared{ shared }
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr& expression, const Ptr& shared)
+	{
+		return fake_<Closure>(expression, shared);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Closure");
+		return TYPE;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		const Ptr local = Shoal::mut_();
+		Shoal* const loc = static_<Shoal>(local);
+		loc->insert_("$", _shared);
+		loc->insert_("&", it);
+		return static_<Expression>(_expression)->evaluate_(_expression, local);
+	}
+
+private:
+	const Ptr _expression;
+	const Ptr _shared;
+};
+
+//----------------------------------------------------------------------
+class Mutation : public Thing
+//----------------------------------------------------------------------
+{
+public:
+	inline Mutation(const Ptr& expression)
+		: Thing{}
+		, _expression{ expression }
+		, _shared{ Shoal::Concurrent::mut_() }
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr& expression)
+	{
+		return fake_<Mutation>(expression);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Mutation");
+		return TYPE;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		if (thing->final_())
 		{
-			loc->insert_("|", creature->me_());
+			throw Mutilation(thing->type_());
 		}
+		const Ptr local = Shoal::mut_();
+		Shoal* const loc = static_<Shoal>(local);
+		loc->insert_("$", _shared);
+		loc->insert_("&", it);
+		loc->insert_("|", thing->me_());
+		return static_<Expression>(_expression)->evaluate_(_expression, local);
+	}
+
+private:
+	const Ptr _expression;
+	const Ptr _shared;
+};
+
+//----------------------------------------------------------------------
+class Extraction : public Thing
+//----------------------------------------------------------------------
+{
+public:
+	inline Extraction(const Ptr& expression)
+		: Thing{}
+		, _expression{ expression }
+		, _shared{ Shoal::Concurrent::mut_() }
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr& expression)
+	{
+		return fake_<Extraction>(expression);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Extraction");
+		return TYPE;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		const Ptr local = Shoal::mut_();
+		Shoal* const loc = static_<Shoal>(local);
+		loc->insert_("$", _shared);
+		loc->insert_("&", it);
+		loc->insert_("|", thing->me_());
 		return static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
 
@@ -1259,13 +1089,327 @@ private:
 // class Expression
 //======================================================================
 
+inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement, const Ptr& flock)
+{
+	const int64_t size = static_<Flock>(flock)->size_();
+	if (statement->is_("local_"))
+	{
+		if (size == 1)
+		{
+			return fin_(token, statement, &Expression::_local_at_, flock);
+		}
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_local_update_, flock);
+		}
+		throw Disagreement("local_ expression of wrong size");
+	}
+	else if (statement->is_("shared_at_"))
+	{
+		if (size == 1)
+		{
+			return fin_(token, statement, &Expression::_shared_at_, flock);
+		}
+		throw Disagreement("shared_at_ expression of wrong size");
+	}
+	else if (statement->is_("shared_update_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_shared_update_, flock);
+		}
+		throw Disagreement("shared_update_ expression of wrong size");
+	}
+	else if (statement->is_("shared_insert_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_shared_insert_, flock);
+		}
+		throw Disagreement("shared_insert_ expression of wrong size");
+	}
+	else if (statement->is_("me_"))
+	{
+		if (size == 0)
+		{
+			return fin_(token, statement, &Expression::_me_, flock);
+		}
+		throw Disagreement("me_ expression of wrong size");
+	}
+	else if (statement->is_("thing_"))
+	{
+		if (size == 1)
+		{
+			return fin_(token, statement, &Expression::_thing_, flock);
+		}
+		throw Disagreement("thing_ expression of wrong size");
+	}
+	else if (statement->is_("invoke_"))
+	{
+		if (size >= 1)
+		{
+			return fin_(token, statement, &Expression::_invoke_, flock);
+		}
+		throw Disagreement("invoke_ expression of wrong size");
+	}
+	else if (statement->is_("invoke_iterator_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_invoke_iterator_, flock);
+		}
+		throw Disagreement("invoke_iterator_ expression of wrong size");
+	}
+	else if (statement->is_("invoke_iterable_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_invoke_iterable_, flock);
+		}
+		throw Disagreement("invoke_iterable_ expression of wrong size");
+	}
+	else if (statement->is_("method_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_method_, flock);
+		}
+		throw Disagreement("method_ expression of wrong size");
+	}
+	else if (statement->is_("operate_"))
+	{
+		if (size >= 2)
+		{
+			return fin_(token, statement, &Expression::_operate_, flock);
+		}
+		throw Disagreement("operate_ expression of wrong size");
+	}
+	else if (statement->is_("operate_iterator_"))
+	{
+		if (size == 3)
+		{
+			return fin_(token, statement, &Expression::_operate_iterator_, flock);
+		}
+		throw Disagreement("operate_iterator_ expression of wrong size");
+	}
+	else if (statement->is_("operate_iterable_"))
+	{
+		if (size == 3)
+		{
+			return fin_(token, statement, &Expression::_operate_iterable_, flock);
+		}
+		throw Disagreement("operate_iterable_ expression of wrong size");
+	}
+	else if (statement->is_("private_"))
+	{
+		if (size == 1)
+		{
+			return fin_(token, statement, &Expression::_private_, flock);
+		}
+		throw Disagreement("private_ expression of wrong size");
+	}
+	else if (statement->is_("intimate_"))
+	{
+		if (size >= 1)
+		{
+			return fin_(token, statement, &Expression::_intimate_, flock);
+		}
+		throw Disagreement("intimate_ expression of wrong size");
+	}
+	else if (statement->is_("intimate_iterator_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_intimate_iterator_, flock);
+		}
+		throw Disagreement("intimate_iterator_ expression of wrong size");
+	}
+	else if (statement->is_("intimate_iterable_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_intimate_iterable_, flock);
+		}
+		throw Disagreement("intimate_iterable_ expression of wrong size");
+	}
+	else if (statement->is_("lambda_"))
+	{
+		if (size % 2 == 1)
+		{
+			return fin_(token, statement, &Expression::_lambda_, flock);
+		}
+		throw Disagreement("lambda_ expression of wrong size");
+	}
+	else if (statement->is_("function_"))
+	{
+		if (size % 2 == 1)
+		{
+			return fin_(token, Function::fin_(fin_(token, statement, &Expression::_function_, flock)));
+		}
+		throw Disagreement("function_ expression of wrong size");
+	}
+	else if (statement->is_("closure_"))
+	{
+		if (size % 2 == 1)
+		{
+			return fin_(token, statement, &Expression::_function_, flock);
+		}
+		throw Disagreement("closure_ expression of wrong size");
+	}
+	else if (statement->is_("mutation_"))
+	{
+		if (size % 2 == 1)
+		{
+			return fin_(token, Mutation::fin_(fin_(token, statement, &Expression::_function_, flock)));
+		}
+		throw Disagreement("mutation_ expression of wrong size");
+	}
+	else if (statement->is_("extraction_"))
+	{
+		if (size % 2 == 1)
+		{
+			return fin_(token, Extraction::fin_(fin_(token, statement, &Expression::_function_, flock)));
+		}
+		throw Disagreement("extraction_ expression of wrong size");
+	}
+	else if (statement->is_("shared_scope_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_shared_scope_, flock);
+		}
+		throw Disagreement("shared_scope_ expression of wrong size");
+	}
+	else if (statement->is_("relative_scope_"))
+	{
+		if (size == 3)
+		{
+			return fin_(token, statement, &Expression::_relative_scope_, flock);
+		}
+		throw Disagreement("relative_scope_ expression of wrong size");
+	}
+	else if (statement->is_("flock_"))
+	{
+		return fin_(token, statement, &Expression::_flock_, flock);
+	}
+	else if (statement->is_("flock_iterator_"))
+	{
+		if (size == 1)
+		{
+			return fin_(token, statement, &Expression::_flock_iterator_, flock);
+		}
+		throw Disagreement("flock_iterator_ expression of wrong size");
+	}
+	else if (statement->is_("shoal_"))
+	{
+		if (size % 2 == 0)
+		{
+			return fin_(token, statement, &Expression::_shoal_, flock);
+		}
+		throw Disagreement("shoal_ expression of odd size");
+	}
+	else if (statement->is_("herd_"))
+	{
+		return fin_(token, statement, &Expression::_herd_, flock);
+	}
+	else if (statement->is_("break_"))
+	{
+		if (size == 1)
+		{
+			return fin_(token, statement, &Expression::_break_, flock);
+		}
+		throw Disagreement("break_ expression of wrong size");
+	}
+	else if (statement->is_("continue_"))
+	{
+		if (size == 1)
+		{
+			return fin_(token, statement, &Expression::_continue_, flock);
+		}
+		throw Disagreement("continue_ expression of wrong size");
+	}
+	else if (statement->is_("return_"))
+	{
+		if (size == 1)
+		{
+			return fin_(token, statement, &Expression::_return_, flock);
+		}
+		throw Disagreement("return_ expression of wrong size");
+	}
+	else if (statement->is_("error_"))
+	{
+		return fin_(token, statement, &Expression::_error_, flock);
+	}
+	else if (statement->is_("throw_"))
+	{
+		if (size == 1)
+		{
+			return fin_(token, statement, &Expression::_throw_, flock);
+		}
+		throw Disagreement("throw_ expression of wrong size");
+	}
+	else if (statement->is_("catch_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_catch_, flock);
+		}
+		throw Disagreement("catch_ expression of wrong size");
+	}
+	else if (statement->is_("block_"))
+	{
+		return fin_(token, statement, &Expression::_block_, flock);
+	}
+	else if (statement->is_("if_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_if_, flock);
+		}
+		if (size == 3)
+		{
+			return fin_(token, statement, &Expression::_if_else_, flock);
+		}
+		throw Disagreement("if_ expression of wrong size");
+	}
+	else if (statement->is_("while_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_while_, flock);
+		}
+		throw Disagreement("while_ expression of wrong size");
+	}
+	else if (statement->is_("do_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_do_, flock);
+		}
+		throw Disagreement("do_ expression of wrong size");
+	}
+	else if (statement->is_("for_"))
+	{
+		if (size == 4)
+		{
+			return fin_(token, statement, &Expression::_for_, flock);
+		}
+		throw Disagreement("for_ expression of wrong size");
+	}
+	else
+	{
+		throw Disagreement("expression with unexpected statement");
+	}
+	return fin_(token);
+}
+
 inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 {
 	try
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-		const Ptr capture = Shoal::mut_();
-		Shoal* const shoal = static_<Shoal>(capture);
+		const Ptr shared = Shoal::Concurrent::mut_();
+		Shoal::Concurrent* const capture = static_<Shoal::Concurrent>(shared);
 		const std::size_t size_1 = vec.size() - 1;
 		Ptr param;
 		for (std::size_t i = 0; i < size_1; ++i)
@@ -1275,9 +1419,9 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 				param = vec[i];
 				continue;
 			}
-			shoal->update_(param, Expression::evaluate_(vec[i], local));
+			capture->update_(param, Expression::evaluate_(vec[i], local));
 		}
-		return Function::fin_(vec[size_1], capture);
+		return Closure::fin_(vec[size_1], shared);
 	}
 	catch (const std::exception& err)
 	{
@@ -1287,6 +1431,18 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 
 //======================================================================
 // class Function
+//======================================================================
+
+//======================================================================
+// class Closure
+//======================================================================
+
+//======================================================================
+// class Mutation
+//======================================================================
+
+//======================================================================
+// class Extraction
 //======================================================================
 
 } // namespace strange

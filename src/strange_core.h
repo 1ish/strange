@@ -949,24 +949,19 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
+		if (thing->final_())
+		{
+			throw Mutilation(thing->type_());
+		}
 #ifdef STRANGE_CHECK_OPERATOR_THING
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
 		{
-			if (t->final_())
-			{
-				throw Mutilation(thing->type_());
-			}
 			return (t->*_function)(it);
 		}
 		throw Disagreement("ERROR: Member passed wrong type of thing");
 #else
-		T* const t = static_cast<T*>(thing);
-		if (t->final_())
-		{
-			throw Mutilation(thing->type_());
-		}
-		return (t->*_function)(it);
+		return (static_cast<T*>(thing)->*_function)(it);
 #endif
 	}
 
@@ -1590,8 +1585,8 @@ public:
 
 		inline void update_(const Ptr& key, const Ptr& value)
 		{
-			key->freeze_();
-			value->freeze_();
+			key->clone_freeze_();
+			value->clone_freeze_();
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
 			static_<Shoal>(_shoal)->update_(key, value);
 		}
@@ -1606,8 +1601,8 @@ public:
 
 		inline const bool insert_(const Ptr& key, const Ptr& value)
 		{
-			key->freeze_();
-			value->freeze_();
+			key->clone_freeze_();
+			value->clone_freeze_();
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
 			return static_<Shoal>(_shoal)->insert_(key, value);
 		}
@@ -2159,7 +2154,7 @@ public:
 
 		inline void push_back_(const Ptr& item)
 		{
-			item->freeze_();
+			item->clone_freeze_();
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
 			static_<Flock>(_flock)->push_back_(item);
 		}
@@ -2821,7 +2816,7 @@ public:
 
 		inline const bool insert_(const Ptr& item)
 		{
-			item->freeze_();
+			item->clone_freeze_();
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
 			return static_<Herd>(_herd)->insert_(item);
 		}
