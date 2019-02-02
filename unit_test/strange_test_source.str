@@ -1,10 +1,15 @@
-(	out := $$strange::River::out
-,	out[].write["hello world\n"]
+(	out := $$strange::River::out[]
+,	out.write"hello world\n"
 ,	x := 3
 ,	s :=
 	{	'f'::function_(a)(a+2)
 	}
 ,	y := $$f[x+1]
-,	z := (s@'f')[y]
-,	out[].write[z.to_symbol[], "\n"]
+,	z := (s@['f'])[y]
+,	z := s@'f'[y]
+,	z := s@'f'y
+,	out.write[z.to_symbol[], "\n"]
+,	it := ["a","b","c","\n"]
+,	out.write it
+,	{'m'::out.write}@'m'"last\n"
 )
