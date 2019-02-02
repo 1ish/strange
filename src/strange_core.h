@@ -8618,14 +8618,14 @@ inline const Thing::Ptr& Thing::shared_()
 
 inline Thing::Dismemberment::Dismemberment(const Ptr& type, const Ptr& member)
 	:Disagreement("Dismemberment "
-		+ static_<Symbol>(type)->get_() + "."
-		+ static_<Symbol>(member)->get_())
+		+ (dynamic_<Symbol>(type) ? static_<Symbol>(type)->get_() : std::string("[UNKNOWN]")) + "."
+		+ (dynamic_<Symbol>(member) ? static_<Symbol>(member)->get_() : std::string("[UNKNOWN]")))
 {
 }
 
 inline Thing::Mutilation::Mutilation(const Ptr& type)
 	:Disagreement("Mutilation "
-		+ static_<Symbol>(type)->get_())
+		+ (dynamic_<Symbol>(type) ? static_<Symbol>(type)->get_() : std::string("[UNKNOWN]")))
 {
 }
 

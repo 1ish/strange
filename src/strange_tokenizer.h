@@ -202,6 +202,7 @@ public:
 			{
 				if (second)
 				{
+					token = "";
 					commentblock = false;
 				}
 				second = (char1 == '*' && char2 == '/');
