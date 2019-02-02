@@ -350,7 +350,7 @@ private:
 				{
 					if (symbol->is_("$")) // shared at/update
 					{
-						_shared_(flock);
+						_name_(flock);
 						bool insert = false;
 						cont = _update_(scope, shoal, finalized, flock, static_<Symbol>(symbol)->add_(flk->at_(0)), insert);
 						if (cont)
@@ -375,6 +375,12 @@ private:
 						_next_();
 						_dot_(scope, shoal, finalized, statement, flock, true);
 						result = Expression::fin_(token, statement, flock);
+					}
+					else if (symbol->is_("|:.")) // me operation
+					{
+						_next_();
+						_name_(flock);
+						result = Expression::fin_(token, sym_("intimation_"), flock);
 					}
 					else if (symbol->is_("..")) // iterator
 					{
@@ -772,6 +778,18 @@ private:
 				flk->push_back_(sym_("greater_or_equal"));
 				_member_(scope, shoal, finalized, statement, flock);
 			}
+			else if (symbol->is_(":."))
+			{
+				_next_();
+				_name_(flock);
+				smt->set_(sym_("operation_"));
+			}
+			else if (symbol->is_(".:"))
+			{
+				_next_();
+				flk->push_back_(_parse_(scope, shoal, finalized, false));
+				smt->set_(sym_("perform_"));
+			}
 			else
 			{
 				return false; // break
@@ -1016,7 +1034,7 @@ private:
 					else
 					{
 						const Ptr shared = Flock::mut_();
-						_shared_(shared);
+						_name_(shared);
 						captured = static_<Symbol>(symbol)->add_(static_<Flock>(shared)->at_(0));
 					}
 					flk->push_back_(captured);
@@ -1190,13 +1208,13 @@ private:
 		return is_map;
 	}
 
-	inline void _shared_(const Ptr& flock)
+	inline void _name_(const Ptr& flock)
 	{
 		const Ptr token = _token_();
 		Token* const tok = static_<Token>(token);
 		if (token->is_("."))
 		{
-			throw tok->error_("Parser ERROR: shared stop");
+			throw tok->error_("Parser ERROR: stop instead of name");
 		}
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
@@ -1205,11 +1223,11 @@ private:
 		}
 		if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 		{
-			throw tok->error_("Parser ERROR: shared literal");
+			throw tok->error_("Parser ERROR: literal instead of name");
 		}
 		if (tag == 'P') // punctuation
 		{
-			throw tok->error_("Parser ERROR: shared punctuation");
+			throw tok->error_("Parser ERROR: punctuation instead of name");
 		}
 		if (tag == 'N') // name
 		{

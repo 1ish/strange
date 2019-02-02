@@ -257,6 +257,20 @@ public:
 					clone = true;
 					continue;
 				}
+				if (token == "|")
+				{
+					if (char1 == ':' && char2 == '.') // |:.
+					{
+						token += char1;
+						continue;
+					}
+					if (char1 == ':' || // |:
+						(char1 == '.' && char2 == ':')) // |.:
+					{
+						_use = char1; // : or .
+						return Token::punctuation_(_filename, _x, _y, token); // |
+					}
+				}
 				return Token::punctuation_(_filename, _x, _y, token + char1);
 			}
 			else if (singlequote && char1 == '\'')
@@ -294,24 +308,42 @@ public:
 				token = char1;
 				doublequote = true;
 				break;
-			case '!':
-				if (char2 == '&' || char2 == '|' || char2 == '%')
-				{
-					second = true;
-				}
 			case '+':
 			case '-':
 			case '*':
 			case '%':
-			case ':':
 			case '#':
-				if ((char1 != '!' && char1 == char2) || char2 == '=')
+				if (char1 == char2 || char2 == '=')
 				{
 					second = true;
 				}
 				token = char1;
 				if (second)
 				{
+					break;
+				}
+				return Token::punctuation_(_filename, _x, _y, token);
+			case '!':
+				token = char1;
+				if (char2 == '&' || char2 == '|' || char2 == '%' || char2 == '=')
+				{
+					second = true;
+					break;
+				}
+				return Token::punctuation_(_filename, _x, _y, token);
+			case ':':
+				token = char1;
+				if (char1 == char2 || char2 == '.' || char2 == '=')
+				{
+					second = true;
+					break;
+				}
+				return Token::punctuation_(_filename, _x, _y, token);
+			case '.':
+				token = char1;
+				if (char1 == char2 || char2 == ':')
+				{
+					second = true;
 					break;
 				}
 				return Token::punctuation_(_filename, _x, _y, token);
@@ -334,7 +366,7 @@ public:
 				return Token::punctuation_(_filename, _x, _y, token);
 			case '|':
 				token = char1;
-				if (char1 == char2 || char2 == '.')
+				if (char1 == char2 || char2 == '.' || char2 == ':')
 				{
 					second = true;
 					break;
@@ -344,7 +376,6 @@ public:
 			case '^':
 			case '$':
 			case '~':
-			case '.':
 			case '=':
 				token = char1;
 				if (char1 == char2)

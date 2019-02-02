@@ -359,6 +359,40 @@ private:
 		}
 	}
 
+	inline const Ptr _operation_(const Ptr& local) const
+	{
+		try
+		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = Expression::evaluate_(vec[0], local);
+			const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
+			if (member->is_nothing_())
+			{
+				throw Dismemberment(thing->type_(), vec[1]);
+			}
+			return member;
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
+	inline const Ptr _perform_(const Ptr& local) const
+	{
+		try
+		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = Expression::evaluate_(vec[0], local);
+			const Ptr member = Expression::evaluate_(vec[1], local);
+			return Method::fin_(thing, member);
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
 	inline const Ptr _private_(const Ptr& local) const
 	{
 		try
@@ -444,6 +478,29 @@ private:
 				return operate_(thing.get(), member, feeder);
 			}
 			return operate_(thing.get(), member, iterable->iterator_());
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
+	inline const Ptr _intimation_(const Ptr& local) const
+	{
+		try
+		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const Ptr thing = static_<Shoal>(local)->at_("|");
+			if (thing->is_nothing_())
+			{
+				throw _stack_("me accessed without a creature");
+			}
+			const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+			if (member->is_nothing_())
+			{
+				throw Dismemberment(thing->type_(), vec[0]);
+			}
+			return member;
 		}
 		catch (const std::exception& err)
 		{
@@ -1198,6 +1255,22 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 		}
 		throw Disagreement("operate_iterable_ expression of wrong size");
 	}
+	else if (statement->is_("operation_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_operation_, flock);
+		}
+		throw Disagreement("operation_ expression of wrong size");
+	}
+	else if (statement->is_("perform_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_perform_, flock);
+		}
+		throw Disagreement("perform_ expression of wrong size");
+	}
 	else if (statement->is_("private_"))
 	{
 		if (size == 1)
@@ -1229,6 +1302,14 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 			return fin_(token, statement, &Expression::_intimate_iterable_, flock);
 		}
 		throw Disagreement("intimate_iterable_ expression of wrong size");
+	}
+	else if (statement->is_("intimation_"))
+	{
+		if (size == 1)
+		{
+			return fin_(token, statement, &Expression::_intimation_, flock);
+		}
+		throw Disagreement("intimation_ expression of wrong size");
 	}
 	else if (statement->is_("lambda_"))
 	{
