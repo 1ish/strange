@@ -970,16 +970,16 @@ class Closure : public Thing
 //----------------------------------------------------------------------
 {
 public:
-	inline Closure(const Ptr& expression, const Ptr& shared)
+	inline Closure(const Ptr& expression, const Ptr& local)
 		: Thing{}
 		, _expression{ expression }
-		, _shared{ shared }
+		, _local{ local }
 	{
 	}
 
-	static inline const Ptr fin_(const Ptr& expression, const Ptr& shared)
+	static inline const Ptr fin_(const Ptr& expression, const Ptr& local)
 	{
-		return fake_<Closure>(expression, shared);
+		return fake_<Closure>(expression, local);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -991,16 +991,14 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-		const Ptr local = Shoal::mut_();
-		Shoal* const loc = static_<Shoal>(local);
-		loc->insert_("$", _shared);
-		loc->insert_("&", it);
+		const Ptr local = _local->copy_();
+		static_<Shoal>(local)->insert_("&", it);
 		return static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
 
 private:
 	const Ptr _expression;
-	const Ptr _shared;
+	const Ptr _local;
 };
 
 //----------------------------------------------------------------------
@@ -1408,8 +1406,10 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 	try
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-		const Ptr shared = Shoal::Concurrent::mut_();
-		Shoal::Concurrent* const capture = static_<Shoal::Concurrent>(shared);
+		const Ptr new_shared = Shoal::Concurrent::mut_();
+		Shoal::Concurrent* const capture_shared = static_<Shoal::Concurrent>(new_shared);
+		const Ptr new_local = Shoal::mut_();
+		Shoal* const capture_local = static_<Shoal>(new_local);
 		const std::size_t size_1 = vec.size() - 1;
 		Ptr param;
 		for (std::size_t i = 0; i < size_1; ++i)
@@ -1419,9 +1419,18 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 				param = vec[i];
 				continue;
 			}
-			capture->update_(param, Expression::evaluate_(vec[i], local));
+			const std::string& s = static_<Symbol>(param)->get_();
+			if (s[0] == '$')
+			{
+				capture_shared->update_(sym_(s.substr(1)), Expression::evaluate_(vec[i], local));
+			}
+			else
+			{
+				capture_local->update_(param, Expression::evaluate_(vec[i], local)->clone_freeze_());
+			}
 		}
-		return Closure::fin_(vec[size_1], shared);
+		capture_local->insert_("$", new_shared);
+		return Closure::fin_(vec[size_1], new_local);
 	}
 	catch (const std::exception& err)
 	{

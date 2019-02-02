@@ -889,7 +889,7 @@ private:
 	inline void _list_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& flock, const Ptr& open, const Ptr& close, const bool parameters = false, const bool capture = false)
 	{
 		Flock* const flk = static_<Flock>(flock);
-		bool parameter = parameters;
+		bool parameter = parameters || capture;
 		Ptr captured;
 		bool punctuation = false;
 		for (bool first = true; true; first = false)
@@ -925,20 +925,35 @@ private:
 			{
 				if (tag == 'P') // punctuation
 				{
-					if (symbol->is_(close))
+					if ((symbol->is_(close) || symbol->is_(",")) && parameter)
 					{
-						_next_();
-						if (parameter)
+						if (capture)
 						{
-							if (capture)
+							const std::string& s = static_<Symbol>(captured)->get_();
+							const Ptr cap = Flock::mut_();
+							if (s[0] == '$')
 							{
-								flk->push_back_(captured);
+								static_<Flock>(cap)->push_back_(sym_(s.substr(1)));
+								flk->push_back_(Expression::fin_(token, sym_("shared_at_"), cap));
+							}
+							else if (s == "|")
+							{
+								flk->push_back_(Expression::fin_(token, sym_("me_"), cap));
 							}
 							else
 							{
-								flk->push_back_(Expression::fin_(token));
+								static_<Flock>(cap)->push_back_(captured);
+								flk->push_back_(Expression::fin_(token, sym_("local_"), cap));
 							}
 						}
+						else
+						{
+							flk->push_back_(Expression::fin_(token));
+						}
+					}
+					if (symbol->is_(close))
+					{
+						_next_();
 						return;
 					}
 					else if (symbol->is_(","))
@@ -947,20 +962,9 @@ private:
 						{
 							throw tok->error_("Parser ERROR: open expecting single item then close");
 						}
-						if (parameter)
+						if (!parameter)
 						{
-							if (capture)
-							{
-								flk->push_back_(captured);
-							}
-							else
-							{
-								flk->push_back_(Expression::fin_(token));
-							}
-						}
-						else
-						{
-							parameter = parameters;
+							parameter = parameters || capture;
 						}
 					}
 					else if (parameter)
@@ -993,17 +997,28 @@ private:
 			}
 			if (parameter)
 			{
+				_next_();
 				if (tag == 'N') // name
 				{
 					flk->push_back_(symbol);
 					if (capture)
 					{
-						captured = _parse_(scope, shoal, finalized);
+						captured = symbol;
+					}
+				}
+				else if (tag == 'P' && capture && (symbol->is_("$") || symbol->is_("|")))
+				{
+					if (symbol->is_("|"))
+					{
+						captured = symbol;
 					}
 					else
 					{
-						_next_();
+						const Ptr shared = Flock::mut_();
+						_shared_(shared);
+						captured = static_<Symbol>(symbol)->add_(static_<Flock>(shared)->at_(0));
 					}
+					flk->push_back_(captured);
 				}
 				else
 				{
