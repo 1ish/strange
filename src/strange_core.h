@@ -953,16 +953,12 @@ protected:
 		{
 			throw Mutilation(thing->type_());
 		}
-#ifdef STRANGE_CHECK_OPERATOR_THING
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
 		{
 			return (t->*_function)(it);
 		}
-		throw Disagreement("ERROR: Member passed wrong type of thing");
-#else
-		return (static_cast<T*>(thing)->*_function)(it);
-#endif
+		throw Disagreement("Member passed wrong type of thing");
 	}
 
 private:
@@ -1012,16 +1008,12 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-#ifdef STRANGE_CHECK_OPERATOR_THING
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
 		{
 			return (t->*_function)(it);
 		}
-		throw Disagreement("ERROR: Const passed wrong type of thing");
-#else
-		return static_cast<T*>(thing)->*_function)(it);
-#endif
+		throw Disagreement("Const member passed wrong type of thing");
 	}
 
 private:

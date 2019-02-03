@@ -3,7 +3,6 @@
 
 #ifdef _DEBUG
 #define STRANGE_CHECK_STATIC_CASTS 1
-#define STRANGE_CHECK_OPERATOR_THING 1
 #endif
 
 #include "strange_core.h"

@@ -1115,7 +1115,7 @@ private:
 						{
 							if (is_map)
 							{
-								throw tok->error_("Parser ERROR : last key with missing value");
+								throw tok->error_("Parser ERROR: last key with missing value");
 							}
 							_next_();
 							return is_map;
