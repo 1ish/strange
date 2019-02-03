@@ -73,6 +73,12 @@ public:
 		return fin_(creator, members);
 	}
 
+	static inline void share_(const Ptr& shoal)
+	{
+		Shoal* const s = static_<Shoal>(shoal);
+		s->update_("strange::Creature::mut", Static::fin_(&Creature::mut, "creator", "members"));
+	}
+
 	virtual inline const Ptr type_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("type");

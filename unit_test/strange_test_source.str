@@ -7,9 +7,22 @@
 		'f'::function_(<strange::Number> a := 1000)
 		(
 			a+2
-		)
+		),
+		'Arithmetic'::
+		{
+			'mut'::function_()
+			(
+				$$strange::Creature::mut[<>]
+			),
+			'addition'::function_(<strange::Number> a, <strange::Number> b)
+			(
+				a+(b*2)
+			)
+		}
 	},
-	n := 100,
+	out.write[s@'Arithmetic'@'addition'[100, 200].to_symbol[], "\n"],
+	out.write[$$Arithmetic::addition[100, 200].to_symbol[], "\n"],
+//	ar := $$Arithmetic::mut[],
 	y := $$f[x+1],
 	z := (s@['f'])[y],
 	z := s@'f'[y],

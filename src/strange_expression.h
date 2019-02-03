@@ -568,7 +568,7 @@ private:
 			{
 				return result;
 			}
-			const std::size_t pos = scope.find_last_of("::");
+			const std::size_t pos = scope.rfind("::");
 			if (pos == std::string::npos)
 			{
 				scope = "";

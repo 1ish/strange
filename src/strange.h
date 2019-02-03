@@ -92,6 +92,9 @@ inline void Thing::share_(const Ptr& shoal)
 	// strange_fence
 	Fence::share_(shoal);
 
+	// strange_creature
+	Creature::share_(shoal);
+
 	// strange_generator
 	Generator::share_(shoal);
 

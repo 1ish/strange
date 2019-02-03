@@ -211,6 +211,7 @@ public:
 			{
 				if (char1 == '\n')
 				{
+					token = "";
 					commentline = false;
 				}
 			}
