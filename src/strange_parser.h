@@ -180,13 +180,13 @@ private:
 					{
 						if (_statement_(scope, shoal, finalized, flock, true, true)) // parameters/capture
 						{
-							if (flk->size_() % 2 == 0)
+							if (flk->size_() % 3 == 0) // <cat> param := capture
 							{
 								const Ptr nested = Flock::mut_();
 								Flock* const nst = static_<Flock>(nested);
 								if (_statement_(scope, shoal, finalized, nested, true)) // parameters
 								{
-									if (nst->size_() % 2 == 0)
+									if (nst->size_() % 3 == 0) // <cat> param := default
 									{
 										nst->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'finalized' scope
 										flk->push_back_(Expression::fin_(token, sym_("closure_"), nested));
@@ -210,7 +210,7 @@ private:
 					{
 						if (_statement_(scope, shoal, finalized, flock, true)) // parameters
 						{
-							if (flk->size_() % 2 == 0)
+							if (flk->size_() % 3 == 0) // <cat> param := default
 							{
 								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'finalized' scope
 								result = Expression::fin_(token, symbol, flock);
@@ -416,12 +416,12 @@ private:
 					}
 					else if (symbol->is_("(")) // block
 					{
-						_list_(scope, shoal, finalized, flock, symbol, sym_(")"));
+						_list_(scope, shoal, finalized, flock, sym_(")"));
 						result = Expression::fin_(token, sym_("block_"), flock);
 					}
 					else if (symbol->is_("[")) // flock
 					{
-						_list_(scope, shoal, finalized, flock, symbol, sym_("]"));
+						_list_(scope, shoal, finalized, flock, sym_("]"));
 						result = Expression::fin_(token, sym_("flock_"), flock);
 					}
 					else if (symbol->is_("{")) // shoal or herd
@@ -437,7 +437,7 @@ private:
 					}
 					else if (symbol->is_("<<")) // iterator
 					{
-						_list_(scope, shoal, finalized, flock, symbol, sym_(">>"));
+						_list_(scope, shoal, finalized, flock, sym_(">>"));
 						result = Expression::fin_(token, sym_("flock_iterator_"), flock);
 					}
 					else
@@ -505,12 +505,12 @@ private:
 			else if (symbol->is_("[")) // flock
 			{
 				_next_();
-				_list_(scope, shoal, finalized, flock, symbol, sym_("]"));
+				_list_(scope, shoal, finalized, flock, sym_("]"));
 			}
 			else if (symbol->is_("<<")) // iterator
 			{
 				_next_();
-				_list_(scope, shoal, finalized, flock, symbol, sym_(">>"));
+				_list_(scope, shoal, finalized, flock, sym_(">>"));
 				smt->set_(sym_("invoke_iterator_"));
 			}
 			else if (symbol->is_("%"))
@@ -855,7 +855,7 @@ private:
 			if (symbol->is_("[")) // flock
 			{
 				_next_();
-				_list_(scope, shoal, finalized, flock, symbol, sym_("]"));
+				_list_(scope, shoal, finalized, flock, sym_("]"));
 				smt->set_(sym_(me_dot ? "intimate_" : "operate_"));
 			}
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
@@ -866,7 +866,7 @@ private:
 			else if (symbol->is_("<<")) // iterator
 			{
 				_next_();
-				_list_(scope, shoal, finalized, flock, symbol, sym_(">>"));
+				_list_(scope, shoal, finalized, flock, sym_(">>"));
 				smt->set_(sym_(me_dot ? "intimate_iterator_" : "operate_iterator_"));
 			}
 			else
@@ -898,13 +898,13 @@ private:
 		if (tag == 'P' && symbol->is_("("))
 		{
 			_next_();
-			_list_(scope, shoal, finalized, flock, symbol, sym_(")"), parameters, capture);
+			_list_(scope, shoal, finalized, flock, sym_(")"), parameters, capture);
 			return true; // is a statement
 		}
 		return false; // not a statement
 	}
 
-	inline void _list_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& flock, const Ptr& open, const Ptr& close, const bool parameters = false, const bool capture = false)
+	inline void _list_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& flock, const Ptr& close, const bool parameters = false, const bool capture = false)
 	{
 		Flock* const flk = static_<Flock>(flock);
 		bool parameter = parameters || capture;
@@ -930,12 +930,16 @@ private:
 				{
 					if (symbol->is_(close))
 					{
+						if (close->is_(">>"))
+						{
+							throw tok->error_("Parser ERROR: list expecting single item instead of none");
+						}
 						_next_();
 						return;
 					}
 					if (symbol->is_(","))
 					{
-						throw tok->error_("Parser ERROR: open followed immediately by ,");
+						throw tok->error_("Parser ERROR: list open followed immediately by ,");
 					}
 				}
 			}
@@ -978,7 +982,7 @@ private:
 					{
 						if (close->is_(">>"))
 						{
-							throw tok->error_("Parser ERROR: open expecting single item then close");
+							throw tok->error_("Parser ERROR: list expecting single item then close");
 						}
 						if (!parameter)
 						{
@@ -993,21 +997,21 @@ private:
 						}
 						else
 						{
-							throw tok->error_("Parser ERROR: open expecting , := or close");
+							throw tok->error_("Parser ERROR: list expecting , := or close");
 						}
 					}
 					else
 					{
-						throw tok->error_("Parser ERROR: open expecting , or close");
+						throw tok->error_("Parser ERROR: list expecting , or close");
 					}
 				}
 				else if (parameter)
 				{
-					throw tok->error_("Parser ERROR: open expecting , := or close");
+					throw tok->error_("Parser ERROR: list expecting , := or close");
 				}
 				else
 				{
-					throw tok->error_("Parser ERROR: open expecting , or close");
+					throw tok->error_("Parser ERROR: list expecting , or close");
 				}
 				_next_();
 				punctuation = false;
@@ -1018,29 +1022,36 @@ private:
 				_next_();
 				if (tag == 'N') // name
 				{
+					flk->push_back_(nothing_()); // cat
 					flk->push_back_(symbol);
 					if (capture)
 					{
 						captured = symbol;
 					}
 				}
-				else if (tag == 'P' && capture && (symbol->is_("$") || symbol->is_("|")))
+				else if (tag == 'P') // punctuation
 				{
-					if (symbol->is_("|"))
+					if (symbol->is_("<"))
 					{
-						captured = symbol;
+						captured = _cat_(flock, capture);
+					}
+					else if (capture)
+					{
+						flk->push_back_(nothing_()); // cat
+						captured = _capture_(symbol, flock);
+						if (captured->is_nothing_())
+						{
+							throw tok->error_("Parser ERROR: list expecting capture name");
+						}
 					}
 					else
 					{
-						const Ptr shared = Flock::mut_();
-						_name_(shared);
-						captured = static_<Symbol>(symbol)->add_(static_<Flock>(shared)->at_(0));
+						throw tok->error_("Parser ERROR: list expecting parameter <cat> name");
 					}
-					flk->push_back_(captured);
 				}
 				else
 				{
-					throw tok->error_("Parser ERROR: open expecting parameter name");
+					throw tok->error_("Parser ERROR: list expecting parameter <cat> name");
 				}
 			}
 			else
@@ -1049,6 +1060,72 @@ private:
 			}
 			punctuation = true;
 		}
+	}
+
+	inline const Ptr _cat_(const Ptr& flock, const bool capture)
+	{
+		// add cat and default/captured to flock, return captured
+		Flock* const flk = static_<Flock>(flock);
+
+		Ptr token;
+		flk->push_back_(_scope_key_(token));
+		Token* tok = static_<Token>(token);
+
+		Ptr symbol;
+		for (bool first = true; true; first = false)
+		{
+			token = _token_();
+			tok = static_<Token>(token);
+			if (token->is_("."))
+			{
+				throw tok->error_("Parser ERROR: cat < without >");
+			}
+			const char tag = tok->tag_();
+			if (tag == 'E') // error
+			{
+				throw tok->error_("Tokenizer ERROR");
+			}
+			symbol = tok->symbol();
+			_next_();
+			if (first)
+			{
+				if (tag == 'P' && symbol->is_(">"))
+				{
+					continue;
+				}
+				throw tok->error_("Parser ERROR: cat < without >");
+			}
+			else
+			{
+				if (tag == 'N') // name
+				{
+					flk->push_back_(symbol);
+					return capture ? symbol : nothing_();
+				}
+				else if (capture && tag == 'P')
+				{
+					break;
+				}
+				throw tok->error_("Parser ERROR: list expecting <cat> name");
+			}
+		}
+		const Ptr captured = _capture_(symbol, flock);
+		if (captured->is_nothing_())
+		{
+			throw tok->error_("Parser ERROR: list expecting capture <cat> name");
+		}
+		return captured;
+	}
+
+	inline const Ptr _capture_(const Ptr& symbol, const Ptr& flock)
+	{
+		if (symbol->is_("$") || symbol->is_("|"))
+		{
+			const Ptr captured = symbol->is_("|") ? symbol : static_<Symbol>(symbol)->add_(_name_());
+			static_<Flock>(flock)->push_back_(captured);
+			return captured;
+		}
+		return nothing_();
 	}
 
 	inline const bool _map_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& flock)
@@ -1207,7 +1284,7 @@ private:
 		return is_map;
 	}
 
-	inline void _name_(const Ptr& flock)
+	inline const Ptr _name_(const Ptr& flock = Flock::mut_())
 	{
 		const Ptr token = _token_();
 		Token* const tok = static_<Token>(token);
@@ -1233,11 +1310,27 @@ private:
 			_next_();
 			static_<Flock>(flock)->push_back_(tok->symbol());
 		}
+		return tok->symbol();
 	}
 
 	inline const Ptr _scope_(const Ptr& scope, const Ptr& shoal, const Ptr& flock, const bool relative)
 	{
 		Ptr token;
+		const Ptr key = _scope_key_(token);
+		const Ptr key_flock = Flock::mut_();
+		Flock* const key_flk = static_<Flock>(key_flock);
+		key_flk->push_back_(shoal);
+		key_flk->push_back_(key);
+		if (relative)
+		{
+			key_flk->push_back_(scope);
+			return Expression::fin_(token, sym_("relative_scope_"), key_flock);
+		}
+		return Expression::fin_(token, sym_("shared_scope_"), key_flock);
+	}
+
+	inline const Ptr _scope_key_(Ptr& token)
+	{
 		Ptr key = nothing_();
 		bool punctuation = false;
 		for (bool first = true; true; first = false)
@@ -1292,16 +1385,7 @@ private:
 			_next_();
 			punctuation = true;
 		}
-		const Ptr key_flock = Flock::mut_();
-		Flock* const key_flk = static_<Flock>(key_flock);
-		key_flk->push_back_(shoal);
-		key_flk->push_back_(key);
-		if (relative)
-		{
-			key_flk->push_back_(scope);
-			return Expression::fin_(token, sym_("relative_scope_"), key_flock);
-		}
-		return Expression::fin_(token, sym_("shared_scope_"), key_flock);
+		return key;
 	}
 	
 	inline const bool _update_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& flock, const Ptr& name, bool& insert)

@@ -518,21 +518,23 @@ private:
 			Shoal* const shoal = static_<Shoal>(local);
 			const Ptr it = shoal->at_("&");
 			const std::size_t size_1 = vec.size() - 1;
-			Ptr param;
-			Ptr value;
-			for (std::size_t i = 0; i < size_1; ++i)
+			for (std::size_t i = 0; i < size_1; i += 3)
 			{
-				if (i % 2 == 0)
-				{
-					param = vec[i];
-					continue;
-				}
-				value = it->next_();
+				const Ptr cat = vec[i];
+				Ptr value = it->next_();
 				if (value->is_("."))
 				{
-					value = Expression::evaluate_(vec[i], local); // default
+					value = Expression::evaluate_(vec[i + 2], local);
 				}
-				shoal->update_(param, value);
+				if (!cat->is_nothing_())
+				{
+					// check cat
+					if (!value->cat_(cat))
+					{
+						throw _stack_("function passed wrong kind of thing");
+					}
+				}
+				shoal->update_(vec[i + 1], value);
 			}
 			try
 			{
@@ -1313,7 +1315,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("lambda_"))
 	{
-		if (size % 2 == 1)
+		if (size % 3 == 1) // <cat> param := capture
 		{
 			return fin_(token, statement, &Expression::_lambda_, flock);
 		}
@@ -1321,7 +1323,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("function_"))
 	{
-		if (size % 2 == 1)
+		if (size % 3 == 1) // <cat> param := default
 		{
 			return fin_(token, Function::fin_(fin_(token, statement, &Expression::_function_, flock)));
 		}
@@ -1329,7 +1331,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("closure_"))
 	{
-		if (size % 2 == 1)
+		if (size % 3 == 1) // <cat> param := default
 		{
 			return fin_(token, statement, &Expression::_function_, flock);
 		}
@@ -1337,7 +1339,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("mutation_"))
 	{
-		if (size % 2 == 1)
+		if (size % 3 == 1) // <cat> param := default
 		{
 			return fin_(token, Mutation::fin_(fin_(token, statement, &Expression::_function_, flock)));
 		}
@@ -1345,7 +1347,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("extraction_"))
 	{
-		if (size % 2 == 1)
+		if (size % 3 == 1) // <cat> param := default
 		{
 			return fin_(token, Extraction::fin_(fin_(token, statement, &Expression::_function_, flock)));
 		}
@@ -1492,22 +1494,27 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 		const Ptr new_local = Shoal::mut_();
 		Shoal* const capture_local = static_<Shoal>(new_local);
 		const std::size_t size_1 = vec.size() - 1;
-		Ptr param;
-		for (std::size_t i = 0; i < size_1; ++i)
+		for (std::size_t i = 0; i < size_1; i += 3)
 		{
-			if (i % 2 == 0)
+			const Ptr cat = vec[i];
+			const Ptr value = Expression::evaluate_(vec[i + 2], local);
+			if (!cat->is_nothing_())
 			{
-				param = vec[i];
-				continue;
+				// check cat
+				if (!value->cat_(cat))
+				{
+					throw _stack_("lambda captured wrong kind of thing");
+				}
 			}
+			const Ptr param = vec[i + 1];
 			const std::string& s = static_<Symbol>(param)->get_();
 			if (s[0] == '$')
 			{
-				capture_shared->update_(sym_(s.substr(1)), Expression::evaluate_(vec[i], local));
+				capture_shared->update_(sym_(s.substr(1)), value);
 			}
 			else
 			{
-				capture_local->update_(param, Expression::evaluate_(vec[i], local)->clone_freeze_());
+				capture_local->update_(param, value->clone_freeze_());
 			}
 		}
 		capture_local->insert_("$", new_shared);

@@ -355,6 +355,13 @@ public:
 		return cats_();
 	}
 
+	inline const bool cat_(const Ptr& cat) const;
+
+	inline const Ptr cat(const Ptr& it) const
+	{
+		return boolean_(cat_(it->next_()));
+	}
+
 	virtual inline const Ptr pub_() const;
 
 	inline const Ptr pub(const Ptr& ignore) const
@@ -8539,6 +8546,7 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("stop", Static::fin_(&Thing::stop));
 		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
 		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
+		shoal->update_("cat", Const<Thing>::fin_(&Thing::cat));
 		shoal->update_("visit", Member<Thing>::fin_(&Thing::visit, "visitor", "member", ".."));
 		shoal->update_("pub", Const<Thing>::fin_(&Thing::pub));
 		shoal->finalize_();
@@ -8595,6 +8603,11 @@ inline const Thing::Ptr Thing::cats_() const
 		return cats;
 	}();
 	return CATS;
+}
+
+inline const bool Thing::cat_(const Ptr& cat) const
+{
+	return static_<Herd>(cats_())->at_(cat);
 }
 
 inline const Thing::Ptr& Thing::shared_()

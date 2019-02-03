@@ -1,18 +1,24 @@
-(	out := $$strange::River::out[]
-,	out.write"hello world\n"
-,	x := 3
-,	s :=
-	{	'f'::function_(a)(a+2)
-	}
-,	y := $$f[x+1]
-,	z := (s@['f'])[y]
-,	z := s@'f'[y]
-,	z := s@'f'y
-,	out.write[z.to_symbol[], "\n"]
-,	it := ["a","b","c","\n"]
-,	out.write it
-,	x := z:.self_add
-,	y.:x[100]
-,	out.write[y.to_symbol[], "\n"]
-,	{'m'::out.write}@'m'"last\n"
+(
+	out := $$strange::River::out[],
+	out.write"hello world\n",
+	x := 3,
+	s :=
+	{
+		'f'::function_(<strange::Number> a := 1000)
+		(
+			a+2
+		)
+	},
+	n := 100,
+	y := $$f[x+1],
+	z := (s@['f'])[y],
+	z := s@'f'[y],
+	out.write[z.to_symbol[], "\n"],
+	it := ["a","b","c","\n"],
+	out.write it,
+	x := z:.self_add,
+	y.:x[100],
+	y.:(z:.self_add)1,
+	out.write[y.to_symbol[], "\n"],
+	{'m'::out.write}@'m'"last\n"
 )
