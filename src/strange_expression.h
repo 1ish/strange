@@ -11,6 +11,7 @@
 namespace strange
 {
 	class Expression;
+	class Operation;
 	class Function;
 	class Closure;
 	class Mutation;
@@ -59,21 +60,7 @@ public:
 	{
 	}
 
-	static inline const Ptr fin_(const Ptr& token, const Ptr& statement, const MemberPtr member, const Ptr& flock)
-	{
-		const Ptr exp = fake_<Expression>(token, statement, member, flock);
-		const Ptr it = flock->iterator_();
-		for (Ptr sub = it->next_(); !sub->is_("."); sub = it->next_())
-		{
-			Expression* const e = dynamic_<Expression>(sub);
-			if (e)
-			{
-				e->parent_(exp);
-			}
-		}
-		flock->freeze_();
-		return exp;
-	}
+	static inline const Ptr fin_(const Ptr& token, const Ptr& statement, const MemberPtr member, const Ptr& flock);
 
 	static inline const Ptr fin_(const Ptr& token, const Ptr& statement, const Ptr& flock);
 
@@ -81,7 +68,7 @@ public:
 	{
 		const Ptr flock = Flock::mut_();
 		static_<Flock>(flock)->push_back_(thing);
-		return Expression::fin_(token, nothing_(), &Expression::_thing_, flock);
+		return Expression::fin_(token, sym_("thing_"), &Expression::_thing_, flock);
 	}
 
 	static inline const Ptr fin(const Ptr& it)
@@ -987,13 +974,32 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Function : public Thing
+class Operation : public Thing
+//----------------------------------------------------------------------
+{
+public:
+	inline Operation(const Ptr& expression)
+		: Thing{}
+		, _expression{ expression }
+	{
+	}
+
+	inline void parent_(const Ptr& parent)
+	{
+		static_<Expression>(_expression)->parent_(parent);
+	}
+
+protected:
+	const Ptr _expression;
+};
+
+//----------------------------------------------------------------------
+class Function : public Operation
 //----------------------------------------------------------------------
 {
 public:
 	inline Function(const Ptr& expression)
-		: Thing{}
-		, _expression{ expression }
+		: Operation{ expression }
 		, _shared{ Shoal::Concurrent::mut_() }
 	{
 	}
@@ -1020,18 +1026,16 @@ protected:
 	}
 
 private:
-	const Ptr _expression;
 	const Ptr _shared;
 };
 
 //----------------------------------------------------------------------
-class Closure : public Thing
+class Closure : public Operation
 //----------------------------------------------------------------------
 {
 public:
 	inline Closure(const Ptr& expression, const Ptr& local)
-		: Thing{}
-		, _expression{ expression }
+		: Operation{ expression }
 		, _local{ local }
 	{
 	}
@@ -1056,18 +1060,16 @@ protected:
 	}
 
 private:
-	const Ptr _expression;
 	const Ptr _local;
 };
 
 //----------------------------------------------------------------------
-class Mutation : public Thing
+class Mutation : public Operation
 //----------------------------------------------------------------------
 {
 public:
 	inline Mutation(const Ptr& expression)
-		: Thing{}
-		, _expression{ expression }
+		: Operation{ expression }
 		, _shared{ Shoal::Concurrent::mut_() }
 	{
 	}
@@ -1099,18 +1101,16 @@ protected:
 	}
 
 private:
-	const Ptr _expression;
 	const Ptr _shared;
 };
 
 //----------------------------------------------------------------------
-class Extraction : public Thing
+class Extraction : public Operation
 //----------------------------------------------------------------------
 {
 public:
 	inline Extraction(const Ptr& expression)
-		: Thing{}
-		, _expression{ expression }
+		: Operation{ expression }
 		, _shared{ Shoal::Concurrent::mut_() }
 	{
 	}
@@ -1138,13 +1138,36 @@ protected:
 	}
 
 private:
-	const Ptr _expression;
 	const Ptr _shared;
 };
 
 //======================================================================
 // class Expression
 //======================================================================
+
+inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement, const MemberPtr member, const Ptr& flock)
+{
+	const Ptr exp = fake_<Expression>(token, statement, member, flock);
+	const Ptr it = flock->iterator_();
+	for (Ptr sub = it->next_(); !sub->is_("."); sub = it->next_())
+	{
+		Expression* const e = dynamic_<Expression>(sub);
+		if (e)
+		{
+			e->parent_(exp);
+		}
+		else
+		{
+			Operation* const op = dynamic_<Operation>(sub);
+			if (op)
+			{
+				op->parent_(exp);
+			}
+		}
+	}
+	flock->freeze_();
+	return exp;
+}
 
 inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement, const Ptr& flock)
 {
@@ -1525,6 +1548,10 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 		throw _stack_(err.what());
 	}
 }
+
+//======================================================================
+// class Operation
+//======================================================================
 
 //======================================================================
 // class Function
