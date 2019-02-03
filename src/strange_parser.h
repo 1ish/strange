@@ -371,13 +371,11 @@ private:
 					}
 					else if (symbol->is_("|.")) // me dot
 					{
-						_next_();
 						_dot_(scope, shoal, finalized, statement, flock, true);
-						result = Expression::fin_(token, statement, flock);
+						result = Expression::fin_(token, smt->get_(), flock);
 					}
 					else if (symbol->is_("|:.")) // me operation
 					{
-						_next_();
 						_name_(flock);
 						result = Expression::fin_(token, sym_("intimation_"), flock);
 					}

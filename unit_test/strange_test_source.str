@@ -14,15 +14,17 @@
 			(
 				$$strange::Creature::mut[<>]
 			),
-			'addition'::function_(<strange::Number> a, <strange::Number> b)
+			'addition'::extraction_(<strange::Number> a, <strange::Number> b)
 			(
-				a+(b*2)
-			)
+				a+b+(|._m[])
+			),
+			'_m':function_()(7)
 		}
 	},
-	out.write[s@'Arithmetic'@'addition'[100, 200].to_symbol[], "\n"],
-	out.write[$$Arithmetic::addition[100, 200].to_symbol[], "\n"],
-//	ar := $$Arithmetic::mut[],
+//	out.write[s@'Arithmetic'@'addition'[100, 200].to_symbol[], "\n"],
+//	out.write[$$Arithmetic::addition[100, 200].to_symbol[], "\n"],
+	ar := $$Arithmetic::mut[],
+	out.write[ar.addition[2, 2].to_symbol[], "\n"],
 	y := $$f[x+1],
 	z := (s@['f'])[y],
 	z := s@'f'[y],

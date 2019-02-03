@@ -116,6 +116,10 @@ public:
 		{
 			return static_<Flock>(_flock)->get_()[0];
 		}
+		if (_member == &Expression::_shoal_)
+		{
+			return immediate_(me_()); //TODO can we evaluate <> later?
+		}
 		return nothing_();
 	}
 

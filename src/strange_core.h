@@ -9171,8 +9171,8 @@ inline const Thing::Ptr Shoal::Iterator::next_()
 	}
 	const Ptr result = Flock::mut_();
 	Flock* const flock = static_<Flock>(result);
-	flock->push_back(_iterator->first);
-	flock->push_back(_iterator->second);
+	flock->push_back_(_iterator->first);
+	flock->push_back_(_iterator->second);
 	flock->finalize_();
 	++_iterator;
 	return result;
