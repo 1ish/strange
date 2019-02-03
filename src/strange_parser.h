@@ -145,9 +145,8 @@ private:
 	{
 		Ptr token;
 		Ptr result;
-		for (bool first = true, cont = true; cont; first = false)
+		for (bool first = true, cont = true; cont; first = false, cont = cont && right)
 		{
-			cont = right;
 			token = _token_();
 			if (token->is_("."))
 			{
@@ -207,7 +206,7 @@ private:
 							continue;
 						}
 					}
-					if (symbol->is_("function_") || symbol->is_("mutation_") || symbol->is_("extraction_"))
+					else if (symbol->is_("function_") || symbol->is_("mutation_") || symbol->is_("extraction_"))
 					{
 						if (_statement_(scope, shoal, finalized, flock, true)) // parameters
 						{

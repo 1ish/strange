@@ -11,5 +11,8 @@
 ,	out.write[z.to_symbol[], "\n"]
 ,	it := ["a","b","c","\n"]
 ,	out.write it
+,	x := z:.self_add
+,	y.:x[100]
+,	out.write[y.to_symbol[], "\n"]
 ,	{'m'::out.write}@'m'"last\n"
 )
