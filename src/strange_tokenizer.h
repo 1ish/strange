@@ -35,12 +35,12 @@ namespace strange
 	// private non-virtual member functions and adapters
 
 //----------------------------------------------------------------------
-class Tokenizer : public Mutable
+class Tokenizer : public Stateful
 //----------------------------------------------------------------------
 {
 public:
 	inline Tokenizer(const Ptr& river)
-		: Mutable{}
+		: Stateful{}
 		, _river{ river }
 		, _filename{ static_<River>(river)->filename_() }
 	{
@@ -503,7 +503,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Tokenizer");
 			herd->insert_("strange::Thing");
 			herd->finalize_();

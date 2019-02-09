@@ -34,16 +34,16 @@ namespace strange
 	// private non-virtual member functions and adapters
 
 //----------------------------------------------------------------------
-class Creature : public Mutable, public Serializable
+class Creature : public Stateful, public Serializable
 //----------------------------------------------------------------------
 {
 public:
 	inline Creature(const Ptr& creator, const Ptr& members)
-		: Mutable{}
+		: Stateful{}
 		, Serializable{}
 		, _creator{ dynamic_<Shoal>(creator) ? creator : Shoal::mut_() }
 		, _members{ dynamic_<Shoal>(members) ? members : _creator->replicate_()}
-		, _public{ _public_(Mutable::pub_(), _members) }
+		, _public{ _public_(Stateful::pub_(), _members) }
 	{
 	}
 
@@ -98,12 +98,12 @@ public:
 			operate_(const_cast<Creature*>(this), over);
 		}
 		_members->finalize_();
-		Mutable::finalize_();
+		Stateful::finalize_();
 	}
 
 	virtual inline const bool final_() const override
 	{
-		bool fin = Mutable::final_();
+		bool fin = Stateful::final_();
 		fin = _members->final_() && fin;
 		const Ptr over = static_<Shoal>(_members)->at_("final");
 		if (!over->is_nothing_())
@@ -121,12 +121,12 @@ public:
 			operate_(const_cast<Creature*>(this), over);
 		}
 		_members->freeze_();
-		Mutable::freeze_();
+		Stateful::freeze_();
 	}
 
 	virtual inline const bool frozen_() const override
 	{
-		bool froz = Mutable::frozen_();
+		bool froz = Stateful::frozen_();
 		froz = _members->frozen_() && froz;
 		const Ptr over = static_<Shoal>(_members)->at_("frozen");
 		if (!over->is_nothing_())
@@ -173,7 +173,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return Mutable::iterator_();
+		return Stateful::iterator_();
 	}
 
 	virtual inline const Ptr next_() override
@@ -183,7 +183,7 @@ public:
 		{
 			return operate_(this, over);
 		}
-		return Mutable::next_();
+		return Stateful::next_();
 	}
 
 	virtual inline std::size_t hash_() const override
@@ -193,7 +193,7 @@ public:
 		{
 			return std::size_t(static_<Int64>(operate_(const_cast<Creature*>(this), over))->get_());
 		}
-		return Mutable::hash_();
+		return Stateful::hash_();
 	}
 
 	virtual inline const bool same_(const Ptr& other) const override
@@ -204,7 +204,7 @@ public:
 			return !operate_(const_cast<Creature*>(this), over,
 				IteratorCopy<std::vector<Ptr>>::mut_(std::vector<Ptr>{ other }))->is_nothing_();
 		}
-		return Mutable::same_(other);
+		return Stateful::same_(other);
 	}
 
 	virtual inline const Ptr visit(const Ptr& it) override
@@ -214,7 +214,7 @@ public:
 		{
 			return operate_(this, over, it);
 		}
-		return Mutable::visit(it);
+		return Stateful::visit(it);
 	}
 
 	virtual inline const Ptr eater_() const override
@@ -224,7 +224,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return Mutable::eater_();
+		return Stateful::eater_();
 	}
 
 	virtual inline const Ptr feeder(const Ptr& eater) const override
@@ -234,7 +234,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over, eater);
 		}
-		return Mutable::feeder(eater);
+		return Stateful::feeder(eater);
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -248,7 +248,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Creature");
 			herd->insert_("strange::Thing");
 			herd->finalize_();

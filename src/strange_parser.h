@@ -38,12 +38,12 @@ namespace strange
 	// private non-virtual member functions and adapters
 
 //----------------------------------------------------------------------
-class Parser : public Mutable
+class Parser : public Stateful
 //----------------------------------------------------------------------
 {
 public:
 	inline Parser(const Ptr& tokenizer)
-		: Mutable{}
+		: Stateful{}
 		, _tokenizer{ tokenizer }
 		, _next{ _tokenizer->next_() }
 	{
@@ -113,7 +113,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Parser");
 			herd->insert_("strange::Thing");
 			herd->finalize_();

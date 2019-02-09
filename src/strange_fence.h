@@ -34,12 +34,12 @@ namespace strange
 	// private non-virtual member functions and adapters
 
 //----------------------------------------------------------------------
-class Fence : public Mutable
+class Fence : public Stateful
 //----------------------------------------------------------------------
 {
 public:
 	inline Fence(const Ptr& ptr)
-		: Mutable{}
+		: Stateful{}
 		, _fence{}
 		, _ptr{ ptr }
 	{
@@ -125,7 +125,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Concurrent");
 			herd->insert_("strange::Thing");
 			herd->finalize_();

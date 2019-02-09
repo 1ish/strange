@@ -34,12 +34,12 @@ namespace strange
 	// private non-virtual member functions and adapters
 
 //----------------------------------------------------------------------
-class Misunderstanding : public Mutable
+class Misunderstanding : public Stateful
 //----------------------------------------------------------------------
 {
 public:
 	inline Misunderstanding(const std::string& description)
-		: Mutable{}
+		: Stateful{}
 		, _river{ River::mut_(description) }
 	{
 	}
@@ -134,7 +134,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
 			return cats;

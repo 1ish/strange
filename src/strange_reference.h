@@ -34,12 +34,12 @@ namespace strange
 	// private non-virtual member functions and adapters
 
 //----------------------------------------------------------------------
-class Reference : public Mutable
+class Reference : public Stateful
 //----------------------------------------------------------------------
 {
 public:
 	inline Reference(const Ptr& ptr)
-		: Mutable{}
+		: Stateful{}
 		, _ptr{ ptr }
 	{
 	}
@@ -124,7 +124,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
 			return cats;
@@ -135,11 +135,11 @@ public:
 private:
 	Ptr _ptr;
 
-	class Iterator : public Mutable
+	class Iterator : public Stateful
 	{
 	public:
 		inline Iterator(const Ptr& reference)
-			: Mutable{}
+			: Stateful{}
 			, _reference{ reference }
 		{
 		}
@@ -195,7 +195,7 @@ private:
 			{
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
-				herd->insert_("strange::Mutable");
+				herd->insert_("strange::Stateful");
 				herd->insert_("strange::Thing");
 				herd->finalize_();
 				return cats;

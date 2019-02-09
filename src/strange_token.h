@@ -34,12 +34,12 @@ namespace strange
 	// private non-virtual member functions and adapters
 
 //----------------------------------------------------------------------
-class Token : public Mutable
+class Token : public Stateful
 //----------------------------------------------------------------------
 {
 public:
 	inline Token(const Ptr& filename, const Ptr& x, const Ptr& y, const Ptr& tag, const Ptr& symbol, const Ptr& value)
-		: Mutable{}
+		: Stateful{}
 		, _filename{ filename }
 		, _x{ x }
 		, _y{ y }
@@ -243,7 +243,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
 			return cats;

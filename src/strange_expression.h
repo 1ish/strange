@@ -881,11 +881,11 @@ private:
 		return Iterator::mut_(static_<Flock>(_flock)->get_(), local, pos);
 	}
 
-	class Iterator : public Mutable
+	class Iterator : public Stateful
 	{
 	public:
 		inline Iterator(const std::vector<Ptr>& vec, const Ptr& local, const int64_t pos)
-			: Mutable{}
+			: Stateful{}
 			, _elements{ vec }
 			, _local{ local }
 			, _pos{ pos }
@@ -923,7 +923,7 @@ private:
 			{
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
-				herd->insert_("strange::Mutable");
+				herd->insert_("strange::Stateful");
 				herd->insert_("strange::Iterator");
 				herd->insert_("strange::Thing");
 				herd->finalize_();

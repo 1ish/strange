@@ -34,12 +34,12 @@ namespace strange
 	// private non-virtual member functions and adapters
 
 //----------------------------------------------------------------------
-class Weak : public Mutable
+class Weak : public Stateful
 //----------------------------------------------------------------------
 {
 public:
 	inline Weak(const Ptr& ptr)
-		: Mutable{}
+		: Stateful{}
 		, _ptr{ ptr }
 	{
 	}
@@ -129,7 +129,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
 			return cats;
@@ -140,11 +140,11 @@ public:
 private:
 	WeakPtr _ptr;
 
-	class Iterator : public Mutable
+	class Iterator : public Stateful
 	{
 	public:
 		inline Iterator(const Ptr& weak)
-			: Mutable{}
+			: Stateful{}
 			, _weak{ weak }
 		{
 		}
@@ -200,7 +200,7 @@ private:
 			{
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
-				herd->insert_("strange::Mutable");
+				herd->insert_("strange::Stateful");
 				herd->insert_("strange::Thing");
 				herd->finalize_();
 				return cats;

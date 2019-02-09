@@ -25,7 +25,7 @@ namespace strange
 	class Static;
 	template <typename T> class Member;
 	template <typename T> class Const;
-	class Mutable;
+	class Stateful;
 	class Shoal;
 	class Flock;
 	class Herd;
@@ -1029,7 +1029,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Mutable : public Thing
+class Stateful : public Thing
 //----------------------------------------------------------------------
 {
 public:
@@ -1044,7 +1044,7 @@ public:
 	}
 
 protected:
-	inline Mutable()
+	inline Stateful()
 		: Thing{}
 		, _final{}
 	{
@@ -1056,7 +1056,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Shoal : public Mutable, public Serializable
+class Shoal : public Stateful, public Serializable
 //----------------------------------------------------------------------
 {
 	class Hash
@@ -1081,7 +1081,7 @@ class Shoal : public Mutable, public Serializable
 
 public:
 	inline Shoal()
-		: Mutable{}
+		: Stateful{}
 		, Serializable{}
 		, _map{}
 		, _frozen{ false }
@@ -1089,7 +1089,7 @@ public:
 	}
 
 	inline Shoal(const Ptr& it)
-		: Mutable{}
+		: Stateful{}
 		, Serializable{}
 		, _map{}
 		, _frozen{ false }
@@ -1517,11 +1517,11 @@ public:
 		return _map;
 	}
 
-	class Concurrent : public Mutable
+	class Concurrent : public Stateful
 	{
 	public:
 		inline Concurrent(const Ptr& shoal)
-			: Mutable{}
+			: Stateful{}
 			, _shoal{ shoal }
 			, _mutex{}
 		{
@@ -1621,11 +1621,11 @@ private:
 	std_unordered_map_ptr_ptr _map;
 	mutable bool _frozen;
 
-	class Iterator : public Mutable
+	class Iterator : public Stateful
 	{
 	public:
 		inline Iterator(const Ptr& shoal)
-			: Mutable{}
+			: Stateful{}
 			, _shoal{ shoal }
 			, _iterator{ static_<Shoal>(_shoal)->_map.cbegin() }
 		{
@@ -1698,14 +1698,14 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Flock : public Mutable, public Serializable
+class Flock : public Stateful, public Serializable
 //----------------------------------------------------------------------
 {
 	using std_vector_ptr = std::vector<Ptr>;
 
 public:
 	inline Flock()
-		: Mutable{}
+		: Stateful{}
 		, Serializable{}
 		, _vector{}
 		, _frozen{ false }
@@ -1713,7 +1713,7 @@ public:
 	}
 
 	inline Flock(const Ptr& it)
-		: Mutable{}
+		: Stateful{}
 		, Serializable{}
 		, _vector{}
 		, _frozen{ false }
@@ -2097,11 +2097,11 @@ public:
 		return _vector;
 	}
 
-	class Concurrent : public Mutable
+	class Concurrent : public Stateful
 	{
 	public:
 		inline Concurrent(const Ptr& flock)
-			: Mutable{}
+			: Stateful{}
 			, _flock{ flock }
 			, _mutex{}
 		{
@@ -2197,11 +2197,11 @@ private:
 	std_vector_ptr _vector;
 	mutable bool _frozen;
 
-	class Iterator : public Mutable
+	class Iterator : public Stateful
 	{
 	public:
 		inline Iterator(const Ptr& flock)
-			: Mutable{}
+			: Stateful{}
 			, _flock{ flock }
 			, _pos{ 0 }
 		{
@@ -2244,7 +2244,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Herd : public Mutable, public Serializable
+class Herd : public Stateful, public Serializable
 //----------------------------------------------------------------------
 {
 	class Hash
@@ -2269,7 +2269,7 @@ class Herd : public Mutable, public Serializable
 
 public:
 	inline Herd()
-		: Mutable{}
+		: Stateful{}
 		, Serializable{}
 		, _set{}
 		, _frozen{ false }
@@ -2277,7 +2277,7 @@ public:
 	}
 
 	inline Herd(const Ptr& it)
-		: Mutable{}
+		: Stateful{}
 		, Serializable{}
 		, _set{}
 		, _frozen{ false }
@@ -2707,7 +2707,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Herd");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -2749,11 +2749,11 @@ public:
 		return _set;
 	}
 
-	class Concurrent : public Mutable
+	class Concurrent : public Stateful
 	{
 	public:
 		inline Concurrent(const Ptr& herd)
-			: Mutable{}
+			: Stateful{}
 			, _herd{ herd }
 			, _mutex{}
 		{
@@ -2834,11 +2834,11 @@ private:
 	std_unordered_set_ptr _set;
 	mutable bool _frozen;
 
-	class Iterator : public Mutable
+	class Iterator : public Stateful
 	{
 	public:
 		inline Iterator(const Ptr& herd)
-			: Mutable{}
+			: Stateful{}
 			, _herd{ herd }
 			, _iterator{ static_<Herd>(_herd)->_set.cbegin() }
 		{
@@ -2877,7 +2877,7 @@ private:
 			{
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
-				herd->insert_("strange::Mutable");
+				herd->insert_("strange::Stateful");
 				herd->insert_("strange::Iterator");
 				herd->insert_("strange::Thing");
 				herd->finalize_();
@@ -2893,12 +2893,12 @@ private:
 };
 
 //----------------------------------------------------------------------
-class IteratorPtr : public Mutable
+class IteratorPtr : public Stateful
 //----------------------------------------------------------------------
 {
 public:
 	inline IteratorPtr(const Ptr& ptr)
-		: Mutable{}
+		: Stateful{}
 		, _ptr{ ptr }
 	{
 	}
@@ -2950,7 +2950,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
 			return cats;
@@ -2964,13 +2964,13 @@ private:
 
 template <typename C>
 //----------------------------------------------------------------------
-class IteratorCopy : public Mutable
+class IteratorCopy : public Stateful
 //----------------------------------------------------------------------
 {
 public:
 	template <typename F>
 	inline IteratorCopy(F&& collection)
-		: Mutable{}
+		: Stateful{}
 		, _collection{ std::forward<F>(collection) }
 		, _iterator{ _collection.cbegin() }
 	{
@@ -3010,7 +3010,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::IteratorCopy");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -3026,13 +3026,13 @@ private:
 
 template <typename C>
 //----------------------------------------------------------------------
-class IteratorRef : public Mutable
+class IteratorRef : public Stateful
 //----------------------------------------------------------------------
 {
 public:
 	template <typename F>
 	inline IteratorRef(F&& collection)
-		: Mutable{}
+		: Stateful{}
 		, _collection{ std::forward<F>(collection) }
 		, _iterator{ _collection.cbegin() }
 	{
@@ -3072,7 +3072,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::IteratorRef");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -3179,7 +3179,7 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Lake : public Mutable, public Serializable, public Data<std::string>
+class Lake : public Stateful, public Serializable, public Data<std::string>
 //----------------------------------------------------------------------
 {
 public:
@@ -3244,7 +3244,7 @@ public:
 	}
 
 	inline Lake(const S& data)
-		: Mutable{}
+		: Stateful{}
 		, Serializable{}
 		, Data{ data }
 	{
@@ -3334,7 +3334,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Lake");
 			herd->insert_("strange::Data");
@@ -3473,7 +3473,7 @@ public:
 };
 
 //----------------------------------------------------------------------
-class Number : public Mutable, public Serializable
+class Number : public Stateful, public Serializable
 //----------------------------------------------------------------------
 {
 public:
@@ -3924,7 +3924,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Bit");
 			herd->insert_("strange::Number");
@@ -4247,7 +4247,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Int8");
 			herd->insert_("strange::Number");
@@ -4565,7 +4565,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::UInt8");
 			herd->insert_("strange::Number");
@@ -4889,7 +4889,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Int16");
 			herd->insert_("strange::Number");
@@ -5213,7 +5213,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::UInt16");
 			herd->insert_("strange::Number");
@@ -5541,7 +5541,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Int32");
 			herd->insert_("strange::Number");
@@ -5869,7 +5869,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::UInt32");
 			herd->insert_("strange::Number");
@@ -6205,7 +6205,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Int64");
 			herd->insert_("strange::Number");
@@ -6541,7 +6541,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::UInt64");
 			herd->insert_("strange::Number");
@@ -6952,7 +6952,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Float32");
 			herd->insert_("strange::Number");
@@ -7289,7 +7289,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Float64");
 			herd->insert_("strange::Number");
@@ -7638,7 +7638,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Complex32");
 			herd->insert_("strange::Number");
@@ -7994,7 +7994,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Serializable");
 			herd->insert_("strange::Complex64");
 			herd->insert_("strange::Number");
@@ -8162,14 +8162,14 @@ public:
 };
 
 //----------------------------------------------------------------------
-class River : public Mutable
+class River : public Stateful
 //----------------------------------------------------------------------
 {
 	using const_std_unique_ios_base = const std::unique_ptr<std::ios_base>;
 
 public:
 	inline River(std::ios_base* const stream, const bool del, const Ptr& filename = nothing_())
-		: Mutable{}
+		: Stateful{}
 		, _stream{ del ? stream : 0 }
 		, _in{ dynamic_cast<std::istream*>(stream) }
 		, _out{ dynamic_cast<std::ostream*>(stream) }
@@ -8302,7 +8302,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::River");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
@@ -8906,7 +8906,7 @@ inline const Thing::Ptr Const<T>::eater_() const
 }
 
 //======================================================================
-// class Mutable
+// class Stateful
 //======================================================================
 
 //======================================================================
@@ -9139,7 +9139,7 @@ inline const Thing::Ptr Shoal::cats_() const
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
+		herd->insert_("strange::Stateful");
 		herd->insert_("strange::Shoal");
 		herd->insert_("strange::Thing");
 		herd->finalize_();
@@ -9154,7 +9154,7 @@ inline const Thing::Ptr Shoal::Iterator::cats_() const
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
+		herd->insert_("strange::Stateful");
 		herd->insert_("strange::Iterator");
 		herd->insert_("strange::Thing");
 		herd->finalize_();
@@ -9184,7 +9184,7 @@ inline const Thing::Ptr Shoal::Feeder::cats_() const
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
+		herd->insert_("strange::Stateful");
 		herd->insert_("strange::Iterator");
 		herd->insert_("strange::Thing");
 		herd->finalize_();
@@ -9405,7 +9405,7 @@ inline const Thing::Ptr Flock::cats_() const
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
+		herd->insert_("strange::Stateful");
 		herd->insert_("strange::Flock");
 		herd->insert_("strange::Thing");
 		herd->finalize_();
@@ -9420,7 +9420,7 @@ inline const Thing::Ptr Flock::Iterator::cats_() const
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Mutable");
+		herd->insert_("strange::Stateful");
 		herd->insert_("strange::Iterator");
 		herd->insert_("strange::Thing");
 		herd->finalize_();

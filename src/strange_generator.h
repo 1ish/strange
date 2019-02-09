@@ -35,12 +35,12 @@ namespace strange
 	// private non-virtual member functions and adapters
 
 //----------------------------------------------------------------------
-class Generator : public Mutable
+class Generator : public Stateful
 //----------------------------------------------------------------------
 {
 public:
 	inline Generator(const Ptr& river)
-		: Mutable{}
+		: Stateful{}
 		, _river{ river }
 	{
 	}
@@ -164,7 +164,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Mutable");
+			herd->insert_("strange::Stateful");
 			herd->insert_("strange::Thing");
 			herd->finalize_();
 			return cats;
