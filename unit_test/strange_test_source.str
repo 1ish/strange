@@ -18,7 +18,7 @@
 			(
 				a+b+(|._m[])
 			),
-//			'read_in_out':fixed_("lake"),
+//			'read_in_out':fixed_("lake"),			// do not allow :: for attributes
 //			'write_in_read_out':variable_("lake"),
 //			'write_in_read_out':mutable_("lake"),
 //			'write_in_out':changeable_("lake"),

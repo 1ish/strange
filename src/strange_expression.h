@@ -1086,27 +1086,16 @@ class Attribute : public Operation
 //----------------------------------------------------------------------
 {
 public:
+	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) = 0;
+
+protected:
+	Ptr _value;
+
 	inline Attribute(const Ptr& expression)
 		: Operation{ expression }
 		, _value{}
 	{
 	}
-
-	static inline const Ptr fin_(const Ptr& expression)
-	{
-		return fake_<Fixed>(expression);
-	}
-
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::Attribute");
-		return TYPE;
-	}
-
-	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) = 0;
-
-protected:
-	Ptr _value;
 
 	inline void _initialize_(Thing* const thing)
 	{
@@ -1170,7 +1159,7 @@ public:
 
 	static inline const Ptr fin_(const Ptr& expression)
 	{
-		return fake_<Fixed>(expression);
+		return fake_<Mutable>(expression);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1221,7 +1210,7 @@ public:
 
 	static inline const Ptr fin_(const Ptr& expression)
 	{
-		return fake_<Fixed>(expression);
+		return fake_<Variable>(expression);
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1268,7 +1257,7 @@ public:
 
 	static inline const Ptr fin_(const Ptr& expression)
 	{
-		return fake_<Fixed>(expression);
+		return fake_<Changeable>(expression);
 	}
 
 	virtual inline const Ptr type_() const override
