@@ -1191,7 +1191,7 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-		throw Dismemberment(thing->type_(), sym_("Mutable data members are private"));
+		throw Dismemberment(thing->type_(), sym_("Mutable attributes are private"));
 	}
 
 private:

@@ -18,15 +18,20 @@
 			(
 				a+b+(|._m[])
 			),
-//			'read_in_out':fixed_("lake"),			// do not allow :: for attributes
-//			'write_in_read_out':variable_("lake"),
-//			'write_in_read_out':mutable_("lake"),
-//			'write_in_out':changeable_("lake"),
+			'f'::fixed_("lake"),			//TODO do not allow :: for attributes
+			'_mut':mutable_("lake"),
+			'v':variable_(|._mut[]),
+			'c':changeable_((|.v["luke"],"lake")),
 			'_m':function_()(7)
 		}
 	},
 	ar := $$Arithmetic::mut[],
 	out.write[ar.addition[2, 2].to_symbol[], "\n"],
+	out.write[ar.f[], "\n"],
+	out.write[ar.v[], "\n"],
+	ar.c["luke"],
+	out.write[ar.c[], "\n"],
+	out.write[ar.v[], "\n"],
 	y := $$f[x+1],
 	z := (s@['f'])[y],
 	z := s@'f'[y],

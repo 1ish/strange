@@ -222,11 +222,83 @@ private:
 							continue;
 						}
 					}
-					else if (symbol->is_("error_"))
+					else if (symbol->is_("fixed_"))
 					{
 						if (_statement_(scope, shoal, finalized, flock))
 						{
-							result = Expression::fin_(token, symbol, flock);
+							const int64_t size = flk->size_();
+							if (size == 0)
+							{
+								result = Expression::fin_(token, Fixed::fin_(Expression::fin_(token)));
+							}
+							else if (size == 1)
+							{
+								result = Expression::fin_(token, Fixed::fin_(flk->at_(0)));
+							}
+							else
+							{
+								throw tok->error_("Parser Error: invalid fixed_");
+							}
+							continue;
+						}
+					}
+					else if (symbol->is_("mutable_"))
+					{
+						if (_statement_(scope, shoal, finalized, flock))
+						{
+							const int64_t size = flk->size_();
+							if (size == 0)
+							{
+								result = Expression::fin_(token, Mutable::fin_(Expression::fin_(token)));
+							}
+							else if (size == 1)
+							{
+								result = Expression::fin_(token, Mutable::fin_(flk->at_(0)));
+							}
+							else
+							{
+								throw tok->error_("Parser Error: invalid mutable_");
+							}
+							continue;
+						}
+					}
+					else if (symbol->is_("variable_"))
+					{
+						if (_statement_(scope, shoal, finalized, flock))
+						{
+							const int64_t size = flk->size_();
+							if (size == 0)
+							{
+								result = Expression::fin_(token, Variable::fin_(Expression::fin_(token)));
+							}
+							else if (size == 1)
+							{
+								result = Expression::fin_(token, Variable::fin_(flk->at_(0)));
+							}
+							else
+							{
+								throw tok->error_("Parser Error: invalid variable_");
+							}
+							continue;
+						}
+					}
+					else if (symbol->is_("changeable_"))
+					{
+						if (_statement_(scope, shoal, finalized, flock))
+						{
+							const int64_t size = flk->size_();
+							if (size == 0)
+							{
+								result = Expression::fin_(token, Changeable::fin_(Expression::fin_(token)));
+							}
+							else if (size == 1)
+							{
+								result = Expression::fin_(token, Changeable::fin_(flk->at_(0)));
+							}
+							else
+							{
+								throw tok->error_("Parser Error: invalid changeable_");
+							}
 							continue;
 						}
 					}
@@ -239,10 +311,21 @@ private:
 							{
 								_wrap_(token, nothing_(), flock);
 							}
-							else if (size != 1)
+							else if (size == 1)
+							{
+								result = Expression::fin_(token, symbol, flock);
+							}
+							else
 							{
 								throw tok->error_("Parser ERROR: invalid break_/continue_/return_/throw_");
 							}
+							continue;
+						}
+					}
+					else if (symbol->is_("error_"))
+					{
+						if (_statement_(scope, shoal, finalized, flock))
+						{
 							result = Expression::fin_(token, symbol, flock);
 							continue;
 						}
