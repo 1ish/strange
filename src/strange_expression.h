@@ -16,6 +16,7 @@ namespace strange
 	class Closure;
 	class Mutation;
 	class Extraction;
+	class Attribute;
 	class Fixed;
 	class Mutable;
 	class Variable;
@@ -405,80 +406,11 @@ private:
 		}
 	}
 
-	inline const Ptr _intimate_(const Ptr& local) const
-	{
-		try
-		{
-			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			const Ptr thing = static_<Shoal>(local)->at_("|");
-			if (thing->is_nothing_())
-			{
-				throw _stack_("me accessed without a creature");
-			}
-			const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
-			if (member->is_nothing_())
-			{
-				throw Dismemberment(thing->type_(), vec[0]);
-			}
-			return operate_(thing.get(), member, _iterator_(local, 1));
-		}
-		catch (const std::exception& err)
-		{
-			throw _stack_(err.what());
-		}
-	}
+	inline const Ptr _intimate_(const Ptr& local) const;
 
-	inline const Ptr _intimate_iterator_(const Ptr& local) const
-	{
-		try
-		{
-			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			const Ptr thing = static_<Shoal>(local)->at_("|");
-			if (thing->is_nothing_())
-			{
-				throw _stack_("me accessed without a creature");
-			}
-			const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
-			if (member->is_nothing_())
-			{
-				throw Dismemberment(thing->type_(), vec[0]);
-			}
-			return operate_(thing.get(), member, Expression::evaluate_(vec[1], local));
-		}
-		catch (const std::exception& err)
-		{
-			throw _stack_(err.what());
-		}
-	}
+	inline const Ptr _intimate_iterator_(const Ptr& local) const;
 
-	inline const Ptr _intimate_iterable_(const Ptr& local) const
-	{
-		try
-		{
-			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			const Ptr thing = static_<Shoal>(local)->at_("|");
-			if (thing->is_nothing_())
-			{
-				throw _stack_("me accessed without a creature");
-			}
-			const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
-			if (member->is_nothing_())
-			{
-				throw Dismemberment(thing->type_(), vec[0]);
-			}
-			const Ptr iterable = Expression::evaluate_(vec[1], local);
-			const Ptr feeder = iterable->feeder(member->eater_());
-			if (!feeder->is_nothing_())
-			{
-				return operate_(thing.get(), member, feeder);
-			}
-			return operate_(thing.get(), member, iterable->iterator_());
-		}
-		catch (const std::exception& err)
-		{
-			throw _stack_(err.what());
-		}
-	}
+	inline const Ptr _intimate_iterable_(const Ptr& local) const;
 
 	inline const Ptr _intimation_(const Ptr& local) const
 	{
@@ -1150,13 +1082,53 @@ private:
 };
 
 //----------------------------------------------------------------------
-class Fixed : public Operation
+class Attribute : public Operation
+//----------------------------------------------------------------------
+{
+public:
+	inline Attribute(const Ptr& expression)
+		: Operation{ expression }
+		, _value{}
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr& expression)
+	{
+		return fake_<Fixed>(expression);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Attribute");
+		return TYPE;
+	}
+
+	virtual inline const Ptr intimator_(Thing* const thing, const Ptr& it) = 0;
+
+protected:
+	Ptr _value;
+
+	inline void _initialize_(Thing* const thing)
+	{
+		if (!_value.get())
+		{
+			const Ptr local = Shoal::mut_();
+			Shoal* const loc = static_<Shoal>(local);
+			loc->insert_("$", Shoal::Concurrent::mut_());
+			loc->insert_("&", stop_());
+			loc->insert_("|", thing->me_());
+			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
+		}
+	}
+};
+
+//----------------------------------------------------------------------
+class Fixed : public Attribute
 //----------------------------------------------------------------------
 {
 public:
 	inline Fixed(const Ptr& expression)
-		: Operation{ expression }
-		, _value{}
+		: Attribute{ expression }
 	{
 	}
 
@@ -1171,33 +1143,27 @@ public:
 		return TYPE;
 	}
 
-protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	virtual inline const Ptr intimator_(Thing* const thing, const Ptr& it) override
 	{
-		if (!_value.get())
-		{
-			const Ptr local = Shoal::mut_();
-			Shoal* const loc = static_<Shoal>(local);
-			loc->insert_("$", Shoal::Concurrent::mut_());
-			loc->insert_("&", stop_());
-			loc->insert_("|", thing->me_());
-			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
-		}
+		_initialize_(thing);
 		return _value;
 	}
 
-private:
-	Ptr _value;
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		_initialize_(thing);
+		return _value;
+	}
 };
 
 //----------------------------------------------------------------------
-class Mutable : public Operation
+class Mutable : public Attribute
 //----------------------------------------------------------------------
 {
 public:
 	inline Mutable(const Ptr& expression)
-		: Operation{ expression }
-		, _value{}
+		: Attribute{ expression }
 		, _mutex{}
 	{
 	}
@@ -1213,12 +1179,20 @@ public:
 		return TYPE;
 	}
 
-	inline const Ptr intimator(Thing* const thing, const Ptr& it)
+	virtual inline const Ptr intimator_(Thing* const thing, const Ptr& it) override
 	{
 		const Ptr value = it->next_();
 		if (value->is_("."))
 		{
-			return _init_(thing);
+			{
+				std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+				if (_value.get())
+				{
+					return _value;
+				}
+			}
+			_initialize_(thing);
+			return _value;
 		}
 		std::unique_lock<std::shared_timed_mutex> lock(_mutex);
 		_value = value;
@@ -1228,44 +1202,20 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-		return _init_(thing);
+		throw Dismemberment(thing->type_(), sym_("Mutable data members are private"));
 	}
 
 private:
-	Ptr _value;
 	mutable std::shared_timed_mutex _mutex;
-
-	inline const Ptr _init_(Thing* const thing)
-	{
-		{
-			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
-			if (_value.get())
-			{
-				return _value;
-			}
-		}
-		std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-		if (!_value.get())
-		{
-			const Ptr local = Shoal::mut_();
-			Shoal* const loc = static_<Shoal>(local);
-			loc->insert_("$", Shoal::Concurrent::mut_());
-			loc->insert_("&", stop_());
-			loc->insert_("|", thing->me_());
-			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
-		}
-		return _value;
-	}
 };
 
 //----------------------------------------------------------------------
-class Variable : public Operation
+class Variable : public Attribute
 //----------------------------------------------------------------------
 {
 public:
 	inline Variable(const Ptr& expression)
-		: Operation{ expression }
-		, _value{}
+		: Attribute{ expression }
 	{
 	}
 
@@ -1280,12 +1230,12 @@ public:
 		return TYPE;
 	}
 
-	inline const Ptr intimator(Thing* const thing, const Ptr& it)
+	virtual inline const Ptr intimator_(Thing* const thing, const Ptr& it) override
 	{
 		const Ptr value = it->next_();
 		if (value->is_("."))
 		{
-			_init_(thing);
+			_initialize_(thing);
 		}
 		else if (thing->final_())
 		{
@@ -1301,35 +1251,18 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-		_init_(thing);
+		_initialize_(thing);
 		return _value;
-	}
-
-private:
-	Ptr _value;
-
-	inline void _init_(Thing* const thing)
-	{
-		if (!_value.get())
-		{
-			const Ptr local = Shoal::mut_();
-			Shoal* const loc = static_<Shoal>(local);
-			loc->insert_("$", Shoal::Concurrent::mut_());
-			loc->insert_("&", stop_());
-			loc->insert_("|", thing->me_());
-			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
-		}
 	}
 };
 
 //----------------------------------------------------------------------
-class Changeable : public Operation
+class Changeable : public Attribute
 //----------------------------------------------------------------------
 {
 public:
 	inline Changeable(const Ptr& expression)
-		: Operation{ expression }
-		, _value{}
+		: Attribute{ expression }
 	{
 	}
 
@@ -1344,21 +1277,12 @@ public:
 		return TYPE;
 	}
 
-protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	virtual inline const Ptr intimator_(Thing* const thing, const Ptr& it) override
 	{
 		const Ptr value = it->next_();
 		if (value->is_("."))
 		{
-			if (!_value.get())
-			{
-				const Ptr local = Shoal::mut_();
-				Shoal* const loc = static_<Shoal>(local);
-				loc->insert_("$", Shoal::Concurrent::mut_());
-				loc->insert_("&", stop_());
-				loc->insert_("|", thing->me_());
-				_value = static_<Expression>(_expression)->evaluate_(_expression, local);
-			}
+			_initialize_(thing);
 		}
 		else if (thing->final_())
 		{
@@ -1371,8 +1295,24 @@ protected:
 		return _value;
 	}
 
-private:
-	Ptr _value;
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		const Ptr value = it->next_();
+		if (value->is_("."))
+		{
+			_initialize_(thing);
+		}
+		else if (thing->final_())
+		{
+			throw Mutilation(thing->type_());
+		}
+		else
+		{
+			_value = value;
+		}
+		return _value;
+	}
 };
 
 //======================================================================
@@ -1741,6 +1681,100 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	return fin_(token);
 }
 
+inline const Thing::Ptr Expression::_intimate_(const Ptr& local) const
+{
+	try
+	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+		const Ptr thing = static_<Shoal>(local)->at_("|");
+		if (thing->is_nothing_())
+		{
+			throw _stack_("me accessed without a creature");
+		}
+		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+		if (member->is_nothing_())
+		{
+			throw Dismemberment(thing->type_(), vec[0]);
+		}
+		Attribute* const attribute = dynamic_<Attribute>(member);
+		if (attribute)
+		{
+			return attribute->intimator_(thing.get(), _iterator_(local, 1));
+		}
+		return operate_(thing.get(), member, _iterator_(local, 1));
+	}
+	catch (const std::exception& err)
+	{
+		throw _stack_(err.what());
+	}
+}
+
+inline const Thing::Ptr Expression::_intimate_iterator_(const Ptr& local) const
+{
+	try
+	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+		const Ptr thing = static_<Shoal>(local)->at_("|");
+		if (thing->is_nothing_())
+		{
+			throw _stack_("me accessed without a creature");
+		}
+		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+		if (member->is_nothing_())
+		{
+			throw Dismemberment(thing->type_(), vec[0]);
+		}
+		Attribute* const attribute = dynamic_<Attribute>(member);
+		if (attribute)
+		{
+			return attribute->intimator_(thing.get(), Expression::evaluate_(vec[1], local));
+		}
+		return operate_(thing.get(), member, Expression::evaluate_(vec[1], local));
+	}
+	catch (const std::exception& err)
+	{
+		throw _stack_(err.what());
+	}
+}
+
+inline const Thing::Ptr Expression::_intimate_iterable_(const Ptr& local) const
+{
+	try
+	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+		const Ptr thing = static_<Shoal>(local)->at_("|");
+		if (thing->is_nothing_())
+		{
+			throw _stack_("me accessed without a creature");
+		}
+		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+		if (member->is_nothing_())
+		{
+			throw Dismemberment(thing->type_(), vec[0]);
+		}
+		Attribute* const attribute = dynamic_<Attribute>(member);
+		const Ptr iterable = Expression::evaluate_(vec[1], local);
+		const Ptr feeder = iterable->feeder(member->eater_());
+		if (!feeder->is_nothing_())
+		{
+			if (attribute)
+			{
+				return attribute->intimator_(thing.get(), feeder);
+			}
+			return operate_(thing.get(), member, feeder);
+		}
+		if (attribute)
+		{
+			return attribute->intimator_(thing.get(), iterable->iterator_());
+		}
+		return operate_(thing.get(), member, iterable->iterator_());
+	}
+	catch (const std::exception& err)
+	{
+		throw _stack_(err.what());
+	}
+}
+
 inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 {
 	try
@@ -1801,6 +1835,10 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 
 //======================================================================
 // class Extraction
+//======================================================================
+
+//======================================================================
+// class Attribute
 //======================================================================
 
 //======================================================================
