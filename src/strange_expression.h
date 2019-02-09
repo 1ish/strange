@@ -17,6 +17,7 @@ namespace strange
 	class Mutation;
 	class Extraction;
 	class Fixed;
+	class Mutable;
 	class Variable;
 	class Changeable;
 
@@ -1155,6 +1156,7 @@ class Fixed : public Operation
 public:
 	inline Fixed(const Ptr& expression)
 		: Operation{ expression }
+		, _value{}
 	{
 	}
 
@@ -1189,12 +1191,81 @@ private:
 };
 
 //----------------------------------------------------------------------
+class Mutable : public Operation
+//----------------------------------------------------------------------
+{
+public:
+	inline Mutable(const Ptr& expression)
+		: Operation{ expression }
+		, _value{}
+		, _mutex{}
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr& expression)
+	{
+		return fake_<Fixed>(expression);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Mutable");
+		return TYPE;
+	}
+
+	inline const Ptr intimator(Thing* const thing, const Ptr& it)
+	{
+		const Ptr value = it->next_();
+		if (value->is_("."))
+		{
+			return _init_(thing);
+		}
+		std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+		_value = value;
+		return value;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		return _init_(thing);
+	}
+
+private:
+	Ptr _value;
+	mutable std::shared_timed_mutex _mutex;
+
+	inline const Ptr _init_(Thing* const thing)
+	{
+		{
+			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+			if (_value.get())
+			{
+				return _value;
+			}
+		}
+		std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+		if (!_value.get())
+		{
+			const Ptr local = Shoal::mut_();
+			Shoal* const loc = static_<Shoal>(local);
+			loc->insert_("$", Shoal::Concurrent::mut_());
+			loc->insert_("&", stop_());
+			loc->insert_("|", thing->me_());
+			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
+		}
+		return _value;
+	}
+};
+
+//----------------------------------------------------------------------
 class Variable : public Operation
 //----------------------------------------------------------------------
 {
 public:
 	inline Variable(const Ptr& expression)
 		: Operation{ expression }
+		, _value{}
 	{
 	}
 
@@ -1258,6 +1329,7 @@ class Changeable : public Operation
 public:
 	inline Changeable(const Ptr& expression)
 		: Operation{ expression }
+		, _value{}
 	{
 	}
 
@@ -1733,6 +1805,10 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 
 //======================================================================
 // class Fixed
+//======================================================================
+
+//======================================================================
+// class Mutable
 //======================================================================
 
 //======================================================================
