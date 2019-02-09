@@ -1103,7 +1103,7 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr intimator_(Thing* const thing, const Ptr& it) = 0;
+	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) = 0;
 
 protected:
 	Ptr _value;
@@ -1143,9 +1143,9 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr intimator_(Thing* const thing, const Ptr& it) override
+	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) override
 	{
-		_initialize_(thing);
+		_initialize_(thing.get());
 		return _value;
 	}
 
@@ -1179,7 +1179,7 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr intimator_(Thing* const thing, const Ptr& it) override
+	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) override
 	{
 		const Ptr value = it->next_();
 		if (value->is_("."))
@@ -1191,7 +1191,7 @@ public:
 					return _value;
 				}
 			}
-			_initialize_(thing);
+			_initialize_(thing.get());
 			return _value;
 		}
 		std::unique_lock<std::shared_timed_mutex> lock(_mutex);
@@ -1230,12 +1230,12 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr intimator_(Thing* const thing, const Ptr& it) override
+	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) override
 	{
 		const Ptr value = it->next_();
 		if (value->is_("."))
 		{
-			_initialize_(thing);
+			_initialize_(thing.get());
 		}
 		else if (thing->final_())
 		{
@@ -1277,12 +1277,12 @@ public:
 		return TYPE;
 	}
 
-	virtual inline const Ptr intimator_(Thing* const thing, const Ptr& it) override
+	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) override
 	{
 		const Ptr value = it->next_();
 		if (value->is_("."))
 		{
-			_initialize_(thing);
+			_initialize_(thing.get());
 		}
 		else if (thing->final_())
 		{
@@ -1699,7 +1699,7 @@ inline const Thing::Ptr Expression::_intimate_(const Ptr& local) const
 		Attribute* const attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
-			return attribute->intimator_(thing.get(), _iterator_(local, 1));
+			return attribute->intimator_(thing, _iterator_(local, 1));
 		}
 		return operate_(thing.get(), member, _iterator_(local, 1));
 	}
@@ -1727,7 +1727,7 @@ inline const Thing::Ptr Expression::_intimate_iterator_(const Ptr& local) const
 		Attribute* const attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
-			return attribute->intimator_(thing.get(), Expression::evaluate_(vec[1], local));
+			return attribute->intimator_(thing, Expression::evaluate_(vec[1], local));
 		}
 		return operate_(thing.get(), member, Expression::evaluate_(vec[1], local));
 	}
@@ -1759,13 +1759,13 @@ inline const Thing::Ptr Expression::_intimate_iterable_(const Ptr& local) const
 		{
 			if (attribute)
 			{
-				return attribute->intimator_(thing.get(), feeder);
+				return attribute->intimator_(thing, feeder);
 			}
 			return operate_(thing.get(), member, feeder);
 		}
 		if (attribute)
 		{
-			return attribute->intimator_(thing.get(), iterable->iterator_());
+			return attribute->intimator_(thing, iterable->iterator_());
 		}
 		return operate_(thing.get(), member, iterable->iterator_());
 	}
