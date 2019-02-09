@@ -16,6 +16,9 @@ namespace strange
 	class Closure;
 	class Mutation;
 	class Extraction;
+	class Fixed;
+	class Variable;
+	class Changeable;
 
 	// Categories:
 	// private typedefs
@@ -1145,6 +1148,161 @@ private:
 	const Ptr _shared;
 };
 
+//----------------------------------------------------------------------
+class Fixed : public Operation
+//----------------------------------------------------------------------
+{
+public:
+	inline Fixed(const Ptr& expression)
+		: Operation{ expression }
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr& expression)
+	{
+		return fake_<Fixed>(expression);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Fixed");
+		return TYPE;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		if (!_value.get())
+		{
+			const Ptr local = Shoal::mut_();
+			Shoal* const loc = static_<Shoal>(local);
+			loc->insert_("$", Shoal::Concurrent::mut_());
+			loc->insert_("&", stop_());
+			loc->insert_("|", thing->me_());
+			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
+		}
+		return _value;
+	}
+
+private:
+	Ptr _value;
+};
+
+//----------------------------------------------------------------------
+class Variable : public Operation
+//----------------------------------------------------------------------
+{
+public:
+	inline Variable(const Ptr& expression)
+		: Operation{ expression }
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr& expression)
+	{
+		return fake_<Fixed>(expression);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Variable");
+		return TYPE;
+	}
+
+	inline const Ptr intimator(Thing* const thing, const Ptr& it)
+	{
+		const Ptr value = it->next_();
+		if (value->is_("."))
+		{
+			_init_(thing);
+		}
+		else if (thing->final_())
+		{
+			throw Mutilation(thing->type_());
+		}
+		else
+		{
+			_value = value;
+		}
+		return _value;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		_init_(thing);
+		return _value;
+	}
+
+private:
+	Ptr _value;
+
+	inline void _init_(Thing* const thing)
+	{
+		if (!_value.get())
+		{
+			const Ptr local = Shoal::mut_();
+			Shoal* const loc = static_<Shoal>(local);
+			loc->insert_("$", Shoal::Concurrent::mut_());
+			loc->insert_("&", stop_());
+			loc->insert_("|", thing->me_());
+			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
+		}
+	}
+};
+
+//----------------------------------------------------------------------
+class Changeable : public Operation
+//----------------------------------------------------------------------
+{
+public:
+	inline Changeable(const Ptr& expression)
+		: Operation{ expression }
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr& expression)
+	{
+		return fake_<Fixed>(expression);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Changeable");
+		return TYPE;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		const Ptr value = it->next_();
+		if (value->is_("."))
+		{
+			if (!_value.get())
+			{
+				const Ptr local = Shoal::mut_();
+				Shoal* const loc = static_<Shoal>(local);
+				loc->insert_("$", Shoal::Concurrent::mut_());
+				loc->insert_("&", stop_());
+				loc->insert_("|", thing->me_());
+				_value = static_<Expression>(_expression)->evaluate_(_expression, local);
+			}
+		}
+		else if (thing->final_())
+		{
+			throw Mutilation(thing->type_());
+		}
+		else
+		{
+			_value = value;
+		}
+		return _value;
+	}
+
+private:
+	Ptr _value;
+};
+
 //======================================================================
 // class Expression
 //======================================================================
@@ -1571,6 +1729,18 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 
 //======================================================================
 // class Extraction
+//======================================================================
+
+//======================================================================
+// class Fixed
+//======================================================================
+
+//======================================================================
+// class Variable
+//======================================================================
+
+//======================================================================
+// class Changeable
 //======================================================================
 
 } // namespace strange

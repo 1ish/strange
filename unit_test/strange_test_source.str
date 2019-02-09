@@ -18,11 +18,13 @@
 			(
 				a+b+(|._m[])
 			),
+//			'read_in_out':fixed_("lake"),
+//			'write_in_read_out':variable_("lake"),
+//			'write_in_read_out':mutable_("lake"),
+//			'write_in_out':changeable_("lake"),
 			'_m':function_()(7)
 		}
 	},
-//	out.write[s@'Arithmetic'@'addition'[100, 200].to_symbol[], "\n"],
-//	out.write[$$Arithmetic::addition[100, 200].to_symbol[], "\n"],
 	ar := $$Arithmetic::mut[],
 	out.write[ar.addition[2, 2].to_symbol[], "\n"],
 	y := $$f[x+1],
