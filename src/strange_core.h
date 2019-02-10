@@ -330,13 +330,6 @@ public:
 		return cats_();
 	}
 
-	inline const bool cat_(const Ptr& cat) const;
-
-	inline const Ptr cat(const Ptr& it) const
-	{
-		return boolean_(cat_(it->next_()));
-	}
-
 	virtual inline const Ptr pub_() const;
 
 	inline const Ptr pub(const Ptr& ignore) const
@@ -850,6 +843,47 @@ public:
 		: Symbol{ std::forward<F>(symbol) }
 	{
 	}
+
+	template <typename F>
+	static inline const Ptr fin_(F&& symbol)
+	{
+		return fake_<Cat>(std::forward<F>(symbol));
+	}
+
+	static inline const Ptr lak_(const Ptr& lake);
+
+	static inline const Ptr lak(const Ptr& it)
+	{
+		return lak_(it->next_());
+	}
+
+	static inline const Ptr riv_(const Ptr& river);
+
+	static inline const Ptr riv(const Ptr& it)
+	{
+		return riv_(it->next_());
+	}
+
+	static inline const Ptr rwl_(const Ptr& river);
+
+	static inline const Ptr rwl(const Ptr& it)
+	{
+		return rwl_(it->next_());
+	}
+
+	static inline void share_(const Ptr& shoal);
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = Cat::fin_("<strange::Cat>");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override;
+
+	virtual inline const Ptr pub_() const override;
+
+	static inline const bool check_(const Ptr& thing, const Ptr& cat);
 };
 
 //----------------------------------------------------------------------
@@ -8533,7 +8567,6 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("stop", Static::fin_(&Thing::stop));
 		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
 		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
-		shoal->update_("cat", Const<Thing>::fin_(&Thing::cat));
 		shoal->update_("visit", Member<Thing>::fin_(&Thing::visit, "visitor", "member", ".."));
 		shoal->update_("pub", Const<Thing>::fin_(&Thing::pub));
 		shoal->finalize_();
@@ -8590,11 +8623,6 @@ inline const Thing::Ptr Thing::cats_() const
 		return cats;
 	}();
 	return CATS;
-}
-
-inline const bool Thing::cat_(const Ptr& cat) const
-{
-	return static_<Herd>(cats_())->at_(cat);
 }
 
 inline const Thing::Ptr& Thing::shared_()
@@ -8866,6 +8894,69 @@ inline const Thing::Ptr Symbol::at(const Ptr& it) const
 //======================================================================
 // class Cat
 //======================================================================
+
+inline const Thing::Ptr Cat::lak_(const Ptr& lake)
+{
+	Lake* const lak = dynamic_<Lake>(lake);
+	if (!lak)
+	{
+		throw Disagreement("Cat::lak_ passed wrong type of thing");
+	}
+	return fin_(lak->get_());
+}
+
+inline const Thing::Ptr Cat::riv_(const Ptr& river)
+{
+	return fin_(static_<Lake>(Lake::riv_(river))->get_());
+}
+
+inline const Thing::Ptr Cat::rwl_(const Ptr& river)
+{
+	return fin_(static_<Lake>(Lake::rwl_(river))->get_());
+}
+
+inline void Cat::share_(const Ptr& shoal)
+{
+	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Cat::lak", Static::fin_(&Cat::lak, "lake"));
+	s->update_("strange::Cat::riv", Static::fin_(&Cat::riv, "river"));
+	s->update_("strange::Cat::rwl", Static::fin_(&Cat::rwl, "river"));
+}
+
+inline const Thing::Ptr Cat::cats_() const
+{
+	static const Ptr CATS = []()
+	{
+		const Ptr cats = Herd::mut_();
+		Herd* const herd = static_<Herd>(cats);
+		herd->insert_(Cat::fin_("<strange::Thing>"));
+		herd->insert_(Cat::fin_("<strange::Symbol>"));
+		herd->insert_(Cat::fin_("<strange::Cat>"));
+		herd->finalize_();
+		return cats;
+	}();
+	return CATS;
+}
+
+inline const Thing::Ptr Cat::pub_() const
+{
+	static const Ptr PUB = [this]()
+	{
+		const Ptr pub = Symbol::pub_()->copy_();
+		Shoal* const shoal = static_<Shoal>(pub);
+		shoal->update_("lak", Static::fin_(&Symbol::lak, "lake"));
+		shoal->update_("riv", Static::fin_(&Symbol::riv, "river"));
+		shoal->update_("rwl", Static::fin_(&Symbol::rwl, "river"));
+		shoal->finalize_();
+		return pub;
+	}();
+	return PUB;
+}
+
+inline const bool Cat::check_(const Ptr& thing, const Ptr& cat)
+{
+	return static_<Herd>(thing->cats_())->at_(cat);
+}
 
 //======================================================================
 // class Static

@@ -409,7 +409,7 @@ private:
 				if (!cat->is_nothing_())
 				{
 					// check cat
-					if (!value->cat_(cat))
+					if (!Cat::check_(value, cat))
 					{
 						throw _stack_("function passed wrong kind of thing");
 					}
@@ -2196,7 +2196,7 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 			if (!cat->is_nothing_())
 			{
 				// check cat
-				if (!value->cat_(cat))
+				if (!Cat::check_(value, cat))
 				{
 					throw _stack_("lambda captured wrong kind of thing");
 				}
