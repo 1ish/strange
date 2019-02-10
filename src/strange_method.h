@@ -31,7 +31,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Method");
+		static const Ptr TYPE = Cat::fin_("<strange::Method>");
 		return TYPE;
 	}
 

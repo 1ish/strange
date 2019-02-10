@@ -706,6 +706,8 @@ public:
 		from_lake_via_river_(it->next_());
 		return Thing::nothing_();
 	}
+
+	static inline const Thing::Ptr cats_();
 };
 
 //----------------------------------------------------------------------
@@ -765,11 +767,7 @@ public:
 
 	virtual inline const Ptr to_lake_() const override;
 
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = sym_("strange::Symbol");
-		return TYPE;
-	}
+	virtual inline const Ptr type_() const override;
 
 	virtual inline const Ptr cats_() const override;
 
@@ -918,7 +916,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Static");
+		static const Ptr TYPE = Cat::fin_("<strange::Static>");
 		return TYPE;
 	}
 
@@ -968,7 +966,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Member");
+		static const Ptr TYPE = Cat::fin_("<strange::Member>");
 		return TYPE;
 	}
 
@@ -1027,7 +1025,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Const");
+		static const Ptr TYPE = Cat::fin_("<strange::Const>");
 		return TYPE;
 	}
 
@@ -1483,7 +1481,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Shoal");
+		static const Ptr TYPE = Cat::fin_("<strange::Shoal>");
 		return TYPE;
 	}
 
@@ -1588,7 +1586,7 @@ public:
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Shoal::Concurrent");
+			static const Ptr TYPE = Cat::fin_("<strange::Shoal::Concurrent>");
 			return TYPE;
 		}
 
@@ -1668,7 +1666,7 @@ private:
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Shoal:Iterator");
+			static const Ptr TYPE = Cat::fin_("<strange::Shoal:Iterator>");
 			return TYPE;
 		}
 
@@ -1679,11 +1677,11 @@ private:
 		std_unordered_map_ptr_ptr::const_iterator _iterator;
 	};
 
-	class Feeder : public Thing
+	class Feeder : public Stateful
 	{
 	public:
 		inline Feeder(const Ptr& shoal, const Ptr& eater)
-			: Thing{}
+			: Stateful{}
 			, _shoal{ shoal }
 			, _eater{ eater }
 		{
@@ -1706,7 +1704,7 @@ private:
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Shoal:Feeder");
+			static const Ptr TYPE = Cat::fin_("<strange::Shoal:Feeder>");
 			return TYPE;
 		}
 
@@ -2090,7 +2088,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Flock");
+		static const Ptr TYPE = Cat::fin_("<strange::Flock>");
 		return TYPE;
 	}
 
@@ -2168,7 +2166,7 @@ public:
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Flock::Concurrent");
+			static const Ptr TYPE = Cat::fin_("<strange::Flock::Concurrent>");
 			return TYPE;
 		}
 
@@ -2252,7 +2250,7 @@ private:
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Flock::Iterator");
+			static const Ptr TYPE = Cat::fin_("<strange::Flock::Iterator>");
 			return TYPE;
 		}
 
@@ -2718,19 +2716,19 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Herd");
+		static const Ptr TYPE = Cat::fin_("<strange::Herd>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Herd");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Stateful::cats_());
+			herd->self_add_(Serializable::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -2819,7 +2817,7 @@ public:
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Herd::Concurrent");
+			static const Ptr TYPE = Cat::fin_("<strange::Herd::Concurrent>");
 			return TYPE;
 		}
 
@@ -2888,19 +2886,18 @@ private:
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Herd::Iterator");
+			static const Ptr TYPE = Cat::fin_("<strange::Herd::Iterator>");
 			return TYPE;
 		}
 
 		virtual inline const Ptr cats_() const override
 		{
-			static const Ptr CATS = []()
+			static const Ptr CATS = [this]()
 			{
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
-				herd->insert_("strange::Stateful");
-				herd->insert_("strange::Iterator");
-				herd->insert_("strange::Thing");
+				herd->self_add_(Stateful::cats_());
+				herd->insert_(type_());
 				herd->finalize_();
 				return cats;
 			}();
@@ -2961,18 +2958,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::IteratorPtr");
+		static const Ptr TYPE = Cat::fin_("<strange::IteratorPtr>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Stateful::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3021,19 +3018,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::IteratorCopy");
+		static const Ptr TYPE = Cat::fin_("<strange::IteratorCopy>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::IteratorCopy");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Stateful::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3083,19 +3079,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::IteratorRef");
+		static const Ptr TYPE = Cat::fin_("<strange::IteratorRef>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::IteratorRef");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Stateful::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3345,21 +3340,19 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Lake");
+		static const Ptr TYPE = Cat::fin_("<strange::Lake>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Lake");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Stateful::cats_());
+			herd->self_add_(Serializable::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3800,6 +3793,27 @@ public:
 		}();
 		return PUB;
 	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = Cat::fin_("<strange::Number>");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		static const Ptr CATS = [this]()
+		{
+			const Ptr cats = Herd::mut_();
+			Herd* const herd = static_<Herd>(cats);
+			herd->self_add_(Stateful::cats_());
+			herd->self_add_(Serializable::cats_());
+			herd->insert_(type_());
+			herd->finalize_();
+			return cats;
+		}();
+		return CATS;
+	}
 };
 
 //----------------------------------------------------------------------
@@ -3935,22 +3949,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Bit");
+		static const Ptr TYPE = Cat::fin_("<strange::Bit>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Bit");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -4258,22 +4268,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Int8");
+		static const Ptr TYPE = Cat::fin_("<strange::Int8>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Int8");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -4576,22 +4582,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::UInt8");
+		static const Ptr TYPE = Cat::fin_("<strange::UInt8>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::UInt8");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -4900,22 +4902,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Int16");
+		static const Ptr TYPE = Cat::fin_("<strange::Int16>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Int16");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -5224,22 +5222,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::UInt16");
+		static const Ptr TYPE = Cat::fin_("<strange::UInt16>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::UInt16");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -5552,22 +5546,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Int32");
+		static const Ptr TYPE = Cat::fin_("<strange::Int32>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Int32");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -5880,22 +5870,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::UInt32");
+		static const Ptr TYPE = Cat::fin_("<strange::UInt32>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::UInt32");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -6216,22 +6202,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Int64");
+		static const Ptr TYPE = Cat::fin_("<strange::Int64>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Int64");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -6552,22 +6534,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::UInt64");
+		static const Ptr TYPE = Cat::fin_("<strange::UInt64>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::UInt64");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -6963,22 +6941,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Float32");
+		static const Ptr TYPE = Cat::fin_("<strange::Float32>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Float32");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -7300,22 +7274,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Float64");
+		static const Ptr TYPE = Cat::fin_("<strange::Float64>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Float64");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -7649,22 +7619,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Complex32");
+		static const Ptr TYPE = Cat::fin_("<strange::Complex32>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Complex32");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -8005,22 +7971,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Complex64");
+		static const Ptr TYPE = Cat::fin_("<strange::Complex64>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Serializable");
-			herd->insert_("strange::Complex64");
-			herd->insert_("strange::Number");
-			herd->insert_("strange::Data");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Number::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -8313,19 +8275,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::River");
+		static const Ptr TYPE = Cat::fin_("<strange::River>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::River");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Stateful::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -8619,6 +8580,7 @@ inline const Thing::Ptr Thing::cats_() const
 	static const Ptr CATS = []()
 	{
 		const Ptr cats = Herd::mut_();
+		static_<Herd>(cats)->insert_(Cat::fin_("<strange::Thing>"));
 		cats->finalize_();
 		return cats;
 	}();
@@ -8707,6 +8669,19 @@ inline void Serializable::from_lake_via_river_(const Thing::Ptr& lake)
 	const Thing::Ptr river = River::mut_();
 	lak->to_river_(river);
 	from_river_(river);
+}
+
+inline const Thing::Ptr Serializable::cats_()
+{
+	static const Thing::Ptr CATS = []()
+	{
+		const Thing::Ptr cats = Herd::mut_();
+		Herd* const herd = Thing::static_<Herd>(cats);
+		herd->insert_(Cat::fin_("<strange::Serializable>"));
+		herd->finalize_();
+		return cats;
+	}();
+	return CATS;
 }
 
 //======================================================================
@@ -8842,15 +8817,21 @@ inline const Thing::Ptr Symbol::to_lake_() const
 	return lake;
 }
 
+inline const Thing::Ptr Symbol::type_() const
+{
+	static const Ptr TYPE = Cat::fin_("<strange::Symbol>");
+	return TYPE;
+}
+
 inline const Thing::Ptr Symbol::cats_() const
 {
-	static const Ptr CATS = []()
+	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Final");
-		herd->insert_("strange::Symbol");
-		herd->insert_("strange::Thing");
+		herd->self_add_(Thing::cats_());
+		herd->self_add_(Serializable::cats_());
+		herd->insert_(type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -8925,13 +8906,12 @@ inline void Cat::share_(const Ptr& shoal)
 
 inline const Thing::Ptr Cat::cats_() const
 {
-	static const Ptr CATS = []()
+	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_(Cat::fin_("<strange::Thing>"));
-		herd->insert_(Cat::fin_("<strange::Symbol>"));
-		herd->insert_(Cat::fin_("<strange::Cat>"));
+		herd->self_add_(Symbol::cats_());
+		herd->insert_(type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -8944,9 +8924,9 @@ inline const Thing::Ptr Cat::pub_() const
 	{
 		const Ptr pub = Symbol::pub_()->copy_();
 		Shoal* const shoal = static_<Shoal>(pub);
-		shoal->update_("lak", Static::fin_(&Symbol::lak, "lake"));
-		shoal->update_("riv", Static::fin_(&Symbol::riv, "river"));
-		shoal->update_("rwl", Static::fin_(&Symbol::rwl, "river"));
+		shoal->update_("lak", Static::fin_(&Cat::lak, "lake"));
+		shoal->update_("riv", Static::fin_(&Cat::riv, "river"));
+		shoal->update_("rwl", Static::fin_(&Cat::rwl, "river"));
 		shoal->finalize_();
 		return pub;
 	}();
@@ -9217,13 +9197,13 @@ inline void Shoal::self_subtract_(const Ptr& other)
 
 inline const Thing::Ptr Shoal::cats_() const
 {
-	static const Ptr CATS = []()
+	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Stateful");
-		herd->insert_("strange::Shoal");
-		herd->insert_("strange::Thing");
+		herd->self_add_(Stateful::cats_());
+		herd->self_add_(Serializable::cats_());
+		herd->insert_(type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9232,13 +9212,12 @@ inline const Thing::Ptr Shoal::cats_() const
 
 inline const Thing::Ptr Shoal::Iterator::cats_() const
 {
-	static const Ptr CATS = []()
+	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Stateful");
-		herd->insert_("strange::Iterator");
-		herd->insert_("strange::Thing");
+		herd->self_add_(Stateful::cats_());
+		herd->insert_(type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9262,13 +9241,12 @@ inline const Thing::Ptr Shoal::Iterator::next_()
 
 inline const Thing::Ptr Shoal::Feeder::cats_() const
 {
-	static const Ptr CATS = []()
+	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Stateful");
-		herd->insert_("strange::Iterator");
-		herd->insert_("strange::Thing");
+		herd->self_add_(Stateful::cats_());
+		herd->insert_(type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9483,13 +9461,13 @@ inline void Flock::replace_links_(const Ptr& shoal)
 
 inline const Thing::Ptr Flock::cats_() const
 {
-	static const Ptr CATS = []()
+	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Stateful");
-		herd->insert_("strange::Flock");
-		herd->insert_("strange::Thing");
+		herd->self_add_(Stateful::cats_());
+		herd->self_add_(Serializable::cats_());
+		herd->insert_(type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9498,13 +9476,12 @@ inline const Thing::Ptr Flock::cats_() const
 
 inline const Thing::Ptr Flock::Iterator::cats_() const
 {
-	static const Ptr CATS = []()
+	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
-		herd->insert_("strange::Stateful");
-		herd->insert_("strange::Iterator");
-		herd->insert_("strange::Thing");
+		herd->self_add_(Stateful::cats_());
+		herd->insert_(type_());
 		herd->finalize_();
 		return cats;
 	}();

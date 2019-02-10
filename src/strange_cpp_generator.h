@@ -78,7 +78,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::CPPGenerator");
+		static const Ptr TYPE = Cat::fin_("<strange::CPPGenerator>");
 		return TYPE;
 	}
 };

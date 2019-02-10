@@ -80,7 +80,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Expression");
+		static const Ptr TYPE = Cat::fin_("<strange::Expression>");
 		return TYPE;
 	}
 
@@ -799,19 +799,18 @@ private:
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Expression::Iterator");
+			static const Ptr TYPE = Cat::fin_("<strange::Expression::Iterator>");
 			return TYPE;
 		}
 
 		virtual inline const Ptr cats_() const override
 		{
-			static const Ptr CATS = []()
+			static const Ptr CATS = [this]()
 			{
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
-				herd->insert_("strange::Stateful");
-				herd->insert_("strange::Iterator");
-				herd->insert_("strange::Thing");
+				herd->self_add_(Stateful::cats_());
+				herd->insert_(type_());
 				herd->finalize_();
 				return cats;
 			}();
@@ -904,7 +903,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Function");
+		static const Ptr TYPE = Cat::fin_("<strange::Function>");
 		return TYPE;
 	}
 
@@ -940,7 +939,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Closure");
+		static const Ptr TYPE = Cat::fin_("<strange::Closure>");
 		return TYPE;
 	}
 
@@ -974,7 +973,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Mutation");
+		static const Ptr TYPE = Cat::fin_("<strange::Mutation>");
 		return TYPE;
 	}
 
@@ -1015,7 +1014,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Extraction");
+		static const Ptr TYPE = Cat::fin_("<strange::Extraction>");
 		return TYPE;
 	}
 
@@ -1149,7 +1148,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Fixed");
+		static const Ptr TYPE = Cat::fin_("<strange::Fixed>");
 		return TYPE;
 	}
 
@@ -1192,7 +1191,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Mutable");
+		static const Ptr TYPE = Cat::fin_("<strange::Mutable>");
 		return TYPE;
 	}
 
@@ -1250,7 +1249,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Variable");
+		static const Ptr TYPE = Cat::fin_("<strange::Variable>");
 		return TYPE;
 	}
 
@@ -1304,7 +1303,7 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Changeable");
+		static const Ptr TYPE = Cat::fin_("<strange::Changeable>");
 		return TYPE;
 	}
 
@@ -1397,7 +1396,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		static const Ptr TYPE = sym_("strange::Creature");
+		static const Ptr TYPE = Cat::fin_("<strange::Creature>");
 		return TYPE;
 	}
 
@@ -1559,13 +1558,13 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Creature");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Stateful::cats_());
+			herd->self_add_(Serializable::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();

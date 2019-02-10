@@ -93,18 +93,18 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Weak");
+		static const Ptr TYPE = Cat::fin_("<strange::Weak>");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = []()
+		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
-			herd->insert_("strange::Stateful");
-			herd->insert_("strange::Thing");
+			herd->self_add_(Stateful::cats_());
+			herd->insert_(type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -164,18 +164,18 @@ private:
 
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Weak::Iterator");
+			static const Ptr TYPE = Cat::fin_("<strange::Weak::Iterator>");
 			return TYPE;
 		}
 
 		virtual inline const Ptr cats_() const override
 		{
-			static const Ptr CATS = []()
+			static const Ptr CATS = [this]()
 			{
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
-				herd->insert_("strange::Stateful");
-				herd->insert_("strange::Thing");
+				herd->self_add_(Stateful::cats_());
+				herd->insert_(type_());
 				herd->finalize_();
 				return cats;
 			}();
