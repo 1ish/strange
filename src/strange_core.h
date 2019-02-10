@@ -2728,7 +2728,7 @@ public:
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
-			herd->insert_(type_());
+			herd->insert_(Herd::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -2897,7 +2897,7 @@ private:
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
 				herd->self_add_(Stateful::cats_());
-				herd->insert_(type_());
+				herd->insert_(Herd::Iterator::type_());
 				herd->finalize_();
 				return cats;
 			}();
@@ -2969,7 +2969,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
-			herd->insert_(type_());
+			herd->insert_(IteratorPtr::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3029,7 +3029,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
-			herd->insert_(type_());
+			herd->insert_(IteratorCopy::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3090,7 +3090,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
-			herd->insert_(type_());
+			herd->insert_(IteratorRef::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3352,7 +3352,7 @@ public:
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
-			herd->insert_(type_());
+			herd->insert_(Lake::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3808,7 +3808,7 @@ public:
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
-			herd->insert_(type_());
+			herd->insert_(Number::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3960,7 +3960,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(Bit::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -4279,7 +4279,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(Int8::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -4593,7 +4593,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(UInt8::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -4913,7 +4913,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(Int16::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -5233,7 +5233,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(UInt16::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -5557,7 +5557,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(Int32::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -5881,7 +5881,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(UInt32::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -6213,7 +6213,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(Int64::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -6545,7 +6545,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(UInt64::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -6952,7 +6952,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(Float32::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -7285,7 +7285,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(Float64::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -7630,7 +7630,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(Complex32::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -7982,7 +7982,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(type_());
+			herd->insert_(Complex64::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -8286,7 +8286,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
-			herd->insert_(type_());
+			herd->insert_(River::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -8831,7 +8831,7 @@ inline const Thing::Ptr Symbol::cats_() const
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Thing::cats_());
 		herd->self_add_(Serializable::cats_());
-		herd->insert_(type_());
+		herd->insert_(Symbol::type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -8911,7 +8911,7 @@ inline const Thing::Ptr Cat::cats_() const
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Symbol::cats_());
-		herd->insert_(type_());
+		herd->insert_(Cat::type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9203,7 +9203,7 @@ inline const Thing::Ptr Shoal::cats_() const
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
 		herd->self_add_(Serializable::cats_());
-		herd->insert_(type_());
+		herd->insert_(Shoal::type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9217,7 +9217,7 @@ inline const Thing::Ptr Shoal::Iterator::cats_() const
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
-		herd->insert_(type_());
+		herd->insert_(Shoal::Iterator::type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9246,7 +9246,7 @@ inline const Thing::Ptr Shoal::Feeder::cats_() const
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
-		herd->insert_(type_());
+		herd->insert_(Shoal::Feeder::type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9467,7 +9467,7 @@ inline const Thing::Ptr Flock::cats_() const
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
 		herd->self_add_(Serializable::cats_());
-		herd->insert_(type_());
+		herd->insert_(Flock::type_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9481,7 +9481,7 @@ inline const Thing::Ptr Flock::Iterator::cats_() const
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
-		herd->insert_(type_());
+		herd->insert_(Flock::Iterator::type_());
 		herd->finalize_();
 		return cats;
 	}();

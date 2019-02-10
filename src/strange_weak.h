@@ -104,7 +104,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
-			herd->insert_(type_());
+			herd->insert_(Weak::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -175,7 +175,7 @@ private:
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
 				herd->self_add_(Stateful::cats_());
-				herd->insert_(type_());
+				herd->insert_(Weak::Iterator::type_());
 				herd->finalize_();
 				return cats;
 			}();

@@ -810,7 +810,7 @@ private:
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
 				herd->self_add_(Stateful::cats_());
-				herd->insert_(type_());
+				herd->insert_(Expression::Iterator::type_());
 				herd->finalize_();
 				return cats;
 			}();
@@ -1564,7 +1564,7 @@ public:
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
-			herd->insert_(type_());
+			herd->insert_(Creature::type_()); //TODO dynamic creature type/cats
 			herd->finalize_();
 			return cats;
 		}();

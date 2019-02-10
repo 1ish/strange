@@ -478,7 +478,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
-			herd->insert_(type_());
+			herd->insert_(Tokenizer::type_());
 			herd->finalize_();
 			return cats;
 		}();

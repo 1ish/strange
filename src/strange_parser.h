@@ -87,7 +87,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
-			herd->insert_(type_());
+			herd->insert_(Parser::type_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -1121,7 +1121,7 @@ private:
 		Flock* const flk = static_<Flock>(flock);
 
 		Ptr token;
-		flk->push_back_(_scope_key_(token));
+		flk->push_back_(Cat::fin_("<" + static_<Symbol>(_scope_key_(token))->get_() +">"));
 		Token* tok = static_<Token>(token);
 
 		Ptr symbol;
