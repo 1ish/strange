@@ -3,7 +3,6 @@
 
 #include "strange_core.h"
 #include "strange_reference.h"
-#include "strange_creature.h"
 #include "strange_expression.h"
 #include "strange_tokenizer.h"
 

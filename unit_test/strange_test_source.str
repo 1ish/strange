@@ -16,13 +16,13 @@
 			),
 			'addition'::extraction_(<strange::Number> a, <strange::Number> b)
 			(
-				a+b+(|._m[])
+				a+b+(|._mem[])
 			),
 			'f'::fixed_("lake"),			//TODO do not allow :: for attributes
-			'_mut':mutable_("lake"),
-			'v':variable_(|._mut[]),
-			'c':changeable_((|.v["luke"],"lake")),
-			'_m':function_()(7)
+			'_m':mutable_("lake"),
+			'v':variable_(|._m[]),
+			'c':changeable_("lake"),
+			'_mem':function_()(7)
 		}
 	},
 	ar := $$Arithmetic::mut[],

@@ -11,7 +11,6 @@
 #include "strange_reference.h"
 #include "strange_weak.h"
 #include "strange_fence.h"
-#include "strange_creature.h"
 #include "strange_expression.h"
 #include "strange_generator.h"
 #include "strange_cpp_generator.h"
