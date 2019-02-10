@@ -18,63 +18,38 @@
 
 namespace strange
 {
-	class Thing;
-	class Variadic;
-	class Serializable;
-	class Symbol;
-	class Static;
-	template <typename T> class Member;
-	template <typename T> class Const;
-	class Stateful;
-	class Shoal;
-	class Flock;
-	class Herd;
-	class IteratorPtr;
-	template <typename C> class IteratorCopy;
-	template <typename C> class IteratorRef;
-	template <typename D> class Data;
-	class Lake;
-	class Number;
-	class Bit;
-	class Int8;
-	class UInt8;
-	class Int16;
-	class UInt16;
-	class Int32;
-	class UInt32;
-	class Int64;
-	class UInt64;
-	class Float32;
-	class Float64;
-	class Complex32;
-	class Complex64;
-	class River;
-
-	// Categories:
-	// private typedefs
-	// protected typedefs
-	// public typedefs
-	// public static utility functions
-	// public static factory functions
-	// public static symbols
-	// public construction/destruction/assignment
-	// public pure virtual member functions and adapters
-	// public impure virtual member functions and adapters
-	// public non-virtual member functions and adapters
-	// protected static utility functions
-	// protected static factory functions
-	// protected static symbols
-	// protected construction/destruction/assignment
-	// protected pure virtual member functions and adapters
-	// protected impure virtual member functions and adapters
-	// protected non-virtual member functions and adapters
-	// private static utility functions
-	// private static factory functions
-	// private static symbols
-	// private construction/destruction/assignment
-	// private pure virtual member functions and adapters
-	// private impure virtual member functions and adapters
-	// private non-virtual member functions and adapters
+class Thing;
+class Variadic;
+class Serializable;
+class Symbol;
+class Cat;
+class Static;
+template <typename T> class Member;
+template <typename T> class Const;
+class Stateful;
+class Shoal;
+class Flock;
+class Herd;
+class IteratorPtr;
+template <typename C> class IteratorCopy;
+template <typename C> class IteratorRef;
+template <typename D> class Data;
+class Lake;
+class Number;
+class Bit;
+class Int8;
+class UInt8;
+class Int16;
+class UInt16;
+class Int32;
+class UInt32;
+class Int64;
+class UInt64;
+class Float32;
+class Float64;
+class Complex32;
+class Complex64;
+class River;
 
 //----------------------------------------------------------------------
 class Thing
@@ -863,6 +838,18 @@ public:
 private:
 	const std::string _symbol;
 	const std::size_t _hash;
+};
+
+//----------------------------------------------------------------------
+class Cat : public Symbol
+//----------------------------------------------------------------------
+{
+public:
+	template <typename F>
+	inline Cat(F&& symbol)
+		: Symbol{ std::forward<F>(symbol) }
+	{
+	}
 };
 
 //----------------------------------------------------------------------
@@ -8875,6 +8862,10 @@ inline const Thing::Ptr Symbol::at(const Ptr& it) const
 {
 	return UInt8::mut_(at_(it->next_()));
 }
+
+//======================================================================
+// class Cat
+//======================================================================
 
 //======================================================================
 // class Static
