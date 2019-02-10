@@ -1065,32 +1065,81 @@ class Attribute : public Operation
 //----------------------------------------------------------------------
 {
 public:
-	static inline void initialize_(const Ptr& creature, const Ptr& shoal)
+	virtual inline const bool final_() const override
+	{
+		if (_creature)
+		{
+			return _creature->final_();
+		}
+		return !Operation::final_();
+	}
+
+	virtual inline void freeze_() const override
+	{
+		if (_value)
+		{
+			_value->freeze_();
+		}
+	}
+
+	virtual inline const bool frozen_() const override
+	{
+		if (_creature)
+		{
+			return _creature->frozen_();
+		}
+		return !Operation::frozen_();
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return dup_(_expression, _value ? _value->copy_() : _value);
+	}
+
+	virtual inline const Ptr clone_() const override
+	{
+		return dup_(_expression, _value ? _value->clone_() : _value);
+	}
+
+	virtual inline const Ptr replicate_() const override
+	{
+		return dup_(_expression, _value ? _value->replicate_() : _value);
+	}
+
+	static inline void initialize_(const Ptr& creature, const Ptr& shoal, const bool values)
 	{
 		for (auto& it : static_<Shoal>(shoal)->get_())
 		{
 			Attribute* const attribute = dynamic_<Attribute>(it.second);
 			if (attribute)
 			{
-				attribute->_initialize_(creature.get());
+				attribute->_creature = creature;
+				if (values)
+				{
+					attribute->_initialize_(creature.get());
+				}
 			}
 		}
 	}
 
 	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) = 0;
 
+	virtual inline const Ptr dup_(const Ptr& expression, const Ptr& value) const = 0;
+
 protected:
+	Ptr _creature;
 	Ptr _value;
 
 	inline Attribute(const Ptr& expression)
 		: Operation{ expression }
+		, _creature{}
 		, _value{}
 	{
 	}
 
 	inline void _initialize_(Thing* const thing)
 	{
-		if (!_value.get())
+		if (!_value)
 		{
 			const Ptr local = Shoal::mut_();
 			Shoal* const loc = static_<Shoal>(local);
@@ -1115,6 +1164,13 @@ public:
 	static inline const Ptr fin_(const Ptr& expression)
 	{
 		return fake_<Fixed>(expression);
+	}
+
+	virtual inline const Ptr dup_(const Ptr& expression, const Ptr& value) const override
+	{
+		const Ptr result = fin_(expression);
+		static_<Fixed>(result)->_value = value;
+		return result;
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1153,6 +1209,13 @@ public:
 		return fake_<Mutable>(expression);
 	}
 
+	virtual inline const Ptr dup_(const Ptr& expression, const Ptr& value) const override
+	{
+		const Ptr result = fin_(expression);
+		static_<Mutable>(result)->_value = value;
+		return result;
+	}
+
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = sym_("strange::Mutable");
@@ -1166,7 +1229,7 @@ public:
 		{
 			{
 				std::shared_lock<std::shared_timed_mutex> lock(_mutex);
-				if (_value.get())
+				if (_value)
 				{
 					return _value;
 				}
@@ -1202,6 +1265,13 @@ public:
 	static inline const Ptr fin_(const Ptr& expression)
 	{
 		return fake_<Variable>(expression);
+	}
+
+	virtual inline const Ptr dup_(const Ptr& expression, const Ptr& value) const override
+	{
+		const Ptr result = fin_(expression);
+		static_<Variable>(result)->_value = value;
+		return result;
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1249,6 +1319,13 @@ public:
 	static inline const Ptr fin_(const Ptr& expression)
 	{
 		return fake_<Changeable>(expression);
+	}
+
+	virtual inline const Ptr dup_(const Ptr& expression, const Ptr& value) const override
+	{
+		const Ptr result = fin_(expression);
+		static_<Changeable>(result)->_value = value;
+		return result;
 	}
 
 	virtual inline const Ptr type_() const override
@@ -1312,7 +1389,7 @@ public:
 	static inline const Ptr mut_(const Ptr& creator, const Ptr& members = Ptr())
 	{
 		const Ptr result = make_<Creature>(creator, members);
-		Attribute::initialize_(result, static_<Creature>(result)->_members);
+		Attribute::initialize_(result, static_<Creature>(result)->_members, !members);
 		return result;
 	}
 
@@ -1422,6 +1499,10 @@ public:
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
+		}
+		if (final_())
+		{
+			return fin_(_creator, _members->replicate_());
 		}
 		return mut_(_creator, _members->replicate_());
 	}
