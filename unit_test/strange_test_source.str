@@ -18,7 +18,7 @@
 			(
 				a+b+(|._mem[])
 			),
-			'f'::fixed_("flake"),			//TODO do not allow :: for attributes
+			'f'::fixed_("flake"),			//TODO do allow :: for attributes
 			'_m':mutable_("_mlake"),
 			'v':variable_("vlake"),
 			'c':changeable_("clake"),

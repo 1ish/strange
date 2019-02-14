@@ -260,7 +260,12 @@ private:
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			const Ptr thing = Expression::evaluate_(vec[0], local);
-			return Method::with_name_(thing, vec[1]);
+			const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
+			if (member->is_nothing_())
+			{
+				throw Dismemberment(thing->type_(), vec[1]);
+			}
+			return Method::fin_(thing, member);
 		}
 		catch (const std::exception& err)
 		{
@@ -367,22 +372,7 @@ private:
 
 	inline const Ptr _set_intimate_(const Ptr& local) const;
 
-	inline const Ptr _private_(const Ptr& local) const
-	{
-		try
-		{
-			const Ptr thing = static_<Shoal>(local)->at_("|");
-			if (thing->is_nothing_())
-			{
-				throw _stack_("me accessed without a creature");
-			}
-			return Method::with_name_(thing, static_<Flock>(_flock)->get_()[0]); //TODO public only
-		}
-		catch (const std::exception& err)
-		{
-			throw _stack_(err.what());
-		}
-	}
+	inline const Ptr _private_(const Ptr& local) const;
 
 	inline const Ptr _intimate_(const Ptr& local) const;
 
@@ -2153,6 +2143,28 @@ inline const Thing::Ptr Expression::_set_intimate_(const Ptr& local) const
 			return value;
 		}
 		throw Mutilation(thing->type_());
+	}
+	catch (const std::exception& err)
+	{
+		throw _stack_(err.what());
+	}
+}
+
+inline const Thing::Ptr Expression::_private_(const Ptr& local) const
+{
+	try
+	{
+		const Ptr thing = static_<Shoal>(local)->at_("|");
+		if (thing->is_nothing_())
+		{
+			throw _stack_("me accessed without a creature");
+		}
+		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(static_<Flock>(_flock)->get_()[0]);
+		if (member->is_nothing_())
+		{
+			throw Dismemberment(thing->type_(), static_<Flock>(_flock)->get_()[0]);
+		}
+		return Method::fin_(thing, member);
 	}
 	catch (const std::exception& err)
 	{

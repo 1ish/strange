@@ -24,11 +24,6 @@ public:
 		return fake_<Method>(thing, member);
 	}
 
-	static inline const Ptr with_name_(const Ptr& thing, const Ptr& name)
-	{
-		return fin_(thing, static_<Shoal>(thing->pub_())->at_(name));
-	}
-
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = Cat::fin_("<strange::Method>");
