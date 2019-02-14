@@ -892,7 +892,7 @@ private:
 		Reference* const smt = static_<Reference>(statement);
 		if (token->is_("."))
 		{
-			smt->set_(sym_(me_dot ? "private_" : "method_"));
+			smt->set_(sym_(me_dot ? "private_" : "public_"));
 			return;
 		}
 		Flock* const flk = static_<Flock>(flock);
@@ -922,9 +922,15 @@ private:
 				_list_(scope, shoal, fixed, flock, sym_(">>"));
 				smt->set_(sym_(me_dot ? "intimate_iterator_" : "operate_iterator_"));
 			}
+			else if (symbol->is_(":=")) // set attribute
+			{
+				_next_();
+				flk->push_back_(_parse_(scope, shoal, fixed, true));
+				smt->set_(sym_(me_dot ? "set_intimate_" : "set_attribute_"));
+			}
 			else
 			{
-				smt->set_(sym_(me_dot ? "private_" : "method_"));
+				smt->set_(sym_(me_dot ? "private_" : "public_"));
 			}
 		}
 		else

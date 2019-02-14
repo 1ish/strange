@@ -252,7 +252,9 @@ private:
 		}
 	}
 
-	inline const Ptr _method_(const Ptr& local) const
+	inline const Ptr _set_attribute_(const Ptr& local) const;
+
+	inline const Ptr _public_(const Ptr& local) const
 	{
 		try
 		{
@@ -363,6 +365,8 @@ private:
 		}
 	}
 
+	inline const Ptr _set_intimate_(const Ptr& local) const;
+
 	inline const Ptr _private_(const Ptr& local) const
 	{
 		try
@@ -372,7 +376,7 @@ private:
 			{
 				throw _stack_("me accessed without a creature");
 			}
-			return Method::with_name_(thing, static_<Flock>(_flock)->get_()[0]);
+			return Method::with_name_(thing, static_<Flock>(_flock)->get_()[0]); //TODO public only
 		}
 		catch (const std::exception& err)
 		{
@@ -1825,13 +1829,21 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 		}
 		throw Disagreement("invoke_iterable_ expression of wrong size");
 	}
-	else if (statement->is_("method_"))
+	else if (statement->is_("set_attribute_"))
+	{
+		if (size == 3)
+		{
+			return fin_(token, statement, &Expression::_set_attribute_, flock);
+		}
+		throw Disagreement("set_attribute_ expression of wrong size");
+	}
+	else if (statement->is_("public_"))
 	{
 		if (size == 2)
 		{
-			return fin_(token, statement, &Expression::_method_, flock);
+			return fin_(token, statement, &Expression::_public_, flock);
 		}
-		throw Disagreement("method_ expression of wrong size");
+		throw Disagreement("public_ expression of wrong size");
 	}
 	else if (statement->is_("operate_"))
 	{
@@ -1872,6 +1884,14 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 			return fin_(token, statement, &Expression::_perform_, flock);
 		}
 		throw Disagreement("perform_ expression of wrong size");
+	}
+	else if (statement->is_("set_intimate_"))
+	{
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_set_intimate_, flock);
+		}
+		throw Disagreement("set_intimate_ expression of wrong size");
 	}
 	else if (statement->is_("private_"))
 	{
@@ -2082,6 +2102,62 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 		throw Disagreement("expression with unexpected statement");
 	}
 	return fin_(token);
+}
+
+inline const Thing::Ptr Expression::_set_attribute_(const Ptr& local) const
+{
+	try
+	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+		const Ptr thing = Expression::evaluate_(vec[0], local);
+		const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
+		if (member->is_nothing_())
+		{
+			throw Dismemberment(thing->type_(), vec[1]);
+		}
+		Attribute* const attribute = dynamic_<Attribute>(member);
+		if (attribute)
+		{
+			const Ptr value = Expression::evaluate_(vec[2], local);
+			attribute->set_(value, false);
+			return value;
+		}
+		throw Mutilation(thing->type_());
+	}
+	catch (const std::exception& err)
+	{
+		throw _stack_(err.what());
+	}
+}
+
+inline const Thing::Ptr Expression::_set_intimate_(const Ptr& local) const
+{
+	try
+	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+		const Ptr thing = static_<Shoal>(local)->at_("|");
+		if (thing->is_nothing_())
+		{
+			throw _stack_("me accessed without a creature");
+		}
+		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+		if (member->is_nothing_())
+		{
+			throw Dismemberment(thing->type_(), vec[0]);
+		}
+		Attribute* const attribute = dynamic_<Attribute>(member);
+		if (attribute)
+		{
+			const Ptr value = Expression::evaluate_(vec[1], local);
+			attribute->set_(value, true);
+			return value;
+		}
+		throw Mutilation(thing->type_());
+	}
+	catch (const std::exception& err)
+	{
+		throw _stack_(err.what());
+	}
 }
 
 inline const Thing::Ptr Expression::_intimate_(const Ptr& local) const

@@ -31,6 +31,8 @@
 	out.write[ar.v, "\n"],
 	out.write[ar.c, "\n"],
 	out.write[ar.v, "\n"],
+	ar.c := "nlake",
+	out.write[ar.c, "\n"],
 	y := $$f[x+1],
 	z := (s@['f'])[y],
 	z := s@'f'[y],
