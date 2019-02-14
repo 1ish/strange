@@ -1137,14 +1137,7 @@ public:
 			if (attribute)
 			{
 				static_<Weak>(attribute->_creature)->set_(creature);
-			}
-		}
-		if (values)
-		{
-			for (auto& it : static_<Shoal>(shoal)->get_())
-			{
-				Attribute* const attribute = dynamic_<Attribute>(it.second);
-				if (attribute)
+				if (values)
 				{
 					attribute->_initialize_(creature);
 				}
@@ -1158,7 +1151,6 @@ public:
 
 	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it)
 	{
-		_initialize_(thing);
 		return _value->invoke(it);
 	}
 
@@ -1180,20 +1172,16 @@ protected:
 
 	inline void _initialize_(const Ptr& thing)
 	{
-		if (!_value)
-		{
-			const Ptr local = Shoal::mut_();
-			Shoal* const loc = static_<Shoal>(local);
-			loc->insert_("$", Shoal::Concurrent::mut_());
-			loc->insert_("&", stop_());
-			loc->insert_("|", thing);
-			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
-		}
+		const Ptr local = Shoal::mut_();
+		Shoal* const loc = static_<Shoal>(local);
+		loc->insert_("$", Shoal::Concurrent::mut_());
+		loc->insert_("&", stop_());
+		loc->insert_("|", thing);
+		_value = static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
 
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-		_initialize_(thing);
 		return _value->invoke(it);
 	}
 };
@@ -1276,7 +1264,6 @@ public:
 
 	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) override
 	{
-		_initialize_(thing);
 		Ptr value;
 		{
 			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
