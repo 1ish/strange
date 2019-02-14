@@ -1038,11 +1038,19 @@ class Attribute : public Operation
 //----------------------------------------------------------------------
 {
 public:
+	virtual inline void finalize_() const override
+	{
+		if (_value)
+		{
+			_value->finalize_();
+		}
+	}
+
 	virtual inline const bool final_() const override
 	{
-		if (_creature)
+		if (_value)
 		{
-			return _creature->final_();
+			return _value->final_();
 		}
 		return false;
 	}
@@ -1057,26 +1065,26 @@ public:
 
 	virtual inline const bool frozen_() const override
 	{
-		if (_creature)
+		if (_value)
 		{
-			return _creature->frozen_();
+			return _value->frozen_();
 		}
 		return false;
 	}
 
 	virtual inline const Ptr copy_() const override
 	{
-		return dup_(_expression, _value ? _value->copy_() : _value);
+		return duplicate_(_expression, _value ? _value->copy_() : _value);
 	}
 
 	virtual inline const Ptr clone_() const override
 	{
-		return dup_(_expression, _value ? _value->clone_() : _value);
+		return duplicate_(_expression, _value ? _value->clone_() : _value);
 	}
 
 	virtual inline const Ptr replicate_() const override
 	{
-		return dup_(_expression, _value ? _value->replicate_() : _value);
+		return duplicate_(_expression, _value ? _value->replicate_() : _value);
 	}
 
 	static inline void initialize_(const Ptr& creature, const Ptr& shoal, const bool values)
@@ -1089,15 +1097,21 @@ public:
 				attribute->_creature = creature;
 				if (values)
 				{
-					attribute->_initialize_(creature.get());
+					attribute->_initialize_(creature);
 				}
 			}
 		}
 	}
 
-	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) = 0;
+	virtual inline void set_(const Ptr& thing, const bool intimate) = 0;
 
-	virtual inline const Ptr dup_(const Ptr& expression, const Ptr& value) const = 0;
+	virtual inline const Ptr duplicate_(const Ptr& expression, const Ptr& value) const = 0;
+
+	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it)
+	{
+		_initialize_(thing);
+		return _value->invoke(it);
+	}
 
 protected:
 	Ptr _creature;
@@ -1112,15 +1126,26 @@ protected:
 
 	inline void _initialize_(Thing* const thing)
 	{
+		_initialize_(thing->me_());
+	}
+
+	inline void _initialize_(const Ptr& thing)
+	{
 		if (!_value)
 		{
 			const Ptr local = Shoal::mut_();
 			Shoal* const loc = static_<Shoal>(local);
 			loc->insert_("$", Shoal::Concurrent::mut_());
 			loc->insert_("&", stop_());
-			loc->insert_("|", thing->me_());
+			loc->insert_("|", thing);
 			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
 		}
+	}
+
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		_initialize_(thing);
+		return _value->invoke(it);
 	}
 };
 
@@ -1139,30 +1164,22 @@ public:
 		return fake_<Fixed>(expression);
 	}
 
-	virtual inline const Ptr dup_(const Ptr& expression, const Ptr& value) const override
-	{
-		const Ptr result = fin_(expression);
-		static_<Fixed>(result)->_value = value;
-		return result;
-	}
-
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = Cat::fin_("<strange::Fixed>");
 		return TYPE;
 	}
 
-	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) override
+	virtual inline void set_(const Ptr& thing, const bool intimate) override
 	{
-		_initialize_(thing.get());
-		return _value;
+		throw Mutilation(thing->type_());
 	}
 
-protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	virtual inline const Ptr duplicate_(const Ptr& expression, const Ptr& value) const override
 	{
-		_initialize_(thing);
-		return _value;
+		const Ptr result = fin_(expression);
+		static_<Fixed>(result)->_value = value;
+		return result;
 	}
 };
 
@@ -1182,37 +1199,41 @@ public:
 		return fake_<Mutable>(expression);
 	}
 
-	virtual inline const Ptr dup_(const Ptr& expression, const Ptr& value) const override
-	{
-		const Ptr result = fin_(expression);
-		static_<Mutable>(result)->_value = value;
-		return result;
-	}
-
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = Cat::fin_("<strange::Mutable>");
 		return TYPE;
 	}
 
+	virtual inline void set_(const Ptr& thing, const bool intimate) override
+	{
+		if (intimate)
+		{
+			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+			_value = thing;
+		}
+		else
+		{
+			throw Mutilation(thing->type_());
+		}
+	}
+
+	virtual inline const Ptr duplicate_(const Ptr& expression, const Ptr& value) const override
+	{
+		const Ptr result = fin_(expression);
+		static_<Mutable>(result)->_value = value;
+		return result;
+	}
+
 	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) override
 	{
-		const Ptr value = it->next_();
-		if (value->is_("."))
+		_initialize_(thing);
+		Ptr value;
 		{
-			{
-				std::shared_lock<std::shared_timed_mutex> lock(_mutex);
-				if (_value)
-				{
-					return _value;
-				}
-			}
-			_initialize_(thing.get());
-			return _value;
+			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+			value = _value;
 		}
-		std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-		_value = value;
-		return value;
+		return value->invoke(it);
 	}
 
 protected:
@@ -1240,42 +1261,29 @@ public:
 		return fake_<Variable>(expression);
 	}
 
-	virtual inline const Ptr dup_(const Ptr& expression, const Ptr& value) const override
-	{
-		const Ptr result = fin_(expression);
-		static_<Variable>(result)->_value = value;
-		return result;
-	}
-
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = Cat::fin_("<strange::Variable>");
 		return TYPE;
 	}
 
-	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) override
+	virtual inline void set_(const Ptr& thing, const bool intimate) override
 	{
-		const Ptr value = it->next_();
-		if (value->is_("."))
+		if (intimate && !_creature->final_())
 		{
-			_initialize_(thing.get());
-		}
-		else if (thing->final_())
-		{
-			throw Mutilation(thing->type_());
+			_value = thing;
 		}
 		else
 		{
-			_value = value;
+			throw Mutilation(thing->type_());
 		}
-		return _value;
 	}
 
-protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	virtual inline const Ptr duplicate_(const Ptr& expression, const Ptr& value) const override
 	{
-		_initialize_(thing);
-		return _value;
+		const Ptr result = fin_(expression);
+		static_<Variable>(result)->_value = value;
+		return result;
 	}
 };
 
@@ -1294,54 +1302,29 @@ public:
 		return fake_<Changeable>(expression);
 	}
 
-	virtual inline const Ptr dup_(const Ptr& expression, const Ptr& value) const override
-	{
-		const Ptr result = fin_(expression);
-		static_<Changeable>(result)->_value = value;
-		return result;
-	}
-
 	virtual inline const Ptr type_() const override
 	{
 		static const Ptr TYPE = Cat::fin_("<strange::Changeable>");
 		return TYPE;
 	}
 
-	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) override
+	virtual inline void set_(const Ptr& thing, const bool intimate) override
 	{
-		const Ptr value = it->next_();
-		if (value->is_("."))
+		if (!_creature->final_())
 		{
-			_initialize_(thing.get());
-		}
-		else if (thing->final_())
-		{
-			throw Mutilation(thing->type_());
+			_value = thing;
 		}
 		else
 		{
-			_value = value;
+			throw Mutilation(thing->type_());
 		}
-		return _value;
 	}
 
-protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	virtual inline const Ptr duplicate_(const Ptr& expression, const Ptr& value) const override
 	{
-		const Ptr value = it->next_();
-		if (value->is_("."))
-		{
-			_initialize_(thing);
-		}
-		else if (thing->final_())
-		{
-			throw Mutilation(thing->type_());
-		}
-		else
-		{
-			_value = value;
-		}
-		return _value;
+		const Ptr result = fin_(expression);
+		static_<Changeable>(result)->_value = value;
+		return result;
 	}
 };
 
