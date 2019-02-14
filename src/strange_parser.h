@@ -113,7 +113,7 @@ private:
 		static_<Flock>(flock)->push_back_(Expression::fin_(token, thing));
 	}
 
-	inline const Ptr _parse_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const bool right)
+	inline const Ptr _parse_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const bool right)
 	{
 		Ptr token;
 		Ptr result;
@@ -150,17 +150,17 @@ private:
 				{
 					if (symbol->is_("lambda_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock, true, true)) // parameters/capture
+						if (_statement_(scope, shoal, fixed, flock, true, true)) // parameters/capture
 						{
 							if (flk->size_() % 3 == 0) // <cat> param := capture
 							{
 								const Ptr nested = Flock::mut_();
 								Flock* const nst = static_<Flock>(nested);
-								if (_statement_(scope, shoal, finalized, nested, true)) // parameters
+								if (_statement_(scope, shoal, fixed, nested, true)) // parameters
 								{
 									if (nst->size_() % 3 == 0) // <cat> param := default
 									{
-										nst->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'finalized' scope
+										nst->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
 										flk->push_back_(Expression::fin_(token, sym_("closure_"), nested));
 										result = Expression::fin_(token, symbol, flock);
 									}
@@ -180,11 +180,11 @@ private:
 					}
 					else if (symbol->is_("function_") || symbol->is_("mutation_") || symbol->is_("extraction_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock, true)) // parameters
+						if (_statement_(scope, shoal, fixed, flock, true)) // parameters
 						{
 							if (flk->size_() % 3 == 0) // <cat> param := default
 							{
-								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'finalized' scope
+								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
 								result = Expression::fin_(token, symbol, flock);
 							}
 							else
@@ -196,7 +196,7 @@ private:
 					}
 					else if (symbol->is_("fixed_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock))
+						if (_statement_(scope, shoal, fixed, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0)
@@ -216,7 +216,7 @@ private:
 					}
 					else if (symbol->is_("mutable_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock))
+						if (_statement_(scope, shoal, fixed, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0)
@@ -236,7 +236,7 @@ private:
 					}
 					else if (symbol->is_("variable_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock))
+						if (_statement_(scope, shoal, fixed, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0)
@@ -256,7 +256,7 @@ private:
 					}
 					else if (symbol->is_("changeable_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock))
+						if (_statement_(scope, shoal, fixed, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0)
@@ -276,7 +276,7 @@ private:
 					}
 					else if (symbol->is_("break_") || symbol->is_("continue_") || symbol->is_("return_") || symbol->is_("throw_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock))
+						if (_statement_(scope, shoal, fixed, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0)
@@ -296,7 +296,7 @@ private:
 					}
 					else if (symbol->is_("error_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock))
+						if (_statement_(scope, shoal, fixed, flock))
 						{
 							result = Expression::fin_(token, symbol, flock);
 							continue;
@@ -304,7 +304,7 @@ private:
 					}
 					else if (symbol->is_("catch_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock))
+						if (_statement_(scope, shoal, fixed, flock))
 						{
 							if (flk->size_() == 2)
 							{
@@ -319,7 +319,7 @@ private:
 					}
 					else if (symbol->is_("if_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock))
+						if (_statement_(scope, shoal, fixed, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 2 || size == 3)
@@ -335,11 +335,11 @@ private:
 					}
 					else if (symbol->is_("while_") || symbol->is_("do_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock))
+						if (_statement_(scope, shoal, fixed, flock))
 						{
 							if (flk->size_() == 1)
 							{
-								flk->push_back_(_parse_(scope, shoal, finalized, false));
+								flk->push_back_(_parse_(scope, shoal, fixed, false));
 								result = Expression::fin_(token, symbol, flock);
 							}
 							else
@@ -351,11 +351,11 @@ private:
 					}
 					else if (symbol->is_("for_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock))
+						if (_statement_(scope, shoal, fixed, flock))
 						{
 							if (flk->size_() == 3)
 							{
-								flk->push_back_(_parse_(scope, shoal, finalized, false));
+								flk->push_back_(_parse_(scope, shoal, fixed, false));
 								result = Expression::fin_(token, symbol, flock);
 							}
 							else
@@ -367,7 +367,7 @@ private:
 					}
 					else if (symbol->is_("import_"))
 					{
-						if (_statement_(scope, shoal, finalized, flock))
+						if (_statement_(scope, shoal, fixed, flock))
 						{
 							if (flk->size_() >= 1)
 							{
@@ -384,7 +384,7 @@ private:
 									{
 										throw tok->error_("Parser ERROR: invalid import_ file: " + lake->get_());
 									}
-									result = static_<Parser>(Parser::mut_(Tokenizer::mut_(river)))->_parse_(nothing_(), shoal, finalized, true);
+									result = static_<Parser>(Parser::mut_(Tokenizer::mut_(river)))->_parse_(nothing_(), shoal, fixed, true);
 								}
 							}
 							else
@@ -397,7 +397,7 @@ private:
 					// local at/update name
 					flk->push_back_(symbol);
 					bool insert = false;
-					cont = _update_(scope, shoal, finalized, flock, symbol, insert);
+					cont = _update_(scope, shoal, fixed, flock, symbol, insert);
 					result = Expression::fin_(token, local, flock);
 				}
 				else if (tag == 'P') // punctuation
@@ -406,7 +406,7 @@ private:
 					{
 						_name_(flock);
 						bool insert = false;
-						cont = _update_(scope, shoal, finalized, flock, static_<Symbol>(symbol)->add_(flk->at_(0)), insert);
+						cont = _update_(scope, shoal, fixed, flock, static_<Symbol>(symbol)->add_(flk->at_(0)), insert);
 						if (cont)
 						{
 							result = Expression::fin_(token, sym_("shared_at_"), flock);
@@ -426,7 +426,7 @@ private:
 					}
 					else if (symbol->is_("|.")) // me dot
 					{
-						_dot_(scope, shoal, finalized, statement, flock, true);
+						_dot_(scope, shoal, fixed, statement, flock, true);
 						result = Expression::fin_(token, smt->get_(), flock);
 					}
 					else if (symbol->is_("|:.")) // me operation
@@ -469,17 +469,17 @@ private:
 					}
 					else if (symbol->is_("(")) // block
 					{
-						_list_(scope, shoal, finalized, flock, sym_(")"));
+						_list_(scope, shoal, fixed, flock, sym_(")"));
 						result = Expression::fin_(token, sym_("block_"), flock);
 					}
 					else if (symbol->is_("[")) // flock
 					{
-						_list_(scope, shoal, finalized, flock, sym_("]"));
+						_list_(scope, shoal, fixed, flock, sym_("]"));
 						result = Expression::fin_(token, sym_("flock_"), flock);
 					}
 					else if (symbol->is_("{")) // shoal or herd
 					{
-						if (_map_(scope, shoal, finalized, flock))
+						if (_map_(scope, shoal, fixed, flock))
 						{
 							result = Expression::fin_(token, sym_("shoal_"), flock);
 						}
@@ -490,7 +490,7 @@ private:
 					}
 					else if (symbol->is_("<<")) // iterator
 					{
-						_list_(scope, shoal, finalized, flock, sym_(">>"));
+						_list_(scope, shoal, fixed, flock, sym_(">>"));
 						result = Expression::fin_(token, sym_("flock_iterator_"), flock);
 					}
 					else
@@ -509,7 +509,7 @@ private:
 				else
 				{
 					flk->push_back_(result);
-					if (_thing_(scope, shoal, finalized, statement, flock))
+					if (_thing_(scope, shoal, fixed, statement, flock))
 					{
 						result = Expression::fin_(token, smt->get_(), flock);
 					}
@@ -527,7 +527,7 @@ private:
 		return Expression::fin_(token);
 	}
 
-	inline const bool _thing_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& statement, const Ptr& flock)
+	inline const bool _thing_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& statement, const Ptr& flock)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -548,59 +548,59 @@ private:
 			if (symbol->is_("."))
 			{
 				_next_();
-				_dot_(scope, shoal, finalized, statement, flock, false);
+				_dot_(scope, shoal, fixed, statement, flock, false);
 			}
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
-				flk->push_back_(_parse_(scope, shoal, finalized, false));
+				flk->push_back_(_parse_(scope, shoal, fixed, false));
 				smt->set_(sym_("invoke_iterable_"));
 			}
 			else if (symbol->is_("[")) // flock
 			{
 				_next_();
-				_list_(scope, shoal, finalized, flock, sym_("]"));
+				_list_(scope, shoal, fixed, flock, sym_("]"));
 			}
 			else if (symbol->is_("<<")) // iterator
 			{
 				_next_();
-				_list_(scope, shoal, finalized, flock, sym_(">>"));
+				_list_(scope, shoal, fixed, flock, sym_(">>"));
 				smt->set_(sym_("invoke_iterator_"));
 			}
 			else if (symbol->is_("%"))
 			{
 				_next_();
 				flk->push_back_(sym_("modulo"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("%="))
 			{
 				_next_();
 				flk->push_back_(sym_("self_modulo"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("%%"))
 			{
 				_next_();
 				flk->push_back_(sym_("xor"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("!%"))
 			{
 				_next_();
 				flk->push_back_(sym_("xnor"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("+"))
 			{
 				_next_();
 				flk->push_back_(sym_("add"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("+="))
 			{
 				_next_();
 				flk->push_back_(sym_("self_add"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("++"))
 			{
@@ -612,13 +612,13 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("subtract"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("-="))
 			{
 				_next_();
 				flk->push_back_(sym_("self_subtract"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("--"))
 			{
@@ -630,37 +630,37 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("multiply"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("*="))
 			{
 				_next_();
 				flk->push_back_(sym_("self_multiply"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("/"))
 			{
 				_next_();
 				flk->push_back_(sym_("divide"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("/="))
 			{
 				_next_();
 				flk->push_back_(sym_("self_divide"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("=="))
 			{
 				_next_();
 				flk->push_back_(sym_("same"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("!="))
 			{
 				_next_();
 				flk->push_back_(sym_("different"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("&"))
 			{
@@ -672,25 +672,25 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("and"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("!&"))
 			{
 				_next_();
 				flk->push_back_(sym_("nand"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("||"))
 			{
 				_next_();
 				flk->push_back_(sym_("or"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("!|"))
 			{
 				_next_();
 				flk->push_back_(sym_("nor"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("^"))
 			{
@@ -702,7 +702,7 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("assign"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("~"))
 			{
@@ -750,7 +750,7 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("at"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("@>"))
 			{
@@ -768,31 +768,31 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("push_back"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_(">@"))
 			{
 				_next_();
 				flk->push_back_(sym_("push_front"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("@="))
 			{
 				_next_();
 				flk->push_back_(sym_("update"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("@+"))
 			{
 				_next_();
 				flk->push_back_(sym_("insert"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("@-"))
 			{
 				_next_();
 				flk->push_back_(sym_("erase"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("!"))
 			{
@@ -810,25 +810,25 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("less_than"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_(">"))
 			{
 				_next_();
 				flk->push_back_(sym_("greater_than"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_("<="))
 			{
 				_next_();
 				flk->push_back_(sym_("less_or_equal"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_(">="))
 			{
 				_next_();
 				flk->push_back_(sym_("greater_or_equal"));
-				_member_(scope, shoal, finalized, statement, flock);
+				_member_(scope, shoal, fixed, statement, flock);
 			}
 			else if (symbol->is_(":."))
 			{
@@ -839,7 +839,7 @@ private:
 			else if (symbol->is_(".:"))
 			{
 				_next_();
-				flk->push_back_(_parse_(scope, shoal, finalized, false));
+				flk->push_back_(_parse_(scope, shoal, fixed, false));
 				smt->set_(sym_("perform_"));
 			}
 			else
@@ -849,13 +849,13 @@ private:
 		}
 		else
 		{
-			flk->push_back_(_parse_(scope, shoal, finalized, false));
+			flk->push_back_(_parse_(scope, shoal, fixed, false));
 			smt->set_(sym_("invoke_iterable_"));
 		}
 		return true; // continue
 	}
 
-	inline void _dot_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& statement, const Ptr& flock, const bool me_dot)
+	inline void _dot_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& statement, const Ptr& flock, const bool me_dot)
 	{
 		const Ptr token = _token_();
 		Token* const tok = static_<Token>(token);
@@ -882,11 +882,11 @@ private:
 		{
 			_next_();
 			flk->push_back_(symbol);
-			_member_(scope, shoal, finalized, statement, flock, me_dot);
+			_member_(scope, shoal, fixed, statement, flock, me_dot);
 		}
 	}
 
-	inline void _member_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& statement, const Ptr& flock, const bool me_dot = false)
+	inline void _member_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& statement, const Ptr& flock, const bool me_dot = false)
 	{
 		const Ptr token = _token_();
 		Reference* const smt = static_<Reference>(statement);
@@ -908,18 +908,18 @@ private:
 			if (symbol->is_("[")) // flock
 			{
 				_next_();
-				_list_(scope, shoal, finalized, flock, sym_("]"));
+				_list_(scope, shoal, fixed, flock, sym_("]"));
 				smt->set_(sym_(me_dot ? "intimate_" : "operate_"));
 			}
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
-				flk->push_back_(_parse_(scope, shoal, finalized, false));
+				flk->push_back_(_parse_(scope, shoal, fixed, false));
 				smt->set_(sym_(me_dot ? "intimate_iterable_" : "operate_iterable_"));
 			}
 			else if (symbol->is_("<<")) // iterator
 			{
 				_next_();
-				_list_(scope, shoal, finalized, flock, sym_(">>"));
+				_list_(scope, shoal, fixed, flock, sym_(">>"));
 				smt->set_(sym_(me_dot ? "intimate_iterator_" : "operate_iterator_"));
 			}
 			else
@@ -929,12 +929,12 @@ private:
 		}
 		else
 		{
-			flk->push_back_(_parse_(scope, shoal, finalized, false));
+			flk->push_back_(_parse_(scope, shoal, fixed, false));
 			smt->set_(sym_(me_dot ? "intimate_iterable_" : "operate_iterable_"));
 		}
 	}
 
-	inline const bool _statement_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& flock, const bool parameters = false, const bool capture = false)
+	inline const bool _statement_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock, const bool parameters = false, const bool capture = false)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -951,13 +951,13 @@ private:
 		if (tag == 'P' && symbol->is_("("))
 		{
 			_next_();
-			_list_(scope, shoal, finalized, flock, sym_(")"), parameters, capture);
+			_list_(scope, shoal, fixed, flock, sym_(")"), parameters, capture);
 			return true; // is a statement
 		}
 		return false; // not a statement
 	}
 
-	inline void _list_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& flock, const Ptr& close, const bool parameters = false, const bool capture = false)
+	inline void _list_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock, const Ptr& close, const bool parameters = false, const bool capture = false)
 	{
 		Flock* const flk = static_<Flock>(flock);
 		bool parameter = parameters || capture;
@@ -1109,7 +1109,7 @@ private:
 			}
 			else
 			{
-				flk->push_back_(_parse_(scope, shoal, finalized, true));
+				flk->push_back_(_parse_(scope, shoal, fixed, true));
 			}
 			punctuation = true;
 		}
@@ -1181,7 +1181,7 @@ private:
 		return nothing_();
 	}
 
-	inline const bool _map_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& flock)
+	inline const bool _map_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock)
 	{
 		Flock* const flk = static_<Flock>(flock);
 		bool is_map = false;
@@ -1308,7 +1308,7 @@ private:
 			}
 			if (key)
 			{
-				add_scope = _parse_(scope, shoal, finalized, true);
+				add_scope = _parse_(scope, shoal, fixed, true);
 				flk->push_back_(add_scope);
 			}
 			else
@@ -1321,7 +1321,7 @@ private:
 						: sym_(static_<Symbol>(scope)->get_() + "::" + add_scope_sym->get_())
 					)
 					: scope;
-				const Ptr value = _parse_(new_scope, shoal, finalized, true);
+				const Ptr value = _parse_(new_scope, shoal, fixed, true);
 				flk->push_back_(value);
 				if (add_shoal)
 				{
@@ -1441,7 +1441,7 @@ private:
 		return key;
 	}
 	
-	inline const bool _update_(const Ptr& scope, const Ptr& shoal, const Ptr& finalized, const Ptr& flock, const Ptr& name, bool& insert)
+	inline const bool _update_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock, const Ptr& name, bool& insert)
 	{
 		const Ptr token = _token_();
 		if (token->is_("."))
@@ -1461,18 +1461,18 @@ private:
 			if (symbol->is_(":="))
 			{
 				_next_();
-				flk->push_back_(_parse_(scope, shoal, finalized, true));
+				flk->push_back_(_parse_(scope, shoal, fixed, true));
 				return false; // break
 			}
 			if (symbol->is_("#="))
 			{
 				insert = true;
-				if (!static_<Herd>(finalized)->insert_(name))
+				if (!static_<Herd>(fixed)->insert_(name))
 				{
-					throw tok->error_("Parser ERROR: attempt to reassign final name");
+					throw tok->error_("Parser ERROR: attempt to reassign fixed name");
 				}
 				_next_();
-				flk->push_back_(_parse_(scope, shoal, finalized, true));
+				flk->push_back_(_parse_(scope, shoal, fixed, true));
 				return false; // break
 			}
 		}

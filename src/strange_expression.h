@@ -1044,7 +1044,7 @@ public:
 		{
 			return _creature->final_();
 		}
-		return !Operation::final_();
+		return false;
 	}
 
 	virtual inline void freeze_() const override
@@ -1061,7 +1061,7 @@ public:
 		{
 			return _creature->frozen_();
 		}
-		return !Operation::frozen_();
+		return false;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1413,14 +1413,16 @@ public:
 
 	virtual inline const bool final_() const override
 	{
-		bool fin = Stateful::final_();
-		fin = _members->final_() && fin;
+		if (!Stateful::final_() || !_members->final_())
+		{
+			return false;
+		}
 		const Ptr over = static_<Shoal>(_members)->at_("final");
 		if (!over->is_nothing_())
 		{
-			return (!operate_(const_cast<Creature*>(this), over)->is_nothing_()) && fin;
+			return !operate_(const_cast<Creature*>(this), over)->is_nothing_();
 		}
-		return fin;
+		return true;
 	}
 
 	virtual inline void freeze_() const override
@@ -1436,14 +1438,16 @@ public:
 
 	virtual inline const bool frozen_() const override
 	{
-		bool froz = Stateful::frozen_();
-		froz = _members->frozen_() && froz;
+		if (!Stateful::frozen_() || !_members->frozen_())
+		{
+			return false;
+		}
 		const Ptr over = static_<Shoal>(_members)->at_("frozen");
 		if (!over->is_nothing_())
 		{
-			return (!operate_(const_cast<Creature*>(this), over)->is_nothing_()) && froz;
+			return !operate_(const_cast<Creature*>(this), over)->is_nothing_();
 		}
-		return froz;
+		return true;
 	}
 
 	virtual inline const Ptr copy_() const override

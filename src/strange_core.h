@@ -162,7 +162,6 @@ public:
 	// public impure virtual member functions and adapters
 	virtual inline void finalize_() const
 	{
-		_final_().store(true, std::memory_order_release);
 	}
 
 	inline const Ptr finalize(const Ptr& ignore) const
@@ -173,7 +172,7 @@ public:
 
 	virtual inline const bool final_() const
 	{
-		return _final_().load(std::memory_order_acquire);
+		return true;
 	}
 
 	inline const Ptr final(const Ptr& ignore) const
@@ -492,6 +491,16 @@ public:
 		return boolean_(count != 1);
 	}
 
+	inline void give_() const
+	{
+		std::atomic_thread_fence(std::memory_order_release);
+	}
+
+	inline void take_() const
+	{
+		std::atomic_thread_fence(std::memory_order_acquire);
+	}
+
 	// public nested classes
 	class Disagreement : public std::logic_error
 	{
@@ -550,13 +559,6 @@ protected:
 
 private:
 	WeakPtr _me;
-
-	// private static utility functions
-	static std::atomic<bool>& _final_()
-	{
-		static std::atomic<bool> FINALIZED(true);
-		return FINALIZED;
-	}
 };
 
 //----------------------------------------------------------------------
@@ -1054,24 +1056,23 @@ class Stateful : public Thing
 public:
 	virtual inline void finalize_() const override
 	{
-		_final.store(true, std::memory_order_release);
+		_final = true;
 	}
 
 	virtual inline const bool final_() const override
 	{
-		return _final.load(std::memory_order_acquire);
+		return _final;
 	}
 
 protected:
 	inline Stateful()
 		: Thing{}
-		, _final{}
+		, _final{ false }
 	{
-		_final.store(false, std::memory_order_release);
 	}
 
 private:
-	mutable std::atomic<bool> _final;
+	mutable bool _final;
 };
 
 //----------------------------------------------------------------------
@@ -1138,14 +1139,14 @@ public:
 				i.first->freeze_();
 				i.second->freeze_();
 			}
+			finalize_();
 			_frozen = true;
 		}
-		finalize_();
 	}
 
 	virtual inline const bool frozen_() const override
 	{
-		return final_() && _frozen;
+		return _frozen;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1751,14 +1752,14 @@ public:
 			{
 				i->freeze_();
 			}
+			finalize_();
 			_frozen = true;
 		}
-		finalize_();
 	}
 
 	virtual inline const bool frozen_() const override
 	{
-		return final_() && _frozen;
+		return _frozen;
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -2315,14 +2316,14 @@ public:
 			{
 				i->freeze_();
 			}
+			finalize_();
 			_frozen = true;
 		}
-		finalize_();
 	}
 
 	virtual inline const bool frozen_() const override
 	{
-		return final_() && _frozen;
+		return _frozen;
 	}
 
 	virtual inline const Ptr copy_() const override
