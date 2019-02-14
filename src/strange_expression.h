@@ -1038,6 +1038,11 @@ class Attribute : public Operation
 //----------------------------------------------------------------------
 {
 public:
+	virtual inline const Ptr type_() const override
+	{
+		return _value->type_();
+	}
+
 	virtual inline void finalize_() const override
 	{
 		if (_value)
@@ -1048,11 +1053,7 @@ public:
 
 	virtual inline const bool final_() const override
 	{
-		if (_value)
-		{
-			return _value->final_();
-		}
-		return false;
+		return _value->final_();
 	}
 
 	virtual inline void freeze_() const override
@@ -1065,11 +1066,7 @@ public:
 
 	virtual inline const bool frozen_() const override
 	{
-		if (_value)
-		{
-			return _value->frozen_();
-		}
-		return false;
+		return _value->frozen_();
 	}
 
 	virtual inline const Ptr copy_() const override
@@ -1087,6 +1084,51 @@ public:
 		return duplicate_(_expression, _value ? _value->replicate_() : _value);
 	}
 
+	virtual inline const Ptr iterator_() const override
+	{
+		return _value->iterator_();
+	}
+
+	virtual inline const Ptr next_() override
+	{
+		return _value->next_();
+	}
+
+	virtual inline std::size_t hash_() const override
+	{
+		return _value->hash_();
+	}
+
+	virtual inline const bool same_(const Ptr& other) const override
+	{
+		return _value->same_(other);
+	}
+
+	virtual inline const Ptr visit(const Ptr& it)
+	{
+		return _value->visit(it);
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return _value->cats_();
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		return _value->pub_();
+	}
+
+	virtual inline const Ptr eater_() const override
+	{
+		return _value->eater_();
+	}
+
+	virtual inline const Ptr feeder(const Ptr& eater) const
+	{
+		return _value->feeder(eater);
+	}
+
 	static inline void initialize_(const Ptr& creature, const Ptr& shoal, const bool values)
 	{
 		for (auto& it : static_<Shoal>(shoal)->get_())
@@ -1094,8 +1136,15 @@ public:
 			Attribute* const attribute = dynamic_<Attribute>(it.second);
 			if (attribute)
 			{
-				attribute->_creature = creature;
-				if (values)
+				static_<Weak>(attribute->_creature)->set_(creature);
+			}
+		}
+		if (values)
+		{
+			for (auto& it : static_<Shoal>(shoal)->get_())
+			{
+				Attribute* const attribute = dynamic_<Attribute>(it.second);
+				if (attribute)
 				{
 					attribute->_initialize_(creature);
 				}
@@ -1114,12 +1163,12 @@ public:
 	}
 
 protected:
-	Ptr _creature;
+	const Ptr _creature;
 	Ptr _value;
 
 	inline Attribute(const Ptr& expression)
 		: Operation{ expression }
-		, _creature{}
+		, _creature{ Weak::mut_(nothing_()) }
 		, _value{}
 	{
 	}
@@ -1269,7 +1318,7 @@ public:
 
 	virtual inline void set_(const Ptr& thing, const bool intimate) override
 	{
-		if (intimate && !_creature->final_())
+		if (intimate && !static_<Weak>(_creature)->get_()->final_())
 		{
 			_value = thing;
 		}
@@ -1310,7 +1359,7 @@ public:
 
 	virtual inline void set_(const Ptr& thing, const bool intimate) override
 	{
-		if (!_creature->final_())
+		if (!static_<Weak>(_creature)->get_()->final_())
 		{
 			_value = thing;
 		}
