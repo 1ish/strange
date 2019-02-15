@@ -51,6 +51,8 @@ class Complex32;
 class Complex64;
 class River;
 
+class Attribute;
+
 //----------------------------------------------------------------------
 class Thing
 //----------------------------------------------------------------------
@@ -79,7 +81,17 @@ public:
 	template <typename T>
 	static inline T* const dynamic_(const Ptr& ptr)
 	{
-		return dynamic_cast<T*>(ptr.get());
+		T* const t = dynamic_cast<T*>(ptr.get());
+		if (t)
+		{
+			return t;
+		}
+		Attribute* const attribute = dynamic_cast<Attribute*>(ptr.get());
+		if (attribute)
+		{
+			return dynamic_cast<T*>(attribute->get_().get());
+		}
+		return nullptr;
 	}
 
 	static inline const Ptr& boolean_(const bool value)

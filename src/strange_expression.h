@@ -1192,6 +1192,10 @@ protected:
 		while (attribute)
 		{
 			actual = attribute->get_();
+			if (actual.get() == thing.get())
+			{
+				throw Disagreement("circular attribute reference");
+			}
 			attribute = dynamic_cast<Attribute*>(actual.get());
 		}
 		return actual;
@@ -1235,7 +1239,7 @@ private:
 		loc->insert_("$", Shoal::Concurrent::mut_());
 		loc->insert_("&", stop_());
 		loc->insert_("|", thing);
-		_value = static_<Expression>(_expression)->evaluate_(_expression, local);
+		_value = _actual_(static_<Expression>(_expression)->evaluate_(_expression, local));
 	}
 };
 
