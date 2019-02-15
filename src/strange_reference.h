@@ -135,7 +135,7 @@ private:
 
 		virtual inline const Ptr next_() override
 		{
-			if (_reference->is_("."))
+			if (_reference->is_stop_())
 			{
 				return _reference;
 			}

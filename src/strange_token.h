@@ -244,7 +244,7 @@ private:
 		{
 			return one_();
 		}
-		else if (symbol->is_("."))
+		else if (symbol->is_stop_())
 		{
 			return stop_();
 		}

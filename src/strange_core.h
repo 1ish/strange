@@ -401,13 +401,28 @@ public:
 		return boolean_(!is_nothing_());
 	}
 
+	inline const bool is_stop_() const
+	{
+		return is_(".");
+	}
+
+	inline const Ptr is_stop(const Ptr& ignore) const
+	{
+		return boolean_(is_stop_());
+	}
+
+	inline const Ptr is_not_stop(const Ptr& ignore) const
+	{
+		return boolean_(!is_stop_());
+	}
+
 	inline const Ptr and_op(const Ptr& it) const
 	{
 		if (is_nothing_())
 		{
 			return nothing_();
 		}
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			if (i->is_nothing_())
 			{
@@ -423,7 +438,7 @@ public:
 		{
 			return one_();
 		}
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			if (!i->is_nothing_())
 			{
@@ -436,7 +451,7 @@ public:
 	inline const Ptr xor_op(const Ptr& it) const
 	{
 		int64_t count = is_nothing_() ? 0 : 1;
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			if (!i->is_nothing_())
 			{
@@ -452,7 +467,7 @@ public:
 		{
 			return one_();
 		}
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			if (i->is_nothing_())
 			{
@@ -468,7 +483,7 @@ public:
 		{
 			return nothing_();
 		}
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			if (!i->is_nothing_())
 			{
@@ -481,7 +496,7 @@ public:
 	inline const Ptr xnor_op(const Ptr& it) const
 	{
 		int64_t count = is_nothing_() ? 0 : 1;
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			if (!i->is_nothing_())
 			{
@@ -584,7 +599,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_(std::vector<Ptr>& vec, Thing& thing, Args&&... args)
 	{
-		for (Ptr p = thing.next_(); !p->is_("."); p = thing.next_())
+		for (Ptr p = thing.next_(); !p->is_stop_(); p = thing.next_())
 		{
 			vec.push_back(p);
 		}
@@ -1116,7 +1131,7 @@ public:
 	{
 		Ptr key;
 		int64_t index = 0;
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			if (index % 2 == 0)
 			{
@@ -1416,7 +1431,7 @@ public:
 
 	inline const Ptr self_add(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_add_(i);
 		}
@@ -1441,7 +1456,7 @@ public:
 
 	inline const Ptr self_subtract(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_subtract_(i);
 		}
@@ -1691,7 +1706,7 @@ private:
 		virtual inline const Ptr next_() override
 		{
 			const Ptr n = _eater->next_();
-			if (n->is_("."))
+			if (n->is_stop_())
 			{
 				return n;
 			}
@@ -1738,7 +1753,7 @@ public:
 		, _vector{}
 		, _frozen{ false }
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			push_back_(i);
 		}
@@ -1921,7 +1936,7 @@ public:
 
 	inline const Ptr push_back(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			push_back_(i);
 		}
@@ -2020,7 +2035,7 @@ public:
 	inline const Ptr insert(const Ptr& it)
 	{
 		const Ptr index = it->next_();
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			insert_(index, i);
 		}
@@ -2039,7 +2054,7 @@ public:
 
 	inline const Ptr erase(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			erase_(i);
 		}
@@ -2061,7 +2076,7 @@ public:
 
 	inline const Ptr self_add(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_add_(i);
 		}
@@ -2180,7 +2195,7 @@ public:
 
 		inline const Ptr push_back(const Ptr& it)
 		{
-			for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+			for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 			{
 				push_back_(i);
 			}
@@ -2302,7 +2317,7 @@ public:
 		, _set{}
 		, _frozen{ false }
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			insert_(i);
 		}
@@ -2628,7 +2643,7 @@ public:
 
 	inline const Ptr self_add(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_add_(i);
 		}
@@ -2685,7 +2700,7 @@ public:
 
 	inline const Ptr self_subtract(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_subtract_(i);
 		}
@@ -3388,7 +3403,7 @@ public:
 
 	inline const Ptr self_add(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_add_(i);
 		}
@@ -3608,7 +3623,7 @@ public:
 
 	inline const Ptr self_add(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_add_(i);
 		}
@@ -3633,7 +3648,7 @@ public:
 
 	inline const Ptr self_subtract(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_subtract_(i);
 		}
@@ -3658,7 +3673,7 @@ public:
 
 	inline const Ptr self_multiply(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_multiply_(i);
 		}
@@ -3683,7 +3698,7 @@ public:
 
 	inline const Ptr self_divide(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_divide_(i);
 		}
@@ -3708,7 +3723,7 @@ public:
 
 	inline const Ptr self_modulo(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_modulo_(i);
 		}
@@ -8178,7 +8193,7 @@ public:
 	static inline const Ptr mut(const Ptr& it)
 	{
 		const Ptr str = it->next_();
-		if (str->is_("."))
+		if (str->is_stop_())
 		{
 			return mut_();
 		}
@@ -8189,7 +8204,7 @@ public:
 			return mut_();
 		}
 		const Ptr file = it->next_();
-		if (file->is_("."))
+		if (file->is_stop_())
 		{
 			return mut_(lake->get_());
 		}
@@ -8315,7 +8330,7 @@ public:
 
 	inline const Ptr push_back(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			push_back_(i);
 		}
@@ -8356,7 +8371,7 @@ public:
 
 	inline const Ptr write(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			write_(i);
 		}
@@ -8504,6 +8519,8 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("is_not", Const<Thing>::fin_(&Thing::is_not, "symbol"));
 		shoal->update_("is_nothing", Const<Thing>::fin_(&Thing::is_nothing));
 		shoal->update_("is_not_nothing", Const<Thing>::fin_(&Thing::is_not_nothing));
+		shoal->update_("is_stop", Const<Thing>::fin_(&Thing::is_stop));
+		shoal->update_("is_not_stop", Const<Thing>::fin_(&Thing::is_not_stop));
 		shoal->update_("and", Const<Thing>::fin_(&Thing::and_op, "other", ".."));
 		shoal->update_("or", Const<Thing>::fin_(&Thing::or_op, "other", ".."));
 		shoal->update_("xor", Const<Thing>::fin_(&Thing::xor_op, "other", ".."));

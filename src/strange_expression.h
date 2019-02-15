@@ -396,7 +396,7 @@ private:
 			{
 				const Ptr cat = vec[i];
 				Ptr value = it->next_();
-				if (value->is_("."))
+				if (value->is_stop_())
 				{
 					value = Expression::evaluate_(vec[i + 2], local);
 				}
@@ -1697,7 +1697,7 @@ private:
 		Shoal* const r = static_<Shoal>(result);
 		Shoal* const m = static_<Shoal>(members);
 		const Ptr it = m->iterator_();
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			Flock* const flock = static_<Flock>(i);
 			const Ptr first = flock->at_(0);
@@ -1720,7 +1720,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 {
 	const Ptr exp = fake_<Expression>(token, statement, member, flock);
 	const Ptr it = flock->iterator_();
-	for (Ptr sub = it->next_(); !sub->is_("."); sub = it->next_())
+	for (Ptr sub = it->next_(); !sub->is_stop_(); sub = it->next_())
 	{
 		Expression* const e = dynamic_<Expression>(sub);
 		if (e)

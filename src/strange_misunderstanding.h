@@ -69,7 +69,7 @@ public:
 
 	inline const Ptr self_add(const Ptr& it)
 	{
-		for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			self_add_(i);
 		}

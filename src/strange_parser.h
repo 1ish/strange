@@ -120,7 +120,7 @@ private:
 		for (bool first = true, cont = true; cont; first = false, cont = cont && right)
 		{
 			token = _token_();
-			if (token->is_("."))
+			if (token->is_stop_())
 			{
 				break;
 			}
@@ -372,7 +372,7 @@ private:
 							if (flk->size_() >= 1)
 							{
 								const Ptr it = flock->iterator_();
-								for (Ptr i = it->next_(); !i->is_("."); i = it->next_())
+								for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 								{
 									Lake* const lake = dynamic_<Lake>(Expression::immediate_(i)->invoke_("to_lake"));
 									if (!lake)
@@ -530,7 +530,7 @@ private:
 	inline const bool _thing_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& statement, const Ptr& flock)
 	{
 		const Ptr token = _token_();
-		if (token->is_("."))
+		if (token->is_stop_())
 		{
 			return false; // break
 		}
@@ -545,7 +545,7 @@ private:
 		Reference* const smt = static_<Reference>(statement);
 		if (tag == 'P') // punctuation
 		{
-			if (symbol->is_("."))
+			if (symbol->is_stop_())
 			{
 				_next_();
 				_dot_(scope, shoal, fixed, statement, flock, false);
@@ -859,7 +859,7 @@ private:
 	{
 		const Ptr token = _token_();
 		Token* const tok = static_<Token>(token);
-		if (token->is_("."))
+		if (token->is_stop_())
 		{
 			throw tok->error_("Parser ERROR: dot stop");
 		}
@@ -890,7 +890,7 @@ private:
 	{
 		const Ptr token = _token_();
 		Reference* const smt = static_<Reference>(statement);
-		if (token->is_("."))
+		if (token->is_stop_())
 		{
 			smt->set_(sym_(me_dot ? "private_" : "public_"));
 			return;
@@ -943,7 +943,7 @@ private:
 	inline const bool _statement_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock, const bool parameters = false, const bool capture = false)
 	{
 		const Ptr token = _token_();
-		if (token->is_("."))
+		if (token->is_stop_())
 		{
 			return false; // not a statement
 		}
@@ -973,7 +973,7 @@ private:
 		{
 			const Ptr token = _token_();
 			Token* const tok = static_<Token>(token);
-			if (token->is_("."))
+			if (token->is_stop_())
 			{
 				throw tok->error_("Parser ERROR: open without close");
 			}
@@ -1135,7 +1135,7 @@ private:
 		{
 			token = _token_();
 			tok = static_<Token>(token);
-			if (token->is_("."))
+			if (token->is_stop_())
 			{
 				throw tok->error_("Parser ERROR: cat < without >");
 			}
@@ -1201,7 +1201,7 @@ private:
 		{
 			const Ptr token = _token_();
 			Token* const tok = static_<Token>(token);
-			if (token->is_("."))
+			if (token->is_stop_())
 			{
 				throw tok->error_("Parser ERROR: { without }");
 			}
@@ -1347,7 +1347,7 @@ private:
 	{
 		const Ptr token = _token_();
 		Token* const tok = static_<Token>(token);
-		if (token->is_("."))
+		if (token->is_stop_())
 		{
 			throw tok->error_("Parser ERROR: stop instead of name");
 		}
@@ -1395,7 +1395,7 @@ private:
 		for (bool first = true; true; first = false)
 		{
 			token = _token_();
-			if (token->is_("."))
+			if (token->is_stop_())
 			{
 				break;
 			}
@@ -1450,7 +1450,7 @@ private:
 	inline const bool _update_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock, const Ptr& name, bool& insert)
 	{
 		const Ptr token = _token_();
-		if (token->is_("."))
+		if (token->is_stop_())
 		{
 			return false; // break
 		}

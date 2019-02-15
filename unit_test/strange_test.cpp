@@ -63,7 +63,7 @@ TEST(StrangeTokenizer, Next) {
 	Tokenizer* const t = Thing::dynamic_<Tokenizer>(tokenizer);
 	ASSERT_NE(t, (Tokenizer*)(0));
 	EXPECT_EQ(t->good_(), true);
-	for (Ptr n = tokenizer->next_(); !n->is_("."); n = tokenizer->next_())
+	for (Ptr n = tokenizer->next_(); !n->is_stop_(); n = tokenizer->next_())
 	{
 		Token* const token = Thing::dynamic_<Token>(n);
 		ASSERT_NE(token, (Token*)(0));

@@ -140,7 +140,7 @@ private:
 
 		virtual inline const Ptr next_() override
 		{
-			if (_weak->is_("."))
+			if (_weak->is_stop_())
 			{
 				return _weak;
 			}
