@@ -2612,6 +2612,14 @@ public:
 						insert_(i);
 					}
 				}
+				else
+				{
+					const Ptr it = other->iterator_();
+					for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
+					{
+						insert_(i);
+					}
+				}
 			}
 		}
 	}
@@ -2665,6 +2673,14 @@ public:
 				if (flock)
 				{
 					for (auto i : flock->get_())
+					{
+						erase_(i);
+					}
+				}
+				else
+				{
+					const Ptr it = other->iterator_();
+					for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 					{
 						erase_(i);
 					}
@@ -9139,6 +9155,17 @@ inline void Shoal::self_add_(const Ptr& other)
 					ind->increment_();
 				}
 			}
+			else
+			{
+				const Ptr index = Int64::mut_();
+				Int64* const ind = static_<Int64>(index);
+				const Ptr it = other->iterator_();
+				for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
+				{
+					update_(ind->copy_(), i);
+					ind->increment_();
+				}
+			}
 		}
 	}
 }
@@ -9176,6 +9203,14 @@ inline void Shoal::self_subtract_(const Ptr& other)
 			if (flock)
 			{
 				for (auto i : flock->get_())
+				{
+					erase_(i);
+				}
+			}
+			else
+			{
+				const Ptr it = other->iterator_();
+				for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 				{
 					erase_(i);
 				}
@@ -9334,7 +9369,11 @@ inline void Flock::self_add_(const Ptr& other)
 			}
 			else
 			{
-				throw Disagreement("strange::Flock::self_add_ passed wrong type of collection");
+				const Ptr it = other->iterator_();
+				for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
+				{
+					_vector.push_back(i);
+				}
 			}
 		}
 	}
