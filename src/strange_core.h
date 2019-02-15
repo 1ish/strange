@@ -117,31 +117,16 @@ public:
 		return NOTHING;
 	}
 
-	static inline const Ptr nothing(const Ptr& ignore)
-	{
-		return nothing_();
-	}
-
 	static inline const Ptr& one_()
 	{
 		static const Ptr ONE = sym_("1");
 		return ONE;
 	}
 
-	static inline const Ptr one(const Ptr& ignore)
-	{
-		return one_();
-	}
-
 	static inline const Ptr& stop_()
 	{
 		static const Ptr STOP = sym_(".");
 		return STOP;
-	}
-
-	static inline const Ptr stop(const Ptr& ignore)
-	{
-		return stop_();
 	}
 
 	// public construction/destruction/assignment
@@ -8541,9 +8526,6 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("replicate", Const<Thing>::fin_(&Thing::replicate));
 		shoal->update_("call", Static::fin_(&Thing::call, "function", ".."));
 		shoal->update_("boolean", Static::fin_(&Thing::boolean, "thing"));
-		shoal->update_("nothing", Static::fin_(&Thing::nothing));
-		shoal->update_("one", Static::fin_(&Thing::one));
-		shoal->update_("stop", Static::fin_(&Thing::stop));
 		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
 		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
 		shoal->update_("visit", Member<Thing>::fin_(&Thing::visit, "visitor", "member", ".."));

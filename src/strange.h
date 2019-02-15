@@ -53,9 +53,6 @@ inline void Thing::share_(const Ptr& shoal)
 	Shoal* const s = static_<Shoal>(shoal);
 	s->update_("strange::Thing::boolean", Static::fin_(&Thing::boolean, "value"));
 	s->update_("strange::Thing::call", Static::fin_(&Thing::call, "function"));
-	s->update_("strange::Thing::nothing", Static::fin_(&Thing::nothing));
-	s->update_("strange::Thing::one", Static::fin_(&Thing::one));
-	s->update_("strange::Thing::stop", Static::fin_(&Thing::stop));
 
 	// strange_core
 	Symbol::share_(shoal);
