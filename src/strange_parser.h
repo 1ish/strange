@@ -806,6 +806,18 @@ private:
 				flk->push_back_(sym_("is_not_nothing"));
 				smt->set_(sym_("operate_"));
 			}
+			else if (symbol->is_(".!"))
+			{
+				_next_();
+				flk->push_back_(sym_("is_not_stop"));
+				smt->set_(sym_("operate_"));
+			}
+			else if (symbol->is_(".?"))
+			{
+				_next_();
+				flk->push_back_(sym_("is_stop"));
+				smt->set_(sym_("operate_"));
+			}
 			else if (symbol->is_("<"))
 			{
 				_next_();
