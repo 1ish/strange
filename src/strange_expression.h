@@ -1137,7 +1137,8 @@ public:
 
 	static inline void initialize_(const Ptr& creature, const Ptr& shoal, const bool values)
 	{
-		for (auto& it : static_<Shoal>(shoal)->get_())
+		auto& members = static_<Shoal>(shoal)->get_();
+		for (auto& it : members)
 		{
 			Attribute* const attribute = dynamic_<Attribute>(it.second);
 			if (attribute)
@@ -1147,7 +1148,7 @@ public:
 		}
 		if (values)
 		{
-			for (auto& it : static_<Shoal>(shoal)->get_())
+			for (auto& it : members)
 			{
 				Attribute* const attribute = dynamic_<Attribute>(it.second);
 				if (attribute)
@@ -1158,7 +1159,12 @@ public:
 		}
 	}
 
-	virtual inline void set_(const Ptr& thing, const bool intimate) = 0;
+	virtual inline void set_(const Ptr& thing, const bool intimate) const = 0;
+
+	virtual inline const Ptr get_() const
+	{
+		return _value;
+	}
 
 	virtual inline const Ptr duplicate_(const Ptr& expression, const Ptr& value) const = 0;
 
@@ -1179,29 +1185,19 @@ protected:
 	{
 	}
 
-	inline void _initialize_(Thing* const thing)
+	inline void _initialize_(Thing* const thing) const
 	{
 		if (!_value)
 		{
-			const Ptr local = Shoal::mut_();
-			Shoal* const loc = static_<Shoal>(local);
-			loc->insert_("$", Shoal::Concurrent::mut_());
-			loc->insert_("&", stop_());
-			loc->insert_("|", thing->me_());
-			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
+			_init_(thing->me_());
 		}
 	}
 
-	inline void _initialize_(const Ptr& thing)
+	inline void _initialize_(const Ptr& thing) const
 	{
 		if (!_value)
 		{
-			const Ptr local = Shoal::mut_();
-			Shoal* const loc = static_<Shoal>(local);
-			loc->insert_("$", Shoal::Concurrent::mut_());
-			loc->insert_("&", stop_());
-			loc->insert_("|", thing);
-			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
+			_init_(thing);
 		}
 	}
 
@@ -1209,12 +1205,7 @@ protected:
 	{
 		if (!_value)
 		{
-			const Ptr local = Shoal::mut_();
-			Shoal* const loc = static_<Shoal>(local);
-			loc->insert_("$", Shoal::Concurrent::mut_());
-			loc->insert_("&", stop_());
-			loc->insert_("|", static_<Weak>(_creature)->get_());
-			_value = static_<Expression>(_expression)->evaluate_(_expression, local);
+			_init_(static_<Weak>(_creature)->get_());
 		}
 	}
 
@@ -1222,6 +1213,17 @@ protected:
 	{
 		_initialize_(thing);
 		return _value->invoke(it);
+	}
+
+private:
+	inline void _init_(const Ptr& thing) const
+	{
+		const Ptr local = Shoal::mut_();
+		Shoal* const loc = static_<Shoal>(local);
+		loc->insert_("$", Shoal::Concurrent::mut_());
+		loc->insert_("&", stop_());
+		loc->insert_("|", thing);
+		_value = static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
 };
 
@@ -1240,13 +1242,7 @@ public:
 		return fake_<Fixed>(expression);
 	}
 
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = Cat::fin_("<strange::Fixed>");
-		return TYPE;
-	}
-
-	virtual inline void set_(const Ptr& thing, const bool intimate) override
+	virtual inline void set_(const Ptr& thing, const bool intimate) const override
 	{
 		throw Mutilation(thing->type_());
 	}
@@ -1277,16 +1273,117 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Mutable>");
-		return TYPE;
+		_initialize_();
+		return _get_()->type_();
 	}
 
-	virtual inline void set_(const Ptr& thing, const bool intimate) override
+	virtual inline void finalize_() const override
+	{
+		const Ptr value = _get_();
+		if (value)
+		{
+			value->finalize_();
+		}
+	}
+
+	virtual inline const bool final_() const override
+	{
+		_initialize_();
+		return _get_()->final_();
+	}
+
+	virtual inline void freeze_() const override
+	{
+		const Ptr value = _get_();
+		if (value)
+		{
+			value->freeze_();
+		}
+	}
+
+	virtual inline const bool frozen_() const override
+	{
+		_initialize_();
+		return _get_()->frozen_();
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		const Ptr value = _get_();
+		return duplicate_(_expression, value ? value->copy_() : value);
+	}
+
+	virtual inline const Ptr clone_() const override
+	{
+		const Ptr value = _get_();
+		return duplicate_(_expression, value ? value->clone_() : value);
+	}
+
+	virtual inline const Ptr replicate_() const override
+	{
+		const Ptr value = _get_();
+		return duplicate_(_expression, value ? value->replicate_() : value);
+	}
+
+	virtual inline const Ptr iterator_() const override
+	{
+		_initialize_();
+		return _get_()->iterator_();
+	}
+
+	virtual inline const Ptr next_() override
+	{
+		_initialize_();
+		return _get_()->next_();
+	}
+
+	virtual inline std::size_t hash_() const override
+	{
+		_initialize_();
+		return _get_()->hash_();
+	}
+
+	virtual inline const bool same_(const Ptr& other) const override
+	{
+		_initialize_();
+		return _get_()->same_(other);
+	}
+
+	virtual inline const Ptr visit(const Ptr& it)
+	{
+		_initialize_();
+		return _get_()->visit(it);
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		_initialize_();
+		return _get_()->cats_();
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		_initialize_();
+		return _get_()->pub_();
+	}
+
+	virtual inline const Ptr eater_() const override
+	{
+		_initialize_();
+		return _get_()->eater_();
+	}
+
+	virtual inline const Ptr feeder(const Ptr& eater) const
+	{
+		_initialize_();
+		return _get_()->feeder(eater);
+	}
+
+	virtual inline void set_(const Ptr& thing, const bool intimate) const override
 	{
 		if (intimate)
 		{
-			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-			_value = thing;
+			_set_(thing);
 		}
 		else
 		{
@@ -1294,22 +1391,22 @@ public:
 		}
 	}
 
+	virtual inline const Ptr get_() const override
+	{
+		return _get_();
+	}
+
 	virtual inline const Ptr duplicate_(const Ptr& expression, const Ptr& value) const override
 	{
 		const Ptr result = fin_(expression);
-		static_<Mutable>(result)->_value = value;
+		static_<Mutable>(result)->_set_(value);
 		return result;
 	}
 
 	virtual inline const Ptr intimator_(const Ptr& thing, const Ptr& it) override
 	{
 		_initialize_(thing);
-		Ptr value;
-		{
-			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
-			value = _value;
-		}
-		return value->invoke(it);
+		return _get_()->invoke(it);
 	}
 
 protected:
@@ -1320,6 +1417,18 @@ protected:
 
 private:
 	mutable std::shared_timed_mutex _mutex;
+
+	inline void _set_(const Ptr& value) const
+	{
+		std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+		_value = value;
+	}
+
+	inline const Ptr _get_() const
+	{
+		std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+		return _value;
+	}
 };
 
 //----------------------------------------------------------------------
@@ -1337,13 +1446,7 @@ public:
 		return fake_<Variable>(expression);
 	}
 
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = Cat::fin_("<strange::Variable>");
-		return TYPE;
-	}
-
-	virtual inline void set_(const Ptr& thing, const bool intimate) override
+	virtual inline void set_(const Ptr& thing, const bool intimate) const override
 	{
 		if (intimate && !static_<Weak>(_creature)->get_()->final_())
 		{
@@ -1378,13 +1481,7 @@ public:
 		return fake_<Changeable>(expression);
 	}
 
-	virtual inline const Ptr type_() const override
-	{
-		static const Ptr TYPE = Cat::fin_("<strange::Changeable>");
-		return TYPE;
-	}
-
-	virtual inline void set_(const Ptr& thing, const bool intimate) override
+	virtual inline void set_(const Ptr& thing, const bool intimate) const override
 	{
 		if (!static_<Weak>(_creature)->get_()->final_())
 		{
