@@ -1209,6 +1209,7 @@ private:
 		bool punctuation = false;
 		bool add_shoal = false;
 		Ptr add_scope = nothing_();
+		Ptr attribute = nothing_();
 		for (bool first = true; true; first = false)
 		{
 			const Ptr token = _token_();
@@ -1268,7 +1269,15 @@ private:
 							_next_();
 							return is_map;
 						}
-						else if (symbol->is_(":") || symbol->is_("::"))
+						if (symbol->is_(":#") || symbol->is_(":%") || symbol->is_(":*") || symbol->is_(":~"))
+						{
+							attribute = symbol;
+						}
+						else
+						{
+							attribute = nothing_();
+						}
+						if (!attribute->is_nothing_() || symbol->is_(":") || symbol->is_("::"))
 						{
 							if (not_map)
 							{
@@ -1339,7 +1348,23 @@ private:
 						: sym_(static_<Symbol>(scope)->get_() + "::" + add_scope_sym->get_())
 					)
 					: scope;
-				const Ptr value = _parse_(new_scope, shoal, fixed, true);
+				Ptr value = _parse_(new_scope, shoal, fixed, true);
+				if (attribute->is_(":#")) // fixed
+				{
+					value = Expression::fin_(token, Fixed::fin_(value));
+				}
+				else if (attribute->is_(":%")) // mutable
+				{
+					value = Expression::fin_(token, Mutable::fin_(value));
+				}
+				else if (attribute->is_(":*")) // variable
+				{
+					value = Expression::fin_(token, Variable::fin_(value));
+				}
+				else if (attribute->is_(":~")) // changeable
+				{
+					value = Expression::fin_(token, Changeable::fin_(value));
+				}
 				flk->push_back_(value);
 				if (add_shoal)
 				{

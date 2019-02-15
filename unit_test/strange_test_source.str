@@ -18,10 +18,10 @@
 			(
 				a+b+(|._mem[])
 			),
-			'f'::fixed_("flake"),			//TODO do allow :: for attributes
-			'_m':mutable_("_mlake"),
-			'v':variable_("vlake"),
-			'c':changeable_("clake"),
+			'f':#"flake",			//TODO do allow :: for attributes
+			'_m':%"_mlake",
+			'v':*"vlake",
+			'c':~"clake",
 			'_mem':function_()(7)
 		}
 	},
