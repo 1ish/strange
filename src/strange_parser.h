@@ -545,7 +545,7 @@ private:
 		Reference* const smt = static_<Reference>(statement);
 		if (tag == 'P') // punctuation
 		{
-			if (symbol->is_stop_())
+			if (symbol->is_("."))
 			{
 				_next_();
 				_dot_(scope, shoal, fixed, statement, flock, false);
