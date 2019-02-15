@@ -87,16 +87,6 @@ public:
 		return value ? one_() : nothing_();
 	}
 
-	static inline const Ptr& boolean_(const Ptr& ptr)
-	{
-		return boolean_(!ptr->is_nothing_());
-	}
-
-	static inline const Ptr boolean(const Ptr& it)
-	{
-		return boolean_(it->next_());
-	}
-
 	template <typename... Args>
 	static inline const Ptr call_(Args&&... args);
 
@@ -8525,7 +8515,6 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("clone_freeze", Const<Thing>::fin_(&Thing::clone_freeze));
 		shoal->update_("replicate", Const<Thing>::fin_(&Thing::replicate));
 		shoal->update_("call", Static::fin_(&Thing::call, "function", ".."));
-		shoal->update_("boolean", Static::fin_(&Thing::boolean, "thing"));
 		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
 		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
 		shoal->update_("visit", Member<Thing>::fin_(&Thing::visit, "visitor", "member", ".."));
