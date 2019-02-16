@@ -143,8 +143,7 @@ private:
 				_next_();
 				if (tag == 'S' || tag == 'L' || tag == 'I' || tag == 'F') // literal
 				{
-					flk->push_back_(tok->value_());
-					result = Expression::fin_(token, sym_("thing_"), flock);
+					result = Expression::fin_(token, tok->value_());
 				}
 				else if (tag == 'N') // name
 				{
@@ -451,7 +450,7 @@ private:
 					{
 						result = _scope_(scope, shoal, flock, symbol->is_("**"));
 					}
-					else if (symbol->is_("<>")) // container
+					else if (false) //TODO container
 					{
 						std::string container = static_<Symbol>(scope)->get_();
 						const std::size_t pos = container.rfind("::");
@@ -487,6 +486,9 @@ private:
 						{
 							result = Expression::fin_(token, sym_("herd_"), flock);
 						}
+					}
+					else if (symbol->is_("<")) //TODO cat
+					{
 					}
 					else if (symbol->is_("<<")) // iterator
 					{
@@ -1093,7 +1095,7 @@ private:
 				_next_();
 				if (tag == 'N') // name
 				{
-					flk->push_back_(nothing_()); // cat
+					flk->push_back_(nothing_()); // no cat
 					flk->push_back_(symbol);
 					if (capture)
 					{
@@ -1133,15 +1135,16 @@ private:
 		}
 	}
 
-	inline const Ptr _cat_(const Ptr& flock, const bool capture)
+	inline const Ptr _cat_nest_()
 	{
-		// add cat and default/captured to flock, return captured
-		Flock* const flk = static_<Flock>(flock);
-
+		std::string category = "<";
 		Ptr token;
-		flk->push_back_(Cat::fin_("<" + static_<Symbol>(_scope_key_(token))->get_() +">"));
+		const std::string name = static_<Symbol>(_scope_key_(token))->get_();
 		Token* tok = static_<Token>(token);
+		category += name;
 
+		bool comma = false;
+		bool close = false;
 		Ptr symbol;
 		for (bool first = true; true; first = false)
 		{
@@ -1160,25 +1163,114 @@ private:
 			_next_();
 			if (first)
 			{
-				if (tag == 'P' && symbol->is_(">"))
+				if (tag == 'P')
 				{
-					continue;
+					if (symbol->is_(">"))
+					{
+						break;
+					}
+					if (symbol->is_("["))
+					{
+						if (name.empty())
+						{
+							throw tok->error_("Parser ERROR: cat without a name");
+						}
+						category += "[";
+						continue;
+					}
 				}
-				throw tok->error_("Parser ERROR: cat < without >");
 			}
 			else
 			{
-				if (tag == 'N') // name
+				if (tag == 'P')
 				{
-					flk->push_back_(symbol);
-					return capture ? symbol : nothing_();
+					if (symbol->is_("]"))
+					{
+						while (category.length() > 3 && category.substr(category.length() - 3) == ",<>")
+						{
+							category = category.substr(0, category.length() - 3);
+						}
+						if (category.length() > 2 && category.substr(category.length() - 2) == "<>")
+						{
+							category = category.substr(0, category.length() - 2);
+						}
+						const char last = category[category.length() - 1];
+						if (last == '[')
+						{
+							category = category.substr(0, category.length() - 1);
+						}
+						else if (last == ',')
+						{
+							throw tok->error_("Parser ERROR: bad cat comma");
+						}
+						else
+						{
+							category += "]";
+						}
+						close = true;
+						continue;
+					}
+					if (close)
+					{
+						if (symbol->is_(">"))
+						{
+							break;
+						}
+					}
+					else if (comma)
+					{
+						comma = false;
+						if (symbol->is_(","))
+						{
+							category += ",";
+							continue;
+						}
+					}
+					else
+					{
+						comma = true;
+						if (symbol->is_("<"))
+						{
+							category += static_<Cat>(_cat_nest_())->get_();
+							continue;
+						}
+					}
 				}
-				else if (capture && tag == 'P')
-				{
-					break;
-				}
-				throw tok->error_("Parser ERROR: list expecting <cat> name");
 			}
+			throw tok->error_("Parser ERROR: bad cat");
+		}
+		return Cat::fin_(category + ">");
+	}
+
+	inline const Ptr _cat_(const Ptr& flock, const bool capture)
+	{
+		// add cat and default/captured to flock, return captured
+		Flock* const flk = static_<Flock>(flock);
+
+		flk->push_back_(_cat_nest_());
+
+		const Ptr token = _token_();
+		Token* const tok = static_<Token>(token);
+		Ptr symbol;
+		if (token->is_stop_())
+		{
+			throw tok->error_("Parser ERROR: cat stop");
+		}
+		const char tag = tok->tag_();
+		if (tag == 'E') // error
+		{
+			throw tok->error_("Tokenizer ERROR");
+		}
+		symbol = tok->symbol();
+		_next_();
+		if (tag == 'N') // name
+		{
+			flk->push_back_(symbol);
+			return capture ? symbol : nothing_();
+		}
+		else if (!capture || tag != 'P')
+		{
+			throw tok->error_("Parser ERROR: list expecting <cat> name");
 		}
 		const Ptr captured = _capture_(symbol, flock);
 		if (captured->is_nothing_())

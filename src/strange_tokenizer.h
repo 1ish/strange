@@ -325,7 +325,7 @@ public:
 			case '<':
 			case '>':
 				token = char1;
-				if (char1 == char2 || char2 == '=' || char2 == '>' || char2 == '@')
+				if (char1 == char2 || char2 == '=' || char2 == '@')
 				{
 					second = true;
 					break;

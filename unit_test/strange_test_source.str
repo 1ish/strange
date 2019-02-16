@@ -4,7 +4,7 @@
 	x := 3,
 	s :=
 	{
-		'f'::function_(<strange::Number> a := 1000)
+		'f'::function_(<strange::Number[<>,<>,<>]> a := 1000)
 		(
 			a+2
 		),
@@ -12,13 +12,13 @@
 		{
 			'mut'::function_()
 			(
-				$$strange::Creature::mut[<>]
+				$$strange::Creature::mut[$$Arithmetic]
 			),
 			'addition'::extraction_(<strange::Number> a, <strange::Number> b)
 			(
 				a+b+(|._mem[])
 			),
-			'f':#"flake",			//TODO do allow :: for attributes
+			'f':#"flake",
 			'_m':%"_mlake",
 			'v':*"vlake",
 			'c':~"clake",

@@ -97,7 +97,7 @@ public:
 		}
 		if (_member == &Expression::_shoal_)
 		{
-			return immediate_(me_()); //TODO can we evaluate <> later?
+			return immediate_(me_()); //TODO can we evaluate this later?
 		}
 		return nothing_();
 	}
