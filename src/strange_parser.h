@@ -487,8 +487,9 @@ private:
 							result = Expression::fin_(token, sym_("herd_"), flock);
 						}
 					}
-					else if (symbol->is_("<")) //TODO cat
+					else if (symbol->is_("<")) // cat
 					{
+						result = Expression::fin_(token, _cat_nest_());
 					}
 					else if (symbol->is_("<<")) // iterator
 					{
