@@ -15,6 +15,7 @@ class Function;
 class Closure;
 class Mutation;
 class Extraction;
+class Creation;
 class Attribute;
 class Fixed;
 class Mutable;
@@ -422,6 +423,49 @@ private:
 		catch (const std::exception& err)
 		{
 			throw _stack_(err.what());
+		}
+	}
+
+	inline const Ptr _creation_(const Ptr& local) const;
+
+	static inline void _merge_(Shoal* const shoal, Shoal* const result)
+	{
+		const Ptr cat = shoal->at_("cat")->invoke_();
+		if (!dynamic_<Cat>(cat))
+		{
+			throw Disagreement("creation merge cat is not a cat");
+		}
+		const Ptr cats = shoal->at_("cats")->invoke_();
+		if (!dynamic_<Herd>(cats))
+		{
+			throw Disagreement("creation merge cats are not a herd");
+		}
+		Herd* const herd = static_<Herd>(result->at_("cats")->invoke_());
+		for (const auto& it : shoal->get_())
+		{
+			const Ptr key = it.first;
+			Symbol* const symbol = dynamic_<Symbol>(key);
+			if (!symbol)
+			{
+				throw Disagreement("creation merge key is not a symbol");
+			}
+			const Ptr value = it.second;
+			if (symbol->is_("cat"))
+			{
+				herd->insert_(cat);
+			}
+			else if (symbol->is_("cats"))
+			{
+				herd->self_add_(cats);
+			}
+			else if (symbol->get_()[0] == '_')
+			{
+				result->update_("_" + static_<Cat>(cat)->get_() + symbol->get_(), value);
+			}
+			else
+			{
+				result->update_(key, value); //TODO check overrides
+			}
 		}
 	}
 
@@ -1020,6 +1064,42 @@ protected:
 		loc->insert_("$", _shared);
 		loc->insert_("&", it);
 		loc->insert_("|", thing->me_());
+		return static_<Expression>(_expression)->evaluate_(_expression, local);
+	}
+
+private:
+	const Ptr _shared;
+};
+
+//----------------------------------------------------------------------
+class Creation : public Operation
+//----------------------------------------------------------------------
+{
+public:
+	inline Creation(const Ptr& expression)
+		: Operation{ expression }
+		, _shared{ Shoal::Concurrent::mut_() }
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr& expression)
+	{
+		return fake_<Creation>(expression);
+	}
+
+	virtual inline const Ptr cat_() const override
+	{
+		static const Ptr CAT = Cat::fin_("<strange::Creation>");
+		return CAT;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		const Ptr local = Shoal::mut_();
+		Shoal* const loc = static_<Shoal>(local);
+		loc->insert_("$", _shared);
+		loc->insert_("&", it);
 		return static_<Expression>(_expression)->evaluate_(_expression, local);
 	}
 
@@ -2490,6 +2570,42 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 	}
 }
 
+inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
+{
+	try
+	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+//			Shoal* const shoal = static_<Shoal>(local);
+//			const Ptr it = shoal->at_("&");
+		const Ptr res = Shoal::mut_();
+		Shoal* const result = static_<Shoal>(res);
+
+		const Ptr flock = Flock::mut_();
+		Flock* const flk = static_<Flock>(flock);
+		flk->push_back_(one_());
+		flk->push_back_(Expression::fin_(_token, sym_("herd_"), Flock::mut_()));
+		const Ptr cats = Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock));
+		result->update_("cats", cats);
+
+		const std::size_t size = vec.size();
+		for (std::size_t i = 0; i < size; ++i)
+		{
+			const Ptr base = Expression::evaluate_(vec[i], local);
+			Shoal* const shoal = dynamic_<Shoal>(base);
+			if (!shoal)
+			{
+				throw _stack_("creation_ passed wrong kind of thing");
+			}
+			_merge_(shoal, result);
+		}
+		return res;
+	}
+	catch (const std::exception& err)
+	{
+		throw _stack_(err.what());
+	}
+}
+
 //======================================================================
 // class Operation
 //======================================================================
@@ -2508,6 +2624,10 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 
 //======================================================================
 // class Extraction
+//======================================================================
+
+//======================================================================
+// class Creation
 //======================================================================
 
 //======================================================================
