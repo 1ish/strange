@@ -139,11 +139,11 @@ public:
 	virtual ~Thing() = default;
 
 	// public pure virtual member functions and adapters
-	virtual inline const Ptr type_() const = 0;
+	virtual inline const Ptr cat_() const = 0;
 
-	inline const Ptr type(const Ptr& ignore) const
+	inline const Ptr cat(const Ptr& ignore) const
 	{
-		return type_();
+		return cat_();
 	}
 
 	// public impure virtual member functions and adapters
@@ -516,13 +516,13 @@ public:
 	class Dismemberment : public Disagreement
 	{
 	public:
-		inline Dismemberment(const Ptr& type, const Ptr& member);
+		inline Dismemberment(const Ptr& cat, const Ptr& member);
 	};
 
 	class Mutilation : public Disagreement
 	{
 	public:
-		inline Mutilation(const Ptr& type);
+		inline Mutilation(const Ptr& cat);
 	};
 
 protected:
@@ -771,7 +771,7 @@ public:
 
 	virtual inline const Ptr to_lake_() const override;
 
-	virtual inline const Ptr type_() const override;
+	virtual inline const Ptr cat_() const override;
 
 	virtual inline const Ptr cats_() const override;
 
@@ -875,10 +875,10 @@ public:
 
 	static inline void share_(const Ptr& shoal);
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Cat>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Cat>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override;
@@ -918,10 +918,10 @@ public:
 		return with_params_(fun, std::move(v));
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Static>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Static>");
+		return CAT;
 	}
 
 	virtual inline const Ptr eater_() const override;
@@ -968,10 +968,10 @@ public:
 		return with_params_(fun, std::move(v));
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Member>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Member>");
+		return CAT;
 	}
 
 	virtual inline const Ptr eater_() const override;
@@ -981,14 +981,14 @@ protected:
 	{
 		if (thing->final_())
 		{
-			throw Mutilation(thing->type_());
+			throw Mutilation(thing->cat_());
 		}
 		T* const t = dynamic_cast<T*>(thing);
 		if (t)
 		{
 			return (t->*_function)(it);
 		}
-		throw Disagreement("Member passed wrong type of thing");
+		throw Disagreement("Member passed wrong category of thing");
 	}
 
 private:
@@ -1027,10 +1027,10 @@ public:
 		return with_params_(fun, std::move(v));
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Const>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Const>");
+		return CAT;
 	}
 
 	virtual inline const Ptr eater_() const override;
@@ -1043,7 +1043,7 @@ protected:
 		{
 			return (t->*_function)(it);
 		}
-		throw Disagreement("Const member passed wrong type of thing");
+		throw Disagreement("Const member passed wrong category of thing");
 	}
 
 private:
@@ -1482,10 +1482,10 @@ public:
 		return Feeder::mut_(me_(), eater);
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Shoal>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Shoal>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override;
@@ -1587,10 +1587,10 @@ public:
 			return mut_(_shoal->copy_());
 		}
 
-		virtual inline const Ptr type_() const override
+		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr TYPE = Cat::fin_("<strange::Shoal::Concurrent>");
-			return TYPE;
+			static const Ptr CAT = Cat::fin_("<strange::Shoal::Concurrent>");
+			return CAT;
 		}
 
 		inline const Ptr at_(const Ptr& key) const
@@ -1667,10 +1667,10 @@ private:
 			return make_<Iterator>(shoal);
 		}
 
-		virtual inline const Ptr type_() const override
+		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr TYPE = Cat::fin_("<strange::Shoal:Iterator>");
-			return TYPE;
+			static const Ptr CAT = Cat::fin_("<strange::Shoal:Iterator>");
+			return CAT;
 		}
 
 		virtual inline const Ptr cats_() const override;
@@ -1705,10 +1705,10 @@ private:
 			return make_<Feeder>(shoal, eater);
 		}
 
-		virtual inline const Ptr type_() const override
+		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr TYPE = Cat::fin_("<strange::Shoal:Feeder>");
-			return TYPE;
+			static const Ptr CAT = Cat::fin_("<strange::Shoal:Feeder>");
+			return CAT;
 		}
 
 		virtual inline const Ptr cats_() const override;
@@ -2089,10 +2089,10 @@ public:
 		return Iterator::mut_(me_());
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Flock>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Flock>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override;
@@ -2167,10 +2167,10 @@ public:
 			return mut_(_flock->copy_());
 		}
 
-		virtual inline const Ptr type_() const override
+		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr TYPE = Cat::fin_("<strange::Flock::Concurrent>");
-			return TYPE;
+			static const Ptr CAT = Cat::fin_("<strange::Flock::Concurrent>");
+			return CAT;
 		}
 
 		inline void push_back_(const Ptr& item)
@@ -2251,10 +2251,10 @@ private:
 			return make_<Iterator>(flock);
 		}
 
-		virtual inline const Ptr type_() const override
+		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr TYPE = Cat::fin_("<strange::Flock::Iterator>");
-			return TYPE;
+			static const Ptr CAT = Cat::fin_("<strange::Flock::Iterator>");
+			return CAT;
 		}
 
 		virtual inline const Ptr cats_() const override;
@@ -2733,10 +2733,10 @@ public:
 		return Iterator::mut_(copy_());
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Herd>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Herd>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -2747,7 +2747,7 @@ public:
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
-			herd->insert_(Herd::type_());
+			herd->insert_(Herd::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -2834,10 +2834,10 @@ public:
 			return mut_(_herd->copy_());
 		}
 
-		virtual inline const Ptr type_() const override
+		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr TYPE = Cat::fin_("<strange::Herd::Concurrent>");
-			return TYPE;
+			static const Ptr CAT = Cat::fin_("<strange::Herd::Concurrent>");
+			return CAT;
 		}
 
 		inline const bool at_(const Ptr& item) const
@@ -2903,10 +2903,10 @@ private:
 			return make_<Iterator>(herd);
 		}
 
-		virtual inline const Ptr type_() const override
+		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr TYPE = Cat::fin_("<strange::Herd::Iterator>");
-			return TYPE;
+			static const Ptr CAT = Cat::fin_("<strange::Herd::Iterator>");
+			return CAT;
 		}
 
 		virtual inline const Ptr cats_() const override
@@ -2916,7 +2916,7 @@ private:
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
 				herd->self_add_(Stateful::cats_());
-				herd->insert_(Herd::Iterator::type_());
+				herd->insert_(Herd::Iterator::cat_());
 				herd->finalize_();
 				return cats;
 			}();
@@ -2975,10 +2975,10 @@ public:
 		return PUB;
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::IteratorPtr>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::IteratorPtr>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -2988,7 +2988,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
-			herd->insert_(IteratorPtr::type_());
+			herd->insert_(IteratorPtr::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3035,10 +3035,10 @@ public:
 		return make_<IteratorCopy<C>>(std::forward<F>(collection));
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::IteratorCopy>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::IteratorCopy>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -3048,7 +3048,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
-			herd->insert_(IteratorCopy::type_());
+			herd->insert_(IteratorCopy::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3096,10 +3096,10 @@ public:
 		return make_<IteratorRef<C>>(std::forward<F>(collection));
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::IteratorRef>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::IteratorRef>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -3109,7 +3109,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
-			herd->insert_(IteratorRef::type_());
+			herd->insert_(IteratorRef::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3344,7 +3344,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("Lake::from_lake_ passed wrong type of thing");
+			throw Disagreement("Lake::from_lake_ passed wrong category of thing");
 		}
 		set_(lak->get_());
 		if (lak->final_())
@@ -3357,10 +3357,10 @@ public:
 
 	virtual inline void from_river_(const Ptr& river) override;
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Lake>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Lake>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -3371,7 +3371,7 @@ public:
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
-			herd->insert_(Lake::type_());
+			herd->insert_(Lake::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3813,10 +3813,10 @@ public:
 		return PUB;
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Number>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Number>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -3827,7 +3827,7 @@ public:
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
-			herd->insert_(Number::type_());
+			herd->insert_(Number::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -3957,7 +3957,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("Bit::from_lake_ passed wrong type of thing");
+			throw Disagreement("Bit::from_lake_ passed wrong category of thing");
 		}
 		set_(bool(lak->get_()[0]));
 		if (lak->final_())
@@ -3966,10 +3966,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Bit>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Bit>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -3979,7 +3979,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(Bit::type_());
+			herd->insert_(Bit::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -4276,7 +4276,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("Int8::from_lake_ passed wrong type of thing");
+			throw Disagreement("Int8::from_lake_ passed wrong category of thing");
 		}
 		set_(lak->get_()[0]);
 		if (lak->final_())
@@ -4285,10 +4285,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Int8>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Int8>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -4298,7 +4298,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(Int8::type_());
+			herd->insert_(Int8::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -4590,7 +4590,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("UInt8::from_lake_ passed wrong type of thing");
+			throw Disagreement("UInt8::from_lake_ passed wrong category of thing");
 		}
 		set_(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0])));
 		if (lak->final_())
@@ -4599,10 +4599,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::UInt8>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::UInt8>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -4612,7 +4612,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(UInt8::type_());
+			herd->insert_(UInt8::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -4907,7 +4907,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("Int16::from_lake_ passed wrong type of thing");
+			throw Disagreement("Int16::from_lake_ passed wrong category of thing");
 		}
 		set_(
 			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -4919,10 +4919,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Int16>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Int16>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -4932,7 +4932,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(Int16::type_());
+			herd->insert_(Int16::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -5227,7 +5227,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("UInt16::from_lake_ passed wrong type of thing");
+			throw Disagreement("UInt16::from_lake_ passed wrong category of thing");
 		}
 		set_(
 			uint16_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -5239,10 +5239,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::UInt16>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::UInt16>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -5252,7 +5252,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(UInt16::type_());
+			herd->insert_(UInt16::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -5549,7 +5549,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("Int32::from_lake_ passed wrong type of thing");
+			throw Disagreement("Int32::from_lake_ passed wrong category of thing");
 		}
 		set_(
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -5563,10 +5563,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Int32>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Int32>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -5576,7 +5576,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(Int32::type_());
+			herd->insert_(Int32::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -5873,7 +5873,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("UInt32::from_lake_ passed wrong type of thing");
+			throw Disagreement("UInt32::from_lake_ passed wrong category of thing");
 		}
 		set_(
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -5887,10 +5887,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::UInt32>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::UInt32>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -5900,7 +5900,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(UInt32::type_());
+			herd->insert_(UInt32::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -6201,7 +6201,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("Int64::from_lake_ passed wrong type of thing");
+			throw Disagreement("Int64::from_lake_ passed wrong category of thing");
 		}
 		set_(
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -6219,10 +6219,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Int64>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Int64>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -6232,7 +6232,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(Int64::type_());
+			herd->insert_(Int64::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -6533,7 +6533,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("UInt64::from_lake_ passed wrong type of thing");
+			throw Disagreement("UInt64::from_lake_ passed wrong category of thing");
 		}
 		set_(
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -6551,10 +6551,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::UInt64>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::UInt64>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -6564,7 +6564,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(UInt64::type_());
+			herd->insert_(UInt64::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -6944,7 +6944,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("Float32::from_lake_ passed wrong type of thing");
+			throw Disagreement("Float32::from_lake_ passed wrong category of thing");
 		}
 		const uint32_t i =
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -6958,10 +6958,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Float32>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Float32>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -6971,7 +6971,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(Float32::type_());
+			herd->insert_(Float32::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -7273,7 +7273,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("Float64::from_lake_ passed wrong type of thing");
+			throw Disagreement("Float64::from_lake_ passed wrong category of thing");
 		}
 		const uint64_t i =
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -7291,10 +7291,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Float64>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Float64>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -7304,7 +7304,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(Float64::type_());
+			herd->insert_(Float64::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -7617,7 +7617,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("Complex32::from_lake_ passed wrong type of thing");
+			throw Disagreement("Complex32::from_lake_ passed wrong category of thing");
 		}
 		const uint32_t r =
 			uint32_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -7636,10 +7636,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Complex32>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Complex32>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -7649,7 +7649,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(Complex32::type_());
+			herd->insert_(Complex32::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -7961,7 +7961,7 @@ public:
 		Lake* const lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
-			throw Disagreement("Complex64::from_lake_ passed wrong type of thing");
+			throw Disagreement("Complex64::from_lake_ passed wrong category of thing");
 		}
 		const uint64_t r =
 			uint64_t(*reinterpret_cast<const uint8_t*>(&(lak->get_()[0]))) |
@@ -7988,10 +7988,10 @@ public:
 		}
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Complex64>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Complex64>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -8001,7 +8001,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
-			herd->insert_(Complex64::type_());
+			herd->insert_(Complex64::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -8292,10 +8292,10 @@ public:
 		s->update_("strange::River::err", Static::fin_(&River::err));
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::River>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::River>");
+		return CAT;
 	}
 
 	virtual inline const Ptr cats_() const override
@@ -8305,7 +8305,7 @@ public:
 			const Ptr cats = Herd::mut_();
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
-			herd->insert_(River::type_());
+			herd->insert_(River::cat_());
 			herd->finalize_();
 			return cats;
 		}();
@@ -8324,9 +8324,9 @@ public:
 
 	inline const bool push_back_(const Ptr& ptr)
 	{
-		const Ptr type = ptr->type_();
-		write_(Int16::mut_(int16_t(static_<Symbol>(type)->get_().length())));
-		write_(type);
+		const Ptr cat = ptr->cat_();
+		write_(Int16::mut_(int16_t(static_<Symbol>(cat)->get_().length())));
+		write_(cat); //TODO cat not <cat>?
 		ptr->invoke_("to_river", me_());
 		return true;
 	}
@@ -8342,9 +8342,9 @@ public:
 
 	inline const bool push_back_with_links_(const Ptr& ptr, const Ptr& shoal)
 	{
-		const Ptr type = ptr->type_();
-		write_(Int16::mut_(int16_t(static_<Symbol>(type)->get_().length())));
-		write_(type);
+		const Ptr cat = ptr->cat_();
+		write_(Int16::mut_(int16_t(static_<Symbol>(cat)->get_().length())));
+		write_(cat); //TODO cat not <cat>?
 		ptr->invoke_("to_river_with_links", shoal, me_());
 		return true;
 	}
@@ -8368,7 +8368,7 @@ public:
 		}
 		else
 		{
-			throw Disagreement("strange::River::write_ passed wrong type of thing");
+			throw Disagreement("strange::River::write_ passed wrong category of thing");
 		}
 	}
 
@@ -8384,8 +8384,8 @@ public:
 	inline const Ptr pop_front_()
 	{
 		const int16_t int16 = read_<Int16>();
-		const std::string type = static_<Lake>(read_(int16))->get_();
-		return call_(type + "::riv", me_());
+		const std::string cat = static_<Lake>(read_(int16))->get_();
+		return call_(cat + "::riv", me_()); //TODO <cat>::riv?
 	}
 
 	inline const Ptr pop_front(const Ptr& ignore)
@@ -8396,8 +8396,8 @@ public:
 	inline const Ptr pop_front_with_links_()
 	{
 		const int16_t int16 = read_<Int16>();
-		const std::string type = static_<Lake>(read_(int16))->get_();
-		return call_(type + "::rwl", me_());
+		const std::string cat = static_<Lake>(read_(int16))->get_();
+		return call_(cat + "::rwl", me_()); //TODO <cat>::rwl?
 	}
 
 	inline const Ptr read_(const int64_t length)
@@ -8543,7 +8543,7 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("clone_freeze", Const<Thing>::fin_(&Thing::clone_freeze));
 		shoal->update_("replicate", Const<Thing>::fin_(&Thing::replicate));
 		shoal->update_("call", Static::fin_(&Thing::call, "function", ".."));
-		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
+		shoal->update_("cat", Const<Thing>::fin_(&Thing::cat));
 		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
 		shoal->update_("visit", Member<Thing>::fin_(&Thing::visit, "visitor", "member", ".."));
 		shoal->update_("pub", Const<Thing>::fin_(&Thing::pub));
@@ -8559,7 +8559,7 @@ inline const Thing::Ptr Thing::operator()(Thing* const thing, const Ptr& it)
 	const Ptr member = static_<Shoal>(thing->pub_())->at_(name);
 	if (member->is_nothing_())
 	{
-		throw Dismemberment(thing->type_(), name);
+		throw Dismemberment(thing->cat_(), name);
 	}
 	return operate_(thing, member, it);
 }
@@ -8615,16 +8615,16 @@ inline const Thing::Ptr& Thing::shared_()
 	return SHARED;
 }
 
-inline Thing::Dismemberment::Dismemberment(const Ptr& type, const Ptr& member)
+inline Thing::Dismemberment::Dismemberment(const Ptr& cat, const Ptr& member)
 	:Disagreement("Dismemberment "
-		+ (dynamic_<Symbol>(type) ? static_<Symbol>(type)->get_() : std::string("[UNKNOWN]")) + "."
+		+ (dynamic_<Symbol>(cat) ? static_<Symbol>(cat)->get_() : std::string("[UNKNOWN]")) + "."
 		+ (dynamic_<Symbol>(member) ? static_<Symbol>(member)->get_() : std::string("[UNKNOWN]")))
 {
 }
 
-inline Thing::Mutilation::Mutilation(const Ptr& type)
+inline Thing::Mutilation::Mutilation(const Ptr& cat)
 	:Disagreement("Mutilation "
-		+ (dynamic_<Symbol>(type) ? static_<Symbol>(type)->get_() : std::string("[UNKNOWN]")))
+		+ (dynamic_<Symbol>(cat) ? static_<Symbol>(cat)->get_() : std::string("[UNKNOWN]")))
 {
 }
 
@@ -8656,7 +8656,7 @@ inline void Serializable::to_river_(const Thing::Ptr& river) const
 	}
 	else
 	{
-		throw Thing::Disagreement("Serializable::to_river_ passed wrong type of thing");
+		throw Thing::Disagreement("Serializable::to_river_ passed wrong category of thing");
 	}
 }
 
@@ -8681,7 +8681,7 @@ inline void Serializable::from_lake_via_river_(const Thing::Ptr& lake)
 	Lake* const lak = Thing::dynamic_<Lake>(lake);
 	if (!lak)
 	{
-		throw Thing::Disagreement("Serializable::from_lake_via_river_ passed wrong type of thing");
+		throw Thing::Disagreement("Serializable::from_lake_via_river_ passed wrong category of thing");
 	}
 	const Thing::Ptr river = River::mut_();
 	lak->to_river_(river);
@@ -8728,7 +8728,7 @@ inline const bool Symbol::less_than_(const Ptr& other) const
 	{
 		return get_() < lake->get_();
 	}
-	throw Disagreement("Symbol::less_than_ passed wrong type of thing");
+	throw Disagreement("Symbol::less_than_ passed wrong category of thing");
 }
 
 inline const bool Symbol::greater_than_(const Ptr& other) const
@@ -8743,7 +8743,7 @@ inline const bool Symbol::greater_than_(const Ptr& other) const
 	{
 		return get_() > lake->get_();
 	}
-	throw Disagreement("Symbol::greater_than_ passed wrong type of thing");
+	throw Disagreement("Symbol::greater_than_ passed wrong category of thing");
 }
 
 inline const bool Symbol::less_or_equal_(const Ptr& other) const
@@ -8758,7 +8758,7 @@ inline const bool Symbol::less_or_equal_(const Ptr& other) const
 	{
 		return get_() <= lake->get_();
 	}
-	throw Disagreement("Symbol::less_or_equal_ passed wrong type of thing");
+	throw Disagreement("Symbol::less_or_equal_ passed wrong category of thing");
 }
 
 inline const bool Symbol::greater_or_equal_(const Ptr& other) const
@@ -8773,7 +8773,7 @@ inline const bool Symbol::greater_or_equal_(const Ptr& other) const
 	{
 		return get_() >= lake->get_();
 	}
-	throw Disagreement("Symbol::greater_or_equal_ passed wrong type of thing");
+	throw Disagreement("Symbol::greater_or_equal_ passed wrong category of thing");
 }
 
 inline const Thing::Ptr Symbol::pub_() const
@@ -8812,7 +8812,7 @@ inline const Thing::Ptr Symbol::lak_(const Ptr& lake)
 	Lake* const lak = dynamic_<Lake>(lake);
 	if (!lak)
 	{
-		throw Disagreement("Symbol::lak_ passed wrong type of thing");
+		throw Disagreement("Symbol::lak_ passed wrong category of thing");
 	}
 	return fin_(lak->get_());
 }
@@ -8834,10 +8834,10 @@ inline const Thing::Ptr Symbol::to_lake_() const
 	return lake;
 }
 
-inline const Thing::Ptr Symbol::type_() const
+inline const Thing::Ptr Symbol::cat_() const
 {
-	static const Ptr TYPE = Cat::fin_("<strange::Symbol>");
-	return TYPE;
+	static const Ptr CAT = Cat::fin_("<strange::Symbol>");
+	return CAT;
 }
 
 inline const Thing::Ptr Symbol::cats_() const
@@ -8848,7 +8848,7 @@ inline const Thing::Ptr Symbol::cats_() const
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Thing::cats_());
 		herd->self_add_(Serializable::cats_());
-		herd->insert_(Symbol::type_());
+		herd->insert_(Symbol::cat_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -8881,7 +8881,7 @@ inline const char Symbol::at_(const Ptr& index) const
 	{
 		return at_(ind->to_int64_());
 	}
-	throw Disagreement("strange::Symbol::at_ passed wrong type of Number");
+	throw Disagreement("strange::Symbol::at_ passed wrong category of Number");
 }
 
 inline const Thing::Ptr Symbol::at(const Ptr& it) const
@@ -8898,7 +8898,7 @@ inline const Thing::Ptr Cat::lak_(const Ptr& lake)
 	Lake* const lak = dynamic_<Lake>(lake);
 	if (!lak)
 	{
-		throw Disagreement("Cat::lak_ passed wrong type of thing");
+		throw Disagreement("Cat::lak_ passed wrong category of thing");
 	}
 	return fin_(lak->get_());
 }
@@ -8928,7 +8928,7 @@ inline const Thing::Ptr Cat::cats_() const
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Symbol::cats_());
-		herd->insert_(Cat::type_());
+		herd->insert_(Cat::cat_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -8997,7 +8997,7 @@ inline void Shoal::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Shoal::to_river_ passed wrong type of thing");
+		throw Disagreement("Shoal::to_river_ passed wrong category of thing");
 	}
 	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_map.size())));
@@ -9013,7 +9013,7 @@ inline void Shoal::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Shoal::from_river_ passed wrong type of thing");
+		throw Disagreement("Shoal::from_river_ passed wrong category of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -9033,12 +9033,12 @@ inline void Shoal::to_river_with_links_(const Ptr& shoal, const Ptr& river) cons
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
-		throw Disagreement("Shoal::to_river_with_links_ passed wrong type of shoal thing");
+		throw Disagreement("Shoal::to_river_with_links_ passed wrong category of shoal thing");
 	}
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Shoal::to_river_with_links_ passed wrong type of river thing");
+		throw Disagreement("Shoal::to_river_with_links_ passed wrong category of river thing");
 	}
 	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_map.size())));
@@ -9054,7 +9054,7 @@ inline void Shoal::from_river_with_links_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Shoal::from_river_with_links_ passed wrong type of thing");
+		throw Disagreement("Shoal::from_river_with_links_ passed wrong category of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -9085,7 +9085,7 @@ inline void Shoal::gather_to_river_(const Ptr& thing, const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Shoal::gather_to_river_ passed wrong type of river thing");
+		throw Disagreement("Shoal::gather_to_river_ passed wrong category of river thing");
 	}
 	gather_(thing);
 	riv->write_(Int64::mut_(int64_t(_map.size())));
@@ -9103,7 +9103,7 @@ inline const Thing::Ptr Shoal::gather_from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Shoal::gather_from_river_ passed wrong type of river thing");
+		throw Disagreement("Shoal::gather_from_river_ passed wrong category of river thing");
 	}
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
 	{
@@ -9239,7 +9239,7 @@ inline const Thing::Ptr Shoal::cats_() const
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
 		herd->self_add_(Serializable::cats_());
-		herd->insert_(Shoal::type_());
+		herd->insert_(Shoal::cat_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9253,7 +9253,7 @@ inline const Thing::Ptr Shoal::Iterator::cats_() const
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
-		herd->insert_(Shoal::Iterator::type_());
+		herd->insert_(Shoal::Iterator::cat_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9282,7 +9282,7 @@ inline const Thing::Ptr Shoal::Feeder::cats_() const
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
-		herd->insert_(Shoal::Feeder::type_());
+		herd->insert_(Shoal::Feeder::cat_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9305,7 +9305,7 @@ inline const Thing::Ptr Flock::at_(const Ptr& pos) const
 	{
 		return at_(number->to_int64_());
 	}
-	throw Disagreement("strange::Flock::at_ passed wrong type of Number");
+	throw Disagreement("strange::Flock::at_ passed wrong category of Number");
 }
 
 inline void Flock::update_(const Ptr& pos, const Ptr& value)
@@ -9317,7 +9317,7 @@ inline void Flock::update_(const Ptr& pos, const Ptr& value)
 	}
 	else
 	{
-		throw Disagreement("strange::Flock::update_ passed wrong type of Number");
+		throw Disagreement("strange::Flock::update_ passed wrong category of Number");
 	}
 }
 
@@ -9330,7 +9330,7 @@ inline void Flock::insert_(const Ptr& pos, const Ptr& value)
 	}
 	else
 	{
-		throw Disagreement("strange::Flock::insert_ passed wrong type of Number");
+		throw Disagreement("strange::Flock::insert_ passed wrong category of Number");
 	}
 }
 
@@ -9343,7 +9343,7 @@ inline void Flock::erase_(const Ptr& pos)
 	}
 	else
 	{
-		throw Disagreement("strange::Flock::erase_ passed wrong type of Number");
+		throw Disagreement("strange::Flock::erase_ passed wrong category of Number");
 	}
 }
 
@@ -9410,7 +9410,7 @@ inline const Thing::Ptr Flock::Concurrent::at_(const Ptr& pos) const
 	}
 	else
 	{
-		throw Disagreement("strange::Flock::Concurrent::at_ passed wrong type of Number");
+		throw Disagreement("strange::Flock::Concurrent::at_ passed wrong category of Number");
 	}
 	return nothing_();
 }
@@ -9420,7 +9420,7 @@ inline void Flock::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Flock::to_river_ passed wrong type of thing");
+		throw Disagreement("Flock::to_river_ passed wrong category of thing");
 	}
 	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_vector.size())));
@@ -9435,7 +9435,7 @@ inline void Flock::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Flock::from_river_ passed wrong type of thing");
+		throw Disagreement("Flock::from_river_ passed wrong category of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
@@ -9455,12 +9455,12 @@ inline void Flock::to_river_with_links_(const Ptr& shoal, const Ptr& river) cons
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
-		throw Disagreement("Flock::to_river_with_links_ passed wrong type of shoal thing");
+		throw Disagreement("Flock::to_river_with_links_ passed wrong category of shoal thing");
 	}
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Flock::to_river_with_links_ passed wrong type of river thing");
+		throw Disagreement("Flock::to_river_with_links_ passed wrong category of river thing");
 	}
 	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_vector.size())));
@@ -9475,7 +9475,7 @@ inline void Flock::from_river_with_links_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Flock::from_river_with_links_ passed wrong type of thing");
+		throw Disagreement("Flock::from_river_with_links_ passed wrong category of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
@@ -9507,7 +9507,7 @@ inline const Thing::Ptr Flock::cats_() const
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
 		herd->self_add_(Serializable::cats_());
-		herd->insert_(Flock::type_());
+		herd->insert_(Flock::cat_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9521,7 +9521,7 @@ inline const Thing::Ptr Flock::Iterator::cats_() const
 		const Ptr cats = Herd::mut_();
 		Herd* const herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
-		herd->insert_(Flock::Iterator::type_());
+		herd->insert_(Flock::Iterator::cat_());
 		herd->finalize_();
 		return cats;
 	}();
@@ -9537,7 +9537,7 @@ inline void Herd::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Herd::to_river_ passed wrong type of thing");
+		throw Disagreement("Herd::to_river_ passed wrong category of thing");
 	}
 	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_set.size())));
@@ -9552,7 +9552,7 @@ inline void Herd::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Herd::from_river_ passed wrong type of thing");
+		throw Disagreement("Herd::from_river_ passed wrong category of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -9570,12 +9570,12 @@ inline void Herd::to_river_with_links_(const Ptr& shoal, const Ptr& river) const
 	Shoal* const sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
-		throw Disagreement("Herd::to_river_with_links_ passed wrong type of shoal thing");
+		throw Disagreement("Herd::to_river_with_links_ passed wrong category of shoal thing");
 	}
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Herd::to_river_with_links_ passed wrong type of river thing");
+		throw Disagreement("Herd::to_river_with_links_ passed wrong category of river thing");
 	}
 	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(_set.size())));
@@ -9590,7 +9590,7 @@ inline void Herd::from_river_with_links_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Herd::from_river_with_links_ passed wrong type of thing");
+		throw Disagreement("Herd::from_river_with_links_ passed wrong category of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	for (int64_t i = riv->read_<Int64>(); i > 0; --i)
@@ -9644,7 +9644,7 @@ inline void Lake::to_river_(const Ptr& river) const
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Lake::to_river_ passed wrong type of thing");
+		throw Disagreement("Lake::to_river_ passed wrong category of thing");
 	}
 	riv->write_(Bit::mut_(final_()));
 	riv->write_(Int64::mut_(int64_t(get_().length())));
@@ -9656,7 +9656,7 @@ inline void Lake::from_river_(const Ptr& river)
 	River* const riv = dynamic_<River>(river);
 	if (!riv)
 	{
-		throw Disagreement("Lake::from_river_ passed wrong type of thing");
+		throw Disagreement("Lake::from_river_ passed wrong category of thing");
 	}
 	const bool bit = riv->read_<Bit>();
 	const int64_t int64 = riv->read_<Int64>();
@@ -9674,7 +9674,7 @@ inline const char Lake::at_(const Ptr& index) const
 	{
 		return at_(ind->to_int64_());
 	}
-	throw Disagreement("strange::Lake::at_ passed wrong type of Number");
+	throw Disagreement("strange::Lake::at_ passed wrong category of Number");
 }
 
 inline const Thing::Ptr Lake::at(const Ptr& it) const
@@ -9695,7 +9695,7 @@ inline void Lake::update_(const Ptr& index, const Ptr& byte)
 	}
 	else
 	{
-		throw Disagreement("strange::Lake::update_ passed wrong type of Number");
+		throw Disagreement("strange::Lake::update_ passed wrong category of Number");
 	}
 }
 
@@ -9711,7 +9711,7 @@ inline const bool Lake::less_than_(const Ptr& other) const
 	{
 		return get_() < symbol->get_();
 	}
-	throw Disagreement("Lake::less_than_ passed wrong type of thing");
+	throw Disagreement("Lake::less_than_ passed wrong category of thing");
 }
 
 inline const bool Lake::greater_than_(const Ptr& other) const
@@ -9726,7 +9726,7 @@ inline const bool Lake::greater_than_(const Ptr& other) const
 	{
 		return get_() > symbol->get_();
 	}
-	throw Disagreement("Lake::greater_than_ passed wrong type of thing");
+	throw Disagreement("Lake::greater_than_ passed wrong category of thing");
 }
 
 inline const bool Lake::less_or_equal_(const Ptr& other) const
@@ -9741,7 +9741,7 @@ inline const bool Lake::less_or_equal_(const Ptr& other) const
 	{
 		return get_() <= symbol->get_();
 	}
-	throw Disagreement("Lake::less_or_equal_ passed wrong type of thing");
+	throw Disagreement("Lake::less_or_equal_ passed wrong category of thing");
 }
 
 inline const bool Lake::greater_or_equal_(const Ptr& other) const
@@ -9756,7 +9756,7 @@ inline const bool Lake::greater_or_equal_(const Ptr& other) const
 	{
 		return get_() >= symbol->get_();
 	}
-	throw Disagreement("Lake::greater_or_equal_ passed wrong type of thing");
+	throw Disagreement("Lake::greater_or_equal_ passed wrong category of thing");
 }
 
 //======================================================================
@@ -9777,7 +9777,7 @@ inline void Number::from_int64_(const Ptr& ptr)
 	}
 	else
 	{
-		throw Disagreement("strange::Number::from_int64_ passed wrong type of thing");
+		throw Disagreement("strange::Number::from_int64_ passed wrong category of thing");
 	}
 }
 
@@ -9795,7 +9795,7 @@ inline void Number::from_float64_(const Ptr& ptr)
 	}
 	else
 	{
-		throw Disagreement("strange::Number::from_float64_ passed wrong type of thing");
+		throw Disagreement("strange::Number::from_float64_ passed wrong category of thing");
 	}
 }
 
@@ -9813,7 +9813,7 @@ inline void Number::from_imaginary64_(const Ptr& ptr)
 	}
 	else
 	{
-		throw Disagreement("strange::Number::from_imaginary64_ passed wrong type of thing");
+		throw Disagreement("strange::Number::from_imaginary64_ passed wrong category of thing");
 	}
 }
 
@@ -9831,7 +9831,7 @@ inline void Number::from_complex64_(const Ptr& ptr)
 	}
 	else
 	{
-		throw Disagreement("strange::Number::from_complex64_ passed wrong type of thing");
+		throw Disagreement("strange::Number::from_complex64_ passed wrong category of thing");
 	}
 }
 

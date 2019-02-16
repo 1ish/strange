@@ -76,10 +76,10 @@ public:
 		riv.write_(")");
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::CPPGenerator>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::CPPGenerator>");
+		return CAT;
 	}
 };
 

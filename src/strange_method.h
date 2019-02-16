@@ -24,10 +24,10 @@ public:
 		return fake_<Method>(thing, member);
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Method>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Method>");
+		return CAT;
 	}
 
 	virtual inline const Ptr eater_() const override

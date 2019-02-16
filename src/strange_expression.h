@@ -78,10 +78,10 @@ public:
 		generator->invoke_("generate_" + static_<Symbol>(_statement)->get_() + "code", _token, _flock);
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Expression>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Expression>");
+		return CAT;
 	}
 
 	inline void parent_(const Ptr& parent)
@@ -263,7 +263,7 @@ private:
 			const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
 			if (member->is_nothing_())
 			{
-				throw Dismemberment(thing->type_(), vec[1]);
+				throw Dismemberment(thing->cat_(), vec[1]);
 			}
 			return Method::fin_(thing, member);
 		}
@@ -282,7 +282,7 @@ private:
 			const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
 			if (member->is_nothing_())
 			{
-				throw Dismemberment(thing->type_(), vec[1]);
+				throw Dismemberment(thing->cat_(), vec[1]);
 			}
 			return operate_(thing.get(), member, _iterator_(local, 2));
 		}
@@ -301,7 +301,7 @@ private:
 			const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
 			if (member->is_nothing_())
 			{
-				throw Dismemberment(thing->type_(), vec[1]);
+				throw Dismemberment(thing->cat_(), vec[1]);
 			}
 			return operate_(thing.get(), member, Expression::evaluate_(vec[2], local));
 		}
@@ -320,7 +320,7 @@ private:
 			const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
 			if (member->is_nothing_())
 			{
-				throw Dismemberment(thing->type_(), vec[1]);
+				throw Dismemberment(thing->cat_(), vec[1]);
 			}
 			const Ptr iterable = Expression::evaluate_(vec[2], local);
 			const Ptr feeder = iterable->feeder(member->eater_());
@@ -345,7 +345,7 @@ private:
 			const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
 			if (member->is_nothing_())
 			{
-				throw Dismemberment(thing->type_(), vec[1]);
+				throw Dismemberment(thing->cat_(), vec[1]);
 			}
 			return member;
 		}
@@ -791,10 +791,10 @@ private:
 			return make_<Iterator>(vec, local, pos);
 		}
 
-		virtual inline const Ptr type_() const override
+		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr TYPE = Cat::fin_("<strange::Expression::Iterator>");
-			return TYPE;
+			static const Ptr CAT = Cat::fin_("<strange::Expression::Iterator>");
+			return CAT;
 		}
 
 		virtual inline const Ptr cats_() const override
@@ -804,7 +804,7 @@ private:
 				const Ptr cats = Herd::mut_();
 				Herd* const herd = static_<Herd>(cats);
 				herd->self_add_(Stateful::cats_());
-				herd->insert_(Expression::Iterator::type_());
+				herd->insert_(Expression::Iterator::cat_());
 				herd->finalize_();
 				return cats;
 			}();
@@ -895,10 +895,10 @@ public:
 		return fake_<Function>(expression);
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Function>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Function>");
+		return CAT;
 	}
 
 protected:
@@ -931,10 +931,10 @@ public:
 		return fake_<Closure>(expression, local);
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Closure>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Closure>");
+		return CAT;
 	}
 
 protected:
@@ -965,10 +965,10 @@ public:
 		return fake_<Mutation>(expression);
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Mutation>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Mutation>");
+		return CAT;
 	}
 
 protected:
@@ -976,7 +976,7 @@ protected:
 	{
 		if (thing->final_())
 		{
-			throw Mutilation(thing->type_());
+			throw Mutilation(thing->cat_());
 		}
 		const Ptr local = Shoal::mut_();
 		Shoal* const loc = static_<Shoal>(local);
@@ -1006,10 +1006,10 @@ public:
 		return fake_<Extraction>(expression);
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("<strange::Extraction>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Extraction>");
+		return CAT;
 	}
 
 protected:
@@ -1032,10 +1032,10 @@ class Attribute : public Operation
 //----------------------------------------------------------------------
 {
 public:
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
 		_initialize_();
-		return _value->type_();
+		return _value->cat_();
 	}
 
 	virtual inline void finalize_() const override
@@ -1260,7 +1260,7 @@ public:
 
 	virtual inline void set_(const Ptr& thing, const bool intimate) const override
 	{
-		throw Mutilation(thing->type_());
+		throw Mutilation(thing->cat_());
 	}
 
 	virtual inline const Ptr duplicate_(const Ptr& expression, const Ptr& value) const override
@@ -1287,10 +1287,10 @@ public:
 		return fake_<Mutable>(expression);
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
 		_initialize_();
-		return _get_()->type_();
+		return _get_()->cat_();
 	}
 
 	virtual inline void finalize_() const override
@@ -1403,7 +1403,7 @@ public:
 		}
 		else
 		{
-			throw Mutilation(thing->type_());
+			throw Mutilation(thing->cat_());
 		}
 	}
 
@@ -1428,7 +1428,7 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-		throw Dismemberment(thing->type_(), sym_("Mutable attributes are private"));
+		throw Dismemberment(thing->cat_(), sym_("Mutable attributes are private"));
 	}
 
 private:
@@ -1470,7 +1470,7 @@ public:
 		}
 		else
 		{
-			throw Mutilation(thing->type_());
+			throw Mutilation(thing->cat_());
 		}
 	}
 
@@ -1505,7 +1505,7 @@ public:
 		}
 		else
 		{
-			throw Mutilation(thing->type_());
+			throw Mutilation(thing->cat_());
 		}
 	}
 
@@ -1561,15 +1561,15 @@ public:
 		s->update_("strange::Creature::mut", Static::fin_(&Creature::mut, "creator"));
 	}
 
-	virtual inline const Ptr type_() const override
+	virtual inline const Ptr cat_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->at_("type");
+		const Ptr over = static_<Shoal>(_members)->at_("cat");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		static const Ptr TYPE = Cat::fin_("<strange::Creature>");
-		return TYPE;
+		static const Ptr CAT = Cat::fin_("<strange::Creature>");
+		return CAT;
 	}
 
 	virtual inline void finalize_() const override
@@ -1740,7 +1740,7 @@ public:
 			Herd* const herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
-			herd->insert_(Creature::type_()); //TODO dynamic creature type/cats
+			herd->insert_(Creature::cat_()); //TODO dynamic creature cat/cats
 			herd->finalize_();
 			return cats;
 		}();
@@ -2262,7 +2262,7 @@ inline const Thing::Ptr Expression::_set_attribute_(const Ptr& local) const
 		const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->type_(), vec[1]);
+			throw Dismemberment(thing->cat_(), vec[1]);
 		}
 		Attribute* const attribute = dynamic_cast<Attribute*>(member.get());
 		if (attribute)
@@ -2271,7 +2271,7 @@ inline const Thing::Ptr Expression::_set_attribute_(const Ptr& local) const
 			attribute->set_(value, false);
 			return value;
 		}
-		throw Mutilation(thing->type_());
+		throw Mutilation(thing->cat_());
 	}
 	catch (const std::exception& err)
 	{
@@ -2292,7 +2292,7 @@ inline const Thing::Ptr Expression::_set_intimate_(const Ptr& local) const
 		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->type_(), vec[0]);
+			throw Dismemberment(thing->cat_(), vec[0]);
 		}
 		Attribute* const attribute = dynamic_cast<Attribute*>(member.get());
 		if (attribute)
@@ -2301,7 +2301,7 @@ inline const Thing::Ptr Expression::_set_intimate_(const Ptr& local) const
 			attribute->set_(value, true);
 			return value;
 		}
-		throw Mutilation(thing->type_());
+		throw Mutilation(thing->cat_());
 	}
 	catch (const std::exception& err)
 	{
@@ -2321,7 +2321,7 @@ inline const Thing::Ptr Expression::_private_(const Ptr& local) const
 		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(static_<Flock>(_flock)->get_()[0]);
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->type_(), static_<Flock>(_flock)->get_()[0]);
+			throw Dismemberment(thing->cat_(), static_<Flock>(_flock)->get_()[0]);
 		}
 		return Method::fin_(thing, member);
 	}
@@ -2344,7 +2344,7 @@ inline const Thing::Ptr Expression::_intimate_(const Ptr& local) const
 		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->type_(), vec[0]);
+			throw Dismemberment(thing->cat_(), vec[0]);
 		}
 		Attribute* const attribute = dynamic_cast<Attribute*>(member.get());
 		if (attribute)
@@ -2372,7 +2372,7 @@ inline const Thing::Ptr Expression::_intimate_iterator_(const Ptr& local) const
 		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->type_(), vec[0]);
+			throw Dismemberment(thing->cat_(), vec[0]);
 		}
 		Attribute* const attribute = dynamic_cast<Attribute*>(member.get());
 		if (attribute)
@@ -2400,7 +2400,7 @@ inline const Thing::Ptr Expression::_intimate_iterable_(const Ptr& local) const
 		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->type_(), vec[0]);
+			throw Dismemberment(thing->cat_(), vec[0]);
 		}
 		Attribute* const attribute = dynamic_cast<Attribute*>(member.get());
 		const Ptr iterable = Expression::evaluate_(vec[1], local);
@@ -2438,7 +2438,7 @@ inline const Thing::Ptr Expression::_intimation_(const Ptr& local) const
 		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->type_(), vec[0]);
+			throw Dismemberment(thing->cat_(), vec[0]);
 		}
 		return member;
 	}

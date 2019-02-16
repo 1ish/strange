@@ -21,7 +21,7 @@
 			'f':#"flake",
 			'_m':%"_mlake",
 			'v':*"vlake",
-			'c':~<strange::Thing[<C>,<>]>.type[],
+			'c':~<strange::Thing[<C>,<>]>.cat[],
 			'_mem':function_()(7)
 		}
 	},
