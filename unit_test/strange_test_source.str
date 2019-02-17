@@ -10,10 +10,9 @@
 		),
 		'Arithmetic'::function_(<strange::Cat> T)creation_()
 		{
-			'T':#T,
 			'cat'::extraction_()
 			(
-				$$strange::Cat::fin['<Arithmetic[' + (|.T) + ']>']
+				$$strange::Cat::fin['<Arithmetic[' + T + ']>']
 			),
 			'mut'::function_()
 			(

@@ -162,19 +162,12 @@ private:
 										nst->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
 										flk->push_back_(Expression::fin_(token, sym_("function_"), nested));
 										result = Expression::fin_(token, symbol, flock);
+										continue;
 									}
-									else
-									{
-										throw tok->error_("Parser ERROR: invalid lambda_ function_");
-									}
-									continue;
 								}
+								throw tok->error_("Parser ERROR: invalid lambda_ function_");
 							}
-							else
-							{
-								throw tok->error_("Parser ERROR: invalid lambda_");
-							}
-							continue;
+							throw tok->error_("Parser ERROR: invalid lambda_");
 						}
 					}
 					else if (symbol->is_("function_"))
@@ -185,12 +178,9 @@ private:
 							{
 								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
 								result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser ERROR: invalid function_");
-							}
-							continue;
+							throw tok->error_("Parser ERROR: invalid function_");
 						}
 					}
 					else if (symbol->is_("mutation_"))
@@ -201,12 +191,9 @@ private:
 							{
 								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
 								result = Expression::fin_(token, Mutation::fin_(Expression::fin_(token, sym_("function_"), flock)));
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser ERROR: invalid mutation_");
-							}
-							continue;
+							throw tok->error_("Parser ERROR: invalid mutation_");
 						}
 					}
 					else if (symbol->is_("extraction_"))
@@ -217,12 +204,29 @@ private:
 							{
 								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
 								result = Expression::fin_(token, Extraction::fin_(Expression::fin_(token, sym_("function_"), flock)));
+								continue;
 							}
-							else
+							throw tok->error_("Parser ERROR: invalid extraction_");
+						}
+					}
+					else if (symbol->is_("creator_"))
+					{
+						if (_statement_(scope, shoal, fixed, flock, true, false, true)) // cat parameters
+						{
+							if (flk->size_() % 3 == 0) //TODO <cat> := default
 							{
-								throw tok->error_("Parser ERROR: invalid extraction_");
+								const Ptr nested = Flock::mut_();
+								Flock* const nst = static_<Flock>(nested);
+								if (_statement_(scope, shoal, fixed, nested))
+								{
+									nst->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
+									flk->push_back_(Expression::fin_(token, sym_("creation_"), nested));
+									result = Expression::fin_(token, symbol, flock);
+									continue;
+								}
+								throw tok->error_("Parser ERROR: invalid creator_ creation_");
 							}
-							continue;
+							throw tok->error_("Parser ERROR: invalid creator_");
 						}
 					}
 					else if (symbol->is_("creation_"))
@@ -242,16 +246,14 @@ private:
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Fixed::fin_(Expression::fin_(token)));
+								continue;
 							}
 							else if (size == 1)
 							{
 								result = Expression::fin_(token, Fixed::fin_(flk->at_(0)));
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser Error: invalid fixed_");
-							}
-							continue;
+							throw tok->error_("Parser Error: invalid fixed_");
 						}
 					}
 					else if (symbol->is_("mutable_"))
@@ -262,16 +264,14 @@ private:
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Mutable::fin_(Expression::fin_(token)));
+								continue;
 							}
 							else if (size == 1)
 							{
 								result = Expression::fin_(token, Mutable::fin_(flk->at_(0)));
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser Error: invalid mutable_");
-							}
-							continue;
+							throw tok->error_("Parser Error: invalid mutable_");
 						}
 					}
 					else if (symbol->is_("variable_"))
@@ -282,16 +282,14 @@ private:
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Variable::fin_(Expression::fin_(token)));
+								continue;
 							}
 							else if (size == 1)
 							{
 								result = Expression::fin_(token, Variable::fin_(flk->at_(0)));
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser Error: invalid variable_");
-							}
-							continue;
+							throw tok->error_("Parser Error: invalid variable_");
 						}
 					}
 					else if (symbol->is_("changeable_"))
@@ -302,16 +300,14 @@ private:
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Changeable::fin_(Expression::fin_(token)));
+								continue;
 							}
 							else if (size == 1)
 							{
 								result = Expression::fin_(token, Changeable::fin_(flk->at_(0)));
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser Error: invalid changeable_");
-							}
-							continue;
+							throw tok->error_("Parser Error: invalid changeable_");
 						}
 					}
 					else if (symbol->is_("break_") || symbol->is_("continue_") || symbol->is_("return_") || symbol->is_("throw_"))
@@ -322,16 +318,14 @@ private:
 							if (size == 0)
 							{
 								_wrap_(token, nothing_(), flock);
+								continue;
 							}
 							else if (size == 1)
 							{
 								result = Expression::fin_(token, symbol, flock);
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser ERROR: invalid break_/continue_/return_/throw_");
-							}
-							continue;
+							throw tok->error_("Parser ERROR: invalid break_/continue_/return_/throw_");
 						}
 					}
 					else if (symbol->is_("error_"))
@@ -349,12 +343,9 @@ private:
 							if (flk->size_() == 2)
 							{
 								result = Expression::fin_(token, symbol, flock);
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser ERROR: invalid catch_");
-							}
-							continue;
+							throw tok->error_("Parser ERROR: invalid catch_");
 						}
 					}
 					else if (symbol->is_("if_"))
@@ -365,12 +356,9 @@ private:
 							if (size == 2 || size == 3)
 							{
 								result = Expression::fin_(token, symbol, flock);
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser ERROR: invalid if_");
-							}
-							continue;
+							throw tok->error_("Parser ERROR: invalid if_");
 						}
 					}
 					else if (symbol->is_("while_") || symbol->is_("do_"))
@@ -381,12 +369,9 @@ private:
 							{
 								flk->push_back_(_parse_(scope, shoal, fixed, false));
 								result = Expression::fin_(token, symbol, flock);
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser ERROR: invalid while_/do_");
-							}
-							continue;
+							throw tok->error_("Parser ERROR: invalid while_/do_");
 						}
 					}
 					else if (symbol->is_("for_"))
@@ -397,12 +382,9 @@ private:
 							{
 								flk->push_back_(_parse_(scope, shoal, fixed, false));
 								result = Expression::fin_(token, symbol, flock);
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser ERROR: invalid for_");
-							}
-							continue;
+							throw tok->error_("Parser ERROR: invalid for_");
 						}
 					}
 					else if (symbol->is_("import_"))
@@ -426,12 +408,9 @@ private:
 									}
 									result = static_<Parser>(Parser::mut_(Tokenizer::mut_(river)))->_parse_(nothing_(), shoal, fixed, true);
 								}
+								continue;
 							}
-							else
-							{
-								throw tok->error_("Parser ERROR: invalid import_");
-							}
-							continue;
+							throw tok->error_("Parser ERROR: invalid import_");
 						}
 					}
 					// local at/update name
@@ -996,7 +975,7 @@ private:
 		}
 	}
 
-	inline const bool _statement_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock, const bool parameters = false, const bool capture = false)
+	inline const bool _statement_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock, const bool parameters = false, const bool capture = false, const bool cats = false)
 	{
 		const Ptr token = _token_();
 		if (token->is_stop_())
