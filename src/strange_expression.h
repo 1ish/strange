@@ -428,20 +428,24 @@ private:
 
 	inline const Ptr _creation_(const Ptr& local) const;
 
-	static inline void _merge_(Shoal* const shoal, Shoal* const result)
+	static inline void _merge_(const bool derived, Shoal* const creation, Shoal* const result)
 	{
-		const Ptr cat = shoal->at_("cat")->invoke_();
-		if (!dynamic_<Cat>(cat))
+		Ptr cat;
+		if (derived)
 		{
-			throw Disagreement("creation merge cat is not a cat");
+			cat = creation->at_("cat")->invoke_();
+			if (!dynamic_<Cat>(cat))
+			{
+				throw Disagreement("creation merge cat is not a cat");
+			}
 		}
-		const Ptr cats = shoal->at_("cats")->invoke_();
+		const Ptr cats = creation->at_("cats")->invoke_();
 		if (!dynamic_<Herd>(cats))
 		{
 			throw Disagreement("creation merge cats are not a herd");
 		}
 		Herd* const herd = static_<Herd>(result->at_("cats")->invoke_());
-		for (const auto& it : shoal->get_())
+		for (const auto& it : creation->get_())
 		{
 			const Ptr key = it.first;
 			Symbol* const symbol = dynamic_<Symbol>(key);
@@ -452,13 +456,17 @@ private:
 			const Ptr value = it.second;
 			if (symbol->is_("cat"))
 			{
-				herd->insert_(cat);
+				if (derived)
+				{
+					result->update_(key, value);
+					herd->insert_(cat);
+				}
 			}
 			else if (symbol->is_("cats"))
 			{
 				herd->self_add_(cats);
 			}
-			else if (symbol->get_()[0] == '_')
+			else if (derived && symbol->get_()[0] == '_')
 			{
 				result->update_("_" + static_<Cat>(cat)->get_() + symbol->get_(), value);
 			}
@@ -2174,33 +2182,17 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	{
 		if (size % 3 == 1) // <cat> param := default
 		{
-			return fin_(token, Function::fin_(fin_(token, statement, &Expression::_function_, flock)));
+			return fin_(token, statement, &Expression::_function_, flock);
 		}
 		throw Disagreement("function_ expression of wrong size");
 	}
-	else if (statement->is_("closure_"))
+	else if (statement->is_("creation_"))
 	{
-		if (size % 3 == 1) // <cat> param := default
+		if (size >= 1) // creation ..
 		{
-			return fin_(token, statement, &Expression::_function_, flock);
+			return fin_(token, statement, &Expression::_creation_, flock);
 		}
-		throw Disagreement("closure_ expression of wrong size");
-	}
-	else if (statement->is_("mutation_"))
-	{
-		if (size % 3 == 1) // <cat> param := default
-		{
-			return fin_(token, Mutation::fin_(fin_(token, statement, &Expression::_function_, flock)));
-		}
-		throw Disagreement("mutation_ expression of wrong size");
-	}
-	else if (statement->is_("extraction_"))
-	{
-		if (size % 3 == 1) // <cat> param := default
-		{
-			return fin_(token, Extraction::fin_(fin_(token, statement, &Expression::_function_, flock)));
-		}
-		throw Disagreement("extraction_ expression of wrong size");
+		throw Disagreement("creation_ expression of wrong size");
 	}
 	else if (statement->is_("shared_scope_"))
 	{
@@ -2575,8 +2567,6 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 	try
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-//			Shoal* const shoal = static_<Shoal>(local);
-//			const Ptr it = shoal->at_("&");
 		const Ptr res = Shoal::mut_();
 		Shoal* const result = static_<Shoal>(res);
 
@@ -2587,16 +2577,16 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 		const Ptr cats = Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock));
 		result->update_("cats", cats);
 
-		const std::size_t size = vec.size();
-		for (std::size_t i = 0; i < size; ++i)
+		const std::size_t size_1 = vec.size() - 1;
+		for (std::size_t i = 0; i <= size_1; ++i)
 		{
-			const Ptr base = Expression::evaluate_(vec[i], local);
-			Shoal* const shoal = dynamic_<Shoal>(base);
-			if (!shoal)
+			const Ptr shoal = Expression::evaluate_(vec[i], local);
+			Shoal* const creation = dynamic_<Shoal>(shoal);
+			if (!creation)
 			{
 				throw _stack_("creation_ passed wrong kind of thing");
 			}
-			_merge_(shoal, result);
+			_merge_(i == size_1, creation, result);
 		}
 		return res;
 	}

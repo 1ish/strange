@@ -8,11 +8,11 @@
 		(
 			a+2
 		),
-		'Arithmetic'::
+		'Arithmetic'::function_()creation_()
 		{
 			'mut'::function_()
 			(
-				$$strange::Creature::mut[$$Arithmetic]
+				$$strange::Creature::mut[$$Arithmetic[]]
 			),
 			'addition'::extraction_(<strange::Number> a, <strange::Number> b)
 			(

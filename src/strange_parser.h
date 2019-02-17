@@ -160,7 +160,7 @@ private:
 									if (nst->size_() % 3 == 0) // <cat> param := default
 									{
 										nst->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
-										flk->push_back_(Expression::fin_(token, sym_("closure_"), nested));
+										flk->push_back_(Expression::fin_(token, sym_("function_"), nested));
 										result = Expression::fin_(token, symbol, flock);
 									}
 									else
@@ -177,19 +177,60 @@ private:
 							continue;
 						}
 					}
-					else if (symbol->is_("function_") || symbol->is_("mutation_") || symbol->is_("extraction_"))
+					else if (symbol->is_("function_"))
 					{
 						if (_statement_(scope, shoal, fixed, flock, true)) // parameters
 						{
 							if (flk->size_() % 3 == 0) // <cat> param := default
 							{
 								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
-								result = Expression::fin_(token, symbol, flock);
+								result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
 							}
 							else
 							{
-								throw tok->error_("Parser ERROR: invalid function_/mutation_/extraction_");
+								throw tok->error_("Parser ERROR: invalid function_");
 							}
+							continue;
+						}
+					}
+					else if (symbol->is_("mutation_"))
+					{
+						if (_statement_(scope, shoal, fixed, flock, true)) // parameters
+						{
+							if (flk->size_() % 3 == 0) // <cat> param := default
+							{
+								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
+								result = Expression::fin_(token, Mutation::fin_(Expression::fin_(token, sym_("function_"), flock)));
+							}
+							else
+							{
+								throw tok->error_("Parser ERROR: invalid mutation_");
+							}
+							continue;
+						}
+					}
+					else if (symbol->is_("extraction_"))
+					{
+						if (_statement_(scope, shoal, fixed, flock, true)) // parameters
+						{
+							if (flk->size_() % 3 == 0) // <cat> param := default
+							{
+								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
+								result = Expression::fin_(token, Extraction::fin_(Expression::fin_(token, sym_("function_"), flock)));
+							}
+							else
+							{
+								throw tok->error_("Parser ERROR: invalid extraction_");
+							}
+							continue;
+						}
+					}
+					else if (symbol->is_("creation_"))
+					{
+						if (_statement_(scope, shoal, fixed, flock))
+						{
+							flk->push_back_(_parse_(scope, shoal, fixed, false));
+							result = Expression::fin_(token, symbol, flock);
 							continue;
 						}
 					}
