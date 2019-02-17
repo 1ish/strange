@@ -15,7 +15,6 @@ class Function;
 class Closure;
 class Mutation;
 class Extraction;
-class Creation;
 class Attribute;
 class Fixed;
 class Mutable;
@@ -436,10 +435,10 @@ private:
 			{
 				throw Disagreement("creation merge cat is missing");
 			}
-			cat = cat_fun->invoke_();
+//TODO			cat = cat_fun->invoke_();
 			if (!dynamic_<Cat>(cat))
 			{
-				throw Disagreement("creation merge cat is not a cat");
+//TODO				throw Disagreement("creation merge cat is not a cat");
 			}
 		}
 
@@ -470,7 +469,7 @@ private:
 				if (derived)
 				{
 					result->update_(key, value);
-					herd->insert_(cat);
+//TODO					herd->insert_(cat);
 				}
 			}
 			else if (symbol->is_("cats"))
@@ -482,7 +481,7 @@ private:
 			}
 			else if (derived && symbol->get_()[0] == '_')
 			{
-				result->update_("_" + static_<Cat>(cat)->get_() + symbol->get_(), value);
+//TODO				result->update_("_" + static_<Cat>(cat)->get_() + symbol->get_(), value);
 			}
 			else
 			{
@@ -1091,38 +1090,6 @@ protected:
 
 private:
 	const Ptr _shared;
-};
-
-//----------------------------------------------------------------------
-class Creation : public Operation
-//----------------------------------------------------------------------
-{
-public:
-	inline Creation(const Ptr& expression, const Ptr& local)
-		: Operation{ expression }
-		, _local{ local }
-	{
-	}
-
-	static inline const Ptr fin_(const Ptr& expression, const Ptr& local)
-	{
-		return fake_<Creation>(expression, local);
-	}
-
-	virtual inline const Ptr cat_() const override
-	{
-		static const Ptr CAT = Cat::fin_("<strange::Creation>");
-		return CAT;
-	}
-
-protected:
-	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
-	{
-		return static_<Expression>(_expression)->evaluate_(_expression, _local->copy_());
-	}
-
-private:
-	const Ptr _local;
 };
 
 //----------------------------------------------------------------------
@@ -2589,9 +2556,8 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 		const Ptr it = shoal->at_("&");
 
 		const Ptr new_shared = Shoal::Concurrent::mut_();
-		Shoal::Concurrent* const capture_shared = static_<Shoal::Concurrent>(new_shared);
 		const Ptr new_local = Shoal::mut_();
-		Shoal* const capture_local = static_<Shoal>(new_local);
+		Shoal* const creation_local = static_<Shoal>(new_local);
 		const Ptr new_it = stop_();
 
 		const std::size_t size_1 = vec.size() - 1;
@@ -2609,14 +2575,14 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 				// check cat
 				if (!Cat::check_(value, cat))
 				{
-					throw _stack_("creator captured wrong kind of thing");
+					throw _stack_("creator passed wrong kind of thing");
 				}
 			}
-			capture_local->update_(param, value->clone_freeze_());
+			creation_local->update_(param, value->clone_freeze_());
 		}
-		capture_local->insert_("$", new_shared);
-		capture_local->insert_("&", new_it);
-		return Creation::fin_(vec[size_1], new_local);
+		creation_local->insert_("$", new_shared);
+		creation_local->insert_("&", new_it);
+		return Expression::evaluate_(vec[size_1], new_local);
 	}
 	catch (const std::exception& err)
 	{
@@ -2650,6 +2616,13 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 			}
 			_merge_(i == size_1, creation, result);
 		}
+		Shoal* const params = static_<Shoal>(local);
+		params->erase_("$");
+		params->erase_("&");
+		for (const auto& p : params->get_())
+		{
+			result->update_(p.first, Fixed::fin_(Expression::fin_(_token, p.second)));
+		}
 		return res;
 	}
 	catch (const std::exception& err)
@@ -2676,10 +2649,6 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 
 //======================================================================
 // class Extraction
-//======================================================================
-
-//======================================================================
-// class Creation
 //======================================================================
 
 //======================================================================

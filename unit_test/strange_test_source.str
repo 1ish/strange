@@ -14,17 +14,17 @@
 		{
 			'cat'::extraction_()
 			(
-				$$strange::Cat::fin['<Arithmetic[' + T + ']>']
+				$$strange::Cat::fin['<Arithmetic[' + (|.T['add','']) + ']>']
 			),
 			'mut'::function_()
 			(
-				$$strange::Creature::mut[$$Arithmetic["1"]["2"]]
+				$$strange::Creature::mut[$$Arithmetic[<Type>]]
 			),
 			'addition'::extraction_(<strange::Number> a, <strange::Number> b)
 			(
 				a+b
 			),
-			'f':#T,
+			'f':#"flake",
 			'_m':%"_mlake",
 			'v':*"vlake",
 			'c':~<strange::Thing[<C>,<>]>.cat[],
@@ -39,6 +39,7 @@
 	out.write[ar.v, "\n"],
 	ar.c := "nlake",
 	out.write[ar.c, "\n"],
+	out.write[ar.T, "\n"],
 	out.write[ar.cat[], "\n"],
 	y := $$f[x+1],
 	z := (s@['f'])[y],

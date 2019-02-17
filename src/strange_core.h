@@ -8953,6 +8953,7 @@ inline const Thing::Ptr Cat::pub_() const
 	{
 		const Ptr pub = Symbol::pub_()->copy_();
 		Shoal* const shoal = static_<Shoal>(pub);
+		shoal->update_("fin", Static::fin_(&Cat::fin, "symbol"));
 		shoal->update_("lak", Static::fin_(&Cat::lak, "lake"));
 		shoal->update_("riv", Static::fin_(&Cat::riv, "river"));
 		shoal->update_("rwl", Static::fin_(&Cat::rwl, "river"));
