@@ -55,6 +55,7 @@ inline void Thing::share_(const Ptr& shoal)
 
 	// strange_core
 	Symbol::share_(shoal);
+	Cat::share_(shoal);
 	Shoal::share_(shoal);
 	Shoal::Concurrent::share_(shoal);
 	Flock::share_(shoal);

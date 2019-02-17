@@ -852,6 +852,17 @@ public:
 		return fake_<Cat>(std::forward<F>(symbol));
 	}
 
+	static inline const Ptr fin(const Ptr& it)
+	{
+		const Ptr symbol = it->next_();
+		Symbol* const s = dynamic_<Symbol>(symbol);
+		if (s)
+		{
+			return fin_(s->get_());
+		}
+		throw Disagreement("strange::Cat::fin passed wrong category of thing");
+	}
+
 	static inline const Ptr lak_(const Ptr& lake);
 
 	static inline const Ptr lak(const Ptr& it)
@@ -8916,6 +8927,7 @@ inline const Thing::Ptr Cat::rwl_(const Ptr& river)
 inline void Cat::share_(const Ptr& shoal)
 {
 	Shoal* const s = static_<Shoal>(shoal);
+	s->update_("strange::Cat::fin", Static::fin_(&Cat::fin, "symbol"));
 	s->update_("strange::Cat::lak", Static::fin_(&Cat::lak, "lake"));
 	s->update_("strange::Cat::riv", Static::fin_(&Cat::riv, "river"));
 	s->update_("strange::Cat::rwl", Static::fin_(&Cat::rwl, "river"));

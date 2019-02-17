@@ -8,15 +8,16 @@
 		(
 			a+2
 		),
-		'Arithmetic'::function_()creation_()
+		'Arithmetic'::function_(<strange::Cat> T)creation_()
 		{
-			'cat'::function_()
+			'T':#T,
+			'cat'::extraction_()
 			(
-				<Arithmetic>
+				$$strange::Cat::fin['<Arithmetic[' + (|.T) + ']>']
 			),
 			'mut'::function_()
 			(
-				$$strange::Creature::mut[$$Arithmetic[]]
+				$$strange::Creature::mut[$$Arithmetic[<x>]]
 			),
 			'addition'::extraction_(<strange::Number> a, <strange::Number> b)
 			(
@@ -37,6 +38,7 @@
 	out.write[ar.v, "\n"],
 	ar.c := "nlake",
 	out.write[ar.c, "\n"],
+	out.write[ar.cat[], "\n"],
 	y := $$f[x+1],
 	z := (s@['f'])[y],
 	z := s@'f'[y],
