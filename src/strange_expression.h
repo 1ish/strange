@@ -433,18 +433,31 @@ private:
 		Ptr cat;
 		if (derived)
 		{
-			cat = creation->at_("cat")->invoke_();
+			const Ptr cat_fun = creation->at_("cat");
+			if (cat_fun->is_nothing_())
+			{
+				throw Disagreement("creation merge cat is missing");
+			}
+			cat = cat_fun->invoke_();
 			if (!dynamic_<Cat>(cat))
 			{
 				throw Disagreement("creation merge cat is not a cat");
 			}
 		}
-		const Ptr cats = creation->at_("cats")->invoke_();
-		if (!dynamic_<Herd>(cats))
+
+		Ptr cats;
+		const Ptr cats_fun = creation->at_("cats");
+		if (!cats_fun->is_nothing_())
 		{
-			throw Disagreement("creation merge cats are not a herd");
+			cats = cats_fun->invoke_();
+			if (!dynamic_<Herd>(cats))
+			{
+				throw Disagreement("creation merge cats are not a herd");
+			}
 		}
+
 		Herd* const herd = static_<Herd>(result->at_("cats")->invoke_());
+
 		for (const auto& it : creation->get_())
 		{
 			const Ptr key = it.first;
@@ -464,7 +477,10 @@ private:
 			}
 			else if (symbol->is_("cats"))
 			{
-				herd->self_add_(cats);
+				if (cats)
+				{
+					herd->self_add_(cats);
+				}
 			}
 			else if (derived && symbol->get_()[0] == '_')
 			{

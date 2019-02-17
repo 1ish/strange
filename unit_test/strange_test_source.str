@@ -10,13 +10,17 @@
 		),
 		'Arithmetic'::function_()creation_()
 		{
+			'cat'::function_()
+			(
+				<Arithmetic>
+			),
 			'mut'::function_()
 			(
 				$$strange::Creature::mut[$$Arithmetic[]]
 			),
 			'addition'::extraction_(<strange::Number> a, <strange::Number> b)
 			(
-				a+b+(|._mem[])
+				a+b
 			),
 			'f':#"flake",
 			'_m':%"_mlake",
