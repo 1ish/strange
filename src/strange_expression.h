@@ -96,10 +96,6 @@ public:
 		{
 			return static_<Flock>(_flock)->get_()[0];
 		}
-		if (_member == &Expression::_shoal_)
-		{
-			return immediate_(me_()); //TODO can we evaluate this later?
-		}
 		return nothing_();
 	}
 
@@ -425,6 +421,8 @@ private:
 			throw _stack_(err.what());
 		}
 	}
+
+	inline const Ptr _creator_(const Ptr& local) const;
 
 	inline const Ptr _creation_(const Ptr& local) const;
 
@@ -1100,15 +1098,15 @@ class Creation : public Operation
 //----------------------------------------------------------------------
 {
 public:
-	inline Creation(const Ptr& expression)
+	inline Creation(const Ptr& expression, const Ptr& local)
 		: Operation{ expression }
-		, _shared{ Shoal::Concurrent::mut_() }
+		, _local{ local }
 	{
 	}
 
-	static inline const Ptr fin_(const Ptr& expression)
+	static inline const Ptr fin_(const Ptr& expression, const Ptr& local)
 	{
-		return fake_<Creation>(expression);
+		return fake_<Creation>(expression, local);
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -1120,15 +1118,11 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-		const Ptr local = Shoal::mut_();
-		Shoal* const loc = static_<Shoal>(local);
-		loc->insert_("$", _shared);
-		loc->insert_("&", it);
-		return static_<Expression>(_expression)->evaluate_(_expression, local);
+		return static_<Expression>(_expression)->evaluate_(_expression, _local->copy_());
 	}
 
 private:
-	const Ptr _shared;
+	const Ptr _local;
 };
 
 //----------------------------------------------------------------------
@@ -2202,6 +2196,14 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 		}
 		throw Disagreement("function_ expression of wrong size");
 	}
+	else if (statement->is_("creator_"))
+	{
+		if (size % 3 == 1) // <cat> param := default
+		{
+			return fin_(token, statement, &Expression::_creator_, flock);
+		}
+		throw Disagreement("creator_ expression of wrong size");
+	}
 	else if (statement->is_("creation_"))
 	{
 		if (size >= 1) // creation ..
@@ -2571,6 +2573,50 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 		}
 		capture_local->insert_("$", new_shared);
 		return Closure::fin_(vec[size_1], new_local);
+	}
+	catch (const std::exception& err)
+	{
+		throw _stack_(err.what());
+	}
+}
+
+inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
+{
+	try
+	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+		Shoal* const shoal = static_<Shoal>(local);
+		const Ptr it = shoal->at_("&");
+
+		const Ptr new_shared = Shoal::Concurrent::mut_();
+		Shoal::Concurrent* const capture_shared = static_<Shoal::Concurrent>(new_shared);
+		const Ptr new_local = Shoal::mut_();
+		Shoal* const capture_local = static_<Shoal>(new_local);
+		const Ptr new_it = stop_();
+
+		const std::size_t size_1 = vec.size() - 1;
+		for (std::size_t i = 0; i < size_1; i += 3)
+		{
+			const Ptr cat = vec[i];
+			const Ptr param = vec[i + 1];
+			Ptr value = it->next_();
+			if (value->is_stop_())
+			{
+				value = Expression::evaluate_(vec[i + 2], local);
+			}
+			if (!cat->is_nothing_())
+			{
+				// check cat
+				if (!Cat::check_(value, cat))
+				{
+					throw _stack_("creator captured wrong kind of thing");
+				}
+			}
+			capture_local->update_(param, value->clone_freeze_());
+		}
+		capture_local->insert_("$", new_shared);
+		capture_local->insert_("&", new_it);
+		return Creation::fin_(vec[size_1], new_local);
 	}
 	catch (const std::exception& err)
 	{

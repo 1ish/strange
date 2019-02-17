@@ -211,9 +211,9 @@ private:
 					}
 					else if (symbol->is_("creator_"))
 					{
-						if (_statement_(scope, shoal, fixed, flock, true, false, true)) // cat parameters
+						if (_statement_(scope, shoal, fixed, flock, true)) // cat parameters
 						{
-							if (flk->size_() % 3 == 0) //TODO <cat> := default
+							if (flk->size_() % 3 == 0) // <cat> param := default
 							{
 								const Ptr nested = Flock::mut_();
 								Flock* const nst = static_<Flock>(nested);
@@ -221,7 +221,7 @@ private:
 								{
 									nst->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
 									flk->push_back_(Expression::fin_(token, sym_("creation_"), nested));
-									result = Expression::fin_(token, symbol, flock);
+									result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
 									continue;
 								}
 								throw tok->error_("Parser ERROR: invalid creator_ creation_");
@@ -470,7 +470,7 @@ private:
 					{
 						result = _scope_(scope, shoal, flock, symbol->is_("**"));
 					}
-					else if (false) //TODO container
+					else if (false) //TODO container?
 					{
 						std::string container = static_<Symbol>(scope)->get_();
 						const std::size_t pos = container.rfind("::");
@@ -975,7 +975,7 @@ private:
 		}
 	}
 
-	inline const bool _statement_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock, const bool parameters = false, const bool capture = false, const bool cats = false)
+	inline const bool _statement_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock, const bool parameters = false, const bool capture = false)
 	{
 		const Ptr token = _token_();
 		if (token->is_stop_())
