@@ -250,24 +250,7 @@ private:
 
 	inline const Ptr _set_attribute_(const Ptr& local) const;
 
-	inline const Ptr _public_(const Ptr& local) const
-	{
-		try
-		{
-			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			const Ptr thing = Expression::evaluate_(vec[0], local);
-			const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
-			if (member->is_nothing_())
-			{
-				throw Dismemberment(thing->cat_(), vec[1]);
-			}
-			return Method::fin_(thing, member);
-		}
-		catch (const std::exception& err)
-		{
-			throw _stack_(err.what());
-		}
-	}
+	inline const Ptr _public_(const Ptr& local) const;
 
 	inline const Ptr _operate_(const Ptr& local) const
 	{
@@ -2336,6 +2319,30 @@ inline const Thing::Ptr Expression::_set_attribute_(const Ptr& local) const
 	}
 }
 
+inline const Thing::Ptr Expression::_public_(const Ptr& local) const
+{
+	try
+	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+		const Ptr thing = Expression::evaluate_(vec[0], local);
+		const Ptr member = static_<Shoal>(thing->pub_())->at_(vec[1]);
+		if (member->is_nothing_())
+		{
+			throw Dismemberment(thing->cat_(), vec[1]);
+		}
+		const auto attribute = dynamic_<Attribute>(member);
+		if (attribute)
+		{
+			return attribute->get_();
+		}
+		return Method::fin_(thing, member);
+	}
+	catch (const std::exception& err)
+	{
+		throw _stack_(err.what());
+	}
+}
+
 inline const Thing::Ptr Expression::_set_intimate_(const Ptr& local) const
 {
 	try
@@ -2379,6 +2386,11 @@ inline const Thing::Ptr Expression::_private_(const Ptr& local) const
 		if (member->is_nothing_())
 		{
 			throw Dismemberment(thing->cat_(), static_<Flock>(_flock)->get_()[0]);
+		}
+		const auto attribute = dynamic_<Attribute>(member);
+		if (attribute)
+		{
+			return attribute->get_();
 		}
 		return Method::fin_(thing, member);
 	}
