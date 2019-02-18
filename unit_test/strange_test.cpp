@@ -33,8 +33,8 @@ TEST(StrangeThing, Mutilation) {
 
 TEST(StrangeRiver, Get) {
 	const Ptr river = River::mut_(test_dir + "strange_test_source.str", true);
-	River* const r = Thing::dynamic_<River>(river);
-	ASSERT_NE(r, (River*)(0));
+	const auto r = Thing::dynamic_<River>(river);
+	ASSERT_NE(r, std::shared_ptr<River>(0));
 	EXPECT_EQ(r->good_(), true);
 	while (r->good_())
 	{
@@ -51,8 +51,8 @@ TEST(StrangeRiver, Get) {
 
 TEST(StrangeRiver, Out) {
 	const Ptr river = River::out_();
-	River* const r = Thing::dynamic_<River>(river);
-	ASSERT_NE(r, (River*)(0));
+	const auto r = Thing::dynamic_<River>(river);
+	ASSERT_NE(r, std::shared_ptr<River>(0));
 	EXPECT_EQ(r->good_(), true);
 	r->write_("river out\n");
 }
@@ -60,15 +60,15 @@ TEST(StrangeRiver, Out) {
 TEST(StrangeTokenizer, Next) {
 	const Ptr river = River::mut_(test_dir + "strange_test_source.str", true);
 	const Ptr tokenizer = Tokenizer::mut_(river);
-	Tokenizer* const t = Thing::dynamic_<Tokenizer>(tokenizer);
-	ASSERT_NE(t, (Tokenizer*)(0));
+	const auto t = Thing::dynamic_<Tokenizer>(tokenizer);
+	ASSERT_NE(t, std::shared_ptr<Tokenizer>(0));
 	EXPECT_EQ(t->good_(), true);
 	for (Ptr n = tokenizer->next_(); !n->is_stop_(); n = tokenizer->next_())
 	{
-		Token* const token = Thing::dynamic_<Token>(n);
-		ASSERT_NE(token, (Token*)(0));
-		Symbol* const symbol = Thing::dynamic_<Symbol>(token->symbol());
-		ASSERT_NE(symbol, (Symbol*)(0));
+		const auto token = Thing::dynamic_<Token>(n);
+		ASSERT_NE(token, std::shared_ptr<Token>(0));
+		const auto symbol = Thing::dynamic_<Symbol>(token->symbol());
+		ASSERT_NE(symbol, std::shared_ptr<Symbol>(0));
 #ifdef STRANGE_TEST_VERBOSE
 		std::cout << "got: " << symbol->get_() << std::endl;
 #endif
@@ -80,8 +80,8 @@ TEST(StrangeParser, HelloWorld) {
 	const Ptr tokenizer = Tokenizer::mut_(river);
 	const Ptr parser = Parser::mut_(tokenizer);
 	const Ptr expression = Thing::dynamic_<Parser>(parser)->parse_();
-	Expression* const exp = Thing::dynamic_<Expression>(expression);
-	ASSERT_NE(exp, (Expression*)(0));
+	const auto exp = Thing::dynamic_<Expression>(expression);
+	ASSERT_NE(exp, std::shared_ptr<Expression>(0));
 	std::string error;
 	try
 	{
@@ -107,8 +107,8 @@ TEST(StrangeParser, TokenError) {
 	catch (const Ptr& err)
 	{
 		const Ptr to_lake = err->invoke_("to_lake");
-		Lake* const lake = Thing::dynamic_<Lake>(to_lake);
-		ASSERT_NE(lake, (Lake*)(0));
+		const auto lake = Thing::dynamic_<Lake>(to_lake);
+		ASSERT_NE(lake, std::shared_ptr<Lake>(0));
 		error = lake->get_();
 		std::cout << error << std::endl;
 	}
@@ -127,8 +127,8 @@ TEST(StrangeParser, ParseError) {
 	catch (const Ptr& err)
 	{
 		const Ptr to_lake = err->invoke_("to_lake");
-		Lake* const lake = Thing::dynamic_<Lake>(to_lake);
-		ASSERT_NE(lake, (Lake*)(0));
+		const auto lake = Thing::dynamic_<Lake>(to_lake);
+		ASSERT_NE(lake, std::shared_ptr<Lake>(0));
 		error = lake->get_();
 		std::cout << error << std::endl;
 	}
@@ -140,8 +140,8 @@ TEST(StrangeParser, EvaluateError) {
 	const Ptr tokenizer = Tokenizer::mut_(river);
 	const Ptr parser = Parser::mut_(tokenizer);
 	const Ptr expression = Thing::dynamic_<Parser>(parser)->parse_();
-	Expression* const exp = Thing::dynamic_<Expression>(expression);
-	ASSERT_NE(exp, (Expression*)(0));
+	const auto exp = Thing::dynamic_<Expression>(expression);
+	ASSERT_NE(exp, std::shared_ptr<Expression>(0));
 	std::string error;
 	try
 	{
@@ -150,7 +150,7 @@ TEST(StrangeParser, EvaluateError) {
 	catch (const Ptr& thing)
 	{
 		const Ptr to_lake = thing->invoke_("to_lake");
-		Lake* const lake = Thing::dynamic_<Lake>(to_lake);
+		const auto lake = Thing::dynamic_<Lake>(to_lake);
 		if (lake)
 		{
 			error = lake->get_();
@@ -178,15 +178,15 @@ TEST(StrangeParser, Evaluate) {
 	catch (const Ptr& err)
 	{
 		const Ptr to_lake = err->invoke_("to_lake");
-		Lake* const lake = Thing::dynamic_<Lake>(to_lake);
-		ASSERT_NE(lake, (Lake*)(0));
+		const auto lake = Thing::dynamic_<Lake>(to_lake);
+		ASSERT_NE(lake, std::shared_ptr<Lake>(0));
 		error = lake->get_();
 		std::cout << error << std::endl;
 	}
 	ASSERT_EQ(error, "");
 
-	Expression* const exp = Thing::dynamic_<Expression>(expression);
-	ASSERT_NE(exp, (Expression*)(0));
+	const auto exp = Thing::dynamic_<Expression>(expression);
+	ASSERT_NE(exp, std::shared_ptr<Expression>(0));
 	try
 	{
 		const Ptr result = Expression::immediate_(expression);
@@ -199,7 +199,7 @@ TEST(StrangeParser, Evaluate) {
 	catch (const Ptr& thing)
 	{
 		const Ptr to_lake = thing->invoke_("to_lake");
-		Lake* const lake = Thing::dynamic_<Lake>(to_lake);
+		const auto lake = Thing::dynamic_<Lake>(to_lake);
 		if (lake)
 		{
 			error = lake->get_();

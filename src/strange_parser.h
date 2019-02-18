@@ -47,7 +47,7 @@ public:
 
 	inline const bool good_()
 	{
-		Tokenizer* const tokenizer = dynamic_<Tokenizer>(_tokenizer);
+		const auto tokenizer = dynamic_<Tokenizer>(_tokenizer);
 		if (tokenizer)
 		{
 			return tokenizer->good_();
@@ -57,7 +57,7 @@ public:
 
 	inline const Ptr good(const Ptr& ignore)
 	{
-		Tokenizer* const tokenizer = dynamic_<Tokenizer>(_tokenizer);
+		const auto tokenizer = dynamic_<Tokenizer>(_tokenizer);
 		if (tokenizer)
 		{
 			return tokenizer->good(ignore);
@@ -396,7 +396,7 @@ private:
 								const Ptr it = flock->iterator_();
 								for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 								{
-									Lake* const lake = dynamic_<Lake>(Expression::immediate_(i)->invoke_("to_lake"));
+									const auto lake = dynamic_<Lake>(Expression::immediate_(i)->invoke_("to_lake"));
 									if (!lake)
 									{
 										throw tok->error_("Parser ERROR: invalid import_ filename");
@@ -1454,7 +1454,7 @@ private:
 			else
 			{
 				const Ptr add_scope_symbol = Expression::immediate_(add_scope);
-				Symbol* const add_scope_sym = dynamic_<Symbol>(add_scope_symbol);
+				const auto add_scope_sym = dynamic_<Symbol>(add_scope_symbol);
 				const Ptr new_scope = add_scope_sym
 					? ( scope->is_nothing_()
 						? add_scope_symbol

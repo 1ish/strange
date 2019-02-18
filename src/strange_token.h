@@ -192,7 +192,7 @@ public:
 	inline const Ptr error_(const Ptr& err) const
 	{
 		const Ptr to_lake = err->invoke_("to_lake");
-		Lake* const lake = dynamic_<Lake>(to_lake);
+		const auto lake = dynamic_<Lake>(to_lake);
 		if (lake)
 		{
 			return error_(lake->get_());

@@ -79,19 +79,24 @@ public:
 	}
 
 	template <typename T>
-	static inline T* const dynamic_(const Ptr& ptr) // TODO const std::shared_ptr<T>
+	static inline const std::shared_ptr<T> dynamic_(const Ptr& ptr)
 	{
-		T* const t = dynamic_cast<T*>(ptr.get());
-		if (t)
+		const auto t = std::dynamic_pointer_cast<T>(ptr);
+		if (!t)
 		{
-			return t;
+			const auto attribute = std::dynamic_pointer_cast<Attribute>(ptr);
+			if (attribute)
+			{
+				return std::dynamic_pointer_cast<T>(attribute->get_());
+			}
 		}
-		Attribute* const attribute = dynamic_cast<Attribute*>(ptr.get());
-		if (attribute)
-		{
-			return dynamic_cast<T*>(attribute->get_().get());
-		}
-		return nullptr;
+		return t;
+	}
+
+	template <>
+	static inline const std::shared_ptr<Attribute> dynamic_<Attribute>(const Ptr& ptr)
+	{
+		return std::dynamic_pointer_cast<Attribute>(ptr);
 	}
 
 	static inline const Ptr& boolean_(const bool value)
@@ -855,7 +860,7 @@ public:
 	static inline const Ptr fin(const Ptr& it)
 	{
 		const Ptr symbol = it->next_();
-		Symbol* const s = dynamic_<Symbol>(symbol);
+		const auto s = dynamic_<Symbol>(symbol);
 		if (s)
 		{
 			return fin_(s->get_());
@@ -2596,7 +2601,7 @@ public:
 
 	inline void self_add_(const Ptr& other)
 	{
-		Herd* const herd = dynamic_<Herd>(other);
+		const auto herd = dynamic_<Herd>(other);
 		if (herd)
 		{
 			if (&_set == &herd->_set)
@@ -2617,7 +2622,7 @@ public:
 		}
 		else
 		{
-			Shoal* const shoal = dynamic_<Shoal>(other);
+			const auto shoal = dynamic_<Shoal>(other);
 			if (shoal)
 			{
 				for (const auto& i : shoal->get_())
@@ -2627,7 +2632,7 @@ public:
 			}
 			else
 			{
-				Flock* const flock = dynamic_<Flock>(other);
+				const auto flock = dynamic_<Flock>(other);
 				if (flock)
 				{
 					for (auto i : flock->get_())
@@ -2672,7 +2677,7 @@ public:
 
 	inline void self_subtract_(const Ptr& other)
 	{
-		Herd* const herd = dynamic_<Herd>(other);
+		const auto herd = dynamic_<Herd>(other);
 		if (herd)
 		{
 			for (auto i : herd->_set)
@@ -2682,7 +2687,7 @@ public:
 		}
 		else
 		{
-			Shoal* const shoal = dynamic_<Shoal>(other);
+			const auto shoal = dynamic_<Shoal>(other);
 			if (shoal)
 			{
 				for (const auto& i : shoal->get_())
@@ -2692,7 +2697,7 @@ public:
 			}
 			else
 			{
-				Flock* const flock = dynamic_<Flock>(other);
+				const auto flock = dynamic_<Flock>(other);
 				if (flock)
 				{
 					for (auto i : flock->get_())
@@ -3352,7 +3357,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("Lake::from_lake_ passed wrong category of thing");
@@ -3396,14 +3401,14 @@ public:
 
 	inline void self_add_(const Ptr& other)
 	{
-		Lake* const lake = dynamic_<Lake>(other);
+		const auto lake = dynamic_<Lake>(other);
 		if (lake)
 		{
 			self_add_(lake->get_());
 		}
 		else
 		{
-			Symbol* const symbol = dynamic_<Symbol>(other);
+			const auto symbol = dynamic_<Symbol>(other);
 			if (symbol)
 			{
 				self_add_(symbol->get_());
@@ -3440,12 +3445,12 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Lake* const lake = dynamic_<Lake>(other);
+		const auto lake = dynamic_<Lake>(other);
 		if (lake)
 		{
 			return get_() == lake->get_();
 		}
-		Symbol* const symbol = dynamic_<Symbol>(other);
+		const auto symbol = dynamic_<Symbol>(other);
 		return symbol && (get_() == symbol->get_());
 	}
 
@@ -3965,7 +3970,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("Bit::from_lake_ passed wrong category of thing");
@@ -4014,7 +4019,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			set_(std::stoull(symbol->get_()) & 1);
@@ -4039,7 +4044,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			bool& b = ref_();
@@ -4053,7 +4058,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number && (number->to_int64_() & 1))
 		{
 			bool& b = ref_();
@@ -4067,7 +4072,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			bool& b = ref_();
@@ -4081,7 +4086,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -4098,7 +4103,7 @@ public:
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -4115,7 +4120,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
 	}
 
@@ -4126,7 +4131,7 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() < number->to_int64_();
@@ -4136,7 +4141,7 @@ public:
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() > number->to_int64_();
@@ -4146,7 +4151,7 @@ public:
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() <= number->to_int64_();
@@ -4156,7 +4161,7 @@ public:
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() >= number->to_int64_();
@@ -4284,7 +4289,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("Int8::from_lake_ passed wrong category of thing");
@@ -4333,7 +4338,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			set_(D(std::stoll(symbol->get_())));
@@ -4356,7 +4361,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() + number->to_int64_());
@@ -4369,7 +4374,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() - number->to_int64_());
@@ -4382,7 +4387,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
@@ -4395,7 +4400,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -4412,7 +4417,7 @@ public:
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -4429,7 +4434,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
 	}
 
@@ -4440,7 +4445,7 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() < number->to_int64_();
@@ -4450,7 +4455,7 @@ public:
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() > number->to_int64_();
@@ -4460,7 +4465,7 @@ public:
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() <= number->to_int64_();
@@ -4470,7 +4475,7 @@ public:
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() >= number->to_int64_();
@@ -4598,7 +4603,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("UInt8::from_lake_ passed wrong category of thing");
@@ -4647,7 +4652,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			set_(D(std::stoull(symbol->get_())));
@@ -4670,7 +4675,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() + number->to_int64_());
@@ -4683,7 +4688,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() - number->to_int64_());
@@ -4696,7 +4701,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
@@ -4709,7 +4714,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -4726,7 +4731,7 @@ public:
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -4743,7 +4748,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
 	}
 
@@ -4754,7 +4759,7 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() < number->to_int64_();
@@ -4764,7 +4769,7 @@ public:
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() > number->to_int64_();
@@ -4774,7 +4779,7 @@ public:
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() <= number->to_int64_();
@@ -4784,7 +4789,7 @@ public:
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() >= number->to_int64_();
@@ -4915,7 +4920,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("Int16::from_lake_ passed wrong category of thing");
@@ -4967,7 +4972,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			set_(D(std::stoll(symbol->get_())));
@@ -4990,7 +4995,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() + number->to_int64_());
@@ -5003,7 +5008,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() - number->to_int64_());
@@ -5016,7 +5021,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
@@ -5029,7 +5034,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -5046,7 +5051,7 @@ public:
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -5063,7 +5068,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
 	}
 
@@ -5074,7 +5079,7 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() < number->to_int64_();
@@ -5084,7 +5089,7 @@ public:
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() > number->to_int64_();
@@ -5094,7 +5099,7 @@ public:
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() <= number->to_int64_();
@@ -5104,7 +5109,7 @@ public:
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() >= number->to_int64_();
@@ -5235,7 +5240,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("UInt16::from_lake_ passed wrong category of thing");
@@ -5287,7 +5292,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			set_(D(std::stoull(symbol->get_())));
@@ -5310,7 +5315,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() + number->to_int64_());
@@ -5323,7 +5328,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() - number->to_int64_());
@@ -5336,7 +5341,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
@@ -5349,7 +5354,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -5366,7 +5371,7 @@ public:
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -5383,7 +5388,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
 	}
 
@@ -5394,7 +5399,7 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() < number->to_int64_();
@@ -5404,7 +5409,7 @@ public:
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() > number->to_int64_();
@@ -5414,7 +5419,7 @@ public:
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() <= number->to_int64_();
@@ -5424,7 +5429,7 @@ public:
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() >= number->to_int64_();
@@ -5557,7 +5562,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("Int32::from_lake_ passed wrong category of thing");
@@ -5611,7 +5616,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			set_(D(std::stoll(symbol->get_())));
@@ -5634,7 +5639,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() + number->to_int64_());
@@ -5647,7 +5652,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() - number->to_int64_());
@@ -5660,7 +5665,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
@@ -5673,7 +5678,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -5690,7 +5695,7 @@ public:
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -5707,7 +5712,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
 	}
 
@@ -5718,7 +5723,7 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() < number->to_int64_();
@@ -5728,7 +5733,7 @@ public:
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() > number->to_int64_();
@@ -5738,7 +5743,7 @@ public:
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() <= number->to_int64_();
@@ -5748,7 +5753,7 @@ public:
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() >= number->to_int64_();
@@ -5881,7 +5886,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("UInt32::from_lake_ passed wrong category of thing");
@@ -5935,7 +5940,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			set_(D(std::stoull(symbol->get_())));
@@ -5958,7 +5963,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() + number->to_int64_());
@@ -5971,7 +5976,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() - number->to_int64_());
@@ -5984,7 +5989,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_int64_(to_int64_() * number->to_int64_());
@@ -5997,7 +6002,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -6014,7 +6019,7 @@ public:
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -6031,7 +6036,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (to_int64_() == number->to_int64_());
 	}
 
@@ -6042,7 +6047,7 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() < number->to_int64_();
@@ -6052,7 +6057,7 @@ public:
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() > number->to_int64_();
@@ -6062,7 +6067,7 @@ public:
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() <= number->to_int64_();
@@ -6072,7 +6077,7 @@ public:
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_int64_() >= number->to_int64_();
@@ -6209,7 +6214,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("Int64::from_lake_ passed wrong category of thing");
@@ -6267,7 +6272,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			set_(D(std::stoll(symbol->get_())));
@@ -6290,7 +6295,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			ref_() += number->to_int64_();
@@ -6303,7 +6308,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			ref_() -= number->to_int64_();
@@ -6316,7 +6321,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			ref_() *= number->to_int64_();
@@ -6329,7 +6334,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -6346,7 +6351,7 @@ public:
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t divisor = number->to_int64_();
@@ -6363,7 +6368,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (get_() == number->to_int64_());
 	}
 
@@ -6374,7 +6379,7 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return get_() < number->to_int64_();
@@ -6384,7 +6389,7 @@ public:
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return get_() > number->to_int64_();
@@ -6394,7 +6399,7 @@ public:
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return get_() <= number->to_int64_();
@@ -6404,7 +6409,7 @@ public:
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return get_() >= number->to_int64_();
@@ -6541,7 +6546,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("UInt64::from_lake_ passed wrong category of thing");
@@ -6599,7 +6604,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			set_(D(std::stoull(symbol->get_())));
@@ -6622,14 +6627,14 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		UInt64* const uint64 = dynamic_<UInt64>(other);
+		const auto uint64 = dynamic_<UInt64>(other);
 		if (uint64)
 		{
 			ref_() += uint64->get_();
 		}
 		else
 		{
-			Number* const number = dynamic_<Number>(other);
+			const auto number = dynamic_<Number>(other);
 			if (number)
 			{
 				ref_() += number->to_int64_();
@@ -6643,14 +6648,14 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		UInt64* const uint64 = dynamic_<UInt64>(other);
+		const auto uint64 = dynamic_<UInt64>(other);
 		if (uint64)
 		{
 			ref_() -= uint64->get_();
 		}
 		else
 		{
-			Number* const number = dynamic_<Number>(other);
+			const auto number = dynamic_<Number>(other);
 			if (number)
 			{
 				ref_() -= number->to_int64_();
@@ -6664,14 +6669,14 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		UInt64* const uint64 = dynamic_<UInt64>(other);
+		const auto uint64 = dynamic_<UInt64>(other);
 		if (uint64)
 		{
 			ref_() *= uint64->get_();
 		}
 		else
 		{
-			Number* const number = dynamic_<Number>(other);
+			const auto number = dynamic_<Number>(other);
 			if (number)
 			{
 				ref_() *= number->to_int64_();
@@ -6685,7 +6690,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		UInt64* const uint64 = dynamic_<UInt64>(other);
+		const auto uint64 = dynamic_<UInt64>(other);
 		if (uint64)
 		{
 			const D divisor = uint64->get_();
@@ -6696,7 +6701,7 @@ public:
 		}
 		else
 		{
-			Number* const number = dynamic_<Number>(other);
+			const auto number = dynamic_<Number>(other);
 			if (number)
 			{
 				const int64_t divisor = number->to_int64_();
@@ -6714,7 +6719,7 @@ public:
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		UInt64* const uint64 = dynamic_<UInt64>(other);
+		const auto uint64 = dynamic_<UInt64>(other);
 		if (uint64)
 		{
 			const D divisor = uint64->get_();
@@ -6725,7 +6730,7 @@ public:
 		}
 		else
 		{
-			Number* const number = dynamic_<Number>(other);
+			const auto number = dynamic_<Number>(other);
 			if (number)
 			{
 				const int64_t divisor = number->to_int64_();
@@ -6743,12 +6748,12 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		UInt64* const uint64 = dynamic_<UInt64>(other);
+		const auto uint64 = dynamic_<UInt64>(other);
 		if (uint64)
 		{
 			return get_() == uint64->get_();
 		}
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t int64 = number->to_int64_();
@@ -6764,12 +6769,12 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		UInt64* const uint64 = dynamic_<UInt64>(other);
+		const auto uint64 = dynamic_<UInt64>(other);
 		if (uint64)
 		{
 			return (get_() < uint64->get_());
 		}
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t int64 = number->to_int64_();
@@ -6780,12 +6785,12 @@ public:
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		UInt64* const uint64 = dynamic_<UInt64>(other);
+		const auto uint64 = dynamic_<UInt64>(other);
 		if (uint64)
 		{
 			return (get_() > uint64->get_());
 		}
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t int64 = number->to_int64_();
@@ -6796,12 +6801,12 @@ public:
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		UInt64* const uint64 = dynamic_<UInt64>(other);
+		const auto uint64 = dynamic_<UInt64>(other);
 		if (uint64)
 		{
 			return (get_() <= uint64->get_());
 		}
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t int64 = number->to_int64_();
@@ -6812,12 +6817,12 @@ public:
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		UInt64* const uint64 = dynamic_<UInt64>(other);
+		const auto uint64 = dynamic_<UInt64>(other);
 		if (uint64)
 		{
 			return (get_() >= uint64->get_());
 		}
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const int64_t int64 = number->to_int64_();
@@ -6952,7 +6957,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("Float32::from_lake_ passed wrong category of thing");
@@ -7006,7 +7011,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			set_(std::stof(symbol->get_()));
@@ -7029,7 +7034,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_float64_(to_float64_() + number->to_float64_());
@@ -7042,7 +7047,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_float64_(to_float64_() - number->to_float64_());
@@ -7055,7 +7060,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_float64_(to_float64_() * number->to_float64_());
@@ -7068,7 +7073,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const double divisor = number->to_float64_();
@@ -7085,7 +7090,7 @@ public:
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const double divisor = number->to_float64_();
@@ -7102,7 +7107,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (to_float64_() == number->to_float64_());
 	}
 
@@ -7113,7 +7118,7 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_float64_() < number->to_float64_();
@@ -7123,7 +7128,7 @@ public:
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_float64_() > number->to_float64_();
@@ -7133,7 +7138,7 @@ public:
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_float64_() <= number->to_float64_();
@@ -7143,7 +7148,7 @@ public:
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return to_float64_() >= number->to_float64_();
@@ -7281,7 +7286,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("Float64::from_lake_ passed wrong category of thing");
@@ -7339,7 +7344,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			set_(std::stod(symbol->get_()));
@@ -7362,7 +7367,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			ref_() += number->to_float64_();
@@ -7375,7 +7380,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			ref_() -= number->to_float64_();
@@ -7388,7 +7393,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			ref_() *= number->to_float64_();
@@ -7401,7 +7406,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const double divisor = number->to_float64_();
@@ -7418,7 +7423,7 @@ public:
 
 	virtual inline void self_modulo_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			const double divisor = number->to_float64_();
@@ -7436,7 +7441,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (get_() == number->to_float64_());
 	}
 
@@ -7447,7 +7452,7 @@ public:
 
 	virtual inline const bool less_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return get_() < number->to_float64_();
@@ -7457,7 +7462,7 @@ public:
 
 	virtual inline const bool greater_than_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return get_() > number->to_float64_();
@@ -7467,7 +7472,7 @@ public:
 
 	virtual inline const bool less_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return get_() <= number->to_float64_();
@@ -7477,7 +7482,7 @@ public:
 
 	virtual inline const bool greater_or_equal_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			return get_() >= number->to_float64_();
@@ -7625,7 +7630,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("Complex32::from_lake_ passed wrong category of thing");
@@ -7704,7 +7709,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			std::stringstream str(symbol->get_());
@@ -7732,7 +7737,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_complex64_(to_complex64_() + number->to_complex64_());
@@ -7745,7 +7750,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_complex64_(to_complex64_() - number->to_complex64_());
@@ -7758,7 +7763,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_complex64_(to_complex64_() * number->to_complex64_());
@@ -7771,7 +7776,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			from_complex64_(to_complex64_() / number->to_complex64_());
@@ -7789,7 +7794,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (to_complex64_() == number->to_complex64_());
 	}
 
@@ -7969,7 +7974,7 @@ public:
 
 	virtual inline void from_lake_(const Ptr& lake) override
 	{
-		Lake* const lak = dynamic_<Lake>(lake);
+		const auto lak = dynamic_<Lake>(lake);
 		if (!lak)
 		{
 			throw Disagreement("Complex64::from_lake_ passed wrong category of thing");
@@ -8056,7 +8061,7 @@ public:
 
 	virtual inline void from_symbol_(const Ptr& ptr) override
 	{
-		Symbol* const symbol = dynamic_<Symbol>(ptr);
+		const auto symbol = dynamic_<Symbol>(ptr);
 		if (symbol)
 		{
 			std::stringstream str(symbol->get_());
@@ -8084,7 +8089,7 @@ public:
 
 	virtual inline void self_add_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			ref_() += number->to_complex64_();
@@ -8097,7 +8102,7 @@ public:
 
 	virtual inline void self_subtract_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			ref_() -= number->to_complex64_();
@@ -8110,7 +8115,7 @@ public:
 
 	virtual inline void self_multiply_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			ref_() *= number->to_complex64_();
@@ -8123,7 +8128,7 @@ public:
 
 	virtual inline void self_divide_(const Ptr& other) override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		if (number)
 		{
 			ref_() /= number->to_complex64_();
@@ -8141,7 +8146,7 @@ public:
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		Number* const number = dynamic_<Number>(other);
+		const auto number = dynamic_<Number>(other);
 		return number && (get_() == number->to_complex64_());
 	}
 
@@ -8212,7 +8217,7 @@ public:
 			return mut_();
 		}
 		const Ptr str_to_lake = str->invoke_("to_lake");
-		const Lake* const lake = dynamic_<Lake>(str_to_lake);
+		const auto lake = dynamic_<Lake>(str_to_lake);
 		if (!lake)
 		{
 			return mut_();
@@ -8372,7 +8377,7 @@ public:
 	inline void write_(const Ptr& ptr)
 	{
 		const Ptr ptr_to_lake = ptr->invoke_("to_lake");
-		Lake* const lake = dynamic_<Lake>(ptr_to_lake);
+		const auto lake = dynamic_<Lake>(ptr_to_lake);
 		if (lake)
 		{
 			write_(lake->get_());
@@ -8499,7 +8504,7 @@ inline const bool Thing::is_(const std::string& str) const
 
 inline const bool Thing::is_(const Ptr& symbol) const
 {
-	Symbol* const sym = dynamic_<Symbol>(symbol);
+	const auto sym = dynamic_<Symbol>(symbol);
 	return sym && is_(sym->get_());
 }
 
@@ -8660,7 +8665,7 @@ inline const Thing::Ptr Serializable::deserialize_(const Thing::Ptr& river)
 inline void Serializable::to_river_(const Thing::Ptr& river) const
 {
 	const Thing::Ptr to_lake = to_lake_();
-	Lake* const lake = Thing::dynamic_<Lake>(to_lake);
+	const auto lake = Thing::dynamic_<Lake>(to_lake);
 	if (lake)
 	{
 		lake->to_river_(river);
@@ -8689,7 +8694,7 @@ inline const Thing::Ptr Serializable::to_lake_via_river_() const
 
 inline void Serializable::from_lake_via_river_(const Thing::Ptr& lake)
 {
-	Lake* const lak = Thing::dynamic_<Lake>(lake);
+	const auto lak = Thing::dynamic_<Lake>(lake);
 	if (!lak)
 	{
 		throw Thing::Disagreement("Serializable::from_lake_via_river_ passed wrong category of thing");
@@ -8718,23 +8723,23 @@ inline const Thing::Ptr Serializable::cats_()
 
 inline const bool Symbol::same_(const Ptr& other) const
 {
-	Symbol* const symbol = dynamic_<Symbol>(other);
+	const auto symbol = dynamic_<Symbol>(other);
 	if (symbol)
 	{
 		return get_() == symbol->get_();
 	}
-	Lake* const lake = dynamic_<Lake>(other);
+	const auto lake = dynamic_<Lake>(other);
 	return lake && (get_() == lake->get_());
 }
 
 inline const bool Symbol::less_than_(const Ptr& other) const
 {
-	Symbol* const symbol = dynamic_<Symbol>(other);
+	const auto symbol = dynamic_<Symbol>(other);
 	if (symbol)
 	{
 		return get_() < symbol->get_();
 	}
-	Lake* const lake = dynamic_<Lake>(other);
+	const auto lake = dynamic_<Lake>(other);
 	if (lake)
 	{
 		return get_() < lake->get_();
@@ -8744,12 +8749,12 @@ inline const bool Symbol::less_than_(const Ptr& other) const
 
 inline const bool Symbol::greater_than_(const Ptr& other) const
 {
-	Symbol* const symbol = dynamic_<Symbol>(other);
+	const auto symbol = dynamic_<Symbol>(other);
 	if (symbol)
 	{
 		return get_() > symbol->get_();
 	}
-	Lake* const lake = dynamic_<Lake>(other);
+	const auto lake = dynamic_<Lake>(other);
 	if (lake)
 	{
 		return get_() > lake->get_();
@@ -8759,12 +8764,12 @@ inline const bool Symbol::greater_than_(const Ptr& other) const
 
 inline const bool Symbol::less_or_equal_(const Ptr& other) const
 {
-	Symbol* const symbol = dynamic_<Symbol>(other);
+	const auto symbol = dynamic_<Symbol>(other);
 	if (symbol)
 	{
 		return get_() <= symbol->get_();
 	}
-	Lake* const lake = dynamic_<Lake>(other);
+	const auto lake = dynamic_<Lake>(other);
 	if (lake)
 	{
 		return get_() <= lake->get_();
@@ -8774,12 +8779,12 @@ inline const bool Symbol::less_or_equal_(const Ptr& other) const
 
 inline const bool Symbol::greater_or_equal_(const Ptr& other) const
 {
-	Symbol* const symbol = dynamic_<Symbol>(other);
+	const auto symbol = dynamic_<Symbol>(other);
 	if (symbol)
 	{
 		return get_() >= symbol->get_();
 	}
-	Lake* const lake = dynamic_<Lake>(other);
+	const auto lake = dynamic_<Lake>(other);
 	if (lake)
 	{
 		return get_() >= lake->get_();
@@ -8820,7 +8825,7 @@ inline void Symbol::share_(const Ptr& shoal)
 
 inline const Thing::Ptr Symbol::lak_(const Ptr& lake)
 {
-	Lake* const lak = dynamic_<Lake>(lake);
+	const auto lak = dynamic_<Lake>(lake);
 	if (!lak)
 	{
 		throw Disagreement("Symbol::lak_ passed wrong category of thing");
@@ -8868,12 +8873,12 @@ inline const Thing::Ptr Symbol::cats_() const
 
 inline const Thing::Ptr Symbol::add_(const Ptr& other) const
 {
-	Symbol* const symbol = dynamic_<Symbol>(other);
+	const auto symbol = dynamic_<Symbol>(other);
 	if (symbol)
 	{
 		return add_(symbol->_symbol);
 	}
-	Lake* const lake = dynamic_<Lake>(other);
+	const auto lake = dynamic_<Lake>(other);
 	if (lake)
 	{
 		return add_(lake->get_());
@@ -8887,7 +8892,7 @@ inline const Thing::Ptr Symbol::add_(const Ptr& other) const
 
 inline const char Symbol::at_(const Ptr& index) const
 {
-	Number* const ind = dynamic_<Number>(index);
+	const auto ind = dynamic_<Number>(index);
 	if (ind)
 	{
 		return at_(ind->to_int64_());
@@ -8906,7 +8911,7 @@ inline const Thing::Ptr Symbol::at(const Ptr& it) const
 
 inline const Thing::Ptr Cat::lak_(const Ptr& lake)
 {
-	Lake* const lak = dynamic_<Lake>(lake);
+	const auto lak = dynamic_<Lake>(lake);
 	if (!lak)
 	{
 		throw Disagreement("Cat::lak_ passed wrong category of thing");
@@ -9007,7 +9012,7 @@ inline const Thing::Ptr Const<T>::eater_() const
 
 inline void Shoal::to_river_(const Ptr& river) const
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Shoal::to_river_ passed wrong category of thing");
@@ -9023,7 +9028,7 @@ inline void Shoal::to_river_(const Ptr& river) const
 
 inline void Shoal::from_river_(const Ptr& river)
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Shoal::from_river_ passed wrong category of thing");
@@ -9043,12 +9048,12 @@ inline void Shoal::from_river_(const Ptr& river)
 
 inline void Shoal::to_river_with_links_(const Ptr& shoal, const Ptr& river) const
 {
-	Shoal* const sho = dynamic_<Shoal>(shoal);
+	const auto sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
 		throw Disagreement("Shoal::to_river_with_links_ passed wrong category of shoal thing");
 	}
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Shoal::to_river_with_links_ passed wrong category of river thing");
@@ -9064,7 +9069,7 @@ inline void Shoal::to_river_with_links_(const Ptr& shoal, const Ptr& river) cons
 
 inline void Shoal::from_river_with_links_(const Ptr& river)
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Shoal::from_river_with_links_ passed wrong category of thing");
@@ -9095,7 +9100,7 @@ inline void Shoal::replace_links_(const Ptr& shoal)
 
 inline void Shoal::gather_to_river_(const Ptr& thing, const Ptr& river)
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Shoal::gather_to_river_ passed wrong category of river thing");
@@ -9113,7 +9118,7 @@ inline void Shoal::gather_to_river_(const Ptr& thing, const Ptr& river)
 
 inline const Thing::Ptr Shoal::gather_from_river_(const Ptr& river)
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Shoal::gather_from_river_ passed wrong category of river thing");
@@ -9138,7 +9143,7 @@ inline const Thing::Ptr Shoal::size(const Ptr& ignore) const
 
 inline void Shoal::self_add_(const Ptr& other)
 {
-	Shoal* const shoal = dynamic_<Shoal>(other);
+	const auto shoal = dynamic_<Shoal>(other);
 	if (shoal)
 	{
 		if (&_map == &shoal->_map)
@@ -9159,7 +9164,7 @@ inline void Shoal::self_add_(const Ptr& other)
 	}
 	else
 	{
-		Herd* const herd = dynamic_<Herd>(other);
+		const auto herd = dynamic_<Herd>(other);
 		if (herd)
 		{
 			for (auto i : herd->get_())
@@ -9169,7 +9174,7 @@ inline void Shoal::self_add_(const Ptr& other)
 		}
 		else
 		{
-			Flock* const flock = dynamic_<Flock>(other);
+			const auto flock = dynamic_<Flock>(other);
 			if (flock)
 			{
 				const Ptr index = Int64::mut_();
@@ -9197,7 +9202,7 @@ inline void Shoal::self_add_(const Ptr& other)
 
 inline void Shoal::self_subtract_(const Ptr& other)
 {
-	Shoal* const shoal = dynamic_<Shoal>(other);
+	const auto shoal = dynamic_<Shoal>(other);
 	if (shoal)
 	{
 		if (&_map == &shoal->_map)
@@ -9214,7 +9219,7 @@ inline void Shoal::self_subtract_(const Ptr& other)
 	}
 	else
 	{
-		Herd* const herd = dynamic_<Herd>(other);
+		const auto herd = dynamic_<Herd>(other);
 		if (herd)
 		{
 			for (auto i : herd->get_())
@@ -9224,7 +9229,7 @@ inline void Shoal::self_subtract_(const Ptr& other)
 		}
 		else
 		{
-			Flock* const flock = dynamic_<Flock>(other);
+			const auto flock = dynamic_<Flock>(other);
 			if (flock)
 			{
 				for (auto i : flock->get_())
@@ -9313,7 +9318,7 @@ inline const Thing::Ptr Flock::size(const Ptr& ignore) const
 
 inline const Thing::Ptr Flock::at_(const Ptr& pos) const
 {
-	Number* const number = dynamic_<Number>(pos);
+	const auto number = dynamic_<Number>(pos);
 	if (number)
 	{
 		return at_(number->to_int64_());
@@ -9323,7 +9328,7 @@ inline const Thing::Ptr Flock::at_(const Ptr& pos) const
 
 inline void Flock::update_(const Ptr& pos, const Ptr& value)
 {
-	Number* const number = dynamic_<Number>(pos);
+	const auto number = dynamic_<Number>(pos);
 	if (number)
 	{
 		update_(number->to_int64_(), value);
@@ -9336,7 +9341,7 @@ inline void Flock::update_(const Ptr& pos, const Ptr& value)
 
 inline void Flock::insert_(const Ptr& pos, const Ptr& value)
 {
-	Number* const number = dynamic_<Number>(pos);
+	const auto number = dynamic_<Number>(pos);
 	if (number)
 	{
 		insert_(number->to_int64_(), value);
@@ -9349,7 +9354,7 @@ inline void Flock::insert_(const Ptr& pos, const Ptr& value)
 
 inline void Flock::erase_(const Ptr& pos)
 {
-	Number* const number = dynamic_<Number>(pos);
+	const auto number = dynamic_<Number>(pos);
 	if (number)
 	{
 		erase_(number->to_int64_());
@@ -9362,7 +9367,7 @@ inline void Flock::erase_(const Ptr& pos)
 
 inline void Flock::self_add_(const Ptr& other)
 {
-	Flock* const flock = dynamic_<Flock>(other);
+	const auto flock = dynamic_<Flock>(other);
 	if (flock)
 	{
 		if (&_vector == &flock->_vector)
@@ -9377,14 +9382,14 @@ inline void Flock::self_add_(const Ptr& other)
 	}
 	else
 	{
-		Herd* const herd = dynamic_<Herd>(other);
+		const auto herd = dynamic_<Herd>(other);
 		if (herd)
 		{
 			_vector.insert(_vector.end(), herd->get_().cbegin(), herd->get_().cend());
 		}
 		else
 		{
-			Shoal* const shoal = dynamic_<Shoal>(other);
+			const auto shoal = dynamic_<Shoal>(other);
 			if (shoal)
 			{
 				for (const auto& i : shoal->get_())
@@ -9411,7 +9416,7 @@ inline const Thing::Ptr Flock::Concurrent::size(const Ptr& ignore) const
 
 inline const Thing::Ptr Flock::Concurrent::at_(const Ptr& pos) const
 {
-	Number* const number = dynamic_<Number>(pos);
+	const auto number = dynamic_<Number>(pos);
 	if (number)
 	{
 		const int64_t p = number->to_int64_();
@@ -9430,7 +9435,7 @@ inline const Thing::Ptr Flock::Concurrent::at_(const Ptr& pos) const
 
 inline void Flock::to_river_(const Ptr& river) const
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Flock::to_river_ passed wrong category of thing");
@@ -9445,7 +9450,7 @@ inline void Flock::to_river_(const Ptr& river) const
 
 inline void Flock::from_river_(const Ptr& river)
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Flock::from_river_ passed wrong category of thing");
@@ -9465,12 +9470,12 @@ inline void Flock::from_river_(const Ptr& river)
 
 inline void Flock::to_river_with_links_(const Ptr& shoal, const Ptr& river) const
 {
-	Shoal* const sho = dynamic_<Shoal>(shoal);
+	const auto sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
 		throw Disagreement("Flock::to_river_with_links_ passed wrong category of shoal thing");
 	}
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Flock::to_river_with_links_ passed wrong category of river thing");
@@ -9485,7 +9490,7 @@ inline void Flock::to_river_with_links_(const Ptr& shoal, const Ptr& river) cons
 
 inline void Flock::from_river_with_links_(const Ptr& river)
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Flock::from_river_with_links_ passed wrong category of thing");
@@ -9547,7 +9552,7 @@ inline const Thing::Ptr Flock::Iterator::cats_() const
 
 inline void Herd::to_river_(const Ptr& river) const
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Herd::to_river_ passed wrong category of thing");
@@ -9562,7 +9567,7 @@ inline void Herd::to_river_(const Ptr& river) const
 
 inline void Herd::from_river_(const Ptr& river)
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Herd::from_river_ passed wrong category of thing");
@@ -9580,12 +9585,12 @@ inline void Herd::from_river_(const Ptr& river)
 
 inline void Herd::to_river_with_links_(const Ptr& shoal, const Ptr& river) const
 {
-	Shoal* const sho = dynamic_<Shoal>(shoal);
+	const auto sho = dynamic_<Shoal>(shoal);
 	if (!sho)
 	{
 		throw Disagreement("Herd::to_river_with_links_ passed wrong category of shoal thing");
 	}
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Herd::to_river_with_links_ passed wrong category of river thing");
@@ -9600,7 +9605,7 @@ inline void Herd::to_river_with_links_(const Ptr& shoal, const Ptr& river) const
 
 inline void Herd::from_river_with_links_(const Ptr& river)
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Herd::from_river_with_links_ passed wrong category of thing");
@@ -9654,7 +9659,7 @@ inline const Thing::Ptr Herd::size(const Ptr& ignore) const
 
 inline void Lake::to_river_(const Ptr& river) const
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Lake::to_river_ passed wrong category of thing");
@@ -9666,7 +9671,7 @@ inline void Lake::to_river_(const Ptr& river) const
 
 inline void Lake::from_river_(const Ptr& river)
 {
-	River* const riv = dynamic_<River>(river);
+	const auto riv = dynamic_<River>(river);
 	if (!riv)
 	{
 		throw Disagreement("Lake::from_river_ passed wrong category of thing");
@@ -9682,7 +9687,7 @@ inline void Lake::from_river_(const Ptr& river)
 
 inline const char Lake::at_(const Ptr& index) const
 {
-	Number* const ind = dynamic_<Number>(index);
+	const auto ind = dynamic_<Number>(index);
 	if (ind)
 	{
 		return at_(ind->to_int64_());
@@ -9697,10 +9702,10 @@ inline const Thing::Ptr Lake::at(const Ptr& it) const
 
 inline void Lake::update_(const Ptr& index, const Ptr& byte)
 {
-	Number* const ind = dynamic_<Number>(index);
+	const auto ind = dynamic_<Number>(index);
 	if (ind)
 	{
-		Number* const byt = dynamic_<Number>(byte);
+		const auto byt = dynamic_<Number>(byte);
 		if (byt)
 		{
 			update_(ind->to_int64_(), byt->to_int64_());
@@ -9714,12 +9719,12 @@ inline void Lake::update_(const Ptr& index, const Ptr& byte)
 
 inline const bool Lake::less_than_(const Ptr& other) const
 {
-	Lake* const lake = dynamic_<Lake>(other);
+	const auto lake = dynamic_<Lake>(other);
 	if (lake)
 	{
 		return get_() < lake->get_();
 	}
-	Symbol* const symbol = dynamic_<Symbol>(other);
+	const auto symbol = dynamic_<Symbol>(other);
 	if (symbol)
 	{
 		return get_() < symbol->get_();
@@ -9729,12 +9734,12 @@ inline const bool Lake::less_than_(const Ptr& other) const
 
 inline const bool Lake::greater_than_(const Ptr& other) const
 {
-	Lake* const lake = dynamic_<Lake>(other);
+	const auto lake = dynamic_<Lake>(other);
 	if (lake)
 	{
 		return get_() > lake->get_();
 	}
-	Symbol* const symbol = dynamic_<Symbol>(other);
+	const auto symbol = dynamic_<Symbol>(other);
 	if (symbol)
 	{
 		return get_() > symbol->get_();
@@ -9744,12 +9749,12 @@ inline const bool Lake::greater_than_(const Ptr& other) const
 
 inline const bool Lake::less_or_equal_(const Ptr& other) const
 {
-	Lake* const lake = dynamic_<Lake>(other);
+	const auto lake = dynamic_<Lake>(other);
 	if (lake)
 	{
 		return get_() <= lake->get_();
 	}
-	Symbol* const symbol = dynamic_<Symbol>(other);
+	const auto symbol = dynamic_<Symbol>(other);
 	if (symbol)
 	{
 		return get_() <= symbol->get_();
@@ -9759,12 +9764,12 @@ inline const bool Lake::less_or_equal_(const Ptr& other) const
 
 inline const bool Lake::greater_or_equal_(const Ptr& other) const
 {
-	Lake* const lake = dynamic_<Lake>(other);
+	const auto lake = dynamic_<Lake>(other);
 	if (lake)
 	{
 		return get_() >= lake->get_();
 	}
-	Symbol* const symbol = dynamic_<Symbol>(other);
+	const auto symbol = dynamic_<Symbol>(other);
 	if (symbol)
 	{
 		return get_() >= symbol->get_();
@@ -9783,7 +9788,7 @@ inline const Thing::Ptr Number::to_int64(const Ptr& ignore) const
 
 inline void Number::from_int64_(const Ptr& ptr)
 {
-	Int64* const int64 = dynamic_<Int64>(ptr);
+	const auto int64 = dynamic_<Int64>(ptr);
 	if (int64)
 	{
 		from_int64_(int64->get_());
@@ -9801,7 +9806,7 @@ inline const Thing::Ptr Number::to_float64(const Ptr& ignore) const
 
 inline void Number::from_float64_(const Ptr& ptr)
 {
-	Float64* const float64 = dynamic_<Float64>(ptr);
+	const auto float64 = dynamic_<Float64>(ptr);
 	if (float64)
 	{
 		from_float64_(float64->get_());
@@ -9819,7 +9824,7 @@ inline const Thing::Ptr Number::to_imaginary64(const Ptr& ignore) const
 
 inline void Number::from_imaginary64_(const Ptr& ptr)
 {
-	Float64* const float64 = dynamic_<Float64>(ptr);
+	const auto float64 = dynamic_<Float64>(ptr);
 	if (float64)
 	{
 		from_imaginary64_(float64->get_());
@@ -9837,7 +9842,7 @@ inline const Thing::Ptr Number::to_complex64(const Ptr& ignore) const
 
 inline void Number::from_complex64_(const Ptr& ptr)
 {
-	Complex64* const complex64 = dynamic_<Complex64>(ptr);
+	const auto complex64 = dynamic_<Complex64>(ptr);
 	if (complex64)
 	{
 		from_complex64_(complex64->get_());

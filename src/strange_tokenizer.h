@@ -45,7 +45,7 @@ public:
 
 	inline const bool good_()
 	{
-		River* const river = dynamic_<River>(_river);
+		const auto river = dynamic_<River>(_river);
 		if (river)
 		{
 			return river->good_();
@@ -55,7 +55,7 @@ public:
 
 	inline const Ptr good(const Ptr& ignore)
 	{
-		River* const river = dynamic_<River>(_river);
+		const auto river = dynamic_<River>(_river);
 		if (river)
 		{
 			return river->good(ignore);
@@ -65,7 +65,7 @@ public:
 
 	virtual inline const Ptr next_() override
 	{
-		River* const river = dynamic_<River>(_river);
+		const auto river = dynamic_<River>(_river);
 		bool alphanumeric = false;
 		bool numeric = false;
 		bool point = false;
@@ -136,7 +136,7 @@ public:
 					{
 						break;
 					}
-					Int8* const byte1 = dynamic_<Int8>(river_get);
+					const auto byte1 = dynamic_<Int8>(river_get);
 					if (!byte1)
 					{
 						break;
@@ -145,7 +145,7 @@ public:
 					++_x;
 				}
 				const Ptr river_peek = _river->invoke_("peek");
-				Int8* const byte2 = good_() ? dynamic_<Int8>(river_peek) : 0;
+				const auto byte2 = dynamic_<Int8>(good_() ? river_peek : Ptr());
 				char2 = byte2 ? byte2->get_() : 0;
 			}
 

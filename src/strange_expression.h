@@ -112,7 +112,7 @@ private:
 			std::to_string(stack) + ": " + static_<Symbol>(_statement)->get_(),
 			misunderstanding);
 		const Ptr parent = static_<Weak>(_parent)->get_();
-		Expression* const p = dynamic_<Expression>(parent);
+		const auto p = dynamic_<Expression>(parent);
 		if (p)
 		{
 			p->_stack_("", stack + 1, misunderstanding);
@@ -441,7 +441,7 @@ private:
 		for (const auto& it : creation->get_())
 		{
 			const Ptr key = it.first;
-			Symbol* const symbol = dynamic_<Symbol>(key);
+			const auto symbol = dynamic_<Symbol>(key);
 			if (!symbol)
 			{
 				throw Disagreement("creation merge key is not a symbol");
@@ -611,7 +611,7 @@ private:
 			{
 				const Ptr thing = Expression::evaluate_(vec[i], local);
 				const Ptr to_lake = thing->invoke_("to_lake");
-				Lake* const lake = Thing::dynamic_<Lake>(to_lake);
+				const auto lake = Thing::dynamic_<Lake>(to_lake);
 				if (lake)
 				{
 					error += lake->get_();
@@ -1908,7 +1908,7 @@ private:
 		{
 			Flock* const flock = static_<Flock>(i);
 			const Ptr first = flock->at_(0);
-			Symbol* const symbol = dynamic_<Symbol>(first);
+			const auto symbol = dynamic_<Symbol>(first);
 			if (symbol && symbol->get_()[0] != '_')
 			{
 				r->update_(first, flock->at_(1));
@@ -1929,14 +1929,14 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	const Ptr it = flock->iterator_();
 	for (Ptr sub = it->next_(); !sub->is_stop_(); sub = it->next_())
 	{
-		Expression* const e = dynamic_<Expression>(sub);
+		const auto e = dynamic_<Expression>(sub);
 		if (e)
 		{
 			e->parent_(exp);
 		}
 		else
 		{
-			Operation* const op = dynamic_<Operation>(sub);
+			const auto op = dynamic_<Operation>(sub);
 			if (op)
 			{
 				op->parent_(exp);
@@ -2621,12 +2621,12 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 		for (std::size_t i = 0; i <= size_1; ++i)
 		{
 			const Ptr shoal = Expression::evaluate_(vec[i], local);
-			Shoal* const creation = dynamic_<Shoal>(shoal);
+			const auto creation = dynamic_<Shoal>(shoal);
 			if (!creation)
 			{
 				throw _stack_("creation_ passed wrong kind of thing");
 			}
-			_merge_(i == size_1, creation, result);
+			_merge_(i == size_1, creation.get(), result);
 		}
 		Shoal* const params = static_<Shoal>(local);
 		params->erase_("$");
