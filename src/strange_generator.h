@@ -34,7 +34,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("mut", Static::fin_(&Generator::mut, "river"));
 			shoal->update_("set", Member<Generator>::fin_(&Generator::set, "river"));
 			shoal->update_("get", Const<Generator>::fin_(&Generator::get));
@@ -49,7 +49,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Generator::mut", Static::fin_(&Generator::mut, "river"));
 	}
 
@@ -137,7 +137,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->insert_(Generator::cat_());
 			herd->finalize_();

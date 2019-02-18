@@ -88,7 +88,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("mut", Static::fin_(&Token::mut, "filename", "x", "y", "tag", "symbol", "value"));
 			shoal->update_("filename", Const<Token>::fin_(&Token::filename));
 			shoal->update_("x", Const<Token>::fin_(&Token::x));
@@ -105,7 +105,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Token::mut", Static::fin_(&Token::mut, "filename", "x", "y", "tag", "symbol", "value"));
 	}
 
@@ -171,7 +171,7 @@ public:
 
 	inline const Ptr error_(const std::string& err, const Ptr& misunderstanding = Misunderstanding::mut_()) const
 	{
-		Misunderstanding* const m = static_<Misunderstanding>(misunderstanding);
+		const auto m = static_<Misunderstanding>(misunderstanding);
 		m->self_add_(err);
 		const std::string filename = filename_();
 		if (!filename.empty())
@@ -216,7 +216,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->insert_(Token::cat_());
 			herd->finalize_();

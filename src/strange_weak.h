@@ -48,7 +48,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("mut", Static::fin_(&Weak::mut, "thing"));
 			shoal->update_("set", Member<Weak>::fin_(&Weak::set, "thing"));
 			shoal->update_("get", Const<Weak>::fin_(&Weak::get));
@@ -60,7 +60,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Weak::mut", Static::fin_(&Weak::mut, "thing"));
 	}
 
@@ -102,7 +102,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->insert_(Weak::cat_());
 			herd->finalize_();
@@ -154,7 +154,7 @@ private:
 			static const Ptr PUB = [this]()
 			{
 				const Ptr pub = Thing::pub_()->copy_();
-				Shoal* const shoal = static_<Shoal>(pub);
+				const auto shoal = static_<Shoal>(pub);
 				shoal->update_("mut", Static::fin_(&Iterator::mut, "thing"));
 				shoal->finalize_();
 				return pub;
@@ -173,7 +173,7 @@ private:
 			static const Ptr CATS = [this]()
 			{
 				const Ptr cats = Herd::mut_();
-				Herd* const herd = static_<Herd>(cats);
+				const auto herd = static_<Herd>(cats);
 				herd->self_add_(Stateful::cats_());
 				herd->insert_(Weak::Iterator::cat_());
 				herd->finalize_();

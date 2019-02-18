@@ -40,7 +40,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("mut", Static::fin_(&Misunderstanding::mut, "thing", ".."));
 			shoal->update_("self_add", Member<Misunderstanding>::fin_(&Misunderstanding::self_add, "thing", ".."));
 			shoal->update_("to_lake", Const<Misunderstanding>::fin_(&Misunderstanding::to_lake));
@@ -53,7 +53,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Misunderstanding::mut", Static::fin_(&Misunderstanding::mut, "thing", ".."));
 	}
 
@@ -107,7 +107,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->insert_(Misunderstanding::cat_());
 			herd->finalize_();

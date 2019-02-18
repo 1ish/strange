@@ -35,7 +35,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("mut", Static::fin_(&Tokenizer::mut, "river"));
 			shoal->finalize_();
 			return pub;
@@ -476,7 +476,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->insert_(Tokenizer::cat_());
 			herd->finalize_();

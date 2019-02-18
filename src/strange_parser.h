@@ -37,7 +37,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("mut", Static::fin_(&Parser::mut, "tokenizer"));
 			shoal->finalize_();
 			return pub;
@@ -85,7 +85,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->insert_(Parser::cat_());
 			herd->finalize_();
@@ -124,7 +124,7 @@ private:
 			{
 				break;
 			}
-			Token* const tok = static_<Token>(token);
+			const auto tok = static_<Token>(token);
 			const char tag = tok->tag_();
 			if (tag == 'E') // error
 			{
@@ -132,12 +132,12 @@ private:
 			}
 			const Ptr symbol = tok->symbol();
 			const Ptr flock = Flock::mut_();
-			Flock* const flk = static_<Flock>(flock);
+			const auto flk = static_<Flock>(flock);
 			static const Ptr local = sym_("local_");
 			static const Ptr invoke = sym_("invoke_");
 			static const Ptr at = sym_("at");
 			const Ptr statement = Reference::mut_(invoke);
-			Reference* const smt = static_<Reference>(statement);
+			const auto smt = static_<Reference>(statement);
 			if (first)
 			{
 				_next_();
@@ -154,7 +154,7 @@ private:
 							if (flk->size_() % 3 == 0) // <cat> param := capture
 							{
 								const Ptr nested = Flock::mut_();
-								Flock* const nst = static_<Flock>(nested);
+								const auto nst = static_<Flock>(nested);
 								if (_statement_(scope, shoal, fixed, nested, true)) // parameters
 								{
 									if (nst->size_() % 3 == 0) // <cat> param := default
@@ -216,7 +216,7 @@ private:
 							if (flk->size_() % 3 == 0) // <cat> param := default
 							{
 								const Ptr nested = Flock::mut_();
-								Flock* const nst = static_<Flock>(nested);
+								const auto nst = static_<Flock>(nested);
 								if (_statement_(scope, shoal, fixed, nested))
 								{
 									nst->push_back_(_parse_(scope, shoal, Herd::mut_(), false)); // create new 'fixed' scope
@@ -557,15 +557,15 @@ private:
 		{
 			return false; // break
 		}
-		Flock* const flk = static_<Flock>(flock);
-		Token* const tok = static_<Token>(token);
+		const auto flk = static_<Flock>(flock);
+		const auto tok = static_<Token>(token);
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
 			throw tok->error_("Tokenizer ERROR");
 		}
 		const Ptr symbol = tok->symbol();
-		Reference* const smt = static_<Reference>(statement);
+		const auto smt = static_<Reference>(statement);
 		if (tag == 'P') // punctuation
 		{
 			if (symbol->is_("."))
@@ -893,7 +893,7 @@ private:
 	inline void _dot_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& statement, const Ptr& flock, const bool me_dot)
 	{
 		const Ptr token = _token_();
-		Token* const tok = static_<Token>(token);
+		const auto tok = static_<Token>(token);
 		if (token->is_stop_())
 		{
 			throw tok->error_("Parser ERROR: dot stop");
@@ -912,7 +912,7 @@ private:
 			throw tok->error_("Parser ERROR: dot punctuation");
 		}
 		const Ptr symbol = tok->symbol();
-		Flock* const flk = static_<Flock>(flock);
+		const auto flk = static_<Flock>(flock);
 		if (tag == 'N') // name
 		{
 			_next_();
@@ -924,14 +924,14 @@ private:
 	inline void _member_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& statement, const Ptr& flock, const bool me_dot = false)
 	{
 		const Ptr token = _token_();
-		Reference* const smt = static_<Reference>(statement);
+		const auto smt = static_<Reference>(statement);
 		if (token->is_stop_())
 		{
 			smt->set_(sym_(me_dot ? "private_" : "public_"));
 			return;
 		}
-		Flock* const flk = static_<Flock>(flock);
-		Token* const tok = static_<Token>(token);
+		const auto flk = static_<Flock>(flock);
+		const auto tok = static_<Token>(token);
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
@@ -982,7 +982,7 @@ private:
 		{
 			return false; // not a statement
 		}
-		Token* const tok = static_<Token>(token);
+		const auto tok = static_<Token>(token);
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{
@@ -1000,14 +1000,14 @@ private:
 
 	inline void _list_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock, const Ptr& close, const bool parameters = false, const bool capture = false)
 	{
-		Flock* const flk = static_<Flock>(flock);
+		const auto flk = static_<Flock>(flock);
 		bool parameter = parameters || capture;
 		Ptr captured;
 		bool punctuation = false;
 		for (bool first = true; true; first = false)
 		{
 			const Ptr token = _token_();
-			Token* const tok = static_<Token>(token);
+			const auto tok = static_<Token>(token);
 			if (token->is_stop_())
 			{
 				throw tok->error_("Parser ERROR: open without close");
@@ -1161,7 +1161,7 @@ private:
 		std::string category = "<";
 		Ptr token;
 		const std::string name = static_<Symbol>(_scope_key_(token))->get_();
-		Token* tok = static_<Token>(token);
+		auto tok = static_<Token>(token);
 		category += name;
 
 		bool comma = false;
@@ -1266,12 +1266,12 @@ private:
 	inline const Ptr _cat_(const Ptr& flock, const bool capture)
 	{
 		// add cat and default/captured to flock, return captured
-		Flock* const flk = static_<Flock>(flock);
+		const auto flk = static_<Flock>(flock);
 
 		flk->push_back_(_cat_nest_());
 
 		const Ptr token = _token_();
-		Token* const tok = static_<Token>(token);
+		const auto tok = static_<Token>(token);
 		Ptr symbol;
 		if (token->is_stop_())
 		{
@@ -1314,7 +1314,7 @@ private:
 
 	inline const bool _map_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& flock)
 	{
-		Flock* const flk = static_<Flock>(flock);
+		const auto flk = static_<Flock>(flock);
 		bool is_map = false;
 		bool not_map = false;
 		bool empty = false;
@@ -1326,7 +1326,7 @@ private:
 		for (bool first = true; true; first = false)
 		{
 			const Ptr token = _token_();
-			Token* const tok = static_<Token>(token);
+			const auto tok = static_<Token>(token);
 			if (token->is_stop_())
 			{
 				throw tok->error_("Parser ERROR: { without }");
@@ -1496,7 +1496,7 @@ private:
 	inline const Ptr _name_(const Ptr& flock = Flock::mut_())
 	{
 		const Ptr token = _token_();
-		Token* const tok = static_<Token>(token);
+		const auto tok = static_<Token>(token);
 		if (token->is_stop_())
 		{
 			throw tok->error_("Parser ERROR: stop instead of name");
@@ -1527,7 +1527,7 @@ private:
 		Ptr token;
 		const Ptr key = _scope_key_(token);
 		const Ptr key_flock = Flock::mut_();
-		Flock* const key_flk = static_<Flock>(key_flock);
+		const auto key_flk = static_<Flock>(key_flock);
 		key_flk->push_back_(shoal);
 		key_flk->push_back_(key);
 		if (relative)
@@ -1549,7 +1549,7 @@ private:
 			{
 				break;
 			}
-			Token* const tok = static_<Token>(token);
+			const auto tok = static_<Token>(token);
 			const char tag = tok->tag_();
 			if (tag == 'E') // error
 			{
@@ -1604,8 +1604,8 @@ private:
 		{
 			return false; // break
 		}
-		Flock* const flk = static_<Flock>(flock);
-		Token* const tok = static_<Token>(token);
+		const auto flk = static_<Flock>(flock);
+		const auto tok = static_<Token>(token);
 		const char tag = tok->tag_();
 		if (tag == 'E') // error
 		{

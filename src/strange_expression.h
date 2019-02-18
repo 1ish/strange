@@ -60,14 +60,14 @@ public:
 
 	static inline const Ptr evaluate_(const Ptr& expression, const Ptr& local)
 	{
-		Expression* const exp = static_<Expression>(expression);
-		return (exp->*(exp->_member))(local);
+		const auto exp = static_<Expression>(expression);
+		return (exp.get()->*(exp->_member))(local);
 	}
 
 	static inline const Ptr immediate_(const Ptr& expression)
 	{
 		const Ptr local = Shoal::mut_();
-		Shoal* const loc = static_<Shoal>(local);
+		const auto loc = static_<Shoal>(local);
 		loc->update_("$", Shoal::Concurrent::mut_());
 		loc->update_("&", stop_());
 		return evaluate_(expression, local);
@@ -165,7 +165,7 @@ private:
 		try
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			Shoal::Concurrent* const shared = static_<Shoal::Concurrent>(static_<Shoal>(local)->at_("$"));
+			const auto shared = static_<Shoal::Concurrent>(static_<Shoal>(local)->at_("$"));
 			const Ptr key = vec[0];
 			const Ptr existing = shared->at_(key);
 			if (existing->is_nothing_())
@@ -368,7 +368,7 @@ private:
 		try
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			Shoal* const shoal = static_<Shoal>(local);
+			const auto shoal = static_<Shoal>(local);
 			const Ptr it = shoal->at_("&");
 			const std::size_t size_1 = vec.size() - 1;
 			for (std::size_t i = 0; i < size_1; i += 3)
@@ -436,7 +436,7 @@ private:
 			}
 		}
 
-		Herd* const herd = static_<Herd>(result->at_("cats")->invoke_());
+		const auto herd = static_<Herd>(result->at_("cats")->invoke_());
 
 		for (const auto& it : creation->get_())
 		{
@@ -488,7 +488,7 @@ private:
 	{
 		// search scope from bottom to top
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-		Shoal* const shoal = static_<Shoal>(vec[0]);
+		const auto shoal = static_<Shoal>(vec[0]);
 		const Ptr key = vec[1];
 		const std::string& key_str = static_<Symbol>(key)->get_();
 		std::string scope = static_<Symbol>(vec[2])->get_();
@@ -850,7 +850,7 @@ private:
 			static const Ptr CATS = [this]()
 			{
 				const Ptr cats = Herd::mut_();
-				Herd* const herd = static_<Herd>(cats);
+				const auto herd = static_<Herd>(cats);
 				herd->self_add_(Stateful::cats_());
 				herd->insert_(Expression::Iterator::cat_());
 				herd->finalize_();
@@ -953,7 +953,7 @@ protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
 		const Ptr local = Shoal::mut_();
-		Shoal* const loc = static_<Shoal>(local);
+		const auto loc = static_<Shoal>(local);
 		loc->insert_("$", _shared);
 		loc->insert_("&", it);
 		return static_<Expression>(_expression)->evaluate_(_expression, local);
@@ -1027,7 +1027,7 @@ protected:
 			throw Mutilation(thing->cat_());
 		}
 		const Ptr local = Shoal::mut_();
-		Shoal* const loc = static_<Shoal>(local);
+		const auto loc = static_<Shoal>(local);
 		loc->insert_("$", _shared);
 		loc->insert_("&", it);
 		loc->insert_("|", thing->me_());
@@ -1064,7 +1064,7 @@ protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
 		const Ptr local = Shoal::mut_();
-		Shoal* const loc = static_<Shoal>(local);
+		const auto loc = static_<Shoal>(local);
 		loc->insert_("$", _shared);
 		loc->insert_("&", it);
 		loc->insert_("|", thing->me_());
@@ -1283,7 +1283,7 @@ private:
 	inline void _init_(const Ptr& thing) const
 	{
 		const Ptr local = Shoal::mut_();
-		Shoal* const loc = static_<Shoal>(local);
+		const auto loc = static_<Shoal>(local);
 		loc->insert_("$", Shoal::Concurrent::mut_());
 		loc->insert_("&", stop_());
 		loc->insert_("|", thing);
@@ -1605,7 +1605,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Creature::mut", Static::fin_(&Creature::mut, "creator"));
 	}
 
@@ -1785,7 +1785,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
 			herd->insert_(Creature::cat_()); //TODO dynamic creature cat/cats
@@ -1901,12 +1901,12 @@ private:
 	static inline const Ptr _public_(const Ptr& pub, const Ptr& members)
 	{
 		const Ptr result = pub->copy_();
-		Shoal* const r = static_<Shoal>(result);
-		Shoal* const m = static_<Shoal>(members);
+		const auto r = static_<Shoal>(result);
+		const auto m = static_<Shoal>(members);
 		const Ptr it = m->iterator_();
 		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
-			Flock* const flock = static_<Flock>(i);
+			const auto flock = static_<Flock>(i);
 			const Ptr first = flock->at_(0);
 			const auto symbol = dynamic_<Symbol>(first);
 			if (symbol && symbol->get_()[0] != '_')
@@ -2523,9 +2523,9 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 		const Ptr new_shared = Shoal::Concurrent::mut_();
-		Shoal::Concurrent* const capture_shared = static_<Shoal::Concurrent>(new_shared);
+		const auto capture_shared = static_<Shoal::Concurrent>(new_shared);
 		const Ptr new_local = Shoal::mut_();
-		Shoal* const capture_local = static_<Shoal>(new_local);
+		const auto capture_local = static_<Shoal>(new_local);
 		const std::size_t size_1 = vec.size() - 1;
 		for (std::size_t i = 0; i < size_1; i += 3)
 		{
@@ -2564,12 +2564,12 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 	try
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-		Shoal* const shoal = static_<Shoal>(local);
+		const auto shoal = static_<Shoal>(local);
 		const Ptr it = shoal->at_("&");
 
 		const Ptr new_shared = Shoal::Concurrent::mut_();
 		const Ptr new_local = Shoal::mut_();
-		Shoal* const creation_local = static_<Shoal>(new_local);
+		const auto creation_local = static_<Shoal>(new_local);
 		const Ptr new_it = stop_();
 
 		const std::size_t size_1 = vec.size() - 1;
@@ -2608,10 +2608,10 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 		const Ptr res = Shoal::mut_();
-		Shoal* const result = static_<Shoal>(res);
+		const auto result = static_<Shoal>(res);
 
 		const Ptr flock = Flock::mut_();
-		Flock* const flk = static_<Flock>(flock);
+		const auto flk = static_<Flock>(flock);
 		flk->push_back_(one_());
 		flk->push_back_(Expression::fin_(_token, sym_("herd_"), Flock::mut_()));
 		const Ptr cats = Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock));
@@ -2626,9 +2626,9 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 			{
 				throw _stack_("creation_ passed wrong kind of thing");
 			}
-			_merge_(i == size_1, creation.get(), result);
+			_merge_(i == size_1, creation.get(), result.get());
 		}
-		Shoal* const params = static_<Shoal>(local);
+		const auto params = static_<Shoal>(local);
 		params->erase_("$");
 		params->erase_("&");
 		for (const auto& p : params->get_())

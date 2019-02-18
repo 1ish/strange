@@ -34,7 +34,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Generator::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("mut", Static::fin_(&CPPGenerator::mut, "river"));
 			shoal->finalize_();
 			return pub;
@@ -44,7 +44,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Generator::mut", Static::fin_(&CPPGenerator::mut, "river"));
 	}
 

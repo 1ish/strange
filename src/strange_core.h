@@ -64,18 +64,15 @@ public:
 
 	// public static utility functions
 	template <typename T>
-	static inline T* const static_(const Ptr& ptr) // TODO const std::shared_ptr<T>
+	static inline const std::shared_ptr<T> static_(const Ptr& ptr)
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
-		Thing* const thing = ptr.get();
-		if (!dynamic_cast<T*>(thing))
+		if (!std::dynamic_pointer_cast<T>(ptr))
 		{
 			throw Disagreement("bad static cast");
 		}
-		return static_cast<T*>(thing);
-#else
-		return static_cast<T*>(ptr.get());
 #endif
+		return std::static_pointer_cast<T>(ptr);
 	}
 
 	template <typename T>
@@ -1229,7 +1226,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<Shoal>::fin_(&Shoal::to_lake));
 			shoal->update_("from_lake", Member<Shoal>::fin_(&Shoal::from_lake, "lake"));
 			shoal->update_("to_river", Const<Shoal>::fin_(&Shoal::to_river, "river"));
@@ -1261,7 +1258,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Shoal::mut", Static::fin_(&Shoal::mut));
 		s->update_("strange::Shoal::lak", Static::fin_(&Shoal::lak, "lake"));
 		s->update_("strange::Shoal::riv", Static::fin_(&Shoal::riv, "river"));
@@ -1570,7 +1567,7 @@ public:
 			static const Ptr PUB = [this]()
 			{
 				const Ptr pub = Thing::pub_()->copy_();
-				Shoal* const shoal = static_<Shoal>(pub);
+				const auto shoal = static_<Shoal>(pub);
 				shoal->update_("at", Const<Concurrent>::fin_(&Concurrent::at, "key"));
 				shoal->update_("update", Member<Concurrent>::fin_(&Concurrent::update, "key", "value"));
 				shoal->update_("insert", Member<Concurrent>::fin_(&Concurrent::insert, "key", "value"));
@@ -1583,7 +1580,7 @@ public:
 
 		static inline void share_(const Ptr& shoal)
 		{
-			Shoal* const s = static_<Shoal>(shoal);
+			const auto s = static_<Shoal>(shoal);
 			s->update_("strange::Shoal::Concurrent::mut", Static::fin_(&Shoal::Concurrent::mut, "shoal"));
 		}
 
@@ -1844,7 +1841,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<Flock>::fin_(&Flock::to_lake));
 			shoal->update_("from_lake", Member<Flock>::fin_(&Flock::from_lake, "lake"));
 			shoal->update_("to_river", Const<Flock>::fin_(&Flock::to_river, "river"));
@@ -1872,7 +1869,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
 		s->update_("strange::Flock::lak", Static::fin_(&Flock::lak, "lake"));
 		s->update_("strange::Flock::riv", Static::fin_(&Flock::riv, "river"));
@@ -2150,7 +2147,7 @@ public:
 			static const Ptr PUB = [this]()
 			{
 				const Ptr pub = Thing::pub_()->copy_();
-				Shoal* const shoal = static_<Shoal>(pub);
+				const auto shoal = static_<Shoal>(pub);
 				shoal->update_("push_back", Member<Concurrent>::fin_(&Concurrent::push_back, "value"));
 				shoal->update_("size", Const<Concurrent>::fin_(&Concurrent::size));
 				shoal->update_("at", Const<Concurrent>::fin_(&Concurrent::at, "index"));
@@ -2163,7 +2160,7 @@ public:
 
 		static inline void share_(const Ptr& shoal)
 		{
-			Shoal* const s = static_<Shoal>(shoal);
+			const auto s = static_<Shoal>(shoal);
 			s->update_("strange::Flock::Concurrent::mut", Static::fin_(&Flock::Concurrent::mut, "flock"));
 		}
 
@@ -2406,7 +2403,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<Herd>::fin_(&Herd::to_lake));
 			shoal->update_("from_lake", Member<Herd>::fin_(&Herd::from_lake, "lake"));
 			shoal->update_("to_river", Const<Herd>::fin_(&Herd::to_river, "river"));
@@ -2436,7 +2433,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Herd::mut", Static::fin_(&Herd::mut));
 		s->update_("strange::Herd::lak", Static::fin_(&Herd::lak, "lake"));
 		s->update_("strange::Herd::riv", Static::fin_(&Herd::riv, "river"));
@@ -2760,7 +2757,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
 			herd->insert_(Herd::cat_());
@@ -2818,7 +2815,7 @@ public:
 			static const Ptr PUB = [this]()
 			{
 				const Ptr pub = Thing::pub_()->copy_();
-				Shoal* const shoal = static_<Shoal>(pub);
+				const auto shoal = static_<Shoal>(pub);
 				shoal->update_("at", Const<Concurrent>::fin_(&Concurrent::at, "key"));
 				shoal->update_("insert", Member<Concurrent>::fin_(&Concurrent::insert, "key"));
 				shoal->update_("mut", Static::fin_(&Concurrent::mut, "herd"));
@@ -2830,7 +2827,7 @@ public:
 
 		static inline void share_(const Ptr& shoal)
 		{
-			Shoal* const s = static_<Shoal>(shoal);
+			const auto s = static_<Shoal>(shoal);
 			s->update_("strange::Herd::Concurrent::mut", Static::fin_(&Herd::Concurrent::mut, "herd"));
 		}
 
@@ -2930,7 +2927,7 @@ private:
 			static const Ptr CATS = [this]()
 			{
 				const Ptr cats = Herd::mut_();
-				Herd* const herd = static_<Herd>(cats);
+				const auto herd = static_<Herd>(cats);
 				herd->self_add_(Stateful::cats_());
 				herd->insert_(Herd::Iterator::cat_());
 				herd->finalize_();
@@ -2983,7 +2980,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("mut", Static::fin_(&IteratorPtr::mut, "thing"));
 			shoal->finalize_();
 			return pub;
@@ -3002,7 +2999,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->insert_(IteratorPtr::cat_());
 			herd->finalize_();
@@ -3062,7 +3059,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->insert_(IteratorCopy::cat_());
 			herd->finalize_();
@@ -3123,7 +3120,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->insert_(IteratorRef::cat_());
 			herd->finalize_();
@@ -3311,7 +3308,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<Lake>::fin_(&Lake::to_lake));
 			shoal->update_("from_lake", Member<Lake>::fin_(&Lake::from_lake, "lake"));
 			shoal->update_("to_river", Const<Lake>::fin_(&Lake::to_river, "river"));
@@ -3337,7 +3334,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Lake::mut", Static::fin_(&Lake::mut));
 		s->update_("strange::Lake::fin", Static::fin_(&Lake::fin));
 		s->update_("strange::Lake::lak", Static::fin_(&Lake::lak, "lake"));
@@ -3384,7 +3381,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
 			herd->insert_(Lake::cat_());
@@ -3796,7 +3793,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_int64", Const<Number>::fin_(&Number::to_int64));
 			shoal->update_("from_int64", Member<Number>::fin_(&Number::from_int64, "int64"));
 			shoal->update_("to_float64", Const<Number>::fin_(&Number::to_float64));
@@ -3840,7 +3837,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
 			herd->insert_(Number::cat_());
@@ -3932,7 +3929,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<Bit>::fin_(&Bit::to_lake));
 			shoal->update_("from_lake", Member<Bit>::fin_(&Bit::from_lake, "lake"));
 			shoal->update_("to_river", Const<Bit>::fin_(&Bit::to_river, "river"));
@@ -3950,7 +3947,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Bit::mut", Static::fin_(&Bit::mut));
 		s->update_("strange::Bit::fin", Static::fin_(&Bit::fin));
 		s->update_("strange::Bit::lak", Static::fin_(&Bit::lak, "lake"));
@@ -3993,7 +3990,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(Bit::cat_());
 			herd->finalize_();
@@ -4251,7 +4248,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<Int8>::fin_(&Int8::to_lake));
 			shoal->update_("from_lake", Member<Int8>::fin_(&Int8::from_lake, "lake"));
 			shoal->update_("to_river", Const<Int8>::fin_(&Int8::to_river, "river"));
@@ -4269,7 +4266,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Int8::mut", Static::fin_(&Int8::mut));
 		s->update_("strange::Int8::fin", Static::fin_(&Int8::fin));
 		s->update_("strange::Int8::lak", Static::fin_(&Int8::lak, "lake"));
@@ -4312,7 +4309,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(Int8::cat_());
 			herd->finalize_();
@@ -4565,7 +4562,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<UInt8>::fin_(&UInt8::to_lake));
 			shoal->update_("from_lake", Member<UInt8>::fin_(&UInt8::from_lake, "lake"));
 			shoal->update_("to_river", Const<UInt8>::fin_(&UInt8::to_river, "river"));
@@ -4583,7 +4580,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::UInt8::mut", Static::fin_(&UInt8::mut));
 		s->update_("strange::UInt8::fin", Static::fin_(&UInt8::fin));
 		s->update_("strange::UInt8::lak", Static::fin_(&UInt8::lak, "lake"));
@@ -4626,7 +4623,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(UInt8::cat_());
 			herd->finalize_();
@@ -4879,7 +4876,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<Int16>::fin_(&Int16::to_lake));
 			shoal->update_("from_lake", Member<Int16>::fin_(&Int16::from_lake, "lake"));
 			shoal->update_("to_river", Const<Int16>::fin_(&Int16::to_river, "river"));
@@ -4897,7 +4894,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Int16::mut", Static::fin_(&Int16::mut));
 		s->update_("strange::Int16::fin", Static::fin_(&Int16::fin));
 		s->update_("strange::Int16::lak", Static::fin_(&Int16::lak, "lake"));
@@ -4946,7 +4943,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(Int16::cat_());
 			herd->finalize_();
@@ -5199,7 +5196,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<UInt16>::fin_(&UInt16::to_lake));
 			shoal->update_("from_lake", Member<UInt16>::fin_(&UInt16::from_lake, "lake"));
 			shoal->update_("to_river", Const<UInt16>::fin_(&UInt16::to_river, "river"));
@@ -5217,7 +5214,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::UInt16::mut", Static::fin_(&UInt16::mut));
 		s->update_("strange::UInt16::fin", Static::fin_(&UInt16::fin));
 		s->update_("strange::UInt16::lak", Static::fin_(&UInt16::lak, "lake"));
@@ -5266,7 +5263,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(UInt16::cat_());
 			herd->finalize_();
@@ -5519,7 +5516,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<Int32>::fin_(&Int32::to_lake));
 			shoal->update_("from_lake", Member<Int32>::fin_(&Int32::from_lake, "lake"));
 			shoal->update_("to_river", Const<Int32>::fin_(&Int32::to_river, "river"));
@@ -5537,7 +5534,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Int32::mut", Static::fin_(&Int32::mut));
 		s->update_("strange::Int32::fin", Static::fin_(&Int32::fin));
 		s->update_("strange::Int32::lak", Static::fin_(&Int32::lak, "lake"));
@@ -5590,7 +5587,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(Int32::cat_());
 			herd->finalize_();
@@ -5843,7 +5840,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<UInt32>::fin_(&UInt32::to_lake));
 			shoal->update_("from_lake", Member<UInt32>::fin_(&UInt32::from_lake, "lake"));
 			shoal->update_("to_river", Const<UInt32>::fin_(&UInt32::to_river, "river"));
@@ -5861,7 +5858,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::UInt32::mut", Static::fin_(&UInt32::mut));
 		s->update_("strange::UInt32::fin", Static::fin_(&UInt32::fin));
 		s->update_("strange::UInt32::lak", Static::fin_(&UInt32::lak, "lake"));
@@ -5914,7 +5911,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(UInt32::cat_());
 			herd->finalize_();
@@ -6167,7 +6164,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<Int64>::fin_(&Int64::to_lake));
 			shoal->update_("from_lake", Member<Int64>::fin_(&Int64::from_lake, "lake"));
 			shoal->update_("to_river", Const<Int64>::fin_(&Int64::to_river, "river"));
@@ -6185,7 +6182,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Int64::mut", Static::fin_(&Int64::mut));
 		s->update_("strange::Int64::fin", Static::fin_(&Int64::fin));
 		s->update_("strange::Int64::lak", Static::fin_(&Int64::lak, "lake"));
@@ -6246,7 +6243,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(Int64::cat_());
 			herd->finalize_();
@@ -6499,7 +6496,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<UInt64>::fin_(&UInt64::to_lake));
 			shoal->update_("from_lake", Member<UInt64>::fin_(&UInt64::from_lake, "lake"));
 			shoal->update_("to_river", Const<UInt64>::fin_(&UInt64::to_river, "river"));
@@ -6517,7 +6514,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::UInt64::mut", Static::fin_(&UInt64::mut));
 		s->update_("strange::UInt64::fin", Static::fin_(&UInt64::fin));
 		s->update_("strange::UInt64::lak", Static::fin_(&UInt64::lak, "lake"));
@@ -6578,7 +6575,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(UInt64::cat_());
 			herd->finalize_();
@@ -6913,7 +6910,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<Float32>::fin_(&Float32::to_lake));
 			shoal->update_("from_lake", Member<Float32>::fin_(&Float32::from_lake, "lake"));
 			shoal->update_("to_river", Const<Float32>::fin_(&Float32::to_river, "river"));
@@ -6931,7 +6928,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Float32::mut", Static::fin_(&Float32::mut));
 		s->update_("strange::Float32::fin", Static::fin_(&Float32::fin));
 		s->update_("strange::Float32::lak", Static::fin_(&Float32::lak, "lake"));
@@ -6985,7 +6982,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(Float32::cat_());
 			herd->finalize_();
@@ -7238,7 +7235,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("to_lake", Const<Float64>::fin_(&Float64::to_lake));
 			shoal->update_("from_lake", Member<Float64>::fin_(&Float64::from_lake, "lake"));
 			shoal->update_("to_river", Const<Float64>::fin_(&Float64::to_river, "river"));
@@ -7256,7 +7253,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Float64::mut", Static::fin_(&Float64::mut));
 		s->update_("strange::Float64::fin", Static::fin_(&Float64::fin));
 		s->update_("strange::Float64::lak", Static::fin_(&Float64::lak, "lake"));
@@ -7318,7 +7315,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(Float64::cat_());
 			herd->finalize_();
@@ -7574,7 +7571,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("self_modulo", nothing_());
 			shoal->update_("less_than", nothing_());
 			shoal->update_("greater_than", nothing_());
@@ -7597,7 +7594,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Complex32::mut", Static::fin_(&Complex32::mut));
 		s->update_("strange::Complex32::fin", Static::fin_(&Complex32::fin));
 		s->update_("strange::Complex32::lak", Static::fin_(&Complex32::lak, "lake"));
@@ -7663,7 +7660,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(Complex32::cat_());
 			herd->finalize_();
@@ -7910,7 +7907,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Number::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("self_modulo", nothing_());
 			shoal->update_("less_than", nothing_());
 			shoal->update_("greater_than", nothing_());
@@ -7933,7 +7930,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Complex64::mut", Static::fin_(&Complex64::mut));
 		s->update_("strange::Complex64::fin", Static::fin_(&Complex64::fin));
 		s->update_("strange::Complex64::lak", Static::fin_(&Complex64::lak, "lake"));
@@ -8015,7 +8012,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Number::cats_());
 			herd->insert_(Complex64::cat_());
 			herd->finalize_();
@@ -8280,7 +8277,7 @@ public:
 		static const Ptr PUB = [this]()
 		{
 			const Ptr pub = Thing::pub_()->copy_();
-			Shoal* const shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(pub);
 			shoal->update_("mut", Static::fin_(&River::mut, "lake", "is_file"));
 			shoal->update_("in", Static::fin_(&River::in));
 			shoal->update_("out", Static::fin_(&River::out));
@@ -8301,7 +8298,7 @@ public:
 
 	static inline void share_(const Ptr& shoal)
 	{
-		Shoal* const s = static_<Shoal>(shoal);
+		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::River::mut", Static::fin_(&River::mut, "lake", "is_file"));
 		s->update_("strange::River::in", Static::fin_(&River::in));
 		s->update_("strange::River::out", Static::fin_(&River::out));
@@ -8319,7 +8316,7 @@ public:
 		static const Ptr CATS = [this]()
 		{
 			const Ptr cats = Herd::mut_();
-			Herd* const herd = static_<Herd>(cats);
+			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->insert_(River::cat_());
 			herd->finalize_();
@@ -8530,7 +8527,7 @@ inline const Thing::Ptr Thing::pub_() const
 	static const Ptr PUB = []()
 	{
 		const Ptr pub = Shoal::mut_();
-		Shoal* const shoal = static_<Shoal>(pub);
+		const auto shoal = static_<Shoal>(pub);
 		shoal->update_("invoke", Member<Thing>::fin_(&Thing::invoke, "member", ".."));
 		shoal->update_("iterator", Const<Thing>::fin_(&Thing::iterator));
 		shoal->update_("next", Member<Thing>::fin_(&Thing::next));
@@ -8709,7 +8706,7 @@ inline const Thing::Ptr Serializable::cats_()
 	static const Thing::Ptr CATS = []()
 	{
 		const Thing::Ptr cats = Herd::mut_();
-		Herd* const herd = Thing::static_<Herd>(cats);
+		const auto herd = Thing::static_<Herd>(cats);
 		herd->insert_(Cat::fin_("<strange::Serializable>"));
 		herd->finalize_();
 		return cats;
@@ -8797,7 +8794,7 @@ inline const Thing::Ptr Symbol::pub_() const
 	static const Ptr PUB = [this]()
 	{
 		const Ptr pub = Thing::pub_()->copy_();
-		Shoal* const shoal = static_<Shoal>(pub);
+		const auto shoal = static_<Shoal>(pub);
 		shoal->update_("to_lake", Const<Symbol>::fin_(&Symbol::to_lake));
 		shoal->update_("to_river", Const<Symbol>::fin_(&Symbol::to_river, "river"));
 		shoal->update_("lak", Static::fin_(&Symbol::lak, "lake"));
@@ -8817,7 +8814,7 @@ inline const Thing::Ptr Symbol::pub_() const
 
 inline void Symbol::share_(const Ptr& shoal)
 {
-	Shoal* const s = static_<Shoal>(shoal);
+	const auto s = static_<Shoal>(shoal);
 	s->update_("strange::Symbol::lak", Static::fin_(&Symbol::lak, "lake"));
 	s->update_("strange::Symbol::riv", Static::fin_(&Symbol::riv, "river"));
 	s->update_("strange::Symbol::rwl", Static::fin_(&Symbol::rwl, "river"));
@@ -8861,7 +8858,7 @@ inline const Thing::Ptr Symbol::cats_() const
 	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
+		const auto herd = static_<Herd>(cats);
 		herd->self_add_(Thing::cats_());
 		herd->self_add_(Serializable::cats_());
 		herd->insert_(Symbol::cat_());
@@ -8931,7 +8928,7 @@ inline const Thing::Ptr Cat::rwl_(const Ptr& river)
 
 inline void Cat::share_(const Ptr& shoal)
 {
-	Shoal* const s = static_<Shoal>(shoal);
+	const auto s = static_<Shoal>(shoal);
 	s->update_("strange::Cat::fin", Static::fin_(&Cat::fin, "symbol"));
 	s->update_("strange::Cat::lak", Static::fin_(&Cat::lak, "lake"));
 	s->update_("strange::Cat::riv", Static::fin_(&Cat::riv, "river"));
@@ -8943,7 +8940,7 @@ inline const Thing::Ptr Cat::cats_() const
 	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
+		const auto herd = static_<Herd>(cats);
 		herd->self_add_(Symbol::cats_());
 		herd->insert_(Cat::cat_());
 		herd->finalize_();
@@ -8957,7 +8954,7 @@ inline const Thing::Ptr Cat::pub_() const
 	static const Ptr PUB = [this]()
 	{
 		const Ptr pub = Symbol::pub_()->copy_();
-		Shoal* const shoal = static_<Shoal>(pub);
+		const auto shoal = static_<Shoal>(pub);
 		shoal->update_("fin", Static::fin_(&Cat::fin, "symbol"));
 		shoal->update_("lak", Static::fin_(&Cat::lak, "lake"));
 		shoal->update_("riv", Static::fin_(&Cat::riv, "river"));
@@ -9090,7 +9087,7 @@ inline void Shoal::from_river_with_links_(const Ptr& river)
 inline void Shoal::replace_links_(const Ptr& shoal)
 {
 	std_unordered_map_ptr_ptr replacement;
-	Shoal* const sho = static_<Shoal>(shoal);
+	const auto sho = static_<Shoal>(shoal);
 	for (const auto& i : _map)
 	{
 		replacement.emplace(sho->at_(i.first), sho->at_(i.second));
@@ -9178,7 +9175,7 @@ inline void Shoal::self_add_(const Ptr& other)
 			if (flock)
 			{
 				const Ptr index = Int64::mut_();
-				Int64* const ind = static_<Int64>(index);
+				const auto ind = static_<Int64>(index);
 				for (auto i : flock->get_())
 				{
 					update_(ind->copy_(), i);
@@ -9188,7 +9185,7 @@ inline void Shoal::self_add_(const Ptr& other)
 			else
 			{
 				const Ptr index = Int64::mut_();
-				Int64* const ind = static_<Int64>(index);
+				const auto ind = static_<Int64>(index);
 				const Ptr it = other->iterator_();
 				for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 				{
@@ -9254,7 +9251,7 @@ inline const Thing::Ptr Shoal::cats_() const
 	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
+		const auto herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
 		herd->self_add_(Serializable::cats_());
 		herd->insert_(Shoal::cat_());
@@ -9269,7 +9266,7 @@ inline const Thing::Ptr Shoal::Iterator::cats_() const
 	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
+		const auto herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
 		herd->insert_(Shoal::Iterator::cat_());
 		herd->finalize_();
@@ -9285,7 +9282,7 @@ inline const Thing::Ptr Shoal::Iterator::next_()
 		return stop_();
 	}
 	const Ptr result = Flock::mut_();
-	Flock* const flock = static_<Flock>(result);
+	const auto flock = static_<Flock>(result);
 	flock->push_back_(_iterator->first);
 	flock->push_back_(_iterator->second);
 	flock->finalize_();
@@ -9298,7 +9295,7 @@ inline const Thing::Ptr Shoal::Feeder::cats_() const
 	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
+		const auto herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
 		herd->insert_(Shoal::Feeder::cat_());
 		herd->finalize_();
@@ -9510,7 +9507,7 @@ inline void Flock::from_river_with_links_(const Ptr& river)
 
 inline void Flock::replace_links_(const Ptr& shoal)
 {
-	Shoal* const sho = static_<Shoal>(shoal);
+	const auto sho = static_<Shoal>(shoal);
 	for (std_vector_ptr::iterator i = _vector.begin(); i != _vector.end(); ++i)
 	{
 		*i = sho->at_(*i);
@@ -9522,7 +9519,7 @@ inline const Thing::Ptr Flock::cats_() const
 	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
+		const auto herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
 		herd->self_add_(Serializable::cats_());
 		herd->insert_(Flock::cat_());
@@ -9537,7 +9534,7 @@ inline const Thing::Ptr Flock::Iterator::cats_() const
 	static const Ptr CATS = [this]()
 	{
 		const Ptr cats = Herd::mut_();
-		Herd* const herd = static_<Herd>(cats);
+		const auto herd = static_<Herd>(cats);
 		herd->self_add_(Stateful::cats_());
 		herd->insert_(Flock::Iterator::cat_());
 		herd->finalize_();
@@ -9624,7 +9621,7 @@ inline void Herd::from_river_with_links_(const Ptr& river)
 inline void Herd::replace_links_(const Ptr& shoal)
 {
 	std_unordered_set_ptr replacement;
-	Shoal* const sho = static_<Shoal>(shoal);
+	const auto sho = static_<Shoal>(shoal);
 	for (const auto i : _set)
 	{
 		replacement.insert(sho->at_(i));

@@ -50,7 +50,7 @@ namespace strange
 
 inline void Thing::share_(const Ptr& shoal)
 {
-	Shoal* const s = static_<Shoal>(shoal);
+	const auto s = static_<Shoal>(shoal);
 	s->update_("strange::Thing::call", Static::fin_(&Thing::call, "function"));
 
 	// strange_core
