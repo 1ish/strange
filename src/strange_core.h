@@ -64,7 +64,7 @@ public:
 
 	// public static utility functions
 	template <typename T>
-	static inline T* const static_(const Ptr& ptr)
+	static inline T* const static_(const Ptr& ptr) // TODO const std::shared_ptr<T>
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		Thing* const thing = ptr.get();
@@ -79,7 +79,7 @@ public:
 	}
 
 	template <typename T>
-	static inline T* const dynamic_(const Ptr& ptr)
+	static inline T* const dynamic_(const Ptr& ptr) // TODO const std::shared_ptr<T>
 	{
 		T* const t = dynamic_cast<T*>(ptr.get());
 		if (t)

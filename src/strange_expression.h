@@ -1188,7 +1188,7 @@ public:
 		auto& members = static_<Shoal>(shoal)->get_();
 		for (auto& it : members)
 		{
-			Attribute* const attribute = dynamic_cast<Attribute*>(it.second.get());
+			const auto attribute = dynamic_<Attribute>(it.second);
 			if (attribute)
 			{
 				static_<Weak>(attribute->_creature)->set_(creature);
@@ -1198,7 +1198,7 @@ public:
 		{
 			for (auto& it : members)
 			{
-				Attribute* const attribute = dynamic_cast<Attribute*>(it.second.get());
+				const auto attribute = dynamic_<Attribute>(it.second);
 				if (attribute)
 				{
 					attribute->_initialize_(creature);
@@ -1236,7 +1236,7 @@ protected:
 	static inline const Ptr _actual_(const Ptr thing)
 	{
 		Ptr actual = thing;
-		Attribute* attribute = dynamic_cast<Attribute*>(actual.get());
+		auto attribute = dynamic_<Attribute>(actual);
 		while (attribute)
 		{
 			actual = attribute->get_();
@@ -1244,7 +1244,7 @@ protected:
 			{
 				throw Disagreement("circular attribute reference");
 			}
-			attribute = dynamic_cast<Attribute*>(actual.get());
+			attribute = dynamic_<Attribute>(actual);
 		}
 		return actual;
 	}
@@ -2304,7 +2304,7 @@ inline const Thing::Ptr Expression::_set_attribute_(const Ptr& local) const
 		{
 			throw Dismemberment(thing->cat_(), vec[1]);
 		}
-		Attribute* const attribute = dynamic_cast<Attribute*>(member.get());
+		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
 			const Ptr value = Expression::evaluate_(vec[2], local);
@@ -2358,7 +2358,7 @@ inline const Thing::Ptr Expression::_set_intimate_(const Ptr& local) const
 		{
 			throw Dismemberment(thing->cat_(), vec[0]);
 		}
-		Attribute* const attribute = dynamic_cast<Attribute*>(member.get());
+		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
 			const Ptr value = Expression::evaluate_(vec[1], local);
@@ -2415,7 +2415,7 @@ inline const Thing::Ptr Expression::_intimate_(const Ptr& local) const
 		{
 			throw Dismemberment(thing->cat_(), vec[0]);
 		}
-		Attribute* const attribute = dynamic_cast<Attribute*>(member.get());
+		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
 			return attribute->intimator_(thing, _iterator_(local, 1));
@@ -2443,7 +2443,7 @@ inline const Thing::Ptr Expression::_intimate_iterator_(const Ptr& local) const
 		{
 			throw Dismemberment(thing->cat_(), vec[0]);
 		}
-		Attribute* const attribute = dynamic_cast<Attribute*>(member.get());
+		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
 			return attribute->intimator_(thing, Expression::evaluate_(vec[1], local));
@@ -2471,7 +2471,7 @@ inline const Thing::Ptr Expression::_intimate_iterable_(const Ptr& local) const
 		{
 			throw Dismemberment(thing->cat_(), vec[0]);
 		}
-		Attribute* const attribute = dynamic_cast<Attribute*>(member.get());
+		const auto attribute = dynamic_<Attribute>(member);
 		const Ptr iterable = Expression::evaluate_(vec[1], local);
 		const Ptr feeder = iterable->feeder(member->eater_());
 		if (!feeder->is_nothing_())
