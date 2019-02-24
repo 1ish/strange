@@ -465,6 +465,12 @@ public:
 		return Token::error_(_filename, _x, _y, token);
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Tokenizer");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Tokenizer>");

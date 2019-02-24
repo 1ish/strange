@@ -141,6 +141,13 @@ public:
 	virtual ~Thing() = default;
 
 	// public pure virtual member functions and adapters
+	virtual inline const Ptr type_() const = 0;
+
+	inline const Ptr type(const Ptr& ignore) const
+	{
+		return type_();
+	}
+
 	virtual inline const Ptr cat_() const = 0;
 
 	inline const Ptr cat(const Ptr& ignore) const
@@ -773,6 +780,12 @@ public:
 
 	virtual inline const Ptr to_lake_() const override;
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Symbol");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override;
 
 	virtual inline const Ptr cats_() const override;
@@ -888,6 +901,12 @@ public:
 
 	static inline void share_(const Ptr& shoal);
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Cat");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Cat>");
@@ -929,6 +948,12 @@ public:
 		v.reserve(sizeof...(Args));
 		Variadic::variadic_(v, std::forward<Args>(args)...);
 		return with_params_(fun, std::move(v));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Static");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -979,6 +1004,12 @@ public:
 		v.reserve(sizeof...(Args));
 		Variadic::variadic_(v, std::forward<Args>(args)...);
 		return with_params_(fun, std::move(v));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Member");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -1038,6 +1069,12 @@ public:
 		v.reserve(sizeof...(Args));
 		Variadic::variadic_(v, std::forward<Args>(args)...);
 		return with_params_(fun, std::move(v));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Const");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -1495,6 +1532,12 @@ public:
 		return Feeder::mut_(me_(), eater);
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Shoal");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Shoal>");
@@ -1600,6 +1643,12 @@ public:
 			return mut_(_shoal->copy_());
 		}
 
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Shoal::Concurrent");
+			return TYPE;
+		}
+
 		virtual inline const Ptr cat_() const override
 		{
 			static const Ptr CAT = Cat::fin_("<strange::Shoal::Concurrent>");
@@ -1680,6 +1729,12 @@ private:
 			return make_<Iterator>(shoal);
 		}
 
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Shoal::Iterator");
+			return TYPE;
+		}
+
 		virtual inline const Ptr cat_() const override
 		{
 			static const Ptr CAT = Cat::fin_("<strange::Shoal:Iterator>");
@@ -1716,6 +1771,12 @@ private:
 		static inline const Ptr mut_(const Ptr& shoal, const Ptr& eater)
 		{
 			return make_<Feeder>(shoal, eater);
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Shoal::Feeder");
+			return TYPE;
 		}
 
 		virtual inline const Ptr cat_() const override
@@ -2102,6 +2163,12 @@ public:
 		return Iterator::mut_(me_());
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Flock");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Flock>");
@@ -2178,6 +2245,12 @@ public:
 		{
 			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
 			return mut_(_flock->copy_());
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Flock::Concurrent");
+			return TYPE;
 		}
 
 		virtual inline const Ptr cat_() const override
@@ -2262,6 +2335,12 @@ private:
 		static inline const Ptr mut_(const Ptr& flock)
 		{
 			return make_<Iterator>(flock);
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Flock::Iterator");
+			return TYPE;
 		}
 
 		virtual inline const Ptr cat_() const override
@@ -2746,6 +2825,12 @@ public:
 		return Iterator::mut_(copy_());
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Herd");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Herd>");
@@ -2847,6 +2932,12 @@ public:
 			return mut_(_herd->copy_());
 		}
 
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Herd::Concurrent");
+			return TYPE;
+		}
+
 		virtual inline const Ptr cat_() const override
 		{
 			static const Ptr CAT = Cat::fin_("<strange::Herd::Concurrent>");
@@ -2914,6 +3005,12 @@ private:
 		static inline const Ptr mut_(const Ptr& herd)
 		{
 			return make_<Iterator>(herd);
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Herd::Iterator");
+			return TYPE;
 		}
 
 		virtual inline const Ptr cat_() const override
@@ -2988,6 +3085,12 @@ public:
 		return PUB;
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::IteratorPtr");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::IteratorPtr>");
@@ -3046,6 +3149,12 @@ public:
 	static inline const Ptr mut_(F&& collection)
 	{
 		return make_<IteratorCopy<C>>(std::forward<F>(collection));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::IteratorCopy");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -3107,6 +3216,12 @@ public:
 	static inline const Ptr mut_(F&& collection)
 	{
 		return make_<IteratorRef<C>>(std::forward<F>(collection));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::IteratorRef");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -3369,6 +3484,12 @@ public:
 	virtual inline void to_river_(const Ptr& river) const override;
 
 	virtual inline void from_river_(const Ptr& river) override;
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Lake");
+		return TYPE;
+	}
 
 	virtual inline const Ptr cat_() const override
 	{
@@ -3826,6 +3947,12 @@ public:
 		return PUB;
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Number");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Number>");
@@ -3977,6 +4104,12 @@ public:
 		{
 			finalize_();
 		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Bit");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -4298,6 +4431,12 @@ public:
 		}
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Int8");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Int8>");
@@ -4610,6 +4749,12 @@ public:
 		{
 			finalize_();
 		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::UInt8");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -4932,6 +5077,12 @@ public:
 		}
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Int16");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Int16>");
@@ -5250,6 +5401,12 @@ public:
 		{
 			finalize_();
 		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::UInt16");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -5576,6 +5733,12 @@ public:
 		}
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Int32");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Int32>");
@@ -5898,6 +6061,12 @@ public:
 		{
 			finalize_();
 		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::UInt32");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -6232,6 +6401,12 @@ public:
 		}
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Int64");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Int64>");
@@ -6562,6 +6737,12 @@ public:
 		{
 			finalize_();
 		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::UInt64");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -6971,6 +7152,12 @@ public:
 		}
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Float32");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Float32>");
@@ -7302,6 +7489,12 @@ public:
 		{
 			finalize_();
 		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Float64");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -7647,6 +7840,12 @@ public:
 		{
 			finalize_();
 		}
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Complex32");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -8001,6 +8200,12 @@ public:
 		}
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Complex64");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Complex64>");
@@ -8303,6 +8508,12 @@ public:
 		s->update_("strange::River::in", Static::fin_(&River::in));
 		s->update_("strange::River::out", Static::fin_(&River::out));
 		s->update_("strange::River::err", Static::fin_(&River::err));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::River");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override

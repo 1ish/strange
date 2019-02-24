@@ -91,6 +91,12 @@ public:
 		return get_();
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Weak");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Weak>");
@@ -160,6 +166,12 @@ private:
 				return pub;
 			}();
 			return PUB;
+		}
+
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Weak::Iterator");
+			return TYPE;
 		}
 
 		virtual inline const Ptr cat_() const override

@@ -74,6 +74,12 @@ public:
 		return expression;
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Parser");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Parser>");

@@ -76,6 +76,12 @@ public:
 		riv.write_(")");
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::CPPGenerator");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::CPPGenerator>");

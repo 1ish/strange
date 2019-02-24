@@ -78,6 +78,12 @@ public:
 		generator->invoke_("generate_" + static_<Symbol>(_statement)->get_() + "code", _token, _flock);
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Expression");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Expression>");
@@ -839,6 +845,12 @@ private:
 			return make_<Iterator>(vec, local, pos);
 		}
 
+		virtual inline const Ptr type_() const override
+		{
+			static const Ptr TYPE = sym_("strange::Expression::Iterator");
+			return TYPE;
+		}
+
 		virtual inline const Ptr cat_() const override
 		{
 			static const Ptr CAT = Cat::fin_("<strange::Expression::Iterator>");
@@ -943,6 +955,12 @@ public:
 		return fake_<Function>(expression);
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Function");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Function>");
@@ -979,6 +997,12 @@ public:
 		return fake_<Closure>(expression, local);
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Closure");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Closure>");
@@ -1011,6 +1035,12 @@ public:
 	static inline const Ptr fin_(const Ptr& expression)
 	{
 		return fake_<Mutation>(expression);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Mutation");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -1054,6 +1084,12 @@ public:
 		return fake_<Extraction>(expression);
 	}
 
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Extraction");
+		return TYPE;
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		static const Ptr CAT = Cat::fin_("<strange::Extraction>");
@@ -1080,6 +1116,12 @@ class Attribute : public Operation
 //----------------------------------------------------------------------
 {
 public:
+	virtual inline const Ptr type_() const override
+	{
+		_initialize_();
+		return _value->type_();
+	}
+
 	virtual inline const Ptr cat_() const override
 	{
 		_initialize_();
@@ -1607,6 +1649,17 @@ public:
 	{
 		const auto s = static_<Shoal>(shoal);
 		s->update_("strange::Creature::mut", Static::fin_(&Creature::mut, "creator"));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		const Ptr over = static_<Shoal>(_members)->at_("type");
+		if (!over->is_nothing_())
+		{
+			return operate_(const_cast<Creature*>(this), over);
+		}
+		static const Ptr TYPE = sym_("strange::Creature");
+		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
