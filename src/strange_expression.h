@@ -2658,16 +2658,23 @@ inline void Expression::_merge_(const Ptr& values, Shoal* const creation, Shoal*
 		const Ptr type_fun = creation->at_("type");
 		if (type_fun->is_nothing_())
 		{
-			//TODO create type function returning nothing for annonymous types
-			throw Disagreement("creation derived type is missing");
+			type = nothing_();
+			const Ptr flock = Flock::mut_();
+			const auto flk = static_<Flock>(flock);
+			flk->push_back_(one_());
+			flk->push_back_(Expression::fin_(_token, type));
+			result->update_("type", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 		}
-		type = type_fun->invoke_();
+		else
+		{
+			type = type_fun->invoke_();
+			result->update_("type", type_fun);
+		}
 		const auto type_symbol = dynamic_<Symbol>(type);
 		if (!type_symbol)
 		{
 			throw Disagreement("creation derived type is not a symbol");
 		}
-		result->update_("type", type_fun);
 		
 		const Ptr cat = Cat::fin_("<" + static_<Symbol>(type)->get_() + static_<Symbol>(values)->get_() + ">");
 		{
@@ -2677,6 +2684,7 @@ inline void Expression::_merge_(const Ptr& values, Shoal* const creation, Shoal*
 			flk->push_back_(Expression::fin_(_token, cat));
 			result->update_("cat", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 		}
+
 		{
 			const auto herd = dynamic_<Herd>(result->at_("cats")->invoke_()->copy_());
 			if (!herd)
