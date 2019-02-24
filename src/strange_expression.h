@@ -414,7 +414,7 @@ private:
 
 	inline const Ptr _creation_(const Ptr& local) const;
 
-	inline void _merge_(const bool derived, Shoal* const creation, Shoal* const result) const;
+	inline void _merge_(const Ptr& values, Shoal* const creation, Shoal* const result) const;
 
 	inline const Ptr _shared_scope_(const Ptr& local) const
 	{
@@ -2562,6 +2562,8 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 		const auto creation_local = static_<Shoal>(new_local);
 		const Ptr new_it = stop_();
 
+		Ptr values = nothing_();
+
 		const std::size_t size_1 = vec.size() - 1;
 		for (std::size_t i = 0; i < size_1; i += 3)
 		{
@@ -2580,8 +2582,23 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 					throw _stack_("creator passed wrong kind of thing");
 				}
 			}
-			creation_local->update_(param, value->clone_freeze_());
+			const Ptr frozen_value = value->clone_freeze_();
+			creation_local->update_(param, frozen_value);
+			if (values->is_nothing_())
+			{
+				values = sym_("[");
+			}
+			else
+			{
+				values = static_<Symbol>(values)->add_(",");
+			}
+			values = static_<Symbol>(values)->add_(frozen_value);
 		}
+		if (!values->is_nothing_())
+		{
+			values = static_<Symbol>(values)->add_("]");
+		}
+		creation_local->insert_("[", values);
 		creation_local->insert_("$", new_shared);
 		creation_local->insert_("&", new_it);
 		return Expression::evaluate_(vec[size_1], new_local);
@@ -2604,8 +2621,9 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 		const auto flk = static_<Flock>(flock);
 		flk->push_back_(one_());
 		flk->push_back_(Expression::fin_(_token, Herd::mut_()));
-		result->update_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
+		result->insert_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 
+		const auto params = static_<Shoal>(local);
 		const std::size_t size_1 = vec.size() - 1;
 		for (std::size_t i = 0; i <= size_1; ++i)
 		{
@@ -2615,9 +2633,9 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 			{
 				throw _stack_("creation_ passed wrong kind of thing");
 			}
-			_merge_(i == size_1, creation.get(), result.get());
+			_merge_((i == size_1) ? params->at_("[") : Ptr(), creation.get(), result.get());
 		}
-		const auto params = static_<Shoal>(local);
+		params->erase_("[");
 		params->erase_("$");
 		params->erase_("&");
 		for (const auto& p : params->get_())
@@ -2632,32 +2650,62 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 	}
 }
 
-inline void Expression::_merge_(const bool derived, Shoal* const creation, Shoal* const result) const
+inline void Expression::_merge_(const Ptr& values, Shoal* const creation, Shoal* const result) const
 {
-	Ptr cat;
-	if (derived)
+	Ptr type;
+	if (values)
 	{
-		const Ptr cat_fun = creation->at_("cat");
-		if (cat_fun->is_nothing_())
+		const Ptr type_fun = creation->at_("type");
+		if (type_fun->is_nothing_())
 		{
-			throw Disagreement("creation merge cat is missing");
+			//TODO create type function returning nothing for annonymous types
+			throw Disagreement("creation derived type is missing");
 		}
-		//TODO			cat = cat_fun->invoke_();
-		if (!dynamic_<Cat>(cat))
+		type = type_fun->invoke_();
+		const auto type_symbol = dynamic_<Symbol>(type);
+		if (!type_symbol)
 		{
-			//TODO				throw Disagreement("creation merge cat is not a cat");
+			throw Disagreement("creation derived type is not a symbol");
+		}
+		result->update_("type", type_fun);
+		
+		const Ptr cat = Cat::fin_("<" + static_<Symbol>(type)->get_() + static_<Symbol>(values)->get_() + ">");
+		{
+			const Ptr flock = Flock::mut_();
+			const auto flk = static_<Flock>(flock);
+			flk->push_back_(one_());
+			flk->push_back_(Expression::fin_(_token, cat));
+			result->update_("cat", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
+		}
+		{
+			const auto herd = dynamic_<Herd>(result->at_("cats")->invoke_()->copy_());
+			if (!herd)
+			{
+				throw Disagreement("creation derived cats are not a herd");
+			}
+			herd->insert_(cat); //TODO cat permutations
+			const Ptr flock = Flock::mut_();
+			const auto flk = static_<Flock>(flock);
+			flk->push_back_(one_());
+			flk->push_back_(Expression::fin_(_token, herd));
+			result->update_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 		}
 	}
 
-	Ptr cats;
 	const Ptr cats_fun = creation->at_("cats");
 	if (!cats_fun->is_nothing_())
 	{
-		cats = cats_fun->invoke_();
+		const Ptr cats = cats_fun->invoke_();
 		if (!dynamic_<Herd>(cats))
 		{
-			throw Disagreement("creation merge cats are not a herd");
+			throw Disagreement("creation cats are not a herd");
 		}
+		const auto herd = static_<Herd>(result->at_("cats")->invoke_());
+		const Ptr flock = Flock::mut_();
+		const auto flk = static_<Flock>(flock);
+		flk->push_back_(one_());
+		flk->push_back_(Expression::fin_(_token, herd->add_(cats)));
+		result->update_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 	}
 
 	for (const auto& it : creation->get_())
@@ -2666,41 +2714,14 @@ inline void Expression::_merge_(const bool derived, Shoal* const creation, Shoal
 		const auto symbol = dynamic_<Symbol>(key);
 		if (!symbol)
 		{
-			throw Disagreement("creation merge key is not a symbol");
+			throw Disagreement("creation key is not a symbol");
 		}
 		const Ptr value = it.second;
-		if (symbol->is_("type"))
+		if (type && symbol->get_()[0] == '_')
 		{
-			if (derived)
-			{
-				result->update_(key, value);
-			}
+			result->update_("_" + static_<Symbol>(type)->get_() + symbol->get_(), value);
 		}
-		else if (symbol->is_("cat"))
-		{
-			if (derived)
-			{
-				result->update_(key, value);
-				//TODO					herd->insert_(cat);
-			}
-		}
-		else if (symbol->is_("cats"))
-		{
-			if (cats)
-			{
-				const auto herd = static_<Herd>(result->at_("cats")->invoke_());
-				const Ptr flock = Flock::mut_();
-				const auto flk = static_<Flock>(flock);
-				flk->push_back_(one_());
-				flk->push_back_(Expression::fin_(_token, herd->add_(cats)));
-				result->update_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
-			}
-		}
-		else if (derived && symbol->get_()[0] == '_')
-		{
-			//TODO				result->update_("_" + static_<Cat>(cat)->get_() + symbol->get_(), value);
-		}
-		else
+		else if (!symbol->is_("type") && !symbol->is_("cat") && !symbol->is_("cats"))
 		{
 			result->update_(key, value); //TODO check overrides
 		}

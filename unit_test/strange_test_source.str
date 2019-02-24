@@ -12,9 +12,9 @@
 		//'Arithmetic'::function_(<strange::Cat> T)creation_()
 		'Arithmetic'::creator_(T)()
 		{
-			'cat'::extraction_()
+			'type'::function_()
 			(
-				$$strange::Cat::fin['<Arithmetic[' + (|.T) + ']>']
+				'Arithmetic'
 			),
 			'mut'::function_()
 			(
@@ -39,6 +39,7 @@
 	out.write[ar.v, "\n"],
 	ar.c := "nlake",
 	out.write[ar.c, "\n"],
+	out.write[ar.type[], "\n"],
 	out.write[ar.T, "\n"],
 	out.write[ar.cat[], "\n"],
 	y := $$f[x+1],
