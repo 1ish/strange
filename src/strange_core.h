@@ -1668,10 +1668,10 @@ public:
 
 		inline void update_(const Ptr& key, const Ptr& value)
 		{
-			key->clone_freeze_();
-			value->clone_freeze_();
+			const Ptr frozen_key = key->clone_freeze_();
+			const Ptr frozen_value = value->clone_freeze_();
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-			static_<Shoal>(_shoal)->update_(key, value);
+			static_<Shoal>(_shoal)->update_(frozen_key, frozen_value);
 		}
 
 		inline const Ptr update(const Ptr& it)
@@ -1684,10 +1684,10 @@ public:
 
 		inline const bool insert_(const Ptr& key, const Ptr& value)
 		{
-			key->clone_freeze_();
-			value->clone_freeze_();
+			const Ptr frozen_key = key->clone_freeze_();
+			const Ptr frozen_value = value->clone_freeze_();
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-			return static_<Shoal>(_shoal)->insert_(key, value);
+			return static_<Shoal>(_shoal)->insert_(frozen_key, frozen_value);
 		}
 
 		inline const Ptr insert(const Ptr& it)
@@ -2261,9 +2261,9 @@ public:
 
 		inline void push_back_(const Ptr& item)
 		{
-			item->clone_freeze_();
+			const Ptr frozen_item = item->clone_freeze_();
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-			static_<Flock>(_flock)->push_back_(item);
+			static_<Flock>(_flock)->push_back_(frozen_item);
 		}
 
 		inline const Ptr push_back(const Ptr& it)
@@ -2957,9 +2957,9 @@ public:
 
 		inline const bool insert_(const Ptr& item)
 		{
-			item->clone_freeze_();
+			const Ptr frozen_item = item->clone_freeze_();
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-			return static_<Herd>(_herd)->insert_(item);
+			return static_<Herd>(_herd)->insert_(frozen_item);
 		}
 
 		inline const Ptr insert(const Ptr& it)
