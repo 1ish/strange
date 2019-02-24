@@ -2603,9 +2603,8 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 		const Ptr flock = Flock::mut_();
 		const auto flk = static_<Flock>(flock);
 		flk->push_back_(one_());
-		flk->push_back_(Expression::fin_(_token, sym_("herd_"), Flock::mut_()));
-		const Ptr cats = Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock));
-		result->update_("cats", cats);
+		flk->push_back_(Expression::fin_(_token, Herd::mut_()));
+		result->update_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 
 		const std::size_t size_1 = vec.size() - 1;
 		for (std::size_t i = 0; i <= size_1; ++i)
@@ -2661,8 +2660,6 @@ inline void Expression::_merge_(const bool derived, Shoal* const creation, Shoal
 		}
 	}
 
-	const auto herd = static_<Herd>(result->at_("cats")->invoke_());
-
 	for (const auto& it : creation->get_())
 	{
 		const Ptr key = it.first;
@@ -2672,7 +2669,14 @@ inline void Expression::_merge_(const bool derived, Shoal* const creation, Shoal
 			throw Disagreement("creation merge key is not a symbol");
 		}
 		const Ptr value = it.second;
-		if (symbol->is_("cat"))
+		if (symbol->is_("type"))
+		{
+			if (derived)
+			{
+				result->update_(key, value);
+			}
+		}
+		else if (symbol->is_("cat"))
 		{
 			if (derived)
 			{
@@ -2684,12 +2688,12 @@ inline void Expression::_merge_(const bool derived, Shoal* const creation, Shoal
 		{
 			if (cats)
 			{
+				const auto herd = static_<Herd>(result->at_("cats")->invoke_());
 				const Ptr flock = Flock::mut_();
 				const auto flk = static_<Flock>(flock);
 				flk->push_back_(one_());
-				flk->push_back_(Expression::fin_(_token, sym_("herd_"), Flock::mut(herd->add_(cats)->iterator_())));
-				cats = Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock));
-				result->update_("cats", cats);
+				flk->push_back_(Expression::fin_(_token, herd->add_(cats)));
+				result->update_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 			}
 		}
 		else if (derived && symbol->get_()[0] == '_')
