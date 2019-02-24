@@ -414,70 +414,7 @@ private:
 
 	inline const Ptr _creation_(const Ptr& local) const;
 
-	static inline void _merge_(const bool derived, Shoal* const creation, Shoal* const result)
-	{
-		Ptr cat;
-		if (derived)
-		{
-			const Ptr cat_fun = creation->at_("cat");
-			if (cat_fun->is_nothing_())
-			{
-				throw Disagreement("creation merge cat is missing");
-			}
-//TODO			cat = cat_fun->invoke_();
-			if (!dynamic_<Cat>(cat))
-			{
-//TODO				throw Disagreement("creation merge cat is not a cat");
-			}
-		}
-
-		Ptr cats;
-		const Ptr cats_fun = creation->at_("cats");
-		if (!cats_fun->is_nothing_())
-		{
-			cats = cats_fun->invoke_();
-			if (!dynamic_<Herd>(cats))
-			{
-				throw Disagreement("creation merge cats are not a herd");
-			}
-		}
-
-		const auto herd = static_<Herd>(result->at_("cats")->invoke_());
-
-		for (const auto& it : creation->get_())
-		{
-			const Ptr key = it.first;
-			const auto symbol = dynamic_<Symbol>(key);
-			if (!symbol)
-			{
-				throw Disagreement("creation merge key is not a symbol");
-			}
-			const Ptr value = it.second;
-			if (symbol->is_("cat"))
-			{
-				if (derived)
-				{
-					result->update_(key, value);
-//TODO					herd->insert_(cat);
-				}
-			}
-			else if (symbol->is_("cats"))
-			{
-				if (cats)
-				{
-					herd->self_add_(cats);
-				}
-			}
-			else if (derived && symbol->get_()[0] == '_')
-			{
-//TODO				result->update_("_" + static_<Cat>(cat)->get_() + symbol->get_(), value);
-			}
-			else
-			{
-				result->update_(key, value); //TODO check overrides
-			}
-		}
-	}
+	inline void _merge_(const bool derived, Shoal* const creation, Shoal* const result) const;
 
 	inline const Ptr _shared_scope_(const Ptr& local) const
 	{
@@ -2693,6 +2630,76 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 	catch (const std::exception& err)
 	{
 		throw _stack_(err.what());
+	}
+}
+
+inline void Expression::_merge_(const bool derived, Shoal* const creation, Shoal* const result) const
+{
+	Ptr cat;
+	if (derived)
+	{
+		const Ptr cat_fun = creation->at_("cat");
+		if (cat_fun->is_nothing_())
+		{
+			throw Disagreement("creation merge cat is missing");
+		}
+		//TODO			cat = cat_fun->invoke_();
+		if (!dynamic_<Cat>(cat))
+		{
+			//TODO				throw Disagreement("creation merge cat is not a cat");
+		}
+	}
+
+	Ptr cats;
+	const Ptr cats_fun = creation->at_("cats");
+	if (!cats_fun->is_nothing_())
+	{
+		cats = cats_fun->invoke_();
+		if (!dynamic_<Herd>(cats))
+		{
+			throw Disagreement("creation merge cats are not a herd");
+		}
+	}
+
+	const auto herd = static_<Herd>(result->at_("cats")->invoke_());
+
+	for (const auto& it : creation->get_())
+	{
+		const Ptr key = it.first;
+		const auto symbol = dynamic_<Symbol>(key);
+		if (!symbol)
+		{
+			throw Disagreement("creation merge key is not a symbol");
+		}
+		const Ptr value = it.second;
+		if (symbol->is_("cat"))
+		{
+			if (derived)
+			{
+				result->update_(key, value);
+				//TODO					herd->insert_(cat);
+			}
+		}
+		else if (symbol->is_("cats"))
+		{
+			if (cats)
+			{
+				const Ptr flock = Flock::mut_();
+				const auto flk = static_<Flock>(flock);
+				flk->push_back_(one_());
+				flk->push_back_(Expression::fin_(_token, sym_("herd_"), Flock::mut(herd->add_(cats)->iterator_())));
+				cats = Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock));
+				result->update_("cats", cats);
+			}
+		}
+		else if (derived && symbol->get_()[0] == '_')
+		{
+			//TODO				result->update_("_" + static_<Cat>(cat)->get_() + symbol->get_(), value);
+		}
+		else
+		{
+			result->update_(key, value); //TODO check overrides
+		}
 	}
 }
 
