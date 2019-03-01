@@ -119,7 +119,7 @@ private:
 		static_<Flock>(flock)->push_back_(Expression::fin_(token, thing));
 	}
 
-	inline const Ptr _parse_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const bool right)
+	inline const Ptr _parse_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const bool right, const bool key = false)
 	{
 		Ptr token;
 		Ptr result;
@@ -538,7 +538,7 @@ private:
 				else
 				{
 					flk->push_back_(result);
-					if (_thing_(scope, shoal, fixed, statement, flock))
+					if (_thing_(scope, shoal, fixed, statement, flock, key))
 					{
 						result = Expression::fin_(token, smt->get_(), flock);
 					}
@@ -556,7 +556,7 @@ private:
 		return Expression::fin_(token);
 	}
 
-	inline const bool _thing_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& statement, const Ptr& flock)
+	inline const bool _thing_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& statement, const Ptr& flock, const bool key)
 	{
 		const Ptr token = _token_();
 		if (token->is_stop_())
@@ -594,6 +594,13 @@ private:
 				_next_();
 				_list_(scope, shoal, fixed, flock, sym_(">>"));
 				smt->set_(sym_("invoke_iterator_"));
+			}
+			else if (!key && symbol->is_("::"))
+			{
+				_next_();
+				flk->push_back_(sym_("at"));
+				_name_(flock, true); // wrap
+				smt->set_(sym_("operate_"));
 			}
 			else if (symbol->is_("%"))
 			{
@@ -1454,7 +1461,7 @@ private:
 			}
 			if (key)
 			{
-				add_scope = _parse_(scope, shoal, fixed, true);
+				add_scope = _parse_(scope, shoal, fixed, true, true); // right, key
 				flk->push_back_(add_scope);
 			}
 			else
@@ -1499,7 +1506,7 @@ private:
 		return is_map;
 	}
 
-	inline const Ptr _name_(const Ptr& flock = Flock::mut_())
+	inline const Ptr _name_(const Ptr& flock = Flock::mut_(), const bool wrap = false)
 	{
 		const Ptr token = _token_();
 		const auto tok = static_<Token>(token);
@@ -1523,7 +1530,14 @@ private:
 		if (tag == 'N') // name
 		{
 			_next_();
-			static_<Flock>(flock)->push_back_(tok->symbol());
+			if (wrap)
+			{
+				_wrap_(token, tok->symbol(), flock);
+			}
+			else
+			{
+				static_<Flock>(flock)->push_back_(tok->symbol());
+			}
 		}
 		return tok->symbol();
 	}

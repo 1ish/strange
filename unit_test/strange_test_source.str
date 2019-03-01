@@ -52,5 +52,6 @@
 	y.:x[100],
 	y.:(z:.self_add)1,
 	out.write[y.to_symbol[], "\n"],
-	{'m'::out.write}@'m'"last\n"
+	{'m'::out.write}@'m'"last\n",
+	out.write[s::f[1].to_symbol[], "\n"]
 )
