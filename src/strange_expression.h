@@ -2146,7 +2146,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("creation_"))
 	{
-		if (size >= 1) // creation ..
+		if (size >= 2) // creation ..
 		{
 			return fin_(token, statement, &Expression::_creation_, flock);
 		}
@@ -2623,9 +2623,11 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 		flk->push_back_(Expression::fin_(_token, Herd::mut_()));
 		result->insert_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 
+		//TODO vec[0] = Weak creator
+
 		const auto params = static_<Shoal>(local);
 		const std::size_t size_1 = vec.size() - 1;
-		for (std::size_t i = 0; i <= size_1; ++i)
+		for (std::size_t i = 1; i <= size_1; ++i)
 		{
 			const Ptr shoal = Expression::evaluate_(vec[i], local);
 			const auto creation = dynamic_<Shoal>(shoal);
