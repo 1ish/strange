@@ -225,8 +225,8 @@ private:
 								const Ptr nested = Flock::mut_();
 								const auto nst = static_<Flock>(nested);
 								const Ptr new_creator = Weak::mut_(Shoal::mut_());
-								nst->push_back_(new_creator);
-								if (_statement_(scope, shoal, fixed, cats, new_creator, nested))
+								_wrap_(token, new_creator, nested);
+								if (_statement_(scope, shoal, fixed, cats, creator, nested))
 								{
 									nst->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), new_creator, false)); // create new fixed/cats scope
 									flk->push_back_(Expression::fin_(token, sym_("creation_"), nested));
@@ -241,8 +241,8 @@ private:
 					else if (symbol->is_("creation_"))
 					{
 						const Ptr new_creator = Weak::mut_(Shoal::mut_());
-						flk->push_back_(new_creator);
-						if (_statement_(scope, shoal, fixed, cats, new_creator, flock))
+						_wrap_(token, new_creator, flock);
+						if (_statement_(scope, shoal, fixed, cats, creator, flock))
 						{
 							flk->push_back_(_parse_(scope, shoal, fixed, cats, new_creator, false)); // right
 							result = Expression::fin_(token, symbol, flock);

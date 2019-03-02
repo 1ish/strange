@@ -2614,8 +2614,7 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 	try
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-		const Ptr res = Shoal::mut_();
-		const auto result = static_<Shoal>(res);
+		const auto result = static_<Shoal>(Shoal::mut_());
 
 		const Ptr flock = Flock::mut_();
 		const auto flk = static_<Flock>(flock);
@@ -2623,9 +2622,9 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 		flk->push_back_(Expression::fin_(_token, Herd::mut_()));
 		result->insert_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 
-		//TODO vec[0] = Weak creator
-
 		const auto params = static_<Shoal>(local);
+		const Ptr creator_params = params->at_("[");
+		params->erase_("[");
 		const std::size_t size_1 = vec.size() - 1;
 		for (std::size_t i = 1; i <= size_1; ++i)
 		{
@@ -2635,16 +2634,16 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 			{
 				throw _stack_("creation_ passed wrong kind of thing");
 			}
-			_merge_((i == size_1) ? params->at_("[") : Ptr(), creation.get(), result.get());
+			_merge_((i == size_1) ? creator_params : Ptr(), creation.get(), result.get());
 		}
-		params->erase_("[");
 		params->erase_("$");
 		params->erase_("&");
 		for (const auto& p : params->get_())
 		{
 			result->update_(p.first, Fixed::fin_(Expression::fin_(_token, p.second)));
 		}
-		return res;
+		static_<Weak>(Expression::evaluate_(vec[0], local))->set_(result);
+		return result;
 	}
 	catch (const std::exception& err)
 	{
