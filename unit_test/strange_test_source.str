@@ -8,8 +8,6 @@
 		(
 			a+2
 		),
-		//'Arithmetic'::creator_(T := <Default>)()
-		//'Arithmetic'::function_(<strange::Cat> T)creation_()
 		'Arithmetic'::creator_(T)()
 		{
 			'type'::function_()
@@ -18,20 +16,21 @@
 			),
 			'mut'::function_()
 			(
-				$$strange::Creature::mut[$$Arithmetic[<Type>]]
+				$$strange::Creature::mut[|::_]
 			),
 			'addition'::extraction_(<strange::Number> a, <strange::Number> b)
 			(
 				a+b
 			),
-			'f':#"flake",
+			'f':#(|::T),
 			'_m':%"_mlake",
 			'v':*"vlake",
 			'c':~<strange::Thing[<C>,<>]>.cat[],
 			'_mem':function_()(7)
 		}
 	},
-	ar := $$Arithmetic::mut[],
+	ar := $$Arithmetic['xxx']::mut[],
+	out.write[$$Arithmetic['xxx']::T, "\n"],
 	out.write[ar.addition[2, 2].to_symbol[], "\n"],
 	out.write[ar.f, "\n"],
 	out.write[ar.v, "\n"],

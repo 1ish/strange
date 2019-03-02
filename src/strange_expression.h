@@ -15,6 +15,7 @@ class Function;
 class Closure;
 class Mutation;
 class Extraction;
+class Creation;
 class Attribute;
 class Fixed;
 class Mutable;
@@ -199,6 +200,32 @@ private:
 			throw _stack_("me accessed without a creature");
 		}
 		return thing;
+	}
+
+	inline const Ptr _me_creator_(const Ptr& local) const
+	{
+		const auto creator = dynamic_<Shoal>(static_<Weak>(static_<Flock>(_flock)->get_()[0])->get_());
+		if (!creator)
+		{
+			throw _stack_("me accessed without a creator");
+		}
+		return creator;
+	}
+
+	inline const Ptr _me_creator_at_(const Ptr& local) const
+	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+		const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+		if (!creator)
+		{
+			throw _stack_("me accessed without a creator");
+		}
+		const Ptr member = creator->at_(vec[1]);
+		if (member->is_nothing_())
+		{
+			throw Dismemberment(sym_("me_creator_"), vec[1]);
+		}
+		return member;
 	}
 
 	inline const Ptr _thing_(const Ptr& local) const
@@ -1049,19 +1076,67 @@ private:
 };
 
 //----------------------------------------------------------------------
+class Creation : public Operation
+//----------------------------------------------------------------------
+{
+public:
+	inline Creation(const Ptr& expression)
+		: Operation{ expression }
+		, _shared{ Shoal::Concurrent::mut_() }
+		, _instantiations{ Herd::mut_() }
+	{
+	}
+
+	static inline const Ptr fin_(const Ptr& expression)
+	{
+		return fake_<Creation>(expression);
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Creation");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cat_() const override
+	{
+		static const Ptr CAT = Cat::fin_("<strange::Creation>");
+		return CAT;
+	}
+
+protected:
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		const Ptr local = Shoal::mut_();
+		const auto loc = static_<Shoal>(local);
+		loc->insert_("$", _shared);
+		loc->insert_("&", it);
+		const Ptr instantiation = static_<Expression>(_expression)->evaluate_(_expression, local);
+		std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+		static_<Herd>(_instantiations)->insert_(instantiation);
+		return instantiation;
+	}
+
+private:
+	const Ptr _shared;
+	const Ptr _instantiations;
+	mutable std::shared_timed_mutex _mutex;
+};
+
+//----------------------------------------------------------------------
 class Attribute : public Operation
 //----------------------------------------------------------------------
 {
 public:
 	virtual inline const Ptr type_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _value->type_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _value->cat_();
 	}
 
@@ -1075,7 +1150,7 @@ public:
 
 	virtual inline const bool final_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _value->final_();
 	}
 
@@ -1089,7 +1164,7 @@ public:
 
 	virtual inline const bool frozen_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _value->frozen_();
 	}
 
@@ -1110,55 +1185,55 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _value->iterator_();
 	}
 
 	virtual inline const Ptr next_() override
 	{
-		_initialize_();
+		initialize_();
 		return _value->next_();
 	}
 
 	virtual inline std::size_t hash_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _value->hash_();
 	}
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		_initialize_();
+		initialize_();
 		return _value->same_(other);
 	}
 
 	virtual inline const Ptr visit(const Ptr& it)
 	{
-		_initialize_();
+		initialize_();
 		return _value->visit(it);
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _value->cats_();
 	}
 
 	virtual inline const Ptr pub_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _value->pub_();
 	}
 
 	virtual inline const Ptr eater_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _value->eater_();
 	}
 
 	virtual inline const Ptr feeder(const Ptr& eater) const
 	{
-		_initialize_();
+		initialize_();
 		return _value->feeder(eater);
 	}
 
@@ -1183,6 +1258,14 @@ public:
 					attribute->_initialize_(creature);
 				}
 			}
+		}
+	}
+
+	inline void initialize_() const
+	{
+		if (!_value)
+		{
+			_init_(static_<Weak>(_creature)->get_());
 		}
 	}
 
@@ -1241,14 +1324,6 @@ protected:
 		if (!_value)
 		{
 			_init_(thing);
-		}
-	}
-
-	inline void _initialize_() const
-	{
-		if (!_value)
-		{
-			_init_(static_<Weak>(_creature)->get_());
 		}
 	}
 
@@ -1316,7 +1391,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->cat_();
 	}
 
@@ -1331,7 +1406,7 @@ public:
 
 	virtual inline const bool final_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->final_();
 	}
 
@@ -1346,7 +1421,7 @@ public:
 
 	virtual inline const bool frozen_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->frozen_();
 	}
 
@@ -1370,55 +1445,55 @@ public:
 
 	virtual inline const Ptr iterator_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->iterator_();
 	}
 
 	virtual inline const Ptr next_() override
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->next_();
 	}
 
 	virtual inline std::size_t hash_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->hash_();
 	}
 
 	virtual inline const bool same_(const Ptr& other) const override
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->same_(other);
 	}
 
 	virtual inline const Ptr visit(const Ptr& it)
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->visit(it);
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->cats_();
 	}
 
 	virtual inline const Ptr pub_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->pub_();
 	}
 
 	virtual inline const Ptr eater_() const override
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->eater_();
 	}
 
 	virtual inline const Ptr feeder(const Ptr& eater) const
 	{
-		_initialize_();
+		initialize_();
 		return _get_()->feeder(eater);
 	}
 
@@ -1984,6 +2059,18 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 		}
 		throw Disagreement("me_ expression of wrong size");
 	}
+	else if (statement->is_("me_creator_"))
+	{
+		if (size == 1)
+		{
+			return fin_(token, statement, &Expression::_me_creator_, flock);
+		}
+		if (size == 2)
+		{
+			return fin_(token, statement, &Expression::_me_creator_at_, flock);
+		}
+		throw Disagreement("me_creator_ expression of wrong size");
+	}
 	else if (statement->is_("thing_"))
 	{
 		if (size == 1)
@@ -2323,6 +2410,7 @@ inline const Thing::Ptr Expression::_public_(const Ptr& local) const
 		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
+			attribute->initialize_();
 			return attribute->get_();
 		}
 		return Method::fin_(thing, member);
@@ -2380,6 +2468,7 @@ inline const Thing::Ptr Expression::_private_(const Ptr& local) const
 		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
+			attribute->initialize_();
 			return attribute->get_();
 		}
 		return Method::fin_(thing, member);
@@ -2642,7 +2731,7 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 		{
 			result->update_(p.first, Fixed::fin_(Expression::fin_(_token, p.second)));
 		}
-		static_<Weak>(Expression::evaluate_(vec[0], local))->set_(result);
+		static_<Weak>(vec[0])->set_(result);
 		return result;
 	}
 	catch (const std::exception& err)
@@ -2755,6 +2844,10 @@ inline void Expression::_merge_(const Ptr& values, Shoal* const creation, Shoal*
 
 //======================================================================
 // class Extraction
+//======================================================================
+
+//======================================================================
+// class Creation
 //======================================================================
 
 //======================================================================

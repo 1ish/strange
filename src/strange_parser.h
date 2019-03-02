@@ -70,7 +70,7 @@ public:
 	{
 		const Ptr shoal = Shoal::mut_();
 		Thing::share_(shoal);
-		const Ptr expression = _parse_(nothing_(), shoal, Herd::mut_(), Shoal::mut_(), Weak::mut_(Shoal::mut_()), true);
+		const Ptr expression = _parse_(nothing_(), shoal, Herd::mut_(), Shoal::mut_(), Weak::mut_(nothing_()), true);
 		shoal->finalize_();
 		return expression;
 	}
@@ -224,13 +224,13 @@ private:
 							{
 								const Ptr nested = Flock::mut_();
 								const auto nst = static_<Flock>(nested);
-								const Ptr new_creator = Weak::mut_(Shoal::mut_());
-								_wrap_(token, new_creator, nested);
+								const Ptr new_creator = Weak::mut_(nothing_());
+								nst->push_back_(new_creator);
 								if (_statement_(scope, shoal, fixed, cats, creator, nested))
 								{
 									nst->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), new_creator, false)); // create new fixed/cats scope
 									flk->push_back_(Expression::fin_(token, sym_("creation_"), nested));
-									result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
+									result = Expression::fin_(token, Creation::fin_(Expression::fin_(token, symbol, flock)));
 									continue;
 								}
 								throw tok->error_("Parser ERROR: invalid creator_ creation_");
@@ -240,12 +240,12 @@ private:
 					}
 					else if (symbol->is_("creation_"))
 					{
-						const Ptr new_creator = Weak::mut_(Shoal::mut_());
-						_wrap_(token, new_creator, flock);
+						const Ptr new_creator = Weak::mut_(nothing_());
+						flk->push_back_(new_creator);
 						if (_statement_(scope, shoal, fixed, cats, creator, flock))
 						{
 							flk->push_back_(_parse_(scope, shoal, fixed, cats, new_creator, false)); // right
-							result = Expression::fin_(token, symbol, flock);
+							result = Expression::fin_(token, Creation::fin_(Expression::fin_(token, symbol, flock)));
 							continue;
 						}
 						flk->clear_();
@@ -457,13 +457,22 @@ private:
 					}
 					else if (symbol->is_("|.")) // me dot
 					{
-						_dot_(scope, shoal, fixed, cats, creator, statement, flock, true);
+						_dot_(scope, shoal, fixed, cats, creator, statement, flock, true); // me dot
 						result = Expression::fin_(token, smt->get_(), flock);
 					}
 					else if (symbol->is_("|:.")) // me operation
 					{
 						_name_(flock);
 						result = Expression::fin_(token, sym_("intimation_"), flock);
+					}
+					else if (symbol->is_("|::")) // me creator
+					{
+						flk->push_back_(creator);
+						if (_name_(flock)->is_("_"))
+						{
+							flk->erase_(1);
+						}						
+						result = Expression::fin_(token, sym_("me_creator_"), flock);
 					}
 					else if (symbol->is_("..")) // iterator
 					{

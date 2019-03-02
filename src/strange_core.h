@@ -525,7 +525,7 @@ public:
 	class Dismemberment : public Disagreement
 	{
 	public:
-		inline Dismemberment(const Ptr& cat, const Ptr& member);
+		inline Dismemberment(const Ptr& type, const Ptr& member);
 	};
 
 	class Mutilation : public Disagreement
@@ -8839,9 +8839,9 @@ inline const Thing::Ptr& Thing::shared_()
 	return SHARED;
 }
 
-inline Thing::Dismemberment::Dismemberment(const Ptr& cat, const Ptr& member)
+inline Thing::Dismemberment::Dismemberment(const Ptr& type, const Ptr& member)
 	:Disagreement("Dismemberment "
-		+ (dynamic_<Symbol>(cat) ? static_<Symbol>(cat)->get_() : std::string("[UNKNOWN]")) + "."
+		+ (dynamic_<Symbol>(type) ? static_<Symbol>(type)->get_() : std::string("[UNKNOWN]")) + "."
 		+ (dynamic_<Symbol>(member) ? static_<Symbol>(member)->get_() : std::string("[UNKNOWN]")))
 {
 }

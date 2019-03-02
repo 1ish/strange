@@ -234,7 +234,7 @@ public:
 				}
 				if (token == "|")
 				{
-					if (char1 == ':' && char2 == '.') // |:.
+					if (char1 == ':' && (char2 == ':' || char2 == '.')) // |:: or |:.
 					{
 						token += char1;
 						continue;
