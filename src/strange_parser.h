@@ -457,11 +457,13 @@ private:
 					}
 					else if (symbol->is_("|.")) // me dot
 					{
+						flk->push_back_(creator);
 						_dot_(scope, shoal, fixed, cats, creator, statement, flock, true); // me dot
 						result = Expression::fin_(token, smt->get_(), flock);
 					}
 					else if (symbol->is_("|:.")) // me operation
 					{
+						flk->push_back_(creator);
 						_name_(flock);
 						result = Expression::fin_(token, sym_("intimation_"), flock);
 					}

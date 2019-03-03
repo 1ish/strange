@@ -2147,7 +2147,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("set_intimate_"))
 	{
-		if (size == 2)
+		if (size == 3)
 		{
 			return fin_(token, statement, &Expression::_set_intimate_, flock);
 		}
@@ -2155,7 +2155,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("private_"))
 	{
-		if (size == 1)
+		if (size == 2)
 		{
 			return fin_(token, statement, &Expression::_private_, flock);
 		}
@@ -2163,7 +2163,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("intimate_"))
 	{
-		if (size >= 1)
+		if (size >= 2)
 		{
 			return fin_(token, statement, &Expression::_intimate_, flock);
 		}
@@ -2171,7 +2171,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("intimate_iterator_"))
 	{
-		if (size == 2)
+		if (size == 3)
 		{
 			return fin_(token, statement, &Expression::_intimate_iterator_, flock);
 		}
@@ -2179,7 +2179,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("intimate_iterable_"))
 	{
-		if (size == 2)
+		if (size == 3)
 		{
 			return fin_(token, statement, &Expression::_intimate_iterable_, flock);
 		}
@@ -2187,7 +2187,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("intimation_"))
 	{
-		if (size == 1)
+		if (size == 2)
 		{
 			return fin_(token, statement, &Expression::_intimation_, flock);
 		}
@@ -2441,15 +2441,30 @@ inline const Thing::Ptr Expression::_set_intimate_(const Ptr& local) const
 		{
 			throw _stack_("me accessed without a creature");
 		}
-		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+		const auto name = static_<Symbol>(vec[1]);
+		Ptr member;
+		if (name->get_()[0] == '_')
+		{
+			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creator)
+			{
+				throw _stack_("set intimate without a creator");
+			}
+			member = static_<Shoal>(static_<Creature>(thing)->members_())
+				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+		}
+		else
+		{
+			member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(name);
+		}
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->cat_(), vec[0]);
+			throw Dismemberment(thing->cat_(), name);
 		}
 		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
-			const Ptr value = Expression::evaluate_(vec[1], local);
+			const Ptr value = Expression::evaluate_(vec[2], local);
 			attribute->set_(value, true);
 			return value;
 		}
@@ -2465,15 +2480,31 @@ inline const Thing::Ptr Expression::_private_(const Ptr& local) const
 {
 	try
 	{
+		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 		const Ptr thing = static_<Shoal>(local)->at_("|");
 		if (thing->is_nothing_())
 		{
 			throw _stack_("me accessed without a creature");
 		}
-		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(static_<Flock>(_flock)->get_()[0]);
+		const auto name = static_<Symbol>(vec[1]);
+		Ptr member;
+		if (name->get_()[0] == '_')
+		{
+			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creator)
+			{
+				throw _stack_("private accessed without a creator");
+			}
+			member = static_<Shoal>(static_<Creature>(thing)->members_())
+				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+		}
+		else
+		{
+			member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(name);
+		}
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->cat_(), static_<Flock>(_flock)->get_()[0]);
+			throw Dismemberment(thing->cat_(), name);
 		}
 		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
@@ -2499,17 +2530,32 @@ inline const Thing::Ptr Expression::_intimate_(const Ptr& local) const
 		{
 			throw _stack_("me accessed without a creature");
 		}
-		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+		const auto name = static_<Symbol>(vec[1]);
+		Ptr member;
+		if (name->get_()[0] == '_')
+		{
+			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creator)
+			{
+				throw _stack_("set intimate without a creator");
+			}
+			member = static_<Shoal>(static_<Creature>(thing)->members_())
+				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+		}
+		else
+		{
+			member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(name);
+		}
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->cat_(), vec[0]);
+			throw Dismemberment(thing->cat_(), name);
 		}
 		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
-			return attribute->intimator_(thing, _iterator_(local, 1));
+			return attribute->intimator_(thing, _iterator_(local, 2));
 		}
-		return operate_(thing.get(), member, _iterator_(local, 1));
+		return operate_(thing.get(), member, _iterator_(local, 2));
 	}
 	catch (const std::exception& err)
 	{
@@ -2527,17 +2573,32 @@ inline const Thing::Ptr Expression::_intimate_iterator_(const Ptr& local) const
 		{
 			throw _stack_("me accessed without a creature");
 		}
-		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+		const auto name = static_<Symbol>(vec[1]);
+		Ptr member;
+		if (name->get_()[0] == '_')
+		{
+			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creator)
+			{
+				throw _stack_("set intimate without a creator");
+			}
+			member = static_<Shoal>(static_<Creature>(thing)->members_())
+				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+		}
+		else
+		{
+			member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(name);
+		}
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->cat_(), vec[0]);
+			throw Dismemberment(thing->cat_(), name);
 		}
 		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
-			return attribute->intimator_(thing, Expression::evaluate_(vec[1], local));
+			return attribute->intimator_(thing, Expression::evaluate_(vec[2], local));
 		}
-		return operate_(thing.get(), member, Expression::evaluate_(vec[1], local));
+		return operate_(thing.get(), member, Expression::evaluate_(vec[2], local));
 	}
 	catch (const std::exception& err)
 	{
@@ -2555,13 +2616,28 @@ inline const Thing::Ptr Expression::_intimate_iterable_(const Ptr& local) const
 		{
 			throw _stack_("me accessed without a creature");
 		}
-		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+		const auto name = static_<Symbol>(vec[1]);
+		Ptr member;
+		if (name->get_()[0] == '_')
+		{
+			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creator)
+			{
+				throw _stack_("set intimate without a creator");
+			}
+			member = static_<Shoal>(static_<Creature>(thing)->members_())
+				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+		}
+		else
+		{
+			member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(name);
+		}
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->cat_(), vec[0]);
+			throw Dismemberment(thing->cat_(), name);
 		}
 		const auto attribute = dynamic_<Attribute>(member);
-		const Ptr iterable = Expression::evaluate_(vec[1], local);
+		const Ptr iterable = Expression::evaluate_(vec[2], local);
 		const Ptr feeder = iterable->feeder(member->eater_());
 		if (!feeder->is_nothing_())
 		{
@@ -2593,10 +2669,25 @@ inline const Thing::Ptr Expression::_intimation_(const Ptr& local) const
 		{
 			throw _stack_("me accessed without a creature");
 		}
-		const Ptr member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(vec[0]);
+		const auto name = static_<Symbol>(vec[1]);
+		Ptr member;
+		if (name->get_()[0] == '_')
+		{
+			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creator)
+			{
+				throw _stack_("set intimate without a creator");
+			}
+			member = static_<Shoal>(static_<Creature>(thing)->members_())
+				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+		}
+		else
+		{
+			member = static_<Shoal>(static_<Creature>(thing)->members_())->at_(name);
+		}
 		if (member->is_nothing_())
 		{
-			throw Dismemberment(thing->cat_(), vec[0]);
+			throw Dismemberment(thing->cat_(), name);
 		}
 		return member;
 	}
