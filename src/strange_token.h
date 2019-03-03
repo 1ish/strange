@@ -20,6 +20,7 @@ public:
 		, _tag{ tag }
 		, _symbol{ symbol }
 		, _value{ value }
+		, _precedence{ _precedence_(tag, symbol) }
 	{
 	}
 
@@ -96,6 +97,7 @@ public:
 			shoal->update_("tag", Const<Token>::fin_(&Token::tag));
 			shoal->update_("symbol", Const<Token>::fin_(&Token::symbol));
 			shoal->update_("value", Const<Token>::fin_(&Token::value));
+			shoal->update_("precedence", Const<Token>::fin_(&Token::precedence));
 			shoal->update_("error", Const<Token>::fin_(&Token::error, "message"));
 			shoal->finalize_();
 			return pub;
@@ -169,6 +171,16 @@ public:
 		return value_();
 	}
 
+	inline const int64_t precedence_() const
+	{
+		return _precedence;
+	}
+
+	inline const Ptr precedence(const Ptr& ignore) const
+	{
+		return Int64::fin_(precedence_());
+	}
+
 	inline const Ptr error_(const std::string& err, const Ptr& misunderstanding = Misunderstanding::mut_()) const
 	{
 		const auto m = static_<Misunderstanding>(misunderstanding);
@@ -238,6 +250,7 @@ private:
 	const Ptr _tag;
 	const Ptr _symbol;
 	const Ptr _value;
+	const int64_t _precedence;
 
 	static inline const Ptr _symbol_(const std::string& str)
 	{
@@ -255,6 +268,68 @@ private:
 			return stop_();
 		}
 		return symbol;
+	}
+
+	static inline const int64_t _precedence_(const Ptr& tag, const Ptr& symbol)
+	{
+		if (static_<Int8>(tag)->get_() == 'P') // punctuation
+		{
+			if (symbol->is_("::") || symbol->is_(":."))
+			{
+				return 100;
+			}
+			if (symbol->is_(".") || symbol->is_(".:") ||
+				symbol->is_("[") || symbol->is_("(") || symbol->is_("{") || symbol->is_("<<"))
+			{
+				return 95;
+			}
+			if (symbol->is_("@") || symbol->is_("@=") || symbol->is_("@+") || symbol->is_("@-") ||
+				symbol->is_("@<") || symbol->is_(">@"))
+			{
+				return 90;
+			}
+			if (symbol->is_("++") || symbol->is_("--") || symbol->is_("?") || symbol->is_("!") ||
+				symbol->is_("~") || symbol->is_("~~") || symbol->is_("#") || symbol->is_("##") || symbol->is_("@@") ||
+				symbol->is_("~#") || symbol->is_("~~##") || symbol->is_(".?") || symbol->is_(".!") ||
+				symbol->is_("^") || symbol->is_("&") || symbol->is_("@>") || symbol->is_("<@"))
+			{
+				return 85;
+			}
+			if (symbol->is_("*") || symbol->is_("/") || symbol->is_("%"))
+			{
+				return 80;
+			}
+			if (symbol->is_("+") || symbol->is_("-"))
+			{
+				return 75;
+			}
+			if (symbol->is_("<") || symbol->is_(">") || symbol->is_("<=") || symbol->is_(">="))
+			{
+				return 70;
+			}
+			if (symbol->is_("==") || symbol->is_("!="))
+			{
+				return 65;
+			}
+			if (symbol->is_("&&") || symbol->is_("!&"))
+			{
+				return 60;
+			}
+			if (symbol->is_("%%") || symbol->is_("!%"))
+			{
+				return 55;
+			}
+			if (symbol->is_("||") || symbol->is_("!|"))
+			{
+				return 50;
+			}
+			if (symbol->is_("=") || symbol->is_("+=") || symbol->is_("-=") || symbol->is_("*=") || symbol->is_("/=") ||
+				symbol->is_("%="))
+			{
+				return 45;
+			}
+		}
+		return -1;
 	}
 };
 
