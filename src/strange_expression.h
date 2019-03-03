@@ -2364,10 +2364,13 @@ inline const Thing::Ptr Expression::_me_creator_at_(const Ptr& local) const
 	{
 		throw _stack_("me accessed without a creator");
 	}
-	const Ptr member = creator->at_(vec[1]);
+	const auto name = static_<Symbol>(vec[1]);
+	const Ptr member = (name->get_()[0] == '_')
+		? creator->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_())
+		: creator->at_(name);
 	if (member->is_nothing_())
 	{
-		throw Dismemberment(sym_("me_creator_"), vec[1]);
+		throw Dismemberment(sym_("me_creator_"), name);
 	}
 	const auto attribute = dynamic_<Attribute>(member);
 	if (attribute)

@@ -22,7 +22,7 @@
 			(
 				a+b
 			),
-			'f':#(|::_Arithmetic_T),
+			'f':#(|::_T),
 			'_m':%"_mlake",
 			'v':*"vlake",
 			'c':~<strange::Thing[<C>,<>]>.cat[],
