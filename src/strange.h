@@ -10,6 +10,7 @@
 #include "strange_misunderstanding.h"
 #include "strange_reference.h"
 #include "strange_weak.h"
+#include "strange_fence.h"
 #include "strange_expression.h"
 #include "strange_generator.h"
 #include "strange_cpp_generator.h"
@@ -86,6 +87,9 @@ inline void Thing::share_(const Ptr& shoal)
 
 	// strange_weak
 	Weak::share_(shoal);
+
+	// strange_fence
+	Fence::share_(shoal);
 
 	// strange_creature
 	Creature::share_(shoal);
