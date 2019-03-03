@@ -1496,11 +1496,11 @@ private:
 				{
 					value = Expression::fin_(token, Fixed::fin_(value));
 				}
-				else if (attribute->is_(":%")) // mutable
+				else if (attribute->is_(":*")) // mutable
 				{
 					value = Expression::fin_(token, Mutable::fin_(value));
 				}
-				else if (attribute->is_(":*")) // variable
+				else if (attribute->is_(":%")) // variable
 				{
 					value = Expression::fin_(token, Variable::fin_(value));
 				}

@@ -23,8 +23,8 @@
 				a+b
 			),
 			'f':#(|::_T),
-			'_m':%"_mlake",
-			'v':*"vlake",
+			'_m':*"_mlake",
+			'v':%"vlake",
 			'c':~<strange::Thing[<C>,<>]>.cat[],
 			'_mem':function_()(7)
 		}
