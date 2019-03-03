@@ -22,7 +22,7 @@
 			(
 				a+b
 			),
-			'f':#(|::T),
+			'f':#(|::_Arithmetic_T),
 			'_m':%"_mlake",
 			'v':*"vlake",
 			'c':~<strange::Thing[<C>,<>]>.cat[],
@@ -30,7 +30,6 @@
 		}
 	},
 	ar := $$Arithmetic['xxx']::mut[],
-	out.write[$$Arithmetic['xxx']::T, "\n"],
 	out.write[ar.addition[2, 2].to_symbol[], "\n"],
 	out.write[ar.f, "\n"],
 	out.write[ar.v, "\n"],
@@ -39,7 +38,6 @@
 	ar.c := "nlake",
 	out.write[ar.c, "\n"],
 	out.write[ar.type[], "\n"],
-	out.write[ar.T, "\n"],
 	out.write[ar.cat[], "\n"],
 	y := $$f[x+1],
 	z := (s@['f'])[y],

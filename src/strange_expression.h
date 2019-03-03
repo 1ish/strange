@@ -212,21 +212,7 @@ private:
 		return creator;
 	}
 
-	inline const Ptr _me_creator_at_(const Ptr& local) const
-	{
-		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-		const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
-		if (!creator)
-		{
-			throw _stack_("me accessed without a creator");
-		}
-		const Ptr member = creator->at_(vec[1]);
-		if (member->is_nothing_())
-		{
-			throw Dismemberment(sym_("me_creator_"), vec[1]);
-		}
-		return member;
-	}
+	inline const Ptr _me_creator_at_(const Ptr& local) const;
 
 	inline const Ptr _thing_(const Ptr& local) const
 	{
@@ -2370,6 +2356,27 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	return fin_(token);
 }
 
+inline const Thing::Ptr Expression::_me_creator_at_(const Ptr& local) const
+{
+	const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+	const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+	if (!creator)
+	{
+		throw _stack_("me accessed without a creator");
+	}
+	const Ptr member = creator->at_(vec[1]);
+	if (member->is_nothing_())
+	{
+		throw Dismemberment(sym_("me_creator_"), vec[1]);
+	}
+	const auto attribute = dynamic_<Attribute>(member);
+	if (attribute)
+	{
+		attribute->initialize_();
+	}
+	return member;
+}
+
 inline const Thing::Ptr Expression::_set_attribute_(const Ptr& local) const
 {
 	try
@@ -2725,11 +2732,16 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 			}
 			_merge_((i == size_1) ? creator_params : Ptr(), creation.get(), result.get());
 		}
+		const auto type = static_<Symbol>(result->at_("type")->invoke_());
 		params->erase_("$");
 		params->erase_("&");
 		for (const auto& p : params->get_())
 		{
-			result->update_(p.first, Fixed::fin_(Expression::fin_(_token, p.second)));
+			const auto symbol = dynamic_<Symbol>(p.first);
+			if (symbol)
+			{
+				result->update_("_" + type->get_() + "_" + symbol->get_(), Fixed::fin_(Expression::fin_(_token, p.second)));
+			}
 		}
 		static_<Weak>(vec[0])->set_(result);
 		return result;
@@ -2766,7 +2778,7 @@ inline void Expression::_merge_(const Ptr& values, Shoal* const creation, Shoal*
 			throw Disagreement("creation derived type is not a symbol");
 		}
 		
-		const Ptr cat = Cat::fin_("<" + static_<Symbol>(type)->get_() + static_<Symbol>(values)->get_() + ">");
+		const Ptr cat = Cat::fin_("<" + type_symbol->get_() + static_<Symbol>(values)->get_() + ">");
 		{
 			const Ptr flock = Flock::mut_();
 			const auto flk = static_<Flock>(flock);
