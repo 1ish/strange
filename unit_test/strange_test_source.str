@@ -6,7 +6,7 @@
 	{
 		'f'::function_(<strange::Number[<>,<>,<>]> a := 1000)
 		(
-			a+2
+			a+2*3
 		),
 		'Arithmetic'::creator_(T)()
 		{
@@ -20,7 +20,7 @@
 			),
 			'addition'::extraction_(<strange::Number> a, <strange::Number> b)
 			(
-				a+b
+				a+b*3
 			),
 			'f':#(|::_T),
 			'_m':*"_mlake",
@@ -40,15 +40,15 @@
 	out.write[ar.type[], "\n"],
 	out.write[ar.cat[], "\n"],
 	y := $$f[x+1],
-	z := (s@['f'])[y],
-	z := s@'f'[y],
+	z := s@['f'][y],
+	z := (s@'f')[y],
 	out.write[z.to_symbol[], "\n"],
 	it := ["a","b","c","\n"],
 	out.write it,
 	x := z:.self_add,
 	y.:x[100],
-	y.:(z:.self_add)1,
 	out.write[y.to_symbol[], "\n"],
 	{'m'::out.write}@'m'"last\n",
-	out.write[s::f[1].to_symbol[], "\n"]
+	out.write[s::f[1].to_symbol[], "\n"],
+	y.:z:.self_add 1
 )
