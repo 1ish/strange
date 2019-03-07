@@ -6,7 +6,7 @@
 	{
 		'f'::function_(<strange::Number[<>,<>,<>]> a := 1000)
 		(
-			a+2*3
+			a*2+3*3
 		),
 		'Arithmetic'::creator_(T)()
 		{
