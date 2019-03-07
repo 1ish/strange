@@ -36,7 +36,6 @@ public:
 		, _statement{ statement }
 		, _member{ member }
 		, _flock{ flock }
-		, _parent{ Weak::mut_(nothing_()) }
 	{
 	}
 
@@ -91,11 +90,6 @@ public:
 		return CAT;
 	}
 
-	inline void parent_(const Ptr& parent)
-	{
-		static_<Weak>(_parent)->set_(parent);
-	}
-
 	inline const Ptr get_() const
 	{
 		if (_member == &Expression::_thing_)
@@ -110,7 +104,6 @@ private:
 	const Ptr _statement;
 	const MemberPtr _member;
 	const Ptr _flock;
-	const Ptr _parent;
 
 	inline const Ptr _stack_(const std::string& str, const int64_t stack = 1, const Ptr& misunderstanding = Misunderstanding::mut_()) const
 	{
@@ -118,12 +111,14 @@ private:
 		static_<Token>(_token)->error_(message + '\n' +
 			std::to_string(stack) + ": " + static_<Symbol>(_statement)->get_(),
 			misunderstanding);
+		/*
 		const Ptr parent = static_<Weak>(_parent)->get_();
 		const auto p = dynamic_<Expression>(parent);
 		if (p)
 		{
 			p->_stack_("", stack + 1, misunderstanding);
 		}
+		*/
 		return misunderstanding;
 	}
 
@@ -880,11 +875,6 @@ public:
 	{
 	}
 
-	inline void parent_(const Ptr& parent)
-	{
-		static_<Expression>(_expression)->parent_(parent);
-	}
-
 protected:
 	const Ptr _expression;
 };
@@ -1259,6 +1249,7 @@ public:
 
 	virtual inline const Ptr get_() const
 	{
+		initialize_();
 		return _value;
 	}
 
@@ -1497,6 +1488,7 @@ public:
 
 	virtual inline const Ptr get_() const override
 	{
+		initialize_();
 		return _get_();
 	}
 
@@ -1977,23 +1969,6 @@ private:
 inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement, const MemberPtr member, const Ptr& flock)
 {
 	const Ptr exp = fake_<Expression>(token, statement, member, flock);
-	const Ptr it = flock->iterator_();
-	for (Ptr sub = it->next_(); !sub->is_stop_(); sub = it->next_())
-	{
-		const auto e = dynamic_<Expression>(sub);
-		if (e)
-		{
-			e->parent_(exp);
-		}
-		else
-		{
-			const auto op = dynamic_<Operation>(sub);
-			if (op)
-			{
-				op->parent_(exp);
-			}
-		}
-	}
 	flock->freeze_();
 	return exp;
 }
@@ -2420,7 +2395,6 @@ inline const Thing::Ptr Expression::_public_(const Ptr& local) const
 		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
-			attribute->initialize_();
 			return attribute->get_();
 		}
 		return Method::fin_(thing, member);
@@ -2509,7 +2483,6 @@ inline const Thing::Ptr Expression::_private_(const Ptr& local) const
 		const auto attribute = dynamic_<Attribute>(member);
 		if (attribute)
 		{
-			attribute->initialize_();
 			return attribute->get_();
 		}
 		return Method::fin_(thing, member);
