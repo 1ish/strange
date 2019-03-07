@@ -597,7 +597,6 @@ private:
 			{
 				return false; // break
 			}
-			min_precedence = precedence;
 			if (symbol->is_("."))
 			{
 				_next_();
@@ -921,6 +920,7 @@ private:
 			const Ptr stmnt = smt->get_();
 			if (stmnt->is_("intimate_iterable_") || stmnt->is_("operate_iterable_") || stmnt->is_("perform_"))
 			{
+				min_precedence = precedence++;
 				const int64_t index = stmnt->is_("perform_") ? 1 : 2;
 				for (;;)
 				{
@@ -929,7 +929,6 @@ private:
 					const Ptr next_flock = Flock::mut_();
 					const auto next_flk = static_<Flock>(next_flock);
 					next_flk->push_back_(flk->at_(index));
-					++precedence;
 					if (!_thing_(scope, shoal, fixed, cats, creator, next_statement, next_flock, key, precedence))
 					{
 						break;
