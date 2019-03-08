@@ -470,10 +470,7 @@ private:
 					else if (symbol->is_("|::")) // me creator
 					{
 						flk->push_back_(creator);
-						if (_name_(flock)->is_("_"))
-						{
-							flk->erase_(1);
-						}						
+						_name_(flock);
 						result = Expression::fin_(token, sym_("me_creator_"), flock);
 					}
 					else if (symbol->is_("..")) // iterator
@@ -519,11 +516,18 @@ private:
 						_list_(scope, shoal, fixed, cats, creator, flock, sym_("]"));
 						result = Expression::fin_(token, sym_("flock_"), flock);
 					}
-					else if (symbol->is_("{")) // shoal or herd
+					else if (symbol->is_("{")) // creator, shoal or herd
 					{
 						if (_map_(scope, shoal, fixed, cats, creator, flock))
 						{
-							result = Expression::fin_(token, sym_("shoal_"), flock);
+							if (flk->size_() == 1 && flk->at_(0) == creator)
+							{
+								result = Expression::fin_(token, sym_("me_creator_"), flock);
+							}
+							else
+							{
+								result = Expression::fin_(token, sym_("shoal_"), flock);
+							}
 						}
 						else
 						{
@@ -1375,6 +1379,7 @@ private:
 		bool is_map = false;
 		bool not_map = false;
 		bool empty = false;
+		bool me_creator = false;
 		bool key = true;
 		bool punctuation = false;
 		bool add_shoal = false;
@@ -1406,7 +1411,15 @@ private:
 					else if (symbol->is_(":"))
 					{
 						_next_();
+						is_map = true;
 						empty = true;
+						continue;
+					}
+					else if (symbol->is_("::"))
+					{
+						_next_();
+						is_map = true;
+						me_creator = true;
 						continue;
 					}
 					else if (symbol->is_(","))
@@ -1423,6 +1436,16 @@ private:
 					return is_map;
 				}
 				throw tok->error_("Parser ERROR: {: not followed immediately by }");
+			}
+			else if (me_creator)
+			{
+				if (tag == 'P' && symbol->is_("}"))
+				{
+					_next_();
+					flk->push_back_(creator);
+					return is_map;
+				}
+				throw tok->error_("Parser ERROR: {:: not followed immediately by }");
 			}
 			else if (key)
 			{

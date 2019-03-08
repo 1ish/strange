@@ -16,7 +16,7 @@
 			),
 			'mut'::function_()
 			(
-				$$strange::Creature::mut[|::_]
+				$$strange::Creature::mut[{::}]
 			),
 			'addition'::extraction_(<strange::Number> a, <strange::Number> b)
 			(
