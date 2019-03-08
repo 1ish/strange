@@ -278,55 +278,59 @@ private:
 			{
 				return 100;
 			}
-			if (symbol->is_(".") || symbol->is_(".:") ||
-				symbol->is_("[") || symbol->is_("(") || symbol->is_("{") || symbol->is_("<<"))
+			if (symbol->is_(".") || symbol->is_(".:"))
 			{
 				return 95;
 			}
-			if (symbol->is_("@") || symbol->is_("@=") || symbol->is_("@+") || symbol->is_("@-") ||
-				symbol->is_("@<") || symbol->is_(">@"))
+			if (symbol->is_("[") || symbol->is_("(") || symbol->is_("{") || symbol->is_("<<"))
 			{
 				return 90;
 			}
-			if (symbol->is_("++") || symbol->is_("--") || symbol->is_("?") || symbol->is_("!") ||
-				symbol->is_("~") || symbol->is_("~~") || symbol->is_("#") || symbol->is_("##") || symbol->is_("@@") ||
-				symbol->is_("~#") || symbol->is_("~~##") || symbol->is_(".?") || symbol->is_(".!") ||
-				symbol->is_("^") || symbol->is_("&") || symbol->is_("@>") || symbol->is_("<@"))
+			if (symbol->is_("@") || symbol->is_("@=") || symbol->is_("@+") || symbol->is_("@-") ||
+				symbol->is_("@<") || symbol->is_(">@") || symbol->is_("@>") || symbol->is_("<@") ||
+				symbol->is_("@@"))
 			{
 				return 85;
 			}
-			if (symbol->is_("*") || symbol->is_("/") || symbol->is_("%"))
+			if (symbol->is_("++") || symbol->is_("--") || symbol->is_("?") || symbol->is_("!") ||
+				symbol->is_("~") || symbol->is_("~~") || symbol->is_("#") || symbol->is_("##") ||
+				symbol->is_("~#") || symbol->is_("~~##") || symbol->is_(".?") || symbol->is_(".!") ||
+				symbol->is_("^") || symbol->is_("&"))
 			{
 				return 80;
 			}
-			if (symbol->is_("+") || symbol->is_("-"))
+			if (symbol->is_("*") || symbol->is_("/") || symbol->is_("%"))
 			{
 				return 75;
 			}
-			if (symbol->is_("<") || symbol->is_(">") || symbol->is_("<=") || symbol->is_(">="))
+			if (symbol->is_("+") || symbol->is_("-"))
 			{
 				return 70;
 			}
-			if (symbol->is_("==") || symbol->is_("!="))
+			if (symbol->is_("<") || symbol->is_(">") || symbol->is_("<=") || symbol->is_(">="))
 			{
 				return 65;
 			}
-			if (symbol->is_("&&") || symbol->is_("!&"))
+			if (symbol->is_("==") || symbol->is_("!="))
 			{
 				return 60;
 			}
-			if (symbol->is_("%%") || symbol->is_("!%"))
+			if (symbol->is_("&&") || symbol->is_("!&"))
 			{
 				return 55;
 			}
-			if (symbol->is_("||") || symbol->is_("!|"))
+			if (symbol->is_("%%") || symbol->is_("!%"))
 			{
 				return 50;
+			}
+			if (symbol->is_("||") || symbol->is_("!|"))
+			{
+				return 45;
 			}
 			if (symbol->is_("=") || symbol->is_("+=") || symbol->is_("-=") || symbol->is_("*=") || symbol->is_("/=") ||
 				symbol->is_("%="))
 			{
-				return 45;
+				return 40;
 			}
 		}
 		return -1;
