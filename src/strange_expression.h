@@ -422,7 +422,7 @@ private:
 
 	inline const Ptr _creation_(const Ptr& local) const;
 
-	inline void _merge_(const Ptr& values, Shoal* const creation, Shoal* const result) const;
+	inline void _merge_(const Ptr& scope, const Ptr& values, Shoal* const creation, Shoal* const result) const;
 
 	inline const Ptr _shared_scope_(const Ptr& local) const
 	{
@@ -2194,7 +2194,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("creation_"))
 	{
-		if (size >= 2) // creation ..
+		if (size >= 3) // scope, creation ..
 		{
 			return fin_(token, statement, &Expression::_creation_, flock);
 		}
@@ -2789,7 +2789,7 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 		const Ptr creator_params = params->at_("[");
 		params->erase_("[");
 		const std::size_t size_1 = vec.size() - 1;
-		for (std::size_t i = 1; i <= size_1; ++i)
+		for (std::size_t i = 2; i <= size_1; ++i)
 		{
 			const Ptr shoal = Expression::evaluate_(vec[i], local);
 			const auto creation = dynamic_<Shoal>(shoal);
@@ -2797,7 +2797,7 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 			{
 				throw _stack_("creation_ passed wrong kind of thing");
 			}
-			_merge_((i == size_1) ? creator_params : Ptr(), creation.get(), result.get());
+			_merge_(vec[0], (i == size_1) ? creator_params : Ptr(), creation.get(), result.get());
 		}
 		const auto type = static_<Symbol>(result->at_("type")->invoke_());
 		params->erase_("$");
@@ -2810,7 +2810,7 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 				result->update_("_" + type->get_() + "_" + symbol->get_(), Fixed::fin_(Expression::fin_(_token, p.second)));
 			}
 		}
-		static_<Weak>(vec[0])->set_(result);
+		static_<Weak>(vec[1])->set_(result);
 		return result;
 	}
 	catch (const std::exception& err)
@@ -2819,7 +2819,7 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 	}
 }
 
-inline void Expression::_merge_(const Ptr& values, Shoal* const creation, Shoal* const result) const
+inline void Expression::_merge_(const Ptr& scope, const Ptr& values, Shoal* const creation, Shoal* const result) const
 {
 	Ptr type;
 	if (values)
@@ -2827,7 +2827,7 @@ inline void Expression::_merge_(const Ptr& values, Shoal* const creation, Shoal*
 		const Ptr type_fun = creation->at_("type");
 		if (type_fun->is_nothing_())
 		{
-			type = nothing_();
+			type = scope;
 			const Ptr flock = Flock::mut_();
 			const auto flk = static_<Flock>(flock);
 			flk->push_back_(one_());

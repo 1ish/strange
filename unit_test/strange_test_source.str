@@ -10,10 +10,6 @@
 		),
 		'Arithmetic'::creator_(T)()
 		{
-			'type'::function_()
-			(
-				'Arithmetic'
-			),
 			'mut'::function_()
 			(
 				$$strange::Creature::mut[{::}]
