@@ -555,8 +555,7 @@ private:
 				else
 				{
 					flk->push_back_(result);
-					int64_t precedence = 0;
-					if (_thing_(scope, shoal, fixed, cats, creator, statement, flock, key, precedence))
+					if (_thing_(scope, shoal, fixed, cats, creator, statement, flock, key))
 					{
 						result = Expression::fin_(token, smt->get_(), flock);
 					}
@@ -574,7 +573,7 @@ private:
 		return Expression::fin_(token);
 	}
 
-	inline const bool _thing_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& statement, const Ptr& flock, const bool key, int64_t& min_precedence)
+	inline const bool _thing_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& statement, const Ptr& flock, const bool key, const int64_t min_precedence = 0)
 	{
 		const Ptr token = _token_();
 		if (token->is_stop_())
@@ -592,8 +591,8 @@ private:
 		const auto smt = static_<Reference>(statement);
 		if (tag == 'P') // punctuation
 		{
-			int64_t precedence = tok->precedence_();
-			if (precedence < min_precedence)
+			const int64_t precedence_inc = tok->precedence_() + 1;
+			if (precedence_inc <= min_precedence)
 			{
 				return false; // break
 			}
@@ -920,7 +919,6 @@ private:
 			const Ptr stmnt = smt->get_();
 			if (stmnt->is_("intimate_iterable_") || stmnt->is_("operate_iterable_") || stmnt->is_("perform_"))
 			{
-				min_precedence = precedence++;
 				const int64_t index = stmnt->is_("perform_") ? 1 : 2;
 				for (;;)
 				{
@@ -929,7 +927,7 @@ private:
 					const Ptr next_flock = Flock::mut_();
 					const auto next_flk = static_<Flock>(next_flock);
 					next_flk->push_back_(flk->at_(index));
-					if (!_thing_(scope, shoal, fixed, cats, creator, next_statement, next_flock, key, precedence))
+					if (!_thing_(scope, shoal, fixed, cats, creator, next_statement, next_flock, key, precedence_inc))
 					{
 						break;
 					}
