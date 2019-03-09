@@ -729,11 +729,11 @@ class Symbol : public Thing, public Serializable
 {
 public:
 	template <typename F>
-	inline Symbol(F&& symbol)
+	inline Symbol(F&& symbol, const std::size_t hash = 0)
 		: Thing{}
 		, Serializable{}
 		, _symbol{ std::forward<F>(symbol) }
-		, _hash{ std::hash<std::string>()(_symbol) }
+		, _hash{ hash ? hash : std::hash<std::string>()(_symbol) }
 	{
 	}
 
@@ -845,7 +845,7 @@ public:
 		return boolean_(greater_or_equal_(it->next_()));
 	}
 
-private:
+protected:
 	const std::string _symbol;
 	const std::size_t _hash;
 };
@@ -858,13 +858,85 @@ public:
 	template <typename F>
 	inline Cat(F&& symbol)
 		: Symbol{ std::forward<F>(symbol) }
+		, _symbolic{ true }
+		, _type_name{}
+		, _arguments{}
+		, _parameters{}
+		, _return_cat{}
 	{
+	}
+
+	inline Cat(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
+		: Symbol{ _symbol_(type_name, arguments, parameters, return_cat), _hash_(type_name, arguments, parameters, return_cat) }
+		, _symbolic{ _symbolic_(arguments, parameters, return_cat) }
+		, _type_name{ _symbolic ? 0 : type_name }
+		, _arguments{ _symbolic ? 0 : arguments }
+		, _parameters{ _symbolic ? 0 : parameters }
+		, _return_cat{ _symbolic ? 0 : return_cat }
+	{
+	}
+
+	virtual inline const bool same_(const Ptr& other) const override
+	{
+		const auto other_cat = dynamic_<Cat>(other);
+		if (!other_cat || _symbolic != other_cat->_symbolic || _hash != other_cat->_hash)
+		{
+			return false;
+		}
+		if (_symbolic)
+		{
+			return Symbol::same_(other);
+		}
+		if (!_type_name->is_(other_cat->_type_name) || !_return_cat->same_(other_cat->_return_cat))
+		{
+			return false;
+		}
+		{
+			const Ptr args = _arguments->iterator_();
+			const Ptr other_args = other_cat->_arguments->iterator_();
+			Ptr other_arg = other_args->next_();
+			for (Ptr arg = args->next_(); !arg->is_stop_(); arg = args->next_())
+			{
+				if (other_arg->is_stop_() || !arg->same_(other_arg))
+				{
+					return false;
+				}
+				other_arg = other_args->next_();
+			}
+			if (!other_arg->is_stop_())
+			{
+				return false;
+			}
+		}
+		{
+			const Ptr params = _parameters->iterator_();
+			const Ptr other_params = other_cat->_parameters->iterator_();
+			Ptr other_param = other_params->next_();
+			for (Ptr param = params->next_(); !param->is_stop_(); param = params->next_())
+			{
+				if (other_param->is_stop_() || !param->same_(other_param))
+				{
+					return false;
+				}
+				other_param = other_params->next_();
+			}
+			if (!other_param->is_stop_())
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	template <typename F>
 	static inline const Ptr fin_(F&& symbol)
 	{
 		return fake_<Cat>(std::forward<F>(symbol));
+	}
+
+	static inline const Ptr fin_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
+	{
+		return fake_<Cat>(type_name, arguments, parameters, return_cat);
 	}
 
 	static inline const Ptr fin(const Ptr& it)
@@ -918,6 +990,138 @@ public:
 	virtual inline const Ptr pub_() const override;
 
 	static inline const bool check_(const Ptr& thing, const Ptr& cat);
+
+private:
+	const bool _symbolic; // recursively true if all of the cats below are symbolic and there are no non-cat arguments
+	const Ptr _type_name; // type name Symbol
+	const Ptr _arguments; // Flock of creator arguments - mix of cats and non-cats
+	const Ptr _parameters; // Flock of function parameter cats
+	const Ptr _return_cat; // function return cat
+
+	static inline const bool _symbolic_(const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
+	{
+		if (!static_<Cat>(return_cat)->_symbolic)
+		{
+			return false;
+		}
+		{
+			const Ptr args = arguments->iterator_();
+			for (Ptr arg = args->next_(); !arg->is_stop_(); arg = args->next_())
+			{
+				const auto cat = dynamic_<Cat>(arg);
+				if (!cat || !cat->_symbolic)
+				{
+					return false;
+				}
+			}
+		}
+		{
+			const Ptr params = parameters->iterator_();
+			for (Ptr param = params->next_(); !param->is_stop_(); param = params->next_())
+			{
+				if (!static_<Cat>(param)->_symbolic)
+				{
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	static inline const std::string _symbol_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat, const bool hash = false)
+	{
+		std::string result = "<" + static_<Symbol>(type_name)->get_();
+		{
+			bool any_args = false;
+			const Ptr args = arguments->iterator_();
+			int64_t anys = 0;
+			for (Ptr arg = args->next_(); !arg->is_stop_(); arg = args->next_())
+			{
+				const auto cat = dynamic_<Cat>(arg);
+				if (cat && cat->_symbol == "<>")
+				{
+					++anys;
+					continue;
+				}
+				if (any_args)
+				{
+					result += ",";
+				}
+				else
+				{
+					result += "[";
+					any_args = true;
+				}
+				while (anys)
+				{
+					result += "<>,";
+					--anys;
+				}
+				if (cat)
+				{
+					result += cat->_symbol;
+				}
+				else if (hash)
+				{
+					result += _hash_arg_(arg);
+				}
+				else
+				{
+					result += "*";
+				}
+			}
+			if (any_args)
+			{
+				result += "]";
+			}
+		}
+		{
+			bool any_params = false;
+			const Ptr params = parameters->iterator_();
+			int64_t anys = 0;
+			for (Ptr param = params->next_(); !param->is_stop_(); param = params->next_())
+			{
+				const std::string& param_cat = static_<Cat>(param)->_symbol;
+				if (param_cat == "<>")
+				{
+					++anys;
+					continue;
+				}
+				if (any_params)
+				{
+					result += ",";
+				}
+				else
+				{
+					result += "(";
+					any_params = true;
+				}
+				while (anys)
+				{
+					result += "<>,";
+					--anys;
+				}
+				result += param_cat;
+			}
+			if (any_params)
+			{
+				result += ")";
+			}
+		}
+		const std::string& symbol = static_<Cat>(return_cat)->_symbol;
+		if (symbol != "<>")
+		{
+			result += symbol;
+		}
+		return result + ">";
+	}
+
+	static inline const std::string _hash_arg_(const Ptr& arg);
+
+	static inline const std::size_t _hash_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
+	{
+		return std::hash<std::string>()(_symbol_(type_name, arguments, parameters, return_cat, true));
+	}
 };
 
 //----------------------------------------------------------------------
@@ -9179,6 +9383,11 @@ inline const Thing::Ptr Cat::pub_() const
 inline const bool Cat::check_(const Ptr& thing, const Ptr& cat)
 {
 	return static_<Herd>(thing->cats_())->at_(cat);
+}
+
+inline const std::string Cat::_hash_arg_(const Ptr& arg)
+{
+	return static_<Lake>(static_<UInt64>(UInt64::fin_(uint64_t(arg->hash_())))->to_lake_())->get_();
 }
 
 //======================================================================
