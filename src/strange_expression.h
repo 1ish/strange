@@ -2085,7 +2085,11 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("cat_"))
 	{
-		return fin_(token, statement, &Expression::_cat_, flock);
+		if (size != 2)
+		{
+			return fin_(token, statement, &Expression::_cat_, flock);
+		}
+		throw Disagreement("cat_ expression of wrong size");
 	}
 	else if (statement->is_("invoke_"))
 	{
