@@ -214,6 +214,49 @@ private:
 		return static_<Flock>(_flock)->get_()[0];
 	}
 
+	inline const Ptr _cat_(const Ptr& local) const
+	{
+		try
+		{
+			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
+			const std::size_t size = vec.size();
+			if (!size)
+			{
+				return Cat::fin_("<>");
+			}
+			const auto arguments = static_<Flock>(Flock::mut_());
+			const auto parameters = static_<Flock>(Flock::mut_());
+			if (size == 1)
+			{
+				return Cat::fin_(vec[0], arguments, parameters, Cat::fin_("<>"));
+			}
+			int64_t argc = static_<Int64>(vec[0])->get_();
+			for (std::size_t i = 2; i < (size - 1); ++i)
+			{
+				const Ptr value = Expression::evaluate_(vec[i], local);
+				if (argc)
+				{
+					arguments->push_back_(value);
+					--argc;
+				}
+				else
+				{
+					parameters->push_back_(value);
+				}
+			}
+			if (argc)
+			{
+				arguments->push_back_(Expression::evaluate_(vec[size - 1], local));
+				return Cat::fin_(vec[1], arguments, parameters, Cat::fin_("<>"));
+			}
+			return Cat::fin_(vec[1], arguments, parameters, Expression::evaluate_(vec[size - 1], local));
+		}
+		catch (const std::exception& err)
+		{
+			throw _stack_(err.what());
+		}
+	}
+
 	inline const Ptr _invoke_(const Ptr& local) const
 	{
 		try
@@ -2039,6 +2082,10 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 			return fin_(token, statement, &Expression::_thing_, flock);
 		}
 		throw Disagreement("thing_ expression of wrong size");
+	}
+	else if (statement->is_("cat_"))
+	{
+		return fin_(token, statement, &Expression::_cat_, flock);
 	}
 	else if (statement->is_("invoke_"))
 	{
