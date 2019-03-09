@@ -25,7 +25,7 @@
 			'_mem':function_()(7)
 		}
 	},
-	ar := $$Arithmetic['xxx']::mut[],
+	ar := $$Arithmetic[<xxx>]::mut[],
 	out.write[ar.addition[2, 2].to_symbol[], "\n"],
 	out.write[ar.f, "\n"],
 	out.write[ar.v, "\n"],

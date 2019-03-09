@@ -2749,18 +2749,11 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 			creation_local->update_(param, frozen_value);
 			if (values->is_nothing_())
 			{
-				values = sym_("[");
+				values = Flock::mut_();
 			}
-			else
-			{
-				values = static_<Symbol>(values)->add_(",");
-			}
-			values = static_<Symbol>(values)->add_(frozen_value);
+			static_<Flock>(values)->push_back_(frozen_value);
 		}
-		if (!values->is_nothing_())
-		{
-			values = static_<Symbol>(values)->add_("]");
-		}
+		values->freeze_();
 		creation_local->insert_("[", values);
 		creation_local->insert_("$", new_shared);
 		creation_local->insert_("&", new_it);
@@ -2845,7 +2838,10 @@ inline void Expression::_merge_(const Ptr& scope, const Ptr& values, Shoal* cons
 			throw Disagreement("creation derived type is not a symbol");
 		}
 		
-		const Ptr cat = Cat::fin_("<" + type_symbol->get_() + static_<Symbol>(values)->get_() + ">");
+		const Ptr cat = Cat::fin_(type_symbol,
+			values->is_nothing_() ? Flock::mut_() : values,
+			Flock::mut_(),
+			Cat::fin_("<>"));
 		{
 			const Ptr flock = Flock::mut_();
 			const auto flk = static_<Flock>(flock);
