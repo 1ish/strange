@@ -221,19 +221,30 @@ private:
 			const Ptr type_name = static_<Flock>(_flock)->get_()[0];
 			const Ptr it = _iterator_(local, 1);
 			Ptr arguments = it->next_();
+			Ptr parameters;
+			Ptr return_cat;
 			if (arguments->is_stop_())
 			{
 				arguments = Flock::mut_();
-			}
-			Ptr parameters = it->next_();
-			if (parameters->is_stop_())
-			{
 				parameters = Flock::mut_();
-			}
-			Ptr return_cat = it->next_();
-			if (return_cat->is_stop_())
-			{
 				return_cat = Cat::fin_("<>");
+			}
+			else
+			{
+				parameters = it->next_();
+				if (parameters->is_stop_())
+				{
+					parameters = Flock::mut_();
+					return_cat = Cat::fin_("<>");
+				}
+				else
+				{
+					return_cat = it->next_();
+					if (return_cat->is_stop_())
+					{
+						return_cat = Cat::fin_("<>");
+					}
+				}
 			}
 			return Cat::fin_(type_name, arguments, parameters, return_cat);
 		}
