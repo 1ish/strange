@@ -492,21 +492,9 @@ private:
 					{
 						result = _scope_(scope, shoal, flock, symbol->is_("**"));
 					}
-					else if (false) //TODO container?
+					else if (symbol->is_("::"))
 					{
-						std::string container = static_<Symbol>(scope)->get_();
-						const std::size_t pos = container.rfind("::");
-						if (pos == std::string::npos)
-						{
-							container = "";
-						}
-						else
-						{
-							container = container.substr(0, pos);
-						}
-						flk->push_back_(shoal);
-						flk->push_back_(sym_(container));
-						result = Expression::fin_(token, sym_("shared_scope_"), flock);
+						result = Expression::fin_(token, scope);
 					}
 					else if (symbol->is_("(")) // block
 					{

@@ -18,9 +18,10 @@
 			(
 				a+b*3
 			),
+			'scope'::function_()(::),
 			'f':#(|::_T),
 			'_m':*"_mlake",
-			'v':%"vlake",
+			'v':%("vlake "+(::)),
 			'c':~<strange::Thing[<C>,<>]>.cat[],
 			'_mem':function_()(7)
 		}
@@ -35,6 +36,7 @@
 	out.write[ar.c, "\n"],
 	out.write[ar.type[], "\n"],
 	out.write[ar.cat[], "\n"],
+	out.write[ar.scope[], "\n"],
 	y := $$f[x+1],
 	z := s@['f'][y],
 	z := (s@'f')[y],
