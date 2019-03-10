@@ -2820,10 +2820,9 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 		const auto result = static_<Shoal>(Shoal::mut_());
 
-		const Ptr flock = Flock::mut_();
-		const auto flk = static_<Flock>(flock);
-		flk->push_back_(one_());
-		flk->push_back_(Expression::fin_(_token, Herd::mut_()));
+		const auto flock = static_<Flock>(Flock::mut_());
+		flock->push_back_(one_());
+		flock->push_back_(Expression::fin_(_token, Herd::mut_()));
 		result->insert_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 
 		const auto params = static_<Shoal>(local);
@@ -2902,10 +2901,9 @@ inline void Expression::_merge_(const Ptr& scope, const Ptr& values, Shoal* cons
 				throw Disagreement("creation derived cats are not a herd");
 			}
 			herd->insert_(cat); //TODO cat permutations
-			const Ptr flock = Flock::mut_();
-			const auto flk = static_<Flock>(flock);
-			flk->push_back_(one_());
-			flk->push_back_(Expression::fin_(_token, herd));
+			const auto flock = static_<Flock>(Flock::mut_());
+			flock->push_back_(one_());
+			flock->push_back_(Expression::fin_(_token, herd));
 			result->update_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 		}
 	}
