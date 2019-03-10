@@ -218,38 +218,24 @@ private:
 	{
 		try
 		{
-			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			const std::size_t size = vec.size();
-			if (!size)
+			const Ptr type_name = static_<Flock>(_flock)->get_()[0];
+			const Ptr it = _iterator_(local, 1);
+			Ptr arguments = it->next_();
+			if (arguments->is_stop_())
 			{
-				return Cat::fin_("<>");
+				arguments = Flock::mut_();
 			}
-			const auto arguments = static_<Flock>(Flock::mut_());
-			const auto parameters = static_<Flock>(Flock::mut_());
-			if (size == 1)
+			Ptr parameters = it->next_();
+			if (parameters->is_stop_())
 			{
-				return Cat::fin_(vec[0], arguments, parameters, Cat::fin_("<>"));
+				parameters = Flock::mut_();
 			}
-			int64_t argc = static_<Int64>(vec[0])->get_();
-			for (std::size_t i = 2; i < (size - 1); ++i)
+			Ptr return_cat = it->next_();
+			if (return_cat->is_stop_())
 			{
-				const Ptr value = Expression::evaluate_(vec[i], local);
-				if (argc)
-				{
-					arguments->push_back_(value);
-					--argc;
-				}
-				else
-				{
-					parameters->push_back_(value);
-				}
+				return_cat = Cat::fin_("<>");
 			}
-			if (argc)
-			{
-				arguments->push_back_(Expression::evaluate_(vec[size - 1], local));
-				return Cat::fin_(vec[1], arguments, parameters, Cat::fin_("<>"));
-			}
-			return Cat::fin_(vec[1], arguments, parameters, Expression::evaluate_(vec[size - 1], local));
+			return Cat::fin_(type_name, arguments, parameters, return_cat);
 		}
 		catch (const std::exception& err)
 		{
@@ -2085,7 +2071,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("cat_"))
 	{
-		if (size != 2)
+		if (size >= 1)
 		{
 			return fin_(token, statement, &Expression::_cat_, flock);
 		}
