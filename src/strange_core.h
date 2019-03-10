@@ -729,11 +729,20 @@ class Symbol : public Thing, public Serializable
 {
 public:
 	template <typename F>
-	inline Symbol(F&& symbol, const std::size_t hash = 0)
+	inline Symbol(F&& symbol)
 		: Thing{}
 		, Serializable{}
 		, _symbol{ std::forward<F>(symbol) }
-		, _hash{ hash ? hash : std::hash<std::string>()(_symbol) }
+		, _hash{ std::hash<std::string>()(_symbol) }
+	{
+	}
+
+	template <typename F>
+	inline Symbol(F&& symbol, const std::size_t hash)
+		: Thing{}
+		, Serializable{}
+		, _symbol{ std::forward<F>(symbol) }
+		, _hash{ hash }
 	{
 	}
 
