@@ -462,7 +462,7 @@ private:
 
 	inline const Ptr _creation_(const Ptr& local) const;
 
-	inline void _merge_(const Ptr& scope, const Ptr& values, Shoal* const creation, Shoal* const result) const;
+	inline const Ptr _merge_(const Ptr& scope, const Ptr& values, Shoal* const creation, Shoal* const result, Herd* const cats) const;
 
 	inline const Ptr _shared_scope_(const Ptr& local) const
 	{
@@ -2819,11 +2819,8 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 		const auto result = static_<Shoal>(Shoal::mut_());
-
-		const auto flock = static_<Flock>(Flock::mut_());
-		flock->push_back_(one_());
-		flock->push_back_(Expression::fin_(_token, Herd::mut_()));
-		result->insert_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
+		Ptr type;
+		const auto cats = static_<Herd>(Herd::mut_());
 
 		const auto params = static_<Shoal>(local);
 		const Ptr creator_params = params->at_("[");
@@ -2837,9 +2834,14 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 			{
 				throw _stack_("creation_ passed wrong kind of thing");
 			}
-			_merge_(vec[0], (i == size_1) ? creator_params : Ptr(), creation.get(), result.get());
+			type = _merge_(vec[0], (i == size_1) ? creator_params : Ptr(), creation.get(), result.get(), cats.get());
 		}
-		const auto type = static_<Symbol>(result->at_("type")->invoke_());
+		{
+			const auto flock = static_<Flock>(Flock::mut_());
+			flock->push_back_(one_());
+			flock->push_back_(Expression::fin_(_token, cats));
+			result->insert_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
+		}
 		params->erase_("$");
 		params->erase_("&");
 		for (const auto& p : params->get_())
@@ -2847,7 +2849,7 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 			const auto symbol = dynamic_<Symbol>(p.first);
 			if (symbol)
 			{
-				result->update_("_" + type->get_() + "_" + symbol->get_(), Fixed::fin_(Expression::fin_(_token, p.second)));
+				result->update_("_" + static_<Symbol>(type)->get_() + "_" + symbol->get_(), Fixed::fin_(Expression::fin_(_token, p.second)));
 			}
 		}
 		static_<Weak>(vec[1])->set_(result);
@@ -2859,7 +2861,7 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 	}
 }
 
-inline void Expression::_merge_(const Ptr& scope, const Ptr& values, Shoal* const creation, Shoal* const result) const
+inline const Thing::Ptr Expression::_merge_(const Ptr& scope, const Ptr& values, Shoal* const creation, Shoal* const result, Herd* const cats) const
 {
 	Ptr type;
 	if (values)
@@ -2895,33 +2897,19 @@ inline void Expression::_merge_(const Ptr& scope, const Ptr& values, Shoal* cons
 		}
 
 		{
-			const auto herd = dynamic_<Herd>(result->at_("cats")->invoke_()->copy_());
-			if (!herd)
-			{
-				throw Disagreement("creation derived cats are not a herd");
-			}
-			herd->insert_(cat); //TODO cat permutations
-			const auto flock = static_<Flock>(Flock::mut_());
-			flock->push_back_(one_());
-			flock->push_back_(Expression::fin_(_token, herd));
-			result->update_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
+			cats->insert_(cat); //TODO cat permutations
 		}
 	}
 
-	const Ptr cats_fun = creation->at_("cats");
-	if (!cats_fun->is_nothing_())
+	const Ptr creation_cats_fun = creation->at_("cats");
+	if (!creation_cats_fun->is_nothing_())
 	{
-		const Ptr cats = cats_fun->invoke_();
-		if (!dynamic_<Herd>(cats))
+		const auto creation_cats = dynamic_<Herd>(creation_cats_fun->invoke_());
+		if (!creation_cats)
 		{
 			throw Disagreement("creation cats are not a herd");
 		}
-		const auto herd = static_<Herd>(result->at_("cats")->invoke_());
-		const Ptr flock = Flock::mut_();
-		const auto flk = static_<Flock>(flock);
-		flk->push_back_(one_());
-		flk->push_back_(Expression::fin_(_token, herd->add_(cats)));
-		result->update_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
+		cats->self_add_(creation_cats);
 	}
 
 	for (const auto& it : creation->get_())
@@ -2942,6 +2930,8 @@ inline void Expression::_merge_(const Ptr& scope, const Ptr& values, Shoal* cons
 			result->update_(key, value); //TODO check overrides
 		}
 	}
+
+	return type;
 }
 
 //======================================================================
