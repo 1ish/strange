@@ -539,7 +539,7 @@ private:
 					else if (symbol->is_("<")) // cat
 					{
 						bool close_close = false;
-						result = _cat_expression_(scope, shoal, fixed, cats, creator, close_close);
+						result = _cat_nest_(true, scope, shoal, fixed, cats, creator, close_close);
 					}
 					else if (symbol->is_("<<")) // iterator
 					{
@@ -1220,172 +1220,57 @@ private:
 		}
 	}
 
-	inline const Ptr _cat_nest_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, bool& close_close)
+	inline const Ptr _cat_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& flock, const bool capture)
 	{
-		Ptr token;
-		const Ptr type_name = _scope_key_(token);
-		auto tok = static_<Token>(token);
+		// add cat and default/captured to flock, return captured
+		const auto flk = static_<Flock>(flock);
 
-		const auto arguments = static_<Flock>(Flock::mut_());
-		const auto parameters = static_<Flock>(Flock::mut_());
-		Ptr return_cat = Cat::fin_("<>");
+		bool close_close = false;
+		flk->push_back_(_cat_nest_(false, scope, shoal, fixed, cats, creator, close_close));
 
-		bool comma = false;
-		bool arg = false;
-		bool param = false;
-		bool params = false;
-		bool close = false;
+		const Ptr token = _token_();
+		const auto tok = static_<Token>(token);
 		Ptr symbol;
-		for (bool first = true; true; first = false)
+		if (token->is_stop_())
 		{
-			token = _token_();
-			tok = static_<Token>(token);
-			if (token->is_stop_())
-			{
-				throw tok->error_("Parser ERROR: cat < without >");
-			}
-			const char tag = tok->tag_();
-			if (tag == 'E') // error
-			{
-				throw tok->error_("Tokenizer ERROR");
-			}
-			symbol = tok->symbol();
-			if (first)
-			{
-				_next_();
-				if (tag == 'P')
-				{
-					if (symbol->is_(">"))
-					{
-						break;
-					}
-					if (symbol->is_("["))
-					{
-						arg = true;
-						continue;
-					}
-					if (symbol->is_("("))
-					{
-						param = true;
-						continue;
-					}
-					if (symbol->is_("<"))
-					{
-						return_cat = _cat_nest_(scope, shoal, fixed, cats, creator, close_close);
-						close = true;
-						continue;
-					}
-				}
-			}
-			else
-			{
-				if (arg && !comma)
-				{
-					if (tag == 'P' && symbol->is_("]"))
-					{
-						if (!arguments->empty_())
-						{
-							throw tok->error_("Parser ERROR: bad cat ]");
-						}
-						_next_();
-						arg = false;
-					}
-					else
-					{
-						arguments->push_back_(Expression::immediate_(_parse_(scope, shoal, fixed, cats, creator, true))); // right
-						comma = true;
-					}
-					continue;
-				}
-				if (tag == 'P')
-				{
-					if (comma)
-					{
-						if (symbol->is_("]"))
-						{
-							if (!arg)
-							{
-								throw tok->error_("Parser ERROR: bad cat ]");
-							}
-							arg = false;
-						}
-						else if (symbol->is_(")"))
-						{
-							if (!param)
-							{
-								throw tok->error_("Parser ERROR: bad cat )");
-							}
-							param = false;
-							params = true;
-						}
-						else if (!symbol->is_(","))
-						{
-							throw tok->error_("Parser ERROR: bad cat missing ,");
-						}
-						_next_();
-						comma = false;
-						continue;
-					}
-					comma = true;
-					if (symbol->is_(">>"))
-					{
-						if (close_close)
-						{
-							_next_();
-						}
-						close_close = !close_close;
-						break;
-					}
-					_next_();
-					if (symbol->is_("("))
-					{
-						if (param || params || close)
-						{
-							throw tok->error_("Parser ERROR: bad cat (");
-						}
-						param = true;
-						continue;
-					}
-					if (symbol->is_("<"))
-					{
-						if (close)
-						{
-							throw tok->error_("Parser ERROR: bad cat <");
-						}
-						const Ptr nest = _cat_nest_(scope, shoal, fixed, cats, creator, close_close);
-						if (param)
-						{
-							parameters->push_back_(nest);
-						}
-						else
-						{
-							return_cat = nest;
-							close = true;
-						}
-						continue;
-					}
-					if (symbol->is_(")"))
-					{
-						if (!param || !parameters->empty_())
-						{
-							throw tok->error_("Parser ERROR: bad cat )");
-						}
-						param = false;
-						params = true;
-						continue;
-					}
-					if (symbol->is_(">"))
-					{
-						break;
-					}
-				}
-			}
-			throw tok->error_("Parser ERROR: bad cat");
+			throw tok->error_("Parser ERROR: cat stop");
 		}
-		return Cat::fin_(type_name, arguments, parameters, return_cat);
+		const char tag = tok->tag_();
+		if (tag == 'E') // error
+		{
+			throw tok->error_("Tokenizer ERROR");
+		}
+		symbol = tok->symbol();
+		_next_();
+		if (tag == 'N') // name
+		{
+			flk->push_back_(symbol);
+			return capture ? symbol : nothing_();
+		}
+		else if (!capture || tag != 'P')
+		{
+			throw tok->error_("Parser ERROR: list expecting <cat> name");
+		}
+		const Ptr captured = _capture_(symbol, flock);
+		if (captured->is_nothing_())
+		{
+			throw tok->error_("Parser ERROR: list expecting capture <cat> name");
+		}
+		return captured;
 	}
 
-	inline const Ptr _cat_expression_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, bool& close_close)
+	inline const Ptr _capture_(const Ptr& symbol, const Ptr& flock)
+	{
+		if (symbol->is_("$") || symbol->is_("|"))
+		{
+			const Ptr captured = symbol->is_("|") ? symbol : static_<Symbol>(symbol)->add_(_name_());
+			static_<Flock>(flock)->push_back_(captured);
+			return captured;
+		}
+		return nothing_();
+	}
+
+	inline const Ptr _cat_nest_(const bool expression, const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, bool& close_close)
 	{
 		Ptr token;
 		const Ptr type_name = _scope_key_(token);
@@ -1436,7 +1321,7 @@ private:
 					}
 					if (symbol->is_("<"))
 					{
-						return_cat = _cat_expression_(scope, shoal, fixed, cats, creator, close_close);
+						return_cat = _cat_nest_(expression, scope, shoal, fixed, cats, creator, close_close);
 						close = true;
 						continue;
 					}
@@ -1457,7 +1342,15 @@ private:
 					}
 					else
 					{
-						arguments->push_back_(_parse_(scope, shoal, fixed, cats, creator, true)); // right
+						const Ptr exp = _parse_(scope, shoal, fixed, cats, creator, true);
+						if (expression)
+						{
+							arguments->push_back_(exp); // right
+						}
+						else
+						{
+							arguments->push_back_(Expression::immediate_(exp)); // right
+						}
 						comma = true;
 					}
 					continue;
@@ -1517,7 +1410,7 @@ private:
 						{
 							throw tok->error_("Parser ERROR: bad cat <");
 						}
-						const Ptr nest = _cat_expression_(scope, shoal, fixed, cats, creator, close_close);
+						const Ptr nest = _cat_nest_(expression, scope, shoal, fixed, cats, creator, close_close);
 						if (param)
 						{
 							parameters->push_back_(nest);
@@ -1547,74 +1440,32 @@ private:
 			}
 			throw tok->error_("Parser ERROR: bad cat");
 		}
-		const auto flock = static_<Flock>(Flock::mut_());
-		flock->push_back_(type_name);
-		if (return_cat)
+		if (expression)
 		{
-			flock->push_back(Expression::fin_(token, sym_("flock_"), arguments));
-			flock->push_back(Expression::fin_(token, sym_("flock_"), parameters));
-			flock->push_back(return_cat);
+			const auto flock = static_<Flock>(Flock::mut_());
+			flock->push_back_(type_name);
+			if (return_cat)
+			{
+				flock->push_back(Expression::fin_(token, sym_("flock_"), arguments));
+				flock->push_back(Expression::fin_(token, sym_("flock_"), parameters));
+				flock->push_back(return_cat);
+			}
+			else if (!parameters->empty_())
+			{
+				flock->push_back(Expression::fin_(token, sym_("flock_"), arguments));
+				flock->push_back(Expression::fin_(token, sym_("flock_"), parameters));
+			}
+			else if (!arguments->empty_())
+			{
+				flock->push_back(Expression::fin_(token, sym_("flock_"), arguments));
+			}
+			return Expression::fin_(token, sym_("cat_"), flock);
 		}
-		else if (!parameters->empty_())
+		if (!return_cat)
 		{
-			flock->push_back(Expression::fin_(token, sym_("flock_"), arguments));
-			flock->push_back(Expression::fin_(token, sym_("flock_"), parameters));
+			return_cat = Cat::fin_("<>");
 		}
-		else if (!arguments->empty_())
-		{
-			flock->push_back(Expression::fin_(token, sym_("flock_"), arguments));
-		}
-		return Expression::fin_(token, sym_("cat_"), flock);
-	}
-
-	inline const Ptr _cat_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& flock, const bool capture)
-	{
-		// add cat and default/captured to flock, return captured
-		const auto flk = static_<Flock>(flock);
-
-		bool close_close = false;
-		flk->push_back_(_cat_nest_(scope, shoal, fixed, cats, creator, close_close));
-
-		const Ptr token = _token_();
-		const auto tok = static_<Token>(token);
-		Ptr symbol;
-		if (token->is_stop_())
-		{
-			throw tok->error_("Parser ERROR: cat stop");
-		}
-		const char tag = tok->tag_();
-		if (tag == 'E') // error
-		{
-			throw tok->error_("Tokenizer ERROR");
-		}
-		symbol = tok->symbol();
-		_next_();
-		if (tag == 'N') // name
-		{
-			flk->push_back_(symbol);
-			return capture ? symbol : nothing_();
-		}
-		else if (!capture || tag != 'P')
-		{
-			throw tok->error_("Parser ERROR: list expecting <cat> name");
-		}
-		const Ptr captured = _capture_(symbol, flock);
-		if (captured->is_nothing_())
-		{
-			throw tok->error_("Parser ERROR: list expecting capture <cat> name");
-		}
-		return captured;
-	}
-
-	inline const Ptr _capture_(const Ptr& symbol, const Ptr& flock)
-	{
-		if (symbol->is_("$") || symbol->is_("|"))
-		{
-			const Ptr captured = symbol->is_("|") ? symbol : static_<Symbol>(symbol)->add_(_name_());
-			static_<Flock>(flock)->push_back_(captured);
-			return captured;
-		}
-		return nothing_();
+		return Cat::fin_(type_name, arguments, parameters, return_cat);
 	}
 
 	inline const bool _map_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& flock)
