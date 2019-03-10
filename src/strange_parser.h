@@ -1449,11 +1449,11 @@ private:
 			}
 			return Expression::fin_(token, sym_("cat_"), flock);
 		}
-		if (!return_cat)
+		if (return_cat)
 		{
-			return_cat = Cat::fin_("<>");
+			return Cat::fin_(type_name, arguments, parameters, return_cat);
 		}
-		return Cat::fin_(type_name, arguments, parameters, return_cat);
+		return Cat::fin_(type_name, arguments, parameters);
 	}
 
 	inline const bool _map_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& flock)

@@ -937,13 +937,19 @@ public:
 		return true;
 	}
 
+	static inline const Ptr fin_()
+	{
+		static const Ptr ANY = fin_("<>");
+		return ANY;
+	}
+
 	template <typename F>
 	static inline const Ptr fin_(F&& symbol)
 	{
 		return fake_<Cat>(std::forward<F>(symbol));
 	}
 
-	static inline const Ptr fin_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
+	static inline const Ptr fin_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat = fin_())
 	{
 		return fake_<Cat>(type_name, arguments, parameters, return_cat);
 	}

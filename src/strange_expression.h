@@ -227,7 +227,7 @@ private:
 			{
 				arguments = Flock::mut_();
 				parameters = Flock::mut_();
-				return_cat = Cat::fin_("<>");
+				return_cat = Cat::fin_();
 			}
 			else
 			{
@@ -235,14 +235,14 @@ private:
 				if (parameters->is_stop_())
 				{
 					parameters = Flock::mut_();
-					return_cat = Cat::fin_("<>");
+					return_cat = Cat::fin_();
 				}
 				else
 				{
 					return_cat = it->next_();
 					if (return_cat->is_stop_())
 					{
-						return_cat = Cat::fin_("<>");
+						return Cat::fin_(type_name, arguments, parameters);
 					}
 				}
 			}
@@ -2886,10 +2886,7 @@ inline void Expression::_merge_(const Ptr& scope, const Ptr& values, Shoal* cons
 			throw Disagreement("creation derived type is not a symbol");
 		}
 		
-		const Ptr cat = Cat::fin_(type_symbol,
-			values->is_nothing_() ? Flock::mut_() : values,
-			Flock::mut_(),
-			Cat::fin_("<>"));
+		const Ptr cat = Cat::fin_(type_symbol, values->is_nothing_() ? Flock::mut_() : values, Flock::mut_());
 		{
 			const Ptr flock = Flock::mut_();
 			const auto flk = static_<Flock>(flock);
