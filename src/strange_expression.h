@@ -2765,11 +2765,8 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 	try
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-		const auto shoal = static_<Shoal>(local);
-		const Ptr it = shoal->at_("&");
-
+		const Ptr it = static_<Shoal>(local)->at_("&");
 		const auto creation_local = static_<Shoal>(Shoal::mut_());
-
 		Ptr values = nothing_();
 
 		const std::size_t size_1 = vec.size() - 1;
