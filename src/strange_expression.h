@@ -2768,10 +2768,7 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 		const auto shoal = static_<Shoal>(local);
 		const Ptr it = shoal->at_("&");
 
-		const Ptr new_shared = Shoal::Concurrent::mut_();
-		const Ptr new_local = Shoal::mut_();
-		const auto creation_local = static_<Shoal>(new_local);
-		const Ptr new_it = stop_();
+		const auto creation_local = static_<Shoal>(Shoal::mut_());
 
 		Ptr values = nothing_();
 
@@ -2803,9 +2800,9 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 		}
 		values->freeze_();
 		creation_local->insert_("[", values);
-		creation_local->insert_("$", new_shared);
-		creation_local->insert_("&", new_it);
-		return Expression::evaluate_(vec[size_1], new_local);
+		creation_local->insert_("$", Shoal::Concurrent::mut_());
+		creation_local->insert_("&", stop_());
+		return Expression::evaluate_(vec[size_1], creation_local);
 	}
 	catch (const std::exception& err)
 	{
