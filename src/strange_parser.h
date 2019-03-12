@@ -225,6 +225,7 @@ private:
 								const Ptr nested = Flock::mut_();
 								const auto nst = static_<Flock>(nested);
 								nst->push_back_(scope);
+								nst->push_back_(shoal);
 								const Ptr new_creation = Weak::mut_(nothing_());
 								nst->push_back_(new_creation);
 								if (_statement_(scope, shoal, fixed, cats, creation, nested))
@@ -242,6 +243,7 @@ private:
 					else if (symbol->is_("creation_"))
 					{
 						flk->push_back_(scope);
+						flk->push_back_(shoal);
 						const Ptr new_creation = Weak::mut_(nothing_());
 						flk->push_back_(new_creation);
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
