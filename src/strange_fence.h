@@ -89,13 +89,13 @@ public:
 
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = Cat::fin_("strange::Fence");
+		static const Ptr TYPE = sym_("strange::Fence");
 		return TYPE;
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Fence>");
+		static const Ptr CAT = Cat::fin_(Fence::type_());
 		return CAT;
 	}
 

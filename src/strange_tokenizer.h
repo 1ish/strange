@@ -473,7 +473,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Tokenizer>");
+		static const Ptr CAT = Cat::fin_(Tokenizer::type_());
 		return CAT;
 	}
 

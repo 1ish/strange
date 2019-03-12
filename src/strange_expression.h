@@ -86,7 +86,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Expression>");
+		static const Ptr CAT = Cat::fin_(Expression::type_());
 		return CAT;
 	}
 
@@ -838,7 +838,7 @@ private:
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_("<strange::Expression::Iterator>");
+			static const Ptr CAT = Cat::fin_(Expression::Iterator::type_());
 			return CAT;
 		}
 
@@ -943,7 +943,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Function>");
+		static const Ptr CAT = Cat::fin_(Function::type_());
 		return CAT;
 	}
 
@@ -985,7 +985,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Closure>");
+		static const Ptr CAT = Cat::fin_(Closure::type_());
 		return CAT;
 	}
 
@@ -1025,7 +1025,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Mutation>");
+		static const Ptr CAT = Cat::fin_(Mutation::type_());
 		return CAT;
 	}
 
@@ -1072,7 +1072,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Extraction>");
+		static const Ptr CAT = Cat::fin_(Extraction::type_());
 		return CAT;
 	}
 
@@ -1116,7 +1116,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Creation>");
+		static const Ptr CAT = Cat::fin_(Creation::type_());
 		return CAT;
 	}
 
@@ -1699,7 +1699,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		static const Ptr CAT = Cat::fin_("<strange::Creature>");
+		static const Ptr CAT = Cat::fin_(sym_("strange::Creature"));
 		return CAT;
 	}
 
@@ -2818,7 +2818,10 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 
 		const auto params = static_<Shoal>(local);
 		const Ptr creator_params = params->at_("[");
-		params->erase_("[");
+		if (!creator_params->is_nothing_())
+		{
+			params->erase_("[");
+		}
 		const std::size_t size_1 = vec.size() - 1;
 		for (std::size_t i = 2; i <= size_1; ++i)
 		{
@@ -2891,7 +2894,24 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, const Ptr& values,
 		}
 
 		{
-			cats->insert_(cat); //TODO cat permutations
+			cats->insert_(cat);
+		}
+
+		if (!values->is_nothing_())
+		{
+			//TODO cat permutations
+			const auto vals = static_<Flock>(values);
+			int64_t i = 0;
+			const Ptr it = vals->iterator_();
+			for (Ptr val = it->next_(); !val->is_stop_(); val = it->next_())
+			{
+				const auto cat_val = dynamic_<Cat>(val);
+				if (cat_val)
+				{
+
+				}
+				++i;
+			}
 		}
 	}
 

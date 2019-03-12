@@ -134,7 +134,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Generator>");
+		static const Ptr CAT = Cat::fin_(Generator::type_());
 		return CAT;
 	}
 

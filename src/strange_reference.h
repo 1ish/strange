@@ -94,7 +94,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Reference>");
+		static const Ptr CAT = Cat::fin_(Reference::type_());
 		return CAT;
 	}
 
@@ -171,7 +171,7 @@ private:
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_("<strange::Reference::Iterator>");
+			static const Ptr CAT = Cat::fin_(Reference::Iterator::type_());
 			return CAT;
 		}
 

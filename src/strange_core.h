@@ -864,24 +864,13 @@ class Cat : public Symbol
 //----------------------------------------------------------------------
 {
 public:
-	template <typename F>
-	inline Cat(F&& symbol)
-		: Symbol{ std::forward<F>(symbol) }
-		, _symbolic{ true }
-		, _type_name{}
-		, _arguments{}
-		, _parameters{}
-		, _return_cat{}
-	{
-	}
-
-	inline Cat(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
+	inline Cat(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat = Ptr())
 		: Symbol{ _symbol_(type_name, arguments, parameters, return_cat), _hash_(type_name, arguments, parameters, return_cat) }
 		, _symbolic{ _symbolic_(arguments, parameters, return_cat) }
-		, _type_name{ _symbolic ? 0 : type_name }
-		, _arguments{ _symbolic ? 0 : arguments }
-		, _parameters{ _symbolic ? 0 : parameters }
-		, _return_cat{ _symbolic ? 0 : return_cat }
+		, _type_name{ type_name }
+		, _arguments{ arguments }
+		, _parameters{ parameters }
+		, _return_cat{ return_cat }
 	{
 	}
 
@@ -896,7 +885,18 @@ public:
 		{
 			return Symbol::same_(other);
 		}
-		if (!_type_name->is_(other_cat->_type_name) || !_return_cat->same_(other_cat->_return_cat))
+		if (!_type_name->is_(other_cat->_type_name))
+		{
+			return false;
+		}
+		if (_return_cat && other_cat->_return_cat)
+		{
+			if (!_return_cat->same_(other_cat->_return_cat))
+			{
+				return false;
+			}
+		}
+		else if (_return_cat || other_cat->_return_cat)
 		{
 			return false;
 		}
@@ -939,51 +939,26 @@ public:
 
 	static inline const Ptr fin_()
 	{
-		static const Ptr ANY = fin_("<>");
+		static const Ptr ANY = fin_(nothing_());
 		return ANY;
 	}
 
-	template <typename F>
-	static inline const Ptr fin_(F&& symbol)
+	static inline const Ptr fin_(const Ptr& type_name);
+
+	static inline const Ptr fin_(const Ptr& type_name, const Ptr& arguments);
+
+	static inline const Ptr fin_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters)
 	{
-		return fake_<Cat>(std::forward<F>(symbol));
+		return fake_<Cat>(type_name, arguments, parameters);
 	}
 
-	static inline const Ptr fin_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat = fin_())
+	static inline const Ptr fin_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
 	{
-		return fake_<Cat>(type_name, arguments, parameters, return_cat);
-	}
-
-	static inline const Ptr fin(const Ptr& it)
-	{
-		const Ptr symbol = it->next_();
-		const auto s = dynamic_<Symbol>(symbol);
-		if (s)
+		if (return_cat->is_("<>"))
 		{
-			return fin_(s->get_());
+			return fake_<Cat>(type_name, arguments, parameters);
 		}
-		throw Disagreement("strange::Cat::fin passed wrong category of thing");
-	}
-
-	static inline const Ptr lak_(const Ptr& lake);
-
-	static inline const Ptr lak(const Ptr& it)
-	{
-		return lak_(it->next_());
-	}
-
-	static inline const Ptr riv_(const Ptr& river);
-
-	static inline const Ptr riv(const Ptr& it)
-	{
-		return riv_(it->next_());
-	}
-
-	static inline const Ptr rwl_(const Ptr& river);
-
-	static inline const Ptr rwl(const Ptr& it)
-	{
-		return rwl_(it->next_());
+		return fake_<Cat>(type_name, arguments, parameters, return_cat);
 	}
 
 	static inline void share_(const Ptr& shoal);
@@ -996,7 +971,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Cat>");
+		static const Ptr CAT = Cat::fin_(Cat::type_());
 		return CAT;
 	}
 
@@ -1005,6 +980,26 @@ public:
 	virtual inline const Ptr pub_() const override;
 
 	static inline const bool check_(const Ptr& thing, const Ptr& cat);
+
+	inline const Ptr type_name_() const
+	{
+		return _type_name;
+	}
+
+	inline const Ptr arguments_() const
+	{
+		return _arguments;
+	}
+
+	inline const Ptr parameters_() const
+	{
+		return _parameters;
+	}
+
+	inline const Ptr return_cat_() const
+	{
+		return _return_cat ? _return_cat : fin_();
+	}
 
 private:
 	const bool _symbolic; // recursively true if all of the cats below are symbolic and there are no non-cat arguments
@@ -1015,7 +1010,7 @@ private:
 
 	static inline const bool _symbolic_(const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
 	{
-		if (!static_<Cat>(return_cat)->_symbolic)
+		if (return_cat && !static_<Cat>(return_cat)->_symbolic)
 		{
 			return false;
 		}
@@ -1123,10 +1118,13 @@ private:
 				result += ")";
 			}
 		}
-		const std::string& symbol = static_<Cat>(return_cat)->_symbol;
-		if (symbol != "<>")
+		if (return_cat)
 		{
-			result += symbol;
+			const std::string& symbol = static_<Cat>(return_cat)->_symbol;
+			if (symbol != "<>")
+			{
+				result += symbol;
+			}
 		}
 		return result + ">";
 	}
@@ -1177,7 +1175,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Static>");
+		static const Ptr CAT = Cat::fin_(Static::type_());
 		return CAT;
 	}
 
@@ -1233,7 +1231,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Member>");
+		static const Ptr CAT = Cat::fin_(sym_("strange::Member"));
 		return CAT;
 	}
 
@@ -1298,7 +1296,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Const>");
+		static const Ptr CAT = Cat::fin_(sym_("strange::Const"));
 		return CAT;
 	}
 
@@ -1759,7 +1757,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Shoal>");
+		static const Ptr CAT = Cat::fin_(Shoal::type_());
 		return CAT;
 	}
 
@@ -1870,7 +1868,7 @@ public:
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_("<strange::Shoal::Concurrent>");
+			static const Ptr CAT = Cat::fin_(Shoal::Concurrent::type_());
 			return CAT;
 		}
 
@@ -1956,7 +1954,7 @@ private:
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_("<strange::Shoal:Iterator>");
+			static const Ptr CAT = Cat::fin_(Shoal::Iterator::type_());
 			return CAT;
 		}
 
@@ -2000,7 +1998,7 @@ private:
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_("<strange::Shoal:Feeder>");
+			static const Ptr CAT = Cat::fin_(Shoal::Feeder::type_());
 			return CAT;
 		}
 
@@ -2166,11 +2164,14 @@ public:
 		return make_<Flock>(it);
 	}
 
+	static inline const Ptr fin_()
+	{
+		return fake_<Flock>();
+	}
+
 	static inline const Ptr fin(const Ptr& it)
 	{
-		const Ptr result = mut(it);
-		result->finalize_();
-		return result;
+		return fake_<Flock>(it);
 	}
 
 	static inline const Ptr lak_(const Ptr& lake)
@@ -2390,7 +2391,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Flock>");
+		static const Ptr CAT = Cat::fin_(Flock::type_());
 		return CAT;
 	}
 
@@ -2474,7 +2475,7 @@ public:
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_("<strange::Flock::Concurrent>");
+			static const Ptr CAT = Cat::fin_(Flock::Concurrent::type_());
 			return CAT;
 		}
 
@@ -2564,7 +2565,7 @@ private:
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_("<strange::Flock::Iterator>");
+			static const Ptr CAT = Cat::fin_(Flock::Iterator::type_());
 			return CAT;
 		}
 
@@ -3052,7 +3053,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Herd>");
+		static const Ptr CAT = Cat::fin_(Herd::type_());
 		return CAT;
 	}
 
@@ -3159,7 +3160,7 @@ public:
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_("<strange::Herd::Concurrent>");
+			static const Ptr CAT = Cat::fin_(Herd::Concurrent::type_());
 			return CAT;
 		}
 
@@ -3234,7 +3235,7 @@ private:
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_("<strange::Herd::Iterator>");
+			static const Ptr CAT = Cat::fin_(Herd::Iterator::type_());
 			return CAT;
 		}
 
@@ -3312,7 +3313,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::IteratorPtr>");
+		static const Ptr CAT = Cat::fin_(IteratorPtr::type_());
 		return CAT;
 	}
 
@@ -3378,7 +3379,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::IteratorCopy>");
+		static const Ptr CAT = Cat::fin_(sym_("strange::IteratorCopy"));
 		return CAT;
 	}
 
@@ -3445,7 +3446,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::IteratorRef>");
+		static const Ptr CAT = Cat::fin_(sym_("strange::IteratorRef"));
 		return CAT;
 	}
 
@@ -3712,7 +3713,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Lake>");
+		static const Ptr CAT = Cat::fin_(Lake::type_());
 		return CAT;
 	}
 
@@ -4174,7 +4175,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Number>");
+		static const Ptr CAT = Cat::fin_(Number::type_());
 		return CAT;
 	}
 
@@ -4333,7 +4334,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Bit>");
+		static const Ptr CAT = Cat::fin_(Bit::type_());
 		return CAT;
 	}
 
@@ -4658,7 +4659,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Int8>");
+		static const Ptr CAT = Cat::fin_(Int8::type_());
 		return CAT;
 	}
 
@@ -4978,7 +4979,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::UInt8>");
+		static const Ptr CAT = Cat::fin_(UInt8::type_());
 		return CAT;
 	}
 
@@ -5304,7 +5305,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Int16>");
+		static const Ptr CAT = Cat::fin_(Int16::type_());
 		return CAT;
 	}
 
@@ -5630,7 +5631,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::UInt16>");
+		static const Ptr CAT = Cat::fin_(UInt16::type_());
 		return CAT;
 	}
 
@@ -5960,7 +5961,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Int32>");
+		static const Ptr CAT = Cat::fin_(Int32::type_());
 		return CAT;
 	}
 
@@ -6290,7 +6291,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::UInt32>");
+		static const Ptr CAT = Cat::fin_(UInt32::type_());
 		return CAT;
 	}
 
@@ -6628,7 +6629,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Int64>");
+		static const Ptr CAT = Cat::fin_(Int64::type_());
 		return CAT;
 	}
 
@@ -6966,7 +6967,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::UInt64>");
+		static const Ptr CAT = Cat::fin_(UInt64::type_());
 		return CAT;
 	}
 
@@ -7379,7 +7380,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Float32>");
+		static const Ptr CAT = Cat::fin_(Float32::type_());
 		return CAT;
 	}
 
@@ -7718,7 +7719,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Float64>");
+		static const Ptr CAT = Cat::fin_(Float64::type_());
 		return CAT;
 	}
 
@@ -8069,7 +8070,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Complex32>");
+		static const Ptr CAT = Cat::fin_(Complex32::type_());
 		return CAT;
 	}
 
@@ -8427,7 +8428,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Complex64>");
+		static const Ptr CAT = Cat::fin_(Complex64::type_());
 		return CAT;
 	}
 
@@ -8737,7 +8738,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::River>");
+		static const Ptr CAT = Cat::fin_(River::type_());
 		return CAT;
 	}
 
@@ -9040,7 +9041,7 @@ inline const Thing::Ptr Thing::cats_() const
 	static const Ptr CATS = []()
 	{
 		const Ptr cats = Herd::mut_();
-		static_<Herd>(cats)->insert_(Cat::fin_("<strange::Thing>"));
+		static_<Herd>(cats)->insert_(Cat::fin_());
 		cats->finalize_();
 		return cats;
 	}();
@@ -9137,7 +9138,7 @@ inline const Thing::Ptr Serializable::cats_()
 	{
 		const Thing::Ptr cats = Herd::mut_();
 		const auto herd = Thing::static_<Herd>(cats);
-		herd->insert_(Cat::fin_("<strange::Serializable>"));
+		herd->insert_(Cat::fin_(Thing::sym_("strange::Serializable")));
 		herd->finalize_();
 		return cats;
 	}();
@@ -9279,7 +9280,7 @@ inline const Thing::Ptr Symbol::to_lake_() const
 
 inline const Thing::Ptr Symbol::cat_() const
 {
-	static const Ptr CAT = Cat::fin_("<strange::Symbol>");
+	static const Ptr CAT = Cat::fin_(Symbol::type_());
 	return CAT;
 }
 
@@ -9336,33 +9337,18 @@ inline const Thing::Ptr Symbol::at(const Ptr& it) const
 // class Cat
 //======================================================================
 
-inline const Thing::Ptr Cat::lak_(const Ptr& lake)
+inline const Thing::Ptr Cat::fin_(const Ptr& type_name)
 {
-	const auto lak = dynamic_<Lake>(lake);
-	if (!lak)
-	{
-		throw Disagreement("Cat::lak_ passed wrong category of thing");
-	}
-	return fin_(lak->get_());
+	return fake_<Cat>(type_name, Flock::fin_(), Flock::fin_());
 }
 
-inline const Thing::Ptr Cat::riv_(const Ptr& river)
+inline const Thing::Ptr Cat::fin_(const Ptr& type_name, const Ptr& arguments)
 {
-	return fin_(static_<Lake>(Lake::riv_(river))->get_());
-}
-
-inline const Thing::Ptr Cat::rwl_(const Ptr& river)
-{
-	return fin_(static_<Lake>(Lake::rwl_(river))->get_());
+	return fake_<Cat>(type_name, arguments, Flock::fin_());
 }
 
 inline void Cat::share_(const Ptr& shoal)
 {
-	const auto s = static_<Shoal>(shoal);
-	s->update_("strange::Cat::fin", Static::fin_(&Cat::fin, "symbol"));
-	s->update_("strange::Cat::lak", Static::fin_(&Cat::lak, "lake"));
-	s->update_("strange::Cat::riv", Static::fin_(&Cat::riv, "river"));
-	s->update_("strange::Cat::rwl", Static::fin_(&Cat::rwl, "river"));
 }
 
 inline const Thing::Ptr Cat::cats_() const
@@ -9385,10 +9371,6 @@ inline const Thing::Ptr Cat::pub_() const
 	{
 		const Ptr pub = Symbol::pub_()->copy_();
 		const auto shoal = static_<Shoal>(pub);
-		shoal->update_("fin", Static::fin_(&Cat::fin, "symbol"));
-		shoal->update_("lak", Static::fin_(&Cat::lak, "lake"));
-		shoal->update_("riv", Static::fin_(&Cat::riv, "river"));
-		shoal->update_("rwl", Static::fin_(&Cat::rwl, "river"));
 		shoal->finalize_();
 		return pub;
 	}();

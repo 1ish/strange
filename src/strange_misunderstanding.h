@@ -104,7 +104,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Misunderstanding>");
+		static const Ptr CAT = Cat::fin_(Misunderstanding::type_());
 		return CAT;
 	}
 

@@ -32,7 +32,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Method>");
+		static const Ptr CAT = Cat::fin_(Method::type_());
 		return CAT;
 	}
 

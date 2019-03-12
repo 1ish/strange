@@ -225,7 +225,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_("<strange::Token>");
+		static const Ptr CAT = Cat::fin_(Token::type_());
 		return CAT;
 	}
 
