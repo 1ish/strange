@@ -12,7 +12,13 @@
 		{
 			'mut':function_()
 			(
-				$$strange::Creature::mut[{::}]
+				$$strange::Creature::mut[{::}].Arithmetic[]
+			),
+			(::):mutation_()
+			(
+				// constructor
+				|.c := <constructed[|.c]>,
+				|
 			),
 			'addition':extraction_(<strange::Number> a, <strange::Number> b)
 			(
@@ -22,7 +28,7 @@
 			'f':#(|:_T),
 			'_m':*"_mlake",
 			'v':%("vlake "+(::)),
-			'c':~<strange::Thing[<C>,<>]>.cat[],
+			'c':~<strange::Thing[<C>,<>]>,
 			'_mem':function_()(7)
 		}
 	},
@@ -31,7 +37,7 @@
 	out.write[ar.f, "\n"],
 	out.write[ar.v, "\n"],
 	out.write[ar.c, "\n"],
-	out.write[ar.v, "\n"],
+	out.write[<xyz[<abc>]>, "\n"],
 	ar.c := "nlake",
 	out.write[ar.c, "\n"],
 	out.write[ar.type[], "\n"],

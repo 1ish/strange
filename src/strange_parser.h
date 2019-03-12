@@ -1436,18 +1436,18 @@ private:
 			flock->push_back_(type_name);
 			if (return_cat)
 			{
-				flock->push_back(Expression::fin_(token, sym_("flock_"), arguments));
-				flock->push_back(Expression::fin_(token, sym_("flock_"), parameters));
-				flock->push_back(return_cat);
+				flock->push_back_(Expression::fin_(token, sym_("flock_"), arguments));
+				flock->push_back_(Expression::fin_(token, sym_("flock_"), parameters));
+				flock->push_back_(return_cat);
 			}
 			else if (!parameters->empty_())
 			{
-				flock->push_back(Expression::fin_(token, sym_("flock_"), arguments));
-				flock->push_back(Expression::fin_(token, sym_("flock_"), parameters));
+				flock->push_back_(Expression::fin_(token, sym_("flock_"), arguments));
+				flock->push_back_(Expression::fin_(token, sym_("flock_"), parameters));
 			}
 			else if (!arguments->empty_())
 			{
-				flock->push_back(Expression::fin_(token, sym_("flock_"), arguments));
+				flock->push_back_(Expression::fin_(token, sym_("flock_"), arguments));
 			}
 			return Expression::fin_(token, sym_("cat_"), flock);
 		}
