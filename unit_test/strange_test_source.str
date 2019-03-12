@@ -10,23 +10,23 @@
 		),
 		'Arithmetic'::creator_(T)()
 		{
-			'mut'::function_()
+			'mut':function_()
 			(
 				$$strange::Creature::mut[{::}]
 			),
-			'addition'::extraction_(<strange::Number> a, <strange::Number> b)
+			'addition':extraction_(<strange::Number> a, <strange::Number> b)
 			(
 				a+b*3
 			),
-			'scope'::function_()(::),
-			'f':#(|::_T),
+			'scope':function_()(::),
+			'f':#(|:_T),
 			'_m':*"_mlake",
 			'v':%("vlake "+(::)),
 			'c':~<strange::Thing[<C>,<>]>.cat[],
 			'_mem':function_()(7)
 		}
 	},
-	ar := $$Arithmetic[<xxx>]::mut[],
+	ar := $$Arithmetic[<xxx>]@:mut[],
 	out.write[ar.addition[2, 2].to_symbol[], "\n"],
 	out.write[ar.f, "\n"],
 	out.write[ar.v, "\n"],
@@ -47,6 +47,6 @@
 	y.:x[100],
 	out.write[y.to_symbol[], "\n"],
 	{'m'::out.write}@'m'"last\n",
-	out.write[s::f[1].to_symbol[], "\n"],
+	out.write[s@:f[1].to_symbol[], "\n"],
 	y.:z:.self_add 1
 )

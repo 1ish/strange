@@ -274,7 +274,7 @@ private:
 	{
 		if (static_<Int8>(tag)->get_() == 'P') // punctuation
 		{
-			if (symbol->is_("::") || symbol->is_(":."))
+			if (symbol->is_(":."))
 			{
 				return 100;
 			}
@@ -288,7 +288,7 @@ private:
 			}
 			if (symbol->is_("@") || symbol->is_("@=") || symbol->is_("@+") || symbol->is_("@-") ||
 				symbol->is_("@<") || symbol->is_(">@") || symbol->is_("@>") || symbol->is_("<@") ||
-				symbol->is_("@@"))
+				symbol->is_("@@") || symbol->is_("@:"))
 			{
 				return 85;
 			}

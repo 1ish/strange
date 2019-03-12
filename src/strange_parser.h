@@ -120,7 +120,7 @@ private:
 		static_<Flock>(flock)->push_back_(Expression::fin_(token, thing));
 	}
 
-	inline const Ptr _parse_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const bool right, const bool key = false)
+	inline const Ptr _parse_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const bool right)
 	{
 		Ptr token;
 		Ptr result;
@@ -156,17 +156,17 @@ private:
 				{
 					if (symbol->is_("lambda_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock, true, true)) // parameters/capture
+						if (_statement_(scope, shoal, fixed, cats, creation, flock, true, true)) // parameters/capture
 						{
 							if (flk->size_() % 3 == 0) // <cat> param := capture
 							{
 								const Ptr nested = Flock::mut_();
 								const auto nst = static_<Flock>(nested);
-								if (_statement_(scope, shoal, fixed, cats, creator, nested, true)) // parameters
+								if (_statement_(scope, shoal, fixed, cats, creation, nested, true)) // parameters
 								{
 									if (nst->size_() % 3 == 0) // <cat> param := default
 									{
-										nst->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creator, false)); // create new fixed/cats scope
+										nst->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
 										flk->push_back_(Expression::fin_(token, sym_("function_"), nested));
 										result = Expression::fin_(token, symbol, flock);
 										continue;
@@ -179,11 +179,11 @@ private:
 					}
 					else if (symbol->is_("function_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock, true)) // parameters
+						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // parameters
 						{
 							if (flk->size_() % 3 == 0) // <cat> param := default
 							{
-								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creator, false)); // create new fixed/cats scope
+								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
 								result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
 								continue;
 							}
@@ -192,11 +192,11 @@ private:
 					}
 					else if (symbol->is_("mutation_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock, true)) // parameters
+						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // parameters
 						{
 							if (flk->size_() % 3 == 0) // <cat> param := default
 							{
-								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creator, false)); // create new fixed/cats scope
+								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
 								result = Expression::fin_(token, Mutation::fin_(Expression::fin_(token, sym_("function_"), flock)));
 								continue;
 							}
@@ -205,11 +205,11 @@ private:
 					}
 					else if (symbol->is_("extraction_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock, true)) // parameters
+						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // parameters
 						{
 							if (flk->size_() % 3 == 0) // <cat> param := default
 							{
-								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creator, false)); // create new fixed/cats scope
+								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
 								result = Expression::fin_(token, Extraction::fin_(Expression::fin_(token, sym_("function_"), flock)));
 								continue;
 							}
@@ -218,18 +218,18 @@ private:
 					}
 					else if (symbol->is_("creator_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock, true)) // cat parameters
+						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // cat parameters
 						{
 							if (flk->size_() % 3 == 0) // <cat> param := default
 							{
 								const Ptr nested = Flock::mut_();
 								const auto nst = static_<Flock>(nested);
 								nst->push_back_(scope);
-								const Ptr new_creator = Weak::mut_(nothing_());
-								nst->push_back_(new_creator);
-								if (_statement_(scope, shoal, fixed, cats, creator, nested))
+								const Ptr new_creation = Weak::mut_(nothing_());
+								nst->push_back_(new_creation);
+								if (_statement_(scope, shoal, fixed, cats, creation, nested))
 								{
-									nst->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), new_creator, false)); // create new fixed/cats scope
+									nst->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), new_creation, false)); // create new fixed/cats scope
 									flk->push_back_(Expression::fin_(token, sym_("creation_"), nested));
 									result = Expression::fin_(token, Creation::fin_(Expression::fin_(token, symbol, flock)));
 									continue;
@@ -242,11 +242,11 @@ private:
 					else if (symbol->is_("creation_"))
 					{
 						flk->push_back_(scope);
-						const Ptr new_creator = Weak::mut_(nothing_());
-						flk->push_back_(new_creator);
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						const Ptr new_creation = Weak::mut_(nothing_());
+						flk->push_back_(new_creation);
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							flk->push_back_(_parse_(scope, shoal, fixed, cats, new_creator, false)); // right
+							flk->push_back_(_parse_(scope, shoal, fixed, cats, new_creation, false)); // right
 							result = Expression::fin_(token, Creation::fin_(Expression::fin_(token, symbol, flock)));
 							continue;
 						}
@@ -254,7 +254,7 @@ private:
 					}
 					else if (symbol->is_("fixed_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0)
@@ -272,7 +272,7 @@ private:
 					}
 					else if (symbol->is_("mutable_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0)
@@ -290,7 +290,7 @@ private:
 					}
 					else if (symbol->is_("variable_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0)
@@ -308,7 +308,7 @@ private:
 					}
 					else if (symbol->is_("changeable_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0)
@@ -326,7 +326,7 @@ private:
 					}
 					else if (symbol->is_("break_") || symbol->is_("continue_") || symbol->is_("return_") || symbol->is_("throw_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 0)
@@ -344,7 +344,7 @@ private:
 					}
 					else if (symbol->is_("error_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							result = Expression::fin_(token, symbol, flock);
 							continue;
@@ -352,7 +352,7 @@ private:
 					}
 					else if (symbol->is_("catch_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							if (flk->size_() == 2)
 							{
@@ -364,7 +364,7 @@ private:
 					}
 					else if (symbol->is_("if_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							const int64_t size = flk->size_();
 							if (size == 2 || size == 3)
@@ -377,11 +377,11 @@ private:
 					}
 					else if (symbol->is_("while_") || symbol->is_("do_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							if (flk->size_() == 1)
 							{
-								flk->push_back_(_parse_(scope, shoal, fixed, cats, creator, false));
+								flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
 								result = Expression::fin_(token, symbol, flock);
 								continue;
 							}
@@ -390,11 +390,11 @@ private:
 					}
 					else if (symbol->is_("for_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							if (flk->size_() == 3)
 							{
-								flk->push_back_(_parse_(scope, shoal, fixed, cats, creator, false));
+								flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
 								result = Expression::fin_(token, symbol, flock);
 								continue;
 							}
@@ -403,7 +403,7 @@ private:
 					}
 					else if (symbol->is_("import_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creator, flock))
+						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							if (flk->size_() >= 1)
 							{
@@ -420,7 +420,7 @@ private:
 									{
 										throw tok->error_("Parser ERROR: invalid import_ file: " + lake->get_());
 									}
-									result = static_<Parser>(Parser::mut_(Tokenizer::mut_(river)))->_parse_(nothing_(), shoal, fixed, cats, creator, true);
+									result = static_<Parser>(Parser::mut_(Tokenizer::mut_(river)))->_parse_(nothing_(), shoal, fixed, cats, creation, true);
 								}
 								continue;
 							}
@@ -430,7 +430,7 @@ private:
 					// local at/update name
 					flk->push_back_(symbol);
 					bool insert = false;
-					cont = _update_(scope, shoal, fixed, cats, creator, flock, symbol, insert);
+					cont = _update_(scope, shoal, fixed, cats, creation, flock, symbol, insert);
 					result = Expression::fin_(token, local, flock);
 				}
 				else if (tag == 'P') // punctuation
@@ -439,7 +439,7 @@ private:
 					{
 						_name_(flock);
 						bool insert = false;
-						cont = _update_(scope, shoal, fixed, cats, creator, flock, static_<Symbol>(symbol)->add_(flk->at_(0)), insert);
+						cont = _update_(scope, shoal, fixed, cats, creation, flock, static_<Symbol>(symbol)->add_(flk->at_(0)), insert);
 						if (cont)
 						{
 							result = Expression::fin_(token, sym_("shared_at_"), flock);
@@ -459,21 +459,21 @@ private:
 					}
 					else if (symbol->is_("|.")) // me dot
 					{
-						flk->push_back_(creator);
-						_dot_(scope, shoal, fixed, cats, creator, statement, flock, true); // me dot
+						flk->push_back_(creation);
+						_dot_(scope, shoal, fixed, cats, creation, statement, flock, true); // me dot
 						result = Expression::fin_(token, smt->get_(), flock);
 					}
 					else if (symbol->is_("|:.")) // me operation
 					{
-						flk->push_back_(creator);
+						flk->push_back_(creation);
 						_name_(flock);
 						result = Expression::fin_(token, sym_("intimation_"), flock);
 					}
-					else if (symbol->is_("|::")) // me creator
+					else if (symbol->is_("|:")) // me creation at
 					{
-						flk->push_back_(creator);
+						flk->push_back_(creation);
 						_name_(flock);
-						result = Expression::fin_(token, sym_("me_creator_"), flock);
+						result = Expression::fin_(token, sym_("me_creation_at_"), flock);
 					}
 					else if (symbol->is_("..")) // iterator
 					{
@@ -498,21 +498,21 @@ private:
 					}
 					else if (symbol->is_("(")) // block
 					{
-						_list_(scope, shoal, fixed, cats, creator, flock, sym_(")"));
+						_list_(scope, shoal, fixed, cats, creation, flock, sym_(")"));
 						result = Expression::fin_(token, sym_("block_"), flock);
 					}
 					else if (symbol->is_("[")) // flock
 					{
-						_list_(scope, shoal, fixed, cats, creator, flock, sym_("]"));
+						_list_(scope, shoal, fixed, cats, creation, flock, sym_("]"));
 						result = Expression::fin_(token, sym_("flock_"), flock);
 					}
-					else if (symbol->is_("{")) // creator, shoal or herd
+					else if (symbol->is_("{")) // creation, shoal or herd
 					{
-						if (_map_(scope, shoal, fixed, cats, creator, flock))
+						if (_map_(scope, shoal, fixed, cats, creation, flock))
 						{
-							if (flk->size_() == 1 && flk->at_(0) == creator)
+							if (flk->size_() == 1 && flk->at_(0) == creation)
 							{
-								result = Expression::fin_(token, sym_("me_creator_"), flock);
+								result = Expression::fin_(token, sym_("me_creation_"), flock);
 							}
 							else
 							{
@@ -527,11 +527,11 @@ private:
 					else if (symbol->is_("<")) // cat
 					{
 						bool close_close = false;
-						result = _cat_nest_(true, scope, shoal, fixed, cats, creator, close_close);
+						result = _cat_nest_(true, scope, shoal, fixed, cats, creation, close_close);
 					}
 					else if (symbol->is_("<<")) // iterator
 					{
-						_list_(scope, shoal, fixed, cats, creator, flock, sym_(">>"));
+						_list_(scope, shoal, fixed, cats, creation, flock, sym_(">>"));
 						result = Expression::fin_(token, sym_("flock_iterator_"), flock);
 					}
 					else
@@ -550,7 +550,7 @@ private:
 				else
 				{
 					flk->push_back_(result);
-					if (_thing_(scope, shoal, fixed, cats, creator, statement, flock, key))
+					if (_thing_(scope, shoal, fixed, cats, creation, statement, flock))
 					{
 						result = Expression::fin_(token, smt->get_(), flock);
 					}
@@ -568,7 +568,7 @@ private:
 		return Expression::fin_(token);
 	}
 
-	inline const bool _thing_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& statement, const Ptr& flock, const bool key, const int64_t min_precedence = 0)
+	inline const bool _thing_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const Ptr& statement, const Ptr& flock, const int64_t min_precedence = 0)
 	{
 		const Ptr token = _token_();
 		if (token->is_stop_())
@@ -594,66 +594,59 @@ private:
 			if (symbol->is_("."))
 			{
 				_next_();
-				_dot_(scope, shoal, fixed, cats, creator, statement, flock, false);
+				_dot_(scope, shoal, fixed, cats, creation, statement, flock, false);
 			}
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
-				flk->push_back_(_parse_(scope, shoal, fixed, cats, creator, false));
+				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
 				smt->set_(sym_("invoke_iterable_"));
 			}
 			else if (symbol->is_("[")) // flock
 			{
 				_next_();
-				_list_(scope, shoal, fixed, cats, creator, flock, sym_("]"));
+				_list_(scope, shoal, fixed, cats, creation, flock, sym_("]"));
 			}
 			else if (symbol->is_("<<")) // iterator
 			{
 				_next_();
-				_list_(scope, shoal, fixed, cats, creator, flock, sym_(">>"));
+				_list_(scope, shoal, fixed, cats, creation, flock, sym_(">>"));
 				smt->set_(sym_("invoke_iterator_"));
-			}
-			else if (!key && symbol->is_("::"))
-			{
-				_next_();
-				flk->push_back_(sym_("at"));
-				_name_(flock, true); // wrap
-				smt->set_(sym_("operate_"));
 			}
 			else if (symbol->is_("%"))
 			{
 				_next_();
 				flk->push_back_(sym_("modulo"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("%="))
 			{
 				_next_();
 				flk->push_back_(sym_("self_modulo"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("%%"))
 			{
 				_next_();
 				flk->push_back_(sym_("xor"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("!%"))
 			{
 				_next_();
 				flk->push_back_(sym_("xnor"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("+"))
 			{
 				_next_();
 				flk->push_back_(sym_("add"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("+="))
 			{
 				_next_();
 				flk->push_back_(sym_("self_add"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("++"))
 			{
@@ -665,13 +658,13 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("subtract"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("-="))
 			{
 				_next_();
 				flk->push_back_(sym_("self_subtract"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("--"))
 			{
@@ -683,37 +676,37 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("multiply"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("*="))
 			{
 				_next_();
 				flk->push_back_(sym_("self_multiply"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("/"))
 			{
 				_next_();
 				flk->push_back_(sym_("divide"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("/="))
 			{
 				_next_();
 				flk->push_back_(sym_("self_divide"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("=="))
 			{
 				_next_();
 				flk->push_back_(sym_("same"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("!="))
 			{
 				_next_();
 				flk->push_back_(sym_("different"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("&"))
 			{
@@ -725,25 +718,25 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("and"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("!&"))
 			{
 				_next_();
 				flk->push_back_(sym_("nand"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("||"))
 			{
 				_next_();
 				flk->push_back_(sym_("or"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("!|"))
 			{
 				_next_();
 				flk->push_back_(sym_("nor"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("^"))
 			{
@@ -755,7 +748,7 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("assign"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("~"))
 			{
@@ -803,7 +796,7 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("at"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("@>"))
 			{
@@ -821,31 +814,38 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("push_back"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_(">@"))
 			{
 				_next_();
 				flk->push_back_(sym_("push_front"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("@="))
 			{
 				_next_();
 				flk->push_back_(sym_("update"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("@+"))
 			{
 				_next_();
 				flk->push_back_(sym_("insert"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("@-"))
 			{
 				_next_();
 				flk->push_back_(sym_("erase"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
+			}
+			else if (symbol->is_("@:"))
+			{
+				_next_();
+				flk->push_back_(sym_("at"));
+				_name_(flock, true); // wrap
+				smt->set_(sym_("operate_"));
 			}
 			else if (symbol->is_("!"))
 			{
@@ -875,25 +875,25 @@ private:
 			{
 				_next_();
 				flk->push_back_(sym_("less_than"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_(">"))
 			{
 				_next_();
 				flk->push_back_(sym_("greater_than"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_("<="))
 			{
 				_next_();
 				flk->push_back_(sym_("less_or_equal"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_(">="))
 			{
 				_next_();
 				flk->push_back_(sym_("greater_or_equal"));
-				_member_(scope, shoal, fixed, cats, creator, statement, flock);
+				_member_(scope, shoal, fixed, cats, creation, statement, flock);
 			}
 			else if (symbol->is_(":."))
 			{
@@ -904,7 +904,7 @@ private:
 			else if (symbol->is_(".:"))
 			{
 				_next_();
-				flk->push_back_(_parse_(scope, shoal, fixed, cats, creator, false));
+				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
 				smt->set_(sym_("perform_"));
 			}
 			else
@@ -922,7 +922,7 @@ private:
 					const Ptr next_flock = Flock::mut_();
 					const auto next_flk = static_<Flock>(next_flock);
 					next_flk->push_back_(flk->at_(index));
-					if (!_thing_(scope, shoal, fixed, cats, creator, next_statement, next_flock, key, precedence_inc))
+					if (!_thing_(scope, shoal, fixed, cats, creation, next_statement, next_flock, precedence_inc))
 					{
 						break;
 					}
@@ -936,13 +936,13 @@ private:
 		}
 		else
 		{
-			flk->push_back_(_parse_(scope, shoal, fixed, cats, creator, false));
+			flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
 			smt->set_(sym_("invoke_iterable_"));
 		}
 		return true; // continue
 	}
 
-	inline void _dot_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& statement, const Ptr& flock, const bool me_dot)
+	inline void _dot_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const Ptr& statement, const Ptr& flock, const bool me_dot)
 	{
 		const Ptr token = _token_();
 		const auto tok = static_<Token>(token);
@@ -969,11 +969,11 @@ private:
 		{
 			_next_();
 			flk->push_back_(symbol);
-			_member_(scope, shoal, fixed, cats, creator, statement, flock, me_dot);
+			_member_(scope, shoal, fixed, cats, creation, statement, flock, me_dot);
 		}
 	}
 
-	inline void _member_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& statement, const Ptr& flock, const bool me_dot = false)
+	inline void _member_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const Ptr& statement, const Ptr& flock, const bool me_dot = false)
 	{
 		const Ptr token = _token_();
 		const auto smt = static_<Reference>(statement);
@@ -995,24 +995,24 @@ private:
 			if (symbol->is_("[")) // flock
 			{
 				_next_();
-				_list_(scope, shoal, fixed, cats, creator, flock, sym_("]"));
+				_list_(scope, shoal, fixed, cats, creation, flock, sym_("]"));
 				smt->set_(sym_(me_dot ? "intimate_" : "operate_"));
 			}
 			else if (symbol->is_("(") || symbol->is_("{")) // block or shoal
 			{
-				flk->push_back_(_parse_(scope, shoal, fixed, cats, creator, false));
+				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
 				smt->set_(sym_(me_dot ? "intimate_iterable_" : "operate_iterable_"));
 			}
 			else if (symbol->is_("<<")) // iterator
 			{
 				_next_();
-				_list_(scope, shoal, fixed, cats, creator, flock, sym_(">>"));
+				_list_(scope, shoal, fixed, cats, creation, flock, sym_(">>"));
 				smt->set_(sym_(me_dot ? "intimate_iterator_" : "operate_iterator_"));
 			}
 			else if (symbol->is_(":=")) // set attribute
 			{
 				_next_();
-				flk->push_back_(_parse_(scope, shoal, fixed, cats, creator, true));
+				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 				smt->set_(sym_(me_dot ? "set_intimate_" : "set_attribute_"));
 			}
 			else
@@ -1022,12 +1022,12 @@ private:
 		}
 		else
 		{
-			flk->push_back_(_parse_(scope, shoal, fixed, cats, creator, false));
+			flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
 			smt->set_(sym_(me_dot ? "intimate_iterable_" : "operate_iterable_"));
 		}
 	}
 
-	inline const bool _statement_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& flock, const bool parameters = false, const bool capture = false)
+	inline const bool _statement_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const Ptr& flock, const bool parameters = false, const bool capture = false)
 	{
 		const Ptr token = _token_();
 		if (token->is_stop_())
@@ -1044,13 +1044,13 @@ private:
 		if (tag == 'P' && symbol->is_("("))
 		{
 			_next_();
-			_list_(scope, shoal, fixed, cats, creator, flock, sym_(")"), parameters, capture);
+			_list_(scope, shoal, fixed, cats, creation, flock, sym_(")"), parameters, capture);
 			return true; // is a statement
 		}
 		return false; // not a statement
 	}
 
-	inline void _list_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& flock, const Ptr& close, const bool parameters = false, const bool capture = false)
+	inline void _list_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const Ptr& flock, const Ptr& close, const bool parameters = false, const bool capture = false)
 	{
 		const auto flk = static_<Flock>(flock);
 		bool parameter = parameters || capture;
@@ -1179,7 +1179,7 @@ private:
 				{
 					if (symbol->is_("<"))
 					{
-						captured = _cat_(scope, shoal, fixed, cats, creator, flock, capture);
+						captured = _cat_(scope, shoal, fixed, cats, creation, flock, capture);
 					}
 					else if (capture)
 					{
@@ -1202,19 +1202,19 @@ private:
 			}
 			else
 			{
-				flk->push_back_(_parse_(scope, shoal, fixed, cats, creator, true));
+				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 			}
 			punctuation = true;
 		}
 	}
 
-	inline const Ptr _cat_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& flock, const bool capture)
+	inline const Ptr _cat_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const Ptr& flock, const bool capture)
 	{
 		// add cat and default/captured to flock, return captured
 		const auto flk = static_<Flock>(flock);
 
 		bool close_close = false;
-		flk->push_back_(_cat_nest_(false, scope, shoal, fixed, cats, creator, close_close));
+		flk->push_back_(_cat_nest_(false, scope, shoal, fixed, cats, creation, close_close));
 
 		const Ptr token = _token_();
 		const auto tok = static_<Token>(token);
@@ -1258,7 +1258,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _cat_nest_(const bool expression, const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, bool& close_close)
+	inline const Ptr _cat_nest_(const bool expression, const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, bool& close_close)
 	{
 		Ptr token;
 		const Ptr type_name = _scope_key_(token);
@@ -1309,7 +1309,7 @@ private:
 					}
 					if (symbol->is_("<"))
 					{
-						return_cat = _cat_nest_(expression, scope, shoal, fixed, cats, creator, close_close);
+						return_cat = _cat_nest_(expression, scope, shoal, fixed, cats, creation, close_close);
 						close = true;
 						continue;
 					}
@@ -1330,7 +1330,7 @@ private:
 					}
 					else
 					{
-						const Ptr exp = _parse_(scope, shoal, fixed, cats, creator, true);
+						const Ptr exp = _parse_(scope, shoal, fixed, cats, creation, true);
 						if (expression)
 						{
 							arguments->push_back_(exp); // right
@@ -1398,7 +1398,7 @@ private:
 						{
 							throw tok->error_("Parser ERROR: bad cat <");
 						}
-						const Ptr nest = _cat_nest_(expression, scope, shoal, fixed, cats, creator, close_close);
+						const Ptr nest = _cat_nest_(expression, scope, shoal, fixed, cats, creation, close_close);
 						if (param)
 						{
 							parameters->push_back_(nest);
@@ -1456,13 +1456,13 @@ private:
 		return Cat::fin_(type_name, arguments, parameters);
 	}
 
-	inline const bool _map_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& flock)
+	inline const bool _map_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const Ptr& flock)
 	{
 		const auto flk = static_<Flock>(flock);
 		bool is_map = false;
 		bool not_map = false;
 		bool empty = false;
-		bool me_creator = false;
+		bool me_creation = false;
 		bool key = true;
 		bool punctuation = false;
 		bool add_shoal = false;
@@ -1502,7 +1502,7 @@ private:
 					{
 						_next_();
 						is_map = true;
-						me_creator = true;
+						me_creation = true;
 						continue;
 					}
 					else if (symbol->is_(","))
@@ -1520,12 +1520,12 @@ private:
 				}
 				throw tok->error_("Parser ERROR: {: not followed immediately by }");
 			}
-			else if (me_creator)
+			else if (me_creation)
 			{
 				if (tag == 'P' && symbol->is_("}"))
 				{
 					_next_();
-					flk->push_back_(creator);
+					flk->push_back_(creation);
 					return is_map;
 				}
 				throw tok->error_("Parser ERROR: {:: not followed immediately by }");
@@ -1611,7 +1611,7 @@ private:
 			}
 			if (key)
 			{
-				add_scope = _parse_(scope, shoal, fixed, cats, creator, true, true); // right, key
+				add_scope = _parse_(scope, shoal, fixed, cats, creation, true); // right
 				flk->push_back_(add_scope);
 			}
 			else
@@ -1624,7 +1624,7 @@ private:
 						: sym_(static_<Symbol>(scope)->get_() + "::" + add_scope_sym->get_())
 					)
 					: scope;
-				Ptr value = _parse_(new_scope, shoal, fixed, cats, creator, true);
+				Ptr value = _parse_(new_scope, shoal, fixed, cats, creation, true);
 				if (attribute->is_(":#")) // fixed
 				{
 					value = Expression::fin_(token, Fixed::fin_(value));
@@ -1767,7 +1767,7 @@ private:
 		return key;
 	}
 	
-	inline const bool _update_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creator, const Ptr& flock, const Ptr& name, bool& insert)
+	inline const bool _update_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const Ptr& flock, const Ptr& name, bool& insert)
 	{
 		const Ptr token = _token_();
 		if (token->is_stop_())
@@ -1787,7 +1787,7 @@ private:
 			if (symbol->is_(":="))
 			{
 				_next_();
-				flk->push_back_(_parse_(scope, shoal, fixed, cats, creator, true));
+				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 				return false; // break
 			}
 			if (symbol->is_("#="))
@@ -1798,7 +1798,7 @@ private:
 					throw tok->error_("Parser ERROR: attempt to reassign fixed name");
 				}
 				_next_();
-				flk->push_back_(_parse_(scope, shoal, fixed, cats, creator, true));
+				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 				return false; // break
 			}
 		}

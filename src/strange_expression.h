@@ -197,17 +197,17 @@ private:
 		return thing;
 	}
 
-	inline const Ptr _me_creator_(const Ptr& local) const
+	inline const Ptr _me_creation_(const Ptr& local) const
 	{
 		const auto creator = dynamic_<Shoal>(static_<Weak>(static_<Flock>(_flock)->get_()[0])->get_());
 		if (!creator)
 		{
-			throw _stack_("me accessed without a creator");
+			throw _stack_("me accessed without a creation");
 		}
 		return creator;
 	}
 
-	inline const Ptr _me_creator_at_(const Ptr& local) const;
+	inline const Ptr _me_creation_at_(const Ptr& local) const;
 
 	inline const Ptr _thing_(const Ptr& local) const
 	{
@@ -2060,17 +2060,21 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 		}
 		throw Disagreement("me_ expression of wrong size");
 	}
-	else if (statement->is_("me_creator_"))
+	else if (statement->is_("me_creation_"))
 	{
 		if (size == 1)
 		{
-			return fin_(token, statement, &Expression::_me_creator_, flock);
+			return fin_(token, statement, &Expression::_me_creation_, flock);
 		}
+		throw Disagreement("me_creation_ expression of wrong size");
+	}
+	else if (statement->is_("me_creation_at_"))
+	{
 		if (size == 2)
 		{
-			return fin_(token, statement, &Expression::_me_creator_at_, flock);
+			return fin_(token, statement, &Expression::_me_creation_at_, flock);
 		}
-		throw Disagreement("me_creator_ expression of wrong size");
+		throw Disagreement("me_creation_at_ expression of wrong size");
 	}
 	else if (statement->is_("thing_"))
 	{
@@ -2379,13 +2383,13 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	return fin_(token);
 }
 
-inline const Thing::Ptr Expression::_me_creator_at_(const Ptr& local) const
+inline const Thing::Ptr Expression::_me_creation_at_(const Ptr& local) const
 {
 	const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 	const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
 	if (!creator)
 	{
-		throw _stack_("me accessed without a creator");
+		throw _stack_("me accessed without a creation");
 	}
 	const auto name = static_<Symbol>(vec[1]);
 	const Ptr member = (name->get_()[0] == '_')
@@ -2393,7 +2397,7 @@ inline const Thing::Ptr Expression::_me_creator_at_(const Ptr& local) const
 		: creator->at_(name);
 	if (member->is_nothing_())
 	{
-		throw Dismemberment(sym_("me_creator_"), name);
+		throw Dismemberment(sym_("me_creation_at_"), name);
 	}
 	const auto attribute = dynamic_<Attribute>(member);
 	if (attribute)
