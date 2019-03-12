@@ -1101,7 +1101,7 @@ public:
 	inline Creation(const Ptr& expression)
 		: Operation{ expression }
 		, _shared{ Shoal::Concurrent::mut_() }
-		, _instantiations{ Herd::mut_() }
+		, _creations{ Shoal::mut_() }
 	{
 	}
 
@@ -1125,19 +1125,31 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-		const Ptr local = Shoal::mut_();
-		const auto loc = static_<Shoal>(local);
-		loc->insert_("$", _shared);
-		loc->insert_("&", it);
-		const Ptr instantiation = static_<Expression>(_expression)->evaluate_(_expression, local);
-		std::unique_lock<std::shared_timed_mutex> lock(_mutex);
-		static_<Herd>(_instantiations)->insert_(instantiation);
-		return instantiation;
+		const Ptr kat = Cat::fin_(nothing_(), Flock::mut(it->copy_()));
+		const auto cache = static_<Shoal>(_creations);
+		Ptr cached;
+		{
+			std::shared_lock<std::shared_timed_mutex> lock(_mutex);
+			cached = cache->at_(kat);
+		}
+		if (!cached->is_nothing_())
+		{
+			return cached;
+		}
+		const auto local = static_<Shoal>(Shoal::mut_());
+		local->insert_("$", _shared);
+		local->insert_("&", it);
+		const Ptr creation = static_<Expression>(_expression)->evaluate_(_expression, local);
+		{
+			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
+			cache->insert_(kat, creation);
+		}
+		return creation;
 	}
 
 private:
 	const Ptr _shared;
-	const Ptr _instantiations;
+	const Ptr _creations;
 	mutable std::shared_timed_mutex _mutex;
 };
 
