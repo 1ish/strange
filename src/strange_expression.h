@@ -464,6 +464,8 @@ private:
 
 	inline const Ptr _merge_(const Ptr& scope, Shoal* const shoal, const Ptr& values, Shoal* const creation, Shoal* const result, Herd* const cats) const;
 
+	static inline void _permutations_(const Ptr& type_name, const Ptr& arguments, Flock* const perms, Herd* const cats, const int64_t begin, const int64_t end);
+
 	inline const Ptr _shared_scope_(const Ptr& local) const
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
@@ -2871,10 +2873,9 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 		if (type_fun->is_nothing_())
 		{
 			type = scope;
-			const Ptr flock = Flock::mut_();
-			const auto flk = static_<Flock>(flock);
-			flk->push_back_(one_());
-			flk->push_back_(Expression::fin_(_token, type));
+			const auto flock = static_<Flock>(Flock::mut_());
+			flock->push_back_(one_());
+			flock->push_back_(Expression::fin_(_token, type));
 			result->update_("type", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 		}
 		else
@@ -2888,24 +2889,22 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 			throw Disagreement("creation derived type is not a symbol");
 		}
 		
-		const Ptr cat = Cat::fin_(type_symbol, values->is_nothing_() ? Flock::mut_() : values, Flock::mut_());
+		const Ptr cat = Cat::fin_(type_symbol, values->is_nothing_() ? Flock::mut_() : values);
 		{
-			const Ptr flock = Flock::mut_();
-			const auto flk = static_<Flock>(flock);
-			flk->push_back_(one_());
-			flk->push_back_(Expression::fin_(_token, cat));
+			const auto flock = static_<Flock>(Flock::mut_());
+			flock->push_back_(one_());
+			flock->push_back_(Expression::fin_(_token, cat));
 			result->update_("cat", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 		}
+		cats->insert_(cat);
 
-		{
-			cats->insert_(cat);
-		}
-
+		// cat permutations
 		if (!values->is_nothing_())
 		{
-			//TODO cat permutations
+			int64_t pos = 0;
+			int64_t end = 0;
+			const auto permutations = static_<Flock>(Flock::mut_());
 			const auto vals = static_<Flock>(values);
-			int64_t i = 0;
 			const Ptr it = vals->iterator_();
 			for (Ptr val = it->next_(); !val->is_stop_(); val = it->next_())
 			{
@@ -2922,15 +2921,22 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 							if (!cats_fun->is_nothing_())
 							{
 								const auto herd = dynamic_<Herd>(cats_fun->invoke_());
-								if (herd)
+								if (herd && herd->size_() > 1)
 								{
-
+									permutations->push_back_(herd);
+									end = ++pos;
+									continue;
 								}
 							}
 						}
 					}
 				}
-				++i;
+				permutations->push_back_(nothing_());
+				++pos;
+			}
+			if (end)
+			{
+				_permutations_(type_symbol, values->copy_(), permutations.get(), cats, 0, end);
 			}
 		}
 	}
@@ -2966,6 +2972,35 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 	}
 
 	return type;
+}
+
+inline void Expression::_permutations_(const Ptr& type_name, const Ptr& arguments, Flock* const perms, Herd* const cats, const int64_t begin, const int64_t end)
+{
+	for (int64_t pos = begin; pos < end; ++pos)
+	{
+		const Ptr perm = perms->at_(pos);
+		if (!perm->is_nothing_())
+		{
+			const Ptr it = perm->iterator_();
+			if (pos == end - 1)
+			{
+				for (Ptr cat = it->next_(); !cat->is_stop_(); cat = it->next_())
+				{
+					static_<Flock>(arguments)->update_(pos, cat);
+					cats->insert_(Cat::fin_(type_name, arguments));
+				}
+			}
+			else
+			{
+				for (Ptr cat = it->next_(); !cat->is_stop_(); cat = it->next_())
+				{
+					static_<Flock>(arguments)->update_(pos, cat);
+					_permutations_(type_name, arguments, perms, cats, pos + 1, end);
+				}
+			}
+			return;
+		}
+	}
 }
 
 //======================================================================
