@@ -2967,7 +2967,13 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 		}
 		else if (!symbol->is_("type") && !symbol->is_("cat") && !symbol->is_("cats"))
 		{
-			result->update_(key, value); //TODO check overrides
+			// check overrides
+			const Ptr overridden = result->at_(key);
+			if (!overridden->is_nothing_() && !Cat::check_(value, overridden->cat_()))
+			{
+				throw Disagreement("invalid override");
+			}
+			result->update_(key, value);
 		}
 	}
 
