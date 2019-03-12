@@ -1873,7 +1873,7 @@ public:
 			const auto herd = static_<Herd>(cats);
 			herd->self_add_(Stateful::cats_());
 			herd->self_add_(Serializable::cats_());
-			herd->insert_(Creature::cat_()); //TODO dynamic creature cat/cats
+			herd->insert_(Creature::cat_());
 			herd->finalize_();
 			return cats;
 		}();

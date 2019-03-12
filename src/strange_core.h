@@ -8768,9 +8768,9 @@ public:
 
 	inline const bool push_back_(const Ptr& ptr)
 	{
-		const Ptr cat = ptr->cat_();
-		write_(Int16::mut_(int16_t(static_<Symbol>(cat)->get_().length())));
-		write_(cat); //TODO cat not <cat>?
+		const Ptr type = ptr->type_();
+		write_(Int16::mut_(int16_t(static_<Symbol>(type)->get_().length())));
+		write_(type);
 		ptr->invoke_("to_river", me_());
 		return true;
 	}
@@ -8786,9 +8786,9 @@ public:
 
 	inline const bool push_back_with_links_(const Ptr& ptr, const Ptr& shoal)
 	{
-		const Ptr cat = ptr->cat_();
-		write_(Int16::mut_(int16_t(static_<Symbol>(cat)->get_().length())));
-		write_(cat); //TODO cat not <cat>?
+		const Ptr type = ptr->type_();
+		write_(Int16::mut_(int16_t(static_<Symbol>(type)->get_().length())));
+		write_(type);
 		ptr->invoke_("to_river_with_links", shoal, me_());
 		return true;
 	}
@@ -8828,8 +8828,8 @@ public:
 	inline const Ptr pop_front_()
 	{
 		const int16_t int16 = read_<Int16>();
-		const std::string cat = static_<Lake>(read_(int16))->get_();
-		return call_(cat + "::riv", me_()); //TODO <cat>::riv?
+		const std::string type = static_<Lake>(read_(int16))->get_();
+		return call_(type + "::riv", me_());
 	}
 
 	inline const Ptr pop_front(const Ptr& ignore)
@@ -8840,8 +8840,8 @@ public:
 	inline const Ptr pop_front_with_links_()
 	{
 		const int16_t int16 = read_<Int16>();
-		const std::string cat = static_<Lake>(read_(int16))->get_();
-		return call_(cat + "::rwl", me_()); //TODO <cat>::rwl?
+		const std::string type = static_<Lake>(read_(int16))->get_();
+		return call_(type + "::rwl", me_());
 	}
 
 	inline const Ptr read_(const int64_t length)
