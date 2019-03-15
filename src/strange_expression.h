@@ -2923,6 +2923,7 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 				const auto cat_val = dynamic_<Cat>(val);
 				if (cat_val && !cat_val->is_("<>"))
 				{
+					end = ++pos;
 					const auto creation = dynamic_<Creation>(shoal->at_(cat_val->type_name_()));
 					if (creation)
 					{
@@ -2936,12 +2937,16 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 								if (herd && herd->size_() > 1)
 								{
 									permutations->push_back_(herd);
-									end = ++pos;
 									continue;
 								}
 							}
 						}
 					}
+					const auto herd = static_<Herd>(Herd::mut_());
+					herd->insert_(cat_val);
+					herd->insert_(Cat::fin_()); // or <> any
+					permutations->push_back_(herd);
+					continue;
 				}
 				permutations->push_back_(nothing_());
 				++pos;
