@@ -1863,7 +1863,8 @@ private:
 			{
 				_next_();
 				cats_shoal->insert_(name, Cat::fin_());
-				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true)); //TODO check cats
+				flk->push_back_(Cat::fin_());
+				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 				return false; // break
 			}
 			else if (symbol->is_(":<") || symbol->is_("#<"))
@@ -1871,10 +1872,12 @@ private:
 				_next_();
 				bool close_close = false;
 				bool close_assign = true;
-				cats_shoal->insert_(name, _cat_nest_(false, scope, shoal, fixed, cats, creation, close_close, close_assign));
+				const Ptr nest = _cat_nest_(false, scope, shoal, fixed, cats, creation, close_close, close_assign);
+				cats_shoal->insert_(name, nest);
 				if (close_assign || _update_cat_())
 				{
-					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true)); //TODO check cats
+					flk->push_back_(nest);
+					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 					return false; // break
 				}
 			}
@@ -1886,10 +1889,12 @@ private:
 				{
 					throw tok->error_("Parser ERROR: name cats cannot be a shoal");
 				}
-				cats_shoal->insert_(name, Expression::immediate_(Expression::fin_(token, sym_("herd_"), herd_flock)));
+				const Ptr herd = Expression::immediate_(Expression::fin_(token, sym_("herd_"), herd_flock));
+				cats_shoal->insert_(name, herd);
 				if (_update_cat_())
 				{
-					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true)); //TODO check cats
+					flk->push_back_(herd);
+					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 					return false; // break
 				}
 			}

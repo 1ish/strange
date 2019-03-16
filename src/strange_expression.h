@@ -132,7 +132,11 @@ private:
 		try
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			const Ptr value = Expression::evaluate_(vec[1], local);
+			const Ptr value = Expression::evaluate_(vec[2], local);
+			if (!Cat::check_(value, vec[1]))
+			{
+				throw _stack_("local assigned wrong kind of thing");
+			}
 			static_<Shoal>(local)->update_(vec[0], value);
 			return value;
 		}
@@ -152,7 +156,11 @@ private:
 		try
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-			const Ptr value = Expression::evaluate_(vec[1], local);
+			const Ptr value = Expression::evaluate_(vec[2], local);
+			if (!Cat::check_(value, vec[1]))
+			{
+				throw _stack_("shared local assigned wrong kind of thing");
+			}
 			static_<Shoal::Concurrent>(static_<Shoal>(local)->at_("$"))->update_(vec[0], value);
 			return value;
 		}
@@ -172,7 +180,11 @@ private:
 			const Ptr existing = shared->at_(key);
 			if (existing->is_nothing_())
 			{
-				const Ptr value = Expression::evaluate_(vec[1], local);
+				const Ptr value = Expression::evaluate_(vec[2], local);
+				if (!Cat::check_(value, vec[1]))
+				{
+					throw _stack_("shared local assigned wrong kind of thing");
+				}
 				if (!shared->insert_(key, value))
 				{
 					return shared->at_(key);
@@ -432,7 +444,6 @@ private:
 				{
 					value = Expression::evaluate_(vec[i + 2], local);
 				}
-				// check cat
 				if (!Cat::check_(value, vec[i + 1]))
 				{
 					throw _stack_("function passed wrong kind of thing");
@@ -2032,7 +2043,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 		{
 			return fin_(token, statement, &Expression::_local_at_, flock);
 		}
-		if (size == 2)
+		if (size == 3)
 		{
 			return fin_(token, statement, &Expression::_local_update_, flock);
 		}
@@ -2048,7 +2059,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("shared_update_"))
 	{
-		if (size == 2)
+		if (size == 3)
 		{
 			return fin_(token, statement, &Expression::_shared_update_, flock);
 		}
@@ -2056,7 +2067,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("shared_insert_"))
 	{
-		if (size == 2)
+		if (size == 3)
 		{
 			return fin_(token, statement, &Expression::_shared_insert_, flock);
 		}
@@ -2745,7 +2756,6 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 		for (std::size_t i = 0; i < size_1; i += 3)
 		{
 			const Ptr value = Expression::evaluate_(vec[i + 2], local);
-			// check cat
 			if (!Cat::check_(value, vec[i + 1]))
 			{
 				throw _stack_("lambda captured wrong kind of thing");
@@ -2788,7 +2798,6 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 			{
 				value = Expression::evaluate_(vec[i + 2], local);
 			}
-			// check cat
 			if (!Cat::check_(value, vec[i + 1]))
 			{
 				throw _stack_("creator passed wrong kind of thing");
@@ -2842,6 +2851,7 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 		{
 			const auto flock = static_<Flock>(Flock::mut_());
 			flock->push_back_(one_());
+			flock->push_back_(Cat::fin_());
 			flock->push_back_(Expression::fin_(_token, cats));
 			result->insert_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 		}
@@ -2875,6 +2885,7 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 			type = scope;
 			const auto flock = static_<Flock>(Flock::mut_());
 			flock->push_back_(one_());
+			flock->push_back_(Cat::fin_());
 			flock->push_back_(Expression::fin_(_token, type));
 			result->update_("type", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 		}
@@ -2893,6 +2904,7 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 		{
 			const auto flock = static_<Flock>(Flock::mut_());
 			flock->push_back_(one_());
+			flock->push_back_(Cat::fin_());
 			flock->push_back_(Expression::fin_(_token, cat));
 			result->update_("cat", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
 		}
