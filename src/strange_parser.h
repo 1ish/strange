@@ -156,17 +156,19 @@ private:
 				{
 					if (symbol->is_("lambda_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creation, flock, true, true)) // parameters/capture
+						const Ptr new_fixed = Herd::mut_();
+						const Ptr new_cats = Shoal::mut_();
+						if (_statement_(scope, shoal, new_fixed, new_cats, creation, flock, true, true)) // parameters/capture
 						{
 							if (flk->size_() % 3 == 0) // param :<cat>= capture
 							{
 								const Ptr nested = Flock::mut_();
 								const auto nst = static_<Flock>(nested);
-								if (_statement_(scope, shoal, fixed, cats, creation, nested, true)) // parameters
+								if (_statement_(scope, shoal, new_fixed, new_cats, creation, nested, true)) // parameters
 								{
 									if (nst->size_() % 3 == 0) // param :<cat>= default
 									{
-										nst->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
+										nst->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
 										flk->push_back_(Expression::fin_(token, sym_("function_"), nested));
 										result = Expression::fin_(token, symbol, flock);
 										continue;
@@ -179,11 +181,13 @@ private:
 					}
 					else if (symbol->is_("function_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // parameters
+						const Ptr new_fixed = Herd::mut_();
+						const Ptr new_cats = Shoal::mut_();
+						if (_statement_(scope, shoal, new_fixed, new_cats, creation, flock, true)) // parameters
 						{
 							if (flk->size_() % 3 == 0) // param :<cat>= default
 							{
-								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
+								flk->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
 								result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
 								continue;
 							}
@@ -192,11 +196,13 @@ private:
 					}
 					else if (symbol->is_("mutation_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // parameters
+						const Ptr new_fixed = Herd::mut_();
+						const Ptr new_cats = Shoal::mut_();
+						if (_statement_(scope, shoal, new_fixed, new_cats, creation, flock, true)) // parameters
 						{
 							if (flk->size_() % 3 == 0) // param :<cat>= default
 							{
-								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
+								flk->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
 								result = Expression::fin_(token, Mutation::fin_(Expression::fin_(token, sym_("function_"), flock)));
 								continue;
 							}
@@ -205,11 +211,13 @@ private:
 					}
 					else if (symbol->is_("extraction_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // parameters
+						const Ptr new_fixed = Herd::mut_();
+						const Ptr new_cats = Shoal::mut_();
+						if (_statement_(scope, shoal, new_fixed, new_cats, creation, flock, true)) // parameters
 						{
 							if (flk->size_() % 3 == 0) // param :<cat>= default
 							{
-								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
+								flk->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
 								result = Expression::fin_(token, Extraction::fin_(Expression::fin_(token, sym_("function_"), flock)));
 								continue;
 							}
@@ -218,7 +226,9 @@ private:
 					}
 					else if (symbol->is_("creator_"))
 					{
-						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // cat parameters
+						const Ptr new_fixed = Herd::mut_();
+						const Ptr new_cats = Shoal::mut_();
+						if (_statement_(scope, shoal, new_fixed, new_cats, creation, flock, true)) // cat parameters
 						{
 							if (flk->size_() % 3 == 0) // param :<cat>= default
 							{
@@ -228,9 +238,9 @@ private:
 								nst->push_back_(shoal);
 								const Ptr new_creation = Weak::mut_(nothing_());
 								nst->push_back_(new_creation);
-								if (_statement_(scope, shoal, fixed, cats, creation, nested))
+								if (_statement_(scope, shoal, new_fixed, new_cats, creation, nested))
 								{
-									nst->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), new_creation, false)); // create new fixed/cats scope
+									nst->push_back_(_parse_(scope, shoal, new_fixed, new_cats, new_creation, false));
 									flk->push_back_(Expression::fin_(token, sym_("creation_"), nested));
 									result = Expression::fin_(token, Creation::fin_(Expression::fin_(token, symbol, flock)));
 									continue;
@@ -1146,13 +1156,13 @@ private:
 					}
 					else if (parameter)
 					{
-						if (symbol->is_(":="))
+						if (symbol->is_(":=")) //TODO #=
 						{
 							flk->push_back_(Cat::fin_()); // any cat
 							cat = false;
 							parameter = false;
 						}
-						else if (symbol->is_(":<"))
+						else if (symbol->is_(":<")) //TODO #<
 						{
 							bool close_close = false;
 							bool close_assign = true;
@@ -1167,7 +1177,7 @@ private:
 								continue;
 							}
 						}
-						else if (symbol->is_(":{"))
+						else if (symbol->is_(":{")) //TODO #{
 						{
 							const auto herd_flock = static_<Flock>(Flock::mut_());
 							if (_map_(scope, shoal, fixed, cats, creation, herd_flock))
