@@ -1068,7 +1068,7 @@ private:
 		const auto flk = static_<Flock>(flock);
 		bool parameter = parameters || capture;
 		bool cat = false;
-		Ptr captured;
+		Ptr name;
 		bool punctuation = false;
 		for (bool first = true; true; first = false)
 		{
@@ -1117,7 +1117,7 @@ private:
 						}
 						if (capture)
 						{
-							const std::string& s = static_<Symbol>(captured)->get_();
+							const std::string& s = static_<Symbol>(name)->get_();
 							const Ptr cap = Flock::mut_();
 							if (s[0] == '$')
 							{
@@ -1130,7 +1130,7 @@ private:
 							}
 							else
 							{
-								static_<Flock>(cap)->push_back_(captured);
+								static_<Flock>(cap)->push_back_(name);
 								flk->push_back_(Expression::fin_(token, sym_("local_"), cap));
 							}
 						}
@@ -1156,17 +1156,54 @@ private:
 					}
 					else if (parameter)
 					{
-						if (symbol->is_(":=")) //TODO #=
+						const auto cats_shoal = static_<Shoal>(cats);
+						if (symbol->is_("#=") || symbol->is_("#<") || symbol->is_("#{"))
 						{
+							if (!cat)
+							{
+								throw tok->error_("Parser ERROR: list not expecting cat");
+							}
+							if (!name->is_("|") &&
+								(!static_<Herd>(fixed)->insert_(name) || !cats_shoal->at_(name)->is_nothing_()))
+							{
+								throw tok->error_("Parser ERROR: attempt to reassign fixed name");
+							}
+						}
+						else if (symbol->is_(":<") || symbol->is_(":{"))
+						{
+							if (!cat)
+							{
+								throw tok->error_("Parser ERROR: list not expecting cat");
+							}
+							if (!name->is_("|") && !cats_shoal->at_(name)->is_nothing_())
+							{
+								throw tok->error_("Parser ERROR: attempt to reassign name cat");
+							}
+						}
+						if (symbol->is_(":=") || symbol->is_("#="))
+						{
+							if (!cat)
+							{
+								throw tok->error_("Parser ERROR: list not expecting cat");
+							}
+							if (!name->is_("|"))
+							{
+								cats_shoal->insert_(name, Cat::fin_());
+							}
 							flk->push_back_(Cat::fin_()); // any cat
 							cat = false;
 							parameter = false;
 						}
-						else if (symbol->is_(":<")) //TODO #<
+						else if (symbol->is_(":<") || symbol->is_("#<"))
 						{
 							bool close_close = false;
 							bool close_assign = true;
-							flk->push_back_(_cat_nest_(false, scope, shoal, fixed, cats, creation, close_close, close_assign));
+							const Ptr nest = _cat_nest_(false, scope, shoal, fixed, cats, creation, close_close, close_assign);
+							if (!name->is_("|"))
+							{
+								cats_shoal->insert_(name, nest);
+							}
+							flk->push_back_(nest);
 							cat = false;
 							if (close_assign || _update_cat_())
 							{
@@ -1177,14 +1214,19 @@ private:
 								continue;
 							}
 						}
-						else if (symbol->is_(":{")) //TODO #{
+						else if (symbol->is_(":{") || symbol->is_("#{"))
 						{
 							const auto herd_flock = static_<Flock>(Flock::mut_());
 							if (_map_(scope, shoal, fixed, cats, creation, herd_flock))
 							{
 								throw tok->error_("Parser ERROR: parameter cats cannot be a shoal");
 							}
-							flk->push_back_(Expression::immediate_(Expression::fin_(token, sym_("herd_"), herd_flock)));
+							const Ptr herd = Expression::immediate_(Expression::fin_(token, sym_("herd_"), herd_flock));
+							if (!name->is_("|"))
+							{
+								cats_shoal->insert_(name, herd);
+							}
+							flk->push_back_(herd);
 							cat = false;
 							if (_update_cat_())
 							{
@@ -1222,18 +1264,15 @@ private:
 				cat = true;
 				if (tag == 'N') // name
 				{
+					name = symbol;
 					flk->push_back_(symbol);
-					if (capture)
-					{
-						captured = symbol;
-					}
 				}
 				else if (tag == 'P') // punctuation
 				{
 					if (capture)
 					{
-						captured = _capture_(symbol, flock);
-						if (captured->is_nothing_())
+						name = _capture_(symbol, flock);
+						if (name->is_nothing_())
 						{
 							throw tok->error_("Parser ERROR: list expecting capture name");
 						}
