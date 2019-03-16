@@ -1802,23 +1802,23 @@ private:
 		if (tag == 'P')
 		{
 			const auto cats_shoal = static_<Shoal>(cats);
-
 			if (symbol->is_("#=") || symbol->is_("#<") || symbol->is_("#{"))
 			{
 				insert = true;
-				if (!static_<Herd>(fixed)->insert_(name))
+				if (!static_<Herd>(fixed)->insert_(name) || !cats_shoal->at_(name)->is_nothing_())
 				{
 					throw tok->error_("Parser ERROR: attempt to reassign fixed name");
 				}
 			}
+			else if ((symbol->is_(":<") || symbol->is_(":{")) &&
+				!cats_shoal->at_(name)->is_nothing_())
+			{
+				throw tok->error_("Parser ERROR: attempt to reassign name cat");
+			}
 			if (symbol->is_(":=") || symbol->is_("#="))
 			{
 				_next_();
-				const Ptr old_cat = cats_shoal->at_(name);
-				if (old_cat->is_nothing_())
-				{
-					cats_shoal->insert_(name, Cat::fin_());
-				}
+				cats_shoal->insert_(name, Cat::fin_());
 				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 				return false; // break
 			}
@@ -1827,15 +1827,7 @@ private:
 				_next_();
 				bool close_close = false;
 				bool close_assign = true;
-				const Ptr old_cat = cats_shoal->at_(name);
-				if (old_cat->is_nothing_())
-				{
-					cats_shoal->insert_(name, Expression::immediate_(_cat_nest_(true, scope, shoal, fixed, cats, creation, close_close, close_assign)));
-				}
-				else
-				{
-					throw tok->error_("Parser ERROR: attempt to reassign name cat");
-				}
+				cats_shoal->insert_(name, _cat_nest_(false, scope, shoal, fixed, cats, creation, close_close, close_assign));
 				if (close_assign || _update_cat_())
 				{
 					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
@@ -1845,20 +1837,12 @@ private:
 			else if (symbol->is_(":{") || symbol->is_("#{"))
 			{
 				_next_();
-				const Ptr old_cat = cats_shoal->at_(name);
-				if (old_cat->is_nothing_())
+				const auto herd_flock = static_<Flock>(Flock::mut_());
+				if (_map_(scope, shoal, fixed, cats, creation, herd_flock))
 				{
-					const Ptr herd_flock = Flock::mut_();
-					if (_map_(scope, shoal, fixed, cats, creation, herd_flock))
-					{
-						throw tok->error_("Parser ERROR: name cats cannot be a shoal");
-					}
-					cats_shoal->insert_(name, Expression::immediate_(Expression::fin_(token, sym_("herd_"), herd_flock)));
+					throw tok->error_("Parser ERROR: name cats cannot be a shoal");
 				}
-				else
-				{
-					throw tok->error_("Parser ERROR: attempt to reassign name cats");
-				}
+				cats_shoal->insert_(name, Expression::immediate_(Expression::fin_(token, sym_("herd_"), herd_flock)));
 				if (_update_cat_())
 				{
 					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
