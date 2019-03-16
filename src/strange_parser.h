@@ -1803,7 +1803,7 @@ private:
 		{
 			const auto cats_shoal = static_<Shoal>(cats);
 
-			if (symbol->is_("#=") || symbol->is_("#<"))
+			if (symbol->is_("#=") || symbol->is_("#<") || symbol->is_("#{"))
 			{
 				insert = true;
 				if (!static_<Herd>(fixed)->insert_(name))
@@ -1814,30 +1814,52 @@ private:
 			if (symbol->is_(":=") || symbol->is_("#="))
 			{
 				_next_();
-				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 				const Ptr old_cat = cats_shoal->at_(name);
 				if (old_cat->is_nothing_())
 				{
 					cats_shoal->insert_(name, Cat::fin_());
 				}
+				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 				return false; // break
 			}
-			if (symbol->is_(":<") || symbol->is_("#<"))
+			else if (symbol->is_(":<") || symbol->is_("#<"))
 			{
 				_next_();
 				bool close_close = false;
 				bool close_assign = true;
-				const Ptr cat = _cat_nest_(true, scope, shoal, fixed, cats, creation, close_close, close_assign);
 				const Ptr old_cat = cats_shoal->at_(name);
 				if (old_cat->is_nothing_())
 				{
-					cats_shoal->insert_(name, cat);
+					cats_shoal->insert_(name, Expression::immediate_(_cat_nest_(true, scope, shoal, fixed, cats, creation, close_close, close_assign)));
 				}
 				else
 				{
 					throw tok->error_("Parser ERROR: attempt to reassign name cat");
 				}
 				if (close_assign || _update_cat_())
+				{
+					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
+					return false; // break
+				}
+			}
+			else if (symbol->is_(":{") || symbol->is_("#{"))
+			{
+				_next_();
+				const Ptr old_cat = cats_shoal->at_(name);
+				if (old_cat->is_nothing_())
+				{
+					const Ptr herd_flock = Flock::mut_();
+					if (_map_(scope, shoal, fixed, cats, creation, herd_flock))
+					{
+						throw tok->error_("Parser ERROR: name cats cannot be a shoal");
+					}
+					cats_shoal->insert_(name, Expression::immediate_(Expression::fin_(token, sym_("herd_"), herd_flock)));
+				}
+				else
+				{
+					throw tok->error_("Parser ERROR: attempt to reassign name cats");
+				}
+				if (_update_cat_())
 				{
 					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 					return false; // break
