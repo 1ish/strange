@@ -529,7 +529,8 @@ private:
 					else if (symbol->is_("<")) // cat
 					{
 						bool close_close = false;
-						result = _cat_nest_(true, scope, shoal, fixed, cats, creation, close_close);
+						bool close_assign = false;
+						result = _cat_nest_(true, scope, shoal, fixed, cats, creation, close_close, close_assign);
 					}
 					else if (symbol->is_("<<")) // iterator
 					{
@@ -1216,7 +1217,8 @@ private:
 		const auto flk = static_<Flock>(flock);
 
 		bool close_close = false;
-		flk->push_back_(_cat_nest_(false, scope, shoal, fixed, cats, creation, close_close));
+		bool close_assign = true;
+		flk->push_back_(_cat_nest_(false, scope, shoal, fixed, cats, creation, close_close, close_assign)); //TODO assign
 
 		const Ptr token = _token_();
 		const auto tok = static_<Token>(token);
@@ -1260,7 +1262,7 @@ private:
 		return nothing_();
 	}
 
-	inline const Ptr _cat_nest_(const bool expression, const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, bool& close_close)
+	inline const Ptr _cat_nest_(const bool expression, const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, bool& close_close, bool& close_assign)
 	{
 		Ptr token;
 		const Ptr type_name = _scope_key_(token);
@@ -1297,6 +1299,11 @@ private:
 				{
 					if (symbol->is_(">"))
 					{
+						close_assign = false;
+						break;
+					}
+					if (close_assign && symbol->is_(">="))
+					{
 						break;
 					}
 					if (symbol->is_("["))
@@ -1311,7 +1318,8 @@ private:
 					}
 					if (symbol->is_("<"))
 					{
-						return_cat = _cat_nest_(expression, scope, shoal, fixed, cats, creation, close_close);
+						bool nested_close_assign = false;
+						return_cat = _cat_nest_(expression, scope, shoal, fixed, cats, creation, close_close, nested_close_assign);
 						close = true;
 						continue;
 					}
@@ -1382,6 +1390,7 @@ private:
 							_next_();
 						}
 						close_close = !close_close;
+						close_assign = false;
 						break;
 					}
 					_next_();
@@ -1400,7 +1409,8 @@ private:
 						{
 							throw tok->error_("Parser ERROR: bad cat <");
 						}
-						const Ptr nest = _cat_nest_(expression, scope, shoal, fixed, cats, creation, close_close);
+						bool nested_close_assign = false;
+						const Ptr nest = _cat_nest_(expression, scope, shoal, fixed, cats, creation, close_close, nested_close_assign);
 						if (param)
 						{
 							parameters->push_back_(nest);
@@ -1423,6 +1433,11 @@ private:
 						continue;
 					}
 					if (symbol->is_(">"))
+					{
+						close_assign = false;
+						break;
+					}
+					if (close_assign && symbol->is_(">="))
 					{
 						break;
 					}
@@ -1803,8 +1818,50 @@ private:
 				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 				return false; // break
 			}
+			if (symbol->is_(":<"))
+			{
+				_next_();
+				bool close_close = false;
+				bool close_assign = true;
+				const Ptr cat = _cat_nest_(true, scope, shoal, fixed, cats, creation, close_close, close_assign);
+				const Ptr old_cat = static_<Shoal>(cats)->at_(name);
+				if (old_cat->is_nothing_())
+				{
+					static_<Shoal>(cats)->insert_(name, cat);
+				}
+				else
+				{
+					throw tok->error_("Parser ERROR: attempt to reassign name cat");
+				}
+				if (close_assign || _update_cat_())
+				{
+					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
+					return false; // break
+				}
+			}
 		}
 		return true; // continue
+	}
+
+	inline const bool _update_cat_()
+	{
+		const Ptr token = _token_();
+		if (token->is_stop_())
+		{
+			return false; // break
+		}
+		const auto tok = static_<Token>(token);
+		const char tag = tok->tag_();
+		if (tag == 'E') // error
+		{
+			throw tok->error_("Tokenizer ERROR");
+		}
+		if (tag == 'P' && tok->symbol()->is_("="))
+		{
+			_next_();
+			return true;
+		}
+		return false;
 	}
 };
 
