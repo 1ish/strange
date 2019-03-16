@@ -1801,33 +1801,37 @@ private:
 		const Ptr symbol = tok->symbol();
 		if (tag == 'P')
 		{
-			if (symbol->is_(":="))
-			{
-				_next_();
-				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
-				return false; // break
-			}
-			if (symbol->is_("#="))
+			const auto cats_shoal = static_<Shoal>(cats);
+
+			if (symbol->is_("#=") || symbol->is_("#<"))
 			{
 				insert = true;
 				if (!static_<Herd>(fixed)->insert_(name))
 				{
 					throw tok->error_("Parser ERROR: attempt to reassign fixed name");
 				}
+			}
+			if (symbol->is_(":=") || symbol->is_("#="))
+			{
 				_next_();
 				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
+				const Ptr old_cat = cats_shoal->at_(name);
+				if (old_cat->is_nothing_())
+				{
+					cats_shoal->insert_(name, Cat::fin_());
+				}
 				return false; // break
 			}
-			if (symbol->is_(":<"))
+			if (symbol->is_(":<") || symbol->is_("#<"))
 			{
 				_next_();
 				bool close_close = false;
 				bool close_assign = true;
 				const Ptr cat = _cat_nest_(true, scope, shoal, fixed, cats, creation, close_close, close_assign);
-				const Ptr old_cat = static_<Shoal>(cats)->at_(name);
+				const Ptr old_cat = cats_shoal->at_(name);
 				if (old_cat->is_nothing_())
 				{
-					static_<Shoal>(cats)->insert_(name, cat);
+					cats_shoal->insert_(name, cat);
 				}
 				else
 				{
