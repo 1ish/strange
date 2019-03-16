@@ -9383,7 +9383,28 @@ inline const bool Cat::check_(const Ptr& thing, const Ptr& cat)
 	{
 		return true;
 	}
-	return static_<Herd>(thing->cats_())->at_(cat); //TODO check intersection if cat is a herd
+	const auto thing_cats = static_<Herd>(thing->cats_());
+	const auto cat_herd = dynamic_<Herd>(cat);
+	if (cat_herd)
+	{
+		for (const auto& item : cat_herd->get_())
+		{
+			const auto cat_item = dynamic_<Cat>(item);
+			if (cat_item)
+			{
+				if (thing_cats->at_(cat_item))
+				{
+					return true;
+				}
+			}
+			else if (cat_item->same_(thing))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	return thing_cats->at_(cat);
 }
 
 inline const std::string Cat::_hash_arg_(const Ptr& arg)
