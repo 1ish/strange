@@ -158,13 +158,13 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock, true, true)) // parameters/capture
 						{
-							if (flk->size_() % 3 == 0) // <cat> param := capture
+							if (flk->size_() % 3 == 0) // param :<cat>= capture
 							{
 								const Ptr nested = Flock::mut_();
 								const auto nst = static_<Flock>(nested);
 								if (_statement_(scope, shoal, fixed, cats, creation, nested, true)) // parameters
 								{
-									if (nst->size_() % 3 == 0) // <cat> param := default
+									if (nst->size_() % 3 == 0) // param :<cat>= default
 									{
 										nst->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
 										flk->push_back_(Expression::fin_(token, sym_("function_"), nested));
@@ -181,7 +181,7 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // parameters
 						{
-							if (flk->size_() % 3 == 0) // <cat> param := default
+							if (flk->size_() % 3 == 0) // param :<cat>= default
 							{
 								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
 								result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
@@ -194,7 +194,7 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // parameters
 						{
-							if (flk->size_() % 3 == 0) // <cat> param := default
+							if (flk->size_() % 3 == 0) // param :<cat>= default
 							{
 								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
 								result = Expression::fin_(token, Mutation::fin_(Expression::fin_(token, sym_("function_"), flock)));
@@ -207,7 +207,7 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // parameters
 						{
-							if (flk->size_() % 3 == 0) // <cat> param := default
+							if (flk->size_() % 3 == 0) // param :<cat>= default
 							{
 								flk->push_back_(_parse_(scope, shoal, Herd::mut_(), Shoal::mut_(), creation, false)); // create new fixed/cats scope
 								result = Expression::fin_(token, Extraction::fin_(Expression::fin_(token, sym_("function_"), flock)));
@@ -220,7 +220,7 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock, true)) // cat parameters
 						{
-							if (flk->size_() % 3 == 0) // <cat> param := default
+							if (flk->size_() % 3 == 0) // param :<cat>= default
 							{
 								const Ptr nested = Flock::mut_();
 								const auto nst = static_<Flock>(nested);
@@ -1057,6 +1057,7 @@ private:
 	{
 		const auto flk = static_<Flock>(flock);
 		bool parameter = parameters || capture;
+		bool cat = false;
 		Ptr captured;
 		bool punctuation = false;
 		for (bool first = true; true; first = false)
@@ -1094,10 +1095,16 @@ private:
 			}
 			else if (punctuation)
 			{
+				_next_();
 				if (tag == 'P') // punctuation
 				{
 					if ((symbol->is_(close) || symbol->is_(",")) && parameter)
 					{
+						if (cat)
+						{
+							flk->push_back_(Cat::fin_()); // any cat
+							cat = false;
+						}
 						if (capture)
 						{
 							const std::string& s = static_<Symbol>(captured)->get_();
@@ -1124,7 +1131,6 @@ private:
 					}
 					if (symbol->is_(close))
 					{
-						_next_();
 						return;
 					}
 					else if (symbol->is_(","))
@@ -1142,7 +1148,42 @@ private:
 					{
 						if (symbol->is_(":="))
 						{
+							flk->push_back_(Cat::fin_()); // any cat
+							cat = false;
 							parameter = false;
+						}
+						else if (symbol->is_(":<"))
+						{
+							bool close_close = false;
+							bool close_assign = true;
+							flk->push_back_(_cat_nest_(false, scope, shoal, fixed, cats, creation, close_close, close_assign));
+							cat = false;
+							if (close_assign || _update_cat_())
+							{
+								parameter = false;
+							}
+							else
+							{
+								continue;
+							}
+						}
+						else if (symbol->is_(":{"))
+						{
+							const auto herd_flock = static_<Flock>(Flock::mut_());
+							if (_map_(scope, shoal, fixed, cats, creation, herd_flock))
+							{
+								throw tok->error_("Parser ERROR: parameter cats cannot be a shoal");
+							}
+							flk->push_back_(Expression::immediate_(Expression::fin_(token, sym_("herd_"), herd_flock)));
+							cat = false;
+							if (_update_cat_())
+							{
+								parameter = false;
+							}
+							else
+							{
+								continue;
+							}
 						}
 						else
 						{
@@ -1162,16 +1203,15 @@ private:
 				{
 					throw tok->error_("Parser ERROR: list expecting , or close");
 				}
-				_next_();
 				punctuation = false;
 				continue;
 			}
 			if (parameter)
 			{
 				_next_();
+				cat = true;
 				if (tag == 'N') // name
 				{
-					flk->push_back_(nothing_()); // no cat
 					flk->push_back_(symbol);
 					if (capture)
 					{
@@ -1180,13 +1220,8 @@ private:
 				}
 				else if (tag == 'P') // punctuation
 				{
-					if (symbol->is_("<"))
+					if (capture)
 					{
-						captured = _cat_(scope, shoal, fixed, cats, creation, flock, capture);
-					}
-					else if (capture)
-					{
-						flk->push_back_(nothing_()); // cat
 						captured = _capture_(symbol, flock);
 						if (captured->is_nothing_())
 						{
@@ -1195,12 +1230,12 @@ private:
 					}
 					else
 					{
-						throw tok->error_("Parser ERROR: list expecting parameter <cat> name");
+						throw tok->error_("Parser ERROR: list expecting parameter name");
 					}
 				}
 				else
 				{
-					throw tok->error_("Parser ERROR: list expecting parameter <cat> name");
+					throw tok->error_("Parser ERROR: list expecting parameter name");
 				}
 			}
 			else
@@ -1209,46 +1244,6 @@ private:
 			}
 			punctuation = true;
 		}
-	}
-
-	inline const Ptr _cat_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const Ptr& flock, const bool capture)
-	{
-		// add cat and default/captured to flock, return captured
-		const auto flk = static_<Flock>(flock);
-
-		bool close_close = false;
-		bool close_assign = true;
-		flk->push_back_(_cat_nest_(false, scope, shoal, fixed, cats, creation, close_close, close_assign)); //TODO assign
-
-		const Ptr token = _token_();
-		const auto tok = static_<Token>(token);
-		Ptr symbol;
-		if (token->is_stop_())
-		{
-			throw tok->error_("Parser ERROR: cat stop");
-		}
-		const char tag = tok->tag_();
-		if (tag == 'E') // error
-		{
-			throw tok->error_("Tokenizer ERROR");
-		}
-		symbol = tok->symbol();
-		_next_();
-		if (tag == 'N') // name
-		{
-			flk->push_back_(symbol);
-			return capture ? symbol : nothing_();
-		}
-		else if (!capture || tag != 'P')
-		{
-			throw tok->error_("Parser ERROR: list expecting <cat> name");
-		}
-		const Ptr captured = _capture_(symbol, flock);
-		if (captured->is_nothing_())
-		{
-			throw tok->error_("Parser ERROR: list expecting capture <cat> name");
-		}
-		return captured;
 	}
 
 	inline const Ptr _capture_(const Ptr& symbol, const Ptr& flock)
@@ -1819,7 +1814,7 @@ private:
 			{
 				_next_();
 				cats_shoal->insert_(name, Cat::fin_());
-				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
+				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true)); //TODO check cats
 				return false; // break
 			}
 			else if (symbol->is_(":<") || symbol->is_("#<"))
@@ -1830,7 +1825,7 @@ private:
 				cats_shoal->insert_(name, _cat_nest_(false, scope, shoal, fixed, cats, creation, close_close, close_assign));
 				if (close_assign || _update_cat_())
 				{
-					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
+					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true)); //TODO check cats
 					return false; // break
 				}
 			}
@@ -1845,7 +1840,7 @@ private:
 				cats_shoal->insert_(name, Expression::immediate_(Expression::fin_(token, sym_("herd_"), herd_flock)));
 				if (_update_cat_())
 				{
-					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
+					flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true)); //TODO check cats
 					return false; // break
 				}
 			}

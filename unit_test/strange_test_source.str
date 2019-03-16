@@ -4,7 +4,7 @@
 	x := 3,
 	s :=
 	{
-		'f'::function_(<strange::Number[<>,<>,<>]> a := 1000)
+		'f'::function_(a :<strange::Number[<>,<>,<>]>= 1000)
 		(
 			a*2+3*3
 		),
@@ -20,7 +20,7 @@
 				|.c := <constructed[|.c]>,
 				|
 			),
-			'addition':extraction_(<strange::Number> a, <strange::Number> b)
+			'addition':extraction_(a:<strange::Number>, b:<strange::Number>)
 			(
 				a+b*3
 			),

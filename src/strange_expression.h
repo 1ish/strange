@@ -427,21 +427,17 @@ private:
 			const std::size_t size_1 = vec.size() - 1;
 			for (std::size_t i = 0; i < size_1; i += 3)
 			{
-				const Ptr cat = vec[i];
 				Ptr value = it->next_();
 				if (value->is_stop_())
 				{
 					value = Expression::evaluate_(vec[i + 2], local);
 				}
-				if (!cat->is_nothing_())
+				// check cat
+				if (!Cat::check_(value, vec[i + 1]))
 				{
-					// check cat
-					if (!Cat::check_(value, cat))
-					{
-						throw _stack_("function passed wrong kind of thing");
-					}
+					throw _stack_("function passed wrong kind of thing");
 				}
-				shoal->update_(vec[i + 1], value);
+				shoal->update_(vec[i], value);
 			}
 			try
 			{
@@ -2236,7 +2232,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("lambda_"))
 	{
-		if (size % 3 == 1) // <cat> param := capture
+		if (size % 3 == 1) // param :<cat>= capture
 		{
 			return fin_(token, statement, &Expression::_lambda_, flock);
 		}
@@ -2244,7 +2240,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("function_"))
 	{
-		if (size % 3 == 1) // <cat> param := default
+		if (size % 3 == 1) // param :<cat>= default
 		{
 			return fin_(token, statement, &Expression::_function_, flock);
 		}
@@ -2252,7 +2248,7 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 	}
 	else if (statement->is_("creator_"))
 	{
-		if (size % 3 == 1) // <cat> param := default
+		if (size % 3 == 1) // param :<cat>= default
 		{
 			return fin_(token, statement, &Expression::_creator_, flock);
 		}
@@ -2748,17 +2744,13 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 		const std::size_t size_1 = vec.size() - 1;
 		for (std::size_t i = 0; i < size_1; i += 3)
 		{
-			const Ptr cat = vec[i];
 			const Ptr value = Expression::evaluate_(vec[i + 2], local);
-			if (!cat->is_nothing_())
+			// check cat
+			if (!Cat::check_(value, vec[i + 1]))
 			{
-				// check cat
-				if (!Cat::check_(value, cat))
-				{
-					throw _stack_("lambda captured wrong kind of thing");
-				}
+				throw _stack_("lambda captured wrong kind of thing");
 			}
-			const Ptr param = vec[i + 1];
+			const Ptr param = vec[i];
 			const std::string& s = static_<Symbol>(param)->get_();
 			if (s[0] == '$')
 			{
@@ -2790,20 +2782,16 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 		const std::size_t size_1 = vec.size() - 1;
 		for (std::size_t i = 0; i < size_1; i += 3)
 		{
-			const Ptr cat = vec[i];
-			const Ptr param = vec[i + 1];
+			const Ptr param = vec[i];
 			Ptr value = it->next_();
 			if (value->is_stop_())
 			{
 				value = Expression::evaluate_(vec[i + 2], local);
 			}
-			if (!cat->is_nothing_())
+			// check cat
+			if (!Cat::check_(value, vec[i + 1]))
 			{
-				// check cat
-				if (!Cat::check_(value, cat))
-				{
-					throw _stack_("creator passed wrong kind of thing");
-				}
+				throw _stack_("creator passed wrong kind of thing");
 			}
 			const Ptr frozen_value = value->clone_freeze_();
 			creation_local->update_(param, frozen_value);

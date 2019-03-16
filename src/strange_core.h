@@ -9379,7 +9379,11 @@ inline const Thing::Ptr Cat::pub_() const
 
 inline const bool Cat::check_(const Ptr& thing, const Ptr& cat)
 {
-	return static_<Herd>(thing->cats_())->at_(cat);
+	if (cat->is_("<>"))
+	{
+		return true;
+	}
+	return static_<Herd>(thing->cats_())->at_(cat); //TODO check intersection if cat is a herd
 }
 
 inline const std::string Cat::_hash_arg_(const Ptr& arg)
