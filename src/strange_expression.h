@@ -211,12 +211,12 @@ private:
 
 	inline const Ptr _me_creation_(const Ptr& local) const
 	{
-		const auto creator = dynamic_<Shoal>(static_<Weak>(static_<Flock>(_flock)->get_()[0])->get_());
-		if (!creator)
+		const auto creation = dynamic_<Shoal>(static_<Weak>(static_<Flock>(_flock)->get_()[0])->get_());
+		if (!creation)
 		{
 			throw _stack_("me accessed without a creation");
 		}
-		return creator;
+		return creation;
 	}
 
 	inline const Ptr _me_creation_at_(const Ptr& local) const;
@@ -469,9 +469,9 @@ private:
 
 	inline const Ptr _creation_(const Ptr& local) const;
 
-	inline const Ptr _merge_(const Ptr& scope, Shoal* const shoal, const Ptr& values, Shoal* const creation, Shoal* const result, Herd* const cats) const;
+	inline const Ptr _merge_(const Ptr& scope, Shoal* const shoal, const Ptr& values, Shoal* const creation, Shoal* const result, Herd* const categories) const;
 
-	static inline void _permutations_(const Ptr& type_name, const Ptr& arguments, Flock* const perms, Herd* const cats, const int64_t begin, const int64_t end);
+	static inline void _permutations_(const Ptr& type_name, const Ptr& arguments, Flock* const perms, Herd* const categories, const int64_t begin, const int64_t end);
 
 	inline const Ptr _shared_scope_(const Ptr& local) const
 	{
@@ -1685,18 +1685,18 @@ class Creature : public Stateful, public Serializable
 //----------------------------------------------------------------------
 {
 public:
-	inline Creature(const Ptr& creator, const Ptr& members)
+	inline Creature(const Ptr& creation, const Ptr& members)
 		: Stateful{}
 		, Serializable{}
-		, _creator{ dynamic_<Shoal>(creator) ? creator : Shoal::mut_() }
-		, _members{ dynamic_<Shoal>(members) ? members : _creator->replicate_() }
+		, _creation{ dynamic_<Shoal>(creation) ? creation : Shoal::mut_() }
+		, _members{ dynamic_<Shoal>(members) ? members : _creation->replicate_() }
 		, _public{ _public_(Stateful::pub_(), _members) }
 	{
 	}
 
-	static inline const Ptr mut_(const Ptr& creator, const Ptr& members = Ptr())
+	static inline const Ptr mut_(const Ptr& creation, const Ptr& members = Ptr())
 	{
-		const Ptr result = make_<Creature>(creator, members);
+		const Ptr result = make_<Creature>(creation, members);
 		Attribute::initialize_(result, static_<Creature>(result)->_members, !members);
 		return result;
 	}
@@ -1706,9 +1706,9 @@ public:
 		return mut_(it->next_());
 	}
 
-	static inline const Ptr fin_(const Ptr& creator, const Ptr& members = Ptr())
+	static inline const Ptr fin_(const Ptr& creation, const Ptr& members = Ptr())
 	{
-		const Ptr result = mut_(creator, members);
+		const Ptr result = mut_(creation, members);
 		result->finalize_();
 		return result;
 	}
@@ -1721,12 +1721,12 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
-		s->update_("strange::Creature::mut", Static::fin_(&Creature::mut, "creator"));
+		s->update_("strange::Creature::mut", Static::fin_(&Creature::mut, "creation"));
 	}
 
 	virtual inline const Ptr type_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->at_("type");
+		const Ptr over = static_<Shoal>(_members)->at_("type_name");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -1737,7 +1737,7 @@ public:
 
 	virtual inline const Ptr cat_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->at_("cat");
+		const Ptr over = static_<Shoal>(_members)->at_("category");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -1803,7 +1803,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return mut_(_creator, _members->copy_());
+		return mut_(_creation, _members->copy_());
 	}
 
 	virtual inline const Ptr clone_() const override
@@ -1813,7 +1813,7 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		return mut_(_creator, _members->clone_());
+		return mut_(_creation, _members->clone_());
 	}
 
 	virtual inline const Ptr replicate_() const override
@@ -1825,9 +1825,9 @@ public:
 		}
 		if (final_())
 		{
-			return fin_(_creator, _members->replicate_());
+			return fin_(_creation, _members->replicate_());
 		}
-		return mut_(_creator, _members->replicate_());
+		return mut_(_creation, _members->replicate_());
 	}
 
 	virtual inline const Ptr iterator_() const override
@@ -1903,7 +1903,7 @@ public:
 
 	virtual inline const Ptr cats_() const override
 	{
-		const Ptr over = static_<Shoal>(_members)->at_("cats");
+		const Ptr over = static_<Shoal>(_members)->at_("categories");
 		if (!over->is_nothing_())
 		{
 			return operate_(const_cast<Creature*>(this), over);
@@ -2020,7 +2020,7 @@ public:
 	}
 
 private:
-	const Ptr _creator;
+	const Ptr _creation;
 	const Ptr _members;
 	const Ptr _public;
 
@@ -2429,15 +2429,15 @@ inline const Thing::Ptr Expression::fin_(const Ptr& token, const Ptr& statement,
 inline const Thing::Ptr Expression::_me_creation_at_(const Ptr& local) const
 {
 	const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-	const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
-	if (!creator)
+	const auto creation = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+	if (!creation)
 	{
 		throw _stack_("me accessed without a creation");
 	}
 	const auto name = static_<Symbol>(vec[1]);
 	const Ptr member = (name->get_()[0] == '_')
-		? creator->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_())
-		: creator->at_(name);
+		? creation->at_("_" + static_<Symbol>(creation->at_("type_name")->invoke_())->get_() + name->get_())
+		: creation->at_(name);
 	if (member->is_nothing_())
 	{
 		throw Dismemberment(sym_("me_creation_at_"), name);
@@ -2514,13 +2514,13 @@ inline const Thing::Ptr Expression::_set_intimate_(const Ptr& local) const
 		Ptr member;
 		if (name->get_()[0] == '_')
 		{
-			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
-			if (!creator)
+			const auto creation = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creation)
 			{
-				throw _stack_("set intimate without a creator");
+				throw _stack_("set intimate without a creation");
 			}
 			member = static_<Shoal>(static_<Creature>(thing)->members_())
-				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+				->at_("_" + static_<Symbol>(creation->at_("type_name")->invoke_())->get_() + name->get_());
 		}
 		else
 		{
@@ -2559,13 +2559,13 @@ inline const Thing::Ptr Expression::_private_(const Ptr& local) const
 		Ptr member;
 		if (name->get_()[0] == '_')
 		{
-			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
-			if (!creator)
+			const auto creation = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creation)
 			{
-				throw _stack_("private accessed without a creator");
+				throw _stack_("private accessed without a creation");
 			}
 			member = static_<Shoal>(static_<Creature>(thing)->members_())
-				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+				->at_("_" + static_<Symbol>(creation->at_("type_name")->invoke_())->get_() + name->get_());
 		}
 		else
 		{
@@ -2602,13 +2602,13 @@ inline const Thing::Ptr Expression::_intimate_(const Ptr& local) const
 		Ptr member;
 		if (name->get_()[0] == '_')
 		{
-			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
-			if (!creator)
+			const auto creation = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creation)
 			{
-				throw _stack_("set intimate without a creator");
+				throw _stack_("set intimate without a creation");
 			}
 			member = static_<Shoal>(static_<Creature>(thing)->members_())
-				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+				->at_("_" + static_<Symbol>(creation->at_("type_name")->invoke_())->get_() + name->get_());
 		}
 		else
 		{
@@ -2645,13 +2645,13 @@ inline const Thing::Ptr Expression::_intimate_iterator_(const Ptr& local) const
 		Ptr member;
 		if (name->get_()[0] == '_')
 		{
-			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
-			if (!creator)
+			const auto creation = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creation)
 			{
-				throw _stack_("set intimate without a creator");
+				throw _stack_("set intimate without a creation");
 			}
 			member = static_<Shoal>(static_<Creature>(thing)->members_())
-				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+				->at_("_" + static_<Symbol>(creation->at_("type_name")->invoke_())->get_() + name->get_());
 		}
 		else
 		{
@@ -2688,13 +2688,13 @@ inline const Thing::Ptr Expression::_intimate_iterable_(const Ptr& local) const
 		Ptr member;
 		if (name->get_()[0] == '_')
 		{
-			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
-			if (!creator)
+			const auto creation = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creation)
 			{
-				throw _stack_("set intimate without a creator");
+				throw _stack_("set intimate without a creation");
 			}
 			member = static_<Shoal>(static_<Creature>(thing)->members_())
-				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+				->at_("_" + static_<Symbol>(creation->at_("type_name")->invoke_())->get_() + name->get_());
 		}
 		else
 		{
@@ -2741,13 +2741,13 @@ inline const Thing::Ptr Expression::_intimation_(const Ptr& local) const
 		Ptr member;
 		if (name->get_()[0] == '_')
 		{
-			const auto creator = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
-			if (!creator)
+			const auto creation = dynamic_<Shoal>(static_<Weak>(vec[0])->get_());
+			if (!creation)
 			{
-				throw _stack_("set intimate without a creator");
+				throw _stack_("set intimate without a creation");
 			}
 			member = static_<Shoal>(static_<Creature>(thing)->members_())
-				->at_("_" + static_<Symbol>(creator->at_("type")->invoke_())->get_() + name->get_());
+				->at_("_" + static_<Symbol>(creation->at_("type_name")->invoke_())->get_() + name->get_());
 		}
 		else
 		{
@@ -2850,8 +2850,8 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 		const auto result = static_<Shoal>(Shoal::mut_());
-		Ptr type;
-		const auto cats = static_<Herd>(Herd::mut_());
+		Ptr type_name;
+		const auto categories = static_<Herd>(Herd::mut_());
 
 		const auto params = static_<Shoal>(local);
 		const Ptr creator_params = params->at_("[");
@@ -2868,9 +2868,9 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 			{
 				throw _stack_("creation_ passed wrong kind of thing");
 			}
-			type = _merge_(vec[0], static_<Shoal>(vec[1]).get(), (i == size_1) ? creator_params : Ptr(), creation.get(), result.get(), cats.get());
+			type_name = _merge_(vec[0], static_<Shoal>(vec[1]).get(), (i == size_1) ? creator_params : Ptr(), creation.get(), result.get(), categories.get());
 		}
-		result->insert_("cats", Operation::fin_(_token, cats));
+		result->insert_("categories", Operation::fin_(_token, categories));
 		params->erase_("$");
 		params->erase_("&");
 		for (const auto& p : params->get_())
@@ -2878,7 +2878,7 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 			const auto symbol = dynamic_<Symbol>(p.first);
 			if (symbol)
 			{
-				result->update_("_" + static_<Symbol>(type)->get_() + "_" + symbol->get_(), Fixed::fin_(Expression::fin_(_token, p.second)));
+				result->update_("_" + static_<Symbol>(type_name)->get_() + "_" + symbol->get_(), Fixed::fin_(Expression::fin_(_token, p.second)));
 			}
 		}
 		static_<Weak>(vec[2])->set_(result);
@@ -2890,31 +2890,31 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 	}
 }
 
-inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal, const Ptr& values, Shoal* const creation, Shoal* const result, Herd* const cats) const
+inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal, const Ptr& values, Shoal* const creation, Shoal* const result, Herd* const categories) const
 {
-	Ptr type;
+	Ptr type_name;
 	if (values)
 	{
-		const Ptr type_fun = creation->at_("type");
+		const Ptr type_fun = creation->at_("type_name");
 		if (type_fun->is_nothing_())
 		{
-			type = scope;
-			result->update_("type", Operation::fin_(_token, type));
+			type_name = scope;
+			result->update_("type_name", Operation::fin_(_token, type_name));
 		}
 		else
 		{
-			type = type_fun->invoke_();
-			result->update_("type", type_fun);
+			type_name = type_fun->invoke_();
+			result->update_("type_name", type_fun);
 		}
-		const auto type_symbol = dynamic_<Symbol>(type);
+		const auto type_symbol = dynamic_<Symbol>(type_name);
 		if (!type_symbol)
 		{
-			throw Disagreement("creation derived type is not a symbol");
+			throw Disagreement("creation derived type name is not a symbol");
 		}
 		
-		const Ptr cat = Cat::fin_(type_symbol, values->is_nothing_() ? Flock::mut_() : values);
-		result->update_("cat", Operation::fin_(_token, cat));
-		cats->insert_(cat);
+		const Ptr category = Cat::fin_(type_symbol, values->is_nothing_() ? Flock::mut_() : values);
+		result->update_("category", Operation::fin_(_token, category));
+		categories->insert_(category);
 
 		// cat permutations
 		if (!values->is_nothing_())
@@ -2936,7 +2936,7 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 						const auto result = dynamic_<Shoal>(creation->invoke(cat_val->arguments_()->iterator_()));
 						if (result)
 						{
-							const Ptr cats_fun = result->at_("cats");
+							const Ptr cats_fun = result->at_("categories");
 							if (!cats_fun->is_nothing_())
 							{
 								const auto herd = dynamic_<Herd>(cats_fun->invoke_());
@@ -2959,12 +2959,12 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 			}
 			if (end)
 			{
-				_permutations_(type_symbol, values->copy_(), permutations.get(), cats, 0, end);
+				_permutations_(type_symbol, values->copy_(), permutations.get(), categories, 0, end);
 			}
 		}
 	}
 
-	const Ptr creation_cats_fun = creation->at_("cats");
+	const Ptr creation_cats_fun = creation->at_("categories");
 	if (!creation_cats_fun->is_nothing_())
 	{
 		const auto creation_cats = dynamic_<Herd>(creation_cats_fun->invoke_());
@@ -2972,7 +2972,7 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 		{
 			throw Disagreement("creation cats are not a herd");
 		}
-		cats->self_add_(creation_cats);
+		categories->self_add_(creation_cats);
 	}
 
 	for (const auto& it : creation->get_())
@@ -2984,11 +2984,11 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 			throw Disagreement("creation key is not a symbol");
 		}
 		const Ptr value = it.second;
-		if (type && symbol->get_()[0] == '_')
+		if (type_name && symbol->get_()[0] == '_')
 		{
-			result->update_("_" + static_<Symbol>(type)->get_() + symbol->get_(), value);
+			result->update_("_" + static_<Symbol>(type_name)->get_() + symbol->get_(), value);
 		}
-		else if (!symbol->is_("type") && !symbol->is_("cat") && !symbol->is_("cats"))
+		else if (!symbol->is_("type_name") && !symbol->is_("category") && !symbol->is_("categories"))
 		{
 			// check overrides
 			const Ptr overridden = result->at_(key);
@@ -3000,10 +3000,10 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 		}
 	}
 
-	return type;
+	return type_name;
 }
 
-inline void Expression::_permutations_(const Ptr& type_name, const Ptr& arguments, Flock* const perms, Herd* const cats, const int64_t begin, const int64_t end)
+inline void Expression::_permutations_(const Ptr& type_name, const Ptr& arguments, Flock* const perms, Herd* const categories, const int64_t begin, const int64_t end)
 {
 	for (int64_t pos = begin; pos < end; ++pos)
 	{
@@ -3016,7 +3016,7 @@ inline void Expression::_permutations_(const Ptr& type_name, const Ptr& argument
 				for (Ptr cat = it->next_(); !cat->is_stop_(); cat = it->next_())
 				{
 					static_<Flock>(arguments)->update_(pos, cat);
-					cats->insert_(Cat::fin_(type_name, arguments));
+					categories->insert_(Cat::fin_(type_name, arguments));
 				}
 			}
 			else
@@ -3024,7 +3024,7 @@ inline void Expression::_permutations_(const Ptr& type_name, const Ptr& argument
 				for (Ptr cat = it->next_(); !cat->is_stop_(); cat = it->next_())
 				{
 					static_<Flock>(arguments)->update_(pos, cat);
-					_permutations_(type_name, arguments, perms, cats, pos + 1, end);
+					_permutations_(type_name, arguments, perms, categories, pos + 1, end);
 				}
 			}
 			return;
