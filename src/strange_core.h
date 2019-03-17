@@ -912,10 +912,10 @@ class Cat : public Symbol
 //----------------------------------------------------------------------
 {
 public:
-	inline Cat(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat = Ptr())
-		: Symbol{ _symbol_(type_name, arguments, parameters, return_cat), _hash_(type_name, arguments, parameters, return_cat) }
+	inline Cat(const Ptr& type_name_symbol, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat = Ptr())
+		: Symbol{ _symbol_(type_name_symbol, arguments, parameters, return_cat), _hash_(type_name_symbol, arguments, parameters, return_cat) }
 		, _symbolic{ _symbolic_(arguments, parameters, return_cat) }
-		, _type_name{ type_name }
+		, _type_name_symbol{ type_name_symbol }
 		, _arguments{ arguments }
 		, _parameters{ parameters }
 		, _return_cat{ return_cat }
@@ -933,7 +933,7 @@ public:
 		{
 			return Symbol::same_(other);
 		}
-		if (!_type_name->is_(other_cat->_type_name))
+		if (!_type_name_symbol->is_(other_cat->_type_name_symbol))
 		{
 			return false;
 		}
@@ -991,47 +991,77 @@ public:
 		return ANY;
 	}
 
-	static inline const Ptr fin_(const Ptr& type_name);
+	static inline const Ptr fin_(const Ptr& type_name_symbol);
 
-	static inline const Ptr fin_(const Ptr& type_name, const Ptr& arguments);
+	static inline const Ptr fin_(const Ptr& type_name_symbol, const Ptr& arguments);
 
-	static inline const Ptr fin_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters)
+	static inline const Ptr fin_(const Ptr& type_name_symbol, const Ptr& arguments, const Ptr& parameters)
 	{
-		return fake_<Cat>(type_name, arguments, parameters);
+		return fake_<Cat>(type_name_symbol, arguments, parameters);
 	}
 
-	static inline const Ptr fin_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
+	static inline const Ptr fin_(const Ptr& type_name_symbol, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
 	{
 		if (return_cat->is_("<>"))
 		{
-			return fake_<Cat>(type_name, arguments, parameters);
+			return fake_<Cat>(type_name_symbol, arguments, parameters);
 		}
-		return fake_<Cat>(type_name, arguments, parameters, return_cat);
+		return fake_<Cat>(type_name_symbol, arguments, parameters, return_cat);
 	}
 
 	static inline void share_(const Ptr& shoal);
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Cat");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Cat::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Cat");
-		return TYPE;
+		return Cat::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Cat::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Cat::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Cat::type_());
-		return CAT;
+		return Cat::category_();
 	}
 
-	virtual inline const Ptr cats_() const override;
+	static inline const Ptr categories_();
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Cat::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return Cat::categories_();
+	}
 
 	virtual inline const Ptr pub_() const override;
 
 	static inline const bool check_(const Ptr& thing, const Ptr& cat);
 
-	inline const Ptr type_name_() const
+	inline const Ptr type_name_symbol_() const
 	{
-		return _type_name;
+		return _type_name_symbol;
 	}
 
 	inline const Ptr arguments_() const
@@ -1051,7 +1081,7 @@ public:
 
 private:
 	const bool _symbolic; // recursively true if all of the cats below are symbolic and there are no non-cat arguments
-	const Ptr _type_name; // type name Symbol
+	const Ptr _type_name_symbol; // type name Symbol
 	const Ptr _arguments; // Flock of creator arguments - mix of cats and non-cats
 	const Ptr _parameters; // Flock of function parameter cats
 	const Ptr _return_cat; // function return cat
@@ -1086,9 +1116,9 @@ private:
 		return true;
 	}
 
-	static inline const std::string _symbol_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat, const bool hash = false)
+	static inline const std::string _symbol_(const Ptr& type_name_symbol, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat, const bool hash = false)
 	{
-		std::string result = "<" + static_<Symbol>(type_name)->get_();
+		std::string result = "<" + static_<Symbol>(type_name_symbol)->get_();
 		{
 			bool any_args = false;
 			const Ptr args = arguments->iterator_();
@@ -1179,9 +1209,9 @@ private:
 
 	static inline const std::string _hash_arg_(const Ptr& arg);
 
-	static inline const std::size_t _hash_(const Ptr& type_name, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
+	static inline const std::size_t _hash_(const Ptr& type_name_symbol, const Ptr& arguments, const Ptr& parameters, const Ptr& return_cat)
 	{
-		return std::hash<std::string>()(_symbol_(type_name, arguments, parameters, return_cat, true));
+		return std::hash<std::string>()(_symbol_(type_name_symbol, arguments, parameters, return_cat, true));
 	}
 };
 
@@ -9645,32 +9675,30 @@ inline const Thing::Ptr Symbol::at(const Ptr& it) const
 // class Cat
 //======================================================================
 
-inline const Thing::Ptr Cat::fin_(const Ptr& type_name)
+inline const Thing::Ptr Cat::fin_(const Ptr& type_name_symbol)
 {
-	return fake_<Cat>(type_name, Flock::fin_(), Flock::fin_());
+	return fake_<Cat>(type_name_symbol, Flock::fin_(), Flock::fin_());
 }
 
-inline const Thing::Ptr Cat::fin_(const Ptr& type_name, const Ptr& arguments)
+inline const Thing::Ptr Cat::fin_(const Ptr& type_name_symbol, const Ptr& arguments)
 {
-	return fake_<Cat>(type_name, arguments, Flock::fin_());
+	return fake_<Cat>(type_name_symbol, arguments, Flock::fin_());
 }
 
 inline void Cat::share_(const Ptr& shoal)
 {
 }
 
-inline const Thing::Ptr Cat::cats_() const
+inline const Thing::Ptr Cat::categories_()
 {
-	static const Ptr CATS = [this]()
+	static const Ptr CATEGORIES = []()
 	{
-		const Ptr cats = Herd::mut_();
-		const auto herd = static_<Herd>(cats);
-		herd->self_add_(Symbol::categories_());
-		herd->insert_(Cat::cat_());
-		herd->finalize_();
-		return cats;
+		const auto categories = static_<Herd>(Symbol::categories_()->copy_());
+		categories->insert_(Cat::category_());
+		categories->finalize_();
+		return categories;
 	}();
-	return CATS;
+	return CATEGORIES;
 }
 
 inline const Thing::Ptr Cat::pub_() const

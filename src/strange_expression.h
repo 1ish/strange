@@ -3224,7 +3224,7 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 				if (cat_val && !cat_val->is_("<>"))
 				{
 					end = ++pos;
-					const auto creation = dynamic_<Creation>(shoal->at_(cat_val->type_name_())); //TODO make this work for native C++ things
+					const auto creation = dynamic_<Creation>(shoal->at_(cat_val->type_name_symbol_())); //TODO make this work for native C++ things
 					if (creation)
 					{
 						const auto result = dynamic_<Shoal>(creation->invoke(cat_val->arguments_()->iterator_()));
