@@ -24,16 +24,58 @@ public:
 		return fake_<Method>(thing, member);
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Method");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Method::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Method");
-		return TYPE;
+		return Method::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Method::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Method::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Method::type_());
-		return CAT;
+		return Method::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Thing::categories_()->copy_());
+			categories->insert_(Method::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Method::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return Method::categories_();
 	}
 
 	virtual inline const Ptr eater_() const override

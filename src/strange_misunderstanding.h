@@ -114,7 +114,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Stateful::cats_());
+			herd->self_add_(Stateful::categories_());
 			herd->insert_(Misunderstanding::cat_());
 			herd->finalize_();
 			return cats;

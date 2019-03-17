@@ -104,7 +104,7 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Stateful::cats_());
+			herd->self_add_(Stateful::categories_());
 			herd->insert_(Reference::cat_());
 			herd->finalize_();
 			return cats;
@@ -181,7 +181,7 @@ private:
 			{
 				const Ptr cats = Herd::mut_();
 				const auto herd = static_<Herd>(cats);
-				herd->self_add_(Stateful::cats_());
+				herd->self_add_(Stateful::categories_());
 				herd->insert_(Reference::Iterator::cat_());
 				herd->finalize_();
 				return cats;

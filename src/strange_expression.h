@@ -78,16 +78,58 @@ public:
 		generator->invoke_("generate_" + static_<Symbol>(_statement)->get_() + "code", _token, _flock);
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Expression");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Expression::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Expression");
-		return TYPE;
+		return Expression::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Expression::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Expression::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Expression::type_());
-		return CAT;
+		return Expression::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Thing::categories_()->copy_());
+			categories->insert_(Expression::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Expression::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return Expression::categories_();
 	}
 
 	inline const Ptr get_() const
@@ -857,7 +899,7 @@ private:
 			{
 				const Ptr cats = Herd::mut_();
 				const auto herd = static_<Herd>(cats);
-				herd->self_add_(Stateful::cats_());
+				herd->self_add_(Stateful::categories_());
 				herd->insert_(Expression::Iterator::cat_());
 				herd->finalize_();
 				return cats;
@@ -929,16 +971,58 @@ public:
 		return fake_<Operation>(Expression::fin_(token, thing));
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Operation");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Operation::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Operation");
-		return TYPE;
+		return Operation::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Operation::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Operation::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Operation::type_());
-		return CAT;
+		return Operation::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Thing::categories_()->copy_());
+			categories->insert_(Operation::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Operation::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return Operation::categories_();
 	}
 
 protected:
@@ -966,16 +1050,58 @@ public:
 		return fake_<Function>(expression);
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Function");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Function::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Function");
-		return TYPE;
+		return Function::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Function::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Function::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Function::type_());
-		return CAT;
+		return Function::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Operation::categories_()->copy_());
+			categories->insert_(Function::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Function::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return Function::categories_();
 	}
 
 protected:
@@ -1008,16 +1134,58 @@ public:
 		return fake_<Closure>(expression, local);
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Closure");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Closure::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Closure");
-		return TYPE;
+		return Closure::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Closure::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Closure::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Closure::type_());
-		return CAT;
+		return Closure::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Operation::categories_()->copy_());
+			categories->insert_(Closure::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Closure::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return Closure::categories_();
 	}
 
 protected:
@@ -1048,16 +1216,58 @@ public:
 		return fake_<Mutation>(expression);
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Mutation");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Mutation::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Mutation");
-		return TYPE;
+		return Mutation::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Mutation::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Mutation::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Mutation::type_());
-		return CAT;
+		return Mutation::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Operation::categories_()->copy_());
+			categories->insert_(Mutation::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Mutation::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return Mutation::categories_();
 	}
 
 protected:
@@ -1095,16 +1305,58 @@ public:
 		return fake_<Extraction>(expression);
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Extraction");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Extraction::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Extraction");
-		return TYPE;
+		return Extraction::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Extraction::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Extraction::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Extraction::type_());
-		return CAT;
+		return Extraction::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Operation::categories_()->copy_());
+			categories->insert_(Extraction::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Extraction::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return Extraction::categories_();
 	}
 
 protected:
@@ -1139,16 +1391,58 @@ public:
 		return fake_<Creation>(expression);
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Creation");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Creation::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Creation");
-		return TYPE;
+		return Creation::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Creation::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Creation::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Creation::type_());
-		return CAT;
+		return Creation::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Operation::categories_()->copy_());
+			categories->insert_(Creation::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Creation::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return Creation::categories_();
 	}
 
 protected:
@@ -1912,8 +2206,8 @@ public:
 		{
 			const Ptr cats = Herd::mut_();
 			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Stateful::cats_());
-			herd->self_add_(Serializable::cats_());
+			herd->self_add_(Stateful::categories_());
+			herd->self_add_(Serializable::categories_());
 			herd->insert_(Creature::cat_());
 			herd->finalize_();
 			return cats;
