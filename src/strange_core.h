@@ -1957,19 +1957,49 @@ public:
 		return Feeder::mut_(me_(), eater);
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Shoal");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Shoal::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Shoal");
-		return TYPE;
+		return Shoal::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Shoal::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Shoal::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Shoal::type_());
-		return CAT;
+		return Shoal::category_();
 	}
 
-	virtual inline const Ptr cats_() const override;
+	static inline const Ptr categories_();
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Shoal::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return Shoal::categories_();
+	}
 
 	virtual inline const Ptr visit(const Ptr& it) override
 	{
@@ -2186,19 +2216,49 @@ private:
 			return make_<Iterator>(shoal);
 		}
 
+		static inline const Ptr type_name_()
+		{
+			static const Ptr TYPE_NAME = sym_("strange::Shoal::Iterator");
+			return TYPE_NAME;
+		}
+
+		static inline const Ptr type_name(const Ptr& ignore)
+		{
+			return Shoal::Iterator::type_name_();
+		}
+
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Shoal::Iterator");
-			return TYPE;
+			return Shoal::Iterator::type_name_();
+		}
+
+		static inline const Ptr category_()
+		{
+			static const Ptr CATEGORY = Cat::fin_(Shoal::Iterator::type_name_());
+			return CATEGORY;
+		}
+
+		static inline const Ptr category(const Ptr& ignore)
+		{
+			return Shoal::Iterator::category_();
 		}
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_(Shoal::Iterator::type_());
-			return CAT;
+			return Shoal::Iterator::category_();
 		}
 
-		virtual inline const Ptr cats_() const override;
+		static inline const Ptr categories_();
+
+		static inline const Ptr categories(const Ptr& ignore)
+		{
+			return Shoal::Iterator::categories_();
+		}
+
+		virtual inline const Ptr cats_() const override
+		{
+			return Shoal::Iterator::categories_();
+		}
 
 	private:
 		const Ptr _shoal;
@@ -2230,19 +2290,49 @@ private:
 			return make_<Feeder>(shoal, eater);
 		}
 
+		static inline const Ptr type_name_()
+		{
+			static const Ptr TYPE_NAME = sym_("strange::Shoal::Feeder");
+			return TYPE_NAME;
+		}
+
+		static inline const Ptr type_name(const Ptr& ignore)
+		{
+			return Shoal::Feeder::type_name_();
+		}
+
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Shoal::Feeder");
-			return TYPE;
+			return Shoal::Feeder::type_name_();
+		}
+
+		static inline const Ptr category_()
+		{
+			static const Ptr CATEGORY = Cat::fin_(Shoal::Feeder::type_name_());
+			return CATEGORY;
+		}
+
+		static inline const Ptr category(const Ptr& ignore)
+		{
+			return Shoal::Feeder::category_();
 		}
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_(Shoal::Feeder::type_());
-			return CAT;
+			return Shoal::Feeder::category_();
 		}
 
-		virtual inline const Ptr cats_() const override;
+		static inline const Ptr categories_();
+
+		static inline const Ptr categories(const Ptr& ignore)
+		{
+			return Shoal::Feeder::categories_();
+		}
+
+		virtual inline const Ptr cats_() const override
+		{
+			return Shoal::Feeder::categories_();
+		}
 
 	private:
 		const Ptr _shoal;
@@ -10062,33 +10152,41 @@ inline void Shoal::self_subtract_(const Ptr& other)
 	}
 }
 
-inline const Thing::Ptr Shoal::cats_() const
+inline const Thing::Ptr Shoal::categories_()
 {
-	static const Ptr CATS = [this]()
+	static const Ptr CATEGORIES = []()
 	{
-		const Ptr cats = Herd::mut_();
-		const auto herd = static_<Herd>(cats);
-		herd->self_add_(Stateful::categories_());
-		herd->self_add_(Serializable::categories_());
-		herd->insert_(Shoal::cat_());
-		herd->finalize_();
-		return cats;
+		const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+		categories->self_add_(Serializable::categories_());
+		categories->insert_(Shoal::category_());
+		categories->finalize_();
+		return categories;
 	}();
-	return CATS;
+	return CATEGORIES;
 }
 
-inline const Thing::Ptr Shoal::Iterator::cats_() const
+inline const Thing::Ptr Shoal::Concurrent::categories_()
 {
-	static const Ptr CATS = [this]()
+	static const Ptr CATEGORIES = []()
 	{
-		const Ptr cats = Herd::mut_();
-		const auto herd = static_<Herd>(cats);
-		herd->self_add_(Stateful::categories_());
-		herd->insert_(Shoal::Iterator::cat_());
-		herd->finalize_();
-		return cats;
+		const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+		categories->insert_(Shoal::Concurrent::category_());
+		categories->finalize_();
+		return categories;
 	}();
-	return CATS;
+	return CATEGORIES;
+}
+
+inline const Thing::Ptr Shoal::Iterator::categories_()
+{
+	static const Ptr CATEGORIES = []()
+	{
+		const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+		categories->insert_(Shoal::Iterator::category_());
+		categories->finalize_();
+		return categories;
+	}();
+	return CATEGORIES;
 }
 
 inline const Thing::Ptr Shoal::Iterator::next_()
@@ -10106,26 +10204,12 @@ inline const Thing::Ptr Shoal::Iterator::next_()
 	return result;
 }
 
-inline const Thing::Ptr Shoal::Feeder::cats_() const
-{
-	static const Ptr CATS = [this]()
-	{
-		const Ptr cats = Herd::mut_();
-		const auto herd = static_<Herd>(cats);
-		herd->self_add_(Stateful::categories_());
-		herd->insert_(Shoal::Feeder::cat_());
-		herd->finalize_();
-		return cats;
-	}();
-	return CATS;
-}
-
-inline const Thing::Ptr Shoal::Concurrent::categories_()
+inline const Thing::Ptr Shoal::Feeder::categories_()
 {
 	static const Ptr CATEGORIES = []()
 	{
 		const auto categories = static_<Herd>(Stateful::categories_()->copy_());
-		categories->insert_(Shoal::Concurrent::category_());
+		categories->insert_(Shoal::Feeder::category_());
 		categories->finalize_();
 		return categories;
 	}();
