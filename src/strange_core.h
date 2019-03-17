@@ -1527,6 +1527,20 @@ public:
 		return _final;
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Stateful");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Stateful::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr categories_();
+
 protected:
 	inline Stateful()
 		: Thing{}
@@ -9792,6 +9806,18 @@ inline const Thing::Ptr Const<T>::eater_() const
 //======================================================================
 // class Stateful
 //======================================================================
+
+inline const Thing::Ptr Stateful::categories_()
+{
+	static const Ptr CATEGORIES = []()
+	{
+		const auto categories = static_<Herd>(Thing::categories_()->copy_());
+		categories->insert_(Stateful::category_());
+		categories->finalize_();
+		return categories;
+	}();
+	return CATEGORIES;
+}
 
 //======================================================================
 // class Shoal
