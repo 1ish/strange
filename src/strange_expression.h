@@ -924,8 +924,30 @@ public:
 	{
 	}
 
+	static inline const Ptr fin_(const Ptr& token, const Ptr& thing = nothing_())
+	{
+		return fake_<Operation>(Expression::fin_(token, thing));
+	}
+
+	virtual inline const Ptr type_() const override
+	{
+		static const Ptr TYPE = sym_("strange::Operation");
+		return TYPE;
+	}
+
+	virtual inline const Ptr cat_() const override
+	{
+		static const Ptr CAT = Cat::fin_(Operation::type_());
+		return CAT;
+	}
+
 protected:
 	const Ptr _expression;
+
+	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
+	{
+		return static_<Expression>(_expression)->evaluate_(_expression, nothing_());
+	}
 };
 
 //----------------------------------------------------------------------
@@ -2848,13 +2870,7 @@ inline const Thing::Ptr Expression::_creation_(const Ptr& local) const
 			}
 			type = _merge_(vec[0], static_<Shoal>(vec[1]).get(), (i == size_1) ? creator_params : Ptr(), creation.get(), result.get(), cats.get());
 		}
-		{
-			const auto flock = static_<Flock>(Flock::mut_());
-			flock->push_back_(one_());
-			flock->push_back_(Cat::fin_());
-			flock->push_back_(Expression::fin_(_token, cats));
-			result->insert_("cats", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
-		}
+		result->insert_("cats", Operation::fin_(_token, cats));
 		params->erase_("$");
 		params->erase_("&");
 		for (const auto& p : params->get_())
@@ -2883,11 +2899,7 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 		if (type_fun->is_nothing_())
 		{
 			type = scope;
-			const auto flock = static_<Flock>(Flock::mut_());
-			flock->push_back_(one_());
-			flock->push_back_(Cat::fin_());
-			flock->push_back_(Expression::fin_(_token, type));
-			result->update_("type", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
+			result->update_("type", Operation::fin_(_token, type));
 		}
 		else
 		{
@@ -2901,13 +2913,7 @@ inline const Thing::Ptr Expression::_merge_(const Ptr& scope, Shoal* const shoal
 		}
 		
 		const Ptr cat = Cat::fin_(type_symbol, values->is_nothing_() ? Flock::mut_() : values);
-		{
-			const auto flock = static_<Flock>(Flock::mut_());
-			flock->push_back_(one_());
-			flock->push_back_(Cat::fin_());
-			flock->push_back_(Expression::fin_(_token, cat));
-			result->update_("cat", Function::fin_(Expression::fin_(_token, sym_("shared_insert_"), flock)));
-		}
+		result->update_("cat", Operation::fin_(_token, cat));
 		cats->insert_(cat);
 
 		// cat permutations
