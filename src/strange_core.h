@@ -335,8 +335,6 @@ public:
 		return visitor->invoke(it);
 	}
 
-	static inline const Ptr creator_(const Ptr& ignore = nothing_());
-
 	virtual inline const Ptr pub_() const
 	{
 		static const Ptr PUB = _public_(Thing::creator_());
@@ -347,6 +345,8 @@ public:
 	{
 		return pub_();
 	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_());
 
 	virtual inline const Ptr eater_() const
 	{
@@ -855,13 +855,13 @@ public:
 		return Symbol::categories_();
 	}
 
-	static inline const Ptr creator_(const Ptr& ignore = nothing_());
-
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = _public_(Symbol::creator_());
 		return PUB;
 	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_());
 
 	inline const Ptr add_(const std::string& s) const
 	{
@@ -1069,13 +1069,13 @@ public:
 		return Cat::categories_();
 	}
 
-	static inline const Ptr creator_(const Ptr& ignore = nothing_());
-
 	virtual inline const Ptr pub_() const override
 	{
 		static const Ptr PUB = _public_(Cat::creator_());
 		return PUB;
 	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_());
 
 	static inline const bool check_(const Ptr& thing, const Ptr& cat);
 
@@ -1705,10 +1705,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Shoal::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Stateful::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Shoal::type_name));
+			shoal->update_("category", Static::fin_(&Shoal::category));
+			shoal->update_("categories", Static::fin_(&Shoal::categories));
 			shoal->update_("to_lake", Const<Shoal>::fin_(&Shoal::to_lake));
 			shoal->update_("from_lake", Member<Shoal>::fin_(&Shoal::from_lake, "lake"));
 			shoal->update_("to_river", Const<Shoal>::fin_(&Shoal::to_river, "river"));
@@ -1733,9 +1741,9 @@ public:
 			shoal->update_("itemize", Member<Shoal>::fin_(&Shoal::itemize, "key"));
 			shoal->update_("gather", Member<Shoal>::fin_(&Shoal::gather, "key"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
