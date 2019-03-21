@@ -2482,10 +2482,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Flock::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Stateful::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Flock::type_name));
+			shoal->update_("category", Static::fin_(&Flock::category));
+			shoal->update_("categories", Static::fin_(&Flock::categories));
 			shoal->update_("to_lake", Const<Flock>::fin_(&Flock::to_lake));
 			shoal->update_("from_lake", Member<Flock>::fin_(&Flock::from_lake, "lake"));
 			shoal->update_("to_river", Const<Flock>::fin_(&Flock::to_river, "river"));
@@ -2506,9 +2514,9 @@ public:
 			shoal->update_("self_add", Member<Flock>::fin_(&Flock::self_add, "flock", ".."));
 			shoal->update_("add", Const<Flock>::fin_(&Flock::add, "flock", ".."));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -2827,18 +2835,26 @@ public:
 
 		virtual inline const Ptr pub_() const override
 		{
-			static const Ptr PUB = [this]()
+			static const Ptr PUB = _public_(Concurrent::creator_());
+			return PUB;
+		}
+
+		static inline const Ptr creator_(const Ptr& ignore = nothing_())
+		{
+			static const Ptr CREATION = []()
 			{
-				const Ptr pub = Thing::pub_()->copy_();
-				const auto shoal = static_<Shoal>(pub);
+				const auto shoal = static_<Shoal>(Stateful::creator_()->copy_());
+				shoal->update_("type_name", Static::fin_(&Concurrent::type_name));
+				shoal->update_("category", Static::fin_(&Concurrent::category));
+				shoal->update_("categories", Static::fin_(&Concurrent::categories));
 				shoal->update_("push_back", Member<Concurrent>::fin_(&Concurrent::push_back, "value"));
 				shoal->update_("size", Const<Concurrent>::fin_(&Concurrent::size));
 				shoal->update_("at", Const<Concurrent>::fin_(&Concurrent::at, "index"));
 				shoal->update_("mut", Static::fin_(&Concurrent::mut, "flock"));
 				shoal->finalize_();
-				return pub;
+				return shoal;
 			}();
-			return PUB;
+			return CREATION;
 		}
 
 		static inline void share_(const Ptr& shoal)
@@ -3157,10 +3173,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Herd::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Stateful::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Herd::type_name));
+			shoal->update_("category", Static::fin_(&Herd::category));
+			shoal->update_("categories", Static::fin_(&Herd::categories));
 			shoal->update_("to_lake", Const<Herd>::fin_(&Herd::to_lake));
 			shoal->update_("from_lake", Member<Herd>::fin_(&Herd::from_lake, "lake"));
 			shoal->update_("to_river", Const<Herd>::fin_(&Herd::to_river, "river"));
@@ -3183,9 +3207,9 @@ public:
 			shoal->update_("subtract", Const<Herd>::fin_(&Herd::subtract, "herd", ".."));
 			shoal->update_("gather", Member<Herd>::fin_(&Herd::gather, "key"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
