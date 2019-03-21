@@ -339,7 +339,7 @@ public:
 
 	virtual inline const Ptr pub_() const
 	{
-		static const Ptr PUB = _public_(creator_());
+		static const Ptr PUB = _public_(Thing::creator_());
 		return PUB;
 	}
 
@@ -855,7 +855,13 @@ public:
 		return Symbol::categories_();
 	}
 
-	virtual inline const Ptr pub_() const override;
+	static inline const Ptr creator_(const Ptr& ignore = nothing_());
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = _public_(Symbol::creator_());
+		return PUB;
+	}
 
 	inline const Ptr add_(const std::string& s) const
 	{
@@ -10309,12 +10315,14 @@ inline const bool Symbol::greater_or_equal_(const Ptr& other) const
 	throw Disagreement("Symbol::greater_or_equal_ passed wrong category of thing");
 }
 
-inline const Thing::Ptr Symbol::pub_() const
+inline const Thing::Ptr Symbol::creator_(const Ptr& ignore)
 {
-	static const Ptr PUB = [this]()
+	static const Ptr CREATION = []()
 	{
-		const Ptr pub = Thing::pub_()->copy_();
-		const auto shoal = static_<Shoal>(pub);
+		const auto shoal = static_<Shoal>(Thing::creator_()->copy_());
+		shoal->update_("type_name", Static::fin_(&Symbol::type_name));
+		shoal->update_("category", Static::fin_(&Symbol::category));
+		shoal->update_("categories", Static::fin_(&Symbol::categories));
 		shoal->update_("to_lake", Const<Symbol>::fin_(&Symbol::to_lake));
 		shoal->update_("to_river", Const<Symbol>::fin_(&Symbol::to_river, "river"));
 		shoal->update_("lak", Static::fin_(&Symbol::lak, "lake"));
@@ -10327,9 +10335,9 @@ inline const Thing::Ptr Symbol::pub_() const
 		shoal->update_("less_or_equal", Const<Symbol>::fin_(&Symbol::less_or_equal, "symbol"));
 		shoal->update_("greater_or_equal", Const<Symbol>::fin_(&Symbol::greater_or_equal, "symbol"));
 		shoal->finalize_();
-		return pub;
+		return shoal;
 	}();
-	return PUB;
+	return CREATION;
 }
 
 inline void Symbol::share_(const Ptr& shoal)
