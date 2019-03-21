@@ -4309,31 +4309,59 @@ public:
 
 	virtual inline void from_river_(const Ptr& river) override;
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Lake");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Lake::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Lake");
-		return TYPE;
+		return Lake::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Lake::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Lake::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Lake::type_());
-		return CAT;
+		return Lake::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+			categories->self_add_(Serializable::categories_());
+			categories->insert_(Lake::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Lake::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Stateful::categories_());
-			herd->self_add_(Serializable::categories_());
-			herd->insert_(Lake::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Lake::categories_();
 	}
 
 	inline void self_add_(const std::string& s)
@@ -4958,30 +4986,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Bit");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Bit::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Bit");
-		return TYPE;
+		return Bit::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Bit::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Bit::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Bit::type_());
-		return CAT;
+		return Bit::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(Bit::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Bit::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(Bit::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Bit::categories_();
 	}
 
 	virtual inline int64_t to_int64_() const override
@@ -5283,30 +5339,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Int8");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Int8::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Int8");
-		return TYPE;
+		return Int8::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Int8::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Int8::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Int8::type_());
-		return CAT;
+		return Int8::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(Int8::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Int8::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(Int8::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Int8::categories_();
 	}
 
 	virtual inline int64_t to_int64_() const override
@@ -5603,30 +5687,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::UInt8");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return UInt8::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::UInt8");
-		return TYPE;
+		return UInt8::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(UInt8::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return UInt8::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(UInt8::type_());
-		return CAT;
+		return UInt8::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(UInt8::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return UInt8::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(UInt8::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return UInt8::categories_();
 	}
 
 	virtual inline int64_t to_int64_() const override
@@ -5929,30 +6041,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Int16");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Int16::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Int16");
-		return TYPE;
+		return Int16::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Int16::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Int16::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Int16::type_());
-		return CAT;
+		return Int16::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(Int16::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Int16::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(Int16::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Int16::categories_();
 	}
 
 	virtual inline int64_t to_int64_() const override
@@ -6255,30 +6395,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::UInt16");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return UInt16::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::UInt16");
-		return TYPE;
+		return UInt16::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(UInt16::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return UInt16::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(UInt16::type_());
-		return CAT;
+		return UInt16::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(UInt16::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return UInt16::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(UInt16::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return UInt16::categories_();
 	}
 
 	virtual inline int64_t to_int64_() const override
@@ -6585,30 +6753,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Int32");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Int32::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Int32");
-		return TYPE;
+		return Int32::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Int32::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Int32::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Int32::type_());
-		return CAT;
+		return Int32::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(Int32::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Int32::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(Int32::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Int32::categories_();
 	}
 
 	virtual inline int64_t to_int64_() const override
@@ -6915,30 +7111,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::UInt32");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return UInt32::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::UInt32");
-		return TYPE;
+		return UInt32::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(UInt32::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return UInt32::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(UInt32::type_());
-		return CAT;
+		return UInt32::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(UInt32::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return UInt32::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(UInt32::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return UInt32::categories_();
 	}
 
 	virtual inline int64_t to_int64_() const override
@@ -7253,30 +7477,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Int64");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Int64::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Int64");
-		return TYPE;
+		return Int64::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Int64::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Int64::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Int64::type_());
-		return CAT;
+		return Int64::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(Int64::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Int64::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(Int64::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Int64::categories_();
 	}
 
 	virtual inline int64_t to_int64_() const override
@@ -7591,30 +7843,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::UInt64");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return UInt64::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::UInt64");
-		return TYPE;
+		return UInt64::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(UInt64::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return UInt64::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(UInt64::type_());
-		return CAT;
+		return UInt64::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(UInt64::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return UInt64::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(UInt64::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return UInt64::categories_();
 	}
 
 	virtual inline int64_t to_int64_() const override
@@ -8004,30 +8284,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Float32");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Float32::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Float32");
-		return TYPE;
+		return Float32::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Float32::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Float32::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Float32::type_());
-		return CAT;
+		return Float32::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(Float32::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Float32::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(Float32::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Float32::categories_();
 	}
 
 	virtual inline double to_float64_() const override
@@ -8343,30 +8651,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Float64");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Float64::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Float64");
-		return TYPE;
+		return Float64::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Float64::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Float64::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Float64::type_());
-		return CAT;
+		return Float64::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(Float64::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Float64::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(Float64::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Float64::categories_();
 	}
 
 	virtual inline double to_float64_() const override
@@ -8694,30 +9030,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Complex32");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Complex32::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Complex32");
-		return TYPE;
+		return Complex32::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Complex32::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Complex32::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Complex32::type_());
-		return CAT;
+		return Complex32::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(Complex32::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Complex32::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(Complex32::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Complex32::categories_();
 	}
 
 	virtual inline double to_float64_() const override
@@ -9052,30 +9416,58 @@ public:
 		}
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Complex64");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Complex64::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Complex64");
-		return TYPE;
+		return Complex64::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Complex64::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Complex64::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Complex64::type_());
-		return CAT;
+		return Complex64::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Number::categories_()->copy_());
+			categories->insert_(Complex64::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Complex64::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Number::categories_());
-			herd->insert_(Complex64::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Complex64::categories_();
 	}
 
 	virtual inline double to_float64_() const override
@@ -9362,30 +9754,58 @@ public:
 		s->update_("strange::River::err", Static::fin_(&River::err));
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::River");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return River::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::River");
-		return TYPE;
+		return River::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(River::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return River::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(River::type_());
-		return CAT;
+		return River::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+			categories->insert_(River::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return River::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Stateful::categories_());
-			herd->insert_(River::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return River::categories_();
 	}
 
 	inline const Ptr filename_() const
