@@ -1069,7 +1069,13 @@ public:
 		return Cat::categories_();
 	}
 
-	virtual inline const Ptr pub_() const override;
+	static inline const Ptr creator_(const Ptr& ignore = nothing_());
+
+	virtual inline const Ptr pub_() const override
+	{
+		static const Ptr PUB = _public_(Cat::creator_());
+		return PUB;
+	}
 
 	static inline const bool check_(const Ptr& thing, const Ptr& cat);
 
@@ -10458,16 +10464,18 @@ inline const Thing::Ptr Cat::categories_()
 	return CATEGORIES;
 }
 
-inline const Thing::Ptr Cat::pub_() const
+inline const Thing::Ptr Cat::creator_(const Ptr& thing)
 {
-	static const Ptr PUB = [this]()
+	static const Ptr CREATION = []()
 	{
-		const Ptr pub = Symbol::pub_()->copy_();
-		const auto shoal = static_<Shoal>(pub);
+		const auto shoal = static_<Shoal>(Symbol::creator_()->copy_());
+		shoal->update_("type_name", Static::fin_(&Cat::type_name));
+		shoal->update_("category", Static::fin_(&Cat::category));
+		shoal->update_("categories", Static::fin_(&Cat::categories));
 		shoal->finalize_();
-		return pub;
+		return shoal;
 	}();
-	return PUB;
+	return CREATION;
 }
 
 inline const bool Cat::check_(const Ptr& thing, const Ptr& cat)
