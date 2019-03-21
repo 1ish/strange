@@ -2713,19 +2713,49 @@ public:
 		return Iterator::mut_(me_());
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Flock");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Flock::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Flock");
-		return TYPE;
+		return Flock::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Flock::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Flock::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Flock::type_());
-		return CAT;
+		return Flock::category_();
 	}
 
-	virtual inline const Ptr cats_() const override;
+	static inline const Ptr categories_();
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Flock::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		return Flock::categories_();
+	}
 
 	virtual inline const Ptr visit(const Ptr& it) override
 	{
@@ -2919,19 +2949,49 @@ private:
 			return make_<Iterator>(flock);
 		}
 
+		static inline const Ptr type_name_()
+		{
+			static const Ptr TYPE_NAME = sym_("strange::Flock::Iterator");
+			return TYPE_NAME;
+		}
+
+		static inline const Ptr type_name(const Ptr& ignore)
+		{
+			return Flock::Iterator::type_name_();
+		}
+
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Flock::Iterator");
-			return TYPE;
+			return Flock::Iterator::type_name_();
+		}
+
+		static inline const Ptr category_()
+		{
+			static const Ptr CATEGORY = Cat::fin_(Flock::Iterator::type_name_());
+			return CATEGORY;
+		}
+
+		static inline const Ptr category(const Ptr& ignore)
+		{
+			return Flock::Iterator::category_();
 		}
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_(Flock::Iterator::type_());
-			return CAT;
+			return Flock::Iterator::category_();
 		}
 
-		virtual inline const Ptr cats_() const override;
+		static inline const Ptr categories_();
+
+		static inline const Ptr categories(const Ptr& ignore)
+		{
+			return Flock::Iterator::categories_();
+		}
+
+		virtual inline const Ptr cats_() const override
+		{
+			return Flock::Iterator::categories_();
+		}
 
 	private:
 		const Ptr _flock;
@@ -10426,33 +10486,17 @@ inline void Flock::replace_links_(const Ptr& shoal)
 	}
 }
 
-inline const Thing::Ptr Flock::cats_() const
+inline const Thing::Ptr Flock::categories_()
 {
-	static const Ptr CATS = [this]()
+	static const Ptr CATEGORIES = []()
 	{
-		const Ptr cats = Herd::mut_();
-		const auto herd = static_<Herd>(cats);
-		herd->self_add_(Stateful::categories_());
-		herd->self_add_(Serializable::categories_());
-		herd->insert_(Flock::cat_());
-		herd->finalize_();
-		return cats;
+		const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+		categories->self_add_(Serializable::categories_());
+		categories->insert_(Flock::category_());
+		categories->finalize_();
+		return categories;
 	}();
-	return CATS;
-}
-
-inline const Thing::Ptr Flock::Iterator::cats_() const
-{
-	static const Ptr CATS = [this]()
-	{
-		const Ptr cats = Herd::mut_();
-		const auto herd = static_<Herd>(cats);
-		herd->self_add_(Stateful::categories_());
-		herd->insert_(Flock::Iterator::cat_());
-		herd->finalize_();
-		return cats;
-	}();
-	return CATS;
+	return CATEGORIES;
 }
 
 inline const Thing::Ptr Flock::Concurrent::categories_()
@@ -10461,6 +10505,18 @@ inline const Thing::Ptr Flock::Concurrent::categories_()
 	{
 		const auto categories = static_<Herd>(Stateful::categories_()->copy_());
 		categories->insert_(Flock::Concurrent::category_());
+		categories->finalize_();
+		return categories;
+	}();
+	return CATEGORIES;
+}
+
+inline const Thing::Ptr Flock::Iterator::categories_()
+{
+	static const Ptr CATEGORIES = []()
+	{
+		const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+		categories->insert_(Flock::Iterator::category_());
 		categories->finalize_();
 		return categories;
 	}();
