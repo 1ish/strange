@@ -87,30 +87,58 @@ public:
 		return take_();
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Fence");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Fence::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Fence");
-		return TYPE;
+		return Fence::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Fence::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Fence::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Fence::type_());
-		return CAT;
+		return Fence::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+			categories->insert_(Fence::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Fence::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Stateful::categories_());
-			herd->insert_(Fence::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Fence::categories_();
 	}
 
 private:

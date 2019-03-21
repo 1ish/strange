@@ -466,30 +466,58 @@ public:
 		return Token::error_(_filename, _x, _y, token);
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Tokenizer");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Tokenizer::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Tokenizer");
-		return TYPE;
+		return Tokenizer::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Tokenizer::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Tokenizer::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Tokenizer::type_());
-		return CAT;
+		return Tokenizer::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+			categories->insert_(Tokenizer::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Tokenizer::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Stateful::categories_());
-			herd->insert_(Tokenizer::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Tokenizer::categories_();
 	}
 
 private:

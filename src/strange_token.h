@@ -8,12 +8,12 @@ namespace strange
 class Token;
 
 //----------------------------------------------------------------------
-class Token : public Stateful
+class Token : public Thing
 //----------------------------------------------------------------------
 {
 public:
 	inline Token(const Ptr& filename, const Ptr& x, const Ptr& y, const Ptr& tag, const Ptr& symbol, const Ptr& value)
-		: Stateful{}
+		: Thing{}
 		, _filename{ filename }
 		, _x{ x }
 		, _y{ y }
@@ -24,17 +24,17 @@ public:
 	{
 	}
 
-	static inline const Ptr mut_(const Ptr& filename, const int64_t x, const int64_t y, const char tag, const std::string& str, const Ptr& value = nothing_())
+	static inline const Ptr fin_(const Ptr& filename, const int64_t x, const int64_t y, const char tag, const std::string& str, const Ptr& value = nothing_())
 	{
-		return mut_(filename, Int64::fin_(x), Int64::fin_(y), Int8::fin_(tag), sym_(str), value);
+		return fin_(filename, Int64::fin_(x), Int64::fin_(y), Int8::fin_(tag), sym_(str), value);
 	}
 
-	static inline const Ptr mut_(const Ptr& filename, const Ptr& x, const Ptr& y, const Ptr& tag, const Ptr& symbol, const Ptr& value)
+	static inline const Ptr fin_(const Ptr& filename, const Ptr& x, const Ptr& y, const Ptr& tag, const Ptr& symbol, const Ptr& value)
 	{
-		return make_<Token>(filename, x, y, tag, symbol, value);
+		return fake_<Token>(filename, x, y, tag, symbol, value);
 	}
 
-	static inline const Ptr mut(const Ptr& it)
+	static inline const Ptr fin(const Ptr& it)
 	{
 		const Ptr filename = it->next_();
 		const Ptr x = it->next_();
@@ -42,46 +42,46 @@ public:
 		const Ptr tag = it->next_();
 		const Ptr symbol = it->next_();
 		const Ptr value = it->next_();
-		return mut_(filename, x, y, tag, symbol, value);
+		return fin_(filename, x, y, tag, symbol, value);
 	}
 
 	static inline const Ptr symbol_(const Ptr& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		return mut_(filename, x, y, 'S', str, _symbol_(str));
+		return fin_(filename, x, y, 'S', str, _symbol_(str));
 	}
 
 	static inline const Ptr lake_(const Ptr& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		return mut_(filename, x, y, 'L', str, Lake::fin_(str.substr(1, str.length() - 2)));
+		return fin_(filename, x, y, 'L', str, Lake::fin_(str.substr(1, str.length() - 2)));
 	}
 
 	static inline const Ptr integer_(const Ptr& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		const Ptr int64 = Int64::mut_();
+		const Ptr int64 = Int64::fin_();
 		static_<Int64>(int64)->from_symbol_(sym_(str));
-		return mut_(filename, x, y, 'I', str, int64);
+		return fin_(filename, x, y, 'I', str, int64);
 	}
 
 	static inline const Ptr float_(const Ptr& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		const Ptr float64 = Float64::mut_();
+		const Ptr float64 = Float64::fin_();
 		static_<Float64>(float64)->from_symbol_(sym_(str));
-		return mut_(filename, x, y, 'F', str, float64);
+		return fin_(filename, x, y, 'F', str, float64);
 	}
 
 	static inline const Ptr name_(const Ptr& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		return mut_(filename, x, y, 'N', str);
+		return fin_(filename, x, y, 'N', str);
 	}
 
 	static inline const Ptr punctuation_(const Ptr& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		return mut_(filename, x, y, 'P', str);
+		return fin_(filename, x, y, 'P', str);
 	}
 
 	static inline const Ptr error_(const Ptr& filename, const int64_t x, const int64_t y, const std::string& str)
 	{
-		return mut_(filename, x, y, 'E', str);
+		return fin_(filename, x, y, 'E', str);
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -90,7 +90,7 @@ public:
 		{
 			const Ptr pub = Thing::pub_()->copy_();
 			const auto shoal = static_<Shoal>(pub);
-			shoal->update_("mut", Static::fin_(&Token::mut, "filename", "x", "y", "tag", "symbol", "value"));
+			shoal->update_("fin", Static::fin_(&Token::fin, "filename", "x", "y", "tag", "symbol", "value"));
 			shoal->update_("filename", Const<Token>::fin_(&Token::filename));
 			shoal->update_("x", Const<Token>::fin_(&Token::x));
 			shoal->update_("y", Const<Token>::fin_(&Token::y));
@@ -108,7 +108,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
-		s->update_("strange::Token::mut", Static::fin_(&Token::mut, "filename", "x", "y", "tag", "symbol", "value"));
+		s->update_("strange::Token::fin", Static::fin_(&Token::fin, "filename", "x", "y", "tag", "symbol", "value"));
 	}
 
 	inline const std::string filename_() const
@@ -217,30 +217,58 @@ public:
 		return error_(it->next_());
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Token");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Token::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Token");
-		return TYPE;
+		return Token::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Token::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Token::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Token::type_());
-		return CAT;
+		return Token::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Thing::categories_()->copy_());
+			categories->insert_(Token::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Token::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Stateful::categories_());
-			herd->insert_(Token::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Token::categories_();
 	}
 
 private:
