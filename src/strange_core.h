@@ -3467,31 +3467,59 @@ public:
 		return Iterator::mut_(copy_());
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Herd");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Herd::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
-		static const Ptr TYPE = sym_("strange::Herd");
-		return TYPE;
+		return Herd::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Herd::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Herd::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
 	{
-		static const Ptr CAT = Cat::fin_(Herd::type_());
-		return CAT;
+		return Herd::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+			categories->self_add_(Serializable::categories_());
+			categories->insert_(Herd::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Herd::categories_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Stateful::categories_());
-			herd->self_add_(Serializable::categories_());
-			herd->insert_(Herd::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
+		return Herd::categories_();
 	}
 
 	virtual inline const Ptr visit(const Ptr& it) override
@@ -3691,30 +3719,58 @@ private:
 			return make_<Iterator>(herd);
 		}
 
+		static inline const Ptr type_name_()
+		{
+			static const Ptr TYPE_NAME = sym_("strange::Herd::Iterator");
+			return TYPE_NAME;
+		}
+
+		static inline const Ptr type_name(const Ptr& ignore)
+		{
+			return Herd::Iterator::type_name_();
+		}
+
 		virtual inline const Ptr type_() const override
 		{
-			static const Ptr TYPE = sym_("strange::Herd::Iterator");
-			return TYPE;
+			return Herd::Iterator::type_name_();
+		}
+
+		static inline const Ptr category_()
+		{
+			static const Ptr CATEGORY = Cat::fin_(Herd::Iterator::type_name_());
+			return CATEGORY;
+		}
+
+		static inline const Ptr category(const Ptr& ignore)
+		{
+			return Herd::Iterator::category_();
 		}
 
 		virtual inline const Ptr cat_() const override
 		{
-			static const Ptr CAT = Cat::fin_(Herd::Iterator::type_());
-			return CAT;
+			return Herd::Iterator::category_();
+		}
+
+		static inline const Ptr categories_()
+		{
+			static const Ptr CATEGORIES = []()
+			{
+				const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+				categories->insert_(Herd::Iterator::category_());
+				categories->finalize_();
+				return categories;
+			}();
+			return CATEGORIES;
+		}
+
+		static inline const Ptr categories(const Ptr& ignore)
+		{
+			return Herd::Iterator::categories_();
 		}
 
 		virtual inline const Ptr cats_() const override
 		{
-			static const Ptr CATS = [this]()
-			{
-				const Ptr cats = Herd::mut_();
-				const auto herd = static_<Herd>(cats);
-				herd->self_add_(Stateful::categories_());
-				herd->insert_(Herd::Iterator::cat_());
-				herd->finalize_();
-				return cats;
-			}();
-			return CATS;
+			return Herd::Iterator::categories_();
 		}
 
 	private:
