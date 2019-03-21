@@ -32,15 +32,23 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Tokenizer::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Stateful::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Tokenizer::type_name));
+			shoal->update_("category", Static::fin_(&Tokenizer::category));
+			shoal->update_("categories", Static::fin_(&Tokenizer::categories));
 			shoal->update_("mut", Static::fin_(&Tokenizer::mut, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	inline const bool good_()

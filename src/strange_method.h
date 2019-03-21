@@ -30,30 +30,10 @@ public:
 		return TYPE_NAME;
 	}
 
-	static inline const Ptr type_name(const Ptr& ignore)
-	{
-		return Method::type_name_();
-	}
-
-	virtual inline const Ptr type_() const override
-	{
-		return Method::type_name_();
-	}
-
 	static inline const Ptr category_()
 	{
 		static const Ptr CATEGORY = Cat::fin_(Method::type_name_());
 		return CATEGORY;
-	}
-
-	static inline const Ptr category(const Ptr& ignore)
-	{
-		return Method::category_();
-	}
-
-	virtual inline const Ptr cat_() const override
-	{
-		return Method::category_();
 	}
 
 	static inline const Ptr categories_()
@@ -68,19 +48,94 @@ public:
 		return CATEGORIES;
 	}
 
-	static inline const Ptr categories(const Ptr& ignore)
+	virtual inline const Ptr type_() const override
 	{
-		return Method::categories_();
+		return _member->type_();
+	}
+
+	virtual inline const Ptr cat_() const override
+	{
+		return _member->cat_();
 	}
 
 	virtual inline const Ptr cats_() const override
 	{
-		return Method::categories_();
+		return _member->cats_();
+	}
+
+	virtual inline void finalize_() const override
+	{
+		_member->finalize_();
+	}
+
+	virtual inline const bool final_() const override
+	{
+		return _member->final_();
+	}
+
+	virtual inline void freeze_() const override
+	{
+		_member->freeze_();
+	}
+
+	virtual inline const bool frozen_() const override
+	{
+		return _member->frozen_();
+	}
+
+	virtual inline const Ptr copy_() const override
+	{
+		return _member->copy_();
+	}
+
+	virtual inline const Ptr clone_() const override
+	{
+		return _member->clone_();
+	}
+
+	virtual inline const Ptr replicate_() const override
+	{
+		return _member->replicate_();
+	}
+
+	virtual inline const Ptr iterator_() const override
+	{
+		return _member->iterator_();
+	}
+
+	virtual inline const Ptr next_() override
+	{
+		return _member->next_();
+	}
+
+	virtual inline std::size_t hash_() const override
+	{
+		return _member->hash_();
+	}
+
+	virtual inline const bool same_(const Ptr& other) const override
+	{
+		return _member->same_(other);
+	}
+
+	virtual inline const Ptr visit(const Ptr& it)
+	{
+		return _member->visit(it);
+	}
+
+	virtual inline const Ptr pub_() const override
+	{
+		return _member->pub_();
 	}
 
 	virtual inline const Ptr eater_() const override
 	{
 		return _member->eater_();
+	}
+
+	virtual inline const Ptr feeder(const Ptr& eater) const
+	{
+		return _member->feeder(eater);
 	}
 
 protected:

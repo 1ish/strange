@@ -31,15 +31,23 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(CPPGenerator::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Generator::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Generator::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&CPPGenerator::type_name));
+			shoal->update_("category", Static::fin_(&CPPGenerator::category));
+			shoal->update_("categories", Static::fin_(&CPPGenerator::categories));
 			shoal->update_("mut", Static::fin_(&CPPGenerator::mut, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)

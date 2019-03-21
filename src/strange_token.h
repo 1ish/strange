@@ -86,10 +86,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Token::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Thing::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Token::type_name));
+			shoal->update_("category", Static::fin_(&Token::category));
+			shoal->update_("categories", Static::fin_(&Token::categories));
 			shoal->update_("fin", Static::fin_(&Token::fin, "filename", "x", "y", "tag", "symbol", "value"));
 			shoal->update_("filename", Const<Token>::fin_(&Token::filename));
 			shoal->update_("x", Const<Token>::fin_(&Token::x));
@@ -100,9 +108,9 @@ public:
 			shoal->update_("precedence", Const<Token>::fin_(&Token::precedence));
 			shoal->update_("error", Const<Token>::fin_(&Token::error, "message"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)

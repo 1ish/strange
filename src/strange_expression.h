@@ -1493,6 +1493,12 @@ public:
 		return _value->cat_();
 	}
 
+	virtual inline const Ptr cats_() const override
+	{
+		initialize_();
+		return _value->cats_();
+	}
+
 	virtual inline void finalize_() const override
 	{
 		if (_value)
@@ -1564,12 +1570,6 @@ public:
 	{
 		initialize_();
 		return _value->visit(it);
-	}
-
-	virtual inline const Ptr cats_() const override
-	{
-		initialize_();
-		return _value->cats_();
 	}
 
 	virtual inline const Ptr pub_() const override
@@ -1984,7 +1984,7 @@ public:
 		, Serializable{}
 		, _creation{ dynamic_<Shoal>(creation) ? creation : Shoal::mut_() }
 		, _members{ dynamic_<Shoal>(members) ? members : _creation->replicate_() }
-		, _public{ _public_(Stateful::pub_(), _members) }
+		, _public{ _public_(static_<Shoal>(Stateful::pub_())->add_(_members)) }
 	{
 	}
 
@@ -2018,6 +2018,17 @@ public:
 		s->update_("strange::Creature::mut", Static::fin_(&Creature::mut, "creation"));
 	}
 
+	static inline const Ptr type_name_()
+	{
+		static const Ptr TYPE_NAME = sym_("strange::Creature");
+		return TYPE_NAME;
+	}
+
+	static inline const Ptr type_name(const Ptr& ignore)
+	{
+		return Creature::type_name_();
+	}
+
 	virtual inline const Ptr type_() const override
 	{
 		const Ptr over = static_<Shoal>(_members)->at_("type_name");
@@ -2025,8 +2036,18 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		static const Ptr TYPE = sym_("strange::Creature");
-		return TYPE;
+		return Creature::type_name_();
+	}
+
+	static inline const Ptr category_()
+	{
+		static const Ptr CATEGORY = Cat::fin_(Creature::type_name_());
+		return CATEGORY;
+	}
+
+	static inline const Ptr category(const Ptr& ignore)
+	{
+		return Creature::category_();
 	}
 
 	virtual inline const Ptr cat_() const override
@@ -2036,8 +2057,35 @@ public:
 		{
 			return operate_(const_cast<Creature*>(this), over);
 		}
-		static const Ptr CAT = Cat::fin_(sym_("strange::Creature"));
-		return CAT;
+		return Creature::category_();
+	}
+
+	static inline const Ptr categories_()
+	{
+		static const Ptr CATEGORIES = []()
+		{
+			const auto categories = static_<Herd>(Stateful::categories_()->copy_());
+			categories->self_add_(Serializable::categories_());
+			categories->insert_(Creature::category_());
+			categories->finalize_();
+			return categories;
+		}();
+		return CATEGORIES;
+	}
+
+	static inline const Ptr categories(const Ptr& ignore)
+	{
+		return Creature::categories_();
+	}
+
+	virtual inline const Ptr cats_() const override
+	{
+		const Ptr over = static_<Shoal>(_members)->at_("categories");
+		if (!over->is_nothing_())
+		{
+			return operate_(const_cast<Creature*>(this), over);
+		}
+		return Creature::categories_();
 	}
 
 	virtual inline void finalize_() const override
@@ -2195,26 +2243,6 @@ public:
 		return Stateful::feeder(eater);
 	}
 
-	virtual inline const Ptr cats_() const override
-	{
-		const Ptr over = static_<Shoal>(_members)->at_("categories");
-		if (!over->is_nothing_())
-		{
-			return operate_(const_cast<Creature*>(this), over);
-		}
-		static const Ptr CATS = [this]()
-		{
-			const Ptr cats = Herd::mut_();
-			const auto herd = static_<Herd>(cats);
-			herd->self_add_(Stateful::categories_());
-			herd->self_add_(Serializable::categories_());
-			herd->insert_(Creature::cat_());
-			herd->finalize_();
-			return cats;
-		}();
-		return CATS;
-	}
-
 	virtual inline const Ptr pub_() const override
 	{
 		return _public;
@@ -2317,23 +2345,6 @@ private:
 	const Ptr _creation;
 	const Ptr _members;
 	const Ptr _public;
-
-	static inline const Ptr _public_(const Ptr& pub, const Ptr& members)
-	{
-		const auto result = static_<Shoal>(pub->copy_());
-		const Ptr it = members->iterator_();
-		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
-		{
-			const auto flock = static_<Flock>(i);
-			const auto symbol = dynamic_<Symbol>(flock->at_(0));
-			if (symbol && symbol->get_()[0] != '_')
-			{
-				result->update_(symbol, flock->at_(1));
-			}
-		}
-		result->finalize_();
-		return result;
-	}
 };
 
 //======================================================================

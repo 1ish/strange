@@ -3627,17 +3627,25 @@ public:
 
 		virtual inline const Ptr pub_() const override
 		{
-			static const Ptr PUB = [this]()
+			static const Ptr PUB = _public_(Concurrent::creator_());
+			return PUB;
+		}
+
+		static inline const Ptr creator_(const Ptr& ignore = nothing_())
+		{
+			static const Ptr CREATION = []()
 			{
-				const Ptr pub = Thing::pub_()->copy_();
-				const auto shoal = static_<Shoal>(pub);
+				const auto shoal = static_<Shoal>(Stateful::creator_()->copy_());
+				shoal->update_("type_name", Static::fin_(&Concurrent::type_name));
+				shoal->update_("category", Static::fin_(&Concurrent::category));
+				shoal->update_("categories", Static::fin_(&Concurrent::categories));
 				shoal->update_("at", Const<Concurrent>::fin_(&Concurrent::at, "key"));
 				shoal->update_("insert", Member<Concurrent>::fin_(&Concurrent::insert, "key"));
 				shoal->update_("mut", Static::fin_(&Concurrent::mut, "herd"));
 				shoal->finalize_();
-				return pub;
+				return shoal;
 			}();
-			return PUB;
+			return CREATION;
 		}
 
 		static inline void share_(const Ptr& shoal)
@@ -3874,15 +3882,23 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(IteratorPtr::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Stateful::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&IteratorPtr::type_name));
+			shoal->update_("category", Static::fin_(&IteratorPtr::category));
+			shoal->update_("categories", Static::fin_(&IteratorPtr::categories));
 			shoal->update_("mut", Static::fin_(&IteratorPtr::mut, "thing"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline const Ptr type_name_()
@@ -4304,10 +4320,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Lake::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Stateful::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Lake::type_name));
+			shoal->update_("category", Static::fin_(&Lake::category));
+			shoal->update_("categories", Static::fin_(&Lake::categories));
 			shoal->update_("to_lake", Const<Lake>::fin_(&Lake::to_lake));
 			shoal->update_("from_lake", Member<Lake>::fin_(&Lake::from_lake, "lake"));
 			shoal->update_("to_river", Const<Lake>::fin_(&Lake::to_river, "river"));
@@ -4326,9 +4350,9 @@ public:
 			shoal->update_("less_or_equal", Const<Lake>::fin_(&Lake::less_or_equal, "lake"));
 			shoal->update_("greater_or_equal", Const<Lake>::fin_(&Lake::greater_or_equal, "lake"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -4823,10 +4847,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Number::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Stateful::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Number::type_name));
+			shoal->update_("category", Static::fin_(&Number::category));
+			shoal->update_("categories", Static::fin_(&Number::categories));
 			shoal->update_("to_int64", Const<Number>::fin_(&Number::to_int64));
 			shoal->update_("from_int64", Member<Number>::fin_(&Number::from_int64, "int64"));
 			shoal->update_("to_float64", Const<Number>::fin_(&Number::to_float64));
@@ -4854,9 +4886,9 @@ public:
 			shoal->update_("less_or_equal", Const<Number>::fin_(&Number::less_or_equal, "number"));
 			shoal->update_("greater_or_equal", Const<Number>::fin_(&Number::greater_or_equal, "number"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline const Ptr type_name_()
@@ -4993,10 +5025,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Bit::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Bit::type_name));
+			shoal->update_("category", Static::fin_(&Bit::category));
+			shoal->update_("categories", Static::fin_(&Bit::categories));
 			shoal->update_("to_lake", Const<Bit>::fin_(&Bit::to_lake));
 			shoal->update_("from_lake", Member<Bit>::fin_(&Bit::from_lake, "lake"));
 			shoal->update_("to_river", Const<Bit>::fin_(&Bit::to_river, "river"));
@@ -5007,9 +5047,9 @@ public:
 			shoal->update_("riv", Static::fin_(&Bit::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Bit::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -5346,10 +5386,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Int8::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Int8::type_name));
+			shoal->update_("category", Static::fin_(&Int8::category));
+			shoal->update_("categories", Static::fin_(&Int8::categories));
 			shoal->update_("to_lake", Const<Int8>::fin_(&Int8::to_lake));
 			shoal->update_("from_lake", Member<Int8>::fin_(&Int8::from_lake, "lake"));
 			shoal->update_("to_river", Const<Int8>::fin_(&Int8::to_river, "river"));
@@ -5360,9 +5408,9 @@ public:
 			shoal->update_("riv", Static::fin_(&Int8::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Int8::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -5694,10 +5742,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(UInt8::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&UInt8::type_name));
+			shoal->update_("category", Static::fin_(&UInt8::category));
+			shoal->update_("categories", Static::fin_(&UInt8::categories));
 			shoal->update_("to_lake", Const<UInt8>::fin_(&UInt8::to_lake));
 			shoal->update_("from_lake", Member<UInt8>::fin_(&UInt8::from_lake, "lake"));
 			shoal->update_("to_river", Const<UInt8>::fin_(&UInt8::to_river, "river"));
@@ -5708,9 +5764,9 @@ public:
 			shoal->update_("riv", Static::fin_(&UInt8::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&UInt8::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -6042,10 +6098,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Int16::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Int16::type_name));
+			shoal->update_("category", Static::fin_(&Int16::category));
+			shoal->update_("categories", Static::fin_(&Int16::categories));
 			shoal->update_("to_lake", Const<Int16>::fin_(&Int16::to_lake));
 			shoal->update_("from_lake", Member<Int16>::fin_(&Int16::from_lake, "lake"));
 			shoal->update_("to_river", Const<Int16>::fin_(&Int16::to_river, "river"));
@@ -6056,9 +6120,9 @@ public:
 			shoal->update_("riv", Static::fin_(&Int16::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Int16::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -6396,10 +6460,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(UInt16::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&UInt16::type_name));
+			shoal->update_("category", Static::fin_(&UInt16::category));
+			shoal->update_("categories", Static::fin_(&UInt16::categories));
 			shoal->update_("to_lake", Const<UInt16>::fin_(&UInt16::to_lake));
 			shoal->update_("from_lake", Member<UInt16>::fin_(&UInt16::from_lake, "lake"));
 			shoal->update_("to_river", Const<UInt16>::fin_(&UInt16::to_river, "river"));
@@ -6410,9 +6482,9 @@ public:
 			shoal->update_("riv", Static::fin_(&UInt16::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&UInt16::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -6750,10 +6822,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Int32::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Int32::type_name));
+			shoal->update_("category", Static::fin_(&Int32::category));
+			shoal->update_("categories", Static::fin_(&Int32::categories));
 			shoal->update_("to_lake", Const<Int32>::fin_(&Int32::to_lake));
 			shoal->update_("from_lake", Member<Int32>::fin_(&Int32::from_lake, "lake"));
 			shoal->update_("to_river", Const<Int32>::fin_(&Int32::to_river, "river"));
@@ -6764,9 +6844,9 @@ public:
 			shoal->update_("riv", Static::fin_(&Int32::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Int32::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -7108,10 +7188,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(UInt32::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&UInt32::type_name));
+			shoal->update_("category", Static::fin_(&UInt32::category));
+			shoal->update_("categories", Static::fin_(&UInt32::categories));
 			shoal->update_("to_lake", Const<UInt32>::fin_(&UInt32::to_lake));
 			shoal->update_("from_lake", Member<UInt32>::fin_(&UInt32::from_lake, "lake"));
 			shoal->update_("to_river", Const<UInt32>::fin_(&UInt32::to_river, "river"));
@@ -7122,9 +7210,9 @@ public:
 			shoal->update_("riv", Static::fin_(&UInt32::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&UInt32::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -7466,10 +7554,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Int64::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Int64::type_name));
+			shoal->update_("category", Static::fin_(&Int64::category));
+			shoal->update_("categories", Static::fin_(&Int64::categories));
 			shoal->update_("to_lake", Const<Int64>::fin_(&Int64::to_lake));
 			shoal->update_("from_lake", Member<Int64>::fin_(&Int64::from_lake, "lake"));
 			shoal->update_("to_river", Const<Int64>::fin_(&Int64::to_river, "river"));
@@ -7480,9 +7576,9 @@ public:
 			shoal->update_("riv", Static::fin_(&Int64::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Int64::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -7832,10 +7928,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(UInt64::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&UInt64::type_name));
+			shoal->update_("category", Static::fin_(&UInt64::category));
+			shoal->update_("categories", Static::fin_(&UInt64::categories));
 			shoal->update_("to_lake", Const<UInt64>::fin_(&UInt64::to_lake));
 			shoal->update_("from_lake", Member<UInt64>::fin_(&UInt64::from_lake, "lake"));
 			shoal->update_("to_river", Const<UInt64>::fin_(&UInt64::to_river, "river"));
@@ -7846,9 +7950,9 @@ public:
 			shoal->update_("riv", Static::fin_(&UInt64::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&UInt64::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -8280,10 +8384,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Float32::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Float32::type_name));
+			shoal->update_("category", Static::fin_(&Float32::category));
+			shoal->update_("categories", Static::fin_(&Float32::categories));
 			shoal->update_("to_lake", Const<Float32>::fin_(&Float32::to_lake));
 			shoal->update_("from_lake", Member<Float32>::fin_(&Float32::from_lake, "lake"));
 			shoal->update_("to_river", Const<Float32>::fin_(&Float32::to_river, "river"));
@@ -8294,9 +8406,9 @@ public:
 			shoal->update_("riv", Static::fin_(&Float32::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Float32::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -8639,10 +8751,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Float64::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&Float64::type_name));
+			shoal->update_("category", Static::fin_(&Float64::category));
+			shoal->update_("categories", Static::fin_(&Float64::categories));
 			shoal->update_("to_lake", Const<Float64>::fin_(&Float64::to_lake));
 			shoal->update_("from_lake", Member<Float64>::fin_(&Float64::from_lake, "lake"));
 			shoal->update_("to_river", Const<Float64>::fin_(&Float64::to_river, "river"));
@@ -8653,9 +8773,9 @@ public:
 			shoal->update_("riv", Static::fin_(&Float64::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Float64::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -9009,15 +9129,23 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Complex32::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
 			shoal->update_("self_modulo", nothing_());
 			shoal->update_("less_than", nothing_());
 			shoal->update_("greater_than", nothing_());
 			shoal->update_("less_or_equal", nothing_());
 			shoal->update_("greater_or_equal", nothing_());
+			shoal->update_("type_name", Static::fin_(&Complex32::type_name));
+			shoal->update_("category", Static::fin_(&Complex32::category));
+			shoal->update_("categories", Static::fin_(&Complex32::categories));
 			shoal->update_("to_lake", Const<Complex32>::fin_(&Complex32::to_lake));
 			shoal->update_("from_lake", Member<Complex32>::fin_(&Complex32::from_lake, "lake"));
 			shoal->update_("to_river", Const<Complex32>::fin_(&Complex32::to_river, "river"));
@@ -9028,9 +9156,9 @@ public:
 			shoal->update_("riv", Static::fin_(&Complex32::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Complex32::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -9379,15 +9507,23 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(Complex64::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Number::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
 			shoal->update_("self_modulo", nothing_());
 			shoal->update_("less_than", nothing_());
 			shoal->update_("greater_than", nothing_());
 			shoal->update_("less_or_equal", nothing_());
 			shoal->update_("greater_or_equal", nothing_());
+			shoal->update_("type_name", Static::fin_(&Complex64::type_name));
+			shoal->update_("category", Static::fin_(&Complex64::category));
+			shoal->update_("categories", Static::fin_(&Complex64::categories));
 			shoal->update_("to_lake", Const<Complex64>::fin_(&Complex64::to_lake));
 			shoal->update_("from_lake", Member<Complex64>::fin_(&Complex64::from_lake, "lake"));
 			shoal->update_("to_river", Const<Complex64>::fin_(&Complex64::to_river, "river"));
@@ -9398,9 +9534,9 @@ public:
 			shoal->update_("riv", Static::fin_(&Complex64::riv, "river"));
 			shoal->update_("rwl", Static::fin_(&Complex64::rwl, "river"));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
@@ -9783,10 +9919,18 @@ public:
 
 	virtual inline const Ptr pub_() const override
 	{
-		static const Ptr PUB = [this]()
+		static const Ptr PUB = _public_(River::creator_());
+		return PUB;
+	}
+
+	static inline const Ptr creator_(const Ptr& ignore = nothing_())
+	{
+		static const Ptr CREATION = []()
 		{
-			const Ptr pub = Thing::pub_()->copy_();
-			const auto shoal = static_<Shoal>(pub);
+			const auto shoal = static_<Shoal>(Number::creator_()->copy_());
+			shoal->update_("type_name", Static::fin_(&River::type_name));
+			shoal->update_("category", Static::fin_(&River::category));
+			shoal->update_("categories", Static::fin_(&River::categories));
 			shoal->update_("mut", Static::fin_(&River::mut, "lake", "is_file"));
 			shoal->update_("in", Static::fin_(&River::in));
 			shoal->update_("out", Static::fin_(&River::out));
@@ -9800,9 +9944,9 @@ public:
 			shoal->update_("peek", Member<River>::fin_(&River::peek));
 			shoal->update_("to_lake", Const<River>::fin_(&River::to_lake));
 			shoal->finalize_();
-			return pub;
+			return shoal;
 		}();
-		return PUB;
+		return CREATION;
 	}
 
 	static inline void share_(const Ptr& shoal)
