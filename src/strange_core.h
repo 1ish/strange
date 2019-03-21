@@ -335,7 +335,13 @@ public:
 		return visitor->invoke(it);
 	}
 
-	virtual inline const Ptr pub_() const;
+	static inline const Ptr creator_(const Ptr& ignore = nothing_());
+
+	virtual inline const Ptr pub_() const
+	{
+		static const Ptr PUB = _public_(creator_());
+		return PUB;
+	}
 
 	inline const Ptr pub(const Ptr& ignore) const
 	{
@@ -571,6 +577,8 @@ protected:
 		result->finalize_();
 		return result;
 	}
+
+	static inline const Ptr _public_(const Ptr& creation);
 
 	// protected construction/destruction/assignment
 	Thing() = default;
@@ -10005,12 +10013,11 @@ inline const Thing::Ptr Thing::call(const Ptr& it)
 	return fun->invoke(it);
 }
 
-inline const Thing::Ptr Thing::pub_() const
+inline const Thing::Ptr Thing::creator_(const Ptr& ignore)
 {
-	static const Ptr PUB = []()
+	static const Ptr CREATION = []()
 	{
-		const Ptr pub = Shoal::mut_();
-		const auto shoal = static_<Shoal>(pub);
+		const auto shoal = static_<Shoal>(Shoal::mut_());
 		shoal->update_("invoke", Member<Thing>::fin_(&Thing::invoke, "member", ".."));
 		shoal->update_("iterator", Const<Thing>::fin_(&Thing::iterator));
 		shoal->update_("next", Member<Thing>::fin_(&Thing::next));
@@ -10039,14 +10046,15 @@ inline const Thing::Ptr Thing::pub_() const
 		shoal->update_("clone_freeze", Const<Thing>::fin_(&Thing::clone_freeze));
 		shoal->update_("replicate", Const<Thing>::fin_(&Thing::replicate));
 		shoal->update_("call", Static::fin_(&Thing::call, "function", ".."));
+		shoal->update_("type", Const<Thing>::fin_(&Thing::type));
 		shoal->update_("cat", Const<Thing>::fin_(&Thing::cat));
 		shoal->update_("cats", Const<Thing>::fin_(&Thing::cats));
 		shoal->update_("visit", Member<Thing>::fin_(&Thing::visit, "visitor", "member", ".."));
 		shoal->update_("pub", Const<Thing>::fin_(&Thing::pub));
 		shoal->finalize_();
-		return pub;
+		return shoal;
 	}();
-	return PUB;
+	return CREATION;
 }
 
 inline const Thing::Ptr Thing::operator()(Thing* const thing, const Ptr& it)
@@ -10116,6 +10124,23 @@ inline const Thing::Ptr& Thing::shared_()
 		return shoal;
 	}();
 	return SHARED;
+}
+
+inline const Thing::Ptr Thing::_public_(const Ptr& creation)
+{
+	const auto result = static_<Shoal>(Shoal::mut_());
+	const Ptr it = creation->iterator_();
+	for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
+	{
+		const auto flock = static_<Flock>(i);
+		const auto symbol = dynamic_<Symbol>(flock->at_(0));
+		if (symbol && symbol->get_()[0] != '_')
+		{
+			result->update_(symbol, flock->at_(1));
+		}
+	}
+	result->finalize_();
+	return result;
 }
 
 inline Thing::Dismemberment::Dismemberment(const Ptr& type, const Ptr& member)

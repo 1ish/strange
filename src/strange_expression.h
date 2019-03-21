@@ -2320,18 +2320,15 @@ private:
 
 	static inline const Ptr _public_(const Ptr& pub, const Ptr& members)
 	{
-		const Ptr result = pub->copy_();
-		const auto r = static_<Shoal>(result);
-		const auto m = static_<Shoal>(members);
-		const Ptr it = m->iterator_();
+		const auto result = static_<Shoal>(pub->copy_());
+		const Ptr it = members->iterator_();
 		for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
 		{
 			const auto flock = static_<Flock>(i);
-			const Ptr first = flock->at_(0);
-			const auto symbol = dynamic_<Symbol>(first);
+			const auto symbol = dynamic_<Symbol>(flock->at_(0));
 			if (symbol && symbol->get_()[0] != '_')
 			{
-				r->update_(first, flock->at_(1));
+				result->update_(symbol, flock->at_(1));
 			}
 		}
 		result->finalize_();
