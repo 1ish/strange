@@ -484,7 +484,7 @@ private:
 				Ptr value = it->next_();
 				if (value->is_stop_())
 				{
-					value = Expression::evaluate_(vec[i + 2], local);
+					value = Expression::evaluate_(vec[i + 2], local); // default
 				}
 				if (!Cat::check_(value, vec[i + 1]))
 				{
@@ -3073,10 +3073,8 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 	try
 	{
 		const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
-		const Ptr new_shared = Shoal::Concurrent::mut_();
-		const auto capture_shared = static_<Shoal::Concurrent>(new_shared);
-		const Ptr new_local = Shoal::mut_();
-		const auto capture_local = static_<Shoal>(new_local);
+		const auto capture_shared = static_<Shoal::Concurrent>(Shoal::Concurrent::mut_());
+		const auto capture_local = static_<Shoal>(Shoal::mut_());
 		const std::size_t size_1 = vec.size() - 1;
 		for (std::size_t i = 0; i < size_1; i += 3)
 		{
@@ -3096,8 +3094,8 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 				capture_local->update_(param, value->clone_freeze_());
 			}
 		}
-		capture_local->insert_("$", new_shared);
-		return Closure::fin_(vec[size_1], new_local);
+		capture_local->insert_("$", capture_shared);
+		return Closure::fin_(vec[size_1], capture_local);
 	}
 	catch (const std::exception& err)
 	{

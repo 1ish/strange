@@ -174,13 +174,11 @@ private:
 				throw tok->error_("Tokenizer ERROR");
 			}
 			const Ptr symbol = tok->symbol();
-			const Ptr flock = Flock::mut_();
-			const auto flk = static_<Flock>(flock);
+			const auto flock = static_<Flock>(Flock::mut_());
 			static const Ptr local = sym_("local_");
 			static const Ptr invoke = sym_("invoke_");
 			static const Ptr at = sym_("at");
-			const Ptr statement = Reference::mut_(invoke);
-			const auto smt = static_<Reference>(statement);
+			const auto statement = static_<Reference>(Reference::mut_(invoke));
 			if (first)
 			{
 				_next_();
@@ -196,16 +194,15 @@ private:
 						const Ptr new_cats = Shoal::mut_();
 						if (_statement_(scope, shoal, new_fixed, new_cats, creation, flock, true, true)) // parameters/capture
 						{
-							if (flk->size_() % 3 == 0) // param :<cat>= capture
+							if (flock->size_() % 3 == 0) // param :<cat>= capture
 							{
-								const Ptr nested = Flock::mut_();
-								const auto nst = static_<Flock>(nested);
+								const auto nested = static_<Flock>(Flock::mut_());
 								if (_statement_(scope, shoal, new_fixed, new_cats, creation, nested, true)) // parameters
 								{
-									if (nst->size_() % 3 == 0) // param :<cat>= default
+									if (nested->size_() % 3 == 0) // param :<cat>= default
 									{
-										nst->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
-										flk->push_back_(Expression::fin_(token, sym_("function_"), nested));
+										nested->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
+										flock->push_back_(Expression::fin_(token, sym_("function_"), nested));
 										result = Expression::fin_(token, symbol, flock);
 										continue;
 									}
@@ -221,9 +218,9 @@ private:
 						const Ptr new_cats = Shoal::mut_();
 						if (_statement_(scope, shoal, new_fixed, new_cats, creation, flock, true)) // parameters
 						{
-							if (flk->size_() % 3 == 0) // param :<cat>= default
+							if (flock->size_() % 3 == 0) // param :<cat>= default
 							{
-								flk->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
+								flock->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
 								result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
 								continue;
 							}
@@ -236,9 +233,9 @@ private:
 						const Ptr new_cats = Shoal::mut_();
 						if (_statement_(scope, shoal, new_fixed, new_cats, creation, flock, true)) // parameters
 						{
-							if (flk->size_() % 3 == 0) // param :<cat>= default
+							if (flock->size_() % 3 == 0) // param :<cat>= default
 							{
-								flk->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
+								flock->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
 								result = Expression::fin_(token, Mutation::fin_(Expression::fin_(token, sym_("function_"), flock)));
 								continue;
 							}
@@ -251,9 +248,9 @@ private:
 						const Ptr new_cats = Shoal::mut_();
 						if (_statement_(scope, shoal, new_fixed, new_cats, creation, flock, true)) // parameters
 						{
-							if (flk->size_() % 3 == 0) // param :<cat>= default
+							if (flock->size_() % 3 == 0) // param :<cat>= default
 							{
-								flk->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
+								flock->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
 								result = Expression::fin_(token, Extraction::fin_(Expression::fin_(token, sym_("function_"), flock)));
 								continue;
 							}
@@ -266,7 +263,7 @@ private:
 						const Ptr new_cats = Shoal::mut_();
 						if (_statement_(scope, shoal, new_fixed, new_cats, creation, flock, true)) // cat parameters
 						{
-							if (flk->size_() % 3 == 0) // param :<cat>= default
+							if (flock->size_() % 3 == 0) // param :<cat>= default
 							{
 								const Ptr nested = Flock::mut_();
 								const auto nst = static_<Flock>(nested);
@@ -277,7 +274,7 @@ private:
 								if (_statement_(scope, shoal, new_fixed, new_cats, creation, nested))
 								{
 									nst->push_back_(_parse_(scope, shoal, new_fixed, new_cats, new_creation, false));
-									flk->push_back_(Expression::fin_(token, sym_("creation_"), nested));
+									flock->push_back_(Expression::fin_(token, sym_("creation_"), nested));
 									result = Expression::fin_(token, Creation::fin_(Expression::fin_(token, symbol, flock)));
 									continue;
 								}
@@ -288,30 +285,30 @@ private:
 					}
 					else if (symbol->is_("creation_"))
 					{
-						flk->push_back_(scope);
-						flk->push_back_(shoal);
+						flock->push_back_(scope);
+						flock->push_back_(shoal);
 						const Ptr new_creation = Weak::mut_(nothing_());
-						flk->push_back_(new_creation);
+						flock->push_back_(new_creation);
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							flk->push_back_(_parse_(scope, shoal, fixed, cats, new_creation, false)); // right
+							flock->push_back_(_parse_(scope, shoal, fixed, cats, new_creation, false)); // right
 							result = Expression::fin_(token, Creation::fin_(Expression::fin_(token, symbol, flock)));
 							continue;
 						}
-						flk->clear_();
+						flock->clear_();
 					}
 					else if (symbol->is_("fixed_"))
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							const int64_t size = flk->size_();
+							const int64_t size = flock->size_();
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Fixed::fin_(Expression::fin_(token)));
 							}
 							else if (size == 1)
 							{
-								result = Expression::fin_(token, Fixed::fin_(flk->at_(0)));
+								result = Expression::fin_(token, Fixed::fin_(flock->at_(0)));
 							}
 							else
 							{
@@ -324,14 +321,14 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							const int64_t size = flk->size_();
+							const int64_t size = flock->size_();
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Mutable::fin_(Expression::fin_(token)));
 							}
 							else if (size == 1)
 							{
-								result = Expression::fin_(token, Mutable::fin_(flk->at_(0)));
+								result = Expression::fin_(token, Mutable::fin_(flock->at_(0)));
 							}
 							else
 							{
@@ -344,14 +341,14 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							const int64_t size = flk->size_();
+							const int64_t size = flock->size_();
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Variable::fin_(Expression::fin_(token)));
 							}
 							else if (size == 1)
 							{
-								result = Expression::fin_(token, Variable::fin_(flk->at_(0)));
+								result = Expression::fin_(token, Variable::fin_(flock->at_(0)));
 							}
 							else
 							{
@@ -364,14 +361,14 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							const int64_t size = flk->size_();
+							const int64_t size = flock->size_();
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Changeable::fin_(Expression::fin_(token)));
 							}
 							else if (size == 1)
 							{
-								result = Expression::fin_(token, Changeable::fin_(flk->at_(0)));
+								result = Expression::fin_(token, Changeable::fin_(flock->at_(0)));
 							}
 							else
 							{
@@ -384,7 +381,7 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							const int64_t size = flk->size_();
+							const int64_t size = flock->size_();
 							if (size == 0)
 							{
 								_wrap_(token, nothing_(), flock);
@@ -415,7 +412,7 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							if (flk->size_() == 2)
+							if (flock->size_() == 2)
 							{
 								result = Expression::fin_(token, symbol, flock);
 								continue;
@@ -427,7 +424,7 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							const int64_t size = flk->size_();
+							const int64_t size = flock->size_();
 							if (size == 2 || size == 3)
 							{
 								result = Expression::fin_(token, symbol, flock);
@@ -440,16 +437,16 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							const int64_t size = flk->size_();
+							const int64_t size = flock->size_();
 							if (size == 0)
 							{
 								_wrap_(token, nothing_(), flock);
-								flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
+								flock->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
 								result = Expression::fin_(token, symbol, flock);
 							}
 							else if (size == 1)
 							{
-								flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
+								flock->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
 								result = Expression::fin_(token, symbol, flock);
 							}
 							else
@@ -466,9 +463,9 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							if (flk->size_() == 3)
+							if (flock->size_() == 3)
 							{
-								flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
+								flock->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
 								result = Expression::fin_(token, symbol, flock);
 								continue;
 							}
@@ -479,7 +476,7 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							if (flk->size_() >= 1)
+							if (flock->size_() >= 1)
 							{
 								const Ptr it = flock->iterator_();
 								for (Ptr i = it->next_(); !i->is_stop_(); i = it->next_())
@@ -502,7 +499,7 @@ private:
 						}
 					}
 					// local at/update name
-					flk->push_back_(symbol);
+					flock->push_back_(symbol);
 					bool insert = false;
 					cont = _update_(scope, shoal, fixed, cats, creation, flock, symbol, insert);
 					result = Expression::fin_(token, local, flock);
@@ -513,7 +510,7 @@ private:
 					{
 						_name_(flock);
 						bool insert = false;
-						cont = _update_(scope, shoal, fixed, cats, creation, flock, static_<Symbol>(symbol)->add_(flk->at_(0)), insert);
+						cont = _update_(scope, shoal, fixed, cats, creation, flock, static_<Symbol>(symbol)->add_(flock->at_(0)), insert);
 						if (cont)
 						{
 							result = Expression::fin_(token, sym_("shared_at_"), flock);
@@ -533,33 +530,33 @@ private:
 					}
 					else if (symbol->is_("|.")) // me dot
 					{
-						flk->push_back_(creation);
+						flock->push_back_(creation);
 						_dot_(scope, shoal, fixed, cats, creation, statement, flock, true); // me dot
-						result = Expression::fin_(token, smt->get_(), flock);
+						result = Expression::fin_(token, statement->get_(), flock);
 					}
 					else if (symbol->is_("|:.")) // me operation
 					{
-						flk->push_back_(creation);
+						flock->push_back_(creation);
 						_name_(flock);
 						result = Expression::fin_(token, sym_("intimation_"), flock);
 					}
 					else if (symbol->is_("|:")) // me creation at
 					{
-						flk->push_back_(creation);
+						flock->push_back_(creation);
 						_name_(flock);
 						result = Expression::fin_(token, sym_("me_creation_at_"), flock);
 					}
 					else if (symbol->is_("..")) // iterator
 					{
-						flk->push_back_(sym_("&"));
+						flock->push_back_(sym_("&"));
 						result = Expression::fin_(token, local, flock);
 					}
 					else if (symbol->is_("^^")) // iterator next
 					{
 						const Ptr nested = Flock::mut_();
 						static_<Flock>(nested)->push_back_(sym_("&"));
-						flk->push_back_(Expression::fin_(token, local, nested));
-						flk->push_back_(sym_("next"));
+						flock->push_back_(Expression::fin_(token, local, nested));
+						flock->push_back_(sym_("next"));
 						result = Expression::fin_(token, sym_("operate_"), flock);
 					}
 					else if (symbol->is_("$$") || symbol->is_("**")) // shared/relative scope
@@ -584,7 +581,7 @@ private:
 					{
 						if (_map_(scope, shoal, fixed, cats, creation, flock))
 						{
-							if (flk->size_() == 1 && flk->at_(0) == creation)
+							if (flock->size_() == 1 && flock->at_(0) == creation)
 							{
 								result = Expression::fin_(token, sym_("me_creation_"), flock);
 							}
@@ -624,10 +621,10 @@ private:
 				}
 				else
 				{
-					flk->push_back_(result);
+					flock->push_back_(result);
 					if (_thing_(scope, shoal, fixed, cats, creation, statement, flock))
 					{
-						result = Expression::fin_(token, smt->get_(), flock);
+						result = Expression::fin_(token, statement->get_(), flock);
 					}
 					else
 					{
