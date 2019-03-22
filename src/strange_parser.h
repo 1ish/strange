@@ -258,20 +258,9 @@ private:
 						{
 							if (flock->size_() % 3 == 0) // param :<cat>= default
 							{
-								const Ptr nested = Flock::mut_();
-								const auto nst = static_<Flock>(nested);
-								nst->push_back_(scope);
-								nst->push_back_(shoal);
-								const Ptr new_creation = Weak::mut_(nothing_());
-								nst->push_back_(new_creation);
-								if (_statement_(scope, shoal, new_fixed, new_cats, creation, nested))
-								{
-									nst->push_back_(_parse_(scope, shoal, new_fixed, new_cats, new_creation, false));
-									flock->push_back_(Expression::fin_(token, sym_("creation_"), nested));
-									result = Expression::fin_(token, Creation::fin_(Expression::fin_(token, symbol, flock)));
-									continue;
-								}
-								throw tok->error_("Parser ERROR: invalid creator_ creation_");
+								flock->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false, true)); // expose
+								result = Expression::fin_(token, Creation::fin_(Expression::fin_(token, symbol, flock)));
+								continue;
 							}
 							throw tok->error_("Parser ERROR: invalid creator_");
 						}
@@ -285,7 +274,9 @@ private:
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
 							flock->push_back_(_parse_(scope, shoal, fixed, cats, new_creation, false)); // right
-							result = Expression::fin_(token, Creation::fin_(Expression::fin_(token, symbol, flock)));
+							result = expose
+								? Expression::fin_(token, symbol, flock)
+								: Expression::fin_(token, Creation::fin_(Expression::fin_(token, symbol, flock)));
 							continue;
 						}
 						flock->clear_();
