@@ -1749,6 +1749,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Shoal", Static::fin_(&Shoal::creator_));
 		s->update_("strange::Shoal::mut", Static::fin_(&Shoal::mut));
 		s->update_("strange::Shoal::lak", Static::fin_(&Shoal::lak, "lake"));
 		s->update_("strange::Shoal::riv", Static::fin_(&Shoal::riv, "river"));
@@ -2115,6 +2116,7 @@ public:
 		static inline void share_(const Ptr& shoal)
 		{
 			const auto s = static_<Shoal>(shoal);
+			s->update_("strange::Shoal::Concurrent", Static::fin_(&Shoal::Concurrent::creator_));
 			s->update_("strange::Shoal::Concurrent::mut", Static::fin_(&Shoal::Concurrent::mut, "shoal"));
 		}
 
@@ -2522,6 +2524,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Flock", Static::fin_(&Flock::creator_));
 		s->update_("strange::Flock::mut", Static::fin_(&Flock::mut));
 		s->update_("strange::Flock::lak", Static::fin_(&Flock::lak, "lake"));
 		s->update_("strange::Flock::riv", Static::fin_(&Flock::riv, "river"));
@@ -2860,6 +2863,7 @@ public:
 		static inline void share_(const Ptr& shoal)
 		{
 			const auto s = static_<Shoal>(shoal);
+			s->update_("strange::Flock::Concurrent", Static::fin_(&Flock::Concurrent::creator_));
 			s->update_("strange::Flock::Concurrent::mut", Static::fin_(&Flock::Concurrent::mut, "flock"));
 		}
 
@@ -3215,6 +3219,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Herd", Static::fin_(&Herd::creator_));
 		s->update_("strange::Herd::mut", Static::fin_(&Herd::mut));
 		s->update_("strange::Herd::lak", Static::fin_(&Herd::lak, "lake"));
 		s->update_("strange::Herd::riv", Static::fin_(&Herd::riv, "river"));
@@ -3651,6 +3656,7 @@ public:
 		static inline void share_(const Ptr& shoal)
 		{
 			const auto s = static_<Shoal>(shoal);
+			s->update_("strange::Herd::Concurrent", Static::fin_(&Herd::Concurrent::creator_));
 			s->update_("strange::Herd::Concurrent::mut", Static::fin_(&Herd::Concurrent::mut, "herd"));
 		}
 
@@ -4358,6 +4364,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Lake", Static::fin_(&Lake::creator_));
 		s->update_("strange::Lake::mut", Static::fin_(&Lake::mut));
 		s->update_("strange::Lake::fin", Static::fin_(&Lake::fin));
 		s->update_("strange::Lake::lak", Static::fin_(&Lake::lak, "lake"));
@@ -5055,6 +5062,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Bit", Static::fin_(&Bit::creator_));
 		s->update_("strange::Bit::mut", Static::fin_(&Bit::mut));
 		s->update_("strange::Bit::fin", Static::fin_(&Bit::fin));
 		s->update_("strange::Bit::lak", Static::fin_(&Bit::lak, "lake"));
@@ -5416,6 +5424,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Int8", Static::fin_(&Int8::creator_));
 		s->update_("strange::Int8::mut", Static::fin_(&Int8::mut));
 		s->update_("strange::Int8::fin", Static::fin_(&Int8::fin));
 		s->update_("strange::Int8::lak", Static::fin_(&Int8::lak, "lake"));
@@ -5772,6 +5781,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::UInt8", Static::fin_(&UInt8::creator_));
 		s->update_("strange::UInt8::mut", Static::fin_(&UInt8::mut));
 		s->update_("strange::UInt8::fin", Static::fin_(&UInt8::fin));
 		s->update_("strange::UInt8::lak", Static::fin_(&UInt8::lak, "lake"));
@@ -6128,6 +6138,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Int16", Static::fin_(&Int16::creator_));
 		s->update_("strange::Int16::mut", Static::fin_(&Int16::mut));
 		s->update_("strange::Int16::fin", Static::fin_(&Int16::fin));
 		s->update_("strange::Int16::lak", Static::fin_(&Int16::lak, "lake"));
@@ -6490,6 +6501,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::UInt16", Static::fin_(&UInt16::creator_));
 		s->update_("strange::UInt16::mut", Static::fin_(&UInt16::mut));
 		s->update_("strange::UInt16::fin", Static::fin_(&UInt16::fin));
 		s->update_("strange::UInt16::lak", Static::fin_(&UInt16::lak, "lake"));
@@ -6852,6 +6864,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Int32", Static::fin_(&Int32::creator_));
 		s->update_("strange::Int32::mut", Static::fin_(&Int32::mut));
 		s->update_("strange::Int32::fin", Static::fin_(&Int32::fin));
 		s->update_("strange::Int32::lak", Static::fin_(&Int32::lak, "lake"));
@@ -7218,6 +7231,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::UInt32", Static::fin_(&UInt32::creator_));
 		s->update_("strange::UInt32::mut", Static::fin_(&UInt32::mut));
 		s->update_("strange::UInt32::fin", Static::fin_(&UInt32::fin));
 		s->update_("strange::UInt32::lak", Static::fin_(&UInt32::lak, "lake"));
@@ -7584,6 +7598,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Int64", Static::fin_(&Int64::creator_));
 		s->update_("strange::Int64::mut", Static::fin_(&Int64::mut));
 		s->update_("strange::Int64::fin", Static::fin_(&Int64::fin));
 		s->update_("strange::Int64::lak", Static::fin_(&Int64::lak, "lake"));
@@ -7958,6 +7973,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::UInt64", Static::fin_(&UInt64::creator_));
 		s->update_("strange::UInt64::mut", Static::fin_(&UInt64::mut));
 		s->update_("strange::UInt64::fin", Static::fin_(&UInt64::fin));
 		s->update_("strange::UInt64::lak", Static::fin_(&UInt64::lak, "lake"));
@@ -8414,6 +8430,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Float32", Static::fin_(&Float32::creator_));
 		s->update_("strange::Float32::mut", Static::fin_(&Float32::mut));
 		s->update_("strange::Float32::fin", Static::fin_(&Float32::fin));
 		s->update_("strange::Float32::lak", Static::fin_(&Float32::lak, "lake"));
@@ -8781,6 +8798,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Float64", Static::fin_(&Float64::creator_));
 		s->update_("strange::Float64::mut", Static::fin_(&Float64::mut));
 		s->update_("strange::Float64::fin", Static::fin_(&Float64::fin));
 		s->update_("strange::Float64::lak", Static::fin_(&Float64::lak, "lake"));
@@ -9164,6 +9182,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Complex32", Static::fin_(&Complex32::creator_));
 		s->update_("strange::Complex32::mut", Static::fin_(&Complex32::mut));
 		s->update_("strange::Complex32::fin", Static::fin_(&Complex32::fin));
 		s->update_("strange::Complex32::lak", Static::fin_(&Complex32::lak, "lake"));
@@ -9542,6 +9561,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Complex64", Static::fin_(&Complex64::creator_));
 		s->update_("strange::Complex64::mut", Static::fin_(&Complex64::mut));
 		s->update_("strange::Complex64::fin", Static::fin_(&Complex64::fin));
 		s->update_("strange::Complex64::lak", Static::fin_(&Complex64::lak, "lake"));
@@ -9952,6 +9972,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::River", Static::fin_(&River::creator_));
 		s->update_("strange::River::mut", Static::fin_(&River::mut, "lake", "is_file"));
 		s->update_("strange::River::in", Static::fin_(&River::in));
 		s->update_("strange::River::out", Static::fin_(&River::out));
@@ -10533,6 +10554,7 @@ inline const Thing::Ptr Symbol::creator_(const Ptr& ignore)
 inline void Symbol::share_(const Ptr& shoal)
 {
 	const auto s = static_<Shoal>(shoal);
+	s->update_("strange::Symbol", Static::fin_(&Symbol::creator_));
 	s->update_("strange::Symbol::lak", Static::fin_(&Symbol::lak, "lake"));
 	s->update_("strange::Symbol::riv", Static::fin_(&Symbol::riv, "river"));
 	s->update_("strange::Symbol::rwl", Static::fin_(&Symbol::rwl, "river"));
@@ -10634,6 +10656,8 @@ inline const Thing::Ptr Cat::fin_(const Ptr& type_name_symbol, const Ptr& argume
 
 inline void Cat::share_(const Ptr& shoal)
 {
+	const auto s = static_<Shoal>(shoal);
+	s->update_("strange::Cat", Static::fin_(&Cat::creator_));
 }
 
 inline const Thing::Ptr Cat::categories_()

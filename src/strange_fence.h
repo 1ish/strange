@@ -61,6 +61,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Fence", Static::fin_(&Fence::creator_));
 		s->update_("strange::Fence::mut", Static::fin_(&Fence::mut, "thing"));
 	}
 

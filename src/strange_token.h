@@ -116,6 +116,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Token", Static::fin_(&Token::creator_));
 		s->update_("strange::Token::fin", Static::fin_(&Token::fin, "filename", "x", "y", "tag", "symbol", "value"));
 	}
 

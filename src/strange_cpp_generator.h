@@ -53,7 +53,8 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
-		s->update_("strange::Generator::mut", Static::fin_(&CPPGenerator::mut, "river"));
+		s->update_("strange::CPPGenerator", Static::fin_(&CPPGenerator::creator_));
+		s->update_("strange::CPPGenerator::mut", Static::fin_(&CPPGenerator::mut, "river"));
 	}
 
 	virtual inline void generate_local_code_(const Token& tok, const std::vector<Ptr>& vec, const Ptr& me, River& riv) override

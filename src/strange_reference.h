@@ -69,6 +69,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Reference", Static::fin_(&Reference::creator_));
 		s->update_("strange::Reference::mut", Static::fin_(&Reference::mut, "thing"));
 	}
 

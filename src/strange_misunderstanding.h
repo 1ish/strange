@@ -62,6 +62,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Misunderstanding", Static::fin_(&Misunderstanding::creator_));
 		s->update_("strange::Misunderstanding::mut", Static::fin_(&Misunderstanding::mut, "thing", ".."));
 	}
 

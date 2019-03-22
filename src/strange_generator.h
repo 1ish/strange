@@ -58,6 +58,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Generator", Static::fin_(&Generator::creator_));
 		s->update_("strange::Generator::mut", Static::fin_(&Generator::mut, "river"));
 	}
 

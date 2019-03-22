@@ -2015,6 +2015,7 @@ public:
 	static inline void share_(const Ptr& shoal)
 	{
 		const auto s = static_<Shoal>(shoal);
+		s->update_("strange::Creature", Static::fin_(&Creature::creator_));
 		s->update_("strange::Creature::mut", Static::fin_(&Creature::mut, "creation"));
 	}
 
