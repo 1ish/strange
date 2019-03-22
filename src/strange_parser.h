@@ -308,14 +308,16 @@ private:
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Fixed::fin_(Expression::fin_(token)));
-								continue;
 							}
 							else if (size == 1)
 							{
 								result = Expression::fin_(token, Fixed::fin_(flk->at_(0)));
-								continue;
 							}
-							throw tok->error_("Parser Error: invalid fixed_");
+							else
+							{
+								result = Expression::fin_(token, Fixed::fin_(Expression::fin_(token, sym_("block_"), flock)));
+							}
+							continue;
 						}
 					}
 					else if (symbol->is_("mutable_"))
@@ -326,14 +328,16 @@ private:
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Mutable::fin_(Expression::fin_(token)));
-								continue;
 							}
 							else if (size == 1)
 							{
 								result = Expression::fin_(token, Mutable::fin_(flk->at_(0)));
-								continue;
 							}
-							throw tok->error_("Parser Error: invalid mutable_");
+							else
+							{
+								result = Expression::fin_(token, Mutable::fin_(Expression::fin_(token, sym_("block_"), flock)));
+							}
+							continue;
 						}
 					}
 					else if (symbol->is_("variable_"))
@@ -344,14 +348,16 @@ private:
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Variable::fin_(Expression::fin_(token)));
-								continue;
 							}
 							else if (size == 1)
 							{
 								result = Expression::fin_(token, Variable::fin_(flk->at_(0)));
-								continue;
 							}
-							throw tok->error_("Parser Error: invalid variable_");
+							else
+							{
+								result = Expression::fin_(token, Variable::fin_(Expression::fin_(token, sym_("block_"), flock)));
+							}
+							continue;
 						}
 					}
 					else if (symbol->is_("changeable_"))
@@ -362,14 +368,16 @@ private:
 							if (size == 0)
 							{
 								result = Expression::fin_(token, Changeable::fin_(Expression::fin_(token)));
-								continue;
 							}
 							else if (size == 1)
 							{
 								result = Expression::fin_(token, Changeable::fin_(flk->at_(0)));
-								continue;
 							}
-							throw tok->error_("Parser Error: invalid changeable_");
+							else
+							{
+								result = Expression::fin_(token, Changeable::fin_(Expression::fin_(token, sym_("block_"), flock)));
+							}
+							continue;
 						}
 					}
 					else if (symbol->is_("break_") || symbol->is_("continue_") || symbol->is_("return_") || symbol->is_("throw_"))
@@ -380,14 +388,19 @@ private:
 							if (size == 0)
 							{
 								_wrap_(token, nothing_(), flock);
-								continue;
+								result = Expression::fin_(token, symbol, flock);
 							}
 							else if (size == 1)
 							{
 								result = Expression::fin_(token, symbol, flock);
-								continue;
 							}
-							throw tok->error_("Parser ERROR: invalid break_/continue_/return_/throw_");
+							else
+							{
+								const auto nested = static_<Flock>(Flock::mut_());
+								nested->push_back_(Expression::fin_(token, sym_("block_"), flock));
+								result = Expression::fin_(token, symbol, nested);
+							}
+							continue;
 						}
 					}
 					else if (symbol->is_("error_"))
@@ -427,13 +440,26 @@ private:
 					{
 						if (_statement_(scope, shoal, fixed, cats, creation, flock))
 						{
-							if (flk->size_() == 1)
+							const int64_t size = flk->size_();
+							if (size == 0)
+							{
+								_wrap_(token, nothing_(), flock);
+								flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
+								result = Expression::fin_(token, symbol, flock);
+							}
+							else if (size == 1)
 							{
 								flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
 								result = Expression::fin_(token, symbol, flock);
-								continue;
 							}
-							throw tok->error_("Parser ERROR: invalid while_/do_");
+							else
+							{
+								const auto nested = static_<Flock>(Flock::mut_());
+								nested->push_back_(Expression::fin_(token, sym_("block_"), flock));
+								nested->push_back_(_parse_(scope, shoal, fixed, cats, creation, false));
+								result = Expression::fin_(token, symbol, nested);
+							}
+							continue;
 						}
 					}
 					else if (symbol->is_("for_"))
