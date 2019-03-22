@@ -156,7 +156,7 @@ private:
 		static_<Flock>(flock)->push_back_(Expression::fin_(token, thing));
 	}
 
-	inline const Ptr _parse_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const bool right)
+	inline const Ptr _parse_(const Ptr& scope, const Ptr& shoal, const Ptr& fixed, const Ptr& cats, const Ptr& creation, const bool right, const bool expose = false)
 	{
 		Ptr token;
 		Ptr result;
@@ -196,32 +196,25 @@ private:
 						{
 							if (flock->size_() % 3 == 0) // param :<cat>= capture
 							{
-								const auto nested = static_<Flock>(Flock::mut_());
-								if (_statement_(scope, shoal, new_fixed, new_cats, creation, nested, true)) // parameters
-								{
-									if (nested->size_() % 3 == 0) // param :<cat>= default
-									{
-										nested->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
-										flock->push_back_(Expression::fin_(token, sym_("function_"), nested));
-										result = Expression::fin_(token, symbol, flock);
-										continue;
-									}
-								}
-								throw tok->error_("Parser ERROR: invalid lambda_ function_");
+								flock->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false, true)); // expose
+								result = Expression::fin_(token, symbol, flock);
+								continue;
 							}
 							throw tok->error_("Parser ERROR: invalid lambda_");
 						}
 					}
 					else if (symbol->is_("function_"))
 					{
-						const Ptr new_fixed = Herd::mut_();
-						const Ptr new_cats = Shoal::mut_();
+						const Ptr new_fixed = expose ? fixed : Herd::mut_();
+						const Ptr new_cats = expose ? cats : Shoal::mut_();
 						if (_statement_(scope, shoal, new_fixed, new_cats, creation, flock, true)) // parameters
 						{
 							if (flock->size_() % 3 == 0) // param :<cat>= default
 							{
 								flock->push_back_(_parse_(scope, shoal, new_fixed, new_cats, creation, false));
-								result = Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
+								result = expose
+									? Expression::fin_(token, symbol, flock)
+									: Expression::fin_(token, Function::fin_(Expression::fin_(token, symbol, flock)));
 								continue;
 							}
 							throw tok->error_("Parser ERROR: invalid function_");
