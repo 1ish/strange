@@ -175,7 +175,7 @@ private:
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			const Ptr value = Expression::evaluate_(vec[2], local);
-			if (!Cat::check_(value, vec[1]))
+			if (!Cat::check_(value, Expression::evaluate_(vec[1], local)))
 			{
 				throw _stack_("local assigned wrong kind of thing");
 			}
@@ -199,7 +199,7 @@ private:
 		{
 			const std::vector<Ptr>& vec = static_<Flock>(_flock)->get_();
 			const Ptr value = Expression::evaluate_(vec[2], local);
-			if (!Cat::check_(value, vec[1]))
+			if (!Cat::check_(value, Expression::evaluate_(vec[1], local)))
 			{
 				throw _stack_("shared local assigned wrong kind of thing");
 			}
@@ -223,7 +223,7 @@ private:
 			if (existing->is_nothing_())
 			{
 				const Ptr value = Expression::evaluate_(vec[2], local);
-				if (!Cat::check_(value, vec[1]))
+				if (!Cat::check_(value, Expression::evaluate_(vec[1], local)))
 				{
 					throw _stack_("shared local assigned wrong kind of thing");
 				}
@@ -486,7 +486,7 @@ private:
 				{
 					value = Expression::evaluate_(vec[i + 2], local); // default
 				}
-				if (!Cat::check_(value, vec[i + 1]))
+				if (!Cat::check_(value, Expression::evaluate_(vec[i + 1], local)))
 				{
 					throw _stack_("function passed wrong kind of thing");
 				}
@@ -1030,7 +1030,14 @@ protected:
 
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-		return static_<Expression>(_expression)->evaluate_(_expression, nothing_());
+		static const Ptr LOCAL = []() {
+			const auto local = static_<Shoal>(Shoal::mut_());
+			local->insert_("$", Shoal::Concurrent::mut_());
+			local->insert_("&", nothing_());
+			local->freeze_();
+			return local;
+		}();
+		return Expression::evaluate_(_expression, LOCAL);
 	}
 };
 
@@ -1107,11 +1114,10 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-		const Ptr local = Shoal::mut_();
-		const auto loc = static_<Shoal>(local);
-		loc->insert_("$", _shared);
-		loc->insert_("&", it);
-		return static_<Expression>(_expression)->evaluate_(_expression, local);
+		const auto local = static_<Shoal>(Shoal::mut_());
+		local->insert_("$", _shared);
+		local->insert_("&", it);
+		return Expression::evaluate_(_expression, local);
 	}
 
 private:
@@ -1193,7 +1199,7 @@ protected:
 	{
 		const Ptr local = _local->copy_();
 		static_<Shoal>(local)->insert_("&", it);
-		return static_<Expression>(_expression)->evaluate_(_expression, local);
+		return Expression::evaluate_(_expression, local);
 	}
 
 private:
@@ -1277,12 +1283,11 @@ protected:
 		{
 			throw Mutilation(thing->cat_());
 		}
-		const Ptr local = Shoal::mut_();
-		const auto loc = static_<Shoal>(local);
-		loc->insert_("$", _shared);
-		loc->insert_("&", it);
-		loc->insert_("|", thing->me_());
-		return static_<Expression>(_expression)->evaluate_(_expression, local);
+		const auto local = static_<Shoal>(Shoal::mut_());
+		local->insert_("$", _shared);
+		local->insert_("&", it);
+		local->insert_("|", thing->me_());
+		return Expression::evaluate_(_expression, local);
 	}
 
 private:
@@ -1362,12 +1367,11 @@ public:
 protected:
 	virtual inline const Ptr operator()(Thing* const thing, const Ptr& it) override
 	{
-		const Ptr local = Shoal::mut_();
-		const auto loc = static_<Shoal>(local);
-		loc->insert_("$", _shared);
-		loc->insert_("&", it);
-		loc->insert_("|", thing->me_());
-		return static_<Expression>(_expression)->evaluate_(_expression, local);
+		const auto local = static_<Shoal>(Shoal::mut_());
+		local->insert_("$", _shared);
+		local->insert_("&", it);
+		local->insert_("|", thing->me_());
+		return Expression::evaluate_(_expression, local);
 	}
 
 private:
@@ -1462,7 +1466,7 @@ protected:
 		const auto local = static_<Shoal>(Shoal::mut_());
 		local->insert_("$", _shared);
 		local->insert_("&", it);
-		const Ptr creation = static_<Expression>(_expression)->evaluate_(_expression, local);
+		const Ptr creation = Expression::evaluate_(_expression, local);
 		{
 			std::unique_lock<std::shared_timed_mutex> lock(_mutex);
 			cache->insert_(kat, creation);
@@ -1695,7 +1699,7 @@ private:
 		loc->insert_("$", Shoal::Concurrent::mut_());
 		loc->insert_("&", stop_());
 		loc->insert_("|", thing);
-		_value = _actual_(static_<Expression>(_expression)->evaluate_(_expression, local));
+		_value = _actual_(Expression::evaluate_(_expression, local));
 	}
 };
 
@@ -3079,7 +3083,7 @@ inline const Thing::Ptr Expression::_lambda_(const Ptr& local) const
 		for (std::size_t i = 0; i < size_1; i += 3)
 		{
 			const Ptr value = Expression::evaluate_(vec[i + 2], local);
-			if (!Cat::check_(value, vec[i + 1]))
+			if (!Cat::check_(value, Expression::evaluate_(vec[i + 1], local)))
 			{
 				throw _stack_("lambda captured wrong kind of thing");
 			}
@@ -3121,7 +3125,7 @@ inline const Thing::Ptr Expression::_creator_(const Ptr& local) const
 			{
 				value = Expression::evaluate_(vec[i + 2], local);
 			}
-			if (!Cat::check_(value, vec[i + 1]))
+			if (!Cat::check_(value, Expression::evaluate_(vec[i + 1], local)))
 			{
 				throw _stack_("creator passed wrong kind of thing");
 			}

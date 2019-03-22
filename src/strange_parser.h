@@ -1155,7 +1155,7 @@ private:
 					{
 						if (cat)
 						{
-							flk->push_back_(Cat::fin_()); // any cat
+							_wrap_(token, Cat::fin_(), flock); // any cat
 							cat = false;
 						}
 						if (capture)
@@ -1229,11 +1229,12 @@ private:
 							{
 								throw tok->error_("Parser ERROR: list not expecting cat");
 							}
+							const Ptr exp = Expression::fin_(token, Cat::fin_()); // any cat
 							if (!name->is_("|"))
 							{
-								cats_shoal->insert_(name, Cat::fin_());
+								cats_shoal->insert_(name, exp);
 							}
-							flk->push_back_(Cat::fin_()); // any cat
+							flk->push_back_(exp);
 							cat = false;
 							parameter = false;
 						}
@@ -1241,7 +1242,7 @@ private:
 						{
 							bool close_close = false;
 							bool close_assign = true;
-							const Ptr nest = _cat_nest_(false, scope, shoal, fixed, cats, creation, close_close, close_assign);
+							const Ptr nest = _cat_nest_(true, scope, shoal, fixed, cats, creation, close_close, close_assign);
 							if (!name->is_("|"))
 							{
 								cats_shoal->insert_(name, nest);
@@ -1264,7 +1265,7 @@ private:
 							{
 								throw tok->error_("Parser ERROR: parameter cats cannot be a shoal");
 							}
-							const Ptr herd = Expression::immediate_(Expression::fin_(token, sym_("herd_"), herd_flock));
+							const Ptr herd = Expression::fin_(token, sym_("herd_"), herd_flock);
 							if (!name->is_("|"))
 							{
 								cats_shoal->insert_(name, herd);
@@ -1905,8 +1906,9 @@ private:
 			if (symbol->is_(":=") || symbol->is_("#="))
 			{
 				_next_();
-				cats_shoal->insert_(name, Cat::fin_());
-				flk->push_back_(Cat::fin_());
+				const Ptr exp = Expression::fin_(token, Cat::fin_()); // any cat
+				cats_shoal->insert_(name, exp);
+				flk->push_back_(exp);
 				flk->push_back_(_parse_(scope, shoal, fixed, cats, creation, true));
 				return false; // break
 			}
@@ -1915,7 +1917,7 @@ private:
 				_next_();
 				bool close_close = false;
 				bool close_assign = true;
-				const Ptr nest = _cat_nest_(false, scope, shoal, fixed, cats, creation, close_close, close_assign);
+				const Ptr nest = _cat_nest_(true, scope, shoal, fixed, cats, creation, close_close, close_assign);
 				cats_shoal->insert_(name, nest);
 				if (close_assign || _update_cat_())
 				{
@@ -1932,7 +1934,7 @@ private:
 				{
 					throw tok->error_("Parser ERROR: name cats cannot be a shoal");
 				}
-				const Ptr herd = Expression::immediate_(Expression::fin_(token, sym_("herd_"), herd_flock));
+				const Ptr herd = Expression::fin_(token, sym_("herd_"), herd_flock);
 				cats_shoal->insert_(name, herd);
 				if (_update_cat_())
 				{
