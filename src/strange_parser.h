@@ -1265,7 +1265,9 @@ private:
 							{
 								throw tok->error_("Parser ERROR: parameter cats cannot be a shoal");
 							}
-							const Ptr herd = Expression::fin_(token, sym_("herd_"), herd_flock);
+							const Ptr herd = (herd_flock->size_() == 1)
+								? herd_flock->at_(0)
+								: Expression::fin_(token, sym_("herd_"), herd_flock);
 							if (!name->is_("|"))
 							{
 								cats_shoal->insert_(name, herd);
@@ -1934,7 +1936,9 @@ private:
 				{
 					throw tok->error_("Parser ERROR: name cats cannot be a shoal");
 				}
-				const Ptr herd = Expression::fin_(token, sym_("herd_"), herd_flock);
+				const Ptr herd = (herd_flock->size_() == 1)
+					? herd_flock->at_(0)
+					: Expression::fin_(token, sym_("herd_"), herd_flock);
 				cats_shoal->insert_(name, herd);
 				if (_update_cat_())
 				{

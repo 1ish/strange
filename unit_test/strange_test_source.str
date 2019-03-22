@@ -20,7 +20,7 @@
 				|.c := <constructed[|.c]>,
 				|
 			),
-			'addition':extraction_(a:<strange::Number>, b:<strange::Number>)
+			'addition':extraction_(a:<strange::Number>, b:{|:_T})
 			(
 				a+b*3
 			),
@@ -32,7 +32,7 @@
 			'_mem':function_()(7)
 		}
 	},
-	ar := $$Arithmetic[<xxx>]@:mut[],
+	ar := $$Arithmetic[<strange::Number>]@:mut[],
 	out.write[ar.addition[2, 2].to_symbol[], "\n"],
 	out.write[ar.f, "\n"],
 	out.write[ar.v, "\n"],
