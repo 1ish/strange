@@ -22,6 +22,12 @@ TEST(TestCaseName, ForLoop) {
 	for (auto i : n)
 	{
 	}
+
+	Oneish o;
+	for (auto i : o)
+	{
+	}
+
 	EXPECT_TRUE(true);
 }
 /*

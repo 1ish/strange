@@ -21,6 +21,9 @@ public:
 	bool operator==(Thing thing) const;
 	bool operator!=(Thing thing) const;
 
+	Thing is_something(Thing thing) const;
+	bool is_something_() const;
+
 	Thing is_nothing(Thing thing) const;
 	bool is_nothing_() const;
 

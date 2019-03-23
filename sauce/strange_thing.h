@@ -80,6 +80,10 @@ namespace strange {
         { assert(handle_); return read().operator==(thing ); }
         bool operator != ( Thing thing ) const
         { assert(handle_); return read().operator!=(thing ); }
+        Thing is_something ( Thing thing ) const
+        { assert(handle_); return read().is_something(thing ); }
+        bool is_something_ ( ) const
+        { assert(handle_); return read().is_something_( ); }
         Thing is_nothing ( Thing thing ) const
         { assert(handle_); return read().is_nothing(thing ); }
         bool is_nothing_ ( ) const
@@ -130,6 +134,8 @@ namespace strange {
             virtual Thing different ( Thing thing ) const = 0;
             virtual bool operator == ( Thing thing ) const = 0;
             virtual bool operator != ( Thing thing ) const = 0;
+            virtual Thing is_something ( Thing thing ) const = 0;
+            virtual bool is_something_ ( ) const = 0;
             virtual Thing is_nothing ( Thing thing ) const = 0;
             virtual bool is_nothing_ ( ) const = 0;
             virtual Thing begin ( Thing thing ) = 0;
@@ -212,6 +218,10 @@ namespace strange {
             { return value_.operator==(thing ); }
             virtual bool operator != ( Thing thing ) const
             { return value_.operator!=(thing ); }
+            virtual Thing is_something ( Thing thing ) const
+            { return value_.is_something(thing ); }
+            virtual bool is_something_ ( ) const
+            { return value_.is_something_( ); }
             virtual Thing is_nothing ( Thing thing ) const
             { return value_.is_nothing(thing ); }
             virtual bool is_nothing_ ( ) const
