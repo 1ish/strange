@@ -2,21 +2,21 @@
 
 //#define STRANGE_TEST_VERBOSE 1
 
-#include "../src/strange.h"
+#include "../sauce/strange.h"
 
 namespace
 {
-	const std::string test_dir = "../../strange/unit_test/";
+	const std::string test_dir = "../../strange/taste/";
 }
 
 using namespace strange;
-using Ptr = Thing::Ptr;
+//using Ptr = Thing::Ptr;
 
 TEST(TestCaseName, TestName) {
   EXPECT_EQ(1, 1);
   EXPECT_TRUE(true);
 }
-
+/*
 TEST(StrangeThing, Dismemberment) {
 	EXPECT_THROW({
 		const Ptr symbol = Thing::sym_("symbol");
@@ -208,3 +208,4 @@ TEST(StrangeParser, Evaluate) {
 	}
 	EXPECT_EQ(error, "");
 }
+*/
