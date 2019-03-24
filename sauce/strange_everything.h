@@ -126,6 +126,12 @@ public:
 	{
 		return Everything::val();
 	}
+
+	// symbol
+	inline std::size_t hash_() const
+	{
+		return 0;
+	}
 };
 
 } // namespace strange

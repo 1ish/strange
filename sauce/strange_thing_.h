@@ -60,53 +60,53 @@ namespace strange {
 
     
 
-        thing_ mutate ( thing_ thing )
+        inline thing_ mutate ( thing_ thing )
         { assert(handle_); return write().mutate(thing ); }
-        thing_ extract ( thing_ thing ) const
+        inline thing_ extract ( thing_ thing ) const
         { assert(handle_); return read().extract(thing ); }
-        thing_ operator ( ) ( thing_ thing )
+        inline thing_ operator ( ) ( thing_ thing )
         { assert(handle_); return write().operator()(thing ); }
-        thing_ operator ( ) ( thing_ thing ) const
+        inline thing_ operator ( ) ( thing_ thing ) const
         { assert(handle_); return read().operator()(thing ); }
-        thing_ same ( thing_ thing ) const
+        inline thing_ same ( thing_ thing ) const
         { assert(handle_); return read().same(thing ); }
-        thing_ different ( thing_ thing ) const
+        inline thing_ different ( thing_ thing ) const
         { assert(handle_); return read().different(thing ); }
-        bool operator == ( thing_ thing ) const
+        inline bool operator == ( thing_ thing ) const
         { assert(handle_); return read().operator==(thing ); }
-        bool operator != ( thing_ thing ) const
+        inline bool operator != ( thing_ thing ) const
         { assert(handle_); return read().operator!=(thing ); }
-        thing_ is_something ( thing_ _ ) const
+        inline thing_ is_something ( thing_ _ ) const
         { assert(handle_); return read().is_something(_ ); }
-        bool is_something_ ( ) const
+        inline bool is_something_ ( ) const
         { assert(handle_); return read().is_something_( ); }
-        thing_ is_nothing ( thing_ _ ) const
+        inline thing_ is_nothing ( thing_ _ ) const
         { assert(handle_); return read().is_nothing(_ ); }
-        bool is_nothing_ ( ) const
+        inline bool is_nothing_ ( ) const
         { assert(handle_); return read().is_nothing_( ); }
-        thing_ begin ( thing_ _ )
+        inline thing_ begin ( thing_ _ )
         { assert(handle_); return write().begin(_ ); }
-        thing_ cbegin ( thing_ _ ) const
+        inline thing_ cbegin ( thing_ _ ) const
         { assert(handle_); return read().cbegin(_ ); }
-        thing_ end ( thing_ _ )
+        inline thing_ end ( thing_ _ )
         { assert(handle_); return write().end(_ ); }
-        thing_ cend ( thing_ _ ) const
+        inline thing_ cend ( thing_ _ ) const
         { assert(handle_); return read().cend(_ ); }
-        thing_ set ( thing_ thing )
+        inline thing_ set ( thing_ thing )
         { assert(handle_); return write().set(thing ); }
-        thing_ get ( thing_ _ ) const
+        inline thing_ get ( thing_ _ ) const
         { assert(handle_); return read().get(_ ); }
-        thing_ & operator * ( )
+        inline thing_ & operator * ( )
         { assert(handle_); return write().operator*( ); }
-        const thing_ & operator * ( ) const
+        inline const thing_ & operator * ( ) const
         { assert(handle_); return read().operator*( ); }
-        thing_ * operator -> ( )
+        inline thing_ * operator -> ( )
         { assert(handle_); return write().operator->( ); }
-        const thing_ * operator -> ( ) const
+        inline const thing_ * operator -> ( ) const
         { assert(handle_); return read().operator->( ); }
-        thing_ increment ( thing_ _ )
+        inline thing_ increment ( thing_ _ )
         { assert(handle_); return write().increment(_ ); }
-        thing_ & operator ++ ( )
+        inline thing_ & operator ++ ( )
         { assert(handle_); return write().operator++( ); }
     
 
@@ -122,30 +122,30 @@ namespace strange {
 
     
 
-            virtual thing_ mutate ( thing_ thing ) = 0;
-            virtual thing_ extract ( thing_ thing ) const = 0;
-            virtual thing_ operator ( ) ( thing_ thing ) = 0;
-            virtual thing_ operator ( ) ( thing_ thing ) const = 0;
-            virtual thing_ same ( thing_ thing ) const = 0;
-            virtual thing_ different ( thing_ thing ) const = 0;
-            virtual bool operator == ( thing_ thing ) const = 0;
-            virtual bool operator != ( thing_ thing ) const = 0;
-            virtual thing_ is_something ( thing_ _ ) const = 0;
-            virtual bool is_something_ ( ) const = 0;
-            virtual thing_ is_nothing ( thing_ _ ) const = 0;
-            virtual bool is_nothing_ ( ) const = 0;
-            virtual thing_ begin ( thing_ _ ) = 0;
-            virtual thing_ cbegin ( thing_ _ ) const = 0;
-            virtual thing_ end ( thing_ _ ) = 0;
-            virtual thing_ cend ( thing_ _ ) const = 0;
-            virtual thing_ set ( thing_ thing ) = 0;
-            virtual thing_ get ( thing_ _ ) const = 0;
-            virtual thing_ & operator * ( ) = 0;
-            virtual const thing_ & operator * ( ) const = 0;
-            virtual thing_ * operator -> ( ) = 0;
-            virtual const thing_ * operator -> ( ) const = 0;
-            virtual thing_ increment ( thing_ _ ) = 0;
-            virtual thing_ & operator ++ ( ) = 0;
+            virtual inline thing_ mutate ( thing_ thing ) = 0;
+            virtual inline thing_ extract ( thing_ thing ) const = 0;
+            virtual inline thing_ operator ( ) ( thing_ thing ) = 0;
+            virtual inline thing_ operator ( ) ( thing_ thing ) const = 0;
+            virtual inline thing_ same ( thing_ thing ) const = 0;
+            virtual inline thing_ different ( thing_ thing ) const = 0;
+            virtual inline bool operator == ( thing_ thing ) const = 0;
+            virtual inline bool operator != ( thing_ thing ) const = 0;
+            virtual inline thing_ is_something ( thing_ _ ) const = 0;
+            virtual inline bool is_something_ ( ) const = 0;
+            virtual inline thing_ is_nothing ( thing_ _ ) const = 0;
+            virtual inline bool is_nothing_ ( ) const = 0;
+            virtual inline thing_ begin ( thing_ _ ) = 0;
+            virtual inline thing_ cbegin ( thing_ _ ) const = 0;
+            virtual inline thing_ end ( thing_ _ ) = 0;
+            virtual inline thing_ cend ( thing_ _ ) const = 0;
+            virtual inline thing_ set ( thing_ thing ) = 0;
+            virtual inline thing_ get ( thing_ _ ) const = 0;
+            virtual inline thing_ & operator * ( ) = 0;
+            virtual inline const thing_ & operator * ( ) const = 0;
+            virtual inline thing_ * operator -> ( ) = 0;
+            virtual inline const thing_ * operator -> ( ) const = 0;
+            virtual inline thing_ increment ( thing_ _ ) = 0;
+            virtual inline thing_ & operator ++ ( ) = 0;
         };
 
     
@@ -198,53 +198,53 @@ namespace strange {
 
     
 
-            virtual thing_ mutate ( thing_ thing )
+            virtual inline thing_ mutate ( thing_ thing )
             { return value_.mutate(thing ); }
-            virtual thing_ extract ( thing_ thing ) const
+            virtual inline thing_ extract ( thing_ thing ) const
             { return value_.extract(thing ); }
-            virtual thing_ operator ( ) ( thing_ thing )
+            virtual inline thing_ operator ( ) ( thing_ thing )
             { return value_.operator()(thing ); }
-            virtual thing_ operator ( ) ( thing_ thing ) const
+            virtual inline thing_ operator ( ) ( thing_ thing ) const
             { return value_.operator()(thing ); }
-            virtual thing_ same ( thing_ thing ) const
+            virtual inline thing_ same ( thing_ thing ) const
             { return value_.same(thing ); }
-            virtual thing_ different ( thing_ thing ) const
+            virtual inline thing_ different ( thing_ thing ) const
             { return value_.different(thing ); }
-            virtual bool operator == ( thing_ thing ) const
+            virtual inline bool operator == ( thing_ thing ) const
             { return value_.operator==(thing ); }
-            virtual bool operator != ( thing_ thing ) const
+            virtual inline bool operator != ( thing_ thing ) const
             { return value_.operator!=(thing ); }
-            virtual thing_ is_something ( thing_ _ ) const
+            virtual inline thing_ is_something ( thing_ _ ) const
             { return value_.is_something(_ ); }
-            virtual bool is_something_ ( ) const
+            virtual inline bool is_something_ ( ) const
             { return value_.is_something_( ); }
-            virtual thing_ is_nothing ( thing_ _ ) const
+            virtual inline thing_ is_nothing ( thing_ _ ) const
             { return value_.is_nothing(_ ); }
-            virtual bool is_nothing_ ( ) const
+            virtual inline bool is_nothing_ ( ) const
             { return value_.is_nothing_( ); }
-            virtual thing_ begin ( thing_ _ )
+            virtual inline thing_ begin ( thing_ _ )
             { return value_.begin(_ ); }
-            virtual thing_ cbegin ( thing_ _ ) const
+            virtual inline thing_ cbegin ( thing_ _ ) const
             { return value_.cbegin(_ ); }
-            virtual thing_ end ( thing_ _ )
+            virtual inline thing_ end ( thing_ _ )
             { return value_.end(_ ); }
-            virtual thing_ cend ( thing_ _ ) const
+            virtual inline thing_ cend ( thing_ _ ) const
             { return value_.cend(_ ); }
-            virtual thing_ set ( thing_ thing )
+            virtual inline thing_ set ( thing_ thing )
             { return value_.set(thing ); }
-            virtual thing_ get ( thing_ _ ) const
+            virtual inline thing_ get ( thing_ _ ) const
             { return value_.get(_ ); }
-            virtual thing_ & operator * ( )
+            virtual inline thing_ & operator * ( )
             { return value_.operator*( ); }
-            virtual const thing_ & operator * ( ) const
+            virtual inline const thing_ & operator * ( ) const
             { return value_.operator*( ); }
-            virtual thing_ * operator -> ( )
+            virtual inline thing_ * operator -> ( )
             { return value_.operator->( ); }
-            virtual const thing_ * operator -> ( ) const
+            virtual inline const thing_ * operator -> ( ) const
             { return value_.operator->( ); }
-            virtual thing_ increment ( thing_ _ )
+            virtual inline thing_ increment ( thing_ _ )
             { return value_.increment(_ ); }
-            virtual thing_ & operator ++ ( )
+            virtual inline thing_ & operator ++ ( )
             { return value_.operator++( ); }
     
 
