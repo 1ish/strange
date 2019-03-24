@@ -1,5 +1,5 @@
-#ifndef COM_ONEISH_STRANGE_THING_H
-#define COM_ONEISH_STRANGE_THING_H
+#ifndef COM_ONEISH_STRANGE_THING__HPP
+#define COM_ONEISH_STRANGE_THING__HPP
 
 #include <algorithm>
 #include <cassert>
@@ -16,7 +16,7 @@
 
 namespace strange {
     
-    class Thing
+    class thing_
 
     {
 
@@ -24,13 +24,13 @@ namespace strange {
 
         // Contructors
 
-        Thing () = default;
+        thing_ () = default;
 
     
 
         template <typename T>
 
-        Thing (T value) :
+        thing_ (T value) :
 
             handle_ (
 
@@ -50,11 +50,11 @@ namespace strange {
 
         template <typename T>
 
-        Thing & operator= (T value)
+        thing_ & operator= (T value)
 
         {
 
-            Thing temp(std::move(value));
+            thing_ temp(std::move(value));
 
             std::swap(temp.handle_, handle_);
 
@@ -64,53 +64,53 @@ namespace strange {
 
     
 
-        Thing mutate ( Thing thing )
+        thing_ mutate ( thing_ thing )
         { assert(handle_); return write().mutate(thing ); }
-        Thing extract ( Thing thing ) const
+        thing_ extract ( thing_ thing ) const
         { assert(handle_); return read().extract(thing ); }
-        Thing operator ( ) ( Thing thing )
+        thing_ operator ( ) ( thing_ thing )
         { assert(handle_); return write().operator()(thing ); }
-        Thing operator ( ) ( Thing thing ) const
+        thing_ operator ( ) ( thing_ thing ) const
         { assert(handle_); return read().operator()(thing ); }
-        Thing same ( Thing thing ) const
+        thing_ same ( thing_ thing ) const
         { assert(handle_); return read().same(thing ); }
-        Thing different ( Thing thing ) const
+        thing_ different ( thing_ thing ) const
         { assert(handle_); return read().different(thing ); }
-        bool operator == ( Thing thing ) const
+        bool operator == ( thing_ thing ) const
         { assert(handle_); return read().operator==(thing ); }
-        bool operator != ( Thing thing ) const
+        bool operator != ( thing_ thing ) const
         { assert(handle_); return read().operator!=(thing ); }
-        Thing is_something ( Thing _ ) const
+        thing_ is_something ( thing_ _ ) const
         { assert(handle_); return read().is_something(_ ); }
         bool is_something_ ( ) const
         { assert(handle_); return read().is_something_( ); }
-        Thing is_nothing ( Thing _ ) const
+        thing_ is_nothing ( thing_ _ ) const
         { assert(handle_); return read().is_nothing(_ ); }
         bool is_nothing_ ( ) const
         { assert(handle_); return read().is_nothing_( ); }
-        Thing begin ( Thing _ )
+        thing_ begin ( thing_ _ )
         { assert(handle_); return write().begin(_ ); }
-        Thing cbegin ( Thing _ ) const
+        thing_ cbegin ( thing_ _ ) const
         { assert(handle_); return read().cbegin(_ ); }
-        Thing end ( Thing _ )
+        thing_ end ( thing_ _ )
         { assert(handle_); return write().end(_ ); }
-        Thing cend ( Thing _ ) const
+        thing_ cend ( thing_ _ ) const
         { assert(handle_); return read().cend(_ ); }
-        Thing set ( Thing thing )
+        thing_ set ( thing_ thing )
         { assert(handle_); return write().set(thing ); }
-        Thing get ( Thing _ ) const
+        thing_ get ( thing_ _ ) const
         { assert(handle_); return read().get(_ ); }
-        Thing & operator * ( )
+        thing_ & operator * ( )
         { assert(handle_); return write().operator*( ); }
-        const Thing & operator * ( ) const
+        const thing_ & operator * ( ) const
         { assert(handle_); return read().operator*( ); }
-        Thing * operator -> ( )
+        thing_ * operator -> ( )
         { assert(handle_); return write().operator->( ); }
-        const Thing * operator -> ( ) const
+        const thing_ * operator -> ( ) const
         { assert(handle_); return read().operator->( ); }
-        Thing increment ( Thing _ )
+        thing_ increment ( thing_ _ )
         { assert(handle_); return write().increment(_ ); }
-        Thing & operator ++ ( )
+        thing_ & operator ++ ( )
         { assert(handle_); return write().operator++( ); }
     
 
@@ -126,30 +126,30 @@ namespace strange {
 
     
 
-            virtual Thing mutate ( Thing thing ) = 0;
-            virtual Thing extract ( Thing thing ) const = 0;
-            virtual Thing operator ( ) ( Thing thing ) = 0;
-            virtual Thing operator ( ) ( Thing thing ) const = 0;
-            virtual Thing same ( Thing thing ) const = 0;
-            virtual Thing different ( Thing thing ) const = 0;
-            virtual bool operator == ( Thing thing ) const = 0;
-            virtual bool operator != ( Thing thing ) const = 0;
-            virtual Thing is_something ( Thing _ ) const = 0;
+            virtual thing_ mutate ( thing_ thing ) = 0;
+            virtual thing_ extract ( thing_ thing ) const = 0;
+            virtual thing_ operator ( ) ( thing_ thing ) = 0;
+            virtual thing_ operator ( ) ( thing_ thing ) const = 0;
+            virtual thing_ same ( thing_ thing ) const = 0;
+            virtual thing_ different ( thing_ thing ) const = 0;
+            virtual bool operator == ( thing_ thing ) const = 0;
+            virtual bool operator != ( thing_ thing ) const = 0;
+            virtual thing_ is_something ( thing_ _ ) const = 0;
             virtual bool is_something_ ( ) const = 0;
-            virtual Thing is_nothing ( Thing _ ) const = 0;
+            virtual thing_ is_nothing ( thing_ _ ) const = 0;
             virtual bool is_nothing_ ( ) const = 0;
-            virtual Thing begin ( Thing _ ) = 0;
-            virtual Thing cbegin ( Thing _ ) const = 0;
-            virtual Thing end ( Thing _ ) = 0;
-            virtual Thing cend ( Thing _ ) const = 0;
-            virtual Thing set ( Thing thing ) = 0;
-            virtual Thing get ( Thing _ ) const = 0;
-            virtual Thing & operator * ( ) = 0;
-            virtual const Thing & operator * ( ) const = 0;
-            virtual Thing * operator -> ( ) = 0;
-            virtual const Thing * operator -> ( ) const = 0;
-            virtual Thing increment ( Thing _ ) = 0;
-            virtual Thing & operator ++ ( ) = 0;
+            virtual thing_ begin ( thing_ _ ) = 0;
+            virtual thing_ cbegin ( thing_ _ ) const = 0;
+            virtual thing_ end ( thing_ _ ) = 0;
+            virtual thing_ cend ( thing_ _ ) const = 0;
+            virtual thing_ set ( thing_ thing ) = 0;
+            virtual thing_ get ( thing_ _ ) const = 0;
+            virtual thing_ & operator * ( ) = 0;
+            virtual const thing_ & operator * ( ) const = 0;
+            virtual thing_ * operator -> ( ) = 0;
+            virtual const thing_ * operator -> ( ) const = 0;
+            virtual thing_ increment ( thing_ _ ) = 0;
+            virtual thing_ & operator ++ ( ) = 0;
         };
 
     
@@ -202,53 +202,53 @@ namespace strange {
 
     
 
-            virtual Thing mutate ( Thing thing )
+            virtual thing_ mutate ( thing_ thing )
             { return value_.mutate(thing ); }
-            virtual Thing extract ( Thing thing ) const
+            virtual thing_ extract ( thing_ thing ) const
             { return value_.extract(thing ); }
-            virtual Thing operator ( ) ( Thing thing )
+            virtual thing_ operator ( ) ( thing_ thing )
             { return value_.operator()(thing ); }
-            virtual Thing operator ( ) ( Thing thing ) const
+            virtual thing_ operator ( ) ( thing_ thing ) const
             { return value_.operator()(thing ); }
-            virtual Thing same ( Thing thing ) const
+            virtual thing_ same ( thing_ thing ) const
             { return value_.same(thing ); }
-            virtual Thing different ( Thing thing ) const
+            virtual thing_ different ( thing_ thing ) const
             { return value_.different(thing ); }
-            virtual bool operator == ( Thing thing ) const
+            virtual bool operator == ( thing_ thing ) const
             { return value_.operator==(thing ); }
-            virtual bool operator != ( Thing thing ) const
+            virtual bool operator != ( thing_ thing ) const
             { return value_.operator!=(thing ); }
-            virtual Thing is_something ( Thing _ ) const
+            virtual thing_ is_something ( thing_ _ ) const
             { return value_.is_something(_ ); }
             virtual bool is_something_ ( ) const
             { return value_.is_something_( ); }
-            virtual Thing is_nothing ( Thing _ ) const
+            virtual thing_ is_nothing ( thing_ _ ) const
             { return value_.is_nothing(_ ); }
             virtual bool is_nothing_ ( ) const
             { return value_.is_nothing_( ); }
-            virtual Thing begin ( Thing _ )
+            virtual thing_ begin ( thing_ _ )
             { return value_.begin(_ ); }
-            virtual Thing cbegin ( Thing _ ) const
+            virtual thing_ cbegin ( thing_ _ ) const
             { return value_.cbegin(_ ); }
-            virtual Thing end ( Thing _ )
+            virtual thing_ end ( thing_ _ )
             { return value_.end(_ ); }
-            virtual Thing cend ( Thing _ ) const
+            virtual thing_ cend ( thing_ _ ) const
             { return value_.cend(_ ); }
-            virtual Thing set ( Thing thing )
+            virtual thing_ set ( thing_ thing )
             { return value_.set(thing ); }
-            virtual Thing get ( Thing _ ) const
+            virtual thing_ get ( thing_ _ ) const
             { return value_.get(_ ); }
-            virtual Thing & operator * ( )
+            virtual thing_ & operator * ( )
             { return value_.operator*( ); }
-            virtual const Thing & operator * ( ) const
+            virtual const thing_ & operator * ( ) const
             { return value_.operator*( ); }
-            virtual Thing * operator -> ( )
+            virtual thing_ * operator -> ( )
             { return value_.operator->( ); }
-            virtual const Thing * operator -> ( ) const
+            virtual const thing_ * operator -> ( ) const
             { return value_.operator->( ); }
-            virtual Thing increment ( Thing _ )
+            virtual thing_ increment ( thing_ _ )
             { return value_.increment(_ ); }
-            virtual Thing & operator ++ ( )
+            virtual thing_ & operator ++ ( )
             { return value_.operator++( ); }
     
 

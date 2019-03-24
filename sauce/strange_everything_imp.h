@@ -6,17 +6,17 @@
 namespace strange
 {
 
-inline Thing Everything::same(Thing thing) const
+inline thing_ Everything::same(thing_ thing) const
 {
 	return thing.is_something_() ? Everything::val() : Nothing::val();
 }
 
-inline Thing Everything::different(Thing thing) const
+inline thing_ Everything::different(thing_ thing) const
 {
 	return thing.is_nothing_() ? Everything::val() : Nothing::val();
 }
 
-inline Thing Everything::is_nothing(Thing _) const
+inline thing_ Everything::is_nothing(thing_ _) const
 {
 	return Nothing::val();
 }

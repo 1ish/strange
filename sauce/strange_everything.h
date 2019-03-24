@@ -1,7 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_EVERYTHING_H
 #define COM_ONEISH_STRANGE_EVERYTHING_H
 
-#include "strange_thing.h"
+#include "strange_thing_.h"
 
 namespace strange
 {
@@ -9,49 +9,49 @@ namespace strange
 class Everything
 {
 public:
-	static inline Thing& val(Thing _ = Thing())
+	static inline thing_& val(thing_ _ = thing_())
 	{
-		static Thing VAL = Everything{};
+		static thing_ VAL = Everything{};
 		return VAL;
 	}
 
 	// function
-	inline Thing mutate(Thing _ = Thing())
+	inline thing_ mutate(thing_ _ = thing_())
 	{
 		return Everything::val();
 	}
 
-	inline Thing extract(Thing _ = Thing()) const
+	inline thing_ extract(thing_ _ = thing_()) const
 	{
 		return Everything::val();
 	}
 
-	inline Thing operator()(Thing _ = Thing())
+	inline thing_ operator()(thing_ _ = thing_())
 	{
 		return Everything::val();
 	}
 
-	inline Thing operator()(Thing _ = Thing()) const
+	inline thing_ operator()(thing_ _ = thing_()) const
 	{
 		return Everything::val();
 	}
 
 	// comparison
-	inline Thing same(Thing thing) const;
+	inline thing_ same(thing_ thing) const;
 
-	inline Thing different(Thing thing) const;
+	inline thing_ different(thing_ thing) const;
 
-	inline bool operator==(Thing thing) const
+	inline bool operator==(thing_ thing) const
 	{
 		return thing.is_something_();
 	}
 
-	inline bool operator!=(Thing thing) const
+	inline bool operator!=(thing_ thing) const
 	{
 		return thing.is_nothing_();
 	}
 
-	inline Thing is_something(Thing _ = Thing()) const
+	inline thing_ is_something(thing_ _ = thing_()) const
 	{
 		return Everything::val();
 	}
@@ -61,68 +61,68 @@ public:
 		return true;
 	}
 
-	inline Thing is_nothing(Thing _ = Thing()) const;
+	inline thing_ is_nothing(thing_ _ = thing_()) const;
 
 	inline bool is_nothing_() const { return false; };
 
 	// range
-	inline Thing begin(Thing _ = Thing())
+	inline thing_ begin(thing_ _ = thing_())
 	{
 		return Everything::val();
 	}
 
-	inline Thing cbegin(Thing _ = Thing()) const
+	inline thing_ cbegin(thing_ _ = thing_()) const
 	{
 		return Everything::val();
 	}
 
-	inline Thing end(Thing _ = Thing())
+	inline thing_ end(thing_ _ = thing_())
 	{
 		return Everything::val();
 	}
 
-	inline Thing cend(Thing _ = Thing()) const
+	inline thing_ cend(thing_ _ = thing_()) const
 	{
 		return Everything::val();
 	}
 
 	// iterator
-	inline Thing set(Thing thing)
+	inline thing_ set(thing_ thing)
 	{
 		return Everything::val();
 	}
 
-	inline Thing get(Thing _ = Thing()) const
+	inline thing_ get(thing_ _ = thing_()) const
 	{
 		return Everything::val();
 	}
 
-	inline Thing& operator*()
+	inline thing_& operator*()
 	{
 		return Everything::val();
 	}
 
-	inline const Thing& operator*() const
+	inline const thing_& operator*() const
 	{
 		return Everything::val();
 	}
 
-	inline Thing* operator->()
+	inline thing_* operator->()
 	{
 		return &Everything::val();
 	}
 
-	inline const Thing* operator->() const
+	inline const thing_* operator->() const
 	{
 		return &Everything::val();
 	}
 
-	inline Thing increment(Thing _ = Thing())
+	inline thing_ increment(thing_ _ = thing_())
 	{
 		return Everything::val();
 	}
 
-	inline Thing& operator++()
+	inline thing_& operator++()
 	{
 		return Everything::val();
 	}
