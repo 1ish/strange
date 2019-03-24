@@ -21,27 +21,27 @@ public:
 	bool operator==(Thing thing) const;
 	bool operator!=(Thing thing) const;
 
-	Thing is_something(Thing thing) const;
+	Thing is_something(Thing _) const;
 	bool is_something_() const;
 
-	Thing is_nothing(Thing thing) const;
+	Thing is_nothing(Thing _) const;
 	bool is_nothing_() const;
 
 	// range
-	Thing begin(Thing thing);
-	Thing cbegin(Thing thing) const;
-	Thing end(Thing thing);
-	Thing cend(Thing thing) const;
+	Thing begin(Thing _);
+	Thing cbegin(Thing _) const;
+	Thing end(Thing _);
+	Thing cend(Thing _) const;
 
 	// iterator
 	Thing set(Thing thing);
-	Thing get(Thing thing) const;
+	Thing get(Thing _) const;
 	Thing& operator*();
 	const Thing& operator*() const;
 	Thing* operator->();
 	const Thing* operator->() const;
 
-	Thing increment(Thing thing);
+	Thing increment(Thing _);
 	Thing& operator++();
 };
 

@@ -19,12 +19,12 @@ TEST(TestCaseName, TestName) {
 
 TEST(TestCaseName, ForLoop) {
 	Nothing n;
-	for (auto i : n)
+	for (auto v : n)
 	{
 	}
 
-	Oneish o;
-	for (auto i : o)
+	Everything e;
+	for (auto v : e)
 	{
 	}
 
