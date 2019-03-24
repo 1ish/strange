@@ -24,13 +24,13 @@ namespace strange {
 
     
 
-        template <typename T>
+        template <typename ___TTT___>
 
-        symbol_ (T value) :
+        symbol_ (___TTT___ value) :
 
             handle_ (
 
-                std::make_shared<handle<typename std::remove_reference<T>::type>>(
+                std::make_shared<handle<typename std::remove_reference<___TTT___>::type>>(
 
                     std::move(value)
 
@@ -44,9 +44,9 @@ namespace strange {
 
         // Assignment
 
-        template <typename T>
+        template <typename ___TTT___>
 
-        symbol_ & operator= (T value)
+        symbol_ & operator= (___TTT___ value)
 
         {
 
@@ -156,7 +156,7 @@ namespace strange {
 
     
 
-        template <typename T>
+        template <typename ___TTT___>
 
         struct handle :
 
@@ -164,13 +164,13 @@ namespace strange {
 
         {
 
-            template <typename U = T>
+            template <typename ___UUU___ = ___TTT___>
 
-            handle (T value,
+            handle (___TTT___ value,
 
                     typename std::enable_if<
 
-                        std::is_reference<U>::value
+                        std::is_reference<___UUU___>::value
 
                     >::type * = 0) :
 
@@ -180,13 +180,13 @@ namespace strange {
 
     
 
-            template <typename U = T>
+            template <typename ___UUU___ = ___TTT___>
 
-            handle (T value,
+            handle (___TTT___ value,
 
                     typename std::enable_if<
 
-                        !std::is_reference<U>::value,
+                        !std::is_reference<___UUU___>::value,
 
                         int
 
@@ -258,23 +258,23 @@ namespace strange {
             { return value_.me_( ); }
     
 
-            T value_;
+            ___TTT___ value_;
 
         };
 
     
 
-        template <typename T>
+        template <typename ___TTT___>
 
-        struct handle<std::reference_wrapper<T>> :
+        struct handle<std::reference_wrapper<___TTT___>> :
 
-            handle<T &>
+            handle<___TTT___ &>
 
         {
 
-            handle (std::reference_wrapper<T> ref) :
+            handle (std::reference_wrapper<___TTT___> ref) :
 
-                handle<T &> (ref.get())
+                handle<___TTT___ &> (ref.get())
 
             {}
 
