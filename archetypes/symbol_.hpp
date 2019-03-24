@@ -48,6 +48,8 @@ public:
 
 	// symbol
 	inline std::size_t hash_() const;
+
+	inline Everything& me_();
 };
 
 } // namespace strange

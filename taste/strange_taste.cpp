@@ -31,7 +31,7 @@ TEST(TestCaseName, ForLoop) {
 	thing_ t{ Nothing() };
 	symbol_ s{ Everything() };
 	t = s; //TODO thing<symbol_<>>
-	//t = s.static_<thing_>();
+	t = s.me_();
 
 	EXPECT_TRUE(true);
 }

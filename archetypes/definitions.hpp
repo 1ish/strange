@@ -6,4 +6,11 @@ namespace std
 	typedef unsigned long long size_t;
 }
 
+namespace strange
+{
+	class Everything
+	{
+	};
+}
+
 #endif

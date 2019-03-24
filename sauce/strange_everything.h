@@ -132,6 +132,11 @@ public:
 	{
 		return 0;
 	}
+
+	inline Everything& me_()
+	{
+		return *this;
+	}
 };
 
 } // namespace strange
