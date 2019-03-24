@@ -110,8 +110,6 @@ namespace strange {
         { assert(handle_); return write().operator++( ); }
         inline std :: size_t hash_ ( ) const
         { assert(handle_); return read().hash_( ); }
-        inline const Everything & me_ ( )
-        { assert(handle_); return write().me_( ); }
     
 
     private:
@@ -151,7 +149,6 @@ namespace strange {
             virtual inline thing_ increment ( thing_ _ ) = 0;
             virtual inline thing_ & operator ++ ( ) = 0;
             virtual inline std :: size_t hash_ ( ) const = 0;
-            virtual inline const Everything & me_ ( ) = 0;
         };
 
     
@@ -254,8 +251,6 @@ namespace strange {
             { return value_.operator++( ); }
             virtual inline std :: size_t hash_ ( ) const
             { return value_.hash_( ); }
-            virtual inline const Everything & me_ ( )
-            { return value_.me_( ); }
     
 
             ___TTT___ value_;

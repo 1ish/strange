@@ -30,8 +30,7 @@ TEST(TestCaseName, ForLoop) {
 
 	thing_ t{ Nothing() };
 	symbol_ s{ Everything() };
-	t = s; //TODO thing<symbol_<>>
-	t = s.me_();
+	t = s; //TODO thing<symbol_<Everything>>
 
 	EXPECT_TRUE(true);
 }

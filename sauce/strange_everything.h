@@ -132,11 +132,6 @@ public:
 	{
 		return 0;
 	}
-
-	inline const auto& me_() const
-	{
-		return *this;
-	}
 };
 
 } // namespace strange
