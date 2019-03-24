@@ -1,7 +1,7 @@
-#ifndef COM_ONEISH_STRANGE_THING__H
-#define COM_ONEISH_STRANGE_THING__H
+#ifndef COM_ONEISH_STRANGE_SYMBOL__H
+#define COM_ONEISH_STRANGE_SYMBOL__H
 
-// # include "definitions.hpp"
+// # include "thing_.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -12,7 +12,7 @@
 
 namespace strange {
     
-    class thing_
+    class symbol_
 
     {
 
@@ -20,13 +20,13 @@ namespace strange {
 
         // Contructors
 
-        thing_ () = default;
+        symbol_ () = default;
 
     
 
         template <typename T>
 
-        thing_ (T value) :
+        symbol_ (T value) :
 
             handle_ (
 
@@ -46,11 +46,11 @@ namespace strange {
 
         template <typename T>
 
-        thing_ & operator= (T value)
+        symbol_ & operator= (T value)
 
         {
 
-            thing_ temp(std::move(value));
+            symbol_ temp(std::move(value));
 
             std::swap(temp.handle_, handle_);
 
@@ -108,6 +108,8 @@ namespace strange {
         { assert(handle_); return write().increment(_ ); }
         thing_ & operator ++ ( )
         { assert(handle_); return write().operator++( ); }
+        inline std :: size_t hash_ ( ) const
+        { assert(handle_); return read().hash_( ); }
     
 
     private:
@@ -146,6 +148,7 @@ namespace strange {
             virtual const thing_ * operator -> ( ) const = 0;
             virtual thing_ increment ( thing_ _ ) = 0;
             virtual thing_ & operator ++ ( ) = 0;
+            virtual inline std :: size_t hash_ ( ) const = 0;
         };
 
     
@@ -246,6 +249,8 @@ namespace strange {
             { return value_.increment(_ ); }
             virtual thing_ & operator ++ ( )
             { return value_.operator++( ); }
+            virtual inline std :: size_t hash_ ( ) const
+            { return value_.hash_( ); }
     
 
             T value_;

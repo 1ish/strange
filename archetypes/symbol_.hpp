@@ -1,14 +1,14 @@
-#ifndef COM_ONEISH_STRANGE_THING__H
-#define COM_ONEISH_STRANGE_THING__H
+#ifndef COM_ONEISH_STRANGE_SYMBOL__H
+#define COM_ONEISH_STRANGE_SYMBOL__H
 
-// ~/source/repos/type_erasure/windows/emtypen.exe -c ~/source/repos/strange/archetypes/thing_.hpp > ~/source/repos/strange/sauce/strange_thing_.h
+// ~/source/repos/type_erasure/windows/emtypen.exe -c ~/source/repos/strange/archetypes/symbol_.hpp > ~/source/repos/strange/sauce/strange_symbol_.h
 
-#include "definitions.hpp"
+#include "thing_.hpp"
 
 namespace strange
 {
 
-class thing_
+class symbol_
 {
 public:
 	// function
@@ -45,6 +45,9 @@ public:
 
 	thing_ increment(thing_ _);
 	thing_& operator++();
+
+	// symbol
+	inline std::size_t hash_() const;
 };
 
 } // namespace strange
