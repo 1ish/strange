@@ -133,7 +133,7 @@ public:
 		return 0;
 	}
 
-	inline const Everything& me_() const
+	inline const auto& me_() const
 	{
 		return *this;
 	}
