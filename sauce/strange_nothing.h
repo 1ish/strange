@@ -10,29 +10,29 @@ namespace strange
 class Nothing
 {
 public:
-	static inline thing_& val(thing_ _ = thing_())
+	static inline thing_& val(thing_ _ = thing_{})
 	{
 		static thing_ VAL = Nothing{};
 		return VAL;
 	}
 
 	// function
-	inline thing_ mutate(thing_ _ = thing_())
+	inline thing_ mutate(thing_)
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ extract(thing_ _ = thing_()) const
+	inline thing_ extract(thing_) const
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ operator()(thing_ _ = thing_())
+	inline thing_ operator()(thing_)
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ operator()(thing_ _ = thing_()) const
+	inline thing_ operator()(thing_) const
 	{
 		return Nothing::val();
 	}
@@ -58,7 +58,7 @@ public:
 		return thing.is_something_();
 	}
 
-	inline thing_ is_something(thing_ _ = thing_()) const
+	inline thing_ is_something(thing_) const
 	{
 		return Nothing::val();
 	}
@@ -68,7 +68,7 @@ public:
 		return false;
 	}
 
-	inline thing_ is_nothing(thing_ _ = thing_()) const
+	inline thing_ is_nothing(thing_) const
 	{
 		return Everything::val();
 	}
@@ -79,22 +79,22 @@ public:
 	}
 
 	// range
-	inline thing_ begin()
+	inline thing_ begin(thing_)
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ cbegin() const
+	inline thing_ cbegin(thing_) const
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ end()
+	inline thing_ end(thing_)
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ cend() const
+	inline thing_ cend(thing_) const
 	{
 		return Nothing::val();
 	}
@@ -105,7 +105,7 @@ public:
 		return Nothing::val();
 	}
 
-	inline thing_ get(thing_ _ = thing_()) const
+	inline thing_ get(thing_) const
 	{
 		return Nothing::val();
 	}
@@ -130,7 +130,7 @@ public:
 		return &Nothing::val();
 	}
 
-	inline thing_ increment(thing_ _ = thing_())
+	inline thing_ increment(thing_)
 	{
 		return Nothing::val();
 	}

@@ -9,29 +9,29 @@ namespace strange
 class Everything
 {
 public:
-	static inline symbol_& val(thing_ _ = thing_()) //TODO thing
+	static inline symbol_& val(thing_ _ = thing_{}) //TODO thing
 	{
 		static symbol_ VAL = Everything{}; //TODO thing
 		return VAL;
 	}
 
 	// function
-	inline thing_ mutate(thing_ _ = thing_())
+	inline thing_ mutate(thing_)
 	{
 		return Everything::val();
 	}
 
-	inline thing_ extract(thing_ _ = thing_()) const
+	inline thing_ extract(thing_) const
 	{
 		return Everything::val();
 	}
 
-	inline thing_ operator()(thing_ _ = thing_())
+	inline thing_ operator()(thing_)
 	{
 		return Everything::val();
 	}
 
-	inline thing_ operator()(thing_ _ = thing_()) const
+	inline thing_ operator()(thing_) const
 	{
 		return Everything::val();
 	}
@@ -51,7 +51,7 @@ public:
 		return thing.is_nothing_();
 	}
 
-	inline thing_ is_something(thing_ _ = thing_()) const
+	inline thing_ is_something(thing_) const
 	{
 		return Everything::val();
 	}
@@ -61,27 +61,30 @@ public:
 		return true;
 	}
 
-	inline thing_ is_nothing(thing_ _ = thing_()) const;
+	inline thing_ is_nothing(thing_) const;
 
-	inline bool is_nothing_() const { return false; };
+	inline bool is_nothing_() const
+	{
+		return false;
+	}
 
 	// range
-	inline thing_ begin()
+	inline thing_ begin(thing_)
 	{
 		return Everything::val();
 	}
 
-	inline thing_ cbegin() const
+	inline thing_ cbegin(thing_) const
 	{
 		return Everything::val();
 	}
 
-	inline thing_ end()
+	inline thing_ end(thing_)
 	{
 		return Everything::val();
 	}
 
-	inline thing_ cend() const
+	inline thing_ cend(thing_) const
 	{
 		return Everything::val();
 	}
@@ -92,7 +95,7 @@ public:
 		return Everything::val();
 	}
 
-	inline thing_ get(thing_ _ = thing_()) const
+	inline thing_ get(thing_) const
 	{
 		return Everything::val();
 	}
@@ -117,7 +120,7 @@ public:
 		return &Everything::val();
 	}
 
-	inline thing_ increment(thing_ _ = thing_())
+	inline thing_ increment(thing_)
 	{
 		return Everything::val();
 	}
