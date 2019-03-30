@@ -15,7 +15,7 @@ class derived_ : public root_
 public:
 	inline void mutate()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().mutate();
 	}
 
@@ -84,16 +84,16 @@ private:
 
 	inline const ___derived_handle_base___& read() const
 	{
-		return *std::static_pointer_cast<const ___derived_handle_base___>(handle_);
+		return *std::static_pointer_cast<const ___derived_handle_base___>(___handle___);
 	}
 
 	inline ___derived_handle_base___& write()
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->clone();
+			___handle___ = ___handle___->clone();
 		}
-		return *std::static_pointer_cast<___derived_handle_base___>(handle_);
+		return *std::static_pointer_cast<___derived_handle_base___>(___handle___);
 	}
 
 	template <typename ___TTT___>
@@ -121,7 +121,7 @@ public:
 	inline derived_& operator=(const std::shared_ptr<___TTT___>& other)
 	{
 		assert(std::dynamic_pointer_cast<___derived_handle_base___>(other));
-		handle_ = other;
+		___handle___ = other;
 		return *this;
 	}
 
@@ -132,13 +132,13 @@ public:
 template <typename ___TTT___>
 inline bool check_(const derived_& v)
 {
-	return ___TTT___::check(v.handle_);
+	return ___TTT___::check(v.___handle___);
 }
 
 template <typename ___TTT___>
 inline derived_::derived_(___TTT___ value)
 	: root_{ check_<derived_>(value)
-		? static_<derived_>(std::move(value)).handle_
+		? static_<derived_>(std::move(value)).___handle___
 		: std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 {}
 
@@ -148,7 +148,7 @@ inline derived_& derived_::operator=(___TTT___ value)
 	derived_ temp{ check_<derived_>(value)
 		? static_<derived_>(std::move(value))
 		: std::move(value) };
-	std::swap(temp.handle_, handle_);
+	std::swap(temp.___handle___, ___handle___);
 	return *this;
 }
 

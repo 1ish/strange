@@ -13,7 +13,7 @@ class root_
 public:
 	inline void print() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		read().print();
 	}
 
@@ -62,7 +62,7 @@ protected:
 		{}
 	};
 
-	std::shared_ptr<___root_handle_base___> handle_;
+	std::shared_ptr<___root_handle_base___> ___handle___;
 
 private:
 	template <typename ___TTT___>
@@ -95,16 +95,16 @@ private:
 
 	inline const ___root_handle_base___& read() const
 	{
-		return *handle_;
+		return *___handle___;
 	}
 
 	inline ___root_handle_base___& write()
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->clone();
+			___handle___ = ___handle___->clone();
 		}
-		return *handle_;
+		return *___handle___;
 	}
 
 	template <typename ___TTT___>
@@ -128,7 +128,7 @@ public:
 
 	template <typename ___TTT___>
 	inline root_(const std::shared_ptr<___TTT___>& other)
-		: handle_{ other }
+		: ___handle___{ other }
 	{}
 
 	template <typename ___TTT___>
@@ -137,7 +137,7 @@ public:
 	template <typename ___TTT___>
 	inline root_& operator=(const std::shared_ptr<___TTT___>& other)
 	{
-		handle_ = other;
+		___handle___ = other;
 		return *this;
 	}
 
@@ -148,7 +148,7 @@ public:
 template <typename ___TTT___>
 inline bool check_(const root_& v)
 {
-	return ___TTT___::check(v.handle_);
+	return ___TTT___::check(v.___handle___);
 }
 
 template <typename ___TTT___, typename ___VVV___>
@@ -160,13 +160,13 @@ inline bool check_(const ___VVV___&)
 template <typename ___TTT___>
 inline ___TTT___ static_(const root_& v)
 {
-	return ___TTT___{ v.handle_ };
+	return ___TTT___{ v.___handle___ };
 }
 
 template <typename ___TTT___>
 inline root_::root_(___TTT___ value)
-	: handle_{ check_<root_>(value)
-		? static_<root_>(std::move(value)).handle_
+	: ___handle___{ check_<root_>(value)
+		? static_<root_>(std::move(value)).___handle___
 		: std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 {}
 
@@ -176,7 +176,7 @@ inline root_& root_::operator=(___TTT___ value)
 	root_ temp{ check_<root_>(value)
 		? static_<root_>(std::move(value))
 		: std::move(value) };
-	std::swap(temp.handle_, handle_);
+	std::swap(temp.___handle___, ___handle___);
 	return *this;
 }
 

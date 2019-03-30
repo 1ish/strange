@@ -15,7 +15,7 @@ class finale_ final : public derived_
 public:
 	inline void finish()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().finish();
 	}
 
@@ -60,16 +60,16 @@ private:
 
 	inline const ___finale_handle_base___& read() const
 	{
-		return *std::static_pointer_cast<const ___finale_handle_base___>(handle_);
+		return *std::static_pointer_cast<const ___finale_handle_base___>(___handle___);
 	}
 
 	inline ___finale_handle_base___& write()
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->clone();
+			___handle___ = ___handle___->clone();
 		}
-		return *std::static_pointer_cast<___finale_handle_base___>(handle_);
+		return *std::static_pointer_cast<___finale_handle_base___>(___handle___);
 	}
 
 	template <typename ___TTT___>
@@ -99,7 +99,7 @@ public:
 	inline finale_& operator=(const std::shared_ptr<___TTT___>& other)
 	{
 		assert(std::dynamic_pointer_cast<___finale_handle_base___>(other));
-		handle_ = other;
+		___handle___ = other;
 		return *this;
 	}
 
@@ -107,7 +107,7 @@ public:
 	inline finale_& operator=(___TTT___ value)
 	{
 		finale_ temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 };
@@ -115,7 +115,7 @@ public:
 template <typename ___TTT___>
 inline bool check_(const finale_& v)
 {
-	return ___TTT___::check(v.handle_);
+	return ___TTT___::check(v.___handle___);
 }
 
 #endif
