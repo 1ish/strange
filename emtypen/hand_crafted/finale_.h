@@ -19,7 +19,7 @@ public:
 		write().finish();
 	}
 
-protected:
+private:
 	struct ___finale_handle_base___ : ___derived_handle_base___
 	{
 		virtual void finish() = 0;

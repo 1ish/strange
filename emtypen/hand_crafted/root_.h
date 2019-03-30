@@ -62,6 +62,9 @@ protected:
 		{}
 	};
 
+	std::shared_ptr<___root_handle_base___> handle_;
+
+private:
 	template <typename ___TTT___>
 	struct ___root_handle_final___ final : ___root_handle___<___TTT___>
 	{
@@ -103,8 +106,6 @@ protected:
 		}
 		return *handle_;
 	}
-
-	std::shared_ptr<___root_handle_base___> handle_;
 
 	template <typename ___TTT___>
 	friend inline bool check_(const root_& v);

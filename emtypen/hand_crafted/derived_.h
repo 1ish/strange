@@ -53,6 +53,7 @@ protected:
 		{}
 	};
 
+private:
 	template <typename ___TTT___>
 	struct ___derived_handle_final___ final : ___derived_handle___<___TTT___>
 	{
