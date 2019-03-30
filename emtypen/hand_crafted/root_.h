@@ -14,7 +14,7 @@ public:
 	inline void print() const
 	{
 		assert(___handle___);
-		read().print();
+		___read___().print();
 	}
 
 protected:
@@ -27,7 +27,7 @@ protected:
 		___root_handle_base___& operator=(___root_handle_base___&&) = default;
 		virtual ~___root_handle_base___() = default;
 
-		virtual std::shared_ptr<___root_handle_base___> clone() const = 0;
+		virtual std::shared_ptr<___root_handle_base___> ___clone___() const = 0;
 
 		virtual void print() const = 0;
 	};
@@ -37,20 +37,20 @@ protected:
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___root_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
-			: value_{ value }
+			: ___value___{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___root_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
-			: value_{ std::move(value) }
+			: ___value___{ std::move(value) }
 		{}
 
 		virtual inline void print() const final
 		{
-			value_.print();
+			___value___.print();
 		}
 
-		___TTT___ value_;
+		___TTT___ ___value___;
 	};
 
 	template <typename ___TTT___, typename ___BHB___>
@@ -78,9 +78,9 @@ private:
 			: ___root_handle___<___TTT___>{ std::move(value) }
 		{}
 
-		virtual inline std::shared_ptr<___root_handle_base___> clone() const final
+		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
 		{
-			return std::make_shared<___root_handle_final___>(___root_handle___<___TTT___>::value_);
+			return std::make_shared<___root_handle_final___>(___root_handle___<___TTT___>::___value___);
 		}
 	};
 
@@ -93,16 +93,16 @@ private:
 		{}
 	};
 
-	inline const ___root_handle_base___& read() const
+	inline const ___root_handle_base___& ___read___() const
 	{
 		return *___handle___;
 	}
 
-	inline ___root_handle_base___& write()
+	inline ___root_handle_base___& ___write___()
 	{
 		if (!___handle___.unique())
 		{
-			___handle___ = ___handle___->clone();
+			___handle___ = ___handle___->___clone___();
 		}
 		return *___handle___;
 	}
@@ -114,7 +114,7 @@ private:
 	friend inline ___TTT___ static_(const root_& v);
 
 public:
-	static inline bool check(const std::shared_ptr<___root_handle_base___>&)
+	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>&)
 	{
 		return true;
 	}
@@ -148,7 +148,7 @@ public:
 template <typename ___TTT___>
 inline bool check_(const root_& v)
 {
-	return ___TTT___::check(v.___handle___);
+	return ___TTT___::___check___(v.___handle___);
 }
 
 template <typename ___TTT___, typename ___VVV___>

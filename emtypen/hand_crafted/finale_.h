@@ -16,7 +16,7 @@ public:
 	inline void finish()
 	{
 		assert(___handle___);
-		write().finish();
+		___write___().finish();
 	}
 
 private:
@@ -38,14 +38,14 @@ private:
 			: ___derived_handle___<___TTT___, ___finale_handle_base___>{ std::move(value) }
 		{}
 
-		virtual inline std::shared_ptr<___root_handle_base___> clone() const final
+		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
 		{
-			return std::make_shared<___finale_handle_final___>(___derived_handle___<___TTT___, ___finale_handle_base___>::value_);
+			return std::make_shared<___finale_handle_final___>(___derived_handle___<___TTT___, ___finale_handle_base___>::___value___);
 		}
 
 		virtual inline void finish() final
 		{
-			___derived_handle___<___TTT___, ___finale_handle_base___>::value_.finish();
+			___derived_handle___<___TTT___, ___finale_handle_base___>::___value___.finish();
 		}
 	};
 
@@ -58,16 +58,16 @@ private:
 		{}
 	};
 
-	inline const ___finale_handle_base___& read() const
+	inline const ___finale_handle_base___& ___read___() const
 	{
 		return *std::static_pointer_cast<const ___finale_handle_base___>(___handle___);
 	}
 
-	inline ___finale_handle_base___& write()
+	inline ___finale_handle_base___& ___write___()
 	{
 		if (!___handle___.unique())
 		{
-			___handle___ = ___handle___->clone();
+			___handle___ = ___handle___->___clone___();
 		}
 		return *std::static_pointer_cast<___finale_handle_base___>(___handle___);
 	}
@@ -76,7 +76,7 @@ private:
 	friend inline bool check_(const finale_& v);
 
 public:
-	static inline bool check(const std::shared_ptr<___root_handle_base___>& h)
+	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& h)
 	{
 		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(h));
 	}
@@ -115,7 +115,7 @@ public:
 template <typename ___TTT___>
 inline bool check_(const finale_& v)
 {
-	return ___TTT___::check(v.___handle___);
+	return ___TTT___::___check___(v.___handle___);
 }
 
 #endif
