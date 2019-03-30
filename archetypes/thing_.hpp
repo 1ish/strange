@@ -1,7 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_THING__H
 #define COM_ONEISH_STRANGE_THING__H
 
-// ~/source/repos/type_erasure/windows/emtypen.exe -c ~/source/repos/strange/archetypes/thing_.hpp > ~/source/repos/strange/sauce/strange_thing_.h
+// ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/root.hpp -c ~/source/repos/strange/archetypes/thing_.hpp > ~/source/repos/strange/sauce/strange_thing_.h
 
 #include "definitions.hpp"
 
