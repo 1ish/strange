@@ -79,22 +79,22 @@ public:
 	}
 
 	// range
-	inline thing_ begin(thing_ _ = thing_())
+	inline thing_ begin()
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ cbegin(thing_ _ = thing_()) const
+	inline thing_ cbegin() const
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ end(thing_ _ = thing_())
+	inline thing_ end()
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ cend(thing_ _ = thing_()) const
+	inline thing_ cend() const
 	{
 		return Nothing::val();
 	}
@@ -139,6 +139,9 @@ public:
 	{
 		return Nothing::val();
 	}
+
+private:
+	inline Nothing() {};
 };
 
 } // namespace strange

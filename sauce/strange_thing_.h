@@ -42,14 +42,14 @@ namespace strange {
      { assert(handle_); return read().is_nothing(_ ); }
      inline bool is_nothing_ ( ) const
      { assert(handle_); return read().is_nothing_( ); }
-     inline thing_ begin ( thing_ _ )
-     { assert(handle_); return write().begin(_ ); }
-     inline thing_ cbegin ( thing_ _ ) const
-     { assert(handle_); return read().cbegin(_ ); }
-     inline thing_ end ( thing_ _ )
-     { assert(handle_); return write().end(_ ); }
-     inline thing_ cend ( thing_ _ ) const
-     { assert(handle_); return read().cend(_ ); }
+     inline thing_ begin ( )
+     { assert(handle_); return write().begin( ); }
+     inline thing_ cbegin ( ) const
+     { assert(handle_); return read().cbegin( ); }
+     inline thing_ end ( )
+     { assert(handle_); return write().end( ); }
+     inline thing_ cend ( ) const
+     { assert(handle_); return read().cend( ); }
      inline thing_ set ( thing_ thing )
      { assert(handle_); return write().set(thing ); }
      inline thing_ get ( thing_ _ ) const
@@ -104,10 +104,10 @@ namespace strange {
       virtual inline bool is_something_ ( ) const = 0;
       virtual inline thing_ is_nothing ( thing_ _ ) const = 0;
       virtual inline bool is_nothing_ ( ) const = 0;
-      virtual inline thing_ begin ( thing_ _ ) = 0;
-      virtual inline thing_ cbegin ( thing_ _ ) const = 0;
-      virtual inline thing_ end ( thing_ _ ) = 0;
-      virtual inline thing_ cend ( thing_ _ ) const = 0;
+      virtual inline thing_ begin ( ) = 0;
+      virtual inline thing_ cbegin ( ) const = 0;
+      virtual inline thing_ end ( ) = 0;
+      virtual inline thing_ cend ( ) const = 0;
       virtual inline thing_ set ( thing_ thing ) = 0;
       virtual inline thing_ get ( thing_ _ ) const = 0;
       virtual inline thing_ & operator * ( ) = 0;
@@ -170,14 +170,14 @@ namespace strange {
       { return value_.is_nothing(_ ); }
       virtual inline bool is_nothing_ ( ) const
       { return value_.is_nothing_( ); }
-      virtual inline thing_ begin ( thing_ _ )
-      { return value_.begin(_ ); }
-      virtual inline thing_ cbegin ( thing_ _ ) const
-      { return value_.cbegin(_ ); }
-      virtual inline thing_ end ( thing_ _ )
-      { return value_.end(_ ); }
-      virtual inline thing_ cend ( thing_ _ ) const
-      { return value_.cend(_ ); }
+      virtual inline thing_ begin ( )
+      { return value_.begin( ); }
+      virtual inline thing_ cbegin ( ) const
+      { return value_.cbegin( ); }
+      virtual inline thing_ end ( )
+      { return value_.end( ); }
+      virtual inline thing_ cend ( ) const
+      { return value_.cend( ); }
       virtual inline thing_ set ( thing_ thing )
       { return value_.set(thing ); }
       virtual inline thing_ get ( thing_ _ ) const

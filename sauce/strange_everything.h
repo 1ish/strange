@@ -1,7 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_EVERYTHING_H
 #define COM_ONEISH_STRANGE_EVERYTHING_H
 
-#include "strange_thing_.h"
+#include "strange_symbol_.h" //TODO thing
 
 namespace strange
 {
@@ -9,9 +9,9 @@ namespace strange
 class Everything
 {
 public:
-	static inline thing_& val(thing_ _ = thing_())
+	static inline symbol_& val(thing_ _ = thing_()) //TODO thing
 	{
-		static thing_ VAL = Everything{};
+		static symbol_ VAL = Everything{}; //TODO thing
 		return VAL;
 	}
 
@@ -66,22 +66,22 @@ public:
 	inline bool is_nothing_() const { return false; };
 
 	// range
-	inline thing_ begin(thing_ _ = thing_())
+	inline thing_ begin()
 	{
 		return Everything::val();
 	}
 
-	inline thing_ cbegin(thing_ _ = thing_()) const
+	inline thing_ cbegin() const
 	{
 		return Everything::val();
 	}
 
-	inline thing_ end(thing_ _ = thing_())
+	inline thing_ end()
 	{
 		return Everything::val();
 	}
 
-	inline thing_ cend(thing_ _ = thing_()) const
+	inline thing_ cend() const
 	{
 		return Everything::val();
 	}
@@ -132,6 +132,9 @@ public:
 	{
 		return 0;
 	}
+
+private:
+	inline Everything() {};
 };
 
 } // namespace strange

@@ -30,10 +30,10 @@ public:
 	inline bool is_nothing_() const;
 
 	// range
-	inline thing_ begin(thing_ _);
-	inline thing_ cbegin(thing_ _) const;
-	inline thing_ end(thing_ _);
-	inline thing_ cend(thing_ _) const;
+	inline thing_ begin();
+	inline thing_ cbegin() const;
+	inline thing_ end();
+	inline thing_ cend() const;
 
 	// iterator
 	inline thing_ set(thing_ thing);
