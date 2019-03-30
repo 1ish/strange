@@ -20,88 +20,88 @@ public:
 	}
 
 protected:
-	struct derived_handle_base : root_handle_base
+	struct ___derived_handle_base___ : ___root_handle_base___
 	{
 		virtual void mutate() = 0;
 	};
 
-	template <typename ___TTT___, typename ___DHB___ = derived_handle_base>
-	struct derived_handle : root_handle<___TTT___, ___DHB___>
+	template <typename ___TTT___, typename ___DHB___ = ___derived_handle_base___>
+	struct ___derived_handle___ : ___root_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline derived_handle(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
-			: root_handle<___TTT___, ___DHB___>{ value }
+		inline ___derived_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+			: ___root_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline derived_handle(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
-			: root_handle<___TTT___, ___DHB___>{ std::move(value) }
+		inline ___derived_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		virtual inline void mutate() final
 		{
-			root_handle<___TTT___, ___DHB___>::value_.mutate();
+			___root_handle___<___TTT___, ___DHB___>::value_.mutate();
 		}
 	};
 
 	template <typename ___TTT___, typename ___DHB___>
-	struct derived_handle<std::reference_wrapper<___TTT___>, ___DHB___>
-		: derived_handle<___TTT___&, ___DHB___>
+	struct ___derived_handle___<std::reference_wrapper<___TTT___>, ___DHB___>
+		: ___derived_handle___<___TTT___&, ___DHB___>
 	{
-		inline derived_handle(std::reference_wrapper<___TTT___> ref)
-			: derived_handle<___TTT___&, ___DHB___>{ ref.get() }
+		inline ___derived_handle___(std::reference_wrapper<___TTT___> ref)
+			: ___derived_handle___<___TTT___&, ___DHB___>{ ref.get() }
 		{}
 	};
 
 	template <typename ___TTT___>
-	struct derived_handle_ final : derived_handle<___TTT___>
+	struct ___derived_handle_final___ final : ___derived_handle___<___TTT___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline derived_handle_(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
-			: derived_handle<___TTT___>{ value }
+		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+			: ___derived_handle___<___TTT___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline derived_handle_(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
-			: derived_handle<___TTT___>{ std::move(value) }
+		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+			: ___derived_handle___<___TTT___>{ std::move(value) }
 		{}
 
-		virtual inline std::shared_ptr<root_handle_base> clone() const final
+		virtual inline std::shared_ptr<___root_handle_base___> clone() const final
 		{
-			return std::make_shared<derived_handle_>(derived_handle<___TTT___>::value_);
+			return std::make_shared<___derived_handle_final___>(___derived_handle___<___TTT___>::value_);
 		}
 	};
 
 	template <typename ___TTT___>
-	struct derived_handle_<std::reference_wrapper<___TTT___>> final
-		: derived_handle_<___TTT___&>
+	struct ___derived_handle_final___<std::reference_wrapper<___TTT___>> final
+		: ___derived_handle_final___<___TTT___&>
 	{
-		inline derived_handle_(std::reference_wrapper<___TTT___> ref)
-			: derived_handle_<___TTT___&>{ ref.get() }
+		inline ___derived_handle_final___(std::reference_wrapper<___TTT___> ref)
+			: ___derived_handle_final___<___TTT___&>{ ref.get() }
 		{}
 	};
 
-	inline const derived_handle_base& read() const
+	inline const ___derived_handle_base___& read() const
 	{
-		return *std::static_pointer_cast<const derived_handle_base>(handle_);
+		return *std::static_pointer_cast<const ___derived_handle_base___>(handle_);
 	}
 
-	inline derived_handle_base& write()
+	inline ___derived_handle_base___& write()
 	{
 		if (!handle_.unique())
 		{
 			handle_ = handle_->clone();
 		}
-		return *std::static_pointer_cast<derived_handle_base>(handle_);
+		return *std::static_pointer_cast<___derived_handle_base___>(handle_);
 	}
 
 	template <typename ___TTT___>
 	friend inline bool check_(const derived_& v);
 
 public:
-	static inline bool check(const std::shared_ptr<root_handle_base>& h)
+	static inline bool check(const std::shared_ptr<___root_handle_base___>& h)
 	{
-		return bool(std::dynamic_pointer_cast<derived_handle_base>(h));
+		return bool(std::dynamic_pointer_cast<___derived_handle_base___>(h));
 	}
 
 	derived_() = default;
@@ -110,7 +110,7 @@ public:
 	inline derived_(const std::shared_ptr<___TTT___>& other)
 		: root_{ other }
 	{
-		assert(std::dynamic_pointer_cast<derived_handle_base>(other));
+		assert(std::dynamic_pointer_cast<___derived_handle_base___>(other));
 	}
 
 	template <typename ___TTT___>
@@ -119,7 +119,7 @@ public:
 	template <typename ___TTT___>
 	inline derived_& operator=(const std::shared_ptr<___TTT___>& other)
 	{
-		assert(std::dynamic_pointer_cast<derived_handle_base>(other));
+		assert(std::dynamic_pointer_cast<___derived_handle_base___>(other));
 		handle_ = other;
 		return *this;
 	}
@@ -138,7 +138,7 @@ template <typename ___TTT___>
 inline derived_::derived_(___TTT___ value)
 	: root_{ check_<derived_>(value)
 		? static_<derived_>(std::move(value)).handle_
-		: std::make_shared<derived_handle_<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+		: std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 {}
 
 template <typename ___TTT___>

@@ -112,13 +112,13 @@ namespace strange {
 
     private:
 
-        struct handle_base
+        struct handle_base___
 
         {
 
-            virtual ~handle_base () {}
+            virtual ~handle_base___ () {}
 
-            virtual std::shared_ptr<handle_base> clone () const = 0;
+            virtual std::shared_ptr<handle_base___> clone () const = 0;
 
     
 
@@ -154,7 +154,7 @@ namespace strange {
 
         struct handle :
 
-            handle_base
+            handle_base___
 
         {
 
@@ -192,7 +192,7 @@ namespace strange {
 
     
 
-            virtual std::shared_ptr<handle_base> clone () const
+            virtual std::shared_ptr<handle_base___> clone () const
 
             { return std::make_shared<handle>(value_); }
 
@@ -272,13 +272,13 @@ namespace strange {
 
     
 
-        const handle_base & read () const
+        const handle_base___ & read () const
 
         { return *handle_; }
 
     
 
-        handle_base & write ()
+        handle_base___ & write ()
 
         {
 
@@ -292,7 +292,7 @@ namespace strange {
 
     
 
-        std::shared_ptr<handle_base> handle_;
+        std::shared_ptr<handle_base___> handle_;
 
     };
 
