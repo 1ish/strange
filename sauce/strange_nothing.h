@@ -38,17 +38,9 @@ public:
 	}
 
 	// comparison
-	inline thing_ same(thing_ range) const
-	{
-		const auto other = range.cbegin();
-		return (other != range.cend() && other.get().is_nothing_()) ? Everything::val() : Nothing::val();
-	}
+	inline thing_ same(thing_ range) const;
 
-	inline thing_ different(thing_ range) const
-	{
-		const auto other = range.cbegin();
-		return (other == range.cend() || other.get().is_something_()) ? Everything::val() : Nothing::val();
-	}
+	inline thing_ different(thing_ range) const;
 
 	inline bool operator==(thing_ thing) const
 	{
