@@ -6,17 +6,19 @@
 namespace strange
 {
 
-inline thing_ Everything::same(thing_ thing) const
+inline thing_ Everything::same(thing_ range) const
 {
-	return thing.is_something_() ? Everything::val() : Nothing::val();
+	const auto other = range.cbegin();
+	return (other != range.cend() && other.get().is_something_()) ? Everything::val() : Nothing::val();
 }
 
-inline thing_ Everything::different(thing_ thing) const
+inline thing_ Everything::different(thing_ range) const
 {
-	return thing.is_nothing_() ? Everything::val() : Nothing::val();
+	const auto other = range.cbegin();
+	return (other == range.cend() || other.get().is_nothing_()) ? Everything::val() : Nothing::val();
 }
 
-inline thing_ Everything::is_nothing(thing_ _) const
+inline thing_ Everything::is_nothing(thing_) const
 {
 	return Nothing::val();
 }

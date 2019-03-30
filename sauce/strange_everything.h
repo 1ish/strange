@@ -37,9 +37,9 @@ public:
 	}
 
 	// comparison
-	inline thing_ same(thing_ thing) const;
+	inline thing_ same(thing_ range) const;
 
-	inline thing_ different(thing_ thing) const;
+	inline thing_ different(thing_ range) const;
 
 	inline bool operator==(thing_ thing) const
 	{
@@ -90,7 +90,7 @@ public:
 	}
 
 	// iterator
-	inline thing_ set(thing_ thing)
+	inline thing_ set(thing_)
 	{
 		return Everything::val();
 	}

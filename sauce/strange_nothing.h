@@ -38,14 +38,16 @@ public:
 	}
 
 	// comparison
-	inline thing_ same(thing_ thing) const
+	inline thing_ same(thing_ range) const
 	{
-		return thing.is_nothing_() ? Everything::val() : Nothing::val();
+		const auto other = range.cbegin();
+		return (other != range.cend() && other.get().is_nothing_()) ? Everything::val() : Nothing::val();
 	}
 
-	inline thing_ different(thing_ thing) const
+	inline thing_ different(thing_ range) const
 	{
-		return thing.is_something_() ? Everything::val() : Nothing::val();
+		const auto other = range.cbegin();
+		return (other == range.cend() || other.get().is_something_()) ? Everything::val() : Nothing::val();
 	}
 
 	inline bool operator==(thing_ thing) const
@@ -100,7 +102,7 @@ public:
 	}
 
 	// iterator
-	inline thing_ set(thing_ thing)
+	inline thing_ set(thing_)
 	{
 		return Nothing::val();
 	}

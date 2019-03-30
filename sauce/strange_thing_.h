@@ -18,18 +18,18 @@ namespace strange {
 
     public:
 
-     inline thing_ mutate ( thing_ thing )
-     { assert(handle_); return write().mutate(thing ); }
-     inline thing_ extract ( thing_ thing ) const
-     { assert(handle_); return read().extract(thing ); }
-     inline thing_ operator ( ) ( thing_ thing )
-     { assert(handle_); return write().operator()(thing ); }
-     inline thing_ operator ( ) ( thing_ thing ) const
-     { assert(handle_); return read().operator()(thing ); }
-     inline thing_ same ( thing_ thing ) const
-     { assert(handle_); return read().same(thing ); }
-     inline thing_ different ( thing_ thing ) const
-     { assert(handle_); return read().different(thing ); }
+     inline thing_ mutate ( thing_ range )
+     { assert(handle_); return write().mutate(range ); }
+     inline thing_ extract ( thing_ range ) const
+     { assert(handle_); return read().extract(range ); }
+     inline thing_ operator ( ) ( thing_ range )
+     { assert(handle_); return write().operator()(range ); }
+     inline thing_ operator ( ) ( thing_ range ) const
+     { assert(handle_); return read().operator()(range ); }
+     inline thing_ same ( thing_ range ) const
+     { assert(handle_); return read().same(range ); }
+     inline thing_ different ( thing_ range ) const
+     { assert(handle_); return read().different(range ); }
      inline bool operator == ( thing_ thing ) const
      { assert(handle_); return read().operator==(thing ); }
      inline bool operator != ( thing_ thing ) const
@@ -50,8 +50,8 @@ namespace strange {
      { assert(handle_); return write().end(_ ); }
      inline thing_ cend ( thing_ _ = thing_ ( ) ) const
      { assert(handle_); return read().cend(_ ); }
-     inline thing_ set ( thing_ thing )
-     { assert(handle_); return write().set(thing ); }
+     inline thing_ set ( thing_ range )
+     { assert(handle_); return write().set(range ); }
      inline thing_ get ( thing_ _ = thing_ ( ) ) const
      { assert(handle_); return read().get(_ ); }
      inline thing_ & operator * ( )
@@ -92,12 +92,12 @@ namespace strange {
 
     
 
-      virtual inline thing_ mutate ( thing_ thing ) = 0;
-      virtual inline thing_ extract ( thing_ thing ) const = 0;
-      virtual inline thing_ operator ( ) ( thing_ thing ) = 0;
-      virtual inline thing_ operator ( ) ( thing_ thing ) const = 0;
-      virtual inline thing_ same ( thing_ thing ) const = 0;
-      virtual inline thing_ different ( thing_ thing ) const = 0;
+      virtual inline thing_ mutate ( thing_ range ) = 0;
+      virtual inline thing_ extract ( thing_ range ) const = 0;
+      virtual inline thing_ operator ( ) ( thing_ range ) = 0;
+      virtual inline thing_ operator ( ) ( thing_ range ) const = 0;
+      virtual inline thing_ same ( thing_ range ) const = 0;
+      virtual inline thing_ different ( thing_ range ) const = 0;
       virtual inline bool operator == ( thing_ thing ) const = 0;
       virtual inline bool operator != ( thing_ thing ) const = 0;
       virtual inline thing_ is_something ( thing_ _ = thing_ ( ) ) const = 0;
@@ -108,7 +108,7 @@ namespace strange {
       virtual inline thing_ cbegin ( thing_ _ = thing_ ( ) ) const = 0;
       virtual inline thing_ end ( thing_ _ = thing_ ( ) ) = 0;
       virtual inline thing_ cend ( thing_ _ = thing_ ( ) ) const = 0;
-      virtual inline thing_ set ( thing_ thing ) = 0;
+      virtual inline thing_ set ( thing_ range ) = 0;
       virtual inline thing_ get ( thing_ _ = thing_ ( ) ) const = 0;
       virtual inline thing_ & operator * ( ) = 0;
       virtual inline const thing_ & operator * ( ) const = 0;
@@ -146,18 +146,18 @@ namespace strange {
 
     
 
-      virtual inline thing_ mutate ( thing_ thing )
-      { return value_.mutate(thing ); }
-      virtual inline thing_ extract ( thing_ thing ) const
-      { return value_.extract(thing ); }
-      virtual inline thing_ operator ( ) ( thing_ thing )
-      { return value_.operator()(thing ); }
-      virtual inline thing_ operator ( ) ( thing_ thing ) const
-      { return value_.operator()(thing ); }
-      virtual inline thing_ same ( thing_ thing ) const
-      { return value_.same(thing ); }
-      virtual inline thing_ different ( thing_ thing ) const
-      { return value_.different(thing ); }
+      virtual inline thing_ mutate ( thing_ range )
+      { return value_.mutate(range ); }
+      virtual inline thing_ extract ( thing_ range ) const
+      { return value_.extract(range ); }
+      virtual inline thing_ operator ( ) ( thing_ range )
+      { return value_.operator()(range ); }
+      virtual inline thing_ operator ( ) ( thing_ range ) const
+      { return value_.operator()(range ); }
+      virtual inline thing_ same ( thing_ range ) const
+      { return value_.same(range ); }
+      virtual inline thing_ different ( thing_ range ) const
+      { return value_.different(range ); }
       virtual inline bool operator == ( thing_ thing ) const
       { return value_.operator==(thing ); }
       virtual inline bool operator != ( thing_ thing ) const
@@ -178,8 +178,8 @@ namespace strange {
       { return value_.end(_ ); }
       virtual inline thing_ cend ( thing_ _ = thing_ ( ) ) const
       { return value_.cend(_ ); }
-      virtual inline thing_ set ( thing_ thing )
-      { return value_.set(thing ); }
+      virtual inline thing_ set ( thing_ range )
+      { return value_.set(range ); }
       virtual inline thing_ get ( thing_ _ = thing_ ( ) ) const
       { return value_.get(_ ); }
       virtual inline thing_ & operator * ( )

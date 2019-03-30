@@ -12,14 +12,14 @@ class thing_
 {
 public:
 	// function
-	inline thing_ mutate(thing_ thing);
-	inline thing_ extract(thing_ thing) const;
-	inline thing_ operator()(thing_ thing);
-	inline thing_ operator()(thing_ thing) const;
+	inline thing_ mutate(thing_ range);
+	inline thing_ extract(thing_ range) const;
+	inline thing_ operator()(thing_ range);
+	inline thing_ operator()(thing_ range) const;
 
 	// comparison
-	inline thing_ same(thing_ thing) const;
-	inline thing_ different(thing_ thing) const;
+	inline thing_ same(thing_ range) const;
+	inline thing_ different(thing_ range) const;
 	inline bool operator==(thing_ thing) const;
 	inline bool operator!=(thing_ thing) const;
 
@@ -36,7 +36,7 @@ public:
 	inline thing_ cend(thing_ _ = thing_()) const;
 
 	// iterator
-	inline thing_ set(thing_ thing);
+	inline thing_ set(thing_ range);
 	inline thing_ get(thing_ _ = thing_()) const;
 	inline thing_& operator*();
 	inline const thing_& operator*() const;
