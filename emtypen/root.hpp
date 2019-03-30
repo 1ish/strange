@@ -31,7 +31,7 @@ protected:
 			: value_{ std::move(value) }
 		{}
 
-		%virtual_members% // final
+		%virtual_members% //TODO final
 
 		___TTT___ value_;
 	};

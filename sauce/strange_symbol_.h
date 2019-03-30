@@ -11,297 +11,281 @@
 
 
 namespace strange {
+    #define ___root___ thing_
+
     
-    class symbol_
+
+    
+    class symbol_ : public ___root___
 
     {
 
     public:
 
-        // Contructors
+     inline std :: size_t hash_ ( ) const
+     { assert(handle_); return read().hash_( ); }
+    
 
-        symbol_ () = default;
+    protected:
+
+    	struct ___derived_handle_base___ : ___root_handle_base___
+
+    	{
+
+      virtual inline std :: size_t hash_ ( ) const = 0;
+    	};
 
     
 
-        template <typename ___TTT___>
+    	template <typename ___TTT___, typename ___DHB___ = ___derived_handle_base___>
 
-        symbol_ (___TTT___ value) :
+    	struct ___derived_handle___ : ___root_handle___<___TTT___, ___DHB___>
 
-            handle_ (
+    	{
 
-                std::make_shared<handle<typename std::remove_reference<___TTT___>::type>>(
+    		template <typename ___UUU___ = ___TTT___>
 
-                    std::move(value)
+    		inline ___derived_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
 
-                )
+    			: ___root_handle___<___TTT___, ___DHB___>{ value }
 
-            )
-
-        {}
+    		{}
 
     
 
-        // Assignment
+    		template <typename ___UUU___ = ___TTT___>
 
-        template <typename ___TTT___>
+    		inline ___derived_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
 
-        symbol_ & operator= (___TTT___ value)
+    			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
 
-        {
-
-            symbol_ temp(std::move(value));
-
-            std::swap(temp.handle_, handle_);
-
-            return *this;
-
-        }
+    		{}
 
     
 
-        inline thing_ mutate ( thing_ thing )
-        { assert(handle_); return write().mutate(thing ); }
-        inline thing_ extract ( thing_ thing ) const
-        { assert(handle_); return read().extract(thing ); }
-        inline thing_ operator ( ) ( thing_ thing )
-        { assert(handle_); return write().operator()(thing ); }
-        inline thing_ operator ( ) ( thing_ thing ) const
-        { assert(handle_); return read().operator()(thing ); }
-        inline thing_ same ( thing_ thing ) const
-        { assert(handle_); return read().same(thing ); }
-        inline thing_ different ( thing_ thing ) const
-        { assert(handle_); return read().different(thing ); }
-        inline bool operator == ( thing_ thing ) const
-        { assert(handle_); return read().operator==(thing ); }
-        inline bool operator != ( thing_ thing ) const
-        { assert(handle_); return read().operator!=(thing ); }
-        thing_ is_something ( thing_ _ ) const
-        { assert(handle_); return read().is_something(_ ); }
-        inline bool is_something_ ( ) const
-        { assert(handle_); return read().is_something_( ); }
-        thing_ is_nothing ( thing_ _ ) const
-        { assert(handle_); return read().is_nothing(_ ); }
-        inline bool is_nothing_ ( ) const
-        { assert(handle_); return read().is_nothing_( ); }
-        inline thing_ begin ( thing_ _ )
-        { assert(handle_); return write().begin(_ ); }
-        inline thing_ cbegin ( thing_ _ ) const
-        { assert(handle_); return read().cbegin(_ ); }
-        inline thing_ end ( thing_ _ )
-        { assert(handle_); return write().end(_ ); }
-        inline thing_ cend ( thing_ _ ) const
-        { assert(handle_); return read().cend(_ ); }
-        inline thing_ set ( thing_ thing )
-        { assert(handle_); return write().set(thing ); }
-        inline thing_ get ( thing_ _ ) const
-        { assert(handle_); return read().get(_ ); }
-        inline thing_ & operator * ( )
-        { assert(handle_); return write().operator*( ); }
-        inline const thing_ & operator * ( ) const
-        { assert(handle_); return read().operator*( ); }
-        inline thing_ * operator -> ( )
-        { assert(handle_); return write().operator->( ); }
-        inline const thing_ * operator -> ( ) const
-        { assert(handle_); return read().operator->( ); }
-        inline thing_ increment ( thing_ _ )
-        { assert(handle_); return write().increment(_ ); }
-        inline thing_ & operator ++ ( )
-        { assert(handle_); return write().operator++( ); }
-        inline std :: size_t hash_ ( ) const
-        { assert(handle_); return read().hash_( ); }
+      virtual inline std :: size_t hash_ ( ) const
+      { return value_.hash_( ); }
+    	};
+
+    
+
+    	template <typename ___TTT___, typename ___DHB___>
+
+    	struct ___derived_handle___<std::reference_wrapper<___TTT___>, ___DHB___>
+
+    		: ___derived_handle___<___TTT___&, ___DHB___>
+
+    	{
+
+    		inline ___derived_handle___(std::reference_wrapper<___TTT___> ref)
+
+    			: ___derived_handle___<___TTT___&, ___DHB___>{ ref.get() }
+
+    		{}
+
+    	};
+
     
 
     private:
 
-        struct handle_base___
+    	template <typename ___TTT___>
 
-        {
+    	struct ___derived_handle_final___ final : ___derived_handle___<___TTT___>
 
-            virtual ~handle_base___ () {}
+    	{
 
-            virtual std::shared_ptr<handle_base___> clone () const = 0;
+    		template <typename ___UUU___ = ___TTT___>
 
-    
+    		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
 
-            virtual inline thing_ mutate ( thing_ thing ) = 0;
-            virtual inline thing_ extract ( thing_ thing ) const = 0;
-            virtual inline thing_ operator ( ) ( thing_ thing ) = 0;
-            virtual inline thing_ operator ( ) ( thing_ thing ) const = 0;
-            virtual inline thing_ same ( thing_ thing ) const = 0;
-            virtual inline thing_ different ( thing_ thing ) const = 0;
-            virtual inline bool operator == ( thing_ thing ) const = 0;
-            virtual inline bool operator != ( thing_ thing ) const = 0;
-            virtual thing_ is_something ( thing_ _ ) const = 0;
-            virtual inline bool is_something_ ( ) const = 0;
-            virtual thing_ is_nothing ( thing_ _ ) const = 0;
-            virtual inline bool is_nothing_ ( ) const = 0;
-            virtual inline thing_ begin ( thing_ _ ) = 0;
-            virtual inline thing_ cbegin ( thing_ _ ) const = 0;
-            virtual inline thing_ end ( thing_ _ ) = 0;
-            virtual inline thing_ cend ( thing_ _ ) const = 0;
-            virtual inline thing_ set ( thing_ thing ) = 0;
-            virtual inline thing_ get ( thing_ _ ) const = 0;
-            virtual inline thing_ & operator * ( ) = 0;
-            virtual inline const thing_ & operator * ( ) const = 0;
-            virtual inline thing_ * operator -> ( ) = 0;
-            virtual inline const thing_ * operator -> ( ) const = 0;
-            virtual inline thing_ increment ( thing_ _ ) = 0;
-            virtual inline thing_ & operator ++ ( ) = 0;
-            virtual inline std :: size_t hash_ ( ) const = 0;
-        };
+    			: ___derived_handle___<___TTT___>{ value }
+
+    		{}
 
     
 
-        template <typename ___TTT___>
+    		template <typename ___UUU___ = ___TTT___>
 
-        struct handle :
+    		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
 
-            handle_base___
+    			: ___derived_handle___<___TTT___>{ std::move(value) }
 
-        {
-
-            template <typename ___UUU___ = ___TTT___>
-
-            handle (___TTT___ value,
-
-                    typename std::enable_if<
-
-                        std::is_reference<___UUU___>::value
-
-                    >::type * = 0) :
-
-                value_ (value)
-
-            {}
+    		{}
 
     
 
-            template <typename ___UUU___ = ___TTT___>
+    		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
 
-            handle (___TTT___ value,
+    		{
 
-                    typename std::enable_if<
+    			return std::make_shared<___derived_handle_final___>(___derived_handle___<___TTT___>::value_);
 
-                        !std::is_reference<___UUU___>::value,
+    		}
 
-                        int
-
-                    >::type * = 0) noexcept :
-
-                value_ (std::move(value))
-
-            {}
+    	};
 
     
 
-            virtual std::shared_ptr<handle_base___> clone () const
+    	template <typename ___TTT___>
 
-            { return std::make_shared<handle>(value_); }
+    	struct ___derived_handle_final___<std::reference_wrapper<___TTT___>> final
 
-    
+    		: ___derived_handle_final___<___TTT___&>
 
-            virtual inline thing_ mutate ( thing_ thing )
-            { return value_.mutate(thing ); }
-            virtual inline thing_ extract ( thing_ thing ) const
-            { return value_.extract(thing ); }
-            virtual inline thing_ operator ( ) ( thing_ thing )
-            { return value_.operator()(thing ); }
-            virtual inline thing_ operator ( ) ( thing_ thing ) const
-            { return value_.operator()(thing ); }
-            virtual inline thing_ same ( thing_ thing ) const
-            { return value_.same(thing ); }
-            virtual inline thing_ different ( thing_ thing ) const
-            { return value_.different(thing ); }
-            virtual inline bool operator == ( thing_ thing ) const
-            { return value_.operator==(thing ); }
-            virtual inline bool operator != ( thing_ thing ) const
-            { return value_.operator!=(thing ); }
-            virtual thing_ is_something ( thing_ _ ) const
-            { return value_.is_something(_ ); }
-            virtual inline bool is_something_ ( ) const
-            { return value_.is_something_( ); }
-            virtual thing_ is_nothing ( thing_ _ ) const
-            { return value_.is_nothing(_ ); }
-            virtual inline bool is_nothing_ ( ) const
-            { return value_.is_nothing_( ); }
-            virtual inline thing_ begin ( thing_ _ )
-            { return value_.begin(_ ); }
-            virtual inline thing_ cbegin ( thing_ _ ) const
-            { return value_.cbegin(_ ); }
-            virtual inline thing_ end ( thing_ _ )
-            { return value_.end(_ ); }
-            virtual inline thing_ cend ( thing_ _ ) const
-            { return value_.cend(_ ); }
-            virtual inline thing_ set ( thing_ thing )
-            { return value_.set(thing ); }
-            virtual inline thing_ get ( thing_ _ ) const
-            { return value_.get(_ ); }
-            virtual inline thing_ & operator * ( )
-            { return value_.operator*( ); }
-            virtual inline const thing_ & operator * ( ) const
-            { return value_.operator*( ); }
-            virtual inline thing_ * operator -> ( )
-            { return value_.operator->( ); }
-            virtual inline const thing_ * operator -> ( ) const
-            { return value_.operator->( ); }
-            virtual inline thing_ increment ( thing_ _ )
-            { return value_.increment(_ ); }
-            virtual inline thing_ & operator ++ ( )
-            { return value_.operator++( ); }
-            virtual inline std :: size_t hash_ ( ) const
-            { return value_.hash_( ); }
-    
+    	{
 
-            ___TTT___ value_;
+    		inline ___derived_handle_final___(std::reference_wrapper<___TTT___> ref)
 
-        };
+    			: ___derived_handle_final___<___TTT___&>{ ref.get() }
+
+    		{}
+
+    	};
 
     
 
-        template <typename ___TTT___>
+    	inline const ___derived_handle_base___& read() const
 
-        struct handle<std::reference_wrapper<___TTT___>> :
+    	{
 
-            handle<___TTT___ &>
+    		return *std::static_pointer_cast<const ___derived_handle_base___>(handle_);
 
-        {
-
-            handle (std::reference_wrapper<___TTT___> ref) :
-
-                handle<___TTT___ &> (ref.get())
-
-            {}
-
-        };
+    	}
 
     
 
-        const handle_base___ & read () const
+    	inline ___derived_handle_base___& write()
 
-        { return *handle_; }
+    	{
 
-    
+    		if (!handle_.unique())
 
-        handle_base___ & write ()
+    		{
 
-        {
+    			handle_ = handle_->___clone___();
 
-            if (!handle_.unique())
+    		}
 
-                handle_ = handle_->clone();
+    		return *std::static_pointer_cast<___derived_handle_base___>(handle_);
 
-            return *handle_;
-
-        }
+    	}
 
     
 
-        std::shared_ptr<handle_base___> handle_;
+    	template <typename ___TTT___>
+
+    	friend inline bool check_(const symbol_& v);
+
+    
+
+    public:
+
+    	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& h)
+
+    	{
+
+    		return bool(std::dynamic_pointer_cast<___derived_handle_base___>(h));
+
+    	}
+
+    
+
+    	symbol_() = default;
+
+    
+
+    	template <typename ___TTT___>
+
+    	inline symbol_(const std::shared_ptr<___TTT___>& other)
+
+    		: ___root___{ other }
+
+    	{
+
+    		assert(std::dynamic_pointer_cast<___derived_handle_base___>(other));
+
+    	}
+
+    
+
+    	template <typename ___TTT___>
+
+    	inline symbol_(___TTT___ value);
+
+    
+
+    	template <typename ___TTT___>
+
+    	inline symbol_& operator=(const std::shared_ptr<___TTT___>& other)
+
+    	{
+
+    		assert(std::dynamic_pointer_cast<___derived_handle_base___>(other));
+
+    		handle_ = other;
+
+    		return *this;
+
+    	}
+
+    
+
+    	template <typename ___TTT___>
+
+    	inline symbol_& operator=(___TTT___ value);
 
     };
 
     
+
+    template <typename ___TTT___>
+
+    inline bool check_(const symbol_& v)
+
+    {
+
+    	return ___TTT___::___check___(v.handle_);
+
+    }
+
+    
+
+    template <typename ___TTT___>
+
+    inline symbol_::symbol_(___TTT___ value)
+
+    	: ___root___{ check_<symbol_>(value)
+
+    		? static_<symbol_>(std::move(value)).handle_
+
+    		: std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+
+    {}
+
+    
+
+    template <typename ___TTT___>
+
+    inline symbol_& symbol_::operator=(___TTT___ value)
+
+    {
+
+    	symbol_ temp{ check_<symbol_>(value)
+
+    		? static_<symbol_>(std::move(value))
+
+    		: std::move(value) };
+
+    	std::swap(temp.handle_, handle_);
+
+    	return *this;
+
+    }
+
+    
+
+    #undef ___root___
 
 }
 #endif
