@@ -38,7 +38,7 @@ protected:
 			: derived_handle<___TTT___, finale_handle_base>{ std::move(value) }
 		{}
 
-		virtual inline std::shared_ptr<base_handle_base> clone() const final
+		virtual inline std::shared_ptr<root_handle_base> clone() const final
 		{
 			return std::make_shared<finale_handle>(derived_handle<___TTT___, finale_handle_base>::value_);
 		}
@@ -76,7 +76,7 @@ protected:
 	friend inline bool check_(const finale_& v);
 
 public:
-	static inline bool check(const std::shared_ptr<base_handle_base>& h)
+	static inline bool check(const std::shared_ptr<root_handle_base>& h)
 	{
 		return bool(std::dynamic_pointer_cast<finale_handle_base>(h));
 	}

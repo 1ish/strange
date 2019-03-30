@@ -1,23 +1,23 @@
 #include "gtest/gtest.h"
 
-#include "base_.h"
+#include "root_.h"
 #include "derived_.h"
 #include "finale_.h"
 
-class base
+class root
 {
 public:
-	static base_ val()
+	static root_ val()
 	{
-		return base_{ base{} };
+		return root_{ root{} };
 	}
 
 	void print() const
 	{
-		std::cout << "base print" << std::endl;
+		std::cout << "root print" << std::endl;
 	}
 private:
-	base() {};
+	root() {};
 };
 
 class derived
@@ -69,10 +69,10 @@ private:
 
 TEST(SomeTaste, TestName) {
 
-	base_ b_{ base::val() };
+	root_ r_{ root::val() };
 
-	std::cout << "\n b_.print()" << std::endl;
-	b_.print();
+	std::cout << "\n r_.print()" << std::endl;
+	r_.print();
 
 	derived_ d_{ derived::val() };
 	
@@ -81,22 +81,22 @@ TEST(SomeTaste, TestName) {
 	std::cout << "\n d_.mutate()" << std::endl;
 	d_.mutate();
 
-	b_ = d_;
+	r_ = d_;
 
-	std::cout << "\n b_.print()" << std::endl;
-	b_.print();
+	std::cout << "\n r_.print()" << std::endl;
+	r_.print();
 
-	base_ b2{ d_ };
+	root_ r2{ d_ };
 
-	std::cout << "\n b2.print()" << std::endl;
-	b2.print();
+	std::cout << "\n r2.print()" << std::endl;
+	r2.print();
 
-	base_ b3{ derived::val() };
+	root_ r3{ derived::val() };
 
-	std::cout << "\n b3.print()" << std::endl;
-	b3.print();
+	std::cout << "\n r3.print()" << std::endl;
+	r3.print();
 
-	derived_ d3{ static_<derived_>(b3) };
+	derived_ d3{ static_<derived_>(r3) };
 
 	std::cout << "\n d3.mutate()" << std::endl;
 	d3.mutate();
@@ -110,14 +110,14 @@ TEST(SomeTaste, TestName) {
 	std::cout << "\n f_.finish()" << std::endl;
 	f_.finish();
 
-	b_ = f_;
+	r_ = f_;
 
-	std::cout << "\n b_.print()" << std::endl;
-	b_.print();
+	std::cout << "\n r_.print()" << std::endl;
+	r_.print();
 
-	EXPECT_TRUE(check_<finale_>(b_));
+	EXPECT_TRUE(check_<finale_>(r_));
 
-	f_ = static_<finale_>(b_);
+	f_ = static_<finale_>(r_);
 
 	std::cout << "\n f_.print()" << std::endl;
 	f_.print();
@@ -126,20 +126,20 @@ TEST(SomeTaste, TestName) {
 	std::cout << "\n f_.finish()" << std::endl;
 	f_.finish();
 
-	b_ = f_;
+	r_ = f_;
 
-	std::cout << "\n b_.print()" << std::endl;
-	b_.print();
+	std::cout << "\n r_.print()" << std::endl;
+	r_.print();
 
-	b_ = b2;
+	r_ = r2;
 
-	std::cout << "\n b_.print()" << std::endl;
-	b_.print();
+	std::cout << "\n r_.print()" << std::endl;
+	r_.print();
 
-	base_ b4{ d_ };
+	root_ r4{ d_ };
 
-	std::cout << "\n b4.print()" << std::endl;
-	b4.print();
+	std::cout << "\n r4.print()" << std::endl;
+	r4.print();
 
 	d_ = f_;
 
@@ -155,10 +155,10 @@ TEST(SomeTaste, TestName) {
 }
 
 TEST(SomeTaste, BadTest) {
-	base_ b_{ base::val() };
-	if (check_<derived_>(b_))
+	root_ r_{ root::val() };
+	if (check_<derived_>(r_))
 	{
-		static_<derived_>(b_);
+		static_<derived_>(r_);
 	}
 	EXPECT_EQ(1, 1);
 }

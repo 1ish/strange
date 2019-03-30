@@ -8,9 +8,9 @@
 #include <type_traits>
 #include <utility>
 
-#include "base_.h"
+#include "root_.h"
 
-class derived_ : public base_
+class derived_ : public root_
 {
 public:
 	inline void mutate()
@@ -20,27 +20,27 @@ public:
 	}
 
 protected:
-	struct derived_handle_base : base_handle_base
+	struct derived_handle_base : root_handle_base
 	{
 		virtual void mutate() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = derived_handle_base>
-	struct derived_handle : base_handle<___TTT___, ___DHB___>
+	struct derived_handle : root_handle<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline derived_handle(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
-			: base_handle<___TTT___, ___DHB___>{ value }
+			: root_handle<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline derived_handle(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
-			: base_handle<___TTT___, ___DHB___>{ std::move(value) }
+			: root_handle<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
 		virtual inline void mutate() final
 		{
-			base_handle<___TTT___, ___DHB___>::value_.mutate();
+			root_handle<___TTT___, ___DHB___>::value_.mutate();
 		}
 	};
 
@@ -66,7 +66,7 @@ protected:
 			: derived_handle<___TTT___>{ std::move(value) }
 		{}
 
-		virtual inline std::shared_ptr<base_handle_base> clone() const final
+		virtual inline std::shared_ptr<root_handle_base> clone() const final
 		{
 			return std::make_shared<derived_handle_>(derived_handle<___TTT___>::value_);
 		}
@@ -99,7 +99,7 @@ protected:
 	friend inline bool check_(const derived_& v);
 
 public:
-	static inline bool check(const std::shared_ptr<base_handle_base>& h)
+	static inline bool check(const std::shared_ptr<root_handle_base>& h)
 	{
 		return bool(std::dynamic_pointer_cast<derived_handle_base>(h));
 	}
@@ -108,7 +108,7 @@ public:
 
 	template <typename ___TTT___>
 	inline derived_(const std::shared_ptr<___TTT___>& other)
-		: base_{ other }
+		: root_{ other }
 	{
 		assert(std::dynamic_pointer_cast<derived_handle_base>(other));
 	}
@@ -136,7 +136,7 @@ inline bool check_(const derived_& v)
 
 template <typename ___TTT___>
 inline derived_::derived_(___TTT___ value)
-	: base_{ check_<derived_>(value)
+	: root_{ check_<derived_>(value)
 		? static_<derived_>(std::move(value)).handle_
 		: std::make_shared<derived_handle_<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 {}
