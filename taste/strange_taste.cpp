@@ -32,6 +32,8 @@ TEST(TestCaseName, ForLoop) {
 	symbol_ s{ Everything() };
 	t = s; //TODO thing<symbol_<Everything>>
 
+	cat_ c;
+
 	EXPECT_TRUE(true);
 }
 /*

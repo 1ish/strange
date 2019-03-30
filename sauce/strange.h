@@ -3,6 +3,7 @@
 
 #include "strange_thing_.h"
 #include "strange_symbol_.h"
+#include "strange_cat_.h"
 
 #include "strange_everything.h"
 #include "strange_nothing.h"
