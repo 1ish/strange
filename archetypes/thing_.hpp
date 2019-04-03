@@ -39,12 +39,15 @@ public:
 	inline thing_ begin_set(thing_ _);
 	inline thing_ begin_set_();
 	inline thing_ begin();
+
 	inline thing_ begin_get(thing_ _) const;
 	inline thing_ begin_get_() const;
 	inline thing_ cbegin() const;
+
 	inline thing_ end_set(thing_ _);
 	inline thing_ end_set_();
 	inline thing_ end();
+
 	inline thing_ end_get(thing_ _) const;
 	inline thing_ end_get_() const;
 	inline thing_ cend() const;
@@ -54,6 +57,7 @@ public:
 	inline thing_ set_(thing_ thing);
 	inline thing_& operator*();
 	inline thing_* operator->();
+
 	inline thing_ get(thing_ _) const;
 	inline thing_ get_() const;
 	inline const thing_& operator*() const;

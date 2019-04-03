@@ -18,6 +18,16 @@ namespace strange {
 
     public:
 
+    	inline operator bool() const
+
+    	{
+
+    		assert(handle_); return read().operator bool();
+
+    	}
+
+    
+
      inline thing_ mutate ( thing_ range )
      { assert(handle_); return write().mutate(range ); }
      inline thing_ operator ( ) ( thing_ range )
@@ -94,16 +104,6 @@ namespace strange {
      { assert(handle_); return write().operator++( ); }
     
 
-    	inline operator bool() const
-
-    	{
-
-    		assert(handle_); return read().operator bool();
-
-    	}
-
-    
-
     protected:
 
     	struct ___root_handle_base___
@@ -125,6 +125,10 @@ namespace strange {
     
 
     		virtual std::shared_ptr<___root_handle_base___> ___clone___() const = 0;
+
+    
+
+    		virtual inline operator bool() const = 0;
 
     
 
@@ -165,10 +169,6 @@ namespace strange {
       virtual inline thing_ increment ( thing_ _ ) = 0;
       virtual inline thing_ increment_ ( ) = 0;
       virtual inline thing_ & operator ++ ( ) = 0;
-    
-
-    		virtual inline operator bool() const = 0;
-
     	};
 
     
@@ -196,6 +196,16 @@ namespace strange {
     			: value_{ std::move(value) }
 
     		{}
+
+    
+
+    		virtual inline operator bool() const
+
+    		{
+
+    			return value_.operator bool();
+
+    		}
 
     
 
@@ -273,16 +283,6 @@ namespace strange {
       { return value_.increment_( ); }
       virtual inline thing_ & operator ++ ( )
       { return value_.operator++( ); }
-    
-
-    		virtual inline operator bool() const
-
-    		{
-
-    			return value_.operator bool();
-
-    		}
-
     
 
     		___TTT___ value_;

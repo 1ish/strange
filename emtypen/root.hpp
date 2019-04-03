@@ -1,12 +1,12 @@
 %struct_prefix%
 {
 public:
-	%nonvirtual_members%
-
 	inline operator bool() const
 	{
 		assert(handle_); return read().operator bool();
 	}
+
+	%nonvirtual_members%
 
 protected:
 	struct ___root_handle_base___
@@ -20,9 +20,9 @@ protected:
 
 		virtual std::shared_ptr<___root_handle_base___> ___clone___() const = 0;
 
-		%pure_virtual_members%
-
 		virtual inline operator bool() const = 0;
+
+		%pure_virtual_members%
 	};
 
 	template <typename ___TTT___, typename ___BHB___ = ___root_handle_base___>
@@ -38,12 +38,12 @@ protected:
 			: value_{ std::move(value) }
 		{}
 
-		%virtual_members% //TODO final
-
 		virtual inline operator bool() const
 		{
 			return value_.operator bool();
 		}
+
+		%virtual_members% //TODO final
 
 		___TTT___ value_;
 	};
