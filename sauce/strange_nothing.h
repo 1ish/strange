@@ -7,7 +7,7 @@
 namespace strange
 {
 
-class Nothing
+class Nothing : public Thing
 {
 public:
 	static inline thing_& val(thing_ _ = thing_{})
@@ -16,18 +16,24 @@ public:
 		return VAL;
 	}
 
+	// conversion
+	inline operator bool() const
+	{
+		return false;
+	}
+
 	// function
 	inline thing_ mutate(thing_)
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ extract(thing_) const
+	inline thing_ operator()(thing_)
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ operator()(thing_)
+	inline thing_ extract(thing_) const
 	{
 		return Nothing::val();
 	}
@@ -40,16 +46,20 @@ public:
 	// comparison
 	inline thing_ same(thing_ range) const;
 
-	inline thing_ different(thing_ range) const;
+	inline thing_ same_(thing_ thing) const;
 
 	inline bool operator==(thing_ thing) const
 	{
-		return thing.is_nothing_();
+		return !thing;
 	}
+
+	inline thing_ different(thing_ range) const;
+
+	inline thing_ different_(thing_ thing) const;
 
 	inline bool operator!=(thing_ thing) const
 	{
-		return thing.is_something_();
+		return thing;
 	}
 
 	inline thing_ is_something(thing_) const
@@ -57,9 +67,9 @@ public:
 		return Nothing::val();
 	}
 
-	inline bool is_something_() const
+	inline thing_ is_something_() const
 	{
-		return false;
+		return Nothing::val();
 	}
 
 	inline thing_ is_nothing(thing_) const
@@ -67,28 +77,68 @@ public:
 		return Everything::val();
 	}
 
-	inline bool is_nothing_() const
+	inline thing_ is_nothing_() const
 	{
-		return true;
+		return Everything::val();
 	}
 
 	// range
-	inline thing_ begin(thing_)
+	inline thing_ begin_set(thing_)
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ cbegin(thing_) const
+	inline thing_ begin_set_()
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ end(thing_)
+	inline thing_ begin()
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ cend(thing_) const
+	inline thing_ begin_get(thing_) const
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ begin_get_() const
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ cbegin() const
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ end_set(thing_)
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ end_set_()
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ end()
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ end_get(thing_) const
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ end_get_() const
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ cend() const
 	{
 		return Nothing::val();
 	}
@@ -99,7 +149,7 @@ public:
 		return Nothing::val();
 	}
 
-	inline thing_ get(thing_) const
+	inline thing_ set_(thing_)
 	{
 		return Nothing::val();
 	}
@@ -109,14 +159,24 @@ public:
 		return Nothing::val();
 	}
 
-	inline const thing_& operator*() const
+	inline thing_* operator->()
+	{
+		return &Nothing::val();
+	}
+
+	inline thing_ get(thing_) const
 	{
 		return Nothing::val();
 	}
 
-	inline thing_* operator->()
+	inline thing_ get_() const
 	{
-		return &Nothing::val();
+		return Nothing::val();
+	}
+
+	inline const thing_& operator*() const
+	{
+		return Nothing::val();
 	}
 
 	inline const thing_* operator->() const
@@ -125,6 +185,11 @@ public:
 	}
 
 	inline thing_ increment(thing_)
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ increment_()
 	{
 		return Nothing::val();
 	}

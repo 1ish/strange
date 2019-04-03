@@ -3,6 +3,11 @@
 public:
 	%nonvirtual_members%
 
+	inline operator bool() const
+	{
+		assert(handle_); return read().operator bool();
+	}
+
 protected:
 	struct ___root_handle_base___
 	{
@@ -16,6 +21,8 @@ protected:
 		virtual std::shared_ptr<___root_handle_base___> ___clone___() const = 0;
 
 		%pure_virtual_members%
+
+		virtual inline operator bool() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___BHB___ = ___root_handle_base___>
@@ -32,6 +39,11 @@ protected:
 		{}
 
 		%virtual_members% //TODO final
+
+		virtual inline operator bool() const
+		{
+			return value_.operator bool();
+		}
 
 		___TTT___ value_;
 	};

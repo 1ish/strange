@@ -1,7 +1,9 @@
 #ifndef COM_ONEISH_STRANGE_CAT__H
 #define COM_ONEISH_STRANGE_CAT__H
 
-// ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/finale.hpp -c ~/source/repos/strange/archetypes/cat_.hpp > ~/source/repos/strange/sauce/strange_cat_.h
+/*
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/finale.hpp -c ~/source/repos/strange/archetypes/cat_.hpp > ~/source/repos/strange/sauce/strange_cat_.h
+*/
 
 #include "symbol_.hpp"
 
