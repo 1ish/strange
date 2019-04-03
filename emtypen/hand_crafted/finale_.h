@@ -65,7 +65,7 @@ private:
 
 	inline ___finale_handle_base___& ___write___()
 	{
-		if (!___handle___.unique())
+		if (!___reference___ && !___handle___.unique())
 		{
 			___handle___ = ___handle___->___clone___();
 		}
@@ -81,18 +81,21 @@ public:
 		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(h));
 	}
 
-	finale_() = default;
+	inline finale_(bool reference = false)
+		:derived_{ reference }
+	{}
 
 	template <typename ___TTT___>
-	inline finale_(const std::shared_ptr<___TTT___>& other)
-		: derived_{ other }
+	inline finale_(const std::shared_ptr<___TTT___>& other, bool reference = false)
+		: derived_(other, reference)
 	{
 		assert(std::dynamic_pointer_cast<___finale_handle_base___>(other));
 	}
 
 	template <typename ___TTT___>
-	inline finale_(___TTT___ value)
-		: derived_{ std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+	inline finale_(___TTT___ value, bool reference = false)
+		: derived_(std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+			reference)
 	{}
 
 	template <typename ___TTT___>

@@ -29,6 +29,12 @@ public:
 		return VAL;
 	}
 
+	static inline symbol_& ref(thing_ _ = thing_{}) //TODO thing
+	{
+		static symbol_ REF(Everything{}, true); //TODO thing
+		return REF;
+	}
+
 	// function
 	inline thing_ mutate(thing_)
 	{

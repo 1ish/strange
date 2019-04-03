@@ -89,7 +89,7 @@ private:
 
 	inline ___derived_handle_base___& ___write___()
 	{
-		if (!___handle___.unique())
+		if (!___reference___ && !___handle___.unique())
 		{
 			___handle___ = ___handle___->___clone___();
 		}
@@ -105,17 +105,19 @@ public:
 		return bool(std::dynamic_pointer_cast<___derived_handle_base___>(h));
 	}
 
-	derived_() = default;
+	inline derived_(bool reference = false)
+		:root_{ reference }
+	{}
 
 	template <typename ___TTT___>
-	inline derived_(const std::shared_ptr<___TTT___>& other)
-		: root_{ other }
+	inline derived_(const std::shared_ptr<___TTT___>& other, bool reference = false)
+		: root_(other, reference)
 	{
 		assert(std::dynamic_pointer_cast<___derived_handle_base___>(other));
 	}
 
 	template <typename ___TTT___>
-	inline derived_(___TTT___ value);
+	inline derived_(___TTT___ value, bool reference = false);
 
 	template <typename ___TTT___>
 	inline derived_& operator=(const std::shared_ptr<___TTT___>& other)
@@ -136,17 +138,18 @@ inline bool check_(const derived_& v)
 }
 
 template <typename ___TTT___>
-inline derived_::derived_(___TTT___ value)
-	: root_{ check_<derived_>(value)
-		? static_<derived_>(std::move(value)).___handle___
-		: std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+inline derived_::derived_(___TTT___ value, bool reference)
+	: root_(check_<derived_>(value)
+		? static_<derived_>(value, reference).___handle___
+		: std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+		reference)
 {}
 
 template <typename ___TTT___>
 inline derived_& derived_::operator=(___TTT___ value)
 {
 	derived_ temp{ check_<derived_>(value)
-		? static_<derived_>(std::move(value))
+		? static_<derived_>(value)
 		: std::move(value) };
 	std::swap(temp.___handle___, ___handle___);
 	return *this;

@@ -313,6 +313,10 @@ namespace strange {
 
     
 
+    	const bool ___reference___;
+
+    
+
     private:
 
     	template <typename ___TTT___>
@@ -385,7 +389,7 @@ namespace strange {
 
     	{
 
-    		if (!handle_.unique())
+    		if (!___reference___ && !handle_.unique())
 
     		{
 
@@ -401,13 +405,13 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(const thing_& v);
+    	friend inline bool check_(const thing_& value);
 
     
 
     	template <typename ___TTT___>
 
-    	friend inline ___TTT___ static_(const thing_& v);
+    	friend inline ___TTT___ static_(const thing_& value, bool reference = false);
 
     
 
@@ -423,15 +427,59 @@ namespace strange {
 
     
 
-    	thing_ () = default;
+    	inline thing_ (bool reference = false)
 
-    	thing_ (const thing_&) = default;
+    		: handle_{}
 
-    	thing_ (thing_&&) = default;
+    		, ___reference___{ reference }
 
-    	thing_& operator=(const thing_&) = default;
+    	{}
 
-    	thing_& operator=(thing_&&) = default;
+    
+
+    	inline thing_ (const thing_& other)
+
+    		: handle_{ other.handle_ }
+
+    		, ___reference___{ false }
+
+    	{}
+
+    
+
+    	inline thing_ (thing_&& other)
+
+    		: handle_{ std::move(other.handle_) }
+
+    		, ___reference___{ false }
+
+    	{}
+
+    
+
+    	inline thing_& operator=(const thing_& other)
+
+    	{
+
+    		handle_ = other.handle_;
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline thing_& operator=(thing_&& other)
+
+    	{
+
+    		handle_ = std::move(other.handle_);
+
+    		return *this;
+
+    	}
+
+    
 
     	virtual ~thing_() = default;
 
@@ -439,9 +487,11 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline thing_(const std::shared_ptr<___TTT___>& other)
+    	inline thing_(const std::shared_ptr<___TTT___>& handle, bool reference = false)
 
-    		: handle_{ other }
+    		: handle_{ handle }
+
+    		, ___reference___{ reference }
 
     	{}
 
@@ -449,17 +499,17 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline thing_(___TTT___ value);
+    	inline thing_(___TTT___ value, bool reference = false);
 
     
 
     	template <typename ___TTT___>
 
-    	inline thing_& operator=(const std::shared_ptr<___TTT___>& other)
+    	inline thing_& operator=(const std::shared_ptr<___TTT___>& handle)
 
     	{
 
-    		handle_ = other;
+    		handle_ = handle;
 
     		return *this;
 
@@ -477,11 +527,11 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(const thing_& v)
+    inline bool check_(const thing_& value)
 
     {
 
-    	return ___TTT___::___check___(v.handle_);
+    	return ___TTT___::___check___(value.handle_);
 
     }
 
@@ -501,11 +551,11 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline ___TTT___ static_(const thing_& v)
+    inline ___TTT___ static_(const thing_& value, bool reference)
 
     {
 
-    	return ___TTT___{ v.handle_ };
+    	return ___TTT___(value.handle_, reference);
 
     }
 
@@ -513,13 +563,15 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline thing_::thing_(___TTT___ value)
+    inline thing_::thing_(___TTT___ value, bool reference)
 
     	: handle_{ check_<thing_>(value)
 
-    		? static_<thing_>(std::move(value)).handle_
+    		? static_<thing_>(value, reference).handle_
 
     		: std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+
+    	, ___reference___{ reference }
 
     {}
 
@@ -533,7 +585,7 @@ namespace strange {
 
     	thing_ temp{ check_<thing_>(value)
 
-    		? static_<thing_>(std::move(value))
+    		? static_<thing_>(value)
 
     		: std::move(value) };
 

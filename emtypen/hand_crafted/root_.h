@@ -64,6 +64,8 @@ protected:
 
 	std::shared_ptr<___root_handle_base___> ___handle___;
 
+	const bool ___reference___;
+
 private:
 	template <typename ___TTT___>
 	struct ___root_handle_final___ final : ___root_handle___<___TTT___>
@@ -100,7 +102,7 @@ private:
 
 	inline ___root_handle_base___& ___write___()
 	{
-		if (!___handle___.unique())
+		if (!___reference___ && !___handle___.unique())
 		{
 			___handle___ = ___handle___->___clone___();
 		}
@@ -111,7 +113,7 @@ private:
 	friend inline bool check_(const root_& v);
 
 	template <typename ___TTT___>
-	friend inline ___TTT___ static_(const root_& v);
+	friend inline ___TTT___ static_(const root_& v, bool reference = false);
 
 public:
 	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>&)
@@ -119,20 +121,43 @@ public:
 		return true;
 	}
 
-	root_() = default;
-	root_(const root_&) = default;
-	root_(root_&&) = default;
-	root_& operator=(const root_&) = default;
-	root_& operator=(root_&&) = default;
+	inline root_(bool reference = false)
+		: ___handle___{}
+		, ___reference___{ reference }
+	{}
+
+	inline root_(const root_& other)
+		: ___handle___{ other.___handle___ }
+		, ___reference___{ false }
+	{}
+
+	inline root_(root_&& other)
+		: ___handle___{ std::move(other.___handle___) }
+		, ___reference___{ false }
+	{}
+
+	inline root_& operator=(const root_& other)
+	{
+		___handle___ = other.___handle___;
+		return *this;
+	}
+
+	inline root_& operator=(root_&& other)
+	{
+		___handle___ = std::move(other.___handle___);
+		return *this;
+	}
+
 	virtual ~root_() = default;
 
 	template <typename ___TTT___>
-	inline root_(const std::shared_ptr<___TTT___>& other)
-		: ___handle___{ other }
+	inline root_(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+		: ___handle___{ handle }
+		, ___reference___{ reference }
 	{}
 
 	template <typename ___TTT___>
-	inline root_(___TTT___ value);
+	inline root_(___TTT___ value, bool reference = false);
 
 	template <typename ___TTT___>
 	inline root_& operator=(const std::shared_ptr<___TTT___>& other)
@@ -158,23 +183,24 @@ inline bool check_(const ___VVV___&)
 }
 
 template <typename ___TTT___>
-inline ___TTT___ static_(const root_& v)
+inline ___TTT___ static_(const root_& v, bool reference)
 {
-	return ___TTT___{ v.___handle___ };
+	return ___TTT___(v.___handle___, reference);
 }
 
 template <typename ___TTT___>
-inline root_::root_(___TTT___ value)
+inline root_::root_(___TTT___ value, bool reference)
 	: ___handle___{ check_<root_>(value)
-		? static_<root_>(std::move(value)).___handle___
+		? static_<root_>(value, reference).___handle___
 		: std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+	, ___reference___{ reference }
 {}
 
 template <typename ___TTT___>
 inline root_& root_::operator=(___TTT___ value)
 {
 	root_ temp{ check_<root_>(value)
-		? static_<root_>(std::move(value))
+		? static_<root_>(value)
 		: std::move(value) };
 	std::swap(temp.___handle___, ___handle___);
 	return *this;

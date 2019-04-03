@@ -48,7 +48,7 @@ private:
 
 	inline ___finale_handle_base___& write()
 	{
-		if (!handle_.unique())
+		if (!___reference___ && !handle_.unique())
 		{
 			handle_ = handle_->___clone___();
 		}
@@ -56,33 +56,37 @@ private:
 	}
 
 	template <typename ___TTT___>
-	friend inline bool check_(const %struct_name%& v);
+	friend inline bool check_(const %struct_name%& value);
 
 public:
-	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& h)
+	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& handle)
 	{
-		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(h));
+		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 	}
 
-	%struct_name%() = default;
+	inline %struct_name%(bool reference = false)
+		: ___derived___{ reference }
+	{}
+
 
 	template <typename ___TTT___>
-	inline %struct_name%(const std::shared_ptr<___TTT___>& other)
-		: ___derived___{ other }
+	inline %struct_name%(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+		: ___derived___(handle, reference)
 	{
-		assert(std::dynamic_pointer_cast<___finale_handle_base___>(other));
+		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 	}
 
 	template <typename ___TTT___>
-	inline %struct_name%(___TTT___ value)
-		: ___derived___{ std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+	inline %struct_name%(___TTT___ value, bool reference = false)
+		: ___derived___(std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+			reference)
 	{}
 
 	template <typename ___TTT___>
-	inline %struct_name%& operator=(const std::shared_ptr<___TTT___>& other)
+	inline %struct_name%& operator=(const std::shared_ptr<___TTT___>& handle)
 	{
-		assert(std::dynamic_pointer_cast<___finale_handle_base___>(other));
-		handle_ = other;
+		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+		handle_ = handle;
 		return *this;
 	}
 
@@ -96,9 +100,9 @@ public:
 };
 
 template <typename ___TTT___>
-inline bool check_(const %struct_name%& v)
+inline bool check_(const %struct_name%& value)
 {
-	return ___TTT___::___check___(v.handle_);
+	return ___TTT___::___check___(value.handle_);
 }
 
 #undef ___derived___

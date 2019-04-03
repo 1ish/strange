@@ -16,6 +16,12 @@ public:
 		return VAL;
 	}
 
+	static inline thing_& ref(thing_ _ = thing_{})
+	{
+		static thing_ REF(Nothing{}, true);
+		return REF;
+	}
+
 	// conversion
 	inline operator bool() const
 	{

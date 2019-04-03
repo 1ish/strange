@@ -12,6 +12,11 @@ public:
 		return root_{ root{} };
 	}
 
+	static root_ ref()
+	{
+		return root_(root{}, true);
+	}
+
 	void print() const
 	{
 		std::cout << "root print" << std::endl;
@@ -26,6 +31,11 @@ public:
 	static derived_ val()
 	{
 		return derived_{ derived{} };
+	}
+
+	static derived_ ref()
+	{
+		return derived_(derived{}, true);
 	}
 
 	void mutate()
@@ -47,6 +57,11 @@ public:
 	static finale_ val()
 	{
 		return finale_{ finale{} };
+	}
+
+	static finale_ ref()
+	{
+		return finale_(finale{}, true);
 	}
 
 	void finish()

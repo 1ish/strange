@@ -59,6 +59,8 @@ protected:
 
 	std::shared_ptr<___root_handle_base___> handle_;
 
+	const bool ___reference___;
+
 private:
 	template <typename ___TTT___>
 	struct ___root_handle_final___ final : ___root_handle___<___TTT___>
@@ -95,7 +97,7 @@ private:
 
 	inline ___root_handle_base___& write()
 	{
-		if (!handle_.unique())
+		if (!___reference___ && !handle_.unique())
 		{
 			handle_ = handle_->___clone___();
 		}
@@ -103,10 +105,10 @@ private:
 	}
 
 	template <typename ___TTT___>
-	friend inline bool check_(const %struct_name%& v);
+	friend inline bool check_(const %struct_name%& value);
 
 	template <typename ___TTT___>
-	friend inline ___TTT___ static_(const %struct_name%& v);
+	friend inline ___TTT___ static_(const %struct_name%& value, bool reference = false);
 
 public:
 	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>&)
@@ -114,25 +116,48 @@ public:
 		return true;
 	}
 
-	%struct_name% () = default;
-	%struct_name% (const %struct_name%&) = default;
-	%struct_name% (%struct_name%&&) = default;
-	%struct_name%& operator=(const %struct_name%&) = default;
-	%struct_name%& operator=(%struct_name%&&) = default;
+	inline %struct_name% (bool reference = false)
+		: handle_{}
+		, ___reference___{ reference }
+	{}
+
+	inline %struct_name% (const %struct_name%& other)
+		: handle_{ other.handle_ }
+		, ___reference___{ false }
+	{}
+
+	inline %struct_name% (%struct_name%&& other)
+		: handle_{ std::move(other.handle_) }
+		, ___reference___{ false }
+	{}
+
+	inline %struct_name%& operator=(const %struct_name%& other)
+	{
+		handle_ = other.handle_;
+		return *this;
+	}
+
+	inline %struct_name%& operator=(%struct_name%&& other)
+	{
+		handle_ = std::move(other.handle_);
+		return *this;
+	}
+
 	virtual ~%struct_name%() = default;
 
 	template <typename ___TTT___>
-	inline %struct_name%(const std::shared_ptr<___TTT___>& other)
-		: handle_{ other }
+	inline %struct_name%(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+		: handle_{ handle }
+		, ___reference___{ reference }
 	{}
 
 	template <typename ___TTT___>
-	inline %struct_name%(___TTT___ value);
+	inline %struct_name%(___TTT___ value, bool reference = false);
 
 	template <typename ___TTT___>
-	inline %struct_name%& operator=(const std::shared_ptr<___TTT___>& other)
+	inline %struct_name%& operator=(const std::shared_ptr<___TTT___>& handle)
 	{
-		handle_ = other;
+		handle_ = handle;
 		return *this;
 	}
 
@@ -141,9 +166,9 @@ public:
 };
 
 template <typename ___TTT___>
-inline bool check_(const %struct_name%& v)
+inline bool check_(const %struct_name%& value)
 {
-	return ___TTT___::___check___(v.handle_);
+	return ___TTT___::___check___(value.handle_);
 }
 
 template <typename ___TTT___, typename ___VVV___>
@@ -153,23 +178,24 @@ inline bool check_(const ___VVV___&)
 }
 
 template <typename ___TTT___>
-inline ___TTT___ static_(const %struct_name%& v)
+inline ___TTT___ static_(const %struct_name%& value, bool reference)
 {
-	return ___TTT___{ v.handle_ };
+	return ___TTT___(value.handle_, reference);
 }
 
 template <typename ___TTT___>
-inline %struct_name%::%struct_name%(___TTT___ value)
+inline %struct_name%::%struct_name%(___TTT___ value, bool reference)
 	: handle_{ check_<%struct_name%>(value)
-		? static_<%struct_name%>(std::move(value)).handle_
+		? static_<%struct_name%>(value, reference).handle_
 		: std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+	, ___reference___{ reference }
 {}
 
 template <typename ___TTT___>
 inline %struct_name%& %struct_name%::operator=(___TTT___ value)
 {
 	%struct_name% temp{ check_<%struct_name%>(value)
-		? static_<%struct_name%>(std::move(value))
+		? static_<%struct_name%>(value)
 		: std::move(value) };
 	std::swap(temp.handle_, handle_);
 	return *this;
