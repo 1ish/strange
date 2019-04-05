@@ -108,7 +108,7 @@ private:
 	friend inline bool check_(const %struct_name%& value);
 
 	template <typename ___TTT___>
-	friend inline ___TTT___ static_(const %struct_name%& value, bool reference = false);
+	friend inline ___TTT___ cast_(const %struct_name%& value, bool reference = false);
 
 public:
 	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>&)
@@ -178,7 +178,7 @@ inline bool check_(const ___VVV___&)
 }
 
 template <typename ___TTT___>
-inline ___TTT___ static_(const %struct_name%& value, bool reference)
+inline ___TTT___ cast_(const %struct_name%& value, bool reference)
 {
 	return ___TTT___(value.handle_, reference);
 }
@@ -186,7 +186,7 @@ inline ___TTT___ static_(const %struct_name%& value, bool reference)
 template <typename ___TTT___>
 inline %struct_name%::%struct_name%(___TTT___ value, bool reference)
 	: handle_{ check_<%struct_name%>(value)
-		? static_<%struct_name%>(value, reference).handle_
+		? cast_<%struct_name%>(value).handle_
 		: std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	, ___reference___{ reference }
 {}
@@ -195,7 +195,7 @@ template <typename ___TTT___>
 inline %struct_name%& %struct_name%::operator=(___TTT___ value)
 {
 	%struct_name% temp{ check_<%struct_name%>(value)
-		? static_<%struct_name%>(value)
+		? cast_<%struct_name%>(value)
 		: std::move(value) };
 	std::swap(temp.handle_, handle_);
 	return *this;

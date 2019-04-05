@@ -140,7 +140,7 @@ inline bool check_(const derived_& v)
 template <typename ___TTT___>
 inline derived_::derived_(___TTT___ value, bool reference)
 	: root_(check_<derived_>(value)
-		? static_<derived_>(value, reference).___handle___
+		? cast_<derived_>(value).___handle___
 		: std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 		reference)
 {}
@@ -149,7 +149,7 @@ template <typename ___TTT___>
 inline derived_& derived_::operator=(___TTT___ value)
 {
 	derived_ temp{ check_<derived_>(value)
-		? static_<derived_>(value)
+		? cast_<derived_>(value)
 		: std::move(value) };
 	std::swap(temp.___handle___, ___handle___);
 	return *this;

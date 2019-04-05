@@ -261,7 +261,7 @@ namespace strange {
 
     	: ___root___(check_<symbol_>(value)
 
-    		? static_<symbol_>(value, reference).handle_
+    		? cast_<symbol_>(value).handle_
 
     		: std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 
@@ -279,7 +279,7 @@ namespace strange {
 
     	symbol_ temp{ check_<symbol_>(value)
 
-    		? static_<symbol_>(value)
+    		? cast_<symbol_>(value)
 
     		: std::move(value) };
 

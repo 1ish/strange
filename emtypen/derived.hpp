@@ -123,7 +123,7 @@ inline bool check_(const %struct_name%& value)
 template <typename ___TTT___>
 inline %struct_name%::%struct_name%(___TTT___ value, bool reference)
 	: ___root___(check_<%struct_name%>(value)
-		? static_<%struct_name%>(value, reference).handle_
+		? cast_<%struct_name%>(value).handle_
 		: std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 		reference)
 {}
@@ -132,7 +132,7 @@ template <typename ___TTT___>
 inline %struct_name%& %struct_name%::operator=(___TTT___ value)
 {
 	%struct_name% temp{ check_<%struct_name%>(value)
-		? static_<%struct_name%>(value)
+		? cast_<%struct_name%>(value)
 		: std::move(value) };
 	std::swap(temp.handle_, handle_);
 	return *this;

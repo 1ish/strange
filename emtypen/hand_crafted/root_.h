@@ -113,7 +113,7 @@ private:
 	friend inline bool check_(const root_& v);
 
 	template <typename ___TTT___>
-	friend inline ___TTT___ static_(const root_& v, bool reference = false);
+	friend inline ___TTT___ cast_(const root_& v, bool reference = false);
 
 public:
 	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>&)
@@ -183,7 +183,7 @@ inline bool check_(const ___VVV___&)
 }
 
 template <typename ___TTT___>
-inline ___TTT___ static_(const root_& v, bool reference)
+inline ___TTT___ cast_(const root_& v, bool reference)
 {
 	return ___TTT___(v.___handle___, reference);
 }
@@ -191,7 +191,7 @@ inline ___TTT___ static_(const root_& v, bool reference)
 template <typename ___TTT___>
 inline root_::root_(___TTT___ value, bool reference)
 	: ___handle___{ check_<root_>(value)
-		? static_<root_>(value, reference).___handle___
+		? cast_<root_>(value).___handle___
 		: std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	, ___reference___{ reference }
 {}
@@ -200,7 +200,7 @@ template <typename ___TTT___>
 inline root_& root_::operator=(___TTT___ value)
 {
 	root_ temp{ check_<root_>(value)
-		? static_<root_>(value)
+		? cast_<root_>(value)
 		: std::move(value) };
 	std::swap(temp.___handle___, ___handle___);
 	return *this;

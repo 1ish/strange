@@ -411,7 +411,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline ___TTT___ static_(const thing_& value, bool reference = false);
+    	friend inline ___TTT___ cast_(const thing_& value, bool reference = false);
 
     
 
@@ -551,7 +551,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline ___TTT___ static_(const thing_& value, bool reference)
+    inline ___TTT___ cast_(const thing_& value, bool reference)
 
     {
 
@@ -567,7 +567,7 @@ namespace strange {
 
     	: handle_{ check_<thing_>(value)
 
-    		? static_<thing_>(value, reference).handle_
+    		? cast_<thing_>(value).handle_
 
     		: std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 
@@ -585,7 +585,7 @@ namespace strange {
 
     	thing_ temp{ check_<thing_>(value)
 
-    		? static_<thing_>(value)
+    		? cast_<thing_>(value)
 
     		: std::move(value) };
 
