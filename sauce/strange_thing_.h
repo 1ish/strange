@@ -432,7 +432,17 @@ namespace strange {
 
     
 
-    	inline thing_ (bool reference = false)
+    	inline thing_()
+
+    		: handle_{}
+
+    		, ___reference___{ false }
+
+    	{}
+
+    
+
+    	inline thing_(bool reference)
 
     		: handle_{}
 
@@ -442,7 +452,7 @@ namespace strange {
 
     
 
-    	inline thing_ (const thing_& other)
+    	inline thing_(const thing_& other)
 
     		: handle_{ other.handle_ }
 
@@ -452,11 +462,31 @@ namespace strange {
 
     
 
-    	inline thing_ (thing_&& other)
+    	inline thing_(const thing_& other, bool reference)
+
+    		: handle_{ other.handle_ }
+
+    		, ___reference___{ reference }
+
+    	{}
+
+    
+
+    	inline thing_(thing_&& other)
 
     		: handle_{ std::move(other.handle_) }
 
     		, ___reference___{ false }
+
+    	{}
+
+    
+
+    	inline thing_(thing_&& other, bool reference)
+
+    		: handle_{ std::move(other.handle_) }
+
+    		, ___reference___{ reference }
 
     	{}
 

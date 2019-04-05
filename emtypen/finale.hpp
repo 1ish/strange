@@ -64,10 +64,19 @@ public:
 		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 	}
 
-	inline %struct_name%(bool reference = false)
+	inline %struct_name%() = default;
+
+	inline %struct_name%(bool reference)
 		: ___derived___{ reference }
 	{}
 
+	inline %struct_name%(const %struct_name%& other, bool reference)
+		: ___derived___(other, reference)
+	{}
+
+	inline %struct_name%(%struct_name%&& other, bool reference)
+		: ___derived___(std::move(other), reference)
+	{}
 
 	template <typename ___TTT___>
 	inline %struct_name%(const std::shared_ptr<___TTT___>& handle, bool reference = false)

@@ -116,19 +116,34 @@ public:
 		return true;
 	}
 
-	inline %struct_name% (bool reference = false)
+	inline %struct_name%()
+		: handle_{}
+		, ___reference___{ false }
+	{}
+
+	inline %struct_name%(bool reference)
 		: handle_{}
 		, ___reference___{ reference }
 	{}
 
-	inline %struct_name% (const %struct_name%& other)
+	inline %struct_name%(const %struct_name%& other)
 		: handle_{ other.handle_ }
 		, ___reference___{ false }
 	{}
 
-	inline %struct_name% (%struct_name%&& other)
+	inline %struct_name%(const %struct_name%& other, bool reference)
+		: handle_{ other.handle_ }
+		, ___reference___{ reference }
+	{}
+
+	inline %struct_name%(%struct_name%&& other)
 		: handle_{ std::move(other.handle_) }
 		, ___reference___{ false }
+	{}
+
+	inline %struct_name%(%struct_name%&& other, bool reference)
+		: handle_{ std::move(other.handle_) }
+		, ___reference___{ reference }
 	{}
 
 	inline %struct_name%& operator=(const %struct_name%& other)

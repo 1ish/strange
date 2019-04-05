@@ -148,13 +148,31 @@ namespace strange {
 
     
 
-    	inline cat_(bool reference = false)
+    	inline cat_() = default;
+
+    
+
+    	inline cat_(bool reference)
 
     		: ___derived___{ reference }
 
     	{}
 
     
+
+    	inline cat_(const cat_& other, bool reference)
+
+    		: ___derived___(other, reference)
+
+    	{}
+
+    
+
+    	inline cat_(cat_&& other, bool reference)
+
+    		: ___derived___(std::move(other), reference)
+
+    	{}
 
     
 

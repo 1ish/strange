@@ -81,8 +81,18 @@ public:
 		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(h));
 	}
 
-	inline finale_(bool reference = false)
-		:derived_{ reference }
+	finale_() = default;
+
+	inline finale_(bool reference)
+		: derived_{ reference }
+	{}
+
+	inline finale_(const finale_& other, bool reference)
+		: derived_(other, reference)
+	{}
+
+	inline finale_(finale_&& other, bool reference)
+		: derived_(std::move(other), reference)
 	{}
 
 	template <typename ___TTT___>

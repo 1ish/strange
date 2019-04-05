@@ -121,7 +121,12 @@ public:
 		return true;
 	}
 
-	inline root_(bool reference = false)
+	inline root_()
+		: ___handle___{}
+		, ___reference___{ false }
+	{}
+
+	inline root_(bool reference)
 		: ___handle___{}
 		, ___reference___{ reference }
 	{}
@@ -131,9 +136,19 @@ public:
 		, ___reference___{ false }
 	{}
 
+	inline root_(const root_& other, bool reference)
+		: ___handle___{ other.___handle___ }
+		, ___reference___{ reference }
+	{}
+
 	inline root_(root_&& other)
 		: ___handle___{ std::move(other.___handle___) }
 		, ___reference___{ false }
+	{}
+
+	inline root_(root_&& other, bool reference)
+		: ___handle___{ std::move(other.___handle___) }
+		, ___reference___{ reference }
 	{}
 
 	inline root_& operator=(const root_& other)

@@ -88,8 +88,18 @@ public:
 		return bool(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
 	}
 
-	inline %struct_name%(bool reference = false)
+	inline %struct_name%() = default;
+
+	inline %struct_name%(bool reference)
 		: ___root___{ reference }
+	{}
+
+	inline %struct_name%(const %struct_name%& other, bool reference)
+		: ___root___(other, reference)
+	{}
+
+	inline %struct_name%(%struct_name%&& other, bool reference)
+		: ___root___(std::move(other), reference)
 	{}
 
 	template <typename ___TTT___>

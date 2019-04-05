@@ -105,8 +105,18 @@ public:
 		return bool(std::dynamic_pointer_cast<___derived_handle_base___>(h));
 	}
 
-	inline derived_(bool reference = false)
-		:root_{ reference }
+	derived_() = default;
+
+	inline derived_(bool reference)
+		: root_{ reference }
+	{}
+
+	inline derived_(const derived_& other, bool reference)
+		: root_(other, reference)
+	{}
+
+	inline derived_(derived_&& other, bool reference)
+		: root_(std::move(other), reference)
 	{}
 
 	template <typename ___TTT___>

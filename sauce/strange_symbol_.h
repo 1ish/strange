@@ -201,9 +201,29 @@ namespace strange {
 
     
 
-    	inline symbol_(bool reference = false)
+    	inline symbol_() = default;
+
+    
+
+    	inline symbol_(bool reference)
 
     		: ___root___{ reference }
+
+    	{}
+
+    
+
+    	inline symbol_(const symbol_& other, bool reference)
+
+    		: ___root___(other, reference)
+
+    	{}
+
+    
+
+    	inline symbol_(symbol_&& other, bool reference)
+
+    		: ___root___(std::move(other), reference)
 
     	{}
 
