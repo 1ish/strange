@@ -556,6 +556,16 @@ namespace strange {
 
     	inline thing_& operator=(___TTT___ value);
 
+    
+
+    	inline std::weak_ptr<___root_handle_base___> weak_() const
+
+    	{
+
+    		return handle_;
+
+    	}
+
     };
 
     

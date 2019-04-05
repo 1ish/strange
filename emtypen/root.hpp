@@ -178,6 +178,11 @@ public:
 
 	template <typename ___TTT___>
 	inline %struct_name%& operator=(___TTT___ value);
+
+	inline std::weak_ptr<___root_handle_base___> weak_() const
+	{
+		return handle_;
+	}
 };
 
 template <typename ___TTT___>

@@ -6,6 +6,27 @@
 namespace strange
 {
 
+inline thing_ Creature::extract(thing_ range) const
+{
+	me_().hash_();//TODO
+	return Everything::val();
+}
+
+inline thing_ Creature::operator()(thing_ range) const
+{
+	return Everything::val();
+}
+
+inline thing_ Creature::mutate(thing_ range)
+{
+	return Everything::val();
+}
+
+inline thing_ Creature::operator()(thing_ range)
+{
+	return Everything::val();
+}
+
 inline thing_ Everything::same(thing_ range) const
 {
 	const auto other = range.cbegin();

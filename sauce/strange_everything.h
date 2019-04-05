@@ -8,6 +8,24 @@ namespace strange
 
 class Thing
 {
+public:
+	const thing_ me_() const
+	{
+		return thing_(_meek.lock(), true);
+	}
+
+	thing_ me_()
+	{
+		return thing_(_meek.lock(), true);
+	}
+
+protected:
+	inline Thing(const thing_& me)
+		: _meek(me.weak_())
+	{}
+
+private:
+	const decltype(thing_().weak_()) _meek;
 };
 
 class Something : public Thing
@@ -18,42 +36,52 @@ public:
 	{
 		return true;
 	}
+
+protected:
+	inline Something(const thing_& me)
+		: Thing{ me }
+	{};
 };
 
-class Everything : public Something
+class Creature : public Something
 {
 public:
-	static inline symbol_& val(thing_ _ = thing_{}) //TODO thing
+	// function
+	inline thing_ extract(thing_ range) const;
+	inline thing_ operator()(thing_ range) const;
+	inline thing_ mutate(thing_ range);
+	inline thing_ operator()(thing_ range);
+
+protected:
+	inline Creature(const thing_& me)
+		: Something{ me }
+	{};
+};
+
+class Everything : public Creature
+{
+public:
+	// construction
+	static inline symbol_& val(thing_ _ = thing_{}) //TODO thing_
 	{
-		static symbol_ VAL = Everything{}; //TODO thing
+		static symbol_ VAL = []() //TODO thing_
+		{
+			symbol_ thing; //TODO thing_
+			thing = Everything{thing};
+			return thing;
+		}();
 		return VAL;
 	}
 
-	static inline symbol_& ref(thing_ _ = thing_{}) //TODO thing
+	static inline symbol_& ref(thing_ _ = thing_{}) //TODO thing_
 	{
-		static symbol_ REF(Everything{}, true); //TODO thing
+		static symbol_ REF = []() //TODO thing_
+		{
+			symbol_ thing{ true }; //TODO thing_
+			thing = Everything{ thing };
+			return thing;
+		}();
 		return REF;
-	}
-
-	// function
-	inline thing_ extract(thing_) const
-	{
-		return Everything::val();
-	}
-
-	inline thing_ operator()(thing_) const
-	{
-		return Everything::val();
-	}
-
-	inline thing_ mutate(thing_)
-	{
-		return Everything::val();
-	}
-
-	inline thing_ operator()(thing_)
-	{
-		return Everything::val();
 	}
 
 	// comparison
@@ -227,8 +255,10 @@ public:
 		return Everything::val();
 	}
 
-private:
-	inline Everything() {};
+protected:
+	inline Everything(const thing_& me)
+		: Creature{ me }
+	{};
 };
 
 } // namespace strange

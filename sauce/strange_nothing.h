@@ -10,15 +10,26 @@ namespace strange
 class Nothing : public Thing
 {
 public:
+	// construction
 	static inline thing_& val(thing_ _ = thing_{})
 	{
-		static thing_ VAL = Nothing{};
+		static thing_ VAL = []()
+		{
+			thing_ thing;
+			thing = Nothing{ thing };
+			return thing;
+		}();
 		return VAL;
 	}
 
 	static inline thing_& ref(thing_ _ = thing_{})
 	{
-		static thing_ REF(Nothing{}, true);
+		static thing_ REF = []()
+		{
+			thing_ thing{ true };
+			thing = Nothing{ thing };
+			return thing;
+		}();
 		return REF;
 	}
 
@@ -210,8 +221,10 @@ public:
 		return Nothing::val();
 	}
 
-private:
-	inline Nothing() {};
+protected:
+	inline Nothing(const thing_& me)
+		: Thing{ me }
+	{};
 };
 
 } // namespace strange
