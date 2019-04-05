@@ -88,6 +88,21 @@ public:
 		return Everything::val();
 	}
 
+	inline thing_ hash(thing_) const
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ hash_() const
+	{
+		return Nothing::val();
+	}
+
+	inline size_t hash__() const
+	{
+		return 0;
+	}
+
 	// range
 	inline thing_ begin_get(thing_) const
 	{

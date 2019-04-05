@@ -89,6 +89,21 @@ public:
 
 	inline thing_ is_nothing_() const;
 
+	inline thing_ hash(thing_) const
+	{
+		return Everything::val();
+	}
+
+	inline thing_ hash_() const
+	{
+		return Everything::val();
+	}
+
+	inline size_t hash__() const
+	{
+		return 1;
+	}
+
 	// range
 	inline thing_ begin_get(thing_) const
 	{
@@ -196,10 +211,20 @@ public:
 		return Everything::val();
 	}
 
-	// symbol
-	inline std::size_t hash_() const
+	//TODO symbol
+	inline symbol_ add(thing_ range) const
 	{
-		return 0;
+		return Everything::val();
+	}
+
+	inline symbol_ add_(symbol_ symbol) const
+	{
+		return Everything::val();
+	}
+
+	inline symbol_ operator+(symbol_ symbol) const
+	{
+		return Everything::val();
 	}
 
 private:

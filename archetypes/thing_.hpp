@@ -35,6 +35,10 @@ public:
 	inline thing_ is_nothing(thing_ _) const;
 	inline thing_ is_nothing_() const;
 
+	inline thing_ hash(thing_ _) const;
+	inline thing_ hash_() const;
+	inline size_t hash__() const;
+
 	// range
 	inline thing_ begin_get(thing_ _) const;
 	inline thing_ begin_get_() const;

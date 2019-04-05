@@ -14,7 +14,9 @@ class symbol_
 {
 public:
 	// symbol
-	inline std::size_t hash_() const;
+	inline symbol_ add(thing_ range) const;
+	inline symbol_ add_(symbol_ symbol) const;
+	inline symbol_ operator+(symbol_ symbol) const;
 };
 
 } // namespace strange

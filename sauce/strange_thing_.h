@@ -56,6 +56,12 @@ namespace strange {
      { assert(handle_); return read().is_nothing(_ ); }
      inline thing_ is_nothing_ ( ) const
      { assert(handle_); return read().is_nothing_( ); }
+     inline thing_ hash ( thing_ _ ) const
+     { assert(handle_); return read().hash(_ ); }
+     inline thing_ hash_ ( ) const
+     { assert(handle_); return read().hash_( ); }
+     inline size_t hash__ ( ) const
+     { assert(handle_); return read().hash__( ); }
      inline thing_ begin_get ( thing_ _ ) const
      { assert(handle_); return read().begin_get(_ ); }
      inline thing_ begin_get_ ( ) const
@@ -142,6 +148,9 @@ namespace strange {
       virtual inline thing_ is_something_ ( ) const = 0;
       virtual inline thing_ is_nothing ( thing_ _ ) const = 0;
       virtual inline thing_ is_nothing_ ( ) const = 0;
+      virtual inline thing_ hash ( thing_ _ ) const = 0;
+      virtual inline thing_ hash_ ( ) const = 0;
+      virtual inline size_t hash__ ( ) const = 0;
       virtual inline thing_ begin_get ( thing_ _ ) const = 0;
       virtual inline thing_ begin_get_ ( ) const = 0;
       virtual inline thing_ cbegin ( ) const = 0;
@@ -231,6 +240,12 @@ namespace strange {
       { return value_.is_nothing(_ ); }
       virtual inline thing_ is_nothing_ ( ) const
       { return value_.is_nothing_( ); }
+      virtual inline thing_ hash ( thing_ _ ) const
+      { return value_.hash(_ ); }
+      virtual inline thing_ hash_ ( ) const
+      { return value_.hash_( ); }
+      virtual inline size_t hash__ ( ) const
+      { return value_.hash__( ); }
       virtual inline thing_ begin_get ( thing_ _ ) const
       { return value_.begin_get(_ ); }
       virtual inline thing_ begin_get_ ( ) const

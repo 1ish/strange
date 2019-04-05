@@ -22,8 +22,12 @@ namespace strange {
 
     public:
 
-     inline std :: size_t hash_ ( ) const
-     { assert(handle_); return read().hash_( ); }
+     inline symbol_ add ( thing_ range ) const
+     { assert(handle_); return read().add(range ); }
+     inline symbol_ add_ ( symbol_ symbol ) const
+     { assert(handle_); return read().add_(symbol ); }
+     inline symbol_ operator + ( symbol_ symbol ) const
+     { assert(handle_); return read().operator+(symbol ); }
     
 
     protected:
@@ -32,7 +36,9 @@ namespace strange {
 
     	{
 
-      virtual inline std :: size_t hash_ ( ) const = 0;
+      virtual inline symbol_ add ( thing_ range ) const = 0;
+      virtual inline symbol_ add_ ( symbol_ symbol ) const = 0;
+      virtual inline symbol_ operator + ( symbol_ symbol ) const = 0;
     	};
 
     
@@ -63,8 +69,12 @@ namespace strange {
 
     
 
-      virtual inline std :: size_t hash_ ( ) const
-      { return value_.hash_( ); }
+      virtual inline symbol_ add ( thing_ range ) const
+      { return value_.add(range ); }
+      virtual inline symbol_ add_ ( symbol_ symbol ) const
+      { return value_.add_(symbol ); }
+      virtual inline symbol_ operator + ( symbol_ symbol ) const
+      { return value_.operator+(symbol ); }
     	};
 
     
