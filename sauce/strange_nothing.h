@@ -66,12 +66,12 @@ public:
 	{
 		const auto other = range.cbegin();
 		assert(other != range.cend()); //TODO throw
-		return (other.hash__() == 0) ? Everything<>::val() : Nothing<>::val();
+		return _boole_(other.hash__() == 0);
 	}
 
 	inline thing_ same_(thing_ thing) const
 	{
-		return (thing.hash__() == 0) ? Everything<>::val() : Nothing<>::val();
+		return _boole_(thing.hash__() == 0);
 	}
 
 	inline bool operator==(thing_ thing) const
@@ -83,12 +83,12 @@ public:
 	{
 		const auto other = range.cbegin();
 		assert(other != range.cend()); //TODO throw
-		return (other.hash__() != 0) ? Everything<>::val() : Nothing<>::val();
+		return _boole_(other.hash__() != 0);
 	}
 
 	inline thing_ different_(thing_ thing) const
 	{
-		return (thing.hash__() != 0) ? Everything<>::val() : Nothing<>::val();
+		return _boole_(thing.hash__() != 0);
 	}
 
 	inline bool operator!=(thing_ thing) const

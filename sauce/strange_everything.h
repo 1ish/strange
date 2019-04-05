@@ -34,6 +34,11 @@ protected:
 	inline Thing(const thing_& me)
 		: One(me)
 	{}
+
+	static inline thing_ _boole_(bool b)
+	{
+		return b ? Everything<>::val() : Nothing<>::val();
+	}
 };
 
 template <typename THING_>
@@ -135,12 +140,12 @@ public:
 	{
 		const auto other = range.cbegin();
 		assert(other != range.cend()); //TODO throw
-		return (other.hash__() == 1) ? Everything<>::val() : Nothing<>::val();
+		return _boole_(other.hash__() == 1);
 	}
 
 	inline thing_ same_(thing_ thing) const
 	{
-		return (thing.hash__() == 1) ? Everything<>::val() : Nothing<>::val();
+		return _boole_(thing.hash__() == 1);
 	}
 
 	inline bool operator==(thing_ thing) const
@@ -152,12 +157,12 @@ public:
 	{
 		const auto other = range.cbegin();
 		assert(other != range.cend()); //TODO throw
-		return (other.hash__() != 1) ? Everything<>::val() : Nothing<>::val();
+		return _boole_(other.hash__() != 1);
 	}
 
 	inline thing_ different_(thing_ thing) const
 	{
-		return (thing.hash__() != 1) ? Everything<>::val() : Nothing<>::val();
+		return _boole_(thing.hash__() != 1);
 	}
 
 	inline bool operator!=(thing_ thing) const
