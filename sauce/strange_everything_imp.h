@@ -60,13 +60,13 @@ inline thing_ Everything<THING_>::different_(thing_ thing) const
 }
 
 template <typename THING_>
-inline thing_ Everything<THING_>::is_nothing(thing_) const
+inline thing_ Something<THING_>::is_nothing(thing_) const
 {
 	return Nothing<>::val();
 }
 
 template <typename THING_>
-inline thing_ Everything<THING_>::is_nothing_() const
+inline thing_ Something<THING_>::is_nothing_() const
 {
 	return Nothing<>::val();
 }

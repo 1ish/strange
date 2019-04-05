@@ -46,6 +46,20 @@ public:
 		return true;
 	}
 
+	inline thing_ is_something(thing_) const
+	{
+		return Everything<>::val();
+	}
+
+	inline thing_ is_something_() const
+	{
+		return Everything<>::val();
+	}
+
+	inline thing_ is_nothing(thing_) const;
+
+	inline thing_ is_nothing_() const;
+
 protected:
 	inline Something(const thing_& me)
 		: Thing{ me }
@@ -113,20 +127,6 @@ public:
 	{
 		return !thing;
 	}
-
-	inline thing_ is_something(thing_) const
-	{
-		return Everything<>::val();
-	}
-
-	inline thing_ is_something_() const
-	{
-		return Everything<>::val();
-	}
-
-	inline thing_ is_nothing(thing_) const;
-
-	inline thing_ is_nothing_() const;
 
 	inline thing_ hash(thing_) const
 	{
