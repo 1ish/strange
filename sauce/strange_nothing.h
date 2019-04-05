@@ -29,22 +29,22 @@ public:
 	}
 
 	// function
-	inline thing_ mutate(thing_)
-	{
-		return Nothing::val();
-	}
-
-	inline thing_ operator()(thing_)
-	{
-		return Nothing::val();
-	}
-
 	inline thing_ extract(thing_) const
 	{
 		return Nothing::val();
 	}
 
 	inline thing_ operator()(thing_) const
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ mutate(thing_)
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ operator()(thing_)
 	{
 		return Nothing::val();
 	}
@@ -89,21 +89,6 @@ public:
 	}
 
 	// range
-	inline thing_ begin_set(thing_)
-	{
-		return Nothing::val();
-	}
-
-	inline thing_ begin_set_()
-	{
-		return Nothing::val();
-	}
-
-	inline thing_ begin()
-	{
-		return Nothing::val();
-	}
-
 	inline thing_ begin_get(thing_) const
 	{
 		return Nothing::val();
@@ -119,17 +104,17 @@ public:
 		return Nothing::val();
 	}
 
-	inline thing_ end_set(thing_)
+	inline thing_ begin_set(thing_)
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ end_set_()
+	inline thing_ begin_set_()
 	{
 		return Nothing::val();
 	}
 
-	inline thing_ end()
+	inline thing_ begin()
 	{
 		return Nothing::val();
 	}
@@ -149,27 +134,22 @@ public:
 		return Nothing::val();
 	}
 
+	inline thing_ end_set(thing_)
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ end_set_()
+	{
+		return Nothing::val();
+	}
+
+	inline thing_ end()
+	{
+		return Nothing::val();
+	}
+
 	// iterator
-	inline thing_ set(thing_)
-	{
-		return Nothing::val();
-	}
-
-	inline thing_ set_(thing_)
-	{
-		return Nothing::val();
-	}
-
-	inline thing_& operator*()
-	{
-		return Nothing::val();
-	}
-
-	inline thing_* operator->()
-	{
-		return &Nothing::val();
-	}
-
 	inline thing_ get(thing_) const
 	{
 		return Nothing::val();
@@ -180,12 +160,22 @@ public:
 		return Nothing::val();
 	}
 
-	inline const thing_& operator*() const
+	inline thing_ set(thing_) const
 	{
 		return Nothing::val();
 	}
 
-	inline const thing_* operator->() const
+	inline thing_ set_(thing_) const
+	{
+		return Nothing::val();
+	}
+
+	inline thing_& operator*() const
+	{
+		return Nothing::val();
+	}
+
+	inline thing_* operator->() const
 	{
 		return &Nothing::val();
 	}

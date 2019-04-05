@@ -28,14 +28,14 @@ namespace strange {
 
     
 
-     inline thing_ mutate ( thing_ range )
-     { assert(handle_); return write().mutate(range ); }
-     inline thing_ operator ( ) ( thing_ range )
-     { assert(handle_); return write().operator()(range ); }
      inline thing_ extract ( thing_ range ) const
      { assert(handle_); return read().extract(range ); }
      inline thing_ operator ( ) ( thing_ range ) const
      { assert(handle_); return read().operator()(range ); }
+     inline thing_ mutate ( thing_ range )
+     { assert(handle_); return write().mutate(range ); }
+     inline thing_ operator ( ) ( thing_ range )
+     { assert(handle_); return write().operator()(range ); }
      inline thing_ same ( thing_ range ) const
      { assert(handle_); return read().same(range ); }
      inline thing_ same_ ( thing_ thing ) const
@@ -56,45 +56,41 @@ namespace strange {
      { assert(handle_); return read().is_nothing(_ ); }
      inline thing_ is_nothing_ ( ) const
      { assert(handle_); return read().is_nothing_( ); }
-     inline thing_ begin_set ( thing_ _ )
-     { assert(handle_); return write().begin_set(_ ); }
-     inline thing_ begin_set_ ( )
-     { assert(handle_); return write().begin_set_( ); }
-     inline thing_ begin ( )
-     { assert(handle_); return write().begin( ); }
      inline thing_ begin_get ( thing_ _ ) const
      { assert(handle_); return read().begin_get(_ ); }
      inline thing_ begin_get_ ( ) const
      { assert(handle_); return read().begin_get_( ); }
      inline thing_ cbegin ( ) const
      { assert(handle_); return read().cbegin( ); }
-     inline thing_ end_set ( thing_ _ )
-     { assert(handle_); return write().end_set(_ ); }
-     inline thing_ end_set_ ( )
-     { assert(handle_); return write().end_set_( ); }
-     inline thing_ end ( )
-     { assert(handle_); return write().end( ); }
+     inline thing_ begin_set ( thing_ _ )
+     { assert(handle_); return write().begin_set(_ ); }
+     inline thing_ begin_set_ ( )
+     { assert(handle_); return write().begin_set_( ); }
+     inline thing_ begin ( )
+     { assert(handle_); return write().begin( ); }
      inline thing_ end_get ( thing_ _ ) const
      { assert(handle_); return read().end_get(_ ); }
      inline thing_ end_get_ ( ) const
      { assert(handle_); return read().end_get_( ); }
      inline thing_ cend ( ) const
      { assert(handle_); return read().cend( ); }
-     inline thing_ set ( thing_ range )
-     { assert(handle_); return write().set(range ); }
-     inline thing_ set_ ( thing_ thing )
-     { assert(handle_); return write().set_(thing ); }
-     inline thing_ & operator * ( )
-     { assert(handle_); return write().operator*( ); }
-     inline thing_ * operator -> ( )
-     { assert(handle_); return write().operator->( ); }
+     inline thing_ end_set ( thing_ _ )
+     { assert(handle_); return write().end_set(_ ); }
+     inline thing_ end_set_ ( )
+     { assert(handle_); return write().end_set_( ); }
+     inline thing_ end ( )
+     { assert(handle_); return write().end( ); }
      inline thing_ get ( thing_ _ ) const
      { assert(handle_); return read().get(_ ); }
      inline thing_ get_ ( ) const
      { assert(handle_); return read().get_( ); }
-     inline const thing_ & operator * ( ) const
+     inline thing_ set ( thing_ range ) const
+     { assert(handle_); return read().set(range ); }
+     inline thing_ set_ ( thing_ thing ) const
+     { assert(handle_); return read().set_(thing ); }
+     inline thing_ & operator * ( ) const
      { assert(handle_); return read().operator*( ); }
-     inline const thing_ * operator -> ( ) const
+     inline thing_ * operator -> ( ) const
      { assert(handle_); return read().operator->( ); }
      inline thing_ increment ( thing_ _ )
      { assert(handle_); return write().increment(_ ); }
@@ -132,10 +128,10 @@ namespace strange {
 
     
 
-      virtual inline thing_ mutate ( thing_ range ) = 0;
-      virtual inline thing_ operator ( ) ( thing_ range ) = 0;
       virtual inline thing_ extract ( thing_ range ) const = 0;
       virtual inline thing_ operator ( ) ( thing_ range ) const = 0;
+      virtual inline thing_ mutate ( thing_ range ) = 0;
+      virtual inline thing_ operator ( ) ( thing_ range ) = 0;
       virtual inline thing_ same ( thing_ range ) const = 0;
       virtual inline thing_ same_ ( thing_ thing ) const = 0;
       virtual inline bool operator == ( thing_ thing ) const = 0;
@@ -146,26 +142,24 @@ namespace strange {
       virtual inline thing_ is_something_ ( ) const = 0;
       virtual inline thing_ is_nothing ( thing_ _ ) const = 0;
       virtual inline thing_ is_nothing_ ( ) const = 0;
-      virtual inline thing_ begin_set ( thing_ _ ) = 0;
-      virtual inline thing_ begin_set_ ( ) = 0;
-      virtual inline thing_ begin ( ) = 0;
       virtual inline thing_ begin_get ( thing_ _ ) const = 0;
       virtual inline thing_ begin_get_ ( ) const = 0;
       virtual inline thing_ cbegin ( ) const = 0;
-      virtual inline thing_ end_set ( thing_ _ ) = 0;
-      virtual inline thing_ end_set_ ( ) = 0;
-      virtual inline thing_ end ( ) = 0;
+      virtual inline thing_ begin_set ( thing_ _ ) = 0;
+      virtual inline thing_ begin_set_ ( ) = 0;
+      virtual inline thing_ begin ( ) = 0;
       virtual inline thing_ end_get ( thing_ _ ) const = 0;
       virtual inline thing_ end_get_ ( ) const = 0;
       virtual inline thing_ cend ( ) const = 0;
-      virtual inline thing_ set ( thing_ range ) = 0;
-      virtual inline thing_ set_ ( thing_ thing ) = 0;
-      virtual inline thing_ & operator * ( ) = 0;
-      virtual inline thing_ * operator -> ( ) = 0;
+      virtual inline thing_ end_set ( thing_ _ ) = 0;
+      virtual inline thing_ end_set_ ( ) = 0;
+      virtual inline thing_ end ( ) = 0;
       virtual inline thing_ get ( thing_ _ ) const = 0;
       virtual inline thing_ get_ ( ) const = 0;
-      virtual inline const thing_ & operator * ( ) const = 0;
-      virtual inline const thing_ * operator -> ( ) const = 0;
+      virtual inline thing_ set ( thing_ range ) const = 0;
+      virtual inline thing_ set_ ( thing_ thing ) const = 0;
+      virtual inline thing_ & operator * ( ) const = 0;
+      virtual inline thing_ * operator -> ( ) const = 0;
       virtual inline thing_ increment ( thing_ _ ) = 0;
       virtual inline thing_ increment_ ( ) = 0;
       virtual inline thing_ & operator ++ ( ) = 0;
@@ -209,13 +203,13 @@ namespace strange {
 
     
 
-      virtual inline thing_ mutate ( thing_ range )
-      { return value_.mutate(range ); }
-      virtual inline thing_ operator ( ) ( thing_ range )
-      { return value_.operator()(range ); }
       virtual inline thing_ extract ( thing_ range ) const
       { return value_.extract(range ); }
       virtual inline thing_ operator ( ) ( thing_ range ) const
+      { return value_.operator()(range ); }
+      virtual inline thing_ mutate ( thing_ range )
+      { return value_.mutate(range ); }
+      virtual inline thing_ operator ( ) ( thing_ range )
       { return value_.operator()(range ); }
       virtual inline thing_ same ( thing_ range ) const
       { return value_.same(range ); }
@@ -237,45 +231,41 @@ namespace strange {
       { return value_.is_nothing(_ ); }
       virtual inline thing_ is_nothing_ ( ) const
       { return value_.is_nothing_( ); }
-      virtual inline thing_ begin_set ( thing_ _ )
-      { return value_.begin_set(_ ); }
-      virtual inline thing_ begin_set_ ( )
-      { return value_.begin_set_( ); }
-      virtual inline thing_ begin ( )
-      { return value_.begin( ); }
       virtual inline thing_ begin_get ( thing_ _ ) const
       { return value_.begin_get(_ ); }
       virtual inline thing_ begin_get_ ( ) const
       { return value_.begin_get_( ); }
       virtual inline thing_ cbegin ( ) const
       { return value_.cbegin( ); }
-      virtual inline thing_ end_set ( thing_ _ )
-      { return value_.end_set(_ ); }
-      virtual inline thing_ end_set_ ( )
-      { return value_.end_set_( ); }
-      virtual inline thing_ end ( )
-      { return value_.end( ); }
+      virtual inline thing_ begin_set ( thing_ _ )
+      { return value_.begin_set(_ ); }
+      virtual inline thing_ begin_set_ ( )
+      { return value_.begin_set_( ); }
+      virtual inline thing_ begin ( )
+      { return value_.begin( ); }
       virtual inline thing_ end_get ( thing_ _ ) const
       { return value_.end_get(_ ); }
       virtual inline thing_ end_get_ ( ) const
       { return value_.end_get_( ); }
       virtual inline thing_ cend ( ) const
       { return value_.cend( ); }
-      virtual inline thing_ set ( thing_ range )
-      { return value_.set(range ); }
-      virtual inline thing_ set_ ( thing_ thing )
-      { return value_.set_(thing ); }
-      virtual inline thing_ & operator * ( )
-      { return value_.operator*( ); }
-      virtual inline thing_ * operator -> ( )
-      { return value_.operator->( ); }
+      virtual inline thing_ end_set ( thing_ _ )
+      { return value_.end_set(_ ); }
+      virtual inline thing_ end_set_ ( )
+      { return value_.end_set_( ); }
+      virtual inline thing_ end ( )
+      { return value_.end( ); }
       virtual inline thing_ get ( thing_ _ ) const
       { return value_.get(_ ); }
       virtual inline thing_ get_ ( ) const
       { return value_.get_( ); }
-      virtual inline const thing_ & operator * ( ) const
+      virtual inline thing_ set ( thing_ range ) const
+      { return value_.set(range ); }
+      virtual inline thing_ set_ ( thing_ thing ) const
+      { return value_.set_(thing ); }
+      virtual inline thing_ & operator * ( ) const
       { return value_.operator*( ); }
-      virtual inline const thing_ * operator -> ( ) const
+      virtual inline thing_ * operator -> ( ) const
       { return value_.operator->( ); }
       virtual inline thing_ increment ( thing_ _ )
       { return value_.increment(_ ); }

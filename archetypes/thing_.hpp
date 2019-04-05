@@ -14,11 +14,11 @@ class thing_
 {
 public:
 	// function
-	inline thing_ mutate(thing_ range);
-	inline thing_ operator()(thing_ range);
-
 	inline thing_ extract(thing_ range) const;
 	inline thing_ operator()(thing_ range) const;
+
+	inline thing_ mutate(thing_ range);
+	inline thing_ operator()(thing_ range);
 
 	// comparison
 	inline thing_ same(thing_ range) const;
@@ -36,32 +36,29 @@ public:
 	inline thing_ is_nothing_() const;
 
 	// range
-	inline thing_ begin_set(thing_ _);
-	inline thing_ begin_set_();
-	inline thing_ begin();
-
 	inline thing_ begin_get(thing_ _) const;
 	inline thing_ begin_get_() const;
 	inline thing_ cbegin() const;
 
-	inline thing_ end_set(thing_ _);
-	inline thing_ end_set_();
-	inline thing_ end();
+	inline thing_ begin_set(thing_ _);
+	inline thing_ begin_set_();
+	inline thing_ begin();
 
 	inline thing_ end_get(thing_ _) const;
 	inline thing_ end_get_() const;
 	inline thing_ cend() const;
 
-	// iterator
-	inline thing_ set(thing_ range);
-	inline thing_ set_(thing_ thing);
-	inline thing_& operator*();
-	inline thing_* operator->();
+	inline thing_ end_set(thing_ _);
+	inline thing_ end_set_();
+	inline thing_ end();
 
+	// iterator
 	inline thing_ get(thing_ _) const;
 	inline thing_ get_() const;
-	inline const thing_& operator*() const;
-	inline const thing_* operator->() const;
+	inline thing_ set(thing_ range) const;
+	inline thing_ set_(thing_ thing) const;
+	inline thing_& operator*() const;
+	inline thing_* operator->() const;
 
 	inline thing_ increment(thing_ _);
 	inline thing_ increment_();

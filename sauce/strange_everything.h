@@ -36,22 +36,22 @@ public:
 	}
 
 	// function
-	inline thing_ mutate(thing_)
-	{
-		return Everything::val();
-	}
-
-	inline thing_ operator()(thing_)
-	{
-		return Everything::val();
-	}
-
 	inline thing_ extract(thing_) const
 	{
 		return Everything::val();
 	}
 
 	inline thing_ operator()(thing_) const
+	{
+		return Everything::val();
+	}
+
+	inline thing_ mutate(thing_)
+	{
+		return Everything::val();
+	}
+
+	inline thing_ operator()(thing_)
 	{
 		return Everything::val();
 	}
@@ -90,21 +90,6 @@ public:
 	inline thing_ is_nothing_() const;
 
 	// range
-	inline thing_ begin_set(thing_)
-	{
-		return Everything::val();
-	}
-
-	inline thing_ begin_set_()
-	{
-		return Everything::val();
-	}
-
-	inline thing_ begin()
-	{
-		return Everything::val();
-	}
-
 	inline thing_ begin_get(thing_) const
 	{
 		return Everything::val();
@@ -120,17 +105,17 @@ public:
 		return Everything::val();
 	}
 
-	inline thing_ end_set(thing_)
+	inline thing_ begin_set(thing_)
 	{
 		return Everything::val();
 	}
 
-	inline thing_ end_set_()
+	inline thing_ begin_set_()
 	{
 		return Everything::val();
 	}
 
-	inline thing_ end()
+	inline thing_ begin()
 	{
 		return Everything::val();
 	}
@@ -150,27 +135,22 @@ public:
 		return Everything::val();
 	}
 
+	inline thing_ end_set(thing_)
+	{
+		return Everything::val();
+	}
+
+	inline thing_ end_set_()
+	{
+		return Everything::val();
+	}
+
+	inline thing_ end()
+	{
+		return Everything::val();
+	}
+
 	// iterator
-	inline thing_ set(thing_)
-	{
-		return Everything::val();
-	}
-
-	inline thing_ set_(thing_)
-	{
-		return Everything::val();
-	}
-
-	inline thing_& operator*()
-	{
-		return Everything::val();
-	}
-
-	inline thing_* operator->()
-	{
-		return &Everything::val();
-	}
-
 	inline thing_ get(thing_) const
 	{
 		return Everything::val();
@@ -181,12 +161,22 @@ public:
 		return Everything::val();
 	}
 
-	inline const thing_& operator*() const
+	inline thing_ set(thing_) const
 	{
 		return Everything::val();
 	}
 
-	inline const thing_* operator->() const
+	inline thing_ set_(thing_) const
+	{
+		return Everything::val();
+	}
+
+	inline thing_& operator*() const
+	{
+		return Everything::val();
+	}
+
+	inline thing_* operator->() const
 	{
 		return &Everything::val();
 	}
