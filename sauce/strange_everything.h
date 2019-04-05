@@ -42,7 +42,7 @@ protected:
 };
 
 template <typename THING_>
-class Creature : public Thing<THING_>
+class Anything : public Thing<THING_>
 {
 public:
 	// function
@@ -67,13 +67,13 @@ public:
 	}
 
 protected:
-	inline Creature(const thing_& me)
+	inline Anything(const thing_& me)
 		: Thing{ me }
 	{};
 };
 
 template <typename THING_, bool SOMETHING = true>
-class Something : public Creature<THING_>
+class Something : public Anything<THING_>
 {
 public:
 	// conversion
@@ -104,12 +104,12 @@ public:
 
 protected:
 	inline Something(const thing_& me)
-		: Creature{ me }
+		: Anything{ me }
 	{};
 };
 
 template <typename THING_>
-class Something<THING_, false> : public Creature<THING_>
+class Something<THING_, false> : public Anything<THING_>
 {
 public:
 	// conversion
@@ -140,7 +140,7 @@ public:
 
 protected:
 	inline Something(const thing_& me)
-		: Creature{ me }
+		: Anything{ me }
 	{};
 };
 
