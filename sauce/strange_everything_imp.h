@@ -6,59 +6,69 @@
 namespace strange
 {
 
-inline thing_ Creature::extract(thing_ range) const
+template <typename THING_>
+inline thing_ Creature<THING_>::extract(thing_ range) const
 {
 	me_().hash_();//TODO
-	return Everything::val();
+	return Everything<>::val();
 }
 
-inline thing_ Creature::operator()(thing_ range) const
+template <typename THING_>
+inline thing_ Creature<THING_>::operator()(thing_ range) const
 {
-	return Everything::val();
+	return Everything<>::val();
 }
 
-inline thing_ Creature::mutate(thing_ range)
+template <typename THING_>
+inline thing_ Creature<THING_>::mutate(thing_ range)
 {
-	return Everything::val();
+	return Everything<>::val();
 }
 
-inline thing_ Creature::operator()(thing_ range)
+template <typename THING_>
+inline thing_ Creature<THING_>::operator()(thing_ range)
 {
-	return Everything::val();
+	return Everything<>::val();
 }
 
-inline thing_ Everything::same(thing_ range) const
-{
-	const auto other = range.cbegin();
-	assert(other != range.cend()); //TODO throw
-	return (*other) ? Everything::val() : Nothing::val();
-}
-
-inline thing_ Everything::same_(thing_ thing) const
-{
-	return thing ? Everything::val() : Nothing::val();
-}
-
-inline thing_ Everything::different(thing_ range) const
+template <typename THING_>
+inline thing_ Everything<THING_>::same(thing_ range) const
 {
 	const auto other = range.cbegin();
 	assert(other != range.cend()); //TODO throw
-	return (!*other) ? Everything::val() : Nothing::val();
+	return (*other) ? Everything<>::val() : Nothing<>::val();
 }
 
-inline thing_ Everything::different_(thing_ thing) const
+template <typename THING_>
+inline thing_ Everything<THING_>::same_(thing_ thing) const
 {
-	return (!thing) ? Everything::val() : Nothing::val();
+	return thing ? Everything<>::val() : Nothing<>::val();
 }
 
-inline thing_ Everything::is_nothing(thing_) const
+template <typename THING_>
+inline thing_ Everything<THING_>::different(thing_ range) const
 {
-	return Nothing::val();
+	const auto other = range.cbegin();
+	assert(other != range.cend()); //TODO throw
+	return (!*other) ? Everything<>::val() : Nothing<>::val();
 }
 
-inline thing_ Everything::is_nothing_() const
+template <typename THING_>
+inline thing_ Everything<THING_>::different_(thing_ thing) const
 {
-	return Nothing::val();
+	return (!thing) ? Everything<>::val() : Nothing<>::val();
+}
+
+template <typename THING_>
+inline thing_ Everything<THING_>::is_nothing(thing_) const
+{
+	return Nothing<>::val();
+}
+
+template <typename THING_>
+inline thing_ Everything<THING_>::is_nothing_() const
+{
+	return Nothing<>::val();
 }
 
 } // namespace strange

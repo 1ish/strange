@@ -6,29 +6,31 @@
 namespace strange
 {
 
+template <typename THING_>
 class Thing
 {
 public:
-	const thing_ me_() const
+	const THING_ me_() const
 	{
-		return thing_(_meek.lock(), true);
+		return THING_(_meek.lock(), true);
 	}
 
-	thing_ me_()
+	THING_ me_()
 	{
-		return thing_(_meek.lock(), true);
+		return THING_(_meek.lock(), true);
 	}
 
 protected:
-	inline Thing(const thing_& me)
+	inline Thing(const THING_& me)
 		: _meek(me.weak_())
 	{}
 
 private:
-	const decltype(thing_().weak_()) _meek;
+	const decltype(THING_().weak_()) _meek;
 };
 
-class Something : public Thing
+template <typename THING_>
+class Something : public Thing<THING_>
 {
 public:
 	// conversion
@@ -43,7 +45,8 @@ protected:
 	{};
 };
 
-class Creature : public Something
+template <typename THING_>
+class Creature : public Something<THING_>
 {
 public:
 	// function
@@ -58,7 +61,8 @@ protected:
 	{};
 };
 
-class Everything : public Creature
+template <typename THING_ = thing_>
+class Everything : public Creature<THING_>
 {
 public:
 	// construction
@@ -67,7 +71,7 @@ public:
 		static symbol_ VAL = []() //TODO thing_
 		{
 			symbol_ thing; //TODO thing_
-			thing = Everything{thing};
+			thing = Everything<>{thing};
 			return thing;
 		}();
 		return VAL;
@@ -78,7 +82,7 @@ public:
 		static symbol_ REF = []() //TODO thing_
 		{
 			symbol_ thing{ true }; //TODO thing_
-			thing = Everything{ thing };
+			thing = Everything<>{ thing };
 			return thing;
 		}();
 		return REF;
@@ -105,12 +109,12 @@ public:
 
 	inline thing_ is_something(thing_) const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ is_something_() const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ is_nothing(thing_) const;
@@ -119,12 +123,12 @@ public:
 
 	inline thing_ hash(thing_) const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ hash_() const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline size_t hash__() const
@@ -135,124 +139,124 @@ public:
 	// range
 	inline thing_ begin_get(thing_) const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ begin_get_() const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ cbegin() const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ begin_set(thing_)
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ begin_set_()
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ begin()
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ end_get(thing_) const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ end_get_() const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ cend() const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ end_set(thing_)
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ end_set_()
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ end()
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	// iterator
 	inline thing_ get(thing_) const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ get_() const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ set(thing_) const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ set_(thing_) const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_& operator*() const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_* operator->() const
 	{
-		return &Everything::val();
+		return &Everything<>::val();
 	}
 
 	inline thing_ increment(thing_)
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_ increment_()
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline thing_& operator++()
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	//TODO symbol
 	inline symbol_ add(thing_ range) const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline symbol_ add_(symbol_ symbol) const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 	inline symbol_ operator+(symbol_ symbol) const
 	{
-		return Everything::val();
+		return Everything<>::val();
 	}
 
 protected:
