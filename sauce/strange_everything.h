@@ -56,9 +56,15 @@ public:
 		return Everything<>::val();
 	}
 
-	inline thing_ is_nothing(thing_) const;
+	inline thing_ is_nothing(thing_) const
+	{
+		return Nothing<>::val();
+	}
 
-	inline thing_ is_nothing_() const;
+	inline thing_ is_nothing_() const
+	{
+		return Nothing<>::val();
+	}
 
 protected:
 	inline Something(const thing_& me)
@@ -71,10 +77,26 @@ class Creature : public Something<THING_>
 {
 public:
 	// function
-	inline thing_ extract(thing_ range) const;
-	inline thing_ operator()(thing_ range) const;
-	inline thing_ mutate(thing_ range);
-	inline thing_ operator()(thing_ range);
+	inline thing_ extract(thing_ range) const
+	{
+		me_().hash_();//TODO
+		return Everything<>::val();
+	}
+
+	inline thing_ operator()(thing_ range) const
+	{
+		return Everything<>::val();
+	}
+
+	inline thing_ mutate(thing_ range)
+	{
+		return Everything<>::val();
+	}
+
+	inline thing_ operator()(thing_ range)
+	{
+		return Everything<>::val();
+	}
 
 protected:
 	inline Creature(const thing_& me)
@@ -110,18 +132,34 @@ public:
 	}
 
 	// comparison
-	inline thing_ same(thing_ range) const;
+	inline thing_ same(thing_ range) const
+	{
+		const auto other = range.cbegin();
+		assert(other != range.cend()); //TODO throw
+		return (*other) ? Everything<>::val() : Nothing<>::val();
+	}
 
-	inline thing_ same_(thing_ thing) const;
+	inline thing_ same_(thing_ thing) const
+	{
+		return thing ? Everything<>::val() : Nothing<>::val();
+	}
 
 	inline bool operator==(thing_ thing) const
 	{
 		return thing;
 	}
 
-	inline thing_ different(thing_ range) const;
+	inline thing_ different(thing_ range) const
+	{
+		const auto other = range.cbegin();
+		assert(other != range.cend()); //TODO throw
+		return (!*other) ? Everything<>::val() : Nothing<>::val();
+	}
 
-	inline thing_ different_(thing_ thing) const;
+	inline thing_ different_(thing_ thing) const
+	{
+		return (!thing) ? Everything<>::val() : Nothing<>::val();
+	}
 
 	inline bool operator!=(thing_ thing) const
 	{
