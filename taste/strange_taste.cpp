@@ -18,13 +18,13 @@ TEST(TestCaseName, TestName) {
 }
 
 TEST(TestCaseName, ForLoop) {
-	thing_ t{ Nothing<>::val() };
+	thing_ t{ Nothing<>::ref() };
 
 	for (auto v : t)
 	{
 	}
 
-	symbol_ s{ Everything<>::val() };
+	symbol_ s{ Everything<>::ref() };
 
 	t = s; //TODO thing<symbol_<Everything>>
 

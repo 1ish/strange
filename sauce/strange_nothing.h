@@ -12,17 +12,6 @@ class Nothing : public Something<THING_, false>
 {
 public:
 	// construction
-	static inline thing_& val(thing_ _ = thing_{})
-	{
-		static thing_ VAL = []()
-		{
-			thing_ thing;
-			thing = Nothing<>{ thing };
-			return thing;
-		}();
-		return VAL;
-	}
-
 	static inline thing_& ref(thing_ _ = thing_{})
 	{
 		static thing_ REF = []()
@@ -71,12 +60,12 @@ public:
 
 	inline thing_ hash(thing_) const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ hash_() const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline size_t hash__() const
@@ -87,108 +76,108 @@ public:
 	// range
 	inline thing_ begin_get(thing_) const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ begin_get_() const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ cbegin() const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ begin_set(thing_)
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ begin_set_()
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ begin()
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ end_get(thing_) const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ end_get_() const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ cend() const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ end_set(thing_)
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ end_set_()
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ end()
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	// iterator
 	inline thing_ get(thing_) const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ get_() const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ set(thing_) const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ set_(thing_) const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_& operator*() const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_* operator->() const
 	{
-		return &Nothing<>::val();
+		return &Nothing<>::ref();
 	}
 
 	inline thing_ increment(thing_)
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ increment_()
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_& operator++()
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 protected:

@@ -37,7 +37,7 @@ protected:
 
 	static inline thing_ _boole_(bool b)
 	{
-		return b ? Everything<>::val() : Nothing<>::val();
+		return b ? Everything<>::ref() : Nothing<>::ref();
 	}
 };
 
@@ -48,22 +48,22 @@ public:
 	// function
 	inline thing_ extract(thing_ range) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ operator()(thing_ range) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ mutate(thing_ range)
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ operator()(thing_ range)
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 protected:
@@ -84,22 +84,22 @@ public:
 
 	inline thing_ is_something(thing_) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ is_something_() const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ is_nothing(thing_) const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ is_nothing_() const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 protected:
@@ -120,22 +120,22 @@ public:
 
 	inline thing_ is_something(thing_) const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ is_something_() const
 	{
-		return Nothing<>::val();
+		return Nothing<>::ref();
 	}
 
 	inline thing_ is_nothing(thing_) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ is_nothing_() const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 protected:
@@ -149,17 +149,6 @@ class Everything : public Something<THING_>
 {
 public:
 	// construction
-	static inline symbol_& val(thing_ _ = thing_{}) //TODO thing_
-	{
-		static symbol_ VAL = []() //TODO thing_
-		{
-			symbol_ thing; //TODO thing_
-			thing = Everything<>{thing};
-			return thing;
-		}();
-		return VAL;
-	}
-
 	static inline symbol_& ref(thing_ _ = thing_{}) //TODO thing_
 	{
 		static symbol_ REF = []() //TODO thing_
@@ -208,12 +197,12 @@ public:
 
 	inline thing_ hash(thing_) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ hash_() const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline size_t hash__() const
@@ -224,124 +213,124 @@ public:
 	// range
 	inline thing_ begin_get(thing_) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ begin_get_() const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ cbegin() const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ begin_set(thing_)
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ begin_set_()
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ begin()
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ end_get(thing_) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ end_get_() const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ cend() const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ end_set(thing_)
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ end_set_()
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ end()
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	// iterator
 	inline thing_ get(thing_) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ get_() const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ set(thing_) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ set_(thing_) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_& operator*() const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_* operator->() const
 	{
-		return &Everything<>::val();
+		return &Everything<>::ref();
 	}
 
 	inline thing_ increment(thing_)
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_ increment_()
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline thing_& operator++()
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	//TODO symbol
 	inline symbol_ add(thing_ range) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline symbol_ add_(symbol_ symbol) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 	inline symbol_ operator+(symbol_ symbol) const
 	{
-		return Everything<>::val();
+		return Everything<>::ref();
 	}
 
 protected:
