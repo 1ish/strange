@@ -6,8 +6,18 @@
 namespace strange
 {
 
+class One
+{
+protected:
+	const decltype(thing_().weak_()) _meek;
+
+	inline One(const thing_& me)
+		: _meek(me.weak_())
+	{}
+};
+
 template <typename THING_>
-class Thing
+class Thing : One
 {
 public:
 	const THING_ me_() const
@@ -21,12 +31,9 @@ public:
 	}
 
 protected:
-	inline Thing(const THING_& me)
-		: _meek(me.weak_())
+	inline Thing(const thing_& me)
+		: One(me)
 	{}
-
-private:
-	const decltype(THING_().weak_()) _meek;
 };
 
 template <typename THING_>
