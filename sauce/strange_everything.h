@@ -42,43 +42,7 @@ protected:
 };
 
 template <typename THING_>
-class Something : public Thing<THING_>
-{
-public:
-	// conversion
-	inline operator bool() const
-	{
-		return true;
-	}
-
-	inline thing_ is_something(thing_) const
-	{
-		return Everything<>::val();
-	}
-
-	inline thing_ is_something_() const
-	{
-		return Everything<>::val();
-	}
-
-	inline thing_ is_nothing(thing_) const
-	{
-		return Nothing<>::val();
-	}
-
-	inline thing_ is_nothing_() const
-	{
-		return Nothing<>::val();
-	}
-
-protected:
-	inline Something(const thing_& me)
-		: Thing{ me }
-	{};
-};
-
-template <typename THING_>
-class Creature : public Something<THING_>
+class Creature : public Thing<THING_>
 {
 public:
 	// function
@@ -104,12 +68,84 @@ public:
 
 protected:
 	inline Creature(const thing_& me)
-		: Something{ me }
+		: Thing{ me }
+	{};
+};
+
+template <typename THING_, bool SOMETHING = true>
+class Something : public Creature<THING_>
+{
+public:
+	// conversion
+	inline operator bool() const
+	{
+		return SOMETHING;
+	}
+
+	inline thing_ is_something(thing_) const
+	{
+		return Everything<>::val();
+	}
+
+	inline thing_ is_something_() const
+	{
+		return Everything<>::val();
+	}
+
+	inline thing_ is_nothing(thing_) const
+	{
+		return Nothing<>::val();
+	}
+
+	inline thing_ is_nothing_() const
+	{
+		return Nothing<>::val();
+	}
+
+protected:
+	inline Something(const thing_& me)
+		: Creature{ me }
+	{};
+};
+
+template <typename THING_>
+class Something<THING_, false> : public Creature<THING_>
+{
+public:
+	// conversion
+	inline operator bool() const
+	{
+		return false;
+	}
+
+	inline thing_ is_something(thing_) const
+	{
+		return Nothing<>::val();
+	}
+
+	inline thing_ is_something_() const
+	{
+		return Nothing<>::val();
+	}
+
+	inline thing_ is_nothing(thing_) const
+	{
+		return Everything<>::val();
+	}
+
+	inline thing_ is_nothing_() const
+	{
+		return Everything<>::val();
+	}
+
+protected:
+	inline Something(const thing_& me)
+		: Creature{ me }
 	{};
 };
 
 template <typename THING_ = thing_>
-class Everything : public Creature<THING_>
+class Everything : public Something<THING_>
 {
 public:
 	// construction
@@ -310,7 +346,7 @@ public:
 
 protected:
 	inline Everything(const thing_& me)
-		: Creature{ me }
+		: Something{ me }
 	{};
 };
 

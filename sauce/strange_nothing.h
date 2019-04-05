@@ -8,7 +8,7 @@ namespace strange
 {
 
 template <typename THING_ = thing_>
-class Nothing : public Thing<THING_>
+class Nothing : public Something<THING_, false>
 {
 public:
 	// construction
@@ -32,33 +32,6 @@ public:
 			return thing;
 		}();
 		return REF;
-	}
-
-	// conversion
-	inline operator bool() const
-	{
-		return false;
-	}
-
-	// function
-	inline thing_ extract(thing_) const
-	{
-		return Nothing<>::val();
-	}
-
-	inline thing_ operator()(thing_) const
-	{
-		return Nothing<>::val();
-	}
-
-	inline thing_ mutate(thing_)
-	{
-		return Nothing<>::val();
-	}
-
-	inline thing_ operator()(thing_)
-	{
-		return Nothing<>::val();
 	}
 
 	// comparison
@@ -94,26 +67,6 @@ public:
 	inline bool operator!=(thing_ thing) const
 	{
 		return thing.hash__() != 0;
-	}
-
-	inline thing_ is_something(thing_) const
-	{
-		return Nothing<>::val();
-	}
-
-	inline thing_ is_something_() const
-	{
-		return Nothing<>::val();
-	}
-
-	inline thing_ is_nothing(thing_) const
-	{
-		return Everything<>::val();
-	}
-
-	inline thing_ is_nothing_() const
-	{
-		return Everything<>::val();
 	}
 
 	inline thing_ hash(thing_) const
@@ -240,7 +193,7 @@ public:
 
 protected:
 	inline Nothing(const thing_& me)
-		: Thing{ me }
+		: Something{ me }
 	{};
 };
 
