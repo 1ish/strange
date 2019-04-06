@@ -66,28 +66,28 @@ namespace strange {
      { assert(handle_); return read().hash_( ); }
      inline size_t hash__ ( ) const
      { assert(handle_); return read().hash__( ); }
-     inline thing_ begin_get ( thing_ _ ) const
-     { assert(handle_); return read().begin_get(_ ); }
-     inline thing_ begin_get_ ( ) const
-     { assert(handle_); return read().begin_get_( ); }
+     inline thing_ beget ( thing_ _ ) const
+     { assert(handle_); return read().beget(_ ); }
+     inline thing_ beget_ ( ) const
+     { assert(handle_); return read().beget_( ); }
      inline thing_ cbegin ( ) const
      { assert(handle_); return read().cbegin( ); }
-     inline thing_ begin_set ( thing_ _ )
-     { assert(handle_); return write().begin_set(_ ); }
-     inline thing_ begin_set_ ( )
-     { assert(handle_); return write().begin_set_( ); }
+     inline thing_ beset ( thing_ _ )
+     { assert(handle_); return write().beset(_ ); }
+     inline thing_ beset_ ( )
+     { assert(handle_); return write().beset_( ); }
      inline thing_ begin ( )
      { assert(handle_); return write().begin( ); }
-     inline thing_ end_get ( thing_ _ ) const
-     { assert(handle_); return read().end_get(_ ); }
-     inline thing_ end_get_ ( ) const
-     { assert(handle_); return read().end_get_( ); }
+     inline thing_ enget ( thing_ _ ) const
+     { assert(handle_); return read().enget(_ ); }
+     inline thing_ enget_ ( ) const
+     { assert(handle_); return read().enget_( ); }
      inline thing_ cend ( ) const
      { assert(handle_); return read().cend( ); }
-     inline thing_ end_set ( thing_ _ )
-     { assert(handle_); return write().end_set(_ ); }
-     inline thing_ end_set_ ( )
-     { assert(handle_); return write().end_set_( ); }
+     inline thing_ enset ( thing_ _ )
+     { assert(handle_); return write().enset(_ ); }
+     inline thing_ enset_ ( )
+     { assert(handle_); return write().enset_( ); }
      inline thing_ end ( )
      { assert(handle_); return write().end( ); }
      inline thing_ get ( thing_ _ ) const
@@ -106,7 +106,7 @@ namespace strange {
      { assert(handle_); return write().increment(_ ); }
      inline thing_ increment_ ( )
      { assert(handle_); return write().increment_( ); }
-     inline thing_ & operator ++ ( )
+     inline thing_ operator ++ ( )
      { assert(handle_); return write().operator++( ); }
     
 
@@ -157,17 +157,17 @@ namespace strange {
       virtual inline thing_ hash ( thing_ _ ) const = 0;
       virtual inline thing_ hash_ ( ) const = 0;
       virtual inline size_t hash__ ( ) const = 0;
-      virtual inline thing_ begin_get ( thing_ _ ) const = 0;
-      virtual inline thing_ begin_get_ ( ) const = 0;
+      virtual inline thing_ beget ( thing_ _ ) const = 0;
+      virtual inline thing_ beget_ ( ) const = 0;
       virtual inline thing_ cbegin ( ) const = 0;
-      virtual inline thing_ begin_set ( thing_ _ ) = 0;
-      virtual inline thing_ begin_set_ ( ) = 0;
+      virtual inline thing_ beset ( thing_ _ ) = 0;
+      virtual inline thing_ beset_ ( ) = 0;
       virtual inline thing_ begin ( ) = 0;
-      virtual inline thing_ end_get ( thing_ _ ) const = 0;
-      virtual inline thing_ end_get_ ( ) const = 0;
+      virtual inline thing_ enget ( thing_ _ ) const = 0;
+      virtual inline thing_ enget_ ( ) const = 0;
       virtual inline thing_ cend ( ) const = 0;
-      virtual inline thing_ end_set ( thing_ _ ) = 0;
-      virtual inline thing_ end_set_ ( ) = 0;
+      virtual inline thing_ enset ( thing_ _ ) = 0;
+      virtual inline thing_ enset_ ( ) = 0;
       virtual inline thing_ end ( ) = 0;
       virtual inline thing_ get ( thing_ _ ) const = 0;
       virtual inline thing_ get_ ( ) const = 0;
@@ -177,7 +177,7 @@ namespace strange {
       virtual inline thing_ * operator -> ( ) const = 0;
       virtual inline thing_ increment ( thing_ _ ) = 0;
       virtual inline thing_ increment_ ( ) = 0;
-      virtual inline thing_ & operator ++ ( ) = 0;
+      virtual inline thing_ operator ++ ( ) = 0;
     	};
 
     
@@ -256,28 +256,28 @@ namespace strange {
       { return value_.hash_( ); }
       virtual inline size_t hash__ ( ) const
       { return value_.hash__( ); }
-      virtual inline thing_ begin_get ( thing_ _ ) const
-      { return value_.begin_get(_ ); }
-      virtual inline thing_ begin_get_ ( ) const
-      { return value_.begin_get_( ); }
+      virtual inline thing_ beget ( thing_ _ ) const
+      { return value_.beget(_ ); }
+      virtual inline thing_ beget_ ( ) const
+      { return value_.beget_( ); }
       virtual inline thing_ cbegin ( ) const
       { return value_.cbegin( ); }
-      virtual inline thing_ begin_set ( thing_ _ )
-      { return value_.begin_set(_ ); }
-      virtual inline thing_ begin_set_ ( )
-      { return value_.begin_set_( ); }
+      virtual inline thing_ beset ( thing_ _ )
+      { return value_.beset(_ ); }
+      virtual inline thing_ beset_ ( )
+      { return value_.beset_( ); }
       virtual inline thing_ begin ( )
       { return value_.begin( ); }
-      virtual inline thing_ end_get ( thing_ _ ) const
-      { return value_.end_get(_ ); }
-      virtual inline thing_ end_get_ ( ) const
-      { return value_.end_get_( ); }
+      virtual inline thing_ enget ( thing_ _ ) const
+      { return value_.enget(_ ); }
+      virtual inline thing_ enget_ ( ) const
+      { return value_.enget_( ); }
       virtual inline thing_ cend ( ) const
       { return value_.cend( ); }
-      virtual inline thing_ end_set ( thing_ _ )
-      { return value_.end_set(_ ); }
-      virtual inline thing_ end_set_ ( )
-      { return value_.end_set_( ); }
+      virtual inline thing_ enset ( thing_ _ )
+      { return value_.enset(_ ); }
+      virtual inline thing_ enset_ ( )
+      { return value_.enset_( ); }
       virtual inline thing_ end ( )
       { return value_.end( ); }
       virtual inline thing_ get ( thing_ _ ) const
@@ -296,7 +296,7 @@ namespace strange {
       { return value_.increment(_ ); }
       virtual inline thing_ increment_ ( )
       { return value_.increment_( ); }
-      virtual inline thing_ & operator ++ ( )
+      virtual inline thing_ operator ++ ( )
       { return value_.operator++( ); }
     
 

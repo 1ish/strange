@@ -1,9 +1,6 @@
 #ifndef COM_ONEISH_STRANGE_SOMETHING_H
 #define COM_ONEISH_STRANGE_SOMETHING_H
 
-#include "strange_thing_.h"
-#include "strange_anything.h"
-
 namespace strange
 {
 
@@ -40,7 +37,7 @@ public:
 protected:
 	inline Something(const thing_& me)
 		: Anything{ me }
-	{};
+	{}
 };
 
 template <typename THING_>
@@ -76,7 +73,7 @@ public:
 protected:
 	inline Something(const thing_& me)
 		: Anything{ me }
-	{};
+	{}
 };
 
 } // namespace strange

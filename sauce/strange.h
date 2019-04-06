@@ -11,5 +11,6 @@
 #include "strange_something.h"
 #include "strange_everything.h"
 #include "strange_nothing.h"
+#include "strange_it.h"
 
 #endif

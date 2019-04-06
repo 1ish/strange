@@ -1,9 +1,6 @@
 #ifndef COM_ONEISH_STRANGE_ANYTHING_H
 #define COM_ONEISH_STRANGE_ANYTHING_H
 
-#include "strange_thing_.h"
-#include "strange_thing.h"
-
 namespace strange
 {
 
@@ -35,7 +32,7 @@ public:
 protected:
 	inline Anything(const thing_& me)
 		: Thing{ me }
-	{};
+	{}
 };
 
 } // namespace strange

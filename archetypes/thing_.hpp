@@ -44,20 +44,20 @@ public:
 	inline size_t hash__() const;
 
 	// range
-	inline thing_ begin_get(thing_ _) const;
-	inline thing_ begin_get_() const;
+	inline thing_ beget(thing_ _) const;
+	inline thing_ beget_() const;
 	inline thing_ cbegin() const;
 
-	inline thing_ begin_set(thing_ _);
-	inline thing_ begin_set_();
+	inline thing_ beset(thing_ _);
+	inline thing_ beset_();
 	inline thing_ begin();
 
-	inline thing_ end_get(thing_ _) const;
-	inline thing_ end_get_() const;
+	inline thing_ enget(thing_ _) const;
+	inline thing_ enget_() const;
 	inline thing_ cend() const;
 
-	inline thing_ end_set(thing_ _);
-	inline thing_ end_set_();
+	inline thing_ enset(thing_ _);
+	inline thing_ enset_();
 	inline thing_ end();
 
 	// iterator
@@ -70,7 +70,7 @@ public:
 
 	inline thing_ increment(thing_ _);
 	inline thing_ increment_();
-	inline thing_& operator++();
+	inline thing_ operator++();
 };
 
 } // namespace strange

@@ -1,9 +1,6 @@
 #ifndef COM_ONEISH_STRANGE_NOTHING_H
 #define COM_ONEISH_STRANGE_NOTHING_H
 
-#include "strange_thing_.h"
-#include "strange_something.h"
-
 namespace strange
 {
 
@@ -37,14 +34,14 @@ public:
 	// comparison
 	inline thing_ same(thing_ range) const
 	{
-		const auto other = range.cbegin();
-		assert(other != range.cend()); //TODO throw
-		return _boole_(other.hash__() == 0);
+		const auto it = range.beget_();
+		assert(it != range.enget_()); //TODO throw
+		return same_(it.get_());
 	}
 
 	inline thing_ same_(thing_ thing) const
 	{
-		return _boole_(thing.hash__() == 0);
+		return _boole_(operator==(thing));
 	}
 
 	inline bool operator==(thing_ thing) const
@@ -54,14 +51,14 @@ public:
 
 	inline thing_ different(thing_ range) const
 	{
-		const auto other = range.cbegin();
-		assert(other != range.cend()); //TODO throw
-		return _boole_(other.hash__() != 0);
+		const auto it = range.beget_();
+		assert(it != range.enget_()); //TODO throw
+		return different_(it.get_());
 	}
 
 	inline thing_ different_(thing_ thing) const
 	{
-		return _boole_(thing.hash__() != 0);
+		return _boole_(operator!=(thing));
 	}
 
 	inline bool operator!=(thing_ thing) const
@@ -85,64 +82,64 @@ public:
 	}
 
 	// range
-	inline thing_ begin_get(thing_) const
+	inline thing_ beget(thing_) const
 	{
-		return Nothing<>::ref();
+		return beget_();
 	}
 
-	inline thing_ begin_get_() const
+	inline thing_ beget_() const
 	{
-		return Nothing<>::ref();
+		return cbegin();
 	}
 
 	inline thing_ cbegin() const
 	{
-		return Nothing<>::ref();
+		return It<thing_, Everything<>>::val_(Nothing<>::ref());
 	}
 
-	inline thing_ begin_set(thing_)
+	inline thing_ beset(thing_)
 	{
-		return Nothing<>::ref();
+		return beset_();
 	}
 
-	inline thing_ begin_set_()
+	inline thing_ beset_()
 	{
-		return Nothing<>::ref();
+		return begin();
 	}
 
 	inline thing_ begin()
 	{
-		return Nothing<>::ref();
+		return It<thing_, Everything<>>::val_(Nothing<>::ref());
 	}
 
-	inline thing_ end_get(thing_) const
+	inline thing_ enget(thing_) const
 	{
-		return Nothing<>::ref();
+		return enget_();
 	}
 
-	inline thing_ end_get_() const
+	inline thing_ enget_() const
 	{
-		return Nothing<>::ref();
+		return cend();
 	}
 
 	inline thing_ cend() const
 	{
-		return Nothing<>::ref();
+		return Everything<>::ref();
 	}
 
-	inline thing_ end_set(thing_)
+	inline thing_ enset(thing_)
 	{
-		return Nothing<>::ref();
+		return enset_();
 	}
 
-	inline thing_ end_set_()
+	inline thing_ enset_()
 	{
-		return Nothing<>::ref();
+		return end();
 	}
 
 	inline thing_ end()
 	{
-		return Nothing<>::ref();
+		return Everything<>::ref();
 	}
 
 	// iterator
@@ -186,7 +183,7 @@ public:
 		return Nothing<>::ref();
 	}
 
-	inline thing_& operator++()
+	inline thing_ operator++()
 	{
 		return Nothing<>::ref();
 	}
@@ -194,7 +191,7 @@ public:
 protected:
 	inline Nothing(const thing_& me)
 		: Something{ me }
-	{};
+	{}
 };
 
 } // namespace strange

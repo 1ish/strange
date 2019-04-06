@@ -1,9 +1,6 @@
 #ifndef COM_ONEISH_STRANGE_THING_H
 #define COM_ONEISH_STRANGE_THING_H
 
-#include "strange_thing_.h"
-#include "strange_one.h"
-
 namespace strange
 {
 

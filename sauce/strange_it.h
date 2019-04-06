@@ -1,34 +1,46 @@
-#ifndef COM_ONEISH_STRANGE_EVERYTHING_H
-#define COM_ONEISH_STRANGE_EVERYTHING_H
+#ifndef COM_ONEISH_STRANGE_IT_H
+#define COM_ONEISH_STRANGE_IT_H
 
 namespace strange
 {
 
-template <typename THING_ = thing_>
-class Everything : public Something<THING_>
+template <typename THING_ = thing_, typename END = Nothing<>>
+class It : public Something<THING_>
 {
 public:
 	// construction
-	static inline thing_& val(thing_ _ = thing_{})
+	static inline thing_ val(thing_ range)
 	{
-		static thing_ VAL = []()
+		const auto it = range.beget_();
+		if (it == range.enget_())
 		{
-			thing_ thing;
-			thing = Everything<>{ thing };
-			return thing;
-		}();
-		return VAL;
+			return val_();
+		}
+		return val_(it.get_());
 	}
 
-	static inline thing_& ref(thing_ _ = thing_{})
+	static inline thing_ val_(thing_ thing = END::ref())
 	{
-		static thing_ REF = []()
+		thing_ it;
+		it = It<THING_, END>(it, thing);
+		return it;
+	}
+
+	static inline thing_ ref(thing_ range)
+	{
+		const auto it = range.beget_();
+		if (it == range.enget_())
 		{
-			thing_ thing{ true };
-			thing = Everything<>{ thing };
-			return thing;
-		}();
-		return REF;
+			return ref_();
+		}
+		return ref_(it.get_());
+	}
+
+	static inline thing_ ref_(thing_ thing = END::ref())
+	{
+		thing_ it{ true };
+		it = It<THING_, END>(it, thing);
+		return it;
 	}
 
 	// comparison
@@ -46,7 +58,7 @@ public:
 
 	inline bool operator==(thing_ thing) const
 	{
-		return thing.hash__() == 1;
+		return *thing == _thing;
 	}
 
 	inline thing_ different(thing_ range) const
@@ -63,7 +75,7 @@ public:
 
 	inline bool operator!=(thing_ thing) const
 	{
-		return thing.hash__() != 1;
+		return *thing != _thing;
 	}
 
 	inline thing_ hash(thing_) const
@@ -84,62 +96,62 @@ public:
 	// range
 	inline thing_ beget(thing_) const
 	{
-		return beget_();
+		return Everything<>::ref();
 	}
 
 	inline thing_ beget_() const
 	{
-		return cbegin();
+		return Everything<>::ref();
 	}
 
 	inline thing_ cbegin() const
 	{
-		return It<>::val_(Everything<>::ref());
+		return Everything<>::ref();
 	}
 
 	inline thing_ beset(thing_)
 	{
-		return beset_();
+		return Everything<>::ref();
 	}
 
 	inline thing_ beset_()
 	{
-		return begin();
+		return Everything<>::ref();
 	}
 
 	inline thing_ begin()
 	{
-		return It<>::val_(Everything<>::ref());
+		return Everything<>::ref();
 	}
 
 	inline thing_ enget(thing_) const
 	{
-		return enget_();
+		return Everything<>::ref();
 	}
 
 	inline thing_ enget_() const
 	{
-		return cend();
+		return Everything<>::ref();
 	}
 
 	inline thing_ cend() const
 	{
-		return Nothing<>::ref();
+		return Everything<>::ref();
 	}
 
 	inline thing_ enset(thing_)
 	{
-		return enset_();
+		return Everything<>::ref();
 	}
 
 	inline thing_ enset_()
 	{
-		return end();
+		return Everything<>::ref();
 	}
 
 	inline thing_ end()
 	{
-		return Nothing<>::ref();
+		return Everything<>::ref();
 	}
 
 	// iterator
@@ -150,7 +162,7 @@ public:
 
 	inline thing_ get_() const
 	{
-		return Everything<>::ref();
+		return _thing;
 	}
 
 	inline thing_ set(thing_) const
@@ -165,12 +177,12 @@ public:
 
 	inline thing_& operator*() const
 	{
-		return Everything<>::ref();
+		return _thing;
 	}
 
 	inline thing_* operator->() const
 	{
-		return &Everything<>::ref();
+		return &_thing;
 	}
 
 	inline thing_ increment(thing_)
@@ -185,12 +197,16 @@ public:
 
 	inline thing_ operator++()
 	{
-		return Everything<>::ref();
+		_thing = END::ref();
+		return me_();
 	}
 
 protected:
-	inline Everything(const thing_& me)
+	mutable thing_ _thing;
+
+	inline It(const thing_& me, const thing_& thing)
 		: Something{ me }
+		, _thing(thing, true)
 	{}
 };
 
