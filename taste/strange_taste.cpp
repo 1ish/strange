@@ -1,16 +1,8 @@
 #include "gtest/gtest.h"
 
-//#define STRANGE_TEST_VERBOSE 1
-
 #include "../sauce/strange.h"
 
-namespace
-{
-	const std::string test_dir = "../../strange/taste/";
-}
-
 using namespace strange;
-//using Ptr = Thing::Ptr;
 
 TEST(TestCaseName, TestName) {
   EXPECT_EQ(1, 1);
@@ -18,25 +10,32 @@ TEST(TestCaseName, TestName) {
 }
 
 TEST(TestCaseName, ForLoop) {
-	thing_ t{ Nothing<>::ref() };
+	thing_ n{ Nothing<>::ref() };
 
-	for (auto v : t)
+	for (auto v : n)
 	{
 	}
 
-	symbol_ s{ Everything<>::ref() };
+	thing_ e{ Everything<>::ref() };
 
-	t = s; //TODO thing<symbol_<Everything>>
-
-	for (auto v : s)
+	for (auto v : e)
 	{
 	}
+
+	e = n;
 
 	cat_ c;
 
 	EXPECT_TRUE(true);
 }
 /*
+//#define STRANGE_TEST_VERBOSE 1
+//using Ptr = Thing::Ptr;
+namespace
+{
+	const std::string test_dir = "../../strange/taste/";
+}
+
 TEST(StrangeThing, Dismemberment) {
 	EXPECT_THROW({
 		const Ptr symbol = Thing::sym_("symbol");

@@ -1,7 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_EVERYTHING_H
 #define COM_ONEISH_STRANGE_EVERYTHING_H
 
-#include "strange_symbol_.h" //TODO thing_
+#include "strange_thing_.h"
 #include "strange_something.h"
 
 namespace strange
@@ -12,11 +12,11 @@ class Everything : public Something<THING_>
 {
 public:
 	// construction
-	static inline symbol_& ref(thing_ _ = thing_{}) //TODO thing_
+	static inline thing_& ref(thing_ _ = thing_{})
 	{
-		static symbol_ REF = []() //TODO thing_
+		static thing_ REF = []()
 		{
-			symbol_ thing{ true }; //TODO thing_
+			thing_ thing{ true };
 			thing = Everything<>{ thing };
 			return thing;
 		}();
@@ -176,22 +176,6 @@ public:
 	}
 
 	inline thing_& operator++()
-	{
-		return Everything<>::ref();
-	}
-
-	//TODO symbol
-	inline symbol_ add(thing_ range) const
-	{
-		return Everything<>::ref();
-	}
-
-	inline symbol_ add_(symbol_ symbol) const
-	{
-		return Everything<>::ref();
-	}
-
-	inline symbol_ operator+(symbol_ symbol) const
 	{
 		return Everything<>::ref();
 	}
