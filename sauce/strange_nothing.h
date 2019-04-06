@@ -8,7 +8,7 @@ namespace strange
 {
 
 template <typename THING_ = thing_>
-class Nothing : public Something<THING_, false>
+class Nothing : public Something<THING_, true>
 {
 public:
 	// construction

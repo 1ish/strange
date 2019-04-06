@@ -7,14 +7,14 @@
 namespace strange
 {
 
-template <typename THING_, bool SOMETHING = true>
+template <typename THING_, bool NOTHING = false>
 class Something : public Anything<THING_>
 {
 public:
 	// conversion
 	inline operator bool() const
 	{
-		return SOMETHING;
+		return true;
 	}
 
 	inline thing_ is_something(thing_) const
@@ -44,7 +44,7 @@ protected:
 };
 
 template <typename THING_>
-class Something<THING_, false> : public Anything<THING_>
+class Something<THING_, true> : public Anything<THING_>
 {
 public:
 	// conversion
