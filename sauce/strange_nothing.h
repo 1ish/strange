@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename THING_ = thing_>
-class Nothing : public Something<THING_, true>
+class Nothing : public Range<THING_, true>
 {
 public:
 	// construction
@@ -81,67 +81,6 @@ public:
 		return 0;
 	}
 
-	// range
-	inline thing_ beget(thing_) const
-	{
-		return beget_();
-	}
-
-	inline thing_ beget_() const
-	{
-		return cbegin();
-	}
-
-	inline thing_ cbegin() const
-	{
-		return It<thing_, Everything<>>::val_(Nothing<>::ref());
-	}
-
-	inline thing_ beset(thing_)
-	{
-		return beset_();
-	}
-
-	inline thing_ beset_()
-	{
-		return begin();
-	}
-
-	inline thing_ begin()
-	{
-		return It<thing_, Everything<>>::val_(Nothing<>::ref());
-	}
-
-	inline thing_ enget(thing_) const
-	{
-		return enget_();
-	}
-
-	inline thing_ enget_() const
-	{
-		return cend();
-	}
-
-	inline thing_ cend() const
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ enset(thing_)
-	{
-		return enset_();
-	}
-
-	inline thing_ enset_()
-	{
-		return end();
-	}
-
-	inline thing_ end()
-	{
-		return Everything<>::ref();
-	}
-
 	// iterator
 	inline thing_ get(thing_) const
 	{
@@ -190,7 +129,7 @@ public:
 
 protected:
 	inline Nothing(const thing_& me)
-		: Something{ me }
+		: Range{ me }
 	{}
 };
 

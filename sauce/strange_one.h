@@ -7,7 +7,7 @@ namespace strange
 class One
 {
 protected:
-	const decltype(thing_().weak_()) _meek;
+	const decltype(thing_().weak_()) _meek; //TODO this doesn't work
 
 	inline One(const thing_& me)
 		: _meek(me.weak_())
