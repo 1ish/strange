@@ -12,6 +12,17 @@ class Nothing : public Something<THING_, true>
 {
 public:
 	// construction
+	static inline thing_& val(thing_ _ = thing_{})
+	{
+		static thing_ VAL = []()
+		{
+			thing_ thing;
+			thing = Nothing<>{ thing };
+			return thing;
+		}();
+		return VAL;
+	}
+
 	static inline thing_& ref(thing_ _ = thing_{})
 	{
 		static thing_ REF = []()

@@ -12,6 +12,17 @@ class Everything : public Something<THING_>
 {
 public:
 	// construction
+	static inline thing_& val(thing_ _ = thing_{})
+	{
+		static thing_ VAL = []()
+		{
+			thing_ thing;
+			thing = Everything<>{ thing };
+			return thing;
+		}();
+		return VAL;
+	}
+
 	static inline thing_& ref(thing_ _ = thing_{})
 	{
 		static thing_ REF = []()

@@ -13,6 +13,10 @@ namespace strange
 class thing_
 {
 public:
+	// construction
+	inline thing_ val(thing_ range) const;
+	inline thing_ ref(thing_ range) const;
+
 	// function
 	inline thing_ extract(thing_ range) const;
 	inline thing_ operator()(thing_ range) const;

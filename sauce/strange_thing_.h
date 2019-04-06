@@ -28,6 +28,10 @@ namespace strange {
 
     
 
+     inline thing_ val ( thing_ range ) const
+     { assert(handle_); return read().val(range ); }
+     inline thing_ ref ( thing_ range ) const
+     { assert(handle_); return read().ref(range ); }
      inline thing_ extract ( thing_ range ) const
      { assert(handle_); return read().extract(range ); }
      inline thing_ operator ( ) ( thing_ range ) const
@@ -134,6 +138,8 @@ namespace strange {
 
     
 
+      virtual inline thing_ val ( thing_ range ) const = 0;
+      virtual inline thing_ ref ( thing_ range ) const = 0;
       virtual inline thing_ extract ( thing_ range ) const = 0;
       virtual inline thing_ operator ( ) ( thing_ range ) const = 0;
       virtual inline thing_ mutate ( thing_ range ) = 0;
@@ -212,6 +218,10 @@ namespace strange {
 
     
 
+      virtual inline thing_ val ( thing_ range ) const
+      { return value_.val(range ); }
+      virtual inline thing_ ref ( thing_ range ) const
+      { return value_.ref(range ); }
       virtual inline thing_ extract ( thing_ range ) const
       { return value_.extract(range ); }
       virtual inline thing_ operator ( ) ( thing_ range ) const
