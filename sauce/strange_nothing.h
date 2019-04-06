@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_NOTHING_H
 
 #include "strange_thing_.h"
-#include "strange_everything.h"
+#include "strange_something.h"
 
 namespace strange
 {

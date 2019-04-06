@@ -5,6 +5,10 @@
 #include "strange_symbol_.h"
 #include "strange_cat_.h"
 
+#include "strange_one.h"
+#include "strange_thing.h"
+#include "strange_anything.h"
+#include "strange_something.h"
 #include "strange_everything.h"
 #include "strange_nothing.h"
 
