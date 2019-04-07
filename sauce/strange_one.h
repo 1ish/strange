@@ -7,7 +7,7 @@ namespace strange
 class One
 {
 public:
-	void ___weak___(thing_::___WEAK___ weak) const
+	inline void ___weak___(thing_::___WEAK___ weak) const
 	{
 		_meek = weak;
 	}

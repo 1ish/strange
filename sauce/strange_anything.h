@@ -11,7 +11,7 @@ public:
 	// function
 	inline thing_ extract(thing_ range) const
 	{
-		return Everything<>::ref();
+		return operator()(range);
 	}
 
 	inline thing_ operator()(thing_ range) const
@@ -21,7 +21,7 @@ public:
 
 	inline thing_ mutate(thing_ range)
 	{
-		return Everything<>::ref();
+		return operator()(range);
 	}
 
 	inline thing_ operator()(thing_ range)

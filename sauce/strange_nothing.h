@@ -58,12 +58,12 @@ public:
 
 	inline thing_ hash(thing_) const
 	{
-		return Nothing<>::ref();
+		return hash_();
 	}
 
 	inline thing_ hash_() const
 	{
-		return Nothing<>::ref();
+		return Nothing<>::ref(); //TODO
 	}
 
 	inline size_t hash__() const
@@ -74,7 +74,7 @@ public:
 	// iterator
 	inline thing_ get(thing_) const
 	{
-		return Nothing<>::ref();
+		return get_();
 	}
 
 	inline thing_ get_() const
@@ -82,14 +82,14 @@ public:
 		return Nothing<>::ref();
 	}
 
-	inline thing_ set(thing_) const
+	inline thing_ set(thing_ range) const
 	{
-		return Nothing<>::ref();
+		return set_(range);
 	}
 
 	inline thing_ set_(thing_) const
 	{
-		return Nothing<>::ref();
+		return get_();
 	}
 
 	inline thing_& operator*() const
@@ -99,17 +99,17 @@ public:
 
 	inline thing_* operator->() const
 	{
-		return &Nothing<>::ref();
+		return &operator*();
 	}
 
 	inline thing_ increment(thing_)
 	{
-		return Nothing<>::ref();
+		return increment_();
 	}
 
 	inline thing_ increment_()
 	{
-		return Nothing<>::ref();
+		return operator++();
 	}
 
 	inline thing_ operator++()

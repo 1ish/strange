@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename THING_ = thing_, typename END = Nothing<>>
-class It : public Something<THING_>
+class It : public Range<THING_>
 {
 public:
 	// construction
@@ -76,78 +76,17 @@ public:
 
 	inline thing_ hash(thing_) const
 	{
-		return Everything<>::ref();
+		return hash_();
 	}
 
 	inline thing_ hash_() const
 	{
-		return Everything<>::ref();
+		return Everything<>::ref(); //TODO
 	}
 
 	inline size_t hash__() const
 	{
-		return 1;
-	}
-
-	// range
-	inline thing_ beget(thing_) const
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ beget_() const
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ cbegin() const
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ beset(thing_)
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ beset_()
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ begin()
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ enget(thing_) const
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ enget_() const
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ cend() const
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ enset(thing_)
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ enset_()
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ end()
-	{
-		return Everything<>::ref();
+		return size_t(this);
 	}
 
 	// iterator
@@ -161,9 +100,9 @@ public:
 		return _thing;
 	}
 
-	inline thing_ set(thing_) const
+	inline thing_ set(thing_ range) const
 	{
-		return get_();
+		return set_(range);
 	}
 
 	inline thing_ set_(thing_) const
@@ -178,7 +117,7 @@ public:
 
 	inline thing_* operator->() const
 	{
-		return &_thing;
+		return &operator*();
 	}
 
 	inline thing_ increment(thing_)
@@ -191,7 +130,7 @@ public:
 		return operator++();
 	}
 
-	inline thing_ operator++()
+	inline thing_ operator++() //TODO thing_&
 	{
 		_thing = END::ref();
 		return me_();
@@ -201,7 +140,7 @@ protected:
 	mutable thing_ _thing;
 
 	inline It(const thing_& thing)
-		: Something{}
+		: Range{}
 		, _thing(thing, true)
 	{}
 };

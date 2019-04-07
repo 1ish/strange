@@ -58,12 +58,12 @@ public:
 
 	inline thing_ hash(thing_) const
 	{
-		return Everything<>::ref();
+		return hash_();
 	}
 
 	inline thing_ hash_() const
 	{
-		return Everything<>::ref();
+		return Everything<>::ref(); //TODO
 	}
 
 	inline size_t hash__() const
@@ -82,9 +82,9 @@ public:
 		return Everything<>::ref();
 	}
 
-	inline thing_ set(thing_) const
+	inline thing_ set(thing_ range) const
 	{
-		return get_();
+		return set_(range);
 	}
 
 	inline thing_ set_(thing_) const
@@ -99,7 +99,7 @@ public:
 
 	inline thing_* operator->() const
 	{
-		return &Everything<>::ref();
+		return &operator*();
 	}
 
 	inline thing_ increment(thing_)
