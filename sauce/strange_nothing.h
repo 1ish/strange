@@ -56,6 +56,32 @@ public: ___THING___
 		return thing.hash__() != 0;
 	}
 
+	// conversion
+	inline operator bool() const
+	{
+		return false;
+	}
+
+	inline thing_ something(thing_) const
+	{
+		return something_();
+	}
+
+	inline thing_ something_() const
+	{
+		return Nothing<>::ref();
+	}
+
+	inline thing_ nothing(thing_) const
+	{
+		return nothing_();
+	}
+
+	inline thing_ nothing_() const
+	{
+		return Everything<>::ref();
+	}
+
 	inline thing_ hash(thing_) const
 	{
 		return hash_();

@@ -7,7 +7,6 @@
 
 #include "strange_one.h"
 #include "strange_thing.h"
-#include "strange_anything.h"
 #include "strange_something.h"
 #include "strange_range.h"
 #include "strange_everything.h"

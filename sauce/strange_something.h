@@ -4,75 +4,24 @@
 namespace strange
 {
 
-template <typename THING_, bool NOTHING = false>
-class Something : public Anything<THING_>
-{
-public:
-	// conversion
-	inline operator bool() const
-	{
-		return true;
-	}
-
-	inline thing_ something(thing_) const
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ something_() const
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ nothing(thing_) const
-	{
-		return Nothing<>::ref();
-	}
-
-	inline thing_ nothing_() const
-	{
-		return Nothing<>::ref();
-	}
-
-protected:
-	inline Something()
-		: Anything{}
-	{}
-};
-
 template <typename THING_>
-class Something<THING_, true> : public Anything<THING_>
+class Something : public Thing<THING_>
 {
 public:
-	// conversion
-	inline operator bool() const
+	// function
+	inline thing_ operator()(thing_ range) const
 	{
-		return false;
+		return Everything<>::ref(); //TODO
 	}
 
-	inline thing_ something(thing_) const
+	inline thing_ operator()(thing_ range)
 	{
-		return Nothing<>::ref();
-	}
-
-	inline thing_ something_() const
-	{
-		return Nothing<>::ref();
-	}
-
-	inline thing_ nothing(thing_) const
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ nothing_() const
-	{
-		return Everything<>::ref();
+		return Everything<>::ref(); //TODO
 	}
 
 protected:
 	inline Something()
-		: Anything{}
+		: Thing{}
 	{}
 };
 

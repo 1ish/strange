@@ -30,6 +30,32 @@ public:
 		return _boole_(identical__(thing));
 	}
 
+	// conversion
+	inline operator bool() const
+	{
+		return true;
+	}
+
+	inline thing_ something(thing_) const
+	{
+		return something_();
+	}
+
+	inline thing_ something_() const
+	{
+		return Everything<>::ref();
+	}
+
+	inline thing_ nothing(thing_) const
+	{
+		return nothing_();
+	}
+
+	inline thing_ nothing_() const
+	{
+		return Nothing<>::ref();
+	}
+
 protected:
 	inline Thing()
 		: One{}

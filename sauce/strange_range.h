@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename THING_ = thing_, bool NOTHING = false>
-class Range : public Something<THING_, NOTHING>
+class Range : public Something<THING_>
 {
 public:
 	// range
@@ -76,7 +76,7 @@ protected:
 };
 
 template <typename THING_>
-class Range<THING_, true> : public Something<THING_, true>
+class Range<THING_, true> : public Something<THING_>
 {
 public:
 	// range
