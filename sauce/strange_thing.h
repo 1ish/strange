@@ -18,6 +18,18 @@ public:
 		return THING_(_meek.lock(), true);
 	}
 
+	inline thing_ identical(thing_ range) const
+	{
+		const auto it = range.beget_();
+		assert(it != range.enget_()); //TODO throw
+		return identical_(it.get_());
+	}
+
+	inline thing_ identical_(thing_ thing) const
+	{
+		return _boole_(identical__(thing));
+	}
+
 protected:
 	inline Thing()
 		: One{}

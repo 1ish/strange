@@ -25,6 +25,12 @@ public:
 	inline thing_ operator()(thing_ range);
 
 	// comparison
+	inline const void* identity__() const;
+
+	inline thing_ identical(thing_ range) const;
+	inline thing_ identical_(thing_ thing) const;
+	inline bool identical__(thing_ thing) const;
+
 	inline thing_ same(thing_ range) const;
 	inline thing_ same_(thing_ thing) const;
 	inline bool operator==(thing_ thing) const;

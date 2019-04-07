@@ -70,6 +70,14 @@ namespace strange {
      { assert(handle_); return write().mutate(range ); }
      inline thing_ operator ( ) ( thing_ range )
      { assert(handle_); return write().operator()(range ); }
+     inline const void * identity__ ( ) const
+     { assert(handle_); return read().identity__( ); }
+     inline thing_ identical ( thing_ range ) const
+     { assert(handle_); return read().identical(range ); }
+     inline thing_ identical_ ( thing_ thing ) const
+     { assert(handle_); return read().identical_(thing ); }
+     inline bool identical__ ( thing_ thing ) const
+     { assert(handle_); return read().identical__(thing ); }
      inline thing_ same ( thing_ range ) const
      { assert(handle_); return read().same(range ); }
      inline thing_ same_ ( thing_ thing ) const
@@ -180,6 +188,10 @@ namespace strange {
       virtual inline thing_ operator ( ) ( thing_ range ) const = 0;
       virtual inline thing_ mutate ( thing_ range ) = 0;
       virtual inline thing_ operator ( ) ( thing_ range ) = 0;
+      virtual inline const void * identity__ ( ) const = 0;
+      virtual inline thing_ identical ( thing_ range ) const = 0;
+      virtual inline thing_ identical_ ( thing_ thing ) const = 0;
+      virtual inline bool identical__ ( thing_ thing ) const = 0;
       virtual inline thing_ same ( thing_ range ) const = 0;
       virtual inline thing_ same_ ( thing_ thing ) const = 0;
       virtual inline bool operator == ( thing_ thing ) const = 0;
@@ -285,6 +297,14 @@ namespace strange {
       { return value_.mutate(range ); }
       virtual inline thing_ operator ( ) ( thing_ range )
       { return value_.operator()(range ); }
+      virtual inline const void * identity__ ( ) const
+      { return value_.identity__( ); }
+      virtual inline thing_ identical ( thing_ range ) const
+      { return value_.identical(range ); }
+      virtual inline thing_ identical_ ( thing_ thing ) const
+      { return value_.identical_(thing ); }
+      virtual inline bool identical__ ( thing_ thing ) const
+      { return value_.identical__(thing ); }
       virtual inline thing_ same ( thing_ range ) const
       { return value_.same(range ); }
       virtual inline thing_ same_ ( thing_ thing ) const

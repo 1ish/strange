@@ -12,6 +12,16 @@ public:
 		_meek = weak;
 	}
 
+	inline const void* identity__() const
+	{
+		return this;
+	}
+
+	inline bool identical__(thing_ thing) const
+	{
+		return thing.identity__() == identity__();
+	}
+
 protected:
 	inline One() {};
 

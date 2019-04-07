@@ -16,7 +16,7 @@ public:
 
 	inline thing_ operator()(thing_ range) const
 	{
-		return Everything<>::ref();
+		return Everything<>::ref(); //TODO
 	}
 
 	inline thing_ mutate(thing_ range)
@@ -26,7 +26,7 @@ public:
 
 	inline thing_ operator()(thing_ range)
 	{
-		return Everything<>::ref();
+		return Everything<>::ref(); //TODO
 	}
 
 protected:
