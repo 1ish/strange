@@ -21,6 +21,15 @@ public:
 	{
 		std::cout << "root print" << std::endl;
 	}
+
+	void ___weak___(root_::___WEAK___ weak) const
+	{
+		_meek = weak;
+	}
+
+protected:
+	mutable root_::___WEAK___ _meek;
+
 private:
 	root() {};
 };
@@ -47,6 +56,15 @@ public:
 	{
 		std::cout << "derived print" << std::endl;
 	}
+
+	void ___weak___(root_::___WEAK___ weak) const
+	{
+		_meek = weak;
+	}
+
+protected:
+	mutable root_::___WEAK___ _meek;
+
 private:
 	derived() {};
 };
@@ -78,12 +96,21 @@ public:
 	{
 		std::cout << "finale print" << std::endl;
 	}
+
+	void ___weak___(root_::___WEAK___ weak) const
+	{
+		_meek = weak;
+	}
+
+protected:
+	mutable root_::___WEAK___ _meek;
+
 private:
 	finale() {};
 };
 
-TEST(SomeTaste, TestName) {
-
+TEST(SomeTaste, TestName)
+{
 	root_ r_{ root::val() };
 
 	std::cout << "\n r_.print()" << std::endl;
@@ -169,7 +196,8 @@ TEST(SomeTaste, TestName) {
 	EXPECT_EQ(1, 1);
 }
 
-TEST(SomeTaste, BadTest) {
+TEST(SomeTaste, BadTest)
+{
 	root_ r_{ root::val() };
 	if (check_<derived_>(r_))
 	{

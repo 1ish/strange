@@ -21,9 +21,7 @@ public:
 
 	static inline thing_ val_(thing_ thing = END::ref())
 	{
-		thing_ it;
-		it = It<THING_, END>(it, thing);
-		return it;
+		return thing_{ It<THING_, END>{ thing } };
 	}
 
 	static inline thing_ ref(thing_ range)
@@ -38,9 +36,7 @@ public:
 
 	static inline thing_ ref_(thing_ thing = END::ref())
 	{
-		thing_ it{ true };
-		it = It<THING_, END>(it, thing);
-		return it;
+		return thing_(It<THING_, END>{ thing }, true);
 	}
 
 	// comparison
@@ -204,8 +200,8 @@ public:
 protected:
 	mutable thing_ _thing;
 
-	inline It(const thing_& me, const thing_& thing)
-		: Something{ me }
+	inline It(const thing_& thing)
+		: Something{}
 		, _thing(thing, true)
 	{}
 };

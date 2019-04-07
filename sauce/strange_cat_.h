@@ -122,6 +122,8 @@ namespace strange {
 
     			handle_ = handle_->___clone___();
 
+    			handle_->___weak___(handle_);
+
     		}
 
     		return *std::static_pointer_cast<___finale_handle_base___>(handle_);
@@ -152,7 +154,7 @@ namespace strange {
 
     
 
-    	inline cat_(bool reference)
+    	explicit inline cat_(bool reference)
 
     		: ___derived___{ reference }
 
@@ -178,7 +180,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline cat_(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+    	explicit inline cat_(const std::shared_ptr<___TTT___>& handle, bool reference = false)
 
     		: ___derived___(handle, reference)
 
@@ -190,9 +192,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_, ___TTT___>::value>>
 
-    	inline cat_(___TTT___ value, bool reference = false)
+    	explicit inline cat_(___TTT___ value, bool reference = false)
 
     		: ___derived___(std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 
@@ -212,13 +214,15 @@ namespace strange {
 
     		handle_ = handle;
 
+    		handle_->___weak___(handle_);
+
     		return *this;
 
     	}
 
     
 
-    	template <typename ___TTT___>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_, ___TTT___>::value>>
 
     	inline cat_& operator=(___TTT___ value)
 
@@ -227,6 +231,8 @@ namespace strange {
     		cat_ temp{ std::move(value) };
 
     		std::swap(temp.handle_, handle_);
+
+    		handle_->___weak___(handle_);
 
     		return *this;
 

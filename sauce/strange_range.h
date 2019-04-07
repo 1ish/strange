@@ -70,8 +70,8 @@ public:
 	}
 
 protected:
-	inline Range(const thing_& me)
-		: Something{ me }
+	inline Range()
+		: Something{}
 	{}
 };
 
@@ -141,8 +141,8 @@ public:
 	}
 
 protected:
-	inline Range(const thing_& me)
-		: Something{ me }
+	inline Range()
+		: Something{}
 	{}
 };
 

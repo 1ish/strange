@@ -68,6 +68,7 @@ private:
 		if (!___reference___ && !___handle___.unique())
 		{
 			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
 		return *std::static_pointer_cast<___finale_handle_base___>(___handle___);
 	}
@@ -83,7 +84,7 @@ public:
 
 	finale_() = default;
 
-	inline finale_(bool reference)
+	explicit inline finale_(bool reference)
 		: derived_{ reference }
 	{}
 
@@ -96,14 +97,14 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	inline finale_(const std::shared_ptr<___TTT___>& other, bool reference = false)
+	explicit inline finale_(const std::shared_ptr<___TTT___>& other, bool reference = false)
 		: derived_(other, reference)
 	{
 		assert(std::dynamic_pointer_cast<___finale_handle_base___>(other));
 	}
 
-	template <typename ___TTT___>
-	inline finale_(___TTT___ value, bool reference = false)
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<root_, ___TTT___>::value>>
+	explicit inline finale_(___TTT___ value, bool reference = false)
 		: derived_(std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 			reference)
 	{}
@@ -113,14 +114,16 @@ public:
 	{
 		assert(std::dynamic_pointer_cast<___finale_handle_base___>(other));
 		___handle___ = other;
+		___handle___->___weak___(___handle___);
 		return *this;
 	}
 
-	template <typename ___TTT___>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<root_, ___TTT___>::value>>
 	inline finale_& operator=(___TTT___ value)
 	{
 		finale_ temp{ std::move(value) };
 		std::swap(temp.___handle___, ___handle___);
+		___handle___->___weak___(___handle___);
 		return *this;
 	}
 };

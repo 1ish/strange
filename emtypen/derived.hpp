@@ -75,6 +75,7 @@ private:
 		if (!___reference___ && !handle_.unique())
 		{
 			handle_ = handle_->___clone___();
+			handle_->___weak___(handle_);
 		}
 		return *std::static_pointer_cast<___derived_handle_base___>(handle_);
 	}
@@ -90,7 +91,7 @@ public:
 
 	inline %struct_name%() = default;
 
-	inline %struct_name%(bool reference)
+	explicit inline %struct_name%(bool reference)
 		: ___root___{ reference }
 	{}
 
@@ -103,24 +104,25 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	inline %struct_name%(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+	explicit inline %struct_name%(const std::shared_ptr<___TTT___>& handle, bool reference = false)
 		: ___root___(handle, reference)
 	{
 		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
 	}
 
-	template <typename ___TTT___>
-	inline %struct_name%(___TTT___ value, bool reference = false);
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, ___TTT___>::value>>
+	explicit inline %struct_name%(___TTT___ value, bool reference = false);
 
 	template <typename ___TTT___>
 	inline %struct_name%& operator=(const std::shared_ptr<___TTT___>& handle)
 	{
 		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
 		handle_ = handle;
+		handle_->___weak___(handle_);
 		return *this;
 	}
 
-	template <typename ___TTT___>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, ___TTT___>::value>>
 	inline %struct_name%& operator=(___TTT___ value);
 };
 
@@ -130,21 +132,18 @@ inline bool check_(const %struct_name%& value)
 	return ___TTT___::___check___(value.handle_);
 }
 
-template <typename ___TTT___>
+template <typename ___TTT___, typename>
 inline %struct_name%::%struct_name%(___TTT___ value, bool reference)
-	: ___root___(check_<%struct_name%>(value)
-		? cast_<%struct_name%>(value).handle_
-		: std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+	: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 		reference)
 {}
 
-template <typename ___TTT___>
+template <typename ___TTT___, typename>
 inline %struct_name%& %struct_name%::operator=(___TTT___ value)
 {
-	%struct_name% temp{ check_<%struct_name%>(value)
-		? cast_<%struct_name%>(value)
-		: std::move(value) };
+	%struct_name% temp{ std::move(value) };
 	std::swap(temp.handle_, handle_);
+	handle_->___weak___(handle_);
 	return *this;
 }
 

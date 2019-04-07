@@ -11,23 +11,13 @@ public:
 	// construction
 	static inline thing_& val(thing_ _ = thing_{})
 	{
-		static thing_ VAL = []()
-		{
-			thing_ thing;
-			thing = Everything<>{ thing };
-			return thing;
-		}();
+		static thing_ VAL = thing_{ Everything<>{} };
 		return VAL;
 	}
 
 	static inline thing_& ref(thing_ _ = thing_{})
 	{
-		static thing_ REF = []()
-		{
-			thing_ thing{ true };
-			thing = Everything<>{ thing };
-			return thing;
-		}();
+		static thing_ REF = thing_(Everything<>{}, true);
 		return REF;
 	}
 
@@ -128,8 +118,8 @@ public:
 	}
 
 protected:
-	inline Everything(const thing_& me)
-		: Range{ me }
+	inline Everything()
+		: Range{}
 	{}
 };
 

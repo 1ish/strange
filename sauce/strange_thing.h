@@ -19,8 +19,8 @@ public:
 	}
 
 protected:
-	inline Thing(const thing_& me)
-		: One(me)
+	inline Thing()
+		: One{}
 	{}
 
 	static inline thing_ _boole_(bool b)

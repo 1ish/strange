@@ -92,6 +92,7 @@ private:
 		if (!___reference___ && !___handle___.unique())
 		{
 			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
 		return *std::static_pointer_cast<___derived_handle_base___>(___handle___);
 	}
@@ -107,7 +108,7 @@ public:
 
 	derived_() = default;
 
-	inline derived_(bool reference)
+	explicit inline derived_(bool reference)
 		: root_{ reference }
 	{}
 
@@ -120,24 +121,25 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	inline derived_(const std::shared_ptr<___TTT___>& other, bool reference = false)
+	explicit inline derived_(const std::shared_ptr<___TTT___>& other, bool reference = false)
 		: root_(other, reference)
 	{
 		assert(std::dynamic_pointer_cast<___derived_handle_base___>(other));
 	}
 
-	template <typename ___TTT___>
-	inline derived_(___TTT___ value, bool reference = false);
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<root_, ___TTT___>::value>>
+	explicit inline derived_(___TTT___ value, bool reference = false);
 
 	template <typename ___TTT___>
 	inline derived_& operator=(const std::shared_ptr<___TTT___>& other)
 	{
 		assert(std::dynamic_pointer_cast<___derived_handle_base___>(other));
 		___handle___ = other;
+		___handle___->___weak___(___handle___);
 		return *this;
 	}
 
-	template <typename ___TTT___>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<root_, ___TTT___>::value>>
 	inline derived_& operator=(___TTT___ value);
 };
 
@@ -147,21 +149,18 @@ inline bool check_(const derived_& v)
 	return ___TTT___::___check___(v.___handle___);
 }
 
-template <typename ___TTT___>
+template <typename ___TTT___, typename>
 inline derived_::derived_(___TTT___ value, bool reference)
-	: root_(check_<derived_>(value)
-		? cast_<derived_>(value).___handle___
-		: std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+	: root_(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 		reference)
 {}
 
-template <typename ___TTT___>
+template <typename ___TTT___, typename>
 inline derived_& derived_::operator=(___TTT___ value)
 {
-	derived_ temp{ check_<derived_>(value)
-		? cast_<derived_>(value)
-		: std::move(value) };
+	derived_ temp{ std::move(value) };
 	std::swap(temp.___handle___, ___handle___);
+	___handle___->___weak___(___handle___);
 	return *this;
 }
 

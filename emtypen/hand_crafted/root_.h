@@ -29,6 +29,8 @@ protected:
 
 		virtual std::shared_ptr<___root_handle_base___> ___clone___() const = 0;
 
+		virtual void ___weak___(const std::weak_ptr<___root_handle_base___>& weak) const = 0;
+
 		virtual void print() const = 0;
 	};
 
@@ -44,6 +46,11 @@ protected:
 		inline ___root_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
 			: ___value___{ std::move(value) }
 		{}
+
+		virtual inline void ___weak___(const std::weak_ptr<___root_handle_base___>& weak) const final
+		{
+			___value___.___weak___(weak);
+		}
 
 		virtual inline void print() const final
 		{
@@ -105,6 +112,7 @@ private:
 		if (!___reference___ && !___handle___.unique())
 		{
 			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
 		return *___handle___;
 	}
@@ -116,6 +124,8 @@ private:
 	friend inline ___TTT___ cast_(const root_& v, bool reference = false);
 
 public:
+	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
+
 	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>&)
 	{
 		return true;
@@ -126,7 +136,7 @@ public:
 		, ___reference___{ false }
 	{}
 
-	inline root_(bool reference)
+	explicit inline root_(bool reference)
 		: ___handle___{}
 		, ___reference___{ reference }
 	{}
@@ -134,60 +144,68 @@ public:
 	inline root_(const root_& other)
 		: ___handle___{ other.___handle___ }
 		, ___reference___{ false }
-	{}
+	{
+		___handle___->___weak___(___handle___);
+	}
 
 	inline root_(const root_& other, bool reference)
 		: ___handle___{ other.___handle___ }
 		, ___reference___{ reference }
-	{}
+	{
+		___handle___->___weak___(___handle___);
+	}
 
 	inline root_(root_&& other)
 		: ___handle___{ std::move(other.___handle___) }
 		, ___reference___{ false }
-	{}
+	{
+		___handle___->___weak___(___handle___);
+	}
 
 	inline root_(root_&& other, bool reference)
 		: ___handle___{ std::move(other.___handle___) }
 		, ___reference___{ reference }
-	{}
+	{
+		___handle___->___weak___(___handle___);
+	}
 
 	inline root_& operator=(const root_& other)
 	{
 		___handle___ = other.___handle___;
+		___handle___->___weak___(___handle___);
 		return *this;
 	}
 
 	inline root_& operator=(root_&& other)
 	{
 		___handle___ = std::move(other.___handle___);
+		___handle___->___weak___(___handle___);
 		return *this;
 	}
 
 	virtual ~root_() = default;
 
 	template <typename ___TTT___>
-	inline root_(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+	explicit inline root_(const std::shared_ptr<___TTT___>& handle, bool reference = false)
 		: ___handle___{ handle }
 		, ___reference___{ reference }
-	{}
+	{
+		___handle___->___weak___(___handle___);
+	}
 
-	template <typename ___TTT___>
-	inline root_(___TTT___ value, bool reference = false);
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<root_, ___TTT___>::value>>
+	explicit inline root_(___TTT___ value, bool reference = false);
 
 	template <typename ___TTT___>
 	inline root_& operator=(const std::shared_ptr<___TTT___>& other)
 	{
 		___handle___ = other;
+		___handle___->___weak___(___handle___);
 		return *this;
 	}
 
-	template <typename ___TTT___>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<root_, ___TTT___>::value>>
 	inline root_& operator=(___TTT___ value);
-
-	inline std::weak_ptr<___root_handle_base___> weak_() const
-	{
-		return ___handle___;
-	}
 };
 
 template <typename ___TTT___>
@@ -208,21 +226,20 @@ inline ___TTT___ cast_(const root_& v, bool reference)
 	return ___TTT___(v.___handle___, reference);
 }
 
-template <typename ___TTT___>
+template <typename ___TTT___, typename>
 inline root_::root_(___TTT___ value, bool reference)
-	: ___handle___{ check_<root_>(value)
-		? cast_<root_>(value).___handle___
-		: std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+	: ___handle___{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	, ___reference___{ reference }
-{}
+{
+	___handle___->___weak___(___handle___);
+}
 
-template <typename ___TTT___>
+template <typename ___TTT___, typename>
 inline root_& root_::operator=(___TTT___ value)
 {
-	root_ temp{ check_<root_>(value)
-		? cast_<root_>(value)
-		: std::move(value) };
+	root_ temp{ std::move(value) };
 	std::swap(temp.___handle___, ___handle___);
+	___handle___->___weak___(___handle___);
 	return *this;
 }
 

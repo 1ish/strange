@@ -6,12 +6,16 @@ namespace strange
 
 class One
 {
-protected:
-	const decltype(thing_().weak_()) _meek; //TODO this doesn't work
+public:
+	void ___weak___(thing_::___WEAK___ weak) const
+	{
+		_meek = weak;
+	}
 
-	inline One(const thing_& me)
-		: _meek(me.weak_())
-	{}
+protected:
+	inline One() {};
+
+	mutable thing_::___WEAK___ _meek;
 };
 
 } // namespace strange

@@ -134,6 +134,10 @@ namespace strange {
 
     
 
+    		virtual void ___weak___(const std::weak_ptr<___root_handle_base___>& weak) const = 0;
+
+    
+
     		virtual inline operator bool() const = 0;
 
     
@@ -208,7 +212,17 @@ namespace strange {
 
     
 
-    		virtual inline operator bool() const
+    		virtual inline void ___weak___(const std::weak_ptr<___root_handle_base___>& weak) const final
+
+    		{
+
+    			value_.___weak___(weak);
+
+    		}
+
+    
+
+    		virtual inline operator bool() const final
 
     		{
 
@@ -410,6 +424,8 @@ namespace strange {
 
     			handle_ = handle_->___clone___();
 
+    			handle_->___weak___(handle_);
+
     		}
 
     		return *handle_;
@@ -432,6 +448,10 @@ namespace strange {
 
     public:
 
+    	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
+
+    
+
     	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>&)
 
     	{
@@ -452,7 +472,7 @@ namespace strange {
 
     
 
-    	inline thing_(bool reference)
+    	explicit inline thing_(bool reference)
 
     		: handle_{}
 
@@ -468,7 +488,11 @@ namespace strange {
 
     		, ___reference___{ false }
 
-    	{}
+    	{
+
+    		handle_->___weak___(handle_);
+
+    	}
 
     
 
@@ -478,7 +502,11 @@ namespace strange {
 
     		, ___reference___{ reference }
 
-    	{}
+    	{
+
+    		handle_->___weak___(handle_);
+
+    	}
 
     
 
@@ -488,7 +516,11 @@ namespace strange {
 
     		, ___reference___{ false }
 
-    	{}
+    	{
+
+    		handle_->___weak___(handle_);
+
+    	}
 
     
 
@@ -498,7 +530,11 @@ namespace strange {
 
     		, ___reference___{ reference }
 
-    	{}
+    	{
+
+    		handle_->___weak___(handle_);
+
+    	}
 
     
 
@@ -507,6 +543,8 @@ namespace strange {
     	{
 
     		handle_ = other.handle_;
+
+    		handle_->___weak___(handle_);
 
     		return *this;
 
@@ -520,6 +558,8 @@ namespace strange {
 
     		handle_ = std::move(other.handle_);
 
+    		handle_->___weak___(handle_);
+
     		return *this;
 
     	}
@@ -532,19 +572,23 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline thing_(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+    	explicit inline thing_(const std::shared_ptr<___TTT___>& handle, bool reference = false)
 
     		: handle_{ handle }
 
     		, ___reference___{ reference }
 
-    	{}
+    	{
+
+    		handle_->___weak___(handle_);
+
+    	}
 
     
 
-    	template <typename ___TTT___>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<thing_, ___TTT___>::value>>
 
-    	inline thing_(___TTT___ value, bool reference = false);
+    	explicit inline thing_(___TTT___ value, bool reference = false);
 
     
 
@@ -556,25 +600,17 @@ namespace strange {
 
     		handle_ = handle;
 
+    		handle_->___weak___(handle_);
+
     		return *this;
 
     	}
 
     
 
-    	template <typename ___TTT___>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<thing_, ___TTT___>::value>>
 
     	inline thing_& operator=(___TTT___ value);
-
-    
-
-    	inline std::weak_ptr<___root_handle_base___> weak_() const
-
-    	{
-
-    		return handle_;
-
-    	}
 
     };
 
@@ -616,35 +652,33 @@ namespace strange {
 
     
 
-    template <typename ___TTT___>
+    template <typename ___TTT___, typename>
 
     inline thing_::thing_(___TTT___ value, bool reference)
 
-    	: handle_{ check_<thing_>(value)
-
-    		? cast_<thing_>(value).handle_
-
-    		: std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+    	: handle_{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 
     	, ___reference___{ reference }
 
-    {}
+    {
+
+    	handle_->___weak___(handle_);
+
+    }
 
     
 
-    template <typename ___TTT___>
+    template <typename ___TTT___, typename>
 
     inline thing_& thing_::operator=(___TTT___ value)
 
     {
 
-    	thing_ temp{ check_<thing_>(value)
-
-    		? cast_<thing_>(value)
-
-    		: std::move(value) };
+    	thing_ temp{ std::move(value) };
 
     	std::swap(temp.handle_, handle_);
+
+    	handle_->___weak___(handle_);
 
     	return *this;
 

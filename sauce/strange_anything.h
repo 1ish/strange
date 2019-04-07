@@ -30,8 +30,8 @@ public:
 	}
 
 protected:
-	inline Anything(const thing_& me)
-		: Thing{ me }
+	inline Anything()
+		: Thing{}
 	{}
 };
 

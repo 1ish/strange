@@ -35,8 +35,8 @@ public:
 	}
 
 protected:
-	inline Something(const thing_& me)
-		: Anything{ me }
+	inline Something()
+		: Anything{}
 	{}
 };
 
@@ -71,8 +71,8 @@ public:
 	}
 
 protected:
-	inline Something(const thing_& me)
-		: Anything{ me }
+	inline Something()
+		: Anything{}
 	{}
 };
 
