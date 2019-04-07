@@ -131,9 +131,17 @@ public:
 		return me_();
 	}
 
-	inline void operator++()
+	inline It& operator++()
 	{
 		_thing = END::ref();
+		return *this;
+	}
+
+	inline It operator++(int)
+	{
+		It result = *this;
+		operator++();
+		return result;
 	}
 
 protected:

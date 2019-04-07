@@ -113,8 +113,17 @@ public:
 		return me_();
 	}
 
-	inline void operator++()
-	{}
+	inline Nothing& operator++()
+	{
+		return *this;
+	}
+
+	inline Nothing operator++(int)
+	{
+		Nothing result = *this;
+		operator++();
+		return result;
+	}
 
 protected:
 	inline Nothing()

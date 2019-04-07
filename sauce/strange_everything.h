@@ -113,8 +113,17 @@ public:
 		return me_();
 	}
 
-	inline void operator++()
-	{}
+	inline Everything& operator++()
+	{
+		return *this;
+	}
+
+	inline Everything operator++(int)
+	{
+		Everything result = *this;
+		operator++();
+		return result;
+	}
 
 protected:
 	inline Everything()
