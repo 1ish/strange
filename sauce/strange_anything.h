@@ -9,19 +9,9 @@ class Anything : public Thing<THING_>
 {
 public:
 	// function
-	inline thing_ extract(thing_ range) const
-	{
-		return operator()(range);
-	}
-
 	inline thing_ operator()(thing_ range) const
 	{
 		return Everything<>::ref(); //TODO
-	}
-
-	inline thing_ mutate(thing_ range)
-	{
-		return operator()(range);
 	}
 
 	inline thing_ operator()(thing_ range)

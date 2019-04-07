@@ -41,6 +41,16 @@ protected:
 	}
 };
 
+#define ___THING___ \
+inline thing_ extract(thing_ range) const \
+{ \
+	return operator()(range); \
+} \
+inline thing_ mutate(thing_ range) \
+{ \
+	return operator()(range); \
+} \
+
 } // namespace strange
 
 #endif

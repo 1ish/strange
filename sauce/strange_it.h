@@ -7,7 +7,7 @@ namespace strange
 template <typename THING_ = thing_, typename END = Nothing<>>
 class It : public Range<THING_>
 {
-public:
+public: ___THING___
 	// construction
 	static inline thing_ val(thing_ range)
 	{
