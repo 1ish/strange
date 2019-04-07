@@ -14,22 +14,22 @@ public:
 		return true;
 	}
 
-	inline thing_ is_something(thing_) const
+	inline thing_ something(thing_) const
 	{
 		return Everything<>::ref();
 	}
 
-	inline thing_ is_something_() const
+	inline thing_ something_() const
 	{
 		return Everything<>::ref();
 	}
 
-	inline thing_ is_nothing(thing_) const
+	inline thing_ nothing(thing_) const
 	{
 		return Nothing<>::ref();
 	}
 
-	inline thing_ is_nothing_() const
+	inline thing_ nothing_() const
 	{
 		return Nothing<>::ref();
 	}
@@ -50,22 +50,22 @@ public:
 		return false;
 	}
 
-	inline thing_ is_something(thing_) const
+	inline thing_ something(thing_) const
 	{
 		return Nothing<>::ref();
 	}
 
-	inline thing_ is_something_() const
+	inline thing_ something_() const
 	{
 		return Nothing<>::ref();
 	}
 
-	inline thing_ is_nothing(thing_) const
+	inline thing_ nothing(thing_) const
 	{
 		return Everything<>::ref();
 	}
 
-	inline thing_ is_nothing_() const
+	inline thing_ nothing_() const
 	{
 		return Everything<>::ref();
 	}

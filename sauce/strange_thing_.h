@@ -90,14 +90,14 @@ namespace strange {
      { assert(handle_); return read().different_(thing ); }
      inline bool operator != ( thing_ thing ) const
      { assert(handle_); return read().operator!=(thing ); }
-     inline thing_ is_something ( thing_ _ ) const
-     { assert(handle_); return read().is_something(_ ); }
-     inline thing_ is_something_ ( ) const
-     { assert(handle_); return read().is_something_( ); }
-     inline thing_ is_nothing ( thing_ _ ) const
-     { assert(handle_); return read().is_nothing(_ ); }
-     inline thing_ is_nothing_ ( ) const
-     { assert(handle_); return read().is_nothing_( ); }
+     inline thing_ something ( thing_ _ ) const
+     { assert(handle_); return read().something(_ ); }
+     inline thing_ something_ ( ) const
+     { assert(handle_); return read().something_( ); }
+     inline thing_ nothing ( thing_ _ ) const
+     { assert(handle_); return read().nothing(_ ); }
+     inline thing_ nothing_ ( ) const
+     { assert(handle_); return read().nothing_( ); }
      inline thing_ hash ( thing_ _ ) const
      { assert(handle_); return read().hash(_ ); }
      inline thing_ hash_ ( ) const
@@ -198,10 +198,10 @@ namespace strange {
       virtual inline thing_ different ( thing_ range ) const = 0;
       virtual inline thing_ different_ ( thing_ thing ) const = 0;
       virtual inline bool operator != ( thing_ thing ) const = 0;
-      virtual inline thing_ is_something ( thing_ _ ) const = 0;
-      virtual inline thing_ is_something_ ( ) const = 0;
-      virtual inline thing_ is_nothing ( thing_ _ ) const = 0;
-      virtual inline thing_ is_nothing_ ( ) const = 0;
+      virtual inline thing_ something ( thing_ _ ) const = 0;
+      virtual inline thing_ something_ ( ) const = 0;
+      virtual inline thing_ nothing ( thing_ _ ) const = 0;
+      virtual inline thing_ nothing_ ( ) const = 0;
       virtual inline thing_ hash ( thing_ _ ) const = 0;
       virtual inline thing_ hash_ ( ) const = 0;
       virtual inline size_t hash__ ( ) const = 0;
@@ -317,14 +317,14 @@ namespace strange {
       { return value_.different_(thing ); }
       virtual inline bool operator != ( thing_ thing ) const
       { return value_.operator!=(thing ); }
-      virtual inline thing_ is_something ( thing_ _ ) const
-      { return value_.is_something(_ ); }
-      virtual inline thing_ is_something_ ( ) const
-      { return value_.is_something_( ); }
-      virtual inline thing_ is_nothing ( thing_ _ ) const
-      { return value_.is_nothing(_ ); }
-      virtual inline thing_ is_nothing_ ( ) const
-      { return value_.is_nothing_( ); }
+      virtual inline thing_ something ( thing_ _ ) const
+      { return value_.something(_ ); }
+      virtual inline thing_ something_ ( ) const
+      { return value_.something_( ); }
+      virtual inline thing_ nothing ( thing_ _ ) const
+      { return value_.nothing(_ ); }
+      virtual inline thing_ nothing_ ( ) const
+      { return value_.nothing_( ); }
       virtual inline thing_ hash ( thing_ _ ) const
       { return value_.hash(_ ); }
       virtual inline thing_ hash_ ( ) const

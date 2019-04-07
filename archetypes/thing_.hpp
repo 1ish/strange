@@ -39,11 +39,11 @@ public:
 	inline thing_ different_(thing_ thing) const;
 	inline bool operator!=(thing_ thing) const;
 
-	inline thing_ is_something(thing_ _) const;
-	inline thing_ is_something_() const;
+	inline thing_ something(thing_ _) const;
+	inline thing_ something_() const;
 
-	inline thing_ is_nothing(thing_ _) const;
-	inline thing_ is_nothing_() const;
+	inline thing_ nothing(thing_ _) const;
+	inline thing_ nothing_() const;
 
 	inline thing_ hash(thing_ _) const;
 	inline thing_ hash_() const;
