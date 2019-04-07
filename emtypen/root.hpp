@@ -6,6 +6,21 @@ public:
 		assert(handle_); return read().operator bool();
 	}
 
+	inline %struct_name%& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+	inline %struct_name% operator++(int)
+	{
+		assert(handle_);
+		%struct_name% result = *this;
+		write().operator++();
+		return result;
+	}
+
 	%nonvirtual_members%
 
 protected:
@@ -23,6 +38,8 @@ protected:
 		virtual void ___weak___(const std::weak_ptr<___root_handle_base___>& weak) const = 0;
 
 		virtual inline operator bool() const = 0;
+
+		virtual inline void operator++() = 0;
 
 		%pure_virtual_members%
 	};
@@ -48,6 +65,11 @@ protected:
 		virtual inline operator bool() const final
 		{
 			return value_.operator bool();
+		}
+
+		virtual inline void operator++() final
+		{
+			value_.operator++();
 		}
 
 		%virtual_members% //TODO final

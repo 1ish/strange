@@ -109,13 +109,12 @@ public:
 
 	inline thing_ increment_()
 	{
-		return operator++();
+		operator++();
+		return me_();
 	}
 
-	inline thing_ operator++()
-	{
-		return Nothing<>::ref();
-	}
+	inline void operator++()
+	{}
 
 protected:
 	inline Nothing()

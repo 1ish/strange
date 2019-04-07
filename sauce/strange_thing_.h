@@ -28,6 +28,36 @@ namespace strange {
 
     
 
+    	inline thing_& operator++()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator++();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline thing_ operator++(int)
+
+    	{
+
+    		assert(handle_);
+
+    		thing_ result = *this;
+
+    		write().operator++();
+
+    		return result;
+
+    	}
+
+    
+
      inline thing_ val ( thing_ range ) const
      { assert(handle_); return read().val(range ); }
      inline thing_ ref ( thing_ range ) const
@@ -106,8 +136,6 @@ namespace strange {
      { assert(handle_); return write().increment(_ ); }
      inline thing_ increment_ ( )
      { assert(handle_); return write().increment_( ); }
-     inline thing_ operator ++ ( )
-     { assert(handle_); return write().operator++( ); }
     
 
     protected:
@@ -139,6 +167,10 @@ namespace strange {
     
 
     		virtual inline operator bool() const = 0;
+
+    
+
+    		virtual inline void operator++() = 0;
 
     
 
@@ -181,7 +213,6 @@ namespace strange {
       virtual inline thing_ * operator -> ( ) const = 0;
       virtual inline thing_ increment ( thing_ _ ) = 0;
       virtual inline thing_ increment_ ( ) = 0;
-      virtual inline thing_ operator ++ ( ) = 0;
     	};
 
     
@@ -227,6 +258,16 @@ namespace strange {
     		{
 
     			return value_.operator bool();
+
+    		}
+
+    
+
+    		virtual inline void operator++() final
+
+    		{
+
+    			value_.operator++();
 
     		}
 
@@ -310,8 +351,6 @@ namespace strange {
       { return value_.increment(_ ); }
       virtual inline thing_ increment_ ( )
       { return value_.increment_( ); }
-      virtual inline thing_ operator ++ ( )
-      { return value_.operator++( ); }
     
 
     		___TTT___ value_;

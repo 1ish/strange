@@ -70,7 +70,6 @@ public:
 
 	inline thing_ increment(thing_ _);
 	inline thing_ increment_();
-	inline thing_ operator++();
 };
 
 } // namespace strange

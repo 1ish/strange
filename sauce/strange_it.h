@@ -127,13 +127,13 @@ public:
 
 	inline thing_ increment_()
 	{
-		return operator++();
+		operator++();
+		return me_();
 	}
 
-	inline thing_ operator++() //TODO thing_&
+	inline void operator++()
 	{
 		_thing = END::ref();
-		return me_();
 	}
 
 protected:
