@@ -40,33 +40,9 @@ public: ___THING___
 	}
 
 	// comparison
-	inline thing_ same(thing_ range) const
-	{
-		const auto it = range.beget_();
-		assert(it != range.enget_()); //TODO throw
-		return same_(it.get_());
-	}
-
-	inline thing_ same_(thing_ thing) const
-	{
-		return _boole_(operator==(thing));
-	}
-
 	inline bool operator==(thing_ thing) const
 	{
 		return *thing == _thing;
-	}
-
-	inline thing_ different(thing_ range) const
-	{
-		const auto it = range.beget_();
-		assert(it != range.enget_()); //TODO throw
-		return different_(it.get_());
-	}
-
-	inline thing_ different_(thing_ thing) const
-	{
-		return _boole_(operator!=(thing));
 	}
 
 	inline bool operator!=(thing_ thing) const
@@ -74,19 +50,9 @@ public: ___THING___
 		return *thing != _thing;
 	}
 
-	inline thing_ hash(thing_) const
-	{
-		return hash_();
-	}
-
-	inline thing_ hash_() const
-	{
-		return Everything<>::ref(); //TODO
-	}
-
 	inline size_t hash__() const
 	{
-		return size_t(this);
+		return _thing.hash__();
 	}
 
 	// iterator

@@ -21,34 +21,16 @@ public: ___THING___
 		return REF;
 	}
 
+	// conversion
+	inline operator bool() const
+	{
+		return false;
+	}
+
 	// comparison
-	inline thing_ same(thing_ range) const
-	{
-		const auto it = range.beget_();
-		assert(it != range.enget_()); //TODO throw
-		return same_(it.get_());
-	}
-
-	inline thing_ same_(thing_ thing) const
-	{
-		return _boole_(operator==(thing));
-	}
-
 	inline bool operator==(thing_ thing) const
 	{
 		return thing.hash__() == 0;
-	}
-
-	inline thing_ different(thing_ range) const
-	{
-		const auto it = range.beget_();
-		assert(it != range.enget_()); //TODO throw
-		return different_(it.get_());
-	}
-
-	inline thing_ different_(thing_ thing) const
-	{
-		return _boole_(operator!=(thing));
 	}
 
 	inline bool operator!=(thing_ thing) const
@@ -56,10 +38,9 @@ public: ___THING___
 		return thing.hash__() != 0;
 	}
 
-	// conversion
-	inline operator bool() const
+	inline size_t hash__() const
 	{
-		return false;
+		return 0;
 	}
 
 	inline thing_ something(thing_) const
@@ -80,21 +61,6 @@ public: ___THING___
 	inline thing_ nothing_() const
 	{
 		return Everything<>::ref();
-	}
-
-	inline thing_ hash(thing_) const
-	{
-		return hash_();
-	}
-
-	inline thing_ hash_() const
-	{
-		return Nothing<>::ref(); //TODO
-	}
-
-	inline size_t hash__() const
-	{
-		return 0;
 	}
 
 	// iterator

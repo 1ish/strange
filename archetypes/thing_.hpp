@@ -24,13 +24,14 @@ public:
 	inline thing_ mutate(thing_ range);
 	inline thing_ operator()(thing_ range);
 
-	// comparison
+	// identification
 	inline const void* identity__() const;
 
 	inline thing_ identical(thing_ range) const;
 	inline thing_ identical_(thing_ thing) const;
 	inline bool identical__(thing_ thing) const;
 
+	// comparison
 	inline thing_ same(thing_ range) const;
 	inline thing_ same_(thing_ thing) const;
 	inline bool operator==(thing_ thing) const;
@@ -39,15 +40,15 @@ public:
 	inline thing_ different_(thing_ thing) const;
 	inline bool operator!=(thing_ thing) const;
 
+	inline thing_ hash(thing_ _) const;
+	inline thing_ hash_() const;
+	inline size_t hash__() const;
+
 	inline thing_ something(thing_ _) const;
 	inline thing_ something_() const;
 
 	inline thing_ nothing(thing_ _) const;
 	inline thing_ nothing_() const;
-
-	inline thing_ hash(thing_ _) const;
-	inline thing_ hash_() const;
-	inline size_t hash__() const;
 
 	// range
 	inline thing_ beget(thing_ _) const;
