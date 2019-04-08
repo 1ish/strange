@@ -26,6 +26,8 @@ TEST(TestCaseName, ForLoop) {
 
 	cat_ c;
 
+	Nothing<>::ref().set_(Everything<>::ref());
+
 	EXPECT_TRUE(true);
 }
 /*

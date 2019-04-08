@@ -38,45 +38,9 @@ public: ___THING___
 	}
 
 	// iterator
-	inline thing_ get(thing_) const
-	{
-		return get_();
-	}
-
-	inline thing_ get_() const
-	{
-		return Everything<>::ref();
-	}
-
-	inline thing_ set(thing_ range) const
-	{
-		return set_(range);
-	}
-
-	inline thing_ set_(thing_) const
-	{
-		return get_();
-	}
-
 	inline thing_& operator*() const
 	{
 		return Everything<>::ref();
-	}
-
-	inline thing_* operator->() const
-	{
-		return &operator*();
-	}
-
-	inline thing_ increment(thing_)
-	{
-		return increment_();
-	}
-
-	inline thing_ increment_()
-	{
-		operator++();
-		return me_();
 	}
 
 	inline Everything& operator++()
