@@ -104,6 +104,38 @@ inline thing_ mutate(thing_ range) \
 { \
 	return operator()(range); \
 } \
+inline thing_ beget(thing_) const \
+{ \
+	return beget_(); \
+} \
+inline thing_ beget_() const \
+{ \
+	return cbegin(); \
+} \
+inline thing_ beset(thing_) \
+{ \
+	return beset_(); \
+} \
+inline thing_ beset_() \
+{ \
+	return begin(); \
+} \
+inline thing_ enget(thing_) const \
+{ \
+	return enget_(); \
+} \
+inline thing_ enget_() const \
+{ \
+	return cend(); \
+} \
+inline thing_ enset(thing_) \
+{ \
+	return enset_(); \
+} \
+inline thing_ enset_() \
+{ \
+	return end(); \
+} \
 
 } // namespace strange
 

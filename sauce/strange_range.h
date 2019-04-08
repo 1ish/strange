@@ -9,29 +9,9 @@ class Range : public Something<THING_>
 {
 public:
 	// range
-	inline thing_ beget(thing_) const
-	{
-		return beget_();
-	}
-
-	inline thing_ beget_() const
-	{
-		return cbegin();
-	}
-
 	inline thing_ cbegin() const
 	{
 		return It<>::val_(me_());
-	}
-
-	inline thing_ beset(thing_)
-	{
-		return beset_();
-	}
-
-	inline thing_ beset_()
-	{
-		return begin();
 	}
 
 	inline thing_ begin()
@@ -39,29 +19,9 @@ public:
 		return It<>::val_(me_());
 	}
 
-	inline thing_ enget(thing_) const
-	{
-		return enget_();
-	}
-
-	inline thing_ enget_() const
-	{
-		return cend();
-	}
-
 	inline thing_ cend() const
 	{
 		return Nothing<>::ref();
-	}
-
-	inline thing_ enset(thing_)
-	{
-		return enset_();
-	}
-
-	inline thing_ enset_()
-	{
-		return end();
 	}
 
 	inline thing_ end()
@@ -80,29 +40,9 @@ class Range<THING_, true> : public Something<THING_>
 {
 public:
 	// range
-	inline thing_ beget(thing_) const
-	{
-		return beget_();
-	}
-
-	inline thing_ beget_() const
-	{
-		return cbegin();
-	}
-
 	inline thing_ cbegin() const
 	{
 		return It<thing_, Everything<>>::val_(Nothing<>::ref());
-	}
-
-	inline thing_ beset(thing_)
-	{
-		return beset_();
-	}
-
-	inline thing_ beset_()
-	{
-		return begin();
 	}
 
 	inline thing_ begin()
@@ -110,29 +50,9 @@ public:
 		return It<thing_, Everything<>>::val_(Nothing<>::ref());
 	}
 
-	inline thing_ enget(thing_) const
-	{
-		return enget_();
-	}
-
-	inline thing_ enget_() const
-	{
-		return cend();
-	}
-
 	inline thing_ cend() const
 	{
 		return Everything<>::ref();
-	}
-
-	inline thing_ enset(thing_)
-	{
-		return enset_();
-	}
-
-	inline thing_ enset_()
-	{
-		return end();
 	}
 
 	inline thing_ end()
