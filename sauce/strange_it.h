@@ -19,7 +19,7 @@ public: ___THING___
 		return val_(it.get_());
 	}
 
-	static inline thing_ val_(thing_ thing = END::ref())
+	static inline thing_ val_(thing_ thing = END::val())
 	{
 		return thing_{ It<CONST, THING_, END>{ thing } };
 	}
@@ -34,7 +34,7 @@ public: ___THING___
 		return ref_(it.get_());
 	}
 
-	static inline thing_ ref_(thing_ thing = END::ref())
+	static inline thing_ ref_(thing_ thing = END::val())
 	{
 		return thing_(It<CONST, THING_, END>{ thing }, true);
 	}
@@ -63,7 +63,7 @@ public: ___THING___
 
 	inline It& operator++()
 	{
-		_thing = END::ref();
+		_thing = END::val();
 		return *this;
 	}
 
