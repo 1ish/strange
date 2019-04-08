@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename THING_ = thing_>
-class Nothing : public Range<THING_, true>
+class Nothing : public Range<THING_>
 {
 public: ___THING___
 	// construction
@@ -59,6 +59,27 @@ public: ___THING___
 	}
 
 	inline thing_ nothing_() const
+	{
+		return Everything<>::ref();
+	}
+
+	// range
+	inline thing_ cbegin() const
+	{
+		return It<thing_, Everything<>>::val_(Nothing<>::ref());
+	}
+
+	inline thing_ begin()
+	{
+		return It<thing_, Everything<>>::val_(Nothing<>::ref());
+	}
+
+	inline thing_ cend() const
+	{
+		return Everything<>::ref();
+	}
+
+	inline thing_ end()
 	{
 		return Everything<>::ref();
 	}
