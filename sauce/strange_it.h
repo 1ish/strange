@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename THING_ = thing_, typename END = Nothing<>>
+template <bool CONST = false, typename THING_ = thing_, typename END = Nothing<>>
 class It : public Range<THING_>
 {
 public: ___THING___
@@ -21,7 +21,7 @@ public: ___THING___
 
 	static inline thing_ val_(thing_ thing = END::ref())
 	{
-		return thing_{ It<THING_, END>{ thing } };
+		return thing_{ It<CONST, THING_, END>{ thing } };
 	}
 
 	static inline thing_ ref(thing_ range)
@@ -36,7 +36,7 @@ public: ___THING___
 
 	static inline thing_ ref_(thing_ thing = END::ref())
 	{
-		return thing_(It<THING_, END>{ thing }, true);
+		return thing_(It<CONST, THING_, END>{ thing }, true);
 	}
 
 	// comparison
@@ -79,7 +79,7 @@ protected:
 
 	inline It(const thing_& thing)
 		: Range{}
-		, _thing(thing, true)
+		, _thing(thing, !CONST)
 	{}
 };
 

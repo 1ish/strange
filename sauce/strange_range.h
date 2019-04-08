@@ -11,7 +11,7 @@ public:
 	// range
 	inline thing_ cbegin() const
 	{
-		return It<>::val_(me_());
+		return It<true>::val_(me_());
 	}
 
 	inline thing_ begin()
