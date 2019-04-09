@@ -75,7 +75,7 @@ public: ___THING___
 	}
 
 protected:
-	mutable thing_ _thing;
+	mutable thing_ _thing; //TODO A forward iterator cannot be "stashing": it cannot return a reference to an object within itself, because such references would be invalidated by the destruction of the forward iterator.
 
 	inline It(const thing_& thing)
 		: Something{}
