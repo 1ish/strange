@@ -44,11 +44,21 @@ public:
 	inline thing_ hash_() const;
 	inline size_t hash__() const;
 
-	inline thing_ something(thing_ _) const;
-	inline thing_ something_() const;
-
 	inline thing_ nothing(thing_ _) const;
 	inline thing_ nothing_() const;
+	inline bool nothing__() const;
+
+	inline thing_ anything(thing_ _) const;
+	inline thing_ anything_() const;
+	inline bool anything__() const;
+
+	inline thing_ something(thing_ _) const;
+	inline thing_ something_() const;
+	inline bool something__() const;
+
+	inline thing_ everything(thing_ _) const;
+	inline thing_ everything_() const;
+	inline bool everything__() const;
 
 	// range
 	inline thing_ beget(thing_ _) const;

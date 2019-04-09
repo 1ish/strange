@@ -19,6 +19,21 @@ public:
 		return Everything<>::ref(); //TODO
 	}
 
+	inline thing_ something(thing_) const
+	{
+		return something_();
+	}
+
+	inline thing_ something_() const
+	{
+		return Everything<>::ref();
+	}
+
+	inline bool something__() const
+	{
+		return true;
+	}
+
 protected:
 	inline Something()
 		: Thing{}

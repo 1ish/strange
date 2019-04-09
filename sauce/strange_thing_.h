@@ -96,14 +96,30 @@ namespace strange {
      { assert(handle_); return read().hash_( ); }
      inline size_t hash__ ( ) const
      { assert(handle_); return read().hash__( ); }
-     inline thing_ something ( thing_ _ ) const
-     { assert(handle_); return read().something(_ ); }
-     inline thing_ something_ ( ) const
-     { assert(handle_); return read().something_( ); }
      inline thing_ nothing ( thing_ _ ) const
      { assert(handle_); return read().nothing(_ ); }
      inline thing_ nothing_ ( ) const
      { assert(handle_); return read().nothing_( ); }
+     inline bool nothing__ ( ) const
+     { assert(handle_); return read().nothing__( ); }
+     inline thing_ anything ( thing_ _ ) const
+     { assert(handle_); return read().anything(_ ); }
+     inline thing_ anything_ ( ) const
+     { assert(handle_); return read().anything_( ); }
+     inline bool anything__ ( ) const
+     { assert(handle_); return read().anything__( ); }
+     inline thing_ something ( thing_ _ ) const
+     { assert(handle_); return read().something(_ ); }
+     inline thing_ something_ ( ) const
+     { assert(handle_); return read().something_( ); }
+     inline bool something__ ( ) const
+     { assert(handle_); return read().something__( ); }
+     inline thing_ everything ( thing_ _ ) const
+     { assert(handle_); return read().everything(_ ); }
+     inline thing_ everything_ ( ) const
+     { assert(handle_); return read().everything_( ); }
+     inline bool everything__ ( ) const
+     { assert(handle_); return read().everything__( ); }
      inline thing_ beget ( thing_ _ ) const
      { assert(handle_); return read().beget(_ ); }
      inline thing_ beget_ ( ) const
@@ -201,10 +217,18 @@ namespace strange {
       virtual inline thing_ hash ( thing_ _ ) const = 0;
       virtual inline thing_ hash_ ( ) const = 0;
       virtual inline size_t hash__ ( ) const = 0;
-      virtual inline thing_ something ( thing_ _ ) const = 0;
-      virtual inline thing_ something_ ( ) const = 0;
       virtual inline thing_ nothing ( thing_ _ ) const = 0;
       virtual inline thing_ nothing_ ( ) const = 0;
+      virtual inline bool nothing__ ( ) const = 0;
+      virtual inline thing_ anything ( thing_ _ ) const = 0;
+      virtual inline thing_ anything_ ( ) const = 0;
+      virtual inline bool anything__ ( ) const = 0;
+      virtual inline thing_ something ( thing_ _ ) const = 0;
+      virtual inline thing_ something_ ( ) const = 0;
+      virtual inline bool something__ ( ) const = 0;
+      virtual inline thing_ everything ( thing_ _ ) const = 0;
+      virtual inline thing_ everything_ ( ) const = 0;
+      virtual inline bool everything__ ( ) const = 0;
       virtual inline thing_ beget ( thing_ _ ) const = 0;
       virtual inline thing_ beget_ ( ) const = 0;
       virtual inline thing_ cbegin ( ) const = 0;
@@ -323,14 +347,30 @@ namespace strange {
       { return value_.hash_( ); }
       virtual inline size_t hash__ ( ) const
       { return value_.hash__( ); }
-      virtual inline thing_ something ( thing_ _ ) const
-      { return value_.something(_ ); }
-      virtual inline thing_ something_ ( ) const
-      { return value_.something_( ); }
       virtual inline thing_ nothing ( thing_ _ ) const
       { return value_.nothing(_ ); }
       virtual inline thing_ nothing_ ( ) const
       { return value_.nothing_( ); }
+      virtual inline bool nothing__ ( ) const
+      { return value_.nothing__( ); }
+      virtual inline thing_ anything ( thing_ _ ) const
+      { return value_.anything(_ ); }
+      virtual inline thing_ anything_ ( ) const
+      { return value_.anything_( ); }
+      virtual inline bool anything__ ( ) const
+      { return value_.anything__( ); }
+      virtual inline thing_ something ( thing_ _ ) const
+      { return value_.something(_ ); }
+      virtual inline thing_ something_ ( ) const
+      { return value_.something_( ); }
+      virtual inline bool something__ ( ) const
+      { return value_.something__( ); }
+      virtual inline thing_ everything ( thing_ _ ) const
+      { return value_.everything(_ ); }
+      virtual inline thing_ everything_ ( ) const
+      { return value_.everything_( ); }
+      virtual inline bool everything__ ( ) const
+      { return value_.everything__( ); }
       virtual inline thing_ beget ( thing_ _ ) const
       { return value_.beget(_ ); }
       virtual inline thing_ beget_ ( ) const

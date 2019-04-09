@@ -33,6 +33,26 @@ public:
 	}
 
 	// comparison
+	inline thing_ nothing(thing_) const
+	{
+		return nothing_();
+	}
+
+	inline thing_ nothing_() const
+	{
+		return Nothing<>::ref();
+	}
+
+	inline thing_ anything(thing_) const
+	{
+		return anything_();
+	}
+
+	inline thing_ anything_() const
+	{
+		return Everything<>::ref();
+	}
+
 	inline thing_ something(thing_) const
 	{
 		return something_();
@@ -40,15 +60,15 @@ public:
 
 	inline thing_ something_() const
 	{
-		return Everything<>::ref();
+		return Nothing<>::ref();
 	}
 
-	inline thing_ nothing(thing_) const
+	inline thing_ everything(thing_) const
 	{
-		return nothing_();
+		return everything_();
 	}
 
-	inline thing_ nothing_() const
+	inline thing_ everything_() const
 	{
 		return Nothing<>::ref();
 	}
@@ -68,6 +88,14 @@ protected:
 
 // adaptation
 #define ___THING___ \
+inline thing_ extract(thing_ range) const \
+{ \
+	return operator()(range); \
+} \
+inline thing_ mutate(thing_ range) \
+{ \
+	return operator()(range); \
+} \
 inline thing_ same(thing_ range) const \
 { \
 	const auto it = range.cbegin(); \
@@ -94,15 +122,7 @@ inline thing_ hash(thing_) const \
 } \
 inline thing_ hash_() const \
 { \
-	return Everything<>::ref(); \
-} \
-inline thing_ extract(thing_ range) const \
-{ \
-	return operator()(range); \
-} \
-inline thing_ mutate(thing_ range) \
-{ \
-	return operator()(range); \
+	return Everything<>::ref(); /* //TODO */ \
 } \
 inline thing_ beget(thing_) const \
 { \

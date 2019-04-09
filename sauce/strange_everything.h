@@ -24,17 +24,33 @@ public: ___THING___
 	// comparison
 	inline bool operator==(thing_ thing) const
 	{
-		return thing.hash__() == 1;
+		return thing.everything__();
 	}
 
 	inline bool operator!=(thing_ thing) const
 	{
-		return thing.hash__() != 1;
+		return !thing.everything__();
 	}
 
 	inline size_t hash__() const
 	{
-		return 1;
+		static const size_t HASH = std::hash<int64_t>{}(1);
+		return HASH;
+	}
+
+	inline thing_ everything(thing_) const
+	{
+		return everything_();
+	}
+
+	inline thing_ everything_() const
+	{
+		return Everything<>::ref();
+	}
+
+	inline bool everything__() const
+	{
+		return true;
 	}
 
 	// iterator

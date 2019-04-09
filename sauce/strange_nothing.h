@@ -24,33 +24,24 @@ public: ___THING___
 	// conversion
 	inline operator bool() const
 	{
-		return false;
+		return anything__();
 	}
 
 	// comparison
 	inline bool operator==(thing_ thing) const
 	{
-		return thing.hash__() == 0;
+		return thing.nothing__();
 	}
 
 	inline bool operator!=(thing_ thing) const
 	{
-		return thing.hash__() != 0;
+		return !thing.nothing__();
 	}
 
 	inline size_t hash__() const
 	{
-		return 0;
-	}
-
-	inline thing_ something(thing_) const
-	{
-		return something_();
-	}
-
-	inline thing_ something_() const
-	{
-		return Nothing<>::ref();
+		static const size_t HASH = std::hash<int64_t>{}(0);
+		return HASH;
 	}
 
 	inline thing_ nothing(thing_) const
@@ -61,6 +52,26 @@ public: ___THING___
 	inline thing_ nothing_() const
 	{
 		return Everything<>::ref();
+	}
+
+	inline bool nothing__() const
+	{
+		return true;
+	}
+
+	inline thing_ anything(thing_) const
+	{
+		return anything_();
+	}
+
+	inline thing_ anything_() const
+	{
+		return Nothing<>::ref();
+	}
+
+	inline bool anything__() const
+	{
+		return false;
 	}
 
 	// range

@@ -16,7 +16,7 @@ public:
 	// conversion
 	inline operator bool() const
 	{
-		return true;
+		return anything__();
 	}
 
 	// identification
@@ -44,6 +44,26 @@ public:
 	inline size_t hash__() const
 	{
 		return std::hash<const void*>{}(identity__());
+	}
+
+	inline bool nothing__() const
+	{
+		return false;
+	}
+
+	inline bool anything__() const
+	{
+		return true;
+	}
+
+	inline bool something__() const
+	{
+		return false;
+	}
+
+	inline bool everything__() const
+	{
+		return false;
 	}
 
 protected:
