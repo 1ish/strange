@@ -73,6 +73,27 @@ public:
 		return Nothing<>::ref();
 	}
 
+	// range
+	inline thing_ cbegin() const
+	{
+		return It<true>::val_(me_());
+	}
+
+	inline thing_ begin()
+	{
+		return It<>::val_(me_());
+	}
+
+	inline thing_ cend() const
+	{
+		return Nothing<>::ref();
+	}
+
+	inline thing_ end()
+	{
+		return Nothing<>::ref();
+	}
+
 protected:
 	// construction
 	inline Thing()

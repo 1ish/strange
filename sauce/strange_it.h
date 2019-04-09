@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <bool CONST = false, typename THING_ = thing_, typename END = Nothing<>>
-class It : public Range<THING_>
+class It : public Something<THING_>
 {
 public: ___THING___
 	// construction
@@ -78,7 +78,7 @@ protected:
 	mutable thing_ _thing;
 
 	inline It(const thing_& thing)
-		: Range{}
+		: Something{}
 		, _thing(thing, !CONST)
 	{}
 };

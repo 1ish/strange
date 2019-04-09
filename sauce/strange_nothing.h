@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename THING_ = thing_>
-class Nothing : public Range<THING_>
+class Nothing : public Something<THING_>
 {
 public: ___THING___
 	// construction
@@ -115,7 +115,7 @@ public: ___THING___
 
 protected:
 	inline Nothing()
-		: Range{}
+		: Something{}
 	{}
 };
 

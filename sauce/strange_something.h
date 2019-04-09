@@ -19,6 +19,7 @@ public:
 		return Everything<>::ref(); //TODO
 	}
 
+	// comparison
 	inline thing_ something(thing_) const
 	{
 		return something_();
