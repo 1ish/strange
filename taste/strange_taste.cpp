@@ -28,7 +28,7 @@ TEST(TestCaseName, ForLoop) {
 
 	Nothing<>::ref().set_(Everything<>::ref());
 
-	EXPECT_TRUE(true);
+	EXPECT_TRUE(Nothing<>::ref().nothing__());
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

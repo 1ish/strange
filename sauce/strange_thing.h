@@ -94,6 +94,18 @@ public:
 		return Nothing<>::ref();
 	}
 
+	// iterator
+	inline thing_& operator*() const
+	{
+		return Nothing<>::val();
+	}
+
+	inline void operator++()
+	{}
+
+	inline void operator++(int)
+	{}
+
 protected:
 	// construction
 	inline Thing()

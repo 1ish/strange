@@ -98,7 +98,7 @@ public: ___THING___
 	// iterator
 	inline thing_& operator*() const
 	{
-		return Nothing<>::ref();
+		return Nothing<>::val();
 	}
 
 	inline Nothing& operator++()
@@ -108,9 +108,7 @@ public: ___THING___
 
 	inline Nothing operator++(int)
 	{
-		Nothing result = *this;
-		operator++();
-		return result;
+		return *this;
 	}
 
 protected:

@@ -56,7 +56,7 @@ public: ___THING___
 	// iterator
 	inline thing_& operator*() const
 	{
-		return Everything<>::ref();
+		return Everything<>::val();
 	}
 
 	inline Everything& operator++()
@@ -66,9 +66,7 @@ public: ___THING___
 
 	inline Everything operator++(int)
 	{
-		Everything result = *this;
-		operator++();
-		return result;
+		return *this;
 	}
 
 protected:
