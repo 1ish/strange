@@ -108,6 +108,12 @@ protected:
 	{}
 };
 
+template <typename F>
+inline symbol_ sym__(F&& s)
+{
+	return Symbol<>::val__(std::forward<F>(s));
+}
+
 } // namespace strange
 
 #endif

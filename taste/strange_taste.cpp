@@ -30,7 +30,7 @@ TEST(TestCaseName, ForLoop) {
 
 	EXPECT_TRUE(Nothing<>::ref().nothing__());
 
-	symbol_ s = Symbol<>::val__("strange");
+	symbol_ s = sym__("strange");
 
 	EXPECT_EQ(s.to_string__(), "strange");
 }
