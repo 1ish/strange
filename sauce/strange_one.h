@@ -66,6 +66,11 @@ public:
 		return false;
 	}
 
+	inline bool is__(const std::string& s) const
+	{
+		return false;
+	}
+
 protected:
 	mutable thing_::___WEAK___ _meek;
 

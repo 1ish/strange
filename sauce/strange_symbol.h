@@ -67,6 +67,11 @@ public: ___THING___
 		return _hash;
 	}
 
+	inline bool is__(const std::string& s) const
+	{
+		return s == _string;
+	}
+
 	// symbol
 	inline const std::string& to_string__() const
 	{

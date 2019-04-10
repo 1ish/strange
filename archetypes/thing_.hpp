@@ -88,6 +88,8 @@ public:
 	inline thing_ everything_() const;
 	inline bool everything__() const;
 
+	inline bool is__(const std::string& s) const;
+
 	// range
 	inline thing_ beget(thing_ _) const;
 	inline thing_ beget_() const;

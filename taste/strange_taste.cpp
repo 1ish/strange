@@ -33,6 +33,8 @@ TEST(TestCaseName, ForLoop) {
 	symbol_ s = sym__("strange");
 
 	EXPECT_EQ(s.to_string__(), "strange");
+	EXPECT_FALSE(e.is__("strange"));
+	EXPECT_TRUE(s.is__("strange"));
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

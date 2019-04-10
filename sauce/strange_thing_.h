@@ -120,6 +120,8 @@ namespace strange {
      { assert(handle_); return read().everything_( ); }
      inline bool everything__ ( ) const
      { assert(handle_); return read().everything__( ); }
+     inline bool is__ ( const std :: string & s ) const
+     { assert(handle_); return read().is__(s ); }
      inline thing_ beget ( thing_ _ ) const
      { assert(handle_); return read().beget(_ ); }
      inline thing_ beget_ ( ) const
@@ -229,6 +231,7 @@ namespace strange {
       virtual inline thing_ everything ( thing_ _ ) const = 0;
       virtual inline thing_ everything_ ( ) const = 0;
       virtual inline bool everything__ ( ) const = 0;
+      virtual inline bool is__ ( const std :: string & s ) const = 0;
       virtual inline thing_ beget ( thing_ _ ) const = 0;
       virtual inline thing_ beget_ ( ) const = 0;
       virtual inline thing_ cbegin ( ) const = 0;
@@ -371,6 +374,8 @@ namespace strange {
       { return value_.everything_( ); }
       virtual inline bool everything__ ( ) const
       { return value_.everything__( ); }
+      virtual inline bool is__ ( const std :: string & s ) const
+      { return value_.is__(s ); }
       virtual inline thing_ beget ( thing_ _ ) const
       { return value_.beget(_ ); }
       virtual inline thing_ beget_ ( ) const
