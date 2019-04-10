@@ -50,7 +50,7 @@ public: ___THING___
 		return thing->nothing__() != _thing.nothing__();
 	}
 
-	inline size_t hash__() const
+	inline std::size_t hash__() const
 	{
 		return _thing.hash__();
 	}

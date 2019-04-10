@@ -4,6 +4,7 @@
 namespace std
 {
 	typedef unsigned long long size_t;
+	class string;
 }
 
 #endif

@@ -41,7 +41,7 @@ public:
 		return !identical__(thing);
 	}
 
-	inline size_t hash__() const
+	inline std::size_t hash__() const
 	{
 		return std::hash<const void*>{}(identity__());
 	}

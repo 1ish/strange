@@ -70,7 +70,7 @@ public:
 
 	inline thing_ hash(thing_ _) const;
 	inline thing_ hash_() const;
-	inline size_t hash__() const;
+	inline std::size_t hash__() const;
 
 	inline thing_ nothing(thing_ _) const;
 	inline thing_ nothing_() const;

@@ -29,6 +29,10 @@ TEST(TestCaseName, ForLoop) {
 	Nothing<>::ref().set_(Everything<>::ref());
 
 	EXPECT_TRUE(Nothing<>::ref().nothing__());
+
+	symbol_ s = Symbol<>::val__("strange");
+
+	EXPECT_EQ(s.to_string__(), "strange");
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

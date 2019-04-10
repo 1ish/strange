@@ -22,6 +22,8 @@ namespace strange {
 
     public:
 
+     inline const std :: string & to_string__ ( ) const
+     { assert(handle_); return read().to_string__( ); }
      inline symbol_ add ( thing_ range ) const
      { assert(handle_); return read().add(range ); }
      inline symbol_ add_ ( symbol_ symbol ) const
@@ -36,6 +38,7 @@ namespace strange {
 
     	{
 
+      virtual inline const std :: string & to_string__ ( ) const = 0;
       virtual inline symbol_ add ( thing_ range ) const = 0;
       virtual inline symbol_ add_ ( symbol_ symbol ) const = 0;
       virtual inline symbol_ operator + ( symbol_ symbol ) const = 0;
@@ -69,6 +72,8 @@ namespace strange {
 
     
 
+      virtual inline const std :: string & to_string__ ( ) const
+      { return value_.to_string__( ); }
       virtual inline symbol_ add ( thing_ range ) const
       { return value_.add(range ); }
       virtual inline symbol_ add_ ( symbol_ symbol ) const

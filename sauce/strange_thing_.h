@@ -94,7 +94,7 @@ namespace strange {
      { assert(handle_); return read().hash(_ ); }
      inline thing_ hash_ ( ) const
      { assert(handle_); return read().hash_( ); }
-     inline size_t hash__ ( ) const
+     inline std :: size_t hash__ ( ) const
      { assert(handle_); return read().hash__( ); }
      inline thing_ nothing ( thing_ _ ) const
      { assert(handle_); return read().nothing(_ ); }
@@ -216,7 +216,7 @@ namespace strange {
       virtual inline bool operator != ( thing_ thing ) const = 0;
       virtual inline thing_ hash ( thing_ _ ) const = 0;
       virtual inline thing_ hash_ ( ) const = 0;
-      virtual inline size_t hash__ ( ) const = 0;
+      virtual inline std :: size_t hash__ ( ) const = 0;
       virtual inline thing_ nothing ( thing_ _ ) const = 0;
       virtual inline thing_ nothing_ ( ) const = 0;
       virtual inline bool nothing__ ( ) const = 0;
@@ -345,7 +345,7 @@ namespace strange {
       { return value_.hash(_ ); }
       virtual inline thing_ hash_ ( ) const
       { return value_.hash_( ); }
-      virtual inline size_t hash__ ( ) const
+      virtual inline std :: size_t hash__ ( ) const
       { return value_.hash__( ); }
       virtual inline thing_ nothing ( thing_ _ ) const
       { return value_.nothing(_ ); }

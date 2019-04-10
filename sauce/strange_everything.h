@@ -32,9 +32,9 @@ public: ___THING___
 		return !thing.everything__();
 	}
 
-	inline size_t hash__() const
+	inline std::size_t hash__() const
 	{
-		static const size_t HASH = std::hash<int64_t>{}(1);
+		static const std::size_t HASH = std::hash<int64_t>{}(1);
 		return HASH;
 	}
 
