@@ -4,19 +4,19 @@
 namespace strange
 {
 
-template <typename THING_>
+template <typename CAT>
 class Thing : public One
 {
 public:
 	// erasure
-	inline const THING_ me_() const
+	inline const CAT me_() const
 	{
-		return THING_(_meek.lock(), true);
+		return CAT(_meek.lock(), true);
 	}
 
-	inline THING_ me_()
+	inline CAT me_()
 	{
-		return THING_(_meek.lock(), true);
+		return CAT(_meek.lock(), true);
 	}
 
 	// identification

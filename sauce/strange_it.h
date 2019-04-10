@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <bool CONST = false, typename THING_ = thing_, typename END = Nothing<>>
-class It : public Something<THING_>
+template <bool CONST = false, typename CAT = thing_, typename END = Nothing<>>
+class It : public Something<CAT>
 {
 public: ___THING___
 	// construction
@@ -21,7 +21,7 @@ public: ___THING___
 
 	static inline thing_ val_(thing_ thing = END::val())
 	{
-		return thing_{ It<CONST, THING_, END>{ thing } };
+		return thing_{ It<CONST, CAT, END>{ thing } };
 	}
 
 	static inline thing_ ref(thing_ range)
@@ -36,7 +36,7 @@ public: ___THING___
 
 	static inline thing_ ref_(thing_ thing = END::val())
 	{
-		return thing_(It<CONST, THING_, END>{ thing }, true);
+		return thing_(It<CONST, CAT, END>{ thing }, true);
 	}
 
 	// comparison
