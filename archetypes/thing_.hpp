@@ -17,6 +17,34 @@ public:
 	inline thing_ val(thing_ range) const;
 	inline thing_ ref(thing_ range) const;
 
+	// reflection
+
+//	symbol_ inline thing_ type(thing_ _) const;
+//	symbol_ inline thing_ type_() const;
+
+//	cat_ inline thing_ cat(thing_ _) const;
+//	cat_ inline thing_ cat_() const;
+
+//	herd_<cat_> inline thing_ cats(thing_ _) const;
+//	herd_<cat_> inline thing_ cats_() const;
+
+//	void inline thing_ share(thing_ range) const;
+	
+//	shoal_<symbol_, thing_> inline thing_ shared(thing_ _) const;
+
+//	shoal_<symbol_, thing_> inline thing_ pub(thing_ _) const;
+
+//	shoal_<symbol_, thing_> inline thing_ creator_() const;
+
+//	flock_<symbol_> inline thing_ eater(thing_ _) const;
+//	flock_<symbol_> inline thing_ eater_() const; // return range of parameter names
+
+//	flock_<thing_> inline thing_ feeder(thing_ eater) const; // return range of parameter values
+
+	// serialization
+
+//	inline thing_ visit(thing_ range); // used for serialization
+
 	// function
 	inline thing_ extract(thing_ range) const;
 	inline thing_ operator()(thing_ range) const;
