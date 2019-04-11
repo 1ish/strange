@@ -14,8 +14,21 @@ class cat_
 {
 public:
 	// cat
-	inline thing_ valid(thing_ thing) const;
-	inline bool valid_(thing_ thing) const;
+	inline thing_ conform(thing_ range) const;
+	inline thing_ conform_(thing_ thing, thing_ cat_or_herd) const;
+	inline bool conform__(thing_ thing, thing_ cat_or_herd) const;
+
+	inline thing_ name(thing_ _) const;
+	inline symbol_ name_() const;
+
+	inline thing_ arguments(thing_ _) const;
+	inline thing_ arguments_() const;
+
+	inline thing_ parameters(thing_ _) const;
+	inline thing_ parameters_() const;
+
+	inline thing_ result(thing_ _) const;
+	inline cat_ result_() const;
 };
 
 } // namespace strange

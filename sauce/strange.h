@@ -12,5 +12,6 @@
 #include "strange_nothing.h"
 #include "strange_it.h"
 #include "strange_symbol.h"
+#include "strange_cat.h"
 
 #endif

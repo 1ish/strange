@@ -24,8 +24,6 @@ TEST(TestCaseName, ForLoop) {
 
 	e = n;
 
-	cat_ c;
-
 	Nothing<>::ref().set_(Everything<>::ref());
 
 	EXPECT_TRUE(Nothing<>::ref().nothing__());
@@ -35,6 +33,8 @@ TEST(TestCaseName, ForLoop) {
 	EXPECT_EQ(s.to_string__(), "strange");
 	EXPECT_FALSE(e.is__("strange"));
 	EXPECT_TRUE(s.is__("strange"));
+
+	cat_ c = Cat<>::val_();
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

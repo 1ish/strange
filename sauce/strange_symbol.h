@@ -11,12 +11,12 @@ public: ___THING___
 	// construction
 	static inline symbol_ val(thing_ range)
 	{
-		const auto it = range.beget_();
-		if (it == range.enget_())
+		thing_ it = range.cbegin();
+		if (it == range.cend())
 		{
 			return val_();
 		}
-		return val_(it.get_());
+		return val_(*it);
 	}
 
 	static inline symbol_ val_(thing_ thing = Nothing<>::val())
@@ -32,12 +32,12 @@ public: ___THING___
 
 	static inline symbol_ ref(thing_ range)
 	{
-		const auto it = range.beget_();
-		if (it == range.enget_())
+		thing_ it = range.cbegin();
+		if (it == range.cend())
 		{
 			return ref_();
 		}
-		return ref_(it.get_());
+		return ref_(*it);
 	}
 
 	static inline symbol_ ref_(thing_ thing = Nothing<>::val())

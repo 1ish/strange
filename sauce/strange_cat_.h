@@ -22,10 +22,28 @@ namespace strange {
 
     public:
 
-     inline thing_ valid ( thing_ thing ) const
-     { assert(handle_); return read().valid(thing ); }
-     inline bool valid_ ( thing_ thing ) const
-     { assert(handle_); return read().valid_(thing ); }
+     inline thing_ conform ( thing_ range ) const
+     { assert(handle_); return read().conform(range ); }
+     inline thing_ conform_ ( thing_ thing , thing_ cat_or_herd ) const
+     { assert(handle_); return read().conform_(thing, cat_or_herd ); }
+     inline bool conform__ ( thing_ thing , thing_ cat_or_herd ) const
+     { assert(handle_); return read().conform__(thing, cat_or_herd ); }
+     inline thing_ name ( thing_ _ ) const
+     { assert(handle_); return read().name(_ ); }
+     inline symbol_ name_ ( ) const
+     { assert(handle_); return read().name_( ); }
+     inline thing_ arguments ( thing_ _ ) const
+     { assert(handle_); return read().arguments(_ ); }
+     inline thing_ arguments_ ( ) const
+     { assert(handle_); return read().arguments_( ); }
+     inline thing_ parameters ( thing_ _ ) const
+     { assert(handle_); return read().parameters(_ ); }
+     inline thing_ parameters_ ( ) const
+     { assert(handle_); return read().parameters_( ); }
+     inline thing_ result ( thing_ _ ) const
+     { assert(handle_); return read().result(_ ); }
+     inline cat_ result_ ( ) const
+     { assert(handle_); return read().result_( ); }
     
 
     private:
@@ -34,8 +52,17 @@ namespace strange {
 
     	{
 
-      virtual inline thing_ valid ( thing_ thing ) const = 0;
-      virtual inline bool valid_ ( thing_ thing ) const = 0;
+      virtual inline thing_ conform ( thing_ range ) const = 0;
+      virtual inline thing_ conform_ ( thing_ thing , thing_ cat_or_herd ) const = 0;
+      virtual inline bool conform__ ( thing_ thing , thing_ cat_or_herd ) const = 0;
+      virtual inline thing_ name ( thing_ _ ) const = 0;
+      virtual inline symbol_ name_ ( ) const = 0;
+      virtual inline thing_ arguments ( thing_ _ ) const = 0;
+      virtual inline thing_ arguments_ ( ) const = 0;
+      virtual inline thing_ parameters ( thing_ _ ) const = 0;
+      virtual inline thing_ parameters_ ( ) const = 0;
+      virtual inline thing_ result ( thing_ _ ) const = 0;
+      virtual inline cat_ result_ ( ) const = 0;
     	};
 
     
@@ -76,10 +103,28 @@ namespace strange {
 
     
 
-      virtual inline thing_ valid ( thing_ thing ) const
-      { return value_.valid(thing ); }
-      virtual inline bool valid_ ( thing_ thing ) const
-      { return value_.valid_(thing ); }
+      virtual inline thing_ conform ( thing_ range ) const
+      { return value_.conform(range ); }
+      virtual inline thing_ conform_ ( thing_ thing , thing_ cat_or_herd ) const
+      { return value_.conform_(thing, cat_or_herd ); }
+      virtual inline bool conform__ ( thing_ thing , thing_ cat_or_herd ) const
+      { return value_.conform__(thing, cat_or_herd ); }
+      virtual inline thing_ name ( thing_ _ ) const
+      { return value_.name(_ ); }
+      virtual inline symbol_ name_ ( ) const
+      { return value_.name_( ); }
+      virtual inline thing_ arguments ( thing_ _ ) const
+      { return value_.arguments(_ ); }
+      virtual inline thing_ arguments_ ( ) const
+      { return value_.arguments_( ); }
+      virtual inline thing_ parameters ( thing_ _ ) const
+      { return value_.parameters(_ ); }
+      virtual inline thing_ parameters_ ( ) const
+      { return value_.parameters_( ); }
+      virtual inline thing_ result ( thing_ _ ) const
+      { return value_.result(_ ); }
+      virtual inline cat_ result_ ( ) const
+      { return value_.result_( ); }
     	};
 
     
