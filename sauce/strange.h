@@ -13,5 +13,7 @@
 #include "strange_it.h"
 #include "strange_symbol.h"
 #include "strange_cat.h"
+#include "strange_variadic.h"
+#include "strange_native_function.h"
 
 #endif

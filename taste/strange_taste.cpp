@@ -9,6 +9,11 @@ TEST(TestCaseName, TestName) {
   EXPECT_TRUE(true);
 }
 
+thing_ fun(thing_ x)
+{
+	return Nothing<>::val();
+}
+
 TEST(TestCaseName, ForLoop) {
 	thing_ n{ Nothing<>::ref() };
 
@@ -35,6 +40,8 @@ TEST(TestCaseName, ForLoop) {
 	EXPECT_TRUE(s.is__("strange"));
 
 	cat_ c = Cat<>::val_();
+
+	thing_ f = NativeFunction<>::val__(fun, "x", "y", "z");
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

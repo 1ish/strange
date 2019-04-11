@@ -1319,7 +1319,7 @@ protected:
 
 private:
 	const function _function;
-	std::vector<Ptr> _params;
+	const std::vector<Ptr> _params;
 };
 
 template <typename T>
