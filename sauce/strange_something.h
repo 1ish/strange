@@ -9,12 +9,12 @@ class Something : public Thing<CAT>
 {
 public:
 	// function
-	inline thing_ operator()(thing_ range) const
+	inline thing_ operator()(const void* identity, thing_ range) const
 	{
 		return Everything<>::ref(); //TODO
 	}
 
-	inline thing_ operator()(thing_ range)
+	inline thing_ operator()(void* identity, thing_ range)
 	{
 		return Everything<>::ref(); //TODO
 	}

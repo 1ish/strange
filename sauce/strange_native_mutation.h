@@ -1,13 +1,13 @@
-#ifndef COM_ONEISH_STRANGE_NATIVE_FUNCTION_H
-#define COM_ONEISH_STRANGE_NATIVE_FUNCTION_H
+#ifndef COM_ONEISH_STRANGE_NATIVE_MUTATION_H
+#define COM_ONEISH_STRANGE_NATIVE_MUTATION_H
 
 namespace strange
 {
 
-template <typename CAT = thing_>
-class NativeFunction : public Thing<CAT>
+template <typename T, typename CAT = thing_>
+class NativeMutation : public Thing<CAT>
 {
-	using function = thing_(*)(thing_);
+	using member = thing_(T::*)(thing_);
 
 public: ___THING___
 	// construction
@@ -18,12 +18,12 @@ public: ___THING___
 	}
 
 	template <typename... Args>
-	static inline thing_ val__(const function fun, Args&&... args)
+	static inline thing_ val__(const member fun, Args&&... args)
 	{
 		std::vector<symbol_> v;
 		v.reserve(sizeof...(Args));
 		Variadic<symbol_>::variadic_(v, std::forward<Args>(args)...);
-		return thing_{ NativeFunction(fun, std::move(v)) };
+		return thing_{ NativeMutation(fun, std::move(v)) };
 	}
 
 	static inline thing_ ref(thing_ _)
@@ -33,31 +33,31 @@ public: ___THING___
 	}
 
 	template <typename... Args>
-	static inline thing_ ref__(const function fun, Args&&... args)
+	static inline thing_ ref__(const member fun, Args&&... args)
 	{
 		std::vector<symbol_> v;
 		v.reserve(sizeof...(Args));
 		Variadic<symbol_>::variadic_(v, std::forward<Args>(args)...);
-		return thing_(NativeFunction(fun, std::move(v)), true);
+		return thing_(NativeMutation(fun, std::move(v)), true);
 	}
 
 	// function
 	inline thing_ operator()(const void* identity, thing_ range) const
 	{
-		return _function(range);
+		return (static_cast<T*>(const_cast<void*>(identity))->*_function)(range); //TODO allowed?
 	}
 
 	inline thing_ operator()(void* identity, thing_ range)
 	{
-		return _function(range);
+		return (static_cast<T*>(identity)->*_function)(range);
 	}
 
 protected:
-	const function _function;
+	const member _function;
 	const std::vector<symbol_> _params;
 
 	template <typename F>
-	inline NativeFunction(const function fun, F&& params)
+	inline NativeMutation(const member fun, F&& params)
 		: Thing{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }

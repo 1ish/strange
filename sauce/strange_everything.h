@@ -9,13 +9,13 @@ class Everything : public Something<CAT>
 {
 public: ___THING___
 	// construction
-	static inline thing_& val(thing_ _ = thing_{})
+	static inline thing_ val(thing_ _ = thing_{})
 	{
 		static thing_ VAL = thing_{ Everything<>{} };
 		return VAL;
 	}
 
-	static inline thing_& ref(thing_ _ = thing_{})
+	static inline thing_ ref(thing_ _ = thing_{})
 	{
 		static thing_ REF = thing_(Everything<>{}, true);
 		return REF;

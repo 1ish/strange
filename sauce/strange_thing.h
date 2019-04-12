@@ -123,11 +123,11 @@ protected:
 #define ___THING___ \
 inline thing_ extract(thing_ range) const \
 { \
-	return operator()(range); \
+	return operator()(this, range); \
 } \
 inline thing_ mutate(thing_ range) \
 { \
-	return operator()(range); \
+	return operator()(this, range); \
 } \
 inline thing_ same(thing_ range) const \
 { \

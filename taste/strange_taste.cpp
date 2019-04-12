@@ -4,7 +4,8 @@
 
 using namespace strange;
 
-TEST(TestCaseName, TestName) {
+TEST(TestCaseName, TestName)
+{
   EXPECT_EQ(1, 1);
   EXPECT_TRUE(true);
 }
@@ -14,7 +15,8 @@ thing_ fun(thing_ x)
 	return Nothing<>::val();
 }
 
-TEST(TestCaseName, ForLoop) {
+TEST(TestCaseName, ForLoop)
+{
 	thing_ n{ Nothing<>::ref() };
 
 	for (auto v : n)
@@ -29,7 +31,7 @@ TEST(TestCaseName, ForLoop) {
 
 	e = n;
 
-	Nothing<>::ref().set_(Everything<>::ref());
+//	Nothing<>::ref().set_(Everything<>::ref());
 
 	EXPECT_TRUE(Nothing<>::ref().nothing__());
 
@@ -42,6 +44,8 @@ TEST(TestCaseName, ForLoop) {
 	cat_ c = Cat<>::val_();
 
 	thing_ f = NativeFunction<>::val__(fun, "x", "y", "z");
+	thing_ g = NativeFunction<>::val__(&Nothing<>::val, "x", "y", "z");
+	thing_ h = NativeMutation<Nothing<>>::val__(&Nothing<>::beset);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

@@ -7,6 +7,8 @@
 
 #include "strange_one.h"
 #include "strange_thing.h"
+#include "strange_native_function.h"
+#include "strange_native_mutation.h"
 #include "strange_something.h"
 #include "strange_everything.h"
 #include "strange_nothing.h"
@@ -14,6 +16,5 @@
 #include "strange_symbol.h"
 #include "strange_cat.h"
 #include "strange_variadic.h"
-#include "strange_native_function.h"
 
 #endif
