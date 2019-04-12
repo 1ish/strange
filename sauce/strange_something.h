@@ -14,7 +14,7 @@ public:
 		return Everything<>::val_(); //TODO
 	}
 
-	inline thing_ operator()(void* identity, thing_ range)
+	inline thing_ operator()(void* identity, thing_ range) const
 	{
 		return Everything<>::val_(); //TODO
 	}

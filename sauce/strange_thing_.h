@@ -68,8 +68,8 @@ namespace strange {
      { assert(handle_); return read().operator()(identity, range ); }
      inline thing_ mutate ( thing_ range )
      { assert(handle_); return write().mutate(range ); }
-     inline thing_ operator ( ) ( void * identity , thing_ range )
-     { assert(handle_); return write().operator()(identity, range ); }
+     inline thing_ operator ( ) ( void * identity , thing_ range ) const
+     { assert(handle_); return read().operator()(identity, range ); }
      inline const void * identity__ ( ) const
      { assert(handle_); return read().identity__( ); }
      inline thing_ identical ( thing_ range ) const
@@ -205,7 +205,7 @@ namespace strange {
       virtual inline thing_ extract ( thing_ range ) const = 0;
       virtual inline thing_ operator ( ) ( const void * identity , thing_ range ) const = 0;
       virtual inline thing_ mutate ( thing_ range ) = 0;
-      virtual inline thing_ operator ( ) ( void * identity , thing_ range ) = 0;
+      virtual inline thing_ operator ( ) ( void * identity , thing_ range ) const = 0;
       virtual inline const void * identity__ ( ) const = 0;
       virtual inline thing_ identical ( thing_ range ) const = 0;
       virtual inline thing_ identical_ ( thing_ thing ) const = 0;
@@ -322,7 +322,7 @@ namespace strange {
       { return value_.operator()(identity, range ); }
       virtual inline thing_ mutate ( thing_ range )
       { return value_.mutate(range ); }
-      virtual inline thing_ operator ( ) ( void * identity , thing_ range )
+      virtual inline thing_ operator ( ) ( void * identity , thing_ range ) const
       { return value_.operator()(identity, range ); }
       virtual inline const void * identity__ ( ) const
       { return value_.identity__( ); }

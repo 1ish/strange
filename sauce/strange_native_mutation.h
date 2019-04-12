@@ -13,7 +13,7 @@ public: ___THING___
 	// construction
 	static inline thing_ val(thing_ _)
 	{
-		assert(false);
+		assert(false); //TODO
 		return Nothing<>::val_();
 	}
 
@@ -28,7 +28,7 @@ public: ___THING___
 
 	static inline thing_ ref(thing_ _)
 	{
-		assert(false);
+		assert(false); //TODO
 		return Nothing<>::val_();
 	}
 
@@ -44,10 +44,11 @@ public: ___THING___
 	// function
 	inline thing_ operator()(const void* identity, thing_ range) const
 	{
-		return (static_cast<T*>(const_cast<void*>(identity))->*_function)(range); //TODO allowed?
+		assert(false); //TODO
+		return (static_cast<T*>(const_cast<void*>(identity))->*_function)(range);
 	}
 
-	inline thing_ operator()(void* identity, thing_ range)
+	inline thing_ operator()(void* identity, thing_ range) const
 	{
 		return (static_cast<T*>(identity)->*_function)(range);
 	}

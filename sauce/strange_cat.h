@@ -43,9 +43,9 @@ public: ___THING___
 	static inline thing_ conform(thing_ range)
 	{
 		thing_ it = range.cbegin();
-		assert(it != range.cend());
+		assert(it != range.cend()); //TODO
 		thing_ thing = *it;
-		assert(++it != range.cend());
+		assert(++it != range.cend()); //TODO
 		thing_ cat_or_herd = *it;
 		return conform_(thing, cat_or_herd);
 	}

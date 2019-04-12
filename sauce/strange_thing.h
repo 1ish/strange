@@ -23,7 +23,7 @@ public:
 	inline thing_ identical(thing_ range) const
 	{
 		thing_ it = range.cbegin();
-		assert(it != range.cend()); //TODO throw
+		assert(it != range.cend()); //TODO
 		return identical_(*it);
 	}
 
@@ -132,7 +132,7 @@ inline thing_ mutate(thing_ range) \
 inline thing_ same(thing_ range) const \
 { \
 	thing_ it = range.cbegin(); \
-	assert(it != range.cend()); \
+	assert(it != range.cend()); /* //TODO */ \
 	return same_(*it); \
 } \
 inline thing_ same_(thing_ thing) const \
@@ -142,7 +142,7 @@ inline thing_ same_(thing_ thing) const \
 inline thing_ different(thing_ range) const \
 { \
 	thing_ it = range.cbegin(); \
-	assert(it != range.cend()); \
+	assert(it != range.cend()); /* //TODO */ \
 	return different_(*it); \
 } \
 inline thing_ different_(thing_ thing) const \
@@ -200,7 +200,7 @@ inline thing_ get_() const \
 inline thing_ set(thing_ range) const \
 { \
 	thing_ it = range.cbegin(); \
-	assert(it != range.cend()); \
+	assert(it != range.cend()); /* //TODO */ \
 	return set_(*it); \
 } \
 inline thing_ set_(thing_ thing) const \
