@@ -12,18 +12,18 @@ TEST(TestCaseName, TestName)
 
 thing_ fun(thing_ x)
 {
-	return Nothing<>::val();
+	return Nothing<>::val_();
 }
 
 TEST(TestCaseName, ForLoop)
 {
-	thing_ n{ Nothing<>::ref() };
+	thing_ n{ Nothing<>::val_() };
 
 	for (auto v : n)
 	{
 	}
 
-	thing_ e{ Everything<>::ref() };
+	thing_ e{ Everything<>::val_() };
 
 	for (auto v : e)
 	{
@@ -33,7 +33,7 @@ TEST(TestCaseName, ForLoop)
 
 //	Nothing<>::ref().set_(Everything<>::ref());
 
-	EXPECT_TRUE(Nothing<>::ref().nothing__());
+	EXPECT_TRUE(Nothing<>::ref_().nothing__());
 
 	symbol_ s = sym__("strange");
 

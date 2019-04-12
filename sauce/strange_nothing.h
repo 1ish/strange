@@ -9,13 +9,33 @@ class Nothing : public Something<CAT>
 {
 public: ___THING___
 	// construction
-	static inline thing_ val(thing_ _ = thing_{})
+	static inline thing_ val(thing_ _)
+	{
+		return val_();
+	}
+
+	static inline thing_ val_()
+	{
+		return val__();
+	}
+
+	static inline thing_& val__()
 	{
 		static thing_ VAL = thing_{ Nothing<>{} };
 		return VAL;
 	}
 
-	static inline thing_ ref(thing_ _ = thing_{})
+	static inline thing_ ref(thing_ _)
+	{
+		return ref_();
+	}
+
+	static inline thing_ ref_()
+	{
+		return ref__();
+	}
+
+	static inline thing_& ref__()
 	{
 		static thing_ REF = thing_(Nothing<>{}, true);
 		return REF;
@@ -51,7 +71,7 @@ public: ___THING___
 
 	inline thing_ nothing_() const
 	{
-		return Everything<>::ref();
+		return Everything<>::val_();
 	}
 
 	inline bool nothing__() const
@@ -66,7 +86,7 @@ public: ___THING___
 
 	inline thing_ anything_() const
 	{
-		return Nothing<>::ref();
+		return Nothing<>::val_();
 	}
 
 	inline bool anything__() const
@@ -77,28 +97,28 @@ public: ___THING___
 	// range
 	inline thing_ cbegin() const
 	{
-		return It<true, thing_, Everything<>>::val_(Nothing<>::ref());
+		return It<true, thing_, Everything<>>::val_(Nothing<>::val_());
 	}
 
 	inline thing_ begin()
 	{
-		return It<false, thing_, Everything<>>::val_(Nothing<>::ref());
+		return It<false, thing_, Everything<>>::val_(Nothing<>::val_());
 	}
 
 	inline thing_ cend() const
 	{
-		return Everything<>::ref();
+		return Everything<>::val_();
 	}
 
 	inline thing_ end()
 	{
-		return Everything<>::ref();
+		return Everything<>::val_();
 	}
 
 	// iterator
 	inline thing_& operator*() const
 	{
-		return Nothing<>::val();
+		return Nothing<>::val__();
 	}
 
 	inline Nothing& operator++()

@@ -19,7 +19,7 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline symbol_ val_(thing_ thing = Nothing<>::val())
+	static inline symbol_ val_(thing_ thing = Nothing<>::val_())
 	{
 		return val__("");
 	}
@@ -40,7 +40,7 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline symbol_ ref_(thing_ thing = Nothing<>::val())
+	static inline symbol_ ref_(thing_ thing = Nothing<>::val_())
 	{
 		return ref__("");
 	}

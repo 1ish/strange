@@ -19,7 +19,7 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline cat_ val_(thing_ thing = Nothing<>::val())
+	static inline cat_ val_(thing_ thing = Nothing<>::val_())
 	{
 		return cat_{ Cat{} };
 	}
@@ -34,7 +34,7 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline cat_ ref_(thing_ thing = Nothing<>::val())
+	static inline cat_ ref_(thing_ thing = Nothing<>::val_())
 	{
 		return cat_(Cat{}, true);
 	}
@@ -109,9 +109,9 @@ protected:
 	inline Cat()
 		: Symbol{ _symbol_() }
 		, _name{ sym__("") }
-		, _arguments{ Nothing<>::val() }
-		, _parameters{ Nothing<>::val() }
-		, _result{ Nothing<>::val() }
+		, _arguments{ Nothing<>::val_() }
+		, _parameters{ Nothing<>::val_() }
+		, _result{ Nothing<>::val_() }
 	{}
 
 	static inline const std::string _symbol_()

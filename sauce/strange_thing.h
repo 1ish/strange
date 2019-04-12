@@ -40,7 +40,7 @@ public:
 
 	inline thing_ nothing_() const
 	{
-		return Nothing<>::ref();
+		return Nothing<>::val_();
 	}
 
 	inline thing_ anything(thing_) const
@@ -50,7 +50,7 @@ public:
 
 	inline thing_ anything_() const
 	{
-		return Everything<>::ref();
+		return Everything<>::val_();
 	}
 
 	inline thing_ something(thing_) const
@@ -60,7 +60,7 @@ public:
 
 	inline thing_ something_() const
 	{
-		return Nothing<>::ref();
+		return Nothing<>::val_();
 	}
 
 	inline thing_ everything(thing_) const
@@ -70,7 +70,7 @@ public:
 
 	inline thing_ everything_() const
 	{
-		return Nothing<>::ref();
+		return Nothing<>::val_();
 	}
 
 	// range
@@ -86,18 +86,18 @@ public:
 
 	inline thing_ cend() const
 	{
-		return Nothing<>::ref();
+		return Nothing<>::val_();
 	}
 
 	inline thing_ end()
 	{
-		return Nothing<>::ref();
+		return Nothing<>::val_();
 	}
 
 	// iterator
 	inline thing_& operator*() const
 	{
-		return Nothing<>::val();
+		return Nothing<>::val__();
 	}
 
 	inline void operator++()
@@ -115,7 +115,7 @@ protected:
 	// conversion
 	static inline thing_ _boole_(bool b)
 	{
-		return b ? Everything<>::ref() : Nothing<>::ref();
+		return b ? Everything<>::val_() : Nothing<>::val_();
 	}
 };
 
@@ -155,7 +155,7 @@ inline thing_ hash(thing_) const \
 } \
 inline thing_ hash_() const \
 { \
-	return Everything<>::ref(); /* //TODO */ \
+	return Everything<>::val_(); /* //TODO */ \
 } \
 inline thing_ beget(thing_) const \
 { \

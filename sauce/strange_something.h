@@ -11,12 +11,12 @@ public:
 	// function
 	inline thing_ operator()(const void* identity, thing_ range) const
 	{
-		return Everything<>::ref(); //TODO
+		return Everything<>::val_(); //TODO
 	}
 
 	inline thing_ operator()(void* identity, thing_ range)
 	{
-		return Everything<>::ref(); //TODO
+		return Everything<>::val_(); //TODO
 	}
 
 	// comparison
@@ -27,7 +27,7 @@ public:
 
 	inline thing_ something_() const
 	{
-		return Everything<>::ref();
+		return Everything<>::val_();
 	}
 
 	inline bool something__() const

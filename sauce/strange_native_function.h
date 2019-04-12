@@ -14,7 +14,7 @@ public: ___THING___
 	static inline thing_ val(thing_ _)
 	{
 		assert(false);
-		return Nothing<>::val();
+		return Nothing<>::val_();
 	}
 
 	template <typename... Args>
@@ -29,7 +29,7 @@ public: ___THING___
 	static inline thing_ ref(thing_ _)
 	{
 		assert(false);
-		return Nothing<>::val();
+		return Nothing<>::val_();
 	}
 
 	template <typename... Args>

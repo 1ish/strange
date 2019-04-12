@@ -9,19 +9,39 @@ class Everything : public Something<CAT>
 {
 public: ___THING___
 	// construction
-	static inline thing_ val(thing_ _ = thing_{})
-	{
-		static thing_ VAL = thing_{ Everything<>{} };
-		return VAL;
-	}
+	static inline thing_ val(thing_ _)
+{
+	return val_();
+}
 
-	static inline thing_ ref(thing_ _ = thing_{})
-	{
-		static thing_ REF = thing_(Everything<>{}, true);
-		return REF;
-	}
+		static inline thing_ val_()
+		{
+			return val__();
+		}
 
-	// comparison
+		static inline thing_& val__()
+		{
+			static thing_ VAL = thing_{ Everything<>{} };
+			return VAL;
+		}
+
+		static inline thing_ ref(thing_ _)
+		{
+			return ref_();
+		}
+
+		static inline thing_ ref_()
+		{
+			return ref__();
+		}
+
+		static inline thing_& ref__()
+		{
+			static thing_ REF = thing_(Everything<>{}, true);
+			return REF;
+		}
+
+		// comparison
 	inline bool operator==(thing_ thing) const
 	{
 		return thing.everything__();
@@ -45,7 +65,7 @@ public: ___THING___
 
 	inline thing_ everything_() const
 	{
-		return Everything<>::ref();
+		return Everything<>::val_();
 	}
 
 	inline bool everything__() const
@@ -56,7 +76,7 @@ public: ___THING___
 	// iterator
 	inline thing_& operator*() const
 	{
-		return Everything<>::val();
+		return Everything<>::val__();
 	}
 
 	inline Everything& operator++()
