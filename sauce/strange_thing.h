@@ -19,6 +19,38 @@ public:
 		return CAT(_meek.lock(), true);
 	}
 
+	// function
+	inline thing_ invoke(thing_ range) const
+	{
+		//TODO
+		// member = range.1st;
+		// return invoke_(member, range.2nd...);
+		return Nothing<>::val_();
+	}
+
+	inline thing_ invoke_(thing_ member, thing_ range) const
+	{
+		//TODO
+		// thing = me_();
+		// operation = thing.operations_().at(member);
+		// return operate_(thing, operation, range);
+		return Nothing<>::val_();
+	}
+
+	static inline thing_ operate(thing_ range)
+	{
+		//TODO
+		// thing = range.1st;
+		// operation = range.2nd;
+		// return operate_(thing, operation, range.3rd...);
+		return Nothing<>::val_();
+	}
+
+	static inline thing_ operate_(thing_ thing, thing_ operation, thing_ range)
+	{
+		return operation.operator()(thing, range);
+	}
+
 	// identification
 	inline thing_ identical(thing_ range) const
 	{
@@ -121,14 +153,6 @@ protected:
 
 // adaptation
 #define ___THING___ \
-inline thing_ extract(thing_ range) const \
-{ \
-	return operator()(this, range); \
-} \
-inline thing_ mutate(thing_ range) \
-{ \
-	return operator()(this, range); \
-} \
 inline thing_ same(thing_ range) const \
 { \
 	thing_ it = range.cbegin(); \

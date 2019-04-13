@@ -42,15 +42,9 @@ public: ___THING___
 	}
 
 	// function
-	inline thing_ operator()(const void* identity, thing_ range) const
+	inline thing_ operator()(thing_ thing, thing_ range) const
 	{
-		assert(false); //TODO
-		return (static_cast<T*>(const_cast<void*>(identity))->*_function)(range);
-	}
-
-	inline thing_ operator()(void* identity, thing_ range) const
-	{
-		return (static_cast<T*>(identity)->*_function)(range);
+		return (cast_<T>(thing).*_function)(range);
 	}
 
 protected:

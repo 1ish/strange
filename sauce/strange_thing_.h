@@ -62,14 +62,16 @@ namespace strange {
      { assert(handle_); return read().val(range ); }
      inline thing_ ref ( thing_ range ) const
      { assert(handle_); return read().ref(range ); }
-     inline thing_ extract ( thing_ range ) const
-     { assert(handle_); return read().extract(range ); }
-     inline thing_ operator ( ) ( const void * identity , thing_ range ) const
-     { assert(handle_); return read().operator()(identity, range ); }
-     inline thing_ mutate ( thing_ range )
-     { assert(handle_); return write().mutate(range ); }
-     inline thing_ operator ( ) ( void * identity , thing_ range ) const
-     { assert(handle_); return read().operator()(identity, range ); }
+     inline thing_ invoke ( thing_ range ) const
+     { assert(handle_); return read().invoke(range ); }
+     inline thing_ invoke_ ( thing_ member , thing_ range ) const
+     { assert(handle_); return read().invoke_(member, range ); }
+     inline thing_ operate ( thing_ range ) const
+     { assert(handle_); return read().operate(range ); }
+     inline thing_ operate_ ( thing_ thing , thing_ operation , thing_ range ) const
+     { assert(handle_); return read().operate_(thing, operation, range ); }
+     inline thing_ operator ( ) ( thing_ thing , thing_ range ) const
+     { assert(handle_); return read().operator()(thing, range ); }
      inline const void * identity__ ( ) const
      { assert(handle_); return read().identity__( ); }
      inline thing_ identical ( thing_ range ) const
@@ -202,10 +204,11 @@ namespace strange {
 
       virtual inline thing_ val ( thing_ range ) const = 0;
       virtual inline thing_ ref ( thing_ range ) const = 0;
-      virtual inline thing_ extract ( thing_ range ) const = 0;
-      virtual inline thing_ operator ( ) ( const void * identity , thing_ range ) const = 0;
-      virtual inline thing_ mutate ( thing_ range ) = 0;
-      virtual inline thing_ operator ( ) ( void * identity , thing_ range ) const = 0;
+      virtual inline thing_ invoke ( thing_ range ) const = 0;
+      virtual inline thing_ invoke_ ( thing_ member , thing_ range ) const = 0;
+      virtual inline thing_ operate ( thing_ range ) const = 0;
+      virtual inline thing_ operate_ ( thing_ thing , thing_ operation , thing_ range ) const = 0;
+      virtual inline thing_ operator ( ) ( thing_ thing , thing_ range ) const = 0;
       virtual inline const void * identity__ ( ) const = 0;
       virtual inline thing_ identical ( thing_ range ) const = 0;
       virtual inline thing_ identical_ ( thing_ thing ) const = 0;
@@ -316,14 +319,16 @@ namespace strange {
       { return value_.val(range ); }
       virtual inline thing_ ref ( thing_ range ) const
       { return value_.ref(range ); }
-      virtual inline thing_ extract ( thing_ range ) const
-      { return value_.extract(range ); }
-      virtual inline thing_ operator ( ) ( const void * identity , thing_ range ) const
-      { return value_.operator()(identity, range ); }
-      virtual inline thing_ mutate ( thing_ range )
-      { return value_.mutate(range ); }
-      virtual inline thing_ operator ( ) ( void * identity , thing_ range ) const
-      { return value_.operator()(identity, range ); }
+      virtual inline thing_ invoke ( thing_ range ) const
+      { return value_.invoke(range ); }
+      virtual inline thing_ invoke_ ( thing_ member , thing_ range ) const
+      { return value_.invoke_(member, range ); }
+      virtual inline thing_ operate ( thing_ range ) const
+      { return value_.operate(range ); }
+      virtual inline thing_ operate_ ( thing_ thing , thing_ operation , thing_ range ) const
+      { return value_.operate_(thing, operation, range ); }
+      virtual inline thing_ operator ( ) ( thing_ thing , thing_ range ) const
+      { return value_.operator()(thing, range ); }
       virtual inline const void * identity__ ( ) const
       { return value_.identity__( ); }
       virtual inline thing_ identical ( thing_ range ) const

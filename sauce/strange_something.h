@@ -9,14 +9,12 @@ class Something : public Thing<CAT>
 {
 public:
 	// function
-	inline thing_ operator()(const void* identity, thing_ range) const
+	inline thing_ operator()(thing_ thing, thing_ range) const
 	{
-		return Everything<>::val_(); //TODO
-	}
-
-	inline thing_ operator()(void* identity, thing_ range) const
-	{
-		return Everything<>::val_(); //TODO
+		//TODO
+		// operation = thing.operations_().at(range.1st);
+		// return operate_(thing, operation, range.2nd...);
+		return Nothing<>::val_();
 	}
 
 	// comparison

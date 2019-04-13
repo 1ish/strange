@@ -14,7 +14,7 @@ class cat_
 {
 public:
 	// cat
-	inline thing_ conform(thing_ range) const;
+	inline thing_ conform(thing_ range) const; //TODO add member version
 	inline thing_ conform_(thing_ thing, thing_ cat_or_herd) const;
 	inline bool conform__(thing_ thing, thing_ cat_or_herd) const;
 

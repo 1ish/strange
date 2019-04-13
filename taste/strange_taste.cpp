@@ -45,7 +45,7 @@ TEST(TestCaseName, ForLoop)
 
 	thing_ f = NativeFunction<>::val__(fun, "x", "y", "z");
 	thing_ g = NativeFunction<>::val__(&Nothing<>::val, "x", "y", "z");
-	thing_ h = NativeMutation<Nothing<>>::val__(&Nothing<>::beset);
+	thing_ h = NativeMutation<thing_>::val__(&thing_::beset);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

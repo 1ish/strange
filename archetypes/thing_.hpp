@@ -32,9 +32,8 @@ public:
 	
 //	shoal_<symbol_, thing_> inline thing_ shared(thing_ _) const;
 
-//	shoal_<symbol_, thing_> inline thing_ pub(thing_ _) const;
-
-//	shoal_<symbol_, thing_> inline thing_ creator_() const;
+//  shoal_<symbol_, thing_> inline thing_ operations(thing_ _) const;
+//  shoal_<symbol_, thing_> inline thing_ operations_() const;
 
 //	flock_<symbol_> inline thing_ eater(thing_ _) const;
 //	flock_<symbol_> inline thing_ eater_() const; // return range of parameter names
@@ -46,11 +45,11 @@ public:
 //	inline thing_ visit(thing_ range); // used for serialization
 
 	// function
-	inline thing_ extract(thing_ range) const;
-	inline thing_ operator()(const void* identity, thing_ range) const;
-
-	inline thing_ mutate(thing_ range);
-	inline thing_ operator()(void* identity, thing_ range) const;
+	inline thing_ invoke(thing_ range) const;
+	inline thing_ invoke_(thing_ member, thing_ range) const;
+	inline thing_ operate(thing_ range) const;
+	inline thing_ operate_(thing_ thing, thing_ operation, thing_ range) const;
+	inline thing_ operator()(thing_ thing, thing_ range) const;
 
 	// identification
 	inline const void* identity__() const;
