@@ -8,6 +8,7 @@
 #include "strange_one.h"
 #include "strange_thing.h"
 #include "strange_native_function.h"
+#include "strange_native_extraction.h"
 #include "strange_native_mutation.h"
 #include "strange_something.h"
 #include "strange_everything.h"
