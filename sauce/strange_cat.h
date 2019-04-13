@@ -40,26 +40,6 @@ public: ___THING___
 	}
 
 	// cat
-	static inline thing_ conform(thing_ range)
-	{
-		thing_ it = range.cbegin();
-		assert(it != range.cend()); //TODO
-		thing_ thing = *it;
-		assert(++it != range.cend()); //TODO
-		thing_ cat_or_herd = *it;
-		return conform_(thing, cat_or_herd);
-	}
-
-	static inline thing_ conform_(thing_ thing, thing_ cat_or_herd)
-	{
-		return _boole_(conform__(thing, cat_or_herd));
-	}
-
-	static inline bool conform__(thing_ thing, thing_ cat_or_herd)
-	{
-		return false;
-	}
-
 	inline thing_ name(thing_ _) const
 	{
 		return name_();
@@ -98,6 +78,53 @@ public: ___THING___
 	inline cat_ result_() const
 	{
 		return check_<cat_>(_result) ? cast_<cat_>(_result) : val_();
+	}
+
+	inline thing_ includes(thing_ range) const
+	{
+		thing_ it = range.cbegin();
+		assert(it != range.cend()); //TODO
+		return includes_(*it);
+	}
+
+	inline thing_ includes_(thing_ thing) const
+	{
+		return _boole_(includes__(thing));
+	}
+
+	inline bool includes__(thing_ thing) const
+	{
+		return false;
+	}
+
+	static inline thing_ conforms(thing_ range)
+	{
+		thing_ it = range.cbegin();
+		assert(it != range.cend()); //TODO
+		thing_ thing = *it;
+		assert(++it != range.cend()); //TODO
+		thing_ cat_or_herd = *it;
+		return conforms_(thing, cat_or_herd);
+	}
+
+	static inline thing_ conforms_(thing_ thing, thing_ cat_or_herd)
+	{
+		return _boole_(conforms__(thing, cat_or_herd));
+	}
+
+	static inline bool conforms__(thing_ thing, thing_ cat_or_herd)
+	{
+		if (check_<cat_>(cat_or_herd))
+		{
+			return cast_<cat_>(cat_or_herd).includes_(thing);
+		}
+		/*
+		if (check_<herd_>(cat_or_herd))
+		{
+			//TODO call includes_ for each cat in the herd
+		}
+		*/
+		return false;
 	}
 
 protected:

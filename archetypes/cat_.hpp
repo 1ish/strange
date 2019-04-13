@@ -14,10 +14,6 @@ class cat_
 {
 public:
 	// cat
-	inline thing_ conform(thing_ range) const; //TODO add member version
-	inline thing_ conform_(thing_ thing, thing_ cat_or_herd) const;
-	inline bool conform__(thing_ thing, thing_ cat_or_herd) const;
-
 	inline thing_ name(thing_ _) const;
 	inline symbol_ name_() const;
 
@@ -29,6 +25,14 @@ public:
 
 	inline thing_ result(thing_ _) const;
 	inline cat_ result_() const;
+
+	inline thing_ includes(thing_ range) const;
+	inline thing_ includes_(thing_ thing) const;
+	inline bool includes__(thing_ thing) const;
+
+	inline thing_ conforms(thing_ range) const;
+	inline thing_ conforms_(thing_ thing, thing_ cat_or_herd) const;
+	inline bool conforms__(thing_ thing, thing_ cat_or_herd) const;
 };
 
 } // namespace strange
