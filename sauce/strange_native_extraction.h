@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename T, typename CAT = thing_>
-class NativeExtraction : public Thing<CAT>
+template <typename T, typename CAT_ = thing_>
+class NativeExtraction : public Thing<CAT_>
 {
 	using member = thing_(T::*)(thing_) const;
 
@@ -44,7 +44,8 @@ public: ___THING___
 	// reflection
 	static inline symbol_ type_()
 	{
-		return sym__("strange::NativeExtraction");
+		static symbol_ TYPE = sym__("strange::NativeExtraction");
+		return TYPE;
 	}
 
 	// function

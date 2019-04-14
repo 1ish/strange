@@ -198,6 +198,16 @@ namespace strange {
 
     public:
 
+    	static inline const char* ___struct_name___()
+
+    	{
+
+    		return "symbol_";
+
+    	}
+
+    
+
     	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& handle)
 
     	{

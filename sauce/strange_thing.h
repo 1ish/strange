@@ -4,19 +4,19 @@
 namespace strange
 {
 
-template <typename CAT>
+template <typename CAT_>
 class Thing : public One
 {
 public:
 	// erasure
-	inline const CAT me_() const
+	inline const CAT_ me_() const
 	{
-		return CAT(_meek.lock(), true);
+		return CAT_(_meek.lock(), true);
 	}
 
-	inline CAT me_()
+	inline CAT_ me_()
 	{
-		return CAT(_meek.lock(), true);
+		return CAT_(_meek.lock(), true);
 	}
 
 	// function
@@ -155,9 +155,18 @@ protected:
 
 // adaptation
 #define ___THING___ \
-static inline symbol_ type(thing_ _) \
+inline symbol_ type(thing_ _) const \
 { \
 	return type_(); \
+} \
+inline cat_ category(thing_ _) const \
+{ \
+	return category_(); \
+} \
+static inline cat_ category_() \
+{ \
+	static cat_ CATEGORY = Cat<>::val_(sym__(std::string("strange") + CAT_::___struct_name___())); \
+	return CATEGORY; \
 } \
 inline thing_ same(thing_ range) const \
 { \

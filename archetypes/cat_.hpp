@@ -14,7 +14,7 @@ class cat_
 {
 public:
 	// cat
-	inline thing_ name(thing_ _) const;
+	inline symbol_ name(thing_ _) const;
 	inline symbol_ name_() const;
 
 	inline thing_ arguments(thing_ _) const;
@@ -23,7 +23,7 @@ public:
 	inline thing_ parameters(thing_ _) const;
 	inline thing_ parameters_() const;
 
-	inline thing_ result(thing_ _) const;
+	inline cat_ result(thing_ _) const;
 	inline cat_ result_() const;
 
 	inline thing_ includes(thing_ range) const;

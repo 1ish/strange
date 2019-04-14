@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename CAT = thing_>
-class NativeFunction : public Thing<CAT>
+template <typename CAT_ = thing_>
+class NativeFunction : public Thing<CAT_>
 {
 	using function = thing_(*)(thing_);
 
@@ -44,7 +44,8 @@ public: ___THING___
 	// reflection
 	static inline symbol_ type_()
 	{
-		return sym__("strange::NativeFunction");
+		static symbol_ TYPE = sym__("strange::NativeFunction");
+		return TYPE;
 	}
 
 	// function

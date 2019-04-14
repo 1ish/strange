@@ -22,7 +22,7 @@ namespace strange {
 
     public:
 
-     inline thing_ name ( thing_ _ ) const
+     inline symbol_ name ( thing_ _ ) const
      { assert(handle_); return read().name(_ ); }
      inline symbol_ name_ ( ) const
      { assert(handle_); return read().name_( ); }
@@ -34,7 +34,7 @@ namespace strange {
      { assert(handle_); return read().parameters(_ ); }
      inline thing_ parameters_ ( ) const
      { assert(handle_); return read().parameters_( ); }
-     inline thing_ result ( thing_ _ ) const
+     inline cat_ result ( thing_ _ ) const
      { assert(handle_); return read().result(_ ); }
      inline cat_ result_ ( ) const
      { assert(handle_); return read().result_( ); }
@@ -58,13 +58,13 @@ namespace strange {
 
     	{
 
-      virtual inline thing_ name ( thing_ _ ) const = 0;
+      virtual inline symbol_ name ( thing_ _ ) const = 0;
       virtual inline symbol_ name_ ( ) const = 0;
       virtual inline thing_ arguments ( thing_ _ ) const = 0;
       virtual inline thing_ arguments_ ( ) const = 0;
       virtual inline thing_ parameters ( thing_ _ ) const = 0;
       virtual inline thing_ parameters_ ( ) const = 0;
-      virtual inline thing_ result ( thing_ _ ) const = 0;
+      virtual inline cat_ result ( thing_ _ ) const = 0;
       virtual inline cat_ result_ ( ) const = 0;
       virtual inline thing_ includes ( thing_ range ) const = 0;
       virtual inline thing_ includes_ ( thing_ thing ) const = 0;
@@ -112,7 +112,7 @@ namespace strange {
 
     
 
-      virtual inline thing_ name ( thing_ _ ) const
+      virtual inline symbol_ name ( thing_ _ ) const
       { return value_.name(_ ); }
       virtual inline symbol_ name_ ( ) const
       { return value_.name_( ); }
@@ -124,7 +124,7 @@ namespace strange {
       { return value_.parameters(_ ); }
       virtual inline thing_ parameters_ ( ) const
       { return value_.parameters_( ); }
-      virtual inline thing_ result ( thing_ _ ) const
+      virtual inline cat_ result ( thing_ _ ) const
       { return value_.result(_ ); }
       virtual inline cat_ result_ ( ) const
       { return value_.result_( ); }
@@ -199,6 +199,16 @@ namespace strange {
     
 
     public:
+
+    	static inline const char* ___struct_name___()
+
+    	{
+
+    		return "cat_";
+
+    	}
+
+    
 
     	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& handle)
 

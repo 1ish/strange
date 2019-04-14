@@ -143,6 +143,11 @@ private:
 public:
 	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
 
+	static inline const char* ___struct_name___()
+	{
+		return "%struct_name%";
+	}
+
 	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>&)
 	{
 		return true;

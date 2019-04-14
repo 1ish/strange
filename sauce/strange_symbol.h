@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename CAT = symbol_>
-class Symbol : public Something<CAT>
+template <typename CAT_ = symbol_>
+class Symbol : public Something<CAT_>
 {
 public: ___THING___
 	// construction
@@ -54,7 +54,8 @@ public: ___THING___
 	// reflection
 	static inline symbol_ type_()
 	{
-		return sym__("strange::Symbol");
+		static symbol_ TYPE = sym__("strange::Symbol");
+		return TYPE;
 	}
 
 	// comparison

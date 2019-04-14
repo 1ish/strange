@@ -66,6 +66,10 @@ namespace strange {
      { assert(handle_); return read().type(_ ); }
      inline thing_ type_ ( ) const
      { assert(handle_); return read().type_( ); }
+     inline thing_ category ( thing_ _ ) const
+     { assert(handle_); return read().category(_ ); }
+     inline thing_ category_ ( ) const
+     { assert(handle_); return read().category_( ); }
      inline thing_ invoke ( thing_ range ) const
      { assert(handle_); return read().invoke(range ); }
      inline thing_ invoke_ ( thing_ member , thing_ range ) const
@@ -210,6 +214,8 @@ namespace strange {
       virtual inline thing_ ref ( thing_ range ) const = 0;
       virtual inline thing_ type ( thing_ _ ) const = 0;
       virtual inline thing_ type_ ( ) const = 0;
+      virtual inline thing_ category ( thing_ _ ) const = 0;
+      virtual inline thing_ category_ ( ) const = 0;
       virtual inline thing_ invoke ( thing_ range ) const = 0;
       virtual inline thing_ invoke_ ( thing_ member , thing_ range ) const = 0;
       virtual inline thing_ operate ( thing_ range ) const = 0;
@@ -329,6 +335,10 @@ namespace strange {
       { return value_.type(_ ); }
       virtual inline thing_ type_ ( ) const
       { return value_.type_( ); }
+      virtual inline thing_ category ( thing_ _ ) const
+      { return value_.category(_ ); }
+      virtual inline thing_ category_ ( ) const
+      { return value_.category_( ); }
       virtual inline thing_ invoke ( thing_ range ) const
       { return value_.invoke(range ); }
       virtual inline thing_ invoke_ ( thing_ member , thing_ range ) const
@@ -568,6 +578,16 @@ namespace strange {
     public:
 
     	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
+
+    
+
+    	static inline const char* ___struct_name___()
+
+    	{
+
+    		return "thing_";
+
+    	}
 
     
 

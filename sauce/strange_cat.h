@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename CAT = cat_>
-class Cat : public Symbol<CAT>
+template <typename CAT_ = cat_>
+class Cat : public Symbol<CAT_>
 {
 public: ___THING___
 	// construction
@@ -42,11 +42,12 @@ public: ___THING___
 	// reflection
 	static inline symbol_ type_()
 	{
-		return sym__("strange::Cat");
+		static symbol_ TYPE = sym__("strange::Cat");
+		return TYPE;
 	}
 
 	// cat
-	inline thing_ name(thing_ _) const
+	inline symbol_ name(thing_ _) const
 	{
 		return name_();
 	}
@@ -76,7 +77,7 @@ public: ___THING___
 		return _parameters;
 	}
 
-	inline thing_ result(thing_ _) const
+	inline cat_ result(thing_ _) const
 	{
 		return result_();
 	}

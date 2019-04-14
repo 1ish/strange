@@ -60,6 +60,11 @@ private:
 	friend inline bool check_(const %struct_name%& value);
 
 public:
+	static inline const char* ___struct_name___()
+	{
+		return "%struct_name%";
+	}
+
 	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& handle)
 	{
 		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(handle));

@@ -21,8 +21,8 @@ public:
 	inline thing_ type(thing_ _) const;
 	inline thing_ type_() const;
 
-//	cat_ inline thing_ cat(thing_ _) const;
-//	cat_ inline thing_ cat_() const;
+	inline thing_ category(thing_ _) const;
+	inline thing_ category_() const;
 
 //	herd_<cat_> inline thing_ cats(thing_ _) const;
 //	herd_<cat_> inline thing_ cats_() const;
