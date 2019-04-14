@@ -70,6 +70,14 @@ namespace strange {
      { assert(handle_); return read().category(_ ); }
      inline thing_ category_ ( ) const
      { assert(handle_); return read().category_( ); }
+     inline thing_ eater ( thing_ _ ) const
+     { assert(handle_); return read().eater(_ ); }
+     inline thing_ eater_ ( ) const
+     { assert(handle_); return read().eater_( ); }
+     inline thing_ feeder ( thing_ range ) const
+     { assert(handle_); return read().feeder(range ); }
+     inline thing_ visit ( thing_ range )
+     { assert(handle_); return write().visit(range ); }
      inline thing_ invoke ( thing_ range ) const
      { assert(handle_); return read().invoke(range ); }
      inline thing_ invoke_ ( thing_ member , thing_ range ) const
@@ -216,6 +224,10 @@ namespace strange {
       virtual inline thing_ type_ ( ) const = 0;
       virtual inline thing_ category ( thing_ _ ) const = 0;
       virtual inline thing_ category_ ( ) const = 0;
+      virtual inline thing_ eater ( thing_ _ ) const = 0;
+      virtual inline thing_ eater_ ( ) const = 0;
+      virtual inline thing_ feeder ( thing_ range ) const = 0;
+      virtual inline thing_ visit ( thing_ range ) = 0;
       virtual inline thing_ invoke ( thing_ range ) const = 0;
       virtual inline thing_ invoke_ ( thing_ member , thing_ range ) const = 0;
       virtual inline thing_ operate ( thing_ range ) const = 0;
@@ -339,6 +351,14 @@ namespace strange {
       { return value_.category(_ ); }
       virtual inline thing_ category_ ( ) const
       { return value_.category_( ); }
+      virtual inline thing_ eater ( thing_ _ ) const
+      { return value_.eater(_ ); }
+      virtual inline thing_ eater_ ( ) const
+      { return value_.eater_( ); }
+      virtual inline thing_ feeder ( thing_ range ) const
+      { return value_.feeder(range ); }
+      virtual inline thing_ visit ( thing_ range )
+      { return value_.visit(range ); }
       virtual inline thing_ invoke ( thing_ range ) const
       { return value_.invoke(range ); }
       virtual inline thing_ invoke_ ( thing_ member , thing_ range ) const

@@ -34,14 +34,13 @@ public:
 //  shoal_<symbol_, thing_> inline thing_ operations(thing_ _) const;
 //  shoal_<symbol_, thing_> inline thing_ operations_() const;
 
-//	flock_<symbol_> inline thing_ eater(thing_ _) const;
-//	flock_<symbol_> inline thing_ eater_() const; // return range of parameter names
+	inline thing_ eater(thing_ _) const;
+	inline thing_ eater_() const; // return range of parameter names
 
-//	flock_<thing_> inline thing_ feeder(thing_ eater) const; // return range of parameter values
+	inline thing_ feeder(thing_ range) const; // return range of parameter values
 
-	// serialization
-
-//	inline thing_ visit(thing_ range); // used for serialization
+	// visitor pattern
+	inline thing_ visit(thing_ range);
 
 	// function
 	inline thing_ invoke(thing_ range) const;

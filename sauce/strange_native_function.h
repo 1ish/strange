@@ -48,6 +48,11 @@ public: ___THING___
 		return TYPE;
 	}
 
+	inline thing_ eater_() const
+	{
+		return Nothing<>::val_(); //TODO return range of parameter names
+	}
+
 	// function
 	inline thing_ operator()(thing_ _, thing_ range) const
 	{

@@ -26,6 +26,25 @@ public:
 		return CATEGORY;
 	}
 
+	static inline thing_ eater_()
+	{
+		return Nothing<>::val_();
+	}
+
+	static inline thing_ feeder(thing_ range)
+	{
+		return Nothing<>::val_();
+	}
+
+	// visitor pattern
+	static inline thing_ visit(thing_ range)
+	{
+		thing_ it = range.cbegin();
+		assert(it != range.cend()); //TODO
+		thing_ visitor = *it;
+		return visitor->invoke(Range<>::val_(++it, range.cend())); //TODO me_() must already be in range
+	}
+
 	// function
 	inline thing_ invoke(thing_ range) const
 	{
@@ -169,6 +188,10 @@ inline symbol_ type(thing_ _) const \
 inline cat_ category(thing_ _) const \
 { \
 	return category_(); \
+} \
+inline thing_ eater(thing_ _) const \
+{ \
+	return eater_(); \
 } \
 inline thing_ same(thing_ range) const \
 { \
