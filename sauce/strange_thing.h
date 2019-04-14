@@ -19,6 +19,13 @@ public:
 		return CAT_(_meek.lock(), true);
 	}
 
+	// reflection
+	static inline cat_ category_()
+	{
+		static cat_ CATEGORY = Cat<>::val_(sym__(std::string("strange") + CAT_::___struct_name___()));
+		return CATEGORY;
+	}
+
 	// function
 	inline thing_ invoke(thing_ range) const
 	{
@@ -162,11 +169,6 @@ inline symbol_ type(thing_ _) const \
 inline cat_ category(thing_ _) const \
 { \
 	return category_(); \
-} \
-static inline cat_ category_() \
-{ \
-	static cat_ CATEGORY = Cat<>::val_(sym__(std::string("strange") + CAT_::___struct_name___())); \
-	return CATEGORY; \
 } \
 inline thing_ same(thing_ range) const \
 { \
