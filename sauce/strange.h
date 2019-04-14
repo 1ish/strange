@@ -17,5 +17,6 @@
 #include "strange_symbol.h"
 #include "strange_cat.h"
 #include "strange_variadic.h"
+#include "strange_range.h"
 
 #endif
