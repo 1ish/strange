@@ -39,6 +39,12 @@ public: ___THING___
 		return cat_(Cat{}, true);
 	}
 
+	// reflection
+	static inline symbol_ type_()
+	{
+		return sym__("strange::Cat");
+	}
+
 	// cat
 	inline thing_ name(thing_ _) const
 	{

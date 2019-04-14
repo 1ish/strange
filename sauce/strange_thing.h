@@ -155,6 +155,10 @@ protected:
 
 // adaptation
 #define ___THING___ \
+static inline symbol_ type(thing_ _) \
+{ \
+	return type_(); \
+} \
 inline thing_ same(thing_ range) const \
 { \
 	thing_ it = range.cbegin(); \

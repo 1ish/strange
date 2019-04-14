@@ -41,6 +41,12 @@ public: ___THING___
 		return thing_(NativeFunction(fun, std::move(v)), true);
 	}
 
+	// reflection
+	static inline symbol_ type_()
+	{
+		return sym__("strange::NativeFunction");
+	}
+
 	// function
 	inline thing_ operator()(thing_ _, thing_ range) const
 	{

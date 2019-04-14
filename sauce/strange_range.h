@@ -39,6 +39,12 @@ public: ___THING___
 		return thing_(Range(begin, end), true);
 	}
 
+	// reflection
+	static inline symbol_ type_()
+	{
+		return sym__("strange::Range");
+	}
+
 	// range
 	inline thing_ cbegin() const
 	{

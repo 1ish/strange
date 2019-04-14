@@ -47,6 +47,12 @@ public: ___THING___
 		return anything__();
 	}
 
+	// reflection
+	static inline symbol_ type_()
+	{
+		return sym__("strange::Nothing");
+	}
+
 	// comparison
 	inline bool operator==(thing_ thing) const
 	{

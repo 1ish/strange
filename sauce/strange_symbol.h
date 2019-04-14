@@ -51,6 +51,12 @@ public: ___THING___
 		return symbol_(Symbol{ std::forward<F>(s) }, true);
 	}
 
+	// reflection
+	static inline symbol_ type_()
+	{
+		return sym__("strange::Symbol");
+	}
+
 	// comparison
 	inline bool operator==(thing_ thing) const
 	{

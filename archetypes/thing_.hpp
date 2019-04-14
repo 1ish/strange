@@ -18,9 +18,8 @@ public:
 	inline thing_ ref(thing_ range) const;
 
 	// reflection
-
-//	symbol_ inline thing_ type(thing_ _) const;
-//	symbol_ inline thing_ type_() const;
+	inline thing_ type(thing_ _) const;
+	inline thing_ type_() const;
 
 //	cat_ inline thing_ cat(thing_ _) const;
 //	cat_ inline thing_ cat_() const;

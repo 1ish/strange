@@ -39,6 +39,12 @@ public: ___THING___
 		return thing_(It<CONST, CAT, END>{ thing }, true);
 	}
 
+	// reflection
+	static inline symbol_ type_()
+	{
+		return sym__("strange::It");
+	}
+
 	// comparison
 	inline bool operator==(thing_ thing) const
 	{
