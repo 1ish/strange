@@ -22,10 +22,10 @@ public:
 	// function
 	inline thing_ invoke(thing_ range) const
 	{
-		//TODO
-		// member = range.1st;
-		// return invoke_(member, range.2nd...);
-		return Nothing<>::val_();
+		thing_ it = range.cbegin();
+		assert(it != range.cend()); //TODO
+		thing_ member = *it;
+		return invoke_(member, Range<>::val_(++it, range.cend()));
 	}
 
 	inline thing_ invoke_(thing_ member, thing_ range) const
@@ -39,11 +39,13 @@ public:
 
 	static inline thing_ operate(thing_ range)
 	{
-		//TODO
-		// thing = range.1st;
-		// operation = range.2nd;
-		// return operate_(thing, operation, range.3rd...);
-		return Nothing<>::val_();
+		thing_ it = range.cbegin();
+		assert(it != range.cend()); //TODO
+		thing_ thing = *it;
+		++it;
+		assert(it != range.cend()); //TODO
+		thing_ operation = *it;
+		return operate_(thing, operation, Range<>::val_(++it, range.cend()));
 	}
 
 	static inline thing_ operate_(thing_ thing, thing_ operation, thing_ range)
