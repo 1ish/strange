@@ -49,6 +49,21 @@ public: ___THING___
 	}
 
 	// comparison
+	static inline thing_ everything(thing_)
+	{
+		return everything_();
+	}
+
+	static inline thing_ everything_()
+	{
+		return Everything<>::val_();
+	}
+
+	static inline bool everything__()
+	{
+		return true;
+	}
+
 	inline bool operator==(thing_ thing) const
 	{
 		return thing.everything__();
@@ -63,21 +78,6 @@ public: ___THING___
 	{
 		static const std::size_t HASH = std::hash<int64_t>{}(1);
 		return HASH;
-	}
-
-	inline thing_ everything(thing_) const
-	{
-		return everything_();
-	}
-
-	inline thing_ everything_() const
-	{
-		return Everything<>::val_();
-	}
-
-	inline bool everything__() const
-	{
-		return true;
 	}
 
 	// iterator

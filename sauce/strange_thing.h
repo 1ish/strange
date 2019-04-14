@@ -93,42 +93,42 @@ public:
 	}
 
 	// comparison
-	inline thing_ nothing(thing_) const
+	static inline thing_ nothing(thing_)
 	{
 		return nothing_();
 	}
 
-	inline thing_ nothing_() const
+	static inline thing_ nothing_()
 	{
 		return Nothing<>::val_();
 	}
 
-	inline thing_ anything(thing_) const
+	static inline thing_ anything(thing_)
 	{
 		return anything_();
 	}
 
-	inline thing_ anything_() const
+	static inline thing_ anything_()
 	{
 		return Everything<>::val_();
 	}
 
-	inline thing_ something(thing_) const
+	static inline thing_ something(thing_)
 	{
 		return something_();
 	}
 
-	inline thing_ something_() const
+	static inline thing_ something_()
 	{
 		return Nothing<>::val_();
 	}
 
-	inline thing_ everything(thing_) const
+	static inline thing_ everything(thing_)
 	{
 		return everything_();
 	}
 
-	inline thing_ everything_() const
+	static inline thing_ everything_()
 	{
 		return Nothing<>::val_();
 	}

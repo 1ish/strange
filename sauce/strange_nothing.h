@@ -55,6 +55,36 @@ public: ___THING___
 	}
 
 	// comparison
+	static inline thing_ nothing(thing_)
+	{
+		return nothing_();
+	}
+
+	static inline thing_ nothing_()
+	{
+		return Everything<>::val_();
+	}
+
+	static inline bool nothing__()
+	{
+		return true;
+	}
+
+	static inline thing_ anything(thing_)
+	{
+		return anything_();
+	}
+
+	static inline thing_ anything_()
+	{
+		return Nothing<>::val_();
+	}
+
+	static inline bool anything__()
+	{
+		return false;
+	}
+
 	inline bool operator==(thing_ thing) const
 	{
 		return thing.nothing__();
@@ -69,36 +99,6 @@ public: ___THING___
 	{
 		static const std::size_t HASH = std::hash<int64_t>{}(0);
 		return HASH;
-	}
-
-	inline thing_ nothing(thing_) const
-	{
-		return nothing_();
-	}
-
-	inline thing_ nothing_() const
-	{
-		return Everything<>::val_();
-	}
-
-	inline bool nothing__() const
-	{
-		return true;
-	}
-
-	inline thing_ anything(thing_) const
-	{
-		return anything_();
-	}
-
-	inline thing_ anything_() const
-	{
-		return Nothing<>::val_();
-	}
-
-	inline bool anything__() const
-	{
-		return false;
 	}
 
 	// range

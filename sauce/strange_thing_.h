@@ -96,24 +96,6 @@ namespace strange {
      { assert(handle_); return read().identical_(thing ); }
      inline bool identical__ ( thing_ thing ) const
      { assert(handle_); return read().identical__(thing ); }
-     inline thing_ same ( thing_ range ) const
-     { assert(handle_); return read().same(range ); }
-     inline thing_ same_ ( thing_ thing ) const
-     { assert(handle_); return read().same_(thing ); }
-     inline bool operator == ( thing_ thing ) const
-     { assert(handle_); return read().operator==(thing ); }
-     inline thing_ different ( thing_ range ) const
-     { assert(handle_); return read().different(range ); }
-     inline thing_ different_ ( thing_ thing ) const
-     { assert(handle_); return read().different_(thing ); }
-     inline bool operator != ( thing_ thing ) const
-     { assert(handle_); return read().operator!=(thing ); }
-     inline thing_ hash ( thing_ _ ) const
-     { assert(handle_); return read().hash(_ ); }
-     inline thing_ hash_ ( ) const
-     { assert(handle_); return read().hash_( ); }
-     inline std :: size_t hash__ ( ) const
-     { assert(handle_); return read().hash__( ); }
      inline thing_ nothing ( thing_ _ ) const
      { assert(handle_); return read().nothing(_ ); }
      inline thing_ nothing_ ( ) const
@@ -138,6 +120,24 @@ namespace strange {
      { assert(handle_); return read().everything_( ); }
      inline bool everything__ ( ) const
      { assert(handle_); return read().everything__( ); }
+     inline thing_ same ( thing_ range ) const
+     { assert(handle_); return read().same(range ); }
+     inline thing_ same_ ( thing_ thing ) const
+     { assert(handle_); return read().same_(thing ); }
+     inline bool operator == ( thing_ thing ) const
+     { assert(handle_); return read().operator==(thing ); }
+     inline thing_ different ( thing_ range ) const
+     { assert(handle_); return read().different(range ); }
+     inline thing_ different_ ( thing_ thing ) const
+     { assert(handle_); return read().different_(thing ); }
+     inline bool operator != ( thing_ thing ) const
+     { assert(handle_); return read().operator!=(thing ); }
+     inline thing_ hash ( thing_ _ ) const
+     { assert(handle_); return read().hash(_ ); }
+     inline thing_ hash_ ( ) const
+     { assert(handle_); return read().hash_( ); }
+     inline std :: size_t hash__ ( ) const
+     { assert(handle_); return read().hash__( ); }
      inline bool is__ ( const std :: string & s ) const
      { assert(handle_); return read().is__(s ); }
      inline thing_ beget ( thing_ _ ) const
@@ -237,15 +237,6 @@ namespace strange {
       virtual inline thing_ identical ( thing_ range ) const = 0;
       virtual inline thing_ identical_ ( thing_ thing ) const = 0;
       virtual inline bool identical__ ( thing_ thing ) const = 0;
-      virtual inline thing_ same ( thing_ range ) const = 0;
-      virtual inline thing_ same_ ( thing_ thing ) const = 0;
-      virtual inline bool operator == ( thing_ thing ) const = 0;
-      virtual inline thing_ different ( thing_ range ) const = 0;
-      virtual inline thing_ different_ ( thing_ thing ) const = 0;
-      virtual inline bool operator != ( thing_ thing ) const = 0;
-      virtual inline thing_ hash ( thing_ _ ) const = 0;
-      virtual inline thing_ hash_ ( ) const = 0;
-      virtual inline std :: size_t hash__ ( ) const = 0;
       virtual inline thing_ nothing ( thing_ _ ) const = 0;
       virtual inline thing_ nothing_ ( ) const = 0;
       virtual inline bool nothing__ ( ) const = 0;
@@ -258,6 +249,15 @@ namespace strange {
       virtual inline thing_ everything ( thing_ _ ) const = 0;
       virtual inline thing_ everything_ ( ) const = 0;
       virtual inline bool everything__ ( ) const = 0;
+      virtual inline thing_ same ( thing_ range ) const = 0;
+      virtual inline thing_ same_ ( thing_ thing ) const = 0;
+      virtual inline bool operator == ( thing_ thing ) const = 0;
+      virtual inline thing_ different ( thing_ range ) const = 0;
+      virtual inline thing_ different_ ( thing_ thing ) const = 0;
+      virtual inline bool operator != ( thing_ thing ) const = 0;
+      virtual inline thing_ hash ( thing_ _ ) const = 0;
+      virtual inline thing_ hash_ ( ) const = 0;
+      virtual inline std :: size_t hash__ ( ) const = 0;
       virtual inline bool is__ ( const std :: string & s ) const = 0;
       virtual inline thing_ beget ( thing_ _ ) const = 0;
       virtual inline thing_ beget_ ( ) const = 0;
@@ -377,24 +377,6 @@ namespace strange {
       { return value_.identical_(thing ); }
       virtual inline bool identical__ ( thing_ thing ) const
       { return value_.identical__(thing ); }
-      virtual inline thing_ same ( thing_ range ) const
-      { return value_.same(range ); }
-      virtual inline thing_ same_ ( thing_ thing ) const
-      { return value_.same_(thing ); }
-      virtual inline bool operator == ( thing_ thing ) const
-      { return value_.operator==(thing ); }
-      virtual inline thing_ different ( thing_ range ) const
-      { return value_.different(range ); }
-      virtual inline thing_ different_ ( thing_ thing ) const
-      { return value_.different_(thing ); }
-      virtual inline bool operator != ( thing_ thing ) const
-      { return value_.operator!=(thing ); }
-      virtual inline thing_ hash ( thing_ _ ) const
-      { return value_.hash(_ ); }
-      virtual inline thing_ hash_ ( ) const
-      { return value_.hash_( ); }
-      virtual inline std :: size_t hash__ ( ) const
-      { return value_.hash__( ); }
       virtual inline thing_ nothing ( thing_ _ ) const
       { return value_.nothing(_ ); }
       virtual inline thing_ nothing_ ( ) const
@@ -419,6 +401,24 @@ namespace strange {
       { return value_.everything_( ); }
       virtual inline bool everything__ ( ) const
       { return value_.everything__( ); }
+      virtual inline thing_ same ( thing_ range ) const
+      { return value_.same(range ); }
+      virtual inline thing_ same_ ( thing_ thing ) const
+      { return value_.same_(thing ); }
+      virtual inline bool operator == ( thing_ thing ) const
+      { return value_.operator==(thing ); }
+      virtual inline thing_ different ( thing_ range ) const
+      { return value_.different(range ); }
+      virtual inline thing_ different_ ( thing_ thing ) const
+      { return value_.different_(thing ); }
+      virtual inline bool operator != ( thing_ thing ) const
+      { return value_.operator!=(thing ); }
+      virtual inline thing_ hash ( thing_ _ ) const
+      { return value_.hash(_ ); }
+      virtual inline thing_ hash_ ( ) const
+      { return value_.hash_( ); }
+      virtual inline std :: size_t hash__ ( ) const
+      { return value_.hash__( ); }
       virtual inline bool is__ ( const std :: string & s ) const
       { return value_.is__(s ); }
       virtual inline thing_ beget ( thing_ _ ) const

@@ -18,17 +18,17 @@ public:
 	}
 
 	// comparison
-	inline thing_ something(thing_) const
+	static inline thing_ something(thing_)
 	{
 		return something_();
 	}
 
-	inline thing_ something_() const
+	static inline thing_ something_()
 	{
 		return Everything<>::val_();
 	}
 
-	inline bool something__() const
+	static inline bool something__()
 	{
 		return true;
 	}

@@ -31,6 +31,26 @@ public:
 	}
 
 	// comparison
+	static inline bool nothing__()
+	{
+		return false;
+	}
+
+	static inline bool anything__()
+	{
+		return true;
+	}
+
+	static inline bool something__()
+	{
+		return false;
+	}
+
+	static inline bool everything__()
+	{
+		return false;
+	}
+
 	inline bool operator==(thing_ thing) const
 	{
 		return identical__(thing);
@@ -46,27 +66,7 @@ public:
 		return std::hash<const void*>{}(identity__());
 	}
 
-	inline bool nothing__() const
-	{
-		return false;
-	}
-
-	inline bool anything__() const
-	{
-		return true;
-	}
-
-	inline bool something__() const
-	{
-		return false;
-	}
-
-	inline bool everything__() const
-	{
-		return false;
-	}
-
-	inline bool is__(const std::string& s) const
+	static inline bool is__(const std::string& s)
 	{
 		return false;
 	}

@@ -57,18 +57,6 @@ public:
 	inline bool identical__(thing_ thing) const;
 
 	// comparison
-	inline thing_ same(thing_ range) const;
-	inline thing_ same_(thing_ thing) const;
-	inline bool operator==(thing_ thing) const;
-
-	inline thing_ different(thing_ range) const;
-	inline thing_ different_(thing_ thing) const;
-	inline bool operator!=(thing_ thing) const;
-
-	inline thing_ hash(thing_ _) const;
-	inline thing_ hash_() const;
-	inline std::size_t hash__() const;
-
 	inline thing_ nothing(thing_ _) const;
 	inline thing_ nothing_() const;
 	inline bool nothing__() const;
@@ -84,6 +72,18 @@ public:
 	inline thing_ everything(thing_ _) const;
 	inline thing_ everything_() const;
 	inline bool everything__() const;
+
+	inline thing_ same(thing_ range) const;
+	inline thing_ same_(thing_ thing) const;
+	inline bool operator==(thing_ thing) const;
+
+	inline thing_ different(thing_ range) const;
+	inline thing_ different_(thing_ thing) const;
+	inline bool operator!=(thing_ thing) const;
+
+	inline thing_ hash(thing_ _) const;
+	inline thing_ hash_() const;
+	inline std::size_t hash__() const;
 
 	inline bool is__(const std::string& s) const;
 
