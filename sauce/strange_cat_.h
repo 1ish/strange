@@ -262,7 +262,7 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_, ___TTT___>::value>>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_, std::decay_t<___TTT___>>::value>>
 
     	explicit inline cat_(___TTT___ value, bool reference = false)
 
@@ -292,7 +292,7 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_, ___TTT___>::value>>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_, std::decay_t<___TTT___>>::value>>
 
     	inline cat_& operator=(___TTT___ value)
 

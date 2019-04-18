@@ -745,7 +745,7 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<thing_, ___TTT___>::value>>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<thing_, std::decay_t<___TTT___>>::value>>
 
     	explicit inline thing_(___TTT___ value, bool reference = false);
 
@@ -767,7 +767,7 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<thing_, ___TTT___>::value>>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<thing_, std::decay_t<___TTT___>>::value>>
 
     	inline thing_& operator=(___TTT___ value);
 

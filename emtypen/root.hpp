@@ -215,7 +215,7 @@ public:
 		handle_->___weak___(handle_);
 	}
 
-	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, ___TTT___>::value>>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
 	explicit inline %struct_name%(___TTT___ value, bool reference = false);
 
 	template <typename ___TTT___>
@@ -226,7 +226,7 @@ public:
 		return *this;
 	}
 
-	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, ___TTT___>::value>>
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
 	inline %struct_name%& operator=(___TTT___ value);
 };
 
