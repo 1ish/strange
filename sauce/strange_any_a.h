@@ -66,10 +66,10 @@ namespace strange {
      { assert(handle_); return read().type(_ ); }
      inline any_a type_ ( ) const
      { assert(handle_); return read().type_( ); }
-     inline any_a category ( any_a _ ) const
-     { assert(handle_); return read().category(_ ); }
-     inline any_a category_ ( ) const
-     { assert(handle_); return read().category_( ); }
+     inline any_a cat ( any_a _ ) const
+     { assert(handle_); return read().cat(_ ); }
+     inline any_a cat_ ( ) const
+     { assert(handle_); return read().cat_( ); }
      inline any_a eater ( any_a _ ) const
      { assert(handle_); return read().eater(_ ); }
      inline any_a eater_ ( ) const
@@ -222,8 +222,8 @@ namespace strange {
       virtual inline any_a ref ( any_a range ) const = 0;
       virtual inline any_a type ( any_a _ ) const = 0;
       virtual inline any_a type_ ( ) const = 0;
-      virtual inline any_a category ( any_a _ ) const = 0;
-      virtual inline any_a category_ ( ) const = 0;
+      virtual inline any_a cat ( any_a _ ) const = 0;
+      virtual inline any_a cat_ ( ) const = 0;
       virtual inline any_a eater ( any_a _ ) const = 0;
       virtual inline any_a eater_ ( ) const = 0;
       virtual inline any_a feeder ( any_a range ) const = 0;
@@ -347,10 +347,10 @@ namespace strange {
       { return value_.type(_ ); }
       virtual inline any_a type_ ( ) const
       { return value_.type_( ); }
-      virtual inline any_a category ( any_a _ ) const
-      { return value_.category(_ ); }
-      virtual inline any_a category_ ( ) const
-      { return value_.category_( ); }
+      virtual inline any_a cat ( any_a _ ) const
+      { return value_.cat(_ ); }
+      virtual inline any_a cat_ ( ) const
+      { return value_.cat_( ); }
       virtual inline any_a eater ( any_a _ ) const
       { return value_.eater(_ ); }
       virtual inline any_a eater_ ( ) const

@@ -20,7 +20,7 @@ public:
 	}
 
 	// reflection
-	static inline cat_a category_()
+	static inline cat_a cat_()
 	{
 		static cat_a CATEGORY = Cat<>::val_(sym__(std::string("strange") + CAT_::___abstraction_name___()));
 		return CATEGORY;
@@ -185,9 +185,9 @@ inline symbol_a type(any_a _) const \
 { \
 	return type_(); \
 } \
-inline cat_a category(any_a _) const \
+inline cat_a cat(any_a _) const \
 { \
-	return category_(); \
+	return cat_(); \
 } \
 inline any_a eater(any_a _) const \
 { \

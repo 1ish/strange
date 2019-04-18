@@ -21,18 +21,18 @@ public:
 	inline any_a type(any_a _) const;
 	inline any_a type_() const;
 
-	inline any_a category(any_a _) const;
-	inline any_a category_() const;
+	inline any_a cat(any_a _) const;
+	inline any_a cat_() const;
 
-//	herd_<cat_> inline any_a cats(any_a _) const;
-//	herd_<cat_> inline any_a cats_() const;
+//	herd_a<cat_a> inline any_a cats(any_a _) const;
+//	herd_a<cat_a> inline any_a cats_() const;
 
 //	void inline any_a share(any_a range) const;
 	
-//	shoal_<symbol_, any_a> inline any_a shared(any_a _) const;
+//	shoal_a<symbol_a, any_a> inline any_a shared(any_a _) const;
 
-//  shoal_<symbol_, any_a> inline any_a operations(any_a _) const;
-//  shoal_<symbol_, any_a> inline any_a operations_() const;
+//  shoal_a<symbol_a, any_a> inline any_a operations(any_a _) const;
+//  shoal_a<symbol_a, any_a> inline any_a operations_() const;
 
 	inline any_a eater(any_a _) const;
 	inline any_a eater_() const; // return range of parameter names
