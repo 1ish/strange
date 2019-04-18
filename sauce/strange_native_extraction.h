@@ -4,64 +4,64 @@
 namespace strange
 {
 
-template <typename T, typename CAT_ = thing_>
+template <typename T, typename CAT_ = any_a>
 class NativeExtraction : public Thing<CAT_>
 {
-	using member = thing_(T::*)(thing_) const;
+	using member = any_a(T::*)(any_a) const;
 
 public: ___THING___
 	// construction
-	static inline thing_ val(thing_ _)
+	static inline any_a val(any_a _)
 	{
 		assert(false); //TODO
 		return Nothing<>::val_();
 	}
 
 	template <typename... Args>
-	static inline thing_ val__(const member fun, Args&&... args)
+	static inline any_a val__(const member fun, Args&&... args)
 	{
-		std::vector<symbol_> v;
+		std::vector<symbol_a> v;
 		v.reserve(sizeof...(Args));
-		Variadic<symbol_>::variadic_(v, std::forward<Args>(args)...);
-		return thing_{ NativeExtraction(fun, std::move(v)) };
+		Variadic<symbol_a>::variadic_(v, std::forward<Args>(args)...);
+		return any_a{ NativeExtraction(fun, std::move(v)) };
 	}
 
-	static inline thing_ ref(thing_ _)
+	static inline any_a ref(any_a _)
 	{
 		assert(false); //TODO
 		return Nothing<>::val_();
 	}
 
 	template <typename... Args>
-	static inline thing_ ref__(const member fun, Args&&... args)
+	static inline any_a ref__(const member fun, Args&&... args)
 	{
-		std::vector<symbol_> v;
+		std::vector<symbol_a> v;
 		v.reserve(sizeof...(Args));
-		Variadic<symbol_>::variadic_(v, std::forward<Args>(args)...);
-		return thing_(NativeExtraction(fun, std::move(v)), true);
+		Variadic<symbol_a>::variadic_(v, std::forward<Args>(args)...);
+		return any_a(NativeExtraction(fun, std::move(v)), true);
 	}
 
 	// reflection
-	static inline symbol_ type_()
+	static inline symbol_a type_()
 	{
-		static symbol_ TYPE = sym__("strange::NativeExtraction");
+		static symbol_a TYPE = sym__("strange::NativeExtraction");
 		return TYPE;
 	}
 
-	inline thing_ eater_() const
+	inline any_a eater_() const
 	{
 		return Nothing<>::val_(); //TODO return range of parameter names
 	}
 
 	// function
-	inline thing_ operator()(thing_ thing, thing_ range) const
+	inline any_a operator()(any_a thing, any_a range) const
 	{
 		return (cast_<T>(thing).*_function)(range);
 	}
 
 protected:
 	const member _function;
-	const std::vector<symbol_> _params;
+	const std::vector<symbol_a> _params;
 
 	template <typename F>
 	inline NativeExtraction(const member fun, F&& params)

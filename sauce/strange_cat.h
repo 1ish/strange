@@ -4,14 +4,14 @@
 namespace strange
 {
 
-template <typename CAT_ = cat_>
+template <typename CAT_ = cat_a>
 class Cat : public Symbol<CAT_>
 {
 public: ___THING___
 	// construction
-	static inline cat_ val(thing_ range)
+	static inline cat_a val(any_a range)
 	{
-		thing_ it = range.cbegin();
+		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
 			return val_();
@@ -19,14 +19,14 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline cat_ val_(thing_ thing = Nothing<>::val_())
+	static inline cat_a val_(any_a thing = Nothing<>::val_())
 	{
-		return cat_{ Cat{} };
+		return cat_a{ Cat{} };
 	}
 
-	static inline cat_ ref(thing_ range)
+	static inline cat_a ref(any_a range)
 	{
-		thing_ it = range.cbegin();
+		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
 			return ref_();
@@ -34,96 +34,96 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline cat_ ref_(thing_ thing = Nothing<>::val_())
+	static inline cat_a ref_(any_a thing = Nothing<>::val_())
 	{
-		return cat_(Cat{}, true);
+		return cat_a(Cat{}, true);
 	}
 
 	// reflection
-	static inline symbol_ type_()
+	static inline symbol_a type_()
 	{
-		static symbol_ TYPE = sym__("strange::Cat");
+		static symbol_a TYPE = sym__("strange::Cat");
 		return TYPE;
 	}
 
 	// cat
-	inline symbol_ name(thing_ _) const
+	inline symbol_a name(any_a _) const
 	{
 		return name_();
 	}
 
-	inline symbol_ name_() const
+	inline symbol_a name_() const
 	{
 		return _name;
 	}
 
-	inline thing_ arguments(thing_ _) const
+	inline any_a arguments(any_a _) const
 	{
 		return arguments_();
 	}
 
-	inline thing_ arguments_() const
+	inline any_a arguments_() const
 	{
 		return _arguments;
 	}
 
-	inline thing_ parameters(thing_ _) const
+	inline any_a parameters(any_a _) const
 	{
 		return parameters_();
 	}
 
-	inline thing_ parameters_() const
+	inline any_a parameters_() const
 	{
 		return _parameters;
 	}
 
-	inline cat_ result(thing_ _) const
+	inline cat_a result(any_a _) const
 	{
 		return result_();
 	}
 
-	inline cat_ result_() const
+	inline cat_a result_() const
 	{
-		return check_<cat_>(_result) ? cast_<cat_>(_result) : val_();
+		return check_<cat_a>(_result) ? cast_<cat_a>(_result) : val_();
 	}
 
-	inline thing_ includes(thing_ range) const
+	inline any_a includes(any_a range) const
 	{
-		thing_ it = range.cbegin();
+		any_a it = range.cbegin();
 		assert(it != range.cend()); //TODO
 		return includes_(*it);
 	}
 
-	inline thing_ includes_(thing_ thing) const
+	inline any_a includes_(any_a thing) const
 	{
 		return _boole_(includes__(thing));
 	}
 
-	inline bool includes__(thing_ thing) const
+	inline bool includes__(any_a thing) const
 	{
 		return false;
 	}
 
-	static inline thing_ conforms(thing_ range)
+	static inline any_a conforms(any_a range)
 	{
-		thing_ it = range.cbegin();
+		any_a it = range.cbegin();
 		assert(it != range.cend()); //TODO
-		thing_ thing = *it;
+		any_a thing = *it;
 		assert(++it != range.cend()); //TODO
-		thing_ cat_or_herd = *it;
+		any_a cat_or_herd = *it;
 		return conforms_(thing, cat_or_herd);
 	}
 
-	static inline thing_ conforms_(thing_ thing, thing_ cat_or_herd)
+	static inline any_a conforms_(any_a thing, any_a cat_or_herd)
 	{
 		return _boole_(conforms__(thing, cat_or_herd));
 	}
 
-	static inline bool conforms__(thing_ thing, thing_ cat_or_herd)
+	static inline bool conforms__(any_a thing, any_a cat_or_herd)
 	{
-		if (check_<cat_>(cat_or_herd))
+		if (check_<cat_a>(cat_or_herd))
 		{
-			return cast_<cat_>(cat_or_herd).includes_(thing);
+			return cast_<cat_a>(cat_or_herd).includes_(thing);
 		}
 		/*
 		if (check_<herd_>(cat_or_herd))
@@ -135,10 +135,10 @@ public: ___THING___
 	}
 
 protected:
-	const symbol_ _name;
-	const thing_ _arguments;
-	const thing_ _parameters;
-	const thing_ _result;
+	const symbol_a _name;
+	const any_a _arguments;
+	const any_a _parameters;
+	const any_a _result;
 
 	inline Cat()
 		: Symbol{ _symbol_() }

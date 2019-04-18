@@ -4,14 +4,14 @@
 namespace strange
 {
 
-template <typename CAT_ = symbol_>
+template <typename CAT_ = symbol_a>
 class Symbol : public Something<CAT_>
 {
 public: ___THING___
 	// construction
-	static inline symbol_ val(thing_ range)
+	static inline symbol_a val(any_a range)
 	{
-		thing_ it = range.cbegin();
+		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
 			return val_();
@@ -19,20 +19,20 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline symbol_ val_(thing_ thing = Nothing<>::val_())
+	static inline symbol_a val_(any_a thing = Nothing<>::val_())
 	{
 		return val__("");
 	}
 
 	template <typename F>
-	static inline symbol_ val__(F&& s)
+	static inline symbol_a val__(F&& s)
 	{
-		return symbol_{ Symbol{ std::forward<F>(s) } };
+		return symbol_a{ Symbol{ std::forward<F>(s) } };
 	}
 
-	static inline symbol_ ref(thing_ range)
+	static inline symbol_a ref(any_a range)
 	{
-		thing_ it = range.cbegin();
+		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
 			return ref_();
@@ -40,33 +40,33 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline symbol_ ref_(thing_ thing = Nothing<>::val_())
+	static inline symbol_a ref_(any_a thing = Nothing<>::val_())
 	{
 		return ref__("");
 	}
 
 	template <typename F>
-	static inline symbol_ ref__(F&& s)
+	static inline symbol_a ref__(F&& s)
 	{
-		return symbol_(Symbol{ std::forward<F>(s) }, true);
+		return symbol_a(Symbol{ std::forward<F>(s) }, true);
 	}
 
 	// reflection
-	static inline symbol_ type_()
+	static inline symbol_a type_()
 	{
-		static symbol_ TYPE = sym__("strange::Symbol");
+		static symbol_a TYPE = sym__("strange::Symbol");
 		return TYPE;
 	}
 
 	// comparison
-	inline bool operator==(thing_ thing) const
+	inline bool operator==(any_a thing) const
 	{
-		return check_<symbol_>(thing) && cast_<symbol_>(thing).to_string__() == _string;
+		return check_<symbol_a>(thing) && cast_<symbol_a>(thing).to_string__() == _string;
 	}
 
-	inline bool operator!=(thing_ thing) const
+	inline bool operator!=(any_a thing) const
 	{
-		return !check_<symbol_>(thing) || cast_<symbol_>(thing).to_string__() != _string;
+		return !check_<symbol_a>(thing) || cast_<symbol_a>(thing).to_string__() != _string;
 	}
 
 	inline std::size_t hash__() const
@@ -85,27 +85,27 @@ public: ___THING___
 		return _string;
 	}
 
-	inline symbol_ add(thing_ range) const
+	inline symbol_a add(any_a range) const
 	{
 		std::string s;
-		for (const thing_ thing : range)
+		for (const any_a thing : range)
 		{
-			if (check_<symbol_>(thing))
+			if (check_<symbol_a>(thing))
 			{
-				s += cast_<symbol_>(thing).to_string__();
+				s += cast_<symbol_a>(thing).to_string__();
 			}
 		}
-		return symbol_{ Symbol{ s } };
+		return symbol_a{ Symbol{ s } };
 	}
 
-	inline symbol_ add_(symbol_ symbol) const
+	inline symbol_a add_(symbol_a symbol) const
 	{
 		return operator+(symbol);
 	}
 
-	inline symbol_ operator+(symbol_ symbol) const
+	inline symbol_a operator+(symbol_a symbol) const
 	{
-		return symbol_{ Symbol{ _string + symbol.to_string__() } };
+		return symbol_a{ Symbol{ _string + symbol.to_string__() } };
 	}
 
 protected:
@@ -121,7 +121,7 @@ protected:
 };
 
 template <typename F>
-inline symbol_ sym__(F&& s)
+inline symbol_a sym__(F&& s)
 {
 	return Symbol<>::val__(std::forward<F>(s));
 }

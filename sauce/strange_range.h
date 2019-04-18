@@ -4,74 +4,74 @@
 namespace strange
 {
 
-template <typename CAT_ = thing_>
+template <typename CAT_ = any_a>
 class Range : public Something<CAT_>
 {
 public: ___THING___
 	// construction
-	static inline thing_ val(thing_ range)
+	static inline any_a val(any_a range)
 	{
-		thing_ it = range.cbegin();
+		any_a it = range.cbegin();
 		assert(it != range.cend());
-		thing_ begin = *it;
+		any_a begin = *it;
 		++it;
 		assert(it != range.cend());
 		return val_(begin, *it);
 	}
 
-	static inline thing_ val_(thing_ begin, thing_ end)
+	static inline any_a val_(any_a begin, any_a end)
 	{
-		return thing_{ Range(begin, end) };
+		return any_a{ Range(begin, end) };
 	}
 
-	static inline thing_ ref(thing_ range)
+	static inline any_a ref(any_a range)
 	{
-		thing_ it = range.cbegin();
+		any_a it = range.cbegin();
 		assert(it != range.cend());
-		thing_ begin = *it;
+		any_a begin = *it;
 		++it;
 		assert(it != range.cend());
 		return ref_(begin, *it);
 	}
 
-	static inline thing_ ref_(thing_ begin, thing_ end)
+	static inline any_a ref_(any_a begin, any_a end)
 	{
-		return thing_(Range(begin, end), true);
+		return any_a(Range(begin, end), true);
 	}
 
 	// reflection
-	static inline symbol_ type_()
+	static inline symbol_a type_()
 	{
-		static symbol_ TYPE = sym__("strange::Range");
+		static symbol_a TYPE = sym__("strange::Range");
 		return TYPE;
 	}
 
 	// range
-	inline thing_ cbegin() const
+	inline any_a cbegin() const
 	{
 		return _begin;
 	}
 
-	inline thing_ begin()
+	inline any_a begin()
 	{
 		return _begin;
 	}
 
-	inline thing_ cend() const
+	inline any_a cend() const
 	{
 		return _end;
 	}
 
-	inline thing_ end()
+	inline any_a end()
 	{
 		return _end;
 	}
 
 protected:
-	thing_ _begin;
-	thing_ _end;
+	any_a _begin;
+	any_a _end;
 
-	inline Range(thing_ begin, thing_ end)
+	inline Range(any_a begin, any_a end)
 		: Something{}
 		, _begin(begin)
 		, _end(end)

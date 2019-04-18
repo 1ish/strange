@@ -1,7 +1,7 @@
-#ifndef COM_ONEISH_STRANGE_SYMBOL__H
-#define COM_ONEISH_STRANGE_SYMBOL__H
+#ifndef COM_ONEISH_STRANGE_SYMBOL_A_H
+#define COM_ONEISH_STRANGE_SYMBOL_A_H
 
-// # include "thing_.hpp"
+// # include "any.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -11,12 +11,8 @@
 
 
 namespace strange {
-    #define ___root___ thing_
-
     
-
-    
-    class symbol_ : public ___root___
+    class symbol_a : public ___root___
 
     {
 
@@ -24,11 +20,11 @@ namespace strange {
 
      inline const std :: string & to_string__ ( ) const
      { assert(handle_); return read().to_string__( ); }
-     inline symbol_ add ( thing_ range ) const
+     inline symbol_a add ( any_a range ) const
      { assert(handle_); return read().add(range ); }
-     inline symbol_ add_ ( symbol_ symbol ) const
+     inline symbol_a add_ ( symbol_a symbol ) const
      { assert(handle_); return read().add_(symbol ); }
-     inline symbol_ operator + ( symbol_ symbol ) const
+     inline symbol_a operator + ( symbol_a symbol ) const
      { assert(handle_); return read().operator+(symbol ); }
     
 
@@ -39,9 +35,9 @@ namespace strange {
     	{
 
       virtual inline const std :: string & to_string__ ( ) const = 0;
-      virtual inline symbol_ add ( thing_ range ) const = 0;
-      virtual inline symbol_ add_ ( symbol_ symbol ) const = 0;
-      virtual inline symbol_ operator + ( symbol_ symbol ) const = 0;
+      virtual inline symbol_a add ( any_a range ) const = 0;
+      virtual inline symbol_a add_ ( symbol_a symbol ) const = 0;
+      virtual inline symbol_a operator + ( symbol_a symbol ) const = 0;
     	};
 
     
@@ -74,11 +70,11 @@ namespace strange {
 
       virtual inline const std :: string & to_string__ ( ) const
       { return value_.to_string__( ); }
-      virtual inline symbol_ add ( thing_ range ) const
+      virtual inline symbol_a add ( any_a range ) const
       { return value_.add(range ); }
-      virtual inline symbol_ add_ ( symbol_ symbol ) const
+      virtual inline symbol_a add_ ( symbol_a symbol ) const
       { return value_.add_(symbol ); }
-      virtual inline symbol_ operator + ( symbol_ symbol ) const
+      virtual inline symbol_a operator + ( symbol_a symbol ) const
       { return value_.operator+(symbol ); }
     	};
 
@@ -192,17 +188,17 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(const symbol_& value);
+    	friend inline bool check_(const symbol_a& value);
 
     
 
     public:
 
-    	static inline const char* ___struct_name___()
+    	static inline const char* ___abstraction_name___()
 
     	{
 
-    		return "symbol_";
+    		return "symbol";
 
     	}
 
@@ -218,11 +214,11 @@ namespace strange {
 
     
 
-    	inline symbol_() = default;
+    	inline symbol_a() = default;
 
     
 
-    	explicit inline symbol_(bool reference)
+    	explicit inline symbol_a(bool reference)
 
     		: ___root___{ reference }
 
@@ -230,7 +226,7 @@ namespace strange {
 
     
 
-    	inline symbol_(const symbol_& other, bool reference)
+    	inline symbol_a(const symbol_a& other, bool reference)
 
     		: ___root___(other, reference)
 
@@ -238,7 +234,7 @@ namespace strange {
 
     
 
-    	inline symbol_(symbol_&& other, bool reference)
+    	inline symbol_a(symbol_a&& other, bool reference)
 
     		: ___root___(std::move(other), reference)
 
@@ -248,7 +244,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline symbol_(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+    	explicit inline symbol_a(const std::shared_ptr<___TTT___>& handle, bool reference = false)
 
     		: ___root___(handle, reference)
 
@@ -260,15 +256,15 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<symbol_, std::decay_t<___TTT___>>::value>>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<symbol_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline symbol_(___TTT___ value, bool reference = false);
+    	explicit inline symbol_a(___TTT___ value, bool reference = false);
 
     
 
     	template <typename ___TTT___>
 
-    	inline symbol_& operator=(const std::shared_ptr<___TTT___>& handle)
+    	inline symbol_a& operator=(const std::shared_ptr<___TTT___>& handle)
 
     	{
 
@@ -284,9 +280,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<symbol_, std::decay_t<___TTT___>>::value>>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<symbol_a, std::decay_t<___TTT___>>::value>>
 
-    	inline symbol_& operator=(___TTT___ value);
+    	inline symbol_a& operator=(___TTT___ value);
 
     };
 
@@ -294,7 +290,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(const symbol_& value)
+    inline bool check_(const symbol_a& value)
 
     {
 
@@ -306,7 +302,7 @@ namespace strange {
 
     template <typename ___TTT___, typename>
 
-    inline symbol_::symbol_(___TTT___ value, bool reference)
+    inline symbol_a::symbol_a(___TTT___ value, bool reference)
 
     	: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 
@@ -318,11 +314,11 @@ namespace strange {
 
     template <typename ___TTT___, typename>
 
-    inline symbol_& symbol_::operator=(___TTT___ value)
+    inline symbol_a& symbol_a::operator=(___TTT___ value)
 
     {
 
-    	symbol_ temp{ std::move(value) };
+    	symbol_a temp{ std::move(value) };
 
     	std::swap(temp.handle_, handle_);
 

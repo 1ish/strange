@@ -7,4 +7,11 @@ namespace std
 	class string;
 }
 
+namespace strange
+{
+	class any_a;
+	class symbol_a;
+	class cat_a;
+}
+
 #endif

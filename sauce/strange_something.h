@@ -9,7 +9,7 @@ class Something : public Thing<CAT_>
 {
 public:
 	// function
-	inline thing_ operator()(thing_ thing, thing_ range) const
+	inline any_a operator()(any_a thing, any_a range) const
 	{
 		//TODO
 		// operation = thing.operations_().at(range.1st);
@@ -18,12 +18,12 @@ public:
 	}
 
 	// comparison
-	static inline thing_ something(thing_)
+	static inline any_a something(any_a)
 	{
 		return something_();
 	}
 
-	static inline thing_ something_()
+	static inline any_a something_()
 	{
 		return Everything<>::val_();
 	}

@@ -1,9 +1,13 @@
 #ifndef COM_ONEISH_STRANGE_H
 #define COM_ONEISH_STRANGE_H
 
-#include "strange_thing_.h"
-#include "strange_symbol_.h"
-#include "strange_cat_.h"
+#include "strange_any_a.h"
+#define ___root___ any_a
+#include "strange_symbol_a.h"
+#undef ___root___
+#define ___derived___ symbol_a
+#include "strange_cat_a.h"
+#undef ___derived___
 
 #include "strange_one.h"
 #include "strange_thing.h"

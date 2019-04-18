@@ -4,40 +4,40 @@
 namespace strange
 {
 
-template <typename CAT_ = thing_>
+template <typename CAT_ = any_a>
 class Nothing : public Something<CAT_>
 {
 public: ___THING___
 	// construction
-	static inline thing_ val(thing_ _)
+	static inline any_a val(any_a _)
 	{
 		return val_();
 	}
 
-	static inline thing_ val_()
+	static inline any_a val_()
 	{
 		return val__();
 	}
 
-	static inline thing_& val__()
+	static inline any_a& val__()
 	{
-		static thing_ VAL = thing_{ Nothing<>{} };
+		static any_a VAL = any_a{ Nothing<>{} };
 		return VAL;
 	}
 
-	static inline thing_ ref(thing_ _)
+	static inline any_a ref(any_a _)
 	{
 		return ref_();
 	}
 
-	static inline thing_ ref_()
+	static inline any_a ref_()
 	{
 		return ref__();
 	}
 
-	static inline thing_& ref__()
+	static inline any_a& ref__()
 	{
-		static thing_ REF = thing_(Nothing<>{}, true);
+		static any_a REF = any_a(Nothing<>{}, true);
 		return REF;
 	}
 
@@ -48,19 +48,19 @@ public: ___THING___
 	}
 
 	// reflection
-	static inline symbol_ type_()
+	static inline symbol_a type_()
 	{
-		static symbol_ TYPE = sym__("strange::Nothing");
+		static symbol_a TYPE = sym__("strange::Nothing");
 		return TYPE;
 	}
 
 	// comparison
-	static inline thing_ nothing(thing_)
+	static inline any_a nothing(any_a)
 	{
 		return nothing_();
 	}
 
-	static inline thing_ nothing_()
+	static inline any_a nothing_()
 	{
 		return Everything<>::val_();
 	}
@@ -70,12 +70,12 @@ public: ___THING___
 		return true;
 	}
 
-	static inline thing_ anything(thing_)
+	static inline any_a anything(any_a)
 	{
 		return anything_();
 	}
 
-	static inline thing_ anything_()
+	static inline any_a anything_()
 	{
 		return Nothing<>::val_();
 	}
@@ -85,12 +85,12 @@ public: ___THING___
 		return false;
 	}
 
-	inline bool operator==(thing_ thing) const
+	inline bool operator==(any_a thing) const
 	{
 		return thing.nothing__();
 	}
 
-	inline bool operator!=(thing_ thing) const
+	inline bool operator!=(any_a thing) const
 	{
 		return !thing.nothing__();
 	}
@@ -102,28 +102,28 @@ public: ___THING___
 	}
 
 	// range
-	inline thing_ cbegin() const
+	inline any_a cbegin() const
 	{
-		return It<true, thing_, Everything<>>::val_(Nothing<>::val_());
+		return It<true, any_a, Everything<>>::val_(Nothing<>::val_());
 	}
 
-	inline thing_ begin()
+	inline any_a begin()
 	{
-		return It<false, thing_, Everything<>>::val_(Nothing<>::val_());
+		return It<false, any_a, Everything<>>::val_(Nothing<>::val_());
 	}
 
-	inline thing_ cend() const
+	inline any_a cend() const
 	{
 		return Everything<>::val_();
 	}
 
-	inline thing_ end()
+	inline any_a end()
 	{
 		return Everything<>::val_();
 	}
 
 	// iterator
-	inline thing_& operator*() const
+	inline any_a& operator*() const
 	{
 		return Nothing<>::val__();
 	}

@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename CAT = thing_>
+template <typename CAT = any_a>
 class Variadic
 {
 public:

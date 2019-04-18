@@ -4,64 +4,64 @@
 namespace strange
 {
 
-template <typename CAT_ = thing_>
+template <typename CAT_ = any_a>
 class NativeFunction : public Thing<CAT_>
 {
-	using function = thing_(*)(thing_);
+	using function = any_a(*)(any_a);
 
 public: ___THING___
 	// construction
-	static inline thing_ val(thing_ _)
+	static inline any_a val(any_a _)
 	{
 		assert(false); //TODO
 		return Nothing<>::val_();
 	}
 
 	template <typename... Args>
-	static inline thing_ val__(const function fun, Args&&... args)
+	static inline any_a val__(const function fun, Args&&... args)
 	{
-		std::vector<symbol_> v;
+		std::vector<symbol_a> v;
 		v.reserve(sizeof...(Args));
-		Variadic<symbol_>::variadic_(v, std::forward<Args>(args)...);
-		return thing_{ NativeFunction(fun, std::move(v)) };
+		Variadic<symbol_a>::variadic_(v, std::forward<Args>(args)...);
+		return any_a{ NativeFunction(fun, std::move(v)) };
 	}
 
-	static inline thing_ ref(thing_ _)
+	static inline any_a ref(any_a _)
 	{
 		assert(false); //TODO
 		return Nothing<>::val_();
 	}
 
 	template <typename... Args>
-	static inline thing_ ref__(const function fun, Args&&... args)
+	static inline any_a ref__(const function fun, Args&&... args)
 	{
-		std::vector<symbol_> v;
+		std::vector<symbol_a> v;
 		v.reserve(sizeof...(Args));
-		Variadic<symbol_>::variadic_(v, std::forward<Args>(args)...);
-		return thing_(NativeFunction(fun, std::move(v)), true);
+		Variadic<symbol_a>::variadic_(v, std::forward<Args>(args)...);
+		return any_a(NativeFunction(fun, std::move(v)), true);
 	}
 
 	// reflection
-	static inline symbol_ type_()
+	static inline symbol_a type_()
 	{
-		static symbol_ TYPE = sym__("strange::NativeFunction");
+		static symbol_a TYPE = sym__("strange::NativeFunction");
 		return TYPE;
 	}
 
-	inline thing_ eater_() const
+	inline any_a eater_() const
 	{
 		return Nothing<>::val_(); //TODO return range of parameter names
 	}
 
 	// function
-	inline thing_ operator()(thing_ _, thing_ range) const
+	inline any_a operator()(any_a _, any_a range) const
 	{
 		return _function(range);
 	}
 
 protected:
 	const function _function;
-	const std::vector<symbol_> _params;
+	const std::vector<symbol_a> _params;
 
 	template <typename F>
 	inline NativeFunction(const function fun, F&& params)

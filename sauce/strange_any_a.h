@@ -1,5 +1,5 @@
-#ifndef COM_ONEISH_STRANGE_THING__H
-#define COM_ONEISH_STRANGE_THING__H
+#ifndef COM_ONEISH_STRANGE_ANY_A_H
+#define COM_ONEISH_STRANGE_ANY_A_H
 
 // # include "definitions.hpp"
 #include <algorithm>
@@ -12,7 +12,7 @@
 
 namespace strange {
     
-    class thing_
+    class any_a
 
     {
 
@@ -28,7 +28,7 @@ namespace strange {
 
     
 
-    	inline thing_& operator++()
+    	inline any_a& operator++()
 
     	{
 
@@ -42,13 +42,13 @@ namespace strange {
 
     
 
-    	inline thing_ operator++(int)
+    	inline any_a operator++(int)
 
     	{
 
     		assert(handle_);
 
-    		thing_ result = *this;
+    		any_a result = *this;
 
     		write().operator++();
 
@@ -58,127 +58,127 @@ namespace strange {
 
     
 
-     inline thing_ val ( thing_ range ) const
+     inline any_a val ( any_a range ) const
      { assert(handle_); return read().val(range ); }
-     inline thing_ ref ( thing_ range ) const
+     inline any_a ref ( any_a range ) const
      { assert(handle_); return read().ref(range ); }
-     inline thing_ type ( thing_ _ ) const
+     inline any_a type ( any_a _ ) const
      { assert(handle_); return read().type(_ ); }
-     inline thing_ type_ ( ) const
+     inline any_a type_ ( ) const
      { assert(handle_); return read().type_( ); }
-     inline thing_ category ( thing_ _ ) const
+     inline any_a category ( any_a _ ) const
      { assert(handle_); return read().category(_ ); }
-     inline thing_ category_ ( ) const
+     inline any_a category_ ( ) const
      { assert(handle_); return read().category_( ); }
-     inline thing_ eater ( thing_ _ ) const
+     inline any_a eater ( any_a _ ) const
      { assert(handle_); return read().eater(_ ); }
-     inline thing_ eater_ ( ) const
+     inline any_a eater_ ( ) const
      { assert(handle_); return read().eater_( ); }
-     inline thing_ feeder ( thing_ range ) const
+     inline any_a feeder ( any_a range ) const
      { assert(handle_); return read().feeder(range ); }
-     inline thing_ visit ( thing_ range )
+     inline any_a visit ( any_a range )
      { assert(handle_); return write().visit(range ); }
-     inline thing_ invoke ( thing_ range ) const
+     inline any_a invoke ( any_a range ) const
      { assert(handle_); return read().invoke(range ); }
-     inline thing_ invoke_ ( thing_ member , thing_ range ) const
+     inline any_a invoke_ ( any_a member , any_a range ) const
      { assert(handle_); return read().invoke_(member, range ); }
-     inline thing_ operate ( thing_ range ) const
+     inline any_a operate ( any_a range ) const
      { assert(handle_); return read().operate(range ); }
-     inline thing_ operate_ ( thing_ thing , thing_ operation , thing_ range ) const
+     inline any_a operate_ ( any_a thing , any_a operation , any_a range ) const
      { assert(handle_); return read().operate_(thing, operation, range ); }
-     inline thing_ operator ( ) ( thing_ thing , thing_ range ) const
+     inline any_a operator ( ) ( any_a thing , any_a range ) const
      { assert(handle_); return read().operator()(thing, range ); }
      inline const void * identity__ ( ) const
      { assert(handle_); return read().identity__( ); }
-     inline thing_ identical ( thing_ range ) const
+     inline any_a identical ( any_a range ) const
      { assert(handle_); return read().identical(range ); }
-     inline thing_ identical_ ( thing_ thing ) const
+     inline any_a identical_ ( any_a thing ) const
      { assert(handle_); return read().identical_(thing ); }
-     inline bool identical__ ( thing_ thing ) const
+     inline bool identical__ ( any_a thing ) const
      { assert(handle_); return read().identical__(thing ); }
-     inline thing_ nothing ( thing_ _ ) const
+     inline any_a nothing ( any_a _ ) const
      { assert(handle_); return read().nothing(_ ); }
-     inline thing_ nothing_ ( ) const
+     inline any_a nothing_ ( ) const
      { assert(handle_); return read().nothing_( ); }
      inline bool nothing__ ( ) const
      { assert(handle_); return read().nothing__( ); }
-     inline thing_ anything ( thing_ _ ) const
+     inline any_a anything ( any_a _ ) const
      { assert(handle_); return read().anything(_ ); }
-     inline thing_ anything_ ( ) const
+     inline any_a anything_ ( ) const
      { assert(handle_); return read().anything_( ); }
      inline bool anything__ ( ) const
      { assert(handle_); return read().anything__( ); }
-     inline thing_ something ( thing_ _ ) const
+     inline any_a something ( any_a _ ) const
      { assert(handle_); return read().something(_ ); }
-     inline thing_ something_ ( ) const
+     inline any_a something_ ( ) const
      { assert(handle_); return read().something_( ); }
      inline bool something__ ( ) const
      { assert(handle_); return read().something__( ); }
-     inline thing_ everything ( thing_ _ ) const
+     inline any_a everything ( any_a _ ) const
      { assert(handle_); return read().everything(_ ); }
-     inline thing_ everything_ ( ) const
+     inline any_a everything_ ( ) const
      { assert(handle_); return read().everything_( ); }
      inline bool everything__ ( ) const
      { assert(handle_); return read().everything__( ); }
-     inline thing_ same ( thing_ range ) const
+     inline any_a same ( any_a range ) const
      { assert(handle_); return read().same(range ); }
-     inline thing_ same_ ( thing_ thing ) const
+     inline any_a same_ ( any_a thing ) const
      { assert(handle_); return read().same_(thing ); }
-     inline bool operator == ( thing_ thing ) const
+     inline bool operator == ( any_a thing ) const
      { assert(handle_); return read().operator==(thing ); }
-     inline thing_ different ( thing_ range ) const
+     inline any_a different ( any_a range ) const
      { assert(handle_); return read().different(range ); }
-     inline thing_ different_ ( thing_ thing ) const
+     inline any_a different_ ( any_a thing ) const
      { assert(handle_); return read().different_(thing ); }
-     inline bool operator != ( thing_ thing ) const
+     inline bool operator != ( any_a thing ) const
      { assert(handle_); return read().operator!=(thing ); }
-     inline thing_ hash ( thing_ _ ) const
+     inline any_a hash ( any_a _ ) const
      { assert(handle_); return read().hash(_ ); }
-     inline thing_ hash_ ( ) const
+     inline any_a hash_ ( ) const
      { assert(handle_); return read().hash_( ); }
      inline std :: size_t hash__ ( ) const
      { assert(handle_); return read().hash__( ); }
      inline bool is__ ( const std :: string & s ) const
      { assert(handle_); return read().is__(s ); }
-     inline thing_ beget ( thing_ _ ) const
+     inline any_a beget ( any_a _ ) const
      { assert(handle_); return read().beget(_ ); }
-     inline thing_ beget_ ( ) const
+     inline any_a beget_ ( ) const
      { assert(handle_); return read().beget_( ); }
-     inline thing_ cbegin ( ) const
+     inline any_a cbegin ( ) const
      { assert(handle_); return read().cbegin( ); }
-     inline thing_ beset ( thing_ _ )
+     inline any_a beset ( any_a _ )
      { assert(handle_); return write().beset(_ ); }
-     inline thing_ beset_ ( )
+     inline any_a beset_ ( )
      { assert(handle_); return write().beset_( ); }
-     inline thing_ begin ( )
+     inline any_a begin ( )
      { assert(handle_); return write().begin( ); }
-     inline thing_ enget ( thing_ _ ) const
+     inline any_a enget ( any_a _ ) const
      { assert(handle_); return read().enget(_ ); }
-     inline thing_ enget_ ( ) const
+     inline any_a enget_ ( ) const
      { assert(handle_); return read().enget_( ); }
-     inline thing_ cend ( ) const
+     inline any_a cend ( ) const
      { assert(handle_); return read().cend( ); }
-     inline thing_ enset ( thing_ _ )
+     inline any_a enset ( any_a _ )
      { assert(handle_); return write().enset(_ ); }
-     inline thing_ enset_ ( )
+     inline any_a enset_ ( )
      { assert(handle_); return write().enset_( ); }
-     inline thing_ end ( )
+     inline any_a end ( )
      { assert(handle_); return write().end( ); }
-     inline thing_ get ( thing_ _ ) const
+     inline any_a get ( any_a _ ) const
      { assert(handle_); return read().get(_ ); }
-     inline thing_ get_ ( ) const
+     inline any_a get_ ( ) const
      { assert(handle_); return read().get_( ); }
-     inline thing_ set ( thing_ range ) const
+     inline any_a set ( any_a range ) const
      { assert(handle_); return read().set(range ); }
-     inline thing_ set_ ( thing_ thing ) const
+     inline any_a set_ ( any_a thing ) const
      { assert(handle_); return read().set_(thing ); }
-     inline thing_ & operator * ( ) const
+     inline any_a & operator * ( ) const
      { assert(handle_); return read().operator*( ); }
-     inline thing_ * operator -> ( ) const
+     inline any_a * operator -> ( ) const
      { assert(handle_); return read().operator->( ); }
-     inline thing_ increment ( thing_ _ )
+     inline any_a increment ( any_a _ )
      { assert(handle_); return write().increment(_ ); }
-     inline thing_ increment_ ( )
+     inline any_a increment_ ( )
      { assert(handle_); return write().increment_( ); }
     
 
@@ -218,67 +218,67 @@ namespace strange {
 
     
 
-      virtual inline thing_ val ( thing_ range ) const = 0;
-      virtual inline thing_ ref ( thing_ range ) const = 0;
-      virtual inline thing_ type ( thing_ _ ) const = 0;
-      virtual inline thing_ type_ ( ) const = 0;
-      virtual inline thing_ category ( thing_ _ ) const = 0;
-      virtual inline thing_ category_ ( ) const = 0;
-      virtual inline thing_ eater ( thing_ _ ) const = 0;
-      virtual inline thing_ eater_ ( ) const = 0;
-      virtual inline thing_ feeder ( thing_ range ) const = 0;
-      virtual inline thing_ visit ( thing_ range ) = 0;
-      virtual inline thing_ invoke ( thing_ range ) const = 0;
-      virtual inline thing_ invoke_ ( thing_ member , thing_ range ) const = 0;
-      virtual inline thing_ operate ( thing_ range ) const = 0;
-      virtual inline thing_ operate_ ( thing_ thing , thing_ operation , thing_ range ) const = 0;
-      virtual inline thing_ operator ( ) ( thing_ thing , thing_ range ) const = 0;
+      virtual inline any_a val ( any_a range ) const = 0;
+      virtual inline any_a ref ( any_a range ) const = 0;
+      virtual inline any_a type ( any_a _ ) const = 0;
+      virtual inline any_a type_ ( ) const = 0;
+      virtual inline any_a category ( any_a _ ) const = 0;
+      virtual inline any_a category_ ( ) const = 0;
+      virtual inline any_a eater ( any_a _ ) const = 0;
+      virtual inline any_a eater_ ( ) const = 0;
+      virtual inline any_a feeder ( any_a range ) const = 0;
+      virtual inline any_a visit ( any_a range ) = 0;
+      virtual inline any_a invoke ( any_a range ) const = 0;
+      virtual inline any_a invoke_ ( any_a member , any_a range ) const = 0;
+      virtual inline any_a operate ( any_a range ) const = 0;
+      virtual inline any_a operate_ ( any_a thing , any_a operation , any_a range ) const = 0;
+      virtual inline any_a operator ( ) ( any_a thing , any_a range ) const = 0;
       virtual inline const void * identity__ ( ) const = 0;
-      virtual inline thing_ identical ( thing_ range ) const = 0;
-      virtual inline thing_ identical_ ( thing_ thing ) const = 0;
-      virtual inline bool identical__ ( thing_ thing ) const = 0;
-      virtual inline thing_ nothing ( thing_ _ ) const = 0;
-      virtual inline thing_ nothing_ ( ) const = 0;
+      virtual inline any_a identical ( any_a range ) const = 0;
+      virtual inline any_a identical_ ( any_a thing ) const = 0;
+      virtual inline bool identical__ ( any_a thing ) const = 0;
+      virtual inline any_a nothing ( any_a _ ) const = 0;
+      virtual inline any_a nothing_ ( ) const = 0;
       virtual inline bool nothing__ ( ) const = 0;
-      virtual inline thing_ anything ( thing_ _ ) const = 0;
-      virtual inline thing_ anything_ ( ) const = 0;
+      virtual inline any_a anything ( any_a _ ) const = 0;
+      virtual inline any_a anything_ ( ) const = 0;
       virtual inline bool anything__ ( ) const = 0;
-      virtual inline thing_ something ( thing_ _ ) const = 0;
-      virtual inline thing_ something_ ( ) const = 0;
+      virtual inline any_a something ( any_a _ ) const = 0;
+      virtual inline any_a something_ ( ) const = 0;
       virtual inline bool something__ ( ) const = 0;
-      virtual inline thing_ everything ( thing_ _ ) const = 0;
-      virtual inline thing_ everything_ ( ) const = 0;
+      virtual inline any_a everything ( any_a _ ) const = 0;
+      virtual inline any_a everything_ ( ) const = 0;
       virtual inline bool everything__ ( ) const = 0;
-      virtual inline thing_ same ( thing_ range ) const = 0;
-      virtual inline thing_ same_ ( thing_ thing ) const = 0;
-      virtual inline bool operator == ( thing_ thing ) const = 0;
-      virtual inline thing_ different ( thing_ range ) const = 0;
-      virtual inline thing_ different_ ( thing_ thing ) const = 0;
-      virtual inline bool operator != ( thing_ thing ) const = 0;
-      virtual inline thing_ hash ( thing_ _ ) const = 0;
-      virtual inline thing_ hash_ ( ) const = 0;
+      virtual inline any_a same ( any_a range ) const = 0;
+      virtual inline any_a same_ ( any_a thing ) const = 0;
+      virtual inline bool operator == ( any_a thing ) const = 0;
+      virtual inline any_a different ( any_a range ) const = 0;
+      virtual inline any_a different_ ( any_a thing ) const = 0;
+      virtual inline bool operator != ( any_a thing ) const = 0;
+      virtual inline any_a hash ( any_a _ ) const = 0;
+      virtual inline any_a hash_ ( ) const = 0;
       virtual inline std :: size_t hash__ ( ) const = 0;
       virtual inline bool is__ ( const std :: string & s ) const = 0;
-      virtual inline thing_ beget ( thing_ _ ) const = 0;
-      virtual inline thing_ beget_ ( ) const = 0;
-      virtual inline thing_ cbegin ( ) const = 0;
-      virtual inline thing_ beset ( thing_ _ ) = 0;
-      virtual inline thing_ beset_ ( ) = 0;
-      virtual inline thing_ begin ( ) = 0;
-      virtual inline thing_ enget ( thing_ _ ) const = 0;
-      virtual inline thing_ enget_ ( ) const = 0;
-      virtual inline thing_ cend ( ) const = 0;
-      virtual inline thing_ enset ( thing_ _ ) = 0;
-      virtual inline thing_ enset_ ( ) = 0;
-      virtual inline thing_ end ( ) = 0;
-      virtual inline thing_ get ( thing_ _ ) const = 0;
-      virtual inline thing_ get_ ( ) const = 0;
-      virtual inline thing_ set ( thing_ range ) const = 0;
-      virtual inline thing_ set_ ( thing_ thing ) const = 0;
-      virtual inline thing_ & operator * ( ) const = 0;
-      virtual inline thing_ * operator -> ( ) const = 0;
-      virtual inline thing_ increment ( thing_ _ ) = 0;
-      virtual inline thing_ increment_ ( ) = 0;
+      virtual inline any_a beget ( any_a _ ) const = 0;
+      virtual inline any_a beget_ ( ) const = 0;
+      virtual inline any_a cbegin ( ) const = 0;
+      virtual inline any_a beset ( any_a _ ) = 0;
+      virtual inline any_a beset_ ( ) = 0;
+      virtual inline any_a begin ( ) = 0;
+      virtual inline any_a enget ( any_a _ ) const = 0;
+      virtual inline any_a enget_ ( ) const = 0;
+      virtual inline any_a cend ( ) const = 0;
+      virtual inline any_a enset ( any_a _ ) = 0;
+      virtual inline any_a enset_ ( ) = 0;
+      virtual inline any_a end ( ) = 0;
+      virtual inline any_a get ( any_a _ ) const = 0;
+      virtual inline any_a get_ ( ) const = 0;
+      virtual inline any_a set ( any_a range ) const = 0;
+      virtual inline any_a set_ ( any_a thing ) const = 0;
+      virtual inline any_a & operator * ( ) const = 0;
+      virtual inline any_a * operator -> ( ) const = 0;
+      virtual inline any_a increment ( any_a _ ) = 0;
+      virtual inline any_a increment_ ( ) = 0;
     	};
 
     
@@ -339,127 +339,127 @@ namespace strange {
 
     
 
-      virtual inline thing_ val ( thing_ range ) const
+      virtual inline any_a val ( any_a range ) const
       { return value_.val(range ); }
-      virtual inline thing_ ref ( thing_ range ) const
+      virtual inline any_a ref ( any_a range ) const
       { return value_.ref(range ); }
-      virtual inline thing_ type ( thing_ _ ) const
+      virtual inline any_a type ( any_a _ ) const
       { return value_.type(_ ); }
-      virtual inline thing_ type_ ( ) const
+      virtual inline any_a type_ ( ) const
       { return value_.type_( ); }
-      virtual inline thing_ category ( thing_ _ ) const
+      virtual inline any_a category ( any_a _ ) const
       { return value_.category(_ ); }
-      virtual inline thing_ category_ ( ) const
+      virtual inline any_a category_ ( ) const
       { return value_.category_( ); }
-      virtual inline thing_ eater ( thing_ _ ) const
+      virtual inline any_a eater ( any_a _ ) const
       { return value_.eater(_ ); }
-      virtual inline thing_ eater_ ( ) const
+      virtual inline any_a eater_ ( ) const
       { return value_.eater_( ); }
-      virtual inline thing_ feeder ( thing_ range ) const
+      virtual inline any_a feeder ( any_a range ) const
       { return value_.feeder(range ); }
-      virtual inline thing_ visit ( thing_ range )
+      virtual inline any_a visit ( any_a range )
       { return value_.visit(range ); }
-      virtual inline thing_ invoke ( thing_ range ) const
+      virtual inline any_a invoke ( any_a range ) const
       { return value_.invoke(range ); }
-      virtual inline thing_ invoke_ ( thing_ member , thing_ range ) const
+      virtual inline any_a invoke_ ( any_a member , any_a range ) const
       { return value_.invoke_(member, range ); }
-      virtual inline thing_ operate ( thing_ range ) const
+      virtual inline any_a operate ( any_a range ) const
       { return value_.operate(range ); }
-      virtual inline thing_ operate_ ( thing_ thing , thing_ operation , thing_ range ) const
+      virtual inline any_a operate_ ( any_a thing , any_a operation , any_a range ) const
       { return value_.operate_(thing, operation, range ); }
-      virtual inline thing_ operator ( ) ( thing_ thing , thing_ range ) const
+      virtual inline any_a operator ( ) ( any_a thing , any_a range ) const
       { return value_.operator()(thing, range ); }
       virtual inline const void * identity__ ( ) const
       { return value_.identity__( ); }
-      virtual inline thing_ identical ( thing_ range ) const
+      virtual inline any_a identical ( any_a range ) const
       { return value_.identical(range ); }
-      virtual inline thing_ identical_ ( thing_ thing ) const
+      virtual inline any_a identical_ ( any_a thing ) const
       { return value_.identical_(thing ); }
-      virtual inline bool identical__ ( thing_ thing ) const
+      virtual inline bool identical__ ( any_a thing ) const
       { return value_.identical__(thing ); }
-      virtual inline thing_ nothing ( thing_ _ ) const
+      virtual inline any_a nothing ( any_a _ ) const
       { return value_.nothing(_ ); }
-      virtual inline thing_ nothing_ ( ) const
+      virtual inline any_a nothing_ ( ) const
       { return value_.nothing_( ); }
       virtual inline bool nothing__ ( ) const
       { return value_.nothing__( ); }
-      virtual inline thing_ anything ( thing_ _ ) const
+      virtual inline any_a anything ( any_a _ ) const
       { return value_.anything(_ ); }
-      virtual inline thing_ anything_ ( ) const
+      virtual inline any_a anything_ ( ) const
       { return value_.anything_( ); }
       virtual inline bool anything__ ( ) const
       { return value_.anything__( ); }
-      virtual inline thing_ something ( thing_ _ ) const
+      virtual inline any_a something ( any_a _ ) const
       { return value_.something(_ ); }
-      virtual inline thing_ something_ ( ) const
+      virtual inline any_a something_ ( ) const
       { return value_.something_( ); }
       virtual inline bool something__ ( ) const
       { return value_.something__( ); }
-      virtual inline thing_ everything ( thing_ _ ) const
+      virtual inline any_a everything ( any_a _ ) const
       { return value_.everything(_ ); }
-      virtual inline thing_ everything_ ( ) const
+      virtual inline any_a everything_ ( ) const
       { return value_.everything_( ); }
       virtual inline bool everything__ ( ) const
       { return value_.everything__( ); }
-      virtual inline thing_ same ( thing_ range ) const
+      virtual inline any_a same ( any_a range ) const
       { return value_.same(range ); }
-      virtual inline thing_ same_ ( thing_ thing ) const
+      virtual inline any_a same_ ( any_a thing ) const
       { return value_.same_(thing ); }
-      virtual inline bool operator == ( thing_ thing ) const
+      virtual inline bool operator == ( any_a thing ) const
       { return value_.operator==(thing ); }
-      virtual inline thing_ different ( thing_ range ) const
+      virtual inline any_a different ( any_a range ) const
       { return value_.different(range ); }
-      virtual inline thing_ different_ ( thing_ thing ) const
+      virtual inline any_a different_ ( any_a thing ) const
       { return value_.different_(thing ); }
-      virtual inline bool operator != ( thing_ thing ) const
+      virtual inline bool operator != ( any_a thing ) const
       { return value_.operator!=(thing ); }
-      virtual inline thing_ hash ( thing_ _ ) const
+      virtual inline any_a hash ( any_a _ ) const
       { return value_.hash(_ ); }
-      virtual inline thing_ hash_ ( ) const
+      virtual inline any_a hash_ ( ) const
       { return value_.hash_( ); }
       virtual inline std :: size_t hash__ ( ) const
       { return value_.hash__( ); }
       virtual inline bool is__ ( const std :: string & s ) const
       { return value_.is__(s ); }
-      virtual inline thing_ beget ( thing_ _ ) const
+      virtual inline any_a beget ( any_a _ ) const
       { return value_.beget(_ ); }
-      virtual inline thing_ beget_ ( ) const
+      virtual inline any_a beget_ ( ) const
       { return value_.beget_( ); }
-      virtual inline thing_ cbegin ( ) const
+      virtual inline any_a cbegin ( ) const
       { return value_.cbegin( ); }
-      virtual inline thing_ beset ( thing_ _ )
+      virtual inline any_a beset ( any_a _ )
       { return value_.beset(_ ); }
-      virtual inline thing_ beset_ ( )
+      virtual inline any_a beset_ ( )
       { return value_.beset_( ); }
-      virtual inline thing_ begin ( )
+      virtual inline any_a begin ( )
       { return value_.begin( ); }
-      virtual inline thing_ enget ( thing_ _ ) const
+      virtual inline any_a enget ( any_a _ ) const
       { return value_.enget(_ ); }
-      virtual inline thing_ enget_ ( ) const
+      virtual inline any_a enget_ ( ) const
       { return value_.enget_( ); }
-      virtual inline thing_ cend ( ) const
+      virtual inline any_a cend ( ) const
       { return value_.cend( ); }
-      virtual inline thing_ enset ( thing_ _ )
+      virtual inline any_a enset ( any_a _ )
       { return value_.enset(_ ); }
-      virtual inline thing_ enset_ ( )
+      virtual inline any_a enset_ ( )
       { return value_.enset_( ); }
-      virtual inline thing_ end ( )
+      virtual inline any_a end ( )
       { return value_.end( ); }
-      virtual inline thing_ get ( thing_ _ ) const
+      virtual inline any_a get ( any_a _ ) const
       { return value_.get(_ ); }
-      virtual inline thing_ get_ ( ) const
+      virtual inline any_a get_ ( ) const
       { return value_.get_( ); }
-      virtual inline thing_ set ( thing_ range ) const
+      virtual inline any_a set ( any_a range ) const
       { return value_.set(range ); }
-      virtual inline thing_ set_ ( thing_ thing ) const
+      virtual inline any_a set_ ( any_a thing ) const
       { return value_.set_(thing ); }
-      virtual inline thing_ & operator * ( ) const
+      virtual inline any_a & operator * ( ) const
       { return value_.operator*( ); }
-      virtual inline thing_ * operator -> ( ) const
+      virtual inline any_a * operator -> ( ) const
       { return value_.operator->( ); }
-      virtual inline thing_ increment ( thing_ _ )
+      virtual inline any_a increment ( any_a _ )
       { return value_.increment(_ ); }
-      virtual inline thing_ increment_ ( )
+      virtual inline any_a increment_ ( )
       { return value_.increment_( ); }
     
 
@@ -585,13 +585,13 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(const thing_& value);
+    	friend inline bool check_(const any_a& value);
 
     
 
     	template <typename ___TTT___>
 
-    	friend inline ___TTT___ cast_(const thing_& value, bool reference = false);
+    	friend inline ___TTT___ cast_(const any_a& value, bool reference = false);
 
     
 
@@ -601,11 +601,11 @@ namespace strange {
 
     
 
-    	static inline const char* ___struct_name___()
+    	static inline const char* ___abstraction_name___()
 
     	{
 
-    		return "thing_";
+    		return "any";
 
     	}
 
@@ -621,7 +621,7 @@ namespace strange {
 
     
 
-    	inline thing_()
+    	inline any_a()
 
     		: handle_{}
 
@@ -631,7 +631,7 @@ namespace strange {
 
     
 
-    	explicit inline thing_(bool reference)
+    	explicit inline any_a(bool reference)
 
     		: handle_{}
 
@@ -641,7 +641,7 @@ namespace strange {
 
     
 
-    	inline thing_(const thing_& other)
+    	inline any_a(const any_a& other)
 
     		: handle_{ other.handle_ }
 
@@ -655,7 +655,7 @@ namespace strange {
 
     
 
-    	inline thing_(const thing_& other, bool reference)
+    	inline any_a(const any_a& other, bool reference)
 
     		: handle_{ other.handle_ }
 
@@ -669,7 +669,7 @@ namespace strange {
 
     
 
-    	inline thing_(thing_&& other)
+    	inline any_a(any_a&& other)
 
     		: handle_{ std::move(other.handle_) }
 
@@ -683,7 +683,7 @@ namespace strange {
 
     
 
-    	inline thing_(thing_&& other, bool reference)
+    	inline any_a(any_a&& other, bool reference)
 
     		: handle_{ std::move(other.handle_) }
 
@@ -697,7 +697,7 @@ namespace strange {
 
     
 
-    	inline thing_& operator=(const thing_& other)
+    	inline any_a& operator=(const any_a& other)
 
     	{
 
@@ -711,7 +711,7 @@ namespace strange {
 
     
 
-    	inline thing_& operator=(thing_&& other)
+    	inline any_a& operator=(any_a&& other)
 
     	{
 
@@ -725,13 +725,13 @@ namespace strange {
 
     
 
-    	virtual ~thing_() = default;
+    	virtual ~any_a() = default;
 
     
 
     	template <typename ___TTT___>
 
-    	explicit inline thing_(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+    	explicit inline any_a(const std::shared_ptr<___TTT___>& handle, bool reference = false)
 
     		: handle_{ handle }
 
@@ -745,15 +745,15 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<thing_, std::decay_t<___TTT___>>::value>>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline thing_(___TTT___ value, bool reference = false);
+    	explicit inline any_a(___TTT___ value, bool reference = false);
 
     
 
     	template <typename ___TTT___>
 
-    	inline thing_& operator=(const std::shared_ptr<___TTT___>& handle)
+    	inline any_a& operator=(const std::shared_ptr<___TTT___>& handle)
 
     	{
 
@@ -767,9 +767,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<thing_, std::decay_t<___TTT___>>::value>>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
 
-    	inline thing_& operator=(___TTT___ value);
+    	inline any_a& operator=(___TTT___ value);
 
     };
 
@@ -777,7 +777,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(const thing_& value)
+    inline bool check_(const any_a& value)
 
     {
 
@@ -801,7 +801,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline ___TTT___ cast_(const thing_& value, bool reference)
+    inline ___TTT___ cast_(const any_a& value, bool reference)
 
     {
 
@@ -813,7 +813,7 @@ namespace strange {
 
     template <typename ___TTT___, typename>
 
-    inline thing_::thing_(___TTT___ value, bool reference)
+    inline any_a::any_a(___TTT___ value, bool reference)
 
     	: handle_{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 
@@ -829,11 +829,11 @@ namespace strange {
 
     template <typename ___TTT___, typename>
 
-    inline thing_& thing_::operator=(___TTT___ value)
+    inline any_a& any_a::operator=(___TTT___ value)
 
     {
 
-    	thing_ temp{ std::move(value) };
+    	any_a temp{ std::move(value) };
 
     	std::swap(temp.handle_, handle_);
 

@@ -4,57 +4,57 @@
 namespace strange
 {
 
-template <typename CAT_ = thing_>
+template <typename CAT_ = any_a>
 class Everything : public Something<CAT_>
 {
 public: ___THING___
 	// construction
-	static inline thing_ val(thing_ _)
+	static inline any_a val(any_a _)
 	{
 		return val_();
 	}
 
-	static inline thing_ val_()
+	static inline any_a val_()
 	{
 		return val__();
 	}
 
-	static inline thing_& val__()
+	static inline any_a& val__()
 	{
-		static thing_ VAL = thing_{ Everything<>{} };
+		static any_a VAL = any_a{ Everything<>{} };
 		return VAL;
 	}
 
-	static inline thing_ ref(thing_ _)
+	static inline any_a ref(any_a _)
 	{
 		return ref_();
 	}
 
-	static inline thing_ ref_()
+	static inline any_a ref_()
 	{
 		return ref__();
 	}
 
-	static inline thing_& ref__()
+	static inline any_a& ref__()
 	{
-		static thing_ REF = thing_(Everything<>{}, true);
+		static any_a REF = any_a(Everything<>{}, true);
 		return REF;
 	}
 
 	// reflection
-	static inline symbol_ type_()
+	static inline symbol_a type_()
 	{
-		static symbol_ TYPE = sym__("strange::Everything");
+		static symbol_a TYPE = sym__("strange::Everything");
 		return TYPE;
 	}
 
 	// comparison
-	static inline thing_ everything(thing_)
+	static inline any_a everything(any_a)
 	{
 		return everything_();
 	}
 
-	static inline thing_ everything_()
+	static inline any_a everything_()
 	{
 		return Everything<>::val_();
 	}
@@ -64,12 +64,12 @@ public: ___THING___
 		return true;
 	}
 
-	inline bool operator==(thing_ thing) const
+	inline bool operator==(any_a thing) const
 	{
 		return thing.everything__();
 	}
 
-	inline bool operator!=(thing_ thing) const
+	inline bool operator!=(any_a thing) const
 	{
 		return !thing.everything__();
 	}
@@ -81,7 +81,7 @@ public: ___THING___
 	}
 
 	// iterator
-	inline thing_& operator*() const
+	inline any_a& operator*() const
 	{
 		return Everything<>::val__();
 	}

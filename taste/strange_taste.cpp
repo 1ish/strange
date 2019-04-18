@@ -10,20 +10,20 @@ TEST(TestCaseName, TestName)
   EXPECT_TRUE(true);
 }
 
-thing_ fun(thing_ x)
+any_a fun(any_a x)
 {
 	return Nothing<>::val_();
 }
 
 TEST(TestCaseName, ForLoop)
 {
-	thing_ n{ Nothing<>::val_() };
+	any_a n{ Nothing<>::val_() };
 
 	for (auto v : n)
 	{
 	}
 
-	thing_ e{ Everything<>::val_() };
+	any_a e{ Everything<>::val_() };
 
 	for (auto v : e)
 	{
@@ -35,18 +35,18 @@ TEST(TestCaseName, ForLoop)
 
 	EXPECT_TRUE(Nothing<>::ref_().nothing__());
 
-	symbol_ s = sym__("strange");
+	symbol_a s = sym__("strange");
 
 	EXPECT_EQ(s.to_string__(), "strange");
 	EXPECT_FALSE(e.is__("strange"));
 	EXPECT_TRUE(s.is__("strange"));
 
-	cat_ c = Cat<>::val_();
+	cat_a c = Cat<>::val_();
 
-	thing_ f = NativeFunction<>::val__(fun, "x", "y", "z");
-	thing_ g = NativeFunction<>::val__(&Nothing<>::val, "x", "y", "z");
-	thing_ h = NativeExtraction<thing_>::val__(&thing_::beget);
-	thing_ i = NativeMutation<thing_>::val__(&thing_::beset);
+	any_a f = NativeFunction<>::val__(fun, "x", "y", "z");
+	any_a g = NativeFunction<>::val__(&Nothing<>::val, "x", "y", "z");
+	any_a h = NativeExtraction<any_a>::val__(&any_a::beget);
+	any_a i = NativeMutation<any_a>::val__(&any_a::beset);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
