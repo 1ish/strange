@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_SYMBOL_H
-#define COM_ONEISH_STRANGE_SYMBOL_H
+#ifndef COM_ONEISH_STRANGE_SYMBOL_T_H
+#define COM_ONEISH_STRANGE_SYMBOL_T_H
 
 namespace strange
 {
 
 template <typename CAT_ = symbol_a>
-class Symbol : public Something<CAT_>
+class symbol_t : public something_t<CAT_>
 {
 public: ___THING___
 	// construction
@@ -19,7 +19,7 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline symbol_a val_(any_a thing = Nothing<>::val_())
+	static inline symbol_a val_(any_a thing = nothing_t<>::val_())
 	{
 		return val__("");
 	}
@@ -27,7 +27,7 @@ public: ___THING___
 	template <typename F>
 	static inline symbol_a val__(F&& s)
 	{
-		return symbol_a{ Symbol{ std::forward<F>(s) } };
+		return symbol_a{ symbol_t{ std::forward<F>(s) } };
 	}
 
 	static inline symbol_a ref(any_a range)
@@ -40,7 +40,7 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline symbol_a ref_(any_a thing = Nothing<>::val_())
+	static inline symbol_a ref_(any_a thing = nothing_t<>::val_())
 	{
 		return ref__("");
 	}
@@ -48,13 +48,13 @@ public: ___THING___
 	template <typename F>
 	static inline symbol_a ref__(F&& s)
 	{
-		return symbol_a(Symbol{ std::forward<F>(s) }, true);
+		return symbol_a(symbol_t{ std::forward<F>(s) }, true);
 	}
 
 	// reflection
 	static inline symbol_a type_()
 	{
-		static symbol_a TYPE = sym__("strange::Symbol");
+		static symbol_a TYPE = sym__("strange::symbol");
 		return TYPE;
 	}
 
@@ -95,7 +95,7 @@ public: ___THING___
 				s += cast_<symbol_a>(thing).to_string__();
 			}
 		}
-		return symbol_a{ Symbol{ s } };
+		return symbol_a{ symbol_t{ s } };
 	}
 
 	inline symbol_a add_(symbol_a symbol) const
@@ -105,7 +105,7 @@ public: ___THING___
 
 	inline symbol_a operator+(symbol_a symbol) const
 	{
-		return symbol_a{ Symbol{ _string + symbol.to_string__() } };
+		return symbol_a{ symbol_t{ _string + symbol.to_string__() } };
 	}
 
 protected:
@@ -113,8 +113,8 @@ protected:
 	const std::size_t _hash;
 
 	template <typename F>
-	inline Symbol(F&& s)
-		: Something{}
+	inline symbol_t(F&& s)
+		: something_t{}
 		, _string{ std::forward<F>(s) }
 		, _hash{ std::hash<std::string>{}(_string) }
 	{}
@@ -123,7 +123,7 @@ protected:
 template <typename F>
 inline symbol_a sym__(F&& s)
 {
-	return Symbol<>::val__(std::forward<F>(s));
+	return symbol_t<>::val__(std::forward<F>(s));
 }
 
 } // namespace strange

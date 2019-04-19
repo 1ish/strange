@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_EVERYTHING_H
-#define COM_ONEISH_STRANGE_EVERYTHING_H
+#ifndef COM_ONEISH_STRANGE_EVERYTHING_T_H
+#define COM_ONEISH_STRANGE_EVERYTHING_T_H
 
 namespace strange
 {
 
 template <typename CAT_ = any_a>
-class Everything : public Something<CAT_>
+class everything_t : public something_t<CAT_>
 {
 public: ___THING___
 	// construction
@@ -21,7 +21,7 @@ public: ___THING___
 
 	static inline any_a& val__()
 	{
-		static any_a VAL = any_a{ Everything<>{} };
+		static any_a VAL = any_a{ everything_t<>{} };
 		return VAL;
 	}
 
@@ -37,14 +37,14 @@ public: ___THING___
 
 	static inline any_a& ref__()
 	{
-		static any_a REF = any_a(Everything<>{}, true);
+		static any_a REF = any_a(everything_t<>{}, true);
 		return REF;
 	}
 
 	// reflection
 	static inline symbol_a type_()
 	{
-		static symbol_a TYPE = sym__("strange::Everything");
+		static symbol_a TYPE = sym__("strange::everything");
 		return TYPE;
 	}
 
@@ -56,7 +56,7 @@ public: ___THING___
 
 	static inline any_a everything_()
 	{
-		return Everything<>::val_();
+		return everything_t<>::val_();
 	}
 
 	static inline bool everything__()
@@ -83,22 +83,22 @@ public: ___THING___
 	// iterator
 	inline any_a& operator*() const
 	{
-		return Everything<>::val__();
+		return everything_t<>::val__();
 	}
 
-	inline Everything& operator++()
+	inline everything_t& operator++()
 	{
 		return *this;
 	}
 
-	inline Everything operator++(int)
+	inline everything_t operator++(int)
 	{
 		return *this;
 	}
 
 protected:
-	inline Everything()
-		: Something{}
+	inline everything_t()
+		: something_t{}
 	{}
 };
 

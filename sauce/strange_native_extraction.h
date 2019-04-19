@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_NATIVE_EXTRACTION_H
-#define COM_ONEISH_STRANGE_NATIVE_EXTRACTION_H
+#ifndef COM_ONEISH_STRANGE_NATIVE_EXTRACTION_T_H
+#define COM_ONEISH_STRANGE_NATIVE_EXTRACTION_T_H
 
 namespace strange
 {
 
 template <typename T, typename CAT_ = any_a>
-class NativeExtraction : public Thing<CAT_>
+class native_extraction_t : public thing_t<CAT_>
 {
 	using member = any_a(T::*)(any_a) const;
 
@@ -14,7 +14,7 @@ public: ___THING___
 	static inline any_a val(any_a _)
 	{
 		assert(false); //TODO
-		return Nothing<>::val_();
+		return nothing_t<>::val_();
 	}
 
 	template <typename... Args>
@@ -22,14 +22,14 @@ public: ___THING___
 	{
 		std::vector<symbol_a> v;
 		v.reserve(sizeof...(Args));
-		Variadic<symbol_a>::variadic_(v, std::forward<Args>(args)...);
-		return any_a{ NativeExtraction(fun, std::move(v)) };
+		variadic_t<symbol_a>::variadic_(v, std::forward<Args>(args)...);
+		return any_a{ native_extraction_t(fun, std::move(v)) };
 	}
 
 	static inline any_a ref(any_a _)
 	{
 		assert(false); //TODO
-		return Nothing<>::val_();
+		return nothing_t<>::val_();
 	}
 
 	template <typename... Args>
@@ -37,20 +37,20 @@ public: ___THING___
 	{
 		std::vector<symbol_a> v;
 		v.reserve(sizeof...(Args));
-		Variadic<symbol_a>::variadic_(v, std::forward<Args>(args)...);
-		return any_a(NativeExtraction(fun, std::move(v)), true);
+		variadic_t<symbol_a>::variadic_(v, std::forward<Args>(args)...);
+		return any_a(native_extraction_t(fun, std::move(v)), true);
 	}
 
 	// reflection
 	static inline symbol_a type_()
 	{
-		static symbol_a TYPE = sym__("strange::NativeExtraction");
+		static symbol_a TYPE = sym__("strange::native_extraction");
 		return TYPE;
 	}
 
 	inline any_a eater_() const
 	{
-		return Nothing<>::val_(); //TODO return range of parameter names
+		return nothing_t<>::val_(); //TODO return range of parameter names
 	}
 
 	// function
@@ -64,8 +64,8 @@ protected:
 	const std::vector<symbol_a> _params;
 
 	template <typename F>
-	inline NativeExtraction(const member fun, F&& params)
-		: Thing{}
+	inline native_extraction_t(const member fun, F&& params)
+		: thing_t{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
 	{}

@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_IT_H
-#define COM_ONEISH_STRANGE_IT_H
+#ifndef COM_ONEISH_STRANGE_IT_T_H
+#define COM_ONEISH_STRANGE_IT_T_H
 
 namespace strange
 {
 
-template <bool CONST = false, typename CAT_ = any_a, typename END = Nothing<>>
-class It : public Something<CAT_>
+template <bool CONST = false, typename CAT_ = any_a, typename END = nothing_t<>>
+class it_t : public something_t<CAT_>
 {
 public: ___THING___
 	// construction
@@ -21,7 +21,7 @@ public: ___THING___
 
 	static inline any_a val_(any_a thing = END::val_())
 	{
-		return any_a{ It<CONST, CAT_, END>{ thing } };
+		return any_a{ it_t<CONST, CAT_, END>{ thing } };
 	}
 
 	static inline any_a ref(any_a range)
@@ -36,13 +36,13 @@ public: ___THING___
 
 	static inline any_a ref_(any_a thing = END::val_())
 	{
-		return any_a(It<CONST, CAT_, END>{ thing }, true);
+		return any_a(it_t<CONST, CAT_, END>{ thing }, true);
 	}
 
 	// reflection
 	static inline symbol_a type_()
 	{
-		static symbol_a TYPE = sym__("strange::It");
+		static symbol_a TYPE = sym__("strange::it");
 		return TYPE;
 	}
 
@@ -68,15 +68,15 @@ public: ___THING___
 		return _thing;
 	}
 
-	inline It& operator++()
+	inline it_t& operator++()
 	{
 		_thing = END::val_();
 		return *this;
 	}
 
-	inline It operator++(int)
+	inline it_t operator++(int)
 	{
-		It result = *this;
+		it_t result = *this;
 		operator++();
 		return result;
 	}
@@ -84,8 +84,8 @@ public: ___THING___
 protected:
 	mutable any_a _thing; //TODO A forward iterator cannot be "stashing": it cannot return a reference to an object within itself, because such references would be invalidated by the destruction of the forward iterator.
 
-	inline It(const any_a& thing)
-		: Something{}
+	inline it_t(const any_a& thing)
+		: something_t{}
 		, _thing(thing, !CONST)
 	{}
 };

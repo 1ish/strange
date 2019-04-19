@@ -12,18 +12,18 @@ TEST(TestCaseName, TestName)
 
 any_a fun(any_a x)
 {
-	return Nothing<>::val_();
+	return nothing_t<>::val_();
 }
 
 TEST(TestCaseName, ForLoop)
 {
-	any_a n{ Nothing<>::val_() };
+	any_a n{ nothing_t<>::val_() };
 
 	for (auto v : n)
 	{
 	}
 
-	any_a e{ Everything<>::val_() };
+	any_a e{ everything_t<>::val_() };
 
 	for (auto v : e)
 	{
@@ -31,9 +31,9 @@ TEST(TestCaseName, ForLoop)
 
 	e = n;
 
-//	Nothing<>::ref().set_(Everything<>::ref());
+//	nothing_t<>::ref().set_(everything_t<>::ref());
 
-	EXPECT_TRUE(Nothing<>::ref_().nothing__());
+	EXPECT_TRUE(nothing_t<>::ref_().nothing__());
 
 	symbol_a s = sym__("strange");
 
@@ -41,12 +41,12 @@ TEST(TestCaseName, ForLoop)
 	EXPECT_FALSE(e.is__("strange"));
 	EXPECT_TRUE(s.is__("strange"));
 
-	cat_a c = Cat<>::val_();
+	cat_a c = cat_t<>::val_();
 
-	any_a f = NativeFunction<>::val__(fun, "x", "y", "z");
-	any_a g = NativeFunction<>::val__(&Nothing<>::val, "x", "y", "z");
-	any_a h = NativeExtraction<any_a>::val__(&any_a::beget);
-	any_a i = NativeMutation<any_a>::val__(&any_a::beset);
+	any_a f = native_function_t<>::val__(fun, "x", "y", "z");
+	any_a g = native_function_t<>::val__(&nothing_t<>::val, "x", "y", "z");
+	any_a h = native_extraction_t<any_a>::val__(&any_a::beget);
+	any_a i = native_mutation_t<any_a>::val__(&any_a::beset);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
@@ -106,8 +106,8 @@ TEST(StrangeTokenizer, Next) {
 	{
 		const auto token = Thing::dynamic_<Token>(n);
 		ASSERT_NE(token, std::shared_ptr<Token>(0));
-		const auto symbol = Thing::dynamic_<Symbol>(token->symbol());
-		ASSERT_NE(symbol, std::shared_ptr<Symbol>(0));
+		const auto symbol = Thing::dynamic_<symbol_t>(token->symbol());
+		ASSERT_NE(symbol, std::shared_ptr<symbol_t>(0));
 #ifdef STRANGE_TEST_VERBOSE
 		std::cout << "got: " << symbol->get_() << std::endl;
 #endif

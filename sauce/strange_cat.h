@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_CAT_H
-#define COM_ONEISH_STRANGE_CAT_H
+#ifndef COM_ONEISH_STRANGE_CAT_T_H
+#define COM_ONEISH_STRANGE_CAT_T_H
 
 namespace strange
 {
 
 template <typename CAT_ = cat_a>
-class Cat : public Symbol<CAT_>
+class cat_t : public symbol_t<CAT_>
 {
 public: ___THING___
 	// construction
@@ -19,9 +19,9 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline cat_a val_(any_a thing = Nothing<>::val_())
+	static inline cat_a val_(any_a thing = nothing_t<>::val_())
 	{
-		return cat_a{ Cat{} };
+		return cat_a{ cat_t{} };
 	}
 
 	static inline cat_a ref(any_a range)
@@ -34,15 +34,15 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline cat_a ref_(any_a thing = Nothing<>::val_())
+	static inline cat_a ref_(any_a thing = nothing_t<>::val_())
 	{
-		return cat_a(Cat{}, true);
+		return cat_a(cat_t{}, true);
 	}
 
 	// reflection
 	static inline symbol_a type_()
 	{
-		static symbol_a TYPE = sym__("strange::Cat");
+		static symbol_a TYPE = sym__("strange::cat");
 		return TYPE;
 	}
 
@@ -140,12 +140,12 @@ protected:
 	const any_a _parameters;
 	const any_a _result;
 
-	inline Cat()
-		: Symbol{ _symbol_() }
+	inline cat_t()
+		: symbol_t{ _symbol_() }
 		, _name{ sym__("") }
-		, _arguments{ Nothing<>::val_() }
-		, _parameters{ Nothing<>::val_() }
-		, _result{ Nothing<>::val_() }
+		, _arguments{ nothing_t<>::val_() }
+		, _parameters{ nothing_t<>::val_() }
+		, _result{ nothing_t<>::val_() }
 	{}
 
 	static inline const std::string _symbol_()

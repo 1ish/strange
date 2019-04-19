@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_RANGE_H
-#define COM_ONEISH_STRANGE_RANGE_H
+#ifndef COM_ONEISH_STRANGE_RANGE_T_H
+#define COM_ONEISH_STRANGE_RANGE_T_H
 
 namespace strange
 {
 
 template <typename CAT_ = any_a>
-class Range : public Something<CAT_>
+class range_t : public something_t<CAT_>
 {
 public: ___THING___
 	// construction
@@ -21,7 +21,7 @@ public: ___THING___
 
 	static inline any_a val_(any_a begin, any_a end)
 	{
-		return any_a{ Range(begin, end) };
+		return any_a{ range_t(begin, end) };
 	}
 
 	static inline any_a ref(any_a range)
@@ -36,13 +36,13 @@ public: ___THING___
 
 	static inline any_a ref_(any_a begin, any_a end)
 	{
-		return any_a(Range(begin, end), true);
+		return any_a(range_t(begin, end), true);
 	}
 
 	// reflection
 	static inline symbol_a type_()
 	{
-		static symbol_a TYPE = sym__("strange::Range");
+		static symbol_a TYPE = sym__("strange::range");
 		return TYPE;
 	}
 
@@ -71,8 +71,8 @@ protected:
 	any_a _begin;
 	any_a _end;
 
-	inline Range(any_a begin, any_a end)
-		: Something{}
+	inline range_t(any_a begin, any_a end)
+		: something_t{}
 		, _begin(begin)
 		, _end(end)
 	{}

@@ -1,10 +1,10 @@
-#ifndef COM_ONEISH_STRANGE_ONE_H
-#define COM_ONEISH_STRANGE_ONE_H
+#ifndef COM_ONEISH_STRANGE_ONE_T_H
+#define COM_ONEISH_STRANGE_ONE_T_H
 
 namespace strange
 {
 
-class One
+class one_t
 {
 public:
 	// erasure
@@ -75,7 +75,7 @@ protected:
 	mutable any_a::___WEAK___ _meek;
 
 	// construction
-	inline One() {};
+	inline one_t() {};
 };
 
 } // namespace strange

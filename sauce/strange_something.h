@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_SOMETHING_H
-#define COM_ONEISH_STRANGE_SOMETHING_H
+#ifndef COM_ONEISH_STRANGE_SOMETHING_T_H
+#define COM_ONEISH_STRANGE_SOMETHING_T_H
 
 namespace strange
 {
 
 template <typename CAT_>
-class Something : public Thing<CAT_>
+class something_t : public thing_t<CAT_>
 {
 public:
 	// function
@@ -14,7 +14,7 @@ public:
 		//TODO
 		// operation = thing.operations_().at(range.1st);
 		// return operate_(thing, operation, range.2nd...);
-		return Nothing<>::val_();
+		return nothing_t<>::val_();
 	}
 
 	// comparison
@@ -25,7 +25,7 @@ public:
 
 	static inline any_a something_()
 	{
-		return Everything<>::val_();
+		return everything_t<>::val_();
 	}
 
 	static inline bool something__()
@@ -34,8 +34,8 @@ public:
 	}
 
 protected:
-	inline Something()
-		: Thing{}
+	inline something_t()
+		: thing_t{}
 	{}
 };
 

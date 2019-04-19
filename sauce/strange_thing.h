@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_THING_H
-#define COM_ONEISH_STRANGE_THING_H
+#ifndef COM_ONEISH_STRANGE_THING_T_H
+#define COM_ONEISH_STRANGE_THING_T_H
 
 namespace strange
 {
 
 template <typename CAT_>
-class Thing : public One
+class thing_t : public one_t
 {
 public:
 	// erasure
@@ -22,18 +22,18 @@ public:
 	// reflection
 	static inline cat_a cat_()
 	{
-		static cat_a CATEGORY = Cat<>::val_(sym__(std::string("strange") + CAT_::___abstraction_name___()));
+		static cat_a CATEGORY = cat_t<>::val_(sym__(std::string("strange") + CAT_::___abstraction_name___()));
 		return CATEGORY;
 	}
 
 	static inline any_a eater_()
 	{
-		return Nothing<>::val_();
+		return nothing_t<>::val_();
 	}
 
 	static inline any_a feeder(any_a range)
 	{
-		return Nothing<>::val_();
+		return nothing_t<>::val_();
 	}
 
 	// visitor pattern
@@ -42,7 +42,7 @@ public:
 		any_a it = range.cbegin();
 		assert(it != range.cend()); //TODO
 		any_a visitor = *it;
-		return visitor->invoke(Range<>::val_(++it, range.cend())); //TODO me_() must already be in range
+		return visitor->invoke(range_t<>::val_(++it, range.cend())); //TODO me_() must already be in range
 	}
 
 	// function
@@ -51,7 +51,7 @@ public:
 		any_a it = range.cbegin();
 		assert(it != range.cend()); //TODO
 		any_a member = *it;
-		return invoke_(member, Range<>::val_(++it, range.cend()));
+		return invoke_(member, range_t<>::val_(++it, range.cend()));
 	}
 
 	inline any_a invoke_(any_a member, any_a range) const
@@ -60,7 +60,7 @@ public:
 		// thing = me_();
 		// operation = thing.operations_().at(member);
 		// return operate_(thing, operation, range);
-		return Nothing<>::val_();
+		return nothing_t<>::val_();
 	}
 
 	static inline any_a operate(any_a range)
@@ -71,7 +71,7 @@ public:
 		++it;
 		assert(it != range.cend()); //TODO
 		any_a operation = *it;
-		return operate_(thing, operation, Range<>::val_(++it, range.cend()));
+		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
 	}
 
 	static inline any_a operate_(any_a thing, any_a operation, any_a range)
@@ -100,7 +100,7 @@ public:
 
 	static inline any_a nothing_()
 	{
-		return Nothing<>::val_();
+		return nothing_t<>::val_();
 	}
 
 	static inline any_a anything(any_a)
@@ -110,7 +110,7 @@ public:
 
 	static inline any_a anything_()
 	{
-		return Everything<>::val_();
+		return everything_t<>::val_();
 	}
 
 	static inline any_a something(any_a)
@@ -120,7 +120,7 @@ public:
 
 	static inline any_a something_()
 	{
-		return Nothing<>::val_();
+		return nothing_t<>::val_();
 	}
 
 	static inline any_a everything(any_a)
@@ -130,34 +130,34 @@ public:
 
 	static inline any_a everything_()
 	{
-		return Nothing<>::val_();
+		return nothing_t<>::val_();
 	}
 
 	// range
 	inline any_a cbegin() const
 	{
-		return It<true>::val_(me_());
+		return it_t<true>::val_(me_());
 	}
 
 	inline any_a begin()
 	{
-		return It<>::val_(me_());
+		return it_t<>::val_(me_());
 	}
 
 	inline any_a cend() const
 	{
-		return Nothing<>::val_();
+		return nothing_t<>::val_();
 	}
 
 	inline any_a end()
 	{
-		return Nothing<>::val_();
+		return nothing_t<>::val_();
 	}
 
 	// iterator
 	inline any_a& operator*() const
 	{
-		return Nothing<>::val__();
+		return nothing_t<>::val__();
 	}
 
 	inline void operator++()
@@ -168,14 +168,14 @@ public:
 
 protected:
 	// construction
-	inline Thing()
-		: One{}
+	inline thing_t()
+		: one_t{}
 	{}
 
 	// conversion
 	static inline any_a _boole_(bool b)
 	{
-		return b ? Everything<>::val_() : Nothing<>::val_();
+		return b ? everything_t<>::val_() : nothing_t<>::val_();
 	}
 };
 
@@ -219,7 +219,7 @@ inline any_a hash(any_a) const \
 } \
 inline any_a hash_() const \
 { \
-	return Everything<>::val_(); /* //TODO */ \
+	return everything_t<>::val_(); /* //TODO */ \
 } \
 inline any_a beget(any_a) const \
 { \
