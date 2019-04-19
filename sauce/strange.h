@@ -9,18 +9,19 @@
 #include "strange_cat_a.h"
 #undef ___derived___
 
-#include "strange_one.h"
-#include "strange_thing.h"
-#include "strange_native_function.h"
-#include "strange_native_extraction.h"
-#include "strange_native_mutation.h"
-#include "strange_something.h"
-#include "strange_everything.h"
-#include "strange_nothing.h"
-#include "strange_it.h"
-#include "strange_symbol.h"
-#include "strange_cat.h"
-#include "strange_variadic.h"
-#include "strange_range.h"
+#include "strange_one_t.h"
+#include "strange_thing_t.h"
+#include "strange_native_function_t.h"
+#include "strange_native_extraction_t.h"
+#include "strange_native_mutation_t.h"
+#include "strange_something_t.h"
+#include "strange_everything_t.h"
+#include "strange_nothing_t.h"
+#include "strange_it_t.h"
+#include "strange_symbol_t.h"
+#include "strange_cat_t.h"
+#include "strange_range_t.h"
+
+#include "strange_variadic_u.h"
 
 #endif

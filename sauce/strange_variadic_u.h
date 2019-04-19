@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_VARIADIC_T_H
-#define COM_ONEISH_STRANGE_VARIADIC_T_H
+#ifndef COM_ONEISH_STRANGE_VARIADIC_U_H
+#define COM_ONEISH_STRANGE_VARIADIC_U_H
 
 namespace strange
 {
 
 template <typename CAT = any_a>
-class variadic_t
+class variadic_u
 {
 public:
 	static inline void variadic_(std::vector<CAT>& vec)
