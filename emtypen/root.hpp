@@ -21,6 +21,56 @@ public:
 		return result;
 	}
 
+	inline %struct_name%_a& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+	inline %struct_name%_a operator--(int)
+	{
+		assert(handle_);
+		%struct_name%_a result = *this;
+		write().operator--();
+		return result;
+	}
+
+	inline %struct_name%_a& operator+=(%struct_name%_a other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline %struct_name%_a& operator-=(%struct_name%_a other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline %struct_name%_a& operator*=(%struct_name%_a other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline %struct_name%_a& operator/=(%struct_name%_a other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline %struct_name%_a& operator%=(%struct_name%_a other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
 	%nonvirtual_members%
 
 protected:
@@ -40,6 +90,18 @@ protected:
 		virtual inline operator bool() const = 0;
 
 		virtual inline void operator++() = 0;
+
+		virtual inline void operator--() = 0;
+
+		virtual inline void operator+=(%struct_name%_a other) = 0;
+
+		virtual inline void operator-=(%struct_name%_a other) = 0;
+
+		virtual inline void operator*=(%struct_name%_a other) = 0;
+
+		virtual inline void operator/=(%struct_name%_a other) = 0;
+
+		virtual inline void operator%=(%struct_name%_a other) = 0;
 
 		%pure_virtual_members%
 	};
@@ -70,6 +132,36 @@ protected:
 		virtual inline void operator++() final
 		{
 			value_.operator++();
+		}
+
+		virtual inline void operator--() final
+		{
+			value_.operator--();
+		}
+
+		virtual inline void operator+=(%struct_name%_a other) final
+		{
+			value_.operator+=(other);
+		}
+
+		virtual inline void operator-=(%struct_name%_a other) final
+		{
+			value_.operator-=(other);
+		}
+
+		virtual inline void operator*=(%struct_name%_a other) final
+		{
+			value_.operator*=(other);
+		}
+
+		virtual inline void operator/=(%struct_name%_a other) final
+		{
+			value_.operator/=(other);
+		}
+
+		virtual inline void operator%=(%struct_name%_a other) final
+		{
+			value_.operator%=(other);
 		}
 
 		%virtual_members% //TODO final

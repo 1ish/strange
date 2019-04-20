@@ -181,6 +181,27 @@ public:
 	inline void operator++(int)
 	{}
 
+	inline void operator--()
+	{}
+
+	inline void operator--(int)
+	{}
+
+	inline void operator+=(any_a other)
+	{}
+
+	inline void operator-=(any_a other)
+	{}
+
+	inline void operator*=(any_a other)
+	{}
+
+	inline void operator/=(any_a other)
+	{}
+
+	inline void operator%=(any_a other)
+	{}
+
 protected:
 	// construction
 	inline thing_t()

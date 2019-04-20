@@ -58,6 +58,106 @@ namespace strange {
 
     
 
+    	inline any_a& operator--()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator--();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline any_a operator--(int)
+
+    	{
+
+    		assert(handle_);
+
+    		any_a result = *this;
+
+    		write().operator--();
+
+    		return result;
+
+    	}
+
+    
+
+    	inline any_a& operator+=(any_a other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator+=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline any_a& operator-=(any_a other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator-=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline any_a& operator*=(any_a other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator*=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline any_a& operator/=(any_a other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator/=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline any_a& operator%=(any_a other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator%=(other);
+
+    		return *this;
+
+    	}
+
+    
+
      inline any_a val ( any_a range ) const
      { assert(handle_); return read().val(range ); }
      inline any_a ref ( any_a range ) const
@@ -218,6 +318,30 @@ namespace strange {
 
     
 
+    		virtual inline void operator--() = 0;
+
+    
+
+    		virtual inline void operator+=(any_a other) = 0;
+
+    
+
+    		virtual inline void operator-=(any_a other) = 0;
+
+    
+
+    		virtual inline void operator*=(any_a other) = 0;
+
+    
+
+    		virtual inline void operator/=(any_a other) = 0;
+
+    
+
+    		virtual inline void operator%=(any_a other) = 0;
+
+    
+
       virtual inline any_a val ( any_a range ) const = 0;
       virtual inline any_a ref ( any_a range ) const = 0;
       virtual inline any_a type ( any_a _ ) const = 0;
@@ -334,6 +458,66 @@ namespace strange {
     		{
 
     			value_.operator++();
+
+    		}
+
+    
+
+    		virtual inline void operator--() final
+
+    		{
+
+    			value_.operator--();
+
+    		}
+
+    
+
+    		virtual inline void operator+=(any_a other) final
+
+    		{
+
+    			value_.operator+=(other);
+
+    		}
+
+    
+
+    		virtual inline void operator-=(any_a other) final
+
+    		{
+
+    			value_.operator-=(other);
+
+    		}
+
+    
+
+    		virtual inline void operator*=(any_a other) final
+
+    		{
+
+    			value_.operator*=(other);
+
+    		}
+
+    
+
+    		virtual inline void operator/=(any_a other) final
+
+    		{
+
+    			value_.operator/=(other);
+
+    		}
+
+    
+
+    		virtual inline void operator%=(any_a other) final
+
+    		{
+
+    			value_.operator%=(other);
 
     		}
 

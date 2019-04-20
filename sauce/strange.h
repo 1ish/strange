@@ -11,6 +11,9 @@
 #define ___root___ any_a
 #include "strange_misunderstanding_a.h"
 #undef ___root___
+#define ___root___ any_a
+#include "strange_collection_a.h"
+#undef ___root___
 
 #include "strange_one_t.h"
 #include "strange_thing_t.h"
