@@ -13,12 +13,12 @@ namespace strange
 class misunderstanding
 {
 public:
-	// symbol
+	// misunderstanding
 	inline const std::string& to_string__() const;
 
-	inline symbol_a add(any_a range) const;
-	inline symbol_a add_(symbol_a symbol) const;
-	inline symbol_a operator+(symbol_a symbol) const;
+	inline misunderstanding_a add(any_a range) const;
+	inline misunderstanding_a add_(misunderstanding_a misunderstanding) const;
+	inline misunderstanding_a operator+(misunderstanding_a misunderstanding) const;
 };
 
 } // namespace strange

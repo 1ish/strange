@@ -52,10 +52,34 @@ public: ___THING___
 	}
 
 	// reflection
-	static inline misunderstanding_a type_()
+	static inline symbol_a type_()
 	{
-		static misunderstanding_a TYPE = sym__("strange::disagreement");
+		static symbol_a TYPE = sym__("strange::disagreement");
 		return TYPE;
+	}
+
+	// misunderstanding
+	inline misunderstanding_a add(any_a range) const
+	{
+		std::string s = _string;
+		for (const any_a thing : range)
+		{
+			if (check_<misunderstanding_a>(thing))
+			{
+				s += cast_<misunderstanding_a>(thing).to_string__();
+			}
+		}
+		return misunderstanding_a{ disagreement_t{ s } };
+	}
+
+	inline misunderstanding_a add_(misunderstanding_a misunderstanding) const
+	{
+		return operator+(misunderstanding);
+	}
+
+	inline misunderstanding_a operator+(misunderstanding_a misunderstanding) const
+	{
+		return misunderstanding_a{ disagreement_t{ _string + misunderstanding.to_string__() } };
 	}
 
 protected:

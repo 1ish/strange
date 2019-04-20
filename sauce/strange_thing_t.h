@@ -40,7 +40,10 @@ public:
 	static inline any_a visit(any_a range)
 	{
 		any_a it = range.cbegin();
-		assert(it != range.cend()); //TODO
+		if (it == range.cend())
+		{
+			return dis__("too few arguments passed to strange::thing::visit");
+		}
 		any_a visitor = *it;
 		return visitor->invoke(range_t<>::val_(++it, range.cend())); //TODO me_() must already be in range
 	}

@@ -12,6 +12,7 @@ namespace strange
 	class any_a;
 	class symbol_a;
 	class cat_a;
+	class misunderstanding_a;
 }
 
 #endif

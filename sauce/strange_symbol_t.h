@@ -87,7 +87,7 @@ public: ___THING___
 
 	inline symbol_a add(any_a range) const
 	{
-		std::string s;
+		std::string s = _string;
 		for (const any_a thing : range)
 		{
 			if (check_<symbol_a>(thing))

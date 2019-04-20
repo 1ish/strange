@@ -52,9 +52,9 @@ public: ___THING___
 	}
 
 	// reflection
-	static inline misunderstanding_a type_()
+	static inline symbol_a type_()
 	{
-		static misunderstanding_a TYPE = sym__("strange::misunderstanding");
+		static symbol_a TYPE = sym__("strange::misunderstanding");
 		return TYPE;
 	}
 
@@ -82,7 +82,7 @@ public: ___THING___
 
 	inline misunderstanding_a add(any_a range) const
 	{
-		std::string s;
+		std::string s = _string;
 		for (const any_a thing : range)
 		{
 			if (check_<misunderstanding_a>(thing))

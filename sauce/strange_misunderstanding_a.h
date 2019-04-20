@@ -20,12 +20,12 @@ namespace strange {
 
      inline const std :: string & to_string__ ( ) const
      { assert(handle_); return read().to_string__( ); }
-     inline symbol_a add ( any_a range ) const
+     inline misunderstanding_a add ( any_a range ) const
      { assert(handle_); return read().add(range ); }
-     inline symbol_a add_ ( symbol_a symbol ) const
-     { assert(handle_); return read().add_(symbol ); }
-     inline symbol_a operator + ( symbol_a symbol ) const
-     { assert(handle_); return read().operator+(symbol ); }
+     inline misunderstanding_a add_ ( misunderstanding_a misunderstanding ) const
+     { assert(handle_); return read().add_(misunderstanding ); }
+     inline misunderstanding_a operator + ( misunderstanding_a misunderstanding ) const
+     { assert(handle_); return read().operator+(misunderstanding ); }
     
 
     protected:
@@ -35,9 +35,9 @@ namespace strange {
     	{
 
       virtual inline const std :: string & to_string__ ( ) const = 0;
-      virtual inline symbol_a add ( any_a range ) const = 0;
-      virtual inline symbol_a add_ ( symbol_a symbol ) const = 0;
-      virtual inline symbol_a operator + ( symbol_a symbol ) const = 0;
+      virtual inline misunderstanding_a add ( any_a range ) const = 0;
+      virtual inline misunderstanding_a add_ ( misunderstanding_a misunderstanding ) const = 0;
+      virtual inline misunderstanding_a operator + ( misunderstanding_a misunderstanding ) const = 0;
     	};
 
     
@@ -70,12 +70,12 @@ namespace strange {
 
       virtual inline const std :: string & to_string__ ( ) const
       { return value_.to_string__( ); }
-      virtual inline symbol_a add ( any_a range ) const
+      virtual inline misunderstanding_a add ( any_a range ) const
       { return value_.add(range ); }
-      virtual inline symbol_a add_ ( symbol_a symbol ) const
-      { return value_.add_(symbol ); }
-      virtual inline symbol_a operator + ( symbol_a symbol ) const
-      { return value_.operator+(symbol ); }
+      virtual inline misunderstanding_a add_ ( misunderstanding_a misunderstanding ) const
+      { return value_.add_(misunderstanding ); }
+      virtual inline misunderstanding_a operator + ( misunderstanding_a misunderstanding ) const
+      { return value_.operator+(misunderstanding ); }
     	};
 
     
