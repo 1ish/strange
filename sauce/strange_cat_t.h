@@ -90,7 +90,10 @@ public: ___THING___
 	inline any_a includes(any_a range) const
 	{
 		any_a it = range.cbegin();
-		assert(it != range.cend()); //TODO
+		if (it == range.cend())
+		{
+			return dis__("empty range passed to strange::cat::includes");
+		}
 		return includes_(*it);
 	}
 
@@ -107,9 +110,15 @@ public: ___THING___
 	static inline any_a conforms(any_a range)
 	{
 		any_a it = range.cbegin();
-		assert(it != range.cend()); //TODO
+		if (it == range.cend())
+		{
+			return dis__("empty range passed to strange::cat::conforms");
+		}
 		any_a thing = *it;
-		assert(++it != range.cend()); //TODO
+		if (it == range.cend())
+		{
+			return dis__("short range passed to strange::cat::conforms");
+		}
 		any_a cat_or_herd = *it;
 		return conforms_(thing, cat_or_herd);
 	}

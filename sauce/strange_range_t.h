@@ -12,10 +12,16 @@ public: ___THING___
 	static inline any_a val(any_a range)
 	{
 		any_a it = range.cbegin();
-		assert(it != range.cend());
+		if (it == range.cend())
+		{
+			return dis__("empty range passed to strange::range::val");
+		}
 		any_a begin = *it;
 		++it;
-		assert(it != range.cend());
+		if (it == range.cend())
+		{
+			return dis__("short range passed to strange::range::val");
+		}
 		return val_(begin, *it);
 	}
 
@@ -27,10 +33,16 @@ public: ___THING___
 	static inline any_a ref(any_a range)
 	{
 		any_a it = range.cbegin();
-		assert(it != range.cend());
+		if (it == range.cend())
+		{
+			return dis__("empty range passed to strange::range::ref");
+		}
 		any_a begin = *it;
 		++it;
-		assert(it != range.cend());
+		if (it == range.cend())
+		{
+			return dis__("short range passed to strange::range::ref");
+		}
 		return ref_(begin, *it);
 	}
 

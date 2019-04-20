@@ -42,7 +42,7 @@ public:
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("too few arguments passed to strange::thing::visit");
+			return dis__("empty range passed to strange::thing::visit");
 		}
 		any_a visitor = *it;
 		return visitor->invoke(range_t<>::val_(++it, range.cend())); //TODO me_() must already be in range
@@ -52,7 +52,10 @@ public:
 	inline any_a invoke(any_a range) const
 	{
 		any_a it = range.cbegin();
-		assert(it != range.cend()); //TODO
+		if (it == range.cend())
+		{
+			return dis__("empty range passed to strange::thing::invoke");
+		}
 		any_a member = *it;
 		return invoke_(member, range_t<>::val_(++it, range.cend()));
 	}
@@ -69,10 +72,16 @@ public:
 	static inline any_a operate(any_a range)
 	{
 		any_a it = range.cbegin();
-		assert(it != range.cend()); //TODO
+		if (it == range.cend())
+		{
+			return dis__("empty range passed to strange::thing::operate");
+		}
 		any_a thing = *it;
 		++it;
-		assert(it != range.cend()); //TODO
+		if (it == range.cend())
+		{
+			return dis__("short range passed to strange::thing::visit");
+		}
 		any_a operation = *it;
 		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
 	}
@@ -86,7 +95,10 @@ public:
 	inline any_a identical(any_a range) const
 	{
 		any_a it = range.cbegin();
-		assert(it != range.cend()); //TODO
+		if (it == range.cend())
+		{
+			return dis__("empty range passed to strange::thing::identical");
+		}
 		return identical_(*it);
 	}
 
@@ -199,7 +211,10 @@ inline any_a eater(any_a _) const \
 inline any_a same(any_a range) const \
 { \
 	any_a it = range.cbegin(); \
-	assert(it != range.cend()); /* //TODO */ \
+	if (it == range.cend()) \
+	{ \
+		return dis__("empty range passed to same"); \
+	} \
 	return same_(*it); \
 } \
 inline any_a same_(any_a thing) const \
@@ -209,7 +224,10 @@ inline any_a same_(any_a thing) const \
 inline any_a different(any_a range) const \
 { \
 	any_a it = range.cbegin(); \
-	assert(it != range.cend()); /* //TODO */ \
+	if (it == range.cend()) \
+	{ \
+		return dis__("empty range passed to different"); \
+	} \
 	return different_(*it); \
 } \
 inline any_a different_(any_a thing) const \
@@ -267,7 +285,10 @@ inline any_a get_() const \
 inline any_a set(any_a range) const \
 { \
 	any_a it = range.cbegin(); \
-	assert(it != range.cend()); /* //TODO */ \
+	if (it == range.cend()) \
+	{ \
+		return dis__("empty range passed to set"); \
+	} \
 	return set_(*it); \
 } \
 inline any_a set_(any_a thing) const \

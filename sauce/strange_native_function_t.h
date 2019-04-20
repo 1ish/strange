@@ -13,8 +13,7 @@ public: ___THING___
 	// construction
 	static inline any_a val(any_a _)
 	{
-		assert(false); //TODO
-		return nothing_t<>::val_();
+		return dis__("strange::native_function::val cannot be implemented");
 	}
 
 	template <typename... Args>
@@ -28,8 +27,7 @@ public: ___THING___
 
 	static inline any_a ref(any_a _)
 	{
-		assert(false); //TODO
-		return nothing_t<>::val_();
+		return dis__("strange::native_function::ref cannot be implemented");
 	}
 
 	template <typename... Args>
