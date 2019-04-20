@@ -8,6 +8,9 @@
 #define ___derived___ symbol_a
 #include "strange_cat_a.h"
 #undef ___derived___
+#define ___root___ any_a
+#include "strange_misunderstanding_a.h"
+#undef ___root___
 
 #include "strange_one_t.h"
 #include "strange_thing_t.h"
@@ -21,6 +24,8 @@
 #include "strange_symbol_t.h"
 #include "strange_cat_t.h"
 #include "strange_range_t.h"
+#include "strange_misunderstanding_t.h"
+#include "strange_disagreement_t.h"
 
 #include "strange_variadic_u.h"
 
