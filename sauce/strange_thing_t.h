@@ -4,25 +4,25 @@
 namespace strange
 {
 
-template <typename CAT_>
+template <typename _ABSTRACTION_>
 class thing_t : public one_t
 {
 public:
 	// erasure
-	inline const CAT_ me_() const
+	inline const _ABSTRACTION_ me_() const
 	{
-		return CAT_(_meek.lock(), true);
+		return _ABSTRACTION_(_meek.lock(), true);
 	}
 
-	inline CAT_ me_()
+	inline _ABSTRACTION_ me_()
 	{
-		return CAT_(_meek.lock(), true);
+		return _ABSTRACTION_(_meek.lock(), true);
 	}
 
 	// reflection
 	static inline cat_a cat_()
 	{
-		static cat_a CATEGORY = cat_t<>::val_(sym__(std::string("strange") + CAT_::___abstraction_name___()));
+		static cat_a CATEGORY = cat_t<>::val_(sym__(std::string("strange") + _ABSTRACTION_::___abstraction_name___()));
 		return CATEGORY;
 	}
 

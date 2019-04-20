@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename CAT_ = symbol_a>
-class symbol_t : public something_t<CAT_>
+template <typename _ABSTRACTION_ = symbol_a>
+class symbol_t : public something_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
