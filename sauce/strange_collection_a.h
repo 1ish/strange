@@ -60,6 +60,22 @@ namespace strange {
      { assert(handle_); return read().empty_( ); }
      inline bool empty__ ( ) const
      { assert(handle_); return read().empty__( ); }
+     inline any_a push_front ( any_a range )
+     { assert(handle_); return write().push_front(range ); }
+     inline any_a push_front_ ( any_a thing )
+     { assert(handle_); return write().push_front_(thing ); }
+     inline any_a pop_front ( any_a _ )
+     { assert(handle_); return write().pop_front(_ ); }
+     inline any_a pop_front_ ( )
+     { assert(handle_); return write().pop_front_( ); }
+     inline any_a push_back ( any_a range )
+     { assert(handle_); return write().push_back(range ); }
+     inline any_a push_back_ ( any_a thing )
+     { assert(handle_); return write().push_back_(thing ); }
+     inline any_a pop_back ( any_a _ )
+     { assert(handle_); return write().pop_back(_ ); }
+     inline any_a pop_back_ ( )
+     { assert(handle_); return write().pop_back_( ); }
      inline collection_a self_add ( any_a range )
      { assert(handle_); return write().self_add(range ); }
      inline collection_a self_add_ ( collection_a collection )
@@ -70,6 +86,16 @@ namespace strange {
      { assert(handle_); return read().add_(collection ); }
      inline collection_a operator + ( collection_a collection ) const
      { assert(handle_); return read().operator+(collection ); }
+     inline collection_a self_subtract ( any_a range )
+     { assert(handle_); return write().self_subtract(range ); }
+     inline collection_a self_subtract_ ( collection_a collection )
+     { assert(handle_); return write().self_subtract_(collection ); }
+     inline collection_a subtract ( any_a range ) const
+     { assert(handle_); return read().subtract(range ); }
+     inline collection_a subtract_ ( collection_a collection ) const
+     { assert(handle_); return read().subtract_(collection ); }
+     inline collection_a operator - ( collection_a collection ) const
+     { assert(handle_); return read().operator-(collection ); }
     
 
     protected:
@@ -99,11 +125,24 @@ namespace strange {
       virtual inline any_a empty ( any_a _ ) const = 0;
       virtual inline any_a empty_ ( ) const = 0;
       virtual inline bool empty__ ( ) const = 0;
+      virtual inline any_a push_front ( any_a range ) = 0;
+      virtual inline any_a push_front_ ( any_a thing ) = 0;
+      virtual inline any_a pop_front ( any_a _ ) = 0;
+      virtual inline any_a pop_front_ ( ) = 0;
+      virtual inline any_a push_back ( any_a range ) = 0;
+      virtual inline any_a push_back_ ( any_a thing ) = 0;
+      virtual inline any_a pop_back ( any_a _ ) = 0;
+      virtual inline any_a pop_back_ ( ) = 0;
       virtual inline collection_a self_add ( any_a range ) = 0;
       virtual inline collection_a self_add_ ( collection_a collection ) = 0;
       virtual inline collection_a add ( any_a range ) const = 0;
       virtual inline collection_a add_ ( collection_a collection ) const = 0;
       virtual inline collection_a operator + ( collection_a collection ) const = 0;
+      virtual inline collection_a self_subtract ( any_a range ) = 0;
+      virtual inline collection_a self_subtract_ ( collection_a collection ) = 0;
+      virtual inline collection_a subtract ( any_a range ) const = 0;
+      virtual inline collection_a subtract_ ( collection_a collection ) const = 0;
+      virtual inline collection_a operator - ( collection_a collection ) const = 0;
     	};
 
     
@@ -176,6 +215,22 @@ namespace strange {
       { return value_.empty_( ); }
       virtual inline bool empty__ ( ) const
       { return value_.empty__( ); }
+      virtual inline any_a push_front ( any_a range )
+      { return value_.push_front(range ); }
+      virtual inline any_a push_front_ ( any_a thing )
+      { return value_.push_front_(thing ); }
+      virtual inline any_a pop_front ( any_a _ )
+      { return value_.pop_front(_ ); }
+      virtual inline any_a pop_front_ ( )
+      { return value_.pop_front_( ); }
+      virtual inline any_a push_back ( any_a range )
+      { return value_.push_back(range ); }
+      virtual inline any_a push_back_ ( any_a thing )
+      { return value_.push_back_(thing ); }
+      virtual inline any_a pop_back ( any_a _ )
+      { return value_.pop_back(_ ); }
+      virtual inline any_a pop_back_ ( )
+      { return value_.pop_back_( ); }
       virtual inline collection_a self_add ( any_a range )
       { return value_.self_add(range ); }
       virtual inline collection_a self_add_ ( collection_a collection )
@@ -186,6 +241,16 @@ namespace strange {
       { return value_.add_(collection ); }
       virtual inline collection_a operator + ( collection_a collection ) const
       { return value_.operator+(collection ); }
+      virtual inline collection_a self_subtract ( any_a range )
+      { return value_.self_subtract(range ); }
+      virtual inline collection_a self_subtract_ ( collection_a collection )
+      { return value_.self_subtract_(collection ); }
+      virtual inline collection_a subtract ( any_a range ) const
+      { return value_.subtract(range ); }
+      virtual inline collection_a subtract_ ( collection_a collection ) const
+      { return value_.subtract_(collection ); }
+      virtual inline collection_a operator - ( collection_a collection ) const
+      { return value_.operator-(collection ); }
     	};
 
     

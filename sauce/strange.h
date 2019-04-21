@@ -29,6 +29,7 @@
 #include "strange_range_t.h"
 #include "strange_misunderstanding_t.h"
 #include "strange_disagreement_t.h"
+#include "strange_shoal_t.h"
 
 #include "strange_variadic_u.h"
 

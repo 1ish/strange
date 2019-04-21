@@ -1,18 +1,79 @@
-#ifndef COM_ONEISH_STRANGE_COLLECTION_A_H
-#define COM_ONEISH_STRANGE_COLLECTION_A_H
-
-/*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived.hpp -c ~/source/repos/strange/archetypes/collection.hpp > ~/source/repos/strange/sauce/strange_collection_a.h
-*/
-
-#include "any.hpp"
+#ifndef COM_ONEISH_STRANGE_SHOAL_T_H
+#define COM_ONEISH_STRANGE_SHOAL_T_H
 
 namespace strange
 {
 
-class collection
+template <typename _ABSTRACTION_ = collection_a>
+class shoal_t : public something_t<_ABSTRACTION_>
 {
-public:
+public: ___THING___
+	// construction
+	static inline collection_a val(any_a range)
+	{
+		any_a it = range.cbegin();
+		if (it == range.cend())
+		{
+			return val_();
+		}
+		return val_(*it);
+	}
+
+	static inline collection_a val_(any_a thing = nothing_t<>::val_())
+	{
+		return val__("");
+	}
+
+	template <typename F>
+	static inline collection_a val__(F&& range)
+	{
+		return collection_a{ shoal_t{ std::forward<F>(range) } };
+	}
+
+	static inline collection_a ref(any_a range)
+	{
+		any_a it = range.cbegin();
+		if (it == range.cend())
+		{
+			return ref_();
+		}
+		return ref_(*it);
+	}
+
+	static inline collection_a ref_(any_a thing = nothing_t<>::val_())
+	{
+		return ref__("");
+	}
+
+	template <typename F>
+	static inline collection_a ref__(F&& range)
+	{
+		return collection_a(shoal_t{ std::forward<F>(range) }, true);
+	}
+
+	// reflection
+	static inline symbol_a type_()
+	{
+		static symbol_a TYPE = sym__("strange::shoal");
+		return TYPE;
+	}
+
+	// comparison
+	inline bool operator==(any_a thing) const
+	{
+		return false; //TODO
+	}
+
+	inline bool operator!=(any_a thing) const
+	{
+		return true; //TODO
+	}
+
+	inline std::size_t hash__() const
+	{
+		return 0; //TODO
+	}
+
 	// collection
 	inline any_a at(any_a range) const;
 	inline any_a at_(any_a key) const;
@@ -56,6 +117,7 @@ public:
 
 	inline collection_a self_add(any_a range);
 	inline collection_a self_add_(collection_a collection);
+	inline collection_a& operator+=(collection_a collection);
 
 	inline collection_a add(any_a range) const;
 	inline collection_a add_(collection_a collection) const;
@@ -63,10 +125,19 @@ public:
 
 	inline collection_a self_subtract(any_a range);
 	inline collection_a self_subtract_(collection_a collection);
+	inline collection_a& operator-=(collection_a collection);
 
 	inline collection_a subtract(any_a range) const;
 	inline collection_a subtract_(collection_a collection) const;
 	inline collection_a operator-(collection_a collection) const;
+
+protected:
+
+
+	template <typename F>
+	inline shoal_t(F&& range)
+		: something_t{}
+	{}
 };
 
 } // namespace strange
