@@ -1,61 +1,27 @@
-#ifndef COM_ONEISH_STRANGE_SHOAL_T_H
-#define COM_ONEISH_STRANGE_SHOAL_T_H
+#ifndef COM_ONEISH_STRANGE_COLLECTION_T_H
+#define COM_ONEISH_STRANGE_COLLECTION_T_H
 
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = collection_a>
-class shoal_t : public collection_t<_ABSTRACTION_>
+template <typename _ABSTRACTION_>
+class collection_t : public something_t<_ABSTRACTION_>
 {
-public: ___THING___
-	// construction
-	static inline collection_a val(any_a range)
+public:
+	// comparison
+	inline bool operator==(any_a thing) const
 	{
-		any_a it = range.cbegin();
-		if (it == range.cend())
-		{
-			return val_();
-		}
-		return val_(*it);
+		return false; //TODO
 	}
 
-	static inline collection_a val_(any_a thing = nothing_t<>::val_())
+	inline bool operator!=(any_a thing) const
 	{
-		return val__("");
+		return true; //TODO
 	}
 
-	template <typename F>
-	static inline collection_a val__(F&& range)
+	inline std::size_t hash__() const
 	{
-		return collection_a{ shoal_t{ std::forward<F>(range) } };
-	}
-
-	static inline collection_a ref(any_a range)
-	{
-		any_a it = range.cbegin();
-		if (it == range.cend())
-		{
-			return ref_();
-		}
-		return ref_(*it);
-	}
-
-	static inline collection_a ref_(any_a thing = nothing_t<>::val_())
-	{
-		return ref__("");
-	}
-
-	template <typename F>
-	static inline collection_a ref__(F&& range)
-	{
-		return collection_a(shoal_t{ std::forward<F>(range) }, true);
-	}
-
-	// reflection
-	static inline symbol_a type_()
-	{
-		static symbol_a TYPE = sym__("strange::shoal");
-		return TYPE;
+		return 0; //TODO
 	}
 
 	// collection
@@ -116,11 +82,8 @@ public: ___THING___
 	inline collection_a operator-(collection_a collection) const;
 
 protected:
-
-
-	template <typename F>
-	inline shoal_t(F&& range)
-		: collection_t{}
+	inline collection_t()
+		: something_t{}
 	{}
 };
 
