@@ -42,7 +42,7 @@ public:
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("empty range passed to strange::thing::visit");
+			return dis__("strange::thing::visit passed empty range");
 		}
 		any_a visitor = *it;
 		return visitor->invoke(range_t<>::val_(++it, range.cend())); //TODO me_() must already be in range
@@ -54,7 +54,7 @@ public:
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("empty range passed to strange::thing::invoke");
+			return dis__("strange::thing::invoke passed empty range");
 		}
 		any_a member = *it;
 		return invoke_(member, range_t<>::val_(++it, range.cend()));
@@ -74,13 +74,12 @@ public:
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("empty range passed to strange::thing::operate");
+			return dis__("strange::thing::operate passed empty range");
 		}
 		any_a thing = *it;
-		++it;
-		if (it == range.cend())
+		if (++it == range.cend())
 		{
-			return dis__("short range passed to strange::thing::visit");
+			return dis__("strange::thing::visit passed short range");
 		}
 		any_a operation = *it;
 		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
@@ -97,7 +96,7 @@ public:
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("empty range passed to strange::thing::identical");
+			return dis__("strange::thing::identical passed empty range");
 		}
 		return identical_(*it);
 	}
@@ -217,15 +216,15 @@ protected:
 
 // adaptation
 #define ___THING___ \
-inline symbol_a type(any_a _) const \
+inline symbol_a type(any_a) const \
 { \
 	return type_(); \
 } \
-inline cat_a cat(any_a _) const \
+inline cat_a cat(any_a) const \
 { \
 	return cat_(); \
 } \
-inline any_a eater(any_a _) const \
+inline any_a eater(any_a) const \
 { \
 	return eater_(); \
 } \
@@ -234,7 +233,7 @@ inline any_a same(any_a range) const \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		return dis__("empty range passed to same"); \
+		return dis__("same passed empty range"); \
 	} \
 	return same_(*it); \
 } \
@@ -247,7 +246,7 @@ inline any_a different(any_a range) const \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		return dis__("empty range passed to different"); \
+		return dis__("different passed empty range"); \
 	} \
 	return different_(*it); \
 } \
@@ -308,7 +307,7 @@ inline any_a set(any_a range) const \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		return dis__("empty range passed to set"); \
+		return dis__("set passed empty range"); \
 	} \
 	return set_(*it); \
 } \
@@ -320,11 +319,11 @@ inline any_a* operator->() const \
 { \
 	return &operator*(); \
 } \
-inline any_a increment(any_a) \
+inline _ABSTRACTION_ increment(any_a) \
 { \
 	return increment_(); \
 } \
-inline any_a increment_() \
+inline _ABSTRACTION_ increment_() \
 { \
 	operator++(); \
 	return me_(); \

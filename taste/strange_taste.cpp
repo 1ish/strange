@@ -47,6 +47,8 @@ TEST(TestCaseName, ForLoop)
 	any_a g = native_function_t<>::val__(&nothing_t<>::val, "x", "y", "z");
 	any_a h = native_extraction_t<any_a>::val__(&any_a::beget);
 	any_a i = native_mutation_t<any_a>::val__(&any_a::beset);
+
+	collection_a shoal = shoal_t<>::val_();
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

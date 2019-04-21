@@ -4,23 +4,23 @@
 namespace strange
 {
 
-template <typename CAT = any_a>
+template <typename _ABSTRACTION_ = any_a>
 class variadic_u
 {
 public:
-	static inline void variadic_(std::vector<CAT>& vec)
+	static inline void variadic_(std::vector<_ABSTRACTION_>& vec)
 	{
 	}
 
 	template <typename... Args>
-	static inline void variadic_(std::vector<CAT>& vec, const std::string& s, Args&&... args)
+	static inline void variadic_(std::vector<_ABSTRACTION_>& vec, const std::string& s, Args&&... args)
 	{
 		vec.push_back(sym__(s));
 		variadic_(vec, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic_(std::vector<CAT>& vec, CAT thing, Args&&... args)
+	static inline void variadic_(std::vector<_ABSTRACTION_>& vec, _ABSTRACTION_ thing, Args&&... args)
 	{
 		vec.push_back(thing);
 		variadic_(vec, std::forward<Args>(args)...);

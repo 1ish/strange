@@ -22,14 +22,10 @@ namespace strange {
      { assert(handle_); return read().at(range ); }
      inline any_a at_ ( any_a key ) const
      { assert(handle_); return read().at_(key ); }
-     inline const any_a & operator [ ] ( any_a key ) const
-     { assert(handle_); return read().operator[](key ); }
      inline any_a update ( any_a range )
      { assert(handle_); return write().update(range ); }
      inline any_a update_ ( any_a key , any_a value )
      { assert(handle_); return write().update_(key, value ); }
-     inline any_a & operator [ ] ( any_a key )
-     { assert(handle_); return write().operator[](key ); }
      inline any_a insert ( any_a range )
      { assert(handle_); return write().insert(range ); }
      inline any_a insert_ ( any_a key , any_a value )
@@ -64,6 +60,8 @@ namespace strange {
      { assert(handle_); return write().push_front(range ); }
      inline any_a push_front_ ( any_a thing )
      { assert(handle_); return write().push_front_(thing ); }
+     inline void push_front__ ( any_a thing )
+     { assert(handle_); write().push_front__(thing ); }
      inline any_a pop_front ( any_a _ )
      { assert(handle_); return write().pop_front(_ ); }
      inline any_a pop_front_ ( )
@@ -72,6 +70,8 @@ namespace strange {
      { assert(handle_); return write().push_back(range ); }
      inline any_a push_back_ ( any_a thing )
      { assert(handle_); return write().push_back_(thing ); }
+     inline void push_back__ ( any_a thing )
+     { assert(handle_); write().push_back__(thing ); }
      inline any_a pop_back ( any_a _ )
      { assert(handle_); return write().pop_back(_ ); }
      inline any_a pop_back_ ( )
@@ -106,10 +106,8 @@ namespace strange {
 
       virtual inline any_a at ( any_a range ) const = 0;
       virtual inline any_a at_ ( any_a key ) const = 0;
-      virtual inline const any_a & operator [ ] ( any_a key ) const = 0;
       virtual inline any_a update ( any_a range ) = 0;
       virtual inline any_a update_ ( any_a key , any_a value ) = 0;
-      virtual inline any_a & operator [ ] ( any_a key ) = 0;
       virtual inline any_a insert ( any_a range ) = 0;
       virtual inline any_a insert_ ( any_a key , any_a value ) = 0;
       virtual inline bool insert__ ( any_a key , any_a value ) = 0;
@@ -127,10 +125,12 @@ namespace strange {
       virtual inline bool empty__ ( ) const = 0;
       virtual inline any_a push_front ( any_a range ) = 0;
       virtual inline any_a push_front_ ( any_a thing ) = 0;
+      virtual inline void push_front__ ( any_a thing ) = 0;
       virtual inline any_a pop_front ( any_a _ ) = 0;
       virtual inline any_a pop_front_ ( ) = 0;
       virtual inline any_a push_back ( any_a range ) = 0;
       virtual inline any_a push_back_ ( any_a thing ) = 0;
+      virtual inline void push_back__ ( any_a thing ) = 0;
       virtual inline any_a pop_back ( any_a _ ) = 0;
       virtual inline any_a pop_back_ ( ) = 0;
       virtual inline collection_a self_add ( any_a range ) = 0;
@@ -177,14 +177,10 @@ namespace strange {
       { return value_.at(range ); }
       virtual inline any_a at_ ( any_a key ) const
       { return value_.at_(key ); }
-      virtual inline const any_a & operator [ ] ( any_a key ) const
-      { return value_.operator[](key ); }
       virtual inline any_a update ( any_a range )
       { return value_.update(range ); }
       virtual inline any_a update_ ( any_a key , any_a value )
       { return value_.update_(key, value ); }
-      virtual inline any_a & operator [ ] ( any_a key )
-      { return value_.operator[](key ); }
       virtual inline any_a insert ( any_a range )
       { return value_.insert(range ); }
       virtual inline any_a insert_ ( any_a key , any_a value )
@@ -219,6 +215,8 @@ namespace strange {
       { return value_.push_front(range ); }
       virtual inline any_a push_front_ ( any_a thing )
       { return value_.push_front_(thing ); }
+      virtual inline void push_front__ ( any_a thing )
+      { value_.push_front__(thing ); }
       virtual inline any_a pop_front ( any_a _ )
       { return value_.pop_front(_ ); }
       virtual inline any_a pop_front_ ( )
@@ -227,6 +225,8 @@ namespace strange {
       { return value_.push_back(range ); }
       virtual inline any_a push_back_ ( any_a thing )
       { return value_.push_back_(thing ); }
+      virtual inline void push_back__ ( any_a thing )
+      { value_.push_back__(thing ); }
       virtual inline any_a pop_back ( any_a _ )
       { return value_.pop_back(_ ); }
       virtual inline any_a pop_back_ ( )

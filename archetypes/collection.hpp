@@ -16,11 +16,9 @@ public:
 	// collection
 	inline any_a at(any_a range) const;
 	inline any_a at_(any_a key) const;
-	inline const any_a& operator[](any_a key) const;
 
 	inline any_a update(any_a range);
 	inline any_a update_(any_a key, any_a value);
-	inline any_a& operator[](any_a key);
 
 	inline any_a insert(any_a range);
 	inline any_a insert_(any_a key, any_a value);
@@ -44,12 +42,14 @@ public:
 
 	inline any_a push_front(any_a range);
 	inline any_a push_front_(any_a thing);
+	inline void push_front__(any_a thing);
 
 	inline any_a pop_front(any_a _);
 	inline any_a pop_front_();
 
 	inline any_a push_back(any_a range);
 	inline any_a push_back_(any_a thing);
+	inline void push_back__(any_a thing);
 
 	inline any_a pop_back(any_a _);
 	inline any_a pop_back_();

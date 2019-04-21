@@ -49,12 +49,12 @@ public: ___THING___
 	// comparison
 	inline bool operator==(any_a thing) const
 	{
-		return thing->nothing__() == _thing.nothing__();
+		return _thing.nothing__() == thing->nothing__();
 	}
 
 	inline bool operator!=(any_a thing) const
 	{
-		return thing->nothing__() != _thing.nothing__();
+		return _thing.nothing__() != thing->nothing__();
 	}
 
 	inline std::size_t hash__() const

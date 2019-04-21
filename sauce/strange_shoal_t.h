@@ -1,54 +1,142 @@
 #ifndef COM_ONEISH_STRANGE_SHOAL_T_H
 #define COM_ONEISH_STRANGE_SHOAL_T_H
 
+#include <unordered_map>
+
 namespace strange
 {
 
 template <typename _ABSTRACTION_ = collection_a>
 class shoal_t : public collection_t<_ABSTRACTION_>
 {
-public: ___THING___
+	class hash_f
+	{
+	public:
+		inline std::size_t operator()(any_a thing) const
+		{
+			return thing.hash__();
+		}
+	};
+
+	using std_unordered_map_any_any = std::unordered_map<any_a, any_a, hash_f>;
+
+	template <typename ITERATOR, typename _ABSTRACTION_ = any_a>
+	class iterator_t : public something_t<_ABSTRACTION_>
+	{
+	public: ___THING___
+		// construction
+		static inline any_a val(any_a range)
+		{
+			return nothing_t<>::val_(); //TODO
+		}
+
+		template <typename F>
+		static inline any_a val__(F&& it, F&& end)
+		{
+			return any_a{ iterator_t(std::forward<F>(it), std::forward<F>(end)) };
+		}
+
+		static inline any_a ref(any_a range)
+		{
+			return nothing_t<>::val_(); //TODO
+		}
+
+		template <typename F>
+		static inline any_a ref__(F&& it, F&& end)
+		{
+			return any_a(iterator_t(std::forward<F>(it), std::forward<F>(end)), true);
+		}
+
+		// reflection
+		static inline symbol_a type_()
+		{
+			static symbol_a TYPE = sym__("strange::shoal::iterator");
+			return TYPE;
+		}
+
+		// comparison
+		inline bool operator==(any_a thing) const
+		{
+			return operator*() == *thing;
+		}
+
+		inline bool operator!=(any_a thing) const
+		{
+			return operator*() != *thing;
+		}
+
+		inline std::size_t hash__() const
+		{
+			return operator*().hash__();
+		}
+
+		// iterator
+		inline any_a& operator*() const
+		{
+			if (_it == _end)
+			{
+				return nothing_t<>::val__();
+			}
+			return const_cast<any_a&>(_it->second); //TODO
+		}
+
+		inline iterator_t& operator++()
+		{
+			++_it;
+			return *this;
+		}
+
+		inline iterator_t operator++(int)
+		{
+			iterator_t result = *this;
+			operator++();
+			return result;
+		}
+
+	private:
+		ITERATOR _it;
+		ITERATOR _end;
+
+		template <typename F>
+		inline iterator_t(F&& it, F&& end)
+			: something_t{}
+			, _it{ std::forward<F>(it) }
+			, _end{ std::forward<F>(end) }
+		{}
+	};
+
+public: ___COLLECTION___
 	// construction
 	static inline collection_a val(any_a range)
 	{
-		any_a it = range.cbegin();
-		if (it == range.cend())
-		{
-			return val_();
-		}
-		return val_(*it);
+		return cast_<collection_a>(val_() += range);
 	}
 
-	static inline collection_a val_(any_a thing = nothing_t<>::val_())
+	static inline collection_a val_()
 	{
-		return val__("");
+		return val__(std_unordered_map_any_any{});
 	}
 
 	template <typename F>
-	static inline collection_a val__(F&& range)
+	static inline collection_a val__(F&& init)
 	{
-		return collection_a{ shoal_t{ std::forward<F>(range) } };
+		return collection_a{ shoal_t{ std::forward<F>(init) } };
 	}
 
 	static inline collection_a ref(any_a range)
 	{
-		any_a it = range.cbegin();
-		if (it == range.cend())
-		{
-			return ref_();
-		}
-		return ref_(*it);
+		return cast_<collection_a>(ref_() += range, true);
 	}
 
-	static inline collection_a ref_(any_a thing = nothing_t<>::val_())
+	static inline collection_a ref_()
 	{
-		return ref__("");
+		return ref__(std_unordered_map_any_any{});
 	}
 
 	template <typename F>
-	static inline collection_a ref__(F&& range)
+	static inline collection_a ref__(F&& init)
 	{
-		return collection_a(shoal_t{ std::forward<F>(range) }, true);
+		return collection_a(shoal_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
@@ -58,69 +146,166 @@ public: ___THING___
 		return TYPE;
 	}
 
+	inline any_a feeder(any_a range) const // return range of parameter values
+	{
+		return nothing_t<>::val_(); //TODO
+	}
+
+	// visitor pattern
+	static inline any_a visit(any_a range)
+	{
+		return nothing_t<>::val_(); //TODO
+	}
+
+	// comparison
+	inline bool operator==(any_a thing) const
+	{
+		return false; //TODO
+	}
+
+	inline bool operator!=(any_a thing) const
+	{
+		return true; //TODO
+	}
+
+	inline std::size_t hash__() const
+	{
+		return 0; //TODO
+	}
+
+	// range
+	inline any_a cbegin() const
+	{
+		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(_map.cbegin(), _map.cend());
+	}
+
+	inline any_a begin()
+	{
+		return iterator_t<std_unordered_map_any_any::iterator>::val__(_map.begin(), _map.end());
+	}
+
+	inline any_a cend() const
+	{
+		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(_map.cend(), _map.cend());
+	}
+
+	inline any_a end()
+	{
+		return iterator_t<std_unordered_map_any_any::iterator>::val__(_map.end(), _map.end());
+	}
+
 	// collection
-	inline any_a at(any_a range) const;
-	inline any_a at_(any_a key) const;
-	inline const any_a& operator[](any_a key) const;
+	inline any_a at_(any_a key) const
+	{
+		const std_unordered_map_any_any::const_iterator mit = _map.find(key);
+		if (mit == _map.cend())
+		{
+			return nothing_t<>::val_();
+		}
+		return mit->second;
+	}
 
-	inline any_a update(any_a range);
-	inline any_a update_(any_a key, any_a value);
-	inline any_a& operator[](any_a key);
+	inline any_a update_(any_a key, any_a value)
+	{
+		if (value.nothing__())
+		{
+			_map.erase(key);
+		}
+		else
+		{
+			_map[key] = value;
+		}
+		return value;
+	}
 
-	inline any_a insert(any_a range);
-	inline any_a insert_(any_a key, any_a value);
-	inline bool insert__(any_a key, any_a value);
+	inline bool insert__(any_a key, any_a value)
+	{
+		if (value.nothing__())
+		{
+			return false;
+		}
+		return _map.emplace(key, value).second;
+	}
 
-	inline any_a erase(any_a range);
-	inline any_a erase_(any_a key);
-	inline bool erase__(any_a key);
+	inline bool erase__(any_a key)
+	{
+		return _map.erase(key);
+	}
 
-	inline any_a clear(any_a _);
-	inline any_a clear_();
-	inline void clear__();
+	inline void clear__()
+	{
+		_map.clear();
+	}
 
-	inline any_a size(any_a _) const;
-	inline any_a size_() const;
-	inline std::size_t size__() const;
+	inline std::size_t size__() const
+	{
+		return _map.size();
+	}
 
-	inline any_a empty(any_a _) const;
-	inline any_a empty_() const;
-	inline bool empty__() const;
+	inline bool empty__() const
+	{
+		return _map.empty();
+	}
 
-	inline any_a push_front(any_a range);
-	inline any_a push_front_(any_a thing);
+	inline void push_front__(any_a thing)
+	{
+		push_back__(thing);
+	}
 
-	inline any_a pop_front(any_a _);
-	inline any_a pop_front_();
+	inline any_a pop_front_()
+	{
+		return pop_back_();
+	}
 
-	inline any_a push_back(any_a range);
-	inline any_a push_back_(any_a thing);
+	inline void push_back__(any_a thing)
+	{
+		if (thing.nothing__())
+		{
+			_map.erase(thing);
+		}
+		else
+		{
+			_map[thing] = thing;
+		}
+	}
 
-	inline any_a pop_back(any_a _);
-	inline any_a pop_back_();
+	inline any_a pop_back_()
+	{
+		const std_unordered_map_any_any::const_iterator mit = _map.cbegin();
+		if (mit == _map.cend())
+		{
+			return nothing_t<>::val_();
+		}
+		any_a result = mit->second;
+		_map.erase(mit);
+		return result;
+	}
 
-	inline collection_a self_add(any_a range);
-	inline collection_a self_add_(collection_a collection);
-	inline collection_a& operator+=(collection_a collection);
+	inline shoal_t& operator+=(any_a range)
+	{
+		for (const auto thing : range)
+		{
+			insert(thing);
+		}
+		return *this;
+	}
 
-	inline collection_a add(any_a range) const;
-	inline collection_a add_(collection_a collection) const;
-	inline collection_a operator+(collection_a collection) const;
-
-	inline collection_a self_subtract(any_a range);
-	inline collection_a self_subtract_(collection_a collection);
-	inline collection_a& operator-=(collection_a collection);
-
-	inline collection_a subtract(any_a range) const;
-	inline collection_a subtract_(collection_a collection) const;
-	inline collection_a operator-(collection_a collection) const;
+	inline shoal_t& operator-=(any_a range)
+	{
+		for (const auto thing : range)
+		{
+			erase(thing);
+		}
+		return *this;
+	}
 
 protected:
-
+	std_unordered_map_any_any _map;
 
 	template <typename F>
-	inline shoal_t(F&& range)
+	inline shoal_t(F&& init)
 		: collection_t{}
+		, _map{ std::forward<F>(init) }
 	{}
 };
 
