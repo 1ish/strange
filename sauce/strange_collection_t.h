@@ -4,15 +4,6 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_>
-class collection_t : public something_t<_ABSTRACTION_>
-{
-protected:
-	inline collection_t()
-		: something_t{}
-	{}
-};
-
 // adaptation
 #define ___COLLECTION___ ___THING___ \
 inline any_a has(any_a range) const \

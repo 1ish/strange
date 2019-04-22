@@ -8,7 +8,7 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = shoal_a>
-class shoal_t : public collection_t<_ABSTRACTION_>
+class shoal_t : public something_t<_ABSTRACTION_>
 {
 	class hash_f
 	{
@@ -352,7 +352,7 @@ protected:
 
 	template <typename F>
 	inline shoal_t(F&& init)
-		: collection_t{}
+		: something_t{}
 		, _map{ std::forward<F>(init) }
 	{}
 };

@@ -7,7 +7,7 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = flock_a>
-class flock_t : public collection_t<_ABSTRACTION_>
+class flock_t : public something_t<_ABSTRACTION_>
 {
 	using std_vector_any = std::vector<any_a>;
 
@@ -398,7 +398,7 @@ protected:
 
 	template <typename F>
 	inline flock_t(F&& init)
-		: collection_t{}
+		: something_t{}
 		, _vector{ std::forward<F>(init) }
 	{}
 };

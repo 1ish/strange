@@ -8,7 +8,7 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = herd_a>
-class herd_t : public collection_t<_ABSTRACTION_>
+class herd_t : public something_t<_ABSTRACTION_>
 {
 	class hash_f
 	{
@@ -332,7 +332,7 @@ protected:
 
 	template <typename F>
 	inline herd_t(F&& init)
-		: collection_t{}
+		: something_t{}
 		, _set{ std::forward<F>(init) }
 	{}
 };
