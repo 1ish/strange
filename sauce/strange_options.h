@@ -3,7 +3,6 @@
 
 #ifdef _DEBUG
 #define STRANGE_CHECK_STATIC_CASTS 1
-#define STRANGE_CHECK_ITERATOR_COMPATIBILITY 1
 #endif
 
 #endif

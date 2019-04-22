@@ -2,6 +2,7 @@
 #define COM_ONEISH_STRANGE_SHOAL_T_H
 
 #include <unordered_map>
+#include <map>
 
 namespace strange
 {
@@ -27,7 +28,8 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		// construction
 		static inline any_a val(any_a range)
 		{
-			return nothing_t<>::val_(); //TODO
+			assert(false);
+			return nothing_t<>::val_();
 		}
 
 		template <typename F>
@@ -38,7 +40,8 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 
 		static inline any_a ref(any_a range)
 		{
-			return nothing_t<>::val_(); //TODO
+			assert(false);
+			return nothing_t<>::val_();
 		}
 
 		template <typename F>
@@ -57,39 +60,31 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		// comparison
 		inline bool operator==(any_a thing) const
 		{
-#ifdef STRANGE_CHECK_ITERATOR_COMPATIBILITY
 			if (!type_().identical__(thing.type_()))
 			{
-				throw dis__("strange::shoal::iterator == comparison failed compatibility check");
+				return false;
 			}
-#else
-			assert(type_().identical__(thing.type_()));
-#endif
 			return _it == reinterpret_cast<const iterator_t<ITERATOR, _ABSTRACTION_>*>(thing.identity__())->_it;
 		}
 
 		inline bool operator!=(any_a thing) const
 		{
-#ifdef STRANGE_CHECK_ITERATOR_COMPATIBILITY
 			if (!type_().identical__(thing.type_()))
 			{
-				throw dis__("strange::shoal::iterator != comparison failed compatibility check");
+				return true;
 			}
-#else
-			assert(type_().identical__(thing.type_()));
-#endif
 			return _it != reinterpret_cast<const iterator_t<ITERATOR, _ABSTRACTION_>*>(thing.identity__())->_it;
 		}
 
 		inline std::size_t hash__() const
 		{
-			return operator*().hash__();
+			return std::hash<const void*>{}(&*_it);
 		}
 
 		// iterator
 		inline any_a& operator*() const
 		{
-			return const_cast<any_a&>(_it->second); //TODO pair
+			return const_cast<any_a&>(_it->second); //TODO flock pair
 		}
 
 		inline iterator_t& operator++()
@@ -170,17 +165,37 @@ public: ___COLLECTION___
 	// comparison
 	inline bool operator==(any_a thing) const
 	{
-		return false; //TODO
+		if (!type_().identical__(thing.type_()))
+		{
+			return false;
+		}
+		return _map == reinterpret_cast<const shoal_t<_ABSTRACTION_>*>(thing.identity__())->_map;
 	}
 
 	inline bool operator!=(any_a thing) const
 	{
-		return true; //TODO
+		if (!type_().identical__(thing.type_()))
+		{
+			return true;
+		}
+		return _map != reinterpret_cast<const shoal_t<_ABSTRACTION_>*>(thing.identity__())->_map;
 	}
 
 	inline std::size_t hash__() const
 	{
-		return 0; //TODO
+		std::map<any_a, std::size_t> ordered;
+		for (const auto& pair : _map)
+		{
+			std::size_t seed = pair.first.hash__();
+			seed ^= pair.second.hash__() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+			ordered.emplace(pair.first, seed);
+		}
+		std::size_t seed = std::hash<std::size_t>{}(_map.size());
+		for (const auto& pair : ordered)
+		{
+			seed ^= pair.second + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+		}
+		return seed;
 	}
 
 	// range
