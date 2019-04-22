@@ -57,19 +57,27 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		// comparison
 		inline bool operator==(any_a thing) const
 		{
+#ifdef STRANGE_CHECK_ITERATOR_COMPATIBILITY
 			if (!type_().identical__(thing.type_()))
 			{
-				return false; //TODO
+				throw dis__("strange::shoal::iterator == comparison failed compatibility check");
 			}
+#else
+			assert(type_().identical__(thing.type_()));
+#endif
 			return _it == reinterpret_cast<const iterator_t<ITERATOR, _ABSTRACTION_>*>(thing.identity__())->_it;
 		}
 
 		inline bool operator!=(any_a thing) const
 		{
+#ifdef STRANGE_CHECK_ITERATOR_COMPATIBILITY
 			if (!type_().identical__(thing.type_()))
 			{
-				return true; //TODO
+				throw dis__("strange::shoal::iterator != comparison failed compatibility check");
 			}
+#else
+			assert(type_().identical__(thing.type_()));
+#endif
 			return _it != reinterpret_cast<const iterator_t<ITERATOR, _ABSTRACTION_>*>(thing.identity__())->_it;
 		}
 

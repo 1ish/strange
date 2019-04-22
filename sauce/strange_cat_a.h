@@ -252,7 +252,21 @@ namespace strange {
 
     	{
 
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+
+    		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
+
+    		{
+
+    			throw dis__("cat constructor failed to cast from base to final");
+
+    		}
+
+    #else
+
     		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+
+    #endif
 
     	}
 
@@ -276,7 +290,21 @@ namespace strange {
 
     	{
 
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+
+    		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
+
+    		{
+
+    			throw dis__("cat assignment failed to cast from base to final");
+
+    		}
+
+    #else
+
     		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+
+    #endif
 
     		handle_ = handle;
 

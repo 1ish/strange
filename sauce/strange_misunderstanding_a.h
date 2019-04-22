@@ -250,7 +250,21 @@ namespace strange {
 
     	{
 
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+
+    		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
+
+    		{
+
+    			throw dis__("misunderstanding constructor failed to cast from base to derived");
+
+    		}
+
+    #else
+
     		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+
+    #endif
 
     	}
 
@@ -268,7 +282,21 @@ namespace strange {
 
     	{
 
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+
+    		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
+
+    		{
+
+    			throw dis__("misunderstanding assignment failed to cast from base to derived");
+
+    		}
+
+    #else
+
     		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+
+    #endif
 
     		handle_ = handle;
 

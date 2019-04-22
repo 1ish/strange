@@ -1,6 +1,8 @@
 #ifndef COM_ONEISH_STRANGE_H
 #define COM_ONEISH_STRANGE_H
 
+#include "strange_options.h"
+
 #include "strange_any_a.h"
 #define ___root___ any_a
 #include "strange_symbol_a.h"

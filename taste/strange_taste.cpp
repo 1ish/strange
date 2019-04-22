@@ -49,6 +49,15 @@ TEST(TestCaseName, ForLoop)
 	any_a i = native_mutation_t<any_a>::val__(&any_a::beset);
 
 	collection_a shoal = shoal_t<>::val_();
+
+	try
+	{
+		shoal = cast_<collection_a>(c);
+	}
+	catch (misunderstanding_a& m)
+	{
+		std::cout << "caught: " << m.to_string__() << std::endl;
+	}
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

@@ -86,7 +86,14 @@ public:
 	explicit inline %struct_name%_a(const std::shared_ptr<___TTT___>& handle, bool reference = false)
 		: ___derived___(handle, reference)
 	{
+#ifdef STRANGE_CHECK_STATIC_CASTS
+		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
+		{
+			throw dis__("%struct_name% constructor failed to cast from base to final");
+		}
+#else
 		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+#endif
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%_a, std::decay_t<___TTT___>>::value>>
@@ -98,7 +105,14 @@ public:
 	template <typename ___TTT___>
 	inline %struct_name%_a& operator=(const std::shared_ptr<___TTT___>& handle)
 	{
+#ifdef STRANGE_CHECK_STATIC_CASTS
+		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
+		{
+			throw dis__("%struct_name% assignment failed to cast from base to final");
+		}
+#else
 		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+#endif
 		handle_ = handle;
 		handle_->___weak___(handle_);
 		return *this;
