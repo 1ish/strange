@@ -31,9 +31,9 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		}
 
 		template <typename F>
-		static inline any_a val__(F&& it, F&& end)
+		static inline any_a val__(F&& it)
 		{
-			return any_a{ iterator_t(std::forward<F>(it), std::forward<F>(end)) };
+			return any_a{ iterator_t{ std::forward<F>(it) } };
 		}
 
 		static inline any_a ref(any_a range)
@@ -42,9 +42,9 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		}
 
 		template <typename F>
-		static inline any_a ref__(F&& it, F&& end)
+		static inline any_a ref__(F&& it)
 		{
-			return any_a(iterator_t(std::forward<F>(it), std::forward<F>(end)), true);
+			return any_a(iterator_t{ std::forward<F>(it) }, true);
 		}
 
 		// reflection
@@ -57,12 +57,20 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		// comparison
 		inline bool operator==(any_a thing) const
 		{
-			return (_it == _end) == thing->nothing__();
+			if (!type_().identical__(thing.type_()))
+			{
+				return false; //TODO
+			}
+			return _it == reinterpret_cast<const iterator_t<ITERATOR, _ABSTRACTION_>*>(thing.identity__())->_it;
 		}
 
 		inline bool operator!=(any_a thing) const
 		{
-			return (_it == _end) != thing->nothing__();
+			if (!type_().identical__(thing.type_()))
+			{
+				return true; //TODO
+			}
+			return _it != reinterpret_cast<const iterator_t<ITERATOR, _ABSTRACTION_>*>(thing.identity__())->_it;
 		}
 
 		inline std::size_t hash__() const
@@ -73,11 +81,7 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		// iterator
 		inline any_a& operator*() const
 		{
-			if (_it == _end)
-			{
-				return nothing_t<>::val__();
-			}
-			return const_cast<any_a&>(_it->second); //TODO
+			return const_cast<any_a&>(_it->second); //TODO pair
 		}
 
 		inline iterator_t& operator++()
@@ -95,13 +99,11 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 
 	private:
 		ITERATOR _it;
-		ITERATOR _end;
 
 		template <typename F>
-		inline iterator_t(F&& it, F&& end)
+		inline iterator_t(F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
-			, _end{ std::forward<F>(end) }
 		{}
 	};
 
@@ -176,22 +178,22 @@ public: ___COLLECTION___
 	// range
 	inline any_a cbegin() const
 	{
-		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(_map.cbegin(), _map.cend());
+		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(_map.cbegin());
 	}
 
 	inline any_a begin()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::val__(_map.begin(), _map.end());
+		return iterator_t<std_unordered_map_any_any::iterator>::val__(_map.begin());
 	}
 
 	inline any_a cend() const
 	{
-		return nothing_t<>::val_();
+		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(_map.cend());
 	}
 
 	inline any_a end()
 	{
-		return nothing_t<>::val_();
+		return iterator_t<std_unordered_map_any_any::iterator>::val__(_map.end());
 	}
 
 	// collection
