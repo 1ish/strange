@@ -16,4 +16,6 @@ namespace strange
 	class collection_a;
 }
 
+using int64_t = long long;
+
 #endif

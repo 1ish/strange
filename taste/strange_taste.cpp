@@ -49,6 +49,7 @@ TEST(TestCaseName, ForLoop)
 	any_a i = native_mutation_t<any_a>::val__(&any_a::beset);
 
 	collection_a shoal = shoal_t<>::val_();
+	collection_a flock = flock_t<>::val_();
 
 	try
 	{

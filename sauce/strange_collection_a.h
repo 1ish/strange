@@ -48,7 +48,7 @@ namespace strange {
      { assert(handle_); return read().size(_ ); }
      inline any_a size_ ( ) const
      { assert(handle_); return read().size_( ); }
-     inline std :: size_t size__ ( ) const
+     inline int64_t size__ ( ) const
      { assert(handle_); return read().size__( ); }
      inline any_a empty ( any_a _ ) const
      { assert(handle_); return read().empty(_ ); }
@@ -119,7 +119,7 @@ namespace strange {
       virtual inline void clear__ ( ) = 0;
       virtual inline any_a size ( any_a _ ) const = 0;
       virtual inline any_a size_ ( ) const = 0;
-      virtual inline std :: size_t size__ ( ) const = 0;
+      virtual inline int64_t size__ ( ) const = 0;
       virtual inline any_a empty ( any_a _ ) const = 0;
       virtual inline any_a empty_ ( ) const = 0;
       virtual inline bool empty__ ( ) const = 0;
@@ -203,7 +203,7 @@ namespace strange {
       { return value_.size(_ ); }
       virtual inline any_a size_ ( ) const
       { return value_.size_( ); }
-      virtual inline std :: size_t size__ ( ) const
+      virtual inline int64_t size__ ( ) const
       { return value_.size__( ); }
       virtual inline any_a empty ( any_a _ ) const
       { return value_.empty(_ ); }

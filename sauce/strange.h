@@ -33,6 +33,7 @@
 #include "strange_disagreement_t.h"
 #include "strange_collection_t.h"
 #include "strange_shoal_t.h"
+#include "strange_flock_t.h"
 
 #include "strange_variadic_u.h"
 

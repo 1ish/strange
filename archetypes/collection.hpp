@@ -34,7 +34,7 @@ public:
 
 	inline any_a size(any_a _) const;
 	inline any_a size_() const;
-	inline std::size_t size__() const;
+	inline int64_t size__() const;
 
 	inline any_a empty(any_a _) const;
 	inline any_a empty_() const;
