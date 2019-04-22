@@ -84,12 +84,19 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		// iterator
 		inline any_a& operator*() const
 		{
-			return const_cast<any_a&>(_it->second); //TODO flock pair
+			if (!_fresh)
+			{
+				_pair.update__(0, _it->first);
+				_pair.update__(1, _it->second);
+				_fresh = true;
+			}
+			return _pair;
 		}
 
 		inline iterator_t& operator++()
 		{
 			++_it;
+			_fresh = false;
 			return *this;
 		}
 
@@ -102,13 +109,15 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 
 	private:
 		ITERATOR _it;
-		collection_a _pair;
+		mutable flock_a _pair;
+		mutable bool _fresh;
 
 		template <typename F>
 		inline iterator_t(F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _pair{ flock_t<>::val_() }
+			, _fresh{}
 		{}
 	};
 

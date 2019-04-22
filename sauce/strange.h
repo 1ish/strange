@@ -25,6 +25,10 @@
 #include "strange_shoal_a.h"
 #undef ___derived___
 
+#define ___derived___ collection_a
+#include "strange_flock_a.h"
+#undef ___derived___
+
 #include "strange_one_t.h"
 #include "strange_thing_t.h"
 #include "strange_native_function_t.h"

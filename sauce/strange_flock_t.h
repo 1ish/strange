@@ -6,7 +6,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = collection_a>
+template <typename _ABSTRACTION_ = flock_a>
 class flock_t : public collection_t<_ABSTRACTION_>
 {
 	using std_vector_any = std::vector<any_a>;
@@ -137,36 +137,36 @@ class flock_t : public collection_t<_ABSTRACTION_>
 
 public: ___COLLECTION___
 	// construction
-	static inline collection_a val(any_a range)
+	static inline flock_a val(any_a range)
 	{
-		return cast_<collection_a>(val_() += range);
+		return cast_<flock_a>(val_() += range);
 	}
 
-	static inline collection_a val_()
+	static inline flock_a val_()
 	{
 		return val__(std_vector_any{});
 	}
 
 	template <typename F>
-	static inline collection_a val__(F&& init)
+	static inline flock_a val__(F&& init)
 	{
-		return collection_a{ flock_t{ std::forward<F>(init) } };
+		return flock_a{ flock_t{ std::forward<F>(init) } };
 	}
 
-	static inline collection_a ref(any_a range)
+	static inline flock_a ref(any_a range)
 	{
-		return cast_<collection_a>(ref_() += range, true);
+		return cast_<flock_a>(ref_() += range, true);
 	}
 
-	static inline collection_a ref_()
+	static inline flock_a ref_()
 	{
 		return ref__(std_vector_any{});
 	}
 
 	template <typename F>
-	static inline collection_a ref__(F&& init)
+	static inline flock_a ref__(F&& init)
 	{
-		return collection_a(flock_t{ std::forward<F>(init) }, true);
+		return flock_a(flock_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
