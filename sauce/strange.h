@@ -4,18 +4,26 @@
 #include "strange_options.h"
 
 #include "strange_any_a.h"
+
 #define ___root___ any_a
 #include "strange_symbol_a.h"
 #undef ___root___
+
 #define ___derived___ symbol_a
 #include "strange_cat_a.h"
 #undef ___derived___
+
 #define ___root___ any_a
 #include "strange_misunderstanding_a.h"
 #undef ___root___
+
 #define ___root___ any_a
 #include "strange_collection_a.h"
 #undef ___root___
+
+#define ___derived___ collection_a
+#include "strange_shoal_a.h"
+#undef ___derived___
 
 #include "strange_one_t.h"
 #include "strange_thing_t.h"

@@ -7,7 +7,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = collection_a>
+template <typename _ABSTRACTION_ = shoal_a>
 class shoal_t : public collection_t<_ABSTRACTION_>
 {
 	class hash_f
@@ -114,36 +114,36 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 
 public: ___COLLECTION___
 	// construction
-	static inline collection_a val(any_a range)
+	static inline shoal_a val(any_a range)
 	{
-		return cast_<collection_a>(val_() += range);
+		return cast_<shoal_a>(val_() += range);
 	}
 
-	static inline collection_a val_()
+	static inline shoal_a val_()
 	{
 		return val__(std_unordered_map_any_any{});
 	}
 
 	template <typename F>
-	static inline collection_a val__(F&& init)
+	static inline shoal_a val__(F&& init)
 	{
-		return collection_a{ shoal_t{ std::forward<F>(init) } };
+		return shoal_a{ shoal_t{ std::forward<F>(init) } };
 	}
 
-	static inline collection_a ref(any_a range)
+	static inline shoal_a ref(any_a range)
 	{
-		return cast_<collection_a>(ref_() += range, true);
+		return cast_<shoal_a>(ref_() += range, true);
 	}
 
-	static inline collection_a ref_()
+	static inline shoal_a ref_()
 	{
 		return ref__(std_unordered_map_any_any{});
 	}
 
 	template <typename F>
-	static inline collection_a ref__(F&& init)
+	static inline shoal_a ref__(F&& init)
 	{
-		return collection_a(shoal_t{ std::forward<F>(init) }, true);
+		return shoal_a(shoal_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
