@@ -14,6 +14,10 @@ class collection
 {
 public:
 	// collection
+	inline any_a has(any_a range) const;
+	inline any_a has_(any_a key) const;
+	inline bool has__(any_a key) const;
+
 	inline any_a at(any_a range) const;
 	inline any_a at_(any_a key) const;
 

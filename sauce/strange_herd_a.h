@@ -18,6 +18,8 @@ namespace strange {
 
     public:
 
+     inline bool has__ ( const std :: string & s ) const
+     { assert(handle_); return read().has__(s ); }
      inline bool at__ ( const std :: string & s ) const
      { assert(handle_); return read().at__(s ); }
      inline bool insert__ ( const std :: string & s )
@@ -32,6 +34,7 @@ namespace strange {
 
     	{
 
+      virtual inline bool has__ ( const std :: string & s ) const = 0;
       virtual inline bool at__ ( const std :: string & s ) const = 0;
       virtual inline bool insert__ ( const std :: string & s ) = 0;
       virtual inline bool erase__ ( const std :: string & s ) = 0;
@@ -75,6 +78,8 @@ namespace strange {
 
     
 
+      virtual inline bool has__ ( const std :: string & s ) const
+      { return value_.has__(s ); }
       virtual inline bool at__ ( const std :: string & s ) const
       { return value_.at__(s ); }
       virtual inline bool insert__ ( const std :: string & s )

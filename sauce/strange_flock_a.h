@@ -18,6 +18,8 @@ namespace strange {
 
     public:
 
+     inline bool has__ ( int64_t index ) const
+     { assert(handle_); return read().has__(index ); }
      inline any_a at__ ( int64_t index ) const
      { assert(handle_); return read().at__(index ); }
      inline void update__ ( int64_t index , any_a value )
@@ -34,6 +36,7 @@ namespace strange {
 
     	{
 
+      virtual inline bool has__ ( int64_t index ) const = 0;
       virtual inline any_a at__ ( int64_t index ) const = 0;
       virtual inline void update__ ( int64_t index , any_a value ) = 0;
       virtual inline bool insert__ ( int64_t index , any_a value ) = 0;
@@ -78,6 +81,8 @@ namespace strange {
 
     
 
+      virtual inline bool has__ ( int64_t index ) const
+      { return value_.has__(index ); }
       virtual inline any_a at__ ( int64_t index ) const
       { return value_.at__(index ); }
       virtual inline void update__ ( int64_t index , any_a value )

@@ -18,6 +18,12 @@ namespace strange {
 
     public:
 
+     inline any_a has ( any_a range ) const
+     { assert(handle_); return read().has(range ); }
+     inline any_a has_ ( any_a key ) const
+     { assert(handle_); return read().has_(key ); }
+     inline bool has__ ( any_a key ) const
+     { assert(handle_); return read().has__(key ); }
      inline any_a at ( any_a range ) const
      { assert(handle_); return read().at(range ); }
      inline any_a at_ ( any_a key ) const
@@ -104,6 +110,9 @@ namespace strange {
 
     	{
 
+      virtual inline any_a has ( any_a range ) const = 0;
+      virtual inline any_a has_ ( any_a key ) const = 0;
+      virtual inline bool has__ ( any_a key ) const = 0;
       virtual inline any_a at ( any_a range ) const = 0;
       virtual inline any_a at_ ( any_a key ) const = 0;
       virtual inline any_a update ( any_a range ) = 0;
@@ -173,6 +182,12 @@ namespace strange {
 
     
 
+      virtual inline any_a has ( any_a range ) const
+      { return value_.has(range ); }
+      virtual inline any_a has_ ( any_a key ) const
+      { return value_.has_(key ); }
+      virtual inline bool has__ ( any_a key ) const
+      { return value_.has__(key ); }
       virtual inline any_a at ( any_a range ) const
       { return value_.at(range ); }
       virtual inline any_a at_ ( any_a key ) const

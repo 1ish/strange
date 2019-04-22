@@ -238,6 +238,16 @@ public: ___COLLECTION___
 	}
 
 	// collection
+	inline bool has__(any_a key) const
+	{
+		return has__(0); //TODO index
+	}
+
+	inline bool has__(int64_t index) const
+	{
+		return index >= 0 && index < size__();
+	}
+
 	inline any_a at_(any_a key) const
 	{
 		return at__(0); //TODO index

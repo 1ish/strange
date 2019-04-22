@@ -14,6 +14,7 @@ class shoal
 {
 public:
 	// shoal
+	inline bool has__(const std::string& s) const;
 	inline any_a at__(const std::string& s) const;
 	inline void update__(const std::string& s, any_a value);
 	inline bool insert__(const std::string& s, any_a value);

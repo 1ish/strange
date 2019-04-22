@@ -214,6 +214,17 @@ public: ___COLLECTION___
 	}
 
 	// collection
+	inline bool has__(any_a key) const
+	{
+		const std_unordered_set_any::const_iterator it = _set.find(key);
+		return it != _set.cend();
+	}
+
+	inline bool has__(const std::string& s) const
+	{
+		return has__(sym__(s));
+	}
+
 	inline any_a at_(any_a key) const
 	{
 		const std_unordered_set_any::const_iterator it = _set.find(key);

@@ -14,6 +14,7 @@ class herd
 {
 public:
 	// herd
+	inline bool has__(const std::string& s) const;
 	inline bool at__(const std::string& s) const;
 	inline bool insert__(const std::string& s);
 	inline bool erase__(const std::string& s);

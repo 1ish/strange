@@ -15,6 +15,19 @@ protected:
 
 // adaptation
 #define ___COLLECTION___ ___THING___ \
+inline any_a has(any_a range) const \
+{ \
+	any_a it = range.cbegin(); \
+	if (it == range.cend()) \
+	{ \
+		return dis__("has passed empty range"); \
+	} \
+	return has_(*it); \
+} \
+inline any_a has_(any_a key) const \
+{ \
+	return _boole_(has__(key)); \
+} \
 inline any_a at(any_a range) const \
 { \
 	any_a it = range.cbegin(); \
