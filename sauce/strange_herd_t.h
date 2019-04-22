@@ -1,14 +1,14 @@
-#ifndef COM_ONEISH_STRANGE_SHOAL_T_H
-#define COM_ONEISH_STRANGE_SHOAL_T_H
+#ifndef COM_ONEISH_STRANGE_HERD_T_H
+#define COM_ONEISH_STRANGE_HERD_T_H
 
-#include <unordered_map>
-#include <map>
+#include <unordered_set>
+#include <set>
 
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = shoal_a>
-class shoal_t : public collection_t<_ABSTRACTION_>
+template <typename _ABSTRACTION_ = herd_a>
+class herd_t : public collection_t<_ABSTRACTION_>
 {
 	class hash_f
 	{
@@ -19,7 +19,7 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		}
 	};
 
-	using std_unordered_map_any_any = std::unordered_map<any_a, any_a, hash_f>;
+	using std_unordered_set_any = std::unordered_set<any_a, hash_f>;
 
 	template <typename ITERATOR, typename _ABSTRACTION_ = any_a>
 	class iterator_t : public something_t<_ABSTRACTION_>
@@ -53,7 +53,7 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		// reflection
 		static inline symbol_a type_()
 		{
-			static symbol_a TYPE = sym__("strange::shoal::iterator");
+			static symbol_a TYPE = sym__("strange::herd::iterator");
 			return TYPE;
 		}
 
@@ -84,19 +84,12 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		// iterator
 		inline any_a& operator*() const
 		{
-			if (!_fresh)
-			{
-				_pair.update__(0, _it->first);
-				_pair.update__(1, _it->second);
-				_fresh = true;
-			}
-			return _pair;
+			return const_cast<any_a&>(*_it);
 		}
 
 		inline iterator_t& operator++()
 		{
 			++_it;
-			_fresh = false;
 			return *this;
 		}
 
@@ -109,56 +102,52 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 
 	private:
 		ITERATOR _it;
-		mutable flock_a _pair;
-		mutable bool _fresh;
 
 		template <typename F>
 		inline iterator_t(F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
-			, _pair{ flock_t<>::val_() }
-			, _fresh{}
 		{}
 	};
 
 public: ___COLLECTION___
 	// construction
-	static inline shoal_a val(any_a range)
+	static inline herd_a val(any_a range)
 	{
-		return cast_<shoal_a>(val_() += range);
+		return cast_<herd_a>(val_() += range);
 	}
 
-	static inline shoal_a val_()
+	static inline herd_a val_()
 	{
-		return val__(std_unordered_map_any_any{});
-	}
-
-	template <typename F>
-	static inline shoal_a val__(F&& init)
-	{
-		return shoal_a{ shoal_t{ std::forward<F>(init) } };
-	}
-
-	static inline shoal_a ref(any_a range)
-	{
-		return cast_<shoal_a>(ref_() += range, true);
-	}
-
-	static inline shoal_a ref_()
-	{
-		return ref__(std_unordered_map_any_any{});
+		return val__(std_unordered_set_any{});
 	}
 
 	template <typename F>
-	static inline shoal_a ref__(F&& init)
+	static inline herd_a val__(F&& init)
 	{
-		return shoal_a(shoal_t{ std::forward<F>(init) }, true);
+		return herd_a{ herd_t{ std::forward<F>(init) } };
+	}
+
+	static inline herd_a ref(any_a range)
+	{
+		return cast_<herd_a>(ref_() += range, true);
+	}
+
+	static inline herd_a ref_()
+	{
+		return ref__(std_unordered_set_any{});
+	}
+
+	template <typename F>
+	static inline herd_a ref__(F&& init)
+	{
+		return herd_a(herd_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
 	static inline symbol_a type_()
 	{
-		static symbol_a TYPE = sym__("strange::shoal");
+		static symbol_a TYPE = sym__("strange::herd");
 		return TYPE;
 	}
 
@@ -180,7 +169,7 @@ public: ___COLLECTION___
 		{
 			return false;
 		}
-		return _map == reinterpret_cast<const shoal_t<_ABSTRACTION_>*>(thing.identity__())->_map;
+		return _set == reinterpret_cast<const herd_t<_ABSTRACTION_>*>(thing.identity__())->_set;
 	}
 
 	inline bool operator!=(any_a thing) const
@@ -189,22 +178,16 @@ public: ___COLLECTION___
 		{
 			return true;
 		}
-		return _map != reinterpret_cast<const shoal_t<_ABSTRACTION_>*>(thing.identity__())->_map;
+		return _set != reinterpret_cast<const herd_t<_ABSTRACTION_>*>(thing.identity__())->_set;
 	}
 
 	inline std::size_t hash__() const
 	{
-		std::map<any_a, std::size_t> ordered;
-		for (const auto& pair : _map)
+		const std::set<any_a> ordered(_set.cbegin(), _set.cend());
+		std::size_t seed = std::hash<std::size_t>{}(_set.size());
+		for (const auto item : ordered)
 		{
-			std::size_t seed = pair.first.hash__();
-			seed ^= pair.second.hash__() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-			ordered.emplace(pair.first, seed);
-		}
-		std::size_t seed = std::hash<std::size_t>{}(_map.size());
-		for (const auto& pair : ordered)
-		{
-			seed ^= pair.second + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+			seed ^= item.hash__() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
 		return seed;
 	}
@@ -212,83 +195,80 @@ public: ___COLLECTION___
 	// range
 	inline any_a cbegin() const
 	{
-		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(_map.cbegin());
+		return iterator_t<std_unordered_set_any::const_iterator>::val__(_set.cbegin());
 	}
 
 	inline any_a begin()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::val__(_map.begin());
+		return iterator_t<std_unordered_set_any::iterator>::val__(_set.begin());
 	}
 
 	inline any_a cend() const
 	{
-		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(_map.cend());
+		return iterator_t<std_unordered_set_any::const_iterator>::val__(_set.cend());
 	}
 
 	inline any_a end()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::val__(_map.end());
+		return iterator_t<std_unordered_set_any::iterator>::val__(_set.end());
 	}
 
 	// collection
 	inline any_a at_(any_a key) const
 	{
-		const std_unordered_map_any_any::const_iterator it = _map.find(key);
-		if (it == _map.cend())
+		const std_unordered_set_any::const_iterator it = _set.find(key);
+		if (it == _set.cend())
 		{
 			return nothing_t<>::val_();
 		}
-		return it->second;
+		return *it;
 	}
 
-	inline any_a at__(const std::string& s) const
+	inline bool at__(const std::string& s) const
 	{
-		return at_(sym__(s));
+		const std_unordered_set_any::const_iterator it = _set.find(sym__(s));
+		return it != _set.cend();
 	}
 
 	inline any_a update_(any_a key, any_a value)
 	{
-		return _map[key] = value;
+		_set.insert(key);
+		return value;
 	}
 
-	inline void update__(const std::string& s, any_a value)
+	inline bool insert__(any_a key, any_a)
 	{
-		_map[sym__(s)] = value;
+		return _set.insert(key).second;
 	}
 
-	inline bool insert__(any_a key, any_a value)
+	inline bool insert__(const std::string& s)
 	{
-		return _map.emplace(key, value).second;
-	}
-
-	inline bool insert__(const std::string& s, any_a value)
-	{
-		return insert__(sym__(s), value);
+		return _set.insert(sym__(s)).second;
 	}
 
 	inline bool erase__(any_a key)
 	{
-		return _map.erase(key);
+		return _set.erase(key);
 	}
 
 	inline bool erase__(const std::string& s)
 	{
-		return _map.erase(sym__(s));
+		return _set.erase(sym__(s));
 	}
 
 	inline void clear__()
 	{
-		_map.clear();
+		_set.clear();
 	}
 
 	inline int64_t size__() const
 	{
-		return int64_t(_map.size());
+		return int64_t(_set.size());
 	}
 
 	inline bool empty__() const
 	{
-		return _map.empty();
+		return _set.empty();
 	}
 
 	inline void push_front__(any_a thing)
@@ -303,22 +283,22 @@ public: ___COLLECTION___
 
 	inline void push_back__(any_a thing)
 	{
-		_map[thing] = thing;
+		_set.insert(thing);
 	}
 
 	inline any_a pop_back_()
 	{
-		const std_unordered_map_any_any::const_iterator it = _map.cbegin();
-		if (it == _map.cend())
+		const std_unordered_set_any::const_iterator it = _set.cbegin();
+		if (it == _set.cend())
 		{
 			return nothing_t<>::val_();
 		}
-		any_a result = it->second;
-		_map.erase(it);
+		any_a result = *it;
+		_set.erase(it);
 		return result;
 	}
 
-	inline shoal_t& operator+=(any_a range)
+	inline herd_t& operator+=(any_a range)
 	{
 		for (const auto thing : range)
 		{
@@ -327,7 +307,7 @@ public: ___COLLECTION___
 		return *this;
 	}
 
-	inline shoal_t& operator-=(any_a range)
+	inline herd_t& operator-=(any_a range)
 	{
 		for (const auto thing : range)
 		{
@@ -337,12 +317,12 @@ public: ___COLLECTION___
 	}
 
 protected:
-	std_unordered_map_any_any _map;
+	std_unordered_set_any _set;
 
 	template <typename F>
-	inline shoal_t(F&& init)
+	inline herd_t(F&& init)
 		: collection_t{}
-		, _map{ std::forward<F>(init) }
+		, _set{ std::forward<F>(init) }
 	{}
 };
 
