@@ -57,12 +57,12 @@ class shoal_t : public collection_t<_ABSTRACTION_>
 		// comparison
 		inline bool operator==(any_a thing) const
 		{
-			return operator*() == *thing;
+			return (_it == _end) == thing->nothing__();
 		}
 
 		inline bool operator!=(any_a thing) const
 		{
-			return operator*() != *thing;
+			return (_it == _end) != thing->nothing__();
 		}
 
 		inline std::size_t hash__() const
@@ -186,12 +186,12 @@ public: ___COLLECTION___
 
 	inline any_a cend() const
 	{
-		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(_map.cend(), _map.cend());
+		return nothing_t<>::val_();
 	}
 
 	inline any_a end()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::val__(_map.end(), _map.end());
+		return nothing_t<>::val_();
 	}
 
 	// collection
