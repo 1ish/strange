@@ -141,7 +141,7 @@ public: ___COLLECTION___
 	// construction
 	static inline flock_a val(any_a range)
 	{
-		return cast_<flock_a>(val_() += range);
+		return cast_<flock_a>(val_() += std::move(range));
 	}
 
 	static inline flock_a val_()
@@ -157,7 +157,7 @@ public: ___COLLECTION___
 
 	static inline flock_a ref(any_a range)
 	{
-		return cast_<flock_a>(ref_() += range, true);
+		return cast_<flock_a>(ref_() += std::move(range), true);
 	}
 
 	static inline flock_a ref_()
@@ -277,7 +277,7 @@ public: ___COLLECTION___
 			const int64_t size = size__();
 			if (index == size)
 			{
-				push_back__(value);
+				push_back__(std::move(value));
 			}
 			else
 			{
@@ -285,14 +285,14 @@ public: ___COLLECTION___
 				{
 					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
 				}
-				_vector[std::size_t(index)] = value;
+				_vector[std::size_t(index)] = std::move(value);
 			}
 		}
 	}
 
 	inline bool insert__(any_a key, any_a value)
 	{
-		return insert__(0, value); //TODO index
+		return insert__(0, std::move(value)); //TODO index
 	}
 
 	inline bool insert__(int64_t index, any_a value)
@@ -302,18 +302,18 @@ public: ___COLLECTION___
 			const int64_t size = size__();
 			if (index == size)
 			{
-				push_back__(value);
+				push_back__(std::move(value));
 			}
 			else
 			{
 				if (index > size)
 				{
 					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
-					_vector[std::size_t(index)] = value;
+					_vector[std::size_t(index)] = std::move(value);
 				}
 				else
 				{
-					_vector.insert(_vector.cbegin() + index, value);
+					_vector.insert(_vector.cbegin() + index, std::move(value));
 				}
 			}
 			return true;
@@ -353,7 +353,7 @@ public: ___COLLECTION___
 
 	inline void push_front__(any_a thing)
 	{
-		push_back__(thing);
+		push_back__(std::move(thing));
 	}
 
 	inline any_a pop_front_()
@@ -363,7 +363,7 @@ public: ___COLLECTION___
 
 	inline void push_back__(any_a thing)
 	{
-		_vector.push_back(thing);
+		_vector.push_back(std::move(thing));
 	}
 
 	inline any_a pop_back_()

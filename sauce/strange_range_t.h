@@ -21,12 +21,12 @@ public: ___THING___
 		{
 			return dis__("strange::range::val passed short range");
 		}
-		return val_(begin, *it);
+		return val_(std::move(begin), *it);
 	}
 
 	static inline any_a val_(any_a begin, any_a end)
 	{
-		return any_a{ range_t(begin, end) };
+		return any_a{ range_t(std::move(begin), std::move(end)) };
 	}
 
 	static inline any_a ref(any_a range)
@@ -41,12 +41,12 @@ public: ___THING___
 		{
 			return dis__("strange::range::ref passed short range");
 		}
-		return ref_(begin, *it);
+		return ref_(std::move(begin), *it);
 	}
 
 	static inline any_a ref_(any_a begin, any_a end)
 	{
-		return any_a(range_t(begin, end), true);
+		return any_a(range_t(std::move(begin), std::move(end)), true);
 	}
 
 	// reflection
@@ -83,8 +83,8 @@ protected:
 
 	inline range_t(any_a begin, any_a end)
 		: something_t{}
-		, _begin(begin)
-		, _end(end)
+		, _begin(std::move(begin))
+		, _end(std::move(end))
 	{}
 };
 

@@ -116,7 +116,7 @@ public: ___COLLECTION___
 	// construction
 	static inline herd_a val(any_a range)
 	{
-		return cast_<herd_a>(val_() += range);
+		return cast_<herd_a>(val_() += std::move(range));
 	}
 
 	static inline herd_a val_()
@@ -132,7 +132,7 @@ public: ___COLLECTION___
 
 	static inline herd_a ref(any_a range)
 	{
-		return cast_<herd_a>(ref_() += range, true);
+		return cast_<herd_a>(ref_() += std::move(range), true);
 	}
 
 	static inline herd_a ref_()
@@ -218,7 +218,7 @@ public: ___COLLECTION___
 	// collection
 	inline bool has__(any_a key) const
 	{
-		const std_unordered_set_any::const_iterator it = _set.find(key);
+		const std_unordered_set_any::const_iterator it = _set.find(std::move(key));
 		return it != _set.cend();
 	}
 
@@ -229,7 +229,7 @@ public: ___COLLECTION___
 
 	inline any_a at_(any_a key) const
 	{
-		const std_unordered_set_any::const_iterator it = _set.find(key);
+		const std_unordered_set_any::const_iterator it = _set.find(std::move(key));
 		if (it == _set.cend())
 		{
 			return nothing_t<>::val_();
@@ -245,13 +245,13 @@ public: ___COLLECTION___
 
 	inline any_a update_(any_a key, any_a value)
 	{
-		_set.insert(key);
+		_set.insert(std::move(key));
 		return value;
 	}
 
 	inline bool insert__(any_a key, any_a)
 	{
-		return _set.insert(key).second;
+		return _set.insert(std::move(key)).second;
 	}
 
 	inline bool insert__(const std::string& s)
@@ -261,7 +261,7 @@ public: ___COLLECTION___
 
 	inline bool erase__(any_a key)
 	{
-		return _set.erase(key);
+		return _set.erase(std::move(key));
 	}
 
 	inline bool erase__(const std::string& s)
@@ -286,7 +286,7 @@ public: ___COLLECTION___
 
 	inline void push_front__(any_a thing)
 	{
-		push_back__(thing);
+		push_back__(std::move(thing));
 	}
 
 	inline any_a pop_front_()
@@ -296,7 +296,7 @@ public: ___COLLECTION___
 
 	inline void push_back__(any_a thing)
 	{
-		_set.insert(thing);
+		_set.insert(std::move(thing));
 	}
 
 	inline any_a pop_back_()

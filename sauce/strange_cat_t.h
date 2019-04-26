@@ -99,7 +99,7 @@ public: ___THING___
 
 	inline any_a includes_(any_a thing) const
 	{
-		return _boole_(includes__(thing));
+		return _boole_(includes__(std::move(thing)));
 	}
 
 	inline bool includes__(any_a thing) const
@@ -119,13 +119,12 @@ public: ___THING___
 		{
 			return dis__("strange::cat::conforms passed short range");
 		}
-		any_a cat_or_herd = *it;
-		return conforms_(thing, cat_or_herd);
+		return conforms_(std::move(thing), *it);
 	}
 
 	static inline any_a conforms_(any_a thing, any_a cat_or_herd)
 	{
-		return _boole_(conforms__(thing, cat_or_herd));
+		return _boole_(conforms__(std::move(thing), std::move(cat_or_herd)));
 	}
 
 	static inline bool conforms__(any_a thing, any_a cat_or_herd)

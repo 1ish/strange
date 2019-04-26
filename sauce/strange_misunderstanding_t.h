@@ -90,12 +90,12 @@ public: ___THING___
 				s += cast_<misunderstanding_a>(thing).to_string__();
 			}
 		}
-		return misunderstanding_a{ misunderstanding_t{ s } };
+		return misunderstanding_a{ misunderstanding_t{ std::move(s) } };
 	}
 
 	inline misunderstanding_a add_(misunderstanding_a misunderstanding) const
 	{
-		return operator+(misunderstanding);
+		return operator+(std::move(misunderstanding));
 	}
 
 	inline misunderstanding_a operator+(misunderstanding_a misunderstanding) const

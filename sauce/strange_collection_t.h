@@ -17,7 +17,7 @@ inline any_a has(any_a range) const \
 } \
 inline any_a has_(any_a key) const \
 { \
-	return _boole_(has__(key)); \
+	return _boole_(has__(std::move(key))); \
 } \
 inline any_a at(any_a range) const \
 { \
@@ -40,7 +40,7 @@ inline any_a update(any_a range) \
 	{ \
 		return update_(key, key); \
 	} \
-	return update_(key, *it); \
+	return update_(std::move(key), *it); \
 } \
 inline any_a insert(any_a range) \
 { \
@@ -54,11 +54,11 @@ inline any_a insert(any_a range) \
 	{ \
 		return insert_(key, key); \
 	} \
-	return insert_(key, *it); \
+	return insert_(std::move(key), *it); \
 } \
 inline any_a insert_(any_a key, any_a value) \
 { \
-	return _boole_(insert__(key, value)); \
+	return _boole_(insert__(std::move(key), std::move(value))); \
 } \
 inline any_a erase(any_a range) \
 { \
@@ -74,7 +74,7 @@ inline any_a erase(any_a range) \
 } \
 inline any_a erase_(any_a key) \
 { \
-	return _boole_(erase__(key)); \
+	return _boole_(erase__(std::move(key))); \
 } \
 inline _ABSTRACTION_ clear(any_a) \
 { \
@@ -111,7 +111,7 @@ inline _ABSTRACTION_ push_front(any_a range) \
 } \
 inline _ABSTRACTION_ push_front_(any_a value) \
 { \
-	push_front__(value); \
+	push_front__(std::move(value)); \
 	return me_(); \
 } \
 inline any_a pop_front(any_a) \
@@ -128,7 +128,7 @@ inline _ABSTRACTION_ push_back(any_a range) \
 } \
 inline _ABSTRACTION_ push_back_(any_a value) \
 { \
-	push_back__(value); \
+	push_back__(std::move(value)); \
 	return me_(); \
 } \
 inline any_a pop_back(any_a) \
@@ -145,7 +145,7 @@ inline _ABSTRACTION_ self_add(any_a range) \
 } \
 inline _ABSTRACTION_ self_add_(collection_a collection) \
 { \
-	operator+=(collection); \
+	operator+=(std::move(collection)); \
 	return me_(); \
 } \
 inline _ABSTRACTION_ add(any_a range) const \
@@ -159,7 +159,7 @@ inline _ABSTRACTION_ add(any_a range) const \
 } \
 inline _ABSTRACTION_ add_(collection_a collection) const \
 { \
-	return operator+(collection); \
+	return operator+(std::move(collection)); \
 } \
 inline _ABSTRACTION_ operator+(collection_a collection) const \
 { \
@@ -177,7 +177,7 @@ inline _ABSTRACTION_ self_subtract(any_a range) \
 } \
 inline _ABSTRACTION_ self_subtract_(collection_a collection) \
 { \
-	operator-=(collection); \
+	operator-=(std::move(collection)); \
 	return me_(); \
 } \
 inline _ABSTRACTION_ subtract(any_a range) const \
@@ -191,7 +191,7 @@ inline _ABSTRACTION_ subtract(any_a range) const \
 } \
 inline _ABSTRACTION_ subtract_(collection_a collection) const \
 { \
-	return operator-(collection); \
+	return operator-(std::move(collection)); \
 } \
 inline _ABSTRACTION_ operator-(collection_a collection) const \
 { \

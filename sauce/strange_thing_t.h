@@ -57,15 +57,15 @@ public:
 			return dis__("strange::thing::invoke passed empty range");
 		}
 		any_a member = *it;
-		return invoke_(member, range_t<>::val_(++it, range.cend()));
+		return invoke_(std::move(member), range_t<>::val_(++it, range.cend()));
 	}
 
 	inline any_a invoke_(any_a member, any_a range) const
 	{
 		//TODO
 		// thing = me_();
-		// operation = thing.operations_().at(member);
-		// return operate_(thing, operation, range);
+		// operation = thing.operations_().at(std::move(member));
+		// return operate_(std::move(thing), std::move(operation), std::move(range));
 		return nothing_t<>::val_();
 	}
 
@@ -82,12 +82,12 @@ public:
 			return dis__("strange::thing::visit passed short range");
 		}
 		any_a operation = *it;
-		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
+		return operate_(std::move(thing), std::move(operation), range_t<>::val_(++it, range.cend()));
 	}
 
 	static inline any_a operate_(any_a thing, any_a operation, any_a range)
 	{
-		return operation.operator()(thing, range);
+		return operation.operator()(std::move(thing), std::move(range));
 	}
 
 	// identification
@@ -103,7 +103,7 @@ public:
 
 	inline any_a identical_(any_a thing) const
 	{
-		return _boole_(identical__(thing));
+		return _boole_(identical__(std::move(thing)));
 	}
 
 	// comparison
@@ -239,7 +239,7 @@ inline any_a same(any_a range) const \
 } \
 inline any_a same_(any_a thing) const \
 { \
-	return _boole_(operator==(thing)); \
+	return _boole_(operator==(std::move(thing))); \
 } \
 inline any_a different(any_a range) const \
 { \
@@ -252,7 +252,7 @@ inline any_a different(any_a range) const \
 } \
 inline any_a different_(any_a thing) const \
 { \
-	return _boole_(operator!=(thing)); \
+	return _boole_(operator!=(std::move(thing))); \
 } \
 inline any_a hash(any_a) const \
 { \
@@ -313,7 +313,7 @@ inline any_a set(any_a range) const \
 } \
 inline any_a set_(any_a thing) const \
 { \
-	return operator*() = thing; \
+	return operator*() = std::move(thing); \
 } \
 inline any_a* operator->() const \
 { \

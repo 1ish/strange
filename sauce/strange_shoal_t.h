@@ -127,7 +127,7 @@ public: ___COLLECTION___
 	// construction
 	static inline shoal_a val(any_a range)
 	{
-		return cast_<shoal_a>(val_() += range);
+		return cast_<shoal_a>(val_() += std::move(range));
 	}
 
 	static inline shoal_a val_()
@@ -143,7 +143,7 @@ public: ___COLLECTION___
 
 	static inline shoal_a ref(any_a range)
 	{
-		return cast_<shoal_a>(ref_() += range, true);
+		return cast_<shoal_a>(ref_() += std::move(range), true);
 	}
 
 	static inline shoal_a ref_()
@@ -235,7 +235,7 @@ public: ___COLLECTION___
 	// collection
 	inline bool has__(any_a key) const
 	{
-		const std_unordered_map_any_any::const_iterator it = _map.find(key);
+		const std_unordered_map_any_any::const_iterator it = _map.find(std::move(key));
 		return it != _map.cend();
 	}
 
@@ -246,7 +246,7 @@ public: ___COLLECTION___
 
 	inline any_a at_(any_a key) const
 	{
-		const std_unordered_map_any_any::const_iterator it = _map.find(key);
+		const std_unordered_map_any_any::const_iterator it = _map.find(std::move(key));
 		if (it == _map.cend())
 		{
 			return nothing_t<>::val_();
@@ -261,27 +261,27 @@ public: ___COLLECTION___
 
 	inline any_a update_(any_a key, any_a value)
 	{
-		return _map[key] = value;
+		return _map[std::move(key)] = std::move(value);
 	}
 
 	inline void update__(const std::string& s, any_a value)
 	{
-		_map[sym__(s)] = value;
+		_map[sym__(s)] = std::move(value);
 	}
 
 	inline bool insert__(any_a key, any_a value)
 	{
-		return _map.emplace(key, value).second;
+		return _map.emplace(std::move(key), std::move(value)).second;
 	}
 
 	inline bool insert__(const std::string& s, any_a value)
 	{
-		return insert__(sym__(s), value);
+		return insert__(sym__(s), std::move(value));
 	}
 
 	inline bool erase__(any_a key)
 	{
-		return _map.erase(key);
+		return _map.erase(std::move(key));
 	}
 
 	inline bool erase__(const std::string& s)
@@ -306,7 +306,7 @@ public: ___COLLECTION___
 
 	inline void push_front__(any_a thing)
 	{
-		push_back__(thing);
+		push_back__(std::move(thing));
 	}
 
 	inline any_a pop_front_()

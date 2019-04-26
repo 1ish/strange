@@ -54,7 +54,7 @@ public: ___THING___
 	// function
 	inline any_a operator()(any_a _, any_a range) const
 	{
-		return _function(range);
+		return _function(std::move(range));
 	}
 
 protected:

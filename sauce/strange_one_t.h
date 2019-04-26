@@ -10,7 +10,7 @@ public:
 	// erasure
 	inline void ___weak___(any_a::___WEAK___ weak) const
 	{
-		_meek = weak;
+		_meek = std::move(weak);
 	}
 
 	// conversion
@@ -53,12 +53,12 @@ public:
 
 	inline bool operator==(any_a thing) const
 	{
-		return identical__(thing);
+		return identical__(std::move(thing));
 	}
 
 	inline bool operator!=(any_a thing) const
 	{
-		return !identical__(thing);
+		return !identical__(std::move(thing));
 	}
 
 	inline std::size_t hash__() const

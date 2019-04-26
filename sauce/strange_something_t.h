@@ -13,7 +13,7 @@ public:
 	{
 		//TODO
 		// operation = thing.operations_().at(range.1st);
-		// return operate_(thing, operation, range.2nd...);
+		// return operate_(std::move(thing), std::move(operation), range.2nd...);
 		return nothing_t<>::val_();
 	}
 
