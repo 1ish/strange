@@ -90,6 +90,18 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
+		//TODO abstractions:
+		inline _ABSTRACTION_ decrement(any_a _)
+		{
+			return decrement_();
+		}
+
+		inline _ABSTRACTION_ decrement_()
+		{
+			operator--();
+			return me_();
+		}
+
 		inline iterator_t& operator--()
 		{
 			--_it;
@@ -103,6 +115,17 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
+		inline _ABSTRACTION_ self_add(any_a range)
+		{
+			return self_add_();
+		}
+
+		inline _ABSTRACTION_ self_add_(any_a thing)
+		{
+			operator+=(std::move(thing));
+			return me_();
+		}
+
 		inline iterator_t& operator+=(any_a thing)
 		{
 			return operator+=(0); //TODO index
@@ -112,6 +135,17 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			_it += index;
 			return *this;
+		}
+
+		inline _ABSTRACTION_ self_subtract(any_a range)
+		{
+			return self_subtract_();
+		}
+
+		inline _ABSTRACTION_ self_subtract_(any_a thing)
+		{
+			operator-=(std::move(thing));
+			return me_();
 		}
 
 		inline iterator_t& operator-=(any_a thing)

@@ -33,6 +33,10 @@
 #include "strange_herd_a.h"
 #undef ___derived___
 
+#define ___root___ any_a
+#include "strange_number_a.h"
+#undef ___root___
+
 #include "strange_one_t.h"
 #include "strange_thing_t.h"
 #include "strange_native_function_t.h"
