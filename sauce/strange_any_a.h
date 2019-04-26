@@ -94,7 +94,7 @@ namespace strange {
 
     		assert(handle_);
 
-    		write().operator+=(other);
+    		write().operator+=(std::move(other));
 
     		return *this;
 
@@ -108,7 +108,7 @@ namespace strange {
 
     		assert(handle_);
 
-    		write().operator-=(other);
+    		write().operator-=(std::move(other));
 
     		return *this;
 
@@ -122,7 +122,7 @@ namespace strange {
 
     		assert(handle_);
 
-    		write().operator*=(other);
+    		write().operator*=(std::move(other));
 
     		return *this;
 
@@ -136,7 +136,7 @@ namespace strange {
 
     		assert(handle_);
 
-    		write().operator/=(other);
+    		write().operator/=(std::move(other));
 
     		return *this;
 
@@ -150,7 +150,7 @@ namespace strange {
 
     		assert(handle_);
 
-    		write().operator%=(other);
+    		write().operator%=(std::move(other));
 
     		return *this;
 
@@ -477,7 +477,7 @@ namespace strange {
 
     		{
 
-    			value_.operator+=(other);
+    			value_.operator+=(std::move(other));
 
     		}
 
@@ -487,7 +487,7 @@ namespace strange {
 
     		{
 
-    			value_.operator-=(other);
+    			value_.operator-=(std::move(other));
 
     		}
 
@@ -497,7 +497,7 @@ namespace strange {
 
     		{
 
-    			value_.operator*=(other);
+    			value_.operator*=(std::move(other));
 
     		}
 
@@ -507,7 +507,7 @@ namespace strange {
 
     		{
 
-    			value_.operator/=(other);
+    			value_.operator/=(std::move(other));
 
     		}
 
@@ -517,7 +517,7 @@ namespace strange {
 
     		{
 
-    			value_.operator%=(other);
+    			value_.operator%=(std::move(other));
 
     		}
 

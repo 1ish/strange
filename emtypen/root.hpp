@@ -39,39 +39,39 @@ public:
 	inline %struct_name%_a& operator+=(%struct_name%_a other)
 	{
 		assert(handle_);
-		write().operator+=(other);
+		write().operator+=(std::move(other));
 		return *this;
 	}
 
 	inline %struct_name%_a& operator-=(%struct_name%_a other)
 	{
 		assert(handle_);
-		write().operator-=(other);
+		write().operator-=(std::move(other));
 		return *this;
 	}
 
 	inline %struct_name%_a& operator*=(%struct_name%_a other)
 	{
 		assert(handle_);
-		write().operator*=(other);
+		write().operator*=(std::move(other));
 		return *this;
 	}
 
 	inline %struct_name%_a& operator/=(%struct_name%_a other)
 	{
 		assert(handle_);
-		write().operator/=(other);
+		write().operator/=(std::move(other));
 		return *this;
 	}
 
 	inline %struct_name%_a& operator%=(%struct_name%_a other)
 	{
 		assert(handle_);
-		write().operator%=(other);
+		write().operator%=(std::move(other));
 		return *this;
 	}
 
-	%nonvirtual_members%
+	%nonvirtual_members% //TODO move params
 
 protected:
 	struct ___root_handle_base___
@@ -141,30 +141,30 @@ protected:
 
 		virtual inline void operator+=(%struct_name%_a other) final
 		{
-			value_.operator+=(other);
+			value_.operator+=(std::move(other));
 		}
 
 		virtual inline void operator-=(%struct_name%_a other) final
 		{
-			value_.operator-=(other);
+			value_.operator-=(std::move(other));
 		}
 
 		virtual inline void operator*=(%struct_name%_a other) final
 		{
-			value_.operator*=(other);
+			value_.operator*=(std::move(other));
 		}
 
 		virtual inline void operator/=(%struct_name%_a other) final
 		{
-			value_.operator/=(other);
+			value_.operator/=(std::move(other));
 		}
 
 		virtual inline void operator%=(%struct_name%_a other) final
 		{
-			value_.operator%=(other);
+			value_.operator%=(std::move(other));
 		}
 
-		%virtual_members% //TODO final
+		%virtual_members% //TODO final / move params
 
 		___TTT___ value_;
 	};
