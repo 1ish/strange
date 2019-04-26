@@ -33,9 +33,9 @@ class herd_t : public something_t<_ABSTRACTION_>
 		}
 
 		template <typename F>
-		static inline any_a val__(F&& it)
+		static inline any_a val__(herd_a herd, F&& it)
 		{
-			return any_a{ iterator_t{ std::forward<F>(it) } };
+			return any_a{ iterator_t(std::move(herd), std::forward<F>(it)) };
 		}
 
 		static inline any_a ref(any_a range)
@@ -45,9 +45,9 @@ class herd_t : public something_t<_ABSTRACTION_>
 		}
 
 		template <typename F>
-		static inline any_a ref__(F&& it)
+		static inline any_a ref__(herd_a herd, F&& it)
 		{
-			return any_a(iterator_t{ std::forward<F>(it) }, true);
+			return any_a(iterator_t(std::move(herd), std::forward<F>(it)), true);
 		}
 
 		// reflection
@@ -102,11 +102,13 @@ class herd_t : public something_t<_ABSTRACTION_>
 
 	private:
 		ITERATOR _it;
+		herd_a _herd;
 
 		template <typename F>
-		inline iterator_t(F&& it)
+		inline iterator_t(herd_a herd, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
+			, _herd(std::move(herd), true)
 		{}
 	};
 
@@ -195,22 +197,22 @@ public: ___COLLECTION___
 	// range
 	inline any_a cbegin() const
 	{
-		return iterator_t<std_unordered_set_any::const_iterator>::val__(_set.cbegin());
+		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cbegin());
 	}
 
 	inline any_a begin()
 	{
-		return iterator_t<std_unordered_set_any::iterator>::val__(_set.begin());
+		return iterator_t<std_unordered_set_any::iterator>::val__(me_(), _set.begin());
 	}
 
 	inline any_a cend() const
 	{
-		return iterator_t<std_unordered_set_any::const_iterator>::val__(_set.cend());
+		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cend());
 	}
 
 	inline any_a end()
 	{
-		return iterator_t<std_unordered_set_any::iterator>::val__(_set.end());
+		return iterator_t<std_unordered_set_any::iterator>::val__(me_(), _set.end());
 	}
 
 	// collection

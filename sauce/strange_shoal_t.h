@@ -33,9 +33,9 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		}
 
 		template <typename F>
-		static inline any_a val__(F&& it)
+		static inline any_a val__(shoal_a shoal, F&& it)
 		{
-			return any_a{ iterator_t{ std::forward<F>(it) } };
+			return any_a{ iterator_t(std::move(shoal), std::forward<F>(it)) };
 		}
 
 		static inline any_a ref(any_a range)
@@ -45,9 +45,9 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		}
 
 		template <typename F>
-		static inline any_a ref__(F&& it)
+		static inline any_a ref__(shoal_a shoal, F&& it)
 		{
-			return any_a(iterator_t{ std::forward<F>(it) }, true);
+			return any_a(iterator_t(std::move(shoal), std::forward<F>(it)), true);
 		}
 
 		// reflection
@@ -111,13 +111,15 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		ITERATOR _it;
 		mutable flock_a _pair;
 		mutable bool _fresh;
+		shoal_a _shoal;
 
 		template <typename F>
-		inline iterator_t(F&& it)
+		inline iterator_t(shoal_a shoal, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _pair{ flock_t<>::val_() }
 			, _fresh{}
+			, _shoal(std::move(shoal), true)
 		{}
 	};
 
@@ -212,22 +214,22 @@ public: ___COLLECTION___
 	// range
 	inline any_a cbegin() const
 	{
-		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(_map.cbegin());
+		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cbegin());
 	}
 
 	inline any_a begin()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::val__(_map.begin());
+		return iterator_t<std_unordered_map_any_any::iterator>::val__(me_(), _map.begin());
 	}
 
 	inline any_a cend() const
 	{
-		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(_map.cend());
+		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cend());
 	}
 
 	inline any_a end()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::val__(_map.end());
+		return iterator_t<std_unordered_map_any_any::iterator>::val__(me_(), _map.end());
 	}
 
 	// collection

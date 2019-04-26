@@ -23,9 +23,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 		}
 
 		template <typename F>
-		static inline any_a val__(F&& it)
+		static inline any_a val__(flock_a flock, F&& it)
 		{
-			return any_a{ iterator_t{ std::forward<F>(it) } };
+			return any_a{ iterator_t(std::move(flock), std::forward<F>(it)) };
 		}
 
 		static inline any_a ref(any_a range)
@@ -35,9 +35,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 		}
 
 		template <typename F>
-		static inline any_a ref__(F&& it)
+		static inline any_a ref__(flock_a flock, F&& it)
 		{
-			return any_a(iterator_t{ std::forward<F>(it) }, true);
+			return any_a(iterator_t(std::move(flock), std::forward<F>(it)), true);
 		}
 
 		// reflection
@@ -127,11 +127,13 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 	private:
 		ITERATOR _it;
+		flock_a _flock;
 
 		template <typename F>
-		inline iterator_t(F&& it)
+		inline iterator_t(flock_a flock, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
+			, _flock(std::move(flock), true)
 		{}
 	};
 
@@ -219,22 +221,22 @@ public: ___COLLECTION___
 	// range
 	inline any_a cbegin() const
 	{
-		return iterator_t<std_vector_any::const_iterator>::val__(_vector.cbegin());
+		return iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cbegin());
 	}
 
 	inline any_a begin()
 	{
-		return iterator_t<std_vector_any::iterator>::val__(_vector.begin());
+		return iterator_t<std_vector_any::iterator>::val__(me_(), _vector.begin());
 	}
 
 	inline any_a cend() const
 	{
-		return iterator_t<std_vector_any::const_iterator>::val__(_vector.cend());
+		return iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cend());
 	}
 
 	inline any_a end()
 	{
-		return iterator_t<std_vector_any::iterator>::val__(_vector.end());
+		return iterator_t<std_vector_any::iterator>::val__(me_(), _vector.end());
 	}
 
 	// collection
