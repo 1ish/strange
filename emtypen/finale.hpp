@@ -1,7 +1,7 @@
 %struct_prefix%_a final : public ___derived___
 {
 public:
-	%nonvirtual_members%
+	%nonvirtual_members% //TODO move params
 
 private:
 	struct ___finale_handle_base___ : ___derived_handle_base___
@@ -27,7 +27,7 @@ private:
 			return std::make_shared<___finale_handle_final___>(___derived_handle___<___TTT___, ___finale_handle_base___>::value_);
 		}
 
-		%virtual_members% //TODO final
+		%virtual_members% //TODO final / move params
 	};
 
 	template <typename ___TTT___>

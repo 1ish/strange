@@ -1,7 +1,7 @@
 %struct_prefix%_a : public ___root___
 {
 public:
-	%nonvirtual_members%
+	%nonvirtual_members% //TODO move params
 
 protected:
 	struct ___derived_handle_base___ : ___root_handle_base___
@@ -22,7 +22,7 @@ protected:
 			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
-		%virtual_members% //TODO final
+		%virtual_members% //TODO final / move params
 	};
 
 	template <typename ___TTT___, typename ___DHB___>
