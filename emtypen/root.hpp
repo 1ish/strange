@@ -3,7 +3,8 @@
 public:
 	inline operator bool() const
 	{
-		assert(handle_); return read().operator bool();
+		assert(handle_);
+		return read().operator bool();
 	}
 
 	inline %struct_name%_a& operator++()

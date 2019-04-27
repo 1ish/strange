@@ -13,7 +13,7 @@ public: ___THING___
 	// construction
 	static inline any_a val(any_a _)
 	{
-		return dis__("strange::native_mutation::val cannot be implemented");
+		throw dis__("strange::native_mutation::val cannot be implemented");
 	}
 
 	template <typename... Args>
@@ -27,7 +27,7 @@ public: ___THING___
 
 	static inline any_a ref(any_a _)
 	{
-		return dis__("strange::native_mutation::ref cannot be implemented");
+		throw dis__("strange::native_mutation::ref cannot be implemented");
 	}
 
 	template <typename... Args>

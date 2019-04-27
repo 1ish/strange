@@ -19,7 +19,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		}
 	};
 
-	using std_unordered_map_any_any = std::unordered_map<any_a, any_a, hash_f>;
+	using std_unordered_map_any_any = std::unordered_map<any_a, any_a, hash_f>; //TODO add data_a to shoal_a
 
 	template <typename ITERATOR, typename _ABSTRACTION_ = data_a<ITERATOR>>
 	class iterator_t : public something_t<_ABSTRACTION_>
@@ -28,8 +28,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		// construction
 		static inline any_a val(any_a range)
 		{
-			assert(false);
-			return nothing_t<>::val_();
+			throw dis__("strange::shoal::iterator::val cannot be implemented");
 		}
 
 		template <typename F>
@@ -40,8 +39,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 
 		static inline any_a ref(any_a range)
 		{
-			assert(false);
-			return nothing_t<>::val_();
+			throw dis__("strange::shoal::iterator::ref cannot be implemented");
 		}
 
 		template <typename F>
@@ -65,13 +63,6 @@ class shoal_t : public something_t<_ABSTRACTION_>
 				return false;
 			}
 			return _it == cast_<data_a<ITERATOR>>(std::move(thing)).extract__();
-			/*
-			if (!type_().identical__(thing.type_()))
-			{
-				return false;
-			}
-			return _it == reinterpret_cast<const iterator_t<ITERATOR, _ABSTRACTION_>*>(thing.identity__())->_it;
-			*/
 		}
 
 		inline bool operator!=(any_a thing) const
@@ -81,13 +72,6 @@ class shoal_t : public something_t<_ABSTRACTION_>
 				return true;
 			}
 			return _it != cast_<data_a<ITERATOR>>(std::move(thing)).extract__();
-			/*
-			if (!type_().identical__(thing.type_()))
-			{
-				return true;
-			}
-			return _it != reinterpret_cast<const iterator_t<ITERATOR, _ABSTRACTION_>*>(thing.identity__())->_it;
-			*/
 		}
 
 		inline std::size_t hash__() const
@@ -208,6 +192,7 @@ public: ___COLLECTION___
 	// comparison
 	inline bool operator==(any_a thing) const
 	{
+		//TODO add data_a to shoal_a
 		if (!type_().identical__(thing.type_()))
 		{
 			return false;
@@ -217,6 +202,7 @@ public: ___COLLECTION___
 
 	inline bool operator!=(any_a thing) const
 	{
+		//TODO add data_a to shoal_a
 		if (!type_().identical__(thing.type_()))
 		{
 			return true;

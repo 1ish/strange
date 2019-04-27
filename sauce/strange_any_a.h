@@ -22,7 +22,9 @@ namespace strange {
 
     	{
 
-    		assert(handle_); return read().operator bool();
+    		assert(handle_);
+
+    		return read().operator bool();
 
     	}
 

@@ -14,12 +14,12 @@ public: ___THING___
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("strange::range::val passed empty range");
+			throw dis__("strange::range::val passed empty range");
 		}
 		any_a begin = *it;
 		if (++it == range.cend())
 		{
-			return dis__("strange::range::val passed short range");
+			throw dis__("strange::range::val passed short range");
 		}
 		return val_(std::move(begin), *it);
 	}
@@ -34,12 +34,12 @@ public: ___THING___
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("strange::range::ref passed empty range");
+			throw dis__("strange::range::ref passed empty range");
 		}
 		any_a begin = *it;
 		if (++it == range.cend())
 		{
-			return dis__("strange::range::ref passed short range");
+			throw dis__("strange::range::ref passed short range");
 		}
 		return ref_(std::move(begin), *it);
 	}

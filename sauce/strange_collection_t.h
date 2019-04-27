@@ -11,7 +11,7 @@ inline any_a has(any_a range) const \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		return dis__("has passed empty range"); \
+		throw dis__("[collection] has passed empty range"); \
 	} \
 	return has_(*it); \
 } \
@@ -24,7 +24,7 @@ inline any_a at(any_a range) const \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		return dis__("at passed empty range"); \
+		throw dis__("[collection] at passed empty range"); \
 	} \
 	return at_(*it); \
 } \
@@ -33,7 +33,7 @@ inline any_a update(any_a range) \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		return dis__("update passed empty range"); \
+		throw dis__("[collection] update passed empty range"); \
 	} \
 	any_a key = *it; \
 	if (++it == range.cend()) \
@@ -47,7 +47,7 @@ inline any_a insert(any_a range) \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		return dis__("insert passed empty range"); \
+		throw dis__("[collection] insert passed empty range"); \
 	} \
 	any_a key = *it; \
 	if (++it == range.cend()) \

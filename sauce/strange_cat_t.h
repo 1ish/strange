@@ -92,7 +92,7 @@ public: ___THING___
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("strange::cat::includes passed empty range");
+			throw dis__("strange::cat::includes passed empty range");
 		}
 		return includes_(*it);
 	}
@@ -112,12 +112,12 @@ public: ___THING___
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("strange::cat::conforms passed empty range");
+			throw dis__("strange::cat::conforms passed empty range");
 		}
 		any_a thing = *it;
 		if (it == range.cend())
 		{
-			return dis__("strange::cat::conforms passed short range");
+			throw dis__("strange::cat::conforms passed short range");
 		}
 		return conforms_(std::move(thing), *it);
 	}

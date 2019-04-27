@@ -42,7 +42,7 @@ public:
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("strange::thing::visit passed empty range");
+			throw dis__("strange::thing::visit passed empty range");
 		}
 		any_a visitor = *it;
 		return visitor->invoke(range_t<>::val_(++it, range.cend())); //TODO me_() must already be in range
@@ -54,7 +54,7 @@ public:
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("strange::thing::invoke passed empty range");
+			throw dis__("strange::thing::invoke passed empty range");
 		}
 		any_a member = *it;
 		return invoke_(std::move(member), range_t<>::val_(++it, range.cend()));
@@ -74,12 +74,12 @@ public:
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("strange::thing::operate passed empty range");
+			throw dis__("strange::thing::operate passed empty range");
 		}
 		any_a thing = *it;
 		if (++it == range.cend())
 		{
-			return dis__("strange::thing::visit passed short range");
+			throw dis__("strange::thing::visit passed short range");
 		}
 		any_a operation = *it;
 		return operate_(std::move(thing), std::move(operation), range_t<>::val_(++it, range.cend()));
@@ -96,7 +96,7 @@ public:
 		any_a it = range.cbegin();
 		if (it == range.cend())
 		{
-			return dis__("strange::thing::identical passed empty range");
+			throw dis__("strange::thing::identical passed empty range");
 		}
 		return identical_(*it);
 	}
@@ -233,7 +233,7 @@ inline any_a same(any_a range) const \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		return dis__("same passed empty range"); \
+		throw dis__("[thing] same passed empty range"); \
 	} \
 	return same_(*it); \
 } \
@@ -246,7 +246,7 @@ inline any_a different(any_a range) const \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		return dis__("different passed empty range"); \
+		throw dis__("[thing] different passed empty range"); \
 	} \
 	return different_(*it); \
 } \
@@ -307,7 +307,7 @@ inline any_a set(any_a range) const \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		return dis__("set passed empty range"); \
+		throw dis__("[thing] set passed empty range"); \
 	} \
 	return set_(*it); \
 } \
