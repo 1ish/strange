@@ -52,21 +52,21 @@ public:
 	inline number_a modulo_(number_a number) const;
 	inline number_a operator%(number_a number) const;
 
-	inline number_a to_integer64(any_a _) const;
-	inline number_a to_integer64_() const;
-	inline int64_t to_int64__() const;
+	inline number_a to_int_64(any_a _) const;
+	inline number_a to_int_64_() const;
+	inline int64_t to_int_64__() const;
 
-	inline any_a from_integer64(any_a range);
-	inline any_a from_integer64_(number_a integer64);
-	inline void from_int64__(int64_t int64);
+	inline any_a from_int_64(any_a range);
+	inline any_a from_int_64_(number_a int_64);
+	inline void from_int_64__(int64_t int_64);
 
-	inline number_a to_float64(any_a _) const;
-	inline number_a to_float64_() const;
-	inline double to_double__() const;
+	inline number_a to_float_64(any_a _) const;
+	inline number_a to_float_64_() const;
+	inline double to_float_64__() const;
 
-	inline any_a from_float64(any_a range);
-	inline any_a from_float64_(number_a float64);
-	inline void from_double__(double dbl);
+	inline any_a from_float_64(any_a range);
+	inline any_a from_float_64_(number_a float_64);
+	inline void from_float_64__(double float_64);
 
 	inline any_a less_than(any_a range) const;
 	inline any_a less_than_(number_a number) const;

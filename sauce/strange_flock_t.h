@@ -120,7 +120,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline _ABSTRACTION_ self_add_(number_a number)
 		{
-			_it += number.to_int64__();
+			_it += number.to_int_64__();
 			return me_();
 		}
 
@@ -130,7 +130,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator += passed non-number");
 			}
-			_it += cast_<number_a>(std::move(thing)).to_int64__();
+			_it += cast_<number_a>(std::move(thing)).to_int_64__();
 			return *this;
 		}
 
@@ -152,7 +152,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		inline random_access_iterator_a operator+(number_a number) const
 		{
 			_ABSTRACTION_ result = me_();
-			result.reference__() += number.to_int64__();
+			result.reference__() += number.to_int_64__();
 			return result;
 		}
 
@@ -167,7 +167,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline _ABSTRACTION_ self_subtract_(number_a number)
 		{
-			_it -= number.to_int64__();
+			_it -= number.to_int_64__();
 			return me_();
 		}
 
@@ -177,7 +177,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator -= passed non-number");
 			}
-			_it -= cast_<number_a>(std::move(thing)).to_int64__();
+			_it -= cast_<number_a>(std::move(thing)).to_int_64__();
 			return *this;
 		}
 
@@ -199,7 +199,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		inline random_access_iterator_a operator-(number_a number) const
 		{
 			_ABSTRACTION_ result = me_();
-			result.reference__() -= number.to_int64__();
+			result.reference__() -= number.to_int_64__();
 			return result;
 		}
 
@@ -454,7 +454,7 @@ public: ___COLLECTION___
 	// collection
 	inline bool has__(any_a key) const
 	{
-		return check_<number_a>(key) && has__(cast_<number_a>(std::move(key)).to_int64__());
+		return check_<number_a>(key) && has__(cast_<number_a>(std::move(key)).to_int_64__());
 	}
 
 	inline bool has__(int64_t index) const
@@ -466,7 +466,7 @@ public: ___COLLECTION___
 	{
 		if (check_<number_a>(key))
 		{
-			return at__(cast_<number_a>(std::move(key)).to_int64__());
+			return at__(cast_<number_a>(std::move(key)).to_int_64__());
 		}
 		return nothing_t<>::val_();
 	}
@@ -484,7 +484,7 @@ public: ___COLLECTION___
 	{
 		if (check_<number_a>(key))
 		{
-			update__(cast_<number_a>(std::move(key)).to_int64__(), value);
+			update__(cast_<number_a>(std::move(key)).to_int_64__(), value);
 		}
 		return value;
 	}
@@ -511,7 +511,7 @@ public: ___COLLECTION___
 
 	inline bool insert__(any_a key, any_a value)
 	{
-		return check_<number_a>(key) && insert__(cast_<number_a>(std::move(key)).to_int64__(), std::move(value));
+		return check_<number_a>(key) && insert__(cast_<number_a>(std::move(key)).to_int_64__(), std::move(value));
 	}
 
 	inline bool insert__(int64_t index, any_a value)
@@ -542,7 +542,7 @@ public: ___COLLECTION___
 
 	inline bool erase__(any_a key)
 	{
-		return check_<number_a>(key) && erase__(cast_<number_a>(std::move(key)).to_int64__());
+		return check_<number_a>(key) && erase__(cast_<number_a>(std::move(key)).to_int_64__());
 	}
 
 	inline bool erase__(int64_t index)
