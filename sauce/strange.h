@@ -37,9 +37,9 @@
 #include "strange_data_a.h"
 #undef ___root___
 
-#define ___root___ any_a
+#define ___derived___ data_a<DATA>
 #include "strange_number_a.h"
-#undef ___root___
+#undef ___derived___
 
 #include "strange_one_t.h"
 #include "strange_thing_t.h"

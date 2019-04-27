@@ -1,7 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_NUMBER_A_H
 #define COM_ONEISH_STRANGE_NUMBER_A_H
 
-// # include "any.hpp"
+// # include "data.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -11,8 +11,8 @@
 
 
 namespace strange {
-    
-    class number_a : public ___root___
+    template < typename DATA >
+    class number_a final : public ___derived___
 
     {
 
@@ -122,9 +122,9 @@ namespace strange {
      { assert(handle_); return read().operator>=(number ); }
     
 
-    protected:
+    private:
 
-    	struct ___derived_handle_base___ : ___root_handle_base___
+    	struct ___finale_handle_base___ : ___derived_handle_base___
 
     	{
 
@@ -183,17 +183,17 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename ___DHB___ = ___derived_handle_base___>
+    	template <typename ___TTT___>
 
-    	struct ___derived_handle___ : ___root_handle___<___TTT___, ___DHB___>
+    	struct ___finale_handle_final___ final : ___derived_handle___<___TTT___, ___finale_handle_base___>
 
     	{
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___derived_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+    		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
 
-    			: ___root_handle___<___TTT___, ___DHB___>{ value }
+    			: ___derived_handle___<___TTT___, ___finale_handle_base___>{ value }
 
     		{}
 
@@ -201,11 +201,21 @@ namespace strange {
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___derived_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+    		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
 
-    			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
+    			: ___derived_handle___<___TTT___, ___finale_handle_base___>{ std::move(value) }
 
     		{}
+
+    
+
+    		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
+
+    		{
+
+    			return std::make_shared<___finale_handle_final___>(___derived_handle___<___TTT___, ___finale_handle_base___>::value_);
+
+    		}
 
     
 
@@ -315,75 +325,17 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename ___DHB___>
-
-    	struct ___derived_handle___<std::reference_wrapper<___TTT___>, ___DHB___>
-
-    		: ___derived_handle___<___TTT___&, ___DHB___>
-
-    	{
-
-    		inline ___derived_handle___(std::reference_wrapper<___TTT___> ref)
-
-    			: ___derived_handle___<___TTT___&, ___DHB___>{ ref.get() }
-
-    		{}
-
-    	};
-
-    
-
-    private:
-
     	template <typename ___TTT___>
 
-    	struct ___derived_handle_final___ final : ___derived_handle___<___TTT___>
+    	struct ___finale_handle_final___<std::reference_wrapper<___TTT___>> final
+
+    		: ___finale_handle_final___<___TTT___&>
 
     	{
 
-    		template <typename ___UUU___ = ___TTT___>
+    		inline ___finale_handle_final___(std::reference_wrapper<___TTT___> ref)
 
-    		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
-
-    			: ___derived_handle___<___TTT___>{ value }
-
-    		{}
-
-    
-
-    		template <typename ___UUU___ = ___TTT___>
-
-    		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
-
-    			: ___derived_handle___<___TTT___>{ std::move(value) }
-
-    		{}
-
-    
-
-    		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
-
-    		{
-
-    			return std::make_shared<___derived_handle_final___>(___derived_handle___<___TTT___>::value_);
-
-    		}
-
-    	};
-
-    
-
-    	template <typename ___TTT___>
-
-    	struct ___derived_handle_final___<std::reference_wrapper<___TTT___>> final
-
-    		: ___derived_handle_final___<___TTT___&>
-
-    	{
-
-    		inline ___derived_handle_final___(std::reference_wrapper<___TTT___> ref)
-
-    			: ___derived_handle_final___<___TTT___&>{ ref.get() }
+    			: ___finale_handle_final___<___TTT___&>{ ref.get() }
 
     		{}
 
@@ -391,17 +343,17 @@ namespace strange {
 
     
 
-    	inline const ___derived_handle_base___& read() const
+    	inline const ___finale_handle_base___& read() const
 
     	{
 
-    		return *std::static_pointer_cast<const ___derived_handle_base___>(handle_);
+    		return *std::static_pointer_cast<const ___finale_handle_base___>(handle_);
 
     	}
 
     
 
-    	inline ___derived_handle_base___& write()
+    	inline ___finale_handle_base___& write()
 
     	{
 
@@ -415,15 +367,15 @@ namespace strange {
 
     		}
 
-    		return *std::static_pointer_cast<___derived_handle_base___>(handle_);
+    		return *std::static_pointer_cast<___finale_handle_base___>(handle_);
 
     	}
 
     
 
-    	template <typename ___TTT___>
+    	template <typename ___TTT___, typename D>
 
-    	friend inline bool check_(const number_a& value);
+    	friend inline bool check_(const number_a<D>& value);
 
     
 
@@ -443,7 +395,7 @@ namespace strange {
 
     	{
 
-    		return bool(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+    		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 
     	}
 
@@ -455,7 +407,7 @@ namespace strange {
 
     	explicit inline number_a(bool reference)
 
-    		: ___root___{ reference }
+    		: ___derived___{ reference }
 
     	{}
 
@@ -463,7 +415,7 @@ namespace strange {
 
     	inline number_a(const number_a& other, bool reference)
 
-    		: ___root___(other, reference)
+    		: ___derived___(other, reference)
 
     	{}
 
@@ -471,7 +423,7 @@ namespace strange {
 
     	inline number_a(number_a&& other, bool reference)
 
-    		: ___root___(std::move(other), reference)
+    		: ___derived___(std::move(other), reference)
 
     	{}
 
@@ -481,23 +433,23 @@ namespace strange {
 
     	explicit inline number_a(const std::shared_ptr<___TTT___>& handle, bool reference = false)
 
-    		: ___root___(handle, reference)
+    		: ___derived___(handle, reference)
 
     	{
 
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
-    		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
+    		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
 
     		{
 
-    			throw dis__("number constructor failed to cast from base to derived");
+    			throw dis__("number constructor failed to cast from base to final");
 
     		}
 
     #else
 
-    		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+    		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 
     #endif
 
@@ -507,7 +459,13 @@ namespace strange {
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<number_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline number_a(___TTT___ value, bool reference = false);
+    	explicit inline number_a(___TTT___ value, bool reference = false)
+
+    		: ___derived___(std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+
+    			reference)
+
+    	{}
 
     
 
@@ -519,17 +477,17 @@ namespace strange {
 
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
-    		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
+    		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
 
     		{
 
-    			throw dis__("number assignment failed to cast from base to derived");
+    			throw dis__("number assignment failed to cast from base to final");
 
     		}
 
     #else
 
-    		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+    		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 
     #endif
 
@@ -545,15 +503,27 @@ namespace strange {
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<number_a, std::decay_t<___TTT___>>::value>>
 
-    	inline number_a& operator=(___TTT___ value);
+    	inline number_a& operator=(___TTT___ value)
+
+    	{
+
+    		number_a temp{ std::move(value) };
+
+    		std::swap(temp.handle_, handle_);
+
+    		handle_->___weak___(handle_);
+
+    		return *this;
+
+    	}
 
     };
 
     
 
-    template <typename ___TTT___>
+    template <typename ___TTT___, typename D>
 
-    inline bool check_(const number_a& value)
+    inline bool check_(const number_a<D>& value)
 
     {
 
@@ -563,37 +533,7 @@ namespace strange {
 
     
 
-    template <typename ___TTT___, typename>
-
-    inline number_a::number_a(___TTT___ value, bool reference)
-
-    	: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
-
-    		reference)
-
-    {}
-
-    
-
-    template <typename ___TTT___, typename>
-
-    inline number_a& number_a::operator=(___TTT___ value)
-
-    {
-
-    	number_a temp{ std::move(value) };
-
-    	std::swap(temp.handle_, handle_);
-
-    	handle_->___weak___(handle_);
-
-    	return *this;
-
-    }
-
-    
-
-    #undef ___root___
+    #undef ___derived___
 
 }
 #endif
