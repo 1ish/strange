@@ -118,9 +118,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline _ABSTRACTION_ self_add_(any_a thing)
+		inline _ABSTRACTION_ self_add_(number_a number)
 		{
-			operator+=(std::move(thing));
+			_it += number.to_int64__();
 			return me_();
 		}
 
@@ -144,19 +144,15 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline random_access_iterator_a add_(any_a thing) const
+		inline random_access_iterator_a add_(number_a number) const
 		{
-			return operator+(std::move(thing));
+			return operator+(std::move(number));
 		}
 
-		inline random_access_iterator_a operator+(any_a thing) const
+		inline random_access_iterator_a operator+(number_a number) const
 		{
-			if (!check_<number_a>(thing))
-			{
-				throw dis__("strange::flock::iterator + passed non-number");
-			}
 			_ABSTRACTION_ result = me_();
-			result.reference__() += cast_<number_a>(std::move(thing)).to_int64__();
+			result.reference__() += number.to_int64__();
 			return result;
 		}
 
@@ -169,9 +165,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline _ABSTRACTION_ self_subtract_(any_a thing)
+		inline _ABSTRACTION_ self_subtract_(number_a number)
 		{
-			operator-=(std::move(thing));
+			_it -= number.to_int64__();
 			return me_();
 		}
 
@@ -195,19 +191,15 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline random_access_iterator_a subtract_(any_a thing) const
+		inline random_access_iterator_a subtract_(number_a number) const
 		{
-			return operator-(std::move(thing));
+			return operator-(std::move(number));
 		}
 
-		inline random_access_iterator_a operator-(any_a thing) const
+		inline random_access_iterator_a operator-(number_a number) const
 		{
-			if (!check_<number_a>(thing))
-			{
-				throw dis__("strange::flock::iterator - passed non-number");
-			}
 			_ABSTRACTION_ result = me_();
-			result.reference__() -= cast_<number_a>(std::move(thing)).to_int64__();
+			result.reference__() -= number.to_int64__();
 			return result;
 		}
 
