@@ -64,7 +64,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 			{
 				return false;
 			}
-			return _it == cast_<data_a<ITERATOR>>(thing).extract__();
+			return _it == cast_<data_a<ITERATOR>>(std::move(thing)).extract__();
 			/*
 			if (!type_().identical__(thing.type_()))
 			{
@@ -80,7 +80,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 			{
 				return true;
 			}
-			return _it != cast_<data_a<ITERATOR>>(thing).extract__();
+			return _it != cast_<data_a<ITERATOR>>(std::move(thing)).extract__();
 			/*
 			if (!type_().identical__(thing.type_()))
 			{
