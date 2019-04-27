@@ -165,5 +165,3 @@ inline %struct_name%_a<_1_>& %struct_name%_a<_1_>::operator=(___TTT___ value)
 	handle_->___weak___(handle_);
 	return *this;
 }
-
-#undef ___root___

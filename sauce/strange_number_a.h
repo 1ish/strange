@@ -593,7 +593,5 @@ namespace strange {
 
     
 
-    #undef ___root___
-
 }
 #endif

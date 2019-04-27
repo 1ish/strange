@@ -1,46 +1,31 @@
 #ifndef COM_ONEISH_STRANGE_H
 #define COM_ONEISH_STRANGE_H
 
+// options
 #include "strange_options.h"
 
+// abstractions
 #include "strange_any_a.h"
-
 #define ___root___ any_a
 #include "strange_symbol_a.h"
-#undef ___root___
-
 #define ___derived___ symbol_a
 #include "strange_cat_a.h"
-#undef ___derived___
-
-#define ___root___ any_a
 #include "strange_misunderstanding_a.h"
-#undef ___root___
-
-#define ___root___ any_a
 #include "strange_collection_a.h"
-#undef ___root___
-
 #define ___derived___ collection_a
 #include "strange_shoal_a.h"
-#undef ___derived___
-
 #define ___derived___ collection_a
 #include "strange_flock_a.h"
-#undef ___derived___
-
 #define ___derived___ collection_a
 #include "strange_herd_a.h"
+#include "strange_data_a.h"
+#include "strange_number_a.h"
+#define ___derived___ number_a
+#include "strange_number_data_a.h"
+#undef ___root___
 #undef ___derived___
 
-#define ___root___ any_a
-#include "strange_data_a.h"
-#undef ___root___
-
-#define ___root___ any_a
-#include "strange_number_a.h"
-#undef ___root___
-
+// things
 #include "strange_one_t.h"
 #include "strange_thing_t.h"
 #include "strange_native_function_t.h"
@@ -60,6 +45,7 @@
 #include "strange_flock_t.h"
 #include "strange_herd_t.h"
 
+// utilities
 #include "strange_variadic_u.h"
 
 #endif
