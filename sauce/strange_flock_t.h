@@ -146,12 +146,10 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline iterator_t& operator+=(any_a thing)
 		{
-			return operator+=(0); //TODO index
-		}
-
-		inline iterator_t& operator+=(int64_t index)
-		{
-			_it += index;
+			if (check_<number_a>(thing))
+			{
+				_it += cast_<number_a>(std::move(thing)).to_int64__();
+			}
 			return *this;
 		}
 
@@ -197,12 +195,10 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline iterator_t& operator-=(any_a thing)
 		{
-			return operator-=(0); //TODO index
-		}
-
-		inline iterator_t& operator-=(int64_t index)
-		{
-			_it -= index;
+			if (check_<number_a>(thing))
+			{
+				_it -= cast_<number_a>(std::move(thing)).to_int64__();
+			}
 			return *this;
 		}
 
@@ -480,7 +476,7 @@ public: ___COLLECTION___
 	// collection
 	inline bool has__(any_a key) const
 	{
-		return has__(0); //TODO index
+		return check_<number_a>(key) && has__(cast_<number_a>(std::move(key)).to_int64__());
 	}
 
 	inline bool has__(int64_t index) const
@@ -490,7 +486,11 @@ public: ___COLLECTION___
 
 	inline any_a at_(any_a key) const
 	{
-		return at__(0); //TODO index
+		if (check_<number_a>(key))
+		{
+			return at__(cast_<number_a>(std::move(key)).to_int64__());
+		}
+		return nothing_t<>::val_();
 	}
 
 	inline any_a at__(int64_t index) const
@@ -504,7 +504,10 @@ public: ___COLLECTION___
 
 	inline any_a update_(any_a key, any_a value)
 	{
-		update__(0, value); //TODO index
+		if (check_<number_a>(key))
+		{
+			update__(cast_<number_a>(std::move(key)).to_int64__(), value);
+		}
 		return value;
 	}
 
@@ -530,7 +533,7 @@ public: ___COLLECTION___
 
 	inline bool insert__(any_a key, any_a value)
 	{
-		return insert__(0, std::move(value)); //TODO index
+		return check_<number_a>(key) && insert__(cast_<number_a>(std::move(key)).to_int64__(), std::move(value));
 	}
 
 	inline bool insert__(int64_t index, any_a value)
@@ -561,7 +564,7 @@ public: ___COLLECTION___
 
 	inline bool erase__(any_a key)
 	{
-		return erase__(0); //TODO index
+		return check_<number_a>(key) && erase__(cast_<number_a>(std::move(key)).to_int64__());
 	}
 
 	inline bool erase__(int64_t index)
