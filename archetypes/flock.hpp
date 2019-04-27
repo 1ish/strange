@@ -19,6 +19,11 @@ public:
 	inline void update__(int64_t index, any_a value);
 	inline bool insert__(int64_t index, any_a value);
 	inline bool erase__(int64_t index);
+
+	// data
+	inline const std::vector<any_a>& extract__() const;
+	inline void mutate__(const std::vector<any_a>& data);
+	inline std::vector<any_a>& reference__();
 };
 
 } // namespace strange

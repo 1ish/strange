@@ -1,6 +1,15 @@
 %struct_prefix%_a
 {
 public:
+	class hash_f
+	{
+	public:
+		inline std::size_t operator()(%struct_name%_a thing) const
+		{
+			return thing.hash__();
+		}
+	};
+
 	inline operator bool() const
 	{
 		assert(handle_);

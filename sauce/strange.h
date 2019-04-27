@@ -1,6 +1,10 @@
 #ifndef COM_ONEISH_STRANGE_H
 #define COM_ONEISH_STRANGE_H
 
+#include <vector>
+#include <unordered_set>
+#include <unordered_map>
+
 // options
 #include "strange_options.h"
 

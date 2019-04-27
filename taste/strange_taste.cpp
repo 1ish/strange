@@ -62,11 +62,11 @@ TEST(TestCaseName, ForLoop)
 	}
 
 	auto it = flock.cbegin();
-	if (check_<data_a<std::vector<any_a>::const_iterator>>(it))
+	if (check_<random_access_iterator_data_a<std::vector<any_a>::const_iterator>>(it))
 	{
 		std::cout << "checked ok" << std::endl;
-		data_a<std::vector<any_a>::const_iterator> data =
-			cast_<data_a<std::vector<any_a>::const_iterator>>(it);
+		random_access_iterator_data_a<std::vector<any_a>::const_iterator> data =
+			cast_<random_access_iterator_data_a<std::vector<any_a>::const_iterator>>(it);
 		std::cout << "data: " << (data == flock.cend()) << std::endl;
 	}
 }

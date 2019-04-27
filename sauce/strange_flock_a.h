@@ -28,6 +28,12 @@ namespace strange {
      { assert(handle_); return write().insert__(index, value ); }
      inline bool erase__ ( int64_t index )
      { assert(handle_); return write().erase__(index ); }
+     inline const std :: vector < any_a > & extract__ ( ) const
+     { assert(handle_); return read().extract__( ); }
+     inline void mutate__ ( const std :: vector < any_a > & data )
+     { assert(handle_); write().mutate__(data ); }
+     inline std :: vector < any_a > & reference__ ( )
+     { assert(handle_); return write().reference__( ); }
     
 
     private:
@@ -41,6 +47,9 @@ namespace strange {
       virtual inline void update__ ( int64_t index , any_a value ) = 0;
       virtual inline bool insert__ ( int64_t index , any_a value ) = 0;
       virtual inline bool erase__ ( int64_t index ) = 0;
+      virtual inline const std :: vector < any_a > & extract__ ( ) const = 0;
+      virtual inline void mutate__ ( const std :: vector < any_a > & data ) = 0;
+      virtual inline std :: vector < any_a > & reference__ ( ) = 0;
     	};
 
     
@@ -91,6 +100,12 @@ namespace strange {
       { return value_.insert__(index, value ); }
       virtual inline bool erase__ ( int64_t index )
       { return value_.erase__(index ); }
+      virtual inline const std :: vector < any_a > & extract__ ( ) const
+      { return value_.extract__( ); }
+      virtual inline void mutate__ ( const std :: vector < any_a > & data )
+      { value_.mutate__(data ); }
+      virtual inline std :: vector < any_a > & reference__ ( )
+      { return value_.reference__( ); }
     	};
 
     

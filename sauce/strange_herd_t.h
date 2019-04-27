@@ -1,7 +1,6 @@
 #ifndef COM_ONEISH_STRANGE_HERD_T_H
 #define COM_ONEISH_STRANGE_HERD_T_H
 
-#include <unordered_set>
 #include <set>
 
 namespace strange
@@ -10,17 +9,6 @@ namespace strange
 template <typename _ABSTRACTION_ = herd_a>
 class herd_t : public something_t<_ABSTRACTION_>
 {
-	class hash_f
-	{
-	public:
-		inline std::size_t operator()(any_a thing) const
-		{
-			return thing.hash__();
-		}
-	};
-
-	using std_unordered_set_any = std::unordered_set<any_a, hash_f>; //TODO add data_a to herd_a
-
 	template <typename ITERATOR, typename _ABSTRACTION_ = data_a<ITERATOR>>
 	class iterator_t : public something_t<_ABSTRACTION_>
 	{
@@ -127,6 +115,8 @@ class herd_t : public something_t<_ABSTRACTION_>
 	};
 
 public: ___COLLECTION___
+	using std_unordered_set_any = std::unordered_set<any_a, any_a::hash_f>;
+
 	// construction
 	static inline herd_a val(any_a range)
 	{
@@ -181,22 +171,20 @@ public: ___COLLECTION___
 	// comparison
 	inline bool operator==(any_a thing) const
 	{
-		//TODO add data_a to herd_a
-		if (!type_().identical__(thing.type_()))
+		if (!check_<herd_a>(thing))
 		{
 			return false;
 		}
-		return _set == reinterpret_cast<const herd_t<_ABSTRACTION_>*>(thing.identity__())->_set;
+		return _set == cast_<herd_a>(std::move(thing)).extract__();
 	}
 
 	inline bool operator!=(any_a thing) const
 	{
-		//TODO add data_a to herd_a
-		if (!type_().identical__(thing.type_()))
+		if (!check_<herd_a>(thing))
 		{
 			return true;
 		}
-		return _set != reinterpret_cast<const herd_t<_ABSTRACTION_>*>(thing.identity__())->_set;
+		return _set != cast_<herd_a>(std::move(thing)).extract__();
 	}
 
 	inline std::size_t hash__() const
@@ -343,6 +331,22 @@ public: ___COLLECTION___
 			erase(std::move(thing));
 		}
 		return *this;
+	}
+
+	// data
+	inline const std_unordered_set_any& extract__() const
+	{
+		return _set;
+	}
+
+	inline void mutate__(const std_unordered_set_any& data)
+	{
+		_set = data;
+	}
+
+	inline std_unordered_set_any& reference__()
+	{
+		return _set;
 	}
 
 protected:

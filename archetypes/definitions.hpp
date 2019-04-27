@@ -5,11 +5,18 @@ namespace std
 {
 	typedef unsigned long long size_t;
 	class string;
+	template <typename T> class vector;
+	template <typename T, typename H> class unordered_set;
+	template <typename K, typename V, typename H> class unordered_map;
 }
 
 namespace strange
 {
-	class any_a;
+	class any_a
+	{
+	public:
+		class hash_f;
+	};
 	class symbol_a;
 	class cat_a;
 	class misunderstanding_a;

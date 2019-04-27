@@ -1,16 +1,12 @@
 #ifndef COM_ONEISH_STRANGE_FLOCK_T_H
 #define COM_ONEISH_STRANGE_FLOCK_T_H
 
-#include <vector>
-
 namespace strange
 {
 
 template <typename _ABSTRACTION_ = flock_a>
 class flock_t : public something_t<_ABSTRACTION_>
 {
-	using std_vector_any = std::vector<any_a>; //TODO add data_a to flock_a
-
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
 	class iterator_t : public something_t<_ABSTRACTION_>
 	{
@@ -360,6 +356,8 @@ class flock_t : public something_t<_ABSTRACTION_>
 	};
 
 public: ___COLLECTION___
+	using std_vector_any = std::vector<any_a>;
+
 	// construction
 	static inline flock_a val(any_a range)
 	{
@@ -414,22 +412,20 @@ public: ___COLLECTION___
 	// comparison
 	inline bool operator==(any_a thing) const
 	{
-		//TODO add data_a to flock_a
-		if (!type_().identical__(thing.type_()))
+		if (!check_<flock_a>(thing))
 		{
 			return false;
 		}
-		return _vector == reinterpret_cast<const flock_t<_ABSTRACTION_>*>(thing.identity__())->_vector;
+		return _vector == cast_<flock_a>(std::move(thing)).extract__();
 	}
 
 	inline bool operator!=(any_a thing) const
 	{
-		//TODO add data_a to flock_a
-		if (!type_().identical__(thing.type_()))
+		if (!check_<flock_a>(thing))
 		{
 			return true;
 		}
-		return _vector != reinterpret_cast<const flock_t<_ABSTRACTION_>*>(thing.identity__())->_vector;
+		return _vector != cast_<flock_a>(std::move(thing)).extract__();
 	}
 
 	inline std::size_t hash__() const
@@ -624,6 +620,22 @@ public: ___COLLECTION___
 			erase(std::move(thing));
 		}
 		return *this;
+	}
+
+	// data
+	inline const std_vector_any& extract__() const
+	{
+		return _vector;
+	}
+
+	inline void mutate__(const std_vector_any& data)
+	{
+		_vector = data;
+	}
+
+	inline std_vector_any& reference__()
+	{
+		return _vector;
 	}
 
 protected:

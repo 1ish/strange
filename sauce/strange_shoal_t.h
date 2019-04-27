@@ -1,7 +1,6 @@
 #ifndef COM_ONEISH_STRANGE_SHOAL_T_H
 #define COM_ONEISH_STRANGE_SHOAL_T_H
 
-#include <unordered_map>
 #include <map>
 
 namespace strange
@@ -10,17 +9,6 @@ namespace strange
 template <typename _ABSTRACTION_ = shoal_a>
 class shoal_t : public something_t<_ABSTRACTION_>
 {
-	class hash_f
-	{
-	public:
-		inline std::size_t operator()(any_a thing) const
-		{
-			return thing.hash__();
-		}
-	};
-
-	using std_unordered_map_any_any = std::unordered_map<any_a, any_a, hash_f>; //TODO add data_a to shoal_a
-
 	template <typename ITERATOR, typename _ABSTRACTION_ = data_a<ITERATOR>>
 	class iterator_t : public something_t<_ABSTRACTION_>
 	{
@@ -138,6 +126,8 @@ class shoal_t : public something_t<_ABSTRACTION_>
 	};
 
 public: ___COLLECTION___
+	using std_unordered_map_any_any = std::unordered_map<any_a, any_a, any_a::hash_f>;
+
 	// construction
 	static inline shoal_a val(any_a range)
 	{
@@ -192,22 +182,20 @@ public: ___COLLECTION___
 	// comparison
 	inline bool operator==(any_a thing) const
 	{
-		//TODO add data_a to shoal_a
-		if (!type_().identical__(thing.type_()))
+		if (!check_<shoal_a>(thing))
 		{
 			return false;
 		}
-		return _map == reinterpret_cast<const shoal_t<_ABSTRACTION_>*>(thing.identity__())->_map;
+		return _map == cast_<shoal_a>(std::move(thing)).extract__();
 	}
 
 	inline bool operator!=(any_a thing) const
 	{
-		//TODO add data_a to shoal_a
-		if (!type_().identical__(thing.type_()))
+		if (!check_<shoal_a>(thing))
 		{
 			return true;
 		}
-		return _map != reinterpret_cast<const shoal_t<_ABSTRACTION_>*>(thing.identity__())->_map;
+		return _map != cast_<shoal_a>(std::move(thing)).extract__();
 	}
 
 	inline std::size_t hash__() const
@@ -363,6 +351,22 @@ public: ___COLLECTION___
 			erase(std::move(thing));
 		}
 		return *this;
+	}
+
+	// data
+	inline const std_unordered_map_any_any& extract__() const
+	{
+		return _map;
+	}
+
+	inline void mutate__(const std_unordered_map_any_any& data)
+	{
+		_map = data;
+	}
+
+	inline std_unordered_map_any_any& reference__()
+	{
+		return _map;
 	}
 
 protected:

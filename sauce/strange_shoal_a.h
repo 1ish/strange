@@ -28,6 +28,12 @@ namespace strange {
      { assert(handle_); return write().insert__(s, value ); }
      inline bool erase__ ( const std :: string & s )
      { assert(handle_); return write().erase__(s ); }
+     inline const std :: unordered_map < any_a , any_a , any_a :: hash_f > & extract__ ( ) const
+     { assert(handle_); return read().extract__( ); }
+     inline void mutate__ ( const std :: unordered_map < any_a , any_a , any_a :: hash_f > & data )
+     { assert(handle_); write().mutate__(data ); }
+     inline std :: unordered_map < any_a , any_a , any_a :: hash_f > & reference__ ( )
+     { assert(handle_); return write().reference__( ); }
     
 
     private:
@@ -41,6 +47,9 @@ namespace strange {
       virtual inline void update__ ( const std :: string & s , any_a value ) = 0;
       virtual inline bool insert__ ( const std :: string & s , any_a value ) = 0;
       virtual inline bool erase__ ( const std :: string & s ) = 0;
+      virtual inline const std :: unordered_map < any_a , any_a , any_a :: hash_f > & extract__ ( ) const = 0;
+      virtual inline void mutate__ ( const std :: unordered_map < any_a , any_a , any_a :: hash_f > & data ) = 0;
+      virtual inline std :: unordered_map < any_a , any_a , any_a :: hash_f > & reference__ ( ) = 0;
     	};
 
     
@@ -91,6 +100,12 @@ namespace strange {
       { return value_.insert__(s, value ); }
       virtual inline bool erase__ ( const std :: string & s )
       { return value_.erase__(s ); }
+      virtual inline const std :: unordered_map < any_a , any_a , any_a :: hash_f > & extract__ ( ) const
+      { return value_.extract__( ); }
+      virtual inline void mutate__ ( const std :: unordered_map < any_a , any_a , any_a :: hash_f > & data )
+      { value_.mutate__(data ); }
+      virtual inline std :: unordered_map < any_a , any_a , any_a :: hash_f > & reference__ ( )
+      { return value_.reference__( ); }
     	};
 
     

@@ -19,6 +19,11 @@ public:
 	inline void update__(const std::string& s, any_a value);
 	inline bool insert__(const std::string& s, any_a value);
 	inline bool erase__(const std::string& s);
+
+	// data
+	inline const std::unordered_map<any_a, any_a, any_a::hash_f>& extract__() const;
+	inline void mutate__(const std::unordered_map<any_a, any_a, any_a::hash_f>& data);
+	inline std::unordered_map<any_a, any_a, any_a::hash_f>& reference__();
 };
 
 } // namespace strange

@@ -18,6 +18,24 @@ namespace strange {
 
     public:
 
+    	class hash_f
+
+    	{
+
+    	public:
+
+    		inline std::size_t operator()(any_a thing) const
+
+    		{
+
+    			return thing.hash__();
+
+    		}
+
+    	};
+
+    
+
     	inline operator bool() const
 
     	{
