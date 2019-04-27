@@ -131,9 +131,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline _ABSTRACTION_ self_add(any_a range)
 		{
-			for (const auto thing : range)
+			for (auto thing : range)
 			{
-				operator+=(thing);
+				operator+=(std::move(thing));
 			}
 			return me_();
 		}
@@ -158,9 +158,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 		inline random_access_iterator_a add(any_a range) const
 		{
 			random_access_iterator_a result = me_();
-			for (const auto thing : range)
+			for (auto thing : range)
 			{
-				result += thing;
+				result += std::move(thing);
 			}
 			return result;
 		}
@@ -182,9 +182,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline _ABSTRACTION_ self_subtract(any_a range)
 		{
-			for (const auto thing : range)
+			for (auto thing : range)
 			{
-				operator-=(thing);
+				operator-=(std::move(thing));
 			}
 			return me_();
 		}
@@ -209,9 +209,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 		inline random_access_iterator_a subtract(any_a range) const
 		{
 			random_access_iterator_a result = me_();
-			for (const auto thing : range)
+			for (auto thing : range)
 			{
-				result -= thing;
+				result -= std::move(thing);
 			}
 			return result;
 		}
@@ -449,7 +449,7 @@ public: ___COLLECTION___
 	inline std::size_t hash__() const
 	{
 		std::size_t seed = std::hash<std::size_t>{}(_vector.size());
-		for (const auto item : _vector)
+		for (const auto& item : _vector)
 		{
 			seed ^= item.hash__() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
@@ -617,18 +617,18 @@ public: ___COLLECTION___
 
 	inline flock_t& operator+=(any_a range)
 	{
-		for (const auto thing : range)
+		for (auto thing : range)
 		{
-			insert(thing);
+			insert(std::move(thing));
 		}
 		return *this;
 	}
 
 	inline flock_t& operator-=(any_a range)
 	{
-		for (const auto thing : range)
+		for (auto thing : range)
 		{
-			erase(thing);
+			erase(std::move(thing));
 		}
 		return *this;
 	}

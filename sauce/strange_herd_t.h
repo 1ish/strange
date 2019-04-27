@@ -217,7 +217,7 @@ public: ___COLLECTION___
 	{
 		const std::set<any_a> ordered(_set.cbegin(), _set.cend());
 		std::size_t seed = std::hash<std::size_t>{}(_set.size());
-		for (const auto item : ordered)
+		for (const auto& item : ordered)
 		{
 			seed ^= item.hash__() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
@@ -343,18 +343,18 @@ public: ___COLLECTION___
 
 	inline herd_t& operator+=(any_a range)
 	{
-		for (const auto thing : range)
+		for (auto thing : range)
 		{
-			insert(thing);
+			insert(std::move(thing));
 		}
 		return *this;
 	}
 
 	inline herd_t& operator-=(any_a range)
 	{
-		for (const auto thing : range)
+		for (auto thing : range)
 		{
-			erase(thing);
+			erase(std::move(thing));
 		}
 		return *this;
 	}

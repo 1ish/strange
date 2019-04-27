@@ -363,18 +363,18 @@ public: ___COLLECTION___
 
 	inline shoal_t& operator+=(any_a range)
 	{
-		for (const auto thing : range)
+		for (auto thing : range)
 		{
-			insert(thing);
+			insert(std::move(thing));
 		}
 		return *this;
 	}
 
 	inline shoal_t& operator-=(any_a range)
 	{
-		for (const auto thing : range)
+		for (auto thing : range)
 		{
-			erase(thing);
+			erase(std::move(thing));
 		}
 		return *this;
 	}

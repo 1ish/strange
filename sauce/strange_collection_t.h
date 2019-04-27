@@ -63,9 +63,9 @@ inline any_a insert_(any_a key, any_a value) \
 inline any_a erase(any_a range) \
 { \
 	bool erased = false; \
-	for (const auto key : range) \
+	for (auto key : range) \
 	{ \
-		if (erase__(key)) \
+		if (erase__(std::move(key))) \
 		{ \
 			erased = true; \
 		} \
@@ -103,9 +103,9 @@ inline any_a empty_() const \
 } \
 inline _ABSTRACTION_ push_front(any_a range) \
 { \
-	for (const auto value : range) \
+	for (auto value : range) \
 	{ \
-		push_front__(value); \
+		push_front__(std::move(value)); \
 	} \
 	return me_(); \
 } \
@@ -120,9 +120,9 @@ inline any_a pop_front(any_a) \
 } \
 inline _ABSTRACTION_ push_back(any_a range) \
 { \
-	for (const auto value : range) \
+	for (auto value : range) \
 	{ \
-		push_back__(value); \
+		push_back__(std::move(value)); \
 	} \
 	return me_(); \
 } \
@@ -137,9 +137,9 @@ inline any_a pop_back(any_a) \
 } \
 inline _ABSTRACTION_ self_add(any_a range) \
 { \
-	for (const auto collection : range) \
+	for (auto collection : range) \
 	{ \
-		operator+=(collection); \
+		operator+=(std::move(collection)); \
 	} \
 	return me_(); \
 } \
@@ -151,9 +151,9 @@ inline _ABSTRACTION_ self_add_(collection_a collection) \
 inline _ABSTRACTION_ add(any_a range) const \
 { \
 	_ABSTRACTION_ result = me_(); \
-	for (const auto collection : range) \
+	for (auto collection : range) \
 	{ \
-		result += collection; \
+		result += std::move(collection); \
 	} \
 	return result; \
 } \
@@ -169,9 +169,9 @@ inline _ABSTRACTION_ operator+(collection_a collection) const \
 } \
 inline _ABSTRACTION_ self_subtract(any_a range) \
 { \
-	for (const auto collection : range) \
+	for (auto collection : range) \
 	{ \
-		operator-=(collection); \
+		operator-=(std::move(collection)); \
 	} \
 	return me_(); \
 } \
@@ -183,9 +183,9 @@ inline _ABSTRACTION_ self_subtract_(collection_a collection) \
 inline _ABSTRACTION_ subtract(any_a range) const \
 { \
 	_ABSTRACTION_ result = me_(); \
-	for (const auto collection : range) \
+	for (auto collection : range) \
 	{ \
-		result -= collection; \
+		result -= std::move(collection); \
 	} \
 	return result; \
 } \
