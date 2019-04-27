@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_NUMBER_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/finale_data.hpp -c ~/source/repos/strange/archetypes/number.hpp > ~/source/repos/strange/sauce/strange_number_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/finale_1.hpp -c ~/source/repos/strange/archetypes/number.hpp > ~/source/repos/strange/sauce/strange_number_a.h
 */
 
 #include "data.hpp"
@@ -10,7 +10,7 @@
 namespace strange
 {
 
-template <typename DATA>
+template <typename _1_>
 class number
 {
 public:

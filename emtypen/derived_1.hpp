@@ -78,8 +78,8 @@ private:
 		return *std::static_pointer_cast<___derived_handle_base___>(handle_);
 	}
 
-	template <typename ___TTT___, typename D>
-	friend inline bool check_(const %struct_name%_a<D>& value);
+	template <typename ___TTT___, typename ___1___>
+	friend inline bool check_(const %struct_name%_a<___1___>& value);
 
 public:
 	static inline const char* ___abstraction_name___()
@@ -143,22 +143,22 @@ public:
 	inline %struct_name%_a& operator=(___TTT___ value);
 };
 
-template <typename ___TTT___, typename D>
-inline bool check_(const %struct_name%_a<D>& value)
+template <typename ___TTT___, typename ___1___>
+inline bool check_(const %struct_name%_a<___1___>& value)
 {
 	return ___TTT___::___check___(value.handle_);
 }
 
-template <typename DATA>
+template <typename _1_>
 template <typename ___TTT___, typename>
-inline %struct_name%_a<DATA>::%struct_name%_a(___TTT___ value, bool reference)
+inline %struct_name%_a<_1_>::%struct_name%_a(___TTT___ value, bool reference)
 	: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 		reference)
 {}
 
-template <typename DATA>
+template <typename _1_>
 template <typename ___TTT___, typename>
-inline %struct_name%_a<DATA>& %struct_name%_a<DATA>::operator=(___TTT___ value)
+inline %struct_name%_a<_1_>& %struct_name%_a<_1_>::operator=(___TTT___ value)
 {
 	%struct_name%_a temp{ std::move(value) };
 	std::swap(temp.handle_, handle_);

@@ -11,18 +11,18 @@
 
 
 namespace strange {
-    template < typename DATA >
+    template < typename _1_ >
     class data_a : public ___root___
 
     {
 
     public:
 
-     inline const DATA & extract__ ( ) const
+     inline const _1_ & extract__ ( ) const
      { assert(handle_); return read().extract__( ); }
-     inline void mutate__ ( const DATA & data )
+     inline void mutate__ ( const _1_ & data )
      { assert(handle_); write().mutate__(data ); }
-     inline DATA & reference__ ( )
+     inline _1_ & reference__ ( )
      { assert(handle_); return write().reference__( ); }
     
 
@@ -32,9 +32,9 @@ namespace strange {
 
     	{
 
-      virtual inline const DATA & extract__ ( ) const = 0;
-      virtual inline void mutate__ ( const DATA & data ) = 0;
-      virtual inline DATA & reference__ ( ) = 0;
+      virtual inline const _1_ & extract__ ( ) const = 0;
+      virtual inline void mutate__ ( const _1_ & data ) = 0;
+      virtual inline _1_ & reference__ ( ) = 0;
     	};
 
     
@@ -65,11 +65,11 @@ namespace strange {
 
     
 
-      virtual inline const DATA & extract__ ( ) const
+      virtual inline const _1_ & extract__ ( ) const
       { return value_.extract__( ); }
-      virtual inline void mutate__ ( const DATA & data )
+      virtual inline void mutate__ ( const _1_ & data )
       { value_.mutate__(data ); }
-      virtual inline DATA & reference__ ( )
+      virtual inline _1_ & reference__ ( )
       { return value_.reference__( ); }
     	};
 
@@ -181,9 +181,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename D>
+    	template <typename ___TTT___, typename ___1___>
 
-    	friend inline bool check_(const data_a<D>& value);
+    	friend inline bool check_(const data_a<___1___>& value);
 
     
 
@@ -311,9 +311,9 @@ namespace strange {
 
     
 
-    template <typename ___TTT___, typename D>
+    template <typename ___TTT___, typename ___1___>
 
-    inline bool check_(const data_a<D>& value)
+    inline bool check_(const data_a<___1___>& value)
 
     {
 
@@ -323,11 +323,11 @@ namespace strange {
 
     
 
-    template <typename DATA>
+    template <typename _1_>
 
     template <typename ___TTT___, typename>
 
-    inline data_a<DATA>::data_a(___TTT___ value, bool reference)
+    inline data_a<_1_>::data_a(___TTT___ value, bool reference)
 
     	: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 
@@ -337,11 +337,11 @@ namespace strange {
 
     
 
-    template <typename DATA>
+    template <typename _1_>
 
     template <typename ___TTT___, typename>
 
-    inline data_a<DATA>& data_a<DATA>::operator=(___TTT___ value)
+    inline data_a<_1_>& data_a<_1_>::operator=(___TTT___ value)
 
     {
 

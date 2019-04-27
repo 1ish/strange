@@ -54,8 +54,8 @@ private:
 		return *std::static_pointer_cast<___finale_handle_base___>(handle_);
 	}
 
-	template <typename ___TTT___, typename D>
-	friend inline bool check_(const %struct_name%_a<D>& value);
+	template <typename ___TTT___, typename ___1___>
+	friend inline bool check_(const %struct_name%_a<___1___>& value);
 
 public:
 	static inline const char* ___abstraction_name___()
@@ -128,8 +128,8 @@ public:
 	}
 };
 
-template <typename ___TTT___, typename D>
-inline bool check_(const %struct_name%_a<D>& value)
+template <typename ___TTT___, typename ___1___>
+inline bool check_(const %struct_name%_a<___1___>& value)
 {
 	return ___TTT___::___check___(value.handle_);
 }

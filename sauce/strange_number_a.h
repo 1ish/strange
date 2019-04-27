@@ -11,7 +11,7 @@
 
 
 namespace strange {
-    template < typename DATA >
+    template < typename _1_ >
     class number_a final : public ___derived___
 
     {
@@ -373,9 +373,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename D>
+    	template <typename ___TTT___, typename ___1___>
 
-    	friend inline bool check_(const number_a<D>& value);
+    	friend inline bool check_(const number_a<___1___>& value);
 
     
 
@@ -521,9 +521,9 @@ namespace strange {
 
     
 
-    template <typename ___TTT___, typename D>
+    template <typename ___TTT___, typename ___1___>
 
-    inline bool check_(const number_a<D>& value)
+    inline bool check_(const number_a<___1___>& value)
 
     {
 
