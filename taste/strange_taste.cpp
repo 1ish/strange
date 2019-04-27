@@ -60,6 +60,15 @@ TEST(TestCaseName, ForLoop)
 	{
 		std::cout << "caught: " << m.to_string__() << std::endl;
 	}
+
+	auto it = flock.cbegin();
+	if (check_<data_a<std::vector<any_a>::const_iterator>>(it))
+	{
+		std::cout << "checked ok" << std::endl;
+		data_a<std::vector<any_a>::const_iterator> data =
+			cast_<data_a<std::vector<any_a>::const_iterator>>(it);
+		std::cout << "data: " << (data == flock.cend()) << std::endl;
+	}
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
