@@ -34,6 +34,10 @@
 #undef ___derived___
 
 #define ___root___ any_a
+#include "strange_data_a.h"
+#undef ___root___
+
+#define ___root___ any_a
 #include "strange_number_a.h"
 #undef ___root___
 
