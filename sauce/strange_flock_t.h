@@ -104,22 +104,6 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		// data
-		inline const ITERATOR& extract__() const
-		{
-			return _it;
-		}
-
-		inline void mutate__(const ITERATOR& it)
-		{
-			_it = it;
-		}
-
-		inline ITERATOR& reference__()
-		{
-			return _it;
-		}
-
 		//TODO random access iterator abstractions:
 		inline _ABSTRACTION_ decrement(any_a _)
 		{
@@ -187,6 +171,22 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			_it -= index;
 			return *this;
+		}
+
+		// data
+		inline const ITERATOR& extract__() const
+		{
+			return _it;
+		}
+
+		inline void mutate__(const ITERATOR& it)
+		{
+			_it = it;
+		}
+
+		inline ITERATOR& reference__()
+		{
+			return _it;
 		}
 
 	private:

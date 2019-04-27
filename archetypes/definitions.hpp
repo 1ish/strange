@@ -15,6 +15,7 @@ namespace strange
 	class misunderstanding_a;
 	class collection_a;
 	class number_a;
+	class random_access_iterator_a;
 }
 
 using int64_t = long long;
