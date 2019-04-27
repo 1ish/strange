@@ -11,7 +11,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 {
 	using std_vector_any = std::vector<any_a>;
 
-	template <typename ITERATOR, typename _ABSTRACTION_ = any_a>
+	template <typename ITERATOR, typename _ABSTRACTION_ = data_a<ITERATOR>>
 	class iterator_t : public something_t<_ABSTRACTION_>
 	{
 	public: ___THING___
@@ -23,9 +23,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 		}
 
 		template <typename F>
-		static inline any_a val__(flock_a flock, F&& it)
+		static inline data_a<ITERATOR> val__(flock_a flock, F&& it)
 		{
-			return any_a{ iterator_t(std::move(flock), std::forward<F>(it)) };
+			return data_a<ITERATOR>{ iterator_t(std::move(flock), std::forward<F>(it)) };
 		}
 
 		static inline any_a ref(any_a range)
@@ -35,9 +35,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 		}
 
 		template <typename F>
-		static inline any_a ref__(flock_a flock, F&& it)
+		static inline data_a<ITERATOR> ref__(flock_a flock, F&& it)
 		{
-			return any_a(iterator_t(std::move(flock), std::forward<F>(it)), true);
+			return data_a<ITERATOR>(iterator_t(std::move(flock), std::forward<F>(it)), true);
 		}
 
 		// reflection
@@ -50,20 +50,34 @@ class flock_t : public something_t<_ABSTRACTION_>
 		// comparison
 		inline bool operator==(any_a thing) const
 		{
+			if (!check_<data_a<ITERATOR>>(thing))
+			{
+				return false;
+			}
+			return _it == cast_<data_a<ITERATOR>>(thing).extract__();
+			/*
 			if (!type_().identical__(thing.type_()))
 			{
 				return false;
 			}
 			return _it == reinterpret_cast<const iterator_t<ITERATOR, _ABSTRACTION_>*>(thing.identity__())->_it;
+			*/
 		}
 
 		inline bool operator!=(any_a thing) const
 		{
+			if (!check_<data_a<ITERATOR>>(thing))
+			{
+				return true;
+			}
+			return _it != cast_<data_a<ITERATOR>>(thing).extract__();
+			/*
 			if (!type_().identical__(thing.type_()))
 			{
 				return true;
 			}
 			return _it != reinterpret_cast<const iterator_t<ITERATOR, _ABSTRACTION_>*>(thing.identity__())->_it;
+			*/
 		}
 
 		inline std::size_t hash__() const
@@ -90,7 +104,23 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		//TODO abstractions:
+		// data
+		inline const ITERATOR& extract__() const
+		{
+			return _it;
+		}
+
+		inline void mutate__(const ITERATOR& it)
+		{
+			_it = it;
+		}
+
+		inline ITERATOR& reference__()
+		{
+			return _it;
+		}
+
+		//TODO random access iterator abstractions:
 		inline _ABSTRACTION_ decrement(any_a _)
 		{
 			return decrement_();
