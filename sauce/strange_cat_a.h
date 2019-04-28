@@ -18,33 +18,33 @@ namespace strange {
 
     public:
 
-     inline symbol_a name ( any_a _ ) const
+     inline symbol_a name ( any_a const & _ ) const
      { assert(handle_); return read().name(_ ); }
      inline symbol_a name_ ( ) const
      { assert(handle_); return read().name_( ); }
-     inline any_a arguments ( any_a _ ) const
+     inline any_a arguments ( any_a const & _ ) const
      { assert(handle_); return read().arguments(_ ); }
      inline any_a arguments_ ( ) const
      { assert(handle_); return read().arguments_( ); }
-     inline any_a parameters ( any_a _ ) const
+     inline any_a parameters ( any_a const & _ ) const
      { assert(handle_); return read().parameters(_ ); }
      inline any_a parameters_ ( ) const
      { assert(handle_); return read().parameters_( ); }
-     inline cat_a result ( any_a _ ) const
+     inline cat_a result ( any_a const & _ ) const
      { assert(handle_); return read().result(_ ); }
      inline cat_a result_ ( ) const
      { assert(handle_); return read().result_( ); }
-     inline any_a includes ( any_a range ) const
+     inline any_a includes ( any_a const & range ) const
      { assert(handle_); return read().includes(range ); }
-     inline any_a includes_ ( any_a thing ) const
+     inline any_a includes_ ( any_a const & thing ) const
      { assert(handle_); return read().includes_(thing ); }
-     inline bool includes__ ( any_a thing ) const
+     inline bool includes__ ( any_a const & thing ) const
      { assert(handle_); return read().includes__(thing ); }
-     inline any_a conforms ( any_a range ) const
+     inline any_a conforms ( any_a const & range ) const
      { assert(handle_); return read().conforms(range ); }
-     inline any_a conforms_ ( any_a thing , any_a cat_or_herd ) const
+     inline any_a conforms_ ( any_a const & thing , any_a const & cat_or_herd ) const
      { assert(handle_); return read().conforms_(thing, cat_or_herd ); }
-     inline bool conforms__ ( any_a thing , any_a cat_or_herd ) const
+     inline bool conforms__ ( any_a const & thing , any_a const & cat_or_herd ) const
      { assert(handle_); return read().conforms__(thing, cat_or_herd ); }
     
 
@@ -54,20 +54,20 @@ namespace strange {
 
     	{
 
-      virtual inline symbol_a name ( any_a _ ) const = 0;
+      virtual inline symbol_a name ( any_a const & _ ) const = 0;
       virtual inline symbol_a name_ ( ) const = 0;
-      virtual inline any_a arguments ( any_a _ ) const = 0;
+      virtual inline any_a arguments ( any_a const & _ ) const = 0;
       virtual inline any_a arguments_ ( ) const = 0;
-      virtual inline any_a parameters ( any_a _ ) const = 0;
+      virtual inline any_a parameters ( any_a const & _ ) const = 0;
       virtual inline any_a parameters_ ( ) const = 0;
-      virtual inline cat_a result ( any_a _ ) const = 0;
+      virtual inline cat_a result ( any_a const & _ ) const = 0;
       virtual inline cat_a result_ ( ) const = 0;
-      virtual inline any_a includes ( any_a range ) const = 0;
-      virtual inline any_a includes_ ( any_a thing ) const = 0;
-      virtual inline bool includes__ ( any_a thing ) const = 0;
-      virtual inline any_a conforms ( any_a range ) const = 0;
-      virtual inline any_a conforms_ ( any_a thing , any_a cat_or_herd ) const = 0;
-      virtual inline bool conforms__ ( any_a thing , any_a cat_or_herd ) const = 0;
+      virtual inline any_a includes ( any_a const & range ) const = 0;
+      virtual inline any_a includes_ ( any_a const & thing ) const = 0;
+      virtual inline bool includes__ ( any_a const & thing ) const = 0;
+      virtual inline any_a conforms ( any_a const & range ) const = 0;
+      virtual inline any_a conforms_ ( any_a const & thing , any_a const & cat_or_herd ) const = 0;
+      virtual inline bool conforms__ ( any_a const & thing , any_a const & cat_or_herd ) const = 0;
     	};
 
     
@@ -108,33 +108,33 @@ namespace strange {
 
     
 
-      virtual inline symbol_a name ( any_a _ ) const
+      virtual inline symbol_a name ( any_a const & _ ) const
       { return value_.name(_ ); }
       virtual inline symbol_a name_ ( ) const
       { return value_.name_( ); }
-      virtual inline any_a arguments ( any_a _ ) const
+      virtual inline any_a arguments ( any_a const & _ ) const
       { return value_.arguments(_ ); }
       virtual inline any_a arguments_ ( ) const
       { return value_.arguments_( ); }
-      virtual inline any_a parameters ( any_a _ ) const
+      virtual inline any_a parameters ( any_a const & _ ) const
       { return value_.parameters(_ ); }
       virtual inline any_a parameters_ ( ) const
       { return value_.parameters_( ); }
-      virtual inline cat_a result ( any_a _ ) const
+      virtual inline cat_a result ( any_a const & _ ) const
       { return value_.result(_ ); }
       virtual inline cat_a result_ ( ) const
       { return value_.result_( ); }
-      virtual inline any_a includes ( any_a range ) const
+      virtual inline any_a includes ( any_a const & range ) const
       { return value_.includes(range ); }
-      virtual inline any_a includes_ ( any_a thing ) const
+      virtual inline any_a includes_ ( any_a const & thing ) const
       { return value_.includes_(thing ); }
-      virtual inline bool includes__ ( any_a thing ) const
+      virtual inline bool includes__ ( any_a const & thing ) const
       { return value_.includes__(thing ); }
-      virtual inline any_a conforms ( any_a range ) const
+      virtual inline any_a conforms ( any_a const & range ) const
       { return value_.conforms(range ); }
-      virtual inline any_a conforms_ ( any_a thing , any_a cat_or_herd ) const
+      virtual inline any_a conforms_ ( any_a const & thing , any_a const & cat_or_herd ) const
       { return value_.conforms_(thing, cat_or_herd ); }
-      virtual inline bool conforms__ ( any_a thing , any_a cat_or_herd ) const
+      virtual inline bool conforms__ ( any_a const & thing , any_a const & cat_or_herd ) const
       { return value_.conforms__(thing, cat_or_herd ); }
     	};
 

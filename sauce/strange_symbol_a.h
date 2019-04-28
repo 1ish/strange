@@ -20,11 +20,11 @@ namespace strange {
 
      inline std :: string const & to_string__ ( ) const
      { assert(handle_); return read().to_string__( ); }
-     inline symbol_a add ( any_a range ) const
+     inline symbol_a add ( any_a const & range ) const
      { assert(handle_); return read().add(range ); }
-     inline symbol_a add_ ( symbol_a symbol ) const
+     inline symbol_a add_ ( symbol_a const & symbol ) const
      { assert(handle_); return read().add_(symbol ); }
-     inline symbol_a operator + ( symbol_a symbol ) const
+     inline symbol_a operator + ( symbol_a const & symbol ) const
      { assert(handle_); return read().operator+(symbol ); }
     
 
@@ -35,9 +35,9 @@ namespace strange {
     	{
 
       virtual inline std :: string const & to_string__ ( ) const = 0;
-      virtual inline symbol_a add ( any_a range ) const = 0;
-      virtual inline symbol_a add_ ( symbol_a symbol ) const = 0;
-      virtual inline symbol_a operator + ( symbol_a symbol ) const = 0;
+      virtual inline symbol_a add ( any_a const & range ) const = 0;
+      virtual inline symbol_a add_ ( symbol_a const & symbol ) const = 0;
+      virtual inline symbol_a operator + ( symbol_a const & symbol ) const = 0;
     	};
 
     
@@ -70,11 +70,11 @@ namespace strange {
 
       virtual inline std :: string const & to_string__ ( ) const
       { return value_.to_string__( ); }
-      virtual inline symbol_a add ( any_a range ) const
+      virtual inline symbol_a add ( any_a const & range ) const
       { return value_.add(range ); }
-      virtual inline symbol_a add_ ( symbol_a symbol ) const
+      virtual inline symbol_a add_ ( symbol_a const & symbol ) const
       { return value_.add_(symbol ); }
-      virtual inline symbol_a operator + ( symbol_a symbol ) const
+      virtual inline symbol_a operator + ( symbol_a const & symbol ) const
       { return value_.operator+(symbol ); }
     	};
 

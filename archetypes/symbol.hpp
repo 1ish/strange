@@ -16,9 +16,9 @@ public:
 	// symbol
 	inline std::string const& to_string__() const;
 
-	inline symbol_a add(any_a range) const;
-	inline symbol_a add_(symbol_a symbol) const;
-	inline symbol_a operator+(symbol_a symbol) const;
+	inline symbol_a add(any_a const& range) const;
+	inline symbol_a add_(symbol_a const& symbol) const;
+	inline symbol_a operator+(symbol_a const& symbol) const;
 };
 
 } // namespace strange

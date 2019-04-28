@@ -22,9 +22,9 @@ namespace strange {
      { assert(handle_); return read().has__(s ); }
      inline any_a at__ ( std :: string const & s ) const
      { assert(handle_); return read().at__(s ); }
-     inline void update__ ( std :: string const & s , any_a value )
+     inline void update__ ( std :: string const & s , any_a const & value )
      { assert(handle_); write().update__(s, value ); }
-     inline bool insert__ ( std :: string const & s , any_a value )
+     inline bool insert__ ( std :: string const & s , any_a const & value )
      { assert(handle_); return write().insert__(s, value ); }
      inline bool erase__ ( std :: string const & s )
      { assert(handle_); return write().erase__(s ); }
@@ -44,8 +44,8 @@ namespace strange {
 
       virtual inline bool has__ ( std :: string const & s ) const = 0;
       virtual inline any_a at__ ( std :: string const & s ) const = 0;
-      virtual inline void update__ ( std :: string const & s , any_a value ) = 0;
-      virtual inline bool insert__ ( std :: string const & s , any_a value ) = 0;
+      virtual inline void update__ ( std :: string const & s , any_a const & value ) = 0;
+      virtual inline bool insert__ ( std :: string const & s , any_a const & value ) = 0;
       virtual inline bool erase__ ( std :: string const & s ) = 0;
       virtual inline std :: unordered_map < any_a , any_a , any_a :: hash_f > const & extract__ ( ) const = 0;
       virtual inline void mutate__ ( std :: unordered_map < any_a , any_a , any_a :: hash_f > const & data ) = 0;
@@ -94,9 +94,9 @@ namespace strange {
       { return value_.has__(s ); }
       virtual inline any_a at__ ( std :: string const & s ) const
       { return value_.at__(s ); }
-      virtual inline void update__ ( std :: string const & s , any_a value )
+      virtual inline void update__ ( std :: string const & s , any_a const & value )
       { value_.update__(s, value ); }
-      virtual inline bool insert__ ( std :: string const & s , any_a value )
+      virtual inline bool insert__ ( std :: string const & s , any_a const & value )
       { return value_.insert__(s, value ); }
       virtual inline bool erase__ ( std :: string const & s )
       { return value_.erase__(s ); }

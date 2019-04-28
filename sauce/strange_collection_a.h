@@ -18,89 +18,89 @@ namespace strange {
 
     public:
 
-     inline any_a has ( any_a range ) const
+     inline any_a has ( any_a const & range ) const
      { assert(handle_); return read().has(range ); }
-     inline any_a has_ ( any_a key ) const
+     inline any_a has_ ( any_a const & key ) const
      { assert(handle_); return read().has_(key ); }
-     inline bool has__ ( any_a key ) const
+     inline bool has__ ( any_a const & key ) const
      { assert(handle_); return read().has__(key ); }
-     inline any_a at ( any_a range ) const
+     inline any_a at ( any_a const & range ) const
      { assert(handle_); return read().at(range ); }
-     inline any_a at_ ( any_a key ) const
+     inline any_a at_ ( any_a const & key ) const
      { assert(handle_); return read().at_(key ); }
-     inline any_a update ( any_a range )
+     inline any_a update ( any_a const & range )
      { assert(handle_); return write().update(range ); }
-     inline any_a update_ ( any_a key , any_a value )
+     inline any_a update_ ( any_a const & key , any_a const & value )
      { assert(handle_); return write().update_(key, value ); }
-     inline any_a insert ( any_a range )
+     inline any_a insert ( any_a const & range )
      { assert(handle_); return write().insert(range ); }
-     inline any_a insert_ ( any_a key , any_a value )
+     inline any_a insert_ ( any_a const & key , any_a const & value )
      { assert(handle_); return write().insert_(key, value ); }
-     inline bool insert__ ( any_a key , any_a value )
+     inline bool insert__ ( any_a const & key , any_a const & value )
      { assert(handle_); return write().insert__(key, value ); }
-     inline any_a erase ( any_a range )
+     inline any_a erase ( any_a const & range )
      { assert(handle_); return write().erase(range ); }
-     inline any_a erase_ ( any_a key )
+     inline any_a erase_ ( any_a const & key )
      { assert(handle_); return write().erase_(key ); }
-     inline bool erase__ ( any_a key )
+     inline bool erase__ ( any_a const & key )
      { assert(handle_); return write().erase__(key ); }
-     inline any_a clear ( any_a _ )
+     inline any_a clear ( any_a const & _ )
      { assert(handle_); return write().clear(_ ); }
      inline any_a clear_ ( )
      { assert(handle_); return write().clear_( ); }
      inline void clear__ ( )
      { assert(handle_); write().clear__( ); }
-     inline any_a size ( any_a _ ) const
+     inline any_a size ( any_a const & _ ) const
      { assert(handle_); return read().size(_ ); }
      inline any_a size_ ( ) const
      { assert(handle_); return read().size_( ); }
      inline int64_t size__ ( ) const
      { assert(handle_); return read().size__( ); }
-     inline any_a empty ( any_a _ ) const
+     inline any_a empty ( any_a const & _ ) const
      { assert(handle_); return read().empty(_ ); }
      inline any_a empty_ ( ) const
      { assert(handle_); return read().empty_( ); }
      inline bool empty__ ( ) const
      { assert(handle_); return read().empty__( ); }
-     inline any_a push_front ( any_a range )
+     inline any_a push_front ( any_a const & range )
      { assert(handle_); return write().push_front(range ); }
-     inline any_a push_front_ ( any_a thing )
+     inline any_a push_front_ ( any_a const & thing )
      { assert(handle_); return write().push_front_(thing ); }
-     inline void push_front__ ( any_a thing )
+     inline void push_front__ ( any_a const & thing )
      { assert(handle_); write().push_front__(thing ); }
-     inline any_a pop_front ( any_a _ )
+     inline any_a pop_front ( any_a const & _ )
      { assert(handle_); return write().pop_front(_ ); }
      inline any_a pop_front_ ( )
      { assert(handle_); return write().pop_front_( ); }
-     inline any_a push_back ( any_a range )
+     inline any_a push_back ( any_a const & range )
      { assert(handle_); return write().push_back(range ); }
-     inline any_a push_back_ ( any_a thing )
+     inline any_a push_back_ ( any_a const & thing )
      { assert(handle_); return write().push_back_(thing ); }
-     inline void push_back__ ( any_a thing )
+     inline void push_back__ ( any_a const & thing )
      { assert(handle_); write().push_back__(thing ); }
-     inline any_a pop_back ( any_a _ )
+     inline any_a pop_back ( any_a const & _ )
      { assert(handle_); return write().pop_back(_ ); }
      inline any_a pop_back_ ( )
      { assert(handle_); return write().pop_back_( ); }
-     inline collection_a self_add ( any_a range )
+     inline collection_a self_add ( any_a const & range )
      { assert(handle_); return write().self_add(range ); }
-     inline collection_a self_add_ ( collection_a collection )
+     inline collection_a self_add_ ( collection_a const & collection )
      { assert(handle_); return write().self_add_(collection ); }
-     inline collection_a add ( any_a range ) const
+     inline collection_a add ( any_a const & range ) const
      { assert(handle_); return read().add(range ); }
-     inline collection_a add_ ( collection_a collection ) const
+     inline collection_a add_ ( collection_a const & collection ) const
      { assert(handle_); return read().add_(collection ); }
-     inline collection_a operator + ( collection_a collection ) const
+     inline collection_a operator + ( collection_a const & collection ) const
      { assert(handle_); return read().operator+(collection ); }
-     inline collection_a self_subtract ( any_a range )
+     inline collection_a self_subtract ( any_a const & range )
      { assert(handle_); return write().self_subtract(range ); }
-     inline collection_a self_subtract_ ( collection_a collection )
+     inline collection_a self_subtract_ ( collection_a const & collection )
      { assert(handle_); return write().self_subtract_(collection ); }
-     inline collection_a subtract ( any_a range ) const
+     inline collection_a subtract ( any_a const & range ) const
      { assert(handle_); return read().subtract(range ); }
-     inline collection_a subtract_ ( collection_a collection ) const
+     inline collection_a subtract_ ( collection_a const & collection ) const
      { assert(handle_); return read().subtract_(collection ); }
-     inline collection_a operator - ( collection_a collection ) const
+     inline collection_a operator - ( collection_a const & collection ) const
      { assert(handle_); return read().operator-(collection ); }
     
 
@@ -110,48 +110,48 @@ namespace strange {
 
     	{
 
-      virtual inline any_a has ( any_a range ) const = 0;
-      virtual inline any_a has_ ( any_a key ) const = 0;
-      virtual inline bool has__ ( any_a key ) const = 0;
-      virtual inline any_a at ( any_a range ) const = 0;
-      virtual inline any_a at_ ( any_a key ) const = 0;
-      virtual inline any_a update ( any_a range ) = 0;
-      virtual inline any_a update_ ( any_a key , any_a value ) = 0;
-      virtual inline any_a insert ( any_a range ) = 0;
-      virtual inline any_a insert_ ( any_a key , any_a value ) = 0;
-      virtual inline bool insert__ ( any_a key , any_a value ) = 0;
-      virtual inline any_a erase ( any_a range ) = 0;
-      virtual inline any_a erase_ ( any_a key ) = 0;
-      virtual inline bool erase__ ( any_a key ) = 0;
-      virtual inline any_a clear ( any_a _ ) = 0;
+      virtual inline any_a has ( any_a const & range ) const = 0;
+      virtual inline any_a has_ ( any_a const & key ) const = 0;
+      virtual inline bool has__ ( any_a const & key ) const = 0;
+      virtual inline any_a at ( any_a const & range ) const = 0;
+      virtual inline any_a at_ ( any_a const & key ) const = 0;
+      virtual inline any_a update ( any_a const & range ) = 0;
+      virtual inline any_a update_ ( any_a const & key , any_a const & value ) = 0;
+      virtual inline any_a insert ( any_a const & range ) = 0;
+      virtual inline any_a insert_ ( any_a const & key , any_a const & value ) = 0;
+      virtual inline bool insert__ ( any_a const & key , any_a const & value ) = 0;
+      virtual inline any_a erase ( any_a const & range ) = 0;
+      virtual inline any_a erase_ ( any_a const & key ) = 0;
+      virtual inline bool erase__ ( any_a const & key ) = 0;
+      virtual inline any_a clear ( any_a const & _ ) = 0;
       virtual inline any_a clear_ ( ) = 0;
       virtual inline void clear__ ( ) = 0;
-      virtual inline any_a size ( any_a _ ) const = 0;
+      virtual inline any_a size ( any_a const & _ ) const = 0;
       virtual inline any_a size_ ( ) const = 0;
       virtual inline int64_t size__ ( ) const = 0;
-      virtual inline any_a empty ( any_a _ ) const = 0;
+      virtual inline any_a empty ( any_a const & _ ) const = 0;
       virtual inline any_a empty_ ( ) const = 0;
       virtual inline bool empty__ ( ) const = 0;
-      virtual inline any_a push_front ( any_a range ) = 0;
-      virtual inline any_a push_front_ ( any_a thing ) = 0;
-      virtual inline void push_front__ ( any_a thing ) = 0;
-      virtual inline any_a pop_front ( any_a _ ) = 0;
+      virtual inline any_a push_front ( any_a const & range ) = 0;
+      virtual inline any_a push_front_ ( any_a const & thing ) = 0;
+      virtual inline void push_front__ ( any_a const & thing ) = 0;
+      virtual inline any_a pop_front ( any_a const & _ ) = 0;
       virtual inline any_a pop_front_ ( ) = 0;
-      virtual inline any_a push_back ( any_a range ) = 0;
-      virtual inline any_a push_back_ ( any_a thing ) = 0;
-      virtual inline void push_back__ ( any_a thing ) = 0;
-      virtual inline any_a pop_back ( any_a _ ) = 0;
+      virtual inline any_a push_back ( any_a const & range ) = 0;
+      virtual inline any_a push_back_ ( any_a const & thing ) = 0;
+      virtual inline void push_back__ ( any_a const & thing ) = 0;
+      virtual inline any_a pop_back ( any_a const & _ ) = 0;
       virtual inline any_a pop_back_ ( ) = 0;
-      virtual inline collection_a self_add ( any_a range ) = 0;
-      virtual inline collection_a self_add_ ( collection_a collection ) = 0;
-      virtual inline collection_a add ( any_a range ) const = 0;
-      virtual inline collection_a add_ ( collection_a collection ) const = 0;
-      virtual inline collection_a operator + ( collection_a collection ) const = 0;
-      virtual inline collection_a self_subtract ( any_a range ) = 0;
-      virtual inline collection_a self_subtract_ ( collection_a collection ) = 0;
-      virtual inline collection_a subtract ( any_a range ) const = 0;
-      virtual inline collection_a subtract_ ( collection_a collection ) const = 0;
-      virtual inline collection_a operator - ( collection_a collection ) const = 0;
+      virtual inline collection_a self_add ( any_a const & range ) = 0;
+      virtual inline collection_a self_add_ ( collection_a const & collection ) = 0;
+      virtual inline collection_a add ( any_a const & range ) const = 0;
+      virtual inline collection_a add_ ( collection_a const & collection ) const = 0;
+      virtual inline collection_a operator + ( collection_a const & collection ) const = 0;
+      virtual inline collection_a self_subtract ( any_a const & range ) = 0;
+      virtual inline collection_a self_subtract_ ( collection_a const & collection ) = 0;
+      virtual inline collection_a subtract ( any_a const & range ) const = 0;
+      virtual inline collection_a subtract_ ( collection_a const & collection ) const = 0;
+      virtual inline collection_a operator - ( collection_a const & collection ) const = 0;
     	};
 
     
@@ -182,89 +182,89 @@ namespace strange {
 
     
 
-      virtual inline any_a has ( any_a range ) const
+      virtual inline any_a has ( any_a const & range ) const
       { return value_.has(range ); }
-      virtual inline any_a has_ ( any_a key ) const
+      virtual inline any_a has_ ( any_a const & key ) const
       { return value_.has_(key ); }
-      virtual inline bool has__ ( any_a key ) const
+      virtual inline bool has__ ( any_a const & key ) const
       { return value_.has__(key ); }
-      virtual inline any_a at ( any_a range ) const
+      virtual inline any_a at ( any_a const & range ) const
       { return value_.at(range ); }
-      virtual inline any_a at_ ( any_a key ) const
+      virtual inline any_a at_ ( any_a const & key ) const
       { return value_.at_(key ); }
-      virtual inline any_a update ( any_a range )
+      virtual inline any_a update ( any_a const & range )
       { return value_.update(range ); }
-      virtual inline any_a update_ ( any_a key , any_a value )
+      virtual inline any_a update_ ( any_a const & key , any_a const & value )
       { return value_.update_(key, value ); }
-      virtual inline any_a insert ( any_a range )
+      virtual inline any_a insert ( any_a const & range )
       { return value_.insert(range ); }
-      virtual inline any_a insert_ ( any_a key , any_a value )
+      virtual inline any_a insert_ ( any_a const & key , any_a const & value )
       { return value_.insert_(key, value ); }
-      virtual inline bool insert__ ( any_a key , any_a value )
+      virtual inline bool insert__ ( any_a const & key , any_a const & value )
       { return value_.insert__(key, value ); }
-      virtual inline any_a erase ( any_a range )
+      virtual inline any_a erase ( any_a const & range )
       { return value_.erase(range ); }
-      virtual inline any_a erase_ ( any_a key )
+      virtual inline any_a erase_ ( any_a const & key )
       { return value_.erase_(key ); }
-      virtual inline bool erase__ ( any_a key )
+      virtual inline bool erase__ ( any_a const & key )
       { return value_.erase__(key ); }
-      virtual inline any_a clear ( any_a _ )
+      virtual inline any_a clear ( any_a const & _ )
       { return value_.clear(_ ); }
       virtual inline any_a clear_ ( )
       { return value_.clear_( ); }
       virtual inline void clear__ ( )
       { value_.clear__( ); }
-      virtual inline any_a size ( any_a _ ) const
+      virtual inline any_a size ( any_a const & _ ) const
       { return value_.size(_ ); }
       virtual inline any_a size_ ( ) const
       { return value_.size_( ); }
       virtual inline int64_t size__ ( ) const
       { return value_.size__( ); }
-      virtual inline any_a empty ( any_a _ ) const
+      virtual inline any_a empty ( any_a const & _ ) const
       { return value_.empty(_ ); }
       virtual inline any_a empty_ ( ) const
       { return value_.empty_( ); }
       virtual inline bool empty__ ( ) const
       { return value_.empty__( ); }
-      virtual inline any_a push_front ( any_a range )
+      virtual inline any_a push_front ( any_a const & range )
       { return value_.push_front(range ); }
-      virtual inline any_a push_front_ ( any_a thing )
+      virtual inline any_a push_front_ ( any_a const & thing )
       { return value_.push_front_(thing ); }
-      virtual inline void push_front__ ( any_a thing )
+      virtual inline void push_front__ ( any_a const & thing )
       { value_.push_front__(thing ); }
-      virtual inline any_a pop_front ( any_a _ )
+      virtual inline any_a pop_front ( any_a const & _ )
       { return value_.pop_front(_ ); }
       virtual inline any_a pop_front_ ( )
       { return value_.pop_front_( ); }
-      virtual inline any_a push_back ( any_a range )
+      virtual inline any_a push_back ( any_a const & range )
       { return value_.push_back(range ); }
-      virtual inline any_a push_back_ ( any_a thing )
+      virtual inline any_a push_back_ ( any_a const & thing )
       { return value_.push_back_(thing ); }
-      virtual inline void push_back__ ( any_a thing )
+      virtual inline void push_back__ ( any_a const & thing )
       { value_.push_back__(thing ); }
-      virtual inline any_a pop_back ( any_a _ )
+      virtual inline any_a pop_back ( any_a const & _ )
       { return value_.pop_back(_ ); }
       virtual inline any_a pop_back_ ( )
       { return value_.pop_back_( ); }
-      virtual inline collection_a self_add ( any_a range )
+      virtual inline collection_a self_add ( any_a const & range )
       { return value_.self_add(range ); }
-      virtual inline collection_a self_add_ ( collection_a collection )
+      virtual inline collection_a self_add_ ( collection_a const & collection )
       { return value_.self_add_(collection ); }
-      virtual inline collection_a add ( any_a range ) const
+      virtual inline collection_a add ( any_a const & range ) const
       { return value_.add(range ); }
-      virtual inline collection_a add_ ( collection_a collection ) const
+      virtual inline collection_a add_ ( collection_a const & collection ) const
       { return value_.add_(collection ); }
-      virtual inline collection_a operator + ( collection_a collection ) const
+      virtual inline collection_a operator + ( collection_a const & collection ) const
       { return value_.operator+(collection ); }
-      virtual inline collection_a self_subtract ( any_a range )
+      virtual inline collection_a self_subtract ( any_a const & range )
       { return value_.self_subtract(range ); }
-      virtual inline collection_a self_subtract_ ( collection_a collection )
+      virtual inline collection_a self_subtract_ ( collection_a const & collection )
       { return value_.self_subtract_(collection ); }
-      virtual inline collection_a subtract ( any_a range ) const
+      virtual inline collection_a subtract ( any_a const & range ) const
       { return value_.subtract(range ); }
-      virtual inline collection_a subtract_ ( collection_a collection ) const
+      virtual inline collection_a subtract_ ( collection_a const & collection ) const
       { return value_.subtract_(collection ); }
-      virtual inline collection_a operator - ( collection_a collection ) const
+      virtual inline collection_a operator - ( collection_a const & collection ) const
       { return value_.operator-(collection ); }
     	};
 

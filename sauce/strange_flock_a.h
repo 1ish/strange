@@ -22,9 +22,9 @@ namespace strange {
      { assert(handle_); return read().has__(index ); }
      inline any_a at__ ( int64_t index ) const
      { assert(handle_); return read().at__(index ); }
-     inline void update__ ( int64_t index , any_a value )
+     inline void update__ ( int64_t index , any_a const & value )
      { assert(handle_); write().update__(index, value ); }
-     inline bool insert__ ( int64_t index , any_a value )
+     inline bool insert__ ( int64_t index , any_a const & value )
      { assert(handle_); return write().insert__(index, value ); }
      inline bool erase__ ( int64_t index )
      { assert(handle_); return write().erase__(index ); }
@@ -44,8 +44,8 @@ namespace strange {
 
       virtual inline bool has__ ( int64_t index ) const = 0;
       virtual inline any_a at__ ( int64_t index ) const = 0;
-      virtual inline void update__ ( int64_t index , any_a value ) = 0;
-      virtual inline bool insert__ ( int64_t index , any_a value ) = 0;
+      virtual inline void update__ ( int64_t index , any_a const & value ) = 0;
+      virtual inline bool insert__ ( int64_t index , any_a const & value ) = 0;
       virtual inline bool erase__ ( int64_t index ) = 0;
       virtual inline std :: vector < any_a > const & extract__ ( ) const = 0;
       virtual inline void mutate__ ( std :: vector < any_a > const & data ) = 0;
@@ -94,9 +94,9 @@ namespace strange {
       { return value_.has__(index ); }
       virtual inline any_a at__ ( int64_t index ) const
       { return value_.at__(index ); }
-      virtual inline void update__ ( int64_t index , any_a value )
+      virtual inline void update__ ( int64_t index , any_a const & value )
       { value_.update__(index, value ); }
-      virtual inline bool insert__ ( int64_t index , any_a value )
+      virtual inline bool insert__ ( int64_t index , any_a const & value )
       { return value_.insert__(index, value ); }
       virtual inline bool erase__ ( int64_t index )
       { return value_.erase__(index ); }
