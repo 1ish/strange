@@ -24,7 +24,7 @@ namespace strange {
 
     	public:
 
-    		inline std::size_t operator()(any_a thing) const
+    		inline std::size_t operator()(any_a const& thing) const
 
     		{
 
@@ -108,13 +108,13 @@ namespace strange {
 
     
 
-    	inline any_a& operator+=(any_a other)
+    	inline any_a& operator+=(any_a const& other)
 
     	{
 
     		assert(handle_);
 
-    		write().operator+=(std::move(other));
+    		write().operator+=(other);
 
     		return *this;
 
@@ -122,13 +122,13 @@ namespace strange {
 
     
 
-    	inline any_a& operator-=(any_a other)
+    	inline any_a& operator-=(any_a const& other)
 
     	{
 
     		assert(handle_);
 
-    		write().operator-=(std::move(other));
+    		write().operator-=(other);
 
     		return *this;
 
@@ -136,13 +136,13 @@ namespace strange {
 
     
 
-    	inline any_a& operator*=(any_a other)
+    	inline any_a& operator*=(any_a const& other)
 
     	{
 
     		assert(handle_);
 
-    		write().operator*=(std::move(other));
+    		write().operator*=(other);
 
     		return *this;
 
@@ -150,13 +150,13 @@ namespace strange {
 
     
 
-    	inline any_a& operator/=(any_a other)
+    	inline any_a& operator/=(any_a const& other)
 
     	{
 
     		assert(handle_);
 
-    		write().operator/=(std::move(other));
+    		write().operator/=(other);
 
     		return *this;
 
@@ -164,13 +164,13 @@ namespace strange {
 
     
 
-    	inline any_a& operator%=(any_a other)
+    	inline any_a& operator%=(any_a const& other)
 
     	{
 
     		assert(handle_);
 
-    		write().operator%=(std::move(other));
+    		write().operator%=(other);
 
     		return *this;
 
@@ -342,23 +342,23 @@ namespace strange {
 
     
 
-    		virtual inline void operator+=(any_a other) = 0;
+    		virtual inline void operator+=(any_a const& other) = 0;
 
     
 
-    		virtual inline void operator-=(any_a other) = 0;
+    		virtual inline void operator-=(any_a const& other) = 0;
 
     
 
-    		virtual inline void operator*=(any_a other) = 0;
+    		virtual inline void operator*=(any_a const& other) = 0;
 
     
 
-    		virtual inline void operator/=(any_a other) = 0;
+    		virtual inline void operator/=(any_a const& other) = 0;
 
     
 
-    		virtual inline void operator%=(any_a other) = 0;
+    		virtual inline void operator%=(any_a const& other) = 0;
 
     
 
@@ -493,51 +493,51 @@ namespace strange {
 
     
 
-    		virtual inline void operator+=(any_a other) final
+    		virtual inline void operator+=(any_a const& other) final
 
     		{
 
-    			value_.operator+=(std::move(other));
+    			value_.operator+=(other);
 
     		}
 
     
 
-    		virtual inline void operator-=(any_a other) final
+    		virtual inline void operator-=(any_a const& other) final
 
     		{
 
-    			value_.operator-=(std::move(other));
+    			value_.operator-=(other);
 
     		}
 
     
 
-    		virtual inline void operator*=(any_a other) final
+    		virtual inline void operator*=(any_a const& other) final
 
     		{
 
-    			value_.operator*=(std::move(other));
+    			value_.operator*=(other);
 
     		}
 
     
 
-    		virtual inline void operator/=(any_a other) final
+    		virtual inline void operator/=(any_a const& other) final
 
     		{
 
-    			value_.operator/=(std::move(other));
+    			value_.operator/=(other);
 
     		}
 
     
 
-    		virtual inline void operator%=(any_a other) final
+    		virtual inline void operator%=(any_a const& other) final
 
     		{
 
-    			value_.operator%=(std::move(other));
+    			value_.operator%=(other);
 
     		}
 

@@ -4,7 +4,7 @@ public:
 	class hash_f
 	{
 	public:
-		inline std::size_t operator()(%struct_name%_a thing) const
+		inline std::size_t operator()(%struct_name%_a const& thing) const
 		{
 			return thing.hash__();
 		}
@@ -46,38 +46,38 @@ public:
 		return result;
 	}
 
-	inline %struct_name%_a& operator+=(%struct_name%_a other)
+	inline %struct_name%_a& operator+=(%struct_name%_a const& other)
 	{
 		assert(handle_);
-		write().operator+=(std::move(other));
+		write().operator+=(other);
 		return *this;
 	}
 
-	inline %struct_name%_a& operator-=(%struct_name%_a other)
+	inline %struct_name%_a& operator-=(%struct_name%_a const& other)
 	{
 		assert(handle_);
-		write().operator-=(std::move(other));
+		write().operator-=(other);
 		return *this;
 	}
 
-	inline %struct_name%_a& operator*=(%struct_name%_a other)
+	inline %struct_name%_a& operator*=(%struct_name%_a const& other)
 	{
 		assert(handle_);
-		write().operator*=(std::move(other));
+		write().operator*=(other);
 		return *this;
 	}
 
-	inline %struct_name%_a& operator/=(%struct_name%_a other)
+	inline %struct_name%_a& operator/=(%struct_name%_a const& other)
 	{
 		assert(handle_);
-		write().operator/=(std::move(other));
+		write().operator/=(other);
 		return *this;
 	}
 
-	inline %struct_name%_a& operator%=(%struct_name%_a other)
+	inline %struct_name%_a& operator%=(%struct_name%_a const& other)
 	{
 		assert(handle_);
-		write().operator%=(std::move(other));
+		write().operator%=(other);
 		return *this;
 	}
 
@@ -103,15 +103,15 @@ protected:
 
 		virtual inline void operator--() = 0;
 
-		virtual inline void operator+=(%struct_name%_a other) = 0;
+		virtual inline void operator+=(%struct_name%_a const& other) = 0;
 
-		virtual inline void operator-=(%struct_name%_a other) = 0;
+		virtual inline void operator-=(%struct_name%_a const& other) = 0;
 
-		virtual inline void operator*=(%struct_name%_a other) = 0;
+		virtual inline void operator*=(%struct_name%_a const& other) = 0;
 
-		virtual inline void operator/=(%struct_name%_a other) = 0;
+		virtual inline void operator/=(%struct_name%_a const& other) = 0;
 
-		virtual inline void operator%=(%struct_name%_a other) = 0;
+		virtual inline void operator%=(%struct_name%_a const& other) = 0;
 
 		%pure_virtual_members%
 	};
@@ -149,29 +149,29 @@ protected:
 			value_.operator--();
 		}
 
-		virtual inline void operator+=(%struct_name%_a other) final
+		virtual inline void operator+=(%struct_name%_a const& other) final
 		{
-			value_.operator+=(std::move(other));
+			value_.operator+=(other);
 		}
 
-		virtual inline void operator-=(%struct_name%_a other) final
+		virtual inline void operator-=(%struct_name%_a const& other) final
 		{
-			value_.operator-=(std::move(other));
+			value_.operator-=(other);
 		}
 
-		virtual inline void operator*=(%struct_name%_a other) final
+		virtual inline void operator*=(%struct_name%_a const& other) final
 		{
-			value_.operator*=(std::move(other));
+			value_.operator*=(other);
 		}
 
-		virtual inline void operator/=(%struct_name%_a other) final
+		virtual inline void operator/=(%struct_name%_a const& other) final
 		{
-			value_.operator/=(std::move(other));
+			value_.operator/=(other);
 		}
 
-		virtual inline void operator%=(%struct_name%_a other) final
+		virtual inline void operator%=(%struct_name%_a const& other) final
 		{
-			value_.operator%=(std::move(other));
+			value_.operator%=(other);
 		}
 
 		%virtual_members% //TODO final / move params
