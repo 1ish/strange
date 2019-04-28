@@ -20,7 +20,7 @@ public:
 	}
 
 	template <typename... Args>
-	static inline void variadic_(std::vector<_ABSTRACTION_>& vec, _ABSTRACTION_ thing, Args&&... args)
+	static inline void variadic_(std::vector<_ABSTRACTION_>& vec, _ABSTRACTION_ const& thing, Args&&... args)
 	{
 		vec.push_back(thing);
 		variadic_(vec, std::forward<Args>(args)...);
