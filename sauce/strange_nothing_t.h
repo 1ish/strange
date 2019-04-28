@@ -97,7 +97,7 @@ public: ___THING___
 
 	inline std::size_t hash__() const
 	{
-		static const std::size_t HASH = std::hash<int64_t>{}(0);
+		static std::size_t const HASH = std::hash<int64_t>{}(0);
 		return HASH;
 	}
 

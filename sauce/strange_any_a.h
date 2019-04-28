@@ -208,7 +208,7 @@ namespace strange {
      { assert(handle_); return read().operate_(thing, operation, range ); }
      inline any_a operator ( ) ( any_a thing , any_a range ) const
      { assert(handle_); return read().operator()(thing, range ); }
-     inline const void * identity__ ( ) const
+     inline void const * identity__ ( ) const
      { assert(handle_); return read().identity__( ); }
      inline any_a identical ( any_a range ) const
      { assert(handle_); return read().identical(range ); }
@@ -258,7 +258,7 @@ namespace strange {
      { assert(handle_); return read().hash_( ); }
      inline std :: size_t hash__ ( ) const
      { assert(handle_); return read().hash__( ); }
-     inline bool is__ ( const std :: string & s ) const
+     inline bool is__ ( std :: string const & s ) const
      { assert(handle_); return read().is__(s ); }
      inline any_a beget ( any_a _ ) const
      { assert(handle_); return read().beget(_ ); }
@@ -310,11 +310,11 @@ namespace strange {
 
     		___root_handle_base___() = default;
 
-    		___root_handle_base___(const ___root_handle_base___&) = default;
+    		___root_handle_base___(___root_handle_base___ const&) = default;
 
     		___root_handle_base___(___root_handle_base___&&) = default;
 
-    		___root_handle_base___& operator=(const ___root_handle_base___&) = default;
+    		___root_handle_base___& operator=(___root_handle_base___ const&) = default;
 
     		___root_handle_base___& operator=(___root_handle_base___&&) = default;
 
@@ -326,7 +326,7 @@ namespace strange {
 
     
 
-    		virtual void ___weak___(const std::weak_ptr<___root_handle_base___>& weak) const = 0;
+    		virtual void ___weak___(std::weak_ptr<___root_handle_base___> const& weak) const = 0;
 
     
 
@@ -377,7 +377,7 @@ namespace strange {
       virtual inline any_a operate ( any_a range ) const = 0;
       virtual inline any_a operate_ ( any_a thing , any_a operation , any_a range ) const = 0;
       virtual inline any_a operator ( ) ( any_a thing , any_a range ) const = 0;
-      virtual inline const void * identity__ ( ) const = 0;
+      virtual inline void const * identity__ ( ) const = 0;
       virtual inline any_a identical ( any_a range ) const = 0;
       virtual inline any_a identical_ ( any_a thing ) const = 0;
       virtual inline bool identical__ ( any_a thing ) const = 0;
@@ -402,7 +402,7 @@ namespace strange {
       virtual inline any_a hash ( any_a _ ) const = 0;
       virtual inline any_a hash_ ( ) const = 0;
       virtual inline std :: size_t hash__ ( ) const = 0;
-      virtual inline bool is__ ( const std :: string & s ) const = 0;
+      virtual inline bool is__ ( std :: string const & s ) const = 0;
       virtual inline any_a beget ( any_a _ ) const = 0;
       virtual inline any_a beget_ ( ) const = 0;
       virtual inline any_a cbegin ( ) const = 0;
@@ -453,7 +453,7 @@ namespace strange {
 
     
 
-    		virtual inline void ___weak___(const std::weak_ptr<___root_handle_base___>& weak) const final
+    		virtual inline void ___weak___(std::weak_ptr<___root_handle_base___> const& weak) const final
 
     		{
 
@@ -573,7 +573,7 @@ namespace strange {
       { return value_.operate_(thing, operation, range ); }
       virtual inline any_a operator ( ) ( any_a thing , any_a range ) const
       { return value_.operator()(thing, range ); }
-      virtual inline const void * identity__ ( ) const
+      virtual inline void const * identity__ ( ) const
       { return value_.identity__( ); }
       virtual inline any_a identical ( any_a range ) const
       { return value_.identical(range ); }
@@ -623,7 +623,7 @@ namespace strange {
       { return value_.hash_( ); }
       virtual inline std :: size_t hash__ ( ) const
       { return value_.hash__( ); }
-      virtual inline bool is__ ( const std :: string & s ) const
+      virtual inline bool is__ ( std :: string const & s ) const
       { return value_.is__(s ); }
       virtual inline any_a beget ( any_a _ ) const
       { return value_.beget(_ ); }
@@ -695,7 +695,7 @@ namespace strange {
 
     
 
-    	const bool ___reference___;
+    	bool const ___reference___;
 
     
 
@@ -757,7 +757,7 @@ namespace strange {
 
     
 
-    	inline const ___root_handle_base___& read() const
+    	inline ___root_handle_base___ const& read() const
 
     	{
 
@@ -789,13 +789,13 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(const any_a& value);
+    	friend inline bool check_(any_a const& value);
 
     
 
     	template <typename ___TTT___>
 
-    	friend inline ___TTT___ cast_(const any_a& value, bool reference = false);
+    	friend inline ___TTT___ cast_(any_a const& value, bool reference = false);
 
     
 
@@ -805,7 +805,7 @@ namespace strange {
 
     
 
-    	static inline const char* ___abstraction_name___()
+    	static inline char const* ___abstraction_name___()
 
     	{
 
@@ -815,7 +815,7 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>&)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const&)
 
     	{
 
@@ -845,7 +845,7 @@ namespace strange {
 
     
 
-    	inline any_a(const any_a& other)
+    	inline any_a(any_a const& other)
 
     		: handle_{ other.handle_ }
 
@@ -859,7 +859,7 @@ namespace strange {
 
     
 
-    	inline any_a(const any_a& other, bool reference)
+    	inline any_a(any_a const& other, bool reference)
 
     		: handle_{ other.handle_ }
 
@@ -901,7 +901,7 @@ namespace strange {
 
     
 
-    	inline any_a& operator=(const any_a& other)
+    	inline any_a& operator=(any_a const& other)
 
     	{
 
@@ -935,7 +935,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline any_a(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+    	explicit inline any_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 
     		: handle_{ handle }
 
@@ -957,7 +957,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline any_a& operator=(const std::shared_ptr<___TTT___>& handle)
+    	inline any_a& operator=(std::shared_ptr<___TTT___> const& handle)
 
     	{
 
@@ -981,7 +981,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(const any_a& value)
+    inline bool check_(any_a const& value)
 
     {
 
@@ -993,7 +993,7 @@ namespace strange {
 
     template <typename ___TTT___, typename ___VVV___>
 
-    inline bool check_(const ___VVV___&)
+    inline bool check_(___VVV___ const&)
 
     {
 
@@ -1005,7 +1005,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline ___TTT___ cast_(const any_a& value, bool reference)
+    inline ___TTT___ cast_(any_a const& value, bool reference)
 
     {
 

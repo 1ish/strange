@@ -62,7 +62,7 @@ public: ___THING___
 	inline misunderstanding_a add(any_a range) const
 	{
 		std::string s = _string;
-		for (const any_a thing : range)
+		for (any_a const& thing : range)
 		{
 			if (check_<misunderstanding_a>(thing))
 			{

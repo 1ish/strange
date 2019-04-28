@@ -20,7 +20,7 @@ public:
 	}
 
 	// identification
-	inline const void* identity__() const
+	inline void const* identity__() const
 	{
 		return this;
 	}
@@ -63,10 +63,10 @@ public:
 
 	inline std::size_t hash__() const
 	{
-		return std::hash<const void*>{}(identity__());
+		return std::hash<void const*>{}(identity__());
 	}
 
-	static inline bool is__(const std::string& s)
+	static inline bool is__(std::string const& s)
 	{
 		return false;
 	}

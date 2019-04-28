@@ -62,7 +62,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline std::size_t hash__() const
 		{
-			return std::hash<const void*>{}(&*_it);
+			return std::hash<void const*>{}(&*_it);
 		}
 
 		// iterator
@@ -320,12 +320,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 		}
 
 		// data
-		inline const ITERATOR& extract__() const
+		inline ITERATOR const& extract__() const
 		{
 			return _it;
 		}
 
-		inline void mutate__(const ITERATOR& it)
+		inline void mutate__(ITERATOR const& it)
 		{
 			_it = it;
 		}
@@ -423,7 +423,7 @@ public: ___COLLECTION___
 	inline std::size_t hash__() const
 	{
 		std::size_t seed = std::hash<std::size_t>{}(_vector.size());
-		for (const auto& item : _vector)
+		for (auto const& item : _vector)
 		{
 			seed ^= item.hash__() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
@@ -493,7 +493,7 @@ public: ___COLLECTION___
 	{
 		if (index >= 0)
 		{
-			const int64_t size = size__();
+			int64_t const size = size__();
 			if (index == size)
 			{
 				push_back__(std::move(value));
@@ -518,7 +518,7 @@ public: ___COLLECTION___
 	{
 		if (index >= 0)
 		{
-			const int64_t size = size__();
+			int64_t const size = size__();
 			if (index == size)
 			{
 				push_back__(std::move(value));
@@ -615,12 +615,12 @@ public: ___COLLECTION___
 	}
 
 	// data
-	inline const std_vector_any& extract__() const
+	inline std_vector_any const& extract__() const
 	{
 		return _vector;
 	}
 
-	inline void mutate__(const std_vector_any& data)
+	inline void mutate__(std_vector_any const& data)
 	{
 		_vector = data;
 	}

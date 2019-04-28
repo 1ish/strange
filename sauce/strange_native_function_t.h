@@ -17,7 +17,7 @@ public: ___THING___
 	}
 
 	template <typename... Args>
-	static inline any_a val__(const function fun, Args&&... args)
+	static inline any_a val__(function const fun, Args&&... args)
 	{
 		std::vector<symbol_a> v;
 		v.reserve(sizeof...(Args));
@@ -31,7 +31,7 @@ public: ___THING___
 	}
 
 	template <typename... Args>
-	static inline any_a ref__(const function fun, Args&&... args)
+	static inline any_a ref__(function const fun, Args&&... args)
 	{
 		std::vector<symbol_a> v;
 		v.reserve(sizeof...(Args));
@@ -58,11 +58,11 @@ public: ___THING___
 	}
 
 protected:
-	const function _function;
-	const std::vector<symbol_a> _params;
+	function const _function;
+	std::vector<symbol_a> const _params;
 
 	template <typename F>
-	inline native_function_t(const function fun, F&& params)
+	inline native_function_t(function const fun, F&& params)
 		: thing_t{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }

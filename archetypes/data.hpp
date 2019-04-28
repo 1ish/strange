@@ -15,8 +15,8 @@ class data
 {
 public:
 	// data
-	inline const _1_& extract__() const;
-	inline void mutate__(const _1_& data);
+	inline _1_ const& extract__() const;
+	inline void mutate__(_1_ const& data);
 	inline _1_& reference__();
 };
 

@@ -18,9 +18,9 @@ namespace strange {
 
     public:
 
-     inline const _1_ & extract__ ( ) const
+     inline _1_ const & extract__ ( ) const
      { assert(handle_); return read().extract__( ); }
-     inline void mutate__ ( const _1_ & data )
+     inline void mutate__ ( _1_ const & data )
      { assert(handle_); write().mutate__(data ); }
      inline _1_ & reference__ ( )
      { assert(handle_); return write().reference__( ); }
@@ -32,8 +32,8 @@ namespace strange {
 
     	{
 
-      virtual inline const _1_ & extract__ ( ) const = 0;
-      virtual inline void mutate__ ( const _1_ & data ) = 0;
+      virtual inline _1_ const & extract__ ( ) const = 0;
+      virtual inline void mutate__ ( _1_ const & data ) = 0;
       virtual inline _1_ & reference__ ( ) = 0;
     	};
 
@@ -75,9 +75,9 @@ namespace strange {
 
     
 
-      virtual inline const _1_ & extract__ ( ) const
+      virtual inline _1_ const & extract__ ( ) const
       { return value_.extract__( ); }
-      virtual inline void mutate__ ( const _1_ & data )
+      virtual inline void mutate__ ( _1_ const & data )
       { value_.mutate__(data ); }
       virtual inline _1_ & reference__ ( )
       { return value_.reference__( ); }
@@ -103,11 +103,11 @@ namespace strange {
 
     
 
-    	inline const ___finale_handle_base___& read() const
+    	inline ___finale_handle_base___ const& read() const
 
     	{
 
-    		return *std::static_pointer_cast<const ___finale_handle_base___>(handle_);
+    		return *std::static_pointer_cast<___finale_handle_base___ const>(handle_);
 
     	}
 
@@ -135,13 +135,13 @@ namespace strange {
 
     	template <typename ___TTT___, typename ___1___>
 
-    	friend inline bool check_(const random_access_iterator_data_a<___1___>& value);
+    	friend inline bool check_(random_access_iterator_data_a<___1___> const& value);
 
     
 
     public:
 
-    	static inline const char* ___abstraction_name___()
+    	static inline char const* ___abstraction_name___()
 
     	{
 
@@ -151,7 +151,7 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& handle)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle)
 
     	{
 
@@ -173,7 +173,7 @@ namespace strange {
 
     
 
-    	inline random_access_iterator_data_a(const random_access_iterator_data_a& other, bool reference)
+    	inline random_access_iterator_data_a(random_access_iterator_data_a const& other, bool reference)
 
     		: ___derived___(other, reference)
 
@@ -191,7 +191,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline random_access_iterator_data_a(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+    	explicit inline random_access_iterator_data_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 
     		: ___derived___(handle, reference)
 
@@ -231,7 +231,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline random_access_iterator_data_a& operator=(const std::shared_ptr<___TTT___>& handle)
+    	inline random_access_iterator_data_a& operator=(std::shared_ptr<___TTT___> const& handle)
 
     	{
 
@@ -283,7 +283,7 @@ namespace strange {
 
     template <typename ___TTT___, typename ___1___>
 
-    inline bool check_(const random_access_iterator_data_a<___1___>& value)
+    inline bool check_(random_access_iterator_data_a<___1___> const& value)
 
     {
 

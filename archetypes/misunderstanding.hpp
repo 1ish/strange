@@ -14,7 +14,7 @@ class misunderstanding
 {
 public:
 	// misunderstanding
-	inline const std::string& to_string__() const;
+	inline std::string const& to_string__() const;
 
 	inline misunderstanding_a add(any_a range) const;
 	inline misunderstanding_a add_(misunderstanding_a misunderstanding) const;

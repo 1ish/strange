@@ -74,13 +74,13 @@ public: ___THING___
 		return _hash;
 	}
 
-	inline bool is__(const std::string& s) const
+	inline bool is__(std::string const& s) const
 	{
 		return s == _string;
 	}
 
 	// symbol
-	inline const std::string& to_string__() const
+	inline std::string const& to_string__() const
 	{
 		return _string;
 	}
@@ -88,7 +88,7 @@ public: ___THING___
 	inline symbol_a add(any_a range) const
 	{
 		std::string s = _string;
-		for (const any_a thing : range)
+		for (any_a const& thing : range)
 		{
 			if (check_<symbol_a>(thing))
 			{
@@ -109,8 +109,8 @@ public: ___THING___
 	}
 
 protected:
-	const std::string _string;
-	const std::size_t _hash;
+	std::string const _string;
+	std::size_t const _hash;
 
 	template <typename F>
 	inline symbol_t(F&& s)

@@ -18,7 +18,7 @@ namespace strange {
 
     public:
 
-     inline const std :: string & to_string__ ( ) const
+     inline std :: string const & to_string__ ( ) const
      { assert(handle_); return read().to_string__( ); }
      inline symbol_a add ( any_a range ) const
      { assert(handle_); return read().add(range ); }
@@ -34,7 +34,7 @@ namespace strange {
 
     	{
 
-      virtual inline const std :: string & to_string__ ( ) const = 0;
+      virtual inline std :: string const & to_string__ ( ) const = 0;
       virtual inline symbol_a add ( any_a range ) const = 0;
       virtual inline symbol_a add_ ( symbol_a symbol ) const = 0;
       virtual inline symbol_a operator + ( symbol_a symbol ) const = 0;
@@ -68,7 +68,7 @@ namespace strange {
 
     
 
-      virtual inline const std :: string & to_string__ ( ) const
+      virtual inline std :: string const & to_string__ ( ) const
       { return value_.to_string__( ); }
       virtual inline symbol_a add ( any_a range ) const
       { return value_.add(range ); }
@@ -156,11 +156,11 @@ namespace strange {
 
     
 
-    	inline const ___derived_handle_base___& read() const
+    	inline ___derived_handle_base___ const& read() const
 
     	{
 
-    		return *std::static_pointer_cast<const ___derived_handle_base___>(handle_);
+    		return *std::static_pointer_cast<___derived_handle_base___ const>(handle_);
 
     	}
 
@@ -188,13 +188,13 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(const symbol_a& value);
+    	friend inline bool check_(symbol_a const& value);
 
     
 
     public:
 
-    	static inline const char* ___abstraction_name___()
+    	static inline char const* ___abstraction_name___()
 
     	{
 
@@ -204,7 +204,7 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& handle)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle)
 
     	{
 
@@ -226,7 +226,7 @@ namespace strange {
 
     
 
-    	inline symbol_a(const symbol_a& other, bool reference)
+    	inline symbol_a(symbol_a const& other, bool reference)
 
     		: ___root___(other, reference)
 
@@ -244,7 +244,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline symbol_a(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+    	explicit inline symbol_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 
     		: ___root___(handle, reference)
 
@@ -278,7 +278,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline symbol_a& operator=(const std::shared_ptr<___TTT___>& handle)
+    	inline symbol_a& operator=(std::shared_ptr<___TTT___> const& handle)
 
     	{
 
@@ -318,7 +318,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(const symbol_a& value)
+    inline bool check_(symbol_a const& value)
 
     {
 

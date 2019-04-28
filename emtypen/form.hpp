@@ -71,7 +71,7 @@ private:
         {}
     };
 
-    const handle_base & read () const
+    handle_base const& read () const
     { return *handle_; }
 
     handle_base & write ()

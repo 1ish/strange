@@ -28,9 +28,9 @@ namespace strange {
      { assert(handle_); return write().insert__(index, value ); }
      inline bool erase__ ( int64_t index )
      { assert(handle_); return write().erase__(index ); }
-     inline const std :: vector < any_a > & extract__ ( ) const
+     inline std :: vector < any_a > const & extract__ ( ) const
      { assert(handle_); return read().extract__( ); }
-     inline void mutate__ ( const std :: vector < any_a > & data )
+     inline void mutate__ ( std :: vector < any_a > const & data )
      { assert(handle_); write().mutate__(data ); }
      inline std :: vector < any_a > & reference__ ( )
      { assert(handle_); return write().reference__( ); }
@@ -47,8 +47,8 @@ namespace strange {
       virtual inline void update__ ( int64_t index , any_a value ) = 0;
       virtual inline bool insert__ ( int64_t index , any_a value ) = 0;
       virtual inline bool erase__ ( int64_t index ) = 0;
-      virtual inline const std :: vector < any_a > & extract__ ( ) const = 0;
-      virtual inline void mutate__ ( const std :: vector < any_a > & data ) = 0;
+      virtual inline std :: vector < any_a > const & extract__ ( ) const = 0;
+      virtual inline void mutate__ ( std :: vector < any_a > const & data ) = 0;
       virtual inline std :: vector < any_a > & reference__ ( ) = 0;
     	};
 
@@ -100,9 +100,9 @@ namespace strange {
       { return value_.insert__(index, value ); }
       virtual inline bool erase__ ( int64_t index )
       { return value_.erase__(index ); }
-      virtual inline const std :: vector < any_a > & extract__ ( ) const
+      virtual inline std :: vector < any_a > const & extract__ ( ) const
       { return value_.extract__( ); }
-      virtual inline void mutate__ ( const std :: vector < any_a > & data )
+      virtual inline void mutate__ ( std :: vector < any_a > const & data )
       { value_.mutate__(data ); }
       virtual inline std :: vector < any_a > & reference__ ( )
       { return value_.reference__( ); }
@@ -128,11 +128,11 @@ namespace strange {
 
     
 
-    	inline const ___finale_handle_base___& read() const
+    	inline ___finale_handle_base___ const& read() const
 
     	{
 
-    		return *std::static_pointer_cast<const ___finale_handle_base___>(handle_);
+    		return *std::static_pointer_cast<___finale_handle_base___ const>(handle_);
 
     	}
 
@@ -160,13 +160,13 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(const flock_a& value);
+    	friend inline bool check_(flock_a const& value);
 
     
 
     public:
 
-    	static inline const char* ___abstraction_name___()
+    	static inline char const* ___abstraction_name___()
 
     	{
 
@@ -176,7 +176,7 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& handle)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle)
 
     	{
 
@@ -198,7 +198,7 @@ namespace strange {
 
     
 
-    	inline flock_a(const flock_a& other, bool reference)
+    	inline flock_a(flock_a const& other, bool reference)
 
     		: ___derived___(other, reference)
 
@@ -216,7 +216,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline flock_a(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+    	explicit inline flock_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 
     		: ___derived___(handle, reference)
 
@@ -256,7 +256,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline flock_a& operator=(const std::shared_ptr<___TTT___>& handle)
+    	inline flock_a& operator=(std::shared_ptr<___TTT___> const& handle)
 
     	{
 
@@ -308,7 +308,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(const flock_a& value)
+    inline bool check_(flock_a const& value)
 
     {
 

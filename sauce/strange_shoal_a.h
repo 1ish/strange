@@ -18,19 +18,19 @@ namespace strange {
 
     public:
 
-     inline bool has__ ( const std :: string & s ) const
+     inline bool has__ ( std :: string const & s ) const
      { assert(handle_); return read().has__(s ); }
-     inline any_a at__ ( const std :: string & s ) const
+     inline any_a at__ ( std :: string const & s ) const
      { assert(handle_); return read().at__(s ); }
-     inline void update__ ( const std :: string & s , any_a value )
+     inline void update__ ( std :: string const & s , any_a value )
      { assert(handle_); write().update__(s, value ); }
-     inline bool insert__ ( const std :: string & s , any_a value )
+     inline bool insert__ ( std :: string const & s , any_a value )
      { assert(handle_); return write().insert__(s, value ); }
-     inline bool erase__ ( const std :: string & s )
+     inline bool erase__ ( std :: string const & s )
      { assert(handle_); return write().erase__(s ); }
-     inline const std :: unordered_map < any_a , any_a , any_a :: hash_f > & extract__ ( ) const
+     inline std :: unordered_map < any_a , any_a , any_a :: hash_f > const & extract__ ( ) const
      { assert(handle_); return read().extract__( ); }
-     inline void mutate__ ( const std :: unordered_map < any_a , any_a , any_a :: hash_f > & data )
+     inline void mutate__ ( std :: unordered_map < any_a , any_a , any_a :: hash_f > const & data )
      { assert(handle_); write().mutate__(data ); }
      inline std :: unordered_map < any_a , any_a , any_a :: hash_f > & reference__ ( )
      { assert(handle_); return write().reference__( ); }
@@ -42,13 +42,13 @@ namespace strange {
 
     	{
 
-      virtual inline bool has__ ( const std :: string & s ) const = 0;
-      virtual inline any_a at__ ( const std :: string & s ) const = 0;
-      virtual inline void update__ ( const std :: string & s , any_a value ) = 0;
-      virtual inline bool insert__ ( const std :: string & s , any_a value ) = 0;
-      virtual inline bool erase__ ( const std :: string & s ) = 0;
-      virtual inline const std :: unordered_map < any_a , any_a , any_a :: hash_f > & extract__ ( ) const = 0;
-      virtual inline void mutate__ ( const std :: unordered_map < any_a , any_a , any_a :: hash_f > & data ) = 0;
+      virtual inline bool has__ ( std :: string const & s ) const = 0;
+      virtual inline any_a at__ ( std :: string const & s ) const = 0;
+      virtual inline void update__ ( std :: string const & s , any_a value ) = 0;
+      virtual inline bool insert__ ( std :: string const & s , any_a value ) = 0;
+      virtual inline bool erase__ ( std :: string const & s ) = 0;
+      virtual inline std :: unordered_map < any_a , any_a , any_a :: hash_f > const & extract__ ( ) const = 0;
+      virtual inline void mutate__ ( std :: unordered_map < any_a , any_a , any_a :: hash_f > const & data ) = 0;
       virtual inline std :: unordered_map < any_a , any_a , any_a :: hash_f > & reference__ ( ) = 0;
     	};
 
@@ -90,19 +90,19 @@ namespace strange {
 
     
 
-      virtual inline bool has__ ( const std :: string & s ) const
+      virtual inline bool has__ ( std :: string const & s ) const
       { return value_.has__(s ); }
-      virtual inline any_a at__ ( const std :: string & s ) const
+      virtual inline any_a at__ ( std :: string const & s ) const
       { return value_.at__(s ); }
-      virtual inline void update__ ( const std :: string & s , any_a value )
+      virtual inline void update__ ( std :: string const & s , any_a value )
       { value_.update__(s, value ); }
-      virtual inline bool insert__ ( const std :: string & s , any_a value )
+      virtual inline bool insert__ ( std :: string const & s , any_a value )
       { return value_.insert__(s, value ); }
-      virtual inline bool erase__ ( const std :: string & s )
+      virtual inline bool erase__ ( std :: string const & s )
       { return value_.erase__(s ); }
-      virtual inline const std :: unordered_map < any_a , any_a , any_a :: hash_f > & extract__ ( ) const
+      virtual inline std :: unordered_map < any_a , any_a , any_a :: hash_f > const & extract__ ( ) const
       { return value_.extract__( ); }
-      virtual inline void mutate__ ( const std :: unordered_map < any_a , any_a , any_a :: hash_f > & data )
+      virtual inline void mutate__ ( std :: unordered_map < any_a , any_a , any_a :: hash_f > const & data )
       { value_.mutate__(data ); }
       virtual inline std :: unordered_map < any_a , any_a , any_a :: hash_f > & reference__ ( )
       { return value_.reference__( ); }
@@ -128,11 +128,11 @@ namespace strange {
 
     
 
-    	inline const ___finale_handle_base___& read() const
+    	inline ___finale_handle_base___ const& read() const
 
     	{
 
-    		return *std::static_pointer_cast<const ___finale_handle_base___>(handle_);
+    		return *std::static_pointer_cast<___finale_handle_base___ const>(handle_);
 
     	}
 
@@ -160,13 +160,13 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(const shoal_a& value);
+    	friend inline bool check_(shoal_a const& value);
 
     
 
     public:
 
-    	static inline const char* ___abstraction_name___()
+    	static inline char const* ___abstraction_name___()
 
     	{
 
@@ -176,7 +176,7 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& handle)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle)
 
     	{
 
@@ -198,7 +198,7 @@ namespace strange {
 
     
 
-    	inline shoal_a(const shoal_a& other, bool reference)
+    	inline shoal_a(shoal_a const& other, bool reference)
 
     		: ___derived___(other, reference)
 
@@ -216,7 +216,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline shoal_a(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+    	explicit inline shoal_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 
     		: ___derived___(handle, reference)
 
@@ -256,7 +256,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline shoal_a& operator=(const std::shared_ptr<___TTT___>& handle)
+    	inline shoal_a& operator=(std::shared_ptr<___TTT___> const& handle)
 
     	{
 
@@ -308,7 +308,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(const shoal_a& value)
+    inline bool check_(shoal_a const& value)
 
     {
 

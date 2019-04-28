@@ -143,10 +143,10 @@ public: ___THING___
 	}
 
 protected:
-	const symbol_a _name;
-	const any_a _arguments;
-	const any_a _parameters;
-	const any_a _result;
+	symbol_a const _name;
+	any_a const _arguments;
+	any_a const _parameters;
+	any_a const _result;
 
 	inline cat_t()
 		: symbol_t{ _symbol_() }
@@ -156,7 +156,7 @@ protected:
 		, _result{ nothing_t<>::val_() }
 	{}
 
-	static inline const std::string _symbol_()
+	static inline std::string const _symbol_()
 	{
 		return "";
 	}

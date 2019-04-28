@@ -64,7 +64,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 
 		inline std::size_t hash__() const
 		{
-			return std::hash<const void*>{}(&*_it);
+			return std::hash<void const*>{}(&*_it);
 		}
 
 		// iterator
@@ -94,12 +94,12 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		}
 
 		// data
-		inline const ITERATOR& extract__() const
+		inline ITERATOR const& extract__() const
 		{
 			return _it;
 		}
 
-		inline void mutate__(const ITERATOR& it)
+		inline void mutate__(ITERATOR const& it)
 		{
 			_it = it;
 		}
@@ -201,14 +201,14 @@ public: ___COLLECTION___
 	inline std::size_t hash__() const
 	{
 		std::map<any_a, std::size_t> ordered;
-		for (const auto& pair : _map)
+		for (auto const& pair : _map)
 		{
 			std::size_t seed = pair.first.hash__();
 			seed ^= pair.second.hash__() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 			ordered.emplace(pair.first, seed);
 		}
 		std::size_t seed = std::hash<std::size_t>{}(_map.size());
-		for (const auto& pair : ordered)
+		for (auto const& pair : ordered)
 		{
 			seed ^= pair.second + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
@@ -239,18 +239,18 @@ public: ___COLLECTION___
 	// collection
 	inline bool has__(any_a key) const
 	{
-		const std_unordered_map_any_any::const_iterator it = _map.find(std::move(key));
+		std_unordered_map_any_any::const_iterator const it = _map.find(std::move(key));
 		return it != _map.cend();
 	}
 
-	inline bool has__(const std::string& s) const
+	inline bool has__(std::string const& s) const
 	{
 		return has__(sym__(s));
 	}
 
 	inline any_a at_(any_a key) const
 	{
-		const std_unordered_map_any_any::const_iterator it = _map.find(std::move(key));
+		std_unordered_map_any_any::const_iterator const it = _map.find(std::move(key));
 		if (it == _map.cend())
 		{
 			return nothing_t<>::val_();
@@ -258,7 +258,7 @@ public: ___COLLECTION___
 		return it->second;
 	}
 
-	inline any_a at__(const std::string& s) const
+	inline any_a at__(std::string const& s) const
 	{
 		return at_(sym__(s));
 	}
@@ -268,7 +268,7 @@ public: ___COLLECTION___
 		return _map[std::move(key)] = std::move(value);
 	}
 
-	inline void update__(const std::string& s, any_a value)
+	inline void update__(std::string const& s, any_a value)
 	{
 		_map[sym__(s)] = std::move(value);
 	}
@@ -278,7 +278,7 @@ public: ___COLLECTION___
 		return _map.emplace(std::move(key), std::move(value)).second;
 	}
 
-	inline bool insert__(const std::string& s, any_a value)
+	inline bool insert__(std::string const& s, any_a value)
 	{
 		return insert__(sym__(s), std::move(value));
 	}
@@ -288,7 +288,7 @@ public: ___COLLECTION___
 		return _map.erase(std::move(key));
 	}
 
-	inline bool erase__(const std::string& s)
+	inline bool erase__(std::string const& s)
 	{
 		return _map.erase(sym__(s));
 	}
@@ -325,7 +325,7 @@ public: ___COLLECTION___
 
 	inline any_a pop_back_()
 	{
-		const std_unordered_map_any_any::const_iterator it = _map.cbegin();
+		std_unordered_map_any_any::const_iterator const it = _map.cbegin();
 		if (it == _map.cend())
 		{
 			return nothing_t<>::val_();
@@ -354,12 +354,12 @@ public: ___COLLECTION___
 	}
 
 	// data
-	inline const std_unordered_map_any_any& extract__() const
+	inline std_unordered_map_any_any const& extract__() const
 	{
 		return _map;
 	}
 
-	inline void mutate__(const std_unordered_map_any_any& data)
+	inline void mutate__(std_unordered_map_any_any const& data)
 	{
 		_map = data;
 	}

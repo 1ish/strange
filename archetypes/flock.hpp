@@ -21,8 +21,8 @@ public:
 	inline bool erase__(int64_t index);
 
 	// data
-	inline const std::vector<any_a>& extract__() const;
-	inline void mutate__(const std::vector<any_a>& data);
+	inline std::vector<any_a> const& extract__() const;
+	inline void mutate__(std::vector<any_a> const& data);
 	inline std::vector<any_a>& reference__();
 };
 

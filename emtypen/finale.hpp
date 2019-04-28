@@ -39,9 +39,9 @@ private:
 		{}
 	};
 
-	inline const ___finale_handle_base___& read() const
+	inline ___finale_handle_base___ const& read() const
 	{
-		return *std::static_pointer_cast<const ___finale_handle_base___>(handle_);
+		return *std::static_pointer_cast<___finale_handle_base___ const>(handle_);
 	}
 
 	inline ___finale_handle_base___& write()
@@ -55,15 +55,15 @@ private:
 	}
 
 	template <typename ___TTT___>
-	friend inline bool check_(const %struct_name%_a& value);
+	friend inline bool check_(%struct_name%_a const& value);
 
 public:
-	static inline const char* ___abstraction_name___()
+	static inline char const* ___abstraction_name___()
 	{
 		return "%struct_name%";
 	}
 
-	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& handle)
+	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle)
 	{
 		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 	}
@@ -74,7 +74,7 @@ public:
 		: ___derived___{ reference }
 	{}
 
-	inline %struct_name%_a(const %struct_name%_a& other, bool reference)
+	inline %struct_name%_a(%struct_name%_a const& other, bool reference)
 		: ___derived___(other, reference)
 	{}
 
@@ -83,7 +83,7 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	explicit inline %struct_name%_a(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+	explicit inline %struct_name%_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 		: ___derived___(handle, reference)
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -103,7 +103,7 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	inline %struct_name%_a& operator=(const std::shared_ptr<___TTT___>& handle)
+	inline %struct_name%_a& operator=(std::shared_ptr<___TTT___> const& handle)
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
@@ -129,7 +129,7 @@ public:
 };
 
 template <typename ___TTT___>
-inline bool check_(const %struct_name%_a& value)
+inline bool check_(%struct_name%_a const& value)
 {
 	return ___TTT___::___check___(value.handle_);
 }

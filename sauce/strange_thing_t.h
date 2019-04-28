@@ -9,7 +9,7 @@ class thing_t : public one_t
 {
 public:
 	// erasure
-	inline const _ABSTRACTION_ me_() const
+	inline _ABSTRACTION_ const me_() const
 	{
 		return _ABSTRACTION_(_meek.lock(), true);
 	}

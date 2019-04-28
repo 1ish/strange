@@ -14,14 +14,14 @@ class herd
 {
 public:
 	// herd
-	inline bool has__(const std::string& s) const;
-	inline bool at__(const std::string& s) const;
-	inline bool insert__(const std::string& s);
-	inline bool erase__(const std::string& s);
+	inline bool has__(std::string const& s) const;
+	inline bool at__(std::string const& s) const;
+	inline bool insert__(std::string const& s);
+	inline bool erase__(std::string const& s);
 
 	// data
-	inline const std::unordered_set<any_a, any_a::hash_f>& extract__() const;
-	inline void mutate__(const std::unordered_set<any_a, any_a::hash_f>& data);
+	inline std::unordered_set<any_a, any_a::hash_f> const& extract__() const;
+	inline void mutate__(std::unordered_set<any_a, any_a::hash_f> const& data);
 	inline std::unordered_set<any_a, any_a::hash_f>& reference__();
 };
 

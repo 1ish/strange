@@ -75,7 +75,7 @@ public: ___THING___
 	}
 
 	// misunderstanding
-	inline const std::string& to_string__() const
+	inline std::string const& to_string__() const
 	{
 		return _string;
 	}
@@ -83,7 +83,7 @@ public: ___THING___
 	inline misunderstanding_a add(any_a range) const
 	{
 		std::string s = _string;
-		for (const any_a thing : range)
+		for (any_a const& thing : range)
 		{
 			if (check_<misunderstanding_a>(thing))
 			{
@@ -104,7 +104,7 @@ public: ___THING___
 	}
 
 protected:
-	const std::string _string;
+	std::string const _string;
 
 	template <typename F>
 	inline misunderstanding_t(F&& s)

@@ -14,7 +14,7 @@ class symbol
 {
 public:
 	// symbol
-	inline const std::string& to_string__() const;
+	inline std::string const& to_string__() const;
 
 	inline symbol_a add(any_a range) const;
 	inline symbol_a add_(symbol_a symbol) const;

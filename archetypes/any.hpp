@@ -50,7 +50,7 @@ public:
 	inline any_a operator()(any_a thing, any_a range) const;
 
 	// identification
-	inline const void* identity__() const;
+	inline void const* identity__() const;
 
 	inline any_a identical(any_a range) const;
 	inline any_a identical_(any_a thing) const;
@@ -85,7 +85,7 @@ public:
 	inline any_a hash_() const;
 	inline std::size_t hash__() const;
 
-	inline bool is__(const std::string& s) const;
+	inline bool is__(std::string const& s) const;
 
 	// range
 	inline any_a beget(any_a _) const;

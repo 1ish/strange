@@ -64,7 +64,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 
 		inline std::size_t hash__() const
 		{
-			return std::hash<const void*>{}(&*_it);
+			return std::hash<void const*>{}(&*_it);
 		}
 
 		// iterator
@@ -87,12 +87,12 @@ class herd_t : public something_t<_ABSTRACTION_>
 		}
 
 		// data
-		inline const ITERATOR& extract__() const
+		inline ITERATOR const& extract__() const
 		{
 			return _it;
 		}
 
-		inline void mutate__(const ITERATOR& it)
+		inline void mutate__(ITERATOR const& it)
 		{
 			_it = it;
 		}
@@ -189,9 +189,9 @@ public: ___COLLECTION___
 
 	inline std::size_t hash__() const
 	{
-		const std::set<any_a> ordered(_set.cbegin(), _set.cend());
+		std::set<any_a> const ordered(_set.cbegin(), _set.cend());
 		std::size_t seed = std::hash<std::size_t>{}(_set.size());
-		for (const auto& item : ordered)
+		for (auto const& item : ordered)
 		{
 			seed ^= item.hash__() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
@@ -222,18 +222,18 @@ public: ___COLLECTION___
 	// collection
 	inline bool has__(any_a key) const
 	{
-		const std_unordered_set_any::const_iterator it = _set.find(std::move(key));
+		std_unordered_set_any::const_iterator const it = _set.find(std::move(key));
 		return it != _set.cend();
 	}
 
-	inline bool has__(const std::string& s) const
+	inline bool has__(std::string const& s) const
 	{
 		return has__(sym__(s));
 	}
 
 	inline any_a at_(any_a key) const
 	{
-		const std_unordered_set_any::const_iterator it = _set.find(std::move(key));
+		std_unordered_set_any::const_iterator const it = _set.find(std::move(key));
 		if (it == _set.cend())
 		{
 			return nothing_t<>::val_();
@@ -241,9 +241,9 @@ public: ___COLLECTION___
 		return *it;
 	}
 
-	inline bool at__(const std::string& s) const
+	inline bool at__(std::string const& s) const
 	{
-		const std_unordered_set_any::const_iterator it = _set.find(sym__(s));
+		std_unordered_set_any::const_iterator const it = _set.find(sym__(s));
 		return it != _set.cend();
 	}
 
@@ -258,7 +258,7 @@ public: ___COLLECTION___
 		return _set.insert(std::move(key)).second;
 	}
 
-	inline bool insert__(const std::string& s)
+	inline bool insert__(std::string const& s)
 	{
 		return _set.insert(sym__(s)).second;
 	}
@@ -268,7 +268,7 @@ public: ___COLLECTION___
 		return _set.erase(std::move(key));
 	}
 
-	inline bool erase__(const std::string& s)
+	inline bool erase__(std::string const& s)
 	{
 		return _set.erase(sym__(s));
 	}
@@ -305,7 +305,7 @@ public: ___COLLECTION___
 
 	inline any_a pop_back_()
 	{
-		const std_unordered_set_any::const_iterator it = _set.cbegin();
+		std_unordered_set_any::const_iterator const it = _set.cbegin();
 		if (it == _set.cend())
 		{
 			return nothing_t<>::val_();
@@ -334,12 +334,12 @@ public: ___COLLECTION___
 	}
 
 	// data
-	inline const std_unordered_set_any& extract__() const
+	inline std_unordered_set_any const& extract__() const
 	{
 		return _set;
 	}
 
-	inline void mutate__(const std_unordered_set_any& data)
+	inline void mutate__(std_unordered_set_any const& data)
 	{
 		_set = data;
 	}

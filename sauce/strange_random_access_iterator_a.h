@@ -256,11 +256,11 @@ namespace strange {
 
     
 
-    	inline const ___derived_handle_base___& read() const
+    	inline ___derived_handle_base___ const& read() const
 
     	{
 
-    		return *std::static_pointer_cast<const ___derived_handle_base___>(handle_);
+    		return *std::static_pointer_cast<___derived_handle_base___ const>(handle_);
 
     	}
 
@@ -288,13 +288,13 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(const random_access_iterator_a& value);
+    	friend inline bool check_(random_access_iterator_a const& value);
 
     
 
     public:
 
-    	static inline const char* ___abstraction_name___()
+    	static inline char const* ___abstraction_name___()
 
     	{
 
@@ -304,7 +304,7 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& handle)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle)
 
     	{
 
@@ -326,7 +326,7 @@ namespace strange {
 
     
 
-    	inline random_access_iterator_a(const random_access_iterator_a& other, bool reference)
+    	inline random_access_iterator_a(random_access_iterator_a const& other, bool reference)
 
     		: ___root___(other, reference)
 
@@ -344,7 +344,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline random_access_iterator_a(const std::shared_ptr<___TTT___>& handle, bool reference = false)
+    	explicit inline random_access_iterator_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 
     		: ___root___(handle, reference)
 
@@ -378,7 +378,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline random_access_iterator_a& operator=(const std::shared_ptr<___TTT___>& handle)
+    	inline random_access_iterator_a& operator=(std::shared_ptr<___TTT___> const& handle)
 
     	{
 
@@ -418,7 +418,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(const random_access_iterator_a& value)
+    inline bool check_(random_access_iterator_a const& value)
 
     {
 
