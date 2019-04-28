@@ -347,7 +347,7 @@ public: ___COLLECTION___
 
 	inline shoal_t& operator+=(any_a range)
 	{
-		for (auto thing : range)
+		for (auto const& thing : range)
 		{
 			insert(std::move(thing));
 		}
@@ -356,7 +356,7 @@ public: ___COLLECTION___
 
 	inline shoal_t& operator-=(any_a range)
 	{
-		for (auto thing : range)
+		for (auto const& thing : range)
 		{
 			erase(std::move(thing));
 		}

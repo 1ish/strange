@@ -111,7 +111,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline _ABSTRACTION_ self_add(any_a range)
 		{
-			for (auto thing : range)
+			for (auto const& thing : range)
 			{
 				operator+=(std::move(thing));
 			}
@@ -137,7 +137,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		inline random_access_iterator_a add(any_a range) const
 		{
 			random_access_iterator_a result = me_();
-			for (auto thing : range)
+			for (auto const& thing : range)
 			{
 				result += std::move(thing);
 			}
@@ -158,7 +158,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline _ABSTRACTION_ self_subtract(any_a range)
 		{
-			for (auto thing : range)
+			for (auto const& thing : range)
 			{
 				operator-=(std::move(thing));
 			}
@@ -184,7 +184,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		inline random_access_iterator_a subtract(any_a range) const
 		{
 			random_access_iterator_a result = me_();
-			for (auto thing : range)
+			for (auto const& thing : range)
 			{
 				result -= std::move(thing);
 			}
@@ -608,7 +608,7 @@ public: ___COLLECTION___
 
 	inline flock_t& operator+=(any_a range)
 	{
-		for (auto thing : range)
+		for (auto const& thing : range)
 		{
 			insert(std::move(thing));
 		}
@@ -617,7 +617,7 @@ public: ___COLLECTION___
 
 	inline flock_t& operator-=(any_a range)
 	{
-		for (auto thing : range)
+		for (auto const& thing : range)
 		{
 			erase(std::move(thing));
 		}
