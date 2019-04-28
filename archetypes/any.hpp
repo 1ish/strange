@@ -91,6 +91,7 @@ public:
 	inline any_a beget(any_a const& _) const;
 	inline any_a beget_() const;
 	inline any_a cbegin() const;
+	inline any_a begin() const;
 
 	inline any_a beset(any_a const& _);
 	inline any_a beset_();
@@ -99,6 +100,7 @@ public:
 	inline any_a enget(any_a const& _) const;
 	inline any_a enget_() const;
 	inline any_a cend() const;
+	inline any_a end() const;
 
 	inline any_a enset(any_a const& _);
 	inline any_a enset_();

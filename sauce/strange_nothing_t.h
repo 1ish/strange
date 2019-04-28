@@ -107,12 +107,22 @@ public: ___THING___
 		return it_t<true, any_a, everything_t<>>::val_(nothing_t<>::val_());
 	}
 
+	inline any_a begin() const
+	{
+		return it_t<true, any_a, everything_t<>>::val_(nothing_t<>::val_());
+	}
+
 	inline any_a begin()
 	{
 		return it_t<false, any_a, everything_t<>>::val_(nothing_t<>::val_());
 	}
 
 	inline any_a cend() const
+	{
+		return everything_t<>::val_();
+	}
+
+	inline any_a end() const
 	{
 		return everything_t<>::val_();
 	}

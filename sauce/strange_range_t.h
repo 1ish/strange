@@ -62,12 +62,22 @@ public: ___THING___
 		return _begin;
 	}
 
+	inline any_a begin() const
+	{
+		return _begin;
+	}
+
 	inline any_a begin()
 	{
 		return _begin;
 	}
 
 	inline any_a cend() const
+	{
+		return _end;
+	}
+
+	inline any_a end() const
 	{
 		return _end;
 	}

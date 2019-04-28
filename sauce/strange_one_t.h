@@ -8,9 +8,9 @@ class one_t
 {
 public:
 	// erasure
-	inline void ___weak___(any_a::___WEAK___ weak) const
+	inline void ___weak___(any_a::___WEAK___ const& weak) const
 	{
-		_meek = std::move(weak);
+		_meek = weak;
 	}
 
 	// conversion
@@ -25,7 +25,7 @@ public:
 		return this;
 	}
 
-	inline bool identical__(any_a thing) const
+	inline bool identical__(any_a const& thing) const
 	{
 		return thing.identity__() == identity__();
 	}
@@ -51,14 +51,14 @@ public:
 		return false;
 	}
 
-	inline bool operator==(any_a thing) const
+	inline bool operator==(any_a const& thing) const
 	{
-		return identical__(std::move(thing));
+		return identical__(thing);
 	}
 
-	inline bool operator!=(any_a thing) const
+	inline bool operator!=(any_a const& thing) const
 	{
-		return !identical__(std::move(thing));
+		return !identical__(thing);
 	}
 
 	inline std::size_t hash__() const

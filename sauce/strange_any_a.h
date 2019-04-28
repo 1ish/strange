@@ -266,6 +266,8 @@ namespace strange {
      { assert(handle_); return read().beget_( ); }
      inline any_a cbegin ( ) const
      { assert(handle_); return read().cbegin( ); }
+     inline any_a begin ( ) const
+     { assert(handle_); return read().begin( ); }
      inline any_a beset ( any_a const & _ )
      { assert(handle_); return write().beset(_ ); }
      inline any_a beset_ ( )
@@ -278,6 +280,8 @@ namespace strange {
      { assert(handle_); return read().enget_( ); }
      inline any_a cend ( ) const
      { assert(handle_); return read().cend( ); }
+     inline any_a end ( ) const
+     { assert(handle_); return read().end( ); }
      inline any_a enset ( any_a const & _ )
      { assert(handle_); return write().enset(_ ); }
      inline any_a enset_ ( )
@@ -406,12 +410,14 @@ namespace strange {
       virtual inline any_a beget ( any_a const & _ ) const = 0;
       virtual inline any_a beget_ ( ) const = 0;
       virtual inline any_a cbegin ( ) const = 0;
+      virtual inline any_a begin ( ) const = 0;
       virtual inline any_a beset ( any_a const & _ ) = 0;
       virtual inline any_a beset_ ( ) = 0;
       virtual inline any_a begin ( ) = 0;
       virtual inline any_a enget ( any_a const & _ ) const = 0;
       virtual inline any_a enget_ ( ) const = 0;
       virtual inline any_a cend ( ) const = 0;
+      virtual inline any_a end ( ) const = 0;
       virtual inline any_a enset ( any_a const & _ ) = 0;
       virtual inline any_a enset_ ( ) = 0;
       virtual inline any_a end ( ) = 0;
@@ -631,6 +637,8 @@ namespace strange {
       { return value_.beget_( ); }
       virtual inline any_a cbegin ( ) const
       { return value_.cbegin( ); }
+      virtual inline any_a begin ( ) const
+      { return value_.begin( ); }
       virtual inline any_a beset ( any_a const & _ )
       { return value_.beset(_ ); }
       virtual inline any_a beset_ ( )
@@ -643,6 +651,8 @@ namespace strange {
       { return value_.enget_( ); }
       virtual inline any_a cend ( ) const
       { return value_.cend( ); }
+      virtual inline any_a end ( ) const
+      { return value_.end( ); }
       virtual inline any_a enset ( any_a const & _ )
       { return value_.enset(_ ); }
       virtual inline any_a enset_ ( )

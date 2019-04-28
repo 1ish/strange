@@ -436,12 +436,22 @@ public: ___COLLECTION___
 		return iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cbegin());
 	}
 
+	inline any_a begin() const
+	{
+		return iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cbegin());
+	}
+
 	inline any_a begin()
 	{
 		return iterator_t<std_vector_any::iterator>::val__(me_(), _vector.begin());
 	}
 
 	inline any_a cend() const
+	{
+		return iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cend());
+	}
+
+	inline any_a end() const
 	{
 		return iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cend());
 	}

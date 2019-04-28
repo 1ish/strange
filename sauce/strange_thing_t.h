@@ -31,13 +31,13 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a feeder(any_a range)
+	static inline any_a feeder(any_a const& range)
 	{
 		return nothing_t<>::val_();
 	}
 
 	// visitor pattern
-	static inline any_a visit(any_a range)
+	static inline any_a visit(any_a const& range)
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -49,7 +49,7 @@ public:
 	}
 
 	// function
-	inline any_a invoke(any_a range) const
+	inline any_a invoke(any_a const& range) const
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -57,19 +57,19 @@ public:
 			throw dis__("strange::thing::invoke passed empty range");
 		}
 		any_a member = *it;
-		return invoke_(std::move(member), range_t<>::val_(++it, range.cend()));
+		return invoke_(member, range_t<>::val_(++it, range.cend()));
 	}
 
-	inline any_a invoke_(any_a member, any_a range) const
+	inline any_a invoke_(any_a const& member, any_a const& range) const
 	{
 		//TODO
 		// thing = me_();
-		// operation = thing.operations_().at(std::move(member));
-		// return operate_(std::move(thing), std::move(operation), std::move(range));
+		// operation = thing.operations_().at(member);
+		// return operate_(thing, operation, range);
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a operate(any_a range)
+	static inline any_a operate(any_a const& range)
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -82,16 +82,16 @@ public:
 			throw dis__("strange::thing::visit passed short range");
 		}
 		any_a operation = *it;
-		return operate_(std::move(thing), std::move(operation), range_t<>::val_(++it, range.cend()));
+		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
 	}
 
-	static inline any_a operate_(any_a thing, any_a operation, any_a range)
+	static inline any_a operate_(any_a const& thing, any_a const& operation, any_a const& range)
 	{
-		return operation.operator()(std::move(thing), std::move(range));
+		return operation.operator()(thing, range);
 	}
 
 	// identification
-	inline any_a identical(any_a range) const
+	inline any_a identical(any_a const& range) const
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -101,13 +101,13 @@ public:
 		return identical_(*it);
 	}
 
-	inline any_a identical_(any_a thing) const
+	inline any_a identical_(any_a const& thing) const
 	{
-		return _boole_(identical__(std::move(thing)));
+		return _boole_(identical__(thing));
 	}
 
 	// comparison
-	static inline any_a nothing(any_a)
+	static inline any_a nothing(any_a const&)
 	{
 		return nothing_();
 	}
@@ -117,7 +117,7 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a anything(any_a)
+	static inline any_a anything(any_a const&)
 	{
 		return anything_();
 	}
@@ -127,7 +127,7 @@ public:
 		return everything_t<>::val_();
 	}
 
-	static inline any_a something(any_a)
+	static inline any_a something(any_a const&)
 	{
 		return something_();
 	}
@@ -137,7 +137,7 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a everything(any_a)
+	static inline any_a everything(any_a const&)
 	{
 		return everything_();
 	}
@@ -153,12 +153,22 @@ public:
 		return it_t<true>::val_(me_());
 	}
 
+	inline any_a begin() const
+	{
+		return it_t<true>::val_(me_());
+	}
+
 	inline any_a begin()
 	{
 		return it_t<>::val_(me_());
 	}
 
 	inline any_a cend() const
+	{
+		return nothing_t<>::val_();
+	}
+
+	inline any_a end() const
 	{
 		return nothing_t<>::val_();
 	}
@@ -186,19 +196,19 @@ public:
 	inline void operator--(int)
 	{}
 
-	inline void operator+=(any_a other)
+	inline void operator+=(any_a const& other)
 	{}
 
-	inline void operator-=(any_a other)
+	inline void operator-=(any_a const& other)
 	{}
 
-	inline void operator*=(any_a other)
+	inline void operator*=(any_a const& other)
 	{}
 
-	inline void operator/=(any_a other)
+	inline void operator/=(any_a const& other)
 	{}
 
-	inline void operator%=(any_a other)
+	inline void operator%=(any_a const& other)
 	{}
 
 protected:
@@ -216,19 +226,19 @@ protected:
 
 // adaptation
 #define ___THING___ \
-inline symbol_a type(any_a) const \
+inline symbol_a type(any_a const&) const \
 { \
 	return type_(); \
 } \
-inline cat_a cat(any_a) const \
+inline cat_a cat(any_a const&) const \
 { \
 	return cat_(); \
 } \
-inline any_a eater(any_a) const \
+inline any_a eater(any_a const&) const \
 { \
 	return eater_(); \
 } \
-inline any_a same(any_a range) const \
+inline any_a same(any_a const& range) const \
 { \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -237,11 +247,11 @@ inline any_a same(any_a range) const \
 	} \
 	return same_(*it); \
 } \
-inline any_a same_(any_a thing) const \
+inline any_a same_(any_a const& thing) const \
 { \
-	return _boole_(operator==(std::move(thing))); \
+	return _boole_(operator==(thing)); \
 } \
-inline any_a different(any_a range) const \
+inline any_a different(any_a const& range) const \
 { \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -250,11 +260,11 @@ inline any_a different(any_a range) const \
 	} \
 	return different_(*it); \
 } \
-inline any_a different_(any_a thing) const \
+inline any_a different_(any_a const& thing) const \
 { \
-	return _boole_(operator!=(std::move(thing))); \
+	return _boole_(operator!=(thing)); \
 } \
-inline any_a hash(any_a) const \
+inline any_a hash(any_a const&) const \
 { \
 	return hash_(); \
 } \
@@ -262,7 +272,7 @@ inline any_a hash_() const \
 { \
 	return everything_t<>::val_(); /* //TODO */ \
 } \
-inline any_a beget(any_a) const \
+inline any_a beget(any_a const&) const \
 { \
 	return beget_(); \
 } \
@@ -270,7 +280,7 @@ inline any_a beget_() const \
 { \
 	return cbegin(); \
 } \
-inline any_a beset(any_a) \
+inline any_a beset(any_a const&) \
 { \
 	return beset_(); \
 } \
@@ -278,7 +288,7 @@ inline any_a beset_() \
 { \
 	return begin(); \
 } \
-inline any_a enget(any_a) const \
+inline any_a enget(any_a const&) const \
 { \
 	return enget_(); \
 } \
@@ -286,7 +296,7 @@ inline any_a enget_() const \
 { \
 	return cend(); \
 } \
-inline any_a enset(any_a) \
+inline any_a enset(any_a const&) \
 { \
 	return enset_(); \
 } \
@@ -294,7 +304,7 @@ inline any_a enset_() \
 { \
 	return end(); \
 } \
-inline any_a get(any_a) const \
+inline any_a get(any_a const&) const \
 { \
 	return get_(); \
 } \
@@ -302,7 +312,7 @@ inline any_a get_() const \
 { \
 	return operator*(); \
 } \
-inline any_a set(any_a range) const \
+inline any_a set(any_a const& range) const \
 { \
 	any_a it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -311,15 +321,15 @@ inline any_a set(any_a range) const \
 	} \
 	return set_(*it); \
 } \
-inline any_a set_(any_a thing) const \
+inline any_a set_(any_a const& thing) const \
 { \
-	return operator*() = std::move(thing); \
+	return operator*() = thing; \
 } \
 inline any_a* operator->() const \
 { \
 	return &operator*(); \
 } \
-inline _ABSTRACTION_ increment(any_a) \
+inline _ABSTRACTION_ increment(any_a const&) \
 { \
 	return increment_(); \
 } \

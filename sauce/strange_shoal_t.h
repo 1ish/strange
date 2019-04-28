@@ -221,12 +221,22 @@ public: ___COLLECTION___
 		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cbegin());
 	}
 
+	inline any_a begin() const
+	{
+		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cbegin());
+	}
+
 	inline any_a begin()
 	{
 		return iterator_t<std_unordered_map_any_any::iterator>::val__(me_(), _map.begin());
 	}
 
 	inline any_a cend() const
+	{
+		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cend());
+	}
+
+	inline any_a end() const
 	{
 		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cend());
 	}

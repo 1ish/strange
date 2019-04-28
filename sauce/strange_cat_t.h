@@ -119,7 +119,7 @@ public: ___THING___
 		{
 			throw dis__("strange::cat::conforms passed short range");
 		}
-		return conforms_(std::move(thing), *it);
+		return conforms_(thing, *it);
 	}
 
 	static inline any_a conforms_(any_a const& thing, any_a const& cat_or_herd)
