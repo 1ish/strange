@@ -7,7 +7,7 @@ namespace strange
 template <typename T, typename _ABSTRACTION_ = any_a>
 class native_mutation_t : public thing_t<_ABSTRACTION_>
 {
-	using member = any_a(T::*)(any_a);
+	using member = any_a(T::*)(any_a const&);
 
 public: ___THING___
 	// construction

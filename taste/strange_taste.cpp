@@ -10,7 +10,7 @@ TEST(TestCaseName, TestName)
   EXPECT_TRUE(true);
 }
 
-any_a fun(any_a x)
+any_a fun(any_a const& x)
 {
 	return nothing_t<>::val_();
 }

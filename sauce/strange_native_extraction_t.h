@@ -7,7 +7,7 @@ namespace strange
 template <typename T, typename _ABSTRACTION_ = any_a>
 class native_extraction_t : public thing_t<_ABSTRACTION_>
 {
-	using member = any_a(T::*)(any_a) const;
+	using member = any_a(T::*)(any_a const&) const;
 
 public: ___THING___
 	// construction

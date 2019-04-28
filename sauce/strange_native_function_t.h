@@ -7,7 +7,7 @@ namespace strange
 template <typename _ABSTRACTION_ = any_a>
 class native_function_t : public thing_t<_ABSTRACTION_>
 {
-	using function = any_a(*)(any_a);
+	using function = any_a(*)(any_a const&);
 
 public: ___THING___
 	// construction
