@@ -20,7 +20,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		template <typename F>
 		static inline random_access_iterator_data_a<ITERATOR> val__(flock_a flock, F&& it)
 		{
-			return random_access_iterator_data_a<ITERATOR>{ iterator_t(std::move(flock), std::forward<F>(it)) };
+			return random_access_iterator_data_a<ITERATOR>{ iterator_t(flock, std::forward<F>(it)) };
 		}
 
 		static inline any_a ref(any_a range)
@@ -31,7 +31,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		template <typename F>
 		static inline random_access_iterator_data_a<ITERATOR> ref__(flock_a flock, F&& it)
 		{
-			return random_access_iterator_data_a<ITERATOR>(iterator_t(std::move(flock), std::forward<F>(it)), true);
+			return random_access_iterator_data_a<ITERATOR>(iterator_t(flock, std::forward<F>(it)), true);
 		}
 
 		// reflection
@@ -48,7 +48,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				return false;
 			}
-			return _it == cast_<random_access_iterator_data_a<ITERATOR>>(std::move(thing)).extract__();
+			return _it == cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__();
 		}
 
 		inline bool operator!=(any_a thing) const
@@ -57,7 +57,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				return true;
 			}
-			return _it != cast_<random_access_iterator_data_a<ITERATOR>>(std::move(thing)).extract__();
+			return _it != cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__();
 		}
 
 		inline std::size_t hash__() const
@@ -113,7 +113,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			for (auto const& thing : range)
 			{
-				operator+=(std::move(thing));
+				operator+=(thing);
 			}
 			return me_();
 		}
@@ -130,7 +130,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator += passed non-number");
 			}
-			_it += cast_<number_a>(std::move(thing)).to_int_64__();
+			_it += cast_<number_a>(thing).to_int_64__();
 			return *this;
 		}
 
@@ -139,14 +139,14 @@ class flock_t : public something_t<_ABSTRACTION_>
 			random_access_iterator_a result = me_();
 			for (auto const& thing : range)
 			{
-				result += std::move(thing);
+				result += thing;
 			}
 			return result;
 		}
 
 		inline random_access_iterator_a add_(number_a number) const
 		{
-			return operator+(std::move(number));
+			return operator+(number);
 		}
 
 		inline random_access_iterator_a operator+(number_a number) const
@@ -160,7 +160,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			for (auto const& thing : range)
 			{
-				operator-=(std::move(thing));
+				operator-=(thing);
 			}
 			return me_();
 		}
@@ -177,7 +177,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator -= passed non-number");
 			}
-			_it -= cast_<number_a>(std::move(thing)).to_int_64__();
+			_it -= cast_<number_a>(thing).to_int_64__();
 			return *this;
 		}
 
@@ -186,14 +186,14 @@ class flock_t : public something_t<_ABSTRACTION_>
 			random_access_iterator_a result = me_();
 			for (auto const& thing : range)
 			{
-				result -= std::move(thing);
+				result -= thing;
 			}
 			return result;
 		}
 
 		inline random_access_iterator_a subtract_(number_a number) const
 		{
-			return operator-(std::move(number));
+			return operator-(number);
 		}
 
 		inline random_access_iterator_a operator-(number_a number) const
@@ -215,12 +215,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator::less_than passed incompatible thing");
 			}
-			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(std::move(thing)).extract__());
+			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
 		}
 
 		inline any_a less_than_(random_access_iterator_a it) const
 		{
-			return _boole_(operator<(std::move(it)));
+			return _boole_(operator<(it));
 		}
 
 		inline bool operator<(random_access_iterator_a it) const
@@ -229,7 +229,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator < passed incompatible thing");
 			}
-			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(std::move(it)).extract__();
+			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
 		}
 
 		inline any_a greater_than(any_a range) const
@@ -244,12 +244,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator::greater_than passed incompatible thing");
 			}
-			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(std::move(thing)).extract__());
+			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
 		}
 
 		inline any_a greater_than_(random_access_iterator_a it) const
 		{
-			return _boole_(operator>(std::move(it)));
+			return _boole_(operator>(it));
 		}
 
 		inline bool operator>(random_access_iterator_a it) const
@@ -258,7 +258,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator > passed incompatible thing");
 			}
-			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(std::move(it)).extract__();
+			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
 		}
 
 		inline any_a less_or_equal(any_a range) const
@@ -273,12 +273,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator::less_or_equal passed incompatible thing");
 			}
-			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(std::move(thing)).extract__());
+			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
 		}
 
 		inline any_a less_or_equal_(random_access_iterator_a it) const
 		{
-			return _boole_(operator<=(std::move(it)));
+			return _boole_(operator<=(it));
 		}
 
 		inline bool operator<=(random_access_iterator_a it) const
@@ -287,7 +287,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator <= passed incompatible thing");
 			}
-			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(std::move(it)).extract__();
+			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
 		}
 
 		inline any_a greater_or_equal(any_a range) const
@@ -302,12 +302,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator::greater_or_equal passed incompatible thing");
 			}
-			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(std::move(thing)).extract__());
+			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
 		}
 
 		inline any_a greater_or_equal_(random_access_iterator_a it) const
 		{
-			return _boole_(operator>=(std::move(it)));
+			return _boole_(operator>=(it));
 		}
 
 		inline bool operator>=(random_access_iterator_a it) const
@@ -316,7 +316,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::flock::iterator >= passed incompatible thing");
 			}
-			return _it >= cast_<random_access_iterator_data_a<ITERATOR>>(std::move(it)).extract__();
+			return _it >= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
 		}
 
 		// data
@@ -343,7 +343,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		inline iterator_t(flock_a flock, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
-			, _flock(std::move(flock), true)
+			, _flock(flock, true)
 		{}
 	};
 
@@ -353,7 +353,7 @@ public: ___COLLECTION___
 	// construction
 	static inline flock_a val(any_a range)
 	{
-		return cast_<flock_a>(val_() += std::move(range));
+		return cast_<flock_a>(val_() += range);
 	}
 
 	static inline flock_a val_()
@@ -369,7 +369,7 @@ public: ___COLLECTION___
 
 	static inline flock_a ref(any_a range)
 	{
-		return cast_<flock_a>(ref_() += std::move(range), true);
+		return cast_<flock_a>(ref_() += range, true);
 	}
 
 	static inline flock_a ref_()
@@ -408,7 +408,7 @@ public: ___COLLECTION___
 		{
 			return false;
 		}
-		return _vector == cast_<flock_a>(std::move(thing)).extract__();
+		return _vector == cast_<flock_a>(thing).extract__();
 	}
 
 	inline bool operator!=(any_a thing) const
@@ -417,7 +417,7 @@ public: ___COLLECTION___
 		{
 			return true;
 		}
-		return _vector != cast_<flock_a>(std::move(thing)).extract__();
+		return _vector != cast_<flock_a>(thing).extract__();
 	}
 
 	inline std::size_t hash__() const
@@ -464,7 +464,7 @@ public: ___COLLECTION___
 	// collection
 	inline bool has__(any_a key) const
 	{
-		return check_<number_a>(key) && has__(cast_<number_a>(std::move(key)).to_int_64__());
+		return check_<number_a>(key) && has__(cast_<number_a>(key).to_int_64__());
 	}
 
 	inline bool has__(int64_t index) const
@@ -476,7 +476,7 @@ public: ___COLLECTION___
 	{
 		if (check_<number_a>(key))
 		{
-			return at__(cast_<number_a>(std::move(key)).to_int_64__());
+			return at__(cast_<number_a>(key).to_int_64__());
 		}
 		return nothing_t<>::val_();
 	}
@@ -494,7 +494,7 @@ public: ___COLLECTION___
 	{
 		if (check_<number_a>(key))
 		{
-			update__(cast_<number_a>(std::move(key)).to_int_64__(), value);
+			update__(cast_<number_a>(key).to_int_64__(), value);
 		}
 		return value;
 	}
@@ -506,7 +506,7 @@ public: ___COLLECTION___
 			int64_t const size = size__();
 			if (index == size)
 			{
-				push_back__(std::move(value));
+				push_back__(value);
 			}
 			else
 			{
@@ -514,14 +514,14 @@ public: ___COLLECTION___
 				{
 					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
 				}
-				_vector[std::size_t(index)] = std::move(value);
+				_vector[std::size_t(index)] = value;
 			}
 		}
 	}
 
 	inline bool insert__(any_a key, any_a value)
 	{
-		return check_<number_a>(key) && insert__(cast_<number_a>(std::move(key)).to_int_64__(), std::move(value));
+		return check_<number_a>(key) && insert__(cast_<number_a>(key).to_int_64__(), value);
 	}
 
 	inline bool insert__(int64_t index, any_a value)
@@ -531,18 +531,18 @@ public: ___COLLECTION___
 			int64_t const size = size__();
 			if (index == size)
 			{
-				push_back__(std::move(value));
+				push_back__(value);
 			}
 			else
 			{
 				if (index > size)
 				{
 					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
-					_vector[std::size_t(index)] = std::move(value);
+					_vector[std::size_t(index)] = value;
 				}
 				else
 				{
-					_vector.insert(_vector.cbegin() + index, std::move(value));
+					_vector.insert(_vector.cbegin() + index, value);
 				}
 			}
 			return true;
@@ -552,7 +552,7 @@ public: ___COLLECTION___
 
 	inline bool erase__(any_a key)
 	{
-		return check_<number_a>(key) && erase__(cast_<number_a>(std::move(key)).to_int_64__());
+		return check_<number_a>(key) && erase__(cast_<number_a>(key).to_int_64__());
 	}
 
 	inline bool erase__(int64_t index)
@@ -582,7 +582,7 @@ public: ___COLLECTION___
 
 	inline void push_front__(any_a thing)
 	{
-		push_back__(std::move(thing));
+		push_back__(thing);
 	}
 
 	inline any_a pop_front_()
@@ -592,7 +592,7 @@ public: ___COLLECTION___
 
 	inline void push_back__(any_a thing)
 	{
-		_vector.push_back(std::move(thing));
+		_vector.push_back(thing);
 	}
 
 	inline any_a pop_back_()
@@ -610,7 +610,7 @@ public: ___COLLECTION___
 	{
 		for (auto const& thing : range)
 		{
-			insert(std::move(thing));
+			insert(thing);
 		}
 		return *this;
 	}
@@ -619,7 +619,7 @@ public: ___COLLECTION___
 	{
 		for (auto const& thing : range)
 		{
-			erase(std::move(thing));
+			erase(thing);
 		}
 		return *this;
 	}

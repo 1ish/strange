@@ -95,7 +95,7 @@ public: ___THING___
 
 	inline misunderstanding_a add_(misunderstanding_a misunderstanding) const
 	{
-		return operator+(std::move(misunderstanding));
+		return operator+(misunderstanding);
 	}
 
 	inline misunderstanding_a operator+(misunderstanding_a misunderstanding) const

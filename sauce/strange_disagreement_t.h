@@ -9,7 +9,7 @@ class disagreement_t : public misunderstanding_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline misunderstanding_a val(any_a range)
+	static inline misunderstanding_a val(any_a const& range)
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -19,7 +19,7 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline misunderstanding_a val_(any_a thing = nothing_t<>::val_())
+	static inline misunderstanding_a val_(any_a const& thing = nothing_t<>::val_())
 	{
 		return val__("");
 	}
@@ -30,7 +30,7 @@ public: ___THING___
 		return misunderstanding_a{ disagreement_t{ std::forward<F>(s) } };
 	}
 
-	static inline misunderstanding_a ref(any_a range)
+	static inline misunderstanding_a ref(any_a const& range)
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -40,7 +40,7 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline misunderstanding_a ref_(any_a thing = nothing_t<>::val_())
+	static inline misunderstanding_a ref_(any_a const& thing = nothing_t<>::val_())
 	{
 		return ref__("");
 	}
@@ -74,7 +74,7 @@ public: ___THING___
 
 	inline misunderstanding_a add_(misunderstanding_a misunderstanding) const
 	{
-		return operator+(std::move(misunderstanding));
+		return operator+(misunderstanding);
 	}
 
 	inline misunderstanding_a operator+(misunderstanding_a misunderstanding) const

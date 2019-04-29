@@ -22,7 +22,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		template <typename F>
 		static inline data_a<ITERATOR> val__(shoal_a shoal, F&& it)
 		{
-			return data_a<ITERATOR>{ iterator_t(std::move(shoal), std::forward<F>(it)) };
+			return data_a<ITERATOR>{ iterator_t(shoal, std::forward<F>(it)) };
 		}
 
 		static inline any_a ref(any_a range)
@@ -33,7 +33,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		template <typename F>
 		static inline data_a<ITERATOR> ref__(shoal_a shoal, F&& it)
 		{
-			return data_a<ITERATOR>(iterator_t(std::move(shoal), std::forward<F>(it)), true);
+			return data_a<ITERATOR>(iterator_t(shoal, std::forward<F>(it)), true);
 		}
 
 		// reflection
@@ -50,7 +50,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			{
 				return false;
 			}
-			return _it == cast_<data_a<ITERATOR>>(std::move(thing)).extract__();
+			return _it == cast_<data_a<ITERATOR>>(thing).extract__();
 		}
 
 		inline bool operator!=(any_a thing) const
@@ -59,7 +59,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			{
 				return true;
 			}
-			return _it != cast_<data_a<ITERATOR>>(std::move(thing)).extract__();
+			return _it != cast_<data_a<ITERATOR>>(thing).extract__();
 		}
 
 		inline std::size_t hash__() const
@@ -121,7 +121,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			, _it{ std::forward<F>(it) }
 			, _pair{ flock_t<>::val_() }
 			, _fresh{}
-			, _shoal(std::move(shoal), true)
+			, _shoal(shoal, true)
 		{}
 	};
 
@@ -131,7 +131,7 @@ public: ___COLLECTION___
 	// construction
 	static inline shoal_a val(any_a range)
 	{
-		return cast_<shoal_a>(val_() += std::move(range));
+		return cast_<shoal_a>(val_() += range);
 	}
 
 	static inline shoal_a val_()
@@ -147,7 +147,7 @@ public: ___COLLECTION___
 
 	static inline shoal_a ref(any_a range)
 	{
-		return cast_<shoal_a>(ref_() += std::move(range), true);
+		return cast_<shoal_a>(ref_() += range, true);
 	}
 
 	static inline shoal_a ref_()
@@ -186,7 +186,7 @@ public: ___COLLECTION___
 		{
 			return false;
 		}
-		return _map == cast_<shoal_a>(std::move(thing)).extract__();
+		return _map == cast_<shoal_a>(thing).extract__();
 	}
 
 	inline bool operator!=(any_a thing) const
@@ -195,7 +195,7 @@ public: ___COLLECTION___
 		{
 			return true;
 		}
-		return _map != cast_<shoal_a>(std::move(thing)).extract__();
+		return _map != cast_<shoal_a>(thing).extract__();
 	}
 
 	inline std::size_t hash__() const
@@ -249,7 +249,7 @@ public: ___COLLECTION___
 	// collection
 	inline bool has__(any_a key) const
 	{
-		std_unordered_map_any_any::const_iterator const it = _map.find(std::move(key));
+		std_unordered_map_any_any::const_iterator const it = _map.find(key);
 		return it != _map.cend();
 	}
 
@@ -260,7 +260,7 @@ public: ___COLLECTION___
 
 	inline any_a at_(any_a key) const
 	{
-		std_unordered_map_any_any::const_iterator const it = _map.find(std::move(key));
+		std_unordered_map_any_any::const_iterator const it = _map.find(key);
 		if (it == _map.cend())
 		{
 			return nothing_t<>::val_();
@@ -275,27 +275,27 @@ public: ___COLLECTION___
 
 	inline any_a update_(any_a key, any_a value)
 	{
-		return _map[std::move(key)] = std::move(value);
+		return _map[key] = value;
 	}
 
 	inline void update__(std::string const& s, any_a value)
 	{
-		_map[sym__(s)] = std::move(value);
+		_map[sym__(s)] = value;
 	}
 
 	inline bool insert__(any_a key, any_a value)
 	{
-		return _map.emplace(std::move(key), std::move(value)).second;
+		return _map.emplace(key, value).second;
 	}
 
 	inline bool insert__(std::string const& s, any_a value)
 	{
-		return insert__(sym__(s), std::move(value));
+		return insert__(sym__(s), value);
 	}
 
 	inline bool erase__(any_a key)
 	{
-		return _map.erase(std::move(key));
+		return _map.erase(key);
 	}
 
 	inline bool erase__(std::string const& s)
@@ -320,7 +320,7 @@ public: ___COLLECTION___
 
 	inline void push_front__(any_a thing)
 	{
-		push_back__(std::move(thing));
+		push_back__(thing);
 	}
 
 	inline any_a pop_front_()
@@ -349,7 +349,7 @@ public: ___COLLECTION___
 	{
 		for (auto const& thing : range)
 		{
-			insert(std::move(thing));
+			insert(thing);
 		}
 		return *this;
 	}
@@ -358,7 +358,7 @@ public: ___COLLECTION___
 	{
 		for (auto const& thing : range)
 		{
-			erase(std::move(thing));
+			erase(thing);
 		}
 		return *this;
 	}

@@ -21,7 +21,7 @@ public: ___THING___
 
 	static inline any_a val_(any_a thing = END::val_())
 	{
-		return any_a{ it_t<CONST, _ABSTRACTION_, END>{ std::move(thing) } };
+		return any_a{ it_t<CONST, _ABSTRACTION_, END>{ thing } };
 	}
 
 	static inline any_a ref(any_a range)
@@ -36,7 +36,7 @@ public: ___THING___
 
 	static inline any_a ref_(any_a thing = END::val_())
 	{
-		return any_a(it_t<CONST, _ABSTRACTION_, END>{ std::move(thing) }, true);
+		return any_a(it_t<CONST, _ABSTRACTION_, END>{ thing }, true);
 	}
 
 	// reflection
