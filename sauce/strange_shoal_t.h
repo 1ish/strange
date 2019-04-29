@@ -14,20 +14,10 @@ class shoal_t : public something_t<_ABSTRACTION_>
 	{
 	public: ___THING___
 		// construction
-		static inline any_a val(any_a const& range)
-		{
-			throw dis__("strange::shoal::iterator::val cannot be implemented");
-		}
-
 		template <typename F>
 		static inline data_a<ITERATOR> val__(shoal_a const& shoal, F&& it)
 		{
 			return data_a<ITERATOR>{ iterator_t(shoal, std::forward<F>(it)) };
-		}
-
-		static inline any_a ref(any_a const& range)
-		{
-			throw dis__("strange::shoal::iterator::ref cannot be implemented");
 		}
 
 		template <typename F>

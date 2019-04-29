@@ -12,20 +12,10 @@ class flock_t : public something_t<_ABSTRACTION_>
 	{
 	public: ___THING___
 		// construction
-		static inline any_a val(any_a const& range)
-		{
-			throw dis__("strange::flock::iterator::val cannot be implemented");
-		}
-
 		template <typename F>
 		static inline random_access_iterator_data_a<ITERATOR> val__(flock_a const& flock, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>{ iterator_t(flock, std::forward<F>(it)) };
-		}
-
-		static inline any_a ref(any_a const& range)
-		{
-			throw dis__("strange::flock::iterator::ref cannot be implemented");
 		}
 
 		template <typename F>

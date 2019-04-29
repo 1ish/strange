@@ -13,10 +13,6 @@ namespace strange
 class any
 {
 public:
-	// construction
-	inline any_a val(any_a const& range) const;
-	inline any_a ref(any_a const& range) const;
-
 	// reflection
 	inline any_a type(any_a const& _) const;
 	inline any_a type_() const;

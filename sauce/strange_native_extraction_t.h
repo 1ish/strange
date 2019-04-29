@@ -11,11 +11,6 @@ class native_extraction_t : public thing_t<_ABSTRACTION_>
 
 public: ___THING___
 	// construction
-	static inline any_a val(any_a const& _)
-	{
-		throw dis__("strange::native_extraction::val cannot be implemented");
-	}
-
 	template <typename... Args>
 	static inline any_a val__(member const fun, Args&&... args)
 	{
@@ -23,11 +18,6 @@ public: ___THING___
 		v.reserve(sizeof...(Args));
 		variadic_u<symbol_a>::variadic_(v, std::forward<Args>(args)...);
 		return any_a{ native_extraction_t(fun, std::move(v)) };
-	}
-
-	static inline any_a ref(any_a const& _)
-	{
-		throw dis__("strange::native_extraction::ref cannot be implemented");
 	}
 
 	template <typename... Args>

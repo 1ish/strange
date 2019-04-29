@@ -178,10 +178,6 @@ namespace strange {
 
     
 
-     inline any_a val ( any_a const & range ) const
-     { assert(handle_); return read().val(range ); }
-     inline any_a ref ( any_a const & range ) const
-     { assert(handle_); return read().ref(range ); }
      inline any_a type ( any_a const & _ ) const
      { assert(handle_); return read().type(_ ); }
      inline any_a type_ ( ) const
@@ -366,8 +362,6 @@ namespace strange {
 
     
 
-      virtual inline any_a val ( any_a const & range ) const = 0;
-      virtual inline any_a ref ( any_a const & range ) const = 0;
       virtual inline any_a type ( any_a const & _ ) const = 0;
       virtual inline any_a type_ ( ) const = 0;
       virtual inline any_a cat ( any_a const & _ ) const = 0;
@@ -549,10 +543,6 @@ namespace strange {
 
     
 
-      virtual inline any_a val ( any_a const & range ) const
-      { return value_.val(range ); }
-      virtual inline any_a ref ( any_a const & range ) const
-      { return value_.ref(range ); }
       virtual inline any_a type ( any_a const & _ ) const
       { return value_.type(_ ); }
       virtual inline any_a type_ ( ) const
