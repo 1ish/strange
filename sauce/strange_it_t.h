@@ -9,7 +9,7 @@ class it_t : public something_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline any_a val(any_a range)
+	static inline any_a val(any_a const& range)
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -19,12 +19,12 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline any_a val_(any_a thing = END::val_())
+	static inline any_a val_(any_a const& thing = END::val_())
 	{
 		return any_a{ it_t<CONST, _ABSTRACTION_, END>{ thing } };
 	}
 
-	static inline any_a ref(any_a range)
+	static inline any_a ref(any_a const& range)
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -34,7 +34,7 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline any_a ref_(any_a thing = END::val_())
+	static inline any_a ref_(any_a const& thing = END::val_())
 	{
 		return any_a(it_t<CONST, _ABSTRACTION_, END>{ thing }, true);
 	}
@@ -47,12 +47,12 @@ public: ___THING___
 	}
 
 	// comparison
-	inline bool operator==(any_a thing) const
+	inline bool operator==(any_a const& thing) const
 	{
 		return _thing.nothing__() == thing->nothing__();
 	}
 
-	inline bool operator!=(any_a thing) const
+	inline bool operator!=(any_a const& thing) const
 	{
 		return _thing.nothing__() != thing->nothing__();
 	}

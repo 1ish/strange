@@ -9,7 +9,7 @@ class something_t : public thing_t<_ABSTRACTION_>
 {
 public:
 	// function
-	inline any_a operator()(any_a thing, any_a range) const
+	inline any_a operator()(any_a const& thing, any_a const& range) const
 	{
 		//TODO
 		// operation = thing.operations_().at(range.1st);
@@ -18,7 +18,7 @@ public:
 	}
 
 	// comparison
-	static inline any_a something(any_a)
+	static inline any_a something(any_a const&)
 	{
 		return something_();
 	}

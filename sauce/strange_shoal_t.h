@@ -14,24 +14,24 @@ class shoal_t : public something_t<_ABSTRACTION_>
 	{
 	public: ___THING___
 		// construction
-		static inline any_a val(any_a range)
+		static inline any_a val(any_a const& range)
 		{
 			throw dis__("strange::shoal::iterator::val cannot be implemented");
 		}
 
 		template <typename F>
-		static inline data_a<ITERATOR> val__(shoal_a shoal, F&& it)
+		static inline data_a<ITERATOR> val__(shoal_a const& shoal, F&& it)
 		{
 			return data_a<ITERATOR>{ iterator_t(shoal, std::forward<F>(it)) };
 		}
 
-		static inline any_a ref(any_a range)
+		static inline any_a ref(any_a const& range)
 		{
 			throw dis__("strange::shoal::iterator::ref cannot be implemented");
 		}
 
 		template <typename F>
-		static inline data_a<ITERATOR> ref__(shoal_a shoal, F&& it)
+		static inline data_a<ITERATOR> ref__(shoal_a const& shoal, F&& it)
 		{
 			return data_a<ITERATOR>(iterator_t(shoal, std::forward<F>(it)), true);
 		}
@@ -44,7 +44,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		}
 
 		// comparison
-		inline bool operator==(any_a thing) const
+		inline bool operator==(any_a const& thing) const
 		{
 			if (!check_<data_a<ITERATOR>>(thing))
 			{
@@ -53,7 +53,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			return _it == cast_<data_a<ITERATOR>>(thing).extract__();
 		}
 
-		inline bool operator!=(any_a thing) const
+		inline bool operator!=(any_a const& thing) const
 		{
 			if (!check_<data_a<ITERATOR>>(thing))
 			{
@@ -116,7 +116,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		shoal_a _shoal;
 
 		template <typename F>
-		inline iterator_t(shoal_a shoal, F&& it)
+		inline iterator_t(shoal_a const& shoal, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _pair{ flock_t<>::val_() }
@@ -129,7 +129,7 @@ public: ___COLLECTION___
 	using std_unordered_map_any_any = std::unordered_map<any_a, any_a, any_a::hash_f>;
 
 	// construction
-	static inline shoal_a val(any_a range)
+	static inline shoal_a val(any_a const& range)
 	{
 		return cast_<shoal_a>(val_() += range);
 	}
@@ -145,7 +145,7 @@ public: ___COLLECTION___
 		return shoal_a{ shoal_t{ std::forward<F>(init) } };
 	}
 
-	static inline shoal_a ref(any_a range)
+	static inline shoal_a ref(any_a const& range)
 	{
 		return cast_<shoal_a>(ref_() += range, true);
 	}
@@ -168,19 +168,19 @@ public: ___COLLECTION___
 		return TYPE;
 	}
 
-	inline any_a feeder(any_a range) const // return range of parameter values
+	inline any_a feeder(any_a const& range) const // return range of parameter values
 	{
 		return nothing_t<>::val_(); //TODO
 	}
 
 	// visitor pattern
-	static inline any_a visit(any_a range)
+	static inline any_a visit(any_a const& range)
 	{
 		return nothing_t<>::val_(); //TODO
 	}
 
 	// comparison
-	inline bool operator==(any_a thing) const
+	inline bool operator==(any_a const& thing) const
 	{
 		if (!check_<shoal_a>(thing))
 		{
@@ -189,7 +189,7 @@ public: ___COLLECTION___
 		return _map == cast_<shoal_a>(thing).extract__();
 	}
 
-	inline bool operator!=(any_a thing) const
+	inline bool operator!=(any_a const& thing) const
 	{
 		if (!check_<shoal_a>(thing))
 		{
@@ -247,7 +247,7 @@ public: ___COLLECTION___
 	}
 
 	// collection
-	inline bool has__(any_a key) const
+	inline bool has__(any_a const& key) const
 	{
 		std_unordered_map_any_any::const_iterator const it = _map.find(key);
 		return it != _map.cend();
@@ -258,7 +258,7 @@ public: ___COLLECTION___
 		return has__(sym__(s));
 	}
 
-	inline any_a at_(any_a key) const
+	inline any_a at_(any_a const& key) const
 	{
 		std_unordered_map_any_any::const_iterator const it = _map.find(key);
 		if (it == _map.cend())
@@ -273,27 +273,27 @@ public: ___COLLECTION___
 		return at_(sym__(s));
 	}
 
-	inline any_a update_(any_a key, any_a value)
+	inline any_a update_(any_a const& key, any_a const& value)
 	{
 		return _map[key] = value;
 	}
 
-	inline void update__(std::string const& s, any_a value)
+	inline void update__(std::string const& s, any_a const& value)
 	{
 		_map[sym__(s)] = value;
 	}
 
-	inline bool insert__(any_a key, any_a value)
+	inline bool insert__(any_a const& key, any_a const& value)
 	{
 		return _map.emplace(key, value).second;
 	}
 
-	inline bool insert__(std::string const& s, any_a value)
+	inline bool insert__(std::string const& s, any_a const& value)
 	{
 		return insert__(sym__(s), value);
 	}
 
-	inline bool erase__(any_a key)
+	inline bool erase__(any_a const& key)
 	{
 		return _map.erase(key);
 	}
@@ -318,7 +318,7 @@ public: ___COLLECTION___
 		return _map.empty();
 	}
 
-	inline void push_front__(any_a thing)
+	inline void push_front__(any_a const& thing)
 	{
 		push_back__(thing);
 	}
@@ -328,7 +328,7 @@ public: ___COLLECTION___
 		return pop_back_();
 	}
 
-	inline void push_back__(any_a thing)
+	inline void push_back__(any_a const& thing)
 	{
 		_map[thing] = thing;
 	}
@@ -345,7 +345,7 @@ public: ___COLLECTION___
 		return result;
 	}
 
-	inline shoal_t& operator+=(any_a range)
+	inline shoal_t& operator+=(any_a const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -354,7 +354,7 @@ public: ___COLLECTION___
 		return *this;
 	}
 
-	inline shoal_t& operator-=(any_a range)
+	inline shoal_t& operator-=(any_a const& range)
 	{
 		for (auto const& thing : range)
 		{

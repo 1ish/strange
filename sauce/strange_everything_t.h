@@ -9,7 +9,7 @@ class everything_t : public something_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline any_a val(any_a _)
+	static inline any_a val(any_a const& _)
 	{
 		return val_();
 	}
@@ -25,7 +25,7 @@ public: ___THING___
 		return VAL;
 	}
 
-	static inline any_a ref(any_a _)
+	static inline any_a ref(any_a const& _)
 	{
 		return ref_();
 	}
@@ -49,7 +49,7 @@ public: ___THING___
 	}
 
 	// comparison
-	static inline any_a everything(any_a)
+	static inline any_a everything(any_a const&)
 	{
 		return everything_();
 	}
@@ -64,12 +64,12 @@ public: ___THING___
 		return true;
 	}
 
-	inline bool operator==(any_a thing) const
+	inline bool operator==(any_a const& thing) const
 	{
 		return thing.everything__();
 	}
 
-	inline bool operator!=(any_a thing) const
+	inline bool operator!=(any_a const& thing) const
 	{
 		return !thing.everything__();
 	}

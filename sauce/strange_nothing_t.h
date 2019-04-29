@@ -25,7 +25,7 @@ public: ___THING___
 		return VAL;
 	}
 
-	static inline any_a ref(any_a _)
+	static inline any_a ref(any_a const& _)
 	{
 		return ref_();
 	}
@@ -55,7 +55,7 @@ public: ___THING___
 	}
 
 	// comparison
-	static inline any_a nothing(any_a)
+	static inline any_a nothing(any_a const&)
 	{
 		return nothing_();
 	}
@@ -70,7 +70,7 @@ public: ___THING___
 		return true;
 	}
 
-	static inline any_a anything(any_a)
+	static inline any_a anything(any_a const&)
 	{
 		return anything_();
 	}
@@ -85,12 +85,12 @@ public: ___THING___
 		return false;
 	}
 
-	inline bool operator==(any_a thing) const
+	inline bool operator==(any_a const& thing) const
 	{
 		return thing.nothing__();
 	}
 
-	inline bool operator!=(any_a thing) const
+	inline bool operator!=(any_a const& thing) const
 	{
 		return !thing.nothing__();
 	}

@@ -11,7 +11,7 @@ class native_mutation_t : public thing_t<_ABSTRACTION_>
 
 public: ___THING___
 	// construction
-	static inline any_a val(any_a _)
+	static inline any_a val(any_a const& _)
 	{
 		throw dis__("strange::native_mutation::val cannot be implemented");
 	}
@@ -25,7 +25,7 @@ public: ___THING___
 		return any_a{ native_mutation_t(fun, std::move(v)) };
 	}
 
-	static inline any_a ref(any_a _)
+	static inline any_a ref(any_a const& _)
 	{
 		throw dis__("strange::native_mutation::ref cannot be implemented");
 	}
@@ -52,7 +52,7 @@ public: ___THING___
 	}
 
 	// function
-	inline any_a operator()(any_a thing, any_a range) const
+	inline any_a operator()(any_a const& thing, any_a const& range) const
 	{
 		return (cast_<T>(thing).*_function)(range);
 	}

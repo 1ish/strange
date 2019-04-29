@@ -59,7 +59,7 @@ public: ___THING___
 	}
 
 	// misunderstanding
-	inline misunderstanding_a add(any_a range) const
+	inline misunderstanding_a add(any_a const& range) const
 	{
 		std::string s = _string;
 		for (any_a const& thing : range)
@@ -72,12 +72,12 @@ public: ___THING___
 		return misunderstanding_a{ disagreement_t{ std::move(s) } };
 	}
 
-	inline misunderstanding_a add_(misunderstanding_a misunderstanding) const
+	inline misunderstanding_a add_(misunderstanding_a const& misunderstanding) const
 	{
 		return operator+(misunderstanding);
 	}
 
-	inline misunderstanding_a operator+(misunderstanding_a misunderstanding) const
+	inline misunderstanding_a operator+(misunderstanding_a const& misunderstanding) const
 	{
 		return misunderstanding_a{ disagreement_t{ _string + misunderstanding.to_string__() } };
 	}

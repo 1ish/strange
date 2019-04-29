@@ -9,7 +9,7 @@ class symbol_t : public something_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline symbol_a val(any_a range)
+	static inline symbol_a val(any_a const& range)
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -19,7 +19,7 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline symbol_a val_(any_a thing = nothing_t<>::val_())
+	static inline symbol_a val_(any_a const& thing = nothing_t<>::val_())
 	{
 		return val__("");
 	}
@@ -30,7 +30,7 @@ public: ___THING___
 		return symbol_a{ symbol_t{ std::forward<F>(s) } };
 	}
 
-	static inline symbol_a ref(any_a range)
+	static inline symbol_a ref(any_a const& range)
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -40,7 +40,7 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline symbol_a ref_(any_a thing = nothing_t<>::val_())
+	static inline symbol_a ref_(any_a const& thing = nothing_t<>::val_())
 	{
 		return ref__("");
 	}
@@ -59,12 +59,12 @@ public: ___THING___
 	}
 
 	// comparison
-	inline bool operator==(any_a thing) const
+	inline bool operator==(any_a const& thing) const
 	{
 		return check_<symbol_a>(thing) && cast_<symbol_a>(thing).to_string__() == _string;
 	}
 
-	inline bool operator!=(any_a thing) const
+	inline bool operator!=(any_a const& thing) const
 	{
 		return !check_<symbol_a>(thing) || cast_<symbol_a>(thing).to_string__() != _string;
 	}
@@ -85,7 +85,7 @@ public: ___THING___
 		return _string;
 	}
 
-	inline symbol_a add(any_a range) const
+	inline symbol_a add(any_a const& range) const
 	{
 		std::string s = _string;
 		for (any_a const& thing : range)
@@ -98,12 +98,12 @@ public: ___THING___
 		return symbol_a{ symbol_t{ std::move(s) } };
 	}
 
-	inline symbol_a add_(symbol_a symbol) const
+	inline symbol_a add_(symbol_a const& symbol) const
 	{
 		return operator+(symbol);
 	}
 
-	inline symbol_a operator+(symbol_a symbol) const
+	inline symbol_a operator+(symbol_a const& symbol) const
 	{
 		return symbol_a{ symbol_t{ _string + symbol.to_string__() } };
 	}

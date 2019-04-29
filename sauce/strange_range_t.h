@@ -9,7 +9,7 @@ class range_t : public something_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline any_a val(any_a range)
+	static inline any_a val(any_a const& range)
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -24,12 +24,12 @@ public: ___THING___
 		return val_(begin, *it);
 	}
 
-	static inline any_a val_(any_a begin, any_a end)
+	static inline any_a val_(any_a const& begin, any_a const& end)
 	{
 		return any_a{ range_t(begin, end) };
 	}
 
-	static inline any_a ref(any_a range)
+	static inline any_a ref(any_a const& range)
 	{
 		any_a it = range.cbegin();
 		if (it == range.cend())
@@ -44,7 +44,7 @@ public: ___THING___
 		return ref_(begin, *it);
 	}
 
-	static inline any_a ref_(any_a begin, any_a end)
+	static inline any_a ref_(any_a const& begin, any_a const& end)
 	{
 		return any_a(range_t(begin, end), true);
 	}
@@ -91,7 +91,7 @@ protected:
 	any_a _begin;
 	any_a _end;
 
-	inline range_t(any_a begin, any_a end)
+	inline range_t(any_a const& begin, any_a const& end)
 		: something_t{}
 		, _begin(begin)
 		, _end(end)
