@@ -26,41 +26,41 @@ public:
 		return CATEGORY;
 	}
 
-	static inline any_a eater_()
+	static inline any_a<> eater_()
 	{
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a feeder(any_a const& range)
+	static inline any_a<> feeder(any_a<> const& range)
 	{
 		return nothing_t<>::val_();
 	}
 
 	// visitor pattern
-	static inline any_a visit(any_a const& range)
+	static inline any_a<> visit(any_a<> const& range)
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::thing::visit passed empty range");
 		}
-		any_a visitor = *it;
+		any_a<> visitor = *it;
 		return visitor->invoke(range_t<>::val_(++it, range.cend())); //TODO me_() must already be in range
 	}
 
 	// function
-	inline any_a invoke(any_a const& range) const
+	inline any_a<> invoke(any_a<> const& range) const
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::thing::invoke passed empty range");
 		}
-		any_a member = *it;
+		any_a<> member = *it;
 		return invoke_(member, range_t<>::val_(++it, range.cend()));
 	}
 
-	inline any_a invoke_(any_a const& member, any_a const& range) const
+	inline any_a<> invoke_(any_a<> const& member, any_a<> const& range) const
 	{
 		//TODO
 		// thing = me_();
@@ -69,31 +69,31 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a operate(any_a const& range)
+	static inline any_a<> operate(any_a<> const& range)
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::thing::operate passed empty range");
 		}
-		any_a thing = *it;
+		any_a<> thing = *it;
 		if (++it == range.cend())
 		{
 			throw dis__("strange::thing::visit passed short range");
 		}
-		any_a operation = *it;
+		any_a<> operation = *it;
 		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
 	}
 
-	static inline any_a operate_(any_a const& thing, any_a const& operation, any_a const& range)
+	static inline any_a<> operate_(any_a<> const& thing, any_a<> const& operation, any_a<> const& range)
 	{
 		return operation.operator()(thing, range);
 	}
 
 	// identification
-	inline any_a identical(any_a const& range) const
+	inline any_a<> identical(any_a<> const& range) const
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::thing::identical passed empty range");
@@ -101,85 +101,85 @@ public:
 		return identical_(*it);
 	}
 
-	inline any_a identical_(any_a const& thing) const
+	inline any_a<> identical_(any_a<> const& thing) const
 	{
 		return _boole_(identical__(thing));
 	}
 
 	// comparison
-	static inline any_a nothing(any_a const&)
+	static inline any_a<> nothing(any_a<> const&)
 	{
 		return nothing_();
 	}
 
-	static inline any_a nothing_()
+	static inline any_a<> nothing_()
 	{
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a anything(any_a const&)
+	static inline any_a<> anything(any_a<> const&)
 	{
 		return anything_();
 	}
 
-	static inline any_a anything_()
+	static inline any_a<> anything_()
 	{
 		return everything_t<>::val_();
 	}
 
-	static inline any_a something(any_a const&)
+	static inline any_a<> something(any_a<> const&)
 	{
 		return something_();
 	}
 
-	static inline any_a something_()
+	static inline any_a<> something_()
 	{
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a everything(any_a const&)
+	static inline any_a<> everything(any_a<> const&)
 	{
 		return everything_();
 	}
 
-	static inline any_a everything_()
+	static inline any_a<> everything_()
 	{
 		return nothing_t<>::val_();
 	}
 
 	// range
-	inline any_a cbegin() const
+	inline any_a<> cbegin() const
 	{
 		return it_t<true>::val_(me_());
 	}
 
-	inline any_a begin() const
+	inline any_a<> begin() const
 	{
 		return it_t<true>::val_(me_());
 	}
 
-	inline any_a begin()
+	inline any_a<> begin()
 	{
 		return it_t<>::val_(me_());
 	}
 
-	inline any_a cend() const
+	inline any_a<> cend() const
 	{
 		return nothing_t<>::val_();
 	}
 
-	inline any_a end() const
+	inline any_a<> end() const
 	{
 		return nothing_t<>::val_();
 	}
 
-	inline any_a end()
+	inline any_a<> end()
 	{
 		return nothing_t<>::val_();
 	}
 
 	// iterator
-	inline any_a& operator*() const
+	inline any_a<>& operator*() const
 	{
 		return nothing_t<>::val__();
 	}
@@ -196,19 +196,19 @@ public:
 	inline void operator--(int)
 	{}
 
-	inline void operator+=(any_a const& other)
+	inline void operator+=(any_a<> const& other)
 	{}
 
-	inline void operator-=(any_a const& other)
+	inline void operator-=(any_a<> const& other)
 	{}
 
-	inline void operator*=(any_a const& other)
+	inline void operator*=(any_a<> const& other)
 	{}
 
-	inline void operator/=(any_a const& other)
+	inline void operator/=(any_a<> const& other)
 	{}
 
-	inline void operator%=(any_a const& other)
+	inline void operator%=(any_a<> const& other)
 	{}
 
 protected:
@@ -218,7 +218,7 @@ protected:
 	{}
 
 	// conversion
-	static inline any_a _boole_(bool b)
+	static inline any_a<> _boole_(bool b)
 	{
 		return b ? everything_t<>::val_() : nothing_t<>::val_();
 	}
@@ -226,110 +226,110 @@ protected:
 
 // adaptation
 #define ___THING___ \
-inline symbol_a type(any_a const&) const \
+inline symbol_a type(any_a<> const&) const \
 { \
 	return type_(); \
 } \
-inline cat_a cat(any_a const&) const \
+inline cat_a cat(any_a<> const&) const \
 { \
 	return cat_(); \
 } \
-inline any_a eater(any_a const&) const \
+inline any_a<> eater(any_a<> const&) const \
 { \
 	return eater_(); \
 } \
-inline any_a same(any_a const& range) const \
+inline any_a<> same(any_a<> const& range) const \
 { \
-	any_a it = range.cbegin(); \
+	any_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
 		throw dis__("[thing] same passed empty range"); \
 	} \
 	return same_(*it); \
 } \
-inline any_a same_(any_a const& thing) const \
+inline any_a<> same_(any_a<> const& thing) const \
 { \
 	return _boole_(operator==(thing)); \
 } \
-inline any_a different(any_a const& range) const \
+inline any_a<> different(any_a<> const& range) const \
 { \
-	any_a it = range.cbegin(); \
+	any_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
 		throw dis__("[thing] different passed empty range"); \
 	} \
 	return different_(*it); \
 } \
-inline any_a different_(any_a const& thing) const \
+inline any_a<> different_(any_a<> const& thing) const \
 { \
 	return _boole_(operator!=(thing)); \
 } \
-inline any_a hash(any_a const&) const \
+inline any_a<> hash(any_a<> const&) const \
 { \
 	return hash_(); \
 } \
-inline any_a hash_() const \
+inline any_a<> hash_() const \
 { \
 	return everything_t<>::val_(); /* //TODO */ \
 } \
-inline any_a beget(any_a const&) const \
+inline any_a<> beget(any_a<> const&) const \
 { \
 	return beget_(); \
 } \
-inline any_a beget_() const \
+inline any_a<> beget_() const \
 { \
 	return cbegin(); \
 } \
-inline any_a beset(any_a const&) \
+inline any_a<> beset(any_a<> const&) \
 { \
 	return beset_(); \
 } \
-inline any_a beset_() \
+inline any_a<> beset_() \
 { \
 	return begin(); \
 } \
-inline any_a enget(any_a const&) const \
+inline any_a<> enget(any_a<> const&) const \
 { \
 	return enget_(); \
 } \
-inline any_a enget_() const \
+inline any_a<> enget_() const \
 { \
 	return cend(); \
 } \
-inline any_a enset(any_a const&) \
+inline any_a<> enset(any_a<> const&) \
 { \
 	return enset_(); \
 } \
-inline any_a enset_() \
+inline any_a<> enset_() \
 { \
 	return end(); \
 } \
-inline any_a get(any_a const&) const \
+inline any_a<> get(any_a<> const&) const \
 { \
 	return get_(); \
 } \
-inline any_a get_() const \
+inline any_a<> get_() const \
 { \
 	return operator*(); \
 } \
-inline any_a set(any_a const& range) const \
+inline any_a<> set(any_a<> const& range) const \
 { \
-	any_a it = range.cbegin(); \
+	any_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
 		throw dis__("[thing] set passed empty range"); \
 	} \
 	return set_(*it); \
 } \
-inline any_a set_(any_a const& thing) const \
+inline any_a<> set_(any_a<> const& thing) const \
 { \
 	return operator*() = thing; \
 } \
-inline any_a* operator->() const \
+inline any_a<>* operator->() const \
 { \
 	return &operator*(); \
 } \
-inline _ABSTRACTION_ increment(any_a const&) \
+inline _ABSTRACTION_ increment(any_a<> const&) \
 { \
 	return increment_(); \
 } \

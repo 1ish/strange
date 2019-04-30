@@ -26,11 +26,11 @@ namespace strange {
      { assert(handle_); return write().insert__(s ); }
      inline bool erase__ ( std :: string const & s )
      { assert(handle_); return write().erase__(s ); }
-     inline std :: unordered_set < any_a , any_a :: hash_f > const & extract__ ( ) const
+     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract__ ( ) const
      { assert(handle_); return read().extract__( ); }
-     inline void mutate__ ( std :: unordered_set < any_a , any_a :: hash_f > const & data )
+     inline void mutate__ ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
      { assert(handle_); write().mutate__(data ); }
-     inline std :: unordered_set < any_a , any_a :: hash_f > & reference__ ( )
+     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference__ ( )
      { assert(handle_); return write().reference__( ); }
     
 
@@ -44,9 +44,9 @@ namespace strange {
       virtual inline bool at__ ( std :: string const & s ) const = 0;
       virtual inline bool insert__ ( std :: string const & s ) = 0;
       virtual inline bool erase__ ( std :: string const & s ) = 0;
-      virtual inline std :: unordered_set < any_a , any_a :: hash_f > const & extract__ ( ) const = 0;
-      virtual inline void mutate__ ( std :: unordered_set < any_a , any_a :: hash_f > const & data ) = 0;
-      virtual inline std :: unordered_set < any_a , any_a :: hash_f > & reference__ ( ) = 0;
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract__ ( ) const = 0;
+      virtual inline void mutate__ ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data ) = 0;
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference__ ( ) = 0;
     	};
 
     
@@ -95,11 +95,11 @@ namespace strange {
       { return value_.insert__(s ); }
       virtual inline bool erase__ ( std :: string const & s )
       { return value_.erase__(s ); }
-      virtual inline std :: unordered_set < any_a , any_a :: hash_f > const & extract__ ( ) const
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract__ ( ) const
       { return value_.extract__( ); }
-      virtual inline void mutate__ ( std :: unordered_set < any_a , any_a :: hash_f > const & data )
+      virtual inline void mutate__ ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
       { value_.mutate__(data ); }
-      virtual inline std :: unordered_set < any_a , any_a :: hash_f > & reference__ ( )
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference__ ( )
       { return value_.reference__( ); }
     	};
 
@@ -165,7 +165,7 @@ namespace strange {
 
     	{
 
-    		return "herd";
+    		return "herd_a";
 
     	}
 
@@ -223,7 +223,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("herd constructor failed to cast from base to final");
+    			throw dis__("herd_a constructor failed to cast from base to final");
 
     		}
 
@@ -261,7 +261,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("herd assignment failed to cast from base to final");
+    			throw dis__("herd_a assignment failed to cast from base to final");
 
     		}
 

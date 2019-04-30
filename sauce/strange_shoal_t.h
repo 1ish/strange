@@ -34,7 +34,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		}
 
 		// comparison
-		inline bool operator==(any_a const& thing) const
+		inline bool operator==(any_a<> const& thing) const
 		{
 			if (!check_<data_a<ITERATOR>>(thing))
 			{
@@ -43,7 +43,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			return _it == cast_<data_a<ITERATOR>>(thing).extract__();
 		}
 
-		inline bool operator!=(any_a const& thing) const
+		inline bool operator!=(any_a<> const& thing) const
 		{
 			if (!check_<data_a<ITERATOR>>(thing))
 			{
@@ -58,7 +58,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		}
 
 		// iterator
-		inline any_a& operator*() const
+		inline any_a<>& operator*() const
 		{
 			if (!_fresh)
 			{
@@ -116,10 +116,10 @@ class shoal_t : public something_t<_ABSTRACTION_>
 	};
 
 public: ___COLLECTION___
-	using std_unordered_map_any_any = std::unordered_map<any_a, any_a, any_a::hash_f>;
+	using std_unordered_map_any_any = std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>;
 
 	// construction
-	static inline shoal_a val(any_a const& range)
+	static inline shoal_a val(any_a<> const& range)
 	{
 		return cast_<shoal_a>(val_() += range);
 	}
@@ -135,7 +135,7 @@ public: ___COLLECTION___
 		return shoal_a{ shoal_t{ std::forward<F>(init) } };
 	}
 
-	static inline shoal_a ref(any_a const& range)
+	static inline shoal_a ref(any_a<> const& range)
 	{
 		return cast_<shoal_a>(ref_() += range, true);
 	}
@@ -158,19 +158,19 @@ public: ___COLLECTION___
 		return TYPE;
 	}
 
-	inline any_a feeder(any_a const& range) const // return range of parameter values
+	inline any_a<> feeder(any_a<> const& range) const // return range of parameter values
 	{
 		return nothing_t<>::val_(); //TODO
 	}
 
 	// visitor pattern
-	static inline any_a visit(any_a const& range)
+	static inline any_a<> visit(any_a<> const& range)
 	{
 		return nothing_t<>::val_(); //TODO
 	}
 
 	// comparison
-	inline bool operator==(any_a const& thing) const
+	inline bool operator==(any_a<> const& thing) const
 	{
 		if (!check_<shoal_a>(thing))
 		{
@@ -179,7 +179,7 @@ public: ___COLLECTION___
 		return _map == cast_<shoal_a>(thing).extract__();
 	}
 
-	inline bool operator!=(any_a const& thing) const
+	inline bool operator!=(any_a<> const& thing) const
 	{
 		if (!check_<shoal_a>(thing))
 		{
@@ -190,7 +190,7 @@ public: ___COLLECTION___
 
 	inline std::size_t hash__() const
 	{
-		std::map<any_a, std::size_t> ordered;
+		std::map<any_a<>, std::size_t> ordered;
 		for (auto const& pair : _map)
 		{
 			std::size_t seed = pair.first.hash__();
@@ -206,38 +206,38 @@ public: ___COLLECTION___
 	}
 
 	// range
-	inline any_a cbegin() const
+	inline any_a<> cbegin() const
 	{
 		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cbegin());
 	}
 
-	inline any_a begin() const
+	inline any_a<> begin() const
 	{
 		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cbegin());
 	}
 
-	inline any_a begin()
+	inline any_a<> begin()
 	{
 		return iterator_t<std_unordered_map_any_any::iterator>::val__(me_(), _map.begin());
 	}
 
-	inline any_a cend() const
+	inline any_a<> cend() const
 	{
 		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cend());
 	}
 
-	inline any_a end() const
+	inline any_a<> end() const
 	{
 		return iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cend());
 	}
 
-	inline any_a end()
+	inline any_a<> end()
 	{
 		return iterator_t<std_unordered_map_any_any::iterator>::val__(me_(), _map.end());
 	}
 
 	// collection
-	inline bool has__(any_a const& key) const
+	inline bool has__(any_a<> const& key) const
 	{
 		std_unordered_map_any_any::const_iterator const it = _map.find(key);
 		return it != _map.cend();
@@ -248,7 +248,7 @@ public: ___COLLECTION___
 		return has__(sym__(s));
 	}
 
-	inline any_a at_(any_a const& key) const
+	inline any_a<> at_(any_a<> const& key) const
 	{
 		std_unordered_map_any_any::const_iterator const it = _map.find(key);
 		if (it == _map.cend())
@@ -258,32 +258,32 @@ public: ___COLLECTION___
 		return it->second;
 	}
 
-	inline any_a at__(std::string const& s) const
+	inline any_a<> at__(std::string const& s) const
 	{
 		return at_(sym__(s));
 	}
 
-	inline any_a update_(any_a const& key, any_a const& value)
+	inline any_a<> update_(any_a<> const& key, any_a<> const& value)
 	{
 		return _map[key] = value;
 	}
 
-	inline void update__(std::string const& s, any_a const& value)
+	inline void update__(std::string const& s, any_a<> const& value)
 	{
 		_map[sym__(s)] = value;
 	}
 
-	inline bool insert__(any_a const& key, any_a const& value)
+	inline bool insert__(any_a<> const& key, any_a<> const& value)
 	{
 		return _map.emplace(key, value).second;
 	}
 
-	inline bool insert__(std::string const& s, any_a const& value)
+	inline bool insert__(std::string const& s, any_a<> const& value)
 	{
 		return insert__(sym__(s), value);
 	}
 
-	inline bool erase__(any_a const& key)
+	inline bool erase__(any_a<> const& key)
 	{
 		return _map.erase(key);
 	}
@@ -308,34 +308,34 @@ public: ___COLLECTION___
 		return _map.empty();
 	}
 
-	inline void push_front__(any_a const& thing)
+	inline void push_front__(any_a<> const& thing)
 	{
 		push_back__(thing);
 	}
 
-	inline any_a pop_front_()
+	inline any_a<> pop_front_()
 	{
 		return pop_back_();
 	}
 
-	inline void push_back__(any_a const& thing)
+	inline void push_back__(any_a<> const& thing)
 	{
 		_map[thing] = thing;
 	}
 
-	inline any_a pop_back_()
+	inline any_a<> pop_back_()
 	{
 		std_unordered_map_any_any::const_iterator const it = _map.cbegin();
 		if (it == _map.cend())
 		{
 			return nothing_t<>::val_();
 		}
-		any_a result = it->second;
+		any_a<> result = it->second;
 		_map.erase(it);
 		return result;
 	}
 
-	inline shoal_t& operator+=(any_a const& range)
+	inline shoal_t& operator+=(any_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -344,7 +344,7 @@ public: ___COLLECTION___
 		return *this;
 	}
 
-	inline shoal_t& operator-=(any_a const& range)
+	inline shoal_t& operator-=(any_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{

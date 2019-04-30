@@ -20,19 +20,19 @@ namespace strange {
 
      inline bool has__ ( std :: string const & s ) const
      { assert(handle_); return read().has__(s ); }
-     inline any_a at__ ( std :: string const & s ) const
+     inline any_a < > at__ ( std :: string const & s ) const
      { assert(handle_); return read().at__(s ); }
-     inline void update__ ( std :: string const & s , any_a const & value )
+     inline void update__ ( std :: string const & s , any_a < > const & value )
      { assert(handle_); write().update__(s, value ); }
-     inline bool insert__ ( std :: string const & s , any_a const & value )
+     inline bool insert__ ( std :: string const & s , any_a < > const & value )
      { assert(handle_); return write().insert__(s, value ); }
      inline bool erase__ ( std :: string const & s )
      { assert(handle_); return write().erase__(s ); }
-     inline std :: unordered_map < any_a , any_a , any_a :: hash_f > const & extract__ ( ) const
+     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract__ ( ) const
      { assert(handle_); return read().extract__( ); }
-     inline void mutate__ ( std :: unordered_map < any_a , any_a , any_a :: hash_f > const & data )
+     inline void mutate__ ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data )
      { assert(handle_); write().mutate__(data ); }
-     inline std :: unordered_map < any_a , any_a , any_a :: hash_f > & reference__ ( )
+     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference__ ( )
      { assert(handle_); return write().reference__( ); }
     
 
@@ -43,13 +43,13 @@ namespace strange {
     	{
 
       virtual inline bool has__ ( std :: string const & s ) const = 0;
-      virtual inline any_a at__ ( std :: string const & s ) const = 0;
-      virtual inline void update__ ( std :: string const & s , any_a const & value ) = 0;
-      virtual inline bool insert__ ( std :: string const & s , any_a const & value ) = 0;
+      virtual inline any_a < > at__ ( std :: string const & s ) const = 0;
+      virtual inline void update__ ( std :: string const & s , any_a < > const & value ) = 0;
+      virtual inline bool insert__ ( std :: string const & s , any_a < > const & value ) = 0;
       virtual inline bool erase__ ( std :: string const & s ) = 0;
-      virtual inline std :: unordered_map < any_a , any_a , any_a :: hash_f > const & extract__ ( ) const = 0;
-      virtual inline void mutate__ ( std :: unordered_map < any_a , any_a , any_a :: hash_f > const & data ) = 0;
-      virtual inline std :: unordered_map < any_a , any_a , any_a :: hash_f > & reference__ ( ) = 0;
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract__ ( ) const = 0;
+      virtual inline void mutate__ ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data ) = 0;
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference__ ( ) = 0;
     	};
 
     
@@ -92,19 +92,19 @@ namespace strange {
 
       virtual inline bool has__ ( std :: string const & s ) const
       { return value_.has__(s ); }
-      virtual inline any_a at__ ( std :: string const & s ) const
+      virtual inline any_a < > at__ ( std :: string const & s ) const
       { return value_.at__(s ); }
-      virtual inline void update__ ( std :: string const & s , any_a const & value )
+      virtual inline void update__ ( std :: string const & s , any_a < > const & value )
       { value_.update__(s, value ); }
-      virtual inline bool insert__ ( std :: string const & s , any_a const & value )
+      virtual inline bool insert__ ( std :: string const & s , any_a < > const & value )
       { return value_.insert__(s, value ); }
       virtual inline bool erase__ ( std :: string const & s )
       { return value_.erase__(s ); }
-      virtual inline std :: unordered_map < any_a , any_a , any_a :: hash_f > const & extract__ ( ) const
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract__ ( ) const
       { return value_.extract__( ); }
-      virtual inline void mutate__ ( std :: unordered_map < any_a , any_a , any_a :: hash_f > const & data )
+      virtual inline void mutate__ ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data )
       { value_.mutate__(data ); }
-      virtual inline std :: unordered_map < any_a , any_a , any_a :: hash_f > & reference__ ( )
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference__ ( )
       { return value_.reference__( ); }
     	};
 
@@ -170,7 +170,7 @@ namespace strange {
 
     	{
 
-    		return "shoal";
+    		return "shoal_a";
 
     	}
 
@@ -228,7 +228,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("shoal constructor failed to cast from base to final");
+    			throw dis__("shoal_a constructor failed to cast from base to final");
 
     		}
 
@@ -266,7 +266,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("shoal assignment failed to cast from base to final");
+    			throw dis__("shoal_a assignment failed to cast from base to final");
 
     		}
 

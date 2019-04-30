@@ -1,4 +1,4 @@
-%struct_prefix%_a : public ___root___
+%struct_prefix% : public ___root___
 {
 public:
 	%nonvirtual_members% //TODO move params
@@ -79,7 +79,7 @@ private:
 	}
 
 	template <typename ___TTT___>
-	friend inline bool check_(%struct_name%_a const& value);
+	friend inline bool check_(%struct_name% const& value);
 
 public:
 	static inline char const* ___abstraction_name___()
@@ -92,22 +92,22 @@ public:
 		return bool(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
 	}
 
-	inline %struct_name%_a() = default;
+	inline %struct_name%() = default;
 
-	explicit inline %struct_name%_a(bool reference)
+	explicit inline %struct_name%(bool reference)
 		: ___root___{ reference }
 	{}
 
-	inline %struct_name%_a(%struct_name%_a const& other, bool reference)
+	inline %struct_name%(%struct_name% const& other, bool reference)
 		: ___root___(other, reference)
 	{}
 
-	inline %struct_name%_a(%struct_name%_a&& other, bool reference)
+	inline %struct_name%(%struct_name%&& other, bool reference)
 		: ___root___(std::move(other), reference)
 	{}
 
 	template <typename ___TTT___>
-	explicit inline %struct_name%_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
+	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 		: ___root___(handle, reference)
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -120,11 +120,11 @@ public:
 #endif
 	}
 
-	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%_a, std::decay_t<___TTT___>>::value>>
-	explicit inline %struct_name%_a(___TTT___ value, bool reference = false);
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
+	explicit inline %struct_name%(___TTT___ value, bool reference = false);
 
 	template <typename ___TTT___>
-	inline %struct_name%_a& operator=(std::shared_ptr<___TTT___> const& handle)
+	inline %struct_name%& operator=(std::shared_ptr<___TTT___> const& handle)
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
@@ -139,26 +139,26 @@ public:
 		return *this;
 	}
 
-	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%_a, std::decay_t<___TTT___>>::value>>
-	inline %struct_name%_a& operator=(___TTT___ value);
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
+	inline %struct_name%& operator=(___TTT___ value);
 };
 
 template <typename ___TTT___>
-inline bool check_(%struct_name%_a const& value)
+inline bool check_(%struct_name% const& value)
 {
 	return ___TTT___::___check___(value.handle_);
 }
 
 template <typename ___TTT___, typename>
-inline %struct_name%_a::%struct_name%_a(___TTT___ value, bool reference)
+inline %struct_name%::%struct_name%(___TTT___ value, bool reference)
 	: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 		reference)
 {}
 
 template <typename ___TTT___, typename>
-inline %struct_name%_a& %struct_name%_a::operator=(___TTT___ value)
+inline %struct_name%& %struct_name%::operator=(___TTT___ value)
 {
-	%struct_name%_a temp{ std::move(value) };
+	%struct_name% temp{ std::move(value) };
 	std::swap(temp.handle_, handle_);
 	handle_->___weak___(handle_);
 	return *this;

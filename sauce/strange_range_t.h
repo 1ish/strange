@@ -4,19 +4,19 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = any_a>
+template <typename _ABSTRACTION_ = any_a<>>
 class range_t : public something_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline any_a val(any_a const& range)
+	static inline any_a<> val(any_a<> const& range)
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::range::val passed empty range");
 		}
-		any_a begin = *it;
+		any_a<> begin = *it;
 		if (++it == range.cend())
 		{
 			throw dis__("strange::range::val passed short range");
@@ -24,19 +24,19 @@ public: ___THING___
 		return val_(begin, *it);
 	}
 
-	static inline any_a val_(any_a const& begin, any_a const& end)
+	static inline any_a<> val_(any_a<> const& begin, any_a<> const& end)
 	{
-		return any_a{ range_t(begin, end) };
+		return any_a<>{ range_t(begin, end) };
 	}
 
-	static inline any_a ref(any_a const& range)
+	static inline any_a<> ref(any_a<> const& range)
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::range::ref passed empty range");
 		}
-		any_a begin = *it;
+		any_a<> begin = *it;
 		if (++it == range.cend())
 		{
 			throw dis__("strange::range::ref passed short range");
@@ -44,9 +44,9 @@ public: ___THING___
 		return ref_(begin, *it);
 	}
 
-	static inline any_a ref_(any_a const& begin, any_a const& end)
+	static inline any_a<> ref_(any_a<> const& begin, any_a<> const& end)
 	{
-		return any_a(range_t(begin, end), true);
+		return any_a<>(range_t(begin, end), true);
 	}
 
 	// reflection
@@ -57,41 +57,41 @@ public: ___THING___
 	}
 
 	// range
-	inline any_a cbegin() const
+	inline any_a<> cbegin() const
 	{
 		return _begin;
 	}
 
-	inline any_a begin() const
+	inline any_a<> begin() const
 	{
 		return _begin;
 	}
 
-	inline any_a begin()
+	inline any_a<> begin()
 	{
 		return _begin;
 	}
 
-	inline any_a cend() const
+	inline any_a<> cend() const
 	{
 		return _end;
 	}
 
-	inline any_a end() const
+	inline any_a<> end() const
 	{
 		return _end;
 	}
 
-	inline any_a end()
+	inline any_a<> end()
 	{
 		return _end;
 	}
 
 protected:
-	any_a _begin;
-	any_a _end;
+	any_a<> _begin;
+	any_a<> _end;
 
-	inline range_t(any_a const& begin, any_a const& end)
+	inline range_t(any_a<> const& begin, any_a<> const& end)
 		: something_t{}
 		, _begin(begin)
 		, _end(end)

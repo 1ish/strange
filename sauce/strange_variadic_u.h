@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = any_a>
+template <typename _ABSTRACTION_ = any_a<>>
 class variadic_u
 {
 public:

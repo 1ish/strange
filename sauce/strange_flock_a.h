@@ -20,19 +20,19 @@ namespace strange {
 
      inline bool has__ ( int64_t index ) const
      { assert(handle_); return read().has__(index ); }
-     inline any_a at__ ( int64_t index ) const
+     inline any_a < > at__ ( int64_t index ) const
      { assert(handle_); return read().at__(index ); }
-     inline void update__ ( int64_t index , any_a const & value )
+     inline void update__ ( int64_t index , any_a < > const & value )
      { assert(handle_); write().update__(index, value ); }
-     inline bool insert__ ( int64_t index , any_a const & value )
+     inline bool insert__ ( int64_t index , any_a < > const & value )
      { assert(handle_); return write().insert__(index, value ); }
      inline bool erase__ ( int64_t index )
      { assert(handle_); return write().erase__(index ); }
-     inline std :: vector < any_a > const & extract__ ( ) const
+     inline std :: vector < any_a < >> const & extract__ ( ) const
      { assert(handle_); return read().extract__( ); }
-     inline void mutate__ ( std :: vector < any_a > const & data )
+     inline void mutate__ ( std :: vector < any_a < >> const & data )
      { assert(handle_); write().mutate__(data ); }
-     inline std :: vector < any_a > & reference__ ( )
+     inline std :: vector < any_a < >> & reference__ ( )
      { assert(handle_); return write().reference__( ); }
     
 
@@ -43,13 +43,13 @@ namespace strange {
     	{
 
       virtual inline bool has__ ( int64_t index ) const = 0;
-      virtual inline any_a at__ ( int64_t index ) const = 0;
-      virtual inline void update__ ( int64_t index , any_a const & value ) = 0;
-      virtual inline bool insert__ ( int64_t index , any_a const & value ) = 0;
+      virtual inline any_a < > at__ ( int64_t index ) const = 0;
+      virtual inline void update__ ( int64_t index , any_a < > const & value ) = 0;
+      virtual inline bool insert__ ( int64_t index , any_a < > const & value ) = 0;
       virtual inline bool erase__ ( int64_t index ) = 0;
-      virtual inline std :: vector < any_a > const & extract__ ( ) const = 0;
-      virtual inline void mutate__ ( std :: vector < any_a > const & data ) = 0;
-      virtual inline std :: vector < any_a > & reference__ ( ) = 0;
+      virtual inline std :: vector < any_a < >> const & extract__ ( ) const = 0;
+      virtual inline void mutate__ ( std :: vector < any_a < >> const & data ) = 0;
+      virtual inline std :: vector < any_a < >> & reference__ ( ) = 0;
     	};
 
     
@@ -92,19 +92,19 @@ namespace strange {
 
       virtual inline bool has__ ( int64_t index ) const
       { return value_.has__(index ); }
-      virtual inline any_a at__ ( int64_t index ) const
+      virtual inline any_a < > at__ ( int64_t index ) const
       { return value_.at__(index ); }
-      virtual inline void update__ ( int64_t index , any_a const & value )
+      virtual inline void update__ ( int64_t index , any_a < > const & value )
       { value_.update__(index, value ); }
-      virtual inline bool insert__ ( int64_t index , any_a const & value )
+      virtual inline bool insert__ ( int64_t index , any_a < > const & value )
       { return value_.insert__(index, value ); }
       virtual inline bool erase__ ( int64_t index )
       { return value_.erase__(index ); }
-      virtual inline std :: vector < any_a > const & extract__ ( ) const
+      virtual inline std :: vector < any_a < >> const & extract__ ( ) const
       { return value_.extract__( ); }
-      virtual inline void mutate__ ( std :: vector < any_a > const & data )
+      virtual inline void mutate__ ( std :: vector < any_a < >> const & data )
       { value_.mutate__(data ); }
-      virtual inline std :: vector < any_a > & reference__ ( )
+      virtual inline std :: vector < any_a < >> & reference__ ( )
       { return value_.reference__( ); }
     	};
 
@@ -170,7 +170,7 @@ namespace strange {
 
     	{
 
-    		return "flock";
+    		return "flock_a";
 
     	}
 
@@ -228,7 +228,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("flock constructor failed to cast from base to final");
+    			throw dis__("flock_a constructor failed to cast from base to final");
 
     		}
 
@@ -266,7 +266,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("flock assignment failed to cast from base to final");
+    			throw dis__("flock_a assignment failed to cast from base to final");
 
     		}
 

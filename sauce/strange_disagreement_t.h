@@ -9,9 +9,9 @@ class disagreement_t : public misunderstanding_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline misunderstanding_a val(any_a const& range)
+	static inline misunderstanding_a val(any_a<> const& range)
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return val_();
@@ -19,7 +19,7 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline misunderstanding_a val_(any_a const& thing = nothing_t<>::val_())
+	static inline misunderstanding_a val_(any_a<> const& thing = nothing_t<>::val_())
 	{
 		return val__("");
 	}
@@ -30,9 +30,9 @@ public: ___THING___
 		return misunderstanding_a{ disagreement_t{ std::forward<F>(s) } };
 	}
 
-	static inline misunderstanding_a ref(any_a const& range)
+	static inline misunderstanding_a ref(any_a<> const& range)
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return ref_();
@@ -40,7 +40,7 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline misunderstanding_a ref_(any_a const& thing = nothing_t<>::val_())
+	static inline misunderstanding_a ref_(any_a<> const& thing = nothing_t<>::val_())
 	{
 		return ref__("");
 	}
@@ -59,10 +59,10 @@ public: ___THING___
 	}
 
 	// misunderstanding
-	inline misunderstanding_a add(any_a const& range) const
+	inline misunderstanding_a add(any_a<> const& range) const
 	{
 		std::string s = _string;
-		for (any_a const& thing : range)
+		for (any_a<> const& thing : range)
 		{
 			if (check_<misunderstanding_a>(thing))
 			{

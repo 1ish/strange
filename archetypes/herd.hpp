@@ -10,7 +10,7 @@
 namespace strange
 {
 
-class herd
+class herd_a
 {
 public:
 	// herd
@@ -20,9 +20,9 @@ public:
 	inline bool erase__(std::string const& s);
 
 	// data
-	inline std::unordered_set<any_a, any_a::hash_f> const& extract__() const;
-	inline void mutate__(std::unordered_set<any_a, any_a::hash_f> const& data);
-	inline std::unordered_set<any_a, any_a::hash_f>& reference__();
+	inline std::unordered_set<any_a<>, any_a<>::hash_f> const& extract__() const;
+	inline void mutate__(std::unordered_set<any_a<>, any_a<>::hash_f> const& data);
+	inline std::unordered_set<any_a<>, any_a<>::hash_f>& reference__();
 };
 
 } // namespace strange

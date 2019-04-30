@@ -4,14 +4,14 @@
 namespace strange
 {
 
-template <bool CONST = false, typename _ABSTRACTION_ = any_a, typename END = nothing_t<>>
+template <bool CONST = false, typename _ABSTRACTION_ = any_a<>, typename END = nothing_t<>>
 class it_t : public something_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline any_a val(any_a const& range)
+	static inline any_a<> val(any_a<> const& range)
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return val_();
@@ -19,14 +19,14 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline any_a val_(any_a const& thing = END::val_())
+	static inline any_a<> val_(any_a<> const& thing = END::val_())
 	{
-		return any_a{ it_t<CONST, _ABSTRACTION_, END>{ thing } };
+		return any_a<>{ it_t<CONST, _ABSTRACTION_, END>{ thing } };
 	}
 
-	static inline any_a ref(any_a const& range)
+	static inline any_a<> ref(any_a<> const& range)
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return ref_();
@@ -34,9 +34,9 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline any_a ref_(any_a const& thing = END::val_())
+	static inline any_a<> ref_(any_a<> const& thing = END::val_())
 	{
-		return any_a(it_t<CONST, _ABSTRACTION_, END>{ thing }, true);
+		return any_a<>(it_t<CONST, _ABSTRACTION_, END>{ thing }, true);
 	}
 
 	// reflection
@@ -47,12 +47,12 @@ public: ___THING___
 	}
 
 	// comparison
-	inline bool operator==(any_a const& thing) const
+	inline bool operator==(any_a<> const& thing) const
 	{
 		return _thing.nothing__() == thing->nothing__();
 	}
 
-	inline bool operator!=(any_a const& thing) const
+	inline bool operator!=(any_a<> const& thing) const
 	{
 		return _thing.nothing__() != thing->nothing__();
 	}
@@ -63,7 +63,7 @@ public: ___THING___
 	}
 
 	// iterator
-	inline any_a& operator*() const
+	inline any_a<>& operator*() const
 	{
 		return _thing;
 	}
@@ -82,9 +82,9 @@ public: ___THING___
 	}
 
 protected:
-	mutable any_a _thing; //TODO A forward iterator cannot be "stashing": it cannot return a reference to an object within itself, because such references would be invalidated by the destruction of the forward iterator.
+	mutable any_a<> _thing; //TODO A forward iterator cannot be "stashing": it cannot return a reference to an object within itself, because such references would be invalidated by the destruction of the forward iterator.
 
-	inline it_t(any_a const& thing)
+	inline it_t(any_a<> const& thing)
 		: something_t{}
 		, _thing(thing, !CONST)
 	{}

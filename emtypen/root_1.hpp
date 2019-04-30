@@ -1,10 +1,10 @@
-%struct_prefix%_a
+%struct_prefix%
 {
 public:
 	class hash_f
 	{
 	public:
-		inline std::size_t operator()(%struct_name%_a const& thing) const
+		inline std::size_t operator()(%struct_name% const& thing) const
 		{
 			return thing.hash__();
 		}
@@ -16,65 +16,65 @@ public:
 		return read().operator bool();
 	}
 
-	inline %struct_name%_a& operator++()
+	inline %struct_name%& operator++()
 	{
 		assert(handle_);
 		write().operator++();
 		return *this;
 	}
 
-	inline %struct_name%_a operator++(int)
+	inline %struct_name% operator++(int)
 	{
 		assert(handle_);
-		%struct_name%_a result = *this;
+		%struct_name% result = *this;
 		write().operator++();
 		return result;
 	}
 
-	inline %struct_name%_a& operator--()
+	inline %struct_name%& operator--()
 	{
 		assert(handle_);
 		write().operator--();
 		return *this;
 	}
 
-	inline %struct_name%_a operator--(int)
+	inline %struct_name% operator--(int)
 	{
 		assert(handle_);
-		%struct_name%_a result = *this;
+		%struct_name% result = *this;
 		write().operator--();
 		return result;
 	}
 
-	inline %struct_name%_a& operator+=(%struct_name%_a const& other)
+	inline %struct_name%& operator+=(%struct_name% const& other)
 	{
 		assert(handle_);
 		write().operator+=(other);
 		return *this;
 	}
 
-	inline %struct_name%_a& operator-=(%struct_name%_a const& other)
+	inline %struct_name%& operator-=(%struct_name% const& other)
 	{
 		assert(handle_);
 		write().operator-=(other);
 		return *this;
 	}
 
-	inline %struct_name%_a& operator*=(%struct_name%_a const& other)
+	inline %struct_name%& operator*=(%struct_name% const& other)
 	{
 		assert(handle_);
 		write().operator*=(other);
 		return *this;
 	}
 
-	inline %struct_name%_a& operator/=(%struct_name%_a const& other)
+	inline %struct_name%& operator/=(%struct_name% const& other)
 	{
 		assert(handle_);
 		write().operator/=(other);
 		return *this;
 	}
 
-	inline %struct_name%_a& operator%=(%struct_name%_a const& other)
+	inline %struct_name%& operator%=(%struct_name% const& other)
 	{
 		assert(handle_);
 		write().operator%=(other);
@@ -103,15 +103,15 @@ protected:
 
 		virtual inline void operator--() = 0;
 
-		virtual inline void operator+=(%struct_name%_a const& other) = 0;
+		virtual inline void operator+=(%struct_name% const& other) = 0;
 
-		virtual inline void operator-=(%struct_name%_a const& other) = 0;
+		virtual inline void operator-=(%struct_name% const& other) = 0;
 
-		virtual inline void operator*=(%struct_name%_a const& other) = 0;
+		virtual inline void operator*=(%struct_name% const& other) = 0;
 
-		virtual inline void operator/=(%struct_name%_a const& other) = 0;
+		virtual inline void operator/=(%struct_name% const& other) = 0;
 
-		virtual inline void operator%=(%struct_name%_a const& other) = 0;
+		virtual inline void operator%=(%struct_name% const& other) = 0;
 
 		%pure_virtual_members%
 	};
@@ -149,27 +149,27 @@ protected:
 			value_.operator--();
 		}
 
-		virtual inline void operator+=(%struct_name%_a const& other) final
+		virtual inline void operator+=(%struct_name% const& other) final
 		{
 			value_.operator+=(other);
 		}
 
-		virtual inline void operator-=(%struct_name%_a const& other) final
+		virtual inline void operator-=(%struct_name% const& other) final
 		{
 			value_.operator-=(other);
 		}
 
-		virtual inline void operator*=(%struct_name%_a const& other) final
+		virtual inline void operator*=(%struct_name% const& other) final
 		{
 			value_.operator*=(other);
 		}
 
-		virtual inline void operator/=(%struct_name%_a const& other) final
+		virtual inline void operator/=(%struct_name% const& other) final
 		{
 			value_.operator/=(other);
 		}
 
-		virtual inline void operator%=(%struct_name%_a const& other) final
+		virtual inline void operator%=(%struct_name% const& other) final
 		{
 			value_.operator%=(other);
 		}
@@ -237,10 +237,10 @@ private:
 	}
 
 	template <typename ___TTT___, typename ___1___>
-	friend inline bool check_(%struct_name%_a<___1___> const& value);
+	friend inline bool check_(%struct_name%<___1___> const& value);
 
 	template <typename ___TTT___, typename ___1___>
-	friend inline ___TTT___ cast_(%struct_name%_a<___1___> const& value, bool reference = false);
+	friend inline ___TTT___ cast_(%struct_name%<___1___> const& value, bool reference = false);
 
 public:
 	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
@@ -255,86 +255,88 @@ public:
 		return true;
 	}
 
-	inline %struct_name%_a()
+	inline %struct_name%()
 		: handle_{}
 		, ___reference___{ false }
 	{}
 
-	explicit inline %struct_name%_a(bool reference)
+	explicit inline %struct_name%(bool reference)
 		: handle_{}
 		, ___reference___{ reference }
 	{}
 
-	inline %struct_name%_a(%struct_name%_a const& other)
+	inline %struct_name%(%struct_name% const& other)
 		: handle_{ other.handle_ }
 		, ___reference___{ false }
 	{
 		handle_->___weak___(handle_);
 	}
 
-	inline %struct_name%_a(%struct_name%_a const& other, bool reference)
+	inline %struct_name%(%struct_name% const& other, bool reference)
 		: handle_{ other.handle_ }
 		, ___reference___{ reference }
 	{
 		handle_->___weak___(handle_);
 	}
 
-	inline %struct_name%_a(%struct_name%_a&& other)
+	inline %struct_name%(%struct_name%&& other)
 		: handle_{ std::move(other.handle_) }
 		, ___reference___{ false }
 	{
 		handle_->___weak___(handle_);
 	}
 
-	inline %struct_name%_a(%struct_name%_a&& other, bool reference)
+	inline %struct_name%(%struct_name%&& other, bool reference)
 		: handle_{ std::move(other.handle_) }
 		, ___reference___{ reference }
 	{
 		handle_->___weak___(handle_);
 	}
 
-	inline %struct_name%_a& operator=(%struct_name%_a const& other)
+	inline %struct_name%& operator=(%struct_name% const& other)
 	{
 		handle_ = other.handle_;
 		handle_->___weak___(handle_);
 		return *this;
 	}
 
-	inline %struct_name%_a& operator=(%struct_name%_a&& other)
+	inline %struct_name%& operator=(%struct_name%&& other)
 	{
 		handle_ = std::move(other.handle_);
 		handle_->___weak___(handle_);
 		return *this;
 	}
 
-	virtual ~%struct_name%_a() = default;
+	virtual ~%struct_name%() = default;
 
 	template <typename ___TTT___>
-	explicit inline %struct_name%_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
+	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 		: handle_{ handle }
 		, ___reference___{ reference }
 	{
 		handle_->___weak___(handle_);
 	}
 
-	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%_a, std::decay_t<___TTT___>>::value>>
-	explicit inline %struct_name%_a(___TTT___ value, bool reference = false)
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
+	explicit inline %struct_name%(___TTT___ value, bool reference = false)
+		: handle_{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+		, ___reference___{ reference }
 	{
 		handle_->___weak___(handle_);
 	}
 
 	template <typename ___TTT___>
-	inline %struct_name%_a& operator=(std::shared_ptr<___TTT___> const& handle)
+	inline %struct_name%& operator=(std::shared_ptr<___TTT___> const& handle)
 	{
 		handle_ = handle;
 		handle_->___weak___(handle_);
 		return *this;
 	}
 
-	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%_a, std::decay_t<___TTT___>>::value>>
-	inline %struct_name%_a& operator=(___TTT___ value)
+	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
+	inline %struct_name%& operator=(___TTT___ value)
 	{
-		% struct_name% _a temp{ std::move(value) };
+		%struct_name% temp{ std::move(value) };
 		std::swap(temp.handle_, handle_);
 		handle_->___weak___(handle_);
 		return *this;
@@ -342,7 +344,7 @@ public:
 };
 
 template <typename ___TTT___, typename ___1___>
-inline bool check_(%struct_name%_a<___1___> const& value)
+inline bool check_(%struct_name%<___1___> const& value)
 {
 	return ___TTT___::___check___(value.handle_);
 }
@@ -354,7 +356,7 @@ inline bool check_(___VVV___ const&)
 }
 
 template <typename ___TTT___, typename ___1___>
-inline ___TTT___ cast_(%struct_name%_a<___1___> const& value, bool reference)
+inline ___TTT___ cast_(%struct_name%<___1___> const& value, bool reference)
 {
 	return ___TTT___(value.handle_, reference);
 }

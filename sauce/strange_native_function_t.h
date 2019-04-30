@@ -4,29 +4,29 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = any_a>
+template <typename _ABSTRACTION_ = any_a<>>
 class native_function_t : public thing_t<_ABSTRACTION_>
 {
-	using function = any_a(*)(any_a const&);
+	using function = any_a<>(*)(any_a<> const&);
 
 public: ___THING___
 	// construction
 	template <typename... Args>
-	static inline any_a val__(function const fun, Args&&... args)
+	static inline any_a<> val__(function const fun, Args&&... args)
 	{
 		std::vector<symbol_a> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<symbol_a>::variadic_(v, std::forward<Args>(args)...);
-		return any_a{ native_function_t(fun, std::move(v)) };
+		return any_a<>{ native_function_t(fun, std::move(v)) };
 	}
 
 	template <typename... Args>
-	static inline any_a ref__(function const fun, Args&&... args)
+	static inline any_a<> ref__(function const fun, Args&&... args)
 	{
 		std::vector<symbol_a> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<symbol_a>::variadic_(v, std::forward<Args>(args)...);
-		return any_a(native_function_t(fun, std::move(v)), true);
+		return any_a<>(native_function_t(fun, std::move(v)), true);
 	}
 
 	// reflection
@@ -36,13 +36,13 @@ public: ___THING___
 		return TYPE;
 	}
 
-	inline any_a eater_() const
+	inline any_a<> eater_() const
 	{
 		return nothing_t<>::val_(); //TODO return range of parameter names
 	}
 
 	// function
-	inline any_a operator()(any_a const& _, any_a const& range) const
+	inline any_a<> operator()(any_a<> const& _, any_a<> const& range) const
 	{
 		return _function(range);
 	}

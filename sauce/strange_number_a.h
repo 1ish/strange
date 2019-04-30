@@ -18,105 +18,105 @@ namespace strange {
 
     public:
 
-     inline number_a decrement ( any_a const & _ )
+     inline number_a decrement ( any_a < > const & _ )
      { assert(handle_); return write().decrement(_ ); }
      inline number_a decrement_ ( )
      { assert(handle_); return write().decrement_( ); }
-     inline number_a self_add ( any_a const & range )
+     inline number_a self_add ( any_a < > const & range )
      { assert(handle_); return write().self_add(range ); }
      inline number_a self_add_ ( number_a const & number )
      { assert(handle_); return write().self_add_(number ); }
-     inline number_a add ( any_a const & range ) const
+     inline number_a add ( any_a < > const & range ) const
      { assert(handle_); return read().add(range ); }
      inline number_a add_ ( number_a const & number ) const
      { assert(handle_); return read().add_(number ); }
      inline number_a operator + ( number_a const & number ) const
      { assert(handle_); return read().operator+(number ); }
-     inline number_a self_subtract ( any_a const & range )
+     inline number_a self_subtract ( any_a < > const & range )
      { assert(handle_); return write().self_subtract(range ); }
      inline number_a self_subtract_ ( number_a const & number )
      { assert(handle_); return write().self_subtract_(number ); }
-     inline number_a subtract ( any_a const & range ) const
+     inline number_a subtract ( any_a < > const & range ) const
      { assert(handle_); return read().subtract(range ); }
      inline number_a subtract_ ( number_a const & number ) const
      { assert(handle_); return read().subtract_(number ); }
      inline number_a operator - ( number_a const & number ) const
      { assert(handle_); return read().operator-(number ); }
-     inline number_a self_multiply ( any_a const & range )
+     inline number_a self_multiply ( any_a < > const & range )
      { assert(handle_); return write().self_multiply(range ); }
      inline number_a self_multiply_ ( number_a const & number )
      { assert(handle_); return write().self_multiply_(number ); }
-     inline number_a multiply ( any_a const & range ) const
+     inline number_a multiply ( any_a < > const & range ) const
      { assert(handle_); return read().multiply(range ); }
      inline number_a multiply_ ( number_a const & number ) const
      { assert(handle_); return read().multiply_(number ); }
      inline number_a operator * ( number_a const & number ) const
      { assert(handle_); return read().operator*(number ); }
-     inline number_a self_divide ( any_a const & range )
+     inline number_a self_divide ( any_a < > const & range )
      { assert(handle_); return write().self_divide(range ); }
      inline number_a self_divide_ ( number_a const & number )
      { assert(handle_); return write().self_divide_(number ); }
-     inline number_a divide ( any_a const & range ) const
+     inline number_a divide ( any_a < > const & range ) const
      { assert(handle_); return read().divide(range ); }
      inline number_a divide_ ( number_a const & number ) const
      { assert(handle_); return read().divide_(number ); }
      inline number_a operator / ( number_a const & number ) const
      { assert(handle_); return read().operator/(number ); }
-     inline number_a self_modulo ( any_a const & range )
+     inline number_a self_modulo ( any_a < > const & range )
      { assert(handle_); return write().self_modulo(range ); }
      inline number_a self_modulo_ ( number_a const & number )
      { assert(handle_); return write().self_modulo_(number ); }
-     inline number_a modulo ( any_a const & range ) const
+     inline number_a modulo ( any_a < > const & range ) const
      { assert(handle_); return read().modulo(range ); }
      inline number_a modulo_ ( number_a const & number ) const
      { assert(handle_); return read().modulo_(number ); }
      inline number_a operator % ( number_a const & number ) const
      { assert(handle_); return read().operator%(number ); }
-     inline number_a to_int_64 ( any_a const & _ ) const
+     inline number_a to_int_64 ( any_a < > const & _ ) const
      { assert(handle_); return read().to_int_64(_ ); }
      inline number_a to_int_64_ ( ) const
      { assert(handle_); return read().to_int_64_( ); }
      inline int64_t to_int_64__ ( ) const
      { assert(handle_); return read().to_int_64__( ); }
-     inline any_a from_int_64 ( any_a const & range )
+     inline any_a < > from_int_64 ( any_a < > const & range )
      { assert(handle_); return write().from_int_64(range ); }
-     inline any_a from_int_64_ ( number_a const & int_64 )
+     inline any_a < > from_int_64_ ( number_a const & int_64 )
      { assert(handle_); return write().from_int_64_(int_64 ); }
      inline void from_int_64__ ( int64_t int_64 )
      { assert(handle_); write().from_int_64__(int_64 ); }
-     inline number_a to_float_64 ( any_a const & _ ) const
+     inline number_a to_float_64 ( any_a < > const & _ ) const
      { assert(handle_); return read().to_float_64(_ ); }
      inline number_a to_float_64_ ( ) const
      { assert(handle_); return read().to_float_64_( ); }
      inline double to_float_64__ ( ) const
      { assert(handle_); return read().to_float_64__( ); }
-     inline any_a from_float_64 ( any_a const & range )
+     inline any_a < > from_float_64 ( any_a < > const & range )
      { assert(handle_); return write().from_float_64(range ); }
-     inline any_a from_float_64_ ( number_a const & float_64 )
+     inline any_a < > from_float_64_ ( number_a const & float_64 )
      { assert(handle_); return write().from_float_64_(float_64 ); }
      inline void from_float_64__ ( double float_64 )
      { assert(handle_); write().from_float_64__(float_64 ); }
-     inline any_a less_than ( any_a const & range ) const
+     inline any_a < > less_than ( any_a < > const & range ) const
      { assert(handle_); return read().less_than(range ); }
-     inline any_a less_than_ ( number_a const & number ) const
+     inline any_a < > less_than_ ( number_a const & number ) const
      { assert(handle_); return read().less_than_(number ); }
      inline bool operator < ( number_a const & number ) const
      { assert(handle_); return read().operator<(number ); }
-     inline any_a greater_than ( any_a const & range ) const
+     inline any_a < > greater_than ( any_a < > const & range ) const
      { assert(handle_); return read().greater_than(range ); }
-     inline any_a greater_than_ ( number_a const & number ) const
+     inline any_a < > greater_than_ ( number_a const & number ) const
      { assert(handle_); return read().greater_than_(number ); }
      inline bool operator > ( number_a const & number ) const
      { assert(handle_); return read().operator>(number ); }
-     inline any_a less_or_equal ( any_a const & range ) const
+     inline any_a < > less_or_equal ( any_a < > const & range ) const
      { assert(handle_); return read().less_or_equal(range ); }
-     inline any_a less_or_equal_ ( number_a const & number ) const
+     inline any_a < > less_or_equal_ ( number_a const & number ) const
      { assert(handle_); return read().less_or_equal_(number ); }
      inline bool operator <= ( number_a const & number ) const
      { assert(handle_); return read().operator<=(number ); }
-     inline any_a greater_or_equal ( any_a const & range ) const
+     inline any_a < > greater_or_equal ( any_a < > const & range ) const
      { assert(handle_); return read().greater_or_equal(range ); }
-     inline any_a greater_or_equal_ ( number_a const & number ) const
+     inline any_a < > greater_or_equal_ ( number_a const & number ) const
      { assert(handle_); return read().greater_or_equal_(number ); }
      inline bool operator >= ( number_a const & number ) const
      { assert(handle_); return read().operator>=(number ); }
@@ -128,56 +128,56 @@ namespace strange {
 
     	{
 
-      virtual inline number_a decrement ( any_a const & _ ) = 0;
+      virtual inline number_a decrement ( any_a < > const & _ ) = 0;
       virtual inline number_a decrement_ ( ) = 0;
-      virtual inline number_a self_add ( any_a const & range ) = 0;
+      virtual inline number_a self_add ( any_a < > const & range ) = 0;
       virtual inline number_a self_add_ ( number_a const & number ) = 0;
-      virtual inline number_a add ( any_a const & range ) const = 0;
+      virtual inline number_a add ( any_a < > const & range ) const = 0;
       virtual inline number_a add_ ( number_a const & number ) const = 0;
       virtual inline number_a operator + ( number_a const & number ) const = 0;
-      virtual inline number_a self_subtract ( any_a const & range ) = 0;
+      virtual inline number_a self_subtract ( any_a < > const & range ) = 0;
       virtual inline number_a self_subtract_ ( number_a const & number ) = 0;
-      virtual inline number_a subtract ( any_a const & range ) const = 0;
+      virtual inline number_a subtract ( any_a < > const & range ) const = 0;
       virtual inline number_a subtract_ ( number_a const & number ) const = 0;
       virtual inline number_a operator - ( number_a const & number ) const = 0;
-      virtual inline number_a self_multiply ( any_a const & range ) = 0;
+      virtual inline number_a self_multiply ( any_a < > const & range ) = 0;
       virtual inline number_a self_multiply_ ( number_a const & number ) = 0;
-      virtual inline number_a multiply ( any_a const & range ) const = 0;
+      virtual inline number_a multiply ( any_a < > const & range ) const = 0;
       virtual inline number_a multiply_ ( number_a const & number ) const = 0;
       virtual inline number_a operator * ( number_a const & number ) const = 0;
-      virtual inline number_a self_divide ( any_a const & range ) = 0;
+      virtual inline number_a self_divide ( any_a < > const & range ) = 0;
       virtual inline number_a self_divide_ ( number_a const & number ) = 0;
-      virtual inline number_a divide ( any_a const & range ) const = 0;
+      virtual inline number_a divide ( any_a < > const & range ) const = 0;
       virtual inline number_a divide_ ( number_a const & number ) const = 0;
       virtual inline number_a operator / ( number_a const & number ) const = 0;
-      virtual inline number_a self_modulo ( any_a const & range ) = 0;
+      virtual inline number_a self_modulo ( any_a < > const & range ) = 0;
       virtual inline number_a self_modulo_ ( number_a const & number ) = 0;
-      virtual inline number_a modulo ( any_a const & range ) const = 0;
+      virtual inline number_a modulo ( any_a < > const & range ) const = 0;
       virtual inline number_a modulo_ ( number_a const & number ) const = 0;
       virtual inline number_a operator % ( number_a const & number ) const = 0;
-      virtual inline number_a to_int_64 ( any_a const & _ ) const = 0;
+      virtual inline number_a to_int_64 ( any_a < > const & _ ) const = 0;
       virtual inline number_a to_int_64_ ( ) const = 0;
       virtual inline int64_t to_int_64__ ( ) const = 0;
-      virtual inline any_a from_int_64 ( any_a const & range ) = 0;
-      virtual inline any_a from_int_64_ ( number_a const & int_64 ) = 0;
+      virtual inline any_a < > from_int_64 ( any_a < > const & range ) = 0;
+      virtual inline any_a < > from_int_64_ ( number_a const & int_64 ) = 0;
       virtual inline void from_int_64__ ( int64_t int_64 ) = 0;
-      virtual inline number_a to_float_64 ( any_a const & _ ) const = 0;
+      virtual inline number_a to_float_64 ( any_a < > const & _ ) const = 0;
       virtual inline number_a to_float_64_ ( ) const = 0;
       virtual inline double to_float_64__ ( ) const = 0;
-      virtual inline any_a from_float_64 ( any_a const & range ) = 0;
-      virtual inline any_a from_float_64_ ( number_a const & float_64 ) = 0;
+      virtual inline any_a < > from_float_64 ( any_a < > const & range ) = 0;
+      virtual inline any_a < > from_float_64_ ( number_a const & float_64 ) = 0;
       virtual inline void from_float_64__ ( double float_64 ) = 0;
-      virtual inline any_a less_than ( any_a const & range ) const = 0;
-      virtual inline any_a less_than_ ( number_a const & number ) const = 0;
+      virtual inline any_a < > less_than ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > less_than_ ( number_a const & number ) const = 0;
       virtual inline bool operator < ( number_a const & number ) const = 0;
-      virtual inline any_a greater_than ( any_a const & range ) const = 0;
-      virtual inline any_a greater_than_ ( number_a const & number ) const = 0;
+      virtual inline any_a < > greater_than ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > greater_than_ ( number_a const & number ) const = 0;
       virtual inline bool operator > ( number_a const & number ) const = 0;
-      virtual inline any_a less_or_equal ( any_a const & range ) const = 0;
-      virtual inline any_a less_or_equal_ ( number_a const & number ) const = 0;
+      virtual inline any_a < > less_or_equal ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > less_or_equal_ ( number_a const & number ) const = 0;
       virtual inline bool operator <= ( number_a const & number ) const = 0;
-      virtual inline any_a greater_or_equal ( any_a const & range ) const = 0;
-      virtual inline any_a greater_or_equal_ ( number_a const & number ) const = 0;
+      virtual inline any_a < > greater_or_equal ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > greater_or_equal_ ( number_a const & number ) const = 0;
       virtual inline bool operator >= ( number_a const & number ) const = 0;
     	};
 
@@ -209,105 +209,105 @@ namespace strange {
 
     
 
-      virtual inline number_a decrement ( any_a const & _ )
+      virtual inline number_a decrement ( any_a < > const & _ )
       { return value_.decrement(_ ); }
       virtual inline number_a decrement_ ( )
       { return value_.decrement_( ); }
-      virtual inline number_a self_add ( any_a const & range )
+      virtual inline number_a self_add ( any_a < > const & range )
       { return value_.self_add(range ); }
       virtual inline number_a self_add_ ( number_a const & number )
       { return value_.self_add_(number ); }
-      virtual inline number_a add ( any_a const & range ) const
+      virtual inline number_a add ( any_a < > const & range ) const
       { return value_.add(range ); }
       virtual inline number_a add_ ( number_a const & number ) const
       { return value_.add_(number ); }
       virtual inline number_a operator + ( number_a const & number ) const
       { return value_.operator+(number ); }
-      virtual inline number_a self_subtract ( any_a const & range )
+      virtual inline number_a self_subtract ( any_a < > const & range )
       { return value_.self_subtract(range ); }
       virtual inline number_a self_subtract_ ( number_a const & number )
       { return value_.self_subtract_(number ); }
-      virtual inline number_a subtract ( any_a const & range ) const
+      virtual inline number_a subtract ( any_a < > const & range ) const
       { return value_.subtract(range ); }
       virtual inline number_a subtract_ ( number_a const & number ) const
       { return value_.subtract_(number ); }
       virtual inline number_a operator - ( number_a const & number ) const
       { return value_.operator-(number ); }
-      virtual inline number_a self_multiply ( any_a const & range )
+      virtual inline number_a self_multiply ( any_a < > const & range )
       { return value_.self_multiply(range ); }
       virtual inline number_a self_multiply_ ( number_a const & number )
       { return value_.self_multiply_(number ); }
-      virtual inline number_a multiply ( any_a const & range ) const
+      virtual inline number_a multiply ( any_a < > const & range ) const
       { return value_.multiply(range ); }
       virtual inline number_a multiply_ ( number_a const & number ) const
       { return value_.multiply_(number ); }
       virtual inline number_a operator * ( number_a const & number ) const
       { return value_.operator*(number ); }
-      virtual inline number_a self_divide ( any_a const & range )
+      virtual inline number_a self_divide ( any_a < > const & range )
       { return value_.self_divide(range ); }
       virtual inline number_a self_divide_ ( number_a const & number )
       { return value_.self_divide_(number ); }
-      virtual inline number_a divide ( any_a const & range ) const
+      virtual inline number_a divide ( any_a < > const & range ) const
       { return value_.divide(range ); }
       virtual inline number_a divide_ ( number_a const & number ) const
       { return value_.divide_(number ); }
       virtual inline number_a operator / ( number_a const & number ) const
       { return value_.operator/(number ); }
-      virtual inline number_a self_modulo ( any_a const & range )
+      virtual inline number_a self_modulo ( any_a < > const & range )
       { return value_.self_modulo(range ); }
       virtual inline number_a self_modulo_ ( number_a const & number )
       { return value_.self_modulo_(number ); }
-      virtual inline number_a modulo ( any_a const & range ) const
+      virtual inline number_a modulo ( any_a < > const & range ) const
       { return value_.modulo(range ); }
       virtual inline number_a modulo_ ( number_a const & number ) const
       { return value_.modulo_(number ); }
       virtual inline number_a operator % ( number_a const & number ) const
       { return value_.operator%(number ); }
-      virtual inline number_a to_int_64 ( any_a const & _ ) const
+      virtual inline number_a to_int_64 ( any_a < > const & _ ) const
       { return value_.to_int_64(_ ); }
       virtual inline number_a to_int_64_ ( ) const
       { return value_.to_int_64_( ); }
       virtual inline int64_t to_int_64__ ( ) const
       { return value_.to_int_64__( ); }
-      virtual inline any_a from_int_64 ( any_a const & range )
+      virtual inline any_a < > from_int_64 ( any_a < > const & range )
       { return value_.from_int_64(range ); }
-      virtual inline any_a from_int_64_ ( number_a const & int_64 )
+      virtual inline any_a < > from_int_64_ ( number_a const & int_64 )
       { return value_.from_int_64_(int_64 ); }
       virtual inline void from_int_64__ ( int64_t int_64 )
       { value_.from_int_64__(int_64 ); }
-      virtual inline number_a to_float_64 ( any_a const & _ ) const
+      virtual inline number_a to_float_64 ( any_a < > const & _ ) const
       { return value_.to_float_64(_ ); }
       virtual inline number_a to_float_64_ ( ) const
       { return value_.to_float_64_( ); }
       virtual inline double to_float_64__ ( ) const
       { return value_.to_float_64__( ); }
-      virtual inline any_a from_float_64 ( any_a const & range )
+      virtual inline any_a < > from_float_64 ( any_a < > const & range )
       { return value_.from_float_64(range ); }
-      virtual inline any_a from_float_64_ ( number_a const & float_64 )
+      virtual inline any_a < > from_float_64_ ( number_a const & float_64 )
       { return value_.from_float_64_(float_64 ); }
       virtual inline void from_float_64__ ( double float_64 )
       { value_.from_float_64__(float_64 ); }
-      virtual inline any_a less_than ( any_a const & range ) const
+      virtual inline any_a < > less_than ( any_a < > const & range ) const
       { return value_.less_than(range ); }
-      virtual inline any_a less_than_ ( number_a const & number ) const
+      virtual inline any_a < > less_than_ ( number_a const & number ) const
       { return value_.less_than_(number ); }
       virtual inline bool operator < ( number_a const & number ) const
       { return value_.operator<(number ); }
-      virtual inline any_a greater_than ( any_a const & range ) const
+      virtual inline any_a < > greater_than ( any_a < > const & range ) const
       { return value_.greater_than(range ); }
-      virtual inline any_a greater_than_ ( number_a const & number ) const
+      virtual inline any_a < > greater_than_ ( number_a const & number ) const
       { return value_.greater_than_(number ); }
       virtual inline bool operator > ( number_a const & number ) const
       { return value_.operator>(number ); }
-      virtual inline any_a less_or_equal ( any_a const & range ) const
+      virtual inline any_a < > less_or_equal ( any_a < > const & range ) const
       { return value_.less_or_equal(range ); }
-      virtual inline any_a less_or_equal_ ( number_a const & number ) const
+      virtual inline any_a < > less_or_equal_ ( number_a const & number ) const
       { return value_.less_or_equal_(number ); }
       virtual inline bool operator <= ( number_a const & number ) const
       { return value_.operator<=(number ); }
-      virtual inline any_a greater_or_equal ( any_a const & range ) const
+      virtual inline any_a < > greater_or_equal ( any_a < > const & range ) const
       { return value_.greater_or_equal(range ); }
-      virtual inline any_a greater_or_equal_ ( number_a const & number ) const
+      virtual inline any_a < > greater_or_equal_ ( number_a const & number ) const
       { return value_.greater_or_equal_(number ); }
       virtual inline bool operator >= ( number_a const & number ) const
       { return value_.operator>=(number ); }
@@ -433,7 +433,7 @@ namespace strange {
 
     	{
 
-    		return "number";
+    		return "number_a";
 
     	}
 
@@ -491,7 +491,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("number constructor failed to cast from base to derived");
+    			throw dis__("number_a constructor failed to cast from base to derived");
 
     		}
 
@@ -523,7 +523,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("number assignment failed to cast from base to derived");
+    			throw dis__("number_a assignment failed to cast from base to derived");
 
     		}
 

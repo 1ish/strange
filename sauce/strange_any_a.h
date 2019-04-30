@@ -11,7 +11,7 @@
 
 
 namespace strange {
-    
+    template < typename _1_ = void >
     class any_a
 
     {
@@ -787,15 +787,15 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___>
+    	template <typename ___TTT___, typename ___1___>
 
-    	friend inline bool check_(any_a const& value);
+    	friend inline bool check_(any_a<___1___> const& value);
 
     
 
-    	template <typename ___TTT___>
+    	template <typename ___TTT___, typename ___1___>
 
-    	friend inline ___TTT___ cast_(any_a const& value, bool reference = false);
+    	friend inline ___TTT___ cast_(any_a<___1___> const& value, bool reference = false);
 
     
 
@@ -809,7 +809,7 @@ namespace strange {
 
     	{
 
-    		return "any";
+    		return "any_a";
 
     	}
 
@@ -951,7 +951,17 @@ namespace strange {
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline any_a(___TTT___ value, bool reference = false);
+    	explicit inline any_a(___TTT___ value, bool reference = false)
+
+    		: handle_{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+
+    		, ___reference___{ reference }
+
+    	{
+
+    		handle_->___weak___(handle_);
+
+    	}
 
     
 
@@ -973,15 +983,27 @@ namespace strange {
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
 
-    	inline any_a& operator=(___TTT___ value);
+    	inline any_a& operator=(___TTT___ value)
+
+    	{
+
+    		any_a temp{ std::move(value) };
+
+    		std::swap(temp.handle_, handle_);
+
+    		handle_->___weak___(handle_);
+
+    		return *this;
+
+    	}
 
     };
 
     
 
-    template <typename ___TTT___>
+    template <typename ___TTT___, typename ___1___>
 
-    inline bool check_(any_a const& value)
+    inline bool check_(any_a<___1___> const& value)
 
     {
 
@@ -1003,47 +1025,13 @@ namespace strange {
 
     
 
-    template <typename ___TTT___>
+    template <typename ___TTT___, typename ___1___>
 
-    inline ___TTT___ cast_(any_a const& value, bool reference)
+    inline ___TTT___ cast_(any_a<___1___> const& value, bool reference)
 
     {
 
     	return ___TTT___(value.handle_, reference);
-
-    }
-
-    
-
-    template <typename ___TTT___, typename>
-
-    inline any_a::any_a(___TTT___ value, bool reference)
-
-    	: handle_{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
-
-    	, ___reference___{ reference }
-
-    {
-
-    	handle_->___weak___(handle_);
-
-    }
-
-    
-
-    template <typename ___TTT___, typename>
-
-    inline any_a& any_a::operator=(___TTT___ value)
-
-    {
-
-    	any_a temp{ std::move(value) };
-
-    	std::swap(temp.handle_, handle_);
-
-    	handle_->___weak___(handle_);
-
-    	return *this;
 
     }
 

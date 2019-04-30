@@ -34,7 +34,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 		}
 
 		// comparison
-		inline bool operator==(any_a const& thing) const
+		inline bool operator==(any_a<> const& thing) const
 		{
 			if (!check_<data_a<ITERATOR>>(thing))
 			{
@@ -43,7 +43,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 			return _it == cast_<data_a<ITERATOR>>(thing).extract__();
 		}
 
-		inline bool operator!=(any_a const& thing) const
+		inline bool operator!=(any_a<> const& thing) const
 		{
 			if (!check_<data_a<ITERATOR>>(thing))
 			{
@@ -58,9 +58,9 @@ class herd_t : public something_t<_ABSTRACTION_>
 		}
 
 		// iterator
-		inline any_a& operator*() const
+		inline any_a<>& operator*() const
 		{
-			return const_cast<any_a&>(*_it);
+			return const_cast<any_a<>&>(*_it);
 		}
 
 		inline iterator_t& operator++()
@@ -105,10 +105,10 @@ class herd_t : public something_t<_ABSTRACTION_>
 	};
 
 public: ___COLLECTION___
-	using std_unordered_set_any = std::unordered_set<any_a, any_a::hash_f>;
+	using std_unordered_set_any = std::unordered_set<any_a<>, any_a<>::hash_f>;
 
 	// construction
-	static inline herd_a val(any_a const& range)
+	static inline herd_a val(any_a<> const& range)
 	{
 		return cast_<herd_a>(val_() += range);
 	}
@@ -124,7 +124,7 @@ public: ___COLLECTION___
 		return herd_a{ herd_t{ std::forward<F>(init) } };
 	}
 
-	static inline herd_a ref(any_a const& range)
+	static inline herd_a ref(any_a<> const& range)
 	{
 		return cast_<herd_a>(ref_() += range, true);
 	}
@@ -147,19 +147,19 @@ public: ___COLLECTION___
 		return TYPE;
 	}
 
-	inline any_a feeder(any_a const& range) const // return range of parameter values
+	inline any_a<> feeder(any_a<> const& range) const // return range of parameter values
 	{
 		return nothing_t<>::val_(); //TODO
 	}
 
 	// visitor pattern
-	static inline any_a visit(any_a const& range)
+	static inline any_a<> visit(any_a<> const& range)
 	{
 		return nothing_t<>::val_(); //TODO
 	}
 
 	// comparison
-	inline bool operator==(any_a const& thing) const
+	inline bool operator==(any_a<> const& thing) const
 	{
 		if (!check_<herd_a>(thing))
 		{
@@ -168,7 +168,7 @@ public: ___COLLECTION___
 		return _set == cast_<herd_a>(thing).extract__();
 	}
 
-	inline bool operator!=(any_a const& thing) const
+	inline bool operator!=(any_a<> const& thing) const
 	{
 		if (!check_<herd_a>(thing))
 		{
@@ -179,7 +179,7 @@ public: ___COLLECTION___
 
 	inline std::size_t hash__() const
 	{
-		std::set<any_a> const ordered(_set.cbegin(), _set.cend());
+		std::set<any_a<>> const ordered(_set.cbegin(), _set.cend());
 		std::size_t seed = std::hash<std::size_t>{}(_set.size());
 		for (auto const& item : ordered)
 		{
@@ -189,38 +189,38 @@ public: ___COLLECTION___
 	}
 
 	// range
-	inline any_a cbegin() const
+	inline any_a<> cbegin() const
 	{
 		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cbegin());
 	}
 
-	inline any_a begin() const
+	inline any_a<> begin() const
 	{
 		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cbegin());
 	}
 
-	inline any_a begin()
+	inline any_a<> begin()
 	{
 		return iterator_t<std_unordered_set_any::iterator>::val__(me_(), _set.begin());
 	}
 
-	inline any_a cend() const
+	inline any_a<> cend() const
 	{
 		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cend());
 	}
 
-	inline any_a end() const
+	inline any_a<> end() const
 	{
 		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cend());
 	}
 
-	inline any_a end()
+	inline any_a<> end()
 	{
 		return iterator_t<std_unordered_set_any::iterator>::val__(me_(), _set.end());
 	}
 
 	// collection
-	inline bool has__(any_a const& key) const
+	inline bool has__(any_a<> const& key) const
 	{
 		std_unordered_set_any::const_iterator const it = _set.find(key);
 		return it != _set.cend();
@@ -231,7 +231,7 @@ public: ___COLLECTION___
 		return has__(sym__(s));
 	}
 
-	inline any_a at_(any_a const& key) const
+	inline any_a<> at_(any_a<> const& key) const
 	{
 		std_unordered_set_any::const_iterator const it = _set.find(key);
 		if (it == _set.cend())
@@ -247,13 +247,13 @@ public: ___COLLECTION___
 		return it != _set.cend();
 	}
 
-	inline any_a update_(any_a const& key, any_a const& value)
+	inline any_a<> update_(any_a<> const& key, any_a<> const& value)
 	{
 		_set.insert(key);
 		return value;
 	}
 
-	inline bool insert__(any_a const& key, any_a const&)
+	inline bool insert__(any_a<> const& key, any_a<> const&)
 	{
 		return _set.insert(key).second;
 	}
@@ -263,7 +263,7 @@ public: ___COLLECTION___
 		return _set.insert(sym__(s)).second;
 	}
 
-	inline bool erase__(any_a const& key)
+	inline bool erase__(any_a<> const& key)
 	{
 		return _set.erase(key);
 	}
@@ -288,34 +288,34 @@ public: ___COLLECTION___
 		return _set.empty();
 	}
 
-	inline void push_front__(any_a const& thing)
+	inline void push_front__(any_a<> const& thing)
 	{
 		push_back__(thing);
 	}
 
-	inline any_a pop_front_()
+	inline any_a<> pop_front_()
 	{
 		return pop_back_();
 	}
 
-	inline void push_back__(any_a const& thing)
+	inline void push_back__(any_a<> const& thing)
 	{
 		_set.insert(thing);
 	}
 
-	inline any_a pop_back_()
+	inline any_a<> pop_back_()
 	{
 		std_unordered_set_any::const_iterator const it = _set.cbegin();
 		if (it == _set.cend())
 		{
 			return nothing_t<>::val_();
 		}
-		any_a result = *it;
+		any_a<> result = *it;
 		_set.erase(it);
 		return result;
 	}
 
-	inline herd_t& operator+=(any_a const& range)
+	inline herd_t& operator+=(any_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -324,7 +324,7 @@ public: ___COLLECTION___
 		return *this;
 	}
 
-	inline herd_t& operator-=(any_a const& range)
+	inline herd_t& operator-=(any_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{

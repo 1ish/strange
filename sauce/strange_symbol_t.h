@@ -9,9 +9,9 @@ class symbol_t : public something_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline symbol_a val(any_a const& range)
+	static inline symbol_a val(any_a<> const& range)
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return val_();
@@ -19,7 +19,7 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline symbol_a val_(any_a const& thing = nothing_t<>::val_())
+	static inline symbol_a val_(any_a<> const& thing = nothing_t<>::val_())
 	{
 		return val__("");
 	}
@@ -30,9 +30,9 @@ public: ___THING___
 		return symbol_a{ symbol_t{ std::forward<F>(s) } };
 	}
 
-	static inline symbol_a ref(any_a const& range)
+	static inline symbol_a ref(any_a<> const& range)
 	{
-		any_a it = range.cbegin();
+		any_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return ref_();
@@ -40,7 +40,7 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline symbol_a ref_(any_a const& thing = nothing_t<>::val_())
+	static inline symbol_a ref_(any_a<> const& thing = nothing_t<>::val_())
 	{
 		return ref__("");
 	}
@@ -59,12 +59,12 @@ public: ___THING___
 	}
 
 	// comparison
-	inline bool operator==(any_a const& thing) const
+	inline bool operator==(any_a<> const& thing) const
 	{
 		return check_<symbol_a>(thing) && cast_<symbol_a>(thing).to_string__() == _string;
 	}
 
-	inline bool operator!=(any_a const& thing) const
+	inline bool operator!=(any_a<> const& thing) const
 	{
 		return !check_<symbol_a>(thing) || cast_<symbol_a>(thing).to_string__() != _string;
 	}
@@ -85,10 +85,10 @@ public: ___THING___
 		return _string;
 	}
 
-	inline symbol_a add(any_a const& range) const
+	inline symbol_a add(any_a<> const& range) const
 	{
 		std::string s = _string;
-		for (any_a const& thing : range)
+		for (any_a<> const& thing : range)
 		{
 			if (check_<symbol_a>(thing))
 			{

@@ -145,7 +145,7 @@ namespace strange {
 
     	{
 
-    		return "number_data";
+    		return "number_data_a";
 
     	}
 
@@ -203,7 +203,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("number_data constructor failed to cast from base to final");
+    			throw dis__("number_data_a constructor failed to cast from base to final");
 
     		}
 
@@ -241,7 +241,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("number_data assignment failed to cast from base to final");
+    			throw dis__("number_data_a assignment failed to cast from base to final");
 
     		}
 

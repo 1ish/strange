@@ -10,7 +10,7 @@
 
 // abstractions
 #include "strange_any_a.h"
-#define ___root___ any_a
+#define ___root___ any_a<>
 #include "strange_symbol_a.h"
 #define ___derived___ symbol_a
 #include "strange_cat_a.h"

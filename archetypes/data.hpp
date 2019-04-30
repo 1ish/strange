@@ -11,7 +11,7 @@ namespace strange
 {
 
 template <typename _1_>
-class data
+class data_a
 {
 public:
 	// data

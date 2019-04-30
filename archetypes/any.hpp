@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_ANY_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/root.hpp -c ~/source/repos/strange/archetypes/any.hpp > ~/source/repos/strange/sauce/strange_any_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/root_1.hpp -c ~/source/repos/strange/archetypes/any.hpp > ~/source/repos/strange/sauce/strange_any_a.h
 */
 
 #include "definitions.hpp"
@@ -10,9 +10,19 @@
 namespace strange
 {
 
-class any
+template <typename _1_ = void>
+class any_a
 {
 public:
+	class hash_f
+	{
+	public:
+		inline std::size_t operator()(any_a const& thing) const
+		{
+			return thing.hash__();
+		}
+	};
+
 	// reflection
 	inline any_a type(any_a const& _) const;
 	inline any_a type_() const;

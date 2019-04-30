@@ -8,7 +8,7 @@ class one_t
 {
 public:
 	// erasure
-	inline void ___weak___(any_a::___WEAK___ const& weak) const
+	inline void ___weak___(any_a<>::___WEAK___ const& weak) const
 	{
 		_meek = weak;
 	}
@@ -25,7 +25,7 @@ public:
 		return this;
 	}
 
-	inline bool identical__(any_a const& thing) const
+	inline bool identical__(any_a<> const& thing) const
 	{
 		return thing.identity__() == identity__();
 	}
@@ -51,12 +51,12 @@ public:
 		return false;
 	}
 
-	inline bool operator==(any_a const& thing) const
+	inline bool operator==(any_a<> const& thing) const
 	{
 		return identical__(thing);
 	}
 
-	inline bool operator!=(any_a const& thing) const
+	inline bool operator!=(any_a<> const& thing) const
 	{
 		return !identical__(thing);
 	}
@@ -72,7 +72,7 @@ public:
 	}
 
 protected:
-	mutable any_a::___WEAK___ _meek;
+	mutable any_a<>::___WEAK___ _meek;
 
 	// construction
 	inline one_t() {};

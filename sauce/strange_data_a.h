@@ -193,7 +193,7 @@ namespace strange {
 
     	{
 
-    		return "data";
+    		return "data_a";
 
     	}
 
@@ -251,7 +251,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("data constructor failed to cast from base to derived");
+    			throw dis__("data_a constructor failed to cast from base to derived");
 
     		}
 
@@ -289,7 +289,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("data assignment failed to cast from base to derived");
+    			throw dis__("data_a assignment failed to cast from base to derived");
 
     		}
 
@@ -315,7 +315,7 @@ namespace strange {
 
     	{
 
-    		% struct_name% _a temp{ std::move(value) };
+    		data_a temp{ std::move(value) };
 
     		std::swap(temp.handle_, handle_);
 
@@ -338,42 +338,6 @@ namespace strange {
     	return ___TTT___::___check___(value.handle_);
 
     }
-
-    /*
-
-    template <typename _1_>
-
-    template <typename ___TTT___, typename>
-
-    inline data_a<_1_>::data_a(___TTT___ value, bool reference)
-
-    	: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
-
-    		reference)
-
-    {}
-
-    
-
-    template <typename _1_>
-
-    template <typename ___TTT___, typename>
-
-    inline data_a<_1_>& data_a<_1_>::operator=(___TTT___ value)
-
-    {
-
-    	data_a temp{ std::move(value) };
-
-    	std::swap(temp.handle_, handle_);
-
-    	handle_->___weak___(handle_);
-
-    	return *this;
-
-    }
-
-    */
 
     
 
