@@ -121,7 +121,10 @@ public:
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%_a, std::decay_t<___TTT___>>::value>>
-	explicit inline %struct_name%_a(___TTT___ value, bool reference = false);
+	explicit inline %struct_name%_a(___TTT___ value, bool reference = false)
+		: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+			reference)
+	{}
 
 	template <typename ___TTT___>
 	inline %struct_name%_a& operator=(std::shared_ptr<___TTT___> const& handle)
@@ -140,28 +143,17 @@ public:
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%_a, std::decay_t<___TTT___>>::value>>
-	inline %struct_name%_a& operator=(___TTT___ value);
+	inline %struct_name%_a& operator=(___TTT___ value)
+	{
+		% struct_name% _a temp{ std::move(value) };
+		std::swap(temp.handle_, handle_);
+		handle_->___weak___(handle_);
+		return *this;
+	}
 };
 
 template <typename ___TTT___, typename ___1___>
 inline bool check_(%struct_name%_a<___1___> const& value)
 {
 	return ___TTT___::___check___(value.handle_);
-}
-
-template <typename _1_>
-template <typename ___TTT___, typename>
-inline %struct_name%_a<_1_>::%struct_name%_a(___TTT___ value, bool reference)
-	: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
-		reference)
-{}
-
-template <typename _1_>
-template <typename ___TTT___, typename>
-inline %struct_name%_a<_1_>& %struct_name%_a<_1_>::operator=(___TTT___ value)
-{
-	%struct_name%_a temp{ std::move(value) };
-	std::swap(temp.handle_, handle_);
-	handle_->___weak___(handle_);
-	return *this;
 }

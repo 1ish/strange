@@ -267,7 +267,13 @@ namespace strange {
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<data_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline data_a(___TTT___ value, bool reference = false);
+    	explicit inline data_a(___TTT___ value, bool reference = false)
+
+    		: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+
+    			reference)
+
+    	{}
 
     
 
@@ -305,7 +311,19 @@ namespace strange {
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<data_a, std::decay_t<___TTT___>>::value>>
 
-    	inline data_a& operator=(___TTT___ value);
+    	inline data_a& operator=(___TTT___ value)
+
+    	{
+
+    		% struct_name% _a temp{ std::move(value) };
+
+    		std::swap(temp.handle_, handle_);
+
+    		handle_->___weak___(handle_);
+
+    		return *this;
+
+    	}
 
     };
 
@@ -321,7 +339,7 @@ namespace strange {
 
     }
 
-    
+    /*
 
     template <typename _1_>
 
@@ -354,6 +372,8 @@ namespace strange {
     	return *this;
 
     }
+
+    */
 
     
 
