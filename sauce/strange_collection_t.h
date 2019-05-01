@@ -143,7 +143,7 @@ inline _ABSTRACTION_ self_add(any_a<> const& range) \
 	} \
 	return me_(); \
 } \
-inline _ABSTRACTION_ self_add_(collection_a const& collection) \
+inline _ABSTRACTION_ self_add_(collection_a<> const& collection) \
 { \
 	operator+=(collection); \
 	return me_(); \
@@ -157,11 +157,11 @@ inline _ABSTRACTION_ add(any_a<> const& range) const \
 	} \
 	return result; \
 } \
-inline _ABSTRACTION_ add_(collection_a const& collection) const \
+inline _ABSTRACTION_ add_(collection_a<> const& collection) const \
 { \
 	return operator+(collection); \
 } \
-inline _ABSTRACTION_ operator+(collection_a const& collection) const \
+inline _ABSTRACTION_ operator+(collection_a<> const& collection) const \
 { \
 	_ABSTRACTION_ result = me_(); \
 	result += collection; \
@@ -175,7 +175,7 @@ inline _ABSTRACTION_ self_subtract(any_a<> const& range) \
 	} \
 	return me_(); \
 } \
-inline _ABSTRACTION_ self_subtract_(collection_a const& collection) \
+inline _ABSTRACTION_ self_subtract_(collection_a<> const& collection) \
 { \
 	operator-=(collection); \
 	return me_(); \
@@ -189,11 +189,11 @@ inline _ABSTRACTION_ subtract(any_a<> const& range) const \
 	} \
 	return result; \
 } \
-inline _ABSTRACTION_ subtract_(collection_a const& collection) const \
+inline _ABSTRACTION_ subtract_(collection_a<> const& collection) const \
 { \
 	return operator-(collection); \
 } \
-inline _ABSTRACTION_ operator-(collection_a const& collection) const \
+inline _ABSTRACTION_ operator-(collection_a<> const& collection) const \
 { \
 	_ABSTRACTION_ result = me_(); \
 	result -= collection; \

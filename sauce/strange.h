@@ -16,11 +16,11 @@
 #include "strange_cat_a.h"
 #include "strange_misunderstanding_a.h"
 #include "strange_collection_a.h"
-#define ___derived___ collection_a
+#define ___derived___ collection_a<>
 #include "strange_shoal_a.h"
-#define ___derived___ collection_a
+#define ___derived___ collection_a<>
 #include "strange_flock_a.h"
-#define ___derived___ collection_a
+#define ___derived___ collection_a<>
 #include "strange_herd_a.h"
 #include "strange_data_a.h"
 #include "strange_number_a.h"
