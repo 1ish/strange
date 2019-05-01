@@ -48,13 +48,13 @@ TEST(TestCaseName, ForLoop)
 	any_a<> h = native_extraction_t<any_a<>>::val__(&any_a<>::beget);
 	any_a<> i = native_mutation_t<any_a<>>::val__(&any_a<>::beset);
 
-	shoal_a shoal = shoal_t<>::val_();
+	shoal_a<> shoal = shoal_t<>::val_();
 	flock_a<> flock = flock_t<>::val_();
 	herd_a<> herd = herd_t<>::val_();
 
 	try
 	{
-		shoal = cast_<shoal_a>(c);
+		shoal = cast_<shoal_a<>>(c);
 	}
 	catch (misunderstanding_a<>& m)
 	{

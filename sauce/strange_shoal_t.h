@@ -6,7 +6,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = shoal_a>
+template <typename _ABSTRACTION_ = shoal_a<>>
 class shoal_t : public something_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = data_a<ITERATOR>>
@@ -15,13 +15,13 @@ class shoal_t : public something_t<_ABSTRACTION_>
 	public: ___THING___
 		// construction
 		template <typename F>
-		static inline data_a<ITERATOR> val__(shoal_a const& shoal, F&& it)
+		static inline data_a<ITERATOR> val__(shoal_a<> const& shoal, F&& it)
 		{
 			return data_a<ITERATOR>{ iterator_t(shoal, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline data_a<ITERATOR> ref__(shoal_a const& shoal, F&& it)
+		static inline data_a<ITERATOR> ref__(shoal_a<> const& shoal, F&& it)
 		{
 			return data_a<ITERATOR>(iterator_t(shoal, std::forward<F>(it)), true);
 		}
@@ -103,10 +103,10 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		ITERATOR _it;
 		mutable flock_a<> _pair;
 		mutable bool _fresh;
-		shoal_a _shoal;
+		shoal_a<> _shoal;
 
 		template <typename F>
-		inline iterator_t(shoal_a const& shoal, F&& it)
+		inline iterator_t(shoal_a<> const& shoal, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _pair{ flock_t<>::val_() }
@@ -119,36 +119,36 @@ public: ___COLLECTION___
 	using std_unordered_map_any_any = std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>;
 
 	// construction
-	static inline shoal_a val(any_a<> const& range)
+	static inline shoal_a<> val(any_a<> const& range)
 	{
-		return cast_<shoal_a>(val_() += range);
+		return cast_<shoal_a<>>(val_() += range);
 	}
 
-	static inline shoal_a val_()
+	static inline shoal_a<> val_()
 	{
 		return val__(std_unordered_map_any_any{});
 	}
 
 	template <typename F>
-	static inline shoal_a val__(F&& init)
+	static inline shoal_a<> val__(F&& init)
 	{
-		return shoal_a{ shoal_t{ std::forward<F>(init) } };
+		return shoal_a<>{ shoal_t{ std::forward<F>(init) } };
 	}
 
-	static inline shoal_a ref(any_a<> const& range)
+	static inline shoal_a<> ref(any_a<> const& range)
 	{
-		return cast_<shoal_a>(ref_() += range, true);
+		return cast_<shoal_a<>>(ref_() += range, true);
 	}
 
-	static inline shoal_a ref_()
+	static inline shoal_a<> ref_()
 	{
 		return ref__(std_unordered_map_any_any{});
 	}
 
 	template <typename F>
-	static inline shoal_a ref__(F&& init)
+	static inline shoal_a<> ref__(F&& init)
 	{
-		return shoal_a(shoal_t{ std::forward<F>(init) }, true);
+		return shoal_a<>(shoal_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
@@ -172,20 +172,20 @@ public: ___COLLECTION___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<shoal_a>(thing))
+		if (!check_<shoal_a<>>(thing))
 		{
 			return false;
 		}
-		return _map == cast_<shoal_a>(thing).extract__();
+		return _map == cast_<shoal_a<>>(thing).extract__();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<shoal_a>(thing))
+		if (!check_<shoal_a<>>(thing))
 		{
 			return true;
 		}
-		return _map != cast_<shoal_a>(thing).extract__();
+		return _map != cast_<shoal_a<>>(thing).extract__();
 	}
 
 	inline std::size_t hash__() const
