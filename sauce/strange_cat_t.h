@@ -4,12 +4,12 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = cat_a>
+template <typename _ABSTRACTION_ = cat_a<>>
 class cat_t : public symbol_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline cat_a val(any_a<> const& range)
+	static inline cat_a<> val(any_a<> const& range)
 	{
 		any_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -19,12 +19,12 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline cat_a val_(any_a<> const& thing = nothing_t<>::val_())
+	static inline cat_a<> val_(any_a<> const& thing = nothing_t<>::val_())
 	{
-		return cat_a{ cat_t{} };
+		return cat_a<>{ cat_t{} };
 	}
 
-	static inline cat_a ref(any_a<> const& range)
+	static inline cat_a<> ref(any_a<> const& range)
 	{
 		any_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -34,9 +34,9 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline cat_a ref_(any_a<> const& thing = nothing_t<>::val_())
+	static inline cat_a<> ref_(any_a<> const& thing = nothing_t<>::val_())
 	{
-		return cat_a(cat_t{}, true);
+		return cat_a<>(cat_t{}, true);
 	}
 
 	// reflection
@@ -77,14 +77,14 @@ public: ___THING___
 		return _parameters;
 	}
 
-	inline cat_a result(any_a<> const& _) const
+	inline cat_a<> result(any_a<> const& _) const
 	{
 		return result_();
 	}
 
-	inline cat_a result_() const
+	inline cat_a<> result_() const
 	{
-		return check_<cat_a>(_result) ? cast_<cat_a>(_result) : val_();
+		return check_<cat_a<>>(_result) ? cast_<cat_a<>>(_result) : val_();
 	}
 
 	inline any_a<> includes(any_a<> const& range) const
@@ -129,9 +129,9 @@ public: ___THING___
 
 	static inline bool conforms__(any_a<> const& thing, any_a<> const& cat_or_herd)
 	{
-		if (check_<cat_a>(cat_or_herd))
+		if (check_<cat_a<>>(cat_or_herd))
 		{
-			return cast_<cat_a>(cat_or_herd).includes_(thing);
+			return cast_<cat_a<>>(cat_or_herd).includes_(thing);
 		}
 		/*
 		if (check_<herd_>(cat_or_herd))
