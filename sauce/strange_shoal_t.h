@@ -101,7 +101,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 
 	private:
 		ITERATOR _it;
-		mutable flock_a _pair;
+		mutable flock_a<> _pair;
 		mutable bool _fresh;
 		shoal_a _shoal;
 

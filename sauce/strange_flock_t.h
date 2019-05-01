@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = flock_a>
+template <typename _ABSTRACTION_ = flock_a<>>
 class flock_t : public something_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
@@ -13,13 +13,13 @@ class flock_t : public something_t<_ABSTRACTION_>
 	public: ___THING___
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> val__(flock_a const& flock, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> val__(flock_a<> const& flock, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>{ iterator_t(flock, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref__(flock_a const& flock, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> ref__(flock_a<> const& flock, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>(iterator_t(flock, std::forward<F>(it)), true);
 		}
@@ -327,10 +327,10 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 	private:
 		ITERATOR _it;
-		flock_a _flock;
+		flock_a<> _flock;
 
 		template <typename F>
-		inline iterator_t(flock_a const& flock, F&& it)
+		inline iterator_t(flock_a<> const& flock, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _flock(flock, true)
@@ -341,36 +341,36 @@ public: ___COLLECTION___
 	using std_vector_any = std::vector<any_a<>>;
 
 	// construction
-	static inline flock_a val(any_a<> const& range)
+	static inline flock_a<> val(any_a<> const& range)
 	{
-		return cast_<flock_a>(val_() += range);
+		return cast_<flock_a<>>(val_() += range);
 	}
 
-	static inline flock_a val_()
+	static inline flock_a<> val_()
 	{
 		return val__(std_vector_any{});
 	}
 
 	template <typename F>
-	static inline flock_a val__(F&& init)
+	static inline flock_a<> val__(F&& init)
 	{
-		return flock_a{ flock_t{ std::forward<F>(init) } };
+		return flock_a<>{ flock_t{ std::forward<F>(init) } };
 	}
 
-	static inline flock_a ref(any_a<> const& range)
+	static inline flock_a<> ref(any_a<> const& range)
 	{
-		return cast_<flock_a>(ref_() += range, true);
+		return cast_<flock_a<>>(ref_() += range, true);
 	}
 
-	static inline flock_a ref_()
+	static inline flock_a<> ref_()
 	{
 		return ref__(std_vector_any{});
 	}
 
 	template <typename F>
-	static inline flock_a ref__(F&& init)
+	static inline flock_a<> ref__(F&& init)
 	{
-		return flock_a(flock_t{ std::forward<F>(init) }, true);
+		return flock_a<>(flock_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
@@ -394,20 +394,20 @@ public: ___COLLECTION___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<flock_a>(thing))
+		if (!check_<flock_a<>>(thing))
 		{
 			return false;
 		}
-		return _vector == cast_<flock_a>(thing).extract__();
+		return _vector == cast_<flock_a<>>(thing).extract__();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<flock_a>(thing))
+		if (!check_<flock_a<>>(thing))
 		{
 			return true;
 		}
-		return _vector != cast_<flock_a>(thing).extract__();
+		return _vector != cast_<flock_a<>>(thing).extract__();
 	}
 
 	inline std::size_t hash__() const
