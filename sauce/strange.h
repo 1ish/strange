@@ -17,11 +17,15 @@ class symbol_a;
 template < typename _1_ = void >
 class cat_a;
 
+template < typename _1_ = void >
+class forward_iterator_a;
+
 }
 
 // abstractions
 #include "strange_any_a.h"
 #define ___root___ any_a<>
+#include "strange_forward_iterator_a.h"
 #include "strange_symbol_a.h"
 #define ___derived___ symbol_a<>
 #include "strange_cat_a.h"
