@@ -14,8 +14,8 @@ class cat_a
 {
 public:
 	// cat
-	inline symbol_a name(any_a<> const& _) const;
-	inline symbol_a name_() const;
+	inline symbol_a<> name(any_a<> const& _) const;
+	inline symbol_a<> name_() const;
 
 	inline any_a<> arguments(any_a<> const& _) const;
 	inline any_a<> arguments_() const;

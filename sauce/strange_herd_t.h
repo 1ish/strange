@@ -27,9 +27,9 @@ class herd_t : public something_t<_ABSTRACTION_>
 		}
 
 		// reflection
-		static inline symbol_a type_()
+		static inline symbol_a<> type_()
 		{
-			static symbol_a TYPE = sym__("strange::herd::iterator");
+			static symbol_a<> TYPE = sym__("strange::herd::iterator");
 			return TYPE;
 		}
 
@@ -141,9 +141,9 @@ public: ___COLLECTION___
 	}
 
 	// reflection
-	static inline symbol_a type_()
+	static inline symbol_a<> type_()
 	{
-		static symbol_a TYPE = sym__("strange::herd");
+		static symbol_a<> TYPE = sym__("strange::herd");
 		return TYPE;
 	}
 

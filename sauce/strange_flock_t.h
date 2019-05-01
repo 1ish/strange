@@ -25,9 +25,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 		}
 
 		// reflection
-		static inline symbol_a type_()
+		static inline symbol_a<> type_()
 		{
-			static symbol_a TYPE = sym__("strange::flock::iterator");
+			static symbol_a<> TYPE = sym__("strange::flock::iterator");
 			return TYPE;
 		}
 
@@ -374,9 +374,9 @@ public: ___COLLECTION___
 	}
 
 	// reflection
-	static inline symbol_a type_()
+	static inline symbol_a<> type_()
 	{
-		static symbol_a TYPE = sym__("strange::flock");
+		static symbol_a<> TYPE = sym__("strange::flock");
 		return TYPE;
 	}
 

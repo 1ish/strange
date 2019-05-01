@@ -27,9 +27,9 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		}
 
 		// reflection
-		static inline symbol_a type_()
+		static inline symbol_a<> type_()
 		{
-			static symbol_a TYPE = sym__("strange::shoal::iterator");
+			static symbol_a<> TYPE = sym__("strange::shoal::iterator");
 			return TYPE;
 		}
 
@@ -152,9 +152,9 @@ public: ___COLLECTION___
 	}
 
 	// reflection
-	static inline symbol_a type_()
+	static inline symbol_a<> type_()
 	{
-		static symbol_a TYPE = sym__("strange::shoal");
+		static symbol_a<> TYPE = sym__("strange::shoal");
 		return TYPE;
 	}
 

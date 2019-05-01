@@ -18,9 +18,9 @@ namespace strange {
 
     public:
 
-     inline symbol_a name ( any_a < > const & _ ) const
+     inline symbol_a < > name ( any_a < > const & _ ) const
      { assert(handle_); return read().name(_ ); }
-     inline symbol_a name_ ( ) const
+     inline symbol_a < > name_ ( ) const
      { assert(handle_); return read().name_( ); }
      inline any_a < > arguments ( any_a < > const & _ ) const
      { assert(handle_); return read().arguments(_ ); }
@@ -54,8 +54,8 @@ namespace strange {
 
     	{
 
-      virtual inline symbol_a name ( any_a < > const & _ ) const = 0;
-      virtual inline symbol_a name_ ( ) const = 0;
+      virtual inline symbol_a < > name ( any_a < > const & _ ) const = 0;
+      virtual inline symbol_a < > name_ ( ) const = 0;
       virtual inline any_a < > arguments ( any_a < > const & _ ) const = 0;
       virtual inline any_a < > arguments_ ( ) const = 0;
       virtual inline any_a < > parameters ( any_a < > const & _ ) const = 0;
@@ -108,9 +108,9 @@ namespace strange {
 
     
 
-      virtual inline symbol_a name ( any_a < > const & _ ) const
+      virtual inline symbol_a < > name ( any_a < > const & _ ) const
       { return value_.name(_ ); }
-      virtual inline symbol_a name_ ( ) const
+      virtual inline symbol_a < > name_ ( ) const
       { return value_.name_( ); }
       virtual inline any_a < > arguments ( any_a < > const & _ ) const
       { return value_.arguments(_ ); }

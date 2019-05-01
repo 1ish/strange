@@ -35,7 +35,7 @@ TEST(TestCaseName, ForLoop)
 
 	EXPECT_TRUE(nothing_t<>::ref_().nothing__());
 
-	symbol_a s = sym__("strange");
+	symbol_a<> s = sym__("strange");
 
 	EXPECT_EQ(s.to_string__(), "strange");
 	EXPECT_FALSE(e.is__("strange"));

@@ -11,7 +11,7 @@
 
 
 namespace strange {
-    
+    template < typename _1_ = void >
     class symbol_a : public ___root___
 
     {
@@ -186,9 +186,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___>
+    	template <typename ___TTT___, typename ___1___>
 
-    	friend inline bool check_(symbol_a const& value);
+    	friend inline bool check_(symbol_a<___1___> const& value);
 
     
 
@@ -204,7 +204,7 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___>const & handle)
 
     	{
 
@@ -272,7 +272,13 @@ namespace strange {
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<symbol_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline symbol_a(___TTT___ value, bool reference = false);
+    	explicit inline symbol_a(___TTT___ value, bool reference = false)
+
+    		: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+
+    			reference)
+
+    	{}
 
     
 
@@ -310,49 +316,31 @@ namespace strange {
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<symbol_a, std::decay_t<___TTT___>>::value>>
 
-    	inline symbol_a& operator=(___TTT___ value);
+    	inline symbol_a& operator=(___TTT___ value)
+
+    	{
+
+    		symbol_a temp{ std::move(value) };
+
+    		std::swap(temp.handle_, handle_);
+
+    		handle_->___weak___(handle_);
+
+    		return *this;
+
+    	}
 
     };
 
     
 
-    template <typename ___TTT___>
+    template <typename ___TTT___, typename ___1___>
 
-    inline bool check_(symbol_a const& value)
+    inline bool check_(symbol_a<___1___> const& value)
 
     {
 
     	return ___TTT___::___check___(value.handle_);
-
-    }
-
-    
-
-    template <typename ___TTT___, typename>
-
-    inline symbol_a::symbol_a(___TTT___ value, bool reference)
-
-    	: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
-
-    		reference)
-
-    {}
-
-    
-
-    template <typename ___TTT___, typename>
-
-    inline symbol_a& symbol_a::operator=(___TTT___ value)
-
-    {
-
-    	symbol_a temp{ std::move(value) };
-
-    	std::swap(temp.handle_, handle_);
-
-    	handle_->___weak___(handle_);
-
-    	return *this;
 
     }
 

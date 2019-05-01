@@ -14,25 +14,25 @@ public: ___THING___
 	template <typename... Args>
 	static inline any_a<> val__(function const fun, Args&&... args)
 	{
-		std::vector<symbol_a> v;
+		std::vector<symbol_a<>> v;
 		v.reserve(sizeof...(Args));
-		variadic_u<symbol_a>::variadic_(v, std::forward<Args>(args)...);
+		variadic_u<symbol_a<>>::variadic_(v, std::forward<Args>(args)...);
 		return any_a<>{ native_function_t(fun, std::move(v)) };
 	}
 
 	template <typename... Args>
 	static inline any_a<> ref__(function const fun, Args&&... args)
 	{
-		std::vector<symbol_a> v;
+		std::vector<symbol_a<>> v;
 		v.reserve(sizeof...(Args));
-		variadic_u<symbol_a>::variadic_(v, std::forward<Args>(args)...);
+		variadic_u<symbol_a<>>::variadic_(v, std::forward<Args>(args)...);
 		return any_a<>(native_function_t(fun, std::move(v)), true);
 	}
 
 	// reflection
-	static inline symbol_a type_()
+	static inline symbol_a<> type_()
 	{
-		static symbol_a TYPE = sym__("strange::native_function");
+		static symbol_a<> TYPE = sym__("strange::native_function");
 		return TYPE;
 	}
 
@@ -49,7 +49,7 @@ public: ___THING___
 
 protected:
 	function const _function;
-	std::vector<symbol_a> const _params;
+	std::vector<symbol_a<>> const _params;
 
 	template <typename F>
 	inline native_function_t(function const fun, F&& params)

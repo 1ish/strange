@@ -40,19 +40,19 @@ public: ___THING___
 	}
 
 	// reflection
-	static inline symbol_a type_()
+	static inline symbol_a<> type_()
 	{
-		static symbol_a TYPE = sym__("strange::cat");
+		static symbol_a<> TYPE = sym__("strange::cat");
 		return TYPE;
 	}
 
 	// cat
-	inline symbol_a name(any_a<> const& _) const
+	inline symbol_a<> name(any_a<> const& _) const
 	{
 		return name_();
 	}
 
-	inline symbol_a name_() const
+	inline symbol_a<> name_() const
 	{
 		return _name;
 	}
@@ -143,7 +143,7 @@ public: ___THING___
 	}
 
 protected:
-	symbol_a const _name;
+	symbol_a<> const _name;
 	any_a<> const _arguments;
 	any_a<> const _parameters;
 	any_a<> const _result;

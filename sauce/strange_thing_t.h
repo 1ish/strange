@@ -226,7 +226,7 @@ protected:
 
 // adaptation
 #define ___THING___ \
-inline symbol_a type(any_a<> const&) const \
+inline symbol_a<> type(any_a<> const&) const \
 { \
 	return type_(); \
 } \

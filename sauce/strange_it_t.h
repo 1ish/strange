@@ -40,9 +40,9 @@ public: ___THING___
 	}
 
 	// reflection
-	static inline symbol_a type_()
+	static inline symbol_a<> type_()
 	{
-		static symbol_a TYPE = sym__("strange::it");
+		static symbol_a<> TYPE = sym__("strange::it");
 		return TYPE;
 	}
 
