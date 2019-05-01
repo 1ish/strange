@@ -12,9 +12,4 @@ namespace std
 	template <typename K, typename V, typename H> class unordered_map;
 }
 
-namespace strange
-{
-	class number_a;
-}
-
 #endif
