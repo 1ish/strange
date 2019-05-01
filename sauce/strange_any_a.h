@@ -3,6 +3,7 @@
 
 // # include "definitions.hpp"
 // # include "symbol_forward.hpp"
+// # include "cat_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -12,7 +13,7 @@
 
 
 namespace strange {
-    template < typename symbol_a = symbol_a < >>
+    template < typename symbol_a = symbol_a < > , typename cat_a = cat_a < >>
     class any_a
 
     {
@@ -183,9 +184,9 @@ namespace strange {
      { assert(handle_); return read().type(_ ); }
      inline symbol_a type_ ( ) const
      { assert(handle_); return read().type_( ); }
-     inline any_a cat ( any_a const & _ ) const
+     inline cat_a cat ( any_a const & _ ) const
      { assert(handle_); return read().cat(_ ); }
-     inline any_a cat_ ( ) const
+     inline cat_a cat_ ( ) const
      { assert(handle_); return read().cat_( ); }
      inline any_a eater ( any_a const & _ ) const
      { assert(handle_); return read().eater(_ ); }
@@ -365,8 +366,8 @@ namespace strange {
 
       virtual inline symbol_a type ( any_a const & _ ) const = 0;
       virtual inline symbol_a type_ ( ) const = 0;
-      virtual inline any_a cat ( any_a const & _ ) const = 0;
-      virtual inline any_a cat_ ( ) const = 0;
+      virtual inline cat_a cat ( any_a const & _ ) const = 0;
+      virtual inline cat_a cat_ ( ) const = 0;
       virtual inline any_a eater ( any_a const & _ ) const = 0;
       virtual inline any_a eater_ ( ) const = 0;
       virtual inline any_a feeder ( any_a const & range ) const = 0;
@@ -548,9 +549,9 @@ namespace strange {
       { return value_.type(_ ); }
       virtual inline symbol_a type_ ( ) const
       { return value_.type_( ); }
-      virtual inline any_a cat ( any_a const & _ ) const
+      virtual inline cat_a cat ( any_a const & _ ) const
       { return value_.cat(_ ); }
-      virtual inline any_a cat_ ( ) const
+      virtual inline cat_a cat_ ( ) const
       { return value_.cat_( ); }
       virtual inline any_a eater ( any_a const & _ ) const
       { return value_.eater(_ ); }
@@ -788,15 +789,15 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename ___1___>
+    	template <typename ___TTT___>
 
-    	friend inline bool check_(any_a<___1___> const& value);
+    	friend inline bool check_(any_a<> const& value);
 
     
 
-    	template <typename ___TTT___, typename ___1___>
+    	template <typename ___TTT___>
 
-    	friend inline ___TTT___ cast_(any_a<___1___> const& value, bool reference = false);
+    	friend inline ___TTT___ cast_(any_a<> const& value, bool reference = false);
 
     
 
@@ -1002,9 +1003,9 @@ namespace strange {
 
     
 
-    template <typename ___TTT___, typename ___1___>
+    template <typename ___TTT___>
 
-    inline bool check_(any_a<___1___> const& value)
+    inline bool check_(any_a<> const& value)
 
     {
 
@@ -1026,9 +1027,9 @@ namespace strange {
 
     
 
-    template <typename ___TTT___, typename ___1___>
+    template <typename ___TTT___>
 
-    inline ___TTT___ cast_(any_a<___1___> const& value, bool reference)
+    inline ___TTT___ cast_(any_a<> const& value, bool reference)
 
     {
 

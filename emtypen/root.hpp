@@ -236,11 +236,11 @@ private:
 		return *handle_;
 	}
 
-	template <typename ___TTT___, typename ___1___>
-	friend inline bool check_(%struct_name%<___1___> const& value);
+	template <typename ___TTT___>
+	friend inline bool check_(%struct_name%<> const& value);
 
-	template <typename ___TTT___, typename ___1___>
-	friend inline ___TTT___ cast_(%struct_name%<___1___> const& value, bool reference = false);
+	template <typename ___TTT___>
+	friend inline ___TTT___ cast_(%struct_name%<> const& value, bool reference = false);
 
 public:
 	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
@@ -343,8 +343,8 @@ public:
 	}
 };
 
-template <typename ___TTT___, typename ___1___>
-inline bool check_(%struct_name%<___1___> const& value)
+template <typename ___TTT___>
+inline bool check_(%struct_name%<> const& value)
 {
 	return ___TTT___::___check___(value.handle_);
 }
@@ -355,8 +355,8 @@ inline bool check_(___VVV___ const&)
 	return false;
 }
 
-template <typename ___TTT___, typename ___1___>
-inline ___TTT___ cast_(%struct_name%<___1___> const& value, bool reference)
+template <typename ___TTT___>
+inline ___TTT___ cast_(%struct_name%<> const& value, bool reference)
 {
 	return ___TTT___(value.handle_, reference);
 }

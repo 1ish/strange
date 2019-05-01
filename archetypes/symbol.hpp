@@ -2,16 +2,15 @@
 #define COM_ONEISH_STRANGE_SYMBOL_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived_1.hpp -c ~/source/repos/strange/archetypes/symbol.hpp > ~/source/repos/strange/sauce/strange_symbol_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived.hpp -c ~/source/repos/strange/archetypes/symbol.hpp > ~/source/repos/strange/sauce/strange_symbol_a.h
 */
 
-#include "definitions.hpp"
 #include "any_forward.hpp"
 
 namespace strange
 {
 
-template < typename _1_ = void >
+template <typename _1_>
 class symbol_a
 {
 public:

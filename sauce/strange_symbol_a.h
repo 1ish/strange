@@ -1,7 +1,6 @@
 #ifndef COM_ONEISH_STRANGE_SYMBOL_A_H
 #define COM_ONEISH_STRANGE_SYMBOL_A_H
 
-// # include "definitions.hpp"
 // # include "any_forward.hpp"
 #include <algorithm>
 #include <cassert>
@@ -12,7 +11,7 @@
 
 
 namespace strange {
-    template < typename _1_ = void >
+    template < typename _1_ >
     class symbol_a : public ___root___
 
     {

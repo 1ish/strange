@@ -2,16 +2,17 @@
 #define COM_ONEISH_STRANGE_ANY_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/root_1.hpp -c ~/source/repos/strange/archetypes/any.hpp > ~/source/repos/strange/sauce/strange_any_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/root.hpp -c ~/source/repos/strange/archetypes/any.hpp > ~/source/repos/strange/sauce/strange_any_a.h
 */
 
 #include "definitions.hpp"
 #include "symbol_forward.hpp"
+#include "cat_forward.hpp"
 
 namespace strange
 {
 
-template <typename symbol_a = symbol_a<>>
+template <typename symbol_a = symbol_a<>, typename cat_a = cat_a<>>
 class any_a
 {
 public:
@@ -28,8 +29,8 @@ public:
 	inline symbol_a type(any_a const& _) const;
 	inline symbol_a type_() const;
 
-	inline any_a cat(any_a const& _) const;
-	inline any_a cat_() const;
+	inline cat_a cat(any_a const& _) const;
+	inline cat_a cat_() const;
 
 //	herd_a<cat_a> inline any_a cats(any_a const& _) const;
 //	herd_a<cat_a> inline any_a cats_() const;

@@ -11,7 +11,7 @@
 
 
 namespace strange {
-    template < typename _1_ = void >
+    template < typename _1_ >
     class cat_a final : public ___derived___
 
     {

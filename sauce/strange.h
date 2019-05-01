@@ -8,6 +8,17 @@
 // options
 #include "strange_options.h"
 
+namespace strange
+{
+
+template < typename _1_ = void >
+class symbol_a;
+
+template < typename _1_ = void >
+class cat_a;
+
+}
+
 // abstractions
 #include "strange_any_a.h"
 #define ___root___ any_a<>
