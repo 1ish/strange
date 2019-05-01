@@ -2,6 +2,7 @@
 #define COM_ONEISH_STRANGE_ANY_A_H
 
 // # include "definitions.hpp"
+// # include "symbol_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -11,7 +12,7 @@
 
 
 namespace strange {
-    template < typename _1_ = void >
+    template < typename symbol_a = symbol_a < >>
     class any_a
 
     {
@@ -178,9 +179,9 @@ namespace strange {
 
     
 
-     inline any_a type ( any_a const & _ ) const
+     inline symbol_a type ( any_a const & _ ) const
      { assert(handle_); return read().type(_ ); }
-     inline any_a type_ ( ) const
+     inline symbol_a type_ ( ) const
      { assert(handle_); return read().type_( ); }
      inline any_a cat ( any_a const & _ ) const
      { assert(handle_); return read().cat(_ ); }
@@ -362,8 +363,8 @@ namespace strange {
 
     
 
-      virtual inline any_a type ( any_a const & _ ) const = 0;
-      virtual inline any_a type_ ( ) const = 0;
+      virtual inline symbol_a type ( any_a const & _ ) const = 0;
+      virtual inline symbol_a type_ ( ) const = 0;
       virtual inline any_a cat ( any_a const & _ ) const = 0;
       virtual inline any_a cat_ ( ) const = 0;
       virtual inline any_a eater ( any_a const & _ ) const = 0;
@@ -543,9 +544,9 @@ namespace strange {
 
     
 
-      virtual inline any_a type ( any_a const & _ ) const
+      virtual inline symbol_a type ( any_a const & _ ) const
       { return value_.type(_ ); }
-      virtual inline any_a type_ ( ) const
+      virtual inline symbol_a type_ ( ) const
       { return value_.type_( ); }
       virtual inline any_a cat ( any_a const & _ ) const
       { return value_.cat(_ ); }

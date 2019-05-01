@@ -6,11 +6,12 @@
 */
 
 #include "definitions.hpp"
+#include "symbol_forward.hpp"
 
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename symbol_a = symbol_a<>>
 class any_a
 {
 public:
@@ -24,8 +25,8 @@ public:
 	};
 
 	// reflection
-	inline any_a type(any_a const& _) const;
-	inline any_a type_() const;
+	inline symbol_a type(any_a const& _) const;
+	inline symbol_a type_() const;
 
 	inline any_a cat(any_a const& _) const;
 	inline any_a cat_() const;
