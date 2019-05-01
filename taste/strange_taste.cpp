@@ -56,7 +56,7 @@ TEST(TestCaseName, ForLoop)
 	{
 		shoal = cast_<shoal_a>(c);
 	}
-	catch (misunderstanding_a& m)
+	catch (misunderstanding_a<>& m)
 	{
 		std::cout << "caught: " << m.to_string__() << std::endl;
 	}

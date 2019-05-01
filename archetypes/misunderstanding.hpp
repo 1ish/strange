@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_MISUNDERSTANDING_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived.hpp -c ~/source/repos/strange/archetypes/misunderstanding.hpp > ~/source/repos/strange/sauce/strange_misunderstanding_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived_1.hpp -c ~/source/repos/strange/archetypes/misunderstanding.hpp > ~/source/repos/strange/sauce/strange_misunderstanding_a.h
 */
 
 #include "any.hpp"
@@ -10,6 +10,7 @@
 namespace strange
 {
 
+template <typename _1_ = void>
 class misunderstanding_a
 {
 public:
