@@ -6,7 +6,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = herd_a>
+template <typename _ABSTRACTION_ = herd_a<>>
 class herd_t : public something_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = data_a<ITERATOR>>
@@ -15,13 +15,13 @@ class herd_t : public something_t<_ABSTRACTION_>
 	public: ___THING___
 		// construction
 		template <typename F>
-		static inline data_a<ITERATOR> val__(herd_a const& herd, F&& it)
+		static inline data_a<ITERATOR> val__(herd_a<> const& herd, F&& it)
 		{
 			return data_a<ITERATOR>{ iterator_t(herd, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline data_a<ITERATOR> ref__(herd_a const& herd, F&& it)
+		static inline data_a<ITERATOR> ref__(herd_a<> const& herd, F&& it)
 		{
 			return data_a<ITERATOR>(iterator_t(herd, std::forward<F>(it)), true);
 		}
@@ -94,10 +94,10 @@ class herd_t : public something_t<_ABSTRACTION_>
 
 	private:
 		ITERATOR _it;
-		herd_a _herd;
+		herd_a<> _herd;
 
 		template <typename F>
-		inline iterator_t(herd_a const& herd, F&& it)
+		inline iterator_t(herd_a<> const& herd, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _herd(herd, true)
@@ -108,36 +108,36 @@ public: ___COLLECTION___
 	using std_unordered_set_any = std::unordered_set<any_a<>, any_a<>::hash_f>;
 
 	// construction
-	static inline herd_a val(any_a<> const& range)
+	static inline herd_a<> val(any_a<> const& range)
 	{
-		return cast_<herd_a>(val_() += range);
+		return cast_<herd_a<>>(val_() += range);
 	}
 
-	static inline herd_a val_()
+	static inline herd_a<> val_()
 	{
 		return val__(std_unordered_set_any{});
 	}
 
 	template <typename F>
-	static inline herd_a val__(F&& init)
+	static inline herd_a<> val__(F&& init)
 	{
-		return herd_a{ herd_t{ std::forward<F>(init) } };
+		return herd_a<>{ herd_t{ std::forward<F>(init) } };
 	}
 
-	static inline herd_a ref(any_a<> const& range)
+	static inline herd_a<> ref(any_a<> const& range)
 	{
-		return cast_<herd_a>(ref_() += range, true);
+		return cast_<herd_a<>>(ref_() += range, true);
 	}
 
-	static inline herd_a ref_()
+	static inline herd_a<> ref_()
 	{
 		return ref__(std_unordered_set_any{});
 	}
 
 	template <typename F>
-	static inline herd_a ref__(F&& init)
+	static inline herd_a<> ref__(F&& init)
 	{
-		return herd_a(herd_t{ std::forward<F>(init) }, true);
+		return herd_a<>(herd_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
@@ -161,20 +161,20 @@ public: ___COLLECTION___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<herd_a>(thing))
+		if (!check_<herd_a<>>(thing))
 		{
 			return false;
 		}
-		return _set == cast_<herd_a>(thing).extract__();
+		return _set == cast_<herd_a<>>(thing).extract__();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<herd_a>(thing))
+		if (!check_<herd_a<>>(thing))
 		{
 			return true;
 		}
-		return _set != cast_<herd_a>(thing).extract__();
+		return _set != cast_<herd_a<>>(thing).extract__();
 	}
 
 	inline std::size_t hash__() const

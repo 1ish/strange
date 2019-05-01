@@ -50,7 +50,7 @@ TEST(TestCaseName, ForLoop)
 
 	shoal_a shoal = shoal_t<>::val_();
 	flock_a<> flock = flock_t<>::val_();
-	herd_a herd = herd_t<>::val_();
+	herd_a<> herd = herd_t<>::val_();
 
 	try
 	{

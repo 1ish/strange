@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_HERD_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/finale.hpp -c ~/source/repos/strange/archetypes/herd.hpp > ~/source/repos/strange/sauce/strange_herd_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/finale_1.hpp -c ~/source/repos/strange/archetypes/herd.hpp > ~/source/repos/strange/sauce/strange_herd_a.h
 */
 
 #include "collection.hpp"
@@ -10,6 +10,7 @@
 namespace strange
 {
 
+template <typename _1_ = void>
 class herd_a
 {
 public:

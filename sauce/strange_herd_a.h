@@ -11,7 +11,7 @@
 
 
 namespace strange {
-    
+    template < typename _1_ = void >
     class herd_a final : public ___derived___
 
     {
@@ -153,9 +153,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___>
+    	template <typename ___TTT___, typename ___1___>
 
-    	friend inline bool check_(herd_a const& value);
+    	friend inline bool check_(herd_a<___1___> const& value);
 
     
 
@@ -301,9 +301,9 @@ namespace strange {
 
     
 
-    template <typename ___TTT___>
+    template <typename ___TTT___, typename ___1___>
 
-    inline bool check_(herd_a const& value)
+    inline bool check_(herd_a<___1___> const& value)
 
     {
 
