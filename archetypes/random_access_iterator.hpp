@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_RANDOM_ACCESS_ITERATOR_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived.hpp -c ~/source/repos/strange/archetypes/random_access_iterator.hpp > ~/source/repos/strange/sauce/strange_random_access_iterator_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived_1.hpp -c ~/source/repos/strange/archetypes/random_access_iterator.hpp > ~/source/repos/strange/sauce/strange_random_access_iterator_a.h
 */
 
 #include "any.hpp"
@@ -11,6 +11,7 @@
 namespace strange
 {
 
+template <typename _1_ = void>
 class random_access_iterator_a
 {
 public:

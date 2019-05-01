@@ -124,9 +124,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_iterator_a add(any_a<> const& range) const
+		inline random_access_iterator_a<> add(any_a<> const& range) const
 		{
-			random_access_iterator_a result = me_();
+			random_access_iterator_a<> result = me_();
 			for (auto const& thing : range)
 			{
 				result += thing;
@@ -134,12 +134,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline random_access_iterator_a add_(number_a<> const& number) const
+		inline random_access_iterator_a<> add_(number_a<> const& number) const
 		{
 			return operator+(number);
 		}
 
-		inline random_access_iterator_a operator+(number_a<> const& number) const
+		inline random_access_iterator_a<> operator+(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
 			result.reference__() += number.to_int_64__();
@@ -171,9 +171,9 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_iterator_a subtract(any_a<> const& range) const
+		inline random_access_iterator_a<> subtract(any_a<> const& range) const
 		{
-			random_access_iterator_a result = me_();
+			random_access_iterator_a<> result = me_();
 			for (auto const& thing : range)
 			{
 				result -= thing;
@@ -181,12 +181,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline random_access_iterator_a subtract_(number_a<> const& number) const
+		inline random_access_iterator_a<> subtract_(number_a<> const& number) const
 		{
 			return operator-(number);
 		}
 
-		inline random_access_iterator_a operator-(number_a<> const& number) const
+		inline random_access_iterator_a<> operator-(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
 			result.reference__() -= number.to_int_64__();
@@ -208,12 +208,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
 		}
 
-		inline any_a<> less_than_(random_access_iterator_a const& it) const
+		inline any_a<> less_than_(random_access_iterator_a<> const& it) const
 		{
 			return _boole_(operator<(it));
 		}
 
-		inline bool operator<(random_access_iterator_a const& it) const
+		inline bool operator<(random_access_iterator_a<> const& it) const
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
@@ -237,12 +237,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
 		}
 
-		inline any_a<> greater_than_(random_access_iterator_a const& it) const
+		inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
 		{
 			return _boole_(operator>(it));
 		}
 
-		inline bool operator>(random_access_iterator_a const& it) const
+		inline bool operator>(random_access_iterator_a<> const& it) const
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
@@ -266,12 +266,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
 		}
 
-		inline any_a<> less_or_equal_(random_access_iterator_a const& it) const
+		inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
 		{
 			return _boole_(operator<=(it));
 		}
 
-		inline bool operator<=(random_access_iterator_a const& it) const
+		inline bool operator<=(random_access_iterator_a<> const& it) const
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
@@ -295,12 +295,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
 		}
 
-		inline any_a<> greater_or_equal_(random_access_iterator_a const& it) const
+		inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
 		{
 			return _boole_(operator>=(it));
 		}
 
-		inline bool operator>=(random_access_iterator_a const& it) const
+		inline bool operator>=(random_access_iterator_a<> const& it) const
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
