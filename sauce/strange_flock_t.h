@@ -115,7 +115,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		// random access iterator
+		// bidirectional iterator
 		inline _ABSTRACTION_ decrement(any_a<> const& _)
 		{
 			return decrement_();
@@ -140,6 +140,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
+		// random access iterator
 		inline _ABSTRACTION_ self_add(any_a<> const& range)
 		{
 			for (auto const& thing : range)

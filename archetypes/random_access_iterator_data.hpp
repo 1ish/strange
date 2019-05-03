@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_RANDOM_ACCESS_ITERATOR_DATA_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/dfinale_1.hpp -c ~/source/repos/strange/archetypes/random_access_iterator_data.hpp > ~/source/repos/strange/sauce/strange_random_access_iterator_data_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/fffinale_1.hpp -c ~/source/repos/strange/archetypes/random_access_iterator_data.hpp > ~/source/repos/strange/sauce/strange_random_access_iterator_data_a.h
 */
 
 #include "random_access_iterator_forward.hpp"

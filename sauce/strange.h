@@ -86,7 +86,7 @@ class random_access_iterator_data_a;
 #include "strange_bidirectional_iterator_a.h"
 #define ___derived___ bidirectional_iterator_a<>
 #include "strange_bidirectional_iterator_data_a.h"
-#define ___derived___ forward_iterator_a<>
+#define ___derived___ bidirectional_iterator_a<>
 #include "strange_random_access_iterator_a.h"
 #define ___derived___ random_access_iterator_a<>
 #include "strange_random_access_iterator_data_a.h"

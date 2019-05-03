@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_RANDOM_ACCESS_ITERATOR_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/dderived.hpp -c ~/source/repos/strange/archetypes/random_access_iterator.hpp > ~/source/repos/strange/sauce/strange_random_access_iterator_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/ddderived.hpp -c ~/source/repos/strange/archetypes/random_access_iterator.hpp > ~/source/repos/strange/sauce/strange_random_access_iterator_a.h
 */
 
 #include "any_forward.hpp"
@@ -16,9 +16,6 @@ class random_access_iterator_a
 {
 public:
 	// random access iterator
-	inline any_a<> decrement(any_a<> const& _);
-	inline random_access_iterator_a decrement_();
-
 	inline any_a<> self_add(any_a<> const& range);
 	inline random_access_iterator_a self_add_(number_a<> const& number);
 

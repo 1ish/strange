@@ -149,10 +149,6 @@ namespace strange {
 
     
 
-     inline any_a < > decrement ( any_a < > const & _ )
-     { assert(handle_); return write().decrement(_ ); }
-     inline random_access_iterator_a decrement_ ( )
-     { assert(handle_); return write().decrement_( ); }
      inline any_a < > self_add ( any_a < > const & range )
      { assert(handle_); return write().self_add(range ); }
      inline random_access_iterator_a self_add_ ( number_a < > const & number )
@@ -201,12 +197,10 @@ namespace strange {
 
     protected:
 
-    	struct ___dderived_handle_base___ : ___derived_handle_base___
+    	struct ___ddderived_handle_base___ : ___dderived_handle_base___
 
     	{
 
-      virtual inline any_a < > decrement ( any_a < > const & _ ) = 0;
-      virtual inline random_access_iterator_a decrement_ ( ) = 0;
       virtual inline any_a < > self_add ( any_a < > const & range ) = 0;
       virtual inline random_access_iterator_a self_add_ ( number_a < > const & number ) = 0;
       virtual inline any_a < > add ( any_a < > const & range ) const = 0;
@@ -233,17 +227,17 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename ___DDHB___ = ___dderived_handle_base___>
+    	template <typename ___TTT___, typename ___DDDHB___ = ___ddderived_handle_base___>
 
-    	struct ___dderived_handle___ : ___derived_handle___<___TTT___, ___DDHB___>
+    	struct ___ddderived_handle___ : ___dderived_handle___<___TTT___, ___DDDHB___>
 
     	{
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___dderived_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+    		inline ___ddderived_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
 
-    			: ___derived_handle___<___TTT___, ___DDHB___>{ value }
+    			: ___dderived_handle___<___TTT___, ___DDDHB___>{ value }
 
     		{}
 
@@ -251,18 +245,14 @@ namespace strange {
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___dderived_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+    		inline ___ddderived_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
 
-    			: ___derived_handle___<___TTT___, ___DDHB___>{ std::move(value) }
+    			: ___dderived_handle___<___TTT___, ___DDDHB___>{ std::move(value) }
 
     		{}
 
     
 
-      virtual inline any_a < > decrement ( any_a < > const & _ )
-      { return value_.decrement(_ ); }
-      virtual inline random_access_iterator_a decrement_ ( )
-      { return value_.decrement_( ); }
       virtual inline any_a < > self_add ( any_a < > const & range )
       { return value_.self_add(range ); }
       virtual inline random_access_iterator_a self_add_ ( number_a < > const & number )
@@ -311,17 +301,17 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename ___DDHB___>
+    	template <typename ___TTT___, typename ___DDDHB___>
 
-    	struct ___dderived_handle___<std::reference_wrapper<___TTT___>, ___DDHB___>
+    	struct ___ddderived_handle___<std::reference_wrapper<___TTT___>, ___DDDHB___>
 
-    		: ___dderived_handle___<___TTT___&, ___DDHB___>
+    		: ___ddderived_handle___<___TTT___&, ___DDDHB___>
 
     	{
 
-    		inline ___dderived_handle___(std::reference_wrapper<___TTT___> ref)
+    		inline ___ddderived_handle___(std::reference_wrapper<___TTT___> ref)
 
-    			: ___dderived_handle___<___TTT___&, ___DDHB___>{ ref.get() }
+    			: ___ddderived_handle___<___TTT___&, ___DDDHB___>{ ref.get() }
 
     		{}
 
@@ -333,15 +323,15 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	struct ___dderived_handle_final___ final : ___dderived_handle___<___TTT___>
+    	struct ___ddderived_handle_final___ final : ___ddderived_handle___<___TTT___>
 
     	{
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___dderived_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+    		inline ___ddderived_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
 
-    			: ___dderived_handle___<___TTT___>{ value }
+    			: ___ddderived_handle___<___TTT___>{ value }
 
     		{}
 
@@ -349,9 +339,9 @@ namespace strange {
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___dderived_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+    		inline ___ddderived_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
 
-    			: ___dderived_handle___<___TTT___>{ std::move(value) }
+    			: ___ddderived_handle___<___TTT___>{ std::move(value) }
 
     		{}
 
@@ -361,7 +351,7 @@ namespace strange {
 
     		{
 
-    			return std::make_shared<___dderived_handle_final___>(___dderived_handle___<___TTT___>::value_);
+    			return std::make_shared<___ddderived_handle_final___>(___ddderived_handle___<___TTT___>::value_);
 
     		}
 
@@ -371,15 +361,15 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	struct ___dderived_handle_final___<std::reference_wrapper<___TTT___>> final
+    	struct ___ddderived_handle_final___<std::reference_wrapper<___TTT___>> final
 
-    		: ___dderived_handle_final___<___TTT___&>
+    		: ___ddderived_handle_final___<___TTT___&>
 
     	{
 
-    		inline ___dderived_handle_final___(std::reference_wrapper<___TTT___> ref)
+    		inline ___ddderived_handle_final___(std::reference_wrapper<___TTT___> ref)
 
-    			: ___dderived_handle_final___<___TTT___&>{ ref.get() }
+    			: ___ddderived_handle_final___<___TTT___&>{ ref.get() }
 
     		{}
 
@@ -387,17 +377,17 @@ namespace strange {
 
     
 
-    	inline ___dderived_handle_base___ const& read() const
+    	inline ___ddderived_handle_base___ const& read() const
 
     	{
 
-    		return *std::static_pointer_cast<___dderived_handle_base___ const>(handle_);
+    		return *std::static_pointer_cast<___ddderived_handle_base___ const>(handle_);
 
     	}
 
     
 
-    	inline ___dderived_handle_base___& write()
+    	inline ___ddderived_handle_base___& write()
 
     	{
 
@@ -411,7 +401,7 @@ namespace strange {
 
     		}
 
-    		return *std::static_pointer_cast<___dderived_handle_base___>(handle_);
+    		return *std::static_pointer_cast<___ddderived_handle_base___>(handle_);
 
     	}
 
@@ -439,7 +429,7 @@ namespace strange {
 
     	{
 
-    		return bool(std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
+    		return bool(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
 
     	}
 
@@ -483,17 +473,17 @@ namespace strange {
 
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
-    		if (!std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
+    		if (!std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
 
     		{
 
-    			throw dis__("random_access_iterator_a constructor failed to cast from base to dderived");
+    			throw dis__("random_access_iterator_a constructor failed to cast from base to ddderived");
 
     		}
 
     #else
 
-    		assert(std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
+    		assert(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
 
     #endif
 
@@ -505,7 +495,7 @@ namespace strange {
 
     	explicit inline random_access_iterator_a(___TTT___ value, bool reference = false)
 
-    		: ___derived___(std::make_shared<___dderived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+    		: ___derived___(std::make_shared<___ddderived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 
     			reference)
 
@@ -521,17 +511,17 @@ namespace strange {
 
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
-    		if (!std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
+    		if (!std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
 
     		{
 
-    			throw dis__("random_access_iterator_a assignment failed to cast from base to dderived");
+    			throw dis__("random_access_iterator_a assignment failed to cast from base to ddderived");
 
     		}
 
     #else
 
-    		assert(std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
+    		assert(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
 
     #endif
 
