@@ -15,6 +15,9 @@ class number_a
 {
 public:
 	// number
+	inline number_a increment(any_a<> const& _);
+	inline number_a increment_();
+
 	inline number_a decrement(any_a<> const& _);
 	inline number_a decrement_();
 

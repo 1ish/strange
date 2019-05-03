@@ -19,6 +19,10 @@ namespace strange {
 
     public:
 
+     inline random_access_iterator_a increment ( any_a < > const & _ )
+     { assert(handle_); return write().increment(_ ); }
+     inline random_access_iterator_a increment_ ( )
+     { assert(handle_); return write().increment_( ); }
      inline random_access_iterator_a decrement ( any_a < > const & _ )
      { assert(handle_); return write().decrement(_ ); }
      inline random_access_iterator_a decrement_ ( )
@@ -75,6 +79,8 @@ namespace strange {
 
     	{
 
+      virtual inline random_access_iterator_a increment ( any_a < > const & _ ) = 0;
+      virtual inline random_access_iterator_a increment_ ( ) = 0;
       virtual inline random_access_iterator_a decrement ( any_a < > const & _ ) = 0;
       virtual inline random_access_iterator_a decrement_ ( ) = 0;
       virtual inline random_access_iterator_a self_add ( any_a < > const & range ) = 0;
@@ -129,6 +135,10 @@ namespace strange {
 
     
 
+      virtual inline random_access_iterator_a increment ( any_a < > const & _ )
+      { return value_.increment(_ ); }
+      virtual inline random_access_iterator_a increment_ ( )
+      { return value_.increment_( ); }
       virtual inline random_access_iterator_a decrement ( any_a < > const & _ )
       { return value_.decrement(_ ); }
       virtual inline random_access_iterator_a decrement_ ( )

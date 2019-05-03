@@ -18,6 +18,10 @@ namespace strange {
 
     public:
 
+     inline number_a increment ( any_a < > const & _ )
+     { assert(handle_); return write().increment(_ ); }
+     inline number_a increment_ ( )
+     { assert(handle_); return write().increment_( ); }
      inline number_a decrement ( any_a < > const & _ )
      { assert(handle_); return write().decrement(_ ); }
      inline number_a decrement_ ( )
@@ -128,6 +132,8 @@ namespace strange {
 
     	{
 
+      virtual inline number_a increment ( any_a < > const & _ ) = 0;
+      virtual inline number_a increment_ ( ) = 0;
       virtual inline number_a decrement ( any_a < > const & _ ) = 0;
       virtual inline number_a decrement_ ( ) = 0;
       virtual inline number_a self_add ( any_a < > const & range ) = 0;
@@ -209,6 +215,10 @@ namespace strange {
 
     
 
+      virtual inline number_a increment ( any_a < > const & _ )
+      { return value_.increment(_ ); }
+      virtual inline number_a increment_ ( )
+      { return value_.increment_( ); }
       virtual inline number_a decrement ( any_a < > const & _ )
       { return value_.decrement(_ ); }
       virtual inline number_a decrement_ ( )

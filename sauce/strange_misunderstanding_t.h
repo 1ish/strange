@@ -11,7 +11,7 @@ public: ___THING___
 	// construction
 	static inline misunderstanding_a<> val(any_a<> const& range)
 	{
-		any_a<> it = range.cbegin();
+		forward_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return val_();
@@ -32,7 +32,7 @@ public: ___THING___
 
 	static inline misunderstanding_a<> ref(any_a<> const& range)
 	{
-		any_a<> it = range.cbegin();
+		forward_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return ref_();

@@ -8,7 +8,7 @@ namespace strange
 #define ___COLLECTION___ ___THING___ \
 inline any_a<> has(any_a<> const& range) const \
 { \
-	any_a<> it = range.cbegin(); \
+	forward_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
 		throw dis__("[collection] has passed empty range"); \
@@ -21,7 +21,7 @@ inline any_a<> has_(any_a<> const& key) const \
 } \
 inline any_a<> at(any_a<> const& range) const \
 { \
-	any_a<> it = range.cbegin(); \
+	forward_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
 		throw dis__("[collection] at passed empty range"); \
@@ -30,7 +30,7 @@ inline any_a<> at(any_a<> const& range) const \
 } \
 inline any_a<> update(any_a<> const& range) \
 { \
-	any_a<> it = range.cbegin(); \
+	forward_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
 		throw dis__("[collection] update passed empty range"); \
@@ -44,7 +44,7 @@ inline any_a<> update(any_a<> const& range) \
 } \
 inline any_a<> insert(any_a<> const& range) \
 { \
-	any_a<> it = range.cbegin(); \
+	forward_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
 		throw dis__("[collection] insert passed empty range"); \

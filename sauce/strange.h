@@ -20,6 +20,9 @@ class cat_a;
 template <typename _1_ = void>
 class forward_iterator_a;
 
+template <typename _1_>
+class forward_iterator_data_a;
+
 template <typename _1_ = void>
 class misunderstanding_a;
 
@@ -59,6 +62,8 @@ class random_access_iterator_data_a;
 #define ___derived___ symbol_a<>
 #include "strange_cat_a.h"
 #include "strange_forward_iterator_a.h"
+#define ___derived___ forward_iterator_a<>
+#include "strange_forward_iterator_data_a.h"
 #include "strange_misunderstanding_a.h"
 #include "strange_collection_a.h"
 #define ___derived___ collection_a<>

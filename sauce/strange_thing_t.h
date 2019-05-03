@@ -39,25 +39,25 @@ public:
 	// visitor pattern
 	static inline any_a<> visit(any_a<> const& range)
 	{
-		any_a<> it = range.cbegin();
+		forward_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::thing::visit passed empty range");
 		}
 		any_a<> visitor = *it;
-		return visitor->invoke(range_t<>::val_(++it, range.cend())); //TODO me_() must already be in range
+		return visitor.invoke(range_t<>::val_(cast_<forward_iterator_a<>>(++it), range.cend())); //TODO add operators to derived and finale and get rid of cast
 	}
 
 	// function
 	inline any_a<> invoke(any_a<> const& range) const
 	{
-		any_a<> it = range.cbegin();
+		forward_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::thing::invoke passed empty range");
 		}
 		any_a<> member = *it;
-		return invoke_(member, range_t<>::val_(++it, range.cend()));
+		return invoke_(member, range_t<>::val_(cast_<forward_iterator_a<>>(++it), range.cend())); //TODO add operators to derived and finale and get rid of cast
 	}
 
 	inline any_a<> invoke_(any_a<> const& member, any_a<> const& range) const
@@ -71,7 +71,7 @@ public:
 
 	static inline any_a<> operate(any_a<> const& range)
 	{
-		any_a<> it = range.cbegin();
+		forward_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::thing::operate passed empty range");
@@ -82,7 +82,7 @@ public:
 			throw dis__("strange::thing::visit passed short range");
 		}
 		any_a<> operation = *it;
-		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
+		return operate_(thing, operation, range_t<>::val_(cast_<forward_iterator_a<>>(++it), range.cend())); //TODO add operators to derived and finale and get rid of cast
 	}
 
 	static inline any_a<> operate_(any_a<> const& thing, any_a<> const& operation, any_a<> const& range)
@@ -93,7 +93,7 @@ public:
 	// identification
 	inline any_a<> identical(any_a<> const& range) const
 	{
-		any_a<> it = range.cbegin();
+		forward_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::thing::identical passed empty range");
@@ -148,42 +148,37 @@ public:
 	}
 
 	// range
-	inline any_a<> cbegin() const
+	inline forward_iterator_a<> cbegin() const
 	{
 		return it_t<true>::val_(me_());
 	}
 
-	inline any_a<> begin() const
+	inline forward_iterator_a<> begin() const
 	{
 		return it_t<true>::val_(me_());
 	}
 
-	inline any_a<> begin()
+	inline forward_iterator_a<> begin()
 	{
 		return it_t<>::val_(me_());
 	}
 
-	inline any_a<> cend() const
+	inline forward_iterator_a<> cend() const
 	{
-		return nothing_t<>::val_();
+		return it_t<true>::val_(nothing_t<>::val_());
 	}
 
-	inline any_a<> end() const
+	inline forward_iterator_a<> end() const
 	{
-		return nothing_t<>::val_();
+		return it_t<true>::val_(nothing_t<>::val_());
 	}
 
-	inline any_a<> end()
+	inline forward_iterator_a<> end()
 	{
-		return nothing_t<>::val_();
+		return it_t<>::val_(nothing_t<>::val_());
 	}
 
-	// iterator
-	inline any_a<>& operator*() const
-	{
-		return nothing_t<>::val__();
-	}
-
+	// operators
 	inline void operator++()
 	{}
 
@@ -240,7 +235,7 @@ inline any_a<> eater(any_a<> const&) const \
 } \
 inline any_a<> same(any_a<> const& range) const \
 { \
-	any_a<> it = range.cbegin(); \
+	forward_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
 		throw dis__("[thing] same passed empty range"); \
@@ -253,7 +248,7 @@ inline any_a<> same_(any_a<> const& thing) const \
 } \
 inline any_a<> different(any_a<> const& range) const \
 { \
-	any_a<> it = range.cbegin(); \
+	forward_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
 		throw dis__("[thing] different passed empty range"); \
@@ -276,7 +271,7 @@ inline any_a<> beget(any_a<> const&) const \
 { \
 	return beget_(); \
 } \
-inline any_a<> beget_() const \
+inline forward_iterator_a<> beget_() const \
 { \
 	return cbegin(); \
 } \
@@ -284,7 +279,7 @@ inline any_a<> beset(any_a<> const&) \
 { \
 	return beset_(); \
 } \
-inline any_a<> beset_() \
+inline forward_iterator_a<> beset_() \
 { \
 	return begin(); \
 } \
@@ -292,7 +287,7 @@ inline any_a<> enget(any_a<> const&) const \
 { \
 	return enget_(); \
 } \
-inline any_a<> enget_() const \
+inline forward_iterator_a<> enget_() const \
 { \
 	return cend(); \
 } \
@@ -300,7 +295,7 @@ inline any_a<> enset(any_a<> const&) \
 { \
 	return enset_(); \
 } \
-inline any_a<> enset_() \
+inline forward_iterator_a<> enset_() \
 { \
 	return end(); \
 } \
@@ -314,7 +309,7 @@ inline any_a<> get_() const \
 } \
 inline any_a<> set(any_a<> const& range) const \
 { \
-	any_a<> it = range.cbegin(); \
+	forward_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
 		throw dis__("[thing] set passed empty range"); \

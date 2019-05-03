@@ -16,6 +16,9 @@ class random_access_iterator_a
 {
 public:
 	// random access iterator
+	inline random_access_iterator_a increment(any_a<> const& _);
+	inline random_access_iterator_a increment_();
+
 	inline random_access_iterator_a decrement(any_a<> const& _);
 	inline random_access_iterator_a decrement_();
 

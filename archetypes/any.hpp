@@ -27,10 +27,10 @@ public:
 	};
 
 	// reflection
-	inline symbol_a type(any_a const& _) const;
+	inline any_a type(any_a const& _) const;
 	inline symbol_a type_() const;
 
-	inline cat_a cat(any_a const& _) const;
+	inline any_a cat(any_a const& _) const;
 	inline cat_a cat_() const;
 
 //	herd_a<cat_a> inline any_a cats(any_a const& _) const;
@@ -98,33 +98,22 @@ public:
 
 	// range
 	inline any_a beget(any_a const& _) const;
-	inline any_a beget_() const;
-	inline any_a cbegin() const;
-	inline any_a begin() const;
+	inline forward_iterator_a beget_() const;
+	inline forward_iterator_a cbegin() const;
+	inline forward_iterator_a begin() const;
 
 	inline any_a beset(any_a const& _);
-	inline any_a beset_();
-	inline any_a begin();
+	inline forward_iterator_a beset_();
+	inline forward_iterator_a begin();
 
 	inline any_a enget(any_a const& _) const;
-	inline any_a enget_() const;
-	inline any_a cend() const;
-	inline any_a end() const;
+	inline forward_iterator_a enget_() const;
+	inline forward_iterator_a cend() const;
+	inline forward_iterator_a end() const;
 
 	inline any_a enset(any_a const& _);
-	inline any_a enset_();
-	inline any_a end();
-
-	// iterator
-	inline any_a get(any_a const& _) const;
-	inline any_a get_() const;
-	inline any_a set(any_a const& range) const;
-	inline any_a set_(any_a const& thing) const;
-	inline any_a& operator*() const;
-	inline any_a* operator->() const;
-
-	inline any_a increment(any_a const& _);
-	inline any_a increment_();
+	inline forward_iterator_a enset_();
+	inline forward_iterator_a end();
 };
 
 } // namespace strange

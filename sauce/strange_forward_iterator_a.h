@@ -30,7 +30,7 @@ namespace strange {
      { assert(handle_); return read().operator*( ); }
      inline any_a < > * operator -> ( ) const
      { assert(handle_); return read().operator->( ); }
-     inline forward_iterator_a increment ( any_a < > const & _ )
+     inline any_a < > increment ( any_a < > const & _ )
      { assert(handle_); return write().increment(_ ); }
      inline forward_iterator_a increment_ ( )
      { assert(handle_); return write().increment_( ); }
@@ -48,7 +48,7 @@ namespace strange {
       virtual inline any_a < > set_ ( any_a < > const & thing ) const = 0;
       virtual inline any_a < > & operator * ( ) const = 0;
       virtual inline any_a < > * operator -> ( ) const = 0;
-      virtual inline forward_iterator_a increment ( any_a < > const & _ ) = 0;
+      virtual inline any_a < > increment ( any_a < > const & _ ) = 0;
       virtual inline forward_iterator_a increment_ ( ) = 0;
     	};
 
@@ -92,7 +92,7 @@ namespace strange {
       { return value_.operator*( ); }
       virtual inline any_a < > * operator -> ( ) const
       { return value_.operator->( ); }
-      virtual inline forward_iterator_a increment ( any_a < > const & _ )
+      virtual inline any_a < > increment ( any_a < > const & _ )
       { return value_.increment(_ ); }
       virtual inline forward_iterator_a increment_ ( )
       { return value_.increment_( ); }

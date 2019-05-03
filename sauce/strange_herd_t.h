@@ -9,21 +9,21 @@ namespace strange
 template <typename _ABSTRACTION_ = herd_a<>>
 class herd_t : public something_t<_ABSTRACTION_>
 {
-	template <typename ITERATOR, typename _ABSTRACTION_ = data_a<ITERATOR>>
+	template <typename ITERATOR, typename _ABSTRACTION_ = forward_iterator_data_a<ITERATOR>>
 	class iterator_t : public something_t<_ABSTRACTION_>
 	{
 	public: ___THING___
 		// construction
 		template <typename F>
-		static inline data_a<ITERATOR> val__(herd_a<> const& herd, F&& it)
+		static inline forward_iterator_data_a<ITERATOR> val__(herd_a<> const& herd, F&& it)
 		{
-			return data_a<ITERATOR>{ iterator_t(herd, std::forward<F>(it)) };
+			return forward_iterator_data_a<ITERATOR>{ iterator_t(herd, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline data_a<ITERATOR> ref__(herd_a<> const& herd, F&& it)
+		static inline forward_iterator_data_a<ITERATOR> ref__(herd_a<> const& herd, F&& it)
 		{
-			return data_a<ITERATOR>(iterator_t(herd, std::forward<F>(it)), true);
+			return forward_iterator_data_a<ITERATOR>(iterator_t(herd, std::forward<F>(it)), true);
 		}
 
 		// reflection
@@ -36,20 +36,20 @@ class herd_t : public something_t<_ABSTRACTION_>
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
-			if (!check_<data_a<ITERATOR>>(thing))
+			if (!check_<forward_iterator_data_a<ITERATOR>>(thing))
 			{
 				return false;
 			}
-			return _it == cast_<data_a<ITERATOR>>(thing).extract__();
+			return _it == cast_<forward_iterator_data_a<ITERATOR>>(thing).extract__();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
 		{
-			if (!check_<data_a<ITERATOR>>(thing))
+			if (!check_<forward_iterator_data_a<ITERATOR>>(thing))
 			{
 				return true;
 			}
-			return _it != cast_<data_a<ITERATOR>>(thing).extract__();
+			return _it != cast_<forward_iterator_data_a<ITERATOR>>(thing).extract__();
 		}
 
 		inline std::size_t hash__() const
@@ -189,32 +189,32 @@ public: ___COLLECTION___
 	}
 
 	// range
-	inline any_a<> cbegin() const
+	inline forward_iterator_a<> cbegin() const
 	{
 		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cbegin());
 	}
 
-	inline any_a<> begin() const
+	inline forward_iterator_a<> begin() const
 	{
 		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cbegin());
 	}
 
-	inline any_a<> begin()
+	inline forward_iterator_a<> begin()
 	{
 		return iterator_t<std_unordered_set_any::iterator>::val__(me_(), _set.begin());
 	}
 
-	inline any_a<> cend() const
+	inline forward_iterator_a<> cend() const
 	{
 		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cend());
 	}
 
-	inline any_a<> end() const
+	inline forward_iterator_a<> end() const
 	{
 		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cend());
 	}
 
-	inline any_a<> end()
+	inline forward_iterator_a<> end()
 	{
 		return iterator_t<std_unordered_set_any::iterator>::val__(me_(), _set.end());
 	}

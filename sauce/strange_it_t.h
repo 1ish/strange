@@ -4,14 +4,14 @@
 namespace strange
 {
 
-template <bool CONST = false, typename _ABSTRACTION_ = any_a<>, typename END = nothing_t<>>
+template <bool CONST = false, typename _ABSTRACTION_ = forward_iterator_a<>, typename END = nothing_t<>>
 class it_t : public something_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline any_a<> val(any_a<> const& range)
+	static inline forward_iterator_a<> val(any_a<> const& range)
 	{
-		any_a<> it = range.cbegin();
+		forward_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return val_();
@@ -19,14 +19,14 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline any_a<> val_(any_a<> const& thing = END::val_())
+	static inline forward_iterator_a<> val_(any_a<> const& thing = END::val_())
 	{
-		return any_a<>{ it_t<CONST, _ABSTRACTION_, END>{ thing } };
+		return forward_iterator_a<>{ it_t<CONST, _ABSTRACTION_, END>{ thing } };
 	}
 
-	static inline any_a<> ref(any_a<> const& range)
+	static inline forward_iterator_a<> ref(any_a<> const& range)
 	{
-		any_a<> it = range.cbegin();
+		forward_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return ref_();
@@ -34,9 +34,9 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline any_a<> ref_(any_a<> const& thing = END::val_())
+	static inline forward_iterator_a<> ref_(any_a<> const& thing = END::val_())
 	{
-		return any_a<>(it_t<CONST, _ABSTRACTION_, END>{ thing }, true);
+		return forward_iterator_a<>(it_t<CONST, _ABSTRACTION_, END>{ thing }, true);
 	}
 
 	// reflection
@@ -49,12 +49,20 @@ public: ___THING___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return _thing.nothing__() == thing->nothing__();
+		if (!check_<forward_iterator_a<>>(thing))
+		{
+			return false;
+		}
+		return _thing.nothing__() == cast_<forward_iterator_a<>>(thing)->nothing__();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return _thing.nothing__() != thing->nothing__();
+		if (!check_<forward_iterator_a<>>(thing))
+		{
+			return true;
+		}
+		return _thing.nothing__() != cast_<forward_iterator_a<>>(thing)->nothing__();
 	}
 
 	inline std::size_t hash__() const

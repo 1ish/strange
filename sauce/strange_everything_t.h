@@ -80,22 +80,6 @@ public: ___THING___
 		return HASH;
 	}
 
-	// iterator
-	inline any_a<>& operator*() const
-	{
-		return everything_t<>::val__();
-	}
-
-	inline everything_t& operator++()
-	{
-		return *this;
-	}
-
-	inline everything_t operator++(int)
-	{
-		return *this;
-	}
-
 protected:
 	inline everything_t()
 		: something_t{}
