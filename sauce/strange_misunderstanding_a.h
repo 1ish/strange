@@ -150,7 +150,7 @@ namespace strange {
 
      inline std :: string const & to_string__ ( ) const
      { assert(handle_); return read().to_string__( ); }
-     inline misunderstanding_a add ( any_a < > const & range ) const
+     inline any_a < > add ( any_a < > const & range ) const
      { assert(handle_); return read().add(range ); }
      inline misunderstanding_a add_ ( misunderstanding_a const & misunderstanding ) const
      { assert(handle_); return read().add_(misunderstanding ); }
@@ -165,7 +165,7 @@ namespace strange {
     	{
 
       virtual inline std :: string const & to_string__ ( ) const = 0;
-      virtual inline misunderstanding_a add ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > add ( any_a < > const & range ) const = 0;
       virtual inline misunderstanding_a add_ ( misunderstanding_a const & misunderstanding ) const = 0;
       virtual inline misunderstanding_a operator + ( misunderstanding_a const & misunderstanding ) const = 0;
     	};
@@ -200,7 +200,7 @@ namespace strange {
 
       virtual inline std :: string const & to_string__ ( ) const
       { return value_.to_string__( ); }
-      virtual inline misunderstanding_a add ( any_a < > const & range ) const
+      virtual inline any_a < > add ( any_a < > const & range ) const
       { return value_.add(range ); }
       virtual inline misunderstanding_a add_ ( misunderstanding_a const & misunderstanding ) const
       { return value_.add_(misunderstanding ); }

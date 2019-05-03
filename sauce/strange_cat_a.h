@@ -149,7 +149,7 @@ namespace strange {
 
     
 
-     inline symbol_a < > name ( any_a < > const & _ ) const
+     inline any_a < > name ( any_a < > const & _ ) const
      { assert(handle_); return read().name(_ ); }
      inline symbol_a < > name_ ( ) const
      { assert(handle_); return read().name_( ); }
@@ -161,7 +161,7 @@ namespace strange {
      { assert(handle_); return read().parameters(_ ); }
      inline any_a < > parameters_ ( ) const
      { assert(handle_); return read().parameters_( ); }
-     inline cat_a result ( any_a < > const & _ ) const
+     inline any_a < > result ( any_a < > const & _ ) const
      { assert(handle_); return read().result(_ ); }
      inline cat_a result_ ( ) const
      { assert(handle_); return read().result_( ); }
@@ -185,13 +185,13 @@ namespace strange {
 
     	{
 
-      virtual inline symbol_a < > name ( any_a < > const & _ ) const = 0;
+      virtual inline any_a < > name ( any_a < > const & _ ) const = 0;
       virtual inline symbol_a < > name_ ( ) const = 0;
       virtual inline any_a < > arguments ( any_a < > const & _ ) const = 0;
       virtual inline any_a < > arguments_ ( ) const = 0;
       virtual inline any_a < > parameters ( any_a < > const & _ ) const = 0;
       virtual inline any_a < > parameters_ ( ) const = 0;
-      virtual inline cat_a result ( any_a < > const & _ ) const = 0;
+      virtual inline any_a < > result ( any_a < > const & _ ) const = 0;
       virtual inline cat_a result_ ( ) const = 0;
       virtual inline any_a < > includes ( any_a < > const & range ) const = 0;
       virtual inline any_a < > includes_ ( any_a < > const & thing ) const = 0;
@@ -239,7 +239,7 @@ namespace strange {
 
     
 
-      virtual inline symbol_a < > name ( any_a < > const & _ ) const
+      virtual inline any_a < > name ( any_a < > const & _ ) const
       { return value_.name(_ ); }
       virtual inline symbol_a < > name_ ( ) const
       { return value_.name_( ); }
@@ -251,7 +251,7 @@ namespace strange {
       { return value_.parameters(_ ); }
       virtual inline any_a < > parameters_ ( ) const
       { return value_.parameters_( ); }
-      virtual inline cat_a result ( any_a < > const & _ ) const
+      virtual inline any_a < > result ( any_a < > const & _ ) const
       { return value_.result(_ ); }
       virtual inline cat_a result_ ( ) const
       { return value_.result_( ); }

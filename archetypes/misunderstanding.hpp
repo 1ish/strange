@@ -17,7 +17,7 @@ public:
 	// misunderstanding
 	inline std::string const& to_string__() const;
 
-	inline misunderstanding_a add(any_a<> const& range) const;
+	inline any_a<> add(any_a<> const& range) const;
 	inline misunderstanding_a add_(misunderstanding_a const& misunderstanding) const;
 	inline misunderstanding_a operator+(misunderstanding_a const& misunderstanding) const;
 };

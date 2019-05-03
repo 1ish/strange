@@ -150,7 +150,7 @@ namespace strange {
 
      inline std :: string const & to_string__ ( ) const
      { assert(handle_); return read().to_string__( ); }
-     inline symbol_a add ( any_a < > const & range ) const
+     inline any_a < > add ( any_a < > const & range ) const
      { assert(handle_); return read().add(range ); }
      inline symbol_a add_ ( symbol_a const & symbol ) const
      { assert(handle_); return read().add_(symbol ); }
@@ -165,7 +165,7 @@ namespace strange {
     	{
 
       virtual inline std :: string const & to_string__ ( ) const = 0;
-      virtual inline symbol_a add ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > add ( any_a < > const & range ) const = 0;
       virtual inline symbol_a add_ ( symbol_a const & symbol ) const = 0;
       virtual inline symbol_a operator + ( symbol_a const & symbol ) const = 0;
     	};
@@ -200,7 +200,7 @@ namespace strange {
 
       virtual inline std :: string const & to_string__ ( ) const
       { return value_.to_string__( ); }
-      virtual inline symbol_a add ( any_a < > const & range ) const
+      virtual inline any_a < > add ( any_a < > const & range ) const
       { return value_.add(range ); }
       virtual inline symbol_a add_ ( symbol_a const & symbol ) const
       { return value_.add_(symbol ); }

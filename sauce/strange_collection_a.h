@@ -212,21 +212,21 @@ namespace strange {
      { assert(handle_); return write().pop_back(_ ); }
      inline any_a < > pop_back_ ( )
      { assert(handle_); return write().pop_back_( ); }
-     inline collection_a self_add ( any_a < > const & range )
+     inline any_a < > self_add ( any_a < > const & range )
      { assert(handle_); return write().self_add(range ); }
      inline collection_a self_add_ ( collection_a const & collection )
      { assert(handle_); return write().self_add_(collection ); }
-     inline collection_a add ( any_a < > const & range ) const
+     inline any_a < > add ( any_a < > const & range ) const
      { assert(handle_); return read().add(range ); }
      inline collection_a add_ ( collection_a const & collection ) const
      { assert(handle_); return read().add_(collection ); }
      inline collection_a operator + ( collection_a const & collection ) const
      { assert(handle_); return read().operator+(collection ); }
-     inline collection_a self_subtract ( any_a < > const & range )
+     inline any_a < > self_subtract ( any_a < > const & range )
      { assert(handle_); return write().self_subtract(range ); }
      inline collection_a self_subtract_ ( collection_a const & collection )
      { assert(handle_); return write().self_subtract_(collection ); }
-     inline collection_a subtract ( any_a < > const & range ) const
+     inline any_a < > subtract ( any_a < > const & range ) const
      { assert(handle_); return read().subtract(range ); }
      inline collection_a subtract_ ( collection_a const & collection ) const
      { assert(handle_); return read().subtract_(collection ); }
@@ -272,14 +272,14 @@ namespace strange {
       virtual inline void push_back__ ( any_a < > const & thing ) = 0;
       virtual inline any_a < > pop_back ( any_a < > const & _ ) = 0;
       virtual inline any_a < > pop_back_ ( ) = 0;
-      virtual inline collection_a self_add ( any_a < > const & range ) = 0;
+      virtual inline any_a < > self_add ( any_a < > const & range ) = 0;
       virtual inline collection_a self_add_ ( collection_a const & collection ) = 0;
-      virtual inline collection_a add ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > add ( any_a < > const & range ) const = 0;
       virtual inline collection_a add_ ( collection_a const & collection ) const = 0;
       virtual inline collection_a operator + ( collection_a const & collection ) const = 0;
-      virtual inline collection_a self_subtract ( any_a < > const & range ) = 0;
+      virtual inline any_a < > self_subtract ( any_a < > const & range ) = 0;
       virtual inline collection_a self_subtract_ ( collection_a const & collection ) = 0;
-      virtual inline collection_a subtract ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > subtract ( any_a < > const & range ) const = 0;
       virtual inline collection_a subtract_ ( collection_a const & collection ) const = 0;
       virtual inline collection_a operator - ( collection_a const & collection ) const = 0;
     	};
@@ -376,21 +376,21 @@ namespace strange {
       { return value_.pop_back(_ ); }
       virtual inline any_a < > pop_back_ ( )
       { return value_.pop_back_( ); }
-      virtual inline collection_a self_add ( any_a < > const & range )
+      virtual inline any_a < > self_add ( any_a < > const & range )
       { return value_.self_add(range ); }
       virtual inline collection_a self_add_ ( collection_a const & collection )
       { return value_.self_add_(collection ); }
-      virtual inline collection_a add ( any_a < > const & range ) const
+      virtual inline any_a < > add ( any_a < > const & range ) const
       { return value_.add(range ); }
       virtual inline collection_a add_ ( collection_a const & collection ) const
       { return value_.add_(collection ); }
       virtual inline collection_a operator + ( collection_a const & collection ) const
       { return value_.operator+(collection ); }
-      virtual inline collection_a self_subtract ( any_a < > const & range )
+      virtual inline any_a < > self_subtract ( any_a < > const & range )
       { return value_.self_subtract(range ); }
       virtual inline collection_a self_subtract_ ( collection_a const & collection )
       { return value_.self_subtract_(collection ); }
-      virtual inline collection_a subtract ( any_a < > const & range ) const
+      virtual inline any_a < > subtract ( any_a < > const & range ) const
       { return value_.subtract(range ); }
       virtual inline collection_a subtract_ ( collection_a const & collection ) const
       { return value_.subtract_(collection ); }

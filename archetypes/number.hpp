@@ -15,48 +15,48 @@ class number_a
 {
 public:
 	// number
-	inline number_a increment(any_a<> const& _);
+	inline any_a<> increment(any_a<> const& _);
 	inline number_a increment_();
 
-	inline number_a decrement(any_a<> const& _);
+	inline any_a<> decrement(any_a<> const& _);
 	inline number_a decrement_();
 
-	inline number_a self_add(any_a<> const& range);
+	inline any_a<> self_add(any_a<> const& range);
 	inline number_a self_add_(number_a const& number);
 
-	inline number_a add(any_a<> const& range) const;
+	inline any_a<> add(any_a<> const& range) const;
 	inline number_a add_(number_a const& number) const;
 	inline number_a operator+(number_a const& number) const;
 
-	inline number_a self_subtract(any_a<> const& range);
+	inline any_a<> self_subtract(any_a<> const& range);
 	inline number_a self_subtract_(number_a const& number);
 
-	inline number_a subtract(any_a<> const& range) const;
+	inline any_a<> subtract(any_a<> const& range) const;
 	inline number_a subtract_(number_a const& number) const;
 	inline number_a operator-(number_a const& number) const;
 
-	inline number_a self_multiply(any_a<> const& range);
+	inline any_a<> self_multiply(any_a<> const& range);
 	inline number_a self_multiply_(number_a const& number);
 
-	inline number_a multiply(any_a<> const& range) const;
+	inline any_a<> multiply(any_a<> const& range) const;
 	inline number_a multiply_(number_a const& number) const;
 	inline number_a operator*(number_a const& number) const;
 
-	inline number_a self_divide(any_a<> const& range);
+	inline any_a<> self_divide(any_a<> const& range);
 	inline number_a self_divide_(number_a const& number);
 
-	inline number_a divide(any_a<> const& range) const;
+	inline any_a<> divide(any_a<> const& range) const;
 	inline number_a divide_(number_a const& number) const;
 	inline number_a operator/(number_a const& number) const;
 
-	inline number_a self_modulo(any_a<> const& range);
+	inline any_a<> self_modulo(any_a<> const& range);
 	inline number_a self_modulo_(number_a const& number);
 
-	inline number_a modulo(any_a<> const& range) const;
+	inline any_a<> modulo(any_a<> const& range) const;
 	inline number_a modulo_(number_a const& number) const;
 	inline number_a operator%(number_a const& number) const;
 
-	inline number_a to_int_64(any_a<> const& _) const;
+	inline any_a<> to_int_64(any_a<> const& _) const;
 	inline number_a to_int_64_() const;
 	inline int64_t to_int_64__() const;
 
@@ -64,7 +64,7 @@ public:
 	inline any_a<> from_int_64_(number_a const& int_64);
 	inline void from_int_64__(int64_t int_64);
 
-	inline number_a to_float_64(any_a<> const& _) const;
+	inline any_a<> to_float_64(any_a<> const& _) const;
 	inline number_a to_float_64_() const;
 	inline double to_float_64__() const;
 

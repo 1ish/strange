@@ -16,7 +16,7 @@ class cat_a
 {
 public:
 	// cat
-	inline symbol_a<> name(any_a<> const& _) const;
+	inline any_a<> name(any_a<> const& _) const;
 	inline symbol_a<> name_() const;
 
 	inline any_a<> arguments(any_a<> const& _) const;
@@ -25,7 +25,7 @@ public:
 	inline any_a<> parameters(any_a<> const& _) const;
 	inline any_a<> parameters_() const;
 
-	inline cat_a result(any_a<> const& _) const;
+	inline any_a<> result(any_a<> const& _) const;
 	inline cat_a result_() const;
 
 	inline any_a<> includes(any_a<> const& range) const;

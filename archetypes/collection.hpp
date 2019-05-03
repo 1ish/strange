@@ -59,17 +59,17 @@ public:
 	inline any_a<> pop_back(any_a<> const& _);
 	inline any_a<> pop_back_();
 
-	inline collection_a self_add(any_a<> const& range);
+	inline any_a<> self_add(any_a<> const& range);
 	inline collection_a self_add_(collection_a const& collection);
 
-	inline collection_a add(any_a<> const& range) const;
+	inline any_a<> add(any_a<> const& range) const;
 	inline collection_a add_(collection_a const& collection) const;
 	inline collection_a operator+(collection_a const& collection) const;
 
-	inline collection_a self_subtract(any_a<> const& range);
+	inline any_a<> self_subtract(any_a<> const& range);
 	inline collection_a self_subtract_(collection_a const& collection);
 
-	inline collection_a subtract(any_a<> const& range) const;
+	inline any_a<> subtract(any_a<> const& range) const;
 	inline collection_a subtract_(collection_a const& collection) const;
 	inline collection_a operator-(collection_a const& collection) const;
 };
