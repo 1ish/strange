@@ -254,6 +254,48 @@ namespace strange {
      { assert(handle_); return read().greater_or_equal_(number ); }
      inline bool operator >= ( number_a const & number ) const
      { assert(handle_); return read().operator>=(number ); }
+     inline any_a < > byte_size ( any_a < > const & range ) const
+     { assert(handle_); return read().byte_size(range ); }
+     inline number_a byte_size_ ( ) const
+     { assert(handle_); return read().byte_size_( ); }
+     inline int64_t byte_size__ ( ) const
+     { assert(handle_); return read().byte_size__( ); }
+     inline any_a < > is_int ( any_a < > const & range ) const
+     { assert(handle_); return read().is_int(range ); }
+     inline any_a < > is_int_ ( ) const
+     { assert(handle_); return read().is_int_( ); }
+     inline bool is_int__ ( ) const
+     { assert(handle_); return read().is_int__( ); }
+     inline any_a < > is_nan ( any_a < > const & range ) const
+     { assert(handle_); return read().is_nan(range ); }
+     inline any_a < > is_nan_ ( ) const
+     { assert(handle_); return read().is_nan_( ); }
+     inline bool is_nan__ ( ) const
+     { assert(handle_); return read().is_nan__( ); }
+     inline any_a < > is_inf ( any_a < > const & range ) const
+     { assert(handle_); return read().is_inf(range ); }
+     inline any_a < > is_inf_ ( ) const
+     { assert(handle_); return read().is_inf_( ); }
+     inline bool is_inf__ ( ) const
+     { assert(handle_); return read().is_inf__( ); }
+     inline any_a < > is_finite ( any_a < > const & range ) const
+     { assert(handle_); return read().is_finite(range ); }
+     inline any_a < > is_finite_ ( ) const
+     { assert(handle_); return read().is_finite_( ); }
+     inline bool is_finite__ ( ) const
+     { assert(handle_); return read().is_finite__( ); }
+     inline any_a < > is_normal ( any_a < > const & range ) const
+     { assert(handle_); return read().is_normal(range ); }
+     inline any_a < > is_normal_ ( ) const
+     { assert(handle_); return read().is_normal_( ); }
+     inline bool is_normal__ ( ) const
+     { assert(handle_); return read().is_normal__( ); }
+     inline any_a < > little_endian ( any_a < > const & range ) const
+     { assert(handle_); return read().little_endian(range ); }
+     inline any_a < > little_endian_ ( ) const
+     { assert(handle_); return read().little_endian_( ); }
+     inline bool little_endian__ ( ) const
+     { assert(handle_); return read().little_endian__( ); }
     
 
     protected:
@@ -315,6 +357,27 @@ namespace strange {
       virtual inline any_a < > greater_or_equal ( any_a < > const & range ) const = 0;
       virtual inline any_a < > greater_or_equal_ ( number_a const & number ) const = 0;
       virtual inline bool operator >= ( number_a const & number ) const = 0;
+      virtual inline any_a < > byte_size ( any_a < > const & range ) const = 0;
+      virtual inline number_a byte_size_ ( ) const = 0;
+      virtual inline int64_t byte_size__ ( ) const = 0;
+      virtual inline any_a < > is_int ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > is_int_ ( ) const = 0;
+      virtual inline bool is_int__ ( ) const = 0;
+      virtual inline any_a < > is_nan ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > is_nan_ ( ) const = 0;
+      virtual inline bool is_nan__ ( ) const = 0;
+      virtual inline any_a < > is_inf ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > is_inf_ ( ) const = 0;
+      virtual inline bool is_inf__ ( ) const = 0;
+      virtual inline any_a < > is_finite ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > is_finite_ ( ) const = 0;
+      virtual inline bool is_finite__ ( ) const = 0;
+      virtual inline any_a < > is_normal ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > is_normal_ ( ) const = 0;
+      virtual inline bool is_normal__ ( ) const = 0;
+      virtual inline any_a < > little_endian ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > little_endian_ ( ) const = 0;
+      virtual inline bool little_endian__ ( ) const = 0;
     	};
 
     
@@ -451,6 +514,48 @@ namespace strange {
       { return value_.greater_or_equal_(number ); }
       virtual inline bool operator >= ( number_a const & number ) const
       { return value_.operator>=(number ); }
+      virtual inline any_a < > byte_size ( any_a < > const & range ) const
+      { return value_.byte_size(range ); }
+      virtual inline number_a byte_size_ ( ) const
+      { return value_.byte_size_( ); }
+      virtual inline int64_t byte_size__ ( ) const
+      { return value_.byte_size__( ); }
+      virtual inline any_a < > is_int ( any_a < > const & range ) const
+      { return value_.is_int(range ); }
+      virtual inline any_a < > is_int_ ( ) const
+      { return value_.is_int_( ); }
+      virtual inline bool is_int__ ( ) const
+      { return value_.is_int__( ); }
+      virtual inline any_a < > is_nan ( any_a < > const & range ) const
+      { return value_.is_nan(range ); }
+      virtual inline any_a < > is_nan_ ( ) const
+      { return value_.is_nan_( ); }
+      virtual inline bool is_nan__ ( ) const
+      { return value_.is_nan__( ); }
+      virtual inline any_a < > is_inf ( any_a < > const & range ) const
+      { return value_.is_inf(range ); }
+      virtual inline any_a < > is_inf_ ( ) const
+      { return value_.is_inf_( ); }
+      virtual inline bool is_inf__ ( ) const
+      { return value_.is_inf__( ); }
+      virtual inline any_a < > is_finite ( any_a < > const & range ) const
+      { return value_.is_finite(range ); }
+      virtual inline any_a < > is_finite_ ( ) const
+      { return value_.is_finite_( ); }
+      virtual inline bool is_finite__ ( ) const
+      { return value_.is_finite__( ); }
+      virtual inline any_a < > is_normal ( any_a < > const & range ) const
+      { return value_.is_normal(range ); }
+      virtual inline any_a < > is_normal_ ( ) const
+      { return value_.is_normal_( ); }
+      virtual inline bool is_normal__ ( ) const
+      { return value_.is_normal__( ); }
+      virtual inline any_a < > little_endian ( any_a < > const & range ) const
+      { return value_.little_endian(range ); }
+      virtual inline any_a < > little_endian_ ( ) const
+      { return value_.little_endian_( ); }
+      virtual inline bool little_endian__ ( ) const
+      { return value_.little_endian__( ); }
     	};
 
     
