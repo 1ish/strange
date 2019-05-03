@@ -13,7 +13,7 @@
 
 namespace strange {
     template < typename _1_ >
-    class random_access_iterator_a : public ___root___
+    class random_access_iterator_a : public ___derived___
 
     {
 
@@ -149,29 +149,25 @@ namespace strange {
 
     
 
-     inline random_access_iterator_a increment ( any_a < > const & _ )
-     { assert(handle_); return write().increment(_ ); }
-     inline random_access_iterator_a increment_ ( )
-     { assert(handle_); return write().increment_( ); }
-     inline random_access_iterator_a decrement ( any_a < > const & _ )
+     inline any_a < > decrement ( any_a < > const & _ )
      { assert(handle_); return write().decrement(_ ); }
      inline random_access_iterator_a decrement_ ( )
      { assert(handle_); return write().decrement_( ); }
-     inline random_access_iterator_a self_add ( any_a < > const & range )
+     inline any_a < > self_add ( any_a < > const & range )
      { assert(handle_); return write().self_add(range ); }
      inline random_access_iterator_a self_add_ ( number_a < > const & number )
      { assert(handle_); return write().self_add_(number ); }
-     inline random_access_iterator_a add ( any_a < > const & range ) const
+     inline any_a < > add ( any_a < > const & range ) const
      { assert(handle_); return read().add(range ); }
      inline random_access_iterator_a add_ ( number_a < > const & number ) const
      { assert(handle_); return read().add_(number ); }
      inline random_access_iterator_a operator + ( number_a < > const & number ) const
      { assert(handle_); return read().operator+(number ); }
-     inline random_access_iterator_a self_subtract ( any_a < > const & range )
+     inline any_a < > self_subtract ( any_a < > const & range )
      { assert(handle_); return write().self_subtract(range ); }
      inline random_access_iterator_a self_subtract_ ( number_a < > const & number )
      { assert(handle_); return write().self_subtract_(number ); }
-     inline random_access_iterator_a subtract ( any_a < > const & range ) const
+     inline any_a < > subtract ( any_a < > const & range ) const
      { assert(handle_); return read().subtract(range ); }
      inline random_access_iterator_a subtract_ ( number_a < > const & number ) const
      { assert(handle_); return read().subtract_(number ); }
@@ -205,22 +201,20 @@ namespace strange {
 
     protected:
 
-    	struct ___derived_handle_base___ : ___root_handle_base___
+    	struct ___dderived_handle_base___ : ___derived_handle_base___
 
     	{
 
-      virtual inline random_access_iterator_a increment ( any_a < > const & _ ) = 0;
-      virtual inline random_access_iterator_a increment_ ( ) = 0;
-      virtual inline random_access_iterator_a decrement ( any_a < > const & _ ) = 0;
+      virtual inline any_a < > decrement ( any_a < > const & _ ) = 0;
       virtual inline random_access_iterator_a decrement_ ( ) = 0;
-      virtual inline random_access_iterator_a self_add ( any_a < > const & range ) = 0;
+      virtual inline any_a < > self_add ( any_a < > const & range ) = 0;
       virtual inline random_access_iterator_a self_add_ ( number_a < > const & number ) = 0;
-      virtual inline random_access_iterator_a add ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > add ( any_a < > const & range ) const = 0;
       virtual inline random_access_iterator_a add_ ( number_a < > const & number ) const = 0;
       virtual inline random_access_iterator_a operator + ( number_a < > const & number ) const = 0;
-      virtual inline random_access_iterator_a self_subtract ( any_a < > const & range ) = 0;
+      virtual inline any_a < > self_subtract ( any_a < > const & range ) = 0;
       virtual inline random_access_iterator_a self_subtract_ ( number_a < > const & number ) = 0;
-      virtual inline random_access_iterator_a subtract ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > subtract ( any_a < > const & range ) const = 0;
       virtual inline random_access_iterator_a subtract_ ( number_a < > const & number ) const = 0;
       virtual inline random_access_iterator_a operator - ( number_a < > const & number ) const = 0;
       virtual inline any_a < > less_than ( any_a < > const & range ) const = 0;
@@ -239,17 +233,17 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename ___DHB___ = ___derived_handle_base___>
+    	template <typename ___TTT___, typename ___DDHB___ = ___dderived_handle_base___>
 
-    	struct ___derived_handle___ : ___root_handle___<___TTT___, ___DHB___>
+    	struct ___dderived_handle___ : ___derived_handle___<___TTT___, ___DDHB___>
 
     	{
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___derived_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+    		inline ___dderived_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
 
-    			: ___root_handle___<___TTT___, ___DHB___>{ value }
+    			: ___derived_handle___<___TTT___, ___DDHB___>{ value }
 
     		{}
 
@@ -257,37 +251,33 @@ namespace strange {
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___derived_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+    		inline ___dderived_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
 
-    			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
+    			: ___derived_handle___<___TTT___, ___DDHB___>{ std::move(value) }
 
     		{}
 
     
 
-      virtual inline random_access_iterator_a increment ( any_a < > const & _ )
-      { return value_.increment(_ ); }
-      virtual inline random_access_iterator_a increment_ ( )
-      { return value_.increment_( ); }
-      virtual inline random_access_iterator_a decrement ( any_a < > const & _ )
+      virtual inline any_a < > decrement ( any_a < > const & _ )
       { return value_.decrement(_ ); }
       virtual inline random_access_iterator_a decrement_ ( )
       { return value_.decrement_( ); }
-      virtual inline random_access_iterator_a self_add ( any_a < > const & range )
+      virtual inline any_a < > self_add ( any_a < > const & range )
       { return value_.self_add(range ); }
       virtual inline random_access_iterator_a self_add_ ( number_a < > const & number )
       { return value_.self_add_(number ); }
-      virtual inline random_access_iterator_a add ( any_a < > const & range ) const
+      virtual inline any_a < > add ( any_a < > const & range ) const
       { return value_.add(range ); }
       virtual inline random_access_iterator_a add_ ( number_a < > const & number ) const
       { return value_.add_(number ); }
       virtual inline random_access_iterator_a operator + ( number_a < > const & number ) const
       { return value_.operator+(number ); }
-      virtual inline random_access_iterator_a self_subtract ( any_a < > const & range )
+      virtual inline any_a < > self_subtract ( any_a < > const & range )
       { return value_.self_subtract(range ); }
       virtual inline random_access_iterator_a self_subtract_ ( number_a < > const & number )
       { return value_.self_subtract_(number ); }
-      virtual inline random_access_iterator_a subtract ( any_a < > const & range ) const
+      virtual inline any_a < > subtract ( any_a < > const & range ) const
       { return value_.subtract(range ); }
       virtual inline random_access_iterator_a subtract_ ( number_a < > const & number ) const
       { return value_.subtract_(number ); }
@@ -321,17 +311,17 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename ___DHB___>
+    	template <typename ___TTT___, typename ___DDHB___>
 
-    	struct ___derived_handle___<std::reference_wrapper<___TTT___>, ___DHB___>
+    	struct ___dderived_handle___<std::reference_wrapper<___TTT___>, ___DDHB___>
 
-    		: ___derived_handle___<___TTT___&, ___DHB___>
+    		: ___dderived_handle___<___TTT___&, ___DDHB___>
 
     	{
 
-    		inline ___derived_handle___(std::reference_wrapper<___TTT___> ref)
+    		inline ___dderived_handle___(std::reference_wrapper<___TTT___> ref)
 
-    			: ___derived_handle___<___TTT___&, ___DHB___>{ ref.get() }
+    			: ___dderived_handle___<___TTT___&, ___DDHB___>{ ref.get() }
 
     		{}
 
@@ -343,15 +333,15 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	struct ___derived_handle_final___ final : ___derived_handle___<___TTT___>
+    	struct ___dderived_handle_final___ final : ___dderived_handle___<___TTT___>
 
     	{
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+    		inline ___dderived_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
 
-    			: ___derived_handle___<___TTT___>{ value }
+    			: ___dderived_handle___<___TTT___>{ value }
 
     		{}
 
@@ -359,9 +349,9 @@ namespace strange {
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+    		inline ___dderived_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
 
-    			: ___derived_handle___<___TTT___>{ std::move(value) }
+    			: ___dderived_handle___<___TTT___>{ std::move(value) }
 
     		{}
 
@@ -371,7 +361,7 @@ namespace strange {
 
     		{
 
-    			return std::make_shared<___derived_handle_final___>(___derived_handle___<___TTT___>::value_);
+    			return std::make_shared<___dderived_handle_final___>(___dderived_handle___<___TTT___>::value_);
 
     		}
 
@@ -381,15 +371,15 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	struct ___derived_handle_final___<std::reference_wrapper<___TTT___>> final
+    	struct ___dderived_handle_final___<std::reference_wrapper<___TTT___>> final
 
-    		: ___derived_handle_final___<___TTT___&>
+    		: ___dderived_handle_final___<___TTT___&>
 
     	{
 
-    		inline ___derived_handle_final___(std::reference_wrapper<___TTT___> ref)
+    		inline ___dderived_handle_final___(std::reference_wrapper<___TTT___> ref)
 
-    			: ___derived_handle_final___<___TTT___&>{ ref.get() }
+    			: ___dderived_handle_final___<___TTT___&>{ ref.get() }
 
     		{}
 
@@ -397,17 +387,17 @@ namespace strange {
 
     
 
-    	inline ___derived_handle_base___ const& read() const
+    	inline ___dderived_handle_base___ const& read() const
 
     	{
 
-    		return *std::static_pointer_cast<___derived_handle_base___ const>(handle_);
+    		return *std::static_pointer_cast<___dderived_handle_base___ const>(handle_);
 
     	}
 
     
 
-    	inline ___derived_handle_base___& write()
+    	inline ___dderived_handle_base___& write()
 
     	{
 
@@ -421,15 +411,15 @@ namespace strange {
 
     		}
 
-    		return *std::static_pointer_cast<___derived_handle_base___>(handle_);
+    		return *std::static_pointer_cast<___dderived_handle_base___>(handle_);
 
     	}
 
     
 
-    	template <typename ___TTT___, typename ___1___>
+    	template <typename ___TTT___>
 
-    	friend inline bool check_(random_access_iterator_a<___1___> const& value);
+    	friend inline bool check_(random_access_iterator_a<> const& value);
 
     
 
@@ -449,7 +439,7 @@ namespace strange {
 
     	{
 
-    		return bool(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+    		return bool(std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
 
     	}
 
@@ -461,7 +451,7 @@ namespace strange {
 
     	explicit inline random_access_iterator_a(bool reference)
 
-    		: ___root___{ reference }
+    		: ___derived___{ reference }
 
     	{}
 
@@ -469,7 +459,7 @@ namespace strange {
 
     	inline random_access_iterator_a(random_access_iterator_a const& other, bool reference)
 
-    		: ___root___(other, reference)
+    		: ___derived___(other, reference)
 
     	{}
 
@@ -477,7 +467,7 @@ namespace strange {
 
     	inline random_access_iterator_a(random_access_iterator_a&& other, bool reference)
 
-    		: ___root___(std::move(other), reference)
+    		: ___derived___(std::move(other), reference)
 
     	{}
 
@@ -487,23 +477,23 @@ namespace strange {
 
     	explicit inline random_access_iterator_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 
-    		: ___root___(handle, reference)
+    		: ___derived___(handle, reference)
 
     	{
 
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
-    		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
+    		if (!std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
 
     		{
 
-    			throw dis__("random_access_iterator_a constructor failed to cast from base to derived");
+    			throw dis__("random_access_iterator_a constructor failed to cast from base to dderived");
 
     		}
 
     #else
 
-    		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+    		assert(std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
 
     #endif
 
@@ -515,7 +505,7 @@ namespace strange {
 
     	explicit inline random_access_iterator_a(___TTT___ value, bool reference = false)
 
-    		: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+    		: ___derived___(std::make_shared<___dderived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 
     			reference)
 
@@ -531,17 +521,17 @@ namespace strange {
 
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
-    		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
+    		if (!std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
 
     		{
 
-    			throw dis__("random_access_iterator_a assignment failed to cast from base to derived");
+    			throw dis__("random_access_iterator_a assignment failed to cast from base to dderived");
 
     		}
 
     #else
 
-    		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+    		assert(std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
 
     #endif
 
@@ -575,9 +565,9 @@ namespace strange {
 
     
 
-    template <typename ___TTT___, typename ___1___>
+    template <typename ___TTT___>
 
-    inline bool check_(random_access_iterator_a<___1___> const& value)
+    inline bool check_(random_access_iterator_a<> const& value)
 
     {
 
@@ -586,6 +576,8 @@ namespace strange {
     }
 
     
+
+    #undef ___derived___
 
 }
 #endif

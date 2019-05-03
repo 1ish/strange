@@ -70,10 +70,51 @@ public: ___THING___
 		return _thing.hash__();
 	}
 
-	// iterator
+	// forward iterator
+	inline any_a<> get(any_a<> const&) const
+	{
+		return get_();
+	}
+	
+	inline any_a<> get_() const
+	{
+		return operator*();
+	}
+
+	inline any_a<> set(any_a<> const& range) const
+	{
+		forward_iterator_a<> it = range.cbegin();
+		if (it == range.cend())
+		{
+			throw dis__("strange::it set passed empty range");
+		}
+		return set_(*it);
+	}
+
+	inline any_a<> set_(any_a<> const& thing) const
+	{
+		return operator*() = thing;
+	}
+
+	inline any_a<>* operator->() const
+	{
+		return &operator*();
+	}
+
 	inline any_a<>& operator*() const
 	{
 		return _thing;
+	}
+
+	inline _ABSTRACTION_ increment(any_a<> const&)
+	{
+		return increment_();
+	}
+
+	inline _ABSTRACTION_ increment_()
+	{
+		operator++();
+		return me_();
 	}
 
 	inline it_t& operator++()

@@ -76,6 +76,7 @@ class random_access_iterator_data_a;
 #include "strange_number_a.h"
 #define ___derived___ number_a<>
 #include "strange_number_data_a.h"
+#define ___derived___ forward_iterator_a<>
 #include "strange_random_access_iterator_a.h"
 #define ___derived___ random_access_iterator_a<>
 #include "strange_random_access_iterator_data_a.h"

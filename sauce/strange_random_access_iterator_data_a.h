@@ -158,7 +158,7 @@ namespace strange {
 
     private:
 
-    	struct ___finale_handle_base___ : ___derived_handle_base___
+    	struct ___finale_handle_base___ : ___dderived_handle_base___
 
     	{
 
@@ -171,7 +171,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	struct ___finale_handle_final___ final : ___derived_handle___<___TTT___, ___finale_handle_base___>
+    	struct ___finale_handle_final___ final : ___dderived_handle___<___TTT___, ___finale_handle_base___>
 
     	{
 
@@ -179,7 +179,7 @@ namespace strange {
 
     		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
 
-    			: ___derived_handle___<___TTT___, ___finale_handle_base___>{ value }
+    			: ___dderived_handle___<___TTT___, ___finale_handle_base___>{ value }
 
     		{}
 
@@ -189,7 +189,7 @@ namespace strange {
 
     		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
 
-    			: ___derived_handle___<___TTT___, ___finale_handle_base___>{ std::move(value) }
+    			: ___dderived_handle___<___TTT___, ___finale_handle_base___>{ std::move(value) }
 
     		{}
 
@@ -199,7 +199,7 @@ namespace strange {
 
     		{
 
-    			return std::make_shared<___finale_handle_final___>(___derived_handle___<___TTT___, ___finale_handle_base___>::value_);
+    			return std::make_shared<___finale_handle_final___>(___dderived_handle___<___TTT___, ___finale_handle_base___>::value_);
 
     		}
 
