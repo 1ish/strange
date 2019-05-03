@@ -5,12 +5,12 @@
 ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived_1.hpp -c ~/source/repos/strange/archetypes/number.hpp > ~/source/repos/strange/sauce/strange_number_a.h
 */
 
-#include "any.hpp"
+#include "any_forward.hpp"
 
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1_>
 class number_a
 {
 public:

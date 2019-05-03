@@ -5,7 +5,8 @@
 ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/finale_1.hpp -c ~/source/repos/strange/archetypes/cat.hpp > ~/source/repos/strange/sauce/strange_cat_a.h
 */
 
-#include "symbol.hpp"
+#include "any_forward.hpp"
+#include "symbol_forward.hpp"
 
 namespace strange
 {

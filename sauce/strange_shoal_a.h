@@ -1,7 +1,8 @@
 #ifndef COM_ONEISH_STRANGE_SHOAL_A_H
 #define COM_ONEISH_STRANGE_SHOAL_A_H
 
-// # include "collection.hpp"
+// # include "any.hpp"
+// # include "collection_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -11,7 +12,7 @@
 
 
 namespace strange {
-    template < typename _1_ = void >
+    template < typename _1_ >
     class shoal_a final : public ___derived___
 
     {

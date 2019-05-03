@@ -4,6 +4,7 @@
 // # include "definitions.hpp"
 // # include "symbol_forward.hpp"
 // # include "cat_forward.hpp"
+// # include "forward_iterator_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -13,7 +14,7 @@
 
 
 namespace strange {
-    template < typename symbol_a = symbol_a < > , typename cat_a = cat_a < >>
+    template < typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename forward_iterator_a = forward_iterator_a < >>
     class any_a
 
     {

@@ -1,7 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_COLLECTION_A_H
 #define COM_ONEISH_STRANGE_COLLECTION_A_H
 
-// # include "any.hpp"
+// # include "any_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -11,7 +11,7 @@
 
 
 namespace strange {
-    template < typename _1_ = void >
+    template < typename _1_ >
     class collection_a : public ___root___
 
     {

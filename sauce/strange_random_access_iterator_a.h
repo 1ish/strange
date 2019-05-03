@@ -1,8 +1,8 @@
 #ifndef COM_ONEISH_STRANGE_RANDOM_ACCESS_ITERATOR_A_H
 #define COM_ONEISH_STRANGE_RANDOM_ACCESS_ITERATOR_A_H
 
-// # include "any.hpp"
-// # include "number.hpp"
+// # include "any_forward.hpp"
+// # include "number_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -12,7 +12,7 @@
 
 
 namespace strange {
-    template < typename _1_ = void >
+    template < typename _1_ >
     class random_access_iterator_a : public ___root___
 
     {

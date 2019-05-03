@@ -5,12 +5,13 @@
 ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/finale_1.hpp -c ~/source/repos/strange/archetypes/shoal.hpp > ~/source/repos/strange/sauce/strange_shoal_a.h
 */
 
-#include "collection.hpp"
+#include "any.hpp"
+#include "collection_forward.hpp"
 
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1_>
 class shoal_a
 {
 public:

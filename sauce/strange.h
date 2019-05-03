@@ -11,24 +11,54 @@
 namespace strange
 {
 
-template < typename _1_ = void >
+template <typename _1_ = void>
 class symbol_a;
 
-template < typename _1_ = void >
+template <typename _1_ = void>
 class cat_a;
 
-template < typename _1_ = void >
+template <typename _1_ = void>
 class forward_iterator_a;
+
+template <typename _1_ = void>
+class misunderstanding_a;
+
+template <typename _1_ = void>
+class collection_a;
+
+template <typename _1_ = void>
+class shoal_a;
+
+template <typename _1_ = void>
+class flock_a;
+
+template <typename _1_ = void>
+class herd_a;
+
+template <typename _1_>
+class data_a;
+
+template <typename _1_ = void>
+class number_a;
+
+template <typename _1_>
+class number_data_a;
+
+template <typename _1_ = void>
+class random_access_iterator_a;
+
+template <typename _1_>
+class random_access_iterator_data_a;
 
 }
 
 // abstractions
 #include "strange_any_a.h"
 #define ___root___ any_a<>
-#include "strange_forward_iterator_a.h"
 #include "strange_symbol_a.h"
 #define ___derived___ symbol_a<>
 #include "strange_cat_a.h"
+#include "strange_forward_iterator_a.h"
 #include "strange_misunderstanding_a.h"
 #include "strange_collection_a.h"
 #define ___derived___ collection_a<>

@@ -5,12 +5,13 @@
 ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/finale_1.hpp -c ~/source/repos/strange/archetypes/flock.hpp > ~/source/repos/strange/sauce/strange_flock_a.h
 */
 
-#include "collection.hpp"
+#include "any_forward.hpp"
+#include "collection_forward.hpp"
 
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename _1_>
 class flock_a
 {
 public:
