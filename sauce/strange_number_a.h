@@ -18,6 +18,136 @@ namespace strange {
 
     public:
 
+    	inline number_a& operator++()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator++();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline number_a operator++(int)
+
+    	{
+
+    		assert(handle_);
+
+    		% struct_name% result = *this;
+
+    		write().operator++();
+
+    		return result;
+
+    	}
+
+    
+
+    	inline number_a& operator--()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator--();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline number_a operator--(int)
+
+    	{
+
+    		assert(handle_);
+
+    		% struct_name% result = *this;
+
+    		write().operator--();
+
+    		return result;
+
+    	}
+
+    
+
+    	inline number_a& operator+=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator+=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline number_a& operator-=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator-=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline number_a& operator*=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator*=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline number_a& operator/=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator/=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline number_a& operator%=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator%=(other);
+
+    		return *this;
+
+    	}
+
+    
+
      inline number_a increment ( any_a < > const & _ )
      { assert(handle_); return write().increment(_ ); }
      inline number_a increment_ ( )

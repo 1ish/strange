@@ -19,6 +19,136 @@ namespace strange {
 
     public:
 
+    	inline shoal_a& operator++()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator++();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline shoal_a operator++(int)
+
+    	{
+
+    		assert(handle_);
+
+    		% struct_name% result = *this;
+
+    		write().operator++();
+
+    		return result;
+
+    	}
+
+    
+
+    	inline shoal_a& operator--()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator--();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline shoal_a operator--(int)
+
+    	{
+
+    		assert(handle_);
+
+    		% struct_name% result = *this;
+
+    		write().operator--();
+
+    		return result;
+
+    	}
+
+    
+
+    	inline shoal_a& operator+=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator+=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline shoal_a& operator-=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator-=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline shoal_a& operator*=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator*=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline shoal_a& operator/=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator/=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline shoal_a& operator%=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator%=(other);
+
+    		return *this;
+
+    	}
+
+    
+
      inline bool has__ ( std :: string const & s ) const
      { assert(handle_); return read().has__(s ); }
      inline any_a < > at__ ( std :: string const & s ) const
@@ -159,9 +289,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename ___1___>
+    	template <typename ___TTT___>
 
-    	friend inline bool check_(shoal_a<___1___> const& value);
+    	friend inline bool check_(shoal_a<> const& value);
 
     
 
@@ -307,9 +437,9 @@ namespace strange {
 
     
 
-    template <typename ___TTT___, typename ___1___>
+    template <typename ___TTT___>
 
-    inline bool check_(shoal_a<___1___> const& value)
+    inline bool check_(shoal_a<> const& value)
 
     {
 

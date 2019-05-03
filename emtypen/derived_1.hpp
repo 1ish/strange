@@ -1,7 +1,72 @@
 %struct_prefix% : public ___root___
 {
 public:
-	%nonvirtual_members% //TODO move params
+	inline %struct_name%& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+	inline %struct_name% operator++(int)
+	{
+		assert(handle_);
+		% struct_name% result = *this;
+		write().operator++();
+		return result;
+	}
+
+	inline %struct_name%& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+	inline %struct_name% operator--(int)
+	{
+		assert(handle_);
+		% struct_name% result = *this;
+		write().operator--();
+		return result;
+	}
+
+	inline %struct_name%& operator+=(___root___ const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline %struct_name%& operator-=(___root___ const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline %struct_name%& operator*=(___root___ const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline %struct_name%& operator/=(___root___ const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline %struct_name%& operator%=(___root___ const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	%nonvirtual_members%
 
 protected:
 	struct ___derived_handle_base___ : ___root_handle_base___
@@ -22,7 +87,7 @@ protected:
 			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
-		%virtual_members% //TODO final / move params
+		%virtual_members% //TODO final
 	};
 
 	template <typename ___TTT___, typename ___DHB___>

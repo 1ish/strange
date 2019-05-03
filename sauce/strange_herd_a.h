@@ -19,6 +19,136 @@ namespace strange {
 
     public:
 
+    	inline herd_a& operator++()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator++();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline herd_a operator++(int)
+
+    	{
+
+    		assert(handle_);
+
+    		% struct_name% result = *this;
+
+    		write().operator++();
+
+    		return result;
+
+    	}
+
+    
+
+    	inline herd_a& operator--()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator--();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline herd_a operator--(int)
+
+    	{
+
+    		assert(handle_);
+
+    		% struct_name% result = *this;
+
+    		write().operator--();
+
+    		return result;
+
+    	}
+
+    
+
+    	inline herd_a& operator+=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator+=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline herd_a& operator-=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator-=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline herd_a& operator*=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator*=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline herd_a& operator/=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator/=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline herd_a& operator%=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator%=(other);
+
+    		return *this;
+
+    	}
+
+    
+
      inline bool has__ ( std :: string const & s ) const
      { assert(handle_); return read().has__(s ); }
      inline bool at__ ( std :: string const & s ) const
@@ -154,9 +284,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename ___1___>
+    	template <typename ___TTT___>
 
-    	friend inline bool check_(herd_a<___1___> const& value);
+    	friend inline bool check_(herd_a<> const& value);
 
     
 
@@ -302,9 +432,9 @@ namespace strange {
 
     
 
-    template <typename ___TTT___, typename ___1___>
+    template <typename ___TTT___>
 
-    inline bool check_(herd_a<___1___> const& value)
+    inline bool check_(herd_a<> const& value)
 
     {
 

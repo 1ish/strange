@@ -18,6 +18,136 @@ namespace strange {
 
     public:
 
+    	inline data_a& operator++()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator++();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline data_a operator++(int)
+
+    	{
+
+    		assert(handle_);
+
+    		% struct_name% result = *this;
+
+    		write().operator++();
+
+    		return result;
+
+    	}
+
+    
+
+    	inline data_a& operator--()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator--();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline data_a operator--(int)
+
+    	{
+
+    		assert(handle_);
+
+    		% struct_name% result = *this;
+
+    		write().operator--();
+
+    		return result;
+
+    	}
+
+    
+
+    	inline data_a& operator+=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator+=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline data_a& operator-=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator-=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline data_a& operator*=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator*=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline data_a& operator/=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator/=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline data_a& operator%=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator%=(other);
+
+    		return *this;
+
+    	}
+
+    
+
      inline _1_ const & extract__ ( ) const
      { assert(handle_); return read().extract__( ); }
      inline void mutate__ ( _1_ const & data )

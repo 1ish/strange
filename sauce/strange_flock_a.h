@@ -19,6 +19,136 @@ namespace strange {
 
     public:
 
+    	inline flock_a& operator++()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator++();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline flock_a operator++(int)
+
+    	{
+
+    		assert(handle_);
+
+    		% struct_name% result = *this;
+
+    		write().operator++();
+
+    		return result;
+
+    	}
+
+    
+
+    	inline flock_a& operator--()
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator--();
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline flock_a operator--(int)
+
+    	{
+
+    		assert(handle_);
+
+    		% struct_name% result = *this;
+
+    		write().operator--();
+
+    		return result;
+
+    	}
+
+    
+
+    	inline flock_a& operator+=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator+=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline flock_a& operator-=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator-=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline flock_a& operator*=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator*=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline flock_a& operator/=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator/=(other);
+
+    		return *this;
+
+    	}
+
+    
+
+    	inline flock_a& operator%=(___root___ const& other)
+
+    	{
+
+    		assert(handle_);
+
+    		write().operator%=(other);
+
+    		return *this;
+
+    	}
+
+    
+
      inline bool has__ ( int64_t index ) const
      { assert(handle_); return read().has__(index ); }
      inline any_a < > at__ ( int64_t index ) const
@@ -159,9 +289,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename ___1___>
+    	template <typename ___TTT___>
 
-    	friend inline bool check_(flock_a<___1___> const& value);
+    	friend inline bool check_(flock_a<> const& value);
 
     
 
@@ -307,9 +437,9 @@ namespace strange {
 
     
 
-    template <typename ___TTT___, typename ___1___>
+    template <typename ___TTT___>
 
-    inline bool check_(flock_a<___1___> const& value)
+    inline bool check_(flock_a<> const& value)
 
     {
 

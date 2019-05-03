@@ -81,7 +81,7 @@ public:
 		return *this;
 	}
 
-	%nonvirtual_members% //TODO move params
+	%nonvirtual_members%
 
 protected:
 	struct ___root_handle_base___
@@ -174,7 +174,7 @@ protected:
 			value_.operator%=(other);
 		}
 
-		%virtual_members% //TODO final / move params
+		%virtual_members% //TODO final
 
 		___TTT___ value_;
 	};

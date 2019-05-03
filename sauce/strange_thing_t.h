@@ -45,7 +45,7 @@ public:
 			throw dis__("strange::thing::visit passed empty range");
 		}
 		any_a<> visitor = *it;
-		return visitor.invoke(range_t<>::val_(cast_<forward_iterator_a<>>(++it), range.cend())); //TODO add operators to derived and finale and get rid of cast
+		return visitor.invoke(range_t<>::val_(++it, range.cend()));
 	}
 
 	// function
@@ -57,7 +57,7 @@ public:
 			throw dis__("strange::thing::invoke passed empty range");
 		}
 		any_a<> member = *it;
-		return invoke_(member, range_t<>::val_(cast_<forward_iterator_a<>>(++it), range.cend())); //TODO add operators to derived and finale and get rid of cast
+		return invoke_(member, range_t<>::val_(++it, range.cend()));
 	}
 
 	inline any_a<> invoke_(any_a<> const& member, any_a<> const& range) const
@@ -82,7 +82,7 @@ public:
 			throw dis__("strange::thing::visit passed short range");
 		}
 		any_a<> operation = *it;
-		return operate_(thing, operation, range_t<>::val_(cast_<forward_iterator_a<>>(++it), range.cend())); //TODO add operators to derived and finale and get rid of cast
+		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
 	}
 
 	static inline any_a<> operate_(any_a<> const& thing, any_a<> const& operation, any_a<> const& range)

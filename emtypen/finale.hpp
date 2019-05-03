@@ -1,7 +1,72 @@
 %struct_prefix% final : public ___derived___
 {
 public:
-	%nonvirtual_members% //TODO move params
+	inline %struct_name%& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+	inline %struct_name% operator++(int)
+	{
+		assert(handle_);
+		% struct_name% result = *this;
+		write().operator++();
+		return result;
+	}
+
+	inline %struct_name%& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+	inline %struct_name% operator--(int)
+	{
+		assert(handle_);
+		% struct_name% result = *this;
+		write().operator--();
+		return result;
+	}
+
+	inline %struct_name%& operator+=(___root___ const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline %struct_name%& operator-=(___root___ const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline %struct_name%& operator*=(___root___ const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline %struct_name%& operator/=(___root___ const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline %struct_name%& operator%=(___root___ const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	%nonvirtual_members%
 
 private:
 	struct ___finale_handle_base___ : ___derived_handle_base___
@@ -27,7 +92,7 @@ private:
 			return std::make_shared<___finale_handle_final___>(___derived_handle___<___TTT___, ___finale_handle_base___>::value_);
 		}
 
-		%virtual_members% //TODO final / move params
+		%virtual_members% //TODO final
 	};
 
 	template <typename ___TTT___>
