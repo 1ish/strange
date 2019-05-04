@@ -16,11 +16,6 @@ public: ___THING___
 
 	static inline any_a<> val_()
 	{
-		return val__();
-	}
-
-	static inline any_a<>& val__()
-	{
 		static any_a<> VAL = any_a<>{ everything_t<>{} };
 		return VAL;
 	}
@@ -31,11 +26,6 @@ public: ___THING___
 	}
 
 	static inline any_a<> ref_()
-	{
-		return ref__();
-	}
-
-	static inline any_a<>& ref__()
 	{
 		static any_a<> REF = any_a<>(everything_t<>{}, true);
 		return REF;
