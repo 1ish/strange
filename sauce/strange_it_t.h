@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <bool CONST = false, typename _ABSTRACTION_ = forward_iterator_a<>, typename END = nothing_t<>>
+template <bool CONST = false, typename END = nothing_t<>, typename _ABSTRACTION_ = forward_iterator_a<>>
 class it_t : public something_t<_ABSTRACTION_>
 {
 public: ___THING___
@@ -21,7 +21,7 @@ public: ___THING___
 
 	static inline forward_iterator_a<> val_(any_a<> const& thing = END::val_())
 	{
-		return forward_iterator_a<>{ it_t<CONST, _ABSTRACTION_, END>{ thing } };
+		return forward_iterator_a<>{ it_t<CONST, END, _ABSTRACTION_>{ thing } };
 	}
 
 	static inline forward_iterator_a<> ref(any_a<> const& range)
@@ -36,7 +36,7 @@ public: ___THING___
 
 	static inline forward_iterator_a<> ref_(any_a<> const& thing = END::val_())
 	{
-		return forward_iterator_a<>(it_t<CONST, _ABSTRACTION_, END>{ thing }, true);
+		return forward_iterator_a<>(it_t<CONST, END, _ABSTRACTION_>{ thing }, true);
 	}
 
 	// reflection

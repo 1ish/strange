@@ -104,32 +104,32 @@ public: ___THING___
 	// range
 	inline forward_iterator_a<> cbegin() const
 	{
-		return it_t<true, forward_iterator_a<>, everything_t<>>::val_(nothing_t<>::val_());
+		return it_t<true, everything_t<>>::val_(nothing_t<>::val_());
 	}
 
 	inline forward_iterator_a<> begin() const
 	{
-		return it_t<true, forward_iterator_a<>, everything_t<>>::val_(nothing_t<>::val_());
+		return it_t<true, everything_t<>>::val_(nothing_t<>::val_());
 	}
 
 	inline forward_iterator_a<> begin()
 	{
-		return it_t<false, forward_iterator_a<>, everything_t<>>::val_(nothing_t<>::val_());
+		return it_t<false, everything_t<>>::val_(nothing_t<>::val_());
 	}
 
 	inline forward_iterator_a<> cend() const
 	{
-		return it_t<true, forward_iterator_a<>, everything_t<>>::val_(everything_t<>::val_());
+		return it_t<true, everything_t<>>::val_(everything_t<>::val_());
 	}
 
 	inline forward_iterator_a<> end() const
 	{
-		return it_t<true, forward_iterator_a<>, everything_t<>>::val_(everything_t<>::val_());
+		return it_t<true, everything_t<>>::val_(everything_t<>::val_());
 	}
 
 	inline forward_iterator_a<> end()
 	{
-		return it_t<false, forward_iterator_a<>, everything_t<>>::val_(everything_t<>::val_());
+		return it_t<false, everything_t<>>::val_(everything_t<>::val_());
 	}
 
 protected:
