@@ -4,26 +4,6 @@
 namespace strange
 {
 
-template <typename PRIMITIVE>
-class number_u
-{
-public:
-	static inline PRIMITIVE from_number__(number_a<> const& other);
-	static inline PRIMITIVE from_int_64__(int64_t other);
-	static inline PRIMITIVE from_uint_64__(uint64_t other);
-	static inline PRIMITIVE from_float_64__(double other);
-	static inline int64_t to_int_64__(PRIMITIVE other);
-	static inline uint64_t to_uint_64__(PRIMITIVE other);
-	static inline double to_float_64__(PRIMITIVE other);
-	static inline PRIMITIVE modulo__(PRIMITIVE x, PRIMITIVE y);
-	static inline bool is_int__();
-	static inline bool is_signed__();
-	static inline bool is_nan__(PRIMITIVE number);
-	static inline bool is_inf__(PRIMITIVE number);
-	static inline bool is_finite__(PRIMITIVE number);
-	static inline bool is_normal__(PRIMITIVE number);
-};
-
 template <typename PRIMITIVE, typename _ABSTRACTION_ = number_data_a<PRIMITIVE>>
 class number_t : public something_t<_ABSTRACTION_>
 {

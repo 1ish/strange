@@ -94,6 +94,10 @@ class random_access_iterator_data_a;
 #undef ___root___
 #undef ___derived___
 
+// utilities
+#include "strange_number_u.h"
+#include "strange_variadic_u.h"
+
 // things
 #include "strange_one_t.h"
 #include "strange_thing_t.h"
@@ -114,8 +118,5 @@ class random_access_iterator_data_a;
 #include "strange_flock_t.h"
 #include "strange_herd_t.h"
 #include "strange_number_t.h"
-
-// utilities
-#include "strange_variadic_u.h"
 
 #endif
