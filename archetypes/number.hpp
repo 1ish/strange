@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_NUMBER_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived_1.hpp -c ~/source/repos/strange/archetypes/number.hpp > ~/source/repos/strange/sauce/strange_number_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived_3.hpp -c ~/source/repos/strange/archetypes/number.hpp > ~/source/repos/strange/sauce/strange_number_a.h
 */
 
 #include "any_forward.hpp"
@@ -11,7 +11,7 @@
 namespace strange
 {
 
-template <typename _1_>
+template <typename number_data_a_int64, typename number_data_a_uint64, typename number_data_a_double>
 class number_a
 {
 public:
@@ -58,27 +58,27 @@ public:
 	inline number_a operator%(number_a const& number) const;
 
 	inline any_a<> to_int_64(any_a<> const& _) const;
-	inline number_data_a<int64_t> to_int_64_() const;
+	inline number_data_a_int64 to_int_64_() const;
 	inline int64_t to_int_64__() const;
 
 	inline any_a<> from_int_64(any_a<> const& range);
-	inline any_a<> from_int_64_(number_data_a<int64_t> const& int_64);
+	inline any_a<> from_int_64_(number_data_a_int64 const& int_64);
 	inline void from_int_64__(int64_t int_64);
 
 	inline any_a<> to_uint_64(any_a<> const& _) const;
-	inline number_data_a<uint64_t> to_uint_64_() const;
+	inline number_data_a_uint64 to_uint_64_() const;
 	inline uint64_t to_uint_64__() const;
 
 	inline any_a<> from_uint_64(any_a<> const& range);
-	inline any_a<> from_uint_64_(number_data_a<uint64_t> const& uint_64);
+	inline any_a<> from_uint_64_(number_data_a_uint64 const& uint_64);
 	inline void from_uint_64__(uint64_t uint_64);
 
 	inline any_a<> to_float_64(any_a<> const& _) const;
-	inline number_data_a<double> to_float_64_() const;
+	inline number_data_a_double to_float_64_() const;
 	inline double to_float_64__() const;
 
 	inline any_a<> from_float_64(any_a<> const& range);
-	inline any_a<> from_float_64_(number_data_a<double> const& float_64);
+	inline any_a<> from_float_64_(number_data_a_double const& float_64);
 	inline void from_float_64__(double float_64);
 
 	inline any_a<> less_than(any_a<> const& range) const;

@@ -41,7 +41,7 @@ class herd_a;
 template <typename _1_>
 class data_a;
 
-template <typename _1_ = void>
+template <typename number_data_a_int64 = number_data_a<int64_t>, typename number_data_a_uint64 = number_data_a<uint64_t>, typename number_data_a_double = number_data_a<double>>
 class number_a;
 
 template <typename _1_>
