@@ -8,7 +8,14 @@ template <typename PRIMITIVE>
 class conversion_u
 {
 public:
-	static inline PRIMITIVE from(number_a<> const& other);
+	static inline PRIMITIVE from_number__(number_a<> const& other);
+	static inline PRIMITIVE from_int_64__(int64_t other);
+	static inline PRIMITIVE from_uint_64__(uint64_t other);
+	static inline PRIMITIVE from_float_64__(double other);
+	static inline int64_t to_int_64__(PRIMITIVE other);
+	static inline uint64_t to_uint_64__(PRIMITIVE other);
+	static inline double to_float_64__(PRIMITIVE other);
+	static inline PRIMITIVE modulo__(PRIMITIVE x, PRIMITIVE y);
 };
 
 template <typename PRIMITIVE, typename _ABSTRACTION_ = number_data_a<PRIMITIVE>>
@@ -60,7 +67,7 @@ public: ___THING___
 		{
 			return false;
 		}
-		return _number == conversion_u<PRIMITIVE>::from(cast_<number_a<>>(thing));
+		return _number == conversion_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
@@ -69,7 +76,7 @@ public: ___THING___
 		{
 			return true;
 		}
-		return _number != conversion_u<PRIMITIVE>::from(cast_<number_a<>>(thing));
+		return _number != conversion_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 	}
 
 	inline std::size_t hash__() const
@@ -137,7 +144,7 @@ public: ___THING___
 
 	inline number_a<> self_add_(number_a<> const& number)
 	{
-		_number += conversion_u<PRIMITIVE>::from(number);
+		_number += conversion_u<PRIMITIVE>::from_number__(number);
 		return me_();
 	}
 
@@ -147,7 +154,7 @@ public: ___THING___
 		{
 			throw dis__("strange::number += passed non-number");
 		}
-		_number += conversion_u<PRIMITIVE>::from(cast_<number_a<>>(thing));
+		_number += conversion_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 		return *this;
 	}
 
@@ -169,7 +176,7 @@ public: ___THING___
 	inline number_a<> operator+(number_a<> const& number) const
 	{
 		_ABSTRACTION_ result = me_();
-		result.reference__() += conversion_u<PRIMITIVE>::from(number);
+		result.reference__() += conversion_u<PRIMITIVE>::from_number__(number);
 		return result;
 	}
 
@@ -184,7 +191,7 @@ public: ___THING___
 
 	inline number_a<> self_subtract_(number_a<> const& number)
 	{
-		_number -= conversion_u<PRIMITIVE>::from(number);
+		_number -= conversion_u<PRIMITIVE>::from_number__(number);
 		return me_();
 	}
 
@@ -194,7 +201,7 @@ public: ___THING___
 		{
 			throw dis__("strange::number -= passed non-number");
 		}
-		_number -= conversion_u<PRIMITIVE>::from(cast_<number_a<>>(thing));
+		_number -= conversion_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 		return *this;
 	}
 
@@ -216,7 +223,7 @@ public: ___THING___
 	inline number_a<> operator-(number_a<> const& number) const
 	{
 		_ABSTRACTION_ result = me_();
-		result.reference__() -= conversion_u<PRIMITIVE>::from(number);
+		result.reference__() -= conversion_u<PRIMITIVE>::from_number__(number);
 		return result;
 	}
 
@@ -231,7 +238,7 @@ public: ___THING___
 
 	inline number_a<> self_multiply_(number_a<> const& number)
 	{
-		_number *= conversion_u<PRIMITIVE>::from(number);
+		_number *= conversion_u<PRIMITIVE>::from_number__(number);
 		return me_();
 	}
 
@@ -241,7 +248,7 @@ public: ___THING___
 		{
 			throw dis__("strange::number *= passed non-number");
 		}
-		_number *= conversion_u<PRIMITIVE>::from(cast_<number_a<>>(thing));
+		_number *= conversion_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 		return *this;
 	}
 
@@ -263,7 +270,7 @@ public: ___THING___
 	inline number_a<> operator*(number_a<> const& number) const
 	{
 		_ABSTRACTION_ result = me_();
-		result.reference__() *= conversion_u<PRIMITIVE>::from(number);
+		result.reference__() *= conversion_u<PRIMITIVE>::from_number__(number);
 		return result;
 	}
 
@@ -278,7 +285,7 @@ public: ___THING___
 
 	inline number_a<> self_divide_(number_a<> const& number)
 	{
-		PRIMITIVE num = conversion_u<PRIMITIVE>::from(number);
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from_number__(number);
 		if (num == 0)
 		{
 			throw dis__("strange::number self_divide division by zero");
@@ -293,7 +300,7 @@ public: ___THING___
 		{
 			throw dis__("strange::number /= passed non-number");
 		}
-		PRIMITIVE num = conversion_u<PRIMITIVE>::from(cast_<number_a<>>(thing));
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 		if (num == 0)
 		{
 			throw dis__("strange::number /= division by zero");
@@ -319,7 +326,7 @@ public: ___THING___
 
 	inline number_a<> operator/(number_a<> const& number) const
 	{
-		PRIMITIVE num = conversion_u<PRIMITIVE>::from(number);
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from_number__(number);
 		if (num == 0)
 		{
 			throw dis__("strange::number / division by zero");
@@ -340,12 +347,12 @@ public: ___THING___
 
 	inline number_a<> self_modulo_(number_a<> const& number)
 	{
-		PRIMITIVE num = conversion_u<PRIMITIVE>::from(number);
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from_number__(number);
 		if (num == 0)
 		{
 			throw dis__("strange::number self_modulo division by zero");
 		}
-		_number %= num;
+		_number = conversion_u<PRIMITIVE>::modulo__(_number, num);
 		return me_();
 	}
 
@@ -355,12 +362,12 @@ public: ___THING___
 		{
 			throw dis__("strange::number %= passed non-number");
 		}
-		PRIMITIVE num = conversion_u<PRIMITIVE>::from(cast_<number_a<>>(thing));
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 		if (num == 0)
 		{
 			throw dis__("strange::number %= division by zero");
 		}
-		_number %= num;
+		_number = conversion_u<PRIMITIVE>::modulo__(_number, num);
 		return *this;
 	}
 
@@ -381,39 +388,136 @@ public: ___THING___
 
 	inline number_a<> operator%(number_a<> const& number) const
 	{
-		PRIMITIVE num = conversion_u<PRIMITIVE>::from(number);
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from_number__(number);
 		if (num == 0)
 		{
 			throw dis__("strange::number % division by zero");
 		}
-		_ABSTRACTION_ result = me_();
-		result.reference__() %= num;
-		return result;
+		return val__(conversion_u<PRIMITIVE>::modulo__(_number, num));
 	}
 
-	inline any_a<> to_int_64(any_a<> const& _) const;
-	inline number_data_a<int64_t> to_int_64_() const;
-	inline int64_t to_int_64__() const;
+	inline any_a<> to_int_64(any_a<> const& _) const
+	{
+		return to_int_64_();
+	}
 
-	inline any_a<> from_int_64(any_a<> const& range);
-	inline any_a<> from_int_64_(number_data_a<int64_t> const& int_64);
-	inline void from_int_64__(int64_t int_64);
+	inline number_data_a<int64_t> to_int_64_() const
+	{
+		return number_t<int64_t>::val__(to_int_64__());
+	}
 
-	inline any_a<> to_uint_64(any_a<> const& _) const;
-	inline number_data_a<uint64_t> to_uint_64_() const;
-	inline uint64_t to_uint_64__() const;
+	inline int64_t to_int_64__() const
+	{
+		return conversion_u<PRIMITIVE>::to_int_64__(_number);
+	}
 
-	inline any_a<> from_uint_64(any_a<> const& range);
-	inline any_a<> from_uint_64_(number_data_a<uint64_t> const& uint_64);
-	inline void from_uint_64__(uint64_t uint_64);
+	inline any_a<> from_int_64(any_a<> const& range)
+	{
+		forward_iterator_a<> it = range.cbegin();
+		if (it == range.cend())
+		{
+			throw dis__("strange::number::from_int_64 passed empty range");
+		}
+		any_a<> thing = *it;
+		if (!check_<number_data_a<int64_t>>(thing))
+		{
+			throw dis__("strange::number::from_int_64 passed wrong type of thing");
+		}
+		return from_int_64_(cast_<number_data_a<int64_t>>(thing));
+	}
 
-	inline any_a<> to_float_64(any_a<> const& _) const;
-	inline number_data_a<double> to_float_64_() const;
-	inline double to_float_64__() const;
+	inline any_a<> from_int_64_(number_data_a<int64_t> const& int_64)
+	{
+		from_int_64__(int_64.extract__());
+		return me_();
+	}
 
-	inline any_a<> from_float_64(any_a<> const& range);
-	inline any_a<> from_float_64_(number_data_a<double> const& float_64);
-	inline void from_float_64__(double float_64);
+	inline void from_int_64__(int64_t int_64)
+	{
+		_number = conversion_u<PRIMITIVE>::from_int_64__(int_64);
+	}
+
+	inline any_a<> to_uint_64(any_a<> const& _) const
+	{
+		return to_uint_64_();
+	}
+
+	inline number_data_a<uint64_t> to_uint_64_() const
+	{
+		return number_t<uint64_t>::val__(to_uint_64__());
+	}
+
+	inline uint64_t to_uint_64__() const
+	{
+		return conversion_u<PRIMITIVE>::to_uint_64__(_number);
+	}
+
+	inline any_a<> from_uint_64(any_a<> const& range)
+	{
+		forward_iterator_a<> it = range.cbegin();
+		if (it == range.cend())
+		{
+			throw dis__("strange::number::from_uint_64 passed empty range");
+		}
+		any_a<> thing = *it;
+		if (!check_<number_data_a<uint64_t>>(thing))
+		{
+			throw dis__("strange::number::from_uint_64 passed wrong type of thing");
+		}
+		return from_uint_64_(cast_<number_data_a<uint64_t>>(thing));
+	}
+
+	inline any_a<> from_uint_64_(number_data_a<uint64_t> const& uint_64)
+	{
+		from_uint_64__(uint_64.extract__());
+		return me_();
+	}
+
+	inline void from_uint_64__(uint64_t uint_64)
+	{
+		_number = conversion_u<PRIMITIVE>::from_uint_64__(uint_64);
+	}
+
+	inline any_a<> to_float_64(any_a<> const& _) const
+	{
+		return to_float_64_();
+	}
+
+	inline number_data_a<double> to_float_64_() const
+	{
+		return number_t<double>::val__(to_float_64__());
+	}
+
+	inline double to_float_64__() const
+	{
+		return conversion_u<PRIMITIVE>::to_float_64__(_number);
+	}
+
+	inline any_a<> from_float_64(any_a<> const& range)
+	{
+		forward_iterator_a<> it = range.cbegin();
+		if (it == range.cend())
+		{
+			throw dis__("strange::number::from_float_64 passed empty range");
+		}
+		any_a<> thing = *it;
+		if (!check_<number_data_a<double>>(thing))
+		{
+			throw dis__("strange::number::from_float_64 passed wrong type of thing");
+		}
+		return from_float_64_(cast_<number_data_a<double>>(thing));
+	}
+
+	inline any_a<> from_float_64_(number_data_a<double> const& float_64)
+	{
+		from_float_64__(float_64.extract__());
+		return me_();
+	}
+
+	inline void from_float_64__(double float_64)
+	{
+		_number = conversion_u<PRIMITIVE>::from_float_64__(float_64);
+	}
 
 	inline any_a<> less_than(any_a<> const& range) const;
 	inline any_a<> less_than_(number_a<> const& number) const;

@@ -16,7 +16,7 @@ public: ___THING___
 	{
 		std::vector<symbol_a<>> v;
 		v.reserve(sizeof...(Args));
-		variadic_u<symbol_a<>>::variadic_(v, std::forward<Args>(args)...);
+		variadic_u<symbol_a<>>::variadic__(v, std::forward<Args>(args)...);
 		return any_a<>{ native_mutation_t(fun, std::move(v)) };
 	}
 
@@ -25,7 +25,7 @@ public: ___THING___
 	{
 		std::vector<symbol_a<>> v;
 		v.reserve(sizeof...(Args));
-		variadic_u<symbol_a<>>::variadic_(v, std::forward<Args>(args)...);
+		variadic_u<symbol_a<>>::variadic__(v, std::forward<Args>(args)...);
 		return any_a<>(native_mutation_t(fun, std::move(v)), true);
 	}
 
