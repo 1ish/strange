@@ -519,21 +519,105 @@ public: ___THING___
 		_number = conversion_u<PRIMITIVE>::from_float_64__(float_64);
 	}
 
-	inline any_a<> less_than(any_a<> const& range) const;
-	inline any_a<> less_than_(number_a<> const& number) const;
-	inline bool operator<(number_a<> const& number) const;
+	inline any_a<> less_than(any_a<> const& range) const
+	{
+		forward_iterator_a<> it = range.cbegin();
+		if (it == range.cend())
+		{
+			throw dis__("strange::number::less_than passed empty range");
+		}
+		any_a<> thing = *it;
+		if (!check_<number_a<>>(thing))
+		{
+			throw dis__("strange::number::less_than passed non-number");
+		}
+		return less_than_(cast_<number_a<>>(thing));
+	}
 
-	inline any_a<> greater_than(any_a<> const& range) const;
-	inline any_a<> greater_than_(number_a<> const& number) const;
-	inline bool operator>(number_a<> const& number) const;
+	inline any_a<> less_than_(number_a<> const& number) const
+	{
+		return _boole_(operator<(number));
+	}
 
-	inline any_a<> less_or_equal(any_a<> const& range) const;
-	inline any_a<> less_or_equal_(number_a<> const& number) const;
-	inline bool operator<=(number_a<> const& number) const;
+	inline bool operator<(number_a<> const& number) const
+	{
+		return _number < conversion_u<PRIMITIVE>::from_number__(number);
+	}
 
-	inline any_a<> greater_or_equal(any_a<> const& range) const;
-	inline any_a<> greater_or_equal_(number_a<> const& number) const;
-	inline bool operator>=(number_a<> const& number) const;
+	inline any_a<> greater_than(any_a<> const& range) const
+	{
+		forward_iterator_a<> it = range.cbegin();
+		if (it == range.cend())
+		{
+			throw dis__("strange::number::greater_than passed empty range");
+		}
+		any_a<> thing = *it;
+		if (!check_<number_a<>>(thing))
+		{
+			throw dis__("strange::number::greater_than passed non-number");
+		}
+		return greater_than_(cast_<number_a<>>(thing));
+	}
+
+	inline any_a<> greater_than_(number_a<> const& number) const
+	{
+		return _boole_(operator>(number));
+	}
+
+	inline bool operator>(number_a<> const& number) const
+	{
+		return _number > conversion_u<PRIMITIVE>::from_number__(number);
+	}
+
+	inline any_a<> less_or_equal(any_a<> const& range) const
+	{
+		forward_iterator_a<> it = range.cbegin();
+		if (it == range.cend())
+		{
+			throw dis__("strange::number::less_or_equal passed empty range");
+		}
+		any_a<> thing = *it;
+		if (!check_<number_a<>>(thing))
+		{
+			throw dis__("strange::number::less_or_equal passed non-number");
+		}
+		return less_or_equal_(cast_<number_a<>>(thing));
+	}
+
+	inline any_a<> less_or_equal_(number_a<> const& number) const
+	{
+		return _boole_(operator<=(number));
+	}
+
+	inline bool operator<=(number_a<> const& number) const
+	{
+		return _number <= conversion_u<PRIMITIVE>::from_number__(number);
+	}
+
+	inline any_a<> greater_or_equal(any_a<> const& range) const
+	{
+		forward_iterator_a<> it = range.cbegin();
+		if (it == range.cend())
+		{
+			throw dis__("strange::number::greater_or_equal passed empty range");
+		}
+		any_a<> thing = *it;
+		if (!check_<number_a<>>(thing))
+		{
+			throw dis__("strange::number::greater_or_equal passed non-number");
+		}
+		return greater_or_equal_(cast_<number_a<>>(thing));
+	}
+
+	inline any_a<> greater_or_equal_(number_a<> const& number) const
+	{
+		return _boole_(operator>=(number));
+	}
+
+	inline bool operator>=(number_a<> const& number) const
+	{
+		return _number >= conversion_u<PRIMITIVE>::from_number__(number);
+	}
 
 	inline any_a<> byte_size(any_a<> const& range) const;
 	inline number_a<> byte_size_() const;
