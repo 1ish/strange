@@ -151,41 +151,245 @@ public: ___THING___
 		return *this;
 	}
 
-	inline any_a<> add(any_a<> const& range) const;
-	inline number_a<> add_(number_a<> const& number) const;
-	inline number_a<> operator+(number_a<> const& number) const;
+	inline any_a<> add(any_a<> const& range) const
+	{
+		number_a<> result = me_();
+		for (auto const& thing : range)
+		{
+			result += thing;
+		}
+		return result;
+	}
 
-	inline any_a<> self_subtract(any_a<> const& range);
-	inline number_a<> self_subtract_(number_a<> const& number);
-	inline number_t& operator-=(any_a<> const& thing);
+	inline number_a<> add_(number_a<> const& number) const
+	{
+		return operator+(number);
+	}
 
-	inline any_a<> subtract(any_a<> const& range) const;
-	inline number_a<> subtract_(number_a<> const& number) const;
-	inline number_a<> operator-(number_a<> const& number) const;
+	inline number_a<> operator+(number_a<> const& number) const
+	{
+		_ABSTRACTION_ result = me_();
+		result.reference__() += conversion_u<PRIMITIVE>::from(number);
+		return result;
+	}
 
-	inline any_a<> self_multiply(any_a<> const& range);
-	inline number_a<> self_multiply_(number_a<> const& number);
-	inline number_t& operator*=(any_a<> const& thing);
+	inline any_a<> self_subtract(any_a<> const& range)
+	{
+		for (auto const& thing : range)
+		{
+			operator-=(thing);
+		}
+		return me_();
+	}
 
-	inline any_a<> multiply(any_a<> const& range) const;
-	inline number_a<> multiply_(number_a<> const& number) const;
-	inline number_a<> operator*(number_a<> const& number) const;
+	inline number_a<> self_subtract_(number_a<> const& number)
+	{
+		_number -= conversion_u<PRIMITIVE>::from(number);
+		return me_();
+	}
 
-	inline any_a<> self_divide(any_a<> const& range);
-	inline number_a<> self_divide_(number_a<> const& number);
-	inline number_t& operator/=(any_a<> const& thing);
+	inline number_t& operator-=(any_a<> const& thing)
+	{
+		if (!check_<number_a<>>(thing))
+		{
+			throw dis__("strange::number -= passed non-number");
+		}
+		_number -= conversion_u<PRIMITIVE>::from(cast_<number_a<>>(thing));
+		return *this;
+	}
 
-	inline any_a<> divide(any_a<> const& range) const;
-	inline number_a<> divide_(number_a<> const& number) const;
-	inline number_a<> operator/(number_a<> const& number) const;
+	inline any_a<> subtract(any_a<> const& range) const
+	{
+		number_a<> result = me_();
+		for (auto const& thing : range)
+		{
+			result -= thing;
+		}
+		return result;
+	}
 
-	inline any_a<> self_modulo(any_a<> const& range);
-	inline number_a<> self_modulo_(number_a<> const& number);
-	inline number_t& operator%=(any_a<> const& thing);
+	inline number_a<> subtract_(number_a<> const& number) const
+	{
+		return operator-(number);
+	}
 
-	inline any_a<> modulo(any_a<> const& range) const;
-	inline number_a<> modulo_(number_a<> const& number) const;
-	inline number_a<> operator%(number_a<> const& number) const;
+	inline number_a<> operator-(number_a<> const& number) const
+	{
+		_ABSTRACTION_ result = me_();
+		result.reference__() -= conversion_u<PRIMITIVE>::from(number);
+		return result;
+	}
+
+	inline any_a<> self_multiply(any_a<> const& range)
+	{
+		for (auto const& thing : range)
+		{
+			operator*=(thing);
+		}
+		return me_();
+	}
+
+	inline number_a<> self_multiply_(number_a<> const& number)
+	{
+		_number *= conversion_u<PRIMITIVE>::from(number);
+		return me_();
+	}
+
+	inline number_t& operator*=(any_a<> const& thing)
+	{
+		if (!check_<number_a<>>(thing))
+		{
+			throw dis__("strange::number *= passed non-number");
+		}
+		_number *= conversion_u<PRIMITIVE>::from(cast_<number_a<>>(thing));
+		return *this;
+	}
+
+	inline any_a<> multiply(any_a<> const& range) const
+	{
+		number_a<> result = me_();
+		for (auto const& thing : range)
+		{
+			result *= thing;
+		}
+		return result;
+	}
+
+	inline number_a<> multiply_(number_a<> const& number) const
+	{
+		return operator*(number);
+	}
+
+	inline number_a<> operator*(number_a<> const& number) const
+	{
+		_ABSTRACTION_ result = me_();
+		result.reference__() *= conversion_u<PRIMITIVE>::from(number);
+		return result;
+	}
+
+	inline any_a<> self_divide(any_a<> const& range)
+	{
+		for (auto const& thing : range)
+		{
+			operator/=(thing);
+		}
+		return me_();
+	}
+
+	inline number_a<> self_divide_(number_a<> const& number)
+	{
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from(number);
+		if (num == 0)
+		{
+			throw dis__("strange::number self_divide division by zero");
+		}
+		_number /= num;
+		return me_();
+	}
+
+	inline number_t& operator/=(any_a<> const& thing)
+	{
+		if (!check_<number_a<>>(thing))
+		{
+			throw dis__("strange::number /= passed non-number");
+		}
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from(cast_<number_a<>>(thing));
+		if (num == 0)
+		{
+			throw dis__("strange::number /= division by zero");
+		}
+		_number /= num;
+		return *this;
+	}
+
+	inline any_a<> divide(any_a<> const& range) const
+	{
+		number_a<> result = me_();
+		for (auto const& thing : range)
+		{
+			result /= thing;
+		}
+		return result;
+	}
+
+	inline number_a<> divide_(number_a<> const& number) const
+	{
+		return operator/(number);
+	}
+
+	inline number_a<> operator/(number_a<> const& number) const
+	{
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from(number);
+		if (num == 0)
+		{
+			throw dis__("strange::number / division by zero");
+		}
+		_ABSTRACTION_ result = me_();
+		result.reference__() /= num;
+		return result;
+	}
+
+	inline any_a<> self_modulo(any_a<> const& range)
+	{
+		for (auto const& thing : range)
+		{
+			operator%=(thing);
+		}
+		return me_();
+	}
+
+	inline number_a<> self_modulo_(number_a<> const& number)
+	{
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from(number);
+		if (num == 0)
+		{
+			throw dis__("strange::number self_modulo division by zero");
+		}
+		_number %= num;
+		return me_();
+	}
+
+	inline number_t& operator%=(any_a<> const& thing)
+	{
+		if (!check_<number_a<>>(thing))
+		{
+			throw dis__("strange::number %= passed non-number");
+		}
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from(cast_<number_a<>>(thing));
+		if (num == 0)
+		{
+			throw dis__("strange::number %= division by zero");
+		}
+		_number %= num;
+		return *this;
+	}
+
+	inline any_a<> modulo(any_a<> const& range) const
+	{
+		number_a<> result = me_();
+		for (auto const& thing : range)
+		{
+			result %= thing;
+		}
+		return result;
+	}
+
+	inline number_a<> modulo_(number_a<> const& number) const
+	{
+		return operator%(number);
+	}
+
+	inline number_a<> operator%(number_a<> const& number) const
+	{
+		PRIMITIVE num = conversion_u<PRIMITIVE>::from(number);
+		if (num == 0)
+		{
+			throw dis__("strange::number % division by zero");
+		}
+		_ABSTRACTION_ result = me_();
+		result.reference__() %= num;
+		return result;
+	}
 
 	inline any_a<> to_int_64(any_a<> const& _) const;
 	inline number_data_a<int64_t> to_int_64_() const;
