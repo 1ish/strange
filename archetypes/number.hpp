@@ -97,35 +97,35 @@ public:
 	inline any_a<> greater_or_equal_(number_a const& number) const;
 	inline bool operator>=(number_a const& number) const;
 
-	inline any_a<> byte_size(any_a<> const& range) const;
-	inline number_a byte_size_() const;
+	inline any_a<> byte_size(any_a<> const& _) const;
+	inline number_data_a_int64 byte_size_() const;
 	inline int64_t byte_size__() const;
 
-	inline any_a<> is_int(any_a<> const& range) const;
+	inline any_a<> is_int(any_a<> const& _) const;
 	inline any_a<> is_int_() const;
 	inline bool is_int__() const;
 
-	inline any_a<> is_signed(any_a<> const& range) const;
+	inline any_a<> is_signed(any_a<> const& _) const;
 	inline any_a<> is_signed_() const;
 	inline bool is_signed__() const;
 
-	inline any_a<> is_nan(any_a<> const& range) const;
+	inline any_a<> is_nan(any_a<> const& _) const;
 	inline any_a<> is_nan_() const;
 	inline bool is_nan__() const;
 
-	inline any_a<> is_inf(any_a<> const& range) const;
+	inline any_a<> is_inf(any_a<> const& _) const;
 	inline any_a<> is_inf_() const;
 	inline bool is_inf__() const;
 
-	inline any_a<> is_finite(any_a<> const& range) const;
+	inline any_a<> is_finite(any_a<> const& _) const;
 	inline any_a<> is_finite_() const;
 	inline bool is_finite__() const;
 
-	inline any_a<> is_normal(any_a<> const& range) const;
+	inline any_a<> is_normal(any_a<> const& _) const;
 	inline any_a<> is_normal_() const;
 	inline bool is_normal__() const;
 
-	inline any_a<> little_endian(any_a<> const& range) const;
+	inline any_a<> little_endian(any_a<> const& _) const;
 	inline any_a<> little_endian_() const;
 	inline bool little_endian__() const;
 };
