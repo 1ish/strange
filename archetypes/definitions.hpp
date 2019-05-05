@@ -2,6 +2,7 @@
 #define COM_ONEISH_STRANGE_DEFINITIONS_HPP
 
 using int64_t = long long;
+using uint64_t = unsigned long long;
 
 namespace std
 {

@@ -113,6 +113,7 @@ class random_access_iterator_data_a;
 #include "strange_shoal_t.h"
 #include "strange_flock_t.h"
 #include "strange_herd_t.h"
+#include "strange_number_t.h"
 
 // utilities
 #include "strange_variadic_u.h"

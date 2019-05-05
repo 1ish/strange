@@ -2,6 +2,7 @@
 #define COM_ONEISH_STRANGE_NUMBER_A_H
 
 // # include "any_forward.hpp"
+// # include "number_data_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -208,25 +209,37 @@ namespace strange {
      { assert(handle_); return read().operator%(number ); }
      inline any_a < > to_int_64 ( any_a < > const & _ ) const
      { assert(handle_); return read().to_int_64(_ ); }
-     inline number_a to_int_64_ ( ) const
+     inline number_data_a < int64_t > to_int_64_ ( ) const
      { assert(handle_); return read().to_int_64_( ); }
      inline int64_t to_int_64__ ( ) const
      { assert(handle_); return read().to_int_64__( ); }
      inline any_a < > from_int_64 ( any_a < > const & range )
      { assert(handle_); return write().from_int_64(range ); }
-     inline any_a < > from_int_64_ ( number_a const & int_64 )
+     inline any_a < > from_int_64_ ( number_data_a < int64_t > const & int_64 )
      { assert(handle_); return write().from_int_64_(int_64 ); }
      inline void from_int_64__ ( int64_t int_64 )
      { assert(handle_); write().from_int_64__(int_64 ); }
+     inline any_a < > to_uint_64 ( any_a < > const & _ ) const
+     { assert(handle_); return read().to_uint_64(_ ); }
+     inline number_data_a < uint64_t > to_uint_64_ ( ) const
+     { assert(handle_); return read().to_uint_64_( ); }
+     inline uint64_t to_uint_64__ ( ) const
+     { assert(handle_); return read().to_uint_64__( ); }
+     inline any_a < > from_uint_64 ( any_a < > const & range )
+     { assert(handle_); return write().from_uint_64(range ); }
+     inline any_a < > from_uint_64_ ( number_data_a < uint64_t > const & uint_64 )
+     { assert(handle_); return write().from_uint_64_(uint_64 ); }
+     inline void from_uint_64__ ( uint64_t uint_64 )
+     { assert(handle_); write().from_uint_64__(uint_64 ); }
      inline any_a < > to_float_64 ( any_a < > const & _ ) const
      { assert(handle_); return read().to_float_64(_ ); }
-     inline number_a to_float_64_ ( ) const
+     inline number_data_a < double > to_float_64_ ( ) const
      { assert(handle_); return read().to_float_64_( ); }
      inline double to_float_64__ ( ) const
      { assert(handle_); return read().to_float_64__( ); }
      inline any_a < > from_float_64 ( any_a < > const & range )
      { assert(handle_); return write().from_float_64(range ); }
-     inline any_a < > from_float_64_ ( number_a const & float_64 )
+     inline any_a < > from_float_64_ ( number_data_a < double > const & float_64 )
      { assert(handle_); return write().from_float_64_(float_64 ); }
      inline void from_float_64__ ( double float_64 )
      { assert(handle_); write().from_float_64__(float_64 ); }
@@ -266,6 +279,12 @@ namespace strange {
      { assert(handle_); return read().is_int_( ); }
      inline bool is_int__ ( ) const
      { assert(handle_); return read().is_int__( ); }
+     inline any_a < > is_signed ( any_a < > const & range ) const
+     { assert(handle_); return read().is_signed(range ); }
+     inline any_a < > is_signed_ ( ) const
+     { assert(handle_); return read().is_signed_( ); }
+     inline bool is_signed__ ( ) const
+     { assert(handle_); return read().is_signed__( ); }
      inline any_a < > is_nan ( any_a < > const & range ) const
      { assert(handle_); return read().is_nan(range ); }
      inline any_a < > is_nan_ ( ) const
@@ -334,16 +353,22 @@ namespace strange {
       virtual inline number_a modulo_ ( number_a const & number ) const = 0;
       virtual inline number_a operator % ( number_a const & number ) const = 0;
       virtual inline any_a < > to_int_64 ( any_a < > const & _ ) const = 0;
-      virtual inline number_a to_int_64_ ( ) const = 0;
+      virtual inline number_data_a < int64_t > to_int_64_ ( ) const = 0;
       virtual inline int64_t to_int_64__ ( ) const = 0;
       virtual inline any_a < > from_int_64 ( any_a < > const & range ) = 0;
-      virtual inline any_a < > from_int_64_ ( number_a const & int_64 ) = 0;
+      virtual inline any_a < > from_int_64_ ( number_data_a < int64_t > const & int_64 ) = 0;
       virtual inline void from_int_64__ ( int64_t int_64 ) = 0;
+      virtual inline any_a < > to_uint_64 ( any_a < > const & _ ) const = 0;
+      virtual inline number_data_a < uint64_t > to_uint_64_ ( ) const = 0;
+      virtual inline uint64_t to_uint_64__ ( ) const = 0;
+      virtual inline any_a < > from_uint_64 ( any_a < > const & range ) = 0;
+      virtual inline any_a < > from_uint_64_ ( number_data_a < uint64_t > const & uint_64 ) = 0;
+      virtual inline void from_uint_64__ ( uint64_t uint_64 ) = 0;
       virtual inline any_a < > to_float_64 ( any_a < > const & _ ) const = 0;
-      virtual inline number_a to_float_64_ ( ) const = 0;
+      virtual inline number_data_a < double > to_float_64_ ( ) const = 0;
       virtual inline double to_float_64__ ( ) const = 0;
       virtual inline any_a < > from_float_64 ( any_a < > const & range ) = 0;
-      virtual inline any_a < > from_float_64_ ( number_a const & float_64 ) = 0;
+      virtual inline any_a < > from_float_64_ ( number_data_a < double > const & float_64 ) = 0;
       virtual inline void from_float_64__ ( double float_64 ) = 0;
       virtual inline any_a < > less_than ( any_a < > const & range ) const = 0;
       virtual inline any_a < > less_than_ ( number_a const & number ) const = 0;
@@ -363,6 +388,9 @@ namespace strange {
       virtual inline any_a < > is_int ( any_a < > const & range ) const = 0;
       virtual inline any_a < > is_int_ ( ) const = 0;
       virtual inline bool is_int__ ( ) const = 0;
+      virtual inline any_a < > is_signed ( any_a < > const & range ) const = 0;
+      virtual inline any_a < > is_signed_ ( ) const = 0;
+      virtual inline bool is_signed__ ( ) const = 0;
       virtual inline any_a < > is_nan ( any_a < > const & range ) const = 0;
       virtual inline any_a < > is_nan_ ( ) const = 0;
       virtual inline bool is_nan__ ( ) const = 0;
@@ -468,25 +496,37 @@ namespace strange {
       { return value_.operator%(number ); }
       virtual inline any_a < > to_int_64 ( any_a < > const & _ ) const
       { return value_.to_int_64(_ ); }
-      virtual inline number_a to_int_64_ ( ) const
+      virtual inline number_data_a < int64_t > to_int_64_ ( ) const
       { return value_.to_int_64_( ); }
       virtual inline int64_t to_int_64__ ( ) const
       { return value_.to_int_64__( ); }
       virtual inline any_a < > from_int_64 ( any_a < > const & range )
       { return value_.from_int_64(range ); }
-      virtual inline any_a < > from_int_64_ ( number_a const & int_64 )
+      virtual inline any_a < > from_int_64_ ( number_data_a < int64_t > const & int_64 )
       { return value_.from_int_64_(int_64 ); }
       virtual inline void from_int_64__ ( int64_t int_64 )
       { value_.from_int_64__(int_64 ); }
+      virtual inline any_a < > to_uint_64 ( any_a < > const & _ ) const
+      { return value_.to_uint_64(_ ); }
+      virtual inline number_data_a < uint64_t > to_uint_64_ ( ) const
+      { return value_.to_uint_64_( ); }
+      virtual inline uint64_t to_uint_64__ ( ) const
+      { return value_.to_uint_64__( ); }
+      virtual inline any_a < > from_uint_64 ( any_a < > const & range )
+      { return value_.from_uint_64(range ); }
+      virtual inline any_a < > from_uint_64_ ( number_data_a < uint64_t > const & uint_64 )
+      { return value_.from_uint_64_(uint_64 ); }
+      virtual inline void from_uint_64__ ( uint64_t uint_64 )
+      { value_.from_uint_64__(uint_64 ); }
       virtual inline any_a < > to_float_64 ( any_a < > const & _ ) const
       { return value_.to_float_64(_ ); }
-      virtual inline number_a to_float_64_ ( ) const
+      virtual inline number_data_a < double > to_float_64_ ( ) const
       { return value_.to_float_64_( ); }
       virtual inline double to_float_64__ ( ) const
       { return value_.to_float_64__( ); }
       virtual inline any_a < > from_float_64 ( any_a < > const & range )
       { return value_.from_float_64(range ); }
-      virtual inline any_a < > from_float_64_ ( number_a const & float_64 )
+      virtual inline any_a < > from_float_64_ ( number_data_a < double > const & float_64 )
       { return value_.from_float_64_(float_64 ); }
       virtual inline void from_float_64__ ( double float_64 )
       { value_.from_float_64__(float_64 ); }
@@ -526,6 +566,12 @@ namespace strange {
       { return value_.is_int_( ); }
       virtual inline bool is_int__ ( ) const
       { return value_.is_int__( ); }
+      virtual inline any_a < > is_signed ( any_a < > const & range ) const
+      { return value_.is_signed(range ); }
+      virtual inline any_a < > is_signed_ ( ) const
+      { return value_.is_signed_( ); }
+      virtual inline bool is_signed__ ( ) const
+      { return value_.is_signed__( ); }
       virtual inline any_a < > is_nan ( any_a < > const & range ) const
       { return value_.is_nan(range ); }
       virtual inline any_a < > is_nan_ ( ) const

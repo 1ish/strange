@@ -69,6 +69,8 @@ TEST(TestCaseName, ForLoop)
 			cast_<random_access_iterator_data_a<std::vector<any_a<>>::const_iterator>>(it);
 		std::cout << "data: " << (data == flock.cend()) << std::endl;
 	}
+
+	number_a<> num = number_t<int64_t>::val__(123);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
