@@ -265,7 +265,7 @@ inline any_a<> hash(any_a<> const&) const \
 } \
 inline number_data_a<uint64_t> hash_() const \
 { \
-	return number_uint_64_t<>::val__(hash__()); \
+	return number_uint_64_t<>::val__(uint64_t(hash__())); \
 } \
 inline any_a<> beget(any_a<> const&) const \
 { \
