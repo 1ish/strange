@@ -19,7 +19,7 @@ public: ___THING___
 		return val__(PRIMITIVE{});
 	}
 
-	static inline number_data_a<PRIMITIVE> val__(PRIMITIVE const& primitive)
+	static inline number_data_a<PRIMITIVE> val__(PRIMITIVE primitive)
 	{
 		return number_data_a<PRIMITIVE>{ number_t<PRIMITIVE, _ABSTRACTION_>{ primitive } };
 	}
@@ -34,7 +34,7 @@ public: ___THING___
 		return ref__(PRIMITIVE{});
 	}
 
-	static inline number_data_a<PRIMITIVE> ref__(PRIMITIVE const& primitive)
+	static inline number_data_a<PRIMITIVE> ref__(PRIMITIVE primitive)
 	{
 		return number_data_a<PRIMITIVE>(number_t<PRIMITIVE, _ABSTRACTION_>{ primitive }, true);
 	}
@@ -749,7 +749,7 @@ public: ___THING___
 protected:
 	PRIMITIVE _number;
 
-	inline number_t(PRIMITIVE const& number)
+	inline number_t(PRIMITIVE number)
 		: something_t{}
 		, _number(number)
 	{}

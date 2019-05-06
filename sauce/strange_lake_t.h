@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = lake_a<>>
+template <typename PRIMITIVE, typename _ABSTRACTION_ = lake_data_a<PRIMITIVE>>
 class lake_t : public something_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
@@ -78,6 +78,10 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<> set_(any_a<> const& thing) const
 		{
+			if (!check_<number_data_a<PRIMITIVE>>(thing))
+			{
+				throw dis__("strange::lake::iterator set passed wrong type of thing");
+			}
 			return operator*() = thing;
 		}
 
@@ -88,7 +92,8 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<>& operator*() const
 		{
-			return const_cast<any_a<>&>(*_it);
+			_number = number_t<PRIMITIVE>::val__(*_it);
+			return _number;
 		}
 
 		inline _ABSTRACTION_ increment(any_a<> const&)
@@ -369,50 +374,52 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 	private:
 		ITERATOR _it;
+		mutable number_data_a<PRIMITIVE> _number;
 		lake_a<> _lake;
 
 		template <typename F>
 		inline iterator_t(lake_a<> const& lake, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
+			, _number{}
 			, _lake(lake, true)
 		{}
 	};
 
 public: ___COLLECTION___
-	using std_vector_any = std::vector<any_a<>>;
+	using std_vector_number = std::vector<PRIMITIVE>;
 
 	// construction
-	static inline lake_a<> val(any_a<> const& range)
+	static inline lake_data_a<PRIMITIVE> val(any_a<> const& range)
 	{
-		return cast_<lake_a<>>(val_() += range);
+		return cast_<lake_data_a<PRIMITIVE>>(val_() += range);
 	}
 
-	static inline lake_a<> val_()
+	static inline lake_data_a<PRIMITIVE> val_()
 	{
-		return val__(std_vector_any{});
-	}
-
-	template <typename F>
-	static inline lake_a<> val__(F&& init)
-	{
-		return lake_a<>{ lake_t{ std::forward<F>(init) } };
-	}
-
-	static inline lake_a<> ref(any_a<> const& range)
-	{
-		return cast_<lake_a<>>(ref_() += range, true);
-	}
-
-	static inline lake_a<> ref_()
-	{
-		return ref__(std_vector_any{});
+		return val__(std_vector_number{});
 	}
 
 	template <typename F>
-	static inline lake_a<> ref__(F&& init)
+	static inline lake_data_a<PRIMITIVE> val__(F&& init)
 	{
-		return lake_a<>(lake_t{ std::forward<F>(init) }, true);
+		return lake_data_a<PRIMITIVE>{ lake_t{ std::forward<F>(init) } };
+	}
+
+	static inline lake_data_a<PRIMITIVE> ref(any_a<> const& range)
+	{
+		return cast_<lake_data_a<PRIMITIVE>>(ref_() += range, true);
+	}
+
+	static inline lake_data_a<PRIMITIVE> ref_()
+	{
+		return ref__(std_vector_number{});
+	}
+
+	template <typename F>
+	static inline lake_data_a<PRIMITIVE> ref__(F&& init)
+	{
+		return lake_data_a<PRIMITIVE>(lake_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
@@ -436,28 +443,28 @@ public: ___COLLECTION___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<lake_a<>>(thing))
+		if (!check_<lake_data_a<PRIMITIVE>>(thing))
 		{
 			return false;
 		}
-		return _vector == cast_<lake_a<>>(thing).extract__();
+		return _vector == cast_<lake_data_a<PRIMITIVE>>(thing).extract__();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<lake_a<>>(thing))
+		if (!check_<lake_data_a<PRIMITIVE>>(thing))
 		{
 			return true;
 		}
-		return _vector != cast_<lake_a<>>(thing).extract__();
+		return _vector != cast_<lake_data_a<PRIMITIVE>>(thing).extract__();
 	}
 
 	inline std::size_t hash__() const
 	{
 		std::size_t seed = std::hash<std::size_t>{}(_vector.size());
-		for (auto const& item : _vector)
+		for (auto item : _vector)
 		{
-			seed ^= item.hash__() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+			seed ^= std::hash<PRIMITIVE>{}(item) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
 		return seed;
 	}
@@ -465,32 +472,32 @@ public: ___COLLECTION___
 	// range
 	inline random_access_iterator_a<> cbegin() const
 	{
-		return iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cbegin());
+		return iterator_t<std_vector_number::const_iterator>::val__(me_(), _vector.cbegin());
 	}
 
 	inline random_access_iterator_a<> begin() const
 	{
-		return iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cbegin());
+		return iterator_t<std_vector_number::const_iterator>::val__(me_(), _vector.cbegin());
 	}
 
 	inline random_access_iterator_a<> begin()
 	{
-		return iterator_t<std_vector_any::iterator>::val__(me_(), _vector.begin());
+		return iterator_t<std_vector_number::iterator>::val__(me_(), _vector.begin());
 	}
 
 	inline random_access_iterator_a<> cend() const
 	{
-		return iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cend());
+		return iterator_t<std_vector_number::const_iterator>::val__(me_(), _vector.cend());
 	}
 
 	inline random_access_iterator_a<> end() const
 	{
-		return iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cend());
+		return iterator_t<std_vector_number::const_iterator>::val__(me_(), _vector.cend());
 	}
 
 	inline random_access_iterator_a<> end()
 	{
-		return iterator_t<std_vector_any::iterator>::val__(me_(), _vector.end());
+		return iterator_t<std_vector_number::iterator>::val__(me_(), _vector.end());
 	}
 
 	// collection
@@ -510,16 +517,21 @@ public: ___COLLECTION___
 		{
 			return at__(cast_<number_a<>>(key).to_int_64__());
 		}
-		return nothing_t<>::val_();
+		return at__(-1);
 	}
 
 	inline any_a<> at__(int64_t index) const
+	{
+		return number_t<PRIMITIVE>::val__(at___(index));
+	}
+
+	inline PRIMITIVE at___(int64_t index) const
 	{
 		if (index >= 0 && index < size__())
 		{
 			return _vector[std::size_t(index)];
 		}
-		return nothing_t<>::val_();
+		return PRIMITIVE{};
 	}
 
 	inline any_a<> update_(any_a<> const& key, any_a<> const& value)
@@ -533,12 +545,21 @@ public: ___COLLECTION___
 
 	inline void update__(int64_t index, any_a<> const& value)
 	{
+		if (!check_<number_a<>>(value))
+		{
+			throw dis__("strange::lake::update passed non-number value");
+		}
+		return update__(index, number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(value)));
+	}
+
+	inline void update__(int64_t index, PRIMITIVE number)
+	{
 		if (index >= 0)
 		{
 			int64_t const size = size__();
 			if (index == size)
 			{
-				push_back__(value);
+				push_back__(number);
 			}
 			else
 			{
@@ -546,7 +567,7 @@ public: ___COLLECTION___
 				{
 					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
 				}
-				_vector[std::size_t(index)] = value;
+				_vector[std::size_t(index)] = number;
 			}
 		}
 	}
@@ -558,23 +579,32 @@ public: ___COLLECTION___
 
 	inline bool insert__(int64_t index, any_a<> const& value)
 	{
+		if (!check_<number_a<>>(value))
+		{
+			throw dis__("strange::lake::insert passed non-number value");
+		}
+		return insert__(index, number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(value)));
+	}
+
+	inline bool insert__(int64_t index, PRIMITIVE number)
+	{
 		if (index >= 0)
 		{
 			int64_t const size = size__();
 			if (index == size)
 			{
-				push_back__(value);
+				push_back__(number);
 			}
 			else
 			{
 				if (index > size)
 				{
 					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
-					_vector[std::size_t(index)] = value;
+					_vector[std::size_t(index)] = number;
 				}
 				else
 				{
-					_vector.insert(_vector.cbegin() + index, value);
+					_vector.insert(_vector.cbegin() + index, number);
 				}
 			}
 			return true;
@@ -617,14 +647,33 @@ public: ___COLLECTION___
 		push_back__(thing);
 	}
 
+	inline void push_front__(PRIMITIVE number)
+	{
+		push_back__(number);
+	}
+
 	inline any_a<> pop_front_()
 	{
 		return pop_back_();
 	}
 
+	inline PRIMITIVE pop_front__()
+	{
+		return pop_back__();
+	}
+
 	inline void push_back__(any_a<> const& thing)
 	{
-		_vector.push_back(thing);
+		if (!check_<number_a<>>(thing))
+		{
+			throw dis__("strange::lake::push_back passed non-number");
+		}
+		push_back__(number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing)));
+	}
+
+	inline void push_back__(PRIMITIVE number)
+	{
+		_vector.push_back(number);
 	}
 
 	inline any_a<> pop_back_()
@@ -633,9 +682,14 @@ public: ___COLLECTION___
 		{
 			return nothing_t<>::val_();
 		}
-		any_a<> result = _vector.back();
+		return number_t<PRIMITIVE>::val__(pop_back__());
+	}
+
+	inline PRIMITIVE pop_back__()
+	{
+		PRIMITIVE number = _vector.back();
 		_vector.pop_back();
-		return result;
+		return number;
 	}
 
 	inline lake_t& operator+=(any_a<> const& range)
@@ -657,23 +711,23 @@ public: ___COLLECTION___
 	}
 
 	// data
-	inline std_vector_any const& extract__() const
+	inline std_vector_number const& extract__() const
 	{
 		return _vector;
 	}
 
-	inline void mutate__(std_vector_any const& data)
+	inline void mutate__(std_vector_number const& data)
 	{
 		_vector = data;
 	}
 
-	inline std_vector_any& reference__()
+	inline std_vector_number& reference__()
 	{
 		return _vector;
 	}
 
 protected:
-	std_vector_any _vector;
+	std_vector_number _vector;
 
 	template <typename F>
 	inline lake_t(F&& init)

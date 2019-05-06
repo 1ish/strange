@@ -80,6 +80,8 @@ TEST(TestCaseName, ForLoop)
 	{
 		std::cout << "caught: " << m.to_string__() << std::endl;
 	}
+
+	lake_a<> lake = lake_t<double>::val_();
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

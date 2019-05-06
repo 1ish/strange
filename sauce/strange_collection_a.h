@@ -506,9 +506,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename ___1___>
+    	template <typename ___TTT___>
 
-    	friend inline bool check_(collection_a<___1___> const& value);
+    	friend inline bool check_(collection_a<> const& value);
 
     
 
@@ -654,9 +654,9 @@ namespace strange {
 
     
 
-    template <typename ___TTT___, typename ___1___>
+    template <typename ___TTT___>
 
-    inline bool check_(collection_a<___1___> const& value)
+    inline bool check_(collection_a<> const& value)
 
     {
 

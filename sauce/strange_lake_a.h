@@ -13,7 +13,7 @@
 
 namespace strange {
     template < typename _1_ >
-    class lake_a final : public ___derived___
+    class lake_a : public ___derived___
 
     {
 
@@ -159,17 +159,11 @@ namespace strange {
      { assert(handle_); return write().insert__(index, value ); }
      inline bool erase__ ( int64_t index )
      { assert(handle_); return write().erase__(index ); }
-     inline std :: vector < any_a < >> const & extract__ ( ) const
-     { assert(handle_); return read().extract__( ); }
-     inline void mutate__ ( std :: vector < any_a < >> const & data )
-     { assert(handle_); write().mutate__(data ); }
-     inline std :: vector < any_a < >> & reference__ ( )
-     { assert(handle_); return write().reference__( ); }
     
 
-    private:
+    protected:
 
-    	struct ___finale_handle_base___ : ___derived_handle_base___
+    	struct ___dderived_handle_base___ : ___derived_handle_base___
 
     	{
 
@@ -178,24 +172,21 @@ namespace strange {
       virtual inline void update__ ( int64_t index , any_a < > const & value ) = 0;
       virtual inline bool insert__ ( int64_t index , any_a < > const & value ) = 0;
       virtual inline bool erase__ ( int64_t index ) = 0;
-      virtual inline std :: vector < any_a < >> const & extract__ ( ) const = 0;
-      virtual inline void mutate__ ( std :: vector < any_a < >> const & data ) = 0;
-      virtual inline std :: vector < any_a < >> & reference__ ( ) = 0;
     	};
 
     
 
-    	template <typename ___TTT___>
+    	template <typename ___TTT___, typename ___DDHB___ = ___dderived_handle_base___>
 
-    	struct ___finale_handle_final___ final : ___derived_handle___<___TTT___, ___finale_handle_base___>
+    	struct ___dderived_handle___ : ___derived_handle___<___TTT___, ___DDHB___>
 
     	{
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+    		inline ___dderived_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
 
-    			: ___derived_handle___<___TTT___, ___finale_handle_base___>{ value }
+    			: ___derived_handle___<___TTT___, ___DDHB___>{ value }
 
     		{}
 
@@ -203,21 +194,11 @@ namespace strange {
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+    		inline ___dderived_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
 
-    			: ___derived_handle___<___TTT___, ___finale_handle_base___>{ std::move(value) }
+    			: ___derived_handle___<___TTT___, ___DDHB___>{ std::move(value) }
 
     		{}
-
-    
-
-    		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
-
-    		{
-
-    			return std::make_shared<___finale_handle_final___>(___derived_handle___<___TTT___, ___finale_handle_base___>::value_);
-
-    		}
 
     
 
@@ -231,27 +212,21 @@ namespace strange {
       { return value_.insert__(index, value ); }
       virtual inline bool erase__ ( int64_t index )
       { return value_.erase__(index ); }
-      virtual inline std :: vector < any_a < >> const & extract__ ( ) const
-      { return value_.extract__( ); }
-      virtual inline void mutate__ ( std :: vector < any_a < >> const & data )
-      { value_.mutate__(data ); }
-      virtual inline std :: vector < any_a < >> & reference__ ( )
-      { return value_.reference__( ); }
     	};
 
     
 
-    	template <typename ___TTT___>
+    	template <typename ___TTT___, typename ___DDHB___>
 
-    	struct ___finale_handle_final___<std::reference_wrapper<___TTT___>> final
+    	struct ___dderived_handle___<std::reference_wrapper<___TTT___>, ___DDHB___>
 
-    		: ___finale_handle_final___<___TTT___&>
+    		: ___dderived_handle___<___TTT___&, ___DDHB___>
 
     	{
 
-    		inline ___finale_handle_final___(std::reference_wrapper<___TTT___> ref)
+    		inline ___dderived_handle___(std::reference_wrapper<___TTT___> ref)
 
-    			: ___finale_handle_final___<___TTT___&>{ ref.get() }
+    			: ___dderived_handle___<___TTT___&, ___DDHB___>{ ref.get() }
 
     		{}
 
@@ -259,17 +234,75 @@ namespace strange {
 
     
 
-    	inline ___finale_handle_base___ const& read() const
+    private:
+
+    	template <typename ___TTT___>
+
+    	struct ___dderived_handle_final___ final : ___dderived_handle___<___TTT___>
 
     	{
 
-    		return *std::static_pointer_cast<___finale_handle_base___ const>(handle_);
+    		template <typename ___UUU___ = ___TTT___>
+
+    		inline ___dderived_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+
+    			: ___dderived_handle___<___TTT___>{ value }
+
+    		{}
+
+    
+
+    		template <typename ___UUU___ = ___TTT___>
+
+    		inline ___dderived_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+
+    			: ___dderived_handle___<___TTT___>{ std::move(value) }
+
+    		{}
+
+    
+
+    		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
+
+    		{
+
+    			return std::make_shared<___dderived_handle_final___>(___dderived_handle___<___TTT___>::value_);
+
+    		}
+
+    	};
+
+    
+
+    	template <typename ___TTT___>
+
+    	struct ___dderived_handle_final___<std::reference_wrapper<___TTT___>> final
+
+    		: ___dderived_handle_final___<___TTT___&>
+
+    	{
+
+    		inline ___dderived_handle_final___(std::reference_wrapper<___TTT___> ref)
+
+    			: ___dderived_handle_final___<___TTT___&>{ ref.get() }
+
+    		{}
+
+    	};
+
+    
+
+    	inline ___dderived_handle_base___ const& read() const
+
+    	{
+
+    		return *std::static_pointer_cast<___dderived_handle_base___ const>(handle_);
 
     	}
 
     
 
-    	inline ___finale_handle_base___& write()
+    	inline ___dderived_handle_base___& write()
 
     	{
 
@@ -283,7 +316,7 @@ namespace strange {
 
     		}
 
-    		return *std::static_pointer_cast<___finale_handle_base___>(handle_);
+    		return *std::static_pointer_cast<___dderived_handle_base___>(handle_);
 
     	}
 
@@ -307,11 +340,11 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___>const & handle)
 
     	{
 
-    		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+    		return bool(std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
 
     	}
 
@@ -355,17 +388,17 @@ namespace strange {
 
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
-    		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
+    		if (!std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
 
     		{
 
-    			throw dis__("lake_a constructor failed to cast from base to final");
+    			throw dis__("lake_a constructor failed to cast from base to dderived");
 
     		}
 
     #else
 
-    		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+    		assert(std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
 
     #endif
 
@@ -377,7 +410,7 @@ namespace strange {
 
     	explicit inline lake_a(___TTT___ value, bool reference = false)
 
-    		: ___derived___(std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
+    		: ___derived___(std::make_shared<___dderived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 
     			reference)
 
@@ -393,17 +426,17 @@ namespace strange {
 
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
-    		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
+    		if (!std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
 
     		{
 
-    			throw dis__("lake_a assignment failed to cast from base to final");
+    			throw dis__("lake_a assignment failed to cast from base to dderived");
 
     		}
 
     #else
 
-    		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+    		assert(std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
 
     #endif
 
