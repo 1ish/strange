@@ -381,7 +381,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		inline iterator_t(lake_a<> const& lake, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
-			, _number{}
+			, _number{ number_t<PRIMITIVE>::val_() }
 			, _lake(lake, true)
 		{}
 	};
