@@ -374,15 +374,15 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 	private:
 		ITERATOR _it;
-		mutable number_data_a<PRIMITIVE> _number;
 		lake_a<> _lake;
+		mutable number_data_a<PRIMITIVE> _number;
 
 		template <typename F>
 		inline iterator_t(lake_a<> const& lake, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
-			, _number{ number_t<PRIMITIVE>::val_() }
 			, _lake(lake, true)
+			, _number{ number_t<PRIMITIVE>::val_() }
 		{}
 	};
 
