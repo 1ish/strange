@@ -5,6 +5,7 @@
 // # include "symbol_forward.hpp"
 // # include "cat_forward.hpp"
 // # include "forward_iterator_forward.hpp"
+// # include "number_data_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -14,7 +15,7 @@
 
 
 namespace strange {
-    template < typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename forward_iterator_a = forward_iterator_a < >>
+    template < typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename forward_iterator_a = forward_iterator_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
     class any_a
 
     {
@@ -253,7 +254,7 @@ namespace strange {
      { assert(handle_); return read().operator!=(thing ); }
      inline any_a hash ( any_a const & _ ) const
      { assert(handle_); return read().hash(_ ); }
-     inline any_a hash_ ( ) const
+     inline number_data_a_uint64 hash_ ( ) const
      { assert(handle_); return read().hash_( ); }
      inline std :: size_t hash__ ( ) const
      { assert(handle_); return read().hash__( ); }
@@ -385,7 +386,7 @@ namespace strange {
       virtual inline any_a different_ ( any_a const & thing ) const = 0;
       virtual inline bool operator != ( any_a const & thing ) const = 0;
       virtual inline any_a hash ( any_a const & _ ) const = 0;
-      virtual inline any_a hash_ ( ) const = 0;
+      virtual inline number_data_a_uint64 hash_ ( ) const = 0;
       virtual inline std :: size_t hash__ ( ) const = 0;
       virtual inline bool is__ ( std :: string const & s ) const = 0;
       virtual inline any_a beget ( any_a const & _ ) const = 0;
@@ -594,7 +595,7 @@ namespace strange {
       { return value_.operator!=(thing ); }
       virtual inline any_a hash ( any_a const & _ ) const
       { return value_.hash(_ ); }
-      virtual inline any_a hash_ ( ) const
+      virtual inline number_data_a_uint64 hash_ ( ) const
       { return value_.hash_( ); }
       virtual inline std :: size_t hash__ ( ) const
       { return value_.hash__( ); }

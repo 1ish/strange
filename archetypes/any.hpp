@@ -9,11 +9,12 @@
 #include "symbol_forward.hpp"
 #include "cat_forward.hpp"
 #include "forward_iterator_forward.hpp"
+#include "number_data_forward.hpp"
 
 namespace strange
 {
 
-template <typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename forward_iterator_a = forward_iterator_a<>>
+template <typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename forward_iterator_a = forward_iterator_a<>, typename number_data_a_uint64 = number_data_a<uint64_t>>
 class any_a
 {
 public:
@@ -91,7 +92,7 @@ public:
 	inline bool operator!=(any_a const& thing) const;
 
 	inline any_a hash(any_a const& _) const;
-	inline any_a hash_() const;
+	inline number_data_a_uint64 hash_() const;
 	inline std::size_t hash__() const;
 
 	inline bool is__(std::string const& s) const;

@@ -263,9 +263,9 @@ inline any_a<> hash(any_a<> const&) const \
 { \
 	return hash_(); \
 } \
-inline any_a<> hash_() const \
+inline number_data_a<uint64_t> hash_() const \
 { \
-	return everything_t<>::val_(); /* //TODO */ \
+	return number_uint_64_t<>::val__(hash__()); \
 } \
 inline any_a<> beget(any_a<> const&) const \
 { \
