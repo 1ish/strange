@@ -1,8 +1,6 @@
 #ifndef COM_ONEISH_STRANGE_SHOAL_T_H
 #define COM_ONEISH_STRANGE_SHOAL_T_H
 
-#include <map>
-
 namespace strange
 {
 

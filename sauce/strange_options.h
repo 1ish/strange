@@ -1,6 +1,8 @@
 #ifndef COM_ONEISH_STRANGE_OPTIONS_H
 #define COM_ONEISH_STRANGE_OPTIONS_H
 
+// options
+
 #ifdef _DEBUG
 #define STRANGE_CHECK_STATIC_CASTS 1
 #endif

@@ -1,8 +1,6 @@
 #ifndef COM_ONEISH_STRANGE_HERD_T_H
 #define COM_ONEISH_STRANGE_HERD_T_H
 
-#include <set>
-
 namespace strange
 {
 
