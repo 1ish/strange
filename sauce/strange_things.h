@@ -21,5 +21,6 @@
 #include "strange_flock_t.h"
 #include "strange_herd_t.h"
 #include "strange_number_t.h"
+#include "strange_lake_t.h"
 
 #endif

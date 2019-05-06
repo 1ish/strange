@@ -43,6 +43,9 @@ template <typename _1_>
 class number_data_a;
 
 template <typename _1_ = void>
+class lake_a;
+
+template <typename _1_ = void>
 class bidirectional_iterator_a;
 
 template <typename _1_>
@@ -77,6 +80,8 @@ class random_access_iterator_data_a;
 #include "strange_number_a.h"
 #define ___derived___ number_a<>
 #include "strange_number_data_a.h"
+#define ___derived___ collection_a<>
+#include "strange_lake_a.h"
 #define ___derived___ forward_iterator_a<>
 #include "strange_bidirectional_iterator_a.h"
 #define ___derived___ bidirectional_iterator_a<>
