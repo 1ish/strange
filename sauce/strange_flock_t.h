@@ -423,22 +423,17 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<> get_() const
 		{
-			return operator*();
+			return *_it;
 		}
 
 		inline any_a<> set(any_a<> const& range) const
 		{
-			forward_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
-			{
-				throw dis__("strange::flock::const_iterator set passed empty range");
-			}
-			return set_(*it);
+			throw dis__("strange::flock::const_iterator set called");
 		}
 
 		inline any_a<> set_(any_a<> const& thing) const
 		{
-			return operator*() = thing;
+			throw dis__("strange::flock::const_iterator set called");
 		}
 
 		inline any_a<>* operator->() const

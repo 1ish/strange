@@ -8,26 +8,26 @@ template <typename _ABSTRACTION_ = herd_a<>>
 class herd_t : public something_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_iterator_data_a<ITERATOR>>
-	class iterator_t : public something_t<_ABSTRACTION_>
+	class const_iterator_t : public something_t<_ABSTRACTION_>
 	{
 	public: ___THING___
 		// construction
 		template <typename F>
 		static inline bidirectional_iterator_data_a<ITERATOR> val__(herd_a<> const& herd, F&& it)
 		{
-			return bidirectional_iterator_data_a<ITERATOR>{ iterator_t(herd, std::forward<F>(it)) };
+			return bidirectional_iterator_data_a<ITERATOR>{ const_iterator_t(herd, std::forward<F>(it)) };
 		}
 
 		template <typename F>
 		static inline bidirectional_iterator_data_a<ITERATOR> ref__(herd_a<> const& herd, F&& it)
 		{
-			return bidirectional_iterator_data_a<ITERATOR>(iterator_t(herd, std::forward<F>(it)), true);
+			return bidirectional_iterator_data_a<ITERATOR>(const_iterator_t(herd, std::forward<F>(it)), true);
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym__("strange::herd::iterator");
+			static symbol_a<> TYPE = sym__("strange::herd::const_iterator");
 			return TYPE;
 		}
 
@@ -63,22 +63,17 @@ class herd_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<> get_() const
 		{
-			return operator*();
+			return *_it;
 		}
 
 		inline any_a<> set(any_a<> const& range) const
 		{
-			forward_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
-			{
-				throw dis__("strange::herd::iterator set passed empty range");
-			}
-			return set_(*it);
+			throw dis__("strange::herd::const_iterator set called");
 		}
 
 		inline any_a<> set_(any_a<> const& thing) const
 		{
-			return operator*() = thing;
+			throw dis__("strange::herd::const_iterator set called");
 		}
 
 		inline any_a<>* operator->() const
@@ -88,7 +83,8 @@ class herd_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<>& operator*() const
 		{
-			return const_cast<any_a<>&>(*_it);
+			_thing = *_it;
+			return _thing;
 		}
 
 		inline _ABSTRACTION_ increment(any_a<> const&)
@@ -102,15 +98,15 @@ class herd_t : public something_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline iterator_t& operator++()
+		inline const_iterator_t& operator++()
 		{
 			++_it;
 			return *this;
 		}
 
-		inline iterator_t operator++(int)
+		inline const_iterator_t operator++(int)
 		{
-			iterator_t result = *this;
+			const_iterator_t result = *this;
 			operator++();
 			return result;
 		}
@@ -127,15 +123,15 @@ class herd_t : public something_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline iterator_t& operator--()
+		inline const_iterator_t& operator--()
 		{
 			--_it;
 			return *this;
 		}
 
-		inline iterator_t operator--(int)
+		inline const_iterator_t operator--(int)
 		{
-			iterator_t result = *this;
+			const_iterator_t result = *this;
 			operator--();
 			return result;
 		}
@@ -159,12 +155,14 @@ class herd_t : public something_t<_ABSTRACTION_>
 	private:
 		ITERATOR _it;
 		herd_a<> _herd;
+		mutable any_a<> _thing;
 
 		template <typename F>
-		inline iterator_t(herd_a<> const& herd, F&& it)
+		inline const_iterator_t(herd_a<> const& herd, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _herd(herd, true)
+			, _thing{ nothing_t<>::val_() }
 		{}
 	};
 
@@ -255,32 +253,32 @@ public: ___COLLECTION___
 	// range
 	inline bidirectional_iterator_a<> cbegin() const
 	{
-		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cbegin());
+		return const_iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cbegin());
 	}
 
 	inline bidirectional_iterator_a<> begin() const
 	{
-		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cbegin());
+		return const_iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cbegin());
 	}
 
 	inline bidirectional_iterator_a<> begin()
 	{
-		return iterator_t<std_unordered_set_any::iterator>::val__(me_(), _set.begin());
+		return const_iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.begin());
 	}
 
 	inline bidirectional_iterator_a<> cend() const
 	{
-		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cend());
+		return const_iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cend());
 	}
 
 	inline bidirectional_iterator_a<> end() const
 	{
-		return iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cend());
+		return const_iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.cend());
 	}
 
 	inline bidirectional_iterator_a<> end()
 	{
-		return iterator_t<std_unordered_set_any::iterator>::val__(me_(), _set.end());
+		return const_iterator_t<std_unordered_set_any::const_iterator>::val__(me_(), _set.end());
 	}
 
 	// collection
