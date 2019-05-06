@@ -70,7 +70,7 @@ TEST(TestCaseName, ForLoop)
 		std::cout << "data: " << (data == flock.cend()) << std::endl;
 	}
 
-	number_a<> num = number_t<int64_t>::val__(123);
+	number_a<> num = number_int_64_t<>::val__(123);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
