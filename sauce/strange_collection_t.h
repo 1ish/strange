@@ -89,9 +89,9 @@ inline any_a<> size(any_a<> const&) const \
 { \
 	return size_(); \
 } \
-inline any_a<> size_() const \
+inline number_data_a<int64_t> size_() const \
 { \
-	return nothing_t<>::val_(); /* //TODO */ \
+	return number_int_64_t<>::val__(size__()); \
 } \
 inline any_a<> empty(any_a<> const&) const \
 { \

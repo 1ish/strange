@@ -21,7 +21,7 @@ class forward_iterator_data_a;
 template <typename _1_ = void>
 class misunderstanding_a;
 
-template <typename _1_ = void>
+template <typename number_data_a_int64 = number_data_a<int64_t>>
 class collection_a;
 
 template <typename _1_ = void>

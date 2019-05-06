@@ -10,7 +10,7 @@
 namespace strange
 {
 
-template <typename _1_>
+template <typename number_data_a_int64>
 class collection_a
 {
 public:
@@ -38,7 +38,7 @@ public:
 	inline void clear__();
 
 	inline any_a<> size(any_a<> const& _) const;
-	inline any_a<> size_() const;
+	inline number_data_a_int64 size_() const;
 	inline int64_t size__() const;
 
 	inline any_a<> empty(any_a<> const& _) const;
