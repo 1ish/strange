@@ -288,7 +288,7 @@ public: ___THING___
 
 	inline number_a<> operator/(number_a<> const& number) const
 	{
-		number_data_a<PRIMITIVE> num = number_u<PRIMITIVE>::from_number__(number);
+		PRIMITIVE num = number_u<PRIMITIVE>::from_number__(number);
 		if (num == 0)
 		{
 			throw dis__("strange::number_reference / division by zero");

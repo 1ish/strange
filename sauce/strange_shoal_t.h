@@ -153,7 +153,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			return _it;
 		}
 
-	private:
+	protected:
 		ITERATOR _it;
 		shoal_a<> _shoal;
 		mutable flock_a<> _pair;

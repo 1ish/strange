@@ -152,7 +152,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 			return _it;
 		}
 
-	private:
+	protected:
 		ITERATOR _it;
 		herd_a<> _herd;
 		mutable any_a<> _thing;
