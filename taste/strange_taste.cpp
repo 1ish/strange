@@ -70,7 +70,16 @@ TEST(TestCaseName, ForLoop)
 		std::cout << "data: " << (data == flock.cend()) << std::endl;
 	}
 
-	number_a<> num = number_int_64_t<>::val__(123);
+	number_a<> num = number_int_64_t<>::val__(-123);
+
+	try
+	{
+		auto bad = num.to_uint_64_();
+	}
+	catch (misunderstanding_a<> & m)
+	{
+		std::cout << "caught: " << m.to_string__() << std::endl;
+	}
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

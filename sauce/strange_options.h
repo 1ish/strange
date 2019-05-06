@@ -5,6 +5,7 @@
 
 #ifdef _DEBUG
 #define STRANGE_CHECK_STATIC_CASTS 1
+#define STRANGE_CHECK_UNSIGNED_CONVERSIONS 1
 #endif
 
 #endif

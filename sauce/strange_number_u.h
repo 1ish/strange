@@ -4,6 +4,9 @@
 namespace strange
 {
 
+template <typename F>
+inline misunderstanding_a<> dis__(F&& s);
+
 template <typename PRIMITIVE>
 class number_u
 {
@@ -55,6 +58,12 @@ public:
 
 	static inline uint64_t to_uint_64__(int8_t other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		if (other < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+#endif
 		return uint64_t(other);
 	}
 
@@ -110,6 +119,12 @@ public:
 
 	static inline uint8_t from_int_64__(int64_t other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		if (other < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+#endif
 		return uint8_t(other);
 	}
 
@@ -120,7 +135,16 @@ public:
 
 	static inline uint8_t from_float_64__(double other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		auto r = std::llround(other);
+		if (r < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+		return uint8_t(r);
+#else
 		return uint8_t(std::llround(other));
+#endif
 	}
 
 	static inline int64_t to_int_64__(uint8_t other)
@@ -205,6 +229,12 @@ public:
 
 	static inline uint64_t to_uint_64__(int16_t other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		if (other < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+#endif
 		return uint64_t(other);
 	}
 
@@ -260,6 +290,12 @@ public:
 
 	static inline uint16_t from_int_64__(int64_t other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		if (other < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+#endif
 		return uint16_t(other);
 	}
 
@@ -270,7 +306,16 @@ public:
 
 	static inline uint16_t from_float_64__(double other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		auto r = std::llround(other);
+		if (r < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+		return uint16_t(r);
+#else
 		return uint16_t(std::llround(other));
+#endif
 	}
 
 	static inline int64_t to_int_64__(uint16_t other)
@@ -355,6 +400,12 @@ public:
 
 	static inline uint64_t to_uint_64__(int32_t other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		if (other < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+#endif
 		return uint64_t(other);
 	}
 
@@ -410,6 +461,12 @@ public:
 
 	static inline uint32_t from_int_64__(int64_t other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		if (other < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+#endif
 		return uint32_t(other);
 	}
 
@@ -420,7 +477,16 @@ public:
 
 	static inline uint32_t from_float_64__(double other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		auto r = std::llround(other);
+		if (r < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+		return uint32_t(r);
+#else
 		return uint32_t(std::llround(other));
+#endif
 	}
 
 	static inline int64_t to_int_64__(uint32_t other)
@@ -505,6 +571,12 @@ public:
 
 	static inline uint64_t to_uint_64__(int64_t other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		if (other < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+#endif
 		return uint64_t(other);
 	}
 
@@ -560,6 +632,12 @@ public:
 
 	static inline uint64_t from_int_64__(int64_t other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		if (other < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+#endif
 		return uint64_t(other);
 	}
 
@@ -570,7 +648,16 @@ public:
 
 	static inline uint64_t from_float_64__(double other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		auto r = std::llround(other);
+		if (r < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+		return uint64_t(r);
+#else
 		return uint64_t(std::llround(other));
+#endif
 	}
 
 	static inline int64_t to_int_64__(uint64_t other)
@@ -655,7 +742,16 @@ public:
 
 	static inline uint64_t to_uint_64__(float other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		auto r = std::llround(other);
+		if (r < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+		return uint64_t(r);
+#else
 		return uint64_t(std::llround(other));
+#endif
 	}
 
 	static inline double to_float_64__(float other)
@@ -730,7 +826,16 @@ public:
 
 	static inline uint64_t to_uint_64__(double other)
 	{
+#ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
+		auto r = std::llround(other);
+		if (r < 0)
+		{
+			throw dis__("conversion of negative number to unsigned integer");
+		}
+		return uint64_t(r);
+#else
 		return uint64_t(std::llround(other));
+#endif
 	}
 
 	static inline double to_float_64__(double other)
