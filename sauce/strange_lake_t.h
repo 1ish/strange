@@ -956,6 +956,36 @@ protected:
 	{}
 };
 
+template <typename _ABSTRACTION_ = lake_data_a<int8_t>>
+using lake_int_8_t = lake_t<int8_t, _ABSTRACTION_>;
+
+template <typename _ABSTRACTION_ = lake_data_a<uint8_t>>
+using lake_uint_8_t = lake_t<uint8_t, _ABSTRACTION_>;
+
+template <typename _ABSTRACTION_ = lake_data_a<int16_t>>
+using lake_int_16_t = lake_t<int16_t, _ABSTRACTION_>;
+
+template <typename _ABSTRACTION_ = lake_data_a<uint16_t>>
+using lake_uint_16_t = lake_t<uint16_t, _ABSTRACTION_>;
+
+template <typename _ABSTRACTION_ = lake_data_a<int32_t>>
+using lake_int_32_t = lake_t<int32_t, _ABSTRACTION_>;
+
+template <typename _ABSTRACTION_ = lake_data_a<uint32_t>>
+using lake_uint_32_t = lake_t<uint32_t, _ABSTRACTION_>;
+
+template <typename _ABSTRACTION_ = lake_data_a<int64_t>>
+using lake_int_64_t = lake_t<int64_t, _ABSTRACTION_>;
+
+template <typename _ABSTRACTION_ = lake_data_a<uint64_t>>
+using lake_uint_64_t = lake_t<uint64_t, _ABSTRACTION_>;
+
+template <typename _ABSTRACTION_ = lake_data_a<float>>
+using lake_float_32_t = lake_t<float, _ABSTRACTION_>;
+
+template <typename _ABSTRACTION_ = lake_data_a<double>>
+using lake_float_64_t = lake_t<double, _ABSTRACTION_>;
+
 } // namespace strange
 
 #endif

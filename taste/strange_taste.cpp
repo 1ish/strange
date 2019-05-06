@@ -81,7 +81,7 @@ TEST(TestCaseName, ForLoop)
 		std::cout << "caught: " << m.to_string__() << std::endl;
 	}
 
-	lake_a<> lake = lake_t<double>::val_();
+	lake_a<> lake = lake_float_64_t<>::val_();
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
