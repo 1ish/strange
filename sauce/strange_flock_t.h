@@ -445,8 +445,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<> const& operator*() const
 		{
-			_thing = *_it;
-			return _thing;
+			return *_it;
 		}
 
 		inline _ABSTRACTION_ increment(any_a<> const&)
@@ -728,14 +727,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 	protected:
 		ITERATOR _it;
 		flock_a<> _flock;
-		mutable any_a<> _thing;
 
 		template <typename F>
 		inline const_iterator_t(flock_a<> const& flock, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _flock(flock, true)
-			, _thing{ nothing_t<>::val_() }
 		{}
 	};
 
