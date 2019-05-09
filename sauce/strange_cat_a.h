@@ -289,7 +289,7 @@ namespace strange {
 
     
 
-    	inline ___finale_handle_base___ const& read() const
+    	inline ___finale_handle_base___ const& read() const noexcept
 
     	{
 
@@ -299,7 +299,7 @@ namespace strange {
 
     
 
-    	inline ___finale_handle_base___& write()
+    	inline ___finale_handle_base___& write() noexcept
 
     	{
 
@@ -321,13 +321,13 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(cat_a<> const& value);
+    	friend inline bool check_(cat_a<> const& value) noexcept;
 
     
 
     public:
 
-    	static inline char const* ___abstraction_name___()
+    	static inline char const* ___abstraction_name___() noexcept
 
     	{
 
@@ -337,7 +337,7 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle) noexcept
 
     	{
 
@@ -351,7 +351,7 @@ namespace strange {
 
     
 
-    	explicit inline cat_a(bool reference)
+    	explicit inline cat_a(bool reference) noexcept
 
     		: ___derived___{ reference }
 
@@ -359,7 +359,7 @@ namespace strange {
 
     
 
-    	inline cat_a(cat_a const& other, bool reference)
+    	inline cat_a(cat_a const& other, bool reference) noexcept
 
     		: ___derived___(other, reference)
 
@@ -367,13 +367,15 @@ namespace strange {
 
     
 
-    	inline cat_a(cat_a&& other, bool reference)
+    	inline cat_a(cat_a&& other, bool reference) noexcept
 
     		: ___derived___(std::move(other), reference)
 
     	{}
 
     
+
+    #ifdef STRANGE_CHECK_STATIC_CASTS
 
     	template <typename ___TTT___>
 
@@ -383,8 +385,6 @@ namespace strange {
 
     	{
 
-    #ifdef STRANGE_CHECK_STATIC_CASTS
-
     		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
 
     		{
@@ -393,19 +393,29 @@ namespace strange {
 
     		}
 
+    	}
+
     #else
+
+    	template <typename ___TTT___>
+
+    	explicit inline cat_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
+
+    		: ___derived___(handle, reference)
+
+    	{
 
     		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 
-    #endif
-
     	}
+
+    #endif
 
     
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline cat_a(___TTT___ value, bool reference = false)
+    	explicit inline cat_a(___TTT___ value, bool reference = false) noexcept
 
     		: ___derived___(std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 
@@ -415,13 +425,13 @@ namespace strange {
 
     
 
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+
     	template <typename ___TTT___>
 
     	inline cat_a& operator=(std::shared_ptr<___TTT___> const& handle)
 
     	{
-
-    #ifdef STRANGE_CHECK_STATIC_CASTS
 
     		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
 
@@ -431,11 +441,23 @@ namespace strange {
 
     		}
 
+    		handle_ = handle;
+
+    		handle_->___weak___(handle_);
+
+    		return *this;
+
+    	}
+
     #else
 
-    		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+    	template <typename ___TTT___>
 
-    #endif
+    	inline cat_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+
+    	{
+
+    		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 
     		handle_ = handle;
 
@@ -445,11 +467,13 @@ namespace strange {
 
     	}
 
+    #endif
+
     
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_a, std::decay_t<___TTT___>>::value>>
 
-    	inline cat_a& operator=(___TTT___ value)
+    	inline cat_a& operator=(___TTT___ value) noexcept
 
     	{
 
@@ -469,7 +493,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(cat_a<> const& value)
+    inline bool check_(cat_a<> const& value) noexcept
 
     {
 

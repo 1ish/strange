@@ -306,7 +306,7 @@ namespace strange {
 
     
 
-    	inline ___derived_handle_base___ const& read() const
+    	inline ___derived_handle_base___ const& read() const noexcept
 
     	{
 
@@ -316,7 +316,7 @@ namespace strange {
 
     
 
-    	inline ___derived_handle_base___& write()
+    	inline ___derived_handle_base___& write() noexcept
 
     	{
 
@@ -338,13 +338,13 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(forward_iterator_a<> const& value);
+    	friend inline bool check_(forward_iterator_a<> const& value) noexcept;
 
     
 
     public:
 
-    	static inline char const* ___abstraction_name___()
+    	static inline char const* ___abstraction_name___() noexcept
 
     	{
 
@@ -354,7 +354,7 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(std::shared_ptr<___root_handle_base___>const & handle)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___>const & handle) noexcept
 
     	{
 
@@ -368,7 +368,7 @@ namespace strange {
 
     
 
-    	explicit inline forward_iterator_a(bool reference)
+    	explicit inline forward_iterator_a(bool reference) noexcept
 
     		: ___root___{ reference }
 
@@ -376,7 +376,7 @@ namespace strange {
 
     
 
-    	inline forward_iterator_a(forward_iterator_a const& other, bool reference)
+    	inline forward_iterator_a(forward_iterator_a const& other, bool reference) noexcept
 
     		: ___root___(other, reference)
 
@@ -384,13 +384,15 @@ namespace strange {
 
     
 
-    	inline forward_iterator_a(forward_iterator_a&& other, bool reference)
+    	inline forward_iterator_a(forward_iterator_a&& other, bool reference) noexcept
 
     		: ___root___(std::move(other), reference)
 
     	{}
 
     
+
+    #ifdef STRANGE_CHECK_STATIC_CASTS
 
     	template <typename ___TTT___>
 
@@ -400,8 +402,6 @@ namespace strange {
 
     	{
 
-    #ifdef STRANGE_CHECK_STATIC_CASTS
-
     		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
 
     		{
@@ -410,19 +410,29 @@ namespace strange {
 
     		}
 
+    	}
+
     #else
+
+    	template <typename ___TTT___>
+
+    	explicit inline forward_iterator_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
+
+    		: ___root___(handle, reference)
+
+    	{
 
     		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
 
-    #endif
-
     	}
+
+    #endif
 
     
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<forward_iterator_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline forward_iterator_a(___TTT___ value, bool reference = false)
+    	explicit inline forward_iterator_a(___TTT___ value, bool reference = false) noexcept
 
     		: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 
@@ -432,13 +442,13 @@ namespace strange {
 
     
 
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+
     	template <typename ___TTT___>
 
     	inline forward_iterator_a& operator=(std::shared_ptr<___TTT___> const& handle)
 
     	{
-
-    #ifdef STRANGE_CHECK_STATIC_CASTS
 
     		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
 
@@ -448,11 +458,23 @@ namespace strange {
 
     		}
 
+    		handle_ = handle;
+
+    		handle_->___weak___(handle_);
+
+    		return *this;
+
+    	}
+
     #else
 
-    		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+    	template <typename ___TTT___>
 
-    #endif
+    	inline forward_iterator_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+
+    	{
+
+    		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
 
     		handle_ = handle;
 
@@ -462,11 +484,13 @@ namespace strange {
 
     	}
 
+    #endif
+
     
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<forward_iterator_a, std::decay_t<___TTT___>>::value>>
 
-    	inline forward_iterator_a& operator=(___TTT___ value)
+    	inline forward_iterator_a& operator=(___TTT___ value) noexcept
 
     	{
 
@@ -486,7 +510,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(forward_iterator_a<> const& value)
+    inline bool check_(forward_iterator_a<> const& value) noexcept
 
     {
 

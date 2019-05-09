@@ -221,12 +221,12 @@ private:
 		{}
 	};
 
-	inline ___root_handle_base___ const& read() const
+	inline ___root_handle_base___ const& read() const noexcept
 	{
 		return *handle_;
 	}
 
-	inline ___root_handle_base___& write()
+	inline ___root_handle_base___& write() noexcept
 	{
 		if (!___reference___ && !handle_.unique())
 		{
@@ -237,70 +237,75 @@ private:
 	}
 
 	template <typename ___TTT___>
-	friend inline bool check_(%struct_name%<> const& value);
+	friend inline bool check_(%struct_name%<> const& value) noexcept;
 
+#ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
 	friend inline ___TTT___ cast_(%struct_name%<> const& value, bool reference = false);
+#else
+	template <typename ___TTT___>
+	friend inline ___TTT___ cast_(%struct_name%<> const& value, bool reference = false) noexcept;
+#endif
 
 public:
 	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
 
-	static inline char const* ___abstraction_name___()
+	static inline char const* ___abstraction_name___() noexcept
 	{
 		return "%struct_name%";
 	}
 
-	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const&)
+	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const&) noexcept
 	{
 		return true;
 	}
 
-	inline %struct_name%()
+	inline %struct_name%() noexcept
 		: handle_{}
 		, ___reference___{ false }
 	{}
 
-	explicit inline %struct_name%(bool reference)
+	explicit inline %struct_name%(bool reference) noexcept
 		: handle_{}
 		, ___reference___{ reference }
 	{}
 
-	inline %struct_name%(%struct_name% const& other)
+	inline %struct_name%(%struct_name% const& other) noexcept
 		: handle_{ other.handle_ }
 		, ___reference___{ false }
 	{
 		handle_->___weak___(handle_);
 	}
 
-	inline %struct_name%(%struct_name% const& other, bool reference)
+	inline %struct_name%(%struct_name% const& other, bool reference) noexcept
 		: handle_{ other.handle_ }
 		, ___reference___{ reference }
 	{
 		handle_->___weak___(handle_);
 	}
 
-	inline %struct_name%(%struct_name%&& other)
+	inline %struct_name%(%struct_name%&& other) noexcept
 		: handle_{ std::move(other.handle_) }
 		, ___reference___{ false }
 	{
 		handle_->___weak___(handle_);
 	}
 
-	inline %struct_name%(%struct_name%&& other, bool reference)
+	inline %struct_name%(%struct_name%&& other, bool reference) noexcept
 		: handle_{ std::move(other.handle_) }
 		, ___reference___{ reference }
 	{
 		handle_->___weak___(handle_);
 	}
 
-	inline %struct_name%& operator=(%struct_name% const& other)
+	inline %struct_name%& operator=(%struct_name% const& other) noexcept
 	{
 		handle_ = other.handle_;
 		handle_->___weak___(handle_);
 		return *this;
 	}
 
-	inline %struct_name%& operator=(%struct_name%&& other)
+	inline %struct_name%& operator=(%struct_name%&& other) noexcept
 	{
 		handle_ = std::move(other.handle_);
 		handle_->___weak___(handle_);
@@ -310,7 +315,7 @@ public:
 	virtual ~%struct_name%() = default;
 
 	template <typename ___TTT___>
-	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false)
+	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
 		: handle_{ handle }
 		, ___reference___{ reference }
 	{
@@ -318,7 +323,7 @@ public:
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
-	explicit inline %struct_name%(___TTT___ value, bool reference = false)
+	explicit inline %struct_name%(___TTT___ value, bool reference = false) noexcept
 		: handle_{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 		, ___reference___{ reference }
 	{
@@ -326,7 +331,7 @@ public:
 	}
 
 	template <typename ___TTT___>
-	inline %struct_name%& operator=(std::shared_ptr<___TTT___> const& handle)
+	inline %struct_name%& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		handle_ = handle;
 		handle_->___weak___(handle_);
@@ -334,7 +339,7 @@ public:
 	}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
-	inline %struct_name%& operator=(___TTT___ value)
+	inline %struct_name%& operator=(___TTT___ value) noexcept
 	{
 		%struct_name% temp{ std::move(value) };
 		std::swap(temp.handle_, handle_);
@@ -344,19 +349,27 @@ public:
 };
 
 template <typename ___TTT___>
-inline bool check_(%struct_name%<> const& value)
+inline bool check_(%struct_name%<> const& value) noexcept
 {
 	return ___TTT___::___check___(value.handle_);
 }
 
 template <typename ___TTT___, typename ___VVV___>
-inline bool check_(___VVV___ const&)
+inline bool check_(___VVV___ const&) noexcept
 {
 	return false;
 }
 
+#ifdef STRANGE_CHECK_STATIC_CASTS
 template <typename ___TTT___>
 inline ___TTT___ cast_(%struct_name%<> const& value, bool reference)
 {
 	return ___TTT___(value.handle_, reference);
 }
+#else
+template <typename ___TTT___>
+inline ___TTT___ cast_(%struct_name%<> const& value, bool reference) noexcept
+{
+	return ___TTT___(value.handle_, reference);
+}
+#endif

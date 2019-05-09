@@ -128,12 +128,12 @@ private:
 		{}
 	};
 
-	inline ___derived_handle_base___ const& read() const
+	inline ___derived_handle_base___ const& read() const noexcept
 	{
 		return *std::static_pointer_cast<___derived_handle_base___ const>(handle_);
 	}
 
-	inline ___derived_handle_base___& write()
+	inline ___derived_handle_base___& write() noexcept
 	{
 		if (!___reference___ && !handle_.unique())
 		{
@@ -144,71 +144,83 @@ private:
 	}
 
 	template <typename ___TTT___>
-	friend inline bool check_(%struct_name%<> const& value);
+	friend inline bool check_(%struct_name%<> const& value) noexcept;
 
 public:
-	static inline char const* ___abstraction_name___()
+	static inline char const* ___abstraction_name___() noexcept
 	{
 		return "%struct_name%";
 	}
 
-	static inline bool ___check___(std::shared_ptr<___root_handle_base___>const & handle)
+	static inline bool ___check___(std::shared_ptr<___root_handle_base___>const & handle) noexcept
 	{
 		return bool(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
 	}
 
 	inline %struct_name%() = default;
 
-	explicit inline %struct_name%(bool reference)
+	explicit inline %struct_name%(bool reference) noexcept
 		: ___root___{ reference }
 	{}
 
-	inline %struct_name%(%struct_name% const& other, bool reference)
+	inline %struct_name%(%struct_name% const& other, bool reference) noexcept
 		: ___root___(other, reference)
 	{}
 
-	inline %struct_name%(%struct_name%&& other, bool reference)
+	inline %struct_name%(%struct_name%&& other, bool reference) noexcept
 		: ___root___(std::move(other), reference)
 	{}
 
+#ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
 	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 		: ___root___(handle, reference)
 	{
-#ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
 		{
 			throw dis__("%struct_name% constructor failed to cast from base to derived");
 		}
-#else
-		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
-#endif
 	}
+#else
+	template <typename ___TTT___>
+	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
+		: ___root___(handle, reference)
+	{
+		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+	}
+#endif
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
-	explicit inline %struct_name%(___TTT___ value, bool reference = false)
+	explicit inline %struct_name%(___TTT___ value, bool reference = false) noexcept
 		: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 			reference)
 	{}
 
+#ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
 	inline %struct_name%& operator=(std::shared_ptr<___TTT___> const& handle)
 	{
-#ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
 		{
 			throw dis__("%struct_name% assignment failed to cast from base to derived");
 		}
-#else
-		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
-#endif
 		handle_ = handle;
 		handle_->___weak___(handle_);
 		return *this;
 	}
+#else
+	template <typename ___TTT___>
+	inline %struct_name%& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+	{
+		assert(std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+		handle_ = handle;
+		handle_->___weak___(handle_);
+		return *this;
+	}
+#endif
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
-	inline %struct_name%& operator=(___TTT___ value)
+	inline %struct_name%& operator=(___TTT___ value) noexcept
 	{
 		%struct_name% temp{ std::move(value) };
 		std::swap(temp.handle_, handle_);
@@ -218,7 +230,7 @@ public:
 };
 
 template <typename ___TTT___>
-inline bool check_(%struct_name%<> const& value)
+inline bool check_(%struct_name%<> const& value) noexcept
 {
 	return ___TTT___::___check___(value.handle_);
 }

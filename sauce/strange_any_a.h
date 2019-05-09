@@ -691,7 +691,7 @@ namespace strange {
 
     
 
-    	inline ___root_handle_base___ const& read() const
+    	inline ___root_handle_base___ const& read() const noexcept
 
     	{
 
@@ -701,7 +701,7 @@ namespace strange {
 
     
 
-    	inline ___root_handle_base___& write()
+    	inline ___root_handle_base___& write() noexcept
 
     	{
 
@@ -723,13 +723,23 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(any_a<> const& value);
+    	friend inline bool check_(any_a<> const& value) noexcept;
 
     
+
+    #ifdef STRANGE_CHECK_STATIC_CASTS
 
     	template <typename ___TTT___>
 
     	friend inline ___TTT___ cast_(any_a<> const& value, bool reference = false);
+
+    #else
+
+    	template <typename ___TTT___>
+
+    	friend inline ___TTT___ cast_(any_a<> const& value, bool reference = false) noexcept;
+
+    #endif
 
     
 
@@ -739,7 +749,7 @@ namespace strange {
 
     
 
-    	static inline char const* ___abstraction_name___()
+    	static inline char const* ___abstraction_name___() noexcept
 
     	{
 
@@ -749,7 +759,7 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const&)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const&) noexcept
 
     	{
 
@@ -759,7 +769,7 @@ namespace strange {
 
     
 
-    	inline any_a()
+    	inline any_a() noexcept
 
     		: handle_{}
 
@@ -769,7 +779,7 @@ namespace strange {
 
     
 
-    	explicit inline any_a(bool reference)
+    	explicit inline any_a(bool reference) noexcept
 
     		: handle_{}
 
@@ -779,7 +789,7 @@ namespace strange {
 
     
 
-    	inline any_a(any_a const& other)
+    	inline any_a(any_a const& other) noexcept
 
     		: handle_{ other.handle_ }
 
@@ -793,7 +803,7 @@ namespace strange {
 
     
 
-    	inline any_a(any_a const& other, bool reference)
+    	inline any_a(any_a const& other, bool reference) noexcept
 
     		: handle_{ other.handle_ }
 
@@ -807,7 +817,7 @@ namespace strange {
 
     
 
-    	inline any_a(any_a&& other)
+    	inline any_a(any_a&& other) noexcept
 
     		: handle_{ std::move(other.handle_) }
 
@@ -821,7 +831,7 @@ namespace strange {
 
     
 
-    	inline any_a(any_a&& other, bool reference)
+    	inline any_a(any_a&& other, bool reference) noexcept
 
     		: handle_{ std::move(other.handle_) }
 
@@ -835,7 +845,7 @@ namespace strange {
 
     
 
-    	inline any_a& operator=(any_a const& other)
+    	inline any_a& operator=(any_a const& other) noexcept
 
     	{
 
@@ -849,7 +859,7 @@ namespace strange {
 
     
 
-    	inline any_a& operator=(any_a&& other)
+    	inline any_a& operator=(any_a&& other) noexcept
 
     	{
 
@@ -869,7 +879,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline any_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
+    	explicit inline any_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
 
     		: handle_{ handle }
 
@@ -885,7 +895,7 @@ namespace strange {
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline any_a(___TTT___ value, bool reference = false)
+    	explicit inline any_a(___TTT___ value, bool reference = false) noexcept
 
     		: handle_{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 
@@ -901,7 +911,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline any_a& operator=(std::shared_ptr<___TTT___> const& handle)
+    	inline any_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 
     	{
 
@@ -917,7 +927,7 @@ namespace strange {
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
 
-    	inline any_a& operator=(___TTT___ value)
+    	inline any_a& operator=(___TTT___ value) noexcept
 
     	{
 
@@ -937,7 +947,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(any_a<> const& value)
+    inline bool check_(any_a<> const& value) noexcept
 
     {
 
@@ -949,7 +959,7 @@ namespace strange {
 
     template <typename ___TTT___, typename ___VVV___>
 
-    inline bool check_(___VVV___ const&)
+    inline bool check_(___VVV___ const&) noexcept
 
     {
 
@@ -958,6 +968,8 @@ namespace strange {
     }
 
     
+
+    #ifdef STRANGE_CHECK_STATIC_CASTS
 
     template <typename ___TTT___>
 
@@ -969,7 +981,19 @@ namespace strange {
 
     }
 
-    
+    #else
+
+    template <typename ___TTT___>
+
+    inline ___TTT___ cast_(any_a<> const& value, bool reference) noexcept
+
+    {
+
+    	return ___TTT___(value.handle_, reference);
+
+    }
+
+    #endif
 
 }
 #endif

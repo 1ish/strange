@@ -1,6 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_NUMBER_DATA_A_H
 #define COM_ONEISH_STRANGE_NUMBER_DATA_A_H
 
+// # include "any_forward.hpp"
 // # include "number_forward.hpp"
 #include <algorithm>
 #include <cassert>
@@ -233,7 +234,7 @@ namespace strange {
 
     
 
-    	inline ___finale_handle_base___ const& read() const
+    	inline ___finale_handle_base___ const& read() const noexcept
 
     	{
 
@@ -243,7 +244,7 @@ namespace strange {
 
     
 
-    	inline ___finale_handle_base___& write()
+    	inline ___finale_handle_base___& write() noexcept
 
     	{
 
@@ -265,13 +266,13 @@ namespace strange {
 
     	template <typename ___TTT___, typename ___1___>
 
-    	friend inline bool check_(number_data_a<___1___> const& value);
+    	friend inline bool check_(number_data_a<___1___> const& value) noexcept;
 
     
 
     public:
 
-    	static inline char const* ___abstraction_name___()
+    	static inline char const* ___abstraction_name___() noexcept
 
     	{
 
@@ -281,7 +282,7 @@ namespace strange {
 
     
 
-    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle)
+    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle) noexcept
 
     	{
 
@@ -295,7 +296,7 @@ namespace strange {
 
     
 
-    	explicit inline number_data_a(bool reference)
+    	explicit inline number_data_a(bool reference) noexcept
 
     		: ___derived___{ reference }
 
@@ -303,7 +304,7 @@ namespace strange {
 
     
 
-    	inline number_data_a(number_data_a const& other, bool reference)
+    	inline number_data_a(number_data_a const& other, bool reference) noexcept
 
     		: ___derived___(other, reference)
 
@@ -311,13 +312,15 @@ namespace strange {
 
     
 
-    	inline number_data_a(number_data_a&& other, bool reference)
+    	inline number_data_a(number_data_a&& other, bool reference) noexcept
 
     		: ___derived___(std::move(other), reference)
 
     	{}
 
     
+
+    #ifdef STRANGE_CHECK_STATIC_CASTS
 
     	template <typename ___TTT___>
 
@@ -327,8 +330,6 @@ namespace strange {
 
     	{
 
-    #ifdef STRANGE_CHECK_STATIC_CASTS
-
     		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
 
     		{
@@ -337,19 +338,29 @@ namespace strange {
 
     		}
 
+    	}
+
     #else
+
+    	template <typename ___TTT___>
+
+    	explicit inline number_data_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
+
+    		: ___derived___(handle, reference)
+
+    	{
 
     		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 
-    #endif
-
     	}
+
+    #endif
 
     
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<number_data_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline number_data_a(___TTT___ value, bool reference = false)
+    	explicit inline number_data_a(___TTT___ value, bool reference = false) noexcept
 
     		: ___derived___(std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 
@@ -359,13 +370,13 @@ namespace strange {
 
     
 
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+
     	template <typename ___TTT___>
 
     	inline number_data_a& operator=(std::shared_ptr<___TTT___> const& handle)
 
     	{
-
-    #ifdef STRANGE_CHECK_STATIC_CASTS
 
     		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
 
@@ -375,11 +386,23 @@ namespace strange {
 
     		}
 
+    		handle_ = handle;
+
+    		handle_->___weak___(handle_);
+
+    		return *this;
+
+    	}
+
     #else
 
-    		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+    	template <typename ___TTT___>
 
-    #endif
+    	inline number_data_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+
+    	{
+
+    		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 
     		handle_ = handle;
 
@@ -389,11 +412,13 @@ namespace strange {
 
     	}
 
+    #endif
+
     
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<number_data_a, std::decay_t<___TTT___>>::value>>
 
-    	inline number_data_a& operator=(___TTT___ value)
+    	inline number_data_a& operator=(___TTT___ value) noexcept
 
     	{
 
@@ -413,7 +438,7 @@ namespace strange {
 
     template <typename ___TTT___, typename ___1___>
 
-    inline bool check_(number_data_a<___1___> const& value)
+    inline bool check_(number_data_a<___1___> const& value) noexcept
 
     {
 
