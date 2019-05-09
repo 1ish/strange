@@ -88,13 +88,13 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<>* operator->() const
 		{
-			return &operator*();
+			_number = number_reference_t<PRIMITIVE>::val__(*_it);
+			return &_number;
 		}
 
 		inline any_a<>& operator*() const
 		{
-			_number = number_reference_t<PRIMITIVE>::val__(*_it);
-			return _number;
+			throw dis__("strange::lake::iterator cannot be dereferenced directly");
 		}
 
 		inline _ABSTRACTION_ increment(any_a<> const&)
