@@ -7,7 +7,11 @@ namespace strange
 {
 
 template <typename symbol_a = void, typename cat_a = void, typename forward_iterator_a = void, typename number_data_a_uint64 = void>
-class any_a;
+class any_a
+{
+public:
+	class hash_f;
+};
 
 } // namespace strange
 

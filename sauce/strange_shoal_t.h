@@ -7,47 +7,47 @@ namespace strange
 template <typename _ABSTRACTION_ = shoal_a<>>
 class shoal_t : public something_t<_ABSTRACTION_>
 {
-	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_const_iterator_data_a<ITERATOR>>
-	class const_iterator_t : public something_t<_ABSTRACTION_>
+	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_iterator_data_a<ITERATOR>>
+	class iterator_t : public something_t<_ABSTRACTION_>
 	{
 	public: ___THING___
 		// construction
 		template <typename F>
-		static inline bidirectional_const_iterator_data_a<ITERATOR> val__(shoal_a<> const& shoal, F&& it)
+		static inline bidirectional_iterator_data_a<ITERATOR> val__(shoal_a<> const& shoal, F&& it)
 		{
-			return bidirectional_const_iterator_data_a<ITERATOR>{ const_iterator_t(shoal, std::forward<F>(it)) };
+			return bidirectional_iterator_data_a<ITERATOR>{ iterator_t(shoal, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline bidirectional_const_iterator_data_a<ITERATOR> ref__(shoal_a<> const& shoal, F&& it)
+		static inline bidirectional_iterator_data_a<ITERATOR> ref__(shoal_a<> const& shoal, F&& it)
 		{
-			return bidirectional_const_iterator_data_a<ITERATOR>(const_iterator_t(shoal, std::forward<F>(it)), true);
+			return bidirectional_iterator_data_a<ITERATOR>(iterator_t(shoal, std::forward<F>(it)), true);
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym__("strange::shoal::const_iterator");
+			static symbol_a<> TYPE = sym__("strange::shoal::iterator");
 			return TYPE;
 		}
 
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
-			if (!check_<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
+			if (!check_<bidirectional_iterator_data_a<ITERATOR>>(thing))
 			{
 				return false;
 			}
-			return _it == cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract__();
+			return _it == cast_<bidirectional_iterator_data_a<ITERATOR>>(thing).extract__();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
 		{
-			if (!check_<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
+			if (!check_<bidirectional_iterator_data_a<ITERATOR>>(thing))
 			{
 				return true;
 			}
-			return _it != cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract__();
+			return _it != cast_<bidirectional_iterator_data_a<ITERATOR>>(thing).extract__();
 		}
 
 		inline std::size_t hash__() const
@@ -68,16 +68,33 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			return _pair;
 		}
 
-		inline any_a<> const* operator->() const
+		inline any_a<> set(any_a<> const& range) const
 		{
-			return &operator*();
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				throw dis__("strange::shoal::iterator set passed empty range");
+			}
+			return set_(*it);
 		}
 
-		inline any_a<> const& operator*() const
+		inline any_a<> set_(any_a<> const& thing) const
 		{
-			_pair.update__(0, _it->first);
-			_pair.update__(1, _it->second);
-			return _pair;
+			if (!check_<flock_a<>>(thing))
+			{
+				throw dis__("strange::shoal::iterator set passed non-flock");
+			}
+			return _it->second = cast_<flock_a<>>(thing).at__(1);
+		}
+
+		inline any_a<>* operator->() const
+		{
+			throw dis__("strange::shoal::iterator cannot be dereferenced");
+		}
+
+		inline any_a<>& operator*() const
+		{
+			throw dis__("strange::shoal::iterator cannot be dereferenced");
 		}
 
 		inline _ABSTRACTION_ increment(any_a<> const&)
@@ -91,15 +108,15 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline const_iterator_t& operator++()
+		inline iterator_t& operator++()
 		{
 			++_it;
 			return *this;
 		}
 
-		inline const_iterator_t operator++(int)
+		inline iterator_t operator++(int)
 		{
-			const_iterator_t result = *this;
+			iterator_t result = *this;
 			operator++();
 			return result;
 		}
@@ -116,15 +133,15 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline const_iterator_t& operator--()
+		inline iterator_t& operator--()
 		{
 			--_it;
 			return *this;
 		}
 
-		inline const_iterator_t operator--(int)
+		inline iterator_t operator--(int)
 		{
-			const_iterator_t result = *this;
+			iterator_t result = *this;
 			operator--();
 			return result;
 		}
@@ -144,6 +161,158 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		{
 			return _it;
 		}
+
+	protected:
+		ITERATOR _it;
+		shoal_a<> _shoal;
+		mutable flock_a<> _pair;
+
+		template <typename F>
+		inline iterator_t(shoal_a<> const& shoal, F&& it)
+			: something_t{}
+			, _it{ std::forward<F>(it) }
+			, _shoal(shoal, true)
+			, _pair{ flock_t<>::val_() }
+		{}
+	};
+
+	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_const_iterator_data_a<ITERATOR>>
+	class const_iterator_t : public something_t<_ABSTRACTION_>
+	{
+	public: ___THING___
+		// construction
+		template <typename F>
+			static inline bidirectional_const_iterator_data_a<ITERATOR> val__(shoal_a<> const& shoal, F&& it)
+			{
+				return bidirectional_const_iterator_data_a<ITERATOR>{ const_iterator_t(shoal, std::forward<F>(it)) };
+			}
+
+			template <typename F>
+			static inline bidirectional_const_iterator_data_a<ITERATOR> ref__(shoal_a<> const& shoal, F&& it)
+			{
+				return bidirectional_const_iterator_data_a<ITERATOR>(const_iterator_t(shoal, std::forward<F>(it)), true);
+			}
+
+			// reflection
+			static inline symbol_a<> type_()
+			{
+				static symbol_a<> TYPE = sym__("strange::shoal::const_iterator");
+				return TYPE;
+			}
+
+			// comparison
+			inline bool operator==(any_a<> const& thing) const
+			{
+				if (!check_<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
+				{
+					return false;
+				}
+				return _it == cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract__();
+			}
+
+			inline bool operator!=(any_a<> const& thing) const
+			{
+				if (!check_<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
+				{
+					return true;
+				}
+				return _it != cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract__();
+			}
+
+			inline std::size_t hash__() const
+			{
+				return std::hash<void const*>{}(&*_it);
+			}
+
+			// forward iterator
+			inline any_a<> get(any_a<> const&) const
+			{
+				return get_();
+			}
+
+			inline any_a<> get_() const
+			{
+				_pair.update__(0, _it->first);
+				_pair.update__(1, _it->second);
+				return _pair;
+			}
+
+			inline any_a<> const* operator->() const
+			{
+				return &operator*();
+			}
+
+			inline any_a<> const& operator*() const
+			{
+				_pair.update__(0, _it->first);
+				_pair.update__(1, _it->second);
+				return _pair;
+			}
+
+			inline _ABSTRACTION_ increment(any_a<> const&)
+			{
+				return increment_();
+			}
+
+			inline _ABSTRACTION_ increment_()
+			{
+				operator++();
+				return me_();
+			}
+
+			inline const_iterator_t& operator++()
+			{
+				++_it;
+				return *this;
+			}
+
+			inline const_iterator_t operator++(int)
+			{
+				const_iterator_t result = *this;
+				operator++();
+				return result;
+			}
+
+			// bidirectional iterator
+			inline _ABSTRACTION_ decrement(any_a<> const& _)
+			{
+				return decrement_();
+			}
+
+			inline _ABSTRACTION_ decrement_()
+			{
+				operator--();
+				return me_();
+			}
+
+			inline const_iterator_t& operator--()
+			{
+				--_it;
+				return *this;
+			}
+
+			inline const_iterator_t operator--(int)
+			{
+				const_iterator_t result = *this;
+				operator--();
+				return result;
+			}
+
+			// data
+			inline ITERATOR const& extract__() const
+			{
+				return _it;
+			}
+
+			inline void mutate__(ITERATOR const& it)
+			{
+				_it = it;
+			}
+
+			inline ITERATOR& reference__()
+			{
+				return _it;
+			}
 
 	protected:
 		ITERATOR _it;
@@ -260,6 +429,21 @@ public: ___COLLECTION___
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cbegin());
 	}
 
+	inline any_a<> beset(any_a<> const&)
+	{
+		return beset_();
+	}
+
+	inline bidirectional_iterator_a<> beset_()
+	{
+		return begin();
+	}
+
+	inline bidirectional_iterator_a<> begin()
+	{
+		return iterator_t<std_unordered_map_any_any::iterator>::val__(me_(), _map.begin());
+	}
+
 	inline bidirectional_const_iterator_a<> cend() const
 	{
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cend());
@@ -268,6 +452,21 @@ public: ___COLLECTION___
 	inline bidirectional_const_iterator_a<> end() const
 	{
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cend());
+	}
+
+	inline any_a<> enset(any_a<> const&)
+	{
+		return enset_();
+	}
+
+	inline bidirectional_iterator_a<> enset_()
+	{
+		return end();
+	}
+
+	inline bidirectional_iterator_a<> end()
+	{
+		return iterator_t<std_unordered_map_any_any::iterator>::val__(me_(), _map.end());
 	}
 
 	// collection
