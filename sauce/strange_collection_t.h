@@ -5,7 +5,7 @@ namespace strange
 {
 
 // adaptation
-#define ___COLLECTION___ ___THING___ \
+#define ___STRANGE_COLLECTION___ ___STRANGE_THING___ \
 inline any_a<> has(any_a<> const& range) const \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \

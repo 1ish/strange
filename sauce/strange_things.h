@@ -24,4 +24,7 @@
 #include "strange_number_reference_t.h"
 #include "strange_lake_t.h"
 
+#undef ___STRANGE_THING___
+#undef ___STRANGE_COLLECTION___
+
 #endif

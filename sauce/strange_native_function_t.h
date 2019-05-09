@@ -9,7 +9,7 @@ class native_function_t : public thing_t<_ABSTRACTION_>
 {
 	using function = any_a<>(*)(any_a<> const&);
 
-public: ___THING___
+public: ___STRANGE_THING___
 	// construction
 	template <typename... Args>
 	static inline any_a<> val__(function const fun, Args&&... args)

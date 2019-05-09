@@ -9,7 +9,7 @@ class native_extraction_t : public thing_t<_ABSTRACTION_>
 {
 	using member = any_a<>(T::*)(any_a<> const&) const;
 
-public: ___THING___
+public: ___STRANGE_THING___
 	// construction
 	template <typename... Args>
 	static inline any_a<> val__(member const fun, Args&&... args)

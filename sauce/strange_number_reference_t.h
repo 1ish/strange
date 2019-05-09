@@ -7,7 +7,7 @@ namespace strange
 template <typename PRIMITIVE, typename _ABSTRACTION_ = number_data_a<PRIMITIVE>>
 class number_reference_t : public something_t<_ABSTRACTION_>
 {
-public: ___THING___
+public: ___STRANGE_THING___
 	// construction
 	static inline number_data_a<PRIMITIVE> val__(PRIMITIVE& primitive)
 	{

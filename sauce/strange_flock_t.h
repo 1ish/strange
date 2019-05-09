@@ -10,7 +10,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
 	class iterator_t : public something_t<_ABSTRACTION_>
 	{
-	public: ___THING___
+	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
 		static inline random_access_iterator_data_a<ITERATOR> val__(flock_a<> const& flock, F&& it)
@@ -382,7 +382,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_const_iterator_data_a<ITERATOR>>
 	class const_iterator_t : public something_t<_ABSTRACTION_>
 	{
-	public: ___THING___
+	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
 		static inline random_access_const_iterator_data_a<ITERATOR> val__(flock_a<> const& flock, F&& it)
@@ -736,7 +736,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{}
 	};
 
-public: ___COLLECTION___
+public: ___STRANGE_COLLECTION___
 	using std_vector_any = std::vector<any_a<>>;
 
 	// construction

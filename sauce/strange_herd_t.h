@@ -10,7 +10,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_const_iterator_data_a<ITERATOR>>
 	class const_iterator_t : public something_t<_ABSTRACTION_>
 	{
-	public: ___THING___
+	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
 		static inline bidirectional_const_iterator_data_a<ITERATOR> val__(herd_a<> const& herd, F&& it)
@@ -153,7 +153,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 		{}
 	};
 
-public: ___COLLECTION___
+public: ___STRANGE_COLLECTION___
 	using std_unordered_set_any = std::unordered_set<any_a<>, any_a<>::hash_f>;
 
 	// construction

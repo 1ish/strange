@@ -210,7 +210,7 @@ protected:
 };
 
 // adaptation
-#define ___THING___ \
+#define ___STRANGE_THING___ \
 inline symbol_a<> type(any_a<> const&) const \
 { \
 	return type_(); \

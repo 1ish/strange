@@ -7,7 +7,7 @@ namespace strange
 template <typename _ABSTRACTION_ = any_a<>>
 class range_t : public something_t<_ABSTRACTION_>
 {
-public: ___THING___
+public: ___STRANGE_THING___
 	// construction
 	static inline any_a<> val(any_a<> const& range)
 	{

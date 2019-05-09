@@ -7,7 +7,7 @@ namespace strange
 template <typename _ABSTRACTION_ = cat_a<>>
 class cat_t : public symbol_t<_ABSTRACTION_>
 {
-public: ___THING___
+public: ___STRANGE_THING___
 	// construction
 	static inline cat_a<> val(any_a<> const& range)
 	{
