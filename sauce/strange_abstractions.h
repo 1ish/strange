@@ -27,6 +27,9 @@ class forward_iterator_data_a;
 template <typename _1_ = void>
 class misunderstanding_a;
 
+template <typename _1_ = void>
+class range_a;
+
 template <typename number_data_a_int64 = number_data_a<int64_t>>
 class collection_a;
 
@@ -101,6 +104,8 @@ class random_access_iterator_data_a;
 #include "strange_forward_iterator_data_a.h"
 
 #include "strange_misunderstanding_a.h"
+
+#include "strange_range_a.h"
 
 #include "strange_collection_a.h"
 
