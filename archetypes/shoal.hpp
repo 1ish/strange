@@ -6,8 +6,6 @@
 */
 
 #include "any_forward.hpp"
-#include "collection_forward.hpp"
-#include "bidirectional_iterator_forward.hpp"
 
 namespace strange
 {

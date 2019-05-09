@@ -2,7 +2,6 @@
 #define COM_ONEISH_STRANGE_HERD_A_H
 
 // # include "any.hpp"
-// # include "collection_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>

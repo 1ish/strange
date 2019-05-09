@@ -6,7 +6,6 @@
 */
 
 #include "any.hpp"
-#include "collection_forward.hpp"
 
 namespace strange
 {

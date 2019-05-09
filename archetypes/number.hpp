@@ -6,7 +6,6 @@
 */
 
 #include "any_forward.hpp"
-#include "number_data_forward.hpp"
 
 namespace strange
 {

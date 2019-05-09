@@ -2,7 +2,6 @@
 #define COM_ONEISH_STRANGE_NUMBER_A_H
 
 // # include "any_forward.hpp"
-// # include "number_data_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>

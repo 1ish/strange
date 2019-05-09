@@ -6,7 +6,6 @@
 */
 
 #include "any_forward.hpp"
-#include "lake_forward.hpp"
 
 namespace strange
 {
