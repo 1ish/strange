@@ -4,7 +4,7 @@
 // # include "definitions.hpp"
 // # include "symbol_forward.hpp"
 // # include "cat_forward.hpp"
-// # include "forward_iterator_forward.hpp"
+// # include "forward_const_iterator_forward.hpp"
 // # include "number_data_forward.hpp"
 #include <algorithm>
 #include <cassert>
@@ -15,7 +15,7 @@
 
 
 namespace strange {
-    template < typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename forward_iterator_a = forward_iterator_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
+    template < typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename forward_const_iterator_a = forward_const_iterator_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
     class any_a
 
     {
@@ -262,32 +262,20 @@ namespace strange {
      { assert(handle_); return read().is__(s ); }
      inline any_a beget ( any_a const & _ ) const
      { assert(handle_); return read().beget(_ ); }
-     inline forward_iterator_a beget_ ( ) const
+     inline forward_const_iterator_a beget_ ( ) const
      { assert(handle_); return read().beget_( ); }
-     inline forward_iterator_a cbegin ( ) const
+     inline forward_const_iterator_a cbegin ( ) const
      { assert(handle_); return read().cbegin( ); }
-     inline forward_iterator_a begin ( ) const
+     inline forward_const_iterator_a begin ( ) const
      { assert(handle_); return read().begin( ); }
-     inline any_a beset ( any_a const & _ )
-     { assert(handle_); return write().beset(_ ); }
-     inline forward_iterator_a beset_ ( )
-     { assert(handle_); return write().beset_( ); }
-     inline forward_iterator_a begin ( )
-     { assert(handle_); return write().begin( ); }
      inline any_a enget ( any_a const & _ ) const
      { assert(handle_); return read().enget(_ ); }
-     inline forward_iterator_a enget_ ( ) const
+     inline forward_const_iterator_a enget_ ( ) const
      { assert(handle_); return read().enget_( ); }
-     inline forward_iterator_a cend ( ) const
+     inline forward_const_iterator_a cend ( ) const
      { assert(handle_); return read().cend( ); }
-     inline forward_iterator_a end ( ) const
+     inline forward_const_iterator_a end ( ) const
      { assert(handle_); return read().end( ); }
-     inline any_a enset ( any_a const & _ )
-     { assert(handle_); return write().enset(_ ); }
-     inline forward_iterator_a enset_ ( )
-     { assert(handle_); return write().enset_( ); }
-     inline forward_iterator_a end ( )
-     { assert(handle_); return write().end( ); }
     
 
     protected:
@@ -390,19 +378,13 @@ namespace strange {
       virtual inline std :: size_t hash__ ( ) const = 0;
       virtual inline bool is__ ( std :: string const & s ) const = 0;
       virtual inline any_a beget ( any_a const & _ ) const = 0;
-      virtual inline forward_iterator_a beget_ ( ) const = 0;
-      virtual inline forward_iterator_a cbegin ( ) const = 0;
-      virtual inline forward_iterator_a begin ( ) const = 0;
-      virtual inline any_a beset ( any_a const & _ ) = 0;
-      virtual inline forward_iterator_a beset_ ( ) = 0;
-      virtual inline forward_iterator_a begin ( ) = 0;
+      virtual inline forward_const_iterator_a beget_ ( ) const = 0;
+      virtual inline forward_const_iterator_a cbegin ( ) const = 0;
+      virtual inline forward_const_iterator_a begin ( ) const = 0;
       virtual inline any_a enget ( any_a const & _ ) const = 0;
-      virtual inline forward_iterator_a enget_ ( ) const = 0;
-      virtual inline forward_iterator_a cend ( ) const = 0;
-      virtual inline forward_iterator_a end ( ) const = 0;
-      virtual inline any_a enset ( any_a const & _ ) = 0;
-      virtual inline forward_iterator_a enset_ ( ) = 0;
-      virtual inline forward_iterator_a end ( ) = 0;
+      virtual inline forward_const_iterator_a enget_ ( ) const = 0;
+      virtual inline forward_const_iterator_a cend ( ) const = 0;
+      virtual inline forward_const_iterator_a end ( ) const = 0;
     	};
 
     
@@ -603,31 +585,19 @@ namespace strange {
       { return value_.is__(s ); }
       virtual inline any_a beget ( any_a const & _ ) const
       { return value_.beget(_ ); }
-      virtual inline forward_iterator_a beget_ ( ) const
+      virtual inline forward_const_iterator_a beget_ ( ) const
       { return value_.beget_( ); }
-      virtual inline forward_iterator_a cbegin ( ) const
+      virtual inline forward_const_iterator_a cbegin ( ) const
       { return value_.cbegin( ); }
-      virtual inline forward_iterator_a begin ( ) const
-      { return value_.begin( ); }
-      virtual inline any_a beset ( any_a const & _ )
-      { return value_.beset(_ ); }
-      virtual inline forward_iterator_a beset_ ( )
-      { return value_.beset_( ); }
-      virtual inline forward_iterator_a begin ( )
+      virtual inline forward_const_iterator_a begin ( ) const
       { return value_.begin( ); }
       virtual inline any_a enget ( any_a const & _ ) const
       { return value_.enget(_ ); }
-      virtual inline forward_iterator_a enget_ ( ) const
+      virtual inline forward_const_iterator_a enget_ ( ) const
       { return value_.enget_( ); }
-      virtual inline forward_iterator_a cend ( ) const
+      virtual inline forward_const_iterator_a cend ( ) const
       { return value_.cend( ); }
-      virtual inline forward_iterator_a end ( ) const
-      { return value_.end( ); }
-      virtual inline any_a enset ( any_a const & _ )
-      { return value_.enset(_ ); }
-      virtual inline forward_iterator_a enset_ ( )
-      { return value_.enset_( ); }
-      virtual inline forward_iterator_a end ( )
+      virtual inline forward_const_iterator_a end ( ) const
       { return value_.end( ); }
     
 

@@ -1,9 +1,7 @@
-#ifndef COM_ONEISH_STRANGE_LAKE_A_H
-#define COM_ONEISH_STRANGE_LAKE_A_H
+#ifndef COM_ONEISH_STRANGE_BIDIRECTIONAL_CONST_ITERATOR_A_H
+#define COM_ONEISH_STRANGE_BIDIRECTIONAL_CONST_ITERATOR_A_H
 
 // # include "any_forward.hpp"
-// # include "collection_forward.hpp"
-// # include "random_access_iterator_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -13,14 +11,14 @@
 
 
 namespace strange {
-    template < typename random_access_iterator_a >
-    class lake_a : public ___derived___
+    template < typename _1_ >
+    class bidirectional_const_iterator_a : public ___derived___
 
     {
 
     public:
 
-    	inline lake_a& operator++()
+    	inline bidirectional_const_iterator_a& operator++()
 
     	{
 
@@ -34,7 +32,7 @@ namespace strange {
 
     
 
-    	inline lake_a operator++(int)
+    	inline bidirectional_const_iterator_a operator++(int)
 
     	{
 
@@ -50,7 +48,7 @@ namespace strange {
 
     
 
-    	inline lake_a& operator--()
+    	inline bidirectional_const_iterator_a& operator--()
 
     	{
 
@@ -64,7 +62,7 @@ namespace strange {
 
     
 
-    	inline lake_a operator--(int)
+    	inline bidirectional_const_iterator_a operator--(int)
 
     	{
 
@@ -80,7 +78,7 @@ namespace strange {
 
     
 
-    	inline lake_a& operator+=(___root___ const& other)
+    	inline bidirectional_const_iterator_a& operator+=(___root___ const& other)
 
     	{
 
@@ -94,7 +92,7 @@ namespace strange {
 
     
 
-    	inline lake_a& operator-=(___root___ const& other)
+    	inline bidirectional_const_iterator_a& operator-=(___root___ const& other)
 
     	{
 
@@ -108,7 +106,7 @@ namespace strange {
 
     
 
-    	inline lake_a& operator*=(___root___ const& other)
+    	inline bidirectional_const_iterator_a& operator*=(___root___ const& other)
 
     	{
 
@@ -122,7 +120,7 @@ namespace strange {
 
     
 
-    	inline lake_a& operator/=(___root___ const& other)
+    	inline bidirectional_const_iterator_a& operator/=(___root___ const& other)
 
     	{
 
@@ -136,7 +134,7 @@ namespace strange {
 
     
 
-    	inline lake_a& operator%=(___root___ const& other)
+    	inline bidirectional_const_iterator_a& operator%=(___root___ const& other)
 
     	{
 
@@ -150,28 +148,10 @@ namespace strange {
 
     
 
-     inline bool has__ ( int64_t index ) const
-     { assert(handle_); return read().has__(index ); }
-     inline any_a < > at__ ( int64_t index ) const
-     { assert(handle_); return read().at__(index ); }
-     inline void update__ ( int64_t index , any_a < > const & value )
-     { assert(handle_); write().update__(index, value ); }
-     inline bool insert__ ( int64_t index , any_a < > const & value )
-     { assert(handle_); return write().insert__(index, value ); }
-     inline bool erase__ ( int64_t index )
-     { assert(handle_); return write().erase__(index ); }
-     inline any_a < > beset ( any_a < > const & _ )
-     { assert(handle_); return write().beset(_ ); }
-     inline random_access_iterator_a beset_ ( )
-     { assert(handle_); return write().beset_( ); }
-     inline random_access_iterator_a begin ( )
-     { assert(handle_); return write().begin( ); }
-     inline any_a < > enset ( any_a < > const & _ )
-     { assert(handle_); return write().enset(_ ); }
-     inline random_access_iterator_a enset_ ( )
-     { assert(handle_); return write().enset_( ); }
-     inline random_access_iterator_a end ( )
-     { assert(handle_); return write().end( ); }
+     inline any_a < > decrement ( any_a < > const & _ )
+     { assert(handle_); return write().decrement(_ ); }
+     inline bidirectional_const_iterator_a decrement_ ( )
+     { assert(handle_); return write().decrement_( ); }
     
 
     protected:
@@ -180,17 +160,8 @@ namespace strange {
 
     	{
 
-      virtual inline bool has__ ( int64_t index ) const = 0;
-      virtual inline any_a < > at__ ( int64_t index ) const = 0;
-      virtual inline void update__ ( int64_t index , any_a < > const & value ) = 0;
-      virtual inline bool insert__ ( int64_t index , any_a < > const & value ) = 0;
-      virtual inline bool erase__ ( int64_t index ) = 0;
-      virtual inline any_a < > beset ( any_a < > const & _ ) = 0;
-      virtual inline random_access_iterator_a beset_ ( ) = 0;
-      virtual inline random_access_iterator_a begin ( ) = 0;
-      virtual inline any_a < > enset ( any_a < > const & _ ) = 0;
-      virtual inline random_access_iterator_a enset_ ( ) = 0;
-      virtual inline random_access_iterator_a end ( ) = 0;
+      virtual inline any_a < > decrement ( any_a < > const & _ ) = 0;
+      virtual inline bidirectional_const_iterator_a decrement_ ( ) = 0;
     	};
 
     
@@ -221,28 +192,10 @@ namespace strange {
 
     
 
-      virtual inline bool has__ ( int64_t index ) const
-      { return value_.has__(index ); }
-      virtual inline any_a < > at__ ( int64_t index ) const
-      { return value_.at__(index ); }
-      virtual inline void update__ ( int64_t index , any_a < > const & value )
-      { value_.update__(index, value ); }
-      virtual inline bool insert__ ( int64_t index , any_a < > const & value )
-      { return value_.insert__(index, value ); }
-      virtual inline bool erase__ ( int64_t index )
-      { return value_.erase__(index ); }
-      virtual inline any_a < > beset ( any_a < > const & _ )
-      { return value_.beset(_ ); }
-      virtual inline random_access_iterator_a beset_ ( )
-      { return value_.beset_( ); }
-      virtual inline random_access_iterator_a begin ( )
-      { return value_.begin( ); }
-      virtual inline any_a < > enset ( any_a < > const & _ )
-      { return value_.enset(_ ); }
-      virtual inline random_access_iterator_a enset_ ( )
-      { return value_.enset_( ); }
-      virtual inline random_access_iterator_a end ( )
-      { return value_.end( ); }
+      virtual inline any_a < > decrement ( any_a < > const & _ )
+      { return value_.decrement(_ ); }
+      virtual inline bidirectional_const_iterator_a decrement_ ( )
+      { return value_.decrement_( ); }
     	};
 
     
@@ -355,7 +308,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	friend inline bool check_(lake_a<> const& value);
+    	friend inline bool check_(bidirectional_const_iterator_a<> const& value);
 
     
 
@@ -365,7 +318,7 @@ namespace strange {
 
     	{
 
-    		return "lake_a";
+    		return "bidirectional_const_iterator_a";
 
     	}
 
@@ -381,11 +334,11 @@ namespace strange {
 
     
 
-    	inline lake_a() = default;
+    	inline bidirectional_const_iterator_a() = default;
 
     
 
-    	explicit inline lake_a(bool reference)
+    	explicit inline bidirectional_const_iterator_a(bool reference)
 
     		: ___derived___{ reference }
 
@@ -393,7 +346,7 @@ namespace strange {
 
     
 
-    	inline lake_a(lake_a const& other, bool reference)
+    	inline bidirectional_const_iterator_a(bidirectional_const_iterator_a const& other, bool reference)
 
     		: ___derived___(other, reference)
 
@@ -401,7 +354,7 @@ namespace strange {
 
     
 
-    	inline lake_a(lake_a&& other, bool reference)
+    	inline bidirectional_const_iterator_a(bidirectional_const_iterator_a&& other, bool reference)
 
     		: ___derived___(std::move(other), reference)
 
@@ -411,7 +364,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline lake_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
+    	explicit inline bidirectional_const_iterator_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
 
     		: ___derived___(handle, reference)
 
@@ -423,7 +376,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("lake_a constructor failed to cast from base to dderived");
+    			throw dis__("bidirectional_const_iterator_a constructor failed to cast from base to dderived");
 
     		}
 
@@ -437,9 +390,9 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<lake_a, std::decay_t<___TTT___>>::value>>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<bidirectional_const_iterator_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline lake_a(___TTT___ value, bool reference = false)
+    	explicit inline bidirectional_const_iterator_a(___TTT___ value, bool reference = false)
 
     		: ___derived___(std::make_shared<___dderived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 
@@ -451,7 +404,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	inline lake_a& operator=(std::shared_ptr<___TTT___> const& handle)
+    	inline bidirectional_const_iterator_a& operator=(std::shared_ptr<___TTT___> const& handle)
 
     	{
 
@@ -461,7 +414,7 @@ namespace strange {
 
     		{
 
-    			throw dis__("lake_a assignment failed to cast from base to dderived");
+    			throw dis__("bidirectional_const_iterator_a assignment failed to cast from base to dderived");
 
     		}
 
@@ -481,13 +434,13 @@ namespace strange {
 
     
 
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<lake_a, std::decay_t<___TTT___>>::value>>
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<bidirectional_const_iterator_a, std::decay_t<___TTT___>>::value>>
 
-    	inline lake_a& operator=(___TTT___ value)
+    	inline bidirectional_const_iterator_a& operator=(___TTT___ value)
 
     	{
 
-    		lake_a temp{ std::move(value) };
+    		bidirectional_const_iterator_a temp{ std::move(value) };
 
     		std::swap(temp.handle_, handle_);
 
@@ -503,7 +456,7 @@ namespace strange {
 
     template <typename ___TTT___>
 
-    inline bool check_(lake_a<> const& value)
+    inline bool check_(bidirectional_const_iterator_a<> const& value)
 
     {
 

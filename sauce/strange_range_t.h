@@ -11,13 +11,13 @@ public: ___THING___
 	// construction
 	static inline any_a<> val(any_a<> const& range)
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::range::val passed empty range");
 		}
 		any_a<> begin = *it;
-		if (!check_<forward_iterator_a<>>(begin))
+		if (!check_<forward_const_iterator_a<>>(begin))
 		{
 			throw dis__("strange::range::val passed non-iterator begin");
 		}
@@ -26,27 +26,27 @@ public: ___THING___
 			throw dis__("strange::range::val passed short range");
 		}
 		any_a<> end = *it;
-		if (!check_<forward_iterator_a<>>(end))
+		if (!check_<forward_const_iterator_a<>>(end))
 		{
 			throw dis__("strange::range::val passed non-iterator end");
 		}
-		return val_(cast_<forward_iterator_a<>>(begin), cast_<forward_iterator_a<>>(end));
+		return val_(cast_<forward_const_iterator_a<>>(begin), cast_<forward_const_iterator_a<>>(end));
 	}
 
-	static inline any_a<> val_(forward_iterator_a<> const& begin, forward_iterator_a<> const& end)
+	static inline any_a<> val_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
 	{
 		return any_a<>{ range_t(begin, end) };
 	}
 
 	static inline any_a<> ref(any_a<> const& range)
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::range::ref passed empty range");
 		}
 		any_a<> begin = *it;
-		if (!check_<forward_iterator_a<>>(begin))
+		if (!check_<forward_const_iterator_a<>>(begin))
 		{
 			throw dis__("strange::range::ref passed non-iterator begin");
 		}
@@ -55,14 +55,14 @@ public: ___THING___
 			throw dis__("strange::range::ref passed short range");
 		}
 		any_a<> end = *it;
-		if (!check_<forward_iterator_a<>>(end))
+		if (!check_<forward_const_iterator_a<>>(end))
 		{
 			throw dis__("strange::range::ref passed non-iterator end");
 		}
-		return ref_(cast_<forward_iterator_a<>>(begin), cast_<forward_iterator_a<>>(end));
+		return ref_(cast_<forward_const_iterator_a<>>(begin), cast_<forward_const_iterator_a<>>(end));
 	}
 
-	static inline any_a<> ref_(forward_iterator_a<> const& begin, forward_iterator_a<> const& end)
+	static inline any_a<> ref_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
 	{
 		return any_a<>(range_t(begin, end), true);
 	}
@@ -75,41 +75,31 @@ public: ___THING___
 	}
 
 	// range
-	inline forward_iterator_a<> cbegin() const
+	inline forward_const_iterator_a<> cbegin() const
 	{
 		return _begin;
 	}
 
-	inline forward_iterator_a<> begin() const
+	inline forward_const_iterator_a<> begin() const
 	{
 		return _begin;
 	}
 
-	inline forward_iterator_a<> begin()
-	{
-		return _begin;
-	}
-
-	inline forward_iterator_a<> cend() const
+	inline forward_const_iterator_a<> cend() const
 	{
 		return _end;
 	}
 
-	inline forward_iterator_a<> end() const
-	{
-		return _end;
-	}
-
-	inline forward_iterator_a<> end()
+	inline forward_const_iterator_a<> end() const
 	{
 		return _end;
 	}
 
 protected:
-	forward_iterator_a<> _begin;
-	forward_iterator_a<> _end;
+	forward_const_iterator_a<> _begin;
+	forward_const_iterator_a<> _end;
 
-	inline range_t(forward_iterator_a<> const& begin, forward_iterator_a<> const& end)
+	inline range_t(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
 		: something_t{}
 		, _begin(begin)
 		, _end(end)

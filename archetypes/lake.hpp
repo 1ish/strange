@@ -7,11 +7,12 @@
 
 #include "any_forward.hpp"
 #include "collection_forward.hpp"
+#include "random_access_iterator_forward.hpp"
 
 namespace strange
 {
 
-template <typename _1_>
+template <typename random_access_iterator_a>
 class lake_a
 {
 public:
@@ -21,6 +22,15 @@ public:
 	inline void update__(int64_t index, any_a<> const& value);
 	inline bool insert__(int64_t index, any_a<> const& value);
 	inline bool erase__(int64_t index);
+
+	// mutable range
+	inline any_a<> beset(any_a<> const& _);
+	inline random_access_iterator_a beset_();
+	inline random_access_iterator_a begin();
+
+	inline any_a<> enset(any_a<> const& _);
+	inline random_access_iterator_a enset_();
+	inline random_access_iterator_a end();
 };
 
 } // namespace strange

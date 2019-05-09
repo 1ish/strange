@@ -46,7 +46,7 @@ TEST(TestCaseName, ForLoop)
 	any_a<> f = native_function_t<>::val__(fun, "x", "y", "z");
 	any_a<> g = native_function_t<>::val__(&nothing_t<>::val, "x", "y", "z");
 	any_a<> h = native_extraction_t<any_a<>>::val__(&any_a<>::beget);
-	any_a<> i = native_mutation_t<any_a<>>::val__(&any_a<>::beset);
+	any_a<> i = native_mutation_t<flock_a<>>::val__(&flock_a<>::beset);
 
 	shoal_a<> shoal = shoal_t<>::val_();
 	flock_a<> flock = flock_t<>::val_();
@@ -62,11 +62,11 @@ TEST(TestCaseName, ForLoop)
 	}
 
 	auto it = flock.cbegin();
-	if (check_<random_access_iterator_data_a<std::vector<any_a<>>::const_iterator>>(it))
+	if (check_<random_access_const_iterator_data_a<std::vector<any_a<>>::const_iterator>>(it))
 	{
 		std::cout << "checked ok" << std::endl;
-		random_access_iterator_data_a<std::vector<any_a<>>::const_iterator> data =
-			cast_<random_access_iterator_data_a<std::vector<any_a<>>::const_iterator>>(it);
+		random_access_const_iterator_data_a<std::vector<any_a<>>::const_iterator> data =
+			cast_<random_access_const_iterator_data_a<std::vector<any_a<>>::const_iterator>>(it);
 		std::cout << "data: " << (data == flock.cend()) << std::endl;
 	}
 

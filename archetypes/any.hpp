@@ -8,13 +8,13 @@
 #include "definitions.hpp"
 #include "symbol_forward.hpp"
 #include "cat_forward.hpp"
-#include "forward_iterator_forward.hpp"
+#include "forward_const_iterator_forward.hpp"
 #include "number_data_forward.hpp"
 
 namespace strange
 {
 
-template <typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename forward_iterator_a = forward_iterator_a<>, typename number_data_a_uint64 = number_data_a<uint64_t>>
+template <typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename forward_const_iterator_a = forward_const_iterator_a<>, typename number_data_a_uint64 = number_data_a<uint64_t>>
 class any_a
 {
 public:
@@ -99,22 +99,14 @@ public:
 
 	// range
 	inline any_a beget(any_a const& _) const;
-	inline forward_iterator_a beget_() const;
-	inline forward_iterator_a cbegin() const;
-	inline forward_iterator_a begin() const;
-
-	inline any_a beset(any_a const& _);
-	inline forward_iterator_a beset_();
-	inline forward_iterator_a begin();
+	inline forward_const_iterator_a beget_() const;
+	inline forward_const_iterator_a cbegin() const;
+	inline forward_const_iterator_a begin() const;
 
 	inline any_a enget(any_a const& _) const;
-	inline forward_iterator_a enget_() const;
-	inline forward_iterator_a cend() const;
-	inline forward_iterator_a end() const;
-
-	inline any_a enset(any_a const& _);
-	inline forward_iterator_a enset_();
-	inline forward_iterator_a end();
+	inline forward_const_iterator_a enget_() const;
+	inline forward_const_iterator_a cend() const;
+	inline forward_const_iterator_a end() const;
 };
 
 } // namespace strange

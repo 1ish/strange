@@ -11,7 +11,7 @@ public: ___THING___
 	// construction
 	static inline cat_a<> val(any_a<> const& range)
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return val_();
@@ -26,7 +26,7 @@ public: ___THING___
 
 	static inline cat_a<> ref(any_a<> const& range)
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return ref_();
@@ -89,7 +89,7 @@ public: ___THING___
 
 	inline any_a<> includes(any_a<> const& range) const
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::cat::includes passed empty range");
@@ -109,7 +109,7 @@ public: ___THING___
 
 	static inline any_a<> conforms(any_a<> const& range)
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::cat::conforms passed empty range");

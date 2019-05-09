@@ -399,7 +399,7 @@ public: ___THING___
 
 	inline any_a<> from_int_64(any_a<> const& range)
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::number::from_int_64 passed empty range");
@@ -440,7 +440,7 @@ public: ___THING___
 
 	inline any_a<> from_uint_64(any_a<> const& range)
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::number::from_uint_64 passed empty range");
@@ -481,7 +481,7 @@ public: ___THING___
 
 	inline any_a<> from_float_64(any_a<> const& range)
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::number::from_float_64 passed empty range");
@@ -507,7 +507,7 @@ public: ___THING___
 
 	inline any_a<> less_than(any_a<> const& range) const
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::number::less_than passed empty range");
@@ -532,7 +532,7 @@ public: ___THING___
 
 	inline any_a<> greater_than(any_a<> const& range) const
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::number::greater_than passed empty range");
@@ -557,7 +557,7 @@ public: ___THING___
 
 	inline any_a<> less_or_equal(any_a<> const& range) const
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::number::less_or_equal passed empty range");
@@ -582,7 +582,7 @@ public: ___THING___
 
 	inline any_a<> greater_or_equal(any_a<> const& range) const
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis__("strange::number::greater_or_equal passed empty range");

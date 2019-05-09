@@ -4,14 +4,14 @@
 namespace strange
 {
 
-template <bool CONST = false, typename END = nothing_t<>, typename _ABSTRACTION_ = forward_iterator_a<>>
+template <bool CONST = false, typename END = nothing_t<>, typename _ABSTRACTION_ = forward_const_iterator_a<>>
 class it_t : public something_t<_ABSTRACTION_>
 {
 public: ___THING___
 	// construction
-	static inline forward_iterator_a<> val(any_a<> const& range)
+	static inline forward_const_iterator_a<> val(any_a<> const& range)
 	{
-		forward_iterator_a<> it = range.cbegin();
+	forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return val_();
@@ -19,14 +19,14 @@ public: ___THING___
 		return val_(*it);
 	}
 
-	static inline forward_iterator_a<> val_(any_a<> const& thing = END::val_())
+	static inline forward_const_iterator_a<> val_(any_a<> const& thing = END::val_())
 	{
-		return forward_iterator_a<>{ it_t<CONST, END, _ABSTRACTION_>{ thing } };
+		return forward_const_iterator_a<>{ it_t<CONST, END, _ABSTRACTION_>{ thing } };
 	}
 
-	static inline forward_iterator_a<> ref(any_a<> const& range)
+	static inline forward_const_iterator_a<> ref(any_a<> const& range)
 	{
-		forward_iterator_a<> it = range.cbegin();
+		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			return ref_();
@@ -34,9 +34,9 @@ public: ___THING___
 		return ref_(*it);
 	}
 
-	static inline forward_iterator_a<> ref_(any_a<> const& thing = END::val_())
+	static inline forward_const_iterator_a<> ref_(any_a<> const& thing = END::val_())
 	{
-		return forward_iterator_a<>(it_t<CONST, END, _ABSTRACTION_>{ thing }, true);
+		return forward_const_iterator_a<>(it_t<CONST, END, _ABSTRACTION_>{ thing }, true);
 	}
 
 	// reflection
@@ -49,20 +49,20 @@ public: ___THING___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<forward_iterator_a<>>(thing))
+		if (!check_<forward_const_iterator_a<>>(thing))
 		{
 			return false;
 		}
-		return _thing.nothing__() == cast_<forward_iterator_a<>>(thing)->nothing__();
+		return _thing.nothing__() == cast_<forward_const_iterator_a<>>(thing)->nothing__();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<forward_iterator_a<>>(thing))
+		if (!check_<forward_const_iterator_a<>>(thing))
 		{
 			return true;
 		}
-		return _thing.nothing__() != cast_<forward_iterator_a<>>(thing)->nothing__();
+		return _thing.nothing__() != cast_<forward_const_iterator_a<>>(thing)->nothing__();
 	}
 
 	inline std::size_t hash__() const
@@ -81,27 +81,12 @@ public: ___THING___
 		return operator*();
 	}
 
-	inline any_a<> set(any_a<> const& range) const
-	{
-		forward_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
-		{
-			throw dis__("strange::it set passed empty range");
-		}
-		return set_(*it);
-	}
-
-	inline any_a<> set_(any_a<> const& thing) const
-	{
-		return operator*() = thing;
-	}
-
-	inline any_a<>* operator->() const
+	inline any_a<> const* operator->() const
 	{
 		return &operator*();
 	}
 
-	inline any_a<>& operator*() const
+	inline any_a<> const& operator*() const
 	{
 		return _thing;
 	}

@@ -7,21 +7,21 @@ namespace strange
 template <typename _ABSTRACTION_ = shoal_a<>>
 class shoal_t : public something_t<_ABSTRACTION_>
 {
-	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_iterator_data_a<ITERATOR>>
+	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_const_iterator_data_a<ITERATOR>>
 	class const_iterator_t : public something_t<_ABSTRACTION_>
 	{
 	public: ___THING___
 		// construction
 		template <typename F>
-		static inline bidirectional_iterator_data_a<ITERATOR> val__(shoal_a<> const& shoal, F&& it)
+		static inline bidirectional_const_iterator_data_a<ITERATOR> val__(shoal_a<> const& shoal, F&& it)
 		{
-			return bidirectional_iterator_data_a<ITERATOR>{ const_iterator_t(shoal, std::forward<F>(it)) };
+			return bidirectional_const_iterator_data_a<ITERATOR>{ const_iterator_t(shoal, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline bidirectional_iterator_data_a<ITERATOR> ref__(shoal_a<> const& shoal, F&& it)
+		static inline bidirectional_const_iterator_data_a<ITERATOR> ref__(shoal_a<> const& shoal, F&& it)
 		{
-			return bidirectional_iterator_data_a<ITERATOR>(const_iterator_t(shoal, std::forward<F>(it)), true);
+			return bidirectional_const_iterator_data_a<ITERATOR>(const_iterator_t(shoal, std::forward<F>(it)), true);
 		}
 
 		// reflection
@@ -34,20 +34,20 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
-			if (!check_<bidirectional_iterator_data_a<ITERATOR>>(thing))
+			if (!check_<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
 			{
 				return false;
 			}
-			return _it == cast_<bidirectional_iterator_data_a<ITERATOR>>(thing).extract__();
+			return _it == cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract__();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
 		{
-			if (!check_<bidirectional_iterator_data_a<ITERATOR>>(thing))
+			if (!check_<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
 			{
 				return true;
 			}
-			return _it != cast_<bidirectional_iterator_data_a<ITERATOR>>(thing).extract__();
+			return _it != cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract__();
 		}
 
 		inline std::size_t hash__() const
@@ -76,12 +76,12 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			throw dis__("strange::shoal::const_iterator set called");
 		}
 
-		inline any_a<>* operator->() const
+		inline any_a<> const* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline any_a<>& operator*() const
+		inline any_a<> const& operator*() const
 		{
 			_pair.update__(0, _it->first);
 			_pair.update__(1, _it->second);
@@ -258,34 +258,24 @@ public: ___COLLECTION___
 	}
 
 	// range
-	inline bidirectional_iterator_a<> cbegin() const
+	inline bidirectional_const_iterator_a<> cbegin() const
 	{
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cbegin());
 	}
 
-	inline bidirectional_iterator_a<> begin() const
+	inline bidirectional_const_iterator_a<> begin() const
 	{
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cbegin());
 	}
 
-	inline bidirectional_iterator_a<> begin()
-	{
-		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.begin());
-	}
-
-	inline bidirectional_iterator_a<> cend() const
+	inline bidirectional_const_iterator_a<> cend() const
 	{
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cend());
 	}
 
-	inline bidirectional_iterator_a<> end() const
+	inline bidirectional_const_iterator_a<> end() const
 	{
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cend());
-	}
-
-	inline bidirectional_iterator_a<> end()
-	{
-		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.end());
 	}
 
 	// collection

@@ -3,6 +3,7 @@
 
 // # include "any_forward.hpp"
 // # include "collection_forward.hpp"
+// # include "random_access_iterator_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -12,7 +13,7 @@
 
 
 namespace strange {
-    template < typename _1_ >
+    template < typename random_access_iterator_a >
     class flock_a final : public ___derived___
 
     {
@@ -159,6 +160,18 @@ namespace strange {
      { assert(handle_); return write().insert__(index, value ); }
      inline bool erase__ ( int64_t index )
      { assert(handle_); return write().erase__(index ); }
+     inline any_a < > beset ( any_a < > const & _ )
+     { assert(handle_); return write().beset(_ ); }
+     inline random_access_iterator_a beset_ ( )
+     { assert(handle_); return write().beset_( ); }
+     inline random_access_iterator_a begin ( )
+     { assert(handle_); return write().begin( ); }
+     inline any_a < > enset ( any_a < > const & _ )
+     { assert(handle_); return write().enset(_ ); }
+     inline random_access_iterator_a enset_ ( )
+     { assert(handle_); return write().enset_( ); }
+     inline random_access_iterator_a end ( )
+     { assert(handle_); return write().end( ); }
      inline std :: vector < any_a < >> const & extract__ ( ) const
      { assert(handle_); return read().extract__( ); }
      inline void mutate__ ( std :: vector < any_a < >> const & data )
@@ -178,6 +191,12 @@ namespace strange {
       virtual inline void update__ ( int64_t index , any_a < > const & value ) = 0;
       virtual inline bool insert__ ( int64_t index , any_a < > const & value ) = 0;
       virtual inline bool erase__ ( int64_t index ) = 0;
+      virtual inline any_a < > beset ( any_a < > const & _ ) = 0;
+      virtual inline random_access_iterator_a beset_ ( ) = 0;
+      virtual inline random_access_iterator_a begin ( ) = 0;
+      virtual inline any_a < > enset ( any_a < > const & _ ) = 0;
+      virtual inline random_access_iterator_a enset_ ( ) = 0;
+      virtual inline random_access_iterator_a end ( ) = 0;
       virtual inline std :: vector < any_a < >> const & extract__ ( ) const = 0;
       virtual inline void mutate__ ( std :: vector < any_a < >> const & data ) = 0;
       virtual inline std :: vector < any_a < >> & reference__ ( ) = 0;
@@ -231,6 +250,18 @@ namespace strange {
       { return value_.insert__(index, value ); }
       virtual inline bool erase__ ( int64_t index )
       { return value_.erase__(index ); }
+      virtual inline any_a < > beset ( any_a < > const & _ )
+      { return value_.beset(_ ); }
+      virtual inline random_access_iterator_a beset_ ( )
+      { return value_.beset_( ); }
+      virtual inline random_access_iterator_a begin ( )
+      { return value_.begin( ); }
+      virtual inline any_a < > enset ( any_a < > const & _ )
+      { return value_.enset(_ ); }
+      virtual inline random_access_iterator_a enset_ ( )
+      { return value_.enset_( ); }
+      virtual inline random_access_iterator_a end ( )
+      { return value_.end( ); }
       virtual inline std :: vector < any_a < >> const & extract__ ( ) const
       { return value_.extract__( ); }
       virtual inline void mutate__ ( std :: vector < any_a < >> const & data )

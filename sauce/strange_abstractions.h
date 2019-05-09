@@ -13,6 +13,12 @@ template <typename _1_ = void>
 class cat_a;
 
 template <typename _1_ = void>
+class forward_const_iterator_a;
+
+template <typename _1_>
+class forward_const_iterator_data_a;
+
+template <typename _1_ = void>
 class forward_iterator_a;
 
 template <typename _1_>
@@ -27,7 +33,7 @@ class collection_a;
 template <typename _1_ = void>
 class shoal_a;
 
-template <typename _1_ = void>
+template <typename random_access_iterator_a = random_access_iterator_a<>>
 class flock_a;
 
 template <typename _1_ = void>
@@ -42,17 +48,29 @@ class number_a;
 template <typename _1_>
 class number_data_a;
 
-template <typename _1_ = void>
+template <typename random_access_iterator_a = random_access_iterator_a<>>
 class lake_a;
 
 template <typename _1_>
 class lake_data_a;
 
 template <typename _1_ = void>
+class bidirectional_const_iterator_a;
+
+template <typename _1_>
+class bidirectional_const_iterator_data_a;
+
+template <typename _1_ = void>
 class bidirectional_iterator_a;
 
 template <typename _1_>
 class bidirectional_iterator_data_a;
+
+template <typename _1_ = void>
+class random_access_const_iterator_a;
+
+template <typename _1_>
+class random_access_const_iterator_data_a;
 
 template <typename _1_ = void>
 class random_access_iterator_a;
@@ -71,6 +89,11 @@ class random_access_iterator_data_a;
 
 #define ___derived___ symbol_a<>
 #include "strange_cat_a.h"
+
+#include "strange_forward_const_iterator_a.h"
+
+#define ___derived___ forward_const_iterator_a<>
+#include "strange_forward_const_iterator_data_a.h"
 
 #include "strange_forward_iterator_a.h"
 
@@ -103,11 +126,23 @@ class random_access_iterator_data_a;
 #define ___derived___ lake_a<>
 #include "strange_lake_data_a.h"
 
+#define ___derived___ forward_const_iterator_a<>
+#include "strange_bidirectional_const_iterator_a.h"
+
+#define ___derived___ bidirectional_const_iterator_a<>
+#include "strange_bidirectional_const_iterator_data_a.h"
+
 #define ___derived___ forward_iterator_a<>
 #include "strange_bidirectional_iterator_a.h"
 
 #define ___derived___ bidirectional_iterator_a<>
 #include "strange_bidirectional_iterator_data_a.h"
+
+#define ___derived___ bidirectional_const_iterator_a<>
+#include "strange_random_access_const_iterator_a.h"
+
+#define ___derived___ random_access_const_iterator_a<>
+#include "strange_random_access_const_iterator_data_a.h"
 
 #define ___derived___ bidirectional_iterator_a<>
 #include "strange_random_access_iterator_a.h"

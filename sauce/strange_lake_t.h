@@ -8,9 +8,29 @@ template <typename PRIMITIVE, typename _ABSTRACTION_ = lake_data_a<PRIMITIVE>>
 class lake_t : public something_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
-	class iterator_base_t : public something_t<_ABSTRACTION_>
+	class iterator_t : public something_t<_ABSTRACTION_>
 	{
-	public:
+	public: ___THING___
+		// construction
+		template <typename F>
+		static inline random_access_iterator_data_a<ITERATOR> val__(lake_a<> const& lake, F&& it)
+		{
+			return random_access_iterator_data_a<ITERATOR>{ iterator_t(lake, std::forward<F>(it)) };
+		}
+
+		template <typename F>
+		static inline random_access_iterator_data_a<ITERATOR> ref__(lake_a<> const& lake, F&& it)
+		{
+			return random_access_iterator_data_a<ITERATOR>(iterator_t(lake, std::forward<F>(it)), true);
+		}
+
+		// reflection
+		static inline symbol_a<> type_()
+		{
+			static symbol_a<> TYPE = sym__("strange::lake::iterator");
+			return TYPE;
+		}
+
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
@@ -35,177 +55,6 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return std::hash<void const*>{}(&*_it);
 		}
 
-		// random access iterator
-		inline any_a<> less_than(any_a<> const& range) const
-		{
-			forward_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
-			{
-				throw dis__("strange::lake::iterator::less_than passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
-			{
-				throw dis__("strange::lake::iterator::less_than passed incompatible thing");
-			}
-			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
-		}
-
-		inline any_a<> less_than_(random_access_iterator_a<> const& it) const
-		{
-			return _boole_(operator<(it));
-		}
-
-		inline bool operator<(random_access_iterator_a<> const& it) const
-		{
-			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
-			{
-				throw dis__("strange::lake::iterator < passed incompatible thing");
-			}
-			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
-		}
-
-		inline any_a<> greater_than(any_a<> const& range) const
-		{
-			forward_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
-			{
-				throw dis__("strange::lake::iterator::greater_than passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
-			{
-				throw dis__("strange::lake::iterator::greater_than passed incompatible thing");
-			}
-			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
-		}
-
-		inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
-		{
-			return _boole_(operator>(it));
-		}
-
-		inline bool operator>(random_access_iterator_a<> const& it) const
-		{
-			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
-			{
-				throw dis__("strange::lake::iterator > passed incompatible thing");
-			}
-			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
-		}
-
-		inline any_a<> less_or_equal(any_a<> const& range) const
-		{
-			forward_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
-			{
-				throw dis__("strange::lake::iterator::less_or_equal passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
-			{
-				throw dis__("strange::lake::iterator::less_or_equal passed incompatible thing");
-			}
-			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
-		}
-
-		inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
-		{
-			return _boole_(operator<=(it));
-		}
-
-		inline bool operator<=(random_access_iterator_a<> const& it) const
-		{
-			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
-			{
-				throw dis__("strange::lake::iterator <= passed incompatible thing");
-			}
-			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
-		}
-
-		inline any_a<> greater_or_equal(any_a<> const& range) const
-		{
-			forward_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
-			{
-				throw dis__("strange::lake::iterator::greater_or_equal passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
-			{
-				throw dis__("strange::lake::iterator::greater_or_equal passed incompatible thing");
-			}
-			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
-		}
-
-		inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
-		{
-			return _boole_(operator>=(it));
-		}
-
-		inline bool operator>=(random_access_iterator_a<> const& it) const
-		{
-			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
-			{
-				throw dis__("strange::lake::iterator >= passed incompatible thing");
-			}
-			return _it >= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
-		}
-
-		// data
-		inline ITERATOR const& extract__() const
-		{
-			return _it;
-		}
-
-		inline void mutate__(ITERATOR const& it)
-		{
-			_it = it;
-		}
-
-		inline ITERATOR& reference__()
-		{
-			return _it;
-		}
-
-	protected:
-		ITERATOR _it;
-		lake_a<> _lake;
-		mutable number_data_a<PRIMITIVE> _number;
-
-		template <typename F>
-		inline iterator_base_t(lake_a<> const& lake, F&& it)
-			: something_t{}
-			, _it{ std::forward<F>(it) }
-			, _lake(lake, true)
-			, _number{ number_t<PRIMITIVE>::val_() }
-		{}
-	};
-
-	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
-	class iterator_t : public iterator_base_t<ITERATOR, _ABSTRACTION_>
-	{
-	public: ___THING___
-		// construction
-		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> val__(lake_a<> const& lake, F&& it)
-		{
-			return random_access_iterator_data_a<ITERATOR>{ iterator_t(lake, std::forward<F>(it)) };
-		}
-
-		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref__(lake_a<> const& lake, F&& it)
-		{
-			return random_access_iterator_data_a<ITERATOR>(iterator_t(lake, std::forward<F>(it)), true);
-		}
-
-		// reflection
-		static inline symbol_a<> type_()
-		{
-			static symbol_a<> TYPE = sym__("strange::lake::iterator");
-			return TYPE;
-		}
-
 		// forward iterator
 		inline any_a<> get(any_a<> const&) const
 		{
@@ -219,7 +68,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<> set(any_a<> const& range) const
 		{
-			forward_iterator_a<> it = range.cbegin();
+			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
 				throw dis__("strange::lake::iterator set passed empty range");
@@ -392,28 +241,167 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
+		inline any_a<> less_than(any_a<> const& range) const
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				throw dis__("strange::lake::iterator::less_than passed empty range");
+			}
+			any_a<> thing = *it;
+			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
+			{
+				throw dis__("strange::lake::iterator::less_than passed incompatible thing");
+			}
+			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
+		}
+
+		inline any_a<> less_than_(random_access_iterator_a<> const& it) const
+		{
+			return _boole_(operator<(it));
+		}
+
+		inline bool operator<(random_access_iterator_a<> const& it) const
+		{
+			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
+			{
+				throw dis__("strange::lake::iterator < passed incompatible thing");
+			}
+			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
+		}
+
+		inline any_a<> greater_than(any_a<> const& range) const
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				throw dis__("strange::lake::iterator::greater_than passed empty range");
+			}
+			any_a<> thing = *it;
+			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
+			{
+				throw dis__("strange::lake::iterator::greater_than passed incompatible thing");
+			}
+			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
+		}
+
+		inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
+		{
+			return _boole_(operator>(it));
+		}
+
+		inline bool operator>(random_access_iterator_a<> const& it) const
+		{
+			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
+			{
+				throw dis__("strange::lake::iterator > passed incompatible thing");
+			}
+			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
+		}
+
+		inline any_a<> less_or_equal(any_a<> const& range) const
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				throw dis__("strange::lake::iterator::less_or_equal passed empty range");
+			}
+			any_a<> thing = *it;
+			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
+			{
+				throw dis__("strange::lake::iterator::less_or_equal passed incompatible thing");
+			}
+			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
+		}
+
+		inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
+		{
+			return _boole_(operator<=(it));
+		}
+
+		inline bool operator<=(random_access_iterator_a<> const& it) const
+		{
+			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
+			{
+				throw dis__("strange::lake::iterator <= passed incompatible thing");
+			}
+			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
+		}
+
+		inline any_a<> greater_or_equal(any_a<> const& range) const
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				throw dis__("strange::lake::iterator::greater_or_equal passed empty range");
+			}
+			any_a<> thing = *it;
+			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
+			{
+				throw dis__("strange::lake::iterator::greater_or_equal passed incompatible thing");
+			}
+			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
+		}
+
+		inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
+		{
+			return _boole_(operator>=(it));
+		}
+
+		inline bool operator>=(random_access_iterator_a<> const& it) const
+		{
+			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
+			{
+				throw dis__("strange::lake::iterator >= passed incompatible thing");
+			}
+			return _it >= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
+		}
+
+		// data
+		inline ITERATOR const& extract__() const
+		{
+			return _it;
+		}
+
+		inline void mutate__(ITERATOR const& it)
+		{
+			_it = it;
+		}
+
+		inline ITERATOR& reference__()
+		{
+			return _it;
+		}
+
 	protected:
+		ITERATOR _it;
+		lake_a<> _lake;
+		mutable number_data_a<PRIMITIVE> _number;
+
 		template <typename F>
 		inline iterator_t(lake_a<> const& lake, F&& it)
-			: iterator_base_t(lake, std::forward<F>(it))
+			: something_t{}
+			, _it{ std::forward<F>(it) }
+			, _lake(lake, true)
+			, _number{ number_t<PRIMITIVE>::val_() }
 		{}
 	};
 
-	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
-	class const_iterator_t : public iterator_base_t<ITERATOR, _ABSTRACTION_>
+	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_const_iterator_data_a<ITERATOR>>
+	class const_iterator_t : public something_t<_ABSTRACTION_>
 	{
 	public: ___THING___
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> val__(lake_a<> const& lake, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> val__(lake_a<> const& lake, F&& it)
 		{
-			return random_access_iterator_data_a<ITERATOR>{ const_iterator_t(lake, std::forward<F>(it)) };
+			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(lake, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref__(lake_a<> const& lake, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> ref__(lake_a<> const& lake, F&& it)
 		{
-			return random_access_iterator_data_a<ITERATOR>(const_iterator_t(lake, std::forward<F>(it)), true);
+			return random_access_const_iterator_data_a<ITERATOR>(const_iterator_t(lake, std::forward<F>(it)), true);
 		}
 
 		// reflection
@@ -421,6 +409,30 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			static symbol_a<> TYPE = sym__("strange::lake::const_iterator");
 			return TYPE;
+		}
+
+		// comparison
+		inline bool operator==(any_a<> const& thing) const
+		{
+			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
+			{
+				return false;
+			}
+			return _it == cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__();
+		}
+
+		inline bool operator!=(any_a<> const& thing) const
+		{
+			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
+			{
+				return true;
+			}
+			return _it != cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__();
+		}
+
+		inline std::size_t hash__() const
+		{
+			return std::hash<void const*>{}(&*_it);
 		}
 
 		// forward iterator
@@ -434,22 +446,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return operator*();
 		}
 
-		inline any_a<> set(any_a<> const& range) const
-		{
-			throw dis__("strange::lake::const_iterator set called");
-		}
-
-		inline any_a<> set_(any_a<> const& thing) const
-		{
-			throw dis__("strange::lake::const_iterator set called");
-		}
-
-		inline any_a<>* operator->() const
+		inline any_a<> const* operator->() const
 		{
 			return &operator*();
 		}
 
-		inline any_a<>& operator*() const
+		inline any_a<> const& operator*() const
 		{
 			_number = number_t<PRIMITIVE>::val__(*_it);
 			return _number;
@@ -530,9 +532,9 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_iterator_a<> add(any_a<> const& range) const
+		inline random_access_const_iterator_a<> add(any_a<> const& range) const
 		{
-			random_access_iterator_a<> result = me_();
+			random_access_const_iterator_a<> result = me_();
 			for (auto const& thing : range)
 			{
 				result += thing;
@@ -540,12 +542,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline random_access_iterator_a<> add_(number_a<> const& number) const
+		inline random_access_const_iterator_a<> add_(number_a<> const& number) const
 		{
 			return operator+(number);
 		}
 
-		inline random_access_iterator_a<> operator+(number_a<> const& number) const
+		inline random_access_const_iterator_a<> operator+(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
 			result.reference__() += number.to_int_64__();
@@ -577,9 +579,9 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_iterator_a<> subtract(any_a<> const& range) const
+		inline random_access_const_iterator_a<> subtract(any_a<> const& range) const
 		{
-			random_access_iterator_a<> result = me_();
+			random_access_const_iterator_a<> result = me_();
 			for (auto const& thing : range)
 			{
 				result -= thing;
@@ -587,22 +589,161 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline random_access_iterator_a<> subtract_(number_a<> const& number) const
+		inline random_access_const_iterator_a<> subtract_(number_a<> const& number) const
 		{
 			return operator-(number);
 		}
 
-		inline random_access_iterator_a<> operator-(number_a<> const& number) const
+		inline random_access_const_iterator_a<> operator-(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
 			result.reference__() -= number.to_int_64__();
 			return result;
 		}
 
+		inline any_a<> less_than(any_a<> const& range) const
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				throw dis__("strange::lake::const_iterator::less_than passed empty range");
+			}
+			any_a<> thing = *it;
+			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
+			{
+				throw dis__("strange::lake::const_iterator::less_than passed incompatible thing");
+			}
+			return _boole_(_it < cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__());
+		}
+
+		inline any_a<> less_than_(random_access_const_iterator_a<> const& it) const
+		{
+			return _boole_(operator<(it));
+		}
+
+		inline bool operator<(random_access_const_iterator_a<> const& it) const
+		{
+			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
+			{
+				throw dis__("strange::lake::const_iterator < passed incompatible thing");
+			}
+			return _it < cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract__();
+		}
+
+		inline any_a<> greater_than(any_a<> const& range) const
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				throw dis__("strange::lake::const_iterator::greater_than passed empty range");
+			}
+			any_a<> thing = *it;
+			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
+			{
+				throw dis__("strange::lake::const_iterator::greater_than passed incompatible thing");
+			}
+			return _boole_(_it > cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__());
+		}
+
+		inline any_a<> greater_than_(random_access_const_iterator_a<> const& it) const
+		{
+			return _boole_(operator>(it));
+		}
+
+		inline bool operator>(random_access_const_iterator_a<> const& it) const
+		{
+			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
+			{
+				throw dis__("strange::lake::const_iterator > passed incompatible thing");
+			}
+			return _it > cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract__();
+		}
+
+		inline any_a<> less_or_equal(any_a<> const& range) const
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				throw dis__("strange::lake::const_iterator::less_or_equal passed empty range");
+			}
+			any_a<> thing = *it;
+			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
+			{
+				throw dis__("strange::lake::const_iterator::less_or_equal passed incompatible thing");
+			}
+			return _boole_(_it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__());
+		}
+
+		inline any_a<> less_or_equal_(random_access_const_iterator_a<> const& it) const
+		{
+			return _boole_(operator<=(it));
+		}
+
+		inline bool operator<=(random_access_const_iterator_a<> const& it) const
+		{
+			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
+			{
+				throw dis__("strange::lake::const_iterator <= passed incompatible thing");
+			}
+			return _it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract__();
+		}
+
+		inline any_a<> greater_or_equal(any_a<> const& range) const
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				throw dis__("strange::lake::const_iterator::greater_or_equal passed empty range");
+			}
+			any_a<> thing = *it;
+			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
+			{
+				throw dis__("strange::lake::const_iterator::greater_or_equal passed incompatible thing");
+			}
+			return _boole_(_it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__());
+		}
+
+		inline any_a<> greater_or_equal_(random_access_const_iterator_a<> const& it) const
+		{
+			return _boole_(operator>=(it));
+		}
+
+		inline bool operator>=(random_access_const_iterator_a<> const& it) const
+		{
+			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
+			{
+				throw dis__("strange::lake::const_iterator >= passed incompatible thing");
+			}
+			return _it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract__();
+		}
+
+		// data
+		inline ITERATOR const& extract__() const
+		{
+			return _it;
+		}
+
+		inline void mutate__(ITERATOR const& it)
+		{
+			_it = it;
+		}
+
+		inline ITERATOR& reference__()
+		{
+			return _it;
+		}
+
 	protected:
+		ITERATOR _it;
+		lake_a<> _lake;
+		mutable number_data_a<PRIMITIVE> _number;
+
 		template <typename F>
 		inline const_iterator_t(lake_a<> const& lake, F&& it)
-			: iterator_base_t(lake, std::forward<F>(it))
+			: something_t{}
+			, _it{ std::forward<F>(it) }
+			, _lake(lake, true)
+			, _number{ number_t<PRIMITIVE>::val_() }
 		{}
 	};
 
@@ -690,14 +831,24 @@ public: ___COLLECTION___
 	}
 
 	// range
-	inline random_access_iterator_a<> cbegin() const
+	inline random_access_const_iterator_a<> cbegin() const
 	{
 		return const_iterator_t<std_vector_number::const_iterator>::val__(me_(), _vector.cbegin());
 	}
 
-	inline random_access_iterator_a<> begin() const
+	inline random_access_const_iterator_a<> begin() const
 	{
 		return const_iterator_t<std_vector_number::const_iterator>::val__(me_(), _vector.cbegin());
+	}
+
+	inline any_a<> beset(any_a<> const&)
+	{
+		return beset_();
+	}
+
+	inline random_access_iterator_a<> beset_()
+	{
+		return begin();
 	}
 
 	inline random_access_iterator_a<> begin()
@@ -705,14 +856,24 @@ public: ___COLLECTION___
 		return iterator_t<std_vector_number::iterator>::val__(me_(), _vector.begin());
 	}
 
-	inline random_access_iterator_a<> cend() const
+	inline random_access_const_iterator_a<> cend() const
 	{
 		return const_iterator_t<std_vector_number::const_iterator>::val__(me_(), _vector.cend());
 	}
 
-	inline random_access_iterator_a<> end() const
+	inline random_access_const_iterator_a<> end() const
 	{
 		return const_iterator_t<std_vector_number::const_iterator>::val__(me_(), _vector.cend());
+	}
+
+	inline any_a<> enset(any_a<> const&)
+	{
+		return enset_();
+	}
+
+	inline random_access_iterator_a<> enset_()
+	{
+		return end();
 	}
 
 	inline random_access_iterator_a<> end()
