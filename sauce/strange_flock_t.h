@@ -63,7 +63,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<> get_() const
 		{
-			return operator*();
+			return *_it;
 		}
 
 		inline any_a<> set(any_a<> const& range) const

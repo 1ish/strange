@@ -443,7 +443,8 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<> get_() const
 		{
-			return operator*();
+			_number = number_t<PRIMITIVE>::val__(*_it);
+			return _number;
 		}
 
 		inline any_a<> const* operator->() const

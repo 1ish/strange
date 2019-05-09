@@ -63,17 +63,9 @@ class shoal_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<> get_() const
 		{
-			return operator*();
-		}
-
-		inline any_a<> set(any_a<> const& range) const
-		{
-			throw dis__("strange::shoal::const_iterator set called");
-		}
-
-		inline any_a<> set_(any_a<> const& thing) const
-		{
-			throw dis__("strange::shoal::const_iterator set called");
+			_pair.update__(0, _it->first);
+			_pair.update__(1, _it->second);
+			return _pair;
 		}
 
 		inline any_a<> const* operator->() const

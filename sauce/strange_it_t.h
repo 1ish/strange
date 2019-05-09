@@ -78,7 +78,7 @@ public: ___THING___
 	
 	inline any_a<> get_() const
 	{
-		return operator*();
+		return _thing;
 	}
 
 	inline any_a<> const* operator->() const

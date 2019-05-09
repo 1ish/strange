@@ -66,16 +66,6 @@ class herd_t : public something_t<_ABSTRACTION_>
 			return *_it;
 		}
 
-		inline any_a<> set(any_a<> const& range) const
-		{
-			throw dis__("strange::herd::const_iterator set called");
-		}
-
-		inline any_a<> set_(any_a<> const& thing) const
-		{
-			throw dis__("strange::herd::const_iterator set called");
-		}
-
 		inline any_a<> const* operator->() const
 		{
 			return &operator*();
@@ -83,8 +73,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<> const& operator*() const
 		{
-			_thing = *_it;
-			return _thing;
+			return *_it;
 		}
 
 		inline _ABSTRACTION_ increment(any_a<> const&)
@@ -155,14 +144,12 @@ class herd_t : public something_t<_ABSTRACTION_>
 	protected:
 		ITERATOR _it;
 		herd_a<> _herd;
-		mutable any_a<> _thing;
 
 		template <typename F>
 		inline const_iterator_t(herd_a<> const& herd, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _herd(herd, true)
-			, _thing{ nothing_t<>::val_() }
 		{}
 	};
 
