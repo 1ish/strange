@@ -240,7 +240,7 @@ inline any_a<> hash__(range_a<> const&) const \
 } \
 inline number_data_a<uint64_t> hash_() const \
 { \
-	return number_uint_64_t<>::val__(uint64_t(hash())); \
+	return number_uint_64_t<>::val(uint64_t(hash())); \
 } \
 inline range_a<> to_range__(range_a<> const& _) const \
 { \

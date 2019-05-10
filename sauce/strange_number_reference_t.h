@@ -9,12 +9,12 @@ class number_reference_t : public something_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline number_data_a<PRIMITIVE> val__(PRIMITIVE& primitive)
+	static inline number_data_a<PRIMITIVE> val(PRIMITIVE& primitive)
 	{
 		return number_data_a<PRIMITIVE>{ number_reference_t<PRIMITIVE, _ABSTRACTION_>{ primitive } };
 	}
 
-	static inline number_data_a<PRIMITIVE> ref__(PRIMITIVE& primitive)
+	static inline number_data_a<PRIMITIVE> ref(PRIMITIVE& primitive)
 	{
 		return number_data_a<PRIMITIVE>(number_reference_t<PRIMITIVE, _ABSTRACTION_>{ primitive }, true);
 	}
@@ -122,7 +122,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> add(range_a<> const& range) const
 	{
-		number_a<> result = number_t<PRIMITIVE>::val__(_number);
+		number_a<> result = number_t<PRIMITIVE>::val(_number);
 		for (auto const& thing : range)
 		{
 			result += thing;
@@ -137,7 +137,7 @@ public: ___STRANGE_THING___
 
 	inline number_a<> operator+(number_a<> const& number) const
 	{
-		number_data_a<PRIMITIVE> result = number_t<PRIMITIVE>::val__(_number);
+		number_data_a<PRIMITIVE> result = number_t<PRIMITIVE>::val(_number);
 		result.reference() += number_u<PRIMITIVE>::from_number__(number);
 		return result;
 	}
@@ -169,7 +169,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> subtract(range_a<> const& range) const
 	{
-		number_a<> result = number_t<PRIMITIVE>::val__(_number);
+		number_a<> result = number_t<PRIMITIVE>::val(_number);
 		for (auto const& thing : range)
 		{
 			result -= thing;
@@ -184,7 +184,7 @@ public: ___STRANGE_THING___
 
 	inline number_a<> operator-(number_a<> const& number) const
 	{
-		number_data_a<PRIMITIVE> result = number_t<PRIMITIVE>::val__(_number);
+		number_data_a<PRIMITIVE> result = number_t<PRIMITIVE>::val(_number);
 		result.reference() -= number_u<PRIMITIVE>::from_number__(number);
 		return result;
 	}
@@ -216,7 +216,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> multiply(range_a<> const& range) const
 	{
-		number_a<> result = number_t<PRIMITIVE>::val__(_number);
+		number_a<> result = number_t<PRIMITIVE>::val(_number);
 		for (auto const& thing : range)
 		{
 			result *= thing;
@@ -231,7 +231,7 @@ public: ___STRANGE_THING___
 
 	inline number_a<> operator*(number_a<> const& number) const
 	{
-		number_data_a<PRIMITIVE> result = number_t<PRIMITIVE>::val__(_number);
+		number_data_a<PRIMITIVE> result = number_t<PRIMITIVE>::val(_number);
 		result.reference() *= number_u<PRIMITIVE>::from_number__(number);
 		return result;
 	}
@@ -273,7 +273,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> divide(range_a<> const& range) const
 	{
-		number_a<> result = number_t<PRIMITIVE>::val__(_number);
+		number_a<> result = number_t<PRIMITIVE>::val(_number);
 		for (auto const& thing : range)
 		{
 			result /= thing;
@@ -293,7 +293,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis__("strange::number_reference / division by zero");
 		}
-		_ABSTRACTION_ result = number_t<PRIMITIVE>::val__(_number);
+		_ABSTRACTION_ result = number_t<PRIMITIVE>::val(_number);
 		result.reference() /= num;
 		return result;
 	}
@@ -335,7 +335,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> modulo(range_a<> const& range) const
 	{
-		number_a<> result = number_t<PRIMITIVE>::val__(_number);
+		number_a<> result = number_t<PRIMITIVE>::val(_number);
 		for (auto const& thing : range)
 		{
 			result %= thing;
@@ -355,7 +355,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis__("strange::number_reference % division by zero");
 		}
-		return number_t<PRIMITIVE>::val__(number_u<PRIMITIVE>::modulo__(_number, num));
+		return number_t<PRIMITIVE>::val(number_u<PRIMITIVE>::modulo__(_number, num));
 	}
 
 	inline any_a<> to_int_64(range_a<> const& _) const
@@ -365,7 +365,7 @@ public: ___STRANGE_THING___
 
 	inline number_data_a<int64_t> to_int_64_() const
 	{
-		return number_t<int64_t>::val__(to_int_64__());
+		return number_t<int64_t>::val(to_int_64__());
 	}
 
 	inline int64_t to_int_64__() const
@@ -406,7 +406,7 @@ public: ___STRANGE_THING___
 
 	inline number_data_a<uint64_t> to_uint_64_() const
 	{
-		return number_t<uint64_t>::val__(to_uint_64__());
+		return number_t<uint64_t>::val(to_uint_64__());
 	}
 
 	inline uint64_t to_uint_64__() const
@@ -447,7 +447,7 @@ public: ___STRANGE_THING___
 
 	inline number_data_a<double> to_float_64_() const
 	{
-		return number_t<double>::val__(to_float_64__());
+		return number_t<double>::val(to_float_64__());
 	}
 
 	inline double to_float_64__() const
@@ -588,7 +588,7 @@ public: ___STRANGE_THING___
 
 	static inline number_data_a<int64_t> byte_size_()
 	{
-		return number_t<int64_t>::val__(byte_size__());
+		return number_t<int64_t>::val(byte_size__());
 	}
 
 	static inline int64_t byte_size__()

@@ -91,7 +91,7 @@ inline any_a<> size(range_a<> const&) const \
 } \
 inline number_data_a<int64_t> size_() const \
 { \
-	return number_int_64_t<>::val__(size__()); \
+	return number_int_64_t<>::val(size__()); \
 } \
 inline any_a<> empty(range_a<> const&) const \
 { \

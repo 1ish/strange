@@ -9,32 +9,32 @@ class number_t : public something_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline number_data_a<PRIMITIVE> val(range_a<> const& _)
+	static inline number_data_a<PRIMITIVE> val__(range_a<> const& _)
 	{
 		return val_();
 	}
 
 	static inline number_data_a<PRIMITIVE> val_()
 	{
-		return val__(PRIMITIVE{});
+		return val(PRIMITIVE{});
 	}
 
-	static inline number_data_a<PRIMITIVE> val__(PRIMITIVE primitive)
+	static inline number_data_a<PRIMITIVE> val(PRIMITIVE primitive)
 	{
 		return number_data_a<PRIMITIVE>{ number_t<PRIMITIVE, _ABSTRACTION_>{ primitive } };
 	}
 
-	static inline number_data_a<PRIMITIVE> ref(range_a<> const& _)
+	static inline number_data_a<PRIMITIVE> ref__(range_a<> const& _)
 	{
 		return ref_();
 	}
 
 	static inline number_data_a<PRIMITIVE> ref_()
 	{
-		return ref__(PRIMITIVE{});
+		return ref(PRIMITIVE{});
 	}
 
-	static inline number_data_a<PRIMITIVE> ref__(PRIMITIVE primitive)
+	static inline number_data_a<PRIMITIVE> ref(PRIMITIVE primitive)
 	{
 		return number_data_a<PRIMITIVE>(number_t<PRIMITIVE, _ABSTRACTION_>{ primitive }, true);
 	}
@@ -379,7 +379,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis__("strange::number % division by zero");
 		}
-		return val__(number_u<PRIMITIVE>::modulo__(_number, num));
+		return val(number_u<PRIMITIVE>::modulo__(_number, num));
 	}
 
 	inline any_a<> to_int_64(range_a<> const& _) const
@@ -389,7 +389,7 @@ public: ___STRANGE_THING___
 
 	inline number_data_a<int64_t> to_int_64_() const
 	{
-		return number_t<int64_t>::val__(to_int_64__());
+		return number_t<int64_t>::val(to_int_64__());
 	}
 
 	inline int64_t to_int_64__() const
@@ -430,7 +430,7 @@ public: ___STRANGE_THING___
 
 	inline number_data_a<uint64_t> to_uint_64_() const
 	{
-		return number_t<uint64_t>::val__(to_uint_64__());
+		return number_t<uint64_t>::val(to_uint_64__());
 	}
 
 	inline uint64_t to_uint_64__() const
@@ -471,7 +471,7 @@ public: ___STRANGE_THING___
 
 	inline number_data_a<double> to_float_64_() const
 	{
-		return number_t<double>::val__(to_float_64__());
+		return number_t<double>::val(to_float_64__());
 	}
 
 	inline double to_float_64__() const
@@ -612,7 +612,7 @@ public: ___STRANGE_THING___
 
 	static inline number_data_a<int64_t> byte_size_()
 	{
-		return number_t<int64_t>::val__(byte_size__());
+		return number_t<int64_t>::val(byte_size__());
 	}
 
 	static inline int64_t byte_size__()

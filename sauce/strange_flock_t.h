@@ -13,13 +13,13 @@ class flock_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> val__(flock_a<> const& flock, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> val(flock_a<> const& flock, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>{ iterator_t(flock, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref__(flock_a<> const& flock, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> ref(flock_a<> const& flock, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>(iterator_t(flock, std::forward<F>(it)), true);
 		}
@@ -385,13 +385,13 @@ class flock_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> val__(flock_a<> const& flock, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> val(flock_a<> const& flock, F&& it)
 		{
 			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(flock, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> ref__(flock_a<> const& flock, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> ref(flock_a<> const& flock, F&& it)
 		{
 			return random_access_const_iterator_data_a<ITERATOR>(const_iterator_t(flock, std::forward<F>(it)), true);
 		}
@@ -740,34 +740,34 @@ public: ___STRANGE_COLLECTION___
 	using std_vector_any = std::vector<any_a<>>;
 
 	// construction
-	static inline flock_a<> val(range_a<> const& range)
+	static inline flock_a<> val__(range_a<> const& range)
 	{
 		return cast_<flock_a<>>(val_() += range);
 	}
 
 	static inline flock_a<> val_()
 	{
-		return val__(std_vector_any{});
+		return val(std_vector_any{});
 	}
 
 	template <typename F>
-	static inline flock_a<> val__(F&& init)
+	static inline flock_a<> val(F&& init)
 	{
 		return flock_a<>{ flock_t{ std::forward<F>(init) } };
 	}
 
-	static inline flock_a<> ref(range_a<> const& range)
+	static inline flock_a<> ref__(range_a<> const& range)
 	{
 		return cast_<flock_a<>>(ref_() += range, true);
 	}
 
 	static inline flock_a<> ref_()
 	{
-		return ref__(std_vector_any{});
+		return ref(std_vector_any{});
 	}
 
 	template <typename F>
-	static inline flock_a<> ref__(F&& init)
+	static inline flock_a<> ref(F&& init)
 	{
 		return flock_a<>(flock_t{ std::forward<F>(init) }, true);
 	}
@@ -822,12 +822,12 @@ public: ___STRANGE_COLLECTION___
 	// range
 	inline random_access_const_iterator_a<> cbegin() const
 	{
-		return const_iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cbegin());
+		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> begin() const
 	{
-		return const_iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cbegin());
+		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cbegin());
 	}
 
 	inline any_a<> beset(range_a<> const&)
@@ -842,17 +842,17 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> begin()
 	{
-		return iterator_t<std_vector_any::iterator>::val__(me_(), _vector.begin());
+		return iterator_t<std_vector_any::iterator>::val(me_(), _vector.begin());
 	}
 
 	inline random_access_const_iterator_a<> cend() const
 	{
-		return const_iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cend());
+		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cend());
 	}
 
 	inline random_access_const_iterator_a<> end() const
 	{
-		return const_iterator_t<std_vector_any::const_iterator>::val__(me_(), _vector.cend());
+		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cend());
 	}
 
 	inline any_a<> enset(range_a<> const&)
@@ -867,7 +867,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> end()
 	{
-		return iterator_t<std_vector_any::iterator>::val__(me_(), _vector.end());
+		return iterator_t<std_vector_any::iterator>::val(me_(), _vector.end());
 	}
 
 	// collection

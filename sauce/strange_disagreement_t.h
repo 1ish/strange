@@ -9,7 +9,7 @@ class disagreement_t : public misunderstanding_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline misunderstanding_a<> val(range_a<> const& range)
+	static inline misunderstanding_a<> val__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -21,16 +21,16 @@ public: ___STRANGE_THING___
 
 	static inline misunderstanding_a<> val_(any_a<> const& thing = nothing_t<>::val_())
 	{
-		return val__("");
+		return val("");
 	}
 
 	template <typename F>
-	static inline misunderstanding_a<> val__(F&& s)
+	static inline misunderstanding_a<> val(F&& s)
 	{
 		return misunderstanding_a<>{ disagreement_t{ std::forward<F>(s) } };
 	}
 
-	static inline misunderstanding_a<> ref(range_a<> const& range)
+	static inline misunderstanding_a<> ref__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -42,11 +42,11 @@ public: ___STRANGE_THING___
 
 	static inline misunderstanding_a<> ref_(any_a<> const& thing = nothing_t<>::val_())
 	{
-		return ref__("");
+		return ref("");
 	}
 
 	template <typename F>
-	static inline misunderstanding_a<> ref__(F&& s)
+	static inline misunderstanding_a<> ref(F&& s)
 	{
 		return misunderstanding_a<>(disagreement_t{ std::forward<F>(s) }, true);
 	}
@@ -92,7 +92,7 @@ protected:
 template <typename F>
 inline misunderstanding_a<> dis__(F&& s)
 {
-	return disagreement_t<>::val__(std::forward<F>(s));
+	return disagreement_t<>::val(std::forward<F>(s));
 }
 
 } // namespace strange

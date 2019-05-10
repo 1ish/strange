@@ -7,12 +7,12 @@
 class root
 {
 public:
-	static root_ val()
+	static root_ val__()
 	{
 		return root_{ root{} };
 	}
 
-	static root_ ref()
+	static root_ ref__()
 	{
 		return root_(root{}, true);
 	}
@@ -37,12 +37,12 @@ private:
 class derived
 {
 public:
-	static derived_ val()
+	static derived_ val__()
 	{
 		return derived_{ derived{} };
 	}
 
-	static derived_ ref()
+	static derived_ ref__()
 	{
 		return derived_(derived{}, true);
 	}
@@ -72,12 +72,12 @@ private:
 class finale
 {
 public:
-	static finale_ val()
+	static finale_ val__()
 	{
 		return finale_{ finale{} };
 	}
 
-	static finale_ ref()
+	static finale_ ref__()
 	{
 		return finale_(finale{}, true);
 	}
@@ -111,12 +111,12 @@ private:
 
 TEST(SomeTaste, TestName)
 {
-	root_ r_{ root::val() };
+	root_ r_{ root::val__() };
 
 	std::cout << "\n r_.print()" << std::endl;
 	r_.print();
 
-	derived_ d_{ derived::val() };
+	derived_ d_{ derived::val__() };
 	
 	std::cout << "\n d_.print()" << std::endl;
 	d_.print();
@@ -133,7 +133,7 @@ TEST(SomeTaste, TestName)
 	std::cout << "\n r2.print()" << std::endl;
 	r2.print();
 
-	root_ r3{ derived::val() };
+	root_ r3{ derived::val__() };
 
 	std::cout << "\n r3.print()" << std::endl;
 	r3.print();
@@ -143,7 +143,7 @@ TEST(SomeTaste, TestName)
 	std::cout << "\n d3.mutate()" << std::endl;
 	d3.mutate();
 
-	finale_ f_{ finale::val() };
+	finale_ f_{ finale::val__() };
 
 	std::cout << "\n f_.print()" << std::endl;
 	f_.print();
@@ -198,7 +198,7 @@ TEST(SomeTaste, TestName)
 
 TEST(SomeTaste, BadTest)
 {
-	root_ r_{ root::val() };
+	root_ r_{ root::val__() };
 	if (check_<derived_>(r_))
 	{
 		cast_<derived_>(r_);

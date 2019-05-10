@@ -12,7 +12,7 @@ class native_mutation_t : public thing_t<_ABSTRACTION_>
 public: ___STRANGE_THING___
 	// construction
 	template <typename... Args>
-	static inline any_a<> val__(member const fun, Args&&... args)
+	static inline any_a<> val(member const fun, Args&&... args)
 	{
 		std::vector<symbol_a<>> v;
 		v.reserve(sizeof...(Args));
@@ -21,7 +21,7 @@ public: ___STRANGE_THING___
 	}
 
 	template <typename... Args>
-	static inline any_a<> ref__(member const fun, Args&&... args)
+	static inline any_a<> ref(member const fun, Args&&... args)
 	{
 		std::vector<symbol_a<>> v;
 		v.reserve(sizeof...(Args));

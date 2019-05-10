@@ -28,7 +28,7 @@ class range_t : public something_t<_ABSTRACTION_>
 {
 public: ___STRANGE_RANGE___
 	// construction
-	static inline range_a<> val(range_a<> const& range)
+	static inline range_a<> val__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -57,7 +57,7 @@ public: ___STRANGE_RANGE___
 		return range_a<>{ range_t(begin, end) };
 	}
 
-	static inline range_a<> ref(range_a<> const& range)
+	static inline range_a<> ref__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())

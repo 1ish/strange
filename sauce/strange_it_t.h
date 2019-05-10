@@ -9,7 +9,7 @@ class it_t : public something_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline forward_const_iterator_a<> val(range_a<> const& range)
+	static inline forward_const_iterator_a<> val__(range_a<> const& range)
 	{
 	forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -24,7 +24,7 @@ public: ___STRANGE_THING___
 		return forward_const_iterator_a<>{ it_t<CONST, END, _ABSTRACTION_>{ thing } };
 	}
 
-	static inline forward_const_iterator_a<> ref(range_a<> const& range)
+	static inline forward_const_iterator_a<> ref__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())

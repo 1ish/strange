@@ -9,7 +9,7 @@ class cat_t : public symbol_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline cat_a<> val(range_a<> const& range)
+	static inline cat_a<> val__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -24,7 +24,7 @@ public: ___STRANGE_THING___
 		return cat_a<>{ cat_t{} };
 	}
 
-	static inline cat_a<> ref(range_a<> const& range)
+	static inline cat_a<> ref__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
