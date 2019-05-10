@@ -80,7 +80,7 @@ public: ___STRANGE_THING___
 		return _string;
 	}
 
-	inline misunderstanding_a<> add(range_a<> const& range) const
+	inline misunderstanding_a<> add__(range_a<> const& range) const
 	{
 		std::string s = _string;
 		for (any_a<> const& thing : range)

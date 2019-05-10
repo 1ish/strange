@@ -1,9 +1,9 @@
 #ifndef COM_ONEISH_STRANGE_RANDOM_ACCESS_CONST_ITERATOR_A_H
 #define COM_ONEISH_STRANGE_RANDOM_ACCESS_CONST_ITERATOR_A_H
 
- //# include "any_forward.hpp"
- //# include "range_forward.hpp"
- //# include "number_forward.hpp"
+ //#include "any_forward.hpp"
+ //#include "range_forward.hpp"
+ //#include "number_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -82,22 +82,22 @@ namespace strange {
     		return *this;
     	}
     
-     inline any_a < > self_add ( range_a < > const & range )
-     { assert(handle_); return write().self_add(range ); }
+     inline any_a < > self_add__ ( range_a < > const & range )
+     { assert(handle_); return write().self_add__(range ); }
      inline random_access_const_iterator_a self_add_ ( number_a < > const & number )
      { assert(handle_); return write().self_add_(number ); }
-     inline any_a < > add ( range_a < > const & range ) const
-     { assert(handle_); return read().add(range ); }
+     inline any_a < > add__ ( range_a < > const & range ) const
+     { assert(handle_); return read().add__(range ); }
      inline random_access_const_iterator_a add_ ( number_a < > const & number ) const
      { assert(handle_); return read().add_(number ); }
      inline random_access_const_iterator_a operator + ( number_a < > const & number ) const
      { assert(handle_); return read().operator+(number ); }
-     inline any_a < > self_subtract ( range_a < > const & range )
-     { assert(handle_); return write().self_subtract(range ); }
+     inline any_a < > self_subtract__ ( range_a < > const & range )
+     { assert(handle_); return write().self_subtract__(range ); }
      inline random_access_const_iterator_a self_subtract_ ( number_a < > const & number )
      { assert(handle_); return write().self_subtract_(number ); }
-     inline any_a < > subtract ( range_a < > const & range ) const
-     { assert(handle_); return read().subtract(range ); }
+     inline any_a < > subtract__ ( range_a < > const & range ) const
+     { assert(handle_); return read().subtract__(range ); }
      inline random_access_const_iterator_a subtract_ ( number_a < > const & number ) const
      { assert(handle_); return read().subtract_(number ); }
      inline random_access_const_iterator_a operator - ( number_a < > const & number ) const
@@ -130,14 +130,14 @@ namespace strange {
     protected:
     	struct ___ddderived_handle_base___ : ___dderived_handle_base___
     	{
-      virtual inline any_a < > self_add ( range_a < > const & range ) = 0;
+      virtual inline any_a < > self_add__ ( range_a < > const & range ) = 0;
       virtual inline random_access_const_iterator_a self_add_ ( number_a < > const & number ) = 0;
-      virtual inline any_a < > add ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > add__ ( range_a < > const & range ) const = 0;
       virtual inline random_access_const_iterator_a add_ ( number_a < > const & number ) const = 0;
       virtual inline random_access_const_iterator_a operator + ( number_a < > const & number ) const = 0;
-      virtual inline any_a < > self_subtract ( range_a < > const & range ) = 0;
+      virtual inline any_a < > self_subtract__ ( range_a < > const & range ) = 0;
       virtual inline random_access_const_iterator_a self_subtract_ ( number_a < > const & number ) = 0;
-      virtual inline any_a < > subtract ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > subtract__ ( range_a < > const & range ) const = 0;
       virtual inline random_access_const_iterator_a subtract_ ( number_a < > const & number ) const = 0;
       virtual inline random_access_const_iterator_a operator - ( number_a < > const & number ) const = 0;
       virtual inline any_a < > less_than ( range_a < > const & range ) const = 0;
@@ -167,22 +167,22 @@ namespace strange {
     			: ___dderived_handle___<___TTT___, ___DDDHB___>{ std::move(value) }
     		{}
     
-      virtual inline any_a < > self_add ( range_a < > const & range )
-      { return value_.self_add(range ); }
+      virtual inline any_a < > self_add__ ( range_a < > const & range )
+      { return value_.self_add__(range ); }
       virtual inline random_access_const_iterator_a self_add_ ( number_a < > const & number )
       { return value_.self_add_(number ); }
-      virtual inline any_a < > add ( range_a < > const & range ) const
-      { return value_.add(range ); }
+      virtual inline any_a < > add__ ( range_a < > const & range ) const
+      { return value_.add__(range ); }
       virtual inline random_access_const_iterator_a add_ ( number_a < > const & number ) const
       { return value_.add_(number ); }
       virtual inline random_access_const_iterator_a operator + ( number_a < > const & number ) const
       { return value_.operator+(number ); }
-      virtual inline any_a < > self_subtract ( range_a < > const & range )
-      { return value_.self_subtract(range ); }
+      virtual inline any_a < > self_subtract__ ( range_a < > const & range )
+      { return value_.self_subtract__(range ); }
       virtual inline random_access_const_iterator_a self_subtract_ ( number_a < > const & number )
       { return value_.self_subtract_(number ); }
-      virtual inline any_a < > subtract ( range_a < > const & range ) const
-      { return value_.subtract(range ); }
+      virtual inline any_a < > subtract__ ( range_a < > const & range ) const
+      { return value_.subtract__(range ); }
       virtual inline random_access_const_iterator_a subtract_ ( number_a < > const & number ) const
       { return value_.subtract_(number ); }
       virtual inline random_access_const_iterator_a operator - ( number_a < > const & number ) const

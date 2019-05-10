@@ -59,7 +59,7 @@ public: ___STRANGE_THING___
 	}
 
 	// misunderstanding
-	inline misunderstanding_a<> add(range_a<> const& range) const
+	inline misunderstanding_a<> add__(range_a<> const& range) const
 	{
 		std::string s = _string;
 		for (any_a<> const& thing : range)

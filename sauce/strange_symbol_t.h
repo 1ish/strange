@@ -85,7 +85,7 @@ public: ___STRANGE_THING___
 		return _string;
 	}
 
-	inline symbol_a<> add(range_a<> const& range) const
+	inline symbol_a<> add__(range_a<> const& range) const
 	{
 		std::string s = _string;
 		for (any_a<> const& thing : range)

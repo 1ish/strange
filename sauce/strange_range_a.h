@@ -1,8 +1,8 @@
 #ifndef COM_ONEISH_STRANGE_RANGE_A_H
 #define COM_ONEISH_STRANGE_RANGE_A_H
 
- //# include "any_forward.hpp"
- //# include "forward_const_iterator_forward.hpp"
+ //#include "any_forward.hpp"
+ //#include "forward_const_iterator_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -81,16 +81,16 @@ namespace strange {
     		return *this;
     	}
     
-     inline any_a < > beget ( range_a const & _ ) const
-     { assert(handle_); return read().beget(_ ); }
+     inline any_a < > beget__ ( range_a const & _ ) const
+     { assert(handle_); return read().beget__(_ ); }
      inline forward_const_iterator_a < > beget_ ( ) const
      { assert(handle_); return read().beget_( ); }
      inline forward_const_iterator_a < > cbegin ( ) const
      { assert(handle_); return read().cbegin( ); }
      inline forward_const_iterator_a < > begin ( ) const
      { assert(handle_); return read().begin( ); }
-     inline any_a < > enget ( range_a const & _ ) const
-     { assert(handle_); return read().enget(_ ); }
+     inline any_a < > enget__ ( range_a const & _ ) const
+     { assert(handle_); return read().enget__(_ ); }
      inline forward_const_iterator_a < > enget_ ( ) const
      { assert(handle_); return read().enget_( ); }
      inline forward_const_iterator_a < > cend ( ) const
@@ -101,11 +101,11 @@ namespace strange {
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
-      virtual inline any_a < > beget ( range_a const & _ ) const = 0;
+      virtual inline any_a < > beget__ ( range_a const & _ ) const = 0;
       virtual inline forward_const_iterator_a < > beget_ ( ) const = 0;
       virtual inline forward_const_iterator_a < > cbegin ( ) const = 0;
       virtual inline forward_const_iterator_a < > begin ( ) const = 0;
-      virtual inline any_a < > enget ( range_a const & _ ) const = 0;
+      virtual inline any_a < > enget__ ( range_a const & _ ) const = 0;
       virtual inline forward_const_iterator_a < > enget_ ( ) const = 0;
       virtual inline forward_const_iterator_a < > cend ( ) const = 0;
       virtual inline forward_const_iterator_a < > end ( ) const = 0;
@@ -124,16 +124,16 @@ namespace strange {
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
-      virtual inline any_a < > beget ( range_a const & _ ) const
-      { return value_.beget(_ ); }
+      virtual inline any_a < > beget__ ( range_a const & _ ) const
+      { return value_.beget__(_ ); }
       virtual inline forward_const_iterator_a < > beget_ ( ) const
       { return value_.beget_( ); }
       virtual inline forward_const_iterator_a < > cbegin ( ) const
       { return value_.cbegin( ); }
       virtual inline forward_const_iterator_a < > begin ( ) const
       { return value_.begin( ); }
-      virtual inline any_a < > enget ( range_a const & _ ) const
-      { return value_.enget(_ ); }
+      virtual inline any_a < > enget__ ( range_a const & _ ) const
+      { return value_.enget__(_ ); }
       virtual inline forward_const_iterator_a < > enget_ ( ) const
       { return value_.enget_( ); }
       virtual inline forward_const_iterator_a < > cend ( ) const

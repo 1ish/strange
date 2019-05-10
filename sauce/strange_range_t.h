@@ -6,7 +6,7 @@ namespace strange
 
 // adaptation
 #define ___STRANGE_RANGE___ ___STRANGE_THING___ \
-inline any_a<> beget(range_a<> const&) const \
+inline any_a<> beget__(range_a<> const&) const \
 { \
 return beget_(); \
 } \
@@ -14,7 +14,7 @@ inline forward_const_iterator_a<> beget_() const \
 { \
 return cbegin(); \
 } \
-inline any_a<> enget(range_a<> const&) const \
+inline any_a<> enget__(range_a<> const&) const \
 { \
 return enget_(); \
 } \

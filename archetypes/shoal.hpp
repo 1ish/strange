@@ -16,18 +16,18 @@ class shoal_a
 {
 public:
 	// shoal
-	inline bool has__(std::string const& s) const;
-	inline any_a<> at__(std::string const& s) const;
-	inline void update__(std::string const& s, any_a<> const& value);
-	inline bool insert__(std::string const& s, any_a<> const& value);
-	inline bool erase__(std::string const& s);
+	inline bool has(std::string const& s) const;
+	inline any_a<> at(std::string const& s) const;
+	inline void update(std::string const& s, any_a<> const& value);
+	inline bool insert(std::string const& s, any_a<> const& value);
+	inline bool erase(std::string const& s);
 
 	// mutable range
-	inline any_a<> beset(range_a<> const& _);
+	inline any_a<> beset__(range_a<> const& _);
 	inline bidirectional_iterator_a beset_();
 	inline bidirectional_iterator_a begin();
 
-	inline any_a<> enset(range_a<> const& _);
+	inline any_a<> enset__(range_a<> const& _);
 	inline bidirectional_iterator_a enset_();
 	inline bidirectional_iterator_a end();
 

@@ -259,15 +259,15 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// collection
-	inline bool has__(any_a<> const& key) const
+	inline bool has(any_a<> const& key) const
 	{
 		std_unordered_set_any::const_iterator const it = _set.find(key);
 		return it != _set.cend();
 	}
 
-	inline bool has__(std::string const& s) const
+	inline bool has(std::string const& s) const
 	{
-		return has__(sym(s));
+		return has(sym(s));
 	}
 
 	inline any_a<> at_(any_a<> const& key) const
@@ -280,7 +280,7 @@ public: ___STRANGE_COLLECTION___
 		return *it;
 	}
 
-	inline bool at__(std::string const& s) const
+	inline bool at(std::string const& s) const
 	{
 		std_unordered_set_any::const_iterator const it = _set.find(sym(s));
 		return it != _set.cend();
@@ -292,44 +292,44 @@ public: ___STRANGE_COLLECTION___
 		return value;
 	}
 
-	inline bool insert__(any_a<> const& key, any_a<> const&)
+	inline bool insert(any_a<> const& key, any_a<> const&)
 	{
 		return _set.insert(key).second;
 	}
 
-	inline bool insert__(std::string const& s)
+	inline bool insert(std::string const& s)
 	{
 		return _set.insert(sym(s)).second;
 	}
 
-	inline bool erase__(any_a<> const& key)
+	inline bool erase(any_a<> const& key)
 	{
 		return _set.erase(key);
 	}
 
-	inline bool erase__(std::string const& s)
+	inline bool erase(std::string const& s)
 	{
 		return _set.erase(sym(s));
 	}
 
-	inline void clear__()
+	inline void clear()
 	{
 		_set.clear();
 	}
 
-	inline int64_t size__() const
+	inline int64_t size() const
 	{
 		return int64_t(_set.size());
 	}
 
-	inline bool empty__() const
+	inline bool empty() const
 	{
 		return _set.empty();
 	}
 
-	inline void push_front__(any_a<> const& thing)
+	inline void push_front(any_a<> const& thing)
 	{
-		push_back__(thing);
+		push_back(thing);
 	}
 
 	inline any_a<> pop_front_()
@@ -337,7 +337,7 @@ public: ___STRANGE_COLLECTION___
 		return pop_back_();
 	}
 
-	inline void push_back__(any_a<> const& thing)
+	inline void push_back(any_a<> const& thing)
 	{
 		_set.insert(thing);
 	}
@@ -362,7 +362,7 @@ public: ___STRANGE_COLLECTION___
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
-			insert(thing.to_range_());
+			insert__(thing.to_range_());
 		}
 		return *this;
 	}
@@ -375,7 +375,7 @@ public: ___STRANGE_COLLECTION___
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
-			erase(thing.to_range_());
+			erase__(thing.to_range_());
 		}
 		return *this;
 	}

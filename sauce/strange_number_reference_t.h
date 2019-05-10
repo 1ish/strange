@@ -95,7 +95,7 @@ public: ___STRANGE_THING___
 		--_number;
 	}
 
-	inline any_a<> self_add(range_a<> const& range)
+	inline any_a<> self_add__(range_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -120,7 +120,7 @@ public: ___STRANGE_THING___
 		return *this;
 	}
 
-	inline any_a<> add(range_a<> const& range) const
+	inline any_a<> add__(range_a<> const& range) const
 	{
 		number_a<> result = number_t<PRIMITIVE>::val(_number);
 		for (auto const& thing : range)
@@ -142,7 +142,7 @@ public: ___STRANGE_THING___
 		return result;
 	}
 
-	inline any_a<> self_subtract(range_a<> const& range)
+	inline any_a<> self_subtract__(range_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -167,7 +167,7 @@ public: ___STRANGE_THING___
 		return *this;
 	}
 
-	inline any_a<> subtract(range_a<> const& range) const
+	inline any_a<> subtract__(range_a<> const& range) const
 	{
 		number_a<> result = number_t<PRIMITIVE>::val(_number);
 		for (auto const& thing : range)
@@ -581,17 +581,17 @@ public: ___STRANGE_THING___
 		return _number >= number_u<PRIMITIVE>::from_number__(number);
 	}
 
-	static inline any_a<> byte_size(range_a<> const& _)
+	static inline any_a<> byte_size__(range_a<> const& _)
 	{
 		return byte_size_();
 	}
 
 	static inline number_data_a<int64_t> byte_size_()
 	{
-		return number_t<int64_t>::val(byte_size__());
+		return number_t<int64_t>::val(byte_size());
 	}
 
-	static inline int64_t byte_size__()
+	static inline int64_t byte_size()
 	{
 		return int64_t(sizeof(_number));
 	}

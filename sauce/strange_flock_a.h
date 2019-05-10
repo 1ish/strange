@@ -1,8 +1,8 @@
 #ifndef COM_ONEISH_STRANGE_FLOCK_A_H
 #define COM_ONEISH_STRANGE_FLOCK_A_H
 
- //# include "any_forward.hpp"
- //# include "range_forward.hpp"
+ //#include "any_forward.hpp"
+ //#include "range_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -81,24 +81,24 @@ namespace strange {
     		return *this;
     	}
     
-     inline bool has__ ( int64_t index ) const
-     { assert(handle_); return read().has__(index ); }
-     inline any_a < > at__ ( int64_t index ) const
-     { assert(handle_); return read().at__(index ); }
-     inline void update__ ( int64_t index , any_a < > const & value )
-     { assert(handle_); write().update__(index, value ); }
-     inline bool insert__ ( int64_t index , any_a < > const & value )
-     { assert(handle_); return write().insert__(index, value ); }
-     inline bool erase__ ( int64_t index )
-     { assert(handle_); return write().erase__(index ); }
-     inline any_a < > beset ( range_a < > const & _ )
-     { assert(handle_); return write().beset(_ ); }
+     inline bool has ( int64_t index ) const
+     { assert(handle_); return read().has(index ); }
+     inline any_a < > at ( int64_t index ) const
+     { assert(handle_); return read().at(index ); }
+     inline void update ( int64_t index , any_a < > const & value )
+     { assert(handle_); write().update(index, value ); }
+     inline bool insert ( int64_t index , any_a < > const & value )
+     { assert(handle_); return write().insert(index, value ); }
+     inline bool erase ( int64_t index )
+     { assert(handle_); return write().erase(index ); }
+     inline any_a < > beset__ ( range_a < > const & _ )
+     { assert(handle_); return write().beset__(_ ); }
      inline random_access_iterator_a beset_ ( )
      { assert(handle_); return write().beset_( ); }
      inline random_access_iterator_a begin ( )
      { assert(handle_); return write().begin( ); }
-     inline any_a < > enset ( range_a < > const & _ )
-     { assert(handle_); return write().enset(_ ); }
+     inline any_a < > enset__ ( range_a < > const & _ )
+     { assert(handle_); return write().enset__(_ ); }
      inline random_access_iterator_a enset_ ( )
      { assert(handle_); return write().enset_( ); }
      inline random_access_iterator_a end ( )
@@ -113,15 +113,15 @@ namespace strange {
     private:
     	struct ___finale_handle_base___ : ___dderived_handle_base___
     	{
-      virtual inline bool has__ ( int64_t index ) const = 0;
-      virtual inline any_a < > at__ ( int64_t index ) const = 0;
-      virtual inline void update__ ( int64_t index , any_a < > const & value ) = 0;
-      virtual inline bool insert__ ( int64_t index , any_a < > const & value ) = 0;
-      virtual inline bool erase__ ( int64_t index ) = 0;
-      virtual inline any_a < > beset ( range_a < > const & _ ) = 0;
+      virtual inline bool has ( int64_t index ) const = 0;
+      virtual inline any_a < > at ( int64_t index ) const = 0;
+      virtual inline void update ( int64_t index , any_a < > const & value ) = 0;
+      virtual inline bool insert ( int64_t index , any_a < > const & value ) = 0;
+      virtual inline bool erase ( int64_t index ) = 0;
+      virtual inline any_a < > beset__ ( range_a < > const & _ ) = 0;
       virtual inline random_access_iterator_a beset_ ( ) = 0;
       virtual inline random_access_iterator_a begin ( ) = 0;
-      virtual inline any_a < > enset ( range_a < > const & _ ) = 0;
+      virtual inline any_a < > enset__ ( range_a < > const & _ ) = 0;
       virtual inline random_access_iterator_a enset_ ( ) = 0;
       virtual inline random_access_iterator_a end ( ) = 0;
       virtual inline std :: vector < any_a < >> const & extract ( ) const = 0;
@@ -147,24 +147,24 @@ namespace strange {
     			return std::make_shared<___finale_handle_final___>(___dderived_handle___<___TTT___, ___finale_handle_base___>::value_);
     		}
     
-      virtual inline bool has__ ( int64_t index ) const
-      { return value_.has__(index ); }
-      virtual inline any_a < > at__ ( int64_t index ) const
-      { return value_.at__(index ); }
-      virtual inline void update__ ( int64_t index , any_a < > const & value )
-      { value_.update__(index, value ); }
-      virtual inline bool insert__ ( int64_t index , any_a < > const & value )
-      { return value_.insert__(index, value ); }
-      virtual inline bool erase__ ( int64_t index )
-      { return value_.erase__(index ); }
-      virtual inline any_a < > beset ( range_a < > const & _ )
-      { return value_.beset(_ ); }
+      virtual inline bool has ( int64_t index ) const
+      { return value_.has(index ); }
+      virtual inline any_a < > at ( int64_t index ) const
+      { return value_.at(index ); }
+      virtual inline void update ( int64_t index , any_a < > const & value )
+      { value_.update(index, value ); }
+      virtual inline bool insert ( int64_t index , any_a < > const & value )
+      { return value_.insert(index, value ); }
+      virtual inline bool erase ( int64_t index )
+      { return value_.erase(index ); }
+      virtual inline any_a < > beset__ ( range_a < > const & _ )
+      { return value_.beset__(_ ); }
       virtual inline random_access_iterator_a beset_ ( )
       { return value_.beset_( ); }
       virtual inline random_access_iterator_a begin ( )
       { return value_.begin( ); }
-      virtual inline any_a < > enset ( range_a < > const & _ )
-      { return value_.enset(_ ); }
+      virtual inline any_a < > enset__ ( range_a < > const & _ )
+      { return value_.enset__(_ ); }
       virtual inline random_access_iterator_a enset_ ( )
       { return value_.enset_( ); }
       virtual inline random_access_iterator_a end ( )

@@ -1,8 +1,8 @@
 #ifndef COM_ONEISH_STRANGE_SHOAL_A_H
 #define COM_ONEISH_STRANGE_SHOAL_A_H
 
- //# include "any_forward.hpp"
- //# include "range_forward.hpp"
+ //#include "any_forward.hpp"
+ //#include "range_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -81,24 +81,24 @@ namespace strange {
     		return *this;
     	}
     
-     inline bool has__ ( std :: string const & s ) const
-     { assert(handle_); return read().has__(s ); }
-     inline any_a < > at__ ( std :: string const & s ) const
-     { assert(handle_); return read().at__(s ); }
-     inline void update__ ( std :: string const & s , any_a < > const & value )
-     { assert(handle_); write().update__(s, value ); }
-     inline bool insert__ ( std :: string const & s , any_a < > const & value )
-     { assert(handle_); return write().insert__(s, value ); }
-     inline bool erase__ ( std :: string const & s )
-     { assert(handle_); return write().erase__(s ); }
-     inline any_a < > beset ( range_a < > const & _ )
-     { assert(handle_); return write().beset(_ ); }
+     inline bool has ( std :: string const & s ) const
+     { assert(handle_); return read().has(s ); }
+     inline any_a < > at ( std :: string const & s ) const
+     { assert(handle_); return read().at(s ); }
+     inline void update ( std :: string const & s , any_a < > const & value )
+     { assert(handle_); write().update(s, value ); }
+     inline bool insert ( std :: string const & s , any_a < > const & value )
+     { assert(handle_); return write().insert(s, value ); }
+     inline bool erase ( std :: string const & s )
+     { assert(handle_); return write().erase(s ); }
+     inline any_a < > beset__ ( range_a < > const & _ )
+     { assert(handle_); return write().beset__(_ ); }
      inline bidirectional_iterator_a beset_ ( )
      { assert(handle_); return write().beset_( ); }
      inline bidirectional_iterator_a begin ( )
      { assert(handle_); return write().begin( ); }
-     inline any_a < > enset ( range_a < > const & _ )
-     { assert(handle_); return write().enset(_ ); }
+     inline any_a < > enset__ ( range_a < > const & _ )
+     { assert(handle_); return write().enset__(_ ); }
      inline bidirectional_iterator_a enset_ ( )
      { assert(handle_); return write().enset_( ); }
      inline bidirectional_iterator_a end ( )
@@ -113,15 +113,15 @@ namespace strange {
     private:
     	struct ___finale_handle_base___ : ___dderived_handle_base___
     	{
-      virtual inline bool has__ ( std :: string const & s ) const = 0;
-      virtual inline any_a < > at__ ( std :: string const & s ) const = 0;
-      virtual inline void update__ ( std :: string const & s , any_a < > const & value ) = 0;
-      virtual inline bool insert__ ( std :: string const & s , any_a < > const & value ) = 0;
-      virtual inline bool erase__ ( std :: string const & s ) = 0;
-      virtual inline any_a < > beset ( range_a < > const & _ ) = 0;
+      virtual inline bool has ( std :: string const & s ) const = 0;
+      virtual inline any_a < > at ( std :: string const & s ) const = 0;
+      virtual inline void update ( std :: string const & s , any_a < > const & value ) = 0;
+      virtual inline bool insert ( std :: string const & s , any_a < > const & value ) = 0;
+      virtual inline bool erase ( std :: string const & s ) = 0;
+      virtual inline any_a < > beset__ ( range_a < > const & _ ) = 0;
       virtual inline bidirectional_iterator_a beset_ ( ) = 0;
       virtual inline bidirectional_iterator_a begin ( ) = 0;
-      virtual inline any_a < > enset ( range_a < > const & _ ) = 0;
+      virtual inline any_a < > enset__ ( range_a < > const & _ ) = 0;
       virtual inline bidirectional_iterator_a enset_ ( ) = 0;
       virtual inline bidirectional_iterator_a end ( ) = 0;
       virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract ( ) const = 0;
@@ -147,24 +147,24 @@ namespace strange {
     			return std::make_shared<___finale_handle_final___>(___dderived_handle___<___TTT___, ___finale_handle_base___>::value_);
     		}
     
-      virtual inline bool has__ ( std :: string const & s ) const
-      { return value_.has__(s ); }
-      virtual inline any_a < > at__ ( std :: string const & s ) const
-      { return value_.at__(s ); }
-      virtual inline void update__ ( std :: string const & s , any_a < > const & value )
-      { value_.update__(s, value ); }
-      virtual inline bool insert__ ( std :: string const & s , any_a < > const & value )
-      { return value_.insert__(s, value ); }
-      virtual inline bool erase__ ( std :: string const & s )
-      { return value_.erase__(s ); }
-      virtual inline any_a < > beset ( range_a < > const & _ )
-      { return value_.beset(_ ); }
+      virtual inline bool has ( std :: string const & s ) const
+      { return value_.has(s ); }
+      virtual inline any_a < > at ( std :: string const & s ) const
+      { return value_.at(s ); }
+      virtual inline void update ( std :: string const & s , any_a < > const & value )
+      { value_.update(s, value ); }
+      virtual inline bool insert ( std :: string const & s , any_a < > const & value )
+      { return value_.insert(s, value ); }
+      virtual inline bool erase ( std :: string const & s )
+      { return value_.erase(s ); }
+      virtual inline any_a < > beset__ ( range_a < > const & _ )
+      { return value_.beset__(_ ); }
       virtual inline bidirectional_iterator_a beset_ ( )
       { return value_.beset_( ); }
       virtual inline bidirectional_iterator_a begin ( )
       { return value_.begin( ); }
-      virtual inline any_a < > enset ( range_a < > const & _ )
-      { return value_.enset(_ ); }
+      virtual inline any_a < > enset__ ( range_a < > const & _ )
+      { return value_.enset__(_ ); }
       virtual inline bidirectional_iterator_a enset_ ( )
       { return value_.enset_( ); }
       virtual inline bidirectional_iterator_a end ( )

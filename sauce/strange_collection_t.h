@@ -6,7 +6,7 @@ namespace strange
 
 // adaptation
 #define ___STRANGE_COLLECTION___ ___STRANGE_RANGE___ \
-inline any_a<> has(range_a<> const& range) const \
+inline any_a<> has__(range_a<> const& range) const \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -17,9 +17,9 @@ inline any_a<> has(range_a<> const& range) const \
 } \
 inline any_a<> has_(any_a<> const& key) const \
 { \
-	return _boole_(has__(key)); \
+	return _boole_(has(key)); \
 } \
-inline any_a<> at(range_a<> const& range) const \
+inline any_a<> at__(range_a<> const& range) const \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -28,7 +28,7 @@ inline any_a<> at(range_a<> const& range) const \
 	} \
 	return at_(*it); \
 } \
-inline any_a<> update(range_a<> const& range) \
+inline any_a<> update__(range_a<> const& range) \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -42,7 +42,7 @@ inline any_a<> update(range_a<> const& range) \
 	} \
 	return update_(key, *it); \
 } \
-inline any_a<> insert(range_a<> const& range) \
+inline any_a<> insert__(range_a<> const& range) \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -58,14 +58,14 @@ inline any_a<> insert(range_a<> const& range) \
 } \
 inline any_a<> insert_(any_a<> const& key, any_a<> const& value) \
 { \
-	return _boole_(insert__(key, value)); \
+	return _boole_(insert(key, value)); \
 } \
-inline any_a<> erase(range_a<> const& range) \
+inline any_a<> erase__(range_a<> const& range) \
 { \
 	bool erased = false; \
 	for (auto const& key : range) \
 	{ \
-		if (erase__(key)) \
+		if (erase(key)) \
 		{ \
 			erased = true; \
 		} \
@@ -74,68 +74,68 @@ inline any_a<> erase(range_a<> const& range) \
 } \
 inline any_a<> erase_(any_a<> const& key) \
 { \
-	return _boole_(erase__(key)); \
+	return _boole_(erase(key)); \
 } \
-inline _ABSTRACTION_ clear(range_a<> const&) \
+inline _ABSTRACTION_ clear__(range_a<> const&) \
 { \
 	return clear_(); \
 } \
 inline _ABSTRACTION_ clear_() \
 { \
-	clear__(); \
+	clear(); \
 	return me_(); \
 } \
-inline any_a<> size(range_a<> const&) const \
+inline any_a<> size__(range_a<> const&) const \
 { \
 	return size_(); \
 } \
 inline number_data_a<int64_t> size_() const \
 { \
-	return number_int_64_t<>::val(size__()); \
+	return number_int_64_t<>::val(size()); \
 } \
-inline any_a<> empty(range_a<> const&) const \
+inline any_a<> empty__(range_a<> const&) const \
 { \
 	return empty_(); \
 } \
 inline any_a<> empty_() const \
 { \
-	return _boole_(empty__()); \
+	return _boole_(empty()); \
 } \
-inline _ABSTRACTION_ push_front(range_a<> const& range) \
+inline _ABSTRACTION_ push_front__(range_a<> const& range) \
 { \
 	for (auto const& value : range) \
 	{ \
-		push_front__(value); \
+		push_front(value); \
 	} \
 	return me_(); \
 } \
 inline _ABSTRACTION_ push_front_(any_a<> const& value) \
 { \
-	push_front__(value); \
+	push_front(value); \
 	return me_(); \
 } \
-inline any_a<> pop_front(range_a<> const&) \
+inline any_a<> pop_front__(range_a<> const&) \
 { \
 	return pop_front_(); \
 } \
-inline _ABSTRACTION_ push_back(range_a<> const& range) \
+inline _ABSTRACTION_ push_back__(range_a<> const& range) \
 { \
 	for (auto const& value : range) \
 	{ \
-		push_back__(value); \
+		push_back(value); \
 	} \
 	return me_(); \
 } \
 inline _ABSTRACTION_ push_back_(any_a<> const& value) \
 { \
-	push_back__(value); \
+	push_back(value); \
 	return me_(); \
 } \
-inline any_a<> pop_back(range_a<> const&) \
+inline any_a<> pop_back__(range_a<> const&) \
 { \
 	return pop_back_(); \
 } \
-inline _ABSTRACTION_ self_add(range_a<> const& range) \
+inline _ABSTRACTION_ self_add__(range_a<> const& range) \
 { \
 	for (auto const& collection : range) \
 	{ \
@@ -148,7 +148,7 @@ inline _ABSTRACTION_ self_add_(collection_a<> const& collection) \
 	operator+=(collection); \
 	return me_(); \
 } \
-inline _ABSTRACTION_ add(range_a<> const& range) const \
+inline _ABSTRACTION_ add__(range_a<> const& range) const \
 { \
 	_ABSTRACTION_ result = me_(); \
 	for (auto const& collection : range) \
@@ -167,7 +167,7 @@ inline _ABSTRACTION_ operator+(collection_a<> const& collection) const \
 	result += collection; \
 	return result; \
 } \
-inline _ABSTRACTION_ self_subtract(range_a<> const& range) \
+inline _ABSTRACTION_ self_subtract__(range_a<> const& range) \
 { \
 	for (auto const& collection : range) \
 	{ \
@@ -180,7 +180,7 @@ inline _ABSTRACTION_ self_subtract_(collection_a<> const& collection) \
 	operator-=(collection); \
 	return me_(); \
 } \
-inline _ABSTRACTION_ subtract(range_a<> const& range) const \
+inline _ABSTRACTION_ subtract__(range_a<> const& range) const \
 { \
 	_ABSTRACTION_ result = me_(); \
 	for (auto const& collection : range) \

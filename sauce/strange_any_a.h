@@ -1,11 +1,11 @@
 #ifndef COM_ONEISH_STRANGE_ANY_A_H
 #define COM_ONEISH_STRANGE_ANY_A_H
 
- //# include "definitions.hpp"
- //# include "symbol_forward.hpp"
- //# include "cat_forward.hpp"
- //# include "range_forward.hpp"
- //# include "number_data_forward.hpp"
+ //#include "definitions.hpp"
+ //#include "symbol_forward.hpp"
+ //#include "cat_forward.hpp"
+ //#include "range_forward.hpp"
+ //#include "number_data_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>

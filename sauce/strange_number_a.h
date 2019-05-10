@@ -1,8 +1,8 @@
 #ifndef COM_ONEISH_STRANGE_NUMBER_A_H
 #define COM_ONEISH_STRANGE_NUMBER_A_H
 
- //# include "any_forward.hpp"
- //# include "range_forward.hpp"
+ //#include "any_forward.hpp"
+ //#include "range_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -89,22 +89,22 @@ namespace strange {
      { assert(handle_); return write().decrement__(_ ); }
      inline number_a decrement_ ( )
      { assert(handle_); return write().decrement_( ); }
-     inline any_a < > self_add ( range_a < > const & range )
-     { assert(handle_); return write().self_add(range ); }
+     inline any_a < > self_add__ ( range_a < > const & range )
+     { assert(handle_); return write().self_add__(range ); }
      inline number_a self_add_ ( number_a const & number )
      { assert(handle_); return write().self_add_(number ); }
-     inline any_a < > add ( range_a < > const & range ) const
-     { assert(handle_); return read().add(range ); }
+     inline any_a < > add__ ( range_a < > const & range ) const
+     { assert(handle_); return read().add__(range ); }
      inline number_a add_ ( number_a const & number ) const
      { assert(handle_); return read().add_(number ); }
      inline number_a operator + ( number_a const & number ) const
      { assert(handle_); return read().operator+(number ); }
-     inline any_a < > self_subtract ( range_a < > const & range )
-     { assert(handle_); return write().self_subtract(range ); }
+     inline any_a < > self_subtract__ ( range_a < > const & range )
+     { assert(handle_); return write().self_subtract__(range ); }
      inline number_a self_subtract_ ( number_a const & number )
      { assert(handle_); return write().self_subtract_(number ); }
-     inline any_a < > subtract ( range_a < > const & range ) const
-     { assert(handle_); return read().subtract(range ); }
+     inline any_a < > subtract__ ( range_a < > const & range ) const
+     { assert(handle_); return read().subtract__(range ); }
      inline number_a subtract_ ( number_a const & number ) const
      { assert(handle_); return read().subtract_(number ); }
      inline number_a operator - ( number_a const & number ) const
@@ -199,12 +199,12 @@ namespace strange {
      { assert(handle_); return read().greater_or_equal_(number ); }
      inline bool operator >= ( number_a const & number ) const
      { assert(handle_); return read().operator>=(number ); }
-     inline any_a < > byte_size ( range_a < > const & _ ) const
-     { assert(handle_); return read().byte_size(_ ); }
+     inline any_a < > byte_size__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().byte_size__(_ ); }
      inline number_data_a_int64 byte_size_ ( ) const
      { assert(handle_); return read().byte_size_( ); }
-     inline int64_t byte_size__ ( ) const
-     { assert(handle_); return read().byte_size__( ); }
+     inline int64_t byte_size ( ) const
+     { assert(handle_); return read().byte_size( ); }
      inline any_a < > is_int ( range_a < > const & _ ) const
      { assert(handle_); return read().is_int(_ ); }
      inline any_a < > is_int_ ( ) const
@@ -255,14 +255,14 @@ namespace strange {
       virtual inline number_a increment_ ( ) = 0;
       virtual inline any_a < > decrement__ ( range_a < > const & _ ) = 0;
       virtual inline number_a decrement_ ( ) = 0;
-      virtual inline any_a < > self_add ( range_a < > const & range ) = 0;
+      virtual inline any_a < > self_add__ ( range_a < > const & range ) = 0;
       virtual inline number_a self_add_ ( number_a const & number ) = 0;
-      virtual inline any_a < > add ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > add__ ( range_a < > const & range ) const = 0;
       virtual inline number_a add_ ( number_a const & number ) const = 0;
       virtual inline number_a operator + ( number_a const & number ) const = 0;
-      virtual inline any_a < > self_subtract ( range_a < > const & range ) = 0;
+      virtual inline any_a < > self_subtract__ ( range_a < > const & range ) = 0;
       virtual inline number_a self_subtract_ ( number_a const & number ) = 0;
-      virtual inline any_a < > subtract ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > subtract__ ( range_a < > const & range ) const = 0;
       virtual inline number_a subtract_ ( number_a const & number ) const = 0;
       virtual inline number_a operator - ( number_a const & number ) const = 0;
       virtual inline any_a < > self_multiply ( range_a < > const & range ) = 0;
@@ -310,9 +310,9 @@ namespace strange {
       virtual inline any_a < > greater_or_equal ( range_a < > const & range ) const = 0;
       virtual inline any_a < > greater_or_equal_ ( number_a const & number ) const = 0;
       virtual inline bool operator >= ( number_a const & number ) const = 0;
-      virtual inline any_a < > byte_size ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > byte_size__ ( range_a < > const & _ ) const = 0;
       virtual inline number_data_a_int64 byte_size_ ( ) const = 0;
-      virtual inline int64_t byte_size__ ( ) const = 0;
+      virtual inline int64_t byte_size ( ) const = 0;
       virtual inline any_a < > is_int ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > is_int_ ( ) const = 0;
       virtual inline bool is_int__ ( ) const = 0;
@@ -357,22 +357,22 @@ namespace strange {
       { return value_.decrement__(_ ); }
       virtual inline number_a decrement_ ( )
       { return value_.decrement_( ); }
-      virtual inline any_a < > self_add ( range_a < > const & range )
-      { return value_.self_add(range ); }
+      virtual inline any_a < > self_add__ ( range_a < > const & range )
+      { return value_.self_add__(range ); }
       virtual inline number_a self_add_ ( number_a const & number )
       { return value_.self_add_(number ); }
-      virtual inline any_a < > add ( range_a < > const & range ) const
-      { return value_.add(range ); }
+      virtual inline any_a < > add__ ( range_a < > const & range ) const
+      { return value_.add__(range ); }
       virtual inline number_a add_ ( number_a const & number ) const
       { return value_.add_(number ); }
       virtual inline number_a operator + ( number_a const & number ) const
       { return value_.operator+(number ); }
-      virtual inline any_a < > self_subtract ( range_a < > const & range )
-      { return value_.self_subtract(range ); }
+      virtual inline any_a < > self_subtract__ ( range_a < > const & range )
+      { return value_.self_subtract__(range ); }
       virtual inline number_a self_subtract_ ( number_a const & number )
       { return value_.self_subtract_(number ); }
-      virtual inline any_a < > subtract ( range_a < > const & range ) const
-      { return value_.subtract(range ); }
+      virtual inline any_a < > subtract__ ( range_a < > const & range ) const
+      { return value_.subtract__(range ); }
       virtual inline number_a subtract_ ( number_a const & number ) const
       { return value_.subtract_(number ); }
       virtual inline number_a operator - ( number_a const & number ) const
@@ -467,12 +467,12 @@ namespace strange {
       { return value_.greater_or_equal_(number ); }
       virtual inline bool operator >= ( number_a const & number ) const
       { return value_.operator>=(number ); }
-      virtual inline any_a < > byte_size ( range_a < > const & _ ) const
-      { return value_.byte_size(_ ); }
+      virtual inline any_a < > byte_size__ ( range_a < > const & _ ) const
+      { return value_.byte_size__(_ ); }
       virtual inline number_data_a_int64 byte_size_ ( ) const
       { return value_.byte_size_( ); }
-      virtual inline int64_t byte_size__ ( ) const
-      { return value_.byte_size__( ); }
+      virtual inline int64_t byte_size ( ) const
+      { return value_.byte_size( ); }
       virtual inline any_a < > is_int ( range_a < > const & _ ) const
       { return value_.is_int(_ ); }
       virtual inline any_a < > is_int_ ( ) const

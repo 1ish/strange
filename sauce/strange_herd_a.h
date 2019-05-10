@@ -1,7 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_HERD_A_H
 #define COM_ONEISH_STRANGE_HERD_A_H
 
- //# include "any.hpp"
+ //#include "any.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -80,14 +80,14 @@ namespace strange {
     		return *this;
     	}
     
-     inline bool has__ ( std :: string const & s ) const
-     { assert(handle_); return read().has__(s ); }
-     inline bool at__ ( std :: string const & s ) const
-     { assert(handle_); return read().at__(s ); }
-     inline bool insert__ ( std :: string const & s )
-     { assert(handle_); return write().insert__(s ); }
-     inline bool erase__ ( std :: string const & s )
-     { assert(handle_); return write().erase__(s ); }
+     inline bool has ( std :: string const & s ) const
+     { assert(handle_); return read().has(s ); }
+     inline bool at ( std :: string const & s ) const
+     { assert(handle_); return read().at(s ); }
+     inline bool insert ( std :: string const & s )
+     { assert(handle_); return write().insert(s ); }
+     inline bool erase ( std :: string const & s )
+     { assert(handle_); return write().erase(s ); }
      inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const
      { assert(handle_); return read().extract( ); }
      inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
@@ -98,10 +98,10 @@ namespace strange {
     private:
     	struct ___finale_handle_base___ : ___dderived_handle_base___
     	{
-      virtual inline bool has__ ( std :: string const & s ) const = 0;
-      virtual inline bool at__ ( std :: string const & s ) const = 0;
-      virtual inline bool insert__ ( std :: string const & s ) = 0;
-      virtual inline bool erase__ ( std :: string const & s ) = 0;
+      virtual inline bool has ( std :: string const & s ) const = 0;
+      virtual inline bool at ( std :: string const & s ) const = 0;
+      virtual inline bool insert ( std :: string const & s ) = 0;
+      virtual inline bool erase ( std :: string const & s ) = 0;
       virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const = 0;
       virtual inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data ) = 0;
       virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference ( ) = 0;
@@ -125,14 +125,14 @@ namespace strange {
     			return std::make_shared<___finale_handle_final___>(___dderived_handle___<___TTT___, ___finale_handle_base___>::value_);
     		}
     
-      virtual inline bool has__ ( std :: string const & s ) const
-      { return value_.has__(s ); }
-      virtual inline bool at__ ( std :: string const & s ) const
-      { return value_.at__(s ); }
-      virtual inline bool insert__ ( std :: string const & s )
-      { return value_.insert__(s ); }
-      virtual inline bool erase__ ( std :: string const & s )
-      { return value_.erase__(s ); }
+      virtual inline bool has ( std :: string const & s ) const
+      { return value_.has(s ); }
+      virtual inline bool at ( std :: string const & s ) const
+      { return value_.at(s ); }
+      virtual inline bool insert ( std :: string const & s )
+      { return value_.insert(s ); }
+      virtual inline bool erase ( std :: string const & s )
+      { return value_.erase(s ); }
       virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const
       { return value_.extract( ); }
       virtual inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )

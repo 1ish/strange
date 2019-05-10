@@ -1,8 +1,8 @@
 #ifndef COM_ONEISH_STRANGE_SYMBOL_A_H
 #define COM_ONEISH_STRANGE_SYMBOL_A_H
 
- //# include "any_forward.hpp"
- //# include "range_forward.hpp"
+ //#include "any_forward.hpp"
+ //#include "range_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -83,8 +83,8 @@ namespace strange {
     
      inline std :: string const & to_string__ ( ) const
      { assert(handle_); return read().to_string__( ); }
-     inline any_a < > add ( range_a < > const & range ) const
-     { assert(handle_); return read().add(range ); }
+     inline any_a < > add__ ( range_a < > const & range ) const
+     { assert(handle_); return read().add__(range ); }
      inline symbol_a add_ ( symbol_a const & symbol ) const
      { assert(handle_); return read().add_(symbol ); }
      inline symbol_a operator + ( symbol_a const & symbol ) const
@@ -94,7 +94,7 @@ namespace strange {
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
       virtual inline std :: string const & to_string__ ( ) const = 0;
-      virtual inline any_a < > add ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > add__ ( range_a < > const & range ) const = 0;
       virtual inline symbol_a add_ ( symbol_a const & symbol ) const = 0;
       virtual inline symbol_a operator + ( symbol_a const & symbol ) const = 0;
     	};
@@ -114,8 +114,8 @@ namespace strange {
     
       virtual inline std :: string const & to_string__ ( ) const
       { return value_.to_string__( ); }
-      virtual inline any_a < > add ( range_a < > const & range ) const
-      { return value_.add(range ); }
+      virtual inline any_a < > add__ ( range_a < > const & range ) const
+      { return value_.add__(range ); }
       virtual inline symbol_a add_ ( symbol_a const & symbol ) const
       { return value_.add_(symbol ); }
       virtual inline symbol_a operator + ( symbol_a const & symbol ) const

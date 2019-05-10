@@ -22,17 +22,17 @@ public:
 	inline any_a<> decrement__(range_a<> const& _);
 	inline number_a decrement_();
 
-	inline any_a<> self_add(range_a<> const& range);
+	inline any_a<> self_add__(range_a<> const& range);
 	inline number_a self_add_(number_a const& number);
 
-	inline any_a<> add(range_a<> const& range) const;
+	inline any_a<> add__(range_a<> const& range) const;
 	inline number_a add_(number_a const& number) const;
 	inline number_a operator+(number_a const& number) const;
 
-	inline any_a<> self_subtract(range_a<> const& range);
+	inline any_a<> self_subtract__(range_a<> const& range);
 	inline number_a self_subtract_(number_a const& number);
 
-	inline any_a<> subtract(range_a<> const& range) const;
+	inline any_a<> subtract__(range_a<> const& range) const;
 	inline number_a subtract_(number_a const& number) const;
 	inline number_a operator-(number_a const& number) const;
 
@@ -97,9 +97,9 @@ public:
 	inline any_a<> greater_or_equal_(number_a const& number) const;
 	inline bool operator>=(number_a const& number) const;
 
-	inline any_a<> byte_size(range_a<> const& _) const;
+	inline any_a<> byte_size__(range_a<> const& _) const;
 	inline number_data_a_int64 byte_size_() const;
-	inline int64_t byte_size__() const;
+	inline int64_t byte_size() const;
 
 	inline any_a<> is_int(range_a<> const& _) const;
 	inline any_a<> is_int_() const;

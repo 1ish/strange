@@ -141,7 +141,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		}
 
 		// random access iterator
-		inline _ABSTRACTION_ self_add(range_a<> const& range)
+		inline _ABSTRACTION_ self_add__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -166,7 +166,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_iterator_a<> add(range_a<> const& range) const
+		inline random_access_iterator_a<> add__(range_a<> const& range) const
 		{
 			random_access_iterator_a<> result = me_();
 			for (auto const& thing : range)
@@ -188,7 +188,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline _ABSTRACTION_ self_subtract(range_a<> const& range)
+		inline _ABSTRACTION_ self_subtract__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -213,7 +213,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_iterator_a<> subtract(range_a<> const& range) const
+		inline random_access_iterator_a<> subtract__(range_a<> const& range) const
 		{
 			random_access_iterator_a<> result = me_();
 			for (auto const& thing : range)
@@ -498,7 +498,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		}
 
 		// random access iterator
-		inline _ABSTRACTION_ self_add(range_a<> const& range)
+		inline _ABSTRACTION_ self_add__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -523,7 +523,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_const_iterator_a<> add(range_a<> const& range) const
+		inline random_access_const_iterator_a<> add__(range_a<> const& range) const
 		{
 			random_access_const_iterator_a<> result = me_();
 			for (auto const& thing : range)
@@ -545,7 +545,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline _ABSTRACTION_ self_subtract(range_a<> const& range)
+		inline _ABSTRACTION_ self_subtract__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -570,7 +570,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_const_iterator_a<> subtract(range_a<> const& range) const
+		inline random_access_const_iterator_a<> subtract__(range_a<> const& range) const
 		{
 			random_access_const_iterator_a<> result = me_();
 			for (auto const& thing : range)
@@ -830,7 +830,7 @@ public: ___STRANGE_COLLECTION___
 		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cbegin());
 	}
 
-	inline any_a<> beset(range_a<> const&)
+	inline any_a<> beset__(range_a<> const&)
 	{
 		return beset_();
 	}
@@ -855,7 +855,7 @@ public: ___STRANGE_COLLECTION___
 		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cend());
 	}
 
-	inline any_a<> enset(range_a<> const&)
+	inline any_a<> enset__(range_a<> const&)
 	{
 		return enset_();
 	}
@@ -871,28 +871,28 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// collection
-	inline bool has__(any_a<> const& key) const
+	inline bool has(any_a<> const& key) const
 	{
-		return check_<number_a<>>(key) && has__(cast_<number_a<>>(key).to_int_64__());
+		return check_<number_a<>>(key) && has(cast_<number_a<>>(key).to_int_64__());
 	}
 
-	inline bool has__(int64_t index) const
+	inline bool has(int64_t index) const
 	{
-		return index >= 0 && index < size__();
+		return index >= 0 && index < size();
 	}
 
 	inline any_a<> at_(any_a<> const& key) const
 	{
 		if (check_<number_a<>>(key))
 		{
-			return at__(cast_<number_a<>>(key).to_int_64__());
+			return at(cast_<number_a<>>(key).to_int_64__());
 		}
 		return nothing_t<>::val_();
 	}
 
-	inline any_a<> at__(int64_t index) const
+	inline any_a<> at(int64_t index) const
 	{
-		if (index >= 0 && index < size__())
+		if (index >= 0 && index < size())
 		{
 			return _vector[std::size_t(index)];
 		}
@@ -903,23 +903,23 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check_<number_a<>>(key))
 		{
-			update__(cast_<number_a<>>(key).to_int_64__(), value);
+			update(cast_<number_a<>>(key).to_int_64__(), value);
 		}
 		return value;
 	}
 
-	inline void update__(int64_t index, any_a<> const& value)
+	inline void update(int64_t index, any_a<> const& value)
 	{
 		if (index >= 0)
 		{
-			int64_t const size = size__();
-			if (index == size)
+			int64_t const siz = size();
+			if (index == siz)
 			{
-				push_back__(value);
+				push_back(value);
 			}
 			else
 			{
-				if (index > size)
+				if (index > siz)
 				{
 					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
 				}
@@ -928,23 +928,23 @@ public: ___STRANGE_COLLECTION___
 		}
 	}
 
-	inline bool insert__(any_a<> const& key, any_a<> const& value)
+	inline bool insert(any_a<> const& key, any_a<> const& value)
 	{
-		return check_<number_a<>>(key) && insert__(cast_<number_a<>>(key).to_int_64__(), value);
+		return check_<number_a<>>(key) && insert(cast_<number_a<>>(key).to_int_64__(), value);
 	}
 
-	inline bool insert__(int64_t index, any_a<> const& value)
+	inline bool insert(int64_t index, any_a<> const& value)
 	{
 		if (index >= 0)
 		{
-			int64_t const size = size__();
-			if (index == size)
+			int64_t const siz = size();
+			if (index == siz)
 			{
-				push_back__(value);
+				push_back(value);
 			}
 			else
 			{
-				if (index > size)
+				if (index > siz)
 				{
 					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
 					_vector[std::size_t(index)] = value;
@@ -959,14 +959,14 @@ public: ___STRANGE_COLLECTION___
 		return false;
 	}
 
-	inline bool erase__(any_a<> const& key)
+	inline bool erase(any_a<> const& key)
 	{
-		return check_<number_a<>>(key) && erase__(cast_<number_a<>>(key).to_int_64__());
+		return check_<number_a<>>(key) && erase(cast_<number_a<>>(key).to_int_64__());
 	}
 
-	inline bool erase__(int64_t index)
+	inline bool erase(int64_t index)
 	{
-		if (index >= 0 && index < size__())
+		if (index >= 0 && index < size())
 		{
 			_vector.erase(_vector.cbegin() + index);
 			return true;
@@ -974,24 +974,24 @@ public: ___STRANGE_COLLECTION___
 		return false;
 	}
 
-	inline void clear__()
+	inline void clear()
 	{
 		_vector.clear();
 	}
 
-	inline int64_t size__() const
+	inline int64_t size() const
 	{
 		return int64_t(_vector.size());
 	}
 
-	inline bool empty__() const
+	inline bool empty() const
 	{
 		return _vector.empty();
 	}
 
-	inline void push_front__(any_a<> const& thing)
+	inline void push_front(any_a<> const& thing)
 	{
-		push_back__(thing);
+		push_back(thing);
 	}
 
 	inline any_a<> pop_front_()
@@ -999,7 +999,7 @@ public: ___STRANGE_COLLECTION___
 		return pop_back_();
 	}
 
-	inline void push_back__(any_a<> const& thing)
+	inline void push_back(any_a<> const& thing)
 	{
 		_vector.push_back(thing);
 	}
@@ -1023,7 +1023,7 @@ public: ___STRANGE_COLLECTION___
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
-			insert(thing.to_range_());
+			insert__(thing.to_range_());
 		}
 		return *this;
 	}
@@ -1036,7 +1036,7 @@ public: ___STRANGE_COLLECTION___
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
-			erase(thing.to_range_());
+			erase__(thing.to_range_());
 		}
 		return *this;
 	}
