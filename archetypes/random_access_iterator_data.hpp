@@ -15,9 +15,9 @@ class random_access_iterator_data_a
 {
 public:
 	// data
-	inline _1_ const& extract__() const;
-	inline void mutate__(_1_ const& data);
-	inline _1_& reference__();
+	inline _1_ const& extract() const;
+	inline void mutate(_1_ const& data);
+	inline _1_& reference();
 };
 
 } // namespace strange

@@ -38,7 +38,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 			{
 				return false;
 			}
-			return _it == cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract__();
+			return _it == cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
@@ -47,7 +47,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 			{
 				return true;
 			}
-			return _it != cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract__();
+			return _it != cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -126,17 +126,17 @@ class herd_t : public something_t<_ABSTRACTION_>
 		}
 
 		// data
-		inline ITERATOR const& extract__() const
+		inline ITERATOR const& extract() const
 		{
 			return _it;
 		}
 
-		inline void mutate__(ITERATOR const& it)
+		inline void mutate(ITERATOR const& it)
 		{
 			_it = it;
 		}
 
-		inline ITERATOR& reference__()
+		inline ITERATOR& reference()
 		{
 			return _it;
 		}
@@ -214,7 +214,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return false;
 		}
-		return _set == cast_<herd_a<>>(thing).extract__();
+		return _set == cast_<herd_a<>>(thing).extract();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
@@ -223,7 +223,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return true;
 		}
-		return _set != cast_<herd_a<>>(thing).extract__();
+		return _set != cast_<herd_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
@@ -381,17 +381,17 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// data
-	inline std_unordered_set_any const& extract__() const
+	inline std_unordered_set_any const& extract() const
 	{
 		return _set;
 	}
 
-	inline void mutate__(std_unordered_set_any const& data)
+	inline void mutate(std_unordered_set_any const& data)
 	{
 		_set = data;
 	}
 
-	inline std_unordered_set_any& reference__()
+	inline std_unordered_set_any& reference()
 	{
 		return _set;
 	}

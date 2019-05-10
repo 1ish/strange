@@ -32,9 +32,9 @@ public:
 	inline bidirectional_iterator_a end();
 
 	// data
-	inline std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f> const& extract__() const;
-	inline void mutate__(std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f> const& data);
-	inline std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>& reference__();
+	inline std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f> const& extract() const;
+	inline void mutate(std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f> const& data);
+	inline std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>& reference();
 };
 
 } // namespace strange

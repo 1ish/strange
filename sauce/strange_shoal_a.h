@@ -103,12 +103,12 @@ namespace strange {
      { assert(handle_); return write().enset_( ); }
      inline bidirectional_iterator_a end ( )
      { assert(handle_); return write().end( ); }
-     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract__ ( ) const
-     { assert(handle_); return read().extract__( ); }
-     inline void mutate__ ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data )
-     { assert(handle_); write().mutate__(data ); }
-     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference__ ( )
-     { assert(handle_); return write().reference__( ); }
+     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract ( ) const
+     { assert(handle_); return read().extract( ); }
+     inline void mutate ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data )
+     { assert(handle_); write().mutate(data ); }
+     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference ( )
+     { assert(handle_); return write().reference( ); }
     
     private:
     	struct ___finale_handle_base___ : ___dderived_handle_base___
@@ -124,9 +124,9 @@ namespace strange {
       virtual inline any_a < > enset ( range_a < > const & _ ) = 0;
       virtual inline bidirectional_iterator_a enset_ ( ) = 0;
       virtual inline bidirectional_iterator_a end ( ) = 0;
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract__ ( ) const = 0;
-      virtual inline void mutate__ ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data ) = 0;
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference__ ( ) = 0;
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract ( ) const = 0;
+      virtual inline void mutate ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data ) = 0;
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference ( ) = 0;
     	};
     
     	template <typename ___TTT___>
@@ -169,12 +169,12 @@ namespace strange {
       { return value_.enset_( ); }
       virtual inline bidirectional_iterator_a end ( )
       { return value_.end( ); }
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract__ ( ) const
-      { return value_.extract__( ); }
-      virtual inline void mutate__ ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data )
-      { value_.mutate__(data ); }
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference__ ( )
-      { return value_.reference__( ); }
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract ( ) const
+      { return value_.extract( ); }
+      virtual inline void mutate ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data )
+      { value_.mutate(data ); }
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference ( )
+      { return value_.reference( ); }
     	};
     
     	template <typename ___TTT___>

@@ -38,7 +38,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				return false;
 			}
-			return _it == cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__();
+			return _it == cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
@@ -47,7 +47,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				return true;
 			}
-			return _it != cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__();
+			return _it != cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -190,7 +190,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		inline random_access_iterator_a<> operator+(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
-			result.reference__() += number.to_int_64__();
+			result.reference() += number.to_int_64__();
 			return result;
 		}
 
@@ -237,7 +237,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		inline random_access_iterator_a<> operator-(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
-			result.reference__() -= number.to_int_64__();
+			result.reference() -= number.to_int_64__();
 			return result;
 		}
 
@@ -253,7 +253,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::iterator::less_than passed incompatible thing");
 			}
-			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
+			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_than_(random_access_iterator_a<> const& it) const
@@ -267,7 +267,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::iterator < passed incompatible thing");
 			}
-			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
+			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_than(range_a<> const& range) const
@@ -282,7 +282,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::iterator::greater_than passed incompatible thing");
 			}
-			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
+			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
@@ -296,7 +296,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::iterator > passed incompatible thing");
 			}
-			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
+			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> less_or_equal(range_a<> const& range) const
@@ -311,7 +311,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::iterator::less_or_equal passed incompatible thing");
 			}
-			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
+			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
@@ -325,7 +325,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::iterator <= passed incompatible thing");
 			}
-			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
+			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_or_equal(range_a<> const& range) const
@@ -340,7 +340,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::iterator::greater_or_equal passed incompatible thing");
 			}
-			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract__());
+			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
@@ -354,21 +354,21 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::iterator >= passed incompatible thing");
 			}
-			return _it >= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
+			return _it >= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		// data
-		inline ITERATOR const& extract__() const
+		inline ITERATOR const& extract() const
 		{
 			return _it;
 		}
 
-		inline void mutate__(ITERATOR const& it)
+		inline void mutate(ITERATOR const& it)
 		{
 			_it = it;
 		}
 
-		inline ITERATOR& reference__()
+		inline ITERATOR& reference()
 		{
 			return _it;
 		}
@@ -418,7 +418,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				return false;
 			}
-			return _it == cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__();
+			return _it == cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
@@ -427,7 +427,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				return true;
 			}
-			return _it != cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__();
+			return _it != cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -551,7 +551,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		inline random_access_const_iterator_a<> operator+(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
-			result.reference__() += number.to_int_64__();
+			result.reference() += number.to_int_64__();
 			return result;
 		}
 
@@ -598,7 +598,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		inline random_access_const_iterator_a<> operator-(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
-			result.reference__() -= number.to_int_64__();
+			result.reference() -= number.to_int_64__();
 			return result;
 		}
 
@@ -614,7 +614,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::const_iterator::less_than passed incompatible thing");
 			}
-			return _boole_(_it < cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__());
+			return _boole_(_it < cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_than_(random_access_const_iterator_a<> const& it) const
@@ -628,7 +628,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::const_iterator < passed incompatible thing");
 			}
-			return _it < cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract__();
+			return _it < cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_than(range_a<> const& range) const
@@ -643,7 +643,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::const_iterator::greater_than passed incompatible thing");
 			}
-			return _boole_(_it > cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__());
+			return _boole_(_it > cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_than_(random_access_const_iterator_a<> const& it) const
@@ -657,7 +657,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::const_iterator > passed incompatible thing");
 			}
-			return _it > cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract__();
+			return _it > cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> less_or_equal(range_a<> const& range) const
@@ -672,7 +672,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::const_iterator::less_or_equal passed incompatible thing");
 			}
-			return _boole_(_it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__());
+			return _boole_(_it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_or_equal_(random_access_const_iterator_a<> const& it) const
@@ -686,7 +686,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::const_iterator <= passed incompatible thing");
 			}
-			return _it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract__();
+			return _it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_or_equal(range_a<> const& range) const
@@ -701,7 +701,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::const_iterator::greater_or_equal passed incompatible thing");
 			}
-			return _boole_(_it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract__());
+			return _boole_(_it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_const_iterator_a<> const& it) const
@@ -715,21 +715,21 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis__("strange::lake::const_iterator >= passed incompatible thing");
 			}
-			return _it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract__();
+			return _it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		// data
-		inline ITERATOR const& extract__() const
+		inline ITERATOR const& extract() const
 		{
 			return _it;
 		}
 
-		inline void mutate__(ITERATOR const& it)
+		inline void mutate(ITERATOR const& it)
 		{
 			_it = it;
 		}
 
-		inline ITERATOR& reference__()
+		inline ITERATOR& reference()
 		{
 			return _it;
 		}
@@ -809,7 +809,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return false;
 		}
-		return _vector == cast_<lake_data_a<PRIMITIVE>>(thing).extract__();
+		return _vector == cast_<lake_data_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
@@ -818,7 +818,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return true;
 		}
-		return _vector != cast_<lake_data_a<PRIMITIVE>>(thing).extract__();
+		return _vector != cast_<lake_data_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
@@ -1101,17 +1101,17 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// data
-	inline std_vector_number const& extract__() const
+	inline std_vector_number const& extract() const
 	{
 		return _vector;
 	}
 
-	inline void mutate__(std_vector_number const& data)
+	inline void mutate(std_vector_number const& data)
 	{
 		_vector = data;
 	}
 
-	inline std_vector_number& reference__()
+	inline std_vector_number& reference()
 	{
 		return _vector;
 	}

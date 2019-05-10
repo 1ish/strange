@@ -88,12 +88,12 @@ namespace strange {
      { assert(handle_); return write().insert__(s ); }
      inline bool erase__ ( std :: string const & s )
      { assert(handle_); return write().erase__(s ); }
-     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract__ ( ) const
-     { assert(handle_); return read().extract__( ); }
-     inline void mutate__ ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
-     { assert(handle_); write().mutate__(data ); }
-     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference__ ( )
-     { assert(handle_); return write().reference__( ); }
+     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const
+     { assert(handle_); return read().extract( ); }
+     inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
+     { assert(handle_); write().mutate(data ); }
+     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference ( )
+     { assert(handle_); return write().reference( ); }
     
     private:
     	struct ___finale_handle_base___ : ___dderived_handle_base___
@@ -102,9 +102,9 @@ namespace strange {
       virtual inline bool at__ ( std :: string const & s ) const = 0;
       virtual inline bool insert__ ( std :: string const & s ) = 0;
       virtual inline bool erase__ ( std :: string const & s ) = 0;
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract__ ( ) const = 0;
-      virtual inline void mutate__ ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data ) = 0;
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference__ ( ) = 0;
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const = 0;
+      virtual inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data ) = 0;
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference ( ) = 0;
     	};
     
     	template <typename ___TTT___>
@@ -133,12 +133,12 @@ namespace strange {
       { return value_.insert__(s ); }
       virtual inline bool erase__ ( std :: string const & s )
       { return value_.erase__(s ); }
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract__ ( ) const
-      { return value_.extract__( ); }
-      virtual inline void mutate__ ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
-      { value_.mutate__(data ); }
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference__ ( )
-      { return value_.reference__( ); }
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const
+      { return value_.extract( ); }
+      virtual inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
+      { value_.mutate(data ); }
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference ( )
+      { return value_.reference( ); }
     	};
     
     	template <typename ___TTT___>

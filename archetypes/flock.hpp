@@ -32,9 +32,9 @@ public:
 	inline random_access_iterator_a end();
 
 	// data
-	inline std::vector<any_a<>> const& extract__() const;
-	inline void mutate__(std::vector<any_a<>> const& data);
-	inline std::vector<any_a<>>& reference__();
+	inline std::vector<any_a<>> const& extract() const;
+	inline void mutate(std::vector<any_a<>> const& data);
+	inline std::vector<any_a<>>& reference();
 };
 
 } // namespace strange

@@ -162,7 +162,7 @@ public: ___STRANGE_THING___
 	inline number_a<> operator+(number_a<> const& number) const
 	{
 		_ABSTRACTION_ result = me_();
-		result.reference__() += number_u<PRIMITIVE>::from_number__(number);
+		result.reference() += number_u<PRIMITIVE>::from_number__(number);
 		return result;
 	}
 
@@ -209,7 +209,7 @@ public: ___STRANGE_THING___
 	inline number_a<> operator-(number_a<> const& number) const
 	{
 		_ABSTRACTION_ result = me_();
-		result.reference__() -= number_u<PRIMITIVE>::from_number__(number);
+		result.reference() -= number_u<PRIMITIVE>::from_number__(number);
 		return result;
 	}
 
@@ -256,7 +256,7 @@ public: ___STRANGE_THING___
 	inline number_a<> operator*(number_a<> const& number) const
 	{
 		_ABSTRACTION_ result = me_();
-		result.reference__() *= number_u<PRIMITIVE>::from_number__(number);
+		result.reference() *= number_u<PRIMITIVE>::from_number__(number);
 		return result;
 	}
 
@@ -318,7 +318,7 @@ public: ___STRANGE_THING___
 			throw dis__("strange::number / division by zero");
 		}
 		_ABSTRACTION_ result = me_();
-		result.reference__() /= num;
+		result.reference() /= num;
 		return result;
 	}
 
@@ -414,7 +414,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> from_int_64_(number_data_a<int64_t> const& int_64)
 	{
-		from_int_64__(int_64.extract__());
+		from_int_64__(int_64.extract());
 		return me_();
 	}
 
@@ -455,7 +455,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> from_uint_64_(number_data_a<uint64_t> const& uint_64)
 	{
-		from_uint_64__(uint_64.extract__());
+		from_uint_64__(uint_64.extract());
 		return me_();
 	}
 
@@ -496,7 +496,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> from_float_64_(number_data_a<double> const& float_64)
 	{
-		from_float_64__(float_64.extract__());
+		from_float_64__(float_64.extract());
 		return me_();
 	}
 
@@ -731,17 +731,17 @@ public: ___STRANGE_THING___
 	}
 
 	// data
-	inline PRIMITIVE const& extract__() const
+	inline PRIMITIVE const& extract() const
 	{
 		return _number;
 	}
 
-	inline void mutate__(PRIMITIVE const& data)
+	inline void mutate(PRIMITIVE const& data)
 	{
 		_number = data;
 	}
 
-	inline PRIMITIVE& reference__()
+	inline PRIMITIVE& reference()
 	{
 		return _number;
 	}
