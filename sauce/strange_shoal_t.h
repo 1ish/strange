@@ -27,7 +27,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym__("strange::shoal::iterator");
+			static symbol_a<> TYPE = sym("strange::shoal::iterator");
 			return TYPE;
 		}
 
@@ -73,7 +73,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::shoal::iterator set passed empty range");
+				throw dis("strange::shoal::iterator set passed empty range");
 			}
 			return set_(*it);
 		}
@@ -82,19 +82,19 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<flock_a<>>(thing))
 			{
-				throw dis__("strange::shoal::iterator set passed non-flock");
+				throw dis("strange::shoal::iterator set passed non-flock");
 			}
 			return _it->second = cast_<flock_a<>>(thing).at__(1);
 		}
 
 		inline any_a<>* operator->() const
 		{
-			throw dis__("strange::shoal::iterator cannot be dereferenced");
+			throw dis("strange::shoal::iterator cannot be dereferenced");
 		}
 
 		inline any_a<>& operator*() const
 		{
-			throw dis__("strange::shoal::iterator cannot be dereferenced");
+			throw dis("strange::shoal::iterator cannot be dereferenced");
 		}
 
 		inline _ABSTRACTION_ increment__(range_a<> const&)
@@ -196,7 +196,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			// reflection
 			static inline symbol_a<> type_()
 			{
-				static symbol_a<> TYPE = sym__("strange::shoal::const_iterator");
+				static symbol_a<> TYPE = sym("strange::shoal::const_iterator");
 				return TYPE;
 			}
 
@@ -367,7 +367,7 @@ public: ___STRANGE_COLLECTION___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym__("strange::shoal");
+		static symbol_a<> TYPE = sym("strange::shoal");
 		return TYPE;
 	}
 
@@ -478,7 +478,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool has__(std::string const& s) const
 	{
-		return has__(sym__(s));
+		return has__(sym(s));
 	}
 
 	inline any_a<> at_(any_a<> const& key) const
@@ -493,7 +493,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> at__(std::string const& s) const
 	{
-		return at_(sym__(s));
+		return at_(sym(s));
 	}
 
 	inline any_a<> update_(any_a<> const& key, any_a<> const& value)
@@ -503,7 +503,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline void update__(std::string const& s, any_a<> const& value)
 	{
-		_map[sym__(s)] = value;
+		_map[sym(s)] = value;
 	}
 
 	inline bool insert__(any_a<> const& key, any_a<> const& value)
@@ -513,7 +513,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool insert__(std::string const& s, any_a<> const& value)
 	{
-		return insert__(sym__(s), value);
+		return insert__(sym(s), value);
 	}
 
 	inline bool erase__(any_a<> const& key)
@@ -523,7 +523,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase__(std::string const& s)
 	{
-		return _map.erase(sym__(s));
+		return _map.erase(sym(s));
 	}
 
 	inline void clear__()
@@ -572,7 +572,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis__("strange::shoal += passed non-range");
+			throw dis("strange::shoal += passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
@@ -585,7 +585,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis__("strange::shoal -= passed non-range");
+			throw dis("strange::shoal -= passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{

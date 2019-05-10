@@ -15,7 +15,7 @@ public:
 	template <typename... Args>
 	static inline void variadic__(std::vector<_ABSTRACTION_>& vec, std::string const& s, Args&&... args)
 	{
-		vec.push_back(sym__(s));
+		vec.push_back(sym(s));
 		variadic__(vec, std::forward<Args>(args)...);
 	}
 

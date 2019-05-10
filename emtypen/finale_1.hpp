@@ -154,7 +154,7 @@ public:
 	{
 		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
 		{
-			throw dis__("%struct_name% constructor failed to cast from base to final");
+			throw dis("%struct_name% constructor failed to cast from base to final");
 		}
 	}
 #else
@@ -178,7 +178,7 @@ public:
 	{
 		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
 		{
-			throw dis__("%struct_name% assignment failed to cast from base to final");
+			throw dis("%struct_name% assignment failed to cast from base to final");
 		}
 		handle_ = handle;
 		handle_->___weak___(handle_);

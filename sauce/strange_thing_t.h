@@ -22,7 +22,7 @@ public:
 	// reflection
 	static inline cat_a<> cat_()
 	{
-		static cat_a<> CATEGORY = cat_t<>::val_(sym__(std::string("strange::") + _ABSTRACTION_::___abstraction_name___()));
+		static cat_a<> CATEGORY = cat_t<>::val_(sym(std::string("strange::") + _ABSTRACTION_::___abstraction_name___()));
 		return CATEGORY;
 	}
 
@@ -42,7 +42,7 @@ public:
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::thing::visit passed empty range");
+			throw dis("strange::thing::visit passed empty range");
 		}
 		any_a<> visitor = *it;
 		return visitor.invoke__(range_t<>::val_(++it, range.cend()));
@@ -54,7 +54,7 @@ public:
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::thing::invoke passed empty range");
+			throw dis("strange::thing::invoke passed empty range");
 		}
 		any_a<> member = *it;
 		return invoke_(member, range_t<>::val_(++it, range.cend()));
@@ -74,12 +74,12 @@ public:
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::thing::operate passed empty range");
+			throw dis("strange::thing::operate passed empty range");
 		}
 		any_a<> thing = *it;
 		if (++it == range.cend())
 		{
-			throw dis__("strange::thing::visit passed short range");
+			throw dis("strange::thing::visit passed short range");
 		}
 		any_a<> operation = *it;
 		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
@@ -96,7 +96,7 @@ public:
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::thing::identical passed empty range");
+			throw dis("strange::thing::identical passed empty range");
 		}
 		return identical_(*it);
 	}
@@ -213,7 +213,7 @@ inline any_a<> same__(range_a<> const& range) const \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		throw dis__("[thing] same passed empty range"); \
+		throw dis("[thing] same passed empty range"); \
 	} \
 	return same_(*it); \
 } \
@@ -226,7 +226,7 @@ inline any_a<> different__(range_a<> const& range) const \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		throw dis__("[thing] different passed empty range"); \
+		throw dis("[thing] different passed empty range"); \
 	} \
 	return different_(*it); \
 } \

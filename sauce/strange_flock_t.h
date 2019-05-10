@@ -27,7 +27,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym__("strange::flock::iterator");
+			static symbol_a<> TYPE = sym("strange::flock::iterator");
 			return TYPE;
 		}
 
@@ -71,7 +71,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::flock::iterator set passed empty range");
+				throw dis("strange::flock::iterator set passed empty range");
 			}
 			return set_(*it);
 		}
@@ -160,7 +160,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis__("strange::flock::iterator += passed non-number");
+				throw dis("strange::flock::iterator += passed non-number");
 			}
 			_it += cast_<number_a<>>(thing).to_int_64__();
 			return *this;
@@ -207,7 +207,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis__("strange::flock::iterator -= passed non-number");
+				throw dis("strange::flock::iterator -= passed non-number");
 			}
 			_it -= cast_<number_a<>>(thing).to_int_64__();
 			return *this;
@@ -240,12 +240,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::flock::iterator::less_than passed empty range");
+				throw dis("strange::flock::iterator::less_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::flock::iterator::less_than passed incompatible thing");
+				throw dis("strange::flock::iterator::less_than passed incompatible thing");
 			}
 			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -259,7 +259,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::flock::iterator < passed incompatible thing");
+				throw dis("strange::flock::iterator < passed incompatible thing");
 			}
 			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -269,12 +269,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::flock::iterator::greater_than passed empty range");
+				throw dis("strange::flock::iterator::greater_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::flock::iterator::greater_than passed incompatible thing");
+				throw dis("strange::flock::iterator::greater_than passed incompatible thing");
 			}
 			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -288,7 +288,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::flock::iterator > passed incompatible thing");
+				throw dis("strange::flock::iterator > passed incompatible thing");
 			}
 			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -298,12 +298,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::flock::iterator::less_or_equal passed empty range");
+				throw dis("strange::flock::iterator::less_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::flock::iterator::less_or_equal passed incompatible thing");
+				throw dis("strange::flock::iterator::less_or_equal passed incompatible thing");
 			}
 			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -317,7 +317,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::flock::iterator <= passed incompatible thing");
+				throw dis("strange::flock::iterator <= passed incompatible thing");
 			}
 			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -327,12 +327,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::flock::iterator::greater_or_equal passed empty range");
+				throw dis("strange::flock::iterator::greater_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::flock::iterator::greater_or_equal passed incompatible thing");
+				throw dis("strange::flock::iterator::greater_or_equal passed incompatible thing");
 			}
 			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -346,7 +346,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::flock::iterator >= passed incompatible thing");
+				throw dis("strange::flock::iterator >= passed incompatible thing");
 			}
 			return _it >= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -399,7 +399,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym__("strange::flock::const_iterator");
+			static symbol_a<> TYPE = sym("strange::flock::const_iterator");
 			return TYPE;
 		}
 
@@ -517,7 +517,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis__("strange::flock::const_iterator += passed non-number");
+				throw dis("strange::flock::const_iterator += passed non-number");
 			}
 			_it += cast_<number_a<>>(thing).to_int_64__();
 			return *this;
@@ -564,7 +564,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis__("strange::flock::const_iterator -= passed non-number");
+				throw dis("strange::flock::const_iterator -= passed non-number");
 			}
 			_it -= cast_<number_a<>>(thing).to_int_64__();
 			return *this;
@@ -597,12 +597,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::flock::const_iterator::less_than passed empty range");
+				throw dis("strange::flock::const_iterator::less_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::flock::const_iterator::less_than passed incompatible thing");
+				throw dis("strange::flock::const_iterator::less_than passed incompatible thing");
 			}
 			return _boole_(_it < cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -616,7 +616,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::flock::const_iterator < passed incompatible thing");
+				throw dis("strange::flock::const_iterator < passed incompatible thing");
 			}
 			return _it < cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -626,12 +626,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::flock::const_iterator::greater_than passed empty range");
+				throw dis("strange::flock::const_iterator::greater_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::flock::const_iterator::greater_than passed incompatible thing");
+				throw dis("strange::flock::const_iterator::greater_than passed incompatible thing");
 			}
 			return _boole_(_it > cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -645,7 +645,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::flock::const_iterator > passed incompatible thing");
+				throw dis("strange::flock::const_iterator > passed incompatible thing");
 			}
 			return _it > cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -655,12 +655,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::flock::const_iterator::less_or_equal passed empty range");
+				throw dis("strange::flock::const_iterator::less_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::flock::const_iterator::less_or_equal passed incompatible thing");
+				throw dis("strange::flock::const_iterator::less_or_equal passed incompatible thing");
 			}
 			return _boole_(_it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -674,7 +674,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::flock::const_iterator <= passed incompatible thing");
+				throw dis("strange::flock::const_iterator <= passed incompatible thing");
 			}
 			return _it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -684,12 +684,12 @@ class flock_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::flock::const_iterator::greater_or_equal passed empty range");
+				throw dis("strange::flock::const_iterator::greater_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::flock::const_iterator::greater_or_equal passed incompatible thing");
+				throw dis("strange::flock::const_iterator::greater_or_equal passed incompatible thing");
 			}
 			return _boole_(_it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -703,7 +703,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::flock::const_iterator >= passed incompatible thing");
+				throw dis("strange::flock::const_iterator >= passed incompatible thing");
 			}
 			return _it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -775,7 +775,7 @@ public: ___STRANGE_COLLECTION___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym__("strange::flock");
+		static symbol_a<> TYPE = sym("strange::flock");
 		return TYPE;
 	}
 
@@ -1019,7 +1019,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis__("strange::flock += passed non-range");
+			throw dis("strange::flock += passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
@@ -1032,7 +1032,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis__("strange::flock -= passed non-range");
+			throw dis("strange::flock -= passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{

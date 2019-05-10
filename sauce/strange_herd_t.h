@@ -27,7 +27,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym__("strange::herd::const_iterator");
+			static symbol_a<> TYPE = sym("strange::herd::const_iterator");
 			return TYPE;
 		}
 
@@ -192,7 +192,7 @@ public: ___STRANGE_COLLECTION___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym__("strange::herd");
+		static symbol_a<> TYPE = sym("strange::herd");
 		return TYPE;
 	}
 
@@ -267,7 +267,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool has__(std::string const& s) const
 	{
-		return has__(sym__(s));
+		return has__(sym(s));
 	}
 
 	inline any_a<> at_(any_a<> const& key) const
@@ -282,7 +282,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool at__(std::string const& s) const
 	{
-		std_unordered_set_any::const_iterator const it = _set.find(sym__(s));
+		std_unordered_set_any::const_iterator const it = _set.find(sym(s));
 		return it != _set.cend();
 	}
 
@@ -299,7 +299,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool insert__(std::string const& s)
 	{
-		return _set.insert(sym__(s)).second;
+		return _set.insert(sym(s)).second;
 	}
 
 	inline bool erase__(any_a<> const& key)
@@ -309,7 +309,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase__(std::string const& s)
 	{
-		return _set.erase(sym__(s));
+		return _set.erase(sym(s));
 	}
 
 	inline void clear__()
@@ -358,7 +358,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis__("strange::herd += passed non-range");
+			throw dis("strange::herd += passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
@@ -371,7 +371,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis__("strange::herd -= passed non-range");
+			throw dis("strange::herd -= passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{

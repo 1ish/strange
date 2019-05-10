@@ -245,7 +245,7 @@ namespace strange {
     	{
     		if (!std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
     		{
-    			throw dis__("lake_a constructor failed to cast from base to ddderived");
+    			throw dis("lake_a constructor failed to cast from base to ddderived");
     		}
     	}
     #else
@@ -269,7 +269,7 @@ namespace strange {
     	{
     		if (!std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
     		{
-    			throw dis__("lake_a assignment failed to cast from base to ddderived");
+    			throw dis("lake_a assignment failed to cast from base to ddderived");
     		}
     		handle_ = handle;
     		handle_->___weak___(handle_);

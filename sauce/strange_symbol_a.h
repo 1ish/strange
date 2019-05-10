@@ -210,7 +210,7 @@ namespace strange {
     	{
     		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
     		{
-    			throw dis__("symbol_a constructor failed to cast from base to derived");
+    			throw dis("symbol_a constructor failed to cast from base to derived");
     		}
     	}
     #else
@@ -234,7 +234,7 @@ namespace strange {
     	{
     		if (!std::dynamic_pointer_cast<___derived_handle_base___>(handle))
     		{
-    			throw dis__("symbol_a assignment failed to cast from base to derived");
+    			throw dis("symbol_a assignment failed to cast from base to derived");
     		}
     		handle_ = handle;
     		handle_->___weak___(handle_);

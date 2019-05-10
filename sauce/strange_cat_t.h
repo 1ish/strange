@@ -42,7 +42,7 @@ public: ___STRANGE_THING___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym__("strange::cat");
+		static symbol_a<> TYPE = sym("strange::cat");
 		return TYPE;
 	}
 
@@ -92,7 +92,7 @@ public: ___STRANGE_THING___
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::cat::includes passed empty range");
+			throw dis("strange::cat::includes passed empty range");
 		}
 		return includes_(*it);
 	}
@@ -112,12 +112,12 @@ public: ___STRANGE_THING___
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::cat::conforms passed empty range");
+			throw dis("strange::cat::conforms passed empty range");
 		}
 		any_a<> thing = *it;
 		if (++it == range.cend())
 		{
-			throw dis__("strange::cat::conforms passed short range");
+			throw dis("strange::cat::conforms passed short range");
 		}
 		return conforms_(thing, *it);
 	}
@@ -150,7 +150,7 @@ protected:
 
 	inline cat_t()
 		: symbol_t{ _symbol_() }
-		, _name{ sym__("") }
+		, _name{ sym("") }
 		, _arguments{ nothing_t<>::val_() }
 		, _parameters{ nothing_t<>::val_() }
 		, _result{ nothing_t<>::val_() }

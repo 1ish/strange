@@ -42,7 +42,7 @@ public: ___STRANGE_THING___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym__("strange::number");
+		static symbol_a<> TYPE = sym("strange::number");
 		return TYPE;
 	}
 
@@ -138,7 +138,7 @@ public: ___STRANGE_THING___
 	{
 		if (!check_<number_a<>>(thing))
 		{
-			throw dis__("strange::number += passed non-number");
+			throw dis("strange::number += passed non-number");
 		}
 		_number += number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 		return *this;
@@ -185,7 +185,7 @@ public: ___STRANGE_THING___
 	{
 		if (!check_<number_a<>>(thing))
 		{
-			throw dis__("strange::number -= passed non-number");
+			throw dis("strange::number -= passed non-number");
 		}
 		_number -= number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 		return *this;
@@ -232,7 +232,7 @@ public: ___STRANGE_THING___
 	{
 		if (!check_<number_a<>>(thing))
 		{
-			throw dis__("strange::number *= passed non-number");
+			throw dis("strange::number *= passed non-number");
 		}
 		_number *= number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 		return *this;
@@ -274,7 +274,7 @@ public: ___STRANGE_THING___
 		PRIMITIVE num = number_u<PRIMITIVE>::from_number__(number);
 		if (num == 0)
 		{
-			throw dis__("strange::number self_divide division by zero");
+			throw dis("strange::number self_divide division by zero");
 		}
 		_number /= num;
 		return me_();
@@ -284,12 +284,12 @@ public: ___STRANGE_THING___
 	{
 		if (!check_<number_a<>>(thing))
 		{
-			throw dis__("strange::number /= passed non-number");
+			throw dis("strange::number /= passed non-number");
 		}
 		PRIMITIVE num = number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 		if (num == 0)
 		{
-			throw dis__("strange::number /= division by zero");
+			throw dis("strange::number /= division by zero");
 		}
 		_number /= num;
 		return *this;
@@ -315,7 +315,7 @@ public: ___STRANGE_THING___
 		PRIMITIVE num = number_u<PRIMITIVE>::from_number__(number);
 		if (num == 0)
 		{
-			throw dis__("strange::number / division by zero");
+			throw dis("strange::number / division by zero");
 		}
 		_ABSTRACTION_ result = me_();
 		result.reference() /= num;
@@ -336,7 +336,7 @@ public: ___STRANGE_THING___
 		PRIMITIVE num = number_u<PRIMITIVE>::from_number__(number);
 		if (num == 0)
 		{
-			throw dis__("strange::number self_modulo division by zero");
+			throw dis("strange::number self_modulo division by zero");
 		}
 		_number = number_u<PRIMITIVE>::modulo__(_number, num);
 		return me_();
@@ -346,12 +346,12 @@ public: ___STRANGE_THING___
 	{
 		if (!check_<number_a<>>(thing))
 		{
-			throw dis__("strange::number %= passed non-number");
+			throw dis("strange::number %= passed non-number");
 		}
 		PRIMITIVE num = number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 		if (num == 0)
 		{
-			throw dis__("strange::number %= division by zero");
+			throw dis("strange::number %= division by zero");
 		}
 		_number = number_u<PRIMITIVE>::modulo__(_number, num);
 		return *this;
@@ -377,7 +377,7 @@ public: ___STRANGE_THING___
 		PRIMITIVE num = number_u<PRIMITIVE>::from_number__(number);
 		if (num == 0)
 		{
-			throw dis__("strange::number % division by zero");
+			throw dis("strange::number % division by zero");
 		}
 		return val(number_u<PRIMITIVE>::modulo__(_number, num));
 	}
@@ -402,12 +402,12 @@ public: ___STRANGE_THING___
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::number::from_int_64 passed empty range");
+			throw dis("strange::number::from_int_64 passed empty range");
 		}
 		any_a<> thing = *it;
 		if (!check_<number_data_a<int64_t>>(thing))
 		{
-			throw dis__("strange::number::from_int_64 passed wrong type of thing");
+			throw dis("strange::number::from_int_64 passed wrong type of thing");
 		}
 		return from_int_64_(cast_<number_data_a<int64_t>>(thing));
 	}
@@ -443,12 +443,12 @@ public: ___STRANGE_THING___
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::number::from_uint_64 passed empty range");
+			throw dis("strange::number::from_uint_64 passed empty range");
 		}
 		any_a<> thing = *it;
 		if (!check_<number_data_a<uint64_t>>(thing))
 		{
-			throw dis__("strange::number::from_uint_64 passed wrong type of thing");
+			throw dis("strange::number::from_uint_64 passed wrong type of thing");
 		}
 		return from_uint_64_(cast_<number_data_a<uint64_t>>(thing));
 	}
@@ -484,12 +484,12 @@ public: ___STRANGE_THING___
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::number::from_float_64 passed empty range");
+			throw dis("strange::number::from_float_64 passed empty range");
 		}
 		any_a<> thing = *it;
 		if (!check_<number_data_a<double>>(thing))
 		{
-			throw dis__("strange::number::from_float_64 passed wrong type of thing");
+			throw dis("strange::number::from_float_64 passed wrong type of thing");
 		}
 		return from_float_64_(cast_<number_data_a<double>>(thing));
 	}
@@ -510,12 +510,12 @@ public: ___STRANGE_THING___
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::number::less_than passed empty range");
+			throw dis("strange::number::less_than passed empty range");
 		}
 		any_a<> thing = *it;
 		if (!check_<number_a<>>(thing))
 		{
-			throw dis__("strange::number::less_than passed non-number");
+			throw dis("strange::number::less_than passed non-number");
 		}
 		return less_than_(cast_<number_a<>>(thing));
 	}
@@ -535,12 +535,12 @@ public: ___STRANGE_THING___
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::number::greater_than passed empty range");
+			throw dis("strange::number::greater_than passed empty range");
 		}
 		any_a<> thing = *it;
 		if (!check_<number_a<>>(thing))
 		{
-			throw dis__("strange::number::greater_than passed non-number");
+			throw dis("strange::number::greater_than passed non-number");
 		}
 		return greater_than_(cast_<number_a<>>(thing));
 	}
@@ -560,12 +560,12 @@ public: ___STRANGE_THING___
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::number::less_or_equal passed empty range");
+			throw dis("strange::number::less_or_equal passed empty range");
 		}
 		any_a<> thing = *it;
 		if (!check_<number_a<>>(thing))
 		{
-			throw dis__("strange::number::less_or_equal passed non-number");
+			throw dis("strange::number::less_or_equal passed non-number");
 		}
 		return less_or_equal_(cast_<number_a<>>(thing));
 	}
@@ -585,12 +585,12 @@ public: ___STRANGE_THING___
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::number::greater_or_equal passed empty range");
+			throw dis("strange::number::greater_or_equal passed empty range");
 		}
 		any_a<> thing = *it;
 		if (!check_<number_a<>>(thing))
 		{
-			throw dis__("strange::number::greater_or_equal passed non-number");
+			throw dis("strange::number::greater_or_equal passed non-number");
 		}
 		return greater_or_equal_(cast_<number_a<>>(thing));
 	}

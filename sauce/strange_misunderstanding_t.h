@@ -54,7 +54,7 @@ public: ___STRANGE_THING___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym__("strange::misunderstanding");
+		static symbol_a<> TYPE = sym("strange::misunderstanding");
 		return TYPE;
 	}
 
@@ -114,7 +114,7 @@ protected:
 };
 
 template <typename F>
-inline misunderstanding_a<> mis__(F&& s)
+inline misunderstanding_a<> mis(F&& s)
 {
 	return misunderstanding_t<>::val(std::forward<F>(s));
 }

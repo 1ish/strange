@@ -178,7 +178,7 @@ public:
 	{
 		if (!std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
 		{
-			throw dis__("%struct_name% constructor failed to cast from base to dderived");
+			throw dis("%struct_name% constructor failed to cast from base to dderived");
 		}
 	}
 #else
@@ -202,7 +202,7 @@ public:
 	{
 		if (!std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
 		{
-			throw dis__("%struct_name% assignment failed to cast from base to dderived");
+			throw dis("%struct_name% assignment failed to cast from base to dderived");
 		}
 		handle_ = handle;
 		handle_->___weak___(handle_);

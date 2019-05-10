@@ -236,7 +236,7 @@ namespace strange {
     	{
     		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
     		{
-    			throw dis__("flock_a constructor failed to cast from base to final");
+    			throw dis("flock_a constructor failed to cast from base to final");
     		}
     	}
     #else
@@ -260,7 +260,7 @@ namespace strange {
     	{
     		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
     		{
-    			throw dis__("flock_a assignment failed to cast from base to final");
+    			throw dis("flock_a assignment failed to cast from base to final");
     		}
     		handle_ = handle;
     		handle_->___weak___(handle_);

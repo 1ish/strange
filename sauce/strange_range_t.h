@@ -33,21 +33,21 @@ public: ___STRANGE_RANGE___
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::range::val passed empty range");
+			throw dis("strange::range::val passed empty range");
 		}
 		any_a<> begin = *it;
 		if (!check_<forward_const_iterator_a<>>(begin))
 		{
-			throw dis__("strange::range::val passed non-iterator begin");
+			throw dis("strange::range::val passed non-iterator begin");
 		}
 		if (++it == range.cend())
 		{
-			throw dis__("strange::range::val passed short range");
+			throw dis("strange::range::val passed short range");
 		}
 		any_a<> end = *it;
 		if (!check_<forward_const_iterator_a<>>(end))
 		{
-			throw dis__("strange::range::val passed non-iterator end");
+			throw dis("strange::range::val passed non-iterator end");
 		}
 		return val_(cast_<forward_const_iterator_a<>>(begin), cast_<forward_const_iterator_a<>>(end));
 	}
@@ -62,21 +62,21 @@ public: ___STRANGE_RANGE___
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
-			throw dis__("strange::range::ref passed empty range");
+			throw dis("strange::range::ref passed empty range");
 		}
 		any_a<> begin = *it;
 		if (!check_<forward_const_iterator_a<>>(begin))
 		{
-			throw dis__("strange::range::ref passed non-iterator begin");
+			throw dis("strange::range::ref passed non-iterator begin");
 		}
 		if (++it == range.cend())
 		{
-			throw dis__("strange::range::ref passed short range");
+			throw dis("strange::range::ref passed short range");
 		}
 		any_a<> end = *it;
 		if (!check_<forward_const_iterator_a<>>(end))
 		{
-			throw dis__("strange::range::ref passed non-iterator end");
+			throw dis("strange::range::ref passed non-iterator end");
 		}
 		return ref_(cast_<forward_const_iterator_a<>>(begin), cast_<forward_const_iterator_a<>>(end));
 	}
@@ -89,7 +89,7 @@ public: ___STRANGE_RANGE___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym__("strange::range");
+		static symbol_a<> TYPE = sym("strange::range");
 		return TYPE;
 	}
 

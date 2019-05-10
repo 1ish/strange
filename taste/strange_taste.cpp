@@ -31,7 +31,7 @@ TEST(TestCaseName, ForLoop)
 
 	e = n;
 
-	symbol_a<> s = sym__("strange");
+	symbol_a<> s = sym("strange");
 
 	EXPECT_EQ(s.to_string__(), "strange");
 	EXPECT_FALSE(e.is("strange"));

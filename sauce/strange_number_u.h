@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename F>
-inline misunderstanding_a<> dis__(F&& s);
+inline misunderstanding_a<> dis(F&& s);
 
 template <typename PRIMITIVE>
 class number_u
@@ -61,7 +61,7 @@ public:
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 #endif
 		return uint64_t(other);
@@ -122,7 +122,7 @@ public:
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 #endif
 		return uint8_t(other);
@@ -139,7 +139,7 @@ public:
 		auto r = std::llround(other);
 		if (r < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 		return uint8_t(r);
 #else
@@ -232,7 +232,7 @@ public:
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 #endif
 		return uint64_t(other);
@@ -293,7 +293,7 @@ public:
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 #endif
 		return uint16_t(other);
@@ -310,7 +310,7 @@ public:
 		auto r = std::llround(other);
 		if (r < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 		return uint16_t(r);
 #else
@@ -403,7 +403,7 @@ public:
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 #endif
 		return uint64_t(other);
@@ -464,7 +464,7 @@ public:
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 #endif
 		return uint32_t(other);
@@ -481,7 +481,7 @@ public:
 		auto r = std::llround(other);
 		if (r < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 		return uint32_t(r);
 #else
@@ -574,7 +574,7 @@ public:
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 #endif
 		return uint64_t(other);
@@ -635,7 +635,7 @@ public:
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 #endif
 		return uint64_t(other);
@@ -652,7 +652,7 @@ public:
 		auto r = std::llround(other);
 		if (r < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 		return uint64_t(r);
 #else
@@ -746,7 +746,7 @@ public:
 		auto r = std::llround(other);
 		if (r < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 		return uint64_t(r);
 #else
@@ -830,7 +830,7 @@ public:
 		auto r = std::llround(other);
 		if (r < 0)
 		{
-			throw dis__("conversion of negative number to unsigned integer");
+			throw dis("conversion of negative number to unsigned integer");
 		}
 		return uint64_t(r);
 #else

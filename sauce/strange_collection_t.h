@@ -11,7 +11,7 @@ inline any_a<> has(range_a<> const& range) const \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		throw dis__("[collection] has passed empty range"); \
+		throw dis("[collection] has passed empty range"); \
 	} \
 	return has_(*it); \
 } \
@@ -24,7 +24,7 @@ inline any_a<> at(range_a<> const& range) const \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		throw dis__("[collection] at passed empty range"); \
+		throw dis("[collection] at passed empty range"); \
 	} \
 	return at_(*it); \
 } \
@@ -33,7 +33,7 @@ inline any_a<> update(range_a<> const& range) \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		throw dis__("[collection] update passed empty range"); \
+		throw dis("[collection] update passed empty range"); \
 	} \
 	any_a<> key = *it; \
 	if (++it == range.cend()) \
@@ -47,7 +47,7 @@ inline any_a<> insert(range_a<> const& range) \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
 	{ \
-		throw dis__("[collection] insert passed empty range"); \
+		throw dis("[collection] insert passed empty range"); \
 	} \
 	any_a<> key = *it; \
 	if (++it == range.cend()) \

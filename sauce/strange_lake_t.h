@@ -27,7 +27,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym__("strange::lake::iterator");
+			static symbol_a<> TYPE = sym("strange::lake::iterator");
 			return TYPE;
 		}
 
@@ -71,7 +71,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::lake::iterator set passed empty range");
+				throw dis("strange::lake::iterator set passed empty range");
 			}
 			return set_(*it);
 		}
@@ -80,7 +80,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis__("strange::lake::iterator set passed non-number");
+				throw dis("strange::lake::iterator set passed non-number");
 			}
 			*_it = number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 			return thing;
@@ -94,7 +94,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<>& operator*() const
 		{
-			throw dis__("strange::lake::iterator cannot be dereferenced directly");
+			throw dis("strange::lake::iterator cannot be dereferenced directly");
 		}
 
 		inline _ABSTRACTION_ increment__(range_a<> const&)
@@ -166,7 +166,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis__("strange::lake::iterator += passed non-number");
+				throw dis("strange::lake::iterator += passed non-number");
 			}
 			_it += cast_<number_a<>>(thing).to_int_64__();
 			return *this;
@@ -213,7 +213,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis__("strange::lake::iterator -= passed non-number");
+				throw dis("strange::lake::iterator -= passed non-number");
 			}
 			_it -= cast_<number_a<>>(thing).to_int_64__();
 			return *this;
@@ -246,12 +246,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::lake::iterator::less_than passed empty range");
+				throw dis("strange::lake::iterator::less_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::lake::iterator::less_than passed incompatible thing");
+				throw dis("strange::lake::iterator::less_than passed incompatible thing");
 			}
 			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -265,7 +265,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::lake::iterator < passed incompatible thing");
+				throw dis("strange::lake::iterator < passed incompatible thing");
 			}
 			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -275,12 +275,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::lake::iterator::greater_than passed empty range");
+				throw dis("strange::lake::iterator::greater_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::lake::iterator::greater_than passed incompatible thing");
+				throw dis("strange::lake::iterator::greater_than passed incompatible thing");
 			}
 			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -294,7 +294,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::lake::iterator > passed incompatible thing");
+				throw dis("strange::lake::iterator > passed incompatible thing");
 			}
 			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -304,12 +304,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::lake::iterator::less_or_equal passed empty range");
+				throw dis("strange::lake::iterator::less_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::lake::iterator::less_or_equal passed incompatible thing");
+				throw dis("strange::lake::iterator::less_or_equal passed incompatible thing");
 			}
 			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -323,7 +323,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::lake::iterator <= passed incompatible thing");
+				throw dis("strange::lake::iterator <= passed incompatible thing");
 			}
 			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -333,12 +333,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::lake::iterator::greater_or_equal passed empty range");
+				throw dis("strange::lake::iterator::greater_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::lake::iterator::greater_or_equal passed incompatible thing");
+				throw dis("strange::lake::iterator::greater_or_equal passed incompatible thing");
 			}
 			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -352,7 +352,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::lake::iterator >= passed incompatible thing");
+				throw dis("strange::lake::iterator >= passed incompatible thing");
 			}
 			return _it >= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -407,7 +407,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym__("strange::lake::const_iterator");
+			static symbol_a<> TYPE = sym("strange::lake::const_iterator");
 			return TYPE;
 		}
 
@@ -527,7 +527,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis__("strange::lake::const_iterator += passed non-number");
+				throw dis("strange::lake::const_iterator += passed non-number");
 			}
 			_it += cast_<number_a<>>(thing).to_int_64__();
 			return *this;
@@ -574,7 +574,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis__("strange::lake::const_iterator -= passed non-number");
+				throw dis("strange::lake::const_iterator -= passed non-number");
 			}
 			_it -= cast_<number_a<>>(thing).to_int_64__();
 			return *this;
@@ -607,12 +607,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::lake::const_iterator::less_than passed empty range");
+				throw dis("strange::lake::const_iterator::less_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::lake::const_iterator::less_than passed incompatible thing");
+				throw dis("strange::lake::const_iterator::less_than passed incompatible thing");
 			}
 			return _boole_(_it < cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -626,7 +626,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::lake::const_iterator < passed incompatible thing");
+				throw dis("strange::lake::const_iterator < passed incompatible thing");
 			}
 			return _it < cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -636,12 +636,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::lake::const_iterator::greater_than passed empty range");
+				throw dis("strange::lake::const_iterator::greater_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::lake::const_iterator::greater_than passed incompatible thing");
+				throw dis("strange::lake::const_iterator::greater_than passed incompatible thing");
 			}
 			return _boole_(_it > cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -655,7 +655,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::lake::const_iterator > passed incompatible thing");
+				throw dis("strange::lake::const_iterator > passed incompatible thing");
 			}
 			return _it > cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -665,12 +665,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::lake::const_iterator::less_or_equal passed empty range");
+				throw dis("strange::lake::const_iterator::less_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::lake::const_iterator::less_or_equal passed incompatible thing");
+				throw dis("strange::lake::const_iterator::less_or_equal passed incompatible thing");
 			}
 			return _boole_(_it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -684,7 +684,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::lake::const_iterator <= passed incompatible thing");
+				throw dis("strange::lake::const_iterator <= passed incompatible thing");
 			}
 			return _it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -694,12 +694,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis__("strange::lake::const_iterator::greater_or_equal passed empty range");
+				throw dis("strange::lake::const_iterator::greater_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis__("strange::lake::const_iterator::greater_or_equal passed incompatible thing");
+				throw dis("strange::lake::const_iterator::greater_or_equal passed incompatible thing");
 			}
 			return _boole_(_it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -713,7 +713,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis__("strange::lake::const_iterator >= passed incompatible thing");
+				throw dis("strange::lake::const_iterator >= passed incompatible thing");
 			}
 			return _it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -787,7 +787,7 @@ public: ___STRANGE_COLLECTION___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym__("strange::lake");
+		static symbol_a<> TYPE = sym("strange::lake");
 		return TYPE;
 	}
 
@@ -929,7 +929,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<number_a<>>(value))
 		{
-			throw dis__("strange::lake::update passed non-number value");
+			throw dis("strange::lake::update passed non-number value");
 		}
 		return update__(index, number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(value)));
 	}
@@ -963,7 +963,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<number_a<>>(value))
 		{
-			throw dis__("strange::lake::insert passed non-number value");
+			throw dis("strange::lake::insert passed non-number value");
 		}
 		return insert__(index, number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(value)));
 	}
@@ -1048,7 +1048,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<number_a<>>(thing))
 		{
-			throw dis__("strange::lake::push_back passed non-number");
+			throw dis("strange::lake::push_back passed non-number");
 		}
 		push_back__(number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing)));
 	}
@@ -1078,7 +1078,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis__("strange::lake += passed non-range");
+			throw dis("strange::lake += passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
@@ -1091,7 +1091,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis__("strange::lake -= passed non-range");
+			throw dis("strange::lake -= passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{

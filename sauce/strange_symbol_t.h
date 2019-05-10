@@ -54,7 +54,7 @@ public: ___STRANGE_THING___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym__("strange::symbol");
+		static symbol_a<> TYPE = sym("strange::symbol");
 		return TYPE;
 	}
 
@@ -121,7 +121,7 @@ protected:
 };
 
 template <typename F>
-inline symbol_a<> sym__(F&& s)
+inline symbol_a<> sym(F&& s)
 {
 	return symbol_t<>::val(std::forward<F>(s));
 }

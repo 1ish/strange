@@ -54,7 +54,7 @@ public: ___STRANGE_THING___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym__("strange::disagreement");
+		static symbol_a<> TYPE = sym("strange::disagreement");
 		return TYPE;
 	}
 
@@ -90,7 +90,7 @@ protected:
 };
 
 template <typename F>
-inline misunderstanding_a<> dis__(F&& s)
+inline misunderstanding_a<> dis(F&& s)
 {
 	return disagreement_t<>::val(std::forward<F>(s));
 }

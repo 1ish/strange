@@ -42,7 +42,7 @@ public: ___STRANGE_THING___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym__("strange::it");
+		static symbol_a<> TYPE = sym("strange::it");
 		return TYPE;
 	}
 
