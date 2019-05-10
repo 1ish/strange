@@ -107,6 +107,7 @@ class random_access_iterator_data_a;
 
 #include "strange_range_a.h"
 
+#define ___derived___ range_a<>
 #include "strange_collection_a.h"
 
 #define ___derived___ collection_a<>

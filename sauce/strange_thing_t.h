@@ -244,7 +244,7 @@ inline number_data_a<uint64_t> hash_() const \
 } \
 inline range_a<> to_range(range_a<> const& _) const \
 { \
-	return to_range_() const \
+	return to_range_(); \
 } \
 
 } // namespace strange

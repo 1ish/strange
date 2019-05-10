@@ -4,12 +4,31 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = any_a<>>
+// adaptation
+#define ___STRANGE_RANGE___ ___STRANGE_THING___ \
+inline any_a<> beget(range_a<> const&) const \
+{ \
+return beget_(); \
+} \
+inline forward_const_iterator_a<> beget_() const \
+{ \
+return cbegin(); \
+} \
+inline any_a<> enget(range_a<> const&) const \
+{ \
+return enget_(); \
+} \
+inline forward_const_iterator_a<> enget_() const \
+{ \
+return cend(); \
+} \
+
+template <typename _ABSTRACTION_ = range_a<>>
 class range_t : public something_t<_ABSTRACTION_>
 {
-public: ___STRANGE_THING___
+public: ___STRANGE_RANGE___
 	// construction
-	static inline any_a<> val(range_a<> const& range)
+	static inline range_a<> val(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -33,12 +52,12 @@ public: ___STRANGE_THING___
 		return val_(cast_<forward_const_iterator_a<>>(begin), cast_<forward_const_iterator_a<>>(end));
 	}
 
-	static inline any_a<> val_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
+	static inline range_a<> val_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
 	{
-		return any_a<>{ range_t(begin, end) };
+		return range_a<>{ range_t(begin, end) };
 	}
 
-	static inline any_a<> ref(range_a<> const& range)
+	static inline range_a<> ref(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -62,9 +81,9 @@ public: ___STRANGE_THING___
 		return ref_(cast_<forward_const_iterator_a<>>(begin), cast_<forward_const_iterator_a<>>(end));
 	}
 
-	static inline any_a<> ref_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
+	static inline range_a<> ref_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
 	{
-		return any_a<>(range_t(begin, end), true);
+		return range_a<>(range_t(begin, end), true);
 	}
 
 	// reflection
@@ -105,25 +124,6 @@ protected:
 		, _end(end)
 	{}
 };
-
-// adaptation
-#define ___STRANGE_RANGE___ ___STRANGE_THING___ \
-inline any_a<> beget(range_a<> const&) const \
-{ \
-return beget_(); \
-} \
-inline forward_const_iterator_a<> beget_() const \
-{ \
-return cbegin(); \
-} \
-inline any_a<> enget(range_a<> const&) const \
-{ \
-return enget_(); \
-} \
-inline forward_const_iterator_a<> enget_() const \
-{ \
-return cend(); \
-} \
 
 } // namespace strange
 

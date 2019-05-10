@@ -1076,18 +1076,26 @@ public: ___STRANGE_COLLECTION___
 
 	inline lake_t& operator+=(any_a<> const& range)
 	{
-		for (auto const& thing : range)
+		if (!check_<range_a<>>(range))
 		{
-			insert(thing);
+			throw dis__("strange::lake += passed non-range");
+		}
+		for (auto const& thing : cast_<range_a<>>(range))
+		{
+			insert(thing.to_range_());
 		}
 		return *this;
 	}
 
 	inline lake_t& operator-=(any_a<> const& range)
 	{
-		for (auto const& thing : range)
+		if (!check_<range_a<>>(range))
 		{
-			erase(thing);
+			throw dis__("strange::lake -= passed non-range");
+		}
+		for (auto const& thing : cast_<range_a<>>(range))
+		{
+			erase(thing.to_range_());
 		}
 		return *this;
 	}

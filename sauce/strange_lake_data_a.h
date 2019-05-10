@@ -88,7 +88,7 @@ namespace strange {
      { assert(handle_); return write().reference__( ); }
     
     private:
-    	struct ___finale_handle_base___ : ___dderived_handle_base___
+    	struct ___finale_handle_base___ : ___ddderived_handle_base___
     	{
       virtual inline std :: vector < _1_ > const & extract__ ( ) const = 0;
       virtual inline void mutate__ ( std :: vector < _1_ > const & data ) = 0;
@@ -96,21 +96,21 @@ namespace strange {
     	};
     
     	template <typename ___TTT___>
-    	struct ___finale_handle_final___ final : ___dderived_handle___<___TTT___, ___finale_handle_base___>
+    	struct ___finale_handle_final___ final : ___ddderived_handle___<___TTT___, ___finale_handle_base___>
     	{
     		template <typename ___UUU___ = ___TTT___>
     		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
-    			: ___dderived_handle___<___TTT___, ___finale_handle_base___>{ value }
+    			: ___ddderived_handle___<___TTT___, ___finale_handle_base___>{ value }
     		{}
     
     		template <typename ___UUU___ = ___TTT___>
     		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
-    			: ___dderived_handle___<___TTT___, ___finale_handle_base___>{ std::move(value) }
+    			: ___ddderived_handle___<___TTT___, ___finale_handle_base___>{ std::move(value) }
     		{}
     
     		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
     		{
-    			return std::make_shared<___finale_handle_final___>(___dderived_handle___<___TTT___, ___finale_handle_base___>::value_);
+    			return std::make_shared<___finale_handle_final___>(___ddderived_handle___<___TTT___, ___finale_handle_base___>::value_);
     		}
     
       virtual inline std :: vector < _1_ > const & extract__ ( ) const

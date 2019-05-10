@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_LAKE_DATA_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/ffinale_1.hpp -c ~/source/repos/strange/archetypes/lake_data.hpp > ~/source/repos/strange/sauce/strange_lake_data_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/fffinale_1.hpp -c ~/source/repos/strange/archetypes/lake_data.hpp > ~/source/repos/strange/sauce/strange_lake_data_a.h
 */
 
 #include "any_forward.hpp"

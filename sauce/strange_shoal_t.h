@@ -570,18 +570,26 @@ public: ___STRANGE_COLLECTION___
 
 	inline shoal_t& operator+=(any_a<> const& range)
 	{
-		for (auto const& thing : range)
+		if (!check_<range_a<>>(range))
 		{
-			insert(thing);
+			throw dis__("strange::shoal += passed non-range");
+		}
+		for (auto const& thing : cast_<range_a<>>(range))
+		{
+			insert(thing.to_range_());
 		}
 		return *this;
 	}
 
 	inline shoal_t& operator-=(any_a<> const& range)
 	{
-		for (auto const& thing : range)
+		if (!check_<range_a<>>(range))
 		{
-			erase(thing);
+			throw dis__("strange::shoal -= passed non-range");
+		}
+		for (auto const& thing : cast_<range_a<>>(range))
+		{
+			erase(thing.to_range_());
 		}
 		return *this;
 	}

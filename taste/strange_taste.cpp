@@ -18,22 +18,18 @@ any_a<> fun(range_a<> const& x)
 TEST(TestCaseName, ForLoop)
 {
 	any_a<> n{ nothing_t<>::val_() };
-/*
-	for (auto const& v : n)
+
+	for (auto const& v : n.to_range_())
 	{
 	}
-*/
+
 	any_a<> e{ everything_t<>::val_() };
-/*
-	for (auto const& v : e)
+
+	for (auto const& v : e.to_range_())
 	{
 	}
-*/
+
 	e = n;
-
-//	nothing_t<>::ref().set_(everything_t<>::ref());
-
-	EXPECT_TRUE(nothing_t<>::ref_().nothing__());
 
 	symbol_a<> s = sym__("strange");
 
