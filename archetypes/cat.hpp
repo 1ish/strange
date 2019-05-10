@@ -17,25 +17,25 @@ class cat_a
 {
 public:
 	// cat
-	inline any_a<> name(range_a<> const& _) const;
+	inline any_a<> name__(range_a<> const& _) const;
 	inline symbol_a<> name_() const;
 
-	inline any_a<> arguments(range_a<> const& _) const;
+	inline any_a<> arguments__(range_a<> const& _) const;
 	inline any_a<> arguments_() const;
 
-	inline any_a<> parameters(range_a<> const& _) const;
+	inline any_a<> parameters__(range_a<> const& _) const;
 	inline any_a<> parameters_() const;
 
-	inline any_a<> result(range_a<> const& _) const;
+	inline any_a<> result__(range_a<> const& _) const;
 	inline cat_a result_() const;
 
-	inline any_a<> includes(range_a<> const& range) const;
+	inline any_a<> includes__(range_a<> const& range) const;
 	inline any_a<> includes_(any_a<> const& thing) const;
-	inline bool includes__(any_a<> const& thing) const;
+	inline bool includes(any_a<> const& thing) const;
 
-	inline any_a<> conforms(range_a<> const& range) const;
+	inline any_a<> conforms__(range_a<> const& range) const;
 	inline any_a<> conforms_(any_a<> const& thing, any_a<> const& cat_or_herd) const;
-	inline bool conforms__(any_a<> const& thing, any_a<> const& cat_or_herd) const;
+	inline bool conforms(any_a<> const& thing, any_a<> const& cat_or_herd) const;
 };
 
 } // namespace strange

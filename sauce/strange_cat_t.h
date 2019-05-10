@@ -47,7 +47,7 @@ public: ___STRANGE_THING___
 	}
 
 	// cat
-	inline symbol_a<> name(range_a<> const& _) const
+	inline symbol_a<> name__(range_a<> const& _) const
 	{
 		return name_();
 	}
@@ -57,7 +57,7 @@ public: ___STRANGE_THING___
 		return _name;
 	}
 
-	inline any_a<> arguments(range_a<> const& _) const
+	inline any_a<> arguments__(range_a<> const& _) const
 	{
 		return arguments_();
 	}
@@ -67,7 +67,7 @@ public: ___STRANGE_THING___
 		return _arguments;
 	}
 
-	inline any_a<> parameters(range_a<> const& _) const
+	inline any_a<> parameters__(range_a<> const& _) const
 	{
 		return parameters_();
 	}
@@ -77,7 +77,7 @@ public: ___STRANGE_THING___
 		return _parameters;
 	}
 
-	inline cat_a<> result(range_a<> const& _) const
+	inline cat_a<> result__(range_a<> const& _) const
 	{
 		return result_();
 	}
@@ -87,7 +87,7 @@ public: ___STRANGE_THING___
 		return check_<cat_a<>>(_result) ? cast_<cat_a<>>(_result) : val_();
 	}
 
-	inline any_a<> includes(range_a<> const& range) const
+	inline any_a<> includes__(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -99,15 +99,15 @@ public: ___STRANGE_THING___
 
 	inline any_a<> includes_(any_a<> const& thing) const
 	{
-		return _boole_(includes__(thing));
+		return _boole_(includes(thing));
 	}
 
-	inline bool includes__(any_a<> const& thing) const
+	inline bool includes(any_a<> const& thing) const
 	{
 		return false;
 	}
 
-	static inline any_a<> conforms(range_a<> const& range)
+	static inline any_a<> conforms__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -124,10 +124,10 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> conforms_(any_a<> const& thing, any_a<> const& cat_or_herd)
 	{
-		return _boole_(conforms__(thing, cat_or_herd));
+		return _boole_(conforms(thing, cat_or_herd));
 	}
 
-	static inline bool conforms__(any_a<> const& thing, any_a<> const& cat_or_herd)
+	static inline bool conforms(any_a<> const& thing, any_a<> const& cat_or_herd)
 	{
 		if (check_<cat_a<>>(cat_or_herd))
 		{
