@@ -71,7 +71,7 @@ public: ___STRANGE_THING___
 	}
 
 	// number
-	inline _ABSTRACTION_ increment(range_a<> const&)
+	inline _ABSTRACTION_ increment__(range_a<> const&)
 	{
 		return increment_();
 	}
@@ -95,7 +95,7 @@ public: ___STRANGE_THING___
 		return result;
 	}
 
-	inline any_a<> decrement(range_a<> const& _)
+	inline any_a<> decrement__(range_a<> const& _)
 	{
 		return decrement_();
 	}

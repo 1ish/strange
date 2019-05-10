@@ -81,12 +81,12 @@ namespace strange {
     		return *this;
     	}
     
-     inline any_a < > increment ( range_a < > const & _ )
-     { assert(handle_); return write().increment(_ ); }
+     inline any_a < > increment__ ( range_a < > const & _ )
+     { assert(handle_); return write().increment__(_ ); }
      inline number_a increment_ ( )
      { assert(handle_); return write().increment_( ); }
-     inline any_a < > decrement ( range_a < > const & _ )
-     { assert(handle_); return write().decrement(_ ); }
+     inline any_a < > decrement__ ( range_a < > const & _ )
+     { assert(handle_); return write().decrement__(_ ); }
      inline number_a decrement_ ( )
      { assert(handle_); return write().decrement_( ); }
      inline any_a < > self_add ( range_a < > const & range )
@@ -251,9 +251,9 @@ namespace strange {
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
-      virtual inline any_a < > increment ( range_a < > const & _ ) = 0;
+      virtual inline any_a < > increment__ ( range_a < > const & _ ) = 0;
       virtual inline number_a increment_ ( ) = 0;
-      virtual inline any_a < > decrement ( range_a < > const & _ ) = 0;
+      virtual inline any_a < > decrement__ ( range_a < > const & _ ) = 0;
       virtual inline number_a decrement_ ( ) = 0;
       virtual inline any_a < > self_add ( range_a < > const & range ) = 0;
       virtual inline number_a self_add_ ( number_a const & number ) = 0;
@@ -349,12 +349,12 @@ namespace strange {
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
-      virtual inline any_a < > increment ( range_a < > const & _ )
-      { return value_.increment(_ ); }
+      virtual inline any_a < > increment__ ( range_a < > const & _ )
+      { return value_.increment__(_ ); }
       virtual inline number_a increment_ ( )
       { return value_.increment_( ); }
-      virtual inline any_a < > decrement ( range_a < > const & _ )
-      { return value_.decrement(_ ); }
+      virtual inline any_a < > decrement__ ( range_a < > const & _ )
+      { return value_.decrement__(_ ); }
       virtual inline number_a decrement_ ( )
       { return value_.decrement_( ); }
       virtual inline any_a < > self_add ( range_a < > const & range )

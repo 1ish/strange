@@ -91,7 +91,7 @@ public: ___STRANGE_THING___
 		return _thing;
 	}
 
-	inline _ABSTRACTION_ increment(range_a<> const&)
+	inline _ABSTRACTION_ increment__(range_a<> const&)
 	{
 		return increment_();
 	}

@@ -16,10 +16,10 @@ class number_a
 {
 public:
 	// number
-	inline any_a<> increment(range_a<> const& _);
+	inline any_a<> increment__(range_a<> const& _);
 	inline number_a increment_();
 
-	inline any_a<> decrement(range_a<> const& _);
+	inline any_a<> decrement__(range_a<> const& _);
 	inline number_a decrement_();
 
 	inline any_a<> self_add(range_a<> const& range);

@@ -91,7 +91,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return *_it;
 		}
 
-		inline _ABSTRACTION_ increment(range_a<> const&)
+		inline _ABSTRACTION_ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
@@ -116,7 +116,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement(range_a<> const& _)
+		inline _ABSTRACTION_ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}
@@ -448,7 +448,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return *_it;
 		}
 
-		inline _ABSTRACTION_ increment(range_a<> const&)
+		inline _ABSTRACTION_ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
@@ -473,7 +473,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement(range_a<> const& _)
+		inline _ABSTRACTION_ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}

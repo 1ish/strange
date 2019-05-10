@@ -16,7 +16,7 @@ class bidirectional_const_iterator_a
 {
 public:
 	// bidirectional iterator
-	inline any_a<> decrement(range_a<> const& _);
+	inline any_a<> decrement__(range_a<> const& _);
 	inline bidirectional_const_iterator_a decrement_();
 };
 

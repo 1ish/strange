@@ -23,7 +23,7 @@ public:
 	inline any_a<>& operator*() const;
 	inline any_a<>* operator->() const;
 
-	inline any_a<> increment(range_a<> const& _);
+	inline any_a<> increment__(range_a<> const& _);
 	inline forward_iterator_a increment_();
 };
 
