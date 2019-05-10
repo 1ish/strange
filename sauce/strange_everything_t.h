@@ -39,7 +39,7 @@ public: ___STRANGE_THING___
 	}
 
 	// comparison
-	static inline any_a<> everything(range_a<> const&)
+	static inline any_a<> everything__(range_a<> const&)
 	{
 		return everything_();
 	}
@@ -49,22 +49,22 @@ public: ___STRANGE_THING___
 		return everything_t<>::val_();
 	}
 
-	static inline bool everything__()
+	static inline bool everything()
 	{
 		return true;
 	}
 
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return thing.everything__();
+		return thing.everything();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return !thing.everything__();
+		return !thing.everything();
 	}
 
-	inline std::size_t hash__() const
+	inline std::size_t hash() const
 	{
 		static std::size_t const HASH = std::hash<int64_t>{}(1);
 		return HASH;

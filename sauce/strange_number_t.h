@@ -65,7 +65,7 @@ public: ___STRANGE_THING___
 		return _number != number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
 	}
 
-	inline std::size_t hash__() const
+	inline std::size_t hash() const
 	{
 		return std::hash<PRIMITIVE>{}(_number);
 	}

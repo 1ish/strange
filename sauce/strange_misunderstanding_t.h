@@ -69,7 +69,7 @@ public: ___STRANGE_THING___
 		return !check_<misunderstanding_a<>>(thing) || cast_<misunderstanding_a<>>(thing).to_string__() != _string;
 	}
 
-	inline std::size_t hash__() const
+	inline std::size_t hash() const
 	{
 		return std::hash<std::string>{}(_string);
 	}

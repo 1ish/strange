@@ -50,7 +50,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			return _it != cast_<bidirectional_iterator_data_a<ITERATOR>>(thing).extract__();
 		}
 
-		inline std::size_t hash__() const
+		inline std::size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
 		}
@@ -219,7 +219,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 				return _it != cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract__();
 			}
 
-			inline std::size_t hash__() const
+			inline std::size_t hash() const
 			{
 				return std::hash<void const*>{}(&*_it);
 			}
@@ -371,13 +371,13 @@ public: ___STRANGE_COLLECTION___
 		return TYPE;
 	}
 
-	inline any_a<> feeder(range_a<> const& range) const // return range of parameter values
+	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
 	{
 		return nothing_t<>::val_(); //TODO
 	}
 
 	// visitor pattern
-	static inline any_a<> visit(range_a<> const& range)
+	static inline any_a<> visit__(range_a<> const& range)
 	{
 		return nothing_t<>::val_(); //TODO
 	}
@@ -401,13 +401,13 @@ public: ___STRANGE_COLLECTION___
 		return _map != cast_<shoal_a<>>(thing).extract__();
 	}
 
-	inline std::size_t hash__() const
+	inline std::size_t hash() const
 	{
 		std::map<any_a<>, std::size_t> ordered;
 		for (auto const& pair : _map)
 		{
-			std::size_t seed = pair.first.hash__();
-			seed ^= pair.second.hash__() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+			std::size_t seed = pair.first.hash();
+			seed ^= pair.second.hash() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 			ordered.emplace(pair.first, seed);
 		}
 		std::size_t seed = std::hash<std::size_t>{}(_map.size());

@@ -34,7 +34,7 @@ public: ___STRANGE_THING___
 	// conversion
 	inline operator bool() const
 	{
-		return anything__();
+		return anything();
 	}
 
 	// reflection
@@ -45,7 +45,7 @@ public: ___STRANGE_THING___
 	}
 
 	// comparison
-	static inline any_a<> nothing(range_a<> const&)
+	static inline any_a<> nothing__(range_a<> const&)
 	{
 		return nothing_();
 	}
@@ -55,12 +55,12 @@ public: ___STRANGE_THING___
 		return everything_t<>::val_();
 	}
 
-	static inline bool nothing__()
+	static inline bool nothing()
 	{
 		return true;
 	}
 
-	static inline any_a<> anything(range_a<> const&)
+	static inline any_a<> anything__(range_a<> const&)
 	{
 		return anything_();
 	}
@@ -70,22 +70,22 @@ public: ___STRANGE_THING___
 		return nothing_t<>::val_();
 	}
 
-	static inline bool anything__()
+	static inline bool anything()
 	{
 		return false;
 	}
 
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return thing.nothing__();
+		return thing.nothing();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return !thing.nothing__();
+		return !thing.nothing();
 	}
 
-	inline std::size_t hash__() const
+	inline std::size_t hash() const
 	{
 		static std::size_t const HASH = std::hash<int64_t>{}(0);
 		return HASH;

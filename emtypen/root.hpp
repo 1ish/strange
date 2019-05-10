@@ -6,7 +6,7 @@ public:
 	public:
 		inline std::size_t operator()(%struct_name% const& thing) const
 		{
-			return thing.hash__();
+			return thing.hash();
 		}
 	};
 

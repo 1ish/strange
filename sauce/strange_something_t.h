@@ -18,7 +18,7 @@ public:
 	}
 
 	// comparison
-	static inline any_a<> something(range_a<> const&)
+	static inline any_a<> something__(range_a<> const&)
 	{
 		return something_();
 	}
@@ -28,7 +28,7 @@ public:
 		return everything_t<>::val_();
 	}
 
-	static inline bool something__()
+	static inline bool something()
 	{
 		return true;
 	}

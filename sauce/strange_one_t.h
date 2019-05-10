@@ -16,57 +16,57 @@ public:
 	// conversion
 	inline operator bool() const
 	{
-		return anything__();
+		return anything();
 	}
 
 	// identification
-	inline void const* identity__() const
+	inline void const* identity() const
 	{
 		return this;
 	}
 
-	inline bool identical__(any_a<> const& thing) const
+	inline bool identical(any_a<> const& thing) const
 	{
-		return thing.identity__() == identity__();
+		return thing.identity() == identity();
 	}
 
 	// comparison
-	static inline bool nothing__()
+	static inline bool nothing()
 	{
 		return false;
 	}
 
-	static inline bool anything__()
+	static inline bool anything()
 	{
 		return true;
 	}
 
-	static inline bool something__()
+	static inline bool something()
 	{
 		return false;
 	}
 
-	static inline bool everything__()
+	static inline bool everything()
 	{
 		return false;
 	}
 
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return identical__(thing);
+		return identical(thing);
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return !identical__(thing);
+		return !identical(thing);
 	}
 
-	inline std::size_t hash__() const
+	inline std::size_t hash() const
 	{
-		return std::hash<void const*>{}(identity__());
+		return std::hash<void const*>{}(identity());
 	}
 
-	static inline bool is__(std::string const& s)
+	static inline bool is(std::string const& s)
 	{
 		return false;
 	}

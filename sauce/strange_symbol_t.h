@@ -69,12 +69,12 @@ public: ___STRANGE_THING___
 		return !check_<symbol_a<>>(thing) || cast_<symbol_a<>>(thing).to_string__() != _string;
 	}
 
-	inline std::size_t hash__() const
+	inline std::size_t hash() const
 	{
 		return _hash;
 	}
 
-	inline bool is__(std::string const& s) const
+	inline bool is(std::string const& s) const
 	{
 		return s == _string;
 	}

@@ -34,8 +34,8 @@ TEST(TestCaseName, ForLoop)
 	symbol_a<> s = sym__("strange");
 
 	EXPECT_EQ(s.to_string__(), "strange");
-	EXPECT_FALSE(e.is__("strange"));
-	EXPECT_TRUE(s.is__("strange"));
+	EXPECT_FALSE(e.is("strange"));
+	EXPECT_TRUE(s.is("strange"));
 
 	cat_a<> c = cat_t<>::val_();
 

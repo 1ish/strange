@@ -50,7 +50,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 			return _it != cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract__();
 		}
 
-		inline std::size_t hash__() const
+		inline std::size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
 		}
@@ -196,13 +196,13 @@ public: ___STRANGE_COLLECTION___
 		return TYPE;
 	}
 
-	inline any_a<> feeder(range_a<> const& range) const // return range of parameter values
+	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
 	{
 		return nothing_t<>::val_(); //TODO
 	}
 
 	// visitor pattern
-	static inline any_a<> visit(range_a<> const& range)
+	static inline any_a<> visit__(range_a<> const& range)
 	{
 		return nothing_t<>::val_(); //TODO
 	}
@@ -226,13 +226,13 @@ public: ___STRANGE_COLLECTION___
 		return _set != cast_<herd_a<>>(thing).extract__();
 	}
 
-	inline std::size_t hash__() const
+	inline std::size_t hash() const
 	{
 		std::set<any_a<>> const ordered(_set.cbegin(), _set.cend());
 		std::size_t seed = std::hash<std::size_t>{}(_set.size());
 		for (auto const& item : ordered)
 		{
-			seed ^= item.hash__() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+			seed ^= item.hash() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
 		return seed;
 	}
