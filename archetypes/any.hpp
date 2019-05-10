@@ -8,13 +8,13 @@
 #include "definitions.hpp"
 #include "symbol_forward.hpp"
 #include "cat_forward.hpp"
-#include "forward_const_iterator_forward.hpp"
+#include "range_forward.hpp"
 #include "number_data_forward.hpp"
 
 namespace strange
 {
 
-template <typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename forward_const_iterator_a = forward_const_iterator_a<>, typename number_data_a_uint64 = number_data_a<uint64_t>>
+template <typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename range_a = range_a<>, typename number_data_a_uint64 = number_data_a<uint64_t>>
 class any_a
 {
 public:
@@ -28,85 +28,78 @@ public:
 	};
 
 	// reflection
-	inline any_a type(any_a const& _) const;
+	inline any_a type(range_a const& _) const;
 	inline symbol_a type_() const;
 
-	inline any_a cat(any_a const& _) const;
+	inline any_a cat(range_a const& _) const;
 	inline cat_a cat_() const;
 
-//	herd_a<cat_a> inline any_a cats(any_a const& _) const;
+//	herd_a<cat_a> inline any_a cats(range_a const& _) const;
 //	herd_a<cat_a> inline any_a cats_() const;
 
-//	void inline any_a share(any_a const& range) const;
+//	void inline any_a share(range_a const& range) const;
 	
-//	shoal_a<symbol_a, any_a> inline any_a shared(any_a const& _) const;
+//	shoal_a<symbol_a, any_a> inline any_a shared(range_a const& _) const;
 
-//  shoal_a<symbol_a, any_a> inline any_a operations(any_a const& _) const;
+//  shoal_a<symbol_a, any_a> inline any_a operations(range_a const& _) const;
 //  shoal_a<symbol_a, any_a> inline any_a operations_() const;
 
-	inline any_a eater(any_a const& _) const;
+	inline any_a eater(range_a const& _) const;
 	inline any_a eater_() const; // return range of parameter names
 
-	inline any_a feeder(any_a const& range) const; // return range of parameter values
+	inline any_a feeder(range_a const& range) const; // return range of parameter values
 
 	// visitor pattern
-	inline any_a visit(any_a const& range);
+	inline any_a visit(range_a const& range);
 
 	// function
-	inline any_a invoke(any_a const& range) const;
-	inline any_a invoke_(any_a const& member, any_a const& range) const;
-	inline any_a operate(any_a const& range) const;
-	inline any_a operate_(any_a const& thing, any_a const& operation, any_a const& range) const;
-	inline any_a operator()(any_a const& thing, any_a const& range) const;
+	inline any_a invoke(range_a const& range) const;
+	inline any_a invoke_(any_a const& member, range_a const& range) const;
+	inline any_a operate(range_a const& range) const;
+	inline any_a operate_(any_a const& thing, any_a const& operation, range_a const& range) const;
+	inline any_a operator()(any_a const& thing, range_a const& range) const;
 
 	// identification
 	inline void const* identity__() const;
 
-	inline any_a identical(any_a const& range) const;
+	inline any_a identical(range_a const& range) const;
 	inline any_a identical_(any_a const& thing) const;
 	inline bool identical__(any_a const& thing) const;
 
 	// comparison
-	inline any_a nothing(any_a const& _) const;
+	inline any_a nothing(range_a const& _) const;
 	inline any_a nothing_() const;
 	inline bool nothing__() const;
 
-	inline any_a anything(any_a const& _) const;
+	inline any_a anything(range_a const& _) const;
 	inline any_a anything_() const;
 	inline bool anything__() const;
 
-	inline any_a something(any_a const& _) const;
+	inline any_a something(range_a const& _) const;
 	inline any_a something_() const;
 	inline bool something__() const;
 
-	inline any_a everything(any_a const& _) const;
+	inline any_a everything(range_a const& _) const;
 	inline any_a everything_() const;
 	inline bool everything__() const;
 
-	inline any_a same(any_a const& range) const;
+	inline any_a same(range_a const& range) const;
 	inline any_a same_(any_a const& thing) const;
 	inline bool operator==(any_a const& thing) const;
 
-	inline any_a different(any_a const& range) const;
+	inline any_a different(range_a const& range) const;
 	inline any_a different_(any_a const& thing) const;
 	inline bool operator!=(any_a const& thing) const;
 
-	inline any_a hash(any_a const& _) const;
+	inline any_a hash(range_a const& _) const;
 	inline number_data_a_uint64 hash_() const;
 	inline std::size_t hash__() const;
 
 	inline bool is__(std::string const& s) const;
 
-	// range
-	inline any_a beget(any_a const& _) const;
-	inline forward_const_iterator_a beget_() const;
-	inline forward_const_iterator_a cbegin() const;
-	inline forward_const_iterator_a begin() const;
-
-	inline any_a enget(any_a const& _) const;
-	inline forward_const_iterator_a enget_() const;
-	inline forward_const_iterator_a cend() const;
-	inline forward_const_iterator_a end() const;
+	// conversion
+	inline range_a to_range(range_a const& _) const;
+	inline range_a to_range_() const;
 };
 
 } // namespace strange

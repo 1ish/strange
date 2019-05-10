@@ -6,6 +6,7 @@
 */
 
 #include "any_forward.hpp"
+#include "range_forward.hpp"
 
 namespace strange
 {
@@ -17,7 +18,7 @@ public:
 	// symbol
 	inline std::string const& to_string__() const;
 
-	inline any_a<> add(any_a<> const& range) const;
+	inline any_a<> add(range_a<> const& range) const;
 	inline symbol_a add_(symbol_a const& symbol) const;
 	inline symbol_a operator+(symbol_a const& symbol) const;
 };

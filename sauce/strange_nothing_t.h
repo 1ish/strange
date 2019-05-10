@@ -9,7 +9,7 @@ class nothing_t : public something_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline any_a<> val(any_a<> const& _)
+	static inline any_a<> val(range_a<> const& _)
 	{
 		return val_();
 	}
@@ -20,7 +20,7 @@ public: ___STRANGE_THING___
 		return VAL;
 	}
 
-	static inline any_a<> ref(any_a<> const& _)
+	static inline any_a<> ref(range_a<> const& _)
 	{
 		return ref_();
 	}
@@ -45,7 +45,7 @@ public: ___STRANGE_THING___
 	}
 
 	// comparison
-	static inline any_a<> nothing(any_a<> const&)
+	static inline any_a<> nothing(range_a<> const&)
 	{
 		return nothing_();
 	}
@@ -60,7 +60,7 @@ public: ___STRANGE_THING___
 		return true;
 	}
 
-	static inline any_a<> anything(any_a<> const&)
+	static inline any_a<> anything(range_a<> const&)
 	{
 		return anything_();
 	}
@@ -91,25 +91,10 @@ public: ___STRANGE_THING___
 		return HASH;
 	}
 
-	// range
-	inline forward_const_iterator_a<> cbegin() const
+	// conversion
+	inline range_a<> to_range_() const
 	{
-		return it_t<true, everything_t<>>::val_(nothing_t<>::val_());
-	}
-
-	inline forward_const_iterator_a<> begin() const
-	{
-		return it_t<true, everything_t<>>::val_(nothing_t<>::val_());
-	}
-
-	inline forward_const_iterator_a<> cend() const
-	{
-		return it_t<true, everything_t<>>::val_(everything_t<>::val_());
-	}
-
-	inline forward_const_iterator_a<> end() const
-	{
-		return it_t<true, everything_t<>>::val_(everything_t<>::val_());
+		return range_t<>::val_(it_t<true, everything_t<>>::val_(nothing_t<>::val_()), it_t<true, everything_t<>>::val_(everything_t<>::val_()));
 	}
 
 protected:

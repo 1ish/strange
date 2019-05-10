@@ -56,7 +56,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		}
 
 		// forward iterator
-		inline any_a<> get(any_a<> const&) const
+		inline any_a<> get(range_a<> const&) const
 		{
 			return get_();
 		}
@@ -68,7 +68,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			return _pair;
 		}
 
-		inline any_a<> set(any_a<> const& range) const
+		inline any_a<> set(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -97,7 +97,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			throw dis__("strange::shoal::iterator cannot be dereferenced");
 		}
 
-		inline _ABSTRACTION_ increment(any_a<> const&)
+		inline _ABSTRACTION_ increment(range_a<> const&)
 		{
 			return increment_();
 		}
@@ -122,7 +122,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement(any_a<> const& _)
+		inline _ABSTRACTION_ decrement(range_a<> const& _)
 		{
 			return decrement_();
 		}
@@ -225,7 +225,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			}
 
 			// forward iterator
-			inline any_a<> get(any_a<> const&) const
+			inline any_a<> get(range_a<> const&) const
 			{
 				return get_();
 			}
@@ -249,7 +249,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 				return _pair;
 			}
 
-			inline _ABSTRACTION_ increment(any_a<> const&)
+			inline _ABSTRACTION_ increment(range_a<> const&)
 			{
 				return increment_();
 			}
@@ -274,7 +274,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			}
 
 			// bidirectional iterator
-			inline _ABSTRACTION_ decrement(any_a<> const& _)
+			inline _ABSTRACTION_ decrement(range_a<> const& _)
 			{
 				return decrement_();
 			}
@@ -332,7 +332,7 @@ public: ___STRANGE_COLLECTION___
 	using std_unordered_map_any_any = std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>;
 
 	// construction
-	static inline shoal_a<> val(any_a<> const& range)
+	static inline shoal_a<> val(range_a<> const& range)
 	{
 		return cast_<shoal_a<>>(val_() += range);
 	}
@@ -348,7 +348,7 @@ public: ___STRANGE_COLLECTION___
 		return shoal_a<>{ shoal_t{ std::forward<F>(init) } };
 	}
 
-	static inline shoal_a<> ref(any_a<> const& range)
+	static inline shoal_a<> ref(range_a<> const& range)
 	{
 		return cast_<shoal_a<>>(ref_() += range, true);
 	}
@@ -371,13 +371,13 @@ public: ___STRANGE_COLLECTION___
 		return TYPE;
 	}
 
-	inline any_a<> feeder(any_a<> const& range) const // return range of parameter values
+	inline any_a<> feeder(range_a<> const& range) const // return range of parameter values
 	{
 		return nothing_t<>::val_(); //TODO
 	}
 
 	// visitor pattern
-	static inline any_a<> visit(any_a<> const& range)
+	static inline any_a<> visit(range_a<> const& range)
 	{
 		return nothing_t<>::val_(); //TODO
 	}
@@ -429,7 +429,7 @@ public: ___STRANGE_COLLECTION___
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cbegin());
 	}
 
-	inline any_a<> beset(any_a<> const&)
+	inline any_a<> beset(range_a<> const&)
 	{
 		return beset_();
 	}
@@ -454,7 +454,7 @@ public: ___STRANGE_COLLECTION___
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val__(me_(), _map.cend());
 	}
 
-	inline any_a<> enset(any_a<> const&)
+	inline any_a<> enset(range_a<> const&)
 	{
 		return enset_();
 	}

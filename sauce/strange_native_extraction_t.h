@@ -7,7 +7,7 @@ namespace strange
 template <typename T, typename _ABSTRACTION_ = any_a<>>
 class native_extraction_t : public thing_t<_ABSTRACTION_>
 {
-	using member = any_a<>(T::*)(any_a<> const&) const;
+	using member = any_a<>(T::*)(range_a<> const&) const;
 
 public: ___STRANGE_THING___
 	// construction
@@ -42,7 +42,7 @@ public: ___STRANGE_THING___
 	}
 
 	// function
-	inline any_a<> operator()(any_a<> const& thing, any_a<> const& range) const
+	inline any_a<> operator()(any_a<> const& thing, range_a<> const& range) const
 	{
 		return (cast_<T>(thing).*_function)(range);
 	}

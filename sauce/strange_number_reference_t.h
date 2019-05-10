@@ -51,7 +51,7 @@ public: ___STRANGE_THING___
 	}
 
 	// number
-	inline _ABSTRACTION_ increment(any_a<> const&)
+	inline _ABSTRACTION_ increment(range_a<> const&)
 	{
 		return increment_();
 	}
@@ -73,7 +73,7 @@ public: ___STRANGE_THING___
 		++_number;
 	}
 
-	inline any_a<> decrement(any_a<> const& _)
+	inline any_a<> decrement(range_a<> const& _)
 	{
 		return decrement_();
 	}
@@ -95,7 +95,7 @@ public: ___STRANGE_THING___
 		--_number;
 	}
 
-	inline any_a<> self_add(any_a<> const& range)
+	inline any_a<> self_add(range_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -120,7 +120,7 @@ public: ___STRANGE_THING___
 		return *this;
 	}
 
-	inline any_a<> add(any_a<> const& range) const
+	inline any_a<> add(range_a<> const& range) const
 	{
 		number_a<> result = number_t<PRIMITIVE>::val__(_number);
 		for (auto const& thing : range)
@@ -142,7 +142,7 @@ public: ___STRANGE_THING___
 		return result;
 	}
 
-	inline any_a<> self_subtract(any_a<> const& range)
+	inline any_a<> self_subtract(range_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -167,7 +167,7 @@ public: ___STRANGE_THING___
 		return *this;
 	}
 
-	inline any_a<> subtract(any_a<> const& range) const
+	inline any_a<> subtract(range_a<> const& range) const
 	{
 		number_a<> result = number_t<PRIMITIVE>::val__(_number);
 		for (auto const& thing : range)
@@ -189,7 +189,7 @@ public: ___STRANGE_THING___
 		return result;
 	}
 
-	inline any_a<> self_multiply(any_a<> const& range)
+	inline any_a<> self_multiply(range_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -214,7 +214,7 @@ public: ___STRANGE_THING___
 		return *this;
 	}
 
-	inline any_a<> multiply(any_a<> const& range) const
+	inline any_a<> multiply(range_a<> const& range) const
 	{
 		number_a<> result = number_t<PRIMITIVE>::val__(_number);
 		for (auto const& thing : range)
@@ -236,7 +236,7 @@ public: ___STRANGE_THING___
 		return result;
 	}
 
-	inline any_a<> self_divide(any_a<> const& range)
+	inline any_a<> self_divide(range_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -271,7 +271,7 @@ public: ___STRANGE_THING___
 		return *this;
 	}
 
-	inline any_a<> divide(any_a<> const& range) const
+	inline any_a<> divide(range_a<> const& range) const
 	{
 		number_a<> result = number_t<PRIMITIVE>::val__(_number);
 		for (auto const& thing : range)
@@ -298,7 +298,7 @@ public: ___STRANGE_THING___
 		return result;
 	}
 
-	inline any_a<> self_modulo(any_a<> const& range)
+	inline any_a<> self_modulo(range_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -333,7 +333,7 @@ public: ___STRANGE_THING___
 		return *this;
 	}
 
-	inline any_a<> modulo(any_a<> const& range) const
+	inline any_a<> modulo(range_a<> const& range) const
 	{
 		number_a<> result = number_t<PRIMITIVE>::val__(_number);
 		for (auto const& thing : range)
@@ -358,7 +358,7 @@ public: ___STRANGE_THING___
 		return number_t<PRIMITIVE>::val__(number_u<PRIMITIVE>::modulo__(_number, num));
 	}
 
-	inline any_a<> to_int_64(any_a<> const& _) const
+	inline any_a<> to_int_64(range_a<> const& _) const
 	{
 		return to_int_64_();
 	}
@@ -373,7 +373,7 @@ public: ___STRANGE_THING___
 		return number_u<PRIMITIVE>::to_int_64__(_number);
 	}
 
-	inline any_a<> from_int_64(any_a<> const& range)
+	inline any_a<> from_int_64(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -399,7 +399,7 @@ public: ___STRANGE_THING___
 		_number = number_u<PRIMITIVE>::from_int_64__(int_64);
 	}
 
-	inline any_a<> to_uint_64(any_a<> const& _) const
+	inline any_a<> to_uint_64(range_a<> const& _) const
 	{
 		return to_uint_64_();
 	}
@@ -414,7 +414,7 @@ public: ___STRANGE_THING___
 		return number_u<PRIMITIVE>::to_uint_64__(_number);
 	}
 
-	inline any_a<> from_uint_64(any_a<> const& range)
+	inline any_a<> from_uint_64(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -440,7 +440,7 @@ public: ___STRANGE_THING___
 		_number = number_u<PRIMITIVE>::from_uint_64__(uint_64);
 	}
 
-	inline any_a<> to_float_64(any_a<> const& _) const
+	inline any_a<> to_float_64(range_a<> const& _) const
 	{
 		return to_float_64_();
 	}
@@ -455,7 +455,7 @@ public: ___STRANGE_THING___
 		return number_u<PRIMITIVE>::to_float_64__(_number);
 	}
 
-	inline any_a<> from_float_64(any_a<> const& range)
+	inline any_a<> from_float_64(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -481,7 +481,7 @@ public: ___STRANGE_THING___
 		_number = number_u<PRIMITIVE>::from_float_64__(float_64);
 	}
 
-	inline any_a<> less_than(any_a<> const& range) const
+	inline any_a<> less_than(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -506,7 +506,7 @@ public: ___STRANGE_THING___
 		return _number < number_u<PRIMITIVE>::from_number__(number);
 	}
 
-	inline any_a<> greater_than(any_a<> const& range) const
+	inline any_a<> greater_than(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -531,7 +531,7 @@ public: ___STRANGE_THING___
 		return _number > number_u<PRIMITIVE>::from_number__(number);
 	}
 
-	inline any_a<> less_or_equal(any_a<> const& range) const
+	inline any_a<> less_or_equal(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -556,7 +556,7 @@ public: ___STRANGE_THING___
 		return _number <= number_u<PRIMITIVE>::from_number__(number);
 	}
 
-	inline any_a<> greater_or_equal(any_a<> const& range) const
+	inline any_a<> greater_or_equal(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -581,7 +581,7 @@ public: ___STRANGE_THING___
 		return _number >= number_u<PRIMITIVE>::from_number__(number);
 	}
 
-	static inline any_a<> byte_size(any_a<> const& _)
+	static inline any_a<> byte_size(range_a<> const& _)
 	{
 		return byte_size_();
 	}
@@ -596,7 +596,7 @@ public: ___STRANGE_THING___
 		return int64_t(sizeof(_number));
 	}
 
-	static inline any_a<> is_int(any_a<> const& _)
+	static inline any_a<> is_int(range_a<> const& _)
 	{
 		return is_int_();
 	}
@@ -611,7 +611,7 @@ public: ___STRANGE_THING___
 		return number_u<PRIMITIVE>::is_int__();
 	}
 
-	static inline any_a<> is_signed(any_a<> const& _)
+	static inline any_a<> is_signed(range_a<> const& _)
 	{
 		return is_signed_();
 	}
@@ -626,7 +626,7 @@ public: ___STRANGE_THING___
 		return number_u<PRIMITIVE>::is_signed__();
 	}
 
-	inline any_a<> is_nan(any_a<> const& _) const
+	inline any_a<> is_nan(range_a<> const& _) const
 	{
 		return is_nan_();
 	}
@@ -641,7 +641,7 @@ public: ___STRANGE_THING___
 		return number_u<PRIMITIVE>::is_nan__(_number);
 	}
 
-	inline any_a<> is_inf(any_a<> const& _) const
+	inline any_a<> is_inf(range_a<> const& _) const
 	{
 		return is_inf_();
 	}
@@ -656,7 +656,7 @@ public: ___STRANGE_THING___
 		return number_u<PRIMITIVE>::is_inf__(_number);
 	}
 
-	inline any_a<> is_finite(any_a<> const& _) const
+	inline any_a<> is_finite(range_a<> const& _) const
 	{
 		return is_finite_();
 	}
@@ -671,7 +671,7 @@ public: ___STRANGE_THING___
 		return number_u<PRIMITIVE>::is_finite__(_number);
 	}
 
-	inline any_a<> is_normal(any_a<> const& _) const
+	inline any_a<> is_normal(range_a<> const& _) const
 	{
 		return is_normal_();
 	}
@@ -686,7 +686,7 @@ public: ___STRANGE_THING___
 		return number_u<PRIMITIVE>::is_normal__(_number);
 	}
 
-	static inline any_a<> little_endian(any_a<> const& _)
+	static inline any_a<> little_endian(range_a<> const& _)
 	{
 		return little_endian_();
 	}

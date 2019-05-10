@@ -31,13 +31,13 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a<> feeder(any_a<> const& range)
+	static inline any_a<> feeder(range_a<> const& range)
 	{
 		return nothing_t<>::val_();
 	}
 
 	// visitor pattern
-	static inline any_a<> visit(any_a<> const& range)
+	static inline any_a<> visit(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -49,7 +49,7 @@ public:
 	}
 
 	// function
-	inline any_a<> invoke(any_a<> const& range) const
+	inline any_a<> invoke(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -60,7 +60,7 @@ public:
 		return invoke_(member, range_t<>::val_(++it, range.cend()));
 	}
 
-	inline any_a<> invoke_(any_a<> const& member, any_a<> const& range) const
+	inline any_a<> invoke_(any_a<> const& member, range_a<> const& range) const
 	{
 		//TODO
 		// thing = me_();
@@ -69,7 +69,7 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a<> operate(any_a<> const& range)
+	static inline any_a<> operate(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -85,13 +85,13 @@ public:
 		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
 	}
 
-	static inline any_a<> operate_(any_a<> const& thing, any_a<> const& operation, any_a<> const& range)
+	static inline any_a<> operate_(any_a<> const& thing, any_a<> const& operation, range_a<> const& range)
 	{
 		return operation.operator()(thing, range);
 	}
 
 	// identification
-	inline any_a<> identical(any_a<> const& range) const
+	inline any_a<> identical(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -107,7 +107,7 @@ public:
 	}
 
 	// comparison
-	static inline any_a<> nothing(any_a<> const&)
+	static inline any_a<> nothing(range_a<> const&)
 	{
 		return nothing_();
 	}
@@ -117,7 +117,7 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a<> anything(any_a<> const&)
+	static inline any_a<> anything(range_a<> const&)
 	{
 		return anything_();
 	}
@@ -127,7 +127,7 @@ public:
 		return everything_t<>::val_();
 	}
 
-	static inline any_a<> something(any_a<> const&)
+	static inline any_a<> something(range_a<> const&)
 	{
 		return something_();
 	}
@@ -137,7 +137,7 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a<> everything(any_a<> const&)
+	static inline any_a<> everything(range_a<> const&)
 	{
 		return everything_();
 	}
@@ -147,25 +147,10 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	// range
-	inline forward_const_iterator_a<> cbegin() const
+	// conversion
+	inline range_a<> to_range_() const
 	{
-		return it_t<true>::val_(me_());
-	}
-
-	inline forward_const_iterator_a<> begin() const
-	{
-		return it_t<true>::val_(me_());
-	}
-
-	inline forward_const_iterator_a<> cend() const
-	{
-		return it_t<true>::val_(nothing_t<>::val_());
-	}
-
-	inline forward_const_iterator_a<> end() const
-	{
-		return it_t<true>::val_(nothing_t<>::val_());
+		return range_t<>::val_(it_t<true>::val_(me_()), it_t<true>::val_(nothing_t<>::val_()));
 	}
 
 	// operators
@@ -211,19 +196,19 @@ protected:
 
 // adaptation
 #define ___STRANGE_THING___ \
-inline symbol_a<> type(any_a<> const&) const \
+inline symbol_a<> type(range_a<> const&) const \
 { \
 	return type_(); \
 } \
-inline cat_a<> cat(any_a<> const&) const \
+inline cat_a<> cat(range_a<> const&) const \
 { \
 	return cat_(); \
 } \
-inline any_a<> eater(any_a<> const&) const \
+inline any_a<> eater(range_a<> const&) const \
 { \
 	return eater_(); \
 } \
-inline any_a<> same(any_a<> const& range) const \
+inline any_a<> same(range_a<> const& range) const \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -236,7 +221,7 @@ inline any_a<> same_(any_a<> const& thing) const \
 { \
 	return _boole_(operator==(thing)); \
 } \
-inline any_a<> different(any_a<> const& range) const \
+inline any_a<> different(range_a<> const& range) const \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -249,7 +234,7 @@ inline any_a<> different_(any_a<> const& thing) const \
 { \
 	return _boole_(operator!=(thing)); \
 } \
-inline any_a<> hash(any_a<> const&) const \
+inline any_a<> hash(range_a<> const&) const \
 { \
 	return hash_(); \
 } \
@@ -257,21 +242,9 @@ inline number_data_a<uint64_t> hash_() const \
 { \
 	return number_uint_64_t<>::val__(uint64_t(hash__())); \
 } \
-inline any_a<> beget(any_a<> const&) const \
+inline range_a<> to_range(range_a<> const& _) const \
 { \
-	return beget_(); \
-} \
-inline forward_const_iterator_a<> beget_() const \
-{ \
-	return cbegin(); \
-} \
-inline any_a<> enget(any_a<> const&) const \
-{ \
-	return enget_(); \
-} \
-inline forward_const_iterator_a<> enget_() const \
-{ \
-	return cend(); \
+	return to_range_() const \
 } \
 
 } // namespace strange

@@ -9,7 +9,7 @@ class cat_t : public symbol_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline cat_a<> val(any_a<> const& range)
+	static inline cat_a<> val(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -24,7 +24,7 @@ public: ___STRANGE_THING___
 		return cat_a<>{ cat_t{} };
 	}
 
-	static inline cat_a<> ref(any_a<> const& range)
+	static inline cat_a<> ref(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -47,7 +47,7 @@ public: ___STRANGE_THING___
 	}
 
 	// cat
-	inline symbol_a<> name(any_a<> const& _) const
+	inline symbol_a<> name(range_a<> const& _) const
 	{
 		return name_();
 	}
@@ -57,7 +57,7 @@ public: ___STRANGE_THING___
 		return _name;
 	}
 
-	inline any_a<> arguments(any_a<> const& _) const
+	inline any_a<> arguments(range_a<> const& _) const
 	{
 		return arguments_();
 	}
@@ -67,7 +67,7 @@ public: ___STRANGE_THING___
 		return _arguments;
 	}
 
-	inline any_a<> parameters(any_a<> const& _) const
+	inline any_a<> parameters(range_a<> const& _) const
 	{
 		return parameters_();
 	}
@@ -77,7 +77,7 @@ public: ___STRANGE_THING___
 		return _parameters;
 	}
 
-	inline cat_a<> result(any_a<> const& _) const
+	inline cat_a<> result(range_a<> const& _) const
 	{
 		return result_();
 	}
@@ -87,7 +87,7 @@ public: ___STRANGE_THING___
 		return check_<cat_a<>>(_result) ? cast_<cat_a<>>(_result) : val_();
 	}
 
-	inline any_a<> includes(any_a<> const& range) const
+	inline any_a<> includes(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -107,7 +107,7 @@ public: ___STRANGE_THING___
 		return false;
 	}
 
-	static inline any_a<> conforms(any_a<> const& range)
+	static inline any_a<> conforms(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())

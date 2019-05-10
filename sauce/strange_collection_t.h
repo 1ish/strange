@@ -5,8 +5,8 @@ namespace strange
 {
 
 // adaptation
-#define ___STRANGE_COLLECTION___ ___STRANGE_THING___ \
-inline any_a<> has(any_a<> const& range) const \
+#define ___STRANGE_COLLECTION___ ___STRANGE_RANGE___ \
+inline any_a<> has(range_a<> const& range) const \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -19,7 +19,7 @@ inline any_a<> has_(any_a<> const& key) const \
 { \
 	return _boole_(has__(key)); \
 } \
-inline any_a<> at(any_a<> const& range) const \
+inline any_a<> at(range_a<> const& range) const \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -28,7 +28,7 @@ inline any_a<> at(any_a<> const& range) const \
 	} \
 	return at_(*it); \
 } \
-inline any_a<> update(any_a<> const& range) \
+inline any_a<> update(range_a<> const& range) \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -42,7 +42,7 @@ inline any_a<> update(any_a<> const& range) \
 	} \
 	return update_(key, *it); \
 } \
-inline any_a<> insert(any_a<> const& range) \
+inline any_a<> insert(range_a<> const& range) \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \
 	if (it == range.cend()) \
@@ -60,7 +60,7 @@ inline any_a<> insert_(any_a<> const& key, any_a<> const& value) \
 { \
 	return _boole_(insert__(key, value)); \
 } \
-inline any_a<> erase(any_a<> const& range) \
+inline any_a<> erase(range_a<> const& range) \
 { \
 	bool erased = false; \
 	for (auto const& key : range) \
@@ -76,7 +76,7 @@ inline any_a<> erase_(any_a<> const& key) \
 { \
 	return _boole_(erase__(key)); \
 } \
-inline _ABSTRACTION_ clear(any_a<> const&) \
+inline _ABSTRACTION_ clear(range_a<> const&) \
 { \
 	return clear_(); \
 } \
@@ -85,7 +85,7 @@ inline _ABSTRACTION_ clear_() \
 	clear__(); \
 	return me_(); \
 } \
-inline any_a<> size(any_a<> const&) const \
+inline any_a<> size(range_a<> const&) const \
 { \
 	return size_(); \
 } \
@@ -93,7 +93,7 @@ inline number_data_a<int64_t> size_() const \
 { \
 	return number_int_64_t<>::val__(size__()); \
 } \
-inline any_a<> empty(any_a<> const&) const \
+inline any_a<> empty(range_a<> const&) const \
 { \
 	return empty_(); \
 } \
@@ -101,7 +101,7 @@ inline any_a<> empty_() const \
 { \
 	return _boole_(empty__()); \
 } \
-inline _ABSTRACTION_ push_front(any_a<> const& range) \
+inline _ABSTRACTION_ push_front(range_a<> const& range) \
 { \
 	for (auto const& value : range) \
 	{ \
@@ -114,11 +114,11 @@ inline _ABSTRACTION_ push_front_(any_a<> const& value) \
 	push_front__(value); \
 	return me_(); \
 } \
-inline any_a<> pop_front(any_a<> const&) \
+inline any_a<> pop_front(range_a<> const&) \
 { \
 	return pop_front_(); \
 } \
-inline _ABSTRACTION_ push_back(any_a<> const& range) \
+inline _ABSTRACTION_ push_back(range_a<> const& range) \
 { \
 	for (auto const& value : range) \
 	{ \
@@ -131,11 +131,11 @@ inline _ABSTRACTION_ push_back_(any_a<> const& value) \
 	push_back__(value); \
 	return me_(); \
 } \
-inline any_a<> pop_back(any_a<> const&) \
+inline any_a<> pop_back(range_a<> const&) \
 { \
 	return pop_back_(); \
 } \
-inline _ABSTRACTION_ self_add(any_a<> const& range) \
+inline _ABSTRACTION_ self_add(range_a<> const& range) \
 { \
 	for (auto const& collection : range) \
 	{ \
@@ -148,7 +148,7 @@ inline _ABSTRACTION_ self_add_(collection_a<> const& collection) \
 	operator+=(collection); \
 	return me_(); \
 } \
-inline _ABSTRACTION_ add(any_a<> const& range) const \
+inline _ABSTRACTION_ add(range_a<> const& range) const \
 { \
 	_ABSTRACTION_ result = me_(); \
 	for (auto const& collection : range) \
@@ -167,7 +167,7 @@ inline _ABSTRACTION_ operator+(collection_a<> const& collection) const \
 	result += collection; \
 	return result; \
 } \
-inline _ABSTRACTION_ self_subtract(any_a<> const& range) \
+inline _ABSTRACTION_ self_subtract(range_a<> const& range) \
 { \
 	for (auto const& collection : range) \
 	{ \
@@ -180,7 +180,7 @@ inline _ABSTRACTION_ self_subtract_(collection_a<> const& collection) \
 	operator-=(collection); \
 	return me_(); \
 } \
-inline _ABSTRACTION_ subtract(any_a<> const& range) const \
+inline _ABSTRACTION_ subtract(range_a<> const& range) const \
 { \
 	_ABSTRACTION_ result = me_(); \
 	for (auto const& collection : range) \

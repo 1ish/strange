@@ -9,7 +9,7 @@ class everything_t : public something_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline any_a<> val(any_a<> const& _)
+	static inline any_a<> val(range_a<> const& _)
 	{
 		return val_();
 	}
@@ -20,7 +20,7 @@ public: ___STRANGE_THING___
 		return VAL;
 	}
 
-	static inline any_a<> ref(any_a<> const& _)
+	static inline any_a<> ref(range_a<> const& _)
 	{
 		return ref_();
 	}
@@ -39,7 +39,7 @@ public: ___STRANGE_THING___
 	}
 
 	// comparison
-	static inline any_a<> everything(any_a<> const&)
+	static inline any_a<> everything(range_a<> const&)
 	{
 		return everything_();
 	}

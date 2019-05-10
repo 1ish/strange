@@ -9,7 +9,7 @@ class range_t : public something_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline any_a<> val(any_a<> const& range)
+	static inline any_a<> val(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -38,7 +38,7 @@ public: ___STRANGE_THING___
 		return any_a<>{ range_t(begin, end) };
 	}
 
-	static inline any_a<> ref(any_a<> const& range)
+	static inline any_a<> ref(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -105,6 +105,25 @@ protected:
 		, _end(end)
 	{}
 };
+
+// adaptation
+#define ___STRANGE_RANGE___ ___STRANGE_THING___ \
+inline any_a<> beget(range_a<> const&) const \
+{ \
+return beget_(); \
+} \
+inline forward_const_iterator_a<> beget_() const \
+{ \
+return cbegin(); \
+} \
+inline any_a<> enget(range_a<> const&) const \
+{ \
+return enget_(); \
+} \
+inline forward_const_iterator_a<> enget_() const \
+{ \
+return cend(); \
+} \
 
 } // namespace strange
 

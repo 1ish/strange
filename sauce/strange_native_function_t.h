@@ -7,7 +7,7 @@ namespace strange
 template <typename _ABSTRACTION_ = any_a<>>
 class native_function_t : public thing_t<_ABSTRACTION_>
 {
-	using function = any_a<>(*)(any_a<> const&);
+	using function = any_a<>(*)(range_a<> const&);
 
 public: ___STRANGE_THING___
 	// construction
@@ -42,7 +42,7 @@ public: ___STRANGE_THING___
 	}
 
 	// function
-	inline any_a<> operator()(any_a<> const& _, any_a<> const& range) const
+	inline any_a<> operator()(any_a<> const& _, range_a<> const& range) const
 	{
 		return _function(range);
 	}

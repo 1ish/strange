@@ -6,6 +6,7 @@
 */
 
 #include "any_forward.hpp"
+#include "range_forward.hpp"
 
 namespace strange
 {
@@ -15,12 +16,12 @@ class forward_const_iterator_a
 {
 public:
 	// forward const iterator
-	inline any_a<> get(any_a<> const& _) const;
+	inline any_a<> get(range_a<> const& _) const;
 	inline any_a<> get_() const;
 	inline any_a<> const& operator*() const;
 	inline any_a<> const* operator->() const;
 
-	inline any_a<> increment(any_a<> const& _);
+	inline any_a<> increment(range_a<> const& _);
 	inline forward_const_iterator_a increment_();
 };
 

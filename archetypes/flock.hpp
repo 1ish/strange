@@ -6,6 +6,7 @@
 */
 
 #include "any_forward.hpp"
+#include "range_forward.hpp"
 
 namespace strange
 {
@@ -22,11 +23,11 @@ public:
 	inline bool erase__(int64_t index);
 
 	// mutable range
-	inline any_a<> beset(any_a<> const& _);
+	inline any_a<> beset(range_a<> const& _);
 	inline random_access_iterator_a beset_();
 	inline random_access_iterator_a begin();
 
-	inline any_a<> enset(any_a<> const& _);
+	inline any_a<> enset(range_a<> const& _);
 	inline random_access_iterator_a enset_();
 	inline random_access_iterator_a end();
 

@@ -1,7 +1,8 @@
 #ifndef COM_ONEISH_STRANGE_BIDIRECTIONAL_CONST_ITERATOR_A_H
 #define COM_ONEISH_STRANGE_BIDIRECTIONAL_CONST_ITERATOR_A_H
 
-// # include "any_forward.hpp"
+ //# include "any_forward.hpp"
+ //# include "range_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -80,7 +81,7 @@ namespace strange {
     		return *this;
     	}
     
-     inline any_a < > decrement ( any_a < > const & _ )
+     inline any_a < > decrement ( range_a < > const & _ )
      { assert(handle_); return write().decrement(_ ); }
      inline bidirectional_const_iterator_a decrement_ ( )
      { assert(handle_); return write().decrement_( ); }
@@ -88,7 +89,7 @@ namespace strange {
     protected:
     	struct ___dderived_handle_base___ : ___derived_handle_base___
     	{
-      virtual inline any_a < > decrement ( any_a < > const & _ ) = 0;
+      virtual inline any_a < > decrement ( range_a < > const & _ ) = 0;
       virtual inline bidirectional_const_iterator_a decrement_ ( ) = 0;
     	};
     
@@ -105,7 +106,7 @@ namespace strange {
     			: ___derived_handle___<___TTT___, ___DDHB___>{ std::move(value) }
     		{}
     
-      virtual inline any_a < > decrement ( any_a < > const & _ )
+      virtual inline any_a < > decrement ( range_a < > const & _ )
       { return value_.decrement(_ ); }
       virtual inline bidirectional_const_iterator_a decrement_ ( )
       { return value_.decrement_( ); }

@@ -56,7 +56,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 		}
 
 		// forward iterator
-		inline any_a<> get(any_a<> const&) const
+		inline any_a<> get(range_a<> const&) const
 		{
 			return get_();
 		}
@@ -76,7 +76,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 			return *_it;
 		}
 
-		inline _ABSTRACTION_ increment(any_a<> const&)
+		inline _ABSTRACTION_ increment(range_a<> const&)
 		{
 			return increment_();
 		}
@@ -101,7 +101,7 @@ class herd_t : public something_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement(any_a<> const& _)
+		inline _ABSTRACTION_ decrement(range_a<> const& _)
 		{
 			return decrement_();
 		}
@@ -157,7 +157,7 @@ public: ___STRANGE_COLLECTION___
 	using std_unordered_set_any = std::unordered_set<any_a<>, any_a<>::hash_f>;
 
 	// construction
-	static inline herd_a<> val(any_a<> const& range)
+	static inline herd_a<> val(range_a<> const& range)
 	{
 		return cast_<herd_a<>>(val_() += range);
 	}
@@ -173,7 +173,7 @@ public: ___STRANGE_COLLECTION___
 		return herd_a<>{ herd_t{ std::forward<F>(init) } };
 	}
 
-	static inline herd_a<> ref(any_a<> const& range)
+	static inline herd_a<> ref(range_a<> const& range)
 	{
 		return cast_<herd_a<>>(ref_() += range, true);
 	}
@@ -196,13 +196,13 @@ public: ___STRANGE_COLLECTION___
 		return TYPE;
 	}
 
-	inline any_a<> feeder(any_a<> const& range) const // return range of parameter values
+	inline any_a<> feeder(range_a<> const& range) const // return range of parameter values
 	{
 		return nothing_t<>::val_(); //TODO
 	}
 
 	// visitor pattern
-	static inline any_a<> visit(any_a<> const& range)
+	static inline any_a<> visit(range_a<> const& range)
 	{
 		return nothing_t<>::val_(); //TODO
 	}

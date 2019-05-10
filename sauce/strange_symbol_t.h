@@ -9,7 +9,7 @@ class symbol_t : public something_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline symbol_a<> val(any_a<> const& range)
+	static inline symbol_a<> val(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -30,7 +30,7 @@ public: ___STRANGE_THING___
 		return symbol_a<>{ symbol_t{ std::forward<F>(s) } };
 	}
 
-	static inline symbol_a<> ref(any_a<> const& range)
+	static inline symbol_a<> ref(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -85,7 +85,7 @@ public: ___STRANGE_THING___
 		return _string;
 	}
 
-	inline symbol_a<> add(any_a<> const& range) const
+	inline symbol_a<> add(range_a<> const& range) const
 	{
 		std::string s = _string;
 		for (any_a<> const& thing : range)

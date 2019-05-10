@@ -6,6 +6,7 @@
 */
 
 #include "any_forward.hpp"
+#include "range_forward.hpp"
 
 namespace strange
 {
@@ -15,7 +16,7 @@ class bidirectional_iterator_a
 {
 public:
 	// bidirectional iterator
-	inline any_a<> decrement(any_a<> const& _);
+	inline any_a<> decrement(range_a<> const& _);
 	inline bidirectional_iterator_a decrement_();
 };
 

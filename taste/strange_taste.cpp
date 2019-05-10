@@ -10,7 +10,7 @@ TEST(TestCaseName, TestName)
   EXPECT_TRUE(true);
 }
 
-any_a<> fun(any_a<> const& x)
+any_a<> fun(range_a<> const& x)
 {
 	return nothing_t<>::val_();
 }
@@ -18,17 +18,17 @@ any_a<> fun(any_a<> const& x)
 TEST(TestCaseName, ForLoop)
 {
 	any_a<> n{ nothing_t<>::val_() };
-
+/*
 	for (auto const& v : n)
 	{
 	}
-
+*/
 	any_a<> e{ everything_t<>::val_() };
-
+/*
 	for (auto const& v : e)
 	{
 	}
-
+*/
 	e = n;
 
 //	nothing_t<>::ref().set_(everything_t<>::ref());
@@ -45,7 +45,7 @@ TEST(TestCaseName, ForLoop)
 
 	any_a<> f = native_function_t<>::val__(fun, "x", "y", "z");
 	any_a<> g = native_function_t<>::val__(&nothing_t<>::val, "x", "y", "z");
-	any_a<> h = native_extraction_t<any_a<>>::val__(&any_a<>::beget);
+	any_a<> h = native_extraction_t<range_a<>>::val__(&range_a<>::beget);
 	any_a<> i = native_mutation_t<flock_a<>>::val__(&flock_a<>::beset);
 
 	shoal_a<> shoal = shoal_t<>::val_();

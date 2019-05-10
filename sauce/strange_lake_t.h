@@ -56,7 +56,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		}
 
 		// forward iterator
-		inline any_a<> get(any_a<> const&) const
+		inline any_a<> get(range_a<> const&) const
 		{
 			return get_();
 		}
@@ -66,7 +66,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return number_t<PRIMITIVE>::val__(*_it);
 		}
 
-		inline any_a<> set(any_a<> const& range) const
+		inline any_a<> set(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -97,7 +97,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			throw dis__("strange::lake::iterator cannot be dereferenced directly");
 		}
 
-		inline _ABSTRACTION_ increment(any_a<> const&)
+		inline _ABSTRACTION_ increment(range_a<> const&)
 		{
 			return increment_();
 		}
@@ -122,7 +122,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement(any_a<> const& _)
+		inline _ABSTRACTION_ decrement(range_a<> const& _)
 		{
 			return decrement_();
 		}
@@ -147,7 +147,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		}
 
 		// random access iterator
-		inline _ABSTRACTION_ self_add(any_a<> const& range)
+		inline _ABSTRACTION_ self_add(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -172,7 +172,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_iterator_a<> add(any_a<> const& range) const
+		inline random_access_iterator_a<> add(range_a<> const& range) const
 		{
 			random_access_iterator_a<> result = me_();
 			for (auto const& thing : range)
@@ -194,7 +194,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline _ABSTRACTION_ self_subtract(any_a<> const& range)
+		inline _ABSTRACTION_ self_subtract(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -219,7 +219,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_iterator_a<> subtract(any_a<> const& range) const
+		inline random_access_iterator_a<> subtract(range_a<> const& range) const
 		{
 			random_access_iterator_a<> result = me_();
 			for (auto const& thing : range)
@@ -241,7 +241,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline any_a<> less_than(any_a<> const& range) const
+		inline any_a<> less_than(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -270,7 +270,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
 		}
 
-		inline any_a<> greater_than(any_a<> const& range) const
+		inline any_a<> greater_than(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -299,7 +299,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
 		}
 
-		inline any_a<> less_or_equal(any_a<> const& range) const
+		inline any_a<> less_or_equal(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -328,7 +328,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract__();
 		}
 
-		inline any_a<> greater_or_equal(any_a<> const& range) const
+		inline any_a<> greater_or_equal(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -436,7 +436,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		}
 
 		// forward iterator
-		inline any_a<> get(any_a<> const&) const
+		inline any_a<> get(range_a<> const&) const
 		{
 			return get_();
 		}
@@ -458,7 +458,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return _number;
 		}
 
-		inline _ABSTRACTION_ increment(any_a<> const&)
+		inline _ABSTRACTION_ increment(range_a<> const&)
 		{
 			return increment_();
 		}
@@ -483,7 +483,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement(any_a<> const& _)
+		inline _ABSTRACTION_ decrement(range_a<> const& _)
 		{
 			return decrement_();
 		}
@@ -508,7 +508,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		}
 
 		// random access iterator
-		inline _ABSTRACTION_ self_add(any_a<> const& range)
+		inline _ABSTRACTION_ self_add(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -533,7 +533,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_const_iterator_a<> add(any_a<> const& range) const
+		inline random_access_const_iterator_a<> add(range_a<> const& range) const
 		{
 			random_access_const_iterator_a<> result = me_();
 			for (auto const& thing : range)
@@ -555,7 +555,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline _ABSTRACTION_ self_subtract(any_a<> const& range)
+		inline _ABSTRACTION_ self_subtract(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -580,7 +580,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return *this;
 		}
 
-		inline random_access_const_iterator_a<> subtract(any_a<> const& range) const
+		inline random_access_const_iterator_a<> subtract(range_a<> const& range) const
 		{
 			random_access_const_iterator_a<> result = me_();
 			for (auto const& thing : range)
@@ -602,7 +602,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return result;
 		}
 
-		inline any_a<> less_than(any_a<> const& range) const
+		inline any_a<> less_than(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -631,7 +631,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return _it < cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract__();
 		}
 
-		inline any_a<> greater_than(any_a<> const& range) const
+		inline any_a<> greater_than(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -660,7 +660,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return _it > cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract__();
 		}
 
-		inline any_a<> less_or_equal(any_a<> const& range) const
+		inline any_a<> less_or_equal(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -689,7 +689,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			return _it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract__();
 		}
 
-		inline any_a<> greater_or_equal(any_a<> const& range) const
+		inline any_a<> greater_or_equal(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -752,7 +752,7 @@ public: ___STRANGE_COLLECTION___
 	using std_vector_number = std::vector<PRIMITIVE>;
 
 	// construction
-	static inline lake_data_a<PRIMITIVE> val(any_a<> const& range)
+	static inline lake_data_a<PRIMITIVE> val(range_a<> const& range)
 	{
 		return cast_<lake_data_a<PRIMITIVE>>(val_() += range);
 	}
@@ -768,7 +768,7 @@ public: ___STRANGE_COLLECTION___
 		return lake_data_a<PRIMITIVE>{ lake_t{ std::forward<F>(init) } };
 	}
 
-	static inline lake_data_a<PRIMITIVE> ref(any_a<> const& range)
+	static inline lake_data_a<PRIMITIVE> ref(range_a<> const& range)
 	{
 		return cast_<lake_data_a<PRIMITIVE>>(ref_() += range, true);
 	}
@@ -791,13 +791,13 @@ public: ___STRANGE_COLLECTION___
 		return TYPE;
 	}
 
-	inline any_a<> feeder(any_a<> const& range) const // return range of parameter values
+	inline any_a<> feeder(range_a<> const& range) const // return range of parameter values
 	{
 		return nothing_t<>::val_(); //TODO
 	}
 
 	// visitor pattern
-	static inline any_a<> visit(any_a<> const& range)
+	static inline any_a<> visit(range_a<> const& range)
 	{
 		return nothing_t<>::val_(); //TODO
 	}
@@ -842,7 +842,7 @@ public: ___STRANGE_COLLECTION___
 		return const_iterator_t<std_vector_number::const_iterator>::val__(me_(), _vector.cbegin());
 	}
 
-	inline any_a<> beset(any_a<> const&)
+	inline any_a<> beset(range_a<> const&)
 	{
 		return beset_();
 	}
@@ -867,7 +867,7 @@ public: ___STRANGE_COLLECTION___
 		return const_iterator_t<std_vector_number::const_iterator>::val__(me_(), _vector.cend());
 	}
 
-	inline any_a<> enset(any_a<> const&)
+	inline any_a<> enset(range_a<> const&)
 	{
 		return enset_();
 	}

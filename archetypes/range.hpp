@@ -16,12 +16,12 @@ class range_a
 {
 public:
 	// range
-	inline any_a<> beget(any_a<> const& _) const;
+	inline any_a<> beget(range_a const& _) const;
 	inline forward_const_iterator_a<> beget_() const;
 	inline forward_const_iterator_a<> cbegin() const;
 	inline forward_const_iterator_a<> begin() const;
 
-	inline any_a<> enget(any_a<> const& _) const;
+	inline any_a<> enget(range_a const& _) const;
 	inline forward_const_iterator_a<> enget_() const;
 	inline forward_const_iterator_a<> cend() const;
 	inline forward_const_iterator_a<> end() const;

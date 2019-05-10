@@ -6,6 +6,7 @@
 */
 
 #include "any_forward.hpp"
+#include "range_forward.hpp"
 
 namespace strange
 {
@@ -22,11 +23,11 @@ public:
 	inline bool erase__(std::string const& s);
 
 	// mutable range
-	inline any_a<> beset(any_a<> const& _);
+	inline any_a<> beset(range_a<> const& _);
 	inline bidirectional_iterator_a beset_();
 	inline bidirectional_iterator_a begin();
 
-	inline any_a<> enset(any_a<> const& _);
+	inline any_a<> enset(range_a<> const& _);
 	inline bidirectional_iterator_a enset_();
 	inline bidirectional_iterator_a end();
 
