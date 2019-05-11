@@ -152,7 +152,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline _ABSTRACTION_ self_add_(number_a<> const& number)
 		{
-			_it += number.to_int_64__();
+			_it += number.to_int_64();
 			return me_();
 		}
 
@@ -162,7 +162,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator += passed non-number");
 			}
-			_it += cast_<number_a<>>(thing).to_int_64__();
+			_it += cast_<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -184,7 +184,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		inline random_access_iterator_a<> operator+(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
-			result.reference() += number.to_int_64__();
+			result.reference() += number.to_int_64();
 			return result;
 		}
 
@@ -199,7 +199,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline _ABSTRACTION_ self_subtract_(number_a<> const& number)
 		{
-			_it -= number.to_int_64__();
+			_it -= number.to_int_64();
 			return me_();
 		}
 
@@ -209,7 +209,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator -= passed non-number");
 			}
-			_it -= cast_<number_a<>>(thing).to_int_64__();
+			_it -= cast_<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -231,11 +231,11 @@ class flock_t : public something_t<_ABSTRACTION_>
 		inline random_access_iterator_a<> operator-(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
-			result.reference() -= number.to_int_64__();
+			result.reference() -= number.to_int_64();
 			return result;
 		}
 
-		inline any_a<> less_than(range_a<> const& range) const
+		inline any_a<> less_than__(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -264,7 +264,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
-		inline any_a<> greater_than(range_a<> const& range) const
+		inline any_a<> greater_than__(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -293,7 +293,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
-		inline any_a<> less_or_equal(range_a<> const& range) const
+		inline any_a<> less_or_equal__(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -322,7 +322,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
-		inline any_a<> greater_or_equal(range_a<> const& range) const
+		inline any_a<> greater_or_equal__(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -509,7 +509,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline _ABSTRACTION_ self_add_(number_a<> const& number)
 		{
-			_it += number.to_int_64__();
+			_it += number.to_int_64();
 			return me_();
 		}
 
@@ -519,7 +519,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator += passed non-number");
 			}
-			_it += cast_<number_a<>>(thing).to_int_64__();
+			_it += cast_<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -541,7 +541,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 		inline random_access_const_iterator_a<> operator+(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
-			result.reference() += number.to_int_64__();
+			result.reference() += number.to_int_64();
 			return result;
 		}
 
@@ -556,7 +556,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		inline _ABSTRACTION_ self_subtract_(number_a<> const& number)
 		{
-			_it -= number.to_int_64__();
+			_it -= number.to_int_64();
 			return me_();
 		}
 
@@ -566,7 +566,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator -= passed non-number");
 			}
-			_it -= cast_<number_a<>>(thing).to_int_64__();
+			_it -= cast_<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -588,11 +588,11 @@ class flock_t : public something_t<_ABSTRACTION_>
 		inline random_access_const_iterator_a<> operator-(number_a<> const& number) const
 		{
 			_ABSTRACTION_ result = me_();
-			result.reference() -= number.to_int_64__();
+			result.reference() -= number.to_int_64();
 			return result;
 		}
 
-		inline any_a<> less_than(range_a<> const& range) const
+		inline any_a<> less_than__(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -621,7 +621,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return _it < cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
-		inline any_a<> greater_than(range_a<> const& range) const
+		inline any_a<> greater_than__(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -650,7 +650,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return _it > cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
-		inline any_a<> less_or_equal(range_a<> const& range) const
+		inline any_a<> less_or_equal__(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -679,7 +679,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 			return _it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
-		inline any_a<> greater_or_equal(range_a<> const& range) const
+		inline any_a<> greater_or_equal__(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -873,7 +873,7 @@ public: ___STRANGE_COLLECTION___
 	// collection
 	inline bool has(any_a<> const& key) const
 	{
-		return check_<number_a<>>(key) && has(cast_<number_a<>>(key).to_int_64__());
+		return check_<number_a<>>(key) && has(cast_<number_a<>>(key).to_int_64());
 	}
 
 	inline bool has(int64_t index) const
@@ -885,7 +885,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check_<number_a<>>(key))
 		{
-			return at(cast_<number_a<>>(key).to_int_64__());
+			return at(cast_<number_a<>>(key).to_int_64());
 		}
 		return nothing_t<>::val_();
 	}
@@ -903,7 +903,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check_<number_a<>>(key))
 		{
-			update(cast_<number_a<>>(key).to_int_64__(), value);
+			update(cast_<number_a<>>(key).to_int_64(), value);
 		}
 		return value;
 	}
@@ -930,7 +930,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool insert(any_a<> const& key, any_a<> const& value)
 	{
-		return check_<number_a<>>(key) && insert(cast_<number_a<>>(key).to_int_64__(), value);
+		return check_<number_a<>>(key) && insert(cast_<number_a<>>(key).to_int_64(), value);
 	}
 
 	inline bool insert(int64_t index, any_a<> const& value)
@@ -961,7 +961,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase(any_a<> const& key)
 	{
-		return check_<number_a<>>(key) && erase(cast_<number_a<>>(key).to_int_64__());
+		return check_<number_a<>>(key) && erase(cast_<number_a<>>(key).to_int_64());
 	}
 
 	inline bool erase(int64_t index)

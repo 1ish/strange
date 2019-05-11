@@ -109,92 +109,92 @@ namespace strange {
      { assert(handle_); return read().subtract_(number ); }
      inline number_a operator - ( number_a const & number ) const
      { assert(handle_); return read().operator-(number ); }
-     inline any_a < > self_multiply ( range_a < > const & range )
-     { assert(handle_); return write().self_multiply(range ); }
+     inline any_a < > self_multiply__ ( range_a < > const & range )
+     { assert(handle_); return write().self_multiply__(range ); }
      inline number_a self_multiply_ ( number_a const & number )
      { assert(handle_); return write().self_multiply_(number ); }
-     inline any_a < > multiply ( range_a < > const & range ) const
-     { assert(handle_); return read().multiply(range ); }
+     inline any_a < > multiply__ ( range_a < > const & range ) const
+     { assert(handle_); return read().multiply__(range ); }
      inline number_a multiply_ ( number_a const & number ) const
      { assert(handle_); return read().multiply_(number ); }
      inline number_a operator * ( number_a const & number ) const
      { assert(handle_); return read().operator*(number ); }
-     inline any_a < > self_divide ( range_a < > const & range )
-     { assert(handle_); return write().self_divide(range ); }
+     inline any_a < > self_divide__ ( range_a < > const & range )
+     { assert(handle_); return write().self_divide__(range ); }
      inline number_a self_divide_ ( number_a const & number )
      { assert(handle_); return write().self_divide_(number ); }
-     inline any_a < > divide ( range_a < > const & range ) const
-     { assert(handle_); return read().divide(range ); }
+     inline any_a < > divide__ ( range_a < > const & range ) const
+     { assert(handle_); return read().divide__(range ); }
      inline number_a divide_ ( number_a const & number ) const
      { assert(handle_); return read().divide_(number ); }
      inline number_a operator / ( number_a const & number ) const
      { assert(handle_); return read().operator/(number ); }
-     inline any_a < > self_modulo ( range_a < > const & range )
-     { assert(handle_); return write().self_modulo(range ); }
+     inline any_a < > self_modulo__ ( range_a < > const & range )
+     { assert(handle_); return write().self_modulo__(range ); }
      inline number_a self_modulo_ ( number_a const & number )
      { assert(handle_); return write().self_modulo_(number ); }
-     inline any_a < > modulo ( range_a < > const & range ) const
-     { assert(handle_); return read().modulo(range ); }
+     inline any_a < > modulo__ ( range_a < > const & range ) const
+     { assert(handle_); return read().modulo__(range ); }
      inline number_a modulo_ ( number_a const & number ) const
      { assert(handle_); return read().modulo_(number ); }
      inline number_a operator % ( number_a const & number ) const
      { assert(handle_); return read().operator%(number ); }
-     inline any_a < > to_int_64 ( range_a < > const & _ ) const
-     { assert(handle_); return read().to_int_64(_ ); }
+     inline any_a < > to_int_64__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().to_int_64__(_ ); }
      inline number_data_a_int64 to_int_64_ ( ) const
      { assert(handle_); return read().to_int_64_( ); }
-     inline int64_t to_int_64__ ( ) const
-     { assert(handle_); return read().to_int_64__( ); }
-     inline any_a < > from_int_64 ( range_a < > const & range )
-     { assert(handle_); return write().from_int_64(range ); }
+     inline int64_t to_int_64 ( ) const
+     { assert(handle_); return read().to_int_64( ); }
+     inline any_a < > from_int_64__ ( range_a < > const & range )
+     { assert(handle_); return write().from_int_64__(range ); }
      inline any_a < > from_int_64_ ( number_data_a_int64 const & int_64 )
      { assert(handle_); return write().from_int_64_(int_64 ); }
-     inline void from_int_64__ ( int64_t int_64 )
-     { assert(handle_); write().from_int_64__(int_64 ); }
-     inline any_a < > to_uint_64 ( range_a < > const & _ ) const
-     { assert(handle_); return read().to_uint_64(_ ); }
+     inline void from_int_64 ( int64_t int_64 )
+     { assert(handle_); write().from_int_64(int_64 ); }
+     inline any_a < > to_uint_64__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().to_uint_64__(_ ); }
      inline number_data_a_uint64 to_uint_64_ ( ) const
      { assert(handle_); return read().to_uint_64_( ); }
-     inline uint64_t to_uint_64__ ( ) const
-     { assert(handle_); return read().to_uint_64__( ); }
-     inline any_a < > from_uint_64 ( range_a < > const & range )
-     { assert(handle_); return write().from_uint_64(range ); }
+     inline uint64_t to_uint_64 ( ) const
+     { assert(handle_); return read().to_uint_64( ); }
+     inline any_a < > from_uint_64__ ( range_a < > const & range )
+     { assert(handle_); return write().from_uint_64__(range ); }
      inline any_a < > from_uint_64_ ( number_data_a_uint64 const & uint_64 )
      { assert(handle_); return write().from_uint_64_(uint_64 ); }
-     inline void from_uint_64__ ( uint64_t uint_64 )
-     { assert(handle_); write().from_uint_64__(uint_64 ); }
-     inline any_a < > to_float_64 ( range_a < > const & _ ) const
-     { assert(handle_); return read().to_float_64(_ ); }
+     inline void from_uint_64 ( uint64_t uint_64 )
+     { assert(handle_); write().from_uint_64(uint_64 ); }
+     inline any_a < > to_float_64__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().to_float_64__(_ ); }
      inline number_data_a_double to_float_64_ ( ) const
      { assert(handle_); return read().to_float_64_( ); }
-     inline double to_float_64__ ( ) const
-     { assert(handle_); return read().to_float_64__( ); }
-     inline any_a < > from_float_64 ( range_a < > const & range )
-     { assert(handle_); return write().from_float_64(range ); }
+     inline double to_float_64 ( ) const
+     { assert(handle_); return read().to_float_64( ); }
+     inline any_a < > from_float_64__ ( range_a < > const & range )
+     { assert(handle_); return write().from_float_64__(range ); }
      inline any_a < > from_float_64_ ( number_data_a_double const & float_64 )
      { assert(handle_); return write().from_float_64_(float_64 ); }
-     inline void from_float_64__ ( double float_64 )
-     { assert(handle_); write().from_float_64__(float_64 ); }
-     inline any_a < > less_than ( range_a < > const & range ) const
-     { assert(handle_); return read().less_than(range ); }
+     inline void from_float_64 ( double float_64 )
+     { assert(handle_); write().from_float_64(float_64 ); }
+     inline any_a < > less_than__ ( range_a < > const & range ) const
+     { assert(handle_); return read().less_than__(range ); }
      inline any_a < > less_than_ ( number_a const & number ) const
      { assert(handle_); return read().less_than_(number ); }
      inline bool operator < ( number_a const & number ) const
      { assert(handle_); return read().operator<(number ); }
-     inline any_a < > greater_than ( range_a < > const & range ) const
-     { assert(handle_); return read().greater_than(range ); }
+     inline any_a < > greater_than__ ( range_a < > const & range ) const
+     { assert(handle_); return read().greater_than__(range ); }
      inline any_a < > greater_than_ ( number_a const & number ) const
      { assert(handle_); return read().greater_than_(number ); }
      inline bool operator > ( number_a const & number ) const
      { assert(handle_); return read().operator>(number ); }
-     inline any_a < > less_or_equal ( range_a < > const & range ) const
-     { assert(handle_); return read().less_or_equal(range ); }
+     inline any_a < > less_or_equal__ ( range_a < > const & range ) const
+     { assert(handle_); return read().less_or_equal__(range ); }
      inline any_a < > less_or_equal_ ( number_a const & number ) const
      { assert(handle_); return read().less_or_equal_(number ); }
      inline bool operator <= ( number_a const & number ) const
      { assert(handle_); return read().operator<=(number ); }
-     inline any_a < > greater_or_equal ( range_a < > const & range ) const
-     { assert(handle_); return read().greater_or_equal(range ); }
+     inline any_a < > greater_or_equal__ ( range_a < > const & range ) const
+     { assert(handle_); return read().greater_or_equal__(range ); }
      inline any_a < > greater_or_equal_ ( number_a const & number ) const
      { assert(handle_); return read().greater_or_equal_(number ); }
      inline bool operator >= ( number_a const & number ) const
@@ -205,48 +205,48 @@ namespace strange {
      { assert(handle_); return read().byte_size_( ); }
      inline int64_t byte_size ( ) const
      { assert(handle_); return read().byte_size( ); }
-     inline any_a < > is_int ( range_a < > const & _ ) const
-     { assert(handle_); return read().is_int(_ ); }
+     inline any_a < > is_int__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().is_int__(_ ); }
      inline any_a < > is_int_ ( ) const
      { assert(handle_); return read().is_int_( ); }
-     inline bool is_int__ ( ) const
-     { assert(handle_); return read().is_int__( ); }
-     inline any_a < > is_signed ( range_a < > const & _ ) const
-     { assert(handle_); return read().is_signed(_ ); }
+     inline bool is_int ( ) const
+     { assert(handle_); return read().is_int( ); }
+     inline any_a < > is_signed__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().is_signed__(_ ); }
      inline any_a < > is_signed_ ( ) const
      { assert(handle_); return read().is_signed_( ); }
-     inline bool is_signed__ ( ) const
-     { assert(handle_); return read().is_signed__( ); }
-     inline any_a < > is_nan ( range_a < > const & _ ) const
-     { assert(handle_); return read().is_nan(_ ); }
+     inline bool is_signed ( ) const
+     { assert(handle_); return read().is_signed( ); }
+     inline any_a < > is_nan__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().is_nan__(_ ); }
      inline any_a < > is_nan_ ( ) const
      { assert(handle_); return read().is_nan_( ); }
-     inline bool is_nan__ ( ) const
-     { assert(handle_); return read().is_nan__( ); }
-     inline any_a < > is_inf ( range_a < > const & _ ) const
-     { assert(handle_); return read().is_inf(_ ); }
+     inline bool is_nan ( ) const
+     { assert(handle_); return read().is_nan( ); }
+     inline any_a < > is_inf__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().is_inf__(_ ); }
      inline any_a < > is_inf_ ( ) const
      { assert(handle_); return read().is_inf_( ); }
-     inline bool is_inf__ ( ) const
-     { assert(handle_); return read().is_inf__( ); }
-     inline any_a < > is_finite ( range_a < > const & _ ) const
-     { assert(handle_); return read().is_finite(_ ); }
+     inline bool is_inf ( ) const
+     { assert(handle_); return read().is_inf( ); }
+     inline any_a < > is_finite__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().is_finite__(_ ); }
      inline any_a < > is_finite_ ( ) const
      { assert(handle_); return read().is_finite_( ); }
-     inline bool is_finite__ ( ) const
-     { assert(handle_); return read().is_finite__( ); }
-     inline any_a < > is_normal ( range_a < > const & _ ) const
-     { assert(handle_); return read().is_normal(_ ); }
+     inline bool is_finite ( ) const
+     { assert(handle_); return read().is_finite( ); }
+     inline any_a < > is_normal__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().is_normal__(_ ); }
      inline any_a < > is_normal_ ( ) const
      { assert(handle_); return read().is_normal_( ); }
-     inline bool is_normal__ ( ) const
-     { assert(handle_); return read().is_normal__( ); }
-     inline any_a < > little_endian ( range_a < > const & _ ) const
-     { assert(handle_); return read().little_endian(_ ); }
+     inline bool is_normal ( ) const
+     { assert(handle_); return read().is_normal( ); }
+     inline any_a < > little_endian__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().little_endian__(_ ); }
      inline any_a < > little_endian_ ( ) const
      { assert(handle_); return read().little_endian_( ); }
-     inline bool little_endian__ ( ) const
-     { assert(handle_); return read().little_endian__( ); }
+     inline bool little_endian ( ) const
+     { assert(handle_); return read().little_endian( ); }
     
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
@@ -265,75 +265,75 @@ namespace strange {
       virtual inline any_a < > subtract__ ( range_a < > const & range ) const = 0;
       virtual inline number_a subtract_ ( number_a const & number ) const = 0;
       virtual inline number_a operator - ( number_a const & number ) const = 0;
-      virtual inline any_a < > self_multiply ( range_a < > const & range ) = 0;
+      virtual inline any_a < > self_multiply__ ( range_a < > const & range ) = 0;
       virtual inline number_a self_multiply_ ( number_a const & number ) = 0;
-      virtual inline any_a < > multiply ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > multiply__ ( range_a < > const & range ) const = 0;
       virtual inline number_a multiply_ ( number_a const & number ) const = 0;
       virtual inline number_a operator * ( number_a const & number ) const = 0;
-      virtual inline any_a < > self_divide ( range_a < > const & range ) = 0;
+      virtual inline any_a < > self_divide__ ( range_a < > const & range ) = 0;
       virtual inline number_a self_divide_ ( number_a const & number ) = 0;
-      virtual inline any_a < > divide ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > divide__ ( range_a < > const & range ) const = 0;
       virtual inline number_a divide_ ( number_a const & number ) const = 0;
       virtual inline number_a operator / ( number_a const & number ) const = 0;
-      virtual inline any_a < > self_modulo ( range_a < > const & range ) = 0;
+      virtual inline any_a < > self_modulo__ ( range_a < > const & range ) = 0;
       virtual inline number_a self_modulo_ ( number_a const & number ) = 0;
-      virtual inline any_a < > modulo ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > modulo__ ( range_a < > const & range ) const = 0;
       virtual inline number_a modulo_ ( number_a const & number ) const = 0;
       virtual inline number_a operator % ( number_a const & number ) const = 0;
-      virtual inline any_a < > to_int_64 ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > to_int_64__ ( range_a < > const & _ ) const = 0;
       virtual inline number_data_a_int64 to_int_64_ ( ) const = 0;
-      virtual inline int64_t to_int_64__ ( ) const = 0;
-      virtual inline any_a < > from_int_64 ( range_a < > const & range ) = 0;
+      virtual inline int64_t to_int_64 ( ) const = 0;
+      virtual inline any_a < > from_int_64__ ( range_a < > const & range ) = 0;
       virtual inline any_a < > from_int_64_ ( number_data_a_int64 const & int_64 ) = 0;
-      virtual inline void from_int_64__ ( int64_t int_64 ) = 0;
-      virtual inline any_a < > to_uint_64 ( range_a < > const & _ ) const = 0;
+      virtual inline void from_int_64 ( int64_t int_64 ) = 0;
+      virtual inline any_a < > to_uint_64__ ( range_a < > const & _ ) const = 0;
       virtual inline number_data_a_uint64 to_uint_64_ ( ) const = 0;
-      virtual inline uint64_t to_uint_64__ ( ) const = 0;
-      virtual inline any_a < > from_uint_64 ( range_a < > const & range ) = 0;
+      virtual inline uint64_t to_uint_64 ( ) const = 0;
+      virtual inline any_a < > from_uint_64__ ( range_a < > const & range ) = 0;
       virtual inline any_a < > from_uint_64_ ( number_data_a_uint64 const & uint_64 ) = 0;
-      virtual inline void from_uint_64__ ( uint64_t uint_64 ) = 0;
-      virtual inline any_a < > to_float_64 ( range_a < > const & _ ) const = 0;
+      virtual inline void from_uint_64 ( uint64_t uint_64 ) = 0;
+      virtual inline any_a < > to_float_64__ ( range_a < > const & _ ) const = 0;
       virtual inline number_data_a_double to_float_64_ ( ) const = 0;
-      virtual inline double to_float_64__ ( ) const = 0;
-      virtual inline any_a < > from_float_64 ( range_a < > const & range ) = 0;
+      virtual inline double to_float_64 ( ) const = 0;
+      virtual inline any_a < > from_float_64__ ( range_a < > const & range ) = 0;
       virtual inline any_a < > from_float_64_ ( number_data_a_double const & float_64 ) = 0;
-      virtual inline void from_float_64__ ( double float_64 ) = 0;
-      virtual inline any_a < > less_than ( range_a < > const & range ) const = 0;
+      virtual inline void from_float_64 ( double float_64 ) = 0;
+      virtual inline any_a < > less_than__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > less_than_ ( number_a const & number ) const = 0;
       virtual inline bool operator < ( number_a const & number ) const = 0;
-      virtual inline any_a < > greater_than ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > greater_than__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > greater_than_ ( number_a const & number ) const = 0;
       virtual inline bool operator > ( number_a const & number ) const = 0;
-      virtual inline any_a < > less_or_equal ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > less_or_equal__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > less_or_equal_ ( number_a const & number ) const = 0;
       virtual inline bool operator <= ( number_a const & number ) const = 0;
-      virtual inline any_a < > greater_or_equal ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > greater_or_equal__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > greater_or_equal_ ( number_a const & number ) const = 0;
       virtual inline bool operator >= ( number_a const & number ) const = 0;
       virtual inline any_a < > byte_size__ ( range_a < > const & _ ) const = 0;
       virtual inline number_data_a_int64 byte_size_ ( ) const = 0;
       virtual inline int64_t byte_size ( ) const = 0;
-      virtual inline any_a < > is_int ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > is_int__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > is_int_ ( ) const = 0;
-      virtual inline bool is_int__ ( ) const = 0;
-      virtual inline any_a < > is_signed ( range_a < > const & _ ) const = 0;
+      virtual inline bool is_int ( ) const = 0;
+      virtual inline any_a < > is_signed__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > is_signed_ ( ) const = 0;
-      virtual inline bool is_signed__ ( ) const = 0;
-      virtual inline any_a < > is_nan ( range_a < > const & _ ) const = 0;
+      virtual inline bool is_signed ( ) const = 0;
+      virtual inline any_a < > is_nan__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > is_nan_ ( ) const = 0;
-      virtual inline bool is_nan__ ( ) const = 0;
-      virtual inline any_a < > is_inf ( range_a < > const & _ ) const = 0;
+      virtual inline bool is_nan ( ) const = 0;
+      virtual inline any_a < > is_inf__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > is_inf_ ( ) const = 0;
-      virtual inline bool is_inf__ ( ) const = 0;
-      virtual inline any_a < > is_finite ( range_a < > const & _ ) const = 0;
+      virtual inline bool is_inf ( ) const = 0;
+      virtual inline any_a < > is_finite__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > is_finite_ ( ) const = 0;
-      virtual inline bool is_finite__ ( ) const = 0;
-      virtual inline any_a < > is_normal ( range_a < > const & _ ) const = 0;
+      virtual inline bool is_finite ( ) const = 0;
+      virtual inline any_a < > is_normal__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > is_normal_ ( ) const = 0;
-      virtual inline bool is_normal__ ( ) const = 0;
-      virtual inline any_a < > little_endian ( range_a < > const & _ ) const = 0;
+      virtual inline bool is_normal ( ) const = 0;
+      virtual inline any_a < > little_endian__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > little_endian_ ( ) const = 0;
-      virtual inline bool little_endian__ ( ) const = 0;
+      virtual inline bool little_endian ( ) const = 0;
     	};
     
     	template <typename ___TTT___, typename ___DHB___ = ___derived_handle_base___>
@@ -377,92 +377,92 @@ namespace strange {
       { return value_.subtract_(number ); }
       virtual inline number_a operator - ( number_a const & number ) const
       { return value_.operator-(number ); }
-      virtual inline any_a < > self_multiply ( range_a < > const & range )
-      { return value_.self_multiply(range ); }
+      virtual inline any_a < > self_multiply__ ( range_a < > const & range )
+      { return value_.self_multiply__(range ); }
       virtual inline number_a self_multiply_ ( number_a const & number )
       { return value_.self_multiply_(number ); }
-      virtual inline any_a < > multiply ( range_a < > const & range ) const
-      { return value_.multiply(range ); }
+      virtual inline any_a < > multiply__ ( range_a < > const & range ) const
+      { return value_.multiply__(range ); }
       virtual inline number_a multiply_ ( number_a const & number ) const
       { return value_.multiply_(number ); }
       virtual inline number_a operator * ( number_a const & number ) const
       { return value_.operator*(number ); }
-      virtual inline any_a < > self_divide ( range_a < > const & range )
-      { return value_.self_divide(range ); }
+      virtual inline any_a < > self_divide__ ( range_a < > const & range )
+      { return value_.self_divide__(range ); }
       virtual inline number_a self_divide_ ( number_a const & number )
       { return value_.self_divide_(number ); }
-      virtual inline any_a < > divide ( range_a < > const & range ) const
-      { return value_.divide(range ); }
+      virtual inline any_a < > divide__ ( range_a < > const & range ) const
+      { return value_.divide__(range ); }
       virtual inline number_a divide_ ( number_a const & number ) const
       { return value_.divide_(number ); }
       virtual inline number_a operator / ( number_a const & number ) const
       { return value_.operator/(number ); }
-      virtual inline any_a < > self_modulo ( range_a < > const & range )
-      { return value_.self_modulo(range ); }
+      virtual inline any_a < > self_modulo__ ( range_a < > const & range )
+      { return value_.self_modulo__(range ); }
       virtual inline number_a self_modulo_ ( number_a const & number )
       { return value_.self_modulo_(number ); }
-      virtual inline any_a < > modulo ( range_a < > const & range ) const
-      { return value_.modulo(range ); }
+      virtual inline any_a < > modulo__ ( range_a < > const & range ) const
+      { return value_.modulo__(range ); }
       virtual inline number_a modulo_ ( number_a const & number ) const
       { return value_.modulo_(number ); }
       virtual inline number_a operator % ( number_a const & number ) const
       { return value_.operator%(number ); }
-      virtual inline any_a < > to_int_64 ( range_a < > const & _ ) const
-      { return value_.to_int_64(_ ); }
+      virtual inline any_a < > to_int_64__ ( range_a < > const & _ ) const
+      { return value_.to_int_64__(_ ); }
       virtual inline number_data_a_int64 to_int_64_ ( ) const
       { return value_.to_int_64_( ); }
-      virtual inline int64_t to_int_64__ ( ) const
-      { return value_.to_int_64__( ); }
-      virtual inline any_a < > from_int_64 ( range_a < > const & range )
-      { return value_.from_int_64(range ); }
+      virtual inline int64_t to_int_64 ( ) const
+      { return value_.to_int_64( ); }
+      virtual inline any_a < > from_int_64__ ( range_a < > const & range )
+      { return value_.from_int_64__(range ); }
       virtual inline any_a < > from_int_64_ ( number_data_a_int64 const & int_64 )
       { return value_.from_int_64_(int_64 ); }
-      virtual inline void from_int_64__ ( int64_t int_64 )
-      { value_.from_int_64__(int_64 ); }
-      virtual inline any_a < > to_uint_64 ( range_a < > const & _ ) const
-      { return value_.to_uint_64(_ ); }
+      virtual inline void from_int_64 ( int64_t int_64 )
+      { value_.from_int_64(int_64 ); }
+      virtual inline any_a < > to_uint_64__ ( range_a < > const & _ ) const
+      { return value_.to_uint_64__(_ ); }
       virtual inline number_data_a_uint64 to_uint_64_ ( ) const
       { return value_.to_uint_64_( ); }
-      virtual inline uint64_t to_uint_64__ ( ) const
-      { return value_.to_uint_64__( ); }
-      virtual inline any_a < > from_uint_64 ( range_a < > const & range )
-      { return value_.from_uint_64(range ); }
+      virtual inline uint64_t to_uint_64 ( ) const
+      { return value_.to_uint_64( ); }
+      virtual inline any_a < > from_uint_64__ ( range_a < > const & range )
+      { return value_.from_uint_64__(range ); }
       virtual inline any_a < > from_uint_64_ ( number_data_a_uint64 const & uint_64 )
       { return value_.from_uint_64_(uint_64 ); }
-      virtual inline void from_uint_64__ ( uint64_t uint_64 )
-      { value_.from_uint_64__(uint_64 ); }
-      virtual inline any_a < > to_float_64 ( range_a < > const & _ ) const
-      { return value_.to_float_64(_ ); }
+      virtual inline void from_uint_64 ( uint64_t uint_64 )
+      { value_.from_uint_64(uint_64 ); }
+      virtual inline any_a < > to_float_64__ ( range_a < > const & _ ) const
+      { return value_.to_float_64__(_ ); }
       virtual inline number_data_a_double to_float_64_ ( ) const
       { return value_.to_float_64_( ); }
-      virtual inline double to_float_64__ ( ) const
-      { return value_.to_float_64__( ); }
-      virtual inline any_a < > from_float_64 ( range_a < > const & range )
-      { return value_.from_float_64(range ); }
+      virtual inline double to_float_64 ( ) const
+      { return value_.to_float_64( ); }
+      virtual inline any_a < > from_float_64__ ( range_a < > const & range )
+      { return value_.from_float_64__(range ); }
       virtual inline any_a < > from_float_64_ ( number_data_a_double const & float_64 )
       { return value_.from_float_64_(float_64 ); }
-      virtual inline void from_float_64__ ( double float_64 )
-      { value_.from_float_64__(float_64 ); }
-      virtual inline any_a < > less_than ( range_a < > const & range ) const
-      { return value_.less_than(range ); }
+      virtual inline void from_float_64 ( double float_64 )
+      { value_.from_float_64(float_64 ); }
+      virtual inline any_a < > less_than__ ( range_a < > const & range ) const
+      { return value_.less_than__(range ); }
       virtual inline any_a < > less_than_ ( number_a const & number ) const
       { return value_.less_than_(number ); }
       virtual inline bool operator < ( number_a const & number ) const
       { return value_.operator<(number ); }
-      virtual inline any_a < > greater_than ( range_a < > const & range ) const
-      { return value_.greater_than(range ); }
+      virtual inline any_a < > greater_than__ ( range_a < > const & range ) const
+      { return value_.greater_than__(range ); }
       virtual inline any_a < > greater_than_ ( number_a const & number ) const
       { return value_.greater_than_(number ); }
       virtual inline bool operator > ( number_a const & number ) const
       { return value_.operator>(number ); }
-      virtual inline any_a < > less_or_equal ( range_a < > const & range ) const
-      { return value_.less_or_equal(range ); }
+      virtual inline any_a < > less_or_equal__ ( range_a < > const & range ) const
+      { return value_.less_or_equal__(range ); }
       virtual inline any_a < > less_or_equal_ ( number_a const & number ) const
       { return value_.less_or_equal_(number ); }
       virtual inline bool operator <= ( number_a const & number ) const
       { return value_.operator<=(number ); }
-      virtual inline any_a < > greater_or_equal ( range_a < > const & range ) const
-      { return value_.greater_or_equal(range ); }
+      virtual inline any_a < > greater_or_equal__ ( range_a < > const & range ) const
+      { return value_.greater_or_equal__(range ); }
       virtual inline any_a < > greater_or_equal_ ( number_a const & number ) const
       { return value_.greater_or_equal_(number ); }
       virtual inline bool operator >= ( number_a const & number ) const
@@ -473,48 +473,48 @@ namespace strange {
       { return value_.byte_size_( ); }
       virtual inline int64_t byte_size ( ) const
       { return value_.byte_size( ); }
-      virtual inline any_a < > is_int ( range_a < > const & _ ) const
-      { return value_.is_int(_ ); }
+      virtual inline any_a < > is_int__ ( range_a < > const & _ ) const
+      { return value_.is_int__(_ ); }
       virtual inline any_a < > is_int_ ( ) const
       { return value_.is_int_( ); }
-      virtual inline bool is_int__ ( ) const
-      { return value_.is_int__( ); }
-      virtual inline any_a < > is_signed ( range_a < > const & _ ) const
-      { return value_.is_signed(_ ); }
+      virtual inline bool is_int ( ) const
+      { return value_.is_int( ); }
+      virtual inline any_a < > is_signed__ ( range_a < > const & _ ) const
+      { return value_.is_signed__(_ ); }
       virtual inline any_a < > is_signed_ ( ) const
       { return value_.is_signed_( ); }
-      virtual inline bool is_signed__ ( ) const
-      { return value_.is_signed__( ); }
-      virtual inline any_a < > is_nan ( range_a < > const & _ ) const
-      { return value_.is_nan(_ ); }
+      virtual inline bool is_signed ( ) const
+      { return value_.is_signed( ); }
+      virtual inline any_a < > is_nan__ ( range_a < > const & _ ) const
+      { return value_.is_nan__(_ ); }
       virtual inline any_a < > is_nan_ ( ) const
       { return value_.is_nan_( ); }
-      virtual inline bool is_nan__ ( ) const
-      { return value_.is_nan__( ); }
-      virtual inline any_a < > is_inf ( range_a < > const & _ ) const
-      { return value_.is_inf(_ ); }
+      virtual inline bool is_nan ( ) const
+      { return value_.is_nan( ); }
+      virtual inline any_a < > is_inf__ ( range_a < > const & _ ) const
+      { return value_.is_inf__(_ ); }
       virtual inline any_a < > is_inf_ ( ) const
       { return value_.is_inf_( ); }
-      virtual inline bool is_inf__ ( ) const
-      { return value_.is_inf__( ); }
-      virtual inline any_a < > is_finite ( range_a < > const & _ ) const
-      { return value_.is_finite(_ ); }
+      virtual inline bool is_inf ( ) const
+      { return value_.is_inf( ); }
+      virtual inline any_a < > is_finite__ ( range_a < > const & _ ) const
+      { return value_.is_finite__(_ ); }
       virtual inline any_a < > is_finite_ ( ) const
       { return value_.is_finite_( ); }
-      virtual inline bool is_finite__ ( ) const
-      { return value_.is_finite__( ); }
-      virtual inline any_a < > is_normal ( range_a < > const & _ ) const
-      { return value_.is_normal(_ ); }
+      virtual inline bool is_finite ( ) const
+      { return value_.is_finite( ); }
+      virtual inline any_a < > is_normal__ ( range_a < > const & _ ) const
+      { return value_.is_normal__(_ ); }
       virtual inline any_a < > is_normal_ ( ) const
       { return value_.is_normal_( ); }
-      virtual inline bool is_normal__ ( ) const
-      { return value_.is_normal__( ); }
-      virtual inline any_a < > little_endian ( range_a < > const & _ ) const
-      { return value_.little_endian(_ ); }
+      virtual inline bool is_normal ( ) const
+      { return value_.is_normal( ); }
+      virtual inline any_a < > little_endian__ ( range_a < > const & _ ) const
+      { return value_.little_endian__(_ ); }
       virtual inline any_a < > little_endian_ ( ) const
       { return value_.little_endian_( ); }
-      virtual inline bool little_endian__ ( ) const
-      { return value_.little_endian__( ); }
+      virtual inline bool little_endian ( ) const
+      { return value_.little_endian( ); }
     	};
     
     	template <typename ___TTT___, typename ___DHB___>

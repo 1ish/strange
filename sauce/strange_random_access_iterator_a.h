@@ -102,26 +102,26 @@ namespace strange {
      { assert(handle_); return read().subtract_(number ); }
      inline random_access_iterator_a operator - ( number_a < > const & number ) const
      { assert(handle_); return read().operator-(number ); }
-     inline any_a < > less_than ( range_a < > const & range ) const
-     { assert(handle_); return read().less_than(range ); }
+     inline any_a < > less_than__ ( range_a < > const & range ) const
+     { assert(handle_); return read().less_than__(range ); }
      inline any_a < > less_than_ ( random_access_iterator_a const & it ) const
      { assert(handle_); return read().less_than_(it ); }
      inline bool operator < ( random_access_iterator_a const & it ) const
      { assert(handle_); return read().operator<(it ); }
-     inline any_a < > greater_than ( range_a < > const & range ) const
-     { assert(handle_); return read().greater_than(range ); }
+     inline any_a < > greater_than__ ( range_a < > const & range ) const
+     { assert(handle_); return read().greater_than__(range ); }
      inline any_a < > greater_than_ ( random_access_iterator_a const & it ) const
      { assert(handle_); return read().greater_than_(it ); }
      inline bool operator > ( random_access_iterator_a const & it ) const
      { assert(handle_); return read().operator>(it ); }
-     inline any_a < > less_or_equal ( range_a < > const & range ) const
-     { assert(handle_); return read().less_or_equal(range ); }
+     inline any_a < > less_or_equal__ ( range_a < > const & range ) const
+     { assert(handle_); return read().less_or_equal__(range ); }
      inline any_a < > less_or_equal_ ( random_access_iterator_a const & it ) const
      { assert(handle_); return read().less_or_equal_(it ); }
      inline bool operator <= ( random_access_iterator_a const & it ) const
      { assert(handle_); return read().operator<=(it ); }
-     inline any_a < > greater_or_equal ( range_a < > const & range ) const
-     { assert(handle_); return read().greater_or_equal(range ); }
+     inline any_a < > greater_or_equal__ ( range_a < > const & range ) const
+     { assert(handle_); return read().greater_or_equal__(range ); }
      inline any_a < > greater_or_equal_ ( random_access_iterator_a const & it ) const
      { assert(handle_); return read().greater_or_equal_(it ); }
      inline bool operator >= ( random_access_iterator_a const & it ) const
@@ -140,16 +140,16 @@ namespace strange {
       virtual inline any_a < > subtract__ ( range_a < > const & range ) const = 0;
       virtual inline random_access_iterator_a subtract_ ( number_a < > const & number ) const = 0;
       virtual inline random_access_iterator_a operator - ( number_a < > const & number ) const = 0;
-      virtual inline any_a < > less_than ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > less_than__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > less_than_ ( random_access_iterator_a const & it ) const = 0;
       virtual inline bool operator < ( random_access_iterator_a const & it ) const = 0;
-      virtual inline any_a < > greater_than ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > greater_than__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > greater_than_ ( random_access_iterator_a const & it ) const = 0;
       virtual inline bool operator > ( random_access_iterator_a const & it ) const = 0;
-      virtual inline any_a < > less_or_equal ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > less_or_equal__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > less_or_equal_ ( random_access_iterator_a const & it ) const = 0;
       virtual inline bool operator <= ( random_access_iterator_a const & it ) const = 0;
-      virtual inline any_a < > greater_or_equal ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > greater_or_equal__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > greater_or_equal_ ( random_access_iterator_a const & it ) const = 0;
       virtual inline bool operator >= ( random_access_iterator_a const & it ) const = 0;
     	};
@@ -187,26 +187,26 @@ namespace strange {
       { return value_.subtract_(number ); }
       virtual inline random_access_iterator_a operator - ( number_a < > const & number ) const
       { return value_.operator-(number ); }
-      virtual inline any_a < > less_than ( range_a < > const & range ) const
-      { return value_.less_than(range ); }
+      virtual inline any_a < > less_than__ ( range_a < > const & range ) const
+      { return value_.less_than__(range ); }
       virtual inline any_a < > less_than_ ( random_access_iterator_a const & it ) const
       { return value_.less_than_(it ); }
       virtual inline bool operator < ( random_access_iterator_a const & it ) const
       { return value_.operator<(it ); }
-      virtual inline any_a < > greater_than ( range_a < > const & range ) const
-      { return value_.greater_than(range ); }
+      virtual inline any_a < > greater_than__ ( range_a < > const & range ) const
+      { return value_.greater_than__(range ); }
       virtual inline any_a < > greater_than_ ( random_access_iterator_a const & it ) const
       { return value_.greater_than_(it ); }
       virtual inline bool operator > ( random_access_iterator_a const & it ) const
       { return value_.operator>(it ); }
-      virtual inline any_a < > less_or_equal ( range_a < > const & range ) const
-      { return value_.less_or_equal(range ); }
+      virtual inline any_a < > less_or_equal__ ( range_a < > const & range ) const
+      { return value_.less_or_equal__(range ); }
       virtual inline any_a < > less_or_equal_ ( random_access_iterator_a const & it ) const
       { return value_.less_or_equal_(it ); }
       virtual inline bool operator <= ( random_access_iterator_a const & it ) const
       { return value_.operator<=(it ); }
-      virtual inline any_a < > greater_or_equal ( range_a < > const & range ) const
-      { return value_.greater_or_equal(range ); }
+      virtual inline any_a < > greater_or_equal__ ( range_a < > const & range ) const
+      { return value_.greater_or_equal__(range ); }
       virtual inline any_a < > greater_or_equal_ ( random_access_iterator_a const & it ) const
       { return value_.greater_or_equal_(it ); }
       virtual inline bool operator >= ( random_access_iterator_a const & it ) const

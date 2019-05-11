@@ -213,7 +213,7 @@ public: ___STRANGE_THING___
 		return result;
 	}
 
-	inline any_a<> self_multiply(range_a<> const& range)
+	inline any_a<> self_multiply__(range_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -238,7 +238,7 @@ public: ___STRANGE_THING___
 		return *this;
 	}
 
-	inline any_a<> multiply(range_a<> const& range) const
+	inline any_a<> multiply__(range_a<> const& range) const
 	{
 		number_a<> result = me_();
 		for (auto const& thing : range)
@@ -260,7 +260,7 @@ public: ___STRANGE_THING___
 		return result;
 	}
 
-	inline any_a<> self_divide(range_a<> const& range)
+	inline any_a<> self_divide__(range_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -295,7 +295,7 @@ public: ___STRANGE_THING___
 		return *this;
 	}
 
-	inline any_a<> divide(range_a<> const& range) const
+	inline any_a<> divide__(range_a<> const& range) const
 	{
 		number_a<> result = me_();
 		for (auto const& thing : range)
@@ -322,7 +322,7 @@ public: ___STRANGE_THING___
 		return result;
 	}
 
-	inline any_a<> self_modulo(range_a<> const& range)
+	inline any_a<> self_modulo__(range_a<> const& range)
 	{
 		for (auto const& thing : range)
 		{
@@ -357,7 +357,7 @@ public: ___STRANGE_THING___
 		return *this;
 	}
 
-	inline any_a<> modulo(range_a<> const& range) const
+	inline any_a<> modulo__(range_a<> const& range) const
 	{
 		number_a<> result = me_();
 		for (auto const& thing : range)
@@ -382,22 +382,22 @@ public: ___STRANGE_THING___
 		return val(number_u<PRIMITIVE>::modulo__(_number, num));
 	}
 
-	inline any_a<> to_int_64(range_a<> const& _) const
+	inline any_a<> to_int_64__(range_a<> const& _) const
 	{
 		return to_int_64_();
 	}
 
 	inline number_data_a<int64_t> to_int_64_() const
 	{
-		return number_t<int64_t>::val(to_int_64__());
+		return number_t<int64_t>::val(to_int_64());
 	}
 
-	inline int64_t to_int_64__() const
+	inline int64_t to_int_64() const
 	{
 		return number_u<PRIMITIVE>::to_int_64__(_number);
 	}
 
-	inline any_a<> from_int_64(range_a<> const& range)
+	inline any_a<> from_int_64__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -414,31 +414,31 @@ public: ___STRANGE_THING___
 
 	inline any_a<> from_int_64_(number_data_a<int64_t> const& int_64)
 	{
-		from_int_64__(int_64.extract());
+		from_int_64(int_64.extract());
 		return me_();
 	}
 
-	inline void from_int_64__(int64_t int_64)
+	inline void from_int_64(int64_t int_64)
 	{
-		_number = number_u<PRIMITIVE>::from_int_64__(int_64);
+		_number = number_u<PRIMITIVE>::from_int_64(int_64);
 	}
 
-	inline any_a<> to_uint_64(range_a<> const& _) const
+	inline any_a<> to_uint_64__(range_a<> const& _) const
 	{
 		return to_uint_64_();
 	}
 
 	inline number_data_a<uint64_t> to_uint_64_() const
 	{
-		return number_t<uint64_t>::val(to_uint_64__());
+		return number_t<uint64_t>::val(to_uint_64());
 	}
 
-	inline uint64_t to_uint_64__() const
+	inline uint64_t to_uint_64() const
 	{
 		return number_u<PRIMITIVE>::to_uint_64__(_number);
 	}
 
-	inline any_a<> from_uint_64(range_a<> const& range)
+	inline any_a<> from_uint_64__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -455,31 +455,31 @@ public: ___STRANGE_THING___
 
 	inline any_a<> from_uint_64_(number_data_a<uint64_t> const& uint_64)
 	{
-		from_uint_64__(uint_64.extract());
+		from_uint_64(uint_64.extract());
 		return me_();
 	}
 
-	inline void from_uint_64__(uint64_t uint_64)
+	inline void from_uint_64(uint64_t uint_64)
 	{
-		_number = number_u<PRIMITIVE>::from_uint_64__(uint_64);
+		_number = number_u<PRIMITIVE>::from_uint_64(uint_64);
 	}
 
-	inline any_a<> to_float_64(range_a<> const& _) const
+	inline any_a<> to_float_64__(range_a<> const& _) const
 	{
 		return to_float_64_();
 	}
 
 	inline number_data_a<double> to_float_64_() const
 	{
-		return number_t<double>::val(to_float_64__());
+		return number_t<double>::val(to_float_64());
 	}
 
-	inline double to_float_64__() const
+	inline double to_float_64() const
 	{
 		return number_u<PRIMITIVE>::to_float_64__(_number);
 	}
 
-	inline any_a<> from_float_64(range_a<> const& range)
+	inline any_a<> from_float_64__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -496,16 +496,16 @@ public: ___STRANGE_THING___
 
 	inline any_a<> from_float_64_(number_data_a<double> const& float_64)
 	{
-		from_float_64__(float_64.extract());
+		from_float_64(float_64.extract());
 		return me_();
 	}
 
-	inline void from_float_64__(double float_64)
+	inline void from_float_64(double float_64)
 	{
-		_number = number_u<PRIMITIVE>::from_float_64__(float_64);
+		_number = number_u<PRIMITIVE>::from_float_64(float_64);
 	}
 
-	inline any_a<> less_than(range_a<> const& range) const
+	inline any_a<> less_than__(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -530,7 +530,7 @@ public: ___STRANGE_THING___
 		return _number < number_u<PRIMITIVE>::from_number__(number);
 	}
 
-	inline any_a<> greater_than(range_a<> const& range) const
+	inline any_a<> greater_than__(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -555,7 +555,7 @@ public: ___STRANGE_THING___
 		return _number > number_u<PRIMITIVE>::from_number__(number);
 	}
 
-	inline any_a<> less_or_equal(range_a<> const& range) const
+	inline any_a<> less_or_equal__(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -580,7 +580,7 @@ public: ___STRANGE_THING___
 		return _number <= number_u<PRIMITIVE>::from_number__(number);
 	}
 
-	inline any_a<> greater_or_equal(range_a<> const& range) const
+	inline any_a<> greater_or_equal__(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -620,107 +620,107 @@ public: ___STRANGE_THING___
 		return int64_t(sizeof(_number));
 	}
 
-	static inline any_a<> is_int(range_a<> const& _)
+	static inline any_a<> is_int__(range_a<> const& _)
 	{
 		return is_int_();
 	}
 
 	static inline any_a<> is_int_()
 	{
-		return _boole_(is_int__());
+		return _boole_(is_int());
 	}
 
-	static inline bool is_int__()
+	static inline bool is_int()
 	{
-		return number_u<PRIMITIVE>::is_int__();
+		return number_u<PRIMITIVE>::is_int();
 	}
 
-	static inline any_a<> is_signed(range_a<> const& _)
+	static inline any_a<> is_signed__(range_a<> const& _)
 	{
 		return is_signed_();
 	}
 
 	static inline any_a<> is_signed_()
 	{
-		return _boole_(is_signed__());
+		return _boole_(is_signed());
 	}
 
-	static inline bool is_signed__()
+	static inline bool is_signed()
 	{
-		return number_u<PRIMITIVE>::is_signed__();
+		return number_u<PRIMITIVE>::is_signed();
 	}
 
-	inline any_a<> is_nan(range_a<> const& _) const
+	inline any_a<> is_nan__(range_a<> const& _) const
 	{
 		return is_nan_();
 	}
 
 	inline any_a<> is_nan_() const
 	{
-		return _boole_(is_nan__());
+		return _boole_(is_nan());
 	}
 
-	inline bool is_nan__() const
+	inline bool is_nan() const
 	{
 		return number_u<PRIMITIVE>::is_nan__(_number);
 	}
 
-	inline any_a<> is_inf(range_a<> const& _) const
+	inline any_a<> is_inf__(range_a<> const& _) const
 	{
 		return is_inf_();
 	}
 
 	inline any_a<> is_inf_() const
 	{
-		return _boole_(is_inf__());
+		return _boole_(is_inf());
 	}
 
-	inline bool is_inf__() const
+	inline bool is_inf() const
 	{
 		return number_u<PRIMITIVE>::is_inf__(_number);
 	}
 
-	inline any_a<> is_finite(range_a<> const& _) const
+	inline any_a<> is_finite__(range_a<> const& _) const
 	{
 		return is_finite_();
 	}
 
 	inline any_a<> is_finite_() const
 	{
-		return _boole_(is_finite__());
+		return _boole_(is_finite());
 	}
 
-	inline bool is_finite__() const
+	inline bool is_finite() const
 	{
 		return number_u<PRIMITIVE>::is_finite__(_number);
 	}
 
-	inline any_a<> is_normal(range_a<> const& _) const
+	inline any_a<> is_normal__(range_a<> const& _) const
 	{
 		return is_normal_();
 	}
 
 	inline any_a<> is_normal_() const
 	{
-		return _boole_(is_normal__());
+		return _boole_(is_normal());
 	}
 
-	inline bool is_normal__() const
+	inline bool is_normal() const
 	{
 		return number_u<PRIMITIVE>::is_normal__(_number);
 	}
 
-	static inline any_a<> little_endian(range_a<> const& _)
+	static inline any_a<> little_endian__(range_a<> const& _)
 	{
 		return little_endian_();
 	}
 
 	static inline any_a<> little_endian_()
 	{
-		return _boole_(little_endian__());
+		return _boole_(little_endian());
 	}
 
-	static inline bool little_endian__()
+	static inline bool little_endian()
 	{
 		union
 		{

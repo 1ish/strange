@@ -31,19 +31,19 @@ public:
 	inline random_access_const_iterator_a subtract_(number_a<> const& number) const;
 	inline random_access_const_iterator_a operator-(number_a<> const& number) const;
 
-	inline any_a<> less_than(range_a<> const& range) const;
+	inline any_a<> less_than__(range_a<> const& range) const;
 	inline any_a<> less_than_(random_access_const_iterator_a const& it) const;
 	inline bool operator<(random_access_const_iterator_a const& it) const;
 
-	inline any_a<> greater_than(range_a<> const& range) const;
+	inline any_a<> greater_than__(range_a<> const& range) const;
 	inline any_a<> greater_than_(random_access_const_iterator_a const& it) const;
 	inline bool operator>(random_access_const_iterator_a const& it) const;
 
-	inline any_a<> less_or_equal(range_a<> const& range) const;
+	inline any_a<> less_or_equal__(range_a<> const& range) const;
 	inline any_a<> less_or_equal_(random_access_const_iterator_a const& it) const;
 	inline bool operator<=(random_access_const_iterator_a const& it) const;
 
-	inline any_a<> greater_or_equal(range_a<> const& range) const;
+	inline any_a<> greater_or_equal__(range_a<> const& range) const;
 	inline any_a<> greater_or_equal_(random_access_const_iterator_a const& it) const;
 	inline bool operator>=(random_access_const_iterator_a const& it) const;
 };

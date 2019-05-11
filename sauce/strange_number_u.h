@@ -12,15 +12,15 @@ class number_u
 {
 public:
 	static inline PRIMITIVE from_number__(number_a<> const& other);
-	static inline PRIMITIVE from_int_64__(int64_t other);
-	static inline PRIMITIVE from_uint_64__(uint64_t other);
-	static inline PRIMITIVE from_float_64__(double other);
+	static inline PRIMITIVE from_int_64(int64_t other);
+	static inline PRIMITIVE from_uint_64(uint64_t other);
+	static inline PRIMITIVE from_float_64(double other);
 	static inline int64_t to_int_64__(PRIMITIVE other);
 	static inline uint64_t to_uint_64__(PRIMITIVE other);
 	static inline double to_float_64__(PRIMITIVE other);
 	static inline PRIMITIVE modulo__(PRIMITIVE x, PRIMITIVE y);
-	static inline bool is_int__();
-	static inline bool is_signed__();
+	static inline bool is_int();
+	static inline bool is_signed();
 	static inline bool is_nan__(PRIMITIVE number);
 	static inline bool is_inf__(PRIMITIVE number);
 	static inline bool is_finite__(PRIMITIVE number);
@@ -33,20 +33,20 @@ class number_u<int8_t>
 public:
 	static inline int8_t from_number__(number_a<> const& other)
 	{
-		return int8_t(other.to_int_64__());
+		return int8_t(other.to_int_64());
 	}
 
-	static inline int8_t from_int_64__(int64_t other)
+	static inline int8_t from_int_64(int64_t other)
 	{
 		return int8_t(other);
 	}
 
-	static inline int8_t from_uint_64__(uint64_t other)
+	static inline int8_t from_uint_64(uint64_t other)
 	{
 		return int8_t(other);
 	}
 
-	static inline int8_t from_float_64__(double other)
+	static inline int8_t from_float_64(double other)
 	{
 		return int8_t(std::llround(other));
 	}
@@ -77,12 +77,12 @@ public:
 		return int8_t(x % y);
 	}
 
-	static inline bool is_int__()
+	static inline bool is_int()
 	{
 		return true;
 	}
 
-	static inline bool is_signed__()
+	static inline bool is_signed()
 	{
 		return true;
 	}
@@ -114,10 +114,10 @@ class number_u<uint8_t>
 public:
 	static inline uint8_t from_number__(number_a<> const& other)
 	{
-		return uint8_t(other.to_uint_64__());
+		return uint8_t(other.to_uint_64());
 	}
 
-	static inline uint8_t from_int_64__(int64_t other)
+	static inline uint8_t from_int_64(int64_t other)
 	{
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
@@ -128,12 +128,12 @@ public:
 		return uint8_t(other);
 	}
 
-	static inline uint8_t from_uint_64__(uint64_t other)
+	static inline uint8_t from_uint_64(uint64_t other)
 	{
 		return uint8_t(other);
 	}
 
-	static inline uint8_t from_float_64__(double other)
+	static inline uint8_t from_float_64(double other)
 	{
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		auto r = std::llround(other);
@@ -167,12 +167,12 @@ public:
 		return uint8_t(x % y);
 	}
 
-	static inline bool is_int__()
+	static inline bool is_int()
 	{
 		return true;
 	}
 
-	static inline bool is_signed__()
+	static inline bool is_signed()
 	{
 		return false;
 	}
@@ -204,20 +204,20 @@ class number_u<int16_t>
 public:
 	static inline int16_t from_number__(number_a<> const& other)
 	{
-		return int16_t(other.to_int_64__());
+		return int16_t(other.to_int_64());
 	}
 
-	static inline int16_t from_int_64__(int64_t other)
+	static inline int16_t from_int_64(int64_t other)
 	{
 		return int16_t(other);
 	}
 
-	static inline int16_t from_uint_64__(uint64_t other)
+	static inline int16_t from_uint_64(uint64_t other)
 	{
 		return int16_t(other);
 	}
 
-	static inline int16_t from_float_64__(double other)
+	static inline int16_t from_float_64(double other)
 	{
 		return int16_t(std::llround(other));
 	}
@@ -248,12 +248,12 @@ public:
 		return int16_t(x % y);
 	}
 
-	static inline bool is_int__()
+	static inline bool is_int()
 	{
 		return true;
 	}
 
-	static inline bool is_signed__()
+	static inline bool is_signed()
 	{
 		return true;
 	}
@@ -285,10 +285,10 @@ class number_u<uint16_t>
 public:
 	static inline uint16_t from_number__(number_a<> const& other)
 	{
-		return uint16_t(other.to_uint_64__());
+		return uint16_t(other.to_uint_64());
 	}
 
-	static inline uint16_t from_int_64__(int64_t other)
+	static inline uint16_t from_int_64(int64_t other)
 	{
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
@@ -299,12 +299,12 @@ public:
 		return uint16_t(other);
 	}
 
-	static inline uint16_t from_uint_64__(uint64_t other)
+	static inline uint16_t from_uint_64(uint64_t other)
 	{
 		return uint16_t(other);
 	}
 
-	static inline uint16_t from_float_64__(double other)
+	static inline uint16_t from_float_64(double other)
 	{
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		auto r = std::llround(other);
@@ -338,12 +338,12 @@ public:
 		return uint16_t(x % y);
 	}
 
-	static inline bool is_int__()
+	static inline bool is_int()
 	{
 		return true;
 	}
 
-	static inline bool is_signed__()
+	static inline bool is_signed()
 	{
 		return false;
 	}
@@ -375,20 +375,20 @@ class number_u<int32_t>
 public:
 	static inline int32_t from_number__(number_a<> const& other)
 	{
-		return int32_t(other.to_int_64__());
+		return int32_t(other.to_int_64());
 	}
 
-	static inline int32_t from_int_64__(int64_t other)
+	static inline int32_t from_int_64(int64_t other)
 	{
 		return int32_t(other);
 	}
 
-	static inline int32_t from_uint_64__(uint64_t other)
+	static inline int32_t from_uint_64(uint64_t other)
 	{
 		return int32_t(other);
 	}
 
-	static inline int32_t from_float_64__(double other)
+	static inline int32_t from_float_64(double other)
 	{
 		return int32_t(std::llround(other));
 	}
@@ -419,12 +419,12 @@ public:
 		return int32_t(x % y);
 	}
 
-	static inline bool is_int__()
+	static inline bool is_int()
 	{
 		return true;
 	}
 
-	static inline bool is_signed__()
+	static inline bool is_signed()
 	{
 		return true;
 	}
@@ -456,10 +456,10 @@ class number_u<uint32_t>
 public:
 	static inline uint32_t from_number__(number_a<> const& other)
 	{
-		return uint32_t(other.to_uint_64__());
+		return uint32_t(other.to_uint_64());
 	}
 
-	static inline uint32_t from_int_64__(int64_t other)
+	static inline uint32_t from_int_64(int64_t other)
 	{
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
@@ -470,12 +470,12 @@ public:
 		return uint32_t(other);
 	}
 
-	static inline uint32_t from_uint_64__(uint64_t other)
+	static inline uint32_t from_uint_64(uint64_t other)
 	{
 		return uint32_t(other);
 	}
 
-	static inline uint32_t from_float_64__(double other)
+	static inline uint32_t from_float_64(double other)
 	{
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		auto r = std::llround(other);
@@ -509,12 +509,12 @@ public:
 		return uint32_t(x % y);
 	}
 
-	static inline bool is_int__()
+	static inline bool is_int()
 	{
 		return true;
 	}
 
-	static inline bool is_signed__()
+	static inline bool is_signed()
 	{
 		return false;
 	}
@@ -546,20 +546,20 @@ class number_u<int64_t>
 public:
 	static inline int64_t from_number__(number_a<> const& other)
 	{
-		return other.to_int_64__();
+		return other.to_int_64();
 	}
 
-	static inline int64_t from_int_64__(int64_t other)
+	static inline int64_t from_int_64(int64_t other)
 	{
 		return other;
 	}
 
-	static inline int64_t from_uint_64__(uint64_t other)
+	static inline int64_t from_uint_64(uint64_t other)
 	{
 		return int64_t(other);
 	}
 
-	static inline int64_t from_float_64__(double other)
+	static inline int64_t from_float_64(double other)
 	{
 		return int64_t(std::llround(other));
 	}
@@ -590,12 +590,12 @@ public:
 		return int64_t(x % y);
 	}
 
-	static inline bool is_int__()
+	static inline bool is_int()
 	{
 		return true;
 	}
 
-	static inline bool is_signed__()
+	static inline bool is_signed()
 	{
 		return true;
 	}
@@ -627,10 +627,10 @@ class number_u<uint64_t>
 public:
 	static inline uint64_t from_number__(number_a<> const& other)
 	{
-		return other.to_uint_64__();
+		return other.to_uint_64();
 	}
 
-	static inline uint64_t from_int_64__(int64_t other)
+	static inline uint64_t from_int_64(int64_t other)
 	{
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		if (other < 0)
@@ -641,12 +641,12 @@ public:
 		return uint64_t(other);
 	}
 
-	static inline uint64_t from_uint_64__(uint64_t other)
+	static inline uint64_t from_uint_64(uint64_t other)
 	{
 		return other;
 	}
 
-	static inline uint64_t from_float_64__(double other)
+	static inline uint64_t from_float_64(double other)
 	{
 #ifdef STRANGE_CHECK_UNSIGNED_CONVERSIONS
 		auto r = std::llround(other);
@@ -680,12 +680,12 @@ public:
 		return uint64_t(x % y);
 	}
 
-	static inline bool is_int__()
+	static inline bool is_int()
 	{
 		return true;
 	}
 
-	static inline bool is_signed__()
+	static inline bool is_signed()
 	{
 		return false;
 	}
@@ -717,20 +717,20 @@ class number_u<float>
 public:
 	static inline float from_number__(number_a<> const& other)
 	{
-		return float(other.to_float_64__());
+		return float(other.to_float_64());
 	}
 
-	static inline float from_int_64__(int64_t other)
+	static inline float from_int_64(int64_t other)
 	{
 		return float(other);
 	}
 
-	static inline float from_uint_64__(uint64_t other)
+	static inline float from_uint_64(uint64_t other)
 	{
 		return float(other);
 	}
 
-	static inline float from_float_64__(double other)
+	static inline float from_float_64(double other)
 	{
 		return float(other);
 	}
@@ -764,12 +764,12 @@ public:
 		return std::fmodf(x, y);
 	}
 
-	static inline bool is_int__()
+	static inline bool is_int()
 	{
 		return false;
 	}
 
-	static inline bool is_signed__()
+	static inline bool is_signed()
 	{
 		return true;
 	}
@@ -801,20 +801,20 @@ class number_u<double>
 public:
 	static inline double from_number__(number_a<> const& other)
 	{
-		return other.to_float_64__();
+		return other.to_float_64();
 	}
 
-	static inline double from_int_64__(int64_t other)
+	static inline double from_int_64(int64_t other)
 	{
 		return double(other);
 	}
 
-	static inline double from_uint_64__(uint64_t other)
+	static inline double from_uint_64(uint64_t other)
 	{
 		return double(other);
 	}
 
-	static inline double from_float_64__(double other)
+	static inline double from_float_64(double other)
 	{
 		return other;
 	}
@@ -848,12 +848,12 @@ public:
 		return std::fmod(x, y);
 	}
 
-	static inline bool is_int__()
+	static inline bool is_int()
 	{
 		return false;
 	}
 
-	static inline bool is_signed__()
+	static inline bool is_signed()
 	{
 		return true;
 	}
