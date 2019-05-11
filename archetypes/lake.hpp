@@ -23,12 +23,12 @@ public:
 	inline bool erase(int64_t index);
 
 	// mutable range
-	inline any_a<> beset__(range_a<> const& _);
-	inline random_access_iterator_a beset_();
+	inline any_a<> begin__(range_a<> const& _);
+	inline random_access_iterator_a begin_();
 	inline random_access_iterator_a begin();
 
-	inline any_a<> enset__(range_a<> const& _);
-	inline random_access_iterator_a enset_();
+	inline any_a<> end__(range_a<> const& _);
+	inline random_access_iterator_a end_();
 	inline random_access_iterator_a end();
 };
 

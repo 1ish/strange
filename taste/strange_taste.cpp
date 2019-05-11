@@ -41,8 +41,8 @@ TEST(TestCaseName, ForLoop)
 
 	any_a<> f = native_function_t<>::val(fun, "x", "y", "z");
 	any_a<> g = native_function_t<>::val(&nothing_t<>::val__, "x", "y", "z");
-	any_a<> h = native_extraction_t<range_a<>>::val(&range_a<>::beget__);
-	any_a<> i = native_mutation_t<flock_a<>>::val(&flock_a<>::beset__);
+	any_a<> h = native_extraction_t<range_a<>>::val(&range_a<>::cbegin__);
+	any_a<> i = native_mutation_t<flock_a<>>::val(&flock_a<>::begin__);
 
 	shoal_a<> shoal = shoal_t<>::val_();
 	flock_a<> flock = flock_t<>::val_();

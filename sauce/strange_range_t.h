@@ -6,19 +6,19 @@ namespace strange
 
 // adaptation
 #define ___STRANGE_RANGE___ ___STRANGE_THING___ \
-inline any_a<> beget__(range_a<> const&) const \
+inline any_a<> cbegin__(range_a<> const&) const \
 { \
-return beget_(); \
+return cbegin_(); \
 } \
-inline forward_const_iterator_a<> beget_() const \
+inline forward_const_iterator_a<> cbegin_() const \
 { \
 return cbegin(); \
 } \
-inline any_a<> enget__(range_a<> const&) const \
+inline any_a<> cend__(range_a<> const&) const \
 { \
-return enget_(); \
+return cend_(); \
 } \
-inline forward_const_iterator_a<> enget_() const \
+inline forward_const_iterator_a<> cend_() const \
 { \
 return cend(); \
 } \

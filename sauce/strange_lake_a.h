@@ -91,16 +91,16 @@ namespace strange {
      { assert(handle_); return write().insert(index, value ); }
      inline bool erase ( int64_t index )
      { assert(handle_); return write().erase(index ); }
-     inline any_a < > beset__ ( range_a < > const & _ )
-     { assert(handle_); return write().beset__(_ ); }
-     inline random_access_iterator_a beset_ ( )
-     { assert(handle_); return write().beset_( ); }
+     inline any_a < > begin__ ( range_a < > const & _ )
+     { assert(handle_); return write().begin__(_ ); }
+     inline random_access_iterator_a begin_ ( )
+     { assert(handle_); return write().begin_( ); }
      inline random_access_iterator_a begin ( )
      { assert(handle_); return write().begin( ); }
-     inline any_a < > enset__ ( range_a < > const & _ )
-     { assert(handle_); return write().enset__(_ ); }
-     inline random_access_iterator_a enset_ ( )
-     { assert(handle_); return write().enset_( ); }
+     inline any_a < > end__ ( range_a < > const & _ )
+     { assert(handle_); return write().end__(_ ); }
+     inline random_access_iterator_a end_ ( )
+     { assert(handle_); return write().end_( ); }
      inline random_access_iterator_a end ( )
      { assert(handle_); return write().end( ); }
     
@@ -112,11 +112,11 @@ namespace strange {
       virtual inline void update ( int64_t index , any_a < > const & value ) = 0;
       virtual inline bool insert ( int64_t index , any_a < > const & value ) = 0;
       virtual inline bool erase ( int64_t index ) = 0;
-      virtual inline any_a < > beset__ ( range_a < > const & _ ) = 0;
-      virtual inline random_access_iterator_a beset_ ( ) = 0;
+      virtual inline any_a < > begin__ ( range_a < > const & _ ) = 0;
+      virtual inline random_access_iterator_a begin_ ( ) = 0;
       virtual inline random_access_iterator_a begin ( ) = 0;
-      virtual inline any_a < > enset__ ( range_a < > const & _ ) = 0;
-      virtual inline random_access_iterator_a enset_ ( ) = 0;
+      virtual inline any_a < > end__ ( range_a < > const & _ ) = 0;
+      virtual inline random_access_iterator_a end_ ( ) = 0;
       virtual inline random_access_iterator_a end ( ) = 0;
     	};
     
@@ -143,16 +143,16 @@ namespace strange {
       { return value_.insert(index, value ); }
       virtual inline bool erase ( int64_t index )
       { return value_.erase(index ); }
-      virtual inline any_a < > beset__ ( range_a < > const & _ )
-      { return value_.beset__(_ ); }
-      virtual inline random_access_iterator_a beset_ ( )
-      { return value_.beset_( ); }
+      virtual inline any_a < > begin__ ( range_a < > const & _ )
+      { return value_.begin__(_ ); }
+      virtual inline random_access_iterator_a begin_ ( )
+      { return value_.begin_( ); }
       virtual inline random_access_iterator_a begin ( )
       { return value_.begin( ); }
-      virtual inline any_a < > enset__ ( range_a < > const & _ )
-      { return value_.enset__(_ ); }
-      virtual inline random_access_iterator_a enset_ ( )
-      { return value_.enset_( ); }
+      virtual inline any_a < > end__ ( range_a < > const & _ )
+      { return value_.end__(_ ); }
+      virtual inline random_access_iterator_a end_ ( )
+      { return value_.end_( ); }
       virtual inline random_access_iterator_a end ( )
       { return value_.end( ); }
     	};

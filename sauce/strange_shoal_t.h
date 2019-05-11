@@ -429,12 +429,12 @@ public: ___STRANGE_COLLECTION___
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val(me_(), _map.cbegin());
 	}
 
-	inline any_a<> beset__(range_a<> const&)
+	inline any_a<> begin__(range_a<> const&)
 	{
-		return beset_();
+		return begin_();
 	}
 
-	inline bidirectional_iterator_a<> beset_()
+	inline bidirectional_iterator_a<> begin_()
 	{
 		return begin();
 	}
@@ -454,12 +454,12 @@ public: ___STRANGE_COLLECTION___
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val(me_(), _map.cend());
 	}
 
-	inline any_a<> enset__(range_a<> const&)
+	inline any_a<> end__(range_a<> const&)
 	{
-		return enset_();
+		return end_();
 	}
 
-	inline bidirectional_iterator_a<> enset_()
+	inline bidirectional_iterator_a<> end_()
 	{
 		return end();
 	}

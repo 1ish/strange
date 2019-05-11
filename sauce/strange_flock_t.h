@@ -830,12 +830,12 @@ public: ___STRANGE_COLLECTION___
 		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cbegin());
 	}
 
-	inline any_a<> beset__(range_a<> const&)
+	inline any_a<> begin__(range_a<> const&)
 	{
-		return beset_();
+		return begin_();
 	}
 
-	inline random_access_iterator_a<> beset_()
+	inline random_access_iterator_a<> begin_()
 	{
 		return begin();
 	}
@@ -855,12 +855,12 @@ public: ___STRANGE_COLLECTION___
 		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cend());
 	}
 
-	inline any_a<> enset__(range_a<> const&)
+	inline any_a<> end__(range_a<> const&)
 	{
-		return enset_();
+		return end_();
 	}
 
-	inline random_access_iterator_a<> enset_()
+	inline random_access_iterator_a<> end_()
 	{
 		return end();
 	}
