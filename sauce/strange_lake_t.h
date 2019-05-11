@@ -82,7 +82,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			{
 				throw dis("strange::lake::iterator set passed non-number");
 			}
-			*_it = number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing));
+			*_it = number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing));
 			return thing;
 		}
 
@@ -931,7 +931,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			throw dis("strange::lake::update passed non-number value");
 		}
-		return update(index, number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(value)));
+		return update(index, number_u<PRIMITIVE>::from_number(cast_<number_a<>>(value)));
 	}
 
 	inline void update(int64_t index, PRIMITIVE number)
@@ -965,7 +965,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			throw dis("strange::lake::insert passed non-number value");
 		}
-		return insert(index, number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(value)));
+		return insert(index, number_u<PRIMITIVE>::from_number(cast_<number_a<>>(value)));
 	}
 
 	inline bool insert(int64_t index, PRIMITIVE number)
@@ -1050,7 +1050,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			throw dis("strange::lake::push_back passed non-number");
 		}
-		push_back(number_u<PRIMITIVE>::from_number__(cast_<number_a<>>(thing)));
+		push_back(number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing)));
 	}
 
 	inline void push_back(PRIMITIVE number)
