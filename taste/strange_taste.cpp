@@ -33,7 +33,7 @@ TEST(TestCaseName, ForLoop)
 
 	symbol_a<> s = sym("strange");
 
-	EXPECT_EQ(s.to_string__(), "strange");
+	EXPECT_EQ(s.to_string(), "strange");
 	EXPECT_FALSE(e.is("strange"));
 	EXPECT_TRUE(s.is("strange"));
 
@@ -54,7 +54,7 @@ TEST(TestCaseName, ForLoop)
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		std::cout << "caught: " << m.to_string__() << std::endl;
+		std::cout << "caught: " << m.to_string() << std::endl;
 	}
 
 	auto it = flock.cbegin();
@@ -74,7 +74,7 @@ TEST(TestCaseName, ForLoop)
 	}
 	catch (misunderstanding_a<> & m)
 	{
-		std::cout << "caught: " << m.to_string__() << std::endl;
+		std::cout << "caught: " << m.to_string() << std::endl;
 	}
 
 	lake_a<> lake = lake_float_64_t<>::val_();

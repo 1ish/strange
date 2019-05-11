@@ -61,12 +61,12 @@ public: ___STRANGE_THING___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return check_<misunderstanding_a<>>(thing) && cast_<misunderstanding_a<>>(thing).to_string__() == _string;
+		return check_<misunderstanding_a<>>(thing) && cast_<misunderstanding_a<>>(thing).to_string() == _string;
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return !check_<misunderstanding_a<>>(thing) || cast_<misunderstanding_a<>>(thing).to_string__() != _string;
+		return !check_<misunderstanding_a<>>(thing) || cast_<misunderstanding_a<>>(thing).to_string() != _string;
 	}
 
 	inline std::size_t hash() const
@@ -75,7 +75,7 @@ public: ___STRANGE_THING___
 	}
 
 	// misunderstanding
-	inline std::string const& to_string__() const
+	inline std::string const& to_string() const
 	{
 		return _string;
 	}
@@ -87,7 +87,7 @@ public: ___STRANGE_THING___
 		{
 			if (check_<misunderstanding_a<>>(thing))
 			{
-				s += cast_<misunderstanding_a<>>(thing).to_string__();
+				s += cast_<misunderstanding_a<>>(thing).to_string();
 			}
 		}
 		return misunderstanding_a<>{ misunderstanding_t{ std::move(s) } };
@@ -100,7 +100,7 @@ public: ___STRANGE_THING___
 
 	inline misunderstanding_a<> operator+(misunderstanding_a<> const& misunderstanding) const
 	{
-		return misunderstanding_a<>{ misunderstanding_t{ _string + misunderstanding.to_string__() } };
+		return misunderstanding_a<>{ misunderstanding_t{ _string + misunderstanding.to_string() } };
 	}
 
 protected:

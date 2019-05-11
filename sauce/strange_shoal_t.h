@@ -56,7 +56,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		}
 
 		// forward iterator
-		inline any_a<> get(range_a<> const&) const
+		inline any_a<> get__(range_a<> const&) const
 		{
 			return get_();
 		}
@@ -68,7 +68,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			return _pair;
 		}
 
-		inline any_a<> set(range_a<> const& range) const
+		inline any_a<> set__(range_a<> const& range) const
 		{
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
@@ -225,7 +225,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			}
 
 			// forward iterator
-			inline any_a<> get(range_a<> const&) const
+			inline any_a<> get__(range_a<> const&) const
 			{
 				return get_();
 			}

@@ -81,8 +81,8 @@ namespace strange {
     		return *this;
     	}
     
-     inline any_a < > get ( range_a < > const & _ ) const
-     { assert(handle_); return read().get(_ ); }
+     inline any_a < > get__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().get__(_ ); }
      inline any_a < > get_ ( ) const
      { assert(handle_); return read().get_( ); }
      inline any_a < > const & operator * ( ) const
@@ -97,7 +97,7 @@ namespace strange {
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
-      virtual inline any_a < > get ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > get__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > get_ ( ) const = 0;
       virtual inline any_a < > const & operator * ( ) const = 0;
       virtual inline any_a < > const * operator -> ( ) const = 0;
@@ -118,8 +118,8 @@ namespace strange {
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
-      virtual inline any_a < > get ( range_a < > const & _ ) const
-      { return value_.get(_ ); }
+      virtual inline any_a < > get__ ( range_a < > const & _ ) const
+      { return value_.get__(_ ); }
       virtual inline any_a < > get_ ( ) const
       { return value_.get_( ); }
       virtual inline any_a < > const & operator * ( ) const

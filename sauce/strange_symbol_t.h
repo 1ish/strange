@@ -61,12 +61,12 @@ public: ___STRANGE_THING___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return check_<symbol_a<>>(thing) && cast_<symbol_a<>>(thing).to_string__() == _string;
+		return check_<symbol_a<>>(thing) && cast_<symbol_a<>>(thing).to_string() == _string;
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return !check_<symbol_a<>>(thing) || cast_<symbol_a<>>(thing).to_string__() != _string;
+		return !check_<symbol_a<>>(thing) || cast_<symbol_a<>>(thing).to_string() != _string;
 	}
 
 	inline std::size_t hash() const
@@ -80,7 +80,7 @@ public: ___STRANGE_THING___
 	}
 
 	// symbol
-	inline std::string const& to_string__() const
+	inline std::string const& to_string() const
 	{
 		return _string;
 	}
@@ -92,7 +92,7 @@ public: ___STRANGE_THING___
 		{
 			if (check_<symbol_a<>>(thing))
 			{
-				s += cast_<symbol_a<>>(thing).to_string__();
+				s += cast_<symbol_a<>>(thing).to_string();
 			}
 		}
 		return symbol_a<>{ symbol_t{ std::move(s) } };
@@ -105,7 +105,7 @@ public: ___STRANGE_THING___
 
 	inline symbol_a<> operator+(symbol_a<> const& symbol) const
 	{
-		return symbol_a<>{ symbol_t{ _string + symbol.to_string__() } };
+		return symbol_a<>{ symbol_t{ _string + symbol.to_string() } };
 	}
 
 protected:

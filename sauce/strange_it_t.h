@@ -71,7 +71,7 @@ public: ___STRANGE_THING___
 	}
 
 	// forward iterator
-	inline any_a<> get(range_a<> const&) const
+	inline any_a<> get__(range_a<> const&) const
 	{
 		return get_();
 	}

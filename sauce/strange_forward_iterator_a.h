@@ -81,12 +81,12 @@ namespace strange {
     		return *this;
     	}
     
-     inline any_a < > get ( range_a < > const & _ ) const
-     { assert(handle_); return read().get(_ ); }
+     inline any_a < > get__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().get__(_ ); }
      inline any_a < > get_ ( ) const
      { assert(handle_); return read().get_( ); }
-     inline any_a < > set ( range_a < > const & range ) const
-     { assert(handle_); return read().set(range ); }
+     inline any_a < > set__ ( range_a < > const & range ) const
+     { assert(handle_); return read().set__(range ); }
      inline any_a < > set_ ( any_a < > const & thing ) const
      { assert(handle_); return read().set_(thing ); }
      inline any_a < > & operator * ( ) const
@@ -101,9 +101,9 @@ namespace strange {
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
-      virtual inline any_a < > get ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > get__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > get_ ( ) const = 0;
-      virtual inline any_a < > set ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > set__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > set_ ( any_a < > const & thing ) const = 0;
       virtual inline any_a < > & operator * ( ) const = 0;
       virtual inline any_a < > * operator -> ( ) const = 0;
@@ -124,12 +124,12 @@ namespace strange {
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
-      virtual inline any_a < > get ( range_a < > const & _ ) const
-      { return value_.get(_ ); }
+      virtual inline any_a < > get__ ( range_a < > const & _ ) const
+      { return value_.get__(_ ); }
       virtual inline any_a < > get_ ( ) const
       { return value_.get_( ); }
-      virtual inline any_a < > set ( range_a < > const & range ) const
-      { return value_.set(range ); }
+      virtual inline any_a < > set__ ( range_a < > const & range ) const
+      { return value_.set__(range ); }
       virtual inline any_a < > set_ ( any_a < > const & thing ) const
       { return value_.set_(thing ); }
       virtual inline any_a < > & operator * ( ) const

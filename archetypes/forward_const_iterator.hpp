@@ -16,7 +16,7 @@ class forward_const_iterator_a
 {
 public:
 	// forward const iterator
-	inline any_a<> get(range_a<> const& _) const;
+	inline any_a<> get__(range_a<> const& _) const;
 	inline any_a<> get_() const;
 	inline any_a<> const& operator*() const;
 	inline any_a<> const* operator->() const;

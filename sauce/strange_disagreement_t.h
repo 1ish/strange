@@ -66,7 +66,7 @@ public: ___STRANGE_THING___
 		{
 			if (check_<misunderstanding_a<>>(thing))
 			{
-				s += cast_<misunderstanding_a<>>(thing).to_string__();
+				s += cast_<misunderstanding_a<>>(thing).to_string();
 			}
 		}
 		return misunderstanding_a<>{ disagreement_t{ std::move(s) } };
@@ -79,7 +79,7 @@ public: ___STRANGE_THING___
 
 	inline misunderstanding_a<> operator+(misunderstanding_a<> const& misunderstanding) const
 	{
-		return misunderstanding_a<>{ disagreement_t{ _string + misunderstanding.to_string__() } };
+		return misunderstanding_a<>{ disagreement_t{ _string + misunderstanding.to_string() } };
 	}
 
 protected:
