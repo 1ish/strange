@@ -8,22 +8,22 @@ template <typename _ABSTRACTION_ = any_a<>>
 class variadic_u
 {
 public:
-	static inline void variadic__(std::vector<_ABSTRACTION_>& vec)
+	static inline void variadic(std::vector<_ABSTRACTION_>& vec)
 	{
 	}
 
 	template <typename... Args>
-	static inline void variadic__(std::vector<_ABSTRACTION_>& vec, std::string const& s, Args&&... args)
+	static inline void variadic(std::vector<_ABSTRACTION_>& vec, std::string const& s, Args&&... args)
 	{
 		vec.push_back(sym(s));
-		variadic__(vec, std::forward<Args>(args)...);
+		variadic(vec, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic__(std::vector<_ABSTRACTION_>& vec, _ABSTRACTION_ const& thing, Args&&... args)
+	static inline void variadic(std::vector<_ABSTRACTION_>& vec, _ABSTRACTION_ const& thing, Args&&... args)
 	{
 		vec.push_back(thing);
-		variadic__(vec, std::forward<Args>(args)...);
+		variadic(vec, std::forward<Args>(args)...);
 	}
 };
 
