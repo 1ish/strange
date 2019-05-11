@@ -15,7 +15,7 @@ template <typename random_access_iterator_a>
 class brook_a
 {
 public:
-	// lake
+	// brook
 	inline bool has(int64_t index) const;
 	inline any_a<> at(int64_t index) const;
 	inline void update(int64_t index, any_a<> const& value);
