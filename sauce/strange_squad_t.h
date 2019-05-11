@@ -991,12 +991,18 @@ public: ___STRANGE_COLLECTION___
 
 	inline void push_front(any_a<> const& thing)
 	{
-		push_back(thing);
+		_deque.push_front(thing);
 	}
 
 	inline any_a<> pop_front_()
 	{
-		return pop_back_();
+		if (_deque.empty())
+		{
+			return nothing_t<>::val_();
+		}
+		any_a<> result = _deque.front();
+		_deque.pop_front();
+		return result;
 	}
 
 	inline void push_back(any_a<> const& thing)
