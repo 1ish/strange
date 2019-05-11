@@ -19,6 +19,7 @@
 #include "strange_collection_t.h"
 #include "strange_shoal_t.h"
 #include "strange_flock_t.h"
+#include "strange_squad_t.h"
 #include "strange_herd_t.h"
 #include "strange_number_t.h"
 #include "strange_number_reference_t.h"

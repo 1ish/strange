@@ -7,6 +7,7 @@
 #include <unordered_set>
 #include <map>
 #include <unordered_map>
+#include <deque>
 #include <algorithm>
 #include <cassert>
 #include <functional>
