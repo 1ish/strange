@@ -147,7 +147,7 @@ class random_access_iterator_data_a;
 #define ___derived___ collection_a<>
 #include "strange_brook_a.h"
 
-#define ___derived___ lake_a<>
+#define ___derived___ brook_a<>
 #include "strange_brook_data_a.h"
 
 #define ___derived___ forward_const_iterator_a<>

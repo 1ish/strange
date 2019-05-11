@@ -79,6 +79,7 @@ TEST(TestCaseName, ForLoop)
 	}
 
 	lake_a<> lake = lake_float_64_t<>::val_();
+	brook_a<> brook = brook_float_32_t<>::val_();
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

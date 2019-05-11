@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_LAKE_T_H
-#define COM_ONEISH_STRANGE_LAKE_T_H
+#ifndef COM_ONEISH_STRANGE_BROOK_T_H
+#define COM_ONEISH_STRANGE_BROOK_T_H
 
 namespace strange
 {
 
-template <typename PRIMITIVE, typename _ABSTRACTION_ = lake_data_a<PRIMITIVE>>
-class lake_t : public something_t<_ABSTRACTION_>
+template <typename PRIMITIVE, typename _ABSTRACTION_ = brook_data_a<PRIMITIVE>>
+class brook_t : public something_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
 	class iterator_t : public something_t<_ABSTRACTION_>
@@ -13,21 +13,21 @@ class lake_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> val(lake_a<> const& lake, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> val(brook_a<> const& brook, F&& it)
 		{
-			return random_access_iterator_data_a<ITERATOR>{ iterator_t(lake, std::forward<F>(it)) };
+			return random_access_iterator_data_a<ITERATOR>{ iterator_t(brook, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref(lake_a<> const& lake, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> ref(brook_a<> const& brook, F&& it)
 		{
-			return random_access_iterator_data_a<ITERATOR>(iterator_t(lake, std::forward<F>(it)), true);
+			return random_access_iterator_data_a<ITERATOR>(iterator_t(brook, std::forward<F>(it)), true);
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::lake::iterator");
+			static symbol_a<> TYPE = sym("strange::brook::iterator");
 			return TYPE;
 		}
 
@@ -71,7 +71,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis("strange::lake::iterator set passed empty range");
+				throw dis("strange::brook::iterator set passed empty range");
 			}
 			return set_(*it);
 		}
@@ -80,7 +80,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis("strange::lake::iterator set passed non-number");
+				throw dis("strange::brook::iterator set passed non-number");
 			}
 			*_it = number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing));
 			return thing;
@@ -94,7 +94,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 		inline any_a<>& operator*() const
 		{
-			throw dis("strange::lake::iterator cannot be dereferenced directly");
+			throw dis("strange::brook::iterator cannot be dereferenced directly");
 		}
 
 		inline _ABSTRACTION_ increment__(range_a<> const&)
@@ -166,7 +166,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis("strange::lake::iterator += passed non-number");
+				throw dis("strange::brook::iterator += passed non-number");
 			}
 			_it += cast_<number_a<>>(thing).to_int_64();
 			return *this;
@@ -213,7 +213,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis("strange::lake::iterator -= passed non-number");
+				throw dis("strange::brook::iterator -= passed non-number");
 			}
 			_it -= cast_<number_a<>>(thing).to_int_64();
 			return *this;
@@ -246,12 +246,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis("strange::lake::iterator::less_than passed empty range");
+				throw dis("strange::brook::iterator::less_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis("strange::lake::iterator::less_than passed incompatible thing");
+				throw dis("strange::brook::iterator::less_than passed incompatible thing");
 			}
 			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -265,7 +265,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis("strange::lake::iterator < passed incompatible thing");
+				throw dis("strange::brook::iterator < passed incompatible thing");
 			}
 			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -275,12 +275,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis("strange::lake::iterator::greater_than passed empty range");
+				throw dis("strange::brook::iterator::greater_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis("strange::lake::iterator::greater_than passed incompatible thing");
+				throw dis("strange::brook::iterator::greater_than passed incompatible thing");
 			}
 			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -294,7 +294,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis("strange::lake::iterator > passed incompatible thing");
+				throw dis("strange::brook::iterator > passed incompatible thing");
 			}
 			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -304,12 +304,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis("strange::lake::iterator::less_or_equal passed empty range");
+				throw dis("strange::brook::iterator::less_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis("strange::lake::iterator::less_or_equal passed incompatible thing");
+				throw dis("strange::brook::iterator::less_or_equal passed incompatible thing");
 			}
 			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -323,7 +323,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis("strange::lake::iterator <= passed incompatible thing");
+				throw dis("strange::brook::iterator <= passed incompatible thing");
 			}
 			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -333,12 +333,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis("strange::lake::iterator::greater_or_equal passed empty range");
+				throw dis("strange::brook::iterator::greater_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis("strange::lake::iterator::greater_or_equal passed incompatible thing");
+				throw dis("strange::brook::iterator::greater_or_equal passed incompatible thing");
 			}
 			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -352,7 +352,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis("strange::lake::iterator >= passed incompatible thing");
+				throw dis("strange::brook::iterator >= passed incompatible thing");
 			}
 			return _it >= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -375,14 +375,14 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 	protected:
 		ITERATOR _it;
-		lake_a<> _lake;
+		brook_a<> _brook;
 		mutable number_data_a<PRIMITIVE> _number;
 
 		template <typename F>
-		inline iterator_t(lake_a<> const& lake, F&& it)
+		inline iterator_t(brook_a<> const& brook, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
-			, _lake(lake, true)
+			, _brook(brook, true)
 			, _number{ number_t<PRIMITIVE>::val_() }
 		{}
 	};
@@ -393,21 +393,21 @@ class lake_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> val(lake_a<> const& lake, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> val(brook_a<> const& brook, F&& it)
 		{
-			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(lake, std::forward<F>(it)) };
+			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(brook, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> ref(lake_a<> const& lake, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> ref(brook_a<> const& brook, F&& it)
 		{
-			return random_access_const_iterator_data_a<ITERATOR>(const_iterator_t(lake, std::forward<F>(it)), true);
+			return random_access_const_iterator_data_a<ITERATOR>(const_iterator_t(brook, std::forward<F>(it)), true);
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::lake::const_iterator");
+			static symbol_a<> TYPE = sym("strange::brook::const_iterator");
 			return TYPE;
 		}
 
@@ -527,7 +527,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis("strange::lake::const_iterator += passed non-number");
+				throw dis("strange::brook::const_iterator += passed non-number");
 			}
 			_it += cast_<number_a<>>(thing).to_int_64();
 			return *this;
@@ -574,7 +574,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<number_a<>>(thing))
 			{
-				throw dis("strange::lake::const_iterator -= passed non-number");
+				throw dis("strange::brook::const_iterator -= passed non-number");
 			}
 			_it -= cast_<number_a<>>(thing).to_int_64();
 			return *this;
@@ -607,12 +607,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis("strange::lake::const_iterator::less_than passed empty range");
+				throw dis("strange::brook::const_iterator::less_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis("strange::lake::const_iterator::less_than passed incompatible thing");
+				throw dis("strange::brook::const_iterator::less_than passed incompatible thing");
 			}
 			return _boole_(_it < cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -626,7 +626,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis("strange::lake::const_iterator < passed incompatible thing");
+				throw dis("strange::brook::const_iterator < passed incompatible thing");
 			}
 			return _it < cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -636,12 +636,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis("strange::lake::const_iterator::greater_than passed empty range");
+				throw dis("strange::brook::const_iterator::greater_than passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis("strange::lake::const_iterator::greater_than passed incompatible thing");
+				throw dis("strange::brook::const_iterator::greater_than passed incompatible thing");
 			}
 			return _boole_(_it > cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -655,7 +655,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis("strange::lake::const_iterator > passed incompatible thing");
+				throw dis("strange::brook::const_iterator > passed incompatible thing");
 			}
 			return _it > cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -665,12 +665,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis("strange::lake::const_iterator::less_or_equal passed empty range");
+				throw dis("strange::brook::const_iterator::less_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis("strange::lake::const_iterator::less_or_equal passed incompatible thing");
+				throw dis("strange::brook::const_iterator::less_or_equal passed incompatible thing");
 			}
 			return _boole_(_it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -684,7 +684,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis("strange::lake::const_iterator <= passed incompatible thing");
+				throw dis("strange::brook::const_iterator <= passed incompatible thing");
 			}
 			return _it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -694,12 +694,12 @@ class lake_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis("strange::lake::const_iterator::greater_or_equal passed empty range");
+				throw dis("strange::brook::const_iterator::greater_or_equal passed empty range");
 			}
 			any_a<> thing = *it;
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				throw dis("strange::lake::const_iterator::greater_or_equal passed incompatible thing");
+				throw dis("strange::brook::const_iterator::greater_or_equal passed incompatible thing");
 			}
 			return _boole_(_it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
@@ -713,7 +713,7 @@ class lake_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<random_access_const_iterator_data_a<ITERATOR>>(it))
 			{
-				throw dis("strange::lake::const_iterator >= passed incompatible thing");
+				throw dis("strange::brook::const_iterator >= passed incompatible thing");
 			}
 			return _it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
@@ -736,58 +736,58 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 	protected:
 		ITERATOR _it;
-		lake_a<> _lake;
+		brook_a<> _brook;
 		mutable number_data_a<PRIMITIVE> _number;
 
 		template <typename F>
-		inline const_iterator_t(lake_a<> const& lake, F&& it)
+		inline const_iterator_t(brook_a<> const& brook, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
-			, _lake(lake, true)
+			, _brook(brook, true)
 			, _number{ number_t<PRIMITIVE>::val_() }
 		{}
 	};
 
 public: ___STRANGE_COLLECTION___
-	using std_vector_number = std::vector<PRIMITIVE>;
+	using std_deque_number = std::deque<PRIMITIVE>;
 
 	// construction
-	static inline lake_data_a<PRIMITIVE> val__(range_a<> const& range)
+	static inline brook_data_a<PRIMITIVE> val__(range_a<> const& range)
 	{
-		return cast_<lake_data_a<PRIMITIVE>>(val_() += range);
+		return cast_<brook_data_a<PRIMITIVE>>(val_() += range);
 	}
 
-	static inline lake_data_a<PRIMITIVE> val_()
+	static inline brook_data_a<PRIMITIVE> val_()
 	{
-		return val(std_vector_number{});
-	}
-
-	template <typename F>
-	static inline lake_data_a<PRIMITIVE> val(F&& init)
-	{
-		return lake_data_a<PRIMITIVE>{ lake_t{ std::forward<F>(init) } };
-	}
-
-	static inline lake_data_a<PRIMITIVE> ref__(range_a<> const& range)
-	{
-		return cast_<lake_data_a<PRIMITIVE>>(ref_() += range, true);
-	}
-
-	static inline lake_data_a<PRIMITIVE> ref_()
-	{
-		return ref(std_vector_number{});
+		return val(std_deque_number{});
 	}
 
 	template <typename F>
-	static inline lake_data_a<PRIMITIVE> ref(F&& init)
+	static inline brook_data_a<PRIMITIVE> val(F&& init)
 	{
-		return lake_data_a<PRIMITIVE>(lake_t{ std::forward<F>(init) }, true);
+		return brook_data_a<PRIMITIVE>{ brook_t{ std::forward<F>(init) } };
+	}
+
+	static inline brook_data_a<PRIMITIVE> ref__(range_a<> const& range)
+	{
+		return cast_<brook_data_a<PRIMITIVE>>(ref_() += range, true);
+	}
+
+	static inline brook_data_a<PRIMITIVE> ref_()
+	{
+		return ref(std_deque_number{});
+	}
+
+	template <typename F>
+	static inline brook_data_a<PRIMITIVE> ref(F&& init)
+	{
+		return brook_data_a<PRIMITIVE>(brook_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::lake");
+		static symbol_a<> TYPE = sym("strange::brook");
 		return TYPE;
 	}
 
@@ -805,26 +805,26 @@ public: ___STRANGE_COLLECTION___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<lake_data_a<PRIMITIVE>>(thing))
+		if (!check_<brook_data_a<PRIMITIVE>>(thing))
 		{
 			return false;
 		}
-		return _vector == cast_<lake_data_a<PRIMITIVE>>(thing).extract();
+		return _deque == cast_<brook_data_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<lake_data_a<PRIMITIVE>>(thing))
+		if (!check_<brook_data_a<PRIMITIVE>>(thing))
 		{
 			return true;
 		}
-		return _vector != cast_<lake_data_a<PRIMITIVE>>(thing).extract();
+		return _deque != cast_<brook_data_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
-		std::size_t seed = std::hash<std::size_t>{}(_vector.size());
-		for (auto item : _vector)
+		std::size_t seed = std::hash<std::size_t>{}(_deque.size());
+		for (auto item : _deque)
 		{
 			seed ^= std::hash<PRIMITIVE>{}(item) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
@@ -834,12 +834,12 @@ public: ___STRANGE_COLLECTION___
 	// range
 	inline random_access_const_iterator_a<> cbegin() const
 	{
-		return const_iterator_t<std_vector_number::const_iterator>::val(me_(), _vector.cbegin());
+		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> begin() const
 	{
-		return const_iterator_t<std_vector_number::const_iterator>::val(me_(), _vector.cbegin());
+		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cbegin());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -854,17 +854,17 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> begin()
 	{
-		return iterator_t<std_vector_number::iterator>::val(me_(), _vector.begin());
+		return iterator_t<std_deque_number::iterator>::val(me_(), _deque.begin());
 	}
 
 	inline random_access_const_iterator_a<> cend() const
 	{
-		return const_iterator_t<std_vector_number::const_iterator>::val(me_(), _vector.cend());
+		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cend());
 	}
 
 	inline random_access_const_iterator_a<> end() const
 	{
-		return const_iterator_t<std_vector_number::const_iterator>::val(me_(), _vector.cend());
+		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cend());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -879,7 +879,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> end()
 	{
-		return iterator_t<std_vector_number::iterator>::val(me_(), _vector.end());
+		return iterator_t<std_deque_number::iterator>::val(me_(), _deque.end());
 	}
 
 	// collection
@@ -911,7 +911,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (index >= 0 && index < size())
 		{
-			return _vector[std::size_t(index)];
+			return _deque[std::size_t(index)];
 		}
 		return PRIMITIVE{};
 	}
@@ -929,7 +929,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<number_a<>>(value))
 		{
-			throw dis("strange::lake::update passed non-number value");
+			throw dis("strange::brook::update passed non-number value");
 		}
 		return update(index, number_u<PRIMITIVE>::from_number(cast_<number_a<>>(value)));
 	}
@@ -947,9 +947,9 @@ public: ___STRANGE_COLLECTION___
 			{
 				if (index > siz)
 				{
-					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
+					_deque.resize(std::size_t(index) + 1, nothing_t<>::val_());
 				}
-				_vector[std::size_t(index)] = number;
+				_deque[std::size_t(index)] = number;
 			}
 		}
 	}
@@ -963,7 +963,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (!check_<number_a<>>(value))
 		{
-			throw dis("strange::lake::insert passed non-number value");
+			throw dis("strange::brook::insert passed non-number value");
 		}
 		return insert(index, number_u<PRIMITIVE>::from_number(cast_<number_a<>>(value)));
 	}
@@ -981,12 +981,12 @@ public: ___STRANGE_COLLECTION___
 			{
 				if (index > siz)
 				{
-					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
-					_vector[std::size_t(index)] = number;
+					_deque.resize(std::size_t(index) + 1, nothing_t<>::val_());
+					_deque[std::size_t(index)] = number;
 				}
 				else
 				{
-					_vector.insert(_vector.cbegin() + index, number);
+					_deque.insert(_deque.cbegin() + index, number);
 				}
 			}
 			return true;
@@ -1003,7 +1003,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (index >= 0 && index < size())
 		{
-			_vector.erase(_vector.cbegin() + index);
+			_deque.erase(_deque.cbegin() + index);
 			return true;
 		}
 		return false;
@@ -1011,56 +1011,66 @@ public: ___STRANGE_COLLECTION___
 
 	inline void clear()
 	{
-		_vector.clear();
+		_deque.clear();
 	}
 
 	inline int64_t size() const
 	{
-		return int64_t(_vector.size());
+		return int64_t(_deque.size());
 	}
 
 	inline bool empty() const
 	{
-		return _vector.empty();
+		return _deque.empty();
 	}
 
 	inline void push_front(any_a<> const& thing)
 	{
-		push_back(thing);
+		if (!check_<number_a<>>(thing))
+		{
+			throw dis("strange::brook::push_front passed non-number");
+		}
+		push_front(number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing)));
 	}
 
 	inline void push_front(PRIMITIVE number)
 	{
-		push_back(number);
+		_deque.push_front(number);
 	}
 
 	inline any_a<> pop_front_()
 	{
-		return pop_back_();
+		if (_deque.empty())
+		{
+			return nothing_t<>::val_();
+		}
+		return number_t<PRIMITIVE>::val(pop_front());
 	}
 
 	inline PRIMITIVE pop_front()
 	{
-		return pop_back();
+		PRIMITIVE number = _deque.back();
+		_deque.pop_front();
+		return number;
 	}
 
 	inline void push_back(any_a<> const& thing)
 	{
 		if (!check_<number_a<>>(thing))
 		{
-			throw dis("strange::lake::push_back passed non-number");
+			throw dis("strange::brook::push_back passed non-number");
 		}
 		push_back(number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing)));
 	}
 
 	inline void push_back(PRIMITIVE number)
 	{
-		_vector.push_back(number);
+		_deque.push_back(number);
 	}
 
 	inline any_a<> pop_back_()
 	{
-		if (_vector.empty())
+		if (_deque.empty())
 		{
 			return nothing_t<>::val_();
 		}
@@ -1069,16 +1079,16 @@ public: ___STRANGE_COLLECTION___
 
 	inline PRIMITIVE pop_back()
 	{
-		PRIMITIVE number = _vector.back();
-		_vector.pop_back();
+		PRIMITIVE number = _deque.back();
+		_deque.pop_back();
 		return number;
 	}
 
-	inline lake_t& operator+=(any_a<> const& range)
+	inline brook_t& operator+=(any_a<> const& range)
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis("strange::lake += passed non-range");
+			throw dis("strange::brook += passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
@@ -1087,11 +1097,11 @@ public: ___STRANGE_COLLECTION___
 		return *this;
 	}
 
-	inline lake_t& operator-=(any_a<> const& range)
+	inline brook_t& operator-=(any_a<> const& range)
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis("strange::lake -= passed non-range");
+			throw dis("strange::brook -= passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
@@ -1101,60 +1111,60 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// data
-	inline std_vector_number const& extract() const
+	inline std_deque_number const& extract() const
 	{
-		return _vector;
+		return _deque;
 	}
 
-	inline void mutate(std_vector_number const& data)
+	inline void mutate(std_deque_number const& data)
 	{
-		_vector = data;
+		_deque = data;
 	}
 
-	inline std_vector_number& reference()
+	inline std_deque_number& reference()
 	{
-		return _vector;
+		return _deque;
 	}
 
 protected:
-	std_vector_number _vector;
+	std_deque_number _deque;
 
 	template <typename F>
-	inline lake_t(F&& init)
+	inline brook_t(F&& init)
 		: something_t{}
-		, _vector{ std::forward<F>(init) }
+		, _deque{ std::forward<F>(init) }
 	{}
 };
 
-template <typename _ABSTRACTION_ = lake_data_a<int8_t>>
-using lake_int_8_t = lake_t<int8_t, _ABSTRACTION_>;
+template <typename _ABSTRACTION_ = brook_data_a<int8_t>>
+using brook_int_8_t = brook_t<int8_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<uint8_t>>
-using lake_uint_8_t = lake_t<uint8_t, _ABSTRACTION_>;
+template <typename _ABSTRACTION_ = brook_data_a<uint8_t>>
+using brook_uint_8_t = brook_t<uint8_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<int16_t>>
-using lake_int_16_t = lake_t<int16_t, _ABSTRACTION_>;
+template <typename _ABSTRACTION_ = brook_data_a<int16_t>>
+using brook_int_16_t = brook_t<int16_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<uint16_t>>
-using lake_uint_16_t = lake_t<uint16_t, _ABSTRACTION_>;
+template <typename _ABSTRACTION_ = brook_data_a<uint16_t>>
+using brook_uint_16_t = brook_t<uint16_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<int32_t>>
-using lake_int_32_t = lake_t<int32_t, _ABSTRACTION_>;
+template <typename _ABSTRACTION_ = brook_data_a<int32_t>>
+using brook_int_32_t = brook_t<int32_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<uint32_t>>
-using lake_uint_32_t = lake_t<uint32_t, _ABSTRACTION_>;
+template <typename _ABSTRACTION_ = brook_data_a<uint32_t>>
+using brook_uint_32_t = brook_t<uint32_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<int64_t>>
-using lake_int_64_t = lake_t<int64_t, _ABSTRACTION_>;
+template <typename _ABSTRACTION_ = brook_data_a<int64_t>>
+using brook_int_64_t = brook_t<int64_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<uint64_t>>
-using lake_uint_64_t = lake_t<uint64_t, _ABSTRACTION_>;
+template <typename _ABSTRACTION_ = brook_data_a<uint64_t>>
+using brook_uint_64_t = brook_t<uint64_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<float>>
-using lake_float_32_t = lake_t<float, _ABSTRACTION_>;
+template <typename _ABSTRACTION_ = brook_data_a<float>>
+using brook_float_32_t = brook_t<float, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<double>>
-using lake_float_64_t = lake_t<double, _ABSTRACTION_>;
+template <typename _ABSTRACTION_ = brook_data_a<double>>
+using brook_float_64_t = brook_t<double, _ABSTRACTION_>;
 
 } // namespace strange
 
