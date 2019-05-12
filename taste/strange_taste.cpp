@@ -44,9 +44,11 @@ TEST(TestCaseName, ForLoop)
 	any_a<> h = native_extraction_t<range_a<>>::val(&range_a<>::cbegin__);
 	any_a<> i = native_mutation_t<flock_a<>>::val(&flock_a<>::begin__);
 
+	ordered_shoal_a<> ordered_shoal = ordered_shoal_t<>::val_();
 	unordered_shoal_a<> unordered_shoal = unordered_shoal_t<>::val_();
 	flock_a<> flock = flock_t<>::val_();
 	squad_a<> squad = squad_t<>::val_();
+	ordered_herd_a<> ordered_herd = ordered_herd_t<>::val_();
 	unordered_herd_a<> unordered_herd = unordered_herd_t<>::val_();
 
 	try

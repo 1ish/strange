@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_UNORDERED_HERD_T_H
-#define COM_ONEISH_STRANGE_UNORDERED_HERD_T_H
+#ifndef COM_ONEISH_STRANGE_ORDERED_HERD_T_H
+#define COM_ONEISH_STRANGE_ORDERED_HERD_T_H
 
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = unordered_herd_a<>>
-class unordered_herd_t : public something_t<_ABSTRACTION_>
+template <typename _ABSTRACTION_ = ordered_herd_a<>>
+class ordered_herd_t : public something_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_const_iterator_data_a<ITERATOR>>
 	class const_iterator_t : public something_t<_ABSTRACTION_>
@@ -13,21 +13,21 @@ class unordered_herd_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline bidirectional_const_iterator_data_a<ITERATOR> val(unordered_herd_a<> const& unordered_herd, F&& it)
+		static inline bidirectional_const_iterator_data_a<ITERATOR> val(ordered_herd_a<> const& ordered_herd, F&& it)
 		{
-			return bidirectional_const_iterator_data_a<ITERATOR>{ const_iterator_t(unordered_herd, std::forward<F>(it)) };
+			return bidirectional_const_iterator_data_a<ITERATOR>{ const_iterator_t(ordered_herd, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline bidirectional_const_iterator_data_a<ITERATOR> ref(unordered_herd_a<> const& unordered_herd, F&& it)
+		static inline bidirectional_const_iterator_data_a<ITERATOR> ref(ordered_herd_a<> const& ordered_herd, F&& it)
 		{
-			return bidirectional_const_iterator_data_a<ITERATOR>(const_iterator_t(unordered_herd, std::forward<F>(it)), true);
+			return bidirectional_const_iterator_data_a<ITERATOR>(const_iterator_t(ordered_herd, std::forward<F>(it)), true);
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::unordered_herd::const_iterator");
+			static symbol_a<> TYPE = sym("strange::ordered_herd::const_iterator");
 			return TYPE;
 		}
 
@@ -143,56 +143,56 @@ class unordered_herd_t : public something_t<_ABSTRACTION_>
 
 	protected:
 		ITERATOR _it;
-		unordered_herd_a<> _unordered_herd;
+		ordered_herd_a<> _ordered_herd;
 
 		template <typename F>
-		inline const_iterator_t(unordered_herd_a<> const& unordered_herd, F&& it)
+		inline const_iterator_t(ordered_herd_a<> const& ordered_herd, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
-			, _unordered_herd(unordered_herd, true)
+			, _ordered_herd(ordered_herd, true)
 		{}
 	};
 
 public: ___STRANGE_COLLECTION___
-	using std_unordered_set_any = std::unordered_set<any_a<>, any_a<>::hash_f>;
+	using std_set_any = std::set<any_a<>>;
 
 	// construction
-	static inline unordered_herd_a<> val__(range_a<> const& range)
+	static inline ordered_herd_a<> val__(range_a<> const& range)
 	{
-		return cast_<unordered_herd_a<>>(val_() += range);
+		return cast_<ordered_herd_a<>>(val_() += range);
 	}
 
-	static inline unordered_herd_a<> val_()
+	static inline ordered_herd_a<> val_()
 	{
-		return val(std_unordered_set_any{});
-	}
-
-	template <typename F>
-	static inline unordered_herd_a<> val(F&& init)
-	{
-		return unordered_herd_a<>{ unordered_herd_t{ std::forward<F>(init) } };
-	}
-
-	static inline unordered_herd_a<> ref__(range_a<> const& range)
-	{
-		return cast_<unordered_herd_a<>>(ref_() += range, true);
-	}
-
-	static inline unordered_herd_a<> ref_()
-	{
-		return ref(std_unordered_set_any{});
+		return val(std_set_any{});
 	}
 
 	template <typename F>
-	static inline unordered_herd_a<> ref(F&& init)
+	static inline ordered_herd_a<> val(F&& init)
 	{
-		return unordered_herd_a<>(unordered_herd_t{ std::forward<F>(init) }, true);
+		return ordered_herd_a<>{ ordered_herd_t{ std::forward<F>(init) } };
+	}
+
+	static inline ordered_herd_a<> ref__(range_a<> const& range)
+	{
+		return cast_<ordered_herd_a<>>(ref_() += range, true);
+	}
+
+	static inline ordered_herd_a<> ref_()
+	{
+		return ref(std_set_any{});
+	}
+
+	template <typename F>
+	static inline ordered_herd_a<> ref(F&& init)
+	{
+		return ordered_herd_a<>(ordered_herd_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::unordered_herd");
+		static symbol_a<> TYPE = sym("strange::ordered_herd");
 		return TYPE;
 	}
 
@@ -210,27 +210,26 @@ public: ___STRANGE_COLLECTION___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<unordered_herd_a<>>(thing))
+		if (!check_<ordered_herd_a<>>(thing))
 		{
 			return false;
 		}
-		return _set == cast_<unordered_herd_a<>>(thing).extract();
+		return _set == cast_<ordered_herd_a<>>(thing).extract();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<unordered_herd_a<>>(thing))
+		if (!check_<ordered_herd_a<>>(thing))
 		{
 			return true;
 		}
-		return _set != cast_<unordered_herd_a<>>(thing).extract();
+		return _set != cast_<ordered_herd_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
-		std::set<any_a<>> const ordered(_set.cbegin(), _set.cend());
 		std::size_t seed = std::hash<std::size_t>{}(_set.size());
-		for (auto const& item : ordered)
+		for (auto const& item : _set)
 		{
 			seed ^= item.hash() + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
@@ -240,28 +239,28 @@ public: ___STRANGE_COLLECTION___
 	// range
 	inline bidirectional_const_iterator_a<> cbegin() const
 	{
-		return const_iterator_t<std_unordered_set_any::const_iterator>::val(me_(), _set.cbegin());
+		return const_iterator_t<std_set_any::const_iterator>::val(me_(), _set.cbegin());
 	}
 
 	inline bidirectional_const_iterator_a<> begin() const
 	{
-		return const_iterator_t<std_unordered_set_any::const_iterator>::val(me_(), _set.cbegin());
+		return const_iterator_t<std_set_any::const_iterator>::val(me_(), _set.cbegin());
 	}
 
 	inline bidirectional_const_iterator_a<> cend() const
 	{
-		return const_iterator_t<std_unordered_set_any::const_iterator>::val(me_(), _set.cend());
+		return const_iterator_t<std_set_any::const_iterator>::val(me_(), _set.cend());
 	}
 
 	inline bidirectional_const_iterator_a<> end() const
 	{
-		return const_iterator_t<std_unordered_set_any::const_iterator>::val(me_(), _set.cend());
+		return const_iterator_t<std_set_any::const_iterator>::val(me_(), _set.cend());
 	}
 
 	// collection
 	inline bool has(any_a<> const& key) const
 	{
-		std_unordered_set_any::const_iterator const it = _set.find(key);
+		std_set_any::const_iterator const it = _set.find(key);
 		return it != _set.cend();
 	}
 
@@ -272,7 +271,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> at_(any_a<> const& key) const
 	{
-		std_unordered_set_any::const_iterator const it = _set.find(key);
+		std_set_any::const_iterator const it = _set.find(key);
 		if (it == _set.cend())
 		{
 			return nothing_t<>::val_();
@@ -282,7 +281,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool at(std::string const& s) const
 	{
-		std_unordered_set_any::const_iterator const it = _set.find(sym(s));
+		std_set_any::const_iterator const it = _set.find(sym(s));
 		return it != _set.cend();
 	}
 
@@ -344,7 +343,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> pop_back_()
 	{
-		std_unordered_set_any::const_iterator const it = _set.cbegin();
+		std_set_any::const_iterator const it = _set.cbegin();
 		if (it == _set.cend())
 		{
 			return nothing_t<>::val_();
@@ -354,11 +353,11 @@ public: ___STRANGE_COLLECTION___
 		return result;
 	}
 
-	inline unordered_herd_t& operator+=(any_a<> const& range)
+	inline ordered_herd_t& operator+=(any_a<> const& range)
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis("strange::unordered_herd += passed non-range");
+			throw dis("strange::ordered_herd += passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
@@ -367,11 +366,11 @@ public: ___STRANGE_COLLECTION___
 		return *this;
 	}
 
-	inline unordered_herd_t& operator-=(any_a<> const& range)
+	inline ordered_herd_t& operator-=(any_a<> const& range)
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis("strange::unordered_herd -= passed non-range");
+			throw dis("strange::ordered_herd -= passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
@@ -381,26 +380,26 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// data
-	inline std_unordered_set_any const& extract() const
+	inline std_set_any const& extract() const
 	{
 		return _set;
 	}
 
-	inline void mutate(std_unordered_set_any const& data)
+	inline void mutate(std_set_any const& data)
 	{
 		_set = data;
 	}
 
-	inline std_unordered_set_any& reference()
+	inline std_set_any& reference()
 	{
 		return _set;
 	}
 
 protected:
-	std_unordered_set_any _set;
+	std_set_any _set;
 
 	template <typename F>
-	inline unordered_herd_t(F&& init)
+	inline ordered_herd_t(F&& init)
 		: something_t{}
 		, _set{ std::forward<F>(init) }
 	{}

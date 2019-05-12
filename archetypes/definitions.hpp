@@ -10,7 +10,9 @@ namespace std
 	class string;
 	template <typename T> class vector;
 	template <typename T> class deque;
+	template <typename T> class set;
 	template <typename T, typename H> class unordered_set;
+	template <typename K, typename V> class map;
 	template <typename K, typename V, typename H> class unordered_map;
 }
 
