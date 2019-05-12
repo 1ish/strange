@@ -39,7 +39,7 @@ class shoal_a;
 template <typename random_access_iterator_a = random_access_iterator_a<>>
 class flock_a;
 
-template <typename random_access_iterator_a = random_access_iterator_a<>>
+template <typename _1_ = void>
 class squad_a;
 
 template <typename _1_ = void>
@@ -123,9 +123,6 @@ class random_access_iterator_data_a;
 #include "strange_flock_a.h"
 
 #define ___derived___ collection_a<>
-#include "strange_squad_a.h"
-
-#define ___derived___ collection_a<>
 #include "strange_herd_a.h"
 
 #include "strange_data_a.h"
@@ -137,6 +134,9 @@ class random_access_iterator_data_a;
 
 #define ___derived___ collection_a<>
 #include "strange_inventory_a.h"
+
+#define ___derived___ inventory_a<>
+#include "strange_squad_a.h"
 
 #define ___derived___ inventory_a<>
 #include "strange_lake_a.h"
