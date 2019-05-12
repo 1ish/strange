@@ -11,23 +11,37 @@
 namespace strange
 {
 
-template <typename number_data_a_int8, typename number_data_a_int64>
+template <typename number_data_a_int8, typename number_data_a_int64, typename lake_a_int8>
 class river_a
 {
 public:
 	// river input
+	any_a<> get__(range_a<> const& _);
+	number_data_a_int8 get_();
 	int8_t get();
 	
+	any_a<> peek__(range_a<> const& _);
+	number_data_a_int8 peek_();
 	int8_t peek();
 
+	any_a<> unget__(range_a<> const& _);
+	any_a<> unget_();
 	void unget();
 
-	void putback(int8_t char8);
+	any_a<> putback__(range_a<> const& range);
+	any_a<> putback_(number_data_a_int8 const& int_8);
+	void putback(int8_t int_8);
 
+	any_a<> getline__(range_a<> const& range);
+	lake_a_int8 getline_(number_data_a_int64 const& count, number_data_a_int8 const& delim);
 	std::vector<int8_t> getline(int64_t count = -1, int8_t delim = '\n');
 
+	any_a<> ignore__(range_a<> const& range);
+	any_a<> ignore_(number_data_a_int64 const& count);
 	void ignore(int64_t count = 1);
 
+	any_a<> read__(range_a<> const& range);
+	lake_a_int8 read_(number_data_a_int64 const& count);
 	std::vector<int8_t> read(int64_t count = -1);
 
 	// river output
