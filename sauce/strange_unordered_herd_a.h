@@ -1,7 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_UNORDERED_HERD_A_H
 #define COM_ONEISH_STRANGE_UNORDERED_HERD_A_H
 
- //#include "any.hpp"
+ //#include "any_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -25,7 +25,7 @@ namespace strange {
     	inline unordered_herd_a operator++(int)
     	{
     		assert(handle_);
-    		% struct_name% result = *this;
+    		unordered_herd_a result = *this;
     		write().operator++();
     		return result;
     	}
@@ -40,7 +40,7 @@ namespace strange {
     	inline unordered_herd_a operator--(int)
     	{
     		assert(handle_);
-    		% struct_name% result = *this;
+    		unordered_herd_a result = *this;
     		write().operator--();
     		return result;
     	}
@@ -80,14 +80,6 @@ namespace strange {
     		return *this;
     	}
     
-     inline bool has ( std :: string const & s ) const
-     { assert(handle_); return read().has(s ); }
-     inline bool at ( std :: string const & s ) const
-     { assert(handle_); return read().at(s ); }
-     inline bool insert ( std :: string const & s )
-     { assert(handle_); return write().insert(s ); }
-     inline bool erase ( std :: string const & s )
-     { assert(handle_); return write().erase(s ); }
      inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const
      { assert(handle_); return read().extract( ); }
      inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
@@ -96,43 +88,31 @@ namespace strange {
      { assert(handle_); return write().reference( ); }
     
     private:
-    	struct ___finale_handle_base___ : ___dderived_handle_base___
+    	struct ___finale_handle_base___ : ___ddderived_handle_base___
     	{
-      virtual inline bool has ( std :: string const & s ) const = 0;
-      virtual inline bool at ( std :: string const & s ) const = 0;
-      virtual inline bool insert ( std :: string const & s ) = 0;
-      virtual inline bool erase ( std :: string const & s ) = 0;
       virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const = 0;
       virtual inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data ) = 0;
       virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference ( ) = 0;
     	};
     
     	template <typename ___TTT___>
-    	struct ___finale_handle_final___ final : ___dderived_handle___<___TTT___, ___finale_handle_base___>
+    	struct ___finale_handle_final___ final : ___ddderived_handle___<___TTT___, ___finale_handle_base___>
     	{
     		template <typename ___UUU___ = ___TTT___>
     		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
-    			: ___dderived_handle___<___TTT___, ___finale_handle_base___>{ value }
+    			: ___ddderived_handle___<___TTT___, ___finale_handle_base___>{ value }
     		{}
     
     		template <typename ___UUU___ = ___TTT___>
     		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
-    			: ___dderived_handle___<___TTT___, ___finale_handle_base___>{ std::move(value) }
+    			: ___ddderived_handle___<___TTT___, ___finale_handle_base___>{ std::move(value) }
     		{}
     
     		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
     		{
-    			return std::make_shared<___finale_handle_final___>(___dderived_handle___<___TTT___, ___finale_handle_base___>::value_);
+    			return std::make_shared<___finale_handle_final___>(___ddderived_handle___<___TTT___, ___finale_handle_base___>::value_);
     		}
     
-      virtual inline bool has ( std :: string const & s ) const
-      { return value_.has(s ); }
-      virtual inline bool at ( std :: string const & s ) const
-      { return value_.at(s ); }
-      virtual inline bool insert ( std :: string const & s )
-      { return value_.insert(s ); }
-      virtual inline bool erase ( std :: string const & s )
-      { return value_.erase(s ); }
       virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const
       { return value_.extract( ); }
       virtual inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )

@@ -26,7 +26,7 @@ namespace strange {
     	inline number_a operator++(int)
     	{
     		assert(handle_);
-    		% struct_name% result = *this;
+    		number_a result = *this;
     		write().operator++();
     		return result;
     	}
@@ -41,7 +41,7 @@ namespace strange {
     	inline number_a operator--(int)
     	{
     		assert(handle_);
-    		% struct_name% result = *this;
+    		number_a result = *this;
     		write().operator--();
     		return result;
     	}

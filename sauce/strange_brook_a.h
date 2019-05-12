@@ -25,7 +25,7 @@ namespace strange {
     	inline brook_a operator++(int)
     	{
     		assert(handle_);
-    		% struct_name% result = *this;
+    		brook_a result = *this;
     		write().operator++();
     		return result;
     	}
@@ -40,7 +40,7 @@ namespace strange {
     	inline brook_a operator--(int)
     	{
     		assert(handle_);
-    		% struct_name% result = *this;
+    		brook_a result = *this;
     		write().operator--();
     		return result;
     	}

@@ -1,5 +1,5 @@
-#ifndef COM_ONEISH_STRANGE_INVENTORY_A_H
-#define COM_ONEISH_STRANGE_INVENTORY_A_H
+#ifndef COM_ONEISH_STRANGE_SHOAL_A_H
+#define COM_ONEISH_STRANGE_SHOAL_A_H
 
  //#include "any_forward.hpp"
  //#include "range_forward.hpp"
@@ -12,112 +12,112 @@
 
 
 namespace strange {
-    template < typename random_access_iterator_a >
-    class inventory_a : public ___derived___
+    template < typename bidirectional_iterator_a >
+    class shoal_a : public ___derived___
     {
     public:
-    	inline inventory_a& operator++()
+    	inline shoal_a& operator++()
     	{
     		assert(handle_);
     		write().operator++();
     		return *this;
     	}
     
-    	inline inventory_a operator++(int)
+    	inline shoal_a operator++(int)
     	{
     		assert(handle_);
-    		inventory_a result = *this;
+    		shoal_a result = *this;
     		write().operator++();
     		return result;
     	}
     
-    	inline inventory_a& operator--()
+    	inline shoal_a& operator--()
     	{
     		assert(handle_);
     		write().operator--();
     		return *this;
     	}
     
-    	inline inventory_a operator--(int)
+    	inline shoal_a operator--(int)
     	{
     		assert(handle_);
-    		inventory_a result = *this;
+    		shoal_a result = *this;
     		write().operator--();
     		return result;
     	}
     
-    	inline inventory_a& operator+=(___root___ const& other)
+    	inline shoal_a& operator+=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator+=(other);
     		return *this;
     	}
     
-    	inline inventory_a& operator-=(___root___ const& other)
+    	inline shoal_a& operator-=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator-=(other);
     		return *this;
     	}
     
-    	inline inventory_a& operator*=(___root___ const& other)
+    	inline shoal_a& operator*=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator*=(other);
     		return *this;
     	}
     
-    	inline inventory_a& operator/=(___root___ const& other)
+    	inline shoal_a& operator/=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator/=(other);
     		return *this;
     	}
     
-    	inline inventory_a& operator%=(___root___ const& other)
+    	inline shoal_a& operator%=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator%=(other);
     		return *this;
     	}
     
-     inline bool has ( int64_t index ) const
-     { assert(handle_); return read().has(index ); }
-     inline any_a < > at ( int64_t index ) const
-     { assert(handle_); return read().at(index ); }
-     inline void update ( int64_t index , any_a < > const & value )
-     { assert(handle_); write().update(index, value ); }
-     inline bool insert ( int64_t index , any_a < > const & value )
-     { assert(handle_); return write().insert(index, value ); }
-     inline bool erase ( int64_t index )
-     { assert(handle_); return write().erase(index ); }
+     inline bool has ( std :: string const & s ) const
+     { assert(handle_); return read().has(s ); }
+     inline any_a < > at ( std :: string const & s ) const
+     { assert(handle_); return read().at(s ); }
+     inline void update ( std :: string const & s , any_a < > const & value )
+     { assert(handle_); write().update(s, value ); }
+     inline bool insert ( std :: string const & s , any_a < > const & value )
+     { assert(handle_); return write().insert(s, value ); }
+     inline bool erase ( std :: string const & s )
+     { assert(handle_); return write().erase(s ); }
      inline any_a < > begin__ ( range_a < > const & _ )
      { assert(handle_); return write().begin__(_ ); }
-     inline random_access_iterator_a begin_ ( )
+     inline bidirectional_iterator_a begin_ ( )
      { assert(handle_); return write().begin_( ); }
-     inline random_access_iterator_a begin ( )
+     inline bidirectional_iterator_a begin ( )
      { assert(handle_); return write().begin( ); }
      inline any_a < > end__ ( range_a < > const & _ )
      { assert(handle_); return write().end__(_ ); }
-     inline random_access_iterator_a end_ ( )
+     inline bidirectional_iterator_a end_ ( )
      { assert(handle_); return write().end_( ); }
-     inline random_access_iterator_a end ( )
+     inline bidirectional_iterator_a end ( )
      { assert(handle_); return write().end( ); }
     
     protected:
     	struct ___ddderived_handle_base___ : ___dderived_handle_base___
     	{
-      virtual inline bool has ( int64_t index ) const = 0;
-      virtual inline any_a < > at ( int64_t index ) const = 0;
-      virtual inline void update ( int64_t index , any_a < > const & value ) = 0;
-      virtual inline bool insert ( int64_t index , any_a < > const & value ) = 0;
-      virtual inline bool erase ( int64_t index ) = 0;
+      virtual inline bool has ( std :: string const & s ) const = 0;
+      virtual inline any_a < > at ( std :: string const & s ) const = 0;
+      virtual inline void update ( std :: string const & s , any_a < > const & value ) = 0;
+      virtual inline bool insert ( std :: string const & s , any_a < > const & value ) = 0;
+      virtual inline bool erase ( std :: string const & s ) = 0;
       virtual inline any_a < > begin__ ( range_a < > const & _ ) = 0;
-      virtual inline random_access_iterator_a begin_ ( ) = 0;
-      virtual inline random_access_iterator_a begin ( ) = 0;
+      virtual inline bidirectional_iterator_a begin_ ( ) = 0;
+      virtual inline bidirectional_iterator_a begin ( ) = 0;
       virtual inline any_a < > end__ ( range_a < > const & _ ) = 0;
-      virtual inline random_access_iterator_a end_ ( ) = 0;
-      virtual inline random_access_iterator_a end ( ) = 0;
+      virtual inline bidirectional_iterator_a end_ ( ) = 0;
+      virtual inline bidirectional_iterator_a end ( ) = 0;
     	};
     
     	template <typename ___TTT___, typename ___DDDHB___ = ___ddderived_handle_base___>
@@ -133,27 +133,27 @@ namespace strange {
     			: ___dderived_handle___<___TTT___, ___DDDHB___>{ std::move(value) }
     		{}
     
-      virtual inline bool has ( int64_t index ) const
-      { return value_.has(index ); }
-      virtual inline any_a < > at ( int64_t index ) const
-      { return value_.at(index ); }
-      virtual inline void update ( int64_t index , any_a < > const & value )
-      { value_.update(index, value ); }
-      virtual inline bool insert ( int64_t index , any_a < > const & value )
-      { return value_.insert(index, value ); }
-      virtual inline bool erase ( int64_t index )
-      { return value_.erase(index ); }
+      virtual inline bool has ( std :: string const & s ) const
+      { return value_.has(s ); }
+      virtual inline any_a < > at ( std :: string const & s ) const
+      { return value_.at(s ); }
+      virtual inline void update ( std :: string const & s , any_a < > const & value )
+      { value_.update(s, value ); }
+      virtual inline bool insert ( std :: string const & s , any_a < > const & value )
+      { return value_.insert(s, value ); }
+      virtual inline bool erase ( std :: string const & s )
+      { return value_.erase(s ); }
       virtual inline any_a < > begin__ ( range_a < > const & _ )
       { return value_.begin__(_ ); }
-      virtual inline random_access_iterator_a begin_ ( )
+      virtual inline bidirectional_iterator_a begin_ ( )
       { return value_.begin_( ); }
-      virtual inline random_access_iterator_a begin ( )
+      virtual inline bidirectional_iterator_a begin ( )
       { return value_.begin( ); }
       virtual inline any_a < > end__ ( range_a < > const & _ )
       { return value_.end__(_ ); }
-      virtual inline random_access_iterator_a end_ ( )
+      virtual inline bidirectional_iterator_a end_ ( )
       { return value_.end_( ); }
-      virtual inline random_access_iterator_a end ( )
+      virtual inline bidirectional_iterator_a end ( )
       { return value_.end( ); }
     	};
     
@@ -211,12 +211,12 @@ namespace strange {
     	}
     
     	template <typename ___TTT___>
-    	friend inline bool check_(inventory_a<> const& value) noexcept;
+    	friend inline bool check_(shoal_a<> const& value) noexcept;
     
     public:
     	static inline char const* ___abstraction_name___() noexcept
     	{
-    		return "inventory_a";
+    		return "shoal_a";
     	}
     
     	static inline bool ___check___(std::shared_ptr<___root_handle_base___>const & handle) noexcept
@@ -224,52 +224,52 @@ namespace strange {
     		return bool(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
     	}
     
-    	inline inventory_a() = default;
+    	inline shoal_a() = default;
     
-    	explicit inline inventory_a(bool reference) noexcept
+    	explicit inline shoal_a(bool reference) noexcept
     		: ___derived___{ reference }
     	{}
     
-    	inline inventory_a(inventory_a const& other, bool reference) noexcept
+    	inline shoal_a(shoal_a const& other, bool reference) noexcept
     		: ___derived___(other, reference)
     	{}
     
-    	inline inventory_a(inventory_a&& other, bool reference) noexcept
+    	inline shoal_a(shoal_a&& other, bool reference) noexcept
     		: ___derived___(std::move(other), reference)
     	{}
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	explicit inline inventory_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
+    	explicit inline shoal_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
     		: ___derived___(handle, reference)
     	{
     		if (!std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
     		{
-    			throw dis("inventory_a constructor failed to cast from base to ddderived");
+    			throw dis("shoal_a constructor failed to cast from base to ddderived");
     		}
     	}
     #else
     	template <typename ___TTT___>
-    	explicit inline inventory_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
+    	explicit inline shoal_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
     		: ___derived___(handle, reference)
     	{
     		assert(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
     	}
     #endif
     
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<inventory_a, std::decay_t<___TTT___>>::value>>
-    	explicit inline inventory_a(___TTT___ value, bool reference = false) noexcept
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<shoal_a, std::decay_t<___TTT___>>::value>>
+    	explicit inline shoal_a(___TTT___ value, bool reference = false) noexcept
     		: ___derived___(std::make_shared<___ddderived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
     			reference)
     	{}
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	inline inventory_a& operator=(std::shared_ptr<___TTT___> const& handle)
+    	inline shoal_a& operator=(std::shared_ptr<___TTT___> const& handle)
     	{
     		if (!std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
     		{
-    			throw dis("inventory_a assignment failed to cast from base to ddderived");
+    			throw dis("shoal_a assignment failed to cast from base to ddderived");
     		}
     		handle_ = handle;
     		handle_->___weak___(handle_);
@@ -277,7 +277,7 @@ namespace strange {
     	}
     #else
     	template <typename ___TTT___>
-    	inline inventory_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+    	inline shoal_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
     	{
     		assert(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
     		handle_ = handle;
@@ -286,10 +286,10 @@ namespace strange {
     	}
     #endif
     
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<inventory_a, std::decay_t<___TTT___>>::value>>
-    	inline inventory_a& operator=(___TTT___ value) noexcept
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<shoal_a, std::decay_t<___TTT___>>::value>>
+    	inline shoal_a& operator=(___TTT___ value) noexcept
     	{
-    		inventory_a temp{ std::move(value) };
+    		shoal_a temp{ std::move(value) };
     		std::swap(temp.handle_, handle_);
     		handle_->___weak___(handle_);
     		return *this;
@@ -297,7 +297,7 @@ namespace strange {
     };
     
     template <typename ___TTT___>
-    inline bool check_(inventory_a<> const& value) noexcept
+    inline bool check_(shoal_a<> const& value) noexcept
     {
     	return ___TTT___::___check___(value.handle_);
     }

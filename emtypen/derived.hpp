@@ -11,7 +11,7 @@ public:
 	inline %struct_name% operator++(int)
 	{
 		assert(handle_);
-		% struct_name% result = *this;
+		%struct_name% result = *this;
 		write().operator++();
 		return result;
 	}
@@ -26,7 +26,7 @@ public:
 	inline %struct_name% operator--(int)
 	{
 		assert(handle_);
-		% struct_name% result = *this;
+		%struct_name% result = *this;
 		write().operator--();
 		return result;
 	}
