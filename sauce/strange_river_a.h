@@ -123,6 +123,30 @@ namespace strange {
      { assert(handle_); return write().read_(count ); }
      std :: vector < int8_t > read ( int64_t count = - 1 )
      { assert(handle_); return write().read(count ); }
+     any_a < > tellg__ ( range_a < > const & range ) const
+     { assert(handle_); return read().tellg__(range ); }
+     number_data_a_int64 tellg_ ( ) const
+     { assert(handle_); return read().tellg_( ); }
+     int64_t tellg ( ) const
+     { assert(handle_); return read().tellg( ); }
+     any_a < > seekg_beg__ ( range_a < > const & range )
+     { assert(handle_); return write().seekg_beg__(range ); }
+     any_a < > seekg_beg_ ( number_data_a_int64 const & pos )
+     { assert(handle_); return write().seekg_beg_(pos ); }
+     void seekg_beg ( int64_t pos )
+     { assert(handle_); write().seekg_beg(pos ); }
+     any_a < > seekg_end__ ( range_a < > const & range )
+     { assert(handle_); return write().seekg_end__(range ); }
+     any_a < > seekg_end_ ( number_data_a_int64 const & pos )
+     { assert(handle_); return write().seekg_end_(pos ); }
+     void seekg_end ( int64_t pos )
+     { assert(handle_); write().seekg_end(pos ); }
+     any_a < > seekg_cur__ ( range_a < > const & range )
+     { assert(handle_); return write().seekg_cur__(range ); }
+     any_a < > seekg_cur_ ( number_data_a_int64 const & pos )
+     { assert(handle_); return write().seekg_cur_(pos ); }
+     void seekg_cur ( int64_t pos )
+     { assert(handle_); write().seekg_cur(pos ); }
     
     protected:
     	struct ___dderived_handle_base___ : ___derived_handle_base___
@@ -148,6 +172,18 @@ namespace strange {
       virtual any_a < > read__ ( range_a < > const & range ) = 0;
       virtual lake_a_int8 read_ ( number_data_a_int64 const & count ) = 0;
       virtual std :: vector < int8_t > read ( int64_t count = - 1 ) = 0;
+      virtual any_a < > tellg__ ( range_a < > const & range ) const = 0;
+      virtual number_data_a_int64 tellg_ ( ) const = 0;
+      virtual int64_t tellg ( ) const = 0;
+      virtual any_a < > seekg_beg__ ( range_a < > const & range ) = 0;
+      virtual any_a < > seekg_beg_ ( number_data_a_int64 const & pos ) = 0;
+      virtual void seekg_beg ( int64_t pos ) = 0;
+      virtual any_a < > seekg_end__ ( range_a < > const & range ) = 0;
+      virtual any_a < > seekg_end_ ( number_data_a_int64 const & pos ) = 0;
+      virtual void seekg_end ( int64_t pos ) = 0;
+      virtual any_a < > seekg_cur__ ( range_a < > const & range ) = 0;
+      virtual any_a < > seekg_cur_ ( number_data_a_int64 const & pos ) = 0;
+      virtual void seekg_cur ( int64_t pos ) = 0;
     	};
     
     	template <typename ___TTT___, typename ___DDHB___ = ___dderived_handle_base___>
@@ -205,6 +241,30 @@ namespace strange {
       { return value_.read_(count ); }
       virtual std :: vector < int8_t > read ( int64_t count = - 1 )
       { return value_.read(count ); }
+      virtual any_a < > tellg__ ( range_a < > const & range ) const
+      { return value_.tellg__(range ); }
+      virtual number_data_a_int64 tellg_ ( ) const
+      { return value_.tellg_( ); }
+      virtual int64_t tellg ( ) const
+      { return value_.tellg( ); }
+      virtual any_a < > seekg_beg__ ( range_a < > const & range )
+      { return value_.seekg_beg__(range ); }
+      virtual any_a < > seekg_beg_ ( number_data_a_int64 const & pos )
+      { return value_.seekg_beg_(pos ); }
+      virtual void seekg_beg ( int64_t pos )
+      { value_.seekg_beg(pos ); }
+      virtual any_a < > seekg_end__ ( range_a < > const & range )
+      { return value_.seekg_end__(range ); }
+      virtual any_a < > seekg_end_ ( number_data_a_int64 const & pos )
+      { return value_.seekg_end_(pos ); }
+      virtual void seekg_end ( int64_t pos )
+      { value_.seekg_end(pos ); }
+      virtual any_a < > seekg_cur__ ( range_a < > const & range )
+      { return value_.seekg_cur__(range ); }
+      virtual any_a < > seekg_cur_ ( number_data_a_int64 const & pos )
+      { return value_.seekg_cur_(pos ); }
+      virtual void seekg_cur ( int64_t pos )
+      { value_.seekg_cur(pos ); }
     	};
     
     	template <typename ___TTT___, typename ___DDHB___>

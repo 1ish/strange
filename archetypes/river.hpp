@@ -44,6 +44,22 @@ public:
 	lake_a_int8 read_(number_data_a_int64 const& count);
 	std::vector<int8_t> read(int64_t count = -1);
 
+	any_a<> tellg__(range_a<> const& range) const;
+	number_data_a_int64 tellg_() const;
+	int64_t tellg() const;
+
+	any_a<> seekg_beg__(range_a<> const& range);
+	any_a<> seekg_beg_(number_data_a_int64 const& pos);
+	void seekg_beg(int64_t pos);
+
+	any_a<> seekg_end__(range_a<> const& range);
+	any_a<> seekg_end_(number_data_a_int64 const& pos);
+	void seekg_end(int64_t pos);
+
+	any_a<> seekg_cur__(range_a<> const& range);
+	any_a<> seekg_cur_(number_data_a_int64 const& pos);
+	void seekg_cur(int64_t pos);
+
 	// river output
 
 
