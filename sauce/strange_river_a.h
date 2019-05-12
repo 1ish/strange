@@ -123,8 +123,8 @@ namespace strange {
      { assert(handle_); return write().read_(count ); }
      std :: vector < int8_t > read ( int64_t count = - 1 )
      { assert(handle_); return write().read(count ); }
-     any_a < > tellg__ ( range_a < > const & range ) const
-     { assert(handle_); return read().tellg__(range ); }
+     any_a < > tellg__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().tellg__(_ ); }
      number_data_a_int64 tellg_ ( ) const
      { assert(handle_); return read().tellg_( ); }
      int64_t tellg ( ) const
@@ -147,6 +147,102 @@ namespace strange {
      { assert(handle_); return write().seekg_cur_(pos ); }
      void seekg_cur ( int64_t pos )
      { assert(handle_); write().seekg_cur(pos ); }
+     any_a < > sync__ ( range_a < > const & _ )
+     { assert(handle_); return write().sync__(_ ); }
+     any_a < > sync_ ( )
+     { assert(handle_); return write().sync_( ); }
+     bool sync ( )
+     { assert(handle_); return write().sync( ); }
+     any_a < > put__ ( range_a < > const & range )
+     { assert(handle_); return write().put__(range ); }
+     any_a < > put_ ( number_data_a_int8 const & int_8 )
+     { assert(handle_); return write().put_(int_8 ); }
+     void put ( int8_t int_8 )
+     { assert(handle_); write().put(int_8 ); }
+     any_a < > write__ ( range_a < > const & range )
+     { assert(handle_); return write().write__(range ); }
+     any_a < > write_ ( lake_a_int8 const & lake )
+     { assert(handle_); return write().write_(lake ); }
+     void write ( std :: vector < int8_t > const & lake )
+     { assert(handle_); write().write(lake ); }
+     any_a < > tellp__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().tellp__(_ ); }
+     number_data_a_int64 tellp_ ( ) const
+     { assert(handle_); return read().tellp_( ); }
+     int64_t tellp ( ) const
+     { assert(handle_); return read().tellp( ); }
+     any_a < > seekp_beg__ ( range_a < > const & range )
+     { assert(handle_); return write().seekp_beg__(range ); }
+     any_a < > seekp_beg_ ( number_data_a_int64 const & pos )
+     { assert(handle_); return write().seekp_beg_(pos ); }
+     void seekp_beg ( int64_t pos )
+     { assert(handle_); write().seekp_beg(pos ); }
+     any_a < > seekp_end__ ( range_a < > const & range )
+     { assert(handle_); return write().seekp_end__(range ); }
+     any_a < > seekp_end_ ( number_data_a_int64 const & pos )
+     { assert(handle_); return write().seekp_end_(pos ); }
+     void seekp_end ( int64_t pos )
+     { assert(handle_); write().seekp_end(pos ); }
+     any_a < > seekp_cur__ ( range_a < > const & range )
+     { assert(handle_); return write().seekp_cur__(range ); }
+     any_a < > seekp_cur_ ( number_data_a_int64 const & pos )
+     { assert(handle_); return write().seekp_cur_(pos ); }
+     void seekp_cur ( int64_t pos )
+     { assert(handle_); write().seekp_cur(pos ); }
+     any_a < > flush__ ( range_a < > const & _ )
+     { assert(handle_); return write().flush__(_ ); }
+     any_a < > flush_ ( )
+     { assert(handle_); return write().flush_( ); }
+     void flush ( )
+     { assert(handle_); write().flush( ); }
+     any_a < > good__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().good__(_ ); }
+     any_a < > good_ ( ) const
+     { assert(handle_); return read().good_( ); }
+     bool good ( ) const
+     { assert(handle_); return read().good( ); }
+     any_a < > eof__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().eof__(_ ); }
+     any_a < > eof_ ( ) const
+     { assert(handle_); return read().eof_( ); }
+     bool eof ( ) const
+     { assert(handle_); return read().eof( ); }
+     any_a < > fail__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().fail__(_ ); }
+     any_a < > fail_ ( ) const
+     { assert(handle_); return read().fail_( ); }
+     bool fail ( ) const
+     { assert(handle_); return read().fail( ); }
+     any_a < > bad__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().bad__(_ ); }
+     any_a < > bad_ ( ) const
+     { assert(handle_); return read().bad_( ); }
+     bool bad ( ) const
+     { assert(handle_); return read().bad( ); }
+     any_a < > set_good__ ( range_a < > const & range )
+     { assert(handle_); return write().set_good__(range ); }
+     any_a < > set_good_ ( any_a < > const & value )
+     { assert(handle_); return write().set_good_(value ); }
+     void set_good ( bool value )
+     { assert(handle_); write().set_good(value ); }
+     any_a < > set_eof__ ( range_a < > const & range )
+     { assert(handle_); return write().set_eof__(range ); }
+     any_a < > set_eof_ ( any_a < > const & value )
+     { assert(handle_); return write().set_eof_(value ); }
+     void set_eof ( bool value )
+     { assert(handle_); write().set_eof(value ); }
+     any_a < > set_fail__ ( range_a < > const & range )
+     { assert(handle_); return write().set_fail__(range ); }
+     any_a < > set_fail_ ( any_a < > const & value )
+     { assert(handle_); return write().set_fail_(value ); }
+     void set_fail ( bool value )
+     { assert(handle_); write().set_fail(value ); }
+     any_a < > set_bad__ ( range_a < > const & range )
+     { assert(handle_); return write().set_bad__(range ); }
+     any_a < > set_bad_ ( any_a < > const & value )
+     { assert(handle_); return write().set_bad_(value ); }
+     void set_bad ( bool value )
+     { assert(handle_); write().set_bad(value ); }
     
     protected:
     	struct ___dderived_handle_base___ : ___derived_handle_base___
@@ -172,7 +268,7 @@ namespace strange {
       virtual any_a < > read__ ( range_a < > const & range ) = 0;
       virtual lake_a_int8 read_ ( number_data_a_int64 const & count ) = 0;
       virtual std :: vector < int8_t > read ( int64_t count = - 1 ) = 0;
-      virtual any_a < > tellg__ ( range_a < > const & range ) const = 0;
+      virtual any_a < > tellg__ ( range_a < > const & _ ) const = 0;
       virtual number_data_a_int64 tellg_ ( ) const = 0;
       virtual int64_t tellg ( ) const = 0;
       virtual any_a < > seekg_beg__ ( range_a < > const & range ) = 0;
@@ -184,6 +280,54 @@ namespace strange {
       virtual any_a < > seekg_cur__ ( range_a < > const & range ) = 0;
       virtual any_a < > seekg_cur_ ( number_data_a_int64 const & pos ) = 0;
       virtual void seekg_cur ( int64_t pos ) = 0;
+      virtual any_a < > sync__ ( range_a < > const & _ ) = 0;
+      virtual any_a < > sync_ ( ) = 0;
+      virtual bool sync ( ) = 0;
+      virtual any_a < > put__ ( range_a < > const & range ) = 0;
+      virtual any_a < > put_ ( number_data_a_int8 const & int_8 ) = 0;
+      virtual void put ( int8_t int_8 ) = 0;
+      virtual any_a < > write__ ( range_a < > const & range ) = 0;
+      virtual any_a < > write_ ( lake_a_int8 const & lake ) = 0;
+      virtual void write ( std :: vector < int8_t > const & lake ) = 0;
+      virtual any_a < > tellp__ ( range_a < > const & _ ) const = 0;
+      virtual number_data_a_int64 tellp_ ( ) const = 0;
+      virtual int64_t tellp ( ) const = 0;
+      virtual any_a < > seekp_beg__ ( range_a < > const & range ) = 0;
+      virtual any_a < > seekp_beg_ ( number_data_a_int64 const & pos ) = 0;
+      virtual void seekp_beg ( int64_t pos ) = 0;
+      virtual any_a < > seekp_end__ ( range_a < > const & range ) = 0;
+      virtual any_a < > seekp_end_ ( number_data_a_int64 const & pos ) = 0;
+      virtual void seekp_end ( int64_t pos ) = 0;
+      virtual any_a < > seekp_cur__ ( range_a < > const & range ) = 0;
+      virtual any_a < > seekp_cur_ ( number_data_a_int64 const & pos ) = 0;
+      virtual void seekp_cur ( int64_t pos ) = 0;
+      virtual any_a < > flush__ ( range_a < > const & _ ) = 0;
+      virtual any_a < > flush_ ( ) = 0;
+      virtual void flush ( ) = 0;
+      virtual any_a < > good__ ( range_a < > const & _ ) const = 0;
+      virtual any_a < > good_ ( ) const = 0;
+      virtual bool good ( ) const = 0;
+      virtual any_a < > eof__ ( range_a < > const & _ ) const = 0;
+      virtual any_a < > eof_ ( ) const = 0;
+      virtual bool eof ( ) const = 0;
+      virtual any_a < > fail__ ( range_a < > const & _ ) const = 0;
+      virtual any_a < > fail_ ( ) const = 0;
+      virtual bool fail ( ) const = 0;
+      virtual any_a < > bad__ ( range_a < > const & _ ) const = 0;
+      virtual any_a < > bad_ ( ) const = 0;
+      virtual bool bad ( ) const = 0;
+      virtual any_a < > set_good__ ( range_a < > const & range ) = 0;
+      virtual any_a < > set_good_ ( any_a < > const & value ) = 0;
+      virtual void set_good ( bool value ) = 0;
+      virtual any_a < > set_eof__ ( range_a < > const & range ) = 0;
+      virtual any_a < > set_eof_ ( any_a < > const & value ) = 0;
+      virtual void set_eof ( bool value ) = 0;
+      virtual any_a < > set_fail__ ( range_a < > const & range ) = 0;
+      virtual any_a < > set_fail_ ( any_a < > const & value ) = 0;
+      virtual void set_fail ( bool value ) = 0;
+      virtual any_a < > set_bad__ ( range_a < > const & range ) = 0;
+      virtual any_a < > set_bad_ ( any_a < > const & value ) = 0;
+      virtual void set_bad ( bool value ) = 0;
     	};
     
     	template <typename ___TTT___, typename ___DDHB___ = ___dderived_handle_base___>
@@ -241,8 +385,8 @@ namespace strange {
       { return value_.read_(count ); }
       virtual std :: vector < int8_t > read ( int64_t count = - 1 )
       { return value_.read(count ); }
-      virtual any_a < > tellg__ ( range_a < > const & range ) const
-      { return value_.tellg__(range ); }
+      virtual any_a < > tellg__ ( range_a < > const & _ ) const
+      { return value_.tellg__(_ ); }
       virtual number_data_a_int64 tellg_ ( ) const
       { return value_.tellg_( ); }
       virtual int64_t tellg ( ) const
@@ -265,6 +409,102 @@ namespace strange {
       { return value_.seekg_cur_(pos ); }
       virtual void seekg_cur ( int64_t pos )
       { value_.seekg_cur(pos ); }
+      virtual any_a < > sync__ ( range_a < > const & _ )
+      { return value_.sync__(_ ); }
+      virtual any_a < > sync_ ( )
+      { return value_.sync_( ); }
+      virtual bool sync ( )
+      { return value_.sync( ); }
+      virtual any_a < > put__ ( range_a < > const & range )
+      { return value_.put__(range ); }
+      virtual any_a < > put_ ( number_data_a_int8 const & int_8 )
+      { return value_.put_(int_8 ); }
+      virtual void put ( int8_t int_8 )
+      { value_.put(int_8 ); }
+      virtual any_a < > write__ ( range_a < > const & range )
+      { return value_.write__(range ); }
+      virtual any_a < > write_ ( lake_a_int8 const & lake )
+      { return value_.write_(lake ); }
+      virtual void write ( std :: vector < int8_t > const & lake )
+      { value_.write(lake ); }
+      virtual any_a < > tellp__ ( range_a < > const & _ ) const
+      { return value_.tellp__(_ ); }
+      virtual number_data_a_int64 tellp_ ( ) const
+      { return value_.tellp_( ); }
+      virtual int64_t tellp ( ) const
+      { return value_.tellp( ); }
+      virtual any_a < > seekp_beg__ ( range_a < > const & range )
+      { return value_.seekp_beg__(range ); }
+      virtual any_a < > seekp_beg_ ( number_data_a_int64 const & pos )
+      { return value_.seekp_beg_(pos ); }
+      virtual void seekp_beg ( int64_t pos )
+      { value_.seekp_beg(pos ); }
+      virtual any_a < > seekp_end__ ( range_a < > const & range )
+      { return value_.seekp_end__(range ); }
+      virtual any_a < > seekp_end_ ( number_data_a_int64 const & pos )
+      { return value_.seekp_end_(pos ); }
+      virtual void seekp_end ( int64_t pos )
+      { value_.seekp_end(pos ); }
+      virtual any_a < > seekp_cur__ ( range_a < > const & range )
+      { return value_.seekp_cur__(range ); }
+      virtual any_a < > seekp_cur_ ( number_data_a_int64 const & pos )
+      { return value_.seekp_cur_(pos ); }
+      virtual void seekp_cur ( int64_t pos )
+      { value_.seekp_cur(pos ); }
+      virtual any_a < > flush__ ( range_a < > const & _ )
+      { return value_.flush__(_ ); }
+      virtual any_a < > flush_ ( )
+      { return value_.flush_( ); }
+      virtual void flush ( )
+      { value_.flush( ); }
+      virtual any_a < > good__ ( range_a < > const & _ ) const
+      { return value_.good__(_ ); }
+      virtual any_a < > good_ ( ) const
+      { return value_.good_( ); }
+      virtual bool good ( ) const
+      { return value_.good( ); }
+      virtual any_a < > eof__ ( range_a < > const & _ ) const
+      { return value_.eof__(_ ); }
+      virtual any_a < > eof_ ( ) const
+      { return value_.eof_( ); }
+      virtual bool eof ( ) const
+      { return value_.eof( ); }
+      virtual any_a < > fail__ ( range_a < > const & _ ) const
+      { return value_.fail__(_ ); }
+      virtual any_a < > fail_ ( ) const
+      { return value_.fail_( ); }
+      virtual bool fail ( ) const
+      { return value_.fail( ); }
+      virtual any_a < > bad__ ( range_a < > const & _ ) const
+      { return value_.bad__(_ ); }
+      virtual any_a < > bad_ ( ) const
+      { return value_.bad_( ); }
+      virtual bool bad ( ) const
+      { return value_.bad( ); }
+      virtual any_a < > set_good__ ( range_a < > const & range )
+      { return value_.set_good__(range ); }
+      virtual any_a < > set_good_ ( any_a < > const & value )
+      { return value_.set_good_(value ); }
+      virtual void set_good ( bool value )
+      { value_.set_good(value ); }
+      virtual any_a < > set_eof__ ( range_a < > const & range )
+      { return value_.set_eof__(range ); }
+      virtual any_a < > set_eof_ ( any_a < > const & value )
+      { return value_.set_eof_(value ); }
+      virtual void set_eof ( bool value )
+      { value_.set_eof(value ); }
+      virtual any_a < > set_fail__ ( range_a < > const & range )
+      { return value_.set_fail__(range ); }
+      virtual any_a < > set_fail_ ( any_a < > const & value )
+      { return value_.set_fail_(value ); }
+      virtual void set_fail ( bool value )
+      { value_.set_fail(value ); }
+      virtual any_a < > set_bad__ ( range_a < > const & range )
+      { return value_.set_bad__(range ); }
+      virtual any_a < > set_bad_ ( any_a < > const & value )
+      { return value_.set_bad_(value ); }
+      virtual void set_bad ( bool value )
+      { value_.set_bad(value ); }
     	};
     
     	template <typename ___TTT___, typename ___DDHB___>
