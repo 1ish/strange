@@ -1,6 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_DEFINITIONS_HPP
 #define COM_ONEISH_STRANGE_DEFINITIONS_HPP
 
+using int8_t = char;
 using int64_t = long long;
 using uint64_t = unsigned long long;
 

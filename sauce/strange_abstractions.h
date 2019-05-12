@@ -33,6 +33,9 @@ class range_a;
 template <typename number_data_a_int64 = number_data_a<int64_t>>
 class collection_a;
 
+template <typename number_data_a_int8 = number_data_a<int8_t>, typename number_data_a_int64 = number_data_a<int64_t>>
+class river_a;
+
 template <typename bidirectional_iterator_a = bidirectional_iterator_a<>>
 class shoal_a;
 
@@ -127,6 +130,9 @@ class random_access_iterator_data_a;
 
 #define ___derived___ range_a<>
 #include "strange_collection_a.h"
+
+#define ___derived___ range_a<>
+#include "strange_river_a.h"
 
 #define ___derived___ collection_a<>
 #include "strange_shoal_a.h"
