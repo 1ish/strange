@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename PRIMITIVE, typename _ABSTRACTION_ = brook_data_a<PRIMITIVE>>
+template <typename PRIMITIVE, typename _ABSTRACTION_ = brook_a<PRIMITIVE>>
 class brook_t : public something_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
@@ -13,13 +13,13 @@ class brook_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> val(brook_data_a<PRIMITIVE> const& brook, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> val(brook_a<PRIMITIVE> const& brook, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>{ iterator_t(brook, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref(brook_data_a<PRIMITIVE> const& brook, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> ref(brook_a<PRIMITIVE> const& brook, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>(iterator_t(brook, std::forward<F>(it)), true);
 		}
@@ -375,11 +375,11 @@ class brook_t : public something_t<_ABSTRACTION_>
 
 	protected:
 		ITERATOR _it;
-		brook_data_a<PRIMITIVE> _brook;
+		brook_a<PRIMITIVE> _brook;
 		mutable number_data_a<PRIMITIVE> _number;
 
 		template <typename F>
-		inline iterator_t(brook_data_a<PRIMITIVE> const& brook, F&& it)
+		inline iterator_t(brook_a<PRIMITIVE> const& brook, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _brook(brook, true)
@@ -393,13 +393,13 @@ class brook_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> val(brook_data_a<PRIMITIVE> const& brook, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> val(brook_a<PRIMITIVE> const& brook, F&& it)
 		{
 			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(brook, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> ref(brook_data_a<PRIMITIVE> const& brook, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> ref(brook_a<PRIMITIVE> const& brook, F&& it)
 		{
 			return random_access_const_iterator_data_a<ITERATOR>(const_iterator_t(brook, std::forward<F>(it)), true);
 		}
@@ -736,11 +736,11 @@ class brook_t : public something_t<_ABSTRACTION_>
 
 	protected:
 		ITERATOR _it;
-		brook_data_a<PRIMITIVE> _brook;
+		brook_a<PRIMITIVE> _brook;
 		mutable number_data_a<PRIMITIVE> _number;
 
 		template <typename F>
-		inline const_iterator_t(brook_data_a<PRIMITIVE> const& brook, F&& it)
+		inline const_iterator_t(brook_a<PRIMITIVE> const& brook, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _brook(brook, true)
@@ -752,36 +752,36 @@ public: ___STRANGE_COLLECTION___
 	using std_deque_number = std::deque<PRIMITIVE>;
 
 	// construction
-	static inline brook_data_a<PRIMITIVE> val__(range_a<> const& range)
+	static inline brook_a<PRIMITIVE> val__(range_a<> const& range)
 	{
-		return cast_<brook_data_a<PRIMITIVE>>(val_() += range);
+		return cast_<brook_a<PRIMITIVE>>(val_() += range);
 	}
 
-	static inline brook_data_a<PRIMITIVE> val_()
+	static inline brook_a<PRIMITIVE> val_()
 	{
 		return val(std_deque_number{});
 	}
 
 	template <typename F>
-	static inline brook_data_a<PRIMITIVE> val(F&& init)
+	static inline brook_a<PRIMITIVE> val(F&& init)
 	{
-		return brook_data_a<PRIMITIVE>{ brook_t{ std::forward<F>(init) } };
+		return brook_a<PRIMITIVE>{ brook_t{ std::forward<F>(init) } };
 	}
 
-	static inline brook_data_a<PRIMITIVE> ref__(range_a<> const& range)
+	static inline brook_a<PRIMITIVE> ref__(range_a<> const& range)
 	{
-		return cast_<brook_data_a<PRIMITIVE>>(ref_() += range, true);
+		return cast_<brook_a<PRIMITIVE>>(ref_() += range, true);
 	}
 
-	static inline brook_data_a<PRIMITIVE> ref_()
+	static inline brook_a<PRIMITIVE> ref_()
 	{
 		return ref(std_deque_number{});
 	}
 
 	template <typename F>
-	static inline brook_data_a<PRIMITIVE> ref(F&& init)
+	static inline brook_a<PRIMITIVE> ref(F&& init)
 	{
-		return brook_data_a<PRIMITIVE>(brook_t{ std::forward<F>(init) }, true);
+		return brook_a<PRIMITIVE>(brook_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
@@ -805,20 +805,20 @@ public: ___STRANGE_COLLECTION___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<brook_data_a<PRIMITIVE>>(thing))
+		if (!check_<brook_a<PRIMITIVE>>(thing))
 		{
 			return false;
 		}
-		return _deque == cast_<brook_data_a<PRIMITIVE>>(thing).extract();
+		return _deque == cast_<brook_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<brook_data_a<PRIMITIVE>>(thing))
+		if (!check_<brook_a<PRIMITIVE>>(thing))
 		{
 			return true;
 		}
-		return _deque != cast_<brook_data_a<PRIMITIVE>>(thing).extract();
+		return _deque != cast_<brook_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
@@ -1136,34 +1136,34 @@ protected:
 	{}
 };
 
-template <typename _ABSTRACTION_ = brook_data_a<int8_t>>
+template <typename _ABSTRACTION_ = brook_a<int8_t>>
 using brook_int_8_t = brook_t<int8_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_data_a<uint8_t>>
+template <typename _ABSTRACTION_ = brook_a<uint8_t>>
 using brook_uint_8_t = brook_t<uint8_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_data_a<int16_t>>
+template <typename _ABSTRACTION_ = brook_a<int16_t>>
 using brook_int_16_t = brook_t<int16_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_data_a<uint16_t>>
+template <typename _ABSTRACTION_ = brook_a<uint16_t>>
 using brook_uint_16_t = brook_t<uint16_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_data_a<int32_t>>
+template <typename _ABSTRACTION_ = brook_a<int32_t>>
 using brook_int_32_t = brook_t<int32_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_data_a<uint32_t>>
+template <typename _ABSTRACTION_ = brook_a<uint32_t>>
 using brook_uint_32_t = brook_t<uint32_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_data_a<int64_t>>
+template <typename _ABSTRACTION_ = brook_a<int64_t>>
 using brook_int_64_t = brook_t<int64_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_data_a<uint64_t>>
+template <typename _ABSTRACTION_ = brook_a<uint64_t>>
 using brook_uint_64_t = brook_t<uint64_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_data_a<float>>
+template <typename _ABSTRACTION_ = brook_a<float>>
 using brook_float_32_t = brook_t<float, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_data_a<double>>
+template <typename _ABSTRACTION_ = brook_a<double>>
 using brook_float_64_t = brook_t<double, _ABSTRACTION_>;
 
 } // namespace strange

@@ -64,7 +64,7 @@ template <typename random_access_iterator_a = random_access_iterator_a<>>
 class inventory_a;
 
 template <typename _1_>
-class brook_data_a;
+class brook_a;
 
 template <typename _1_ = void>
 class bidirectional_const_iterator_a;
@@ -148,7 +148,7 @@ class random_access_iterator_data_a;
 #include "strange_inventory_a.h"
 
 #define ___derived___ inventory_a<>
-#include "strange_brook_data_a.h"
+#include "strange_brook_a.h"
 
 #define ___derived___ forward_const_iterator_a<>
 #include "strange_bidirectional_const_iterator_a.h"
