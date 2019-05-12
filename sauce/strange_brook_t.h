@@ -13,13 +13,13 @@ class brook_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> val(brook_a<> const& brook, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> val(brook_data_a<PRIMITIVE> const& brook, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>{ iterator_t(brook, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref(brook_a<> const& brook, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> ref(brook_data_a<PRIMITIVE> const& brook, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>(iterator_t(brook, std::forward<F>(it)), true);
 		}
@@ -375,11 +375,11 @@ class brook_t : public something_t<_ABSTRACTION_>
 
 	protected:
 		ITERATOR _it;
-		brook_a<> _brook;
+		brook_data_a<PRIMITIVE> _brook;
 		mutable number_data_a<PRIMITIVE> _number;
 
 		template <typename F>
-		inline iterator_t(brook_a<> const& brook, F&& it)
+		inline iterator_t(brook_data_a<PRIMITIVE> const& brook, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _brook(brook, true)
@@ -393,13 +393,13 @@ class brook_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> val(brook_a<> const& brook, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> val(brook_data_a<PRIMITIVE> const& brook, F&& it)
 		{
 			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(brook, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> ref(brook_a<> const& brook, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> ref(brook_data_a<PRIMITIVE> const& brook, F&& it)
 		{
 			return random_access_const_iterator_data_a<ITERATOR>(const_iterator_t(brook, std::forward<F>(it)), true);
 		}
@@ -736,11 +736,11 @@ class brook_t : public something_t<_ABSTRACTION_>
 
 	protected:
 		ITERATOR _it;
-		brook_a<> _brook;
+		brook_data_a<PRIMITIVE> _brook;
 		mutable number_data_a<PRIMITIVE> _number;
 
 		template <typename F>
-		inline const_iterator_t(brook_a<> const& brook, F&& it)
+		inline const_iterator_t(brook_data_a<PRIMITIVE> const& brook, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _brook(brook, true)

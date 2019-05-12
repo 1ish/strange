@@ -1,8 +1,8 @@
-#ifndef COM_ONEISH_STRANGE_BROOK_A_H
-#define COM_ONEISH_STRANGE_BROOK_A_H
+#ifndef COM_ONEISH_STRANGE_INVENTORY_A_H
+#define COM_ONEISH_STRANGE_INVENTORY_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/ddderived.hpp -c ~/source/repos/strange/archetypes/brook.hpp > ~/source/repos/strange/sauce/strange_brook_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/ddderived.hpp -c ~/source/repos/strange/archetypes/inventory.hpp > ~/source/repos/strange/sauce/strange_inventory_a.h
 */
 
 #include "any_forward.hpp"
@@ -12,10 +12,10 @@ namespace strange
 {
 
 template <typename random_access_iterator_a>
-class brook_a
+class inventory_a
 {
 public:
-	// brook
+	// inventory
 	inline bool has(int64_t index) const;
 	inline any_a<> at(int64_t index) const;
 	inline void update(int64_t index, any_a<> const& value);

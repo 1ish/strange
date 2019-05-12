@@ -1,5 +1,5 @@
-#ifndef COM_ONEISH_STRANGE_BROOK_A_H
-#define COM_ONEISH_STRANGE_BROOK_A_H
+#ifndef COM_ONEISH_STRANGE_INVENTORY_A_H
+#define COM_ONEISH_STRANGE_INVENTORY_A_H
 
  //#include "any_forward.hpp"
  //#include "range_forward.hpp"
@@ -13,17 +13,17 @@
 
 namespace strange {
     template < typename random_access_iterator_a >
-    class brook_a : public ___derived___
+    class inventory_a : public ___derived___
     {
     public:
-    	inline brook_a& operator++()
+    	inline inventory_a& operator++()
     	{
     		assert(handle_);
     		write().operator++();
     		return *this;
     	}
     
-    	inline brook_a operator++(int)
+    	inline inventory_a operator++(int)
     	{
     		assert(handle_);
     		% struct_name% result = *this;
@@ -31,14 +31,14 @@ namespace strange {
     		return result;
     	}
     
-    	inline brook_a& operator--()
+    	inline inventory_a& operator--()
     	{
     		assert(handle_);
     		write().operator--();
     		return *this;
     	}
     
-    	inline brook_a operator--(int)
+    	inline inventory_a operator--(int)
     	{
     		assert(handle_);
     		% struct_name% result = *this;
@@ -46,35 +46,35 @@ namespace strange {
     		return result;
     	}
     
-    	inline brook_a& operator+=(___root___ const& other)
+    	inline inventory_a& operator+=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator+=(other);
     		return *this;
     	}
     
-    	inline brook_a& operator-=(___root___ const& other)
+    	inline inventory_a& operator-=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator-=(other);
     		return *this;
     	}
     
-    	inline brook_a& operator*=(___root___ const& other)
+    	inline inventory_a& operator*=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator*=(other);
     		return *this;
     	}
     
-    	inline brook_a& operator/=(___root___ const& other)
+    	inline inventory_a& operator/=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator/=(other);
     		return *this;
     	}
     
-    	inline brook_a& operator%=(___root___ const& other)
+    	inline inventory_a& operator%=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator%=(other);
@@ -211,12 +211,12 @@ namespace strange {
     	}
     
     	template <typename ___TTT___>
-    	friend inline bool check_(brook_a<> const& value) noexcept;
+    	friend inline bool check_(inventory_a<> const& value) noexcept;
     
     public:
     	static inline char const* ___abstraction_name___() noexcept
     	{
-    		return "brook_a";
+    		return "inventory_a";
     	}
     
     	static inline bool ___check___(std::shared_ptr<___root_handle_base___>const & handle) noexcept
@@ -224,52 +224,52 @@ namespace strange {
     		return bool(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
     	}
     
-    	inline brook_a() = default;
+    	inline inventory_a() = default;
     
-    	explicit inline brook_a(bool reference) noexcept
+    	explicit inline inventory_a(bool reference) noexcept
     		: ___derived___{ reference }
     	{}
     
-    	inline brook_a(brook_a const& other, bool reference) noexcept
+    	inline inventory_a(inventory_a const& other, bool reference) noexcept
     		: ___derived___(other, reference)
     	{}
     
-    	inline brook_a(brook_a&& other, bool reference) noexcept
+    	inline inventory_a(inventory_a&& other, bool reference) noexcept
     		: ___derived___(std::move(other), reference)
     	{}
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	explicit inline brook_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
+    	explicit inline inventory_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
     		: ___derived___(handle, reference)
     	{
     		if (!std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
     		{
-    			throw dis("brook_a constructor failed to cast from base to ddderived");
+    			throw dis("inventory_a constructor failed to cast from base to ddderived");
     		}
     	}
     #else
     	template <typename ___TTT___>
-    	explicit inline brook_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
+    	explicit inline inventory_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
     		: ___derived___(handle, reference)
     	{
     		assert(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
     	}
     #endif
     
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<brook_a, std::decay_t<___TTT___>>::value>>
-    	explicit inline brook_a(___TTT___ value, bool reference = false) noexcept
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<inventory_a, std::decay_t<___TTT___>>::value>>
+    	explicit inline inventory_a(___TTT___ value, bool reference = false) noexcept
     		: ___derived___(std::make_shared<___ddderived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
     			reference)
     	{}
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	inline brook_a& operator=(std::shared_ptr<___TTT___> const& handle)
+    	inline inventory_a& operator=(std::shared_ptr<___TTT___> const& handle)
     	{
     		if (!std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
     		{
-    			throw dis("brook_a assignment failed to cast from base to ddderived");
+    			throw dis("inventory_a assignment failed to cast from base to ddderived");
     		}
     		handle_ = handle;
     		handle_->___weak___(handle_);
@@ -277,7 +277,7 @@ namespace strange {
     	}
     #else
     	template <typename ___TTT___>
-    	inline brook_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+    	inline inventory_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
     	{
     		assert(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
     		handle_ = handle;
@@ -286,10 +286,10 @@ namespace strange {
     	}
     #endif
     
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<brook_a, std::decay_t<___TTT___>>::value>>
-    	inline brook_a& operator=(___TTT___ value) noexcept
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<inventory_a, std::decay_t<___TTT___>>::value>>
+    	inline inventory_a& operator=(___TTT___ value) noexcept
     	{
-    		brook_a temp{ std::move(value) };
+    		inventory_a temp{ std::move(value) };
     		std::swap(temp.handle_, handle_);
     		handle_->___weak___(handle_);
     		return *this;
@@ -297,7 +297,7 @@ namespace strange {
     };
     
     template <typename ___TTT___>
-    inline bool check_(brook_a<> const& value) noexcept
+    inline bool check_(inventory_a<> const& value) noexcept
     {
     	return ___TTT___::___check___(value.handle_);
     }
