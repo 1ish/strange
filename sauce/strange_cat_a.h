@@ -106,10 +106,10 @@ namespace strange {
      { assert(handle_); return read().includes(thing ); }
      inline any_a < > conforms__ ( range_a < > const & range ) const
      { assert(handle_); return read().conforms__(range ); }
-     inline any_a < > conforms_ ( any_a < > const & thing , any_a < > const & cat_or_herd ) const
-     { assert(handle_); return read().conforms_(thing, cat_or_herd ); }
-     inline bool conforms ( any_a < > const & thing , any_a < > const & cat_or_herd ) const
-     { assert(handle_); return read().conforms(thing, cat_or_herd ); }
+     inline any_a < > conforms_ ( any_a < > const & thing , any_a < > const & cat_or_unordered_herd ) const
+     { assert(handle_); return read().conforms_(thing, cat_or_unordered_herd ); }
+     inline bool conforms ( any_a < > const & thing , any_a < > const & cat_or_unordered_herd ) const
+     { assert(handle_); return read().conforms(thing, cat_or_unordered_herd ); }
     
     private:
     	struct ___finale_handle_base___ : ___derived_handle_base___
@@ -126,8 +126,8 @@ namespace strange {
       virtual inline any_a < > includes_ ( any_a < > const & thing ) const = 0;
       virtual inline bool includes ( any_a < > const & thing ) const = 0;
       virtual inline any_a < > conforms__ ( range_a < > const & range ) const = 0;
-      virtual inline any_a < > conforms_ ( any_a < > const & thing , any_a < > const & cat_or_herd ) const = 0;
-      virtual inline bool conforms ( any_a < > const & thing , any_a < > const & cat_or_herd ) const = 0;
+      virtual inline any_a < > conforms_ ( any_a < > const & thing , any_a < > const & cat_or_unordered_herd ) const = 0;
+      virtual inline bool conforms ( any_a < > const & thing , any_a < > const & cat_or_unordered_herd ) const = 0;
     	};
     
     	template <typename ___TTT___>
@@ -172,10 +172,10 @@ namespace strange {
       { return value_.includes(thing ); }
       virtual inline any_a < > conforms__ ( range_a < > const & range ) const
       { return value_.conforms__(range ); }
-      virtual inline any_a < > conforms_ ( any_a < > const & thing , any_a < > const & cat_or_herd ) const
-      { return value_.conforms_(thing, cat_or_herd ); }
-      virtual inline bool conforms ( any_a < > const & thing , any_a < > const & cat_or_herd ) const
-      { return value_.conforms(thing, cat_or_herd ); }
+      virtual inline any_a < > conforms_ ( any_a < > const & thing , any_a < > const & cat_or_unordered_herd ) const
+      { return value_.conforms_(thing, cat_or_unordered_herd ); }
+      virtual inline bool conforms ( any_a < > const & thing , any_a < > const & cat_or_unordered_herd ) const
+      { return value_.conforms(thing, cat_or_unordered_herd ); }
     	};
     
     	template <typename ___TTT___>

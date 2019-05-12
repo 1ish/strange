@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = shoal_a<>>
-class shoal_t : public something_t<_ABSTRACTION_>
+template <typename _ABSTRACTION_ = unordered_shoal_a<>>
+class unordered_shoal_t : public something_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_iterator_data_a<ITERATOR>>
 	class iterator_t : public something_t<_ABSTRACTION_>
@@ -13,21 +13,21 @@ class shoal_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline bidirectional_iterator_data_a<ITERATOR> val(shoal_a<> const& shoal, F&& it)
+		static inline bidirectional_iterator_data_a<ITERATOR> val(unordered_shoal_a<> const& unordered_shoal, F&& it)
 		{
-			return bidirectional_iterator_data_a<ITERATOR>{ iterator_t(shoal, std::forward<F>(it)) };
+			return bidirectional_iterator_data_a<ITERATOR>{ iterator_t(unordered_shoal, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline bidirectional_iterator_data_a<ITERATOR> ref(shoal_a<> const& shoal, F&& it)
+		static inline bidirectional_iterator_data_a<ITERATOR> ref(unordered_shoal_a<> const& unordered_shoal, F&& it)
 		{
-			return bidirectional_iterator_data_a<ITERATOR>(iterator_t(shoal, std::forward<F>(it)), true);
+			return bidirectional_iterator_data_a<ITERATOR>(iterator_t(unordered_shoal, std::forward<F>(it)), true);
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::shoal::iterator");
+			static symbol_a<> TYPE = sym("strange::unordered_shoal::iterator");
 			return TYPE;
 		}
 
@@ -73,7 +73,7 @@ class shoal_t : public something_t<_ABSTRACTION_>
 			forward_const_iterator_a<> it = range.cbegin();
 			if (it == range.cend())
 			{
-				throw dis("strange::shoal::iterator set passed empty range");
+				throw dis("strange::unordered_shoal::iterator set passed empty range");
 			}
 			return set_(*it);
 		}
@@ -82,19 +82,19 @@ class shoal_t : public something_t<_ABSTRACTION_>
 		{
 			if (!check_<flock_a<>>(thing))
 			{
-				throw dis("strange::shoal::iterator set passed non-flock");
+				throw dis("strange::unordered_shoal::iterator set passed non-flock");
 			}
 			return _it->second = cast_<flock_a<>>(thing).at(1);
 		}
 
 		inline any_a<>* operator->() const
 		{
-			throw dis("strange::shoal::iterator cannot be dereferenced");
+			throw dis("strange::unordered_shoal::iterator cannot be dereferenced");
 		}
 
 		inline any_a<>& operator*() const
 		{
-			throw dis("strange::shoal::iterator cannot be dereferenced");
+			throw dis("strange::unordered_shoal::iterator cannot be dereferenced");
 		}
 
 		inline _ABSTRACTION_ increment__(range_a<> const&)
@@ -164,14 +164,14 @@ class shoal_t : public something_t<_ABSTRACTION_>
 
 	protected:
 		ITERATOR _it;
-		shoal_a<> _shoal;
+		unordered_shoal_a<> _unordered_shoal;
 		mutable flock_a<> _pair;
 
 		template <typename F>
-		inline iterator_t(shoal_a<> const& shoal, F&& it)
+		inline iterator_t(unordered_shoal_a<> const& unordered_shoal, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
-			, _shoal(shoal, true)
+			, _unordered_shoal(unordered_shoal, true)
 			, _pair{ flock_t<>::val_() }
 		{}
 	};
@@ -182,21 +182,21 @@ class shoal_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-			static inline bidirectional_const_iterator_data_a<ITERATOR> val(shoal_a<> const& shoal, F&& it)
+			static inline bidirectional_const_iterator_data_a<ITERATOR> val(unordered_shoal_a<> const& unordered_shoal, F&& it)
 			{
-				return bidirectional_const_iterator_data_a<ITERATOR>{ const_iterator_t(shoal, std::forward<F>(it)) };
+				return bidirectional_const_iterator_data_a<ITERATOR>{ const_iterator_t(unordered_shoal, std::forward<F>(it)) };
 			}
 
 			template <typename F>
-			static inline bidirectional_const_iterator_data_a<ITERATOR> ref(shoal_a<> const& shoal, F&& it)
+			static inline bidirectional_const_iterator_data_a<ITERATOR> ref(unordered_shoal_a<> const& unordered_shoal, F&& it)
 			{
-				return bidirectional_const_iterator_data_a<ITERATOR>(const_iterator_t(shoal, std::forward<F>(it)), true);
+				return bidirectional_const_iterator_data_a<ITERATOR>(const_iterator_t(unordered_shoal, std::forward<F>(it)), true);
 			}
 
 			// reflection
 			static inline symbol_a<> type_()
 			{
-				static symbol_a<> TYPE = sym("strange::shoal::const_iterator");
+				static symbol_a<> TYPE = sym("strange::unordered_shoal::const_iterator");
 				return TYPE;
 			}
 
@@ -316,14 +316,14 @@ class shoal_t : public something_t<_ABSTRACTION_>
 
 	protected:
 		ITERATOR _it;
-		shoal_a<> _shoal;
+		unordered_shoal_a<> _unordered_shoal;
 		mutable flock_a<> _pair;
 
 		template <typename F>
-		inline const_iterator_t(shoal_a<> const& shoal, F&& it)
+		inline const_iterator_t(unordered_shoal_a<> const& unordered_shoal, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
-			, _shoal(shoal, true)
+			, _unordered_shoal(unordered_shoal, true)
 			, _pair{ flock_t<>::val_() }
 		{}
 	};
@@ -332,42 +332,42 @@ public: ___STRANGE_COLLECTION___
 	using std_unordered_map_any_any = std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>;
 
 	// construction
-	static inline shoal_a<> val__(range_a<> const& range)
+	static inline unordered_shoal_a<> val__(range_a<> const& range)
 	{
-		return cast_<shoal_a<>>(val_() += range);
+		return cast_<unordered_shoal_a<>>(val_() += range);
 	}
 
-	static inline shoal_a<> val_()
+	static inline unordered_shoal_a<> val_()
 	{
 		return val(std_unordered_map_any_any{});
 	}
 
 	template <typename F>
-	static inline shoal_a<> val(F&& init)
+	static inline unordered_shoal_a<> val(F&& init)
 	{
-		return shoal_a<>{ shoal_t{ std::forward<F>(init) } };
+		return unordered_shoal_a<>{ unordered_shoal_t{ std::forward<F>(init) } };
 	}
 
-	static inline shoal_a<> ref__(range_a<> const& range)
+	static inline unordered_shoal_a<> ref__(range_a<> const& range)
 	{
-		return cast_<shoal_a<>>(ref_() += range, true);
+		return cast_<unordered_shoal_a<>>(ref_() += range, true);
 	}
 
-	static inline shoal_a<> ref_()
+	static inline unordered_shoal_a<> ref_()
 	{
 		return ref(std_unordered_map_any_any{});
 	}
 
 	template <typename F>
-	static inline shoal_a<> ref(F&& init)
+	static inline unordered_shoal_a<> ref(F&& init)
 	{
-		return shoal_a<>(shoal_t{ std::forward<F>(init) }, true);
+		return unordered_shoal_a<>(unordered_shoal_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::shoal");
+		static symbol_a<> TYPE = sym("strange::unordered_shoal");
 		return TYPE;
 	}
 
@@ -385,20 +385,20 @@ public: ___STRANGE_COLLECTION___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<shoal_a<>>(thing))
+		if (!check_<unordered_shoal_a<>>(thing))
 		{
 			return false;
 		}
-		return _map == cast_<shoal_a<>>(thing).extract();
+		return _map == cast_<unordered_shoal_a<>>(thing).extract();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<shoal_a<>>(thing))
+		if (!check_<unordered_shoal_a<>>(thing))
 		{
 			return true;
 		}
-		return _map != cast_<shoal_a<>>(thing).extract();
+		return _map != cast_<unordered_shoal_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
@@ -568,11 +568,11 @@ public: ___STRANGE_COLLECTION___
 		return result;
 	}
 
-	inline shoal_t& operator+=(any_a<> const& range)
+	inline unordered_shoal_t& operator+=(any_a<> const& range)
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis("strange::shoal += passed non-range");
+			throw dis("strange::unordered_shoal += passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
@@ -581,11 +581,11 @@ public: ___STRANGE_COLLECTION___
 		return *this;
 	}
 
-	inline shoal_t& operator-=(any_a<> const& range)
+	inline unordered_shoal_t& operator-=(any_a<> const& range)
 	{
 		if (!check_<range_a<>>(range))
 		{
-			throw dis("strange::shoal -= passed non-range");
+			throw dis("strange::unordered_shoal -= passed non-range");
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
@@ -614,7 +614,7 @@ protected:
 	std_unordered_map_any_any _map;
 
 	template <typename F>
-	inline shoal_t(F&& init)
+	inline unordered_shoal_t(F&& init)
 		: something_t{}
 		, _map{ std::forward<F>(init) }
 	{}

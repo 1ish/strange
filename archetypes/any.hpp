@@ -34,15 +34,15 @@ public:
 	inline any_a cat__(range_a const& _) const;
 	inline cat_a cat_() const;
 
-//	herd_a<cat_a> inline any_a cats__(range_a const& _) const;
-//	herd_a<cat_a> inline any_a cats_() const;
+//	unordered_herd_a<cat_a> inline any_a cats__(range_a const& _) const;
+//	unordered_herd_a<cat_a> inline any_a cats_() const;
 
 //	void inline any_a share__(range_a const& range) const;
 	
-//	shoal_a<symbol_a, any_a> inline any_a shared__(range_a const& _) const;
+//	unordered_shoal_a<symbol_a, any_a> inline any_a shared__(range_a const& _) const;
 
-//  shoal_a<symbol_a, any_a> inline any_a operations__(range_a const& _) const;
-//  shoal_a<symbol_a, any_a> inline any_a operations_() const;
+//  unordered_shoal_a<symbol_a, any_a> inline any_a operations__(range_a const& _) const;
+//  unordered_shoal_a<symbol_a, any_a> inline any_a operations_() const;
 
 	inline any_a eater__(range_a const& _) const;
 	inline any_a eater_() const; // return range of parameter names

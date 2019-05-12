@@ -1,8 +1,8 @@
-#ifndef COM_ONEISH_STRANGE_SHOAL_A_H
-#define COM_ONEISH_STRANGE_SHOAL_A_H
+#ifndef COM_ONEISH_STRANGE_UNORDERED_SHOAL_A_H
+#define COM_ONEISH_STRANGE_UNORDERED_SHOAL_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/ffinale.hpp -c ~/source/repos/strange/archetypes/shoal.hpp > ~/source/repos/strange/sauce/strange_shoal_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/ffinale.hpp -c ~/source/repos/strange/archetypes/unordered_shoal.hpp > ~/source/repos/strange/sauce/strange_unordered_shoal_a.h
 */
 
 #include "any_forward.hpp"
@@ -12,10 +12,10 @@ namespace strange
 {
 
 template <typename bidirectional_iterator_a>
-class shoal_a
+class unordered_shoal_a
 {
 public:
-	// shoal
+	// unordered_shoal
 	inline bool has(std::string const& s) const;
 	inline any_a<> at(std::string const& s) const;
 	inline void update(std::string const& s, any_a<> const& value);

@@ -122,21 +122,21 @@ public: ___STRANGE_THING___
 		return conforms_(thing, *it);
 	}
 
-	static inline any_a<> conforms_(any_a<> const& thing, any_a<> const& cat_or_herd)
+	static inline any_a<> conforms_(any_a<> const& thing, any_a<> const& cat_or_unordered_herd)
 	{
-		return _boole_(conforms(thing, cat_or_herd));
+		return _boole_(conforms(thing, cat_or_unordered_herd));
 	}
 
-	static inline bool conforms(any_a<> const& thing, any_a<> const& cat_or_herd)
+	static inline bool conforms(any_a<> const& thing, any_a<> const& cat_or_unordered_herd)
 	{
-		if (check_<cat_a<>>(cat_or_herd))
+		if (check_<cat_a<>>(cat_or_unordered_herd))
 		{
-			return cast_<cat_a<>>(cat_or_herd).includes_(thing);
+			return cast_<cat_a<>>(cat_or_unordered_herd).includes_(thing);
 		}
 		/*
-		if (check_<herd_>(cat_or_herd))
+		if (check_<unordered_herd_>(cat_or_unordered_herd))
 		{
-			//TODO call includes_ for each cat in the herd
+			//TODO call includes_ for each cat in the unordered_herd
 		}
 		*/
 		return false;

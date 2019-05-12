@@ -1,8 +1,8 @@
-#ifndef COM_ONEISH_STRANGE_HERD_A_H
-#define COM_ONEISH_STRANGE_HERD_A_H
+#ifndef COM_ONEISH_STRANGE_UNORDERED_HERD_A_H
+#define COM_ONEISH_STRANGE_UNORDERED_HERD_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/ffinale.hpp -c ~/source/repos/strange/archetypes/herd.hpp > ~/source/repos/strange/sauce/strange_herd_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/ffinale.hpp -c ~/source/repos/strange/archetypes/unordered_herd.hpp > ~/source/repos/strange/sauce/strange_unordered_herd_a.h
 */
 
 #include "any.hpp"
@@ -11,10 +11,10 @@ namespace strange
 {
 
 template <typename _1_>
-class herd_a
+class unordered_herd_a
 {
 public:
-	// herd
+	// unordered_herd
 	inline bool has(std::string const& s) const;
 	inline bool at(std::string const& s) const;
 	inline bool insert(std::string const& s);

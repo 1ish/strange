@@ -44,14 +44,14 @@ TEST(TestCaseName, ForLoop)
 	any_a<> h = native_extraction_t<range_a<>>::val(&range_a<>::cbegin__);
 	any_a<> i = native_mutation_t<flock_a<>>::val(&flock_a<>::begin__);
 
-	shoal_a<> shoal = shoal_t<>::val_();
+	unordered_shoal_a<> unordered_shoal = unordered_shoal_t<>::val_();
 	flock_a<> flock = flock_t<>::val_();
 	squad_a<> squad = squad_t<>::val_();
-	herd_a<> herd = herd_t<>::val_();
+	unordered_herd_a<> unordered_herd = unordered_herd_t<>::val_();
 
 	try
 	{
-		shoal = cast_<shoal_a<>>(c);
+		unordered_shoal = cast_<unordered_shoal_a<>>(c);
 	}
 	catch (misunderstanding_a<>& m)
 	{

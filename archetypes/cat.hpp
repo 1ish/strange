@@ -34,8 +34,8 @@ public:
 	inline bool includes(any_a<> const& thing) const;
 
 	inline any_a<> conforms__(range_a<> const& range) const;
-	inline any_a<> conforms_(any_a<> const& thing, any_a<> const& cat_or_herd) const;
-	inline bool conforms(any_a<> const& thing, any_a<> const& cat_or_herd) const;
+	inline any_a<> conforms_(any_a<> const& thing, any_a<> const& cat_or_unordered_herd) const;
+	inline bool conforms(any_a<> const& thing, any_a<> const& cat_or_unordered_herd) const;
 };
 
 } // namespace strange

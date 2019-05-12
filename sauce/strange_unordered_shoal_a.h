@@ -1,7 +1,8 @@
-#ifndef COM_ONEISH_STRANGE_HERD_A_H
-#define COM_ONEISH_STRANGE_HERD_A_H
+#ifndef COM_ONEISH_STRANGE_UNORDERED_SHOAL_A_H
+#define COM_ONEISH_STRANGE_UNORDERED_SHOAL_A_H
 
- //#include "any.hpp"
+ //#include "any_forward.hpp"
+ //#include "range_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -11,18 +12,18 @@
 
 
 namespace strange {
-    template < typename _1_ >
-    class herd_a final : public ___derived___
+    template < typename bidirectional_iterator_a >
+    class unordered_shoal_a final : public ___derived___
     {
     public:
-    	inline herd_a& operator++()
+    	inline unordered_shoal_a& operator++()
     	{
     		assert(handle_);
     		write().operator++();
     		return *this;
     	}
     
-    	inline herd_a operator++(int)
+    	inline unordered_shoal_a operator++(int)
     	{
     		assert(handle_);
     		% struct_name% result = *this;
@@ -30,14 +31,14 @@ namespace strange {
     		return result;
     	}
     
-    	inline herd_a& operator--()
+    	inline unordered_shoal_a& operator--()
     	{
     		assert(handle_);
     		write().operator--();
     		return *this;
     	}
     
-    	inline herd_a operator--(int)
+    	inline unordered_shoal_a operator--(int)
     	{
     		assert(handle_);
     		% struct_name% result = *this;
@@ -45,35 +46,35 @@ namespace strange {
     		return result;
     	}
     
-    	inline herd_a& operator+=(___root___ const& other)
+    	inline unordered_shoal_a& operator+=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator+=(other);
     		return *this;
     	}
     
-    	inline herd_a& operator-=(___root___ const& other)
+    	inline unordered_shoal_a& operator-=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator-=(other);
     		return *this;
     	}
     
-    	inline herd_a& operator*=(___root___ const& other)
+    	inline unordered_shoal_a& operator*=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator*=(other);
     		return *this;
     	}
     
-    	inline herd_a& operator/=(___root___ const& other)
+    	inline unordered_shoal_a& operator/=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator/=(other);
     		return *this;
     	}
     
-    	inline herd_a& operator%=(___root___ const& other)
+    	inline unordered_shoal_a& operator%=(___root___ const& other)
     	{
     		assert(handle_);
     		write().operator%=(other);
@@ -82,29 +83,50 @@ namespace strange {
     
      inline bool has ( std :: string const & s ) const
      { assert(handle_); return read().has(s ); }
-     inline bool at ( std :: string const & s ) const
+     inline any_a < > at ( std :: string const & s ) const
      { assert(handle_); return read().at(s ); }
-     inline bool insert ( std :: string const & s )
-     { assert(handle_); return write().insert(s ); }
+     inline void update ( std :: string const & s , any_a < > const & value )
+     { assert(handle_); write().update(s, value ); }
+     inline bool insert ( std :: string const & s , any_a < > const & value )
+     { assert(handle_); return write().insert(s, value ); }
      inline bool erase ( std :: string const & s )
      { assert(handle_); return write().erase(s ); }
-     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const
+     inline any_a < > begin__ ( range_a < > const & _ )
+     { assert(handle_); return write().begin__(_ ); }
+     inline bidirectional_iterator_a begin_ ( )
+     { assert(handle_); return write().begin_( ); }
+     inline bidirectional_iterator_a begin ( )
+     { assert(handle_); return write().begin( ); }
+     inline any_a < > end__ ( range_a < > const & _ )
+     { assert(handle_); return write().end__(_ ); }
+     inline bidirectional_iterator_a end_ ( )
+     { assert(handle_); return write().end_( ); }
+     inline bidirectional_iterator_a end ( )
+     { assert(handle_); return write().end( ); }
+     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract ( ) const
      { assert(handle_); return read().extract( ); }
-     inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
+     inline void mutate ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data )
      { assert(handle_); write().mutate(data ); }
-     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference ( )
+     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference ( )
      { assert(handle_); return write().reference( ); }
     
     private:
     	struct ___finale_handle_base___ : ___dderived_handle_base___
     	{
       virtual inline bool has ( std :: string const & s ) const = 0;
-      virtual inline bool at ( std :: string const & s ) const = 0;
-      virtual inline bool insert ( std :: string const & s ) = 0;
+      virtual inline any_a < > at ( std :: string const & s ) const = 0;
+      virtual inline void update ( std :: string const & s , any_a < > const & value ) = 0;
+      virtual inline bool insert ( std :: string const & s , any_a < > const & value ) = 0;
       virtual inline bool erase ( std :: string const & s ) = 0;
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const = 0;
-      virtual inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data ) = 0;
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference ( ) = 0;
+      virtual inline any_a < > begin__ ( range_a < > const & _ ) = 0;
+      virtual inline bidirectional_iterator_a begin_ ( ) = 0;
+      virtual inline bidirectional_iterator_a begin ( ) = 0;
+      virtual inline any_a < > end__ ( range_a < > const & _ ) = 0;
+      virtual inline bidirectional_iterator_a end_ ( ) = 0;
+      virtual inline bidirectional_iterator_a end ( ) = 0;
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract ( ) const = 0;
+      virtual inline void mutate ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data ) = 0;
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference ( ) = 0;
     	};
     
     	template <typename ___TTT___>
@@ -127,17 +149,31 @@ namespace strange {
     
       virtual inline bool has ( std :: string const & s ) const
       { return value_.has(s ); }
-      virtual inline bool at ( std :: string const & s ) const
+      virtual inline any_a < > at ( std :: string const & s ) const
       { return value_.at(s ); }
-      virtual inline bool insert ( std :: string const & s )
-      { return value_.insert(s ); }
+      virtual inline void update ( std :: string const & s , any_a < > const & value )
+      { value_.update(s, value ); }
+      virtual inline bool insert ( std :: string const & s , any_a < > const & value )
+      { return value_.insert(s, value ); }
       virtual inline bool erase ( std :: string const & s )
       { return value_.erase(s ); }
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const
+      virtual inline any_a < > begin__ ( range_a < > const & _ )
+      { return value_.begin__(_ ); }
+      virtual inline bidirectional_iterator_a begin_ ( )
+      { return value_.begin_( ); }
+      virtual inline bidirectional_iterator_a begin ( )
+      { return value_.begin( ); }
+      virtual inline any_a < > end__ ( range_a < > const & _ )
+      { return value_.end__(_ ); }
+      virtual inline bidirectional_iterator_a end_ ( )
+      { return value_.end_( ); }
+      virtual inline bidirectional_iterator_a end ( )
+      { return value_.end( ); }
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract ( ) const
       { return value_.extract( ); }
-      virtual inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
+      virtual inline void mutate ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data )
       { value_.mutate(data ); }
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference ( )
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference ( )
       { return value_.reference( ); }
     	};
     
@@ -166,12 +202,12 @@ namespace strange {
     	}
     
     	template <typename ___TTT___>
-    	friend inline bool check_(herd_a<> const& value) noexcept;
+    	friend inline bool check_(unordered_shoal_a<> const& value) noexcept;
     
     public:
     	static inline char const* ___abstraction_name___() noexcept
     	{
-    		return "herd_a";
+    		return "unordered_shoal_a";
     	}
     
     	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle) noexcept
@@ -179,52 +215,52 @@ namespace strange {
     		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
     	}
     
-    	inline herd_a() = default;
+    	inline unordered_shoal_a() = default;
     
-    	explicit inline herd_a(bool reference) noexcept
+    	explicit inline unordered_shoal_a(bool reference) noexcept
     		: ___derived___{ reference }
     	{}
     
-    	inline herd_a(herd_a const& other, bool reference) noexcept
+    	inline unordered_shoal_a(unordered_shoal_a const& other, bool reference) noexcept
     		: ___derived___(other, reference)
     	{}
     
-    	inline herd_a(herd_a&& other, bool reference) noexcept
+    	inline unordered_shoal_a(unordered_shoal_a&& other, bool reference) noexcept
     		: ___derived___(std::move(other), reference)
     	{}
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	explicit inline herd_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
+    	explicit inline unordered_shoal_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
     		: ___derived___(handle, reference)
     	{
     		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
     		{
-    			throw dis("herd_a constructor failed to cast from base to final");
+    			throw dis("unordered_shoal_a constructor failed to cast from base to final");
     		}
     	}
     #else
     	template <typename ___TTT___>
-    	explicit inline herd_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
+    	explicit inline unordered_shoal_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
     		: ___derived___(handle, reference)
     	{
     		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
     	}
     #endif
     
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<herd_a, std::decay_t<___TTT___>>::value>>
-    	explicit inline herd_a(___TTT___ value, bool reference = false) noexcept
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<unordered_shoal_a, std::decay_t<___TTT___>>::value>>
+    	explicit inline unordered_shoal_a(___TTT___ value, bool reference = false) noexcept
     		: ___derived___(std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
     			reference)
     	{}
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	inline herd_a& operator=(std::shared_ptr<___TTT___> const& handle)
+    	inline unordered_shoal_a& operator=(std::shared_ptr<___TTT___> const& handle)
     	{
     		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
     		{
-    			throw dis("herd_a assignment failed to cast from base to final");
+    			throw dis("unordered_shoal_a assignment failed to cast from base to final");
     		}
     		handle_ = handle;
     		handle_->___weak___(handle_);
@@ -232,7 +268,7 @@ namespace strange {
     	}
     #else
     	template <typename ___TTT___>
-    	inline herd_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+    	inline unordered_shoal_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
     	{
     		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
     		handle_ = handle;
@@ -241,10 +277,10 @@ namespace strange {
     	}
     #endif
     
-    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<herd_a, std::decay_t<___TTT___>>::value>>
-    	inline herd_a& operator=(___TTT___ value) noexcept
+    	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<unordered_shoal_a, std::decay_t<___TTT___>>::value>>
+    	inline unordered_shoal_a& operator=(___TTT___ value) noexcept
     	{
-    		herd_a temp{ std::move(value) };
+    		unordered_shoal_a temp{ std::move(value) };
     		std::swap(temp.handle_, handle_);
     		handle_->___weak___(handle_);
     		return *this;
@@ -252,7 +288,7 @@ namespace strange {
     };
     
     template <typename ___TTT___>
-    inline bool check_(herd_a<> const& value) noexcept
+    inline bool check_(unordered_shoal_a<> const& value) noexcept
     {
     	return ___TTT___::___check___(value.handle_);
     }

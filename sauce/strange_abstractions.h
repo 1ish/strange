@@ -34,7 +34,7 @@ template <typename number_data_a_int64 = number_data_a<int64_t>>
 class collection_a;
 
 template <typename bidirectional_iterator_a = bidirectional_iterator_a<>>
-class shoal_a;
+class unordered_shoal_a;
 
 template <typename _1_ = void>
 class flock_a;
@@ -43,7 +43,7 @@ template <typename _1_ = void>
 class squad_a;
 
 template <typename _1_ = void>
-class herd_a;
+class unordered_herd_a;
 
 template <typename _1_>
 class data_a;
@@ -117,10 +117,10 @@ class random_access_iterator_data_a;
 #include "strange_collection_a.h"
 
 #define ___derived___ collection_a<>
-#include "strange_shoal_a.h"
+#include "strange_unordered_shoal_a.h"
 
 #define ___derived___ collection_a<>
-#include "strange_herd_a.h"
+#include "strange_unordered_herd_a.h"
 
 #include "strange_data_a.h"
 
