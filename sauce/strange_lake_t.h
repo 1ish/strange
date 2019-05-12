@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename PRIMITIVE, typename _ABSTRACTION_ = lake_data_a<PRIMITIVE>>
+template <typename PRIMITIVE, typename _ABSTRACTION_ = lake_a<PRIMITIVE>>
 class lake_t : public something_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
@@ -13,13 +13,13 @@ class lake_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> val(lake_data_a<PRIMITIVE> const& lake, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> val(lake_a<PRIMITIVE> const& lake, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>{ iterator_t(lake, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref(lake_data_a<PRIMITIVE> const& lake, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> ref(lake_a<PRIMITIVE> const& lake, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>(iterator_t(lake, std::forward<F>(it)), true);
 		}
@@ -375,11 +375,11 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 	protected:
 		ITERATOR _it;
-		lake_data_a<PRIMITIVE> _lake;
+		lake_a<PRIMITIVE> _lake;
 		mutable number_data_a<PRIMITIVE> _number;
 
 		template <typename F>
-		inline iterator_t(lake_data_a<PRIMITIVE> const& lake, F&& it)
+		inline iterator_t(lake_a<PRIMITIVE> const& lake, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _lake(lake, true)
@@ -393,13 +393,13 @@ class lake_t : public something_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> val(lake_data_a<PRIMITIVE> const& lake, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> val(lake_a<PRIMITIVE> const& lake, F&& it)
 		{
 			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(lake, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> ref(lake_data_a<PRIMITIVE> const& lake, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> ref(lake_a<PRIMITIVE> const& lake, F&& it)
 		{
 			return random_access_const_iterator_data_a<ITERATOR>(const_iterator_t(lake, std::forward<F>(it)), true);
 		}
@@ -736,11 +736,11 @@ class lake_t : public something_t<_ABSTRACTION_>
 
 	protected:
 		ITERATOR _it;
-		lake_data_a<PRIMITIVE> _lake;
+		lake_a<PRIMITIVE> _lake;
 		mutable number_data_a<PRIMITIVE> _number;
 
 		template <typename F>
-		inline const_iterator_t(lake_data_a<PRIMITIVE> const& lake, F&& it)
+		inline const_iterator_t(lake_a<PRIMITIVE> const& lake, F&& it)
 			: something_t{}
 			, _it{ std::forward<F>(it) }
 			, _lake(lake, true)
@@ -752,36 +752,36 @@ public: ___STRANGE_COLLECTION___
 	using std_vector_number = std::vector<PRIMITIVE>;
 
 	// construction
-	static inline lake_data_a<PRIMITIVE> val__(range_a<> const& range)
+	static inline lake_a<PRIMITIVE> val__(range_a<> const& range)
 	{
-		return cast_<lake_data_a<PRIMITIVE>>(val_() += range);
+		return cast_<lake_a<PRIMITIVE>>(val_() += range);
 	}
 
-	static inline lake_data_a<PRIMITIVE> val_()
+	static inline lake_a<PRIMITIVE> val_()
 	{
 		return val(std_vector_number{});
 	}
 
 	template <typename F>
-	static inline lake_data_a<PRIMITIVE> val(F&& init)
+	static inline lake_a<PRIMITIVE> val(F&& init)
 	{
-		return lake_data_a<PRIMITIVE>{ lake_t{ std::forward<F>(init) } };
+		return lake_a<PRIMITIVE>{ lake_t{ std::forward<F>(init) } };
 	}
 
-	static inline lake_data_a<PRIMITIVE> ref__(range_a<> const& range)
+	static inline lake_a<PRIMITIVE> ref__(range_a<> const& range)
 	{
-		return cast_<lake_data_a<PRIMITIVE>>(ref_() += range, true);
+		return cast_<lake_a<PRIMITIVE>>(ref_() += range, true);
 	}
 
-	static inline lake_data_a<PRIMITIVE> ref_()
+	static inline lake_a<PRIMITIVE> ref_()
 	{
 		return ref(std_vector_number{});
 	}
 
 	template <typename F>
-	static inline lake_data_a<PRIMITIVE> ref(F&& init)
+	static inline lake_a<PRIMITIVE> ref(F&& init)
 	{
-		return lake_data_a<PRIMITIVE>(lake_t{ std::forward<F>(init) }, true);
+		return lake_a<PRIMITIVE>(lake_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
@@ -805,20 +805,20 @@ public: ___STRANGE_COLLECTION___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<lake_data_a<PRIMITIVE>>(thing))
+		if (!check_<lake_a<PRIMITIVE>>(thing))
 		{
 			return false;
 		}
-		return _vector == cast_<lake_data_a<PRIMITIVE>>(thing).extract();
+		return _vector == cast_<lake_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<lake_data_a<PRIMITIVE>>(thing))
+		if (!check_<lake_a<PRIMITIVE>>(thing))
 		{
 			return true;
 		}
-		return _vector != cast_<lake_data_a<PRIMITIVE>>(thing).extract();
+		return _vector != cast_<lake_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
@@ -1126,34 +1126,34 @@ protected:
 	{}
 };
 
-template <typename _ABSTRACTION_ = lake_data_a<int8_t>>
+template <typename _ABSTRACTION_ = lake_a<int8_t>>
 using lake_int_8_t = lake_t<int8_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<uint8_t>>
+template <typename _ABSTRACTION_ = lake_a<uint8_t>>
 using lake_uint_8_t = lake_t<uint8_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<int16_t>>
+template <typename _ABSTRACTION_ = lake_a<int16_t>>
 using lake_int_16_t = lake_t<int16_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<uint16_t>>
+template <typename _ABSTRACTION_ = lake_a<uint16_t>>
 using lake_uint_16_t = lake_t<uint16_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<int32_t>>
+template <typename _ABSTRACTION_ = lake_a<int32_t>>
 using lake_int_32_t = lake_t<int32_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<uint32_t>>
+template <typename _ABSTRACTION_ = lake_a<uint32_t>>
 using lake_uint_32_t = lake_t<uint32_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<int64_t>>
+template <typename _ABSTRACTION_ = lake_a<int64_t>>
 using lake_int_64_t = lake_t<int64_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<uint64_t>>
+template <typename _ABSTRACTION_ = lake_a<uint64_t>>
 using lake_uint_64_t = lake_t<uint64_t, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<float>>
+template <typename _ABSTRACTION_ = lake_a<float>>
 using lake_float_32_t = lake_t<float, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_data_a<double>>
+template <typename _ABSTRACTION_ = lake_a<double>>
 using lake_float_64_t = lake_t<double, _ABSTRACTION_>;
 
 } // namespace strange
