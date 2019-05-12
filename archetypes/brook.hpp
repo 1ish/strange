@@ -14,7 +14,7 @@ template <typename _1_>
 class brook_a
 {
 public:
-	// data
+	// brook
 	inline std::deque<_1_> const& extract() const;
 	inline void mutate(std::deque<_1_> const& data);
 	inline std::deque<_1_>& reference();

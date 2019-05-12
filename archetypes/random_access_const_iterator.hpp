@@ -16,7 +16,7 @@ template <typename _1_>
 class random_access_const_iterator_a
 {
 public:
-	// random access iterator
+	// random access const iterator
 	inline any_a<> self_add__(range_a<> const& range);
 	inline random_access_const_iterator_a self_add_(number_a<> const& number);
 

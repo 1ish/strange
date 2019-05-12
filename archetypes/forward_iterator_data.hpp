@@ -14,7 +14,7 @@ template <typename _1_>
 class forward_iterator_data_a
 {
 public:
-	// data
+	// forward iterator data
 	inline _1_ const& extract() const;
 	inline void mutate(_1_ const& data);
 	inline _1_& reference();

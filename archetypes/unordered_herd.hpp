@@ -14,13 +14,12 @@ template <typename _1_>
 class unordered_herd_a
 {
 public:
-	// unordered_herd
+	// unordered herd
 	inline bool has(std::string const& s) const;
 	inline bool at(std::string const& s) const;
 	inline bool insert(std::string const& s);
 	inline bool erase(std::string const& s);
 
-	// data
 	inline std::unordered_set<any_a<>, any_a<>::hash_f> const& extract() const;
 	inline void mutate(std::unordered_set<any_a<>, any_a<>::hash_f> const& data);
 	inline std::unordered_set<any_a<>, any_a<>::hash_f>& reference();

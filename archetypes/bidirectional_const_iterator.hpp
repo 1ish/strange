@@ -15,7 +15,7 @@ template <typename _1_>
 class bidirectional_const_iterator_a
 {
 public:
-	// bidirectional iterator
+	// bidirectional const iterator
 	inline any_a<> decrement__(range_a<> const& _);
 	inline bidirectional_const_iterator_a decrement_();
 };

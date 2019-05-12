@@ -14,7 +14,7 @@ template <typename _1_>
 class random_access_const_iterator_data_a
 {
 public:
-	// data
+	// random access const iterator data
 	inline _1_ const& extract() const;
 	inline void mutate(_1_ const& data);
 	inline _1_& reference();

@@ -14,7 +14,7 @@ template <typename _1_>
 class squad_a
 {
 public:
-	// data
+	// squad
 	inline std::deque<any_a<>> const& extract() const;
 	inline void mutate(std::deque<any_a<>> const& data);
 	inline std::deque<any_a<>>& reference();

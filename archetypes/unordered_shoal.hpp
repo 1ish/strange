@@ -15,7 +15,7 @@ template <typename bidirectional_iterator_a>
 class unordered_shoal_a
 {
 public:
-	// unordered_shoal
+	// unordered shoal
 	inline bool has(std::string const& s) const;
 	inline any_a<> at(std::string const& s) const;
 	inline void update(std::string const& s, any_a<> const& value);

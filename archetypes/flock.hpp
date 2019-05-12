@@ -14,7 +14,7 @@ template <typename _1_>
 class flock_a
 {
 public:
-	// data
+	// flock
 	inline std::vector<any_a<>> const& extract() const;
 	inline void mutate(std::vector<any_a<>> const& data);
 	inline std::vector<any_a<>>& reference();

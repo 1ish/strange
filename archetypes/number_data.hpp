@@ -15,7 +15,7 @@ template <typename _1_>
 class number_data_a
 {
 public:
-	// data
+	// number data
 	inline _1_ const& extract() const;
 	inline void mutate(_1_ const& data);
 	inline _1_& reference();

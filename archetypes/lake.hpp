@@ -14,7 +14,7 @@ template <typename _1_>
 class lake_a
 {
 public:
-	// data
+	// lake
 	inline std::vector<_1_> const& extract() const;
 	inline void mutate(std::vector<_1_> const& data);
 	inline std::vector<_1_>& reference();
