@@ -55,13 +55,10 @@ template <typename _1_>
 class number_data_a;
 
 template <typename random_access_iterator_a = random_access_iterator_a<>>
-class lake_a;
+class inventory_a;
 
 template <typename _1_>
 class lake_data_a;
-
-template <typename random_access_iterator_a = random_access_iterator_a<>>
-class inventory_a;
 
 template <typename _1_>
 class brook_a;
@@ -139,13 +136,10 @@ class random_access_iterator_data_a;
 #include "strange_number_data_a.h"
 
 #define ___derived___ collection_a<>
-#include "strange_lake_a.h"
-
-#define ___derived___ lake_a<>
-#include "strange_lake_data_a.h"
-
-#define ___derived___ collection_a<>
 #include "strange_inventory_a.h"
+
+#define ___derived___ inventory_a<>
+#include "strange_lake_data_a.h"
 
 #define ___derived___ inventory_a<>
 #include "strange_brook_a.h"

@@ -78,7 +78,7 @@ TEST(TestCaseName, ForLoop)
 		std::cout << "caught: " << m.to_string() << std::endl;
 	}
 
-	lake_a<> lake = lake_float_64_t<>::val_();
+	inventory_a<> lake = lake_float_64_t<>::val_();
 	inventory_a<> brook = brook_float_32_t<>::val_();
 }
 /*
