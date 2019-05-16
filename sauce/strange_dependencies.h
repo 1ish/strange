@@ -14,5 +14,9 @@
 #include <memory>
 #include <type_traits>
 #include <utility>
+#include <ios>
+#include <fstream>
+#include <sstream>
+#include <iterator>
 
 #endif

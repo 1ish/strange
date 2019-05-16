@@ -83,7 +83,7 @@ TEST(TestCaseName, ForLoop)
 	inventory_a<> lake = lake_float_64_t<>::val_();
 	inventory_a<> brook = brook_float_32_t<>::val_();
 
-	river_a<> river;
+	river_a<> river = river_t<>::val();
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
