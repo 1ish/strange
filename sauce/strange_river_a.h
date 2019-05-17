@@ -115,13 +115,13 @@ namespace strange {
      { assert(handle_); return write().ignore__(range ); }
      any_a < > ignore_ ( number_data_a_int64 const & count )
      { assert(handle_); return write().ignore_(count ); }
-     void ignore ( int64_t count = 1 )
+     void ignore ( int64_t count )
      { assert(handle_); write().ignore(count ); }
      any_a < > read__ ( range_a < > const & range )
      { assert(handle_); return write().read__(range ); }
      lake_a_int8 read_ ( number_data_a_int64 const & count )
      { assert(handle_); return write().read_(count ); }
-     std :: vector < int8_t > read ( int64_t count = - 1 )
+     std :: vector < int8_t > read ( int64_t count )
      { assert(handle_); return write().read(count ); }
      any_a < > tellg__ ( range_a < > const & _ ) const
      { assert(handle_); return read().tellg__(_ ); }
@@ -264,10 +264,10 @@ namespace strange {
       virtual std :: vector < int8_t > getline ( int64_t count , int8_t delimiter ) = 0;
       virtual any_a < > ignore__ ( range_a < > const & range ) = 0;
       virtual any_a < > ignore_ ( number_data_a_int64 const & count ) = 0;
-      virtual void ignore ( int64_t count = 1 ) = 0;
+      virtual void ignore ( int64_t count ) = 0;
       virtual any_a < > read__ ( range_a < > const & range ) = 0;
       virtual lake_a_int8 read_ ( number_data_a_int64 const & count ) = 0;
-      virtual std :: vector < int8_t > read ( int64_t count = - 1 ) = 0;
+      virtual std :: vector < int8_t > read ( int64_t count ) = 0;
       virtual any_a < > tellg__ ( range_a < > const & _ ) const = 0;
       virtual number_data_a_int64 tellg_ ( ) const = 0;
       virtual int64_t tellg ( ) const = 0;
@@ -377,13 +377,13 @@ namespace strange {
       { return value_.ignore__(range ); }
       virtual any_a < > ignore_ ( number_data_a_int64 const & count )
       { return value_.ignore_(count ); }
-      virtual void ignore ( int64_t count = 1 )
+      virtual void ignore ( int64_t count )
       { value_.ignore(count ); }
       virtual any_a < > read__ ( range_a < > const & range )
       { return value_.read__(range ); }
       virtual lake_a_int8 read_ ( number_data_a_int64 const & count )
       { return value_.read_(count ); }
-      virtual std :: vector < int8_t > read ( int64_t count = - 1 )
+      virtual std :: vector < int8_t > read ( int64_t count )
       { return value_.read(count ); }
       virtual any_a < > tellg__ ( range_a < > const & _ ) const
       { return value_.tellg__(_ ); }

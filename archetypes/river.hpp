@@ -38,11 +38,11 @@ public:
 
 	any_a<> ignore__(range_a<> const& range);
 	any_a<> ignore_(number_data_a_int64 const& count);
-	void ignore(int64_t count = 1);
+	void ignore(int64_t count);
 
 	any_a<> read__(range_a<> const& range);
 	lake_a_int8 read_(number_data_a_int64 const& count);
-	std::vector<int8_t> read(int64_t count = -1);
+	std::vector<int8_t> read(int64_t count);
 
 	any_a<> tellg__(range_a<> const& _) const;
 	number_data_a_int64 tellg_() const;

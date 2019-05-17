@@ -332,20 +332,20 @@ namespace strange
 				return getline_();
 			}
 			any_a<> thing = *it;
-			if (!check_<number_a<>>(thing))
+			if (!check_<number_data_a<int64_t>>(thing))
 			{
-				throw dis("strange::river::getline passed non-number count");
+				throw dis("strange::river::getline passed non-int-64 count");
 			}
 			if (++it == range.cend())
 			{
-				return getline_(cast_<number_a<>>(thing).to_int_64_());
+				return getline_(cast_<number_data_a<int64_t>>(thing));
 			}
 			any_a<> delimiter = *it;
 			if (!check_<number_data_a<int8_t>>(delimiter))
 			{
 				throw dis("strange::river::getline passed non-int-8 delimiter");
 			}
-			return getline_(cast_<number_a<>>(thing).to_int_64_(), cast_<number_data_a<int8_t>>(delimiter));
+			return getline_(cast_<number_data_a<int64_t>>(thing), cast_<number_data_a<int8_t>>(delimiter));
 		}
 
 		inline lake_a<int8_t> getline_(number_data_a<int64_t> const& count = number_int_64_t<>::val(-1), number_data_a<int8_t> const& delimiter = number_int_8_t<>::val('\n'))
@@ -365,19 +365,13 @@ namespace strange
 			}
 			if (count < 0)
 			{
-				count = STRANGE_RIVER_DEFAULT_MAX_LINE_LENGTH;
+				std::string str;
+				std::getline(*_istream, str, char(delimiter));
+				return std::vector<int8_t>(str.cbegin(), str.cend());
 			}
-			std::vector<int8_t> v(std::size_t(count), 0);
-			_istream->getline(reinterpret_cast<char*>(&v[0]), count, delimiter);
-			// trim trailing zeros
-			while (--count >= 0)
-			{
-				if (v[std::size_t(count)])
-				{
-					break;
-				}
-			}
-			v.resize(std::size_t(count + 1));
+			std::vector<int8_t> v(std::size_t(++count), 0);
+			_istream->getline(reinterpret_cast<char*>(&v[0]), count, char(delimiter));
+			v.resize(std::size_t(std::max<int64_t>(0, _istream->gcount() - 1)));
 			return v;
 		}
 
@@ -391,7 +385,7 @@ namespace strange
 			any_a<> thing = *it;
 			if (!check_<number_data_a<int64_t>>(thing))
 			{
-				throw dis("strange::river::ignore passed non-number count");
+				throw dis("strange::river::ignore passed non-int-64 count");
 			}
 			return ignore_(cast_<number_data_a<int64_t>>(thing));
 		}
@@ -411,9 +405,45 @@ namespace strange
 			_istream->ignore(count);
 		}
 
-		inline any_a<> read__(range_a<> const& range);
-		inline lake_a<int8_t> read_(number_data_a<int64_t> const& count);
-		inline std::vector<int8_t> read(int64_t count = -1);
+		inline any_a<> read__(range_a<> const& range)
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				return read_();
+			}
+			any_a<> thing = *it;
+			if (!check_<number_data_a<int64_t>>(thing))
+			{
+				throw dis("strange::river::read passed non-int-64 count");
+			}
+			return read_(cast_<number_data_a<int64_t>>(thing));
+		}
+
+		inline lake_a<int8_t> read_(number_data_a<int64_t> const& count = number_int_64_t<>::val(-1))
+		{
+			return lake_int_8_t<>::val(read(count.extract()));
+		}
+
+		inline std::vector<int8_t> read(int64_t count = -1)
+		{
+			if (!count)
+			{
+				return std::vector<int8_t>{};
+			}
+			if (!_istream)
+			{
+				throw dis("strange::river::read can only be called on input rivers");
+			}
+			if (count < 0)
+			{
+				count = STRANGE_RIVER_DEFAULT_READ_SIZE;
+			}
+			std::vector<int8_t> v(std::size_t(count), 0);
+			_istream->read(reinterpret_cast<char*>(&v[0]), count);
+			v.resize(std::size_t(_istream->gcount()));
+			return v;
+		}
 
 		inline any_a<> tellg__(range_a<> const& _) const;
 		inline number_data_a<int64_t> tellg_() const;
