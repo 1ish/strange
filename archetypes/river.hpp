@@ -33,8 +33,8 @@ public:
 	void putback(int8_t int_8);
 
 	any_a<> getline__(range_a<> const& range);
-	lake_a_int8 getline_(number_data_a_int64 const& count, number_data_a_int8 const& delim);
-	std::vector<int8_t> getline(int64_t count = -1, int8_t delim = '\n');
+	lake_a_int8 getline_(number_data_a_int64 const& count, number_data_a_int8 const& delimiter);
+	std::vector<int8_t> getline(int64_t count, int8_t delimiter);
 
 	any_a<> ignore__(range_a<> const& range);
 	any_a<> ignore_(number_data_a_int64 const& count);

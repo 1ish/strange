@@ -107,10 +107,10 @@ namespace strange {
      { assert(handle_); write().putback(int_8 ); }
      any_a < > getline__ ( range_a < > const & range )
      { assert(handle_); return write().getline__(range ); }
-     lake_a_int8 getline_ ( number_data_a_int64 const & count , number_data_a_int8 const & delim )
-     { assert(handle_); return write().getline_(count, delim ); }
-     std :: vector < int8_t > getline ( int64_t count = - 1 , int8_t delim = '\n' )
-     { assert(handle_); return write().getline(count, delim ); }
+     lake_a_int8 getline_ ( number_data_a_int64 const & count , number_data_a_int8 const & delimiter )
+     { assert(handle_); return write().getline_(count, delimiter ); }
+     std :: vector < int8_t > getline ( int64_t count , int8_t delimiter )
+     { assert(handle_); return write().getline(count, delimiter ); }
      any_a < > ignore__ ( range_a < > const & range )
      { assert(handle_); return write().ignore__(range ); }
      any_a < > ignore_ ( number_data_a_int64 const & count )
@@ -260,8 +260,8 @@ namespace strange {
       virtual any_a < > putback_ ( number_data_a_int8 const & int_8 ) = 0;
       virtual void putback ( int8_t int_8 ) = 0;
       virtual any_a < > getline__ ( range_a < > const & range ) = 0;
-      virtual lake_a_int8 getline_ ( number_data_a_int64 const & count , number_data_a_int8 const & delim ) = 0;
-      virtual std :: vector < int8_t > getline ( int64_t count = - 1 , int8_t delim = '\n' ) = 0;
+      virtual lake_a_int8 getline_ ( number_data_a_int64 const & count , number_data_a_int8 const & delimiter ) = 0;
+      virtual std :: vector < int8_t > getline ( int64_t count , int8_t delimiter ) = 0;
       virtual any_a < > ignore__ ( range_a < > const & range ) = 0;
       virtual any_a < > ignore_ ( number_data_a_int64 const & count ) = 0;
       virtual void ignore ( int64_t count = 1 ) = 0;
@@ -369,10 +369,10 @@ namespace strange {
       { value_.putback(int_8 ); }
       virtual any_a < > getline__ ( range_a < > const & range )
       { return value_.getline__(range ); }
-      virtual lake_a_int8 getline_ ( number_data_a_int64 const & count , number_data_a_int8 const & delim )
-      { return value_.getline_(count, delim ); }
-      virtual std :: vector < int8_t > getline ( int64_t count = - 1 , int8_t delim = '\n' )
-      { return value_.getline(count, delim ); }
+      virtual lake_a_int8 getline_ ( number_data_a_int64 const & count , number_data_a_int8 const & delimiter )
+      { return value_.getline_(count, delimiter ); }
+      virtual std :: vector < int8_t > getline ( int64_t count , int8_t delimiter )
+      { return value_.getline(count, delimiter ); }
       virtual any_a < > ignore__ ( range_a < > const & range )
       { return value_.ignore__(range ); }
       virtual any_a < > ignore_ ( number_data_a_int64 const & count )
