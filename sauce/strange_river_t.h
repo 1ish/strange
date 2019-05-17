@@ -445,25 +445,133 @@ namespace strange
 			return v;
 		}
 
-		inline any_a<> tellg__(range_a<> const& _) const;
-		inline number_data_a<int64_t> tellg_() const;
-		inline int64_t tellg() const;
+		inline any_a<> tellg__(range_a<> const& _) const
+		{
+			return tellg_();
+		}
 
-		inline any_a<> seekg_beg__(range_a<> const& range);
-		inline any_a<> seekg_beg_(number_data_a<int64_t> const& pos);
-		inline void seekg_beg(int64_t pos);
+		inline number_data_a<int64_t> tellg_() const
+		{
+			return number_int_64_t<>::val(tellg());
+		}
 
-		inline any_a<> seekg_end__(range_a<> const& range);
-		inline any_a<> seekg_end_(number_data_a<int64_t> const& pos);
-		inline void seekg_end(int64_t pos);
+		inline int64_t tellg() const
+		{
+			if (!_istream)
+			{
+				throw dis("strange::river::tellg can only be called on input rivers");
+			}
+			return _istream->tellg();
+		}
 
-		inline any_a<> seekg_cur__(range_a<> const& range);
-		inline any_a<> seekg_cur_(number_data_a<int64_t> const& pos);
-		inline void seekg_cur(int64_t pos);
+		inline any_a<> seekg_beg__(range_a<> const& range)
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				return seekg_beg_();
+			}
+			any_a<> thing = *it;
+			if (!check_<number_data_a<int64_t>>(thing))
+			{
+				throw dis("strange::river::seekg_beg passed non-int-64 pos");
+			}
+			return seekg_beg_(cast_<number_data_a<int64_t>>(thing));
+		}
 
-		inline any_a<> sync__(range_a<> const& _);
-		inline any_a<> sync_();
-		inline bool sync();
+		inline any_a<> seekg_beg_(number_data_a<int64_t> const& pos = number_int_64_t<>::val_())
+		{
+			seekg_beg(pos.extract());
+			return me_();
+		}
+
+		inline void seekg_beg(int64_t pos)
+		{
+			if (!_istream)
+			{
+				throw dis("strange::river::seekg_beg can only be called on input rivers");
+			}
+			_istream->seekg(pos, std::ios_base::beg);
+		}
+
+		inline any_a<> seekg_end__(range_a<> const& range)
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				return seekg_end_();
+			}
+			any_a<> thing = *it;
+			if (!check_<number_data_a<int64_t>>(thing))
+			{
+				throw dis("strange::river::seekg_end passed non-int-64 pos");
+			}
+			return seekg_end_(cast_<number_data_a<int64_t>>(thing));
+		}
+
+		inline any_a<> seekg_end_(number_data_a<int64_t> const& pos = number_int_64_t<>::val_())
+		{
+			seekg_end(pos.extract());
+			return me_();
+		}
+
+		inline void seekg_end(int64_t pos)
+		{
+			if (!_istream)
+			{
+				throw dis("strange::river::seekg_end can only be called on input rivers");
+			}
+			_istream->seekg(pos, std::ios_base::end);
+		}
+
+		inline any_a<> seekg_cur__(range_a<> const& range)
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				return seekg_cur_();
+			}
+			any_a<> thing = *it;
+			if (!check_<number_data_a<int64_t>>(thing))
+			{
+				throw dis("strange::river::seekg_cur passed non-int-64 pos");
+			}
+			return seekg_cur_(cast_<number_data_a<int64_t>>(thing));
+		}
+
+		inline any_a<> seekg_cur_(number_data_a<int64_t> const& pos = number_int_64_t<>::val_())
+		{
+			seekg_cur(pos.extract());
+			return me_();
+		}
+
+		inline void seekg_cur(int64_t pos)
+		{
+			if (!_istream)
+			{
+				throw dis("strange::river::seekg_cur can only be called on input rivers");
+			}
+			_istream->seekg(pos, std::ios_base::cur);
+		}
+
+		inline any_a<> sync__(range_a<> const& _)
+		{
+			return sync_();
+		}
+
+		inline any_a<> sync_()
+		{
+			return _boole_(sync());
+		}
+
+		inline bool sync()
+		{
+			if (!_istream)
+			{
+				throw dis("strange::river::sync can only be called on input rivers");
+			}
+			return !_istream->sync();
+		}
 
 		// river output
 		inline any_a<> put__(range_a<> const& range);
