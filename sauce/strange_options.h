@@ -3,6 +3,11 @@
 
 // options
 
+namespace strange
+{
+	int64_t const STRANGE_RIVER_DEFAULT_MAX_LINE_LENGTH = 1024;
+}
+
 #ifdef _DEBUG
 #define STRANGE_CHECK_STATIC_CASTS 1
 #define STRANGE_CHECK_UNSIGNED_CONVERSIONS 1
