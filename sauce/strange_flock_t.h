@@ -1030,7 +1030,7 @@ public: ___STRANGE_COLLECTION___
 			}
 			for (auto const& thing : cast_<range_a<>>(range))
 			{
-				push_back(thing);
+				_vector.push_back(thing);
 			}
 		}
 		return *this;

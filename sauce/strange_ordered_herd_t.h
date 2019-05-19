@@ -355,26 +355,42 @@ public: ___STRANGE_COLLECTION___
 
 	inline ordered_herd_t& operator+=(any_a<> const& range)
 	{
-		if (!check_<range_a<>>(range))
+		if (check_<ordered_herd_a<>>(range))
 		{
-			throw dis("strange::ordered_herd += passed non-range");
+			auto other = cast_<ordered_herd_a<>>(range).extract();
+			_set.insert(other.cbegin(), other.cend());
 		}
-		for (auto const& thing : cast_<range_a<>>(range))
+		else
 		{
-			insert__(thing.to_range_());
+			if (!check_<range_a<>>(range))
+			{
+				throw dis("strange::ordered_herd += passed non-range");
+			}
+			for (auto const& thing : cast_<range_a<>>(range))
+			{
+				_set.insert(thing);
+			}
 		}
 		return *this;
 	}
 
 	inline ordered_herd_t& operator-=(any_a<> const& range)
 	{
-		if (!check_<range_a<>>(range))
+		if (check_<ordered_herd_a<>>(range))
 		{
-			throw dis("strange::ordered_herd -= passed non-range");
+			auto other = cast_<ordered_herd_a<>>(range).extract();
+			_set.erase(other.cbegin(), other.cend());
 		}
-		for (auto const& thing : cast_<range_a<>>(range))
+		else
 		{
-			erase__(thing.to_range_());
+			if (!check_<range_a<>>(range))
+			{
+				throw dis("strange::ordered_herd -= passed non-range");
+			}
+			for (auto const& thing : cast_<range_a<>>(range))
+			{
+				_set.erase(thing);
+			}
 		}
 		return *this;
 	}
