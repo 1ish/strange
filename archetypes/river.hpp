@@ -49,16 +49,16 @@ public:
 	int64_t tellg() const;
 
 	any_a<> seekg_beg__(range_a<> const& range);
-	any_a<> seekg_beg_(number_data_a_int64 const& pos);
-	void seekg_beg(int64_t pos);
+	any_a<> seekg_beg_(number_data_a_int64 const& offset);
+	void seekg_beg(int64_t offset);
 
 	any_a<> seekg_end__(range_a<> const& range);
-	any_a<> seekg_end_(number_data_a_int64 const& pos);
-	void seekg_end(int64_t pos);
+	any_a<> seekg_end_(number_data_a_int64 const& offset);
+	void seekg_end(int64_t offset);
 
 	any_a<> seekg_cur__(range_a<> const& range);
-	any_a<> seekg_cur_(number_data_a_int64 const& pos);
-	void seekg_cur(int64_t pos);
+	any_a<> seekg_cur_(number_data_a_int64 const& offset);
+	void seekg_cur(int64_t offset);
 
 	any_a<> sync__(range_a<> const& _);
 	any_a<> sync_();
@@ -78,16 +78,16 @@ public:
 	int64_t tellp() const;
 
 	any_a<> seekp_beg__(range_a<> const& range);
-	any_a<> seekp_beg_(number_data_a_int64 const& pos);
-	void seekp_beg(int64_t pos);
+	any_a<> seekp_beg_(number_data_a_int64 const& offset);
+	void seekp_beg(int64_t offset);
 
 	any_a<> seekp_end__(range_a<> const& range);
-	any_a<> seekp_end_(number_data_a_int64 const& pos);
-	void seekp_end(int64_t pos);
+	any_a<> seekp_end_(number_data_a_int64 const& offset);
+	void seekp_end(int64_t offset);
 
 	any_a<> seekp_cur__(range_a<> const& range);
-	any_a<> seekp_cur_(number_data_a_int64 const& pos);
-	void seekp_cur(int64_t pos);
+	any_a<> seekp_cur_(number_data_a_int64 const& offset);
+	void seekp_cur(int64_t offset);
 
 	any_a<> flush__(range_a<> const& _);
 	any_a<> flush_();

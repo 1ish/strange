@@ -131,22 +131,22 @@ namespace strange {
      { assert(handle_); return read().tellg( ); }
      any_a < > seekg_beg__ ( range_a < > const & range )
      { assert(handle_); return write().seekg_beg__(range ); }
-     any_a < > seekg_beg_ ( number_data_a_int64 const & pos )
-     { assert(handle_); return write().seekg_beg_(pos ); }
-     void seekg_beg ( int64_t pos )
-     { assert(handle_); write().seekg_beg(pos ); }
+     any_a < > seekg_beg_ ( number_data_a_int64 const & offset )
+     { assert(handle_); return write().seekg_beg_(offset ); }
+     void seekg_beg ( int64_t offset )
+     { assert(handle_); write().seekg_beg(offset ); }
      any_a < > seekg_end__ ( range_a < > const & range )
      { assert(handle_); return write().seekg_end__(range ); }
-     any_a < > seekg_end_ ( number_data_a_int64 const & pos )
-     { assert(handle_); return write().seekg_end_(pos ); }
-     void seekg_end ( int64_t pos )
-     { assert(handle_); write().seekg_end(pos ); }
+     any_a < > seekg_end_ ( number_data_a_int64 const & offset )
+     { assert(handle_); return write().seekg_end_(offset ); }
+     void seekg_end ( int64_t offset )
+     { assert(handle_); write().seekg_end(offset ); }
      any_a < > seekg_cur__ ( range_a < > const & range )
      { assert(handle_); return write().seekg_cur__(range ); }
-     any_a < > seekg_cur_ ( number_data_a_int64 const & pos )
-     { assert(handle_); return write().seekg_cur_(pos ); }
-     void seekg_cur ( int64_t pos )
-     { assert(handle_); write().seekg_cur(pos ); }
+     any_a < > seekg_cur_ ( number_data_a_int64 const & offset )
+     { assert(handle_); return write().seekg_cur_(offset ); }
+     void seekg_cur ( int64_t offset )
+     { assert(handle_); write().seekg_cur(offset ); }
      any_a < > sync__ ( range_a < > const & _ )
      { assert(handle_); return write().sync__(_ ); }
      any_a < > sync_ ( )
@@ -173,22 +173,22 @@ namespace strange {
      { assert(handle_); return read().tellp( ); }
      any_a < > seekp_beg__ ( range_a < > const & range )
      { assert(handle_); return write().seekp_beg__(range ); }
-     any_a < > seekp_beg_ ( number_data_a_int64 const & pos )
-     { assert(handle_); return write().seekp_beg_(pos ); }
-     void seekp_beg ( int64_t pos )
-     { assert(handle_); write().seekp_beg(pos ); }
+     any_a < > seekp_beg_ ( number_data_a_int64 const & offset )
+     { assert(handle_); return write().seekp_beg_(offset ); }
+     void seekp_beg ( int64_t offset )
+     { assert(handle_); write().seekp_beg(offset ); }
      any_a < > seekp_end__ ( range_a < > const & range )
      { assert(handle_); return write().seekp_end__(range ); }
-     any_a < > seekp_end_ ( number_data_a_int64 const & pos )
-     { assert(handle_); return write().seekp_end_(pos ); }
-     void seekp_end ( int64_t pos )
-     { assert(handle_); write().seekp_end(pos ); }
+     any_a < > seekp_end_ ( number_data_a_int64 const & offset )
+     { assert(handle_); return write().seekp_end_(offset ); }
+     void seekp_end ( int64_t offset )
+     { assert(handle_); write().seekp_end(offset ); }
      any_a < > seekp_cur__ ( range_a < > const & range )
      { assert(handle_); return write().seekp_cur__(range ); }
-     any_a < > seekp_cur_ ( number_data_a_int64 const & pos )
-     { assert(handle_); return write().seekp_cur_(pos ); }
-     void seekp_cur ( int64_t pos )
-     { assert(handle_); write().seekp_cur(pos ); }
+     any_a < > seekp_cur_ ( number_data_a_int64 const & offset )
+     { assert(handle_); return write().seekp_cur_(offset ); }
+     void seekp_cur ( int64_t offset )
+     { assert(handle_); write().seekp_cur(offset ); }
      any_a < > flush__ ( range_a < > const & _ )
      { assert(handle_); return write().flush__(_ ); }
      any_a < > flush_ ( )
@@ -272,14 +272,14 @@ namespace strange {
       virtual number_data_a_int64 tellg_ ( ) const = 0;
       virtual int64_t tellg ( ) const = 0;
       virtual any_a < > seekg_beg__ ( range_a < > const & range ) = 0;
-      virtual any_a < > seekg_beg_ ( number_data_a_int64 const & pos ) = 0;
-      virtual void seekg_beg ( int64_t pos ) = 0;
+      virtual any_a < > seekg_beg_ ( number_data_a_int64 const & offset ) = 0;
+      virtual void seekg_beg ( int64_t offset ) = 0;
       virtual any_a < > seekg_end__ ( range_a < > const & range ) = 0;
-      virtual any_a < > seekg_end_ ( number_data_a_int64 const & pos ) = 0;
-      virtual void seekg_end ( int64_t pos ) = 0;
+      virtual any_a < > seekg_end_ ( number_data_a_int64 const & offset ) = 0;
+      virtual void seekg_end ( int64_t offset ) = 0;
       virtual any_a < > seekg_cur__ ( range_a < > const & range ) = 0;
-      virtual any_a < > seekg_cur_ ( number_data_a_int64 const & pos ) = 0;
-      virtual void seekg_cur ( int64_t pos ) = 0;
+      virtual any_a < > seekg_cur_ ( number_data_a_int64 const & offset ) = 0;
+      virtual void seekg_cur ( int64_t offset ) = 0;
       virtual any_a < > sync__ ( range_a < > const & _ ) = 0;
       virtual any_a < > sync_ ( ) = 0;
       virtual bool sync ( ) = 0;
@@ -293,14 +293,14 @@ namespace strange {
       virtual number_data_a_int64 tellp_ ( ) const = 0;
       virtual int64_t tellp ( ) const = 0;
       virtual any_a < > seekp_beg__ ( range_a < > const & range ) = 0;
-      virtual any_a < > seekp_beg_ ( number_data_a_int64 const & pos ) = 0;
-      virtual void seekp_beg ( int64_t pos ) = 0;
+      virtual any_a < > seekp_beg_ ( number_data_a_int64 const & offset ) = 0;
+      virtual void seekp_beg ( int64_t offset ) = 0;
       virtual any_a < > seekp_end__ ( range_a < > const & range ) = 0;
-      virtual any_a < > seekp_end_ ( number_data_a_int64 const & pos ) = 0;
-      virtual void seekp_end ( int64_t pos ) = 0;
+      virtual any_a < > seekp_end_ ( number_data_a_int64 const & offset ) = 0;
+      virtual void seekp_end ( int64_t offset ) = 0;
       virtual any_a < > seekp_cur__ ( range_a < > const & range ) = 0;
-      virtual any_a < > seekp_cur_ ( number_data_a_int64 const & pos ) = 0;
-      virtual void seekp_cur ( int64_t pos ) = 0;
+      virtual any_a < > seekp_cur_ ( number_data_a_int64 const & offset ) = 0;
+      virtual void seekp_cur ( int64_t offset ) = 0;
       virtual any_a < > flush__ ( range_a < > const & _ ) = 0;
       virtual any_a < > flush_ ( ) = 0;
       virtual void flush ( ) = 0;
@@ -393,22 +393,22 @@ namespace strange {
       { return value_.tellg( ); }
       virtual any_a < > seekg_beg__ ( range_a < > const & range )
       { return value_.seekg_beg__(range ); }
-      virtual any_a < > seekg_beg_ ( number_data_a_int64 const & pos )
-      { return value_.seekg_beg_(pos ); }
-      virtual void seekg_beg ( int64_t pos )
-      { value_.seekg_beg(pos ); }
+      virtual any_a < > seekg_beg_ ( number_data_a_int64 const & offset )
+      { return value_.seekg_beg_(offset ); }
+      virtual void seekg_beg ( int64_t offset )
+      { value_.seekg_beg(offset ); }
       virtual any_a < > seekg_end__ ( range_a < > const & range )
       { return value_.seekg_end__(range ); }
-      virtual any_a < > seekg_end_ ( number_data_a_int64 const & pos )
-      { return value_.seekg_end_(pos ); }
-      virtual void seekg_end ( int64_t pos )
-      { value_.seekg_end(pos ); }
+      virtual any_a < > seekg_end_ ( number_data_a_int64 const & offset )
+      { return value_.seekg_end_(offset ); }
+      virtual void seekg_end ( int64_t offset )
+      { value_.seekg_end(offset ); }
       virtual any_a < > seekg_cur__ ( range_a < > const & range )
       { return value_.seekg_cur__(range ); }
-      virtual any_a < > seekg_cur_ ( number_data_a_int64 const & pos )
-      { return value_.seekg_cur_(pos ); }
-      virtual void seekg_cur ( int64_t pos )
-      { value_.seekg_cur(pos ); }
+      virtual any_a < > seekg_cur_ ( number_data_a_int64 const & offset )
+      { return value_.seekg_cur_(offset ); }
+      virtual void seekg_cur ( int64_t offset )
+      { value_.seekg_cur(offset ); }
       virtual any_a < > sync__ ( range_a < > const & _ )
       { return value_.sync__(_ ); }
       virtual any_a < > sync_ ( )
@@ -435,22 +435,22 @@ namespace strange {
       { return value_.tellp( ); }
       virtual any_a < > seekp_beg__ ( range_a < > const & range )
       { return value_.seekp_beg__(range ); }
-      virtual any_a < > seekp_beg_ ( number_data_a_int64 const & pos )
-      { return value_.seekp_beg_(pos ); }
-      virtual void seekp_beg ( int64_t pos )
-      { value_.seekp_beg(pos ); }
+      virtual any_a < > seekp_beg_ ( number_data_a_int64 const & offset )
+      { return value_.seekp_beg_(offset ); }
+      virtual void seekp_beg ( int64_t offset )
+      { value_.seekp_beg(offset ); }
       virtual any_a < > seekp_end__ ( range_a < > const & range )
       { return value_.seekp_end__(range ); }
-      virtual any_a < > seekp_end_ ( number_data_a_int64 const & pos )
-      { return value_.seekp_end_(pos ); }
-      virtual void seekp_end ( int64_t pos )
-      { value_.seekp_end(pos ); }
+      virtual any_a < > seekp_end_ ( number_data_a_int64 const & offset )
+      { return value_.seekp_end_(offset ); }
+      virtual void seekp_end ( int64_t offset )
+      { value_.seekp_end(offset ); }
       virtual any_a < > seekp_cur__ ( range_a < > const & range )
       { return value_.seekp_cur__(range ); }
-      virtual any_a < > seekp_cur_ ( number_data_a_int64 const & pos )
-      { return value_.seekp_cur_(pos ); }
-      virtual void seekp_cur ( int64_t pos )
-      { value_.seekp_cur(pos ); }
+      virtual any_a < > seekp_cur_ ( number_data_a_int64 const & offset )
+      { return value_.seekp_cur_(offset ); }
+      virtual void seekp_cur ( int64_t offset )
+      { value_.seekp_cur(offset ); }
       virtual any_a < > flush__ ( range_a < > const & _ )
       { return value_.flush__(_ ); }
       virtual any_a < > flush_ ( )
