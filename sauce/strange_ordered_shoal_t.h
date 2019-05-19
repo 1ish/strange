@@ -538,12 +538,19 @@ public: ___STRANGE_COLLECTION___
 
 	inline void push_front(any_a<> const& thing)
 	{
-		push_back(thing);
+		_map[thing] = thing;
 	}
 
 	inline any_a<> pop_front_()
 	{
-		return pop_back_();
+		std_map_any_any::const_iterator const it = _map.cbegin();
+		if (it == _map.cend())
+		{
+			return nothing_t<>::val_();
+		}
+		any_a<> result = it->second;
+		_map.erase(it);
+		return result;
 	}
 
 	inline void push_back(any_a<> const& thing)
@@ -553,12 +560,12 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> pop_back_()
 	{
-		std_map_any_any::const_iterator const it = _map.cbegin();
-		if (it == _map.cend())
+		std_map_any_any::const_iterator it = _map.cend();
+		if (it == _map.cbegin())
 		{
 			return nothing_t<>::val_();
 		}
-		any_a<> result = it->second;
+		any_a<> result = (--it)->second;
 		_map.erase(it);
 		return result;
 	}

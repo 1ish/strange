@@ -328,12 +328,19 @@ public: ___STRANGE_COLLECTION___
 
 	inline void push_front(any_a<> const& thing)
 	{
-		push_back(thing);
+		_set.insert(thing);
 	}
 
 	inline any_a<> pop_front_()
 	{
-		return pop_back_();
+		std_set_any::const_iterator const it = _set.cbegin();
+		if (it == _set.cend())
+		{
+			return nothing_t<>::val_();
+		}
+		any_a<> result = *it;
+		_set.erase(it);
+		return result;
 	}
 
 	inline void push_back(any_a<> const& thing)
@@ -343,12 +350,12 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> pop_back_()
 	{
-		std_set_any::const_iterator const it = _set.cbegin();
-		if (it == _set.cend())
+		std_set_any::const_iterator it = _set.cend();
+		if (it == _set.cbegin())
 		{
 			return nothing_t<>::val_();
 		}
-		any_a<> result = *it;
+		any_a<> result = *--it;
 		_set.erase(it);
 		return result;
 	}
