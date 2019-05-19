@@ -137,66 +137,66 @@ inline any_a<> pop_back__(range_a<> const&) \
 } \
 inline _ABSTRACTION_ self_add__(range_a<> const& range) \
 { \
-	for (auto const& collection : range) \
+	for (auto const& rng : range) \
 	{ \
-		operator+=(collection); \
+		operator+=(rng); \
 	} \
 	return me_(); \
 } \
-inline _ABSTRACTION_ self_add_(collection_a<> const& collection) \
+inline _ABSTRACTION_ self_add_(range_a<> const& range) \
 { \
-	operator+=(collection); \
+	operator+=(range); \
 	return me_(); \
 } \
 inline _ABSTRACTION_ add__(range_a<> const& range) const \
 { \
 	_ABSTRACTION_ result = me_(); \
-	for (auto const& collection : range) \
+	for (auto const& rng : range) \
 	{ \
-		result += collection; \
+		result += rng; \
 	} \
 	return result; \
 } \
-inline _ABSTRACTION_ add_(collection_a<> const& collection) const \
+inline _ABSTRACTION_ add_(range_a<> const& range) const \
 { \
-	return operator+(collection); \
+	return operator+(range); \
 } \
-inline _ABSTRACTION_ operator+(collection_a<> const& collection) const \
+inline _ABSTRACTION_ operator+(range_a<> const& range) const \
 { \
 	_ABSTRACTION_ result = me_(); \
-	result += collection; \
+	result += range; \
 	return result; \
 } \
 inline _ABSTRACTION_ self_subtract__(range_a<> const& range) \
 { \
-	for (auto const& collection : range) \
+	for (auto const& rng : range) \
 	{ \
-		operator-=(collection); \
+		operator-=(rng); \
 	} \
 	return me_(); \
 } \
-inline _ABSTRACTION_ self_subtract_(collection_a<> const& collection) \
+inline _ABSTRACTION_ self_subtract_(range_a<> const& range) \
 { \
-	operator-=(collection); \
+	operator-=(range); \
 	return me_(); \
 } \
 inline _ABSTRACTION_ subtract__(range_a<> const& range) const \
 { \
 	_ABSTRACTION_ result = me_(); \
-	for (auto const& collection : range) \
+	for (auto const& rng : range) \
 	{ \
-		result -= collection; \
+		result -= rng; \
 	} \
 	return result; \
 } \
-inline _ABSTRACTION_ subtract_(collection_a<> const& collection) const \
+inline _ABSTRACTION_ subtract_(range_a<> const& range) const \
 { \
-	return operator-(collection); \
+	return operator-(range); \
 } \
-inline _ABSTRACTION_ operator-(collection_a<> const& collection) const \
+inline _ABSTRACTION_ operator-(range_a<> const& range) const \
 { \
 	_ABSTRACTION_ result = me_(); \
-	result -= collection; \
+	result -= range; \
 	return result; \
 } \
 

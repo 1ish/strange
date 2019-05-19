@@ -147,24 +147,24 @@ namespace strange {
      { assert(handle_); return write().pop_back_( ); }
      inline any_a < > self_add__ ( range_a < > const & range )
      { assert(handle_); return write().self_add__(range ); }
-     inline collection_a self_add_ ( collection_a const & collection )
-     { assert(handle_); return write().self_add_(collection ); }
+     inline range_a < > self_add_ ( range_a < > const & range )
+     { assert(handle_); return write().self_add_(range ); }
      inline any_a < > add__ ( range_a < > const & range ) const
      { assert(handle_); return read().add__(range ); }
-     inline collection_a add_ ( collection_a const & collection ) const
-     { assert(handle_); return read().add_(collection ); }
-     inline collection_a operator + ( collection_a const & collection ) const
-     { assert(handle_); return read().operator+(collection ); }
+     inline range_a < > add_ ( range_a < > const & range ) const
+     { assert(handle_); return read().add_(range ); }
+     inline range_a < > operator + ( range_a < > const & range ) const
+     { assert(handle_); return read().operator+(range ); }
      inline any_a < > self_subtract__ ( range_a < > const & range )
      { assert(handle_); return write().self_subtract__(range ); }
-     inline collection_a self_subtract_ ( collection_a const & collection )
-     { assert(handle_); return write().self_subtract_(collection ); }
+     inline range_a < > self_subtract_ ( range_a < > const & range )
+     { assert(handle_); return write().self_subtract_(range ); }
      inline any_a < > subtract__ ( range_a < > const & range ) const
      { assert(handle_); return read().subtract__(range ); }
-     inline collection_a subtract_ ( collection_a const & collection ) const
-     { assert(handle_); return read().subtract_(collection ); }
-     inline collection_a operator - ( collection_a const & collection ) const
-     { assert(handle_); return read().operator-(collection ); }
+     inline range_a < > subtract_ ( range_a < > const & range ) const
+     { assert(handle_); return read().subtract_(range ); }
+     inline range_a < > operator - ( range_a < > const & range ) const
+     { assert(handle_); return read().operator-(range ); }
     
     protected:
     	struct ___dderived_handle_base___ : ___derived_handle_base___
@@ -202,15 +202,15 @@ namespace strange {
       virtual inline any_a < > pop_back__ ( range_a < > const & _ ) = 0;
       virtual inline any_a < > pop_back_ ( ) = 0;
       virtual inline any_a < > self_add__ ( range_a < > const & range ) = 0;
-      virtual inline collection_a self_add_ ( collection_a const & collection ) = 0;
+      virtual inline range_a < > self_add_ ( range_a < > const & range ) = 0;
       virtual inline any_a < > add__ ( range_a < > const & range ) const = 0;
-      virtual inline collection_a add_ ( collection_a const & collection ) const = 0;
-      virtual inline collection_a operator + ( collection_a const & collection ) const = 0;
+      virtual inline range_a < > add_ ( range_a < > const & range ) const = 0;
+      virtual inline range_a < > operator + ( range_a < > const & range ) const = 0;
       virtual inline any_a < > self_subtract__ ( range_a < > const & range ) = 0;
-      virtual inline collection_a self_subtract_ ( collection_a const & collection ) = 0;
+      virtual inline range_a < > self_subtract_ ( range_a < > const & range ) = 0;
       virtual inline any_a < > subtract__ ( range_a < > const & range ) const = 0;
-      virtual inline collection_a subtract_ ( collection_a const & collection ) const = 0;
-      virtual inline collection_a operator - ( collection_a const & collection ) const = 0;
+      virtual inline range_a < > subtract_ ( range_a < > const & range ) const = 0;
+      virtual inline range_a < > operator - ( range_a < > const & range ) const = 0;
     	};
     
     	template <typename ___TTT___, typename ___DDHB___ = ___dderived_handle_base___>
@@ -292,24 +292,24 @@ namespace strange {
       { return value_.pop_back_( ); }
       virtual inline any_a < > self_add__ ( range_a < > const & range )
       { return value_.self_add__(range ); }
-      virtual inline collection_a self_add_ ( collection_a const & collection )
-      { return value_.self_add_(collection ); }
+      virtual inline range_a < > self_add_ ( range_a < > const & range )
+      { return value_.self_add_(range ); }
       virtual inline any_a < > add__ ( range_a < > const & range ) const
       { return value_.add__(range ); }
-      virtual inline collection_a add_ ( collection_a const & collection ) const
-      { return value_.add_(collection ); }
-      virtual inline collection_a operator + ( collection_a const & collection ) const
-      { return value_.operator+(collection ); }
+      virtual inline range_a < > add_ ( range_a < > const & range ) const
+      { return value_.add_(range ); }
+      virtual inline range_a < > operator + ( range_a < > const & range ) const
+      { return value_.operator+(range ); }
       virtual inline any_a < > self_subtract__ ( range_a < > const & range )
       { return value_.self_subtract__(range ); }
-      virtual inline collection_a self_subtract_ ( collection_a const & collection )
-      { return value_.self_subtract_(collection ); }
+      virtual inline range_a < > self_subtract_ ( range_a < > const & range )
+      { return value_.self_subtract_(range ); }
       virtual inline any_a < > subtract__ ( range_a < > const & range ) const
       { return value_.subtract__(range ); }
-      virtual inline collection_a subtract_ ( collection_a const & collection ) const
-      { return value_.subtract_(collection ); }
-      virtual inline collection_a operator - ( collection_a const & collection ) const
-      { return value_.operator-(collection ); }
+      virtual inline range_a < > subtract_ ( range_a < > const & range ) const
+      { return value_.subtract_(range ); }
+      virtual inline range_a < > operator - ( range_a < > const & range ) const
+      { return value_.operator-(range ); }
     	};
     
     	template <typename ___TTT___, typename ___DDHB___>

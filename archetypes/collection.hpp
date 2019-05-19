@@ -61,18 +61,18 @@ public:
 	inline any_a<> pop_back_();
 
 	inline any_a<> self_add__(range_a<> const& range);
-	inline collection_a self_add_(collection_a const& collection);
+	inline range_a<> self_add_(range_a<> const& range);
 
 	inline any_a<> add__(range_a<> const& range) const;
-	inline collection_a add_(collection_a const& collection) const;
-	inline collection_a operator+(collection_a const& collection) const;
+	inline range_a<> add_(range_a<> const& range) const;
+	inline range_a<> operator+(range_a<> const& range) const;
 
 	inline any_a<> self_subtract__(range_a<> const& range);
-	inline collection_a self_subtract_(collection_a const& collection);
+	inline range_a<> self_subtract_(range_a<> const& range);
 
 	inline any_a<> subtract__(range_a<> const& range) const;
-	inline collection_a subtract_(collection_a const& collection) const;
-	inline collection_a operator-(collection_a const& collection) const;
+	inline range_a<> subtract_(range_a<> const& range) const;
+	inline range_a<> operator-(range_a<> const& range) const;
 };
 
 } // namespace strange
