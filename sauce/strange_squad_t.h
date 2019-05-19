@@ -1023,26 +1023,45 @@ public: ___STRANGE_COLLECTION___
 
 	inline squad_t& operator+=(any_a<> const& range)
 	{
-		if (!check_<range_a<>>(range))
+		if (check_<squad_a<>>(range))
 		{
-			throw dis("strange::squad += passed non-range");
+			auto other = cast_<squad_a<>>(range).extract();
+			_deque.insert(_deque.cend(), other.cbegin(), other.cend());
 		}
-		for (auto const& thing : cast_<range_a<>>(range))
+		else
 		{
-			insert__(thing.to_range_());
+			if (!check_<range_a<>>(range))
+			{
+				throw dis("strange::squad += passed non-range");
+			}
+			for (auto const& thing : cast_<range_a<>>(range))
+			{
+				_deque.push_back(thing);
+			}
 		}
 		return *this;
 	}
 
 	inline squad_t& operator-=(any_a<> const& range)
 	{
-		if (!check_<range_a<>>(range))
+		if (check_<collection_a<>>(range))
 		{
-			throw dis("strange::squad -= passed non-range");
+			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - cast_<collection_a<>>(range).size())));
 		}
-		for (auto const& thing : cast_<range_a<>>(range))
+		else
 		{
-			erase__(thing.to_range_());
+			if (!check_<range_a<>>(range))
+			{
+				throw dis("strange::squad -= passed non-range");
+			}
+			for (auto const& thing : cast_<range_a<>>(range))
+			{
+				if (_deque.empty())
+				{
+					break;
+				}
+				_deque.pop_back();
+			}
 		}
 		return *this;
 	}
