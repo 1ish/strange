@@ -764,37 +764,181 @@ namespace strange
 		}
 
 		// river
-		inline any_a<> good__(range_a<> const& _) const;
-		inline any_a<> good_() const;
-		inline bool good() const;
+		inline any_a<> good__(range_a<> const& _) const
+		{
+			return good_();
+		}
 
-		inline any_a<> eof__(range_a<> const& _) const;
-		inline any_a<> eof_() const;
-		inline bool eof() const;
+		inline any_a<> good_() const
+		{
+			return _boole_(good());
+		}
 
-		inline any_a<> fail__(range_a<> const& _) const;
-		inline any_a<> fail_() const;
-		inline bool fail() const;
+		inline bool good() const
+		{
+			return (_istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream))->good();
+		}
 
-		inline any_a<> bad__(range_a<> const& _) const;
-		inline any_a<> bad_() const;
-		inline bool bad() const;
+		inline any_a<> eof__(range_a<> const& _) const
+		{
+			return eof_();
+		}
 
-		inline any_a<> set_good__(range_a<> const& range);
-		inline any_a<> set_good_(any_a<> const& value);
-		inline void set_good(bool value);
+		inline any_a<> eof_() const
+		{
+			return _boole_(eof());
+		}
 
-		inline any_a<> set_eof__(range_a<> const& range);
-		inline any_a<> set_eof_(any_a<> const& value);
-		inline void set_eof(bool value);
+		inline bool eof() const
+		{
+			return (_istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream))->eof();
+		}
 
-		inline any_a<> set_fail__(range_a<> const& range);
-		inline any_a<> set_fail_(any_a<> const& value);
-		inline void set_fail(bool value);
+		inline any_a<> fail__(range_a<> const& _) const
+		{
+			return fail_();
+		}
 
-		inline any_a<> set_bad__(range_a<> const& range);
-		inline any_a<> set_bad_(any_a<> const& value);
-		inline void set_bad(bool value);
+		inline any_a<> fail_() const
+		{
+			return _boole_(fail());
+		}
+
+		inline bool fail() const
+		{
+			return (_istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream))->fail();
+		}
+
+		inline any_a<> bad__(range_a<> const& _) const
+		{
+			return bad_();
+		}
+
+		inline any_a<> bad_() const
+		{
+			return _boole_(bad());
+		}
+
+		inline bool bad() const
+		{
+			return (_istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream))->bad();
+		}
+
+		inline any_a<> set_good__(range_a<> const& range)
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				return set_good_();
+			}
+			return set_good_(*it);
+		}
+
+		inline any_a<> set_good_(any_a<> const& value = everything_t<>::val_())
+		{
+			set_good(value.everything());
+			return me_();
+		}
+
+		inline void set_good(bool value = true)
+		{
+			std::ios_base* const ios = _istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream);
+			if (value)
+			{
+				ios->clear();
+			}
+			else
+			{
+				ios->setstate(std::ios_base::badbit);
+			}
+		}
+
+		inline any_a<> set_eof__(range_a<> const& range)
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				return set_eof_();
+			}
+			return set_eof_(*it);
+		}
+
+		inline any_a<> set_eof_(any_a<> const& value = everything_t<>::val_())
+		{
+			set_eof(value.everything());
+			return me_();
+		}
+
+		inline void set_eof(bool value = true)
+		{
+			std::ios_base* const ios = _istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream);
+			if (value)
+			{
+				ios->setstate(std::ios_base::eofbit);
+			}
+			else
+			{
+				ios->clear((ios->fail() ? std::ios_base::failbit : std::ios_base::goodbit) | (ios->bad() ? std::ios_base::badbit : std::ios_base::goodbit));
+			}
+		}
+
+		inline any_a<> set_fail__(range_a<> const& range)
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				return set_fail_();
+			}
+			return set_fail_(*it);
+		}
+
+		inline any_a<> set_fail_(any_a<> const& value = everything_t<>::val_())
+		{
+			set_fail(value.everything());
+			return me_();
+		}
+
+		inline void set_fail(bool value = true)
+		{
+			std::ios_base* const ios = _istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream);
+			if (value)
+			{
+				ios->setstate(std::ios_base::failbit);
+			}
+			else
+			{
+				ios->clear((ios->eof() ? std::ios_base::eofbit : std::ios_base::goodbit) | (ios->bad() ? std::ios_base::badbit : std::ios_base::goodbit));
+			}
+		}
+
+		inline any_a<> set_bad__(range_a<> const& range)
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				return set_bad_();
+			}
+			return set_bad_(*it);
+		}
+
+		inline any_a<> set_bad_(any_a<> const& value = everything_t<>::val_())
+		{
+			set_bad(value.everything());
+			return me_();
+		}
+
+		inline void set_bad(bool value = true)
+		{
+			std::ios_base* const ios = _istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream);
+			if (value)
+			{
+				ios->setstate(std::ios_base::badbit);
+			}
+			else
+			{
+				ios->clear((ios->eof() ? std::ios_base::eofbit : std::ios_base::goodbit) | (ios->fail() ? std::ios_base::failbit : std::ios_base::goodbit));
+			}
+		}
 
 	protected:
 		std::istream* const _istream;
@@ -808,7 +952,9 @@ namespace strange
 			, _ostream{ os }
 			, _stream{ stream }
 			, _filename{ filename }
-		{}
+		{
+			assert(_istream || _ostream);
+		}
 	};
 
 } // namespace strange
