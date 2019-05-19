@@ -95,6 +95,8 @@ namespace strange {
      { assert(handle_); return write().update__(range ); }
      inline any_a < > update_ ( any_a < > const & key , any_a < > const & value )
      { assert(handle_); return write().update_(key, value ); }
+     inline void update ( any_a < > const & key , any_a < > const & value )
+     { assert(handle_); write().update(key, value ); }
      inline any_a < > insert__ ( range_a < > const & range )
      { assert(handle_); return write().insert__(range ); }
      inline any_a < > insert_ ( any_a < > const & key , any_a < > const & value )
@@ -176,6 +178,7 @@ namespace strange {
       virtual inline any_a < > at_ ( any_a < > const & key ) const = 0;
       virtual inline any_a < > update__ ( range_a < > const & range ) = 0;
       virtual inline any_a < > update_ ( any_a < > const & key , any_a < > const & value ) = 0;
+      virtual inline void update ( any_a < > const & key , any_a < > const & value ) = 0;
       virtual inline any_a < > insert__ ( range_a < > const & range ) = 0;
       virtual inline any_a < > insert_ ( any_a < > const & key , any_a < > const & value ) = 0;
       virtual inline bool insert ( any_a < > const & key , any_a < > const & value ) = 0;
@@ -240,6 +243,8 @@ namespace strange {
       { return value_.update__(range ); }
       virtual inline any_a < > update_ ( any_a < > const & key , any_a < > const & value )
       { return value_.update_(key, value ); }
+      virtual inline void update ( any_a < > const & key , any_a < > const & value )
+      { value_.update(key, value ); }
       virtual inline any_a < > insert__ ( range_a < > const & range )
       { return value_.insert__(range ); }
       virtual inline any_a < > insert_ ( any_a < > const & key , any_a < > const & value )

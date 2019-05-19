@@ -496,9 +496,9 @@ public: ___STRANGE_COLLECTION___
 		return at_(sym(s));
 	}
 
-	inline any_a<> update_(any_a<> const& key, any_a<> const& value)
+	inline void update(any_a<> const& key, any_a<> const& value)
 	{
-		return _map[key] = value;
+		_map[key] = value;
 	}
 
 	inline void update(std::string const& s, any_a<> const& value)

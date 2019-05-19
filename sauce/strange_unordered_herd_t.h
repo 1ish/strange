@@ -286,10 +286,9 @@ public: ___STRANGE_COLLECTION___
 		return it != _set.cend();
 	}
 
-	inline any_a<> update_(any_a<> const& key, any_a<> const& value)
+	inline void update(any_a<> const& key, any_a<> const& value)
 	{
 		_set.insert(key);
-		return value;
 	}
 
 	inline bool insert(any_a<> const& key, any_a<> const&)

@@ -42,6 +42,11 @@ inline any_a<> update__(range_a<> const& range) \
 	} \
 	return update_(key, *it); \
 } \
+inline any_a<> update_(any_a<> const& key, any_a<> const& value) \
+{ \
+	update(key, value); \
+	return value; \
+} \
 inline any_a<> insert__(range_a<> const& range) \
 { \
 	forward_const_iterator_a<> it = range.cbegin(); \

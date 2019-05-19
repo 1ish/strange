@@ -25,6 +25,7 @@ public:
 
 	inline any_a<> update__(range_a<> const& range);
 	inline any_a<> update_(any_a<> const& key, any_a<> const& value);
+	inline void update(any_a<> const& key, any_a<> const& value);
 
 	inline any_a<> insert__(range_a<> const& range);
 	inline any_a<> insert_(any_a<> const& key, any_a<> const& value);

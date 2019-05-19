@@ -899,13 +899,12 @@ public: ___STRANGE_COLLECTION___
 		return nothing_t<>::val_();
 	}
 
-	inline any_a<> update_(any_a<> const& key, any_a<> const& value)
+	inline void update(any_a<> const& key, any_a<> const& value)
 	{
 		if (check_<number_a<>>(key))
 		{
 			update(cast_<number_a<>>(key).to_int_64(), value);
 		}
-		return value;
 	}
 
 	inline void update(int64_t index, any_a<> const& value)
