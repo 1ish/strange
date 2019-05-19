@@ -565,13 +565,26 @@ public: ___STRANGE_COLLECTION___
 
 	inline ordered_shoal_t& operator+=(any_a<> const& range)
 	{
-		if (!check_<range_a<>>(range))
+		if (check_<ordered_shoal_a<>>(range))
 		{
-			throw dis("strange::ordered_shoal += passed non-range");
+			auto other = cast_<ordered_shoal_a<>>(range).extract();
+			_map.insert(other.cbegin(), other.cend());
 		}
-		for (auto const& thing : cast_<range_a<>>(range))
+		else if (check_<unordered_shoal_a<>>(range))
 		{
-			insert__(thing.to_range_());
+			auto other = cast_<unordered_shoal_a<>>(range).extract();
+			_map.insert(other.cbegin(), other.cend());
+		}
+		else
+		{
+			if (!check_<range_a<>>(range))
+			{
+				throw dis("strange::ordered_shoal += passed non-range");
+			}
+			for (auto const& thing : cast_<range_a<>>(range))
+			{
+				_map.emplace(thing, thing);
+			}
 		}
 		return *this;
 	}
@@ -584,7 +597,7 @@ public: ___STRANGE_COLLECTION___
 		}
 		for (auto const& thing : cast_<range_a<>>(range))
 		{
-			erase__(thing.to_range_());
+			_map.erase(thing);
 		}
 		return *this;
 	}
