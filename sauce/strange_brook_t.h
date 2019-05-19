@@ -5,10 +5,10 @@ namespace strange
 {
 
 template <typename PRIMITIVE, typename _ABSTRACTION_ = brook_a<PRIMITIVE>>
-class brook_t : public something_t<_ABSTRACTION_>
+class brook_t : public anything_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
-	class iterator_t : public something_t<_ABSTRACTION_>
+	class iterator_t : public anything_t<_ABSTRACTION_>
 	{
 	public: ___STRANGE_THING___
 		// construction
@@ -380,7 +380,7 @@ class brook_t : public something_t<_ABSTRACTION_>
 
 		template <typename F>
 		inline iterator_t(brook_a<PRIMITIVE> const& brook, F&& it)
-			: something_t{}
+			: anything_t{}
 			, _it{ std::forward<F>(it) }
 			, _brook(brook, true)
 			, _number{ number_t<PRIMITIVE>::val_() }
@@ -388,7 +388,7 @@ class brook_t : public something_t<_ABSTRACTION_>
 	};
 
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_const_iterator_data_a<ITERATOR>>
-	class const_iterator_t : public something_t<_ABSTRACTION_>
+	class const_iterator_t : public anything_t<_ABSTRACTION_>
 	{
 	public: ___STRANGE_THING___
 		// construction
@@ -741,7 +741,7 @@ class brook_t : public something_t<_ABSTRACTION_>
 
 		template <typename F>
 		inline const_iterator_t(brook_a<PRIMITIVE> const& brook, F&& it)
-			: something_t{}
+			: anything_t{}
 			, _it{ std::forward<F>(it) }
 			, _brook(brook, true)
 			, _number{ number_t<PRIMITIVE>::val_() }
@@ -1131,7 +1131,7 @@ protected:
 
 	template <typename F>
 	inline brook_t(F&& init)
-		: something_t{}
+		: anything_t{}
 		, _deque{ std::forward<F>(init) }
 	{}
 };

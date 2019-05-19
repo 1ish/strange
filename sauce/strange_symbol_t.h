@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = symbol_a<>>
-class symbol_t : public something_t<_ABSTRACTION_>
+class symbol_t : public anything_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
@@ -124,7 +124,7 @@ protected:
 
 	template <typename F>
 	inline symbol_t(F&& s)
-		: something_t{}
+		: anything_t{}
 		, _string{ std::forward<F>(s) }
 		, _hash{ std::hash<std::string>{}(_string) }
 	{}

@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_SOMETHING_T_H
-#define COM_ONEISH_STRANGE_SOMETHING_T_H
+#ifndef COM_ONEISH_STRANGE_ANYTHING_T_H
+#define COM_ONEISH_STRANGE_ANYTHING_T_H
 
 namespace strange
 {
 
 template <typename _ABSTRACTION_>
-class something_t : public thing_t<_ABSTRACTION_>
+class anything_t : public thing_t<_ABSTRACTION_>
 {
 public:
 	// function
@@ -18,23 +18,23 @@ public:
 	}
 
 	// comparison
-	static inline any_a<> something__(range_a<> const&)
+	static inline any_a<> anything__(range_a<> const&)
 	{
-		return something_();
+		return anything_();
 	}
 
-	static inline any_a<> something_()
+	static inline any_a<> anything_()
 	{
 		return everything_t<>::val_();
 	}
 
-	static inline bool something()
+	static inline bool anything()
 	{
 		return true;
 	}
 
 protected:
-	inline something_t()
+	inline anything_t()
 		: thing_t{}
 	{}
 };

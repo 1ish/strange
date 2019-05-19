@@ -5,10 +5,10 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = unordered_shoal_a<>>
-class unordered_shoal_t : public something_t<_ABSTRACTION_>
+class unordered_shoal_t : public anything_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_iterator_data_a<ITERATOR>>
-	class iterator_t : public something_t<_ABSTRACTION_>
+	class iterator_t : public anything_t<_ABSTRACTION_>
 	{
 	public: ___STRANGE_THING___
 		// construction
@@ -169,7 +169,7 @@ class unordered_shoal_t : public something_t<_ABSTRACTION_>
 
 		template <typename F>
 		inline iterator_t(unordered_shoal_a<> const& unordered_shoal, F&& it)
-			: something_t{}
+			: anything_t{}
 			, _it{ std::forward<F>(it) }
 			, _unordered_shoal(unordered_shoal, true)
 			, _pair{ flock_t<>::val_() }
@@ -177,7 +177,7 @@ class unordered_shoal_t : public something_t<_ABSTRACTION_>
 	};
 
 	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_const_iterator_data_a<ITERATOR>>
-	class const_iterator_t : public something_t<_ABSTRACTION_>
+	class const_iterator_t : public anything_t<_ABSTRACTION_>
 	{
 	public: ___STRANGE_THING___
 		// construction
@@ -321,7 +321,7 @@ class unordered_shoal_t : public something_t<_ABSTRACTION_>
 
 		template <typename F>
 		inline const_iterator_t(unordered_shoal_a<> const& unordered_shoal, F&& it)
-			: something_t{}
+			: anything_t{}
 			, _it{ std::forward<F>(it) }
 			, _unordered_shoal(unordered_shoal, true)
 			, _pair{ flock_t<>::val_() }
@@ -615,7 +615,7 @@ protected:
 
 	template <typename F>
 	inline unordered_shoal_t(F&& init)
-		: something_t{}
+		: anything_t{}
 		, _map{ std::forward<F>(init) }
 	{}
 };

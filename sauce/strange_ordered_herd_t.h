@@ -5,10 +5,10 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = ordered_herd_a<>>
-class ordered_herd_t : public something_t<_ABSTRACTION_>
+class ordered_herd_t : public anything_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_const_iterator_data_a<ITERATOR>>
-	class const_iterator_t : public something_t<_ABSTRACTION_>
+	class const_iterator_t : public anything_t<_ABSTRACTION_>
 	{
 	public: ___STRANGE_THING___
 		// construction
@@ -147,7 +147,7 @@ class ordered_herd_t : public something_t<_ABSTRACTION_>
 
 		template <typename F>
 		inline const_iterator_t(ordered_herd_a<> const& ordered_herd, F&& it)
-			: something_t{}
+			: anything_t{}
 			, _it{ std::forward<F>(it) }
 			, _ordered_herd(ordered_herd, true)
 		{}
@@ -400,7 +400,7 @@ protected:
 
 	template <typename F>
 	inline ordered_herd_t(F&& init)
-		: something_t{}
+		: anything_t{}
 		, _set{ std::forward<F>(init) }
 	{}
 };

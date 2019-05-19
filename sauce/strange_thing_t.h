@@ -41,8 +41,8 @@ public:
 			operations.update(sym("operate"), native_extraction_t<any_a<>>::val(any_a<>::operate__));
 			operations.update(sym("identical"), native_extraction_t<any_a<>>::val(any_a<>::identical__));
 			operations.update(sym("nothing"), native_extraction_t<any_a<>>::val(any_a<>::nothing__));
-			operations.update(sym("anything"), native_extraction_t<any_a<>>::val(any_a<>::anything__));
 			operations.update(sym("something"), native_extraction_t<any_a<>>::val(any_a<>::something__));
+			operations.update(sym("anything"), native_extraction_t<any_a<>>::val(any_a<>::anything__));
 			operations.update(sym("everything"), native_extraction_t<any_a<>>::val(any_a<>::everything__));
 
 		}();
@@ -140,22 +140,22 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a<> anything__(range_a<> const&)
-	{
-		return anything_();
-	}
-
-	static inline any_a<> anything_()
-	{
-		return everything_t<>::val_();
-	}
-
 	static inline any_a<> something__(range_a<> const&)
 	{
 		return something_();
 	}
 
 	static inline any_a<> something_()
+	{
+		return everything_t<>::val_();
+	}
+
+	static inline any_a<> anything__(range_a<> const&)
+	{
+		return anything_();
+	}
+
+	static inline any_a<> anything_()
 	{
 		return nothing_t<>::val_();
 	}

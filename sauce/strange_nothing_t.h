@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = any_a<>>
-class nothing_t : public something_t<_ABSTRACTION_>
+class nothing_t : public anything_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
@@ -34,7 +34,7 @@ public: ___STRANGE_THING___
 	// conversion
 	inline operator bool() const
 	{
-		return anything();
+		return something();
 	}
 
 	// reflection
@@ -60,17 +60,17 @@ public: ___STRANGE_THING___
 		return true;
 	}
 
-	static inline any_a<> anything__(range_a<> const&)
+	static inline any_a<> something__(range_a<> const&)
 	{
-		return anything_();
+		return something_();
 	}
 
-	static inline any_a<> anything_()
+	static inline any_a<> something_()
 	{
 		return nothing_t<>::val_();
 	}
 
-	static inline bool anything()
+	static inline bool something()
 	{
 		return false;
 	}
@@ -99,7 +99,7 @@ public: ___STRANGE_THING___
 
 protected:
 	inline nothing_t()
-		: something_t{}
+		: anything_t{}
 	{}
 };
 

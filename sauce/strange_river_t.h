@@ -5,10 +5,10 @@ namespace strange
 {
 
 	template <typename _ABSTRACTION_ = river_a<>>
-	class river_t : public something_t<_ABSTRACTION_>
+	class river_t : public anything_t<_ABSTRACTION_>
 	{
 		template <typename ITERATOR, typename _ABSTRACTION_ = forward_const_iterator_data_a<ITERATOR>>
-		class const_iterator_t : public something_t<_ABSTRACTION_>
+		class const_iterator_t : public anything_t<_ABSTRACTION_>
 		{
 		public: ___STRANGE_THING___
 			// construction
@@ -125,7 +125,7 @@ namespace strange
 
 			template <typename F>
 			inline const_iterator_t(river_a<> const& river, F&& it)
-				: something_t{}
+				: anything_t{}
 				, _it{ std::forward<F>(it) }
 				, _river(river, true)
 				, _int_8{ number_int_8_t<>::val_() }
@@ -836,7 +836,7 @@ namespace strange
 
 		inline any_a<> set_good_(any_a<> const& value = everything_t<>::val_())
 		{
-			set_good(value.anything());
+			set_good(value.something());
 			return me_();
 		}
 
@@ -865,7 +865,7 @@ namespace strange
 
 		inline any_a<> set_eof_(any_a<> const& value = everything_t<>::val_())
 		{
-			set_eof(value.anything());
+			set_eof(value.something());
 			return me_();
 		}
 
@@ -894,7 +894,7 @@ namespace strange
 
 		inline any_a<> set_fail_(any_a<> const& value = everything_t<>::val_())
 		{
-			set_fail(value.anything());
+			set_fail(value.something());
 			return me_();
 		}
 
@@ -923,7 +923,7 @@ namespace strange
 
 		inline any_a<> set_bad_(any_a<> const& value = everything_t<>::val_())
 		{
-			set_bad(value.anything());
+			set_bad(value.something());
 			return me_();
 		}
 
@@ -947,7 +947,7 @@ namespace strange
 		std::string const& _filename;
 
 		inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_ios_base const& stream = std_shared_ios_base{}, std::string const& filename = std::string{})
-			: something_t{}
+			: anything_t{}
 			, _istream{ is }
 			, _ostream{ os }
 			, _stream{ stream }

@@ -5,10 +5,10 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = flock_a<>>
-class flock_t : public something_t<_ABSTRACTION_>
+class flock_t : public anything_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
-	class iterator_t : public something_t<_ABSTRACTION_>
+	class iterator_t : public anything_t<_ABSTRACTION_>
 	{
 	public: ___STRANGE_THING___
 		// construction
@@ -373,14 +373,14 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		template <typename F>
 		inline iterator_t(flock_a<> const& flock, F&& it)
-			: something_t{}
+			: anything_t{}
 			, _it{ std::forward<F>(it) }
 			, _flock(flock, true)
 		{}
 	};
 
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_const_iterator_data_a<ITERATOR>>
-	class const_iterator_t : public something_t<_ABSTRACTION_>
+	class const_iterator_t : public anything_t<_ABSTRACTION_>
 	{
 	public: ___STRANGE_THING___
 		// construction
@@ -730,7 +730,7 @@ class flock_t : public something_t<_ABSTRACTION_>
 
 		template <typename F>
 		inline const_iterator_t(flock_a<> const& flock, F&& it)
-			: something_t{}
+			: anything_t{}
 			, _it{ std::forward<F>(it) }
 			, _flock(flock, true)
 		{}
@@ -1062,7 +1062,7 @@ protected:
 
 	template <typename F>
 	inline flock_t(F&& init)
-		: something_t{}
+		: anything_t{}
 		, _vector{ std::forward<F>(init) }
 	{}
 };

@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename PRIMITIVE, typename _ABSTRACTION_ = number_data_a<PRIMITIVE>>
-class number_reference_t : public something_t<_ABSTRACTION_>
+class number_reference_t : public anything_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
@@ -726,7 +726,7 @@ protected:
 	PRIMITIVE& _number;
 
 	inline number_reference_t(PRIMITIVE& number)
-		: something_t{}
+		: anything_t{}
 		, _number(number)
 	{}
 };
