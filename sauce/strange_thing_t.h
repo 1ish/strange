@@ -44,7 +44,10 @@ public:
 			operations.update(sym("something"), native_extraction_t<any_a<>>::val(any_a<>::something__));
 			operations.update(sym("anything"), native_extraction_t<any_a<>>::val(any_a<>::anything__));
 			operations.update(sym("everything"), native_extraction_t<any_a<>>::val(any_a<>::everything__));
-
+			operations.update(sym("same"), native_extraction_t<any_a<>>::val(any_a<>::same__));
+			operations.update(sym("different"), native_extraction_t<any_a<>>::val(any_a<>::different__));
+			operations.update(sym("hash"), native_extraction_t<any_a<>>::val(any_a<>::hash__));
+			operations.update(sym("to_range"), native_extraction_t<any_a<>>::val(any_a<>::to_range__));
 		}();
 		return OPERATIONS;
 	}
