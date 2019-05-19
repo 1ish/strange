@@ -2,9 +2,10 @@
 #define COM_ONEISH_STRANGE_ANY_A_H
 
  //#include "definitions.hpp"
+ //#include "range_forward.hpp"
  //#include "symbol_forward.hpp"
  //#include "cat_forward.hpp"
- //#include "range_forward.hpp"
+ //#include "unordered_shoal_forward.hpp"
  //#include "number_data_forward.hpp"
 #include <algorithm>
 #include <cassert>
@@ -15,7 +16,7 @@
 
 
 namespace strange {
-    template < typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename range_a = range_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
+    template < typename range_a = range_a < > , typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename unordered_shoal_a = unordered_shoal_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
     class any_a
     {
     public:
@@ -107,6 +108,10 @@ namespace strange {
      { assert(handle_); return read().cat__(_ ); }
      inline cat_a cat_ ( ) const
      { assert(handle_); return read().cat_( ); }
+     inline any_a operations__ ( range_a const & _ ) const
+     { assert(handle_); return read().operations__(_ ); }
+     inline unordered_shoal_a operations_ ( ) const
+     { assert(handle_); return read().operations_( ); }
      inline any_a eater__ ( range_a const & _ ) const
      { assert(handle_); return read().eater__(_ ); }
      inline any_a eater_ ( ) const
@@ -177,10 +182,10 @@ namespace strange {
      { assert(handle_); return read().hash( ); }
      inline bool is ( std :: string const & s ) const
      { assert(handle_); return read().is(s ); }
-     inline range_a to_range__ ( range_a const & _ ) const
-     { assert(handle_); return read().to_range__(_ ); }
-     inline range_a to_range_ ( ) const
-     { assert(handle_); return read().to_range_( ); }
+     inline any_a ranged__ ( range_a const & _ ) const
+     { assert(handle_); return read().ranged__(_ ); }
+     inline range_a ranged_ ( ) const
+     { assert(handle_); return read().ranged_( ); }
     
     protected:
     	struct ___root_handle_base___
@@ -216,6 +221,8 @@ namespace strange {
       virtual inline symbol_a type_ ( ) const = 0;
       virtual inline any_a cat__ ( range_a const & _ ) const = 0;
       virtual inline cat_a cat_ ( ) const = 0;
+      virtual inline any_a operations__ ( range_a const & _ ) const = 0;
+      virtual inline unordered_shoal_a operations_ ( ) const = 0;
       virtual inline any_a eater__ ( range_a const & _ ) const = 0;
       virtual inline any_a eater_ ( ) const = 0;
       virtual inline any_a feeder__ ( range_a const & range ) const = 0;
@@ -251,8 +258,8 @@ namespace strange {
       virtual inline number_data_a_uint64 hash_ ( ) const = 0;
       virtual inline std :: size_t hash ( ) const = 0;
       virtual inline bool is ( std :: string const & s ) const = 0;
-      virtual inline range_a to_range__ ( range_a const & _ ) const = 0;
-      virtual inline range_a to_range_ ( ) const = 0;
+      virtual inline any_a ranged__ ( range_a const & _ ) const = 0;
+      virtual inline range_a ranged_ ( ) const = 0;
     	};
     
     	template <typename ___TTT___, typename ___BHB___ = ___root_handle_base___>
@@ -321,6 +328,10 @@ namespace strange {
       { return value_.cat__(_ ); }
       virtual inline cat_a cat_ ( ) const
       { return value_.cat_( ); }
+      virtual inline any_a operations__ ( range_a const & _ ) const
+      { return value_.operations__(_ ); }
+      virtual inline unordered_shoal_a operations_ ( ) const
+      { return value_.operations_( ); }
       virtual inline any_a eater__ ( range_a const & _ ) const
       { return value_.eater__(_ ); }
       virtual inline any_a eater_ ( ) const
@@ -391,10 +402,10 @@ namespace strange {
       { return value_.hash( ); }
       virtual inline bool is ( std :: string const & s ) const
       { return value_.is(s ); }
-      virtual inline range_a to_range__ ( range_a const & _ ) const
-      { return value_.to_range__(_ ); }
-      virtual inline range_a to_range_ ( ) const
-      { return value_.to_range_( ); }
+      virtual inline any_a ranged__ ( range_a const & _ ) const
+      { return value_.ranged__(_ ); }
+      virtual inline range_a ranged_ ( ) const
+      { return value_.ranged_( ); }
     
     		___TTT___ value_;
     	};

@@ -92,7 +92,7 @@ public: ___STRANGE_THING___
 	}
 
 	// conversion
-	inline range_a<> to_range_() const
+	inline range_a<> ranged_() const
 	{
 		return range_t<>::val_(it_t<true, everything_t<>>::val_(nothing_t<>::val_()), it_t<true, everything_t<>>::val_(everything_t<>::val_()));
 	}

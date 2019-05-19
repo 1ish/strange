@@ -19,13 +19,13 @@ TEST(TestCaseName, ForLoop)
 {
 	any_a<> n{ nothing_t<>::val_() };
 
-	for (auto const& v : n.to_range_())
+	for (auto const& v : n.ranged_())
 	{
 	}
 
 	any_a<> e{ everything_t<>::val_() };
 
-	for (auto const& v : e.to_range_())
+	for (auto const& v : e.ranged_())
 	{
 	}
 

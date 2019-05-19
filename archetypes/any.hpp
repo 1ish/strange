@@ -6,15 +6,16 @@
 */
 
 #include "definitions.hpp"
+#include "range_forward.hpp"
 #include "symbol_forward.hpp"
 #include "cat_forward.hpp"
-#include "range_forward.hpp"
+#include "unordered_shoal_forward.hpp"
 #include "number_data_forward.hpp"
 
 namespace strange
 {
 
-template <typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename range_a = range_a<>, typename number_data_a_uint64 = number_data_a<uint64_t>>
+template <typename range_a = range_a<>, typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename unordered_shoal_a = unordered_shoal_a<>, typename number_data_a_uint64 = number_data_a<uint64_t>>
 class any_a
 {
 public:
@@ -41,8 +42,8 @@ public:
 	
 //	unordered_shoal_a<symbol_a, any_a> inline any_a shared__(range_a const& _) const;
 
-//  unordered_shoal_a<symbol_a, any_a> inline any_a operations__(range_a const& _) const;
-//  unordered_shoal_a<symbol_a, any_a> inline any_a operations_() const;
+	inline any_a operations__(range_a const& _) const;
+	inline unordered_shoal_a operations_() const;
 
 	inline any_a eater__(range_a const& _) const;
 	inline any_a eater_() const; // return range of parameter names
@@ -98,8 +99,8 @@ public:
 	inline bool is(std::string const& s) const;
 
 	// conversion
-	inline range_a to_range__(range_a const& _) const;
-	inline range_a to_range_() const;
+	inline any_a ranged__(range_a const& _) const;
+	inline range_a ranged_() const;
 };
 
 } // namespace strange

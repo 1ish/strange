@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_>
+template <typename _ABSTRACTION_ = any_a<>>
 class thing_t : public one_t
 {
 public:
@@ -31,23 +31,24 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = unordered_shoal_t<>::val_();
-			operations.update(sym("type"), native_extraction_t<any_a<>>::val(any_a<>::type__));
-			operations.update(sym("cat"), native_extraction_t<any_a<>>::val(any_a<>::cat__));
-			//TODO operations.update(sym("operations"), native_extraction_t<any_a<>>::val(any_a<>::operations__));
-			operations.update(sym("eater"), native_extraction_t<any_a<>>::val(any_a<>::eater__));
-			operations.update(sym("feeder"), native_extraction_t<any_a<>>::val(any_a<>::feeder__));
-			operations.update(sym("visit"), native_extraction_t<any_a<>>::val(any_a<>::visit__));
-			operations.update(sym("invoke"), native_extraction_t<any_a<>>::val(any_a<>::invoke__));
-			operations.update(sym("operate"), native_extraction_t<any_a<>>::val(any_a<>::operate__));
-			operations.update(sym("identical"), native_extraction_t<any_a<>>::val(any_a<>::identical__));
-			operations.update(sym("nothing"), native_extraction_t<any_a<>>::val(any_a<>::nothing__));
-			operations.update(sym("something"), native_extraction_t<any_a<>>::val(any_a<>::something__));
-			operations.update(sym("anything"), native_extraction_t<any_a<>>::val(any_a<>::anything__));
-			operations.update(sym("everything"), native_extraction_t<any_a<>>::val(any_a<>::everything__));
-			operations.update(sym("same"), native_extraction_t<any_a<>>::val(any_a<>::same__));
-			operations.update(sym("different"), native_extraction_t<any_a<>>::val(any_a<>::different__));
-			operations.update(sym("hash"), native_extraction_t<any_a<>>::val(any_a<>::hash__));
-			operations.update(sym("to_range"), native_extraction_t<any_a<>>::val(any_a<>::to_range__));
+			operations.update("type", native_extraction_t<any_a<>>::val(&any_a<>::type__));
+			operations.update("cat", native_extraction_t<any_a<>>::val(&any_a<>::cat__));
+			operations.update("operations", native_extraction_t<any_a<>>::val(&any_a<>::operations__));
+			operations.update("eater", native_extraction_t<any_a<>>::val(&any_a<>::eater__));
+			operations.update("feeder", native_extraction_t<any_a<>>::val(&any_a<>::feeder__));
+			operations.update("visit", native_mutation_t<any_a<>>::val(&any_a<>::visit__));
+			operations.update("invoke", native_extraction_t<any_a<>>::val(&any_a<>::invoke__));
+			operations.update("operate", native_extraction_t<any_a<>>::val(&any_a<>::operate__));
+			operations.update("identical", native_extraction_t<any_a<>>::val(&any_a<>::identical__));
+			operations.update("nothing", native_extraction_t<any_a<>>::val(&any_a<>::nothing__));
+			operations.update("something", native_extraction_t<any_a<>>::val(&any_a<>::something__));
+			operations.update("anything", native_extraction_t<any_a<>>::val(&any_a<>::anything__));
+			operations.update("everything", native_extraction_t<any_a<>>::val(&any_a<>::everything__));
+			operations.update("same", native_extraction_t<any_a<>>::val(&any_a<>::same__));
+			operations.update("different", native_extraction_t<any_a<>>::val(&any_a<>::different__));
+			operations.update("hash", native_extraction_t<any_a<>>::val(&any_a<>::hash__));
+			operations.update("ranged", native_extraction_t<any_a<>>::val(&any_a<>::ranged__));
+			return operations;
 		}();
 		return OPERATIONS;
 	}
@@ -174,7 +175,7 @@ public:
 	}
 
 	// conversion
-	inline range_a<> to_range_() const
+	inline range_a<> ranged_() const
 	{
 		return range_t<>::val_(it_t<true>::val_(me_()), it_t<true>::val_(nothing_t<>::val_()));
 	}
@@ -272,9 +273,9 @@ inline number_data_a<uint64_t> hash_() const \
 { \
 	return number_uint_64_t<>::val(uint64_t(hash())); \
 } \
-inline range_a<> to_range__(range_a<> const& _) const \
+inline range_a<> ranged__(range_a<> const& _) const \
 { \
-	return to_range_(); \
+	return ranged_(); \
 } \
 
 } // namespace strange

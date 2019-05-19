@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_>
+template <typename _ABSTRACTION_ = any_a<>>
 class anything_t : public thing_t<_ABSTRACTION_>
 {
 public:

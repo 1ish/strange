@@ -62,8 +62,9 @@ public: ___STRANGE_THING___
 	{
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
-			auto operations = thing_t<>::operations_();
-			operations.update(sym("add"), native_extraction_t<symbol_a<>>::val(symbol_a<>::add__, sym("symbol")));
+			auto operations = anything_t<>::operations_();
+			operations.update("add", native_extraction_t<symbol_a<>>::val(&symbol_a<>::add__, sym("symbol")));
+			return operations;
 		}();
 		return OPERATIONS;
 	}
