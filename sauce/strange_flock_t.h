@@ -1017,26 +1017,45 @@ public: ___STRANGE_COLLECTION___
 
 	inline flock_t& operator+=(any_a<> const& range)
 	{
-		if (!check_<range_a<>>(range))
+		if (check_<flock_a<>>(range))
 		{
-			throw dis("strange::flock += passed non-range");
+			auto other = cast_<flock_a<>>(range).extract();
+			_vector.insert(_vector.cend(), other.cbegin(), other.cend());
 		}
-		for (auto const& thing : cast_<range_a<>>(range))
+		else
 		{
-			insert__(thing.to_range_());
+			if (!check_<range_a<>>(range))
+			{
+				throw dis("strange::flock += passed non-range");
+			}
+			for (auto const& thing : cast_<range_a<>>(range))
+			{
+				push_back(thing);
+			}
 		}
 		return *this;
 	}
 
 	inline flock_t& operator-=(any_a<> const& range)
 	{
-		if (!check_<range_a<>>(range))
+		if (check_<collection_a<>>(range))
 		{
-			throw dis("strange::flock -= passed non-range");
+			_vector.resize(std::size_t(std::max<int64_t>(0, int64_t(_vector.size()) - cast_<collection_a<>>(range).size())));
 		}
-		for (auto const& thing : cast_<range_a<>>(range))
+		else
 		{
-			erase__(thing.to_range_());
+			if (!check_<range_a<>>(range))
+			{
+				throw dis("strange::flock -= passed non-range");
+			}
+			for (auto const& thing : cast_<range_a<>>(range))
+			{
+				if (_vector.empty())
+				{
+					break;
+				}
+				_vector.pop_back();
+			}
 		}
 		return *this;
 	}
