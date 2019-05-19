@@ -836,7 +836,7 @@ namespace strange
 
 		inline any_a<> set_good_(any_a<> const& value = everything_t<>::val_())
 		{
-			set_good(value.everything());
+			set_good(value.anything());
 			return me_();
 		}
 
@@ -865,7 +865,7 @@ namespace strange
 
 		inline any_a<> set_eof_(any_a<> const& value = everything_t<>::val_())
 		{
-			set_eof(value.everything());
+			set_eof(value.anything());
 			return me_();
 		}
 
@@ -894,7 +894,7 @@ namespace strange
 
 		inline any_a<> set_fail_(any_a<> const& value = everything_t<>::val_())
 		{
-			set_fail(value.everything());
+			set_fail(value.anything());
 			return me_();
 		}
 
@@ -923,7 +923,7 @@ namespace strange
 
 		inline any_a<> set_bad_(any_a<> const& value = everything_t<>::val_())
 		{
-			set_bad(value.everything());
+			set_bad(value.anything());
 			return me_();
 		}
 

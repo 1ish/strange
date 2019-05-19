@@ -26,6 +26,29 @@ public:
 		return CATEGORY;
 	}
 
+	static inline unordered_shoal_a<> operations_()
+	{
+		static unordered_shoal_a<> OPERATIONS = []()
+		{
+			auto operations = unordered_shoal_t<>::val_();
+			operations.update(sym("type"), native_extraction_t<any_a<>>::val(any_a<>::type__));
+			operations.update(sym("cat"), native_extraction_t<any_a<>>::val(any_a<>::cat__));
+			//TODO operations.update(sym("operations"), native_extraction_t<any_a<>>::val(any_a<>::operations__));
+			operations.update(sym("eater"), native_extraction_t<any_a<>>::val(any_a<>::eater__));
+			operations.update(sym("feeder"), native_extraction_t<any_a<>>::val(any_a<>::feeder__));
+			operations.update(sym("visit"), native_extraction_t<any_a<>>::val(any_a<>::visit__));
+			operations.update(sym("invoke"), native_extraction_t<any_a<>>::val(any_a<>::invoke__));
+			operations.update(sym("operate"), native_extraction_t<any_a<>>::val(any_a<>::operate__));
+			operations.update(sym("identical"), native_extraction_t<any_a<>>::val(any_a<>::identical__));
+			operations.update(sym("nothing"), native_extraction_t<any_a<>>::val(any_a<>::nothing__));
+			operations.update(sym("anything"), native_extraction_t<any_a<>>::val(any_a<>::anything__));
+			operations.update(sym("something"), native_extraction_t<any_a<>>::val(any_a<>::something__));
+			operations.update(sym("everything"), native_extraction_t<any_a<>>::val(any_a<>::everything__));
+
+		}();
+		return OPERATIONS;
+	}
+
 	static inline any_a<> eater_()
 	{
 		return nothing_t<>::val_();
@@ -203,6 +226,10 @@ inline symbol_a<> type__(range_a<> const&) const \
 inline cat_a<> cat__(range_a<> const&) const \
 { \
 	return cat_(); \
+} \
+inline unordered_shoal_a<> operations__(range_a<> const&) const \
+{ \
+	return operations_(); \
 } \
 inline any_a<> eater__(range_a<> const&) const \
 { \

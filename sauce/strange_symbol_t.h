@@ -58,6 +58,16 @@ public: ___STRANGE_THING___
 		return TYPE;
 	}
 
+	static inline unordered_shoal_a<> operations_()
+	{
+		static unordered_shoal_a<> OPERATIONS = []()
+		{
+			auto operations = thing_t<>::operations_();
+			operations.update(sym("add"), native_extraction_t<symbol_a<>>::val(symbol_a<>::add__, sym("symbol")));
+		}();
+		return OPERATIONS;
+	}
+
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
