@@ -10,13 +10,8 @@
 // abstractions
 #include "strange_abstractions.h"
 
-namespace strange
-{
-
-// conversion
-inline any_a<> boole(bool b);
-
-}
+// declarations
+#include "strange_declarations.h"
 
 // utilities
 #include "strange_utilities.h"
@@ -27,15 +22,7 @@ inline any_a<> boole(bool b);
 // operations
 #include "strange_operations.h"
 
-namespace strange
-{
-
-// conversion
-inline any_a<> boole(bool b)
-{
-	return b ? something_t<>::val_() : nothing_t<>::val_();
-}
-
-}
+// definitions
+#include "strange_definitions.h"
 
 #endif
