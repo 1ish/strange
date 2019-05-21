@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = symbol_a<>>
-class symbol_t : public anything_t<_ABSTRACTION_>
+class symbol_t : public thing_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
@@ -62,7 +62,7 @@ public: ___STRANGE_THING___
 	{
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
-			auto operations = anything_t<>::operations_();
+			auto operations = thing_t<>::operations_();
 			operations.update("add", native_extraction_t<symbol_a<>>::val(&symbol_a<>::add__, sym("symbol")));
 			return operations;
 		}();
@@ -125,7 +125,7 @@ protected:
 
 	template <typename F>
 	inline symbol_t(F&& s)
-		: anything_t{}
+		: thing_t{}
 		, _string{ std::forward<F>(s) }
 		, _hash{ std::hash<std::string>{}(_string) }
 	{}

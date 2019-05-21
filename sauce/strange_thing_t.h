@@ -42,7 +42,7 @@ public:
 			operations.update("identical", native_extraction_t<any_a<>>::val(&any_a<>::identical__));
 			operations.update("nothing", native_extraction_t<any_a<>>::val(&any_a<>::nothing__));
 			operations.update("everything", native_extraction_t<any_a<>>::val(&any_a<>::everything__));
-			operations.update("anything", native_extraction_t<any_a<>>::val(&any_a<>::anything__));
+			operations.update("operation", native_extraction_t<any_a<>>::val(&any_a<>::operation__));
 			operations.update("something", native_extraction_t<any_a<>>::val(&any_a<>::something__));
 			operations.update("same", native_extraction_t<any_a<>>::val(&any_a<>::same__));
 			operations.update("different", native_extraction_t<any_a<>>::val(&any_a<>::different__));
@@ -117,6 +117,14 @@ public:
 		return operation.operator()(thing, range);
 	}
 
+	inline any_a<> operator()(any_a<> const& thing, range_a<> const& range) const
+	{
+		//TODO
+		// operation = thing.operations_().at(range.1st);
+		// return operate_(thing, operation, range.2nd...);
+		return nothing_t<>::val_();
+	}
+
 	// identification
 	inline any_a<> identical__(range_a<> const& range) const
 	{
@@ -154,12 +162,12 @@ public:
 		return something_t<>::val_();
 	}
 
-	static inline any_a<> anything__(range_a<> const&)
+	static inline any_a<> operation__(range_a<> const&)
 	{
-		return anything_();
+		return operation_();
 	}
 
-	static inline any_a<> anything_()
+	static inline any_a<> operation_()
 	{
 		return nothing_t<>::val_();
 	}

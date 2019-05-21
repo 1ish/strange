@@ -41,7 +41,7 @@ public:
 		return true;
 	}
 
-	static inline bool anything()
+	static inline bool operation()
 	{
 		return false;
 	}

@@ -24,7 +24,7 @@ return cend(); \
 } \
 
 template <typename _ABSTRACTION_ = range_a<>>
-class range_t : public anything_t<_ABSTRACTION_>
+class range_t : public thing_t<_ABSTRACTION_>
 {
 public: ___STRANGE_RANGE___
 	// construction
@@ -119,7 +119,7 @@ protected:
 	forward_const_iterator_a<> _end;
 
 	inline range_t(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
-		: anything_t{}
+		: thing_t{}
 		, _begin(begin)
 		, _end(end)
 	{}

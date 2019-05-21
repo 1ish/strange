@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = misunderstanding_a<>>
-class misunderstanding_t : public anything_t<_ABSTRACTION_>
+class misunderstanding_t : public thing_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
@@ -108,7 +108,7 @@ protected:
 
 	template <typename F>
 	inline misunderstanding_t(F&& s)
-		: anything_t{}
+		: thing_t{}
 		, _string{ std::forward<F>(s) }
 	{}
 };

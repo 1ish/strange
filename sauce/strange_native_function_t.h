@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = any_a<>>
-class native_function_t : public thing_t<_ABSTRACTION_>
+class native_function_t : public operation_t<_ABSTRACTION_>
 {
 	using function = any_a<>(*)(range_a<> const&);
 
@@ -53,7 +53,7 @@ protected:
 
 	template <typename F>
 	inline native_function_t(function const fun, F&& params)
-		: thing_t{}
+		: operation_t{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }
 	{}

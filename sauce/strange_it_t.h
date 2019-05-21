@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <bool CONST = false, typename END = nothing_t<>, typename _ABSTRACTION_ = forward_const_iterator_a<>>
-class it_t : public anything_t<_ABSTRACTION_>
+class it_t : public thing_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
@@ -119,7 +119,7 @@ protected:
 	mutable any_a<> _thing; //TODO A forward iterator cannot be "stashing": it cannot return a reference to an object within itself, because such references would be invalidated by the destruction of the forward iterator.
 
 	inline it_t(any_a<> const& thing)
-		: anything_t{}
+		: thing_t{}
 		, _thing(thing, !CONST)
 	{}
 };

@@ -5,10 +5,10 @@ namespace strange
 {
 
 template <typename PRIMITIVE, typename _ABSTRACTION_ = lake_a<PRIMITIVE>>
-class lake_t : public anything_t<_ABSTRACTION_>
+class lake_t : public thing_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
-	class iterator_t : public anything_t<_ABSTRACTION_>
+	class iterator_t : public thing_t<_ABSTRACTION_>
 	{
 	public: ___STRANGE_THING___
 		// construction
@@ -380,7 +380,7 @@ class lake_t : public anything_t<_ABSTRACTION_>
 
 		template <typename F>
 		inline iterator_t(lake_a<PRIMITIVE> const& lake, F&& it)
-			: anything_t{}
+			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _lake(lake, true)
 			, _number{ number_t<PRIMITIVE>::val_() }
@@ -388,7 +388,7 @@ class lake_t : public anything_t<_ABSTRACTION_>
 	};
 
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_const_iterator_data_a<ITERATOR>>
-	class const_iterator_t : public anything_t<_ABSTRACTION_>
+	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
 	public: ___STRANGE_THING___
 		// construction
@@ -741,7 +741,7 @@ class lake_t : public anything_t<_ABSTRACTION_>
 
 		template <typename F>
 		inline const_iterator_t(lake_a<PRIMITIVE> const& lake, F&& it)
-			: anything_t{}
+			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _lake(lake, true)
 			, _number{ number_t<PRIMITIVE>::val_() }
@@ -1139,7 +1139,7 @@ protected:
 
 	template <typename F>
 	inline lake_t(F&& init)
-		: anything_t{}
+		: thing_t{}
 		, _vector{ std::forward<F>(init) }
 	{}
 };

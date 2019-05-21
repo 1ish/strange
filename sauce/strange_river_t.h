@@ -5,10 +5,10 @@ namespace strange
 {
 
 	template <typename _ABSTRACTION_ = river_a<>>
-	class river_t : public anything_t<_ABSTRACTION_>
+	class river_t : public thing_t<_ABSTRACTION_>
 	{
 		template <typename ITERATOR, typename _ABSTRACTION_ = forward_const_iterator_data_a<ITERATOR>>
-		class const_iterator_t : public anything_t<_ABSTRACTION_>
+		class const_iterator_t : public thing_t<_ABSTRACTION_>
 		{
 		public: ___STRANGE_THING___
 			// construction
@@ -125,7 +125,7 @@ namespace strange
 
 			template <typename F>
 			inline const_iterator_t(river_a<> const& river, F&& it)
-				: anything_t{}
+				: thing_t{}
 				, _it{ std::forward<F>(it) }
 				, _river(river, true)
 				, _int_8{ number_int_8_t<>::val_() }
@@ -947,7 +947,7 @@ namespace strange
 		std::string const& _filename;
 
 		inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_ios_base const& stream = std_shared_ios_base{}, std::string const& filename = std::string{})
-			: anything_t{}
+			: thing_t{}
 			, _istream{ is }
 			, _ostream{ os }
 			, _stream{ stream }

@@ -4,10 +4,10 @@
 // things
 #include "strange_one_t.h"
 #include "strange_thing_t.h"
+#include "strange_operation_t.h"
 #include "strange_native_function_t.h"
 #include "strange_native_extraction_t.h"
 #include "strange_native_mutation_t.h"
-#include "strange_anything_t.h"
 #include "strange_something_t.h"
 #include "strange_nothing_t.h"
 #include "strange_it_t.h"

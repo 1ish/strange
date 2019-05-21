@@ -76,9 +76,9 @@ public:
 	inline any_a everything_() const;
 	inline bool everything() const;
 
-	inline any_a anything__(range_a const& _) const;
-	inline any_a anything_() const;
-	inline bool anything() const;
+	inline any_a operation__(range_a const& _) const;
+	inline any_a operation_() const;
+	inline bool operation() const;
 
 	inline any_a something__(range_a const& _) const;
 	inline any_a something_() const;

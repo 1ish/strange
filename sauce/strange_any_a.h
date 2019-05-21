@@ -150,12 +150,12 @@ namespace strange {
      { assert(handle_); return read().everything_( ); }
      inline bool everything ( ) const
      { assert(handle_); return read().everything( ); }
-     inline any_a anything__ ( range_a const & _ ) const
-     { assert(handle_); return read().anything__(_ ); }
-     inline any_a anything_ ( ) const
-     { assert(handle_); return read().anything_( ); }
-     inline bool anything ( ) const
-     { assert(handle_); return read().anything( ); }
+     inline any_a operation__ ( range_a const & _ ) const
+     { assert(handle_); return read().operation__(_ ); }
+     inline any_a operation_ ( ) const
+     { assert(handle_); return read().operation_( ); }
+     inline bool operation ( ) const
+     { assert(handle_); return read().operation( ); }
      inline any_a something__ ( range_a const & _ ) const
      { assert(handle_); return read().something__(_ ); }
      inline any_a something_ ( ) const
@@ -242,9 +242,9 @@ namespace strange {
       virtual inline any_a everything__ ( range_a const & _ ) const = 0;
       virtual inline any_a everything_ ( ) const = 0;
       virtual inline bool everything ( ) const = 0;
-      virtual inline any_a anything__ ( range_a const & _ ) const = 0;
-      virtual inline any_a anything_ ( ) const = 0;
-      virtual inline bool anything ( ) const = 0;
+      virtual inline any_a operation__ ( range_a const & _ ) const = 0;
+      virtual inline any_a operation_ ( ) const = 0;
+      virtual inline bool operation ( ) const = 0;
       virtual inline any_a something__ ( range_a const & _ ) const = 0;
       virtual inline any_a something_ ( ) const = 0;
       virtual inline bool something ( ) const = 0;
@@ -370,12 +370,12 @@ namespace strange {
       { return value_.everything_( ); }
       virtual inline bool everything ( ) const
       { return value_.everything( ); }
-      virtual inline any_a anything__ ( range_a const & _ ) const
-      { return value_.anything__(_ ); }
-      virtual inline any_a anything_ ( ) const
-      { return value_.anything_( ); }
-      virtual inline bool anything ( ) const
-      { return value_.anything( ); }
+      virtual inline any_a operation__ ( range_a const & _ ) const
+      { return value_.operation__(_ ); }
+      virtual inline any_a operation_ ( ) const
+      { return value_.operation_( ); }
+      virtual inline bool operation ( ) const
+      { return value_.operation( ); }
       virtual inline any_a something__ ( range_a const & _ ) const
       { return value_.something__(_ ); }
       virtual inline any_a something_ ( ) const

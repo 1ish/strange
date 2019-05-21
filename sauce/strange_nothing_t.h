@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = any_a<>>
-class nothing_t : public anything_t<_ABSTRACTION_>
+class nothing_t : public thing_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
@@ -99,7 +99,7 @@ public: ___STRANGE_THING___
 
 protected:
 	inline nothing_t()
-		: anything_t{}
+		: thing_t{}
 	{}
 };
 
