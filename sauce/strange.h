@@ -33,6 +33,11 @@ inline any_a<> boole(bool b)
 	return b ? something_t<>::val_() : nothing_t<>::val_();
 }
 
+template<typename _ABSTRACTION_>
+class abstraction;
+
 }
+
+#include "strange_any_o.h"
 
 #endif

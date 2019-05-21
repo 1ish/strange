@@ -28,29 +28,7 @@ public:
 
 	static inline unordered_shoal_a<> operations_()
 	{
-		static unordered_shoal_a<> OPERATIONS = []()
-		{
-			auto operations = unordered_shoal_t<>::val_();
-			operations.update("type", native_extraction_t<any_a<>>::val(&any_a<>::type__));
-			operations.update("cat", native_extraction_t<any_a<>>::val(&any_a<>::cat__));
-			operations.update("operations", native_extraction_t<any_a<>>::val(&any_a<>::operations__));
-			operations.update("eater", native_extraction_t<any_a<>>::val(&any_a<>::eater__));
-			operations.update("feeder", native_extraction_t<any_a<>>::val(&any_a<>::feeder__));
-			operations.update("visit", native_mutation_t<any_a<>>::val(&any_a<>::visit__));
-			operations.update("invoke", native_extraction_t<any_a<>>::val(&any_a<>::invoke__));
-			operations.update("operate", native_extraction_t<any_a<>>::val(&any_a<>::operate__));
-			operations.update("identical", native_extraction_t<any_a<>>::val(&any_a<>::identical__));
-			operations.update("nothing", native_extraction_t<any_a<>>::val(&any_a<>::nothing__));
-			operations.update("everything", native_extraction_t<any_a<>>::val(&any_a<>::everything__));
-			operations.update("operation", native_extraction_t<any_a<>>::val(&any_a<>::operation__));
-			operations.update("something", native_extraction_t<any_a<>>::val(&any_a<>::something__));
-			operations.update("same", native_extraction_t<any_a<>>::val(&any_a<>::same__));
-			operations.update("different", native_extraction_t<any_a<>>::val(&any_a<>::different__));
-			operations.update("hash", native_extraction_t<any_a<>>::val(&any_a<>::hash__));
-			operations.update("ranged", native_extraction_t<any_a<>>::val(&any_a<>::ranged__));
-			return operations;
-		}();
-		return OPERATIONS;
+		return abstraction<any_a<>>::operations();
 	}
 
 	static inline any_a<> eater_()
