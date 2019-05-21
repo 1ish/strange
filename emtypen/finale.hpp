@@ -120,7 +120,7 @@ private:
 	}
 
 	template <typename ___TTT___>
-	friend inline bool check_(%struct_name%<> const& value) noexcept;
+	friend inline bool check(%struct_name%<> const& value) noexcept;
 
 public:
 	static inline char const* ___abstraction_name___() noexcept
@@ -206,7 +206,7 @@ public:
 };
 
 template <typename ___TTT___>
-inline bool check_(%struct_name%<> const& value) noexcept
+inline bool check(%struct_name%<> const& value) noexcept
 {
 	return ___TTT___::___check___(value.handle_);
 }

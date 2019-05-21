@@ -157,7 +157,7 @@ TEST(SomeTaste, TestName)
 	std::cout << "\n r_.print()" << std::endl;
 	r_.print();
 
-	EXPECT_TRUE(check_<finale_>(r_));
+	EXPECT_TRUE(check<finale_>(r_));
 
 	f_ = cast_<finale_>(r_);
 
@@ -199,7 +199,7 @@ TEST(SomeTaste, TestName)
 TEST(SomeTaste, BadTest)
 {
 	root_ r_{ root::val__() };
-	if (check_<derived_>(r_))
+	if (check<derived_>(r_))
 	{
 		cast_<derived_>(r_);
 	}

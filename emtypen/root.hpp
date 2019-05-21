@@ -237,7 +237,7 @@ private:
 	}
 
 	template <typename ___TTT___>
-	friend inline bool check_(%struct_name%<> const& value) noexcept;
+	friend inline bool check(%struct_name%<> const& value) noexcept;
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
@@ -349,13 +349,13 @@ public:
 };
 
 template <typename ___TTT___>
-inline bool check_(%struct_name%<> const& value) noexcept
+inline bool check(%struct_name%<> const& value) noexcept
 {
 	return ___TTT___::___check___(value.handle_);
 }
 
 template <typename ___TTT___, typename ___VVV___>
-inline bool check_(___VVV___ const&) noexcept
+inline bool check(___VVV___ const&) noexcept
 {
 	return false;
 }

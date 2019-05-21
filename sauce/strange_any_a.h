@@ -468,7 +468,7 @@ namespace strange {
     	}
     
     	template <typename ___TTT___>
-    	friend inline bool check_(any_a<> const& value) noexcept;
+    	friend inline bool check(any_a<> const& value) noexcept;
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
@@ -580,13 +580,13 @@ namespace strange {
     };
     
     template <typename ___TTT___>
-    inline bool check_(any_a<> const& value) noexcept
+    inline bool check(any_a<> const& value) noexcept
     {
     	return ___TTT___::___check___(value.handle_);
     }
     
     template <typename ___TTT___, typename ___VVV___>
-    inline bool check_(___VVV___ const&) noexcept
+    inline bool check(___VVV___ const&) noexcept
     {
     	return false;
     }

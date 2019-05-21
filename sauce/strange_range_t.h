@@ -36,7 +36,7 @@ public: ___STRANGE_RANGE___
 			throw dis("strange::range::val passed empty range");
 		}
 		any_a<> begin = *it;
-		if (!check_<forward_const_iterator_a<>>(begin))
+		if (!check<forward_const_iterator_a<>>(begin))
 		{
 			throw dis("strange::range::val passed non-iterator begin");
 		}
@@ -45,7 +45,7 @@ public: ___STRANGE_RANGE___
 			throw dis("strange::range::val passed short range");
 		}
 		any_a<> end = *it;
-		if (!check_<forward_const_iterator_a<>>(end))
+		if (!check<forward_const_iterator_a<>>(end))
 		{
 			throw dis("strange::range::val passed non-iterator end");
 		}
@@ -65,7 +65,7 @@ public: ___STRANGE_RANGE___
 			throw dis("strange::range::ref passed empty range");
 		}
 		any_a<> begin = *it;
-		if (!check_<forward_const_iterator_a<>>(begin))
+		if (!check<forward_const_iterator_a<>>(begin))
 		{
 			throw dis("strange::range::ref passed non-iterator begin");
 		}
@@ -74,7 +74,7 @@ public: ___STRANGE_RANGE___
 			throw dis("strange::range::ref passed short range");
 		}
 		any_a<> end = *it;
-		if (!check_<forward_const_iterator_a<>>(end))
+		if (!check<forward_const_iterator_a<>>(end))
 		{
 			throw dis("strange::range::ref passed non-iterator end");
 		}

@@ -72,12 +72,12 @@ public: ___STRANGE_THING___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return check_<symbol_a<>>(thing) && cast_<symbol_a<>>(thing).to_string() == _string;
+		return check<symbol_a<>>(thing) && cast_<symbol_a<>>(thing).to_string() == _string;
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return !check_<symbol_a<>>(thing) || cast_<symbol_a<>>(thing).to_string() != _string;
+		return !check<symbol_a<>>(thing) || cast_<symbol_a<>>(thing).to_string() != _string;
 	}
 
 	inline std::size_t hash() const
@@ -101,7 +101,7 @@ public: ___STRANGE_THING___
 		std::string s = _string;
 		for (any_a<> const& thing : range)
 		{
-			if (check_<symbol_a<>>(thing))
+			if (check<symbol_a<>>(thing))
 			{
 				s += cast_<symbol_a<>>(thing).to_string();
 			}

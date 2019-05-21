@@ -203,7 +203,7 @@ namespace strange {
     	}
     
     	template <typename ___TTT___>
-    	friend inline bool check_(cat_a<> const& value) noexcept;
+    	friend inline bool check(cat_a<> const& value) noexcept;
     
     public:
     	static inline char const* ___abstraction_name___() noexcept
@@ -289,7 +289,7 @@ namespace strange {
     };
     
     template <typename ___TTT___>
-    inline bool check_(cat_a<> const& value) noexcept
+    inline bool check(cat_a<> const& value) noexcept
     {
     	return ___TTT___::___check___(value.handle_);
     }

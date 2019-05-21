@@ -34,7 +34,7 @@ namespace strange
 				// comparison
 				inline bool operator==(any_a<> const& thing) const
 				{
-					if (!check_<forward_const_iterator_data_a<ITERATOR>>(thing))
+					if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
 					{
 						return false;
 					}
@@ -43,7 +43,7 @@ namespace strange
 
 				inline bool operator!=(any_a<> const& thing) const
 				{
-					if (!check_<forward_const_iterator_data_a<ITERATOR>>(thing))
+					if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
 					{
 						return true;
 					}
@@ -300,7 +300,7 @@ namespace strange
 		{
 			for (auto const& thing : range)
 			{
-				if (!check_<number_data_a<int8_t>>(thing))
+				if (!check<number_data_a<int8_t>>(thing))
 				{
 					throw dis("strange::river::putback called with non-int-8");
 				}
@@ -332,7 +332,7 @@ namespace strange
 				return getline_();
 			}
 			any_a<> thing = *it;
-			if (!check_<number_data_a<int64_t>>(thing))
+			if (!check<number_data_a<int64_t>>(thing))
 			{
 				throw dis("strange::river::getline passed non-int-64 count");
 			}
@@ -341,7 +341,7 @@ namespace strange
 				return getline_(cast_<number_data_a<int64_t>>(thing));
 			}
 			any_a<> delimiter = *it;
-			if (!check_<number_data_a<int8_t>>(delimiter))
+			if (!check<number_data_a<int8_t>>(delimiter))
 			{
 				throw dis("strange::river::getline passed non-int-8 delimiter");
 			}
@@ -383,7 +383,7 @@ namespace strange
 				return ignore_();
 			}
 			any_a<> thing = *it;
-			if (!check_<number_data_a<int64_t>>(thing))
+			if (!check<number_data_a<int64_t>>(thing))
 			{
 				throw dis("strange::river::ignore passed non-int-64 count");
 			}
@@ -413,7 +413,7 @@ namespace strange
 				return read_();
 			}
 			any_a<> thing = *it;
-			if (!check_<number_data_a<int64_t>>(thing))
+			if (!check<number_data_a<int64_t>>(thing))
 			{
 				throw dis("strange::river::read passed non-int-64 count");
 			}
@@ -472,7 +472,7 @@ namespace strange
 				return seekg_beg_();
 			}
 			any_a<> thing = *it;
-			if (!check_<number_data_a<int64_t>>(thing))
+			if (!check<number_data_a<int64_t>>(thing))
 			{
 				throw dis("strange::river::seekg_beg passed non-int-64 offset");
 			}
@@ -502,7 +502,7 @@ namespace strange
 				return seekg_end_();
 			}
 			any_a<> thing = *it;
-			if (!check_<number_data_a<int64_t>>(thing))
+			if (!check<number_data_a<int64_t>>(thing))
 			{
 				throw dis("strange::river::seekg_end passed non-int-64 offset");
 			}
@@ -532,7 +532,7 @@ namespace strange
 				return seekg_cur_();
 			}
 			any_a<> thing = *it;
-			if (!check_<number_data_a<int64_t>>(thing))
+			if (!check<number_data_a<int64_t>>(thing))
 			{
 				throw dis("strange::river::seekg_cur passed non-int-64 offset");
 			}
@@ -578,7 +578,7 @@ namespace strange
 		{
 			for (auto const& thing : range)
 			{
-				if (!check_<number_data_a<int8_t>>(thing))
+				if (!check<number_data_a<int8_t>>(thing))
 				{
 					throw dis("strange::river::put called with non-int-8");
 				}
@@ -606,7 +606,7 @@ namespace strange
 		{
 			for (auto const& thing : range)
 			{
-				if (!check_<lake_a<int8_t>>(thing))
+				if (!check<lake_a<int8_t>>(thing))
 				{
 					throw dis("strange::river::write called with non-lake-int-8");
 				}
@@ -661,7 +661,7 @@ namespace strange
 				return seekp_beg_();
 			}
 			any_a<> thing = *it;
-			if (!check_<number_data_a<int64_t>>(thing))
+			if (!check<number_data_a<int64_t>>(thing))
 			{
 				throw dis("strange::river::seekp_beg passed non-int-64 offset");
 			}
@@ -691,7 +691,7 @@ namespace strange
 				return seekp_end_();
 			}
 			any_a<> thing = *it;
-			if (!check_<number_data_a<int64_t>>(thing))
+			if (!check<number_data_a<int64_t>>(thing))
 			{
 				throw dis("strange::river::seekp_end passed non-int-64 offset");
 			}
@@ -721,7 +721,7 @@ namespace strange
 				return seekp_cur_();
 			}
 			any_a<> thing = *it;
-			if (!check_<number_data_a<int64_t>>(thing))
+			if (!check<number_data_a<int64_t>>(thing))
 			{
 				throw dis("strange::river::seekp_cur passed non-int-64 offset");
 			}

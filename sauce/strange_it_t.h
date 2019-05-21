@@ -49,7 +49,7 @@ public: ___STRANGE_THING___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<forward_const_iterator_a<>>(thing))
+		if (!check<forward_const_iterator_a<>>(thing))
 		{
 			return false;
 		}
@@ -58,7 +58,7 @@ public: ___STRANGE_THING___
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<forward_const_iterator_a<>>(thing))
+		if (!check<forward_const_iterator_a<>>(thing))
 		{
 			return true;
 		}

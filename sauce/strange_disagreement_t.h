@@ -64,7 +64,7 @@ public: ___STRANGE_THING___
 		std::string s = _string;
 		for (any_a<> const& thing : range)
 		{
-			if (check_<misunderstanding_a<>>(thing))
+			if (check<misunderstanding_a<>>(thing))
 			{
 				s += cast_<misunderstanding_a<>>(thing).to_string();
 			}

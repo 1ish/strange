@@ -118,7 +118,7 @@ private:
 	}
 
 	template <typename ___TTT___>
-	friend inline bool check_(const root_& v);
+	friend inline bool check(const root_& v);
 
 	template <typename ___TTT___>
 	friend inline ___TTT___ cast_(const root_& v, bool reference = false);
@@ -209,13 +209,13 @@ public:
 };
 
 template <typename ___TTT___>
-inline bool check_(const root_& v)
+inline bool check(const root_& v)
 {
 	return ___TTT___::___check___(v.___handle___);
 }
 
 template <typename ___TTT___, typename ___VVV___>
-inline bool check_(const ___VVV___&)
+inline bool check(const ___VVV___&)
 {
 	return false;
 }

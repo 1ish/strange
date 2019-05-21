@@ -34,7 +34,7 @@ class unordered_herd_t : public anything_t<_ABSTRACTION_>
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
-			if (!check_<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
+			if (!check<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
 			{
 				return false;
 			}
@@ -43,7 +43,7 @@ class unordered_herd_t : public anything_t<_ABSTRACTION_>
 
 		inline bool operator!=(any_a<> const& thing) const
 		{
-			if (!check_<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
+			if (!check<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
 			{
 				return true;
 			}
@@ -210,7 +210,7 @@ public: ___STRANGE_COLLECTION___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<unordered_herd_a<>>(thing))
+		if (!check<unordered_herd_a<>>(thing))
 		{
 			return false;
 		}
@@ -219,7 +219,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<unordered_herd_a<>>(thing))
+		if (!check<unordered_herd_a<>>(thing))
 		{
 			return true;
 		}
@@ -355,19 +355,19 @@ public: ___STRANGE_COLLECTION___
 
 	inline unordered_herd_t& operator+=(any_a<> const& range)
 	{
-		if (check_<unordered_herd_a<>>(range))
+		if (check<unordered_herd_a<>>(range))
 		{
 			auto other = cast_<unordered_herd_a<>>(range).extract();
 			_set.insert(other.cbegin(), other.cend());
 		}
-		else if (check_<ordered_herd_a<>>(range))
+		else if (check<ordered_herd_a<>>(range))
 		{
 			auto other = cast_<ordered_herd_a<>>(range).extract();
 			_set.insert(other.cbegin(), other.cend());
 		}
 		else
 		{
-			if (!check_<range_a<>>(range))
+			if (!check<range_a<>>(range))
 			{
 				throw dis("strange::unordered_herd += passed non-range");
 			}
@@ -381,7 +381,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline unordered_herd_t& operator-=(any_a<> const& range)
 	{
-		if (!check_<range_a<>>(range))
+		if (!check<range_a<>>(range))
 		{
 			throw dis("strange::unordered_herd -= passed non-range");
 		}

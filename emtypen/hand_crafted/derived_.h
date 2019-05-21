@@ -98,7 +98,7 @@ private:
 	}
 
 	template <typename ___TTT___>
-	friend inline bool check_(const derived_& v);
+	friend inline bool check(const derived_& v);
 
 public:
 	static inline bool ___check___(const std::shared_ptr<___root_handle_base___>& h)
@@ -144,7 +144,7 @@ public:
 };
 
 template <typename ___TTT___>
-inline bool check_(const derived_& v)
+inline bool check(const derived_& v)
 {
 	return ___TTT___::___check___(v.___handle___);
 }

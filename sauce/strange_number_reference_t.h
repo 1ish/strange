@@ -29,7 +29,7 @@ public: ___STRANGE_THING___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<number_a<>>(thing))
+		if (!check<number_a<>>(thing))
 		{
 			return false;
 		}
@@ -38,7 +38,7 @@ public: ___STRANGE_THING___
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<number_a<>>(thing))
+		if (!check<number_a<>>(thing))
 		{
 			return true;
 		}
@@ -112,7 +112,7 @@ public: ___STRANGE_THING___
 
 	inline number_reference_t& operator+=(any_a<> const& thing)
 	{
-		if (!check_<number_a<>>(thing))
+		if (!check<number_a<>>(thing))
 		{
 			throw dis("strange::number_reference += passed non-number");
 		}
@@ -159,7 +159,7 @@ public: ___STRANGE_THING___
 
 	inline number_reference_t& operator-=(any_a<> const& thing)
 	{
-		if (!check_<number_a<>>(thing))
+		if (!check<number_a<>>(thing))
 		{
 			throw dis("strange::number_reference -= passed non-number");
 		}
@@ -206,7 +206,7 @@ public: ___STRANGE_THING___
 
 	inline number_reference_t& operator*=(any_a<> const& thing)
 	{
-		if (!check_<number_a<>>(thing))
+		if (!check<number_a<>>(thing))
 		{
 			throw dis("strange::number_reference *= passed non-number");
 		}
@@ -258,7 +258,7 @@ public: ___STRANGE_THING___
 
 	inline number_reference_t& operator/=(any_a<> const& thing)
 	{
-		if (!check_<number_a<>>(thing))
+		if (!check<number_a<>>(thing))
 		{
 			throw dis("strange::number_reference /= passed non-number");
 		}
@@ -320,7 +320,7 @@ public: ___STRANGE_THING___
 
 	inline number_reference_t& operator%=(any_a<> const& thing)
 	{
-		if (!check_<number_a<>>(thing))
+		if (!check<number_a<>>(thing))
 		{
 			throw dis("strange::number_reference %= passed non-number");
 		}
@@ -381,7 +381,7 @@ public: ___STRANGE_THING___
 			throw dis("strange::number_reference::from_int_64 passed empty range");
 		}
 		any_a<> thing = *it;
-		if (!check_<number_data_a<int64_t>>(thing))
+		if (!check<number_data_a<int64_t>>(thing))
 		{
 			throw dis("strange::number_reference::from_int_64 passed wrong type of thing");
 		}
@@ -422,7 +422,7 @@ public: ___STRANGE_THING___
 			throw dis("strange::number_reference::from_uint_64 passed empty range");
 		}
 		any_a<> thing = *it;
-		if (!check_<number_data_a<uint64_t>>(thing))
+		if (!check<number_data_a<uint64_t>>(thing))
 		{
 			throw dis("strange::number_reference::from_uint_64 passed wrong type of thing");
 		}
@@ -463,7 +463,7 @@ public: ___STRANGE_THING___
 			throw dis("strange::number_reference::from_float_64 passed empty range");
 		}
 		any_a<> thing = *it;
-		if (!check_<number_data_a<double>>(thing))
+		if (!check<number_data_a<double>>(thing))
 		{
 			throw dis("strange::number_reference::from_float_64 passed wrong type of thing");
 		}
@@ -489,7 +489,7 @@ public: ___STRANGE_THING___
 			throw dis("strange::number_reference::less_than passed empty range");
 		}
 		any_a<> thing = *it;
-		if (!check_<number_a<>>(thing))
+		if (!check<number_a<>>(thing))
 		{
 			throw dis("strange::number_reference::less_than passed non-number");
 		}
@@ -514,7 +514,7 @@ public: ___STRANGE_THING___
 			throw dis("strange::number_reference::greater_than passed empty range");
 		}
 		any_a<> thing = *it;
-		if (!check_<number_a<>>(thing))
+		if (!check<number_a<>>(thing))
 		{
 			throw dis("strange::number_reference::greater_than passed non-number");
 		}
@@ -539,7 +539,7 @@ public: ___STRANGE_THING___
 			throw dis("strange::number_reference::less_or_equal passed empty range");
 		}
 		any_a<> thing = *it;
-		if (!check_<number_a<>>(thing))
+		if (!check<number_a<>>(thing))
 		{
 			throw dis("strange::number_reference::less_or_equal passed non-number");
 		}
@@ -564,7 +564,7 @@ public: ___STRANGE_THING___
 			throw dis("strange::number_reference::greater_or_equal passed empty range");
 		}
 		any_a<> thing = *it;
-		if (!check_<number_a<>>(thing))
+		if (!check<number_a<>>(thing))
 		{
 			throw dis("strange::number_reference::greater_or_equal passed non-number");
 		}

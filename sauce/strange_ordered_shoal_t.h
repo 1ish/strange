@@ -34,7 +34,7 @@ class ordered_shoal_t : public anything_t<_ABSTRACTION_>
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
-			if (!check_<bidirectional_iterator_data_a<ITERATOR>>(thing))
+			if (!check<bidirectional_iterator_data_a<ITERATOR>>(thing))
 			{
 				return false;
 			}
@@ -43,7 +43,7 @@ class ordered_shoal_t : public anything_t<_ABSTRACTION_>
 
 		inline bool operator!=(any_a<> const& thing) const
 		{
-			if (!check_<bidirectional_iterator_data_a<ITERATOR>>(thing))
+			if (!check<bidirectional_iterator_data_a<ITERATOR>>(thing))
 			{
 				return true;
 			}
@@ -80,7 +80,7 @@ class ordered_shoal_t : public anything_t<_ABSTRACTION_>
 
 		inline any_a<> set_(any_a<> const& thing) const
 		{
-			if (!check_<flock_a<>>(thing))
+			if (!check<flock_a<>>(thing))
 			{
 				throw dis("strange::ordered_shoal::iterator set passed non-flock");
 			}
@@ -203,7 +203,7 @@ class ordered_shoal_t : public anything_t<_ABSTRACTION_>
 			// comparison
 			inline bool operator==(any_a<> const& thing) const
 			{
-				if (!check_<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
+				if (!check<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
 				{
 					return false;
 				}
@@ -212,7 +212,7 @@ class ordered_shoal_t : public anything_t<_ABSTRACTION_>
 
 			inline bool operator!=(any_a<> const& thing) const
 			{
-				if (!check_<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
+				if (!check<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
 				{
 					return true;
 				}
@@ -385,7 +385,7 @@ public: ___STRANGE_COLLECTION___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check_<ordered_shoal_a<>>(thing))
+		if (!check<ordered_shoal_a<>>(thing))
 		{
 			return false;
 		}
@@ -394,7 +394,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		if (!check_<ordered_shoal_a<>>(thing))
+		if (!check<ordered_shoal_a<>>(thing))
 		{
 			return true;
 		}
@@ -572,19 +572,19 @@ public: ___STRANGE_COLLECTION___
 
 	inline ordered_shoal_t& operator+=(any_a<> const& range)
 	{
-		if (check_<ordered_shoal_a<>>(range))
+		if (check<ordered_shoal_a<>>(range))
 		{
 			auto other = cast_<ordered_shoal_a<>>(range).extract();
 			_map.insert(other.cbegin(), other.cend());
 		}
-		else if (check_<unordered_shoal_a<>>(range))
+		else if (check<unordered_shoal_a<>>(range))
 		{
 			auto other = cast_<unordered_shoal_a<>>(range).extract();
 			_map.insert(other.cbegin(), other.cend());
 		}
 		else
 		{
-			if (!check_<range_a<>>(range))
+			if (!check<range_a<>>(range))
 			{
 				throw dis("strange::ordered_shoal += passed non-range");
 			}
@@ -598,7 +598,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline ordered_shoal_t& operator-=(any_a<> const& range)
 	{
-		if (!check_<range_a<>>(range))
+		if (!check<range_a<>>(range))
 		{
 			throw dis("strange::ordered_shoal -= passed non-range");
 		}
