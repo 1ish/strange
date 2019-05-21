@@ -20,15 +20,25 @@ public:
 	}
 
 	// reflection
+	static inline any_a<> cat__(range_a<> const&)
+	{
+		return cat_();
+	}
+	
 	static inline cat_a<> cat_()
 	{
 		static cat_a<> CATEGORY = cat_t<>::val_(sym(std::string("strange::") + _ABSTRACTION_::___abstraction_name___()));
 		return CATEGORY;
 	}
 
+	static inline any_a<> operations__(range_a<> const&)
+	{
+		return operations_();
+	}
+	
 	static inline unordered_shoal_a<> operations_()
 	{
-		return abstraction<any_a<>>::operations();
+		return abstraction<_ABSTRACTION_>::operations();
 	}
 
 	static inline any_a<> eater_()
@@ -206,14 +216,6 @@ protected:
 inline symbol_a<> type__(range_a<> const&) const \
 { \
 	return type_(); \
-} \
-inline cat_a<> cat__(range_a<> const&) const \
-{ \
-	return cat_(); \
-} \
-inline unordered_shoal_a<> operations__(range_a<> const&) const \
-{ \
-	return operations_(); \
 } \
 inline any_a<> eater__(range_a<> const&) const \
 { \
