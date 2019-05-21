@@ -36,17 +36,17 @@ public:
 		return false;
 	}
 
+	static inline bool something()
+	{
+		return false;
+	}
+
 	static inline bool everything()
 	{
 		return true;
 	}
 
 	static inline bool operation()
-	{
-		return false;
-	}
-
-	static inline bool something()
 	{
 		return false;
 	}
