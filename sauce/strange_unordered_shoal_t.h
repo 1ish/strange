@@ -486,7 +486,7 @@ public: ___STRANGE_COLLECTION___
 		std_unordered_map_any_any::const_iterator const it = _map.find(key);
 		if (it == _map.cend())
 		{
-			return nothing_t<>::val_();
+			return misunderstanding_t<>::val("strange::unordered_shoal::at key not found");
 		}
 		return it->second;
 	}

@@ -274,7 +274,7 @@ public: ___STRANGE_COLLECTION___
 		std_set_any::const_iterator const it = _set.find(key);
 		if (it == _set.cend())
 		{
-			return nothing_t<>::val_();
+			return misunderstanding_t<>::val("strange::ordered_herd::at key not found");
 		}
 		return *it;
 	}

@@ -887,7 +887,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return at(cast<number_a<>>(key).to_int_64());
 		}
-		return nothing_t<>::val_();
+		return misunderstanding_t<>::val("strange::squad::at index is not a number");
 	}
 
 	inline any_a<> at(int64_t index) const
@@ -896,7 +896,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return _deque[std::size_t(index)];
 		}
-		return nothing_t<>::val_();
+		return misunderstanding_t<>::val("strange::squad::at index out of bounds");
 	}
 
 	inline void update(any_a<> const& key, any_a<> const& value)
