@@ -17,7 +17,7 @@ inline any_a<> has__(range_a<> const& range) const \
 } \
 inline any_a<> has_(any_a<> const& key) const \
 { \
-	return _boole_(has(key)); \
+	return boole(has(key)); \
 } \
 inline any_a<> at__(range_a<> const& range) const \
 { \
@@ -63,7 +63,7 @@ inline any_a<> insert__(range_a<> const& range) \
 } \
 inline any_a<> insert_(any_a<> const& key, any_a<> const& value) \
 { \
-	return _boole_(insert(key, value)); \
+	return boole(insert(key, value)); \
 } \
 inline any_a<> erase__(range_a<> const& range) \
 { \
@@ -75,11 +75,11 @@ inline any_a<> erase__(range_a<> const& range) \
 			erased = true; \
 		} \
 	} \
-	return _boole_(erased); \
+	return boole(erased); \
 } \
 inline any_a<> erase_(any_a<> const& key) \
 { \
-	return _boole_(erase(key)); \
+	return boole(erase(key)); \
 } \
 inline _ABSTRACTION_ clear__(range_a<> const&) \
 { \
@@ -104,7 +104,7 @@ inline any_a<> empty__(range_a<> const&) const \
 } \
 inline any_a<> empty_() const \
 { \
-	return _boole_(empty()); \
+	return boole(empty()); \
 } \
 inline _ABSTRACTION_ push_front__(range_a<> const& range) \
 { \

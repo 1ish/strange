@@ -247,12 +247,12 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			{
 				throw dis("strange::squad::iterator::less_than passed incompatible thing");
 			}
-			return _boole_(_it < cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return boole(_it < cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_than_(random_access_iterator_a<> const& it) const
 		{
-			return _boole_(operator<(it));
+			return boole(operator<(it));
 		}
 
 		inline bool operator<(random_access_iterator_a<> const& it) const
@@ -276,12 +276,12 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			{
 				throw dis("strange::squad::iterator::greater_than passed incompatible thing");
 			}
-			return _boole_(_it > cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return boole(_it > cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
 		{
-			return _boole_(operator>(it));
+			return boole(operator>(it));
 		}
 
 		inline bool operator>(random_access_iterator_a<> const& it) const
@@ -305,12 +305,12 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			{
 				throw dis("strange::squad::iterator::less_or_equal passed incompatible thing");
 			}
-			return _boole_(_it <= cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return boole(_it <= cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
 		{
-			return _boole_(operator<=(it));
+			return boole(operator<=(it));
 		}
 
 		inline bool operator<=(random_access_iterator_a<> const& it) const
@@ -334,12 +334,12 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			{
 				throw dis("strange::squad::iterator::greater_or_equal passed incompatible thing");
 			}
-			return _boole_(_it >= cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return boole(_it >= cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
 		{
-			return _boole_(operator>=(it));
+			return boole(operator>=(it));
 		}
 
 		inline bool operator>=(random_access_iterator_a<> const& it) const
@@ -604,12 +604,12 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			{
 				throw dis("strange::squad::const_iterator::less_than passed incompatible thing");
 			}
-			return _boole_(_it < cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return boole(_it < cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_than_(random_access_const_iterator_a<> const& it) const
 		{
-			return _boole_(operator<(it));
+			return boole(operator<(it));
 		}
 
 		inline bool operator<(random_access_const_iterator_a<> const& it) const
@@ -633,12 +633,12 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			{
 				throw dis("strange::squad::const_iterator::greater_than passed incompatible thing");
 			}
-			return _boole_(_it > cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return boole(_it > cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_than_(random_access_const_iterator_a<> const& it) const
 		{
-			return _boole_(operator>(it));
+			return boole(operator>(it));
 		}
 
 		inline bool operator>(random_access_const_iterator_a<> const& it) const
@@ -662,12 +662,12 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			{
 				throw dis("strange::squad::const_iterator::less_or_equal passed incompatible thing");
 			}
-			return _boole_(_it <= cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return boole(_it <= cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_or_equal_(random_access_const_iterator_a<> const& it) const
 		{
-			return _boole_(operator<=(it));
+			return boole(operator<=(it));
 		}
 
 		inline bool operator<=(random_access_const_iterator_a<> const& it) const
@@ -691,12 +691,12 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			{
 				throw dis("strange::squad::const_iterator::greater_or_equal passed incompatible thing");
 			}
-			return _boole_(_it >= cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return boole(_it >= cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_const_iterator_a<> const& it) const
 		{
-			return _boole_(operator>=(it));
+			return boole(operator>=(it));
 		}
 
 		inline bool operator>=(random_access_const_iterator_a<> const& it) const

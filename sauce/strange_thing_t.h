@@ -138,7 +138,7 @@ public:
 
 	inline any_a<> identical_(any_a<> const& thing) const
 	{
-		return _boole_(identical(thing));
+		return boole(identical(thing));
 	}
 
 	// comparison
@@ -216,17 +216,17 @@ public:
 	inline void operator%=(any_a<> const& other)
 	{}
 
+	// conversion
+	static inline any_a<> boole(bool b)
+	{
+		return b ? something_t<>::val_() : nothing_t<>::val_();
+	}
+
 protected:
 	// construction
 	inline thing_t()
 		: one_t{}
 	{}
-
-	// conversion
-	static inline any_a<> _boole_(bool b)
-	{
-		return b ? something_t<>::val_() : nothing_t<>::val_();
-	}
 };
 
 // adaptation
@@ -258,7 +258,7 @@ inline any_a<> same__(range_a<> const& range) const \
 } \
 inline any_a<> same_(any_a<> const& thing) const \
 { \
-	return _boole_(operator==(thing)); \
+	return boole(operator==(thing)); \
 } \
 inline any_a<> different__(range_a<> const& range) const \
 { \
@@ -271,7 +271,7 @@ inline any_a<> different__(range_a<> const& range) const \
 } \
 inline any_a<> different_(any_a<> const& thing) const \
 { \
-	return _boole_(operator!=(thing)); \
+	return boole(operator!=(thing)); \
 } \
 inline any_a<> hash__(range_a<> const&) const \
 { \

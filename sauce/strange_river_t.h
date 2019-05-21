@@ -561,7 +561,7 @@ namespace strange
 
 		inline any_a<> sync_()
 		{
-			return _boole_(sync());
+			return boole(sync());
 		}
 
 		inline bool sync()
@@ -771,7 +771,7 @@ namespace strange
 
 		inline any_a<> good_() const
 		{
-			return _boole_(good());
+			return boole(good());
 		}
 
 		inline bool good() const
@@ -786,7 +786,7 @@ namespace strange
 
 		inline any_a<> eof_() const
 		{
-			return _boole_(eof());
+			return boole(eof());
 		}
 
 		inline bool eof() const
@@ -801,7 +801,7 @@ namespace strange
 
 		inline any_a<> fail_() const
 		{
-			return _boole_(fail());
+			return boole(fail());
 		}
 
 		inline bool fail() const
@@ -816,7 +816,7 @@ namespace strange
 
 		inline any_a<> bad_() const
 		{
-			return _boole_(bad());
+			return boole(bad());
 		}
 
 		inline bool bad() const

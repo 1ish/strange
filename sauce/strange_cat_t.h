@@ -99,7 +99,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> includes_(any_a<> const& thing) const
 	{
-		return _boole_(includes(thing));
+		return boole(includes(thing));
 	}
 
 	inline bool includes(any_a<> const& thing) const
@@ -124,7 +124,7 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> conforms_(any_a<> const& thing, any_a<> const& cat_or_unordered_herd)
 	{
-		return _boole_(conforms(thing, cat_or_unordered_herd));
+		return boole(conforms(thing, cat_or_unordered_herd));
 	}
 
 	static inline bool conforms(any_a<> const& thing, any_a<> const& cat_or_unordered_herd)

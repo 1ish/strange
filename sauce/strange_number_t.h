@@ -522,7 +522,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> less_than_(number_a<> const& number) const
 	{
-		return _boole_(operator<(number));
+		return boole(operator<(number));
 	}
 
 	inline bool operator<(number_a<> const& number) const
@@ -547,7 +547,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> greater_than_(number_a<> const& number) const
 	{
-		return _boole_(operator>(number));
+		return boole(operator>(number));
 	}
 
 	inline bool operator>(number_a<> const& number) const
@@ -572,7 +572,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> less_or_equal_(number_a<> const& number) const
 	{
-		return _boole_(operator<=(number));
+		return boole(operator<=(number));
 	}
 
 	inline bool operator<=(number_a<> const& number) const
@@ -597,7 +597,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> greater_or_equal_(number_a<> const& number) const
 	{
-		return _boole_(operator>=(number));
+		return boole(operator>=(number));
 	}
 
 	inline bool operator>=(number_a<> const& number) const
@@ -627,7 +627,7 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> is_int_()
 	{
-		return _boole_(is_int());
+		return boole(is_int());
 	}
 
 	static inline bool is_int()
@@ -642,7 +642,7 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> is_signed_()
 	{
-		return _boole_(is_signed());
+		return boole(is_signed());
 	}
 
 	static inline bool is_signed()
@@ -657,7 +657,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> is_nan_() const
 	{
-		return _boole_(is_nan());
+		return boole(is_nan());
 	}
 
 	inline bool is_nan() const
@@ -672,7 +672,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> is_inf_() const
 	{
-		return _boole_(is_inf());
+		return boole(is_inf());
 	}
 
 	inline bool is_inf() const
@@ -687,7 +687,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> is_finite_() const
 	{
-		return _boole_(is_finite());
+		return boole(is_finite());
 	}
 
 	inline bool is_finite() const
@@ -702,7 +702,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> is_normal_() const
 	{
-		return _boole_(is_normal());
+		return boole(is_normal());
 	}
 
 	inline bool is_normal() const
@@ -717,7 +717,7 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> little_endian_()
 	{
-		return _boole_(little_endian());
+		return boole(little_endian());
 	}
 
 	static inline bool little_endian()
