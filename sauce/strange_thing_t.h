@@ -213,7 +213,7 @@ protected:
 
 // adaptation
 #define ___STRANGE_THING___ \
-inline symbol_a<> type__(range_a<> const&) const \
+inline any_a<> type__(range_a<> const&) const \
 { \
 	return type_(); \
 } \
@@ -255,7 +255,7 @@ inline number_data_a<uint64_t> hash_() const \
 { \
 	return number_uint_64_t<>::val(uint64_t(hash())); \
 } \
-inline range_a<> ranged__(range_a<> const& _) const \
+inline any_a<> ranged__(range_a<> const& _) const \
 { \
 	return ranged_(); \
 } \
