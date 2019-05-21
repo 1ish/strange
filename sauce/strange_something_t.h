@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_EVERYTHING_T_H
-#define COM_ONEISH_STRANGE_EVERYTHING_T_H
+#ifndef COM_ONEISH_STRANGE_SOMETHING_T_H
+#define COM_ONEISH_STRANGE_SOMETHING_T_H
 
 namespace strange
 {
 
 template <typename _ABSTRACTION_ = any_a<>>
-class everything_t : public anything_t<_ABSTRACTION_>
+class something_t : public anything_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
@@ -16,7 +16,7 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> val_()
 	{
-		static any_a<> VAL = any_a<>{ everything_t<>{} };
+		static any_a<> VAL = any_a<>{ something_t<>{} };
 		return VAL;
 	}
 
@@ -27,41 +27,41 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> ref_()
 	{
-		static any_a<> REF = any_a<>(everything_t<>{}, true);
+		static any_a<> REF = any_a<>(something_t<>{}, true);
 		return REF;
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::everything");
+		static symbol_a<> TYPE = sym("strange::something");
 		return TYPE;
 	}
 
 	// comparison
-	static inline any_a<> everything__(range_a<> const&)
+	static inline any_a<> something__(range_a<> const&)
 	{
-		return everything_();
+		return something_();
 	}
 
-	static inline any_a<> everything_()
+	static inline any_a<> something_()
 	{
-		return everything_t<>::val_();
+		return something_t<>::val_();
 	}
 
-	static inline bool everything()
+	static inline bool something()
 	{
 		return true;
 	}
 
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return thing.everything();
+		return thing.something();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return !thing.everything();
+		return !thing.something();
 	}
 
 	inline std::size_t hash() const
@@ -71,7 +71,7 @@ public: ___STRANGE_THING___
 	}
 
 protected:
-	inline everything_t()
+	inline something_t()
 		: anything_t{}
 	{}
 };

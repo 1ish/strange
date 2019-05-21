@@ -25,7 +25,7 @@ public:
 
 	static inline any_a<> anything_()
 	{
-		return everything_t<>::val_();
+		return something_t<>::val_();
 	}
 
 	static inline bool anything()

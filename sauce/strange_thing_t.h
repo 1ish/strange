@@ -41,9 +41,9 @@ public:
 			operations.update("operate", native_extraction_t<any_a<>>::val(&any_a<>::operate__));
 			operations.update("identical", native_extraction_t<any_a<>>::val(&any_a<>::identical__));
 			operations.update("nothing", native_extraction_t<any_a<>>::val(&any_a<>::nothing__));
-			operations.update("something", native_extraction_t<any_a<>>::val(&any_a<>::something__));
-			operations.update("anything", native_extraction_t<any_a<>>::val(&any_a<>::anything__));
 			operations.update("everything", native_extraction_t<any_a<>>::val(&any_a<>::everything__));
+			operations.update("anything", native_extraction_t<any_a<>>::val(&any_a<>::anything__));
+			operations.update("something", native_extraction_t<any_a<>>::val(&any_a<>::something__));
 			operations.update("same", native_extraction_t<any_a<>>::val(&any_a<>::same__));
 			operations.update("different", native_extraction_t<any_a<>>::val(&any_a<>::different__));
 			operations.update("hash", native_extraction_t<any_a<>>::val(&any_a<>::hash__));
@@ -144,14 +144,14 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a<> something__(range_a<> const&)
+	static inline any_a<> everything__(range_a<> const&)
 	{
-		return something_();
+		return everything_();
 	}
 
-	static inline any_a<> something_()
+	static inline any_a<> everything_()
 	{
-		return everything_t<>::val_();
+		return something_t<>::val_();
 	}
 
 	static inline any_a<> anything__(range_a<> const&)
@@ -164,12 +164,12 @@ public:
 		return nothing_t<>::val_();
 	}
 
-	static inline any_a<> everything__(range_a<> const&)
+	static inline any_a<> something__(range_a<> const&)
 	{
-		return everything_();
+		return something_();
 	}
 
-	static inline any_a<> everything_()
+	static inline any_a<> something_()
 	{
 		return nothing_t<>::val_();
 	}
@@ -217,7 +217,7 @@ protected:
 	// conversion
 	static inline any_a<> _boole_(bool b)
 	{
-		return b ? everything_t<>::val_() : nothing_t<>::val_();
+		return b ? something_t<>::val_() : nothing_t<>::val_();
 	}
 };
 

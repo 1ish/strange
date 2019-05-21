@@ -34,7 +34,7 @@ public: ___STRANGE_THING___
 	// conversion
 	inline operator bool() const
 	{
-		return something();
+		return everything();
 	}
 
 	// reflection
@@ -52,7 +52,7 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> nothing_()
 	{
-		return everything_t<>::val_();
+		return something_t<>::val_();
 	}
 
 	static inline bool nothing()
@@ -60,17 +60,17 @@ public: ___STRANGE_THING___
 		return true;
 	}
 
-	static inline any_a<> something__(range_a<> const&)
+	static inline any_a<> everything__(range_a<> const&)
 	{
-		return something_();
+		return everything_();
 	}
 
-	static inline any_a<> something_()
+	static inline any_a<> everything_()
 	{
 		return nothing_t<>::val_();
 	}
 
-	static inline bool something()
+	static inline bool everything()
 	{
 		return false;
 	}
@@ -94,7 +94,7 @@ public: ___STRANGE_THING___
 	// conversion
 	inline range_a<> ranged_() const
 	{
-		return range_t<>::val_(it_t<true, everything_t<>>::val_(nothing_t<>::val_()), it_t<true, everything_t<>>::val_(everything_t<>::val_()));
+		return range_t<>::val_(it_t<true, something_t<>>::val_(nothing_t<>::val_()), it_t<true, something_t<>>::val_(something_t<>::val_()));
 	}
 
 protected:

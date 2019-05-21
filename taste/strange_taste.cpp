@@ -23,7 +23,7 @@ TEST(TestCaseName, ForLoop)
 	{
 	}
 
-	any_a<> e{ everything_t<>::val_() };
+	any_a<> e{ something_t<>::val_() };
 
 	for (auto const& v : e.ranged_())
 	{
