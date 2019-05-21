@@ -121,7 +121,7 @@ private:
 	friend inline bool check(const root_& v);
 
 	template <typename ___TTT___>
-	friend inline ___TTT___ cast_(const root_& v, bool reference = false);
+	friend inline ___TTT___ cast(const root_& v, bool reference = false);
 
 public:
 	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
@@ -221,7 +221,7 @@ inline bool check(const ___VVV___&)
 }
 
 template <typename ___TTT___>
-inline ___TTT___ cast_(const root_& v, bool reference)
+inline ___TTT___ cast(const root_& v, bool reference)
 {
 	return ___TTT___(v.___handle___, reference);
 }

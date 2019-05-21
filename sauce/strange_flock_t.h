@@ -38,7 +38,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				return false;
 			}
-			return _it == cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it == cast<random_access_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
@@ -47,7 +47,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				return true;
 			}
-			return _it != cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it != cast<random_access_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -162,7 +162,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator += passed non-number");
 			}
-			_it += cast_<number_a<>>(thing).to_int_64();
+			_it += cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -209,7 +209,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator -= passed non-number");
 			}
-			_it -= cast_<number_a<>>(thing).to_int_64();
+			_it -= cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -247,7 +247,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator::less_than passed incompatible thing");
 			}
-			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it < cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_than_(random_access_iterator_a<> const& it) const
@@ -261,7 +261,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator < passed incompatible thing");
 			}
-			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
+			return _it < cast<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_than__(range_a<> const& range) const
@@ -276,7 +276,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator::greater_than passed incompatible thing");
 			}
-			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it > cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
@@ -290,7 +290,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator > passed incompatible thing");
 			}
-			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
+			return _it > cast<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> less_or_equal__(range_a<> const& range) const
@@ -305,7 +305,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator::less_or_equal passed incompatible thing");
 			}
-			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it <= cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
@@ -319,7 +319,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator <= passed incompatible thing");
 			}
-			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
+			return _it <= cast<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_or_equal__(range_a<> const& range) const
@@ -334,7 +334,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator::greater_or_equal passed incompatible thing");
 			}
-			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it >= cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
@@ -348,7 +348,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::iterator >= passed incompatible thing");
 			}
-			return _it >= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
+			return _it >= cast<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		// data
@@ -410,7 +410,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				return false;
 			}
-			return _it == cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it == cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
@@ -419,7 +419,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				return true;
 			}
-			return _it != cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it != cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -519,7 +519,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator += passed non-number");
 			}
-			_it += cast_<number_a<>>(thing).to_int_64();
+			_it += cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -566,7 +566,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator -= passed non-number");
 			}
-			_it -= cast_<number_a<>>(thing).to_int_64();
+			_it -= cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -604,7 +604,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator::less_than passed incompatible thing");
 			}
-			return _boole_(_it < cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it < cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_than_(random_access_const_iterator_a<> const& it) const
@@ -618,7 +618,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator < passed incompatible thing");
 			}
-			return _it < cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
+			return _it < cast<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_than__(range_a<> const& range) const
@@ -633,7 +633,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator::greater_than passed incompatible thing");
 			}
-			return _boole_(_it > cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it > cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_than_(random_access_const_iterator_a<> const& it) const
@@ -647,7 +647,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator > passed incompatible thing");
 			}
-			return _it > cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
+			return _it > cast<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> less_or_equal__(range_a<> const& range) const
@@ -662,7 +662,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator::less_or_equal passed incompatible thing");
 			}
-			return _boole_(_it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it <= cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_or_equal_(random_access_const_iterator_a<> const& it) const
@@ -676,7 +676,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator <= passed incompatible thing");
 			}
-			return _it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
+			return _it <= cast<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_or_equal__(range_a<> const& range) const
@@ -691,7 +691,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator::greater_or_equal passed incompatible thing");
 			}
-			return _boole_(_it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it >= cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_const_iterator_a<> const& it) const
@@ -705,7 +705,7 @@ class flock_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::flock::const_iterator >= passed incompatible thing");
 			}
-			return _it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
+			return _it >= cast<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		// data
@@ -742,7 +742,7 @@ public: ___STRANGE_COLLECTION___
 	// construction
 	static inline flock_a<> val__(range_a<> const& range)
 	{
-		return cast_<flock_a<>>(val_() += range);
+		return cast<flock_a<>>(val_() += range);
 	}
 
 	static inline flock_a<> val_()
@@ -758,7 +758,7 @@ public: ___STRANGE_COLLECTION___
 
 	static inline flock_a<> ref__(range_a<> const& range)
 	{
-		return cast_<flock_a<>>(ref_() += range, true);
+		return cast<flock_a<>>(ref_() += range, true);
 	}
 
 	static inline flock_a<> ref_()
@@ -797,7 +797,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return false;
 		}
-		return _vector == cast_<flock_a<>>(thing).extract();
+		return _vector == cast<flock_a<>>(thing).extract();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
@@ -806,7 +806,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return true;
 		}
-		return _vector != cast_<flock_a<>>(thing).extract();
+		return _vector != cast<flock_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
@@ -873,7 +873,7 @@ public: ___STRANGE_COLLECTION___
 	// collection
 	inline bool has(any_a<> const& key) const
 	{
-		return check<number_a<>>(key) && has(cast_<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && has(cast<number_a<>>(key).to_int_64());
 	}
 
 	inline bool has(int64_t index) const
@@ -885,7 +885,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<number_a<>>(key))
 		{
-			return at(cast_<number_a<>>(key).to_int_64());
+			return at(cast<number_a<>>(key).to_int_64());
 		}
 		return nothing_t<>::val_();
 	}
@@ -903,7 +903,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<number_a<>>(key))
 		{
-			update(cast_<number_a<>>(key).to_int_64(), value);
+			update(cast<number_a<>>(key).to_int_64(), value);
 		}
 	}
 
@@ -929,7 +929,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool insert(any_a<> const& key, any_a<> const& value)
 	{
-		return check<number_a<>>(key) && insert(cast_<number_a<>>(key).to_int_64(), value);
+		return check<number_a<>>(key) && insert(cast<number_a<>>(key).to_int_64(), value);
 	}
 
 	inline bool insert(int64_t index, any_a<> const& value)
@@ -960,7 +960,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase(any_a<> const& key)
 	{
-		return check<number_a<>>(key) && erase(cast_<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && erase(cast<number_a<>>(key).to_int_64());
 	}
 
 	inline bool erase(int64_t index)
@@ -1018,7 +1018,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<flock_a<>>(range))
 		{
-			auto other = cast_<flock_a<>>(range).extract();
+			auto other = cast<flock_a<>>(range).extract();
 			_vector.insert(_vector.cend(), other.cbegin(), other.cend());
 		}
 		else
@@ -1027,7 +1027,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::flock += passed non-range");
 			}
-			for (auto const& thing : cast_<range_a<>>(range))
+			for (auto const& thing : cast<range_a<>>(range))
 			{
 				_vector.push_back(thing);
 			}
@@ -1039,7 +1039,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<collection_a<>>(range))
 		{
-			_vector.resize(std::size_t(std::max<int64_t>(0, int64_t(_vector.size()) - cast_<collection_a<>>(range).size())));
+			_vector.resize(std::size_t(std::max<int64_t>(0, int64_t(_vector.size()) - cast<collection_a<>>(range).size())));
 		}
 		else
 		{
@@ -1047,7 +1047,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::flock -= passed non-range");
 			}
-			for (auto const& thing : cast_<range_a<>>(range))
+			for (auto const& thing : cast<range_a<>>(range))
 			{
 				if (_vector.empty())
 				{

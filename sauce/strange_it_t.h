@@ -53,7 +53,7 @@ public: ___STRANGE_THING___
 		{
 			return false;
 		}
-		return _thing.nothing() == cast_<forward_const_iterator_a<>>(thing)->nothing();
+		return _thing.nothing() == cast<forward_const_iterator_a<>>(thing)->nothing();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
@@ -62,7 +62,7 @@ public: ___STRANGE_THING___
 		{
 			return true;
 		}
-		return _thing.nothing() != cast_<forward_const_iterator_a<>>(thing)->nothing();
+		return _thing.nothing() != cast<forward_const_iterator_a<>>(thing)->nothing();
 	}
 
 	inline std::size_t hash() const

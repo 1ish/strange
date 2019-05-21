@@ -53,7 +53,7 @@ TEST(TestCaseName, ForLoop)
 
 	try
 	{
-		unordered_shoal = cast_<unordered_shoal_a<>>(c);
+		unordered_shoal = cast<unordered_shoal_a<>>(c);
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -65,7 +65,7 @@ TEST(TestCaseName, ForLoop)
 	{
 		std::cout << "checked ok" << std::endl;
 		random_access_const_iterator_data_a<std::vector<any_a<>>::const_iterator> data =
-			cast_<random_access_const_iterator_data_a<std::vector<any_a<>>::const_iterator>>(it);
+			cast<random_access_const_iterator_data_a<std::vector<any_a<>>::const_iterator>>(it);
 		std::cout << "data: " << (data == flock.cend()) << std::endl;
 	}
 

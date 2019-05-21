@@ -53,7 +53,7 @@ public: ___STRANGE_THING___
 		{
 			return false;
 		}
-		return _number == number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing));
+		return _number == number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
@@ -62,7 +62,7 @@ public: ___STRANGE_THING___
 		{
 			return true;
 		}
-		return _number != number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing));
+		return _number != number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
 	}
 
 	inline std::size_t hash() const
@@ -140,7 +140,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number += passed non-number");
 		}
-		_number += number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing));
+		_number += number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
 		return *this;
 	}
 
@@ -187,7 +187,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number -= passed non-number");
 		}
-		_number -= number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing));
+		_number -= number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
 		return *this;
 	}
 
@@ -234,7 +234,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number *= passed non-number");
 		}
-		_number *= number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing));
+		_number *= number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
 		return *this;
 	}
 
@@ -286,7 +286,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number /= passed non-number");
 		}
-		PRIMITIVE num = number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing));
+		PRIMITIVE num = number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
 		if (num == 0)
 		{
 			throw dis("strange::number /= division by zero");
@@ -348,7 +348,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number %= passed non-number");
 		}
-		PRIMITIVE num = number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing));
+		PRIMITIVE num = number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
 		if (num == 0)
 		{
 			throw dis("strange::number %= division by zero");
@@ -409,7 +409,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number::from_int_64 passed wrong type of thing");
 		}
-		return from_int_64_(cast_<number_data_a<int64_t>>(thing));
+		return from_int_64_(cast<number_data_a<int64_t>>(thing));
 	}
 
 	inline any_a<> from_int_64_(number_data_a<int64_t> const& int_64)
@@ -450,7 +450,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number::from_uint_64 passed wrong type of thing");
 		}
-		return from_uint_64_(cast_<number_data_a<uint64_t>>(thing));
+		return from_uint_64_(cast<number_data_a<uint64_t>>(thing));
 	}
 
 	inline any_a<> from_uint_64_(number_data_a<uint64_t> const& uint_64)
@@ -491,7 +491,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number::from_float_64 passed wrong type of thing");
 		}
-		return from_float_64_(cast_<number_data_a<double>>(thing));
+		return from_float_64_(cast<number_data_a<double>>(thing));
 	}
 
 	inline any_a<> from_float_64_(number_data_a<double> const& float_64)
@@ -517,7 +517,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number::less_than passed non-number");
 		}
-		return less_than_(cast_<number_a<>>(thing));
+		return less_than_(cast<number_a<>>(thing));
 	}
 
 	inline any_a<> less_than_(number_a<> const& number) const
@@ -542,7 +542,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number::greater_than passed non-number");
 		}
-		return greater_than_(cast_<number_a<>>(thing));
+		return greater_than_(cast<number_a<>>(thing));
 	}
 
 	inline any_a<> greater_than_(number_a<> const& number) const
@@ -567,7 +567,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number::less_or_equal passed non-number");
 		}
-		return less_or_equal_(cast_<number_a<>>(thing));
+		return less_or_equal_(cast<number_a<>>(thing));
 	}
 
 	inline any_a<> less_or_equal_(number_a<> const& number) const
@@ -592,7 +592,7 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::number::greater_or_equal passed non-number");
 		}
-		return greater_or_equal_(cast_<number_a<>>(thing));
+		return greater_or_equal_(cast<number_a<>>(thing));
 	}
 
 	inline any_a<> greater_or_equal_(number_a<> const& number) const

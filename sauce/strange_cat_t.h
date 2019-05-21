@@ -84,7 +84,7 @@ public: ___STRANGE_THING___
 
 	inline cat_a<> result_() const
 	{
-		return check<cat_a<>>(_result) ? cast_<cat_a<>>(_result) : val_();
+		return check<cat_a<>>(_result) ? cast<cat_a<>>(_result) : val_();
 	}
 
 	inline any_a<> includes__(range_a<> const& range) const
@@ -131,7 +131,7 @@ public: ___STRANGE_THING___
 	{
 		if (check<cat_a<>>(cat_or_unordered_herd))
 		{
-			return cast_<cat_a<>>(cat_or_unordered_herd).includes_(thing);
+			return cast<cat_a<>>(cat_or_unordered_herd).includes_(thing);
 		}
 		/*
 		if (check<unordered_herd_>(cat_or_unordered_herd))

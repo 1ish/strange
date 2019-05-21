@@ -61,12 +61,12 @@ public: ___STRANGE_THING___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return check<misunderstanding_a<>>(thing) && cast_<misunderstanding_a<>>(thing).to_string() == _string;
+		return check<misunderstanding_a<>>(thing) && cast<misunderstanding_a<>>(thing).to_string() == _string;
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return !check<misunderstanding_a<>>(thing) || cast_<misunderstanding_a<>>(thing).to_string() != _string;
+		return !check<misunderstanding_a<>>(thing) || cast<misunderstanding_a<>>(thing).to_string() != _string;
 	}
 
 	inline std::size_t hash() const
@@ -87,7 +87,7 @@ public: ___STRANGE_THING___
 		{
 			if (check<misunderstanding_a<>>(thing))
 			{
-				s += cast_<misunderstanding_a<>>(thing).to_string();
+				s += cast<misunderstanding_a<>>(thing).to_string();
 			}
 		}
 		return misunderstanding_a<>{ misunderstanding_t{ std::move(s) } };

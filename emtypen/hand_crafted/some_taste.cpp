@@ -138,7 +138,7 @@ TEST(SomeTaste, TestName)
 	std::cout << "\n r3.print()" << std::endl;
 	r3.print();
 
-	derived_ d3{ cast_<derived_>(r3) };
+	derived_ d3{ cast<derived_>(r3) };
 
 	std::cout << "\n d3.mutate()" << std::endl;
 	d3.mutate();
@@ -159,7 +159,7 @@ TEST(SomeTaste, TestName)
 
 	EXPECT_TRUE(check<finale_>(r_));
 
-	f_ = cast_<finale_>(r_);
+	f_ = cast<finale_>(r_);
 
 	std::cout << "\n f_.print()" << std::endl;
 	f_.print();
@@ -201,7 +201,7 @@ TEST(SomeTaste, BadTest)
 	root_ r_{ root::val__() };
 	if (check<derived_>(r_))
 	{
-		cast_<derived_>(r_);
+		cast<derived_>(r_);
 	}
 	EXPECT_EQ(1, 1);
 }

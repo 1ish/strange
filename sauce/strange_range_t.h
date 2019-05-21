@@ -49,7 +49,7 @@ public: ___STRANGE_RANGE___
 		{
 			throw dis("strange::range::val passed non-iterator end");
 		}
-		return val_(cast_<forward_const_iterator_a<>>(begin), cast_<forward_const_iterator_a<>>(end));
+		return val_(cast<forward_const_iterator_a<>>(begin), cast<forward_const_iterator_a<>>(end));
 	}
 
 	static inline range_a<> val_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
@@ -78,7 +78,7 @@ public: ___STRANGE_RANGE___
 		{
 			throw dis("strange::range::ref passed non-iterator end");
 		}
-		return ref_(cast_<forward_const_iterator_a<>>(begin), cast_<forward_const_iterator_a<>>(end));
+		return ref_(cast<forward_const_iterator_a<>>(begin), cast<forward_const_iterator_a<>>(end));
 	}
 
 	static inline range_a<> ref_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)

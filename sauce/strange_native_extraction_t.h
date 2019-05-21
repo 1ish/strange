@@ -44,7 +44,7 @@ public: ___STRANGE_THING___
 	// function
 	inline any_a<> operator()(any_a<> const& thing, range_a<> const& range) const
 	{
-		return (cast_<T>(thing).*_function)(range);
+		return (cast<T>(thing).*_function)(range);
 	}
 
 protected:

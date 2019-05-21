@@ -66,7 +66,7 @@ public: ___STRANGE_THING___
 		{
 			if (check<misunderstanding_a<>>(thing))
 			{
-				s += cast_<misunderstanding_a<>>(thing).to_string();
+				s += cast<misunderstanding_a<>>(thing).to_string();
 			}
 		}
 		return misunderstanding_a<>{ disagreement_t{ std::move(s) } };

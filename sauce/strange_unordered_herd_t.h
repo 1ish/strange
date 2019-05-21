@@ -38,7 +38,7 @@ class unordered_herd_t : public anything_t<_ABSTRACTION_>
 			{
 				return false;
 			}
-			return _it == cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it == cast<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
@@ -47,7 +47,7 @@ class unordered_herd_t : public anything_t<_ABSTRACTION_>
 			{
 				return true;
 			}
-			return _it != cast_<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it != cast<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -159,7 +159,7 @@ public: ___STRANGE_COLLECTION___
 	// construction
 	static inline unordered_herd_a<> val__(range_a<> const& range)
 	{
-		return cast_<unordered_herd_a<>>(val_() += range);
+		return cast<unordered_herd_a<>>(val_() += range);
 	}
 
 	static inline unordered_herd_a<> val_()
@@ -175,7 +175,7 @@ public: ___STRANGE_COLLECTION___
 
 	static inline unordered_herd_a<> ref__(range_a<> const& range)
 	{
-		return cast_<unordered_herd_a<>>(ref_() += range, true);
+		return cast<unordered_herd_a<>>(ref_() += range, true);
 	}
 
 	static inline unordered_herd_a<> ref_()
@@ -214,7 +214,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return false;
 		}
-		return _set == cast_<unordered_herd_a<>>(thing).extract();
+		return _set == cast<unordered_herd_a<>>(thing).extract();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
@@ -223,7 +223,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return true;
 		}
-		return _set != cast_<unordered_herd_a<>>(thing).extract();
+		return _set != cast<unordered_herd_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
@@ -357,12 +357,12 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<unordered_herd_a<>>(range))
 		{
-			auto other = cast_<unordered_herd_a<>>(range).extract();
+			auto other = cast<unordered_herd_a<>>(range).extract();
 			_set.insert(other.cbegin(), other.cend());
 		}
 		else if (check<ordered_herd_a<>>(range))
 		{
-			auto other = cast_<ordered_herd_a<>>(range).extract();
+			auto other = cast<ordered_herd_a<>>(range).extract();
 			_set.insert(other.cbegin(), other.cend());
 		}
 		else
@@ -371,7 +371,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::unordered_herd += passed non-range");
 			}
-			for (auto const& thing : cast_<range_a<>>(range))
+			for (auto const& thing : cast<range_a<>>(range))
 			{
 				_set.insert(thing);
 			}
@@ -385,7 +385,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			throw dis("strange::unordered_herd -= passed non-range");
 		}
-		for (auto const& thing : cast_<range_a<>>(range))
+		for (auto const& thing : cast<range_a<>>(range))
 		{
 			_set.erase(thing);
 		}

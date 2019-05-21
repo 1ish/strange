@@ -38,7 +38,7 @@ namespace strange
 					{
 						return false;
 					}
-					return _it == cast_<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
+					return _it == cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
 				}
 
 				inline bool operator!=(any_a<> const& thing) const
@@ -47,7 +47,7 @@ namespace strange
 					{
 						return true;
 					}
-					return _it != cast_<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
+					return _it != cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
 				}
 
 				inline std::size_t hash() const
@@ -304,7 +304,7 @@ namespace strange
 				{
 					throw dis("strange::river::putback called with non-int-8");
 				}
-				putback(cast_<number_data_a<int8_t>>(thing).extract());
+				putback(cast<number_data_a<int8_t>>(thing).extract());
 			}
 			return me_();
 		}
@@ -338,14 +338,14 @@ namespace strange
 			}
 			if (++it == range.cend())
 			{
-				return getline_(cast_<number_data_a<int64_t>>(thing));
+				return getline_(cast<number_data_a<int64_t>>(thing));
 			}
 			any_a<> delimiter = *it;
 			if (!check<number_data_a<int8_t>>(delimiter))
 			{
 				throw dis("strange::river::getline passed non-int-8 delimiter");
 			}
-			return getline_(cast_<number_data_a<int64_t>>(thing), cast_<number_data_a<int8_t>>(delimiter));
+			return getline_(cast<number_data_a<int64_t>>(thing), cast<number_data_a<int8_t>>(delimiter));
 		}
 
 		inline lake_a<int8_t> getline_(number_data_a<int64_t> const& count = number_int_64_t<>::val(-1), number_data_a<int8_t> const& delimiter = number_int_8_t<>::val('\n'))
@@ -387,7 +387,7 @@ namespace strange
 			{
 				throw dis("strange::river::ignore passed non-int-64 count");
 			}
-			return ignore_(cast_<number_data_a<int64_t>>(thing));
+			return ignore_(cast<number_data_a<int64_t>>(thing));
 		}
 
 		inline any_a<> ignore_(number_data_a<int64_t> const& count = number_int_64_t<>::val(1))
@@ -417,7 +417,7 @@ namespace strange
 			{
 				throw dis("strange::river::read passed non-int-64 count");
 			}
-			return read_(cast_<number_data_a<int64_t>>(thing));
+			return read_(cast<number_data_a<int64_t>>(thing));
 		}
 
 		inline lake_a<int8_t> read_(number_data_a<int64_t> const& count = number_int_64_t<>::val(-1))
@@ -476,7 +476,7 @@ namespace strange
 			{
 				throw dis("strange::river::seekg_beg passed non-int-64 offset");
 			}
-			return seekg_beg_(cast_<number_data_a<int64_t>>(thing));
+			return seekg_beg_(cast<number_data_a<int64_t>>(thing));
 		}
 
 		inline any_a<> seekg_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())
@@ -506,7 +506,7 @@ namespace strange
 			{
 				throw dis("strange::river::seekg_end passed non-int-64 offset");
 			}
-			return seekg_end_(cast_<number_data_a<int64_t>>(thing));
+			return seekg_end_(cast<number_data_a<int64_t>>(thing));
 		}
 
 		inline any_a<> seekg_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())
@@ -536,7 +536,7 @@ namespace strange
 			{
 				throw dis("strange::river::seekg_cur passed non-int-64 offset");
 			}
-			return seekg_cur_(cast_<number_data_a<int64_t>>(thing));
+			return seekg_cur_(cast<number_data_a<int64_t>>(thing));
 		}
 
 		inline any_a<> seekg_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())
@@ -582,7 +582,7 @@ namespace strange
 				{
 					throw dis("strange::river::put called with non-int-8");
 				}
-				put(cast_<number_data_a<int8_t>>(thing).extract());
+				put(cast<number_data_a<int8_t>>(thing).extract());
 			}
 			return me_();
 		}
@@ -610,7 +610,7 @@ namespace strange
 				{
 					throw dis("strange::river::write called with non-lake-int-8");
 				}
-				write(cast_<lake_a<int8_t>>(thing).extract());
+				write(cast<lake_a<int8_t>>(thing).extract());
 			}
 			return me_();
 		}
@@ -665,7 +665,7 @@ namespace strange
 			{
 				throw dis("strange::river::seekp_beg passed non-int-64 offset");
 			}
-			return seekp_beg_(cast_<number_data_a<int64_t>>(thing));
+			return seekp_beg_(cast<number_data_a<int64_t>>(thing));
 		}
 
 		inline any_a<> seekp_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())
@@ -695,7 +695,7 @@ namespace strange
 			{
 				throw dis("strange::river::seekp_end passed non-int-64 offset");
 			}
-			return seekp_end_(cast_<number_data_a<int64_t>>(thing));
+			return seekp_end_(cast<number_data_a<int64_t>>(thing));
 		}
 
 		inline any_a<> seekp_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())
@@ -725,7 +725,7 @@ namespace strange
 			{
 				throw dis("strange::river::seekp_cur passed non-int-64 offset");
 			}
-			return seekp_cur_(cast_<number_data_a<int64_t>>(thing));
+			return seekp_cur_(cast<number_data_a<int64_t>>(thing));
 		}
 
 		inline any_a<> seekp_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())

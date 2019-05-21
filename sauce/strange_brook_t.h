@@ -38,7 +38,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				return false;
 			}
-			return _it == cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it == cast<random_access_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
@@ -47,7 +47,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				return true;
 			}
-			return _it != cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it != cast<random_access_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -82,7 +82,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::iterator set passed non-number");
 			}
-			*_it = number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing));
+			*_it = number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
 			return thing;
 		}
 
@@ -168,7 +168,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::iterator += passed non-number");
 			}
-			_it += cast_<number_a<>>(thing).to_int_64();
+			_it += cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -215,7 +215,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::iterator -= passed non-number");
 			}
-			_it -= cast_<number_a<>>(thing).to_int_64();
+			_it -= cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -253,7 +253,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::iterator::less_than passed incompatible thing");
 			}
-			return _boole_(_it < cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it < cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_than_(random_access_iterator_a<> const& it) const
@@ -267,7 +267,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::iterator < passed incompatible thing");
 			}
-			return _it < cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
+			return _it < cast<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_than__(range_a<> const& range) const
@@ -282,7 +282,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::iterator::greater_than passed incompatible thing");
 			}
-			return _boole_(_it > cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it > cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
@@ -296,7 +296,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::iterator > passed incompatible thing");
 			}
-			return _it > cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
+			return _it > cast<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> less_or_equal__(range_a<> const& range) const
@@ -311,7 +311,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::iterator::less_or_equal passed incompatible thing");
 			}
-			return _boole_(_it <= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it <= cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
@@ -325,7 +325,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::iterator <= passed incompatible thing");
 			}
-			return _it <= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
+			return _it <= cast<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_or_equal__(range_a<> const& range) const
@@ -340,7 +340,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::iterator::greater_or_equal passed incompatible thing");
 			}
-			return _boole_(_it >= cast_<random_access_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it >= cast<random_access_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
@@ -354,7 +354,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::iterator >= passed incompatible thing");
 			}
-			return _it >= cast_<random_access_iterator_data_a<ITERATOR>>(it).extract();
+			return _it >= cast<random_access_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		// data
@@ -418,7 +418,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				return false;
 			}
-			return _it == cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it == cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
@@ -427,7 +427,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				return true;
 			}
-			return _it != cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it != cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -529,7 +529,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::const_iterator += passed non-number");
 			}
-			_it += cast_<number_a<>>(thing).to_int_64();
+			_it += cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -576,7 +576,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::const_iterator -= passed non-number");
 			}
-			_it -= cast_<number_a<>>(thing).to_int_64();
+			_it -= cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
 
@@ -614,7 +614,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::const_iterator::less_than passed incompatible thing");
 			}
-			return _boole_(_it < cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it < cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_than_(random_access_const_iterator_a<> const& it) const
@@ -628,7 +628,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::const_iterator < passed incompatible thing");
 			}
-			return _it < cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
+			return _it < cast<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_than__(range_a<> const& range) const
@@ -643,7 +643,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::const_iterator::greater_than passed incompatible thing");
 			}
-			return _boole_(_it > cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it > cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_than_(random_access_const_iterator_a<> const& it) const
@@ -657,7 +657,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::const_iterator > passed incompatible thing");
 			}
-			return _it > cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
+			return _it > cast<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> less_or_equal__(range_a<> const& range) const
@@ -672,7 +672,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::const_iterator::less_or_equal passed incompatible thing");
 			}
-			return _boole_(_it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it <= cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> less_or_equal_(random_access_const_iterator_a<> const& it) const
@@ -686,7 +686,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::const_iterator <= passed incompatible thing");
 			}
-			return _it <= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
+			return _it <= cast<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		inline any_a<> greater_or_equal__(range_a<> const& range) const
@@ -701,7 +701,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::const_iterator::greater_or_equal passed incompatible thing");
 			}
-			return _boole_(_it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
+			return _boole_(_it >= cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_const_iterator_a<> const& it) const
@@ -715,7 +715,7 @@ class brook_t : public anything_t<_ABSTRACTION_>
 			{
 				throw dis("strange::brook::const_iterator >= passed incompatible thing");
 			}
-			return _it >= cast_<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
+			return _it >= cast<random_access_const_iterator_data_a<ITERATOR>>(it).extract();
 		}
 
 		// data
@@ -754,7 +754,7 @@ public: ___STRANGE_COLLECTION___
 	// construction
 	static inline brook_a<PRIMITIVE> val__(range_a<> const& range)
 	{
-		return cast_<brook_a<PRIMITIVE>>(val_() += range);
+		return cast<brook_a<PRIMITIVE>>(val_() += range);
 	}
 
 	static inline brook_a<PRIMITIVE> val_()
@@ -770,7 +770,7 @@ public: ___STRANGE_COLLECTION___
 
 	static inline brook_a<PRIMITIVE> ref__(range_a<> const& range)
 	{
-		return cast_<brook_a<PRIMITIVE>>(ref_() += range, true);
+		return cast<brook_a<PRIMITIVE>>(ref_() += range, true);
 	}
 
 	static inline brook_a<PRIMITIVE> ref_()
@@ -809,7 +809,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return false;
 		}
-		return _deque == cast_<brook_a<PRIMITIVE>>(thing).extract();
+		return _deque == cast<brook_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
@@ -818,7 +818,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			return true;
 		}
-		return _deque != cast_<brook_a<PRIMITIVE>>(thing).extract();
+		return _deque != cast<brook_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
@@ -885,7 +885,7 @@ public: ___STRANGE_COLLECTION___
 	// collection
 	inline bool has(any_a<> const& key) const
 	{
-		return check<number_a<>>(key) && has(cast_<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && has(cast<number_a<>>(key).to_int_64());
 	}
 
 	inline bool has(int64_t index) const
@@ -897,7 +897,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<number_a<>>(key))
 		{
-			return at(cast_<number_a<>>(key).to_int_64());
+			return at(cast<number_a<>>(key).to_int_64());
 		}
 		return at(-1);
 	}
@@ -920,7 +920,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<number_a<>>(key))
 		{
-			update(cast_<number_a<>>(key).to_int_64(), value);
+			update(cast<number_a<>>(key).to_int_64(), value);
 		}
 	}
 
@@ -930,7 +930,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			throw dis("strange::brook::update passed non-number value");
 		}
-		return update(index, number_u<PRIMITIVE>::from_number(cast_<number_a<>>(value)));
+		return update(index, number_u<PRIMITIVE>::from_number(cast<number_a<>>(value)));
 	}
 
 	inline void update(int64_t index, PRIMITIVE number)
@@ -955,7 +955,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool insert(any_a<> const& key, any_a<> const& value)
 	{
-		return check<number_a<>>(key) && insert(cast_<number_a<>>(key).to_int_64(), value);
+		return check<number_a<>>(key) && insert(cast<number_a<>>(key).to_int_64(), value);
 	}
 
 	inline bool insert(int64_t index, any_a<> const& value)
@@ -964,7 +964,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			throw dis("strange::brook::insert passed non-number value");
 		}
-		return insert(index, number_u<PRIMITIVE>::from_number(cast_<number_a<>>(value)));
+		return insert(index, number_u<PRIMITIVE>::from_number(cast<number_a<>>(value)));
 	}
 
 	inline bool insert(int64_t index, PRIMITIVE number)
@@ -995,7 +995,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase(any_a<> const& key)
 	{
-		return check<number_a<>>(key) && erase(cast_<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && erase(cast<number_a<>>(key).to_int_64());
 	}
 
 	inline bool erase(int64_t index)
@@ -1029,7 +1029,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			throw dis("strange::brook::push_front passed non-number");
 		}
-		push_front(number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing)));
+		push_front(number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing)));
 	}
 
 	inline void push_front(PRIMITIVE number)
@@ -1059,7 +1059,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			throw dis("strange::brook::push_back passed non-number");
 		}
-		push_back(number_u<PRIMITIVE>::from_number(cast_<number_a<>>(thing)));
+		push_back(number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing)));
 	}
 
 	inline void push_back(PRIMITIVE number)
@@ -1087,7 +1087,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<brook_a<PRIMITIVE>>(range))
 		{
-			auto other = cast_<brook_a<PRIMITIVE>>(range).extract();
+			auto other = cast<brook_a<PRIMITIVE>>(range).extract();
 			_deque.insert(_deque.cend(), other.cbegin(), other.cend());
 		}
 		else
@@ -1096,7 +1096,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::brook += passed non-range");
 			}
-			for (auto const& thing : cast_<range_a<>>(range))
+			for (auto const& thing : cast<range_a<>>(range))
 			{
 				push_back(thing);
 			}
@@ -1108,7 +1108,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<collection_a<>>(range))
 		{
-			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - cast_<collection_a<>>(range).size())));
+			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - cast<collection_a<>>(range).size())));
 		}
 		else
 		{
@@ -1116,7 +1116,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::brook -= passed non-range");
 			}
-			for (auto const& thing : cast_<range_a<>>(range))
+			for (auto const& thing : cast<range_a<>>(range))
 			{
 				if (_deque.empty())
 				{

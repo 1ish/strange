@@ -241,10 +241,10 @@ private:
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
-	friend inline ___TTT___ cast_(%struct_name%<> const& value, bool reference = false);
+	friend inline ___TTT___ cast(%struct_name%<> const& value, bool reference = false);
 #else
 	template <typename ___TTT___>
-	friend inline ___TTT___ cast_(%struct_name%<> const& value, bool reference = false) noexcept;
+	friend inline ___TTT___ cast(%struct_name%<> const& value, bool reference = false) noexcept;
 #endif
 
 public:
@@ -362,13 +362,13 @@ inline bool check(___VVV___ const&) noexcept
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
 template <typename ___TTT___>
-inline ___TTT___ cast_(%struct_name%<> const& value, bool reference)
+inline ___TTT___ cast(%struct_name%<> const& value, bool reference)
 {
 	return ___TTT___(value.handle_, reference);
 }
 #else
 template <typename ___TTT___>
-inline ___TTT___ cast_(%struct_name%<> const& value, bool reference) noexcept
+inline ___TTT___ cast(%struct_name%<> const& value, bool reference) noexcept
 {
 	return ___TTT___(value.handle_, reference);
 }
