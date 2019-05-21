@@ -152,6 +152,16 @@ public:
 		return nothing_t<>::val_();
 	}
 
+	static inline any_a<> something__(range_a<> const&)
+	{
+		return something_();
+	}
+
+	static inline any_a<> something_()
+	{
+		return nothing_t<>::val_();
+	}
+
 	static inline any_a<> everything__(range_a<> const&)
 	{
 		return everything_();
@@ -168,16 +178,6 @@ public:
 	}
 
 	static inline any_a<> operation_()
-	{
-		return nothing_t<>::val_();
-	}
-
-	static inline any_a<> something__(range_a<> const&)
-	{
-		return something_();
-	}
-
-	static inline any_a<> something_()
 	{
 		return nothing_t<>::val_();
 	}
