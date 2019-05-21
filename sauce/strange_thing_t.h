@@ -216,12 +216,6 @@ public:
 	inline void operator%=(any_a<> const& other)
 	{}
 
-	// conversion
-	static inline any_a<> boole(bool b)
-	{
-		return b ? something_t<>::val_() : nothing_t<>::val_();
-	}
-
 protected:
 	// construction
 	inline thing_t()
