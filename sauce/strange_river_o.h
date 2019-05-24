@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<river_a<>>
+class reflection<river_a<>>
 {
 public:
 	static inline cat_a<> cat()
@@ -18,7 +18,7 @@ public:
 	{
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
-			auto operations = abstraction<range_a<>>::operations();
+			auto operations = reflection<range_a<>>::operations();
 			operations.update("get", native_mutation_t<river_a<>>::val(&river_a<>::get__));
 			operations.update("peek", native_mutation_t<river_a<>>::val(&river_a<>::peek__));
 			operations.update("unget", native_mutation_t<river_a<>>::val(&river_a<>::unget__));

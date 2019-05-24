@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<random_access_const_iterator_a<>>
+class reflection<random_access_const_iterator_a<>>
 {
 public:
 	static inline cat_a<> cat()
@@ -18,7 +18,7 @@ public:
 	{
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
-			auto operations = abstraction<bidirectional_const_iterator_a<>>::operations();
+			auto operations = reflection<bidirectional_const_iterator_a<>>::operations();
 			operations.update("self_add", native_mutation_t<random_access_const_iterator_a<>>::val(&random_access_const_iterator_a<>::self_add__));
 			operations.update("add", native_extraction_t<random_access_const_iterator_a<>>::val(&random_access_const_iterator_a<>::add__));
 			operations.update("self_subtract", native_mutation_t<random_access_const_iterator_a<>>::val(&random_access_const_iterator_a<>::self_subtract__));

@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<forward_const_iterator_data_a<std::istreambuf_iterator<char>>>
+class reflection<forward_const_iterator_data_a<std::istreambuf_iterator<char>>>
 {
 public:
 	static inline cat_a<> cat()
@@ -16,12 +16,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<forward_const_iterator_a<>>::operations();
+		return reflection<forward_const_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<forward_const_iterator_data_a<std::unordered_set<any_a<>, any_a<>::hash_f>::const_iterator>>
+class reflection<forward_const_iterator_data_a<std::unordered_set<any_a<>, any_a<>::hash_f>::const_iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -32,12 +32,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<forward_const_iterator_a<>>::operations();
+		return reflection<forward_const_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<forward_const_iterator_data_a<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::const_iterator>>
+class reflection<forward_const_iterator_data_a<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::const_iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -48,7 +48,7 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<forward_const_iterator_a<>>::operations();
+		return reflection<forward_const_iterator_a<>>::operations();
 	}
 };
 

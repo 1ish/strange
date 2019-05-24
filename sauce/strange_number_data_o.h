@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<number_data_a<int8_t>>
+class reflection<number_data_a<int8_t>>
 {
 public:
 	static inline cat_a<> cat()
@@ -16,12 +16,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<number_a<>>::operations();
+		return reflection<number_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<number_data_a<uint8_t>>
+class reflection<number_data_a<uint8_t>>
 {
 public:
 	static inline cat_a<> cat()
@@ -32,12 +32,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<number_a<>>::operations();
+		return reflection<number_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<number_data_a<int16_t>>
+class reflection<number_data_a<int16_t>>
 {
 public:
 	static inline cat_a<> cat()
@@ -48,12 +48,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<number_a<>>::operations();
+		return reflection<number_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<number_data_a<uint16_t>>
+class reflection<number_data_a<uint16_t>>
 {
 public:
 	static inline cat_a<> cat()
@@ -64,12 +64,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<number_a<>>::operations();
+		return reflection<number_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<number_data_a<int32_t>>
+class reflection<number_data_a<int32_t>>
 {
 public:
 	static inline cat_a<> cat()
@@ -80,12 +80,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<number_a<>>::operations();
+		return reflection<number_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<number_data_a<uint32_t>>
+class reflection<number_data_a<uint32_t>>
 {
 public:
 	static inline cat_a<> cat()
@@ -96,12 +96,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<number_a<>>::operations();
+		return reflection<number_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<number_data_a<int64_t>>
+class reflection<number_data_a<int64_t>>
 {
 public:
 	static inline cat_a<> cat()
@@ -112,12 +112,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<number_a<>>::operations();
+		return reflection<number_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<number_data_a<uint64_t>>
+class reflection<number_data_a<uint64_t>>
 {
 public:
 	static inline cat_a<> cat()
@@ -128,12 +128,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<number_a<>>::operations();
+		return reflection<number_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<number_data_a<float>>
+class reflection<number_data_a<float>>
 {
 public:
 	static inline cat_a<> cat()
@@ -144,12 +144,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<number_a<>>::operations();
+		return reflection<number_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<number_data_a<double>>
+class reflection<number_data_a<double>>
 {
 public:
 	static inline cat_a<> cat()
@@ -160,7 +160,7 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<number_a<>>::operations();
+		return reflection<number_a<>>::operations();
 	}
 };
 

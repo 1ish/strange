@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<bidirectional_iterator_a<>>
+class reflection<bidirectional_iterator_a<>>
 {
 public:
 	static inline cat_a<> cat()
@@ -18,7 +18,7 @@ public:
 	{
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
-			auto operations = abstraction<forward_iterator_a<>>::operations();
+			auto operations = reflection<forward_iterator_a<>>::operations();
 			operations.update("decrement", native_mutation_t<bidirectional_iterator_a<>>::val(&bidirectional_iterator_a<>::decrement__));
 			return operations;
 		}();

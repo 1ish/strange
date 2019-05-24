@@ -7,7 +7,7 @@ namespace strange
 {
 
 template<typename _ABSTRACTION_>
-class abstraction;
+class reflection;
 
 }
 

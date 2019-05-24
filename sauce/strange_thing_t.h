@@ -38,7 +38,7 @@ public:
 	
 	static inline unordered_shoal_a<> operations_()
 	{
-		return abstraction<_ABSTRACTION_>::operations();
+		return reflection<_ABSTRACTION_>::operations();
 	}
 
 	static inline any_a<> eater_()

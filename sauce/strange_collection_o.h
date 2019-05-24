@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<collection_a<>>
+class reflection<collection_a<>>
 {
 public:
 	static inline cat_a<> cat()
@@ -18,7 +18,7 @@ public:
 	{
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
-			auto operations = abstraction<range_a<>>::operations();
+			auto operations = reflection<range_a<>>::operations();
 			operations.update("has", native_extraction_t<collection_a<>>::val(&collection_a<>::has__));
 			operations.update("at", native_extraction_t<collection_a<>>::val(&collection_a<>::at__));
 			operations.update("update", native_mutation_t<collection_a<>>::val(&collection_a<>::update__));

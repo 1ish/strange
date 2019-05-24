@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<squad_a<>>
+class reflection<squad_a<>>
 {
 public:
 	static inline cat_a<> cat()
@@ -16,7 +16,7 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<inventory_a<>>::operations();
+		return reflection<inventory_a<>>::operations();
 	}
 };
 

@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<random_access_iterator_data_a<std::vector<any_a<>>::iterator>>
+class reflection<random_access_iterator_data_a<std::vector<any_a<>>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -16,12 +16,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::deque<any_a<>>::iterator>>
+class reflection<random_access_iterator_data_a<std::deque<any_a<>>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -32,12 +32,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::vector<int8_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::vector<int8_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -48,12 +48,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::deque<int8_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::deque<int8_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -64,12 +64,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::vector<uint8_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::vector<uint8_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -80,12 +80,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::deque<uint8_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::deque<uint8_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -96,12 +96,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::vector<int16_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::vector<int16_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -112,12 +112,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::deque<int16_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::deque<int16_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -128,12 +128,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::vector<uint16_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::vector<uint16_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -144,12 +144,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::deque<uint16_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::deque<uint16_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -160,12 +160,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::vector<int32_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::vector<int32_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -176,12 +176,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::deque<int32_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::deque<int32_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -192,12 +192,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::vector<uint32_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::vector<uint32_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -208,12 +208,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::deque<uint32_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::deque<uint32_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -224,12 +224,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::vector<int64_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::vector<int64_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -240,12 +240,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::deque<int64_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::deque<int64_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -256,12 +256,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::vector<uint64_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::vector<uint64_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -272,12 +272,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::deque<uint64_t>::iterator>>
+class reflection<random_access_iterator_data_a<std::deque<uint64_t>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -288,12 +288,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::vector<float>::iterator>>
+class reflection<random_access_iterator_data_a<std::vector<float>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -304,12 +304,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::deque<float>::iterator>>
+class reflection<random_access_iterator_data_a<std::deque<float>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -320,12 +320,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::vector<double>::iterator>>
+class reflection<random_access_iterator_data_a<std::vector<double>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -336,12 +336,12 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 
 template<>
-class abstraction<random_access_iterator_data_a<std::deque<double>::iterator>>
+class reflection<random_access_iterator_data_a<std::deque<double>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -352,7 +352,7 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<random_access_iterator_a<>>::operations();
+		return reflection<random_access_iterator_a<>>::operations();
 	}
 };
 

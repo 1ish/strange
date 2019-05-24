@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<number_a<>>
+class reflection<number_a<>>
 {
 public:
 	static inline cat_a<> cat()
@@ -18,7 +18,7 @@ public:
 	{
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
-			auto operations = abstraction<any_a<>>::operations();
+			auto operations = reflection<any_a<>>::operations();
 			operations.update("increment", native_mutation_t<number_a<>>::val(&number_a<>::increment__));
 			operations.update("decrement", native_mutation_t<number_a<>>::val(&number_a<>::decrement__));
 			operations.update("self_add", native_mutation_t<number_a<>>::val(&number_a<>::self_add__));

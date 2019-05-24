@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<any_a<>>
+class reflection<any_a<>>
 {
 public:
 	static inline cat_a<> cat()

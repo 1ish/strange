@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<forward_iterator_data_a<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::iterator>>
+class reflection<forward_iterator_data_a<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -16,7 +16,7 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<forward_iterator_a<>>::operations();
+		return reflection<forward_iterator_a<>>::operations();
 	}
 };
 

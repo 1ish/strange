@@ -20,7 +20,7 @@
 #include "strange_things.h"
 
 // operations
-#include "strange_operations.h"
+#include "strange_reflections.h"
 
 // definitions
 #include "strange_definitions.h"

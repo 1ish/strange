@@ -5,7 +5,7 @@ namespace strange
 {
 
 template<>
-class abstraction<bidirectional_iterator_data_a<std::map<any_a<>, any_a<>>::iterator>>
+class reflection<bidirectional_iterator_data_a<std::map<any_a<>, any_a<>>::iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -16,7 +16,7 @@ public:
 
 	static inline unordered_shoal_a<> operations()
 	{
-		return abstraction<bidirectional_iterator_a<>>::operations();
+		return reflection<bidirectional_iterator_a<>>::operations();
 	}
 };
 
