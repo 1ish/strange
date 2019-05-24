@@ -1,5 +1,5 @@
-#ifndef COM_ONEISH_STRANGE_RANGE_O_H
-#define COM_ONEISH_STRANGE_RANGE_O_H
+#ifndef COM_ONEISH_STRANGE_RANGE_R_H
+#define COM_ONEISH_STRANGE_RANGE_R_H
 
 namespace strange
 {
