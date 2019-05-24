@@ -147,11 +147,6 @@ private:
 	friend inline bool check(%struct_name%<___1___> const& value) noexcept;
 
 public:
-	static inline char const* ___abstraction_name___() noexcept
-	{
-		return "%struct_name%";
-	}
-
 	static inline bool ___check___(std::shared_ptr<___root_handle_base___>const & handle) noexcept
 	{
 		return bool(std::dynamic_pointer_cast<___derived_handle_base___>(handle));

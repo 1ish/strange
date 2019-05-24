@@ -27,8 +27,7 @@ public:
 	
 	static inline cat_a<> cat_()
 	{
-		static cat_a<> CATEGORY = cat_t<>::val_(sym(std::string("strange::") + _ABSTRACTION_::___abstraction_name___()));
-		return CATEGORY;
+		return reflection<_ABSTRACTION_>::cat();
 	}
 
 	static inline any_a<> operations__(range_a<> const&)

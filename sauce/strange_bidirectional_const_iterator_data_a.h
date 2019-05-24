@@ -149,11 +149,6 @@ namespace strange {
     	friend inline bool check(bidirectional_const_iterator_data_a<___1___> const& value) noexcept;
     
     public:
-    	static inline char const* ___abstraction_name___() noexcept
-    	{
-    		return "bidirectional_const_iterator_data_a";
-    	}
-    
     	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle) noexcept
     	{
     		return bool(std::dynamic_pointer_cast<___finale_handle_base___>(handle));

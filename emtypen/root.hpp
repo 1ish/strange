@@ -250,11 +250,6 @@ private:
 public:
 	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
 
-	static inline char const* ___abstraction_name___() noexcept
-	{
-		return "%struct_name%";
-	}
-
 	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const&) noexcept
 	{
 		return true;
