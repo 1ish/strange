@@ -36,7 +36,7 @@ class collection_a;
 template <typename number_data_a_int8 = number_data_a<int8_t>, typename number_data_a_int64 = number_data_a<int64_t>, typename lake_a_int8 = lake_a<int8_t>>
 class river_a;
 
-template <typename bidirectional_iterator_a = bidirectional_iterator_a<>>
+template <typename forward_iterator_a = forward_iterator_a<>>
 class shoal_a;
 
 template <typename _1_ = void>

@@ -1,16 +1,16 @@
-#ifndef COM_ONEISH_STRANGE_SYMBOL_O_H
-#define COM_ONEISH_STRANGE_SYMBOL_O_H
+#ifndef COM_ONEISH_STRANGE_MISUNDERSTANDING_O_H
+#define COM_ONEISH_STRANGE_MISUNDERSTANDING_O_H
 
 namespace strange
 {
 
 template<>
-class abstraction<symbol_a<>>
+class abstraction<misunderstanding_a<>>
 {
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::symbol"));
+		static cat_a<> CAT = cat_t<>::val_(sym("strange::misunderstanding"));
 		return CAT;
 	}
 
@@ -19,7 +19,7 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = abstraction<any_a<>>::operations();
-			operations.update("add", native_extraction_t<symbol_a<>>::val(&symbol_a<>::add__));
+			operations.update("add", native_extraction_t<misunderstanding_a<>>::val(&misunderstanding_a<>::add__));
 			return operations;
 		}();
 		return OPERATIONS;

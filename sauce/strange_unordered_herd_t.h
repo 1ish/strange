@@ -7,21 +7,21 @@ namespace strange
 template <typename _ABSTRACTION_ = unordered_herd_a<>>
 class unordered_herd_t : public thing_t<_ABSTRACTION_>
 {
-	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_const_iterator_data_a<ITERATOR>>
+	template <typename ITERATOR, typename _ABSTRACTION_ = forward_const_iterator_data_a<ITERATOR>>
 	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-		static inline bidirectional_const_iterator_data_a<ITERATOR> val(unordered_herd_a<> const& unordered_herd, F&& it)
+		static inline forward_const_iterator_data_a<ITERATOR> val(unordered_herd_a<> const& unordered_herd, F&& it)
 		{
-			return bidirectional_const_iterator_data_a<ITERATOR>{ const_iterator_t(unordered_herd, std::forward<F>(it)) };
+			return forward_const_iterator_data_a<ITERATOR>{ const_iterator_t(unordered_herd, std::forward<F>(it)) };
 		}
 
 		template <typename F>
-		static inline bidirectional_const_iterator_data_a<ITERATOR> ref(unordered_herd_a<> const& unordered_herd, F&& it)
+		static inline forward_const_iterator_data_a<ITERATOR> ref(unordered_herd_a<> const& unordered_herd, F&& it)
 		{
-			return bidirectional_const_iterator_data_a<ITERATOR>(const_iterator_t(unordered_herd, std::forward<F>(it)), true);
+			return forward_const_iterator_data_a<ITERATOR>(const_iterator_t(unordered_herd, std::forward<F>(it)), true);
 		}
 
 		// reflection
@@ -34,20 +34,20 @@ class unordered_herd_t : public thing_t<_ABSTRACTION_>
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
-			if (!check<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
+			if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
 			{
 				return false;
 			}
-			return _it == cast<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it == cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline bool operator!=(any_a<> const& thing) const
 		{
-			if (!check<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
+			if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
 			{
 				return true;
 			}
-			return _it != cast<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it != cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -97,31 +97,6 @@ class unordered_herd_t : public thing_t<_ABSTRACTION_>
 		{
 			const_iterator_t result = *this;
 			operator++();
-			return result;
-		}
-
-		// bidirectional iterator
-		inline _ABSTRACTION_ decrement__(range_a<> const& _)
-		{
-			return decrement_();
-		}
-
-		inline _ABSTRACTION_ decrement_()
-		{
-			operator--();
-			return me_();
-		}
-
-		inline const_iterator_t& operator--()
-		{
-			--_it;
-			return *this;
-		}
-
-		inline const_iterator_t operator--(int)
-		{
-			const_iterator_t result = *this;
-			operator--();
 			return result;
 		}
 
@@ -238,22 +213,22 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// range
-	inline bidirectional_const_iterator_a<> cbegin() const
+	inline forward_const_iterator_a<> cbegin() const
 	{
 		return const_iterator_t<std_unordered_set_any::const_iterator>::val(me_(), _set.cbegin());
 	}
 
-	inline bidirectional_const_iterator_a<> begin() const
+	inline forward_const_iterator_a<> begin() const
 	{
 		return const_iterator_t<std_unordered_set_any::const_iterator>::val(me_(), _set.cbegin());
 	}
 
-	inline bidirectional_const_iterator_a<> cend() const
+	inline forward_const_iterator_a<> cend() const
 	{
 		return const_iterator_t<std_unordered_set_any::const_iterator>::val(me_(), _set.cend());
 	}
 
-	inline bidirectional_const_iterator_a<> end() const
+	inline forward_const_iterator_a<> end() const
 	{
 		return const_iterator_t<std_unordered_set_any::const_iterator>::val(me_(), _set.cend());
 	}

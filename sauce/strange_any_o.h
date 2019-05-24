@@ -8,6 +8,12 @@ template<>
 class abstraction<any_a<>>
 {
 public:
+	static inline cat_a<> cat()
+	{
+		static cat_a<> CAT = cat_t<>::val_(sym("strange::any"));
+		return CAT;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		static unordered_shoal_a<> OPERATIONS = []()

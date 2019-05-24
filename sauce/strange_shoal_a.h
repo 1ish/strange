@@ -12,7 +12,7 @@
 
 
 namespace strange {
-    template < typename bidirectional_iterator_a >
+    template < typename forward_iterator_a >
     class shoal_a : public ___derived___
     {
     public:
@@ -93,15 +93,15 @@ namespace strange {
      { assert(handle_); return write().erase(s ); }
      inline any_a < > begin__ ( range_a < > const & _ )
      { assert(handle_); return write().begin__(_ ); }
-     inline bidirectional_iterator_a begin_ ( )
+     inline forward_iterator_a begin_ ( )
      { assert(handle_); return write().begin_( ); }
-     inline bidirectional_iterator_a begin ( )
+     inline forward_iterator_a begin ( )
      { assert(handle_); return write().begin( ); }
      inline any_a < > end__ ( range_a < > const & _ )
      { assert(handle_); return write().end__(_ ); }
-     inline bidirectional_iterator_a end_ ( )
+     inline forward_iterator_a end_ ( )
      { assert(handle_); return write().end_( ); }
-     inline bidirectional_iterator_a end ( )
+     inline forward_iterator_a end ( )
      { assert(handle_); return write().end( ); }
     
     protected:
@@ -113,11 +113,11 @@ namespace strange {
       virtual inline bool insert ( std :: string const & s , any_a < > const & value ) = 0;
       virtual inline bool erase ( std :: string const & s ) = 0;
       virtual inline any_a < > begin__ ( range_a < > const & _ ) = 0;
-      virtual inline bidirectional_iterator_a begin_ ( ) = 0;
-      virtual inline bidirectional_iterator_a begin ( ) = 0;
+      virtual inline forward_iterator_a begin_ ( ) = 0;
+      virtual inline forward_iterator_a begin ( ) = 0;
       virtual inline any_a < > end__ ( range_a < > const & _ ) = 0;
-      virtual inline bidirectional_iterator_a end_ ( ) = 0;
-      virtual inline bidirectional_iterator_a end ( ) = 0;
+      virtual inline forward_iterator_a end_ ( ) = 0;
+      virtual inline forward_iterator_a end ( ) = 0;
     	};
     
     	template <typename ___TTT___, typename ___DDDHB___ = ___ddderived_handle_base___>
@@ -145,15 +145,15 @@ namespace strange {
       { return value_.erase(s ); }
       virtual inline any_a < > begin__ ( range_a < > const & _ )
       { return value_.begin__(_ ); }
-      virtual inline bidirectional_iterator_a begin_ ( )
+      virtual inline forward_iterator_a begin_ ( )
       { return value_.begin_( ); }
-      virtual inline bidirectional_iterator_a begin ( )
+      virtual inline forward_iterator_a begin ( )
       { return value_.begin( ); }
       virtual inline any_a < > end__ ( range_a < > const & _ )
       { return value_.end__(_ ); }
-      virtual inline bidirectional_iterator_a end_ ( )
+      virtual inline forward_iterator_a end_ ( )
       { return value_.end_( ); }
-      virtual inline bidirectional_iterator_a end ( )
+      virtual inline forward_iterator_a end ( )
       { return value_.end( ); }
     	};
     
