@@ -149,12 +149,12 @@ public:
 		return no();
 	}
 
-	static inline any_a<> everything__(range_a<> const&)
+	static inline any_a<> something__(range_a<> const&)
 	{
-		return everything_();
+		return something_();
 	}
 
-	static inline any_a<> everything_()
+	static inline any_a<> something_()
 	{
 		return yes();
 	}

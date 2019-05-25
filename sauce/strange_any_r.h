@@ -40,7 +40,7 @@ public:
 			operations.update("operate", native_extraction_t<any_a<>>::val(&any_a<>::operate__));
 			operations.update("identical", native_extraction_t<any_a<>>::val(&any_a<>::identical__));
 			operations.update("nothing", native_extraction_t<any_a<>>::val(&any_a<>::nothing__));
-			operations.update("everything", native_extraction_t<any_a<>>::val(&any_a<>::everything__));
+			operations.update("something", native_extraction_t<any_a<>>::val(&any_a<>::something__));
 			operations.update("operation", native_extraction_t<any_a<>>::val(&any_a<>::operation__));
 			operations.update("same", native_extraction_t<any_a<>>::val(&any_a<>::same__));
 			operations.update("different", native_extraction_t<any_a<>>::val(&any_a<>::different__));

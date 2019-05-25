@@ -23,7 +23,7 @@ public: ___STRANGE_THING___
 	// conversion
 	inline operator bool() const
 	{
-		return everything();
+		return something();
 	}
 
 	// reflection
@@ -49,17 +49,17 @@ public: ___STRANGE_THING___
 		return true;
 	}
 
-	static inline any_a<> everything__(range_a<> const&)
+	static inline any_a<> something__(range_a<> const&)
 	{
-		return everything_();
+		return something_();
 	}
 
-	static inline any_a<> everything_()
+	static inline any_a<> something_()
 	{
 		return no();
 	}
 
-	static inline bool everything()
+	static inline bool something()
 	{
 		return false;
 	}

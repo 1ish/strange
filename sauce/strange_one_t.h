@@ -16,7 +16,7 @@ public:
 	// conversion
 	inline operator bool() const
 	{
-		return everything();
+		return something();
 	}
 
 	// identification
@@ -36,7 +36,7 @@ public:
 		return false;
 	}
 
-	static inline bool everything()
+	static inline bool something()
 	{
 		return true;
 	}

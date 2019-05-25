@@ -30,12 +30,12 @@ public: ___STRANGE_THING___
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return thing.everything();
+		return thing.something();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return !thing.everything();
+		return !thing.something();
 	}
 
 	inline std::size_t hash() const
