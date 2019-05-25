@@ -149,16 +149,6 @@ public:
 		return no();
 	}
 
-	static inline any_a<> something__(range_a<> const&)
-	{
-		return something_();
-	}
-
-	static inline any_a<> something_()
-	{
-		return no();
-	}
-
 	static inline any_a<> everything__(range_a<> const&)
 	{
 		return everything_();

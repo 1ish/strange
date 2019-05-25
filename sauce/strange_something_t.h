@@ -28,29 +28,14 @@ public: ___STRANGE_THING___
 	}
 
 	// comparison
-	static inline any_a<> something__(range_a<> const&)
-	{
-		return something_();
-	}
-
-	static inline any_a<> something_()
-	{
-		return yes();
-	}
-
-	static inline bool something()
-	{
-		return true;
-	}
-
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return thing.something();
+		return thing.everything();
 	}
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return !thing.something();
+		return !thing.everything();
 	}
 
 	inline std::size_t hash() const

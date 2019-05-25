@@ -42,7 +42,6 @@ public:
 			operations.update("nothing", native_extraction_t<any_a<>>::val(&any_a<>::nothing__));
 			operations.update("everything", native_extraction_t<any_a<>>::val(&any_a<>::everything__));
 			operations.update("operation", native_extraction_t<any_a<>>::val(&any_a<>::operation__));
-			operations.update("something", native_extraction_t<any_a<>>::val(&any_a<>::something__));
 			operations.update("same", native_extraction_t<any_a<>>::val(&any_a<>::same__));
 			operations.update("different", native_extraction_t<any_a<>>::val(&any_a<>::different__));
 			operations.update("hash", native_extraction_t<any_a<>>::val(&any_a<>::hash__));
