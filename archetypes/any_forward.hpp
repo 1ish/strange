@@ -6,7 +6,7 @@
 namespace strange
 {
 
-template <typename range_a = void, typename symbol_a = void, typename cat_a = void, typename unordered_herd_a = void, typename unordered_shoal_a = void, typename number_data_a_uint64 = void>
+template <typename range_a = void, typename symbol_a = void, typename cat_a = void, typename unordered_herd_a = void, typename shoal_a = void, typename unordered_shoal_a = void, typename number_data_a_uint64 = void>
 class any_a
 {
 public:

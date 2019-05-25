@@ -6,6 +6,7 @@
  //#include "symbol_forward.hpp"
  //#include "cat_forward.hpp"
  //#include "unordered_herd_forward.hpp"
+ //#include "shoal_forward.hpp"
  //#include "unordered_shoal_forward.hpp"
  //#include "number_data_forward.hpp"
 #include <algorithm>
@@ -17,7 +18,7 @@
 
 
 namespace strange {
-    template < typename range_a = range_a < > , typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename unordered_herd_a = unordered_herd_a < > , typename unordered_shoal_a = unordered_shoal_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
+    template < typename range_a = range_a < > , typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename unordered_herd_a = unordered_herd_a < > , typename shoal_a = shoal_a < > , typename unordered_shoal_a = unordered_shoal_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
     class any_a
     {
     public:
@@ -105,6 +106,8 @@ namespace strange {
      { assert(handle_); return read().type__(_ ); }
      inline symbol_a type_ ( ) const
      { assert(handle_); return read().type_( ); }
+     inline void share ( shoal_a const & shoal ) const
+     { assert(handle_); read().share(shoal ); }
      inline any_a cat__ ( range_a const & _ ) const
      { assert(handle_); return read().cat__(_ ); }
      inline cat_a cat_ ( ) const
@@ -218,6 +221,7 @@ namespace strange {
     
       virtual inline any_a type__ ( range_a const & _ ) const = 0;
       virtual inline symbol_a type_ ( ) const = 0;
+      virtual inline void share ( shoal_a const & shoal ) const = 0;
       virtual inline any_a cat__ ( range_a const & _ ) const = 0;
       virtual inline cat_a cat_ ( ) const = 0;
       virtual inline any_a cats__ ( range_a const & _ ) const = 0;
@@ -322,6 +326,8 @@ namespace strange {
       { return value_.type__(_ ); }
       virtual inline symbol_a type_ ( ) const
       { return value_.type_( ); }
+      virtual inline void share ( shoal_a const & shoal ) const
+      { value_.share(shoal ); }
       virtual inline any_a cat__ ( range_a const & _ ) const
       { return value_.cat__(_ ); }
       virtual inline cat_a cat_ ( ) const
