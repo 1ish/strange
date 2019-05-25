@@ -235,6 +235,16 @@ inline shoal_a<> share_(shoal_a<> const& shoal) const \
 	share(shoal); \
 	return shoal; \
 } \
+inline any_a<> shared__(range_a<> const&) const \
+{ \
+	return shared_(); \
+} \
+inline unordered_shoal_a<> shared_() const \
+{ \
+	unordered_shoal_a<> shoal = unordered_shoal_t<>::val_(); \
+	share(shoal); \
+	return shoal; \
+} \
 inline any_a<> eater__(range_a<> const&) const \
 { \
 	return eater_(); \

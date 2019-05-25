@@ -112,6 +112,10 @@ namespace strange {
      { assert(handle_); return read().share_(shoal ); }
      inline void share ( shoal_a const & shoal ) const
      { assert(handle_); read().share(shoal ); }
+     inline any_a shared__ ( range_a const & _ ) const
+     { assert(handle_); return read().shared__(_ ); }
+     inline unordered_shoal_a shared_ ( ) const
+     { assert(handle_); return read().shared_( ); }
      inline any_a cat__ ( range_a const & _ ) const
      { assert(handle_); return read().cat__(_ ); }
      inline cat_a cat_ ( ) const
@@ -228,6 +232,8 @@ namespace strange {
       virtual inline any_a share__ ( range_a const & range ) const = 0;
       virtual inline shoal_a share_ ( shoal_a const & shoal ) const = 0;
       virtual inline void share ( shoal_a const & shoal ) const = 0;
+      virtual inline any_a shared__ ( range_a const & _ ) const = 0;
+      virtual inline unordered_shoal_a shared_ ( ) const = 0;
       virtual inline any_a cat__ ( range_a const & _ ) const = 0;
       virtual inline cat_a cat_ ( ) const = 0;
       virtual inline any_a cats__ ( range_a const & _ ) const = 0;
@@ -338,6 +344,10 @@ namespace strange {
       { return value_.share_(shoal ); }
       virtual inline void share ( shoal_a const & shoal ) const
       { value_.share(shoal ); }
+      virtual inline any_a shared__ ( range_a const & _ ) const
+      { return value_.shared__(_ ); }
+      virtual inline unordered_shoal_a shared_ ( ) const
+      { return value_.shared_( ); }
       virtual inline any_a cat__ ( range_a const & _ ) const
       { return value_.cat__(_ ); }
       virtual inline cat_a cat_ ( ) const
