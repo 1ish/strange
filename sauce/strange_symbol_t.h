@@ -19,7 +19,7 @@ public: ___STRANGE_THING___
 		return val_(*it);
 	}
 
-	static inline symbol_a<> val_(any_a<> const& thing = nothing_t<>::val_())
+	static inline symbol_a<> val_(any_a<> const& thing = no())
 	{
 		return val("");
 	}

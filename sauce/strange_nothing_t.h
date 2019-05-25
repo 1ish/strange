@@ -41,7 +41,7 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> nothing_()
 	{
-		return something_t<>::val_();
+		return yes();
 	}
 
 	static inline bool nothing()
@@ -56,7 +56,7 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> everything_()
 	{
-		return nothing_t<>::val_();
+		return no();
 	}
 
 	static inline bool everything()
@@ -83,7 +83,7 @@ public: ___STRANGE_THING___
 	// conversion
 	inline range_a<> ranged_() const
 	{
-		return range_t<>::val_(it_t<true, something_t<>>::val_(nothing_t<>::val_()), it_t<true, something_t<>>::val_(something_t<>::val_()));
+		return range_t<>::val_(it_t<true, something_t<>>::val_(no()), it_t<true, something_t<>>::val_(yes()));
 	}
 
 protected:

@@ -19,7 +19,7 @@ public: ___STRANGE_THING___
 		return val_(*it);
 	}
 
-	static inline misunderstanding_a<> val_(any_a<> const& thing = nothing_t<>::val_())
+	static inline misunderstanding_a<> val_(any_a<> const& thing = no())
 	{
 		return val("");
 	}

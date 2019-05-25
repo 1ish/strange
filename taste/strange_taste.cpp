@@ -12,18 +12,18 @@ TEST(TestCaseName, TestName)
 
 any_a<> fun(range_a<> const& x)
 {
-	return nothing_t<>::val_();
+	return no();
 }
 
 TEST(TestCaseName, ForLoop)
 {
-	any_a<> n{ nothing_t<>::val_() };
+	any_a<> n{ no() };
 
 	for (auto const& v : n.ranged_())
 	{
 	}
 
-	any_a<> e{ something_t<>::val_() };
+	any_a<> e{ yes() };
 
 	for (auto const& v : e.ranged_())
 	{

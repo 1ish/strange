@@ -176,13 +176,13 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
 	{
-		return nothing_t<>::val_(); //TODO
+		return no(); //TODO
 	}
 
 	// visitor pattern
 	static inline any_a<> visit__(range_a<> const& range)
 	{
-		return nothing_t<>::val_(); //TODO
+		return no(); //TODO
 	}
 
 	// comparison
@@ -318,7 +318,7 @@ public: ___STRANGE_COLLECTION___
 		std_set_any::const_iterator const it = _set.cbegin();
 		if (it == _set.cend())
 		{
-			return nothing_t<>::val_();
+			return no();
 		}
 		any_a<> result = *it;
 		_set.erase(it);
@@ -335,7 +335,7 @@ public: ___STRANGE_COLLECTION___
 		std_set_any::const_iterator it = _set.cend();
 		if (it == _set.cbegin())
 		{
-			return nothing_t<>::val_();
+			return no();
 		}
 		any_a<> result = *--it;
 		_set.erase(it);

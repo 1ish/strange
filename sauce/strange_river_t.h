@@ -177,13 +177,13 @@ namespace strange
 
 		inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
 		{
-			return nothing_t<>::val_(); //TODO
+			return no(); //TODO
 		}
 
 		// visitor pattern
 		static inline any_a<> visit__(range_a<> const& range)
 		{
-			return nothing_t<>::val_(); //TODO
+			return no(); //TODO
 		}
 
 		// range
@@ -812,7 +812,7 @@ namespace strange
 			return set_good_(*it);
 		}
 
-		inline any_a<> set_good_(any_a<> const& value = something_t<>::val_())
+		inline any_a<> set_good_(any_a<> const& value = yes())
 		{
 			set_good(value.everything());
 			return me_();
@@ -841,7 +841,7 @@ namespace strange
 			return set_eof_(*it);
 		}
 
-		inline any_a<> set_eof_(any_a<> const& value = something_t<>::val_())
+		inline any_a<> set_eof_(any_a<> const& value = yes())
 		{
 			set_eof(value.everything());
 			return me_();
@@ -870,7 +870,7 @@ namespace strange
 			return set_fail_(*it);
 		}
 
-		inline any_a<> set_fail_(any_a<> const& value = something_t<>::val_())
+		inline any_a<> set_fail_(any_a<> const& value = yes())
 		{
 			set_fail(value.everything());
 			return me_();
@@ -899,7 +899,7 @@ namespace strange
 			return set_bad_(*it);
 		}
 
-		inline any_a<> set_bad_(any_a<> const& value = something_t<>::val_())
+		inline any_a<> set_bad_(any_a<> const& value = yes())
 		{
 			set_bad(value.everything());
 			return me_();

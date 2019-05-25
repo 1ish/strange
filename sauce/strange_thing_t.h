@@ -52,12 +52,12 @@ public:
 
 	static inline any_a<> eater_()
 	{
-		return nothing_t<>::val_();
+		return no();
 	}
 
 	static inline any_a<> feeder__(range_a<> const& range)
 	{
-		return nothing_t<>::val_();
+		return no();
 	}
 
 	// visitor pattern
@@ -90,7 +90,7 @@ public:
 		// thing = me_();
 		// operation = thing.operations_().at(member);
 		// return operate_(thing, operation, range);
-		return nothing_t<>::val_();
+		return no();
 	}
 
 	static inline any_a<> operate__(range_a<> const& range)
@@ -119,7 +119,7 @@ public:
 		//TODO
 		// operation = thing.operations_().at(range.1st);
 		// return operate_(thing, operation, range.2nd...);
-		return nothing_t<>::val_();
+		return no();
 	}
 
 	// identification
@@ -146,7 +146,7 @@ public:
 
 	static inline any_a<> nothing_()
 	{
-		return nothing_t<>::val_();
+		return no();
 	}
 
 	static inline any_a<> something__(range_a<> const&)
@@ -156,7 +156,7 @@ public:
 
 	static inline any_a<> something_()
 	{
-		return nothing_t<>::val_();
+		return no();
 	}
 
 	static inline any_a<> everything__(range_a<> const&)
@@ -166,7 +166,7 @@ public:
 
 	static inline any_a<> everything_()
 	{
-		return something_t<>::val_();
+		return yes();
 	}
 
 	static inline any_a<> operation__(range_a<> const&)
@@ -176,13 +176,13 @@ public:
 
 	static inline any_a<> operation_()
 	{
-		return nothing_t<>::val_();
+		return no();
 	}
 
 	// conversion
 	inline range_a<> ranged_() const
 	{
-		return range_t<>::val_(it_t<true>::val_(me_()), it_t<true>::val_(nothing_t<>::val_()));
+		return range_t<>::val_(it_t<true>::val_(me_()), it_t<true>::val_(no()));
 	}
 
 	// operators

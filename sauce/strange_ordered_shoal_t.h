@@ -345,13 +345,13 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
 	{
-		return nothing_t<>::val_(); //TODO
+		return no(); //TODO
 	}
 
 	// visitor pattern
 	static inline any_a<> visit__(range_a<> const& range)
 	{
-		return nothing_t<>::val_(); //TODO
+		return no(); //TODO
 	}
 
 	// comparison
@@ -518,7 +518,7 @@ public: ___STRANGE_COLLECTION___
 		std_map_any_any::const_iterator const it = _map.cbegin();
 		if (it == _map.cend())
 		{
-			return nothing_t<>::val_();
+			return no();
 		}
 		any_a<> result = it->second;
 		_map.erase(it);
@@ -535,7 +535,7 @@ public: ___STRANGE_COLLECTION___
 		std_map_any_any::const_iterator it = _map.cend();
 		if (it == _map.cbegin())
 		{
-			return nothing_t<>::val_();
+			return no();
 		}
 		any_a<> result = (--it)->second;
 		_map.erase(it);

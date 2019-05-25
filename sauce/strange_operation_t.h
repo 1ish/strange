@@ -16,7 +16,7 @@ public:
 
 	static inline any_a<> operation_()
 	{
-		return something_t<>::val_();
+		return yes();
 	}
 
 	static inline bool operation()

@@ -753,13 +753,13 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
 	{
-		return nothing_t<>::val_(); //TODO
+		return no(); //TODO
 	}
 
 	// visitor pattern
 	static inline any_a<> visit__(range_a<> const& range)
 	{
-		return nothing_t<>::val_(); //TODO
+		return no(); //TODO
 	}
 
 	// comparison
@@ -892,7 +892,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				if (index > siz)
 				{
-					_deque.resize(std::size_t(index) + 1, nothing_t<>::val_());
+					_deque.resize(std::size_t(index) + 1, no());
 				}
 				_deque[std::size_t(index)] = value;
 			}
@@ -917,7 +917,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				if (index > siz)
 				{
-					_deque.resize(std::size_t(index) + 1, nothing_t<>::val_());
+					_deque.resize(std::size_t(index) + 1, no());
 					_deque[std::size_t(index)] = value;
 				}
 				else
@@ -969,7 +969,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (_deque.empty())
 		{
-			return nothing_t<>::val_();
+			return no();
 		}
 		any_a<> result = _deque.front();
 		_deque.pop_front();
@@ -985,7 +985,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (_deque.empty())
 		{
-			return nothing_t<>::val_();
+			return no();
 		}
 		any_a<> result = _deque.back();
 		_deque.pop_back();

@@ -753,13 +753,13 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
 	{
-		return nothing_t<>::val_(); //TODO
+		return no(); //TODO
 	}
 
 	// visitor pattern
 	static inline any_a<> visit__(range_a<> const& range)
 	{
-		return nothing_t<>::val_(); //TODO
+		return no(); //TODO
 	}
 
 	// comparison
@@ -892,7 +892,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				if (index > siz)
 				{
-					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
+					_vector.resize(std::size_t(index) + 1, no());
 				}
 				_vector[std::size_t(index)] = value;
 			}
@@ -917,7 +917,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				if (index > siz)
 				{
-					_vector.resize(std::size_t(index) + 1, nothing_t<>::val_());
+					_vector.resize(std::size_t(index) + 1, no());
 					_vector[std::size_t(index)] = value;
 				}
 				else
@@ -979,7 +979,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (_vector.empty())
 		{
-			return nothing_t<>::val_();
+			return no();
 		}
 		any_a<> result = _vector.back();
 		_vector.pop_back();

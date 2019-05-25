@@ -35,7 +35,7 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> something_()
 	{
-		return something_t<>::val_();
+		return yes();
 	}
 
 	static inline bool something()

@@ -19,7 +19,7 @@ public: ___STRANGE_THING___
 		return val_(*it);
 	}
 
-	static inline cat_a<> val_(any_a<> const& thing = nothing_t<>::val_())
+	static inline cat_a<> val_(any_a<> const& thing = no())
 	{
 		return cat_a<>{ cat_t{} };
 	}
@@ -136,9 +136,9 @@ protected:
 	inline cat_t()
 		: symbol_t{ _symbol_() }
 		, _name{ sym("") }
-		, _arguments{ nothing_t<>::val_() }
-		, _parameters{ nothing_t<>::val_() }
-		, _result{ nothing_t<>::val_() }
+		, _arguments{ no() }
+		, _parameters{ no() }
+		, _result{ no() }
 	{}
 
 	static inline std::string const _symbol_()

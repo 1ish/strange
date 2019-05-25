@@ -6,7 +6,9 @@
 namespace strange
 {
 
-// conversion
+// logic
+inline any_a<> yes();
+inline any_a<> no();
 inline any_a<> boole(bool b);
 
 }

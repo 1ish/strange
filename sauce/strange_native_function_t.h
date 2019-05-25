@@ -29,7 +29,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> eater_() const
 	{
-		return nothing_t<>::val_(); //TODO return range of parameter names
+		return no(); //TODO return range of parameter names
 	}
 
 	// function

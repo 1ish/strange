@@ -6,10 +6,21 @@
 namespace strange
 {
 
-// conversion
+// logic
+
+inline any_a<> yes()
+{
+	return something_t<>::val_();
+}
+
+inline any_a<> no()
+{
+	return nothing_t<>::val_();
+}
+
 inline any_a<> boole(bool b)
 {
-	return b ? something_t<>::val_() : nothing_t<>::val_();
+	return b ? yes() : no();
 }
 
 }
