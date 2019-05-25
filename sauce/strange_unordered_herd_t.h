@@ -18,12 +18,6 @@ class unordered_herd_t : public thing_t<_ABSTRACTION_>
 			return forward_const_iterator_data_a<ITERATOR>{ const_iterator_t(unordered_herd, std::forward<F>(it)) };
 		}
 
-		template <typename F>
-		static inline forward_const_iterator_data_a<ITERATOR> ref(unordered_herd_a<> const& unordered_herd, F&& it)
-		{
-			return forward_const_iterator_data_a<ITERATOR>(const_iterator_t(unordered_herd, std::forward<F>(it)), true);
-		}
-
 		// reflection
 		static inline symbol_a<> type_()
 		{
@@ -146,22 +140,6 @@ public: ___STRANGE_COLLECTION___
 	static inline unordered_herd_a<> val(F&& init)
 	{
 		return unordered_herd_a<>{ unordered_herd_t{ std::forward<F>(init) } };
-	}
-
-	static inline unordered_herd_a<> ref__(range_a<> const& range)
-	{
-		return cast<unordered_herd_a<>>(ref_() += range, true);
-	}
-
-	static inline unordered_herd_a<> ref_()
-	{
-		return ref(std_unordered_set_any{});
-	}
-
-	template <typename F>
-	static inline unordered_herd_a<> ref(F&& init)
-	{
-		return unordered_herd_a<>(unordered_herd_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection

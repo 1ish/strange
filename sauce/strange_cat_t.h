@@ -24,21 +24,6 @@ public: ___STRANGE_THING___
 		return cat_a<>{ cat_t{} };
 	}
 
-	static inline cat_a<> ref__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
-		{
-			return ref_();
-		}
-		return ref_(*it);
-	}
-
-	static inline cat_a<> ref_(any_a<> const& thing = nothing_t<>::val_())
-	{
-		return cat_a<>(cat_t{}, true);
-	}
-
 	// reflection
 	static inline symbol_a<> type_()
 	{

@@ -18,12 +18,6 @@ class lake_t : public thing_t<_ABSTRACTION_>
 			return random_access_iterator_data_a<ITERATOR>{ iterator_t(lake, std::forward<F>(it)) };
 		}
 
-		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref(lake_a<PRIMITIVE> const& lake, F&& it)
-		{
-			return random_access_iterator_data_a<ITERATOR>(iterator_t(lake, std::forward<F>(it)), true);
-		}
-
 		// reflection
 		static inline symbol_a<> type_()
 		{
@@ -398,12 +392,6 @@ class lake_t : public thing_t<_ABSTRACTION_>
 			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(lake, std::forward<F>(it)) };
 		}
 
-		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> ref(lake_a<PRIMITIVE> const& lake, F&& it)
-		{
-			return random_access_const_iterator_data_a<ITERATOR>(const_iterator_t(lake, std::forward<F>(it)), true);
-		}
-
 		// reflection
 		static inline symbol_a<> type_()
 		{
@@ -766,22 +754,6 @@ public: ___STRANGE_COLLECTION___
 	static inline lake_a<PRIMITIVE> val(F&& init)
 	{
 		return lake_a<PRIMITIVE>{ lake_t{ std::forward<F>(init) } };
-	}
-
-	static inline lake_a<PRIMITIVE> ref__(range_a<> const& range)
-	{
-		return cast<lake_a<PRIMITIVE>>(ref_() += range, true);
-	}
-
-	static inline lake_a<PRIMITIVE> ref_()
-	{
-		return ref(std_vector_number{});
-	}
-
-	template <typename F>
-	static inline lake_a<PRIMITIVE> ref(F&& init)
-	{
-		return lake_a<PRIMITIVE>(lake_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection

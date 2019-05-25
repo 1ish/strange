@@ -18,12 +18,6 @@ class ordered_shoal_t : public thing_t<_ABSTRACTION_>
 			return bidirectional_iterator_data_a<ITERATOR>{ iterator_t(ordered_shoal, std::forward<F>(it)) };
 		}
 
-		template <typename F>
-		static inline bidirectional_iterator_data_a<ITERATOR> ref(ordered_shoal_a<> const& ordered_shoal, F&& it)
-		{
-			return bidirectional_iterator_data_a<ITERATOR>(iterator_t(ordered_shoal, std::forward<F>(it)), true);
-		}
-
 		// reflection
 		static inline symbol_a<> type_()
 		{
@@ -187,12 +181,6 @@ class ordered_shoal_t : public thing_t<_ABSTRACTION_>
 				return bidirectional_const_iterator_data_a<ITERATOR>{ const_iterator_t(ordered_shoal, std::forward<F>(it)) };
 			}
 
-			template <typename F>
-			static inline bidirectional_const_iterator_data_a<ITERATOR> ref(ordered_shoal_a<> const& ordered_shoal, F&& it)
-			{
-				return bidirectional_const_iterator_data_a<ITERATOR>(const_iterator_t(ordered_shoal, std::forward<F>(it)), true);
-			}
-
 			// reflection
 			static inline symbol_a<> type_()
 			{
@@ -346,22 +334,6 @@ public: ___STRANGE_COLLECTION___
 	static inline ordered_shoal_a<> val(F&& init)
 	{
 		return ordered_shoal_a<>{ ordered_shoal_t{ std::forward<F>(init) } };
-	}
-
-	static inline ordered_shoal_a<> ref__(range_a<> const& range)
-	{
-		return cast<ordered_shoal_a<>>(ref_() += range, true);
-	}
-
-	static inline ordered_shoal_a<> ref_()
-	{
-		return ref(std_map_any_any{});
-	}
-
-	template <typename F>
-	static inline ordered_shoal_a<> ref(F&& init)
-	{
-		return ordered_shoal_a<>(ordered_shoal_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection

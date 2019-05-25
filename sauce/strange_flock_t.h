@@ -18,12 +18,6 @@ class flock_t : public thing_t<_ABSTRACTION_>
 			return random_access_iterator_data_a<ITERATOR>{ iterator_t(flock, std::forward<F>(it)) };
 		}
 
-		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref(flock_a<> const& flock, F&& it)
-		{
-			return random_access_iterator_data_a<ITERATOR>(iterator_t(flock, std::forward<F>(it)), true);
-		}
-
 		// reflection
 		static inline symbol_a<> type_()
 		{
@@ -390,12 +384,6 @@ class flock_t : public thing_t<_ABSTRACTION_>
 			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(flock, std::forward<F>(it)) };
 		}
 
-		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> ref(flock_a<> const& flock, F&& it)
-		{
-			return random_access_const_iterator_data_a<ITERATOR>(const_iterator_t(flock, std::forward<F>(it)), true);
-		}
-
 		// reflection
 		static inline symbol_a<> type_()
 		{
@@ -754,22 +742,6 @@ public: ___STRANGE_COLLECTION___
 	static inline flock_a<> val(F&& init)
 	{
 		return flock_a<>{ flock_t{ std::forward<F>(init) } };
-	}
-
-	static inline flock_a<> ref__(range_a<> const& range)
-	{
-		return cast<flock_a<>>(ref_() += range, true);
-	}
-
-	static inline flock_a<> ref_()
-	{
-		return ref(std_vector_any{});
-	}
-
-	template <typename F>
-	static inline flock_a<> ref(F&& init)
-	{
-		return flock_a<>(flock_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection

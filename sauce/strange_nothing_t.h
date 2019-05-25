@@ -20,17 +20,6 @@ public: ___STRANGE_THING___
 		return VAL;
 	}
 
-	static inline any_a<> ref__(range_a<> const& _)
-	{
-		return ref_();
-	}
-
-	static inline any_a<> ref_()
-	{
-		static any_a<> REF = any_a<>(nothing_t<>{}, true);
-		return REF;
-	}
-
 	// conversion
 	inline operator bool() const
 	{

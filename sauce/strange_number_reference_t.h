@@ -14,11 +14,6 @@ public: ___STRANGE_THING___
 		return number_data_a<PRIMITIVE>{ number_reference_t<PRIMITIVE, _ABSTRACTION_>{ primitive } };
 	}
 
-	static inline number_data_a<PRIMITIVE> ref(PRIMITIVE& primitive)
-	{
-		return number_data_a<PRIMITIVE>(number_reference_t<PRIMITIVE, _ABSTRACTION_>{ primitive }, true);
-	}
-
 	// reflection
 	static inline symbol_a<> type_()
 	{

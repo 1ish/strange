@@ -18,12 +18,6 @@ class ordered_herd_t : public thing_t<_ABSTRACTION_>
 			return bidirectional_const_iterator_data_a<ITERATOR>{ const_iterator_t(ordered_herd, std::forward<F>(it)) };
 		}
 
-		template <typename F>
-		static inline bidirectional_const_iterator_data_a<ITERATOR> ref(ordered_herd_a<> const& ordered_herd, F&& it)
-		{
-			return bidirectional_const_iterator_data_a<ITERATOR>(const_iterator_t(ordered_herd, std::forward<F>(it)), true);
-		}
-
 		// reflection
 		static inline symbol_a<> type_()
 		{
@@ -171,22 +165,6 @@ public: ___STRANGE_COLLECTION___
 	static inline ordered_herd_a<> val(F&& init)
 	{
 		return ordered_herd_a<>{ ordered_herd_t{ std::forward<F>(init) } };
-	}
-
-	static inline ordered_herd_a<> ref__(range_a<> const& range)
-	{
-		return cast<ordered_herd_a<>>(ref_() += range, true);
-	}
-
-	static inline ordered_herd_a<> ref_()
-	{
-		return ref(std_set_any{});
-	}
-
-	template <typename F>
-	static inline ordered_herd_a<> ref(F&& init)
-	{
-		return ordered_herd_a<>(ordered_herd_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection

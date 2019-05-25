@@ -18,12 +18,6 @@ namespace strange
 					return forward_const_iterator_data_a<ITERATOR>{ const_iterator_t(river, std::forward<F>(it)) };
 				}
 
-				template <typename F>
-				static inline forward_const_iterator_data_a<ITERATOR> ref(river_a<> const& river, F&& it)
-				{
-					return forward_const_iterator_data_a<ITERATOR>(const_iterator_t(river, std::forward<F>(it)), true);
-				}
-
 				// reflection
 				static inline symbol_a<> type_()
 				{
@@ -148,22 +142,6 @@ namespace strange
 		}
 
 		static inline river_a<> val(std::string const& str = std::string())
-		{
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(str);
-			return river_a<>{ river_t(stream.get(), stream.get(), stream) };
-		}
-
-		static inline river_a<> ref__(range_a<> const& _)
-		{
-			return ref_();
-		}
-
-		static inline river_a<> ref_()
-		{
-			return ref();
-		}
-
-		static inline river_a<> ref(std::string const& str = std::string())
 		{
 			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(str);
 			return river_a<>(river_t(stream.get(), stream.get(), stream), true);

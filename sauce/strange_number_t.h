@@ -24,21 +24,6 @@ public: ___STRANGE_THING___
 		return number_data_a<PRIMITIVE>{ number_t<PRIMITIVE, _ABSTRACTION_>{ primitive } };
 	}
 
-	static inline number_data_a<PRIMITIVE> ref__(range_a<> const& _)
-	{
-		return ref_();
-	}
-
-	static inline number_data_a<PRIMITIVE> ref_()
-	{
-		return ref(PRIMITIVE{});
-	}
-
-	static inline number_data_a<PRIMITIVE> ref(PRIMITIVE primitive)
-	{
-		return number_data_a<PRIMITIVE>(number_t<PRIMITIVE, _ABSTRACTION_>{ primitive }, true);
-	}
-
 	// reflection
 	static inline symbol_a<> type_()
 	{

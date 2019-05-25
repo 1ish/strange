@@ -24,21 +24,6 @@ public: ___STRANGE_THING___
 		return forward_const_iterator_a<>{ it_t<CONST, END, _ABSTRACTION_>{ thing } };
 	}
 
-	static inline forward_const_iterator_a<> ref__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
-		{
-			return ref_();
-		}
-		return ref_(*it);
-	}
-
-	static inline forward_const_iterator_a<> ref_(any_a<> const& thing = END::val_())
-	{
-		return forward_const_iterator_a<>(it_t<CONST, END, _ABSTRACTION_>{ thing }, true);
-	}
-
 	// reflection
 	static inline symbol_a<> type_()
 	{

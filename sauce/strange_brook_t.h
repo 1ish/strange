@@ -18,12 +18,6 @@ class brook_t : public thing_t<_ABSTRACTION_>
 			return random_access_iterator_data_a<ITERATOR>{ iterator_t(brook, std::forward<F>(it)) };
 		}
 
-		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref(brook_a<PRIMITIVE> const& brook, F&& it)
-		{
-			return random_access_iterator_data_a<ITERATOR>(iterator_t(brook, std::forward<F>(it)), true);
-		}
-
 		// reflection
 		static inline symbol_a<> type_()
 		{
@@ -398,12 +392,6 @@ class brook_t : public thing_t<_ABSTRACTION_>
 			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(brook, std::forward<F>(it)) };
 		}
 
-		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> ref(brook_a<PRIMITIVE> const& brook, F&& it)
-		{
-			return random_access_const_iterator_data_a<ITERATOR>(const_iterator_t(brook, std::forward<F>(it)), true);
-		}
-
 		// reflection
 		static inline symbol_a<> type_()
 		{
@@ -766,22 +754,6 @@ public: ___STRANGE_COLLECTION___
 	static inline brook_a<PRIMITIVE> val(F&& init)
 	{
 		return brook_a<PRIMITIVE>{ brook_t{ std::forward<F>(init) } };
-	}
-
-	static inline brook_a<PRIMITIVE> ref__(range_a<> const& range)
-	{
-		return cast<brook_a<PRIMITIVE>>(ref_() += range, true);
-	}
-
-	static inline brook_a<PRIMITIVE> ref_()
-	{
-		return ref(std_deque_number{});
-	}
-
-	template <typename F>
-	static inline brook_a<PRIMITIVE> ref(F&& init)
-	{
-		return brook_a<PRIMITIVE>(brook_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection

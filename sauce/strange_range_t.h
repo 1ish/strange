@@ -57,35 +57,6 @@ public: ___STRANGE_RANGE___
 		return range_a<>{ range_t(begin, end) };
 	}
 
-	static inline range_a<> ref__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
-		{
-			throw dis("strange::range::ref passed empty range");
-		}
-		any_a<> begin = *it;
-		if (!check<forward_const_iterator_a<>>(begin))
-		{
-			throw dis("strange::range::ref passed non-iterator begin");
-		}
-		if (++it == range.cend())
-		{
-			throw dis("strange::range::ref passed short range");
-		}
-		any_a<> end = *it;
-		if (!check<forward_const_iterator_a<>>(end))
-		{
-			throw dis("strange::range::ref passed non-iterator end");
-		}
-		return ref_(cast<forward_const_iterator_a<>>(begin), cast<forward_const_iterator_a<>>(end));
-	}
-
-	static inline range_a<> ref_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
-	{
-		return range_a<>(range_t(begin, end), true);
-	}
-
 	// reflection
 	static inline symbol_a<> type_()
 	{

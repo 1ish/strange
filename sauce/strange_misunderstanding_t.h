@@ -30,27 +30,6 @@ public: ___STRANGE_THING___
 		return misunderstanding_a<>{ misunderstanding_t{ std::forward<F>(s) } };
 	}
 
-	static inline misunderstanding_a<> ref__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
-		{
-			return ref_();
-		}
-		return ref_(*it);
-	}
-
-	static inline misunderstanding_a<> ref_(any_a<> const& thing = nothing_t<>::val_())
-	{
-		return ref("");
-	}
-
-	template <typename F>
-	static inline misunderstanding_a<> ref(F&& s)
-	{
-		return misunderstanding_a<>(misunderstanding_t{ std::forward<F>(s) }, true);
-	}
-
 	// reflection
 	static inline symbol_a<> type_()
 	{

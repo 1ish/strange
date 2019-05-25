@@ -20,15 +20,6 @@ public: ___STRANGE_THING___
 		return any_a<>{ native_extraction_t(fun, std::move(v)) };
 	}
 
-	template <typename... Args>
-	static inline any_a<> ref(member const fun, Args&&... args)
-	{
-		std::vector<symbol_a<>> v;
-		v.reserve(sizeof...(Args));
-		variadic_u<symbol_a<>>::variadic(v, std::forward<Args>(args)...);
-		return any_a<>(native_extraction_t(fun, std::move(v)), true);
-	}
-
 	// reflection
 	static inline symbol_a<> type_()
 	{

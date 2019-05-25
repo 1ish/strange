@@ -20,17 +20,6 @@ public: ___STRANGE_THING___
 		return VAL;
 	}
 
-	static inline any_a<> ref__(range_a<> const& _)
-	{
-		return ref_();
-	}
-
-	static inline any_a<> ref_()
-	{
-		static any_a<> REF = any_a<>(something_t<>{}, true);
-		return REF;
-	}
-
 	// reflection
 	static inline symbol_a<> type_()
 	{

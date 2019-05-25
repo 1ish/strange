@@ -18,12 +18,6 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			return random_access_iterator_data_a<ITERATOR>{ iterator_t(squad, std::forward<F>(it)) };
 		}
 
-		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> ref(squad_a<> const& squad, F&& it)
-		{
-			return random_access_iterator_data_a<ITERATOR>(iterator_t(squad, std::forward<F>(it)), true);
-		}
-
 		// reflection
 		static inline symbol_a<> type_()
 		{
@@ -390,12 +384,6 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(squad, std::forward<F>(it)) };
 		}
 
-		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> ref(squad_a<> const& squad, F&& it)
-		{
-			return random_access_const_iterator_data_a<ITERATOR>(const_iterator_t(squad, std::forward<F>(it)), true);
-		}
-
 		// reflection
 		static inline symbol_a<> type_()
 		{
@@ -754,22 +742,6 @@ public: ___STRANGE_COLLECTION___
 	static inline squad_a<> val(F&& init)
 	{
 		return squad_a<>{ squad_t{ std::forward<F>(init) } };
-	}
-
-	static inline squad_a<> ref__(range_a<> const& range)
-	{
-		return cast<squad_a<>>(ref_() += range, true);
-	}
-
-	static inline squad_a<> ref_()
-	{
-		return ref(std_deque_any{});
-	}
-
-	template <typename F>
-	static inline squad_a<> ref(F&& init)
-	{
-		return squad_a<>(squad_t{ std::forward<F>(init) }, true);
 	}
 
 	// reflection
