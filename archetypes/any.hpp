@@ -34,8 +34,8 @@ public:
 	inline any_a type__(range_a const& _) const;
 	inline symbol_a type_() const;
 
-	//	inline any_a share__(range_a const& range) const;
-	//	inline any_a share_(shoal_a const& shoal) const;
+	inline any_a share__(range_a const& range) const;
+	inline shoal_a share_(shoal_a const& shoal) const;
 	inline void share(shoal_a const& shoal) const;
 
 	//	inline any_a shared__(range_a const& _) const;

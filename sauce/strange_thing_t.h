@@ -216,6 +216,25 @@ inline any_a<> type__(range_a<> const&) const \
 { \
 	return type_(); \
 } \
+inline any_a<> share__(range_a<> const& range) const \
+{ \
+	forward_const_iterator_a<> it = range.cbegin(); \
+	if (it == range.cend()) \
+	{ \
+		throw dis("[thing] share passed empty range"); \
+	} \
+	any_a<> thing = *it; \
+	if (!check<shoal_a<>>(thing)) \
+	{ \
+		throw dis("[thing] share passed non-shoal"); \
+	} \
+	return share_(cast<shoal_a<>>(thing)); \
+} \
+inline shoal_a<> share_(shoal_a<> const& shoal) const \
+{ \
+	share(shoal); \
+	return shoal; \
+} \
 inline any_a<> eater__(range_a<> const&) const \
 { \
 	return eater_(); \

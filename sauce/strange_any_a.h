@@ -106,6 +106,10 @@ namespace strange {
      { assert(handle_); return read().type__(_ ); }
      inline symbol_a type_ ( ) const
      { assert(handle_); return read().type_( ); }
+     inline any_a share__ ( range_a const & range ) const
+     { assert(handle_); return read().share__(range ); }
+     inline shoal_a share_ ( shoal_a const & shoal ) const
+     { assert(handle_); return read().share_(shoal ); }
      inline void share ( shoal_a const & shoal ) const
      { assert(handle_); read().share(shoal ); }
      inline any_a cat__ ( range_a const & _ ) const
@@ -221,6 +225,8 @@ namespace strange {
     
       virtual inline any_a type__ ( range_a const & _ ) const = 0;
       virtual inline symbol_a type_ ( ) const = 0;
+      virtual inline any_a share__ ( range_a const & range ) const = 0;
+      virtual inline shoal_a share_ ( shoal_a const & shoal ) const = 0;
       virtual inline void share ( shoal_a const & shoal ) const = 0;
       virtual inline any_a cat__ ( range_a const & _ ) const = 0;
       virtual inline cat_a cat_ ( ) const = 0;
@@ -326,6 +332,10 @@ namespace strange {
       { return value_.type__(_ ); }
       virtual inline symbol_a type_ ( ) const
       { return value_.type_( ); }
+      virtual inline any_a share__ ( range_a const & range ) const
+      { return value_.share__(range ); }
+      virtual inline shoal_a share_ ( shoal_a const & shoal ) const
+      { return value_.share_(shoal ); }
       virtual inline void share ( shoal_a const & shoal ) const
       { value_.share(shoal ); }
       virtual inline any_a cat__ ( range_a const & _ ) const

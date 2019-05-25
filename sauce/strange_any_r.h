@@ -31,6 +31,7 @@ public:
 		{
 			auto operations = unordered_shoal_t<>::val_();
 			operations.update("type", native_extraction_t<any_a<>>::val(&any_a<>::type__));
+			operations.update("share", native_extraction_t<any_a<>>::val(&any_a<>::share__));
 			operations.update("cat", native_extraction_t<any_a<>>::val(&any_a<>::cat__));
 			operations.update("operations", native_extraction_t<any_a<>>::val(&any_a<>::operations__));
 			operations.update("eater", native_extraction_t<any_a<>>::val(&any_a<>::eater__));
