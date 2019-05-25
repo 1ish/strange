@@ -27,8 +27,12 @@ public: ___STRANGE_THING___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::it");
-		return TYPE;
+		return reflection<it_t<CONST>>::type();
+	}
+
+	static inline void share(shoal_a<> const& shoal)
+	{
+		reflection<it_t<CONST>>::share(shoal);
 	}
 
 	// comparison

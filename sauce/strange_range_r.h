@@ -38,6 +38,23 @@ public:
 	}
 };
 
+template<>
+class reflection<range_t<>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::range");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<> const& shoal)
+	{
+		auto ref = shoal_a<>(shoal, true);
+		ref.update("strange::range::val", native_function_t<>::val(&range_t<>::val__));
+	}
+};
+
 }
 
 #endif

@@ -31,6 +31,23 @@ public:
 	}
 };
 
+template<>
+class reflection<unordered_herd_t<>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::unordered_herd");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<> const& shoal)
+	{
+		auto ref = shoal_a<>(shoal, true);
+		ref.update("strange::unordered_herd::val", native_function_t<>::val(&unordered_herd_t<>::val__));
+	}
+};
+
 }
 
 #endif

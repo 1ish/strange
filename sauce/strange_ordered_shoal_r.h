@@ -31,6 +31,23 @@ public:
 	}
 };
 
+template<>
+class reflection<ordered_shoal_t<>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::ordered_shoal");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<> const& shoal)
+	{
+		auto ref = shoal_a<>(shoal, true);
+		ref.update("strange::ordered_shoal::val", native_function_t<>::val(&ordered_shoal_t<>::val__));
+	}
+};
+
 }
 
 #endif

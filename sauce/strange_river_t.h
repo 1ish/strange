@@ -25,6 +25,9 @@ namespace strange
 					return TYPE;
 				}
 
+				static inline void share(shoal_a<> const& shoal)
+				{}
+
 				// comparison
 				inline bool operator==(any_a<> const& thing) const
 				{
@@ -171,8 +174,12 @@ namespace strange
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::river");
-			return TYPE;
+			return reflection<river_t<>>::type();
+		}
+
+		static inline void share(shoal_a<> const& shoal)
+		{
+			reflection<river_t<>>::share(shoal);
 		}
 
 		inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values

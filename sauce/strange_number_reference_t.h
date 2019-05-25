@@ -17,8 +17,12 @@ public: ___STRANGE_THING___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::number_reference");
-		return TYPE;
+		return reflection<number_reference_t<PRIMITIVE>>::type();
+	}
+
+	static inline void share(shoal_a<> const& shoal)
+	{
+		reflection<number_reference_t<PRIMITIVE>>::share(shoal);
 	}
 
 	// comparison

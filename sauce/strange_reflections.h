@@ -1,12 +1,12 @@
-#ifndef COM_ONEISH_STRANGE_OPERATIONS_H
-#define COM_ONEISH_STRANGE_OPERATIONS_H
+#ifndef COM_ONEISH_STRANGE_REFLECTIONS_H
+#define COM_ONEISH_STRANGE_REFLECTIONS_H
 
-// operations
+// reflections
 
 namespace strange
 {
 
-template<typename _ABSTRACTION_>
+template<typename _ABSTRACTION_OR_THING_>
 class reflection;
 
 }
@@ -43,5 +43,10 @@ class reflection;
 #include "strange_random_access_const_iterator_data_r.h"
 #include "strange_random_access_iterator_r.h"
 #include "strange_random_access_iterator_data_r.h"
+#include "strange_disagreement_r.h"
+#include "strange_it_r.h"
+#include "strange_nothing_r.h"
+#include "strange_number_reference_r.h"
+#include "strange_something_r.h"
 
 #endif

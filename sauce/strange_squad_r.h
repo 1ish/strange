@@ -31,6 +31,23 @@ public:
 	}
 };
 
+template<>
+class reflection<squad_t<>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::squad");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<> const& shoal)
+	{
+		auto ref = shoal_a<>(shoal, true);
+		ref.update("strange::squad::val", native_function_t<>::val(&squad_t<>::val__));
+	}
+};
+
 }
 
 #endif

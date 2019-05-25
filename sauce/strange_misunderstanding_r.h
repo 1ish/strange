@@ -37,6 +37,23 @@ public:
 	}
 };
 
+template<>
+class reflection<misunderstanding_t<>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::misunderstanding");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<> const& shoal)
+	{
+		auto ref = shoal_a<>(shoal, true);
+		ref.update("strange::misunderstanding::val", native_function_t<>::val(&misunderstanding_t<>::val__));
+	}
+};
+
 }
 
 #endif

@@ -27,6 +27,9 @@ public: ___STRANGE_THING___
 		return TYPE;
 	}
 
+	static inline void share(shoal_a<> const& shoal)
+	{}
+
 	inline any_a<> eater_() const
 	{
 		return no(); //TODO return range of parameter names

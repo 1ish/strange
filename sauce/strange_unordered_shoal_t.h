@@ -25,6 +25,9 @@ class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 			return TYPE;
 		}
 
+		static inline void share(shoal_a<> const& shoal)
+		{}
+
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
@@ -163,6 +166,9 @@ class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 				return TYPE;
 			}
 
+			static inline void share(shoal_a<> const& shoal)
+			{}
+
 			// comparison
 			inline bool operator==(any_a<> const& thing) const
 			{
@@ -289,8 +295,12 @@ public: ___STRANGE_COLLECTION___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::unordered_shoal");
-		return TYPE;
+		return reflection<unordered_shoal_t<>>::type();
+	}
+
+	static inline void share(shoal_a<> const& shoal)
+	{
+		reflection<unordered_shoal_t<>>::share(shoal);
 	}
 
 	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values

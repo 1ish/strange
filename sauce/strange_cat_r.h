@@ -42,6 +42,23 @@ public:
 	}
 };
 
+template<>
+class reflection<cat_t<>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::cat");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<> const& shoal)
+	{
+		auto ref = shoal_a<>(shoal, true);
+		ref.update("strange::cat::val", native_function_t<>::val(&cat_t<>::val__));
+	}
+};
+
 }
 
 #endif

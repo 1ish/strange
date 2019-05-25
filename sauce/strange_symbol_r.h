@@ -50,7 +50,7 @@ public:
 	static inline void share(shoal_a<> const& shoal)
 	{
 		auto ref = shoal_a<>(shoal, true);
-		//TODO ref.update("strange::symbol::val", native_function_t<symbol_t<>>::val(&symbol_t<>::val__));
+		ref.update("strange::symbol::val", native_function_t<>::val(&symbol_t<>::val__));
 	}
 };
 

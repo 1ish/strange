@@ -63,6 +63,23 @@ public:
 	}
 };
 
+template<>
+class reflection<river_t<>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::river");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<> const& shoal)
+	{
+		auto ref = shoal_a<>(shoal, true);
+		ref.update("strange::river::val", native_function_t<>::val(&river_t<>::val__));
+	}
+};
+
 }
 
 #endif

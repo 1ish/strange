@@ -60,8 +60,12 @@ public: ___STRANGE_RANGE___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::range");
-		return TYPE;
+		return reflection<range_t<>>::type();
+	}
+
+	static inline void share(shoal_a<> const& shoal)
+	{
+		reflection<range_t<>>::share(shoal);
 	}
 
 	// range
