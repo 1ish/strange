@@ -5,6 +5,7 @@
  //#include "range_forward.hpp"
  //#include "symbol_forward.hpp"
  //#include "cat_forward.hpp"
+ //#include "unordered_herd_forward.hpp"
  //#include "unordered_shoal_forward.hpp"
  //#include "number_data_forward.hpp"
 #include <algorithm>
@@ -16,7 +17,7 @@
 
 
 namespace strange {
-    template < typename range_a = range_a < > , typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename unordered_shoal_a = unordered_shoal_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
+    template < typename range_a = range_a < > , typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename unordered_herd_a = unordered_herd_a < > , typename unordered_shoal_a = unordered_shoal_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
     class any_a
     {
     public:
@@ -108,6 +109,10 @@ namespace strange {
      { assert(handle_); return read().cat__(_ ); }
      inline cat_a cat_ ( ) const
      { assert(handle_); return read().cat_( ); }
+     inline any_a cats__ ( range_a const & _ ) const
+     { assert(handle_); return read().cats__(_ ); }
+     inline unordered_herd_a cats_ ( ) const
+     { assert(handle_); return read().cats_( ); }
      inline any_a operations__ ( range_a const & _ ) const
      { assert(handle_); return read().operations__(_ ); }
      inline unordered_shoal_a operations_ ( ) const
@@ -221,6 +226,8 @@ namespace strange {
       virtual inline symbol_a type_ ( ) const = 0;
       virtual inline any_a cat__ ( range_a const & _ ) const = 0;
       virtual inline cat_a cat_ ( ) const = 0;
+      virtual inline any_a cats__ ( range_a const & _ ) const = 0;
+      virtual inline unordered_herd_a cats_ ( ) const = 0;
       virtual inline any_a operations__ ( range_a const & _ ) const = 0;
       virtual inline unordered_shoal_a operations_ ( ) const = 0;
       virtual inline any_a eater__ ( range_a const & _ ) const = 0;
@@ -328,6 +335,10 @@ namespace strange {
       { return value_.cat__(_ ); }
       virtual inline cat_a cat_ ( ) const
       { return value_.cat_( ); }
+      virtual inline any_a cats__ ( range_a const & _ ) const
+      { return value_.cats__(_ ); }
+      virtual inline unordered_herd_a cats_ ( ) const
+      { return value_.cats_( ); }
       virtual inline any_a operations__ ( range_a const & _ ) const
       { return value_.operations__(_ ); }
       virtual inline unordered_shoal_a operations_ ( ) const

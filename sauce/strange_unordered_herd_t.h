@@ -261,12 +261,17 @@ public: ___STRANGE_COLLECTION___
 		return it != _set.cend();
 	}
 
-	inline void update(any_a<> const& key, any_a<> const& value)
+	inline void update(any_a<> const& key, any_a<> const&)
 	{
 		_set.insert(key);
 	}
 
 	inline bool insert(any_a<> const& key, any_a<> const&)
+	{
+		return _set.insert(key).second;
+	}
+
+	inline bool insert(any_a<> const& key)
 	{
 		return _set.insert(key).second;
 	}

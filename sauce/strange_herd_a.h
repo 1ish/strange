@@ -84,6 +84,8 @@ namespace strange {
      { assert(handle_); return read().has(s ); }
      inline bool at ( std :: string const & s ) const
      { assert(handle_); return read().at(s ); }
+     inline bool insert ( any_a < > const & thing )
+     { assert(handle_); return write().insert(thing ); }
      inline bool insert ( std :: string const & s )
      { assert(handle_); return write().insert(s ); }
      inline bool erase ( std :: string const & s )
@@ -94,6 +96,7 @@ namespace strange {
     	{
       virtual inline bool has ( std :: string const & s ) const = 0;
       virtual inline bool at ( std :: string const & s ) const = 0;
+      virtual inline bool insert ( any_a < > const & thing ) = 0;
       virtual inline bool insert ( std :: string const & s ) = 0;
       virtual inline bool erase ( std :: string const & s ) = 0;
     	};
@@ -115,6 +118,8 @@ namespace strange {
       { return value_.has(s ); }
       virtual inline bool at ( std :: string const & s ) const
       { return value_.at(s ); }
+      virtual inline bool insert ( any_a < > const & thing )
+      { return value_.insert(thing ); }
       virtual inline bool insert ( std :: string const & s )
       { return value_.insert(s ); }
       virtual inline bool erase ( std :: string const & s )

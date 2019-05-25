@@ -14,6 +14,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<bidirectional_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		static unordered_shoal_a<> OPERATIONS = []()

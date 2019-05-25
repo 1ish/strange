@@ -17,6 +17,7 @@ public:
 	// herd
 	inline bool has(std::string const& s) const;
 	inline bool at(std::string const& s) const;
+	inline bool insert(any_a<> const& thing);
 	inline bool insert(std::string const& s);
 	inline bool erase(std::string const& s);
 };

@@ -9,13 +9,14 @@
 #include "range_forward.hpp"
 #include "symbol_forward.hpp"
 #include "cat_forward.hpp"
+#include "unordered_herd_forward.hpp"
 #include "unordered_shoal_forward.hpp"
 #include "number_data_forward.hpp"
 
 namespace strange
 {
 
-template <typename range_a = range_a<>, typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename unordered_shoal_a = unordered_shoal_a<>, typename number_data_a_uint64 = number_data_a<uint64_t>>
+template <typename range_a = range_a<>, typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename unordered_herd_a = unordered_herd_a<>, typename unordered_shoal_a = unordered_shoal_a<>, typename number_data_a_uint64 = number_data_a<uint64_t>>
 class any_a
 {
 public:
@@ -35,8 +36,8 @@ public:
 	inline any_a cat__(range_a const& _) const;
 	inline cat_a cat_() const;
 
-//	unordered_herd_a<cat_a> inline any_a cats__(range_a const& _) const;
-//	unordered_herd_a<cat_a> inline any_a cats_() const;
+	inline any_a cats__(range_a const& _) const;
+	inline unordered_herd_a cats_() const;
 
 //	void inline any_a share__(range_a const& range) const;
 	

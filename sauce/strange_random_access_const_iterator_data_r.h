@@ -14,6 +14,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<random_access_const_iterator_a<>>::operations();
@@ -28,6 +39,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_squad"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -46,6 +68,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<random_access_const_iterator_a<>>::operations();
@@ -60,6 +93,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_int_8"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -78,6 +122,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<random_access_const_iterator_a<>>::operations();
@@ -92,6 +147,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_uint_8"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -110,6 +176,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<random_access_const_iterator_a<>>::operations();
@@ -124,6 +201,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_int_16"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -142,6 +230,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<random_access_const_iterator_a<>>::operations();
@@ -156,6 +255,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_uint_16"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -174,6 +284,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<random_access_const_iterator_a<>>::operations();
@@ -188,6 +309,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_int_32"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -206,6 +338,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<random_access_const_iterator_a<>>::operations();
@@ -220,6 +363,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_uint_32"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -238,6 +392,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<random_access_const_iterator_a<>>::operations();
@@ -252,6 +417,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_int_64"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -270,6 +446,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<random_access_const_iterator_a<>>::operations();
@@ -284,6 +471,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_uint_64"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -302,6 +500,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<random_access_const_iterator_a<>>::operations();
@@ -316,6 +525,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_float_32"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -334,6 +554,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<random_access_const_iterator_a<>>::operations();
@@ -348,6 +579,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_float_64"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<random_access_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()

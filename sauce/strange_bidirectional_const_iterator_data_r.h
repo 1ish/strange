@@ -14,6 +14,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<bidirectional_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<bidirectional_const_iterator_a<>>::operations();
@@ -28,6 +39,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::bidirectional_const_iterator_data_shoal"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<bidirectional_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()

@@ -30,6 +30,16 @@ public:
 		return reflection<_ABSTRACTION_>::cat();
 	}
 
+	static inline any_a<> cats__(range_a<> const&)
+	{
+		return cats_();
+	}
+
+	static inline unordered_herd_a<> cats_()
+	{
+		return reflection<_ABSTRACTION_>::cats();
+	}
+
 	static inline any_a<> operations__(range_a<> const&)
 	{
 		return operations_();

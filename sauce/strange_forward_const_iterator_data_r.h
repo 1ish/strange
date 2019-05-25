@@ -14,6 +14,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<forward_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<forward_const_iterator_a<>>::operations();
@@ -30,6 +41,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<forward_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<forward_const_iterator_a<>>::operations();
@@ -44,6 +66,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::forward_const_iterator_data_unordered_shoal"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<forward_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()

@@ -14,6 +14,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<number_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<number_a<>>::operations();
@@ -28,6 +39,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::number_data_uint_8"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<number_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -46,6 +68,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<number_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<number_a<>>::operations();
@@ -60,6 +93,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::number_data_uint_16"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<number_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -78,6 +122,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<number_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<number_a<>>::operations();
@@ -92,6 +147,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::number_data_uint_32"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<number_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -110,6 +176,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<number_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<number_a<>>::operations();
@@ -124,6 +201,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::number_data_uint_64"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<number_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -142,6 +230,17 @@ public:
 		return CAT;
 	}
 
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<number_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<number_a<>>::operations();
@@ -156,6 +255,17 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val_(sym("strange::number_data_float_64"));
 		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<number_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
 	}
 
 	static inline unordered_shoal_a<> operations()
