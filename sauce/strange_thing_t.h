@@ -86,11 +86,9 @@ public:
 
 	inline any_a<> invoke_(any_a<> const& member, range_a<> const& range) const
 	{
-		//TODO
-		// thing = me_();
-		// operation = thing.operations_().at(member);
-		// return operate_(thing, operation, range);
-		return no();
+		any_a<> thing = me_(); //TODO ref?
+		any_a<> operation = thing.operations_().at_(member);
+		return operate_(thing, operation, range);
 	}
 
 	static inline any_a<> operate__(range_a<> const& range)
@@ -100,7 +98,7 @@ public:
 		{
 			throw dis("strange::thing::operate passed empty range");
 		}
-		any_a<> thing = *it;
+		any_a<> thing = *it; //TODO ref?
 		if (++it == range.cend())
 		{
 			throw dis("strange::thing::visit passed short range");
@@ -116,10 +114,13 @@ public:
 
 	inline any_a<> operator()(any_a<> const& thing, range_a<> const& range) const
 	{
-		//TODO
-		// operation = thing.operations_().at(range.1st);
-		// return operate_(thing, operation, range.2nd...);
-		return no();
+		forward_const_iterator_a<> it = range.cbegin();
+		if (it == range.cend())
+		{
+			throw dis("strange::thing::operator() passed empty range");
+		}
+		any_a<> operation = thing.operations_().at_(*it);
+		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
 	}
 
 	// identification
