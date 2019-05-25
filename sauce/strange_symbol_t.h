@@ -9,7 +9,7 @@ class symbol_t : public thing_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline symbol_a<> val__(range_a<> const& range)
+	static inline any_a<> val__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())

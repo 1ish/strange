@@ -332,9 +332,9 @@ public: ___STRANGE_COLLECTION___
 	using std_map_any_any = std::map<any_a<>, any_a<>>;
 
 	// construction
-	static inline ordered_shoal_a<> val__(range_a<> const& range)
+	static inline any_a<> val__(range_a<> const& range)
 	{
-		return cast<ordered_shoal_a<>>(val_() += range);
+		return val_() += range;
 	}
 
 	static inline ordered_shoal_a<> val_()

@@ -33,15 +33,18 @@ public:
 	inline any_a type__(range_a const& _) const;
 	inline symbol_a type_() const;
 
+	//	inline any_a share__(range_a const& range) const;
+	//	inline any_a share_(shoal_a const& shoal) const;
+	//	inline void share(shoal_a const& shoal) const;
+
+	//	inline any_a shared__(range_a const& _) const;
+	//	inline unordered_shoal_a shared_() const;
+
 	inline any_a cat__(range_a const& _) const;
 	inline cat_a cat_() const;
 
 	inline any_a cats__(range_a const& _) const;
 	inline unordered_herd_a cats_() const;
-
-//	void inline any_a share__(range_a const& range) const;
-	
-//	unordered_shoal_a<symbol_a, any_a> inline any_a shared__(range_a const& _) const;
 
 	inline any_a operations__(range_a const& _) const;
 	inline unordered_shoal_a operations_() const;

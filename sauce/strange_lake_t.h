@@ -752,9 +752,9 @@ public: ___STRANGE_COLLECTION___
 	using std_vector_number = std::vector<PRIMITIVE>;
 
 	// construction
-	static inline lake_a<PRIMITIVE> val__(range_a<> const& range)
+	static inline any_a<> val__(range_a<> const& range)
 	{
-		return cast<lake_a<PRIMITIVE>>(val_() += range);
+		return val_() += range;
 	}
 
 	static inline lake_a<PRIMITIVE> val_()

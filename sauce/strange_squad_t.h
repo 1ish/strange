@@ -740,9 +740,9 @@ public: ___STRANGE_COLLECTION___
 	using std_deque_any = std::deque<any_a<>>;
 
 	// construction
-	static inline squad_a<> val__(range_a<> const& range)
+	static inline any_a<> val__(range_a<> const& range)
 	{
-		return cast<squad_a<>>(val_() += range);
+		return val_() += range;
 	}
 
 	static inline squad_a<> val_()

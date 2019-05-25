@@ -157,9 +157,9 @@ public: ___STRANGE_COLLECTION___
 	using std_set_any = std::set<any_a<>>;
 
 	// construction
-	static inline ordered_herd_a<> val__(range_a<> const& range)
+	static inline any_a<> val__(range_a<> const& range)
 	{
-		return cast<ordered_herd_a<>>(val_() += range);
+		return val_() += range;
 	}
 
 	static inline ordered_herd_a<> val_()

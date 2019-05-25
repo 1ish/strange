@@ -137,7 +137,7 @@ namespace strange
 		using std_istreambuf_iterator_char = std::istreambuf_iterator<char>;
 
 		// construction
-		static inline river_a<> val__(range_a<> const& _)
+		static inline any_a<> val__(range_a<> const& _)
 		{
 			return val_();
 		}

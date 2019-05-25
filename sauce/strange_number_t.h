@@ -9,7 +9,7 @@ class number_t : public thing_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
 	// construction
-	static inline number_data_a<PRIMITIVE> val__(range_a<> const& _)
+	static inline any_a<> val__(range_a<> const& _)
 	{
 		return val_();
 	}

@@ -132,9 +132,9 @@ public: ___STRANGE_COLLECTION___
 	using std_unordered_set_any = std::unordered_set<any_a<>, any_a<>::hash_f>;
 
 	// construction
-	static inline unordered_herd_a<> val__(range_a<> const& range)
+	static inline any_a<> val__(range_a<> const& range)
 	{
-		return cast<unordered_herd_a<>>(val_() += range);
+		return val_() += range;
 	}
 
 	static inline unordered_herd_a<> val_()

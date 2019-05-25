@@ -740,9 +740,9 @@ public: ___STRANGE_COLLECTION___
 	using std_vector_any = std::vector<any_a<>>;
 
 	// construction
-	static inline flock_a<> val__(range_a<> const& range)
+	static inline any_a<> val__(range_a<> const& range)
 	{
-		return cast<flock_a<>>(val_() += range);
+		return val_() += range;
 	}
 
 	static inline flock_a<> val_()
