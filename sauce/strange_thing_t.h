@@ -86,6 +86,10 @@ public:
 
 	static inline any_a<> invoke(any_a<>& thing, any_a<> const& member, range_a<> const& range)
 	{
+		if (!thing.operations_().has_(member))
+		{
+			throw dis("strange::thing::invoke passed non-existent member");
+		}
 		return operate(thing, thing.operations_().at_(member), range);
 	}
 
