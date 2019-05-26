@@ -38,7 +38,7 @@ public:
 			operations.update("operations", native_extraction_t<any_a<>>::val(&any_a<>::operations__));
 			operations.update("eater", native_extraction_t<any_a<>>::val(&any_a<>::eater__));
 			operations.update("feeder", native_extraction_t<any_a<>>::val(&any_a<>::feeder__));
-			operations.update("visit", native_mutation_t<any_a<>>::val(&any_a<>::visit__));
+			operations.update("visit", native_extraction_t<any_a<>>::val(&any_a<>::visit__));
 			operations.update("invoke", native_extraction_t<any_a<>>::val(&any_a<>::invoke__));
 			operations.update("operate", native_extraction_t<any_a<>>::val(&any_a<>::operate__));
 			operations.update("identical", native_extraction_t<any_a<>>::val(&any_a<>::identical__));

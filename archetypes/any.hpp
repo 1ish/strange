@@ -56,7 +56,7 @@ public:
 	inline any_a feeder__(range_a const& range) const; // return range of parameter values
 
 	// visitor pattern
-	inline any_a visit__(range_a const& range);
+	inline any_a visit__(range_a const& range) const;
 
 	// function
 	inline any_a invoke__(range_a const& range) const;
