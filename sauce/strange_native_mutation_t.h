@@ -36,6 +36,17 @@ public: ___STRANGE_THING___
 	}
 
 	// function
+	inline any_a<> operate__(range_a<> const& range) const
+	{
+		forward_const_iterator_a<> it = range.cbegin();
+		if (it == range.cend())
+		{
+			throw dis("strange::native_mutation::operate passed empty range");
+		}
+		any_a<> thing(*it, true);
+		return operate_(thing, range_t<>::val_(++it, range.cend()));
+	}
+
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
 		assert(dynamic_cast<T*>(&thing));

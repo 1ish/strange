@@ -59,8 +59,11 @@ public:
 	inline any_a visit__(range_a const& range);
 
 	// function
+	inline any_a invoke__(range_a const& range) const;
 	inline any_a invoke_(any_a& thing, range_a const& range) const;
 	inline any_a invoke(any_a& thing, any_a const& member, range_a const& range) const;
+
+	inline any_a operate__(range_a const& range) const;
 	inline any_a operate_(any_a& thing, range_a const& range) const;
 	inline any_a operate(any_a& thing, any_a const& operation, range_a const& range) const;
 
