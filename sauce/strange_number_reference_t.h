@@ -20,7 +20,7 @@ public: ___STRANGE_THING___
 		return reflection<number_reference_t<PRIMITIVE>>::type();
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 		reflection<number_reference_t<PRIMITIVE>>::share(shoal);
 	}

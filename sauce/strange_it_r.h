@@ -14,10 +14,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::const_it::val", native_function_t<>::val(&it_t<true>::val__));
+		shoal.update("strange::const_it::val", native_function_t<>::val(&it_t<true>::val__));
 	}
 };
 
@@ -31,10 +30,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::it::val", native_function_t<>::val(&it_t<false>::val__));
+		shoal.update("strange::it::val", native_function_t<>::val(&it_t<false>::val__));
 	}
 };
 

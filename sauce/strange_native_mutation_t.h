@@ -27,7 +27,7 @@ public: ___STRANGE_THING___
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{}
 
 	inline any_a<> eater_() const

@@ -25,7 +25,7 @@ class brook_t : public thing_t<_ABSTRACTION_>
 			return TYPE;
 		}
 
-		static inline void share(shoal_a<> const& shoal)
+		static inline void share(shoal_a<>& shoal)
 		{}
 
 		// comparison
@@ -402,7 +402,7 @@ class brook_t : public thing_t<_ABSTRACTION_>
 			return TYPE;
 		}
 
-		static inline void share(shoal_a<> const& shoal)
+		static inline void share(shoal_a<>& shoal)
 		{}
 
 		// comparison
@@ -768,7 +768,7 @@ public: ___STRANGE_COLLECTION___
 		return reflection<brook_t<PRIMITIVE>>::type();
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 		reflection<brook_t<PRIMITIVE>>::share(shoal);
 	}

@@ -25,7 +25,7 @@ namespace strange
 					return TYPE;
 				}
 
-				static inline void share(shoal_a<> const& shoal)
+				static inline void share(shoal_a<>& shoal)
 				{}
 
 				// comparison
@@ -150,23 +150,58 @@ namespace strange
 			return river_a<>(river_t(stream.get(), stream.get(), stream), true);
 		}
 
+		static inline any_a<> file__(range_a<> const& range)
+		{
+			forward_const_iterator_a<> it = range.cbegin();
+			if (it == range.cend())
+			{
+				throw dis("strange::river::file passed empty range");
+			}
+			any_a<> name = *it;
+			if (!check<symbol_a<>>(name))
+			{
+				throw dis("strange::river::file passed non-symbol");
+			}
+			return file_(cast<symbol_a<>>(name));
+		}
+
+		static inline river_a<> file_(symbol_a<> const& name)
+		{
+			return file(name.to_string());
+		}
+
 		static inline river_a<> file(std::string const& name)
 		{
-			std::shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(str, std::fstream::binary | std::fstream::in | std::fstream::out);
+			std::shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name, std::fstream::binary | std::fstream::in | std::fstream::out);
 			return river_a<>(river_t(stream.get(), stream.get(), stream, name), true);
 		}
 
-		static inline river_a<> cin()
+		static inline any_a<> in__(range_a<> const& _)
+		{
+			return in_();
+		}
+
+		static inline river_a<> in_()
 		{
 			return river_a<>(river_t{ &std::cin }, true);
 		}
 
-		static inline river_a<> cout()
+		static inline any_a<> out__(range_a<> const& _)
+		{
+			return out_();
+		}
+
+		static inline river_a<> out_()
 		{
 			return river_a<>(river_t(nullptr, &std::cout), true);
 		}
 
-		static inline river_a<> cerr()
+		static inline any_a<> err__(range_a<> const& _)
+		{
+			return err_();
+		}
+
+		static inline river_a<> err_()
 		{
 			return river_a<>(river_t(nullptr, &std::cerr), true);
 		}
@@ -177,7 +212,7 @@ namespace strange
 			return reflection<river_t<>>::type();
 		}
 
-		static inline void share(shoal_a<> const& shoal)
+		static inline void share(shoal_a<>& shoal)
 		{
 			reflection<river_t<>>::share(shoal);
 		}

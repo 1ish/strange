@@ -36,7 +36,7 @@ public: ___STRANGE_THING___
 		return reflection<disagreement_t<>>::type();
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 		reflection<disagreement_t<>>::share(shoal);
 	}

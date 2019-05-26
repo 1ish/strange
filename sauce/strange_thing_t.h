@@ -215,9 +215,9 @@ inline any_a<> share__(range_a<> const& range) const \
 	{ \
 		throw dis("[thing] share passed non-shoal"); \
 	} \
-	return share_(cast<shoal_a<>>(thing)); \
+	return share_(cast<shoal_a<>>(thing, true)); \
 } \
-inline shoal_a<> share_(shoal_a<> const& shoal) const \
+inline shoal_a<> share_(shoal_a<>& shoal) const \
 { \
 	share(shoal); \
 	return shoal; \

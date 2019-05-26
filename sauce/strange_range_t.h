@@ -63,7 +63,7 @@ public: ___STRANGE_RANGE___
 		return reflection<range_t<>>::type();
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 		reflection<range_t<>>::share(shoal);
 	}

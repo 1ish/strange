@@ -35,7 +35,7 @@ public: ___STRANGE_THING___
 		return reflection<cat_t<>>::type();
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 		reflection<cat_t<>>::share(shoal);
 	}

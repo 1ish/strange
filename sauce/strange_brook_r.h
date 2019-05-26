@@ -284,10 +284,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::brook_int_8::val", native_function_t<>::val(&brook_int_8_t<>::val__));
+		shoal.update("strange::brook_int_8::val", native_function_t<>::val(&brook_int_8_t<>::val__));
 	}
 };
 
@@ -301,10 +300,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::brook_uint_8::val", native_function_t<>::val(&brook_uint_8_t<>::val__));
+		shoal.update("strange::brook_uint_8::val", native_function_t<>::val(&brook_uint_8_t<>::val__));
 	}
 };
 
@@ -318,10 +316,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::brook_int_16::val", native_function_t<>::val(&brook_int_16_t<>::val__));
+		shoal.update("strange::brook_int_16::val", native_function_t<>::val(&brook_int_16_t<>::val__));
 	}
 };
 
@@ -335,10 +332,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::brook_uint_16::val", native_function_t<>::val(&brook_uint_16_t<>::val__));
+		shoal.update("strange::brook_uint_16::val", native_function_t<>::val(&brook_uint_16_t<>::val__));
 	}
 };
 
@@ -352,10 +348,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::brook_int_32::val", native_function_t<>::val(&brook_int_32_t<>::val__));
+		shoal.update("strange::brook_int_32::val", native_function_t<>::val(&brook_int_32_t<>::val__));
 	}
 };
 
@@ -369,10 +364,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::brook_uint_32::val", native_function_t<>::val(&brook_uint_32_t<>::val__));
+		shoal.update("strange::brook_uint_32::val", native_function_t<>::val(&brook_uint_32_t<>::val__));
 	}
 };
 
@@ -386,10 +380,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::brook_int_64::val", native_function_t<>::val(&brook_int_64_t<>::val__));
+		shoal.update("strange::brook_int_64::val", native_function_t<>::val(&brook_int_64_t<>::val__));
 	}
 };
 
@@ -403,10 +396,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::brook_uint_64::val", native_function_t<>::val(&brook_uint_64_t<>::val__));
+		shoal.update("strange::brook_uint_64::val", native_function_t<>::val(&brook_uint_64_t<>::val__));
 	}
 };
 
@@ -420,10 +412,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::brook_float_32::val", native_function_t<>::val(&brook_float_32_t<>::val__));
+		shoal.update("strange::brook_float_32::val", native_function_t<>::val(&brook_float_32_t<>::val__));
 	}
 };
 
@@ -437,10 +428,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::brook_float_64::val", native_function_t<>::val(&brook_float_64_t<>::val__));
+		shoal.update("strange::brook_float_64::val", native_function_t<>::val(&brook_float_64_t<>::val__));
 	}
 };
 

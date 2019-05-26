@@ -73,10 +73,13 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::river::val", native_function_t<>::val(&river_t<>::val__));
+		shoal.update("strange::river::val", native_function_t<>::val(&river_t<>::val__));
+		shoal.update("strange::river::file", native_function_t<>::val(&river_t<>::file__));
+		shoal.update("strange::river::in", native_function_t<>::val(&river_t<>::in__));
+		shoal.update("strange::river::out", native_function_t<>::val(&river_t<>::out__));
+		shoal.update("strange::river::err", native_function_t<>::val(&river_t<>::err__));
 	}
 };
 

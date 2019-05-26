@@ -14,7 +14,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 	}
 };
@@ -29,7 +29,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 	}
 };
@@ -44,7 +44,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 	}
 };
@@ -59,7 +59,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 	}
 };
@@ -74,7 +74,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 	}
 };
@@ -89,7 +89,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 	}
 };
@@ -104,7 +104,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 	}
 };
@@ -119,7 +119,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 	}
 };
@@ -134,7 +134,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 	}
 };
@@ -149,7 +149,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 	}
 };

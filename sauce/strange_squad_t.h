@@ -25,7 +25,7 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			return TYPE;
 		}
 
-		static inline void share(shoal_a<> const& shoal)
+		static inline void share(shoal_a<>& shoal)
 		{}
 
 		// comparison
@@ -394,7 +394,7 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			return TYPE;
 		}
 
-		static inline void share(shoal_a<> const& shoal)
+		static inline void share(shoal_a<>& shoal)
 		{}
 
 		// comparison
@@ -756,7 +756,7 @@ public: ___STRANGE_COLLECTION___
 		return reflection<squad_t<>>::type();
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 		reflection<squad_t<>>::share(shoal);
 	}

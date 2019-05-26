@@ -47,10 +47,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::symbol::val", native_function_t<>::val(&symbol_t<>::val__));
+		shoal.update("strange::symbol::val", native_function_t<>::val(&symbol_t<>::val__));
 	}
 };
 

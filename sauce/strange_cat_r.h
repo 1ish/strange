@@ -52,10 +52,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::cat::val", native_function_t<>::val(&cat_t<>::val__));
+		shoal.update("strange::cat::val", native_function_t<>::val(&cat_t<>::val__));
 	}
 };
 

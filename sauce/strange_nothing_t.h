@@ -32,7 +32,7 @@ public: ___STRANGE_THING___
 		return reflection<nothing_t<>>::type();
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 		reflection<nothing_t<>>::share(shoal);
 	}

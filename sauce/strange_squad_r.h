@@ -41,10 +41,9 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
-		auto ref = shoal_a<>(shoal, true);
-		ref.update("strange::squad::val", native_function_t<>::val(&squad_t<>::val__));
+		shoal.update("strange::squad::val", native_function_t<>::val(&squad_t<>::val__));
 	}
 };
 

@@ -25,7 +25,7 @@ class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 			return TYPE;
 		}
 
-		static inline void share(shoal_a<> const& shoal)
+		static inline void share(shoal_a<>& shoal)
 		{}
 
 		// comparison
@@ -166,7 +166,7 @@ class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 				return TYPE;
 			}
 
-			static inline void share(shoal_a<> const& shoal)
+			static inline void share(shoal_a<>& shoal)
 			{}
 
 			// comparison
@@ -298,7 +298,7 @@ public: ___STRANGE_COLLECTION___
 		return reflection<unordered_shoal_t<>>::type();
 	}
 
-	static inline void share(shoal_a<> const& shoal)
+	static inline void share(shoal_a<>& shoal)
 	{
 		reflection<unordered_shoal_t<>>::share(shoal);
 	}
