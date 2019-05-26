@@ -142,6 +142,16 @@ public:
 	}
 
 	// identification
+	inline any_a<> identity__(range_a<> const&) const
+	{
+		return identity_();
+	}
+
+	inline number_data_a<uint64_t> identity_() const
+	{
+		return number_uint_64_t<>::val(uint64_t(identity()));
+	}
+
 	inline any_a<> identical__(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin();

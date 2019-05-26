@@ -148,6 +148,10 @@ namespace strange {
      { assert(handle_); return read().operate_(thing, range ); }
      inline any_a operate ( any_a & thing , any_a const & operation , range_a const & range ) const
      { assert(handle_); return read().operate(thing, operation, range ); }
+     inline any_a identity__ ( range_a const & _ ) const
+     { assert(handle_); return read().identity__(_ ); }
+     inline number_data_a_uint64 identity_ ( ) const
+     { assert(handle_); return read().identity_( ); }
      inline void const * identity ( ) const
      { assert(handle_); return read().identity( ); }
      inline any_a identical__ ( range_a const & range ) const
@@ -252,6 +256,8 @@ namespace strange {
       virtual inline any_a operate__ ( range_a const & range ) const = 0;
       virtual inline any_a operate_ ( any_a & thing , range_a const & range ) const = 0;
       virtual inline any_a operate ( any_a & thing , any_a const & operation , range_a const & range ) const = 0;
+      virtual inline any_a identity__ ( range_a const & _ ) const = 0;
+      virtual inline number_data_a_uint64 identity_ ( ) const = 0;
       virtual inline void const * identity ( ) const = 0;
       virtual inline any_a identical__ ( range_a const & range ) const = 0;
       virtual inline any_a identical_ ( any_a const & thing ) const = 0;
@@ -383,6 +389,10 @@ namespace strange {
       { return value_.operate_(thing, range ); }
       virtual inline any_a operate ( any_a & thing , any_a const & operation , range_a const & range ) const
       { return value_.operate(thing, operation, range ); }
+      virtual inline any_a identity__ ( range_a const & _ ) const
+      { return value_.identity__(_ ); }
+      virtual inline number_data_a_uint64 identity_ ( ) const
+      { return value_.identity_( ); }
       virtual inline void const * identity ( ) const
       { return value_.identity( ); }
       virtual inline any_a identical__ ( range_a const & range ) const

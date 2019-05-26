@@ -68,6 +68,8 @@ public:
 	inline any_a operate(any_a& thing, any_a const& operation, range_a const& range) const;
 
 	// identification
+	inline any_a identity__(range_a const& _) const;
+	inline number_data_a_uint64 identity_() const;
 	inline void const* identity() const;
 
 	inline any_a identical__(range_a const& range) const;
