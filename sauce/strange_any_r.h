@@ -41,6 +41,7 @@ public:
 			operations.update("visit", native_extraction_t<any_a<>>::val(&any_a<>::visit__));
 			operations.update("invoke", native_extraction_t<any_a<>>::val(&any_a<>::invoke__));
 			operations.update("operate", native_extraction_t<any_a<>>::val(&any_a<>::operate__));
+			operations.update("identity", native_extraction_t<any_a<>>::val(&any_a<>::identity__));
 			operations.update("identical", native_extraction_t<any_a<>>::val(&any_a<>::identical__));
 			operations.update("nothing", native_extraction_t<any_a<>>::val(&any_a<>::nothing__));
 			operations.update("something", native_extraction_t<any_a<>>::val(&any_a<>::something__));
