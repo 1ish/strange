@@ -10,9 +10,6 @@ template <typename _1_ = void>
 class symbol_a;
 
 template <typename _1_ = void>
-class cat_a;
-
-template <typename _1_ = void>
 class forward_const_iterator_a;
 
 template <typename _1_>
@@ -102,6 +99,9 @@ class random_access_iterator_a;
 template <typename _1_>
 class random_access_iterator_data_a;
 
+template <typename _1_ = void>
+class cat_a;
+
 }
 
 // abstractions
@@ -110,9 +110,6 @@ class random_access_iterator_data_a;
 
 #define ___root___ any_a<>
 #include "strange_symbol_a.h"
-
-#define ___derived___ symbol_a<>
-#include "strange_cat_a.h"
 
 #include "strange_forward_const_iterator_a.h"
 
@@ -197,6 +194,9 @@ class random_access_iterator_data_a;
 
 #define ___derived___ random_access_iterator_a<>
 #include "strange_random_access_iterator_data_a.h"
+
+#define ___derived___ symbol_a<>
+#include "strange_cat_a.h"
 
 #undef ___root___
 #undef ___derived___

@@ -8,6 +8,7 @@
 #include "any_forward.hpp"
 #include "range_forward.hpp"
 #include "symbol_forward.hpp"
+#include "flock_forward.hpp"
 
 namespace strange
 {
@@ -17,14 +18,18 @@ class cat_a
 {
 public:
 	// cat
+	inline any_a<> symbolic__(range_a<> const& _) const;
+	inline any_a<> symbolic_() const;
+	inline bool symbolic() const;
+
 	inline any_a<> name__(range_a<> const& _) const;
 	inline symbol_a<> name_() const;
 
 	inline any_a<> arguments__(range_a<> const& _) const;
-	inline any_a<> arguments_() const;
+	inline flock_a<> arguments_() const;
 
 	inline any_a<> parameters__(range_a<> const& _) const;
-	inline any_a<> parameters_() const;
+	inline flock_a<> parameters_() const;
 
 	inline any_a<> result__(range_a<> const& _) const;
 	inline cat_a result_() const;

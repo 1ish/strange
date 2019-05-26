@@ -4,6 +4,7 @@
  //#include "any_forward.hpp"
  //#include "range_forward.hpp"
  //#include "symbol_forward.hpp"
+ //#include "flock_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -82,17 +83,23 @@ namespace strange {
     		return *this;
     	}
     
+     inline any_a < > symbolic__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().symbolic__(_ ); }
+     inline any_a < > symbolic_ ( ) const
+     { assert(handle_); return read().symbolic_( ); }
+     inline bool symbolic ( ) const
+     { assert(handle_); return read().symbolic( ); }
      inline any_a < > name__ ( range_a < > const & _ ) const
      { assert(handle_); return read().name__(_ ); }
      inline symbol_a < > name_ ( ) const
      { assert(handle_); return read().name_( ); }
      inline any_a < > arguments__ ( range_a < > const & _ ) const
      { assert(handle_); return read().arguments__(_ ); }
-     inline any_a < > arguments_ ( ) const
+     inline flock_a < > arguments_ ( ) const
      { assert(handle_); return read().arguments_( ); }
      inline any_a < > parameters__ ( range_a < > const & _ ) const
      { assert(handle_); return read().parameters__(_ ); }
-     inline any_a < > parameters_ ( ) const
+     inline flock_a < > parameters_ ( ) const
      { assert(handle_); return read().parameters_( ); }
      inline any_a < > result__ ( range_a < > const & _ ) const
      { assert(handle_); return read().result__(_ ); }
@@ -114,12 +121,15 @@ namespace strange {
     private:
     	struct ___finale_handle_base___ : ___derived_handle_base___
     	{
+      virtual inline any_a < > symbolic__ ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > symbolic_ ( ) const = 0;
+      virtual inline bool symbolic ( ) const = 0;
       virtual inline any_a < > name__ ( range_a < > const & _ ) const = 0;
       virtual inline symbol_a < > name_ ( ) const = 0;
       virtual inline any_a < > arguments__ ( range_a < > const & _ ) const = 0;
-      virtual inline any_a < > arguments_ ( ) const = 0;
+      virtual inline flock_a < > arguments_ ( ) const = 0;
       virtual inline any_a < > parameters__ ( range_a < > const & _ ) const = 0;
-      virtual inline any_a < > parameters_ ( ) const = 0;
+      virtual inline flock_a < > parameters_ ( ) const = 0;
       virtual inline any_a < > result__ ( range_a < > const & _ ) const = 0;
       virtual inline cat_a result_ ( ) const = 0;
       virtual inline any_a < > includes__ ( range_a < > const & range ) const = 0;
@@ -148,17 +158,23 @@ namespace strange {
     			return std::make_shared<___finale_handle_final___>(___derived_handle___<___TTT___, ___finale_handle_base___>::value_);
     		}
     
+      virtual inline any_a < > symbolic__ ( range_a < > const & _ ) const
+      { return value_.symbolic__(_ ); }
+      virtual inline any_a < > symbolic_ ( ) const
+      { return value_.symbolic_( ); }
+      virtual inline bool symbolic ( ) const
+      { return value_.symbolic( ); }
       virtual inline any_a < > name__ ( range_a < > const & _ ) const
       { return value_.name__(_ ); }
       virtual inline symbol_a < > name_ ( ) const
       { return value_.name_( ); }
       virtual inline any_a < > arguments__ ( range_a < > const & _ ) const
       { return value_.arguments__(_ ); }
-      virtual inline any_a < > arguments_ ( ) const
+      virtual inline flock_a < > arguments_ ( ) const
       { return value_.arguments_( ); }
       virtual inline any_a < > parameters__ ( range_a < > const & _ ) const
       { return value_.parameters__(_ ); }
-      virtual inline any_a < > parameters_ ( ) const
+      virtual inline flock_a < > parameters_ ( ) const
       { return value_.parameters_( ); }
       virtual inline any_a < > result__ ( range_a < > const & _ ) const
       { return value_.result__(_ ); }

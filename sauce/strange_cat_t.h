@@ -41,7 +41,22 @@ public: ___STRANGE_THING___
 	}
 
 	// cat
-	inline symbol_a<> name__(range_a<> const& _) const
+	inline any_a<> symbolic__(range_a<> const& _) const
+	{
+		return symbolic_();
+	}
+
+	inline any_a<> symbolic_() const
+	{
+		return boole(symbolic());
+	}
+
+	inline bool symbolic() const
+	{
+		return _symbolic;
+	}
+
+	inline any_a<> name__(range_a<> const& _) const
 	{
 		return name_();
 	}
@@ -56,7 +71,7 @@ public: ___STRANGE_THING___
 		return arguments_();
 	}
 
-	inline any_a<> arguments_() const
+	inline flock_a<> arguments_() const
 	{
 		return _arguments;
 	}
@@ -66,12 +81,12 @@ public: ___STRANGE_THING___
 		return parameters_();
 	}
 
-	inline any_a<> parameters_() const
+	inline flock_a<> parameters_() const
 	{
 		return _parameters;
 	}
 
-	inline cat_a<> result__(range_a<> const& _) const
+	inline any_a<> result__(range_a<> const& _) const
 	{
 		return result_();
 	}
@@ -137,22 +152,135 @@ public: ___STRANGE_THING___
 	}
 
 protected:
+	bool const _symbolic; // recursively true if all of the cats below are symbolic and there are no non-cat arguments
 	symbol_a<> const _name;
-	any_a<> const _arguments;
-	any_a<> const _parameters;
+	flock_a<> const _arguments;
+	flock_a<> const _parameters;
 	any_a<> const _result;
 
-	inline cat_t()
-		: symbol_t{ _symbol_() }
-		, _name{ sym("") }
-		, _arguments{ no() }
-		, _parameters{ no() }
-		, _result{ no() }
+	inline cat_t(symbol_a<> const& name, flock_a<> const& arguments, flock_a<> const& parameters, any_a<> const& result)
+		: symbol_t{ _symbol_(name, arguments, parameters, result) }
+		, _symbolic{ _symbolic_(arguments, parameters, result) }
+		, _name{ name }
+		, _arguments{ arguments }
+		, _parameters{ parameters }
+		, _result{ result }
 	{}
 
-	static inline std::string const _symbol_()
+	static inline std::string const _symbol_(symbol_a<> const& name, flock_a<> const& arguments, flock_a<> const& parameters, any_a<> const& result)
 	{
-		return "";
+		std::string symbol = "<" + name.to_string();
+
+		bool any = false;
+		int64_t anys = 0;
+		for (auto const& argument : arguments)
+		{
+			bool const is_cat = check<cat_a<>>(argument);
+			cat_a<> cat;
+			if (is_cat)
+			{
+				cat = cast<cat_a<>>(argument);
+			}
+			std::string str;
+			if (is_cat && (str = cat.to_string()) == "<>")
+			{
+				++anys;
+				continue;
+			}
+			if (any)
+			{
+				symbol += ",";
+			}
+			else
+			{
+				symbol += "[";
+				any = true;
+			}
+			while (anys)
+			{
+				symbol += "<>,";
+				--anys;
+			}
+			if (is_cat)
+			{
+				symbol += str;
+			}
+			else
+			{
+				symbol += "*";
+			}
+		}
+		if (any)
+		{
+			symbol += "]";
+			any = false;
+		}
+
+		anys = 0;
+		for (auto const& parameter : parameters)
+		{
+			cat_a<> const cat = cast<cat_a<>>(parameter);
+			std::string const str = cat.to_string();
+			if (str == "<>")
+			{
+				++anys;
+				continue;
+			}
+			if (any)
+			{
+				symbol += ",";
+			}
+			else
+			{
+				symbol += "(";
+				any = true;
+			}
+			while (anys)
+			{
+				symbol += "<>,";
+				--anys;
+			}
+			symbol += str;
+		}
+		if (any)
+		{
+			symbol += ")";
+		}
+
+		if (check<cat_a<>>(result))
+		{
+			std::string const str = cast<cat_a<>>(result).to_string();
+			if (str != "<>")
+			{
+				symbol += str;
+			}
+		}
+
+		symbol += ">";
+		return symbol;
+	}
+
+	static inline bool _symbolic_(flock_a<> const& arguments, flock_a<> const& parameters, any_a<> const& result)
+	{
+		if (check<cat_a<>>(result) && !cast<cat_a<>>(result).symbolic())
+		{
+			return false;
+		}
+		for (auto const& argument : arguments)
+		{
+			if (!check<cat_a<>>(argument) || !cast<cat_a<>>(argument).symbolic())
+			{
+				return false;
+			}
+		}
+		for (auto const& parameter : parameters)
+		{
+			if (!cast<cat_a<>>(parameter).symbolic())
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 };
 
