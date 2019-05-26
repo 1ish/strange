@@ -69,11 +69,11 @@ public:
 			throw dis("strange::thing::visit passed empty range");
 		}
 		any_a<> visitor = *it;
-		return visitor.invoke__(range_t<>::val_(++it, range.cend()));
+		return visitor.invoke_(visitor, range_t<>::val_(++it, range.cend()));
 	}
 
 	// function
-	inline any_a<> invoke__(range_a<> const& range) const
+	static inline any_a<> invoke_(any_a<>& thing, range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
@@ -81,46 +81,28 @@ public:
 			throw dis("strange::thing::invoke passed empty range");
 		}
 		any_a<> member = *it;
-		return invoke_(member, range_t<>::val_(++it, range.cend()));
+		return invoke(thing, member, range_t<>::val_(++it, range.cend()));
 	}
 
-	inline any_a<> invoke_(any_a<> const& member, range_a<> const& range) const
+	static inline any_a<> invoke(any_a<>& thing, any_a<> const& member, range_a<> const& range)
 	{
-		any_a<> thing = me_(); //TODO ref?
-		any_a<> operation = thing.operations_().at_(member);
-		return operate_(thing, operation, range);
+		return operate(thing, thing.operations_().at_(member), range);
 	}
 
-	static inline any_a<> operate__(range_a<> const& range)
+	static inline any_a<> operate_(any_a<>& thing, range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin();
 		if (it == range.cend())
 		{
 			throw dis("strange::thing::operate passed empty range");
 		}
-		any_a<> thing = *it; //TODO ref?
-		if (++it == range.cend())
-		{
-			throw dis("strange::thing::visit passed short range");
-		}
 		any_a<> operation = *it;
-		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
+		return operate(thing, operation, range_t<>::val_(++it, range.cend()));
 	}
 
-	static inline any_a<> operate_(any_a<> const& thing, any_a<> const& operation, range_a<> const& range)
+	static inline any_a<> operate(any_a<>& thing, any_a<> const& operation, range_a<> const& range)
 	{
-		return operation.operator()(thing, range);
-	}
-
-	inline any_a<> operator()(any_a<> const& thing, range_a<> const& range) const
-	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
-		{
-			throw dis("strange::thing::operator() passed empty range");
-		}
-		any_a<> operation = thing.operations_().at_(*it);
-		return operate_(thing, operation, range_t<>::val_(++it, range.cend()));
+		return operation.operate_(thing, range);
 	}
 
 	// identification

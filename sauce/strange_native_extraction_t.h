@@ -7,12 +7,12 @@ namespace strange
 template <typename T, typename _ABSTRACTION_ = any_a<>>
 class native_extraction_t : public operation_t<_ABSTRACTION_>
 {
-	using member = any_a<>(T::*)(range_a<> const&) const;
+	using const_member = any_a<>(T::*)(range_a<> const&) const;
 
 public: ___STRANGE_THING___
 	// construction
 	template <typename... Args>
-	static inline any_a<> val(member const fun, Args&&... args)
+	static inline any_a<> val(const_member const fun, Args&&... args)
 	{
 		std::vector<symbol_a<>> v;
 		v.reserve(sizeof...(Args));
@@ -36,17 +36,18 @@ public: ___STRANGE_THING___
 	}
 
 	// function
-	inline any_a<> operator()(any_a<> const& thing, range_a<> const& range) const
+	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
-		return (cast<T>(thing).*_function)(range);
+		assert(dynamic_cast<T*>(&thing));
+		return (static_cast<T&>(thing).*_function)(range);
 	}
 
 protected:
-	member const _function;
+	const_member const _function;
 	std::vector<symbol_a<>> const _params;
 
 	template <typename F>
-	inline native_extraction_t(member const fun, F&& params)
+	inline native_extraction_t(const_member const fun, F&& params)
 		: operation_t{}
 		, _function{ fun }
 		, _params{ std::forward<F>(params) }

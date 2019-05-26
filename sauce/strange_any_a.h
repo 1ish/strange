@@ -136,16 +136,14 @@ namespace strange {
      { assert(handle_); return read().feeder__(range ); }
      inline any_a visit__ ( range_a const & range )
      { assert(handle_); return write().visit__(range ); }
-     inline any_a invoke__ ( range_a const & range ) const
-     { assert(handle_); return read().invoke__(range ); }
-     inline any_a invoke_ ( any_a const & member , range_a const & range ) const
-     { assert(handle_); return read().invoke_(member, range ); }
-     inline any_a operate__ ( range_a const & range ) const
-     { assert(handle_); return read().operate__(range ); }
-     inline any_a operate_ ( any_a const & thing , any_a const & operation , range_a const & range ) const
-     { assert(handle_); return read().operate_(thing, operation, range ); }
-     inline any_a operator ( ) ( any_a const & thing , range_a const & range ) const
-     { assert(handle_); return read().operator()(thing, range ); }
+     inline any_a invoke_ ( any_a & thing , range_a const & range ) const
+     { assert(handle_); return read().invoke_(thing, range ); }
+     inline any_a invoke ( any_a & thing , any_a const & member , range_a const & range ) const
+     { assert(handle_); return read().invoke(thing, member, range ); }
+     inline any_a operate_ ( any_a & thing , range_a const & range ) const
+     { assert(handle_); return read().operate_(thing, range ); }
+     inline any_a operate ( any_a & thing , any_a const & operation , range_a const & range ) const
+     { assert(handle_); return read().operate(thing, operation, range ); }
      inline void const * identity ( ) const
      { assert(handle_); return read().identity( ); }
      inline any_a identical__ ( range_a const & range ) const
@@ -244,11 +242,10 @@ namespace strange {
       virtual inline any_a eater_ ( ) const = 0;
       virtual inline any_a feeder__ ( range_a const & range ) const = 0;
       virtual inline any_a visit__ ( range_a const & range ) = 0;
-      virtual inline any_a invoke__ ( range_a const & range ) const = 0;
-      virtual inline any_a invoke_ ( any_a const & member , range_a const & range ) const = 0;
-      virtual inline any_a operate__ ( range_a const & range ) const = 0;
-      virtual inline any_a operate_ ( any_a const & thing , any_a const & operation , range_a const & range ) const = 0;
-      virtual inline any_a operator ( ) ( any_a const & thing , range_a const & range ) const = 0;
+      virtual inline any_a invoke_ ( any_a & thing , range_a const & range ) const = 0;
+      virtual inline any_a invoke ( any_a & thing , any_a const & member , range_a const & range ) const = 0;
+      virtual inline any_a operate_ ( any_a & thing , range_a const & range ) const = 0;
+      virtual inline any_a operate ( any_a & thing , any_a const & operation , range_a const & range ) const = 0;
       virtual inline void const * identity ( ) const = 0;
       virtual inline any_a identical__ ( range_a const & range ) const = 0;
       virtual inline any_a identical_ ( any_a const & thing ) const = 0;
@@ -368,16 +365,14 @@ namespace strange {
       { return value_.feeder__(range ); }
       virtual inline any_a visit__ ( range_a const & range )
       { return value_.visit__(range ); }
-      virtual inline any_a invoke__ ( range_a const & range ) const
-      { return value_.invoke__(range ); }
-      virtual inline any_a invoke_ ( any_a const & member , range_a const & range ) const
-      { return value_.invoke_(member, range ); }
-      virtual inline any_a operate__ ( range_a const & range ) const
-      { return value_.operate__(range ); }
-      virtual inline any_a operate_ ( any_a const & thing , any_a const & operation , range_a const & range ) const
-      { return value_.operate_(thing, operation, range ); }
-      virtual inline any_a operator ( ) ( any_a const & thing , range_a const & range ) const
-      { return value_.operator()(thing, range ); }
+      virtual inline any_a invoke_ ( any_a & thing , range_a const & range ) const
+      { return value_.invoke_(thing, range ); }
+      virtual inline any_a invoke ( any_a & thing , any_a const & member , range_a const & range ) const
+      { return value_.invoke(thing, member, range ); }
+      virtual inline any_a operate_ ( any_a & thing , range_a const & range ) const
+      { return value_.operate_(thing, range ); }
+      virtual inline any_a operate ( any_a & thing , any_a const & operation , range_a const & range ) const
+      { return value_.operate(thing, operation, range ); }
       virtual inline void const * identity ( ) const
       { return value_.identity( ); }
       virtual inline any_a identical__ ( range_a const & range ) const

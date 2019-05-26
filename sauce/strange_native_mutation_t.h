@@ -36,9 +36,10 @@ public: ___STRANGE_THING___
 	}
 
 	// function
-	inline any_a<> operator()(any_a<> const& thing, range_a<> const& range) const
+	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
-		return (cast<T>(thing).*_function)(range);
+		assert(dynamic_cast<T*>(&thing));
+		return (static_cast<T&>(thing).*_function)(range);
 	}
 
 protected:

@@ -36,7 +36,7 @@ public: ___STRANGE_THING___
 	}
 
 	// function
-	inline any_a<> operator()(any_a<> const& _, range_a<> const& range) const
+	inline any_a<> operate_(any_a<>& _, range_a<> const& range) const
 	{
 		return _function(range);
 	}
