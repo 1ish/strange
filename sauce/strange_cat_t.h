@@ -19,7 +19,12 @@ public: ___STRANGE_THING___
 		return val_(*it);
 	}
 
-	static inline cat_a<> val_(any_a<> const& thing = no())
+	static inline cat_a<> val_(any_a<> const& name = no())
+	{
+		return cat_a<>{ cat_t{} };
+	}
+
+	static inline cat_a<> val(std::string const& name)
 	{
 		return cat_a<>{ cat_t{} };
 	}

@@ -10,7 +10,7 @@ class reflection<unordered_shoal_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::unordered_shoal"));
+		static cat_a<> CAT = cat_t<>::val("strange::unordered_shoal");
 		return CAT;
 	}
 

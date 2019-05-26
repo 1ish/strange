@@ -10,7 +10,7 @@ class reflection<random_access_const_iterator_data_a<std::vector<any_a<>>::const
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_flock"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_flock");
 		return CAT;
 	}
 
@@ -37,7 +37,7 @@ class reflection<random_access_const_iterator_data_a<std::deque<any_a<>>::const_
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_squad"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_squad");
 		return CAT;
 	}
 
@@ -64,7 +64,7 @@ class reflection<random_access_const_iterator_data_a<std::vector<int8_t>::const_
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_lake_int_8"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_lake_int_8");
 		return CAT;
 	}
 
@@ -91,7 +91,7 @@ class reflection<random_access_const_iterator_data_a<std::deque<int8_t>::const_i
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_int_8"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_brook_int_8");
 		return CAT;
 	}
 
@@ -118,7 +118,7 @@ class reflection<random_access_const_iterator_data_a<std::vector<uint8_t>::const
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_lake_uint_8"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_lake_uint_8");
 		return CAT;
 	}
 
@@ -145,7 +145,7 @@ class reflection<random_access_const_iterator_data_a<std::deque<uint8_t>::const_
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_uint_8"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_brook_uint_8");
 		return CAT;
 	}
 
@@ -172,7 +172,7 @@ class reflection<random_access_const_iterator_data_a<std::vector<int16_t>::const
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_lake_int_16"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_lake_int_16");
 		return CAT;
 	}
 
@@ -199,7 +199,7 @@ class reflection<random_access_const_iterator_data_a<std::deque<int16_t>::const_
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_int_16"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_brook_int_16");
 		return CAT;
 	}
 
@@ -226,7 +226,7 @@ class reflection<random_access_const_iterator_data_a<std::vector<uint16_t>::cons
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_lake_uint_16"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_lake_uint_16");
 		return CAT;
 	}
 
@@ -253,7 +253,7 @@ class reflection<random_access_const_iterator_data_a<std::deque<uint16_t>::const
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_uint_16"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_brook_uint_16");
 		return CAT;
 	}
 
@@ -280,7 +280,7 @@ class reflection<random_access_const_iterator_data_a<std::vector<int32_t>::const
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_lake_int_32"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_lake_int_32");
 		return CAT;
 	}
 
@@ -307,7 +307,7 @@ class reflection<random_access_const_iterator_data_a<std::deque<int32_t>::const_
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_int_32"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_brook_int_32");
 		return CAT;
 	}
 
@@ -334,7 +334,7 @@ class reflection<random_access_const_iterator_data_a<std::vector<uint32_t>::cons
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_lake_uint_32"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_lake_uint_32");
 		return CAT;
 	}
 
@@ -361,7 +361,7 @@ class reflection<random_access_const_iterator_data_a<std::deque<uint32_t>::const
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_uint_32"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_brook_uint_32");
 		return CAT;
 	}
 
@@ -388,7 +388,7 @@ class reflection<random_access_const_iterator_data_a<std::vector<int64_t>::const
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_lake_int_64"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_lake_int_64");
 		return CAT;
 	}
 
@@ -415,7 +415,7 @@ class reflection<random_access_const_iterator_data_a<std::deque<int64_t>::const_
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_int_64"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_brook_int_64");
 		return CAT;
 	}
 
@@ -442,7 +442,7 @@ class reflection<random_access_const_iterator_data_a<std::vector<uint64_t>::cons
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_lake_uint_64"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_lake_uint_64");
 		return CAT;
 	}
 
@@ -469,7 +469,7 @@ class reflection<random_access_const_iterator_data_a<std::deque<uint64_t>::const
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_uint_64"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_brook_uint_64");
 		return CAT;
 	}
 
@@ -496,7 +496,7 @@ class reflection<random_access_const_iterator_data_a<std::vector<float>::const_i
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_lake_float_32"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_lake_float_32");
 		return CAT;
 	}
 
@@ -523,7 +523,7 @@ class reflection<random_access_const_iterator_data_a<std::deque<float>::const_it
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_float_32"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_brook_float_32");
 		return CAT;
 	}
 
@@ -550,7 +550,7 @@ class reflection<random_access_const_iterator_data_a<std::vector<double>::const_
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_lake_float_64"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_lake_float_64");
 		return CAT;
 	}
 
@@ -577,7 +577,7 @@ class reflection<random_access_const_iterator_data_a<std::deque<double>::const_i
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_const_iterator_data_brook_float_64"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_const_iterator_data_brook_float_64");
 		return CAT;
 	}
 

@@ -10,7 +10,7 @@ class reflection<misunderstanding_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::misunderstanding"));
+		static cat_a<> CAT = cat_t<>::val("strange::misunderstanding");
 		return CAT;
 	}
 

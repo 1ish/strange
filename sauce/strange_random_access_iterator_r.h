@@ -10,7 +10,7 @@ class reflection<random_access_iterator_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::random_access_iterator"));
+		static cat_a<> CAT = cat_t<>::val("strange::random_access_iterator");
 		return CAT;
 	}
 

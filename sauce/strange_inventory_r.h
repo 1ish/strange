@@ -10,7 +10,7 @@ class reflection<inventory_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::inventory"));
+		static cat_a<> CAT = cat_t<>::val("strange::inventory");
 		return CAT;
 	}
 

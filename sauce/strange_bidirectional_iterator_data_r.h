@@ -10,7 +10,7 @@ class reflection<bidirectional_iterator_data_a<std::map<any_a<>, any_a<>>::itera
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::bidirectional_iterator_data_shoal"));
+		static cat_a<> CAT = cat_t<>::val("strange::bidirectional_iterator_data_shoal");
 		return CAT;
 	}
 

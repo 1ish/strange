@@ -10,7 +10,7 @@ class reflection<range_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::range"));
+		static cat_a<> CAT = cat_t<>::val("strange::range");
 		return CAT;
 	}
 

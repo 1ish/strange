@@ -10,7 +10,7 @@ class reflection<bidirectional_iterator_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::bidirectional_iterator"));
+		static cat_a<> CAT = cat_t<>::val("strange::bidirectional_iterator");
 		return CAT;
 	}
 

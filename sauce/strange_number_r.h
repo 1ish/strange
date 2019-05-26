@@ -10,7 +10,7 @@ class reflection<number_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::number"));
+		static cat_a<> CAT = cat_t<>::val("strange::number");
 		return CAT;
 	}
 

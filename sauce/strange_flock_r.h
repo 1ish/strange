@@ -10,7 +10,7 @@ class reflection<flock_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val_(sym("strange::flock"));
+		static cat_a<> CAT = cat_t<>::val("strange::flock");
 		return CAT;
 	}
 
