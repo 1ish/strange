@@ -10,17 +10,9 @@ inline any_a<> cbegin__(range_a<> const&) const \
 { \
 return cbegin_(); \
 } \
-inline forward_const_iterator_a<> cbegin_() const \
-{ \
-return cbegin(); \
-} \
 inline any_a<> cend__(range_a<> const&) const \
 { \
 return cend_(); \
-} \
-inline forward_const_iterator_a<> cend_() const \
-{ \
-return cend(); \
 } \
 
 template <typename _ABSTRACTION_ = range_a<>>
@@ -69,22 +61,12 @@ public: ___STRANGE_RANGE___
 	}
 
 	// range
-	inline forward_const_iterator_a<> cbegin() const
+	inline forward_const_iterator_a<> cbegin_() const
 	{
 		return _begin;
 	}
 
-	inline forward_const_iterator_a<> begin() const
-	{
-		return _begin;
-	}
-
-	inline forward_const_iterator_a<> cend() const
-	{
-		return _end;
-	}
-
-	inline forward_const_iterator_a<> end() const
+	inline forward_const_iterator_a<> cend_() const
 	{
 		return _end;
 	}

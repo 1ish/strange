@@ -351,14 +351,14 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// range
-	inline forward_const_iterator_a<> cbegin() const
+	inline forward_const_iterator_a<> cbegin_() const
 	{
 		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val(me_(), _map.cbegin());
 	}
 
-	inline forward_const_iterator_a<> begin() const
+	inline forward_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val(me_(), _map.cbegin());
+		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val(me_(), _map.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -368,22 +368,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline forward_iterator_a<> begin_()
 	{
-		return begin();
-	}
-
-	inline forward_iterator_a<> begin()
-	{
 		return iterator_t<std_unordered_map_any_any::iterator>::val(me_(), _map.begin());
-	}
-
-	inline forward_const_iterator_a<> cend() const
-	{
-		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val(me_(), _map.cend());
-	}
-
-	inline forward_const_iterator_a<> end() const
-	{
-		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val(me_(), _map.cend());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -392,11 +377,6 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	inline forward_iterator_a<> end_()
-	{
-		return end();
-	}
-
-	inline forward_iterator_a<> end()
 	{
 		return iterator_t<std_unordered_map_any_any::iterator>::val(me_(), _map.end());
 	}

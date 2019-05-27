@@ -222,22 +222,12 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// range
-	inline bidirectional_const_iterator_a<> cbegin() const
+	inline bidirectional_const_iterator_a<> cbegin_() const
 	{
 		return const_iterator_t<std_set_any::const_iterator>::val(me_(), _set.cbegin());
 	}
 
-	inline bidirectional_const_iterator_a<> begin() const
-	{
-		return const_iterator_t<std_set_any::const_iterator>::val(me_(), _set.cbegin());
-	}
-
-	inline bidirectional_const_iterator_a<> cend() const
-	{
-		return const_iterator_t<std_set_any::const_iterator>::val(me_(), _set.cend());
-	}
-
-	inline bidirectional_const_iterator_a<> end() const
+	inline bidirectional_const_iterator_a<> cend_() const
 	{
 		return const_iterator_t<std_set_any::const_iterator>::val(me_(), _set.cend());
 	}

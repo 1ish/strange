@@ -814,14 +814,14 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// range
-	inline random_access_const_iterator_a<> cbegin() const
+	inline random_access_const_iterator_a<> cbegin_() const
 	{
 		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cbegin());
 	}
 
-	inline random_access_const_iterator_a<> begin() const
+	inline random_access_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cbegin());
+		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -831,22 +831,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> begin_()
 	{
-		return begin();
-	}
-
-	inline random_access_iterator_a<> begin()
-	{
 		return iterator_t<std_deque_number::iterator>::val(me_(), _deque.begin());
-	}
-
-	inline random_access_const_iterator_a<> cend() const
-	{
-		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cend());
-	}
-
-	inline random_access_const_iterator_a<> end() const
-	{
-		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cend());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -855,11 +840,6 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	inline random_access_iterator_a<> end_()
-	{
-		return end();
-	}
-
-	inline random_access_iterator_a<> end()
 	{
 		return iterator_t<std_deque_number::iterator>::val(me_(), _deque.end());
 	}
