@@ -7,11 +7,12 @@
 
 #include "any_forward.hpp"
 #include "range_forward.hpp"
+#include "random_access_iterator_forward.hpp"
 
 namespace strange
 {
 
-template <typename random_access_iterator_a>
+template <typename _1_>
 class inventory_a
 {
 public:
@@ -24,12 +25,12 @@ public:
 
 	// mutable range
 	inline any_a<> begin__(range_a<> const& _);
-	inline random_access_iterator_a begin_();
-	inline random_access_iterator_a begin();
+	inline random_access_iterator_a<> begin_();
+	inline random_access_iterator_a<> begin();
 
 	inline any_a<> end__(range_a<> const& _);
-	inline random_access_iterator_a end_();
-	inline random_access_iterator_a end();
+	inline random_access_iterator_a<> end_();
+	inline random_access_iterator_a<> end();
 };
 
 } // namespace strange

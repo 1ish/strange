@@ -3,6 +3,7 @@
 
  //#include "any_forward.hpp"
  //#include "range_forward.hpp"
+ //#include "random_access_iterator_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -12,7 +13,7 @@
 
 
 namespace strange {
-    template < typename random_access_iterator_a >
+    template < typename _1_ >
     class inventory_a : public ___derived___
     {
     public:
@@ -93,15 +94,15 @@ namespace strange {
      { assert(handle_); return write().erase(index ); }
      inline any_a < > begin__ ( range_a < > const & _ )
      { assert(handle_); return write().begin__(_ ); }
-     inline random_access_iterator_a begin_ ( )
+     inline random_access_iterator_a < > begin_ ( )
      { assert(handle_); return write().begin_( ); }
-     inline random_access_iterator_a begin ( )
+     inline random_access_iterator_a < > begin ( )
      { assert(handle_); return write().begin( ); }
      inline any_a < > end__ ( range_a < > const & _ )
      { assert(handle_); return write().end__(_ ); }
-     inline random_access_iterator_a end_ ( )
+     inline random_access_iterator_a < > end_ ( )
      { assert(handle_); return write().end_( ); }
-     inline random_access_iterator_a end ( )
+     inline random_access_iterator_a < > end ( )
      { assert(handle_); return write().end( ); }
     
     protected:
@@ -113,11 +114,11 @@ namespace strange {
       virtual inline bool insert ( int64_t index , any_a < > const & value ) = 0;
       virtual inline bool erase ( int64_t index ) = 0;
       virtual inline any_a < > begin__ ( range_a < > const & _ ) = 0;
-      virtual inline random_access_iterator_a begin_ ( ) = 0;
-      virtual inline random_access_iterator_a begin ( ) = 0;
+      virtual inline random_access_iterator_a < > begin_ ( ) = 0;
+      virtual inline random_access_iterator_a < > begin ( ) = 0;
       virtual inline any_a < > end__ ( range_a < > const & _ ) = 0;
-      virtual inline random_access_iterator_a end_ ( ) = 0;
-      virtual inline random_access_iterator_a end ( ) = 0;
+      virtual inline random_access_iterator_a < > end_ ( ) = 0;
+      virtual inline random_access_iterator_a < > end ( ) = 0;
     	};
     
     	template <typename ___TTT___, typename ___DDDHB___ = ___ddderived_handle_base___>
@@ -145,15 +146,15 @@ namespace strange {
       { return value_.erase(index ); }
       virtual inline any_a < > begin__ ( range_a < > const & _ )
       { return value_.begin__(_ ); }
-      virtual inline random_access_iterator_a begin_ ( )
+      virtual inline random_access_iterator_a < > begin_ ( )
       { return value_.begin_( ); }
-      virtual inline random_access_iterator_a begin ( )
+      virtual inline random_access_iterator_a < > begin ( )
       { return value_.begin( ); }
       virtual inline any_a < > end__ ( range_a < > const & _ )
       { return value_.end__(_ ); }
-      virtual inline random_access_iterator_a end_ ( )
+      virtual inline random_access_iterator_a < > end_ ( )
       { return value_.end_( ); }
-      virtual inline random_access_iterator_a end ( )
+      virtual inline random_access_iterator_a < > end ( )
       { return value_.end( ); }
     	};
     

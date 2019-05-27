@@ -6,7 +6,7 @@
 namespace strange
 {
 
-template <typename forward_iterator_a = forward_iterator_a<>>
+template <typename _1_ = void>
 class shoal_a;
 
 } // namespace strange

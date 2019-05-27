@@ -6,7 +6,7 @@
 namespace strange
 {
 
-template <typename random_access_iterator_a = random_access_iterator_a<>>
+template <typename _1_ = void>
 class inventory_a;
 
 } // namespace strange

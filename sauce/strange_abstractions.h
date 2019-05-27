@@ -22,6 +22,30 @@ template <typename _1_>
 class forward_iterator_data_a;
 
 template <typename _1_ = void>
+class bidirectional_const_iterator_a;
+
+template <typename _1_>
+class bidirectional_const_iterator_data_a;
+
+template <typename _1_ = void>
+class bidirectional_iterator_a;
+
+template <typename _1_>
+class bidirectional_iterator_data_a;
+
+template <typename _1_ = void>
+class random_access_const_iterator_a;
+
+template <typename _1_>
+class random_access_const_iterator_data_a;
+
+template <typename _1_ = void>
+class random_access_iterator_a;
+
+template <typename _1_>
+class random_access_iterator_data_a;
+
+template <typename _1_ = void>
 class misunderstanding_a;
 
 template <typename _1_ = void>
@@ -33,7 +57,7 @@ class collection_a;
 template <typename number_data_a_int8 = number_data_a<int8_t>, typename number_data_a_int64 = number_data_a<int64_t>, typename lake_a_int8 = lake_a<int8_t>>
 class river_a;
 
-template <typename forward_iterator_a = forward_iterator_a<>>
+template <typename _1_ = void>
 class shoal_a;
 
 template <typename _1_ = void>
@@ -66,7 +90,7 @@ class number_a;
 template <typename _1_>
 class number_data_a;
 
-template <typename random_access_iterator_a = random_access_iterator_a<>>
+template <typename _1_ = void>
 class inventory_a;
 
 template <typename _1_>
@@ -74,30 +98,6 @@ class lake_a;
 
 template <typename _1_>
 class brook_a;
-
-template <typename _1_ = void>
-class bidirectional_const_iterator_a;
-
-template <typename _1_>
-class bidirectional_const_iterator_data_a;
-
-template <typename _1_ = void>
-class bidirectional_iterator_a;
-
-template <typename _1_>
-class bidirectional_iterator_data_a;
-
-template <typename _1_ = void>
-class random_access_const_iterator_a;
-
-template <typename _1_>
-class random_access_const_iterator_data_a;
-
-template <typename _1_ = void>
-class random_access_iterator_a;
-
-template <typename _1_>
-class random_access_iterator_data_a;
 
 template <typename _1_ = void>
 class cat_a;
@@ -120,6 +120,30 @@ class cat_a;
 
 #define ___derived___ forward_iterator_a<>
 #include "strange_forward_iterator_data_a.h"
+
+#define ___derived___ forward_const_iterator_a<>
+#include "strange_bidirectional_const_iterator_a.h"
+
+#define ___derived___ bidirectional_const_iterator_a<>
+#include "strange_bidirectional_const_iterator_data_a.h"
+
+#define ___derived___ forward_iterator_a<>
+#include "strange_bidirectional_iterator_a.h"
+
+#define ___derived___ bidirectional_iterator_a<>
+#include "strange_bidirectional_iterator_data_a.h"
+
+#define ___derived___ bidirectional_const_iterator_a<>
+#include "strange_random_access_const_iterator_a.h"
+
+#define ___derived___ random_access_const_iterator_a<>
+#include "strange_random_access_const_iterator_data_a.h"
+
+#define ___derived___ bidirectional_iterator_a<>
+#include "strange_random_access_iterator_a.h"
+
+#define ___derived___ random_access_iterator_a<>
+#include "strange_random_access_iterator_data_a.h"
 
 #include "strange_misunderstanding_a.h"
 
@@ -171,32 +195,13 @@ class cat_a;
 #define ___derived___ inventory_a<>
 #include "strange_brook_a.h"
 
-#define ___derived___ forward_const_iterator_a<>
-#include "strange_bidirectional_const_iterator_a.h"
-
-#define ___derived___ bidirectional_const_iterator_a<>
-#include "strange_bidirectional_const_iterator_data_a.h"
-
-#define ___derived___ forward_iterator_a<>
-#include "strange_bidirectional_iterator_a.h"
-
-#define ___derived___ bidirectional_iterator_a<>
-#include "strange_bidirectional_iterator_data_a.h"
-
-#define ___derived___ bidirectional_const_iterator_a<>
-#include "strange_random_access_const_iterator_a.h"
-
-#define ___derived___ random_access_const_iterator_a<>
-#include "strange_random_access_const_iterator_data_a.h"
-
-#define ___derived___ bidirectional_iterator_a<>
-#include "strange_random_access_iterator_a.h"
-
-#define ___derived___ random_access_iterator_a<>
-#include "strange_random_access_iterator_data_a.h"
-
 #define ___derived___ symbol_a<>
 #include "strange_cat_a.h"
+
+namespace strange
+{
+
+}
 
 #undef ___root___
 #undef ___derived___
