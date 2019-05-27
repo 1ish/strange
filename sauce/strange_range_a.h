@@ -87,16 +87,12 @@ namespace strange {
      { assert(handle_); return read().cbegin_( ); }
      inline forward_const_iterator_a < > cbegin ( ) const
      { assert(handle_); return read().cbegin( ); }
-     inline forward_const_iterator_a < > begin ( ) const
-     { assert(handle_); return read().begin( ); }
      inline any_a < > cend__ ( range_a const & _ ) const
      { assert(handle_); return read().cend__(_ ); }
      inline forward_const_iterator_a < > cend_ ( ) const
      { assert(handle_); return read().cend_( ); }
      inline forward_const_iterator_a < > cend ( ) const
      { assert(handle_); return read().cend( ); }
-     inline forward_const_iterator_a < > end ( ) const
-     { assert(handle_); return read().end( ); }
     
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
@@ -104,11 +100,9 @@ namespace strange {
       virtual inline any_a < > cbegin__ ( range_a const & _ ) const = 0;
       virtual inline forward_const_iterator_a < > cbegin_ ( ) const = 0;
       virtual inline forward_const_iterator_a < > cbegin ( ) const = 0;
-      virtual inline forward_const_iterator_a < > begin ( ) const = 0;
       virtual inline any_a < > cend__ ( range_a const & _ ) const = 0;
       virtual inline forward_const_iterator_a < > cend_ ( ) const = 0;
       virtual inline forward_const_iterator_a < > cend ( ) const = 0;
-      virtual inline forward_const_iterator_a < > end ( ) const = 0;
     	};
     
     	template <typename ___TTT___, typename ___DHB___ = ___derived_handle_base___>
@@ -130,16 +124,12 @@ namespace strange {
       { return value_.cbegin_( ); }
       virtual inline forward_const_iterator_a < > cbegin ( ) const
       { return value_.cbegin( ); }
-      virtual inline forward_const_iterator_a < > begin ( ) const
-      { return value_.begin( ); }
       virtual inline any_a < > cend__ ( range_a const & _ ) const
       { return value_.cend__(_ ); }
       virtual inline forward_const_iterator_a < > cend_ ( ) const
       { return value_.cend_( ); }
       virtual inline forward_const_iterator_a < > cend ( ) const
       { return value_.cend( ); }
-      virtual inline forward_const_iterator_a < > end ( ) const
-      { return value_.end( ); }
     	};
     
     	template <typename ___TTT___, typename ___DHB___>

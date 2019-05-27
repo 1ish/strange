@@ -26,11 +26,9 @@ public:
 	// mutable range
 	inline any_a<> begin__(range_a<> const& _);
 	inline forward_iterator_a<> begin_();
-	inline forward_iterator_a<> begin();
 
 	inline any_a<> end__(range_a<> const& _);
 	inline forward_iterator_a<> end_();
-	inline forward_iterator_a<> end();
 };
 
 } // namespace strange

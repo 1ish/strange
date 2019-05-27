@@ -19,12 +19,10 @@ public:
 	inline any_a<> cbegin__(range_a const& _) const;
 	inline forward_const_iterator_a<> cbegin_() const;
 	inline forward_const_iterator_a<> cbegin() const;
-	inline forward_const_iterator_a<> begin() const;
 
 	inline any_a<> cend__(range_a const& _) const;
 	inline forward_const_iterator_a<> cend_() const;
 	inline forward_const_iterator_a<> cend() const;
-	inline forward_const_iterator_a<> end() const;
 };
 
 } // namespace strange

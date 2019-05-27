@@ -200,7 +200,76 @@ class cat_a;
 
 namespace strange
 {
+	inline forward_const_iterator_a<> begin(range_a<> const& range)
+	{
+		return range.cbegin_();
+	}
 
+	inline forward_const_iterator_a<> end(range_a<> const& range)
+	{
+		return range.cend_();
+	}
+
+	inline forward_const_iterator_a<> begin(shoal_a<> const& shoal)
+	{
+		return shoal.cbegin_();
+	}
+
+	inline forward_const_iterator_a<> end(shoal_a<> const& shoal)
+	{
+		return shoal.cend_();
+	}
+
+	inline forward_iterator_a<> begin(shoal_a<>& shoal)
+	{
+		return shoal.begin_();
+	}
+
+	inline forward_iterator_a<> end(shoal_a<>& shoal)
+	{
+		return shoal.end_();
+	}
+
+	inline forward_const_iterator_a<> begin(inventory_a<> const& inventory)
+	{
+		return inventory.cbegin_();
+	}
+
+	inline forward_const_iterator_a<> end(inventory_a<> const& inventory)
+	{
+		return inventory.cend_();
+	}
+
+	inline random_access_iterator_a<> begin(inventory_a<>& inventory)
+	{
+		return inventory.begin_();
+	}
+
+	inline random_access_iterator_a<> end(inventory_a<>& inventory)
+	{
+		return inventory.end_();
+	}
+	/*
+	inline forward_const_iterator_a<> begin(flock_a<> const& flock)
+	{
+		return flock.cbegin_();
+	}
+
+	inline forward_const_iterator_a<> end(flock_a<> const& flock)
+	{
+		return flock.cend_();
+	}
+
+	inline random_access_iterator_a<> begin(flock_a<>& flock)
+	{
+		return flock.begin_();
+	}
+
+	inline random_access_iterator_a<> end(flock_a<>& flock)
+	{
+		return flock.end_();
+	}
+	*/
 }
 
 #undef ___root___

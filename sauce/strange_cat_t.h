@@ -178,7 +178,7 @@ protected:
 
 		bool any = false;
 		int64_t anys = 0;
-		for (auto const& argument : cast<range_a<>>(arguments)) //TODO no cast
+		for (auto const& argument : arguments)
 		{
 			bool const is_cat = check<cat_a<>>(argument);
 			cat_a<> cat;
@@ -222,7 +222,7 @@ protected:
 		}
 
 		anys = 0;
-		for (auto const& parameter : cast<range_a<>>(parameters)) //TODO no cast
+		for (auto const& parameter : parameters)
 		{
 			cat_a<> const cat = cast<cat_a<>>(parameter);
 			std::string const str = cat.to_string();
@@ -271,14 +271,14 @@ protected:
 		{
 			return false;
 		}
-		for (auto const& argument : cast<range_a<>>(arguments)) //TODO no cast
+		for (auto const& argument : arguments)
 		{
 			if (!check<cat_a<>>(argument) || !cast<cat_a<>>(argument).symbolic())
 			{
 				return false;
 			}
 		}
-		for (auto const& parameter : cast<range_a<>>(parameters)) //TODO no cast
+		for (auto const& parameter : parameters)
 		{
 			if (!cast<cat_a<>>(parameter).symbolic())
 			{
