@@ -43,7 +43,12 @@ public: ___STRANGE_THING___
 		{
 			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments), cast<flock_a<>>(parameters));
 		}
-		return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments), cast<flock_a<>>(parameters), *it);
+		any_a<> result = *it;
+		if (!check<symbol_a<>>(result))
+		{
+			throw dis("strange::cat::val passed non-symbol result");
+		}
+		return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
 	}
 
 	static inline cat_a<> val_()
@@ -52,12 +57,12 @@ public: ___STRANGE_THING___
 		return ANY;
 	}
 
-	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), any_a<> const& result = no())
+	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = sym(""))
 	{
 		return cat_a<>{ cat_t(name, arguments, parameters, result) };
 	}
 
-	static inline cat_a<> val(std::string const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), any_a<> const& result = no())
+	static inline cat_a<> val(std::string const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = sym(""))
 	{
 		return val_(sym(name), arguments, parameters, result);
 	}
@@ -73,7 +78,80 @@ public: ___STRANGE_THING___
 		reflection<cat_t<>>::share(shoal);
 	}
 
-	//TODO comparison
+	// comparison
+	/*
+	inline bool operator==(any_a<> const& thing) const
+	{
+		if (!check<cat_a<>>(thing))
+		{
+			return false;
+		}
+		auto cat = cast<cat_a<>>(thing);
+		if (_symbolic != cat.symbolic() || _hash != cat.hash())
+		{
+			return false;
+		}
+		if (_symbolic)
+		{
+			return symbol_t<_ABSTRACTION_>::operator==(thing);
+		}
+		if (_name != cat.name_())
+		{
+			return false;
+		}
+		if (_return_cat && other_cat->_return_cat)
+		{
+			if (!_return_cat->same_(other_cat->_return_cat))
+			{
+				return false;
+			}
+		}
+		else if (_return_cat || other_cat->_return_cat)
+		{
+			return false;
+		}
+		{
+			const Ptr args = _arguments->iterator_();
+			const Ptr other_args = other_cat->_arguments->iterator_();
+			Ptr other_arg = other_args->next_();
+			for (Ptr arg = args->next_(); !arg->is_stop_(); arg = args->next_())
+			{
+				if (other_arg->is_stop_() || !arg->same_(other_arg))
+				{
+					return false;
+				}
+				other_arg = other_args->next_();
+			}
+			if (!other_arg->is_stop_())
+			{
+				return false;
+			}
+		}
+		{
+			const Ptr params = _parameters->iterator_();
+			const Ptr other_params = other_cat->_parameters->iterator_();
+			Ptr other_param = other_params->next_();
+			for (Ptr param = params->next_(); !param->is_stop_(); param = params->next_())
+			{
+				if (other_param->is_stop_() || !param->same_(other_param))
+				{
+					return false;
+				}
+				other_param = other_params->next_();
+			}
+			if (!other_param->is_stop_())
+			{
+				return false;
+			}
+		}
+		return true;
+
+	}
+	*/
+	inline bool operator!=(any_a<> const& thing) const
+	{
+		return !operator==(thing);
+	}
 
 	// cat
 	inline any_a<> symbolic__(range_a<> const& _) const
@@ -197,18 +275,18 @@ protected:
 	symbol_a<> const _name;
 	flock_a<> const _arguments;
 	flock_a<> const _parameters;
-	any_a<> const _result;
+	symbol_a<> const _result;
 
-	inline cat_t(symbol_a<> const& name, flock_a<> const& arguments, flock_a<> const& parameters, any_a<> const& result)
+	inline cat_t(symbol_a<> const& name, flock_a<> const& arguments, flock_a<> const& parameters, symbol_a<> const& result)
 		: symbol_t{ _symbol_(name, arguments, parameters, result) }
 		, _symbolic{ _symbolic_(arguments, parameters, result) }
 		, _name{ name }
 		, _arguments{ arguments }
 		, _parameters{ parameters }
-		, _result{ result }
+		, _result{ _result_(result) }
 	{}
 
-	static inline std::string const _symbol_(symbol_a<> const& name, flock_a<> const& arguments, flock_a<> const& parameters, any_a<> const& result)
+	static inline std::string const _symbol_(symbol_a<> const& name, flock_a<> const& arguments, flock_a<> const& parameters, symbol_a<> const& result)
 	{
 		std::string symbol = "<" + name.to_string();
 
@@ -290,7 +368,7 @@ protected:
 
 		if (check<cat_a<>>(result))
 		{
-			std::string const str = cast<cat_a<>>(result).to_string();
+			std::string const& str = result.to_string();
 			if (str != "<>")
 			{
 				symbol += str;
@@ -301,7 +379,7 @@ protected:
 		return symbol;
 	}
 
-	static inline bool _symbolic_(flock_a<> const& arguments, flock_a<> const& parameters, any_a<> const& result)
+	static inline bool _symbolic_(flock_a<> const& arguments, flock_a<> const& parameters, symbol_a<> const& result)
 	{
 		if (check<cat_a<>>(result) && !cast<cat_a<>>(result).symbolic())
 		{
@@ -322,6 +400,11 @@ protected:
 			}
 		}
 		return true;
+	}
+
+	static inline symbol_a<> _result_(symbol_a<> const& result)
+	{
+		return (check<cat_a<>>(result) && result.to_string() != "<>") ? result : sym("<>");
 	}
 };
 
