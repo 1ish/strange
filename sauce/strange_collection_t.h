@@ -8,8 +8,8 @@ namespace strange
 #define ___STRANGE_COLLECTION___ ___STRANGE_RANGE___ \
 inline any_a<> has__(range_a<> const& range) const \
 { \
-	forward_const_iterator_a<> it = range.cbegin(); \
-	if (it == range.cend()) \
+	forward_const_iterator_a<> it = range.cbegin_(); \
+	if (it == range.cend_()) \
 	{ \
 		throw dis("[collection] has passed empty range"); \
 	} \
@@ -21,8 +21,8 @@ inline any_a<> has_(any_a<> const& key) const \
 } \
 inline any_a<> at__(range_a<> const& range) const \
 { \
-	forward_const_iterator_a<> it = range.cbegin(); \
-	if (it == range.cend()) \
+	forward_const_iterator_a<> it = range.cbegin_(); \
+	if (it == range.cend_()) \
 	{ \
 		throw dis("[collection] at passed empty range"); \
 	} \
@@ -30,13 +30,13 @@ inline any_a<> at__(range_a<> const& range) const \
 } \
 inline any_a<> update__(range_a<> const& range) \
 { \
-	forward_const_iterator_a<> it = range.cbegin(); \
-	if (it == range.cend()) \
+	forward_const_iterator_a<> it = range.cbegin_(); \
+	if (it == range.cend_()) \
 	{ \
 		throw dis("[collection] update passed empty range"); \
 	} \
 	any_a<> key = *it; \
-	if (++it == range.cend()) \
+	if (++it == range.cend_()) \
 	{ \
 		return update_(key, key); \
 	} \
@@ -49,13 +49,13 @@ inline any_a<> update_(any_a<> const& key, any_a<> const& value) \
 } \
 inline any_a<> insert__(range_a<> const& range) \
 { \
-	forward_const_iterator_a<> it = range.cbegin(); \
-	if (it == range.cend()) \
+	forward_const_iterator_a<> it = range.cbegin_(); \
+	if (it == range.cend_()) \
 	{ \
 		throw dis("[collection] insert passed empty range"); \
 	} \
 	any_a<> key = *it; \
-	if (++it == range.cend()) \
+	if (++it == range.cend_()) \
 	{ \
 		return insert_(key, key); \
 	} \

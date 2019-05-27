@@ -38,12 +38,12 @@ public: ___STRANGE_THING___
 	// function
 	inline any_a<> operate__(range_a<> const& range) const
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			throw dis("strange::native_function::operate passed empty range");
 		}
-		return operate_(it, range_t<>::val_(++it, range.cend()));
+		return operate_(it, range_t<>::val_(++it, range.cend_()));
 	}
 
 	inline any_a<> operate_(any_a<>& _, range_a<> const& range) const

@@ -11,8 +11,8 @@ public: ___STRANGE_THING___
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			return val_();
 		}
@@ -103,8 +103,8 @@ public: ___STRANGE_THING___
 
 	inline any_a<> includes__(range_a<> const& range) const
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			throw dis("strange::cat::includes passed empty range");
 		}
@@ -123,13 +123,13 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> conforms__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			throw dis("strange::cat::conforms passed empty range");
 		}
 		any_a<> thing = *it;
-		if (++it == range.cend())
+		if (++it == range.cend_())
 		{
 			throw dis("strange::cat::conforms passed short range");
 		}

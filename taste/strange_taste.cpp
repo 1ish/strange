@@ -60,13 +60,13 @@ TEST(TestCaseName, ForLoop)
 		std::cout << "caught: " << m.to_string() << std::endl;
 	}
 
-	auto it = flock.cbegin();
+	auto it = flock.cbegin_();
 	if (check<random_access_const_iterator_data_a<std::vector<any_a<>>::const_iterator>>(it))
 	{
 		std::cout << "checked ok" << std::endl;
 		random_access_const_iterator_data_a<std::vector<any_a<>>::const_iterator> data =
 			cast<random_access_const_iterator_data_a<std::vector<any_a<>>::const_iterator>>(it);
-		std::cout << "data: " << (data == flock.cend()) << std::endl;
+		std::cout << "data: " << (data == flock.cend_()) << std::endl;
 	}
 
 	number_a<> num = number_int_64_t<>::val(-123);

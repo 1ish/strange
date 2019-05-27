@@ -30,8 +30,8 @@ public: ___STRANGE_RANGE___
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			throw dis("strange::range::val passed empty range");
 		}
@@ -40,7 +40,7 @@ public: ___STRANGE_RANGE___
 		{
 			throw dis("strange::range::val passed non-iterator begin");
 		}
-		if (++it == range.cend())
+		if (++it == range.cend_())
 		{
 			throw dis("strange::range::val passed short range");
 		}

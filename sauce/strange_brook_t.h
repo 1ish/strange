@@ -65,8 +65,8 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> set__(range_a<> const& range) const
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				throw dis("strange::brook::iterator set passed empty range");
 			}
@@ -240,8 +240,8 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> less_than__(range_a<> const& range) const
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				throw dis("strange::brook::iterator::less_than passed empty range");
 			}
@@ -269,8 +269,8 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> greater_than__(range_a<> const& range) const
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				throw dis("strange::brook::iterator::greater_than passed empty range");
 			}
@@ -298,8 +298,8 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> less_or_equal__(range_a<> const& range) const
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				throw dis("strange::brook::iterator::less_or_equal passed empty range");
 			}
@@ -327,8 +327,8 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> greater_or_equal__(range_a<> const& range) const
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				throw dis("strange::brook::iterator::greater_or_equal passed empty range");
 			}
@@ -598,8 +598,8 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> less_than__(range_a<> const& range) const
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				throw dis("strange::brook::const_iterator::less_than passed empty range");
 			}
@@ -627,8 +627,8 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> greater_than__(range_a<> const& range) const
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				throw dis("strange::brook::const_iterator::greater_than passed empty range");
 			}
@@ -656,8 +656,8 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> less_or_equal__(range_a<> const& range) const
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				throw dis("strange::brook::const_iterator::less_or_equal passed empty range");
 			}
@@ -685,8 +685,8 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> greater_or_equal__(range_a<> const& range) const
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				throw dis("strange::brook::const_iterator::greater_or_equal passed empty range");
 			}

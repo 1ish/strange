@@ -388,8 +388,8 @@ public: ___STRANGE_THING___
 
 	inline any_a<> from_int_64__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			throw dis("strange::number::from_int_64 passed empty range");
 		}
@@ -429,8 +429,8 @@ public: ___STRANGE_THING___
 
 	inline any_a<> from_uint_64__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			throw dis("strange::number::from_uint_64 passed empty range");
 		}
@@ -470,8 +470,8 @@ public: ___STRANGE_THING___
 
 	inline any_a<> from_float_64__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			throw dis("strange::number::from_float_64 passed empty range");
 		}
@@ -496,8 +496,8 @@ public: ___STRANGE_THING___
 
 	inline any_a<> less_than__(range_a<> const& range) const
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			throw dis("strange::number::less_than passed empty range");
 		}
@@ -521,8 +521,8 @@ public: ___STRANGE_THING___
 
 	inline any_a<> greater_than__(range_a<> const& range) const
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			throw dis("strange::number::greater_than passed empty range");
 		}
@@ -546,8 +546,8 @@ public: ___STRANGE_THING___
 
 	inline any_a<> less_or_equal__(range_a<> const& range) const
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			throw dis("strange::number::less_or_equal passed empty range");
 		}
@@ -571,8 +571,8 @@ public: ___STRANGE_THING___
 
 	inline any_a<> greater_or_equal__(range_a<> const& range) const
 	{
-		forward_const_iterator_a<> it = range.cbegin();
-		if (it == range.cend())
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
 		{
 			throw dis("strange::number::greater_or_equal passed empty range");
 		}

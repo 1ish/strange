@@ -152,8 +152,8 @@ namespace strange
 
 		static inline any_a<> file__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				throw dis("strange::river::file passed empty range");
 			}
@@ -346,8 +346,8 @@ namespace strange
 
 		inline any_a<> getline__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return getline_();
 			}
@@ -356,7 +356,7 @@ namespace strange
 			{
 				throw dis("strange::river::getline passed non-int-64 count");
 			}
-			if (++it == range.cend())
+			if (++it == range.cend_())
 			{
 				return getline_(cast<number_data_a<int64_t>>(thing));
 			}
@@ -397,8 +397,8 @@ namespace strange
 
 		inline any_a<> ignore__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return ignore_();
 			}
@@ -427,8 +427,8 @@ namespace strange
 
 		inline any_a<> read__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return read_();
 			}
@@ -486,8 +486,8 @@ namespace strange
 
 		inline any_a<> seekg_beg__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return seekg_beg_();
 			}
@@ -516,8 +516,8 @@ namespace strange
 
 		inline any_a<> seekg_end__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return seekg_end_();
 			}
@@ -546,8 +546,8 @@ namespace strange
 
 		inline any_a<> seekg_cur__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return seekg_cur_();
 			}
@@ -675,8 +675,8 @@ namespace strange
 
 		inline any_a<> seekp_beg__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return seekp_beg_();
 			}
@@ -705,8 +705,8 @@ namespace strange
 
 		inline any_a<> seekp_end__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return seekp_end_();
 			}
@@ -735,8 +735,8 @@ namespace strange
 
 		inline any_a<> seekp_cur__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return seekp_cur_();
 			}
@@ -846,8 +846,8 @@ namespace strange
 
 		inline any_a<> set_good__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return set_good_();
 			}
@@ -875,8 +875,8 @@ namespace strange
 
 		inline any_a<> set_eof__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return set_eof_();
 			}
@@ -904,8 +904,8 @@ namespace strange
 
 		inline any_a<> set_fail__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return set_fail_();
 			}
@@ -933,8 +933,8 @@ namespace strange
 
 		inline any_a<> set_bad__(range_a<> const& range)
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				return set_bad_();
 			}

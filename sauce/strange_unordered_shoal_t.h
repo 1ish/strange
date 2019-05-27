@@ -67,8 +67,8 @@ class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> set__(range_a<> const& range) const
 		{
-			forward_const_iterator_a<> it = range.cbegin();
-			if (it == range.cend())
+			forward_const_iterator_a<> it = range.cbegin_();
+			if (it == range.cend_())
 			{
 				throw dis("strange::unordered_shoal::iterator set passed empty range");
 			}
