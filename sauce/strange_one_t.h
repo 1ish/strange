@@ -51,11 +51,6 @@ public:
 		return identical(thing);
 	}
 
-	inline bool operator!=(any_a<> const& thing) const
-	{
-		return !identical(thing);
-	}
-
 	inline std::size_t hash() const
 	{
 		return std::hash<void const*>{}(identity());

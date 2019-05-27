@@ -304,6 +304,10 @@ inline any_a<> different_(any_a<> const& thing) const \
 { \
 	return boole(operator!=(thing)); \
 } \
+inline bool operator!=(any_a<> const& thing) const \
+{ \
+	return !operator==(thing); \
+} \
 inline any_a<> hash__(range_a<> const&) const \
 { \
 	return hash_(); \

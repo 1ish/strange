@@ -38,15 +38,6 @@ class squad_t : public thing_t<_ABSTRACTION_>
 			return _it == cast<random_access_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
-		inline bool operator!=(any_a<> const& thing) const
-		{
-			if (!check<random_access_iterator_data_a<ITERATOR>>(thing))
-			{
-				return true;
-			}
-			return _it != cast<random_access_iterator_data_a<ITERATOR>>(thing).extract();
-		}
-
 		inline std::size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
@@ -405,15 +396,6 @@ class squad_t : public thing_t<_ABSTRACTION_>
 				return false;
 			}
 			return _it == cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
-		}
-
-		inline bool operator!=(any_a<> const& thing) const
-		{
-			if (!check<random_access_const_iterator_data_a<ITERATOR>>(thing))
-			{
-				return true;
-			}
-			return _it != cast<random_access_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -780,15 +762,6 @@ public: ___STRANGE_COLLECTION___
 			return false;
 		}
 		return _deque == cast<squad_a<>>(thing).extract();
-	}
-
-	inline bool operator!=(any_a<> const& thing) const
-	{
-		if (!check<squad_a<>>(thing))
-		{
-			return true;
-		}
-		return _deque != cast<squad_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const

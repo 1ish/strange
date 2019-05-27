@@ -37,11 +37,6 @@ public: ___STRANGE_THING___
 		return thing.something();
 	}
 
-	inline bool operator!=(any_a<> const& thing) const
-	{
-		return !thing.something();
-	}
-
 	inline std::size_t hash() const
 	{
 		static std::size_t const HASH = std::hash<int64_t>{}(1);

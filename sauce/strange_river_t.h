@@ -38,15 +38,6 @@ class river_t : public thing_t<_ABSTRACTION_>
 				return _it == cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
 			}
 
-			inline bool operator!=(any_a<> const& thing) const
-			{
-				if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
-				{
-					return true;
-				}
-				return _it != cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
-			}
-
 			inline std::size_t hash() const
 			{
 				return std::hash<int64_t>{}(_it == ITERATOR{});

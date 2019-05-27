@@ -35,15 +35,6 @@ public: ___STRANGE_THING___
 		return _number == number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
 	}
 
-	inline bool operator!=(any_a<> const& thing) const
-	{
-		if (!check<number_a<>>(thing))
-		{
-			return true;
-		}
-		return _number != number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
-	}
-
 	inline std::size_t hash() const
 	{
 		return std::hash<PRIMITIVE>{}(_number);

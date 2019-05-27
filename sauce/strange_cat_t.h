@@ -79,7 +79,6 @@ public: ___STRANGE_THING___
 	}
 
 	// comparison
-	/*
 	inline bool operator==(any_a<> const& thing) const
 	{
 		if (!check<cat_a<>>(thing))
@@ -91,66 +90,12 @@ public: ___STRANGE_THING___
 		{
 			return false;
 		}
-		if (_symbolic)
+		bool const same = symbol_t<_ABSTRACTION_>::operator==(thing);
+		if (_symbolic || !same)
 		{
-			return symbol_t<_ABSTRACTION_>::operator==(thing);
+			return same;
 		}
-		if (_name != cat.name_())
-		{
-			return false;
-		}
-		if (_return_cat && other_cat->_return_cat)
-		{
-			if (!_return_cat->same_(other_cat->_return_cat))
-			{
-				return false;
-			}
-		}
-		else if (_return_cat || other_cat->_return_cat)
-		{
-			return false;
-		}
-		{
-			const Ptr args = _arguments->iterator_();
-			const Ptr other_args = other_cat->_arguments->iterator_();
-			Ptr other_arg = other_args->next_();
-			for (Ptr arg = args->next_(); !arg->is_stop_(); arg = args->next_())
-			{
-				if (other_arg->is_stop_() || !arg->same_(other_arg))
-				{
-					return false;
-				}
-				other_arg = other_args->next_();
-			}
-			if (!other_arg->is_stop_())
-			{
-				return false;
-			}
-		}
-		{
-			const Ptr params = _parameters->iterator_();
-			const Ptr other_params = other_cat->_parameters->iterator_();
-			Ptr other_param = other_params->next_();
-			for (Ptr param = params->next_(); !param->is_stop_(); param = params->next_())
-			{
-				if (other_param->is_stop_() || !param->same_(other_param))
-				{
-					return false;
-				}
-				other_param = other_params->next_();
-			}
-			if (!other_param->is_stop_())
-			{
-				return false;
-			}
-		}
-		return true;
-
-	}
-	*/
-	inline bool operator!=(any_a<> const& thing) const
-	{
-		return !operator==(thing);
+		return _arguments == cat.arguments_() && _parameters == cat.parameters_() && result_() == cat.result_();
 	}
 
 	// cat

@@ -47,11 +47,6 @@ public: ___STRANGE_THING___
 		return check<symbol_a<>>(thing) && cast<symbol_a<>>(thing).to_string() == _string;
 	}
 
-	inline bool operator!=(any_a<> const& thing) const
-	{
-		return !check<symbol_a<>>(thing) || cast<symbol_a<>>(thing).to_string() != _string;
-	}
-
 	inline std::size_t hash() const
 	{
 		return _hash;

@@ -38,15 +38,6 @@ class unordered_herd_t : public thing_t<_ABSTRACTION_>
 			return _it == cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
 		}
 
-		inline bool operator!=(any_a<> const& thing) const
-		{
-			if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
-			{
-				return true;
-			}
-			return _it != cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
-		}
-
 		inline std::size_t hash() const
 		{
 			return std::hash<void const*>{}(&*_it);
@@ -175,15 +166,6 @@ public: ___STRANGE_COLLECTION___
 			return false;
 		}
 		return _set == cast<unordered_herd_a<>>(thing).extract();
-	}
-
-	inline bool operator!=(any_a<> const& thing) const
-	{
-		if (!check<unordered_herd_a<>>(thing))
-		{
-			return true;
-		}
-		return _set != cast<unordered_herd_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
