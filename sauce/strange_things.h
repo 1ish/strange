@@ -12,7 +12,6 @@
 #include "strange_nothing_t.h"
 #include "strange_it_t.h"
 #include "strange_symbol_t.h"
-#include "strange_cat_t.h"
 #include "strange_range_t.h"
 #include "strange_misunderstanding_t.h"
 #include "strange_disagreement_t.h"
@@ -28,6 +27,7 @@
 #include "strange_lake_t.h"
 #include "strange_brook_t.h"
 #include "strange_river_t.h"
+#include "strange_cat_t.h"
 
 #undef ___STRANGE_THING___
 #undef ___STRANGE_COLLECTION___
