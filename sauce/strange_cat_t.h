@@ -148,7 +148,7 @@ public: ___STRANGE_THING___
 
 	inline bool includes(any_a<> const& thing) const
 	{
-		return false;
+		return thing.cats_().has_(me_());
 	}
 
 	static inline any_a<> conforms__(range_a<> const& range)
@@ -166,24 +166,30 @@ public: ___STRANGE_THING___
 		return conforms_(thing, *it);
 	}
 
-	static inline any_a<> conforms_(any_a<> const& thing, any_a<> const& cat_or_unordered_herd)
+	static inline any_a<> conforms_(any_a<> const& thing, any_a<> const& cat_or_cats)
 	{
-		return boole(conforms(thing, cat_or_unordered_herd));
+		return boole(conforms(thing, cat_or_cats));
 	}
 
-	static inline bool conforms(any_a<> const& thing, any_a<> const& cat_or_unordered_herd)
+	static inline bool conforms(any_a<> const& thing, any_a<> const& cat_or_cats)
 	{
-		if (check<cat_a<>>(cat_or_unordered_herd))
+		auto cats = thing.cats_();
+		if (check<cat_a<>>(cat_or_cats))
 		{
-			return cast<cat_a<>>(cat_or_unordered_herd).includes_(thing);
+			return cats.has_(cat_or_cats);
 		}
-		/*
-		if (check<unordered_herd_>(cat_or_unordered_herd))
+		if (check<range_a<>>(cat_or_cats))
 		{
-			//TODO call includes_ for each cat in the unordered_herd
+			for (auto const& cat : cast<range_a<>>(cat_or_cats))
+			{
+				if (cats.has_(cat))
+				{
+					return true;
+				}
+			}
+			return false;
 		}
-		*/
-		return false;
+		throw dis("strange::cat:conforms passed non-cat-or-cats");
 	}
 
 protected:
