@@ -30,6 +30,7 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = unordered_shoal_t<>::val_();
+			operations.update("", native_mutation_t<any_a<>>::val(&any_a<>::operator()));
 			operations.update("type", native_extraction_t<any_a<>>::val(&any_a<>::type__));
 			operations.update("share", native_extraction_t<any_a<>>::val(&any_a<>::share__));
 			operations.update("shared", native_extraction_t<any_a<>>::val(&any_a<>::shared__));
