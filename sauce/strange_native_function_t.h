@@ -36,11 +36,6 @@ public: ___STRANGE_THING___
 	}
 
 	// function
-	inline any_a<> operate__(range_a<> const& range) const
-	{
-		return _function(range);
-	}
-
 	inline any_a<> operate_(any_a<>& _, range_a<> const& range) const
 	{
 		return _function(range);
