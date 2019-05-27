@@ -21,17 +21,45 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::cat::val passed non-symbol name");
 		}
-		return val_(cast<symbol_a<>>(name));
+		if (++it == range.cend_())
+		{
+			return val_(cast<symbol_a<>>(name));
+		}
+		any_a<> arguments = *it;
+		if (!check<flock_a<>>(arguments))
+		{
+			throw dis("strange::cat::val passed non-flock arguments");
+		}
+		if (++it == range.cend_())
+		{
+			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments));
+		}
+		any_a<> parameters = *it;
+		if (!check<flock_a<>>(parameters))
+		{
+			throw dis("strange::cat::val passed non-flock parameters");
+		}
+		if (++it == range.cend_())
+		{
+			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments), cast<flock_a<>>(parameters));
+		}
+		return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments), cast<flock_a<>>(parameters), *it);
 	}
 
-	static inline cat_a<> val_(symbol_a<> const& name = sym(""))
+	static inline cat_a<> val_()
 	{
-		return cat_a<>{ cat_t(name, flock_t<>::val_(), flock_t<>::val_(), no()) };
+		static cat_a<> ANY = val("");
+		return ANY;
 	}
 
-	static inline cat_a<> val(std::string const& name)
+	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), any_a<> const& result = no())
 	{
-		return cat_a<>{ cat_t(sym(name), flock_t<>::val_(), flock_t<>::val_(), no()) };
+		return cat_a<>{ cat_t(name, arguments, parameters, result) };
+	}
+
+	static inline cat_a<> val(std::string const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), any_a<> const& result = no())
+	{
+		return val_(sym(name), arguments, parameters, result);
 	}
 
 	// reflection
