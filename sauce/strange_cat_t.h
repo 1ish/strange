@@ -45,6 +45,8 @@ public: ___STRANGE_THING___
 		reflection<cat_t<>>::share(shoal);
 	}
 
+	//TODO comparison
+
 	// cat
 	inline any_a<> symbolic__(range_a<> const& _) const
 	{
@@ -212,7 +214,7 @@ protected:
 			}
 			else
 			{
-				symbol += "*";
+				symbol += "#" + std::to_string(argument.hash());
 			}
 		}
 		if (any)
