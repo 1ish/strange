@@ -146,18 +146,10 @@ namespace strange {
      { assert(handle_); return read().feeder__(range ); }
      inline any_a visit__ ( range_a const & range ) const
      { assert(handle_); return read().visit__(range ); }
-     inline any_a invoke__ ( range_a const & range ) const
-     { assert(handle_); return read().invoke__(range ); }
      inline any_a invoke_ ( any_a & thing , range_a const & range ) const
      { assert(handle_); return read().invoke_(thing, range ); }
-     inline any_a invoke ( any_a & thing , any_a const & member , range_a const & range ) const
-     { assert(handle_); return read().invoke(thing, member, range ); }
-     inline any_a operate__ ( range_a const & range ) const
-     { assert(handle_); return read().operate__(range ); }
      inline any_a operate_ ( any_a & thing , range_a const & range ) const
      { assert(handle_); return read().operate_(thing, range ); }
-     inline any_a operate ( any_a & thing , any_a const & operation , range_a const & range ) const
-     { assert(handle_); return read().operate(thing, operation, range ); }
      inline any_a identity__ ( range_a const & _ ) const
      { assert(handle_); return read().identity__(_ ); }
      inline number_data_a_uint64 identity_ ( ) const
@@ -260,12 +252,8 @@ namespace strange {
       virtual inline any_a eater_ ( ) const = 0;
       virtual inline any_a feeder__ ( range_a const & range ) const = 0;
       virtual inline any_a visit__ ( range_a const & range ) const = 0;
-      virtual inline any_a invoke__ ( range_a const & range ) const = 0;
       virtual inline any_a invoke_ ( any_a & thing , range_a const & range ) const = 0;
-      virtual inline any_a invoke ( any_a & thing , any_a const & member , range_a const & range ) const = 0;
-      virtual inline any_a operate__ ( range_a const & range ) const = 0;
       virtual inline any_a operate_ ( any_a & thing , range_a const & range ) const = 0;
-      virtual inline any_a operate ( any_a & thing , any_a const & operation , range_a const & range ) const = 0;
       virtual inline any_a identity__ ( range_a const & _ ) const = 0;
       virtual inline number_data_a_uint64 identity_ ( ) const = 0;
       virtual inline void const * identity ( ) const = 0;
@@ -387,18 +375,10 @@ namespace strange {
       { return value_.feeder__(range ); }
       virtual inline any_a visit__ ( range_a const & range ) const
       { return value_.visit__(range ); }
-      virtual inline any_a invoke__ ( range_a const & range ) const
-      { return value_.invoke__(range ); }
       virtual inline any_a invoke_ ( any_a & thing , range_a const & range ) const
       { return value_.invoke_(thing, range ); }
-      virtual inline any_a invoke ( any_a & thing , any_a const & member , range_a const & range ) const
-      { return value_.invoke(thing, member, range ); }
-      virtual inline any_a operate__ ( range_a const & range ) const
-      { return value_.operate__(range ); }
       virtual inline any_a operate_ ( any_a & thing , range_a const & range ) const
       { return value_.operate_(thing, range ); }
-      virtual inline any_a operate ( any_a & thing , any_a const & operation , range_a const & range ) const
-      { return value_.operate(thing, operation, range ); }
       virtual inline any_a identity__ ( range_a const & _ ) const
       { return value_.identity__(_ ); }
       virtual inline number_data_a_uint64 identity_ ( ) const
