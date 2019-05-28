@@ -31,7 +31,16 @@ namespace strange {
     		}
     	};
     
-    	inline any_a operator()(range_a const& range)	{		return operate_(*this, range);	}
+    	inline any_a operator[](range_a const& range)
+    	{
+    		return invoke_(*this, range);
+    	}
+    
+    	inline any_a operator()(range_a const& range)
+    	{
+    		return operate_(*this, range);
+    	}
+    
     	inline operator bool() const
     	{
     		assert(handle_);
