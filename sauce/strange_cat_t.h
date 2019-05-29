@@ -48,7 +48,11 @@ public: ___STRANGE_THING___
 		{
 			throw dis("strange::cat::val passed non-symbol result");
 		}
-		return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
+		if (++it == range.cend_())
+		{
+			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
+		}
+		return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), *it);
 	}
 
 	static inline cat_a<> val_()
@@ -57,14 +61,14 @@ public: ___STRANGE_THING___
 		return ANY;
 	}
 
-	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = sym(""))
+	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = sym(""), any_a<> const& reference = no())
 	{
-		return cat_a<>{ cat_t(name, arguments, parameters, result) };
+		return cat_a<>{ cat_t(name, arguments, parameters, result, reference) };
 	}
 
-	static inline cat_a<> val(std::string const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = sym(""))
+	static inline cat_a<> val(std::string const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = sym(""), bool reference = false)
 	{
-		return val_(sym(name), arguments, parameters, result);
+		return val_(sym(name), arguments, parameters, result, boole(reference));
 	}
 
 	// reflection
@@ -221,14 +225,16 @@ protected:
 	flock_a<> const _arguments;
 	flock_a<> const _parameters;
 	symbol_a<> const _result;
+	any_a<> const _reference;
 
-	inline cat_t(symbol_a<> const& name, flock_a<> const& arguments, flock_a<> const& parameters, symbol_a<> const& result)
+	inline cat_t(symbol_a<> const& name, flock_a<> const& arguments, flock_a<> const& parameters, symbol_a<> const& result, any_a<> const& reference)
 		: symbol_t{ _symbol_(name, arguments, parameters, result) }
 		, _symbolic{ _symbolic_(arguments, parameters, result) }
 		, _name{ name }
 		, _arguments{ arguments }
 		, _parameters{ parameters }
 		, _result{ _result_(result) }
+		, _reference{ reference }
 	{}
 
 	static inline std::string const _symbol_(symbol_a<> const& name, flock_a<> const& arguments, flock_a<> const& parameters, symbol_a<> const& result)
