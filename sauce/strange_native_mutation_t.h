@@ -38,7 +38,7 @@ public: ___STRANGE_THING___
 	// function
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
-		assert(dynamic_cast<T*>(&thing));
+		assert(check<T>(thing));
 		return (static_cast<T&>(thing).*_function)(range);
 	}
 
