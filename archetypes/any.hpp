@@ -58,7 +58,7 @@ public:
 
 	// visitor pattern
 	inline any_a visit__(range_a const& range) const;
-	inline any_a visit_(flock_a const& flock) const;
+	inline any_a visit_(flock_a& flock) const;
 
 	// function
 	inline any_a invoke_(any_a& thing, range_a const& range) const;

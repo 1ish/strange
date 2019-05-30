@@ -750,20 +750,19 @@ public: ___STRANGE_COLLECTION___
 		{
 			throw dis("strange::flock::visit passed non-flock");
 		}
-		return visit_(cast<flock_a<>>(range));
+		return visit_(cast<flock_a<>>(range, true));
 	}
 
-	inline any_a<> visit_(flock_a<> const& flock) const
+	inline any_a<> visit_(flock_a<>& flock) const
 	{
 		auto result = thing_t<>::visit_(flock);
 		if (result)
 		{
-			auto ref = flock_a<>(flock, true);
-			auto last = ref.size() - 1;
+			auto last = flock.size() - 1;
 			for (auto const& visited : _vector)
 			{
-				ref.update(last, visited);
-				visited.visit_(ref);
+				flock.update(last, visited);
+				visited.visit_(flock);
 			}
 		}
 		return result;

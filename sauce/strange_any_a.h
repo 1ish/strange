@@ -147,7 +147,7 @@ namespace strange {
      { assert(handle_); return read().feeder__(range ); }
      inline any_a visit__ ( range_a const & range ) const
      { assert(handle_); return read().visit__(range ); }
-     inline any_a visit_ ( flock_a const & flock ) const
+     inline any_a visit_ ( flock_a & flock ) const
      { assert(handle_); return read().visit_(flock ); }
      inline any_a invoke_ ( any_a & thing , range_a const & range ) const
      { assert(handle_); return read().invoke_(thing, range ); }
@@ -255,7 +255,7 @@ namespace strange {
       virtual inline any_a eater_ ( ) const = 0;
       virtual inline any_a feeder__ ( range_a const & range ) const = 0;
       virtual inline any_a visit__ ( range_a const & range ) const = 0;
-      virtual inline any_a visit_ ( flock_a const & flock ) const = 0;
+      virtual inline any_a visit_ ( flock_a & flock ) const = 0;
       virtual inline any_a invoke_ ( any_a & thing , range_a const & range ) const = 0;
       virtual inline any_a operate_ ( any_a & thing , range_a const & range ) const = 0;
       virtual inline any_a identity__ ( range_a const & _ ) const = 0;
@@ -379,7 +379,7 @@ namespace strange {
       { return value_.feeder__(range ); }
       virtual inline any_a visit__ ( range_a const & range ) const
       { return value_.visit__(range ); }
-      virtual inline any_a visit_ ( flock_a const & flock ) const
+      virtual inline any_a visit_ ( flock_a & flock ) const
       { return value_.visit_(flock ); }
       virtual inline any_a invoke_ ( any_a & thing , range_a const & range ) const
       { return value_.invoke_(thing, range ); }
