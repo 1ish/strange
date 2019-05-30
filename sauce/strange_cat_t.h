@@ -57,18 +57,24 @@ public: ___STRANGE_THING___
 
 	static inline cat_a<> val_()
 	{
-		static cat_a<> ANY = val("");
-		return ANY;
+		static cat_a<> VAL = val("");
+		return VAL;
 	}
 
-	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = sym(""), any_a<> const& reference = no())
+	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), any_a<> const& reference = no())
 	{
 		return cat_a<>{ cat_t(name, arguments, parameters, result, reference) };
 	}
 
-	static inline cat_a<> val(std::string const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = sym(""), bool reference = false)
+	static inline cat_a<> val(std::string const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool reference = false)
 	{
 		return val_(sym(name), arguments, parameters, result, boole(reference));
+	}
+
+	static inline symbol_a<> any_sym()
+	{
+		static symbol_a<> ANY = sym("<>");
+		return ANY;
 	}
 
 	// reflection
@@ -355,7 +361,7 @@ protected:
 
 	static inline symbol_a<> _result_(symbol_a<> const& result)
 	{
-		return (check<cat_a<>>(result) && result.to_string() != "<>") ? result : sym("<>");
+		return (check<cat_a<>>(result) && result.to_string() != "<>") ? result : any_sym();
 	}
 };
 
