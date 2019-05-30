@@ -5,6 +5,7 @@
  //#include "range_forward.hpp"
  //#include "symbol_forward.hpp"
  //#include "cat_forward.hpp"
+ //#include "flock_forward.hpp"
  //#include "unordered_herd_forward.hpp"
  //#include "shoal_forward.hpp"
  //#include "unordered_shoal_forward.hpp"
@@ -18,7 +19,7 @@
 
 
 namespace strange {
-    template < typename range_a = range_a < > , typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename unordered_herd_a = unordered_herd_a < > , typename shoal_a = shoal_a < > , typename unordered_shoal_a = unordered_shoal_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
+    template < typename range_a = range_a < > , typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename flock_a = flock_a < > , typename unordered_herd_a = unordered_herd_a < > , typename shoal_a = shoal_a < > , typename unordered_shoal_a = unordered_shoal_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
     class any_a
     {
     public:
@@ -146,6 +147,8 @@ namespace strange {
      { assert(handle_); return read().feeder__(range ); }
      inline any_a visit__ ( range_a const & range ) const
      { assert(handle_); return read().visit__(range ); }
+     inline any_a visit_ ( flock_a const & flock ) const
+     { assert(handle_); return read().visit_(flock ); }
      inline any_a invoke_ ( any_a & thing , range_a const & range ) const
      { assert(handle_); return read().invoke_(thing, range ); }
      inline any_a operate_ ( any_a & thing , range_a const & range ) const
@@ -252,6 +255,7 @@ namespace strange {
       virtual inline any_a eater_ ( ) const = 0;
       virtual inline any_a feeder__ ( range_a const & range ) const = 0;
       virtual inline any_a visit__ ( range_a const & range ) const = 0;
+      virtual inline any_a visit_ ( flock_a const & flock ) const = 0;
       virtual inline any_a invoke_ ( any_a & thing , range_a const & range ) const = 0;
       virtual inline any_a operate_ ( any_a & thing , range_a const & range ) const = 0;
       virtual inline any_a identity__ ( range_a const & _ ) const = 0;
@@ -375,6 +379,8 @@ namespace strange {
       { return value_.feeder__(range ); }
       virtual inline any_a visit__ ( range_a const & range ) const
       { return value_.visit__(range ); }
+      virtual inline any_a visit_ ( flock_a const & flock ) const
+      { return value_.visit_(flock ); }
       virtual inline any_a invoke_ ( any_a & thing , range_a const & range ) const
       { return value_.invoke_(thing, range ); }
       virtual inline any_a operate_ ( any_a & thing , range_a const & range ) const

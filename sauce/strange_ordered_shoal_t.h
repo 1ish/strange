@@ -346,9 +346,31 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// visitor pattern
-	static inline any_a<> visit__(range_a<> const& range)
+	inline any_a<> visit__(range_a<> const& range) const
 	{
-		return no(); //TODO
+		if (!check<flock_a<>>(range))
+		{
+			throw dis("strange::ordered_shoal::visit passed non-flock");
+		}
+		return visit_(cast<flock_a<>>(range));
+	}
+
+	inline any_a<> visit_(flock_a<> const& flock) const
+	{
+		auto result = thing_t<>::visit_(flock);
+		if (result)
+		{
+			auto ref = flock_a<>(flock, true);
+			auto last = ref.size() - 1;
+			for (auto const& visited : _map)
+			{
+				ref.update(last, visited.first);
+				visited.first.visit_(ref);
+				ref.update(last, visited.second);
+				visited.second.visit_(ref);
+			}
+		}
+		return result;
 	}
 
 	// comparison

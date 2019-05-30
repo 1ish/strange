@@ -63,13 +63,12 @@ public:
 	// visitor pattern
 	static inline any_a<> visit__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			throw dis("strange::thing::visit passed empty range");
-		}
-		any_a<> visitor = *it;
-		return visitor.invoke_(visitor, range_t<>::val_(++it, range.cend_()));
+		return operate__(range);
+	}
+
+	static inline any_a<> visit_(flock_a<> const& flock)
+	{
+		return operate__(flock);
 	}
 
 	// function
