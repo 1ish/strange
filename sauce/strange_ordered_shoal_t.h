@@ -337,7 +337,12 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
 	{
-		return no(); //TODO
+		auto values = flock_t<>::val_();
+		for (auto const& param : range)
+		{
+			values.push_back(at_(param));
+		}
+		return values;
 	}
 
 	// visitor pattern

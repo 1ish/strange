@@ -14,10 +14,10 @@ public: ___STRANGE_THING___
 	template <typename... Args>
 	static inline any_a<> val(function const fun, Args&&... args)
 	{
-		std::vector<symbol_a<>> v;
+		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
-		variadic_u<symbol_a<>>::variadic(v, std::forward<Args>(args)...);
-		return any_a<>{ native_function_t(fun, std::move(v)) };
+		variadic_u<any_a<>>::variadic(v, std::forward<Args>(args)...);
+		return any_a<>{ native_function_t(fun, flock_t<>::val(std::move(v))) };
 	}
 
 	// reflection
@@ -32,7 +32,7 @@ public: ___STRANGE_THING___
 
 	inline any_a<> eater_() const
 	{
-		return no(); //TODO return range of parameter names
+		return _params;
 	}
 
 	// function
@@ -43,13 +43,12 @@ public: ___STRANGE_THING___
 
 protected:
 	function const _function;
-	std::vector<symbol_a<>> const _params;
+	flock_a<> const _params;
 
-	template <typename F>
-	inline native_function_t(function const fun, F&& params)
+	inline native_function_t(function const fun, flock_a<> const& params)
 		: operation_t{}
 		, _function{ fun }
-		, _params{ std::forward<F>(params) }
+		, _params{ params }
 	{}
 };
 

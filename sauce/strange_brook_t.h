@@ -755,11 +755,6 @@ public: ___STRANGE_COLLECTION___
 		reflection<brook_t<PRIMITIVE>>::share(shoal);
 	}
 
-	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
-	{
-		return no(); //TODO
-	}
-
 	// visitor pattern
 	static inline any_a<> visit__(range_a<> const& range)
 	{
