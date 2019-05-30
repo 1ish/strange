@@ -208,12 +208,6 @@ public: ___STRANGE_COLLECTION___
 		reflection<river_t<>>::share(shoal);
 	}
 
-	// visitor pattern
-	static inline any_a<> visit__(range_a<> const& range)
-	{
-		return no(); //TODO
-	}
-
 	// range
 	inline forward_const_iterator_a<> cbegin_() const
 	{

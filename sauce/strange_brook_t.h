@@ -755,12 +755,6 @@ public: ___STRANGE_COLLECTION___
 		reflection<brook_t<PRIMITIVE>>::share(shoal);
 	}
 
-	// visitor pattern
-	static inline any_a<> visit__(range_a<> const& range)
-	{
-		return no(); //TODO
-	}
-
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
