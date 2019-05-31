@@ -76,10 +76,10 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update("strange::river::val", native_function_t<>::val(&river_t<>::val__));
-		shoal.update("strange::river::file", native_function_t<>::val(&river_t<>::file__));
-		shoal.update("strange::river::in", native_function_t<>::val(&river_t<>::in__));
-		shoal.update("strange::river::out", native_function_t<>::val(&river_t<>::out__));
-		shoal.update("strange::river::err", native_function_t<>::val(&river_t<>::err__));
+		shoal.update("strange::river::file_val", native_function_t<>::val(&river_t<>::file_val__));
+		shoal.update("strange::river::in_val", native_function_t<>::val(&river_t<>::in_val__));
+		shoal.update("strange::river::out_val", native_function_t<>::val(&river_t<>::out_val__));
+		shoal.update("strange::river::err_val", native_function_t<>::val(&river_t<>::err_val__));
 	}
 };
 
