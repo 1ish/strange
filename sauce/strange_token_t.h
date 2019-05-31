@@ -7,35 +7,71 @@ namespace strange
 template <typename _ABSTRACTION_ = any_a<>>
 class token_t : public thing_t<_ABSTRACTION_>
 {
-public: ___STRANGE_RANGE___
+public: ___STRANGE_THING___
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::range::val passed empty range");
+			throw dis("strange::token::val passed empty range");
 		}
-		any_a<> begin = *it;
-		if (!check<forward_const_iterator_a<>>(begin))
+		any_a<> filename = *it;
+		if (!check<symbol_a<>>(filename))
 		{
-			throw dis("strange::range::val passed non-iterator begin");
+			throw dis("strange::token::val passed non-symbol filename");
 		}
 		if (++it == range.cend_())
 		{
-			throw dis("strange::range::val passed short range");
+			throw dis("strange::token::val passed short range");
 		}
-		any_a<> end = *it;
-		if (!check<forward_const_iterator_a<>>(end))
+		any_a<> line = *it;
+		if (!check<number_data_a<int64_t>>(line))
 		{
-			throw dis("strange::range::val passed non-iterator end");
+			throw dis("strange::token::val passed non-number-int-64 line");
 		}
-		return val_(cast<forward_const_iterator_a<>>(begin), cast<forward_const_iterator_a<>>(end));
+		if (++it == range.cend_())
+		{
+			throw dis("strange::token::val passed short range");
+		}
+		any_a<> pos = *it;
+		if (!check<number_data_a<int64_t>>(pos))
+		{
+			throw dis("strange::token::val passed non-number-int-64 pos");
+		}
+		if (++it == range.cend_())
+		{
+			throw dis("strange::token::val passed short range");
+		}
+		any_a<> tag = *it;
+		if (!check<symbol_a<>>(tag))
+		{
+			throw dis("strange::token::val passed non-symbol tag");
+		}
+		if (++it == range.cend_())
+		{
+			throw dis("strange::token::val passed short range");
+		}
+		any_a<> symbol = *it;
+		if (!check<symbol_a<>>(symbol))
+		{
+			throw dis("strange::token::val passed non-symbol symbol");
+		}
+		if (++it == range.cend_())
+		{
+			return val_(filename, line, pos, tag, symbol);
+		}
+		return val_(filename, line, pos, tag, symbol, *it);
 	}
 
-	static inline range_a<> val_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
+	static inline any_a<> val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& pos, symbol_a<> const& tag, symbol_a<> const& symbol)
 	{
-		return range_a<>{ token_t(begin, end) };
+		return val_(filename, line, pos, tag, symbol, symbol);
+	}
+
+	static inline any_a<> val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& pos, symbol_a<> const& tag, symbol_a<> const& symbol, any_a<> const& value)
+	{
+		return any_a<>{ token_t(filename, line, pos, tag, symbol, value) };
 	}
 
 	// reflection
@@ -49,25 +85,24 @@ public: ___STRANGE_RANGE___
 		reflection<token_t<>>::share(shoal);
 	}
 
-	// range
-	inline forward_const_iterator_a<> cbegin_() const
-	{
-		return _begin;
-	}
-
-	inline forward_const_iterator_a<> cend_() const
-	{
-		return _end;
-	}
+	// token
 
 protected:
-	forward_const_iterator_a<> _begin;
-	forward_const_iterator_a<> _end;
+	symbol_a<> const _filename;
+	number_data_a<int64_t> const _line;
+	number_data_a<int64_t> const _pos;
+	symbol_a<> const _tag;
+	symbol_a<> const _symbol;
+	any_a<> const _value;
 
-	inline token_t(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
+	inline token_t(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& pos, symbol_a<> const& tag, symbol_a<> const& symbol, any_a<> const& value)
 		: thing_t{}
-		, _begin(begin)
-		, _end(end)
+		, _filename{ filename }
+		, _line{ line }
+		, _pos{ pos }
+		, _tag{ tag }
+		, _symbol{ symbol }
+		, _value{ value }
 	{}
 };
 

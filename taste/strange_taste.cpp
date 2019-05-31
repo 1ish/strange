@@ -84,6 +84,8 @@ TEST(TestCaseName, ForLoop)
 	inventory_a<> brook = brook_float_32_t<>::val_();
 
 	river_a<> river = river_t<>::val();
+
+	any_a<> token = token_t<>::val_(sym("filename"), number_int_64_t<>::val(1), number_int_64_t<>::val(2), sym("symbol"), sym("xyz"));
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
