@@ -10,6 +10,9 @@
 // abstractions
 #include "strange_abstractions.h"
 
+// ranges
+#include "strange_ranges.h"
+
 // declarations
 #include "strange_declarations.h"
 
