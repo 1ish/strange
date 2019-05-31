@@ -1098,6 +1098,11 @@ using lake_float_32_t = lake_t<float, _ABSTRACTION_>;
 template <typename _ABSTRACTION_ = lake_a<double>>
 using lake_float_64_t = lake_t<double, _ABSTRACTION_>;
 
+lake_a<int8_t> lake_from_string(std::string const& str)
+{
+	return lake_int_8_t<>::val(lake_int_8_t<>::std_vector_number(str.cbegin(), str.cend()));
+}
+
 } // namespace strange
 
 #endif

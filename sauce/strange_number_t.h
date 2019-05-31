@@ -765,6 +765,16 @@ using number_float_32_t = number_t<float, _ABSTRACTION_>;
 template <typename _ABSTRACTION_ = number_data_a<double>>
 using number_float_64_t = number_t<double, _ABSTRACTION_>;
 
+number_data_a<int64_t> int_64_from_string(std::string const& str)
+{
+	return number_int_64_t<>::val(std::stoll(str));
+}
+
+number_data_a<double> float_64_from_string(std::string const& str)
+{
+	return number_float_64_t<>::val(std::stod(str));
+}
+
 } // namespace strange
 
 #endif

@@ -50,7 +50,14 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::token::val", native_function_t<>::val(&range_t<>::val__));
+		shoal.update("strange::token::val", native_function_t<>::val(&token_t<>::val__));
+		shoal.update("strange::token::symbol_val", native_function_t<>::val(&token_t<>::symbol_val__));
+		shoal.update("strange::token::lake_val", native_function_t<>::val(&token_t<>::lake_val__));
+		shoal.update("strange::token::int_val", native_function_t<>::val(&token_t<>::int_val__));
+		shoal.update("strange::token::float_val", native_function_t<>::val(&token_t<>::float_val__));
+		shoal.update("strange::token::name_val", native_function_t<>::val(&token_t<>::name_val__));
+		shoal.update("strange::token::punctuation_val", native_function_t<>::val(&token_t<>::punctuation_val__));
+		shoal.update("strange::token::error_val", native_function_t<>::val(&token_t<>::error_val__));
 	}
 };
 
