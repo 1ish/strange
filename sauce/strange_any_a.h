@@ -19,7 +19,7 @@
 
 
 namespace strange {
-    template < typename range_a = range_a < > , typename symbol_a = symbol_a < > , typename cat_a = cat_a < > , typename flock_a = flock_a < > , typename unordered_herd_a = unordered_herd_a < > , typename shoal_a = shoal_a < > , typename unordered_shoal_a = unordered_shoal_a < > , typename number_data_a_uint64 = number_data_a < uint64_t >>
+    template < typename range_a , typename symbol_a , typename cat_a , typename flock_a , typename unordered_herd_a , typename shoal_a , typename unordered_shoal_a , typename number_data_a_uint64 >
     class any_a
     {
     public:

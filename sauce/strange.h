@@ -7,14 +7,14 @@
 // options
 #include "strange_options.h"
 
+// forward declarations
+#include "strange_declarations.h"
+
 // abstractions
 #include "strange_abstractions.h"
 
 // ranges
 #include "strange_ranges.h"
-
-// declarations
-#include "strange_declarations.h"
 
 // utilities
 #include "strange_utilities.h"
