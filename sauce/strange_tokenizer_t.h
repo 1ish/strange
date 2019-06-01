@@ -13,106 +13,106 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 	public: ___STRANGE_THING___
 		// construction
 		template <typename F>
-			static inline forward_const_iterator_data_a<ITERATOR> val(range_a<> const& tokenizer, F&& it)
-			{
-				return forward_const_iterator_data_a<ITERATOR>{ const_iterator_t(tokenizer, std::forward<F>(it)) };
-			}
+		static inline forward_const_iterator_data_a<ITERATOR> val(river_a<> const& river, F&& it)
+		{
+			return forward_const_iterator_data_a<ITERATOR>{ const_iterator_t(river, std::forward<F>(it)) };
+		}
 
-			// reflection
-			static inline symbol_a<> type_()
-			{
-				static symbol_a<> TYPE = sym("strange::tokenizer::const_iterator");
-				return TYPE;
-			}
+		// reflection
+		static inline symbol_a<> type_()
+		{
+			static symbol_a<> TYPE = sym("strange::tokenizer::const_iterator");
+			return TYPE;
+		}
 
-			static inline void share(shoal_a<>& shoal)
-			{}
+		static inline void share(shoal_a<>& shoal)
+		{}
 
-			// comparison
-			inline bool operator==(any_a<> const& thing) const
+		// comparison
+		inline bool operator==(any_a<> const& thing) const
+		{
+			if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
-				{
-					return false;
-				}
-				return _it == cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
+				return false;
 			}
+			return _it == cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
+		}
 
-			inline std::size_t hash() const
-			{
-				return std::hash<void const*>{}(&*_it);
-			}
+		inline std::size_t hash() const
+		{
+			return std::hash<void const*>{}(&*_it);
+		}
 
-			// forward iterator
-			inline any_a<> get__(range_a<> const&) const
-			{
-				return get_();
-			}
+		// forward iterator
+		inline any_a<> get__(range_a<> const&) const
+		{
+			return get_();
+		}
 
-			inline any_a<> get_() const
-			{
-				return *_it;
-			}
+		inline any_a<> get_() const
+		{
+			return *_it;
+		}
 
-			inline any_a<> const* operator->() const
-			{
-				return &operator*();
-			}
+		inline any_a<> const* operator->() const
+		{
+			return &operator*();
+		}
 
-			inline any_a<> const& operator*() const
-			{
-				return *_it;
-			}
+		inline any_a<> const& operator*() const
+		{
+			return *_it;
+		}
 
-			inline _ABSTRACTION_ increment__(range_a<> const&)
-			{
-				return increment_();
-			}
+		inline _ABSTRACTION_ increment__(range_a<> const&)
+		{
+			return increment_();
+		}
 
-			inline _ABSTRACTION_ increment_()
-			{
-				operator++();
-				return me_();
-			}
+		inline _ABSTRACTION_ increment_()
+		{
+			operator++();
+			return me_();
+		}
 
-			inline const_iterator_t& operator++()
-			{
-				++_it;
-				return *this;
-			}
+		inline const_iterator_t& operator++()
+		{
+			++_it;
+			return *this;
+		}
 
-			inline const_iterator_t operator++(int)
-			{
-				const_iterator_t result = *this;
-				operator++();
-				return result;
-			}
+		inline const_iterator_t operator++(int)
+		{
+			const_iterator_t result = *this;
+			operator++();
+			return result;
+		}
 
-			// data
-			inline ITERATOR const& extract() const
-			{
-				return _it;
-			}
+		// data
+		inline ITERATOR const& extract() const
+		{
+			return _it;
+		}
 
-			inline void mutate(ITERATOR const& it)
-			{
-				_it = it;
-			}
+		inline void mutate(ITERATOR const& it)
+		{
+			_it = it;
+		}
 
-			inline ITERATOR& reference()
-			{
-				return _it;
-			}
+		inline ITERATOR& reference()
+		{
+			return _it;
+		}
 
 	protected:
 		ITERATOR _it;
-		range_a<> _tokenizer;
+		range_a<> _river;
 
 		template <typename F>
-		inline const_iterator_t(range_a<> const& tokenizer, F&& it)
+		inline const_iterator_t(river_a<> const& river, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _tokenizer(tokenizer, true)
+			, _river(river, true)
 		{}
 	};
 
@@ -152,12 +152,12 @@ public: ___STRANGE_RANGE___
 	// range
 	inline forward_const_iterator_a<> cbegin_() const
 	{
-		return const_iterator_t<forward_const_iterator_a<>>::val(me_(), _river.cbegin_());
+		return const_iterator_t<forward_const_iterator_a<>>::val(_river, _river.cbegin_());
 	}
 
 	inline forward_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<forward_const_iterator_a<>>::val(me_(), _river.cend_());
+		return const_iterator_t<forward_const_iterator_a<>>::val(_river, _river.cend_());
 	}
 
 protected:
