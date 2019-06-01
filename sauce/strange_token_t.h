@@ -128,9 +128,9 @@ public: ___STRANGE_THING___
 		return val_(filename, line, position, sym("symbol"), symbol);
 	}
 
-	static inline token_a<> symbol_val(std::string const& filename, int64_t line, int64_t position, std::string& symbol)
+	static inline token_a<> symbol_val(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
 	{
-		return symbol_val_(sym(filename), number_data_a<int64_t>::val(line), number_data_a<int64_t>::val(position), sym(symbol));
+		return symbol_val_(sym(filename), number_int_64_t<>::val(line), number_int_64_t<>::val(position), sym(symbol));
 	}
 
 	static inline any_a<> lake_val__(range_a<> const& range)
@@ -143,9 +143,9 @@ public: ___STRANGE_THING___
 		return val_(filename, line, position, sym("lake"), symbol, lake_from_string(symbol.to_string()));
 	}
 
-	static inline token_a<> lake_val(std::string const& filename, int64_t line, int64_t position, std::string& symbol)
+	static inline token_a<> lake_val(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
 	{
-		return lake_val_(sym(filename), number_data_a<int64_t>::val(line), number_data_a<int64_t>::val(position), sym(symbol));
+		return lake_val_(sym(filename), number_int_64_t<>::val(line), number_int_64_t<>::val(position), sym(symbol));
 	}
 
 	static inline any_a<> int_val__(range_a<> const& range)
@@ -158,9 +158,9 @@ public: ___STRANGE_THING___
 		return val_(filename, line, position, sym("int"), symbol, int_64_from_string(symbol.to_string()));
 	}
 
-	static inline token_a<> int_val(std::string const& filename, int64_t line, int64_t position, std::string& symbol)
+	static inline token_a<> int_val(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
 	{
-		return int_val_(sym(filename), number_data_a<int64_t>::val(line), number_data_a<int64_t>::val(position), sym(symbol));
+		return int_val_(sym(filename), number_int_64_t<>::val(line), number_int_64_t<>::val(position), sym(symbol));
 	}
 
 	static inline any_a<> float_val__(range_a<> const& range)
@@ -173,9 +173,9 @@ public: ___STRANGE_THING___
 		return val_(filename, line, position, sym("float"), symbol, float_64_from_string(symbol.to_string()));
 	}
 
-	static inline token_a<> float_val(std::string const& filename, int64_t line, int64_t position, std::string& symbol)
+	static inline token_a<> float_val(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
 	{
-		return float_val_(sym(filename), number_data_a<int64_t>::val(line), number_data_a<int64_t>::val(position), sym(symbol));
+		return float_val_(sym(filename), number_int_64_t<>::val(line), number_int_64_t<>::val(position), sym(symbol));
 	}
 
 	static inline any_a<> name_val__(range_a<> const& range)
@@ -188,9 +188,9 @@ public: ___STRANGE_THING___
 		return val_(filename, line, position, sym("name"), symbol);
 	}
 
-	static inline token_a<> name_val(std::string const& filename, int64_t line, int64_t position, std::string& symbol)
+	static inline token_a<> name_val(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
 	{
-		return name_val_(sym(filename), number_data_a<int64_t>::val(line), number_data_a<int64_t>::val(position), sym(symbol));
+		return name_val_(sym(filename), number_int_64_t<>::val(line), number_int_64_t<>::val(position), sym(symbol));
 	}
 
 	static inline any_a<> punctuation_val__(range_a<> const& range)
@@ -203,9 +203,9 @@ public: ___STRANGE_THING___
 		return val_(filename, line, position, sym("punctuation"), symbol);
 	}
 
-	static inline token_a<> punctuation_val(std::string const& filename, int64_t line, int64_t position, std::string& symbol)
+	static inline token_a<> punctuation_val(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
 	{
-		return punctuation_val_(sym(filename), number_data_a<int64_t>::val(line), number_data_a<int64_t>::val(position), sym(symbol));
+		return punctuation_val_(sym(filename), number_int_64_t<>::val(line), number_int_64_t<>::val(position), sym(symbol));
 	}
 
 	static inline any_a<> error_val__(range_a<> const& range)
@@ -218,9 +218,9 @@ public: ___STRANGE_THING___
 		return val_(filename, line, position, sym("error"), symbol);
 	}
 
-	static inline token_a<> error_val(std::string const& filename, int64_t line, int64_t position, std::string& symbol)
+	static inline token_a<> error_val(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
 	{
-		return error_val_(sym(filename), number_data_a<int64_t>::val(line), number_data_a<int64_t>::val(position), sym(symbol));
+		return error_val_(sym(filename), number_int_64_t<>::val(line), number_int_64_t<>::val(position), sym(symbol));
 	}
 
 	// reflection
