@@ -95,6 +95,9 @@
 #define ___derived___ symbol_a<>
 #include "strange_cat_a.h"
 
+#define ___root___ any_a<>
+#include "strange_token_a.h"
+
 #undef ___root___
 #undef ___derived___
 

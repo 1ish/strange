@@ -1,5 +1,5 @@
-#ifndef COM_ONEISH_STRANGE_NUMBER_A_H
-#define COM_ONEISH_STRANGE_NUMBER_A_H
+#ifndef COM_ONEISH_STRANGE_NUMBER_FORWARD_A_H
+#define COM_ONEISH_STRANGE_NUMBER_FORWARD_A_H
 
 #include "number_data_forward.hpp"
 

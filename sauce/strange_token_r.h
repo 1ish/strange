@@ -3,14 +3,14 @@
 
 namespace strange
 {
-/*
+
 template<>
-class reflection<range_a<>>
+class reflection<token_a<>>
 {
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val("strange::range");
+		static cat_a<> CAT = cat_t<>::val("strange::token");
 		return CAT;
 	}
 
@@ -30,14 +30,19 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update("cbegin", native_extraction_t<range_a<>>::val(&range_a<>::cbegin__));
-			operations.update("cend", native_extraction_t<range_a<>>::val(&range_a<>::cend__));
+			operations.update("filename", native_extraction_t<token_a<>>::val(&token_a<>::filename__));
+			operations.update("line", native_extraction_t<token_a<>>::val(&token_a<>::line__));
+			operations.update("position", native_extraction_t<token_a<>>::val(&token_a<>::position__));
+			operations.update("tag", native_extraction_t<token_a<>>::val(&token_a<>::tag__));
+			operations.update("symbol", native_extraction_t<token_a<>>::val(&token_a<>::symbol__));
+			operations.update("literal", native_extraction_t<token_a<>>::val(&token_a<>::literal__));
+			operations.update("precedence", native_extraction_t<token_a<>>::val(&token_a<>::precedence__));
 			return operations;
 		}();
 		return OPERATIONS;
 	}
 };
-*/
+
 template<>
 class reflection<token_t<>>
 {

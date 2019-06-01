@@ -1,5 +1,5 @@
-#ifndef COM_ONEISH_STRANGE_SHOAL_A_H
-#define COM_ONEISH_STRANGE_SHOAL_A_H
+#ifndef COM_ONEISH_STRANGE_SHOAL_FORWARD_A_H
+#define COM_ONEISH_STRANGE_SHOAL_FORWARD_A_H
 
 #include "forward_iterator_forward.hpp"
 

@@ -1,5 +1,5 @@
-#ifndef COM_ONEISH_STRANGE_FLOCK_A_H
-#define COM_ONEISH_STRANGE_FLOCK_A_H
+#ifndef COM_ONEISH_STRANGE_FLOCK_FORWARD_A_H
+#define COM_ONEISH_STRANGE_FLOCK_FORWARD_A_H
 
 #include "random_access_iterator_forward.hpp"
 

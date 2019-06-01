@@ -1,5 +1,5 @@
-#ifndef COM_ONEISH_STRANGE_ANY_A_H
-#define COM_ONEISH_STRANGE_ANY_A_H
+#ifndef COM_ONEISH_STRANGE_ANY_FORWARD_A_H
+#define COM_ONEISH_STRANGE_ANY_FORWARD_A_H
 
 #include "definitions.hpp"
 
