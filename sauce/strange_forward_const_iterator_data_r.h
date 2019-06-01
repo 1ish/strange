@@ -85,6 +85,33 @@ public:
 	}
 };
 
+template<>
+class reflection<forward_const_iterator_data_a<forward_const_iterator_a<>>>
+{
+public:
+	static inline cat_a<> cat()
+	{
+		static cat_a<> CAT = cat_t<>::val("strange::forward_const_iterator_data_forward_const_iterator");
+		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<forward_const_iterator_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
+	static inline unordered_shoal_a<> operations()
+	{
+		return reflection<forward_const_iterator_a<>>::operations();
+	}
+};
+
 }
 
 #endif

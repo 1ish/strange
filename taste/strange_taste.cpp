@@ -86,7 +86,7 @@ TEST(TestCaseName, ForLoop)
 	river_a<> river = river_t<>::val();
 
 	token_a<> token = token_t<>::val_(sym("filename"), number_int_64_t<>::val(1), number_int_64_t<>::val(2), sym("symbol"), sym("xyz"));
-	range_a<> tokenizer = tokenizer_t<>::val_(token.ranged_().cbegin_(), token.ranged_().cend_());
+	range_a<> tokenizer = tokenizer_t<>::val_(river);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
