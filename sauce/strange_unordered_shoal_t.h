@@ -290,7 +290,8 @@ public: ___STRANGE_COLLECTION___
 		auto values = flock_t<>::val_();
 		for (auto const& param : range)
 		{
-			values.push_back(at_(param));
+			auto p = at_(param);
+			values.push_back(p ? p : no());
 		}
 		return values;
 	}
