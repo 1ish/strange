@@ -51,7 +51,7 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> get_() const
 		{
-			return *_it;
+			return _token;
 		}
 
 		inline any_a<> const* operator->() const
@@ -61,7 +61,7 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> const& operator*() const
 		{
-			return *_it;
+			return _token;
 		}
 
 		inline _ABSTRACTION_ increment__(range_a<> const&)
@@ -77,7 +77,7 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 
 		inline const_iterator_t& operator++()
 		{
-			++_it;
+			_token = next();
 			return *this;
 		}
 
@@ -104,9 +104,20 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 			return _it;
 		}
 
+		// tokenizer
+		inline token_a<> next()
+		{
+			std::string token;
+			//TODO
+
+			return token_t<>::error_val(_river.filename(), _line, _position, token);
+		}
+
 	protected:
 		ITERATOR _it;
-		range_a<> _river;
+		river_a<> _river;
+		int64_t _line;
+		int64_t _position;
 		mutable token_a<> _token;
 
 		template <typename F>
@@ -114,7 +125,9 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _river(river, true)
-			, _token{ token_t<>::val_() }
+			, _line{ 1 }
+			, _position{ 1 }
+			, _token{ next() }
 		{}
 	};
 
