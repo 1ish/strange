@@ -50,5 +50,6 @@ class reflection;
 #include "strange_number_reference_r.h"
 #include "strange_something_r.h"
 #include "strange_token_r.h"
+#include "strange_tokenizer_r.h"
 
 #endif
