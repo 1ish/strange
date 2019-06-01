@@ -57,6 +57,7 @@ public:
 			operations.update("set_eof", native_mutation_t<river_a<>>::val(&river_a<>::set_eof__));
 			operations.update("set_fail", native_mutation_t<river_a<>>::val(&river_a<>::set_fail__));
 			operations.update("set_bad", native_mutation_t<river_a<>>::val(&river_a<>::set_bad__));
+			operations.update("filename", native_extraction_t<river_a<>>::val(&river_a<>::filename__));
 			return operations;
 		}();
 		return OPERATIONS;

@@ -16,7 +16,7 @@ public: ___STRANGE_THING___
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::token::val passed empty range");
+			return val_();
 		}
 		any_a<> filename = *it;
 		if (!check<symbol_a<>>(filename))
@@ -64,6 +64,11 @@ public: ___STRANGE_THING___
 			return val_(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(tag), cast<symbol_a<>>(symbol));
 		}
 		return val_(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(tag), cast<symbol_a<>>(symbol), *it);
+	}
+
+	static inline token_a<> val_()
+	{
+		return error_val();
 	}
 
 	static inline token_a<> val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& tag, symbol_a<> const& symbol)
@@ -218,7 +223,7 @@ public: ___STRANGE_THING___
 		return val_(filename, line, position, sym("error"), symbol);
 	}
 
-	static inline token_a<> error_val(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
+	static inline token_a<> error_val(std::string const& filename = std::string(), int64_t line = -1, int64_t position = -1, std::string const& symbol = std::string())
 	{
 		return error_val_(sym(filename), number_int_64_t<>::val(line), number_int_64_t<>::val(position), sym(symbol));
 	}

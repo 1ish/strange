@@ -926,11 +926,26 @@ public: ___STRANGE_COLLECTION___
 		}
 	}
 
+	inline any_a<> filename__(range_a<> const& _) const
+	{
+		return filename_();
+	}
+
+	inline symbol_a<> filename_() const
+	{
+		return sym(_filename);
+	}
+
+	inline std::string filename() const
+	{
+		return _filename;
+	}
+
 protected:
 	std::istream* const _istream;
 	std::ostream* const _ostream;
 	std_shared_ios_base const _stream;
-	std::string const& _filename;
+	std::string const _filename;
 
 	inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_ios_base const& stream = std_shared_ios_base{}, std::string const& filename = std::string{})
 		: thing_t{}

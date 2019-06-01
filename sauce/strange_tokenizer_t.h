@@ -107,12 +107,14 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 	protected:
 		ITERATOR _it;
 		range_a<> _river;
+		mutable token_a<> _token;
 
 		template <typename F>
 		inline const_iterator_t(river_a<> const& river, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _river(river, true)
+			, _token{ token_t<>::val_() }
 		{}
 	};
 
