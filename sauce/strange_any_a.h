@@ -113,6 +113,10 @@ namespace strange {
     		return *this;
     	}
     
+     inline one_t const & const_thing ( ) const
+     { assert(handle_); return read().const_thing( ); }
+     inline one_t & mutable_thing ( )
+     { assert(handle_); return write().mutable_thing( ); }
      inline any_a type__ ( range_a const & _ ) const
      { assert(handle_); return read().type__(_ ); }
      inline symbol_a type_ ( ) const
@@ -238,6 +242,8 @@ namespace strange {
     
     		virtual inline void operator%=(any_a const& other) = 0;
     
+      virtual inline one_t const & const_thing ( ) const = 0;
+      virtual inline one_t & mutable_thing ( ) = 0;
       virtual inline any_a type__ ( range_a const & _ ) const = 0;
       virtual inline symbol_a type_ ( ) const = 0;
       virtual inline any_a share__ ( range_a const & range ) const = 0;
@@ -345,6 +351,10 @@ namespace strange {
     			value_.operator%=(other);
     		}
     
+      virtual inline one_t const & const_thing ( ) const
+      { return value_.const_thing( ); }
+      virtual inline one_t & mutable_thing ( )
+      { return value_.mutable_thing( ); }
       virtual inline any_a type__ ( range_a const & _ ) const
       { return value_.type__(_ ); }
       virtual inline symbol_a type_ ( ) const

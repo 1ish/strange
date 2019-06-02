@@ -13,6 +13,17 @@ public:
 		_meek = weak;
 	}
 
+	// exposure
+	inline one_t const& const_thing() const
+	{
+		return *this;
+	}
+
+	inline one_t& mutable_thing()
+	{
+		return *this;
+	}
+
 	// conversion
 	inline operator bool() const
 	{
