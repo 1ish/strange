@@ -118,6 +118,8 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 		river_a<> _river;
 		int64_t _line;
 		int64_t _position;
+		bool _dot;
+		char _use;
 		mutable token_a<> _token;
 
 		template <typename F>
@@ -127,8 +129,20 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 			, _river(river, true)
 			, _line{ 1 }
 			, _position{ 1 }
+			, _dot{ false }
+			, _use{ 0 }
 			, _token{ next() }
 		{}
+
+		static inline const bool alpha_(const char c)
+		{
+			return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_';
+		}
+
+		static inline const bool numeric_(const char c)
+		{
+			return c >= '0' && c <= '9';
+		}
 	};
 
 public: ___STRANGE_RANGE___
