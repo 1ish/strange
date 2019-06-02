@@ -104,13 +104,370 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 			return _it;
 		}
 
-		// tokenizer
+		// next token
 		inline token_a<> next()
 		{
+			bool alphanumeric = false;
+			bool numeric = false;
+			bool point = false;
+			bool exponent = false;
+			bool second = false;
+			bool singlequote = false;
+			bool doublequote = false;
+			bool escape = false;
+			bool commentblock = false;
+			bool commentline = false;
+			bool clone = false;
 			std::string token;
-			//TODO
 
-			return token_t<>::error_val(_river.filename(), _line, _position, token);
+			while (true)
+			{
+				char char1;
+				char char2;
+				if (_dot)
+				{
+					char1 = '.';
+					_dot = false;
+				}
+				else if (_use)
+				{
+					char1 = _use;
+					_use = 0;
+				}
+				else if (!_river.good())
+				{
+					break;
+				}
+				else
+				{
+					char1 = _river.get();
+					if (!_river.good())
+					{
+						break;
+					}
+					++_position;
+				}
+				char2 = _river.good() ? _river.peek() : 0;
+				if (!_river.good())
+				{
+					char2 = 0;
+				}
+
+				if (char1 == '\n')
+				{
+					_position = 1;
+					++_line;
+				}
+
+				if (clone)
+				{
+					if (token == "~~")
+					{
+						if (char2 == '#') // ~~##
+						{
+							token += char1; // ~~#
+							continue;
+						}
+						// ~~#.
+						_use = char1; // #
+						return punctuation_token(token); // ~~
+					}
+					// ~~##.
+					return punctuation_token(token + char1); // ~~##
+				}
+
+				if (commentblock)
+				{
+					if (second)
+					{
+						token = "";
+						commentblock = false;
+					}
+					second = (char1 == '*' && char2 == '/');
+				}
+				else if (commentline)
+				{
+					if (char1 == '\n')
+					{
+						token = "";
+						commentline = false;
+					}
+				}
+				else if (escape)
+				{
+					switch (char1)
+					{
+					case 'a':
+						token += '\a';
+						break;
+					case 'b':
+						token += '\b';
+						break;
+					case 'f':
+						token += '\f';
+						break;
+					case 'n':
+						token += '\n';
+						break;
+					case 'r':
+						token += '\r';
+						break;
+					case 't':
+						token += '\t';
+						break;
+					case 'v':
+						token += '\v';
+						break;
+					default:
+						token += char1;
+					}
+					escape = false;
+				}
+				else if (second)
+				{
+					if (char1 == '=' && char2 == '=' && (token == "!" || token == "#")) // !== or #==
+					{
+						_use = char1; // =
+						return punctuation_token(token); // ! or #
+					}
+					if (char1 == '~' && char2 == '#' && token == "~") // ~~#
+					{
+						token += char1; // ~~
+						clone = true;
+						continue;
+					}
+					if (token == "|")
+					{
+						if (char1 == ':' && char2 == '.') // |:.
+						{
+							token += char1;
+							continue;
+						}
+						if (char1 == '.' && char2 == ':') // |.:
+						{
+							_use = char1;
+							return punctuation_token(token);
+						}
+						// |: or |.
+					}
+					return punctuation_token(token + char1);
+				}
+				else if (singlequote && char1 == '\'')
+				{
+					return symbol_token(token + char1);
+				}
+				else if (doublequote && char1 == '\"')
+				{
+					return lake_token(token + char1);
+				}
+				else if (singlequote || doublequote)
+				{
+					if (char1 == '\\')
+					{
+						escape = true;
+					}
+					else
+					{
+						token += char1;
+					}
+				}
+				else switch (char1)
+				{
+				case ' ':
+				case '\n':
+				case '\t':
+				case '\r':
+					// skip whitespace
+					break;
+				case '\'':
+					token = char1;
+					singlequote = true;
+					break;
+				case '\"':
+					token = char1;
+					doublequote = true;
+					break;
+				case '+':
+				case '-':
+				case '*':
+				case '%':
+				case '#':
+					if (char1 == char2 || char2 == '=' || char2 == '<' || char2 == '{')
+					{
+						second = true;
+					}
+					token = char1;
+					if (second)
+					{
+						break;
+					}
+					return punctuation_token(token);
+				case '!':
+					token = char1;
+					if (char2 == '&' || char2 == '|' || char2 == '%' || char2 == '=')
+					{
+						second = true;
+						break;
+					}
+					return punctuation_token(token);
+				case ':':
+					token = char1;
+					if (char1 == char2 || char2 == '.' || char2 == '=' || char2 == '#' || char2 == '%' || char2 == '*' || char2 == '~' ||
+						char2 == '<' || char2 == '{')
+					{
+						second = true;
+						break;
+					}
+					return punctuation_token(token);
+				case '.':
+					token = char1;
+					if (char1 == char2 || char2 == ':' || char2 == '?' || char2 == '!')
+					{
+						second = true;
+						break;
+					}
+					return punctuation_token(token);
+				case '<':
+				case '>':
+					token = char1;
+					if (char1 == char2 || char2 == '=' || char2 == '@')
+					{
+						second = true;
+						break;
+					}
+					return punctuation_token(token);
+				case '@':
+					token = char1;
+					if (char1 == char2 || char2 == '=' || char2 == '+' || char2 == '-' || char2 == '<' || char2 == '>' || char2 == ':')
+					{
+						second = true;
+						break;
+					}
+					return punctuation_token(token);
+				case '|':
+					token = char1;
+					if (char1 == char2 || char2 == '.' || char2 == ':')
+					{
+						second = true;
+						break;
+					}
+					return punctuation_token(token);
+				case '&':
+				case '^':
+				case '$':
+				case '~':
+				case '=':
+					token = char1;
+					if (char1 == char2)
+					{
+						second = true;
+						break;
+					}
+					return punctuation_token(token);
+				case '/':
+					token = char1;
+					if (char2 == '=')
+					{
+						second = true;
+						break;
+					}
+					if (char2 == '*')
+					{
+						commentblock = true;
+						break;
+					}
+					if (char2 == '/')
+					{
+						commentline = true;
+						break;
+					}
+					return punctuation_token(token);
+				default:
+				{
+					bool const alpha1 = alpha_char(char1);
+					bool const num1 = numeric_char(char1);
+					bool const alpha2 = alpha_char(char2);
+					bool const num2 = numeric_char(char2);
+					if (!alphanumeric && !numeric)
+					{
+						if (num1 || char1 == '-' && num2)
+						{
+							numeric = true;
+						}
+						else if (alpha1)
+						{
+							alphanumeric = true;
+						}
+					}
+					if (numeric)
+					{
+						token += char1;
+						bool const exp1 = (char1 == 'E' || char1 == 'e');
+						bool const pnt1 = (char1 == '.');
+						if (exp1)
+						{
+							exponent = true;
+							point = true;
+						}
+						else if (pnt1)
+						{
+							point = true;
+						}
+						bool const pnt2 = (char2 == '.');
+						bool const exp2 = (char2 == 'E' || char2 == 'e');
+						bool const sig2 = (char2 == '+' || char2 == '-');
+						if (!num2 &&
+							(!pnt2 || (pnt2 && point)) &&
+							(!exp2 || (exp2 && exponent)) &&
+							(!sig2 || (sig2 && !exp1)))
+						{
+							if (point || exponent)
+							{
+								if (pnt1)
+								{
+									_dot = true;
+									return int_token(token.substr(0, token.length() - 1));
+								}
+								if (exp1)
+								{
+									_use = char1;
+									if (point)
+									{
+										if (token[token.length() - 2] == '.')
+										{
+											_dot = true;
+											return int_token(token.substr(0, token.length() - 2));
+										}
+										return float_token(token.substr(0, token.length() - 1));
+									}
+									return int_token(token.substr(0, token.length() - 1));
+								}
+								return float_token(token);
+							}
+							return int_token(token);
+						}
+					}
+					else if (alphanumeric)
+					{
+						token += char1;
+						if (!alpha2 && !num2)
+						{
+							return name_token(token);
+						}
+					}
+					else
+					{
+						// single character punctuation
+						return punctuation_token(std::string(&char1, 1));
+					}
+				}
+				}
+			}
+			if (commentline || token.empty())
+			{
+				return punctuation_token("");
+			}
+			return error_token(token);
 		}
 
 	protected:
@@ -134,14 +491,49 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 			, _token{ next() }
 		{}
 
-		static inline const bool alpha_(const char c)
+		static inline bool alpha_char(char c)
 		{
 			return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_';
 		}
 
-		static inline const bool numeric_(const char c)
+		static inline bool numeric_char(char c)
 		{
 			return c >= '0' && c <= '9';
+		}
+
+		inline token_a<> symbol_token(std::string const& str) const
+		{
+			return token_t<>::symbol_val(_river.filename(), _line, _position, str);
+		}
+
+		inline token_a<> lake_token(std::string const& str) const
+		{
+			return token_t<>::lake_val(_river.filename(), _line, _position, str);
+		}
+
+		inline token_a<> int_token(std::string const& str) const
+		{
+			return token_t<>::int_val(_river.filename(), _line, _position, str);
+		}
+
+		inline token_a<> float_token(std::string const& str) const
+		{
+			return token_t<>::float_val(_river.filename(), _line, _position, str);
+		}
+
+		inline token_a<> name_token(std::string const& str) const
+		{
+			return token_t<>::name_val(_river.filename(), _line, _position, str);
+		}
+
+		inline token_a<> punctuation_token(std::string const& str) const
+		{
+			return token_t<>::punctuation_val(_river.filename(), _line, _position, str);
+		}
+
+		inline token_a<> error_token(std::string const& str) const
+		{
+			return token_t<>::error_val(_river.filename(), _line, _position, str);
 		}
 	};
 
