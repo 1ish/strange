@@ -121,7 +121,6 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 			bool escape = false;
 			bool commentblock = false;
 			bool commentline = false;
-			bool clone = false;
 			std::string token;
 
 			while (true)
@@ -161,23 +160,6 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 				{
 					_position = 1;
 					++_line;
-				}
-
-				if (clone)
-				{
-					if (token == "~~")
-					{
-						if (char2 == '#') // ~~##
-						{
-							token += char1; // ~~#
-							continue;
-						}
-						// ~~#.
-						_use = char1; // #
-						return punctuation_token(token); // ~~
-					}
-					// ~~##.
-					return punctuation_token(token + char1); // ~~##
 				}
 
 				if (commentblock)
@@ -229,16 +211,10 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 				}
 				else if (second)
 				{
-					if (char1 == '=' && char2 == '=' && (token == "!" || token == "#")) // !== or #==
+					if (char1 == '=' && char2 == '=' && token == "!") // !==
 					{
 						_use = char1; // =
-						return punctuation_token(token); // ! or #
-					}
-					if (char1 == '~' && char2 == '#' && token == "~") // ~~#
-					{
-						token += char1; // ~~
-						clone = true;
-						continue;
+						return punctuation_token(token); // !
 					}
 					if (token == "|")
 					{
@@ -295,14 +271,18 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 				case '-':
 				case '*':
 				case '%':
-				case '#':
+					token = char1;
 					if (char1 == char2 || char2 == '=' || char2 == '<' || char2 == '{')
 					{
 						second = true;
+						break;
 					}
+					return punctuation_token(token);
+				case '#':
 					token = char1;
-					if (second)
+					if (char2 == '=' || char2 == '<' || char2 == '{')
 					{
+						second = true;
 						break;
 					}
 					return punctuation_token(token);
@@ -325,7 +305,7 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 					return punctuation_token(token);
 				case '.':
 					token = char1;
-					if (char1 == char2 || char2 == ':' || char2 == '?' || char2 == '!')
+					if (char2 == ':')
 					{
 						second = true;
 						break;
@@ -357,9 +337,7 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 					}
 					return punctuation_token(token);
 				case '&':
-				case '^':
 				case '$':
-				case '~':
 				case '=':
 					token = char1;
 					if (char1 == char2)
