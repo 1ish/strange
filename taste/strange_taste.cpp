@@ -104,6 +104,8 @@ TEST(TestCaseName, ForLoop)
 			std::cout << "token: " << t.symbol() << std::endl;
 		}
 	}
+
+	expression_a<> expression;
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

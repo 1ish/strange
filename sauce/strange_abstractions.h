@@ -6,6 +6,7 @@
 #include "strange_any_a.h"
 
 #define ___root___ any_a<>
+
 #include "strange_symbol_a.h"
 
 #include "strange_forward_const_iterator_a.h"
@@ -95,8 +96,9 @@
 #define ___derived___ symbol_a<>
 #include "strange_cat_a.h"
 
-#define ___root___ any_a<>
 #include "strange_token_a.h"
+
+#include "strange_expression_a.h"
 
 #undef ___root___
 #undef ___derived___
