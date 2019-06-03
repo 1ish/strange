@@ -31,12 +31,36 @@ public: ___STRANGE_THING___
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& _, range_a<> const& range) const
+	inline any_a<> operate_(any_a<>& local, range_a<> const& _) const
+	{
+		if (!check<unordered_shoal_a<>>(local))
+		{
+			throw dis("strange::expression::operate passed non-unordered-shoal local");
+		}
+		return evaluate_(static_cast<unordered_shoal_a<>&>(local));
+	}
+
+	// expression
+	inline any_a<> evaluate__(range_a<> const& range) const
+	{
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
+		{
+			throw dis("strange::expression::evaluate passed empty range");
+		}
+		any_a<> local = *it;
+		if (!check<unordered_shoal_a<>>(local))
+		{
+			throw dis("strange::expression::evaluate passed non-unordered-shoal local");
+		}
+		return evaluate_(cast<unordered_shoal_a<>>(local, true));
+	}
+
+	inline any_a<> evaluate_(unordered_shoal_a<>& local) const
 	{
 		return no();
 	}
 
-	// expression
 	inline any_a<> generate__(range_a<> const& range) const
 	{
 		return no();
