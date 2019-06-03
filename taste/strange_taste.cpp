@@ -105,7 +105,7 @@ TEST(TestCaseName, ForLoop)
 		}
 	}
 
-	expression_a<> expression;
+	expression_a<> expression = expression_t<>::val_();
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
