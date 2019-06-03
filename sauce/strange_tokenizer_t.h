@@ -211,24 +211,24 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 				}
 				else if (second)
 				{
-					if (char1 == '=' && char2 == '=' && token == "!") // !==
+					if (char1 == '=' && char2 == '=' && (token == "!" || token == "#")) // !== or #==
 					{
 						_use = char1; // =
-						return punctuation_token(token); // !
+						return punctuation_token(token); // ! or #
 					}
-					if (token == "|")
+					if (token == "^")
 					{
-						if (char1 == ':' && char2 == '.') // |:.
+						if (char1 == ':' && char2 == '.') // ^:.
 						{
 							token += char1;
 							continue;
 						}
-						if (char1 == '.' && char2 == ':') // |.:
+						if (char1 == '.' && char2 == ':') // ^.:
 						{
 							_use = char1;
 							return punctuation_token(token);
 						}
-						// |: or |.
+						// ^: or ^.
 					}
 					return punctuation_token(token + char1);
 				}
@@ -328,15 +328,16 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 						break;
 					}
 					return punctuation_token(token);
-				case '|':
+				case '^':
 					token = char1;
-					if (char1 == char2 || char2 == '.' || char2 == ':')
+					if (char2 == '.' || char2 == ':')
 					{
 						second = true;
 						break;
 					}
 					return punctuation_token(token);
 				case '&':
+				case '|':
 				case '$':
 				case '=':
 					token = char1;
