@@ -107,6 +107,10 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 		// next token
 		inline token_a<> next()
 		{
+			if (_it == _river.cend_())
+			{
+				return punctuation_token("");
+			}
 			bool alphanumeric = false;
 			bool numeric = false;
 			bool point = false;
@@ -465,6 +469,10 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 			}
 			if (commentline || token.empty())
 			{
+				if (!_river.good() && _it != _river.cend_())
+				{
+					++_it;
+				}
 				return punctuation_token("");
 			}
 			return error_token(token);

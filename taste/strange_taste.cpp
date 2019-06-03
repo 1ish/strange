@@ -83,10 +83,27 @@ TEST(TestCaseName, ForLoop)
 	inventory_a<> lake = lake_float_64_t<>::val_();
 	inventory_a<> brook = brook_float_32_t<>::val_();
 
-	river_a<> river = river_t<>::val();
-
+	river_a<> river = river_t<>::val(" x y z ");
+	/*
+	for (auto const& c : river)
+	{
+		if (check<number_a<>>(c))
+		{
+			std::cout << "char: " << cast<number_a<>>(c).to_int_64() << std::endl;
+		}
+	}
+	*/
 	token_a<> token = token_t<>::val_(sym("filename"), number_int_64_t<>::val(1), number_int_64_t<>::val(2), sym("symbol"), sym("xyz"));
 	range_a<> tokenizer = tokenizer_t<>::val_(river);
+
+	for (auto const& tok : tokenizer)
+	{
+		if (check<token_a<>>(tok))
+		{
+			auto t = cast<token_a<>>(tok);
+			std::cout << "token: " << t.symbol() << std::endl;
+		}
+	}
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
