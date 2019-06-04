@@ -48,8 +48,13 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 	// expression
-	inline void generate(int64_t indent, river_a<> const& river) const //TODO
+	inline void generate(int64_t indent, river_a<>& river) const
 	{
+		if (!check<symbol_a<>>(_key))
+		{
+			throw dis("strange::expression_local_at::generate called with non-symbol key");
+		}
+		river.write_(lake_from_string(" " + cast<symbol_a<>>(_key).to_string() + " "));
 	}
 
 protected:

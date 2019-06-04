@@ -19,8 +19,8 @@ class expression_a
 public:
 	// expression
 	inline any_a<> generate__(range_a<> const& range) const;
-	inline any_a<> generate_(number_data_a_int64 const& indent, river_a<> const& river) const;
-	inline void generate(int64_t indent, river_a<> const& river) const;
+	inline any_a<> generate_(number_data_a_int64 const& indent, river_a<>& river) const;
+	inline void generate(int64_t indent, river_a<>& river) const;
 };
 
 } // namespace strange
