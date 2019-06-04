@@ -14,6 +14,34 @@ static inline any_a<> val__(range_a<> const& range) \
 	} \
 	return val_(cast<flock_a<>>(range)); \
 } \
+inline any_a<> generate__(range_a<> const& range) const \
+{ \
+	forward_const_iterator_a<> it = range.cbegin_(); \
+	if (it == range.cend_()) \
+	{ \
+		throw dis("[expression]::val passed empty range"); \
+	} \
+	any_a<> indent = *it; \
+	if (!check<number_data_a<int64_t>>(indent)) \
+	{ \
+		throw dis("[expression]::val passed non-int-64 indent"); \
+	} \
+	if (++it == range.cend_()) \
+	{ \
+		throw dis("[expression]::val passed short range"); \
+	} \
+	any_a<> river = *it; \
+	if (!check<river_a<>>(river)) \
+	{ \
+		throw dis("[expression]::val passed non-river"); \
+	} \
+	return generate_(cast<number_data_a<int64_t>>(indent), cast<river_a<>>(river)); \
+} \
+inline any_a<> generate_(number_data_a<int64_t> const& indent, river_a<> const& river) const \
+{ \
+	generate(indent.extract(), river); \
+	return river; \
+} \
 
 template <typename _ABSTRACTION_ = expression_a<>>
 class expression_t : public operation_t<_ABSTRACTION_>
@@ -43,17 +71,7 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 	// expression
-	inline any_a<> generate__(range_a<> const& range) const
-	{
-		return no();
-	}
-
-	inline any_a<> generate_(number_data_a<int64_t> const& indent, river_a<> const& river) const
-	{
-		return no();
-	}
-
-	inline void generate(int64_t indent, river_a<> const& river) const
+	inline void generate(int64_t indent, river_a<> const& river) const //TODO
 	{
 	}
 
