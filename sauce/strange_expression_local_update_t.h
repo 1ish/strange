@@ -11,11 +11,21 @@ public: ___STRANGE_EXPRESSION___
 	// construction
 	static inline expression_a<> val_(flock_a<> const& terms)
 	{
-		if (terms.size() != 1)
+		if (terms.size() != 3)
 		{
 			throw dis("strange::expression_local_update::val passed wrong number of terms");
 		}
-		return expression_a<>{ expression_local_update_t<>{ terms.at(0) } };
+		any_a<> cat = terms.at(0);
+		if (!check<cat_a<>>(cat))
+		{
+			throw dis("strange::expression_local_update::val passed non-cat");
+		}
+		any_a<> val = terms.at(2);
+		if (!check<expression_a<>>(val))
+		{
+			throw dis("strange::expression_local_update::val passed non-expression");
+		}
+		return expression_a<>{ expression_local_update_t<>{ cast<cat_a<>>(cat), terms.at(1), cast<expression_a<>>(val) } };
 	}
 
 	// reflection
@@ -38,13 +48,18 @@ public: ___STRANGE_EXPRESSION___
 			throw dis("strange::expression_local_update::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract();
+		auto& local = static_cast<unordered_shoal_a<>&>(thing).reference();
 		auto it = local.find(_key);
 		if (it == local.cend())
 		{
 			throw dis("strange::expression_local_update::operate key not found");
 		}
-		return it->second;
+		auto val = _val.operate_(thing, range);
+		if (!val.cats_().has_(_cat))
+		{
+			throw dis("strange::expression_local_update::operate cat does not include value");
+		}
+		return it->second = val;
 	}
 
 	// expression
@@ -54,15 +69,20 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis("strange::expression_local_update::generate called with non-symbol key");
 		}
-		river.write_(lake_from_string(" " + cast<symbol_a<>>(_key).to_string() + " "));
+		river.write_(lake_from_string(" " + cast<symbol_a<>>(_key).to_string() + " ="));
+		_val.generate(indent, river);
 	}
 
 protected:
+	cat_a<> const _cat;
 	any_a<> const _key;
+	expression_a<> const _val;
 
-	inline expression_local_update_t(any_a<> const& key)
+	inline expression_local_update_t(cat_a<> const& cat, any_a<> const& key, expression_a<> const& val)
 		: expression_t{}
+		, _cat{ cat }
 		, _key{ key }
+		, _val{ val }
 	{}
 };
 
