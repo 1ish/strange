@@ -78,7 +78,7 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis("strange::expression_local_insert::generate called with non-symbol key");
 		}
-		//TODO river.write_(lake_from_string(" " + _cat.code() + " " + cast<symbol_a<>>(_key).to_string() + " ="));
+		river.write_(lake_from_string(" " + _cat.code() + " " + cast<symbol_a<>>(_key).to_string() + " ="));
 		_val.generate(indent, river);
 	}
 

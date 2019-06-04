@@ -13,7 +13,7 @@
 namespace strange
 {
 
-template <typename _1_>
+template <typename lake_a_int8>
 class cat_a
 {
 public:
@@ -37,6 +37,10 @@ public:
 	inline any_a<> includes__(range_a<> const& range) const;
 	inline any_a<> includes_(any_a<> const& thing) const;
 	inline bool includes(any_a<> const& thing) const;
+
+	inline any_a<> code__(range_a<> const& _) const;
+	inline lake_a_int8 code_() const;
+	inline std::string code() const;
 };
 
 } // namespace strange

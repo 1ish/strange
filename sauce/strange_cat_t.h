@@ -225,6 +225,21 @@ public: ___STRANGE_THING___
 		throw dis("strange::cat:conforms passed non-cat-or-cats");
 	}
 
+	inline any_a<> code__(range_a<> const& _) const
+	{
+		return code_();
+	}
+
+	inline lake_a<int8_t> code_() const
+	{
+		return lake_from_string(code());
+	}
+
+	inline std::string code() const
+	{
+		return _name.to_string() + "_a<>";
+	}
+
 protected:
 	bool const _symbolic; // recursively true if all of the cats below are symbolic and there are no non-cat arguments
 	symbol_a<> const _name;

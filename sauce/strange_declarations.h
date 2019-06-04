@@ -105,7 +105,7 @@ class lake_a;
 template <typename _1_>
 class brook_a;
 
-template <typename _1_ = void>
+template <typename lake_a_int8 = lake_a<int8_t>>
 class cat_a;
 
 template <typename number_data_a_int64 = number_data_a<int64_t>>

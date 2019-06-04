@@ -14,7 +14,7 @@
 
 
 namespace strange {
-    template < typename _1_ >
+    template < typename lake_a_int8 >
     class cat_a final : public ___derived___
     {
     public:
@@ -111,6 +111,12 @@ namespace strange {
      { assert(handle_); return read().includes_(thing ); }
      inline bool includes ( any_a < > const & thing ) const
      { assert(handle_); return read().includes(thing ); }
+     inline any_a < > code__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().code__(_ ); }
+     inline lake_a_int8 code_ ( ) const
+     { assert(handle_); return read().code_( ); }
+     inline std :: string code ( ) const
+     { assert(handle_); return read().code( ); }
     
     private:
     	struct ___finale_handle_base___ : ___derived_handle_base___
@@ -129,6 +135,9 @@ namespace strange {
       virtual inline any_a < > includes__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > includes_ ( any_a < > const & thing ) const = 0;
       virtual inline bool includes ( any_a < > const & thing ) const = 0;
+      virtual inline any_a < > code__ ( range_a < > const & _ ) const = 0;
+      virtual inline lake_a_int8 code_ ( ) const = 0;
+      virtual inline std :: string code ( ) const = 0;
     	};
     
     	template <typename ___TTT___>
@@ -177,6 +186,12 @@ namespace strange {
       { return value_.includes_(thing ); }
       virtual inline bool includes ( any_a < > const & thing ) const
       { return value_.includes(thing ); }
+      virtual inline any_a < > code__ ( range_a < > const & _ ) const
+      { return value_.code__(_ ); }
+      virtual inline lake_a_int8 code_ ( ) const
+      { return value_.code_( ); }
+      virtual inline std :: string code ( ) const
+      { return value_.code( ); }
     	};
     
     	template <typename ___TTT___>
