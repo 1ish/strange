@@ -31,6 +31,7 @@
 #include "strange_token_t.h"
 #include "strange_tokenizer_t.h"
 #include "strange_expression_t.h"
+#include "strange_expression_local_at_t.h"
 
 #undef ___STRANGE_THING___
 #undef ___STRANGE_COLLECTION___

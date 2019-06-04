@@ -16,7 +16,7 @@ public: ___STRANGE_THING___
 
 	static inline expression_a<> val_()
 	{
-		return expression_a<>{ expression_t<>{ flock_t<>::val_() } };
+		return expression_a<>{ expression_t<>{} };
 	}
 
 	// reflection
@@ -33,13 +33,6 @@ public: ___STRANGE_THING___
 	// function
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
-#ifdef STRANGE_CHECK_STATIC_CASTS
-		if (!check<unordered_shoal_a<>>(thing))
-		{
-			throw dis("strange::expression::operate passed non-unordered-shoal local");
-		}
-#endif
-		unordered_shoal_a<>& local = static_cast<unordered_shoal_a<>&>(thing);
 		return no();
 	}
 
@@ -59,11 +52,8 @@ public: ___STRANGE_THING___
 	}
 
 protected:
-	flock_a<> const _terms;
-
-	inline expression_t(flock_a<> const& terms)
+	inline expression_t()
 		: operation_t{}
-		, _terms{ terms }
 	{}
 };
 
