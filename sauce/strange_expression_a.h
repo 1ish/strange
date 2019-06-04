@@ -83,10 +83,6 @@ namespace strange {
     		return *this;
     	}
     
-     inline any_a < > evaluate__ ( range_a < > const & range ) const
-     { assert(handle_); return read().evaluate__(range ); }
-     inline any_a < > evaluate_ ( unordered_shoal_a < > & local ) const
-     { assert(handle_); return read().evaluate_(local ); }
      inline any_a < > generate__ ( range_a < > const & range ) const
      { assert(handle_); return read().generate__(range ); }
      inline any_a < > generate_ ( number_data_a_int64 const & indent , river_a < > const & river ) const
@@ -97,8 +93,6 @@ namespace strange {
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
-      virtual inline any_a < > evaluate__ ( range_a < > const & range ) const = 0;
-      virtual inline any_a < > evaluate_ ( unordered_shoal_a < > & local ) const = 0;
       virtual inline any_a < > generate__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > generate_ ( number_data_a_int64 const & indent , river_a < > const & river ) const = 0;
       virtual inline void generate ( int64_t indent , river_a < > const & river ) const = 0;
@@ -117,10 +111,6 @@ namespace strange {
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
-      virtual inline any_a < > evaluate__ ( range_a < > const & range ) const
-      { return value_.evaluate__(range ); }
-      virtual inline any_a < > evaluate_ ( unordered_shoal_a < > & local ) const
-      { return value_.evaluate_(local ); }
       virtual inline any_a < > generate__ ( range_a < > const & range ) const
       { return value_.generate__(range ); }
       virtual inline any_a < > generate_ ( number_data_a_int64 const & indent , river_a < > const & river ) const
