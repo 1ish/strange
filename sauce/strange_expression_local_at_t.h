@@ -9,13 +9,14 @@ class expression_local_at_t : public expression_t<_ABSTRACTION_>
 {
 public: ___STRANGE_EXPRESSION___
 	// construction
-	static inline expression_a<> val_(flock_a<> const& terms)
+	static inline expression_a<> val_(range_a<> const& terms)
 	{
-		if (terms.size() != 1)
+		forward_const_iterator_a<> it = terms.cbegin_();
+		if (it == terms.cend_())
 		{
-			throw dis("strange::expression_local_at::val passed wrong number of terms");
+			throw dis("strange::expression_local_at::val not passed any terms");
 		}
-		return expression_a<>{ expression_local_at_t<>{ terms.at(0) } };
+		return expression_a<>{ expression_local_at_t<>{ *it } };
 	}
 
 	// reflection

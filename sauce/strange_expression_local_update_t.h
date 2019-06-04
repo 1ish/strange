@@ -9,23 +9,33 @@ class expression_local_update_t : public expression_t<_ABSTRACTION_>
 {
 public: ___STRANGE_EXPRESSION___
 	// construction
-	static inline expression_a<> val_(flock_a<> const& terms)
+	static inline expression_a<> val_(range_a<> const& terms)
 	{
-		if (terms.size() != 3)
+		forward_const_iterator_a<> it = terms.cbegin_();
+		if (it == terms.cend_())
 		{
-			throw dis("strange::expression_local_update::val passed wrong number of terms");
+			throw dis("strange::expression_local_update::val not passed any terms");
 		}
-		any_a<> cat = terms.at(0);
+		any_a<> cat = *it;
 		if (!check<cat_a<>>(cat))
 		{
 			throw dis("strange::expression_local_update::val passed non-cat");
 		}
-		any_a<> val = terms.at(2);
+		if (++it == terms.cend_())
+		{
+			throw dis("strange::expression_local_update::val not passed sufficient terms");
+		}
+		any_a<> key = *it;
+		if (++it == terms.cend_())
+		{
+			throw dis("strange::expression_local_update::val not passed sufficient terms");
+		}
+		any_a<> val = *it;
 		if (!check<expression_a<>>(val))
 		{
 			throw dis("strange::expression_local_update::val passed non-expression");
 		}
-		return expression_a<>{ expression_local_update_t<>{ cast<cat_a<>>(cat), terms.at(1), cast<expression_a<>>(val) } };
+		return expression_a<>{ expression_local_update_t<>{ cast<cat_a<>>(cat), key, cast<expression_a<>>(val) } };
 	}
 
 	// reflection

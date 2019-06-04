@@ -8,11 +8,7 @@ namespace strange
 #define ___STRANGE_EXPRESSION___ ___STRANGE_THING___ \
 static inline any_a<> val__(range_a<> const& range) \
 { \
-	if (!check<flock_a<>>(range)) \
-	{ \
-		throw dis("[expression]::val passed non-flock range"); \
-	} \
-	return val_(cast<flock_a<>>(range)); \
+	return val_(range); \
 } \
 inline any_a<> generate__(range_a<> const& range) const \
 { \
@@ -48,7 +44,7 @@ class expression_t : public operation_t<_ABSTRACTION_>
 {
 public: ___STRANGE_EXPRESSION___
 	// construction
-	static inline expression_a<> val_(flock_a<> const& terms)
+	static inline expression_a<> val_(range_a<> const& terms)
 	{
 		return expression_a<>{ expression_t<>{} };
 	}
