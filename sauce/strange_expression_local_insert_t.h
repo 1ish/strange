@@ -59,17 +59,16 @@ public: ___STRANGE_EXPRESSION___
 		}
 #endif
 		auto& local = static_cast<unordered_shoal_a<>&>(thing).reference();
-		auto it = local.find(_key);
-		if (it == local.cend())
-		{
-			throw dis("strange::expression_local_insert::operate key not found");
-		}
 		auto val = _val.operate_(thing, range);
 		if (!val.cats_().has_(_cat))
 		{
 			throw dis("strange::expression_local_insert::operate cat does not include value");
 		}
-		return it->second = val;
+		if (!local.emplace(_key, val).second)
+		{
+			throw dis("strange::expression_local_insert::operate key exists");
+		}
+		return val;
 	}
 
 	// expression
@@ -79,7 +78,7 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis("strange::expression_local_insert::generate called with non-symbol key");
 		}
-		river.write_(lake_from_string(" " + cast<symbol_a<>>(_key).to_string() + " ="));
+		//TODO river.write_(lake_from_string(" " + _cat.code() + " " + cast<symbol_a<>>(_key).to_string() + " ="));
 		_val.generate(indent, river);
 	}
 
