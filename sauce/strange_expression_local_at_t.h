@@ -7,17 +7,8 @@ namespace strange
 template <typename _ABSTRACTION_ = expression_a<>>
 class expression_local_at_t : public expression_t<_ABSTRACTION_>
 {
-public: ___STRANGE_THING___
+public: ___STRANGE_EXPRESSION___
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
-	{
-		if (!check<flock_a<>>(range))
-		{
-			throw dis("strange::expression_local_at::val passed non-flock range");
-		}
-		return val_(cast<flock_a<>>(range));
-	}
-
 	static inline expression_a<> val_(flock_a<> const& terms)
 	{
 		if (terms.size() != 1)

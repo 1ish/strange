@@ -4,17 +4,23 @@
 namespace strange
 {
 
+// adaptation
+#define ___STRANGE_EXPRESSION___ ___STRANGE_THING___ \
+static inline any_a<> val__(range_a<> const& range) \
+{ \
+	if (!check<flock_a<>>(range)) \
+	{ \
+		throw dis("[expression]::val passed non-flock range"); \
+	} \
+	return val_(cast<flock_a<>>(range)); \
+} \
+
 template <typename _ABSTRACTION_ = expression_a<>>
 class expression_t : public operation_t<_ABSTRACTION_>
 {
-public: ___STRANGE_THING___
+public: ___STRANGE_EXPRESSION___
 	// construction
-	static inline any_a<> val__(range_a<> const& _)
-	{
-		return val_();
-	}
-
-	static inline expression_a<> val_()
+	static inline expression_a<> val_(flock_a<> const& terms)
 	{
 		return expression_a<>{ expression_t<>{} };
 	}
