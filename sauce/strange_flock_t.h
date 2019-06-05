@@ -759,6 +759,7 @@ public: ___STRANGE_COLLECTION___
 		if (result)
 		{
 			auto last = flock.size() - 1;
+			typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 			for (auto const& visited : _vector)
 			{
 				flock.update(last, visited);
@@ -775,11 +776,13 @@ public: ___STRANGE_COLLECTION___
 		{
 			return false;
 		}
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _vector == cast<flock_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		std::size_t seed = std::hash<std::size_t>{}(_vector.size());
 		for (auto const& item : _vector)
 		{
@@ -791,11 +794,13 @@ public: ___STRANGE_COLLECTION___
 	// range
 	inline random_access_const_iterator_a<> cbegin_() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> cend_() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cend());
 	}
 
@@ -806,6 +811,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> begin_()
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return iterator_t<std_vector_any::iterator>::val(me_(), _vector.begin());
 	}
 
@@ -816,6 +822,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> end_()
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return iterator_t<std_vector_any::iterator>::val(me_(), _vector.end());
 	}
 
@@ -842,7 +849,7 @@ public: ___STRANGE_COLLECTION___
 	inline any_a<> at(int64_t index) const
 	{
 		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
-		if (index >= 0 && index < size())
+		if (index >= 0 && index < int64_t(_vector.size()))
 		{
 			return _vector[std::size_t(index)];
 		}
@@ -862,10 +869,10 @@ public: ___STRANGE_COLLECTION___
 		if (index >= 0)
 		{
 			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
-			int64_t const siz = size();
+			int64_t const siz = int64_t(_vector.size());
 			if (index == siz)
 			{
-				push_back(value);
+				_vector.push_back(value);
 			}
 			else
 			{
@@ -887,10 +894,11 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (index >= 0)
 		{
-			int64_t const siz = size();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			int64_t const siz = int64_t(_vector.size());
 			if (index == siz)
 			{
-				push_back(value);
+				_vector.push_back(value);
 			}
 			else
 			{
@@ -916,7 +924,8 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase(int64_t index)
 	{
-		if (index >= 0 && index < size())
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		if (index >= 0 && index < int64_t(_vector.size()))
 		{
 			_vector.erase(_vector.cbegin() + index);
 			return true;
@@ -926,16 +935,19 @@ public: ___STRANGE_COLLECTION___
 
 	inline void clear()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_vector.clear();
 	}
 
 	inline int64_t size() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return int64_t(_vector.size());
 	}
 
 	inline bool empty() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _vector.empty();
 	}
 
@@ -951,11 +963,13 @@ public: ___STRANGE_COLLECTION___
 
 	inline void push_back(any_a<> const& thing)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_vector.push_back(thing);
 	}
 
 	inline any_a<> pop_back_()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		if (_vector.empty())
 		{
 			return no();
@@ -969,6 +983,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<flock_a<>>(range))
 		{
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			auto other = cast<flock_a<>>(range).extract();
 			_vector.insert(_vector.cend(), other.cbegin(), other.cend());
 		}
@@ -978,6 +993,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::flock += passed non-range");
 			}
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				_vector.push_back(thing);
@@ -990,6 +1006,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<collection_a<>>(range))
 		{
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_vector.resize(std::size_t(std::max<int64_t>(0, int64_t(_vector.size()) - cast<collection_a<>>(range).size())));
 		}
 		else
@@ -998,6 +1015,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::flock -= passed non-range");
 			}
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				if (_vector.empty())
@@ -1018,6 +1036,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline void mutate(std_vector_any const& data)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_vector = data;
 	}
 
