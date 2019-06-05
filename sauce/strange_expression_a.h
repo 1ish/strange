@@ -83,6 +83,12 @@ namespace strange {
     		return *this;
     	}
     
+     inline any_a < > generate__ ( range_a < > const & range ) const
+     { assert(handle_); return read().generate__(range ); }
+     inline any_a < > generate_ ( number_data_a_int64 const & indent , river_a < > & river ) const
+     { assert(handle_); return read().generate_(indent, river ); }
+     inline void generate ( int64_t indent , river_a < > & river ) const
+     { assert(handle_); read().generate(indent, river ); }
      inline any_a < > generate_cpp__ ( range_a < > const & range ) const
      { assert(handle_); return read().generate_cpp__(range ); }
      inline any_a < > generate_cpp_ ( number_data_a_int64 const & indent , river_a < > & river ) const
@@ -93,6 +99,9 @@ namespace strange {
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
+      virtual inline any_a < > generate__ ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > generate_ ( number_data_a_int64 const & indent , river_a < > & river ) const = 0;
+      virtual inline void generate ( int64_t indent , river_a < > & river ) const = 0;
       virtual inline any_a < > generate_cpp__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > generate_cpp_ ( number_data_a_int64 const & indent , river_a < > & river ) const = 0;
       virtual inline void generate_cpp ( int64_t indent , river_a < > & river ) const = 0;
@@ -111,6 +120,12 @@ namespace strange {
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
+      virtual inline any_a < > generate__ ( range_a < > const & range ) const
+      { return value_.generate__(range ); }
+      virtual inline any_a < > generate_ ( number_data_a_int64 const & indent , river_a < > & river ) const
+      { return value_.generate_(indent, river ); }
+      virtual inline void generate ( int64_t indent , river_a < > & river ) const
+      { value_.generate(indent, river ); }
       virtual inline any_a < > generate_cpp__ ( range_a < > const & range ) const
       { return value_.generate_cpp__(range ); }
       virtual inline any_a < > generate_cpp_ ( number_data_a_int64 const & indent , river_a < > & river ) const

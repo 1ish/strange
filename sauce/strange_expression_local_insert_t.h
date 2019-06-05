@@ -72,6 +72,16 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 	// expression
+	inline void generate(int64_t indent, river_a<>& river) const
+	{
+		if (!check<symbol_a<>>(_key))
+		{
+			throw dis("strange::expression_local_insert::generate called with non-symbol key");
+		}
+		river.write_(lake_from_string(" " + cast<symbol_a<>>(_key).to_string() + " :" + _cat.to_string() + "="));
+		_val.generate(indent, river);
+	}
+
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
 		if (!check<symbol_a<>>(_key))

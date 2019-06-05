@@ -10,26 +10,54 @@ static inline any_a<> val__(range_a<> const& range) \
 { \
 	return val_(range); \
 } \
+inline any_a<> generate__(range_a<> const& range) const \
+{ \
+	forward_const_iterator_a<> it = range.cbegin_(); \
+	if (it == range.cend_()) \
+	{ \
+		throw dis("[expression]::generate passed empty range"); \
+	} \
+	any_a<> indent = *it; \
+	if (!check<number_data_a<int64_t>>(indent)) \
+	{ \
+		throw dis("[expression]::generate passed non-int-64 indent"); \
+	} \
+	if (++it == range.cend_()) \
+	{ \
+		throw dis("[expression]::generate passed short range"); \
+	} \
+	any_a<> river = *it; \
+	if (!check<river_a<>>(river)) \
+	{ \
+		throw dis("[expression]::generate passed non-river"); \
+	} \
+	return generate_(cast<number_data_a<int64_t>>(indent), cast<river_a<>>(river, true)); \
+} \
+inline any_a<> generate_(number_data_a<int64_t> const& indent, river_a<>& river) const \
+{ \
+	generate(indent.extract(), river); \
+	return river; \
+} \
 inline any_a<> generate_cpp__(range_a<> const& range) const \
 { \
 	forward_const_iterator_a<> it = range.cbegin_(); \
 	if (it == range.cend_()) \
 	{ \
-		throw dis("[expression]::val passed empty range"); \
+		throw dis("[expression]::generate_cpp passed empty range"); \
 	} \
 	any_a<> indent = *it; \
 	if (!check<number_data_a<int64_t>>(indent)) \
 	{ \
-		throw dis("[expression]::val passed non-int-64 indent"); \
+		throw dis("[expression]::generate_cpp passed non-int-64 indent"); \
 	} \
 	if (++it == range.cend_()) \
 	{ \
-		throw dis("[expression]::val passed short range"); \
+		throw dis("[expression]::generate_cpp passed short range"); \
 	} \
 	any_a<> river = *it; \
 	if (!check<river_a<>>(river)) \
 	{ \
-		throw dis("[expression]::val passed non-river"); \
+		throw dis("[expression]::generate_cpp passed non-river"); \
 	} \
 	return generate_cpp_(cast<number_data_a<int64_t>>(indent), cast<river_a<>>(river, true)); \
 } \
@@ -67,6 +95,11 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 	// expression
+	inline void generate(int64_t indent, river_a<>& river) const
+	{
+		river.write_(lake_from_string(" $$strange::no[] "));
+	}
+
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
 		river.write_(lake_from_string(" strange::no() "));
