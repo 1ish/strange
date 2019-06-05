@@ -735,12 +735,12 @@ public: ___STRANGE_COLLECTION___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<flock_t<>>::type();
+		return reflection<flock_t<CONCURRENT>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<flock_t<>>::share(shoal);
+		reflection<flock_t<CONCURRENT>>::share(shoal);
 	}
 
 	// visitor pattern
@@ -1033,8 +1033,16 @@ protected:
 	template <typename F>
 	inline flock_t(F&& init)
 		: thing_t{}
-		, _mutex{}
 		, _vector{ std::forward<F>(init) }
+	{}
+
+public:
+	inline flock_t(flock_t const& other)
+		: _vector{ other._vector }
+	{}
+
+	inline flock_t(flock_t&& other)
+		: _vector{ std::move(other._vector) }
 	{}
 };
 

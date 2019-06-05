@@ -47,6 +47,22 @@ public:
 	}
 };
 
+template<>
+class reflection<flock_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::flock_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::flock_concurrent::val", native_function_t<>::val(&flock_t<true>::val__));
+	}
+};
+
 }
 
 #endif
