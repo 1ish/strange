@@ -18,5 +18,7 @@
 #include <fstream>
 #include <sstream>
 #include <iterator>
+#include <mutex>
+#include <shared_mutex>
 
 #endif

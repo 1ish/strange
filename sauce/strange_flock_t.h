@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = flock_a<>>
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = flock_a<>>
 class flock_t : public thing_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
@@ -841,6 +841,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> at(int64_t index) const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		if (index >= 0 && index < size())
 		{
 			return _vector[std::size_t(index)];
@@ -860,6 +861,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (index >= 0)
 		{
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			int64_t const siz = size();
 			if (index == siz)
 			{
@@ -1025,11 +1027,13 @@ public: ___STRANGE_COLLECTION___
 	}
 
 protected:
+	mutable typename concurrent_u<CONCURRENT>::mutex _mutex;
 	std_vector_any _vector;
 
 	template <typename F>
 	inline flock_t(F&& init)
 		: thing_t{}
+		, _mutex{}
 		, _vector{ std::forward<F>(init) }
 	{}
 };
