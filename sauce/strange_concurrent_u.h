@@ -71,13 +71,13 @@ using write_lock_ptr = typename concurrent_u<CONCURRENT>::write_lock_ptr;
 template <bool CONCURRENT>
 inline read_lock_ptr<CONCURRENT> make_read_lock_ptr(typename concurrent_u<CONCURRENT>::mutex& m)
 {
-	return std::make_shared<concurrent_u<CONCURRENT>::read_lock>(m);
+	return std::make_shared<typename concurrent_u<CONCURRENT>::read_lock>(m);
 }
 
 template <bool CONCURRENT>
 inline write_lock_ptr<CONCURRENT> make_write_lock_ptr(typename concurrent_u<CONCURRENT>::mutex& m)
 {
-	return std::make_shared<concurrent_u<CONCURRENT>::write_lock>(m);
+	return std::make_shared<typename concurrent_u<CONCURRENT>::write_lock>(m);
 }
 
 }
