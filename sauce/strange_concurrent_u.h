@@ -63,10 +63,10 @@ public:
 };
 
 template <bool CONCURRENT>
-using read_lock_ptr = std::shared_ptr<typename concurrent_u<CONCURRENT>::read_lock>;
+using read_lock_ptr = typename concurrent_u<CONCURRENT>::read_lock_ptr;
 
 template <bool CONCURRENT>
-using write_lock_ptr = std::shared_ptr<typename concurrent_u<CONCURRENT>::write_lock>;
+using write_lock_ptr = typename concurrent_u<CONCURRENT>::write_lock_ptr;
 
 template <bool CONCURRENT>
 inline read_lock_ptr<CONCURRENT> make_read_lock_ptr(typename concurrent_u<CONCURRENT>::mutex& m)
