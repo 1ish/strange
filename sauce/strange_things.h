@@ -28,6 +28,7 @@
 #include "strange_brook_t.h"
 #include "strange_river_t.h"
 #include "strange_cat_t.h"
+#include "strange_data_t.h"
 #include "strange_token_t.h"
 #include "strange_tokenizer_t.h"
 #include "strange_expression_t.h"

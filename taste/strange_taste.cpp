@@ -110,6 +110,8 @@ TEST(TestCaseName, ForLoop)
 	expression = expression_local_at_t<>::val_(flock);
 
 	flock_a<> concurrent = flock_t<true>::val_();
+
+	data_a<bool> data = data_t<bool>::val(true);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
