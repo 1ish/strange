@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename PRIMITIVE, typename _ABSTRACTION_ = lake_a<PRIMITIVE>>
+template <typename PRIMITIVE, bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<PRIMITIVE>>
 class lake_t : public thing_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
@@ -747,12 +747,12 @@ public: ___STRANGE_COLLECTION___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<lake_t<PRIMITIVE>>::type();
+		return reflection<lake_t<PRIMITIVE, CONCURRENT>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<lake_t<PRIMITIVE>>::share(shoal);
+		reflection<lake_t<PRIMITIVE, CONCURRENT>>::share(shoal);
 	}
 
 	// comparison
@@ -1059,6 +1059,7 @@ public: ___STRANGE_COLLECTION___
 	}
 
 protected:
+	mutable typename concurrent_u<CONCURRENT>::mutex _mutex;
 	std_vector_number _vector;
 
 	template <typename F>
@@ -1066,37 +1067,46 @@ protected:
 		: thing_t{}
 		, _vector{ std::forward<F>(init) }
 	{}
+
+public:
+	inline lake_t(lake_t const& other)
+		: _vector{ other._vector }
+	{}
+
+	inline lake_t(lake_t&& other)
+		: _vector{ std::move(other._vector) }
+	{}
 };
 
-template <typename _ABSTRACTION_ = lake_a<int8_t>>
-using lake_int_8_t = lake_t<int8_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<int8_t>>
+using lake_int_8_t = lake_t<int8_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_a<uint8_t>>
-using lake_uint_8_t = lake_t<uint8_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<uint8_t>>
+using lake_uint_8_t = lake_t<uint8_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_a<int16_t>>
-using lake_int_16_t = lake_t<int16_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<int16_t>>
+using lake_int_16_t = lake_t<int16_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_a<uint16_t>>
-using lake_uint_16_t = lake_t<uint16_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<uint16_t>>
+using lake_uint_16_t = lake_t<uint16_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_a<int32_t>>
-using lake_int_32_t = lake_t<int32_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<int32_t>>
+using lake_int_32_t = lake_t<int32_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_a<uint32_t>>
-using lake_uint_32_t = lake_t<uint32_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<uint32_t>>
+using lake_uint_32_t = lake_t<uint32_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_a<int64_t>>
-using lake_int_64_t = lake_t<int64_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<int64_t>>
+using lake_int_64_t = lake_t<int64_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_a<uint64_t>>
-using lake_uint_64_t = lake_t<uint64_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<uint64_t>>
+using lake_uint_64_t = lake_t<uint64_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_a<float>>
-using lake_float_32_t = lake_t<float, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<float>>
+using lake_float_32_t = lake_t<float, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = lake_a<double>>
-using lake_float_64_t = lake_t<double, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<double>>
+using lake_float_64_t = lake_t<double, CONCURRENT, _ABSTRACTION_>;
 
 lake_a<int8_t> lake_from_string(std::string const& str)
 {

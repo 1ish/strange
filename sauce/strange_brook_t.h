@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename PRIMITIVE, typename _ABSTRACTION_ = brook_a<PRIMITIVE>>
+template <typename PRIMITIVE, bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<PRIMITIVE>>
 class brook_t : public thing_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
@@ -747,12 +747,12 @@ public: ___STRANGE_COLLECTION___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<brook_t<PRIMITIVE>>::type();
+		return reflection<brook_t<PRIMITIVE, CONCURRENT>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<brook_t<PRIMITIVE>>::share(shoal);
+		reflection<brook_t<PRIMITIVE, CONCURRENT>>::share(shoal);
 	}
 
 	// comparison
@@ -1069,6 +1069,7 @@ public: ___STRANGE_COLLECTION___
 	}
 
 protected:
+	mutable typename concurrent_u<CONCURRENT>::mutex _mutex;
 	std_deque_number _deque;
 
 	template <typename F>
@@ -1076,37 +1077,46 @@ protected:
 		: thing_t{}
 		, _deque{ std::forward<F>(init) }
 	{}
+
+public:
+	inline brook_t(brook_t const& other)
+		: _deque{ other._deque }
+	{}
+
+	inline brook_t(brook_t&& other)
+		: _deque{ std::move(other._deque) }
+	{}
 };
 
-template <typename _ABSTRACTION_ = brook_a<int8_t>>
-using brook_int_8_t = brook_t<int8_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<int8_t>>
+using brook_int_8_t = brook_t<int8_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_a<uint8_t>>
-using brook_uint_8_t = brook_t<uint8_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<uint8_t>>
+using brook_uint_8_t = brook_t<uint8_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_a<int16_t>>
-using brook_int_16_t = brook_t<int16_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<int16_t>>
+using brook_int_16_t = brook_t<int16_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_a<uint16_t>>
-using brook_uint_16_t = brook_t<uint16_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<uint16_t>>
+using brook_uint_16_t = brook_t<uint16_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_a<int32_t>>
-using brook_int_32_t = brook_t<int32_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<int32_t>>
+using brook_int_32_t = brook_t<int32_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_a<uint32_t>>
-using brook_uint_32_t = brook_t<uint32_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<uint32_t>>
+using brook_uint_32_t = brook_t<uint32_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_a<int64_t>>
-using brook_int_64_t = brook_t<int64_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<int64_t>>
+using brook_int_64_t = brook_t<int64_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_a<uint64_t>>
-using brook_uint_64_t = brook_t<uint64_t, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<uint64_t>>
+using brook_uint_64_t = brook_t<uint64_t, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_a<float>>
-using brook_float_32_t = brook_t<float, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<float>>
+using brook_float_32_t = brook_t<float, CONCURRENT, _ABSTRACTION_>;
 
-template <typename _ABSTRACTION_ = brook_a<double>>
-using brook_float_64_t = brook_t<double, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<double>>
+using brook_float_64_t = brook_t<double, CONCURRENT, _ABSTRACTION_>;
 
 } // namespace strange
 

@@ -109,7 +109,14 @@ TEST(TestCaseName, ForLoop)
 	flock.push_back(sym("hello"));
 	expression = expression_local_at_t<>::val_(flock);
 
-	flock_a<> concurrent = flock_t<true>::val_();
+	brook_a<int8_t> concurrent_brook = brook_t<int8_t, true>::val_();
+	flock_a<> concurrent_flock = flock_t<true>::val_();
+	lake_a<int8_t> concurrent_lake = lake_t<int8_t, true>::val_();
+	ordered_herd_a<> concurrent_ordered_herd = ordered_herd_t<true>::val_();
+	ordered_shoal_a<> concurrent_ordered_shoal = ordered_shoal_t<true>::val_();
+	squad_a<> concurrent_squad = squad_t<true>::val_();
+	unordered_herd_a<> concurrent_unordered_herd = unordered_herd_t<true>::val_();
+	unordered_shoal_a<> concurrent_unordered_shoal = unordered_shoal_t<true>::val_();
 
 	data_a<bool> data = data_t<bool>::val(true);
 }

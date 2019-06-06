@@ -32,6 +32,114 @@ public:
 };
 
 template<>
+class reflection<data_a<std::shared_ptr<strange::concurrent_u<false>::read_lock>>>
+{
+public:
+	static inline cat_a<> cat()
+	{
+		static cat_a<> CAT = cat_t<>::val("strange::data_read_lock_ptr");
+		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<symbol_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
+	static inline unordered_shoal_a<> operations()
+	{
+		return reflection<any_a<>>::operations();
+	}
+};
+
+template<>
+class reflection<data_a<std::shared_ptr<strange::concurrent_u<true>::read_lock>>>
+{
+public:
+	static inline cat_a<> cat()
+	{
+		static cat_a<> CAT = cat_t<>::val("strange::data_concurrent_read_lock_ptr");
+		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<symbol_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
+	static inline unordered_shoal_a<> operations()
+	{
+		return reflection<any_a<>>::operations();
+	}
+};
+
+template<>
+class reflection<data_a<std::shared_ptr<strange::concurrent_u<false>::write_lock>>>
+{
+public:
+	static inline cat_a<> cat()
+	{
+		static cat_a<> CAT = cat_t<>::val("strange::data_write_lock_ptr");
+		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<symbol_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
+	static inline unordered_shoal_a<> operations()
+	{
+		return reflection<any_a<>>::operations();
+	}
+};
+
+template<>
+class reflection<data_a<std::shared_ptr<strange::concurrent_u<true>::write_lock>>>
+{
+public:
+	static inline cat_a<> cat()
+	{
+		static cat_a<> CAT = cat_t<>::val("strange::data_concurrent_write_lock_ptr");
+		return CAT;
+	}
+
+	static inline unordered_herd_a<> cats()
+	{
+		static unordered_herd_a<> CATS = []()
+		{
+			auto cats = reflection<symbol_a<>>::cats();
+			cats.insert(cat());
+			return cats;
+		}();
+		return CATS;
+	}
+
+	static inline unordered_shoal_a<> operations()
+	{
+		return reflection<any_a<>>::operations();
+	}
+};
+
+template<>
 class reflection<data_t<>>
 {
 public:

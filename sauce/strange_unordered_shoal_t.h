@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = unordered_shoal_a<>>
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = unordered_shoal_a<>>
 class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = forward_iterator_data_a<ITERATOR>>
@@ -277,12 +277,12 @@ public: ___STRANGE_COLLECTION___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<unordered_shoal_t<>>::type();
+		return reflection<unordered_shoal_t<CONCURRENT>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<unordered_shoal_t<>>::share(shoal);
+		reflection<unordered_shoal_t<CONCURRENT>>::share(shoal);
 	}
 
 	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
@@ -536,12 +536,22 @@ public: ___STRANGE_COLLECTION___
 	}
 
 protected:
+	mutable typename concurrent_u<CONCURRENT>::mutex _mutex;
 	std_unordered_map_any_any _map;
 
 	template <typename F>
 	inline unordered_shoal_t(F&& init)
 		: thing_t{}
 		, _map{ std::forward<F>(init) }
+	{}
+
+public:
+	inline unordered_shoal_t(unordered_shoal_t const& other)
+		: _map{ other._map }
+	{}
+
+	inline unordered_shoal_t(unordered_shoal_t&& other)
+		: _map{ std::move(other._map) }
 	{}
 };
 

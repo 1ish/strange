@@ -434,6 +434,166 @@ public:
 	}
 };
 
+template<>
+class reflection<lake_int_8_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::lake_int_8_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::lake_int_8_concurrent::val", native_function_t<>::val(&lake_int_8_t<true>::val__));
+	}
+};
+
+template<>
+class reflection<lake_uint_8_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::lake_uint_8_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::lake_uint_8_concurrent::val", native_function_t<>::val(&lake_uint_8_t<true>::val__));
+	}
+};
+
+template<>
+class reflection<lake_int_16_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::lake_int_16_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::lake_int_16_concurrent::val", native_function_t<>::val(&lake_int_16_t<true>::val__));
+	}
+};
+
+template<>
+class reflection<lake_uint_16_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::lake_uint_16_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::lake_uint_16_concurrent::val", native_function_t<>::val(&lake_uint_16_t<true>::val__));
+	}
+};
+
+template<>
+class reflection<lake_int_32_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::lake_int_32_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::lake_int_32_concurrent::val", native_function_t<>::val(&lake_int_32_t<true>::val__));
+	}
+};
+
+template<>
+class reflection<lake_uint_32_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::lake_uint_32_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::lake_uint_32_concurrent::val", native_function_t<>::val(&lake_uint_32_t<true>::val__));
+	}
+};
+
+template<>
+class reflection<lake_int_64_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::lake_int_64_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::lake_int_64_concurrent::val", native_function_t<>::val(&lake_int_64_t<true>::val__));
+	}
+};
+
+template<>
+class reflection<lake_uint_64_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::lake_uint_64_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::lake_uint_64_concurrent::val", native_function_t<>::val(&lake_uint_64_t<true>::val__));
+	}
+};
+
+template<>
+class reflection<lake_float_32_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::lake_float_32_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::lake_float_32_concurrent::val", native_function_t<>::val(&lake_float_32_t<true>::val__));
+	}
+};
+
+template<>
+class reflection<lake_float_64_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::lake_float_64_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::lake_float_64_concurrent::val", native_function_t<>::val(&lake_float_64_t<true>::val__));
+	}
+};
+
 }
 
 #endif

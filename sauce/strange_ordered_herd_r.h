@@ -47,6 +47,22 @@ public:
 	}
 };
 
+template<>
+class reflection<ordered_herd_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::ordered_herd_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::ordered_herd_concurrent::val", native_function_t<>::val(&ordered_herd_t<true>::val__));
+	}
+};
+
 }
 
 #endif

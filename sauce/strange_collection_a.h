@@ -167,6 +167,14 @@ namespace strange {
      { assert(handle_); return read().subtract_(range ); }
      inline range_a < > operator - ( range_a < > const & range ) const
      { assert(handle_); return read().operator-(range ); }
+     inline any_a < > read_lock__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().read_lock__(_ ); }
+     inline any_a < > read_lock_ ( ) const
+     { assert(handle_); return read().read_lock_( ); }
+     inline any_a < > write_lock__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().write_lock__(_ ); }
+     inline any_a < > write_lock_ ( ) const
+     { assert(handle_); return read().write_lock_( ); }
     
     protected:
     	struct ___dderived_handle_base___ : ___derived_handle_base___
@@ -214,6 +222,10 @@ namespace strange {
       virtual inline any_a < > subtract__ ( range_a < > const & range ) const = 0;
       virtual inline range_a < > subtract_ ( range_a < > const & range ) const = 0;
       virtual inline range_a < > operator - ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > read_lock__ ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > read_lock_ ( ) const = 0;
+      virtual inline any_a < > write_lock__ ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > write_lock_ ( ) const = 0;
     	};
     
     	template <typename ___TTT___, typename ___DDHB___ = ___dderived_handle_base___>
@@ -315,6 +327,14 @@ namespace strange {
       { return value_.subtract_(range ); }
       virtual inline range_a < > operator - ( range_a < > const & range ) const
       { return value_.operator-(range ); }
+      virtual inline any_a < > read_lock__ ( range_a < > const & _ ) const
+      { return value_.read_lock__(_ ); }
+      virtual inline any_a < > read_lock_ ( ) const
+      { return value_.read_lock_( ); }
+      virtual inline any_a < > write_lock__ ( range_a < > const & _ ) const
+      { return value_.write_lock__(_ ); }
+      virtual inline any_a < > write_lock_ ( ) const
+      { return value_.write_lock_( ); }
     	};
     
     	template <typename ___TTT___, typename ___DDHB___>

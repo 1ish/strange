@@ -1028,16 +1028,6 @@ public: ___STRANGE_COLLECTION___
 		return *this;
 	}
 
-	inline any_a<> read_lock_() const
-	{
-		return data_t<read_lock_ptr<CONCURRENT>>::val(make_read_lock_ptr<CONCURRENT>(_mutex));
-	}
-
-	inline any_a<> write_lock_() const
-	{
-		return data_t<write_lock_ptr<CONCURRENT>>::val(make_write_lock_ptr<CONCURRENT>(_mutex));
-	}
-
 	// data
 	inline std_vector_any const& extract() const
 	{

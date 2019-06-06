@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = squad_a<>>
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = squad_a<>>
 class squad_t : public thing_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
@@ -735,12 +735,12 @@ public: ___STRANGE_COLLECTION___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<squad_t<>>::type();
+		return reflection<squad_t<CONCURRENT>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<squad_t<>>::share(shoal);
+		reflection<squad_t<CONCURRENT>>::share(shoal);
 	}
 
 	// visitor pattern
@@ -1031,12 +1031,22 @@ public: ___STRANGE_COLLECTION___
 	}
 
 protected:
+	mutable typename concurrent_u<CONCURRENT>::mutex _mutex;
 	std_deque_any _deque;
 
 	template <typename F>
 	inline squad_t(F&& init)
 		: thing_t{}
 		, _deque{ std::forward<F>(init) }
+	{}
+
+public:
+	inline squad_t(squad_t const& other)
+		: _deque{ other._deque }
+	{}
+
+	inline squad_t(squad_t&& other)
+		: _deque{ std::move(other._deque) }
 	{}
 };
 

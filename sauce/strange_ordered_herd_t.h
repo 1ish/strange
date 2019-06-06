@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = ordered_herd_a<>>
+template <bool CONCURRENT = false, typename _ABSTRACTION_ = ordered_herd_a<>>
 class ordered_herd_t : public thing_t<_ABSTRACTION_>
 {
 	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_const_iterator_data_a<ITERATOR>>
@@ -164,12 +164,12 @@ public: ___STRANGE_COLLECTION___
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<ordered_herd_t<>>::type();
+		return reflection<ordered_herd_t<CONCURRENT>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<ordered_herd_t<>>::share(shoal);
+		reflection<ordered_herd_t<CONCURRENT>>::share(shoal);
 	}
 
 	// visitor pattern
@@ -391,12 +391,22 @@ public: ___STRANGE_COLLECTION___
 	}
 
 protected:
+	mutable typename concurrent_u<CONCURRENT>::mutex _mutex;
 	std_set_any _set;
 
 	template <typename F>
 	inline ordered_herd_t(F&& init)
 		: thing_t{}
 		, _set{ std::forward<F>(init) }
+	{}
+
+public:
+	inline ordered_herd_t(ordered_herd_t const& other)
+		: _set{ other._set }
+	{}
+
+	inline ordered_herd_t(ordered_herd_t&& other)
+		: _set{ std::move(other._set) }
 	{}
 };
 

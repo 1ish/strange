@@ -74,6 +74,12 @@ public:
 	inline any_a<> subtract__(range_a<> const& range) const;
 	inline range_a<> subtract_(range_a<> const& range) const;
 	inline range_a<> operator-(range_a<> const& range) const;
+
+	inline any_a<> read_lock__(range_a<> const& _) const;
+	inline any_a<> read_lock_() const;
+
+	inline any_a<> write_lock__(range_a<> const& _) const;
+	inline any_a<> write_lock_() const;
 };
 
 } // namespace strange

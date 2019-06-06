@@ -47,6 +47,22 @@ public:
 	}
 };
 
+template<>
+class reflection<squad_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::squad_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::squad_concurrent::val", native_function_t<>::val(&squad_t<true>::val__));
+	}
+};
+
 }
 
 #endif

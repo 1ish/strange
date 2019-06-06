@@ -47,6 +47,22 @@ public:
 	}
 };
 
+template<>
+class reflection<unordered_herd_t<true>>
+{
+public:
+	static inline symbol_a<> type()
+	{
+		static symbol_a<> TYPE = sym("strange::unordered_herd_concurrent");
+		return TYPE;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update("strange::unordered_herd_concurrent::val", native_function_t<>::val(&unordered_herd_t<true>::val__));
+	}
+};
+
 }
 
 #endif
