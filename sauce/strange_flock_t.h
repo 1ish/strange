@@ -1030,12 +1030,12 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> read_lock_() const
 	{
-		return data_t<concurrent_u<CONCURRENT>::read_lock_ptr>::val(concurrent_u<CONCURRENT>::make_read_lock_ptr(_mutex));
+		return data_t<read_lock_ptr<CONCURRENT>>::val(make_read_lock_ptr<CONCURRENT>(_mutex));
 	}
 
 	inline any_a<> write_lock_() const
 	{
-		return data_t<concurrent_u<CONCURRENT>::write_lock_ptr>::val(concurrent_u<CONCURRENT>::make_write_lock_ptr(_mutex));
+		return data_t<write_lock_ptr<CONCURRENT>>::val(make_write_lock_ptr<CONCURRENT>(_mutex));
 	}
 
 	// data
