@@ -983,8 +983,8 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<flock_a<>>(range))
 		{
-			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			auto other = cast<flock_a<>>(range).extract();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_vector.insert(_vector.cend(), other.cbegin(), other.cend());
 		}
 		else

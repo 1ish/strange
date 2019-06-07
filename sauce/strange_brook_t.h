@@ -762,11 +762,13 @@ public: ___STRANGE_COLLECTION___
 		{
 			return false;
 		}
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _deque == cast<brook_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		std::size_t seed = std::hash<std::size_t>{}(_deque.size());
 		for (auto item : _deque)
 		{
@@ -778,11 +780,13 @@ public: ___STRANGE_COLLECTION___
 	// range
 	inline random_access_const_iterator_a<> cbegin_() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> cend_() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cend());
 	}
 
@@ -793,6 +797,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> begin_()
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return iterator_t<std_deque_number::iterator>::val(me_(), _deque.begin());
 	}
 
@@ -803,6 +808,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> end_()
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return iterator_t<std_deque_number::iterator>::val(me_(), _deque.end());
 	}
 
@@ -833,7 +839,8 @@ public: ___STRANGE_COLLECTION___
 
 	inline PRIMITIVE pat(int64_t index) const
 	{
-		if (index >= 0 && index < size())
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		if (index >= 0 && index < int64_t(_deque.size()))
 		{
 			return _deque[std::size_t(index)];
 		}
@@ -861,10 +868,11 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (index >= 0)
 		{
-			int64_t const siz = size();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			int64_t const siz = int64_t(_deque.size());
 			if (index == siz)
 			{
-				push_back(number);
+				_deque.push_back(number);
 			}
 			else
 			{
@@ -895,10 +903,11 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (index >= 0)
 		{
-			int64_t const siz = size();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			int64_t const siz = int64_t(_deque.size());
 			if (index == siz)
 			{
-				push_back(number);
+				_deque.push_back(number);
 			}
 			else
 			{
@@ -924,7 +933,8 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase(int64_t index)
 	{
-		if (index >= 0 && index < size())
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		if (index >= 0 && index < int64_t(_deque.size()))
 		{
 			_deque.erase(_deque.cbegin() + index);
 			return true;
@@ -934,16 +944,19 @@ public: ___STRANGE_COLLECTION___
 
 	inline void clear()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_deque.clear();
 	}
 
 	inline int64_t size() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return int64_t(_deque.size());
 	}
 
 	inline bool empty() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _deque.empty();
 	}
 
@@ -958,21 +971,26 @@ public: ___STRANGE_COLLECTION___
 
 	inline void push_front(PRIMITIVE number)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_deque.push_front(number);
 	}
 
 	inline any_a<> pop_front_()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
 			return no();
 		}
-		return number_t<PRIMITIVE>::val(pop_front());
+		PRIMITIVE number = _deque.front();
+		_deque.pop_front();
+		return number_t<PRIMITIVE>::val(number);
 	}
 
 	inline PRIMITIVE pop_front()
 	{
-		PRIMITIVE number = _deque.back();
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		PRIMITIVE number = _deque.front();
 		_deque.pop_front();
 		return number;
 	}
@@ -988,20 +1006,25 @@ public: ___STRANGE_COLLECTION___
 
 	inline void push_back(PRIMITIVE number)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_deque.push_back(number);
 	}
 
 	inline any_a<> pop_back_()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
 			return no();
 		}
-		return number_t<PRIMITIVE>::val(pop_back());
+		PRIMITIVE number = _deque.back();
+		_deque.pop_back();
+		return number_t<PRIMITIVE>::val(number);
 	}
 
 	inline PRIMITIVE pop_back()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		PRIMITIVE number = _deque.back();
 		_deque.pop_back();
 		return number;
@@ -1012,6 +1035,7 @@ public: ___STRANGE_COLLECTION___
 		if (check<brook_a<PRIMITIVE>>(range))
 		{
 			auto other = cast<brook_a<PRIMITIVE>>(range).extract();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_deque.insert(_deque.cend(), other.cbegin(), other.cend());
 		}
 		else
@@ -1020,9 +1044,10 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::brook += passed non-range");
 			}
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
-				push_back(thing);
+				_deque.push_back(thing);
 			}
 		}
 		return *this;
@@ -1032,6 +1057,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<collection_a<>>(range))
 		{
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - cast<collection_a<>>(range).size())));
 		}
 		else
@@ -1040,6 +1066,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::brook -= passed non-range");
 			}
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				if (_deque.empty())
@@ -1060,6 +1087,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline void mutate(std_deque_number const& data)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_deque = data;
 	}
 
