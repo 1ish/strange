@@ -163,6 +163,7 @@ public: ___STRANGE_COLLECTION___
 		if (result)
 		{
 			auto last = flock.size() - 1;
+			typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 			for (auto const& visited : _set)
 			{
 				flock.update(last, visited);
@@ -179,11 +180,13 @@ public: ___STRANGE_COLLECTION___
 		{
 			return false;
 		}
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _set == cast<unordered_herd_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		std::set<any_a<>> const ordered(_set.cbegin(), _set.cend());
 		std::size_t seed = std::hash<std::size_t>{}(_set.size());
 		for (auto const& item : ordered)
@@ -207,6 +210,7 @@ public: ___STRANGE_COLLECTION___
 	// collection
 	inline bool has(any_a<> const& key) const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		std_unordered_set_any::const_iterator const it = _set.find(key);
 		return it != _set.cend();
 	}
@@ -218,6 +222,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> at_(any_a<> const& key) const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		std_unordered_set_any::const_iterator const it = _set.find(key);
 		if (it == _set.cend())
 		{
@@ -228,52 +233,62 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool at(std::string const& s) const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		std_unordered_set_any::const_iterator const it = _set.find(sym(s));
 		return it != _set.cend();
 	}
 
 	inline void update(any_a<> const& key, any_a<> const&)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_set.insert(key);
 	}
 
 	inline bool insert(any_a<> const& key, any_a<> const&)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		return _set.insert(key).second;
 	}
 
 	inline bool insert(any_a<> const& key)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		return _set.insert(key).second;
 	}
 
 	inline bool insert(std::string const& s)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		return _set.insert(sym(s)).second;
 	}
 
 	inline bool erase(any_a<> const& key)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		return _set.erase(key);
 	}
 
 	inline bool erase(std::string const& s)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		return _set.erase(sym(s));
 	}
 
 	inline void clear()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_set.clear();
 	}
 
 	inline int64_t size() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return int64_t(_set.size());
 	}
 
 	inline bool empty() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _set.empty();
 	}
 
@@ -289,11 +304,13 @@ public: ___STRANGE_COLLECTION___
 
 	inline void push_back(any_a<> const& thing)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_set.insert(thing);
 	}
 
 	inline any_a<> pop_back_()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		std_unordered_set_any::const_iterator const it = _set.cbegin();
 		if (it == _set.cend())
 		{
@@ -309,11 +326,13 @@ public: ___STRANGE_COLLECTION___
 		if (check<unordered_herd_a<>>(range))
 		{
 			auto other = cast<unordered_herd_a<>>(range).extract();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_set.insert(other.cbegin(), other.cend());
 		}
 		else if (check<ordered_herd_a<>>(range))
 		{
 			auto other = cast<ordered_herd_a<>>(range).extract();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_set.insert(other.cbegin(), other.cend());
 		}
 		else
@@ -322,6 +341,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::unordered_herd += passed non-range");
 			}
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				_set.insert(thing);
@@ -336,6 +356,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			throw dis("strange::unordered_herd -= passed non-range");
 		}
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		for (auto const& thing : cast<range_a<>>(range))
 		{
 			_set.erase(thing);
@@ -351,6 +372,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline void mutate(std_unordered_set_any const& data)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_set = data;
 	}
 

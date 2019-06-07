@@ -312,6 +312,7 @@ public: ___STRANGE_COLLECTION___
 		if (result)
 		{
 			auto last = flock.size() - 1;
+			typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 			for (auto const& visited : _map)
 			{
 				flock.update(last, visited.first);
@@ -330,12 +331,14 @@ public: ___STRANGE_COLLECTION___
 		{
 			return false;
 		}
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _map == cast<unordered_shoal_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
 		std::map<any_a<>, std::size_t> ordered;
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		for (auto const& pair : _map)
 		{
 			std::size_t seed = pair.first.hash();
@@ -384,6 +387,7 @@ public: ___STRANGE_COLLECTION___
 	// collection
 	inline bool has(any_a<> const& key) const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		std_unordered_map_any_any::const_iterator const it = _map.find(key);
 		return it != _map.cend();
 	}
@@ -395,6 +399,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> at_(any_a<> const& key) const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		std_unordered_map_any_any::const_iterator const it = _map.find(key);
 		if (it == _map.cend())
 		{
@@ -410,16 +415,19 @@ public: ___STRANGE_COLLECTION___
 
 	inline void update(any_a<> const& key, any_a<> const& value)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_map[key] = value;
 	}
 
 	inline void update(std::string const& s, any_a<> const& value)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_map[sym(s)] = value;
 	}
 
 	inline bool insert(any_a<> const& key, any_a<> const& value)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		return _map.emplace(key, value).second;
 	}
 
@@ -430,26 +438,31 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase(any_a<> const& key)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		return _map.erase(key);
 	}
 
 	inline bool erase(std::string const& s)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		return _map.erase(sym(s));
 	}
 
 	inline void clear()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_map.clear();
 	}
 
 	inline int64_t size() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return int64_t(_map.size());
 	}
 
 	inline bool empty() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _map.empty();
 	}
 
@@ -465,11 +478,13 @@ public: ___STRANGE_COLLECTION___
 
 	inline void push_back(any_a<> const& thing)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_map[thing] = thing;
 	}
 
 	inline any_a<> pop_back_()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		std_unordered_map_any_any::const_iterator const it = _map.cbegin();
 		if (it == _map.cend())
 		{
@@ -485,11 +500,13 @@ public: ___STRANGE_COLLECTION___
 		if (check<unordered_shoal_a<>>(range))
 		{
 			auto other = cast<unordered_shoal_a<>>(range).extract();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_map.insert(other.cbegin(), other.cend());
 		}
 		else if (check<ordered_shoal_a<>>(range))
 		{
 			auto other = cast<ordered_shoal_a<>>(range).extract();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_map.insert(other.cbegin(), other.cend());
 		}
 		else
@@ -498,6 +515,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::unordered_shoal += passed non-range");
 			}
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				_map.emplace(thing, thing);
@@ -512,6 +530,7 @@ public: ___STRANGE_COLLECTION___
 		{
 			throw dis("strange::unordered_shoal -= passed non-range");
 		}
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		for (auto const& thing : cast<range_a<>>(range))
 		{
 			_map.erase(thing);
@@ -527,6 +546,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline void mutate(std_unordered_map_any_any const& data)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_map = data;
 	}
 
