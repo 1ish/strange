@@ -759,6 +759,7 @@ public: ___STRANGE_COLLECTION___
 		if (result)
 		{
 			auto last = flock.size() - 1;
+			typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 			for (auto const& visited : _deque)
 			{
 				flock.update(last, visited);
@@ -775,11 +776,13 @@ public: ___STRANGE_COLLECTION___
 		{
 			return false;
 		}
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _deque == cast<squad_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		std::size_t seed = std::hash<std::size_t>{}(_deque.size());
 		for (auto const& item : _deque)
 		{
@@ -841,7 +844,8 @@ public: ___STRANGE_COLLECTION___
 
 	inline any_a<> at(int64_t index) const
 	{
-		if (index >= 0 && index < size())
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		if (index >= 0 && index < int64_t(_deque.size()))
 		{
 			return _deque[std::size_t(index)];
 		}
@@ -860,10 +864,11 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (index >= 0)
 		{
-			int64_t const siz = size();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			int64_t const siz = int64_t(_deque.size());
 			if (index == siz)
 			{
-				push_back(value);
+				_deque.push_back(value);
 			}
 			else
 			{
@@ -885,10 +890,11 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (index >= 0)
 		{
-			int64_t const siz = size();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			int64_t const siz = int64_t(_deque.size());
 			if (index == siz)
 			{
-				push_back(value);
+				_deque.push_back(value);
 			}
 			else
 			{
@@ -914,7 +920,8 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase(int64_t index)
 	{
-		if (index >= 0 && index < size())
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		if (index >= 0 && index < int64_t(_deque.size()))
 		{
 			_deque.erase(_deque.cbegin() + index);
 			return true;
@@ -924,26 +931,31 @@ public: ___STRANGE_COLLECTION___
 
 	inline void clear()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_deque.clear();
 	}
 
 	inline int64_t size() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return int64_t(_deque.size());
 	}
 
 	inline bool empty() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _deque.empty();
 	}
 
 	inline void push_front(any_a<> const& thing)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_deque.push_front(thing);
 	}
 
 	inline any_a<> pop_front_()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
 			return no();
@@ -955,11 +967,13 @@ public: ___STRANGE_COLLECTION___
 
 	inline void push_back(any_a<> const& thing)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_deque.push_back(thing);
 	}
 
 	inline any_a<> pop_back_()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
 			return no();
@@ -974,6 +988,7 @@ public: ___STRANGE_COLLECTION___
 		if (check<squad_a<>>(range))
 		{
 			auto other = cast<squad_a<>>(range).extract();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_deque.insert(_deque.cend(), other.cbegin(), other.cend());
 		}
 		else
@@ -982,6 +997,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::squad += passed non-range");
 			}
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				_deque.push_back(thing);
@@ -994,6 +1010,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<collection_a<>>(range))
 		{
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - cast<collection_a<>>(range).size())));
 		}
 		else
@@ -1002,6 +1019,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::squad -= passed non-range");
 			}
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				if (_deque.empty())
@@ -1022,6 +1040,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline void mutate(std_deque_any const& data)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_deque = data;
 	}
 
