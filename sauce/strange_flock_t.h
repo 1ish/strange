@@ -794,13 +794,11 @@ public: ___STRANGE_COLLECTION___
 	// range
 	inline random_access_const_iterator_a<> cbegin_() const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> cend_() const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cend());
 	}
 
@@ -811,7 +809,6 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> begin_()
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return iterator_t<std_vector_any::iterator>::val(me_(), _vector.begin());
 	}
 
@@ -822,7 +819,6 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> end_()
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return iterator_t<std_vector_any::iterator>::val(me_(), _vector.end());
 	}
 

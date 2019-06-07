@@ -780,13 +780,11 @@ public: ___STRANGE_COLLECTION___
 	// range
 	inline random_access_const_iterator_a<> cbegin_() const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> cend_() const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return const_iterator_t<std_deque_number::const_iterator>::val(me_(), _deque.cend());
 	}
 
@@ -797,7 +795,6 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> begin_()
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return iterator_t<std_deque_number::iterator>::val(me_(), _deque.begin());
 	}
 
@@ -808,7 +805,6 @@ public: ___STRANGE_COLLECTION___
 
 	inline random_access_iterator_a<> end_()
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return iterator_t<std_deque_number::iterator>::val(me_(), _deque.end());
 	}
 

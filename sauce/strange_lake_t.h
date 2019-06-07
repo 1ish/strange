@@ -762,11 +762,13 @@ public: ___STRANGE_COLLECTION___
 		{
 			return false;
 		}
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _vector == cast<lake_a<PRIMITIVE>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		std::size_t seed = std::hash<std::size_t>{}(_vector.size());
 		for (auto item : _vector)
 		{
@@ -833,7 +835,8 @@ public: ___STRANGE_COLLECTION___
 
 	inline PRIMITIVE pat(int64_t index) const
 	{
-		if (index >= 0 && index < size())
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		if (index >= 0 && index < int64_t(_vector.size()))
 		{
 			return _vector[std::size_t(index)];
 		}
@@ -861,10 +864,11 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (index >= 0)
 		{
-			int64_t const siz = size();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			int64_t const siz = int64_t(_vector.size());
 			if (index == siz)
 			{
-				push_back(number);
+				_vector.push_back(number);
 			}
 			else
 			{
@@ -895,10 +899,11 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (index >= 0)
 		{
-			int64_t const siz = size();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			int64_t const siz = int64_t(_vector.size());
 			if (index == siz)
 			{
-				push_back(number);
+				_vector.push_back(number);
 			}
 			else
 			{
@@ -924,7 +929,8 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase(int64_t index)
 	{
-		if (index >= 0 && index < size())
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		if (index >= 0 && index < int64_t(_vector.size()))
 		{
 			_vector.erase(_vector.cbegin() + index);
 			return true;
@@ -934,16 +940,19 @@ public: ___STRANGE_COLLECTION___
 
 	inline void clear()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_vector.clear();
 	}
 
 	inline int64_t size() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return int64_t(_vector.size());
 	}
 
 	inline bool empty() const
 	{
+		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		return _vector.empty();
 	}
 
@@ -978,20 +987,25 @@ public: ___STRANGE_COLLECTION___
 
 	inline void push_back(PRIMITIVE number)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_vector.push_back(number);
 	}
 
 	inline any_a<> pop_back_()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		if (_vector.empty())
 		{
 			return no();
 		}
-		return number_t<PRIMITIVE>::val(pop_back());
+		PRIMITIVE number = _vector.back();
+		_vector.pop_back();
+		return number_t<PRIMITIVE>::val(number);
 	}
 
 	inline PRIMITIVE pop_back()
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		PRIMITIVE number = _vector.back();
 		_vector.pop_back();
 		return number;
@@ -1002,6 +1016,7 @@ public: ___STRANGE_COLLECTION___
 		if (check<lake_a<PRIMITIVE>>(range))
 		{
 			auto other = cast<lake_a<PRIMITIVE>>(range).extract();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_vector.insert(_vector.cend(), other.cbegin(), other.cend());
 		}
 		else
@@ -1010,9 +1025,10 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::lake += passed non-range");
 			}
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
-				push_back(thing);
+				_vector.push_back(thing);
 			}
 		}
 		return *this;
@@ -1022,6 +1038,7 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<collection_a<>>(range))
 		{
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			_vector.resize(std::size_t(std::max<int64_t>(0, int64_t(_vector.size()) - cast<collection_a<>>(range).size())));
 		}
 		else
@@ -1030,6 +1047,7 @@ public: ___STRANGE_COLLECTION___
 			{
 				throw dis("strange::lake -= passed non-range");
 			}
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				if (_vector.empty())
@@ -1050,6 +1068,7 @@ public: ___STRANGE_COLLECTION___
 
 	inline void mutate(std_vector_number const& data)
 	{
+		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_vector = data;
 	}
 
