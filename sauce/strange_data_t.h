@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename PRIMITIVE = bool, typename _ABSTRACTION_ = data_a<PRIMITIVE>>
+template <typename DATA, typename _ABSTRACTION_ = data_a<DATA>>
 class data_t : public thing_t<_ABSTRACTION_>
 {
 public: ___STRANGE_THING___
@@ -14,62 +14,62 @@ public: ___STRANGE_THING___
 		return val_();
 	}
 
-	static inline data_a<PRIMITIVE> val_()
+	static inline data_a<DATA> val_()
 	{
-		return val(PRIMITIVE{});
+		return val(DATA{});
 	}
 
-	static inline data_a<PRIMITIVE> val(PRIMITIVE primitive)
+	static inline data_a<DATA> val(DATA primitive)
 	{
-		return data_a<PRIMITIVE>{ data_t<PRIMITIVE, _ABSTRACTION_>{ primitive } };
+		return data_a<DATA>{ data_t<DATA, _ABSTRACTION_>{ primitive } };
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<data_t<>>::type();
+		return reflection<data_t<DATA>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<data_t<>>::share(shoal);
+		reflection<data_t<DATA>>::share(shoal);
 	}
 
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check<data_a<PRIMITIVE>>(thing))
+		if (!check<data_a<DATA>>(thing))
 		{
 			return false;
 		}
-		return _data == cast<data_a<PRIMITIVE>>(thing).extract();
+		return _data == cast<data_a<DATA>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
-		return std::hash<PRIMITIVE>{}(_data);
+		return std::hash<DATA>{}(_data);
 	}
 
 	// data
-	inline PRIMITIVE const& extract() const
+	inline DATA const& extract() const
 	{
 		return _data;
 	}
 
-	inline void mutate(PRIMITIVE const& data)
+	inline void mutate(DATA const& data)
 	{
 		_data = data;
 	}
 
-	inline PRIMITIVE& reference()
+	inline DATA& reference()
 	{
 		return _data;
 	}
 
 protected:
-	PRIMITIVE _data;
+	DATA _data;
 
-	inline data_t(PRIMITIVE data)
+	inline data_t(DATA data)
 		: thing_t{}
 		, _data(data)
 	{}
