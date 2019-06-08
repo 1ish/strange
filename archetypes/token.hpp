@@ -8,6 +8,7 @@
 #include "any_forward.hpp"
 #include "range_forward.hpp"
 #include "symbol_forward.hpp"
+#include "misunderstanding_forward.hpp"
 
 namespace strange
 {
@@ -43,6 +44,10 @@ public:
 	inline any_a<> precedence__(range_a<> const& _) const;
 	inline number_data_a_int64 precedence_() const;
 	inline int64_t precedence() const;
+
+	inline any_a<> report__(range_a<> const& _) const;
+	inline misunderstanding_a<> report_() const;
+	inline std::string report() const;
 };
 
 } // namespace strange

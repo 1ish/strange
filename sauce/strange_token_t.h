@@ -335,6 +335,21 @@ public: ___STRANGE_THING___
 		return _precedence.extract();
 	}
 
+	inline any_a<> report__(range_a<> const& _) const
+	{
+		return report_();
+	}
+
+	inline misunderstanding_a<> report_() const
+	{
+		return misunderstanding_t<>::val(report());
+	}
+
+	inline std::string report() const
+	{
+		return filename() + "(" + std::to_string(line()) + "," + std::to_string(position()) + "): " + tag() + " '" + symbol() + "'\n";
+	}
+
 protected:
 	symbol_a<> const _filename;
 	number_data_a<int64_t> const _line;

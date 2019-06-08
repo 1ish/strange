@@ -14,26 +14,26 @@ public: ___STRANGE_EXPRESSION___
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis("strange::expression_shared_insert::val not passed any terms");
+			throw dis(token.report() + "strange::expression_shared_insert::val not passed any terms");
 		}
 		any_a<> cat = *it;
 		if (!check<cat_a<>>(cat))
 		{
-			throw dis("strange::expression_shared_insert::val passed non-cat");
+			throw dis(token.report() + "strange::expression_shared_insert::val passed non-cat");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis("strange::expression_shared_insert::val not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_shared_insert::val not passed sufficient terms");
 		}
 		any_a<> key = *it;
 		if (++it == terms.cend_())
 		{
-			throw dis("strange::expression_shared_insert::val not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_shared_insert::val not passed sufficient terms");
 		}
 		any_a<> val = *it;
 		if (!check<expression_a<>>(val))
 		{
-			throw dis("strange::expression_shared_insert::val passed non-expression");
+			throw dis(token.report() + "strange::expression_shared_insert::val passed non-expression");
 		}
 		return expression_a<>{ expression_shared_insert_t<>{ token, cast<cat_a<>>(cat), key, cast<expression_a<>>(val) } };
 	}
@@ -55,30 +55,30 @@ public: ___STRANGE_EXPRESSION___
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis("strange::expression_shared_insert::operate passed non-unordered-shoal local");
+			throw dis(_token.report() + "strange::expression_shared_insert::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = static_cast<unordered_shoal_a<>&>(thing).reference();
 		auto lit = local.find(sym("$"));
 		if (lit == local.end())
 		{
-			throw dis("strange::expression_shared_insert::operate $ not found");
+			throw dis(_token.report() + "strange::expression_shared_insert::operate $ not found");
 		}
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(lit->second))
 		{
-			throw dis("strange::expression_shared_insert::operate passed non-unordered-shoal shared");
+			throw dis(_token.report() + "strange::expression_shared_insert::operate passed non-unordered-shoal shared");
 		}
 #endif
 		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second).reference();
 		auto val = _val.operate_(thing, range);
 		if (!val.cats_().has_(_cat))
 		{
-			throw dis("strange::expression_shared_insert::operate cat does not include value");
+			throw dis(_token.report() + "strange::expression_shared_insert::operate cat does not include value");
 		}
 		if (!shared.emplace(_key, val).second)
 		{
-			throw dis("strange::expression_shared_insert::operate key exists");
+			throw dis(_token.report() + "strange::expression_shared_insert::operate key exists");
 		}
 		return val;
 	}
@@ -88,7 +88,7 @@ public: ___STRANGE_EXPRESSION___
 	{
 		if (!check<symbol_a<>>(_key))
 		{
-			throw dis("strange::expression_shared_insert::generate called with non-symbol key");
+			throw dis(_token.report() + "strange::expression_shared_insert::generate called with non-symbol key");
 		}
 		river.write_(lake_from_string(" $" + cast<symbol_a<>>(_key).to_string() + " :" + _cat.to_string() + "="));
 		_val.generate(indent, river);
@@ -98,7 +98,7 @@ public: ___STRANGE_EXPRESSION___
 	{
 		if (!check<symbol_a<>>(_key))
 		{
-			throw dis("strange::expression_shared_insert::generate_cpp called with non-symbol key");
+			throw dis(_token.report() + "strange::expression_shared_insert::generate_cpp called with non-symbol key");
 		}
 		river.write_(lake_from_string(" static " + _cat.code() + " " + cast<symbol_a<>>(_key).to_string() + " ="));
 		_val.generate_cpp(indent, river);

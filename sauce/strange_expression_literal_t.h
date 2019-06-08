@@ -14,7 +14,7 @@ public: ___STRANGE_EXPRESSION___
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis("strange::expression_literal::val not passed any terms");
+			throw dis(token.report() + "strange::expression_literal::val not passed any terms");
 		}
 		return expression_a<>{ expression_literal_t<>{ token, *it } };
 	}

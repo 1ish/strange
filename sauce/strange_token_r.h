@@ -37,6 +37,7 @@ public:
 			operations.update("symbol", native_extraction_t<token_a<>>::val(&token_a<>::symbol__));
 			operations.update("literal", native_extraction_t<token_a<>>::val(&token_a<>::literal__));
 			operations.update("precedence", native_extraction_t<token_a<>>::val(&token_a<>::precedence__));
+			operations.update("report", native_extraction_t<token_a<>>::val(&token_a<>::report__));
 			return operations;
 		}();
 		return OPERATIONS;

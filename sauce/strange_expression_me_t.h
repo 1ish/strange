@@ -31,14 +31,14 @@ public: ___STRANGE_EXPRESSION___
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis("strange::expression_me::operate passed non-unordered-shoal local");
+			throw dis(_token.report() + "strange::expression_me::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract();
 		auto it = local.find(sym("^"));
 		if (it == local.cend())
 		{
-			throw dis("strange::expression_me::operate ^ not found");
+			throw dis(_token.report() + "strange::expression_me::operate ^ not found");
 		}
 		return it->second;
 	}

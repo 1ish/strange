@@ -4,6 +4,7 @@
  //#include "any_forward.hpp"
  //#include "range_forward.hpp"
  //#include "symbol_forward.hpp"
+ //#include "misunderstanding_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -190,6 +191,12 @@ namespace strange {
      { assert(handle_); return read().precedence_( ); }
      inline int64_t precedence ( ) const
      { assert(handle_); return read().precedence( ); }
+     inline any_a < > report__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().report__(_ ); }
+     inline misunderstanding_a < > report_ ( ) const
+     { assert(handle_); return read().report_( ); }
+     inline std :: string report ( ) const
+     { assert(handle_); return read().report( ); }
     
 
     protected:
@@ -218,6 +225,9 @@ namespace strange {
       virtual inline any_a < > precedence__ ( range_a < > const & _ ) const = 0;
       virtual inline number_data_a_int64 precedence_ ( ) const = 0;
       virtual inline int64_t precedence ( ) const = 0;
+      virtual inline any_a < > report__ ( range_a < > const & _ ) const = 0;
+      virtual inline misunderstanding_a < > report_ ( ) const = 0;
+      virtual inline std :: string report ( ) const = 0;
     	};
 
     
@@ -288,6 +298,12 @@ namespace strange {
       { return value_.precedence_( ); }
       virtual inline int64_t precedence ( ) const
       { return value_.precedence( ); }
+      virtual inline any_a < > report__ ( range_a < > const & _ ) const
+      { return value_.report__(_ ); }
+      virtual inline misunderstanding_a < > report_ ( ) const
+      { return value_.report_( ); }
+      virtual inline std :: string report ( ) const
+      { return value_.report( ); }
     	};
 
     

@@ -14,7 +14,7 @@ public: ___STRANGE_EXPRESSION___
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis("strange::expression_shared_at::val not passed any terms");
+			throw dis(token.report() + "strange::expression_shared_at::val not passed any terms");
 		}
 		return expression_a<>{ expression_shared_at_t<>{ token, *it } };
 	}
@@ -36,26 +36,26 @@ public: ___STRANGE_EXPRESSION___
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis("strange::expression_shared_at::operate passed non-unordered-shoal local");
+			throw dis(_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract();
 		auto lit = local.find(sym("$"));
 		if (lit == local.cend())
 		{
-			throw dis("strange::expression_shared_at::operate $ not found");
+			throw dis(_token.report() + "strange::expression_shared_at::operate $ not found");
 		}
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(lit->second))
 		{
-			throw dis("strange::expression_shared_at::operate passed non-unordered-shoal shared");
+			throw dis(_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal shared");
 		}
 #endif
 		auto const& shared = static_cast<unordered_shoal_a<> const&>(lit->second).extract();
 		auto sit = shared.find(_key);
 		if (sit == shared.cend())
 		{
-			throw dis("strange::expression_shared_at::operate key not found");
+			throw dis(_token.report() + "strange::expression_shared_at::operate key not found");
 		}
 		return sit->second;
 	}
@@ -65,7 +65,7 @@ public: ___STRANGE_EXPRESSION___
 	{
 		if (!check<symbol_a<>>(_key))
 		{
-			throw dis("strange::expression_shared_at::generate called with non-symbol key");
+			throw dis(_token.report() + "strange::expression_shared_at::generate called with non-symbol key");
 		}
 		river.write_(lake_from_string(" $" + cast<symbol_a<>>(_key).to_string() + " "));
 	}
@@ -74,7 +74,7 @@ public: ___STRANGE_EXPRESSION___
 	{
 		if (!check<symbol_a<>>(_key))
 		{
-			throw dis("strange::expression_shared_at::generate_cpp called with non-symbol key");
+			throw dis(_token.report() + "strange::expression_shared_at::generate_cpp called with non-symbol key");
 		}
 		river.write_(lake_from_string(" " + cast<symbol_a<>>(_key).to_string() + " "));
 	}
