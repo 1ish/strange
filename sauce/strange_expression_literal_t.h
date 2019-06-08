@@ -16,7 +16,12 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis(token.report() + "strange::expression_literal::val not passed any terms");
 		}
-		return expression_a<>{ expression_literal_t<>{ token, *it } };
+		return val(token, *it);
+	}
+
+	static inline expression_a<> val(token_a<> const& token, any_a<> const& literal)
+	{
+		return expression_a<>{ expression_literal_t<>{ token, literal } };
 	}
 
 	// reflection

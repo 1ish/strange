@@ -40,6 +40,7 @@
 #include "strange_expression_shared_update_t.h"
 #include "strange_expression_me_t.h"
 #include "strange_expression_literal_t.h"
+#include "strange_expression_cat_t.h"
 
 #undef ___STRANGE_THING___
 #undef ___STRANGE_COLLECTION___

@@ -61,5 +61,6 @@ class reflection;
 #include "strange_expression_shared_update_r.h"
 #include "strange_expression_me_r.h"
 #include "strange_expression_literal_r.h"
+#include "strange_expression_cat_r.h"
 
 #endif

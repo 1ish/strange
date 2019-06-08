@@ -84,6 +84,11 @@ public: ___STRANGE_EXPRESSION___
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
+		return val(token);
+	}
+
+	static inline expression_a<> val(token_a<> const& token)
+	{
 		return expression_a<>{ expression_t<>{token} };
 	}
 
