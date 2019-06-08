@@ -35,6 +35,9 @@
 #include "strange_expression_local_at_t.h"
 #include "strange_expression_local_insert_t.h"
 #include "strange_expression_local_update_t.h"
+#include "strange_expression_shared_at_t.h"
+#include "strange_expression_shared_insert_t.h"
+#include "strange_expression_shared_update_t.h"
 
 #undef ___STRANGE_THING___
 #undef ___STRANGE_COLLECTION___
