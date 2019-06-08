@@ -9,9 +9,9 @@ class expression_me_t : public expression_t<_ABSTRACTION_>
 {
 public: ___STRANGE_EXPRESSION___
 	// construction
-	static inline expression_a<> val_(range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
-		return expression_a<>{ expression_me_t<>{} };
+		return expression_a<>{ expression_me_t<>{ token } };
 	}
 
 	// reflection
@@ -55,8 +55,8 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 protected:
-	inline expression_me_t()
-		: expression_t{}
+	inline expression_me_t(token_a<> const& token)
+		: expression_t{ token }
 	{}
 };
 

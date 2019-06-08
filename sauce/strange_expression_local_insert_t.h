@@ -9,7 +9,7 @@ class expression_local_insert_t : public expression_t<_ABSTRACTION_>
 {
 public: ___STRANGE_EXPRESSION___
 	// construction
-	static inline expression_a<> val_(range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
@@ -35,7 +35,7 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis("strange::expression_local_insert::val passed non-expression");
 		}
-		return expression_a<>{ expression_local_insert_t<>{ cast<cat_a<>>(cat), key, cast<expression_a<>>(val) } };
+		return expression_a<>{ expression_local_insert_t<>{ token, cast<cat_a<>>(cat), key, cast<expression_a<>>(val) } };
 	}
 
 	// reflection
@@ -97,8 +97,8 @@ protected:
 	any_a<> const _key;
 	expression_a<> const _val;
 
-	inline expression_local_insert_t(cat_a<> const& cat, any_a<> const& key, expression_a<> const& val)
-		: expression_t{}
+	inline expression_local_insert_t(token_a<> const& token, cat_a<> const& cat, any_a<> const& key, expression_a<> const& val)
+		: expression_t{ token }
 		, _cat{ cat }
 		, _key{ key }
 		, _val{ val }

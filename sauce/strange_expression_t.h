@@ -8,7 +8,17 @@ namespace strange
 #define ___STRANGE_EXPRESSION___ ___STRANGE_THING___ \
 static inline any_a<> val__(range_a<> const& range) \
 { \
-	return val_(range); \
+	forward_const_iterator_a<> it = range.cbegin_(); \
+	if (it == range.cend_()) \
+	{ \
+		throw dis("[expression] val passed empty range"); \
+	} \
+	any_a<> token = *it; \
+	if (!check<token_a<>>(token)) \
+	{ \
+		throw dis("[expression] val passed non-token"); \
+	} \
+	return val_(cast<token_a<>>(token), range_t<>::val_(++it, range.cend_())); \
 } \
 inline any_a<> generate__(range_a<> const& range) const \
 { \
@@ -72,9 +82,9 @@ class expression_t : public operation_t<_ABSTRACTION_>
 {
 public: ___STRANGE_EXPRESSION___
 	// construction
-	static inline expression_a<> val_(range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
-		return expression_a<>{ expression_t<>{} };
+		return expression_a<>{ expression_t<>{token} };
 	}
 
 	// reflection
@@ -106,8 +116,11 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 protected:
-	inline expression_t()
+	token_a<> const _token;
+
+	inline expression_t(token_a<> const& token)
 		: operation_t{}
+		, _token(token)
 	{}
 };
 

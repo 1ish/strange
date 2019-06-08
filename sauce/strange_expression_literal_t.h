@@ -9,14 +9,14 @@ class expression_literal_t : public expression_t<_ABSTRACTION_>
 {
 public: ___STRANGE_EXPRESSION___
 	// construction
-	static inline expression_a<> val_(range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
 			throw dis("strange::expression_literal::val not passed any terms");
 		}
-		return expression_a<>{ expression_literal_t<>{ *it } };
+		return expression_a<>{ expression_literal_t<>{ token, *it } };
 	}
 
 	// reflection
@@ -48,8 +48,8 @@ public: ___STRANGE_EXPRESSION___
 protected:
 	any_a<> const _literal;
 
-	inline expression_literal_t(any_a<> const& literal)
-		: expression_t{}
+	inline expression_literal_t(token_a<> const& token, any_a<> const& literal)
+		: expression_t{ token }
 		, _literal{ literal }
 	{}
 };

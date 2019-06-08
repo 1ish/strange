@@ -105,9 +105,9 @@ TEST(TestCaseName, ForLoop)
 		}
 	}
 
-	expression_a<> expression = expression_t<>::val_(flock);
+	expression_a<> expression = expression_t<>::val_(token, flock);
 	flock.push_back(sym("hello"));
-	expression = expression_local_at_t<>::val_(flock);
+	expression = expression_local_at_t<>::val_(token, flock);
 
 	brook_a<int8_t> concurrent_brook = brook_t<int8_t, true>::val_();
 	flock_a<> concurrent_flock = flock_t<true>::val_();
