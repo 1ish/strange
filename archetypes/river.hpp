@@ -17,6 +17,8 @@ class river_a
 {
 public:
 	// river input
+	inline std::string to_string();
+
 	inline any_a<> get__(range_a<> const& _);
 	inline number_data_a_int8 get_();
 	inline int8_t get();

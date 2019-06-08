@@ -82,6 +82,8 @@ namespace strange {
     		return *this;
     	}
     
+     inline std :: string to_string ( )
+     { assert(handle_); return write().to_string( ); }
      inline any_a < > get__ ( range_a < > const & _ )
      { assert(handle_); return write().get__(_ ); }
      inline number_data_a_int8 get_ ( )
@@ -254,6 +256,7 @@ namespace strange {
     protected:
     	struct ___dderived_handle_base___ : ___derived_handle_base___
     	{
+      virtual inline std :: string to_string ( ) = 0;
       virtual inline any_a < > get__ ( range_a < > const & _ ) = 0;
       virtual inline number_data_a_int8 get_ ( ) = 0;
       virtual inline int8_t get ( ) = 0;
@@ -353,6 +356,8 @@ namespace strange {
     			: ___derived_handle___<___TTT___, ___DDHB___>{ std::move(value) }
     		{}
     
+      virtual inline std :: string to_string ( )
+      { return value_.to_string( ); }
       virtual inline any_a < > get__ ( range_a < > const & _ )
       { return value_.get__(_ ); }
       virtual inline number_data_a_int8 get_ ( )

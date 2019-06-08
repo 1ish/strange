@@ -224,6 +224,16 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	// river input
+	inline std::string to_string()
+	{
+		std::string result;
+		while (good())
+		{
+			result += lake_to_string(read_());
+		}
+		return result;
+	}
+
 	inline any_a<> get__(range_a<> const& _)
 	{
 		return get_();

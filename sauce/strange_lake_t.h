@@ -1132,6 +1132,12 @@ lake_a<int8_t> lake_from_string(std::string const& str)
 	return lake_int_8_t<>::val(lake_int_8_t<>::std_vector_number(str.cbegin(), str.cend()));
 }
 
+std::string lake_to_string(lake_a<int8_t> const& lake)
+{
+	auto const& v = lake.extract();
+	return std::string(v.cbegin(), v.cend());
+}
+
 } // namespace strange
 
 #endif
