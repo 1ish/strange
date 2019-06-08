@@ -90,7 +90,7 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis("strange::expression_shared_insert::generate called with non-symbol key");
 		}
-		river.write_(lake_from_string(" " + cast<symbol_a<>>(_key).to_string() + " :" + _cat.to_string() + "="));
+		river.write_(lake_from_string(" $" + cast<symbol_a<>>(_key).to_string() + " :" + _cat.to_string() + "="));
 		_val.generate(indent, river);
 	}
 
@@ -100,7 +100,7 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis("strange::expression_shared_insert::generate_cpp called with non-symbol key");
 		}
-		river.write_(lake_from_string(" " + _cat.code() + " " + cast<symbol_a<>>(_key).to_string() + " ="));
+		river.write_(lake_from_string(" static " + _cat.code() + " " + cast<symbol_a<>>(_key).to_string() + " ="));
 		_val.generate_cpp(indent, river);
 	}
 
