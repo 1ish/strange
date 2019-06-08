@@ -37,12 +37,38 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 	// expression
-	inline void generate(int64_t indent, river_a<>& river) const //TODO literal
+	inline void generate(int64_t indent, river_a<>& river) const
 	{
+		auto const& tag = _token.tag();
+		if (tag == "symbol")
+		{
+			river.write_(lake_from_string(" '" + _token.symbol() + "' "));
+		}
+		else if (tag == "lake")
+		{
+			river.write_(lake_from_string(" \"" + _token.symbol() + "\" "));
+		}
+		else
+		{
+			river.write_(lake_from_string(" " + _token.symbol() + " "));
+		}
 	}
 
-	inline void generate_cpp(int64_t indent, river_a<>& river) const //TODO literal
+	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
+		auto const& tag = _token.tag();
+		if (tag == "symbol")
+		{
+			river.write_(lake_from_string(" strange::sym(\"" + _token.symbol() + "\") "));
+		}
+		else if (tag == "lake")
+		{
+			river.write_(lake_from_string(" strange::lake_from_string(\"" + _token.symbol() + "\") "));
+		}
+		else
+		{
+			river.write_(lake_from_string(" " + _token.symbol() + " "));
+		}
 	}
 
 protected:
