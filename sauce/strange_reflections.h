@@ -59,5 +59,6 @@ class reflection;
 #include "strange_expression_shared_at_r.h"
 #include "strange_expression_shared_insert_r.h"
 #include "strange_expression_shared_update_r.h"
+#include "strange_expression_me_r.h"
 
 #endif

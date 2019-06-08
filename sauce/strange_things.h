@@ -38,6 +38,7 @@
 #include "strange_expression_shared_at_t.h"
 #include "strange_expression_shared_insert_t.h"
 #include "strange_expression_shared_update_t.h"
+#include "strange_expression_me_t.h"
 
 #undef ___STRANGE_THING___
 #undef ___STRANGE_COLLECTION___
