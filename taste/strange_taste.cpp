@@ -117,6 +117,8 @@ TEST(TestCaseName, ForLoop)
 	squad_a<> concurrent_squad = squad_t<true>::val_();
 	unordered_herd_a<> concurrent_unordered_herd = unordered_herd_t<true>::val_();
 	unordered_shoal_a<> concurrent_unordered_shoal = unordered_shoal_t<true>::val_();
+
+	range_a<> range_operator = range_operator_t<>::val_(concurrent_flock, concurrent_lake, concurrent_ordered_herd);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
