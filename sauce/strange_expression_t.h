@@ -81,6 +81,20 @@ template <typename _ABSTRACTION_ = expression_a<>>
 class expression_t : public operation_t<_ABSTRACTION_>
 {
 public: ___STRANGE_EXPRESSION___
+	// instructions
+	struct break_i {};
+
+	struct continue_i {};
+
+	struct return_i
+	{
+		any_a<> const result;
+
+		return_i(any_a<> const& thing = no())
+			: result{ thing }
+		{}
+	};
+
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
