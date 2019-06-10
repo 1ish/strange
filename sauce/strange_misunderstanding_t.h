@@ -53,7 +53,7 @@ public: ___STRANGE_THING___
 	}
 
 	// misunderstanding
-	inline std::string const& to_string() const
+	inline std::string to_string() const
 	{
 		return _string;
 	}

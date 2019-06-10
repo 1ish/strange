@@ -81,7 +81,7 @@ namespace strange {
     		return *this;
     	}
     
-     inline std :: string const & to_string ( ) const
+     inline std :: string to_string ( ) const
      { assert(handle_); return read().to_string( ); }
      inline any_a < > add__ ( range_a < > const & range ) const
      { assert(handle_); return read().add__(range ); }
@@ -93,7 +93,7 @@ namespace strange {
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
-      virtual inline std :: string const & to_string ( ) const = 0;
+      virtual inline std :: string to_string ( ) const = 0;
       virtual inline any_a < > add__ ( range_a < > const & range ) const = 0;
       virtual inline misunderstanding_a add_ ( misunderstanding_a const & misunderstanding ) const = 0;
       virtual inline misunderstanding_a operator + ( misunderstanding_a const & misunderstanding ) const = 0;
@@ -112,7 +112,7 @@ namespace strange {
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
-      virtual inline std :: string const & to_string ( ) const
+      virtual inline std :: string to_string ( ) const
       { return value_.to_string( ); }
       virtual inline any_a < > add__ ( range_a < > const & range ) const
       { return value_.add__(range ); }
