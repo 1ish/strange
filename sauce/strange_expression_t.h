@@ -82,16 +82,31 @@ class expression_t : public operation_t<_ABSTRACTION_>
 {
 public: ___STRANGE_EXPRESSION___
 	// instructions
-	struct break_i {};
-
-	struct continue_i {};
-
-	struct return_i
+	class break_i : public std::runtime_error
 	{
+	public:
+		break_i()
+			: std::runtime_error("strange::expression::break escaped")
+		{}
+	};
+
+	class continue_i : public std::runtime_error
+	{
+	public:
+		continue_i()
+			: std::runtime_error("strange::expression::continue escaped")
+		{}
+	};
+
+
+	class  return_i : public std::runtime_error
+	{
+	public:
 		any_a<> const result;
 
 		return_i(any_a<> const& thing = no())
-			: result{ thing }
+			: std::runtime_error("strange::expression::return escaped")
+			, result{ thing }
 		{}
 	};
 
