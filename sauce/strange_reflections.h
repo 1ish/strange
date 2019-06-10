@@ -67,5 +67,6 @@ class reflection;
 #include "strange_expression_operate_r.h"
 #include "strange_expression_break_r.h"
 #include "strange_expression_continue_r.h"
+#include "strange_expression_return_r.h"
 
 #endif
