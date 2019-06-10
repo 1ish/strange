@@ -45,6 +45,7 @@
 #include "strange_expression_invoke_t.h"
 #include "strange_expression_operate_t.h"
 #include "strange_expression_break_t.h"
+#include "strange_expression_continue_t.h"
 
 #undef ___STRANGE_THING___
 #undef ___STRANGE_COLLECTION___
