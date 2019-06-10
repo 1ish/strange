@@ -11,7 +11,27 @@ public: ___STRANGE_EXPRESSION___
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
-		return expression_a<>{ expression_return_t<>{ token } };
+		forward_const_iterator_a<> it = terms.cbegin_();
+		if (it == terms.cend_())
+		{
+			return val(token);
+		}
+		any_a<> result = *it;
+		if (!check<expression_a<>>(result))
+		{
+			throw dis("strange::expression_return::val passed non-expression result");
+		}
+		return val(token, cast<expression_a<>>(result));
+	}
+
+	static inline expression_a<> val(token_a<> const& token)
+	{
+		return expression_a<>{ expression_return_t<>(token, expression_t<>::val(token)) };
+	}
+
+	static inline expression_a<> val(token_a<> const& token, expression_a<> const& result)
+	{
+		return expression_a<>{ expression_return_t<>(token, result) };
 	}
 
 	// reflection
@@ -28,23 +48,30 @@ public: ___STRANGE_EXPRESSION___
 	// function
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
-		throw return_i{};
+		throw return_i{ _result.operate_(thing, range) };
 	}
 
 	// expression
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" return "));
+		river.write_(lake_from_string(" return["));
+		_result.generate(indent, river);
+		river.write_(lake_from_string("] "));
 	}
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" return; "));
+		river.write_(lake_from_string(" return("));
+		_result.generate_cpp(indent, river);
+		river.write_(lake_from_string("); "));
 	}
 
 protected:
-	inline expression_return_t(token_a<> const& token)
+	expression_a<> const _result;
+
+	inline expression_return_t(token_a<> const& token, expression_a<> const& result)
 		: expression_t{ token }
+		, _result{ result }
 	{}
 };
 
