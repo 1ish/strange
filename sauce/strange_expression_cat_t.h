@@ -129,7 +129,7 @@ public: ___STRANGE_EXPRESSION___
 	// expression
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" <" + _name.to_string()));
+		river.write_string(" <" + _name.to_string());
 		if (_count >= 2)
 		{
 			_arguments.generate(indent, river);
@@ -143,45 +143,45 @@ public: ___STRANGE_EXPRESSION___
 				{
 					str[1] = '(';
 					str[len - 2] = ')';
-					river.write_(lake_from_string(str));
+					river.write_string(str);
 				}
 				if (_count >= 4)
 				{
 					_result.generate(indent, river);
 					if (_reference)
 					{
-						river.write_(lake_from_string(">& "));
+						river.write_string(">& ");
 						return;
 					}
 				}
 			}
 		}
-		river.write_(lake_from_string("> "));
+		river.write_string("> ");
 	}
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" strange::cat_t<>::val(\"" + _name.to_string() + "\""));
+		river.write_string(" strange::cat_t<>::val(\"" + _name.to_string() + "\"");
 		if (_count >= 2)
 		{
-			river.write_(lake_from_string(","));
+			river.write_string(",");
 			_arguments.generate_cpp(indent, river);
 			if (_count >= 3)
 			{
-				river.write_(lake_from_string(","));
+				river.write_string(",");
 				_parameters.generate_cpp(indent, river);
 				if (_count >= 4)
 				{
-					river.write_(lake_from_string(","));
+					river.write_string(",");
 					_result.generate_cpp(indent, river);
 					if (_reference)
 					{
-						river.write_(lake_from_string(", true"));
+						river.write_string(", true");
 					}
 				}
 			}
 		}
-		river.write_(lake_from_string(") "));
+		river.write_string(") ");
 	}
 
 protected:

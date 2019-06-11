@@ -34,12 +34,12 @@ public: ___STRANGE_EXPRESSION___
 	// expression
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" continue "));
+		river.write_string(" continue ");
 	}
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" continue; "));
+		river.write_string(" continue; ");
 	}
 
 protected:

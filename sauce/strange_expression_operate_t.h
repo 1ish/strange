@@ -34,7 +34,7 @@ public: ___STRANGE_EXPRESSION___
 	// expression
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" $$strange::thing::operate["));
+		river.write_string(" $$strange::thing::operate[");
 		bool first = true;
 		for (auto const& term : _terms)
 		{
@@ -44,7 +44,7 @@ public: ___STRANGE_EXPRESSION___
 			}
 			else
 			{
-				river.write_(lake_from_string(", "));
+				river.write_string(", ");
 			}
 			if (!check<expression_a<>>(term))
 			{
@@ -52,12 +52,12 @@ public: ___STRANGE_EXPRESSION___
 			}
 			cast<expression_a<>>(term).generate(indent, river);
 		}
-		river.write_(lake_from_string("] "));
+		river.write_string("] ");
 	}
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" thing_t<>::operate__("));
+		river.write_string(" thing_t<>::operate__(");
 		bool first = true;
 		for (auto const& term : _terms)
 		{
@@ -67,7 +67,7 @@ public: ___STRANGE_EXPRESSION___
 			}
 			else
 			{
-				river.write_(lake_from_string(", "));
+				river.write_string(", ");
 			}
 			if (!check<expression_a<>>(term))
 			{
@@ -75,7 +75,7 @@ public: ___STRANGE_EXPRESSION___
 			}
 			cast<expression_a<>>(term).generate_cpp(indent, river);
 		}
-		river.write_(lake_from_string(") "));
+		river.write_string(") ");
 	}
 
 protected:

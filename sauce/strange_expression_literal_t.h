@@ -47,15 +47,15 @@ public: ___STRANGE_EXPRESSION___
 		auto const& tag = _token.tag();
 		if (tag == "symbol")
 		{
-			river.write_(lake_from_string(" '" + _token.symbol() + "' "));
+			river.write_string(" '" + _token.symbol() + "' ");
 		}
 		else if (tag == "lake")
 		{
-			river.write_(lake_from_string(" \"" + _token.symbol() + "\" "));
+			river.write_string(" \"" + _token.symbol() + "\" ");
 		}
 		else
 		{
-			river.write_(lake_from_string(" " + _token.symbol() + " "));
+			river.write_string(" " + _token.symbol() + " ");
 		}
 	}
 
@@ -64,15 +64,15 @@ public: ___STRANGE_EXPRESSION___
 		auto const& tag = _token.tag();
 		if (tag == "symbol")
 		{
-			river.write_(lake_from_string(" strange::sym(\"" + _token.symbol() + "\") "));
+			river.write_string(" strange::sym(\"" + _token.symbol() + "\") ");
 		}
 		else if (tag == "lake")
 		{
-			river.write_(lake_from_string(" strange::lake_from_string(\"" + _token.symbol() + "\") "));
+			river.write_string(" strange::lake_from_string(\"" + _token.symbol() + "\") ");
 		}
 		else
 		{
-			river.write_(lake_from_string(" " + _token.symbol() + " "));
+			river.write_string(" " + _token.symbol() + " ");
 		}
 	}
 

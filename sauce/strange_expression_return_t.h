@@ -54,16 +54,16 @@ public: ___STRANGE_EXPRESSION___
 	// expression
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" return["));
+		river.write_string(" return[");
 		_result.generate(indent, river);
-		river.write_(lake_from_string("] "));
+		river.write_string("] ");
 	}
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" return("));
+		river.write_string(" return(");
 		_result.generate_cpp(indent, river);
-		river.write_(lake_from_string("); "));
+		river.write_string("); ");
 	}
 
 protected:

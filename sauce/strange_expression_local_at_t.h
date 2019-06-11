@@ -55,7 +55,7 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis(_token.report() + "strange::expression_local_at::generate called with non-symbol key");
 		}
-		river.write_(lake_from_string(" " + cast<symbol_a<>>(_key).to_string() + " "));
+		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " ");
 	}
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
@@ -64,7 +64,7 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis(_token.report() + "strange::expression_local_at::generate_cpp called with non-symbol key");
 		}
-		river.write_(lake_from_string(" " + cast<symbol_a<>>(_key).to_string() + " "));
+		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " ");
 	}
 
 protected:

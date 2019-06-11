@@ -141,12 +141,12 @@ public: ___STRANGE_EXPRESSION___
 	// expression
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" $$strange::no[] "));
+		river.write_string(" $$strange::no[] ");
 	}
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" strange::no() "));
+		river.write_string(" strange::no() ");
 	}
 
 protected:

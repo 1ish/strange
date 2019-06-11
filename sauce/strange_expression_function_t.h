@@ -104,7 +104,7 @@ public: ___STRANGE_EXPRESSION___
 	// expression
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" function("));
+		river.write_string(" function(");
 		forward_const_iterator_a<> pit = _parameters.cbegin_();
 		bool first = true;
 		while (pit != _parameters.cend_())
@@ -115,21 +115,21 @@ public: ___STRANGE_EXPRESSION___
 			}
 			else
 			{
-				river.write_(lake_from_string(","));
+				river.write_string(",");
 			}
-			river.write_(lake_from_string(cast<symbol_a<>>(*pit).to_string() + " :"));
+			river.write_string(cast<symbol_a<>>(*pit).to_string() + " :");
 			cast<expression_a<>>(*++pit).generate(indent, river);
-			river.write_(lake_from_string("="));
+			river.write_string("=");
 			cast<expression_a<>>(*++pit).generate(indent, river);
 			++pit;
 		}
-		river.write_(lake_from_string(")\n"));
+		river.write_string(")\n");
 		_expression.generate(indent, river);
 	}
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" []("));
+		river.write_string(" [](");
 		forward_const_iterator_a<> pit = _parameters.cbegin_();
 		bool first = true;
 		while (pit != _parameters.cend_())
@@ -140,18 +140,18 @@ public: ___STRANGE_EXPRESSION___
 			}
 			else
 			{
-				river.write_(lake_from_string(","));
+				river.write_string(",");
 			}
 			auto name = cast<symbol_a<>>(*pit).to_string();
 			cast<expression_a<>>(*++pit).generate_cpp(indent, river);
-			river.write_(lake_from_string( name + " ="));
+			river.write_string( name + " =");
 			cast<expression_a<>>(*++pit).generate_cpp(indent, river);
 			++pit;
 		}
-		river.write_(lake_from_string(")\n"));
-		river.write_(lake_from_string("{\n"));
+		river.write_string(")\n");
+		river.write_string("{\n");
 		_expression.generate_cpp(indent, river);
-		river.write_(lake_from_string("}\n"));
+		river.write_string("}\n");
 	}
 
 protected:
