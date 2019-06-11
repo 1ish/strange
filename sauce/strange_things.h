@@ -48,6 +48,7 @@
 #include "strange_expression_continue_t.h"
 #include "strange_expression_return_t.h"
 #include "strange_expression_function_t.h"
+#include "strange_expression_shared_scope_t.h"
 
 #undef ___STRANGE_THING___
 #undef ___STRANGE_COLLECTION___
