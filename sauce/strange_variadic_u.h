@@ -13,6 +13,20 @@ public:
 	}
 
 	template <typename... Args>
+	static inline void variadic(std::vector<_ABSTRACTION_>& vec, int64_t i, Args&& ... args)
+	{
+		vec.push_back(number_int_64_t<>::val(i));
+		variadic(vec, std::forward<Args>(args)...);
+	}
+
+	template <typename... Args>
+	static inline void variadic(std::vector<_ABSTRACTION_>& vec, double f, Args&& ... args)
+	{
+		vec.push_back(number_float_64_t<>::val(f));
+		variadic(vec, std::forward<Args>(args)...);
+	}
+
+	template <typename... Args>
 	static inline void variadic(std::vector<_ABSTRACTION_>& vec, std::string const& s, Args&&... args)
 	{
 		vec.push_back(sym(s));
