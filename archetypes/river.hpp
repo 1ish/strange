@@ -46,6 +46,7 @@ public:
 	inline any_a<> read__(range_a<> const& range);
 	inline lake_a_int8 read_(number_data_a_int64 const& count);
 	inline std::vector<int8_t> read(int64_t count);
+	inline std::string read_string(int64_t count);
 
 	inline any_a<> tellg__(range_a<> const& _) const;
 	inline number_data_a_int64 tellg_() const;
@@ -75,6 +76,7 @@ public:
 	inline any_a<> write__(range_a<> const& range);
 	inline any_a<> write_(lake_a_int8 const& lake);
 	inline void write(std::vector<int8_t> const& lake);
+	inline void write_string(std::string const& str);
 
 	inline any_a<> tellp__(range_a<> const& _) const;
 	inline number_data_a_int64 tellp_() const;

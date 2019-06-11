@@ -126,6 +126,8 @@ namespace strange {
      { assert(handle_); return write().read_(count ); }
      inline std :: vector < int8_t > read ( int64_t count )
      { assert(handle_); return write().read(count ); }
+     inline std :: string read_string ( int64_t count )
+     { assert(handle_); return write().read_string(count ); }
      inline any_a < > tellg__ ( range_a < > const & _ ) const
      { assert(handle_); return read().tellg__(_ ); }
      inline number_data_a_int64 tellg_ ( ) const
@@ -168,6 +170,8 @@ namespace strange {
      { assert(handle_); return write().write_(lake ); }
      inline void write ( std :: vector < int8_t > const & lake )
      { assert(handle_); write().write(lake ); }
+     inline void write_string ( std :: string const & str )
+     { assert(handle_); write().write_string(str ); }
      inline any_a < > tellp__ ( range_a < > const & _ ) const
      { assert(handle_); return read().tellp__(_ ); }
      inline number_data_a_int64 tellp_ ( ) const
@@ -278,6 +282,7 @@ namespace strange {
       virtual inline any_a < > read__ ( range_a < > const & range ) = 0;
       virtual inline lake_a_int8 read_ ( number_data_a_int64 const & count ) = 0;
       virtual inline std :: vector < int8_t > read ( int64_t count ) = 0;
+      virtual inline std :: string read_string ( int64_t count ) = 0;
       virtual inline any_a < > tellg__ ( range_a < > const & _ ) const = 0;
       virtual inline number_data_a_int64 tellg_ ( ) const = 0;
       virtual inline int64_t tellg ( ) const = 0;
@@ -299,6 +304,7 @@ namespace strange {
       virtual inline any_a < > write__ ( range_a < > const & range ) = 0;
       virtual inline any_a < > write_ ( lake_a_int8 const & lake ) = 0;
       virtual inline void write ( std :: vector < int8_t > const & lake ) = 0;
+      virtual inline void write_string ( std :: string const & str ) = 0;
       virtual inline any_a < > tellp__ ( range_a < > const & _ ) const = 0;
       virtual inline number_data_a_int64 tellp_ ( ) const = 0;
       virtual inline int64_t tellp ( ) const = 0;
@@ -400,6 +406,8 @@ namespace strange {
       { return value_.read_(count ); }
       virtual inline std :: vector < int8_t > read ( int64_t count )
       { return value_.read(count ); }
+      virtual inline std :: string read_string ( int64_t count )
+      { return value_.read_string(count ); }
       virtual inline any_a < > tellg__ ( range_a < > const & _ ) const
       { return value_.tellg__(_ ); }
       virtual inline number_data_a_int64 tellg_ ( ) const
@@ -442,6 +450,8 @@ namespace strange {
       { return value_.write_(lake ); }
       virtual inline void write ( std :: vector < int8_t > const & lake )
       { value_.write(lake ); }
+      virtual inline void write_string ( std :: string const & str )
+      { value_.write_string(str ); }
       virtual inline any_a < > tellp__ ( range_a < > const & _ ) const
       { return value_.tellp__(_ ); }
       virtual inline number_data_a_int64 tellp_ ( ) const

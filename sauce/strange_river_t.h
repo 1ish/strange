@@ -229,7 +229,7 @@ public: ___STRANGE_COLLECTION___
 		std::string result;
 		while (good())
 		{
-			result += lake_to_string(read_());
+			result += read_string();
 		}
 		return result;
 	}
@@ -441,6 +441,26 @@ public: ___STRANGE_COLLECTION___
 		return v;
 	}
 
+	inline std::string read_string(int64_t count = -1)
+	{
+		if (!count)
+		{
+			return std::string{};
+		}
+		if (!_istream)
+		{
+			throw dis("strange::river::read_string can only be called on input rivers");
+		}
+		if (count < 0)
+		{
+			count = STRANGE_RIVER_DEFAULT_READ_SIZE;
+		}
+		std::string s(std::size_t(count), '\0');
+		_istream->read(&s[0], count);
+		s.resize(std::size_t(_istream->gcount()));
+		return s;
+	}
+
 	inline any_a<> tellg__(range_a<> const& _) const
 	{
 		return tellg_();
@@ -628,6 +648,19 @@ public: ___STRANGE_COLLECTION___
 			throw dis("strange::river::write can only be called on output rivers");
 		}
 		_ostream->write(reinterpret_cast<char const*>(&lake[0]), int64_t(lake.size()));
+	}
+
+	inline void write_string(std::string const& str)
+	{
+		if (str.empty())
+		{
+			return;
+		}
+		if (!_ostream)
+		{
+			throw dis("strange::river::write_string can only be called on output rivers");
+		}
+		_ostream->write(&str[0], int64_t(str.length()));
 	}
 
 	inline any_a<> tellp__(range_a<> const& _) const
