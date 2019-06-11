@@ -70,5 +70,6 @@ class reflection;
 #include "strange_expression_return_r.h"
 #include "strange_expression_function_r.h"
 #include "strange_expression_shared_scope_r.h"
+#include "strange_expression_flock_r.h"
 
 #endif

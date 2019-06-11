@@ -49,6 +49,7 @@
 #include "strange_expression_return_t.h"
 #include "strange_expression_function_t.h"
 #include "strange_expression_shared_scope_t.h"
+#include "strange_expression_flock_t.h"
 
 #undef ___STRANGE_THING___
 #undef ___STRANGE_RANGE___
