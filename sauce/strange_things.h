@@ -51,6 +51,8 @@
 #include "strange_expression_shared_scope_t.h"
 
 #undef ___STRANGE_THING___
+#undef ___STRANGE_RANGE___
 #undef ___STRANGE_COLLECTION___
+#undef ___STRANGE_EXPRESSION___
 
 #endif
