@@ -91,7 +91,14 @@ public: ___STRANGE_EXPRESSION___
 			}
 			local.emplace(name, argument);
 		}
-		return _expression.operate_(thing, range);
+		try
+		{
+			return _expression.operate_(thing, range);
+		}
+		catch (return_i& ret)
+		{
+			return ret.result;
+		}
 	}
 
 	// expression
