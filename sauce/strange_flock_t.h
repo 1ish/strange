@@ -732,6 +732,12 @@ public: ___STRANGE_COLLECTION___
 		return flock_a<>{ flock_t{ std::forward<F>(init) } };
 	}
 
+	template <typename... Args>
+	static inline flock_a<> var(Args&&... args)
+	{
+		return val(variadic_u<>::var(std::forward<Args>(args)...));
+	}
+
 	// reflection
 	static inline symbol_a<> type_()
 	{

@@ -25,6 +25,14 @@ public:
 		vec.push_back(thing);
 		variadic(vec, std::forward<Args>(args)...);
 	}
+
+	template <typename... Args>
+	static inline std::vector<_ABSTRACTION_> var(Args&&... args)
+	{
+		std::vector<_ABSTRACTION_> vec;
+		variadic(vec, std::forward<Args>(args)...);
+		return vec;
+	}
 };
 
 } // namespace strange

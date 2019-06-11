@@ -57,7 +57,7 @@ public: ___STRANGE_EXPRESSION___
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
-		river.write_(lake_from_string(" thing_t<>::operate__("));
+		river.write_(lake_from_string(" flock_t<>::var("));
 		bool first = true;
 		for (auto const& term : _terms)
 		{
