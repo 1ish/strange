@@ -7,6 +7,7 @@
 
 #include "any_forward.hpp"
 #include "range_forward.hpp"
+#include "token_forward.hpp"
 #include "unordered_shoal_forward.hpp"
 #include "river_forward.hpp"
 
@@ -18,6 +19,9 @@ class expression_a
 {
 public:
 	// expression
+	inline any_a<> token__(range_a<> const& _) const;
+	inline token_a<> token_() const;
+
 	inline any_a<> pure__(range_a<> const& _) const;
 	inline any_a<> pure_() const;
 	inline bool pure() const;

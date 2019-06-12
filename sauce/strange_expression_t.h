@@ -20,6 +20,10 @@ static inline any_a<> val__(range_a<> const& range) \
 	} \
 	return val_(cast<token_a<>>(token), range_t<>::val_(++it, range.cend_())); \
 } \
+inline any_a<> token__(range_a<> const&) const \
+{ \
+	return token_(); \
+} \
 inline any_a<> pure__(range_a<> const&) const \
 { \
 	return pure_(); \
@@ -155,6 +159,11 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 	// expression
+	inline token_a<> token_() const
+	{
+		return _token;
+	}
+
 	inline bool pure() const
 	{
 		return _pure;
