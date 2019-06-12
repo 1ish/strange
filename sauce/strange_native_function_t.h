@@ -16,7 +16,7 @@ public: ___STRANGE_THING___
 	{
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
-		variadic_u<any_a<>>::variadic(v, std::forward<Args>(args)...);
+		variadic_u<>::variadic(v, std::forward<Args>(args)...);
 		return any_a<>{ native_function_t(fun, flock_t<>::val(std::move(v))) };
 	}
 
