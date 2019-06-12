@@ -5,5 +5,6 @@
 #include "strange_concurrent_u.h"
 #include "strange_number_u.h"
 #include "strange_variadic_u.h"
+#include "strange_variadic_pair_u.h"
 
 #endif
