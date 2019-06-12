@@ -120,6 +120,7 @@ TEST(TestCaseName, ForLoop)
 
 	range_a<> range_operator = range_operator_t<>::val_(concurrent_flock, concurrent_lake, concurrent_ordered_herd);
 
+	brook_a<int64_t> brk = brook_t<int64_t>::val_(1, 2, 3);
 	flock_a<> var = flock_t<>::val_(concurrent_brook, "hello", concurrent_flock);
 }
 /*

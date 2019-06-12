@@ -12,20 +12,6 @@ public:
 	{}
 
 	template <typename... Args>
-	static inline void variadic(std::vector<_ABSTRACTION_>& collection, int64_t i, Args&& ... args)
-	{
-		collection.push_back(number_int_64_t<>::val(i));
-		variadic(collection, std::forward<Args>(args)...);
-	}
-
-	template <typename... Args>
-	static inline void variadic(std::vector<_ABSTRACTION_>& collection, double f, Args&& ... args)
-	{
-		collection.push_back(number_float_64_t<>::val(f));
-		variadic(collection, std::forward<Args>(args)...);
-	}
-
-	template <typename... Args>
 	static inline void variadic(std::vector<_ABSTRACTION_>& collection, std::string const& s, Args&&... args)
 	{
 		collection.push_back(sym(s));
@@ -49,20 +35,6 @@ public:
 
 	static inline void variadic(std::deque<_ABSTRACTION_>& collection)
 	{}
-
-	template <typename... Args>
-	static inline void variadic(std::deque<_ABSTRACTION_>& collection, int64_t i, Args&& ... args)
-	{
-		collection.push_back(number_int_64_t<>::val(i));
-		variadic(collection, std::forward<Args>(args)...);
-	}
-
-	template <typename... Args>
-	static inline void variadic(std::deque<_ABSTRACTION_>& collection, double f, Args&& ... args)
-	{
-		collection.push_back(number_float_64_t<>::val(f));
-		variadic(collection, std::forward<Args>(args)...);
-	}
 
 	template <typename... Args>
 	static inline void variadic(std::deque<_ABSTRACTION_>& collection, std::string const& s, Args&& ... args)

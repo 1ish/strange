@@ -738,6 +738,12 @@ public: ___STRANGE_COLLECTION___
 		return val(std_vector_number{});
 	}
 
+	template <typename... Args>
+	static inline lake_a<PRIMITIVE> val_(Args&& ... args)
+	{
+		return val(variadic_u<PRIMITIVE>::vector(std::forward<Args>(args)...));
+	}
+
 	template <typename F>
 	static inline lake_a<PRIMITIVE> val(F&& init)
 	{
