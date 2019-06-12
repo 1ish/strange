@@ -524,7 +524,16 @@ public: ___STRANGE_COLLECTION___
 			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
-				_map.emplace(thing, thing);
+				if (!check<flock_a<>>(thing))
+				{
+					throw dis("strange::unordered_shoal += passed range containing non-flock");
+				}
+				flock_a<> pair = cast<flock_a<>>(thing);
+				if (pair.size() != 2)
+				{
+					throw dis("strange::unordered_shoal += passed range containing flock of wrong size");
+				}
+				_map.emplace(pair.at(0), pair.at(1));
 			}
 		}
 		return *this;
@@ -532,14 +541,35 @@ public: ___STRANGE_COLLECTION___
 
 	inline unordered_shoal_t& operator-=(any_a<> const& range)
 	{
-		if (!check<range_a<>>(range))
+		if (check<unordered_shoal_a<>>(range))
 		{
-			throw dis("strange::unordered_shoal -= passed non-range");
+			auto other = cast<unordered_shoal_a<>>(range).extract();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			for (auto const& pair : other)
+			{
+				_map.erase(pair.first);
+			}
 		}
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
-		for (auto const& thing : cast<range_a<>>(range))
+		else if (check<ordered_shoal_a<>>(range))
 		{
-			_map.erase(thing);
+			auto other = cast<ordered_shoal_a<>>(range).extract();
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			for (auto const& pair : other)
+			{
+				_map.erase(pair.first);
+			}
+		}
+		else
+		{
+			if (!check<range_a<>>(range))
+			{
+				throw dis("strange::unordered_shoal -= passed non-range");
+			}
+			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			for (auto const& thing : cast<range_a<>>(range))
+			{
+				_map.erase(thing);
+			}
 		}
 		return *this;
 	}
