@@ -83,6 +83,18 @@ namespace strange {
     		return *this;
     	}
     
+     inline any_a < > pure__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().pure__(_ ); }
+     inline any_a < > pure_ ( ) const
+     { assert(handle_); return read().pure_( ); }
+     inline bool pure ( ) const
+     { assert(handle_); return read().pure( ); }
+     inline any_a < > literal__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().literal__(_ ); }
+     inline any_a < > literal_ ( ) const
+     { assert(handle_); return read().literal_( ); }
+     inline bool literal ( ) const
+     { assert(handle_); return read().literal( ); }
      inline any_a < > generate__ ( range_a < > const & range ) const
      { assert(handle_); return read().generate__(range ); }
      inline any_a < > generate_ ( number_data_a_int64 const & indent , river_a < > & river ) const
@@ -99,6 +111,12 @@ namespace strange {
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
+      virtual inline any_a < > pure__ ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > pure_ ( ) const = 0;
+      virtual inline bool pure ( ) const = 0;
+      virtual inline any_a < > literal__ ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > literal_ ( ) const = 0;
+      virtual inline bool literal ( ) const = 0;
       virtual inline any_a < > generate__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > generate_ ( number_data_a_int64 const & indent , river_a < > & river ) const = 0;
       virtual inline void generate ( int64_t indent , river_a < > & river ) const = 0;
@@ -120,6 +138,18 @@ namespace strange {
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
+      virtual inline any_a < > pure__ ( range_a < > const & _ ) const
+      { return value_.pure__(_ ); }
+      virtual inline any_a < > pure_ ( ) const
+      { return value_.pure_( ); }
+      virtual inline bool pure ( ) const
+      { return value_.pure( ); }
+      virtual inline any_a < > literal__ ( range_a < > const & _ ) const
+      { return value_.literal__(_ ); }
+      virtual inline any_a < > literal_ ( ) const
+      { return value_.literal_( ); }
+      virtual inline bool literal ( ) const
+      { return value_.literal( ); }
       virtual inline any_a < > generate__ ( range_a < > const & range ) const
       { return value_.generate__(range ); }
       virtual inline any_a < > generate_ ( number_data_a_int64 const & indent , river_a < > & river ) const

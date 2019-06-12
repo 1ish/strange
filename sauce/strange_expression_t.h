@@ -20,6 +20,22 @@ static inline any_a<> val__(range_a<> const& range) \
 	} \
 	return val_(cast<token_a<>>(token), range_t<>::val_(++it, range.cend_())); \
 } \
+inline any_a<> pure__(range_a<> const&) const \
+{ \
+	return pure_(); \
+} \
+inline any_a<> pure_() const \
+{ \
+	return boole(pure()); \
+} \
+inline any_a<> literal__(range_a<> const&) const \
+{ \
+	return literal_(); \
+} \
+inline any_a<> literal_() const \
+{ \
+	return boole(literal()); \
+} \
 inline any_a<> generate__(range_a<> const& range) const \
 { \
 	forward_const_iterator_a<> it = range.cbegin_(); \
@@ -139,6 +155,16 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 	// expression
+	inline bool pure() const
+	{
+		return _pure;
+	}
+
+	inline bool literal() const
+	{
+		return _literal;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" $$strange::no[] ");
@@ -151,10 +177,14 @@ public: ___STRANGE_EXPRESSION___
 
 protected:
 	token_a<> const _token;
+	bool const _pure;
+	bool const _literal;
 
-	inline expression_t(token_a<> const& token)
+	inline expression_t(token_a<> const& token, bool pure = false, bool literal = false)
 		: operation_t{}
 		, _token(token)
+		, _pure(pure)
+		, _literal(literal)
 	{}
 };
 
