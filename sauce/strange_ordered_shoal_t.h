@@ -319,9 +319,9 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	template <typename... Args>
-	static inline ordered_shoal_a<> val_(Args&& ... args)
+	static inline ordered_shoal_a<> val_(Args&&... args)
 	{
-		return val(variadic_u<>::map(std::forward<Args>(args)...));
+		return val(variadic_pair_u<>::map(std::forward<Args>(args)...));
 	}
 
 	template <typename F>

@@ -131,7 +131,7 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	template <typename... Args>
-	static inline unordered_herd_a<> val_(Args&& ... args)
+	static inline unordered_herd_a<> val_(Args&&... args)
 	{
 		return val(variadic_u<>::unordered_set(std::forward<Args>(args)...));
 	}

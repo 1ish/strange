@@ -727,7 +727,7 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	template <typename... Args>
-	static inline flock_a<> val_(Args&& ... args)
+	static inline flock_a<> val_(Args&&... args)
 	{
 		return val(variadic_u<>::vector(std::forward<Args>(args)...));
 	}

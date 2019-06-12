@@ -739,7 +739,7 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	template <typename... Args>
-	static inline brook_a<PRIMITIVE> val_(Args&& ... args)
+	static inline brook_a<PRIMITIVE> val_(Args&&... args)
 	{
 		return val(variadic_u<PRIMITIVE>::deque(std::forward<Args>(args)...));
 	}

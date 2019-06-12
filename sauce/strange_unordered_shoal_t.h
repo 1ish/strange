@@ -268,6 +268,12 @@ public: ___STRANGE_COLLECTION___
 		return val(std_unordered_map_any_any{});
 	}
 
+	template <typename... Args>
+	static inline unordered_shoal_a<> val_(Args&&... args)
+	{
+		return val(variadic_pair_u<>::unordered_map(std::forward<Args>(args)...));
+	}
+
 	template <typename F>
 	static inline unordered_shoal_a<> val(F&& init)
 	{

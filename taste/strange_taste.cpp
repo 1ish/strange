@@ -123,6 +123,7 @@ TEST(TestCaseName, ForLoop)
 	brook_a<int64_t> brk = brook_t<int64_t>::val_(1, 2, 3);
 	flock_a<> var = flock_t<>::val_(concurrent_brook, "hello", concurrent_flock);
 	ordered_shoal_a<> ors = ordered_shoal_t<>::val_(std::make_pair(concurrent_ordered_herd, concurrent_ordered_shoal), std::make_pair(concurrent_squad, concurrent_unordered_herd));
+	unordered_shoal_a<> uos = unordered_shoal_t<>::val_(std::make_pair(concurrent_ordered_herd, concurrent_ordered_shoal), std::make_pair(concurrent_squad, concurrent_unordered_herd));
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

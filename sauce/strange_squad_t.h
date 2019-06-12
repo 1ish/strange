@@ -727,7 +727,7 @@ public: ___STRANGE_COLLECTION___
 	}
 
 	template <typename... Args>
-	static inline squad_a<> val_(Args&& ... args)
+	static inline squad_a<> val_(Args&&... args)
 	{
 		return val(variadic_u<>::deque(std::forward<Args>(args)...));
 	}
