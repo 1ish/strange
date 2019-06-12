@@ -120,7 +120,7 @@ TEST(TestCaseName, ForLoop)
 
 	range_a<> range_operator = range_operator_t<>::val_(concurrent_flock, concurrent_lake, concurrent_ordered_herd);
 
-	flock_a<> var = flock_t<>::var(concurrent_brook, "hello", concurrent_flock);
+	flock_a<> var = flock_t<>::val_(concurrent_brook, "hello", concurrent_flock);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
