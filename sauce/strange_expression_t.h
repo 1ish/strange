@@ -24,6 +24,10 @@ inline any_a<> evaluate__(range_a<> const&) const \
 { \
 	return evaluate_(); \
 } \
+inline any_a<> evaluate_() const \
+{ \
+	return operate_(no(), no().ranged_()); /* //TODO populate local shoal and pass empty range */ \
+} \
 inline any_a<> token__(range_a<> const&) const \
 { \
 	return token_(); \
@@ -163,11 +167,6 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 	// expression
-	inline any_a<> evaluate_() const
-	{
-		return operate_(no(), no().ranged_()); //TODO
-	}
-
 	inline token_a<> token_() const
 	{
 		return _token;
