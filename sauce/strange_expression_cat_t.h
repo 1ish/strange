@@ -64,22 +64,22 @@ public: ___STRANGE_EXPRESSION___
 
 	static inline expression_a<> val(token_a<> const& token, symbol_a<> const& name = sym(""))
 	{
-		return expression_a<>{ expression_cat_t<>(token, 1, name, expression_t<>::val(token), expression_t<>::val(token), expression_t<>::val(token), no()) };
+		return expression_override_t<expression_cat_t<>>::val(expression_cat_t<>(token, 1, name, expression_t<>::val(token), expression_t<>::val(token), expression_t<>::val(token), no()));
 	}
 
 	static inline expression_a<> val(token_a<> const& token, symbol_a<> const& name, expression_a<> const& arguments)
 	{
-		return expression_a<>{ expression_cat_t<>(token, 2, name, arguments, expression_t<>::val(token), expression_t<>::val(token), no()) };
+		return expression_override_t<expression_cat_t<>>::val(expression_cat_t<>(token, 2, name, arguments, expression_t<>::val(token), expression_t<>::val(token), no()));
 	}
 
 	static inline expression_a<> val(token_a<> const& token, symbol_a<> const& name, expression_a<> const& arguments, expression_a<> const& parameters)
 	{
-		return expression_a<>{ expression_cat_t<>(token, 3, name, arguments, parameters, expression_t<>::val(token), no()) };
+		return expression_override_t<expression_cat_t<>>::val(expression_cat_t<>(token, 3, name, arguments, parameters, expression_t<>::val(token), no()));
 	}
 
 	static inline expression_a<> val(token_a<> const& token, symbol_a<> const& name, expression_a<> const& arguments, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& reference = no())
 	{
-		return expression_a<>{ expression_cat_t<>(token, 4, name, arguments, parameters, result, reference) };
+		return expression_override_t<expression_cat_t<>>::val(expression_cat_t<>(token, 4, name, arguments, parameters, result, reference));
 	}
 
 	// reflection

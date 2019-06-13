@@ -11,7 +11,7 @@ public: ___STRANGE_EXPRESSION___
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
-		return expression_a<>{ expression_operate_t<>{ token, terms } };
+		return expression_override_t<expression_operate_t<>>::val(expression_operate_t<>(token, terms));
 	}
 
 	// reflection

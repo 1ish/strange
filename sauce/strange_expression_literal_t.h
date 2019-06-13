@@ -24,17 +24,6 @@ public: ___STRANGE_EXPRESSION___
 		return expression_a<>{ expression_literal_t<>{ token, literal } };
 	}
 
-	static inline expression_a<> val(expression_a<> const& expression)
-	{
-		if (expression.literal())
-		{
-			any_a<> thing = no();
-			range_a<> range = thing.ranged_();
-			return val(expression.token_(), expression.operate_(thing, range)); //TODO
-		}
-		return expression;
-	}
-
 	// reflection
 	static inline symbol_a<> type_()
 	{

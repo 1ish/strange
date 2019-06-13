@@ -46,7 +46,7 @@ public: ___STRANGE_EXPRESSION___
 			}
 			++it;
 		}
-		return expression_a<>{ expression_function_t<>(token, cast<expression_a<>>(expression), range_t<>::val_(pit, terms.cend_())) };
+		return expression_override_t<expression_function_t<>>::val(expression_function_t<>(token, cast<expression_a<>>(expression), range_t<>::val_(pit, terms.cend_())));
 	}
 
 	// reflection
