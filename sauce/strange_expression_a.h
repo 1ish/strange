@@ -84,6 +84,10 @@ namespace strange {
     		return *this;
     	}
     
+     inline any_a < > evaluate__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().evaluate__(_ ); }
+     inline any_a < > evaluate_ ( ) const
+     { assert(handle_); return read().evaluate_( ); }
      inline any_a < > token__ ( range_a < > const & _ ) const
      { assert(handle_); return read().token__(_ ); }
      inline token_a < > token_ ( ) const
@@ -116,6 +120,8 @@ namespace strange {
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
+      virtual inline any_a < > evaluate__ ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > evaluate_ ( ) const = 0;
       virtual inline any_a < > token__ ( range_a < > const & _ ) const = 0;
       virtual inline token_a < > token_ ( ) const = 0;
       virtual inline any_a < > pure__ ( range_a < > const & _ ) const = 0;
@@ -145,6 +151,10 @@ namespace strange {
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
+      virtual inline any_a < > evaluate__ ( range_a < > const & _ ) const
+      { return value_.evaluate__(_ ); }
+      virtual inline any_a < > evaluate_ ( ) const
+      { return value_.evaluate_( ); }
       virtual inline any_a < > token__ ( range_a < > const & _ ) const
       { return value_.token__(_ ); }
       virtual inline token_a < > token_ ( ) const

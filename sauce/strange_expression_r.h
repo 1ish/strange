@@ -30,6 +30,7 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
+			operations.update("evaluate", native_extraction_t<expression_a<>>::val(&expression_a<>::evaluate__));
 			operations.update("token", native_extraction_t<expression_a<>>::val(&expression_a<>::token__));
 			operations.update("pure", native_extraction_t<expression_a<>>::val(&expression_a<>::pure__));
 			operations.update("literal", native_extraction_t<expression_a<>>::val(&expression_a<>::literal__));

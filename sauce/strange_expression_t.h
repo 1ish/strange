@@ -20,6 +20,10 @@ static inline any_a<> val__(range_a<> const& range) \
 	} \
 	return val_(cast<token_a<>>(token), range_t<>::val_(++it, range.cend_())); \
 } \
+inline any_a<> evaluate__(range_a<> const&) const \
+{ \
+	return evaluate_(); \
+} \
 inline any_a<> token__(range_a<> const&) const \
 { \
 	return token_(); \
@@ -159,6 +163,11 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 	// expression
+	inline any_a<> evaluate_() const
+	{
+		return operate_(no(), no().ranged_()); //TODO
+	}
+
 	inline token_a<> token_() const
 	{
 		return _token;
