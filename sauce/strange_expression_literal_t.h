@@ -73,9 +73,13 @@ public: ___STRANGE_EXPRESSION___
 		{
 			river.write_string(" \"" + lake_to_string(cast<lake_a<int8_t>>(_literal)) + "\" ");
 		}
-		else
+		else if (_token.literal_() == _literal)
 		{
 			river.write_string(" " + _token.symbol() + " ");
+		}
+		else
+		{
+			throw dis(_token.report() + "strange::expression_literal::generate with invalid literal");
 		}
 	}
 
@@ -89,9 +93,13 @@ public: ___STRANGE_EXPRESSION___
 		{
 			river.write_string(" strange::lake_from_string(\"" + lake_to_string(cast<lake_a<int8_t>>(_literal)) + "\") ");
 		}
-		else
+		else if (_token.literal_() == _literal)
 		{
 			river.write_string(" " + _token.symbol() + " ");
+		}
+		else
+		{
+			throw dis(_token.report() + "strange::expression_literal::generate_cpp with invalid literal");
 		}
 	}
 

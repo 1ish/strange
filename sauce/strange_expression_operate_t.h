@@ -48,7 +48,7 @@ public: ___STRANGE_EXPRESSION___
 			}
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(_token.report() + "strange::expression_operate::generate passed non-expression term");
+				throw dis(_token.report() + "strange::expression_operate::generate with non-expression term");
 			}
 			cast<expression_a<>>(term).generate(indent, river);
 		}
@@ -71,7 +71,7 @@ public: ___STRANGE_EXPRESSION___
 			}
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(_token.report() + "strange::expression_operate::generate_cpp passed non-expression term");
+				throw dis(_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
 			}
 			cast<expression_a<>>(term).generate_cpp(indent, river);
 		}

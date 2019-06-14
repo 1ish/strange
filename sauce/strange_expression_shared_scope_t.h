@@ -56,7 +56,7 @@ public: ___STRANGE_EXPRESSION___
 	{
 		if (!check<symbol_a<>>(_key))
 		{
-			throw dis(_token.report() + "strange::expression_shared_scope::generate called with non-symbol key");
+			throw dis(_token.report() + "strange::expression_shared_scope::generate with non-symbol key");
 		}
 		river.write_string(" $$" + cast<symbol_a<>>(_key).to_string() + " ");
 	}
@@ -65,7 +65,7 @@ public: ___STRANGE_EXPRESSION___
 	{
 		if (!check<symbol_a<>>(_key))
 		{
-			throw dis(_token.report() + "strange::expression_shared_scope::generate_cpp called with non-symbol key");
+			throw dis(_token.report() + "strange::expression_shared_scope::generate_cpp with non-symbol key");
 		}
 		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " ");
 	}
