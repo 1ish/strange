@@ -159,10 +159,54 @@ protected:
 	range_a<> const _parameters;
 
 	inline expression_function_t(token_a<> const& token, expression_a<> const& expression, range_a<> const& parameters)
-		: expression_t{ token }
+		: expression_t(token, is_pure(expression, parameters), is_literal(expression, parameters))
 		, _expression{ expression }
 		, _parameters{ parameters }
 	{}
+
+	static inline bool is_pure(expression_a<> const& expression, range_a<> const& parameters)
+	{
+		if (!expression.pure())
+		{
+			return false;
+		}
+		forward_const_iterator_a<> pit = parameters.cbegin_();
+		while (pit != parameters.cend_())
+		{
+			if (!cast<expression_a<>>(*++pit).pure())
+			{
+				return false;
+			}
+			if (!cast<expression_a<>>(*++pit).pure())
+			{
+				return false;
+			}
+			++pit;
+		}
+		return true;
+	}
+
+	static inline bool is_literal(expression_a<> const& expression, range_a<> const& parameters)
+	{
+		if (!expression.literal())
+		{
+			return false;
+		}
+		forward_const_iterator_a<> pit = parameters.cbegin_();
+		while (pit != parameters.cend_())
+		{
+			if (!cast<expression_a<>>(*++pit).literal())
+			{
+				return false;
+			}
+			if (!cast<expression_a<>>(*++pit).literal())
+			{
+				return false;
+			}
+			++pit;
+		}
+		return true;
+	}
 };
 
 } // namespace strange
