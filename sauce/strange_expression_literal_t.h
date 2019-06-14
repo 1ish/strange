@@ -24,6 +24,12 @@ public: ___STRANGE_EXPRESSION___
 		return expression_a<>{ expression_literal_t<>{ token, literal } };
 	}
 
+	// validation
+	static inline bool validate(any_a<> const& literal)
+	{
+		return literal.type_() == symbol_t<>::type_() || literal.type_() == lake_int_8_t<>::type_();
+	}
+
 	// reflection
 	static inline symbol_a<> type_()
 	{
@@ -44,14 +50,13 @@ public: ___STRANGE_EXPRESSION___
 	// expression
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
-		auto const& tag = _token.tag();
-		if (tag == "symbol")
+		if (_literal.type_() == symbol_t<>::type_())
 		{
-			river.write_string(" '" + _token.symbol() + "' ");
+			river.write_string(" '" + cast<symbol_a<>>(_literal).to_string() + "' ");
 		}
-		else if (tag == "lake")
+		else if (_literal.type_() == lake_int_8_t<>::type_())
 		{
-			river.write_string(" \"" + _token.symbol() + "\" ");
+			river.write_string(" \"" + lake_to_string(cast<lake_a<int8_t>>(_literal)) + "\" ");
 		}
 		else
 		{
@@ -61,14 +66,13 @@ public: ___STRANGE_EXPRESSION___
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
-		auto const& tag = _token.tag();
-		if (tag == "symbol")
+		if (_literal.type_() == symbol_t<>::type_())
 		{
-			river.write_string(" strange::sym(\"" + _token.symbol() + "\") ");
+			river.write_string(" strange::sym(\"" + cast<symbol_a<>>(_literal).to_string() + "\") ");
 		}
-		else if (tag == "lake")
+		else if (_literal.type_() == lake_int_8_t<>::type_())
 		{
-			river.write_string(" strange::lake_from_string(\"" + _token.symbol() + "\") ");
+			river.write_string(" strange::lake_from_string(\"" + lake_to_string(cast<lake_a<int8_t>>(_literal)) + "\") ");
 		}
 		else
 		{

@@ -14,7 +14,7 @@ public: ___STRANGE_EXPRESSION___
 		if (overridden.literal())
 		{
 			any_a<> literal = overridden.evaluate_();
-			if (check<symbol_a<>>(literal)) //TODO expression_literal_t<>::validate(literal)
+			if (expression_literal_t<>::validate(literal))
 			{
 				return expression_literal_t<>::val(overridden.token_(), literal);
 			}
