@@ -25,6 +25,21 @@ public: ___STRANGE_EXPRESSION___
 	}
 
 	// validation
+	static inline any_a<> validate__(range_a<> const& range)
+	{
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
+		{
+			throw dis("strange::expression_literal::validate passed empty range");
+		}
+		return validate_(*it);
+	}
+
+	static inline any_a<> validate_(any_a<> const& literal)
+	{
+		return boole(validate(literal));
+	}
+
 	static inline bool validate(any_a<> const& literal)
 	{
 		return literal.type_() == symbol_t<>::type_() || literal.type_() == lake_int_8_t<>::type_();
