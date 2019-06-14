@@ -82,7 +82,7 @@ public: ___STRANGE_THING___
 	// conversion
 	inline range_a<> ranged_() const
 	{
-		return range_t<>::val_(it_t<true, something_t<>>::val_(no()), it_t<true, something_t<>>::val_(yes()));
+		return range_t<>::val_(it_t<true, something_t<>>::val_(no()), it_t<true, something_t<>>::val_());
 	}
 
 protected:

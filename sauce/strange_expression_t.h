@@ -26,7 +26,7 @@ inline any_a<> evaluate__(range_a<> const&) const \
 } \
 inline any_a<> evaluate_() const \
 { \
-	return operate_(no(), no().ranged_()); /* //TODO populate local shoal and pass empty range */ \
+	return operate_(unordered_shoal_t<>::val_(), range_t<>::val_()); \
 } \
 inline any_a<> token__(range_a<> const&) const \
 { \

@@ -11,7 +11,7 @@ public: ___STRANGE_THING___
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
-	forward_const_iterator_a<> it = range.cbegin_();
+		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
 			return val_();
@@ -19,7 +19,13 @@ public: ___STRANGE_THING___
 		return val_(*it);
 	}
 
-	static inline forward_const_iterator_a<> val_(any_a<> const& thing = END::val_())
+	static inline forward_const_iterator_a<> val_()
+	{
+		static forward_const_iterator_a<> VAL = val_(END::val_());
+		return VAL;
+	}
+
+	static inline forward_const_iterator_a<> val_(any_a<> const& thing)
 	{
 		return forward_const_iterator_a<>{ it_t<CONST, END, _ABSTRACTION_>{ thing } };
 	}

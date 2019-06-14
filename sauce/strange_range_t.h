@@ -25,7 +25,7 @@ public: ___STRANGE_RANGE___
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::range::val passed empty range");
+			return val_();
 		}
 		any_a<> begin = *it;
 		if (!check<forward_const_iterator_a<>>(begin))
@@ -42,6 +42,12 @@ public: ___STRANGE_RANGE___
 			throw dis("strange::range::val passed non-iterator end");
 		}
 		return val_(cast<forward_const_iterator_a<>>(begin), cast<forward_const_iterator_a<>>(end));
+	}
+
+	static inline range_a<> val_()
+	{
+		static range_a<> VAL = val_(it_t<true>::val_(), it_t<true>::val_());
+		return VAL;
 	}
 
 	static inline range_a<> val_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)

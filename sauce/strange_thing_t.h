@@ -200,7 +200,7 @@ public:
 	// conversion
 	inline range_a<> ranged_() const
 	{
-		return range_t<>::val_(it_t<true>::val_(me_()), it_t<true>::val_(no()));
+		return range_t<>::val_(it_t<true>::val_(me_()), it_t<true>::val_());
 	}
 
 	// operators
