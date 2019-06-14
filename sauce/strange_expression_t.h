@@ -203,6 +203,30 @@ protected:
 		, _pure(pure)
 		, _literal(literal)
 	{}
+
+	static inline bool pure_terms(range_a<> const& terms)
+	{
+		for (auto const& term : terms)
+		{
+			if (!cast<expression_a<>>(term).pure())
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	static inline bool literal_terms(range_a<> const& terms)
+	{
+		for (auto const& term : terms)
+		{
+			if (!cast<expression_a<>>(term).literal())
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 };
 
 } // namespace strange

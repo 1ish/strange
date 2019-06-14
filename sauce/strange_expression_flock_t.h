@@ -82,33 +82,9 @@ protected:
 	range_a<> const _terms;
 
 	inline expression_flock_t(token_a<> const& token, range_a<> const& terms)
-		: expression_t(token, is_pure(terms), is_literal(terms))
+		: expression_t(token, pure_terms(terms), literal_terms(terms))
 		, _terms{ terms }
 	{}
-
-	static inline bool is_pure(range_a<> const& terms)
-	{
-		for (auto const& term : terms)
-		{
-			if (!cast<expression_a<>>(term).pure())
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
-	static inline bool is_literal(range_a<> const& terms)
-	{
-		for (auto const& term : terms)
-		{
-			if (!cast<expression_a<>>(term).literal())
-			{
-				return false;
-			}
-		}
-		return true;
-	}
 };
 
 } // namespace strange
