@@ -44,7 +44,7 @@ public: ___STRANGE_EXPRESSION___
 
 protected:
 	inline expression_continue_t(token_a<> const& token)
-		: expression_t{ token }
+		: expression_t(token, true, true) // pure, literal
 	{}
 };
 

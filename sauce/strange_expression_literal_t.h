@@ -208,7 +208,7 @@ protected:
 	any_a<> const _literal;
 
 	inline expression_literal_t(token_a<> const& token, any_a<> const& literal)
-		: expression_t{ token }
+		: expression_t(token, true, true) // pure, literal
 		, _literal{ literal }
 	{}
 };

@@ -193,7 +193,7 @@ protected:
 	any_a<> const _reference;
 
 	inline expression_cat_t(token_a<> const& token, int64_t count, symbol_a<> const& name, expression_a<> const& arguments, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& reference)
-		: expression_t{ token }
+		: expression_t(token, arguments.pure() && parameters.pure() && result.pure(), arguments.literal() && parameters.literal() && result.literal()) // pure, literal
 		, _count{ count }
 		, _name{ name }
 		, _arguments{ arguments }

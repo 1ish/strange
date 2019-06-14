@@ -70,7 +70,7 @@ protected:
 	expression_a<> const _result;
 
 	inline expression_return_t(token_a<> const& token, expression_a<> const& result)
-		: expression_t{ token }
+		: expression_t(token, result.pure(), result.literal()) // pure, literal
 		, _result{ result }
 	{}
 };
