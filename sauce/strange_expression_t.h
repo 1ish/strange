@@ -194,14 +194,10 @@ public: ___STRANGE_EXPRESSION___
 
 protected:
 	token_a<> const _token;
-	bool const _pure;
-	bool const _literal;
 
 	inline expression_t(token_a<> const& token, bool pure = false, bool literal = false)
-		: operation_t{}
+		: operation_t(pure, literal)
 		, _token(token)
-		, _pure(pure)
-		, _literal(literal)
 	{}
 
 	static inline bool pure_terms(range_a<> const& terms)

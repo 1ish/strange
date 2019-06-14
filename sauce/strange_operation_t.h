@@ -25,8 +25,13 @@ public:
 	}
 
 protected:
-	inline operation_t()
+	bool const _pure;
+	bool const _literal;
+
+	inline operation_t(bool pure = false, bool literal = false)
 		: thing_t{}
+		, _pure(pure)
+		, _literal(literal)
 	{}
 };
 
