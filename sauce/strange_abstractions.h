@@ -98,6 +98,9 @@
 
 #include "strange_token_a.h"
 
+#include "strange_operation_a.h"
+
+#define ___derived___ operation_a<>
 #include "strange_expression_a.h"
 
 #undef ___root___

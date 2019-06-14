@@ -2,7 +2,7 @@
 #define COM_ONEISH_STRANGE_EXPRESSION_A_H
 
 /*
-~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived.hpp -c ~/source/repos/strange/archetypes/expression.hpp > ~/source/repos/strange/sauce/strange_expression_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/finale.hpp -c ~/source/repos/strange/archetypes/expression.hpp > ~/source/repos/strange/sauce/strange_expression_a.h
 */
 
 #include "any_forward.hpp"
@@ -24,14 +24,6 @@ public:
 
 	inline any_a<> token__(range_a<> const& _) const;
 	inline token_a<> token_() const;
-
-	inline any_a<> pure__(range_a<> const& _) const;
-	inline any_a<> pure_() const;
-	inline bool pure() const;
-
-	inline any_a<> literal__(range_a<> const& _) const;
-	inline any_a<> literal_() const;
-	inline bool literal() const;
 
 	inline any_a<> generate__(range_a<> const& range) const;
 	inline any_a<> generate_(number_data_a_int64 const& indent, river_a<>& river) const;

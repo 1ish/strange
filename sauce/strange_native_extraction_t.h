@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename T, typename _ABSTRACTION_ = any_a<>>
+template <typename T, typename _ABSTRACTION_ = operation_a<>>
 class native_extraction_t : public operation_t<_ABSTRACTION_>
 {
 	using const_member = any_a<>(T::*)(range_a<> const&) const;
@@ -12,12 +12,12 @@ class native_extraction_t : public operation_t<_ABSTRACTION_>
 public: ___STRANGE_THING___
 	// construction
 	template <typename... Args>
-	static inline any_a<> val(const_member const fun, Args&&... args)
+	static inline operation_a<> val(const_member const fun, Args&&... args)
 	{
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
-		return any_a<>{ native_extraction_t(fun, flock_t<>::val(std::move(v))) };
+		return operation_a<>{ native_extraction_t(fun, flock_t<>::val(std::move(v))) };
 	}
 
 	// reflection

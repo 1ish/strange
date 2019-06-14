@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = any_a<>>
+template <typename _ABSTRACTION_ = operation_a<>>
 class operation_t : public thing_t<_ABSTRACTION_>
 {
 public:
@@ -22,6 +22,37 @@ public:
 	static inline bool operation()
 	{
 		return true;
+	}
+
+	// operation
+	inline any_a<> pure__(range_a<> const&) const
+	{
+		return pure_();
+	}
+
+	inline any_a<> pure_() const
+	{
+		return boole(pure());
+	}
+
+	inline bool pure() const
+	{
+		return _pure;
+	}
+
+	inline any_a<> literal__(range_a<> const&) const
+	{
+		return literal_();
+	}
+
+	inline any_a<> literal_() const
+	{
+		return boole(literal());
+	}
+
+	inline bool literal() const
+	{
+		return _literal;
 	}
 
 protected:

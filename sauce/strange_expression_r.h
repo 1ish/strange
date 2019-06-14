@@ -18,7 +18,7 @@ public:
 	{
 		static unordered_herd_a<> CATS = []()
 		{
-			auto cats = reflection<any_a<>>::cats();
+			auto cats = reflection<operation_a<>>::cats();
 			cats.insert(cat());
 			return cats;
 		}();
@@ -29,11 +29,9 @@ public:
 	{
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
-			auto operations = reflection<any_a<>>::operations();
+			auto operations = reflection<operation_a<>>::operations();
 			operations.update("evaluate", native_extraction_t<expression_a<>>::val(&expression_a<>::evaluate__));
 			operations.update("token", native_extraction_t<expression_a<>>::val(&expression_a<>::token__));
-			operations.update("pure", native_extraction_t<expression_a<>>::val(&expression_a<>::pure__));
-			operations.update("literal", native_extraction_t<expression_a<>>::val(&expression_a<>::literal__));
 			operations.update("generate", native_extraction_t<expression_a<>>::val(&expression_a<>::generate__));
 			operations.update("generate_cpp", native_extraction_t<expression_a<>>::val(&expression_a<>::generate_cpp__));
 			return operations;

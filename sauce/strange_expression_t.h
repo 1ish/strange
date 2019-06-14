@@ -32,22 +32,6 @@ inline any_a<> token__(range_a<> const&) const \
 { \
 	return token_(); \
 } \
-inline any_a<> pure__(range_a<> const&) const \
-{ \
-	return pure_(); \
-} \
-inline any_a<> pure_() const \
-{ \
-	return boole(pure()); \
-} \
-inline any_a<> literal__(range_a<> const&) const \
-{ \
-	return literal_(); \
-} \
-inline any_a<> literal_() const \
-{ \
-	return boole(literal()); \
-} \
 inline any_a<> generate__(range_a<> const& range) const \
 { \
 	forward_const_iterator_a<> it = range.cbegin_(); \
@@ -170,16 +154,6 @@ public: ___STRANGE_EXPRESSION___
 	inline token_a<> token_() const
 	{
 		return _token;
-	}
-
-	inline bool pure() const
-	{
-		return _pure;
-	}
-
-	inline bool literal() const
-	{
-		return _literal;
 	}
 
 	inline void generate(int64_t indent, river_a<>& river) const

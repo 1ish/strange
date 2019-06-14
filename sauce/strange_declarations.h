@@ -111,6 +111,9 @@ class cat_a;
 template <typename number_data_a_int64 = number_data_a<int64_t>>
 class token_a;
 
+template <typename _1_ = void>
+class operation_a;
+
 template <typename number_data_a_int64 = number_data_a<int64_t>>
 class expression_a;
 
