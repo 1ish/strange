@@ -70,17 +70,20 @@ public: ___STRANGE_EXPRESSION___
 			throw dis(_token.report() + "strange::expression_shared_update::operate passed non-unordered-shoal shared");
 		}
 #endif
-		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
-		if (!shared.has(_key))
-		{
-			throw dis(_token.report() + "strange::expression_shared_update::operate key not found");
-		}
 		auto val = _val.operate_(thing, range);
 		if (!val.cats_().has_(_cat))
 		{
 			throw dis(_token.report() + "strange::expression_shared_update::operate cat does not include value");
 		}
-		shared.update(_key, val);
+		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
+		auto& map = shared.reference();
+		auto lock = shared.write_lock_();
+		auto it = map.find(_key);
+		if (it == map.end())
+		{
+			throw dis(_token.report() + "strange::expression_shared_update::operate key not found");
+		}
+		it->second = val;
 		return val;
 	}
 

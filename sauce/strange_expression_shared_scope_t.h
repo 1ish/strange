@@ -42,11 +42,12 @@ public: ___STRANGE_EXPRESSION___
 	// function
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
-		if (!_shared.has(_key))
+		auto value = _shared.at_(_key);
+		if (!value)
 		{
 			throw dis(_token.report() + "strange::expression_shared_scope::operate key not found");
 		}
-		return _shared.at_(_key);
+		return value;
 	}
 
 	// expression

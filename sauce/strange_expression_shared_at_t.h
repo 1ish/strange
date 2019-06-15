@@ -52,11 +52,14 @@ public: ___STRANGE_EXPRESSION___
 		}
 #endif
 		auto const& shared = static_cast<unordered_shoal_a<> const&>(lit->second);
-		if (!shared.has(_key))
+		auto const& map = shared.extract();
+		auto lock = shared.read_lock_();
+		auto it = map.find(_key);
+		if (it == map.cend())
 		{
 			throw dis(_token.report() + "strange::expression_shared_at::operate key not found");
 		}
-		return shared.at_(_key);
+		return it->second;
 	}
 
 	// expression
