@@ -82,7 +82,7 @@ protected:
 	range_a<> const _terms;
 
 	inline expression_flock_t(token_a<> const& token, range_a<> const& terms)
-		: expression_t(token, pure_terms(terms), literal_terms(terms))
+		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 	{}
 };

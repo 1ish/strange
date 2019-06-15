@@ -64,6 +64,12 @@ protected:
 		, _pure(pure)
 		, _literal(literal)
 	{}
+
+	inline operation_t(std::pair<bool, bool> const& pure_literal)
+		: thing_t{}
+		, _pure(pure_literal.first)
+		, _literal(pure_literal.second)
+	{}
 };
 
 } // namespace strange

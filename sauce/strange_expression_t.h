@@ -174,10 +174,19 @@ protected:
 		, _token(token)
 	{}
 
-	static inline bool pure_terms(range_a<> const& terms)
+	inline expression_t(token_a<> const& token, std::pair<bool, bool> const& pure_literal)
+		: operation_t(pure_literal)
+		, _token(token)
+	{}
+
+	static inline bool pure_terms(token_a<> const& token, range_a<> const& terms)
 	{
 		for (auto const& term : terms)
 		{
+			if (!check<expression_a<>>(term))
+			{
+				throw dis(token.report() + "strange::expression::pure_terms passed non-expression");
+			}
 			if (!cast<expression_a<>>(term).pure())
 			{
 				return false;
@@ -186,16 +195,50 @@ protected:
 		return true;
 	}
 
-	static inline bool literal_terms(range_a<> const& terms)
+	static inline bool literal_terms(token_a<> const& token, range_a<> const& terms)
 	{
 		for (auto const& term : terms)
 		{
+			if (!check<expression_a<>>(term))
+			{
+				throw dis(token.report() + "strange::expression::literal_terms passed non-expression");
+			}
 			if (!cast<expression_a<>>(term).literal())
 			{
 				return false;
 			}
 		}
 		return true;
+	}
+
+	static inline std::pair<bool, bool> pure_literal_terms(token_a<> const& token, range_a<> const& terms)
+	{
+		std::pair<bool, bool> pure_literal(true, true);
+		for (auto const& term : terms)
+		{
+			if (!check<expression_a<>>(term))
+			{
+				throw dis(token.report() + "strange::expression::pure_literal_terms passed non-expression");
+			}
+			auto expression = cast<expression_a<>>(term);
+			if (!expression.pure())
+			{
+				pure_literal.first = false;
+				if (!pure_literal.second)
+				{
+					break;
+				}
+			}
+			if (!expression.literal())
+			{
+				pure_literal.second = false;
+				if (!pure_literal.first)
+				{
+					break;
+				}
+			}
+		}
+		return pure_literal;
 	}
 };
 
