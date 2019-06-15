@@ -768,7 +768,7 @@ public: ___STRANGE_COLLECTION___
 			typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 			for (auto const& visited : _deque)
 			{
-				flock.update(last, visited);
+				flock.update_index(last, visited);
 				visited.visit_(flock);
 			}
 		}
@@ -831,10 +831,10 @@ public: ___STRANGE_COLLECTION___
 	// collection
 	inline bool has(any_a<> const& key) const
 	{
-		return check<number_a<>>(key) && has(cast<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && has_index(cast<number_a<>>(key).to_int_64());
 	}
 
-	inline bool has(int64_t index) const
+	inline bool has_index(int64_t index) const
 	{
 		return index >= 0 && index < size();
 	}
@@ -843,12 +843,12 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<number_a<>>(key))
 		{
-			return at(cast<number_a<>>(key).to_int_64());
+			return at_index(cast<number_a<>>(key).to_int_64());
 		}
 		return misunderstanding_t<>::val("strange::squad::at index is not a number");
 	}
 
-	inline any_a<> at(int64_t index) const
+	inline any_a<> at_index(int64_t index) const
 	{
 		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		if (index >= 0 && index < int64_t(_deque.size()))
@@ -862,11 +862,11 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<number_a<>>(key))
 		{
-			update(cast<number_a<>>(key).to_int_64(), value);
+			update_index(cast<number_a<>>(key).to_int_64(), value);
 		}
 	}
 
-	inline void update(int64_t index, any_a<> const& value)
+	inline void update_index(int64_t index, any_a<> const& value)
 	{
 		if (index >= 0)
 		{
@@ -889,10 +889,10 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool insert(any_a<> const& key, any_a<> const& value)
 	{
-		return check<number_a<>>(key) && insert(cast<number_a<>>(key).to_int_64(), value);
+		return check<number_a<>>(key) && insert_index(cast<number_a<>>(key).to_int_64(), value);
 	}
 
-	inline bool insert(int64_t index, any_a<> const& value)
+	inline bool insert_index(int64_t index, any_a<> const& value)
 	{
 		if (index >= 0)
 		{
@@ -921,10 +921,10 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase(any_a<> const& key)
 	{
-		return check<number_a<>>(key) && erase(cast<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && erase_index(cast<number_a<>>(key).to_int_64());
 	}
 
-	inline bool erase(int64_t index)
+	inline bool erase_index(int64_t index)
 	{
 		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		if (index >= 0 && index < int64_t(_deque.size()))

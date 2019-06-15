@@ -17,11 +17,11 @@ class inventory_a
 {
 public:
 	// inventory
-	inline bool has(int64_t index) const;
-	inline any_a<> at(int64_t index) const;
-	inline void update(int64_t index, any_a<> const& value);
-	inline bool insert(int64_t index, any_a<> const& value);
-	inline bool erase(int64_t index);
+	inline bool has_index(int64_t index) const;
+	inline any_a<> at_index(int64_t index) const;
+	inline void update_index(int64_t index, any_a<> const& value);
+	inline bool insert_index(int64_t index, any_a<> const& value);
+	inline bool erase_index(int64_t index);
 
 	// mutable range
 	inline any_a<> begin__(range_a<> const& _);

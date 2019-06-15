@@ -51,8 +51,8 @@ class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<> get_() const
 		{
-			_pair.update(0, _it->first);
-			_pair.update(1, _it->second);
+			_pair.update_index(0, _it->first);
+			_pair.update_index(1, _it->second);
 			return _pair;
 		}
 
@@ -72,7 +72,7 @@ class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 			{
 				throw dis("strange::unordered_shoal::iterator set passed non-flock");
 			}
-			return _it->second = cast<flock_a<>>(thing).at(1);
+			return _it->second = cast<flock_a<>>(thing).at_index(1);
 		}
 
 		inline any_a<>* operator->() const
@@ -183,8 +183,8 @@ class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 
 			inline any_a<> get_() const
 			{
-				_pair.update(0, _it->first);
-				_pair.update(1, _it->second);
+				_pair.update_index(0, _it->first);
+				_pair.update_index(1, _it->second);
 				return _pair;
 			}
 
@@ -195,8 +195,8 @@ class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 
 			inline any_a<> const& operator*() const
 			{
-				_pair.update(0, _it->first);
-				_pair.update(1, _it->second);
+				_pair.update_index(0, _it->first);
+				_pair.update_index(1, _it->second);
 				return _pair;
 			}
 
@@ -321,9 +321,9 @@ public: ___STRANGE_COLLECTION___
 			typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 			for (auto const& visited : _map)
 			{
-				flock.update(last, visited.first);
+				flock.update_index(last, visited.first);
 				visited.first.visit_(flock);
-				flock.update(last, visited.second);
+				flock.update_index(last, visited.second);
 				visited.second.visit_(flock);
 			}
 		}
@@ -533,7 +533,7 @@ public: ___STRANGE_COLLECTION___
 				{
 					throw dis("strange::unordered_shoal += passed range containing flock of wrong size");
 				}
-				_map.emplace(pair.at(0), pair.at(1));
+				_map.emplace(pair.at_index(0), pair.at_index(1));
 			}
 		}
 		return *this;

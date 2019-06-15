@@ -817,10 +817,10 @@ public: ___STRANGE_COLLECTION___
 	// collection
 	inline bool has(any_a<> const& key) const
 	{
-		return check<number_a<>>(key) && has(cast<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && has_index(cast<number_a<>>(key).to_int_64());
 	}
 
-	inline bool has(int64_t index) const
+	inline bool has_index(int64_t index) const
 	{
 		return index >= 0 && index < size();
 	}
@@ -829,12 +829,12 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<number_a<>>(key))
 		{
-			return at(cast<number_a<>>(key).to_int_64());
+			return at_index(cast<number_a<>>(key).to_int_64());
 		}
-		return at(-1);
+		return at_index(-1);
 	}
 
-	inline any_a<> at(int64_t index) const
+	inline any_a<> at_index(int64_t index) const
 	{
 		return number_t<PRIMITIVE>::val(pat(index));
 	}
@@ -853,20 +853,20 @@ public: ___STRANGE_COLLECTION___
 	{
 		if (check<number_a<>>(key))
 		{
-			update(cast<number_a<>>(key).to_int_64(), value);
+			update_index(cast<number_a<>>(key).to_int_64(), value);
 		}
 	}
 
-	inline void update(int64_t index, any_a<> const& value)
+	inline void update_index(int64_t index, any_a<> const& value)
 	{
 		if (!check<number_a<>>(value))
 		{
 			throw dis("strange::lake::update passed non-number value");
 		}
-		return update(index, number_u<PRIMITIVE>::from_number(cast<number_a<>>(value)));
+		return pupdate(index, number_u<PRIMITIVE>::from_number(cast<number_a<>>(value)));
 	}
 
-	inline void update(int64_t index, PRIMITIVE number)
+	inline void pupdate(int64_t index, PRIMITIVE number)
 	{
 		if (index >= 0)
 		{
@@ -889,19 +889,19 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool insert(any_a<> const& key, any_a<> const& value)
 	{
-		return check<number_a<>>(key) && insert(cast<number_a<>>(key).to_int_64(), value);
+		return check<number_a<>>(key) && insert_index(cast<number_a<>>(key).to_int_64(), value);
 	}
 
-	inline bool insert(int64_t index, any_a<> const& value)
+	inline bool insert_index(int64_t index, any_a<> const& value)
 	{
 		if (!check<number_a<>>(value))
 		{
 			throw dis("strange::lake::insert passed non-number value");
 		}
-		return insert(index, number_u<PRIMITIVE>::from_number(cast<number_a<>>(value)));
+		return pinsert(index, number_u<PRIMITIVE>::from_number(cast<number_a<>>(value)));
 	}
 
-	inline bool insert(int64_t index, PRIMITIVE number)
+	inline bool pinsert(int64_t index, PRIMITIVE number)
 	{
 		if (index >= 0)
 		{
@@ -930,10 +930,10 @@ public: ___STRANGE_COLLECTION___
 
 	inline bool erase(any_a<> const& key)
 	{
-		return check<number_a<>>(key) && erase(cast<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && erase_index(cast<number_a<>>(key).to_int_64());
 	}
 
-	inline bool erase(int64_t index)
+	inline bool erase_index(int64_t index)
 	{
 		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		if (index >= 0 && index < int64_t(_vector.size()))

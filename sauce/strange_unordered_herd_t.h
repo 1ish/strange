@@ -172,7 +172,7 @@ public: ___STRANGE_COLLECTION___
 			typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 			for (auto const& visited : _set)
 			{
-				flock.update(last, visited);
+				flock.update_index(last, visited);
 				visited.visit_(flock);
 			}
 		}
