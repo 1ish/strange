@@ -221,7 +221,7 @@ public: ___STRANGE_COLLECTION___
 		return it != _set.cend();
 	}
 
-	inline bool has(std::string const& s) const
+	inline bool has_string(std::string const& s) const
 	{
 		return has(sym(s));
 	}
@@ -237,7 +237,7 @@ public: ___STRANGE_COLLECTION___
 		return *it;
 	}
 
-	inline bool at(std::string const& s) const
+	inline bool at_string(std::string const& s) const
 	{
 		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 		std_unordered_set_any::const_iterator const it = _set.find(sym(s));
@@ -262,7 +262,7 @@ public: ___STRANGE_COLLECTION___
 		return _set.insert(key).second;
 	}
 
-	inline bool insert(std::string const& s)
+	inline bool insert_string(std::string const& s)
 	{
 		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		return _set.insert(sym(s)).second;
@@ -274,7 +274,7 @@ public: ___STRANGE_COLLECTION___
 		return _set.erase(key);
 	}
 
-	inline bool erase(std::string const& s)
+	inline bool erase_string(std::string const& s)
 	{
 		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		return _set.erase(sym(s));
