@@ -70,9 +70,8 @@ public: ___STRANGE_EXPRESSION___
 			throw dis(_token.report() + "strange::expression_shared_update::operate passed non-unordered-shoal shared");
 		}
 #endif
-		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second).reference();
-		auto sit = shared.find(_key);
-		if (sit == shared.end())
+		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
+		if (!shared.has(_key))
 		{
 			throw dis(_token.report() + "strange::expression_shared_update::operate key not found");
 		}
@@ -81,7 +80,8 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis(_token.report() + "strange::expression_shared_update::operate cat does not include value");
 		}
-		return sit->second = val;
+		shared.update(_key, val);
+		return val;
 	}
 
 	// expression

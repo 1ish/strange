@@ -30,10 +30,10 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<operation_a<>>::operations();
-			operations.update("evaluate", native_extraction_t<expression_a<>>::val(&expression_a<>::evaluate__));
-			operations.update("token", native_extraction_t<expression_a<>>::val(&expression_a<>::token__));
-			operations.update("generate", native_extraction_t<expression_a<>>::val(&expression_a<>::generate__));
-			operations.update("generate_cpp", native_extraction_t<expression_a<>>::val(&expression_a<>::generate_cpp__));
+			operations.update_string("evaluate", native_extraction_t<expression_a<>>::val(&expression_a<>::evaluate__));
+			operations.update_string("token", native_extraction_t<expression_a<>>::val(&expression_a<>::token__));
+			operations.update_string("generate", native_extraction_t<expression_a<>>::val(&expression_a<>::generate__));
+			operations.update_string("generate_cpp", native_extraction_t<expression_a<>>::val(&expression_a<>::generate_cpp__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -52,7 +52,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::expression::val", native_function_t<>::val(&expression_t<>::val__));
+		shoal.update_string("strange::expression::val", native_function_t<>::val(&expression_t<>::val__));
 	}
 };
 

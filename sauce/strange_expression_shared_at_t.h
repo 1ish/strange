@@ -51,13 +51,12 @@ public: ___STRANGE_EXPRESSION___
 			throw dis(_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal shared");
 		}
 #endif
-		auto const& shared = static_cast<unordered_shoal_a<> const&>(lit->second).extract();
-		auto sit = shared.find(_key);
-		if (sit == shared.cend())
+		auto const& shared = static_cast<unordered_shoal_a<> const&>(lit->second);
+		if (!shared.has(_key))
 		{
 			throw dis(_token.report() + "strange::expression_shared_at::operate key not found");
 		}
-		return sit->second;
+		return shared.at_(_key);
 	}
 
 	// expression

@@ -124,7 +124,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::data_dummy_read_lock_ptr::val", native_function_t<>::val(&data_t<std::shared_ptr<strange::concurrent_u<false>::read_lock>>::val__));
+		shoal.update_string("strange::data_dummy_read_lock_ptr::val", native_function_t<>::val(&data_t<std::shared_ptr<strange::concurrent_u<false>::read_lock>>::val__));
 	}
 };
 
@@ -140,7 +140,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::data_concurrent_read_lock_ptr::val", native_function_t<>::val(&data_t<std::shared_ptr<strange::concurrent_u<true>::read_lock>>::val__));
+		shoal.update_string("strange::data_concurrent_read_lock_ptr::val", native_function_t<>::val(&data_t<std::shared_ptr<strange::concurrent_u<true>::read_lock>>::val__));
 	}
 };
 
@@ -156,7 +156,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::data_dummy_write_lock_ptr::val", native_function_t<>::val(&data_t<std::shared_ptr<strange::concurrent_u<false>::write_lock>>::val__));
+		shoal.update_string("strange::data_dummy_write_lock_ptr::val", native_function_t<>::val(&data_t<std::shared_ptr<strange::concurrent_u<false>::write_lock>>::val__));
 	}
 };
 
@@ -172,7 +172,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::data_concurrent_write_lock_ptr::val", native_function_t<>::val(&data_t<std::shared_ptr<strange::concurrent_u<true>::write_lock>>::val__));
+		shoal.update_string("strange::data_concurrent_write_lock_ptr::val", native_function_t<>::val(&data_t<std::shared_ptr<strange::concurrent_u<true>::write_lock>>::val__));
 	}
 };
 

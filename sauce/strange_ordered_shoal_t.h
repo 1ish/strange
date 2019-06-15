@@ -443,7 +443,7 @@ public: ___STRANGE_COLLECTION___
 		return it != _map.cend();
 	}
 
-	inline bool has(std::string const& s) const
+	inline bool has_string(std::string const& s) const
 	{
 		return has(sym(s));
 	}
@@ -459,7 +459,7 @@ public: ___STRANGE_COLLECTION___
 		return it->second;
 	}
 
-	inline any_a<> at(std::string const& s) const
+	inline any_a<> at_string(std::string const& s) const
 	{
 		return at_(sym(s));
 	}
@@ -470,7 +470,7 @@ public: ___STRANGE_COLLECTION___
 		_map[key] = value;
 	}
 
-	inline void update(std::string const& s, any_a<> const& value)
+	inline void update_string(std::string const& s, any_a<> const& value)
 	{
 		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		_map[sym(s)] = value;
@@ -482,7 +482,7 @@ public: ___STRANGE_COLLECTION___
 		return _map.emplace(key, value).second;
 	}
 
-	inline bool insert(std::string const& s, any_a<> const& value)
+	inline bool insert_string(std::string const& s, any_a<> const& value)
 	{
 		return insert(sym(s), value);
 	}
@@ -493,7 +493,7 @@ public: ___STRANGE_COLLECTION___
 		return _map.erase(key);
 	}
 
-	inline bool erase(std::string const& s)
+	inline bool erase_string(std::string const& s)
 	{
 		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
 		return _map.erase(sym(s));

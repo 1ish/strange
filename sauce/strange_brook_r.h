@@ -286,7 +286,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_int_8::val", native_function_t<>::val(&brook_int_8_t<>::val__));
+		shoal.update_string("strange::brook_int_8::val", native_function_t<>::val(&brook_int_8_t<>::val__));
 	}
 };
 
@@ -302,7 +302,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_uint_8::val", native_function_t<>::val(&brook_uint_8_t<>::val__));
+		shoal.update_string("strange::brook_uint_8::val", native_function_t<>::val(&brook_uint_8_t<>::val__));
 	}
 };
 
@@ -318,7 +318,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_int_16::val", native_function_t<>::val(&brook_int_16_t<>::val__));
+		shoal.update_string("strange::brook_int_16::val", native_function_t<>::val(&brook_int_16_t<>::val__));
 	}
 };
 
@@ -334,7 +334,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_uint_16::val", native_function_t<>::val(&brook_uint_16_t<>::val__));
+		shoal.update_string("strange::brook_uint_16::val", native_function_t<>::val(&brook_uint_16_t<>::val__));
 	}
 };
 
@@ -350,7 +350,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_int_32::val", native_function_t<>::val(&brook_int_32_t<>::val__));
+		shoal.update_string("strange::brook_int_32::val", native_function_t<>::val(&brook_int_32_t<>::val__));
 	}
 };
 
@@ -366,7 +366,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_uint_32::val", native_function_t<>::val(&brook_uint_32_t<>::val__));
+		shoal.update_string("strange::brook_uint_32::val", native_function_t<>::val(&brook_uint_32_t<>::val__));
 	}
 };
 
@@ -382,7 +382,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_int_64::val", native_function_t<>::val(&brook_int_64_t<>::val__));
+		shoal.update_string("strange::brook_int_64::val", native_function_t<>::val(&brook_int_64_t<>::val__));
 	}
 };
 
@@ -398,7 +398,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_uint_64::val", native_function_t<>::val(&brook_uint_64_t<>::val__));
+		shoal.update_string("strange::brook_uint_64::val", native_function_t<>::val(&brook_uint_64_t<>::val__));
 	}
 };
 
@@ -414,7 +414,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_float_32::val", native_function_t<>::val(&brook_float_32_t<>::val__));
+		shoal.update_string("strange::brook_float_32::val", native_function_t<>::val(&brook_float_32_t<>::val__));
 	}
 };
 
@@ -430,7 +430,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_float_64::val", native_function_t<>::val(&brook_float_64_t<>::val__));
+		shoal.update_string("strange::brook_float_64::val", native_function_t<>::val(&brook_float_64_t<>::val__));
 	}
 };
 
@@ -446,7 +446,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_int_8_concurrent::val", native_function_t<>::val(&brook_int_8_t<true>::val__));
+		shoal.update_string("strange::brook_int_8_concurrent::val", native_function_t<>::val(&brook_int_8_t<true>::val__));
 	}
 };
 
@@ -462,7 +462,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_uint_8_concurrent::val", native_function_t<>::val(&brook_uint_8_t<true>::val__));
+		shoal.update_string("strange::brook_uint_8_concurrent::val", native_function_t<>::val(&brook_uint_8_t<true>::val__));
 	}
 };
 
@@ -478,7 +478,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_int_16_concurrent::val", native_function_t<>::val(&brook_int_16_t<true>::val__));
+		shoal.update_string("strange::brook_int_16_concurrent::val", native_function_t<>::val(&brook_int_16_t<true>::val__));
 	}
 };
 
@@ -494,7 +494,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_uint_16_concurrent::val", native_function_t<>::val(&brook_uint_16_t<true>::val__));
+		shoal.update_string("strange::brook_uint_16_concurrent::val", native_function_t<>::val(&brook_uint_16_t<true>::val__));
 	}
 };
 
@@ -510,7 +510,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_int_32_concurrent::val", native_function_t<>::val(&brook_int_32_t<true>::val__));
+		shoal.update_string("strange::brook_int_32_concurrent::val", native_function_t<>::val(&brook_int_32_t<true>::val__));
 	}
 };
 
@@ -526,7 +526,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_uint_32_concurrent::val", native_function_t<>::val(&brook_uint_32_t<true>::val__));
+		shoal.update_string("strange::brook_uint_32_concurrent::val", native_function_t<>::val(&brook_uint_32_t<true>::val__));
 	}
 };
 
@@ -542,7 +542,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_int_64_concurrent::val", native_function_t<>::val(&brook_int_64_t<true>::val__));
+		shoal.update_string("strange::brook_int_64_concurrent::val", native_function_t<>::val(&brook_int_64_t<true>::val__));
 	}
 };
 
@@ -558,7 +558,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_uint_64_concurrent::val", native_function_t<>::val(&brook_uint_64_t<true>::val__));
+		shoal.update_string("strange::brook_uint_64_concurrent::val", native_function_t<>::val(&brook_uint_64_t<true>::val__));
 	}
 };
 
@@ -574,7 +574,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_float_32_concurrent::val", native_function_t<>::val(&brook_float_32_t<true>::val__));
+		shoal.update_string("strange::brook_float_32_concurrent::val", native_function_t<>::val(&brook_float_32_t<true>::val__));
 	}
 };
 
@@ -590,7 +590,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::brook_float_64_concurrent::val", native_function_t<>::val(&brook_float_64_t<true>::val__));
+		shoal.update_string("strange::brook_float_64_concurrent::val", native_function_t<>::val(&brook_float_64_t<true>::val__));
 	}
 };
 

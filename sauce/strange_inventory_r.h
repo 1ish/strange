@@ -30,8 +30,8 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<collection_a<>>::operations();
-			operations.update("begin", native_mutation_t<inventory_a<>>::val(&inventory_a<>::begin__));
-			operations.update("end", native_mutation_t<inventory_a<>>::val(&inventory_a<>::end__));
+			operations.update_string("begin", native_mutation_t<inventory_a<>>::val(&inventory_a<>::begin__));
+			operations.update_string("end", native_mutation_t<inventory_a<>>::val(&inventory_a<>::end__));
 			return operations;
 		}();
 		return OPERATIONS;

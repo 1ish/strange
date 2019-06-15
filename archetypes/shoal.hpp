@@ -17,11 +17,11 @@ class shoal_a
 {
 public:
 	// shoal
-	inline bool has(std::string const& s) const;
-	inline any_a<> at(std::string const& s) const;
-	inline void update(std::string const& s, any_a<> const& value);
-	inline bool insert(std::string const& s, any_a<> const& value);
-	inline bool erase(std::string const& s);
+	inline bool has_string(std::string const& s) const;
+	inline any_a<> at_string(std::string const& s) const;
+	inline void update_string(std::string const& s, any_a<> const& value);
+	inline bool insert_string(std::string const& s, any_a<> const& value);
+	inline bool erase_string(std::string const& s);
 
 	// mutable range
 	inline any_a<> begin__(range_a<> const& _);

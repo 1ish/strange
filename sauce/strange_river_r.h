@@ -30,34 +30,34 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<range_a<>>::operations();
-			operations.update("get", native_mutation_t<river_a<>>::val(&river_a<>::get__));
-			operations.update("peek", native_mutation_t<river_a<>>::val(&river_a<>::peek__));
-			operations.update("unget", native_mutation_t<river_a<>>::val(&river_a<>::unget__));
-			operations.update("putback", native_mutation_t<river_a<>>::val(&river_a<>::putback__));
-			operations.update("getline", native_mutation_t<river_a<>>::val(&river_a<>::getline__));
-			operations.update("ignore", native_mutation_t<river_a<>>::val(&river_a<>::ignore__));
-			operations.update("read", native_mutation_t<river_a<>>::val(&river_a<>::read__));
-			operations.update("tellg", native_extraction_t<river_a<>>::val(&river_a<>::tellg__));
-			operations.update("seekg_beg", native_mutation_t<river_a<>>::val(&river_a<>::seekg_beg__));
-			operations.update("seekg_end", native_mutation_t<river_a<>>::val(&river_a<>::seekg_end__));
-			operations.update("seekg_cur", native_mutation_t<river_a<>>::val(&river_a<>::seekg_cur__));
-			operations.update("sync", native_mutation_t<river_a<>>::val(&river_a<>::sync__));
-			operations.update("put", native_mutation_t<river_a<>>::val(&river_a<>::put__));
-			operations.update("write", native_mutation_t<river_a<>>::val(&river_a<>::write__));
-			operations.update("tellp", native_extraction_t<river_a<>>::val(&river_a<>::tellp__));
-			operations.update("seekp_beg", native_mutation_t<river_a<>>::val(&river_a<>::seekp_beg__));
-			operations.update("seekp_end", native_mutation_t<river_a<>>::val(&river_a<>::seekp_end__));
-			operations.update("seekp_cur", native_mutation_t<river_a<>>::val(&river_a<>::seekp_cur__));
-			operations.update("flush", native_mutation_t<river_a<>>::val(&river_a<>::flush__));
-			operations.update("good", native_extraction_t<river_a<>>::val(&river_a<>::good__));
-			operations.update("eof", native_extraction_t<river_a<>>::val(&river_a<>::eof__));
-			operations.update("fail", native_extraction_t<river_a<>>::val(&river_a<>::fail__));
-			operations.update("bad", native_extraction_t<river_a<>>::val(&river_a<>::bad__));
-			operations.update("set_good", native_mutation_t<river_a<>>::val(&river_a<>::set_good__));
-			operations.update("set_eof", native_mutation_t<river_a<>>::val(&river_a<>::set_eof__));
-			operations.update("set_fail", native_mutation_t<river_a<>>::val(&river_a<>::set_fail__));
-			operations.update("set_bad", native_mutation_t<river_a<>>::val(&river_a<>::set_bad__));
-			operations.update("filename", native_extraction_t<river_a<>>::val(&river_a<>::filename__));
+			operations.update_string("get", native_mutation_t<river_a<>>::val(&river_a<>::get__));
+			operations.update_string("peek", native_mutation_t<river_a<>>::val(&river_a<>::peek__));
+			operations.update_string("unget", native_mutation_t<river_a<>>::val(&river_a<>::unget__));
+			operations.update_string("putback", native_mutation_t<river_a<>>::val(&river_a<>::putback__));
+			operations.update_string("getline", native_mutation_t<river_a<>>::val(&river_a<>::getline__));
+			operations.update_string("ignore", native_mutation_t<river_a<>>::val(&river_a<>::ignore__));
+			operations.update_string("read", native_mutation_t<river_a<>>::val(&river_a<>::read__));
+			operations.update_string("tellg", native_extraction_t<river_a<>>::val(&river_a<>::tellg__));
+			operations.update_string("seekg_beg", native_mutation_t<river_a<>>::val(&river_a<>::seekg_beg__));
+			operations.update_string("seekg_end", native_mutation_t<river_a<>>::val(&river_a<>::seekg_end__));
+			operations.update_string("seekg_cur", native_mutation_t<river_a<>>::val(&river_a<>::seekg_cur__));
+			operations.update_string("sync", native_mutation_t<river_a<>>::val(&river_a<>::sync__));
+			operations.update_string("put", native_mutation_t<river_a<>>::val(&river_a<>::put__));
+			operations.update_string("write", native_mutation_t<river_a<>>::val(&river_a<>::write__));
+			operations.update_string("tellp", native_extraction_t<river_a<>>::val(&river_a<>::tellp__));
+			operations.update_string("seekp_beg", native_mutation_t<river_a<>>::val(&river_a<>::seekp_beg__));
+			operations.update_string("seekp_end", native_mutation_t<river_a<>>::val(&river_a<>::seekp_end__));
+			operations.update_string("seekp_cur", native_mutation_t<river_a<>>::val(&river_a<>::seekp_cur__));
+			operations.update_string("flush", native_mutation_t<river_a<>>::val(&river_a<>::flush__));
+			operations.update_string("good", native_extraction_t<river_a<>>::val(&river_a<>::good__));
+			operations.update_string("eof", native_extraction_t<river_a<>>::val(&river_a<>::eof__));
+			operations.update_string("fail", native_extraction_t<river_a<>>::val(&river_a<>::fail__));
+			operations.update_string("bad", native_extraction_t<river_a<>>::val(&river_a<>::bad__));
+			operations.update_string("set_good", native_mutation_t<river_a<>>::val(&river_a<>::set_good__));
+			operations.update_string("set_eof", native_mutation_t<river_a<>>::val(&river_a<>::set_eof__));
+			operations.update_string("set_fail", native_mutation_t<river_a<>>::val(&river_a<>::set_fail__));
+			operations.update_string("set_bad", native_mutation_t<river_a<>>::val(&river_a<>::set_bad__));
+			operations.update_string("filename", native_extraction_t<river_a<>>::val(&river_a<>::filename__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -76,11 +76,11 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::river::val", native_function_t<>::val(&river_t<>::val__));
-		shoal.update("strange::river::file_val", native_function_t<>::val(&river_t<>::file_val__));
-		shoal.update("strange::river::in_val", native_function_t<>::val(&river_t<>::in_val__));
-		shoal.update("strange::river::out_val", native_function_t<>::val(&river_t<>::out_val__));
-		shoal.update("strange::river::err_val", native_function_t<>::val(&river_t<>::err_val__));
+		shoal.update_string("strange::river::val", native_function_t<>::val(&river_t<>::val__));
+		shoal.update_string("strange::river::file_val", native_function_t<>::val(&river_t<>::file_val__));
+		shoal.update_string("strange::river::in_val", native_function_t<>::val(&river_t<>::in_val__));
+		shoal.update_string("strange::river::out_val", native_function_t<>::val(&river_t<>::out_val__));
+		shoal.update_string("strange::river::err_val", native_function_t<>::val(&river_t<>::err_val__));
 	}
 };
 

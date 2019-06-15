@@ -30,7 +30,7 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update("add", native_extraction_t<symbol_a<>>::val(&symbol_a<>::add__));
+			operations.update_string("add", native_extraction_t<symbol_a<>>::val(&symbol_a<>::add__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -49,7 +49,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::symbol::val", native_function_t<>::val(&symbol_t<>::val__));
+		shoal.update_string("strange::symbol::val", native_function_t<>::val(&symbol_t<>::val__));
 	}
 };
 

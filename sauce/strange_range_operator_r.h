@@ -16,7 +16,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::range_operator::val", native_function_t<>::val(&range_operator_t<>::val__));
+		shoal.update_string("strange::range_operator::val", native_function_t<>::val(&range_operator_t<>::val__));
 	}
 };
 

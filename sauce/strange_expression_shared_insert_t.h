@@ -70,13 +70,13 @@ public: ___STRANGE_EXPRESSION___
 			throw dis(_token.report() + "strange::expression_shared_insert::operate passed non-unordered-shoal shared");
 		}
 #endif
-		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second).reference();
+		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
 		auto val = _val.operate_(thing, range);
 		if (!val.cats_().has_(_cat))
 		{
 			throw dis(_token.report() + "strange::expression_shared_insert::operate cat does not include value");
 		}
-		if (!shared.emplace(_key, val).second)
+		if (!shared.insert(_key, val))
 		{
 			throw dis(_token.report() + "strange::expression_shared_insert::operate key exists");
 		}

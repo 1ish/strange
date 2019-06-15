@@ -26,7 +26,9 @@ inline any_a<> evaluate__(range_a<> const&) const \
 } \
 inline any_a<> evaluate_() const \
 { \
-	return operate_(unordered_shoal_t<>::val_(), range_t<>::val_()); \
+	auto local = unordered_shoal_t<>::val_(); \
+	local.insert_string("$", unordered_shoal_t<>::val_()); \
+	return operate_(local, range_t<>::val_()); \
 } \
 inline any_a<> token__(range_a<> const&) const \
 { \

@@ -30,8 +30,8 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update("get", native_extraction_t<forward_const_iterator_a<>>::val(&forward_const_iterator_a<>::get__));
-			operations.update("increment", native_mutation_t<forward_const_iterator_a<>>::val(&forward_const_iterator_a<>::increment__));
+			operations.update_string("get", native_extraction_t<forward_const_iterator_a<>>::val(&forward_const_iterator_a<>::get__));
+			operations.update_string("increment", native_mutation_t<forward_const_iterator_a<>>::val(&forward_const_iterator_a<>::increment__));
 			return operations;
 		}();
 		return OPERATIONS;

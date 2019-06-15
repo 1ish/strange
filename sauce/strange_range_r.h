@@ -30,8 +30,8 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update("cbegin", native_extraction_t<range_a<>>::val(&range_a<>::cbegin__));
-			operations.update("cend", native_extraction_t<range_a<>>::val(&range_a<>::cend__));
+			operations.update_string("cbegin", native_extraction_t<range_a<>>::val(&range_a<>::cbegin__));
+			operations.update_string("cend", native_extraction_t<range_a<>>::val(&range_a<>::cend__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -50,7 +50,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::range::val", native_function_t<>::val(&range_t<>::val__));
+		shoal.update_string("strange::range::val", native_function_t<>::val(&range_t<>::val__));
 	}
 };
 

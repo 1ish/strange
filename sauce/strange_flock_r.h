@@ -43,7 +43,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::flock::val", native_function_t<>::val(&flock_t<>::val__));
+		shoal.update_string("strange::flock::val", native_function_t<>::val(&flock_t<>::val__));
 	}
 };
 
@@ -59,7 +59,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::flock_concurrent::val", native_function_t<>::val(&flock_t<true>::val__));
+		shoal.update_string("strange::flock_concurrent::val", native_function_t<>::val(&flock_t<true>::val__));
 	}
 };
 

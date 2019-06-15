@@ -30,11 +30,11 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<symbol_a<>>::operations();
-			operations.update("name", native_extraction_t<cat_a<>>::val(&cat_a<>::name__));
-			operations.update("arguments", native_extraction_t<cat_a<>>::val(&cat_a<>::arguments__));
-			operations.update("parameters", native_extraction_t<cat_a<>>::val(&cat_a<>::parameters__));
-			operations.update("result", native_extraction_t<cat_a<>>::val(&cat_a<>::result__));
-			operations.update("includes", native_extraction_t<cat_a<>>::val(&cat_a<>::includes__));
+			operations.update_string("name", native_extraction_t<cat_a<>>::val(&cat_a<>::name__));
+			operations.update_string("arguments", native_extraction_t<cat_a<>>::val(&cat_a<>::arguments__));
+			operations.update_string("parameters", native_extraction_t<cat_a<>>::val(&cat_a<>::parameters__));
+			operations.update_string("result", native_extraction_t<cat_a<>>::val(&cat_a<>::result__));
+			operations.update_string("includes", native_extraction_t<cat_a<>>::val(&cat_a<>::includes__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -53,8 +53,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::cat::val", native_function_t<>::val(&cat_t<>::val__));
-		shoal.update("strange::cat::conforms", native_function_t<>::val(&cat_t<>::conforms__));
+		shoal.update_string("strange::cat::val", native_function_t<>::val(&cat_t<>::val__));
+		shoal.update_string("strange::cat::conforms", native_function_t<>::val(&cat_t<>::conforms__));
 	}
 };
 

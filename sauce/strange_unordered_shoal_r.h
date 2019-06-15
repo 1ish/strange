@@ -43,7 +43,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::unordered_shoal::val", native_function_t<>::val(&unordered_shoal_t<>::val__));
+		shoal.update_string("strange::unordered_shoal::val", native_function_t<>::val(&unordered_shoal_t<>::val__));
 	}
 };
 
@@ -59,7 +59,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::unordered_shoal_concurrent::val", native_function_t<>::val(&unordered_shoal_t<true>::val__));
+		shoal.update_string("strange::unordered_shoal_concurrent::val", native_function_t<>::val(&unordered_shoal_t<true>::val__));
 	}
 };
 

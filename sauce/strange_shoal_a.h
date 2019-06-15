@@ -82,16 +82,16 @@ namespace strange {
     		return *this;
     	}
     
-     inline bool has ( std :: string const & s ) const
-     { assert(handle_); return read().has(s ); }
-     inline any_a < > at ( std :: string const & s ) const
-     { assert(handle_); return read().at(s ); }
-     inline void update ( std :: string const & s , any_a < > const & value )
-     { assert(handle_); write().update(s, value ); }
-     inline bool insert ( std :: string const & s , any_a < > const & value )
-     { assert(handle_); return write().insert(s, value ); }
-     inline bool erase ( std :: string const & s )
-     { assert(handle_); return write().erase(s ); }
+     inline bool has_string ( std :: string const & s ) const
+     { assert(handle_); return read().has_string(s ); }
+     inline any_a < > at_string ( std :: string const & s ) const
+     { assert(handle_); return read().at_string(s ); }
+     inline void update_string ( std :: string const & s , any_a < > const & value )
+     { assert(handle_); write().update_string(s, value ); }
+     inline bool insert_string ( std :: string const & s , any_a < > const & value )
+     { assert(handle_); return write().insert_string(s, value ); }
+     inline bool erase_string ( std :: string const & s )
+     { assert(handle_); return write().erase_string(s ); }
      inline any_a < > begin__ ( range_a < > const & _ )
      { assert(handle_); return write().begin__(_ ); }
      inline forward_iterator_a < > begin_ ( )
@@ -104,11 +104,11 @@ namespace strange {
     protected:
     	struct ___ddderived_handle_base___ : ___dderived_handle_base___
     	{
-      virtual inline bool has ( std :: string const & s ) const = 0;
-      virtual inline any_a < > at ( std :: string const & s ) const = 0;
-      virtual inline void update ( std :: string const & s , any_a < > const & value ) = 0;
-      virtual inline bool insert ( std :: string const & s , any_a < > const & value ) = 0;
-      virtual inline bool erase ( std :: string const & s ) = 0;
+      virtual inline bool has_string ( std :: string const & s ) const = 0;
+      virtual inline any_a < > at_string ( std :: string const & s ) const = 0;
+      virtual inline void update_string ( std :: string const & s , any_a < > const & value ) = 0;
+      virtual inline bool insert_string ( std :: string const & s , any_a < > const & value ) = 0;
+      virtual inline bool erase_string ( std :: string const & s ) = 0;
       virtual inline any_a < > begin__ ( range_a < > const & _ ) = 0;
       virtual inline forward_iterator_a < > begin_ ( ) = 0;
       virtual inline any_a < > end__ ( range_a < > const & _ ) = 0;
@@ -128,16 +128,16 @@ namespace strange {
     			: ___dderived_handle___<___TTT___, ___DDDHB___>{ std::move(value) }
     		{}
     
-      virtual inline bool has ( std :: string const & s ) const
-      { return value_.has(s ); }
-      virtual inline any_a < > at ( std :: string const & s ) const
-      { return value_.at(s ); }
-      virtual inline void update ( std :: string const & s , any_a < > const & value )
-      { value_.update(s, value ); }
-      virtual inline bool insert ( std :: string const & s , any_a < > const & value )
-      { return value_.insert(s, value ); }
-      virtual inline bool erase ( std :: string const & s )
-      { return value_.erase(s ); }
+      virtual inline bool has_string ( std :: string const & s ) const
+      { return value_.has_string(s ); }
+      virtual inline any_a < > at_string ( std :: string const & s ) const
+      { return value_.at_string(s ); }
+      virtual inline void update_string ( std :: string const & s , any_a < > const & value )
+      { value_.update_string(s, value ); }
+      virtual inline bool insert_string ( std :: string const & s , any_a < > const & value )
+      { return value_.insert_string(s, value ); }
+      virtual inline bool erase_string ( std :: string const & s )
+      { return value_.erase_string(s ); }
       virtual inline any_a < > begin__ ( range_a < > const & _ )
       { return value_.begin__(_ ); }
       virtual inline forward_iterator_a < > begin_ ( )

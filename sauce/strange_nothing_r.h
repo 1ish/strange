@@ -16,7 +16,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update("strange::nothing::val", native_function_t<>::val(&nothing_t<>::val__));
+		shoal.update_string("strange::nothing::val", native_function_t<>::val(&nothing_t<>::val__));
 	}
 };
 

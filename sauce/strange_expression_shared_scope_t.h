@@ -42,13 +42,11 @@ public: ___STRANGE_EXPRESSION___
 	// function
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
-		auto const& shared = _shared.extract();
-		auto sit = shared.find(_key);
-		if (sit == shared.cend())
+		if (!_shared.has(_key))
 		{
 			throw dis(_token.report() + "strange::expression_shared_scope::operate key not found");
 		}
-		return sit->second;
+		return _shared.at_(_key);
 	}
 
 	// expression
