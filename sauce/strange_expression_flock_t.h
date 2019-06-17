@@ -44,7 +44,7 @@ public: ___STRANGE_EXPRESSION___
 			}
 			else
 			{
-				river.write_string(", ");
+				river.write_string(",");
 			}
 			if (!check<expression_a<>>(term))
 			{
@@ -67,7 +67,7 @@ public: ___STRANGE_EXPRESSION___
 			}
 			else
 			{
-				river.write_string(", ");
+				river.write_string(",");
 			}
 			if (!check<expression_a<>>(term))
 			{

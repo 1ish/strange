@@ -34,48 +34,48 @@ public: ___STRANGE_EXPRESSION___
 	// expression
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" $$strange::thing::invoke[");
-		bool first = true;
+		int64_t count = 0;
 		for (auto const& term : _terms)
 		{
-			if (first)
+			if (count == 1)
 			{
-				first = false;
+				river.write_string(".call[");
 			}
-			else
+			else if (count > 1)
 			{
-				river.write_string(", ");
+				river.write_string(",");
 			}
 			if (!check<expression_a<>>(term))
 			{
 				throw dis(_token.report() + "strange::expression_invoke::generate with non-expression term");
 			}
 			cast<expression_a<>>(term).generate(indent, river);
+			++count;
 		}
 		river.write_string("] ");
 	}
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" thing_t<>::invoke__(");
-		bool first = true;
+		int64_t count = 0;
 		for (auto const& term : _terms)
 		{
-			if (first)
+			if (count == 1)
 			{
-				first = false;
+				river.write_string("[flock_t<>::val_(");
 			}
-			else
+			else if (count > 1)
 			{
-				river.write_string(", ");
+				river.write_string(",");
 			}
 			if (!check<expression_a<>>(term))
 			{
 				throw dis(_token.report() + "strange::expression_invoke::generate_cpp with non-expression term");
 			}
 			cast<expression_a<>>(term).generate_cpp(indent, river);
+			++count;
 		}
-		river.write_string(") ");
+		river.write_string(")] ");
 	}
 
 protected:
