@@ -126,7 +126,7 @@ protected:
 		any_operation = expression_operation.evaluate_();
 		if (!check<operation_a<>>(any_operation))
 		{
-			throw dis("strange::expression_operate::val passed non-operation");
+			throw dis(token.report() + "strange::expression_operate::val passed non-operation");
 		}
 		auto operation = cast<operation_a<>>(any_operation);
 		if (!operation.pure())

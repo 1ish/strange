@@ -126,12 +126,12 @@ protected:
 		auto member = expression_member.evaluate_();
 		if (!thing.operations_().has_(member))
 		{
-			throw dis("strange::expression_invoke::val passed non-existent member");
+			throw dis(token.report() + "strange::expression_invoke::val passed non-existent member");
 		}
 		auto any_operation = thing.operations_().at_(member);
 		if (!check<operation_a<>>(any_operation))
 		{
-			throw dis("strange::expression_invoke::val passed non-operation member");
+			throw dis(token.report() + "strange::expression_invoke::val passed non-operation member");
 		}
 		auto operation = cast<operation_a<>>(any_operation);
 		if (!operation.pure())

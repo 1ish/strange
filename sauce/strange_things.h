@@ -46,6 +46,7 @@
 #include "strange_expression_invoke_t.h"
 #include "strange_expression_invoke_range_t.h"
 #include "strange_expression_operate_t.h"
+#include "strange_expression_operate_range_t.h"
 #include "strange_expression_break_t.h"
 #include "strange_expression_continue_t.h"
 #include "strange_expression_return_t.h"
