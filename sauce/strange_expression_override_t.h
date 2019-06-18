@@ -9,7 +9,7 @@ class expression_override_t : public _OVERRIDDEN_
 {
 public: ___STRANGE_EXPRESSION___
 	// construction
-	static inline expression_a<> val(_OVERRIDDEN_ const& overridden)
+	static inline expression_a<> val(_OVERRIDDEN_&& overridden)
 	{
 		if (overridden.literal())
 		{
@@ -18,9 +18,9 @@ public: ___STRANGE_EXPRESSION___
 			{
 				return expression_literal_t<>::val(overridden.token_(), literal);
 			}
-			return expression_a<>{ expression_override_t(overridden, literal) };
+			return expression_a<>{ expression_override_t(std::move(overridden), literal) };
 		}
-		return expression_a<>{ overridden };
+		return expression_a<>{ std::move(overridden) };
 	}
 
 	// function
@@ -32,8 +32,8 @@ public: ___STRANGE_EXPRESSION___
 protected:
 	any_a<> const _literal;
 
-	inline expression_override_t(_OVERRIDDEN_ const& overridden, any_a<> const& literal)
-		: _OVERRIDDEN_{ overridden }
+	inline expression_override_t(_OVERRIDDEN_&& overridden, any_a<> const& literal)
+		: _OVERRIDDEN_{ std::move(overridden) }
 		, _literal{ literal }
 	{}
 };

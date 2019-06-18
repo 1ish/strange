@@ -9,7 +9,7 @@ class token_t : public thing_t<_ABSTRACTION_>
 {
 	using val_member = token_a<>(*)(symbol_a<> const&, number_data_a<int64_t> const&, number_data_a<int64_t> const&, symbol_a<> const&);
 
-public: ___STRANGE_THING___
+public:
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
@@ -73,7 +73,7 @@ public: ___STRANGE_THING___
 
 	static inline token_a<> val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& tag, symbol_a<> const& symbol, any_a<> const& literal)
 	{
-		return token_a<>{ token_t(filename, line, position, tag, symbol, literal) };
+		return token_a<>{ thing_o<token_t>{ token_t(filename, line, position, tag, symbol, literal) } };
 	}
 
 	static inline token_a<> val(std::string const& tag, range_a<> const& range, val_member member)

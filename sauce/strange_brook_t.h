@@ -10,12 +10,12 @@ class brook_t : public thing_t<_ABSTRACTION_>
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
 	class iterator_t : public thing_t<_ABSTRACTION_>
 	{
-	public: ___STRANGE_THING___
+	public:
 		// construction
 		template <typename F>
 		static inline random_access_iterator_data_a<ITERATOR> val(brook_a<PRIMITIVE> const& brook, F&& it)
 		{
-			return random_access_iterator_data_a<ITERATOR>{ iterator_t(brook, std::forward<F>(it)) };
+			return random_access_iterator_data_a<ITERATOR>{ thing_o<iterator_t>{ iterator_t(brook, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -378,12 +378,12 @@ class brook_t : public thing_t<_ABSTRACTION_>
 	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_const_iterator_data_a<ITERATOR>>
 	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
-	public: ___STRANGE_THING___
+	public:
 		// construction
 		template <typename F>
 		static inline random_access_const_iterator_data_a<ITERATOR> val(brook_a<PRIMITIVE> const& brook, F&& it)
 		{
-			return random_access_const_iterator_data_a<ITERATOR>{ const_iterator_t(brook, std::forward<F>(it)) };
+			return random_access_const_iterator_data_a<ITERATOR>{ thing_o<const_iterator_t>{ const_iterator_t(brook, std::forward<F>(it)) } };
 		}
 
 		// reflection

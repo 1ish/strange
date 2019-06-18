@@ -7,7 +7,7 @@ namespace strange
 template <typename _ABSTRACTION_ = misunderstanding_a<>>
 class disagreement_t : public nothing_t<_ABSTRACTION_>, public std::logic_error
 {
-public: ___STRANGE_THING___
+public:
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
@@ -27,7 +27,7 @@ public: ___STRANGE_THING___
 	template <typename F>
 	static inline misunderstanding_a<> val(F&& s)
 	{
-		return misunderstanding_a<>{ disagreement_t{ std::forward<F>(s) } };
+		return misunderstanding_a<>{ thing_o<disagreement_t>{ disagreement_t{ std::forward<F>(s) } } };
 	}
 
 	// reflection
@@ -68,7 +68,7 @@ public: ___STRANGE_THING___
 				s += cast<misunderstanding_a<>>(thing).to_string();
 			}
 		}
-		return misunderstanding_a<>{ disagreement_t{ std::move(s) } };
+		return misunderstanding_a<>{ thing_o<disagreement_t>{ disagreement_t{ std::move(s) } } };
 	}
 
 	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
@@ -78,7 +78,7 @@ public: ___STRANGE_THING___
 
 	inline misunderstanding_a<> operator+(misunderstanding_a<> const& misunderstanding) const
 	{
-		return misunderstanding_a<>{ disagreement_t{ to_string() + misunderstanding.to_string() } };
+		return misunderstanding_a<>{ thing_o<disagreement_t>{ disagreement_t{ to_string() + misunderstanding.to_string() } } };
 	}
 
 protected:

@@ -10,12 +10,12 @@ class range_operator_t : public thing_t<_ABSTRACTION_>
 	template <typename ITERATOR, typename _ABSTRACTION_ = forward_const_iterator_data_a<ITERATOR>>
 	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
-	public: ___STRANGE_THING___
+	public:
 		// construction
 		template <typename F>
 		static inline forward_const_iterator_data_a<ITERATOR> val(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
 		{
-			return forward_const_iterator_data_a<ITERATOR>{ const_iterator_t(range, std::forward<F>(it), thing_ref, range_ref) };
+			return forward_const_iterator_data_a<ITERATOR>{ thing_o<const_iterator_t>{ const_iterator_t(range, std::forward<F>(it), thing_ref, range_ref) } };
 		}
 
 		// reflection

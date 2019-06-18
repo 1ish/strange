@@ -10,12 +10,12 @@ class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 	template <typename ITERATOR, typename _ABSTRACTION_ = forward_iterator_data_a<ITERATOR>>
 	class iterator_t : public thing_t<_ABSTRACTION_>
 	{
-	public: ___STRANGE_THING___
+	public:
 		// construction
 		template <typename F>
 		static inline forward_iterator_data_a<ITERATOR> val(unordered_shoal_a<> const& unordered_shoal, F&& it)
 		{
-			return forward_iterator_data_a<ITERATOR>{ iterator_t(unordered_shoal, std::forward<F>(it)) };
+			return forward_iterator_data_a<ITERATOR>{ thing_o<iterator_t>{ iterator_t(unordered_shoal, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -142,12 +142,12 @@ class unordered_shoal_t : public thing_t<_ABSTRACTION_>
 	template <typename ITERATOR, typename _ABSTRACTION_ = forward_const_iterator_data_a<ITERATOR>>
 	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
-	public: ___STRANGE_THING___
+	public:
 		// construction
 		template <typename F>
 			static inline forward_const_iterator_data_a<ITERATOR> val(unordered_shoal_a<> const& unordered_shoal, F&& it)
 			{
-				return forward_const_iterator_data_a<ITERATOR>{ const_iterator_t(unordered_shoal, std::forward<F>(it)) };
+				return forward_const_iterator_data_a<ITERATOR>{ thing_o<const_iterator_t>{ const_iterator_t(unordered_shoal, std::forward<F>(it)) } };
 			}
 
 			// reflection

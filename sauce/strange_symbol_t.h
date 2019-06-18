@@ -7,7 +7,7 @@ namespace strange
 template <typename _ABSTRACTION_ = symbol_a<>>
 class symbol_t : public thing_t<_ABSTRACTION_>
 {
-public: ___STRANGE_THING___
+public:
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
@@ -27,7 +27,7 @@ public: ___STRANGE_THING___
 	template <typename F>
 	static inline symbol_a<> val(F&& s)
 	{
-		return symbol_a<>{ symbol_t{ std::forward<F>(s) } };
+		return symbol_a<>{ thing_o<symbol_t> { symbol_t{ std::forward<F>(s) } } };
 	}
 
 	// reflection
@@ -73,7 +73,7 @@ public: ___STRANGE_THING___
 				s += cast<symbol_a<>>(thing).to_string();
 			}
 		}
-		return symbol_a<>{ symbol_t{ std::move(s) } };
+		return symbol_a<>{ thing_o<symbol_t>{ symbol_t{ std::move(s) } } };
 	}
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
@@ -83,7 +83,7 @@ public: ___STRANGE_THING___
 
 	inline symbol_a<> operator+(symbol_a<> const& symbol) const
 	{
-		return symbol_a<>{ symbol_t{ _string + symbol.to_string() } };
+		return symbol_a<>{ thing_o<symbol_t>{ symbol_t{ _string + symbol.to_string() } } };
 	}
 
 protected:

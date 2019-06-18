@@ -7,7 +7,7 @@ namespace strange
 template <bool CONST = false, typename END = nothing_t<>, typename _ABSTRACTION_ = forward_const_iterator_a<>>
 class it_t : public thing_t<_ABSTRACTION_>
 {
-public: ___STRANGE_THING___
+public:
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
@@ -27,7 +27,7 @@ public: ___STRANGE_THING___
 
 	static inline forward_const_iterator_a<> val_(any_a<> const& thing)
 	{
-		return forward_const_iterator_a<>{ it_t<CONST, END, _ABSTRACTION_>{ thing } };
+		return forward_const_iterator_a<>{ thing_o<it_t<CONST, END, _ABSTRACTION_>>{ it_t<CONST, END, _ABSTRACTION_>{ thing } } };
 	}
 
 	// reflection

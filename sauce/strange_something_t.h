@@ -7,7 +7,7 @@ namespace strange
 template <typename _ABSTRACTION_ = any_a<>>
 class something_t : public thing_t<_ABSTRACTION_>
 {
-public: ___STRANGE_THING___
+public:
 	// construction
 	static inline any_a<> val__(range_a<> const& _)
 	{
@@ -16,7 +16,7 @@ public: ___STRANGE_THING___
 
 	static inline any_a<> val_()
 	{
-		static any_a<> VAL = any_a<>{ something_t<>{} };
+		static any_a<> VAL = any_a<>{ thing_o<something_t<>>{ something_t<>{} } };
 		return VAL;
 	}
 

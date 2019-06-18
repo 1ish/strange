@@ -9,7 +9,7 @@ class native_function_t : public operation_t<_ABSTRACTION_>
 {
 	using function = any_a<>(*)(range_a<> const&);
 
-public: ___STRANGE_THING___
+public:
 	// construction
 	template <typename... Args>
 	static inline operation_a<> val(function const fun, Args&&... args)
@@ -17,7 +17,7 @@ public: ___STRANGE_THING___
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
-		return operation_a<>{ native_function_t(fun, flock_t<>::val(std::move(v))) };
+		return operation_a<>{ thing_o<native_function_t>{ native_function_t(fun, flock_t<>::val(std::move(v))) } };
 	}
 
 	// reflection

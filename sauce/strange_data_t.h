@@ -7,7 +7,7 @@ namespace strange
 template <typename DATA, typename _ABSTRACTION_ = data_a<DATA>>
 class data_t : public thing_t<_ABSTRACTION_>
 {
-public: ___STRANGE_THING___
+public:
 	// construction
 	static inline any_a<> val__(range_a<> const& _)
 	{
@@ -21,7 +21,7 @@ public: ___STRANGE_THING___
 
 	static inline data_a<DATA> val(DATA primitive)
 	{
-		return data_a<DATA>{ data_t<DATA, _ABSTRACTION_>{ primitive } };
+		return data_a<DATA>{ thing_o<data_t<DATA, _ABSTRACTION_>>{ data_t<DATA, _ABSTRACTION_>{ primitive } } };
 	}
 
 	// reflection

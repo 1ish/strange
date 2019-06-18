@@ -22,6 +22,9 @@
 // things
 #include "strange_things.h"
 
+// overrides
+#include "strange_overrides.h"
+
 // operations
 #include "strange_reflections.h"
 

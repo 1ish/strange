@@ -10,12 +10,12 @@ class unordered_herd_t : public thing_t<_ABSTRACTION_>
 	template <typename ITERATOR, typename _ABSTRACTION_ = forward_const_iterator_data_a<ITERATOR>>
 	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
-	public: ___STRANGE_THING___
+	public:
 		// construction
 		template <typename F>
 		static inline forward_const_iterator_data_a<ITERATOR> val(unordered_herd_a<> const& unordered_herd, F&& it)
 		{
-			return forward_const_iterator_data_a<ITERATOR>{ const_iterator_t(unordered_herd, std::forward<F>(it)) };
+			return forward_const_iterator_data_a<ITERATOR>{ thing_o<const_iterator_t>{ const_iterator_t(unordered_herd, std::forward<F>(it)) } };
 		}
 
 		// reflection
