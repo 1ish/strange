@@ -94,7 +94,7 @@ inline any_a<> generate_cpp_(number_data_a<int64_t> const& indent, river_a<>& ri
 template <typename _ABSTRACTION_ = expression_a<>>
 class expression_t : public operation_t<_ABSTRACTION_>
 {
-public: ___STRANGE_EXPRESSION___
+public:
 	// instructions
 	class break_i : public std::runtime_error
 	{
@@ -132,7 +132,7 @@ public: ___STRANGE_EXPRESSION___
 
 	static inline expression_a<> val(token_a<> const& token)
 	{
-		return expression_a<>{ expression_t<>{token} };
+		return expression_a<>{ expression_o<expression_t<>>{ expression_t<>{token} } };
 	}
 
 	// reflection

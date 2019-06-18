@@ -3,5 +3,6 @@
 
 // overrides
 #include "strange_thing_o.h"
+#include "strange_expression_o.h"
 
 #endif
