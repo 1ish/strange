@@ -123,9 +123,12 @@ class river_t : public thing_t<_ABSTRACTION_>
 		{}
 	};
 
-public: ___STRANGE_COLLECTION___
+public:
 	using std_shared_ios_base = std::shared_ptr<std::ios_base>;
 	using std_istreambuf_iterator_char = std::istreambuf_iterator<char>;
+
+	// override
+	using over = range_o<river_t<>>;
 
 	// construction
 	static inline any_a<> val__(range_a<> const& _)
@@ -141,7 +144,7 @@ public: ___STRANGE_COLLECTION___
 	static inline river_a<> val(std::string const& str = std::string())
 	{
 		std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(str);
-		return river_a<>(river_t(stream.get(), stream.get(), stream), true);
+		return river_a<>(over{ river_t<>(stream.get(), stream.get(), stream) }, true);
 	}
 
 	static inline any_a<> file_val__(range_a<> const& range)
@@ -167,7 +170,7 @@ public: ___STRANGE_COLLECTION___
 	static inline river_a<> file_val(std::string const& name)
 	{
 		std::shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name, std::fstream::binary | std::fstream::in | std::fstream::out);
-		return river_a<>(river_t(stream.get(), stream.get(), stream, name), true);
+		return river_a<>(over{ river_t<>(stream.get(), stream.get(), stream, name) }, true);
 	}
 
 	static inline any_a<> in_val__(range_a<> const& _)
@@ -177,7 +180,7 @@ public: ___STRANGE_COLLECTION___
 
 	static inline river_a<> in_val_()
 	{
-		return river_a<>(river_t{ &std::cin }, true);
+		return river_a<>(over{ river_t<>{ &std::cin } }, true);
 	}
 
 	static inline any_a<> out_val__(range_a<> const& _)
@@ -187,7 +190,7 @@ public: ___STRANGE_COLLECTION___
 
 	static inline river_a<> out_val_()
 	{
-		return river_a<>(river_t(nullptr, &std::cout), true);
+		return river_a<>(over{ river_t<>(nullptr, &std::cout) }, true);
 	}
 
 	static inline any_a<> err_val__(range_a<> const& _)
@@ -197,7 +200,7 @@ public: ___STRANGE_COLLECTION___
 
 	static inline river_a<> err_val_()
 	{
-		return river_a<>(river_t(nullptr, &std::cerr), true);
+		return river_a<>(over{ river_t<>(nullptr, &std::cerr) }, true);
 	}
 
 	// reflection

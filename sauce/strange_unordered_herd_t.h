@@ -119,8 +119,11 @@ class unordered_herd_t : public thing_t<_ABSTRACTION_>
 		{}
 	};
 
-public: ___STRANGE_COLLECTION___
+public:
 	using std_unordered_set_any = std::unordered_set<any_a<>, any_a<>::hash_f>;
+
+	// override
+	using over = collection_o<unordered_herd_t<CONCURRENT>>;
 
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
@@ -142,7 +145,7 @@ public: ___STRANGE_COLLECTION___
 	template <typename F>
 	static inline unordered_herd_a<> val(F&& init)
 	{
-		return unordered_herd_a<>{ unordered_herd_t{ std::forward<F>(init) } };
+		return unordered_herd_a<>{ over{ unordered_herd_t<CONCURRENT>{ std::forward<F>(init) } } };
 	}
 
 	// reflection
@@ -371,6 +374,16 @@ public: ___STRANGE_COLLECTION___
 			_set.erase(thing);
 		}
 		return *this;
+	}
+
+	inline any_a<> read_lock_() const
+	{
+		return data_t<read_lock_ptr<CONCURRENT>>::val(make_read_lock_ptr<CONCURRENT>(_mutex));
+	}
+
+	inline any_a<> write_lock_() const
+	{
+		return data_t<write_lock_ptr<CONCURRENT>>::val(make_write_lock_ptr<CONCURRENT>(_mutex));
 	}
 
 	// data

@@ -4,17 +4,6 @@
 namespace strange
 {
 
-// adaptation
-#define ___STRANGE_RANGE___ ___STRANGE_THING___ \
-inline any_a<> cbegin__(range_a<> const&) const \
-{ \
-return cbegin_(); \
-} \
-inline any_a<> cend__(range_a<> const&) const \
-{ \
-return cend_(); \
-} \
-
 template <typename _ABSTRACTION_ = range_a<>>
 class range_t : public thing_t<_ABSTRACTION_>
 {

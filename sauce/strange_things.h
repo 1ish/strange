@@ -15,7 +15,6 @@
 #include "strange_range_t.h"
 #include "strange_misunderstanding_t.h"
 #include "strange_disagreement_t.h"
-#include "strange_collection_t.h"
 #include "strange_ordered_shoal_t.h"
 #include "strange_unordered_shoal_t.h"
 #include "strange_flock_t.h"
@@ -53,9 +52,5 @@
 #include "strange_expression_function_t.h"
 #include "strange_expression_shared_scope_t.h"
 #include "strange_expression_flock_t.h"
-
-#undef ___STRANGE_THING___
-#undef ___STRANGE_RANGE___
-#undef ___STRANGE_COLLECTION___
 
 #endif

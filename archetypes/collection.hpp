@@ -36,7 +36,7 @@ public:
 	inline bool erase(any_a<> const& key);
 
 	inline any_a<> clear__(range_a<> const& _);
-	inline any_a<> clear_();
+	inline collection_a clear_();
 	inline void clear();
 
 	inline any_a<> size__(range_a<> const& _) const;
@@ -48,32 +48,32 @@ public:
 	inline bool empty() const;
 
 	inline any_a<> push_front__(range_a<> const& range);
-	inline any_a<> push_front_(any_a<> const& thing);
+	inline collection_a push_front_(any_a<> const& thing);
 	inline void push_front(any_a<> const& thing);
 
 	inline any_a<> pop_front__(range_a<> const& _);
 	inline any_a<> pop_front_();
 
 	inline any_a<> push_back__(range_a<> const& range);
-	inline any_a<> push_back_(any_a<> const& thing);
+	inline collection_a push_back_(any_a<> const& thing);
 	inline void push_back(any_a<> const& thing);
 
 	inline any_a<> pop_back__(range_a<> const& _);
 	inline any_a<> pop_back_();
 
 	inline any_a<> self_add__(range_a<> const& range);
-	inline range_a<> self_add_(range_a<> const& range);
+	inline collection_a self_add_(range_a<> const& range);
 
 	inline any_a<> add__(range_a<> const& range) const;
-	inline range_a<> add_(range_a<> const& range) const;
-	inline range_a<> operator+(range_a<> const& range) const;
+	inline collection_a add_(range_a<> const& range) const;
+	inline collection_a operator+(range_a<> const& range) const;
 
 	inline any_a<> self_subtract__(range_a<> const& range);
-	inline range_a<> self_subtract_(range_a<> const& range);
+	inline collection_a self_subtract_(range_a<> const& range);
 
 	inline any_a<> subtract__(range_a<> const& range) const;
-	inline range_a<> subtract_(range_a<> const& range) const;
-	inline range_a<> operator-(range_a<> const& range) const;
+	inline collection_a subtract_(range_a<> const& range) const;
+	inline collection_a operator-(range_a<> const& range) const;
 
 	inline any_a<> read_lock__(range_a<> const& _) const;
 	inline any_a<> read_lock_() const;

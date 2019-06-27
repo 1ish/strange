@@ -730,8 +730,11 @@ class lake_t : public thing_t<_ABSTRACTION_>
 		{}
 	};
 
-public: ___STRANGE_COLLECTION___
+public:
 	using std_vector_number = std::vector<PRIMITIVE>;
+
+	// override
+	using over = collection_o<lake_t<PRIMITIVE, CONCURRENT>>;
 
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
@@ -753,7 +756,7 @@ public: ___STRANGE_COLLECTION___
 	template <typename F>
 	static inline lake_a<PRIMITIVE> val(F&& init)
 	{
-		return lake_a<PRIMITIVE>{ lake_t{ std::forward<F>(init) } };
+		return lake_a<PRIMITIVE>{ over{ lake_t<PRIMITIVE, CONCURRENT>{ std::forward<F>(init) } } };
 	}
 
 	// reflection
@@ -1070,6 +1073,16 @@ public: ___STRANGE_COLLECTION___
 			}
 		}
 		return *this;
+	}
+
+	inline any_a<> read_lock_() const
+	{
+		return data_t<read_lock_ptr<CONCURRENT>>::val(make_read_lock_ptr<CONCURRENT>(_mutex));
+	}
+
+	inline any_a<> write_lock_() const
+	{
+		return data_t<write_lock_ptr<CONCURRENT>>::val(make_write_lock_ptr<CONCURRENT>(_mutex));
 	}
 
 	// data
