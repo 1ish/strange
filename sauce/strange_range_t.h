@@ -18,7 +18,10 @@ return cend_(); \
 template <typename _ABSTRACTION_ = range_a<>>
 class range_t : public thing_t<_ABSTRACTION_>
 {
-public: ___STRANGE_RANGE___
+public:
+	// override
+	using over = range_o<range_t<>>;
+
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
@@ -52,7 +55,7 @@ public: ___STRANGE_RANGE___
 
 	static inline range_a<> val_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
 	{
-		return range_a<>{ range_t(begin, end) };
+		return range_a<>{ over{ range_t<>(begin, end) } };
 	}
 
 	// reflection

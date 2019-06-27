@@ -136,7 +136,10 @@ class range_operator_t : public thing_t<_ABSTRACTION_>
 		{}
 	};
 
-public: ___STRANGE_RANGE___
+public:
+	// override
+	using over = range_o<range_operator_t<>>;
+
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
@@ -169,7 +172,7 @@ public: ___STRANGE_RANGE___
 
 	static inline range_a<> val_(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref)
 	{
-		return range_a<>{ range_operator_t(range, thing_ref, range_ref) };
+		return range_a<>{ over{ range_operator_t<>(range, thing_ref, range_ref) } };
 	}
 
 	// reflection

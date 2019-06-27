@@ -527,7 +527,10 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 		}
 	};
 
-public: ___STRANGE_RANGE___
+public:
+	// override
+	using over = range_o<tokenizer_t<>>;
+
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
@@ -546,7 +549,7 @@ public: ___STRANGE_RANGE___
 
 	static inline range_a<> val_(river_a<> const& river)
 	{
-		return range_a<>{ tokenizer_t(river) };
+		return range_a<>{ over{ tokenizer_t<>(river) } };
 	}
 
 	// reflection
