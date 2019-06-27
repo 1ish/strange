@@ -7,7 +7,10 @@ namespace strange
 template <typename _ABSTRACTION_ = expression_a<>>
 class expression_shared_scope_t : public expression_t<_ABSTRACTION_>
 {
-public: ___STRANGE_EXPRESSION___
+public:
+	// override
+	using over = expression_o<expression_shared_scope_t<>>;
+
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
@@ -25,7 +28,7 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis(token.report() + "strange::expression_shared_scope::val passed too few terms");
 		}
-		return expression_a<>{ expression_shared_scope_t<>(token, cast<unordered_shoal_a<>>(shared), *it) };
+		return expression_a<>{ over{ expression_shared_scope_t<>(token, cast<unordered_shoal_a<>>(shared), *it) } };
 	}
 
 	// reflection

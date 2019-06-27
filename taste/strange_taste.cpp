@@ -124,6 +124,8 @@ TEST(TestCaseName, ForLoop)
 	flock_a<> var = flock_t<>::val_(concurrent_brook, "hello", concurrent_flock);
 	ordered_shoal_a<> ors = ordered_shoal_t<>::val_(std::make_pair(concurrent_ordered_herd, concurrent_ordered_shoal), std::make_pair(concurrent_squad, concurrent_unordered_herd));
 	unordered_shoal_a<> uos = unordered_shoal_t<>::val_(std::make_pair(concurrent_ordered_herd, concurrent_ordered_shoal), std::make_pair(concurrent_squad, concurrent_unordered_herd));
+
+	expression_a<> exp = cast<expression_a<>>(expression_o<expression_break_t<>>::val__(token.ranged_()));
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

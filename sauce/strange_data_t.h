@@ -8,6 +8,9 @@ template <typename DATA, typename _ABSTRACTION_ = data_a<DATA>>
 class data_t : public thing_t<_ABSTRACTION_>
 {
 public:
+	// override
+	using over = thing_o<data_t<DATA>>;
+
 	// construction
 	static inline any_a<> val__(range_a<> const& _)
 	{
@@ -21,7 +24,7 @@ public:
 
 	static inline data_a<DATA> val(DATA primitive)
 	{
-		return data_a<DATA>{ thing_o<data_t<DATA, _ABSTRACTION_>>{ data_t<DATA, _ABSTRACTION_>{ primitive } } };
+		return data_a<DATA>{ over{ data_t<DATA>{ primitive } } };
 	}
 
 	// reflection

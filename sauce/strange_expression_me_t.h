@@ -7,11 +7,14 @@ namespace strange
 template <typename _ABSTRACTION_ = expression_a<>>
 class expression_me_t : public expression_t<_ABSTRACTION_>
 {
-public: ___STRANGE_EXPRESSION___
+public:
+	// override
+	using over = expression_o<expression_me_t<>>;
+
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
-		return expression_a<>{ expression_me_t<>{ token } };
+		return expression_a<>{ over{ expression_me_t<>{ token } } };
 	}
 
 	// reflection

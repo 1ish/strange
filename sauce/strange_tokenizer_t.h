@@ -11,11 +11,14 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
 	public:
+		// override
+		using over = thing_o<const_iterator_t<ITERATOR>>;
+
 		// construction
 		template <typename F>
 		static inline forward_const_iterator_data_a<ITERATOR> val(river_a<> const& river, F&& it)
 		{
-			return forward_const_iterator_data_a<ITERATOR>{ thing_o<const_iterator_t>{ const_iterator_t(river, std::forward<F>(it)) } };
+			return forward_const_iterator_data_a<ITERATOR>{ over{ const_iterator_t<ITERATOR>(river, std::forward<F>(it)) } };
 		}
 
 		// reflection

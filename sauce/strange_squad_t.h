@@ -11,11 +11,14 @@ class squad_t : public thing_t<_ABSTRACTION_>
 	class iterator_t : public thing_t<_ABSTRACTION_>
 	{
 	public:
+		// override
+		using over = thing_o<iterator_t<ITERATOR>>;
+
 		// construction
 		template <typename F>
 		static inline random_access_iterator_data_a<ITERATOR> val(squad_a<> const& squad, F&& it)
 		{
-			return random_access_iterator_data_a<ITERATOR>{ thing_o<iterator_t>{ iterator_t(squad, std::forward<F>(it)) } };
+			return random_access_iterator_data_a<ITERATOR>{ over{ iterator_t<ITERATOR>(squad, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -371,11 +374,14 @@ class squad_t : public thing_t<_ABSTRACTION_>
 	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
 	public:
+		// override
+		using over = thing_o<const_iterator_t<ITERATOR>>;
+
 		// construction
 		template <typename F>
 		static inline random_access_const_iterator_data_a<ITERATOR> val(squad_a<> const& squad, F&& it)
 		{
-			return random_access_const_iterator_data_a<ITERATOR>{ thing_o<const_iterator_t>{ const_iterator_t(squad, std::forward<F>(it)) } };
+			return random_access_const_iterator_data_a<ITERATOR>{ over{ const_iterator_t<ITERATOR>(squad, std::forward<F>(it)) } };
 		}
 
 		// reflection

@@ -7,7 +7,10 @@ namespace strange
 template <typename _ABSTRACTION_ = expression_a<>>
 class expression_local_insert_t : public expression_t<_ABSTRACTION_>
 {
-public: ___STRANGE_EXPRESSION___
+public:
+	// override
+	using over = expression_o<expression_local_insert_t<>>;
+
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
@@ -35,7 +38,7 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis(token.report() + "strange::expression_local_insert::val passed non-expression");
 		}
-		return expression_a<>{ expression_local_insert_t<>{ token, cast<cat_a<>>(cat), key, cast<expression_a<>>(val) } };
+		return expression_a<>{ over{ expression_local_insert_t<>{ token, cast<cat_a<>>(cat), key, cast<expression_a<>>(val) } } };
 	}
 
 	// reflection

@@ -11,100 +11,103 @@ class river_t : public thing_t<_ABSTRACTION_>
 	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
 	public:
+		// override
+		using over = thing_o<const_iterator_t<ITERATOR>>;
+
 		// construction
 		template <typename F>
-			static inline forward_const_iterator_data_a<ITERATOR> val(river_a<> const& river, F&& it)
-			{
-				return forward_const_iterator_data_a<ITERATOR>{ thing_o<const_iterator_t>{ const_iterator_t(river, std::forward<F>(it)) } };
-			}
+		static inline forward_const_iterator_data_a<ITERATOR> val(river_a<> const& river, F&& it)
+		{
+			return forward_const_iterator_data_a<ITERATOR>{ over{ const_iterator_t<ITERATOR>(river, std::forward<F>(it)) } };
+		}
 
-			// reflection
-			static inline symbol_a<> type_()
-			{
-				static symbol_a<> TYPE = sym("strange::river::const_iterator");
-				return TYPE;
-			}
+		// reflection
+		static inline symbol_a<> type_()
+		{
+			static symbol_a<> TYPE = sym("strange::river::const_iterator");
+			return TYPE;
+		}
 
-			static inline void share(shoal_a<>& shoal)
-			{}
+		static inline void share(shoal_a<>& shoal)
+		{}
 
-			// comparison
-			inline bool operator==(any_a<> const& thing) const
+		// comparison
+		inline bool operator==(any_a<> const& thing) const
+		{
+			if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
-				{
-					return false;
-				}
-				return _it == cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
+				return false;
 			}
+			return _it == cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
+		}
 
-			inline std::size_t hash() const
-			{
-				return std::hash<int64_t>{}(_it == ITERATOR{});
-			}
+		inline std::size_t hash() const
+		{
+			return std::hash<int64_t>{}(_it == ITERATOR{});
+		}
 
-			// forward iterator
-			inline any_a<> get__(range_a<> const&) const
-			{
-				return get_();
-			}
+		// forward iterator
+		inline any_a<> get__(range_a<> const&) const
+		{
+			return get_();
+		}
 
-			inline any_a<> get_() const
-			{
-				_int_8 = number_int_8_t<>::val(*_it);
-				return _int_8;
-			}
+		inline any_a<> get_() const
+		{
+			_int_8 = number_int_8_t<>::val(*_it);
+			return _int_8;
+		}
 
-			inline any_a<> const* operator->() const
-			{
-				return &operator*();
-			}
+		inline any_a<> const* operator->() const
+		{
+			return &operator*();
+		}
 
-			inline any_a<> const& operator*() const
-			{
-				_int_8 = number_int_8_t<>::val(*_it);
-				return _int_8;
-			}
+		inline any_a<> const& operator*() const
+		{
+			_int_8 = number_int_8_t<>::val(*_it);
+			return _int_8;
+		}
 
-			inline _ABSTRACTION_ increment__(range_a<> const&)
-			{
-				return increment_();
-			}
+		inline _ABSTRACTION_ increment__(range_a<> const&)
+		{
+			return increment_();
+		}
 
-			inline _ABSTRACTION_ increment_()
-			{
-				operator++();
-				return me_();
-			}
+		inline _ABSTRACTION_ increment_()
+		{
+			operator++();
+			return me_();
+		}
 
-			inline const_iterator_t& operator++()
-			{
-				++_it;
-				return *this;
-			}
+		inline const_iterator_t& operator++()
+		{
+			++_it;
+			return *this;
+		}
 
-			inline const_iterator_t operator++(int)
-			{
-				const_iterator_t result = *this;
-				operator++();
-				return result;
-			}
+		inline const_iterator_t operator++(int)
+		{
+			const_iterator_t result = *this;
+			operator++();
+			return result;
+		}
 
-			// data
-			inline ITERATOR const& extract() const
-			{
-				return _it;
-			}
+		// data
+		inline ITERATOR const& extract() const
+		{
+			return _it;
+		}
 
-			inline void mutate(ITERATOR const& it)
-			{
-				_it = it;
-			}
+		inline void mutate(ITERATOR const& it)
+		{
+			_it = it;
+		}
 
-			inline ITERATOR& reference()
-			{
-				return _it;
-			}
+		inline ITERATOR& reference()
+		{
+			return _it;
+		}
 
 	protected:
 		ITERATOR _it;

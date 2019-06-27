@@ -8,10 +8,13 @@ template <typename PRIMITIVE, typename _ABSTRACTION_ = number_data_a<PRIMITIVE>>
 class number_reference_t : public thing_t<_ABSTRACTION_>
 {
 public:
+	// override
+	using over = thing_o<number_reference_t<PRIMITIVE>>;
+
 	// construction
 	static inline number_data_a<PRIMITIVE> val(PRIMITIVE& primitive)
 	{
-		return number_data_a<PRIMITIVE>{ thing_o<number_reference_t<PRIMITIVE, _ABSTRACTION_>>{ number_reference_t<PRIMITIVE, _ABSTRACTION_>{ primitive } } };
+		return number_data_a<PRIMITIVE>{ over{ number_reference_t<PRIMITIVE>{ primitive } } };
 	}
 
 	// reflection

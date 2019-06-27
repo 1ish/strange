@@ -8,6 +8,9 @@ template <typename _ABSTRACTION_ = any_a<>>
 class nothing_t : public thing_t<_ABSTRACTION_>
 {
 public:
+	// override
+	using over = thing_o<nothing_t<>>;
+
 	// construction
 	static inline any_a<> val__(range_a<> const& _)
 	{
@@ -16,7 +19,7 @@ public:
 
 	static inline any_a<> val_()
 	{
-		static any_a<> VAL = any_a<>{ thing_o<nothing_t<>>{ nothing_t<>{} } };
+		static any_a<> VAL = any_a<>{ over{ nothing_t<>{} } };
 		return VAL;
 	}
 

@@ -7,7 +7,10 @@ namespace strange
 template <typename _ABSTRACTION_ = expression_a<>>
 class expression_operate_range_t : public expression_t<_ABSTRACTION_>
 {
-public: ___STRANGE_EXPRESSION___
+public:
+	// override
+	using over = expression_o<expression_operate_range_t<>>;
+
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
@@ -30,7 +33,7 @@ public: ___STRANGE_EXPRESSION___
 		{
 			throw dis(token.report() + "strange::expression_operate_range::val passed non-expression range term");
 		}
-		return expression_override_t<expression_operate_range_t<>>::val(expression_operate_range_t<>(token, cast<expression_a<>>(thing), cast<expression_a<>>(range)));
+		return expression_substitute_t<over>::val(over{ expression_operate_range_t<>(token, cast<expression_a<>>(thing), cast<expression_a<>>(range)) });
 	}
 
 	// reflection

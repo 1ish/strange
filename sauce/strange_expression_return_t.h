@@ -7,7 +7,10 @@ namespace strange
 template <typename _ABSTRACTION_ = expression_a<>>
 class expression_return_t : public expression_t<_ABSTRACTION_>
 {
-public: ___STRANGE_EXPRESSION___
+public:
+	// override
+	using over = expression_o<expression_return_t<>>;
+
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
@@ -26,12 +29,12 @@ public: ___STRANGE_EXPRESSION___
 
 	static inline expression_a<> val(token_a<> const& token)
 	{
-		return expression_a<>{ expression_return_t<>(token, expression_t<>::val(token)) };
+		return expression_a<>{ over{ expression_return_t<>(token, expression_t<>::val(token)) } };
 	}
 
 	static inline expression_a<> val(token_a<> const& token, expression_a<> const& result)
 	{
-		return expression_a<>{ expression_return_t<>(token, result) };
+		return expression_a<>{ over{ expression_return_t<>(token, result) } };
 	}
 
 	// reflection

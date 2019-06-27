@@ -19,11 +19,11 @@
 // utilities
 #include "strange_utilities.h"
 
-// things
-#include "strange_things.h"
-
 // overrides
 #include "strange_overrides.h"
+
+// things
+#include "strange_things.h"
 
 // operations
 #include "strange_reflections.h"

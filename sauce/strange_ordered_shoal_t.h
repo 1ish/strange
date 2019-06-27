@@ -11,11 +11,14 @@ class ordered_shoal_t : public thing_t<_ABSTRACTION_>
 	class iterator_t : public thing_t<_ABSTRACTION_>
 	{
 	public:
+		// override
+		using over = thing_o<iterator_t<ITERATOR>>;
+
 		// construction
 		template <typename F>
 		static inline bidirectional_iterator_data_a<ITERATOR> val(ordered_shoal_a<> const& ordered_shoal, F&& it)
 		{
-			return bidirectional_iterator_data_a<ITERATOR>{ thing_o<iterator_t>{ iterator_t(ordered_shoal, std::forward<F>(it)) } };
+			return bidirectional_iterator_data_a<ITERATOR>{ over{ iterator_t<ITERATOR>(ordered_shoal, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -168,127 +171,130 @@ class ordered_shoal_t : public thing_t<_ABSTRACTION_>
 	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
 	public:
+		// override
+		using over = thing_o<const_iterator_t<ITERATOR>>;
+
 		// construction
 		template <typename F>
-			static inline bidirectional_const_iterator_data_a<ITERATOR> val(ordered_shoal_a<> const& ordered_shoal, F&& it)
-			{
-				return bidirectional_const_iterator_data_a<ITERATOR>{ thing_o<const_iterator_t>{ const_iterator_t(ordered_shoal, std::forward<F>(it)) } };
-			}
+		static inline bidirectional_const_iterator_data_a<ITERATOR> val(ordered_shoal_a<> const& ordered_shoal, F&& it)
+		{
+			return bidirectional_const_iterator_data_a<ITERATOR>{ over{ const_iterator_t<ITERATOR>(ordered_shoal, std::forward<F>(it)) } };
+		}
 
-			// reflection
-			static inline symbol_a<> type_()
-			{
-				static symbol_a<> TYPE = sym("strange::ordered_shoal::const_iterator");
-				return TYPE;
-			}
+		// reflection
+		static inline symbol_a<> type_()
+		{
+			static symbol_a<> TYPE = sym("strange::ordered_shoal::const_iterator");
+			return TYPE;
+		}
 
-			static inline void share(shoal_a<>& shoal)
-			{}
+		static inline void share(shoal_a<>& shoal)
+		{}
 
-			// comparison
-			inline bool operator==(any_a<> const& thing) const
+		// comparison
+		inline bool operator==(any_a<> const& thing) const
+		{
+			if (!check<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
 			{
-				if (!check<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
-				{
-					return false;
-				}
-				return _it == cast<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract();
+				return false;
 			}
+			return _it == cast<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract();
+		}
 
-			inline std::size_t hash() const
-			{
-				return std::hash<void const*>{}(&*_it);
-			}
+		inline std::size_t hash() const
+		{
+			return std::hash<void const*>{}(&*_it);
+		}
 
-			// forward iterator
-			inline any_a<> get__(range_a<> const&) const
-			{
-				return get_();
-			}
+		// forward iterator
+		inline any_a<> get__(range_a<> const&) const
+		{
+			return get_();
+		}
 
-			inline any_a<> get_() const
-			{
-				_pair.update_index(0, _it->first);
-				_pair.update_index(1, _it->second);
-				return _pair;
-			}
+		inline any_a<> get_() const
+		{
+			_pair.update_index(0, _it->first);
+			_pair.update_index(1, _it->second);
+			return _pair;
+		}
 
-			inline any_a<> const* operator->() const
-			{
-				return &operator*();
-			}
+		inline any_a<> const* operator->() const
+		{
+			return &operator*();
+		}
 
-			inline any_a<> const& operator*() const
-			{
-				_pair.update_index(0, _it->first);
-				_pair.update_index(1, _it->second);
-				return _pair;
-			}
+		inline any_a<> const& operator*() const
+		{
+			_pair.update_index(0, _it->first);
+			_pair.update_index(1, _it->second);
+			return _pair;
+		}
 
-			inline _ABSTRACTION_ increment__(range_a<> const&)
-			{
-				return increment_();
-			}
+		inline _ABSTRACTION_ increment__(range_a<> const&)
+		{
+			return increment_();
+		}
 
-			inline _ABSTRACTION_ increment_()
-			{
-				operator++();
-				return me_();
-			}
+		inline _ABSTRACTION_ increment_()
+		{
+			operator++();
+			return me_();
+		}
 
-			inline const_iterator_t& operator++()
-			{
-				++_it;
-				return *this;
-			}
+		inline const_iterator_t& operator++()
+		{
+			++_it;
+			return *this;
+		}
 
-			inline const_iterator_t operator++(int)
-			{
-				const_iterator_t result = *this;
-				operator++();
-				return result;
-			}
+		inline const_iterator_t operator++(int)
+		{
+			const_iterator_t result = *this;
+			operator++();
+			return result;
+		}
 
-			// bidirectional iterator
-			inline _ABSTRACTION_ decrement__(range_a<> const& _)
-			{
-				return decrement_();
-			}
+		// bidirectional iterator
+		inline _ABSTRACTION_ decrement__(range_a<> const& _)
+		{
+			return decrement_();
+		}
 
-			inline _ABSTRACTION_ decrement_()
-			{
-				operator--();
-				return me_();
-			}
+		inline _ABSTRACTION_ decrement_()
+		{
+			operator--();
+			return me_();
+		}
 
-			inline const_iterator_t& operator--()
-			{
-				--_it;
-				return *this;
-			}
+		inline const_iterator_t& operator--()
+		{
+			--_it;
+			return *this;
+		}
 
-			inline const_iterator_t operator--(int)
-			{
-				const_iterator_t result = *this;
-				operator--();
-				return result;
-			}
+		inline const_iterator_t operator--(int)
+		{
+			const_iterator_t result = *this;
+			operator--();
+			return result;
+		}
 
-			// data
-			inline ITERATOR const& extract() const
-			{
-				return _it;
-			}
+		// data
+		inline ITERATOR const& extract() const
+		{
+			return _it;
+		}
 
-			inline void mutate(ITERATOR const& it)
-			{
-				_it = it;
-			}
+		inline void mutate(ITERATOR const& it)
+		{
+			_it = it;
+		}
 
-			inline ITERATOR& reference()
-			{
-				return _it;
-			}
+		inline ITERATOR& reference()
+		{
+			return _it;
+		}
 
 	protected:
 		ITERATOR _it;

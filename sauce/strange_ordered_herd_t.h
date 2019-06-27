@@ -11,11 +11,14 @@ class ordered_herd_t : public thing_t<_ABSTRACTION_>
 	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
 	public:
+		// override
+		using over = thing_o<const_iterator_t<ITERATOR>>;
+
 		// construction
 		template <typename F>
 		static inline bidirectional_const_iterator_data_a<ITERATOR> val(ordered_herd_a<> const& ordered_herd, F&& it)
 		{
-			return bidirectional_const_iterator_data_a<ITERATOR>{ thing_o<const_iterator_t>{ const_iterator_t(ordered_herd, std::forward<F>(it)) } };
+			return bidirectional_const_iterator_data_a<ITERATOR>{ over{ const_iterator_t<ITERATOR>(ordered_herd, std::forward<F>(it)) } };
 		}
 
 		// reflection

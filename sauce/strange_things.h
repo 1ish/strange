@@ -34,7 +34,7 @@
 #include "strange_tokenizer_t.h"
 #include "strange_expression_t.h"
 #include "strange_expression_literal_t.h"
-#include "strange_expression_override_t.h"
+#include "strange_expression_substitute_t.h"
 #include "strange_expression_local_at_t.h"
 #include "strange_expression_local_insert_t.h"
 #include "strange_expression_local_update_t.h"
@@ -57,6 +57,5 @@
 #undef ___STRANGE_THING___
 #undef ___STRANGE_RANGE___
 #undef ___STRANGE_COLLECTION___
-#undef ___STRANGE_EXPRESSION___
 
 #endif

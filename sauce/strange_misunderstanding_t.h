@@ -8,6 +8,9 @@ template <typename _ABSTRACTION_ = misunderstanding_a<>>
 class misunderstanding_t : public nothing_t<_ABSTRACTION_>
 {
 public:
+	// override
+	using over = thing_o<misunderstanding_t<>>;
+
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
@@ -27,7 +30,7 @@ public:
 	template <typename F>
 	static inline misunderstanding_a<> val(F&& s)
 	{
-		return misunderstanding_a<>{ thing_o<misunderstanding_t>{ misunderstanding_t{ std::forward<F>(s) } } };
+		return misunderstanding_a<>{ over{ misunderstanding_t<>{ std::forward<F>(s) } } };
 	}
 
 	// reflection
@@ -68,7 +71,7 @@ public:
 				s += cast<misunderstanding_a<>>(thing).to_string();
 			}
 		}
-		return misunderstanding_a<>{ thing_o<misunderstanding_t>{ misunderstanding_t{ std::move(s) } } };
+		return misunderstanding_t<>::val(std::move(s));
 	}
 
 	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
@@ -78,7 +81,7 @@ public:
 
 	inline misunderstanding_a<> operator+(misunderstanding_a<> const& misunderstanding) const
 	{
-		return misunderstanding_a<>{ thing_o<misunderstanding_t>{ misunderstanding_t{ _string + misunderstanding.to_string() } } };
+		return misunderstanding_t<>::val(_string + misunderstanding.to_string());
 	}
 
 protected:

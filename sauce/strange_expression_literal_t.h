@@ -7,7 +7,10 @@ namespace strange
 template <typename _ABSTRACTION_ = expression_a<>>
 class expression_literal_t : public expression_t<_ABSTRACTION_>
 {
-public: ___STRANGE_EXPRESSION___
+public:
+	// override
+	using over = expression_o<expression_literal_t<>>;
+
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
 	{
@@ -21,7 +24,7 @@ public: ___STRANGE_EXPRESSION___
 
 	static inline expression_a<> val(token_a<> const& token, any_a<> const& literal)
 	{
-		return expression_a<>{ expression_literal_t<>{ token, literal } };
+		return expression_a<>{ over{ expression_literal_t<>{ token, literal } } };
 	}
 
 	// validation

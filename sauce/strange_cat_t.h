@@ -8,6 +8,9 @@ template <typename _ABSTRACTION_ = cat_a<>>
 class cat_t : public symbol_t<_ABSTRACTION_>
 {
 public:
+	// override
+	using over = thing_o<cat_t<>>;
+
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
@@ -63,7 +66,7 @@ public:
 
 	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), any_a<> const& reference = no())
 	{
-		return cat_a<>{ thing_o<cat_t>{ cat_t(name, arguments, parameters, result, reference) } };
+		return cat_a<>{ over{ cat_t<>(name, arguments, parameters, result, reference) } };
 	}
 
 	static inline cat_a<> val(std::string const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool reference = false)

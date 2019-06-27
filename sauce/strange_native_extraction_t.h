@@ -10,6 +10,9 @@ class native_extraction_t : public operation_t<_ABSTRACTION_>
 	using const_member = any_a<>(T::*)(range_a<> const&) const;
 
 public:
+	// override
+	using over = thing_o<native_extraction_t<T>>;
+
 	// construction
 	template <typename... Args>
 	static inline operation_a<> val(const_member const fun, Args&&... args)
@@ -17,7 +20,7 @@ public:
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
-		return operation_a<>{ thing_o<native_extraction_t>{ native_extraction_t(fun, flock_t<>::val(std::move(v))) } };
+		return operation_a<>{ over{ native_extraction_t<T>(fun, flock_t<>::val(std::move(v))) } };
 	}
 
 	// reflection

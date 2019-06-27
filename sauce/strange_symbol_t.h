@@ -8,6 +8,9 @@ template <typename _ABSTRACTION_ = symbol_a<>>
 class symbol_t : public thing_t<_ABSTRACTION_>
 {
 public:
+	// override
+	using over = thing_o<symbol_t<>>;
+
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
@@ -27,7 +30,7 @@ public:
 	template <typename F>
 	static inline symbol_a<> val(F&& s)
 	{
-		return symbol_a<>{ thing_o<symbol_t> { symbol_t{ std::forward<F>(s) } } };
+		return symbol_a<>{ over{ symbol_t<>{ std::forward<F>(s) } } };
 	}
 
 	// reflection
@@ -73,7 +76,7 @@ public:
 				s += cast<symbol_a<>>(thing).to_string();
 			}
 		}
-		return symbol_a<>{ thing_o<symbol_t>{ symbol_t{ std::move(s) } } };
+		return symbol_t<>::val(std::move(s));
 	}
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
@@ -83,7 +86,7 @@ public:
 
 	inline symbol_a<> operator+(symbol_a<> const& symbol) const
 	{
-		return symbol_a<>{ thing_o<symbol_t>{ symbol_t{ _string + symbol.to_string() } } };
+		return symbol_t<>::val(_string + symbol.to_string());
 	}
 
 protected:

@@ -11,11 +11,14 @@ class range_operator_t : public thing_t<_ABSTRACTION_>
 	class const_iterator_t : public thing_t<_ABSTRACTION_>
 	{
 	public:
+		// override
+		using over = thing_o<const_iterator_t<ITERATOR>>;
+
 		// construction
 		template <typename F>
 		static inline forward_const_iterator_data_a<ITERATOR> val(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
 		{
-			return forward_const_iterator_data_a<ITERATOR>{ thing_o<const_iterator_t>{ const_iterator_t(range, std::forward<F>(it), thing_ref, range_ref) } };
+			return forward_const_iterator_data_a<ITERATOR>{ over{ const_iterator_t<ITERATOR>(range, std::forward<F>(it), thing_ref, range_ref) } };
 		}
 
 		// reflection
