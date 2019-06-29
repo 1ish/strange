@@ -24,32 +24,45 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_function::val passed non-expression");
 		}
+		auto names = flock_t<>::val_();
+		auto evaluated = flock_t<>::val_();
 		forward_const_iterator_a<> pit = ++it;
 		while (it != terms.cend_())
 		{
-			if (!check<symbol_a<>>(*it))
+			auto name = *it;
+			if (!check<symbol_a<>>(name))
 			{
 				throw dis(token.report() + "strange::expression_function::val passed non-symbol name");
 			}
+			names.push_back(name);
 			if (++it == terms.cend_())
 			{
 				throw dis(token.report() + "strange::expression_function::val passed short range");
 			}
-			if (!check<expression_a<>>(*it))
+			auto cat_expression = *it;
+			if (!check<expression_a<>>(cat_expression))
 			{
 				throw dis(token.report() + "strange::expression_function::val passed non-expression cat");
 			}
+			auto cat = cast<expression_a<>>(cat_expression).evaluate_();
+			if (!check<cat_a<>>(cat))
+			{
+				throw dis(token.report() + "strange::expression_function::val passed non-cat");
+			}
+			evaluated.push_back(cat);
 			if (++it == terms.cend_())
 			{
 				throw dis(token.report() + "strange::expression_function::val passed short range");
 			}
-			if (!check<expression_a<>>(*it))
+			auto default_expression = *it;
+			if (!check<expression_a<>>(default_expression))
 			{
 				throw dis(token.report() + "strange::expression_function::val passed non-expression default");
 			}
+			evaluated.push_back(cast<expression_a<>>(default_expression).evaluate_());
 			++it;
 		}
-		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, cast<expression_a<>>(expression), range_t<>::val_(pit, terms.cend_())) });
+		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, cast<expression_a<>>(expression), range_t<>::val_(pit, terms.cend_()), names, evaluated) });
 	}
 
 	// reflection
@@ -63,31 +76,27 @@ public:
 		reflection<expression_function_t<>>::share(shoal);
 	}
 
+	inline any_a<> eater_() const
+	{
+		return _names;
+	}
+
 	// function
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
-#ifdef STRANGE_CHECK_STATIC_CASTS
-		if (!check<unordered_shoal_a<>>(thing))
-		{
-			throw dis(_token.report() + "strange::expression_function::operate passed non-unordered-shoal local");
-		}
-#endif
-		auto& local = static_cast<unordered_shoal_a<>&>(thing).reference();
-		forward_const_iterator_a<> pit = _parameters.cbegin_();
+		auto local_shoal = unordered_shoal_t<>::val_();
+		auto& local = local_shoal.reference();
+		local.emplace(sym("$"), _shared);
+		local.emplace(sym("^"), thing);
+		auto eit = _evaluated.extract().cbegin();
 		forward_const_iterator_a<> ait = range.cbegin_();
-		while (pit != _parameters.cend_())
+		for (auto const& name : _names.extract())
 		{
-			auto name = cast<symbol_a<>>(*pit);
-			auto cat = cast<expression_a<>>(*++pit).operate_(thing, range);
-			if (!check<cat_a<>>(cat))
-			{
-				throw dis(_token.report() + "strange::expression_function::operate passed non-cat");
-			}
-			++pit;
+			auto cat = *eit++;
 			any_a<> argument = (ait == range.cend_())
-				? cast<expression_a<>>(*pit).operate_(thing, range)
+				? *eit
 				: (*ait++);
-			++pit;
+			++eit;
 			if (!argument.cats_().has_(cat))
 			{
 				throw dis(_token.report() + "strange::expression_function::operate cat does not include argument");
@@ -96,7 +105,7 @@ public:
 		}
 		try
 		{
-			return _expression.operate_(thing, range);
+			return _expression.operate_(local_shoal, range);
 		}
 		catch (return_i& ret)
 		{
@@ -160,11 +169,17 @@ public:
 protected:
 	expression_a<> const _expression;
 	range_a<> const _parameters;
+	flock_a<> const _names;
+	flock_a<> const _evaluated;
+	unordered_shoal_a<> const _shared;
 
-	inline expression_function_t(token_a<> const& token, expression_a<> const& expression, range_a<> const& parameters)
+	inline expression_function_t(token_a<> const& token, expression_a<> const& expression, range_a<> const& parameters, flock_a<> const& names, flock_a<> const& evaluated)
 		: expression_t(token, is_pure(expression, parameters), is_literal(expression, parameters))
 		, _expression{ expression }
 		, _parameters{ parameters }
+		, _names{ names }
+		, _evaluated{ evaluated }
+		, _shared{ unordered_shoal_t<true>::val_() }
 	{}
 
 	static inline bool is_pure(expression_a<> const& expression, range_a<> const& parameters)
