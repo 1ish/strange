@@ -54,5 +54,6 @@
 #include "strange_expression_flock_t.h"
 #include "strange_expression_shoal_t.h"
 #include "strange_expression_herd_t.h"
+#include "strange_expression_throw_t.h"
 
 #endif

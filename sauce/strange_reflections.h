@@ -76,5 +76,6 @@ class reflection;
 #include "strange_expression_flock_r.h"
 #include "strange_expression_shoal_r.h"
 #include "strange_expression_herd_r.h"
+#include "strange_expression_throw_r.h"
 
 #endif
