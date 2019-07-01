@@ -53,5 +53,6 @@
 #include "strange_expression_shared_scope_t.h"
 #include "strange_expression_flock_t.h"
 #include "strange_expression_shoal_t.h"
+#include "strange_expression_herd_t.h"
 
 #endif
