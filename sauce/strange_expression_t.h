@@ -74,6 +74,11 @@ public:
 		return _token;
 	}
 
+	static inline flock_a<> terms_()
+	{
+		return flock_t<>::val_();
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" $$strange::no[] ");

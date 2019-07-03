@@ -8,6 +8,7 @@
 #include "any_forward.hpp"
 #include "range_forward.hpp"
 #include "token_forward.hpp"
+#include "flock_forward.hpp"
 #include "unordered_shoal_forward.hpp"
 #include "river_forward.hpp"
 
@@ -24,6 +25,9 @@ public:
 
 	inline any_a<> token__(range_a<> const& _) const;
 	inline token_a<> token_() const;
+
+	inline any_a<> terms__(range_a<> const& _) const;
+	inline flock_a<> terms_() const;
 
 	inline any_a<> generate__(range_a<> const& range) const;
 	inline any_a<> generate_(number_data_a_int64 const& indent, river_a<>& river) const;

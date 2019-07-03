@@ -44,6 +44,11 @@ public:
 		return token_();
 	}
 
+	inline any_a<> terms__(range_a<> const&) const
+	{
+		return terms_();
+	}
+
 	inline any_a<> generate__(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
