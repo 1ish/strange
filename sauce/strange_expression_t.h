@@ -25,7 +25,6 @@ public:
 		{}
 	};
 
-
 	class  return_i : public std::runtime_error
 	{
 	public:
@@ -41,7 +40,7 @@ public:
 	using over = expression_o<expression_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		return val(token);
 	}
@@ -102,7 +101,7 @@ protected:
 		, _token(token)
 	{}
 
-	static inline bool pure_terms(token_a<> const& token, range_a<> const& terms)
+	static inline bool pure_terms(token_a<> const& token, flock_a<> const& terms)
 	{
 		for (auto const& term : terms)
 		{
@@ -118,7 +117,7 @@ protected:
 		return true;
 	}
 
-	static inline bool literal_terms(token_a<> const& token, range_a<> const& terms)
+	static inline bool literal_terms(token_a<> const& token, flock_a<> const& terms)
 	{
 		for (auto const& term : terms)
 		{
@@ -134,7 +133,7 @@ protected:
 		return true;
 	}
 
-	static inline std::pair<bool, bool> pure_literal_terms(token_a<> const& token, range_a<> const& terms)
+	static inline std::pair<bool, bool> pure_literal_terms(token_a<> const& token, flock_a<> const& terms)
 	{
 		std::pair<bool, bool> pure_literal(true, true);
 		for (auto const& term : terms)

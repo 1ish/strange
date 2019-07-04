@@ -12,7 +12,7 @@ public:
 	using over = expression_o<expression_local_insert_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
@@ -38,7 +38,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_local_insert::val passed non-expression");
 		}
-		return expression_a<>{ over{ expression_local_insert_t<>{ token, cast<cat_a<>>(cat), key, cast<expression_a<>>(val) } } };
+		return expression_a<>{ over{ expression_local_insert_t<>{ token, terms, cast<cat_a<>>(cat), key, cast<expression_a<>>(val) } } };
 	}
 
 	// reflection
@@ -75,6 +75,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		if (!check<symbol_a<>>(_key))
@@ -96,12 +101,14 @@ public:
 	}
 
 protected:
+	flock_a<> const _terms;
 	cat_a<> const _cat;
 	any_a<> const _key;
 	expression_a<> const _val;
 
-	inline expression_local_insert_t(token_a<> const& token, cat_a<> const& cat, any_a<> const& key, expression_a<> const& val)
+	inline expression_local_insert_t(token_a<> const& token, flock_a<> const& terms, cat_a<> const& cat, any_a<> const& key, expression_a<> const& val)
 		: expression_t{ token }
+		, _terms{ terms }
 		, _cat{ cat }
 		, _key{ key }
 		, _val{ val }

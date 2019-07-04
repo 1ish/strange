@@ -12,12 +12,12 @@ public:
 	using over = expression_o<expression_cat_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			return val(token);
+			return val(token, terms);
 		}
 		any_a<> name = *it;
 		if (!check<symbol_a<>>(name))
@@ -26,7 +26,7 @@ public:
 		}
 		if (++it == terms.cend_())
 		{
-			return val(token, cast<symbol_a<>>(name));
+			return val(token, terms, cast<symbol_a<>>(name));
 		}
 		any_a<> arguments = *it;
 		if (!check<expression_a<>>(arguments))
@@ -35,7 +35,7 @@ public:
 		}
 		if (++it == terms.cend_())
 		{
-			return val(token, cast<symbol_a<>>(name), cast<expression_a<>>(arguments));
+			return val(token, terms, cast<symbol_a<>>(name), cast<expression_a<>>(arguments));
 		}
 		any_a<> parameters = *it;
 		if (!check<expression_a<>>(parameters))
@@ -44,7 +44,7 @@ public:
 		}
 		if (++it == terms.cend_())
 		{
-			return val(token, cast<symbol_a<>>(name), cast<expression_a<>>(arguments), cast<expression_a<>>(parameters));
+			return val(token, terms, cast<symbol_a<>>(name), cast<expression_a<>>(arguments), cast<expression_a<>>(parameters));
 		}
 		any_a<> result = *it;
 		if (!check<expression_a<>>(result))
@@ -53,36 +53,36 @@ public:
 		}
 		if (++it == terms.cend_())
 		{
-			return val(token, cast<symbol_a<>>(name),
+			return val(token, terms, cast<symbol_a<>>(name),
 				cast<expression_a<>>(arguments),
 				cast<expression_a<>>(parameters),
 				cast<expression_a<>>(result));
 		}
-		return val(token, cast<symbol_a<>>(name),
+		return val(token, terms, cast<symbol_a<>>(name),
 			cast<expression_a<>>(arguments),
 			cast<expression_a<>>(parameters),
 			cast<expression_a<>>(result),
 			*it);
 	}
 
-	static inline expression_a<> val(token_a<> const& token, symbol_a<> const& name = sym(""))
+	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name = sym(""))
 	{
-		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, 1, name, expression_t<>::val(token), expression_t<>::val(token), expression_t<>::val(token), no()) });
+		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 1, name, expression_t<>::val(token), expression_t<>::val(token), expression_t<>::val(token), no()) });
 	}
 
-	static inline expression_a<> val(token_a<> const& token, symbol_a<> const& name, expression_a<> const& arguments)
+	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, expression_a<> const& arguments)
 	{
-		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, 2, name, arguments, expression_t<>::val(token), expression_t<>::val(token), no()) });
+		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 2, name, arguments, expression_t<>::val(token), expression_t<>::val(token), no()) });
 	}
 
-	static inline expression_a<> val(token_a<> const& token, symbol_a<> const& name, expression_a<> const& arguments, expression_a<> const& parameters)
+	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, expression_a<> const& arguments, expression_a<> const& parameters)
 	{
-		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, 3, name, arguments, parameters, expression_t<>::val(token), no()) });
+		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 3, name, arguments, parameters, expression_t<>::val(token), no()) });
 	}
 
-	static inline expression_a<> val(token_a<> const& token, symbol_a<> const& name, expression_a<> const& arguments, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& reference = no())
+	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, expression_a<> const& arguments, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& reference = no())
 	{
-		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, 4, name, arguments, parameters, result, reference) });
+		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 4, name, arguments, parameters, result, reference) });
 	}
 
 	// reflection
@@ -130,6 +130,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" <" + _name.to_string());
@@ -188,6 +193,7 @@ public:
 	}
 
 protected:
+	flock_a<> const _terms;
 	int64_t const _count;
 	symbol_a<> const _name;
 	expression_a<> const _arguments;
@@ -195,8 +201,9 @@ protected:
 	expression_a<> const _result;
 	any_a<> const _reference;
 
-	inline expression_cat_t(token_a<> const& token, int64_t count, symbol_a<> const& name, expression_a<> const& arguments, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& reference)
+	inline expression_cat_t(token_a<> const& token, flock_a<> const& terms, int64_t count, symbol_a<> const& name, expression_a<> const& arguments, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& reference)
 		: expression_t(token, arguments.pure() && parameters.pure() && result.pure(), arguments.literal() && parameters.literal() && result.literal()) // pure, literal
+		, _terms{ terms }
 		, _count{ count }
 		, _name{ name }
 		, _arguments{ arguments }

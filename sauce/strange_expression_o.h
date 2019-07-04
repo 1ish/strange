@@ -24,7 +24,7 @@ public:
 		{
 			throw dis("[expression] val passed non-token");
 		}
-		return val_(cast<token_a<>>(token), range_t<>::val_(++it, range.cend_()));
+		return val_(cast<token_a<>>(token), flock_t<>::val_() += range_t<>::val_(++it, range.cend_()));
 	}
 
 	inline any_a<> evaluate__(range_a<> const&) const

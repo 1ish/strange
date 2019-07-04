@@ -12,7 +12,7 @@ public:
 	using over = expression_o<expression_shoal_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		return expression_substitute_t<over>::val(over{ expression_shoal_t<>(token, terms) });
 	}
@@ -35,6 +35,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" {");
@@ -82,9 +87,9 @@ public:
 	}
 
 protected:
-	range_a<> const _terms;
+	flock_a<> const _terms;
 
-	inline expression_shoal_t(token_a<> const& token, range_a<> const& terms)
+	inline expression_shoal_t(token_a<> const& token, flock_a<> const& terms)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 	{}

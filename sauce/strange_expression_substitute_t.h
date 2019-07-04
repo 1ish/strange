@@ -16,7 +16,9 @@ public:
 			any_a<> literal = substituted.evaluate_();
 			if (expression_literal_t<>::validate(literal))
 			{
-				return expression_literal_t<>::val(substituted.token_(), literal);
+				flock_a<> terms = flock_t<>::val_();
+				terms.push_back(literal);
+				return expression_literal_t<>::val(substituted.token_(), terms, literal);
 			}
 			return expression_a<>{ expression_substitute_t(std::move(substituted), literal) };
 		}

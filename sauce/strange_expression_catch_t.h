@@ -12,7 +12,7 @@ public:
 	using over = expression_o<expression_catch_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
@@ -61,7 +61,7 @@ public:
 			}
 			++it;
 		}
-		return expression_substitute_t<over>::val(over{ expression_catch_t<>(token, cast<expression_a<>>(expression), range_t<>::val_(pit, terms.cend_()), names, cats) });
+		return expression_substitute_t<over>::val(over{ expression_catch_t<>(token, terms, cast<expression_a<>>(expression), range_t<>::val_(pit, terms.cend_()), names, cats) });
 	}
 
 	// reflection
@@ -114,6 +114,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const //TODO
 	{
 		river.write_string(" catch(");
@@ -167,13 +172,15 @@ public:
 	}
 
 protected:
+	flock_a<> const _terms;
 	expression_a<> const _expression;
 	range_a<> const _parameters;
 	flock_a<> const _names;
 	flock_a<> const _cats;
 
-	inline expression_catch_t(token_a<> const& token, expression_a<> const& expression, range_a<> const& parameters, flock_a<> const& names, flock_a<> const& cats)
+	inline expression_catch_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, range_a<> const& parameters, flock_a<> const& names, flock_a<> const& cats)
 		: expression_t(token, is_pure(expression, parameters), is_literal(expression, parameters))
+		, _terms{ terms }
 		, _expression{ expression }
 		, _parameters{ parameters }
 		, _names{ names }

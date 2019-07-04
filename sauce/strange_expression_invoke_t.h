@@ -12,7 +12,7 @@ public:
 	using over = expression_o<expression_invoke_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		return expression_substitute_t<over>::val(over{ expression_invoke_t<>(token, terms) });
 	}
@@ -35,6 +35,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		int64_t count = 0;
@@ -82,14 +87,14 @@ public:
 	}
 
 protected:
-	range_a<> const _terms;
+	flock_a<> const _terms;
 
-	inline expression_invoke_t(token_a<> const& token, range_a<> const& terms)
+	inline expression_invoke_t(token_a<> const& token, flock_a<> const& terms)
 		: expression_t(token, is_pure_literal(token, terms))
 		, _terms{ terms }
 	{}
 
-	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, range_a<> const& terms)
+	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, flock_a<> const& terms)
 	{
 		std::pair<bool, bool> pure_literal(true, true);
 		auto it = terms.cbegin_();

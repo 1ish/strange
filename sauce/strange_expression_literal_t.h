@@ -12,19 +12,19 @@ public:
 	using over = expression_o<expression_literal_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
 			throw dis(token.report() + "strange::expression_literal::val not passed any terms");
 		}
-		return val(token, *it);
+		return val(token, terms, *it);
 	}
 
-	static inline expression_a<> val(token_a<> const& token, any_a<> const& literal)
+	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, any_a<> const& literal)
 	{
-		return expression_a<>{ over{ expression_literal_t<>{ token, literal } } };
+		return expression_a<>{ over{ expression_literal_t<>{ token, terms, literal } } };
 	}
 
 	// validation
@@ -77,6 +77,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		if (_literal.type_() == symbol_t<>::type_())
@@ -208,10 +213,12 @@ public:
 	}
 
 protected:
+	flock_a<> const _terms;
 	any_a<> const _literal;
 
-	inline expression_literal_t(token_a<> const& token, any_a<> const& literal)
+	inline expression_literal_t(token_a<> const& token, flock_a<> const& terms, any_a<> const& literal)
 		: expression_t(token, true, true) // pure, literal
+		, _terms{ terms }
 		, _literal{ literal }
 	{}
 };

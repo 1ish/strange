@@ -12,7 +12,7 @@ public:
 	using over = expression_o<expression_operate_range_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		auto it = terms.cbegin_();
 		if (it == terms.cend_())
@@ -33,7 +33,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_operate_range::val passed non-expression range term");
 		}
-		return expression_substitute_t<over>::val(over{ expression_operate_range_t<>(token, cast<expression_a<>>(thing), cast<expression_a<>>(range)) });
+		return expression_substitute_t<over>::val(over{ expression_operate_range_t<>(token, terms, cast<expression_a<>>(thing), cast<expression_a<>>(range)) });
 	}
 
 	// reflection
@@ -60,6 +60,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		_thing.generate(indent, river);
@@ -76,11 +81,13 @@ public:
 	}
 
 protected:
+	flock_a<> const _terms;
 	expression_a<> const _thing;
 	expression_a<> const _range;
 
-	inline expression_operate_range_t(token_a<> const& token, expression_a<> const& thing, expression_a<> const& range)
+	inline expression_operate_range_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, expression_a<> const& range)
 		: expression_t(token, is_pure_literal(token, thing, range))
+		, _terms{ terms }
 		, _thing{ thing }
 		, _range{ range }
 	{}

@@ -12,7 +12,7 @@ public:
 	using over = expression_o<expression_shared_scope_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
@@ -28,7 +28,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_shared_scope::val passed too few terms");
 		}
-		return expression_a<>{ over{ expression_shared_scope_t<>(token, cast<unordered_shoal_a<>>(shared), *it) } };
+		return expression_a<>{ over{ expression_shared_scope_t<>(token, terms, cast<unordered_shoal_a<>>(shared), *it) } };
 	}
 
 	// reflection
@@ -54,6 +54,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		if (!check<symbol_a<>>(_key))
@@ -73,11 +78,13 @@ public:
 	}
 
 protected:
+	flock_a<> const _terms;
 	unordered_shoal_a<> const _shared;
 	any_a<> const _key;
 
-	inline expression_shared_scope_t(token_a<> const& token, unordered_shoal_a<> const& shared, any_a<> const& key)
+	inline expression_shared_scope_t(token_a<> const& token, flock_a<> const& terms, unordered_shoal_a<> const& shared, any_a<> const& key)
 		: expression_t{ token }
+		, _terms{ terms }
 		, _shared{ shared }
 		, _key{ key }
 	{}

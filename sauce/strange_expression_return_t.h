@@ -12,29 +12,29 @@ public:
 	using over = expression_o<expression_return_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			return val(token);
+			return val(token, terms);
 		}
 		any_a<> result = *it;
 		if (!check<expression_a<>>(result))
 		{
 			throw dis("strange::expression_return::val passed non-expression result");
 		}
-		return val(token, cast<expression_a<>>(result));
+		return val(token, terms, cast<expression_a<>>(result));
 	}
 
-	static inline expression_a<> val(token_a<> const& token)
+	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_a<>{ over{ expression_return_t<>(token, expression_t<>::val(token)) } };
+		return expression_a<>{ over{ expression_return_t<>(token, terms, expression_t<>::val(token)) } };
 	}
 
-	static inline expression_a<> val(token_a<> const& token, expression_a<> const& result)
+	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, expression_a<> const& result)
 	{
-		return expression_a<>{ over{ expression_return_t<>(token, result) } };
+		return expression_a<>{ over{ expression_return_t<>(token, terms, result) } };
 	}
 
 	// reflection
@@ -55,6 +55,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" return[");
@@ -70,10 +75,12 @@ public:
 	}
 
 protected:
+	flock_a<> const _terms;
 	expression_a<> const _result;
 
-	inline expression_return_t(token_a<> const& token, expression_a<> const& result)
+	inline expression_return_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& result)
 		: expression_t(token, result.pure(), result.literal()) // pure, literal
+		, _terms{ terms }
 		, _result{ result }
 	{}
 };

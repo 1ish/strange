@@ -12,29 +12,29 @@ public:
 	using over = expression_o<expression_throw_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			return val(token);
+			return val(token, terms);
 		}
 		any_a<> exception = *it;
 		if (!check<expression_a<>>(exception))
 		{
 			throw dis("strange::expression_throw::val passed non-expression exception");
 		}
-		return val(token, cast<expression_a<>>(exception));
+		return val(token, terms, cast<expression_a<>>(exception));
 	}
 
-	static inline expression_a<> val(token_a<> const& token)
+	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_a<>{ over{ expression_throw_t<>(token, expression_t<>::val(token)) } };
+		return expression_a<>{ over{ expression_throw_t<>(token, terms, expression_t<>::val(token)) } };
 	}
 
-	static inline expression_a<> val(token_a<> const& token, expression_a<> const& exception)
+	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, expression_a<> const& exception)
 	{
-		return expression_a<>{ over{ expression_throw_t<>(token, exception) } };
+		return expression_a<>{ over{ expression_throw_t<>(token, terms, exception) } };
 	}
 
 	// reflection
@@ -55,6 +55,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" throw[");
@@ -70,10 +75,12 @@ public:
 	}
 
 protected:
+	flock_a<> const _terms;
 	expression_a<> const _exception;
 
-	inline expression_throw_t(token_a<> const& token, expression_a<> const& exception)
+	inline expression_throw_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& exception)
 		: expression_t(token, exception.pure(), exception.literal()) // pure, literal
+		, _terms{ terms }
 		, _exception{ exception }
 	{}
 };

@@ -12,14 +12,14 @@ public:
 	using over = expression_o<expression_shared_at_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
 			throw dis(token.report() + "strange::expression_shared_at::val not passed any terms");
 		}
-		return expression_a<>{ over{ expression_shared_at_t<>{ token, *it } } };
+		return expression_a<>{ over{ expression_shared_at_t<>{ token, terms, *it } } };
 	}
 
 	// reflection
@@ -66,6 +66,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		if (!check<symbol_a<>>(_key))
@@ -85,10 +90,12 @@ public:
 	}
 
 protected:
+	flock_a<> const _terms;
 	any_a<> const _key;
 
-	inline expression_shared_at_t(token_a<> const& token, any_a<> const& key)
+	inline expression_shared_at_t(token_a<> const& token, flock_a<> const& terms, any_a<> const& key)
 		: expression_t{ token }
+		, _terms{ terms }
 		, _key{ key }
 	{}
 };

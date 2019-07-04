@@ -12,7 +12,7 @@ public:
 	using over = expression_o<expression_function_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, range_a<> const& terms)
+	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
@@ -62,7 +62,7 @@ public:
 			evaluated.push_back(cast<expression_a<>>(default_expression).evaluate_());
 			++it;
 		}
-		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, cast<expression_a<>>(expression), range_t<>::val_(pit, terms.cend_()), names, evaluated) });
+		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, terms, cast<expression_a<>>(expression), range_t<>::val_(pit, terms.cend_()), names, evaluated) });
 	}
 
 	// reflection
@@ -114,6 +114,11 @@ public:
 	}
 
 	// expression
+	inline flock_a<> terms_() const
+	{
+		return _terms;
+	}
+
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" function(");
@@ -167,14 +172,16 @@ public:
 	}
 
 protected:
+	flock_a<> const _terms;
 	expression_a<> const _expression;
 	range_a<> const _parameters;
 	flock_a<> const _names;
 	flock_a<> const _evaluated;
 	unordered_shoal_a<> const _shared;
 
-	inline expression_function_t(token_a<> const& token, expression_a<> const& expression, range_a<> const& parameters, flock_a<> const& names, flock_a<> const& evaluated)
+	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, range_a<> const& parameters, flock_a<> const& names, flock_a<> const& evaluated)
 		: expression_t(token, is_pure(expression, parameters), is_literal(expression, parameters))
+		, _terms{ terms }
 		, _expression{ expression }
 		, _parameters{ parameters }
 		, _names{ names }
