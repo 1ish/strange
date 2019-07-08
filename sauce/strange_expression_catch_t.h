@@ -26,42 +26,42 @@ public:
 		}
 		auto names = flock_t<>::val_();
 		auto cats = flock_t<>::val_();
-		forward_const_iterator_a<> pit = ++it;
-		while (it != terms.cend_())
+		auto values = flock_t<>::val_();
+		while (++it != terms.cend_())
 		{
-			auto name = *it;
+			auto term = *it;
+			if (!check<expression_a<>>(term))
+			{
+				throw dis(token.report() + "strange::expression_catch::val passed non-expression catch");
+			}
+			auto subterms = cast<expression_a<>>(term).terms_();
+			if (subterms.size() != 3)
+			{
+				throw dis(token.report() + "strange::expression_catch::val passed wrong number of subterms");
+			}
+
+			auto name = subterms.at_index(0);
 			if (!check<symbol_a<>>(name))
 			{
 				throw dis(token.report() + "strange::expression_catch::val passed non-symbol name");
 			}
 			names.push_back(name);
-			if (++it == terms.cend_())
-			{
-				throw dis(token.report() + "strange::expression_catch::val passed short range");
-			}
-			auto cat_expression = *it;
-			if (!check<expression_a<>>(cat_expression))
-			{
-				throw dis(token.report() + "strange::expression_catch::val passed non-expression cat");
-			}
-			auto cat = cast<expression_a<>>(cat_expression).evaluate_();
+
+			auto cat = subterms.at_index(1);
 			if (!check<cat_a<>>(cat))
 			{
 				throw dis(token.report() + "strange::expression_catch::val passed non-cat");
 			}
 			cats.push_back(cat);
-			if (++it == terms.cend_())
-			{
-				throw dis(token.report() + "strange::expression_catch::val passed short range");
-			}
-			auto catch_expression = *it;
-			if (!check<expression_a<>>(catch_expression))
+
+			auto value = subterms.at_index(2);
+			if (!check<expression_a<>>(value))
 			{
 				throw dis(token.report() + "strange::expression_catch::val passed non-expression catch");
 			}
-			++it;
+			values.push_back(value);
 		}
-		return expression_substitute_t<over>::val(over{ expression_catch_t<>(token, terms, cast<expression_a<>>(expression), range_t<>::val_(pit, terms.cend_()), names, cats) });
+		return expression_substitute_t<over>::val(over{ expression_catch_t<>(token, terms, cast<expression_a<>>(expression), names, cats, values) });
 	}
 
 	// reflection
@@ -95,19 +95,16 @@ public:
 		}
 		catch (any_a<>& exception)
 		{
-			auto pit = _parameters.cbegin_();
 			auto cit = _cats.extract().cbegin();
+			auto vit = _values.extract().cbegin();
 			for (auto const& name : _names.extract())
 			{
-				++pit;
-				++pit;
-				auto cat = *cit++;
-				if (exception.cats_().has_(cat))
+				if (exception.cats_().has_(*cit++))
 				{
 					cast<unordered_shoal_a<>>(thing).update_(name, exception);
-					return pit->operate_(thing, range);
+					return vit->operate_(thing, range);
 				}
-				++pit;
+				++vit;
 			}
 			throw;
 		}
@@ -122,9 +119,9 @@ public:
 	inline void generate(int64_t indent, river_a<>& river) const //TODO
 	{
 		river.write_string(" catch(");
-		forward_const_iterator_a<> pit = _parameters.cbegin_();
+		forward_const_iterator_a<> it = _terms.cbegin_();
 		bool first = true;
-		while (pit != _parameters.cend_())
+		while (++it != _terms.cend_())
 		{
 			if (first)
 			{
@@ -134,11 +131,7 @@ public:
 			{
 				river.write_string(",");
 			}
-			river.write_string(cast<symbol_a<>>(*pit).to_string() + " :");
-			cast<expression_a<>>(*++pit).generate(indent, river);
-			river.write_string("=");
-			cast<expression_a<>>(*++pit).generate(indent, river);
-			++pit;
+			cast<expression_a<>>(*it).generate(indent, river);
 		}
 		river.write_string(")\n");
 		_expression.generate(indent, river);
@@ -147,9 +140,10 @@ public:
 	inline void generate_cpp(int64_t indent, river_a<>& river) const //TODO
 	{
 		river.write_string(" catch(");
-		forward_const_iterator_a<> pit = _parameters.cbegin_();
+		forward_const_iterator_a<> cit = _cats.cbegin_();
+		forward_const_iterator_a<> vit = _values.cbegin_();
 		bool first = true;
-		while (pit != _parameters.cend_())
+		for (auto const& name : _names)
 		{
 			if (first)
 			{
@@ -159,77 +153,26 @@ public:
 			{
 				river.write_string(",");
 			}
-			auto name = cast<symbol_a<>>(*pit).to_string();
-			cast<expression_a<>>(*++pit).generate_cpp(indent, river);
-			river.write_string( name + " =");
-			cast<expression_a<>>(*++pit).generate_cpp(indent, river);
-			++pit;
+			river.write_string(cast<symbol_a<>>(name).to_string());
 		}
 		river.write_string(")\n");
-		river.write_string("{\n");
-		_expression.generate_cpp(indent, river);
-		river.write_string("}\n");
 	}
 
 protected:
 	flock_a<> const _terms;
 	expression_a<> const _expression;
-	range_a<> const _parameters;
 	flock_a<> const _names;
 	flock_a<> const _cats;
+	flock_a<> const _values;
 
-	inline expression_catch_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, range_a<> const& parameters, flock_a<> const& names, flock_a<> const& cats)
-		: expression_t(token, is_pure(expression, parameters), is_literal(expression, parameters))
+	inline expression_catch_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, flock_a<> const& names, flock_a<> const& cats, flock_a<> const& values)
+		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _expression{ expression }
-		, _parameters{ parameters }
 		, _names{ names }
 		, _cats{ cats }
+		, _values{ values }
 	{}
-
-	static inline bool is_pure(expression_a<> const& expression, range_a<> const& parameters)
-	{
-		if (!expression.pure())
-		{
-			return false;
-		}
-		forward_const_iterator_a<> pit = parameters.cbegin_();
-		while (pit != parameters.cend_())
-		{
-			if (!cast<expression_a<>>(*++pit).pure())
-			{
-				return false;
-			}
-			if (!cast<expression_a<>>(*++pit).pure())
-			{
-				return false;
-			}
-			++pit;
-		}
-		return true;
-	}
-
-	static inline bool is_literal(expression_a<> const& expression, range_a<> const& parameters)
-	{
-		if (!expression.literal())
-		{
-			return false;
-		}
-		forward_const_iterator_a<> pit = parameters.cbegin_();
-		while (pit != parameters.cend_())
-		{
-			if (!cast<expression_a<>>(*++pit).literal())
-			{
-				return false;
-			}
-			if (!cast<expression_a<>>(*++pit).literal())
-			{
-				return false;
-			}
-			++pit;
-		}
-		return true;
-	}
 };
 
 } // namespace strange
