@@ -144,7 +144,7 @@ public:
 		forward_const_iterator_a<> vit = _values.cbegin_();
 		for (auto const& name : _names)
 		{
-			river.write_string("catch(" + cast<cat_a<>>(*cit++).name_().to_string() + "_a const& exception)\n{\n");
+			river.write_string("catch(" + cast<cat_a<>>(*cit++).name_().to_string() + "_a<> const& exception)\n{\n");
 			cast<expression_a<>>(*vit++).generate_cpp(indent, river);
 			river.write_string("\n}\n");
 		}
