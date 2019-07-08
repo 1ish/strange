@@ -19,6 +19,11 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_local_update::val not passed any terms");
 		}
+		any_a<> key = *it;
+		if (++it == terms.cend_())
+		{
+			throw dis(token.report() + "strange::expression_local_update::val not passed sufficient terms");
+		}
 		any_a<> cat = *it;
 		if (!check<cat_a<>>(cat))
 		{
@@ -28,17 +33,12 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_local_update::val not passed sufficient terms");
 		}
-		any_a<> key = *it;
-		if (++it == terms.cend_())
-		{
-			throw dis(token.report() + "strange::expression_local_update::val not passed sufficient terms");
-		}
 		any_a<> val = *it;
 		if (!check<expression_a<>>(val))
 		{
 			throw dis(token.report() + "strange::expression_local_update::val passed non-expression");
 		}
-		return expression_a<>{ over{ expression_local_update_t<>{ token, terms, cast<cat_a<>>(cat), key, cast<expression_a<>>(val) } } };
+		return expression_a<>{ over{ expression_local_update_t<>{ token, terms, key, cast<cat_a<>>(cat), cast<expression_a<>>(val) } } };
 	}
 
 	// reflection
@@ -103,15 +103,15 @@ public:
 
 protected:
 	flock_a<> const _terms;
-	cat_a<> const _cat;
 	any_a<> const _key;
+	cat_a<> const _cat;
 	expression_a<> const _val;
 
-	inline expression_local_update_t(token_a<> const& token, flock_a<> const& terms, cat_a<> const& cat, any_a<> const& key, expression_a<> const& val)
+	inline expression_local_update_t(token_a<> const& token, flock_a<> const& terms, any_a<> const& key, cat_a<> const& cat, expression_a<> const& val)
 		: expression_t{ token }
 		, _terms{ terms }
-		, _cat{ cat }
 		, _key{ key }
+		, _cat{ cat }
 		, _val{ val }
 	{}
 };
