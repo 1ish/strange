@@ -116,12 +116,11 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t indent, river_a<>& river) const //TODO
+	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" catch(");
-		forward_const_iterator_a<> it = _terms.cbegin_();
 		bool first = true;
-		while (++it != _terms.cend_())
+		for (auto const& term : _terms)
 		{
 			if (first)
 			{
@@ -129,33 +128,26 @@ public:
 			}
 			else
 			{
-				river.write_string(",");
+				river.write_string("\n,");
 			}
-			cast<expression_a<>>(*it).generate(indent, river);
+			cast<expression_a<>>(term).generate(indent, river);
 		}
-		river.write_string(")\n");
-		_expression.generate(indent, river);
+		river.write_string("\n)\n");
 	}
 
-	inline void generate_cpp(int64_t indent, river_a<>& river) const //TODO
+	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" catch(");
+		river.write_string("try\n{\n");
+		_expression.generate_cpp(indent, river);
+		river.write_string("\n}\n");
 		forward_const_iterator_a<> cit = _cats.cbegin_();
 		forward_const_iterator_a<> vit = _values.cbegin_();
-		bool first = true;
 		for (auto const& name : _names)
 		{
-			if (first)
-			{
-				first = false;
-			}
-			else
-			{
-				river.write_string(",");
-			}
-			river.write_string(cast<symbol_a<>>(name).to_string());
+			river.write_string("catch(" + cast<cat_a<>>(*cit++).name_().to_string() + "_a const& exception)\n{\n");
+			cast<expression_a<>>(*vit++).generate_cpp(indent, river);
+			river.write_string("\n}\n");
 		}
-		river.write_string(")\n");
 	}
 
 protected:
