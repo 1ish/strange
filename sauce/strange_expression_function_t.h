@@ -23,6 +23,7 @@ public:
 		{
 			if (value)
 			{
+				values.push_back(value);
 				evaluated.push_back(cast<expression_a<>>(value).evaluate_());
 			}
 
@@ -55,9 +56,12 @@ public:
 			{
 				throw dis(token.report() + "strange::expression_function::val passed non-expression catch");
 			}
-			values.push_back(value);
 		}
-		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, terms, names, cats, values, evaluated) });
+		if (!value)
+		{
+			throw dis(token.report() + "strange::expression_function::val passed no terms");
+		}
+		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, terms, names, cats, values, evaluated, cast<expression_a<>>(value)) });
 	}
 
 	// reflection
@@ -86,10 +90,8 @@ public:
 		forward_const_iterator_a<> ait = range.cbegin_();
 		auto nit = _names.extract().cbegin();
 		auto cit = _cats.extract().cbegin();
-		auto vit = _values.extract().cbegin();
 		for (auto const& eval : _evaluated.extract())
 		{
-			++vit;
 			any_a<> argument = (ait == range.cend_())
 				? eval
 				: (*ait++);
@@ -101,7 +103,7 @@ public:
 		}
 		try
 		{
-			auto result = vit->operate_(local_shoal, range);
+			auto result = _expression.operate_(local_shoal, range);
 			if (!result.cats_().has_(*cit))
 			{
 				throw dis(_token.report() + "strange::expression_function::operate cat does not include result");
@@ -149,7 +151,7 @@ public:
 			value.generate(indent, river);
 		}
 		river.write_string(")\n");
-		cast<expression_a<>>(*vit).generate(indent, river);
+		_expression.generate(indent, river);
 	}
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
@@ -177,7 +179,7 @@ public:
 			value.generate_cpp(indent, river);
 		}
 		river.write_string(")\n{\n");
-		cast<expression_a<>>(*vit).generate_cpp(indent, river);
+		_expression.generate_cpp(indent, river);
 		river.write_string("}\n");
 	}
 
@@ -187,15 +189,17 @@ protected:
 	flock_a<> const _cats;
 	flock_a<> const _values;
 	flock_a<> const _evaluated;
+	expression_a<> const _expression;
 	unordered_shoal_a<> const _shared;
 
-	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& cats, flock_a<> const& values, flock_a<> const& evaluated)
+	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& cats, flock_a<> const& values, flock_a<> const& evaluated, expression_a<> const& expression)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _names{ names }
 		, _cats{ cats }
 		, _values{ values }
 		, _evaluated{ evaluated }
+		, _expression{ expression }
 		, _shared{ unordered_shoal_t<true>::val_() }
 	{}
 };
