@@ -14,55 +14,50 @@ public:
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
-		forward_const_iterator_a<> it = terms.cbegin_();
-		if (it == terms.cend_())
-		{
-			throw dis(token.report() + "strange::expression_function::val not passed any terms");
-		}
-		any_a<> expression = *it;
-		if (!check<expression_a<>>(expression))
-		{
-			throw dis(token.report() + "strange::expression_function::val passed non-expression");
-		}
 		auto names = flock_t<>::val_();
+		auto cats = flock_t<>::val_();
+		auto values = flock_t<>::val_();
 		auto evaluated = flock_t<>::val_();
-		forward_const_iterator_a<> pit = ++it;
-		while (it != terms.cend_())
+		any_a<> value = no();
+		for (auto const& term : terms)
 		{
-			auto name = *it;
+			if (value)
+			{
+				evaluated.push_back(cast<expression_a<>>(value).evaluate_());
+			}
+
+			if (!check<expression_a<>>(term))
+			{
+				throw dis(token.report() + "strange::expression_function::val passed non-expression catch");
+			}
+			auto subterms = cast<expression_a<>>(term).terms_();
+			if (subterms.size() != 3)
+			{
+				throw dis(token.report() + "strange::expression_function::val passed wrong number of subterms");
+			}
+
+			auto name = subterms.at_index(0);
 			if (!check<symbol_a<>>(name))
 			{
 				throw dis(token.report() + "strange::expression_function::val passed non-symbol name");
 			}
 			names.push_back(name);
-			if (++it == terms.cend_())
-			{
-				throw dis(token.report() + "strange::expression_function::val passed short range");
-			}
-			auto cat_expression = *it;
-			if (!check<expression_a<>>(cat_expression))
-			{
-				throw dis(token.report() + "strange::expression_function::val passed non-expression cat");
-			}
-			auto cat = cast<expression_a<>>(cat_expression).evaluate_();
+
+			auto cat = subterms.at_index(1);
 			if (!check<cat_a<>>(cat))
 			{
 				throw dis(token.report() + "strange::expression_function::val passed non-cat");
 			}
-			evaluated.push_back(cat);
-			if (++it == terms.cend_())
+			cats.push_back(cat);
+
+			value = subterms.at_index(2);
+			if (!check<expression_a<>>(value))
 			{
-				throw dis(token.report() + "strange::expression_function::val passed short range");
+				throw dis(token.report() + "strange::expression_function::val passed non-expression catch");
 			}
-			auto default_expression = *it;
-			if (!check<expression_a<>>(default_expression))
-			{
-				throw dis(token.report() + "strange::expression_function::val passed non-expression default");
-			}
-			evaluated.push_back(cast<expression_a<>>(default_expression).evaluate_());
-			++it;
+			values.push_back(value);
 		}
-		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, terms, cast<expression_a<>>(expression), range_t<>::val_(pit, terms.cend_()), names, evaluated) });
+		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, terms, names, cats, values, evaluated) });
 	}
 
 	// reflection
@@ -88,27 +83,37 @@ public:
 		auto& local = local_shoal.reference();
 		local.emplace(sym("$"), _shared);
 		local.emplace(sym("^"), thing);
-		auto eit = _evaluated.extract().cbegin();
 		forward_const_iterator_a<> ait = range.cbegin_();
-		for (auto const& name : _names.extract())
+		auto nit = _names.extract().cbegin();
+		auto cit = _cats.extract().cbegin();
+		auto vit = _values.extract().cbegin();
+		for (auto const& eval : _evaluated.extract())
 		{
-			auto cat = *eit++;
+			++vit;
 			any_a<> argument = (ait == range.cend_())
-				? *eit
+				? eval
 				: (*ait++);
-			++eit;
-			if (!argument.cats_().has_(cat))
+			if (!argument.cats_().has_(*cit++))
 			{
 				throw dis(_token.report() + "strange::expression_function::operate cat does not include argument");
 			}
-			local.emplace(name, argument);
+			local.emplace(*nit++, argument);
 		}
 		try
 		{
-			return _expression.operate_(local_shoal, range);
+			auto result = vit->operate_(local_shoal, range);
+			if (!result.cats_().has_(*cit))
+			{
+				throw dis(_token.report() + "strange::expression_function::operate cat does not include result");
+			}
+			return result;
 		}
 		catch (return_i& ret)
 		{
+			if (!ret.result.cats_().has_(*cit))
+			{
+				throw dis(_token.report() + "strange::expression_function::operate cat does not include result");
+			}
 			return ret.result;
 		}
 	}
@@ -122,9 +127,11 @@ public:
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" function(");
-		forward_const_iterator_a<> pit = _parameters.cbegin_();
+		auto nit = _names.extract().cbegin();
+		auto cit = _cats.extract().cbegin();
+		auto vit = _values.extract().cbegin();
 		bool first = true;
-		while (pit != _parameters.cend_())
+		for (auto const& eval : _evaluated.extract())
 		{
 			if (first)
 			{
@@ -134,22 +141,25 @@ public:
 			{
 				river.write_string(",");
 			}
-			river.write_string(cast<symbol_a<>>(*pit).to_string() + " :");
-			cast<expression_a<>>(*++pit).generate(indent, river);
-			river.write_string("=");
-			cast<expression_a<>>(*++pit).generate(indent, river);
-			++pit;
+			auto name = cast<symbol_a<>>(*nit++);
+			auto cat = cast<cat_a<>>(*cit++);
+			auto value = cast<expression_a<>>(*vit++);
+			river.write_string(name.to_string() + ":");
+			river.write_string(cat.to_string() + "=");
+			value.generate(indent, river);
 		}
 		river.write_string(")\n");
-		_expression.generate(indent, river);
+		cast<expression_a<>>(*vit).generate(indent, river);
 	}
 
 	inline void generate_cpp(int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" [](");
-		forward_const_iterator_a<> pit = _parameters.cbegin_();
+		auto nit = _names.extract().cbegin();
+		auto cit = _cats.extract().cbegin();
+		auto vit = _values.extract().cbegin();
 		bool first = true;
-		while (pit != _parameters.cend_())
+		for (auto const& eval : _evaluated.extract())
 		{
 			if (first)
 			{
@@ -159,79 +169,35 @@ public:
 			{
 				river.write_string(",");
 			}
-			auto name = cast<symbol_a<>>(*pit).to_string();
-			cast<expression_a<>>(*++pit).generate_cpp(indent, river);
-			river.write_string( name + " =");
-			cast<expression_a<>>(*++pit).generate_cpp(indent, river);
-			++pit;
+			auto name = cast<symbol_a<>>(*nit++);
+			auto cat = cast<cat_a<>>(*cit++);
+			auto value = cast<expression_a<>>(*vit++);
+			river.write_string("catch(" + cat.name_().to_string() + "_a<> const& ");
+			river.write_string(name.to_string() + " =");
+			value.generate_cpp(indent, river);
 		}
-		river.write_string(")\n");
-		river.write_string("{\n");
-		_expression.generate_cpp(indent, river);
+		river.write_string(")\n{\n");
+		cast<expression_a<>>(*vit).generate_cpp(indent, river);
 		river.write_string("}\n");
 	}
 
 protected:
 	flock_a<> const _terms;
-	expression_a<> const _expression;
-	range_a<> const _parameters;
 	flock_a<> const _names;
+	flock_a<> const _cats;
+	flock_a<> const _values;
 	flock_a<> const _evaluated;
 	unordered_shoal_a<> const _shared;
 
-	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, range_a<> const& parameters, flock_a<> const& names, flock_a<> const& evaluated)
-		: expression_t(token, is_pure(expression, parameters), is_literal(expression, parameters))
+	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& cats, flock_a<> const& values, flock_a<> const& evaluated)
+		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
-		, _expression{ expression }
-		, _parameters{ parameters }
 		, _names{ names }
+		, _cats{ cats }
+		, _values{ values }
 		, _evaluated{ evaluated }
 		, _shared{ unordered_shoal_t<true>::val_() }
 	{}
-
-	static inline bool is_pure(expression_a<> const& expression, range_a<> const& parameters)
-	{
-		if (!expression.pure())
-		{
-			return false;
-		}
-		forward_const_iterator_a<> pit = parameters.cbegin_();
-		while (pit != parameters.cend_())
-		{
-			if (!cast<expression_a<>>(*++pit).pure())
-			{
-				return false;
-			}
-			if (!cast<expression_a<>>(*++pit).pure())
-			{
-				return false;
-			}
-			++pit;
-		}
-		return true;
-	}
-
-	static inline bool is_literal(expression_a<> const& expression, range_a<> const& parameters)
-	{
-		if (!expression.literal())
-		{
-			return false;
-		}
-		forward_const_iterator_a<> pit = parameters.cbegin_();
-		while (pit != parameters.cend_())
-		{
-			if (!cast<expression_a<>>(*++pit).literal())
-			{
-				return false;
-			}
-			if (!cast<expression_a<>>(*++pit).literal())
-			{
-				return false;
-			}
-			++pit;
-		}
-		return true;
-	}
 };
 
 } // namespace strange
