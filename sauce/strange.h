@@ -25,10 +25,13 @@
 // things
 #include "strange_things.h"
 
-// operations
+// reflections
 #include "strange_reflections.h"
 
 // definitions
 #include "strange_definitions.h"
+
+// creatures
+#include "strange_creatures.h"
 
 #endif
