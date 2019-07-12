@@ -126,6 +126,9 @@ TEST(TestCaseName, ForLoop)
 	unordered_shoal_a<> uos = unordered_shoal_t<>::val_(std::make_pair(concurrent_ordered_herd, concurrent_ordered_shoal), std::make_pair(concurrent_squad, concurrent_unordered_herd));
 
 	expression_a<> exp = cast<expression_a<>>(expression_o<expression_break_t<>>::val__(token.ranged_()));
+
+	any_a<> creature = creature_c<>::val_(uos);
+	exp.shared_();
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

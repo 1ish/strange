@@ -8,6 +8,12 @@ template <typename _ABSTRACTION_ = any_a<>>
 class creature_c : public one_t
 {
 public:
+	// construction
+	static inline any_a<> val_(shoal_a<> const& creation)
+	{
+		return any_a<>{ creature_c{ creation } };
+	}
+
 	// erasure
 	inline _ABSTRACTION_ const me_() const
 	{
@@ -20,6 +26,54 @@ public:
 	}
 
 	// reflection
+	inline any_a<> type__(range_a<> const&) const
+	{
+		return type_();
+	}
+
+	inline symbol_a<> type_() const
+	{
+		return sym("strange::creature");
+	}
+
+	inline any_a<> share__(range_a<> const& range) const
+	{
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
+		{
+			throw dis("[thing] share passed empty range");
+		}
+		any_a<> thing = *it;
+		if (!check<shoal_a<>>(thing))
+		{
+			throw dis("[thing] share passed non-shoal");
+		}
+		return share_(cast<shoal_a<>>(thing, true));
+	}
+
+	inline shoal_a<> share_(shoal_a<>& shoal) const
+	{
+		share(shoal);
+		return shoal;
+	}
+
+	inline void share(shoal_a<>& shoal) const
+	{
+
+	}
+
+	inline any_a<> shared__(range_a<> const&) const
+	{
+		return shared_();
+	}
+
+	inline unordered_shoal_a<> shared_() const
+	{
+		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
+		share(shoal);
+		return shoal;
+	}
+
 	static inline any_a<> cat__(range_a<> const&)
 	{
 		return cat_();
@@ -48,6 +102,11 @@ public:
 	static inline unordered_shoal_a<> operations_()
 	{
 		return reflection<_ABSTRACTION_>::operations();
+	}
+
+	inline any_a<> eater__(range_a<> const&) const
+	{
+		return eater_();
 	}
 
 	static inline any_a<> eater_()
@@ -197,7 +256,67 @@ public:
 		return no();
 	}
 
+	inline any_a<> same__(range_a<> const& range) const
+	{
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
+		{
+			throw dis("[thing] same passed empty range");
+		}
+		return same_(*it);
+	}
+
+	inline any_a<> same_(any_a<> const& thing) const
+	{
+		return boole(operator==(thing));
+	}
+
+	inline bool operator==(any_a<> const& thing) const
+	{
+		return !operator!=(thing);
+	}
+
+	inline any_a<> different__(range_a<> const& range) const
+	{
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
+		{
+			throw dis("[thing] different passed empty range");
+		}
+		return different_(*it);
+	}
+
+	inline any_a<> different_(any_a<> const& thing) const
+	{
+		return boole(operator!=(thing));
+	}
+
+	inline bool operator!=(any_a<> const& thing) const
+	{
+		return !operator==(thing);
+	}
+
+	inline any_a<> hash__(range_a<> const&) const
+	{
+		return hash_();
+	}
+
+	inline number_data_a<uint64_t> hash_() const
+	{
+		return number_uint_64_t<>::val(uint64_t(hash()));
+	}
+
+	inline std::size_t hash() const
+	{
+		return 0;
+	}
+
 	// conversion
+	inline any_a<> ranged__(range_a<> const& _) const
+	{
+		return ranged_();
+	}
+
 	inline range_a<> ranged_() const
 	{
 		return range_t<>::val_(it_t<true>::val_(me_()), it_t<true>::val_());
@@ -232,9 +351,12 @@ public:
 	{}
 
 protected:
+	shoal_a<> const _creation;
+
 	// construction
-	inline creature_c()
+	inline creature_c(shoal_a<> const& creation)
 		: one_t{}
+		, _creation{ creation }
 	{}
 };
 
