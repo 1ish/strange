@@ -66,9 +66,9 @@ public:
 		return operate__(range);
 	}
 
-	static inline any_a<> visit_(flock_a<>& flock)
+	static inline any_a<> visit_(inventory_a<>& inventory)
 	{
-		return operate__(flock);
+		return operate__(inventory);
 	}
 
 	// function

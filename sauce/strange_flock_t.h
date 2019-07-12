@@ -761,24 +761,24 @@ public:
 	// visitor pattern
 	inline any_a<> visit__(range_a<> const& range) const
 	{
-		if (!check<flock_a<>>(range))
+		if (!check<inventory_a<>>(range))
 		{
-			throw dis("strange::flock::visit passed non-flock");
+			throw dis("strange::flock::visit passed non-inventory");
 		}
-		return visit_(cast<flock_a<>>(range, true));
+		return visit_(cast<inventory_a<>>(range, true));
 	}
 
-	inline any_a<> visit_(flock_a<>& flock) const
+	inline any_a<> visit_(inventory_a<>& inventory) const
 	{
-		auto result = thing_t<>::visit_(flock);
+		auto result = thing_t<>::visit_(inventory);
 		if (result)
 		{
-			auto last = flock.size() - 1;
+			auto last = inventory.size() - 1;
 			typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
 			for (auto const& visited : _vector)
 			{
-				flock.update_index(last, visited);
-				visited.visit_(flock);
+				inventory.update_index(last, visited);
+				visited.visit_(inventory);
 			}
 		}
 		return result;
