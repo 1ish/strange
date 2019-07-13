@@ -13,6 +13,7 @@ class reflection;
 
 #include "strange_any_r.h"
 #include "strange_thing_r.h"
+#include "strange_creature_r.h"
 #include "strange_symbol_r.h"
 #include "strange_cat_r.h"
 #include "strange_forward_const_iterator_r.h"
