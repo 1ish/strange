@@ -250,81 +250,54 @@ public:
 	// visitor pattern
 	inline any_a<> visit__(range_a<> const& range) const
 	{
-		return operate__(range);
+		auto op = _creation.at_string("visit");
+		if (op.operation())
+		{
+			return op.operate_(any_a<>(me_(), true), range);
+		}
+		return thing_t<>::operate__(range);
 	}
 
 	inline any_a<> visit_(inventory_a<>& inventory) const
 	{
-		return operate__(inventory);
+		return visit__(inventory);
 	}
 
 	// function
-	inline any_a<> invoke__(range_a<> const& range) const
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			throw dis("strange::thing::invoke passed empty range");
-		}
-		any_a<> thing(*it, true);
-		if (++it == range.cend_())
-		{
-			throw dis("strange::thing::invoke passed short range");
-		}
-		any_a<> member = *it;
-		return invoke(thing, member, range_t<>::val_(++it, range.cend_()));
-	}
-
 	inline any_a<> invoke_(any_a<>& thing, range_a<> const& range) const
 	{
+		auto op = _creation.at_string("invoke");
+		if (op.operation())
+		{
+			op.operate_(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
+		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::thing::invoke passed short range");
+			throw dis("strange::creature::invoke passed short range");
 		}
 		any_a<> member = *it;
-		return invoke(thing, member, range_t<>::val_(++it, range.cend_()));
-	}
-
-	inline any_a<> invoke(any_a<>& thing, any_a<> const& member, range_a<> const& range) const
-	{
 		if (!thing.operations_().has_(member))
 		{
-			throw dis("strange::thing::invoke passed non-existent member");
+			throw dis("strange::creature::invoke passed non-existent member");
 		}
-		return operate(thing, thing.operations_().at_(member), range);
-	}
-
-	inline any_a<> operate__(range_a<> const& range) const
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			throw dis("strange::thing::operate passed empty range");
-		}
-		any_a<> thing(*it, true);
-		if (++it == range.cend_())
-		{
-			throw dis("strange::thing::operate passed short range");
-		}
-		any_a<> operation = *it;
-		return operate(thing, operation, range_t<>::val_(++it, range.cend_()));
+		return thing.operations_().at_(member).operate_(thing, range_t<>::val_(++it, range.cend_()));
 	}
 
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
+		auto op = _creation.at_string("operate");
+		if (op.operation())
+		{
+			op.operate_(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
+		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::thing::operate passed short range");
+			throw dis("strange::creature::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operate(thing, operation, range_t<>::val_(++it, range.cend_()));
-	}
-
-	inline any_a<> operate(any_a<>& thing, any_a<> const& operation, range_a<> const& range) const
-	{
-		return operation.operate_(thing, range);
+		return operation.operate_(thing, range_t<>::val_(++it, range.cend_()));
 	}
 
 	// identification
