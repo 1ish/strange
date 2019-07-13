@@ -301,7 +301,7 @@ public:
 	}
 
 	// identification
-	inline any_a<> identity__(range_a<> const&) const
+	inline any_a<> identity__(range_a<> const&) const // cannot be overridden
 	{
 		return identity_();
 	}
@@ -311,12 +311,12 @@ public:
 		return number_uint_64_t<>::val(uint64_t(identity()));
 	}
 
-	inline any_a<> identical__(range_a<> const& range) const
+	inline any_a<> identical__(range_a<> const& range) const // cannot be overridden
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::thing::identical passed empty range");
+			throw dis("strange::creature::identical passed empty range");
 		}
 		return identical_(*it);
 	}
@@ -327,7 +327,7 @@ public:
 	}
 
 	// comparison
-	inline any_a<> nothing__(range_a<> const&) const
+	inline any_a<> nothing__(range_a<> const&) const // cannot be overridden
 	{
 		return nothing_();
 	}
@@ -337,7 +337,7 @@ public:
 		return no();
 	}
 
-	inline any_a<> something__(range_a<> const&) const
+	inline any_a<> something__(range_a<> const&) const // cannot be overridden
 	{
 		return something_();
 	}
@@ -347,7 +347,7 @@ public:
 		return yes();
 	}
 
-	inline any_a<> operation__(range_a<> const&) const
+	inline any_a<> operation__(range_a<> const&) const // cannot be overridden
 	{
 		return operation_();
 	}
@@ -359,30 +359,45 @@ public:
 
 	inline any_a<> same__(range_a<> const& range) const
 	{
+		auto op = _creation.at_string("same");
+		if (op.operation())
+		{
+			return op.operate_(any_a<>(me_(), true), range);
+		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("[thing] same passed empty range");
+			throw dis("strange::creature same passed empty range");
 		}
-		return same_(*it);
+		return identical_(*it);
 	}
 
 	inline any_a<> same_(any_a<> const& thing) const
 	{
-		return boole(operator==(thing));
+		auto op = _creation.at_string("same");
+		if (op.operation())
+		{
+			return op.operate_(any_a<>(me_(), true), thing.ranged_());
+		}
+		return identical_(thing);
 	}
 
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return !operator!=(thing);
+		auto op = _creation.at_string("same");
+		if (op.operation())
+		{
+			return op.operate_(any_a<>(me_(), true), thing.ranged_());
+		}
+		return identical(thing);
 	}
 
-	inline any_a<> different__(range_a<> const& range) const
+	inline any_a<> different__(range_a<> const& range) const // cannot be overridden
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("[thing] different passed empty range");
+			throw dis("strange::creature different passed empty range");
 		}
 		return different_(*it);
 	}
@@ -397,19 +412,44 @@ public:
 		return !operator==(thing);
 	}
 
-	inline any_a<> hash__(range_a<> const&) const
+	inline any_a<> hash__(range_a<> const& range) const
 	{
-		return hash_();
+		auto op = _creation.at_string("hash");
+		if (op.operation())
+		{
+			return op.operate_(any_a<>(me_(), true), range);
+		}
+		return number_uint_64_t<>::val(uint64_t(std::hash<void const*>{}(identity())));
 	}
 
 	inline number_data_a<uint64_t> hash_() const
 	{
-		return number_uint_64_t<>::val(uint64_t(hash()));
+		auto op = _creation.at_string("hash");
+		if (op.operation())
+		{
+			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			if (!check<number_data_a<uint64_t>>(result))
+			{
+				throw dis("strange::creature::hash returned non-number-uint64");
+			}
+			return cast<number_data_a<uint64_t>>(result);
+		}
+		return number_uint_64_t<>::val(uint64_t(std::hash<void const*>{}(identity())));
 	}
 
 	inline std::size_t hash() const
 	{
-		return 0;
+		auto op = _creation.at_string("hash");
+		if (op.operation())
+		{
+			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			if (!check<number_data_a<uint64_t>>(result))
+			{
+				throw dis("strange::creature::hash returned non-number-uint64");
+			}
+			return cast<number_data_a<uint64_t>>(result).extract();
+		}
+		return std::hash<void const*>{}(identity());
 	}
 
 	// conversion
