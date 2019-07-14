@@ -45,7 +45,6 @@ public:
 			operations.update_string("identical", native_extraction_t<any_a<>>::val(&any_a<>::identical__));
 			operations.update_string("nothing", native_extraction_t<any_a<>>::val(&any_a<>::nothing__));
 			operations.update_string("something", native_extraction_t<any_a<>>::val(&any_a<>::something__));
-			operations.update_string("operation", native_extraction_t<any_a<>>::val(&any_a<>::operation__));
 			operations.update_string("same", native_extraction_t<any_a<>>::val(&any_a<>::same__));
 			operations.update_string("different", native_extraction_t<any_a<>>::val(&any_a<>::different__));
 			operations.update_string("hash", native_extraction_t<any_a<>>::val(&any_a<>::hash__));

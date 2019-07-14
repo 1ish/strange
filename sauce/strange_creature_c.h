@@ -44,7 +44,7 @@ public:
 	inline any_a<> type__(range_a<> const& range) const
 	{
 		auto op = _creation.at_string("type");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
@@ -54,7 +54,7 @@ public:
 	inline symbol_a<> type_() const
 	{
 		auto op = _creation.at_string("type");
-		if (op.operation())
+		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<symbol_a<>>(result))
@@ -69,7 +69,7 @@ public:
 	inline any_a<> share__(range_a<> const& range) const
 	{
 		auto op = _creation.at_string("share");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
@@ -90,7 +90,7 @@ public:
 	inline shoal_a<> share_(shoal_a<>& shoal) const
 	{
 		auto op = _creation.at_string("share");
-		if (op.operation())
+		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), shoal.ranged_());
 			if (!check<shoal_a<>>(result))
@@ -106,7 +106,7 @@ public:
 	inline void share(shoal_a<>& shoal) const
 	{
 		auto op = _creation.at_string("share");
-		if (op.operation())
+		if (op)
 		{
 			op.operate_(any_a<>(me_(), true), shoal.ranged_());
 		}
@@ -116,7 +116,7 @@ public:
 	inline any_a<> shared__(range_a<> const& range) const
 	{
 		auto op = _creation.at_string("shared");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
@@ -128,7 +128,7 @@ public:
 	inline unordered_shoal_a<> shared_() const
 	{
 		auto op = _creation.at_string("shared");
-		if (op.operation())
+		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<unordered_shoal_a<>>(result))
@@ -145,7 +145,7 @@ public:
 	inline any_a<> cat__(range_a<> const& range) const
 	{
 		auto op = _creation.at_string("cat");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
@@ -155,7 +155,7 @@ public:
 	inline cat_a<> cat_() const
 	{
 		auto op = _creation.at_string("cat");
-		if (op.operation())
+		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<cat_a<>>(result))
@@ -170,7 +170,7 @@ public:
 	inline any_a<> cats__(range_a<> const& range) const
 	{
 		auto op = _creation.at_string("cats");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
@@ -180,7 +180,7 @@ public:
 	inline unordered_herd_a<> cats_() const
 	{
 		auto op = _creation.at_string("cats");
-		if (op.operation())
+		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<unordered_herd_a<>>(result))
@@ -195,7 +195,7 @@ public:
 	inline any_a<> operations__(range_a<> const& range) const
 	{
 		auto op = _creation.at_string("operations");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
@@ -205,7 +205,7 @@ public:
 	inline unordered_shoal_a<> operations_() const
 	{
 		auto op = _creation.at_string("operations");
-		if (op.operation())
+		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<unordered_shoal_a<>>(result))
@@ -220,7 +220,7 @@ public:
 	inline any_a<> eater__(range_a<> const& range) const
 	{
 		auto op = _creation.at_string("eater");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
@@ -230,7 +230,7 @@ public:
 	inline any_a<> eater_() const
 	{
 		auto op = _creation.at_string("eater");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
 		}
@@ -240,7 +240,7 @@ public:
 	inline any_a<> feeder__(range_a<> const& range) const
 	{
 		auto op = _creation.at_string("feeder");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
@@ -251,7 +251,7 @@ public:
 	inline any_a<> visit__(range_a<> const& range) const
 	{
 		auto op = _creation.at_string("visit");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
@@ -267,7 +267,7 @@ public:
 	inline any_a<> invoke_(any_a<>& thing, range_a<> const& range) const
 	{
 		auto op = _creation.at_string("invoke");
-		if (op.operation())
+		if (op)
 		{
 			op.operate_(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
 		}
@@ -287,7 +287,7 @@ public:
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
 		auto op = _creation.at_string("operate");
-		if (op.operation())
+		if (op)
 		{
 			op.operate_(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
 		}
@@ -347,20 +347,10 @@ public:
 		return yes();
 	}
 
-	inline any_a<> operation__(range_a<> const&) const // cannot be overridden
-	{
-		return operation_();
-	}
-
-	inline any_a<> operation_() const
-	{
-		return no();
-	}
-
 	inline any_a<> same__(range_a<> const& range) const
 	{
 		auto op = _creation.at_string("same");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
@@ -375,7 +365,7 @@ public:
 	inline any_a<> same_(any_a<> const& thing) const
 	{
 		auto op = _creation.at_string("same");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), thing.ranged_());
 		}
@@ -385,7 +375,7 @@ public:
 	inline bool operator==(any_a<> const& thing) const
 	{
 		auto op = _creation.at_string("same");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), thing.ranged_());
 		}
@@ -415,7 +405,7 @@ public:
 	inline any_a<> hash__(range_a<> const& range) const
 	{
 		auto op = _creation.at_string("hash");
-		if (op.operation())
+		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
@@ -425,7 +415,7 @@ public:
 	inline number_data_a<uint64_t> hash_() const
 	{
 		auto op = _creation.at_string("hash");
-		if (op.operation())
+		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<number_data_a<uint64_t>>(result))
@@ -440,7 +430,7 @@ public:
 	inline std::size_t hash() const
 	{
 		auto op = _creation.at_string("hash");
-		if (op.operation())
+		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<number_data_a<uint64_t>>(result))

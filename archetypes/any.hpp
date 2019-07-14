@@ -86,10 +86,6 @@ public:
 	inline any_a something_() const;
 	inline bool something() const;
 
-	inline any_a operation__(range_a const& _) const;
-	inline any_a operation_() const;
-	inline bool operation() const;
-
 	inline any_a same__(range_a const& range) const;
 	inline any_a same_(any_a const& thing) const;
 	inline bool operator==(any_a const& thing) const;

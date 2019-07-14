@@ -187,16 +187,6 @@ public:
 		return yes();
 	}
 
-	static inline any_a<> operation__(range_a<> const&)
-	{
-		return operation_();
-	}
-
-	static inline any_a<> operation_()
-	{
-		return no();
-	}
-
 	// conversion
 	inline range_a<> ranged_() const
 	{

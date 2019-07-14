@@ -8,22 +8,6 @@ template <typename _ABSTRACTION_ = operation_a<>>
 class operation_t : public thing_t<_ABSTRACTION_>
 {
 public:
-	// comparison
-	static inline any_a<> operation__(range_a<> const&)
-	{
-		return operation_();
-	}
-
-	static inline any_a<> operation_()
-	{
-		return yes();
-	}
-
-	static inline bool operation()
-	{
-		return true;
-	}
-
 	// operation
 	inline any_a<> pure__(range_a<> const&) const
 	{

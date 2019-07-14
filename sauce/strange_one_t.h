@@ -52,11 +52,6 @@ public:
 		return true;
 	}
 
-	static inline bool operation()
-	{
-		return false;
-	}
-
 	inline bool operator==(any_a<> const& thing) const
 	{
 		return identical(thing);
