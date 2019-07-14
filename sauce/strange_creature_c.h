@@ -443,7 +443,7 @@ public:
 	}
 
 	// conversion
-	inline any_a<> ranged__(range_a<> const& _) const
+	inline any_a<> ranged__(range_a<> const& _) const // cannot be overridden
 	{
 		return ranged_();
 	}
