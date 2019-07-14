@@ -214,7 +214,7 @@ public:
 			}
 			return cast<unordered_shoal_a<>>(result);
 		}
-		return reflection<_ABSTRACTION_>::operations(); //TODO
+		return _operations;
 	}
 
 	inline any_a<> eater__(range_a<> const& range) const

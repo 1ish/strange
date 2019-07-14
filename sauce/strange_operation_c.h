@@ -24,9 +24,9 @@ public:
 		return val_(cast<shoal_a<>>(creation));
 	}
 
-	static inline any_a<> val_(shoal_a<> const& creation)
+	static inline operation_a<> val_(shoal_a<> const& creation)
 	{
-		return any_a<>{operation_c{ creation } };
+		return operation_a<>{operation_c{ creation } };
 	}
 
 	// operation

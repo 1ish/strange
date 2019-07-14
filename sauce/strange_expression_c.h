@@ -24,9 +24,9 @@ public:
 		return val_(cast<shoal_a<>>(creation));
 	}
 
-	static inline any_a<> val_(shoal_a<> const& creation)
+	static inline expression_a<> val_(shoal_a<> const& creation)
 	{
-		return any_a<>{ expression_c{ creation } };
+		return expression_a<>{ expression_c{ creation } };
 	}
 
 	// expression
@@ -69,7 +69,12 @@ public:
 		auto op = _operations.at_string("token");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			if (!check<token_a<>>(result))
+			{
+				throw dis("strange::expression creature token returned non-token");
+			}
+			return cast<token_a<>>(result);
 		}
 		return token_t<>::punctuation_val("", 0, 0, "");
 	}
@@ -89,7 +94,12 @@ public:
 		auto op = _operations.at_string("terms");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			if (!check<flock_a<>>(result))
+			{
+				throw dis("strange::expression creature terms returned non-flock");
+			}
+			return cast<flock_a<>>(result);
 		}
 		return flock_t<>::val_();
 	}
@@ -138,9 +148,8 @@ public:
 		auto op = _operations.at_string("generate");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(indent), river));
+			op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(indent), river));
 		}
-		return river;
 	}
 
 	inline any_a<> generate_cpp__(range_a<> const& range) const
@@ -187,9 +196,8 @@ public:
 		auto op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(indent), river));
+			op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(indent), river));
 		}
-		return river;
 	}
 
 protected:
