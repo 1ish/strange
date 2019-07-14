@@ -25,6 +25,11 @@ public:
 		return expression_a<>{ std::move(substituted) };
 	}
 
+	static inline expression_a<> val(_SUBSTITUTED_&& substituted, any_a<> const& literal)
+	{
+		return expression_a<>{ expression_substitute_t(std::move(substituted), literal) };
+	}
+
 	// function
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{

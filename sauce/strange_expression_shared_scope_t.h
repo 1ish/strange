@@ -20,15 +20,22 @@ public:
 			throw dis(token.report() + "strange::expression_shared_scope::val not passed any terms");
 		}
 		any_a<> shared = *it;
-		if (!check<unordered_shoal_a<>>(shared))
+		if (!check<shoal_a<>>(shared))
 		{
-			throw dis(token.report() + "strange::expression_shared_scope::val passed non-unordered-shoal shared");
+			throw dis(token.report() + "strange::expression_shared_scope::val passed non-shoal shared");
 		}
 		if (++it == terms.cend_())
 		{
 			throw dis(token.report() + "strange::expression_shared_scope::val passed too few terms");
 		}
-		return expression_a<>{ over{ expression_shared_scope_t<>(token, terms, cast<unordered_shoal_a<>>(shared), *it) } };
+		auto shared_shoal = cast<shoal_a<>>(shared);
+		auto key = *it;
+		auto value = shared_shoal.at_(key);
+		if (value)
+		{
+			return expression_substitute_t<over>::val(over{ expression_shared_scope_t<>(token, terms, shared_shoal, key) }, value);
+		}
+		return expression_a<>{ over{ expression_shared_scope_t<>(token, terms, shared_shoal, key) } };
 	}
 
 	// reflection
@@ -79,10 +86,10 @@ public:
 
 protected:
 	flock_a<> const _terms;
-	unordered_shoal_a<> const _shared;
+	shoal_a<> const _shared;
 	any_a<> const _key;
 
-	inline expression_shared_scope_t(token_a<> const& token, flock_a<> const& terms, unordered_shoal_a<> const& shared, any_a<> const& key)
+	inline expression_shared_scope_t(token_a<> const& token, flock_a<> const& terms, shoal_a<> const& shared, any_a<> const& key)
 		: expression_t{ token }
 		, _terms{ terms }
 		, _shared{ shared }
