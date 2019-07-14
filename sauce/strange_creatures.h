@@ -3,5 +3,7 @@
 
 // creatures
 #include "strange_creature_c.h"
+#include "strange_operation_c.h"
+#include "strange_expression_c.h"
 
 #endif
