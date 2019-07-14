@@ -43,7 +43,7 @@ public:
 	// reflection
 	inline any_a<> type__(range_a<> const& range) const
 	{
-		auto op = _creation.at_string("type");
+		auto op = _operations.at_string("type");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -53,7 +53,7 @@ public:
 
 	inline symbol_a<> type_() const
 	{
-		auto op = _creation.at_string("type");
+		auto op = _operations.at_string("type");
 		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
@@ -68,7 +68,7 @@ public:
 
 	inline any_a<> share__(range_a<> const& range) const
 	{
-		auto op = _creation.at_string("share");
+		auto op = _operations.at_string("share");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -89,7 +89,7 @@ public:
 
 	inline shoal_a<> share_(shoal_a<>& shoal) const
 	{
-		auto op = _creation.at_string("share");
+		auto op = _operations.at_string("share");
 		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), shoal.ranged_());
@@ -105,7 +105,7 @@ public:
 
 	inline void share(shoal_a<>& shoal) const
 	{
-		auto op = _creation.at_string("share");
+		auto op = _operations.at_string("share");
 		if (op)
 		{
 			op.operate_(any_a<>(me_(), true), shoal.ranged_());
@@ -115,7 +115,7 @@ public:
 
 	inline any_a<> shared__(range_a<> const& range) const
 	{
-		auto op = _creation.at_string("shared");
+		auto op = _operations.at_string("shared");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -127,7 +127,7 @@ public:
 
 	inline unordered_shoal_a<> shared_() const
 	{
-		auto op = _creation.at_string("shared");
+		auto op = _operations.at_string("shared");
 		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
@@ -144,7 +144,7 @@ public:
 
 	inline any_a<> cat__(range_a<> const& range) const
 	{
-		auto op = _creation.at_string("cat");
+		auto op = _operations.at_string("cat");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -154,7 +154,7 @@ public:
 	
 	inline cat_a<> cat_() const
 	{
-		auto op = _creation.at_string("cat");
+		auto op = _operations.at_string("cat");
 		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
@@ -169,7 +169,7 @@ public:
 
 	inline any_a<> cats__(range_a<> const& range) const
 	{
-		auto op = _creation.at_string("cats");
+		auto op = _operations.at_string("cats");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -179,7 +179,7 @@ public:
 
 	inline unordered_herd_a<> cats_() const
 	{
-		auto op = _creation.at_string("cats");
+		auto op = _operations.at_string("cats");
 		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
@@ -194,17 +194,17 @@ public:
 
 	inline any_a<> operations__(range_a<> const& range) const
 	{
-		auto op = _creation.at_string("operations");
+		auto op = _operations.at_string("operations");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
-		return reflection<_ABSTRACTION_>::operations();
+		return _operations;
 	}
 	
 	inline unordered_shoal_a<> operations_() const
 	{
-		auto op = _creation.at_string("operations");
+		auto op = _operations.at_string("operations");
 		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
@@ -214,12 +214,12 @@ public:
 			}
 			return cast<unordered_shoal_a<>>(result);
 		}
-		return reflection<_ABSTRACTION_>::operations();
+		return reflection<_ABSTRACTION_>::operations(); //TODO
 	}
 
 	inline any_a<> eater__(range_a<> const& range) const
 	{
-		auto op = _creation.at_string("eater");
+		auto op = _operations.at_string("eater");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -229,7 +229,7 @@ public:
 
 	inline any_a<> eater_() const
 	{
-		auto op = _creation.at_string("eater");
+		auto op = _operations.at_string("eater");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
@@ -239,7 +239,7 @@ public:
 
 	inline any_a<> feeder__(range_a<> const& range) const
 	{
-		auto op = _creation.at_string("feeder");
+		auto op = _operations.at_string("feeder");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -250,7 +250,7 @@ public:
 	// visitor pattern
 	inline any_a<> visit__(range_a<> const& range) const
 	{
-		auto op = _creation.at_string("visit");
+		auto op = _operations.at_string("visit");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -266,7 +266,7 @@ public:
 	// function
 	inline any_a<> invoke_(any_a<>& thing, range_a<> const& range) const
 	{
-		auto op = _creation.at_string("invoke");
+		auto op = _operations.at_string("invoke");
 		if (op)
 		{
 			op.operate_(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
@@ -286,7 +286,7 @@ public:
 
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
-		auto op = _creation.at_string("operate");
+		auto op = _operations.at_string("operate");
 		if (op)
 		{
 			op.operate_(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
@@ -349,7 +349,7 @@ public:
 
 	inline any_a<> same__(range_a<> const& range) const
 	{
-		auto op = _creation.at_string("same");
+		auto op = _operations.at_string("same");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -364,7 +364,7 @@ public:
 
 	inline any_a<> same_(any_a<> const& thing) const
 	{
-		auto op = _creation.at_string("same");
+		auto op = _operations.at_string("same");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), thing.ranged_());
@@ -374,7 +374,7 @@ public:
 
 	inline bool operator==(any_a<> const& thing) const
 	{
-		auto op = _creation.at_string("same");
+		auto op = _operations.at_string("same");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), thing.ranged_());
@@ -404,7 +404,7 @@ public:
 
 	inline any_a<> hash__(range_a<> const& range) const
 	{
-		auto op = _creation.at_string("hash");
+		auto op = _operations.at_string("hash");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -414,7 +414,7 @@ public:
 
 	inline number_data_a<uint64_t> hash_() const
 	{
-		auto op = _creation.at_string("hash");
+		auto op = _operations.at_string("hash");
 		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
@@ -429,7 +429,7 @@ public:
 
 	inline std::size_t hash() const
 	{
-		auto op = _creation.at_string("hash");
+		auto op = _operations.at_string("hash");
 		if (op)
 		{
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
@@ -483,12 +483,34 @@ public:
 
 protected:
 	shoal_a<> const _creation;
+	unordered_shoal_a<> const _operations;
 
 	// construction
 	inline creature_c(shoal_a<> const& creation)
 		: one_t{}
 		, _creation{ creation }
+		, _operations{ _operations_(_creation) }
 	{}
+
+	static inline unordered_shoal_a<> _operations_(shoal_a<> const& creation)
+	{
+		unordered_shoal_a<> operations = reflection<_ABSTRACTION_>::operations();
+		for (auto const& op : creation)
+		{
+			auto flop = cast<flock_a<>>(op);
+			auto key = flop.at_index(0);
+			if (!check<symbol_a<>>(key))
+			{
+				throw dis("strange::creature constructor passed creation with non-symbol key");
+			}
+			if (cast<symbol_a<>>(key).to_string().c_str()[0] == '_')
+			{
+				continue;
+			}
+			operations.update(key, flop.at_index(1));
+		}
+		return operations;
+	}
 };
 
 } // namespace strange

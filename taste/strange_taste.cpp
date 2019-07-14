@@ -127,7 +127,7 @@ TEST(TestCaseName, ForLoop)
 
 	expression_a<> exp = cast<expression_a<>>(expression_o<expression_break_t<>>::val__(token.ranged_()));
 
-	any_a<> creature = creature_c<>::val_(uos);
+	any_a<> creature = creature_c<>::val_(ordered_shoal);
 	exp.shared_();
 }
 /*
