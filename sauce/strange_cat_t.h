@@ -381,6 +381,26 @@ protected:
 	{
 		return (check<cat_a<>>(result) && result.to_string() != "<>") ? result : any_sym();
 	}
+
+private:
+	static bool const ___share___;
+	friend class ___cat_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const cat_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	share(shoal);
+	return shoal;
+}();
+
+class ___cat_t_share___
+{
+	static inline bool ___share___()
+	{
+		return cat_t<>::___share___;
+	}
 };
 
 } // namespace strange

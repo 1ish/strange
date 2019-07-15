@@ -211,6 +211,26 @@ protected:
 		, _result{ result }
 		, _reference{ reference }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___expression_cat_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const expression_cat_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	share(shoal);
+	return shoal;
+}();
+
+class ___expression_cat_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_cat_t<>::___share___;
+	}
 };
 
 } // namespace strange

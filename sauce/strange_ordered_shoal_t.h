@@ -682,6 +682,27 @@ public:
 	inline ordered_shoal_t(ordered_shoal_t&& other)
 		: _map{ std::move(other._map) }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___ordered_shoal_t_share___;
+};
+
+template <bool CONCURRENT, typename _ABSTRACTION_>
+bool const ordered_shoal_t<CONCURRENT, _ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	share(shoal);
+	return shoal;
+}();
+
+class ___ordered_shoal_t_share___
+{
+	static inline bool ___share___()
+	{
+		return ordered_shoal_t<>::___share___
+			&& ordered_shoal_t<true>::___share___;
+	}
 };
 
 } // namespace strange

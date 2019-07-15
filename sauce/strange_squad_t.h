@@ -1092,6 +1092,27 @@ public:
 	inline squad_t(squad_t&& other)
 		: _deque{ std::move(other._deque) }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___squad_t_share___;
+};
+
+template <bool CONCURRENT, typename _ABSTRACTION_>
+bool const squad_t<CONCURRENT, _ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	share(shoal);
+	return shoal;
+}();
+
+class ___squad_t_share___
+{
+	static inline bool ___share___()
+	{
+		return squad_t<>::___share___
+			&& squad_t<true>::___share___;
+	}
 };
 
 } // namespace strange

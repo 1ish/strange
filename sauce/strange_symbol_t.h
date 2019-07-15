@@ -99,6 +99,26 @@ protected:
 		, _string{ std::forward<F>(s) }
 		, _hash{ std::hash<std::string>{}(_string) }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___symbol_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const symbol_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	share(shoal);
+	return shoal;
+}();
+
+class ___symbol_t_share___
+{
+	static inline bool ___share___()
+	{
+		return symbol_t<>::___share___;
+	}
 };
 
 template <typename F>

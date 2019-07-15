@@ -78,6 +78,26 @@ protected:
 		, _begin(begin)
 		, _end(end)
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___range_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const range_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	share(shoal);
+	return shoal;
+}();
+
+class ___range_t_share___
+{
+	static inline bool ___share___()
+	{
+		return range_t<>::___share___;
+	}
 };
 
 } // namespace strange

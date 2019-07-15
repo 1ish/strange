@@ -25,7 +25,6 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<number_reference_t<PRIMITIVE>>::share(shoal);
 	}
 
 	// comparison

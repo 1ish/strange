@@ -27,13 +27,7 @@ inline any_a<> boole(bool b)
 
 inline shoal_a<> shared()
 {
-	static shoal_a<> SHARED = []()
-	{
-		auto shared = unordered_shoal_t<>::val_();
-		symbol_t<>::share(shared);
-		cat_t<>::share(shared);
-		return shared;
-	}();
+	static shoal_a<> SHARED = unordered_shoal_t<>::val_();
 	return SHARED;
 }
 

@@ -736,7 +736,19 @@ protected:
 		: thing_t{}
 		, _number(number)
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___number_t_share___;
 };
+
+template <typename PRIMITIVE, typename _ABSTRACTION_>
+bool const number_t<PRIMITIVE, _ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	share(shoal);
+	return shoal;
+}();
 
 template <typename _ABSTRACTION_ = number_data_a<int8_t>>
 using number_int_8_t = number_t<int8_t, _ABSTRACTION_>;
@@ -767,6 +779,23 @@ using number_float_32_t = number_t<float, _ABSTRACTION_>;
 
 template <typename _ABSTRACTION_ = number_data_a<double>>
 using number_float_64_t = number_t<double, _ABSTRACTION_>;
+
+class ___number_t_share___
+{
+	static inline bool ___share___()
+	{
+		return number_int_8_t<>::___share___
+			&& number_uint_8_t<>::___share___
+			&& number_int_16_t<>::___share___
+			&& number_uint_16_t<>::___share___
+			&& number_int_32_t<>::___share___
+			&& number_uint_32_t<>::___share___
+			&& number_int_64_t<>::___share___
+			&& number_uint_64_t<>::___share___
+			&& number_float_32_t<>::___share___
+			&& number_float_64_t<>::___share___;
+	}
+};
 
 number_data_a<int64_t> int_64_from_string(std::string const& str)
 {

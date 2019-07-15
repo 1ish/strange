@@ -49,6 +49,26 @@ protected:
 	inline expression_continue_t(token_a<> const& token)
 		: expression_t(token, true, true) // pure, literal
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___expression_continue_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const expression_continue_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	share(shoal);
+	return shoal;
+}();
+
+class ___expression_continue_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_continue_t<>::___share___;
+	}
 };
 
 } // namespace strange

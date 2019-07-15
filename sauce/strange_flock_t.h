@@ -1084,6 +1084,27 @@ public:
 	inline flock_t(flock_t&& other)
 		: _vector{ std::move(other._vector) }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___flock_t_share___;
+};
+
+template <bool CONCURRENT, typename _ABSTRACTION_>
+bool const flock_t<CONCURRENT, _ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	share(shoal);
+	return shoal;
+}();
+
+class ___flock_t_share___
+{
+	static inline bool ___share___()
+	{
+		return flock_t<>::___share___
+			&& flock_t<true>::___share___;
+	}
 };
 
 } // namespace strange

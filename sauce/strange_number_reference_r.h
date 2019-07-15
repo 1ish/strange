@@ -13,10 +13,6 @@ public:
 		static symbol_a<> TYPE = sym("strange::number_reference_int_8");
 		return TYPE;
 	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-	}
 };
 
 template<>
@@ -27,10 +23,6 @@ public:
 	{
 		static symbol_a<> TYPE = sym("strange::number_reference_uint_8");
 		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
 	}
 };
 
@@ -43,10 +35,6 @@ public:
 		static symbol_a<> TYPE = sym("strange::number_reference_int_16");
 		return TYPE;
 	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-	}
 };
 
 template<>
@@ -57,10 +45,6 @@ public:
 	{
 		static symbol_a<> TYPE = sym("strange::number_reference_uint_16");
 		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
 	}
 };
 
@@ -73,10 +57,6 @@ public:
 		static symbol_a<> TYPE = sym("strange::number_reference_int_32");
 		return TYPE;
 	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-	}
 };
 
 template<>
@@ -87,10 +67,6 @@ public:
 	{
 		static symbol_a<> TYPE = sym("strange::number_reference_uint_32");
 		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
 	}
 };
 
@@ -103,10 +79,6 @@ public:
 		static symbol_a<> TYPE = sym("strange::number_reference_int_64");
 		return TYPE;
 	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-	}
 };
 
 template<>
@@ -117,10 +89,6 @@ public:
 	{
 		static symbol_a<> TYPE = sym("strange::number_reference_uint_64");
 		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
 	}
 };
 
@@ -133,10 +101,6 @@ public:
 		static symbol_a<> TYPE = sym("strange::number_reference_float_32");
 		return TYPE;
 	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-	}
 };
 
 template<>
@@ -147,10 +111,6 @@ public:
 	{
 		static symbol_a<> TYPE = sym("strange::number_reference_float_64");
 		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
 	}
 };
 

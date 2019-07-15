@@ -421,6 +421,27 @@ public:
 	inline unordered_herd_t(unordered_herd_t&& other)
 		: _set{ std::move(other._set) }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___unordered_herd_t_share___;
+};
+
+template <bool CONCURRENT, typename _ABSTRACTION_>
+bool const unordered_herd_t<CONCURRENT, _ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	share(shoal);
+	return shoal;
+}();
+
+class ___unordered_herd_t_share___
+{
+	static inline bool ___share___()
+	{
+		return unordered_herd_t<>::___share___
+			&& unordered_herd_t<true>::___share___;
+	}
 };
 
 } // namespace strange
