@@ -131,6 +131,9 @@ TEST(TestCaseName, ForLoop)
 	any_a<> creature = creature_c<>::val_(ordered_shoal);
 	operation_a<> operation_creature = operation_c<>::val_(ordered_shoal);
 	expression_a<> expression_creature = expression_c<>::val_(ordered_shoal);
+
+	auto shared_scope = shared();
+	std::cout << "shared().size() = " << shared_scope.size() << std::endl;
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
