@@ -83,6 +83,26 @@ protected:
 		, _terms{ terms }
 		, _exception{ exception }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___expression_throw_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const expression_throw_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<expression_throw_t<>>::share(shoal);
+	return shoal;
+}();
+
+class ___expression_throw_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_throw_t<>::___share___;
+	}
 };
 
 } // namespace strange

@@ -24,8 +24,7 @@ public:
 	}
 
 	static inline void share(shoal_a<>& shoal)
-	{
-	}
+	{}
 
 	// comparison
 	inline bool operator==(any_a<> const& thing) const

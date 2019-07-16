@@ -434,6 +434,26 @@ protected:
 		}
 		return number_int_64_t<>::val(-1);
 	}
+
+private:
+	static bool const ___share___;
+	friend class ___token_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const token_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<token_t<>>::share(shoal);
+	return shoal;
+}();
+
+class ___token_t_share___
+{
+	static inline bool ___share___()
+	{
+		return token_t<>::___share___;
+	}
 };
 
 } // namespace strange

@@ -1005,6 +1005,26 @@ protected:
 	{
 		assert(_istream || _ostream);
 	}
+
+private:
+	static bool const ___share___;
+	friend class ___river_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const river_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<river_t<>>::share(shoal);
+	return shoal;
+}();
+
+class ___river_t_share___
+{
+	static inline bool ___share___()
+	{
+		return river_t<>::___share___;
+	}
 };
 
 } // namespace strange

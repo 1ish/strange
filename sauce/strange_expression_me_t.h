@@ -61,6 +61,26 @@ protected:
 	inline expression_me_t(token_a<> const& token)
 		: expression_t{ token }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___expression_me_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const expression_me_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<expression_me_t<>>::share(shoal);
+	return shoal;
+}();
+
+class ___expression_me_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_me_t<>::___share___;
+	}
 };
 
 } // namespace strange

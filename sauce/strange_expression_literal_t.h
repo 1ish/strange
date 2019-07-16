@@ -221,6 +221,26 @@ protected:
 		, _terms{ terms }
 		, _literal{ literal }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___expression_literal_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const expression_literal_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<expression_literal_t<>>::share(shoal);
+	return shoal;
+}();
+
+class ___expression_literal_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_literal_t<>::___share___;
+	}
 };
 
 } // namespace strange

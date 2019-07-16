@@ -50,6 +50,26 @@ protected:
 	inline something_t()
 		: thing_t{}
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___something_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const something_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<something_t<>>::share(shoal);
+	return shoal;
+}();
+
+class ___something_t_share___
+{
+	static inline bool ___share___()
+	{
+		return something_t<>::___share___;
+	}
 };
 
 } // namespace strange

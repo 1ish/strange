@@ -76,6 +76,29 @@ protected:
 		: thing_t{}
 		, _data(data)
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___data_t_share___;
+};
+
+template <typename DATA, typename _ABSTRACTION_>
+bool const data_t<DATA, _ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<data_t<DATA>>::share(shoal);
+	return shoal;
+}();
+
+class ___data_t_share___
+{
+	static inline bool ___share___()
+	{
+		return data_t<std::shared_ptr<strange::concurrent_u<false>::read_lock>>::___share___
+			&& data_t<std::shared_ptr<strange::concurrent_u<true>::read_lock>>::___share___
+			&& data_t<std::shared_ptr<strange::concurrent_u<false>::write_lock>>::___share___
+			&& data_t<std::shared_ptr<strange::concurrent_u<true>::write_lock>>::___share___;
+	}
 };
 
 } // namespace strange

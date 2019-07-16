@@ -90,6 +90,26 @@ protected:
 		: nothing_t{}
 		, std::logic_error{ std::forward<F>(s) }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___disagreement_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const disagreement_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<disagreement_t<>>::share(shoal);
+	return shoal;
+}();
+
+class ___disagreement_t_share___
+{
+	static inline bool ___share___()
+	{
+		return disagreement_t<>::___share___;
+	}
 };
 
 template <typename F>

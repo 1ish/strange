@@ -111,6 +111,27 @@ protected:
 		: thing_t{}
 		, _thing(thing, !CONST)
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___it_t_share___;
+};
+
+template <bool CONST, typename END, typename _ABSTRACTION_>
+bool const it_t<CONST, END, _ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<it_t<CONST>>::share(shoal);
+	return shoal;
+}();
+
+class ___it_t_share___
+{
+	static inline bool ___share___()
+	{
+		return it_t<true>::___share___
+			&& it_t<false>::___share___;
+	}
 };
 
 } // namespace strange

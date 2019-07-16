@@ -92,6 +92,26 @@ protected:
 		: nothing_t{}
 		, _string{ std::forward<F>(s) }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___misunderstanding_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const misunderstanding_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<misunderstanding_t<>>::share(shoal);
+	return shoal;
+}();
+
+class ___misunderstanding_t_share___
+{
+	static inline bool ___share___()
+	{
+		return misunderstanding_t<>::___share___;
+	}
 };
 
 template <typename F>

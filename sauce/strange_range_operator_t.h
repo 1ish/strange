@@ -208,6 +208,26 @@ protected:
 		, _thing_ref(thing_ref)
 		, _range_ref(range_ref)
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___range_operator_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const range_operator_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<range_operator_t<>>::share(shoal);
+	return shoal;
+}();
+
+class ___range_operator_t_share___
+{
+	static inline bool ___share___()
+	{
+		return range_operator_t<>::___share___;
+	}
 };
 
 } // namespace strange

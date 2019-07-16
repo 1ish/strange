@@ -92,6 +92,26 @@ protected:
 	inline nothing_t()
 		: thing_t{}
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___nothing_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const nothing_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<nothing_t<>>::share(shoal);
+	return shoal;
+}();
+
+class ___nothing_t_share___
+{
+	static inline bool ___share___()
+	{
+		return nothing_t<>::___share___;
+	}
 };
 
 } // namespace strange

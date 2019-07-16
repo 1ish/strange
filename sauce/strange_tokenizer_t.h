@@ -581,6 +581,26 @@ protected:
 		: thing_t{}
 		, _river(river)
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___tokenizer_t_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const tokenizer_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<tokenizer_t<>>::share(shoal);
+	return shoal;
+}();
+
+class ___tokenizer_t_share___
+{
+	static inline bool ___share___()
+	{
+		return tokenizer_t<>::___share___;
+	}
 };
 
 } // namespace strange
