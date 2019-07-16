@@ -1,11 +1,11 @@
-#ifndef COM_ONEISH_STRANGE_CREATURE_C_H
-#define COM_ONEISH_STRANGE_CREATURE_C_H
+#ifndef COM_ONEISH_STRANGE_ANY_C_H
+#define COM_ONEISH_STRANGE_ANY_C_H
 
 namespace strange
 {
 
 template <typename _ABSTRACTION_ = any_a<>>
-class creature_c : public one_t
+class any_c : public one_t
 {
 public:
 	// construction
@@ -26,7 +26,7 @@ public:
 
 	static inline any_a<> val_(shoal_a<> const& creation)
 	{
-		return any_a<>{ creature_c{ creation } };
+		return any_a<>{ any_c{ creation } };
 	}
 
 	// erasure
@@ -48,7 +48,7 @@ public:
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
-		return reflection<creature_c<>>::type();
+		return reflection<any_c<>>::type();
 	}
 
 	inline symbol_a<> type_() const
@@ -63,7 +63,7 @@ public:
 			}
 			return cast<symbol_a<>>(result);
 		}
-		return reflection<creature_c<>>::type();
+		return reflection<any_c<>>::type();
 	}
 
 	inline any_a<> share__(range_a<> const& range) const
@@ -83,7 +83,7 @@ public:
 		{
 			throw dis("strange::creature share passed non-shoal");
 		}
-		reflection<creature_c<>>::share(cast<shoal_a<>>(thing, true));
+		reflection<any_c<>>::share(cast<shoal_a<>>(thing, true));
 		return thing;
 	}
 
@@ -99,7 +99,7 @@ public:
 			}
 			return cast<shoal_a<>>(result);
 		}
-		reflection<creature_c<>>::share(shoal);
+		reflection<any_c<>>::share(shoal);
 		return shoal;
 	}
 
@@ -110,7 +110,7 @@ public:
 		{
 			op.operate_(any_a<>(me_(), true), shoal.ranged_());
 		}
-		reflection<creature_c<>>::share(shoal);
+		reflection<any_c<>>::share(shoal);
 	}
 
 	inline any_a<> shared__(range_a<> const& range) const
@@ -458,7 +458,7 @@ protected:
 	unordered_shoal_a<> const _operations;
 
 	// construction
-	inline creature_c(shoal_a<> const& creation)
+	inline any_c(shoal_a<> const& creation)
 		: one_t{}
 		, _creation{ creation }
 		, _operations{ _operations_(_creation) }

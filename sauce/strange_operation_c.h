@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename _ABSTRACTION_ = operation_a<>>
-class operation_c : public creature_c<_ABSTRACTION_>
+class operation_c : public any_c<_ABSTRACTION_>
 {
 public:
 	// construction
@@ -93,7 +93,7 @@ public:
 protected:
 	// construction
 	inline operation_c(shoal_a<> const& creation)
-		: creature_c{ creation }
+		: any_c{ creation }
 	{}
 };
 

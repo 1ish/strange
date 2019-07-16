@@ -5,18 +5,18 @@ namespace strange
 {
 
 template<>
-class reflection<creature_c<>>
+class reflection<any_c<>>
 {
 public:
 	static inline symbol_a<> type()
 	{
-		static symbol_a<> TYPE = sym("strange::creature");
+		static symbol_a<> TYPE = sym("strange::any_creature");
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::creature::val", native_function_t<>::val(&creature_c<>::val__));
+		shoal.update_string("strange::any_creature::val", native_function_t<>::val(&any_c<>::val__));
 	}
 };
 
