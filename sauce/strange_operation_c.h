@@ -14,12 +14,12 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::operation creature val passed empty range");
+			throw dis("strange::operation_creature::val passed empty range");
 		}
 		any_a<> creation = *it;
 		if (!check<shoal_a<>>(creation))
 		{
-			throw dis("strange::operation creature val passed non-shoal creation");
+			throw dis("strange::operation_creature::val passed non-shoal creation");
 		}
 		return val_(cast<shoal_a<>>(creation));
 	}

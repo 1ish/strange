@@ -14,12 +14,12 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::expression creature val passed empty range");
+			throw dis("strange::expression_creature::val passed empty range");
 		}
 		any_a<> creation = *it;
 		if (!check<shoal_a<>>(creation))
 		{
-			throw dis("strange::expression creature val passed non-shoal creation");
+			throw dis("strange::expression_creature::val passed non-shoal creation");
 		}
 		return val_(cast<shoal_a<>>(creation));
 	}
@@ -72,7 +72,7 @@ public:
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<token_a<>>(result))
 			{
-				throw dis("strange::expression creature token returned non-token");
+				throw dis("strange::expression_creature::token returned non-token");
 			}
 			return cast<token_a<>>(result);
 		}
@@ -97,7 +97,7 @@ public:
 			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<flock_a<>>(result))
 			{
-				throw dis("strange::expression creature terms returned non-flock");
+				throw dis("strange::expression_creature::terms returned non-flock");
 			}
 			return cast<flock_a<>>(result);
 		}
@@ -114,21 +114,21 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::expression creature generate passed empty range");
+			throw dis("strange::expression_creature::generate passed empty range");
 		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
 		{
-			throw dis("strange::expression creature generate passed non-int-64 indent");
+			throw dis("strange::expression_creature::generate passed non-int-64 indent");
 		}
 		if (++it == range.cend_())
 		{
-			throw dis("strange::expression creature generate passed short range");
+			throw dis("strange::expression_creature::generate passed short range");
 		}
 		any_a<> river = *it;
 		if (!check<river_a<>>(river))
 		{
-			throw dis("strange::expression creature generate passed non-river");
+			throw dis("strange::expression_creature::generate passed non-river");
 		}
 		return river;
 	}
@@ -162,21 +162,21 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::expression creature generate_cpp passed empty range");
+			throw dis("strange::expression_creature::generate_cpp passed empty range");
 		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
 		{
-			throw dis("strange::expression creature generate_cpp passed non-int-64 indent");
+			throw dis("strange::expression_creature::generate_cpp passed non-int-64 indent");
 		}
 		if (++it == range.cend_())
 		{
-			throw dis("strange::expression creature generate_cpp passed short range");
+			throw dis("strange::expression_creature::generate_cpp passed short range");
 		}
 		any_a<> river = *it;
 		if (!check<river_a<>>(river))
 		{
-			throw dis("strange::expression creature generate_cpp passed non-river");
+			throw dis("strange::expression_creature::generate_cpp passed non-river");
 		}
 		return river;
 	}
