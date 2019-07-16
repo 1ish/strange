@@ -483,6 +483,26 @@ protected:
 		}
 		return operations;
 	}
+
+private:
+	static bool const ___share___;
+	friend class ___any_c_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const any_c<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<any_c<>>::share(shoal);
+	return shoal;
+}();
+
+class ___any_c_share___
+{
+	static inline bool ___share___()
+	{
+		return any_c<>::___share___;
+	}
 };
 
 } // namespace strange

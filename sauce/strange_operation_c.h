@@ -197,6 +197,26 @@ protected:
 	inline operation_c(shoal_a<> const& creation)
 		: any_c{ creation }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___operation_c_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const operation_c<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<operation_c<>>::share(shoal);
+	return shoal;
+}();
+
+class ___operation_c_share___
+{
+	static inline bool ___share___()
+	{
+		return operation_c<>::___share___;
+	}
 };
 
 } // namespace strange

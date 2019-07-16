@@ -1094,7 +1094,7 @@ template <bool CONCURRENT, typename _ABSTRACTION_>
 bool const flock_t<CONCURRENT, _ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	share(shoal);
+	reflection<flock_t<CONCURRENT>>::share(shoal);
 	return shoal;
 }();
 

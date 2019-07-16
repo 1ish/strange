@@ -65,7 +65,7 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::expression_creature share passed empty range");
+			throw dis("strange::expression_creature::share passed empty range");
 		}
 		any_a<> thing = *it;
 		if (!check<shoal_a<>>(thing))
@@ -307,6 +307,26 @@ protected:
 	inline expression_c(shoal_a<> const& creation)
 		: operation_c{ creation }
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___expression_c_share___;
+};
+
+template <typename _ABSTRACTION_>
+bool const expression_c<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<expression_c<>>::share(shoal);
+	return shoal;
+}();
+
+class ___expression_c_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_c<>::___share___;
+	}
 };
 
 } // namespace strange

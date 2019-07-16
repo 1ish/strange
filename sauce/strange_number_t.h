@@ -746,7 +746,7 @@ template <typename PRIMITIVE, typename _ABSTRACTION_>
 bool const number_t<PRIMITIVE, _ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	share(shoal);
+	reflection<number_t<PRIMITIVE>>::share(shoal);
 	return shoal;
 }();
 

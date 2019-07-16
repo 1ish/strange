@@ -109,7 +109,7 @@ template <typename _ABSTRACTION_>
 bool const symbol_t<_ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	share(shoal);
+	reflection<symbol_t<>>::share(shoal);
 	return shoal;
 }();
 

@@ -59,7 +59,7 @@ template <typename _ABSTRACTION_>
 bool const expression_continue_t<_ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	share(shoal);
+	reflection<expression_continue_t<>>::share(shoal);
 	return shoal;
 }();
 

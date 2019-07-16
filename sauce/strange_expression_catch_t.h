@@ -175,7 +175,7 @@ template <typename _ABSTRACTION_>
 bool const expression_catch_t<_ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	share(shoal);
+	reflection<expression_catch_t<>>::share(shoal);
 	return shoal;
 }();
 
