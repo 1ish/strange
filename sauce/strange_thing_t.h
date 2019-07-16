@@ -193,34 +193,6 @@ public:
 		return range_t<>::val_(it_t<true>::val_(me_()), it_t<true>::val_());
 	}
 
-	// operators
-	inline void operator++()
-	{}
-
-	inline void operator++(int)
-	{}
-
-	inline void operator--()
-	{}
-
-	inline void operator--(int)
-	{}
-
-	inline void operator+=(any_a<> const& other)
-	{}
-
-	inline void operator-=(any_a<> const& other)
-	{}
-
-	inline void operator*=(any_a<> const& other)
-	{}
-
-	inline void operator/=(any_a<> const& other)
-	{}
-
-	inline void operator%=(any_a<> const& other)
-	{}
-
 protected:
 	// construction
 	inline thing_t()

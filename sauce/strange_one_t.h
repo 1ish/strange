@@ -67,6 +67,34 @@ public:
 		return false;
 	}
 
+	// operators
+	inline void operator++()
+	{}
+
+	inline void operator++(int)
+	{}
+
+	inline void operator--()
+	{}
+
+	inline void operator--(int)
+	{}
+
+	inline void operator+=(any_a<> const& other)
+	{}
+
+	inline void operator-=(any_a<> const& other)
+	{}
+
+	inline void operator*=(any_a<> const& other)
+	{}
+
+	inline void operator/=(any_a<> const& other)
+	{}
+
+	inline void operator%=(any_a<> const& other)
+	{}
+
 protected:
 	mutable any_a<>::___WEAK___ _meek;
 
