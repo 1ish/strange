@@ -55,53 +55,6 @@ public:
 		return reflection<operation_c<>>::type();
 	}
 
-	inline any_a<> share__(range_a<> const& range) const
-	{
-		auto op = _operations.at_string("share");
-		if (op)
-		{
-			return op.operate_(any_a<>(me_(), true), range);
-		}
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			throw dis("strange::operation_creature share passed empty range");
-		}
-		any_a<> thing = *it;
-		if (!check<shoal_a<>>(thing))
-		{
-			throw dis("strange::operation_creature::share passed non-shoal");
-		}
-		reflection<operation_c<>>::share(cast<shoal_a<>>(thing, true));
-		return thing;
-	}
-
-	inline shoal_a<> share_(shoal_a<>& shoal) const
-	{
-		auto op = _operations.at_string("share");
-		if (op)
-		{
-			auto result = op.operate_(any_a<>(me_(), true), shoal.ranged_());
-			if (!check<shoal_a<>>(result))
-			{
-				throw dis("strange::operation_creature::share returned non-shoal");
-			}
-			return cast<shoal_a<>>(result);
-		}
-		reflection<operation_c<>>::share(shoal);
-		return shoal;
-	}
-
-	inline void share(shoal_a<>& shoal) const
-	{
-		auto op = _operations.at_string("share");
-		if (op)
-		{
-			op.operate_(any_a<>(me_(), true), shoal.ranged_());
-		}
-		reflection<operation_c<>>::share(shoal);
-	}
-
 	inline any_a<> shared__(range_a<> const& range) const
 	{
 		auto op = _operations.at_string("shared");
@@ -110,7 +63,7 @@ public:
 			return op.operate_(any_a<>(me_(), true), range);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
-		share(shoal);
+		reflection<operation_c<>>::share(shoal);
 		return shoal;
 	}
 
@@ -127,7 +80,7 @@ public:
 			return cast<unordered_shoal_a<>>(result);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
-		share(shoal);
+		reflection<operation_c<>>::share(shoal);
 		return shoal;
 	}
 

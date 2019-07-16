@@ -33,7 +33,6 @@ public:
 			operations.update_string("call", native_mutation_t<any_a<>>::val(&any_a<>::operator[]));
 			operations.update_string("perform", native_mutation_t<any_a<>>::val(&any_a<>::operator()));
 			operations.update_string("type", native_extraction_t<any_a<>>::val(&any_a<>::type__));
-			operations.update_string("share", native_extraction_t<any_a<>>::val(&any_a<>::share__));
 			operations.update_string("shared", native_extraction_t<any_a<>>::val(&any_a<>::shared__));
 			operations.update_string("cat", native_extraction_t<any_a<>>::val(&any_a<>::cat__));
 			operations.update_string("cats", native_extraction_t<any_a<>>::val(&any_a<>::cats__));
