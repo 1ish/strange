@@ -134,6 +134,9 @@ TEST(TestCaseName, ForLoop)
 
 	auto shared_scope = shared();
 	std::cout << "shared().size() = " << shared_scope.size() << std::endl;
+
+	flock_a<> const fl = flock_t<>::val_();
+	flock_a<>(fl, true).push_back(no());
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

@@ -41,6 +41,7 @@ public:
 
 	inline any_a shared__(range_a const& _) const;
 	inline unordered_shoal_a shared_() const;
+	inline void share(shoal_a& shoal) const;
 
 	inline any_a cat__(range_a const& _) const;
 	inline cat_a cat_() const;
