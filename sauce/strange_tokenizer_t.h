@@ -591,7 +591,7 @@ template <typename _ABSTRACTION_>
 bool const tokenizer_t<_ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<tokenizer_t<>>::share(shoal);
+	tokenizer_t<_ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 

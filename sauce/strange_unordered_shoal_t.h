@@ -638,7 +638,7 @@ template <bool CONCURRENT, typename _ABSTRACTION_>
 bool const unordered_shoal_t<CONCURRENT, _ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<unordered_shoal_t<CONCURRENT>>::share(shoal);
+	unordered_shoal_t<CONCURRENT, _ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 

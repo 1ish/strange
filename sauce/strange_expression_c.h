@@ -63,7 +63,7 @@ public:
 			return op.operate_(any_a<>(me_(), true), range);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
-		reflection<expression_c<>>::share(shoal);
+		share(shoal);
 		return shoal;
 	}
 
@@ -80,8 +80,13 @@ public:
 			return cast<unordered_shoal_a<>>(result);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
-		reflection<expression_c<>>::share(shoal);
+		share(shoal);
 		return shoal;
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		reflection<expression_c<>>::share(shoal);
 	}
 
 	// expression
@@ -270,7 +275,7 @@ template <typename _ABSTRACTION_>
 bool const expression_c<_ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<expression_c<>>::share(shoal);
+	expression_c<_ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 

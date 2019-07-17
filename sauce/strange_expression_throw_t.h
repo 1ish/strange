@@ -93,7 +93,7 @@ template <typename _ABSTRACTION_>
 bool const expression_throw_t<_ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<expression_throw_t<>>::share(shoal);
+	expression_throw_t<_ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 

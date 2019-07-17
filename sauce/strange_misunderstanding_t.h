@@ -102,7 +102,7 @@ template <typename _ABSTRACTION_>
 bool const misunderstanding_t<_ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<misunderstanding_t<>>::share(shoal);
+	misunderstanding_t<_ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 

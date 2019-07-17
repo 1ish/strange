@@ -86,7 +86,7 @@ template <typename DATA, typename _ABSTRACTION_>
 bool const data_t<DATA, _ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<data_t<DATA>>::share(shoal);
+	data_t<DATA, _ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 

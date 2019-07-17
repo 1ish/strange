@@ -123,7 +123,7 @@ template <typename _ABSTRACTION_>
 bool const expression_local_insert_t<_ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<expression_local_insert_t<>>::share(shoal);
+	expression_local_insert_t<_ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 

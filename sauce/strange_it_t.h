@@ -121,7 +121,7 @@ template <bool CONST, typename END, typename _ABSTRACTION_>
 bool const it_t<CONST, END, _ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<it_t<CONST>>::share(shoal);
+	it_t<CONST, END, _ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 

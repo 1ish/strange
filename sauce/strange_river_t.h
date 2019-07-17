@@ -1015,7 +1015,7 @@ template <typename _ABSTRACTION_>
 bool const river_t<_ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<river_t<>>::share(shoal);
+	river_t<_ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 

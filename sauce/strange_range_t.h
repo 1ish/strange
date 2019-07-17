@@ -88,7 +88,7 @@ template <typename _ABSTRACTION_>
 bool const range_t<_ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<range_t<>>::share(shoal);
+	range_t<_ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 

@@ -1145,7 +1145,7 @@ template <typename PRIMITIVE, bool CONCURRENT, typename _ABSTRACTION_>
 bool const brook_t<PRIMITIVE, CONCURRENT, _ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<brook_t<PRIMITIVE, CONCURRENT>>::share(shoal);
+	brook_t<PRIMITIVE, CONCURRENT, _ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 
