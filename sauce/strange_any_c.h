@@ -426,7 +426,7 @@ public:
 
 	static inline any_a<> intimate(any_a<>& thing, any_a<> const& member, range_a<> const& range)
 	{
-		auto const& creation = static_cast<any_c const&>(thing.const_thing())._creation;
+		auto const& creation = static_cast<any_c<> const&>(thing.const_thing())._creation;
 		if (!creation.has_(member))
 		{
 			throw dis("strange::creature::intimate passed non-existent member");
