@@ -150,28 +150,13 @@ public:
 		return reflection<_ABSTRACTION_>::cats();
 	}
 
-	inline any_a<> operations__(range_a<> const& range) const
+	inline any_a<> operations__(range_a<> const& range) const // cannot be overridden
 	{
-		auto op = _operations.at_string("operations");
-		if (op)
-		{
-			return op.operate_(any_a<>(me_(), true), range);
-		}
 		return _operations;
 	}
 	
 	inline unordered_shoal_a<> operations_() const
 	{
-		auto op = _operations.at_string("operations");
-		if (op)
-		{
-			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
-			if (!check<unordered_shoal_a<>>(result))
-			{
-				throw dis("strange::any_creature::operations returned non-unordered-shoal");
-			}
-			return cast<unordered_shoal_a<>>(result);
-		}
 		return _operations;
 	}
 
