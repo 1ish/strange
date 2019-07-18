@@ -97,6 +97,11 @@ public:
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
+		auto oper = _operations.at_string("operate");
+		if (check<operation_a<>>(oper))
+		{
+			return cast<operation_a<>>(oper).pure_();
+		}
 		return no();
 	}
 
@@ -106,6 +111,11 @@ public:
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
+		}
+		auto oper = _operations.at_string("operate");
+		if (check<operation_a<>>(oper))
+		{
+			return cast<operation_a<>>(oper).pure_();
 		}
 		return no();
 	}
@@ -117,6 +127,11 @@ public:
 		{
 			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
 		}
+		auto oper = _operations.at_string("operate");
+		if (check<operation_a<>>(oper))
+		{
+			return cast<operation_a<>>(oper).pure();
+		}
 		return false;
 	}
 
@@ -126,6 +141,11 @@ public:
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
+		}
+		auto oper = _operations.at_string("operate");
+		if (check<operation_a<>>(oper))
+		{
+			return cast<operation_a<>>(oper).literal_();
 		}
 		return no();
 	}
@@ -137,6 +157,11 @@ public:
 		{
 			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
 		}
+		auto oper = _operations.at_string("operate");
+		if (check<operation_a<>>(oper))
+		{
+			return cast<operation_a<>>(oper).literal_();
+		}
 		return no();
 	}
 
@@ -146,6 +171,11 @@ public:
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
+		}
+		auto oper = _operations.at_string("operate");
+		if (check<operation_a<>>(oper))
+		{
+			return cast<operation_a<>>(oper).literal();
 		}
 		return false;
 	}
