@@ -396,6 +396,44 @@ public:
 		return range_t<>::val_(it_t<true>::val_(me_()), it_t<true>::val_());
 	}
 
+	// creature
+	static inline any_a<> intimate__(range_a<> const& range)
+	{
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
+		{
+			throw dis("strange::creature::intimate passed empty range");
+		}
+		any_a<> thing(*it, true);
+		if (++it == range.cend_())
+		{
+			throw dis("strange::creature::intimate passed short range");
+		}
+		any_a<> member = *it;
+		return intimate(thing, member, range_t<>::val_(++it, range.cend_()));
+	}
+
+	static inline any_a<> intimate_(any_a<>& thing, range_a<> const& range)
+	{
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
+		{
+			throw dis("strange::creature::intimate passed short range");
+		}
+		any_a<> member = *it;
+		return intimate(thing, member, range_t<>::val_(++it, range.cend_()));
+	}
+
+	static inline any_a<> intimate(any_a<>& thing, any_a<> const& member, range_a<> const& range)
+	{
+		auto creation = static_cast<any_c const&>(thing.const_thing())._creation;
+		if (!creation.has_(member))
+		{
+			throw dis("strange::creature::intimate passed non-existent member");
+		}
+		return creation.at_(member).operate_(thing, range);
+	}
+
 protected:
 	shoal_a<> const _creation;
 	unordered_shoal_a<> const _operations;

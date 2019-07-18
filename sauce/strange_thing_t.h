@@ -105,7 +105,7 @@ public:
 		{
 			throw dis("strange::thing::invoke passed non-existent member");
 		}
-		return operate(thing, thing.operations_().at_(member), range);
+		return thing.operations_().at_(member).operate_(thing, range);
 	}
 
 	static inline any_a<> operate__(range_a<> const& range)
@@ -121,7 +121,7 @@ public:
 			throw dis("strange::thing::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operate(thing, operation, range_t<>::val_(++it, range.cend_()));
+		return operation.operate_(thing, range_t<>::val_(++it, range.cend_()));
 	}
 
 	static inline any_a<> operate_(any_a<>& thing, range_a<> const& range)
@@ -132,12 +132,7 @@ public:
 			throw dis("strange::thing::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operate(thing, operation, range_t<>::val_(++it, range.cend_()));
-	}
-
-	static inline any_a<> operate(any_a<>& thing, any_a<> const& operation, range_a<> const& range)
-	{
-		return operation.operate_(thing, range);
+		return operation.operate_(thing, range_t<>::val_(++it, range.cend_()));
 	}
 
 	// identification
