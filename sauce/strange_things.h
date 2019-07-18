@@ -56,5 +56,7 @@
 #include "strange_expression_herd_t.h"
 #include "strange_expression_throw_t.h"
 #include "strange_expression_catch_t.h"
+#include "strange_expression_intimate_t.h"
+#include "strange_expression_intimate_range_t.h"
 
 #endif

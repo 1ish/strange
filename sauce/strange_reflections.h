@@ -78,6 +78,8 @@ class reflection;
 #include "strange_expression_herd_r.h"
 #include "strange_expression_throw_r.h"
 #include "strange_expression_catch_r.h"
+#include "strange_expression_intimate_r.h"
+#include "strange_expression_intimate_range_r.h"
 #include "strange_any_creature_r.h"
 #include "strange_operation_creature_r.h"
 #include "strange_expression_creature_r.h"
