@@ -9,6 +9,7 @@
 #include "range_forward.hpp"
 #include "symbol_forward.hpp"
 #include "flock_forward.hpp"
+#include "herd_forward.hpp"
 
 namespace strange
 {
@@ -25,19 +26,26 @@ public:
 	inline any_a<> name__(range_a<> const& _) const;
 	inline symbol_a<> name_() const;
 
-	inline any_a<> arguments__(range_a<> const& _) const;
-	inline flock_a<> arguments_() const;
+	inline any_a<> args__(range_a<> const& _) const;
+	inline flock_a<> args_() const;
 
-	inline any_a<> parameters__(range_a<> const& _) const;
-	inline flock_a<> parameters_() const;
+	inline any_a<> params__(range_a<> const& _) const;
+	inline flock_a<> params_() const;
 
 	inline any_a<> result__(range_a<> const& _) const;
 	inline cat_a result_() const;
 
+	inline any_a<> ref__(range_a<> const& _) const;
+	inline any_a<> ref_() const;
+	inline bool ref() const;
+
+	inline any_a<> subs__(range_a<> const& _) const;
+	inline herd_a<> subs_() const;
+/*
 	inline any_a<> includes__(range_a<> const& range) const;
 	inline any_a<> includes_(any_a<> const& thing) const;
 	inline bool includes(any_a<> const& thing) const;
-
+*/
 	inline any_a<> code__(range_a<> const& _) const;
 	inline lake_a_int8 code_() const;
 	inline std::string code() const;

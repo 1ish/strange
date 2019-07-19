@@ -28,23 +28,23 @@ public:
 		{
 			return val_(cast<symbol_a<>>(name));
 		}
-		any_a<> arguments = *it;
-		if (!check<flock_a<>>(arguments))
+		any_a<> args = *it;
+		if (!check<flock_a<>>(args))
 		{
-			throw dis("strange::cat::val passed non-flock arguments");
+			throw dis("strange::cat::val passed non-flock args");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments));
+			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args));
 		}
-		any_a<> parameters = *it;
-		if (!check<flock_a<>>(parameters))
+		any_a<> params = *it;
+		if (!check<flock_a<>>(params))
 		{
-			throw dis("strange::cat::val passed non-flock parameters");
+			throw dis("strange::cat::val passed non-flock params");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments), cast<flock_a<>>(parameters));
+			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params));
 		}
 		any_a<> result = *it;
 		if (!check<symbol_a<>>(result))
@@ -53,9 +53,19 @@ public:
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
+			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result));
 		}
-		return val_(cast<symbol_a<>>(name), cast<flock_a<>>(arguments), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), *it);
+		any_a<> ref = *it;
+		if (++it == range.cend_())
+		{
+			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result), ref);
+		}
+		any_a<> subs = *it;
+		if (!check<herd_a<>>(subs))
+		{
+			throw dis("strange::cat::val passed non-herd subs");
+		}
+		return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result), ref, cast<herd_a<>>(subs));
 	}
 
 	static inline cat_a<> val_()
@@ -64,14 +74,14 @@ public:
 		return VAL;
 	}
 
-	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), any_a<> const& reference = no())
+	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& args = flock_t<>::val_(), flock_a<> const& params = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool const ref = false, herd_a<> const& subs = unordered_herd_t<>::val_())
 	{
-		return cat_a<>{ over{ cat_t<>(name, arguments, parameters, result, reference) } };
+		return cat_a<>{ over{ cat_t<>(name, args, params, result, ref, subs) } };
 	}
 
-	static inline cat_a<> val(std::string const& name, flock_a<> const& arguments = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool reference = false)
+	static inline cat_a<> val(std::string const& name, flock_a<> const& args = flock_t<>::val_(), flock_a<> const& params = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool const ref = false, herd_a<> const& subs = unordered_herd_t<>::val_())
 	{
-		return val_(sym(name), arguments, parameters, result, boole(reference));
+		return val_(sym(name), args, params, result, ref, subs);
 	}
 
 	static inline symbol_a<> any_sym()
@@ -108,7 +118,7 @@ public:
 		{
 			return same;
 		}
-		return _arguments == cat.arguments_() && _parameters == cat.parameters_() && result_() == cat.result_();
+		return _args == cat.args_() && _params == cat.params_() && result_() == cat.result_();
 	}
 
 	// cat
@@ -137,24 +147,24 @@ public:
 		return _name;
 	}
 
-	inline any_a<> arguments__(range_a<> const& _) const
+	inline any_a<> args__(range_a<> const& _) const
 	{
-		return arguments_();
+		return args_();
 	}
 
-	inline flock_a<> arguments_() const
+	inline flock_a<> args_() const
 	{
-		return _arguments;
+		return _args;
 	}
 
-	inline any_a<> parameters__(range_a<> const& _) const
+	inline any_a<> params__(range_a<> const& _) const
 	{
-		return parameters_();
+		return params_();
 	}
 
-	inline flock_a<> parameters_() const
+	inline flock_a<> params_() const
 	{
-		return _parameters;
+		return _params;
 	}
 
 	inline any_a<> result__(range_a<> const& _) const
@@ -167,6 +177,31 @@ public:
 		return check<cat_a<>>(_result) ? cast<cat_a<>>(_result) : val_();
 	}
 
+	inline any_a<> ref__(range_a<> const& _) const
+	{
+		return ref_();
+	}
+
+	inline any_a<> ref_() const
+	{
+		return boole(ref());
+	}
+
+	inline bool ref() const
+	{
+		return _ref;
+	}
+
+	inline any_a<> subs__(range_a<> const& _) const
+	{
+		return subs_();
+	}
+
+	inline herd_a<> subs_() const
+	{
+		return _subs;
+	}
+	/*
 	inline any_a<> includes__(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
@@ -227,7 +262,7 @@ public:
 		}
 		throw dis("strange::cat:conforms passed non-cat-or-cats");
 	}
-
+*/
 	inline any_a<> code__(range_a<> const& _) const
 	{
 		return code_();
@@ -244,36 +279,38 @@ public:
 	}
 
 protected:
-	bool const _symbolic; // recursively true if all of the cats below are symbolic and there are no non-cat arguments
+	bool const _symbolic; // recursively true if all of the cats below are symbolic and there are no non-cat args
 	symbol_a<> const _name;
-	flock_a<> const _arguments;
-	flock_a<> const _parameters;
+	flock_a<> const _args;
+	flock_a<> const _params;
 	symbol_a<> const _result;
-	any_a<> const _reference;
+	bool const _ref;
+	herd_a<> const _subs;
 
-	inline cat_t(symbol_a<> const& name, flock_a<> const& arguments, flock_a<> const& parameters, symbol_a<> const& result, any_a<> const& reference)
-		: symbol_t{ _symbol_(name, arguments, parameters, result) }
-		, _symbolic{ _symbolic_(arguments, parameters, result) }
+	inline cat_t(symbol_a<> const& name, flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result, bool const ref, herd_a<> const& subs)
+		: symbol_t{ _symbol_(name, args, params, result) }
+		, _symbolic{ _symbolic_(args, params, result) }
 		, _name{ name }
-		, _arguments{ arguments }
-		, _parameters{ parameters }
+		, _args{ args }
+		, _params{ params }
 		, _result{ _result_(result) }
-		, _reference{ reference }
+		, _ref{ ref }
+		, _subs{ subs }
 	{}
 
-	static inline std::string const _symbol_(symbol_a<> const& name, flock_a<> const& arguments, flock_a<> const& parameters, symbol_a<> const& result)
+	static inline std::string const _symbol_(symbol_a<> const& name, flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result)
 	{
 		std::string symbol = "<" + name.to_string();
 
 		bool any = false;
 		int64_t anys = 0;
-		for (auto const& argument : arguments)
+		for (auto const& arg : args)
 		{
-			bool const is_cat = check<cat_a<>>(argument);
+			bool const is_cat = check<cat_a<>>(arg);
 			cat_a<> cat;
 			if (is_cat)
 			{
-				cat = cast<cat_a<>>(argument);
+				cat = cast<cat_a<>>(arg);
 			}
 			std::string str;
 			if (is_cat && (str = cat.to_string()) == "<>")
@@ -301,7 +338,7 @@ protected:
 			}
 			else
 			{
-				symbol += "#" + std::to_string(argument.hash());
+				symbol += "#" + std::to_string(arg.hash());
 			}
 		}
 		if (any)
@@ -311,9 +348,9 @@ protected:
 		}
 
 		anys = 0;
-		for (auto const& parameter : parameters)
+		for (auto const& param : params)
 		{
-			cat_a<> const cat = cast<cat_a<>>(parameter);
+			cat_a<> const cat = cast<cat_a<>>(param);
 			std::string const str = cat.to_string();
 			if (str == "<>")
 			{
@@ -354,22 +391,22 @@ protected:
 		return symbol;
 	}
 
-	static inline bool _symbolic_(flock_a<> const& arguments, flock_a<> const& parameters, symbol_a<> const& result)
+	static inline bool _symbolic_(flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result)
 	{
 		if (check<cat_a<>>(result) && !cast<cat_a<>>(result).symbolic())
 		{
 			return false;
 		}
-		for (auto const& argument : arguments)
+		for (auto const& arg : args)
 		{
-			if (!check<cat_a<>>(argument) || !cast<cat_a<>>(argument).symbolic())
+			if (!check<cat_a<>>(arg) || !cast<cat_a<>>(arg).symbolic())
 			{
 				return false;
 			}
 		}
-		for (auto const& parameter : parameters)
+		for (auto const& param : params)
 		{
-			if (!cast<cat_a<>>(parameter).symbolic())
+			if (!cast<cat_a<>>(param).symbolic())
 			{
 				return false;
 			}

@@ -5,6 +5,7 @@
  //#include "range_forward.hpp"
  //#include "symbol_forward.hpp"
  //#include "flock_forward.hpp"
+ //#include "herd_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>
@@ -161,24 +162,28 @@ namespace strange {
      { assert(handle_); return read().name__(_ ); }
      inline symbol_a < > name_ ( ) const
      { assert(handle_); return read().name_( ); }
-     inline any_a < > arguments__ ( range_a < > const & _ ) const
-     { assert(handle_); return read().arguments__(_ ); }
-     inline flock_a < > arguments_ ( ) const
-     { assert(handle_); return read().arguments_( ); }
-     inline any_a < > parameters__ ( range_a < > const & _ ) const
-     { assert(handle_); return read().parameters__(_ ); }
-     inline flock_a < > parameters_ ( ) const
-     { assert(handle_); return read().parameters_( ); }
+     inline any_a < > args__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().args__(_ ); }
+     inline flock_a < > args_ ( ) const
+     { assert(handle_); return read().args_( ); }
+     inline any_a < > params__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().params__(_ ); }
+     inline flock_a < > params_ ( ) const
+     { assert(handle_); return read().params_( ); }
      inline any_a < > result__ ( range_a < > const & _ ) const
      { assert(handle_); return read().result__(_ ); }
      inline cat_a result_ ( ) const
      { assert(handle_); return read().result_( ); }
-     inline any_a < > includes__ ( range_a < > const & range ) const
-     { assert(handle_); return read().includes__(range ); }
-     inline any_a < > includes_ ( any_a < > const & thing ) const
-     { assert(handle_); return read().includes_(thing ); }
-     inline bool includes ( any_a < > const & thing ) const
-     { assert(handle_); return read().includes(thing ); }
+     inline any_a < > ref__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().ref__(_ ); }
+     inline any_a < > ref_ ( ) const
+     { assert(handle_); return read().ref_( ); }
+     inline bool ref ( ) const
+     { assert(handle_); return read().ref( ); }
+     inline any_a < > subs__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().subs__(_ ); }
+     inline herd_a < > subs_ ( ) const
+     { assert(handle_); return read().subs_( ); }
      inline any_a < > code__ ( range_a < > const & _ ) const
      { assert(handle_); return read().code__(_ ); }
      inline lake_a_int8 code_ ( ) const
@@ -198,15 +203,17 @@ namespace strange {
       virtual inline bool symbolic ( ) const = 0;
       virtual inline any_a < > name__ ( range_a < > const & _ ) const = 0;
       virtual inline symbol_a < > name_ ( ) const = 0;
-      virtual inline any_a < > arguments__ ( range_a < > const & _ ) const = 0;
-      virtual inline flock_a < > arguments_ ( ) const = 0;
-      virtual inline any_a < > parameters__ ( range_a < > const & _ ) const = 0;
-      virtual inline flock_a < > parameters_ ( ) const = 0;
+      virtual inline any_a < > args__ ( range_a < > const & _ ) const = 0;
+      virtual inline flock_a < > args_ ( ) const = 0;
+      virtual inline any_a < > params__ ( range_a < > const & _ ) const = 0;
+      virtual inline flock_a < > params_ ( ) const = 0;
       virtual inline any_a < > result__ ( range_a < > const & _ ) const = 0;
       virtual inline cat_a result_ ( ) const = 0;
-      virtual inline any_a < > includes__ ( range_a < > const & range ) const = 0;
-      virtual inline any_a < > includes_ ( any_a < > const & thing ) const = 0;
-      virtual inline bool includes ( any_a < > const & thing ) const = 0;
+      virtual inline any_a < > ref__ ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > ref_ ( ) const = 0;
+      virtual inline bool ref ( ) const = 0;
+      virtual inline any_a < > subs__ ( range_a < > const & _ ) const = 0;
+      virtual inline herd_a < > subs_ ( ) const = 0;
       virtual inline any_a < > code__ ( range_a < > const & _ ) const = 0;
       virtual inline lake_a_int8 code_ ( ) const = 0;
       virtual inline std :: string code ( ) const = 0;
@@ -260,24 +267,28 @@ namespace strange {
       { return value_.name__(_ ); }
       virtual inline symbol_a < > name_ ( ) const
       { return value_.name_( ); }
-      virtual inline any_a < > arguments__ ( range_a < > const & _ ) const
-      { return value_.arguments__(_ ); }
-      virtual inline flock_a < > arguments_ ( ) const
-      { return value_.arguments_( ); }
-      virtual inline any_a < > parameters__ ( range_a < > const & _ ) const
-      { return value_.parameters__(_ ); }
-      virtual inline flock_a < > parameters_ ( ) const
-      { return value_.parameters_( ); }
+      virtual inline any_a < > args__ ( range_a < > const & _ ) const
+      { return value_.args__(_ ); }
+      virtual inline flock_a < > args_ ( ) const
+      { return value_.args_( ); }
+      virtual inline any_a < > params__ ( range_a < > const & _ ) const
+      { return value_.params__(_ ); }
+      virtual inline flock_a < > params_ ( ) const
+      { return value_.params_( ); }
       virtual inline any_a < > result__ ( range_a < > const & _ ) const
       { return value_.result__(_ ); }
       virtual inline cat_a result_ ( ) const
       { return value_.result_( ); }
-      virtual inline any_a < > includes__ ( range_a < > const & range ) const
-      { return value_.includes__(range ); }
-      virtual inline any_a < > includes_ ( any_a < > const & thing ) const
-      { return value_.includes_(thing ); }
-      virtual inline bool includes ( any_a < > const & thing ) const
-      { return value_.includes(thing ); }
+      virtual inline any_a < > ref__ ( range_a < > const & _ ) const
+      { return value_.ref__(_ ); }
+      virtual inline any_a < > ref_ ( ) const
+      { return value_.ref_( ); }
+      virtual inline bool ref ( ) const
+      { return value_.ref( ); }
+      virtual inline any_a < > subs__ ( range_a < > const & _ ) const
+      { return value_.subs__(_ ); }
+      virtual inline herd_a < > subs_ ( ) const
+      { return value_.subs_( ); }
       virtual inline any_a < > code__ ( range_a < > const & _ ) const
       { return value_.code__(_ ); }
       virtual inline lake_a_int8 code_ ( ) const
