@@ -17,6 +17,7 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::expression_catch::val", native_function_t<>::val(&expression_catch_t<>::over::val__));
+		shoal.update_string("strange::catch_", native_function_t<>::val(&expression_catch_t<>::over::val__));
 	}
 };
 
