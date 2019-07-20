@@ -49,13 +49,13 @@ protected:
 		, _literal(literal)
 	{}
 
-	static inline std::pair<cat_a<>, flock_a<>> cat_eater_params(symbol_a<> const& prefix, flock_a<> const& params)
+	static inline std::pair<cat_a<>, flock_a<>> interface_eater_params(symbol_a<> const& prefix, flock_a<> const& params)
 	{
-		std::pair<cat_a<>, flock_a<>> cat_eater(cat_t<>::val_(), flock_t<>::val_());
+		std::pair<cat_a<>, flock_a<>> interface_eater(cat_t<>::val_(), flock_t<>::val_());
 		auto it = params.cbegin_();
 		if (it == params.cend_())
 		{
-			return cat_eater;
+			return interface_eater;
 		}
 		auto cat_name = sym("");
 		auto cat_params = flock_t<>::val_();
@@ -82,7 +82,7 @@ protected:
 			}
 			else
 			{
-				cat_eater.second.push_back(name);
+				interface_eater.second.push_back(name);
 				cat_params.push_back(cat);
 			}
 			if (end)
@@ -91,8 +91,8 @@ protected:
 			}
 			++it;
 		}
-		cat_eater.first = cat_t<>::val_(cat_name, flock_t<>::val_(), cat_params, cat_result);
-		return cat_eater;
+		interface_eater.first = cat_t<>::val_(cat_name, flock_t<>::val_(), cat_params, cat_result);
+		return interface_eater;
 	}
 };
 

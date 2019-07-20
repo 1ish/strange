@@ -180,6 +180,31 @@ public:
 		return false;
 	}
 
+	inline any_a<> interface__(range_a<> const& range) const
+	{
+		auto op = _operations.at_string("interface");
+		if (op)
+		{
+			return op.operate_(any_a<>(me_(), true), range);
+		}
+		return cat_t<>::val_();
+	}
+
+	inline cat_a<> interface_() const
+	{
+		auto op = _operations.at_string("interface");
+		if (op)
+		{
+			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			if (!check<cat_a<>>(result))
+			{
+				throw dis("strange::operation_creature::interface returned non-cat");
+			}
+			return cast<cat_a<>>(result);
+		}
+		return cat_t<>::val_();
+	}
+
 protected:
 	// construction
 	inline operation_c(shoal_a<> const& creation)

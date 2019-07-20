@@ -27,6 +27,16 @@ public:
 		return val_(cast<token_a<>>(token), flock_t<>::val_() += range_t<>::val_(++it, range.cend_()));
 	}
 
+	inline any_a<> interface__(range_a<> const&) const
+	{
+		return interface_();
+	}
+
+	inline cat_a<> interface_() const
+	{
+		return cat_t<>::val_();
+	}
+
 	inline any_a<> evaluate__(range_a<> const&) const
 	{
 		return evaluate_();
