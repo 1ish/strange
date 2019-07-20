@@ -20,7 +20,8 @@ public:
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
-		return operation_a<>{ over{ native_function_t<>(fun, flock_t<>::val(std::move(v))) } };
+		return operation_a<>{ over{ native_function_t<>(fun,
+			cat_eater_params(sym(""), flock_t<>::val(std::move(v)))) } };
 	}
 
 	// reflection
@@ -35,7 +36,7 @@ public:
 
 	inline any_a<> eater_() const
 	{
-		return _params;
+		return _eater;
 	}
 
 	// function
@@ -46,12 +47,14 @@ public:
 
 protected:
 	function const _function;
-	flock_a<> const _params;
+	cat_a<> const _cat;
+	flock_a<> const _eater;
 
-	inline native_function_t(function const fun, flock_a<> const& params)
+	inline native_function_t(function const fun, std::pair<cat_a<>, flock_a<>> const& cat_eater)
 		: operation_t{}
 		, _function{ fun }
-		, _params{ params }
+		, _cat{ cat_eater.first }
+		, _eater{ cat_eater.second }
 	{}
 };
 
