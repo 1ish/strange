@@ -97,41 +97,9 @@ protected:
 	{}
 
 	inline expression_t(token_a<> const& token, std::pair<bool, bool> const& pure_literal)
-		: operation_t(pure_literal)
+		: operation_t(pure_literal.first, pure_literal.second)
 		, _token(token)
 	{}
-
-	static inline bool pure_terms(token_a<> const& token, flock_a<> const& terms)
-	{
-		for (auto const& term : terms)
-		{
-			if (!check<expression_a<>>(term))
-			{
-				throw dis(token.report() + "strange::expression::pure_terms passed non-expression");
-			}
-			if (!cast<expression_a<>>(term).pure())
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
-	static inline bool literal_terms(token_a<> const& token, flock_a<> const& terms)
-	{
-		for (auto const& term : terms)
-		{
-			if (!check<expression_a<>>(term))
-			{
-				throw dis(token.report() + "strange::expression::literal_terms passed non-expression");
-			}
-			if (!cast<expression_a<>>(term).literal())
-			{
-				return false;
-			}
-		}
-		return true;
-	}
 
 	static inline std::pair<bool, bool> pure_literal_terms(token_a<> const& token, flock_a<> const& terms)
 	{
