@@ -180,10 +180,6 @@ namespace strange {
      { assert(handle_); return read().ref_( ); }
      inline bool ref ( ) const
      { assert(handle_); return read().ref( ); }
-     inline any_a < > subs__ ( range_a < > const & _ ) const
-     { assert(handle_); return read().subs__(_ ); }
-     inline herd_a < > subs_ ( ) const
-     { assert(handle_); return read().subs_( ); }
      inline any_a < > code__ ( range_a < > const & _ ) const
      { assert(handle_); return read().code__(_ ); }
      inline lake_a_int8 code_ ( ) const
@@ -212,8 +208,6 @@ namespace strange {
       virtual inline any_a < > ref__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > ref_ ( ) const = 0;
       virtual inline bool ref ( ) const = 0;
-      virtual inline any_a < > subs__ ( range_a < > const & _ ) const = 0;
-      virtual inline herd_a < > subs_ ( ) const = 0;
       virtual inline any_a < > code__ ( range_a < > const & _ ) const = 0;
       virtual inline lake_a_int8 code_ ( ) const = 0;
       virtual inline std :: string code ( ) const = 0;
@@ -285,10 +279,6 @@ namespace strange {
       { return value_.ref_( ); }
       virtual inline bool ref ( ) const
       { return value_.ref( ); }
-      virtual inline any_a < > subs__ ( range_a < > const & _ ) const
-      { return value_.subs__(_ ); }
-      virtual inline herd_a < > subs_ ( ) const
-      { return value_.subs_( ); }
       virtual inline any_a < > code__ ( range_a < > const & _ ) const
       { return value_.code__(_ ); }
       virtual inline lake_a_int8 code_ ( ) const

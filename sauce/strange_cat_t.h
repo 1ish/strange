@@ -55,17 +55,7 @@ public:
 		{
 			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result));
 		}
-		any_a<> ref = *it;
-		if (++it == range.cend_())
-		{
-			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result), ref);
-		}
-		any_a<> subs = *it;
-		if (!check<herd_a<>>(subs))
-		{
-			throw dis("strange::cat::val passed non-herd subs");
-		}
-		return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result), ref, cast<herd_a<>>(subs));
+		return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result), *it);
 	}
 
 	static inline cat_a<> val_()
@@ -74,14 +64,14 @@ public:
 		return VAL;
 	}
 
-	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& args = flock_t<>::val_(), flock_a<> const& params = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool const ref = false, herd_a<> const& subs = unordered_herd_t<>::val_())
+	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& args = flock_t<>::val_(), flock_a<> const& params = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool const ref = false)
 	{
-		return cat_a<>{ over{ cat_t<>(name, args, params, result, ref, subs) } };
+		return cat_a<>{ over{ cat_t<>(name, args, params, result, ref) } };
 	}
 
-	static inline cat_a<> val(std::string const& name, flock_a<> const& args = flock_t<>::val_(), flock_a<> const& params = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool const ref = false, herd_a<> const& subs = unordered_herd_t<>::val_())
+	static inline cat_a<> val(std::string const& name, flock_a<> const& args = flock_t<>::val_(), flock_a<> const& params = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool const ref = false)
 	{
-		return val_(sym(name), args, params, result, ref, subs);
+		return val_(sym(name), args, params, result, ref);
 	}
 
 	static inline symbol_a<> any_sym()
@@ -191,16 +181,6 @@ public:
 	{
 		return _ref;
 	}
-
-	inline any_a<> subs__(range_a<> const& _) const
-	{
-		return subs_();
-	}
-
-	inline herd_a<> subs_() const
-	{
-		return _subs;
-	}
 	/*
 	inline any_a<> includes__(range_a<> const& range) const
 	{
@@ -285,9 +265,8 @@ protected:
 	flock_a<> const _params;
 	symbol_a<> const _result;
 	bool const _ref;
-	herd_a<> const _subs;
 
-	inline cat_t(symbol_a<> const& name, flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result, bool const ref, herd_a<> const& subs)
+	inline cat_t(symbol_a<> const& name, flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result, bool const ref)
 		: symbol_t{ _symbol_(name, args, params, result) }
 		, _symbolic{ _symbolic_(args, params, result) }
 		, _name{ name }
@@ -295,7 +274,6 @@ protected:
 		, _params{ params }
 		, _result{ _result_(result) }
 		, _ref{ ref }
-		, _subs{ subs }
 	{}
 
 	static inline std::string const _symbol_(symbol_a<> const& name, flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result)

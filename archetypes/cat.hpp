@@ -38,10 +38,10 @@ public:
 	inline any_a<> ref__(range_a<> const& _) const;
 	inline any_a<> ref_() const;
 	inline bool ref() const;
-
+/*
 	inline any_a<> subs__(range_a<> const& _) const;
 	inline herd_a<> subs_() const;
-/*
+
 	inline any_a<> includes__(range_a<> const& range) const;
 	inline any_a<> includes_(any_a<> const& thing) const;
 	inline bool includes(any_a<> const& thing) const;

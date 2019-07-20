@@ -35,7 +35,7 @@ public:
 			operations.update_string("params", native_extraction_t<cat_a<>>::val(&cat_a<>::params__));
 			operations.update_string("result", native_extraction_t<cat_a<>>::val(&cat_a<>::result__));
 			operations.update_string("ref", native_extraction_t<cat_a<>>::val(&cat_a<>::ref__));
-			operations.update_string("subs", native_extraction_t<cat_a<>>::val(&cat_a<>::subs__));
+//TODO			operations.update_string("subs", native_extraction_t<cat_a<>>::val(&cat_a<>::subs__));
 //TODO			operations.update_string("includes", native_extraction_t<cat_a<>>::val(&cat_a<>::includes__));
 			return operations;
 		}();
