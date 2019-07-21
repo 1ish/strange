@@ -35,17 +35,14 @@ public:
 	inline any_a<> result__(range_a<> const& _) const;
 	inline cat_a result_() const;
 
+	inline any_a<> def__(range_a<> const& _) const;
+	inline any_a<> def_() const;
+	inline bool def() const;
+
 	inline any_a<> ref__(range_a<> const& _) const;
 	inline any_a<> ref_() const;
 	inline bool ref() const;
-/*
-	inline any_a<> subs__(range_a<> const& _) const;
-	inline herd_a<> subs_() const;
 
-	inline any_a<> includes__(range_a<> const& range) const;
-	inline any_a<> includes_(any_a<> const& thing) const;
-	inline bool includes(any_a<> const& thing) const;
-*/
 	inline any_a<> code__(range_a<> const& _) const;
 	inline lake_a_int8 code_() const;
 	inline std::string code() const;

@@ -174,6 +174,12 @@ namespace strange {
      { assert(handle_); return read().result__(_ ); }
      inline cat_a result_ ( ) const
      { assert(handle_); return read().result_( ); }
+     inline any_a < > def__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().def__(_ ); }
+     inline any_a < > def_ ( ) const
+     { assert(handle_); return read().def_( ); }
+     inline bool def ( ) const
+     { assert(handle_); return read().def( ); }
      inline any_a < > ref__ ( range_a < > const & _ ) const
      { assert(handle_); return read().ref__(_ ); }
      inline any_a < > ref_ ( ) const
@@ -205,6 +211,9 @@ namespace strange {
       virtual inline flock_a < > params_ ( ) const = 0;
       virtual inline any_a < > result__ ( range_a < > const & _ ) const = 0;
       virtual inline cat_a result_ ( ) const = 0;
+      virtual inline any_a < > def__ ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > def_ ( ) const = 0;
+      virtual inline bool def ( ) const = 0;
       virtual inline any_a < > ref__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > ref_ ( ) const = 0;
       virtual inline bool ref ( ) const = 0;
@@ -273,6 +282,12 @@ namespace strange {
       { return value_.result__(_ ); }
       virtual inline cat_a result_ ( ) const
       { return value_.result_( ); }
+      virtual inline any_a < > def__ ( range_a < > const & _ ) const
+      { return value_.def__(_ ); }
+      virtual inline any_a < > def_ ( ) const
+      { return value_.def_( ); }
+      virtual inline bool def ( ) const
+      { return value_.def( ); }
       virtual inline any_a < > ref__ ( range_a < > const & _ ) const
       { return value_.ref__(_ ); }
       virtual inline any_a < > ref_ ( ) const

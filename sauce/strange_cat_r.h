@@ -34,9 +34,8 @@ public:
 			operations.update_string("args", native_extraction_t<cat_a<>>::val(&cat_a<>::args__, "args"));
 			operations.update_string("params", native_extraction_t<cat_a<>>::val(&cat_a<>::params__, "params"));
 			operations.update_string("result", native_extraction_t<cat_a<>>::val(&cat_a<>::result__, "result"));
+			operations.update_string("def", native_extraction_t<cat_a<>>::val(&cat_a<>::ref__, "def"));
 			operations.update_string("ref", native_extraction_t<cat_a<>>::val(&cat_a<>::ref__, "ref"));
-//TODO			operations.update_string("subs", native_extraction_t<cat_a<>>::val(&cat_a<>::subs__, "subs"));
-//TODO			operations.update_string("includes", native_extraction_t<cat_a<>>::val(&cat_a<>::includes__, "includes"));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -56,7 +55,6 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::cat::val", native_function_t<>::val(&cat_t<>::val__, "strange::cat::val"));
-//TODO		shoal.update_string("strange::cat::conforms", native_function_t<>::val(&cat_t<>::conforms__));
 	}
 };
 
