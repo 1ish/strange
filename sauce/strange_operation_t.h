@@ -94,6 +94,13 @@ protected:
 		cat_eater.first = cat_t<>::val_(cat_name, flock_t<>::val_(), cat_params, cat_result);
 		return cat_eater;
 	}
+
+	static inline unordered_herd_a<> cats(cat_a<> const& cat)
+	{
+		auto result = reflection<_ABSTRACTION_>::cats();
+		result.insert(cat);
+		return result;
+	}
 };
 
 } // namespace strange

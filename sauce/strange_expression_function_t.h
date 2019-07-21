@@ -84,9 +84,7 @@ public:
 
 	inline unordered_herd_a<> cats_() const
 	{
-		auto result = reflection<_ABSTRACTION_>::cats();
-		result.insert(cat_());
-		return result;
+		return _cats;
 	}
 
 	inline any_a<> eater_() const
@@ -207,6 +205,7 @@ protected:
 	cat_a<> const _result;
 	expression_a<> const _expression;
 	cat_a<> const _cat;
+	unordered_herd_a<> const _cats;
 	unordered_shoal_a<> const _shared;
 
 	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& params, flock_a<> const& values, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
@@ -220,6 +219,7 @@ protected:
 		, _result{ result }
 		, _expression{ expression }
 		, _cat{ cat_t<>::val_(_name, flock_t<>::val_(), _params, _result) }
+		, _cats{ cats(_cat) }
 		, _shared{ unordered_shoal_t<true>::val_() }
 	{}
 

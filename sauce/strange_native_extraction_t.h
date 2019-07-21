@@ -51,9 +51,7 @@ public:
 
 	inline unordered_herd_a<> cats_() const
 	{
-		auto result = reflection<_ABSTRACTION_>::cats();
-		result.insert(cat_());
-		return result;
+		return _cats;
 	}
 
 	inline any_a<> eater_() const
@@ -71,12 +69,14 @@ public:
 protected:
 	const_member const _function;
 	cat_a<> const _cat;
+	unordered_herd_a<> const _cats;
 	flock_a<> const _eater;
 
 	inline native_extraction_t(const_member const fun, std::pair<cat_a<>, flock_a<>> const& cat_eater)
 		: operation_t{}
 		, _function{ fun }
 		, _cat{ cat_eater.first }
+		, _cats{ cats(_cat) }
 		, _eater{ cat_eater.second }
 	{}
 };
