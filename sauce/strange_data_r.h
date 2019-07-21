@@ -29,6 +29,11 @@ public:
 	{
 		return reflection<any_a<>>::operations();
 	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update(cat(), operations());
+	}
 };
 
 template<>
@@ -55,6 +60,11 @@ public:
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<any_a<>>::operations();
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update(cat(), operations());
 	}
 };
 
@@ -83,6 +93,11 @@ public:
 	{
 		return reflection<any_a<>>::operations();
 	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update(cat(), operations());
+	}
 };
 
 template<>
@@ -109,6 +124,11 @@ public:
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<any_a<>>::operations();
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update(cat(), operations());
 	}
 };
 

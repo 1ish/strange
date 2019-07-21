@@ -40,6 +40,11 @@ public:
 		}();
 		return OPERATIONS;
 	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update(cat(), operations());
+	}
 };
 
 template<>
@@ -54,7 +59,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::cat::val", native_function_t<>::val(&cat_t<>::val__, "strange::cat::val"));
+		shoal.update_string("strange::cat::val", native_function_t<>::val(&cat_t<>::val__, "val"));
 	}
 };
 

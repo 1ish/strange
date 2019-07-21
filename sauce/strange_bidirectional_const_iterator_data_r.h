@@ -29,6 +29,11 @@ public:
 	{
 		return reflection<bidirectional_const_iterator_a<>>::operations();
 	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update(cat(), operations());
+	}
 };
 
 template<>
@@ -55,6 +60,11 @@ public:
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<bidirectional_const_iterator_a<>>::operations();
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		shoal.update(cat(), operations());
 	}
 };
 

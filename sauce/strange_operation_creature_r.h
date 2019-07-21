@@ -17,7 +17,6 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::operation_creature::val", native_function_t<>::val(&operation_c<>::val__));
-		shoal.update(reflection<operation_a<>>::cat(), native_function_t<>::val(&operation_c<>::val__));
 	}
 };
 
