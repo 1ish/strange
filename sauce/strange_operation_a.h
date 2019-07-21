@@ -94,10 +94,6 @@ namespace strange {
      { assert(handle_); return read().literal_( ); }
      inline bool literal ( ) const
      { assert(handle_); return read().literal( ); }
-     inline any_a < > interface__ ( range_a < > const & _ ) const
-     { assert(handle_); return read().interface__(_ ); }
-     inline cat_a < > interface_ ( ) const
-     { assert(handle_); return read().interface_( ); }
     
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
@@ -108,8 +104,6 @@ namespace strange {
       virtual inline any_a < > literal__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > literal_ ( ) const = 0;
       virtual inline bool literal ( ) const = 0;
-      virtual inline any_a < > interface__ ( range_a < > const & _ ) const = 0;
-      virtual inline cat_a < > interface_ ( ) const = 0;
     	};
     
     	template <typename ___TTT___, typename ___DHB___ = ___derived_handle_base___>
@@ -137,10 +131,6 @@ namespace strange {
       { return value_.literal_( ); }
       virtual inline bool literal ( ) const
       { return value_.literal( ); }
-      virtual inline any_a < > interface__ ( range_a < > const & _ ) const
-      { return value_.interface__(_ ); }
-      virtual inline cat_a < > interface_ ( ) const
-      { return value_.interface_( ); }
     	};
     
     	template <typename ___TTT___, typename ___DHB___>

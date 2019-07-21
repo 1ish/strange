@@ -14,15 +14,23 @@ public:
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
+		if (terms.empty())
+		{
+			throw dis(token.report() + "strange::expression_function::val passed no terms");
+		}
 		auto names = flock_t<>::val_();
-		auto cats = flock_t<>::val_();
+		auto params = flock_t<>::val_();
 		auto values = flock_t<>::val_();
 		auto defaults = flock_t<>::val_();
+		any_a<> name = sym("");
+		any_a<> cat = cat_t<>::val_();
 		any_a<> value = no();
 		for (auto const& term : terms)
 		{
 			if (value)
 			{
+				names.push_back(name);
+				params.push_back(cat);
 				values.push_back(value);
 				defaults.push_back(cast<expression_a<>>(value).evaluate_());
 			}
@@ -37,19 +45,17 @@ public:
 				throw dis(token.report() + "strange::expression_function::val passed wrong number of subterms");
 			}
 
-			auto name = subterms.at_index(0);
+			name = subterms.at_index(0);
 			if (!check<symbol_a<>>(name))
 			{
 				throw dis(token.report() + "strange::expression_function::val passed non-symbol name");
 			}
-			names.push_back(name);
 
-			auto cat = subterms.at_index(1);
+			cat = subterms.at_index(1);
 			if (!check<cat_a<>>(cat))
 			{
 				throw dis(token.report() + "strange::expression_function::val passed non-cat");
 			}
-			cats.push_back(cat);
 
 			value = subterms.at_index(2);
 			if (!check<expression_a<>>(value))
@@ -57,11 +63,7 @@ public:
 				throw dis(token.report() + "strange::expression_function::val passed non-expression catch");
 			}
 		}
-		if (!value)
-		{
-			throw dis(token.report() + "strange::expression_function::val passed no terms");
-		}
-		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, terms, names, cats, values, defaults, cast<expression_a<>>(value)) });
+		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) });
 	}
 
 	// reflection
@@ -73,6 +75,18 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		reflection<expression_function_t<>>::share(shoal);
+	}
+
+	inline cat_a<> cat_() const
+	{
+		return _cat;
+	}
+
+	inline unordered_herd_a<> cats_() const
+	{
+		auto result = reflection<_ABSTRACTION_>::cats();
+		result.insert(cat_());
+		return result;
 	}
 
 	inline any_a<> eater_() const
@@ -89,13 +103,13 @@ public:
 		local.emplace(sym("^"), thing);
 		forward_const_iterator_a<> ait = range.cbegin_();
 		auto nit = _names.extract().cbegin();
-		auto cit = _cats.extract().cbegin();
+		auto pit = _params.extract().cbegin();
 		for (auto const& def : _defaults.extract())
 		{
 			any_a<> argument = (ait == range.cend_())
 				? def
 				: (*ait++);
-			if (!argument.cats_().has_(*cit++))
+			if (!argument.cats_().has_(*pit++))
 			{
 				throw dis(_token.report() + "strange::expression_function::operate cat does not include argument");
 			}
@@ -104,7 +118,7 @@ public:
 		try
 		{
 			auto result = _expression.operate_(local_shoal, range);
-			if (!result.cats_().has_(*cit))
+			if (!result.cats_().has_(_result))
 			{
 				throw dis(_token.report() + "strange::expression_function::operate cat does not include result");
 			}
@@ -112,7 +126,7 @@ public:
 		}
 		catch (return_i& ret)
 		{
-			if (!ret.result.cats_().has_(*cit))
+			if (!ret.result.cats_().has_(_result))
 			{
 				throw dis(_token.report() + "strange::expression_function::operate cat does not include result");
 			}
@@ -130,7 +144,7 @@ public:
 	{
 		river.write_string(" function(");
 		auto nit = _names.extract().cbegin();
-		auto cit = _cats.extract().cbegin();
+		auto pit = _params.extract().cbegin();
 		auto vit = _values.extract().cbegin();
 		bool first = true;
 		for (auto const& def : _defaults.extract())
@@ -144,7 +158,7 @@ public:
 				river.write_string(",");
 			}
 			auto name = cast<symbol_a<>>(*nit++);
-			auto cat = cast<cat_a<>>(*cit++);
+			auto cat = cast<cat_a<>>(*pit++);
 			auto value = cast<expression_a<>>(*vit++);
 			river.write_string(name.to_string() + ":");
 			river.write_string(cat.to_string() + "=");
@@ -158,7 +172,7 @@ public:
 	{
 		river.write_string(" [](");
 		auto nit = _names.extract().cbegin();
-		auto cit = _cats.extract().cbegin();
+		auto pit = _params.extract().cbegin();
 		auto vit = _values.extract().cbegin();
 		bool first = true;
 		for (auto const& def : _defaults.extract())
@@ -172,7 +186,7 @@ public:
 				river.write_string(",");
 			}
 			auto name = cast<symbol_a<>>(*nit++);
-			auto cat = cast<cat_a<>>(*cit++);
+			auto cat = cast<cat_a<>>(*pit++);
 			auto value = cast<expression_a<>>(*vit++);
 			river.write_string("catch(" + cat.name_().to_string() + "_a<> const& ");
 			river.write_string(name.to_string() + " =");
@@ -186,20 +200,26 @@ public:
 protected:
 	flock_a<> const _terms;
 	flock_a<> const _names;
-	flock_a<> const _cats;
+	flock_a<> const _params;
 	flock_a<> const _values;
 	flock_a<> const _defaults;
+	symbol_a<> const _name;
+	cat_a<> const _result;
 	expression_a<> const _expression;
+	cat_a<> const _cat;
 	unordered_shoal_a<> const _shared;
 
-	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& cats, flock_a<> const& values, flock_a<> const& defaults, expression_a<> const& expression)
+	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& params, flock_a<> const& values, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _names{ names }
-		, _cats{ cats }
+		, _params{ params }
 		, _values{ values }
 		, _defaults{ defaults }
+		, _name{ name }
+		, _result{ result }
 		, _expression{ expression }
+		, _cat{ cat_t<>::val_(_name, flock_t<>::val_(), _params, _result) }
 		, _shared{ unordered_shoal_t<true>::val_() }
 	{}
 

@@ -21,7 +21,7 @@ public:
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
 		return operation_a<>{ over{ native_function_t<>(fun,
-			interface_eater_params(flock_t<>::val(std::move(v)))) } };
+			cat_eater_params(flock_t<>::val(std::move(v)))) } };
 	}
 
 	// reflection
@@ -34,6 +34,28 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{}
 
+	inline any_a<> cat__(range_a<> const&) const
+	{
+		return cat_();
+	}
+
+	inline cat_a<> cat_() const
+	{
+		return _cat;
+	}
+
+	inline any_a<> cats__(range_a<> const&) const
+	{
+		return cats_();
+	}
+
+	inline unordered_herd_a<> cats_() const
+	{
+		auto result = reflection<_ABSTRACTION_>::cats();
+		result.insert(cat_());
+		return result;
+	}
+
 	inline any_a<> eater_() const
 	{
 		return _eater;
@@ -45,27 +67,16 @@ public:
 		return _function(range);
 	}
 
-	// operation
-	inline any_a<> interface__(range_a<> const&) const
-	{
-		return interface_();
-	}
-
-	inline cat_a<> interface_() const
-	{
-		return _interface;
-	}
-
 protected:
 	function const _function;
-	cat_a<> const _interface;
+	cat_a<> const _cat;
 	flock_a<> const _eater;
 
-	inline native_function_t(function const fun, std::pair<cat_a<>, flock_a<>> const& interface_eater)
+	inline native_function_t(function const fun, std::pair<cat_a<>, flock_a<>> const& cat_eater)
 		: operation_t{}
 		, _function{ fun }
-		, _interface{ interface_eater.first }
-		, _eater{ interface_eater.second }
+		, _cat{ cat_eater.first }
+		, _eater{ cat_eater.second }
 	{}
 };
 
