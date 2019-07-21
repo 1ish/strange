@@ -27,15 +27,6 @@ public:
 
 	inline any_a<> interface__(range_a<> const& _) const;
 	inline cat_a<> interface_() const;
-
-	inline any_a<> names__(range_a<> const& _) const;
-	inline flock_a<> names_() const;
-
-	inline any_a<> cats__(range_a<> const& _) const;
-	inline flock_a<> cats_() const;
-
-	inline any_a<> defaults__(range_a<> const& _) const;
-	inline flock_a<> defaults_() const;
 };
 
 } // namespace strange
