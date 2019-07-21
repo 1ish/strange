@@ -57,11 +57,14 @@ protected:
 		{
 			return cat_eater;
 		}
-		auto cat_name = sym("");
+		auto cat = *it;
+		if (!check<cat_a<>>(cat))
+		{
+			throw dis("strange::native_mutation::val passed non-cat result");
+		}
+		auto cat_result = cast<cat_a<>>(cat);
 		auto cat_params = flock_t<>::val_();
-		auto cat_result = cat_t<>::val_();
-		bool first = true;
-		while (it != params.cend_())
+		while (++it != params.cend_())
 		{
 			auto name = *it;
 			if (!check<symbol_a<>>(name))
@@ -69,29 +72,19 @@ protected:
 				throw dis("strange::native_mutation::val passed non-symbol name");
 			}
 			bool const end = (++it == params.cend_());
-			auto cat = end ? cast<any_a<>>(cat_t<>::val_()) : *it;
+			cat = end ? cast<any_a<>>(cat_t<>::val_()) : *it;
 			if (!end && !check<cat_a<>>(cat))
 			{
 				throw dis("strange::native_mutation::val passed non-cat param");
 			}
-			if (first)
-			{
-				cat_name = cast<symbol_a<>>(name);
-				cat_result = cast<cat_a<>>(cat);
-				first = false;
-			}
-			else
-			{
-				cat_eater.second.push_back(name);
-				cat_params.push_back(cat);
-			}
+			cat_eater.second.push_back(name);
+			cat_params.push_back(cat);
 			if (end)
 			{
 				break;
 			}
-			++it;
 		}
-		cat_eater.first = cat_t<>::val_(cat_name, flock_t<>::val_(), cat_params, cat_result);
+		cat_eater.first = cat_t<>::val("", flock_t<>::val_(), cat_params, cat_result);
 		return cat_eater;
 	}
 
