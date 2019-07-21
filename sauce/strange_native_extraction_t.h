@@ -21,7 +21,7 @@ public:
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
 		return operation_a<>{ over{ native_extraction_t<T>(fun,
-			interface_eater_params(reflection<T>::cat().name_() + sym(":#"), flock_t<>::val(std::move(v)))) } };
+			interface_eater_params(flock_t<>::val(std::move(v)))) } };
 	}
 
 	// reflection

@@ -49,7 +49,7 @@ protected:
 		, _literal(literal)
 	{}
 
-	static inline std::pair<cat_a<>, flock_a<>> interface_eater_params(symbol_a<> const& prefix, flock_a<> const& params)
+	static inline std::pair<cat_a<>, flock_a<>> interface_eater_params(flock_a<> const& params)
 	{
 		std::pair<cat_a<>, flock_a<>> interface_eater(cat_t<>::val_(), flock_t<>::val_());
 		auto it = params.cbegin_();
@@ -76,7 +76,7 @@ protected:
 			}
 			if (first)
 			{
-				cat_name = prefix + cast<symbol_a<>>(name);
+				cat_name = cast<symbol_a<>>(name);
 				cat_result = cast<cat_a<>>(cat);
 				first = false;
 			}
