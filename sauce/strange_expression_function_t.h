@@ -17,14 +17,14 @@ public:
 		auto names = flock_t<>::val_();
 		auto cats = flock_t<>::val_();
 		auto values = flock_t<>::val_();
-		auto evaluated = flock_t<>::val_();
+		auto defaults = flock_t<>::val_();
 		any_a<> value = no();
 		for (auto const& term : terms)
 		{
 			if (value)
 			{
 				values.push_back(value);
-				evaluated.push_back(cast<expression_a<>>(value).evaluate_());
+				defaults.push_back(cast<expression_a<>>(value).evaluate_());
 			}
 
 			if (!check<expression_a<>>(term))
@@ -61,7 +61,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_function::val passed no terms");
 		}
-		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, terms, names, cats, values, evaluated, cast<expression_a<>>(value)) });
+		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, terms, names, cats, values, defaults, cast<expression_a<>>(value)) });
 	}
 
 	// reflection
@@ -90,10 +90,10 @@ public:
 		forward_const_iterator_a<> ait = range.cbegin_();
 		auto nit = _names.extract().cbegin();
 		auto cit = _cats.extract().cbegin();
-		for (auto const& eval : _evaluated.extract())
+		for (auto const& def : _defaults.extract())
 		{
 			any_a<> argument = (ait == range.cend_())
-				? eval
+				? def
 				: (*ait++);
 			if (!argument.cats_().has_(*cit++))
 			{
@@ -133,7 +133,7 @@ public:
 		auto cit = _cats.extract().cbegin();
 		auto vit = _values.extract().cbegin();
 		bool first = true;
-		for (auto const& eval : _evaluated.extract())
+		for (auto const& def : _defaults.extract())
 		{
 			if (first)
 			{
@@ -161,7 +161,7 @@ public:
 		auto cit = _cats.extract().cbegin();
 		auto vit = _values.extract().cbegin();
 		bool first = true;
-		for (auto const& eval : _evaluated.extract())
+		for (auto const& def : _defaults.extract())
 		{
 			if (first)
 			{
@@ -188,17 +188,17 @@ protected:
 	flock_a<> const _names;
 	flock_a<> const _cats;
 	flock_a<> const _values;
-	flock_a<> const _evaluated;
+	flock_a<> const _defaults;
 	expression_a<> const _expression;
 	unordered_shoal_a<> const _shared;
 
-	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& cats, flock_a<> const& values, flock_a<> const& evaluated, expression_a<> const& expression)
+	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& cats, flock_a<> const& values, flock_a<> const& defaults, expression_a<> const& expression)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _names{ names }
 		, _cats{ cats }
 		, _values{ values }
-		, _evaluated{ evaluated }
+		, _defaults{ defaults }
 		, _expression{ expression }
 		, _shared{ unordered_shoal_t<true>::val_() }
 	{}
