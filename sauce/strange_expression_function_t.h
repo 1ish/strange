@@ -236,14 +236,6 @@ bool const expression_function_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___expression_function_t_share___
-{
-	static inline bool ___share___()
-	{
-		return expression_function_t<>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

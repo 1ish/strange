@@ -156,14 +156,6 @@ bool const expression_invoke_range_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___expression_invoke_range_t_share___
-{
-	static inline bool ___share___()
-	{
-		return expression_invoke_range_t<>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

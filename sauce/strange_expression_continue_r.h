@@ -21,6 +21,14 @@ public:
 	}
 };
 
+class ___expression_continue_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_continue_t<>::___share___;
+	}
+};
+
 }
 
 #endif

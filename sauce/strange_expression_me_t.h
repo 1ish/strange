@@ -75,14 +75,6 @@ bool const expression_me_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___expression_me_t_share___
-{
-	static inline bool ___share___()
-	{
-		return expression_me_t<>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

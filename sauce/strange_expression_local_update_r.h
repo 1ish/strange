@@ -20,6 +20,14 @@ public:
 	}
 };
 
+class ___expression_local_update_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_local_update_t<>::___share___;
+	}
+};
+
 }
 
 #endif

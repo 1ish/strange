@@ -46,6 +46,14 @@ public:
 	}
 };
 
+class ___expression_a_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_a<>::___share___;
+	}
+};
+
 template<>
 class reflection<expression_t<>>
 {
@@ -59,6 +67,14 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::expression::val", native_function_t<>::val(&expression_t<>::over::val__));
+	}
+};
+
+class ___expression_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_t<>::___share___;
 	}
 };
 

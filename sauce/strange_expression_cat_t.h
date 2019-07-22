@@ -225,14 +225,6 @@ bool const expression_cat_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___expression_cat_t_share___
-{
-	static inline bool ___share___()
-	{
-		return expression_cat_t<>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif
