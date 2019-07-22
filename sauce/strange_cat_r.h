@@ -47,6 +47,14 @@ public:
 	}
 };
 
+class ___cat_a_share___
+{
+	static inline bool ___share___()
+	{
+		return cat_a<>::___share___;
+	}
+};
+
 template<>
 class reflection<cat_t<>>
 {

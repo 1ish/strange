@@ -510,7 +510,11 @@ namespace strange {
 
     	}
 
-    };
+
+	private:
+		static bool const ___share___;
+		friend class ___cat_a_share___;
+	};
 
     
 
@@ -524,7 +528,16 @@ namespace strange {
 
     }
 
-    
+	template <typename _1_>
+	bool const cat_a<_1_>::___share___ = []()
+	{
+		auto shoal = shoal_a<>(shared(), true);
+		reflection<cat_a<_1_>>::share(shoal);
+		return shoal;
+	}();
+
+
+
 
     #undef ___derived___
 
