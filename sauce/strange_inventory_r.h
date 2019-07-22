@@ -43,6 +43,14 @@ public:
 	}
 };
 
+class ___inventory_a_share___
+{
+	static inline bool ___share___()
+	{
+		return inventory_a<>::___share___;
+	}
+};
+
 }
 
 #endif

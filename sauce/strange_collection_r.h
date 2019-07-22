@@ -57,6 +57,14 @@ public:
 	}
 };
 
+class ___collection_a_share___
+{
+	static inline bool ___share___()
+	{
+		return collection_a<>::___share___;
+	}
+};
+
 }
 
 #endif

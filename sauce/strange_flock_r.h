@@ -36,6 +36,14 @@ public:
 	}
 };
 
+class ___flock_a_share___
+{
+	static inline bool ___share___()
+	{
+		return flock_a<>::___share___;
+	}
+};
+
 template<>
 class reflection<flock_t<>>
 {
@@ -65,6 +73,15 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::flock_concurrent::val", native_function_t<>::val(&flock_t<true>::val__));
+	}
+};
+
+class ___flock_t_share___
+{
+	static inline bool ___share___()
+	{
+		return flock_t<>::___share___
+			&& flock_t<true>::___share___;
 	}
 };
 

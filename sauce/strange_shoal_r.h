@@ -43,6 +43,14 @@ public:
 	}
 };
 
+class ___shoal_a_share___
+{
+	static inline bool ___share___()
+	{
+		return shoal_a<>::___share___;
+	}
+};
+
 }
 
 #endif

@@ -1179,33 +1179,6 @@ using brook_float_32_t = brook_t<float, CONCURRENT, _ABSTRACTION_>;
 template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<double>>
 using brook_float_64_t = brook_t<double, CONCURRENT, _ABSTRACTION_>;
 
-class ___brook_t_share___
-{
-	static inline bool ___share___()
-	{
-		return brook_int_8_t<>::___share___
-			&& brook_uint_8_t<>::___share___
-			&& brook_int_16_t<>::___share___
-			&& brook_uint_16_t<>::___share___
-			&& brook_int_32_t<>::___share___
-			&& brook_uint_32_t<>::___share___
-			&& brook_int_64_t<>::___share___
-			&& brook_uint_64_t<>::___share___
-			&& brook_float_32_t<>::___share___
-			&& brook_float_64_t<>::___share___
-			&& brook_int_8_t<true>::___share___
-			&& brook_uint_8_t<true>::___share___
-			&& brook_int_16_t<true>::___share___
-			&& brook_uint_16_t<true>::___share___
-			&& brook_int_32_t<true>::___share___
-			&& brook_uint_32_t<true>::___share___
-			&& brook_int_64_t<true>::___share___
-			&& brook_uint_64_t<true>::___share___
-			&& brook_float_32_t<true>::___share___
-			&& brook_float_64_t<true>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

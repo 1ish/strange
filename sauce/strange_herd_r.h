@@ -36,6 +36,14 @@ public:
 	}
 };
 
+class ___herd_a_share___
+{
+	static inline bool ___share___()
+	{
+		return herd_a<>::___share___;
+	}
+};
+
 }
 
 #endif

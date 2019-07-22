@@ -71,6 +71,14 @@ public:
 	}
 };
 
+class ___cat_t_share___
+{
+	static inline bool ___share___()
+	{
+		return cat_t<>::___share___;
+	}
+};
+
 }
 
 #endif

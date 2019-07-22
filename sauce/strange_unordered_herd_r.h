@@ -36,6 +36,14 @@ public:
 	}
 };
 
+class ___unordered_herd_a_share___
+{
+	static inline bool ___share___()
+	{
+		return unordered_herd_a<>::___share___;
+	}
+};
+
 template<>
 class reflection<unordered_herd_t<>>
 {
@@ -65,6 +73,15 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::unordered_herd_concurrent::val", native_function_t<>::val(&unordered_herd_t<true>::val__));
+	}
+};
+
+class ___unordered_herd_t_share___
+{
+	static inline bool ___share___()
+	{
+		return unordered_herd_t<>::___share___
+			&& unordered_herd_t<true>::___share___;
 	}
 };
 

@@ -324,6 +324,23 @@ public:
 	}
 };
 
+class ___lake_a_share___
+{
+	static inline bool ___share___()
+	{
+		return lake_a<int8_t>::___share___
+			&& lake_a<uint8_t>::___share___
+			&& lake_a<int16_t>::___share___
+			&& lake_a<uint16_t>::___share___
+			&& lake_a<int32_t>::___share___
+			&& lake_a<uint32_t>::___share___
+			&& lake_a<int64_t>::___share___
+			&& lake_a<uint64_t>::___share___
+			&& lake_a<float>::___share___
+			&& lake_a<double>::___share___;
+	}
+};
+
 template<>
 class reflection<lake_int_8_t<>>
 {
@@ -641,6 +658,33 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::lake_float_64_concurrent::val", native_function_t<>::val(&lake_float_64_t<true>::val__));
+	}
+};
+
+class ___lake_t_share___
+{
+	static inline bool ___share___()
+	{
+		return lake_int_8_t<>::___share___
+			&& lake_uint_8_t<>::___share___
+			&& lake_int_16_t<>::___share___
+			&& lake_uint_16_t<>::___share___
+			&& lake_int_32_t<>::___share___
+			&& lake_uint_32_t<>::___share___
+			&& lake_int_64_t<>::___share___
+			&& lake_uint_64_t<>::___share___
+			&& lake_float_32_t<>::___share___
+			&& lake_float_64_t<>::___share___
+			&& lake_int_8_t<true>::___share___
+			&& lake_uint_8_t<true>::___share___
+			&& lake_int_16_t<true>::___share___
+			&& lake_uint_16_t<true>::___share___
+			&& lake_int_32_t<true>::___share___
+			&& lake_uint_32_t<true>::___share___
+			&& lake_int_64_t<true>::___share___
+			&& lake_uint_64_t<true>::___share___
+			&& lake_float_32_t<true>::___share___
+			&& lake_float_64_t<true>::___share___;
 	}
 };
 

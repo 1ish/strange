@@ -696,15 +696,6 @@ bool const ordered_shoal_t<CONCURRENT, _ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___ordered_shoal_t_share___
-{
-	static inline bool ___share___()
-	{
-		return ordered_shoal_t<>::___share___
-			&& ordered_shoal_t<true>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

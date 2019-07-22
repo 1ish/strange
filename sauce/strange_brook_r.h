@@ -324,6 +324,23 @@ public:
 	}
 };
 
+class ___brook_a_share___
+{
+	static inline bool ___share___()
+	{
+		return brook_a<int8_t>::___share___
+			&& brook_a<uint8_t>::___share___
+			&& brook_a<int16_t>::___share___
+			&& brook_a<uint16_t>::___share___
+			&& brook_a<int32_t>::___share___
+			&& brook_a<uint32_t>::___share___
+			&& brook_a<int64_t>::___share___
+			&& brook_a<uint64_t>::___share___
+			&& brook_a<float>::___share___
+			&& brook_a<double>::___share___;
+	}
+};
+
 template<>
 class reflection<brook_int_8_t<>>
 {
@@ -641,6 +658,33 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::brook_float_64_concurrent::val", native_function_t<>::val(&brook_float_64_t<true>::val__));
+	}
+};
+
+class ___brook_t_share___
+{
+	static inline bool ___share___()
+	{
+		return brook_int_8_t<>::___share___
+			&& brook_uint_8_t<>::___share___
+			&& brook_int_16_t<>::___share___
+			&& brook_uint_16_t<>::___share___
+			&& brook_int_32_t<>::___share___
+			&& brook_uint_32_t<>::___share___
+			&& brook_int_64_t<>::___share___
+			&& brook_uint_64_t<>::___share___
+			&& brook_float_32_t<>::___share___
+			&& brook_float_64_t<>::___share___
+			&& brook_int_8_t<true>::___share___
+			&& brook_uint_8_t<true>::___share___
+			&& brook_int_16_t<true>::___share___
+			&& brook_uint_16_t<true>::___share___
+			&& brook_int_32_t<true>::___share___
+			&& brook_uint_32_t<true>::___share___
+			&& brook_int_64_t<true>::___share___
+			&& brook_uint_64_t<true>::___share___
+			&& brook_float_32_t<true>::___share___
+			&& brook_float_64_t<true>::___share___;
 	}
 };
 

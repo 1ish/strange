@@ -1098,15 +1098,6 @@ bool const flock_t<CONCURRENT, _ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___flock_t_share___
-{
-	static inline bool ___share___()
-	{
-		return flock_t<>::___share___
-			&& flock_t<true>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

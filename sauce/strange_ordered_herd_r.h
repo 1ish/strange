@@ -36,6 +36,14 @@ public:
 	}
 };
 
+class ___ordered_herd_a_share___
+{
+	static inline bool ___share___()
+	{
+		return ordered_herd_a<>::___share___;
+	}
+};
+
 template<>
 class reflection<ordered_herd_t<>>
 {
@@ -65,6 +73,15 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::ordered_herd_concurrent::val", native_function_t<>::val(&ordered_herd_t<true>::val__));
+	}
+};
+
+class ___ordered_herd_t_share___
+{
+	static inline bool ___share___()
+	{
+		return ordered_herd_t<>::___share___
+			&& ordered_herd_t<true>::___share___;
 	}
 };
 

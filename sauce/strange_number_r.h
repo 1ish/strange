@@ -231,6 +231,23 @@ public:
 	}
 };
 
+class ___number_t_share___
+{
+	static inline bool ___share___()
+	{
+		return number_int_8_t<>::___share___
+			&& number_uint_8_t<>::___share___
+			&& number_int_16_t<>::___share___
+			&& number_uint_16_t<>::___share___
+			&& number_int_32_t<>::___share___
+			&& number_uint_32_t<>::___share___
+			&& number_int_64_t<>::___share___
+			&& number_uint_64_t<>::___share___
+			&& number_float_32_t<>::___share___
+			&& number_float_64_t<>::___share___;
+	}
+};
+
 }
 
 #endif

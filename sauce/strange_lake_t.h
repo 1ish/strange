@@ -1164,33 +1164,6 @@ using lake_float_32_t = lake_t<float, CONCURRENT, _ABSTRACTION_>;
 template <bool CONCURRENT = false, typename _ABSTRACTION_ = lake_a<double>>
 using lake_float_64_t = lake_t<double, CONCURRENT, _ABSTRACTION_>;
 
-class ___lake_t_share___
-{
-	static inline bool ___share___()
-	{
-		return lake_int_8_t<>::___share___
-			&& lake_uint_8_t<>::___share___
-			&& lake_int_16_t<>::___share___
-			&& lake_uint_16_t<>::___share___
-			&& lake_int_32_t<>::___share___
-			&& lake_uint_32_t<>::___share___
-			&& lake_int_64_t<>::___share___
-			&& lake_uint_64_t<>::___share___
-			&& lake_float_32_t<>::___share___
-			&& lake_float_64_t<>::___share___
-			&& lake_int_8_t<true>::___share___
-			&& lake_uint_8_t<true>::___share___
-			&& lake_int_16_t<true>::___share___
-			&& lake_uint_16_t<true>::___share___
-			&& lake_int_32_t<true>::___share___
-			&& lake_uint_32_t<true>::___share___
-			&& lake_int_64_t<true>::___share___
-			&& lake_uint_64_t<true>::___share___
-			&& lake_float_32_t<true>::___share___
-			&& lake_float_64_t<true>::___share___;
-	}
-};
-
 lake_a<int8_t> lake_from_string(std::string const& str)
 {
 	return lake_int_8_t<>::val(lake_int_8_t<>::std_vector_number(str.cbegin(), str.cend()));
