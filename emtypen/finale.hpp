@@ -198,6 +198,10 @@ public:
 		handle_->___weak___(handle_);
 		return *this;
 	}
+
+private:
+	static bool const ___share___;
+	friend class ___%struct_name%_share___;
 };
 
 template <typename ___TTT___>
@@ -205,5 +209,13 @@ inline bool check(%struct_name%<> const& value) noexcept
 {
 	return ___TTT___::___check___(value.handle_);
 }
+
+template <typename ___1___>
+bool const %struct_name%<___1___>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	reflection<%struct_name%<___1___>>::share(shoal);
+	return shoal;
+}();
 
 #undef ___derived___

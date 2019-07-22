@@ -870,6 +870,14 @@ namespace strange {
 
     	}
 
+    
+
+    private:
+
+    	static bool const ___share___;
+
+    	friend class ___number_a_share___;
+
     };
 
     
@@ -883,6 +891,22 @@ namespace strange {
     	return ___TTT___::___check___(value.handle_);
 
     }
+
+    
+
+    template <typename ___1___, typename ___2___, typename ___3___>
+
+    bool const number_a<___1___, ___2___, ___3___>::___share___ = []()
+
+    {
+
+    	auto shoal = shoal_a<>(shared(), true);
+
+    	reflection<number_a<___1___, ___2___, ___3___>>::share(shoal);
+
+    	return shoal;
+
+    }();
 
     
 

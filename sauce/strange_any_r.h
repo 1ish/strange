@@ -59,6 +59,14 @@ public:
 	}
 };
 
+class ___any_a_share___
+{
+	static inline bool ___share___()
+	{
+		return any_a<>::___share___;
+	}
+};
+
 }
 
 #endif

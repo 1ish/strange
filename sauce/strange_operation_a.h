@@ -265,6 +265,10 @@ namespace strange {
     		handle_->___weak___(handle_);
     		return *this;
     	}
+    
+    private:
+    	static bool const ___share___;
+    	friend class ___operation_a_share___;
     };
     
     template <typename ___TTT___>
@@ -272,6 +276,14 @@ namespace strange {
     {
     	return ___TTT___::___check___(value.handle_);
     }
+    
+    template <typename ___1___>
+    bool const operation_a<___1___>::___share___ = []()
+    {
+    	auto shoal = shoal_a<>(shared(), true);
+    	reflection<operation_a<___1___>>::share(shoal);
+    	return shoal;
+    }();
     
 
 }

@@ -590,6 +590,10 @@ namespace strange {
     		handle_->___weak___(handle_);
     		return *this;
     	}
+    
+    private:
+    	static bool const ___share___;
+    	friend class ___any_a_share___;
     };
     
     template <typename ___TTT___>
@@ -616,7 +620,16 @@ namespace strange {
     {
     	return ___TTT___(value.handle_, reference);
     }
-    #endif
+    #endif
+    
+    template <typename ___1___, typename ___2___, typename ___3___, typename ___4___, typename ___5___, typename ___6___, typename ___7___, typename ___8___>
+    bool const any_a<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___>::___share___ = []()
+    {
+    	auto shoal = shoal_a<>(shared(), true);
+    	reflection<any_a<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___>>::share(shoal);
+    	return shoal;
+    }();
+    
 
 }
 #endif

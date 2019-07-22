@@ -465,6 +465,14 @@ namespace strange {
 
     	}
 
+    
+
+    private:
+
+    	static bool const ___share___;
+
+    	friend class ___bidirectional_iterator_a_share___;
+
     };
 
     
@@ -478,6 +486,22 @@ namespace strange {
     	return ___TTT___::___check___(value.handle_);
 
     }
+
+    
+
+    template <typename ___1___>
+
+    bool const bidirectional_iterator_a<___1___>::___share___ = []()
+
+    {
+
+    	auto shoal = shoal_a<>(shared(), true);
+
+    	reflection<bidirectional_iterator_a<___1___>>::share(shoal);
+
+    	return shoal;
+
+    }();
 
     
 

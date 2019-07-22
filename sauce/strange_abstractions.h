@@ -50,9 +50,6 @@
 #define ___derived___ range_a<>
 #include "strange_collection_a.h"
 
-#define ___derived___ range_a<>
-#include "strange_river_a.h"
-
 #define ___derived___ collection_a<>
 #include "strange_shoal_a.h"
 
@@ -77,6 +74,9 @@
 
 #define ___derived___ number_a<>
 #include "strange_number_data_a.h"
+
+#define ___derived___ range_a<>
+#include "strange_river_a.h"
 
 #define ___derived___ collection_a<>
 #include "strange_inventory_a.h"
