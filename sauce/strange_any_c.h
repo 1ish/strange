@@ -478,14 +478,6 @@ bool const any_c<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___any_c_share___
-{
-	static inline bool ___share___()
-	{
-		return any_c<>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif
