@@ -60,5 +60,6 @@
 #include "strange_expression_catch_t.h"
 #include "strange_expression_intimate_t.h"
 #include "strange_expression_intimate_range_t.h"
+#include "strange_expression_block_t.h"
 
 #endif
