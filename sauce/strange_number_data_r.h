@@ -324,6 +324,23 @@ public:
 	}
 };
 
+class ___number_data_a_share___
+{
+	static inline bool ___share___()
+	{
+		return number_data_a<int8_t>::___share___
+			&& number_data_a<uint8_t>::___share___
+			&& number_data_a<int16_t>::___share___
+			&& number_data_a<uint16_t>::___share___
+			&& number_data_a<int32_t>::___share___
+			&& number_data_a<uint32_t>::___share___
+			&& number_data_a<int64_t>::___share___
+			&& number_data_a<uint64_t>::___share___
+			&& number_data_a<float>::___share___
+			&& number_data_a<double>::___share___;
+	}
+};
+
 }
 
 #endif

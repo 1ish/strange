@@ -125,15 +125,6 @@ bool const it_t<CONST, END, _ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___it_t_share___
-{
-	static inline bool ___share___()
-	{
-		return it_t<true>::___share___
-			&& it_t<false>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

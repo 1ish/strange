@@ -49,6 +49,14 @@ public:
 	}
 };
 
+class ___token_a_share___
+{
+	static inline bool ___share___()
+	{
+		return token_a<>::___share___;
+	}
+};
+
 template<>
 class reflection<token_t<>>
 {
@@ -69,6 +77,14 @@ public:
 		shoal.update_string("strange::token::name_val", native_function_t<>::val(&token_t<>::name_val__));
 		shoal.update_string("strange::token::punctuation_val", native_function_t<>::val(&token_t<>::punctuation_val__));
 		shoal.update_string("strange::token::error_val", native_function_t<>::val(&token_t<>::error_val__));
+	}
+};
+
+class ___token_t_share___
+{
+	static inline bool ___share___()
+	{
+		return token_t<>::___share___;
 	}
 };
 

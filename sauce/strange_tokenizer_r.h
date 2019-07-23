@@ -20,6 +20,14 @@ public:
 	}
 };
 
+class ___tokenizer_t_share___
+{
+	static inline bool ___share___()
+	{
+		return tokenizer_t<>::___share___;
+	}
+};
+
 }
 
 #endif

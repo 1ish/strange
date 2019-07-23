@@ -106,14 +106,6 @@ bool const misunderstanding_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___misunderstanding_t_share___
-{
-	static inline bool ___share___()
-	{
-		return misunderstanding_t<>::___share___;
-	}
-};
-
 template <typename F>
 inline misunderstanding_a<> mis(F&& s)
 {

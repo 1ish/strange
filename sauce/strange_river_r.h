@@ -69,6 +69,14 @@ public:
 	}
 };
 
+class ___river_a_share___
+{
+	static inline bool ___share___()
+	{
+		return river_a<>::___share___;
+	}
+};
+
 template<>
 class reflection<river_t<>>
 {
@@ -86,6 +94,14 @@ public:
 		shoal.update_string("strange::river::in_val", native_function_t<>::val(&river_t<>::in_val__));
 		shoal.update_string("strange::river::out_val", native_function_t<>::val(&river_t<>::out_val__));
 		shoal.update_string("strange::river::err_val", native_function_t<>::val(&river_t<>::err_val__));
+	}
+};
+
+class ___river_t_share___
+{
+	static inline bool ___share___()
+	{
+		return river_t<>::___share___;
 	}
 };
 

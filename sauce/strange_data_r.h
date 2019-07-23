@@ -132,6 +132,17 @@ public:
 	}
 };
 
+class ___data_a_share___
+{
+	static inline bool ___share___()
+	{
+		return data_a<std::shared_ptr<strange::concurrent_u<false>::read_lock>>::___share___
+			&& data_a<std::shared_ptr<strange::concurrent_u<true>::read_lock>>::___share___
+			&& data_a<std::shared_ptr<strange::concurrent_u<false>::write_lock>>::___share___
+			&& data_a<std::shared_ptr<strange::concurrent_u<true>::write_lock>>::___share___;
+	}
+};
+
 template<>
 class reflection<data_t<std::shared_ptr<strange::concurrent_u<false>::read_lock>>>
 {
@@ -193,6 +204,17 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::data_concurrent_write_lock_ptr::val", native_function_t<>::val(&data_t<std::shared_ptr<strange::concurrent_u<true>::write_lock>>::val__));
+	}
+};
+
+class ___data_t_share___
+{
+	static inline bool ___share___()
+	{
+		return data_t<std::shared_ptr<strange::concurrent_u<false>::read_lock>>::___share___
+			&& data_t<std::shared_ptr<strange::concurrent_u<true>::read_lock>>::___share___
+			&& data_t<std::shared_ptr<strange::concurrent_u<false>::write_lock>>::___share___
+			&& data_t<std::shared_ptr<strange::concurrent_u<true>::write_lock>>::___share___;
 	}
 };
 

@@ -222,14 +222,6 @@ bool const range_operator_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___range_operator_t_share___
-{
-	static inline bool ___share___()
-	{
-		return range_operator_t<>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

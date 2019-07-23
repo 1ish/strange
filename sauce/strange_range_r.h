@@ -43,6 +43,14 @@ public:
 	}
 };
 
+class ___range_a_share___
+{
+	static inline bool ___share___()
+	{
+		return range_a<>::___share___;
+	}
+};
+
 template<>
 class reflection<range_t<>>
 {
@@ -56,6 +64,14 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::range::val", native_function_t<>::val(&range_t<>::val__));
+	}
+};
+
+class ___range_t_share___
+{
+	static inline bool ___share___()
+	{
+		return range_t<>::___share___;
 	}
 };
 

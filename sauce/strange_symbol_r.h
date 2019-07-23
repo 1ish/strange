@@ -42,6 +42,14 @@ public:
 	}
 };
 
+class ___symbol_a_share___
+{
+	static inline bool ___share___()
+	{
+		return symbol_a<>::___share___;
+	}
+};
+
 template<>
 class reflection<symbol_t<>>
 {
@@ -55,6 +63,14 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::symbol::val", native_function_t<>::val(&symbol_t<>::val__));
+	}
+};
+
+class ___symbol_t_share___
+{
+	static inline bool ___share___()
+	{
+		return symbol_t<>::___share___;
 	}
 };
 

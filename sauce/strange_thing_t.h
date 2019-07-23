@@ -20,6 +20,16 @@ public:
 	}
 
 	// reflection
+	static inline symbol_a<> type_()
+	{
+		return reflection<thing_t<>>::type();
+	}
+
+	static inline void share(shoal_a<>& shoal)
+	{
+		reflection<thing_t<>>::share(shoal);
+	}
+
 	static inline any_a<> cat__(range_a<> const&)
 	{
 		return cat_();
@@ -193,7 +203,19 @@ protected:
 	inline thing_t()
 		: one_t{}
 	{}
+
+private:
+	static bool const ___share___;
+	friend class ___thing_t_share___;
 };
+
+template <typename _ABSTRACTION_>
+bool const thing_t<_ABSTRACTION_>::___share___ = []()
+{
+	auto shoal = shoal_a<>(shared(), true);
+	thing_t<_ABSTRACTION_>::share(shoal);
+	return shoal;
+}();
 
 } // namespace strange
 

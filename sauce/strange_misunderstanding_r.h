@@ -42,6 +42,14 @@ public:
 	}
 };
 
+class ___misunderstanding_a_share___
+{
+	static inline bool ___share___()
+	{
+		return misunderstanding_a<>::___share___;
+	}
+};
+
 template<>
 class reflection<misunderstanding_t<>>
 {
@@ -55,6 +63,14 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		shoal.update_string("strange::misunderstanding::val", native_function_t<>::val(&misunderstanding_t<>::val__));
+	}
+};
+
+class ___misunderstanding_t_share___
+{
+	static inline bool ___share___()
+	{
+		return misunderstanding_t<>::___share___;
 	}
 };
 

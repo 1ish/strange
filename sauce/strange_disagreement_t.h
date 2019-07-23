@@ -104,14 +104,6 @@ bool const disagreement_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___disagreement_t_share___
-{
-	static inline bool ___share___()
-	{
-		return disagreement_t<>::___share___;
-	}
-};
-
 template <typename F>
 inline misunderstanding_a<> dis(F&& s)
 {

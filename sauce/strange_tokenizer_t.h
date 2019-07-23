@@ -595,14 +595,6 @@ bool const tokenizer_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___tokenizer_t_share___
-{
-	static inline bool ___share___()
-	{
-		return tokenizer_t<>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

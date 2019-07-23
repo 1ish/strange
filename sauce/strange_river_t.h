@@ -1019,14 +1019,6 @@ bool const river_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___river_t_share___
-{
-	static inline bool ___share___()
-	{
-		return river_t<>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

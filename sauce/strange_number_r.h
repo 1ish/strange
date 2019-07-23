@@ -71,6 +71,14 @@ public:
 	}
 };
 
+class ___number_a_share___
+{
+	static inline bool ___share___()
+	{
+		return number_a<>::___share___;
+	}
+};
+
 template<>
 class reflection<number_int_8_t<>>
 {

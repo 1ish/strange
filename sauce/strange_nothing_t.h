@@ -106,14 +106,6 @@ bool const nothing_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___nothing_t_share___
-{
-	static inline bool ___share___()
-	{
-		return nothing_t<>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

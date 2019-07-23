@@ -90,17 +90,6 @@ bool const data_t<DATA, _ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___data_t_share___
-{
-	static inline bool ___share___()
-	{
-		return data_t<std::shared_ptr<strange::concurrent_u<false>::read_lock>>::___share___
-			&& data_t<std::shared_ptr<strange::concurrent_u<true>::read_lock>>::___share___
-			&& data_t<std::shared_ptr<strange::concurrent_u<false>::write_lock>>::___share___
-			&& data_t<std::shared_ptr<strange::concurrent_u<true>::write_lock>>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif

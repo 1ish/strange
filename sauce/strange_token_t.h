@@ -448,14 +448,6 @@ bool const token_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
-class ___token_t_share___
-{
-	static inline bool ___share___()
-	{
-		return token_t<>::___share___;
-	}
-};
-
 } // namespace strange
 
 #endif
