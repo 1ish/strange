@@ -14,10 +14,6 @@ public:
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
-		if (terms.empty())
-		{
-			throw dis(token.report() + "strange::expression_function::val passed no terms");
-		}
 		auto names = flock_t<>::val_();
 		auto params = flock_t<>::val_();
 		auto values = flock_t<>::val_();
@@ -62,6 +58,10 @@ public:
 			{
 				throw dis(token.report() + "strange::expression_function::val passed non-expression catch");
 			}
+		}
+		if (!value)
+		{
+			value = expression_t<>::val(token);
 		}
 		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) });
 	}
