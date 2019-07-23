@@ -68,6 +68,15 @@ public:
 	}
 };
 
+class ___bidirectional_const_iterator_data_a_share___
+{
+	static inline bool ___share___()
+	{
+		return bidirectional_const_iterator_data_a<std::set<any_a<>>::const_iterator>::___share___
+			&& bidirectional_const_iterator_data_a<std::map<any_a<>, any_a<>>::const_iterator>::___share___;
+	}
+};
+
 }
 
 #endif

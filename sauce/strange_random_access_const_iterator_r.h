@@ -49,6 +49,14 @@ public:
 	}
 };
 
+class ___random_access_const_iterator_a_share___
+{
+	static inline bool ___share___()
+	{
+		return random_access_const_iterator_a<>::___share___;
+	}
+};
+
 }
 
 #endif

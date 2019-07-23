@@ -708,6 +708,35 @@ public:
 	}
 };
 
+class ___random_access_const_iterator_data_a_share___
+{
+	static inline bool ___share___()
+	{
+		return random_access_const_iterator_data_a<std::vector<any_a<>>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::deque<any_a<>>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::vector<int8_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::deque<int8_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::vector<uint8_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::deque<uint8_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::vector<int16_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::deque<int16_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::vector<uint16_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::deque<uint16_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::vector<int32_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::deque<int32_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::vector<uint32_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::deque<uint32_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::vector<int64_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::deque<int64_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::vector<uint64_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::deque<uint64_t>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::vector<float>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::deque<float>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::vector<double>::const_iterator>::___share___
+			&& random_access_const_iterator_data_a<std::deque<double>::const_iterator>::___share___;
+	}
+};
+
 }
 
 #endif

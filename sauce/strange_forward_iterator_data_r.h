@@ -36,6 +36,14 @@ public:
 	}
 };
 
+class ___forward_iterator_data_a_share___
+{
+	static inline bool ___share___()
+	{
+		return forward_iterator_data_a<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::iterator>::___share___;
+	}
+};
+
 }
 
 #endif

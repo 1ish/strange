@@ -44,6 +44,14 @@ public:
 	}
 };
 
+class ___forward_iterator_a_share___
+{
+	static inline bool ___share___()
+	{
+		return forward_iterator_a<>::___share___;
+	}
+};
+
 }
 
 #endif

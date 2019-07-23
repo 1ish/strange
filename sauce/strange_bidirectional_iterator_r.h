@@ -42,6 +42,14 @@ public:
 	}
 };
 
+class ___bidirectional_iterator_a_share___
+{
+	static inline bool ___share___()
+	{
+		return bidirectional_iterator_a<>::___share___;
+	}
+};
+
 }
 
 #endif
