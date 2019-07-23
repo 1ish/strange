@@ -1,15 +1,15 @@
-#ifndef COM_ONEISH_STRANGE_EXPRESSION_FUNCTION_T_H
-#define COM_ONEISH_STRANGE_EXPRESSION_FUNCTION_T_H
+#ifndef COM_ONEISH_STRANGE_EXPRESSION_EXTRACTION_T_H
+#define COM_ONEISH_STRANGE_EXPRESSION_EXTRACTION_T_H
 
 namespace strange
 {
 
 template <typename _ABSTRACTION_ = expression_a<>>
-class expression_function_t : public expression_t<_ABSTRACTION_>
+class expression_extraction_t : public expression_t<_ABSTRACTION_>
 {
 public:
 	// override
-	using over = expression_o<expression_function_t<>>;
+	using over = expression_o<expression_extraction_t<>>;
 
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
@@ -33,48 +33,48 @@ public:
 
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(token.report() + "strange::expression_function::val passed non-expression catch");
+				throw dis(token.report() + "strange::expression_extraction::val passed non-expression catch");
 			}
 			auto subterms = cast<expression_a<>>(term).terms_();
 			if (subterms.size() != 3)
 			{
-				throw dis(token.report() + "strange::expression_function::val passed wrong number of subterms");
+				throw dis(token.report() + "strange::expression_extraction::val passed wrong number of subterms");
 			}
 
 			name = subterms.at_index(0);
 			if (!check<symbol_a<>>(name))
 			{
-				throw dis(token.report() + "strange::expression_function::val passed non-symbol name");
+				throw dis(token.report() + "strange::expression_extraction::val passed non-symbol name");
 			}
 
 			cat = subterms.at_index(1);
 			if (!check<cat_a<>>(cat))
 			{
-				throw dis(token.report() + "strange::expression_function::val passed non-cat");
+				throw dis(token.report() + "strange::expression_extraction::val passed non-cat");
 			}
 
 			value = subterms.at_index(2);
 			if (!check<expression_a<>>(value))
 			{
-				throw dis(token.report() + "strange::expression_function::val passed non-expression catch");
+				throw dis(token.report() + "strange::expression_extraction::val passed non-expression catch");
 			}
 		}
 		if (!value)
 		{
 			value = expression_t<>::val(token);
 		}
-		return expression_substitute_t<over>::val(over{ expression_function_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) });
+		return expression_substitute_t<over>::val(over{ expression_extraction_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) });
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<expression_function_t<>>::type();
+		return reflection<expression_extraction_t<>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<expression_function_t<>>::share(shoal);
+		reflection<expression_extraction_t<>>::share(shoal);
 	}
 
 	inline cat_a<> cat_() const
@@ -93,11 +93,12 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& _, range_a<> const& range) const
+	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
 		auto local_shoal = unordered_shoal_t<>::val_();
 		auto& local = local_shoal.reference();
 		local.emplace(sym("$"), _shared);
+		local.emplace(sym("^"), thing);
 		forward_const_iterator_a<> ait = range.cbegin_();
 		auto nit = _names.extract().cbegin();
 		auto pit = _params.extract().cbegin();
@@ -108,7 +109,7 @@ public:
 				: (*ait++);
 			if (!argument.cats_().has_(*pit++))
 			{
-				throw dis(_token.report() + "strange::expression_function::operate cat does not include argument");
+				throw dis(_token.report() + "strange::expression_extraction::operate cat does not include argument");
 			}
 			local.emplace(*nit++, argument);
 		}
@@ -117,7 +118,7 @@ public:
 			auto result = _expression.operate_(local_shoal, range);
 			if (!result.cats_().has_(_result))
 			{
-				throw dis(_token.report() + "strange::expression_function::operate cat does not include result");
+				throw dis(_token.report() + "strange::expression_extraction::operate cat does not include result");
 			}
 			return result;
 		}
@@ -125,7 +126,7 @@ public:
 		{
 			if (!ret.result.cats_().has_(_result))
 			{
-				throw dis(_token.report() + "strange::expression_function::operate cat does not include result");
+				throw dis(_token.report() + "strange::expression_extraction::operate cat does not include result");
 			}
 			return ret.result;
 		}
@@ -139,7 +140,7 @@ public:
 
 	inline void generate(int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" function(");
+		river.write_string(" extraction(");
 		auto nit = _names.extract().cbegin();
 		auto pit = _params.extract().cbegin();
 		auto vit = _values.extract().cbegin();
@@ -207,7 +208,7 @@ protected:
 	unordered_herd_a<> const _cats;
 	unordered_shoal_a<> const _shared;
 
-	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& params, flock_a<> const& values, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
+	inline expression_extraction_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& params, flock_a<> const& values, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _names{ names }
@@ -224,14 +225,14 @@ protected:
 
 private:
 	static bool const ___share___;
-	friend class ___expression_function_t_share___;
+	friend class ___expression_extraction_t_share___;
 };
 
 template <typename _ABSTRACTION_>
-bool const expression_function_t<_ABSTRACTION_>::___share___ = []()
+bool const expression_extraction_t<_ABSTRACTION_>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	expression_function_t<_ABSTRACTION_>::share(shoal);
+	expression_extraction_t<_ABSTRACTION_>::share(shoal);
 	return shoal;
 }();
 
