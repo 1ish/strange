@@ -65,18 +65,18 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		_thing.generate(indent, river);
+		_thing.generate(version, indent, river);
 		river.write_string(".perform");
-		_range.generate(indent, river);
+		_range.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		_thing.generate(indent, river);
+		_thing.generate(version, indent, river);
 		river.write_string("(");
-		_range.generate(indent, river);
+		_range.generate(version, indent, river);
 		river.write_string(") ");
 	}
 

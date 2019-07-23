@@ -137,7 +137,7 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" function(");
 		auto nit = _names.extract().cbegin();
@@ -159,13 +159,13 @@ public:
 			auto value = cast<expression_a<>>(*vit++);
 			river.write_string(name.to_string() + ":");
 			river.write_string(cat.to_string() + "=");
-			value.generate(indent, river);
+			value.generate(version, indent, river);
 		}
 		river.write_string(")\n");
-		_expression.generate(indent, river);
+		_expression.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" [](");
 		auto nit = _names.extract().cbegin();
@@ -187,10 +187,10 @@ public:
 			auto value = cast<expression_a<>>(*vit++);
 			river.write_string("catch(" + cat.name_().to_string() + "_a<> const& ");
 			river.write_string(name.to_string() + " =");
-			value.generate_cpp(indent, river);
+			value.generate_cpp(version, indent, river);
 		}
 		river.write_string(")\n{\n");
-		_expression.generate_cpp(indent, river);
+		_expression.generate_cpp(version, indent, river);
 		river.write_string("}\n");
 	}
 

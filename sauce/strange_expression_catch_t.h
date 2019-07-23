@@ -116,7 +116,7 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" catch(");
 		bool first = true;
@@ -130,22 +130,22 @@ public:
 			{
 				river.write_string("\n,");
 			}
-			cast<expression_a<>>(term).generate(indent, river);
+			cast<expression_a<>>(term).generate(version, indent, river);
 		}
 		river.write_string("\n)\n");
 	}
 
-	inline void generate_cpp(int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string("try\n{\n");
-		_expression.generate_cpp(indent, river);
+		_expression.generate_cpp(version, indent, river);
 		river.write_string("\n}\n");
 		forward_const_iterator_a<> cit = _cats.cbegin_();
 		forward_const_iterator_a<> vit = _values.cbegin_();
 		for (auto const& name : _names)
 		{
 			river.write_string("catch(" + cast<cat_a<>>(*cit++).name_().to_string() + "_a<> const& exception)\n{\n");
-			cast<expression_a<>>(*vit++).generate_cpp(indent, river);
+			cast<expression_a<>>(*vit++).generate_cpp(version, indent, river);
 			river.write_string("\n}\n");
 		}
 	}

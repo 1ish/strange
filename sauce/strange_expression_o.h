@@ -66,6 +66,15 @@ public:
 		{
 			throw dis("[expression]::generate passed empty range");
 		}
+		any_a<> version = *it;
+		if (!check<number_data_a<int64_t>>(version))
+		{
+			throw dis("[expression]::generate passed non-int-64 version");
+		}
+		if (++it == range.cend_())
+		{
+			throw dis("[expression]::generate passed short range");
+		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
 		{
@@ -80,12 +89,12 @@ public:
 		{
 			throw dis("[expression]::generate passed non-river");
 		}
-		return generate_(cast<number_data_a<int64_t>>(indent), cast<river_a<>>(river, true));
+		return generate_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast<river_a<>>(river, true));
 	}
 
-	inline any_a<> generate_(number_data_a<int64_t> const& indent, river_a<>& river) const
+	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
 	{
-		generate(indent.extract(), river);
+		generate(version.extract(), indent.extract(), river);
 		return river;
 	}
 
@@ -95,6 +104,15 @@ public:
 		if (it == range.cend_())
 		{
 			throw dis("[expression]::generate_cpp passed empty range");
+		}
+		any_a<> version = *it;
+		if (!check<number_data_a<int64_t>>(version))
+		{
+			throw dis("[expression]::generate_cpp passed non-int-64 version");
+		}
+		if (++it == range.cend_())
+		{
+			throw dis("[expression]::generate_cpp passed short range");
 		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
@@ -110,12 +128,12 @@ public:
 		{
 			throw dis("[expression]::generate_cpp passed non-river");
 		}
-		return generate_cpp_(cast<number_data_a<int64_t>>(indent), cast<river_a<>>(river, true));
+		return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast<river_a<>>(river, true));
 	}
 
-	inline any_a<> generate_cpp_(number_data_a<int64_t> const& indent, river_a<>& river) const
+	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
 	{
-		generate_cpp(indent.extract(), river);
+		generate_cpp(version.extract(), indent.extract(), river);
 		return river;
 	}
 };

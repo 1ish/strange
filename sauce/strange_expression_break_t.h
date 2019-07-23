@@ -35,12 +35,12 @@ public:
 	}
 
 	// expression
-	inline void generate(int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" break() ");
 	}
 
-	inline void generate_cpp(int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" break; ");
 	}

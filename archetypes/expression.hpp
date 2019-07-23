@@ -30,12 +30,12 @@ public:
 	inline flock_a<> terms_() const;
 
 	inline any_a<> generate__(range_a<> const& range) const;
-	inline any_a<> generate_(number_data_a_int64 const& indent, river_a<>& river) const;
-	inline void generate(int64_t indent, river_a<>& river) const;
+	inline any_a<> generate_(number_data_a_int64 const& version, number_data_a_int64 const& indent, river_a<>& river) const;
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const;
 
 	inline any_a<> generate_cpp__(range_a<> const& range) const;
-	inline any_a<> generate_cpp_(number_data_a_int64 const& indent, river_a<>& river) const;
-	inline void generate_cpp(int64_t indent, river_a<>& river) const;
+	inline any_a<> generate_cpp_(number_data_a_int64 const& version, number_data_a_int64 const& indent, river_a<>& river) const;
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const;
 };
 
 } // namespace strange

@@ -80,24 +80,24 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		if (!check<symbol_a<>>(_key))
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::generate with non-symbol key");
 		}
 		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " :" + _cat.to_string() + "=");
-		_val.generate(indent, river);
+		_val.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		if (!check<symbol_a<>>(_key))
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::generate_cpp with non-symbol key");
 		}
 		river.write_string(" " + _cat.code() + " " + cast<symbol_a<>>(_key).to_string() + " =");
-		_val.generate_cpp(indent, river);
+		_val.generate_cpp(version, indent, river);
 	}
 
 protected:

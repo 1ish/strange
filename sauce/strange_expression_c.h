@@ -176,6 +176,15 @@ public:
 		{
 			throw dis("strange::expression_creature::generate passed empty range");
 		}
+		any_a<> version = *it;
+		if (!check<number_data_a<int64_t>>(version))
+		{
+			throw dis("strange::expression_creature::generate passed non-int-64 version");
+		}
+		if (++it == range.cend_())
+		{
+			throw dis("strange::expression_creature::generate passed short range");
+		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
 		{
@@ -193,22 +202,22 @@ public:
 		return river;
 	}
 
-	inline any_a<> generate_(number_data_a<int64_t> const& indent, river_a<>& river) const
+	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
 	{
 		auto op = _operations.at_string("generate");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), flock_t<>::val_(indent, river));
+			return op.operate_(any_a<>(me_(), true), flock_t<>::val_(version, indent, river));
 		}
 		return river;
 	}
 
-	inline void generate(int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		auto op = _operations.at_string("generate");
 		if (op)
 		{
-			op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(indent), river));
+			op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(version), number_int_64_t<>::val(indent), river));
 		}
 	}
 
@@ -223,6 +232,15 @@ public:
 		if (it == range.cend_())
 		{
 			throw dis("strange::expression_creature::generate_cpp passed empty range");
+		}
+		any_a<> version = *it;
+		if (!check<number_data_a<int64_t>>(version))
+		{
+			throw dis("strange::expression_creature::generate_cpp passed non-int-64 version");
+		}
+		if (++it == range.cend_())
+		{
+			throw dis("strange::expression_creature::generate_cpp passed short range");
 		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
@@ -241,22 +259,22 @@ public:
 		return river;
 	}
 
-	inline any_a<> generate_cpp_(number_data_a<int64_t> const& indent, river_a<>& river) const
+	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
 	{
 		auto op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), flock_t<>::val_(indent, river));
+			return op.operate_(any_a<>(me_(), true), flock_t<>::val_(version, indent, river));
 		}
 		return river;
 	}
 
-	inline void generate_cpp(int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		auto op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(indent), river));
+			op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(version), number_int_64_t<>::val(indent), river));
 		}
 	}
 

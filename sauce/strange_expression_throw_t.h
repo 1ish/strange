@@ -60,17 +60,17 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" throw[");
-		_exception.generate(indent, river);
+		_exception.generate(version, indent, river);
 		river.write_string("] ");
 	}
 
-	inline void generate_cpp(int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" throw(");
-		_exception.generate_cpp(indent, river);
+		_exception.generate_cpp(version, indent, river);
 		river.write_string("); ");
 	}
 

@@ -135,16 +135,16 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" <" + _name.to_string());
 		if (_count >= 2)
 		{
-			_arguments.generate(indent, river);
+			_arguments.generate(version, indent, river);
 			if (_count >= 3)
 			{
 				auto params = river_t<>::val();
-				_parameters.generate(indent, params);
+				_parameters.generate(version, indent, params);
 				auto str = params.to_string();
 				auto len = str.length();
 				if (len >= 4 && str[1] == '[' && str[len - 2] == ']')
@@ -155,7 +155,7 @@ public:
 				}
 				if (_count >= 4)
 				{
-					_result.generate(indent, river);
+					_result.generate(version, indent, river);
 					if (_reference)
 					{
 						river.write_string(">& ");
@@ -167,21 +167,21 @@ public:
 		river.write_string("> ");
 	}
 
-	inline void generate_cpp(int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" strange::cat_t<>::val(\"" + _name.to_string() + "\"");
 		if (_count >= 2)
 		{
 			river.write_string(",");
-			_arguments.generate_cpp(indent, river);
+			_arguments.generate_cpp(version, indent, river);
 			if (_count >= 3)
 			{
 				river.write_string(",");
-				_parameters.generate_cpp(indent, river);
+				_parameters.generate_cpp(version, indent, river);
 				if (_count >= 4)
 				{
 					river.write_string(",");
-					_result.generate_cpp(indent, river);
+					_result.generate_cpp(version, indent, river);
 					if (_reference)
 					{
 						river.write_string(", true");

@@ -40,7 +40,7 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t indent, river_a<>& river) const //TODO
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		int64_t count = 0;
 		for (auto const& term : _terms)
@@ -57,13 +57,13 @@ public:
 			{
 				throw dis(_token.report() + "strange::expression_intimate::generate with non-expression term");
 			}
-			cast<expression_a<>>(term).generate(indent, river);
+			cast<expression_a<>>(term).generate(version, indent, river);
 			++count;
 		}
 		river.write_string("] ");
 	}
 
-	inline void generate_cpp(int64_t indent, river_a<>& river) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		int64_t count = 0;
 		for (auto const& term : _terms)
@@ -80,7 +80,7 @@ public:
 			{
 				throw dis(_token.report() + "strange::expression_intimate::generate_cpp with non-expression term");
 			}
-			cast<expression_a<>>(term).generate_cpp(indent, river);
+			cast<expression_a<>>(term).generate_cpp(version, indent, river);
 			++count;
 		}
 		river.write_string(")] ");
