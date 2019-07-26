@@ -59,14 +59,11 @@ public:
 	// function
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
-		auto result_range = range_operator_t<>::val_(_terms, thing, range);
-		auto it = result_range.cbegin_();
-		auto result = no();
-		while (it != result_range.cend_())
+		if (_condition.operate_(thing, range))
 		{
-			result = *it++;
+			return _yay.operate_(thing, range);
 		}
-		return result;
+		return _nay.operate_(thing, range);
 	}
 
 	// expression
