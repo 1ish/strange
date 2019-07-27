@@ -62,5 +62,6 @@
 #include "strange_expression_intimate_range_t.h"
 #include "strange_expression_block_t.h"
 #include "strange_expression_if_t.h"
+#include "strange_expression_while_t.h"
 
 #endif

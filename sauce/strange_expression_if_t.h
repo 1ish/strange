@@ -22,16 +22,16 @@ public:
 		any_a<> condition = *it;
 		if (!check<expression_a<>>(condition))
 		{
-			throw dis(token.report() + "strange::expression_shared_update::val passed non-expression condition");
+			throw dis(token.report() + "strange::expression_if::val passed non-expression condition");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_shared_update::val not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_if::val not passed sufficient terms");
 		}
 		any_a<> yay = *it;
 		if (!check<expression_a<>>(yay))
 		{
-			throw dis(token.report() + "strange::expression_shared_update::val passed non-expression");
+			throw dis(token.report() + "strange::expression_if::val passed non-expression");
 		}
 		if (++it == terms.cend_())
 		{
@@ -40,7 +40,7 @@ public:
 		any_a<> nay = *it;
 		if (!check<expression_a<>>(nay))
 		{
-			throw dis(token.report() + "strange::expression_shared_update::val passed non-expression");
+			throw dis(token.report() + "strange::expression_if::val passed non-expression");
 		}
 		return expression_a<>{ over{ expression_if_t<>( token, terms, cast<expression_a<>>(condition), cast<expression_a<>>(yay), cast<expression_a<>>(nay)) } };
 	}
@@ -100,9 +100,9 @@ public:
 		river.write_string(" (");
 		_condition.generate_cpp(version, indent, river);
 		river.write_string(") ? (");
-		_condition.generate_cpp(version, indent, river);
+		_yay.generate_cpp(version, indent, river);
 		river.write_string(") : (");
-		_condition.generate_cpp(version, indent, river);
+		_nay.generate_cpp(version, indent, river);
 		river.write_string(") ");
 	}
 
