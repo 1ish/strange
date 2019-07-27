@@ -63,5 +63,6 @@
 #include "strange_expression_block_t.h"
 #include "strange_expression_if_t.h"
 #include "strange_expression_while_t.h"
+#include "strange_expression_do_t.h"
 
 #endif
