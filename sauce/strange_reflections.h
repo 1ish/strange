@@ -86,6 +86,7 @@ class reflection;
 #include "strange_expression_if_r.h"
 #include "strange_expression_while_r.h"
 #include "strange_expression_do_r.h"
+#include "strange_expression_for_r.h"
 #include "strange_any_creature_r.h"
 #include "strange_operation_creature_r.h"
 #include "strange_expression_creature_r.h"
