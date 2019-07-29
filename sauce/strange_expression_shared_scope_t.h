@@ -30,12 +30,16 @@ public:
 		}
 		auto shared_shoal = cast<shoal_a<>>(shared);
 		auto key = *it;
+		if (!check<symbol_a<>>(key))
+		{
+			throw dis(token.report() + "strange::expression_shared_scope::val passed non-symbol key");
+		}
 		auto value = shared_shoal.at_(key);
 		if (value)
 		{
-			return expression_substitute_t<over>::val(over{ expression_shared_scope_t<>(token, terms, shared_shoal, key) }, value);
+			return expression_substitute_t<over>::val(over{ expression_shared_scope_t<>(token, terms, shared_shoal, cast<symbol_a<>>(key)) }, value);
 		}
-		return expression_a<>{ over{ expression_shared_scope_t<>(token, terms, shared_shoal, key) } };
+		return expression_a<>{ over{ expression_shared_scope_t<>(token, terms, shared_shoal, cast<symbol_a<>>(key)) } };
 	}
 
 	// reflection
@@ -68,28 +72,20 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		if (!check<symbol_a<>>(_key))
-		{
-			throw dis(_token.report() + "strange::expression_shared_scope::generate with non-symbol key");
-		}
 		river.write_string(" $$" + cast<symbol_a<>>(_key).to_string() + " ");
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		if (!check<symbol_a<>>(_key))
-		{
-			throw dis(_token.report() + "strange::expression_shared_scope::generate_cpp with non-symbol key");
-		}
 		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " ");
 	}
 
 protected:
 	flock_a<> const _terms;
 	shoal_a<> const _shared;
-	any_a<> const _key;
+	symbol_a<> const _key;
 
-	inline expression_shared_scope_t(token_a<> const& token, flock_a<> const& terms, shoal_a<> const& shared, any_a<> const& key)
+	inline expression_shared_scope_t(token_a<> const& token, flock_a<> const& terms, shoal_a<> const& shared, symbol_a<> const& key)
 		: expression_t{ token }
 		, _terms{ terms }
 		, _shared{ shared }
