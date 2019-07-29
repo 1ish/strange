@@ -121,7 +121,7 @@ public:
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
-		return token_t<>::punctuation_val("", 0, 0, "");
+		return token_t<>::punctuation_val_();
 	}
 
 	inline token_a<> token_() const
@@ -136,7 +136,7 @@ public:
 			}
 			return cast<token_a<>>(result);
 		}
-		return token_t<>::punctuation_val("", 0, 0, "");
+		return token_t<>::punctuation_val_();
 	}
 
 	inline any_a<> terms__(range_a<> const& range) const

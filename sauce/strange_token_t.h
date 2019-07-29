@@ -7,7 +7,7 @@ namespace strange
 template <typename _ABSTRACTION_ = token_a<>>
 class token_t : public thing_t<_ABSTRACTION_>
 {
-	using val_member = token_a<>(*)(symbol_a<> const&, number_data_a<int64_t> const&, number_data_a<int64_t> const&, symbol_a<> const&);
+	using val_member = token_a<>(*)(symbol_a<> const&, number_data_a<int64_t> const&, number_data_a<int64_t> const&, symbol_a<> const&, number_data_a<int64_t> const&);
 
 public:
 	// override
@@ -66,17 +66,32 @@ public:
 		{
 			return val_(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(tag), cast<symbol_a<>>(symbol));
 		}
-		return val_(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(tag), cast<symbol_a<>>(symbol), *it);
+		any_a<> literal = *it;
+		if (++it == range.cend_())
+		{
+			return val_(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(tag), cast<symbol_a<>>(symbol), literal);
+		}
+		any_a<> precedence = *it;
+		if (!check<number_data_a<int64_t>>(precedence))
+		{
+			throw dis("strange::token::val passed non-int-64 precedence");
+		}
+		return val_(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(tag), cast<symbol_a<>>(symbol), literal, cast<number_data_a<int64_t>>(precedence));
 	}
 
 	static inline token_a<> val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& tag, symbol_a<> const& symbol)
 	{
-		return val_(filename, line, position, tag, symbol, symbol);
+		return val_(filename, line, position, tag, symbol, symbol, number_int_64_t<>::val(-1));
 	}
 
 	static inline token_a<> val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& tag, symbol_a<> const& symbol, any_a<> const& literal)
 	{
-		return token_a<>{ over{ token_t<>(filename, line, position, tag, symbol, literal) } };
+		return token_a<>{ over{ token_t<>(filename, line, position, tag, symbol, literal, number_int_64_t<>::val(-1)) } };
+	}
+
+	static inline token_a<> val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& tag, symbol_a<> const& symbol, any_a<> const& literal, number_data_a<int64_t> const& precedence)
+	{
+		return token_a<>{ over{ token_t<>(filename, line, position, tag, symbol, literal, precedence) } };
 	}
 
 	static inline token_a<> val(std::string const& tag, range_a<> const& range, val_member member)
@@ -118,7 +133,16 @@ public:
 		{
 			throw dis("strange::token::" + tag + "_val passed non-symbol symbol");
 		}
-		return member(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(symbol));
+		if (++it == range.cend_())
+		{
+			return member(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(symbol), number_int_64_t<>::val(-1));
+		}
+		any_a<> precedence = *it;
+		if (!check<number_data_a<int64_t>>(precedence))
+		{
+			throw dis("strange::token::" + tag + "_val passed non-int-64 precedence");
+		}
+		return member(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(symbol), cast<number_data_a<int64_t>>(precedence));
 	}
 
 	static inline any_a<> symbol_val__(range_a<> const& range)
@@ -126,7 +150,7 @@ public:
 		return val("symbol", range, &symbol_val_);
 	}
 	
-	static inline token_a<> symbol_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol)
+	static inline token_a<> symbol_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::val_())
 	{
 		return val_(filename, line, position, sym("symbol"), symbol);
 	}
@@ -141,7 +165,7 @@ public:
 		return val("lake", range, &lake_val_);
 	}
 
-	static inline token_a<> lake_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol)
+	static inline token_a<> lake_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::val_())
 	{
 		return val_(filename, line, position, sym("lake"), symbol, lake_from_string(symbol.to_string()));
 	}
@@ -156,7 +180,7 @@ public:
 		return val("int", range, &int_val_);
 	}
 
-	static inline token_a<> int_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol)
+	static inline token_a<> int_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::val_())
 	{
 		return val_(filename, line, position, sym("int"), symbol, int_64_from_string(symbol.to_string()));
 	}
@@ -171,7 +195,7 @@ public:
 		return val("float", range, &float_val_);
 	}
 
-	static inline token_a<> float_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol)
+	static inline token_a<> float_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::val_())
 	{
 		return val_(filename, line, position, sym("float"), symbol, float_64_from_string(symbol.to_string()));
 	}
@@ -186,7 +210,7 @@ public:
 		return val("name", range, &name_val_);
 	}
 
-	static inline token_a<> name_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol)
+	static inline token_a<> name_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::val_())
 	{
 		return val_(filename, line, position, sym("name"), symbol);
 	}
@@ -201,14 +225,19 @@ public:
 		return val("punctuation", range, &punctuation_val_);
 	}
 
-	static inline token_a<> punctuation_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol)
+	static inline token_a<> punctuation_val_()
 	{
-		return val_(filename, line, position, sym("punctuation"), symbol);
+		return punctuation_val("", 0, 0, "", 0);
 	}
 
-	static inline token_a<> punctuation_val(std::string const& filename, int64_t line, int64_t position, std::string const& symbol)
+	static inline token_a<> punctuation_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& precedence)
 	{
-		return punctuation_val_(sym(filename), number_int_64_t<>::val(line), number_int_64_t<>::val(position), sym(symbol));
+		return val_(filename, line, position, sym("punctuation"), symbol, precedence);
+	}
+
+	static inline token_a<> punctuation_val(std::string const& filename, int64_t line, int64_t position, std::string const& symbol, int64_t precedence)
+	{
+		return punctuation_val_(sym(filename), number_int_64_t<>::val(line), number_int_64_t<>::val(position), sym(symbol), number_int_64_t<>::val(precedence));
 	}
 
 	static inline any_a<> error_val__(range_a<> const& range)
@@ -216,7 +245,7 @@ public:
 		return val("error", range, &error_val_);
 	}
 
-	static inline token_a<> error_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol)
+	static inline token_a<> error_val_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& = number_int_64_t<>::val_())
 	{
 		return val_(filename, line, position, sym("error"), symbol);
 	}
@@ -362,7 +391,7 @@ protected:
 	any_a<> const _literal;
 	number_data_a<int64_t> const _precedence;
 
-	inline token_t(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& tag, symbol_a<> const& symbol, any_a<> const& literal)
+	inline token_t(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& tag, symbol_a<> const& symbol, any_a<> const& literal, number_data_a<int64_t> const& precedence)
 		: thing_t{}
 		, _filename{ filename }
 		, _line{ line }
@@ -370,70 +399,8 @@ protected:
 		, _tag{ tag }
 		, _symbol{ symbol }
 		, _literal{ literal }
-		, _precedence{ _precedence_(tag, symbol) }
+		, _precedence{ precedence }
 	{}
-
-	static inline number_data_a<int64_t> _precedence_(symbol_a<> const& tag, symbol_a<> const& symbol)
-	{
-		if (tag.is("punctuation"))
-		{
-			static auto PRECEDENCE = []()
-			{
-				auto precedence = unordered_shoal_t<>::val_();
-				precedence.update_string(":.", number_int_64_t<>::val(100));
-				precedence.update_string(".", number_int_64_t<>::val(95));
-				precedence.update_string(".:", number_int_64_t<>::val(95));
-				precedence.update_string("[", number_int_64_t<>::val(90));
-				precedence.update_string("(", number_int_64_t<>::val(90));
-				precedence.update_string("{", number_int_64_t<>::val(90));
-				precedence.update_string("<<", number_int_64_t<>::val(90));
-				precedence.update_string("@", number_int_64_t<>::val(85));
-				precedence.update_string("@=", number_int_64_t<>::val(85));
-				precedence.update_string("@+", number_int_64_t<>::val(85));
-				precedence.update_string("@-", number_int_64_t<>::val(85));
-				precedence.update_string("@<", number_int_64_t<>::val(85));
-				precedence.update_string(">@", number_int_64_t<>::val(85));
-				precedence.update_string("@>", number_int_64_t<>::val(85));
-				precedence.update_string("<@", number_int_64_t<>::val(85));
-				precedence.update_string("@@", number_int_64_t<>::val(85));
-				precedence.update_string("@:", number_int_64_t<>::val(85));
-				precedence.update_string("++", number_int_64_t<>::val(80));
-				precedence.update_string("--", number_int_64_t<>::val(80));
-				precedence.update_string("?", number_int_64_t<>::val(80));
-				precedence.update_string("!", number_int_64_t<>::val(80));
-				precedence.update_string("*", number_int_64_t<>::val(75));
-				precedence.update_string("/", number_int_64_t<>::val(75));
-				precedence.update_string("%", number_int_64_t<>::val(75));
-				precedence.update_string("+", number_int_64_t<>::val(70));
-				precedence.update_string("-", number_int_64_t<>::val(70));
-				precedence.update_string("<", number_int_64_t<>::val(65));
-				precedence.update_string(">", number_int_64_t<>::val(65));
-				precedence.update_string("<=", number_int_64_t<>::val(65));
-				precedence.update_string(">=", number_int_64_t<>::val(65));
-				precedence.update_string("==", number_int_64_t<>::val(60));
-				precedence.update_string("!=", number_int_64_t<>::val(60));
-				precedence.update_string("&&", number_int_64_t<>::val(55));
-				precedence.update_string("!&", number_int_64_t<>::val(55));
-				precedence.update_string("%%", number_int_64_t<>::val(50));
-				precedence.update_string("!%", number_int_64_t<>::val(50));
-				precedence.update_string("||", number_int_64_t<>::val(45));
-				precedence.update_string("!|", number_int_64_t<>::val(45));
-				precedence.update_string("=", number_int_64_t<>::val(40));
-				precedence.update_string("+=", number_int_64_t<>::val(40));
-				precedence.update_string("-=", number_int_64_t<>::val(40));
-				precedence.update_string("*=", number_int_64_t<>::val(40));
-				precedence.update_string("/=", number_int_64_t<>::val(40));
-				precedence.update_string("%=", number_int_64_t<>::val(40));
-				return precedence;
-			}();
-			auto p = PRECEDENCE.at_(symbol);
-			if (p)
-			{
-				return cast<number_data_a<int64_t>>(p);
-			}
-		}
-		return number_int_64_t<>::val(-1);
-	}
 
 private:
 	static bool const ___share___;

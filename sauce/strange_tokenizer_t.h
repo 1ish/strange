@@ -518,7 +518,7 @@ class tokenizer_t : public thing_t<_ABSTRACTION_>
 
 		inline token_a<> punctuation_token(std::string const& str) const
 		{
-			return token_t<>::punctuation_val(_river.filename(), _line, _position, str);
+			return token_t<>::punctuation_val(_river.filename(), _line, _position, str, _precedence_(str));
 		}
 
 		inline token_a<> error_token(std::string const& str) const
@@ -581,6 +581,65 @@ protected:
 		: thing_t{}
 		, _river(river)
 	{}
+
+	static inline int64_t _precedence_(std::string const& str)
+	{
+		static auto PRECEDENCE = []()
+		{
+			auto precedence = unordered_shoal_t<>::val_();
+			precedence.update_string(":.", number_int_64_t<>::val(100));
+			precedence.update_string(".", number_int_64_t<>::val(95));
+			precedence.update_string(".:", number_int_64_t<>::val(95));
+			precedence.update_string("[", number_int_64_t<>::val(90));
+			precedence.update_string("(", number_int_64_t<>::val(90));
+			precedence.update_string("{", number_int_64_t<>::val(90));
+			precedence.update_string("<<", number_int_64_t<>::val(90));
+			precedence.update_string("@", number_int_64_t<>::val(85));
+			precedence.update_string("@=", number_int_64_t<>::val(85));
+			precedence.update_string("@+", number_int_64_t<>::val(85));
+			precedence.update_string("@-", number_int_64_t<>::val(85));
+			precedence.update_string("@<", number_int_64_t<>::val(85));
+			precedence.update_string(">@", number_int_64_t<>::val(85));
+			precedence.update_string("@>", number_int_64_t<>::val(85));
+			precedence.update_string("<@", number_int_64_t<>::val(85));
+			precedence.update_string("@@", number_int_64_t<>::val(85));
+			precedence.update_string("@:", number_int_64_t<>::val(85));
+			precedence.update_string("++", number_int_64_t<>::val(80));
+			precedence.update_string("--", number_int_64_t<>::val(80));
+			precedence.update_string("?", number_int_64_t<>::val(80));
+			precedence.update_string("!", number_int_64_t<>::val(80));
+			precedence.update_string("*", number_int_64_t<>::val(75));
+			precedence.update_string("/", number_int_64_t<>::val(75));
+			precedence.update_string("%", number_int_64_t<>::val(75));
+			precedence.update_string("+", number_int_64_t<>::val(70));
+			precedence.update_string("-", number_int_64_t<>::val(70));
+			precedence.update_string("<", number_int_64_t<>::val(65));
+			precedence.update_string(">", number_int_64_t<>::val(65));
+			precedence.update_string("<=", number_int_64_t<>::val(65));
+			precedence.update_string(">=", number_int_64_t<>::val(65));
+			precedence.update_string("==", number_int_64_t<>::val(60));
+			precedence.update_string("!=", number_int_64_t<>::val(60));
+			precedence.update_string("&&", number_int_64_t<>::val(55));
+			precedence.update_string("!&", number_int_64_t<>::val(55));
+			precedence.update_string("%%", number_int_64_t<>::val(50));
+			precedence.update_string("!%", number_int_64_t<>::val(50));
+			precedence.update_string("||", number_int_64_t<>::val(45));
+			precedence.update_string("!|", number_int_64_t<>::val(45));
+			precedence.update_string("=", number_int_64_t<>::val(40));
+			precedence.update_string("+=", number_int_64_t<>::val(40));
+			precedence.update_string("-=", number_int_64_t<>::val(40));
+			precedence.update_string("*=", number_int_64_t<>::val(40));
+			precedence.update_string("/=", number_int_64_t<>::val(40));
+			precedence.update_string("%=", number_int_64_t<>::val(40));
+			return precedence;
+		}();
+		auto p = PRECEDENCE.at_(sym(str));
+		if (p)
+		{
+			return cast<number_data_a<int64_t>>(p).extract();
+		}
+		return -1;
+	}
 
 private:
 	static bool const ___share___;
