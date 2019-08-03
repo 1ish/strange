@@ -58,31 +58,69 @@ public:
 				cast<expression_a<>>(params),
 				cast<expression_a<>>(result));
 		}
+		any_a<> def = *it;
+		if (++it == terms.cend_())
+		{
+			return val(token, terms, cast<symbol_a<>>(name),
+				cast<expression_a<>>(args),
+				cast<expression_a<>>(params),
+				cast<expression_a<>>(result),
+				def);
+		}
+		any_a<> ref = *it;
+		if (++it == terms.cend_())
+		{
+			return val(token, terms, cast<symbol_a<>>(name),
+				cast<expression_a<>>(args),
+				cast<expression_a<>>(params),
+				cast<expression_a<>>(result),
+				def,
+				ref);
+		}
+		any_a<> kind = *it;
+		if (++it == terms.cend_())
+		{
+			return val(token, terms, cast<symbol_a<>>(name),
+				cast<expression_a<>>(args),
+				cast<expression_a<>>(params),
+				cast<expression_a<>>(result),
+				def,
+				ref,
+				kind);
+		}
+		any_a<> order = *it;
+		if (!check<number_data_a<int64_t>>(order))
+		{
+			throw dis(token.report() + "strange::expression_cat::val passed non-int-64 order");
+		}
 		return val(token, terms, cast<symbol_a<>>(name),
 			cast<expression_a<>>(args),
 			cast<expression_a<>>(params),
 			cast<expression_a<>>(result),
-			*it);
+			def,
+			ref,
+			kind,
+			cast<number_data_a<int64_t>>(order));
 	}
 
 	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name = sym(""))
 	{
-		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 1, name, expression_t<>::val(token), expression_t<>::val(token), expression_t<>::val(token), no(), no()) });
+		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 1, name, expression_t<>::val(token), expression_t<>::val(token), expression_t<>::val(token), no(), no(), no(), number_int_64_t<>::val(1)) });
 	}
 
 	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, expression_a<> const& args)
 	{
-		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 2, name, args, expression_t<>::val(token), expression_t<>::val(token), no(), no()) });
+		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 2, name, args, expression_t<>::val(token), expression_t<>::val(token), no(), no(), no(), number_int_64_t<>::val(1)) });
 	}
 
 	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, expression_a<> const& args, expression_a<> const& params)
 	{
-		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 3, name, args, params, expression_t<>::val(token), no(), no()) });
+		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 3, name, args, params, expression_t<>::val(token), no(), no(), no(), number_int_64_t<>::val(1)) });
 	}
 
-	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, expression_a<> const& args, expression_a<> const& params, expression_a<> const& result, any_a<> const& def = no(), any_a<> const& ref = no())
+	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, expression_a<> const& args, expression_a<> const& params, expression_a<> const& result, any_a<> const& def = no(), any_a<> const& ref = no(), any_a<> const& kind = no(), number_data_a<int64_t> const& order = number_int_64_t<>::val(1))
 	{
-		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 4, name, args, params, result, def, ref) });
+		return expression_substitute_t<over>::val(over{ expression_cat_t<>(token, terms, 4, name, args, params, result, def, ref, kind, order) });
 	}
 
 	// reflection
@@ -210,8 +248,10 @@ protected:
 	expression_a<> const _result;
 	any_a<> const _def;
 	any_a<> const _ref;
+	any_a<> const _kind;
+	number_data_a<int64_t> const _order;
 
-	inline expression_cat_t(token_a<> const& token, flock_a<> const& terms, int64_t count, symbol_a<> const& name, expression_a<> const& args, expression_a<> const& params, expression_a<> const& result, any_a<> const& def, any_a<> const& ref)
+	inline expression_cat_t(token_a<> const& token, flock_a<> const& terms, int64_t count, symbol_a<> const& name, expression_a<> const& args, expression_a<> const& params, expression_a<> const& result, any_a<> const& def, any_a<> const& ref, any_a<> const& kind, number_data_a<int64_t> const& order)
 		: expression_t(token, args.pure() && params.pure() && result.pure(), args.literal() && params.literal() && result.literal()) // pure, literal
 		, _terms{ terms }
 		, _count{ count }
@@ -221,6 +261,8 @@ protected:
 		, _result{ result }
 		, _def{ def }
 		, _ref{ ref }
+		, _kind{ kind }
+		, _order{ order }
 	{}
 
 private:
