@@ -322,7 +322,7 @@ protected:
 			std::string const& str = result.to_string();
 			if (str != "<>")
 			{
-				symbol += str;
+				symbol += ":" + str;
 			}
 		}
 
