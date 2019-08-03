@@ -225,9 +225,11 @@ protected:
 	symbol_a<> const _result;
 	bool const _def;
 	bool const _ref;
+	bool const _kind;
+	int64_t const _order;
 
-	inline cat_t(symbol_a<> const& name, flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result, bool const def, bool const ref)
-		: symbol_t{ _symbol_(name, args, params, result) }
+	inline cat_t(symbol_a<> const& name, flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result, bool const def, bool const ref, bool const kind = false, int64_t const order = 1)
+		: symbol_t{ _symbol_(name, args, params, result, kind, order) }
 		, _symbolic{ _symbolic_(args, params, result) }
 		, _name{ name }
 		, _args{ args }
@@ -235,11 +237,19 @@ protected:
 		, _result{ _result_(result) }
 		, _def{ def }
 		, _ref{ ref }
+		, _kind{ kind }
+		, _order{ order }
 	{}
 
-	static inline std::string const _symbol_(symbol_a<> const& name, flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result)
+	static inline std::string const _symbol_(symbol_a<> const& name, flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result, bool const kind, int64_t const order)
 	{
-		std::string symbol = "<" + name.to_string();
+		std::string symbol;
+		for (int64_t o = 0; o < order; ++o)
+		{
+			symbol += "<";
+		}
+
+		symbol += name.to_string();
 
 		bool any = false;
 		int64_t anys = 0;
@@ -263,7 +273,7 @@ protected:
 			}
 			else
 			{
-				symbol += "[";
+				symbol += kind ? "{" : "[";
 				any = true;
 			}
 			while (anys)
@@ -282,7 +292,7 @@ protected:
 		}
 		if (any)
 		{
-			symbol += "]";
+			symbol += kind ? "}" : "]";
 			any = false;
 		}
 
@@ -326,7 +336,10 @@ protected:
 			}
 		}
 
-		symbol += ">";
+		for (int64_t o = 0; o < order; ++o)
+		{
+			symbol += ">";
+		}
 		return symbol;
 	}
 
