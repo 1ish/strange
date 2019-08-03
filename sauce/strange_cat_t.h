@@ -60,7 +60,22 @@ public:
 		{
 			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result), def);
 		}
-		return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result), def, *it);
+		any_a<> ref = *it;
+		if (++it == range.cend_())
+		{
+			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result), def, ref);
+		}
+		any_a<> kind = *it;
+		if (++it == range.cend_())
+		{
+			return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result), def, ref, kind);
+		}
+		any_a<> order = *it;
+		if (!check<number_data_a<int64_t>>(order))
+		{
+			throw dis("strange::cat::val passed non-int-64 order");
+		}
+		return val_(cast<symbol_a<>>(name), cast<flock_a<>>(args), cast<flock_a<>>(params), cast<symbol_a<>>(result), def, ref, kind, cast<number_data_a<int64_t>>(order));
 	}
 
 	static inline cat_a<> val_()
@@ -69,14 +84,14 @@ public:
 		return VAL;
 	}
 
-	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& args = flock_t<>::val_(), flock_a<> const& params = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool const def = false, bool const ref = false)
+	static inline cat_a<> val_(symbol_a<> const& name, flock_a<> const& args = flock_t<>::val_(), flock_a<> const& params = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool const def = false, bool const ref = false, bool const kind = false, int64_t const order = 1)
 	{
-		return cat_a<>{ over{ cat_t<>(name, args, params, result, def, ref) } };
+		return cat_a<>{ over{ cat_t<>(name, args, params, result, def, ref, kind, order) } };
 	}
 
-	static inline cat_a<> val(std::string const& name, flock_a<> const& args = flock_t<>::val_(), flock_a<> const& params = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool const def = false, bool const ref = false)
+	static inline cat_a<> val(std::string const& name, flock_a<> const& args = flock_t<>::val_(), flock_a<> const& params = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool const def = false, bool const ref = false, bool const kind = false, int64_t const order = 1)
 	{
-		return val_(sym(name), args, params, result, def, ref);
+		return val_(sym(name), args, params, result, def, ref, kind, order);
 	}
 
 	static inline symbol_a<> any_sym()
@@ -258,7 +273,7 @@ protected:
 	bool const _kind;
 	int64_t const _order;
 
-	inline cat_t(symbol_a<> const& name, flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result, bool const def, bool const ref, bool const kind = false, int64_t const order = 1)
+	inline cat_t(symbol_a<> const& name, flock_a<> const& args, flock_a<> const& params, symbol_a<> const& result, bool const def, bool const ref, bool const kind, int64_t const order)
 		: symbol_t{ _symbol_(name, args, params, result, kind, order) }
 		, _symbolic{ _symbolic_(args, params, result) }
 		, _name{ name }
