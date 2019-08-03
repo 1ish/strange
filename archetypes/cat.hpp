@@ -10,6 +10,7 @@
 #include "symbol_forward.hpp"
 #include "flock_forward.hpp"
 #include "herd_forward.hpp"
+#include "number_forward.hpp"
 
 namespace strange
 {
@@ -42,6 +43,14 @@ public:
 	inline any_a<> ref__(range_a<> const& _) const;
 	inline any_a<> ref_() const;
 	inline bool ref() const;
+
+	inline any_a<> kind__(range_a<> const& _) const;
+	inline any_a<> kind_() const;
+	inline bool kind() const;
+
+	inline any_a<> order__(range_a<> const& _) const;
+	inline number_data_a<int64_t> order_() const;
+	inline int64_t order() const;
 
 	inline any_a<> code__(range_a<> const& _) const;
 	inline lake_a_int8 code_() const;

@@ -202,6 +202,36 @@ public:
 		return _ref;
 	}
 
+	inline any_a<> kind__(range_a<> const&) const
+	{
+		return kind_();
+	}
+
+	inline any_a<> kind_() const
+	{
+		return boole(kind());
+	}
+
+	inline bool kind() const
+	{
+		return _kind;
+	}
+
+	inline any_a<> order__(range_a<> const&) const
+	{
+		return order_();
+	}
+
+	inline number_data_a<int64_t> order_() const
+	{
+		return number_int_64_t<>::val(order());
+	}
+
+	inline int64_t order() const
+	{
+		return _order;
+	}
+
 	inline any_a<> code__(range_a<> const&) const
 	{
 		return code_();

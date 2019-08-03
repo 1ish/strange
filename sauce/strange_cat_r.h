@@ -36,6 +36,8 @@ public:
 			operations.update_string("result", native_extraction_t<cat_a<>>::val(&cat_a<>::result__));
 			operations.update_string("def", native_extraction_t<cat_a<>>::val(&cat_a<>::def__));
 			operations.update_string("ref", native_extraction_t<cat_a<>>::val(&cat_a<>::ref__));
+			operations.update_string("kind", native_extraction_t<cat_a<>>::val(&cat_a<>::kind__));
+			operations.update_string("order", native_extraction_t<cat_a<>>::val(&cat_a<>::order__));
 			return operations;
 		}();
 		return OPERATIONS;
