@@ -24,33 +24,29 @@ public:
 	inline any_a<> symbolic_() const;
 	inline bool symbolic() const;
 
+	inline any_a<> order__(range_a<> const& _) const;
+	inline number_data_a<int64_t> order_() const;
+	inline int64_t order() const;
+
 	inline any_a<> name__(range_a<> const& _) const;
 	inline symbol_a<> name_() const;
 
-	inline any_a<> args__(range_a<> const& _) const;
-	inline flock_a<> args_() const;
+	inline any_a<> dimensions__(range_a<> const& _) const;
+	inline flock_a<> dimensions_() const;
 
-	inline any_a<> params__(range_a<> const& _) const;
-	inline flock_a<> params_() const;
+	inline any_a<> parameters__(range_a<> const& _) const;
+	inline flock_a<> parameters_() const;
 
 	inline any_a<> result__(range_a<> const& _) const;
 	inline cat_a result_() const;
 
-	inline any_a<> def__(range_a<> const& _) const;
-	inline any_a<> def_() const;
-	inline bool def() const;
+	inline any_a<> reference__(range_a<> const& _) const;
+	inline any_a<> reference_() const;
+	inline bool reference() const;
 
-	inline any_a<> ref__(range_a<> const& _) const;
-	inline any_a<> ref_() const;
-	inline bool ref() const;
-
-	inline any_a<> kind__(range_a<> const& _) const;
-	inline any_a<> kind_() const;
-	inline bool kind() const;
-
-	inline any_a<> order__(range_a<> const& _) const;
-	inline number_data_a<int64_t> order_() const;
-	inline int64_t order() const;
+	inline any_a<> optional__(range_a<> const& _) const;
+	inline any_a<> optional_() const;
+	inline bool optional() const;
 
 	inline any_a<> code__(range_a<> const& _) const;
 	inline lake_a_int8 code_() const;
