@@ -96,6 +96,9 @@
 #define ___derived___ symbol_a<>
 #include "strange_cat_a.h"
 
+#define ___derived___ cat_a<>
+#include "strange_kind_a.h"
+
 #include "strange_token_a.h"
 
 #include "strange_operation_a.h"
