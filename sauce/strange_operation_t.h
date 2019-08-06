@@ -84,7 +84,7 @@ protected:
 				break;
 			}
 		}
-		cat_eater.first = cat_t<>::val("", flock_t<>::val_(), cat_params, cat_result);
+		cat_eater.first = cat_t<>::val(1, "", flock_t<>::val_(), cat_params, cat_result);
 		return cat_eater;
 	}
 

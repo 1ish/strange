@@ -10,7 +10,7 @@ class reflection<forward_iterator_data_a<std::unordered_map<any_a<>, any_a<>, an
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val("strange::forward_iterator_data_unordered_shoal");
+		static cat_a<> CAT = cat_t<>::val(1, "strange::forward_iterator_data_unordered_shoal");
 		return CAT;
 	}
 

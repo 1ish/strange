@@ -10,7 +10,7 @@ class reflection<squad_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val("strange::squad");
+		static cat_a<> CAT = cat_t<>::val(1, "strange::squad");
 		return CAT;
 	}
 

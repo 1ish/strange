@@ -74,7 +74,7 @@ public:
 
 	static inline cat_a<> val_()
 	{
-		static cat_a<> VAL = val();
+		static cat_a<> VAL = val(1);
 		return VAL;
 	}
 
@@ -83,10 +83,9 @@ public:
 		return cat_a<>{ over{ cat_t<>(order.extract(), name, dimensions, flock_t<>::val_(), parameters, result, reference, optional) } };
 	}
 
-	static inline cat_a<> val(std::string const& name = "", flock_a<> const& dimensions = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool reference = false, bool optional = false)
+	static inline cat_a<> val(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool reference = false, bool optional = false)
 	{
-		//TODO don't default the order
-		return cat_a<>{ over{ cat_t<>(1, sym(name), dimensions, flock_t<>::val_(), parameters, result, reference, optional) } };
+		return cat_a<>{ over{ cat_t<>(order, sym(name), dimensions, flock_t<>::val_(), parameters, result, reference, optional) } };
 	}
 
 	static inline symbol_a<> any_sym()

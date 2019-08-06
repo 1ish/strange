@@ -10,7 +10,7 @@ class reflection<data_a<std::shared_ptr<strange::concurrent_u<false>::read_lock>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val("strange::data_dummy_read_lock_ptr");
+		static cat_a<> CAT = cat_t<>::val(1, "strange::data_dummy_read_lock_ptr");
 		return CAT;
 	}
 
@@ -42,7 +42,7 @@ class reflection<data_a<std::shared_ptr<strange::concurrent_u<true>::read_lock>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val("strange::data_concurrent_read_lock_ptr");
+		static cat_a<> CAT = cat_t<>::val(1, "strange::data_concurrent_read_lock_ptr");
 		return CAT;
 	}
 
@@ -74,7 +74,7 @@ class reflection<data_a<std::shared_ptr<strange::concurrent_u<false>::write_lock
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val("strange::data_dummy_write_lock_ptr");
+		static cat_a<> CAT = cat_t<>::val(1, "strange::data_dummy_write_lock_ptr");
 		return CAT;
 	}
 
@@ -106,7 +106,7 @@ class reflection<data_a<std::shared_ptr<strange::concurrent_u<true>::write_lock>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val("strange::data_concurrent_write_lock_ptr");
+		static cat_a<> CAT = cat_t<>::val(1, "strange::data_concurrent_write_lock_ptr");
 		return CAT;
 	}
 
