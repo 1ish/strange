@@ -15,6 +15,7 @@ class reflection;
 #include "strange_thing_r.h"
 #include "strange_symbol_r.h"
 #include "strange_cat_r.h"
+#include "strange_kind_r.h"
 #include "strange_forward_const_iterator_r.h"
 #include "strange_forward_const_iterator_data_r.h"
 #include "strange_forward_iterator_r.h"
