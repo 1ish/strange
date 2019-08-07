@@ -12,19 +12,15 @@ public:
 	using over = thing_o<symbol_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> val__(range_a<> const&)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return val_();
-		}
-		return val_(*it);
+		return val_();
 	}
 
-	static inline symbol_a<> val_(any_a<> const& thing = no())
+	static inline symbol_a<> val_()
 	{
-		return val("");
+		static symbol_a<> VAL = symbol_t<>::val("");
+		return VAL;
 	}
 
 	template <typename F>

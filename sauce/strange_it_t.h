@@ -24,7 +24,7 @@ public:
 
 	static inline forward_const_iterator_a<> val_()
 	{
-		static forward_const_iterator_a<> VAL = val_(END::val_());
+		static forward_const_iterator_a<> VAL = it_t<CONST, END>::val_(END::val_());
 		return VAL;
 	}
 

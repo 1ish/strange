@@ -49,7 +49,7 @@ class ___kind_a_share___
 		return kind_a<>::___share___;
 	}
 };
-/* //TODO
+
 template<>
 class reflection<kind_t<>>
 {
@@ -73,7 +73,7 @@ class ___kind_t_share___
 		return kind_t<>::___share___;
 	}
 };
-*/
+
 }
 
 #endif

@@ -27,6 +27,7 @@
 #include "strange_brook_t.h"
 #include "strange_river_t.h"
 #include "strange_cat_t.h"
+#include "strange_kind_t.h"
 #include "strange_data_t.h"
 #include "strange_range_operator_t.h"
 #include "strange_token_t.h"

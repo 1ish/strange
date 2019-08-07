@@ -38,7 +38,7 @@ public:
 
 	static inline range_a<> val_()
 	{
-		static range_a<> VAL = val_(it_t<true>::val_(), it_t<true>::val_());
+		static range_a<> VAL = range_t<>::val_(it_t<true>::val_(), it_t<true>::val_());
 		return VAL;
 	}
 

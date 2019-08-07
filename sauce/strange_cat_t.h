@@ -74,7 +74,7 @@ public:
 
 	static inline cat_a<> val_()
 	{
-		static cat_a<> VAL = val(1);
+		static cat_a<> VAL = cat_t<>::val(1);
 		return VAL;
 	}
 
