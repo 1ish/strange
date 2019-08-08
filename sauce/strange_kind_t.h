@@ -115,7 +115,7 @@ public:
 		{
 			return false;
 		}
-		auto kind = cast<kind_a<>>(thing);
+		auto const kind = cast<kind_a<>>(thing);
 		if (_symbolic != kind.symbolic() || _hash != kind.hash())
 		{
 			return false;

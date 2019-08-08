@@ -43,7 +43,7 @@ public:
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return check<symbol_a<>>(thing) && cast<symbol_a<>>(thing).to_string() == _string;
+		return check<symbol_a<>>(thing) && !check<cat_a<>>(thing) && cast<symbol_a<>>(thing).to_string() == _string;
 	}
 
 	inline std::size_t hash() const
