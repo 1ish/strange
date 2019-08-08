@@ -38,6 +38,7 @@ TEST(TestCaseName, ForLoop)
 	EXPECT_TRUE(s.is("strange"));
 
 	cat_a<> c = cat_t<>::val_();
+	kind_a<> k = kind_t<>::val_();
 
 	any_a<> f = native_function_t<>::val(fun, cat_t<>::val_(), "x", cat_t<>::val_(), "y", cat_t<>::val_(), "z", cat_t<>::val_());
 	any_a<> g = native_function_t<>::val(&nothing_t<>::val__, cat_t<>::val_(), "x", cat_t<>::val_(), "y", cat_t<>::val_(), "z");
