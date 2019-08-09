@@ -9,6 +9,7 @@
 #include "range_forward.hpp"
 #include "symbol_forward.hpp"
 #include "cat_forward.hpp"
+#include "kind_forward.hpp"
 #include "inventory_forward.hpp"
 #include "unordered_herd_forward.hpp"
 #include "shoal_forward.hpp"
@@ -18,7 +19,7 @@
 namespace strange
 {
 
-template <typename range_a, typename symbol_a, typename cat_a, typename inventory_a, typename unordered_herd_a, typename shoal_a, typename unordered_shoal_a, typename number_data_a_uint64>
+template <typename range_a, typename symbol_a, typename cat_a, typename kind_a, typename inventory_a, typename unordered_herd_a, typename shoal_a, typename unordered_shoal_a, typename number_data_a_uint64>
 class any_a
 {
 public:
@@ -48,6 +49,12 @@ public:
 
 	inline any_a cats__(range_a const& _) const;
 	inline unordered_herd_a cats_() const;
+
+	inline any_a kind__(range_a const& _) const;
+	inline kind_a kind_() const;
+
+	inline any_a kinds__(range_a const& _) const;
+	inline unordered_herd_a kinds_() const;
 
 	inline any_a operations__(range_a const& _) const;
 	inline unordered_shoal_a operations_() const;

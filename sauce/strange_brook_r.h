@@ -25,6 +25,18 @@ public:
 		return CATS;
 	}
 
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<inventory_a<>>::operations();
@@ -55,6 +67,18 @@ public:
 			return cats;
 		}();
 		return CATS;
+	}
+
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -89,6 +113,18 @@ public:
 		return CATS;
 	}
 
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<inventory_a<>>::operations();
@@ -119,6 +155,18 @@ public:
 			return cats;
 		}();
 		return CATS;
+	}
+
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -153,6 +201,18 @@ public:
 		return CATS;
 	}
 
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<inventory_a<>>::operations();
@@ -183,6 +243,18 @@ public:
 			return cats;
 		}();
 		return CATS;
+	}
+
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -217,6 +289,18 @@ public:
 		return CATS;
 	}
 
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<inventory_a<>>::operations();
@@ -247,6 +331,18 @@ public:
 			return cats;
 		}();
 		return CATS;
+	}
+
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
 	}
 
 	static inline unordered_shoal_a<> operations()
@@ -281,6 +377,18 @@ public:
 		return CATS;
 	}
 
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<inventory_a<>>::operations();
@@ -311,6 +419,18 @@ public:
 			return cats;
 		}();
 		return CATS;
+	}
+
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
 	}
 
 	static inline unordered_shoal_a<> operations()

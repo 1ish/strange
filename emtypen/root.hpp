@@ -383,10 +383,10 @@ inline ___TTT___ cast(%struct_name%<> const& value, bool reference) noexcept
 }
 #endif
 
-template <typename ___1___, typename ___2___, typename ___3___, typename ___4___, typename ___5___, typename ___6___, typename ___7___, typename ___8___>
-bool const %struct_name%<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___>::___share___ = []()
+template <typename ___1___, typename ___2___, typename ___3___, typename ___4___, typename ___5___, typename ___6___, typename ___7___, typename ___8___, typename ___9___>
+bool const %struct_name%<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___, ___9___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	reflection<%struct_name%<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___>>::share(shoal);
+	reflection<%struct_name%<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___, ___9___>>::share(shoal);
 	return shoal;
 }();

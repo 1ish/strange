@@ -160,6 +160,45 @@ bool const kind_t<_ABSTRACTION_>::___share___ = []()
 	return shoal;
 }();
 
+// cat conversion
+inline kind_a<> cat_to_kind(cat_a<> const& cat)
+{
+	return kind_t<>::val_(cat.order_(), cat.name_(), cat.dimensions_(), flock_t<>::val_(), cat.parameters_(), cat.result_(), cat.reference_(), cat.optional_());
+}
+
+inline unordered_herd_a<> cats_to_kinds(unordered_herd_a<> const& cats)
+{
+	auto result = unordered_herd_t<>::val_();
+	for (auto const& cat : cats)
+	{
+		if (!check<cat_a<>>(cat))
+		{
+			throw dis("strange::cats_to_kinds passed non-cat");
+		}
+		result.insert(cat_to_kind(cast<cat_a<>>(cat)));
+	}
+	return result;
+}
+
+inline cat_a<> cat_from_kind(kind_a<> const& kind)
+{
+	return cat_t<>::val_(kind.order_(), kind.name_(), kind.dimensions_(), kind.parameters_(), kind.result_(), kind.reference_(), kind.optional_());
+}
+
+inline unordered_herd_a<> cats_from_kinds(unordered_herd_a<> const& kinds)
+{
+	auto result = unordered_herd_t<>::val_();
+	for (auto const& kind : kinds)
+	{
+		if (!check<kind_a<>>(kind))
+		{
+			throw dis("strange::cats_from_kinds passed non-kind");
+		}
+		result.insert(cat_from_kind(cast<kind_a<>>(kind)));
+	}
+	return result;
+}
+
 } // namespace strange
 
 #endif

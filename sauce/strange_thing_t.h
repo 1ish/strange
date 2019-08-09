@@ -50,6 +50,26 @@ public:
 		return reflection<_ABSTRACTION_>::cats();
 	}
 
+	static inline any_a<> kind__(range_a<> const&)
+	{
+		return kind_();
+	}
+
+	static inline kind_a<> kind_()
+	{
+		return reflection<_ABSTRACTION_>::kind();
+	}
+
+	static inline any_a<> kinds__(range_a<> const&)
+	{
+		return kinds_();
+	}
+
+	static inline unordered_herd_a<> kinds_()
+	{
+		return reflection<_ABSTRACTION_>::kinds();
+	}
+
 	static inline any_a<> operations__(range_a<> const&)
 	{
 		return operations_();

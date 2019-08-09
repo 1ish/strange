@@ -25,6 +25,18 @@ public:
 		return CATS;
 	}
 
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<forward_const_iterator_a<>>::operations();
@@ -44,6 +56,18 @@ public:
 	{
 		static cat_a<> CAT = cat_t<>::val(1, "strange::forward_const_iterator_data_unordered_herd");
 		return CAT;
+	}
+
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
 	}
 
 	static inline unordered_herd_a<> cats()
@@ -89,6 +113,18 @@ public:
 		return CATS;
 	}
 
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
+	}
+
 	static inline unordered_shoal_a<> operations()
 	{
 		return reflection<forward_const_iterator_a<>>::operations();
@@ -119,6 +155,18 @@ public:
 			return cats;
 		}();
 		return CATS;
+	}
+
+	static inline kind_a<> kind()
+	{
+		static kind_a<> KIND = cat_to_kind(cat());
+		return KIND;
+	}
+
+	static inline unordered_herd_a<> kinds()
+	{
+		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		return KINDS;
 	}
 
 	static inline unordered_shoal_a<> operations()

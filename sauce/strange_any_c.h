@@ -150,6 +150,56 @@ public:
 		return reflection<_ABSTRACTION_>::cats();
 	}
 
+	inline any_a<> kind__(range_a<> const& range) const
+	{
+		auto const op = _operations.at_string("kind");
+		if (op)
+		{
+			return op.operate_(any_a<>(me_(), true), range);
+		}
+		return reflection<_ABSTRACTION_>::kind();
+	}
+
+	inline kind_a<> kind_() const
+	{
+		auto const op = _operations.at_string("kind");
+		if (op)
+		{
+			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			if (!check<kind_a<>>(result))
+			{
+				throw dis("strange::any_creature::shared returned non-kind");
+			}
+			return cast<kind_a<>>(result);
+		}
+		return reflection<_ABSTRACTION_>::kind();
+	}
+
+	inline any_a<> kinds__(range_a<> const& range) const
+	{
+		auto const op = _operations.at_string("kinds");
+		if (op)
+		{
+			return op.operate_(any_a<>(me_(), true), range);
+		}
+		return reflection<_ABSTRACTION_>::kinds();
+	}
+
+	inline unordered_herd_a<> kinds_() const
+	{
+		auto const op = _operations.at_string("kinds");
+		if (op)
+		{
+			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			if (!check<unordered_herd_a<>>(result))
+			{
+				throw dis("strange::any_creature::shared returned non-unordered-herd");
+			}
+			return cast<unordered_herd_a<>>(result);
+		}
+		return reflection<_ABSTRACTION_>::kinds();
+	}
+
 	inline any_a<> operations__(range_a<> const& range) const // cannot be overridden
 	{
 		return _operations;
