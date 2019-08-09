@@ -32,7 +32,7 @@ public:
 	// reflection
 	inline any_a<> type__(range_a<> const& range) const
 	{
-		auto op = _operations.at_string("type");
+		auto const op = _operations.at_string("type");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -42,10 +42,10 @@ public:
 
 	inline symbol_a<> type_() const
 	{
-		auto op = _operations.at_string("type");
+		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("strange::operation_creature::type returned non-symbol");
@@ -57,7 +57,7 @@ public:
 
 	inline any_a<> shared__(range_a<> const& range) const
 	{
-		auto op = _operations.at_string("shared");
+		auto const op = _operations.at_string("shared");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -69,10 +69,10 @@ public:
 
 	inline unordered_shoal_a<> shared_() const
 	{
-		auto op = _operations.at_string("shared");
+		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("strange::operation_creature::shared returned non-unordered-shoal");
@@ -92,12 +92,12 @@ public:
 	// operation
 	inline any_a<> pure__(range_a<> const& range) const
 	{
-		auto op = _operations.at_string("pure");
+		auto const op = _operations.at_string("pure");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
-		auto oper = _operations.at_string("operate");
+		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
 			return cast<operation_a<>>(oper).pure_();
@@ -107,12 +107,12 @@ public:
 
 	inline any_a<> pure_() const
 	{
-		auto op = _operations.at_string("pure");
+		auto const op = _operations.at_string("pure");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
 		}
-		auto oper = _operations.at_string("operate");
+		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
 			return cast<operation_a<>>(oper).pure_();
@@ -122,12 +122,12 @@ public:
 
 	inline bool pure() const
 	{
-		auto op = _operations.at_string("pure");
+		auto const op = _operations.at_string("pure");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
 		}
-		auto oper = _operations.at_string("operate");
+		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
 			return cast<operation_a<>>(oper).pure();
@@ -137,12 +137,12 @@ public:
 
 	inline any_a<> literal__(range_a<> const& range) const
 	{
-		auto op = _operations.at_string("literal");
+		auto const op = _operations.at_string("literal");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
-		auto oper = _operations.at_string("operate");
+		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
 			return cast<operation_a<>>(oper).literal_();
@@ -152,12 +152,12 @@ public:
 
 	inline any_a<> literal_() const
 	{
-		auto op = _operations.at_string("literal");
+		auto const op = _operations.at_string("literal");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
 		}
-		auto oper = _operations.at_string("operate");
+		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
 			return cast<operation_a<>>(oper).literal_();
@@ -167,12 +167,12 @@ public:
 
 	inline bool literal() const
 	{
-		auto op = _operations.at_string("literal");
+		auto const op = _operations.at_string("literal");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
 		}
-		auto oper = _operations.at_string("operate");
+		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
 			return cast<operation_a<>>(oper).literal();

@@ -32,7 +32,7 @@ public:
 	// reflection
 	inline any_a<> type__(range_a<> const& range) const
 	{
-		auto op = _operations.at_string("type");
+		auto const op = _operations.at_string("type");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -42,10 +42,10 @@ public:
 
 	inline symbol_a<> type_() const
 	{
-		auto op = _operations.at_string("type");
+		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("strange::expression_creature::type returned non-symbol");
@@ -57,7 +57,7 @@ public:
 
 	inline any_a<> shared__(range_a<> const& range) const
 	{
-		auto op = _operations.at_string("shared");
+		auto const op = _operations.at_string("shared");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -69,10 +69,10 @@ public:
 
 	inline unordered_shoal_a<> shared_() const
 	{
-		auto op = _operations.at_string("shared");
+		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("strange::expression_creature::shared returned non-unordered-shoal");
@@ -92,7 +92,7 @@ public:
 	// expression
 	inline any_a<> evaluate__(range_a<> const& range) const
 	{
-		auto op = _operations.at_string("evaluate");
+		auto const op = _operations.at_string("evaluate");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -104,7 +104,7 @@ public:
 
 	inline any_a<> evaluate_() const
 	{
-		auto op = _operations.at_string("evaluate");
+		auto const op = _operations.at_string("evaluate");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
@@ -116,7 +116,7 @@ public:
 
 	inline any_a<> token__(range_a<> const& range) const
 	{
-		auto op = _operations.at_string("token");
+		auto const op = _operations.at_string("token");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -126,10 +126,10 @@ public:
 
 	inline token_a<> token_() const
 	{
-		auto op = _operations.at_string("token");
+		auto const op = _operations.at_string("token");
 		if (op)
 		{
-			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<token_a<>>(result))
 			{
 				throw dis("strange::expression_creature::token returned non-token");
@@ -141,7 +141,7 @@ public:
 
 	inline any_a<> terms__(range_a<> const& range) const
 	{
-		auto op = _operations.at_string("terms");
+		auto const op = _operations.at_string("terms");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -151,10 +151,10 @@ public:
 
 	inline flock_a<> terms_() const
 	{
-		auto op = _operations.at_string("terms");
+		auto const op = _operations.at_string("terms");
 		if (op)
 		{
-			auto result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<flock_a<>>(result))
 			{
 				throw dis("strange::expression_creature::terms returned non-flock");
@@ -166,7 +166,7 @@ public:
 
 	inline any_a<> generate__(range_a<> const& range) const
 	{
-		auto op = _operations.at_string("generate");
+		auto const op = _operations.at_string("generate");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -204,7 +204,7 @@ public:
 
 	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
 	{
-		auto op = _operations.at_string("generate");
+		auto const op = _operations.at_string("generate");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), flock_t<>::val_(version, indent, river));
@@ -214,7 +214,7 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		auto op = _operations.at_string("generate");
+		auto const op = _operations.at_string("generate");
 		if (op)
 		{
 			op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(version), number_int_64_t<>::val(indent), river));
@@ -223,7 +223,7 @@ public:
 
 	inline any_a<> generate_cpp__(range_a<> const& range) const
 	{
-		auto op = _operations.at_string("generate_cpp");
+		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), range);
@@ -261,7 +261,7 @@ public:
 
 	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
 	{
-		auto op = _operations.at_string("generate_cpp");
+		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
 			return op.operate_(any_a<>(me_(), true), flock_t<>::val_(version, indent, river));
@@ -271,7 +271,7 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		auto op = _operations.at_string("generate_cpp");
+		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
 			op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(version), number_int_64_t<>::val(indent), river));
