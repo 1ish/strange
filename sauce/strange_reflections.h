@@ -22,6 +22,7 @@ class reflection;
 #include "strange_forward_iterator_data_r.h"
 #include "strange_misunderstanding_r.h"
 #include "strange_range_r.h"
+#include "strange_range_of_r.h"
 #include "strange_collection_r.h"
 #include "strange_inventory_r.h"
 #include "strange_herd_r.h"

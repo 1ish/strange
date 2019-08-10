@@ -47,6 +47,8 @@
 
 #include "strange_range_a.h"
 
+#include "strange_range_of_a.h"
+
 #define ___derived___ range_a<>
 #include "strange_collection_a.h"
 

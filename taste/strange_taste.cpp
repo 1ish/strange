@@ -139,6 +139,9 @@ TEST(TestCaseName, ForLoop)
 
 	flock_a<> const fl = flock_t<>::val_();
 	flock_a<>(fl, true).push_back(no());
+
+	range_of_a<> rof = range_of_t<>::val_();
+	auto rofs = range_of_t<symbol_a<>>::val_();
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1
