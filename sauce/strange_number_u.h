@@ -11,6 +11,7 @@ template <typename PRIMITIVE>
 class number_u
 {
 public:
+	static inline std::string category();
 	static inline PRIMITIVE from_number(number_a<> const& other);
 	static inline PRIMITIVE from_int_64(int64_t other);
 	static inline PRIMITIVE from_uint_64(uint64_t other);
@@ -31,6 +32,11 @@ template <>
 class number_u<int8_t>
 {
 public:
+	static inline std::string category()
+	{
+		return "int_8";
+	}
+
 	static inline int8_t from_number(number_a<> const& other)
 	{
 		return int8_t(other.to_int_64());
@@ -112,6 +118,11 @@ template <>
 class number_u<uint8_t>
 {
 public:
+	static inline std::string category()
+	{
+		return "uint_8";
+	}
+
 	static inline uint8_t from_number(number_a<> const& other)
 	{
 		return uint8_t(other.to_uint_64());
@@ -202,6 +213,11 @@ template <>
 class number_u<int16_t>
 {
 public:
+	static inline std::string category()
+	{
+		return "int_16";
+	}
+
 	static inline int16_t from_number(number_a<> const& other)
 	{
 		return int16_t(other.to_int_64());
@@ -283,6 +299,11 @@ template <>
 class number_u<uint16_t>
 {
 public:
+	static inline std::string category()
+	{
+		return "uint_16";
+	}
+
 	static inline uint16_t from_number(number_a<> const& other)
 	{
 		return uint16_t(other.to_uint_64());
@@ -373,6 +394,11 @@ template <>
 class number_u<int32_t>
 {
 public:
+	static inline std::string category()
+	{
+		return "int_32";
+	}
+
 	static inline int32_t from_number(number_a<> const& other)
 	{
 		return int32_t(other.to_int_64());
@@ -454,6 +480,11 @@ template <>
 class number_u<uint32_t>
 {
 public:
+	static inline std::string category()
+	{
+		return "uint_32";
+	}
+
 	static inline uint32_t from_number(number_a<> const& other)
 	{
 		return uint32_t(other.to_uint_64());
@@ -544,6 +575,11 @@ template <>
 class number_u<int64_t>
 {
 public:
+	static inline std::string category()
+	{
+		return "int_64";
+	}
+
 	static inline int64_t from_number(number_a<> const& other)
 	{
 		return other.to_int_64();
@@ -625,6 +661,11 @@ template <>
 class number_u<uint64_t>
 {
 public:
+	static inline std::string category()
+	{
+		return "uint_64";
+	}
+
 	static inline uint64_t from_number(number_a<> const& other)
 	{
 		return other.to_uint_64();
@@ -715,6 +756,11 @@ template <>
 class number_u<float>
 {
 public:
+	static inline std::string category()
+	{
+		return "float_32";
+	}
+
 	static inline float from_number(number_a<> const& other)
 	{
 		return float(other.to_float_64());
@@ -799,6 +845,11 @@ template <>
 class number_u<double>
 {
 public:
+	static inline std::string category()
+	{
+		return "float_64";
+	}
+
 	static inline double from_number(number_a<> const& other)
 	{
 		return other.to_float_64();
