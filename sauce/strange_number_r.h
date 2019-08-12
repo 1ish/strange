@@ -84,7 +84,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update(cat(), operations());
+		shoal.update(kind(), operations());
 	}
 };
 
