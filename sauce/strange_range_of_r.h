@@ -28,13 +28,7 @@ public:
 
 	static inline kind_a<> kind()
 	{
-		static kind_a<> KIND = kind_t<>::val_(
-			cat().order_(),
-			cat().name_(),
-			cat().dimensions_(),
-			flock_t<>::val_(reflection<ELEMENT>::cat()),
-			cat().parameters_(),
-			cat().result_());
+		static kind_a<> KIND = kind_from_cat(cat(), flock_t<>::val_(reflection<ELEMENT>::cat()));
 		return KIND;
 	}
 
@@ -71,8 +65,7 @@ class ___range_of_a_share___
 {
 	static inline bool ___share___()
 	{
-		return range_of_a<>::___share___
-			&& range_of_a<symbol_a<>>::___share___;
+		return range_of_a<>::___share___;
 	}
 };
 

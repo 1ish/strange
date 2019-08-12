@@ -27,13 +27,13 @@ public:
 
 	static inline kind_a<> kind()
 	{
-		static kind_a<> KIND = cat_to_kind(cat());
+		static kind_a<> KIND = kind_from_cat(cat());
 		return KIND;
 	}
 
 	static inline unordered_herd_a<> kinds()
 	{
-		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		static unordered_herd_a<> KINDS = kinds_from_cats(cats());
 		return KINDS;
 	}
 
@@ -71,13 +71,13 @@ public:
 
 	static inline kind_a<> kind()
 	{
-		static kind_a<> KIND = cat_to_kind(cat());
+		static kind_a<> KIND = kind_from_cat(cat());
 		return KIND;
 	}
 
 	static inline unordered_herd_a<> kinds()
 	{
-		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		static unordered_herd_a<> KINDS = kinds_from_cats(cats());
 		return KINDS;
 	}
 
@@ -115,13 +115,13 @@ public:
 
 	static inline kind_a<> kind()
 	{
-		static kind_a<> KIND = cat_to_kind(cat());
+		static kind_a<> KIND = kind_from_cat(cat());
 		return KIND;
 	}
 
 	static inline unordered_herd_a<> kinds()
 	{
-		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		static unordered_herd_a<> KINDS = kinds_from_cats(cats());
 		return KINDS;
 	}
 
@@ -159,13 +159,13 @@ public:
 
 	static inline kind_a<> kind()
 	{
-		static kind_a<> KIND = cat_to_kind(cat());
+		static kind_a<> KIND = kind_from_cat(cat());
 		return KIND;
 	}
 
 	static inline unordered_herd_a<> kinds()
 	{
-		static unordered_herd_a<> KINDS = cats_to_kinds(cats());
+		static unordered_herd_a<> KINDS = kinds_from_cats(cats());
 		return KINDS;
 	}
 

@@ -161,40 +161,40 @@ bool const kind_t<_ABSTRACTION_>::___share___ = []()
 }();
 
 // cat conversion
-inline kind_a<> cat_to_kind(cat_a<> const& cat)
+inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects = flock_t<>::val_())
 {
-	return kind_t<>::val_(cat.order_(), cat.name_(), cat.dimensions_(), flock_t<>::val_(), cat.parameters_(), cat.result_(), cat.reference_(), cat.optional_());
+	return kind_t<>::val_(cat.order_(), cat.name_(), cat.dimensions_(), aspects, cat.parameters_(), cat.result_(), cat.reference_(), cat.optional_());
 }
 
-inline unordered_herd_a<> cats_to_kinds(unordered_herd_a<> const& cats)
+inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects = flock_t<>::val_())
 {
 	auto result = unordered_herd_t<>::val_();
 	for (auto const& cat : cats)
 	{
 		if (!check<cat_a<>>(cat))
 		{
-			throw dis("strange::cats_to_kinds passed non-cat");
+			throw dis("strange::kinds_from_cats passed non-cat");
 		}
-		result.insert(cat_to_kind(cast<cat_a<>>(cat)));
+		result.insert(kind_from_cat(cast<cat_a<>>(cat), aspects));
 	}
 	return result;
 }
 
-inline cat_a<> cat_from_kind(kind_a<> const& kind)
+inline cat_a<> kind_to_cat(kind_a<> const& kind)
 {
 	return cat_t<>::val_(kind.order_(), kind.name_(), kind.dimensions_(), kind.parameters_(), kind.result_(), kind.reference_(), kind.optional_());
 }
 
-inline unordered_herd_a<> cats_from_kinds(unordered_herd_a<> const& kinds)
+inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds)
 {
 	auto result = unordered_herd_t<>::val_();
 	for (auto const& kind : kinds)
 	{
 		if (!check<kind_a<>>(kind))
 		{
-			throw dis("strange::cats_from_kinds passed non-kind");
+			throw dis("strange::kinds_to_cats passed non-kind");
 		}
-		result.insert(cat_from_kind(cast<kind_a<>>(kind)));
+		result.insert(kind_to_cat(cast<kind_a<>>(kind)));
 	}
 	return result;
 }
