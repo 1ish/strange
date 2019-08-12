@@ -33,7 +33,12 @@ public:
 
 	static inline unordered_herd_a<> kinds()
 	{
-		static unordered_herd_a<> KINDS = kinds_from_cats(cats());
+		static unordered_herd_a<> KINDS = []()
+		{
+			auto kinds = reflection<shoal_a<>>::kinds();
+			kinds.insert(kind());
+			return kinds;
+		}();
 		return KINDS;
 	}
 

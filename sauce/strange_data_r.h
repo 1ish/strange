@@ -18,7 +18,7 @@ public:
 	{
 		static unordered_herd_a<> CATS = []()
 		{
-			auto cats = reflection<symbol_a<>>::cats();
+			auto cats = reflection<any_a<>>::cats();
 			cats.insert(cat());
 			return cats;
 		}();
@@ -33,7 +33,12 @@ public:
 
 	static inline unordered_herd_a<> kinds()
 	{
-		static unordered_herd_a<> KINDS = kinds_from_cats(cats());
+		static unordered_herd_a<> KINDS = []()
+		{
+			auto kinds = reflection<any_a<>>::kinds();
+			kinds.insert(kind());
+			return kinds;
+		}();
 		return KINDS;
 	}
 
@@ -62,7 +67,7 @@ public:
 	{
 		static unordered_herd_a<> CATS = []()
 		{
-			auto cats = reflection<symbol_a<>>::cats();
+			auto cats = reflection<any_a<>>::cats();
 			cats.insert(cat());
 			return cats;
 		}();
@@ -77,7 +82,12 @@ public:
 
 	static inline unordered_herd_a<> kinds()
 	{
-		static unordered_herd_a<> KINDS = kinds_from_cats(cats());
+		static unordered_herd_a<> KINDS = []()
+		{
+			auto kinds = reflection<any_a<>>::kinds();
+			kinds.insert(kind());
+			return kinds;
+		}();
 		return KINDS;
 	}
 
@@ -106,7 +116,7 @@ public:
 	{
 		static unordered_herd_a<> CATS = []()
 		{
-			auto cats = reflection<symbol_a<>>::cats();
+			auto cats = reflection<any_a<>>::cats();
 			cats.insert(cat());
 			return cats;
 		}();
@@ -121,7 +131,12 @@ public:
 
 	static inline unordered_herd_a<> kinds()
 	{
-		static unordered_herd_a<> KINDS = kinds_from_cats(cats());
+		static unordered_herd_a<> KINDS = []()
+		{
+			auto kinds = reflection<any_a<>>::kinds();
+			kinds.insert(kind());
+			return kinds;
+		}();
 		return KINDS;
 	}
 
@@ -150,7 +165,7 @@ public:
 	{
 		static unordered_herd_a<> CATS = []()
 		{
-			auto cats = reflection<symbol_a<>>::cats();
+			auto cats = reflection<any_a<>>::cats();
 			cats.insert(cat());
 			return cats;
 		}();
@@ -165,7 +180,12 @@ public:
 
 	static inline unordered_herd_a<> kinds()
 	{
-		static unordered_herd_a<> KINDS = kinds_from_cats(cats());
+		static unordered_herd_a<> KINDS = []()
+		{
+			auto kinds = reflection<any_a<>>::kinds();
+			kinds.insert(kind());
+			return kinds;
+		}();
 		return KINDS;
 	}
 
