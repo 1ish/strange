@@ -69,35 +69,19 @@ class ___range_of_a_share___
 	}
 };
 
-template<>
-class reflection<range_of_t<>>
+template<typename ELEMENT>
+class reflection<range_of_t<ELEMENT>>
 {
 public:
 	static inline symbol_a<> type()
 	{
-		static symbol_a<> TYPE = sym("strange::range_of");
+		static symbol_a<> TYPE = sym("strange::range_of" + reflection<ELEMENT>::cat().to_string());
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::range_of::val", native_function_t<>::val(&range_of_t<>::val__));
-	}
-};
-
-template<>
-class reflection<range_of_t<symbol_a<>>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::range_of_symbol");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::range_of_symbol::val", native_function_t<>::val(&range_of_t<symbol_a<>>::val__));
+		shoal.update_string(type().to_string() + "::val", native_function_t<>::val(&range_of_t<ELEMENT>::val__));
 	}
 };
 
@@ -105,8 +89,7 @@ class ___range_of_t_share___
 {
 	static inline bool ___share___()
 	{
-		return range_of_t<>::___share___
-			&& range_of_t<symbol_a<>>::___share___;
+		return range_of_t<>::___share___;
 	}
 };
 

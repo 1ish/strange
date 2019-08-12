@@ -96,163 +96,19 @@ class ___number_a_share___
 	}
 };
 
-template<>
-class reflection<number_int_8_t<>>
+template<typename PRIMITIVE>
+class reflection<number_t<PRIMITIVE>>
 {
 public:
 	static inline symbol_a<> type()
 	{
-		static symbol_a<> TYPE = sym("strange::number_int_8");
+		static symbol_a<> TYPE = sym("strange::number_" + number_u<PRIMITIVE>::category());
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::number_int_8::val", native_function_t<>::val(&number_int_8_t<>::val__));
-	}
-};
-
-template<>
-class reflection<number_uint_8_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::number_uint_8");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::number_uint_8::val", native_function_t<>::val(&number_uint_8_t<>::val__));
-	}
-};
-
-template<>
-class reflection<number_int_16_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::number_int_16");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::number_int_16::val", native_function_t<>::val(&number_int_16_t<>::val__));
-	}
-};
-
-template<>
-class reflection<number_uint_16_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::number_uint_16");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::number_uint_16::val", native_function_t<>::val(&number_uint_16_t<>::val__));
-	}
-};
-
-template<>
-class reflection<number_int_32_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::number_int_32");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::number_int_32::val", native_function_t<>::val(&number_int_32_t<>::val__));
-	}
-};
-
-template<>
-class reflection<number_uint_32_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::number_uint_32");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::number_uint_32::val", native_function_t<>::val(&number_uint_32_t<>::val__));
-	}
-};
-
-template<>
-class reflection<number_int_64_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::number_int_64");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::number_int_64::val", native_function_t<>::val(&number_int_64_t<>::val__));
-	}
-};
-
-template<>
-class reflection<number_uint_64_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::number_uint_64");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::number_uint_64::val", native_function_t<>::val(&number_uint_64_t<>::val__));
-	}
-};
-
-template<>
-class reflection<number_float_32_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::number_float_32");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::number_float_32::val", native_function_t<>::val(&number_float_32_t<>::val__));
-	}
-};
-
-template<>
-class reflection<number_float_64_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::number_float_64");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::number_float_64::val", native_function_t<>::val(&number_float_64_t<>::val__));
+		shoal.update_string(type().to_string() + "::val", native_function_t<>::val(&number_t<PRIMITIVE>::val__));
 	}
 };
 
