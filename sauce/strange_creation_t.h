@@ -17,9 +17,13 @@ public:
 		return val_();
 	}
 
-	static inline unordered_shoal_a<> val_()
+	template <typename... Args>
+	static inline unordered_shoal_a<> val_(Args&&... args)
 	{
-		return unordered_shoal_a<>{ over{ creation_t<>{} } };
+		auto const parents = flock_t<>::val_(std::forward<Args>(args)...);
+		auto child = over{ creation_t<>{} };
+		//TODO
+		return unordered_shoal_a<>{ child };
 	}
 
 	// reflection
