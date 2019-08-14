@@ -4,12 +4,12 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = any_a<>>
-class creation_t : public thing_t<_ABSTRACTION_>
+template <typename _ABSTRACTION_ = unordered_shoal_a<>>
+class creation_t : public unordered_shoal_t<false, _ABSTRACTION_>
 {
 public:
 	// override
-	using over = thing_o<creation_t<>>;
+	using over = collection_o<creation_t<>>;
 
 	// construction
 	static inline any_a<> val__(range_a<> const& _)
@@ -17,10 +17,9 @@ public:
 		return val_();
 	}
 
-	static inline any_a<> val_()
+	static inline unordered_shoal_a<> val_()
 	{
-		static any_a<> VAL = any_a<>{ over{ creation_t<>{} } };
-		return VAL;
+		return unordered_shoal_a<>{ over{ creation_t<>{} } };
 	}
 
 	// reflection
@@ -36,7 +35,7 @@ public:
 
 protected:
 	inline creation_t()
-		: thing_t{}
+		: unordered_shoal_t{ std_unordered_map_any_any{} }
 	{}
 
 private:
