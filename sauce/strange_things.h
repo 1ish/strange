@@ -33,6 +33,7 @@
 #include "strange_range_operator_t.h"
 #include "strange_token_t.h"
 #include "strange_tokenizer_t.h"
+#include "strange_creation_t.h"
 #include "strange_expression_t.h"
 #include "strange_expression_literal_t.h"
 #include "strange_expression_substitute_t.h"
