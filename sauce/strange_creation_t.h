@@ -28,8 +28,9 @@ public:
 			{
 				throw dis("strange::creation::val passed non-unordered-shoal parent");
 			}
+			child.merge(cast<unordered_shoal_a<>>(parent));
 		}
-		//TODO
+		//TODO finishing touches?
 		return unordered_shoal_a<>{ child };
 	}
 
@@ -42,6 +43,37 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{
 		reflection<creation_t<>>::share(shoal);
+	}
+
+	// creation
+	inline void merge(unordered_shoal_a<> const& parent)
+	{
+		auto type = parent.at_string("type");
+		if (!type)
+		{
+			throw dis("strange::creation::val merge passed parent without a type");
+		}
+		auto const type_symbol = type(range_t<>::val_());
+		if (!check<symbol_a<>>(type_symbol))
+		{
+			throw dis("strange::creation::val merge parent type returned non-symbol");
+		}
+		auto const& type_string = cast<symbol_a<>>(type_symbol).to_string();
+		for (auto const& member : parent.extract())
+		{
+			if (!check<symbol_a<>>(member.first))
+			{
+				throw dis("strange::creation::val merge passed non-symbol key");
+			}
+			auto key = cast<symbol_a<>>(member.first);
+			auto const& key_string = key.to_string();
+			if (key_string.c_str()[0] == '_')
+			{
+				key = sym("_" + type_string + key_string);
+			}
+			//TODO
+			_map[key] = member.second;
+		}
 	}
 
 protected:
