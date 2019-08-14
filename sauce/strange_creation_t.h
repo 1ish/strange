@@ -22,6 +22,13 @@ public:
 	{
 		auto const parents = flock_t<>::val_(std::forward<Args>(args)...);
 		auto child = over{ creation_t<>{} };
+		for (auto const& parent : parents)
+		{
+			if (!check<unordered_shoal_a<>>(parent))
+			{
+				throw dis("strange::creation::val passed non-unordered-shoal parent");
+			}
+		}
 		//TODO
 		return unordered_shoal_a<>{ child };
 	}
