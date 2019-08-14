@@ -67,12 +67,25 @@ public:
 			}
 			auto key = cast<symbol_a<>>(member.first);
 			auto const& key_string = key.to_string();
-			if (key_string.c_str()[0] == '_')
+			bool const intimate = (key_string.c_str()[0] == '_');
+			if (intimate)
 			{
 				key = sym("_" + type_string + key_string);
 			}
-			//TODO
-			_map[key] = member.second;
+			auto const it = _map.find(key);
+			if (it != _map.cend())
+			{
+				// check overrides
+				if (intimate || !member.second.kinds_().has_(it->second.kind_()))
+				{
+					throw dis("strange::creation::val merge invalid override");
+				}
+				it->second = member.second;
+			}
+			else
+			{
+				_map.emplace(key, member.second);
+			}
 		}
 	}
 
