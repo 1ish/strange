@@ -14,15 +14,15 @@ public:
 	// construction
 	static inline any_a<> val__(range_a<> const& parents)
 	{
+		//TODO move into constructor
 		auto child = over{ creation_t<>{} };
-		symbol_a<> type = sym("");
 		for (auto const& parent : parents)
 		{
 			if (!check<unordered_shoal_a<>>(parent))
 			{
 				throw dis("strange::creation::val passed non-unordered-shoal parent");
 			}
-			child.merge(cast<unordered_shoal_a<>>(parent), type);
+			child.merge(cast<unordered_shoal_a<>>(parent));
 		}
 		//TODO finishing touches?
 		return unordered_shoal_a<>{ child };
@@ -46,7 +46,7 @@ public:
 	}
 
 	// creation
-	inline void merge(unordered_shoal_a<> const& parent, symbol_a<>& type)
+	inline void merge(unordered_shoal_a<> const& parent)
 	{
 		static auto const DROP = unordered_herd_t<>::val_(
 			sym("operations"),
@@ -67,8 +67,8 @@ public:
 		{
 			throw dis("strange::creation::val merge parent type returned non-symbol");
 		}
-		type = cast<symbol_a<>>(type_symbol);
-		auto const& type_string = type.to_string();
+		_type = cast<symbol_a<>>(type_symbol);
+		auto const& type_string = _type.to_string();
 
 		for (auto const& member : parent.extract())
 		{
@@ -105,8 +105,11 @@ public:
 	}
 
 protected:
+	symbol_a<> _type;
+
 	inline creation_t()
 		: unordered_shoal_t{ std_unordered_map_any_any{} }
+		, _type(sym(""))
 	{}
 
 private:
