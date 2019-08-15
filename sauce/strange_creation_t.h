@@ -12,15 +12,8 @@ public:
 	using over = collection_o<creation_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& _)
+	static inline any_a<> val__(range_a<> const& parents)
 	{
-		return val_();
-	}
-
-	template <typename... Args>
-	static inline unordered_shoal_a<> val_(Args&&... args)
-	{
-		auto const parents = flock_t<>::val_(std::forward<Args>(args)...);
 		auto child = over{ creation_t<>{} };
 		for (auto const& parent : parents)
 		{
@@ -32,6 +25,12 @@ public:
 		}
 		//TODO finishing touches?
 		return unordered_shoal_a<>{ child };
+	}
+
+	template <typename... Args>
+	static inline unordered_shoal_a<> val_(Args&&... args)
+	{
+		return val__(flock_t<>::val_(std::forward<Args>(args)...));
 	}
 
 	// reflection
