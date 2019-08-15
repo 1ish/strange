@@ -139,7 +139,7 @@ public:
 	template <typename... Args>
 	static inline unordered_herd_a<> val_(Args&&... args)
 	{
-		return val(variadic_u<>::unordered_set(std::forward<Args>(args)...));
+		return val(variadic_u<any_a<>, any_a<>::hash_f>::unordered_set(std::forward<Args>(args)...));
 	}
 
 	template <typename F>

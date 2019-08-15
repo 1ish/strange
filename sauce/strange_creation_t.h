@@ -48,12 +48,21 @@ public:
 	// creation
 	inline void merge(unordered_shoal_a<> const& parent)
 	{
+		static auto const DROP = unordered_herd_t<>::val_(
+			sym("operations"),
+			sym("identity"),
+			sym("identical"),
+			sym("nothing"),
+			sym("something"),
+			sym("different"),
+			sym("ranged"));
+
 		auto type = parent.at_string("type");
 		if (!type)
 		{
 			throw dis("strange::creation::val merge passed parent without a type");
 		}
-		auto const type_symbol = type(range_t<>::val_());
+		auto const type_symbol = type.operate_(no(), range_t<>::val_());
 		if (!check<symbol_a<>>(type_symbol))
 		{
 			throw dis("strange::creation::val merge parent type returned non-symbol");
@@ -71,6 +80,10 @@ public:
 			if (intimate)
 			{
 				key = sym("_" + type_string + key_string);
+			}
+			else if (DROP.has_(key))
+			{
+				continue;
 			}
 			auto const it = _map.find(key);
 			if (it != _map.cend())

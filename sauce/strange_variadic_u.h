@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _1_ = any_a<>>
+template <typename _1_ = any_a<>, typename _2_ = std::hash<_1_>>
 class variadic_u
 {
 public:
@@ -97,41 +97,41 @@ public:
 		return collection;
 	}
 
-	static inline void variadic(std::unordered_set<_1_>& collection)
+	static inline void variadic(std::unordered_set<_1_, _2_>& collection)
 	{}
 
 	template <typename... Args>
-	static inline void variadic(std::unordered_set<_1_>& collection, int64_t i, Args&&... args)
+	static inline void variadic(std::unordered_set<_1_, _2_>& collection, int64_t i, Args&&... args)
 	{
 		collection.insert(number_int_64_t<>::val(i));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std::unordered_set<_1_>& collection, double f, Args&&... args)
+	static inline void variadic(std::unordered_set<_1_, _2_>& collection, double f, Args&&... args)
 	{
 		collection.insert(number_float_64_t<>::val(f));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std::unordered_set<_1_>& collection, std::string const& s, Args&&... args)
+	static inline void variadic(std::unordered_set<_1_, _2_>& collection, std::string const& s, Args&&... args)
 	{
 		collection.insert(sym(s));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline void variadic(std::unordered_set<_1_>& collection, _1_ const& thing, Args&&... args)
+	static inline void variadic(std::unordered_set<_1_, _2_>& collection, _1_ const& thing, Args&&... args)
 	{
 		collection.insert(thing);
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
-	static inline std::unordered_set<_1_> unordered_set(Args&&... args)
+	static inline std::unordered_set<_1_, _2_> unordered_set(Args&&... args)
 	{
-		std::unordered_set<_1_> collection;
+		std::unordered_set<_1_, _2_> collection;
 		variadic(collection, std::forward<Args>(args)...);
 		return collection;
 	}
