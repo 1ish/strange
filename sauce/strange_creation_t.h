@@ -15,13 +15,14 @@ public:
 	static inline any_a<> val__(range_a<> const& parents)
 	{
 		auto child = over{ creation_t<>{} };
+		symbol_a<> type = sym("");
 		for (auto const& parent : parents)
 		{
 			if (!check<unordered_shoal_a<>>(parent))
 			{
 				throw dis("strange::creation::val passed non-unordered-shoal parent");
 			}
-			child.merge(cast<unordered_shoal_a<>>(parent));
+			child.merge(cast<unordered_shoal_a<>>(parent), type);
 		}
 		//TODO finishing touches?
 		return unordered_shoal_a<>{ child };
@@ -45,7 +46,7 @@ public:
 	}
 
 	// creation
-	inline void merge(unordered_shoal_a<> const& parent)
+	inline void merge(unordered_shoal_a<> const& parent, symbol_a<>& type)
 	{
 		static auto const DROP = unordered_herd_t<>::val_(
 			sym("operations"),
@@ -56,17 +57,19 @@ public:
 			sym("different"),
 			sym("ranged"));
 
-		auto type = parent.at_string("type");
-		if (!type)
+		auto type_op = parent.at_string("type");
+		if (!type_op)
 		{
-			throw dis("strange::creation::val merge passed parent without a type");
+			throw dis("strange::creation::val merge passed parent without a type operation");
 		}
-		auto const type_symbol = type.operate_(no(), range_t<>::val_());
+		auto const type_symbol = type_op.operate_(no(), range_t<>::val_());
 		if (!check<symbol_a<>>(type_symbol))
 		{
 			throw dis("strange::creation::val merge parent type returned non-symbol");
 		}
-		auto const& type_string = cast<symbol_a<>>(type_symbol).to_string();
+		type = cast<symbol_a<>>(type_symbol);
+		auto const& type_string = type.to_string();
+
 		for (auto const& member : parent.extract())
 		{
 			if (!check<symbol_a<>>(member.first))
