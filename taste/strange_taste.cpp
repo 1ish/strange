@@ -40,8 +40,8 @@ TEST(TestCaseName, ForLoop)
 	cat_a<> c = cat_t<>::val_();
 	kind_a<> k = kind_t<>::val_();
 
-	any_a<> f = native_function_t<>::val(fun, cat_t<>::val_(), "x", cat_t<>::val_(), "y", cat_t<>::val_(), "z", cat_t<>::val_());
-	any_a<> g = native_function_t<>::val(&nothing_t<>::val__, cat_t<>::val_(), "x", cat_t<>::val_(), "y", cat_t<>::val_(), "z");
+	any_a<> f = native_function_t<>::val(fun, kind_t<>::val_(), "x", kind_t<>::val_(), "y", kind_t<>::val_(), "z", kind_t<>::val_());
+	any_a<> g = native_function_t<>::val(&nothing_t<>::val__, kind_t<>::val_(), "x", kind_t<>::val_(), "y", kind_t<>::val_(), "z");
 	any_a<> h = native_extraction_t<range_a<>>::val(&range_a<>::cbegin__);
 	any_a<> i = native_mutation_t<flock_a<>>::val(&flock_a<>::begin__);
 

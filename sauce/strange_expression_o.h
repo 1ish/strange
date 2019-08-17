@@ -37,6 +37,16 @@ public:
 		return cats_();
 	}
 
+	inline any_a<> kind__(range_a<> const&) const
+	{
+		return kind_();
+	}
+
+	inline any_a<> kinds__(range_a<> const&) const
+	{
+		return kinds_();
+	}
+
 	inline any_a<> evaluate__(range_a<> const&) const
 	{
 		return evaluate_();

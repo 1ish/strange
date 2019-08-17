@@ -21,7 +21,7 @@ public:
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
 		return operation_a<>{ over{ native_function_t<>(fun,
-			cat_eater_params(flock_t<>::val(std::move(v)))) } };
+			kind_eater_params(flock_t<>::val(std::move(v)))) } };
 	}
 
 	// reflection
@@ -54,6 +54,26 @@ public:
 		return _cats;
 	}
 
+	inline any_a<> kind__(range_a<> const&) const
+	{
+		return kind_();
+	}
+
+	inline kind_a<> kind_() const
+	{
+		return _kind;
+	}
+
+	inline any_a<> kinds__(range_a<> const&) const
+	{
+		return kinds_();
+	}
+
+	inline unordered_herd_a<> kinds_() const
+	{
+		return _kinds;
+	}
+
 	inline any_a<> eater_() const
 	{
 		return _eater;
@@ -67,16 +87,20 @@ public:
 
 protected:
 	function const _function;
+	kind_a<> const _kind;
+	unordered_herd_a<> const _kinds;
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
 	flock_a<> const _eater;
 
-	inline native_function_t(function const fun, std::pair<cat_a<>, flock_a<>> const& cat_eater)
+	inline native_function_t(function const fun, std::pair<kind_a<>, flock_a<>> const& kind_eater)
 		: operation_t{}
 		, _function{ fun }
-		, _cat{ cat_eater.first }
-		, _cats{ cats(_cat) }
-		, _eater{ cat_eater.second }
+		, _kind{ kind_eater.first }
+		, _kinds{ kinds(_kind) }
+		, _cat{ kind_to_cat(_kind) }
+		, _cats{ kinds_to_cats(_kinds) }
+		, _eater{ kind_eater.second }
 	{}
 };
 

@@ -87,6 +87,16 @@ public:
 		return _cats;
 	}
 
+	inline kind_a<> kind_() const
+	{
+		return _kind;
+	}
+
+	inline unordered_herd_a<> kinds_() const
+	{
+		return _kinds;
+	}
+
 	inline any_a<> eater_() const
 	{
 		return _names;
@@ -205,6 +215,8 @@ protected:
 	expression_a<> const _expression;
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
+	kind_a<> const _kind;
+	unordered_herd_a<> const _kinds;
 	unordered_shoal_a<> const _shared;
 
 	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& params, flock_a<> const& values, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
@@ -219,6 +231,8 @@ protected:
 		, _expression{ expression }
 		, _cat{ cat_t<>::val_(number_int_64_t<>::val(1), _name, flock_t<>::val_(), _params, _result) }
 		, _cats{ cats(_cat) }
+		, _kind{ kind_from_cat(_cat) }
+		, _kinds{ kinds(_kind) }
 		, _shared{ unordered_shoal_t<true>::val_() }
 	{}
 

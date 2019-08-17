@@ -49,49 +49,56 @@ protected:
 		, _literal(literal)
 	{}
 
-	static inline std::pair<cat_a<>, flock_a<>> cat_eater_params(flock_a<> const& params)
+	static inline std::pair<kind_a<>, flock_a<>> kind_eater_params(flock_a<> const& params)
 	{
-		std::pair<cat_a<>, flock_a<>> cat_eater(cat_t<>::val_(), flock_t<>::val_());
+		std::pair<kind_a<>, flock_a<>> kind_eater(kind_t<>::val_(), flock_t<>::val_());
 		auto it = params.cbegin_();
 		if (it == params.cend_())
 		{
-			return cat_eater;
+			return kind_eater;
 		}
-		auto cat = *it;
-		if (!check<cat_a<>>(cat))
+		auto kind = *it;
+		if (!check<kind_a<>>(kind))
 		{
-			throw dis("strange::native_mutation::val passed non-cat result");
+			throw dis("strange::operation::kind_eater_params passed non-kind result");
 		}
-		auto cat_result = cast<cat_a<>>(cat);
-		auto cat_params = flock_t<>::val_();
+		auto kind_result = cast<kind_a<>>(kind);
+		auto kind_params = flock_t<>::val_();
 		while (++it != params.cend_())
 		{
 			auto name = *it;
 			if (!check<symbol_a<>>(name))
 			{
-				throw dis("strange::native_mutation::val passed non-symbol name");
+				throw dis("strange::operation::kind_eater_params passed non-symbol name");
 			}
 			bool const end = (++it == params.cend_());
-			cat = end ? cast<any_a<>>(cat_t<>::val_()) : *it;
-			if (!end && !check<cat_a<>>(cat))
+			kind = end ? cast<any_a<>>(kind_t<>::val_()) : *it;
+			if (!end && !check<kind_a<>>(kind))
 			{
-				throw dis("strange::native_mutation::val passed non-cat param");
+				throw dis("strange::operation::kind_eater_params passed non-kind param");
 			}
-			cat_eater.second.push_back(name);
-			cat_params.push_back(cat);
+			kind_eater.second.push_back(name);
+			kind_params.push_back(kind);
 			if (end)
 			{
 				break;
 			}
 		}
-		cat_eater.first = cat_t<>::val(1, "", flock_t<>::val_(), cat_params, cat_result);
-		return cat_eater;
+		kind_eater.first = kind_t<>::val(1, "", flock_t<>::val_(), flock_t<>::val_(), kind_params, kind_result);
+		return kind_eater;
 	}
 
 	static inline unordered_herd_a<> cats(cat_a<> const& cat)
 	{
 		auto result = reflection<_ABSTRACTION_>::cats();
 		result.insert(cat);
+		return result;
+	}
+
+	static inline unordered_herd_a<> kinds(kind_a<> const& kind)
+	{
+		auto result = reflection<_ABSTRACTION_>::kinds();
+		result.insert(kind);
 		return result;
 	}
 };
