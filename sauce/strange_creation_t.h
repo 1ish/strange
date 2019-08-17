@@ -35,7 +35,7 @@ public:
 	}
 
 	// creation
-	inline void merge(unordered_shoal_a<> const& parent)
+	inline void merge(unordered_shoal_a<> const& parent, symbol_a<>& type, cat_a<>& cat, unordered_herd_a<>& cats, kind_a<>& kind, unordered_herd_a<>& kinds)
 	{
 		static auto const DROP = unordered_herd_t<>::val_(
 			sym("type"),
@@ -54,79 +54,79 @@ public:
 		auto type_op = parent.at_string("type");
 		if (!type_op)
 		{
-			_type = sym("");
+			type = sym("");
 		}
 		else
 		{
-			auto const type = type_op.operate_(no(), range_t<>::val_());
-			if (!check<symbol_a<>>(type))
+			auto const type_any = type_op.operate_(no(), range_t<>::val_());
+			if (!check<symbol_a<>>(type_any))
 			{
 				throw dis("strange::creation::val merge parent type returned non-symbol");
 			}
-			_type = cast<symbol_a<>>(type);
+			type = cast<symbol_a<>>(type_any);
 		}
-		auto const& type_string = _type.to_string();
+		auto const& type_string = type.to_string();
 
 		auto cat_op = parent.at_string("cat");
 		if (!cat_op)
 		{
-			_cat = cat_t<>::val_();
+			cat = cat_t<>::val_();
 		}
 		else
 		{
-			auto const cat = cat_op.operate_(no(), range_t<>::val_());
-			if (!check<cat_a<>>(cat))
+			auto const cat_any = cat_op.operate_(no(), range_t<>::val_());
+			if (!check<cat_a<>>(cat_any))
 			{
 				throw dis("strange::creation::val merge parent cat returned non-cat");
 			}
-			_cat = cast<cat_a<>>(cat);
+			cat = cast<cat_a<>>(cat_any);
 		}
-		_cats.insert(_cat);
+		cats.insert(cat);
 
 		auto cats_op = parent.at_string("cats");
-		any_a<> cats = no();
+		any_a<> cats_any = no();
 		if (cats_op)
 		{
-			cats = cats_op.operate_(no(), range_t<>::val_());
-			if (!check<unordered_herd_a<>>(cats))
+			cats_any = cats_op.operate_(no(), range_t<>::val_());
+			if (!check<unordered_herd_a<>>(cats_any))
 			{
 				throw dis("strange::creation::val merge parent cats returned non-unordered-herd");
 			}
-			_cats += cats;
+			cats += cats_any;
 		}
 
 		auto kind_op = parent.at_string("kind");
 		if (!kind_op)
 		{
-			_kind = cat_op ? kind_from_cat(_cat) : kind_t<>::val_();
+			kind = cat_op ? kind_from_cat(cat) : kind_t<>::val_();
 		}
 		else
 		{
-			auto const kind = kind_op.operate_(no(), range_t<>::val_());
-			if (!check<kind_a<>>(kind))
+			auto const kind_any = kind_op.operate_(no(), range_t<>::val_());
+			if (!check<kind_a<>>(kind_any))
 			{
 				throw dis("strange::creation::val merge parent kind returned non-kind");
 			}
-			_kind = cast<kind_a<>>(kind);
+			kind = cast<kind_a<>>(kind_any);
 		}
-		_kinds.insert(_kind);
+		kinds.insert(kind);
 
 		auto kinds_op = parent.at_string("kinds");
 		if (!kinds_op)
 		{
-			if (cats_op)
+			if (cats_any)
 			{
-				_kinds += kinds_from_cats(cast<unordered_herd_a<>>(cats));
+				kinds += kinds_from_cats(cast<unordered_herd_a<>>(cats_any));
 			}
 		}
 		else
 		{
-			auto const kinds = kinds_op.operate_(no(), range_t<>::val_());
-			if (!check<unordered_herd_a<>>(kinds))
+			auto const kinds_any = kinds_op.operate_(no(), range_t<>::val_());
+			if (!check<unordered_herd_a<>>(kinds_any))
 			{
 				throw dis("strange::creation::val merge parent kinds returned non-unordered-herd");
 			}
-			_kinds += kinds;
+			kinds += kinds_any;
 		}
 
 		for (auto const& member : parent.extract())
@@ -164,29 +164,30 @@ public:
 	}
 
 protected:
-	symbol_a<> _type;
-	cat_a<> _cat;
-	unordered_herd_a<> _cats;
-	kind_a<> _kind;
-	unordered_herd_a<> _kinds;
-
 	inline creation_t(range_a<> const& parents)
 		: unordered_shoal_t{ std_unordered_map_any_any{} }
-		, _type{ sym("") }
-		, _cat{ cat_t<>::val_() }
-		, _cats{ unordered_herd_t<>::val_() }
-		, _kind{ kind_t<>::val_() }
-		, _kinds{ unordered_herd_t<>::val_() }
 	{
+		symbol_a<> type = sym("");
+		cat_a<> cat = cat_t<>::val_();
+		unordered_herd_a<> cats = unordered_herd_t<>::val_();
+		kind_a<> kind = kind_t<>::val_();
+		unordered_herd_a<> kinds = unordered_herd_t<>::val_();
+
 		for (auto const& parent : parents)
 		{
 			if (!check<unordered_shoal_a<>>(parent))
 			{
 				throw dis("strange::creation::val passed non-unordered-shoal parent");
 			}
-			merge(cast<unordered_shoal_a<>>(parent));
+			merge(cast<unordered_shoal_a<>>(parent), type, cat, cats, kind, kinds);
 		}
 		//TODO add operations for type, cat, cats, kind and kinds
+		/*
+		_map.emplace(sym("type"), native_function_t<>::val([type](range_a<> const&) -> any_a<>
+			{
+				return type;
+			}));
+		*/
 	}
 
 private:
