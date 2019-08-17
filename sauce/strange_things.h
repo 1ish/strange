@@ -10,6 +10,7 @@
 #include "strange_native_mutation_t.h"
 #include "strange_attribute_t.h"
 #include "strange_attribute_copy_t.h"
+#include "strange_description_t.h"
 #include "strange_something_t.h"
 #include "strange_nothing_t.h"
 #include "strange_it_t.h"

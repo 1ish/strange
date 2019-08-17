@@ -44,6 +44,9 @@ TEST(TestCaseName, ForLoop)
 	any_a<> g = native_function_t<>::val(&nothing_t<>::val__, kind_t<>::val_(), "x", kind_t<>::val_(), "y", kind_t<>::val_(), "z");
 	any_a<> h = native_extraction_t<range_a<>>::val(&range_a<>::cbegin__);
 	any_a<> i = native_mutation_t<flock_a<>>::val(&flock_a<>::begin__);
+	any_a<> j = attribute_t<>::val_(no());
+	any_a<> l = attribute_copy_t<>::val_(no());
+	any_a<> m = description_t<>::val_();
 
 	ordered_shoal_a<> ordered_shoal = ordered_shoal_t<>::val_();
 	unordered_shoal_a<> unordered_shoal = unordered_shoal_t<>::val_();
