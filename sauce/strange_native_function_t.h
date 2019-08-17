@@ -31,7 +31,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<>& shoal)
+	static inline void share(shoal_a<>&)
 	{}
 
 	inline any_a<> cat__(range_a<> const&) const
@@ -60,7 +60,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& _, range_a<> const& range) const
+	inline any_a<> operate_(any_a<>&, range_a<> const& range) const
 	{
 		return _function(range);
 	}

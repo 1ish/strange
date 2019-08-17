@@ -31,7 +31,7 @@ public:
 		return TYPE;
 	}
 
-	static inline void share(shoal_a<>& shoal)
+	static inline void share(shoal_a<>&)
 	{}
 
 	inline any_a<> cat__(range_a<> const&) const

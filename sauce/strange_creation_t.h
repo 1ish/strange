@@ -20,7 +20,7 @@ public:
 	template <typename... Args>
 	static inline unordered_shoal_a<> val_(Args&&... args)
 	{
-		return val__(flock_t<>::val_(std::forward<Args>(args)...));
+		return unordered_shoal_a<>{ over{ creation_t<>{ flock_t<>::val_(std::forward<Args>(args)...) } } };
 	}
 
 	// reflection
@@ -182,11 +182,11 @@ protected:
 			merge(cast<unordered_shoal_a<>>(parent), type, cat, cats, kind, kinds);
 		}
 		// add operations for type, cat, cats, kind and kinds
-		_map.emplace(sym("type"), attribute_t<>::val_(type));
-		_map.emplace(sym("cat"), attribute_t<>::val_(cat));
-		_map.emplace(sym("cats"), attribute_t<>::val_(cats));
-		_map.emplace(sym("kind"), attribute_t<>::val_(kind));
-		_map.emplace(sym("kinds"), attribute_t<>::val_(kinds));
+		_map.emplace(sym("type"), attribute_copy_t<>::val_(type));
+		_map.emplace(sym("cat"), attribute_copy_t<>::val_(cat));
+		_map.emplace(sym("cats"), attribute_copy_t<>::val_(cats));
+		_map.emplace(sym("kind"), attribute_copy_t<>::val_(kind));
+		_map.emplace(sym("kinds"), attribute_copy_t<>::val_(kinds));
 	}
 
 private:
