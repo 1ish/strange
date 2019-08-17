@@ -181,13 +181,12 @@ protected:
 			}
 			merge(cast<unordered_shoal_a<>>(parent), type, cat, cats, kind, kinds);
 		}
-		//TODO add operations for type, cat, cats, kind and kinds
-		/*
-		_map.emplace(sym("type"), native_function_t<>::val([type](range_a<> const&) -> any_a<>
-			{
-				return type;
-			}));
-		*/
+		// add operations for type, cat, cats, kind and kinds
+		_map.emplace(sym("type"), attribute_t<>::val_(type));
+		_map.emplace(sym("cat"), attribute_t<>::val_(cat));
+		_map.emplace(sym("cats"), attribute_t<>::val_(cats));
+		_map.emplace(sym("kind"), attribute_t<>::val_(kind));
+		_map.emplace(sym("kinds"), attribute_t<>::val_(kinds));
 	}
 
 private:
