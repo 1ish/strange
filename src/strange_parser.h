@@ -1263,7 +1263,7 @@ private:
 							const auto herd_flock = static_<Flock>(Flock::mut_());
 							if (_map_(scope, shoal, fixed, cats, creation, herd_flock))
 							{
-								throw tok->error_("Parser ERROR: parameter cats cannot be a shoal");
+								throw tok->error_("Parser ERROR: parameter cats should not be a shoal");
 							}
 							const Ptr herd = (herd_flock->size_() == 1)
 								? herd_flock->at_(0)
@@ -1934,7 +1934,7 @@ private:
 				const auto herd_flock = static_<Flock>(Flock::mut_());
 				if (_map_(scope, shoal, fixed, cats, creation, herd_flock))
 				{
-					throw tok->error_("Parser ERROR: name cats cannot be a shoal");
+					throw tok->error_("Parser ERROR: name cats should not be a shoal");
 				}
 				const Ptr herd = (herd_flock->size_() == 1)
 					? herd_flock->at_(0)

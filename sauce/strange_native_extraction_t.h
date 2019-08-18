@@ -100,7 +100,7 @@ protected:
 		, _kind{ kind_eater.first }
 		, _kinds{ kinds(_kind) }
 		, _cat{ kind_to_cat(_kind) }
-		, _cats{ kinds_to_cats(_kinds) }
+		, _cats{ cats(_cat) }
 		, _eater{ kind_eater.second }
 	{}
 };

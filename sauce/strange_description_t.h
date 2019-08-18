@@ -67,10 +67,15 @@ public:
 		return _kinds;
 	}
 
+	inline any_a<> eater_() const
+	{
+		return _eater;
+	}
+
 	// function
 	inline any_a<> operate_(any_a<>&, range_a<> const&) const
 	{
-		throw dis("strange::description::operate cannot be called");
+		throw dis("strange::description::operate should not be called");
 	}
 
 protected:
@@ -78,13 +83,15 @@ protected:
 	unordered_herd_a<> const _kinds;
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
+	flock_a<> const _eater;
 
 	inline description_t()
 		: operation_t{}
 		, _kind{ kind_t<>::val_() }
 		, _kinds{ kinds(_kind) }
 		, _cat{ kind_to_cat(_kind) }
-		, _cats{ kinds_to_cats(_kinds) }
+		, _cats{ cats(_cat) }
+		, _eater{ flock_t<>::val_() }
 	{}
 };
 

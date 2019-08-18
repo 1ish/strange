@@ -85,7 +85,7 @@ class lake_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<>& operator*() const
 		{
-			throw dis("strange::lake::iterator cannot be dereferenced directly");
+			throw dis("strange::lake::iterator should not be dereferenced directly");
 		}
 
 		inline _ABSTRACTION_ increment__(range_a<> const&)

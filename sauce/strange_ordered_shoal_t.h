@@ -80,12 +80,12 @@ class ordered_shoal_t : public thing_t<_ABSTRACTION_>
 
 		inline any_a<>* operator->() const
 		{
-			throw dis("strange::ordered_shoal::iterator cannot be dereferenced");
+			throw dis("strange::ordered_shoal::iterator should not be dereferenced");
 		}
 
 		inline any_a<>& operator*() const
 		{
-			throw dis("strange::ordered_shoal::iterator cannot be dereferenced");
+			throw dis("strange::ordered_shoal::iterator should not be dereferenced");
 		}
 
 		inline _ABSTRACTION_ increment__(range_a<> const&)
