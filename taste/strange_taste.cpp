@@ -47,6 +47,8 @@ TEST(TestCaseName, ForLoop)
 	any_a<> j = attribute_t<>::val_(no());
 	any_a<> l = attribute_copy_t<>::val_(no());
 	any_a<> m = description_t<>::val_();
+	any_a<> o = abstraction_t<>::val_();
+	any_a<> p = incarnation_t<>::val_();
 
 	ordered_shoal_a<> ordered_shoal = ordered_shoal_t<>::val_();
 	unordered_shoal_a<> unordered_shoal = unordered_shoal_t<>::val_();

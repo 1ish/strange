@@ -57,6 +57,7 @@ class reflection;
 #include "strange_tokenizer_r.h"
 #include "strange_creation_r.h"
 #include "strange_abstraction_r.h"
+#include "strange_incarnation_r.h"
 #include "strange_operation_r.h"
 #include "strange_expression_r.h"
 #include "strange_expression_local_at_r.h"
