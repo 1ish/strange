@@ -1,26 +1,26 @@
-#ifndef COM_ONEISH_STRANGE_ATTRIBUTE_COPY_T_H
-#define COM_ONEISH_STRANGE_ATTRIBUTE_COPY_T_H
+#ifndef COM_ONEISH_STRANGE_ATTRIBUTE_EXTRACTION_T_H
+#define COM_ONEISH_STRANGE_ATTRIBUTE_EXTRACTION_T_H
 
 namespace strange
 {
 
 template <typename _ABSTRACTION_ = operation_a<>>
-class attribute_copy_t : public operation_t<_ABSTRACTION_>
+class attribute_extraction_t : public operation_t<_ABSTRACTION_>
 {
 public:
 	// override
-	using over = thing_o<attribute_copy_t<>>;
+	using over = thing_o<attribute_extraction_t<>>;
 
 	// construction
 	static inline operation_a<> val_(any_a<> const& thing)
 	{
-		return operation_a<>{ over{ attribute_copy_t<>(thing) } };
+		return operation_a<>{ over{ attribute_extraction_t<>(thing) } };
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::attribute_copy");
+		static symbol_a<> TYPE = sym("strange::attribute_extraction");
 		return TYPE;
 	}
 
@@ -38,7 +38,7 @@ public:
 protected:
 	any_a<> const _thing;
 
-	inline attribute_copy_t(any_a<> const& thing)
+	inline attribute_extraction_t(any_a<> const& thing)
 		: operation_t{}
 		, _thing{ thing }
 	{}
