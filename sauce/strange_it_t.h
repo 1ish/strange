@@ -4,12 +4,12 @@
 namespace strange
 {
 
-template <bool CONST = false, typename END = nothing_t<>, typename ___ego___ = forward_const_iterator_a<>>
+template <bool CONST = false, typename _end_ = nothing_t<>, typename ___ego___ = forward_const_iterator_a<>>
 class it_t : public thing_t<___ego___>
 {
 public:
 	// override
-	using over = thing_o<it_t<CONST, END>>;
+	using over = thing_o<it_t<CONST, _end_>>;
 
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
@@ -24,13 +24,13 @@ public:
 
 	static inline forward_const_iterator_a<> val_()
 	{
-		static forward_const_iterator_a<> VAL = it_t<CONST, END>::val_(END::val_());
+		static forward_const_iterator_a<> VAL = it_t<CONST, _end_>::val_(_end_::val_());
 		return VAL;
 	}
 
 	static inline forward_const_iterator_a<> val_(any_a<> const& thing)
 	{
-		return forward_const_iterator_a<>{ over{ it_t<CONST, END>{ thing } } };
+		return forward_const_iterator_a<>{ over{ it_t<CONST, _end_>{ thing } } };
 	}
 
 	// reflection
@@ -93,7 +93,7 @@ public:
 
 	inline it_t& operator++()
 	{
-		_thing = END::val_();
+		_thing = _end_::val_();
 		return *this;
 	}
 
@@ -117,11 +117,11 @@ private:
 	friend class ___it_t_share___;
 };
 
-template <bool CONST, typename END, typename ___ego___>
-bool const it_t<CONST, END, ___ego___>::___share___ = []()
+template <bool CONST, typename _end_, typename ___ego___>
+bool const it_t<CONST, _end_, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	it_t<CONST, END, ___ego___>::share(shoal);
+	it_t<CONST, _end_, ___ego___>::share(shoal);
 	return shoal;
 }();
 
