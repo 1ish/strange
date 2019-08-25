@@ -7,18 +7,18 @@ namespace strange
 template <bool _concurrent_ = false, typename ___ego___ = ordered_shoal_a<>>
 class ordered_shoal_t : public thing_t<___ego___>
 {
-	template <typename ITERATOR, typename ___ego___ = bidirectional_iterator_data_a<ITERATOR>>
+	template <typename _iterator_, typename ___ego___ = bidirectional_iterator_data_a<_iterator_>>
 	class iterator_t : public thing_t<___ego___>
 	{
 	public:
 		// override
-		using over = thing_o<iterator_t<ITERATOR>>;
+		using over = thing_o<iterator_t<_iterator_>>;
 
 		// construction
 		template <typename F>
-		static inline bidirectional_iterator_data_a<ITERATOR> val(ordered_shoal_a<> const& ordered_shoal, F&& it)
+		static inline bidirectional_iterator_data_a<_iterator_> val(ordered_shoal_a<> const& ordered_shoal, F&& it)
 		{
-			return bidirectional_iterator_data_a<ITERATOR>{ over{ iterator_t<ITERATOR>(ordered_shoal, std::forward<F>(it)) } };
+			return bidirectional_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(ordered_shoal, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -34,11 +34,11 @@ class ordered_shoal_t : public thing_t<___ego___>
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
-			if (!check<bidirectional_iterator_data_a<ITERATOR>>(thing))
+			if (!check<bidirectional_iterator_data_a<_iterator_>>(thing))
 			{
 				return false;
 			}
-			return _it == cast<bidirectional_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it == cast<bidirectional_iterator_data_a<_iterator_>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -138,23 +138,23 @@ class ordered_shoal_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline ITERATOR const& extract() const
+		inline _iterator_ const& extract() const
 		{
 			return _it;
 		}
 
-		inline void mutate(ITERATOR const& it)
+		inline void mutate(_iterator_ const& it)
 		{
 			_it = it;
 		}
 
-		inline ITERATOR& reference()
+		inline _iterator_& reference()
 		{
 			return _it;
 		}
 
 	protected:
-		ITERATOR _it;
+		_iterator_ _it;
 		ordered_shoal_a<> _ordered_shoal;
 		mutable flock_a<> _pair;
 
@@ -167,18 +167,18 @@ class ordered_shoal_t : public thing_t<___ego___>
 		{}
 	};
 
-	template <typename ITERATOR, typename ___ego___ = bidirectional_const_iterator_data_a<ITERATOR>>
+	template <typename _iterator_, typename ___ego___ = bidirectional_const_iterator_data_a<_iterator_>>
 	class const_iterator_t : public thing_t<___ego___>
 	{
 	public:
 		// override
-		using over = thing_o<const_iterator_t<ITERATOR>>;
+		using over = thing_o<const_iterator_t<_iterator_>>;
 
 		// construction
 		template <typename F>
-		static inline bidirectional_const_iterator_data_a<ITERATOR> val(ordered_shoal_a<> const& ordered_shoal, F&& it)
+		static inline bidirectional_const_iterator_data_a<_iterator_> val(ordered_shoal_a<> const& ordered_shoal, F&& it)
 		{
-			return bidirectional_const_iterator_data_a<ITERATOR>{ over{ const_iterator_t<ITERATOR>(ordered_shoal, std::forward<F>(it)) } };
+			return bidirectional_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(ordered_shoal, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -194,11 +194,11 @@ class ordered_shoal_t : public thing_t<___ego___>
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
-			if (!check<bidirectional_const_iterator_data_a<ITERATOR>>(thing))
+			if (!check<bidirectional_const_iterator_data_a<_iterator_>>(thing))
 			{
 				return false;
 			}
-			return _it == cast<bidirectional_const_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it == cast<bidirectional_const_iterator_data_a<_iterator_>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -281,23 +281,23 @@ class ordered_shoal_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline ITERATOR const& extract() const
+		inline _iterator_ const& extract() const
 		{
 			return _it;
 		}
 
-		inline void mutate(ITERATOR const& it)
+		inline void mutate(_iterator_ const& it)
 		{
 			_it = it;
 		}
 
-		inline ITERATOR& reference()
+		inline _iterator_& reference()
 		{
 			return _it;
 		}
 
 	protected:
-		ITERATOR _it;
+		_iterator_ _it;
 		ordered_shoal_a<> _ordered_shoal;
 		mutable flock_a<> _pair;
 

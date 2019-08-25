@@ -7,18 +7,18 @@ namespace strange
 template <typename ___ego___ = range_a<>>
 class range_operator_t : public thing_t<___ego___>
 {
-	template <typename ITERATOR, typename ___ego___ = forward_const_iterator_data_a<ITERATOR>>
+	template <typename _iterator_, typename ___ego___ = forward_const_iterator_data_a<_iterator_>>
 	class const_iterator_t : public thing_t<___ego___>
 	{
 	public:
 		// override
-		using over = thing_o<const_iterator_t<ITERATOR>>;
+		using over = thing_o<const_iterator_t<_iterator_>>;
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<ITERATOR> val(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
+		static inline forward_const_iterator_data_a<_iterator_> val(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
 		{
-			return forward_const_iterator_data_a<ITERATOR>{ over{ const_iterator_t<ITERATOR>(range, std::forward<F>(it), thing_ref, range_ref) } };
+			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(range, std::forward<F>(it), thing_ref, range_ref) } };
 		}
 
 		// reflection
@@ -34,11 +34,11 @@ class range_operator_t : public thing_t<___ego___>
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
-			if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
+			if (!check<forward_const_iterator_data_a<_iterator_>>(thing))
 			{
 				return false;
 			}
-			return _it == cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it == cast<forward_const_iterator_data_a<_iterator_>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -93,17 +93,17 @@ class range_operator_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline ITERATOR const& extract() const
+		inline _iterator_ const& extract() const
 		{
 			return _it;
 		}
 
-		inline void mutate(ITERATOR const& it)
+		inline void mutate(_iterator_ const& it)
 		{
 			_it = it;
 		}
 
-		inline ITERATOR& reference()
+		inline _iterator_& reference()
 		{
 			return _it;
 		}
@@ -119,7 +119,7 @@ class range_operator_t : public thing_t<___ego___>
 		}
 
 	protected:
-		ITERATOR _it;
+		_iterator_ _it;
 		range_a<> _range;
 		any_a<>& _thing_ref;
 		range_a<> const& _range_ref;

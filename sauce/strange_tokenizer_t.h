@@ -7,18 +7,18 @@ namespace strange
 template <typename ___ego___ = range_a<>>
 class tokenizer_t : public thing_t<___ego___>
 {
-	template <typename ITERATOR, typename ___ego___ = forward_const_iterator_data_a<ITERATOR>>
+	template <typename _iterator_, typename ___ego___ = forward_const_iterator_data_a<_iterator_>>
 	class const_iterator_t : public thing_t<___ego___>
 	{
 	public:
 		// override
-		using over = thing_o<const_iterator_t<ITERATOR>>;
+		using over = thing_o<const_iterator_t<_iterator_>>;
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<ITERATOR> val(river_a<> const& river, F&& it)
+		static inline forward_const_iterator_data_a<_iterator_> val(river_a<> const& river, F&& it)
 		{
-			return forward_const_iterator_data_a<ITERATOR>{ over{ const_iterator_t<ITERATOR>(river, std::forward<F>(it)) } };
+			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(river, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -34,11 +34,11 @@ class tokenizer_t : public thing_t<___ego___>
 		// comparison
 		inline bool operator==(any_a<> const& thing) const
 		{
-			if (!check<forward_const_iterator_data_a<ITERATOR>>(thing))
+			if (!check<forward_const_iterator_data_a<_iterator_>>(thing))
 			{
 				return false;
 			}
-			return _it == cast<forward_const_iterator_data_a<ITERATOR>>(thing).extract();
+			return _it == cast<forward_const_iterator_data_a<_iterator_>>(thing).extract();
 		}
 
 		inline std::size_t hash() const
@@ -92,17 +92,17 @@ class tokenizer_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline ITERATOR const& extract() const
+		inline _iterator_ const& extract() const
 		{
 			return _it;
 		}
 
-		inline void mutate(ITERATOR const& it)
+		inline void mutate(_iterator_ const& it)
 		{
 			_it = it;
 		}
 
-		inline ITERATOR& reference()
+		inline _iterator_& reference()
 		{
 			return _it;
 		}
@@ -461,7 +461,7 @@ class tokenizer_t : public thing_t<___ego___>
 		}
 
 	protected:
-		ITERATOR _it;
+		_iterator_ _it;
 		river_a<> _river;
 		int64_t _line;
 		int64_t _position;
