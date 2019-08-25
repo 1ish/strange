@@ -7,25 +7,25 @@ namespace strange
 template <typename F>
 inline misunderstanding_a<> dis(F&& s);
 
-template <typename PRIMITIVE>
+template <typename _primitive_>
 class number_u
 {
 public:
 	static inline std::string category();
-	static inline PRIMITIVE from_number(number_a<> const& other);
-	static inline PRIMITIVE from_int_64(int64_t other);
-	static inline PRIMITIVE from_uint_64(uint64_t other);
-	static inline PRIMITIVE from_float_64(double other);
-	static inline int64_t to_int_64(PRIMITIVE other);
-	static inline uint64_t to_uint_64(PRIMITIVE other);
-	static inline double to_float_64(PRIMITIVE other);
-	static inline PRIMITIVE modulo(PRIMITIVE x, PRIMITIVE y);
+	static inline _primitive_ from_number(number_a<> const& other);
+	static inline _primitive_ from_int_64(int64_t other);
+	static inline _primitive_ from_uint_64(uint64_t other);
+	static inline _primitive_ from_float_64(double other);
+	static inline int64_t to_int_64(_primitive_ other);
+	static inline uint64_t to_uint_64(_primitive_ other);
+	static inline double to_float_64(_primitive_ other);
+	static inline _primitive_ modulo(_primitive_ x, _primitive_ y);
 	static inline bool is_int();
 	static inline bool is_signed();
-	static inline bool is_nan(PRIMITIVE number);
-	static inline bool is_inf(PRIMITIVE number);
-	static inline bool is_finite(PRIMITIVE number);
-	static inline bool is_normal(PRIMITIVE number);
+	static inline bool is_nan(_primitive_ number);
+	static inline bool is_inf(_primitive_ number);
+	static inline bool is_finite(_primitive_ number);
+	static inline bool is_normal(_primitive_ number);
 };
 
 template <>

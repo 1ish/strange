@@ -4,13 +4,13 @@
 namespace strange
 {
 
-template<typename PRIMITIVE>
-class reflection<number_data_a<PRIMITIVE>>
+template<typename _primitive_>
+class reflection<number_data_a<_primitive_>>
 {
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::number_data_" + number_u<PRIMITIVE>::category());
+		static cat_a<> CAT = cat_t<>::val(1, "strange::number_data_" + number_u<_primitive_>::category());
 		return CAT;
 	}
 

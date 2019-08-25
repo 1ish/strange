@@ -96,19 +96,19 @@ class ___number_a_share___
 	}
 };
 
-template<typename PRIMITIVE>
-class reflection<number_t<PRIMITIVE>>
+template<typename _primitive_>
+class reflection<number_t<_primitive_>>
 {
 public:
 	static inline symbol_a<> type()
 	{
-		static symbol_a<> TYPE = sym("strange::number_" + number_u<PRIMITIVE>::category());
+		static symbol_a<> TYPE = sym("strange::number_" + number_u<_primitive_>::category());
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string(type().to_string() + "::val", native_function_t<>::val(&number_t<PRIMITIVE>::val__));
+		shoal.update_string(type().to_string() + "::val", native_function_t<>::val(&number_t<_primitive_>::val__));
 	}
 };
 

@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename PRIMITIVE, bool CONCURRENT = false, typename ___ego___ = brook_a<PRIMITIVE>>
+template <typename _primitive_, bool _concurrent_ = false, typename ___ego___ = brook_a<_primitive_>>
 class brook_t : public thing_t<___ego___>
 {
 	template <typename ITERATOR, typename ___ego___ = random_access_iterator_data_a<ITERATOR>>
@@ -16,7 +16,7 @@ class brook_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<ITERATOR> val(brook_a<PRIMITIVE> const& brook, F&& it)
+		static inline random_access_iterator_data_a<ITERATOR> val(brook_a<_primitive_> const& brook, F&& it)
 		{
 			return random_access_iterator_data_a<ITERATOR>{ over{ iterator_t<ITERATOR>(brook, std::forward<F>(it)) } };
 		}
@@ -54,7 +54,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			return number_t<PRIMITIVE>::val(*_it);
+			return number_t<_primitive_>::val(*_it);
 		}
 
 		inline any_a<> set__(range_a<> const& range) const
@@ -73,13 +73,13 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator set passed non-number");
 			}
-			*_it = number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
+			*_it = number_u<_primitive_>::from_number(cast<number_a<>>(thing));
 			return thing;
 		}
 
 		inline any_a<>* operator->() const
 		{
-			_number = number_reference_t<PRIMITIVE>::val(*_it);
+			_number = number_reference_t<_primitive_>::val(*_it);
 			return &_number;
 		}
 
@@ -366,15 +366,15 @@ class brook_t : public thing_t<___ego___>
 
 	protected:
 		ITERATOR _it;
-		brook_a<PRIMITIVE> _brook;
-		mutable number_data_a<PRIMITIVE> _number;
+		brook_a<_primitive_> _brook;
+		mutable number_data_a<_primitive_> _number;
 
 		template <typename F>
-		inline iterator_t(brook_a<PRIMITIVE> const& brook, F&& it)
+		inline iterator_t(brook_a<_primitive_> const& brook, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _brook(brook, true)
-			, _number{ number_t<PRIMITIVE>::val_() }
+			, _number{ number_t<_primitive_>::val_() }
 		{}
 	};
 
@@ -387,7 +387,7 @@ class brook_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_const_iterator_data_a<ITERATOR> val(brook_a<PRIMITIVE> const& brook, F&& it)
+		static inline random_access_const_iterator_data_a<ITERATOR> val(brook_a<_primitive_> const& brook, F&& it)
 		{
 			return random_access_const_iterator_data_a<ITERATOR>{ over{ const_iterator_t<ITERATOR>(brook, std::forward<F>(it)) } };
 		}
@@ -425,7 +425,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			_number = number_t<PRIMITIVE>::val(*_it);
+			_number = number_t<_primitive_>::val(*_it);
 			return _number;
 		}
 
@@ -436,7 +436,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<> const& operator*() const
 		{
-			_number = number_t<PRIMITIVE>::val(*_it);
+			_number = number_t<_primitive_>::val(*_it);
 			return _number;
 		}
 
@@ -718,23 +718,23 @@ class brook_t : public thing_t<___ego___>
 
 	protected:
 		ITERATOR _it;
-		brook_a<PRIMITIVE> _brook;
-		mutable number_data_a<PRIMITIVE> _number;
+		brook_a<_primitive_> _brook;
+		mutable number_data_a<_primitive_> _number;
 
 		template <typename F>
-		inline const_iterator_t(brook_a<PRIMITIVE> const& brook, F&& it)
+		inline const_iterator_t(brook_a<_primitive_> const& brook, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _brook(brook, true)
-			, _number{ number_t<PRIMITIVE>::val_() }
+			, _number{ number_t<_primitive_>::val_() }
 		{}
 	};
 
 public:
-	using std_deque_number = std::deque<PRIMITIVE>;
+	using std_deque_number = std::deque<_primitive_>;
 
 	// override
-	using over = collection_o<brook_t<PRIMITIVE, CONCURRENT>>;
+	using over = collection_o<brook_t<_primitive_, _concurrent_>>;
 
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
@@ -742,52 +742,52 @@ public:
 		return val_() += range;
 	}
 
-	static inline brook_a<PRIMITIVE> val_()
+	static inline brook_a<_primitive_> val_()
 	{
 		return val(std_deque_number{});
 	}
 
 	template <typename... Args>
-	static inline brook_a<PRIMITIVE> val_(Args&&... args)
+	static inline brook_a<_primitive_> val_(Args&&... args)
 	{
-		return val(variadic_u<PRIMITIVE>::deque(std::forward<Args>(args)...));
+		return val(variadic_u<_primitive_>::deque(std::forward<Args>(args)...));
 	}
 
 	template <typename F>
-	static inline brook_a<PRIMITIVE> val(F&& init)
+	static inline brook_a<_primitive_> val(F&& init)
 	{
-		return brook_a<PRIMITIVE>{ over{ brook_t<PRIMITIVE, CONCURRENT>{ std::forward<F>(init) } } };
+		return brook_a<_primitive_>{ over{ brook_t<_primitive_, _concurrent_>{ std::forward<F>(init) } } };
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<brook_t<PRIMITIVE, CONCURRENT>>::type();
+		return reflection<brook_t<_primitive_, _concurrent_>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<brook_t<PRIMITIVE, CONCURRENT>>::share(shoal);
+		reflection<brook_t<_primitive_, _concurrent_>>::share(shoal);
 	}
 
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check<brook_a<PRIMITIVE>>(thing))
+		if (!check<brook_a<_primitive_>>(thing))
 		{
 			return false;
 		}
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
-		return _deque == cast<brook_a<PRIMITIVE>>(thing).extract();
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque == cast<brook_a<_primitive_>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		std::size_t seed = std::hash<std::size_t>{}(_deque.size());
 		for (auto item : _deque)
 		{
-			seed ^= std::hash<PRIMITIVE>{}(item) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+			seed ^= std::hash<_primitive_>{}(item) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
 		return seed;
 	}
@@ -845,17 +845,17 @@ public:
 
 	inline any_a<> at_index(int64_t index) const
 	{
-		return number_t<PRIMITIVE>::val(pat(index));
+		return number_t<_primitive_>::val(pat(index));
 	}
 
-	inline PRIMITIVE pat(int64_t index) const
+	inline _primitive_ pat(int64_t index) const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		if (index >= 0 && index < int64_t(_deque.size()))
 		{
 			return _deque[std::size_t(index)];
 		}
-		return PRIMITIVE{};
+		return _primitive_{};
 	}
 
 	inline void update(any_a<> const& key, any_a<> const& value)
@@ -872,14 +872,14 @@ public:
 		{
 			throw dis("strange::brook::update passed non-number value");
 		}
-		return pupdate(index, number_u<PRIMITIVE>::from_number(cast<number_a<>>(value)));
+		return pupdate(index, number_u<_primitive_>::from_number(cast<number_a<>>(value)));
 	}
 
-	inline void pupdate(int64_t index, PRIMITIVE number)
+	inline void pupdate(int64_t index, _primitive_ number)
 	{
 		if (index >= 0)
 		{
-			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 			int64_t const siz = int64_t(_deque.size());
 			if (index == siz)
 			{
@@ -907,14 +907,14 @@ public:
 		{
 			throw dis("strange::brook::insert passed non-number value");
 		}
-		return pinsert(index, number_u<PRIMITIVE>::from_number(cast<number_a<>>(value)));
+		return pinsert(index, number_u<_primitive_>::from_number(cast<number_a<>>(value)));
 	}
 
-	inline bool pinsert(int64_t index, PRIMITIVE number)
+	inline bool pinsert(int64_t index, _primitive_ number)
 	{
 		if (index >= 0)
 		{
-			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 			int64_t const siz = int64_t(_deque.size());
 			if (index == siz)
 			{
@@ -944,7 +944,7 @@ public:
 
 	inline bool erase_index(int64_t index)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (index >= 0 && index < int64_t(_deque.size()))
 		{
 			_deque.erase(_deque.cbegin() + index);
@@ -955,19 +955,19 @@ public:
 
 	inline void clear()
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_deque.clear();
 	}
 
 	inline int64_t size() const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return int64_t(_deque.size());
 	}
 
 	inline bool empty() const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _deque.empty();
 	}
 
@@ -977,31 +977,31 @@ public:
 		{
 			throw dis("strange::brook::push_front passed non-number");
 		}
-		push_front(number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing)));
+		push_front(number_u<_primitive_>::from_number(cast<number_a<>>(thing)));
 	}
 
-	inline void push_front(PRIMITIVE number)
+	inline void push_front(_primitive_ number)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_deque.push_front(number);
 	}
 
 	inline any_a<> pop_front_()
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
 			return no();
 		}
-		PRIMITIVE number = _deque.front();
+		_primitive_ number = _deque.front();
 		_deque.pop_front();
-		return number_t<PRIMITIVE>::val(number);
+		return number_t<_primitive_>::val(number);
 	}
 
-	inline PRIMITIVE pop_front()
+	inline _primitive_ pop_front()
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
-		PRIMITIVE number = _deque.front();
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+		_primitive_ number = _deque.front();
 		_deque.pop_front();
 		return number;
 	}
@@ -1012,41 +1012,41 @@ public:
 		{
 			throw dis("strange::brook::push_back passed non-number");
 		}
-		push_back(number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing)));
+		push_back(number_u<_primitive_>::from_number(cast<number_a<>>(thing)));
 	}
 
-	inline void push_back(PRIMITIVE number)
+	inline void push_back(_primitive_ number)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_deque.push_back(number);
 	}
 
 	inline any_a<> pop_back_()
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		if (_deque.empty())
 		{
 			return no();
 		}
-		PRIMITIVE number = _deque.back();
+		_primitive_ number = _deque.back();
 		_deque.pop_back();
-		return number_t<PRIMITIVE>::val(number);
+		return number_t<_primitive_>::val(number);
 	}
 
-	inline PRIMITIVE pop_back()
+	inline _primitive_ pop_back()
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
-		PRIMITIVE number = _deque.back();
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+		_primitive_ number = _deque.back();
 		_deque.pop_back();
 		return number;
 	}
 
 	inline brook_t& operator+=(any_a<> const& range)
 	{
-		if (check<brook_a<PRIMITIVE>>(range))
+		if (check<brook_a<_primitive_>>(range))
 		{
-			auto other = cast<brook_a<PRIMITIVE>>(range).extract();
-			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			auto other = cast<brook_a<_primitive_>>(range).extract();
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 			_deque.insert(_deque.cend(), other.cbegin(), other.cend());
 		}
 		else
@@ -1055,7 +1055,7 @@ public:
 			{
 				throw dis("strange::brook += passed non-range");
 			}
-			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				_deque.push_back(thing);
@@ -1068,7 +1068,7 @@ public:
 	{
 		if (check<collection_a<>>(range))
 		{
-			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - cast<collection_a<>>(range).size())));
 		}
 		else
@@ -1077,7 +1077,7 @@ public:
 			{
 				throw dis("strange::brook -= passed non-range");
 			}
-			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				if (_deque.empty())
@@ -1092,12 +1092,12 @@ public:
 
 	inline any_a<> read_lock_() const
 	{
-		return data_t<read_lock_ptr<CONCURRENT>>::val(make_read_lock_ptr<CONCURRENT>(_mutex));
+		return data_t<read_lock_ptr<_concurrent_>>::val(make_read_lock_ptr<_concurrent_>(_mutex));
 	}
 
 	inline any_a<> write_lock_() const
 	{
-		return data_t<write_lock_ptr<CONCURRENT>>::val(make_write_lock_ptr<CONCURRENT>(_mutex));
+		return data_t<write_lock_ptr<_concurrent_>>::val(make_write_lock_ptr<_concurrent_>(_mutex));
 	}
 
 	// data
@@ -1108,7 +1108,7 @@ public:
 
 	inline void mutate(std_deque_number const& data)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_deque = data;
 	}
 
@@ -1118,7 +1118,7 @@ public:
 	}
 
 protected:
-	mutable typename concurrent_u<CONCURRENT>::mutex _mutex;
+	mutable typename concurrent_u<_concurrent_>::mutex _mutex;
 	std_deque_number _deque;
 
 	template <typename F>
@@ -1141,43 +1141,43 @@ private:
 	friend class ___brook_t_share___;
 };
 
-template <typename PRIMITIVE, bool CONCURRENT, typename ___ego___>
-bool const brook_t<PRIMITIVE, CONCURRENT, ___ego___>::___share___ = []()
+template <typename _primitive_, bool _concurrent_, typename ___ego___>
+bool const brook_t<_primitive_, _concurrent_, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	brook_t<PRIMITIVE, CONCURRENT, ___ego___>::share(shoal);
+	brook_t<_primitive_, _concurrent_, ___ego___>::share(shoal);
 	return shoal;
 }();
 
-template <bool CONCURRENT = false, typename ___ego___ = brook_a<int8_t>>
-using brook_int_8_t = brook_t<int8_t, CONCURRENT, ___ego___>;
+template <bool _concurrent_ = false, typename ___ego___ = brook_a<int8_t>>
+using brook_int_8_t = brook_t<int8_t, _concurrent_, ___ego___>;
 
-template <bool CONCURRENT = false, typename ___ego___ = brook_a<uint8_t>>
-using brook_uint_8_t = brook_t<uint8_t, CONCURRENT, ___ego___>;
+template <bool _concurrent_ = false, typename ___ego___ = brook_a<uint8_t>>
+using brook_uint_8_t = brook_t<uint8_t, _concurrent_, ___ego___>;
 
-template <bool CONCURRENT = false, typename ___ego___ = brook_a<int16_t>>
-using brook_int_16_t = brook_t<int16_t, CONCURRENT, ___ego___>;
+template <bool _concurrent_ = false, typename ___ego___ = brook_a<int16_t>>
+using brook_int_16_t = brook_t<int16_t, _concurrent_, ___ego___>;
 
-template <bool CONCURRENT = false, typename ___ego___ = brook_a<uint16_t>>
-using brook_uint_16_t = brook_t<uint16_t, CONCURRENT, ___ego___>;
+template <bool _concurrent_ = false, typename ___ego___ = brook_a<uint16_t>>
+using brook_uint_16_t = brook_t<uint16_t, _concurrent_, ___ego___>;
 
-template <bool CONCURRENT = false, typename ___ego___ = brook_a<int32_t>>
-using brook_int_32_t = brook_t<int32_t, CONCURRENT, ___ego___>;
+template <bool _concurrent_ = false, typename ___ego___ = brook_a<int32_t>>
+using brook_int_32_t = brook_t<int32_t, _concurrent_, ___ego___>;
 
-template <bool CONCURRENT = false, typename ___ego___ = brook_a<uint32_t>>
-using brook_uint_32_t = brook_t<uint32_t, CONCURRENT, ___ego___>;
+template <bool _concurrent_ = false, typename ___ego___ = brook_a<uint32_t>>
+using brook_uint_32_t = brook_t<uint32_t, _concurrent_, ___ego___>;
 
-template <bool CONCURRENT = false, typename ___ego___ = brook_a<int64_t>>
-using brook_int_64_t = brook_t<int64_t, CONCURRENT, ___ego___>;
+template <bool _concurrent_ = false, typename ___ego___ = brook_a<int64_t>>
+using brook_int_64_t = brook_t<int64_t, _concurrent_, ___ego___>;
 
-template <bool CONCURRENT = false, typename ___ego___ = brook_a<uint64_t>>
-using brook_uint_64_t = brook_t<uint64_t, CONCURRENT, ___ego___>;
+template <bool _concurrent_ = false, typename ___ego___ = brook_a<uint64_t>>
+using brook_uint_64_t = brook_t<uint64_t, _concurrent_, ___ego___>;
 
-template <bool CONCURRENT = false, typename ___ego___ = brook_a<float>>
-using brook_float_32_t = brook_t<float, CONCURRENT, ___ego___>;
+template <bool _concurrent_ = false, typename ___ego___ = brook_a<float>>
+using brook_float_32_t = brook_t<float, _concurrent_, ___ego___>;
 
-template <bool CONCURRENT = false, typename ___ego___ = brook_a<double>>
-using brook_float_64_t = brook_t<double, CONCURRENT, ___ego___>;
+template <bool _concurrent_ = false, typename ___ego___ = brook_a<double>>
+using brook_float_64_t = brook_t<double, _concurrent_, ___ego___>;
 
 } // namespace strange
 

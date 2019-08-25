@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <bool CONCURRENT>
+template <bool _concurrent_>
 class concurrent_u;
 
 template <>
@@ -62,22 +62,22 @@ public:
 	}
 };
 
-template <bool CONCURRENT>
-using read_lock_ptr = typename concurrent_u<CONCURRENT>::read_lock_ptr;
+template <bool _concurrent_>
+using read_lock_ptr = typename concurrent_u<_concurrent_>::read_lock_ptr;
 
-template <bool CONCURRENT>
-using write_lock_ptr = typename concurrent_u<CONCURRENT>::write_lock_ptr;
+template <bool _concurrent_>
+using write_lock_ptr = typename concurrent_u<_concurrent_>::write_lock_ptr;
 
-template <bool CONCURRENT>
-inline read_lock_ptr<CONCURRENT> make_read_lock_ptr(typename concurrent_u<CONCURRENT>::mutex& m)
+template <bool _concurrent_>
+inline read_lock_ptr<_concurrent_> make_read_lock_ptr(typename concurrent_u<_concurrent_>::mutex& m)
 {
-	return std::make_shared<typename concurrent_u<CONCURRENT>::read_lock>(m);
+	return std::make_shared<typename concurrent_u<_concurrent_>::read_lock>(m);
 }
 
-template <bool CONCURRENT>
-inline write_lock_ptr<CONCURRENT> make_write_lock_ptr(typename concurrent_u<CONCURRENT>::mutex& m)
+template <bool _concurrent_>
+inline write_lock_ptr<_concurrent_> make_write_lock_ptr(typename concurrent_u<_concurrent_>::mutex& m)
 {
-	return std::make_shared<typename concurrent_u<CONCURRENT>::write_lock>(m);
+	return std::make_shared<typename concurrent_u<_concurrent_>::write_lock>(m);
 }
 
 }

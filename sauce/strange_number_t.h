@@ -4,12 +4,12 @@
 namespace strange
 {
 
-template <typename PRIMITIVE, typename ___ego___ = number_data_a<PRIMITIVE>>
+template <typename _primitive_, typename ___ego___ = number_data_a<_primitive_>>
 class number_t : public thing_t<___ego___>
 {
 public:
 	// override
-	using over = thing_o<number_t<PRIMITIVE>>;
+	using over = thing_o<number_t<_primitive_>>;
 
 	// construction
 	static inline any_a<> val__(range_a<> const& _)
@@ -17,25 +17,25 @@ public:
 		return val_();
 	}
 
-	static inline number_data_a<PRIMITIVE> val_()
+	static inline number_data_a<_primitive_> val_()
 	{
-		return val(PRIMITIVE{});
+		return val(_primitive_{});
 	}
 
-	static inline number_data_a<PRIMITIVE> val(PRIMITIVE primitive)
+	static inline number_data_a<_primitive_> val(_primitive_ primitive)
 	{
-		return number_data_a<PRIMITIVE>{ over{ number_t<PRIMITIVE>{ primitive } } };
+		return number_data_a<_primitive_>{ over{ number_t<_primitive_>{ primitive } } };
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<number_t<PRIMITIVE>>::type();
+		return reflection<number_t<_primitive_>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<number_t<PRIMITIVE>>::share(shoal);
+		reflection<number_t<_primitive_>>::share(shoal);
 	}
 
 	// comparison
@@ -45,12 +45,12 @@ public:
 		{
 			return false;
 		}
-		return _number == number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
+		return _number == number_u<_primitive_>::from_number(cast<number_a<>>(thing));
 	}
 
 	inline std::size_t hash() const
 	{
-		return std::hash<PRIMITIVE>{}(_number);
+		return std::hash<_primitive_>{}(_number);
 	}
 
 	// number
@@ -113,7 +113,7 @@ public:
 
 	inline number_a<> self_add_(number_a<> const& number)
 	{
-		_number += number_u<PRIMITIVE>::from_number(number);
+		_number += number_u<_primitive_>::from_number(number);
 		return me_();
 	}
 
@@ -123,7 +123,7 @@ public:
 		{
 			throw dis("strange::number += passed non-number");
 		}
-		_number += number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
+		_number += number_u<_primitive_>::from_number(cast<number_a<>>(thing));
 		return *this;
 	}
 
@@ -145,7 +145,7 @@ public:
 	inline number_a<> operator+(number_a<> const& number) const
 	{
 		___ego___ result = me_();
-		result.reference() += number_u<PRIMITIVE>::from_number(number);
+		result.reference() += number_u<_primitive_>::from_number(number);
 		return result;
 	}
 
@@ -160,7 +160,7 @@ public:
 
 	inline number_a<> self_subtract_(number_a<> const& number)
 	{
-		_number -= number_u<PRIMITIVE>::from_number(number);
+		_number -= number_u<_primitive_>::from_number(number);
 		return me_();
 	}
 
@@ -170,7 +170,7 @@ public:
 		{
 			throw dis("strange::number -= passed non-number");
 		}
-		_number -= number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
+		_number -= number_u<_primitive_>::from_number(cast<number_a<>>(thing));
 		return *this;
 	}
 
@@ -192,7 +192,7 @@ public:
 	inline number_a<> operator-(number_a<> const& number) const
 	{
 		___ego___ result = me_();
-		result.reference() -= number_u<PRIMITIVE>::from_number(number);
+		result.reference() -= number_u<_primitive_>::from_number(number);
 		return result;
 	}
 
@@ -207,7 +207,7 @@ public:
 
 	inline number_a<> self_multiply_(number_a<> const& number)
 	{
-		_number *= number_u<PRIMITIVE>::from_number(number);
+		_number *= number_u<_primitive_>::from_number(number);
 		return me_();
 	}
 
@@ -217,7 +217,7 @@ public:
 		{
 			throw dis("strange::number *= passed non-number");
 		}
-		_number *= number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
+		_number *= number_u<_primitive_>::from_number(cast<number_a<>>(thing));
 		return *this;
 	}
 
@@ -239,7 +239,7 @@ public:
 	inline number_a<> operator*(number_a<> const& number) const
 	{
 		___ego___ result = me_();
-		result.reference() *= number_u<PRIMITIVE>::from_number(number);
+		result.reference() *= number_u<_primitive_>::from_number(number);
 		return result;
 	}
 
@@ -254,7 +254,7 @@ public:
 
 	inline number_a<> self_divide_(number_a<> const& number)
 	{
-		PRIMITIVE num = number_u<PRIMITIVE>::from_number(number);
+		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)
 		{
 			throw dis("strange::number self_divide division by zero");
@@ -269,7 +269,7 @@ public:
 		{
 			throw dis("strange::number /= passed non-number");
 		}
-		PRIMITIVE num = number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
+		_primitive_ num = number_u<_primitive_>::from_number(cast<number_a<>>(thing));
 		if (num == 0)
 		{
 			throw dis("strange::number /= division by zero");
@@ -295,7 +295,7 @@ public:
 
 	inline number_a<> operator/(number_a<> const& number) const
 	{
-		PRIMITIVE num = number_u<PRIMITIVE>::from_number(number);
+		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)
 		{
 			throw dis("strange::number / division by zero");
@@ -316,12 +316,12 @@ public:
 
 	inline number_a<> self_modulo_(number_a<> const& number)
 	{
-		PRIMITIVE num = number_u<PRIMITIVE>::from_number(number);
+		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)
 		{
 			throw dis("strange::number self_modulo division by zero");
 		}
-		_number = number_u<PRIMITIVE>::modulo(_number, num);
+		_number = number_u<_primitive_>::modulo(_number, num);
 		return me_();
 	}
 
@@ -331,12 +331,12 @@ public:
 		{
 			throw dis("strange::number %= passed non-number");
 		}
-		PRIMITIVE num = number_u<PRIMITIVE>::from_number(cast<number_a<>>(thing));
+		_primitive_ num = number_u<_primitive_>::from_number(cast<number_a<>>(thing));
 		if (num == 0)
 		{
 			throw dis("strange::number %= division by zero");
 		}
-		_number = number_u<PRIMITIVE>::modulo(_number, num);
+		_number = number_u<_primitive_>::modulo(_number, num);
 		return *this;
 	}
 
@@ -357,12 +357,12 @@ public:
 
 	inline number_a<> operator%(number_a<> const& number) const
 	{
-		PRIMITIVE num = number_u<PRIMITIVE>::from_number(number);
+		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)
 		{
 			throw dis("strange::number % division by zero");
 		}
-		return val(number_u<PRIMITIVE>::modulo(_number, num));
+		return val(number_u<_primitive_>::modulo(_number, num));
 	}
 
 	inline any_a<> to_int_64__(range_a<> const& _) const
@@ -377,7 +377,7 @@ public:
 
 	inline int64_t to_int_64() const
 	{
-		return number_u<PRIMITIVE>::to_int_64(_number);
+		return number_u<_primitive_>::to_int_64(_number);
 	}
 
 	inline any_a<> from_int_64__(range_a<> const& range)
@@ -403,7 +403,7 @@ public:
 
 	inline void from_int_64(int64_t int_64)
 	{
-		_number = number_u<PRIMITIVE>::from_int_64(int_64);
+		_number = number_u<_primitive_>::from_int_64(int_64);
 	}
 
 	inline any_a<> to_uint_64__(range_a<> const& _) const
@@ -418,7 +418,7 @@ public:
 
 	inline uint64_t to_uint_64() const
 	{
-		return number_u<PRIMITIVE>::to_uint_64(_number);
+		return number_u<_primitive_>::to_uint_64(_number);
 	}
 
 	inline any_a<> from_uint_64__(range_a<> const& range)
@@ -444,7 +444,7 @@ public:
 
 	inline void from_uint_64(uint64_t uint_64)
 	{
-		_number = number_u<PRIMITIVE>::from_uint_64(uint_64);
+		_number = number_u<_primitive_>::from_uint_64(uint_64);
 	}
 
 	inline any_a<> to_float_64__(range_a<> const& _) const
@@ -459,7 +459,7 @@ public:
 
 	inline double to_float_64() const
 	{
-		return number_u<PRIMITIVE>::to_float_64(_number);
+		return number_u<_primitive_>::to_float_64(_number);
 	}
 
 	inline any_a<> from_float_64__(range_a<> const& range)
@@ -485,7 +485,7 @@ public:
 
 	inline void from_float_64(double float_64)
 	{
-		_number = number_u<PRIMITIVE>::from_float_64(float_64);
+		_number = number_u<_primitive_>::from_float_64(float_64);
 	}
 
 	inline any_a<> less_than__(range_a<> const& range) const
@@ -510,7 +510,7 @@ public:
 
 	inline bool operator<(number_a<> const& number) const
 	{
-		return _number < number_u<PRIMITIVE>::from_number(number);
+		return _number < number_u<_primitive_>::from_number(number);
 	}
 
 	inline any_a<> greater_than__(range_a<> const& range) const
@@ -535,7 +535,7 @@ public:
 
 	inline bool operator>(number_a<> const& number) const
 	{
-		return _number > number_u<PRIMITIVE>::from_number(number);
+		return _number > number_u<_primitive_>::from_number(number);
 	}
 
 	inline any_a<> less_or_equal__(range_a<> const& range) const
@@ -560,7 +560,7 @@ public:
 
 	inline bool operator<=(number_a<> const& number) const
 	{
-		return _number <= number_u<PRIMITIVE>::from_number(number);
+		return _number <= number_u<_primitive_>::from_number(number);
 	}
 
 	inline any_a<> greater_or_equal__(range_a<> const& range) const
@@ -585,7 +585,7 @@ public:
 
 	inline bool operator>=(number_a<> const& number) const
 	{
-		return _number >= number_u<PRIMITIVE>::from_number(number);
+		return _number >= number_u<_primitive_>::from_number(number);
 	}
 
 	static inline any_a<> byte_size__(range_a<> const& _)
@@ -615,7 +615,7 @@ public:
 
 	static inline bool is_int()
 	{
-		return number_u<PRIMITIVE>::is_int();
+		return number_u<_primitive_>::is_int();
 	}
 
 	static inline any_a<> is_signed__(range_a<> const& _)
@@ -630,7 +630,7 @@ public:
 
 	static inline bool is_signed()
 	{
-		return number_u<PRIMITIVE>::is_signed();
+		return number_u<_primitive_>::is_signed();
 	}
 
 	inline any_a<> is_nan__(range_a<> const& _) const
@@ -645,7 +645,7 @@ public:
 
 	inline bool is_nan() const
 	{
-		return number_u<PRIMITIVE>::is_nan(_number);
+		return number_u<_primitive_>::is_nan(_number);
 	}
 
 	inline any_a<> is_inf__(range_a<> const& _) const
@@ -660,7 +660,7 @@ public:
 
 	inline bool is_inf() const
 	{
-		return number_u<PRIMITIVE>::is_inf(_number);
+		return number_u<_primitive_>::is_inf(_number);
 	}
 
 	inline any_a<> is_finite__(range_a<> const& _) const
@@ -675,7 +675,7 @@ public:
 
 	inline bool is_finite() const
 	{
-		return number_u<PRIMITIVE>::is_finite(_number);
+		return number_u<_primitive_>::is_finite(_number);
 	}
 
 	inline any_a<> is_normal__(range_a<> const& _) const
@@ -690,7 +690,7 @@ public:
 
 	inline bool is_normal() const
 	{
-		return number_u<PRIMITIVE>::is_normal(_number);
+		return number_u<_primitive_>::is_normal(_number);
 	}
 
 	static inline any_a<> little_endian__(range_a<> const& _)
@@ -714,25 +714,25 @@ public:
 	}
 
 	// data
-	inline PRIMITIVE const& extract() const
+	inline _primitive_ const& extract() const
 	{
 		return _number;
 	}
 
-	inline void mutate(PRIMITIVE const& data)
+	inline void mutate(_primitive_ const& data)
 	{
 		_number = data;
 	}
 
-	inline PRIMITIVE& reference()
+	inline _primitive_& reference()
 	{
 		return _number;
 	}
 
 protected:
-	PRIMITIVE _number;
+	_primitive_ _number;
 
-	inline number_t(PRIMITIVE number)
+	inline number_t(_primitive_ number)
 		: thing_t{}
 		, _number(number)
 	{}
@@ -742,11 +742,11 @@ private:
 	friend class ___number_t_share___;
 };
 
-template <typename PRIMITIVE, typename ___ego___>
-bool const number_t<PRIMITIVE, ___ego___>::___share___ = []()
+template <typename _primitive_, typename ___ego___>
+bool const number_t<_primitive_, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	number_t<PRIMITIVE, ___ego___>::share(shoal);
+	number_t<_primitive_, ___ego___>::share(shoal);
 	return shoal;
 }();
 

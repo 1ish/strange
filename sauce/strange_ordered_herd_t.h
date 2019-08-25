@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <bool CONCURRENT = false, typename ___ego___ = ordered_herd_a<>>
+template <bool _concurrent_ = false, typename ___ego___ = ordered_herd_a<>>
 class ordered_herd_t : public thing_t<___ego___>
 {
 	template <typename ITERATOR, typename ___ego___ = bidirectional_const_iterator_data_a<ITERATOR>>
@@ -148,7 +148,7 @@ public:
 	using std_set_any = std::set<any_a<>>;
 
 	// override
-	using over = collection_o<ordered_herd_t<CONCURRENT>>;
+	using over = collection_o<ordered_herd_t<_concurrent_>>;
 
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
@@ -170,18 +170,18 @@ public:
 	template <typename F>
 	static inline ordered_herd_a<> val(F&& init)
 	{
-		return ordered_herd_a<>{ over{ ordered_herd_t<CONCURRENT>{ std::forward<F>(init) } } };
+		return ordered_herd_a<>{ over{ ordered_herd_t<_concurrent_>{ std::forward<F>(init) } } };
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<ordered_herd_t<CONCURRENT>>::type();
+		return reflection<ordered_herd_t<_concurrent_>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<ordered_herd_t<CONCURRENT>>::share(shoal);
+		reflection<ordered_herd_t<_concurrent_>>::share(shoal);
 	}
 
 	// visitor pattern
@@ -200,7 +200,7 @@ public:
 		if (result)
 		{
 			auto last = inventory.size() - 1;
-			typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+			typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 			for (auto const& visited : _set)
 			{
 				inventory.update_index(last, visited);
@@ -217,13 +217,13 @@ public:
 		{
 			return false;
 		}
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _set == cast<ordered_herd_a<>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		std::size_t seed = std::hash<std::size_t>{}(_set.size());
 		for (auto const& item : _set)
 		{
@@ -246,7 +246,7 @@ public:
 	// collection
 	inline bool has(any_a<> const& key) const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		std_set_any::const_iterator const it = _set.find(key);
 		return it != _set.cend();
 	}
@@ -258,7 +258,7 @@ public:
 
 	inline any_a<> at_(any_a<> const& key) const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		std_set_any::const_iterator const it = _set.find(key);
 		if (it == _set.cend())
 		{
@@ -269,74 +269,74 @@ public:
 
 	inline bool at_string(std::string const& s) const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		std_set_any::const_iterator const it = _set.find(sym(s));
 		return it != _set.cend();
 	}
 
 	inline void update(any_a<> const& key, any_a<> const&)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_set.insert(key);
 	}
 
 	inline bool insert(any_a<> const& key, any_a<> const&)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		return _set.insert(key).second;
 	}
 
 	inline bool insert(any_a<> const& key)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		return _set.insert(key).second;
 	}
 
 	inline bool insert_string(std::string const& s)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		return _set.insert(sym(s)).second;
 	}
 
 	inline bool erase(any_a<> const& key)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		return _set.erase(key);
 	}
 
 	inline bool erase_string(std::string const& s)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		return _set.erase(sym(s));
 	}
 
 	inline void clear()
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_set.clear();
 	}
 
 	inline int64_t size() const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return int64_t(_set.size());
 	}
 
 	inline bool empty() const
 	{
-		typename concurrent_u<CONCURRENT>::read_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _set.empty();
 	}
 
 	inline void push_front(any_a<> const& thing)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_set.insert(thing);
 	}
 
 	inline any_a<> pop_front_()
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		std_set_any::const_iterator const it = _set.cbegin();
 		if (it == _set.cend())
 		{
@@ -349,13 +349,13 @@ public:
 
 	inline void push_back(any_a<> const& thing)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_set.insert(thing);
 	}
 
 	inline any_a<> pop_back_()
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		std_set_any::const_iterator it = _set.cend();
 		if (it == _set.cbegin())
 		{
@@ -371,13 +371,13 @@ public:
 		if (check<ordered_herd_a<>>(range))
 		{
 			auto other = cast<ordered_herd_a<>>(range).extract();
-			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 			_set.insert(other.cbegin(), other.cend());
 		}
 		else if (check<unordered_herd_a<>>(range))
 		{
 			auto other = cast<unordered_herd_a<>>(range).extract();
-			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 			_set.insert(other.cbegin(), other.cend());
 		}
 		else
@@ -386,7 +386,7 @@ public:
 			{
 				throw dis("strange::ordered_herd += passed non-range");
 			}
-			typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				_set.insert(thing);
@@ -401,7 +401,7 @@ public:
 		{
 			throw dis("strange::ordered_herd -= passed non-range");
 		}
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		for (auto const& thing : cast<range_a<>>(range))
 		{
 			_set.erase(thing);
@@ -411,12 +411,12 @@ public:
 
 	inline any_a<> read_lock_() const
 	{
-		return data_t<read_lock_ptr<CONCURRENT>>::val(make_read_lock_ptr<CONCURRENT>(_mutex));
+		return data_t<read_lock_ptr<_concurrent_>>::val(make_read_lock_ptr<_concurrent_>(_mutex));
 	}
 
 	inline any_a<> write_lock_() const
 	{
-		return data_t<write_lock_ptr<CONCURRENT>>::val(make_write_lock_ptr<CONCURRENT>(_mutex));
+		return data_t<write_lock_ptr<_concurrent_>>::val(make_write_lock_ptr<_concurrent_>(_mutex));
 	}
 
 	// data
@@ -427,7 +427,7 @@ public:
 
 	inline void mutate(std_set_any const& data)
 	{
-		typename concurrent_u<CONCURRENT>::write_lock lock(_mutex);
+		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_set = data;
 	}
 
@@ -437,7 +437,7 @@ public:
 	}
 
 protected:
-	mutable typename concurrent_u<CONCURRENT>::mutex _mutex;
+	mutable typename concurrent_u<_concurrent_>::mutex _mutex;
 	std_set_any _set;
 
 	template <typename F>
@@ -460,11 +460,11 @@ private:
 	friend class ___ordered_herd_t_share___;
 };
 
-template <bool CONCURRENT, typename ___ego___>
-bool const ordered_herd_t<CONCURRENT, ___ego___>::___share___ = []()
+template <bool _concurrent_, typename ___ego___>
+bool const ordered_herd_t<_concurrent_, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	ordered_herd_t<CONCURRENT, ___ego___>::share(shoal);
+	ordered_herd_t<_concurrent_, ___ego___>::share(shoal);
 	return shoal;
 }();
 

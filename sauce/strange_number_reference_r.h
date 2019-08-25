@@ -4,13 +4,13 @@
 namespace strange
 {
 
-template<typename PRIMITIVE>
-class reflection<number_reference_t<PRIMITIVE>>
+template<typename _primitive_>
+class reflection<number_reference_t<_primitive_>>
 {
 public:
 	static inline symbol_a<> type()
 	{
-		static symbol_a<> TYPE = sym("strange::number_reference_" + number_u<PRIMITIVE>::category());
+		static symbol_a<> TYPE = sym("strange::number_reference_" + number_u<_primitive_>::category());
 		return TYPE;
 	}
 };

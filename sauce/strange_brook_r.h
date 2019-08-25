@@ -4,13 +4,13 @@
 namespace strange
 {
 
-template<typename PRIMITIVE>
-class reflection<brook_a<PRIMITIVE>>
+template<typename _primitive_>
+class reflection<brook_a<_primitive_>>
 {
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::brook_" + number_u<PRIMITIVE>::category());
+		static cat_a<> CAT = cat_t<>::val(1, "strange::brook_" + number_u<_primitive_>::category());
 		return CAT;
 	}
 
@@ -70,20 +70,20 @@ class ___brook_a_share___
 	}
 };
 
-template<typename PRIMITIVE, bool CONCURRENT>
-class reflection<brook_t<PRIMITIVE, CONCURRENT>>
+template<typename _primitive_, bool _concurrent_>
+class reflection<brook_t<_primitive_, _concurrent_>>
 {
 public:
 	static inline symbol_a<> type()
 	{
-		static symbol_a<> TYPE = sym("strange::brook_" + number_u<PRIMITIVE>::category() +
-			(CONCURRENT ? "_concurrent" : ""));
+		static symbol_a<> TYPE = sym("strange::brook_" + number_u<_primitive_>::category() +
+			(_concurrent_ ? "_concurrent" : ""));
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string(type().to_string() + "::val", native_function_t<>::val(&brook_t<PRIMITIVE, CONCURRENT>::val__));
+		shoal.update_string(type().to_string() + "::val", native_function_t<>::val(&brook_t<_primitive_, _concurrent_>::val__));
 	}
 };
 
