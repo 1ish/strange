@@ -8,6 +8,7 @@
 #include "strange_native_function_t.h"
 #include "strange_native_extraction_t.h"
 #include "strange_native_mutation_t.h"
+#include "strange_attribution_t.h"
 #include "strange_attribute_mutation_t.h"
 #include "strange_attribute_extraction_t.h"
 #include "strange_description_t.h"
