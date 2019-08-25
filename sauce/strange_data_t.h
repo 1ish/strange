@@ -4,12 +4,12 @@
 namespace strange
 {
 
-template <typename DATA, typename ___ego___ = data_a<DATA>>
+template <typename _data_, typename ___ego___ = data_a<_data_>>
 class data_t : public thing_t<___ego___>
 {
 public:
 	// override
-	using over = thing_o<data_t<DATA>>;
+	using over = thing_o<data_t<_data_>>;
 
 	// construction
 	static inline any_a<> val__(range_a<> const& _)
@@ -17,62 +17,62 @@ public:
 		return val_();
 	}
 
-	static inline data_a<DATA> val_()
+	static inline data_a<_data_> val_()
 	{
-		return val(DATA{});
+		return val(_data_{});
 	}
 
-	static inline data_a<DATA> val(DATA primitive)
+	static inline data_a<_data_> val(_data_ primitive)
 	{
-		return data_a<DATA>{ over{ data_t<DATA>{ primitive } } };
+		return data_a<_data_>{ over{ data_t<_data_>{ primitive } } };
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<data_t<DATA>>::type();
+		return reflection<data_t<_data_>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<data_t<DATA>>::share(shoal);
+		reflection<data_t<_data_>>::share(shoal);
 	}
 
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check<data_a<DATA>>(thing))
+		if (!check<data_a<_data_>>(thing))
 		{
 			return false;
 		}
-		return _data == cast<data_a<DATA>>(thing).extract();
+		return _data == cast<data_a<_data_>>(thing).extract();
 	}
 
 	inline std::size_t hash() const
 	{
-		return std::hash<DATA>{}(_data);
+		return std::hash<_data_>{}(_data);
 	}
 
 	// data
-	inline DATA const& extract() const
+	inline _data_ const& extract() const
 	{
 		return _data;
 	}
 
-	inline void mutate(DATA const& data)
+	inline void mutate(_data_ const& data)
 	{
 		_data = data;
 	}
 
-	inline DATA& reference()
+	inline _data_& reference()
 	{
 		return _data;
 	}
 
 protected:
-	DATA _data;
+	_data_ _data;
 
-	inline data_t(DATA data)
+	inline data_t(_data_ data)
 		: thing_t{}
 		, _data(data)
 	{}
@@ -82,11 +82,11 @@ private:
 	friend class ___data_t_share___;
 };
 
-template <typename DATA, typename ___ego___>
-bool const data_t<DATA, ___ego___>::___share___ = []()
+template <typename _data_, typename ___ego___>
+bool const data_t<_data_, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	data_t<DATA, ___ego___>::share(shoal);
+	data_t<_data_, ___ego___>::share(shoal);
 	return shoal;
 }();
 
