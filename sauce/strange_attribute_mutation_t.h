@@ -30,8 +30,7 @@ public:
 	// function
 	inline any_a<> operate_(any_a<>&, range_a<> const&) const
 	{
-		any_a<> ref(_thing, true);
-		return ref;
+		return any_a<>(_thing, true);
 	}
 
 protected:
