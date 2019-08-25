@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename ELEMENT = void>
+template <typename _element_ = void>
 class range_of_a;
 
 } // namespace strange

@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template<typename ELEMENT>
-class reflection<range_of_a<ELEMENT>>
+template<typename _element_>
+class reflection<range_of_a<_element_>>
 {
 public:
 	static inline cat_a<> cat()
@@ -28,7 +28,7 @@ public:
 
 	static inline kind_a<> kind()
 	{
-		static kind_a<> KIND = kind_from_cat(cat(), flock_t<>::val_(reflection<ELEMENT>::cat()));
+		static kind_a<> KIND = kind_from_cat(cat(), flock_t<>::val_(reflection<_element_>::cat()));
 		return KIND;
 	}
 
@@ -48,8 +48,8 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update_string("cbegin", native_extraction_t<range_of_a<ELEMENT>>::val(&range_of_a<ELEMENT>::cbegin__));
-			operations.update_string("cend", native_extraction_t<range_of_a<ELEMENT>>::val(&range_of_a<ELEMENT>::cend__));
+			operations.update_string("cbegin", native_extraction_t<range_of_a<_element_>>::val(&range_of_a<_element_>::cbegin__));
+			operations.update_string("cend", native_extraction_t<range_of_a<_element_>>::val(&range_of_a<_element_>::cend__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -69,19 +69,19 @@ class ___range_of_a_share___
 	}
 };
 
-template<typename ELEMENT>
-class reflection<range_of_t<ELEMENT>>
+template<typename _element_>
+class reflection<range_of_t<_element_>>
 {
 public:
 	static inline symbol_a<> type()
 	{
-		static symbol_a<> TYPE = sym("strange::range_of" + reflection<ELEMENT>::cat().to_string());
+		static symbol_a<> TYPE = sym("strange::range_of" + reflection<_element_>::cat().to_string());
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string(type().to_string() + "::val", native_function_t<>::val(&range_of_t<ELEMENT>::val__));
+		shoal.update_string(type().to_string() + "::val", native_function_t<>::val(&range_of_t<_element_>::val__));
 	}
 };
 

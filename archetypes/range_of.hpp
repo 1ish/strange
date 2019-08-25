@@ -12,7 +12,7 @@
 namespace strange
 {
 
-template <typename ELEMENT>
+template <typename _element_>
 class range_of_a
 {
 public:

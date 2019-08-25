@@ -57,7 +57,7 @@ class misunderstanding_a;
 template <typename _1_ = void>
 class range_a;
 
-template <typename ELEMENT = any_a<>>
+template <typename _element_ = any_a<>>
 class range_of_a;
 
 template <typename number_data_a_int64 = number_data_a<int64_t>>

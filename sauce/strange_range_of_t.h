@@ -4,12 +4,12 @@
 namespace strange
 {
 
-template <typename ELEMENT = any_a<>, typename ___ego___ = range_of_a<ELEMENT>>
+template <typename _element_ = any_a<>, typename ___ego___ = range_of_a<_element_>>
 class range_of_t : public thing_t<___ego___>
 {
 public:
 	// override
-	using over = range_o<range_of_t<ELEMENT>>;
+	using over = range_o<range_of_t<_element_>>;
 
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
@@ -36,26 +36,26 @@ public:
 		return val_(cast<forward_const_iterator_a<>>(begin), cast<forward_const_iterator_a<>>(end));
 	}
 
-	static inline range_of_a<ELEMENT> val_()
+	static inline range_of_a<_element_> val_()
 	{
-		static range_of_a<ELEMENT> VAL = range_of_t<ELEMENT>::val_(it_t<true>::val_(), it_t<true>::val_());
+		static range_of_a<_element_> VAL = range_of_t<_element_>::val_(it_t<true>::val_(), it_t<true>::val_());
 		return VAL;
 	}
 
-	static inline range_of_a<ELEMENT> val_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
+	static inline range_of_a<_element_> val_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
 	{
-		return range_of_a<ELEMENT>{ over{ range_of_t<ELEMENT>(begin, end) } };
+		return range_of_a<_element_>{ over{ range_of_t<_element_>(begin, end) } };
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<range_of_t<ELEMENT>>::type();
+		return reflection<range_of_t<_element_>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<range_of_t<ELEMENT>>::share(shoal);
+		reflection<range_of_t<_element_>>::share(shoal);
 	}
 
 	// range
@@ -84,11 +84,11 @@ private:
 	friend class ___range_of_t_share___;
 };
 
-template <typename ELEMENT, typename ___ego___>
-bool const range_of_t<ELEMENT, ___ego___>::___share___ = []()
+template <typename _element_, typename ___ego___>
+bool const range_of_t<_element_, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	range_of_t<ELEMENT, ___ego___>::share(shoal);
+	range_of_t<_element_, ___ego___>::share(shoal);
 	return shoal;
 }();
 
