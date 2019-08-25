@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename ELEMENT = any_a<>, typename _ABSTRACTION_ = range_of_a<ELEMENT>>
-class range_of_t : public thing_t<_ABSTRACTION_>
+template <typename ELEMENT = any_a<>, typename ___ego___ = range_of_a<ELEMENT>>
+class range_of_t : public thing_t<___ego___>
 {
 public:
 	// override
@@ -84,11 +84,11 @@ private:
 	friend class ___range_of_t_share___;
 };
 
-template <typename ELEMENT, typename _ABSTRACTION_>
-bool const range_of_t<ELEMENT, _ABSTRACTION_>::___share___ = []()
+template <typename ELEMENT, typename ___ego___>
+bool const range_of_t<ELEMENT, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	range_of_t<ELEMENT, _ABSTRACTION_>::share(shoal);
+	range_of_t<ELEMENT, ___ego___>::share(shoal);
 	return shoal;
 }();
 

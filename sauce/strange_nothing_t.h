@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = any_a<>>
-class nothing_t : public thing_t<_ABSTRACTION_>
+template <typename ___ego___ = any_a<>>
+class nothing_t : public thing_t<___ego___>
 {
 public:
 	// override
@@ -98,11 +98,11 @@ private:
 	friend class ___nothing_t_share___;
 };
 
-template <typename _ABSTRACTION_>
-bool const nothing_t<_ABSTRACTION_>::___share___ = []()
+template <typename ___ego___>
+bool const nothing_t<___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	nothing_t<_ABSTRACTION_>::share(shoal);
+	nothing_t<___ego___>::share(shoal);
 	return shoal;
 }();
 

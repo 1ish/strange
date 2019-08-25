@@ -4,19 +4,19 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = any_a<>>
+template <typename ___ego___ = any_a<>>
 class thing_t : public one_t
 {
 public:
 	// erasure
-	inline _ABSTRACTION_ const me_() const
+	inline ___ego___ const me_() const
 	{
-		return _ABSTRACTION_(_meek.lock(), true);
+		return ___ego___(_meek.lock(), true);
 	}
 
-	inline _ABSTRACTION_ me_()
+	inline ___ego___ me_()
 	{
-		return _ABSTRACTION_(_meek.lock(), true);
+		return ___ego___(_meek.lock(), true);
 	}
 
 	// reflection
@@ -37,7 +37,7 @@ public:
 	
 	static inline cat_a<> cat_()
 	{
-		return reflection<_ABSTRACTION_>::cat();
+		return reflection<___ego___>::cat();
 	}
 
 	static inline any_a<> cats__(range_a<> const&)
@@ -47,7 +47,7 @@ public:
 
 	static inline unordered_herd_a<> cats_()
 	{
-		return reflection<_ABSTRACTION_>::cats();
+		return reflection<___ego___>::cats();
 	}
 
 	static inline any_a<> kind__(range_a<> const&)
@@ -57,7 +57,7 @@ public:
 
 	static inline kind_a<> kind_()
 	{
-		return reflection<_ABSTRACTION_>::kind();
+		return reflection<___ego___>::kind();
 	}
 
 	static inline any_a<> kinds__(range_a<> const&)
@@ -67,7 +67,7 @@ public:
 
 	static inline unordered_herd_a<> kinds_()
 	{
-		return reflection<_ABSTRACTION_>::kinds();
+		return reflection<___ego___>::kinds();
 	}
 
 	static inline any_a<> operations__(range_a<> const&)
@@ -77,7 +77,7 @@ public:
 	
 	static inline unordered_shoal_a<> operations_()
 	{
-		return reflection<_ABSTRACTION_>::operations();
+		return reflection<___ego___>::operations();
 	}
 
 	static inline any_a<> eater_()
@@ -229,11 +229,11 @@ private:
 	friend class ___thing_t_share___;
 };
 
-template <typename _ABSTRACTION_>
-bool const thing_t<_ABSTRACTION_>::___share___ = []()
+template <typename ___ego___>
+bool const thing_t<___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	thing_t<_ABSTRACTION_>::share(shoal);
+	thing_t<___ego___>::share(shoal);
 	return shoal;
 }();
 

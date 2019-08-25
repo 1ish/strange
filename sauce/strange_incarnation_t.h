@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = unordered_shoal_a<>>
-class incarnation_t : public unordered_shoal_t<false, _ABSTRACTION_>
+template <typename ___ego___ = unordered_shoal_a<>>
+class incarnation_t : public unordered_shoal_t<false, ___ego___>
 {
 public:
 	// override
@@ -72,11 +72,11 @@ private:
 	friend class ___incarnation_t_share___;
 };
 
-template <typename _ABSTRACTION_>
-bool const incarnation_t<_ABSTRACTION_>::___share___ = []()
+template <typename ___ego___>
+bool const incarnation_t<___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	incarnation_t<_ABSTRACTION_>::share(shoal);
+	incarnation_t<___ego___>::share(shoal);
 	return shoal;
 }();
 

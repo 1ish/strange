@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename PRIMITIVE, typename _ABSTRACTION_ = number_data_a<PRIMITIVE>>
-class number_reference_t : public thing_t<_ABSTRACTION_>
+template <typename PRIMITIVE, typename ___ego___ = number_data_a<PRIMITIVE>>
+class number_reference_t : public thing_t<___ego___>
 {
 public:
 	// override
@@ -42,12 +42,12 @@ public:
 	}
 
 	// number
-	inline _ABSTRACTION_ increment__(range_a<> const&)
+	inline ___ego___ increment__(range_a<> const&)
 	{
 		return increment_();
 	}
 
-	inline _ABSTRACTION_ increment_()
+	inline ___ego___ increment_()
 	{
 		operator++();
 		return me_();
@@ -284,7 +284,7 @@ public:
 		{
 			throw dis("strange::number_reference / division by zero");
 		}
-		_ABSTRACTION_ result = number_t<PRIMITIVE>::val(_number);
+		___ego___ result = number_t<PRIMITIVE>::val(_number);
 		result.reference() /= num;
 		return result;
 	}
@@ -722,35 +722,35 @@ protected:
 	{}
 };
 
-template <typename _ABSTRACTION_ = number_data_a<int8_t>>
-using number_reference_int_8_t = number_reference_t<int8_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<int8_t>>
+using number_reference_int_8_t = number_reference_t<int8_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<uint8_t>>
-using number_reference_uint_8_t = number_reference_t<uint8_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<uint8_t>>
+using number_reference_uint_8_t = number_reference_t<uint8_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<int16_t>>
-using number_reference_int_16_t = number_reference_t<int16_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<int16_t>>
+using number_reference_int_16_t = number_reference_t<int16_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<uint16_t>>
-using number_reference_uint_16_t = number_reference_t<uint16_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<uint16_t>>
+using number_reference_uint_16_t = number_reference_t<uint16_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<int32_t>>
-using number_reference_int_32_t = number_reference_t<int32_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<int32_t>>
+using number_reference_int_32_t = number_reference_t<int32_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<uint32_t>>
-using number_reference_uint_32_t = number_reference_t<uint32_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<uint32_t>>
+using number_reference_uint_32_t = number_reference_t<uint32_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<int64_t>>
-using number_reference_int_64_t = number_reference_t<int64_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<int64_t>>
+using number_reference_int_64_t = number_reference_t<int64_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<uint64_t>>
-using number_reference_uint_64_t = number_reference_t<uint64_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<uint64_t>>
+using number_reference_uint_64_t = number_reference_t<uint64_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<float>>
-using number_reference_float_32_t = number_reference_t<float, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<float>>
+using number_reference_float_32_t = number_reference_t<float, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<double>>
-using number_reference_float_64_t = number_reference_t<double, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<double>>
+using number_reference_float_64_t = number_reference_t<double, ___ego___>;
 
 } // namespace strange
 

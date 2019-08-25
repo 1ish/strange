@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = operation_a<>>
-class attribute_extraction_t : public operation_t<_ABSTRACTION_>
+template <typename ___ego___ = operation_a<>>
+class attribute_extraction_t : public operation_t<___ego___>
 {
 public:
 	// override

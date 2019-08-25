@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename DATA, typename _ABSTRACTION_ = data_a<DATA>>
-class data_t : public thing_t<_ABSTRACTION_>
+template <typename DATA, typename ___ego___ = data_a<DATA>>
+class data_t : public thing_t<___ego___>
 {
 public:
 	// override
@@ -82,11 +82,11 @@ private:
 	friend class ___data_t_share___;
 };
 
-template <typename DATA, typename _ABSTRACTION_>
-bool const data_t<DATA, _ABSTRACTION_>::___share___ = []()
+template <typename DATA, typename ___ego___>
+bool const data_t<DATA, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	data_t<DATA, _ABSTRACTION_>::share(shoal);
+	data_t<DATA, ___ego___>::share(shoal);
 	return shoal;
 }();
 

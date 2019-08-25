@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = token_a<>>
-class token_t : public thing_t<_ABSTRACTION_>
+template <typename ___ego___ = token_a<>>
+class token_t : public thing_t<___ego___>
 {
 	using val_member = token_a<>(*)(symbol_a<> const&, number_data_a<int64_t> const&, number_data_a<int64_t> const&, symbol_a<> const&, number_data_a<int64_t> const&);
 
@@ -407,11 +407,11 @@ private:
 	friend class ___token_t_share___;
 };
 
-template <typename _ABSTRACTION_>
-bool const token_t<_ABSTRACTION_>::___share___ = []()
+template <typename ___ego___>
+bool const token_t<___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	token_t<_ABSTRACTION_>::share(shoal);
+	token_t<___ego___>::share(shoal);
 	return shoal;
 }();
 

@@ -6,7 +6,7 @@
 namespace strange
 {
 
-template<typename _ABSTRACTION_OR_THING_>
+template<typename _abstraction_or_thing_>
 class reflection;
 
 }

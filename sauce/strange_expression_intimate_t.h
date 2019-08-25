@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = expression_a<>>
-class expression_intimate_t : public expression_t<_ABSTRACTION_>
+template <typename ___ego___ = expression_a<>>
+class expression_intimate_t : public expression_t<___ego___>
 {
 public:
 	// override
@@ -185,11 +185,11 @@ private:
 	friend class ___expression_intimate_t_share___;
 };
 
-template <typename _ABSTRACTION_>
-bool const expression_intimate_t<_ABSTRACTION_>::___share___ = []()
+template <typename ___ego___>
+bool const expression_intimate_t<___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	expression_intimate_t<_ABSTRACTION_>::share(shoal);
+	expression_intimate_t<___ego___>::share(shoal);
 	return shoal;
 }();
 

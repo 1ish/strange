@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename PRIMITIVE, typename _ABSTRACTION_ = number_data_a<PRIMITIVE>>
-class number_t : public thing_t<_ABSTRACTION_>
+template <typename PRIMITIVE, typename ___ego___ = number_data_a<PRIMITIVE>>
+class number_t : public thing_t<___ego___>
 {
 public:
 	// override
@@ -54,12 +54,12 @@ public:
 	}
 
 	// number
-	inline _ABSTRACTION_ increment__(range_a<> const&)
+	inline ___ego___ increment__(range_a<> const&)
 	{
 		return increment_();
 	}
 
-	inline _ABSTRACTION_ increment_()
+	inline ___ego___ increment_()
 	{
 		operator++();
 		return me_();
@@ -144,7 +144,7 @@ public:
 
 	inline number_a<> operator+(number_a<> const& number) const
 	{
-		_ABSTRACTION_ result = me_();
+		___ego___ result = me_();
 		result.reference() += number_u<PRIMITIVE>::from_number(number);
 		return result;
 	}
@@ -191,7 +191,7 @@ public:
 
 	inline number_a<> operator-(number_a<> const& number) const
 	{
-		_ABSTRACTION_ result = me_();
+		___ego___ result = me_();
 		result.reference() -= number_u<PRIMITIVE>::from_number(number);
 		return result;
 	}
@@ -238,7 +238,7 @@ public:
 
 	inline number_a<> operator*(number_a<> const& number) const
 	{
-		_ABSTRACTION_ result = me_();
+		___ego___ result = me_();
 		result.reference() *= number_u<PRIMITIVE>::from_number(number);
 		return result;
 	}
@@ -300,7 +300,7 @@ public:
 		{
 			throw dis("strange::number / division by zero");
 		}
-		_ABSTRACTION_ result = me_();
+		___ego___ result = me_();
 		result.reference() /= num;
 		return result;
 	}
@@ -742,43 +742,43 @@ private:
 	friend class ___number_t_share___;
 };
 
-template <typename PRIMITIVE, typename _ABSTRACTION_>
-bool const number_t<PRIMITIVE, _ABSTRACTION_>::___share___ = []()
+template <typename PRIMITIVE, typename ___ego___>
+bool const number_t<PRIMITIVE, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	number_t<PRIMITIVE, _ABSTRACTION_>::share(shoal);
+	number_t<PRIMITIVE, ___ego___>::share(shoal);
 	return shoal;
 }();
 
-template <typename _ABSTRACTION_ = number_data_a<int8_t>>
-using number_int_8_t = number_t<int8_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<int8_t>>
+using number_int_8_t = number_t<int8_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<uint8_t>>
-using number_uint_8_t = number_t<uint8_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<uint8_t>>
+using number_uint_8_t = number_t<uint8_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<int16_t>>
-using number_int_16_t = number_t<int16_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<int16_t>>
+using number_int_16_t = number_t<int16_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<uint16_t>>
-using number_uint_16_t = number_t<uint16_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<uint16_t>>
+using number_uint_16_t = number_t<uint16_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<int32_t>>
-using number_int_32_t = number_t<int32_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<int32_t>>
+using number_int_32_t = number_t<int32_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<uint32_t>>
-using number_uint_32_t = number_t<uint32_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<uint32_t>>
+using number_uint_32_t = number_t<uint32_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<int64_t>>
-using number_int_64_t = number_t<int64_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<int64_t>>
+using number_int_64_t = number_t<int64_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<uint64_t>>
-using number_uint_64_t = number_t<uint64_t, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<uint64_t>>
+using number_uint_64_t = number_t<uint64_t, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<float>>
-using number_float_32_t = number_t<float, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<float>>
+using number_float_32_t = number_t<float, ___ego___>;
 
-template <typename _ABSTRACTION_ = number_data_a<double>>
-using number_float_64_t = number_t<double, _ABSTRACTION_>;
+template <typename ___ego___ = number_data_a<double>>
+using number_float_64_t = number_t<double, ___ego___>;
 
 number_data_a<int64_t> int_64_from_string(std::string const& str)
 {

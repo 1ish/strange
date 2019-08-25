@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = cat_a<>>
-class cat_t : public symbol_t<_ABSTRACTION_>
+template <typename ___ego___ = cat_a<>>
+class cat_t : public symbol_t<___ego___>
 {
 public:
 	// override
@@ -117,7 +117,7 @@ public:
 		{
 			return false;
 		}
-		bool const same = symbol_t<_ABSTRACTION_>::operator==(thing);
+		bool const same = symbol_t<___ego___>::operator==(thing);
 		if (_symbolic || !same)
 		{
 			return same;
@@ -437,11 +437,11 @@ private:
 	friend class ___cat_t_share___;
 };
 
-template <typename _ABSTRACTION_>
-bool const cat_t<_ABSTRACTION_>::___share___ = []()
+template <typename ___ego___>
+bool const cat_t<___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	cat_t<_ABSTRACTION_>::share(shoal);
+	cat_t<___ego___>::share(shoal);
 	return shoal;
 }();
 

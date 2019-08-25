@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = misunderstanding_a<>>
-class disagreement_t : public nothing_t<_ABSTRACTION_>, public std::logic_error
+template <typename ___ego___ = misunderstanding_a<>>
+class disagreement_t : public nothing_t<___ego___>, public std::logic_error
 {
 public:
 	// override
@@ -96,11 +96,11 @@ private:
 	friend class ___disagreement_t_share___;
 };
 
-template <typename _ABSTRACTION_>
-bool const disagreement_t<_ABSTRACTION_>::___share___ = []()
+template <typename ___ego___>
+bool const disagreement_t<___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	disagreement_t<_ABSTRACTION_>::share(shoal);
+	disagreement_t<___ego___>::share(shoal);
 	return shoal;
 }();
 

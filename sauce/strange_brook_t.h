@@ -4,11 +4,11 @@
 namespace strange
 {
 
-template <typename PRIMITIVE, bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<PRIMITIVE>>
-class brook_t : public thing_t<_ABSTRACTION_>
+template <typename PRIMITIVE, bool CONCURRENT = false, typename ___ego___ = brook_a<PRIMITIVE>>
+class brook_t : public thing_t<___ego___>
 {
-	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
-	class iterator_t : public thing_t<_ABSTRACTION_>
+	template <typename ITERATOR, typename ___ego___ = random_access_iterator_data_a<ITERATOR>>
+	class iterator_t : public thing_t<___ego___>
 	{
 	public:
 		// override
@@ -88,12 +88,12 @@ class brook_t : public thing_t<_ABSTRACTION_>
 			throw dis("strange::brook::iterator should not be dereferenced directly");
 		}
 
-		inline _ABSTRACTION_ increment__(range_a<> const&)
+		inline ___ego___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline _ABSTRACTION_ increment_()
+		inline ___ego___ increment_()
 		{
 			operator++();
 			return me_();
@@ -113,12 +113,12 @@ class brook_t : public thing_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement__(range_a<> const& _)
+		inline ___ego___ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}
 
-		inline _ABSTRACTION_ decrement_()
+		inline ___ego___ decrement_()
 		{
 			operator--();
 			return me_();
@@ -138,7 +138,7 @@ class brook_t : public thing_t<_ABSTRACTION_>
 		}
 
 		// random access iterator
-		inline _ABSTRACTION_ self_add__(range_a<> const& range)
+		inline ___ego___ self_add__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -147,7 +147,7 @@ class brook_t : public thing_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline _ABSTRACTION_ self_add_(number_a<> const& number)
+		inline ___ego___ self_add_(number_a<> const& number)
 		{
 			_it += number.to_int_64();
 			return me_();
@@ -180,12 +180,12 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline random_access_iterator_a<> operator+(number_a<> const& number) const
 		{
-			_ABSTRACTION_ result = me_();
+			___ego___ result = me_();
 			result.reference() += number.to_int_64();
 			return result;
 		}
 
-		inline _ABSTRACTION_ self_subtract__(range_a<> const& range)
+		inline ___ego___ self_subtract__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -194,7 +194,7 @@ class brook_t : public thing_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline _ABSTRACTION_ self_subtract_(number_a<> const& number)
+		inline ___ego___ self_subtract_(number_a<> const& number)
 		{
 			_it -= number.to_int_64();
 			return me_();
@@ -227,7 +227,7 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline random_access_iterator_a<> operator-(number_a<> const& number) const
 		{
-			_ABSTRACTION_ result = me_();
+			___ego___ result = me_();
 			result.reference() -= number.to_int_64();
 			return result;
 		}
@@ -378,8 +378,8 @@ class brook_t : public thing_t<_ABSTRACTION_>
 		{}
 	};
 
-	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_const_iterator_data_a<ITERATOR>>
-	class const_iterator_t : public thing_t<_ABSTRACTION_>
+	template <typename ITERATOR, typename ___ego___ = random_access_const_iterator_data_a<ITERATOR>>
+	class const_iterator_t : public thing_t<___ego___>
 	{
 	public:
 		// override
@@ -440,12 +440,12 @@ class brook_t : public thing_t<_ABSTRACTION_>
 			return _number;
 		}
 
-		inline _ABSTRACTION_ increment__(range_a<> const&)
+		inline ___ego___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline _ABSTRACTION_ increment_()
+		inline ___ego___ increment_()
 		{
 			operator++();
 			return me_();
@@ -465,12 +465,12 @@ class brook_t : public thing_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement__(range_a<> const& _)
+		inline ___ego___ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}
 
-		inline _ABSTRACTION_ decrement_()
+		inline ___ego___ decrement_()
 		{
 			operator--();
 			return me_();
@@ -490,7 +490,7 @@ class brook_t : public thing_t<_ABSTRACTION_>
 		}
 
 		// random access iterator
-		inline _ABSTRACTION_ self_add__(range_a<> const& range)
+		inline ___ego___ self_add__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -499,7 +499,7 @@ class brook_t : public thing_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline _ABSTRACTION_ self_add_(number_a<> const& number)
+		inline ___ego___ self_add_(number_a<> const& number)
 		{
 			_it += number.to_int_64();
 			return me_();
@@ -532,12 +532,12 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline random_access_const_iterator_a<> operator+(number_a<> const& number) const
 		{
-			_ABSTRACTION_ result = me_();
+			___ego___ result = me_();
 			result.reference() += number.to_int_64();
 			return result;
 		}
 
-		inline _ABSTRACTION_ self_subtract__(range_a<> const& range)
+		inline ___ego___ self_subtract__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -546,7 +546,7 @@ class brook_t : public thing_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline _ABSTRACTION_ self_subtract_(number_a<> const& number)
+		inline ___ego___ self_subtract_(number_a<> const& number)
 		{
 			_it -= number.to_int_64();
 			return me_();
@@ -579,7 +579,7 @@ class brook_t : public thing_t<_ABSTRACTION_>
 
 		inline random_access_const_iterator_a<> operator-(number_a<> const& number) const
 		{
-			_ABSTRACTION_ result = me_();
+			___ego___ result = me_();
 			result.reference() -= number.to_int_64();
 			return result;
 		}
@@ -1141,43 +1141,43 @@ private:
 	friend class ___brook_t_share___;
 };
 
-template <typename PRIMITIVE, bool CONCURRENT, typename _ABSTRACTION_>
-bool const brook_t<PRIMITIVE, CONCURRENT, _ABSTRACTION_>::___share___ = []()
+template <typename PRIMITIVE, bool CONCURRENT, typename ___ego___>
+bool const brook_t<PRIMITIVE, CONCURRENT, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	brook_t<PRIMITIVE, CONCURRENT, _ABSTRACTION_>::share(shoal);
+	brook_t<PRIMITIVE, CONCURRENT, ___ego___>::share(shoal);
 	return shoal;
 }();
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<int8_t>>
-using brook_int_8_t = brook_t<int8_t, CONCURRENT, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename ___ego___ = brook_a<int8_t>>
+using brook_int_8_t = brook_t<int8_t, CONCURRENT, ___ego___>;
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<uint8_t>>
-using brook_uint_8_t = brook_t<uint8_t, CONCURRENT, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename ___ego___ = brook_a<uint8_t>>
+using brook_uint_8_t = brook_t<uint8_t, CONCURRENT, ___ego___>;
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<int16_t>>
-using brook_int_16_t = brook_t<int16_t, CONCURRENT, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename ___ego___ = brook_a<int16_t>>
+using brook_int_16_t = brook_t<int16_t, CONCURRENT, ___ego___>;
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<uint16_t>>
-using brook_uint_16_t = brook_t<uint16_t, CONCURRENT, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename ___ego___ = brook_a<uint16_t>>
+using brook_uint_16_t = brook_t<uint16_t, CONCURRENT, ___ego___>;
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<int32_t>>
-using brook_int_32_t = brook_t<int32_t, CONCURRENT, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename ___ego___ = brook_a<int32_t>>
+using brook_int_32_t = brook_t<int32_t, CONCURRENT, ___ego___>;
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<uint32_t>>
-using brook_uint_32_t = brook_t<uint32_t, CONCURRENT, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename ___ego___ = brook_a<uint32_t>>
+using brook_uint_32_t = brook_t<uint32_t, CONCURRENT, ___ego___>;
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<int64_t>>
-using brook_int_64_t = brook_t<int64_t, CONCURRENT, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename ___ego___ = brook_a<int64_t>>
+using brook_int_64_t = brook_t<int64_t, CONCURRENT, ___ego___>;
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<uint64_t>>
-using brook_uint_64_t = brook_t<uint64_t, CONCURRENT, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename ___ego___ = brook_a<uint64_t>>
+using brook_uint_64_t = brook_t<uint64_t, CONCURRENT, ___ego___>;
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<float>>
-using brook_float_32_t = brook_t<float, CONCURRENT, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename ___ego___ = brook_a<float>>
+using brook_float_32_t = brook_t<float, CONCURRENT, ___ego___>;
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = brook_a<double>>
-using brook_float_64_t = brook_t<double, CONCURRENT, _ABSTRACTION_>;
+template <bool CONCURRENT = false, typename ___ego___ = brook_a<double>>
+using brook_float_64_t = brook_t<double, CONCURRENT, ___ego___>;
 
 } // namespace strange
 

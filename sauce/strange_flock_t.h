@@ -4,11 +4,11 @@
 namespace strange
 {
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = flock_a<>>
-class flock_t : public thing_t<_ABSTRACTION_>
+template <bool CONCURRENT = false, typename ___ego___ = flock_a<>>
+class flock_t : public thing_t<___ego___>
 {
-	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_iterator_data_a<ITERATOR>>
-	class iterator_t : public thing_t<_ABSTRACTION_>
+	template <typename ITERATOR, typename ___ego___ = random_access_iterator_data_a<ITERATOR>>
+	class iterator_t : public thing_t<___ego___>
 	{
 	public:
 		// override
@@ -82,12 +82,12 @@ class flock_t : public thing_t<_ABSTRACTION_>
 			return *_it;
 		}
 
-		inline _ABSTRACTION_ increment__(range_a<> const&)
+		inline ___ego___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline _ABSTRACTION_ increment_()
+		inline ___ego___ increment_()
 		{
 			operator++();
 			return me_();
@@ -107,12 +107,12 @@ class flock_t : public thing_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement__(range_a<> const& _)
+		inline ___ego___ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}
 
-		inline _ABSTRACTION_ decrement_()
+		inline ___ego___ decrement_()
 		{
 			operator--();
 			return me_();
@@ -132,7 +132,7 @@ class flock_t : public thing_t<_ABSTRACTION_>
 		}
 
 		// random access iterator
-		inline _ABSTRACTION_ self_add__(range_a<> const& range)
+		inline ___ego___ self_add__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -141,7 +141,7 @@ class flock_t : public thing_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline _ABSTRACTION_ self_add_(number_a<> const& number)
+		inline ___ego___ self_add_(number_a<> const& number)
 		{
 			_it += number.to_int_64();
 			return me_();
@@ -174,12 +174,12 @@ class flock_t : public thing_t<_ABSTRACTION_>
 
 		inline random_access_iterator_a<> operator+(number_a<> const& number) const
 		{
-			_ABSTRACTION_ result = me_();
+			___ego___ result = me_();
 			result.reference() += number.to_int_64();
 			return result;
 		}
 
-		inline _ABSTRACTION_ self_subtract__(range_a<> const& range)
+		inline ___ego___ self_subtract__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -188,7 +188,7 @@ class flock_t : public thing_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline _ABSTRACTION_ self_subtract_(number_a<> const& number)
+		inline ___ego___ self_subtract_(number_a<> const& number)
 		{
 			_it -= number.to_int_64();
 			return me_();
@@ -221,7 +221,7 @@ class flock_t : public thing_t<_ABSTRACTION_>
 
 		inline random_access_iterator_a<> operator-(number_a<> const& number) const
 		{
-			_ABSTRACTION_ result = me_();
+			___ego___ result = me_();
 			result.reference() -= number.to_int_64();
 			return result;
 		}
@@ -370,8 +370,8 @@ class flock_t : public thing_t<_ABSTRACTION_>
 		{}
 	};
 
-	template <typename ITERATOR, typename _ABSTRACTION_ = random_access_const_iterator_data_a<ITERATOR>>
-	class const_iterator_t : public thing_t<_ABSTRACTION_>
+	template <typename ITERATOR, typename ___ego___ = random_access_const_iterator_data_a<ITERATOR>>
+	class const_iterator_t : public thing_t<___ego___>
 	{
 	public:
 		// override
@@ -430,12 +430,12 @@ class flock_t : public thing_t<_ABSTRACTION_>
 			return *_it;
 		}
 
-		inline _ABSTRACTION_ increment__(range_a<> const&)
+		inline ___ego___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline _ABSTRACTION_ increment_()
+		inline ___ego___ increment_()
 		{
 			operator++();
 			return me_();
@@ -455,12 +455,12 @@ class flock_t : public thing_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement__(range_a<> const& _)
+		inline ___ego___ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}
 
-		inline _ABSTRACTION_ decrement_()
+		inline ___ego___ decrement_()
 		{
 			operator--();
 			return me_();
@@ -480,7 +480,7 @@ class flock_t : public thing_t<_ABSTRACTION_>
 		}
 
 		// random access iterator
-		inline _ABSTRACTION_ self_add__(range_a<> const& range)
+		inline ___ego___ self_add__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -489,7 +489,7 @@ class flock_t : public thing_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline _ABSTRACTION_ self_add_(number_a<> const& number)
+		inline ___ego___ self_add_(number_a<> const& number)
 		{
 			_it += number.to_int_64();
 			return me_();
@@ -522,12 +522,12 @@ class flock_t : public thing_t<_ABSTRACTION_>
 
 		inline random_access_const_iterator_a<> operator+(number_a<> const& number) const
 		{
-			_ABSTRACTION_ result = me_();
+			___ego___ result = me_();
 			result.reference() += number.to_int_64();
 			return result;
 		}
 
-		inline _ABSTRACTION_ self_subtract__(range_a<> const& range)
+		inline ___ego___ self_subtract__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
@@ -536,7 +536,7 @@ class flock_t : public thing_t<_ABSTRACTION_>
 			return me_();
 		}
 
-		inline _ABSTRACTION_ self_subtract_(number_a<> const& number)
+		inline ___ego___ self_subtract_(number_a<> const& number)
 		{
 			_it -= number.to_int_64();
 			return me_();
@@ -569,7 +569,7 @@ class flock_t : public thing_t<_ABSTRACTION_>
 
 		inline random_access_const_iterator_a<> operator-(number_a<> const& number) const
 		{
-			_ABSTRACTION_ result = me_();
+			___ego___ result = me_();
 			result.reference() -= number.to_int_64();
 			return result;
 		}
@@ -1090,11 +1090,11 @@ private:
 	friend class ___flock_t_share___;
 };
 
-template <bool CONCURRENT, typename _ABSTRACTION_>
-bool const flock_t<CONCURRENT, _ABSTRACTION_>::___share___ = []()
+template <bool CONCURRENT, typename ___ego___>
+bool const flock_t<CONCURRENT, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	flock_t<CONCURRENT, _ABSTRACTION_>::share(shoal);
+	flock_t<CONCURRENT, ___ego___>::share(shoal);
 	return shoal;
 }();
 

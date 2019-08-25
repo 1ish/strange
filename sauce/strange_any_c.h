@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = any_a<>>
+template <typename ___ego___ = any_a<>>
 class any_c : public one_t
 {
 public:
@@ -30,14 +30,14 @@ public:
 	}
 
 	// erasure
-	inline _ABSTRACTION_ const me_() const
+	inline ___ego___ const me_() const
 	{
-		return _ABSTRACTION_(_meek.lock(), true);
+		return ___ego___(_meek.lock(), true);
 	}
 
-	inline _ABSTRACTION_ me_()
+	inline ___ego___ me_()
 	{
-		return _ABSTRACTION_(_meek.lock(), true);
+		return ___ego___(_meek.lock(), true);
 	}
 
 	// reflection
@@ -107,7 +107,7 @@ public:
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
-		return reflection<_ABSTRACTION_>::cat();
+		return reflection<___ego___>::cat();
 	}
 	
 	inline cat_a<> cat_() const
@@ -122,7 +122,7 @@ public:
 			}
 			return cast<cat_a<>>(result);
 		}
-		return reflection<_ABSTRACTION_>::cat();
+		return reflection<___ego___>::cat();
 	}
 
 	inline any_a<> cats__(range_a<> const& range) const
@@ -132,7 +132,7 @@ public:
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
-		return reflection<_ABSTRACTION_>::cats();
+		return reflection<___ego___>::cats();
 	}
 
 	inline unordered_herd_a<> cats_() const
@@ -147,7 +147,7 @@ public:
 			}
 			return cast<unordered_herd_a<>>(result);
 		}
-		return reflection<_ABSTRACTION_>::cats();
+		return reflection<___ego___>::cats();
 	}
 
 	inline any_a<> kind__(range_a<> const& range) const
@@ -157,7 +157,7 @@ public:
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
-		return reflection<_ABSTRACTION_>::kind();
+		return reflection<___ego___>::kind();
 	}
 
 	inline kind_a<> kind_() const
@@ -172,7 +172,7 @@ public:
 			}
 			return cast<kind_a<>>(result);
 		}
-		return reflection<_ABSTRACTION_>::kind();
+		return reflection<___ego___>::kind();
 	}
 
 	inline any_a<> kinds__(range_a<> const& range) const
@@ -182,7 +182,7 @@ public:
 		{
 			return op.operate_(any_a<>(me_(), true), range);
 		}
-		return reflection<_ABSTRACTION_>::kinds();
+		return reflection<___ego___>::kinds();
 	}
 
 	inline unordered_herd_a<> kinds_() const
@@ -197,7 +197,7 @@ public:
 			}
 			return cast<unordered_herd_a<>>(result);
 		}
-		return reflection<_ABSTRACTION_>::kinds();
+		return reflection<___ego___>::kinds();
 	}
 
 	inline any_a<> operations__(range_a<> const& range) const // cannot be overridden
@@ -497,7 +497,7 @@ protected:
 
 	static inline unordered_shoal_a<> _operations_(shoal_a<> const& creation)
 	{
-		unordered_shoal_a<> operations = reflection<_ABSTRACTION_>::operations();
+		unordered_shoal_a<> operations = reflection<___ego___>::operations();
 		for (auto const& op : creation)
 		{
 			auto const flop = cast<flock_a<>>(op);
@@ -520,11 +520,11 @@ private:
 	friend class ___any_c_share___;
 };
 
-template <typename _ABSTRACTION_>
-bool const any_c<_ABSTRACTION_>::___share___ = []()
+template <typename ___ego___>
+bool const any_c<___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	any_c<_ABSTRACTION_>::share(shoal);
+	any_c<___ego___>::share(shoal);
 	return shoal;
 }();
 

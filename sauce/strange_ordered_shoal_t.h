@@ -4,11 +4,11 @@
 namespace strange
 {
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = ordered_shoal_a<>>
-class ordered_shoal_t : public thing_t<_ABSTRACTION_>
+template <bool CONCURRENT = false, typename ___ego___ = ordered_shoal_a<>>
+class ordered_shoal_t : public thing_t<___ego___>
 {
-	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_iterator_data_a<ITERATOR>>
-	class iterator_t : public thing_t<_ABSTRACTION_>
+	template <typename ITERATOR, typename ___ego___ = bidirectional_iterator_data_a<ITERATOR>>
+	class iterator_t : public thing_t<___ego___>
 	{
 	public:
 		// override
@@ -88,12 +88,12 @@ class ordered_shoal_t : public thing_t<_ABSTRACTION_>
 			throw dis("strange::ordered_shoal::iterator should not be dereferenced");
 		}
 
-		inline _ABSTRACTION_ increment__(range_a<> const&)
+		inline ___ego___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline _ABSTRACTION_ increment_()
+		inline ___ego___ increment_()
 		{
 			operator++();
 			return me_();
@@ -113,12 +113,12 @@ class ordered_shoal_t : public thing_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement__(range_a<> const& _)
+		inline ___ego___ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}
 
-		inline _ABSTRACTION_ decrement_()
+		inline ___ego___ decrement_()
 		{
 			operator--();
 			return me_();
@@ -167,8 +167,8 @@ class ordered_shoal_t : public thing_t<_ABSTRACTION_>
 		{}
 	};
 
-	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_const_iterator_data_a<ITERATOR>>
-	class const_iterator_t : public thing_t<_ABSTRACTION_>
+	template <typename ITERATOR, typename ___ego___ = bidirectional_const_iterator_data_a<ITERATOR>>
+	class const_iterator_t : public thing_t<___ego___>
 	{
 	public:
 		// override
@@ -231,12 +231,12 @@ class ordered_shoal_t : public thing_t<_ABSTRACTION_>
 			return _pair;
 		}
 
-		inline _ABSTRACTION_ increment__(range_a<> const&)
+		inline ___ego___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline _ABSTRACTION_ increment_()
+		inline ___ego___ increment_()
 		{
 			operator++();
 			return me_();
@@ -256,12 +256,12 @@ class ordered_shoal_t : public thing_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement__(range_a<> const& _)
+		inline ___ego___ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}
 
-		inline _ABSTRACTION_ decrement_()
+		inline ___ego___ decrement_()
 		{
 			operator--();
 			return me_();
@@ -688,11 +688,11 @@ private:
 	friend class ___ordered_shoal_t_share___;
 };
 
-template <bool CONCURRENT, typename _ABSTRACTION_>
-bool const ordered_shoal_t<CONCURRENT, _ABSTRACTION_>::___share___ = []()
+template <bool CONCURRENT, typename ___ego___>
+bool const ordered_shoal_t<CONCURRENT, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	ordered_shoal_t<CONCURRENT, _ABSTRACTION_>::share(shoal);
+	ordered_shoal_t<CONCURRENT, ___ego___>::share(shoal);
 	return shoal;
 }();
 

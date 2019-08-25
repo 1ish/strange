@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <bool CONST = false, typename END = nothing_t<>, typename _ABSTRACTION_ = forward_const_iterator_a<>>
-class it_t : public thing_t<_ABSTRACTION_>
+template <bool CONST = false, typename END = nothing_t<>, typename ___ego___ = forward_const_iterator_a<>>
+class it_t : public thing_t<___ego___>
 {
 public:
 	// override
@@ -80,12 +80,12 @@ public:
 		return _thing;
 	}
 
-	inline _ABSTRACTION_ increment__(range_a<> const&)
+	inline ___ego___ increment__(range_a<> const&)
 	{
 		return increment_();
 	}
 
-	inline _ABSTRACTION_ increment_()
+	inline ___ego___ increment_()
 	{
 		operator++();
 		return me_();
@@ -117,11 +117,11 @@ private:
 	friend class ___it_t_share___;
 };
 
-template <bool CONST, typename END, typename _ABSTRACTION_>
-bool const it_t<CONST, END, _ABSTRACTION_>::___share___ = []()
+template <bool CONST, typename END, typename ___ego___>
+bool const it_t<CONST, END, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	it_t<CONST, END, _ABSTRACTION_>::share(shoal);
+	it_t<CONST, END, ___ego___>::share(shoal);
 	return shoal;
 }();
 

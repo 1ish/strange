@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename T, typename _ABSTRACTION_ = operation_a<>>
-class native_extraction_t : public operation_t<_ABSTRACTION_>
+template <typename T, typename ___ego___ = operation_a<>>
+class native_extraction_t : public operation_t<___ego___>
 {
 	using const_member = any_a<>(T::*)(range_a<> const&) const;
 

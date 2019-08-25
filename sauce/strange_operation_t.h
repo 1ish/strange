@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = operation_a<>>
-class operation_t : public thing_t<_ABSTRACTION_>
+template <typename ___ego___ = operation_a<>>
+class operation_t : public thing_t<___ego___>
 {
 public:
 	// operation
@@ -90,14 +90,14 @@ protected:
 
 	static inline unordered_herd_a<> cats(cat_a<> const& cat)
 	{
-		auto result = reflection<_ABSTRACTION_>::cats();
+		auto result = reflection<___ego___>::cats();
 		result.insert(cat);
 		return result;
 	}
 
 	static inline unordered_herd_a<> kinds(kind_a<> const& kind)
 	{
-		auto result = reflection<_ABSTRACTION_>::kinds();
+		auto result = reflection<___ego___>::kinds();
 		result.insert(kind);
 		return result;
 	}

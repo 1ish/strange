@@ -4,8 +4,8 @@
 namespace strange
 {
 
-template <typename _ABSTRACTION_ = expression_a<>>
-class expression_c : public operation_c<_ABSTRACTION_>
+template <typename ___ego___ = expression_a<>>
+class expression_c : public operation_c<___ego___>
 {
 public:
 	// construction
@@ -289,11 +289,11 @@ private:
 	friend class ___expression_c_share___;
 };
 
-template <typename _ABSTRACTION_>
-bool const expression_c<_ABSTRACTION_>::___share___ = []()
+template <typename ___ego___>
+bool const expression_c<___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	expression_c<_ABSTRACTION_>::share(shoal);
+	expression_c<___ego___>::share(shoal);
 	return shoal;
 }();
 

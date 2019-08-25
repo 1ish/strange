@@ -4,11 +4,11 @@
 namespace strange
 {
 
-template <bool CONCURRENT = false, typename _ABSTRACTION_ = ordered_herd_a<>>
-class ordered_herd_t : public thing_t<_ABSTRACTION_>
+template <bool CONCURRENT = false, typename ___ego___ = ordered_herd_a<>>
+class ordered_herd_t : public thing_t<___ego___>
 {
-	template <typename ITERATOR, typename _ABSTRACTION_ = bidirectional_const_iterator_data_a<ITERATOR>>
-	class const_iterator_t : public thing_t<_ABSTRACTION_>
+	template <typename ITERATOR, typename ___ego___ = bidirectional_const_iterator_data_a<ITERATOR>>
+	class const_iterator_t : public thing_t<___ego___>
 	{
 	public:
 		// override
@@ -67,12 +67,12 @@ class ordered_herd_t : public thing_t<_ABSTRACTION_>
 			return *_it;
 		}
 
-		inline _ABSTRACTION_ increment__(range_a<> const&)
+		inline ___ego___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline _ABSTRACTION_ increment_()
+		inline ___ego___ increment_()
 		{
 			operator++();
 			return me_();
@@ -92,12 +92,12 @@ class ordered_herd_t : public thing_t<_ABSTRACTION_>
 		}
 
 		// bidirectional iterator
-		inline _ABSTRACTION_ decrement__(range_a<> const& _)
+		inline ___ego___ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}
 
-		inline _ABSTRACTION_ decrement_()
+		inline ___ego___ decrement_()
 		{
 			operator--();
 			return me_();
@@ -460,11 +460,11 @@ private:
 	friend class ___ordered_herd_t_share___;
 };
 
-template <bool CONCURRENT, typename _ABSTRACTION_>
-bool const ordered_herd_t<CONCURRENT, _ABSTRACTION_>::___share___ = []()
+template <bool CONCURRENT, typename ___ego___>
+bool const ordered_herd_t<CONCURRENT, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	ordered_herd_t<CONCURRENT, _ABSTRACTION_>::share(shoal);
+	ordered_herd_t<CONCURRENT, ___ego___>::share(shoal);
 	return shoal;
 }();
 
