@@ -4,14 +4,14 @@
 namespace strange
 {
 
-template <typename T, typename ___ego___ = operation_a<>>
+template <typename _abstraction_, typename ___ego___ = operation_a<>>
 class native_extraction_t : public operation_t<___ego___>
 {
-	using const_member = any_a<>(T::*)(range_a<> const&) const;
+	using const_member = any_a<>(_abstraction_::*)(range_a<> const&) const;
 
 public:
 	// override
-	using over = thing_o<native_extraction_t<T>>;
+	using over = thing_o<native_extraction_t<_abstraction_>>;
 
 	// construction
 	template <typename... Args>
@@ -20,7 +20,7 @@ public:
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
-		return operation_a<>{ over{ native_extraction_t<T>(fun,
+		return operation_a<>{ over{ native_extraction_t<_abstraction_>(fun,
 			kind_eater_params(flock_t<>::val(std::move(v)))) } };
 	}
 
@@ -82,8 +82,8 @@ public:
 	// function
 	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
 	{
-		assert(check<T>(thing));
-		return (static_cast<T&>(thing).*_function)(range);
+		assert(check<_abstraction_>(thing));
+		return (static_cast<_abstraction_&>(thing).*_function)(range);
 	}
 
 protected:
