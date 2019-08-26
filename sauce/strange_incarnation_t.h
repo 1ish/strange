@@ -12,9 +12,9 @@ public:
 	using over = collection_o<incarnation_t<>>;
 
 	// construction
-	static inline unordered_shoal_a<> val_(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects)
+	static inline unordered_shoal_a<> val_(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects, flock_a<> const& defaults)
 	{
-		return unordered_shoal_a<>{ over{ incarnation_t<>(inspiration, mention, aspects) } };
+		return unordered_shoal_a<>{ over{ incarnation_t<>(inspiration, mention, aspects, defaults) } };
 	}
 
 	// reflection
@@ -29,29 +29,43 @@ public:
 	}
 
 	// incarnation
-	inline void merge(unordered_shoal_a<> const& parent)
+	inline void incarnate(flock_a<> const& mention, flock_a<> const& aspects, flock_a<> const& defaults)
 	{
-		for (auto const& member : parent.extract())
+		auto aspect = aspects.cbegin_();
+		auto value = defaults.cbegin_();
+		for (auto const& name : mention)
 		{
-			if (!check<symbol_a<>>(member.first))
+			if (!check<symbol_a<>>(name))
 			{
-				throw dis("strange::incarnation::val merge passed non-symbol key");
+				throw dis("strange::incarnation::val passed non-symbol dimension name");
 			}
-			auto key = cast<symbol_a<>>(member.first);
-			if (_map.find(key) != _map.cend())
+			if (aspect == aspects.cend_())
 			{
-				// no overrides
-				throw dis("strange::incarnation::val merge invalid override");
+				if (value == defaults.cend_())
+				{
+					_map.emplace(name, no());
+				}
+				else
+				{
+					_map.emplace(name, *value++);
+				}
 			}
-			_map.emplace(key, member.second);
+			else
+			{
+				_map.emplace(name, *aspect++);
+				if (value != defaults.cend_())
+				{
+					++value;
+				}
+			}
 		}
 	}
 
 protected:
-	inline incarnation_t(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects)
-		: unordered_shoal_t{ std_unordered_map_any_any{} }
+	inline incarnation_t(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects, flock_a<> const& defaults)
+		: unordered_shoal_t{ inspiration.extract() }
 	{
-		//TODO
+		incarnate(mention, aspects, defaults);
 	}
 
 private:
