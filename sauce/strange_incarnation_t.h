@@ -12,15 +12,9 @@ public:
 	using over = collection_o<incarnation_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline unordered_shoal_a<> val_(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects)
 	{
-		return unordered_shoal_a<>{ over{ incarnation_t<>{ range } } };
-	}
-
-	template <typename... Args>
-	static inline unordered_shoal_a<> val_(Args&&... args)
-	{
-		return unordered_shoal_a<>{ over{ incarnation_t<>{ flock_t<>::val_(std::forward<Args>(args)...) } } };
+		return unordered_shoal_a<>{ over{ incarnation_t<>(inspiration, mention, aspects) } };
 	}
 
 	// reflection
@@ -54,17 +48,10 @@ public:
 	}
 
 protected:
-	inline incarnation_t(range_a<> const& parents)
+	inline incarnation_t(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects)
 		: unordered_shoal_t{ std_unordered_map_any_any{} }
 	{
-		for (auto const& parent : parents)
-		{
-			if (!check<unordered_shoal_a<>>(parent))
-			{
-				throw dis("strange::incarnation::val passed non-unordered-shoal parent");
-			}
-			merge(cast<unordered_shoal_a<>>(parent));
-		}
+		//TODO
 	}
 
 private:
