@@ -43,16 +43,16 @@ public:
 			{
 				if (value == defaults.cend_())
 				{
-					_map.emplace(name, no());
+					_map.emplace(name, attribution_t<>::val_(no()));
 				}
 				else
 				{
-					_map.emplace(name, *value++);
+					_map.emplace(name, attribution_t<>::val_(*value++));
 				}
 			}
 			else
 			{
-				_map.emplace(name, *aspect++);
+				_map.emplace(name, attribution_t<>::val_(*aspect++));
 				if (value != defaults.cend_())
 				{
 					++value;
