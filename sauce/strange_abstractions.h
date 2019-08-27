@@ -108,6 +108,8 @@
 #define ___derived___ operation_a<>
 #include "strange_expression_a.h"
 
+#include "strange_parser_a.h"
+
 #undef ___root___
 #undef ___derived___
 

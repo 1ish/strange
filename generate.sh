@@ -24,6 +24,7 @@
 ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived.hpp -c ~/source/repos/strange/archetypes/operation.hpp > ~/source/repos/strange/sauce/strange_operation_a.h
 ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/fffinale.hpp -c ~/source/repos/strange/archetypes/ordered_herd.hpp > ~/source/repos/strange/sauce/strange_ordered_herd_a.h
 ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/fffinale.hpp -c ~/source/repos/strange/archetypes/ordered_shoal.hpp > ~/source/repos/strange/sauce/strange_ordered_shoal_a.h
+~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived.hpp -c ~/source/repos/strange/archetypes/parser.hpp > ~/source/repos/strange/sauce/strange_parser_a.h
 ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/ddderived.hpp -c ~/source/repos/strange/archetypes/random_access_const_iterator.hpp > ~/source/repos/strange/sauce/strange_random_access_const_iterator_a.h
 ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/fffinale_1.hpp -c ~/source/repos/strange/archetypes/random_access_const_iterator_data.hpp > ~/source/repos/strange/sauce/strange_random_access_const_iterator_data_a.h
 ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/ddderived.hpp -c ~/source/repos/strange/archetypes/random_access_iterator.hpp > ~/source/repos/strange/sauce/strange_random_access_iterator_a.h

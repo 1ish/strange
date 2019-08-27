@@ -55,6 +55,7 @@ class reflection;
 #include "strange_range_operator_r.h"
 #include "strange_token_r.h"
 #include "strange_tokenizer_r.h"
+#include "strange_parser_r.h"
 #include "strange_creation_r.h"
 #include "strange_abstraction_r.h"
 #include "strange_incarnation_r.h"

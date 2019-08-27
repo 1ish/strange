@@ -15,6 +15,11 @@ any_a<> fun(range_a<> const& x)
 	return no();
 }
 
+TEST(TestCaseName, Parse)
+{
+	auto p = parser_t<>::val_();
+}
+
 TEST(TestCaseName, ForLoop)
 {
 	any_a<> n{ no() };

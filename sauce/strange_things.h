@@ -37,6 +37,7 @@
 #include "strange_range_operator_t.h"
 #include "strange_token_t.h"
 #include "strange_tokenizer_t.h"
+#include "strange_parser_t.h"
 #include "strange_creation_t.h"
 #include "strange_abstraction_t.h"
 #include "strange_incarnation_t.h"
