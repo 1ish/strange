@@ -69,21 +69,61 @@ protected:
 		{
 			throw _token.report_();
 		}
-		expression_a<> result = expression_t<>::val(_token);
+		expression_a<> initial = expression_t<>::val(_token);
 		if (_token.tag() == "symbol" ||
 			_token.tag() == "lake" ||
 			_token.tag() == "int" ||
 			_token.tag() == "float")
 		{
-			result = expression_literal_t<>::val_(_token, flock_t<>::val_(_token.literal_()));
+			// literal
+			initial = expression_literal_t<>::val_(_token, flock_t<>::val_(_token.literal_()));
 		}
-		//TODO tag...
-		if (++_it != _end)
+		else if (_token.tag() == "name")
 		{
-			_token = cast<token_a<>>(*_it);
-			return _subsequent_(result, scope_lake, fixed_herd, kind_shoal);
+			std::string const name = _token.symbol();
+			if (name.c_str()[0] == '_')
+			{
+				if (name.c_str()[name.length()] == '_')
+				{
+					// aspect
+					//TODO ...
+				}
+				else
+				{
+					// intimate
+					//TODO ...
+				}
+			}
+			else if (name.c_str()[name.length()] == '_')
+			{
+				// instruction
+				initial = _instruction_(scope_lake, fixed_herd, kind_shoal);
+			}
+			else
+			{
+				// local
+				//TODO ...
+			}
 		}
-		return result;
+		else if (_token.tag() == "punctuation")
+		{
+			//TODO ...
+		}
+		return _subsequent_(initial, scope_lake, fixed_herd, kind_shoal);
+	}
+
+	inline expression_a<> _instruction_(
+		lake_a<int8_t> scope_lake,
+		unordered_herd_a<> fixed_herd,
+		unordered_shoal_a<> kind_shoal)
+	{
+		if (++_it == _end)
+		{
+			return expression_t<>::val(_token);
+		}
+		_token = cast<token_a<>>(*_it);
+		//TODO ...
+		return expression_t<>::val(_token);
 	}
 
 	inline expression_a<> _subsequent_(
@@ -92,6 +132,12 @@ protected:
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
+		if (++_it == _end)
+		{
+			return initial;
+		}
+		_token = cast<token_a<>>(*_it);
+		//TODO ...
 		return initial;
 	}
 
