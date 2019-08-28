@@ -65,7 +65,34 @@ protected:
 		unordered_herd_a<> fixed_herd = unordered_herd_t<>::val_(),
 		unordered_shoal_a<> kind_shoal = unordered_shoal_t<>::val_())
 	{
-		return expression_t<>::val(_token);
+		if (_token.tag() == "error")
+		{
+			throw _token.report_();
+		}
+		expression_a<> result = expression_t<>::val(_token);
+		if (_token.tag() == "symbol" ||
+			_token.tag() == "lake" ||
+			_token.tag() == "int" ||
+			_token.tag() == "float")
+		{
+			result = expression_literal_t<>::val_(_token, flock_t<>::val_(_token.literal_()));
+		}
+		//TODO tag...
+		if (++_it != _end)
+		{
+			_token = cast<token_a<>>(*_it);
+			return _subsequent_(result, scope_lake, fixed_herd, kind_shoal);
+		}
+		return result;
+	}
+
+	inline expression_a<> _subsequent_(
+		expression_a<> initial,
+		lake_a<int8_t> scope_lake,
+		unordered_herd_a<> fixed_herd,
+		unordered_shoal_a<> kind_shoal)
+	{
+		return initial;
 	}
 
 private:
