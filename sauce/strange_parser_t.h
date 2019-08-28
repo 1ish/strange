@@ -39,7 +39,7 @@ public:
 			return expression_t<>::val(token_t<>::punctuation_val_());
 		}
 		_token = cast<token_a<>>(*_it);
-		return _initial_(sym(""));
+		return _initial_();
 	}
 
 protected:
@@ -60,7 +60,10 @@ protected:
 		_shared += shared();
 	}
 
-	inline expression_a<> _initial_(symbol_a<> const scope)
+	inline expression_a<> _initial_(
+		lake_a<int8_t> scope_lake = lake_int_8_t<>::val_(),
+		unordered_herd_a<> fixed_herd = unordered_herd_t<>::val_(),
+		unordered_shoal_a<> kind_shoal = unordered_shoal_t<>::val_())
 	{
 		return expression_t<>::val(_token);
 	}
