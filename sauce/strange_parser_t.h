@@ -32,16 +32,38 @@ public:
 	inline expression_a<> parse_(range_a<> const& tokenizer)
 	{
 		_tokenizer = tokenizer;
-		return expression_t<>::val(token_t<>::punctuation_val_());
+		_it = _tokenizer.cbegin_();
+		_end = _tokenizer.cend_();
+		if (_it == _end)
+		{
+			return expression_t<>::val(token_t<>::punctuation_val_());
+		}
+		_token = cast<token_a<>>(*_it);
+		return _initial_(sym(""));
 	}
 
 protected:
+	unordered_shoal_a<> _shared;
 	range_a<> _tokenizer;
+	forward_const_iterator_a<> _it;
+	forward_const_iterator_a<> _end;
+	token_a<> _token;
 
 	inline parser_t()
 		: thing_t{}
+		, _shared{ unordered_shoal_t<>::val_() }
 		, _tokenizer{ tokenizer_t<>::val_(river_t<>::val_()) }
-	{}
+		, _it{ _tokenizer.cbegin_() }
+		, _end{ _tokenizer.cend_() }
+		, _token{ token_t<>::punctuation_val_() }
+	{
+		_shared += shared();
+	}
+
+	inline expression_a<> _initial_(symbol_a<> const scope)
+	{
+		return expression_t<>::val(_token);
+	}
 
 private:
 	static bool const ___share___;
