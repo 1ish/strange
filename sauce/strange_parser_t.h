@@ -128,7 +128,7 @@ private:
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
-		auto terms = flock_t<>::val_(expression_literal_t<>::val_(_token, flock_t<>::val_(_token.symbol_()))); //TODO me thing, member
+		auto terms = flock_t<>::val_(expression_me_t<>::val_(_token, flock_t<>::val_()), expression_literal_t<>::val_(_token, flock_t<>::val_(_token.symbol_())));
 		if (++_it != _end)
 		{
 			_token = cast<token_a<>>(*_it);
