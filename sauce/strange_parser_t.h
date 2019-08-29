@@ -39,16 +39,10 @@ public:
 			return expression_t<>::val(token_t<>::punctuation_val_());
 		}
 		_token = cast<token_a<>>(*_it);
-		return _initial_();
+		return _initial();
 	}
 
 protected:
-	unordered_shoal_a<> _shared;
-	range_a<> _tokenizer;
-	forward_const_iterator_a<> _it;
-	forward_const_iterator_a<> _end;
-	token_a<> _token;
-
 	inline parser_t()
 		: thing_t{}
 		, _shared{ unordered_shoal_t<>::val_() }
@@ -60,7 +54,14 @@ protected:
 		_shared += shared();
 	}
 
-	inline expression_a<> _initial_(
+private:
+	unordered_shoal_a<> _shared;
+	range_a<> _tokenizer;
+	forward_const_iterator_a<> _it;
+	forward_const_iterator_a<> _end;
+	token_a<> _token;
+
+	inline expression_a<> _initial(
 		lake_a<int8_t> scope_lake = lake_int_8_t<>::val_(),
 		unordered_herd_a<> fixed_herd = unordered_herd_t<>::val_(),
 		unordered_shoal_a<> kind_shoal = unordered_shoal_t<>::val_())
@@ -85,20 +86,20 @@ protected:
 			{
 				if (name.c_str()[name.length() - 1] == '_')
 				{
-					initial = _aspect_(scope_lake, fixed_herd, kind_shoal);
+					initial = _aspect(scope_lake, fixed_herd, kind_shoal);
 				}
 				else
 				{
-					initial = _intimate_(scope_lake, fixed_herd, kind_shoal);
+					initial = _intimate(scope_lake, fixed_herd, kind_shoal);
 				}
 			}
 			else if (name.c_str()[name.length() - 1] == '_')
 			{
-				initial = _instruction_(scope_lake, fixed_herd, kind_shoal);
+				initial = _instruction(scope_lake, fixed_herd, kind_shoal);
 			}
 			else
 			{
-				initial = _local_(scope_lake, fixed_herd, kind_shoal);
+				initial = _local(scope_lake, fixed_herd, kind_shoal);
 			}
 		}
 		else if (_token.tag() == "punctuation")
@@ -110,10 +111,10 @@ protected:
 			return initial;
 		}
 		_token = cast<token_a<>>(*_it);
-		return _subsequent_(initial, scope_lake, fixed_herd, kind_shoal);
+		return _subsequent(initial, scope_lake, fixed_herd, kind_shoal);
 	}
 
-	inline expression_a<> _aspect_(
+	inline expression_a<> _aspect(
 		lake_a<int8_t> scope_lake,
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
@@ -122,7 +123,7 @@ protected:
 		return expression_t<>::val(_token);
 	}
 
-	inline expression_a<> _intimate_(
+	inline expression_a<> _intimate(
 		lake_a<int8_t> scope_lake,
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
@@ -133,13 +134,13 @@ protected:
 			_token = cast<token_a<>>(*_it);
 			if (_token.tag() == "punctuation" && _token.symbol() == "[")
 			{
-				terms += _flock_(scope_lake, fixed_herd, kind_shoal);
+				terms += _elements(scope_lake, fixed_herd, kind_shoal);
 			}
 		}
 		return expression_intimate_t<>::val_(_token, terms);
 	}
 
-	inline expression_a<> _instruction_(
+	inline expression_a<> _instruction(
 		lake_a<int8_t> scope_lake,
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
@@ -148,7 +149,7 @@ protected:
 		return expression_t<>::val(_token);
 	}
 
-	inline expression_a<> _local_(
+	inline expression_a<> _local(
 		lake_a<int8_t> scope_lake,
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
@@ -157,7 +158,7 @@ protected:
 		return expression_t<>::val(_token);
 	}
 
-	inline expression_a<> _subsequent_(
+	inline expression_a<> _subsequent(
 		expression_a<> initial,
 		lake_a<int8_t> scope_lake,
 		unordered_herd_a<> fixed_herd,
@@ -167,7 +168,7 @@ protected:
 		return initial;
 	}
 
-	inline expression_a<> _flock_(
+	inline expression_a<> _elements(
 		lake_a<int8_t> scope_lake,
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
@@ -176,7 +177,6 @@ protected:
 		return expression_t<>::val(_token);
 	}
 
-private:
 	static bool const ___share___;
 	friend class ___parser_t_share___;
 };
