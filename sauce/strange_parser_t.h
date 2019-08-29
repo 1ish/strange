@@ -105,6 +105,11 @@ protected:
 		{
 			//TODO ...
 		}
+		if (++_it == _end)
+		{
+			return initial;
+		}
+		_token = cast<token_a<>>(*_it);
 		return _subsequent_(initial, scope_lake, fixed_herd, kind_shoal);
 	}
 
@@ -113,11 +118,6 @@ protected:
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
-		if (++_it == _end)
-		{
-			return expression_t<>::val(_token);
-		}
-		_token = cast<token_a<>>(*_it);
 		//TODO ...
 		return expression_t<>::val(_token);
 	}
@@ -127,13 +127,16 @@ protected:
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
-		if (++_it == _end)
+		auto terms = flock_t<>::val_(expression_literal_t<>::val_(_token, flock_t<>::val_(_token.symbol_()))); //TODO me thing, member
+		if (++_it != _end)
 		{
-			return expression_t<>::val(_token);
+			_token = cast<token_a<>>(*_it);
+			if (_token.tag() == "punctuation" && _token.symbol() == "[")
+			{
+				terms += _flock_(scope_lake, fixed_herd, kind_shoal);
+			}
 		}
-		_token = cast<token_a<>>(*_it);
-		//TODO ...
-		return expression_t<>::val(_token);
+		return expression_intimate_t<>::val_(_token, terms);
 	}
 
 	inline expression_a<> _instruction_(
@@ -141,11 +144,6 @@ protected:
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
-		if (++_it == _end)
-		{
-			return expression_t<>::val(_token);
-		}
-		_token = cast<token_a<>>(*_it);
 		//TODO ...
 		return expression_t<>::val(_token);
 	}
@@ -155,11 +153,6 @@ protected:
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
-		if (++_it == _end)
-		{
-			return expression_t<>::val(_token);
-		}
-		_token = cast<token_a<>>(*_it);
 		//TODO ...
 		return expression_t<>::val(_token);
 	}
@@ -170,13 +163,17 @@ protected:
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
-		if (++_it == _end)
-		{
-			return initial;
-		}
-		_token = cast<token_a<>>(*_it);
 		//TODO ...
 		return initial;
+	}
+
+	inline expression_a<> _flock_(
+		lake_a<int8_t> scope_lake,
+		unordered_herd_a<> fixed_herd,
+		unordered_shoal_a<> kind_shoal)
+	{
+		//TODO ...
+		return expression_t<>::val(_token);
 	}
 
 private:
