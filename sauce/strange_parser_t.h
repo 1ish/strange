@@ -156,7 +156,7 @@ private:
 			terms += _elements(scope_lake, fixed_herd, kind_shoal);
 			return expression_intimate_t<>::val_(_token_, terms);
 		}
-		throw dis("strange::parser intimate operation with no arguments:\n") + _token_.report_();
+		throw dis("strange::parser intimate operation with no arguments:\n") + _token_.report_(); //TODO expression_intimate_range_t
 	}
 
 	inline expression_a<> _instruction(
@@ -164,8 +164,27 @@ private:
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
-		//TODO ...
-		return expression_t<>::val(_token_);
+		auto const instruction = _shared_.at_(_token_.symbol_());
+		if (!instruction)
+		{
+			throw dis("strange::parser instruction not recognised:\n") + _token_.report_();
+		}
+		if (++_it_ == _end_)
+		{
+			throw dis("strange::parser instruction with no arguments:\n") + _token_.report_();
+		}
+		_token_ = cast<token_a<>>(*_it_);
+		if (_token_.tag() == "punctuation" && _token_.symbol() == "(")
+		{
+			auto const terms = _elements(scope_lake, fixed_herd, kind_shoal);
+			auto const expression = instruction.operate_(no(), terms);
+			if (!check<expression_a<>>(expression))
+			{
+				throw dis("strange::parser instruction returned non-expression:\n") + _token_.report_();
+			}
+			return cast<expression_a<>>(expression);
+		}
+		throw dis("strange::parser instruction with no arguments:\n") + _token_.report_();
 	}
 
 	inline expression_a<> _local(
@@ -187,13 +206,13 @@ private:
 		return initial;
 	}
 
-	inline expression_a<> _elements(
+	inline flock_a<> _elements(
 		lake_a<int8_t> scope_lake,
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
 		//TODO ...
-		return expression_t<>::val(_token_);
+		return flock_t<>::val_();
 	}
 
 	static bool const ___share___;
