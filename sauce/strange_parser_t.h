@@ -31,57 +31,57 @@ public:
 	// parser
 	inline expression_a<> parse_(range_a<> const& tokenizer)
 	{
-		_tokenizer = tokenizer;
-		_it = _tokenizer.cbegin_();
-		_end = _tokenizer.cend_();
-		if (_it == _end)
+		_tokenizer_ = tokenizer;
+		_it_ = _tokenizer_.cbegin_();
+		_end_ = _tokenizer_.cend_();
+		if (_it_ == _end_)
 		{
 			return expression_t<>::val(token_t<>::punctuation_val_());
 		}
-		_token = cast<token_a<>>(*_it);
+		_token_ = cast<token_a<>>(*_it_);
 		return _initial();
 	}
 
 protected:
 	inline parser_t()
 		: thing_t{}
-		, _shared{ unordered_shoal_t<>::val_() }
-		, _tokenizer{ tokenizer_t<>::val_(river_t<>::val_()) }
-		, _it{ _tokenizer.cbegin_() }
-		, _end{ _tokenizer.cend_() }
-		, _token{ token_t<>::punctuation_val_() }
+		, _shared_{ unordered_shoal_t<>::val_() }
+		, _tokenizer_{ tokenizer_t<>::val_(river_t<>::val_()) }
+		, _it_{ _tokenizer_.cbegin_() }
+		, _end_{ _tokenizer_.cend_() }
+		, _token_{ token_t<>::punctuation_val_() }
 	{
-		_shared += shared();
+		_shared_ += shared();
 	}
 
 private:
-	unordered_shoal_a<> _shared;
-	range_a<> _tokenizer;
-	forward_const_iterator_a<> _it;
-	forward_const_iterator_a<> _end;
-	token_a<> _token;
+	unordered_shoal_a<> _shared_;
+	range_a<> _tokenizer_;
+	forward_const_iterator_a<> _it_;
+	forward_const_iterator_a<> _end_;
+	token_a<> _token_;
 
 	inline expression_a<> _initial(
 		lake_a<int8_t> scope_lake = lake_int_8_t<>::val_(),
 		unordered_herd_a<> fixed_herd = unordered_herd_t<>::val_(),
 		unordered_shoal_a<> kind_shoal = unordered_shoal_t<>::val_())
 	{
-		if (_token.tag() == "error")
+		if (_token_.tag() == "error")
 		{
-			throw dis("strange::parser tokenizer error:\n") + _token.report_();
+			throw dis("strange::parser tokenizer error:\n") + _token_.report_();
 		}
-		expression_a<> initial = expression_t<>::val(_token);
-		if (_token.tag() == "symbol" ||
-			_token.tag() == "lake" ||
-			_token.tag() == "int" ||
-			_token.tag() == "float")
+		expression_a<> initial = expression_t<>::val(_token_);
+		if (_token_.tag() == "symbol" ||
+			_token_.tag() == "lake" ||
+			_token_.tag() == "int" ||
+			_token_.tag() == "float")
 		{
 			// literal
-			initial = expression_literal_t<>::val_(_token, flock_t<>::val_(_token.literal_()));
+			initial = expression_literal_t<>::val_(_token_, flock_t<>::val_(_token_.literal_()));
 		}
-		else if (_token.tag() == "name")
+		else if (_token_.tag() == "name")
 		{
-			std::string const name = _token.symbol();
+			std::string const name = _token_.symbol();
 			if (name.c_str()[0] == '_')
 			{
 				if (name.c_str()[name.length() - 1] == '_')
@@ -102,15 +102,15 @@ private:
 				initial = _local(scope_lake, fixed_herd, kind_shoal);
 			}
 		}
-		else if (_token.tag() == "punctuation")
+		else if (_token_.tag() == "punctuation")
 		{
 			//TODO ...
 		}
-		if (++_it == _end)
+		if (++_it_ == _end_)
 		{
 			return initial;
 		}
-		_token = cast<token_a<>>(*_it);
+		_token_ = cast<token_a<>>(*_it_);
 		return _subsequent(initial, scope_lake, fixed_herd, kind_shoal);
 	}
 
@@ -122,16 +122,16 @@ private:
 		if (scope_lake.empty())
 		{
 			// me._name_[]
-			return expression_intimate_t<>::val_(_token,
-				flock_t<>::val_(expression_me_t<>::val_(_token, flock_t<>::val_()),
-					expression_literal_t<>::val_(_token, flock_t<>::val_(_token.symbol_()))));
+			return expression_intimate_t<>::val_(_token_,
+				flock_t<>::val_(expression_me_t<>::val_(_token_, flock_t<>::val_()),
+					expression_literal_t<>::val_(_token_, flock_t<>::val_(_token_.symbol_()))));
 		}
 		else
 		{
 			// me._scope_name_[]
-			return expression_intimate_t<>::val_(_token,
-				flock_t<>::val_(expression_me_t<>::val_(_token, flock_t<>::val_()),
-					expression_literal_t<>::val_(_token, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + _token.symbol_().to_string())))));
+			return expression_intimate_t<>::val_(_token_,
+				flock_t<>::val_(expression_me_t<>::val_(_token_, flock_t<>::val_()),
+					expression_literal_t<>::val_(_token_, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + _token_.symbol_().to_string())))));
 		}
 	}
 
@@ -142,21 +142,21 @@ private:
 	{
 		// me._name[...] / me._scope_name[...]
 		auto terms = scope_lake.empty()
-			? flock_t<>::val_(expression_me_t<>::val_(_token,
-				flock_t<>::val_()), expression_literal_t<>::val_(_token, flock_t<>::val_(_token.symbol_())))
-			: flock_t<>::val_(expression_me_t<>::val_(_token,
-				flock_t<>::val_()), expression_literal_t<>::val_(_token, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + _token.symbol_().to_string()))));
-		if (++_it == _end)
+			? flock_t<>::val_(expression_me_t<>::val_(_token_,
+				flock_t<>::val_()), expression_literal_t<>::val_(_token_, flock_t<>::val_(_token_.symbol_())))
+			: flock_t<>::val_(expression_me_t<>::val_(_token_,
+				flock_t<>::val_()), expression_literal_t<>::val_(_token_, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + _token_.symbol_().to_string()))));
+		if (++_it_ == _end_)
 		{
-			throw dis("strange::parser intimate operation with no arguments:\n") + _token.report_();
+			throw dis("strange::parser intimate operation with no arguments:\n") + _token_.report_();
 		}
-		_token = cast<token_a<>>(*_it);
-		if (_token.tag() == "punctuation" && _token.symbol() == "[")
+		_token_ = cast<token_a<>>(*_it_);
+		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
 		{
 			terms += _elements(scope_lake, fixed_herd, kind_shoal);
-			return expression_intimate_t<>::val_(_token, terms);
+			return expression_intimate_t<>::val_(_token_, terms);
 		}
-		throw dis("strange::parser intimate operation with no arguments:\n") + _token.report_();
+		throw dis("strange::parser intimate operation with no arguments:\n") + _token_.report_();
 	}
 
 	inline expression_a<> _instruction(
@@ -165,7 +165,7 @@ private:
 		unordered_shoal_a<> kind_shoal)
 	{
 		//TODO ...
-		return expression_t<>::val(_token);
+		return expression_t<>::val(_token_);
 	}
 
 	inline expression_a<> _local(
@@ -174,7 +174,7 @@ private:
 		unordered_shoal_a<> kind_shoal)
 	{
 		//TODO ...
-		return expression_t<>::val(_token);
+		return expression_t<>::val(_token_);
 	}
 
 	inline expression_a<> _subsequent(
@@ -193,7 +193,7 @@ private:
 		unordered_shoal_a<> kind_shoal)
 	{
 		//TODO ...
-		return expression_t<>::val(_token);
+		return expression_t<>::val(_token_);
 	}
 
 	static bool const ___share___;
