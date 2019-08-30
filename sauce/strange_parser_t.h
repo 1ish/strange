@@ -68,7 +68,7 @@ private:
 	{
 		if (_token.tag() == "error")
 		{
-			throw _token.report_();
+			throw dis("strange::parser tokenizer error:\n") + _token.report_();
 		}
 		expression_a<> initial = expression_t<>::val(_token);
 		if (_token.tag() == "symbol" ||
@@ -86,7 +86,7 @@ private:
 			{
 				if (name.c_str()[name.length() - 1] == '_')
 				{
-					initial = _aspect(scope_lake, fixed_herd, kind_shoal);
+					initial = _attribute(scope_lake, fixed_herd, kind_shoal);
 				}
 				else
 				{
@@ -114,13 +114,25 @@ private:
 		return _subsequent(initial, scope_lake, fixed_herd, kind_shoal);
 	}
 
-	inline expression_a<> _aspect(
+	inline expression_a<> _attribute(
 		lake_a<int8_t> scope_lake,
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
-		//TODO ...
-		return expression_t<>::val(_token);
+		if (scope_lake.empty())
+		{
+			// me._name_[]
+			return expression_intimate_t<>::val_(_token,
+				flock_t<>::val_(expression_me_t<>::val_(_token, flock_t<>::val_()),
+					expression_literal_t<>::val_(_token, flock_t<>::val_(_token.symbol_()))));
+		}
+		else
+		{
+			// me._scope_name_[]
+			return expression_intimate_t<>::val_(_token,
+				flock_t<>::val_(expression_me_t<>::val_(_token, flock_t<>::val_()),
+					expression_literal_t<>::val_(_token, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + _token.symbol_().to_string())))));
+		}
 	}
 
 	inline expression_a<> _intimate(
@@ -128,16 +140,23 @@ private:
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
-		auto terms = flock_t<>::val_(expression_me_t<>::val_(_token, flock_t<>::val_()), expression_literal_t<>::val_(_token, flock_t<>::val_(_token.symbol_())));
-		if (++_it != _end)
+		// me._name[...] / me._scope_name[...]
+		auto terms = scope_lake.empty()
+			? flock_t<>::val_(expression_me_t<>::val_(_token,
+				flock_t<>::val_()), expression_literal_t<>::val_(_token, flock_t<>::val_(_token.symbol_())))
+			: flock_t<>::val_(expression_me_t<>::val_(_token,
+				flock_t<>::val_()), expression_literal_t<>::val_(_token, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + _token.symbol_().to_string()))));
+		if (++_it == _end)
 		{
-			_token = cast<token_a<>>(*_it);
-			if (_token.tag() == "punctuation" && _token.symbol() == "[")
-			{
-				terms += _elements(scope_lake, fixed_herd, kind_shoal);
-			}
+			throw dis("strange::parser intimate operation with no arguments:\n") + _token.report_();
 		}
-		return expression_intimate_t<>::val_(_token, terms);
+		_token = cast<token_a<>>(*_it);
+		if (_token.tag() == "punctuation" && _token.symbol() == "[")
+		{
+			terms += _elements(scope_lake, fixed_herd, kind_shoal);
+			return expression_intimate_t<>::val_(_token, terms);
+		}
+		throw dis("strange::parser intimate operation with no arguments:\n") + _token.report_();
 	}
 
 	inline expression_a<> _instruction(
