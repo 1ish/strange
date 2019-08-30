@@ -156,7 +156,8 @@ private:
 			terms += _elements(scope_lake, fixed_herd, kind_shoal);
 			return expression_intimate_t<>::val_(_token_, terms);
 		}
-		throw dis("strange::parser intimate operation with no arguments:\n") + _token_.report_(); //TODO expression_intimate_range_t
+		terms.push_back_(_initial(scope_lake, fixed_herd, kind_shoal));
+		return expression_intimate_range_t<>::val_(_token_, terms);
 	}
 
 	inline expression_a<> _instruction(
