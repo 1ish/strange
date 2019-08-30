@@ -39,6 +39,10 @@ public:
 			return expression_t<>::val(token_t<>::punctuation_val_());
 		}
 		_token_ = cast<token_a<>>(*_it_);
+		if (_token_.tag() == "error")
+		{
+			throw dis("strange::parser tokenizer error:\n") + _token_.report_();
+		}
 		return _initial();
 	}
 
@@ -61,15 +65,29 @@ private:
 	forward_const_iterator_a<> _end_;
 	token_a<> _token_;
 
+	inline bool _next()
+	{
+		if (_it_ == _end_)
+		{
+			return false;
+		}
+		if (++_it_ == _end_)
+		{
+			return false;
+		}
+		_token_ = cast<token_a<>>(*_it_);
+		if (_token_.tag() == "error")
+		{
+			throw dis("strange::parser tokenizer error:\n") + _token_.report_();
+		}
+		return true;
+	}
+
 	inline expression_a<> _initial(
 		lake_a<int8_t> scope_lake = lake_int_8_t<>::val_(),
 		unordered_herd_a<> fixed_herd = unordered_herd_t<>::val_(),
 		unordered_shoal_a<> kind_shoal = unordered_shoal_t<>::val_())
 	{
-		if (_token_.tag() == "error")
-		{
-			throw dis("strange::parser tokenizer error:\n") + _token_.report_();
-		}
 		expression_a<> initial = expression_t<>::val(_token_);
 		if (_token_.tag() == "symbol" ||
 			_token_.tag() == "lake" ||
@@ -106,11 +124,10 @@ private:
 		{
 			//TODO ...
 		}
-		if (++_it_ == _end_)
+		if (!_next())
 		{
 			return initial;
 		}
-		_token_ = cast<token_a<>>(*_it_);
 		return _subsequent(initial, scope_lake, fixed_herd, kind_shoal);
 	}
 
@@ -142,15 +159,14 @@ private:
 	{
 		// me._name[...] / me._scope_name[...]
 		auto terms = scope_lake.empty()
-			? flock_t<>::val_(expression_me_t<>::val_(_token_,
-				flock_t<>::val_()), expression_literal_t<>::val_(_token_, flock_t<>::val_(_token_.symbol_())))
-			: flock_t<>::val_(expression_me_t<>::val_(_token_,
-				flock_t<>::val_()), expression_literal_t<>::val_(_token_, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + _token_.symbol_().to_string()))));
-		if (++_it_ == _end_)
+			? flock_t<>::val_(expression_me_t<>::val_(_token_, flock_t<>::val_()),
+				expression_literal_t<>::val_(_token_, flock_t<>::val_(_token_.symbol_())))
+			: flock_t<>::val_(expression_me_t<>::val_(_token_, flock_t<>::val_()),
+				expression_literal_t<>::val_(_token_, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + _token_.symbol_().to_string()))));
+		if (!_next())
 		{
 			throw dis("strange::parser intimate operation with no arguments:\n") + _token_.report_();
 		}
-		_token_ = cast<token_a<>>(*_it_);
 		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
 		{
 			terms += _elements(scope_lake, fixed_herd, kind_shoal);
@@ -170,11 +186,10 @@ private:
 		{
 			throw dis("strange::parser instruction not recognised:\n") + _token_.report_();
 		}
-		if (++_it_ == _end_)
+		if (!_next())
 		{
 			throw dis("strange::parser instruction with no arguments:\n") + _token_.report_();
 		}
-		_token_ = cast<token_a<>>(*_it_);
 		if (_token_.tag() == "punctuation" && _token_.symbol() == "(")
 		{
 			auto const terms = _elements(scope_lake, fixed_herd, kind_shoal);
@@ -193,8 +208,18 @@ private:
 		unordered_herd_a<> fixed_herd,
 		unordered_shoal_a<> kind_shoal)
 	{
+		auto const name = _token_.symbol_();
+		auto const kind = kind_shoal.at_(name);
+		if (kind)
+		{
+			if (_next())
+			{
+				//TODO ...
+			}
+			return expression_local_at_t<>::val_(_token_, flock_t<>::val_(name));
+		}
 		//TODO ...
-		return expression_t<>::val(_token_);
+		return expression_local_at_t<>::val_(_token_, flock_t<>::val_(name));
 	}
 
 	inline expression_a<> _subsequent(
