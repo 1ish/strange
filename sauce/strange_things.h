@@ -40,6 +40,7 @@
 #include "strange_parser_t.h"
 #include "strange_creation_t.h"
 #include "strange_abstraction_t.h"
+#include "strange_introspection_t.h"
 #include "strange_incarnation_t.h"
 #include "strange_expression_t.h"
 #include "strange_expression_literal_t.h"

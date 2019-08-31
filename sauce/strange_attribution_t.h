@@ -28,13 +28,18 @@ public:
 	{}
 
 	// function
-	inline any_a<> operate_(any_a<>&, range_a<> const&) const
+	inline any_a<> operate_(any_a<>&, range_a<> const& range) const
 	{
+		auto const it = range.cbegin_();
+		if (it != range.cend_())
+		{
+			_thing = *it;
+		}
 		return _thing;
 	}
 
 protected:
-	any_a<> const _thing;
+	any_a<> mutable _thing;
 
 	inline attribution_t(any_a<> const& thing)
 		: operation_t{}
