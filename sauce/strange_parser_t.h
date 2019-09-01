@@ -216,37 +216,28 @@ private:
 	{
 		auto const token = _token_;
 		auto const name = _token_.symbol_();
-		bool const fixed = fixed_herd.has(name);
-		auto const kind = kind_shoal.at_(name);
+		bool fixed = fixed_herd.has(name);
+		auto kind = kind_shoal.at_(name);
+		bool insert = false;
+		bool update = false;
 		if (_next())
 		{
 			if (kind)
 			{
 				if (_token_.tag() == "punctuation")
 				{
-					if (fixed && (
-						_token_.symbol() == "#=" || _token_.symbol() == "#<" ||
-						_token_.symbol() == ":=" || _token_.symbol() == ":<"))
+					auto const op = _token_.symbol();
+					if (fixed && (op == "#=" || op == "#<" || op == ":=" || op == ":<"))
 					{
 						throw dis("strange::parser cannot overwrite fixed variable") + _token_.report_();
 					}
-					if (!fixed && (
-						_token_.symbol() == "#=" || _token_.symbol() == "#<"))
+					if (!fixed && (op == "#=" || op == "#<"))
 					{
 						throw dis("strange::parser cannot overwrite variable with fixed") + _token_.report_();
 					}
-					if (_token_.symbol() == "#=" || _token_.symbol() == ":=")
+					if (op == ":=")
 					{
-						if (!_next())
-						{
-							throw dis("strange::parser local assignment with no right-hand side") + token.report_();
-						}
-						if (_token_.symbol() == "#=")
-						{
-							unordered_herd_a<>(fixed_herd, true).insert(name);
-						}
-						unordered_shoal_a<>(kind_shoal, true).insert_(name, kind_t<>::val_());
-						return expression_local_update_t<>::val_(token, flock_t<>::val_(name, kind_t<>::val_(), _initial(scope_lake, fixed_herd, kind_shoal)));
+						update = true;
 					}
 					//TODO ...
 				}
@@ -254,6 +245,26 @@ private:
 			else
 			{
 
+			}
+		}
+		if (insert || update)
+		{
+			if (!_next())
+			{
+				throw dis("strange::parser local assignment with no right-hand side") + token.report_();
+			}
+			if (insert)
+			{
+				if (fixed)
+				{
+					unordered_herd_a<>(fixed_herd, true).insert(name);
+				}
+				unordered_shoal_a<>(kind_shoal, true).insert_(name, kind);
+				return expression_local_insert_t<>::val_(token, flock_t<>::val_(name, kind, _initial(scope_lake, fixed_herd, kind_shoal)));
+			}
+			if (update)
+			{
+				return expression_local_update_t<>::val_(token, flock_t<>::val_(name, kind, _initial(scope_lake, fixed_herd, kind_shoal)));
 			}
 		}
 		return expression_local_at_t<>::val_(token, flock_t<>::val_(name));
