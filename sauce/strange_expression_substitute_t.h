@@ -31,7 +31,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate_(any_a<>&, range_a<> const&) const
 	{
 		return _literal;
 	}

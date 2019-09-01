@@ -103,7 +103,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& _, range_a<> const& range) const
+	inline any_a<> operate_(any_a<>&, range_a<> const& range) const
 	{
 		auto local_shoal = unordered_shoal_t<>::val_();
 		auto& local = local_shoal.reference();
