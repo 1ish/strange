@@ -156,6 +156,9 @@ TEST(TestCaseName, ForLoop)
 
 	range_of_a<> rof = range_of_t<>::val_();
 	auto rofs = range_of_t<symbol_a<>>::val_();
+
+	auto f1 = flock_t<>::val_(number_int_64_t<>::val(1), number_int_64_t<>::val(2), number_int_64_t<>::val(3));
+	auto a1 = f1 | native_function_t<>::val(fun);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

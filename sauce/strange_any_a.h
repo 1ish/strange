@@ -114,6 +114,18 @@ namespace strange {
     		return *this;
     	}
     
+    	inline any_a operator|(any_a& adaptor) const
+    	{
+    		if (check<range_a>(*this))
+    		{
+    			return adaptor.operate(adaptor, cast<range_a>(*this));
+    		}
+    		else
+    		{
+    			return adaptor.operate(adaptor, ranged_());
+    		}
+    	}
+    
      inline one_t const & const_thing ( ) const
      { assert(handle_); return read().const_thing( ); }
      inline one_t & mutable_thing ( )
