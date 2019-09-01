@@ -115,7 +115,7 @@ public:
 			throw dis("strange::thing::invoke passed short range");
 		}
 		any_a<> member = *it;
-		return invoke(thing, member, range_t<>::val_(++it, range.cend_()));
+		return invoke_member(thing, member, range_t<>::val_(++it, range.cend_()));
 	}
 
 	static inline any_a<> invoke_(any_a<>& thing, range_a<> const& range)
@@ -126,10 +126,10 @@ public:
 			throw dis("strange::thing::invoke passed short range");
 		}
 		any_a<> member = *it;
-		return invoke(thing, member, range_t<>::val_(++it, range.cend_()));
+		return invoke_member(thing, member, range_t<>::val_(++it, range.cend_()));
 	}
 
-	static inline any_a<> invoke(any_a<>& thing, any_a<> const& member, range_a<> const& range)
+	static inline any_a<> invoke_member(any_a<>& thing, any_a<> const& member, range_a<> const& range)
 	{
 		if (!thing.operations_().has_(member))
 		{
