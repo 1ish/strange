@@ -43,7 +43,7 @@ public:
 		{
 			throw dis("strange::parser tokenizer error:\n") + _token_.report_();
 		}
-		return _initial();
+		return _initial(lake_int_8_t<>::val_(), unordered_herd_t<>::val_(), unordered_shoal_t<>::val_());
 	}
 
 protected:
@@ -84,9 +84,9 @@ private:
 	}
 
 	inline expression_a<> _initial(
-		lake_a<int8_t> const& scope_lake = lake_int_8_t<>::val_(),
-		unordered_herd_a<> const& fixed_herd = unordered_herd_t<>::val_(),
-		unordered_shoal_a<> const& kind_shoal = unordered_shoal_t<>::val_())
+		lake_a<int8_t> const& scope_lake,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
 	{
 		expression_a<> initial = expression_t<>::val(_token_);
 		bool consumed = false;
@@ -216,12 +216,44 @@ private:
 	{
 		auto const token = _token_;
 		auto const name = _token_.symbol_();
+		bool const fixed = fixed_herd.has(name);
 		auto const kind = kind_shoal.at_(name);
 		if (_next())
 		{
-			//TODO ...
 			if (kind)
 			{
+				if (_token_.tag() == "punctuation")
+				{
+					if (fixed && (
+						_token_.symbol() == "#=" || _token_.symbol() == "#<" ||
+						_token_.symbol() == ":=" || _token_.symbol() == ":<"))
+					{
+						throw dis("strange::parser cannot overwrite fixed variable") + _token_.report_();
+					}
+					if (!fixed && (
+						_token_.symbol() == "#=" || _token_.symbol() == "#<"))
+					{
+						throw dis("strange::parser cannot overwrite variable with fixed") + _token_.report_();
+					}
+					if (_token_.symbol() == "#=" || _token_.symbol() == ":=")
+					{
+						if (!_next())
+						{
+							throw dis("strange::parser local assignment with no right-hand side") + token.report_();
+						}
+						if (_token_.symbol() == "#=")
+						{
+							unordered_herd_a<>(fixed_herd, true).insert(name);
+						}
+						unordered_shoal_a<>(kind_shoal, true).insert_(name, kind_t<>::val_());
+						return expression_local_update_t<>::val_(token, flock_t<>::val_(name, kind_t<>::val_(), _initial(scope_lake, fixed_herd, kind_shoal)));
+					}
+					//TODO ...
+				}
+			}
+			else
+			{
+
 			}
 		}
 		return expression_local_at_t<>::val_(token, flock_t<>::val_(name));
