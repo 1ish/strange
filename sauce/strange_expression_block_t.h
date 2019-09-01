@@ -29,7 +29,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		auto result_range = range_operator_t<>::val_(_terms, thing, range);
 		auto it = result_range.cbegin_();

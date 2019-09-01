@@ -35,7 +35,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return reflection<expression_c<>>::type();
 	}
@@ -45,7 +45,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("strange::expression_creature::type returned non-symbol");
@@ -60,7 +60,7 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
 		share(shoal);
@@ -72,7 +72,7 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("strange::expression_creature::shared returned non-unordered-shoal");
@@ -95,11 +95,11 @@ public:
 		auto const op = _operations.at_string("evaluate");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		auto local = unordered_shoal_t<>::val_();
 		local.insert_string("$", unordered_shoal_t<true>::val_());
-		return operate_(local, range_t<>::val_());
+		return operate(local, range_t<>::val_());
 	}
 
 	inline any_a<> evaluate_() const
@@ -107,11 +107,11 @@ public:
 		auto const op = _operations.at_string("evaluate");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::val_());
 		}
 		auto local = unordered_shoal_t<>::val_();
 		local.insert_string("$", unordered_shoal_t<true>::val_());
-		return operate_(local, range_t<>::val_());
+		return operate(local, range_t<>::val_());
 	}
 
 	inline any_a<> token__(range_a<> const& range) const
@@ -119,7 +119,7 @@ public:
 		auto const op = _operations.at_string("token");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return token_t<>::punctuation_val_();
 	}
@@ -129,7 +129,7 @@ public:
 		auto const op = _operations.at_string("token");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<token_a<>>(result))
 			{
 				throw dis("strange::expression_creature::token returned non-token");
@@ -144,7 +144,7 @@ public:
 		auto const op = _operations.at_string("terms");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return flock_t<>::val_();
 	}
@@ -154,7 +154,7 @@ public:
 		auto const op = _operations.at_string("terms");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<flock_a<>>(result))
 			{
 				throw dis("strange::expression_creature::terms returned non-flock");
@@ -169,7 +169,7 @@ public:
 		auto const op = _operations.at_string("generate");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -207,7 +207,7 @@ public:
 		auto const op = _operations.at_string("generate");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), flock_t<>::val_(version, indent, river));
+			return op.operate(any_a<>(me_(), true), flock_t<>::val_(version, indent, river));
 		}
 		return river;
 	}
@@ -217,7 +217,7 @@ public:
 		auto const op = _operations.at_string("generate");
 		if (op)
 		{
-			op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(version), number_int_64_t<>::val(indent), river));
+			op.operate(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(version), number_int_64_t<>::val(indent), river));
 		}
 	}
 
@@ -226,7 +226,7 @@ public:
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -264,7 +264,7 @@ public:
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), flock_t<>::val_(version, indent, river));
+			return op.operate(any_a<>(me_(), true), flock_t<>::val_(version, indent, river));
 		}
 		return river;
 	}
@@ -274,7 +274,7 @@ public:
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			op.operate_(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(version), number_int_64_t<>::val(indent), river));
+			op.operate(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(version), number_int_64_t<>::val(indent), river));
 		}
 	}
 

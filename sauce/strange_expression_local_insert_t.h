@@ -57,7 +57,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
@@ -66,7 +66,7 @@ public:
 		}
 #endif
 		auto& local = static_cast<unordered_shoal_a<>&>(thing).reference();
-		auto val = _val.operate_(thing, range);
+		auto val = _val.operate(thing, range);
 		if (!val.cats_().has_(_cat))
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::operate cat does not include value");

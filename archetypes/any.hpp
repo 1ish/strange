@@ -69,8 +69,8 @@ public:
 	inline any_a visit_(inventory_a& inventory) const;
 
 	// function
-	inline any_a invoke_(any_a& thing, range_a const& range) const;
-	inline any_a operate_(any_a& thing, range_a const& range) const;
+	inline any_a invoke(any_a& thing, range_a const& range) const;
+	inline any_a operate(any_a& thing, range_a const& range) const;
 
 	// identification
 	inline any_a identity__(range_a const& _) const;

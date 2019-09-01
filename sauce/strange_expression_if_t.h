@@ -57,13 +57,13 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		if (_condition.operate_(thing, range))
+		if (_condition.operate(thing, range))
 		{
-			return _yay.operate_(thing, range);
+			return _yay.operate(thing, range);
 		}
-		return _nay.operate_(thing, range);
+		return _nay.operate(thing, range);
 	}
 
 	// expression

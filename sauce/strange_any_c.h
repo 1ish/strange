@@ -46,7 +46,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return reflection<any_c<>>::type();
 	}
@@ -56,7 +56,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("strange::any_creature::type returned non-symbol");
@@ -71,7 +71,7 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
 		share(shoal);
@@ -83,7 +83,7 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("strange::any_creature::shared returned non-unordered-shoal");
@@ -105,7 +105,7 @@ public:
 		auto const op = _operations.at_string("cat");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return reflection<___ego___>::cat();
 	}
@@ -115,7 +115,7 @@ public:
 		auto const op = _operations.at_string("cat");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<cat_a<>>(result))
 			{
 				throw dis("strange::any_creature::shared returned non-cat");
@@ -130,7 +130,7 @@ public:
 		auto const op = _operations.at_string("cats");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return reflection<___ego___>::cats();
 	}
@@ -140,7 +140,7 @@ public:
 		auto const op = _operations.at_string("cats");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<unordered_herd_a<>>(result))
 			{
 				throw dis("strange::any_creature::shared returned non-unordered-herd");
@@ -155,7 +155,7 @@ public:
 		auto const op = _operations.at_string("kind");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return reflection<___ego___>::kind();
 	}
@@ -165,7 +165,7 @@ public:
 		auto const op = _operations.at_string("kind");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<kind_a<>>(result))
 			{
 				throw dis("strange::any_creature::shared returned non-kind");
@@ -180,7 +180,7 @@ public:
 		auto const op = _operations.at_string("kinds");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return reflection<___ego___>::kinds();
 	}
@@ -190,7 +190,7 @@ public:
 		auto const op = _operations.at_string("kinds");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<unordered_herd_a<>>(result))
 			{
 				throw dis("strange::any_creature::shared returned non-unordered-herd");
@@ -215,7 +215,7 @@ public:
 		auto const op = _operations.at_string("eater");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return no();
 	}
@@ -225,7 +225,7 @@ public:
 		auto const op = _operations.at_string("eater");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::val_());
 		}
 		return no();
 	}
@@ -235,7 +235,7 @@ public:
 		auto const op = _operations.at_string("feeder");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return no();
 	}
@@ -246,7 +246,7 @@ public:
 		auto const op = _operations.at_string("visit");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return thing_t<>::operate__(range);
 	}
@@ -257,12 +257,12 @@ public:
 	}
 
 	// function
-	inline any_a<> invoke_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> invoke(any_a<>& thing, range_a<> const& range) const
 	{
 		auto const op = _operations.at_string("invoke");
 		if (op)
 		{
-			op.operate_(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
+			op.operate(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
 		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -274,15 +274,15 @@ public:
 		{
 			throw dis("strange::any_creature::invoke passed non-existent member");
 		}
-		return thing.operations_().at_(member).operate_(thing, range_t<>::val_(++it, range.cend_()));
+		return thing.operations_().at_(member).operate(thing, range_t<>::val_(++it, range.cend_()));
 	}
 
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		auto const op = _operations.at_string("operate");
 		if (op)
 		{
-			op.operate_(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
+			op.operate(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
 		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -290,7 +290,7 @@ public:
 			throw dis("strange::any_creature::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operation.operate_(thing, range_t<>::val_(++it, range.cend_()));
+		return operation.operate(thing, range_t<>::val_(++it, range.cend_()));
 	}
 
 	// identification
@@ -345,7 +345,7 @@ public:
 		auto const op = _operations.at_string("same");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -360,7 +360,7 @@ public:
 		auto const op = _operations.at_string("same");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), thing.ranged_());
+			return op.operate(any_a<>(me_(), true), thing.ranged_());
 		}
 		return identical_(thing);
 	}
@@ -370,7 +370,7 @@ public:
 		auto const op = _operations.at_string("same");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), thing.ranged_());
+			return op.operate(any_a<>(me_(), true), thing.ranged_());
 		}
 		return identical(thing);
 	}
@@ -400,7 +400,7 @@ public:
 		auto const op = _operations.at_string("hash");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return number_uint_64_t<>::val(uint64_t(std::hash<void const*>{}(identity())));
 	}
@@ -410,7 +410,7 @@ public:
 		auto const op = _operations.at_string("hash");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
 				throw dis("strange::any_creature::hash returned non-number-uint64");
@@ -425,7 +425,7 @@ public:
 		auto const op = _operations.at_string("hash");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
 				throw dis("strange::creature::hash returned non-number-uint64");
@@ -481,7 +481,7 @@ public:
 		{
 			throw dis("strange::creature::intimate passed non-existent member");
 		}
-		return creation.at_(member).operate_(thing, range);
+		return creation.at_(member).operate(thing, range);
 	}
 
 protected:

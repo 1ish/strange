@@ -1,10 +1,10 @@
 #ifndef COM_ONEISH_STRANGE_TOKEN_A_H
 #define COM_ONEISH_STRANGE_TOKEN_A_H
 
- //#include "any_forward.hpp"
- //#include "range_forward.hpp"
- //#include "symbol_forward.hpp"
- //#include "misunderstanding_forward.hpp"
+ //# include "any_forward.hpp"
+ //# include "range_forward.hpp"
+ //# include "symbol_forward.hpp"
+ //# include "misunderstanding_forward.hpp"
 #include <algorithm>
 #include <cassert>
 #include <functional>

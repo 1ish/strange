@@ -168,14 +168,14 @@ namespace
 TEST(StrangeThing, Dismemberment) {
 	EXPECT_THROW({
 		const Ptr symbol = Thing::sym_("symbol");
-		symbol->invoke_("nonexistent");
+		symbol->invoke("nonexistent");
 	}, Thing::Dismemberment);
 }
 
 TEST(StrangeThing, Mutilation) {
 	EXPECT_THROW({
 		const Ptr symbol = Thing::sym_("symbol");
-		symbol->invoke_("next");
+		symbol->invoke("next");
 	}, Thing::Mutilation);
 }
 
@@ -254,7 +254,7 @@ TEST(StrangeParser, TokenError) {
 	}
 	catch (const Ptr& err)
 	{
-		const Ptr to_lake = err->invoke_("to_lake");
+		const Ptr to_lake = err->invoke("to_lake");
 		const auto lake = Thing::dynamic_<Lake>(to_lake);
 		ASSERT_NE(lake, std::shared_ptr<Lake>(0));
 		error = lake->get_();
@@ -274,7 +274,7 @@ TEST(StrangeParser, ParseError) {
 	}
 	catch (const Ptr& err)
 	{
-		const Ptr to_lake = err->invoke_("to_lake");
+		const Ptr to_lake = err->invoke("to_lake");
 		const auto lake = Thing::dynamic_<Lake>(to_lake);
 		ASSERT_NE(lake, std::shared_ptr<Lake>(0));
 		error = lake->get_();
@@ -297,7 +297,7 @@ TEST(StrangeParser, EvaluateError) {
 	}
 	catch (const Ptr& thing)
 	{
-		const Ptr to_lake = thing->invoke_("to_lake");
+		const Ptr to_lake = thing->invoke("to_lake");
 		const auto lake = Thing::dynamic_<Lake>(to_lake);
 		if (lake)
 		{
@@ -325,7 +325,7 @@ TEST(StrangeParser, Evaluate) {
 	}
 	catch (const Ptr& err)
 	{
-		const Ptr to_lake = err->invoke_("to_lake");
+		const Ptr to_lake = err->invoke("to_lake");
 		const auto lake = Thing::dynamic_<Lake>(to_lake);
 		ASSERT_NE(lake, std::shared_ptr<Lake>(0));
 		error = lake->get_();
@@ -346,7 +346,7 @@ TEST(StrangeParser, Evaluate) {
 	}
 	catch (const Ptr& thing)
 	{
-		const Ptr to_lake = thing->invoke_("to_lake");
+		const Ptr to_lake = thing->invoke("to_lake");
 		const auto lake = Thing::dynamic_<Lake>(to_lake);
 		if (lake)
 		{

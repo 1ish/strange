@@ -66,7 +66,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
@@ -79,7 +79,7 @@ public:
 		any_a<> result = no();
 		try
 		{
-			auto for_range = _range.operate_(thing, range);
+			auto for_range = _range.operate(thing, range);
 			if (!check<range_a<>>(for_range))
 			{
 				throw dis(_token.report() + "strange::expression_for_range::operate expression returned non-range");
@@ -93,7 +93,7 @@ public:
 				it->second = for_thing;
 				try
 				{
-					result = _loop.operate_(thing, range);
+					result = _loop.operate(thing, range);
 				}
 				catch (continue_i&)
 				{

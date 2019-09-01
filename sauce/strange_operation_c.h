@@ -35,7 +35,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		return reflection<operation_c<>>::type();
 	}
@@ -45,7 +45,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("strange::operation_creature::type returned non-symbol");
@@ -60,7 +60,7 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
 		share(shoal);
@@ -72,7 +72,7 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			auto const result = op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("strange::operation_creature::shared returned non-unordered-shoal");
@@ -95,7 +95,7 @@ public:
 		auto const op = _operations.at_string("pure");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
@@ -110,7 +110,7 @@ public:
 		auto const op = _operations.at_string("pure");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::val_());
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
@@ -125,7 +125,7 @@ public:
 		auto const op = _operations.at_string("pure");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::val_());
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
@@ -140,7 +140,7 @@ public:
 		auto const op = _operations.at_string("literal");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range);
+			return op.operate(any_a<>(me_(), true), range);
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
@@ -155,7 +155,7 @@ public:
 		auto const op = _operations.at_string("literal");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::val_());
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
@@ -170,7 +170,7 @@ public:
 		auto const op = _operations.at_string("literal");
 		if (op)
 		{
-			return op.operate_(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::val_());
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))

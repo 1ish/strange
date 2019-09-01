@@ -115,7 +115,7 @@ class range_operator_t : public thing_t<___ego___>
 			{
 				return no();
 			}
-			return _it.get_().operate_(_thing_ref, _range_ref);
+			return _it.get_().operate(_thing_ref, _range_ref);
 		}
 
 	protected:

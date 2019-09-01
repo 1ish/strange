@@ -28,7 +28,7 @@ public:
 	{}
 
 	// function
-	inline any_a<> operate_(any_a<>&, range_a<> const&) const
+	inline any_a<> operate(any_a<>&, range_a<> const&) const
 	{
 		any_a<> copy = _thing;
 		copy.mutable_thing();

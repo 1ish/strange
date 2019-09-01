@@ -81,7 +81,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
@@ -91,7 +91,7 @@ public:
 #endif
 		try
 		{
-			return _expression.operate_(thing, range);
+			return _expression.operate(thing, range);
 		}
 		catch (any_a<>& exception)
 		{
@@ -102,7 +102,7 @@ public:
 				if (exception.cats_().has_(*cit++))
 				{
 					cast<unordered_shoal_a<>>(thing).update_(name, exception);
-					return vit->operate_(thing, range);
+					return vit->operate(thing, range);
 				}
 				++vit;
 			}

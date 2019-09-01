@@ -118,7 +118,7 @@ public:
 		return invoke_member(thing, member, range_t<>::val_(++it, range.cend_()));
 	}
 
-	static inline any_a<> invoke_(any_a<>& thing, range_a<> const& range)
+	static inline any_a<> invoke(any_a<>& thing, range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -135,7 +135,7 @@ public:
 		{
 			throw dis("strange::thing::invoke passed non-existent member");
 		}
-		return thing.operations_().at_(member).operate_(thing, range);
+		return thing.operations_().at_(member).operate(thing, range);
 	}
 
 	static inline any_a<> operate__(range_a<> const& range)
@@ -151,10 +151,10 @@ public:
 			throw dis("strange::thing::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operation.operate_(thing, range_t<>::val_(++it, range.cend_()));
+		return operation.operate(thing, range_t<>::val_(++it, range.cend_()));
 	}
 
-	static inline any_a<> operate_(any_a<>& thing, range_a<> const& range)
+	static inline any_a<> operate(any_a<>& thing, range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -162,7 +162,7 @@ public:
 			throw dis("strange::thing::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operation.operate_(thing, range_t<>::val_(++it, range.cend_()));
+		return operation.operate(thing, range_t<>::val_(++it, range.cend_()));
 	}
 
 	// identification

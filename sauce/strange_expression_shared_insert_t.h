@@ -57,7 +57,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
@@ -77,7 +77,7 @@ public:
 			throw dis(_token.report() + "strange::expression_shared_insert::operate passed non-unordered-shoal shared");
 		}
 #endif
-		auto val = _val.operate_(thing, range);
+		auto val = _val.operate(thing, range);
 		if (!val.cats_().has_(_cat))
 		{
 			throw dis(_token.report() + "strange::expression_shared_insert::operate cat does not include value");

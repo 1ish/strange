@@ -48,10 +48,10 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto thing_term = _thing.operate_(thing, range);
-		auto range_term = _range.operate_(thing, range);
+		auto thing_term = _thing.operate(thing, range);
+		auto range_term = _range.operate(thing, range);
 		if (!check<range_a<>>(range_term))
 		{
 			throw dis(_token.report() + "strange::expression_intimate_range::operate with non-range term");

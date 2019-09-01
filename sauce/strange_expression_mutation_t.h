@@ -103,7 +103,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		auto local_shoal = unordered_shoal_t<>::val_();
 		auto& local = local_shoal.reference();
@@ -126,7 +126,7 @@ public:
 		}
 		try
 		{
-			auto result = _expression.operate_(local_shoal, range);
+			auto result = _expression.operate(local_shoal, range);
 			if (!result.cats_().has_(_result))
 			{
 				throw dis(_token.report() + "strange::expression_mutation::operate cat does not include result");

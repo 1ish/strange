@@ -122,13 +122,13 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		if (_count <= 1)
 		{
 			return cat_t<>::val_(_order, _name);
 		}
-		auto dimensions = _dimensions.operate_(thing, range);
+		auto dimensions = _dimensions.operate(thing, range);
 		if (!check<flock_a<>>(dimensions))
 		{
 			throw dis(_token.report() + "strange::expression_cat::operate dimensions are not a flock");
@@ -137,7 +137,7 @@ public:
 		{
 			return cat_t<>::val_(_order, _name, cast<flock_a<>>(dimensions));
 		}
-		auto parameters = _parameters.operate_(thing, range);
+		auto parameters = _parameters.operate(thing, range);
 		if (!check<flock_a<>>(parameters))
 		{
 			throw dis(_token.report() + "strange::expression_cat::operate parameters are not a flock");
@@ -146,7 +146,7 @@ public:
 		{
 			return cat_t<>::val_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters));
 		}
-		auto result = _result.operate_(thing, range);
+		auto result = _result.operate(thing, range);
 		if (!check<symbol_a<>>(result))
 		{
 			throw dis(_token.report() + "strange::expression_cat::operate result is not a symbol");

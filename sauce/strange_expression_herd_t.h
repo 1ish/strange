@@ -29,7 +29,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		return unordered_herd_t<>::val__(range_operator_t<>::val_(_terms, thing, range));
 	}

@@ -12,12 +12,12 @@ public:
 
 	inline any_a operator[](range_a const& range)
 	{
-		return invoke_(*this, range);
+		return invoke(*this, range);
 	}
 
 	inline any_a operator()(range_a const& range)
 	{
-		return operate_(*this, range);
+		return operate(*this, range);
 	}
 
 	inline operator bool() const

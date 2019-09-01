@@ -28,7 +28,7 @@ public:
 	{}
 
 	// function
-	inline any_a<> operate_(any_a<>&, range_a<> const& range) const
+	inline any_a<> operate(any_a<>&, range_a<> const& range) const
 	{
 		if (range.cbegin_() != range.cend_())
 		{

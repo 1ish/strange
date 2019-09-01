@@ -58,7 +58,7 @@ public:
 		}
 		else
 		{
-			auto const type_any = type_op.operate_(no(), range_t<>::val_());
+			auto const type_any = type_op.operate(no(), range_t<>::val_());
 			if (!check<symbol_a<>>(type_any))
 			{
 				throw dis("strange::creation::val merge parent type returned non-symbol");
@@ -74,7 +74,7 @@ public:
 		}
 		else
 		{
-			auto const cat_any = cat_op.operate_(no(), range_t<>::val_());
+			auto const cat_any = cat_op.operate(no(), range_t<>::val_());
 			if (!check<cat_a<>>(cat_any))
 			{
 				throw dis("strange::creation::val merge parent cat returned non-cat");
@@ -87,7 +87,7 @@ public:
 		any_a<> cats_any = no();
 		if (cats_op)
 		{
-			cats_any = cats_op.operate_(no(), range_t<>::val_());
+			cats_any = cats_op.operate(no(), range_t<>::val_());
 			if (!check<unordered_herd_a<>>(cats_any))
 			{
 				throw dis("strange::creation::val merge parent cats returned non-unordered-herd");
@@ -102,7 +102,7 @@ public:
 		}
 		else
 		{
-			auto const kind_any = kind_op.operate_(no(), range_t<>::val_());
+			auto const kind_any = kind_op.operate(no(), range_t<>::val_());
 			if (!check<kind_a<>>(kind_any))
 			{
 				throw dis("strange::creation::val merge parent kind returned non-kind");
@@ -121,7 +121,7 @@ public:
 		}
 		else
 		{
-			auto const kinds_any = kinds_op.operate_(no(), range_t<>::val_());
+			auto const kinds_any = kinds_op.operate(no(), range_t<>::val_());
 			if (!check<unordered_herd_a<>>(kinds_any))
 			{
 				throw dis("strange::creation::val merge parent kinds returned non-unordered-herd");

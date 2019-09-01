@@ -80,7 +80,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		assert(check<_abstraction_>(thing));
 		return (static_cast<_abstraction_&>(thing).*_function)(range);

@@ -48,7 +48,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate_(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		any_a<> result = no();
 		try
@@ -57,11 +57,11 @@ public:
 			{
 				try
 				{
-					result = _loop.operate_(thing, range);
+					result = _loop.operate(thing, range);
 				}
 				catch (continue_i&)
 				{}
-			} while (_condition.operate_(thing, range));
+			} while (_condition.operate(thing, range));
 		}
 		catch (break_i&)
 		{}
