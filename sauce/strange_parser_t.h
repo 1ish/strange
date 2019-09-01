@@ -84,9 +84,9 @@ private:
 	}
 
 	inline expression_a<> _initial(
-		lake_a<int8_t> scope_lake = lake_int_8_t<>::val_(),
-		unordered_herd_a<> fixed_herd = unordered_herd_t<>::val_(),
-		unordered_shoal_a<> kind_shoal = unordered_shoal_t<>::val_())
+		lake_a<int8_t> const& scope_lake = lake_int_8_t<>::val_(),
+		unordered_herd_a<> const& fixed_herd = unordered_herd_t<>::val_(),
+		unordered_shoal_a<> const& kind_shoal = unordered_shoal_t<>::val_())
 	{
 		expression_a<> initial = expression_t<>::val(_token_);
 		bool consumed = false;
@@ -134,9 +134,9 @@ private:
 	}
 
 	inline expression_a<> _attribute(
-		lake_a<int8_t> scope_lake,
-		unordered_herd_a<> fixed_herd,
-		unordered_shoal_a<> kind_shoal)
+		lake_a<int8_t> const& scope_lake,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
 	{
 		auto const token = _token_;
 		if (scope_lake.empty())
@@ -157,9 +157,9 @@ private:
 	}
 
 	inline expression_a<> _intimate(
-		lake_a<int8_t> scope_lake,
-		unordered_herd_a<> fixed_herd,
-		unordered_shoal_a<> kind_shoal)
+		lake_a<int8_t> const& scope_lake,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
 	{
 		auto const token = _token_;
 		// me._name[...] / me._scope_name[...]
@@ -182,9 +182,9 @@ private:
 	}
 
 	inline expression_a<> _instruction(
-		lake_a<int8_t> scope_lake,
-		unordered_herd_a<> fixed_herd,
-		unordered_shoal_a<> kind_shoal)
+		lake_a<int8_t> const& scope_lake,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
 	{
 		auto const token = _token_;
 		auto const instruction = _shared_.at_(token.symbol_());
@@ -210,9 +210,9 @@ private:
 	}
 
 	inline expression_a<> _local(
-		lake_a<int8_t> scope_lake,
-		unordered_herd_a<> fixed_herd,
-		unordered_shoal_a<> kind_shoal)
+		lake_a<int8_t> const& scope_lake,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
 	{
 		auto const token = _token_;
 		auto const name = _token_.symbol_();
@@ -228,19 +228,19 @@ private:
 	}
 
 	inline expression_a<> _subsequent(
-		expression_a<> initial,
-		lake_a<int8_t> scope_lake,
-		unordered_herd_a<> fixed_herd,
-		unordered_shoal_a<> kind_shoal)
+		expression_a<> const& initial,
+		lake_a<int8_t> const& scope_lake,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
 	{
 		//TODO ...
 		return initial;
 	}
 
 	inline flock_a<> _elements(
-		lake_a<int8_t> scope_lake,
-		unordered_herd_a<> fixed_herd,
-		unordered_shoal_a<> kind_shoal)
+		lake_a<int8_t> const& scope_lake,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
 	{
 		//TODO ...
 		return flock_t<>::val_();
