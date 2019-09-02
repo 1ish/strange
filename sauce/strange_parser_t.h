@@ -224,31 +224,31 @@ private:
 		auto kind = kind_shoal.at_(name);
 		bool insert = false;
 		bool update = false;
-		if (_next()) // consume
+		if (_next() && _token_.tag() == "punctuation") // consume
 		{
+			auto const op = _token_.symbol();
 			if (kind)
 			{
-				if (_token_.tag() == "punctuation")
+				if (op == ":<")
 				{
-					auto const op = _token_.symbol();
-					if (fixed && (op == "#=" || op == "#<" || op == ":=" || op == ":<"))
+					throw dis("strange::parser cannot reassign variable kind");
+				}
+				if (op == "#=" || op == "#<")
+				{
+					throw dis("strange::parser cannot reassign variable with fixed") + _token_.report_();
+				}
+				if (op == ":=")
+				{
+					if (fixed)
 					{
-						throw dis("strange::parser cannot overwrite fixed variable") + _token_.report_();
+						throw dis("strange::parser cannot reassign fixed variable") + _token_.report_();
 					}
-					if (!fixed && (op == "#=" || op == "#<"))
-					{
-						throw dis("strange::parser cannot overwrite variable with fixed") + _token_.report_();
-					}
-					if (op == ":=")
-					{
-						update = true;
-					}
-					//TODO ...
+					update = true;
 				}
 			}
 			else
 			{
-
+				//TODO ...
 			}
 		}
 		if (insert || update)
