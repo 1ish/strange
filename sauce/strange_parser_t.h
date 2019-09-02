@@ -89,7 +89,6 @@ private:
 		unordered_shoal_a<> const& kind_shoal)
 	{
 		expression_a<> initial = expression_t<>::val(_token_);
-		bool consumed = false;
 		if (_token_.tag() == "symbol" ||
 			_token_.tag() == "lake" ||
 			_token_.tag() == "int" ||
@@ -119,14 +118,13 @@ private:
 			else
 			{
 				initial = _local(scope_lake, fixed_herd, kind_shoal);
-				consumed = true;
 			}
 		}
 		else if (_token_.tag() == "punctuation")
 		{
 			//TODO ...
 		}
-		if ((consumed && _it_ == _end_) || (!consumed && !_next()))
+		if (_it_ == _end_)
 		{
 			return initial;
 		}
@@ -139,21 +137,23 @@ private:
 		unordered_shoal_a<> const& kind_shoal)
 	{
 		auto const token = _token_;
+		auto const name = token.symbol_();
+		auto terms = flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_())); // me
 		if (scope_lake.empty())
 		{
 			// me._name_[]
-			return expression_intimate_t<>::val_(token,
-				flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_()),
-					expression_literal_t<>::val_(token, flock_t<>::val_(token.symbol_()))));
+			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(name)));
 		}
 		else
 		{
 			// me._scope_name_[]
-			return expression_intimate_t<>::val_(token,
-				flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_()),
-					expression_literal_t<>::val_(token, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + token.symbol_().to_string())))));
+			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + name.to_string()))));
 		}
-		//TODO assignment / consume
+		if (_next() && _token_.tag() == "punctuation" && _token_.symbol() == ":=") // consume
+		{
+			terms.push_back_(_initial(scope_lake, fixed_herd, kind_shoal)); // assignment
+		}
+		return expression_intimate_t<>::val_(token, terms);
 	}
 
 	inline expression_a<> _intimate(
@@ -162,22 +162,27 @@ private:
 		unordered_shoal_a<> const& kind_shoal)
 	{
 		auto const token = _token_;
-		// me._name[...] / me._scope_name[...]
-		auto terms = scope_lake.empty()
-			? flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_()),
-				expression_literal_t<>::val_(token, flock_t<>::val_(token.symbol_())))
-			: flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_()),
-				expression_literal_t<>::val_(token, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + token.symbol_().to_string()))));
-		if (!_next())
+		auto terms = flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_())); // me
+		if (scope_lake.empty())
+		{
+			// me._name
+			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(token.symbol_())));
+		}
+		else
+		{
+			// me._scope_name
+			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + token.symbol_().to_string()))));
+		}
+		if (!_next()) // consume
 		{
 			throw dis("strange::parser intimate operation with no arguments:\n") + token.report_();
 		}
 		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
 		{
-			terms += _elements(scope_lake, fixed_herd, kind_shoal);
+			terms += _elements(scope_lake, fixed_herd, kind_shoal); // me._name[...]
 			return expression_intimate_t<>::val_(token, terms);
 		}
-		terms.push_back_(_initial(scope_lake, fixed_herd, kind_shoal)); //TODO precedence / consume
+		terms.push_back_(_initial(scope_lake, fixed_herd, kind_shoal)); // me._name range
 		return expression_intimate_range_t<>::val_(token, terms);
 	}
 
@@ -192,14 +197,13 @@ private:
 		{
 			throw dis("strange::parser instruction not recognised:\n") + token.report_();
 		}
-		if (!_next())
+		if (!_next()) // consume
 		{
 			throw dis("strange::parser instruction with no arguments:\n") + token.report_();
 		}
 		if (_token_.tag() == "punctuation" && _token_.symbol() == "(")
 		{
-			auto const terms = _elements(scope_lake, fixed_herd, kind_shoal);
-			auto const expression = instruction.operate(no(), terms);
+			auto const expression = instruction.operate(no(), _elements(scope_lake, fixed_herd, kind_shoal));
 			if (!check<expression_a<>>(expression))
 			{
 				throw dis("strange::parser instruction returned non-expression:\n") + token.report_();
@@ -220,7 +224,7 @@ private:
 		auto kind = kind_shoal.at_(name);
 		bool insert = false;
 		bool update = false;
-		if (_next())
+		if (_next()) // consume
 		{
 			if (kind)
 			{
