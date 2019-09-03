@@ -248,7 +248,16 @@ private:
 			}
 			else
 			{
-				//TODO ...
+				kind = kind_t<>::val_();
+				if (op == ":=" || op == "#=" || op == ":<" || op == "#<")
+				{
+					fixed = (op[0] == '#');
+					insert = true;
+					if (op[1] == '<')
+					{
+						//TODO parse kind
+					}
+				}
 			}
 		}
 		if (insert || update)
