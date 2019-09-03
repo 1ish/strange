@@ -123,14 +123,22 @@ private:
 		else if (_token_.tag() == "punctuation")
 		{
 			auto const token = _token_;
-			std::string const pun = token.symbol();
-			if (pun == "$") // shared
+			std::string const op = token.symbol();
+			if (op == "$") // shared local
 			{
 				if (!_next())
 				{
 					throw dis("strange::parser $ with nothing following it:\n") + token.report_();
 				}
 				initial = _local(true, scope_lake, fixed_herd, kind_shoal);
+			}
+			else if (op == "$$") // shared scope
+			{
+				if (!_next())
+				{
+					throw dis("strange::parser $$ with nothing following it:\n") + token.report_();
+				}
+				initial = expression_shared_scope_t<>::val_(token, flock_t<>::val_(_shared_, _scope()));
 			}
 			//TODO ...
 		}
@@ -304,6 +312,33 @@ private:
 			return expression_shared_at_t<>::val_(token, flock_t<>::val_(name));
 		}
 		return expression_local_at_t<>::val_(token, flock_t<>::val_(name));
+	}
+
+	inline symbol_a<> _scope()
+	{
+		std::string scope;
+		for (bool first = true;;first = false)
+		{
+			if (_token_.tag() != "name")
+			{
+				if (first)
+				{
+					break;
+				}
+				throw dis("strange::parser scope operator with unexpected token following it:\n") + _token_.report_();
+			}
+			scope += _token_.symbol();
+			if (!_next() || _token_.tag() != "punctuation" || _token_.symbol() != "::")
+			{
+				break;
+			}
+			scope += "::";
+			if (!_next())
+			{
+				throw dis("strange::parser scope operator with nothing following it:\n") + _token_.report_();
+			}
+		}
+		return sym(scope);
 	}
 
 	inline expression_a<> _subsequent(
