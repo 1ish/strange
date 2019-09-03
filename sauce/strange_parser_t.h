@@ -117,11 +117,21 @@ private:
 			}
 			else
 			{
-				initial = _local(scope_lake, fixed_herd, kind_shoal);
+				initial = _local(false, scope_lake, fixed_herd, kind_shoal);
 			}
 		}
 		else if (_token_.tag() == "punctuation")
 		{
+			auto const token = _token_;
+			std::string const pun = token.symbol();
+			if (pun == "$") // shared
+			{
+				if (!_next())
+				{
+					throw dis("strange::parser $ with nothing following it:\n") + token.report_();
+				}
+				initial = _local(true, scope_lake, fixed_herd, kind_shoal);
+			}
 			//TODO ...
 		}
 		if (_it_ == _end_)
@@ -214,6 +224,7 @@ private:
 	}
 
 	inline expression_a<> _local(
+		bool const shared,
 		lake_a<int8_t> const& scope_lake,
 		unordered_herd_a<> const& fixed_herd,
 		unordered_shoal_a<> const& kind_shoal)
@@ -231,17 +242,17 @@ private:
 			{
 				if (op == ":<")
 				{
-					throw dis("strange::parser cannot reassign variable kind");
+					throw dis("strange::parser cannot reassign variable kind:\n") + _token_.report_();
 				}
 				if (op == "#=" || op == "#<")
 				{
-					throw dis("strange::parser cannot reassign variable with fixed") + _token_.report_();
+					throw dis("strange::parser cannot reassign variable with fixed:\n") + _token_.report_();
 				}
 				if (op == ":=")
 				{
 					if (fixed)
 					{
-						throw dis("strange::parser cannot reassign fixed variable") + _token_.report_();
+						throw dis("strange::parser cannot reassign fixed variable:\n") + _token_.report_();
 					}
 					update = true;
 				}
@@ -264,7 +275,7 @@ private:
 		{
 			if (!_next())
 			{
-				throw dis("strange::parser local assignment with no right-hand side") + token.report_();
+				throw dis("strange::parser local assignment with no right-hand side:\n") + token.report_();
 			}
 			if (insert)
 			{
@@ -273,12 +284,24 @@ private:
 					unordered_herd_a<>(fixed_herd, true).insert(name);
 				}
 				unordered_shoal_a<>(kind_shoal, true).insert_(name, kind);
+				if (shared)
+				{
+					return expression_shared_insert_t<>::val_(token, flock_t<>::val_(name, kind, _initial(scope_lake, fixed_herd, kind_shoal)));
+				}
 				return expression_local_insert_t<>::val_(token, flock_t<>::val_(name, kind, _initial(scope_lake, fixed_herd, kind_shoal)));
 			}
 			if (update)
 			{
+				if (shared)
+				{
+					return expression_shared_update_t<>::val_(token, flock_t<>::val_(name, kind, _initial(scope_lake, fixed_herd, kind_shoal)));
+				}
 				return expression_local_update_t<>::val_(token, flock_t<>::val_(name, kind, _initial(scope_lake, fixed_herd, kind_shoal)));
 			}
+		}
+		if (shared)
+		{
+			return expression_shared_at_t<>::val_(token, flock_t<>::val_(name));
 		}
 		return expression_local_at_t<>::val_(token, flock_t<>::val_(name));
 	}
