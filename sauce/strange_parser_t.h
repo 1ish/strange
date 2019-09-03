@@ -141,6 +141,14 @@ private:
 				initial = expression_shared_scope_t<>::val_(token, flock_t<>::val_(_shared_, _scope()));
 			}
 			//TODO ...
+			else
+			{
+				throw dis("strange::parser unexpected punctuation:\n") + token.report_();
+			}
+		}
+		else
+		{
+			throw dis("strange::parser unexpected token tag:\n") + _token_.report_();
 		}
 		if (_it_ == _end_)
 		{
