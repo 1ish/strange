@@ -43,7 +43,7 @@ public:
 		{
 			throw dis("strange::parser tokenizer error:\n") + _token_.report_();
 		}
-		return _initial(true, lake_int_8_t<>::val_(), unordered_herd_t<>::val_(), unordered_shoal_t<>::val_());
+		return _initial(0, lake_int_8_t<>::val_(), unordered_herd_t<>::val_(), unordered_shoal_t<>::val_());
 	}
 
 protected:
@@ -84,7 +84,7 @@ private:
 	}
 
 	inline expression_a<> _initial(
-		bool const subsequent,
+		int64_t const min_precedence,
 		lake_a<int8_t> const& scope_lake,
 		unordered_herd_a<> const& fixed_herd,
 		unordered_shoal_a<> const& kind_shoal)
@@ -151,11 +151,11 @@ private:
 		{
 			throw dis("strange::parser unexpected token tag:\n") + _token_.report_();
 		}
-		if (!subsequent || _it_ == _end_)
+		if (_it_ == _end_)
 		{
 			return initial;
 		}
-		return _subsequent(initial, scope_lake, fixed_herd, kind_shoal);
+		return _subsequent(min_precedence, initial, scope_lake, fixed_herd, kind_shoal);
 	}
 
 	inline expression_a<> _attribute(
@@ -178,7 +178,7 @@ private:
 		}
 		if (_next() && _token_.tag() == "punctuation" && _token_.symbol() == ":=") // consume
 		{
-			terms.push_back_(_initial(true, scope_lake, fixed_herd, kind_shoal)); // assignment
+			terms.push_back_(_initial(0, scope_lake, fixed_herd, kind_shoal)); // assignment
 		}
 		return expression_intimate_t<>::val_(token, terms);
 	}
@@ -209,7 +209,7 @@ private:
 			terms += _elements(scope_lake, fixed_herd, kind_shoal); // me._name[...]
 			return expression_intimate_t<>::val_(token, terms);
 		}
-		terms.push_back_(_initial(false, scope_lake, fixed_herd, kind_shoal)); // me._name range
+		terms.push_back_(_initial(100, scope_lake, fixed_herd, kind_shoal)); // me._name range
 		return expression_intimate_range_t<>::val_(token, terms);
 	}
 
@@ -303,17 +303,17 @@ private:
 				unordered_shoal_a<>(kind_shoal, true).insert_(name, kind);
 				if (shared)
 				{
-					return expression_shared_insert_t<>::val_(token, flock_t<>::val_(name, kind, _initial(true, scope_lake, fixed_herd, kind_shoal)));
+					return expression_shared_insert_t<>::val_(token, flock_t<>::val_(name, kind, _initial(0, scope_lake, fixed_herd, kind_shoal)));
 				}
-				return expression_local_insert_t<>::val_(token, flock_t<>::val_(name, kind, _initial(true, scope_lake, fixed_herd, kind_shoal)));
+				return expression_local_insert_t<>::val_(token, flock_t<>::val_(name, kind, _initial(0, scope_lake, fixed_herd, kind_shoal)));
 			}
 			if (update)
 			{
 				if (shared)
 				{
-					return expression_shared_update_t<>::val_(token, flock_t<>::val_(name, kind, _initial(true, scope_lake, fixed_herd, kind_shoal)));
+					return expression_shared_update_t<>::val_(token, flock_t<>::val_(name, kind, _initial(0, scope_lake, fixed_herd, kind_shoal)));
 				}
-				return expression_local_update_t<>::val_(token, flock_t<>::val_(name, kind, _initial(true, scope_lake, fixed_herd, kind_shoal)));
+				return expression_local_update_t<>::val_(token, flock_t<>::val_(name, kind, _initial(0, scope_lake, fixed_herd, kind_shoal)));
 			}
 		}
 		if (shared)
@@ -351,12 +351,27 @@ private:
 	}
 
 	inline expression_a<> _subsequent(
+		int64_t const min_precedence,
 		expression_a<> const& initial,
 		lake_a<int8_t> const& scope_lake,
 		unordered_herd_a<> const& fixed_herd,
 		unordered_shoal_a<> const& kind_shoal)
 	{
-		//TODO ...
+		if (min_precedence >= 100)
+		{
+			return initial;
+		}
+		auto const token = _token_;
+		if (token.tag() == "punctuation")
+		{
+			//TODO [] etc.
+			int64_t const precedence_inc = token.precedence() + 1;
+			if (precedence_inc <= min_precedence)
+			{
+				return initial;
+			}
+			//TODO ...
+		}
 		return initial;
 	}
 
