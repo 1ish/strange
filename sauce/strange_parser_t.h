@@ -206,7 +206,7 @@ private:
 			return expression_intimate_t<>::val_(token, terms);
 		}
 		terms.push_back_(_initial(100, scope_lake, fixed_herd, kind_shoal)); // me._name range
-		return expression_intimate_range_t<>::val_(token, terms);
+		return expression_intimate_member_range_t<>::val_(token, terms);
 	}
 
 	inline expression_a<> _instruction(
@@ -368,7 +368,7 @@ private:
 				terms += _elements(scope_lake, fixed_herd, kind_shoal);
 				return _subsequent(min_precedence, expression_operate_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 			}
-			//TODO etc.
+			//TODO ...
 			int64_t const precedence = token.precedence();
 			if (precedence)
 			{
