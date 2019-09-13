@@ -368,6 +368,14 @@ private:
 				terms += _elements(scope_lake, fixed_herd, kind_shoal);
 				return _subsequent(min_precedence, expression_operate_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 			}
+			if (op == ".")
+			{
+				if (!_next())
+				{
+					throw dis("strange::parser dot operator with nothing following it:\n") + token.report_();
+				}
+				return _dot(min_precedence, initial, scope_lake, fixed_herd, kind_shoal);
+			}
 			//TODO ...
 			int64_t const precedence = token.precedence();
 			if (precedence)
@@ -432,6 +440,34 @@ private:
 	{
 		//TODO consume [...]
 		return flock_t<>::val_();
+	}
+
+	inline expression_a<> _dot(
+		int64_t const min_precedence,
+		expression_a<> const& initial,
+		lake_a<int8_t> const& scope_lake,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
+	{
+		auto const token = _token_;
+		if (token.tag() != "name")
+		{
+			throw dis("strange::parser dot operator with non-name following it:\n") + token.report_();
+		}
+		auto terms = flock_t<>::val_(
+			initial,
+			expression_literal_t<>::val_(token, flock_t<>::val_(token.symbol_())));
+		if (!_next())
+		{
+			throw dis("strange::parser dot operator with nothing following member name:\n") + token.report_();
+		}
+		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
+		{
+			terms += _elements(scope_lake, fixed_herd, kind_shoal);
+			return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+		}
+		terms.push_back_(_initial(100, scope_lake, fixed_herd, kind_shoal));
+		return _subsequent(min_precedence, expression_invoke_range_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 	}
 
 	static bool const ___share___;

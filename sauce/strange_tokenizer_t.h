@@ -588,7 +588,6 @@ protected:
 		{
 			auto precedence = unordered_shoal_t<>::val_();
 			precedence.update_string(":.", number_int_64_t<>::val(95));
-			precedence.update_string(".", number_int_64_t<>::val(90));
 			precedence.update_string(".:", number_int_64_t<>::val(90));
 			precedence.update_string("@?", number_int_64_t<>::val(85));
 			precedence.update_string("@", number_int_64_t<>::val(85));
