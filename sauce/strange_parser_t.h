@@ -151,10 +151,6 @@ private:
 		{
 			throw dis("strange::parser unexpected token tag:\n") + _token_.report_();
 		}
-		if (_it_ == _end_)
-		{
-			return initial;
-		}
 		return _subsequent(min_precedence, initial, scope_lake, fixed_herd, kind_shoal);
 	}
 
@@ -357,22 +353,76 @@ private:
 		unordered_herd_a<> const& fixed_herd,
 		unordered_shoal_a<> const& kind_shoal)
 	{
-		if (min_precedence >= 100)
+		if (min_precedence >= 100 || _it_ == _end_)
 		{
 			return initial;
 		}
 		auto const token = _token_;
 		if (token.tag() == "punctuation")
 		{
-			//TODO [] etc.
-			int64_t const precedence_inc = token.precedence() + 1;
-			if (precedence_inc <= min_precedence)
+			auto const op = token.symbol();
+			if (op == "[")
 			{
-				return initial;
+				// operate with elements
+				auto terms = flock_t<>::val_(initial);
+				terms += _elements(scope_lake, fixed_herd, kind_shoal);
+				return _subsequent(min_precedence, expression_operate_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 			}
-			//TODO ...
+			//TODO etc.
+			int64_t const precedence = token.precedence();
+			if (precedence)
+			{
+				if (precedence < min_precedence)
+				{
+					return initial;
+				}
+				auto oper = sym("");
+				bool binary = false;
+				if (op == "@")
+				{
+					oper = sym("at");
+					binary = true;
+				}
+				else if (op == "@=")
+				{
+					oper = sym("update");
+					binary = true;
+				}
+				else if (op == "?")
+				{
+					oper = sym("something");
+				}
+				else if (op == "!")
+				{
+					oper = sym("nothing");
+				}
+				//TODO ...
+				else
+				{
+					throw dis("strange::parser unexpected operator:\n") + token.report_();
+				}
+				if (binary)
+				{
+					// invoke binary operator
+					if (!_next())
+					{
+						throw dis("strange::parser binary operator with nothing following it:\n") + token.report_();
+					}
+					auto const terms = flock_t<>::val_(
+						initial,
+						expression_literal_t<>::val_(token, flock_t<>::val_(oper)),
+						_initial(precedence + 1, scope_lake, fixed_herd, kind_shoal));
+					return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+				}
+				// invoke unary operator
+				_next();
+				auto const terms = flock_t<>::val_(initial, expression_literal_t<>::val_(token, flock_t<>::val_(oper)));
+				return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+			}
 		}
-		return initial;
+		// operate with range
+		auto const terms = flock_t<>::val_(initial, _initial(100, scope_lake, fixed_herd, kind_shoal));
+		return _subsequent(min_precedence, expression_operate_range_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 	}
 
 	inline flock_a<> _elements(
@@ -380,7 +430,7 @@ private:
 		unordered_herd_a<> const& fixed_herd,
 		unordered_shoal_a<> const& kind_shoal)
 	{
-		//TODO ...
+		//TODO consume [...]
 		return flock_t<>::val_();
 	}
 
