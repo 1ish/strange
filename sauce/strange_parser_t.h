@@ -370,46 +370,107 @@ private:
 			}
 			if (op == ".")
 			{
+				// member
 				if (!_next())
 				{
 					throw dis("strange::parser dot operator with nothing following it:\n") + token.report_();
 				}
 				return _dot(min_precedence, initial, scope_lake, fixed_herd, kind_shoal);
 			}
+			if (op == "]" || op == "," || op == ":") //TODO ...
+			{
+				// delimiter
+				return initial;
+			}
 			//TODO ...
 			int64_t const precedence = token.precedence();
 			if (precedence)
 			{
+				// operator
 				if (precedence < min_precedence)
 				{
 					return initial;
 				}
 				auto oper = sym("");
-				bool binary = false;
-				if (op == "@")
+				int64_t count = 0;
+				if (op == "@?")
+				{
+					oper = sym("has");
+					count = 2;
+				}
+				else if (op == "@")
 				{
 					oper = sym("at");
-					binary = true;
+					count = 2;
 				}
 				else if (op == "@=")
 				{
 					oper = sym("update");
-					binary = true;
+					count = 3;
+				}
+				else if (op == "@+")
+				{
+					oper = sym("insert");
+					count = 3;
+				}
+				else if (op == "@-")
+				{
+					oper = sym("erase");
+					count = 2;
+				}
+				else if (op == "@<")
+				{
+					oper = sym("push_back");
+					count = 2;
+				}
+				else if (op == ">@")
+				{
+					oper = sym("push_front");
+					count = 2;
+				}
+				else if (op == "@>")
+				{
+					oper = sym("pop_back");
+					count = 1;
+				}
+				else if (op == "<@")
+				{
+					oper = sym("pop_front");
+					count = 1;
+				}
+				else if (op == "++")
+				{
+					oper = sym("increment");
+					count = 1;
+				}
+				else if (op == "--")
+				{
+					oper = sym("decrement");
+					count = 1;
 				}
 				else if (op == "?")
 				{
 					oper = sym("something");
+					count = 1;
 				}
 				else if (op == "!")
 				{
 					oper = sym("nothing");
+					count = 1;
 				}
 				//TODO ...
 				else
 				{
 					throw dis("strange::parser unexpected operator:\n") + token.report_();
 				}
-				if (binary)
+				if (count == 1)
+				{
+					// invoke unary operator
+					_next();
+					auto const terms = flock_t<>::val_(initial, expression_literal_t<>::val_(token, flock_t<>::val_(oper)));
+					return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+				}
+				else if (count == 2)
 				{
 					// invoke binary operator
 					if (!_next())
@@ -422,10 +483,33 @@ private:
 						_initial(precedence + 1, scope_lake, fixed_herd, kind_shoal));
 					return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 				}
-				// invoke unary operator
-				_next();
-				auto const terms = flock_t<>::val_(initial, expression_literal_t<>::val_(token, flock_t<>::val_(oper)));
-				return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+				else if (count == 3)
+				{
+					// invoke ternary operator
+					if (!_next())
+					{
+						throw dis("strange::parser ternary operator with nothing following it:\n") + token.report_();
+					}
+					auto const second = _initial(precedence + 1, scope_lake, fixed_herd, kind_shoal);
+					if (!_next() || _token_.tag() != "punctuation" || _token_.symbol() != ":")
+					{
+						throw dis("strange::parser ternary operator with no delimiter:\n") + token.report_();
+					}
+					if (!_next())
+					{
+						throw dis("strange::parser ternary operator with nothing following the delimiter:\n") + token.report_();
+					}
+					auto const terms = flock_t<>::val_(
+						initial,
+						expression_literal_t<>::val_(token, flock_t<>::val_(oper)),
+						second,
+						_initial(precedence + 1, scope_lake, fixed_herd, kind_shoal));
+					return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+				}
+				else
+				{
+					throw dis("strange::parser operator with unexpected element count:\n") + token.report_();
+				}
 			}
 		}
 		// operate with range

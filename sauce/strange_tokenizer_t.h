@@ -325,7 +325,7 @@ class tokenizer_t : public thing_t<___ego___>
 					return punctuation_token(token);
 				case '@':
 					token = char1;
-					if (char1 == char2 || char2 == '?' || char2 == '=' || char2 == '+' || char2 == '-' || char2 == '<' || char2 == '>' || char2 == ':')
+					if (char2 == '?' || char2 == '=' || char2 == '+' || char2 == '-' || char2 == '<' || char2 == '>')
 					{
 						second = true;
 						break;
@@ -598,8 +598,6 @@ protected:
 			precedence.update_string(">@", number_int_64_t<>::val(85));
 			precedence.update_string("@>", number_int_64_t<>::val(85));
 			precedence.update_string("<@", number_int_64_t<>::val(85));
-			precedence.update_string("@@", number_int_64_t<>::val(85));
-			precedence.update_string("@:", number_int_64_t<>::val(85));
 			precedence.update_string("++", number_int_64_t<>::val(80));
 			precedence.update_string("--", number_int_64_t<>::val(80));
 			precedence.update_string("?", number_int_64_t<>::val(80));
