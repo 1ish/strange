@@ -391,6 +391,22 @@ private:
 				{
 					return initial;
 				}
+				if (op == "&&" || op == "!&" || op == "%%" || op == "!%" || op == "||" || op == "!|")
+				{
+					// logic operator
+					if (!_next())
+					{
+						throw dis("strange::parser logic operator with nothing following it:\n") + token.report_();
+					}
+					auto const terms = flock_t<>::val_(
+						initial,
+						_initial(precedence + 1, scope_lake, fixed_herd, kind_shoal));
+					if (op == "&&")
+					{
+						return _subsequent(min_precedence, expression_and_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+					}
+					//TODO ...
+				}
 				auto oper = sym("");
 				int64_t count = 0;
 				if (op == "@?")

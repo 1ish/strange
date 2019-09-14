@@ -78,5 +78,6 @@
 #include "strange_expression_do_t.h"
 #include "strange_expression_for_t.h"
 #include "strange_expression_for_range_t.h"
+#include "strange_expression_and_t.h"
 
 #endif
