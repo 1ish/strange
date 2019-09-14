@@ -458,6 +458,91 @@ private:
 					oper = sym("nothing");
 					count = 1;
 				}
+				else if (op == "*")
+				{
+					oper = sym("multiply");
+					count = 2;
+				}
+				else if (op == "/")
+				{
+					oper = sym("divide");
+					count = 2;
+				}
+				else if (op == "%")
+				{
+					oper = sym("modulo");
+					count = 2;
+				}
+				else if (op == "+")
+				{
+					oper = sym("add");
+					count = 2;
+				}
+				else if (op == "-")
+				{
+					oper = sym("subtract");
+					count = 2;
+				}
+				else if (op == "<")
+				{
+					oper = sym("less_than");
+					count = 2;
+				}
+				else if (op == ">")
+				{
+					oper = sym("greater_than");
+					count = 2;
+				}
+				else if (op == "<=")
+				{
+					oper = sym("less_or_equal");
+					count = 2;
+				}
+				else if (op == ">=")
+				{
+					oper = sym("greater_or_equal");
+					count = 2;
+				}
+				else if (op == "==")
+				{
+					oper = sym("same");
+					count = 2;
+				}
+				else if (op == "!=")
+				{
+					oper = sym("different");
+					count = 2;
+				}
+				else if (op == "=")
+				{
+					oper = sym("assign");
+					count = 2;
+				}
+				else if (op == "*=")
+				{
+					oper = sym("self_multiply");
+					count = 2;
+				}
+				else if (op == "/=")
+				{
+					oper = sym("self_divide");
+					count = 2;
+				}
+				else if (op == "%=")
+				{
+					oper = sym("self_modulo");
+					count = 2;
+				}
+				else if (op == "+=")
+				{
+					oper = sym("self_add");
+					count = 2;
+				}
+				else if (op == "-=")
+				{
+					oper = sym("self_subtract");
+					count = 2;
+				}
 				//TODO ...
 				else
 				{
