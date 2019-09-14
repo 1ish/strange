@@ -55,7 +55,7 @@
 #include "strange_expression_cat_t.h"
 #include "strange_expression_kind_t.h"
 #include "strange_expression_invoke_t.h"
-#include "strange_expression_invoke_range_t.h"
+#include "strange_expression_invoke_member_range_t.h"
 #include "strange_expression_operate_t.h"
 #include "strange_expression_operate_range_t.h"
 #include "strange_expression_break_t.h"

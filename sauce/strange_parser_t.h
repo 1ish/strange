@@ -467,7 +467,7 @@ private:
 			return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 		}
 		terms.push_back_(_initial(100, scope_lake, fixed_herd, kind_shoal));
-		return _subsequent(min_precedence, expression_invoke_range_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+		return _subsequent(min_precedence, expression_invoke_member_range_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 	}
 
 	static bool const ___share___;
