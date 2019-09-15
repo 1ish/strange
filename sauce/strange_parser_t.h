@@ -405,7 +405,26 @@ private:
 					{
 						return _subsequent(min_precedence, expression_and_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 					}
-					//TODO ...
+					if (op == "!&")
+					{
+						return _subsequent(min_precedence, expression_nand_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+					}
+					if (op == "%%")
+					{
+						return _subsequent(min_precedence, expression_xor_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+					}
+					if (op == "!%")
+					{
+						return _subsequent(min_precedence, expression_xnor_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+					}
+					if (op == "||")
+					{
+						return _subsequent(min_precedence, expression_or_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+					}
+					if (op == "!|")
+					{
+						return _subsequent(min_precedence, expression_nor_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+					}
 				}
 				auto oper = sym("");
 				int64_t count = 0;

@@ -79,5 +79,10 @@
 #include "strange_expression_for_t.h"
 #include "strange_expression_for_range_t.h"
 #include "strange_expression_and_t.h"
+#include "strange_expression_nand_t.h"
+#include "strange_expression_or_t.h"
+#include "strange_expression_nor_t.h"
+#include "strange_expression_xor_t.h"
+#include "strange_expression_xnor_t.h"
 
 #endif
