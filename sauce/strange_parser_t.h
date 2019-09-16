@@ -427,16 +427,15 @@ private:
 					}
 				}
 				auto oper = sym("");
-				int64_t count = 0;
+				int64_t count = 2;
+				bool right_to_left = false;
 				if (op == "@?")
 				{
 					oper = sym("has");
-					count = 2;
 				}
 				else if (op == "@")
 				{
 					oper = sym("at");
-					count = 2;
 				}
 				else if (op == "@=")
 				{
@@ -451,17 +450,14 @@ private:
 				else if (op == "@-")
 				{
 					oper = sym("erase");
-					count = 2;
 				}
 				else if (op == "@<")
 				{
 					oper = sym("push_back");
-					count = 2;
 				}
 				else if (op == ">@")
 				{
 					oper = sym("push_front");
-					count = 2;
 				}
 				else if (op == "@>")
 				{
@@ -496,87 +492,76 @@ private:
 				else if (op == "*")
 				{
 					oper = sym("multiply");
-					count = 2;
 				}
 				else if (op == "/")
 				{
 					oper = sym("divide");
-					count = 2;
 				}
 				else if (op == "%")
 				{
 					oper = sym("modulo");
-					count = 2;
 				}
 				else if (op == "+")
 				{
 					oper = sym("add");
-					count = 2;
 				}
 				else if (op == "-")
 				{
 					oper = sym("subtract");
-					count = 2;
 				}
 				else if (op == "<")
 				{
 					oper = sym("less_than");
-					count = 2;
 				}
 				else if (op == ">")
 				{
 					oper = sym("greater_than");
-					count = 2;
 				}
 				else if (op == "<=")
 				{
 					oper = sym("less_or_equal");
-					count = 2;
 				}
 				else if (op == ">=")
 				{
 					oper = sym("greater_or_equal");
-					count = 2;
 				}
 				else if (op == "==")
 				{
 					oper = sym("same");
-					count = 2;
 				}
 				else if (op == "!=")
 				{
 					oper = sym("different");
-					count = 2;
 				}
 				else if (op == "=")
 				{
 					oper = sym("assign");
-					count = 2;
+					right_to_left = true;
 				}
 				else if (op == "*=")
 				{
 					oper = sym("self_multiply");
-					count = 2;
+					right_to_left = true;
 				}
 				else if (op == "/=")
 				{
 					oper = sym("self_divide");
-					count = 2;
+					right_to_left = true;
 				}
 				else if (op == "%=")
 				{
 					oper = sym("self_modulo");
-					count = 2;
+					right_to_left = true;
 				}
 				else if (op == "+=")
 				{
 					oper = sym("self_add");
-					count = 2;
+					right_to_left = true;
 				}
 				else if (op == "-=")
 				{
 					oper = sym("self_subtract");
-					count = 2;
+					right_to_left = true;
 				}
 				//TODO ...
 				else
@@ -600,7 +585,7 @@ private:
 					auto const terms = flock_t<>::val_(
 						initial,
 						expression_literal_t<>::val_(token, flock_t<>::val_(oper)),
-						_initial(precedence + 1, scope_lake, fixed_herd, kind_shoal));
+						_initial(precedence + (right_to_left ? 0 : 1), scope_lake, fixed_herd, kind_shoal));
 					return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 				}
 				else if (count == 3)
@@ -623,13 +608,10 @@ private:
 						initial,
 						expression_literal_t<>::val_(token, flock_t<>::val_(oper)),
 						second,
-						_initial(precedence + 1, scope_lake, fixed_herd, kind_shoal));
+						_initial(precedence + (right_to_left ? 0 : 1), scope_lake, fixed_herd, kind_shoal));
 					return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 				}
-				else
-				{
-					throw dis("strange::parser operator with unexpected element count:\n") + token.report_();
-				}
+				assert(count >= 1 && count <= 3);
 			}
 		}
 		// operate with range
