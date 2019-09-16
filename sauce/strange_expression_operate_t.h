@@ -31,7 +31,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		return operate__(range_operator_t<>::val_(_terms, thing, range));
+		return thing_t<>::operate__(range_operator_t<>::val_(_terms, thing, range));
 	}
 
 	// expression

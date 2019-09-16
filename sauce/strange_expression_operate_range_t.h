@@ -56,7 +56,7 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_operate_range::operate with non-range term");
 		}
-		return operate(thing_term, cast<range_a<>>(range_term));
+		return thing_t<>::operate(thing_term, cast<range_a<>>(range_term));
 	}
 
 	// expression

@@ -66,7 +66,7 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_invoke_member_range::operate with non-range term");
 		}
-		return invoke_member(thing_term, member_term, cast<range_a<>>(range_term));
+		return thing_t<>::invoke_member(thing_term, member_term, cast<range_a<>>(range_term));
 	}
 
 	// expression

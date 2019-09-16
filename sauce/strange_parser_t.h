@@ -535,7 +535,7 @@ private:
 				}
 				else if (op == "=")
 				{
-					oper = sym("assign");
+					oper = sym("self_assign");
 					right_to_left = true;
 				}
 				else if (op == "*=")
