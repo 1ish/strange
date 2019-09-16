@@ -370,12 +370,21 @@ private:
 			}
 			if (op == ".")
 			{
-				// member
+				// invoke member
 				if (!_next())
 				{
 					throw dis("strange::parser dot operator with nothing following it:\n") + token.report_();
 				}
 				return _dot(min_precedence, initial, scope_lake, fixed_herd, kind_shoal);
+			}
+			if (op == ".:")
+			{
+				// operate
+				if (!_next())
+				{
+					throw dis("strange::parser dot-colon operator with nothing following it:\n") + token.report_();
+				}
+				return _dot_colon(min_precedence, initial, scope_lake, fixed_herd, kind_shoal);
 			}
 			if (op == "]" || op == "," || op == ":") //TODO ...
 			{
@@ -654,6 +663,33 @@ private:
 		}
 		terms.push_back_(_initial(100, scope_lake, fixed_herd, kind_shoal));
 		return _subsequent(min_precedence, expression_invoke_member_range_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+	}
+
+	inline expression_a<> _dot_colon(
+		int64_t const min_precedence,
+		expression_a<> const& initial,
+		lake_a<int8_t> const& scope_lake,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
+	{
+		auto const token = _token_;
+		auto second = _initial(100, scope_lake, fixed_herd, kind_shoal);
+		if (_it_ != _end_ && _token_.tag() == "punctuation" && _token_.symbol() == ":.")
+		{
+			second = _subsequent(min_precedence, second, scope_lake, fixed_herd, kind_shoal);
+		}
+		auto terms = flock_t<>::val_(initial, second);
+		if (!_next())
+		{
+			throw dis("strange::parser dot-colon operator with nothing following operation:\n") + token.report_();
+		}
+		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
+		{
+			terms += _elements(scope_lake, fixed_herd, kind_shoal);
+			return _subsequent(min_precedence, expression_operate_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+		}
+		terms.push_back_(_initial(100, scope_lake, fixed_herd, kind_shoal));
+		return _subsequent(min_precedence, expression_operate_range_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 	}
 
 	static bool const ___share___;
