@@ -51,7 +51,7 @@ public:
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		auto thing_term = _thing.operate(thing, range);
-		auto range_term = _range.operate(thing, range);
+		auto const range_term = _range.operate(thing, range);
 		if (!check<range_a<>>(range_term))
 		{
 			throw dis(_token.report() + "strange::expression_operate_range::operate with non-range term");

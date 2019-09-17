@@ -73,6 +73,7 @@ class reflection;
 #include "strange_expression_kind_r.h"
 #include "strange_expression_invoke_r.h"
 #include "strange_expression_invoke_member_range_r.h"
+#include "strange_expression_member_r.h"
 #include "strange_expression_operate_r.h"
 #include "strange_expression_operate_range_r.h"
 #include "strange_expression_break_r.h"
