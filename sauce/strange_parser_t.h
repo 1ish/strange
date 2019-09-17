@@ -685,12 +685,17 @@ private:
 		auto second = _initial(100, scope_lake, fixed_herd, kind_shoal);
 		if (_it_ != _end_ && _token_.tag() == "punctuation" && _token_.symbol() == ":.")
 		{
-			second = _subsequent(min_precedence, second, scope_lake, fixed_herd, kind_shoal);
+			// member
+			if (!_next())
+			{
+				throw dis("strange::parser colon-dot operator with nothing following it:\n") + token.report_();
+			}
+			second = _colon_dot(100, second, scope_lake, fixed_herd, kind_shoal);
 		}
 		auto terms = flock_t<>::val_(initial, second);
 		if (!_next())
 		{
-			throw dis("strange::parser dot-colon operator with nothing following operation:\n") + token.report_();
+			throw dis("strange::parser dot-colon operator with nothing following its operation:\n") + token.report_();
 		}
 		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
 		{
