@@ -386,6 +386,15 @@ private:
 				}
 				return _dot_colon(min_precedence, initial, scope_lake, fixed_herd, kind_shoal);
 			}
+			if (op == ":.")
+			{
+				// member
+				if (!_next())
+				{
+					throw dis("strange::parser colon-dot operator with nothing following it:\n") + token.report_();
+				}
+				return _colon_dot(min_precedence, initial, scope_lake, fixed_herd, kind_shoal);
+			}
 			if (op == "]" || op == "," || op == ":") //TODO ...
 			{
 				// delimiter
@@ -690,6 +699,24 @@ private:
 		}
 		terms.push_back_(_initial(100, scope_lake, fixed_herd, kind_shoal));
 		return _subsequent(min_precedence, expression_operate_range_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+	}
+
+	inline expression_a<> _colon_dot(
+		int64_t const min_precedence,
+		expression_a<> const& initial,
+		lake_a<int8_t> const& scope_lake,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
+	{
+		auto const token = _token_;
+		if (token.tag() != "name")
+		{
+			throw dis("strange::parser colon-dot operator with non-name following it:\n") + token.report_();
+		}
+		auto const terms = flock_t<>::val_(
+			initial,
+			expression_literal_t<>::val_(token, flock_t<>::val_(token.symbol_())));
+		return _subsequent(min_precedence, expression_member_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 	}
 
 	static bool const ___share___;
