@@ -83,7 +83,7 @@ public:
 protected:
 	flock_a<> const _terms;
 	expression_a<> const _thing;
-	expression_a<> const _member;
+	expression_a<> const _member; //TODO symbol
 
 	inline expression_member_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, expression_a<> const& member)
 		: expression_t(token, is_pure_literal(token, thing, member))

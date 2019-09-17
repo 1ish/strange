@@ -620,7 +620,7 @@ private:
 							initial,
 							expression_literal_t<>::val_(token, flock_t<>::val_(oper)),
 							second,
-							second);
+							second); //TODO double evaluation
 						return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 					}
 					if (!_next())

@@ -94,7 +94,7 @@ public:
 protected:
 	flock_a<> const _terms;
 	expression_a<> const _thing;
-	expression_a<> const _member;
+	expression_a<> const _member; //TODO symbol
 	expression_a<> const _range;
 
 	inline expression_intimate_member_range_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, expression_a<> const& member, expression_a<> const& range)
