@@ -613,10 +613,15 @@ private:
 					{
 						throw dis("strange::parser ternary operator with nothing following it:\n") + token.report_();
 					}
-					auto const second = _initial(precedence + 1, scope_lake, fixed_herd, kind_shoal);
+					auto const second = _initial(precedence + (right_to_left ? 0 : 1), scope_lake, fixed_herd, kind_shoal);
 					if (!_next() || _token_.tag() != "punctuation" || _token_.symbol() != ":")
 					{
-						throw dis("strange::parser ternary operator with no delimiter:\n") + token.report_();
+						auto const terms = flock_t<>::val_(
+							initial,
+							expression_literal_t<>::val_(token, flock_t<>::val_(oper)),
+							second,
+							second);
+						return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 					}
 					if (!_next())
 					{
