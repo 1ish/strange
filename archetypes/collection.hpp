@@ -24,11 +24,11 @@ public:
 	inline any_a<> at_(any_a<> const& key) const;
 
 	inline any_a<> update__(range_a<> const& range);
-	inline any_a<> update_(any_a<> const& key, any_a<> const& value);
+	inline any_a<> update_(any_a<> const& key, any_a<> const& value = no());
 	inline void update(any_a<> const& key, any_a<> const& value);
 
 	inline any_a<> insert__(range_a<> const& range);
-	inline any_a<> insert_(any_a<> const& key, any_a<> const& value);
+	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = no());
 	inline bool insert(any_a<> const& key, any_a<> const& value);
 
 	inline any_a<> erase__(range_a<> const& range);

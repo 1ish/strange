@@ -243,7 +243,7 @@ public:
 		return const_iterator_t<std_set_any::const_iterator>::val(me_(), _set.cend());
 	}
 
-	// collection
+	// collection / herd
 	inline bool has(any_a<> const& key) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
@@ -276,14 +276,24 @@ public:
 
 	inline void update(any_a<> const& key, any_a<> const&)
 	{
+		update(key);
+	}
+
+	inline void update(any_a<> const& key)
+	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+		_set.erase(key);
 		_set.insert(key);
+	}
+
+	inline void update_string(std::string const& s)
+	{
+		update(sym(s));
 	}
 
 	inline bool insert(any_a<> const& key, any_a<> const&)
 	{
-		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		return _set.insert(key).second;
+		return insert(key);
 	}
 
 	inline bool insert(any_a<> const& key)
@@ -294,8 +304,7 @@ public:
 
 	inline bool insert_string(std::string const& s)
 	{
-		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		return _set.insert(sym(s)).second;
+		return insert(sym(s));
 	}
 
 	inline bool erase(any_a<> const& key)

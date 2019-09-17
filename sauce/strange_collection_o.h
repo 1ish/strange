@@ -47,12 +47,12 @@ public:
 		any_a<> key = *it;
 		if (++it == range.cend_())
 		{
-			return update_(key, key);
+			return update_(key);
 		}
 		return update_(key, *it);
 	}
 
-	inline any_a<> update_(any_a<> const& key, any_a<> const& value)
+	inline any_a<> update_(any_a<> const& key, any_a<> const& value = no())
 	{
 		update(key, value);
 		return value;
@@ -68,12 +68,12 @@ public:
 		any_a<> key = *it;
 		if (++it == range.cend_())
 		{
-			return insert_(key, key);
+			return insert_(key);
 		}
 		return insert_(key, *it);
 	}
 
-	inline any_a<> insert_(any_a<> const& key, any_a<> const& value)
+	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = no())
 	{
 		return boole(insert(key, value));
 	}

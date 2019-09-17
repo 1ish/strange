@@ -16,9 +16,15 @@ class herd_a
 public:
 	// herd
 	inline bool has_string(std::string const& s) const;
+
 	inline bool at_string(std::string const& s) const;
+
+	inline void update(any_a<> const& thing);
+	inline void update_string(std::string const& s);
+
 	inline bool insert(any_a<> const& thing);
 	inline bool insert_string(std::string const& s);
+
 	inline bool erase_string(std::string const& s);
 };
 
