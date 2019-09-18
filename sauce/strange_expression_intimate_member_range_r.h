@@ -16,7 +16,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_intimate_member_range::val", native_function_t<>::val(&expression_intimate_member_range_t<>::over::val__));
+		// nope: shoal.update_string("strange::expression_intimate_member_range::val", native_function_t<>::val(&expression_intimate_member_range_t<>::over::val__));
 	}
 };
 

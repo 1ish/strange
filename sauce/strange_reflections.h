@@ -89,7 +89,7 @@ class reflection;
 #include "strange_expression_throw_r.h"
 #include "strange_expression_catch_r.h"
 #include "strange_expression_intimate_r.h"
-#include "strange_expression_intimate_range_r.h"
+#include "strange_expression_intimate_member_range_r.h"
 #include "strange_expression_block_r.h"
 #include "strange_expression_if_r.h"
 #include "strange_expression_while_r.h"
