@@ -658,18 +658,18 @@ private:
 		{
 			throw dis("strange::parser dot operator with non-name following it:\n") + token.report_();
 		}
-		auto terms = flock_t<>::val_(
-			initial,
-			expression_literal_t<>::val_(token, flock_t<>::val_(token.symbol_())));
+		auto terms = flock_t<>::val_(initial);
 		if (!_next())
 		{
 			throw dis("strange::parser dot operator with nothing following member name:\n") + token.report_();
 		}
 		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
 		{
+			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(token.symbol_())));
 			terms += _elements(scope_lake, fixed_herd, kind_shoal);
 			return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 		}
+		terms.push_back_(token.symbol_());
 		terms.push_back_(_initial(100, scope_lake, fixed_herd, kind_shoal));
 		return _subsequent(min_precedence, expression_invoke_member_range_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 	}

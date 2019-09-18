@@ -29,9 +29,9 @@ public:
 			throw dis(token.report() + "strange::expression_invoke_member_range::val passed short range");
 		}
 		auto member = *it;
-		if (!check<expression_a<>>(member))
+		if (!check<symbol_a<>>(member))
 		{
-			throw dis(token.report() + "strange::expression_invoke_member_range::val passed non-expression member term");
+			throw dis(token.report() + "strange::expression_invoke_member_range::val passed non-symbol member term");
 		}
 		if (++it == terms.cend_())
 		{
@@ -42,7 +42,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_invoke_member_range::val passed non-expression range term");
 		}
-		return expression_substitute_t<over>::val(over{ expression_invoke_member_range_t<>(token, terms, cast<expression_a<>>(thing), cast<expression_a<>>(member), cast<expression_a<>>(range)) });
+		return expression_substitute_t<over>::val(over{ expression_invoke_member_range_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member), cast<expression_a<>>(range)) });
 	}
 
 	// reflection
@@ -60,13 +60,12 @@ public:
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		auto thing_term = _thing.operate(thing, range);
-		auto const member_term = _member.operate(thing, range);
 		auto const range_term = _range.operate(thing, range);
 		if (!check<range_a<>>(range_term))
 		{
 			throw dis(_token.report() + "strange::expression_invoke_member_range::operate with non-range term");
 		}
-		return thing_t<>::invoke_member(thing_term, member_term, cast<range_a<>>(range_term));
+		return thing_t<>::invoke_member(thing_term, _member, cast<range_a<>>(range_term));
 	}
 
 	// expression
@@ -78,26 +77,24 @@ public:
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		_thing.generate(version, indent, river);
-		river.write_string(".");
-		_member.generate(version, indent, river);
+		river.write_string("." + _member.to_string());
 		_range.generate(version, indent, river);
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		_thing.generate_cpp(version, indent, river);
-		river.write_string(".");
-		_member.generate_cpp(version, indent, river);
+		river.write_string("." + _member.to_string());
 		_range.generate_cpp(version, indent, river);
 	}
 
 protected:
 	flock_a<> const _terms;
 	expression_a<> const _thing;
-	expression_a<> const _member; //TODO symbol
+	symbol_a<> const _member;
 	expression_a<> const _range;
 
-	inline expression_invoke_member_range_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, expression_a<> const& member, expression_a<> const& range)
+	inline expression_invoke_member_range_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, symbol_a<> const& member, expression_a<> const& range)
 		: expression_t(token, is_pure_literal(token, thing, member, range))
 		, _terms{ terms }
 		, _thing{ thing }
@@ -105,16 +102,10 @@ protected:
 		, _range{ range }
 	{}
 
-	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& thing_expression, expression_a<> const& member_expression, expression_a<> const& range_expression)
+	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& thing_expression, symbol_a<> const& member, expression_a<> const& range_expression)
 	{
 		std::pair<bool, bool> pure_literal(true, true);
 		if (!thing_expression.literal())
-		{
-			pure_literal.first = false;
-			pure_literal.second = false;
-			return pure_literal;
-		}
-		if (!member_expression.literal())
 		{
 			pure_literal.first = false;
 			pure_literal.second = false;
@@ -127,7 +118,6 @@ protected:
 			return pure_literal;
 		}
 		auto thing = thing_expression.evaluate_();
-		auto member = member_expression.evaluate_();
 		auto any_range = range_expression.evaluate_();
 		if (!check<range_a<>>(any_range))
 		{
