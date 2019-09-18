@@ -214,24 +214,15 @@ class tokenizer_t : public thing_t<___ego___>
 				}
 				else if (second)
 				{
-					if (char1 == '=' && char2 == '=' && (token == "!" || token == "#")) // !== or #==
+					if (char1 == '=' && char2 == '=' && token == "!") // !==
 					{
 						_use = char1; // =
-						return punctuation_token(token); // ! or #
+						return punctuation_token(token); // !
 					}
-					if (token == "^")
+					if ((char1 == '.' && char2 == ':' || char1 == ':' && char2 == '.') && token == "^") // ^.: / ^:.
 					{
-						if (char1 == ':' && char2 == '.') // ^:.
-						{
-							token += char1;
-							continue;
-						}
-						if (char1 == '.' && char2 == ':') // ^.:
-						{
-							_use = char1;
-							return punctuation_token(token);
-						}
-						// ^: or ^.
+						_use = char1;
+						return punctuation_token(token); // ^
 					}
 					return punctuation_token(token + char1);
 				}

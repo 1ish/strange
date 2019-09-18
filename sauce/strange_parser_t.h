@@ -391,7 +391,7 @@ private:
 				}
 				return _colon_dot(min_precedence, initial, scope_lake, fixed_herd, kind_shoal);
 			}
-			if (op == "]" || op == "," || op == ":") //TODO ...
+			if (op == "," || op == ":" || op == ";" || op == "]" || op == "}" || op == ")") //TODO ...
 			{
 				// delimiter
 				return initial;
