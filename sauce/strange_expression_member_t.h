@@ -29,11 +29,11 @@ public:
 			throw dis(token.report() + "strange::expression_member::val passed short range");
 		}
 		auto member = *it;
-		if (!check<expression_a<>>(member))
+		if (!check<symbol_a<>>(member))
 		{
 			throw dis(token.report() + "strange::expression_member::val passed non-expression member term");
 		}
-		return expression_substitute_t<over>::val(over{ expression_member_t<>(token, terms, cast<expression_a<>>(thing), cast<expression_a<>>(member)) });
+		return expression_substitute_t<over>::val(over{ expression_member_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member)) });
 	}
 
 	// reflection
@@ -51,8 +51,7 @@ public:
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		auto const thing_term = _thing.operate(thing, range);
-		auto const member_term = _member.operate(thing, range);
-		auto const member = thing_term.operations_().at_(member_term);
+		auto const member = thing_term.operations_().at_(_member);
 		if (!check<operation_a<>>(member))
 		{
 			throw dis(_token.report() + "strange::expression_member::operate with non-existent or non-operaton member");
@@ -69,30 +68,28 @@ public:
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		_thing.generate(version, indent, river);
-		river.write_string(":.");
-		_member.generate(version, indent, river);
+		river.write_string(":." + _member.to_string());
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		_thing.generate_cpp(version, indent, river);
-		river.write_string(":.");
-		_member.generate_cpp(version, indent, river);
+		river.write_string(":." + _member.to_string());
 	}
 
 protected:
 	flock_a<> const _terms;
 	expression_a<> const _thing;
-	expression_a<> const _member; //TODO symbol
+	symbol_a<> const _member;
 
-	inline expression_member_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, expression_a<> const& member)
+	inline expression_member_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, symbol_a<> const& member)
 		: expression_t(token, is_pure_literal(token, thing, member))
 		, _terms{ terms }
 		, _thing{ thing }
 		, _member{ member }
 	{}
 
-	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& thing_expression, expression_a<> const& member_expression)
+	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, expression_a<> const& thing_expression, symbol_a<> const& member)
 	{
 		std::pair<bool, bool> pure_literal(true, true);
 		if (!thing_expression.literal())
@@ -101,14 +98,7 @@ protected:
 			pure_literal.second = false;
 			return pure_literal;
 		}
-		if (!member_expression.literal())
-		{
-			pure_literal.first = false;
-			pure_literal.second = false;
-			return pure_literal;
-		}
 		auto thing = thing_expression.evaluate_();
-		auto member = member_expression.evaluate_();
 		if (!thing.operations_().has_(member))
 		{
 			throw dis(token.report() + "strange::expression_member::val passed non-existent member");

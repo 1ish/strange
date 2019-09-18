@@ -577,7 +577,6 @@ private:
 					oper = sym("self_subtract");
 					right_to_left = true;
 				}
-				//TODO ...
 				else
 				{
 					throw dis("strange::parser unexpected operator:\n") + token.report_();
@@ -718,9 +717,7 @@ private:
 		{
 			throw dis("strange::parser colon-dot operator with non-name following it:\n") + token.report_();
 		}
-		auto const terms = flock_t<>::val_(
-			initial,
-			expression_literal_t<>::val_(token, flock_t<>::val_(token.symbol_())));
+		auto const terms = flock_t<>::val_(initial, token.symbol_());
 		return _subsequent(min_precedence, expression_member_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 	}
 
