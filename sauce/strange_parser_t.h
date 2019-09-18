@@ -162,18 +162,13 @@ private:
 		auto const token = _token_;
 		auto const name = token.symbol_();
 		auto terms = flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_())); // me
-		if (scope_lake.empty())
-		{
-			// me._name_[]
-			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(name)));
-		}
-		else
-		{
-			// me._scope_name_[]
-			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + name.to_string()))));
-		}
+		terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(_identifier(scope_lake, name))));// _name_ / _scope_name_
 		if (_next() && _token_.tag() == "punctuation" && _token_.symbol() == ":=") // consume
 		{
+			if (!_next())
+			{
+				throw dis("strange::parser attribute assignment with nothing following it:\n") + token.report_();
+			}
 			terms.push_back_(_initial(0, scope_lake, fixed_herd, kind_shoal)); // assignment
 		}
 		return expression_intimate_t<>::val_(token, terms);
@@ -186,27 +181,28 @@ private:
 	{
 		auto const token = _token_;
 		auto terms = flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_())); // me
-		if (scope_lake.empty())
-		{
-			// me._name
-			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(token.symbol_())));
-		}
-		else
-		{
-			// me._scope_name
-			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(sym("_" + lake_to_string(scope_lake) + token.symbol_().to_string()))));
-		}
+		auto const identifier = _identifier(scope_lake, token.symbol_());// _name / _scope_name
 		if (!_next()) // consume
 		{
 			throw dis("strange::parser intimate operation with no arguments:\n") + token.report_();
 		}
 		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
 		{
-			terms += _elements(scope_lake, fixed_herd, kind_shoal); // me._name[...]
+			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(identifier)));
+			terms += _elements(scope_lake, fixed_herd, kind_shoal); // me._scope_name[...]
 			return expression_intimate_t<>::val_(token, terms);
 		}
-		terms.push_back_(_initial(100, scope_lake, fixed_herd, kind_shoal)); // me._name range
+		terms.push_back_(identifier);
+		terms.push_back_(_initial(100, scope_lake, fixed_herd, kind_shoal)); // me._scope_name range
 		return expression_intimate_member_range_t<>::val_(token, terms);
+	}
+
+	static inline symbol_a<> _identifier(
+		lake_a<int8_t> const& scope_lake,
+		symbol_a<> const& name)
+	{
+		// _name / _scope_name
+		return scope_lake.empty() ? name : sym("_" + lake_to_string(scope_lake) + name.to_string());
 	}
 
 	inline expression_a<> _instruction(
