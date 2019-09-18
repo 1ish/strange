@@ -150,6 +150,10 @@ private:
 			{
 				initial = _me_dot(scope_lake, fixed_herd, kind_shoal);
 			}
+			else if (op == "^:") // me colon
+			{
+				initial = _me_colon(scope_lake, fixed_herd, kind_shoal);
+			}
 			//TODO ...
 			else
 			{
@@ -203,6 +207,41 @@ private:
 		return expression_invoke_member_range_t<>::val_(token, terms);
 	}
 
+	inline expression_a<> _me_colon(
+		lake_a<int8_t> const& scope_lake,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
+	{
+		auto const token = _token_;
+		if (!_next())
+		{
+			throw dis("strange::parser ^: with nothing following it:\n") + token.report_();
+		}
+		if (_token_.tag() != "name")
+		{
+			throw dis("strange::parser ^: with non-name following it:\n") + token.report_();
+		}
+		auto const name_symbol = _token_.symbol_();
+		std::string const name = name_symbol.to_string();
+		if (name.c_str()[0] == '_')
+		{
+			if (name.c_str()[name.length() - 1] == '_')
+			{
+				return _attribute(scope_lake, fixed_herd, kind_shoal);
+			}
+			_next();
+			auto const terms = flock_t<>::val_(
+				expression_me_t<>::val_(token, flock_t<>::val_()),
+				_identifier(scope_lake, name_symbol)); // me:._name / me:._scope_name
+			return expression_intimate_member_t<>::val_(token, terms);
+		}
+		_next();
+		auto const terms = flock_t<>::val_(
+			expression_me_t<>::val_(token, flock_t<>::val_()),
+			name_symbol); // me:.name
+		return expression_member_t<>::val_(token, terms);
+	}
+
 	inline expression_a<> _attribute(
 		lake_a<int8_t> const& scope_lake,
 		unordered_herd_a<> const& fixed_herd,
@@ -211,7 +250,7 @@ private:
 		auto const token = _token_;
 		auto const name = token.symbol_();
 		auto terms = flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_())); // me
-		terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(_identifier(scope_lake, name))));// _name_ / _scope_name_
+		terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(_identifier(scope_lake, name)))); // _name_ / _scope_name_
 		if (_next() && _token_.tag() == "punctuation" && _token_.symbol() == ":=") // consume
 		{
 			if (!_next())
@@ -230,7 +269,7 @@ private:
 	{
 		auto const token = _token_;
 		auto terms = flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_())); // me
-		auto const identifier = _identifier(scope_lake, token.symbol_());// _name / _scope_name
+		auto const identifier = _identifier(scope_lake, token.symbol_()); // _name / _scope_name
 		if (!_next()) // consume
 		{
 			throw dis("strange::parser intimate operation with no arguments:\n") + token.report_();
@@ -736,14 +775,14 @@ private:
 			// member
 			if (!_next())
 			{
-				throw dis("strange::parser :. operator with nothing following it:\n") + token.report_();
+				throw dis("strange::parser :. with nothing following it:\n") + token.report_();
 			}
 			second = _colon_dot(100, second, scope_lake, fixed_herd, kind_shoal);
 		}
 		auto terms = flock_t<>::val_(initial, second);
 		if (!_next())
 		{
-			throw dis("strange::parser .: operator with nothing following its operation:\n") + token.report_();
+			throw dis("strange::parser .: with nothing following its operation:\n") + token.report_();
 		}
 		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
 		{
@@ -764,7 +803,7 @@ private:
 		auto const token = _token_;
 		if (token.tag() != "name")
 		{
-			throw dis("strange::parser :. operator with non-name following it:\n") + token.report_();
+			throw dis("strange::parser :. with non-name following it:\n") + token.report_();
 		}
 		auto const terms = flock_t<>::val_(initial, token.symbol_());
 		return _subsequent(min_precedence, expression_member_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);

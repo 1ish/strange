@@ -484,6 +484,16 @@ public:
 		return creation.at_(member).operate(thing, range);
 	}
 
+	static inline any_a<> intimate_member(any_a<>& thing, any_a<> const& member)
+	{
+		auto const& creation = static_cast<any_c<> const&>(thing.const_thing())._creation;
+		if (!creation.has_(member))
+		{
+			throw dis("strange::creature::intimate_member passed non-existent member");
+		}
+		return creation.at_(member);
+	}
+
 protected:
 	shoal_a<> const _creation;
 	unordered_shoal_a<> const _operations;
