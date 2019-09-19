@@ -143,12 +143,14 @@ private:
 			}
 			else if (op == "^") // me
 			{
-				_next();
-				initial = expression_me_t<>::val_(token, flock_t<>::val_());
-			}
-			else if (op == "^.") // me dot
-			{
-				initial = _me_dot(scope_lake, fixed_herd, kind_shoal);
+				if (_next() && _token_.tag() == "punctuation" && _token_.symbol() == ".") // me dot
+				{
+					initial = _me_dot(scope_lake, fixed_herd, kind_shoal);
+				}
+				else
+				{
+					initial = expression_me_t<>::val_(token, flock_t<>::val_()); // me
+				}
 			}
 			else if (op == "^:") // me colon
 			{

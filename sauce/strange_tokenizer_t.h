@@ -219,9 +219,9 @@ class tokenizer_t : public thing_t<___ego___>
 						_use = char1; // =
 						return punctuation_token(token); // !
 					}
-					if ((char1 == '.' && char2 == ':' || char1 == ':' && char2 == '.') && token == "^") // ^.: / ^:.
+					if (char1 == ':' && char2 == '.' && token == "^") // ^:.
 					{
-						_use = char1;
+						_use = char1; // :
 						return punctuation_token(token); // ^
 					}
 					return punctuation_token(token + char1);
@@ -324,7 +324,7 @@ class tokenizer_t : public thing_t<___ego___>
 					return punctuation_token(token);
 				case '^':
 					token = char1;
-					if (char2 == '.' || char2 == ':')
+					if (char2 == ':')
 					{
 						second = true;
 						break;
