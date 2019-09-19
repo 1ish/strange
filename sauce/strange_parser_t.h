@@ -159,6 +159,14 @@ private:
 					initial = expression_me_t<>::val_(token, flock_t<>::val_()); // me
 				}
 			}
+			else if (token.symbol() == "[") // flock
+			{
+				initial = expression_flock_t<>::val_(token, _elements(scope_lake, fixed_herd, kind_shoal));
+			}
+			else if (token.symbol() == "(") // block
+			{
+				initial = expression_block_t<>::val_(token, _elements(scope_lake, fixed_herd, kind_shoal));
+			}
 			//TODO ...
 			else
 			{
