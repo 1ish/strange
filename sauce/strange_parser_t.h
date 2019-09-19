@@ -232,7 +232,7 @@ private:
 		{
 			if (name.c_str()[name.length() - 1] == '_')
 			{
-				return _initial_attribute(scope_lake, fixed_herd, kind_shoal);
+				throw dis("strange::parser ^:. with attribute name following it:\n") + token.report_();
 			}
 			_next();
 			auto const terms = flock_t<>::val_(
