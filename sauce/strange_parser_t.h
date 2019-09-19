@@ -143,18 +143,21 @@ private:
 			}
 			else if (op == "^") // me
 			{
-				if (_next() && _token_.tag() == "punctuation" && _token_.symbol() == ".") // me dot
+				if (_next() && _token_.tag() == "punctuation")
 				{
-					initial = _me_dot(scope_lake, fixed_herd, kind_shoal);
+					if (_token_.symbol() == ".") // me dot
+					{
+						initial = _me_dot(scope_lake, fixed_herd, kind_shoal);
+					}
+					else if (_token_.symbol() == ":.") // me colon-dot
+					{
+						initial = _me_colon_dot(scope_lake, fixed_herd, kind_shoal);
+					}
 				}
 				else
 				{
 					initial = expression_me_t<>::val_(token, flock_t<>::val_()); // me
 				}
-			}
-			else if (op == "^:") // me colon
-			{
-				initial = _me_colon(scope_lake, fixed_herd, kind_shoal);
 			}
 			//TODO ...
 			else
@@ -209,7 +212,7 @@ private:
 		return expression_invoke_member_range_t<>::val_(token, terms);
 	}
 
-	inline expression_a<> _me_colon(
+	inline expression_a<> _me_colon_dot(
 		lake_a<int8_t> const& scope_lake,
 		unordered_herd_a<> const& fixed_herd,
 		unordered_shoal_a<> const& kind_shoal)
