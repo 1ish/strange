@@ -734,8 +734,46 @@ private:
 		unordered_herd_a<> const& fixed_herd,
 		unordered_shoal_a<> const& kind_shoal)
 	{
-		//TODO consume [...]
-		return flock_t<>::val_();
+		bool const square = _token_.symbol() == "[";
+		bool const round = _token_.symbol() == "(";
+		bool const curly = _token_.symbol() == "{";
+		if (!_next())
+		{
+			throw dis("strange::parser " + _token_.symbol() + " with nothing following it:\n") + _token_.report_();
+		}
+		auto flock = flock_t<>::val_();
+		if (_token_.tag() == "punctuation" &&
+			(square && _token_.symbol() == "]" ||
+				round && _token_.symbol() == ")" ||
+				curly && _token_.symbol() == "}"))
+		{
+			_next();
+		}
+		else for (;;)
+		{
+			flock.push_back(_initial(0, scope_lake, fixed_herd, kind_shoal));
+			if (_token_.tag() != "punctuation")
+			{
+				throw dis("strange::parser element with non-punctuation following it:\n") + _token_.report_();
+			}
+			if (_token_.symbol() == ",")
+			{
+				if (!_next())
+				{
+					throw dis("strange::parser , with nothing following it:\n") + _token_.report_();
+				}
+				continue;
+			}
+			if (square && _token_.symbol() == "]" ||
+				round && _token_.symbol() == ")" ||
+				curly && _token_.symbol() == "}")
+			{
+				_next();
+				break;
+			}
+			throw dis("strange::parser element with unexpected punctuation following it:\n") + _token_.report_();
+		}
+		return flock;
 	}
 
 	inline expression_a<> _subsequent_dot(
