@@ -220,11 +220,11 @@ private:
 		auto const token = _token_;
 		if (!_next())
 		{
-			throw dis("strange::parser ^: with nothing following it:\n") + token.report_();
+			throw dis("strange::parser ^:. with nothing following it:\n") + token.report_();
 		}
 		if (_token_.tag() != "name")
 		{
-			throw dis("strange::parser ^: with non-name following it:\n") + token.report_();
+			throw dis("strange::parser ^:. with non-name following it:\n") + token.report_();
 		}
 		auto const name_symbol = _token_.symbol_();
 		std::string const name = name_symbol.to_string();
@@ -810,27 +810,8 @@ private:
 		{
 			throw dis("strange::parser :. with non-name following it:\n") + token.report_();
 		}
-		auto const name_symbol = token.symbol_();
-		std::string const name = name_symbol.to_string();
-		if (name.c_str()[0] == '_')
-		{
-			// check that initial is me
-			if (initial.type_() != expression_me_t<>::type_() || initial.token_().tag() != "punctuation" || initial.token_().symbol() != "^")
-			{
-				throw dis("strange::parser :. with intimate name following it:\n") + token.report_();
-			}
-			if (name.c_str()[name.length() - 1] == '_')
-			{
-				return _subsequent(min_precedence, _attribute(scope_lake, fixed_herd, kind_shoal), scope_lake, fixed_herd, kind_shoal);
-			}
-			_next();
-			auto const terms = flock_t<>::val_(
-				expression_me_t<>::val_(token, flock_t<>::val_()),
-				_identifier(scope_lake, name_symbol)); // me:._name / me:._scope_name
-			return _subsequent(min_precedence, expression_intimate_member_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
-		}
 		_next();
-		auto const terms = flock_t<>::val_(initial, name_symbol);
+		auto const terms = flock_t<>::val_(initial, token.symbol_());
 		return _subsequent(min_precedence, expression_member_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 	}
 
