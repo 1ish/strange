@@ -101,18 +101,15 @@ private:
 		else if (_token_.tag() == "name")
 		{
 			std::string const name = _token_.symbol();
-			if (name.c_str()[0] == '_')
+			if (name.c_str()[name.length() - 1] == '_')
 			{
-				if (name.c_str()[name.length() - 1] == '_')
-				{
-					initial = _initial_attribute(scope_lake, fixed_herd, kind_shoal);
-				}
-				else
-				{
-					initial = _initial_intimate(scope_lake, fixed_herd, kind_shoal);
-				}
+				initial = _initial_attribute(scope_lake, fixed_herd, kind_shoal);
 			}
-			else if (name.c_str()[name.length() - 1] == '_')
+			else if (name.c_str()[0] == '_')
+			{
+				initial = _initial_intimate(scope_lake, fixed_herd, kind_shoal);
+			}
+			else if (_shared_.has_string(name))
 			{
 				initial = _initial_instruction(scope_lake, fixed_herd, kind_shoal);
 			}
@@ -196,12 +193,12 @@ private:
 		}
 		auto const name_symbol = _token_.symbol_();
 		std::string const name = name_symbol.to_string();
+		if (name.c_str()[name.length() - 1] == '_')
+		{
+			return _initial_attribute(scope_lake, fixed_herd, kind_shoal);
+		}
 		if (name.c_str()[0] == '_')
 		{
-			if (name.c_str()[name.length() - 1] == '_')
-			{
-				return _initial_attribute(scope_lake, fixed_herd, kind_shoal);
-			}
 			return _initial_intimate(scope_lake, fixed_herd, kind_shoal);
 		}
 		if (!_next())
@@ -236,12 +233,12 @@ private:
 		}
 		auto const name_symbol = _token_.symbol_();
 		std::string const name = name_symbol.to_string();
-		if (name.c_str()[0] == '_')
+		if (name.c_str()[name.length() - 1] == '_')
 		{
-			if (name.c_str()[name.length() - 1] == '_')
-			{
-				throw dis("strange::parser ^:. with attribute name following it:\n") + token.report_();
-			}
+			throw dis("strange::parser ^:. with attribute name following it:\n") + token.report_();
+		}
+		else if (name.c_str()[0] == '_')
+		{
 			_next();
 			auto const terms = flock_t<>::val_(
 				expression_me_t<>::val_(token, flock_t<>::val_()),
@@ -302,8 +299,10 @@ private:
 		lake_a<int8_t> const& scope_lake,
 		symbol_a<> const& name)
 	{
-		// _name / _scope_name
-		return scope_lake.empty() ? name : sym("_" + lake_to_string(scope_lake) + name.to_string());
+		// name / _scope_name
+		return (scope_lake.empty() || name.to_string().c_str()[0] != '_')
+			? name
+			: sym("_" + lake_to_string(scope_lake) + name.to_string());
 	}
 
 	inline expression_a<> _initial_instruction(
@@ -744,7 +743,6 @@ private:
 	{
 		bool const square = _token_.symbol() == "[";
 		bool const round = _token_.symbol() == "(";
-		bool const curly = _token_.symbol() == "{";
 		if (!_next())
 		{
 			throw dis("strange::parser " + _token_.symbol() + " with nothing following it:\n") + _token_.report_();
@@ -752,8 +750,7 @@ private:
 		auto flock = flock_t<>::val_();
 		if (_token_.tag() == "punctuation" &&
 			(square && _token_.symbol() == "]" ||
-				round && _token_.symbol() == ")" ||
-				curly && _token_.symbol() == "}"))
+				round && _token_.symbol() == ")"))
 		{
 			_next();
 		}
@@ -773,8 +770,7 @@ private:
 				continue;
 			}
 			if (square && _token_.symbol() == "]" ||
-				round && _token_.symbol() == ")" ||
-				curly && _token_.symbol() == "}")
+				round && _token_.symbol() == ")")
 			{
 				_next();
 				break;
@@ -797,6 +793,20 @@ private:
 			throw dis("strange::parser . with non-name following it:\n") + token.report_();
 		}
 		auto terms = flock_t<>::val_(initial);
+		if (token.symbol().c_str()[token.symbol().length() - 1] == '_')
+		{
+			// attribute
+			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(token.symbol_())));
+			if (_next() && _token_.tag() == "punctuation" && _token_.symbol() == ":=")
+			{
+				if (!_next())
+				{
+					throw dis("strange::parser attribute assignment with nothing following it:\n") + token.report_();
+				}
+				terms.push_back_(_initial(0, scope_lake, fixed_herd, kind_shoal)); // assignment
+			}
+			return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+		}
 		if (!_next())
 		{
 			throw dis("strange::parser . with nothing following member name:\n") + token.report_();
