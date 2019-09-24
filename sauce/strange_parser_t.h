@@ -269,7 +269,7 @@ private:
 			}
 			terms.push_back_(_initial(0, scope_lake, fixed_herd, kind_shoal)); // assignment
 		}
-		return expression_intimate_t<>::val_(token, terms);
+		return expression_intimate_attribute_t<>::val_(token, terms);
 	}
 
 	inline expression_a<> _initial_intimate(
