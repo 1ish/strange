@@ -92,6 +92,7 @@ class reflection;
 #include "strange_expression_intimate_member_r.h"
 #include "strange_expression_intimate_member_range_r.h"
 #include "strange_expression_intimate_attribute_r.h"
+#include "strange_expression_invoke_attribute_r.h"
 #include "strange_expression_block_r.h"
 #include "strange_expression_if_r.h"
 #include "strange_expression_while_r.h"

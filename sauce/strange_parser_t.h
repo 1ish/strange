@@ -153,7 +153,7 @@ private:
 				}
 				else
 				{
-					initial = expression_me_t<>::val_(token, flock_t<>::val_()); // me
+					initial = expression_me_t<>::val_(token); // me
 				}
 			}
 			else if (token.symbol() == "[") // flock
@@ -205,7 +205,7 @@ private:
 		{
 			throw dis("strange::parser ^. with no nothing following member name:\n") + token.report_();
 		}
-		auto terms = flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_())); // me
+		auto terms = flock_t<>::val_(expression_me_t<>::val_(token)); // me
 		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
 		{
 			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(name_symbol)));
@@ -241,13 +241,13 @@ private:
 		{
 			_next();
 			auto const terms = flock_t<>::val_(
-				expression_me_t<>::val_(token, flock_t<>::val_()),
+				expression_me_t<>::val_(token),
 				_identifier(scope_lake, name_symbol)); // me:._name / me:._scope_name
 			return expression_intimate_member_t<>::val_(token, terms);
 		}
 		_next();
 		auto const terms = flock_t<>::val_(
-			expression_me_t<>::val_(token, flock_t<>::val_()),
+			expression_me_t<>::val_(token),
 			name_symbol); // me:.name
 		return expression_member_t<>::val_(token, terms);
 	}
@@ -259,8 +259,8 @@ private:
 	{
 		auto const token = _token_;
 		auto const name = token.symbol_();
-		auto terms = flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_())); // me
-		terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(_identifier(scope_lake, name)))); // _name_ / _scope_name_
+		auto terms = flock_t<>::val_(expression_me_t<>::val_(token)); // me
+		terms.push_back_(_identifier(scope_lake, name)); // _name_ / _scope_name_
 		if (_next() && _token_.tag() == "punctuation" && _token_.symbol() == ":=") // consume
 		{
 			if (!_next())
@@ -278,7 +278,7 @@ private:
 		unordered_shoal_a<> const& kind_shoal)
 	{
 		auto const token = _token_;
-		auto terms = flock_t<>::val_(expression_me_t<>::val_(token, flock_t<>::val_())); // me
+		auto terms = flock_t<>::val_(expression_me_t<>::val_(token)); // me
 		auto const identifier = _identifier(scope_lake, token.symbol_()); // _name / _scope_name
 		if (!_next()) // consume
 		{
@@ -796,7 +796,7 @@ private:
 		if (token.symbol().c_str()[token.symbol().length() - 1] == '_')
 		{
 			// attribute
-			terms.push_back_(expression_literal_t<>::val_(token, flock_t<>::val_(token.symbol_())));
+			terms.push_back_(token.symbol_());
 			if (_next() && _token_.tag() == "punctuation" && _token_.symbol() == ":=")
 			{
 				if (!_next())
@@ -805,7 +805,7 @@ private:
 				}
 				terms.push_back_(_initial(0, scope_lake, fixed_herd, kind_shoal)); // assignment
 			}
-			return _subsequent(min_precedence, expression_invoke_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
+			return _subsequent(min_precedence, expression_invoke_attribute_t<>::val_(token, terms), scope_lake, fixed_herd, kind_shoal);
 		}
 		if (!_next())
 		{
