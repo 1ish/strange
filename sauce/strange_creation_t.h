@@ -51,7 +51,7 @@ public:
 			sym("different"),
 			sym("ranged"));
 
-		auto type_op = parent.at_string("type");
+		auto const type_op = parent.at_string("type");
 		if (!type_op)
 		{
 			type = sym("");
@@ -67,7 +67,7 @@ public:
 		}
 		auto const& type_string = type.to_string();
 
-		auto cat_op = parent.at_string("cat");
+		auto const cat_op = parent.at_string("cat");
 		if (!cat_op)
 		{
 			cat = cat_t<>::val_();
@@ -83,7 +83,7 @@ public:
 		}
 		cats.insert(cat);
 
-		auto cats_op = parent.at_string("cats");
+		auto const cats_op = parent.at_string("cats");
 		any_a<> cats_any = no();
 		if (cats_op)
 		{
@@ -95,7 +95,7 @@ public:
 			cats += cats_any;
 		}
 
-		auto kind_op = parent.at_string("kind");
+		auto const kind_op = parent.at_string("kind");
 		if (!kind_op)
 		{
 			kind = cat_op ? kind_from_cat(cat) : kind_t<>::val_();
@@ -111,7 +111,7 @@ public:
 		}
 		kinds.insert(kind);
 
-		auto kinds_op = parent.at_string("kinds");
+		auto const kinds_op = parent.at_string("kinds");
 		if (!kinds_op)
 		{
 			if (cats_any)
