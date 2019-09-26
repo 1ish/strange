@@ -494,9 +494,18 @@ public:
 		return creation.at_(member);
 	}
 
+	inline void update_attribution(symbol_a<> const& name, operation_a<> const& attribution)
+	{
+		_creation.update_(name, attribution);
+		if (name.to_string().c_str()[0] != '_')
+		{
+			_operations.update_(name, attribution);
+		}
+	}
+
 protected:
-	shoal_a<> const _creation;
-	unordered_shoal_a<> const _operations;
+	shoal_a<> _creation;
+	unordered_shoal_a<> _operations;
 
 	// construction
 	inline any_c(shoal_a<> const& creation)

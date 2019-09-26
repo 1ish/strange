@@ -12,9 +12,9 @@ public:
 	using over = thing_o<attribution_t<>>;
 
 	// construction
-	static inline operation_a<> val_(any_a<> const& thing)
+	static inline operation_a<> val_(symbol_a<> const& name, any_a<> const& thing)
 	{
-		return operation_a<>{ over{ attribution_t<>(thing) } };
+		return operation_a<>{ over{ attribution_t<>(name, thing) } };
 	}
 
 	// reflection
@@ -28,21 +28,34 @@ public:
 	{}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		auto const it = range.cbegin_();
-		if (it != range.cend_())
+		if (it != range.cend_()) // assign
 		{
-			_thing = *it;
+			auto const value = *it;
+			if (!_thing.identical(value))
+			{
+				auto const original = thing.const_thing().identity();
+				auto& mut = static_cast<any_c<>&>(thing.mutable_thing());
+				if (mut.identity() != original)
+				{
+					mut.update_attribution(_name, attribution_t<>::val_(_name, value));
+					return value;
+				}
+				_thing = value;
+			}
 		}
 		return _thing;
 	}
 
 protected:
+	symbol_a<> const _name;
 	any_a<> mutable _thing;
 
-	inline attribution_t(any_a<> const& thing)
+	inline attribution_t(symbol_a<> const& name, any_a<> const& thing)
 		: operation_t{}
+		, _name{ name }
 		, _thing{ thing }
 	{}
 };
