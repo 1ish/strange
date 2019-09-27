@@ -28,11 +28,13 @@ public:
 	{}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const&) const
+	inline any_a<> operate(any_a<>&, range_a<> const& range) const
 	{
-		any_a<> copy = _thing;
-		copy.mutable_thing();
-		return copy;
+		if (range.cbegin_() != range.cend_()) //TODO check when parsing instead
+		{
+			throw dis("strange::attribute_extraction passed non-empty range");
+		}
+		return _thing;
 	}
 
 protected:

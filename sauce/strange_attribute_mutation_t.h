@@ -12,9 +12,9 @@ public:
 	using over = thing_o<attribute_mutation_t<>>;
 
 	// construction
-	static inline operation_a<> val_(any_a<> const& thing)
+	static inline operation_a<> val_(symbol_a<> const& name, any_a<> const& thing)
 	{
-		return operation_a<>{ over{ attribute_mutation_t<>(thing) } };
+		return operation_a<>{ over{ attribute_mutation_t<>(name, thing) } };
 	}
 
 	// reflection
@@ -28,16 +28,34 @@ public:
 	{}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const&) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		return any_a<>(_thing, true);
+		auto const it = range.cbegin_();
+		if (it != range.cend_()) // assign
+		{
+			auto const value = *it;
+			if (!_thing.identical(value))
+			{
+				auto const original = thing.const_thing().identity();
+				auto& mut = static_cast<any_c<>&>(thing.mutable_thing());
+				if (mut.identity() != original)
+				{
+					mut.update_attribution(_name, attribute_mutation_t<>::val_(_name, value));
+					return value;
+				}
+				_thing = value;
+			}
+		}
+		return _thing;
 	}
 
 protected:
-	any_a<> const _thing;
+	symbol_a<> const _name;
+	any_a<> mutable _thing;
 
-	inline attribute_mutation_t(any_a<> const& thing)
+	inline attribute_mutation_t(symbol_a<> const& name, any_a<> const& thing)
 		: operation_t{}
+		, _name{ name }
 		, _thing{ thing }
 	{}
 };

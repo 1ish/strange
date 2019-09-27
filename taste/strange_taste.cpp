@@ -49,13 +49,11 @@ TEST(TestCaseName, ForLoop)
 	any_a<> g = native_function_t<>::val(&nothing_t<>::val__, kind_t<>::val_(), "x", kind_t<>::val_(), "y", kind_t<>::val_(), "z");
 	any_a<> h = native_extraction_t<range_a<>>::val(&range_a<>::cbegin__);
 	any_a<> i = native_mutation_t<flock_a<>>::val(&flock_a<>::begin__);
-	any_a<> j = attribute_mutation_t<>::val_(no());
+	any_a<> j = attribute_mutation_t<>::val_(sym("yes"), no());
 	any_a<> l = attribute_extraction_t<>::val_(no());
 	any_a<> m = description_t<>::val_();
 	any_a<> o = abstraction_t<>::val_();
 	any_a<> p = incarnation_t<>::val_(unordered_shoal_t<>::val_(), flock_t<>::val_(), k.aspects_(), flock_t<>::val_());
-	any_a<> q = attribution_t<>::val_(sym("yes"), no());
-	any_a<> r = introspection_t<>::val_(no());
 
 	ordered_shoal_a<> ordered_shoal = ordered_shoal_t<>::val_();
 	unordered_shoal_a<> unordered_shoal = unordered_shoal_t<>::val_();
