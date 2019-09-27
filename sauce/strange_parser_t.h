@@ -109,6 +109,14 @@ private:
 			{
 				initial = _initial_intimate(scope_lake, fixed_herd, kind_shoal);
 			}
+			else if (name == "true")
+			{
+				initial = expression_literal_t<>::val_(_token_, flock_t<>::val_(yes()));
+			}
+			else if (name == "false" || name == "null")
+			{
+				initial = expression_literal_t<>::val_(_token_, flock_t<>::val_(no()));
+			}
 			else if (_shared_.has_string(name))
 			{
 				initial = _initial_instruction(scope_lake, fixed_herd, kind_shoal);
