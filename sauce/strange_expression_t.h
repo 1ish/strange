@@ -25,7 +25,7 @@ public:
 		{}
 	};
 
-	class  return_i : public std::runtime_error
+	class return_i : public std::runtime_error
 	{
 	public:
 		any_a<> const result;

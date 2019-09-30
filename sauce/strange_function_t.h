@@ -12,70 +12,20 @@ public:
 	using over = thing_o<function_t<>>;
 
 	// construction
-	static inline operation_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline operation_a<> val_(token_a<> const& token, flock_a<> const& names, flock_a<> const& params, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
 	{
-		auto names = flock_t<>::val_();
-		auto params = flock_t<>::val_();
-		auto values = flock_t<>::val_();
-		auto defaults = flock_t<>::val_();
-		any_a<> name = sym("");
-		any_a<> cat = cat_t<>::val_();
-		any_a<> value = no();
-		for (auto const& term : terms)
-		{
-			if (value)
-			{
-				names.push_back(name);
-				params.push_back(cat);
-				values.push_back(value);
-				defaults.push_back(cast<expression_a<>>(value).evaluate_());
-			}
-
-			if (!check<expression_a<>>(term))
-			{
-				throw dis(token.report() + "strange::function::val passed non-expression catch");
-			}
-			auto subterms = cast<expression_a<>>(term).terms_();
-			if (subterms.size() != 3)
-			{
-				throw dis(token.report() + "strange::function::val passed wrong number of subterms");
-			}
-
-			name = subterms.at_index(0);
-			if (!check<symbol_a<>>(name))
-			{
-				throw dis(token.report() + "strange::function::val passed non-symbol name");
-			}
-
-			cat = subterms.at_index(1);
-			if (!check<cat_a<>>(cat))
-			{
-				throw dis(token.report() + "strange::function::val passed non-cat");
-			}
-
-			value = subterms.at_index(2);
-			if (!check<expression_a<>>(value))
-			{
-				throw dis(token.report() + "strange::function::val passed non-expression catch");
-			}
-		}
-		if (!value)
-		{
-			value = expression_t<>::val(token);
-		}
-		return operation_a<>{ over{ function_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) } };
+		return operation_a<>{ over{ function_t<>(token, names, params, defaults, name, result, expression) } };
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<function_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::function");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
-	{
-		reflection<function_t<>>::share(shoal);
-	}
+	{}
 
 	inline cat_a<> cat_() const
 	{
@@ -131,7 +81,7 @@ public:
 			}
 			return result;
 		}
-		catch (return_i& ret)
+		catch (expression_t<>::return_i& ret)
 		{
 			if (!ret.result.cats_().has_(_result))
 			{
@@ -142,10 +92,9 @@ public:
 	}
 
 protected:
-	flock_a<> const _terms;
+	token_a<> const _token;
 	flock_a<> const _names;
 	flock_a<> const _params;
-	flock_a<> const _values;
 	flock_a<> const _defaults;
 	symbol_a<> const _name;
 	cat_a<> const _result;
@@ -156,12 +105,11 @@ protected:
 	unordered_herd_a<> const _kinds;
 	unordered_shoal_a<> const _shared;
 
-	inline function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& params, flock_a<> const& values, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
-		: thing_t{}
-		, _terms{ terms }
+	inline function_t(token_a<> const& token, flock_a<> const& names, flock_a<> const& params, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
+		: operation_t(expression.pure(), expression.literal())
+		, _token{ token }
 		, _names{ names }
 		, _params{ params }
-		, _values{ values }
 		, _defaults{ defaults }
 		, _name{ name }
 		, _result{ result }
@@ -172,19 +120,7 @@ protected:
 		, _kinds{ kinds(_kind) }
 		, _shared{ unordered_shoal_t<true>::val_() }
 	{}
-
-private:
-	static bool const ___share___;
-	friend class ___function_t_share___;
 };
-
-template <typename ___ego___>
-bool const function_t<___ego___>::___share___ = []()
-{
-	auto shoal = shoal_a<>(shared(), true);
-	function_t<___ego___>::share(shoal);
-	return shoal;
-}();
 
 } // namespace strange
 
