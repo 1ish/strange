@@ -560,16 +560,19 @@ private:
 				}
 				auto const expression = _initial(0, scope_lake, fixed_herd, kind_shoal);
 				flock.push_back(expression);
-				auto value = no();
+				bool clash = false;
 				try
 				{
-					value = expression.evaluate_();
+					clash = !_shared_.insert(_scope_name(scope_lake, cast<symbol_a<>>(key)), expression.evaluate_());
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
 					throw dis("strange::parser shoal :: evaluation error:") + _token_.report_() + misunderstanding;
 				}
-				_shared_.update_(_scope_name(scope_lake, cast<symbol_a<>>(key)), value);
+				if (clash)
+				{
+					throw dis("strange::parser shoal :: redefinition of shared name:") + _token_.report_();
+				}
 			}
 			else if (_token_.symbol() == ":#")
 			{
