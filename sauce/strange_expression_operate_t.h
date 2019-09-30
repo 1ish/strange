@@ -130,23 +130,31 @@ protected:
 			pure_literal.second = false;
 			return pure_literal;
 		}
-		auto thing = expression_thing.evaluate_();
-		any_operation = expression_operation.evaluate_();
-		if (!check<operation_a<>>(any_operation))
+		try
 		{
-			throw dis(token.report() + "strange::expression_operate::val passed non-operation");
+			auto thing = expression_thing.evaluate_();
+			any_operation = expression_operation.evaluate_();
+			if (!check<operation_a<>>(any_operation))
+			{
+				throw dis(token.report() + "strange::expression_operate::val passed non-operation");
+			}
+			auto operation = cast<operation_a<>>(any_operation);
+			if (!operation.pure())
+			{
+				pure_literal.first = false;
+				pure_literal.second = false;
+				return pure_literal;
+			}
+			if (!operation.literal())
+			{
+				pure_literal.second = false;
+			}
 		}
-		auto operation = cast<operation_a<>>(any_operation);
-		if (!operation.pure())
+		catch (misunderstanding_a<>& misunderstanding)
 		{
-			pure_literal.first = false;
-			pure_literal.second = false;
-			return pure_literal;
+			throw dis("strange::expression_operate::val pure literal evaluation error:") + token.report_() + misunderstanding;
 		}
-		if (!operation.literal())
-		{
-			pure_literal.second = false;
-		}
+
 		while (++it != terms.cend_())
 		{
 			auto term = *it;

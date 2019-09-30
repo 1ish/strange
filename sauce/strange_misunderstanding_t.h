@@ -81,7 +81,7 @@ public:
 
 	inline misunderstanding_a<> operator+(misunderstanding_a<> const& misunderstanding) const
 	{
-		return misunderstanding_t<>::val(_string + misunderstanding.to_string());
+		return misunderstanding_t<>::val(_string + "\n" + misunderstanding.to_string());
 	}
 
 protected:

@@ -28,7 +28,14 @@ public:
 				names.push_back(name);
 				params.push_back(cat);
 				values.push_back(value);
-				defaults.push_back(cast<expression_a<>>(value).evaluate_());
+				try
+				{
+					defaults.push_back(cast<expression_a<>>(value).evaluate_());
+				}
+				catch (misunderstanding_a<>& misunderstanding)
+				{
+					throw dis("strange::expression_function::val parameter default evaluation error:") + token.report_() + misunderstanding;
+				}
 			}
 
 			if (!check<expression_a<>>(term))

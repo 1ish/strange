@@ -130,28 +130,36 @@ protected:
 			pure_literal.second = false;
 			return pure_literal;
 		}
-		auto thing = expression_thing.evaluate_();
-		auto member = expression_member.evaluate_();
-		if (!thing.operations_().has_(member))
+		try
 		{
-			throw dis(token.report() + "strange::expression_intimate::val passed non-existent member");
+			auto thing = expression_thing.evaluate_();
+			auto member = expression_member.evaluate_();
+			if (!thing.operations_().has_(member))
+			{
+				throw dis(token.report() + "strange::expression_intimate::val passed non-existent member");
+			}
+			auto any_operation = thing.operations_().at_(member);
+			if (!check<operation_a<>>(any_operation))
+			{
+				throw dis(token.report() + "strange::expression_intimate::val passed non-operation member");
+			}
+			auto operation = cast<operation_a<>>(any_operation);
+			if (!operation.pure())
+			{
+				pure_literal.first = false;
+				pure_literal.second = false;
+				return pure_literal;
+			}
+			if (!operation.literal())
+			{
+				pure_literal.second = false;
+			}
 		}
-		auto any_operation = thing.operations_().at_(member);
-		if (!check<operation_a<>>(any_operation))
+		catch (misunderstanding_a<>& misunderstanding)
 		{
-			throw dis(token.report() + "strange::expression_intimate::val passed non-operation member");
+			throw dis("strange::expression_intimate::val pure literal evaluation error:") + token.report_() + misunderstanding;
 		}
-		auto operation = cast<operation_a<>>(any_operation);
-		if (!operation.pure())
-		{
-			pure_literal.first = false;
-			pure_literal.second = false;
-			return pure_literal;
-		}
-		if (!operation.literal())
-		{
-			pure_literal.second = false;
-		}
+
 		while (++it != terms.cend_())
 		{
 			auto term = *it;

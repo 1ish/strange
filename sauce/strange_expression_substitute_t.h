@@ -13,14 +13,21 @@ public:
 	{
 		if (substituted.literal())
 		{
-			any_a<> literal = substituted.evaluate_();
-			if (expression_literal_t<>::validate(literal))
+			try
 			{
-				flock_a<> terms = flock_t<>::val_();
-				terms.push_back(literal);
-				return expression_literal_t<>::val(substituted.token_(), terms, literal);
+				any_a<> literal = substituted.evaluate_();
+				if (expression_literal_t<>::validate(literal))
+				{
+					flock_a<> terms = flock_t<>::val_();
+					terms.push_back(literal);
+					return expression_literal_t<>::val(substituted.token_(), terms, literal);
+				}
+				return expression_a<>{ expression_substitute_t(std::move(substituted), literal) };
 			}
-			return expression_a<>{ expression_substitute_t(std::move(substituted), literal) };
+			catch (misunderstanding_a<>& misunderstanding)
+			{
+				throw dis("strange::expression_substitute::val literal evaluation error:") + substituted.token_().report_() + misunderstanding;
+			}
 		}
 		return expression_a<>{ std::move(substituted) };
 	}

@@ -117,33 +117,41 @@ protected:
 			pure_literal.second = false;
 			return pure_literal;
 		}
-		auto thing = thing_expression.evaluate_();
-		auto any_range = range_expression.evaluate_();
-		if (!check<range_a<>>(any_range))
+		try
 		{
-			throw dis(token.report() + "strange::expression_invoke_member_range::val passed non-range");
+			auto thing = thing_expression.evaluate_();
+			auto any_range = range_expression.evaluate_();
+			if (!check<range_a<>>(any_range))
+			{
+				throw dis(token.report() + "strange::expression_invoke_member_range::val passed non-range");
+			}
+			auto range = cast<range_a<>>(any_range);
+			if (!thing.operations_().has_(member))
+			{
+				throw dis(token.report() + "strange::expression_invoke_member_range::val passed non-existent member");
+			}
+			auto any_operation = thing.operations_().at_(member);
+			if (!check<operation_a<>>(any_operation))
+			{
+				throw dis(token.report() + "strange::expression_invoke_member_range::val passed non-operation member");
+			}
+			auto operation = cast<operation_a<>>(any_operation);
+			if (!operation.pure())
+			{
+				pure_literal.first = false;
+				pure_literal.second = false;
+				return pure_literal;
+			}
+			if (!operation.literal())
+			{
+				pure_literal.second = false;
+			}
 		}
-		auto range = cast<range_a<>>(any_range);
-		if (!thing.operations_().has_(member))
+		catch (misunderstanding_a<>& misunderstanding)
 		{
-			throw dis(token.report() + "strange::expression_invoke_member_range::val passed non-existent member");
+			throw dis("strange::expression_invoke_member_range::val pure literal evaluation error:") + token.report_() + misunderstanding;
 		}
-		auto any_operation = thing.operations_().at_(member);
-		if (!check<operation_a<>>(any_operation))
-		{
-			throw dis(token.report() + "strange::expression_invoke_member_range::val passed non-operation member");
-		}
-		auto operation = cast<operation_a<>>(any_operation);
-		if (!operation.pure())
-		{
-			pure_literal.first = false;
-			pure_literal.second = false;
-			return pure_literal;
-		}
-		if (!operation.literal())
-		{
-			pure_literal.second = false;
-		}
+
 		return pure_literal;
 	}
 
