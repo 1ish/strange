@@ -16,17 +16,17 @@ public:
 		{
 			throw dis("strange::expression_creature::val passed empty range");
 		}
-		any_a<> creation = *it;
-		if (!check<shoal_a<>>(creation))
+		any_a<> conception = *it;
+		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("strange::expression_creature::val passed non-shoal creation");
+			throw dis("strange::expression_creature::val passed non-shoal conception");
 		}
-		return val_(cast<shoal_a<>>(creation));
+		return val_(cast<shoal_a<>>(conception));
 	}
 
-	static inline expression_a<> val_(shoal_a<> const& creation)
+	static inline expression_a<> val_(shoal_a<> const& conception)
 	{
-		return expression_a<>{ expression_c{ creation } };
+		return expression_a<>{ expression_c{ conception } };
 	}
 
 	// reflection
@@ -280,8 +280,8 @@ public:
 
 protected:
 	// construction
-	inline expression_c(shoal_a<> const& creation)
-		: operation_c{ creation }
+	inline expression_c(shoal_a<> const& conception)
+		: operation_c{ conception }
 	{}
 
 private:

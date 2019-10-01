@@ -1,40 +1,40 @@
-#ifndef COM_ONEISH_STRANGE_CREATION_T_H
-#define COM_ONEISH_STRANGE_CREATION_T_H
+#ifndef COM_ONEISH_STRANGE_CONCEPTION_T_H
+#define COM_ONEISH_STRANGE_CONCEPTION_T_H
 
 namespace strange
 {
 
 template <typename ___ego___ = unordered_shoal_a<>>
-class creation_t : public unordered_shoal_t<false, ___ego___>
+class conception_t : public unordered_shoal_t<false, ___ego___>
 {
 public:
 	// override
-	using over = collection_o<creation_t<>>;
+	using over = collection_o<conception_t<>>;
 
 	// construction
 	static inline any_a<> val__(range_a<> const& range)
 	{
-		return unordered_shoal_a<>{ over{ creation_t<>{ range } } };
+		return unordered_shoal_a<>{ over{ conception_t<>{ range } } };
 	}
 
 	template <typename... Args>
 	static inline unordered_shoal_a<> val_(Args&&... args)
 	{
-		return unordered_shoal_a<>{ over{ creation_t<>{ flock_t<>::val_(std::forward<Args>(args)...) } } };
+		return unordered_shoal_a<>{ over{ conception_t<>{ flock_t<>::val_(std::forward<Args>(args)...) } } };
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<creation_t<>>::type();
+		return reflection<conception_t<>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<creation_t<>>::share(shoal);
+		reflection<conception_t<>>::share(shoal);
 	}
 
-	// creation
+	// conception
 	inline void merge(unordered_shoal_a<> const& parent, symbol_a<>& type, cat_a<>& cat, unordered_herd_a<>& cats, kind_a<>& kind, unordered_herd_a<>& kinds)
 	{
 		static auto const DROP = unordered_herd_t<>::val_(
@@ -61,7 +61,7 @@ public:
 			auto const type_any = type_op.operate(no(), range_t<>::val_());
 			if (!check<symbol_a<>>(type_any))
 			{
-				throw dis("strange::creation::val merge parent type returned non-symbol");
+				throw dis("strange::conception::val merge parent type returned non-symbol");
 			}
 			type = cast<symbol_a<>>(type_any);
 		}
@@ -77,7 +77,7 @@ public:
 			auto const cat_any = cat_op.operate(no(), range_t<>::val_());
 			if (!check<cat_a<>>(cat_any))
 			{
-				throw dis("strange::creation::val merge parent cat returned non-cat");
+				throw dis("strange::conception::val merge parent cat returned non-cat");
 			}
 			cat = cast<cat_a<>>(cat_any);
 		}
@@ -90,7 +90,7 @@ public:
 			cats_any = cats_op.operate(no(), range_t<>::val_());
 			if (!check<unordered_herd_a<>>(cats_any))
 			{
-				throw dis("strange::creation::val merge parent cats returned non-unordered-herd");
+				throw dis("strange::conception::val merge parent cats returned non-unordered-herd");
 			}
 			cats += cats_any;
 		}
@@ -105,7 +105,7 @@ public:
 			auto const kind_any = kind_op.operate(no(), range_t<>::val_());
 			if (!check<kind_a<>>(kind_any))
 			{
-				throw dis("strange::creation::val merge parent kind returned non-kind");
+				throw dis("strange::conception::val merge parent kind returned non-kind");
 			}
 			kind = cast<kind_a<>>(kind_any);
 		}
@@ -124,7 +124,7 @@ public:
 			auto const kinds_any = kinds_op.operate(no(), range_t<>::val_());
 			if (!check<unordered_herd_a<>>(kinds_any))
 			{
-				throw dis("strange::creation::val merge parent kinds returned non-unordered-herd");
+				throw dis("strange::conception::val merge parent kinds returned non-unordered-herd");
 			}
 			kinds += kinds_any;
 		}
@@ -133,7 +133,7 @@ public:
 		{
 			if (!check<symbol_a<>>(member.first))
 			{
-				throw dis("strange::creation::val merge passed non-symbol key");
+				throw dis("strange::conception::val merge passed non-symbol key");
 			}
 			auto key = cast<symbol_a<>>(member.first);
 			auto const& key_string = key.to_string();
@@ -152,7 +152,7 @@ public:
 				// check overrides
 				if (intimate || !member.second.kinds_().has_(it->second.kind_()))
 				{
-					throw dis("strange::creation::val merge invalid override");
+					throw dis("strange::conception::val merge invalid override");
 				}
 				it->second = member.second;
 			}
@@ -164,7 +164,7 @@ public:
 	}
 
 protected:
-	inline creation_t(range_a<> const& parents)
+	inline conception_t(range_a<> const& parents)
 		: unordered_shoal_t{ std_unordered_map_any_any{} }
 	{
 		symbol_a<> type = sym("");
@@ -177,7 +177,7 @@ protected:
 		{
 			if (!check<unordered_shoal_a<>>(parent))
 			{
-				throw dis("strange::creation::val passed non-unordered-shoal parent");
+				throw dis("strange::conception::val passed non-unordered-shoal parent");
 			}
 			merge(cast<unordered_shoal_a<>>(parent), type, cat, cats, kind, kinds);
 		}
@@ -191,14 +191,14 @@ protected:
 
 private:
 	static bool const ___share___;
-	friend class ___creation_t_share___;
+	friend class ___conception_t_share___;
 };
 
 template <typename ___ego___>
-bool const creation_t<___ego___>::___share___ = []()
+bool const conception_t<___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	creation_t<___ego___>::share(shoal);
+	conception_t<___ego___>::share(shoal);
 	return shoal;
 }();
 

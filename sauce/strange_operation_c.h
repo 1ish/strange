@@ -16,17 +16,17 @@ public:
 		{
 			throw dis("strange::operation_creature::val passed empty range");
 		}
-		any_a<> creation = *it;
-		if (!check<shoal_a<>>(creation))
+		any_a<> conception = *it;
+		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("strange::operation_creature::val passed non-shoal creation");
+			throw dis("strange::operation_creature::val passed non-shoal conception");
 		}
-		return val_(cast<shoal_a<>>(creation));
+		return val_(cast<shoal_a<>>(conception));
 	}
 
-	static inline operation_a<> val_(shoal_a<> const& creation)
+	static inline operation_a<> val_(shoal_a<> const& conception)
 	{
-		return operation_a<>{operation_c{ creation } };
+		return operation_a<>{operation_c{ conception } };
 	}
 
 	// reflection
@@ -182,8 +182,8 @@ public:
 
 protected:
 	// construction
-	inline operation_c(shoal_a<> const& creation)
-		: any_c{ creation }
+	inline operation_c(shoal_a<> const& conception)
+		: any_c{ conception }
 	{}
 
 private:

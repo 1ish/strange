@@ -16,17 +16,17 @@ public:
 		{
 			throw dis("strange::any_creature::val passed empty range");
 		}
-		any_a<> creation = *it;
-		if (!check<shoal_a<>>(creation))
+		any_a<> conception = *it;
+		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("strange::any_creature::val passed non-shoal creation");
+			throw dis("strange::any_creature::val passed non-shoal conception");
 		}
-		return val_(cast<shoal_a<>>(creation));
+		return val_(cast<shoal_a<>>(conception));
 	}
 
-	static inline any_a<> val_(shoal_a<> const& creation)
+	static inline any_a<> val_(shoal_a<> const& conception)
 	{
-		return any_a<>{ any_c{ creation } };
+		return any_a<>{ any_c{ conception } };
 	}
 
 	// erasure
@@ -476,27 +476,27 @@ public:
 
 	static inline any_a<> intimate(any_a<>& thing, any_a<> const& member, range_a<> const& range)
 	{
-		auto const& creation = static_cast<any_c<> const&>(thing.extract_thing())._creation;
-		if (!creation.has_(member))
+		auto const& conception = static_cast<any_c<> const&>(thing.extract_thing())._conception;
+		if (!conception.has_(member))
 		{
 			throw dis("strange::creature::intimate passed non-existent member");
 		}
-		return creation.at_(member).operate(thing, range);
+		return conception.at_(member).operate(thing, range);
 	}
 
 	static inline any_a<> intimate_member(any_a<>& thing, any_a<> const& member)
 	{
-		auto const& creation = static_cast<any_c<> const&>(thing.extract_thing())._creation;
-		if (!creation.has_(member))
+		auto const& conception = static_cast<any_c<> const&>(thing.extract_thing())._conception;
+		if (!conception.has_(member))
 		{
 			throw dis("strange::creature::intimate_member passed non-existent member");
 		}
-		return creation.at_(member);
+		return conception.at_(member);
 	}
 
 	inline void update_attribution(symbol_a<> const& name, operation_a<> const& attribution)
 	{
-		_creation.update_(name, attribution);
+		_conception.update_(name, attribution);
 		if (name.to_string().c_str()[0] != '_')
 		{
 			_operations.update_(name, attribution);
@@ -504,26 +504,26 @@ public:
 	}
 
 protected:
-	shoal_a<> _creation;
+	shoal_a<> _conception;
 	unordered_shoal_a<> _operations;
 
 	// construction
-	inline any_c(shoal_a<> const& creation)
+	inline any_c(shoal_a<> const& conception)
 		: one_t{}
-		, _creation{ creation }
-		, _operations{ _operations_(_creation) }
+		, _conception{ conception }
+		, _operations{ _operations_(_conception) }
 	{}
 
-	static inline unordered_shoal_a<> _operations_(shoal_a<> const& creation)
+	static inline unordered_shoal_a<> _operations_(shoal_a<> const& conception)
 	{
 		unordered_shoal_a<> operations = reflection<___ego___>::operations();
-		for (auto const& op : creation)
+		for (auto const& op : conception)
 		{
 			auto const flop = cast<flock_a<>>(op);
 			auto const key = flop.at_index(0);
 			if (!check<symbol_a<>>(key))
 			{
-				throw dis("strange::any_creature constructor passed creation with non-symbol key");
+				throw dis("strange::any_creature constructor passed conception with non-symbol key");
 			}
 			if (cast<symbol_a<>>(key).to_string().c_str()[0] == '_')
 			{
