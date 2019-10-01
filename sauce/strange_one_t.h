@@ -14,12 +14,12 @@ public:
 	}
 
 	// exposure
-	inline one_t const& const_thing() const
+	inline one_t const& extract_thing() const
 	{
 		return *this;
 	}
 
-	inline one_t& mutable_thing()
+	inline one_t& mutate_thing()
 	{
 		return *this;
 	}

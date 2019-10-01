@@ -33,8 +33,8 @@ public:
 	};
 
 	// exposure
-	inline one_t const& const_thing() const;
-	inline one_t& mutable_thing();
+	inline one_t const& extract_thing() const;
+	inline one_t& mutate_thing();
 
 	// reflection
 	inline any_a type__(range_a const& _) const;

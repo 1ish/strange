@@ -36,8 +36,8 @@ public:
 			auto const value = *it;
 			if (!_thing.identical(value))
 			{
-				auto const original = thing.const_thing().identity();
-				auto& mut = static_cast<any_c<>&>(thing.mutable_thing());
+				auto const original = thing.extract_thing().identity();
+				auto& mut = static_cast<any_c<>&>(thing.mutate_thing());
 				if (mut.identity() != original)
 				{
 					mut.update_attribution(_name, attribute_mutation_t<>::val_(_name, value));

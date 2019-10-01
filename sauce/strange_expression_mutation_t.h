@@ -115,7 +115,7 @@ public:
 		auto local_shoal = unordered_shoal_t<>::val_();
 		auto& local = local_shoal.reference();
 		local.emplace(sym("$"), _shared);
-		thing.mutable_thing();
+		thing.mutate_thing();
 		local.emplace(sym("^"), thing);
 		forward_const_iterator_a<> ait = range.cbegin_();
 		auto nit = _names.extract().cbegin();
