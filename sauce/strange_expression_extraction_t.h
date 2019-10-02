@@ -70,7 +70,8 @@ public:
 		{
 			value = expression_t<>::val(token);
 		}
-		return expression_substitute_t<over>::val(over{ expression_extraction_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) });
+		return expression_substitute_t<over>::val(over{ expression_extraction_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) },
+			extraction_t<>::val_(token, names, params, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)));
 	}
 
 	// reflection
@@ -107,46 +108,6 @@ public:
 	inline any_a<> eater_() const
 	{
 		return _names;
-	}
-
-	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
-	{
-		auto local_shoal = unordered_shoal_t<>::val_();
-		auto& local = local_shoal.reference();
-		local.emplace(sym("$"), _shared);
-		local.emplace(sym("^"), thing);
-		forward_const_iterator_a<> ait = range.cbegin_();
-		auto nit = _names.extract().cbegin();
-		auto pit = _params.extract().cbegin();
-		for (auto const& def : _defaults.extract())
-		{
-			any_a<> argument = (ait == range.cend_())
-				? def
-				: (*ait++);
-			if (!argument.cats_().has_(*pit++))
-			{
-				throw dis(_token.report() + "strange::expression_extraction::operate cat does not include argument");
-			}
-			local.emplace(*nit++, argument);
-		}
-		try
-		{
-			auto result = _expression.operate(local_shoal, range);
-			if (!result.cats_().has_(_result))
-			{
-				throw dis(_token.report() + "strange::expression_extraction::operate cat does not include result");
-			}
-			return result;
-		}
-		catch (return_i& ret)
-		{
-			if (!ret.result.cats_().has_(_result))
-			{
-				throw dis(_token.report() + "strange::expression_extraction::operate cat does not include result");
-			}
-			return ret.result;
-		}
 	}
 
 	// expression
