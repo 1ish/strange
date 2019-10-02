@@ -186,7 +186,6 @@ protected:
 	unordered_herd_a<> const _cats;
 	kind_a<> const _kind;
 	unordered_herd_a<> const _kinds;
-	unordered_shoal_a<> const _shared;
 
 	inline expression_extraction_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& params, flock_a<> const& values, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
 		: expression_t(token, pure_literal_terms(token, terms))
@@ -202,7 +201,6 @@ protected:
 		, _cats{ cats(_cat) }
 		, _kind{ kind_from_cat(_cat) }
 		, _kinds{ kinds(_kind) }
-		, _shared{ unordered_shoal_t<true>::val_() }
 	{}
 
 private:
