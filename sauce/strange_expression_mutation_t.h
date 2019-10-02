@@ -85,31 +85,6 @@ public:
 		reflection<expression_mutation_t<>>::share(shoal);
 	}
 
-	inline cat_a<> cat_() const
-	{
-		return _cat;
-	}
-
-	inline unordered_herd_a<> cats_() const
-	{
-		return _cats;
-	}
-
-	inline kind_a<> kind_() const
-	{
-		return _kind;
-	}
-
-	inline unordered_herd_a<> kinds_() const
-	{
-		return _kinds;
-	}
-
-	inline any_a<> eater_() const
-	{
-		return _names;
-	}
-
 	// expression
 	inline flock_a<> terms_() const
 	{
@@ -182,10 +157,6 @@ protected:
 	symbol_a<> const _name;
 	cat_a<> const _result;
 	expression_a<> const _expression;
-	cat_a<> const _cat;
-	unordered_herd_a<> const _cats;
-	kind_a<> const _kind;
-	unordered_herd_a<> const _kinds;
 
 	inline expression_mutation_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& params, flock_a<> const& values, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
 		: expression_t(token, pure_literal_terms(token, terms))
@@ -197,10 +168,6 @@ protected:
 		, _name{ name }
 		, _result{ result }
 		, _expression{ expression }
-		, _cat{ cat_t<>::val_(number_int_64_t<>::val(1), _name, flock_t<>::val_(), _params, _result) }
-		, _cats{ cats(_cat) }
-		, _kind{ kind_from_cat(_cat) }
-		, _kinds{ kinds(_kind) }
 	{}
 
 private:

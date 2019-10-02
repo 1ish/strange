@@ -114,7 +114,7 @@ protected:
 		, _name{ name }
 		, _result{ result }
 		, _expression{ expression }
-		, _cat{ cat_t<>::val_(number_int_64_t<>::val(1), _name, flock_t<>::val_(), _params, _result) }
+		, _cat{ cat_t<>::val_(number_int_64_t<>::val(1), sym(""), flock_t<>::val_(), _params, _result) }
 		, _cats{ cats(_cat) }
 		, _kind{ kind_from_cat(_cat) }
 		, _kinds{ kinds(_kind) }
