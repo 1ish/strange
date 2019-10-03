@@ -14,34 +14,33 @@ public:
 	// construction
 	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
 	{
-		if (terms.empty())
+		forward_const_iterator_a<> it = terms.cbegin_();
+		if (it == terms.cend_())
 		{
 			throw dis(token.report() + "strange::expression_attribute_extraction::val passed no terms");
 		}
-		any_a<> const term = terms.at_index(0);
-		if (!check<expression_a<>>(term))
-		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::val passed non-expression catch");
-		}
-		auto subterms = cast<expression_a<>>(term).terms_();
-		if (subterms.size() != 3)
-		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::val passed wrong number of subterms");
-		}
 
-		any_a<> const name = subterms.at_index(0);
+		any_a<> const name = *it;
 		if (!check<symbol_a<>>(name))
 		{
 			throw dis(token.report() + "strange::expression_attribute_extraction::val passed non-symbol name");
 		}
+		if (++it == terms.cend_())
+		{
+			throw dis(token.report() + "strange::expression_attribute_extraction::val passed too few terms");
+		}
 
-		any_a<> const cat = subterms.at_index(1);
+		any_a<> const cat = *it;
 		if (!check<cat_a<>>(cat))
 		{
 			throw dis(token.report() + "strange::expression_attribute_extraction::val passed non-cat");
 		}
+		if (++it == terms.cend_())
+		{
+			throw dis(token.report() + "strange::expression_attribute_extraction::val passed too few terms");
+		}
 
-		any_a<> const value = subterms.at_index(2);
+		any_a<> const value = *it;
 		if (!check<expression_a<>>(value))
 		{
 			throw dis(token.report() + "strange::expression_attribute_extraction::val passed non-expression catch");
