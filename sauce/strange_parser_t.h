@@ -119,7 +119,7 @@ private:
 				_next();
 				initial = expression_literal_t<>::val_(_token_, flock_t<>::val_(no()));
 			}
-			else if (_shared_.has_string(name))
+			else if (_shared_.has_string(name + "!"))
 			{
 				initial = _initial_instruction(scope_lake, fixed_herd, kind_shoal);
 			}
@@ -335,7 +335,7 @@ private:
 		unordered_shoal_a<> const& kind_shoal)
 	{
 		auto const token = _token_;
-		auto const instruction = _shared_.at_(token.symbol_());
+		auto const instruction = _shared_.at_string(token.symbol() + "!");
 		if (!instruction)
 		{
 			throw dis("strange::parser instruction not recognised:") + token.report_();
@@ -373,14 +373,6 @@ private:
 			auto const op = _token_.symbol();
 			if (kind)
 			{
-				if (op == ":<")
-				{
-					throw dis("strange::parser cannot reassign variable kind:") + _token_.report_();
-				}
-				if (op == "#=" || op == "#<")
-				{
-					throw dis("strange::parser cannot reassign variable with fixed:") + _token_.report_();
-				}
 				if (op == ":=")
 				{
 					if (fixed)
@@ -389,18 +381,32 @@ private:
 					}
 					update = true;
 				}
+				else if (op == ":#")
+				{
+					throw dis("strange::parser cannot reassign variable with fixed:") + _token_.report_();
+				}
+				else if (op == ":<" || op == ":{")
+				{
+					throw dis("strange::parser cannot reassign variable kind:") + _token_.report_();
+				}
 			}
 			else
 			{
 				kind = kind_t<>::val_();
-				if (op == ":=" || op == "#=" || op == ":<" || op == "#<")
+				if (op == ":=")
 				{
-					fixed = (op[0] == '#');
+					fixed = false;
 					insert = true;
-					if (op[1] == '<')
-					{
-						//TODO parse kind
-					}
+				}
+				else if (op == ":#")
+				{
+					fixed = true;
+					insert = true;
+				}
+				else if (op == ":<" || op == ":{")
+				{
+					//TODO parse kind and fixed
+					insert = true;
 				}
 			}
 		}
@@ -583,11 +589,11 @@ private:
 				auto const value = _initial(0, scope_lake, fixed_herd, kind_shoal);
 				//TODO attribute extraction
 			}
-			else if (_token_.symbol() == ":~")
+			else if (_token_.symbol() == ":=")
 			{
 				if (!_next())
 				{
-					throw dis("strange::parser shoal :~ with nothing following it:") + _token_.report_();
+					throw dis("strange::parser shoal := with nothing following it:") + _token_.report_();
 				}
 				auto const value = _initial(0, scope_lake, fixed_herd, kind_shoal);
 				//TODO attribute mutation
@@ -675,7 +681,7 @@ private:
 				}
 				return _subsequent_colon_dot(min_precedence, initial, scope_lake, fixed_herd, kind_shoal);
 			}
-			if (op == "," || op == ":" || op == ";" || op == "]" || op == "}" || op == ")") //TODO ...
+			if (op == "," || op == ":" || op == "::" || op == ":#" || op == ":=" || op == ";" || op == "]" || op == "}" || op == ")") //TODO ...
 			{
 				// delimiter
 				return initial;
