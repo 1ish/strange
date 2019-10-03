@@ -580,23 +580,42 @@ private:
 					throw dis("strange::parser shoal :: redefinition of shared name:") + _token_.report_();
 				}
 			}
-			else if (_token_.symbol() == ":#")
+			else if (_token_.symbol() == ":#" || _token_.symbol() == ":=")
 			{
+				auto const operator_token = _token_;
+				bool const fixed = (operator_token.symbol() == ":#");
+				if (!check<symbol_a<>>(key))
+				{
+					throw dis("strange::parser shoal " + operator_token.symbol() + " with non-symbol key:") + operator_token.report_();
+				}
 				if (!_next())
 				{
-					throw dis("strange::parser shoal :# with nothing following it:") + _token_.report_();
+					throw dis("strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
 				}
-				auto const value = _initial(0, scope_lake, fixed_herd, kind_shoal);
-				//TODO attribute extraction
-			}
-			else if (_token_.symbol() == ":=")
-			{
-				if (!_next())
+				auto const key_string = cast<symbol_a<>>(key).to_string();
+				if (key_string[key_string.length() - 1] == '_')
 				{
-					throw dis("strange::parser shoal := with nothing following it:") + _token_.report_();
+					//TODO attribute extraction/mutation
+					auto const value = _initial(0, scope_lake, fixed_herd, kind_shoal);
+
 				}
-				auto const value = _initial(0, scope_lake, fixed_herd, kind_shoal);
-				//TODO attribute mutation
+				else
+				{
+					// extraction
+					if (_token_.tag() != "punctuation" || _token_.symbol() != "(")
+					{
+						throw dis("strange::parser shoal " + _token_.symbol() + " without ( following it:") + _token_.report_();
+					}
+					auto const terms = _elements(scope_lake, fixed_herd, kind_shoal);
+					if (fixed)
+					{
+						flock.push_back(expression_extraction_t<>::val_(operator_token, terms));
+					}
+					else
+					{
+						flock.push_back(expression_mutation_t<>::val_(operator_token, terms));
+					}
+				}
 			}
 			else
 			{
