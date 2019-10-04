@@ -26,10 +26,10 @@ namespace strange {
     inline bool check(___VVV___ const&) noexcept;
     #ifdef STRANGE_CHECK_STATIC_CASTS
     template <typename ___TTT___>
-    inline ___TTT___ cast(any_a<> const& value, bool reference);
+    inline ___TTT___ cast(any_a<> const& value, bool reference = false);
     #else
     template <typename ___TTT___>
-    inline ___TTT___ cast(any_a<> const& value, bool reference) noexcept;
+    inline ___TTT___ cast(any_a<> const& value, bool reference = false) noexcept;
     #endif
     
     template < typename range_a , typename symbol_a , typename cat_a , typename kind_a , typename inventory_a , typename unordered_herd_a , typename shoal_a , typename unordered_shoal_a , typename number_data_a_uint64 >
@@ -535,10 +535,10 @@ namespace strange {
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	friend inline ___TTT___ cast(any_a<> const& value, bool reference = false);
+    	friend inline ___TTT___ cast(any_a<> const& value, bool reference);
     #else
     	template <typename ___TTT___>
-    	friend inline ___TTT___ cast(any_a<> const& value, bool reference = false) noexcept;
+    	friend inline ___TTT___ cast(any_a<> const& value, bool reference) noexcept;
     #endif
     
     public:

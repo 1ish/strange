@@ -3,14 +3,6 @@
 
 // reflections
 
-namespace strange
-{
-
-template<typename _abstraction_or_thing_>
-class reflection;
-
-}
-
 #include "strange_any_r.h"
 #include "strange_thing_r.h"
 #include "strange_symbol_r.h"
