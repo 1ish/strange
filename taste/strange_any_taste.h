@@ -1,5 +1,12 @@
-TEST_CASE("strange any taste", "[default constructor]")
+TEST_CASE("strange any_a default constructor", "[any_a]")
 {
 	any_a<> a;
-	REQUIRE(1 == 1);
+}
+
+TEST_CASE("strange any_a basic logic", "[any_a]")
+{
+	any_a<> a = yes();
+	REQUIRE(a);
+	a = no();
+	REQUIRE(!a);
 }
