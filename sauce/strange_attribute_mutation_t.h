@@ -12,7 +12,7 @@ public:
 	using over = thing_o<attribute_mutation_t<>>;
 
 	// construction
-	static inline operation_a<> val_(symbol_a<> const& name, any_a<> const& thing)
+	static inline operation_a<> create_(symbol_a<> const& name, any_a<> const& thing)
 	{
 		return operation_a<>{ over{ attribute_mutation_t<>(name, thing) } };
 	}
@@ -40,7 +40,7 @@ public:
 				auto& mut = static_cast<any_c<>&>(thing.mutate_thing());
 				if (mut.identity() != original)
 				{
-					mut.update_attribution(_name, attribute_mutation_t<>::val_(_name, value));
+					mut.update_attribution(_name, attribute_mutation_t<>::create_(_name, value));
 					return value;
 				}
 				_thing = value;

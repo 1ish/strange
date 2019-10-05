@@ -12,23 +12,23 @@ public:
 	using over = thing_o<disagreement_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			return val_();
+			return create_();
 		}
-		return val_(*it);
+		return create_(*it);
 	}
 
-	static inline misunderstanding_a<> val_(any_a<> const& thing = no())
+	static inline misunderstanding_a<> create_(any_a<> const& thing = no())
 	{
-		return val("");
+		return create("");
 	}
 
 	template <typename F>
-	static inline misunderstanding_a<> val(F&& s)
+	static inline misunderstanding_a<> create(F&& s)
 	{
 		return misunderstanding_a<>{ over{ disagreement_t<>{ std::forward<F>(s) } } };
 	}
@@ -71,7 +71,7 @@ public:
 				s += cast<misunderstanding_a<>>(thing).to_string();
 			}
 		}
-		return disagreement_t<>::val(std::move(s));
+		return disagreement_t<>::create(std::move(s));
 	}
 
 	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
@@ -81,7 +81,7 @@ public:
 
 	inline misunderstanding_a<> operator+(misunderstanding_a<> const& misunderstanding) const
 	{
-		return disagreement_t<>::val(to_string() + "\n" + misunderstanding.to_string());
+		return disagreement_t<>::create(to_string() + "\n" + misunderstanding.to_string());
 	}
 
 protected:
@@ -107,7 +107,7 @@ bool const disagreement_t<___ego___>::___share___ = []()
 template <typename F>
 inline misunderstanding_a<> dis(F&& s)
 {
-	return disagreement_t<>::val(std::forward<F>(s));
+	return disagreement_t<>::create(std::forward<F>(s));
 }
 
 inline misunderstanding_a<> operator+(std::exception const& e, misunderstanding_a<> const& m)

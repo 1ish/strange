@@ -115,7 +115,7 @@ public:
 			throw dis("strange::thing::invoke passed short range");
 		}
 		any_a<> member = *it;
-		return invoke_member(thing, member, range_t<>::val_(++it, range.cend_()));
+		return invoke_member(thing, member, range_t<>::create_(++it, range.cend_()));
 	}
 
 	static inline any_a<> invoke(any_a<>& thing, range_a<> const& range)
@@ -126,7 +126,7 @@ public:
 			throw dis("strange::thing::invoke passed short range");
 		}
 		any_a<> member = *it;
-		return invoke_member(thing, member, range_t<>::val_(++it, range.cend_()));
+		return invoke_member(thing, member, range_t<>::create_(++it, range.cend_()));
 	}
 
 	static inline any_a<> invoke_member(any_a<>& thing, any_a<> const& member, range_a<> const& range)
@@ -151,7 +151,7 @@ public:
 			throw dis("strange::thing::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operation.operate(thing, range_t<>::val_(++it, range.cend_()));
+		return operation.operate(thing, range_t<>::create_(++it, range.cend_()));
 	}
 
 	static inline any_a<> operate(any_a<>& thing, range_a<> const& range)
@@ -162,7 +162,7 @@ public:
 			throw dis("strange::thing::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operation.operate(thing, range_t<>::val_(++it, range.cend_()));
+		return operation.operate(thing, range_t<>::create_(++it, range.cend_()));
 	}
 
 	// identification
@@ -173,7 +173,7 @@ public:
 
 	inline number_data_a<uint64_t> identity_() const
 	{
-		return number_uint_64_t<>::val(uint64_t(identity()));
+		return number_uint_64_t<>::create(uint64_t(identity()));
 	}
 
 	inline any_a<> identical__(range_a<> const& range) const
@@ -215,7 +215,7 @@ public:
 	// conversion
 	inline range_a<> ranged_() const
 	{
-		return range_t<>::val_(it_t<true>::val_(me_()), it_t<true>::val_());
+		return range_t<>::create_(it_t<true>::create_(me_()), it_t<true>::create_());
 	}
 
 protected:

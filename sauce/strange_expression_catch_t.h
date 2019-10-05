@@ -12,56 +12,56 @@ public:
 	using over = expression_o<expression_catch_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_catch::val not passed any terms");
+			throw dis(token.report() + "strange::expression_catch::create not passed any terms");
 		}
 		any_a<> expression = *it;
 		if (!check<expression_a<>>(expression))
 		{
-			throw dis(token.report() + "strange::expression_catch::val passed non-expression try");
+			throw dis(token.report() + "strange::expression_catch::create passed non-expression try");
 		}
-		auto names = flock_t<>::val_();
-		auto cats = flock_t<>::val_();
-		auto values = flock_t<>::val_();
+		auto names = flock_t<>::create_();
+		auto cats = flock_t<>::create_();
+		auto values = flock_t<>::create_();
 		while (++it != terms.cend_())
 		{
 			auto term = *it;
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(token.report() + "strange::expression_catch::val passed non-expression catch");
+				throw dis(token.report() + "strange::expression_catch::create passed non-expression catch");
 			}
 			auto subterms = cast<expression_a<>>(term).terms_();
 			if (subterms.size() != 3)
 			{
-				throw dis(token.report() + "strange::expression_catch::val passed wrong number of subterms");
+				throw dis(token.report() + "strange::expression_catch::create passed wrong number of subterms");
 			}
 
 			auto name = subterms.at_index(0);
 			if (!check<symbol_a<>>(name))
 			{
-				throw dis(token.report() + "strange::expression_catch::val passed non-symbol name");
+				throw dis(token.report() + "strange::expression_catch::create passed non-symbol name");
 			}
 			names.push_back(name);
 
 			auto cat = subterms.at_index(1);
 			if (!check<cat_a<>>(cat))
 			{
-				throw dis(token.report() + "strange::expression_catch::val passed non-cat");
+				throw dis(token.report() + "strange::expression_catch::create passed non-cat");
 			}
 			cats.push_back(cat);
 
 			auto value = subterms.at_index(2);
 			if (!check<expression_a<>>(value))
 			{
-				throw dis(token.report() + "strange::expression_catch::val passed non-expression catch");
+				throw dis(token.report() + "strange::expression_catch::create passed non-expression catch");
 			}
 			values.push_back(value);
 		}
-		return expression_substitute_t<over>::val(over{ expression_catch_t<>(token, terms, cast<expression_a<>>(expression), names, cats, values) });
+		return expression_substitute_t<over>::create(over{ expression_catch_t<>(token, terms, cast<expression_a<>>(expression), names, cats, values) });
 	}
 
 	// reflection

@@ -16,7 +16,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::disagreement::val", native_function_t<>::val(&disagreement_t<>::val__));
+		shoal.update_string("strange::disagreement::create", native_function_t<>::create(&disagreement_t<>::create__));
 	}
 };
 

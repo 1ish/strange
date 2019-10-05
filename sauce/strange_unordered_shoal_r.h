@@ -10,7 +10,7 @@ class reflection<unordered_shoal_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::unordered_shoal");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::unordered_shoal");
 		return CAT;
 	}
 
@@ -73,7 +73,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::unordered_shoal::val", native_function_t<>::val(&unordered_shoal_t<>::val__));
+		shoal.update_string("strange::unordered_shoal::create", native_function_t<>::create(&unordered_shoal_t<>::create__));
 	}
 };
 
@@ -89,7 +89,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::unordered_shoal_concurrent::val", native_function_t<>::val(&unordered_shoal_t<true>::val__));
+		shoal.update_string("strange::unordered_shoal_concurrent::create", native_function_t<>::create(&unordered_shoal_t<true>::create__));
 	}
 };
 

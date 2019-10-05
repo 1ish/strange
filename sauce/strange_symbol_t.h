@@ -12,19 +12,19 @@ public:
 	using over = thing_o<symbol_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const&)
+	static inline any_a<> create__(range_a<> const&)
 	{
-		return val_();
+		return create_();
 	}
 
-	static inline symbol_a<> val_()
+	static inline symbol_a<> create_()
 	{
-		static symbol_a<> VAL = symbol_t<>::val("");
+		static symbol_a<> VAL = symbol_t<>::create("");
 		return VAL;
 	}
 
 	template <typename F>
-	static inline symbol_a<> val(F&& s)
+	static inline symbol_a<> create(F&& s)
 	{
 		return symbol_a<>{ over{ symbol_t<>{ std::forward<F>(s) } } };
 	}
@@ -72,7 +72,7 @@ public:
 				s += cast<symbol_a<>>(thing).to_string();
 			}
 		}
-		return symbol_t<>::val(std::move(s));
+		return symbol_t<>::create(std::move(s));
 	}
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
@@ -82,7 +82,7 @@ public:
 
 	inline symbol_a<> operator+(symbol_a<> const& symbol) const
 	{
-		return symbol_t<>::val(_string + symbol.to_string());
+		return symbol_t<>::create(_string + symbol.to_string());
 	}
 
 protected:
@@ -112,7 +112,7 @@ bool const symbol_t<___ego___>::___share___ = []()
 template <typename F>
 inline symbol_a<> sym(F&& s)
 {
-	return symbol_t<>::val(std::forward<F>(s));
+	return symbol_t<>::create(std::forward<F>(s));
 }
 
 } // namespace strange

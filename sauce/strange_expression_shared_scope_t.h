@@ -12,32 +12,32 @@ public:
 	using over = expression_o<expression_shared_scope_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_shared_scope::val not passed any terms");
+			throw dis(token.report() + "strange::expression_shared_scope::create not passed any terms");
 		}
 		any_a<> shared = *it;
 		if (!check<shoal_a<>>(shared))
 		{
-			throw dis(token.report() + "strange::expression_shared_scope::val passed non-shoal shared");
+			throw dis(token.report() + "strange::expression_shared_scope::create passed non-shoal shared");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_shared_scope::val passed too few terms");
+			throw dis(token.report() + "strange::expression_shared_scope::create passed too few terms");
 		}
 		auto shared_shoal = cast<shoal_a<>>(shared);
 		auto key = *it;
 		if (!check<symbol_a<>>(key))
 		{
-			throw dis(token.report() + "strange::expression_shared_scope::val passed non-symbol key");
+			throw dis(token.report() + "strange::expression_shared_scope::create passed non-symbol key");
 		}
 		auto value = shared_shoal.at_(key);
 		if (value)
 		{
-			return expression_substitute_t<over>::val(over{ expression_shared_scope_t<>(token, terms, shared_shoal, cast<symbol_a<>>(key)) }, value);
+			return expression_substitute_t<over>::create(over{ expression_shared_scope_t<>(token, terms, shared_shoal, cast<symbol_a<>>(key)) }, value);
 		}
 		return expression_a<>{ over{ expression_shared_scope_t<>(token, terms, shared_shoal, cast<symbol_a<>>(key)) } };
 	}

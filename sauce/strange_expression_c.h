@@ -9,22 +9,22 @@ class expression_c : public operation_c<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::expression_creature::val passed empty range");
+			throw dis("strange::expression_creature::create passed empty range");
 		}
 		any_a<> conception = *it;
 		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("strange::expression_creature::val passed non-shoal conception");
+			throw dis("strange::expression_creature::create passed non-shoal conception");
 		}
-		return val_(cast<shoal_a<>>(conception));
+		return create_(cast<shoal_a<>>(conception));
 	}
 
-	static inline expression_a<> val_(shoal_a<> const& conception)
+	static inline expression_a<> create_(shoal_a<> const& conception)
 	{
 		return expression_a<>{ expression_c{ conception } };
 	}
@@ -45,7 +45,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("strange::expression_creature::type returned non-symbol");
@@ -62,7 +62,7 @@ public:
 		{
 			return op.operate(any_a<>(me_(), true), range);
 		}
-		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
+		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
 		return shoal;
 	}
@@ -72,14 +72,14 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("strange::expression_creature::shared returned non-unordered-shoal");
 			}
 			return cast<unordered_shoal_a<>>(result);
 		}
-		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
+		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
 		return shoal;
 	}
@@ -97,9 +97,9 @@ public:
 		{
 			return op.operate(any_a<>(me_(), true), range);
 		}
-		auto local = unordered_shoal_t<>::val_();
-		local.insert_string("$", unordered_shoal_t<true>::val_());
-		return operate(local, range_t<>::val_());
+		auto local = unordered_shoal_t<>::create_();
+		local.insert_string("$", unordered_shoal_t<true>::create_());
+		return operate(local, range_t<>::create_());
 	}
 
 	inline any_a<> evaluate_() const
@@ -107,11 +107,11 @@ public:
 		auto const op = _operations.at_string("evaluate");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::create_());
 		}
-		auto local = unordered_shoal_t<>::val_();
-		local.insert_string("$", unordered_shoal_t<true>::val_());
-		return operate(local, range_t<>::val_());
+		auto local = unordered_shoal_t<>::create_();
+		local.insert_string("$", unordered_shoal_t<true>::create_());
+		return operate(local, range_t<>::create_());
 	}
 
 	inline any_a<> token__(range_a<> const& range) const
@@ -121,7 +121,7 @@ public:
 		{
 			return op.operate(any_a<>(me_(), true), range);
 		}
-		return token_t<>::punctuation_val_();
+		return token_t<>::create_punctuation_();
 	}
 
 	inline token_a<> token_() const
@@ -129,14 +129,14 @@ public:
 		auto const op = _operations.at_string("token");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<token_a<>>(result))
 			{
 				throw dis("strange::expression_creature::token returned non-token");
 			}
 			return cast<token_a<>>(result);
 		}
-		return token_t<>::punctuation_val_();
+		return token_t<>::create_punctuation_();
 	}
 
 	inline any_a<> terms__(range_a<> const& range) const
@@ -146,7 +146,7 @@ public:
 		{
 			return op.operate(any_a<>(me_(), true), range);
 		}
-		return flock_t<>::val_();
+		return flock_t<>::create_();
 	}
 
 	inline flock_a<> terms_() const
@@ -154,14 +154,14 @@ public:
 		auto const op = _operations.at_string("terms");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<flock_a<>>(result))
 			{
 				throw dis("strange::expression_creature::terms returned non-flock");
 			}
 			return cast<flock_a<>>(result);
 		}
-		return flock_t<>::val_();
+		return flock_t<>::create_();
 	}
 
 	inline any_a<> generate__(range_a<> const& range) const
@@ -207,7 +207,7 @@ public:
 		auto const op = _operations.at_string("generate");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), flock_t<>::val_(version, indent, river));
+			return op.operate(any_a<>(me_(), true), flock_t<>::create_(version, indent, river));
 		}
 		return river;
 	}
@@ -217,7 +217,7 @@ public:
 		auto const op = _operations.at_string("generate");
 		if (op)
 		{
-			op.operate(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(version), number_int_64_t<>::val(indent), river));
+			op.operate(any_a<>(me_(), true), flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river));
 		}
 	}
 
@@ -264,7 +264,7 @@ public:
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), flock_t<>::val_(version, indent, river));
+			return op.operate(any_a<>(me_(), true), flock_t<>::create_(version, indent, river));
 		}
 		return river;
 	}
@@ -274,7 +274,7 @@ public:
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			op.operate(any_a<>(me_(), true), flock_t<>::val_(number_int_64_t<>::val(version), number_int_64_t<>::val(indent), river));
+			op.operate(any_a<>(me_(), true), flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river));
 		}
 	}
 

@@ -12,14 +12,14 @@ public:
 	using over = expression_o<expression_extraction_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		auto names = flock_t<>::val_();
-		auto params = flock_t<>::val_();
-		auto values = flock_t<>::val_();
-		auto defaults = flock_t<>::val_();
+		auto names = flock_t<>::create_();
+		auto params = flock_t<>::create_();
+		auto values = flock_t<>::create_();
+		auto defaults = flock_t<>::create_();
 		any_a<> name = sym("");
-		any_a<> cat = cat_t<>::val_();
+		any_a<> cat = cat_t<>::create_();
 		any_a<> value = no();
 		for (auto const& term : terms)
 		{
@@ -34,44 +34,44 @@ public:
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
-					throw dis("strange::expression_extraction::val parameter default evaluation error:") + token.report_() + misunderstanding;
+					throw dis("strange::expression_extraction::create parameter default evaluation error:") + token.report_() + misunderstanding;
 				}
 			}
 
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(token.report() + "strange::expression_extraction::val passed non-expression catch");
+				throw dis(token.report() + "strange::expression_extraction::create passed non-expression catch");
 			}
 			auto subterms = cast<expression_a<>>(term).terms_();
 			if (subterms.size() != 3)
 			{
-				throw dis(token.report() + "strange::expression_extraction::val passed wrong number of subterms");
+				throw dis(token.report() + "strange::expression_extraction::create passed wrong number of subterms");
 			}
 
 			name = subterms.at_index(0);
 			if (!check<symbol_a<>>(name))
 			{
-				throw dis(token.report() + "strange::expression_extraction::val passed non-symbol name");
+				throw dis(token.report() + "strange::expression_extraction::create passed non-symbol name");
 			}
 
 			cat = subterms.at_index(1);
 			if (!check<cat_a<>>(cat))
 			{
-				throw dis(token.report() + "strange::expression_extraction::val passed non-cat");
+				throw dis(token.report() + "strange::expression_extraction::create passed non-cat");
 			}
 
 			value = subterms.at_index(2);
 			if (!check<expression_a<>>(value))
 			{
-				throw dis(token.report() + "strange::expression_extraction::val passed non-expression catch");
+				throw dis(token.report() + "strange::expression_extraction::create passed non-expression catch");
 			}
 		}
 		if (!value)
 		{
-			value = expression_t<>::val(token);
+			value = expression_t<>::create(token);
 		}
-		return expression_substitute_t<over>::val(over{ expression_extraction_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) },
-			extraction_t<>::val_(token, names, params, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)));
+		return expression_substitute_t<over>::create(over{ expression_extraction_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) },
+			extraction_t<>::create_(token, names, params, defaults, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)));
 	}
 
 	// reflection

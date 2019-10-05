@@ -16,7 +16,7 @@ class flock_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<_iterator_> val(flock_a<> const& flock, F&& it)
+		static inline random_access_iterator_data_a<_iterator_> create(flock_a<> const& flock, F&& it)
 		{
 			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(flock, std::forward<F>(it)) } };
 		}
@@ -379,7 +379,7 @@ class flock_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_const_iterator_data_a<_iterator_> val(flock_a<> const& flock, F&& it)
+		static inline random_access_const_iterator_data_a<_iterator_> create(flock_a<> const& flock, F&& it)
 		{
 			return random_access_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(flock, std::forward<F>(it)) } };
 		}
@@ -725,24 +725,24 @@ public:
 	using over = collection_o<flock_t<_concurrent_>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
-		return val_() += range;
+		return create_() += range;
 	}
 
-	static inline flock_a<> val_()
+	static inline flock_a<> create_()
 	{
-		return val(std_vector_any{});
+		return create(std_vector_any{});
 	}
 
 	template <typename... Args>
-	static inline flock_a<> val_(Args&&... args)
+	static inline flock_a<> create_(Args&&... args)
 	{
-		return val(variadic_u<>::vector(std::forward<Args>(args)...));
+		return create(variadic_u<>::vector(std::forward<Args>(args)...));
 	}
 
 	template <typename F>
-	static inline flock_a<> val(F&& init)
+	static inline flock_a<> create(F&& init)
 	{
 		return flock_a<>{ over{ flock_t<_concurrent_>{ std::forward<F>(init) } } };
 	}
@@ -809,12 +809,12 @@ public:
 	// range
 	inline random_access_const_iterator_a<> cbegin_() const
 	{
-		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cbegin());
+		return const_iterator_t<std_vector_any::const_iterator>::create(me_(), _vector.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_vector_any::const_iterator>::val(me_(), _vector.cend());
+		return const_iterator_t<std_vector_any::const_iterator>::create(me_(), _vector.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -824,7 +824,7 @@ public:
 
 	inline random_access_iterator_a<> begin_()
 	{
-		return iterator_t<std_vector_any::iterator>::val(me_(), _vector.begin());
+		return iterator_t<std_vector_any::iterator>::create(me_(), _vector.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -834,7 +834,7 @@ public:
 
 	inline random_access_iterator_a<> end_()
 	{
-		return iterator_t<std_vector_any::iterator>::val(me_(), _vector.end());
+		return iterator_t<std_vector_any::iterator>::create(me_(), _vector.end());
 	}
 
 	// collection
@@ -854,7 +854,7 @@ public:
 		{
 			return at_index(cast<number_a<>>(key).to_int_64());
 		}
-		return misunderstanding_t<>::val("strange::flock::at index is not a number");
+		return misunderstanding_t<>::create("strange::flock::at index is not a number");
 	}
 
 	inline any_a<> at_index(int64_t index) const
@@ -864,7 +864,7 @@ public:
 		{
 			return _vector[std::size_t(index)];
 		}
-		return misunderstanding_t<>::val("strange::flock::at index out of bounds");
+		return misunderstanding_t<>::create("strange::flock::at index out of bounds");
 	}
 
 	inline void update(any_a<> const& key, any_a<> const& value)
@@ -1041,12 +1041,12 @@ public:
 
 	inline any_a<> read_lock_() const
 	{
-		return data_t<read_lock_ptr<_concurrent_>>::val(make_read_lock_ptr<_concurrent_>(_mutex));
+		return data_t<read_lock_ptr<_concurrent_>>::create(make_read_lock_ptr<_concurrent_>(_mutex));
 	}
 
 	inline any_a<> write_lock_() const
 	{
-		return data_t<write_lock_ptr<_concurrent_>>::val(make_write_lock_ptr<_concurrent_>(_mutex));
+		return data_t<write_lock_ptr<_concurrent_>>::create(make_write_lock_ptr<_concurrent_>(_mutex));
 	}
 
 	// data

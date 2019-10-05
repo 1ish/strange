@@ -9,22 +9,22 @@ class any_c : public one_t
 {
 public:
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::any_creature::val passed empty range");
+			throw dis("strange::any_creature::create passed empty range");
 		}
 		any_a<> conception = *it;
 		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("strange::any_creature::val passed non-shoal conception");
+			throw dis("strange::any_creature::create passed non-shoal conception");
 		}
-		return val_(cast<shoal_a<>>(conception));
+		return create_(cast<shoal_a<>>(conception));
 	}
 
-	static inline any_a<> val_(shoal_a<> const& conception)
+	static inline any_a<> create_(shoal_a<> const& conception)
 	{
 		return any_a<>{ any_c{ conception } };
 	}
@@ -56,7 +56,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("strange::any_creature::type returned non-symbol");
@@ -73,7 +73,7 @@ public:
 		{
 			return op.operate(any_a<>(me_(), true), range);
 		}
-		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
+		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
 		return shoal;
 	}
@@ -83,14 +83,14 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("strange::any_creature::shared returned non-unordered-shoal");
 			}
 			return cast<unordered_shoal_a<>>(result);
 		}
-		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
+		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
 		return shoal;
 	}
@@ -115,7 +115,7 @@ public:
 		auto const op = _operations.at_string("cat");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<cat_a<>>(result))
 			{
 				throw dis("strange::any_creature::shared returned non-cat");
@@ -140,7 +140,7 @@ public:
 		auto const op = _operations.at_string("cats");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_herd_a<>>(result))
 			{
 				throw dis("strange::any_creature::shared returned non-unordered-herd");
@@ -165,7 +165,7 @@ public:
 		auto const op = _operations.at_string("kind");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<kind_a<>>(result))
 			{
 				throw dis("strange::any_creature::shared returned non-kind");
@@ -190,7 +190,7 @@ public:
 		auto const op = _operations.at_string("kinds");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_herd_a<>>(result))
 			{
 				throw dis("strange::any_creature::shared returned non-unordered-herd");
@@ -225,7 +225,7 @@ public:
 		auto const op = _operations.at_string("eater");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::create_());
 		}
 		return no();
 	}
@@ -262,7 +262,7 @@ public:
 		auto const op = _operations.at_string("invoke");
 		if (op)
 		{
-			op.operate(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
+			op.operate(any_a<>(me_(), true), flock_t<>::create_(thing) += range);
 		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -274,7 +274,7 @@ public:
 		{
 			throw dis("strange::any_creature::invoke passed non-existent member");
 		}
-		return thing.operations_().at_(member).operate(thing, range_t<>::val_(++it, range.cend_()));
+		return thing.operations_().at_(member).operate(thing, range_t<>::create_(++it, range.cend_()));
 	}
 
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
@@ -282,7 +282,7 @@ public:
 		auto const op = _operations.at_string("operate");
 		if (op)
 		{
-			op.operate(any_a<>(me_(), true), flock_t<>::val_(thing) += range);
+			op.operate(any_a<>(me_(), true), flock_t<>::create_(thing) += range);
 		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -290,7 +290,7 @@ public:
 			throw dis("strange::any_creature::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operation.operate(thing, range_t<>::val_(++it, range.cend_()));
+		return operation.operate(thing, range_t<>::create_(++it, range.cend_()));
 	}
 
 	// identification
@@ -301,7 +301,7 @@ public:
 
 	inline number_data_a<uint64_t> identity_() const
 	{
-		return number_uint_64_t<>::val(uint64_t(identity()));
+		return number_uint_64_t<>::create(uint64_t(identity()));
 	}
 
 	inline any_a<> identical__(range_a<> const& range) const // cannot be overridden
@@ -402,7 +402,7 @@ public:
 		{
 			return op.operate(any_a<>(me_(), true), range);
 		}
-		return number_uint_64_t<>::val(uint64_t(std::hash<void const*>{}(identity())));
+		return number_uint_64_t<>::create(uint64_t(std::hash<void const*>{}(identity())));
 	}
 
 	inline number_data_a<uint64_t> hash_() const
@@ -410,14 +410,14 @@ public:
 		auto const op = _operations.at_string("hash");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
 				throw dis("strange::any_creature::hash returned non-number-uint64");
 			}
 			return cast<number_data_a<uint64_t>>(result);
 		}
-		return number_uint_64_t<>::val(uint64_t(std::hash<void const*>{}(identity())));
+		return number_uint_64_t<>::create(uint64_t(std::hash<void const*>{}(identity())));
 	}
 
 	inline std::size_t hash() const
@@ -425,7 +425,7 @@ public:
 		auto const op = _operations.at_string("hash");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
 				throw dis("strange::creature::hash returned non-number-uint64");
@@ -443,7 +443,7 @@ public:
 
 	inline range_a<> ranged_() const
 	{
-		return range_t<>::val_(it_t<true>::val_(me_()), it_t<true>::val_());
+		return range_t<>::create_(it_t<true>::create_(me_()), it_t<true>::create_());
 	}
 
 	// creature
@@ -460,7 +460,7 @@ public:
 			throw dis("strange::creature::intimate passed short range");
 		}
 		any_a<> member = *it;
-		return intimate(thing, member, range_t<>::val_(++it, range.cend_()));
+		return intimate(thing, member, range_t<>::create_(++it, range.cend_()));
 	}
 
 	static inline any_a<> intimate_(any_a<>& thing, range_a<> const& range)
@@ -471,7 +471,7 @@ public:
 			throw dis("strange::creature::intimate passed short range");
 		}
 		any_a<> member = *it;
-		return intimate(thing, member, range_t<>::val_(++it, range.cend_()));
+		return intimate(thing, member, range_t<>::create_(++it, range.cend_()));
 	}
 
 	static inline any_a<> intimate(any_a<>& thing, any_a<> const& member, range_a<> const& range)

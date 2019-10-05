@@ -12,15 +12,15 @@ public:
 	using over = collection_o<conception_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		return unordered_shoal_a<>{ over{ conception_t<>{ range } } };
 	}
 
 	template <typename... Args>
-	static inline unordered_shoal_a<> val_(Args&&... args)
+	static inline unordered_shoal_a<> create_(Args&&... args)
 	{
-		return unordered_shoal_a<>{ over{ conception_t<>{ flock_t<>::val_(std::forward<Args>(args)...) } } };
+		return unordered_shoal_a<>{ over{ conception_t<>{ flock_t<>::create_(std::forward<Args>(args)...) } } };
 	}
 
 	// reflection
@@ -37,7 +37,7 @@ public:
 	// conception
 	inline void merge(unordered_shoal_a<> const& parent, symbol_a<>& type, cat_a<>& cat, unordered_herd_a<>& cats, kind_a<>& kind, unordered_herd_a<>& kinds)
 	{
-		static auto const DROP = unordered_herd_t<>::val_(
+		static auto const DROP = unordered_herd_t<>::create_(
 			sym("type"),
 			sym("cat"),
 			sym("cats"),
@@ -58,10 +58,10 @@ public:
 		}
 		else
 		{
-			auto const type_any = type_op.operate(no(), range_t<>::val_());
+			auto const type_any = type_op.operate(no(), range_t<>::create_());
 			if (!check<symbol_a<>>(type_any))
 			{
-				throw dis("strange::conception::val merge parent type returned non-symbol");
+				throw dis("strange::conception::create merge parent type returned non-symbol");
 			}
 			type = cast<symbol_a<>>(type_any);
 		}
@@ -70,14 +70,14 @@ public:
 		auto const cat_op = parent.at_string("cat");
 		if (!cat_op)
 		{
-			cat = cat_t<>::val_();
+			cat = cat_t<>::create_();
 		}
 		else
 		{
-			auto const cat_any = cat_op.operate(no(), range_t<>::val_());
+			auto const cat_any = cat_op.operate(no(), range_t<>::create_());
 			if (!check<cat_a<>>(cat_any))
 			{
-				throw dis("strange::conception::val merge parent cat returned non-cat");
+				throw dis("strange::conception::create merge parent cat returned non-cat");
 			}
 			cat = cast<cat_a<>>(cat_any);
 		}
@@ -87,10 +87,10 @@ public:
 		any_a<> cats_any = no();
 		if (cats_op)
 		{
-			cats_any = cats_op.operate(no(), range_t<>::val_());
+			cats_any = cats_op.operate(no(), range_t<>::create_());
 			if (!check<unordered_herd_a<>>(cats_any))
 			{
-				throw dis("strange::conception::val merge parent cats returned non-unordered-herd");
+				throw dis("strange::conception::create merge parent cats returned non-unordered-herd");
 			}
 			cats += cats_any;
 		}
@@ -98,14 +98,14 @@ public:
 		auto const kind_op = parent.at_string("kind");
 		if (!kind_op)
 		{
-			kind = cat_op ? kind_from_cat(cat) : kind_t<>::val_();
+			kind = cat_op ? kind_from_cat(cat) : kind_t<>::create_();
 		}
 		else
 		{
-			auto const kind_any = kind_op.operate(no(), range_t<>::val_());
+			auto const kind_any = kind_op.operate(no(), range_t<>::create_());
 			if (!check<kind_a<>>(kind_any))
 			{
-				throw dis("strange::conception::val merge parent kind returned non-kind");
+				throw dis("strange::conception::create merge parent kind returned non-kind");
 			}
 			kind = cast<kind_a<>>(kind_any);
 		}
@@ -121,10 +121,10 @@ public:
 		}
 		else
 		{
-			auto const kinds_any = kinds_op.operate(no(), range_t<>::val_());
+			auto const kinds_any = kinds_op.operate(no(), range_t<>::create_());
 			if (!check<unordered_herd_a<>>(kinds_any))
 			{
-				throw dis("strange::conception::val merge parent kinds returned non-unordered-herd");
+				throw dis("strange::conception::create merge parent kinds returned non-unordered-herd");
 			}
 			kinds += kinds_any;
 		}
@@ -133,7 +133,7 @@ public:
 		{
 			if (!check<symbol_a<>>(member.first))
 			{
-				throw dis("strange::conception::val merge passed non-symbol key");
+				throw dis("strange::conception::create merge passed non-symbol key");
 			}
 			auto key = cast<symbol_a<>>(member.first);
 			auto const& key_string = key.to_string();
@@ -152,7 +152,7 @@ public:
 				// check overrides
 				if (intimate || !member.second.kinds_().has_(it->second.kind_()))
 				{
-					throw dis("strange::conception::val merge invalid override");
+					throw dis("strange::conception::create merge invalid override");
 				}
 				it->second = member.second;
 			}
@@ -168,25 +168,25 @@ protected:
 		: unordered_shoal_t{ std_unordered_map_any_any{} }
 	{
 		symbol_a<> type = sym("");
-		cat_a<> cat = cat_t<>::val_();
-		unordered_herd_a<> cats = unordered_herd_t<>::val_();
-		kind_a<> kind = kind_t<>::val_();
-		unordered_herd_a<> kinds = unordered_herd_t<>::val_();
+		cat_a<> cat = cat_t<>::create_();
+		unordered_herd_a<> cats = unordered_herd_t<>::create_();
+		kind_a<> kind = kind_t<>::create_();
+		unordered_herd_a<> kinds = unordered_herd_t<>::create_();
 
 		for (auto const& parent : parents)
 		{
 			if (!check<unordered_shoal_a<>>(parent))
 			{
-				throw dis("strange::conception::val passed non-unordered-shoal parent");
+				throw dis("strange::conception::create passed non-unordered-shoal parent");
 			}
 			merge(cast<unordered_shoal_a<>>(parent), type, cat, cats, kind, kinds);
 		}
 		// add operations for type, cat, cats, kind and kinds
-		_map.emplace(sym("type"), attribute_extraction_t<>::val_(type));
-		_map.emplace(sym("cat"), attribute_extraction_t<>::val_(cat));
-		_map.emplace(sym("cats"), attribute_extraction_t<>::val_(cats));
-		_map.emplace(sym("kind"), attribute_extraction_t<>::val_(kind));
-		_map.emplace(sym("kinds"), attribute_extraction_t<>::val_(kinds));
+		_map.emplace(sym("type"), attribute_extraction_t<>::create_(type));
+		_map.emplace(sym("cat"), attribute_extraction_t<>::create_(cat));
+		_map.emplace(sym("cats"), attribute_extraction_t<>::create_(cats));
+		_map.emplace(sym("kind"), attribute_extraction_t<>::create_(kind));
+		_map.emplace(sym("kinds"), attribute_extraction_t<>::create_(kinds));
 	}
 
 private:

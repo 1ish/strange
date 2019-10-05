@@ -12,26 +12,26 @@ public:
 	using over = expression_o<expression_xor_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_xor::val not passed any terms");
+			throw dis(token.report() + "strange::expression_xor::create not passed any terms");
 		}
 		any_a<> left = *it;
 		if (!check<expression_a<>>(left))
 		{
-			throw dis(token.report() + "strange::expression_xor::val passed non-expression left-hand term");
+			throw dis(token.report() + "strange::expression_xor::create passed non-expression left-hand term");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_xor::val not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_xor::create not passed sufficient terms");
 		}
 		any_a<> right = *it;
 		if (!check<expression_a<>>(right))
 		{
-			throw dis(token.report() + "strange::expression_xor::val passed non-expression right-hand term");
+			throw dis(token.report() + "strange::expression_xor::create passed non-expression right-hand term");
 		}
 		return expression_a<>{ over{ expression_xor_t<>( token, terms, cast<expression_a<>>(left), cast<expression_a<>>(right)) } };
 	}

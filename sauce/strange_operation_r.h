@@ -10,7 +10,7 @@ class reflection<operation_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::operation");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::operation");
 		return CAT;
 	}
 
@@ -47,8 +47,8 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update_string("pure", native_extraction_t<operation_a<>>::val(&operation_a<>::pure__));
-			operations.update_string("literal", native_extraction_t<operation_a<>>::val(&operation_a<>::literal__));
+			operations.update_string("pure", native_extraction_t<operation_a<>>::create(&operation_a<>::pure__));
+			operations.update_string("literal", native_extraction_t<operation_a<>>::create(&operation_a<>::literal__));
 			return operations;
 		}();
 		return OPERATIONS;

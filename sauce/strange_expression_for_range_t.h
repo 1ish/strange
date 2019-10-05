@@ -12,44 +12,44 @@ public:
 	using over = expression_o<expression_for_range_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_for_range::val not passed any terms");
+			throw dis(token.report() + "strange::expression_for_range::create not passed any terms");
 		}
 		any_a<> key = *it;
 		if (!check<symbol_a<>>(key))
 		{
-			throw dis(token.report() + "strange::expression_for_range::val passed non-symbol key");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-symbol key");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_for_range::val not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_for_range::create not passed sufficient terms");
 		}
 		any_a<> cat = *it;
 		if (!check<cat_a<>>(cat))
 		{
-			throw dis(token.report() + "strange::expression_for_range::val passed non-cat");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-cat");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_for_range::val not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_for_range::create not passed sufficient terms");
 		}
 		any_a<> range = *it;
 		if (!check<expression_a<>>(range))
 		{
-			throw dis(token.report() + "strange::expression_for_range::val passed non-expression range");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-expression range");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_for_range::val not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_for_range::create not passed sufficient terms");
 		}
 		any_a<> loop = *it;
 		if (!check<expression_a<>>(loop))
 		{
-			throw dis(token.report() + "strange::expression_for_range::val passed non-expression loop");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-expression loop");
 		}
 		return expression_a<>{ over{ expression_for_range_t<>( token, terms, cast<symbol_a<>>(key), cast<cat_a<>>(cat), cast<expression_a<>>(range), cast<expression_a<>>(loop)) } };
 	}

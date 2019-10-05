@@ -12,9 +12,9 @@ public:
 	using over = expression_o<expression_block_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_substitute_t<over>::val(over{ expression_block_t<>(token, terms) });
+		return expression_substitute_t<over>::create(over{ expression_block_t<>(token, terms) });
 	}
 
 	// reflection
@@ -31,7 +31,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto result_range = range_operator_t<>::val_(_terms, thing, range);
+		auto result_range = range_operator_t<>::create_(_terms, thing, range);
 		auto it = result_range.cbegin_();
 		auto result = no();
 		while (it != result_range.cend_())

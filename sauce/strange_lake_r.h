@@ -10,7 +10,7 @@ class reflection<lake_a<_primitive_>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::lake_" + number_u<_primitive_>::category());
+		static cat_a<> CAT = cat_t<>::create(1, "strange::lake_" + number_u<_primitive_>::category());
 		return CAT;
 	}
 
@@ -83,7 +83,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string(type().to_string() + "::val", native_function_t<>::val(&lake_t<_primitive_, _concurrent_>::val__));
+		shoal.update_string(type().to_string() + "::create", native_function_t<>::create(&lake_t<_primitive_, _concurrent_>::create__));
 	}
 };
 

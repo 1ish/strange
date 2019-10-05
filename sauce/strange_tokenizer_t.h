@@ -16,7 +16,7 @@ class tokenizer_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<_iterator_> val(river_a<> const& river, F&& it)
+		static inline forward_const_iterator_data_a<_iterator_> create(river_a<> const& river, F&& it)
 		{
 			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(river, std::forward<F>(it)) } };
 		}
@@ -469,37 +469,37 @@ class tokenizer_t : public thing_t<___ego___>
 
 		inline token_a<> symbol_token(std::string const& str) const
 		{
-			return token_t<>::symbol_val(_river.filename(), _line, _position, str);
+			return token_t<>::create_symbol(_river.filename(), _line, _position, str);
 		}
 
 		inline token_a<> lake_token(std::string const& str) const
 		{
-			return token_t<>::lake_val(_river.filename(), _line, _position, str);
+			return token_t<>::create_lake(_river.filename(), _line, _position, str);
 		}
 
 		inline token_a<> int_token(std::string const& str) const
 		{
-			return token_t<>::int_val(_river.filename(), _line, _position, str);
+			return token_t<>::create_int(_river.filename(), _line, _position, str);
 		}
 
 		inline token_a<> float_token(std::string const& str) const
 		{
-			return token_t<>::float_val(_river.filename(), _line, _position, str);
+			return token_t<>::create_float(_river.filename(), _line, _position, str);
 		}
 
 		inline token_a<> name_token(std::string const& str) const
 		{
-			return token_t<>::name_val(_river.filename(), _line, _position, str);
+			return token_t<>::create_name(_river.filename(), _line, _position, str);
 		}
 
 		inline token_a<> punctuation_token(std::string const& str) const
 		{
-			return token_t<>::punctuation_val(_river.filename(), _line, _position, str, _precedence_(str));
+			return token_t<>::create_punctuation(_river.filename(), _line, _position, str, _precedence_(str));
 		}
 
 		inline token_a<> error_token(std::string const& str) const
 		{
-			return token_t<>::error_val(_river.filename(), _line, _position, str);
+			return token_t<>::create_error(_river.filename(), _line, _position, str);
 		}
 	};
 
@@ -508,22 +508,22 @@ public:
 	using over = range_o<tokenizer_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::tokenizer::val passed empty range");
+			throw dis("strange::tokenizer::create passed empty range");
 		}
 		any_a<> river = *it;
 		if (!check<river_a<>>(river))
 		{
-			throw dis("strange::tokenizer::val passed non-river");
+			throw dis("strange::tokenizer::create passed non-river");
 		}
-		return val_(cast<river_a<>>(river));
+		return create_(cast<river_a<>>(river));
 	}
 
-	static inline range_a<> val_(river_a<> const& river)
+	static inline range_a<> create_(river_a<> const& river)
 	{
 		return range_a<>{ over{ tokenizer_t<>(river) } };
 	}
@@ -542,12 +542,12 @@ public:
 	// range
 	inline forward_const_iterator_a<> cbegin_() const
 	{
-		return const_iterator_t<forward_const_iterator_a<>>::val(_river, _river.cbegin_());
+		return const_iterator_t<forward_const_iterator_a<>>::create(_river, _river.cbegin_());
 	}
 
 	inline forward_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<forward_const_iterator_a<>>::val(_river, _river.cend_());
+		return const_iterator_t<forward_const_iterator_a<>>::create(_river, _river.cend_());
 	}
 
 protected:
@@ -562,43 +562,43 @@ protected:
 	{
 		static auto PRECEDENCE = []()
 		{
-			auto precedence = unordered_shoal_t<>::val_();
-			precedence.update_string("@?", number_int_64_t<>::val(85));
-			precedence.update_string("@", number_int_64_t<>::val(85));
-			precedence.update_string("@=", number_int_64_t<>::val(85));
-			precedence.update_string("@+", number_int_64_t<>::val(85));
-			precedence.update_string("@-", number_int_64_t<>::val(85));
-			precedence.update_string("@<", number_int_64_t<>::val(85));
-			precedence.update_string(">@", number_int_64_t<>::val(85));
-			precedence.update_string("@>", number_int_64_t<>::val(85));
-			precedence.update_string("<@", number_int_64_t<>::val(85));
-			precedence.update_string("++", number_int_64_t<>::val(80));
-			precedence.update_string("--", number_int_64_t<>::val(80));
-			precedence.update_string("?", number_int_64_t<>::val(80));
-			precedence.update_string("!", number_int_64_t<>::val(80));
-			precedence.update_string("*", number_int_64_t<>::val(75));
-			precedence.update_string("/", number_int_64_t<>::val(75));
-			precedence.update_string("%", number_int_64_t<>::val(75));
-			precedence.update_string("+", number_int_64_t<>::val(70));
-			precedence.update_string("-", number_int_64_t<>::val(70));
-			precedence.update_string("<", number_int_64_t<>::val(65));
-			precedence.update_string(">", number_int_64_t<>::val(65));
-			precedence.update_string("<=", number_int_64_t<>::val(65));
-			precedence.update_string(">=", number_int_64_t<>::val(65));
-			precedence.update_string("==", number_int_64_t<>::val(60));
-			precedence.update_string("!=", number_int_64_t<>::val(60));
-			precedence.update_string("&&", number_int_64_t<>::val(55));
-			precedence.update_string("!&", number_int_64_t<>::val(55));
-			precedence.update_string("%%", number_int_64_t<>::val(50));
-			precedence.update_string("!%", number_int_64_t<>::val(50));
-			precedence.update_string("||", number_int_64_t<>::val(45));
-			precedence.update_string("!|", number_int_64_t<>::val(45));
-			precedence.update_string("=", number_int_64_t<>::val(40));
-			precedence.update_string("+=", number_int_64_t<>::val(40));
-			precedence.update_string("-=", number_int_64_t<>::val(40));
-			precedence.update_string("*=", number_int_64_t<>::val(40));
-			precedence.update_string("/=", number_int_64_t<>::val(40));
-			precedence.update_string("%=", number_int_64_t<>::val(40));
+			auto precedence = unordered_shoal_t<>::create_();
+			precedence.update_string("@?", number_int_64_t<>::create(85));
+			precedence.update_string("@", number_int_64_t<>::create(85));
+			precedence.update_string("@=", number_int_64_t<>::create(85));
+			precedence.update_string("@+", number_int_64_t<>::create(85));
+			precedence.update_string("@-", number_int_64_t<>::create(85));
+			precedence.update_string("@<", number_int_64_t<>::create(85));
+			precedence.update_string(">@", number_int_64_t<>::create(85));
+			precedence.update_string("@>", number_int_64_t<>::create(85));
+			precedence.update_string("<@", number_int_64_t<>::create(85));
+			precedence.update_string("++", number_int_64_t<>::create(80));
+			precedence.update_string("--", number_int_64_t<>::create(80));
+			precedence.update_string("?", number_int_64_t<>::create(80));
+			precedence.update_string("!", number_int_64_t<>::create(80));
+			precedence.update_string("*", number_int_64_t<>::create(75));
+			precedence.update_string("/", number_int_64_t<>::create(75));
+			precedence.update_string("%", number_int_64_t<>::create(75));
+			precedence.update_string("+", number_int_64_t<>::create(70));
+			precedence.update_string("-", number_int_64_t<>::create(70));
+			precedence.update_string("<", number_int_64_t<>::create(65));
+			precedence.update_string(">", number_int_64_t<>::create(65));
+			precedence.update_string("<=", number_int_64_t<>::create(65));
+			precedence.update_string(">=", number_int_64_t<>::create(65));
+			precedence.update_string("==", number_int_64_t<>::create(60));
+			precedence.update_string("!=", number_int_64_t<>::create(60));
+			precedence.update_string("&&", number_int_64_t<>::create(55));
+			precedence.update_string("!&", number_int_64_t<>::create(55));
+			precedence.update_string("%%", number_int_64_t<>::create(50));
+			precedence.update_string("!%", number_int_64_t<>::create(50));
+			precedence.update_string("||", number_int_64_t<>::create(45));
+			precedence.update_string("!|", number_int_64_t<>::create(45));
+			precedence.update_string("=", number_int_64_t<>::create(40));
+			precedence.update_string("+=", number_int_64_t<>::create(40));
+			precedence.update_string("-=", number_int_64_t<>::create(40));
+			precedence.update_string("*=", number_int_64_t<>::create(40));
+			precedence.update_string("/=", number_int_64_t<>::create(40));
+			precedence.update_string("%=", number_int_64_t<>::create(40));
 			return precedence;
 		}();
 		auto p = PRECEDENCE.at_(sym(str));

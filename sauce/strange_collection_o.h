@@ -114,7 +114,7 @@ public:
 
 	inline number_data_a<int64_t> size_() const
 	{
-		return number_int_64_t<>::val(size());
+		return number_int_64_t<>::create(size());
 	}
 
 	inline any_a<> empty__(range_a<> const&) const

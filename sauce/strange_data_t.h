@@ -12,17 +12,17 @@ public:
 	using over = thing_o<data_t<_data_>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& _)
+	static inline any_a<> create__(range_a<> const& _)
 	{
-		return val_();
+		return create_();
 	}
 
-	static inline data_a<_data_> val_()
+	static inline data_a<_data_> create_()
 	{
-		return val(_data_{});
+		return create(_data_{});
 	}
 
-	static inline data_a<_data_> val(_data_ primitive)
+	static inline data_a<_data_> create(_data_ primitive)
 	{
 		return data_a<_data_>{ over{ data_t<_data_>{ primitive } } };
 	}

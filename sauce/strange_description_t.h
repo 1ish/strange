@@ -12,7 +12,7 @@ public:
 	using over = thing_o<description_t<>>;
 
 	// construction
-	static inline operation_a<> val_()
+	static inline operation_a<> create_()
 	{
 		return operation_a<>{ over{ description_t<>() } };
 	}
@@ -87,11 +87,11 @@ protected:
 
 	inline description_t()
 		: operation_t{}
-		, _kind{ kind_t<>::val_() }
+		, _kind{ kind_t<>::create_() }
 		, _kinds{ kinds(_kind) }
 		, _cat{ kind_to_cat(_kind) }
 		, _cats{ cats(_cat) }
-		, _eater{ flock_t<>::val_() }
+		, _eater{ flock_t<>::create_() }
 	{}
 };
 

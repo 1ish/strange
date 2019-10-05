@@ -12,9 +12,9 @@ public:
 	using over = expression_o<expression_shoal_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_substitute_t<over>::val(over{ expression_shoal_t<>(token, terms) });
+		return expression_substitute_t<over>::create(over{ expression_shoal_t<>(token, terms) });
 	}
 
 	// reflection
@@ -31,7 +31,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		return unordered_shoal_t<>::val__(range_operator_t<>::val_(_terms, thing, range));
+		return unordered_shoal_t<>::create__(range_operator_t<>::create_(_terms, thing, range));
 	}
 
 	// expression
@@ -65,7 +65,7 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" unordered_shoal_t<>::val_(");
+		river.write_string(" unordered_shoal_t<>::create_(");
 		bool first = true;
 		for (auto const& term : _terms)
 		{

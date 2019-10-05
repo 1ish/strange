@@ -12,37 +12,37 @@ public:
 	using over = expression_o<expression_invoke_attribute_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		auto it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_invoke_attribute::val passed empty range");
+			throw dis(token.report() + "strange::expression_invoke_attribute::create passed empty range");
 		}
 		auto thing = *it;
 		if (!check<expression_a<>>(thing))
 		{
-			throw dis(token.report() + "strange::expression_invoke_attribute::val passed non-expression thing term");
+			throw dis(token.report() + "strange::expression_invoke_attribute::create passed non-expression thing term");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_invoke_attribute::val passed short range");
+			throw dis(token.report() + "strange::expression_invoke_attribute::create passed short range");
 		}
 		auto member = *it;
 		if (!check<symbol_a<>>(member))
 		{
-			throw dis(token.report() + "strange::expression_invoke_attribute::val passed non-symbol member term");
+			throw dis(token.report() + "strange::expression_invoke_attribute::create passed non-symbol member term");
 		}
 		if (++it == terms.cend_())
 		{
-			return expression_substitute_t<over>::val(over{ expression_invoke_attribute_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member)) });
+			return expression_substitute_t<over>::create(over{ expression_invoke_attribute_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member)) });
 		}
 		auto value = *it;
 		if (!check<expression_a<>>(value))
 		{
-			throw dis(token.report() + "strange::expression_invoke_attribute::val passed non-expression value term");
+			throw dis(token.report() + "strange::expression_invoke_attribute::create passed non-expression value term");
 		}
-		return expression_substitute_t<over>::val(over{ expression_invoke_attribute_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member), cast<expression_a<>>(value)) });
+		return expression_substitute_t<over>::create(over{ expression_invoke_attribute_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member), cast<expression_a<>>(value)) });
 	}
 
 	// reflection
@@ -62,9 +62,9 @@ public:
 		auto thing_term = _thing.operate(thing, range);
 		if (_assign)
 		{
-			return thing_t<>::invoke_member(thing_term, _member, flock_t<>::val_(_value.operate(thing, range)));
+			return thing_t<>::invoke_member(thing_term, _member, flock_t<>::create_(_value.operate(thing, range)));
 		}
-		return thing_t<>::invoke_member(thing_term, _member, flock_t<>::val_());
+		return thing_t<>::invoke_member(thing_term, _member, flock_t<>::create_());
 	}
 
 	// expression
@@ -95,11 +95,11 @@ protected:
 	bool const _assign;
 
 	inline expression_invoke_attribute_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, symbol_a<> const& member)
-		: expression_t(token, is_pure_literal(token, terms, thing, member, expression_t<>::val(token)))
+		: expression_t(token, is_pure_literal(token, terms, thing, member, expression_t<>::create(token)))
 		, _terms{ terms }
 		, _thing{ thing }
 		, _member{ member }
-		, _value{ expression_t<>::val(token) }
+		, _value{ expression_t<>::create(token) }
 		, _assign{ false }
 	{}
 
@@ -126,12 +126,12 @@ protected:
 			auto thing = expression_thing.evaluate_();
 			if (!thing.operations_().has_(member))
 			{
-				throw dis(token.report() + "strange::expression_invoke_attribute::val passed non-existent member");
+				throw dis(token.report() + "strange::expression_invoke_attribute::create passed non-existent member");
 			}
 			auto any_operation = thing.operations_().at_(member);
 			if (!check<operation_a<>>(any_operation))
 			{
-				throw dis(token.report() + "strange::expression_invoke_attribute::val passed non-operation member");
+				throw dis(token.report() + "strange::expression_invoke_attribute::create passed non-operation member");
 			}
 			auto operation = cast<operation_a<>>(any_operation);
 			if (!operation.pure())
@@ -147,7 +147,7 @@ protected:
 		}
 		catch (misunderstanding_a<>& misunderstanding)
 		{
-			throw dis("strange::expression_invoke_attribute::val pure literal evaluation error:") + token.report_() + misunderstanding;
+			throw dis("strange::expression_invoke_attribute::create pure literal evaluation error:") + token.report_() + misunderstanding;
 		}
 
 		return pure_literal;

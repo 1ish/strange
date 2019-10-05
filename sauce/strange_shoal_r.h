@@ -10,7 +10,7 @@ class reflection<shoal_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::shoal");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::shoal");
 		return CAT;
 	}
 
@@ -47,8 +47,8 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<collection_a<>>::operations();
-			operations.update_string("begin", native_mutation_t<shoal_a<>>::val(&shoal_a<>::begin__));
-			operations.update_string("end", native_mutation_t<shoal_a<>>::val(&shoal_a<>::end__));
+			operations.update_string("begin", native_mutation_t<shoal_a<>>::create(&shoal_a<>::begin__));
+			operations.update_string("end", native_mutation_t<shoal_a<>>::create(&shoal_a<>::end__));
 			return operations;
 		}();
 		return OPERATIONS;

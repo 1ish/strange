@@ -12,15 +12,15 @@ public:
 	using over = collection_o<abstraction_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		return unordered_shoal_a<>{ over{ abstraction_t<>{ range } } };
 	}
 
 	template <typename... Args>
-	static inline unordered_shoal_a<> val_(Args&&... args)
+	static inline unordered_shoal_a<> create_(Args&&... args)
 	{
-		return unordered_shoal_a<>{ over{ abstraction_t<>{ flock_t<>::val_(std::forward<Args>(args)...) } } };
+		return unordered_shoal_a<>{ over{ abstraction_t<>{ flock_t<>::create_(std::forward<Args>(args)...) } } };
 	}
 
 	// reflection
@@ -41,13 +41,13 @@ public:
 		{
 			if (!check<symbol_a<>>(member.first))
 			{
-				throw dis("strange::abstraction::val merge passed non-symbol key");
+				throw dis("strange::abstraction::create merge passed non-symbol key");
 			}
 			auto key = cast<symbol_a<>>(member.first);
 			if (_map.find(key) != _map.cend())
 			{
 				// no overrides
-				throw dis("strange::abstraction::val merge invalid override");
+				throw dis("strange::abstraction::create merge invalid override");
 			}
 			_map.emplace(key, member.second);
 		}
@@ -61,7 +61,7 @@ protected:
 		{
 			if (!check<unordered_shoal_a<>>(parent))
 			{
-				throw dis("strange::abstraction::val passed non-unordered-shoal parent");
+				throw dis("strange::abstraction::create passed non-unordered-shoal parent");
 			}
 			merge(cast<unordered_shoal_a<>>(parent));
 		}

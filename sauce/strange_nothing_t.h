@@ -12,12 +12,12 @@ public:
 	using over = thing_o<nothing_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& _)
+	static inline any_a<> create__(range_a<> const& _)
 	{
-		return val_();
+		return create_();
 	}
 
-	static inline any_a<> val_()
+	static inline any_a<> create_()
 	{
 		static any_a<> VAL = any_a<>{ over{ nothing_t<>{} } };
 		return VAL;
@@ -85,7 +85,7 @@ public:
 	// conversion
 	inline range_a<> ranged_() const
 	{
-		return range_t<>::val_(it_t<true, something_t<>>::val_(no()), it_t<true, something_t<>>::val_());
+		return range_t<>::create_(it_t<true, something_t<>>::create_(no()), it_t<true, something_t<>>::create_());
 	}
 
 protected:

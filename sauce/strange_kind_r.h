@@ -10,7 +10,7 @@ class reflection<kind_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::kind");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::kind");
 		return CAT;
 	}
 
@@ -47,7 +47,7 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<cat_a<>>::operations();
-			operations.update_string("aspects", native_extraction_t<kind_a<>>::val(&kind_a<>::aspects__));
+			operations.update_string("aspects", native_extraction_t<kind_a<>>::create(&kind_a<>::aspects__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -79,7 +79,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::kind::val", native_function_t<>::val(&kind_t<>::val__));
+		shoal.update_string("strange::kind::create", native_function_t<>::create(&kind_t<>::create__));
 	}
 };
 

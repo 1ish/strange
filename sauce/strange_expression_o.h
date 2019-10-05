@@ -12,19 +12,19 @@ public:
 		: thing_o<_OVERRIDDEN_>{ std::move(overridden) }
 	{}
 
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("[expression] val passed empty range");
+			throw dis("[expression] create passed empty range");
 		}
 		any_a<> token = *it;
 		if (!check<token_a<>>(token))
 		{
-			throw dis("[expression] val passed non-token");
+			throw dis("[expression] create passed non-token");
 		}
-		return val_(cast<token_a<>>(token), flock_t<>::val_() += range_t<>::val_(++it, range.cend_()));
+		return create_(cast<token_a<>>(token), flock_t<>::create_() += range_t<>::create_(++it, range.cend_()));
 	}
 
 	inline any_a<> cat__(range_a<> const&) const
@@ -54,9 +54,9 @@ public:
 
 	inline any_a<> evaluate_() const
 	{
-		auto local = unordered_shoal_t<>::val_();
-		local.insert_string("$", unordered_shoal_t<true>::val_());
-		return operate(local, range_t<>::val_());
+		auto local = unordered_shoal_t<>::create_();
+		local.insert_string("$", unordered_shoal_t<true>::create_());
+		return operate(local, range_t<>::create_());
 	}
 
 	inline any_a<> token__(range_a<> const&) const

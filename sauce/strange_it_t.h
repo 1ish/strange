@@ -12,23 +12,23 @@ public:
 	using over = thing_o<it_t<_const_, _end_>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			return val_();
+			return create_();
 		}
-		return val_(*it);
+		return create_(*it);
 	}
 
-	static inline forward_const_iterator_a<> val_()
+	static inline forward_const_iterator_a<> create_()
 	{
-		static forward_const_iterator_a<> VAL = it_t<_const_, _end_>::val_(_end_::val_());
+		static forward_const_iterator_a<> VAL = it_t<_const_, _end_>::create_(_end_::create_());
 		return VAL;
 	}
 
-	static inline forward_const_iterator_a<> val_(any_a<> const& thing)
+	static inline forward_const_iterator_a<> create_(any_a<> const& thing)
 	{
 		return forward_const_iterator_a<>{ over{ it_t<_const_, _end_>{ thing } } };
 	}
@@ -93,7 +93,7 @@ public:
 
 	inline it_t& operator++()
 	{
-		_thing = _end_::val_();
+		_thing = _end_::create_();
 		return *this;
 	}
 

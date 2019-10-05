@@ -12,17 +12,17 @@ public:
 	using over = expression_o<expression_literal_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_literal::val not passed any terms");
+			throw dis(token.report() + "strange::expression_literal::create not passed any terms");
 		}
-		return val(token, terms, *it);
+		return create(token, terms, *it);
 	}
 
-	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, any_a<> const& literal)
+	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, any_a<> const& literal)
 	{
 		return expression_a<>{ over{ expression_literal_t<>{ token, terms, literal } } };
 	}
@@ -98,27 +98,27 @@ public:
 		}
 		else if (_literal.type_() == number_int_8_t<>::type_())
 		{
-			river.write_string(" $$strange::number_int_8::val[" + std::to_string(cast<number_data_a<int8_t>>(_literal).extract()) + "] ");
+			river.write_string(" $$strange::number_int_8::create[" + std::to_string(cast<number_data_a<int8_t>>(_literal).extract()) + "] ");
 		}
 		else if	(_literal.type_() == number_uint_8_t<>::type_())
 		{
-			river.write_string(" $$strange::number_uint_8::val[" + std::to_string(cast<number_data_a<uint8_t>>(_literal).extract()) + "] ");
+			river.write_string(" $$strange::number_uint_8::create[" + std::to_string(cast<number_data_a<uint8_t>>(_literal).extract()) + "] ");
 		}
 		else if (_literal.type_() == number_int_16_t<>::type_())
 		{
-			river.write_string(" $$strange::number_int_16::val[" + std::to_string(cast<number_data_a<int16_t>>(_literal).extract()) + "] ");
+			river.write_string(" $$strange::number_int_16::create[" + std::to_string(cast<number_data_a<int16_t>>(_literal).extract()) + "] ");
 		}
 		else if (_literal.type_() == number_uint_16_t<>::type_())
 		{
-			river.write_string(" $$strange::number_uint_16::val[" + std::to_string(cast<number_data_a<uint16_t>>(_literal).extract()) + "] ");
+			river.write_string(" $$strange::number_uint_16::create[" + std::to_string(cast<number_data_a<uint16_t>>(_literal).extract()) + "] ");
 		}
 		else if (_literal.type_() == number_int_32_t<>::type_())
 		{
-			river.write_string(" $$strange::number_int_32::val[" + std::to_string(cast<number_data_a<int32_t>>(_literal).extract()) + "] ");
+			river.write_string(" $$strange::number_int_32::create[" + std::to_string(cast<number_data_a<int32_t>>(_literal).extract()) + "] ");
 		}
 		else if (_literal.type_() == number_uint_32_t<>::type_())
 		{
-			river.write_string(" $$strange::number_uint_32::val[" + std::to_string(cast<number_data_a<uint32_t>>(_literal).extract()) + "] ");
+			river.write_string(" $$strange::number_uint_32::create[" + std::to_string(cast<number_data_a<uint32_t>>(_literal).extract()) + "] ");
 		}
 		else if (_literal.type_() == number_int_64_t<>::type_())
 		{
@@ -126,11 +126,11 @@ public:
 		}
 		else if (_literal.type_() == number_uint_64_t<>::type_())
 		{
-			river.write_string(" $$strange::number_uint_64::val[" + std::to_string(cast<number_data_a<uint64_t>>(_literal).extract()) + "] ");
+			river.write_string(" $$strange::number_uint_64::create[" + std::to_string(cast<number_data_a<uint64_t>>(_literal).extract()) + "] ");
 		}
 		else if (_literal.type_() == number_float_32_t<>::type_())
 		{
-			river.write_string(" $$strange::number_float_32::val[" + std::to_string(cast<number_data_a<float>>(_literal).extract()) + "] ");
+			river.write_string(" $$strange::number_float_32::create[" + std::to_string(cast<number_data_a<float>>(_literal).extract()) + "] ");
 		}
 		else if (_literal.type_() == number_float_64_t<>::type_())
 		{
@@ -154,56 +154,56 @@ public:
 		}
 		else if (_literal.type_() == number_int_8_t<>::type_())
 		{
-			river.write_string(" strange::number_int_8::val(" + std::to_string(cast<number_data_a<int8_t>>(_literal).extract()) + ") ");
+			river.write_string(" strange::number_int_8::create(" + std::to_string(cast<number_data_a<int8_t>>(_literal).extract()) + ") ");
 		}
 		else if (_literal.type_() == number_uint_8_t<>::type_())
 		{
-			river.write_string(" strange::number_uint_8::val(" + std::to_string(cast<number_data_a<uint8_t>>(_literal).extract()) + ") ");
+			river.write_string(" strange::number_uint_8::create(" + std::to_string(cast<number_data_a<uint8_t>>(_literal).extract()) + ") ");
 		}
 		else if (_literal.type_() == number_int_16_t<>::type_())
 		{
-			river.write_string(" strange::number_int_16::val(" + std::to_string(cast<number_data_a<int16_t>>(_literal).extract()) + ") ");
+			river.write_string(" strange::number_int_16::create(" + std::to_string(cast<number_data_a<int16_t>>(_literal).extract()) + ") ");
 		}
 		else if (_literal.type_() == number_uint_16_t<>::type_())
 		{
-			river.write_string(" strange::number_uint_16::val(" + std::to_string(cast<number_data_a<uint16_t>>(_literal).extract()) + ") ");
+			river.write_string(" strange::number_uint_16::create(" + std::to_string(cast<number_data_a<uint16_t>>(_literal).extract()) + ") ");
 		}
 		else if (_literal.type_() == number_int_32_t<>::type_())
 		{
-			river.write_string(" strange::number_int_32::val(" + std::to_string(cast<number_data_a<int32_t>>(_literal).extract()) + ") ");
+			river.write_string(" strange::number_int_32::create(" + std::to_string(cast<number_data_a<int32_t>>(_literal).extract()) + ") ");
 		}
 		else if (_literal.type_() == number_uint_32_t<>::type_())
 		{
-			river.write_string(" strange::number_uint_32::val(" + std::to_string(cast<number_data_a<uint32_t>>(_literal).extract()) + ") ");
+			river.write_string(" strange::number_uint_32::create(" + std::to_string(cast<number_data_a<uint32_t>>(_literal).extract()) + ") ");
 		}
 		else if (_literal.type_() == number_int_64_t<>::type_())
 		{
 			if (_token.literal_() == _literal)
 			{
-				river.write_string(" strange::number_int_64::val(" + _token.symbol() + ") ");
+				river.write_string(" strange::number_int_64::create(" + _token.symbol() + ") ");
 			}
 			else
 			{
-				river.write_string(" strange::number_int_64::val(" + std::to_string(cast<number_data_a<int64_t>>(_literal).extract()) + ") ");
+				river.write_string(" strange::number_int_64::create(" + std::to_string(cast<number_data_a<int64_t>>(_literal).extract()) + ") ");
 			}
 		}
 		else if (_literal.type_() == number_uint_64_t<>::type_())
 		{
-			river.write_string(" strange::number_uint_64::val(" + std::to_string(cast<number_data_a<uint64_t>>(_literal).extract()) + ") ");
+			river.write_string(" strange::number_uint_64::create(" + std::to_string(cast<number_data_a<uint64_t>>(_literal).extract()) + ") ");
 		}
 		else if (_literal.type_() == number_float_32_t<>::type_())
 		{
-			river.write_string(" strange::number_float_32::val(" + std::to_string(cast<number_data_a<float>>(_literal).extract()) + ") ");
+			river.write_string(" strange::number_float_32::create(" + std::to_string(cast<number_data_a<float>>(_literal).extract()) + ") ");
 		}
 		else if (_literal.type_() == number_float_64_t<>::type_())
 		{
 			if (_token.literal_() == _literal)
 			{
-				river.write_string(" strange::number_float_64::val(" + _token.symbol() + ") ");
+				river.write_string(" strange::number_float_64::create(" + _token.symbol() + ") ");
 			}
 			else
 			{
-				river.write_string(" strange::number_float_64::val(" + std::to_string(cast<number_data_a<double>>(_literal).extract()) + ") ");
+				river.write_string(" strange::number_float_64::create(" + std::to_string(cast<number_data_a<double>>(_literal).extract()) + ") ");
 			}
 		}
 		else

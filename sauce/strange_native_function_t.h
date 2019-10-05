@@ -15,13 +15,13 @@ public:
 
 	// construction
 	template <typename... Args>
-	static inline operation_a<> val(function const fun, Args&&... args)
+	static inline operation_a<> create(function const fun, Args&&... args)
 	{
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
 		return operation_a<>{ over{ native_function_t<>(fun,
-			kind_eater_params(flock_t<>::val(std::move(v)))) } };
+			kind_eater_params(flock_t<>::create(std::move(v)))) } };
 	}
 
 	// reflection

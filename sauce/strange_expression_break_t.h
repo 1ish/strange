@@ -12,7 +12,7 @@ public:
 	using over = expression_o<expression_break_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		return expression_a<>{ over{ expression_break_t<>{ token } } };
 	}

@@ -12,7 +12,7 @@ public:
 	using over = thing_o<attribute_extraction_t<>>;
 
 	// construction
-	static inline operation_a<> val_(any_a<> const& thing)
+	static inline operation_a<> create_(any_a<> const& thing)
 	{
 		return operation_a<>{ over{ attribute_extraction_t<>(thing) } };
 	}

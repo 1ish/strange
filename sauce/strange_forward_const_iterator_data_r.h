@@ -10,7 +10,7 @@ class reflection<forward_const_iterator_data_a<std::istreambuf_iterator<char>>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::forward_const_iterator_data_river");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::forward_const_iterator_data_river");
 		return CAT;
 	}
 
@@ -59,7 +59,7 @@ class reflection<forward_const_iterator_data_a<std::unordered_set<any_a<>, any_a
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::forward_const_iterator_data_unordered_herd");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::forward_const_iterator_data_unordered_herd");
 		return CAT;
 	}
 
@@ -108,7 +108,7 @@ class reflection<forward_const_iterator_data_a<std::unordered_map<any_a<>, any_a
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::forward_const_iterator_data_unordered_shoal");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::forward_const_iterator_data_unordered_shoal");
 		return CAT;
 	}
 
@@ -157,7 +157,7 @@ class reflection<forward_const_iterator_data_a<forward_const_iterator_a<>>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::forward_const_iterator_data_forward_const_iterator");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::forward_const_iterator_data_forward_const_iterator");
 		return CAT;
 	}
 

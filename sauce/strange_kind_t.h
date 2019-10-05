@@ -12,87 +12,87 @@ public:
 	using over = thing_o<kind_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			return val_();
+			return create_();
 		}
 		any_a<> order = *it;
 		if (!check<number_data_a<int64_t>>(order))
 		{
-			throw dis("strange::kind::val passed non-int-64 order");
+			throw dis("strange::kind::create passed non-int-64 order");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order));
+			return create_(cast<number_data_a<int64_t>>(order));
 		}
 		any_a<> name = *it;
 		if (!check<symbol_a<>>(name))
 		{
-			throw dis("strange::kind::val passed non-symbol name");
+			throw dis("strange::kind::create passed non-symbol name");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name));
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name));
 		}
 		any_a<> dimensions = *it;
 		if (!check<flock_a<>>(dimensions))
 		{
-			throw dis("strange::kind::val passed non-flock dimensions");
+			throw dis("strange::kind::create passed non-flock dimensions");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions));
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions));
 		}
 		any_a<> aspects = *it;
 		if (!check<flock_a<>>(aspects))
 		{
-			throw dis("strange::kind::val passed non-flock aspects");
+			throw dis("strange::kind::create passed non-flock aspects");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects));
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects));
 		}
 		any_a<> parameters = *it;
 		if (!check<flock_a<>>(parameters))
 		{
-			throw dis("strange::kind::val passed non-flock parameters");
+			throw dis("strange::kind::create passed non-flock parameters");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters));
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters));
 		}
 		any_a<> result = *it;
 		if (!check<symbol_a<>>(result))
 		{
-			throw dis("strange::kind::val passed non-symbol result");
+			throw dis("strange::kind::create passed non-symbol result");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
 		}
 		any_a<> reference = *it;
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), reference);
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), reference);
 		}
-		return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), reference, *it);
+		return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), reference, *it);
 	}
 
-	static inline kind_a<> val_()
+	static inline kind_a<> create_()
 	{
-		static kind_a<> VAL = kind_t<>::val(1);
+		static kind_a<> VAL = kind_t<>::create(1);
 		return VAL;
 	}
 
-	static inline kind_a<> val_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::val_(), flock_a<> const& aspects = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), any_a<> const& reference = no(), any_a<> const& optional = no())
+	static inline kind_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), any_a<> const& reference = no(), any_a<> const& optional = no())
 	{
 		return kind_a<>{ over{ kind_t<>(order.extract(), name, dimensions, aspects, parameters, result, reference, optional) } };
 	}
 
-	static inline kind_a<> val(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::val_(), flock_a<> const& aspects = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool reference = false, bool optional = false)
+	static inline kind_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), bool reference = false, bool optional = false)
 	{
 		return kind_a<>{ over{ kind_t<>(order, sym(name), dimensions, aspects, parameters, result, reference, optional) } };
 	}
@@ -161,14 +161,14 @@ bool const kind_t<___ego___>::___share___ = []()
 }();
 
 // cat conversion
-inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects = flock_t<>::val_())
+inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects = flock_t<>::create_())
 {
-	return kind_t<>::val_(cat.order_(), cat.name_(), cat.dimensions_(), aspects, cat.parameters_(), cat.result_(), cat.reference_(), cat.optional_());
+	return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), aspects, cat.parameters_(), cat.result_(), cat.reference_(), cat.optional_());
 }
 
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects = flock_t<>::val_())
+inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects = flock_t<>::create_())
 {
-	auto result = unordered_herd_t<>::val_();
+	auto result = unordered_herd_t<>::create_();
 	for (auto const& cat : cats)
 	{
 		if (!check<cat_a<>>(cat))
@@ -182,12 +182,12 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 
 inline cat_a<> kind_to_cat(kind_a<> const& kind)
 {
-	return cat_t<>::val_(kind.order_(), kind.name_(), kind.dimensions_(), kind.parameters_(), kind.result_(), kind.reference_(), kind.optional_());
+	return cat_t<>::create_(kind.order_(), kind.name_(), kind.dimensions_(), kind.parameters_(), kind.result_(), kind.reference_(), kind.optional_());
 }
 
 inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds)
 {
-	auto result = unordered_herd_t<>::val_();
+	auto result = unordered_herd_t<>::create_();
 	for (auto const& kind : kinds)
 	{
 		if (!check<kind_a<>>(kind))

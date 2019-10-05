@@ -10,8 +10,8 @@ class reflection<range_of_a<_element_>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::range_of",
-			flock_t<>::val_(cat_t<>::val(2, "strange::any")));
+		static cat_a<> CAT = cat_t<>::create(1, "strange::range_of",
+			flock_t<>::create_(cat_t<>::create(2, "strange::any")));
 		return CAT;
 	}
 
@@ -28,7 +28,7 @@ public:
 
 	static inline kind_a<> kind()
 	{
-		static kind_a<> KIND = kind_from_cat(cat(), flock_t<>::val_(reflection<_element_>::cat()));
+		static kind_a<> KIND = kind_from_cat(cat(), flock_t<>::create_(reflection<_element_>::cat()));
 		return KIND;
 	}
 
@@ -48,8 +48,8 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update_string("cbegin", native_extraction_t<range_of_a<_element_>>::val(&range_of_a<_element_>::cbegin__));
-			operations.update_string("cend", native_extraction_t<range_of_a<_element_>>::val(&range_of_a<_element_>::cend__));
+			operations.update_string("cbegin", native_extraction_t<range_of_a<_element_>>::create(&range_of_a<_element_>::cbegin__));
+			operations.update_string("cend", native_extraction_t<range_of_a<_element_>>::create(&range_of_a<_element_>::cend__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -81,7 +81,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string(type().to_string() + "::val", native_function_t<>::val(&range_of_t<_element_>::val__));
+		shoal.update_string(type().to_string() + "::create", native_function_t<>::create(&range_of_t<_element_>::create__));
 	}
 };
 

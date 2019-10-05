@@ -10,7 +10,7 @@ class reflection<herd_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::herd");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::herd");
 		return CAT;
 	}
 

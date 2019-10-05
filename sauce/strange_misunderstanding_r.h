@@ -10,7 +10,7 @@ class reflection<misunderstanding_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::misunderstanding");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::misunderstanding");
 		return CAT;
 	}
 
@@ -47,7 +47,7 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update_string("add", native_extraction_t<misunderstanding_a<>>::val(&misunderstanding_a<>::add__));
+			operations.update_string("add", native_extraction_t<misunderstanding_a<>>::create(&misunderstanding_a<>::add__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -79,7 +79,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::misunderstanding::val", native_function_t<>::val(&misunderstanding_t<>::val__));
+		shoal.update_string("strange::misunderstanding::create", native_function_t<>::create(&misunderstanding_t<>::create__));
 	}
 };
 

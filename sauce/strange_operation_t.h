@@ -51,7 +51,7 @@ protected:
 
 	static inline std::pair<kind_a<>, flock_a<>> kind_eater_params(flock_a<> const& params)
 	{
-		std::pair<kind_a<>, flock_a<>> kind_eater(kind_t<>::val_(), flock_t<>::val_());
+		std::pair<kind_a<>, flock_a<>> kind_eater(kind_t<>::create_(), flock_t<>::create_());
 		auto it = params.cbegin_();
 		if (it == params.cend_())
 		{
@@ -63,7 +63,7 @@ protected:
 			throw dis("strange::operation::kind_eater_params passed non-kind result");
 		}
 		auto kind_result = cast<kind_a<>>(kind);
-		auto kind_params = flock_t<>::val_();
+		auto kind_params = flock_t<>::create_();
 		while (++it != params.cend_())
 		{
 			auto name = *it;
@@ -72,7 +72,7 @@ protected:
 				throw dis("strange::operation::kind_eater_params passed non-symbol name");
 			}
 			bool const end = (++it == params.cend_());
-			kind = end ? cast<any_a<>>(kind_t<>::val_()) : *it;
+			kind = end ? cast<any_a<>>(kind_t<>::create_()) : *it;
 			if (!end && !check<kind_a<>>(kind))
 			{
 				throw dis("strange::operation::kind_eater_params passed non-kind param");
@@ -84,7 +84,7 @@ protected:
 				break;
 			}
 		}
-		kind_eater.first = kind_t<>::val(1, "", flock_t<>::val_(), flock_t<>::val_(), kind_params, kind_result);
+		kind_eater.first = kind_t<>::create(1, "", flock_t<>::create_(), flock_t<>::create_(), kind_params, kind_result);
 		return kind_eater;
 	}
 

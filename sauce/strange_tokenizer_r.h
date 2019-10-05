@@ -16,7 +16,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::tokenizer::val", native_function_t<>::val(&tokenizer_t<>::val__));
+		shoal.update_string("strange::tokenizer::create", native_function_t<>::create(&tokenizer_t<>::create__));
 	}
 };
 

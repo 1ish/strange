@@ -12,26 +12,26 @@ public:
 	using over = expression_o<expression_do_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_do::val not passed any terms");
+			throw dis(token.report() + "strange::expression_do::create not passed any terms");
 		}
 		any_a<> loop = *it;
 		if (!check<expression_a<>>(loop))
 		{
-			throw dis(token.report() + "strange::expression_do::val passed non-expression loop");
+			throw dis(token.report() + "strange::expression_do::create passed non-expression loop");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_do::val not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_do::create not passed sufficient terms");
 		}
 		any_a<> condition = *it;
 		if (!check<expression_a<>>(condition))
 		{
-			throw dis(token.report() + "strange::expression_do::val passed non-expression condition");
+			throw dis(token.report() + "strange::expression_do::create passed non-expression condition");
 		}
 		return expression_a<>{ over{ expression_do_t<>( token, terms, cast<expression_a<>>(loop), cast<expression_a<>>(condition)) } };
 	}

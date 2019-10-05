@@ -12,9 +12,9 @@ public:
 	using over = expression_o<expression_invoke_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_substitute_t<over>::val(over{ expression_invoke_t<>(token, terms) });
+		return expression_substitute_t<over>::create(over{ expression_invoke_t<>(token, terms) });
 	}
 
 	// reflection
@@ -31,7 +31,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		return thing_t<>::invoke__(range_operator_t<>::val_(_terms, thing, range));
+		return thing_t<>::invoke__(range_operator_t<>::create_(_terms, thing, range));
 	}
 
 	// expression
@@ -70,7 +70,7 @@ public:
 		{
 			if (count == 1)
 			{
-				river.write_string("[flock_t<>::val_(");
+				river.write_string("[flock_t<>::create_(");
 			}
 			else if (count > 1)
 			{
@@ -100,12 +100,12 @@ protected:
 		auto it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_invoke::val passed no terms");
+			throw dis(token.report() + "strange::expression_invoke::create passed no terms");
 		}
 		auto any_thing = *it;
 		if (!check<expression_a<>>(any_thing))
 		{
-			throw dis(token.report() + "strange::expression_invoke::val passed non-expression thing");
+			throw dis(token.report() + "strange::expression_invoke::create passed non-expression thing");
 		}
 		auto expression_thing = cast<expression_a<>>(any_thing);
 		if (!expression_thing.literal())
@@ -116,12 +116,12 @@ protected:
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_invoke::val passed too few terms");
+			throw dis(token.report() + "strange::expression_invoke::create passed too few terms");
 		}
 		auto any_member = *it;
 		if (!check<expression_a<>>(any_member))
 		{
-			throw dis(token.report() + "strange::expression_invoke::val passed non-expression member");
+			throw dis(token.report() + "strange::expression_invoke::create passed non-expression member");
 		}
 		auto expression_member = cast<expression_a<>>(any_member);
 		if (!expression_member.literal())
@@ -136,12 +136,12 @@ protected:
 			auto member = expression_member.evaluate_();
 			if (!thing.operations_().has_(member))
 			{
-				throw dis(token.report() + "strange::expression_invoke::val passed non-existent member");
+				throw dis(token.report() + "strange::expression_invoke::create passed non-existent member");
 			}
 			auto any_operation = thing.operations_().at_(member);
 			if (!check<operation_a<>>(any_operation))
 			{
-				throw dis(token.report() + "strange::expression_invoke::val passed non-operation member");
+				throw dis(token.report() + "strange::expression_invoke::create passed non-operation member");
 			}
 			auto operation = cast<operation_a<>>(any_operation);
 			if (!operation.pure())
@@ -157,7 +157,7 @@ protected:
 		}
 		catch (misunderstanding_a<>& misunderstanding)
 		{
-			throw dis("strange::expression_invoke::val pure literal evaluation error:") + token.report_() + misunderstanding;
+			throw dis("strange::expression_invoke::create pure literal evaluation error:") + token.report_() + misunderstanding;
 		}
 
 		while (++it != terms.cend_())
@@ -165,7 +165,7 @@ protected:
 			auto term = *it;
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(token.report() + "strange::expression_invoke::val passed non-expression argument");
+				throw dis(token.report() + "strange::expression_invoke::create passed non-expression argument");
 			}
 			auto expression = cast<expression_a<>>(term);
 			if (!expression.pure())

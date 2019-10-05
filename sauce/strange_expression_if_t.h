@@ -12,35 +12,35 @@ public:
 	using over = expression_o<expression_if_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_if::val not passed any terms");
+			throw dis(token.report() + "strange::expression_if::create not passed any terms");
 		}
 		any_a<> condition = *it;
 		if (!check<expression_a<>>(condition))
 		{
-			throw dis(token.report() + "strange::expression_if::val passed non-expression condition");
+			throw dis(token.report() + "strange::expression_if::create passed non-expression condition");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_if::val not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_if::create not passed sufficient terms");
 		}
 		any_a<> yay = *it;
 		if (!check<expression_a<>>(yay))
 		{
-			throw dis(token.report() + "strange::expression_if::val passed non-expression");
+			throw dis(token.report() + "strange::expression_if::create passed non-expression");
 		}
 		if (++it == terms.cend_())
 		{
-			return expression_a<>{ over{ expression_if_t<>( token, terms, cast<expression_a<>>(condition), cast<expression_a<>>(yay), expression_t<>::val(token)) } };
+			return expression_a<>{ over{ expression_if_t<>( token, terms, cast<expression_a<>>(condition), cast<expression_a<>>(yay), expression_t<>::create(token)) } };
 		}
 		any_a<> nay = *it;
 		if (!check<expression_a<>>(nay))
 		{
-			throw dis(token.report() + "strange::expression_if::val passed non-expression");
+			throw dis(token.report() + "strange::expression_if::create passed non-expression");
 		}
 		return expression_a<>{ over{ expression_if_t<>( token, terms, cast<expression_a<>>(condition), cast<expression_a<>>(yay), cast<expression_a<>>(nay)) } };
 	}

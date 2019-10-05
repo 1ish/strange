@@ -10,7 +10,7 @@ class reflection<token_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::token");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::token");
 		return CAT;
 	}
 
@@ -47,14 +47,14 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update_string("filename", native_extraction_t<token_a<>>::val(&token_a<>::filename__));
-			operations.update_string("line", native_extraction_t<token_a<>>::val(&token_a<>::line__));
-			operations.update_string("position", native_extraction_t<token_a<>>::val(&token_a<>::position__));
-			operations.update_string("tag", native_extraction_t<token_a<>>::val(&token_a<>::tag__));
-			operations.update_string("symbol", native_extraction_t<token_a<>>::val(&token_a<>::symbol__));
-			operations.update_string("literal", native_extraction_t<token_a<>>::val(&token_a<>::literal__));
-			operations.update_string("precedence", native_extraction_t<token_a<>>::val(&token_a<>::precedence__));
-			operations.update_string("report", native_extraction_t<token_a<>>::val(&token_a<>::report__));
+			operations.update_string("filename", native_extraction_t<token_a<>>::create(&token_a<>::filename__));
+			operations.update_string("line", native_extraction_t<token_a<>>::create(&token_a<>::line__));
+			operations.update_string("position", native_extraction_t<token_a<>>::create(&token_a<>::position__));
+			operations.update_string("tag", native_extraction_t<token_a<>>::create(&token_a<>::tag__));
+			operations.update_string("symbol", native_extraction_t<token_a<>>::create(&token_a<>::symbol__));
+			operations.update_string("literal", native_extraction_t<token_a<>>::create(&token_a<>::literal__));
+			operations.update_string("precedence", native_extraction_t<token_a<>>::create(&token_a<>::precedence__));
+			operations.update_string("report", native_extraction_t<token_a<>>::create(&token_a<>::report__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -86,14 +86,14 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::token::val", native_function_t<>::val(&token_t<>::val__));
-		shoal.update_string("strange::token::symbol_val", native_function_t<>::val(&token_t<>::symbol_val__));
-		shoal.update_string("strange::token::lake_val", native_function_t<>::val(&token_t<>::lake_val__));
-		shoal.update_string("strange::token::int_val", native_function_t<>::val(&token_t<>::int_val__));
-		shoal.update_string("strange::token::float_val", native_function_t<>::val(&token_t<>::float_val__));
-		shoal.update_string("strange::token::name_val", native_function_t<>::val(&token_t<>::name_val__));
-		shoal.update_string("strange::token::punctuation_val", native_function_t<>::val(&token_t<>::punctuation_val__));
-		shoal.update_string("strange::token::error_val", native_function_t<>::val(&token_t<>::error_val__));
+		shoal.update_string("strange::token::create", native_function_t<>::create(&token_t<>::create__));
+		shoal.update_string("strange::token::create_symbol", native_function_t<>::create(&token_t<>::create_symbol__));
+		shoal.update_string("strange::token::create_lake", native_function_t<>::create(&token_t<>::create_lake__));
+		shoal.update_string("strange::token::create_int", native_function_t<>::create(&token_t<>::create_int__));
+		shoal.update_string("strange::token::create_float", native_function_t<>::create(&token_t<>::create_float__));
+		shoal.update_string("strange::token::create_name", native_function_t<>::create(&token_t<>::create_name__));
+		shoal.update_string("strange::token::create_punctuation", native_function_t<>::create(&token_t<>::create_punctuation__));
+		shoal.update_string("strange::token::create_error", native_function_t<>::create(&token_t<>::create_error__));
 	}
 };
 

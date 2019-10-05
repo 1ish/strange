@@ -17,7 +17,7 @@ any_a<> fun(range_a<> const& x)
 
 TEST(TestCaseName, Parse)
 {
-	auto p = parser_t<>::val_();
+	auto p = parser_t<>::create_();
 }
 
 TEST(TestCaseName, ForLoop)
@@ -42,25 +42,25 @@ TEST(TestCaseName, ForLoop)
 	EXPECT_FALSE(e.is("strange"));
 	EXPECT_TRUE(s.is("strange"));
 
-	cat_a<> c = cat_t<>::val_();
-	kind_a<> k = kind_t<>::val_();
+	cat_a<> c = cat_t<>::create_();
+	kind_a<> k = kind_t<>::create_();
 
-	any_a<> f = native_function_t<>::val(fun, kind_t<>::val_(), "x", kind_t<>::val_(), "y", kind_t<>::val_(), "z", kind_t<>::val_());
-	any_a<> g = native_function_t<>::val(&nothing_t<>::val__, kind_t<>::val_(), "x", kind_t<>::val_(), "y", kind_t<>::val_(), "z");
-	any_a<> h = native_extraction_t<range_a<>>::val(&range_a<>::cbegin__);
-	any_a<> i = native_mutation_t<flock_a<>>::val(&flock_a<>::begin__);
-	any_a<> j = attribute_mutation_t<>::val_(sym("yes"), no());
-	any_a<> l = attribute_extraction_t<>::val_(no());
-	any_a<> m = description_t<>::val_();
-	any_a<> o = abstraction_t<>::val_();
-	any_a<> p = incarnation_t<>::val_(unordered_shoal_t<>::val_(), flock_t<>::val_(), k.aspects_(), flock_t<>::val_());
+	any_a<> f = native_function_t<>::create(fun, kind_t<>::create_(), "x", kind_t<>::create_(), "y", kind_t<>::create_(), "z", kind_t<>::create_());
+	any_a<> g = native_function_t<>::create(&nothing_t<>::create__, kind_t<>::create_(), "x", kind_t<>::create_(), "y", kind_t<>::create_(), "z");
+	any_a<> h = native_extraction_t<range_a<>>::create(&range_a<>::cbegin__);
+	any_a<> i = native_mutation_t<flock_a<>>::create(&flock_a<>::begin__);
+	any_a<> j = attribute_mutation_t<>::create_(sym("yes"), no());
+	any_a<> l = attribute_extraction_t<>::create_(no());
+	any_a<> m = description_t<>::create_();
+	any_a<> o = abstraction_t<>::create_();
+	any_a<> p = incarnation_t<>::create_(unordered_shoal_t<>::create_(), flock_t<>::create_(), k.aspects_(), flock_t<>::create_());
 
-	ordered_shoal_a<> ordered_shoal = ordered_shoal_t<>::val_();
-	unordered_shoal_a<> unordered_shoal = unordered_shoal_t<>::val_();
-	flock_a<> flock = flock_t<>::val_();
-	squad_a<> squad = squad_t<>::val_();
-	ordered_herd_a<> ordered_herd = ordered_herd_t<>::val_();
-	unordered_herd_a<> unordered_herd = unordered_herd_t<>::val_();
+	ordered_shoal_a<> ordered_shoal = ordered_shoal_t<>::create_();
+	unordered_shoal_a<> unordered_shoal = unordered_shoal_t<>::create_();
+	flock_a<> flock = flock_t<>::create_();
+	squad_a<> squad = squad_t<>::create_();
+	ordered_herd_a<> ordered_herd = ordered_herd_t<>::create_();
+	unordered_herd_a<> unordered_herd = unordered_herd_t<>::create_();
 
 	try
 	{
@@ -80,7 +80,7 @@ TEST(TestCaseName, ForLoop)
 		std::cout << "data: " << (data == flock.cend_()) << std::endl;
 	}
 
-	number_a<> num = number_int_64_t<>::val(-123);
+	number_a<> num = number_int_64_t<>::create(-123);
 
 	try
 	{
@@ -91,10 +91,10 @@ TEST(TestCaseName, ForLoop)
 		std::cout << "caught: " << m.to_string() << std::endl;
 	}
 
-	inventory_a<> lake = lake_float_64_t<>::val_();
-	inventory_a<> brook = brook_float_32_t<>::val_();
+	inventory_a<> lake = lake_float_64_t<>::create_();
+	inventory_a<> brook = brook_float_32_t<>::create_();
 
-	river_a<> river = river_t<>::val(" x y z ");
+	river_a<> river = river_t<>::create(" x y z ");
 	/*
 	for (auto const& c : river)
 	{
@@ -104,8 +104,8 @@ TEST(TestCaseName, ForLoop)
 		}
 	}
 	*/
-	token_a<> token = token_t<>::val_(sym("filename"), number_int_64_t<>::val(1), number_int_64_t<>::val(2), sym("symbol"), sym("xyz"));
-	range_a<> tokenizer = tokenizer_t<>::val_(river);
+	token_a<> token = token_t<>::create_(sym("filename"), number_int_64_t<>::create(1), number_int_64_t<>::create(2), sym("symbol"), sym("xyz"));
+	range_a<> tokenizer = tokenizer_t<>::create_(river);
 
 	for (auto const& tok : tokenizer)
 	{
@@ -116,47 +116,47 @@ TEST(TestCaseName, ForLoop)
 		}
 	}
 
-	expression_a<> expression = expression_t<>::val_(token, flock);
+	expression_a<> expression = expression_t<>::create_(token, flock);
 	flock.push_back(sym("hello"));
-	expression = expression_local_at_t<>::val_(token, flock);
-	auto const expression_kind = expression_kind_t<>::val_(token, flock_t<>::val_());
+	expression = expression_local_at_t<>::create_(token, flock);
+	auto const expression_kind = expression_kind_t<>::create_(token, flock_t<>::create_());
 
-	brook_a<int8_t> concurrent_brook = brook_t<int8_t, true>::val_();
-	flock_a<> concurrent_flock = flock_t<true>::val_();
-	lake_a<int8_t> concurrent_lake = lake_t<int8_t, true>::val_();
-	ordered_herd_a<> concurrent_ordered_herd = ordered_herd_t<true>::val_();
-	ordered_shoal_a<> concurrent_ordered_shoal = ordered_shoal_t<true>::val_();
-	squad_a<> concurrent_squad = squad_t<true>::val_();
-	unordered_herd_a<> concurrent_unordered_herd = unordered_herd_t<true>::val_();
-	unordered_shoal_a<> concurrent_unordered_shoal = unordered_shoal_t<true>::val_();
+	brook_a<int8_t> concurrent_brook = brook_t<int8_t, true>::create_();
+	flock_a<> concurrent_flock = flock_t<true>::create_();
+	lake_a<int8_t> concurrent_lake = lake_t<int8_t, true>::create_();
+	ordered_herd_a<> concurrent_ordered_herd = ordered_herd_t<true>::create_();
+	ordered_shoal_a<> concurrent_ordered_shoal = ordered_shoal_t<true>::create_();
+	squad_a<> concurrent_squad = squad_t<true>::create_();
+	unordered_herd_a<> concurrent_unordered_herd = unordered_herd_t<true>::create_();
+	unordered_shoal_a<> concurrent_unordered_shoal = unordered_shoal_t<true>::create_();
 
-	range_a<> range_operator = range_operator_t<>::val_(concurrent_flock, concurrent_lake, concurrent_ordered_herd);
+	range_a<> range_operator = range_operator_t<>::create_(concurrent_flock, concurrent_lake, concurrent_ordered_herd);
 
-	brook_a<int64_t> brk = brook_t<int64_t>::val_(1, 2, 3);
-	flock_a<> var = flock_t<>::val_(concurrent_brook, "hello", concurrent_flock);
-	ordered_shoal_a<> ors = ordered_shoal_t<>::val_(std::make_pair(concurrent_ordered_herd, concurrent_ordered_shoal), std::make_pair(concurrent_squad, concurrent_unordered_herd));
-	unordered_shoal_a<> uos = unordered_shoal_t<>::val_(std::make_pair(concurrent_ordered_herd, concurrent_ordered_shoal), std::make_pair(concurrent_squad, concurrent_unordered_herd));
+	brook_a<int64_t> brk = brook_t<int64_t>::create_(1, 2, 3);
+	flock_a<> var = flock_t<>::create_(concurrent_brook, "hello", concurrent_flock);
+	ordered_shoal_a<> ors = ordered_shoal_t<>::create_(std::make_pair(concurrent_ordered_herd, concurrent_ordered_shoal), std::make_pair(concurrent_squad, concurrent_unordered_herd));
+	unordered_shoal_a<> uos = unordered_shoal_t<>::create_(std::make_pair(concurrent_ordered_herd, concurrent_ordered_shoal), std::make_pair(concurrent_squad, concurrent_unordered_herd));
 
-	expression_a<> exp = cast<expression_a<>>(expression_o<expression_break_t<>>::val__(token.ranged_()));
+	expression_a<> exp = cast<expression_a<>>(expression_o<expression_break_t<>>::create__(token.ranged_()));
 	exp.shared_();
 
-	auto conception = conception_t<>::val_();
+	auto conception = conception_t<>::create_();
 
-	any_a<> creature = any_c<>::val_(conception);
-	operation_a<> operation_creature = operation_c<>::val_(ordered_shoal);
-	expression_a<> expression_creature = expression_c<>::val_(ordered_shoal);
+	any_a<> creature = any_c<>::create_(conception);
+	operation_a<> operation_creature = operation_c<>::create_(ordered_shoal);
+	expression_a<> expression_creature = expression_c<>::create_(ordered_shoal);
 
 	auto shared_scope = shared();
 	std::cout << "shared().size() = " << shared_scope.size() << std::endl;
 
-	flock_a<> const fl = flock_t<>::val_();
+	flock_a<> const fl = flock_t<>::create_();
 	flock_a<>(fl, true).push_back(no());
 
-	range_of_a<> rof = range_of_t<>::val_();
-	auto rofs = range_of_t<symbol_a<>>::val_();
+	range_of_a<> rof = range_of_t<>::create_();
+	auto rofs = range_of_t<symbol_a<>>::create_();
 
-	auto f1 = flock_t<>::val_(number_int_64_t<>::val(1), number_int_64_t<>::val(2), number_int_64_t<>::val(3));
-	auto a1 = f1 | native_function_t<>::val(fun);
+	auto f1 = flock_t<>::create_(number_int_64_t<>::create(1), number_int_64_t<>::create(2), number_int_64_t<>::create(3));
+	auto a1 = f1 | native_function_t<>::create(fun);
 }
 /*
 //#define STRANGE_TEST_VERBOSE 1

@@ -12,80 +12,80 @@ public:
 	using over = thing_o<cat_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			return val_();
+			return create_();
 		}
 		any_a<> order = *it;
 		if (!check<number_data_a<int64_t>>(order))
 		{
-			throw dis("strange::cat::val passed non-int-64 order");
+			throw dis("strange::cat::create passed non-int-64 order");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order));
+			return create_(cast<number_data_a<int64_t>>(order));
 		}
 		any_a<> name = *it;
 		if (!check<symbol_a<>>(name))
 		{
-			throw dis("strange::cat::val passed non-symbol name");
+			throw dis("strange::cat::create passed non-symbol name");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name));
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name));
 		}
 		any_a<> dimensions = *it;
 		if (!check<flock_a<>>(dimensions))
 		{
-			throw dis("strange::cat::val passed non-flock dimensions");
+			throw dis("strange::cat::create passed non-flock dimensions");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions));
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions));
 		}
 		any_a<> parameters = *it;
 		if (!check<flock_a<>>(parameters))
 		{
-			throw dis("strange::cat::val passed non-flock parameters");
+			throw dis("strange::cat::create passed non-flock parameters");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters));
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters));
 		}
 		any_a<> result = *it;
 		if (!check<symbol_a<>>(result))
 		{
-			throw dis("strange::cat::val passed non-symbol result");
+			throw dis("strange::cat::create passed non-symbol result");
 		}
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
 		}
 		any_a<> reference = *it;
 		if (++it == range.cend_())
 		{
-			return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), reference);
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), reference);
 		}
-		return val_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), reference, *it);
+		return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), reference, *it);
 	}
 
-	static inline cat_a<> val_()
+	static inline cat_a<> create_()
 	{
-		static cat_a<> VAL = cat_t<>::val(1);
+		static cat_a<> VAL = cat_t<>::create(1);
 		return VAL;
 	}
 
-	static inline cat_a<> val_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), any_a<> const& reference = no(), any_a<> const& optional = no())
+	static inline cat_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), any_a<> const& reference = no(), any_a<> const& optional = no())
 	{
-		return cat_a<>{ over{ cat_t<>(order.extract(), name, dimensions, flock_t<>::val_(), parameters, result, reference, optional) } };
+		return cat_a<>{ over{ cat_t<>(order.extract(), name, dimensions, flock_t<>::create_(), parameters, result, reference, optional) } };
 	}
 
-	static inline cat_a<> val(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::val_(), flock_a<> const& parameters = flock_t<>::val_(), symbol_a<> const& result = any_sym(), bool reference = false, bool optional = false)
+	static inline cat_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), bool reference = false, bool optional = false)
 	{
-		return cat_a<>{ over{ cat_t<>(order, sym(name), dimensions, flock_t<>::val_(), parameters, result, reference, optional) } };
+		return cat_a<>{ over{ cat_t<>(order, sym(name), dimensions, flock_t<>::create_(), parameters, result, reference, optional) } };
 	}
 
 	static inline symbol_a<> any_sym()
@@ -148,7 +148,7 @@ public:
 
 	inline number_data_a<int64_t> order_() const
 	{
-		return number_int_64_t<>::val(order());
+		return number_int_64_t<>::create(order());
 	}
 
 	inline int64_t order() const
@@ -193,7 +193,7 @@ public:
 
 	inline cat_a<> result_() const
 	{
-		return check<cat_a<>>(_result) ? cast<cat_a<>>(_result) : val_();
+		return check<cat_a<>>(_result) ? cast<cat_a<>>(_result) : create_();
 	}
 
 	inline any_a<> reference__(range_a<> const&) const

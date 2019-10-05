@@ -16,7 +16,7 @@ class range_operator_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<_iterator_> val(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
+		static inline forward_const_iterator_data_a<_iterator_> create(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
 		{
 			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(range, std::forward<F>(it), thing_ref, range_ref) } };
 		}
@@ -141,36 +141,36 @@ public:
 	using over = range_o<range_operator_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::range_operator::val passed empty range");
+			throw dis("strange::range_operator::create passed empty range");
 		}
 		any_a<> the_range = *it;
 		if (!check<range_a<>>(the_range))
 		{
-			throw dis("strange::range_operator::val passed non-range");
+			throw dis("strange::range_operator::create passed non-range");
 		}
 		if (++it == range.cend_())
 		{
-			throw dis("strange::range_operator::val passed short range");
+			throw dis("strange::range_operator::create passed short range");
 		}
 		any_a<> thing_ref(*it, true);
 		if (++it == range.cend_())
 		{
-			throw dis("strange::range_operator::val passed short range");
+			throw dis("strange::range_operator::create passed short range");
 		}
 		any_a<> range_ref(*it, true);
 		if (!check<range_a<>>(range_ref))
 		{
-			throw dis("strange::range_operator::val passed non-range range ref");
+			throw dis("strange::range_operator::create passed non-range range ref");
 		}
-		return val_(cast<range_a<>>(the_range), thing_ref, cast<range_a<>>(range_ref, true));
+		return create_(cast<range_a<>>(the_range), thing_ref, cast<range_a<>>(range_ref, true));
 	}
 
-	static inline range_a<> val_(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref)
+	static inline range_a<> create_(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref)
 	{
 		return range_a<>{ over{ range_operator_t<>(range, thing_ref, range_ref) } };
 	}
@@ -189,12 +189,12 @@ public:
 	// range
 	inline forward_const_iterator_a<> cbegin_() const
 	{
-		return const_iterator_t<forward_const_iterator_a<>>::val(_range, _range.cbegin_(), _thing_ref, _range_ref);
+		return const_iterator_t<forward_const_iterator_a<>>::create(_range, _range.cbegin_(), _thing_ref, _range_ref);
 	}
 
 	inline forward_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<forward_const_iterator_a<>>::val(_range, _range.cend_(), _thing_ref, _range_ref);
+		return const_iterator_t<forward_const_iterator_a<>>::create(_range, _range.cend_(), _thing_ref, _range_ref);
 	}
 
 protected:

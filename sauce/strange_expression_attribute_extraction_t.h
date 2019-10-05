@@ -12,47 +12,47 @@ public:
 	using over = expression_o<expression_attribute_extraction_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::val passed no terms");
+			throw dis(token.report() + "strange::expression_attribute_extraction::create passed no terms");
 		}
 
 		any_a<> const name = *it;
 		if (!check<symbol_a<>>(name))
 		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::val passed non-symbol name");
+			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-symbol name");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::val passed too few terms");
+			throw dis(token.report() + "strange::expression_attribute_extraction::create passed too few terms");
 		}
 
 		any_a<> const cat = *it;
 		if (!check<cat_a<>>(cat))
 		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::val passed non-cat");
+			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-cat");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::val passed too few terms");
+			throw dis(token.report() + "strange::expression_attribute_extraction::create passed too few terms");
 		}
 
 		any_a<> const value = *it;
 		if (!check<expression_a<>>(value))
 		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::val passed non-expression catch");
+			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-expression catch");
 		}
 
 		auto const thing = cast<expression_a<>>(value).evaluate_();
 		if (!thing.cats_().has_(cat))
 		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::val passed wrong kind of thing");
+			throw dis(token.report() + "strange::expression_attribute_extraction::create passed wrong kind of thing");
 		}
-		return expression_substitute_t<over>::val(over{ expression_attribute_extraction_t<>(token, terms, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) },
-			attribute_extraction_t<>::val_(thing));
+		return expression_substitute_t<over>::create(over{ expression_attribute_extraction_t<>(token, terms, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) },
+			attribute_extraction_t<>::create_(thing));
 	}
 
 	// reflection

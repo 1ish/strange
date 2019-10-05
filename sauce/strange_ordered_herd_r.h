@@ -10,7 +10,7 @@ class reflection<ordered_herd_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::ordered_herd");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::ordered_herd");
 		return CAT;
 	}
 
@@ -73,7 +73,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::ordered_herd::val", native_function_t<>::val(&ordered_herd_t<>::val__));
+		shoal.update_string("strange::ordered_herd::create", native_function_t<>::create(&ordered_herd_t<>::create__));
 	}
 };
 
@@ -89,7 +89,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::ordered_herd_concurrent::val", native_function_t<>::val(&ordered_herd_t<true>::val__));
+		shoal.update_string("strange::ordered_herd_concurrent::create", native_function_t<>::create(&ordered_herd_t<true>::create__));
 	}
 };
 

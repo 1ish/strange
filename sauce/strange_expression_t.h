@@ -40,12 +40,12 @@ public:
 	using over = expression_o<expression_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		return val(token);
+		return create(token);
 	}
 
-	static inline expression_a<> val(token_a<> const& token)
+	static inline expression_a<> create(token_a<> const& token)
 	{
 		return expression_a<>{ over{ expression_t<>{token} } };
 	}
@@ -75,7 +75,7 @@ public:
 
 	static inline flock_a<> terms_()
 	{
-		return flock_t<>::val_();
+		return flock_t<>::create_();
 	}
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const

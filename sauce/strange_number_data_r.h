@@ -10,7 +10,7 @@ class reflection<number_data_a<_primitive_>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::number_data_" + number_u<_primitive_>::category());
+		static cat_a<> CAT = cat_t<>::create(1, "strange::number_data_" + number_u<_primitive_>::category());
 		return CAT;
 	}
 

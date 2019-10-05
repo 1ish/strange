@@ -12,17 +12,17 @@ public:
 	using over = expression_o<expression_shared_at_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_shared_at::val not passed any terms");
+			throw dis(token.report() + "strange::expression_shared_at::create not passed any terms");
 		}
 		any_a<> key = *it;
 		if (!check<symbol_a<>>(key))
 		{
-			throw dis(token.report() + "strange::expression_shared_at::val passed non-symbol key");
+			throw dis(token.report() + "strange::expression_shared_at::create passed non-symbol key");
 		}
 		return expression_a<>{ over{ expression_shared_at_t<>{ token, terms, cast<symbol_a<>>(key) } } };
 	}

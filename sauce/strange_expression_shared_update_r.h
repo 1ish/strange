@@ -16,7 +16,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_shared_update::val", native_function_t<>::val(&expression_shared_update_t<>::over::val__));
+		shoal.update_string("strange::expression_shared_update::create", native_function_t<>::create(&expression_shared_update_t<>::over::create__));
 	}
 };
 

@@ -10,7 +10,7 @@ class reflection<flock_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::flock");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::flock");
 		return CAT;
 	}
 
@@ -73,7 +73,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::flock::val", native_function_t<>::val(&flock_t<>::val__));
+		shoal.update_string("strange::flock::create", native_function_t<>::create(&flock_t<>::create__));
 	}
 };
 
@@ -89,7 +89,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::flock_concurrent::val", native_function_t<>::val(&flock_t<true>::val__));
+		shoal.update_string("strange::flock_concurrent::create", native_function_t<>::create(&flock_t<true>::create__));
 	}
 };
 

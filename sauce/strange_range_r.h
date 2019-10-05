@@ -10,7 +10,7 @@ class reflection<range_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::range");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::range");
 		return CAT;
 	}
 
@@ -47,8 +47,8 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update_string("cbegin", native_extraction_t<range_a<>>::val(&range_a<>::cbegin__));
-			operations.update_string("cend", native_extraction_t<range_a<>>::val(&range_a<>::cend__));
+			operations.update_string("cbegin", native_extraction_t<range_a<>>::create(&range_a<>::cbegin__));
+			operations.update_string("cend", native_extraction_t<range_a<>>::create(&range_a<>::cend__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -80,7 +80,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::range::val", native_function_t<>::val(&range_t<>::val__));
+		shoal.update_string("strange::range::create", native_function_t<>::create(&range_t<>::create__));
 	}
 };
 

@@ -9,22 +9,22 @@ class operation_c : public any_c<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::operation_creature::val passed empty range");
+			throw dis("strange::operation_creature::create passed empty range");
 		}
 		any_a<> conception = *it;
 		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("strange::operation_creature::val passed non-shoal conception");
+			throw dis("strange::operation_creature::create passed non-shoal conception");
 		}
-		return val_(cast<shoal_a<>>(conception));
+		return create_(cast<shoal_a<>>(conception));
 	}
 
-	static inline operation_a<> val_(shoal_a<> const& conception)
+	static inline operation_a<> create_(shoal_a<> const& conception)
 	{
 		return operation_a<>{operation_c{ conception } };
 	}
@@ -45,7 +45,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("strange::operation_creature::type returned non-symbol");
@@ -62,7 +62,7 @@ public:
 		{
 			return op.operate(any_a<>(me_(), true), range);
 		}
-		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
+		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
 		return shoal;
 	}
@@ -72,14 +72,14 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::val_());
+			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("strange::operation_creature::shared returned non-unordered-shoal");
 			}
 			return cast<unordered_shoal_a<>>(result);
 		}
-		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
+		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
 		return shoal;
 	}
@@ -110,7 +110,7 @@ public:
 		auto const op = _operations.at_string("pure");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::create_());
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
@@ -125,7 +125,7 @@ public:
 		auto const op = _operations.at_string("pure");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::create_());
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
@@ -155,7 +155,7 @@ public:
 		auto const op = _operations.at_string("literal");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::create_());
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
@@ -170,7 +170,7 @@ public:
 		auto const op = _operations.at_string("literal");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range_t<>::val_());
+			return op.operate(any_a<>(me_(), true), range_t<>::create_());
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))

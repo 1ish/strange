@@ -10,12 +10,12 @@ namespace strange
 
 inline any_a<> yes()
 {
-	return something_t<>::val_();
+	return something_t<>::create_();
 }
 
 inline any_a<> no()
 {
-	return nothing_t<>::val_();
+	return nothing_t<>::create_();
 }
 
 inline any_a<> boole(bool b)
@@ -27,7 +27,7 @@ inline any_a<> boole(bool b)
 
 inline shoal_a<> shared()
 {
-	static shoal_a<> SHARED = unordered_shoal_t<>::val_();
+	static shoal_a<> SHARED = unordered_shoal_t<>::create_();
 	return SHARED;
 }
 

@@ -10,7 +10,7 @@ class reflection<bidirectional_const_iterator_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::bidirectional_const_iterator");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::bidirectional_const_iterator");
 		return CAT;
 	}
 
@@ -47,7 +47,7 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<forward_const_iterator_a<>>::operations();
-			operations.update_string("decrement", native_mutation_t<bidirectional_const_iterator_a<>>::val(&bidirectional_const_iterator_a<>::decrement__));
+			operations.update_string("decrement", native_mutation_t<bidirectional_const_iterator_a<>>::create(&bidirectional_const_iterator_a<>::decrement__));
 			return operations;
 		}();
 		return OPERATIONS;

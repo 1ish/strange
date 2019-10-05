@@ -24,7 +24,7 @@ public:
 
 	inline unordered_shoal_a<> shared_() const
 	{
-		unordered_shoal_a<> shoal = unordered_shoal_t<>::val_();
+		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
 		return shoal;
 	}
@@ -76,7 +76,7 @@ public:
 
 	inline number_data_a<uint64_t> hash_() const
 	{
-		return number_uint_64_t<>::val(uint64_t(hash()));
+		return number_uint_64_t<>::create(uint64_t(hash()));
 	}
 
 	inline any_a<> ranged__(range_a<> const& _) const

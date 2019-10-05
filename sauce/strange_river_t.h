@@ -16,7 +16,7 @@ class river_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<_iterator_> val(river_a<> const& river, F&& it)
+		static inline forward_const_iterator_data_a<_iterator_> create(river_a<> const& river, F&& it)
 		{
 			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(river, std::forward<F>(it)) } };
 		}
@@ -54,7 +54,7 @@ class river_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			_int_8 = number_int_8_t<>::val(*_it);
+			_int_8 = number_int_8_t<>::create(*_it);
 			return _int_8;
 		}
 
@@ -65,7 +65,7 @@ class river_t : public thing_t<___ego___>
 
 		inline any_a<> const& operator*() const
 		{
-			_int_8 = number_int_8_t<>::val(*_it);
+			_int_8 = number_int_8_t<>::create(*_it);
 			return _int_8;
 		}
 
@@ -119,7 +119,7 @@ class river_t : public thing_t<___ego___>
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _river(river, true)
-			, _int_8{ number_int_8_t<>::val_() }
+			, _int_8{ number_int_8_t<>::create_() }
 		{}
 	};
 
@@ -131,74 +131,74 @@ public:
 	using over = range_o<river_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& _)
+	static inline any_a<> create__(range_a<> const& _)
 	{
-		return val_();
+		return create_();
 	}
 
-	static inline river_a<> val_()
+	static inline river_a<> create_()
 	{
-		return val();
+		return create();
 	}
 
-	static inline river_a<> val(std::string const& str = std::string())
+	static inline river_a<> create(std::string const& str = std::string())
 	{
 		std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(str);
 		return river_a<>(over{ river_t<>(stream.get(), stream.get(), stream) }, true);
 	}
 
-	static inline any_a<> file_val__(range_a<> const& range)
+	static inline any_a<> create_file__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::river::file_val passed empty range");
+			throw dis("strange::river::create_file passed empty range");
 		}
 		any_a<> name = *it;
 		if (!check<symbol_a<>>(name))
 		{
-			throw dis("strange::river::file_val passed non-symbol");
+			throw dis("strange::river::create_file passed non-symbol");
 		}
-		return file_val_(cast<symbol_a<>>(name));
+		return create_file_(cast<symbol_a<>>(name));
 	}
 
-	static inline river_a<> file_val_(symbol_a<> const& name)
+	static inline river_a<> create_file_(symbol_a<> const& name)
 	{
-		return file_val(name.to_string());
+		return create_file(name.to_string());
 	}
 
-	static inline river_a<> file_val(std::string const& name)
+	static inline river_a<> create_file(std::string const& name)
 	{
 		std::shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name, std::fstream::binary | std::fstream::in | std::fstream::out);
 		return river_a<>(over{ river_t<>(stream.get(), stream.get(), stream, name) }, true);
 	}
 
-	static inline any_a<> in_val__(range_a<> const& _)
+	static inline any_a<> create_in__(range_a<> const& _)
 	{
-		return in_val_();
+		return create_in_();
 	}
 
-	static inline river_a<> in_val_()
+	static inline river_a<> create_in_()
 	{
 		return river_a<>(over{ river_t<>{ &std::cin } }, true);
 	}
 
-	static inline any_a<> out_val__(range_a<> const& _)
+	static inline any_a<> create_out__(range_a<> const& _)
 	{
-		return out_val_();
+		return create_out_();
 	}
 
-	static inline river_a<> out_val_()
+	static inline river_a<> create_out_()
 	{
 		return river_a<>(over{ river_t<>(nullptr, &std::cout) }, true);
 	}
 
-	static inline any_a<> err_val__(range_a<> const& _)
+	static inline any_a<> create_err__(range_a<> const& _)
 	{
-		return err_val_();
+		return create_err_();
 	}
 
-	static inline river_a<> err_val_()
+	static inline river_a<> create_err_()
 	{
 		return river_a<>(over{ river_t<>(nullptr, &std::cerr) }, true);
 	}
@@ -221,12 +221,12 @@ public:
 		{
 			throw dis("strange::river::cbegin can only be called on input rivers");
 		}
-		return const_iterator_t<std_istreambuf_iterator_char>::val(me_(), std_istreambuf_iterator_char{ *_istream });
+		return const_iterator_t<std_istreambuf_iterator_char>::create(me_(), std_istreambuf_iterator_char{ *_istream });
 	}
 
 	inline forward_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_istreambuf_iterator_char>::val(me_(), std_istreambuf_iterator_char{});
+		return const_iterator_t<std_istreambuf_iterator_char>::create(me_(), std_istreambuf_iterator_char{});
 	}
 
 	// river input
@@ -247,7 +247,7 @@ public:
 
 	inline number_data_a<int8_t> get_()
 	{
-		return number_int_8_t<>::val(get());
+		return number_int_8_t<>::create(get());
 	}
 
 	inline int8_t get()
@@ -266,7 +266,7 @@ public:
 
 	inline number_data_a<int8_t> peek_()
 	{
-		return number_int_8_t<>::val(peek());
+		return number_int_8_t<>::create(peek());
 	}
 
 	inline int8_t peek()
@@ -350,9 +350,9 @@ public:
 		return getline_(cast<number_data_a<int64_t>>(thing), cast<number_data_a<int8_t>>(delimiter));
 	}
 
-	inline lake_a<int8_t> getline_(number_data_a<int64_t> const& count = number_int_64_t<>::val(-1), number_data_a<int8_t> const& delimiter = number_int_8_t<>::val('\n'))
+	inline lake_a<int8_t> getline_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1), number_data_a<int8_t> const& delimiter = number_int_8_t<>::create('\n'))
 	{
-		return lake_int_8_t<>::val(getline(count.extract(), delimiter.extract()));
+		return lake_int_8_t<>::create(getline(count.extract(), delimiter.extract()));
 	}
 
 	inline std::vector<int8_t> getline(int64_t count = -1, int8_t delimiter = '\n')
@@ -392,7 +392,7 @@ public:
 		return ignore_(cast<number_data_a<int64_t>>(thing));
 	}
 
-	inline any_a<> ignore_(number_data_a<int64_t> const& count = number_int_64_t<>::val(1))
+	inline any_a<> ignore_(number_data_a<int64_t> const& count = number_int_64_t<>::create(1))
 	{
 		ignore(count.extract());
 		return me_();
@@ -422,9 +422,9 @@ public:
 		return read_(cast<number_data_a<int64_t>>(thing));
 	}
 
-	inline lake_a<int8_t> read_(number_data_a<int64_t> const& count = number_int_64_t<>::val(-1))
+	inline lake_a<int8_t> read_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1))
 	{
-		return lake_int_8_t<>::val(read(count.extract()));
+		return lake_int_8_t<>::create(read(count.extract()));
 	}
 
 	inline std::vector<int8_t> read(int64_t count = -1)
@@ -474,7 +474,7 @@ public:
 
 	inline number_data_a<int64_t> tellg_() const
 	{
-		return number_int_64_t<>::val(tellg());
+		return number_int_64_t<>::create(tellg());
 	}
 
 	inline int64_t tellg() const
@@ -501,7 +501,7 @@ public:
 		return seekg_beg_(cast<number_data_a<int64_t>>(thing));
 	}
 
-	inline any_a<> seekg_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())
+	inline any_a<> seekg_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekg_beg(offset.extract());
 		return me_();
@@ -531,7 +531,7 @@ public:
 		return seekg_end_(cast<number_data_a<int64_t>>(thing));
 	}
 
-	inline any_a<> seekg_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())
+	inline any_a<> seekg_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekg_end(offset.extract());
 		return me_();
@@ -561,7 +561,7 @@ public:
 		return seekg_cur_(cast<number_data_a<int64_t>>(thing));
 	}
 
-	inline any_a<> seekg_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())
+	inline any_a<> seekg_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekg_cur(offset.extract());
 		return me_();
@@ -676,7 +676,7 @@ public:
 
 	inline number_data_a<int64_t> tellp_() const
 	{
-		return number_int_64_t<>::val(tellp());
+		return number_int_64_t<>::create(tellp());
 	}
 
 	inline int64_t tellp() const
@@ -703,7 +703,7 @@ public:
 		return seekp_beg_(cast<number_data_a<int64_t>>(thing));
 	}
 
-	inline any_a<> seekp_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())
+	inline any_a<> seekp_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekp_beg(offset.extract());
 		return me_();
@@ -733,7 +733,7 @@ public:
 		return seekp_end_(cast<number_data_a<int64_t>>(thing));
 	}
 
-	inline any_a<> seekp_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())
+	inline any_a<> seekp_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekp_end(offset.extract());
 		return me_();
@@ -763,7 +763,7 @@ public:
 		return seekp_cur_(cast<number_data_a<int64_t>>(thing));
 	}
 
-	inline any_a<> seekp_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::val_())
+	inline any_a<> seekp_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekp_cur(offset.extract());
 		return me_();

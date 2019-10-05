@@ -12,37 +12,37 @@ public:
 	using over = range_o<range_t<>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			return val_();
+			return create_();
 		}
 		any_a<> begin = *it;
 		if (!check<forward_const_iterator_a<>>(begin))
 		{
-			throw dis("strange::range::val passed non-iterator begin");
+			throw dis("strange::range::create passed non-iterator begin");
 		}
 		if (++it == range.cend_())
 		{
-			throw dis("strange::range::val passed short range");
+			throw dis("strange::range::create passed short range");
 		}
 		any_a<> end = *it;
 		if (!check<forward_const_iterator_a<>>(end))
 		{
-			throw dis("strange::range::val passed non-iterator end");
+			throw dis("strange::range::create passed non-iterator end");
 		}
-		return val_(cast<forward_const_iterator_a<>>(begin), cast<forward_const_iterator_a<>>(end));
+		return create_(cast<forward_const_iterator_a<>>(begin), cast<forward_const_iterator_a<>>(end));
 	}
 
-	static inline range_a<> val_()
+	static inline range_a<> create_()
 	{
-		static range_a<> VAL = range_t<>::val_(it_t<true>::val_(), it_t<true>::val_());
+		static range_a<> VAL = range_t<>::create_(it_t<true>::create_(), it_t<true>::create_());
 		return VAL;
 	}
 
-	static inline range_a<> val_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
+	static inline range_a<> create_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
 	{
 		return range_a<>{ over{ range_t<>(begin, end) } };
 	}

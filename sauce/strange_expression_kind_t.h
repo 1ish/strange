@@ -12,66 +12,66 @@ public:
 	using over = expression_o<expression_kind_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			return val(token, terms, number_int_64_t<>::val(1));
+			return create(token, terms, number_int_64_t<>::create(1));
 		}
 		any_a<> order = *it;
 		if (!check<number_data_a<int64_t>>(order))
 		{
-			throw dis(token.report() + "strange::expression_kind::val passed non-int-64 order");
+			throw dis(token.report() + "strange::expression_kind::create passed non-int-64 order");
 		}
 		if (++it == terms.cend_())
 		{
-			return val(token, terms, cast<number_data_a<int64_t>>(order));
+			return create(token, terms, cast<number_data_a<int64_t>>(order));
 		}
 		any_a<> name = *it;
 		if (!check<symbol_a<>>(name))
 		{
-			throw dis(token.report() + "strange::expression_kind::val passed non-symbol name");
+			throw dis(token.report() + "strange::expression_kind::create passed non-symbol name");
 		}
 		if (++it == terms.cend_())
 		{
-			return val(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name));
+			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name));
 		}
 		any_a<> dimensions = *it;
 		if (!check<expression_a<>>(dimensions))
 		{
-			throw dis(token.report() + "strange::expression_kind::val passed non-expression dimensions");
+			throw dis(token.report() + "strange::expression_kind::create passed non-expression dimensions");
 		}
 		if (++it == terms.cend_())
 		{
-			return val(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions));
+			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions));
 		}
 		any_a<> aspects = *it;
 		if (!check<expression_a<>>(aspects))
 		{
-			throw dis(token.report() + "strange::expression_kind::val passed non-expression aspects");
+			throw dis(token.report() + "strange::expression_kind::create passed non-expression aspects");
 		}
 		if (++it == terms.cend_())
 		{
-			return val(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions), cast<expression_a<>>(aspects));
+			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions), cast<expression_a<>>(aspects));
 		}
 		any_a<> parameters = *it;
 		if (!check<expression_a<>>(parameters))
 		{
-			throw dis(token.report() + "strange::expression_kind::val passed non-expression parameters");
+			throw dis(token.report() + "strange::expression_kind::create passed non-expression parameters");
 		}
 		if (++it == terms.cend_())
 		{
-			return val(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions), cast<expression_a<>>(aspects), cast<expression_a<>>(parameters));
+			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions), cast<expression_a<>>(aspects), cast<expression_a<>>(parameters));
 		}
 		any_a<> result = *it;
 		if (!check<expression_a<>>(result))
 		{
-			throw dis(token.report() + "strange::expression_kind::val passed non-expression result");
+			throw dis(token.report() + "strange::expression_kind::create passed non-expression result");
 		}
 		if (++it == terms.cend_())
 		{
-			return val(token, terms,
+			return create(token, terms,
 				cast<number_data_a<int64_t>>(order),
 				cast<symbol_a<>>(name),
 				cast<expression_a<>>(dimensions),
@@ -82,7 +82,7 @@ public:
 		any_a<> reference = *it;
 		if (++it == terms.cend_())
 		{
-			return val(token, terms,
+			return create(token, terms,
 				cast<number_data_a<int64_t>>(order),
 				cast<symbol_a<>>(name),
 				cast<expression_a<>>(dimensions),
@@ -91,7 +91,7 @@ public:
 				cast<expression_a<>>(result),
 				reference);
 		}
-		return val(token, terms,
+		return create(token, terms,
 			cast<number_data_a<int64_t>>(order),
 			cast<symbol_a<>>(name),
 			cast<expression_a<>>(dimensions),
@@ -102,29 +102,29 @@ public:
 			*it);
 	}
 
-	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""))
+	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""))
 	{
-		return expression_substitute_t<over>::val(over{ expression_kind_t<>(token, terms, 1, order, name, expression_t<>::val(token), expression_t<>::val(token), expression_t<>::val(token), expression_t<>::val(token), no(), no()) });
+		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, 1, order, name, expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), no(), no()) });
 	}
 
-	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions)
+	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions)
 	{
-		return expression_substitute_t<over>::val(over{ expression_kind_t<>(token, terms, 2, order, name, dimensions, expression_t<>::val(token), expression_t<>::val(token), expression_t<>::val(token), no(), no()) });
+		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, 2, order, name, dimensions, expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), no(), no()) });
 	}
 
-	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects)
+	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects)
 	{
-		return expression_substitute_t<over>::val(over{ expression_kind_t<>(token, terms, 3, order, name, dimensions, aspects, expression_t<>::val(token), expression_t<>::val(token), no(), no()) });
+		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, 3, order, name, dimensions, aspects, expression_t<>::create(token), expression_t<>::create(token), no(), no()) });
 	}
 
-	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters)
+	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters)
 	{
-		return expression_substitute_t<over>::val(over{ expression_kind_t<>(token, terms, 4, order, name, dimensions, aspects, parameters, expression_t<>::val(token), no(), no()) });
+		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, 4, order, name, dimensions, aspects, parameters, expression_t<>::create(token), no(), no()) });
 	}
 
-	static inline expression_a<> val(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& reference = no(), any_a<> const& optional = no())
+	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& reference = no(), any_a<> const& optional = no())
 	{
-		return expression_substitute_t<over>::val(over{ expression_kind_t<>(token, terms, 5, order, name, dimensions, aspects, parameters, result, reference, optional) });
+		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, 5, order, name, dimensions, aspects, parameters, result, reference, optional) });
 	}
 
 	// reflection
@@ -143,7 +143,7 @@ public:
 	{
 		if (_count <= 1)
 		{
-			return kind_t<>::val_(_order, _name);
+			return kind_t<>::create_(_order, _name);
 		}
 		auto dimensions = _dimensions.operate(thing, range);
 		if (!check<flock_a<>>(dimensions))
@@ -152,7 +152,7 @@ public:
 		}
 		if (_count == 2)
 		{
-			return kind_t<>::val_(_order, _name, cast<flock_a<>>(dimensions));
+			return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions));
 		}
 		auto aspects = _aspects.operate(thing, range);
 		if (!check<flock_a<>>(aspects))
@@ -161,7 +161,7 @@ public:
 		}
 		if (_count == 3)
 		{
-			return kind_t<>::val_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects));
+			return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects));
 		}
 		auto parameters = _parameters.operate(thing, range);
 		if (!check<flock_a<>>(parameters))
@@ -170,14 +170,14 @@ public:
 		}
 		if (_count == 4)
 		{
-			return kind_t<>::val_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters));
+			return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters));
 		}
 		auto result = _result.operate(thing, range);
 		if (!check<symbol_a<>>(result))
 		{
 			throw dis(_token.report() + "strange::expression_kind::operate result is not a symbol");
 		}
-		return kind_t<>::val_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), _reference, _optional);
+		return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), _reference, _optional);
 	}
 
 	// expression
@@ -197,7 +197,7 @@ public:
 				_aspects.generate(version, indent, river);
 				if (_count >= 4)
 				{
-					auto parameters = river_t<>::val();
+					auto parameters = river_t<>::create();
 					_parameters.generate(version, indent, parameters);
 					auto str = parameters.to_string();
 					auto len = str.length();
@@ -225,7 +225,7 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" strange::kind_t<>::val(\"" + _name.to_string() + "\"");
+		river.write_string(" strange::kind_t<>::create(\"" + _name.to_string() + "\"");
 		if (_count >= 2)
 		{
 			river.write_string(",");

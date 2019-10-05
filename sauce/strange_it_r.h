@@ -16,7 +16,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::const_it::val", native_function_t<>::val(&it_t<true>::val__));
+		shoal.update_string("strange::const_it::create", native_function_t<>::create(&it_t<true>::create__));
 	}
 };
 
@@ -32,7 +32,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::it::val", native_function_t<>::val(&it_t<false>::val__));
+		shoal.update_string("strange::it::create", native_function_t<>::create(&it_t<false>::create__));
 	}
 };
 

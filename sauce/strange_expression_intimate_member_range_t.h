@@ -12,37 +12,37 @@ public:
 	using over = expression_o<expression_intimate_member_range_t<>>;
 
 	// construction
-	static inline expression_a<> val_(token_a<> const& token, flock_a<> const& terms)
+	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		auto it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_intimate_member_range::val passed empty range");
+			throw dis(token.report() + "strange::expression_intimate_member_range::create passed empty range");
 		}
 		auto thing = *it;
 		if (!check<expression_a<>>(thing))
 		{
-			throw dis(token.report() + "strange::expression_intimate_member_range::val passed non-expression thing term");
+			throw dis(token.report() + "strange::expression_intimate_member_range::create passed non-expression thing term");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_intimate_member_range::val passed short range");
+			throw dis(token.report() + "strange::expression_intimate_member_range::create passed short range");
 		}
 		auto member = *it;
 		if (!check<symbol_a<>>(member))
 		{
-			throw dis(token.report() + "strange::expression_intimate_member_range::val passed non-symbol member term");
+			throw dis(token.report() + "strange::expression_intimate_member_range::create passed non-symbol member term");
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_intimate_member_range::val passed short range");
+			throw dis(token.report() + "strange::expression_intimate_member_range::create passed short range");
 		}
 		auto range = *it;
 		if (!check<expression_a<>>(range))
 		{
-			throw dis(token.report() + "strange::expression_intimate_member_range::val passed non-expression range term");
+			throw dis(token.report() + "strange::expression_intimate_member_range::create passed non-expression range term");
 		}
-		return expression_substitute_t<over>::val(over{ expression_intimate_member_range_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member), cast<expression_a<>>(range)) });
+		return expression_substitute_t<over>::create(over{ expression_intimate_member_range_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member), cast<expression_a<>>(range)) });
 	}
 
 	// reflection
@@ -123,17 +123,17 @@ protected:
 			auto any_range = range_expression.evaluate_();
 			if (!check<range_a<>>(any_range))
 			{
-				throw dis(token.report() + "strange::expression_intimate_member_range::val passed non-range");
+				throw dis(token.report() + "strange::expression_intimate_member_range::create passed non-range");
 			}
 			auto range = cast<range_a<>>(any_range);
 			if (!thing.operations_().has_(member))
 			{
-				throw dis(token.report() + "strange::expression_intimate_member_range::val passed non-existent member");
+				throw dis(token.report() + "strange::expression_intimate_member_range::create passed non-existent member");
 			}
 			auto any_operation = thing.operations_().at_(member);
 			if (!check<operation_a<>>(any_operation))
 			{
-				throw dis(token.report() + "strange::expression_intimate_member_range::val passed non-operation member");
+				throw dis(token.report() + "strange::expression_intimate_member_range::create passed non-operation member");
 			}
 			auto operation = cast<operation_a<>>(any_operation);
 			if (!operation.pure())
@@ -149,7 +149,7 @@ protected:
 		}
 		catch (misunderstanding_a<>& misunderstanding)
 		{
-			throw dis("strange::expression_intimate_member_range::val pure literal evaluation error:") + token.report_() + misunderstanding;
+			throw dis("strange::expression_intimate_member_range::create pure literal evaluation error:") + token.report_() + misunderstanding;
 		}
 
 		return pure_literal;

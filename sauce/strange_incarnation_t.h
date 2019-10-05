@@ -12,7 +12,7 @@ public:
 	using over = collection_o<incarnation_t<>>;
 
 	// construction
-	static inline unordered_shoal_a<> val_(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects, flock_a<> const& defaults)
+	static inline unordered_shoal_a<> create_(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects, flock_a<> const& defaults)
 	{
 		return unordered_shoal_a<>{ over{ incarnation_t<>(inspiration, mention, aspects, defaults) } };
 	}
@@ -37,22 +37,22 @@ public:
 		{
 			if (!check<symbol_a<>>(name))
 			{
-				throw dis("strange::incarnation::val passed non-symbol dimension name");
+				throw dis("strange::incarnation::create passed non-symbol dimension name");
 			}
 			if (aspect == aspects.cend_())
 			{
 				if (value == defaults.cend_())
 				{
-					_map.emplace(name, attribute_extraction_t<>::val_(no()));
+					_map.emplace(name, attribute_extraction_t<>::create_(no()));
 				}
 				else
 				{
-					_map.emplace(name, attribute_extraction_t<>::val_(*value++));
+					_map.emplace(name, attribute_extraction_t<>::create_(*value++));
 				}
 			}
 			else
 			{
-				_map.emplace(name, attribute_extraction_t<>::val_(*aspect++));
+				_map.emplace(name, attribute_extraction_t<>::create_(*aspect++));
 				if (value != defaults.cend_())
 				{
 					++value;

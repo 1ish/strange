@@ -16,7 +16,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline forward_iterator_data_a<_iterator_> val(unordered_shoal_a<> const& unordered_shoal, F&& it)
+		static inline forward_iterator_data_a<_iterator_> create(unordered_shoal_a<> const& unordered_shoal, F&& it)
 		{
 			return forward_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(unordered_shoal, std::forward<F>(it)) } };
 		}
@@ -138,7 +138,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _unordered_shoal(unordered_shoal, true)
-			, _pair{ flock_t<>::val_() }
+			, _pair{ flock_t<>::create_() }
 		{}
 	};
 
@@ -151,7 +151,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<_iterator_> val(unordered_shoal_a<> const& unordered_shoal, F&& it)
+		static inline forward_const_iterator_data_a<_iterator_> create(unordered_shoal_a<> const& unordered_shoal, F&& it)
 		{
 			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(unordered_shoal, std::forward<F>(it)) } };
 		}
@@ -256,7 +256,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _unordered_shoal(unordered_shoal, true)
-			, _pair{ flock_t<>::val_() }
+			, _pair{ flock_t<>::create_() }
 		{}
 	};
 
@@ -267,24 +267,24 @@ public:
 	using over = collection_o<unordered_shoal_t<_concurrent_>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
-		return val_() += range;
+		return create_() += range;
 	}
 
-	static inline unordered_shoal_a<> val_()
+	static inline unordered_shoal_a<> create_()
 	{
-		return val(std_unordered_map_any_any{});
+		return create(std_unordered_map_any_any{});
 	}
 
 	template <typename... Args>
-	static inline unordered_shoal_a<> val_(Args&&... args)
+	static inline unordered_shoal_a<> create_(Args&&... args)
 	{
-		return val(variadic_pair_u<>::unordered_map(std::forward<Args>(args)...));
+		return create(variadic_pair_u<>::unordered_map(std::forward<Args>(args)...));
 	}
 
 	template <typename F>
-	static inline unordered_shoal_a<> val(F&& init)
+	static inline unordered_shoal_a<> create(F&& init)
 	{
 		return unordered_shoal_a<>{ over{ unordered_shoal_t<_concurrent_>{ std::forward<F>(init) } } };
 	}
@@ -302,7 +302,7 @@ public:
 
 	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
 	{
-		auto values = flock_t<>::val_();
+		auto values = flock_t<>::create_();
 		for (auto const& param : range)
 		{
 			auto p = at_(param);
@@ -371,12 +371,12 @@ public:
 	// range
 	inline forward_const_iterator_a<> cbegin_() const
 	{
-		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val(me_(), _map.cbegin());
+		return const_iterator_t<std_unordered_map_any_any::const_iterator>::create(me_(), _map.cbegin());
 	}
 
 	inline forward_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_unordered_map_any_any::const_iterator>::val(me_(), _map.cend());
+		return const_iterator_t<std_unordered_map_any_any::const_iterator>::create(me_(), _map.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -386,7 +386,7 @@ public:
 
 	inline forward_iterator_a<> begin_()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::val(me_(), _map.begin());
+		return iterator_t<std_unordered_map_any_any::iterator>::create(me_(), _map.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -396,7 +396,7 @@ public:
 
 	inline forward_iterator_a<> end_()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::val(me_(), _map.end());
+		return iterator_t<std_unordered_map_any_any::iterator>::create(me_(), _map.end());
 	}
 
 	// collection
@@ -418,7 +418,7 @@ public:
 		std_unordered_map_any_any::const_iterator const it = _map.find(key);
 		if (it == _map.cend())
 		{
-			return misunderstanding_t<>::val("strange::unordered_shoal::at key not found");
+			return misunderstanding_t<>::create("strange::unordered_shoal::at key not found");
 		}
 		return it->second;
 	}
@@ -585,12 +585,12 @@ public:
 
 	inline any_a<> read_lock_() const
 	{
-		return data_t<read_lock_ptr<_concurrent_>>::val(make_read_lock_ptr<_concurrent_>(_mutex));
+		return data_t<read_lock_ptr<_concurrent_>>::create(make_read_lock_ptr<_concurrent_>(_mutex));
 	}
 
 	inline any_a<> write_lock_() const
 	{
-		return data_t<write_lock_ptr<_concurrent_>>::val(make_write_lock_ptr<_concurrent_>(_mutex));
+		return data_t<write_lock_ptr<_concurrent_>>::create(make_write_lock_ptr<_concurrent_>(_mutex));
 	}
 
 	// data

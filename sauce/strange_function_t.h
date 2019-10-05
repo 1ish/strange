@@ -12,7 +12,7 @@ public:
 	using over = thing_o<function_t<>>;
 
 	// construction
-	static inline operation_a<> val_(token_a<> const& token, flock_a<> const& names, flock_a<> const& params, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
+	static inline operation_a<> create_(token_a<> const& token, flock_a<> const& names, flock_a<> const& params, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
 	{
 		return operation_a<>{ over{ function_t<>(token, names, params, defaults, name, result, expression) } };
 	}
@@ -55,7 +55,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>&, range_a<> const& range) const
 	{
-		auto local_shoal = unordered_shoal_t<>::val_();
+		auto local_shoal = unordered_shoal_t<>::create_();
 		auto& local = local_shoal.reference();
 		local.emplace(sym("$"), _shared);
 		forward_const_iterator_a<> ait = range.cbegin_();
@@ -114,11 +114,11 @@ protected:
 		, _name{ name }
 		, _result{ result }
 		, _expression{ expression }
-		, _cat{ cat_t<>::val_(number_int_64_t<>::val(1), sym(""), flock_t<>::val_(), _params, _result) }
+		, _cat{ cat_t<>::create_(number_int_64_t<>::create(1), sym(""), flock_t<>::create_(), _params, _result) }
 		, _cats{ cats(_cat) }
 		, _kind{ kind_from_cat(_cat) }
 		, _kinds{ kinds(_kind) }
-		, _shared{ unordered_shoal_t<true>::val_() }
+		, _shared{ unordered_shoal_t<true>::create_() }
 	{}
 };
 

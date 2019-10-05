@@ -12,17 +12,17 @@ public:
 	using over = thing_o<number_t<_primitive_>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& _)
+	static inline any_a<> create__(range_a<> const& _)
 	{
-		return val_();
+		return create_();
 	}
 
-	static inline number_data_a<_primitive_> val_()
+	static inline number_data_a<_primitive_> create_()
 	{
-		return val(_primitive_{});
+		return create(_primitive_{});
 	}
 
-	static inline number_data_a<_primitive_> val(_primitive_ primitive)
+	static inline number_data_a<_primitive_> create(_primitive_ primitive)
 	{
 		return number_data_a<_primitive_>{ over{ number_t<_primitive_>{ primitive } } };
 	}
@@ -362,7 +362,7 @@ public:
 		{
 			throw dis("strange::number % division by zero");
 		}
-		return val(number_u<_primitive_>::modulo(_number, num));
+		return create(number_u<_primitive_>::modulo(_number, num));
 	}
 
 	inline any_a<> to_int_64__(range_a<> const& _) const
@@ -372,7 +372,7 @@ public:
 
 	inline number_data_a<int64_t> to_int_64_() const
 	{
-		return number_t<int64_t>::val(to_int_64());
+		return number_t<int64_t>::create(to_int_64());
 	}
 
 	inline int64_t to_int_64() const
@@ -413,7 +413,7 @@ public:
 
 	inline number_data_a<uint64_t> to_uint_64_() const
 	{
-		return number_t<uint64_t>::val(to_uint_64());
+		return number_t<uint64_t>::create(to_uint_64());
 	}
 
 	inline uint64_t to_uint_64() const
@@ -454,7 +454,7 @@ public:
 
 	inline number_data_a<double> to_float_64_() const
 	{
-		return number_t<double>::val(to_float_64());
+		return number_t<double>::create(to_float_64());
 	}
 
 	inline double to_float_64() const
@@ -595,7 +595,7 @@ public:
 
 	static inline number_data_a<int64_t> byte_size_()
 	{
-		return number_t<int64_t>::val(byte_size());
+		return number_t<int64_t>::create(byte_size());
 	}
 
 	static inline int64_t byte_size()
@@ -782,12 +782,12 @@ using number_float_64_t = number_t<double, ___ego___>;
 
 number_data_a<int64_t> int_64_from_string(std::string const& str)
 {
-	return number_int_64_t<>::val(std::stoll(str));
+	return number_int_64_t<>::create(std::stoll(str));
 }
 
 number_data_a<double> float_64_from_string(std::string const& str)
 {
-	return number_float_64_t<>::val(std::stod(str));
+	return number_float_64_t<>::create(std::stod(str));
 }
 
 } // namespace strange

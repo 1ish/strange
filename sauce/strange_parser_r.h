@@ -10,7 +10,7 @@ class reflection<parser_a<>>
 public:
 	static inline cat_a<> cat()
 	{
-		static cat_a<> CAT = cat_t<>::val(1, "strange::parser");
+		static cat_a<> CAT = cat_t<>::create(1, "strange::parser");
 		return CAT;
 	}
 
@@ -47,7 +47,7 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-//TODO			operations.update_string("parse", native_extraction_t<parser_a<>>::val(&parser_a<>::parse__));
+//TODO			operations.update_string("parse", native_extraction_t<parser_a<>>::create(&parser_a<>::parse__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -79,7 +79,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-//TODO		shoal.update_string("strange::parser::val", native_function_t<>::val(&parser_t<>::val__));
+//TODO		shoal.update_string("strange::parser::create", native_function_t<>::create(&parser_t<>::create__));
 	}
 };
 

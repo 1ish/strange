@@ -16,7 +16,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_attribute_extraction::val", native_function_t<>::val(&expression_attribute_extraction_t<>::over::val__));
+		shoal.update_string("strange::expression_attribute_extraction::create", native_function_t<>::create(&expression_attribute_extraction_t<>::over::create__));
 	}
 };
 

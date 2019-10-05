@@ -16,7 +16,7 @@ class lake_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<_iterator_> val(lake_a<_primitive_> const& lake, F&& it)
+		static inline random_access_iterator_data_a<_iterator_> create(lake_a<_primitive_> const& lake, F&& it)
 		{
 			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(lake, std::forward<F>(it)) } };
 		}
@@ -54,7 +54,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			return number_t<_primitive_>::val(*_it);
+			return number_t<_primitive_>::create(*_it);
 		}
 
 		inline any_a<> set__(range_a<> const& range) const
@@ -79,7 +79,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline any_a<>* operator->() const
 		{
-			_number = number_reference_t<_primitive_>::val(*_it);
+			_number = number_reference_t<_primitive_>::create(*_it);
 			return &_number;
 		}
 
@@ -374,7 +374,7 @@ class lake_t : public thing_t<___ego___>
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _lake(lake, true)
-			, _number{ number_t<_primitive_>::val_() }
+			, _number{ number_t<_primitive_>::create_() }
 		{}
 	};
 
@@ -387,7 +387,7 @@ class lake_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_const_iterator_data_a<_iterator_> val(lake_a<_primitive_> const& lake, F&& it)
+		static inline random_access_const_iterator_data_a<_iterator_> create(lake_a<_primitive_> const& lake, F&& it)
 		{
 			return random_access_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(lake, std::forward<F>(it)) } };
 		}
@@ -425,7 +425,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			_number = number_t<_primitive_>::val(*_it);
+			_number = number_t<_primitive_>::create(*_it);
 			return _number;
 		}
 
@@ -436,7 +436,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline any_a<> const& operator*() const
 		{
-			_number = number_t<_primitive_>::val(*_it);
+			_number = number_t<_primitive_>::create(*_it);
 			return _number;
 		}
 
@@ -726,7 +726,7 @@ class lake_t : public thing_t<___ego___>
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _lake(lake, true)
-			, _number{ number_t<_primitive_>::val_() }
+			, _number{ number_t<_primitive_>::create_() }
 		{}
 	};
 
@@ -737,24 +737,24 @@ public:
 	using over = collection_o<lake_t<_primitive_, _concurrent_>>;
 
 	// construction
-	static inline any_a<> val__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const& range)
 	{
-		return val_() += range;
+		return create_() += range;
 	}
 
-	static inline lake_a<_primitive_> val_()
+	static inline lake_a<_primitive_> create_()
 	{
-		return val(std_vector_number{});
+		return create(std_vector_number{});
 	}
 
 	template <typename... Args>
-	static inline lake_a<_primitive_> val_(Args&&... args)
+	static inline lake_a<_primitive_> create_(Args&&... args)
 	{
-		return val(variadic_u<_primitive_>::vector(std::forward<Args>(args)...));
+		return create(variadic_u<_primitive_>::vector(std::forward<Args>(args)...));
 	}
 
 	template <typename F>
-	static inline lake_a<_primitive_> val(F&& init)
+	static inline lake_a<_primitive_> create(F&& init)
 	{
 		return lake_a<_primitive_>{ over{ lake_t<_primitive_, _concurrent_>{ std::forward<F>(init) } } };
 	}
@@ -795,12 +795,12 @@ public:
 	// range
 	inline random_access_const_iterator_a<> cbegin_() const
 	{
-		return const_iterator_t<std_vector_number::const_iterator>::val(me_(), _vector.cbegin());
+		return const_iterator_t<std_vector_number::const_iterator>::create(me_(), _vector.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_vector_number::const_iterator>::val(me_(), _vector.cend());
+		return const_iterator_t<std_vector_number::const_iterator>::create(me_(), _vector.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -810,7 +810,7 @@ public:
 
 	inline random_access_iterator_a<> begin_()
 	{
-		return iterator_t<std_vector_number::iterator>::val(me_(), _vector.begin());
+		return iterator_t<std_vector_number::iterator>::create(me_(), _vector.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -820,7 +820,7 @@ public:
 
 	inline random_access_iterator_a<> end_()
 	{
-		return iterator_t<std_vector_number::iterator>::val(me_(), _vector.end());
+		return iterator_t<std_vector_number::iterator>::create(me_(), _vector.end());
 	}
 
 	// collection
@@ -845,7 +845,7 @@ public:
 
 	inline any_a<> at_index(int64_t index) const
 	{
-		return number_t<_primitive_>::val(pat(index));
+		return number_t<_primitive_>::create(pat(index));
 	}
 
 	inline _primitive_ pat(int64_t index) const
@@ -1015,7 +1015,7 @@ public:
 		}
 		_primitive_ number = _vector.back();
 		_vector.pop_back();
-		return number_t<_primitive_>::val(number);
+		return number_t<_primitive_>::create(number);
 	}
 
 	inline _primitive_ pop_back()
@@ -1077,12 +1077,12 @@ public:
 
 	inline any_a<> read_lock_() const
 	{
-		return data_t<read_lock_ptr<_concurrent_>>::val(make_read_lock_ptr<_concurrent_>(_mutex));
+		return data_t<read_lock_ptr<_concurrent_>>::create(make_read_lock_ptr<_concurrent_>(_mutex));
 	}
 
 	inline any_a<> write_lock_() const
 	{
-		return data_t<write_lock_ptr<_concurrent_>>::val(make_write_lock_ptr<_concurrent_>(_mutex));
+		return data_t<write_lock_ptr<_concurrent_>>::create(make_write_lock_ptr<_concurrent_>(_mutex));
 	}
 
 	// data
@@ -1166,7 +1166,7 @@ using lake_float_64_t = lake_t<double, _concurrent_, ___ego___>;
 
 lake_a<int8_t> lake_from_string(std::string const& str)
 {
-	return lake_int_8_t<>::val(lake_int_8_t<>::std_vector_number(str.cbegin(), str.cend()));
+	return lake_int_8_t<>::create(lake_int_8_t<>::std_vector_number(str.cbegin(), str.cend()));
 }
 
 std::string lake_to_string(lake_a<int8_t> const& lake)
