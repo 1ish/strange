@@ -1,20 +1,29 @@
-TEST_CASE("strange parse and evaluate hello world", "[parse_t]")
+TEST_CASE("strange river create_file input hello world", "[river_t]")
 {
 	try
 	{
-		auto parser = parser_t<>::create_();
-		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::create_file(taste_dir + "strange_taste_hello_world.str")));
-		auto result = expression.evaluate_();
+		auto river = river_t<>::create_file(taste_dir + "strange_taste_hello_world.str");
+		REQUIRE(river.good());
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		std::cout << "misunderstanding: " << m.to_string() << std::endl;
-		throw;
+		throw std::runtime_error(m.to_string());
 	}
-	catch (std::exception & e)
+}
+
+TEST_CASE("strange tokenize hello world", "[tokenizer_t]")
+{
+	try
 	{
-		std::cout << "exception: " << e.what() << std::endl;
-		throw;
+		auto tokenizer = tokenizer_t<>::create_(river_t<>::create_file(taste_dir + "strange_taste_hello_world.str"));
+		for (auto const token : tokenizer)
+		{
+			std::cout << "token: " << cast<token_a<>>(token).report();
+		}
+	}
+	catch (misunderstanding_a<>& m)
+	{
+		throw std::runtime_error(m.to_string());
 	}
 }
 
@@ -30,27 +39,20 @@ TEST_CASE("strange parse and generate hello world", "[parse_t]")
 	}
 	catch (misunderstanding_a<>& m)
 	{
-		std::cout << "misunderstanding: " << m.to_string() << std::endl;
-		throw;
-	}
-	catch (std::exception & e)
-	{
-		std::cout << "exception: " << e.what() << std::endl;
-		throw;
+		throw std::runtime_error(m.to_string());
 	}
 }
 
-TEST_CASE("strange river create_file input hello world", "[river_t]")
+TEST_CASE("strange parse and evaluate hello world", "[parse_t]")
 {
-	auto river = river_t<>::create_file(taste_dir + "strange_taste_hello_world.str");
-	REQUIRE(river.good());
-}
-
-TEST_CASE("strange tokenize hello world", "[tokenizer_t]")
-{
-	auto tokenizer = tokenizer_t<>::create_(river_t<>::create_file(taste_dir + "strange_taste_hello_world.str"));
-	for (auto const token : tokenizer)
+	try
 	{
-		std::cout << "token: " << cast<token_a<>>(token).report();
+		auto parser = parser_t<>::create_();
+		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::create_file(taste_dir + "strange_taste_hello_world.str")));
+		auto result = expression.evaluate_();
+	}
+	catch (misunderstanding_a<>& m)
+	{
+		throw std::runtime_error(m.to_string());
 	}
 }

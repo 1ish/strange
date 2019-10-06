@@ -5,7 +5,7 @@ namespace strange
 {
 
 template <typename ___ego___ = misunderstanding_a<>>
-class disagreement_t : public nothing_t<___ego___>, public std::logic_error
+class disagreement_t : public nothing_t<___ego___>
 {
 public:
 	// override
@@ -58,7 +58,7 @@ public:
 	// misunderstanding
 	inline std::string to_string() const
 	{
-		return what();
+		return _string;
 	}
 
 	inline misunderstanding_a<> add__(range_a<> const& range) const
@@ -85,10 +85,12 @@ public:
 	}
 
 protected:
+	std::string const _string;
+
 	template <typename F>
 	inline disagreement_t(F&& s)
 		: nothing_t{}
-		, std::logic_error{ std::forward<F>(s) }
+		, _string{ std::forward<F>(s) }
 	{}
 
 private:
