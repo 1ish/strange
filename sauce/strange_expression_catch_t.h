@@ -116,8 +116,9 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
+		// catch(name :<cat>= value)
 		river.write_string(" catch(");
 		bool first = true;
 		for (auto const& term : _terms)

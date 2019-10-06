@@ -72,10 +72,10 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" attribute_mutation(");
-		river.write_string(")\n");
+		// name := expression
+		river.write_string(" " + _name.to_string() + " := ");
 		_expression.generate(version, indent, river);
 	}
 

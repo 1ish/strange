@@ -223,11 +223,11 @@ class tokenizer_t : public thing_t<___ego___>
 				}
 				else if (singlequote && char1 == '\'')
 				{
-					return symbol_token(token + char1);
+					return symbol_token(token);
 				}
 				else if (doublequote && char1 == '\"')
 				{
-					return lake_token(token + char1);
+					return lake_token(token);
 				}
 				else if (singlequote || doublequote)
 				{
@@ -249,11 +249,9 @@ class tokenizer_t : public thing_t<___ego___>
 					// skip whitespace
 					break;
 				case '\'':
-					token = char1;
 					singlequote = true;
 					break;
 				case '\"':
-					token = char1;
 					doublequote = true;
 					break;
 				case '+':

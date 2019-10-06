@@ -91,8 +91,9 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
+		// name :<cat># (...)
 		river.write_string(" extraction(");
 		auto nit = _names.extract().cbegin();
 		auto pit = _params.extract().cbegin();

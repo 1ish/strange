@@ -37,6 +37,7 @@ public:
 	// expression
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
+		// continue()
 		river.write_string(" continue() ");
 	}
 

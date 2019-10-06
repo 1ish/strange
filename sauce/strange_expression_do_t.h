@@ -76,7 +76,8 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" do_(");
+		// do(x,y,z)
+		river.write_string(" do(");
 		bool first = true;
 		for (auto const& term : _terms)
 		{

@@ -146,12 +146,7 @@ public:
 			throw dis("strange::thing::operate passed empty range");
 		}
 		any_a<> thing(*it, true);
-		if (++it == range.cend_())
-		{
-			throw dis("strange::thing::operate passed short range");
-		}
-		any_a<> operation = *it;
-		return operation.operate(thing, range_t<>::create_(++it, range.cend_()));
+		return thing.operate(thing, range_t<>::create_(++it, range.cend_()));
 	}
 
 	static inline any_a<> operate(any_a<>& thing, range_a<> const& range)

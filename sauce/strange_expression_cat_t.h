@@ -162,6 +162,7 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
+		// <name[d1,d2,d3](p1,p2,p3):result>&
 		river.write_string(" <" + _name.to_string());
 		if (_count >= 2)
 		{

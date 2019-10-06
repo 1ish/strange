@@ -42,14 +42,23 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
+		// (thing.name[x,y,z])
 		int64_t count = 0;
 		for (auto const& term : _terms)
 		{
-			if (count == 1)
+			if (count == 0)
 			{
-				river.write_string(".call[");
+				river.write_string(" (");
 			}
-			else if (count > 1)
+			else if (count == 1)
+			{
+				river.write_string(".");
+			}
+			else if (count == 2)
+			{
+				river.write_string("[");
+			}
+			else
 			{
 				river.write_string(",");
 			}
@@ -60,7 +69,18 @@ public:
 			cast<expression_a<>>(term).generate(version, indent, river);
 			++count;
 		}
-		river.write_string("] ");
+		if (count < 2)
+		{
+			throw dis(_token.report() + "strange::expression_invoke::generate with less than two terms");
+		}
+		else if (count == 2)
+		{
+			river.write_string("[]) ");
+		}
+		else
+		{
+			river.write_string("]) ");
+		}
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const

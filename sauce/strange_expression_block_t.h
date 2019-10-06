@@ -49,6 +49,7 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
+		// (x,y,z)
 		river.write_string(" (");
 		bool first = true;
 		for (auto const& term : _terms)

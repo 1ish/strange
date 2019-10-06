@@ -42,14 +42,19 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
+		// (thing[x,y,z])
 		int64_t count = 0;
 		for (auto const& term : _terms)
 		{
-			if (count == 1)
+			if (count == 0)
 			{
-				river.write_string(".perform[");
+				river.write_string(" (");
 			}
-			else if (count > 1)
+			else if (count == 1)
+			{
+				river.write_string("[");
+			}
+			else
 			{
 				river.write_string(",");
 			}
@@ -60,7 +65,18 @@ public:
 			cast<expression_a<>>(term).generate(version, indent, river);
 			++count;
 		}
-		river.write_string("] ");
+		if (!count)
+		{
+			throw dis(_token.report() + "strange::expression_operate::generate with no terms");
+		}
+		else if (count == 1)
+		{
+			river.write_string("[]) ");
+		}
+		else
+		{
+			river.write_string("]) ");
+		}
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
