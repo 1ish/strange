@@ -97,6 +97,7 @@ private:
 		{
 			// literal
 			initial = expression_literal_t<>::create_(_token_, flock_t<>::create_(_token_.literal_()));
+			_next();
 		}
 		else if (_token_.tag() == "name")
 		{

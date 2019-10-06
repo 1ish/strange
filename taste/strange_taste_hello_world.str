@@ -1,1 +1,1 @@
-$$strange::River::out[].write["hello world\n"]
+$$strange::river::create_out[].write["hello world\n"]
