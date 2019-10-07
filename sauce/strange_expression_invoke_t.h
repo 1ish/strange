@@ -66,7 +66,19 @@ public:
 			{
 				throw dis(_token.report() + "strange::expression_invoke::generate with non-expression term");
 			}
-			cast<expression_a<>>(term).generate(version, indent, river);
+			if (count == 1)
+			{
+				auto const name = cast<expression_a<>>(term).evaluate_();
+				if (!check<symbol_a<>>(name))
+				{
+					throw dis(_token.report() + "strange::expression_invoke::generate with non-symbol name");
+				}
+				river.write_string(cast<symbol_a<>>(name).to_string());
+			}
+			else
+			{
+				cast<expression_a<>>(term).generate(version, indent, river);
+			}
 			++count;
 		}
 		if (count < 2)
