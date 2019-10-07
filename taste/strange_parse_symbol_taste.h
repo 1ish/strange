@@ -1,8 +1,8 @@
-TEST_CASE("strange river create_file input hello world", "[river_t]")
+TEST_CASE("strange river create input symbol", "[river_t]")
 {
 	try
 	{
-		auto river = river_t<>::create_file(taste_dir + "strange_taste_hello_world.str");
+		auto river = river_t<>::create("'this is symbolic'");
 		REQUIRE(river.good());
 	}
 	catch (misunderstanding_a<>& m)
@@ -11,14 +11,15 @@ TEST_CASE("strange river create_file input hello world", "[river_t]")
 	}
 }
 
-TEST_CASE("strange tokenize hello world", "[tokenizer_t]")
+TEST_CASE("strange tokenize symbol", "[tokenizer_t]")
 {
 	try
 	{
-		auto tokenizer = tokenizer_t<>::create_(river_t<>::create_file(taste_dir + "strange_taste_hello_world.str"));
+		auto tokenizer = tokenizer_t<>::create_(river_t<>::create("'this is symbolic'"));
 		for (auto const token : tokenizer)
 		{
 			std__cout << "token: " << cast<token_a<>>(token).report();
+			REQUIRE(cast<token_a<>>(token));
 		}
 	}
 	catch (misunderstanding_a<>& m)
@@ -27,12 +28,12 @@ TEST_CASE("strange tokenize hello world", "[tokenizer_t]")
 	}
 }
 
-TEST_CASE("strange parse and generate hello world", "[parse_t]")
+TEST_CASE("strange parse and generate symbol", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
-		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::create_file(taste_dir + "strange_taste_hello_world.str")));
+		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::create("'this is symbolic'")));
 		auto river = river_t<>::create();
 		expression.generate(1, 1, river);
 		std__cout << "generated: " << river.to_string() << std::endl;
@@ -43,13 +44,14 @@ TEST_CASE("strange parse and generate hello world", "[parse_t]")
 	}
 }
 
-TEST_CASE("strange parse and evaluate hello world", "[parse_t]")
+TEST_CASE("strange parse and evaluate symbol", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
-		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::create_file(taste_dir + "strange_taste_hello_world.str")));
+		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::create("'this is symbolic'")));
 		auto result = expression.evaluate_();
+		REQUIRE(result.is("this is symbolic"));
 	}
 	catch (misunderstanding_a<>& m)
 	{
