@@ -45,7 +45,10 @@ public:
 
 	static inline bool validate(any_a<> const& literal)
 	{
-		return literal.type_() == symbol_t<>::type_() ||
+		return 
+			literal.type_() == nothing_t<>::type_() ||
+			literal.type_() == something_t<>::type_() ||
+			literal.type_() == symbol_t<>::type_() ||
 			literal.type_() == lake_int_8_t<>::type_() ||
 			literal.type_() == number_int_8_t<>::type_() ||
 			literal.type_() == number_uint_8_t<>::type_() ||
@@ -84,7 +87,15 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		if (_literal.type_() == symbol_t<>::type_())
+		if (_literal.type_() == nothing_t<>::type_())
+		{
+			river.write_string(" false ");
+		}
+		else if (_literal.type_() == something_t<>::type_())
+		{
+			river.write_string(" true ");
+		}
+		else if (_literal.type_() == symbol_t<>::type_())
 		{
 			river.write_string(" '" + cast<symbol_a<>>(_literal).to_string() + "' ");
 		}
@@ -144,7 +155,15 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		if (_literal.type_() == symbol_t<>::type_())
+		if (_literal.type_() == nothing_t<>::type_())
+		{
+			river.write_string(" strange::no() ");
+		}
+		else if (_literal.type_() == something_t<>::type_())
+		{
+			river.write_string(" strange::yes() ");
+		}
+		else if (_literal.type_() == symbol_t<>::type_())
 		{
 			river.write_string(" strange::sym(\"" + cast<symbol_a<>>(_literal).to_string() + "\") ");
 		}
