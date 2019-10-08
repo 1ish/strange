@@ -347,7 +347,9 @@ private:
 		}
 		if (_token_.tag() == "punctuation" && _token_.symbol() == "(")
 		{
-			auto const expression = instruction.operate(no(), _elements(scope_lake, fixed_herd, kind_shoal));
+			auto token_terms = flock_t<>::create_(token);
+			token_terms += _elements(scope_lake, fixed_herd, kind_shoal);
+			auto const expression = instruction.operate(no(), token_terms);
 			if (!check<expression_a<>>(expression))
 			{
 				throw dis("strange::parser instruction returned non-expression:") + token.report_();

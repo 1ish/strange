@@ -45,6 +45,12 @@ TEST_CASE("strange parse and generate boole", "[parse_t]")
 			expression.generate(1, 1, river);
 			std__cout << "generated: " << river.to_string() << std::endl;
 		}
+		{
+			auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::create("if(1,'yes','no')")));
+			auto river = river_t<>::create();
+			expression.generate(1, 1, river);
+			std__cout << "generated: " << river.to_string() << std::endl;
+		}
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -74,13 +80,29 @@ TEST_CASE("strange parse and evaluate booles", "[parse_t]")
 		auto parser = parser_t<>::create_();
 		{
 			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("true"))).evaluate_();
-			REQUIRE(result.type_().is("strange::something"));
+			REQUIRE(result.type_() == yes().type_());
 			REQUIRE(result.something());
 		}
 		{
 			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("false"))).evaluate_();
-			REQUIRE(result.type_().is("strange::nothing"));
+			REQUIRE(result.type_() == no().type_());
 			REQUIRE(result.nothing());
+		}
+		{
+			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("if(1,'yes')"))).evaluate_();
+			REQUIRE(result.is("yes"));
+		}
+		{
+			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("if(false,'yes')"))).evaluate_();
+			REQUIRE(result.nothing());
+		}
+		{
+			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("if(1,'yes','no')"))).evaluate_();
+			REQUIRE(result.is("yes"));
+		}
+		{
+			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("if(false,'yes','no')"))).evaluate_();
+			REQUIRE(result.is("no"));
 		}
 	}
 	catch (misunderstanding_a<>& m)
