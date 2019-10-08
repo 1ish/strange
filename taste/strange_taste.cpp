@@ -26,3 +26,5 @@ std::ostream& std__cout = discard;
 #include "strange_parser_hello_world_taste.h"
 #include "strange_parser_symbol_taste.h"
 #include "strange_parser_lake_taste.h"
+#include "strange_parser_int_taste.h"
+#include "strange_parser_float_taste.h"

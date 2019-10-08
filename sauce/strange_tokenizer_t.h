@@ -126,7 +126,7 @@ class tokenizer_t : public thing_t<___ego___>
 			bool commentline = false;
 			std::string token;
 
-			while (true)
+			for (bool first = true;;first = false)
 			{
 				char char1;
 				char char2;
@@ -240,121 +240,16 @@ class tokenizer_t : public thing_t<___ego___>
 						token += char1;
 					}
 				}
-				else switch (char1)
+				else
 				{
-				case ' ':
-				case '\n':
-				case '\t':
-				case '\r':
-					// skip whitespace
-					break;
-				case '\'':
-					singlequote = true;
-					break;
-				case '\"':
-					doublequote = true;
-					break;
-				case '+':
-				case '-':
-				case '*':
-				case '%':
-					token = char1;
-					if (char1 == char2 || char2 == '=' || char2 == '<' || char2 == '{')
-					{
-						second = true;
-						break;
-					}
-					return punctuation_token(token);
-				case '!':
-					token = char1;
-					if (char2 == '&' || char2 == '|' || char2 == '%' || char2 == '=')
-					{
-						second = true;
-						break;
-					}
-					return punctuation_token(token);
-				case ':':
-					token = char1;
-					if (char1 == char2 || char2 == '.' || char2 == '=' || char2 == '#' || char2 == '<' || char2 == '{')
-					{
-						second = true;
-						break;
-					}
-					return punctuation_token(token);
-				case '.':
-					token = char1;
-					if (char2 == ':')
-					{
-						second = true;
-						break;
-					}
-					return punctuation_token(token);
-				case '<':
-					token = char1;
-					if (char2 == '=' || char2 == '@')
-					{
-						second = true;
-						break;
-					}
-					return punctuation_token(token);
-				case '>':
-					token = char1;
-					if (char2 == '=' || char2 == '@' || char2 == '#')
-					{
-						second = true;
-						break;
-					}
-					return punctuation_token(token);
-				case '@':
-					token = char1;
-					if (char2 == '?' || char2 == '=' || char2 == '+' || char2 == '-' || char2 == '<' || char2 == '>')
-					{
-						second = true;
-						break;
-					}
-					return punctuation_token(token);
-				case '&':
-				case '|':
-				case '$':
-				case '=':
-					token = char1;
-					if (char1 == char2)
-					{
-						second = true;
-						break;
-					}
-					return punctuation_token(token);
-				case '/':
-					token = char1;
-					if (char2 == '=')
-					{
-						second = true;
-						break;
-					}
-					if (char2 == '*')
-					{
-						commentblock = true;
-						break;
-					}
-					if (char2 == '/')
-					{
-						commentline = true;
-						break;
-					}
-					return punctuation_token(token);
-				default:
-				{
-					bool const alpha1 = alpha_char(char1);
-					bool const num1 = numeric_char(char1);
-					bool const alpha2 = alpha_char(char2);
 					bool const num2 = numeric_char(char2);
-					if (!alphanumeric && !numeric)
+					if (first)
 					{
-						if (num1 || char1 == '-' && num2)
+						if (char1 == '-' && num2 || numeric_char(char1))
 						{
 							numeric = true;
 						}
-						else if (alpha1)
+						else if (alpha_char(char1))
 						{
 							alphanumeric = true;
 						}
@@ -363,7 +258,10 @@ class tokenizer_t : public thing_t<___ego___>
 					{
 						token += char1;
 						bool const exp1 = (char1 == 'E' || char1 == 'e');
+						bool const exp2 = (char2 == 'E' || char2 == 'e');
 						bool const pnt1 = (char1 == '.');
+						bool const pnt2 = (char2 == '.');
+						bool const sig2 = (char2 == '+' || char2 == '-');
 						if (exp1)
 						{
 							exponent = true;
@@ -373,14 +271,12 @@ class tokenizer_t : public thing_t<___ego___>
 						{
 							point = true;
 						}
-						bool const pnt2 = (char2 == '.');
-						bool const exp2 = (char2 == 'E' || char2 == 'e');
-						bool const sig2 = (char2 == '+' || char2 == '-');
 						if (!num2 &&
 							(!pnt2 || (pnt2 && point)) &&
 							(!exp2 || (exp2 && exponent)) &&
 							(!sig2 || (sig2 && !exp1)))
 						{
+							// end of numeric token
 							if (point || exponent)
 							{
 								if (pnt1)
@@ -410,17 +306,118 @@ class tokenizer_t : public thing_t<___ego___>
 					else if (alphanumeric)
 					{
 						token += char1;
-						if (!alpha2 && !num2)
+						if (!num2 && !alpha_char(char2))
 						{
+							// end of alphanumeric token
 							return name_token(token);
 						}
 					}
-					else
+					else switch (char1)
 					{
+					case ' ':
+					case '\n':
+					case '\t':
+					case '\r':
+						// skip whitespace
+						break;
+					case '\'':
+						singlequote = true;
+						break;
+					case '\"':
+						doublequote = true;
+						break;
+					case '+':
+					case '-':
+					case '*':
+					case '%':
+						token = char1;
+						if (char1 == char2 || char2 == '=' || char2 == '<' || char2 == '{')
+						{
+							second = true;
+							break;
+						}
+						return punctuation_token(token);
+					case '!':
+						token = char1;
+						if (char2 == '&' || char2 == '|' || char2 == '%' || char2 == '=')
+						{
+							second = true;
+							break;
+						}
+						return punctuation_token(token);
+					case ':':
+						token = char1;
+						if (char1 == char2 || char2 == '.' || char2 == '=' || char2 == '#' || char2 == '<' || char2 == '{')
+						{
+							second = true;
+							break;
+						}
+						return punctuation_token(token);
+					case '.':
+						token = char1;
+						if (char2 == ':')
+						{
+							second = true;
+							break;
+						}
+						return punctuation_token(token);
+					case '<':
+						token = char1;
+						if (char2 == '=' || char2 == '@')
+						{
+							second = true;
+							break;
+						}
+						return punctuation_token(token);
+					case '>':
+						token = char1;
+						if (char2 == '=' || char2 == '@' || char2 == '#')
+						{
+							second = true;
+							break;
+						}
+						return punctuation_token(token);
+					case '@':
+						token = char1;
+						if (char2 == '?' || char2 == '=' || char2 == '+' || char2 == '-' || char2 == '<' || char2 == '>')
+						{
+							second = true;
+							break;
+						}
+						return punctuation_token(token);
+					case '&':
+					case '|':
+					case '$':
+					case '=':
+						token = char1;
+						if (char1 == char2)
+						{
+							second = true;
+							break;
+						}
+						return punctuation_token(token);
+					case '/':
+						token = char1;
+						if (char2 == '=')
+						{
+							second = true;
+							break;
+						}
+						if (char2 == '*')
+						{
+							commentblock = true;
+							break;
+						}
+						if (char2 == '/')
+						{
+							commentline = true;
+							break;
+						}
+						return punctuation_token(token);
+					default:
 						// single character punctuation
 						return punctuation_token(std::string(&char1, 1));
 					}
-				}
 				}
 			}
 			if (commentline || token.empty())
