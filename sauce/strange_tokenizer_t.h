@@ -110,6 +110,8 @@ class tokenizer_t : public thing_t<___ego___>
 		// next token
 		inline token_a<> next()
 		{
+			_start_line = _line;
+			_start_position = _position;
 			if (_it == _river.cend_())
 			{
 				return punctuation_token("");
@@ -436,6 +438,8 @@ class tokenizer_t : public thing_t<___ego___>
 		river_a<> _river;
 		int64_t _line;
 		int64_t _position;
+		int64_t _start_line;
+		int64_t _start_position;
 		bool _dot;
 		char _use;
 		mutable token_a<> _token;
@@ -447,6 +451,8 @@ class tokenizer_t : public thing_t<___ego___>
 			, _river(river, true)
 			, _line{ 1 }
 			, _position{ 1 }
+			, _start_line{ 1 }
+			, _start_position{ 1 }
 			, _dot{ false }
 			, _use{ 0 }
 			, _token{ next() }
@@ -464,32 +470,32 @@ class tokenizer_t : public thing_t<___ego___>
 
 		inline token_a<> symbol_token(std::string const& str) const
 		{
-			return token_t<>::create_symbol(_river.filename(), _line, _position, str);
+			return token_t<>::create_symbol(_river.filename(), _start_line, _start_position, str);
 		}
 
 		inline token_a<> lake_token(std::string const& str) const
 		{
-			return token_t<>::create_lake(_river.filename(), _line, _position, str);
+			return token_t<>::create_lake(_river.filename(), _start_line, _start_position, str);
 		}
 
 		inline token_a<> int_token(std::string const& str) const
 		{
-			return token_t<>::create_int(_river.filename(), _line, _position, str);
+			return token_t<>::create_int(_river.filename(), _start_line, _start_position, str);
 		}
 
 		inline token_a<> float_token(std::string const& str) const
 		{
-			return token_t<>::create_float(_river.filename(), _line, _position, str);
+			return token_t<>::create_float(_river.filename(), _start_line, _start_position, str);
 		}
 
 		inline token_a<> name_token(std::string const& str) const
 		{
-			return token_t<>::create_name(_river.filename(), _line, _position, str);
+			return token_t<>::create_name(_river.filename(), _start_line, _start_position, str);
 		}
 
 		inline token_a<> punctuation_token(std::string const& str) const
 		{
-			return token_t<>::create_punctuation(_river.filename(), _line, _position, str, _precedence_(str));
+			return token_t<>::create_punctuation(_river.filename(), _start_line, _start_position, str, _precedence_(str));
 		}
 
 		inline token_a<> error_token(std::string const& str) const
