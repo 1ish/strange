@@ -59,3 +59,25 @@ TEST_CASE("strange parse and evaluate float", "[parse_t]")
 		throw std::runtime_error(m.to_string());
 	}
 }
+
+TEST_CASE("strange parse and evaluate floats", "[parse_t]")
+{
+	try
+	{
+		auto parser = parser_t<>::create_();
+		{
+			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("29.7"))).evaluate_();
+			REQUIRE(check<number_data_a<double>>(result));
+			REQUIRE(cast<number_data_a<double>>(result).extract() == 29.7);
+		}
+		{
+			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("-29.7"))).evaluate_();
+			REQUIRE(check<number_data_a<double>>(result));
+			REQUIRE(cast<number_data_a<double>>(result).extract() == -29.7);
+		}
+	}
+	catch (misunderstanding_a<>& m)
+	{
+		throw std::runtime_error(m.to_string());
+	}
+}

@@ -59,3 +59,25 @@ TEST_CASE("strange parse and evaluate int", "[parse_t]")
 		throw std::runtime_error(m.to_string());
 	}
 }
+
+TEST_CASE("strange parse and evaluate ints", "[parse_t]")
+{
+	try
+	{
+		auto parser = parser_t<>::create_();
+		{
+			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("42"))).evaluate_();
+			REQUIRE(check<number_data_a<int64_t>>(result));
+			REQUIRE(cast<number_data_a<int64_t>>(result).extract() == 42);
+		}
+		{
+			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("-42"))).evaluate_();
+			REQUIRE(check<number_data_a<int64_t>>(result));
+			REQUIRE(cast<number_data_a<int64_t>>(result).extract() == -42);
+		}
+	}
+	catch (misunderstanding_a<>& m)
+	{
+		throw std::runtime_error(m.to_string());
+	}
+}
