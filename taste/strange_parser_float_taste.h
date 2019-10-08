@@ -75,6 +75,16 @@ TEST_CASE("strange parse and evaluate floats", "[parse_t]")
 			REQUIRE(check<number_data_a<double>>(result));
 			REQUIRE(cast<number_data_a<double>>(result).extract() == -29.7);
 		}
+		{
+			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("-29.7e1"))).evaluate_();
+			REQUIRE(check<number_data_a<double>>(result));
+			REQUIRE(cast<number_data_a<double>>(result).extract() == -297);
+		}
+		{
+			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("-29.7e-1"))).evaluate_();
+			REQUIRE(check<number_data_a<double>>(result));
+			REQUIRE(cast<number_data_a<double>>(result).extract() == -2.97);
+		}
 	}
 	catch (misunderstanding_a<>& m)
 	{
