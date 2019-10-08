@@ -24,7 +24,16 @@ public:
 		{
 			throw dis("[expression] create passed non-token");
 		}
-		return create_(cast<token_a<>>(token), flock_t<>::create_() += range_t<>::create_(++it, range.cend_()));
+		if (++it == range.cend_())
+		{
+			throw dis("[expression] create passed short range");
+		}
+		any_a<> terms = *it;
+		if (!check<flock_a<>>(terms))
+		{
+			throw dis("[expression] create passed non-flock terms");
+		}
+		return create_(cast<token_a<>>(token), cast<flock_a<>>(terms));
 	}
 
 	inline any_a<> cat__(range_a<> const&) const
