@@ -232,7 +232,7 @@ public:
 
 	static inline token_a<> create_punctuation_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& symbol, number_data_a<int64_t> const& precedence)
 	{
-		return create_(filename, line, position, sym("punctuation"), symbol, precedence);
+		return create_(filename, line, position, sym("punctuation"), symbol, symbol, precedence);
 	}
 
 	static inline token_a<> create_punctuation(std::string const& filename, int64_t line, int64_t position, std::string const& symbol, int64_t precedence)

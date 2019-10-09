@@ -80,11 +80,19 @@ public:
 
 	static inline cat_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), any_a<> const& reference = no(), any_a<> const& optional = no())
 	{
+		if (name.is("strange::any"))
+		{
+			return cat_a<>{ over{ cat_t<>(order.extract(), sym(""), dimensions, flock_t<>::create_(), parameters, result, reference, optional) } };
+		}
 		return cat_a<>{ over{ cat_t<>(order.extract(), name, dimensions, flock_t<>::create_(), parameters, result, reference, optional) } };
 	}
 
 	static inline cat_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), bool reference = false, bool optional = false)
 	{
+		if (name == "strange::any")
+		{
+			return cat_a<>{ over{ cat_t<>(order, sym(""), dimensions, flock_t<>::create_(), parameters, result, reference, optional) } };
+		}
 		return cat_a<>{ over{ cat_t<>(order, sym(name), dimensions, flock_t<>::create_(), parameters, result, reference, optional) } };
 	}
 
@@ -117,7 +125,7 @@ public:
 		{
 			return false;
 		}
-		bool const same = symbol_t<___ego___>::operator==(thing);
+		bool const same = cat.to_string() == _string;
 		if (_symbolic || !same)
 		{
 			return same;

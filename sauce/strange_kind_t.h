@@ -89,11 +89,19 @@ public:
 
 	static inline kind_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), any_a<> const& reference = no(), any_a<> const& optional = no())
 	{
+		if (name.is("strange::any"))
+		{
+			return kind_a<>{ over{ kind_t<>(order.extract(), sym(""), dimensions, aspects, parameters, result, reference, optional) } };
+		}
 		return kind_a<>{ over{ kind_t<>(order.extract(), name, dimensions, aspects, parameters, result, reference, optional) } };
 	}
 
 	static inline kind_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), bool reference = false, bool optional = false)
 	{
+		if (name == "strange::any")
+		{
+			return kind_a<>{ over{ kind_t<>(order, sym(""), dimensions, aspects, parameters, result, reference, optional) } };
+		}
 		return kind_a<>{ over{ kind_t<>(order, sym(name), dimensions, aspects, parameters, result, reference, optional) } };
 	}
 
@@ -120,7 +128,7 @@ public:
 		{
 			return false;
 		}
-		bool const same = symbol_t<___ego___>::operator==(thing);
+		bool const same = kind.to_string() == _string;
 		if (_symbolic || !same)
 		{
 			return same;

@@ -2,7 +2,7 @@ TEST_CASE("strange tokenize loop", "[tokenizer_t]")
 {
 	try
 	{
-		auto tokenizer = tokenizer_t<>::create_(river_t<>::create("while(true, break())"));
+		auto tokenizer = tokenizer_t<>::create_(river_t<>::create("for(x:=1,x<=10,x++,$$strange::river::create_out[].write[\"ab\"])"));
 		for (auto const token : tokenizer)
 		{
 			std__cout << "token: " << cast<token_a<>>(token).report();
@@ -76,6 +76,12 @@ TEST_CASE("strange parse and evaluate loops", "[parse_t]")
 		{
 			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("for(true,false,true,false)"))).evaluate_();
 			REQUIRE(!result);
+		}
+		{
+			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create(
+				"for(x:=1,x<=10,x++,$$strange::river::create_out[].write[\"abc \"])"
+			))).evaluate_();
+			REQUIRE(result);
 		}
 	}
 	catch (misunderstanding_a<>& m)

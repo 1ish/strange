@@ -28,10 +28,10 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_local_update::create not passed sufficient terms");
 		}
-		any_a<> cat = *it;
-		if (!check<cat_a<>>(cat))
+		any_a<> kind = *it;
+		if (!check<kind_a<>>(kind))
 		{
-			throw dis(token.report() + "strange::expression_local_update::create passed non-cat");
+			throw dis(token.report() + "strange::expression_local_update::create passed non-kind");
 		}
 		if (++it == terms.cend_())
 		{
@@ -42,7 +42,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_local_update::create passed non-expression");
 		}
-		return expression_a<>{ over{ expression_local_update_t<>{ token, terms, cast<symbol_a<>>(key), cast<cat_a<>>(cat), cast<expression_a<>>(val) } } };
+		return expression_a<>{ over{ expression_local_update_t<>{ token, terms, cast<symbol_a<>>(key), cast<kind_a<>>(kind), cast<expression_a<>>(val) } } };
 	}
 
 	// reflection
@@ -72,9 +72,9 @@ public:
 			throw dis(_token.report() + "strange::expression_local_update::operate key not found");
 		}
 		auto val = _val.operate(thing, range);
-		if (!val.cats_().has_(_cat))
+		if (!val.kinds_().has_(_kind))
 		{
-			throw dis(_token.report() + "strange::expression_local_update::operate cat does not include value");
+			throw dis(_token.report() + "strange::expression_local_update::operate kind does not include value");
 		}
 		return it->second = val;
 	}
@@ -100,14 +100,14 @@ public:
 protected:
 	flock_a<> const _terms;
 	symbol_a<> const _key;
-	cat_a<> const _cat;
+	kind_a<> const _kind;
 	expression_a<> const _val;
 
-	inline expression_local_update_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key, cat_a<> const& cat, expression_a<> const& val)
+	inline expression_local_update_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key, kind_a<> const& kind, expression_a<> const& val)
 		: expression_t{ token }
 		, _terms{ terms }
 		, _key{ key }
-		, _cat{ cat }
+		, _kind{ kind }
 		, _val{ val }
 	{}
 
