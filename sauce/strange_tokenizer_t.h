@@ -128,7 +128,7 @@ class tokenizer_t : public thing_t<___ego___>
 			bool commentline = false;
 			std::string token;
 
-			for (bool first = true;;first = false)
+			for (bool first = true;;)
 			{
 				char char1;
 				char char2;
@@ -314,14 +314,13 @@ class tokenizer_t : public thing_t<___ego___>
 							return name_token(token);
 						}
 					}
+					else if (char1 == ' ' || char1 == '\n' || char1 == '\t' || char1 == '\r')
+					{
+						// skip whitespace
+						continue;
+					}
 					else switch (char1)
 					{
-					case ' ':
-					case '\n':
-					case '\t':
-					case '\r':
-						// skip whitespace
-						break;
 					case '\'':
 						singlequote = true;
 						break;
@@ -421,6 +420,7 @@ class tokenizer_t : public thing_t<___ego___>
 						return punctuation_token(std::string(&char1, 1));
 					}
 				}
+				first = false;
 			}
 			if (commentline || token.empty())
 			{

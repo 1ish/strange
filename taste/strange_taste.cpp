@@ -29,3 +29,4 @@ std::ostream& std__cout = discard;
 #include "strange_parser_int_taste.h"
 #include "strange_parser_float_taste.h"
 #include "strange_parser_boole_taste.h"
+#include "strange_parser_loop_taste.h"
