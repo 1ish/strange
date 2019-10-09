@@ -40,7 +40,7 @@ public:
 
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(token.report() + "strange::expression_extraction::create passed non-expression catch");
+				throw dis(token.report() + "strange::expression_extraction::create passed non-expression term");
 			}
 			auto subterms = cast<expression_a<>>(term).terms_();
 			if (subterms.size() != 3)
@@ -63,7 +63,7 @@ public:
 			value = subterms.at_index(2);
 			if (!check<expression_a<>>(value))
 			{
-				throw dis(token.report() + "strange::expression_extraction::create passed non-expression catch");
+				throw dis(token.report() + "strange::expression_extraction::create passed non-expression value");
 			}
 		}
 		if (!value)

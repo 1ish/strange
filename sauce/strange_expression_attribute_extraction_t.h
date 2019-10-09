@@ -30,10 +30,10 @@ public:
 			throw dis(token.report() + "strange::expression_attribute_extraction::create passed too few terms");
 		}
 
-		any_a<> const cat = *it;
-		if (!check<cat_a<>>(cat))
+		any_a<> const kind = *it;
+		if (!check<kind_a<>>(kind))
 		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-cat");
+			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-kind");
 		}
 		if (++it == terms.cend_())
 		{
@@ -43,15 +43,15 @@ public:
 		any_a<> const value = *it;
 		if (!check<expression_a<>>(value))
 		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-expression catch");
+			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-expression value");
 		}
 
 		auto const thing = cast<expression_a<>>(value).evaluate_();
-		if (!thing.cats_().has_(cat))
+		if (!thing.kinds_().has_(kind))
 		{
 			throw dis(token.report() + "strange::expression_attribute_extraction::create passed wrong kind of thing");
 		}
-		return expression_substitute_t<over>::create(over{ expression_attribute_extraction_t<>(token, terms, cast<symbol_a<>>(name), cast<cat_a<>>(cat), cast<expression_a<>>(value)) },
+		return expression_substitute_t<over>::create(over{ expression_attribute_extraction_t<>(token, terms, cast<symbol_a<>>(name), cast<kind_a<>>(kind), cast<expression_a<>>(value)) },
 			attribute_extraction_t<>::create_(thing));
 	}
 
@@ -90,10 +90,10 @@ public:
 protected:
 	flock_a<> const _terms;
 	symbol_a<> const _name;
-	cat_a<> const _result;
+	kind_a<> const _result;
 	expression_a<> const _expression;
 
-	inline expression_attribute_extraction_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
+	inline expression_attribute_extraction_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, kind_a<> const& result, expression_a<> const& expression)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _name{ name }
