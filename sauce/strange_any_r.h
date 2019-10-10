@@ -53,6 +53,8 @@ public:
 			operations.update_string("shared", native_extraction_t<any_a<>>::create(&any_a<>::shared__));
 			operations.update_string("cat", native_extraction_t<any_a<>>::create(&any_a<>::cat__));
 			operations.update_string("cats", native_extraction_t<any_a<>>::create(&any_a<>::cats__));
+			operations.update_string("kind", native_extraction_t<any_a<>>::create(&any_a<>::kind__));
+			operations.update_string("kinds", native_extraction_t<any_a<>>::create(&any_a<>::kinds__));
 			operations.update_string("operations", native_extraction_t<any_a<>>::create(&any_a<>::operations__));
 			operations.update_string("eater", native_extraction_t<any_a<>>::create(&any_a<>::eater__));
 			operations.update_string("feeder", native_extraction_t<any_a<>>::create(&any_a<>::feeder__));
