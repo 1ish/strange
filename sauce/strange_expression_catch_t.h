@@ -25,7 +25,7 @@ public:
 			throw dis(token.report() + "strange::expression_catch::create passed non-expression try");
 		}
 		auto names = flock_t<>::create_();
-		auto cats = flock_t<>::create_();
+		auto kinds = flock_t<>::create_();
 		auto values = flock_t<>::create_();
 		while (++it != terms.cend_())
 		{
@@ -47,12 +47,12 @@ public:
 			}
 			names.push_back(name);
 
-			auto cat = subterms.at_index(1);
-			if (!check<cat_a<>>(cat))
+			auto kind = subterms.at_index(1);
+			if (!check<kind_a<>>(kind))
 			{
-				throw dis(token.report() + "strange::expression_catch::create passed non-cat");
+				throw dis(token.report() + "strange::expression_catch::create passed non-kind");
 			}
-			cats.push_back(cat);
+			kinds.push_back(kind);
 
 			auto value = subterms.at_index(2);
 			if (!check<expression_a<>>(value))
@@ -61,7 +61,7 @@ public:
 			}
 			values.push_back(value);
 		}
-		return expression_substitute_t<over>::create(over{ expression_catch_t<>(token, terms, cast<expression_a<>>(expression), names, cats, values) });
+		return expression_substitute_t<over>::create(over{ expression_catch_t<>(token, terms, cast<expression_a<>>(expression), names, kinds, values) });
 	}
 
 	// reflection
@@ -95,11 +95,11 @@ public:
 		}
 		catch (any_a<>& exception)
 		{
-			auto cit = _cats.extract().cbegin();
+			auto kit = _kinds.extract().cbegin();
 			auto vit = _values.extract().cbegin();
 			for (auto const& name : _names.extract())
 			{
-				if (exception.cats_().has_(*cit++))
+				if (exception.kinds_().has_(*kit++))
 				{
 					cast<unordered_shoal_a<>>(thing).update_(name, exception);
 					return vit->operate(thing, range);
@@ -118,7 +118,7 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
-		// catch(name :<cat>= value)
+		// catch(name :<kind>= value)
 		river.write_string(" catch(");
 		bool first = true;
 		for (auto const& term : _terms)
@@ -141,11 +141,11 @@ public:
 		river.write_string("try\n{\n");
 		_expression.generate_cpp(version, indent, river);
 		river.write_string("\n}\n");
-		forward_const_iterator_a<> cit = _cats.cbegin_();
+		forward_const_iterator_a<> kit = _kinds.cbegin_();
 		forward_const_iterator_a<> vit = _values.cbegin_();
 		for (auto const& name : _names)
 		{
-			river.write_string("catch(" + cast<cat_a<>>(*cit++).name_().to_string() + "_a<> const& exception)\n{\n");
+			river.write_string("catch(" + cast<kind_a<>>(*kit++).name_().to_string() + "_a<> const& exception)\n{\n");
 			cast<expression_a<>>(*vit++).generate_cpp(version, indent, river);
 			river.write_string("\n}\n");
 		}
@@ -155,15 +155,15 @@ protected:
 	flock_a<> const _terms;
 	expression_a<> const _expression;
 	flock_a<> const _names;
-	flock_a<> const _cats;
+	flock_a<> const _kinds;
 	flock_a<> const _values;
 
-	inline expression_catch_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, flock_a<> const& names, flock_a<> const& cats, flock_a<> const& values)
+	inline expression_catch_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& expression, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& values)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _expression{ expression }
 		, _names{ names }
-		, _cats{ cats }
+		, _kinds{ kinds }
 		, _values{ values }
 	{}
 

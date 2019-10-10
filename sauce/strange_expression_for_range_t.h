@@ -28,10 +28,10 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_for_range::create not passed sufficient terms");
 		}
-		any_a<> cat = *it;
-		if (!check<cat_a<>>(cat))
+		any_a<> kind = *it;
+		if (!check<kind_a<>>(kind))
 		{
-			throw dis(token.report() + "strange::expression_for_range::create passed non-cat");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-kind");
 		}
 		if (++it == terms.cend_())
 		{
@@ -51,7 +51,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_for_range::create passed non-expression loop");
 		}
-		return expression_a<>{ over{ expression_for_range_t<>( token, terms, cast<symbol_a<>>(key), cast<cat_a<>>(cat), cast<expression_a<>>(range), cast<expression_a<>>(loop)) } };
+		return expression_a<>{ over{ expression_for_range_t<>( token, terms, cast<symbol_a<>>(key), cast<kind_a<>>(kind), cast<expression_a<>>(range), cast<expression_a<>>(loop)) } };
 	}
 
 	// reflection
@@ -86,9 +86,9 @@ public:
 			}
 			for (auto const& for_thing : cast<range_a<>>(for_range))
 			{
-				if (!for_thing.cats_().has_(_cat))
+				if (!for_thing.kinds_().has_(_kind))
 				{
-					throw dis(_token.report() + "strange::expression_for_range::operate cat does not include value");
+					throw dis(_token.report() + "strange::expression_for_range::operate kind does not include value");
 				}
 				it->second = for_thing;
 				try
@@ -136,7 +136,7 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" for(" + _cat.code() + " const& " + _key.to_string() + " : ");
+		river.write_string(" for(" + _kind.code() + " const& " + _key.to_string() + " : ");
 		_range.generate_cpp(version, indent, river);
 		river.write_string(")\n{\n");
 		_loop.generate_cpp(version, indent, river);
@@ -146,15 +146,15 @@ public:
 protected:
 	flock_a<> const _terms;
 	symbol_a<> const _key;
-	cat_a<> const _cat;
+	kind_a<> const _kind;
 	expression_a<> const _range;
 	expression_a<> const _loop;
 
-	inline expression_for_range_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key, cat_a<> const& cat, expression_a<> const& range, expression_a<> const& loop)
+	inline expression_for_range_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key, kind_a<> const& kind, expression_a<> const& range, expression_a<> const& loop)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _key{ key }
-		, _cat{ cat }
+		, _kind{ kind }
 		, _range{ range }
 		, _loop{ loop }
 	{}

@@ -602,7 +602,7 @@ private:
 					if (key_string[key_string.length() - 1] == '_')
 					{
 						// attribute extraction/mutation
-						auto const terms = flock_t<>::create_(key_symbol, cat_t<>::create_(), _initial(0, scope_lake, fixed_herd, kind_shoal));
+						auto const terms = flock_t<>::create_(key_symbol, kind_t<>::create_(), _initial(0, scope_lake, fixed_herd, kind_shoal));
 						if (fixed)
 						{
 							flock.push_back(expression_attribute_extraction_t<>::create_(operator_token, terms));
