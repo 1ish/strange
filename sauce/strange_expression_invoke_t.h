@@ -42,7 +42,7 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		// (thing.name[x,y,z])
+		// (thing.name[x,y,z]) - or could have done (thing.call['name',x,y,z]) instead
 		int64_t count = 0;
 		for (auto const& term : _terms)
 		{
