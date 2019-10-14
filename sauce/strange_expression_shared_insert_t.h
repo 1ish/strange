@@ -77,15 +77,28 @@ public:
 			throw dis(_token.report() + "strange::expression_shared_insert::operate passed non-unordered-shoal shared");
 		}
 #endif
+		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
+		auto& unordered_map = shared.reference();
+		{
+			auto const read_lock = shared.read_lock_();
+			auto const read_it = unordered_map.find(_key);
+			if (read_it != unordered_map.end())
+			{
+				return read_it->second;
+			}
+		}
+		auto const write_lock = shared.write_lock_();
+		auto const write_it = unordered_map.find(_key);
+		if (write_it != unordered_map.end())
+		{
+			return write_it->second;
+		}
 		auto val = _val.operate(thing, range);
 		if (!val.kinds_().has_(_kind))
 		{
 			throw dis(_token.report() + "strange::expression_shared_insert::operate kind does not include value");
 		}
-		if (!static_cast<unordered_shoal_a<>&>(lit->second).insert(_key, val))
-		{
-			throw dis(_token.report() + "strange::expression_shared_insert::operate key exists");
-		}
+		unordered_map.emplace(_key, val);
 		return val;
 	}
 
