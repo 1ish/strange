@@ -392,6 +392,10 @@ private:
 					throw dis("strange::parser cannot reassign variable kind:") + _token_.report_();
 				}
 			}
+			else if (fixed)
+			{
+				throw dis("strange::parser recursive variable definition:") + _token_.report_();
+			}
 			else
 			{
 				kind = kind_t<>::create_();
@@ -418,26 +422,28 @@ private:
 			{
 				throw dis("strange::parser local assignment with no right-hand side:") + token.report_();
 			}
+			unordered_herd_a<>(fixed_herd, true).insert(name);
+			auto const rhs = _initial(0, scope_symbol, fixed_herd, kind_shoal);
+			if (!fixed)
+			{
+				unordered_herd_a<>(fixed_herd, true).erase(name);
+			}
 			if (insert)
 			{
-				if (fixed)
-				{
-					unordered_herd_a<>(fixed_herd, true).insert(name);
-				}
 				unordered_shoal_a<>(kind_shoal, true).insert_(name, kind);
 				if (shared)
 				{
-					return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind, _initial(0, scope_symbol, fixed_herd, kind_shoal)));
+					return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 				}
-				return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind, _initial(0, scope_symbol, fixed_herd, kind_shoal)));
+				return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 			}
 			if (update)
 			{
 				if (shared)
 				{
-					return expression_shared_update_t<>::create_(token, flock_t<>::create_(name, kind, _initial(0, scope_symbol, fixed_herd, kind_shoal)));
+					return expression_shared_update_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 				}
-				return expression_local_update_t<>::create_(token, flock_t<>::create_(name, kind, _initial(0, scope_symbol, fixed_herd, kind_shoal)));
+				return expression_local_update_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 			}
 		}
 		if (shared)
