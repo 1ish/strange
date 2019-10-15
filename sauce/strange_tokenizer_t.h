@@ -112,6 +112,10 @@ class tokenizer_t : public thing_t<___ego___>
 		{
 			_start_line = _line;
 			_start_position = _position;
+			if (!_dot && !_use)
+			{
+				++_start_position;
+			}
 			if (_it == _river.cend_())
 			{
 				return punctuation_token("");
@@ -163,8 +167,12 @@ class tokenizer_t : public thing_t<___ego___>
 
 				if (char1 == '\n')
 				{
-					_position = 1;
+					_position = 0;
 					++_line;
+				}
+				else if (char1 == '\t')
+				{
+					_position = ((_position + 3) / 4) * 4;
 				}
 
 				if (commentblock)
@@ -317,6 +325,8 @@ class tokenizer_t : public thing_t<___ego___>
 					else if (char1 == ' ' || char1 == '\n' || char1 == '\t' || char1 == '\r')
 					{
 						// skip whitespace
+						_start_line = _line;
+						_start_position = _position + 1;
 						continue;
 					}
 					else switch (char1)
@@ -450,9 +460,9 @@ class tokenizer_t : public thing_t<___ego___>
 			, _it{ std::forward<F>(it) }
 			, _river(river, true)
 			, _line{ 1 }
-			, _position{ 1 }
+			, _position{ 0 }
 			, _start_line{ 1 }
-			, _start_position{ 1 }
+			, _start_position{ 0 }
 			, _dot{ false }
 			, _use{ 0 }
 			, _token{ next() }
