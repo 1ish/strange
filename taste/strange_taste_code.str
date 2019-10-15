@@ -1,0 +1,9 @@
+(
+	cout :# $$strange::river::create_out[],
+	cout.write["hello\n"],
+	null &&
+		{
+			cout.write["parse\n"],
+		},
+	cout.write["goodbye\n"],
+)

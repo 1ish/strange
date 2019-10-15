@@ -510,7 +510,6 @@ private:
 		else for (;;)
 		{
 			key = _initial(0, scope_symbol, fixed_herd, kind_shoal);
-			flock.push_back(key);
 			if (_it_ == _end_)
 			{
 				if (shoal)
@@ -527,7 +526,8 @@ private:
 				}
 				throw dis("strange::parser element with non-punctuation following it:") + _token_.report_();
 			}
-			if (_token_.symbol() == ",")
+			bool comma = _token_.symbol() == ",";
+			if (comma)
 			{
 				if (shoal)
 				{
@@ -537,8 +537,6 @@ private:
 				{
 					throw dis("strange::parser , with nothing following it:") + _token_.report_();
 				}
-				herd = true;
-				continue;
 			}
 			if (_token_.symbol() == "}")
 			{
@@ -547,24 +545,33 @@ private:
 					throw dis("strange::parser shoal key without a corresponding value:") + _token_.report_();
 				}
 				_next();
+				herd = true;
+				flock.push_back(key);
 				break;
+			}
+			if (comma)
+			{
+				herd = true;
+				flock.push_back(key);
+				continue;
 			}
 			if (herd)
 			{
 				throw dis("strange::parser herd element with unexpected punctuation following it:") + _token_.report_();
 			}
 			shoal = true;
-			if (_token_.symbol() == ":")
+			auto const operator_token = _token_;
+			auto value = expression_t<>::create(operator_token);
+			if (operator_token.symbol() == ":")
 			{
 				if (!_next())
 				{
-					throw dis("strange::parser shoal : with nothing following it:") + _token_.report_();
+					throw dis("strange::parser shoal : with nothing following it:") + operator_token.report_();
 				}
-				flock.push_back(_initial(0, scope_symbol, fixed_herd, kind_shoal));
+				value = _initial(0, scope_symbol, fixed_herd, kind_shoal);
 			}
-			else if (_token_.symbol() == "::" || _token_.symbol() == ":#" || _token_.symbol() == ":=")
+			else if (operator_token.symbol() == "::" || operator_token.symbol() == ":#" || operator_token.symbol() == ":=")
 			{
-				auto const operator_token = _token_;
 				auto key_symbol = no();
 				try
 				{
@@ -587,16 +594,15 @@ private:
 					// shared scope
 					if (_token_.tag() != "punctuation" || _token_.symbol() != "(") //TODO handle {
 					{
-						throw dis("strange::parser shoal " + _token_.symbol() + " without ( following it:") + _token_.report_();
+						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token_.report_();
 					}
 					auto const new_scope_symbol = _scope_name(scope_symbol, cast<symbol_a<>>(key_symbol));
 					auto const terms = _elements(new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_());
-					auto const expression = expression_function_t<>::create_(operator_token, terms);
-					flock.push_back(expression);
+					value = expression_function_t<>::create_(operator_token, terms);
 					bool clash = false;
 					try
 					{
-						clash = !_shared_.insert(new_scope_symbol, expression.evaluate_());
+						clash = !_shared_.insert(new_scope_symbol, value.evaluate_());
 					}
 					catch (misunderstanding_a<>& misunderstanding)
 					{
@@ -617,11 +623,11 @@ private:
 						auto const terms = flock_t<>::create_(key_symbol, kind_t<>::create_(), _initial(0, scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_()));
 						if (fixed)
 						{
-							flock.push_back(expression_attribute_extraction_t<>::create_(operator_token, terms));
+							value = expression_attribute_extraction_t<>::create_(operator_token, terms);
 						}
 						else
 						{
-							flock.push_back(expression_attribute_mutation_t<>::create_(operator_token, terms));
+							value = expression_attribute_mutation_t<>::create_(operator_token, terms);
 						}
 					}
 					else
@@ -629,16 +635,16 @@ private:
 						// extraction/mutation
 						if (_token_.tag() != "punctuation" || _token_.symbol() != "(")
 						{
-							throw dis("strange::parser shoal " + _token_.symbol() + " without ( following it:") + _token_.report_();
+							throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token_.report_();
 						}
 						auto const terms = _elements(scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_());
 						if (fixed)
 						{
-							flock.push_back(expression_extraction_t<>::create_(operator_token, terms));
+							value = expression_extraction_t<>::create_(operator_token, terms);
 						}
 						else
 						{
-							flock.push_back(expression_mutation_t<>::create_(operator_token, terms));
+							value = expression_mutation_t<>::create_(operator_token, terms);
 						}
 					}
 				}
@@ -655,20 +661,21 @@ private:
 			{
 				throw dis("strange::parser shoal value with non-punctuation following it:") + _token_.report_();
 			}
-			if (_token_.symbol() == ",")
+			flock.push_back(expression_flock_t<>::create_(operator_token, flock_t<>::create_(key, value)));
+			comma = _token_.symbol() == ",";
+			if (comma && !_next())
 			{
-				if (!_next())
-				{
-					throw dis("strange::parser shoal , with nothing following it:") + _token_.report_();
-				}
-				continue;
+				throw dis("strange::parser shoal , with nothing following it:") + _token_.report_();
 			}
 			if (_token_.symbol() == "}")
 			{
 				_next();
 				break;
 			}
-			throw dis("strange::parser shoal value with unexpected punctuation following it:") + _token_.report_();
+			if (!comma)
+			{
+				throw dis("strange::parser shoal value with unexpected punctuation following it:") + _token_.report_();
+			}
 		}
 		if (herd)
 		{
@@ -1007,13 +1014,10 @@ private:
 			{
 				throw dis("strange::parser element with non-punctuation following it:") + _token_.report_();
 			}
-			if (_token_.symbol() == ",")
+			bool const comma = _token_.symbol() == ",";
+			if (comma && !_next())
 			{
-				if (!_next())
-				{
-					throw dis("strange::parser , with nothing following it:") + _token_.report_();
-				}
-				continue;
+				throw dis("strange::parser , with nothing following it:") + _token_.report_();
 			}
 			if (square && _token_.symbol() == "]" ||
 				round && _token_.symbol() == ")")
@@ -1021,7 +1025,10 @@ private:
 				_next();
 				break;
 			}
-			throw dis("strange::parser element with unexpected punctuation following it:") + _token_.report_();
+			if (!comma)
+			{
+				throw dis("strange::parser element with unexpected punctuation following it:") + _token_.report_();
+			}
 		}
 		return flock;
 	}

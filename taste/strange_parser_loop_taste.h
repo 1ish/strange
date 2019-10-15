@@ -82,6 +82,7 @@ TEST_CASE("strange parse and evaluate loops", "[parse_t]")
 				"for(x:=1,x<=10,x++,$$strange::river::create_out[].write[\"abc \"])"
 			))).evaluate_();
 			REQUIRE(result);
+			std__cout << std::endl;
 		}
 	}
 	catch (misunderstanding_a<>& m)
