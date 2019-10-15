@@ -3,7 +3,15 @@
 	cout.write["hello\n"],
 	null &&
 		{
-			cout.write["parse\n"],
+			'create' :: (v :# $$strange::any_creature::create[$$strange::conception::create[$$this]]),
+			'a' : cout.write["value\n"],
+			'b' : 'c',
 		},
+	cout.write
+		[
+"line1
+line2
+"
+		],
 	cout.write["goodbye\n"],
 )
