@@ -12,7 +12,7 @@ public:
 	using over = thing_o<extraction_t<>>;
 
 	// construction
-	static inline operation_a<> create_(token_a<> const& token, flock_a<> const& names, flock_a<> const& params, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
+	static inline operation_a<> create_(token_a<> const& token, flock_a<> const& names, flock_a<> const& params, flock_a<> const& defaults, symbol_a<> const& name, kind_a<> const& result, expression_a<> const& expression)
 	{
 		return operation_a<>{ over{ extraction_t<>(token, names, params, defaults, name, result, expression) } };
 	}
@@ -64,29 +64,33 @@ public:
 		auto pit = _params.extract().cbegin();
 		for (auto const& def : _defaults.extract())
 		{
-			any_a<> argument = (ait == range.cend_())
-				? def
-				: (*ait++);
-			if (!argument.cats_().has_(*pit++))
+			auto const param = cast<kind_a<>>(*pit++);
+			bool const more = ait != range.cend_();
+			if (!more && !param.optional())
 			{
-				throw dis(_token.report() + "strange::extraction::operate cat does not include argument");
+				throw dis(_token.report() + "strange::function::operate not passed enough arguments");
+			}
+			any_a<> const argument = more ? (*ait++) : def;
+			if (!argument.kinds_().has_(param))
+			{
+				throw dis(_token.report() + "strange::extraction::operate kind does not include argument");
 			}
 			local.emplace(*nit++, argument);
 		}
 		try
 		{
 			auto result = _expression.operate(local_shoal, range);
-			if (!result.cats_().has_(_result))
+			if (!result.kinds_().has_(_result))
 			{
-				throw dis(_token.report() + "strange::extraction::operate cat does not include result");
+				throw dis(_token.report() + "strange::extraction::operate kind does not include result");
 			}
 			return result;
 		}
 		catch (expression_t<>::return_i& ret)
 		{
-			if (!ret.result.cats_().has_(_result))
+			if (!ret.result.kinds_().has_(_result))
 			{
-				throw dis(_token.report() + "strange::extraction::operate cat does not include result");
+				throw dis(_token.report() + "strange::extraction::operate kind does not include result");
 			}
 			return ret.result;
 		}
@@ -98,7 +102,7 @@ protected:
 	flock_a<> const _params;
 	flock_a<> const _defaults;
 	symbol_a<> const _name;
-	cat_a<> const _result;
+	kind_a<> const _result;
 	expression_a<> const _expression;
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
@@ -106,7 +110,7 @@ protected:
 	unordered_herd_a<> const _kinds;
 	unordered_shoal_a<> const _shared;
 
-	inline extraction_t(token_a<> const& token, flock_a<> const& names, flock_a<> const& params, flock_a<> const& defaults, symbol_a<> const& name, cat_a<> const& result, expression_a<> const& expression)
+	inline extraction_t(token_a<> const& token, flock_a<> const& names, flock_a<> const& params, flock_a<> const& defaults, symbol_a<> const& name, kind_a<> const& result, expression_a<> const& expression)
 		: operation_t(expression.pure(), expression.literal())
 		, _token{ token }
 		, _names{ names }

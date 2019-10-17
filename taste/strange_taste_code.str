@@ -29,11 +29,10 @@
 */
 			'inspiration' :: function
 			(
-				i :#
 				{
 					'create' :: function
 					(
-						c :# $$strange::any_creature::create
+						$$strange::any_creature::create
 						[
 							$$strange::conception::create
 							[

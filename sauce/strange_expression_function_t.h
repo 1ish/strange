@@ -28,13 +28,20 @@ public:
 				names.push_back(name);
 				params.push_back(kind);
 				values.push_back(value);
-				try
+				if (check<expression_a<>>(value))
 				{
-					defaults.push_back(cast<expression_a<>>(value).evaluate_());
+					try
+					{
+						defaults.push_back(cast<expression_a<>>(value).evaluate_());
+					}
+					catch (misunderstanding_a<>& misunderstanding)
+					{
+						throw dis("strange::expression_function::create parameter default evaluation error:") + token.report_() + misunderstanding;
+					}
 				}
-				catch (misunderstanding_a<>& misunderstanding)
+				else
 				{
-					throw dis("strange::expression_function::create parameter default evaluation error:") + token.report_() + misunderstanding;
+					defaults.push_back(no());
 				}
 			}
 
@@ -42,28 +49,50 @@ public:
 			{
 				throw dis(token.report() + "strange::expression_function::create passed non-expression term");
 			}
-			auto subterms = cast<expression_a<>>(term).terms_();
-			if (subterms.size() != 3)
+			if (term.type_().is("strange::expression_local_at"))
 			{
-				throw dis(token.report() + "strange::expression_function::create passed wrong number of subterms");
+				auto subterms = cast<expression_a<>>(term).terms_();
+				if (subterms.size() != 1)
+				{
+					throw dis(token.report() + "strange::expression_function::create passed wrong number of subterms");
+				}
+				name = subterms.at_index(0);
+				if (!check<symbol_a<>>(name))
+				{
+					throw dis(token.report() + "strange::expression_function::create passed non-symbol name");
+				}
+				kind = kind_t<>::create_();
+				value = yes();
 			}
-
-			name = subterms.at_index(0);
-			if (!check<symbol_a<>>(name))
+			else if (term.type_().is("strange::expression_local_insert") ||
+				term.type_().is("strange::expression_local_update"))
 			{
-				throw dis(token.report() + "strange::expression_function::create passed non-symbol name");
+				auto subterms = cast<expression_a<>>(term).terms_();
+				if (subterms.size() != 3)
+				{
+					throw dis(token.report() + "strange::expression_function::create passed wrong number of subterms");
+				}
+				name = subterms.at_index(0);
+				if (!check<symbol_a<>>(name))
+				{
+					throw dis(token.report() + "strange::expression_function::create passed non-symbol name");
+				}
+				kind = subterms.at_index(1);
+				if (!check<kind_a<>>(kind))
+				{
+					throw dis(token.report() + "strange::expression_function::create passed non-kind");
+				}
+				value = subterms.at_index(2);
+				if (!check<expression_a<>>(value))
+				{
+					throw dis(token.report() + "strange::expression_function::create passed non-expression value");
+				}
 			}
-
-			kind = subterms.at_index(1);
-			if (!check<kind_a<>>(kind))
+			else
 			{
-				throw dis(token.report() + "strange::expression_function::create passed non-kind");
-			}
-
-			value = subterms.at_index(2);
-			if (!check<expression_a<>>(value))
-			{
-				throw dis(token.report() + "strange::expression_function::create passed non-expression value");
+				name = sym("");
+				kind = kind_t<>::create_();
+				value = term;
 			}
 		}
 		if (!value)
