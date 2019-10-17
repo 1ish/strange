@@ -1,42 +1,36 @@
-(
-	cout :# $$strange::river::create_out[],
+(	cout :# $$strange::river::create_out[],
 	cout.write["hello\n"],
 	null &&
-	{
-		'a' : cout.write["value\n"],
+	{	'a' : cout.write["value\n"],
 		2 : 'c',
 		'taste' :
-		{
-		//	template <typename _element_ = any_a<>, typename ___ego___ = collection_a<>>
-		//	class forest_t : public flock_t<___ego___>;
-		//	<forest{<<>>}[<strange::symbol>]>
+		{	//	template <typename _element_ = any_a<>, typename ___ego___ = collection_a<>>
+			//	class forest_t : public flock_t<___ego___>;
+			//	<forest{<<>>}[<strange::symbol>]>
 /*
-			'forest' :: inspiration(_element_ :<<>># <>, ___ego___ :<<>># <strange::collection>,
-			conception($$strange::flock[],
-			{
-				'create' :: function
-				(
-					$$strange::any_creature::create
-					[
-						$$strange::conception::create
-						[
-							$$strange::incarnation::create[$$strange::flock],
-							$$strange::incarnation::create[^^]
-						]
-					]
+			'forest' :: inspiration
+			(	_element_ :<<>># <>, ___ego___ :<<>># <strange::collection>,
+				conception
+				(	$$strange::flock[_element_],
+					{
+						'create' :: function
+						(	range :<strange::range># $$strange::range::create[],
+							(	creature := $$strange::collection_creature::create[^^],
+								creature._flock[],
+								creature._forest[range],
+								creature
+							)
+						)
+					}
 				)
-			})),
+			),
 */
 			'inspiration' :: function
 			(
-				{
-					'create' :: function
-					(
-						$$strange::any_creature::create
-						[
-							$$strange::conception::create
-							[
-								$$strange::incarnation::create[$$taste::inspiration[]]
+				{	'create' :: function
+					(	$$strange::any_creature::create
+						[	$$strange::conception::create
+							[	$$strange::incarnation::create[$$taste::inspiration[]]
 							]
 						]
 					)
