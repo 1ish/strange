@@ -561,18 +561,9 @@ private:
 			}
 			shoal = true;
 			auto const operator_token = _token_;
-			auto value = expression_t<>::create(operator_token);
-			if (operator_token.symbol() == ":")
+			auto key_symbol = no();
+			if (key.literal())
 			{
-				if (!_next())
-				{
-					throw dis("strange::parser shoal : with nothing following it:") + operator_token.report_();
-				}
-				value = _initial(0, scope_symbol, fixed_herd, kind_shoal);
-			}
-			else if (operator_token.symbol() == "::" || operator_token.symbol() == ":#" || operator_token.symbol() == ":=")
-			{
-				auto key_symbol = no();
 				try
 				{
 					key_symbol = key.evaluate_();
@@ -581,10 +572,21 @@ private:
 				{
 					throw dis("strange::parser shoal " + operator_token.symbol() + " key evaluation error:") + operator_token.report_() + misunderstanding;
 				}
-				if (!check<symbol_a<>>(key_symbol))
+			}
+			auto const new_scope_symbol = _scope_name(scope_symbol,
+				check<symbol_a<>>(key_symbol) ? cast<symbol_a<>>(key_symbol) : sym("#"));
+
+			auto value = expression_t<>::create(operator_token);
+			if (operator_token.symbol() == ":")
+			{
+				if (!_next())
 				{
-					throw dis("strange::parser shoal " + operator_token.symbol() + " with non-symbol key:") + operator_token.report_();
+					throw dis("strange::parser shoal : with nothing following it:") + operator_token.report_();
 				}
+				value = _initial(0, new_scope_symbol, fixed_herd, kind_shoal);
+			}
+			else if (operator_token.symbol() == "::" || operator_token.symbol() == ":#" || operator_token.symbol() == ":=")
+			{
 				if (!_next())
 				{
 					throw dis("strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
@@ -596,7 +598,6 @@ private:
 					{
 						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token_.report_();
 					}
-					auto const new_scope_symbol = _scope_name(scope_symbol, cast<symbol_a<>>(key_symbol));
 					auto const terms = _elements(new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_());
 					value = expression_function_t<>::create_(operator_token, terms);
 					bool clash = false;
@@ -620,7 +621,7 @@ private:
 					if (key_string[key_string.length() - 1] == '_')
 					{
 						// attribute extraction/mutation
-						auto const terms = flock_t<>::create_(key_symbol, kind_t<>::create_(), _initial(0, scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_()));
+						auto const terms = flock_t<>::create_(key_symbol, kind_t<>::create_(), _initial(0, new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_()));
 						if (fixed)
 						{
 							value = expression_attribute_extraction_t<>::create_(operator_token, terms);
@@ -637,7 +638,7 @@ private:
 						{
 							throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token_.report_();
 						}
-						auto const terms = _elements(scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_());
+						auto const terms = _elements(new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_());
 						if (fixed)
 						{
 							value = expression_extraction_t<>::create_(operator_token, terms);

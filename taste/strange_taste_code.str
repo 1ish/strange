@@ -2,16 +2,37 @@
 	cout :# $$strange::river::create_out[],
 	cout.write["hello\n"],
 	null &&
-		{
-			'create' :: (v :# $$strange::any_creature::create[$$strange::conception::create[$$this]]),
-			'a' : cout.write["value\n"],
-			'b' : 'c',
-		},
+	{
+		'a' : cout.write["value\n"],
+		2 : 'c',
+		'taste' ::
+		(
+			t :#
+			{
+				'inspiration' :: 
+				(
+					i :#
+					{
+						'create' ::
+						(
+							c :# $$strange::any_creature::create
+							[
+								$$strange::conception::create
+								[
+									$$strange::incarnation::create[$$taste::inspiration[]]
+								]
+							]
+						)
+					}
+				)
+			}
+		)
+	},
 	cout.write
-		[
+	[
 "line1
 line2
 "
-		],
+	],
 	cout.write["goodbye\n"],
 )
