@@ -20,34 +20,23 @@ public:
 		auto defaults = flock_t<>::create_();
 		any_a<> name = sym("");
 		any_a<> kind = kind_t<>::create_();
-		any_a<> value = no();
-		for (auto const& term : terms)
+		any_a<> value = expression_t<>::create(token);
+		auto it = terms.cbegin_();
+		bool end = it == terms.cend_();
+		while (!end)
 		{
-			if (value)
-			{
-				names.push_back(name);
-				params.push_back(kind);
-				values.push_back(value);
-				if (check<expression_a<>>(value))
-				{
-					try
-					{
-						defaults.push_back(cast<expression_a<>>(value).evaluate_());
-					}
-					catch (misunderstanding_a<>& misunderstanding)
-					{
-						throw dis("strange::expression_mutation::create parameter default evaluation error:") + token.report_() + misunderstanding;
-					}
-				}
-				else
-				{
-					defaults.push_back(no());
-				}
-			}
-
+			auto const& term = *it;
+			end = ++it == terms.cend_();
 			if (!check<expression_a<>>(term))
 			{
 				throw dis(token.report() + "strange::expression_mutation::create passed non-expression term");
+			}
+			if (end)
+			{
+				name = sym("");
+				kind = kind_t<>::create_();
+				value = term;
+				break;
 			}
 			if (term.type_().is("strange::expression_local_at"))
 			{
@@ -62,7 +51,7 @@ public:
 					throw dis(token.report() + "strange::expression_mutation::create passed non-symbol name");
 				}
 				kind = kind_t<>::create_();
-				value = yes();
+				value = expression_t<>::create(token);
 			}
 			else if (term.type_().is("strange::expression_local_insert") ||
 				term.type_().is("strange::expression_local_update"))
@@ -90,14 +79,19 @@ public:
 			}
 			else
 			{
-				name = sym("");
-				kind = kind_t<>::create_();
-				value = term;
+				throw dis(token.report() + "strange::expression_mutation::create passed invalid parameter term");
 			}
-		}
-		if (!value)
-		{
-			value = expression_t<>::create(token);
+			names.push_back(name);
+			params.push_back(kind);
+			values.push_back(value);
+			try
+			{
+				defaults.push_back(cast<expression_a<>>(value).evaluate_());
+			}
+			catch (misunderstanding_a<>& misunderstanding)
+			{
+				throw dis("strange::expression_mutation::create parameter default evaluation error:") + token.report_() + misunderstanding;
+			}
 		}
 		return expression_substitute_t<over>::create(over{ expression_mutation_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<kind_a<>>(kind), cast<expression_a<>>(value)) },
 			mutation_t<>::create_(token, names, params, defaults, cast<symbol_a<>>(name), cast<kind_a<>>(kind), cast<expression_a<>>(value)));
