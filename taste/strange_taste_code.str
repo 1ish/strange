@@ -7,6 +7,26 @@
 		2 : 'c',
 		'taste' :
 		{
+		//	template <typename _element_ = any_a<>, typename ___ego___ = collection_a<>>
+		//	class forest_t : public flock_t<___ego___>;
+		//	<forest{<<>>}[<strange::symbol>]>
+/*
+			'forest' :: inspiration(_element_ :<<>># <>, ___ego___ :<<>># <strange::collection>,
+			conception($$strange::flock[],
+			{
+				'create' :: function
+				(
+					$$strange::any_creature::create
+					[
+						$$strange::conception::create
+						[
+							$$strange::incarnation::create[$$strange::flock],
+							$$strange::incarnation::create[^^]
+						]
+					]
+				)
+			})),
+*/
 			'inspiration' :: function
 			(
 				i :#
