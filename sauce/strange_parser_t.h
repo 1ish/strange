@@ -561,6 +561,10 @@ private:
 			}
 			shoal = true;
 			auto const operator_token = _token_;
+			if (!_next())
+			{
+				throw dis("strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
+			}
 			auto key_symbol = no();
 			if (key.literal())
 			{
@@ -579,74 +583,59 @@ private:
 			auto value = expression_t<>::create(operator_token);
 			if (operator_token.symbol() == ":")
 			{
-				if (!_next())
-				{
-					throw dis("strange::parser shoal : with nothing following it:") + operator_token.report_();
-				}
+				// regular key/value pair
 				value = _initial(0, new_scope_symbol, fixed_herd, kind_shoal);
 			}
-			else if (operator_token.symbol() == "::" || operator_token.symbol() == ":#" || operator_token.symbol() == ":=")
+			else if (operator_token.symbol() == "::")
 			{
-				if (!_next())
+				// shared scope
+				value = _initial(0, new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_());
+				bool clash = false;
+				try
 				{
-					throw dis("strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
+					clash = !_shared_.insert(new_scope_symbol, value.evaluate_());
 				}
-				if (operator_token.symbol() == "::")
+				catch (misunderstanding_a<>& misunderstanding)
 				{
-					// shared scope
-					if (_token_.tag() != "punctuation" || _token_.symbol() != "(") //TODO handle {
+					throw dis("strange::parser shoal :: value evaluation error:") + _token_.report_() + misunderstanding;
+				}
+				if (clash)
+				{
+					throw dis("strange::parser shoal :: redefinition of shared name:") + _token_.report_();
+				}
+			}
+			else if (operator_token.symbol() == ":#" || operator_token.symbol() == ":=")
+			{
+				bool const fixed = (operator_token.symbol() == ":#");
+				auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
+				if (key_string[key_string.length() - 1] == '_')
+				{
+					// attribute extraction/mutation
+					auto const terms = flock_t<>::create_(key_symbol, kind_t<>::create_(), _initial(0, new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_()));
+					if (fixed)
 					{
-						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token_.report_();
+						value = expression_attribute_extraction_t<>::create_(operator_token, terms);
 					}
-					auto const terms = _elements(new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_());
-					value = expression_function_t<>::create_(operator_token, terms);
-					bool clash = false;
-					try
+					else
 					{
-						clash = !_shared_.insert(new_scope_symbol, value.evaluate_());
-					}
-					catch (misunderstanding_a<>& misunderstanding)
-					{
-						throw dis("strange::parser shoal :: value evaluation error:") + _token_.report_() + misunderstanding;
-					}
-					if (clash)
-					{
-						throw dis("strange::parser shoal :: redefinition of shared name:") + _token_.report_();
+						value = expression_attribute_mutation_t<>::create_(operator_token, terms);
 					}
 				}
 				else
 				{
-					bool const fixed = (operator_token.symbol() == ":#");
-					auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
-					if (key_string[key_string.length() - 1] == '_')
+					// extraction/mutation
+					if (_token_.tag() != "punctuation" || _token_.symbol() != "(")
 					{
-						// attribute extraction/mutation
-						auto const terms = flock_t<>::create_(key_symbol, kind_t<>::create_(), _initial(0, new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_()));
-						if (fixed)
-						{
-							value = expression_attribute_extraction_t<>::create_(operator_token, terms);
-						}
-						else
-						{
-							value = expression_attribute_mutation_t<>::create_(operator_token, terms);
-						}
+						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token_.report_();
+					}
+					auto const terms = _elements(new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_());
+					if (fixed)
+					{
+						value = expression_extraction_t<>::create_(operator_token, terms);
 					}
 					else
 					{
-						// extraction/mutation
-						if (_token_.tag() != "punctuation" || _token_.symbol() != "(")
-						{
-							throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token_.report_();
-						}
-						auto const terms = _elements(new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_());
-						if (fixed)
-						{
-							value = expression_extraction_t<>::create_(operator_token, terms);
-						}
-						else
-						{
-							value = expression_mutation_t<>::create_(operator_token, terms);
-						}
+						value = expression_mutation_t<>::create_(operator_token, terms);
 					}
 				}
 			}

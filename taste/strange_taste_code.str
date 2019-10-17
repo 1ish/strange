@@ -5,28 +5,25 @@
 	{
 		'a' : cout.write["value\n"],
 		2 : 'c',
-		'taste' ::
-		(
-			t :#
-			{
-				'inspiration' :: 
-				(
-					i :#
-					{
-						'create' ::
-						(
-							c :# $$strange::any_creature::create
+		'taste' :
+		{
+			'inspiration' :: function
+			(
+				i :#
+				{
+					'create' :: function
+					(
+						c :# $$strange::any_creature::create
+						[
+							$$strange::conception::create
 							[
-								$$strange::conception::create
-								[
-									$$strange::incarnation::create[$$taste::inspiration[]]
-								]
+								$$strange::incarnation::create[$$taste::inspiration[]]
 							]
-						)
-					}
-				)
-			}
-		)
+						]
+					)
+				}
+			)
+		}
 	},
 	cout.write
 	[
