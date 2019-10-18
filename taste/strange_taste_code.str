@@ -8,18 +8,26 @@
 			//	class forest_t : public flock_t<___ego___>;
 			//	<forest{<<>>}[<strange::symbol>]>
 /*
-			'forest' :: inspiration
-			(	_element_ :<<>># <>, ___ego___ :<<>># <strange::collection>,
+			<collection> :: abstraction
+			(	_element_ :<<>># <>,
 				conception
+				(	$$<strange::range>[_element_],
+					{	'empty'		:# (<>),
+						'has'		:# (item, <>)
+						'insert'	:= (key, value, <>)
+						'size_'		:# <number_int_64>
+					}
+				)
+			)
+
+			'forest' :: inspiration
+			(	_element_ :<<>># <>,
+				___ego___ :<<>># <strange::collection>,
+				incarnation
 				(	$$strange::flock[_element_],
-					{
-						'create' :: function
+					{	'create' :: function
 						(	range :<strange::range># $$strange::range::create[],
-							(	creature := $$strange::collection_creature::create[^^],
-								creature._flock[],
-								creature._forest[range],
-								creature
-							)
+							$$<taste::collection>[_element_].creation[^^, range]
 						)
 					}
 				)
