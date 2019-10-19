@@ -31,8 +31,8 @@
 				(	$$strange::flock[_element_],
 					{	create :: function
 						(	range :<strange::range># $$strange::range::create[],
-							creation(<taste::forest[_element_]>, ^^[_element_], range),
-						//	$$<strange::range[_element_]>::create[$$taste::forest[_element_], range],
+							animate(<taste::forest[_element_]>, ^^[_element_], range),
+						//	$$<strange::range[_element_]>::animate[$$taste::forest[_element_], range],
 						),
 
 						_forest :=

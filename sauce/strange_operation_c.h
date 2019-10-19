@@ -9,22 +9,22 @@ class operation_c : public any_c<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> animate__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::operation_creature::create passed empty range");
+			throw dis("<strange::operation>::animate passed empty range");
 		}
 		any_a<> conception = *it;
 		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("strange::operation_creature::create passed non-shoal conception");
+			throw dis("<strange::operation>::animate passed non-shoal conception");
 		}
-		return create_(cast<shoal_a<>>(conception));
+		return animate_(cast<shoal_a<>>(conception));
 	}
 
-	static inline operation_a<> create_(shoal_a<> const& conception)
+	static inline operation_a<> animate_(shoal_a<> const& conception)
 	{
 		return operation_a<>{operation_c{ conception } };
 	}
@@ -48,7 +48,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<symbol_a<>>(result))
 			{
-				throw dis("strange::operation_creature::type returned non-symbol");
+				throw dis("<strange::operation>::type returned non-symbol");
 			}
 			return cast<symbol_a<>>(result);
 		}
@@ -75,7 +75,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
-				throw dis("strange::operation_creature::shared returned non-unordered-shoal");
+				throw dis("<strange::operation>::shared returned non-unordered-shoal");
 			}
 			return cast<unordered_shoal_a<>>(result);
 		}

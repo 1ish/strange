@@ -9,22 +9,22 @@ class expression_c : public operation_c<___ego___>
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> animate__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::expression_creature::create passed empty range");
+			throw dis("<strange::expression>::animate passed empty range");
 		}
 		any_a<> conception = *it;
 		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("strange::expression_creature::create passed non-shoal conception");
+			throw dis("<strange::expression>::animate passed non-shoal conception");
 		}
-		return create_(cast<shoal_a<>>(conception));
+		return animate_(cast<shoal_a<>>(conception));
 	}
 
-	static inline expression_a<> create_(shoal_a<> const& conception)
+	static inline expression_a<> animate_(shoal_a<> const& conception)
 	{
 		return expression_a<>{ expression_c{ conception } };
 	}
@@ -48,7 +48,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<symbol_a<>>(result))
 			{
-				throw dis("strange::expression_creature::type returned non-symbol");
+				throw dis("<strange::expression>::type returned non-symbol");
 			}
 			return cast<symbol_a<>>(result);
 		}
@@ -75,7 +75,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
-				throw dis("strange::expression_creature::shared returned non-unordered-shoal");
+				throw dis("<strange::expression>::shared returned non-unordered-shoal");
 			}
 			return cast<unordered_shoal_a<>>(result);
 		}
@@ -132,7 +132,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<token_a<>>(result))
 			{
-				throw dis("strange::expression_creature::token returned non-token");
+				throw dis("<strange::expression>::token returned non-token");
 			}
 			return cast<token_a<>>(result);
 		}
@@ -157,7 +157,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<flock_a<>>(result))
 			{
-				throw dis("strange::expression_creature::terms returned non-flock");
+				throw dis("<strange::expression>::terms returned non-flock");
 			}
 			return cast<flock_a<>>(result);
 		}
@@ -174,30 +174,30 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::expression_creature::generate passed empty range");
+			throw dis("<strange::expression>::generate passed empty range");
 		}
 		any_a<> version = *it;
 		if (!check<number_data_a<int64_t>>(version))
 		{
-			throw dis("strange::expression_creature::generate passed non-int-64 version");
+			throw dis("<strange::expression>::generate passed non-int-64 version");
 		}
 		if (++it == range.cend_())
 		{
-			throw dis("strange::expression_creature::generate passed short range");
+			throw dis("<strange::expression>::generate passed short range");
 		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
 		{
-			throw dis("strange::expression_creature::generate passed non-int-64 indent");
+			throw dis("<strange::expression>::generate passed non-int-64 indent");
 		}
 		if (++it == range.cend_())
 		{
-			throw dis("strange::expression_creature::generate passed short range");
+			throw dis("<strange::expression>::generate passed short range");
 		}
 		any_a<> river = *it;
 		if (!check<river_a<>>(river))
 		{
-			throw dis("strange::expression_creature::generate passed non-river");
+			throw dis("<strange::expression>::generate passed non-river");
 		}
 		return river;
 	}
@@ -231,30 +231,30 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::expression_creature::generate_cpp passed empty range");
+			throw dis("<strange::expression>::generate_cpp passed empty range");
 		}
 		any_a<> version = *it;
 		if (!check<number_data_a<int64_t>>(version))
 		{
-			throw dis("strange::expression_creature::generate_cpp passed non-int-64 version");
+			throw dis("<strange::expression>::generate_cpp passed non-int-64 version");
 		}
 		if (++it == range.cend_())
 		{
-			throw dis("strange::expression_creature::generate_cpp passed short range");
+			throw dis("<strange::expression>::generate_cpp passed short range");
 		}
 		any_a<> indent = *it;
 		if (!check<number_data_a<int64_t>>(indent))
 		{
-			throw dis("strange::expression_creature::generate_cpp passed non-int-64 indent");
+			throw dis("<strange::expression>::generate_cpp passed non-int-64 indent");
 		}
 		if (++it == range.cend_())
 		{
-			throw dis("strange::expression_creature::generate_cpp passed short range");
+			throw dis("<strange::expression>::generate_cpp passed short range");
 		}
 		any_a<> river = *it;
 		if (!check<river_a<>>(river))
 		{
-			throw dis("strange::expression_creature::generate_cpp passed non-river");
+			throw dis("<strange::expression>::generate_cpp passed non-river");
 		}
 		return river;
 	}

@@ -9,22 +9,22 @@ class any_c : public one_t
 {
 public:
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> animate__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::any_creature::create passed empty range");
+			throw dis("<strange::any>::animate passed empty range");
 		}
 		any_a<> conception = *it;
 		if (!check<shoal_a<>>(conception))
 		{
-			throw dis("strange::any_creature::create passed non-shoal conception");
+			throw dis("<strange::any>::animate passed non-shoal conception");
 		}
-		return create_(cast<shoal_a<>>(conception));
+		return animate_(cast<shoal_a<>>(conception));
 	}
 
-	static inline any_a<> create_(shoal_a<> const& conception)
+	static inline any_a<> animate_(shoal_a<> const& conception)
 	{
 		return any_a<>{ any_c{ conception } };
 	}
@@ -59,7 +59,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<symbol_a<>>(result))
 			{
-				throw dis("strange::any_creature::type returned non-symbol");
+				throw dis("<strange::any>::type returned non-symbol");
 			}
 			return cast<symbol_a<>>(result);
 		}
@@ -86,7 +86,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
-				throw dis("strange::any_creature::shared returned non-unordered-shoal");
+				throw dis("<strange::any>::shared returned non-unordered-shoal");
 			}
 			return cast<unordered_shoal_a<>>(result);
 		}
@@ -118,7 +118,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<cat_a<>>(result))
 			{
-				throw dis("strange::any_creature::shared returned non-cat");
+				throw dis("<strange::any>::shared returned non-cat");
 			}
 			return cast<cat_a<>>(result);
 		}
@@ -143,7 +143,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_herd_a<>>(result))
 			{
-				throw dis("strange::any_creature::shared returned non-unordered-herd");
+				throw dis("<strange::any>::shared returned non-unordered-herd");
 			}
 			return cast<unordered_herd_a<>>(result);
 		}
@@ -168,7 +168,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<kind_a<>>(result))
 			{
-				throw dis("strange::any_creature::shared returned non-kind");
+				throw dis("<strange::any>::shared returned non-kind");
 			}
 			return cast<kind_a<>>(result);
 		}
@@ -193,7 +193,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_herd_a<>>(result))
 			{
-				throw dis("strange::any_creature::shared returned non-unordered-herd");
+				throw dis("<strange::any>::shared returned non-unordered-herd");
 			}
 			return cast<unordered_herd_a<>>(result);
 		}
@@ -267,12 +267,12 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::any_creature::invoke passed short range");
+			throw dis("<strange::any>::invoke passed short range");
 		}
 		any_a<> member = *it;
 		if (!thing.operations_().has_(member))
 		{
-			throw dis("strange::any_creature::invoke passed non-existent member");
+			throw dis("<strange::any>::invoke passed non-existent member");
 		}
 		return thing.operations_().at_(member).operate(thing, range_t<>::create_(++it, range.cend_()));
 	}
@@ -287,7 +287,7 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::any_creature::operate passed short range");
+			throw dis("<strange::any>::operate passed short range");
 		}
 		any_a<> operation = *it;
 		return operation.operate(thing, range_t<>::create_(++it, range.cend_()));
@@ -309,7 +309,7 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::any_creature::identical passed empty range");
+			throw dis("<strange::any>::identical passed empty range");
 		}
 		return identical_(*it);
 	}
@@ -350,7 +350,7 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::any_creature::same passed empty range");
+			throw dis("<strange::any>::same passed empty range");
 		}
 		return identical_(*it);
 	}
@@ -380,7 +380,7 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::any_creature::different passed empty range");
+			throw dis("<strange::any>::different passed empty range");
 		}
 		return different_(*it);
 	}
@@ -413,7 +413,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
-				throw dis("strange::any_creature::hash returned non-number-uint64");
+				throw dis("<strange::any>::hash returned non-number-uint64");
 			}
 			return cast<number_data_a<uint64_t>>(result);
 		}
@@ -428,7 +428,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<number_data_a<uint64_t>>(result))
 			{
-				throw dis("strange::creature::hash returned non-number-uint64");
+				throw dis("<strange::any>::hash returned non-number-uint64");
 			}
 			return cast<number_data_a<uint64_t>>(result).extract();
 		}
@@ -452,12 +452,12 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::creature::intimate passed empty range");
+			throw dis("<strange::any>::intimate passed empty range");
 		}
 		any_a<> thing(*it, true);
 		if (++it == range.cend_())
 		{
-			throw dis("strange::creature::intimate passed short range");
+			throw dis("<strange::any>::intimate passed short range");
 		}
 		any_a<> member = *it;
 		return intimate(thing, member, range_t<>::create_(++it, range.cend_()));
@@ -468,7 +468,7 @@ public:
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::creature::intimate passed short range");
+			throw dis("<strange::any>::intimate passed short range");
 		}
 		any_a<> member = *it;
 		return intimate(thing, member, range_t<>::create_(++it, range.cend_()));
@@ -479,7 +479,7 @@ public:
 		auto const& conception = static_cast<any_c<> const&>(thing.extract_thing())._conception;
 		if (!conception.has_(member))
 		{
-			throw dis("strange::creature::intimate passed non-existent member");
+			throw dis("<strange::any>::intimate passed non-existent member");
 		}
 		return conception.at_(member).operate(thing, range);
 	}
@@ -489,7 +489,7 @@ public:
 		auto const& conception = static_cast<any_c<> const&>(thing.extract_thing())._conception;
 		if (!conception.has_(member))
 		{
-			throw dis("strange::creature::intimate_member passed non-existent member");
+			throw dis("<strange::any>::intimate_member passed non-existent member");
 		}
 		return conception.at_(member);
 	}
@@ -523,7 +523,7 @@ protected:
 			auto const key = flop.at_index(0);
 			if (!check<symbol_a<>>(key))
 			{
-				throw dis("strange::any_creature constructor passed conception with non-symbol key");
+				throw dis("<strange::any>::animate passed conception with non-symbol key");
 			}
 			if (cast<symbol_a<>>(key).to_string().c_str()[0] == '_')
 			{

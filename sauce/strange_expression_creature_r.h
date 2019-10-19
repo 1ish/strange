@@ -10,13 +10,13 @@ class reflection<expression_c<>>
 public:
 	static inline symbol_a<> type()
 	{
-		static symbol_a<> TYPE = sym("strange::expression_creature");
+		static symbol_a<> TYPE = sym("<strange::expression>");
 		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::expression_creature::create", native_function_t<>::create(&expression_c<>::create__));
+		shoal.update_string("<strange::expression>::animate", native_function_t<>::create(&expression_c<>::animate__));
 	}
 };
 
