@@ -183,6 +183,7 @@ class tokenizer_t : public thing_t<___ego___>
 						commentblock = false;
 					}
 					second = (char1 == '*' && char2 == '/');
+					continue;
 				}
 				else if (commentline)
 				{
@@ -191,6 +192,7 @@ class tokenizer_t : public thing_t<___ego___>
 						token = "";
 						commentline = false;
 					}
+					continue;
 				}
 				else if (escape)
 				{
@@ -430,7 +432,10 @@ class tokenizer_t : public thing_t<___ego___>
 						return punctuation_token(std::string(&char1, 1));
 					}
 				}
-				first = false;
+				if (!commentblock && !commentline)
+				{
+					first = false;
+				}
 			}
 			if (commentline || token.empty())
 			{

@@ -509,7 +509,15 @@ private:
 		}
 		else for (;;)
 		{
-			key = _initial(0, scope_symbol, fixed_herd, kind_shoal);
+			if (_token_.tag() == "name")
+			{
+				key = expression_literal_t<>::create_(_token_, flock_t<>::create_(_token_.symbol_()));
+				_next();
+			}
+			else
+			{
+				key = _initial(0, scope_symbol, fixed_herd, kind_shoal);
+			}
 			if (_it_ == _end_)
 			{
 				if (shoal)

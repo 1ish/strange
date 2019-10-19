@@ -147,58 +147,58 @@ public:
 		return river_a<>(over{ river_t<>(stream.get(), stream.get(), stream) }, true);
 	}
 
-	static inline any_a<> create_file__(range_a<> const& range)
+	static inline any_a<> file__(range_a<> const& range)
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
-			throw dis("strange::river::create_file passed empty range");
+			throw dis("strange::river::file passed empty range");
 		}
 		any_a<> name = *it;
 		if (!check<symbol_a<>>(name))
 		{
-			throw dis("strange::river::create_file passed non-symbol");
+			throw dis("strange::river::file passed non-symbol");
 		}
-		return create_file_(cast<symbol_a<>>(name));
+		return file_(cast<symbol_a<>>(name));
 	}
 
-	static inline river_a<> create_file_(symbol_a<> const& name)
+	static inline river_a<> file_(symbol_a<> const& name)
 	{
-		return create_file(name.to_string());
+		return file(name.to_string());
 	}
 
-	static inline river_a<> create_file(std::string const& name)
+	static inline river_a<> file(std::string const& name)
 	{
 		std::shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name, std::fstream::binary | std::fstream::in | std::fstream::out);
 		return river_a<>(over{ river_t<>(stream.get(), stream.get(), stream, name) }, true);
 	}
 
-	static inline any_a<> create_in__(range_a<> const& _)
+	static inline any_a<> in__(range_a<> const& _)
 	{
-		return create_in_();
+		return in_();
 	}
 
-	static inline river_a<> create_in_()
+	static inline river_a<> in_()
 	{
 		return river_a<>(over{ river_t<>{ &std::cin } }, true);
 	}
 
-	static inline any_a<> create_out__(range_a<> const& _)
+	static inline any_a<> out__(range_a<> const& _)
 	{
-		return create_out_();
+		return out_();
 	}
 
-	static inline river_a<> create_out_()
+	static inline river_a<> out_()
 	{
 		return river_a<>(over{ river_t<>(nullptr, &std::cout) }, true);
 	}
 
-	static inline any_a<> create_err__(range_a<> const& _)
+	static inline any_a<> err__(range_a<> const& _)
 	{
-		return create_err_();
+		return err_();
 	}
 
-	static inline river_a<> create_err_()
+	static inline river_a<> err_()
 	{
 		return river_a<>(over{ river_t<>(nullptr, &std::cerr) }, true);
 	}

@@ -1,7 +1,7 @@
-(	cout :# $$strange::river::create_out[],
-	cout.write["hello\n"],
+(	out :# $$strange::river::out[],
+	out.write["hello\n"],
 	null &&
-	{	'a' : cout.write["value\n"],
+	{	'a' : out.write["value\n"],
 		2 : 'c',
 		'taste' :
 		{	//	template <typename _element_ = any_a<>, typename ___ego___ = collection_a<>>
@@ -12,30 +12,45 @@
 			(	_element_ :<<>># <>,
 				conception
 				(	$$<strange::range>[_element_],
-					{	'empty'		:# (<>),
-						'has'		:# (item, <>)
-						'insert'	:= (key, value, <>)
-						'size_'		:# <number_int_64>
+					{	empty :# (<>),
+						size :# (<number_int_64>),
+						has :# (item, <>),
+						insert := (key, value, <>),
 					}
 				)
-			)
+			),
 
-			'forest' :: inspiration
+			<forest> :: abstraction
 			(	_element_ :<<>># <>,
-				___ego___ :<<>># <strange::collection>,
+				conception
+				(	$$<taste::collection>[_element_],
+					{}
+				)
+			),
+
+			forest :: inspiration
+			(	_element_ :<<>># <>,
 				incarnation
 				(	$$strange::flock[_element_],
-					{	'create' :: function
+					{	create :: function
 						(	range :<strange::range># $$strange::range::create[],
-							$$<taste::collection>[_element_].creation[^^, range]
+							creature(<taste::forest[_element_]>, ^^[_element_], range),
+						//	$$strange::range_creature::create[$$taste::forest[_element_], range],
+						),
+						_forest :=
+						(	range :<strange::range>,
+							(
+							)
 						)
 					}
 				)
 			),
+
+			f :<taste::forest[<symbol>]># $$taste::forest[<symbol>].create[],
 */
-			'inspiration' :: function
+			inspiration :: function
 			(
-				{	'create' :: function
+				{	create :: function
 					(	$$strange::any_creature::create
 						[	$$strange::conception::create
 							[	$$strange::incarnation::create[$$taste::inspiration[]]
@@ -46,11 +61,11 @@
 			)
 		}
 	},
-	cout.write
+	out.write
 	[
 "line1
 line2
 "
 	],
-	cout.write["goodbye\n"],
+	out.write["goodbye\n"],
 )
