@@ -10,7 +10,6 @@
 /*
 			<collection> :: abstraction
 			(	_element_ :<<>># <>,
-				conception
 				(	$$<strange::range>[_element_],
 					{	empty :# (<>),
 						size :# (<number_int_64>),
@@ -22,21 +21,20 @@
 
 			<forest> :: abstraction
 			(	_element_ :<<>># <>,
-				conception
 				(	$$<taste::collection>[_element_],
-					{}
+					{},
 				)
 			),
 
-			forest :: inspiration
+			forest :: thing
 			(	_element_ :<<>># <>,
-				incarnation
 				(	$$strange::flock[_element_],
 					{	create :: function
 						(	range :<strange::range># $$strange::range::create[],
-							creature(<taste::forest[_element_]>, ^^[_element_], range),
-						//	$$strange::range_creature::create[$$taste::forest[_element_], range],
+							creation(<taste::forest[_element_]>, ^^[_element_], range),
+						//	$$<strange::range[_element_]>::create[$$taste::forest[_element_], range],
 						),
+
 						_forest :=
 						(	range :<strange::range>,
 							(
