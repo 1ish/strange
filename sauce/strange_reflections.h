@@ -99,8 +99,5 @@
 #include "strange_expression_nor_r.h"
 #include "strange_expression_xor_r.h"
 #include "strange_expression_xnor_r.h"
-#include "strange_any_creature_r.h"
-#include "strange_operation_creature_r.h"
-#include "strange_expression_creature_r.h"
 
 #endif
