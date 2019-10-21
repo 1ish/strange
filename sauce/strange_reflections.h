@@ -76,6 +76,7 @@
 #include "strange_expression_mutation_r.h"
 #include "strange_expression_attribute_extraction_r.h"
 #include "strange_expression_attribute_mutation_r.h"
+#include "strange_expression_abstraction_r.h"
 #include "strange_expression_shared_scope_r.h"
 #include "strange_expression_flock_r.h"
 #include "strange_expression_shoal_r.h"
