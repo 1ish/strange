@@ -66,7 +66,7 @@ public:
 				{
 					throw dis(token.report() + "strange::expression_function::create passed non-symbol name");
 				}
-				kind = subterms.at_index(1);
+				kind = subterms.at_index(1); //TODO optional?
 				if (!check<kind_a<>>(kind))
 				{
 					throw dis(token.report() + "strange::expression_function::create passed non-kind");

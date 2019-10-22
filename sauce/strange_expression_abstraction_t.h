@@ -14,13 +14,15 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		auto names = flock_t<>::create_();
-		auto params = flock_t<>::create_();
-		auto values = flock_t<>::create_();
-		auto defaults = flock_t<>::create_();
-		any_a<> name = sym("");
-		any_a<> kind = kind_t<>::create_();
-		any_a<> value = expression_t<>::create(token);
+		auto dimension_names = flock_t<>::create_();
+		auto dimension_kinds = flock_t<>::create_();
+		auto dimension_expressions = flock_t<>::create_();
+		auto dimension_defaults = flock_t<>::create_();
+		auto parent_expressions = flock_t<>::create_();
+		auto parent_shoals = flock_t<>::create_();
+		any_a<> name = no();
+		any_a<> kind = no();
+		any_a<> value = no();
 		auto it = terms.cbegin_();
 		bool end = it == terms.cend_();
 		while (!end)
@@ -33,9 +35,36 @@ public:
 			}
 			if (end)
 			{
-				name = sym("");
-				kind = kind_t<>::create_();
-				value = term;
+				if (!term.type_().is("strange::expression_block"))
+				{
+					throw dis(token.report() + "strange::expression_abstraction::create passed non-block last term");
+				}
+				auto const subterms = cast<expression_a<>>(term).terms_();
+				if (subterms.empty())
+				{
+					throw dis(token.report() + "strange::expression_abstraction::create passed no subterms");
+				}
+				for (auto const& subterm : subterms)
+				{
+					if (!check<expression_a<>>(subterm))
+					{
+						throw dis(token.report() + "strange::expression_abstraction::create passed non-expression subterm");
+					}
+					try
+					{
+						auto const parent_shoal = cast<expression_a<>>(subterm).evaluate_();
+						if (!check<unordered_shoal_a<>>(parent_shoal))
+						{
+							throw dis("parent does not evaluate to an unordered shoal");
+						}
+						parent_expressions.push_back(subterm);
+						parent_shoals.push_back(parent_shoal);
+					}
+					catch (misunderstanding_a<>& misunderstanding)
+					{
+						throw dis("strange::expression_abstraction::create parent shoal evaluation error:") + token.report_() + misunderstanding;
+					}
+				}
 				break;
 			}
 			if (term.type_().is("strange::expression_local_at"))
@@ -43,12 +72,12 @@ public:
 				auto subterms = cast<expression_a<>>(term).terms_();
 				if (subterms.size() != 1)
 				{
-					throw dis(token.report() + "strange::expression_abstraction::create passed wrong number of subterms");
+					throw dis(token.report() + "strange::expression_abstraction::create passed wrong number of dimension subterms");
 				}
 				name = subterms.at_index(0);
 				if (!check<symbol_a<>>(name))
 				{
-					throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol name");
+					throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol dimension name");
 				}
 				kind = kind_t<>::create_();
 				value = expression_t<>::create(token);
@@ -59,42 +88,42 @@ public:
 				auto subterms = cast<expression_a<>>(term).terms_();
 				if (subterms.size() != 3)
 				{
-					throw dis(token.report() + "strange::expression_abstraction::create passed wrong number of subterms");
+					throw dis(token.report() + "strange::expression_abstraction::create passed wrong number of dimension subterms");
 				}
 				name = subterms.at_index(0);
 				if (!check<symbol_a<>>(name))
 				{
-					throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol name");
+					throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol dimension name");
 				}
-				kind = subterms.at_index(1);
+				kind = subterms.at_index(1); //TODO optional?
 				if (!check<kind_a<>>(kind))
 				{
-					throw dis(token.report() + "strange::expression_abstraction::create passed non-kind");
+					throw dis(token.report() + "strange::expression_abstraction::create passed non-kind dimension kind");
 				}
 				value = subterms.at_index(2);
 				if (!check<expression_a<>>(value))
 				{
-					throw dis(token.report() + "strange::expression_abstraction::create passed non-expression value");
+					throw dis(token.report() + "strange::expression_abstraction::create passed non-expression dimension default");
 				}
 			}
 			else
 			{
-				throw dis(token.report() + "strange::expression_abstraction::create passed invalid parameter term");
+				throw dis(token.report() + "strange::expression_abstraction::create passed invalid dimension term");
 			}
-			names.push_back(name);
-			params.push_back(kind);
-			values.push_back(value);
+			dimension_names.push_back(name);
+			dimension_kinds.push_back(kind);
+			dimension_expressions.push_back(value);
 			try
 			{
-				defaults.push_back(cast<expression_a<>>(value).evaluate_());
+				dimension_defaults.push_back(cast<expression_a<>>(value).evaluate_());
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
 				throw dis("strange::expression_abstraction::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<over>::create(over{ expression_abstraction_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<kind_a<>>(kind), cast<expression_a<>>(value)) },
-			function_t<>::create_(token, names, params, defaults, cast<symbol_a<>>(name), cast<kind_a<>>(kind), cast<expression_a<>>(value)));
+		return expression_substitute_t<over>::create(over{ expression_abstraction_t<>(token, terms, dimension_names, dimension_kinds, dimension_expressions, dimension_defaults, parent_expressions, parent_shoals) },
+			abstraction_t<>::create_(token, dimension_names, dimension_kinds, dimension_defaults, parent_shoals));
 	}
 
 	// reflection
@@ -117,11 +146,11 @@ public:
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		river.write_string(" abstraction(");
-		auto nit = _names.extract().cbegin();
-		auto pit = _params.extract().cbegin();
-		auto vit = _values.extract().cbegin();
+		auto nit = _dimension_names.extract().cbegin();
+		auto pit = _dimension_kinds.extract().cbegin();
+		auto vit = _dimension_expressions.extract().cbegin();
 		bool first = true;
-		for (auto const& def : _defaults.extract())
+		for (auto const& def : _dimension_defaults.extract())
 		{
 			if (first)
 			{
@@ -139,17 +168,16 @@ public:
 			value.generate(version, indent, river);
 		}
 		river.write_string(")\n");
-		_expression.generate(version, indent, river);
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		river.write_string(" [](");
-		auto nit = _names.extract().cbegin();
-		auto pit = _params.extract().cbegin();
-		auto vit = _values.extract().cbegin();
+		auto nit = _dimension_names.extract().cbegin();
+		auto pit = _dimension_kinds.extract().cbegin();
+		auto vit = _dimension_expressions.extract().cbegin();
 		bool first = true;
-		for (auto const& def : _defaults.extract())
+		for (auto const& def : _dimension_defaults.extract())
 		{
 			if (first)
 			{
@@ -167,30 +195,27 @@ public:
 			value.generate_cpp(version, indent, river);
 		}
 		river.write_string(")\n{\n");
-		_expression.generate_cpp(version, indent, river);
 		river.write_string("}\n");
 	}
 
 protected:
 	flock_a<> const _terms;
-	flock_a<> const _names;
-	flock_a<> const _params;
-	flock_a<> const _values;
-	flock_a<> const _defaults;
-	symbol_a<> const _name;
-	kind_a<> const _result;
-	expression_a<> const _expression;
+	flock_a<> const _dimension_names;
+	flock_a<> const _dimension_kinds;
+	flock_a<> const _dimension_expressions;
+	flock_a<> const _dimension_defaults;
+	flock_a<> const _parent_expressions;
+	flock_a<> const _parent_shoals;
 
-	inline expression_abstraction_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& params, flock_a<> const& values, flock_a<> const& defaults, symbol_a<> const& name, kind_a<> const& result, expression_a<> const& expression)
+	inline expression_abstraction_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_expressions, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions, flock_a<> const& parent_shoals)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
-		, _names{ names }
-		, _params{ params }
-		, _values{ values }
-		, _defaults{ defaults }
-		, _name{ name }
-		, _result{ result }
-		, _expression{ expression }
+		, _dimension_names{ dimension_names }
+		, _dimension_kinds{ dimension_kinds }
+		, _dimension_expressions{ dimension_expressions }
+		, _dimension_defaults{ dimension_defaults }
+		, _parent_expressions{ parent_expressions }
+		, _parent_shoals{ parent_shoals }
 	{}
 
 private:
