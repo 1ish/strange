@@ -31,3 +31,5 @@ std::ostream& std__cout = discard;
 #include "strange_parser_boole_taste.h"
 #include "strange_parser_loop_taste.h"
 #include "strange_parser_code_taste.h"
+#include "strange_code_generate.h"
+#include "strange_code_generate_cpp.h"

@@ -1,9 +1,9 @@
 (	out :# $$strange::river::out[],
 	out.write["hello\n"],
-	null &&
+	false &&
 	{	'a' : out.write["value\n"],
 		2 : 'c',
-		'taste' :
+		taste :
 		{	//	template <typename _element_ = any_a<>, typename ___ego___ = collection_a<>>
 			//	class forest_t : public flock_t<___ego___>;
 			//	<forest{<<>>}[<strange::symbol>]>
