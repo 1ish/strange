@@ -179,6 +179,10 @@ private:
 			{
 				initial = _initial_shoal_or_herd(scope_symbol, fixed_herd, kind_shoal);
 			}
+			else if (token.symbol() == "<") // kind
+			{
+				initial = _initial_kind(scope_symbol, fixed_herd, kind_shoal);
+			}
 			//TODO ...
 			else
 			{
@@ -682,6 +686,34 @@ private:
 		return expression_shoal_t<>::create_(token, flock);
 	}
 
+	inline expression_a<> _initial_kind(
+		symbol_a<> const& scope_symbol,
+		unordered_herd_a<> const& fixed_herd,
+		unordered_shoal_a<> const& kind_shoal)
+	{
+		auto const token = _token_;
+		auto terms = flock_t<>::create_();
+		// order
+		int64_t order = 0;
+		while (_token_.tag() == "punctuation" && _token_.symbol() == "<")
+		{
+			++order;
+			if (!_next())
+			{
+				throw dis("strange::parser < with nothing following it:") + token.report_();
+			}
+		}
+		// name
+		// dimensions
+		// aspects
+		// paramters
+		// result
+		// reference
+		// optional
+		throw dis("strange::parser ***kind***:") + token.report_();
+		return expression_kind_t<>::create_(token, terms);
+	}
+	
 	inline expression_a<> _subsequent(
 		int64_t const min_precedence,
 		expression_a<> const& initial,

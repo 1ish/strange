@@ -402,6 +402,7 @@ class tokenizer_t : public thing_t<___ego___>
 					case '|':
 					case '$':
 					case '=':
+					case '^':
 						token = char1;
 						if (char1 == char2)
 						{
