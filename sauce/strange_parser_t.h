@@ -705,7 +705,8 @@ private:
 		}
 		terms.push_back(number_int_64_t<>::create(order));
 		// name
-		if (_token_.tag() == "name")
+		bool const name = _token_.tag() == "name";
+		if (name)
 		{
 			terms.push_back(_token_.symbol_());
 			if (!_next())
@@ -718,7 +719,8 @@ private:
 			terms.push_back(sym(""));
 		}
 		// dimensions
-		if (_token_.tag() == "punctuation" && _token_.symbol() == "{")
+		bool const dimensions = _token_.tag() == "punctuation" && _token_.symbol() == "{";
+		if (dimensions)
 		{
 			terms.push_back(expression_flock_t<>::create_(token, _elements(scope_symbol, fixed_herd, kind_shoal)));
 			if (_it_ == _end_)
@@ -731,7 +733,8 @@ private:
 			terms.push_back(expression_flock_t<>::create(token));
 		}
 		// aspects
-		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
+		bool const aspects = _token_.tag() == "punctuation" && _token_.symbol() == "[";
+		if (aspects)
 		{
 			terms.push_back(expression_flock_t<>::create_(token, _elements(scope_symbol, fixed_herd, kind_shoal)));
 			if (_it_ == _end_)
@@ -744,7 +747,8 @@ private:
 			terms.push_back(expression_flock_t<>::create(token));
 		}
 		// paramters
-		if (_token_.tag() == "punctuation" && _token_.symbol() == "(")
+		bool const parameters = _token_.tag() == "punctuation" && _token_.symbol() == "(";
+		if (parameters)
 		{
 			terms.push_back(expression_flock_t<>::create_(token, _elements(scope_symbol, fixed_herd, kind_shoal)));
 			if (_it_ == _end_)
@@ -757,7 +761,8 @@ private:
 			terms.push_back(expression_flock_t<>::create(token));
 		}
 		// result
-		if (_token_.tag() == "punctuation" && _token_.symbol() == ":")
+		bool const result = _token_.tag() == "punctuation" && _token_.symbol() == ":";
+		if (result)
 		{
 			if (!_next())
 			{
@@ -790,17 +795,20 @@ private:
 			throw dis("strange::parser mismatched kind < and > pair:") + token.report_();
 		}
 		// reference
-		if (_it_ != _end_ && _token_.tag() == "punctuation" && _token_.symbol() == "&")
+		bool const reference = _it_ != _end_ && _token_.tag() == "punctuation" && _token_.symbol() == "&";
+		if (reference)
 		{
 			terms.push_back(yes());
 			_next();
 		}
 		// optional
-		if (_it_ != _end_ && _token_.tag() == "punctuation" &&
-			(_token_.symbol() == "#" || _token_.symbol() == "="))
+		bool const optional = _it_ != _end_ && _token_.tag() == "punctuation" &&
+			(_token_.symbol() == "#" || _token_.symbol() == "=");
+		if (optional)
 		{
 			terms.push_back(yes());
 		}
+		//TODO remove redundant terms
 		return expression_kind_t<>::create_(token, terms);
 	}
 	
