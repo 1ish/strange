@@ -700,17 +700,107 @@ private:
 			++order;
 			if (!_next())
 			{
-				throw dis("strange::parser < with nothing following it:") + token.report_();
+				throw dis("strange::parser kind < with nothing following it:") + token.report_();
 			}
 		}
+		terms.push_back(number_int_64_t<>::create(order));
 		// name
+		if (_token_.tag() == "name")
+		{
+			terms.push_back(_token_.symbol_());
+			if (!_next())
+			{
+				throw dis("strange::parser kind name with nothing following it:") + token.report_();
+			}
+		}
+		else
+		{
+			terms.push_back(sym(""));
+		}
 		// dimensions
+		if (_token_.tag() == "punctuation" && _token_.symbol() == "{")
+		{
+			terms.push_back(expression_flock_t<>::create_(token, _elements(scope_symbol, fixed_herd, kind_shoal)));
+			if (_it_ == _end_)
+			{
+				throw dis("strange::parser kind } with nothing following it:") + token.report_();
+			}
+		}
+		else
+		{
+			terms.push_back(expression_flock_t<>::create(token));
+		}
 		// aspects
+		if (_token_.tag() == "punctuation" && _token_.symbol() == "[")
+		{
+			terms.push_back(expression_flock_t<>::create_(token, _elements(scope_symbol, fixed_herd, kind_shoal)));
+			if (_it_ == _end_)
+			{
+				throw dis("strange::parser kind ] with nothing following it:") + token.report_();
+			}
+		}
+		else
+		{
+			terms.push_back(expression_flock_t<>::create(token));
+		}
 		// paramters
+		if (_token_.tag() == "punctuation" && _token_.symbol() == "(")
+		{
+			terms.push_back(expression_flock_t<>::create_(token, _elements(scope_symbol, fixed_herd, kind_shoal)));
+			if (_it_ == _end_)
+			{
+				throw dis("strange::parser kind ) with nothing following it:") + token.report_();
+			}
+		}
+		else
+		{
+			terms.push_back(expression_flock_t<>::create(token));
+		}
 		// result
+		if (_token_.tag() == "punctuation" && _token_.symbol() == ":")
+		{
+			if (!_next())
+			{
+				throw dis("strange::parser kind : with nothing following it:") + token.report_();
+			}
+			if (_token_.tag() != "punctuation" || _token_.symbol() != "<")
+			{
+				throw dis("strange::parser kind : without result following it:") + _token_.report_();
+			}
+			terms.push_back(_initial_kind(scope_symbol, fixed_herd, kind_shoal));
+			if (_it_ == _end_)
+			{
+				throw dis("strange::parser kind result with nothing following it:") + token.report_();
+			}
+		}
+		while (_token_.tag() == "punctuation" && _token_.symbol() == ">")
+		{
+			_next();
+			if (!--order)
+			{
+				break;
+			}
+			if (_it_ == _end_)
+			{
+				throw dis("strange::parser kind > with nothing following it:") + token.report_();
+			}
+		}
+		if (order)
+		{
+			throw dis("strange::parser mismatched kind < and > pair:") + token.report_();
+		}
 		// reference
+		if (_it_ != _end_ && _token_.tag() == "punctuation" && _token_.symbol() == "&")
+		{
+			terms.push_back(yes());
+			_next();
+		}
 		// optional
-		throw dis("strange::parser ***kind***:") + token.report_();
+		if (_it_ != _end_ && _token_.tag() == "punctuation" &&
+			(_token_.symbol() == "#" || _token_.symbol() == "="))
+		{
+			terms.push_back(yes());
+		}
 		return expression_kind_t<>::create_(token, terms);
 	}
 	
@@ -1015,9 +1105,10 @@ private:
 	{
 		bool const square = _token_.symbol() == "[";
 		bool const round = _token_.symbol() == "(";
+		bool const curly = _token_.symbol() == "{";
 		auto new_fixed_herd = fixed_herd;
 		auto new_kind_shoal = kind_shoal;
-		if (round)
+		if (round || curly)
 		{
 			new_fixed_herd.mutate_thing();
 			new_kind_shoal.mutate_thing();
@@ -1029,7 +1120,8 @@ private:
 		auto flock = flock_t<>::create_();
 		if (_token_.tag() == "punctuation" &&
 			(square && _token_.symbol() == "]" ||
-				round && _token_.symbol() == ")"))
+				round && _token_.symbol() == ")" ||
+				curly && _token_.symbol() == "}"))
 		{
 			_next();
 		}
@@ -1050,7 +1142,8 @@ private:
 				throw dis("strange::parser , with nothing following it:") + _token_.report_();
 			}
 			if (square && _token_.symbol() == "]" ||
-				round && _token_.symbol() == ")")
+				round && _token_.symbol() == ")" ||
+				curly && _token_.symbol() == "}")
 			{
 				_next();
 				break;

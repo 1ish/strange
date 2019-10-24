@@ -5,11 +5,11 @@ false &&
 			(	// no parents
 				{	
 					// exposure
-					//TODO extract_thing #= (:<one_t>&#),
+					//TODO extract_thing :# (:<one_t>&#),
 					//TODO mutate_thing(:<one_t>&=),
 
 					// reflection
-					type #= (:<symbol>=()),
+					type :# (:<symbol>=()),
 				}
 			)
 		)
