@@ -778,6 +778,10 @@ private:
 				throw dis("strange::parser kind result with nothing following it:") + token.report_();
 			}
 		}
+		else
+		{
+			terms.push_back(expression_literal_t<>::create_(token, flock_t<>::create_(kind_t<>::create_())));
+		}
 		while (_token_.tag() == "punctuation" && _token_.symbol() == ">")
 		{
 			_next();
@@ -801,14 +805,41 @@ private:
 			terms.push_back(yes());
 			_next();
 		}
+		else
+		{
+			terms.push_back(no());
+		}
 		// optional
-		bool const optional = _it_ != _end_ && _token_.tag() == "punctuation" &&
-			(_token_.symbol() == "#" || _token_.symbol() == "=");
-		if (optional)
+		if (_it_ != _end_ && _token_.tag() == "punctuation" &&
+			(_token_.symbol() == "#" || _token_.symbol() == "="))
 		{
 			terms.push_back(yes());
+		}		
+		else if (!reference)
+		{
+			// remove redundant terms
+			terms.pop_back_();
+			if (!result)
+			{
+				terms.pop_back_();
+				if (!parameters)
+				{
+					terms.pop_back_();
+					if (!aspects)
+					{
+						terms.pop_back_();
+						if (!dimensions)
+						{
+							terms.pop_back_();
+							if (!name)
+							{
+								terms.pop_back_();
+							}
+						}
+					}
+				}
+			}
 		}
-		//TODO remove redundant terms
 		return expression_kind_t<>::create_(token, terms);
 	}
 	
