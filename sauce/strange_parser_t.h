@@ -179,7 +179,7 @@ private:
 			{
 				initial = _initial_shoal_or_herd(scope_symbol, fixed_herd, kind_shoal);
 			}
-			else if (token.symbol() == "<") // kind
+			else if (token.symbol() == "<" || token.symbol() == ":<") // kind
 			{
 				initial = _initial_kind(scope_symbol, fixed_herd, kind_shoal);
 			}
@@ -692,10 +692,12 @@ private:
 		unordered_shoal_a<> const& kind_shoal)
 	{
 		auto const token = _token_;
+		bool const colon = token.tag() == "punctuation" && token.symbol() == ":<";
 		auto terms = flock_t<>::create_();
 		// order
 		int64_t order = 0;
-		while (_token_.tag() == "punctuation" && _token_.symbol() == "<")
+		while (!order && colon ||
+			_token_.tag() == "punctuation" && _token_.symbol() == "<")
 		{
 			++order;
 			if (!_next())
@@ -810,11 +812,12 @@ private:
 			terms.push_back(no());
 		}
 		// optional
-		if (_it_ != _end_ && _token_.tag() == "punctuation" &&
+		if (colon && _it_ != _end_ && _token_.tag() == "punctuation" &&
 			(_token_.symbol() == "#" || _token_.symbol() == "="))
 		{
 			terms.push_back(yes());
-		}		
+			_next();
+		}
 		else if (!reference)
 		{
 			// remove redundant terms

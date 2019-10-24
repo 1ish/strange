@@ -9,7 +9,7 @@ false &&
 					//TODO mutate_thing(:<one_t>&=),
 
 					// reflection
-					type :# (:<symbol>=()),
+					type :# (<symbol>),
 				}
 			)
 		)
