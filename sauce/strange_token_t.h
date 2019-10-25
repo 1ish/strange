@@ -101,7 +101,7 @@ public:
 		{
 			throw dis("strange::token::create_" + tag + " passed empty range");
 		}
-		any_a<> filename = *it;
+		auto const filename = *it;
 		if (!check<symbol_a<>>(filename))
 		{
 			throw dis("strange::token::create_" + tag + " passed non-symbol filename");
@@ -110,7 +110,7 @@ public:
 		{
 			throw dis("strange::token::create_" + tag + "passed short range");
 		}
-		any_a<> line = *it;
+		auto const line = *it;
 		if (!check<number_data_a<int64_t>>(line))
 		{
 			throw dis("strange::token::create_" + tag + " passed non-number-int-64 line");
@@ -119,7 +119,7 @@ public:
 		{
 			throw dis("strange::token::create_" + tag + " passed short range");
 		}
-		any_a<> position = *it;
+		auto const position = *it;
 		if (!check<number_data_a<int64_t>>(position))
 		{
 			throw dis("strange::token::create_" + tag + " passed non-number-int-64 position");
@@ -128,7 +128,7 @@ public:
 		{
 			throw dis("strange::token::create_" + tag + " passed short range");
 		}
-		any_a<> symbol = *it;
+		auto const symbol = *it;
 		if (!check<symbol_a<>>(symbol))
 		{
 			throw dis("strange::token::create_" + tag + " passed non-symbol symbol");
@@ -137,7 +137,7 @@ public:
 		{
 			return member(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(symbol), number_int_64_t<>::create(-1));
 		}
-		any_a<> precedence = *it;
+		auto const precedence = *it;
 		if (!check<number_data_a<int64_t>>(precedence))
 		{
 			throw dis("strange::token::create_" + tag + " passed non-int-64 precedence");
