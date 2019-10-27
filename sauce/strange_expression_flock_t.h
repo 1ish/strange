@@ -17,6 +17,11 @@ public:
 		return expression_substitute_t<over>::create(over{ expression_flock_t<>(token, terms) });
 	}
 
+	static inline expression_a<> create(token_a<> const& token)
+	{
+		return expression_substitute_t<over>::create(over{ expression_flock_t<>(token, flock_t<>::create_()) });
+	}
+
 	// reflection
 	static inline symbol_a<> type_()
 	{

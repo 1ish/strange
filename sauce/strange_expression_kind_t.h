@@ -145,7 +145,7 @@ public:
 		{
 			return kind_t<>::create_(_order, _name);
 		}
-		auto dimensions = _dimensions.operate(thing, range);
+		auto const dimensions = _dimensions.operate(thing, range);
 		if (!check<flock_a<>>(dimensions))
 		{
 			throw dis(_token.report() + "strange::expression_kind::operate dimensions are not a flock");
@@ -154,7 +154,7 @@ public:
 		{
 			return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions));
 		}
-		auto aspects = _aspects.operate(thing, range);
+		auto const aspects = _aspects.operate(thing, range);
 		if (!check<flock_a<>>(aspects))
 		{
 			throw dis(_token.report() + "strange::expression_kind::operate aspects are not a flock");
@@ -163,7 +163,7 @@ public:
 		{
 			return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects));
 		}
-		auto parameters = _parameters.operate(thing, range);
+		auto const parameters = _parameters.operate(thing, range);
 		if (!check<flock_a<>>(parameters))
 		{
 			throw dis(_token.report() + "strange::expression_kind::operate parameters are not a flock");
@@ -172,7 +172,7 @@ public:
 		{
 			return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters));
 		}
-		auto result = _result.operate(thing, range);
+		auto const result = _result.operate(thing, range);
 		if (!check<symbol_a<>>(result))
 		{
 			throw dis(_token.report() + "strange::expression_kind::operate result is not a symbol");

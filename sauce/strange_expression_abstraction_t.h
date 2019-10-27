@@ -67,7 +67,9 @@ public:
 				}
 				break;
 			}
-			if (term.type_().is("strange::expression_local_at"))
+			if (term.type_().is("strange::expression_local_at") ||
+				term.type_().is("strange::expression_intimate_attribute") &&
+					cast<expression_a<>>(term).terms_().size() == 1)
 			{
 				auto subterms = cast<expression_a<>>(term).terms_();
 				if (subterms.size() != 1)
@@ -83,7 +85,9 @@ public:
 				value = expression_t<>::create(token);
 			}
 			else if (term.type_().is("strange::expression_local_insert") ||
-				term.type_().is("strange::expression_local_update"))
+				term.type_().is("strange::expression_local_update") ||
+				term.type_().is("strange::expression_intimate_attribute") &&
+					cast<expression_a<>>(term).terms_().size() == 3)
 			{
 				auto subterms = cast<expression_a<>>(term).terms_();
 				if (subterms.size() != 3)
