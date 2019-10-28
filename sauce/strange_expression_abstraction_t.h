@@ -19,7 +19,6 @@ public:
 		auto dimension_expressions = flock_t<>::create_();
 		auto dimension_defaults = flock_t<>::create_();
 		auto parent_expressions = flock_t<>::create_();
-		auto parent_shoals = flock_t<>::create_();
 		any_a<> name = no();
 		any_a<> kind = no();
 		any_a<> value = no();
@@ -50,20 +49,7 @@ public:
 					{
 						throw dis(token.report() + "strange::expression_abstraction::create passed non-expression subterm");
 					}
-					try
-					{
-						auto const parent_shoal = cast<expression_a<>>(subterm).evaluate_();
-						if (!check<unordered_shoal_a<>>(parent_shoal))
-						{
-							throw dis("parent does not evaluate to an unordered shoal");
-						}
-						parent_expressions.push_back(subterm);
-						parent_shoals.push_back(parent_shoal);
-					}
-					catch (misunderstanding_a<>& misunderstanding)
-					{
-						throw dis("strange::expression_abstraction::create parent shoal evaluation error:") + token.report_() + misunderstanding;
-					}
+					parent_expressions.push_back(subterm);
 				}
 				break;
 			}
@@ -126,8 +112,8 @@ public:
 				throw dis("strange::expression_abstraction::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<over>::create(over{ expression_abstraction_t<>(token, terms, dimension_names, dimension_kinds, dimension_expressions, dimension_defaults, parent_expressions, parent_shoals) },
-			abstraction_t<>::create_(token, dimension_names, dimension_kinds, dimension_defaults, parent_shoals));
+		return expression_substitute_t<over>::create(over{ expression_abstraction_t<>(token, terms, dimension_names, dimension_kinds, dimension_expressions, dimension_defaults, parent_expressions) },
+			abstraction_t<>::create_(token, dimension_names, dimension_kinds, dimension_defaults, parent_expressions));
 	}
 
 	// reflection
@@ -209,9 +195,8 @@ protected:
 	flock_a<> const _dimension_expressions;
 	flock_a<> const _dimension_defaults;
 	flock_a<> const _parent_expressions;
-	flock_a<> const _parent_shoals;
 
-	inline expression_abstraction_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_expressions, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions, flock_a<> const& parent_shoals)
+	inline expression_abstraction_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_expressions, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _dimension_names{ dimension_names }
@@ -219,7 +204,6 @@ protected:
 		, _dimension_expressions{ dimension_expressions }
 		, _dimension_defaults{ dimension_defaults }
 		, _parent_expressions{ parent_expressions }
-		, _parent_shoals{ parent_shoals }
 	{}
 
 private:

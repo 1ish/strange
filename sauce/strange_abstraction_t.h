@@ -4,12 +4,12 @@
 namespace strange
 {
 
-template <typename ___ego___ = unordered_shoal_a<>>
-class abstraction_t : public unordered_shoal_t<false, ___ego___>
+template <typename ___ego___ = operation_a<>>
+class abstraction_t : public operation_t<___ego___>
 {
 public:
 	// override
-	using over = collection_o<abstraction_t<>>;
+	using over = thing_o<abstraction_t<>>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
@@ -55,17 +55,17 @@ public:
 		{
 			throw dis("strange::abstraction::create passed short range");
 		}
-		auto const parent_shoals = *it;
-		if (!check<flock_a<>>(parent_shoals))
+		auto const parent_expressions = *it;
+		if (!check<flock_a<>>(parent_expressions))
 		{
-			throw dis(cast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock parent shoals");
+			throw dis(cast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock parent expressions");
 		}
-		return create_(cast<token_a<>>(token), cast<flock_a<>>(dimension_names), cast<flock_a<>>(dimension_kinds), cast<flock_a<>>(dimension_defaults), cast<flock_a<>>(parent_shoals));
+		return create_(cast<token_a<>>(token), cast<flock_a<>>(dimension_names), cast<flock_a<>>(dimension_kinds), cast<flock_a<>>(dimension_defaults), cast<flock_a<>>(parent_expressions));
 	}
 
-	static inline unordered_shoal_a<> create_(token_a<> const& token, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_shoals)
+	static inline operation_a<> create_(token_a<> const& token, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
 	{
-		return unordered_shoal_a<>{ over{ abstraction_t<>(token, dimension_names, dimension_kinds, dimension_defaults, parent_shoals) } };
+		return operation_a<>{ over{ abstraction_t<>(token, dimension_names, dimension_kinds, dimension_defaults, parent_expressions) } };
 	}
 
 	// reflection
@@ -79,24 +79,48 @@ public:
 		reflection<abstraction_t<>>::share(shoal);
 	}
 
-	// abstraction
-	inline void merge(unordered_shoal_a<> const& parent)
+	// function
+	inline any_a<> operate(any_a<>&, range_a<> const& range) const
 	{
-		//TODO dimensions
-		for (auto const& member : parent.extract())
+		auto local_shoal = unordered_shoal_t<>::create_();
+		auto& local = local_shoal.reference();
+		forward_const_iterator_a<> ait = range.cbegin_();
+		auto nit = _dimension_names.extract().cbegin();
+		auto kit = _dimension_kinds.extract().cbegin();
+		for (auto const& def : _dimension_defaults.extract())
 		{
-			if (!check<symbol_a<>>(member.first))
+			auto const kind = cast<kind_a<>>(*kit++);
+			bool const more = ait != range.cend_();
+			if (!more && !kind.optional())
 			{
-				throw dis("strange::abstraction::create merge passed non-symbol key");
+				throw dis(_token.report() + "strange::abstraction::operate not passed enough arguments");
 			}
-			auto key = cast<symbol_a<>>(member.first);
-			if (_map.find(key) != _map.cend())
+			any_a<> const argument = more ? (*ait++) : def;
+			if (!argument.kinds_().has_(kind))
 			{
-				// no overrides
-				throw dis("strange::abstraction::create merge invalid override");
+				throw dis(_token.report() + "strange::abstraction::operate kind does not include argument");
 			}
-			_map.emplace(key, member.second);
+			local.emplace(*nit++, argument);
 		}
+		auto child = unordered_shoal_t<>::create_();
+		for (auto const& expression : _parent_expressions)
+		{
+			auto parent = no();
+			try
+			{
+				parent = expression.operate(local_shoal, range);
+			}
+			catch (misunderstanding_a<>& misunderstanding)
+			{
+				throw dis("strange::abstraction::operate parent shoal evaluation error:") + _token.report_() + misunderstanding;
+			}
+			if (!check<unordered_shoal_a<>>(parent))
+			{
+				throw dis("strange::abstraction::operate parent expression returned non-unordered-shoal");
+			}
+			_merge(cast<unordered_shoal_a<>>(parent), child);
+		}
+		return child;
 	}
 
 protected:
@@ -104,23 +128,33 @@ protected:
 	flock_a<> const _dimension_names;
 	flock_a<> const _dimension_kinds;
 	flock_a<> const _dimension_defaults;
-	flock_a<> const _parent_shoals;
+	flock_a<> const _parent_expressions;
 
-	inline abstraction_t(token_a<> const& token, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_shoals)
-		: unordered_shoal_t{ std_unordered_map_any_any{} }
+	inline abstraction_t(token_a<> const& token, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
+		: operation_t(false, false) //TODO pure/literal
 		, _token{ token }
 		, _dimension_names{ dimension_names }
 		, _dimension_kinds{ dimension_kinds }
 		, _dimension_defaults{ dimension_defaults }
-		, _parent_shoals{ parent_shoals }
+		, _parent_expressions{ parent_expressions }
+	{}
+
+	static inline void _merge(unordered_shoal_a<> const& parent, unordered_shoal_a<>& child)
 	{
-		for (auto const& parent : parent_shoals)
+		auto& map = child.reference();
+		for (auto const& member : parent.extract())
 		{
-			if (!check<unordered_shoal_a<>>(parent))
+			if (!check<symbol_a<>>(member.first))
 			{
-				throw dis("strange::abstraction::create passed non-unordered-shoal parent");
+				throw dis("strange::abstraction::create merge passed non-symbol key");
 			}
-			merge(cast<unordered_shoal_a<>>(parent));
+			auto key = cast<symbol_a<>>(member.first);
+			if (map.find(key) != map.cend())
+			{
+				// no overrides
+				throw dis("strange::abstraction::create merge invalid override");
+			}
+			map.emplace(key, member.second);
 		}
 	}
 

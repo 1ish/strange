@@ -7,7 +7,7 @@
 		{	//	template <typename _element_ = any_a<>, typename ___ego___ = collection_a<>>
 			//	class forest_t : public flock_t<___ego___>;
 			//	<forest{<<>>}[<strange::symbol>]>
-/*
+
 			<collection> :: abstraction
 			(	_element_ :<<>># <>,
 				(	$$<strange::range>[_element_],
@@ -18,11 +18,11 @@
 					}
 				)
 			),
-
+/*
 			<forest> :: abstraction
 			(	_element_ :<<>># <>,
 				(	$$<taste::collection>[_element_],
-					{},
+					{}
 				)
 			),
 
