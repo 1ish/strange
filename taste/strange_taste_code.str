@@ -18,14 +18,14 @@
 					}
 				)
 			),
-/*
+
 			<forest> :: abstraction
 			(	_element_ :<<>># <>,
 				(	$$<taste::collection>[_element_],
 					{}
 				)
 			),
-
+/*
 			forest :: thing
 			(	_element_ :<<>># <>,
 				(	$$strange::flock[_element_],

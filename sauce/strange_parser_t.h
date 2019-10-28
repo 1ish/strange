@@ -625,17 +625,12 @@ private:
 				throw dis("strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
 			}
 			auto key_symbol = no();
-			if (key.literal())
+			try
 			{
-				try
-				{
-					key_symbol = key.evaluate_();
-				}
-				catch (misunderstanding_a<>& misunderstanding)
-				{
-					throw dis("strange::parser shoal " + operator_token.symbol() + " key evaluation error:") + operator_token.report_() + misunderstanding;
-				}
+				key_symbol = key.evaluate_();
 			}
+			catch (misunderstanding_a<>&)
+			{}
 			auto const new_scope_symbol = _scope_name(scope_symbol,
 				check<symbol_a<>>(key_symbol) ? cast<symbol_a<>>(key_symbol) : sym("#"));
 
