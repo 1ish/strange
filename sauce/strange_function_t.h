@@ -93,6 +93,14 @@ public:
 			}
 			return ret.result;
 		}
+		catch (expression_t<>::break_i&)
+		{
+			throw dis(_token.report() + "strange::function::operate break caught trying to escape");
+		}
+		catch (expression_t<>::continue_i&)
+		{
+			throw dis(_token.report() + "strange::function::operate continue caught trying to escape");
+		}
 	}
 
 protected:
