@@ -53,15 +53,12 @@ public:
 				}
 				break;
 			}
-			if (term.type_().is("strange::expression_local_at") ||
-				term.type_().is("strange::expression_intimate_attribute") &&
-					cast<expression_a<>>(term).terms_().size() == 1)
+			int64_t const count = term.type_().is("strange::expression_intimate_attribute")
+				? cast<expression_a<>>(term).terms_().size() 
+				: 0;
+			if (count == 1)
 			{
-				auto subterms = cast<expression_a<>>(term).terms_();
-				if (subterms.size() != 1)
-				{
-					throw dis(token.report() + "strange::expression_abstraction::create passed wrong number of dimension subterms");
-				}
+				auto const subterms = cast<expression_a<>>(term).terms_();
 				name = subterms.at_index(0);
 				if (!check<symbol_a<>>(name))
 				{
@@ -70,16 +67,9 @@ public:
 				kind = kind_t<>::create_();
 				value = expression_t<>::create(token);
 			}
-			else if (term.type_().is("strange::expression_local_insert") ||
-				term.type_().is("strange::expression_local_update") ||
-				term.type_().is("strange::expression_intimate_attribute") &&
-					cast<expression_a<>>(term).terms_().size() == 3)
+			else if (count == 3)
 			{
-				auto subterms = cast<expression_a<>>(term).terms_();
-				if (subterms.size() != 3)
-				{
-					throw dis(token.report() + "strange::expression_abstraction::create passed wrong number of dimension subterms");
-				}
+				auto const subterms = cast<expression_a<>>(term).terms_();
 				name = subterms.at_index(0);
 				if (!check<symbol_a<>>(name))
 				{
