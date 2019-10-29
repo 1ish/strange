@@ -274,15 +274,13 @@ private:
 		if (_next() && _token_.tag() == "punctuation" &&
 			(_token_.symbol() == ":=" || _token_.symbol() == ":<"))
 		{
+			bool optional = true;
 			if (_token_.symbol() == ":<")
 			{
 				try
 				{
 					auto const kind = cast<kind_a<>>(_kind(scope_symbol, fixed_herd, kind_shoal).evaluate_());
-					if (!kind.optional())
-					{
-						throw dis("kind without assignment");
-					}
+					optional = kind.optional();
 					terms.push_back(kind);
 				}
 				catch (misunderstanding_a<>& misunderstanding)
@@ -292,13 +290,17 @@ private:
 			}
 			else
 			{
-				if (!_next())
+				_next();
+				terms.push_back(kind_t<>::create_());
+			}
+			if (optional)
+			{
+				if (_it_ == _end_)
 				{
 					throw dis("strange::parser attribute assignment with nothing following it:") + token.report_();
 				}
-				terms.push_back(kind_t<>::create_());
+				terms.push_back_(_initial(0, scope_symbol, fixed_herd, kind_shoal)); // assignment
 			}
-			terms.push_back_(_initial(0, scope_symbol, fixed_herd, kind_shoal)); // assignment
 		}
 		return expression_intimate_attribute_t<>::create_(token, terms);
 	}

@@ -35,7 +35,7 @@ public:
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_intimate_attribute::create passed short range");
+			return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, cast<symbol_a<>>(member), cast<kind_a<>>(kind)) });
 		}
 		auto const value = *it;
 		if (!check<expression_a<>>(value))
@@ -109,11 +109,11 @@ protected:
 	expression_a<> const _value;
 	bool const _assign;
 
-	inline expression_intimate_attribute_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& member)
+	inline expression_intimate_attribute_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& member, kind_a<> const& kind = kind_t<>::create_())
 		: expression_t(token, is_pure_literal(token, member, expression_t<>::create(token)))
 		, _terms{ terms }
 		, _member{ member }
-		, _kind{ kind_t<>::create_() }
+		, _kind{ kind }
 		, _value{ expression_t<>::create(token) }
 		, _assign{ false }
 	{}

@@ -20,7 +20,7 @@
 			),
 
 			<forest> :: abstraction
-			(	_element_ :<<>># <>,
+			(	_element_ :<<>>,
 				(	$$<taste::collection>[_element_],
 					{}
 				)
