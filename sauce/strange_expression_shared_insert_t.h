@@ -35,6 +35,7 @@ public:
 		}
 		if (++it == terms.cend_())
 		{
+			//TODO !optional
 			throw dis(token.report() + "strange::expression_shared_insert::create not passed sufficient terms");
 		}
 		any_a<> val = *it;

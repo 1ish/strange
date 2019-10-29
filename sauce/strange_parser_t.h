@@ -392,6 +392,7 @@ private:
 		auto kind = kind_shoal.at_(name);
 		bool insert = false;
 		bool update = false;
+		bool optional = true;
 		if (_next() && _token_.tag() == "punctuation") // consume
 		{
 			auto const op = _token_.symbol();
@@ -433,7 +434,17 @@ private:
 				}
 				else if (op == ":<" || op == ":{")
 				{
-					//TODO parse kind and fixed
+					//TODO parse fixed
+					auto const kind_expression = _kind(scope_symbol, fixed_herd, kind_shoal);
+					try
+					{
+						kind = kind_expression.evaluate_();
+						optional = cast<kind_a<>>(kind).optional();
+					}
+					catch (misunderstanding_a<>&)
+					{
+						kind = kind_expression; //TODO
+					}
 					insert = true;
 				}
 			}
@@ -445,7 +456,9 @@ private:
 				throw dis("strange::parser local assignment with no right-hand side:") + token.report_();
 			}
 			unordered_herd_a<>(fixed_herd, true).insert(name);
-			auto const rhs = _initial(0, scope_symbol, fixed_herd, kind_shoal);
+			any_a<> const rhs = optional
+				? _initial(0, scope_symbol, fixed_herd, kind_shoal)
+				: no();
 			if (!fixed)
 			{
 				unordered_herd_a<>(fixed_herd, true).erase(name);
@@ -453,11 +466,22 @@ private:
 			if (insert)
 			{
 				unordered_shoal_a<>(kind_shoal, true).insert_(name, kind);
-				if (shared)
+				if (optional)
 				{
-					return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
+					if (shared)
+					{
+						return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
+					}
+					return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 				}
-				return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
+				else
+				{
+					if (shared)
+					{
+						return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind));
+					}
+					return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind));
+				}
 			}
 			if (update)
 			{
