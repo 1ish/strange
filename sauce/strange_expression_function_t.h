@@ -15,12 +15,12 @@ public:
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		auto names = flock_t<>::create_();
-		auto params = flock_t<>::create_();
-		auto values = flock_t<>::create_();
+		auto kinds = flock_t<>::create_();
+		auto expressions = flock_t<>::create_();
 		auto defaults = flock_t<>::create_();
 		any_a<> name = sym("");
 		any_a<> kind = kind_t<>::create_();
-		any_a<> value = expression_t<>::create(token);
+		any_a<> expression = expression_t<>::create(token);
 		auto it = terms.cbegin_();
 		bool end = it == terms.cend_();
 		while (!end)
@@ -33,9 +33,7 @@ public:
 			}
 			if (end)
 			{
-				name = sym("");
-				kind = kind_t<>::create_();
-				value = term;
+				expression = term;
 				break;
 			}
 			if (term.type_().is("strange::expression_local_at"))
@@ -51,7 +49,7 @@ public:
 					throw dis(token.report() + "strange::expression_function::create passed non-symbol name");
 				}
 				kind = kind_t<>::create_();
-				value = expression_t<>::create(token);
+				expression = expression_t<>::create(token);
 			}
 			else if (term.type_().is("strange::expression_local_insert") ||
 				term.type_().is("strange::expression_local_update"))
@@ -66,15 +64,15 @@ public:
 				{
 					throw dis(token.report() + "strange::expression_function::create passed non-symbol name");
 				}
-				kind = subterms.at_index(1); //TODO optional?
+				kind = subterms.at_index(1);
 				if (!check<kind_a<>>(kind))
 				{
 					throw dis(token.report() + "strange::expression_function::create passed non-kind");
 				}
-				value = subterms.at_index(2);
-				if (!check<expression_a<>>(value))
+				expression = subterms.at_index(2);
+				if (!check<expression_a<>>(expression))
 				{
-					throw dis(token.report() + "strange::expression_function::create passed non-expression value");
+					throw dis(token.report() + "strange::expression_function::create passed non-expression");
 				}
 			}
 			else
@@ -82,19 +80,19 @@ public:
 				throw dis(token.report() + "strange::expression_function::create passed invalid parameter term");
 			}
 			names.push_back(name);
-			params.push_back(kind);
-			values.push_back(value);
+			kinds.push_back(kind);
+			expressions.push_back(expression);
 			try
 			{
-				defaults.push_back(cast<expression_a<>>(value).evaluate_());
+				defaults.push_back(cast<expression_a<>>(expression).evaluate_());
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
 				throw dis("strange::expression_function::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<over>::create(over{ expression_function_t<>(token, terms, names, params, values, defaults, cast<symbol_a<>>(name), cast<kind_a<>>(kind), cast<expression_a<>>(value)) },
-			function_t<>::create_(token, names, params, defaults, cast<symbol_a<>>(name), cast<kind_a<>>(kind), cast<expression_a<>>(value)));
+		return expression_substitute_t<over>::create(over{ expression_function_t<>(token, terms, names, kinds, expressions, defaults, cast<expression_a<>>(expression)) },
+			function_t<>::create_(token, names, kinds, defaults, cast<expression_a<>>(expression)));
 	}
 
 	// reflection
@@ -118,8 +116,8 @@ public:
 	{
 		river.write_string(" function(");
 		auto nit = _names.extract().cbegin();
-		auto pit = _params.extract().cbegin();
-		auto vit = _values.extract().cbegin();
+		auto kit = _kinds.extract().cbegin();
+		auto eit = _expressions.extract().cbegin();
 		bool first = true;
 		for (auto const& def : _defaults.extract())
 		{
@@ -132,11 +130,11 @@ public:
 				river.write_string(",");
 			}
 			auto name = cast<symbol_a<>>(*nit++);
-			auto kind = cast<kind_a<>>(*pit++);
-			auto value = cast<expression_a<>>(*vit++);
+			auto kind = cast<kind_a<>>(*kit++);
+			auto expression = cast<expression_a<>>(*eit++);
 			river.write_string(name.to_string() + ":");
 			river.write_string(kind.to_string() + "=");
-			value.generate(version, indent, river);
+			expression.generate(version, indent, river);
 		}
 		river.write_string(")\n");
 		_expression.generate(version, indent, river);
@@ -146,8 +144,8 @@ public:
 	{
 		river.write_string(" [](");
 		auto nit = _names.extract().cbegin();
-		auto pit = _params.extract().cbegin();
-		auto vit = _values.extract().cbegin();
+		auto kit = _kinds.extract().cbegin();
+		auto eit = _expressions.extract().cbegin();
 		bool first = true;
 		for (auto const& def : _defaults.extract())
 		{
@@ -160,11 +158,11 @@ public:
 				river.write_string(",");
 			}
 			auto name = cast<symbol_a<>>(*nit++);
-			auto kind = cast<kind_a<>>(*pit++);
-			auto value = cast<expression_a<>>(*vit++);
+			auto kind = cast<kind_a<>>(*kit++);
+			auto expression = cast<expression_a<>>(*eit++);
 			river.write_string("catch(" + kind.name_().to_string() + "_a<> const& ");
 			river.write_string(name.to_string() + " =");
-			value.generate_cpp(version, indent, river);
+			expression.generate_cpp(version, indent, river);
 		}
 		river.write_string(")\n{\n");
 		_expression.generate_cpp(version, indent, river);
@@ -174,22 +172,18 @@ public:
 protected:
 	flock_a<> const _terms;
 	flock_a<> const _names;
-	flock_a<> const _params;
-	flock_a<> const _values;
+	flock_a<> const _kinds;
+	flock_a<> const _expressions;
 	flock_a<> const _defaults;
-	symbol_a<> const _name;
-	kind_a<> const _result;
 	expression_a<> const _expression;
 
-	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& params, flock_a<> const& values, flock_a<> const& defaults, symbol_a<> const& name, kind_a<> const& result, expression_a<> const& expression)
+	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& expressions, flock_a<> const& defaults, expression_a<> const& expression)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _names{ names }
-		, _params{ params }
-		, _values{ values }
+		, _kinds{ kinds }
+		, _expressions{ expressions }
 		, _defaults{ defaults }
-		, _name{ name }
-		, _result{ result }
 		, _expression{ expression }
 	{}
 

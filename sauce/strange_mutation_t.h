@@ -12,9 +12,9 @@ public:
 	using over = thing_o<mutation_t<>>;
 
 	// construction
-	static inline operation_a<> create_(token_a<> const& token, flock_a<> const& names, flock_a<> const& params, flock_a<> const& defaults, symbol_a<> const& name, kind_a<> const& result, expression_a<> const& expression)
+	static inline operation_a<> create_(token_a<> const& token, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& defaults, expression_a<> const& expression)
 	{
-		return operation_a<>{ over{ mutation_t<>(token, names, params, defaults, name, result, expression) } };
+		return operation_a<>{ over{ mutation_t<>(token, names, kinds, defaults, expression) } };
 	}
 
 	// reflection
@@ -34,7 +34,7 @@ public:
 
 	inline unordered_herd_a<> cats_() const
 	{
-		return _cats;
+		return cats(_cat);
 	}
 
 	inline kind_a<> kind_() const
@@ -44,7 +44,7 @@ public:
 
 	inline unordered_herd_a<> kinds_() const
 	{
-		return _kinds;
+		return kinds(_kind);
 	}
 
 	inline any_a<> eater_() const
@@ -62,17 +62,17 @@ public:
 		local.emplace(sym("^"), thing);
 		forward_const_iterator_a<> ait = range.cbegin_();
 		auto nit = _names.extract().cbegin();
-		auto pit = _params.extract().cbegin();
+		auto kit = _kinds.extract().cbegin();
 		for (auto const& def : _defaults.extract())
 		{
-			auto const param = cast<kind_a<>>(*pit++);
+			auto const kind = cast<kind_a<>>(*kit++);
 			bool const more = ait != range.cend_();
-			if (!more && !param.optional())
+			if (!more && !kind.optional())
 			{
 				throw dis(_token.report() + "strange::function::operate not passed enough arguments");
 			}
 			any_a<> const argument = more ? (*ait++) : def;
-			if (!argument.kinds_().has_(param))
+			if (!argument.kinds_().has_(kind))
 			{
 				throw dis(_token.report() + "strange::mutation::operate kind does not include argument");
 			}
@@ -80,19 +80,10 @@ public:
 		}
 		try
 		{
-			auto result = _expression.operate(local_shoal, range);
-			if (!result.kinds_().has_(_result))
-			{
-				throw dis(_token.report() + "strange::mutation::operate kind does not include result");
-			}
-			return result;
+			return _expression.operate(local_shoal, range);
 		}
 		catch (expression_t<>::return_i& ret)
 		{
-			if (!ret.result.kinds_().has_(_result))
-			{
-				throw dis(_token.report() + "strange::mutation::operate kind does not include result");
-			}
 			return ret.result;
 		}
 	}
@@ -100,30 +91,22 @@ public:
 protected:
 	token_a<> const _token;
 	flock_a<> const _names;
-	flock_a<> const _params;
+	flock_a<> const _kinds;
 	flock_a<> const _defaults;
-	symbol_a<> const _name;
-	kind_a<> const _result;
 	expression_a<> const _expression;
 	cat_a<> const _cat;
-	unordered_herd_a<> const _cats;
 	kind_a<> const _kind;
-	unordered_herd_a<> const _kinds;
 	unordered_shoal_a<> const _shared;
 
-	inline mutation_t(token_a<> const& token, flock_a<> const& names, flock_a<> const& params, flock_a<> const& defaults, symbol_a<> const& name, kind_a<> const& result, expression_a<> const& expression)
+	inline mutation_t(token_a<> const& token, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& defaults, expression_a<> const& expression)
 		: operation_t(expression.pure(), expression.literal())
 		, _token{ token }
 		, _names{ names }
-		, _params{ params }
+		, _kinds{ kinds }
 		, _defaults{ defaults }
-		, _name{ name }
-		, _result{ result }
 		, _expression{ expression }
-		, _cat{ cat_t<>::create_(number_int_64_t<>::create(1), sym(""), flock_t<>::create_(), _params, _result) }
-		, _cats{ cats(_cat) }
+		, _cat{ cat_t<>::create_(number_int_64_t<>::create(1), sym(""), flock_t<>::create_(), _kinds) }
 		, _kind{ kind_from_cat(_cat) }
-		, _kinds{ kinds(_kind) }
 		, _shared{ unordered_shoal_t<true>::create_() }
 	{}
 };
