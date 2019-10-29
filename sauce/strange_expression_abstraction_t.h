@@ -32,7 +32,7 @@ public:
 			{
 				throw dis(token.report() + "strange::expression_abstraction::create passed non-expression term");
 			}
-			if (end)
+			if (end) // parents
 			{
 				if (!term.type_().is("strange::expression_block"))
 				{
@@ -53,33 +53,32 @@ public:
 				}
 				break;
 			}
-			int64_t const count = term.type_().is("strange::expression_intimate_attribute")
-				? cast<expression_a<>>(term).terms_().size() 
-				: 0;
+			// dimensions
+			if (!term.type_().is("strange::expression_intimate_attribute"))
+			{
+				throw dis(token.report() + "strange::expression_abstraction::create passed invalid dimension term");
+			}
+			auto const subterms = cast<expression_a<>>(term).terms_();
+			int64_t const count = subterms.size();
+			name = subterms.at_index(0);
+			if (!check<symbol_a<>>(name))
+			{
+				throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol dimension name");
+			}
 			if (count == 1)
 			{
-				auto const subterms = cast<expression_a<>>(term).terms_();
-				name = subterms.at_index(0);
-				if (!check<symbol_a<>>(name))
-				{
-					throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol dimension name");
-				}
 				kind = kind_t<>::create_();
-				value = expression_t<>::create(token);
 			}
-			else if (count == 3)
+			else
 			{
-				auto const subterms = cast<expression_a<>>(term).terms_();
-				name = subterms.at_index(0);
-				if (!check<symbol_a<>>(name))
-				{
-					throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol dimension name");
-				}
-				kind = subterms.at_index(1); //TODO optional?
+				kind = subterms.at_index(1);
 				if (!check<kind_a<>>(kind))
 				{
 					throw dis(token.report() + "strange::expression_abstraction::create passed non-kind dimension kind");
 				}
+			}
+			if (count == 3)
+			{
 				value = subterms.at_index(2);
 				if (!check<expression_a<>>(value))
 				{
@@ -88,7 +87,7 @@ public:
 			}
 			else
 			{
-				throw dis(token.report() + "strange::expression_abstraction::create passed invalid dimension term");
+				value = expression_t<>::create(token);
 			}
 			dimension_names.push_back(name);
 			dimension_kinds.push_back(kind);
