@@ -29,7 +29,7 @@ public:
 			throw dis(token.report() + "strange::expression_shared_update::create not passed sufficient terms");
 		}
 		any_a<> kind = *it;
-		if (!check<kind_a<>>(kind))
+		if (!check<kind_a<>>(kind)) //TODO accept kind expression
 		{
 			throw dis(token.report() + "strange::expression_shared_update::create passed non-kind");
 		}

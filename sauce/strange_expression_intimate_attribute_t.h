@@ -29,7 +29,7 @@ public:
 			return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, cast<symbol_a<>>(member)) });
 		}
 		auto const kind = *it;
-		if (!check<kind_a<>>(kind))
+		if (!check<kind_a<>>(kind)) //TODO accept kind expression
 		{
 			throw dis(token.report() + "strange::expression_intimate_attribute::create passed non-kind term");
 		}
