@@ -38,6 +38,7 @@ public:
 		{
 			return expression_t<>::create(token_t<>::create_punctuation_());
 		}
+		_previous_ = token_t<>::create_punctuation_();
 		_token_ = cast<token_a<>>(*_it_);
 		if (_token_.tag() == "error")
 		{
@@ -53,7 +54,8 @@ protected:
 		, _tokenizer_{ tokenizer_t<>::create_(river_t<>::create_()) }
 		, _it_{ _tokenizer_.cbegin_() }
 		, _end_{ _tokenizer_.cend_() }
-		, _token_{ token_t<>::create_punctuation_() }
+		, _previous_{ token_t<>::create_punctuation_() }
+		, _token_{ _previous_ }
 	{
 		_shared_ += shared();
 	}
@@ -63,6 +65,7 @@ private:
 	range_a<> _tokenizer_;
 	forward_const_iterator_a<> _it_;
 	forward_const_iterator_a<> _end_;
+	token_a<> _previous_;
 	token_a<> _token_;
 
 	inline bool _next()
@@ -75,6 +78,7 @@ private:
 		{
 			return false;
 		}
+		_previous_ = _token_;
 		_token_ = cast<token_a<>>(*_it_);
 		if (_token_.tag() == "error")
 		{
@@ -433,8 +437,9 @@ private:
 				}
 				else if (op == ":<" || op == ":{")
 				{
-					//TODO parse fixed
 					auto const kind_expression = _kind(scope_symbol, fixed_herd, kind_shoal);
+					fixed = _previous_.tag() == "punctuation" && _previous_.symbol() == "#";
+					insert = true;
 					try
 					{
 						kind = kind_expression.evaluate_();
@@ -444,7 +449,6 @@ private:
 					{
 						kind = kind_expression; //TODO
 					}
-					insert = true;
 				}
 			}
 		}
@@ -760,6 +764,11 @@ private:
 	{
 		auto const token = _token_;
 		bool const colon = token.tag() == "punctuation" && token.symbol() == ":<";
+		bool const variant = token.tag() == "punctuation" && token.symbol() == ":{";
+		if (variant)
+		{
+			throw dis("strange::parser variants not yet implemented:") + token.report_(); //TODO variants
+		}
 		auto terms = flock_t<>::create_();
 
 		// order
