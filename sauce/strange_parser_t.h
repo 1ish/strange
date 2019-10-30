@@ -438,12 +438,13 @@ private:
 				else if (op == ":<" || op == ":{")
 				{
 					auto const kind_expression = _kind(scope_symbol, fixed_herd, kind_shoal);
-					fixed = _previous_.tag() == "punctuation" && _previous_.symbol() == "#";
+					bool const punctuation = _previous_.tag() == "punctuation";
+					fixed = punctuation && _previous_.symbol() == "#";
+					optional = fixed || punctuation && _previous_.symbol() == "=";
 					insert = true;
 					try
 					{
 						kind = kind_expression.evaluate_();
-						optional = cast<kind_a<>>(kind).optional();
 					}
 					catch (misunderstanding_a<>&)
 					{
