@@ -175,7 +175,6 @@ private:
 			{
 				initial = _kind(scope_symbol, fixed_herd, kind_shoal);
 			}
-			//TODO ...
 			else
 			{
 				throw dis("strange::parser unexpected punctuation:") + token.report_();
@@ -956,12 +955,11 @@ private:
 				}
 				return _subsequent_colon_dot(min_precedence, initial, scope_symbol, fixed_herd, kind_shoal);
 			}
-			if (op == "," || op == ":" || op == "::" || op == ":#" || op == ":=" || op == ";" || op == "]" || op == "}" || op == ")") //TODO ...
+			if (op == "," || op == ":" || op == "::" || op == ":#" || op == ":=" || op == ":<" || op == ":{" || op == ";" || op == "]" || op == "}" || op == ")")
 			{
 				// delimiter
 				return initial;
 			}
-			//TODO ...
 			int64_t const precedence = token.precedence();
 			if (precedence)
 			{
