@@ -35,8 +35,7 @@ public:
 		}
 		if (++it == terms.cend_())
 		{
-			//TODO !optional
-			throw dis(token.report() + "strange::expression_local_insert::create not passed sufficient terms");
+			return expression_a<>{ over{ expression_local_insert_t<>{ token, terms, cast<symbol_a<>>(key), cast<kind_a<>>(kind), expression_t<>::create(token) } } };
 		}
 		any_a<> val = *it;
 		if (!check<expression_a<>>(val))
