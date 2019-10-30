@@ -275,10 +275,15 @@ private:
 		auto const name = token.symbol_();
 		auto terms = flock_t<>::create_(_identifier(scope_symbol, name)); // _name_ / _scope_name_
 		if (_next() && _token_.tag() == "punctuation" &&
-			(_token_.symbol() == ":=" || _token_.symbol() == ":<")) //TODO dimension
+			(_token_.symbol() == ":=" || _token_.symbol() == ":" || _token_.symbol() == ":<"))
 		{
 			bool optional = true;
-			if (_token_.symbol() == ":<")
+			if (_token_.symbol() == ":=")
+			{
+				_next();
+				terms.push_back(kind_t<>::create_());
+			}
+			else
 			{
 				try
 				{
@@ -291,11 +296,6 @@ private:
 					throw dis("strange::parser attribute assignment kind evaluation error:") + token.report_() + misunderstanding;
 				}
 			}
-			else
-			{
-				_next();
-				terms.push_back(kind_t<>::create_());
-			}
 			if (optional)
 			{
 				if (_it_ == _end_)
@@ -305,7 +305,7 @@ private:
 				terms.push_back_(_initial(0, scope_symbol, fixed_herd, kind_shoal)); // assignment
 			}
 		}
-		return expression_intimate_attribute_t<>::create_(token, terms);
+		return expression_intimate_attribute_t<>::create_(token, terms); //TODO pass kind expression?
 	}
 
 	inline expression_a<> _initial_intimate(
@@ -435,7 +435,7 @@ private:
 					fixed = true;
 					insert = true;
 				}
-				else if (op == ":<" || op == ":{") //TODO dimension
+				else if (op == ":" || op == ":<" || op == ":{")
 				{
 					auto const kind_expression = _kind(scope_symbol, fixed_herd, kind_shoal);
 					bool const punctuation = _previous_.tag() == "punctuation";
@@ -448,7 +448,7 @@ private:
 					}
 					catch (misunderstanding_a<>&)
 					{
-						kind = kind_expression; //TODO
+						throw dis("strange::parser kind expression not yet implemented here:") + _token_.report_(); //TODO
 					}
 				}
 			}
@@ -467,6 +467,7 @@ private:
 			{
 				unordered_herd_a<>(fixed_herd, true).erase(name);
 			}
+			//TODO pass kind expression below?
 			if (insert)
 			{
 				unordered_shoal_a<>(kind_shoal, true).insert_(name, kind);
