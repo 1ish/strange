@@ -31,53 +31,47 @@ public:
 			{
 				throw dis(token.report() + "strange::expression_function::create passed non-expression term");
 			}
-			if (end)
+			if (end) // expression
 			{
 				expression = term;
 				break;
 			}
-			if (term.type_().is("strange::expression_local_at"))
+			// parameters
+			if (!term.type_().is("strange::expression_local_at") &&
+				!term.type_().is("strange::expression_local_insert"))
 			{
-				auto subterms = cast<expression_a<>>(term).terms_();
-				if (subterms.size() != 1)
-				{
-					throw dis(token.report() + "strange::expression_function::create passed wrong number of subterms");
-				}
-				name = subterms.at_index(0);
-				if (!check<symbol_a<>>(name))
-				{
-					throw dis(token.report() + "strange::expression_function::create passed non-symbol name");
-				}
-				kind = kind_t<>::create_();
-				expression = expression_t<>::create(token);
+				throw dis(token.report() + "strange::expression_function::create passed invalid parameter term");
 			}
-			else if (term.type_().is("strange::expression_local_insert") ||
-				term.type_().is("strange::expression_local_update"))
+			auto const subterms = cast<expression_a<>>(term).terms_();
+			int64_t const count = subterms.size();
+			name = subterms.at_index(0);
+			if (!check<symbol_a<>>(name))
 			{
-				auto subterms = cast<expression_a<>>(term).terms_();
-				if (subterms.size() != 3)
-				{
-					throw dis(token.report() + "strange::expression_function::create passed wrong number of subterms");
-				}
-				name = subterms.at_index(0);
-				if (!check<symbol_a<>>(name))
-				{
-					throw dis(token.report() + "strange::expression_function::create passed non-symbol name");
-				}
+				throw dis(token.report() + "strange::expression_function::create passed non-symbol parameter name");
+			}
+			if (count == 1)
+			{
+				kind = kind_t<>::create_();
+			}
+			else
+			{
 				kind = subterms.at_index(1);
 				if (!check<kind_a<>>(kind))
 				{
-					throw dis(token.report() + "strange::expression_function::create passed non-kind");
+					throw dis(token.report() + "strange::expression_function::create passed non-kind parameter kind");
 				}
+			}
+			if (count == 3)
+			{
 				expression = subterms.at_index(2);
 				if (!check<expression_a<>>(expression))
 				{
-					throw dis(token.report() + "strange::expression_function::create passed non-expression");
+					throw dis(token.report() + "strange::expression_function::create passed non-expression parameter default");
 				}
 			}
 			else
 			{
-				throw dis(token.report() + "strange::expression_function::create passed invalid parameter term");
+				expression = expression_t<>::create(token);
 			}
 			names.push_back(name);
 			kinds.push_back(kind);

@@ -21,7 +21,7 @@ public:
 		auto parent_expressions = flock_t<>::create_();
 		any_a<> name = no();
 		any_a<> kind = no();
-		any_a<> value = no();
+		any_a<> expression = no();
 		auto it = terms.cbegin_();
 		bool end = it == terms.cend_();
 		while (!end)
@@ -79,22 +79,22 @@ public:
 			}
 			if (count == 3)
 			{
-				value = subterms.at_index(2);
-				if (!check<expression_a<>>(value))
+				expression = subterms.at_index(2);
+				if (!check<expression_a<>>(expression))
 				{
 					throw dis(token.report() + "strange::expression_abstraction::create passed non-expression dimension default");
 				}
 			}
 			else
 			{
-				value = expression_t<>::create(token);
+				expression = expression_t<>::create(token);
 			}
 			dimension_names.push_back(name);
 			dimension_kinds.push_back(kind);
-			dimension_expressions.push_back(value);
+			dimension_expressions.push_back(expression);
 			try
 			{
-				dimension_defaults.push_back(cast<expression_a<>>(value).evaluate_());
+				dimension_defaults.push_back(cast<expression_a<>>(expression).evaluate_());
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
@@ -126,8 +126,8 @@ public:
 	{
 		river.write_string(" abstraction(");
 		auto nit = _dimension_names.extract().cbegin();
-		auto pit = _dimension_kinds.extract().cbegin();
-		auto vit = _dimension_expressions.extract().cbegin();
+		auto kit = _dimension_kinds.extract().cbegin();
+		auto eit = _dimension_expressions.extract().cbegin();
 		bool first = true;
 		for (auto const& def : _dimension_defaults.extract())
 		{
@@ -140,11 +140,11 @@ public:
 				river.write_string(",");
 			}
 			auto name = cast<symbol_a<>>(*nit++);
-			auto kind = cast<kind_a<>>(*pit++);
-			auto value = cast<expression_a<>>(*vit++);
+			auto kind = cast<kind_a<>>(*kit++);
+			auto expression = cast<expression_a<>>(*eit++);
 			river.write_string(name.to_string() + ":");
 			river.write_string(kind.to_string() + "=");
-			value.generate(version, indent, river);
+			expression.generate(version, indent, river);
 		}
 		river.write_string(")\n");
 	}
@@ -153,8 +153,8 @@ public:
 	{
 		river.write_string(" [](");
 		auto nit = _dimension_names.extract().cbegin();
-		auto pit = _dimension_kinds.extract().cbegin();
-		auto vit = _dimension_expressions.extract().cbegin();
+		auto kit = _dimension_kinds.extract().cbegin();
+		auto eit = _dimension_expressions.extract().cbegin();
 		bool first = true;
 		for (auto const& def : _dimension_defaults.extract())
 		{
@@ -167,11 +167,11 @@ public:
 				river.write_string(",");
 			}
 			auto name = cast<symbol_a<>>(*nit++);
-			auto kind = cast<kind_a<>>(*pit++);
-			auto value = cast<expression_a<>>(*vit++);
+			auto kind = cast<kind_a<>>(*kit++);
+			auto expression = cast<expression_a<>>(*eit++);
 			river.write_string("catch(" + kind.name_().to_string() + "_a<> const& ");
 			river.write_string(name.to_string() + " =");
-			value.generate_cpp(version, indent, river);
+			expression.generate_cpp(version, indent, river);
 		}
 		river.write_string(")\n{\n");
 		river.write_string("}\n");
