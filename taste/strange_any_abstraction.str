@@ -5,8 +5,8 @@ false &&
 			(	// no parents
 				{	
 					// exposure
-					//TODO extract_thing :# (:<one_t>&#),
-					//TODO mutate_thing(:<one_t>&=),
+					"extract_thing" : "one_t const& extract_thing() const",
+					"mutate_thing" : "one_t& mutate_thing()",
 
 					// reflection
 					type :# (<symbol>),

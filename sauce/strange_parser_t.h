@@ -689,7 +689,7 @@ private:
 					throw dis("strange::parser shoal :: redefinition of shared name:") + _token_.report_();
 				}
 			}
-			else if (operator_token.symbol() == ":#" || operator_token.symbol() == ":=")
+			else if (operator_token.symbol() == ":#" || operator_token.symbol() == ":=") //TODO :kind=
 			{
 				bool const fixed = (operator_token.symbol() == ":#");
 				auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
