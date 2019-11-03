@@ -27,26 +27,6 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{}
 
-	inline cat_a<> cat_() const
-	{
-		return _cat;
-	}
-
-	inline unordered_herd_a<> cats_() const
-	{
-		return cats(_cat);
-	}
-
-	inline kind_a<> kind_() const
-	{
-		return _kind;
-	}
-
-	inline unordered_herd_a<> kinds_() const
-	{
-		return kinds(_kind);
-	}
-
 	inline any_a<> eater_() const
 	{
 		return _names;
@@ -64,11 +44,27 @@ public:
 		auto kit = _kinds.extract().cbegin();
 		for (auto const& def : _defaults.extract())
 		{
-			auto const kind = cast<kind_a<>>(*kit++);
-			bool const more = ait != range.cend_();
-			if (!more && !kind.optional())
+			auto kind = *kit++;
+			if (check<expression_a<>>(kind))
 			{
-				throw dis(_token.report() + "strange::function::operate not passed enough arguments");
+				try
+				{
+					kind = cast<expression_a<>>(kind).operate(thing, range);
+				}
+				catch (misunderstanding_a<>& misunderstanding)
+				{
+					throw dis(_token.report() + "strange::extraction::operate kind expression evaluation error") + misunderstanding;
+				}
+			}
+			if (!check<kind_a<>>(kind))
+			{
+				throw dis(_token.report() + "strange::extraction::operate non-kind parameter kind");
+			}
+
+			bool const more = ait != range.cend_();
+			if (!more && !cast<kind_a<>>(kind).optional())
+			{
+				throw dis(_token.report() + "strange::extraction::operate not passed enough arguments");
 			}
 			any_a<> const argument = more ? (*ait++) : def;
 			if (!argument.kinds_().has_(kind))
@@ -93,8 +89,6 @@ protected:
 	flock_a<> const _kinds;
 	flock_a<> const _defaults;
 	expression_a<> const _expression;
-	cat_a<> const _cat;
-	kind_a<> const _kind;
 	unordered_shoal_a<> const _shared;
 
 	inline extraction_t(token_a<> const& token, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& defaults, expression_a<> const& expression)
@@ -104,8 +98,6 @@ protected:
 		, _kinds{ kinds }
 		, _defaults{ defaults }
 		, _expression{ expression }
-		, _cat{ cat_t<>::create_(number_int_64_t<>::create(1), sym(""), flock_t<>::create_(), _kinds) }
-		, _kind{ kind_from_cat(_cat) }
 		, _shared{ unordered_shoal_t<true>::create_() }
 	{}
 };

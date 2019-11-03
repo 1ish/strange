@@ -80,7 +80,7 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>&, range_a<> const& range) const
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		auto local_shoal = unordered_shoal_t<>::create_();
 		auto& local = local_shoal.reference();
@@ -89,9 +89,25 @@ public:
 		auto kit = _dimension_kinds.extract().cbegin();
 		for (auto const& def : _dimension_defaults.extract())
 		{
-			auto const kind = cast<kind_a<>>(*kit++);
+			auto kind = *kit++;
+			if (check<expression_a<>>(kind))
+			{
+				try
+				{
+					kind = cast<expression_a<>>(kind).operate(thing, range);
+				}
+				catch (misunderstanding_a<>& misunderstanding)
+				{
+					throw dis(_token.report() + "strange::abstraction::operate kind expression evaluation error") + misunderstanding;
+				}
+			}
+			if (!check<kind_a<>>(kind))
+			{
+				throw dis(_token.report() + "strange::abstraction::operate non-kind dimension kind");
+			}
+
 			bool const more = ait != range.cend_();
-			if (!more && !kind.optional())
+			if (!more && !cast<kind_a<>>(kind).optional())
 			{
 				throw dis(_token.report() + "strange::abstraction::operate not passed enough arguments");
 			}
