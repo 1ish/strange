@@ -29,20 +29,20 @@ public:
 			return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, cast<symbol_a<>>(member)) });
 		}
 		auto const kind = *it;
-		if (!check<kind_a<>>(kind)) //TODO accept kind expression
+		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 		{
-			throw dis(token.report() + "strange::expression_intimate_attribute::create passed non-kind term");
+			throw dis(token.report() + "strange::expression_intimate_attribute::create passed non-kind/expression term");
 		}
 		if (++it == terms.cend_())
 		{
 			return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, cast<symbol_a<>>(member), cast<kind_a<>>(kind)) });
 		}
-		auto const value = *it;
-		if (!check<expression_a<>>(value))
+		auto const expression = *it;
+		if (!check<expression_a<>>(expression))
 		{
 			throw dis(token.report() + "strange::expression_intimate_attribute::create passed non-expression value term");
 		}
-		return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, cast<symbol_a<>>(member), cast<kind_a<>>(kind), cast<expression_a<>>(value)) });
+		return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, cast<symbol_a<>>(member), kind, cast<expression_a<>>(expression)) });
 	}
 
 	// reflection
@@ -74,8 +74,20 @@ public:
 		auto me_reference = any_a<>(it->second, true);
 		if (_assign)
 		{
-			auto const value = _value.operate(thing, range);
-			if (!value.kinds_().has(_kind))
+			auto kind = _kind;
+			if (check<expression_a<>>(kind))
+			{
+				try
+				{
+					kind = cast<expression_a<>>(kind).operate(thing, range);
+				}
+				catch (misunderstanding_a<>& misunderstanding)
+				{
+					throw dis(_token.report() + "strange::expression_intimate_attribute::operate kind expression evaluation error") + misunderstanding;
+				}
+			}
+			auto const value = _expression.operate(thing, range);
+			if (!value.kinds_().has(kind))
 			{
 				throw dis(_token.report() + "strange::expression_intimate_attribute::operate returned wrong kind of thing");
 			}
@@ -93,44 +105,44 @@ public:
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		river.write_string("." + _member.to_string());
-		_value.generate(version, indent, river);
+		_expression.generate(version, indent, river);
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		river.write_string("." + _member.to_string());
-		_value.generate_cpp(version, indent, river);
+		_expression.generate_cpp(version, indent, river);
 	}
 
 protected:
 	flock_a<> const _terms;
 	symbol_a<> const _member;
-	kind_a<> const _kind;
-	expression_a<> const _value;
+	any_a<> const _kind;
+	expression_a<> const _expression;
 	bool const _assign;
 
-	inline expression_intimate_attribute_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& member, kind_a<> const& kind = kind_t<>::create_())
+	inline expression_intimate_attribute_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& member, any_a<> const& kind = kind_t<>::create_())
 		: expression_t(token, is_pure_literal(token, member, expression_t<>::create(token)))
 		, _terms{ terms }
 		, _member{ member }
 		, _kind{ kind }
-		, _value{ expression_t<>::create(token) }
+		, _expression{ expression_t<>::create(token) }
 		, _assign{ false }
 	{}
 
-	inline expression_intimate_attribute_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& member, kind_a<> const& kind, expression_a<> const& value)
-		: expression_t(token, is_pure_literal(token, member, value))
+	inline expression_intimate_attribute_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& member, any_a<> const& kind, expression_a<> const& expression)
+		: expression_t(token, is_pure_literal(token, member, expression))
 		, _terms{ terms }
 		, _member{ member }
 		, _kind{ kind }
-		, _value{ value }
+		, _expression{ expression }
 		, _assign{ true }
 	{}
 
-	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, symbol_a<> const& member, expression_a<> const& expression_value)
+	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, symbol_a<> const& member, expression_a<> const& expression)
 	{
 		std::pair<bool, bool> pure_literal(true, true);
-		if (!expression_value.literal())
+		if (!expression.literal())
 		{
 			pure_literal.first = false;
 			pure_literal.second = false;

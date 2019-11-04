@@ -12,9 +12,9 @@ public:
 	using over = thing_o<attribute_mutation_t<>>;
 
 	// construction
-	static inline operation_a<> create_(symbol_a<> const& name, any_a<> const& thing)
+	static inline operation_a<> create_(symbol_a<> const& name, any_a<> const& kind, any_a<> const& thing)
 	{
-		return operation_a<>{ over{ attribute_mutation_t<>(name, thing) } };
+		return operation_a<>{ over{ attribute_mutation_t<>(name, kind, thing) } };
 	}
 
 	// reflection
@@ -46,8 +46,12 @@ public:
 				auto& mut = static_cast<any_c<>&>(thing.mutate_thing());
 				if (mut.identity() != original)
 				{
-					mut.update_attribution(_name, attribute_mutation_t<>::create_(_name, value));
+					mut.mutate_attribute(_name, attribute_mutation_t<>::create_(_name, _kind, value));
 					return value;
+				}
+				if (!value.kinds_().has(_kind))
+				{
+					throw dis("strange::attribute_mutation::operate passed wrong kind of thing");
 				}
 				_thing = value;
 			}
@@ -57,11 +61,13 @@ public:
 
 protected:
 	symbol_a<> const _name;
+	any_a<> const _kind;
 	any_a<> mutable _thing;
 
-	inline attribute_mutation_t(symbol_a<> const& name, any_a<> const& thing)
+	inline attribute_mutation_t(symbol_a<> const& name, any_a<> const& kind, any_a<> const& thing)
 		: operation_t{}
 		, _name{ name }
+		, _kind{ kind }
 		, _thing{ thing }
 	{}
 };

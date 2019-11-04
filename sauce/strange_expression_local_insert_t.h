@@ -29,20 +29,20 @@ public:
 			throw dis(token.report() + "strange::expression_local_insert::create not passed sufficient terms");
 		}
 		any_a<> kind = *it;
-		if (!check<kind_a<>>(kind)) //TODO accept kind expression
+		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 		{
-			throw dis(token.report() + "strange::expression_local_insert::create passed non-kind");
+			throw dis(token.report() + "strange::expression_local_insert::create passed non-kind/expression");
 		}
 		if (++it == terms.cend_())
 		{
-			return expression_a<>{ over{ expression_local_insert_t<>{ token, terms, cast<symbol_a<>>(key), cast<kind_a<>>(kind), expression_t<>::create(token) } } };
+			return expression_a<>{ over{ expression_local_insert_t<>{ token, terms, cast<symbol_a<>>(key), kind, expression_t<>::create(token) } } };
 		}
-		any_a<> val = *it;
-		if (!check<expression_a<>>(val))
+		any_a<> expression = *it;
+		if (!check<expression_a<>>(expression))
 		{
 			throw dis(token.report() + "strange::expression_local_insert::create passed non-expression");
 		}
-		return expression_a<>{ over{ expression_local_insert_t<>{ token, terms, cast<symbol_a<>>(key), cast<kind_a<>>(kind), cast<expression_a<>>(val) } } };
+		return expression_a<>{ over{ expression_local_insert_t<>{ token, terms, cast<symbol_a<>>(key), kind, cast<expression_a<>>(expression) } } };
 	}
 
 	// reflection
@@ -66,16 +66,28 @@ public:
 		}
 #endif
 		auto& local = static_cast<unordered_shoal_a<>&>(thing).reference();
-		auto val = _val.operate(thing, range);
-		if (!val.kinds_().has_(_kind))
+		auto kind = _kind;
+		if (check<expression_a<>>(kind))
+		{
+			try
+			{
+				kind = cast<expression_a<>>(kind).operate(thing, range);
+			}
+			catch (misunderstanding_a<>& misunderstanding)
+			{
+				throw dis(_token.report() + "strange::expression_local_insert::operate kind expression evaluation error") + misunderstanding;
+			}
+		}
+		auto value = _expression.operate(thing, range);
+		if (!value.kinds_().has_(kind))
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::operate kind does not include value");
 		}
-		if (!local.emplace(_key, val).second)
+		if (!local.emplace(_key, value).second)
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::operate key exists");
 		}
-		return val;
+		return value;
 	}
 
 	// expression
@@ -84,30 +96,30 @@ public:
 		return _terms;
 	}
 
-	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
-		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " :" + _kind.to_string() + "=");
-		_val.generate(version, indent, river);
+		// river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " :" + _kind.to_string() + "=");
+		_expression.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
-		river.write_string(" " + _kind.code() + " " + cast<symbol_a<>>(_key).to_string() + " =");
-		_val.generate_cpp(version, indent, river);
+		// river.write_string(" " + _kind.code() + " " + cast<symbol_a<>>(_key).to_string() + " =");
+		_expression.generate_cpp(version, indent, river);
 	}
 
 protected:
 	flock_a<> const _terms;
 	symbol_a<> const _key;
-	kind_a<> const _kind;
-	expression_a<> const _val;
+	any_a<> const _kind;
+	expression_a<> const _expression;
 
-	inline expression_local_insert_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key, kind_a<> const& kind, expression_a<> const& val)
+	inline expression_local_insert_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key, any_a<> const& kind, expression_a<> const& expression)
 		: expression_t{ token }
 		, _terms{ terms }
 		, _key{ key }
 		, _kind{ kind }
-		, _val{ val }
+		, _expression{ expression }
 	{}
 
 private:

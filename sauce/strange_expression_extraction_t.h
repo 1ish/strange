@@ -18,8 +18,6 @@ public:
 		auto kinds = flock_t<>::create_();
 		auto expressions = flock_t<>::create_();
 		auto defaults = flock_t<>::create_();
-		any_a<> name = sym("");
-		any_a<> kind = kind_t<>::create_();
 		any_a<> expression = expression_t<>::create(token);
 		auto it = terms.cbegin_();
 		bool end = it == terms.cend_();
@@ -44,22 +42,24 @@ public:
 			}
 			auto const subterms = cast<expression_a<>>(term).terms_();
 			int64_t const count = subterms.size();
-			name = subterms.at_index(0);
+			auto const name = subterms.at_index(0);
 			if (!check<symbol_a<>>(name))
 			{
 				throw dis(token.report() + "strange::expression_extraction::create passed non-symbol parameter name");
 			}
+			names.push_back(name);
 			if (count == 1)
 			{
-				kind = kind_t<>::create_();
+				kinds.push_back(kind_t<>::create_());
 			}
 			else
 			{
-				kind = subterms.at_index(1);
-				if (!check<kind_a<>>(kind))
+				auto const kind = subterms.at_index(1);
+				if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 				{
-					throw dis(token.report() + "strange::expression_extraction::create passed non-kind parameter kind");
+					throw dis(token.report() + "strange::expression_extraction::create passed non-kind/expression parameter kind");
 				}
+				kinds.push_back(kind);
 			}
 			if (count == 3)
 			{
@@ -73,8 +73,6 @@ public:
 			{
 				expression = expression_t<>::create(token);
 			}
-			names.push_back(name);
-			kinds.push_back(kind);
 			expressions.push_back(expression);
 			try
 			{

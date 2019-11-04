@@ -494,12 +494,12 @@ public:
 		return conception.at_(member);
 	}
 
-	inline void update_attribution(symbol_a<> const& name, operation_a<> const& attribution)
+	inline void mutate_attribute(symbol_a<> const& name, operation_a<> const& attribute_mutation)
 	{
-		_conception.update_(name, attribution);
+		_conception.update_(name, attribute_mutation);
 		if (name.to_string().c_str()[0] != '_')
 		{
-			_operations.update_(name, attribution);
+			_operations.update_(name, attribute_mutation);
 		}
 	}
 

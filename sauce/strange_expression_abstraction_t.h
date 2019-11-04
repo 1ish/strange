@@ -19,9 +19,6 @@ public:
 		auto dimension_expressions = flock_t<>::create_();
 		auto dimension_defaults = flock_t<>::create_();
 		auto parent_expressions = flock_t<>::create_();
-		any_a<> name = no();
-		any_a<> kind = no();
-		any_a<> expression = no();
 		auto it = terms.cbegin_();
 		bool end = it == terms.cend_();
 		while (!end)
@@ -60,7 +57,9 @@ public:
 			}
 			auto const subterms = cast<expression_a<>>(term).terms_();
 			int64_t const count = subterms.size();
-			name = subterms.at_index(0);
+			auto const name = subterms.at_index(0);
+			auto kind = no();
+			auto expression = no();
 			if (!check<symbol_a<>>(name))
 			{
 				throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol dimension name");
@@ -72,9 +71,9 @@ public:
 			else
 			{
 				kind = subterms.at_index(1);
-				if (!check<kind_a<>>(kind))
+				if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 				{
-					throw dis(token.report() + "strange::expression_abstraction::create passed non-kind dimension kind");
+					throw dis(token.report() + "strange::expression_abstraction::create passed non-kind/expression dimension kind");
 				}
 			}
 			if (count == 3)
@@ -139,11 +138,18 @@ public:
 			{
 				river.write_string(",");
 			}
-			auto name = cast<symbol_a<>>(*nit++);
-			auto kind = cast<kind_a<>>(*kit++);
-			auto expression = cast<expression_a<>>(*eit++);
+			auto const name = cast<symbol_a<>>(*nit++);
+			auto const kind = *kit++;
+			auto const expression = cast<expression_a<>>(*eit++);
 			river.write_string(name.to_string() + ":");
-			river.write_string(kind.to_string() + "=");
+			if (check<kind_a<>>(kind))
+			{
+				river.write_string(cast<kind_a<>>(kind).to_string() + "=");
+			}
+			else
+			{
+				cast<expression_a<>>(kind).generate(version, indent, river);
+			}
 			expression.generate(version, indent, river);
 		}
 		river.write_string(")\n");
@@ -166,11 +172,18 @@ public:
 			{
 				river.write_string(",");
 			}
-			auto name = cast<symbol_a<>>(*nit++);
-			auto kind = cast<kind_a<>>(*kit++);
-			auto expression = cast<expression_a<>>(*eit++);
-			river.write_string("catch(" + kind.name_().to_string() + "_a<> const& ");
-			river.write_string(name.to_string() + " =");
+			auto const name = cast<symbol_a<>>(*nit++);
+			auto const kind = *kit++;
+			auto const expression = cast<expression_a<>>(*eit++);
+			if (check<kind_a<>>(kind))
+			{
+				river.write_string("catch(" + cast<kind_a<>>(kind).name_().to_string() + "_a<> const& ");
+				river.write_string(cast<kind_a<>>(kind).to_string() + " =");
+			}
+			else
+			{
+				cast<expression_a<>>(kind).generate_cpp(version, indent, river);
+			}
 			expression.generate_cpp(version, indent, river);
 		}
 		river.write_string(")\n{\n");

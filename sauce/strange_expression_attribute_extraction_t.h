@@ -20,7 +20,7 @@ public:
 			throw dis(token.report() + "strange::expression_attribute_extraction::create passed no terms");
 		}
 
-		any_a<> const name = *it;
+		auto const name = *it;
 		if (!check<symbol_a<>>(name))
 		{
 			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-symbol name");
@@ -30,29 +30,22 @@ public:
 			throw dis(token.report() + "strange::expression_attribute_extraction::create passed too few terms");
 		}
 
-		any_a<> const kind = *it;
-		if (!check<kind_a<>>(kind))
+		auto const kind = *it;
+		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-kind");
+			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-kind/expression");
 		}
 		if (++it == terms.cend_())
 		{
 			throw dis(token.report() + "strange::expression_attribute_extraction::create passed too few terms");
 		}
 
-		any_a<> const value = *it;
-		if (!check<expression_a<>>(value))
+		auto const expression = *it;
+		if (!check<expression_a<>>(expression))
 		{
 			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-expression value");
 		}
-
-		auto const thing = cast<expression_a<>>(value).evaluate_();
-		if (!thing.kinds_().has_(kind))
-		{
-			throw dis(token.report() + "strange::expression_attribute_extraction::create passed wrong kind of thing");
-		}
-		return expression_substitute_t<over>::create(over{ expression_attribute_extraction_t<>(token, terms, cast<symbol_a<>>(name), cast<kind_a<>>(kind), cast<expression_a<>>(value)) },
-			attribute_extraction_t<>::create_(thing));
+		return expression_substitute_t<over>::create(over{ expression_attribute_extraction_t<>(token, terms, cast<symbol_a<>>(name), kind, cast<expression_a<>>(expression)) });
 	}
 
 	// reflection
@@ -66,13 +59,32 @@ public:
 		reflection<expression_attribute_extraction_t<>>::share(shoal);
 	}
 
+	// function
+	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	{
+		try
+		{
+			auto const kind = check<expression_a<>>(_kind) ? _kind.operate(thing, range) : _kind;
+			auto const value = _expression.operate(thing, range);
+			if (!value.kinds_().has(kind))
+			{
+				throw dis("wrong kind of thing");
+			}
+			return attribute_extraction_t<>::create_(value);
+		}
+		catch (misunderstanding_a<>& misunderstanding)
+		{
+			throw dis(_token.report() + "strange::expression_attribute_extraction::operate value evaluation error") + misunderstanding;
+		}
+	}
+	
 	// expression
 	inline flock_a<> terms_() const
 	{
 		return _terms;
 	}
 
-	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
+	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		// name :# expression
 		river.write_string(" " + _name.to_string() + " :# ");
@@ -90,14 +102,14 @@ public:
 protected:
 	flock_a<> const _terms;
 	symbol_a<> const _name;
-	kind_a<> const _result;
+	any_a<> const _kind;
 	expression_a<> const _expression;
 
-	inline expression_attribute_extraction_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, kind_a<> const& result, expression_a<> const& expression)
+	inline expression_attribute_extraction_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, any_a<> const& kind, expression_a<> const& expression)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _name{ name }
-		, _result{ result }
+		, _kind{ kind }
 		, _expression{ expression }
 	{}
 

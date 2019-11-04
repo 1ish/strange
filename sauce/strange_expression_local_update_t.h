@@ -29,20 +29,20 @@ public:
 			throw dis(token.report() + "strange::expression_local_update::create not passed sufficient terms");
 		}
 		any_a<> kind = *it;
-		if (!check<kind_a<>>(kind)) //TODO accept kind expression
+		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 		{
-			throw dis(token.report() + "strange::expression_local_update::create passed non-kind");
+			throw dis(token.report() + "strange::expression_local_update::create passed non-kind/expression");
 		}
 		if (++it == terms.cend_())
 		{
 			throw dis(token.report() + "strange::expression_local_update::create not passed sufficient terms");
 		}
-		any_a<> val = *it;
-		if (!check<expression_a<>>(val))
+		any_a<> expression = *it;
+		if (!check<expression_a<>>(expression))
 		{
 			throw dis(token.report() + "strange::expression_local_update::create passed non-expression");
 		}
-		return expression_a<>{ over{ expression_local_update_t<>{ token, terms, cast<symbol_a<>>(key), cast<kind_a<>>(kind), cast<expression_a<>>(val) } } };
+		return expression_a<>{ over{ expression_local_update_t<>{ token, terms, cast<symbol_a<>>(key), kind, cast<expression_a<>>(expression) } } };
 	}
 
 	// reflection
@@ -71,12 +71,24 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_local_update::operate key not found");
 		}
-		auto val = _val.operate(thing, range);
-		if (!val.kinds_().has_(_kind))
+		auto kind = _kind;
+		if (check<expression_a<>>(kind))
+		{
+			try
+			{
+				kind = cast<expression_a<>>(kind).operate(thing, range);
+			}
+			catch (misunderstanding_a<>& misunderstanding)
+			{
+				throw dis(_token.report() + "strange::expression_local_update::operate kind expression evaluation error") + misunderstanding;
+			}
+		}
+		auto value = _expression.operate(thing, range);
+		if (!value.kinds_().has_(kind))
 		{
 			throw dis(_token.report() + "strange::expression_local_update::operate kind does not include value");
 		}
-		return it->second = val;
+		return it->second = value;
 	}
 
 	// expression
@@ -88,27 +100,27 @@ public:
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " :=");
-		_val.generate(version, indent, river);
+		_expression.generate(version, indent, river);
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " =");
-		_val.generate_cpp(version, indent, river);
+		_expression.generate_cpp(version, indent, river);
 	}
 
 protected:
 	flock_a<> const _terms;
 	symbol_a<> const _key;
-	kind_a<> const _kind;
-	expression_a<> const _val;
+	any_a<> const _kind;
+	expression_a<> const _expression;
 
-	inline expression_local_update_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key, kind_a<> const& kind, expression_a<> const& val)
+	inline expression_local_update_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key, any_a<> const& kind, expression_a<> const& expression)
 		: expression_t{ token }
 		, _terms{ terms }
 		, _key{ key }
 		, _kind{ kind }
-		, _val{ val }
+		, _expression{ expression }
 	{}
 
 private:
