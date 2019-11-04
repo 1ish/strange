@@ -283,7 +283,8 @@ private:
 		auto const name = token.symbol_();
 		auto terms = flock_t<>::create_(_identifier(scope_symbol, name)); // _name_ / _scope_name_
 		if (_next() && _token.tag() == "punctuation" &&
-			(_token.symbol() == ":=" || _token.symbol() == ":" || _token.symbol() == ":<"))
+			(_token.symbol() == ":=" ||
+				_token.symbol() == ":" || _token.symbol() == ":<" || _token.symbol() == ":{"))
 		{
 			bool optional = true;
 			if (_token.symbol() == ":=")
@@ -293,16 +294,15 @@ private:
 			}
 			else
 			{
+				any_a<> kind = _kind(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				optional = _previous.tag() == "punctuation" && (_previous.symbol() == "#" || _previous.symbol() == "=");
 				try
 				{
-					auto const kind = cast<kind_a<>>(_kind(shoal_symbol, scope_symbol, fixed_herd, kind_shoal).evaluate_());
-					optional = kind.optional();
-					terms.push_back(kind);
+					kind = cast<expression_a<>>(kind).evaluate_();
 				}
-				catch (misunderstanding_a<>& misunderstanding)
-				{
-					throw dis("strange::parser attribute assignment kind evaluation error:") + token.report_() + misunderstanding;
-				}
+				catch (misunderstanding_a<>&)
+				{}
+				terms.push_back(kind);
 			}
 			if (optional)
 			{
@@ -313,7 +313,7 @@ private:
 				terms.push_back_(_initial(0, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)); // assignment
 			}
 		}
-		return expression_intimate_attribute_t<>::create_(token, terms); //TODO pass kind expression?
+		return expression_intimate_attribute_t<>::create_(token, terms);
 	}
 
 	inline expression_a<> _initial_intimate(
@@ -424,7 +424,7 @@ private:
 				{
 					throw dis("strange::parser cannot reassign variable with fixed:") + _token.report_();
 				}
-				else if (op == ":<" || op == ":{")
+				else if (op == ":" || op == ":<" || op == ":{")
 				{
 					throw dis("strange::parser cannot reassign variable kind:") + _token.report_();
 				}
@@ -448,19 +448,17 @@ private:
 				}
 				else if (op == ":" || op == ":<" || op == ":{")
 				{
-					auto const kind_expression = _kind(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+					kind = _kind(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 					bool const punctuation = _previous.tag() == "punctuation";
 					fixed = punctuation && _previous.symbol() == "#";
 					optional = fixed || punctuation && _previous.symbol() == "=";
 					insert = true;
 					try
 					{
-						kind = kind_expression.evaluate_();
+						kind = cast<expression_a<>>(kind).evaluate_();
 					}
 					catch (misunderstanding_a<>&)
-					{
-						throw dis("strange::parser kind expression not yet implemented here:") + _token.report_(); //TODO
-					}
+					{}
 				}
 			}
 		}
@@ -478,7 +476,6 @@ private:
 			{
 				unordered_herd_a<>(fixed_herd, true).erase(name);
 			}
-			//TODO pass kind expression below?
 			if (insert)
 			{
 				unordered_shoal_a<>(kind_shoal, true).insert_(name, kind);
@@ -884,7 +881,8 @@ private:
 		}
 
 		// result
-		bool const result = !modify && _token.tag() == "punctuation" && (_token.symbol() == ":" || _token.symbol() == ":<");
+		bool const result = !modify && _token.tag() == "punctuation" &&
+			(_token.symbol() == ":" || _token.symbol() == ":<" || _token.symbol() == ":{");
 		if (result)
 		{
 			terms.push_back(_kind(shoal_symbol, scope_symbol, fixed_herd, kind_shoal)); // recurse for result
