@@ -360,7 +360,7 @@ class tokenizer_t : public thing_t<___ego___>
 						return punctuation_token(token);
 					case ':':
 						token = char1;
-						if (char1 == char2 || char2 == '.' || char2 == '=' || char2 == '#' || char2 == '<' || char2 == '{')
+						if (char1 == char2 || char2 == '.' || char2 == '=' || char2 == '#' || char2 == '<' || char2 == '(')
 						{
 							second = true;
 							break;

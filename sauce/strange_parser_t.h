@@ -284,7 +284,7 @@ private:
 		auto terms = flock_t<>::create_(_identifier(scope_symbol, name)); // _name_ / _scope_name_
 		if (_next() && _token.tag() == "punctuation" &&
 			(_token.symbol() == ":=" ||
-				_token.symbol() == ":" || _token.symbol() == ":<" || _token.symbol() == ":{"))
+				_token.symbol() == ":<" || _token.symbol() == ":("))
 		{
 			bool optional = true;
 			if (_token.symbol() == ":=")
@@ -424,7 +424,7 @@ private:
 				{
 					throw dis("strange::parser cannot reassign variable with fixed:") + _token.report_();
 				}
-				else if (op == ":" || op == ":<" || op == ":{")
+				else if (op == ":<" || op == ":(")
 				{
 					throw dis("strange::parser cannot reassign variable kind:") + _token.report_();
 				}
@@ -446,7 +446,7 @@ private:
 					fixed = true;
 					insert = true;
 				}
-				else if (op == ":" || op == ":<" || op == ":{")
+				else if (op == ":<" || op == ":(")
 				{
 					kind = _kind(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 					bool const punctuation = _previous.tag() == "punctuation";
@@ -699,14 +699,18 @@ private:
 					throw dis("strange::parser shoal :: redefinition of shared name:") + _token.report_();
 				}
 			}
-			else if (operator_token.symbol() == ":#" || operator_token.symbol() == ":=") //TODO :kind=
+			else if (operator_token.symbol() == ":#" || operator_token.symbol() == ":=" ||
+				operator_token.symbol() == ":<" || operator_token.symbol() == ":(")
 			{
 				bool const fixed = (operator_token.symbol() == ":#");
+				auto const kind = (fixed || operator_token.symbol() == ":=")
+					? any_a<>(kind_t<>::create_())
+					: any_a<>(_kind(shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
 				auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
 				if (key_string[key_string.length() - 1] == '_')
 				{
 					// attribute extraction/mutation
-					auto const terms = flock_t<>::create_(key_symbol, kind_t<>::create_(), _initial(0, scope_symbol, new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_()));
+					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, scope_symbol, new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_()));
 					if (fixed)
 					{
 						value = expression_attribute_extraction_t<>::create_(operator_token, terms);
@@ -777,27 +781,23 @@ private:
 	{
 		auto const token = _token;
 		bool const punctuation = token.tag() == "punctuation";
-		bool modify = punctuation && token.symbol() == ":";
+		bool const parenthesis = punctuation && token.symbol() == ":(";
+		bool const colon = parenthesis || punctuation && token.symbol() == ":<";
+		bool modify = parenthesis;
 		auto expression = no();
-		if (modify)
+		if (parenthesis)
 		{
 			if (!_next())
 			{
-				throw dis("strange::parser kind : with nothing following it:") + token.report_();
+				throw dis("strange::parser kind :( with nothing following it:") + token.report_();
 			}
 			expression = _initial(100, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 		}
-		bool const variant = punctuation && token.symbol() == ":{";
-		if (variant)
-		{
-			throw dis("strange::parser variants not yet implemented:") + token.report_(); //TODO variants
-		}
-		bool const colon = modify || variant || punctuation && token.symbol() == ":<";
 		auto terms = flock_t<>::create_();
 
 		// order
 		int64_t order = 0;
-		if (!modify)
+		if (!parenthesis)
 		{
 			while (!order && colon ||
 				_token.tag() == "punctuation" && _token.symbol() == "<")
@@ -812,7 +812,7 @@ private:
 		terms.push_back(number_int_64_t<>::create(order));
 
 		// name
-		bool const name = !modify && _token.tag() == "name";
+		bool const name = !parenthesis && _token.tag() == "name";
 		if (name)
 		{
 			if (_token.symbol().c_str()[_token.symbol().length() - 1] == '_')
@@ -882,7 +882,7 @@ private:
 
 		// result
 		bool const result = !modify && _token.tag() == "punctuation" &&
-			(_token.symbol() == ":" || _token.symbol() == ":<" || _token.symbol() == ":{");
+			(_token.symbol() == ":<" || _token.symbol() == ":(");
 		if (result)
 		{
 			terms.push_back(_kind(shoal_symbol, scope_symbol, fixed_herd, kind_shoal)); // recurse for result
@@ -905,6 +905,14 @@ private:
 		if (order)
 		{
 			throw dis("strange::parser mismatched kind < and > pair:") + token.report_();
+		}
+		if (parenthesis)
+		{
+			if (_it == _end || _token.tag() != "punctuation" || _token.symbol() != ")")
+			{
+				throw dis("strange::parser mismatched kind :( and ) pair:") + _token.report_();
+			}
+			_next();
 		}
 
 		// reference
@@ -1015,7 +1023,7 @@ private:
 				}
 				return _subsequent_colon_dot(min_precedence, initial, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 			}
-			if (op == "," || op == ":" || op == "::" || op == ":#" || op == ":=" || op == ":<" || op == ":{" || op == ";" || op == "]" || op == "}" || op == ")")
+			if (op == "," || op == ":" || op == "::" || op == ":#" || op == ":=" || op == ":<" || op == ":(" || op == ";" || op == "]" || op == "}" || op == ")")
 			{
 				// delimiter
 				return initial;
