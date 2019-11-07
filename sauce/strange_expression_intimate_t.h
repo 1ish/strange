@@ -14,7 +14,26 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_substitute_t<over>::create(over{ expression_intimate_t<>(token, terms) });
+		auto it = terms.cbegin_();
+		if (it == terms.cend_())
+		{
+			throw dis(token.report() + "strange::expression_intimate::create passed empty range");
+		}
+		auto member = *it;
+		if (!check<symbol_a<>>(member))
+		{
+			throw dis(token.report() + "strange::expression_intimate::create passed non-symbol member term");
+		}
+		if (++it == terms.cend_())
+		{
+			throw dis(token.report() + "strange::expression_intimate::create passed short range");
+		}
+		auto arguments = *it;
+		if (!check<flock_a<>>(arguments))
+		{
+			throw dis(token.report() + "strange::expression_intimate::create passed non-flock arguments");
+		}
+		return expression_substitute_t<over>::create(over{ expression_intimate_t<>(token, terms, cast<symbol_a<>>(member), cast<flock_a<>>(arguments)) });
 	}
 
 	// reflection
@@ -31,7 +50,19 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		return any_c<>::intimate__(range_operator_t<>::create_(_terms, thing, range));
+#ifdef STRANGE_CHECK_STATIC_CASTS
+		if (!check<unordered_shoal_a<>>(thing))
+		{
+			throw dis(_token.report() + "strange::expression_intimate::operate passed non-unordered-shoal local");
+		}
+#endif
+		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract();
+		auto it = local.find(sym("^"));
+		if (it == local.cend())
+		{
+			throw dis(_token.report() + "strange::expression_intimate::operate ^ not found");
+		}
+		return any_c<>::intimate(any_a<>(it->second, true), _member, range_operator_t<>::create_(_arguments, thing, range));
 	}
 
 	// expression
@@ -42,149 +73,30 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
-		int64_t count = 0;
-		for (auto const& term : _terms)
-		{
-			if (count == 1)
-			{
-				river.write_string(".call[");
-			}
-			else if (count > 1)
-			{
-				river.write_string(",");
-			}
-			if (!check<expression_a<>>(term))
-			{
-				throw dis(_token.report() + "strange::expression_intimate::generate with non-expression term");
-			}
-			cast<expression_a<>>(term).generate(version, indent, river);
-			++count;
-		}
-		river.write_string("] ");
+		river.write_string(" intimate ");
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
-		int64_t count = 0;
-		for (auto const& term : _terms)
-		{
-			if (count == 1)
-			{
-				river.write_string("[flock_t<>::create_(");
-			}
-			else if (count > 1)
-			{
-				river.write_string(",");
-			}
-			if (!check<expression_a<>>(term))
-			{
-				throw dis(_token.report() + "strange::expression_intimate::generate_cpp with non-expression term");
-			}
-			cast<expression_a<>>(term).generate_cpp(version, indent, river);
-			++count;
-		}
-		river.write_string(")] ");
+		river.write_string(" intimate ");
 	}
 
 protected:
 	flock_a<> const _terms;
+	symbol_a<> const _member;
+	flock_a<> const _arguments;
 
-	inline expression_intimate_t(token_a<> const& token, flock_a<> const& terms)
-		: expression_t(token, is_pure_literal(token, terms))
+	inline expression_intimate_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& member, flock_a<> const& arguments)
+		: expression_t(token, is_pure_literal(token, member, arguments))
 		, _terms{ terms }
+		, _member{ member }
+		, _arguments{ arguments }
 	{}
 
-	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, flock_a<> const& terms)
+	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, symbol_a<> const& member, flock_a<> const& arguments)
 	{
 		std::pair<bool, bool> pure_literal(true, true);
-		auto it = terms.cbegin_();
-		if (it == terms.cend_())
-		{
-			throw dis(token.report() + "strange::expression_intimate::create passed no terms");
-		}
-		auto any_thing = *it;
-		if (!check<expression_a<>>(any_thing))
-		{
-			throw dis(token.report() + "strange::expression_intimate::create passed non-expression thing");
-		}
-		auto expression_thing = cast<expression_a<>>(any_thing);
-		if (!expression_thing.literal())
-		{
-			pure_literal.first = false;
-			pure_literal.second = false;
-			return pure_literal;
-		}
-		if (++it == terms.cend_())
-		{
-			throw dis(token.report() + "strange::expression_intimate::create passed too few terms");
-		}
-		auto any_member = *it;
-		if (!check<expression_a<>>(any_member))
-		{
-			throw dis(token.report() + "strange::expression_intimate::create passed non-expression member");
-		}
-		auto expression_member = cast<expression_a<>>(any_member);
-		if (!expression_member.literal())
-		{
-			pure_literal.first = false;
-			pure_literal.second = false;
-			return pure_literal;
-		}
-		try
-		{
-			auto thing = expression_thing.evaluate_();
-			auto member = expression_member.evaluate_();
-			if (!thing.operations_().has_(member))
-			{
-				throw dis(token.report() + "strange::expression_intimate::create passed non-existent member");
-			}
-			auto any_operation = thing.operations_().at_(member);
-			if (!check<operation_a<>>(any_operation))
-			{
-				throw dis(token.report() + "strange::expression_intimate::create passed non-operation member");
-			}
-			auto operation = cast<operation_a<>>(any_operation);
-			if (!operation.pure())
-			{
-				pure_literal.first = false;
-				pure_literal.second = false;
-				return pure_literal;
-			}
-			if (!operation.literal())
-			{
-				pure_literal.second = false;
-			}
-		}
-		catch (misunderstanding_a<>& misunderstanding)
-		{
-			throw dis("strange::expression_intimate::create pure literal evaluation error:") + token.report_() + misunderstanding;
-		}
-
-		while (++it != terms.cend_())
-		{
-			auto term = *it;
-			if (!check<expression_a<>>(term))
-			{
-				throw dis(token.report() + "strange::expression_intimate::create passed non-expression argument");
-			}
-			auto expression = cast<expression_a<>>(term);
-			if (!expression.pure())
-			{
-				pure_literal.first = false;
-				if (!pure_literal.second)
-				{
-					return pure_literal;
-				}
-			}
-			if (!expression.literal())
-			{
-				pure_literal.second = false;
-				if (!pure_literal.first)
-				{
-					return pure_literal;
-				}
-			}
-		}
+		//TODO pure literal
 		return pure_literal;
 	}
 
