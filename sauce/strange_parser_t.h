@@ -323,20 +323,16 @@ private:
 		unordered_shoal_a<> const& kind_shoal)
 	{
 		auto const token = _token;
-		auto terms = flock_t<>::create_();
-		auto const identifier = _identifier(scope_symbol, token.symbol_()); // _name / _scope_name
+		auto terms = flock_t<>::create_(_identifier(scope_symbol, token.symbol_())); // _name / _scope_name
 		if (!_next())
 		{
 			throw dis("strange::parser intimate operation with no arguments:") + token.report_();
 		}
 		if (_token.tag() == "punctuation" && _token.symbol() == "[")
 		{
-			terms.push_back(identifier);
 			terms.push_back(_elements(shoal_symbol, scope_symbol, fixed_herd, kind_shoal)); // me._scope_name[...]
 			return expression_intimate_t<>::create_(token, terms);
 		}
-		terms.push_back(expression_me_t<>::create_(token)); //TODO 'me' should be implied
-		terms.push_back(identifier);
 		terms.push_back(_initial(100, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)); // me._scope_name range
 		return expression_intimate_member_range_t<>::create_(token, terms);
 	}
