@@ -136,11 +136,10 @@ public:
 				throw dis("strange::conception::create merge passed non-symbol key");
 			}
 			auto key = cast<symbol_a<>>(member.first);
-			auto const& key_string = key.to_string();
-			bool const intimate = (key_string.c_str()[0] == '_');
+			bool const intimate = key.first_character() == '_';
 			if (intimate)
 			{
-				key = sym("_" + type_string + key_string);
+				key = sym("_" + type_string + key.to_string());
 			}
 			else if (DROP.has_(key))
 			{

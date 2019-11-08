@@ -497,7 +497,7 @@ public:
 	inline void mutate_attribute(symbol_a<> const& name, operation_a<> const& attribute_mutation)
 	{
 		_conception.update_(name, attribute_mutation);
-		if (name.to_string().c_str()[0] != '_')
+		if (name.first_character() != '_')
 		{
 			_operations.update_(name, attribute_mutation);
 		}
@@ -525,7 +525,7 @@ protected:
 			{
 				throw dis("<strange::any>::animate passed conception with non-symbol key");
 			}
-			if (cast<symbol_a<>>(key).to_string().c_str()[0] == '_')
+			if (cast<symbol_a<>>(key).first_character() == '_')
 			{
 				continue;
 			}

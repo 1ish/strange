@@ -17,6 +17,8 @@ class symbol_a
 public:
 	// symbol
 	inline std::string const& to_string() const;
+	inline int8_t first_character() const;
+	inline int8_t last_character() const;
 
 	inline any_a<> add__(range_a<> const& range) const;
 	inline symbol_a add_(symbol_a const& symbol) const;

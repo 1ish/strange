@@ -62,6 +62,17 @@ public:
 		return _string;
 	}
 
+	inline int8_t first_character() const
+	{
+		return _string.empty() ? 0 : _string[0];
+	}
+
+	inline int8_t last_character() const
+	{
+		auto const length = _string.length();
+		return length ? _string[length - 1] : 0;
+	}
+
 	inline symbol_a<> add__(range_a<> const& range) const
 	{
 		std::string s = _string;

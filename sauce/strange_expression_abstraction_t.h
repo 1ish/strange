@@ -51,31 +51,37 @@ public:
 				break;
 			}
 			// dimensions
-			if (!term.type_().is("strange::expression_intimate_attribute"))
+			if (!term.type_().is("strange::expression_local_at") &&
+				!term.type_().is("strange::expression_local_insert"))
 			{
 				throw dis(token.report() + "strange::expression_abstraction::create passed invalid dimension term");
 			}
 			auto const subterms = cast<expression_a<>>(term).terms_();
 			int64_t const count = subterms.size();
 			auto const name = subterms.at_index(0);
-			auto kind = no();
-			auto expression = no();
 			if (!check<symbol_a<>>(name))
 			{
 				throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol dimension name");
 			}
+			if (cast<symbol_a<>>(name).last_character() != '~')
+			{
+				throw dis(token.report() + "strange::expression_abstraction::create passed dimension name without ~ following it");
+			}
+			dimension_names.push_back(name);
 			if (count == 1)
 			{
-				kind = kind_t<>::create_();
+				dimension_kinds.push_back(kind_t<>::create_());
 			}
 			else
 			{
-				kind = subterms.at_index(1);
+				auto const kind = subterms.at_index(1);
 				if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
 				{
 					throw dis(token.report() + "strange::expression_abstraction::create passed non-kind/expression dimension kind");
 				}
+				dimension_kinds.push_back(kind);
 			}
+			auto expression = no();
 			if (count == 3)
 			{
 				expression = subterms.at_index(2);
@@ -88,8 +94,6 @@ public:
 			{
 				expression = expression_t<>::create(token);
 			}
-			dimension_names.push_back(name);
-			dimension_kinds.push_back(kind);
 			dimension_expressions.push_back(expression);
 			try
 			{

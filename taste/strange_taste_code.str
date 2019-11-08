@@ -4,13 +4,13 @@
 	{	'a' : out.write_["value\n"],
 		2 : 'c',
 		taste :
-		{	//	template <typename _element = any_a<>, typename ___ego___ = collection_a<>>
+		{	//	template <typename element = any_a<>, typename ___ego___ = collection_a<>>
 			//	class forest_t : public flock_t<___ego___>;
 			//	<forest{<<>>}[<strange::symbol>]>
 
 			<collection> :: abstraction
-			(	_element :<<>># <>,
-				(	$$<strange::range>[_element],
+			(	element~ :<<>># <>,
+				(	$$<strange::range>[element~],
 					{	empty_ :# (<>),
 						size_ :# (<number_int_64>),
 						has_ :# (item, <>),
@@ -20,19 +20,19 @@
 			),
 
 			<forest> :: abstraction
-			(	_element :<<>>,
-				(	$$<taste::collection>[_element],
+			(	element~ :<<>>,
+				(	$$<taste::collection>[element~],
 					{}
 				)
 			),
 /*
 			forest :: thing
-			(	_element :<<>># <>,
-				(	$$strange::flock[_element],
+			(	element~ :<<>># <>,
+				(	$$strange::flock[element~],
 					{	create :: function
 						(	range :<strange::range># $$strange::range::create[],
-							animate(<taste::forest[_element]>, ^^[_element], range),
-						//	$$<strange::range[_element]>::animate[$$taste::forest[_element], range],
+							animate(<taste::forest[element~]>, ^^[element~], range),
+						//	$$<strange::range[element~]>::animate[$$taste::forest[element~], range],
 						),
 
 						_forest_ :=
