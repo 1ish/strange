@@ -390,6 +390,7 @@ private:
 						throw dis("strange::parser cannot reassign fixed variable:") + _token.report_();
 					}
 					update = true;
+					_next();
 				}
 				else if (op == ":#")
 				{
@@ -411,11 +412,13 @@ private:
 				{
 					fixed = false;
 					insert = true;
+					_next();
 				}
 				else if (op == ":#")
 				{
 					fixed = true;
 					insert = true;
+					_next();
 				}
 				else if (op == ":<" || op == ":(")
 				{
@@ -435,7 +438,7 @@ private:
 		}
 		if (insert || update)
 		{
-			if (!_next())
+			if (_it == _end)
 			{
 				throw dis("strange::parser local assignment with no right-hand side:") + token.report_();
 			}
