@@ -47,7 +47,7 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<forward_const_iterator_a<>>::operations();
-			operations.update_string("decrement", native_mutation_t<bidirectional_const_iterator_a<>>::create(&bidirectional_const_iterator_a<>::decrement__));
+			operations.update_string("decrement_", native_mutation_t<bidirectional_const_iterator_a<>>::create(&bidirectional_const_iterator_a<>::decrement__));
 			return operations;
 		}();
 		return OPERATIONS;

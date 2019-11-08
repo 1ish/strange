@@ -47,7 +47,7 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<cat_a<>>::operations();
-			operations.update_string("aspects", native_extraction_t<kind_a<>>::create(&kind_a<>::aspects__));
+			operations.update_string("aspects_", native_extraction_t<kind_a<>>::create(&kind_a<>::aspects__));
 			return operations;
 		}();
 		return OPERATIONS;

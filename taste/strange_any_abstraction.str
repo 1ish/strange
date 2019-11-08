@@ -5,11 +5,11 @@ false &&
 			(	// no parents
 				{	
 					// exposure
-					"extract_thing" : "one_t const& extract_thing() const",
-					"mutate_thing" : "one_t& mutate_thing()",
+					extract_thing : "one_t const& extract_thing() const",
+					mutate_thing : "one_t& mutate_thing()",
 
 					// reflection
-					type :# (<symbol>),
+					type_ :# (<symbol>),
 				}
 			)
 		)

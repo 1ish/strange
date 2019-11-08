@@ -47,14 +47,14 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<symbol_a<>>::operations();
-			operations.update_string("order", native_extraction_t<cat_a<>>::create(&cat_a<>::order__));
-			operations.update_string("name", native_extraction_t<cat_a<>>::create(&cat_a<>::name__));
-			operations.update_string("dimensions", native_extraction_t<cat_a<>>::create(&cat_a<>::dimensions__));
-			operations.update_string("parameterss", native_extraction_t<cat_a<>>::create(&cat_a<>::parameters__));
-			operations.update_string("result", native_extraction_t<cat_a<>>::create(&cat_a<>::result__));
-			operations.update_string("reference", native_extraction_t<cat_a<>>::create(&cat_a<>::reference__));
-			operations.update_string("optional", native_extraction_t<cat_a<>>::create(&cat_a<>::optional__));
-			operations.update_string("code", native_extraction_t<cat_a<>>::create(&cat_a<>::code__));
+			operations.update_string("order_", native_extraction_t<cat_a<>>::create(&cat_a<>::order__));
+			operations.update_string("name_", native_extraction_t<cat_a<>>::create(&cat_a<>::name__));
+			operations.update_string("dimensions_", native_extraction_t<cat_a<>>::create(&cat_a<>::dimensions__));
+			operations.update_string("parameters_", native_extraction_t<cat_a<>>::create(&cat_a<>::parameters__));
+			operations.update_string("result_", native_extraction_t<cat_a<>>::create(&cat_a<>::result__));
+			operations.update_string("reference_", native_extraction_t<cat_a<>>::create(&cat_a<>::reference__));
+			operations.update_string("optional_", native_extraction_t<cat_a<>>::create(&cat_a<>::optional__));
+			operations.update_string("code_", native_extraction_t<cat_a<>>::create(&cat_a<>::code__));
 			return operations;
 		}();
 		return OPERATIONS;

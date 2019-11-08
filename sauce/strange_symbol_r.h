@@ -47,7 +47,7 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update_string("add", native_extraction_t<symbol_a<>>::create(&symbol_a<>::add__));
+			operations.update_string("add_", native_extraction_t<symbol_a<>>::create(&symbol_a<>::add__));
 			return operations;
 		}();
 		return OPERATIONS;

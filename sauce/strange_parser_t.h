@@ -109,11 +109,11 @@ private:
 			std::string const name = _token.symbol();
 			if (name.c_str()[name.length() - 1] == '_')
 			{
-				initial = _initial_attribute(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				initial = _initial_intimate(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 			}
 			else if (name.c_str()[0] == '_')
 			{
-				initial = _initial_intimate(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				initial = _initial_attribute(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 			}
 			else if (name == "true")
 			{
@@ -215,26 +215,9 @@ private:
 		std::string const name = name_symbol.to_string();
 		if (name.c_str()[name.length() - 1] == '_')
 		{
-			return _initial_attribute(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
-		}
-		if (name.c_str()[0] == '_')
-		{
 			return _initial_intimate(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 		}
-		if (!_next())
-		{
-			throw dis("strange::parser ^. with no nothing following member name:") + token.report_();
-		}
-		auto terms = flock_t<>::create_(expression_me_t<>::create_(token)); // me
-		if (_token.tag() == "punctuation" && _token.symbol() == "[")
-		{
-			terms.push_back(expression_literal_t<>::create_(token, flock_t<>::create_(name_symbol)));
-			terms += _elements(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
-			return expression_invoke_t<>::create_(token, terms);
-		}
-		terms.push_back(name_symbol);
-		terms.push_back(_initial(100, shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
-		return expression_invoke_member_range_t<>::create_(token, terms);
+		return _initial_attribute(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 	}
 
 	inline expression_a<> _initial_me_colon_dot(
@@ -254,23 +237,15 @@ private:
 		}
 		auto const name_symbol = _token.symbol_();
 		std::string const name = name_symbol.to_string();
-		if (name.c_str()[name.length() - 1] == '_')
+		if (name.c_str()[name.length() - 1] != '_')
 		{
 			throw dis("strange::parser ^:. with attribute name following it:") + token.report_();
 		}
-		else if (name.c_str()[0] == '_')
-		{
-			_next();
-			auto const terms = flock_t<>::create_(
-				expression_me_t<>::create_(token),
-				_identifier(scope_symbol, name_symbol)); // me:._name / me:._scope_name
-			return expression_intimate_member_t<>::create_(token, terms);
-		}
 		_next();
 		auto const terms = flock_t<>::create_(
-			expression_me_t<>::create_(token),
-			name_symbol); // me:.name
-		return expression_member_t<>::create_(token, terms);
+			expression_me_t<>::create_(token), //TODO move 'me' into expresson_intimate_member_t
+			_identifier(scope_symbol, name_symbol)); // me:._name / me:._scope_name
+		return expression_intimate_member_t<>::create_(token, terms);
 	}
 
 	inline expression_a<> _initial_attribute(
@@ -280,8 +255,7 @@ private:
 		unordered_shoal_a<> const& kind_shoal)
 	{
 		auto const token = _token;
-		auto const name = token.symbol_();
-		auto terms = flock_t<>::create_(_identifier(scope_symbol, name)); // _name_ / _scope_name_
+		auto terms = flock_t<>::create_(_identifier(scope_symbol, token.symbol_())); // _name_ / _scope_name_
 		if (_next() && _token.tag() == "punctuation" &&
 			(_token.symbol() == ":=" ||
 				_token.symbol() == ":<" || _token.symbol() == ":("))
@@ -706,19 +680,6 @@ private:
 				auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
 				if (key_string[key_string.length() - 1] == '_')
 				{
-					// attribute extraction/mutation
-					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, scope_symbol, new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_()));
-					if (fixed)
-					{
-						value = expression_attribute_extraction_t<>::create_(operator_token, terms);
-					}
-					else
-					{
-						value = expression_attribute_mutation_t<>::create_(operator_token, terms);
-					}
-				}
-				else
-				{
 					// extraction/mutation
 					if (_token.tag() != "punctuation" || _token.symbol() != "(")
 					{
@@ -732,6 +693,19 @@ private:
 					else
 					{
 						value = expression_mutation_t<>::create_(operator_token, terms);
+					}
+				}
+				else
+				{
+					// attribute extraction/mutation
+					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, scope_symbol, new_scope_symbol, unordered_herd_t<>::create_(), unordered_shoal_t<>::create_()));
+					if (fixed)
+					{
+						value = expression_attribute_extraction_t<>::create_(operator_token, terms);
+					}
+					else
+					{
+						value = expression_attribute_mutation_t<>::create_(operator_token, terms);
 					}
 				}
 			}
@@ -812,7 +786,7 @@ private:
 		bool const name = !parenthesis && _token.tag() == "name";
 		if (name)
 		{
-			if (_token.symbol().c_str()[_token.symbol().length() - 1] == '_')
+			if (_token.symbol().c_str()[0] == '_') //TODO
 			{
 				modify = true;
 				expression = _initial(100, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
@@ -1073,136 +1047,136 @@ private:
 				bool right_to_left = false;
 				if (op == "@?")
 				{
-					oper = sym("has");
+					oper = sym("has_");
 				}
 				else if (op == "@")
 				{
-					oper = sym("at");
+					oper = sym("at_");
 				}
 				else if (op == "@=")
 				{
-					oper = sym("update");
+					oper = sym("update_");
 					count = 3;
 				}
 				else if (op == "@+")
 				{
-					oper = sym("insert");
+					oper = sym("insert_");
 					count = 3;
 				}
 				else if (op == "@-")
 				{
-					oper = sym("erase");
+					oper = sym("erase_");
 				}
 				else if (op == "@<")
 				{
-					oper = sym("push_back");
+					oper = sym("push_back_");
 				}
 				else if (op == ">@")
 				{
-					oper = sym("push_front");
+					oper = sym("push_front_");
 				}
 				else if (op == "@>")
 				{
-					oper = sym("pop_back");
+					oper = sym("pop_back_");
 					count = 1;
 				}
 				else if (op == "<@")
 				{
-					oper = sym("pop_front");
+					oper = sym("pop_front_");
 					count = 1;
 				}
 				else if (op == "++")
 				{
-					oper = sym("increment");
+					oper = sym("increment_");
 					count = 1;
 				}
 				else if (op == "--")
 				{
-					oper = sym("decrement");
+					oper = sym("decrement_");
 					count = 1;
 				}
 				else if (op == "?")
 				{
-					oper = sym("something");
+					oper = sym("something_");
 					count = 1;
 				}
 				else if (op == "!")
 				{
-					oper = sym("nothing");
+					oper = sym("nothing_");
 					count = 1;
 				}
 				else if (op == "*")
 				{
-					oper = sym("multiply");
+					oper = sym("multiply_");
 				}
 				else if (op == "/")
 				{
-					oper = sym("divide");
+					oper = sym("divide_");
 				}
 				else if (op == "%")
 				{
-					oper = sym("modulo");
+					oper = sym("modulo_");
 				}
 				else if (op == "+")
 				{
-					oper = sym("add");
+					oper = sym("add_");
 				}
 				else if (op == "-")
 				{
-					oper = sym("subtract");
+					oper = sym("subtract_");
 				}
 				else if (op == "<")
 				{
-					oper = sym("less_than");
+					oper = sym("less_than_");
 				}
 				else if (op == ">")
 				{
-					oper = sym("greater_than");
+					oper = sym("greater_than_");
 				}
 				else if (op == "<=")
 				{
-					oper = sym("less_or_equal");
+					oper = sym("less_or_equal_");
 				}
 				else if (op == ">=")
 				{
-					oper = sym("greater_or_equal");
+					oper = sym("greater_or_equal_");
 				}
 				else if (op == "==")
 				{
-					oper = sym("same");
+					oper = sym("same_");
 				}
 				else if (op == "!=")
 				{
-					oper = sym("different");
+					oper = sym("different_");
 				}
 				else if (op == "=")
 				{
-					oper = sym("self_assign");
+					oper = sym("self_assign_");
 					right_to_left = true;
 				}
 				else if (op == "*=")
 				{
-					oper = sym("self_multiply");
+					oper = sym("self_multiply_");
 					right_to_left = true;
 				}
 				else if (op == "/=")
 				{
-					oper = sym("self_divide");
+					oper = sym("self_divide_");
 					right_to_left = true;
 				}
 				else if (op == "%=")
 				{
-					oper = sym("self_modulo");
+					oper = sym("self_modulo_");
 					right_to_left = true;
 				}
 				else if (op == "+=")
 				{
-					oper = sym("self_add");
+					oper = sym("self_add_");
 					right_to_left = true;
 				}
 				else if (op == "-=")
 				{
-					oper = sym("self_subtract");
+					oper = sym("self_subtract_");
 					right_to_left = true;
 				}
 				else
@@ -1213,6 +1187,7 @@ private:
 				{
 					// invoke unary operator
 					_next();
+					//TODO don't wrap member symbol in an expression
 					auto const terms = flock_t<>::create_(initial, expression_literal_t<>::create_(token, flock_t<>::create_(oper)));
 					return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 				}
@@ -1223,6 +1198,7 @@ private:
 					{
 						throw dis("strange::parser binary operator with nothing following it:") + token.report_();
 					}
+					//TODO don't wrap member symbol in an expression
 					auto const terms = flock_t<>::create_(
 						initial,
 						expression_literal_t<>::create_(token, flock_t<>::create_(oper)),
@@ -1239,6 +1215,7 @@ private:
 					auto const second = _initial(precedence + (right_to_left ? 0 : 1), shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 					if (!_next() || _token.tag() != "punctuation" || _token.symbol() != ":")
 					{
+						//TODO don't wrap member symbol in an expression
 						auto const terms = flock_t<>::create_(
 							initial,
 							expression_literal_t<>::create_(token, flock_t<>::create_(oper)),
@@ -1249,6 +1226,7 @@ private:
 					{
 						throw dis("strange::parser ternary operator with nothing following the delimiter:") + token.report_();
 					}
+					//TODO don't wrap member symbol in an expression
 					auto const terms = flock_t<>::create_(
 						initial,
 						expression_literal_t<>::create_(token, flock_t<>::create_(oper)),
@@ -1337,7 +1315,7 @@ private:
 			throw dis("strange::parser . with non-name following it:") + token.report_();
 		}
 		auto terms = flock_t<>::create_(initial);
-		if (token.symbol().c_str()[token.symbol().length() - 1] == '_')
+		if (token.symbol().c_str()[token.symbol().length() - 1] != '_')
 		{
 			// attribute
 			terms.push_back(token.symbol_());
@@ -1357,6 +1335,7 @@ private:
 		}
 		if (_token.tag() == "punctuation" && _token.symbol() == "[")
 		{
+			//TODO don't wrap member symbol in an expression
 			terms.push_back(expression_literal_t<>::create_(token, flock_t<>::create_(token.symbol_())));
 			terms += _elements(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 			return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shoal_symbol, scope_symbol, fixed_herd, kind_shoal);

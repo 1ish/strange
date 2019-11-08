@@ -47,8 +47,8 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<any_a<>>::operations();
-			operations.update_string("cbegin", native_extraction_t<range_a<>>::create(&range_a<>::cbegin__));
-			operations.update_string("cend", native_extraction_t<range_a<>>::create(&range_a<>::cend__));
+			operations.update_string("cbegin_", native_extraction_t<range_a<>>::create(&range_a<>::cbegin__));
+			operations.update_string("cend_", native_extraction_t<range_a<>>::create(&range_a<>::cend__));
 			return operations;
 		}();
 		return OPERATIONS;

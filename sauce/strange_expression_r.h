@@ -47,11 +47,11 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<operation_a<>>::operations();
-			operations.update_string("evaluate", native_extraction_t<expression_a<>>::create(&expression_a<>::evaluate__));
-			operations.update_string("token", native_extraction_t<expression_a<>>::create(&expression_a<>::token__));
-			operations.update_string("terms", native_extraction_t<expression_a<>>::create(&expression_a<>::terms__));
-			operations.update_string("generate", native_extraction_t<expression_a<>>::create(&expression_a<>::generate__));
-			operations.update_string("generate_cpp", native_extraction_t<expression_a<>>::create(&expression_a<>::generate_cpp__));
+			operations.update_string("evaluate_", native_extraction_t<expression_a<>>::create(&expression_a<>::evaluate__));
+			operations.update_string("token_", native_extraction_t<expression_a<>>::create(&expression_a<>::token__));
+			operations.update_string("terms_", native_extraction_t<expression_a<>>::create(&expression_a<>::terms__));
+			operations.update_string("generate_", native_extraction_t<expression_a<>>::create(&expression_a<>::generate__));
+			operations.update_string("generate_cpp_", native_extraction_t<expression_a<>>::create(&expression_a<>::generate_cpp__));
 			return operations;
 		}();
 		return OPERATIONS;

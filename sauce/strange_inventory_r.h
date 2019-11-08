@@ -47,8 +47,8 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<collection_a<>>::operations();
-			operations.update_string("begin", native_mutation_t<inventory_a<>>::create(&inventory_a<>::begin__));
-			operations.update_string("end", native_mutation_t<inventory_a<>>::create(&inventory_a<>::end__));
+			operations.update_string("begin_", native_mutation_t<inventory_a<>>::create(&inventory_a<>::begin__));
+			operations.update_string("end_", native_mutation_t<inventory_a<>>::create(&inventory_a<>::end__));
 			return operations;
 		}();
 		return OPERATIONS;

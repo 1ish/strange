@@ -1,41 +1,41 @@
 (	out :# $$strange::river::out[],
-	out.write["hello\n"],
+	out.write_["hello\n"],
 	false &&
-	{	'a' : out.write["value\n"],
+	{	'a' : out.write_["value\n"],
 		2 : 'c',
 		taste :
-		{	//	template <typename _element_ = any_a<>, typename ___ego___ = collection_a<>>
+		{	//	template <typename _element = any_a<>, typename ___ego___ = collection_a<>>
 			//	class forest_t : public flock_t<___ego___>;
 			//	<forest{<<>>}[<strange::symbol>]>
 
 			<collection> :: abstraction
-			(	_element_ :<<>># <>,
-				(	$$<strange::range>[_element_],
-					{	empty :# (<>),
-						size :# (<number_int_64>),
-						has :# (item, <>),
-						insert := (key, value, <>),
+			(	_element :<<>># <>,
+				(	$$<strange::range>[_element],
+					{	empty_ :# (<>),
+						size_ :# (<number_int_64>),
+						has_ :# (item, <>),
+						insert_ := (key, value, <>),
 					}
 				)
 			),
 
 			<forest> :: abstraction
-			(	_element_ :<<>>,
-				(	$$<taste::collection>[_element_],
+			(	_element :<<>>,
+				(	$$<taste::collection>[_element],
 					{}
 				)
 			),
 /*
 			forest :: thing
-			(	_element_ :<<>># <>,
-				(	$$strange::flock[_element_],
+			(	_element :<<>># <>,
+				(	$$strange::flock[_element],
 					{	create :: function
 						(	range :<strange::range># $$strange::range::create[],
-							animate(<taste::forest[_element_]>, ^^[_element_], range),
-						//	$$<strange::range[_element_]>::animate[$$taste::forest[_element_], range],
+							animate(<taste::forest[_element]>, ^^[_element], range),
+						//	$$<strange::range[_element]>::animate[$$taste::forest[_element], range],
 						),
 
-						_forest :=
+						_forest_ :=
 						(	range :<strange::range>,
 							(
 							)
@@ -59,11 +59,11 @@
 			)
 		}
 	},
-	out.write
+	out.write_
 	[
 "line1
 line2
 "
 	],
-	out.write["goodbye\n"],
+	out.write_["goodbye\n"],
 )

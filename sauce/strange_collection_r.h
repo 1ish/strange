@@ -47,22 +47,22 @@ public:
 		static unordered_shoal_a<> OPERATIONS = []()
 		{
 			auto operations = reflection<range_a<>>::operations();
-			operations.update_string("has", native_extraction_t<collection_a<>>::create(&collection_a<>::has__));
-			operations.update_string("at", native_extraction_t<collection_a<>>::create(&collection_a<>::at__));
-			operations.update_string("update", native_mutation_t<collection_a<>>::create(&collection_a<>::update__));
-			operations.update_string("insert", native_mutation_t<collection_a<>>::create(&collection_a<>::insert__));
-			operations.update_string("erase", native_mutation_t<collection_a<>>::create(&collection_a<>::erase__));
-			operations.update_string("clear", native_mutation_t<collection_a<>>::create(&collection_a<>::clear__));
-			operations.update_string("size", native_extraction_t<collection_a<>>::create(&collection_a<>::size__));
-			operations.update_string("empty", native_extraction_t<collection_a<>>::create(&collection_a<>::empty__));
-			operations.update_string("push_front", native_mutation_t<collection_a<>>::create(&collection_a<>::push_front__));
-			operations.update_string("pop_front", native_mutation_t<collection_a<>>::create(&collection_a<>::pop_front__));
-			operations.update_string("push_back", native_mutation_t<collection_a<>>::create(&collection_a<>::push_back__));
-			operations.update_string("pop_back", native_mutation_t<collection_a<>>::create(&collection_a<>::pop_back__));
-			operations.update_string("self_add", native_mutation_t<collection_a<>>::create(&collection_a<>::self_add__));
-			operations.update_string("add", native_extraction_t<collection_a<>>::create(&collection_a<>::add__));
-			operations.update_string("self_subtract", native_mutation_t<collection_a<>>::create(&collection_a<>::self_subtract__));
-			operations.update_string("subtract", native_extraction_t<collection_a<>>::create(&collection_a<>::subtract__));
+			operations.update_string("has_", native_extraction_t<collection_a<>>::create(&collection_a<>::has__));
+			operations.update_string("at_", native_extraction_t<collection_a<>>::create(&collection_a<>::at__));
+			operations.update_string("update_", native_mutation_t<collection_a<>>::create(&collection_a<>::update__));
+			operations.update_string("insert_", native_mutation_t<collection_a<>>::create(&collection_a<>::insert__));
+			operations.update_string("erase_", native_mutation_t<collection_a<>>::create(&collection_a<>::erase__));
+			operations.update_string("clear_", native_mutation_t<collection_a<>>::create(&collection_a<>::clear__));
+			operations.update_string("size_", native_extraction_t<collection_a<>>::create(&collection_a<>::size__));
+			operations.update_string("empty_", native_extraction_t<collection_a<>>::create(&collection_a<>::empty__));
+			operations.update_string("push_front_", native_mutation_t<collection_a<>>::create(&collection_a<>::push_front__));
+			operations.update_string("pop_front_", native_mutation_t<collection_a<>>::create(&collection_a<>::pop_front__));
+			operations.update_string("push_back_", native_mutation_t<collection_a<>>::create(&collection_a<>::push_back__));
+			operations.update_string("pop_back_", native_mutation_t<collection_a<>>::create(&collection_a<>::pop_back__));
+			operations.update_string("self_add_", native_mutation_t<collection_a<>>::create(&collection_a<>::self_add__));
+			operations.update_string("add_", native_extraction_t<collection_a<>>::create(&collection_a<>::add__));
+			operations.update_string("self_subtract_", native_mutation_t<collection_a<>>::create(&collection_a<>::self_subtract__));
+			operations.update_string("subtract_", native_extraction_t<collection_a<>>::create(&collection_a<>::subtract__));
 			return operations;
 		}();
 		return OPERATIONS;
