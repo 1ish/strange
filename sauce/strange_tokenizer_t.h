@@ -593,6 +593,7 @@ protected:
 			precedence.update_string("--", number_int_64_t<>::create(80));
 			precedence.update_string("?", number_int_64_t<>::create(80));
 			precedence.update_string("!", number_int_64_t<>::create(80));
+			precedence.update_string("#", number_int_64_t<>::create(80));
 			precedence.update_string("*", number_int_64_t<>::create(75));
 			precedence.update_string("/", number_int_64_t<>::create(75));
 			precedence.update_string("%", number_int_64_t<>::create(75));

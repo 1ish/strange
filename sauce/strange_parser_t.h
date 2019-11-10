@@ -1201,6 +1201,11 @@ private:
 				{
 					oper = sym("different_");
 				}
+				else if (op == "#")
+				{
+					oper = sym("hash_");
+					count = 1;
+				}
 				else if (op == "=")
 				{
 					oper = sym("self_assign_");
