@@ -1026,13 +1026,37 @@ public:
 		return number;
 	}
 
+	inline lake_a<_primitive_> self_assign_(range_a<> const& range)
+	{
+		if (check<lake_a<_primitive_>>(range))
+		{
+			auto const other = cast<lake_a<_primitive_>>(range);
+			auto read_lock = other.read_lock_();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_vector = other.extract();
+		}
+		else
+		{
+			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_vector.clear();
+			for (auto const& thing : range)
+			{
+				_vector.push_back(thing);
+			}
+		}
+		return me_();
+	}
+	
 	inline lake_t& operator+=(any_a<> const& range)
 	{
 		if (check<lake_a<_primitive_>>(range))
 		{
-			auto other = cast<lake_a<_primitive_>>(range).extract();
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_vector.insert(_vector.cend(), other.cbegin(), other.cend());
+			auto const other = cast<lake_a<_primitive_>>(range);
+			auto read_lock = other.read_lock_();
+			auto const& other_vector = other.extract();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_vector.insert(_vector.cend(), other_vector.cbegin(), other_vector.cend());
 		}
 		else
 		{
@@ -1040,7 +1064,8 @@ public:
 			{
 				throw dis("strange::lake += passed non-range");
 			}
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				_vector.push_back(thing);
@@ -1062,7 +1087,8 @@ public:
 			{
 				throw dis("strange::lake -= passed non-range");
 			}
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				if (_vector.empty())

@@ -59,6 +59,7 @@ public:
 			operations.update_string("pop_front_", native_mutation_t<collection_a<>>::create(&collection_a<>::pop_front__));
 			operations.update_string("push_back_", native_mutation_t<collection_a<>>::create(&collection_a<>::push_back__));
 			operations.update_string("pop_back_", native_mutation_t<collection_a<>>::create(&collection_a<>::pop_back__));
+			operations.update_string("self_assign_", native_mutation_t<collection_a<>>::create(&collection_a<>::self_assign__));
 			operations.update_string("self_add_", native_mutation_t<collection_a<>>::create(&collection_a<>::self_add__));
 			operations.update_string("add_", native_extraction_t<collection_a<>>::create(&collection_a<>::add__));
 			operations.update_string("self_subtract_", native_mutation_t<collection_a<>>::create(&collection_a<>::self_subtract__));

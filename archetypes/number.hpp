@@ -22,6 +22,9 @@ public:
 	inline any_a<> decrement__(range_a<> const& _);
 	inline number_a decrement_();
 
+	inline any_a<> self_assign__(range_a<> const& range);
+	inline number_a self_assign_(number_a const& number);
+
 	inline any_a<> self_add__(range_a<> const& range);
 	inline number_a self_add_(number_a const& number);
 

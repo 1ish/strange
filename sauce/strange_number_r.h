@@ -49,6 +49,7 @@ public:
 			auto operations = reflection<any_a<>>::operations();
 			operations.update_string("increment_", native_mutation_t<number_a<>>::create(&number_a<>::increment__));
 			operations.update_string("decrement_", native_mutation_t<number_a<>>::create(&number_a<>::decrement__));
+			operations.update_string("self_assign_", native_mutation_t<number_a<>>::create(&number_a<>::self_assign__));
 			operations.update_string("self_add_", native_mutation_t<number_a<>>::create(&number_a<>::self_add__));
 			operations.update_string("add_", native_extraction_t<number_a<>>::create(&number_a<>::add__));
 			operations.update_string("self_subtract_", native_mutation_t<number_a<>>::create(&number_a<>::self_subtract__));

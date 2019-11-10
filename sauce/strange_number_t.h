@@ -102,6 +102,27 @@ public:
 		return result;
 	}
 
+	inline any_a<> self_assign__(range_a<> const& range)
+	{
+		auto const it = range.cbegin_();
+		if (it == range.cend_())
+		{
+			throw dis("strange::number self_assign passed empty range");
+		}
+		auto const number = *it;
+		if (!check<number_a<>>(number))
+		{
+			throw dis("strange::number self_assign passed non-number");
+		}
+		return self_assign_(cast<number_a<>>(number));
+	}
+
+	inline number_a<> self_assign_(number_a<> const& number)
+	{
+		_number = number_u<_primitive_>::from_number(number);
+		return me_();
+	}
+
 	inline any_a<> self_add__(range_a<> const& range)
 	{
 		for (auto const& thing : range)

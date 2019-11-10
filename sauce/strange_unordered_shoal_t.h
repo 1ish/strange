@@ -510,19 +510,63 @@ public:
 		return result;
 	}
 
+	inline unordered_shoal_a<> self_assign_(range_a<> const& range)
+	{
+		if (check<unordered_shoal_a<>>(range))
+		{
+			auto const other = cast<unordered_shoal_a<>>(range);
+			auto read_lock = other.read_lock_();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_map = other.extract();
+		}
+		else if (check<ordered_shoal_a<>>(range))
+		{
+			auto const other = cast<ordered_shoal_a<>>(range);
+			auto read_lock = other.read_lock_();
+			auto const& other_map = other.extract();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_map.clear();
+			_map.insert(other_map.cbegin(), other_map.cend());
+		}
+		else
+		{
+			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_map.clear();
+			for (auto const& thing : range)
+			{
+				if (!check<flock_a<>>(thing))
+				{
+					throw dis("strange::unordered_shoal self_assign passed range containing non-flock");
+				}
+				flock_a<> pair = cast<flock_a<>>(thing);
+				if (pair.size() != 2)
+				{
+					throw dis("strange::unordered_shoal self_assign passed range containing flock of wrong size");
+				}
+				_map.emplace(pair.at_index(0), pair.at_index(1));
+			}
+		}
+		return me_();
+	}
+
 	inline unordered_shoal_t& operator+=(any_a<> const& range)
 	{
 		if (check<unordered_shoal_a<>>(range))
 		{
-			auto other = cast<unordered_shoal_a<>>(range).extract();
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_map.insert(other.cbegin(), other.cend());
+			auto const other = cast<unordered_shoal_a<>>(range);
+			auto read_lock = other.read_lock_();
+			auto const& other_map = other.extract();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_map.insert(other_map.cbegin(), other_map.cend());
 		}
 		else if (check<ordered_shoal_a<>>(range))
 		{
-			auto other = cast<ordered_shoal_a<>>(range).extract();
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_map.insert(other.cbegin(), other.cend());
+			auto const other = cast<ordered_shoal_a<>>(range);
+			auto read_lock = other.read_lock_();
+			auto const& other_map = other.extract();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_map.insert(other_map.cbegin(), other_map.cend());
 		}
 		else
 		{
@@ -530,7 +574,8 @@ public:
 			{
 				throw dis("strange::unordered_shoal += passed non-range");
 			}
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				if (!check<flock_a<>>(thing))
@@ -552,18 +597,20 @@ public:
 	{
 		if (check<unordered_shoal_a<>>(range))
 		{
-			auto other = cast<unordered_shoal_a<>>(range).extract();
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			for (auto const& pair : other)
+			auto const other = cast<unordered_shoal_a<>>(range);
+			auto read_lock = other.read_lock_();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			for (auto const& pair : other.extract())
 			{
 				_map.erase(pair.first);
 			}
 		}
 		else if (check<ordered_shoal_a<>>(range))
 		{
-			auto other = cast<ordered_shoal_a<>>(range).extract();
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			for (auto const& pair : other)
+			auto const other = cast<ordered_shoal_a<>>(range);
+			auto read_lock = other.read_lock_();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			for (auto const& pair : other.extract())
 			{
 				_map.erase(pair.first);
 			}
@@ -574,7 +621,8 @@ public:
 			{
 				throw dis("strange::unordered_shoal -= passed non-range");
 			}
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				_map.erase(thing);

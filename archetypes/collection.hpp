@@ -61,6 +61,9 @@ public:
 	inline any_a<> pop_back__(range_a<> const& _);
 	inline any_a<> pop_back_();
 
+	inline any_a<> self_assign__(range_a<> const& range);
+	inline collection_a self_assign_(range_a<> const& range);
+
 	inline any_a<> self_add__(range_a<> const& range);
 	inline collection_a self_add_(range_a<> const& range);
 

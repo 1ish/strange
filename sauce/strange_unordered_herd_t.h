@@ -342,19 +342,54 @@ public:
 		return result;
 	}
 
+	inline unordered_herd_a<> self_assign_(range_a<> const& range)
+	{
+		if (check<unordered_herd_a<>>(range))
+		{
+			auto const other = cast<unordered_herd_a<>>(range);
+			auto read_lock = other.read_lock_();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_set = other.extract();
+		}
+		else if (check<ordered_herd_a<>>(range))
+		{
+			auto const other = cast<ordered_herd_a<>>(range);
+			auto read_lock = other.read_lock_();
+			auto const& other_set = other.extract();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_set.clear();
+			_set.insert(other_set.cbegin(), other_set.cend());
+		}
+		else
+		{
+			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_set.clear();
+			for (auto const& thing : range)
+			{
+				_set.insert(thing);
+			}
+		}
+		return me_();
+	}
+
 	inline unordered_herd_t& operator+=(any_a<> const& range)
 	{
 		if (check<unordered_herd_a<>>(range))
 		{
-			auto other = cast<unordered_herd_a<>>(range).extract();
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_set.insert(other.cbegin(), other.cend());
+			auto const other = cast<unordered_herd_a<>>(range);
+			auto read_lock = other.read_lock_();
+			auto const& other_set = other.extract();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_set.insert(other_set.cbegin(), other_set.cend());
 		}
 		else if (check<ordered_herd_a<>>(range))
 		{
-			auto other = cast<ordered_herd_a<>>(range).extract();
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_set.insert(other.cbegin(), other.cend());
+			auto const other = cast<ordered_herd_a<>>(range);
+			auto read_lock = other.read_lock_();
+			auto const& other_set = other.extract();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
+			_set.insert(other_set.cbegin(), other_set.cend());
 		}
 		else
 		{
@@ -362,7 +397,8 @@ public:
 			{
 				throw dis("strange::unordered_herd += passed non-range");
 			}
-			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			for (auto const& thing : cast<range_a<>>(range))
 			{
 				_set.insert(thing);
@@ -377,7 +413,8 @@ public:
 		{
 			throw dis("strange::unordered_herd -= passed non-range");
 		}
-		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
+		auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 		for (auto const& thing : cast<range_a<>>(range))
 		{
 			_set.erase(thing);

@@ -167,6 +167,11 @@ public:
 		return pop_back_();
 	}
 
+	inline any_a<> self_assign__(range_a<> const& range)
+	{
+		return self_assign_(range);
+	}
+	
 	inline any_a<> self_add__(range_a<> const& range)
 	{
 		for (auto const& rng : range)
