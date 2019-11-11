@@ -370,16 +370,16 @@ private:
 		}
 		auto const token = _token;
 		auto name = _token.symbol_();
-		auto kind = boole(!_next() || _token.tag() != "punctuation");
-		bool const dimension = !kind && _token.symbol() == "~";
+		bool non_instruction = !_next() || _token.tag() != "punctuation";
+		bool const dimension = !non_instruction && _token.symbol() == "~";
 		if (dimension)
 		{
 			name = name + _token.symbol_();
-			kind = boole(!_next() || _token.tag() != "punctuation");
+			non_instruction = !_next() || _token.tag() != "punctuation";
 		}
-		if (!kind)
+		if (!non_instruction)
 		{
-			kind = kind_shoal.at_(name);
+			auto kind = kind_shoal.at_(name);
 			bool fixed = fixed_herd.has(name);
 			bool insert = false;
 			bool update = false;
@@ -484,12 +484,13 @@ private:
 					return expression_local_update_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 				}
 			}
+			non_instruction = dimension || kind;
 		}
 		if (shared)
 		{
 			return expression_shared_at_t<>::create_(token, flock_t<>::create_(name));
 		}
-		if (!dimension && !kind && _shared.has_string(token.symbol() + "!"))
+		if (!non_instruction && _shared.has_string(token.symbol() + "!"))
 		{
 			return _instruction(token, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 		}
