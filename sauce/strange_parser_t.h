@@ -124,10 +124,6 @@ private:
 				_next();
 				initial = expression_literal_t<>::create_(_token, flock_t<>::create_(no()));
 			}
-			else if (_shared.has_string(_token.symbol() + "!"))
-			{
-				initial = _initial_instruction(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
-			}
 			else
 			{
 				initial = _initial_local(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
@@ -336,33 +332,29 @@ private:
 			: sym(scope_symbol.to_string() + "::" + name.to_string());
 	}
 
-	inline expression_a<> _initial_instruction(
+	inline expression_a<> _instruction(
+		token_a<> const& token,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
 		unordered_herd_a<> const& fixed_herd,
 		unordered_shoal_a<> const& kind_shoal)
 	{
-		auto const token = _token;
 		auto const instruction = _shared.at_string(token.symbol() + "!");
 		if (!instruction)
 		{
 			throw dis("strange::parser instruction not recognised:") + token.report_();
 		}
-		if (!_next())
+		if (_token.tag() != "punctuation" || _token.symbol() != "(")
 		{
 			throw dis("strange::parser instruction with no arguments:") + token.report_();
 		}
-		if (_token.tag() == "punctuation" && _token.symbol() == "(")
+		auto const expression = instruction.operate(no(),
+			flock_t<>::create_(token, _elements(shoal_symbol, scope_symbol, fixed_herd, kind_shoal)));
+		if (!check<expression_a<>>(expression))
 		{
-			auto const expression = instruction.operate(no(),
-				flock_t<>::create_(token, _elements(shoal_symbol, scope_symbol, fixed_herd, kind_shoal)));
-			if (!check<expression_a<>>(expression))
-			{
-				throw dis("strange::parser instruction returned non-expression:") + token.report_();
-			}
-			return cast<expression_a<>>(expression);
+			throw dis("strange::parser instruction returned non-expression:") + token.report_();
 		}
-		throw dis("strange::parser instruction with no arguments:") + token.report_();
+		return cast<expression_a<>>(expression);
 	}
 
 	inline expression_a<> _initial_local(
@@ -378,126 +370,128 @@ private:
 		}
 		auto const token = _token;
 		auto name = _token.symbol_();
-		if (!_next() || _token.tag() != "punctuation")
-		{
-			return expression_local_at_t<>::create_(token, flock_t<>::create_(name));
-		}
-		bool const dimension = _token.symbol() == "~";
+		auto kind = boole(!_next() || _token.tag() != "punctuation");
+		bool const dimension = !kind && _token.symbol() == "~";
 		if (dimension)
 		{
 			name = name + _token.symbol_();
-			if (!_next() || _token.tag() != "punctuation")
-			{
-				return expression_local_at_t<>::create_(token, flock_t<>::create_(name));
-			}
+			kind = boole(!_next() || _token.tag() != "punctuation");
 		}
-		bool fixed = fixed_herd.has(name);
-		auto kind = kind_shoal.at_(name);
-		bool insert = false;
-		bool update = false;
-		bool optional = true;
-		auto const op = _token.symbol();
-		if (kind)
+		if (!kind)
 		{
-			if (op == ":=")
+			kind = kind_shoal.at_(name);
+			bool fixed = fixed_herd.has(name);
+			bool insert = false;
+			bool update = false;
+			bool optional = true;
+			auto const op = _token.symbol();
+			if (kind)
 			{
-				if (fixed)
+				if (op == ":=")
 				{
-					throw dis("strange::parser cannot reassign fixed variable:") + _token.report_();
+					if (fixed)
+					{
+						throw dis("strange::parser cannot reassign fixed variable:") + _token.report_();
+					}
+					update = true;
+					_next();
 				}
-				update = true;
-				_next();
-			}
-			else if (op == ":#")
-			{
-				throw dis("strange::parser cannot reassign variable with fixed:") + _token.report_();
-			}
-			else if (op == ":<" || op == ":(")
-			{
-				throw dis("strange::parser cannot reassign variable kind:") + _token.report_();
-			}
-		}
-		else if (fixed)
-		{
-			throw dis("strange::parser recursive variable definition:") + _token.report_();
-		}
-		else
-		{
-			kind = kind_t<>::create_();
-			if (op == ":=")
-			{
-				fixed = dimension;
-				insert = true;
-				_next();
-			}
-			else if (op == ":#")
-			{
-				fixed = true;
-				insert = true;
-				_next();
-			}
-			else if (op == ":<" || op == ":(")
-			{
-				kind = _kind(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
-				bool const punctuation = _previous.tag() == "punctuation";
-				fixed = punctuation && _previous.symbol() == "#";
-				optional = fixed || punctuation && (_previous.symbol() == "=" || _previous.symbol() == ">=");
-				fixed = fixed || dimension;
-				insert = true;
-				try
+				else if (op == ":#")
 				{
-					kind = cast<expression_a<>>(kind).evaluate_();
+					throw dis("strange::parser cannot reassign variable with fixed:") + _token.report_();
 				}
-				catch (misunderstanding_a<>&)
-				{}
+				else if (op == ":<" || op == ":(")
+				{
+					throw dis("strange::parser cannot reassign variable kind:") + _token.report_();
+				}
 			}
-		}
-		if (insert || update)
-		{
-			if (_it == _end)
+			else if (fixed)
 			{
-				throw dis("strange::parser local assignment with no right-hand side:") + token.report_();
+				throw dis("strange::parser recursive variable definition:") + _token.report_();
 			}
-			unordered_herd_a<>(fixed_herd, true).insert(name);
-			any_a<> const rhs = optional
-				? _initial(0, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)
-				: no();
-			if (!fixed)
+			else
 			{
-				unordered_herd_a<>(fixed_herd, true).erase(name);
+				if (op == ":=")
+				{
+					kind = kind_t<>::create_();
+					fixed = dimension;
+					insert = true;
+					_next();
+				}
+				else if (op == ":#")
+				{
+					kind = kind_t<>::create_();
+					fixed = true;
+					insert = true;
+					_next();
+				}
+				else if (op == ":<" || op == ":(")
+				{
+					kind = _kind(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+					bool const punctuation = _previous.tag() == "punctuation";
+					fixed = punctuation && _previous.symbol() == "#";
+					optional = fixed || punctuation && (_previous.symbol() == "=" || _previous.symbol() == ">=");
+					fixed = fixed || dimension;
+					insert = true;
+					try
+					{
+						kind = cast<expression_a<>>(kind).evaluate_();
+					}
+					catch (misunderstanding_a<>&)
+					{}
+				}
 			}
-			if (insert)
+			if (insert || update)
 			{
-				unordered_shoal_a<>(kind_shoal, true).insert_(name, kind);
-				if (optional)
+				if (_it == _end)
+				{
+					throw dis("strange::parser local assignment with no right-hand side:") + token.report_();
+				}
+				unordered_herd_a<>(fixed_herd, true).insert(name);
+				any_a<> const rhs = optional
+					? _initial(0, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)
+					: no();
+				if (!fixed)
+				{
+					unordered_herd_a<>(fixed_herd, true).erase(name);
+				}
+				if (insert)
+				{
+					unordered_shoal_a<>(kind_shoal, true).insert_(name, kind);
+					if (optional)
+					{
+						if (shared)
+						{
+							return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
+						}
+						return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
+					}
+					else
+					{
+						if (shared)
+						{
+							return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind));
+						}
+						return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind));
+					}
+				}
+				if (update)
 				{
 					if (shared)
 					{
-						return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
+						return expression_shared_update_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 					}
-					return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
+					return expression_local_update_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 				}
-				else
-				{
-					if (shared)
-					{
-						return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind));
-					}
-					return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind));
-				}
-			}
-			if (update)
-			{
-				if (shared)
-				{
-					return expression_shared_update_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
-				}
-				return expression_local_update_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 			}
 		}
 		if (shared)
 		{
 			return expression_shared_at_t<>::create_(token, flock_t<>::create_(name));
+		}
+		if (!dimension && !kind && _shared.has_string(token.symbol() + "!"))
+		{
+			return _instruction(token, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 		}
 		return expression_local_at_t<>::create_(token, flock_t<>::create_(name));
 	}
