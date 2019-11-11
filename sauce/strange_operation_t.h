@@ -39,6 +39,9 @@ public:
 		return _literal;
 	}
 
+	static inline void aspects(unordered_shoal_a<> const&)
+	{}
+
 protected:
 	bool const _pure;
 	bool const _literal;

@@ -180,6 +180,9 @@ public:
 		return false;
 	}
 
+	static inline void aspects(unordered_shoal_a<> const&) //TODO
+	{}
+
 protected:
 	// construction
 	inline operation_c(shoal_a<> const& conception)

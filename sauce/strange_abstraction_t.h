@@ -158,6 +158,8 @@ protected:
 	static inline void _merge(unordered_shoal_a<> const& parent, unordered_shoal_a<>& child)
 	{
 		auto& map = child.reference();
+		auto const aspects = parent.at_string("~");
+		bool const aspects_unordered_shoal = check<unordered_shoal_a<>>(aspects);
 		for (auto const& member : parent.extract())
 		{
 			if (!check<symbol_a<>>(member.first))
@@ -170,7 +172,12 @@ protected:
 				// no overrides
 				throw dis("strange::abstraction::create merge invalid override");
 			}
-			map.emplace(key, member.second);
+			auto value = member.second;
+			if (aspects_unordered_shoal && check<operation_a<>>(value))
+			{
+				cast<operation_a<>>(value, true).aspects(cast<unordered_shoal_a<>>(aspects));
+			}
+			map.emplace(key, value);
 		}
 	}
 

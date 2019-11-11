@@ -8,6 +8,7 @@
 #include "any_forward.hpp"
 #include "range_forward.hpp"
 #include "cat_forward.hpp"
+#include "unordered_shoal_forward.hpp"
 
 namespace strange
 {
@@ -24,6 +25,8 @@ public:
 	inline any_a<> literal__(range_a<> const& _) const;
 	inline any_a<> literal_() const;
 	inline bool literal() const;
+
+	inline void aspects(unordered_shoal_a<> const& shoal);
 };
 
 } // namespace strange
