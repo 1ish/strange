@@ -171,22 +171,25 @@ protected:
 		bool const aspects_unordered_shoal = check<unordered_shoal_a<>>(aspects);
 		for (auto const& member : parent.extract())
 		{
-			if (!check<symbol_a<>>(member.first))
+			if (member.first.is("~"))
 			{
-				throw dis("strange::abstraction::create merge passed non-symbol key");
+				continue;
 			}
-			auto key = cast<symbol_a<>>(member.first);
-			if (map.find(key) != map.cend())
+			if (map.find(member.first) != map.cend())
 			{
 				// no overrides
 				throw dis("strange::abstraction::create merge invalid override");
 			}
-			auto value = member.second;
-			if (aspects_unordered_shoal && check<operation_a<>>(value))
+			if (aspects_unordered_shoal && check<operation_a<>>(member.second))
 			{
-				cast<operation_a<>>(value, true).aspects(cast<unordered_shoal_a<>>(aspects));
+				auto operation = cast<operation_a<>>(member.second);
+				operation.aspects(cast<unordered_shoal_a<>>(aspects));
+				map.emplace(member.first, operation);
 			}
-			map.emplace(key, value);
+			else
+			{
+				map.emplace(member);
+			}
 		}
 	}
 
