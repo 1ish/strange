@@ -80,8 +80,11 @@ public:
 	}
 
 	// function
-	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
+	inline any_a<> operate(any_a<>&, range_a<> const& range) const
 	{
+		//TODO cache range -> child
+		auto aspects_shoal = unordered_shoal_t<>::create_();
+		auto& aspects = aspects_shoal.reference();
 		auto local_shoal = unordered_shoal_t<>::create_();
 		auto& local = local_shoal.reference();
 		forward_const_iterator_a<> ait = range.cbegin_();
@@ -94,7 +97,7 @@ public:
 			{
 				try
 				{
-					kind = cast<expression_a<>>(kind).operate(thing, range);
+					kind = cast<expression_a<>>(kind).operate(local_shoal, range);
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
@@ -116,7 +119,9 @@ public:
 			{
 				throw dis(_token.report() + "strange::abstraction::operate kind does not include argument");
 			}
-			local.emplace(*nit++, argument);
+			auto const name = *nit++;
+			aspects.emplace(name, argument);
+			local.emplace(name, argument);
 		}
 		auto child = unordered_shoal_t<>::create_();
 		for (auto const& expression : _parent_expressions)
@@ -134,8 +139,9 @@ public:
 			{
 				throw dis("strange::abstraction::operate parent expression returned non-unordered-shoal");
 			}
-			_merge(cast<unordered_shoal_a<>>(parent), child);
+			_merge(cast<unordered_shoal_a<>>(parent), child, aspects_shoal);
 		}
+		child.insert_string("~", aspects_shoal);
 		return child;
 	}
 
@@ -155,10 +161,13 @@ protected:
 		, _parent_expressions{ parent_expressions }
 	{}
 
-	static inline void _merge(unordered_shoal_a<> const& parent, unordered_shoal_a<>& child)
+	static inline void _merge(unordered_shoal_a<> const& parent, unordered_shoal_a<>& child, any_a<> aspects)
 	{
 		auto& map = child.reference();
-		auto const aspects = parent.at_string("~");
+		if (parent.has_string("~"))
+		{
+			aspects = parent.at_string("~");
+		}
 		bool const aspects_unordered_shoal = check<unordered_shoal_a<>>(aspects);
 		for (auto const& member : parent.extract())
 		{

@@ -180,7 +180,7 @@ public:
 		return false;
 	}
 
-	static inline void aspects(unordered_shoal_a<> const&) //TODO
+	static inline void aspects(unordered_shoal_a<> const&)
 	{}
 
 protected:

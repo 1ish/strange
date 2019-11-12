@@ -35,7 +35,10 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto local_shoal = unordered_shoal_t<>::create_();
+		auto local_shoal = check<unordered_shoal_a<>>(_aspects)
+			? cast<unordered_shoal_a<>>(_aspects)
+			: unordered_shoal_t<>::create_();
+		local_shoal.mutate_thing();
 		auto& local = local_shoal.reference();
 		local.emplace(sym("$"), _shared);
 		thing.mutate_thing();
@@ -50,7 +53,7 @@ public:
 			{
 				try
 				{
-					kind = cast<expression_a<>>(kind).operate(thing, range);
+					kind = cast<expression_a<>>(kind).operate(local_shoal, range);
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
@@ -84,12 +87,19 @@ public:
 		}
 	}
 
+	// operation
+	inline void aspects(unordered_shoal_a<> const& aspects)
+	{
+		_aspects = aspects;
+	}
+
 protected:
 	token_a<> const _token;
 	flock_a<> const _names;
 	flock_a<> const _kinds;
 	flock_a<> const _defaults;
 	expression_a<> const _expression;
+	any_a<> _aspects;
 	unordered_shoal_a<> const _shared;
 
 	inline mutation_t(token_a<> const& token, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& defaults, expression_a<> const& expression)
@@ -99,6 +109,7 @@ protected:
 		, _kinds{ kinds }
 		, _defaults{ defaults }
 		, _expression{ expression }
+		, _aspects{ no() }
 		, _shared{ unordered_shoal_t<true>::create_() }
 	{}
 };
