@@ -234,9 +234,7 @@ private:
 			throw dis("strange::parser ^:. with attribute name following it:") + token.report_();
 		}
 		_next();
-		auto const terms = flock_t<>::create_(
-			expression_me_t<>::create_(token), //TODO move 'me' into expresson_intimate_member_t
-			_identifier(scope_symbol, name)); // me:._name / me:._scope_name
+		auto const terms = flock_t<>::create_(_identifier(scope_symbol, name)); // me:._name / me:._scope_name
 		return expression_intimate_member_t<>::create_(token, terms);
 	}
 
