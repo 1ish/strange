@@ -95,8 +95,7 @@ protected:
 
 	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, symbol_a<> const& member, flock_a<> const& arguments)
 	{
-		std::pair<bool, bool> pure_literal(true, true);
-		//TODO pure literal
+		std::pair<bool, bool> pure_literal(false, false); //TODO pure literal
 		return pure_literal;
 	}
 

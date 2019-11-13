@@ -1237,8 +1237,7 @@ private:
 				{
 					// invoke unary operator
 					_next();
-					//TODO don't wrap member symbol in an expression
-					auto const terms = flock_t<>::create_(initial, expression_literal_t<>::create_(token, flock_t<>::create_(oper)));
+					auto const terms = flock_t<>::create_(initial, oper, flock_t<>::create_());
 					return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 				}
 				else if (count == 2)
@@ -1248,11 +1247,10 @@ private:
 					{
 						throw dis("strange::parser binary operator with nothing following it:") + token.report_();
 					}
-					//TODO don't wrap member symbol in an expression
 					auto const terms = flock_t<>::create_(
 						initial,
-						expression_literal_t<>::create_(token, flock_t<>::create_(oper)),
-						_initial(precedence + (right_to_left ? 0 : 1), shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
+						oper,
+						flock_t<>::create_(_initial(precedence + (right_to_left ? 0 : 1), shoal_symbol, scope_symbol, fixed_herd, kind_shoal)));
 					return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 				}
 				else if (count == 3)
@@ -1265,23 +1263,17 @@ private:
 					auto const second = _initial(precedence + (right_to_left ? 0 : 1), shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 					if (!_next() || _token.tag() != "punctuation" || _token.symbol() != ":")
 					{
-						//TODO don't wrap member symbol in an expression
-						auto const terms = flock_t<>::create_(
-							initial,
-							expression_literal_t<>::create_(token, flock_t<>::create_(oper)),
-							second);
+						auto const terms = flock_t<>::create_(initial, oper, flock_t<>::create_(second));
 						return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 					}
 					if (!_next())
 					{
 						throw dis("strange::parser ternary operator with nothing following the delimiter:") + token.report_();
 					}
-					//TODO don't wrap member symbol in an expression
 					auto const terms = flock_t<>::create_(
 						initial,
-						expression_literal_t<>::create_(token, flock_t<>::create_(oper)),
-						second,
-						_initial(precedence + (right_to_left ? 0 : 1), shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
+						oper,
+						flock_t<>::create_(second, _initial(precedence + (right_to_left ? 0 : 1), shoal_symbol, scope_symbol, fixed_herd, kind_shoal)));
 					return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 				}
 				assert(count >= 1 && count <= 3);
@@ -1364,11 +1356,10 @@ private:
 		{
 			throw dis("strange::parser . with non-name following it:") + token.report_();
 		}
-		auto terms = flock_t<>::create_(initial);
+		auto terms = flock_t<>::create_(initial, token.symbol_());
 		if (token.symbol_().last_character() != '_')
 		{
 			// attribute
-			terms.push_back(token.symbol_());
 			if (_next() && _token.tag() == "punctuation" && _token.symbol() == ":=")
 			{
 				if (!_next())
@@ -1385,12 +1376,9 @@ private:
 		}
 		if (_token.tag() == "punctuation" && _token.symbol() == "[")
 		{
-			//TODO don't wrap member symbol in an expression
-			terms.push_back(expression_literal_t<>::create_(token, flock_t<>::create_(token.symbol_())));
-			terms += _elements(shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+			terms.push_back(_elements(shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
 			return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 		}
-		terms.push_back(token.symbol_());
 		terms.push_back(_initial(100, shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
 		return _subsequent(min_precedence, expression_invoke_member_range_t<>::create_(token, terms), shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
 	}

@@ -112,7 +112,7 @@ protected:
 
 	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, flock_a<> const& terms)
 	{
-		std::pair<bool, bool> pure_literal(true, true);
+		std::pair<bool, bool> pure_literal(false, false); //TODO pure literal
 		auto it = terms.cbegin_();
 		if (it == terms.cend_())
 		{

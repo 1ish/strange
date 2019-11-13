@@ -141,14 +141,13 @@ protected:
 
 	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, symbol_a<> const& member, expression_a<> const& expression)
 	{
-		std::pair<bool, bool> pure_literal(true, true);
+		std::pair<bool, bool> pure_literal(false, false); //TODO pure literal attribute?
 		if (!expression.literal())
 		{
 			pure_literal.first = false;
 			pure_literal.second = false;
 			return pure_literal;
 		}
-		//TODO pure literal attribute?
 		return pure_literal;
 	}
 
