@@ -87,11 +87,11 @@ private:
 
 	inline expression_a<> _initial(
 		int64_t const min_precedence,
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		expression_a<> initial = expression_t<>::create(_token);
 		if (_token.tag() == "symbol" ||
@@ -191,11 +191,11 @@ private:
 	}
 
 	inline expression_a<> _initial_me_dot(
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		auto const token = _token;
 		if (!_next())
@@ -214,11 +214,11 @@ private:
 	}
 
 	inline expression_a<> _initial_me_colon_dot(
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		auto const token = _token;
 		if (!_next())
@@ -240,11 +240,11 @@ private:
 	}
 
 	inline expression_a<> _initial_attribute(
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		auto const token = _token;
 		auto terms = flock_t<>::create_(_identifier(scope_symbol, token.symbol_())); // _name / _scope_name
@@ -292,11 +292,11 @@ private:
 	}
 
 	inline expression_a<> _initial_intimate(
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		auto const token = _token;
 		auto terms = flock_t<>::create_(_identifier(scope_symbol, token.symbol_())); // _name_ / _scope_name_
@@ -335,11 +335,11 @@ private:
 
 	inline expression_a<> _instruction(
 		token_a<> const& token,
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		auto const instruction = shared_shoal.at_string(token.symbol() + "!");
 		if (!instruction)
@@ -360,11 +360,11 @@ private:
 	}
 
 	inline expression_a<> _initial_local(
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		bool const shared = _token.tag() == "punctuation";
 		if (shared && !_next())
@@ -450,17 +450,17 @@ private:
 				{
 					throw dis("strange::parser local assignment with no right-hand side:") + token.report_();
 				}
-				unordered_herd_a<>(fixed_herd, true).insert(name);
+				fixed_herd.insert(name);
 				any_a<> const rhs = optional
 					? _initial(0, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)
 					: no();
 				if (!fixed)
 				{
-					unordered_herd_a<>(fixed_herd, true).erase(name);
+					fixed_herd.erase(name);
 				}
 				if (insert)
 				{
-					unordered_shoal_a<>(kind_shoal, true).insert_(name, kind);
+					kind_shoal.insert_(name, kind);
 					if (optional)
 					{
 						if (shared)
@@ -501,11 +501,11 @@ private:
 	}
 
 	inline expression_a<> _shared_scope(
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		if (!_next())
 		{
@@ -561,11 +561,11 @@ private:
 	}
 
 	inline expression_a<> _initial_shoal_or_herd(
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		auto const token = _token;
 		if (!_next())
@@ -678,7 +678,7 @@ private:
 				bool clash = false;
 				try
 				{
-					clash = !unordered_shoal_a<>(shared_shoal, true).insert(new_scope_symbol, value.evaluate_());
+					clash = !shared_shoal.insert(new_scope_symbol, value.evaluate_());
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
@@ -790,11 +790,11 @@ private:
 	}
 
 	inline expression_a<> _kind(
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		auto const token = _token;
 		bool const punctuation = token.tag() == "punctuation";
@@ -1000,11 +1000,11 @@ private:
 	inline expression_a<> _subsequent(
 		int64_t const min_precedence,
 		expression_a<> const& initial,
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		if (min_precedence >= 100 || _it == _end)
 		{
@@ -1294,11 +1294,11 @@ private:
 	}
 
 	inline flock_a<> _elements(
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		bool const square = _token.symbol() == "[";
 		bool const round = _token.symbol() == "(";
@@ -1356,11 +1356,11 @@ private:
 	inline expression_a<> _subsequent_dot(
 		int64_t const min_precedence,
 		expression_a<> const& initial,
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		auto const token = _token;
 		if (token.tag() != "name")
@@ -1397,11 +1397,11 @@ private:
 	inline expression_a<> _subsequent_dot_colon(
 		int64_t const min_precedence,
 		expression_a<> const& initial,
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		auto const token = _token;
 		auto second = _initial(100, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
@@ -1431,11 +1431,11 @@ private:
 	inline expression_a<> _subsequent_colon_dot(
 		int64_t const min_precedence,
 		expression_a<> const& initial,
-		unordered_shoal_a<> const& shared_shoal,
+		unordered_shoal_a<>& shared_shoal,
 		symbol_a<> const& shoal_symbol,
 		symbol_a<> const& scope_symbol,
-		unordered_herd_a<> const& fixed_herd,
-		unordered_shoal_a<> const& kind_shoal)
+		unordered_herd_a<>& fixed_herd,
+		unordered_shoal_a<>& kind_shoal)
 	{
 		auto const token = _token;
 		if (token.tag() != "name")
