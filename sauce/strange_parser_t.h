@@ -44,9 +44,7 @@ public:
 		{
 			throw dis("strange::parser tokenizer error:") + _token.report_();
 		}
-		auto shared_shoal = unordered_shoal_t<>::create_();
-		shared_shoal += shared();
-		return _initial(0, shared_shoal, sym(""), sym(""), unordered_herd_t<>::create_(), unordered_shoal_t<>::create_());
+		return _initial(0, context_struct{ sym(""), sym(""), unordered_shoal_t<>::create_() += shared(), unordered_herd_t<>::create_(), unordered_shoal_t<>::create_() });
 	}
 
 protected:
@@ -65,6 +63,28 @@ private:
 	forward_const_iterator_a<> _end;
 	token_a<> _previous;
 	token_a<> _token;
+
+	struct context_struct
+	{
+		inline context_struct(
+			symbol_a<> const& _shoal,
+			symbol_a<> const& _scope,
+			unordered_shoal_a<>& _shared,
+			unordered_herd_a<>& _fixed,
+			unordered_shoal_a<>& _kind)
+			: shoal{ _shoal }
+			, scope{ _scope }
+			, shared{ _shared }
+			, fixed{ _fixed }
+			, kind{ _kind }
+		{}
+
+		symbol_a<> const& shoal;
+		symbol_a<> const& scope;
+		unordered_shoal_a<>& shared;
+		unordered_herd_a<>& fixed;
+		unordered_shoal_a<>& kind;
+	};
 
 	inline bool _next()
 	{
@@ -87,11 +107,7 @@ private:
 
 	inline expression_a<> _initial(
 		int64_t const min_precedence,
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+		context_struct& context)
 	{
 		expression_a<> initial = expression_t<>::create(_token);
 		if (_token.tag() == "symbol" ||
@@ -107,11 +123,11 @@ private:
 		{
 			if (_token.symbol_().last_character() == '_')
 			{
-				initial = _initial_intimate(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				initial = _initial_intimate(context);
 			}
 			else if (_token.symbol_().first_character() == '_')
 			{
-				initial = _initial_attribute(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				initial = _initial_attribute(context);
 			}
 			else if (_token.symbol() == "true")
 			{
@@ -125,7 +141,7 @@ private:
 			}
 			else
 			{
-				initial = _initial_local(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				initial = _initial_local(context);
 			}
 		}
 		else if (_token.tag() == "punctuation")
@@ -134,15 +150,15 @@ private:
 			std::string const op = token.symbol();
 			if (op == "$") // shared local
 			{
-				initial = _initial_local(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				initial = _initial_local(context);
 			}
 			else if (op == "$$") // shared scope
 			{
-				initial = _shared_scope(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				initial = _shared_scope(context);
 			}
 			else if (op == "^^") // shoal scope
 			{
-				initial = expression_shared_scope_t<>::create_(token, flock_t<>::create_(shared_shoal, shoal_symbol));
+				initial = expression_shared_scope_t<>::create_(token, flock_t<>::create_(context.shared, context.shoal));
 			}
 			else if (op == "^") // me
 			{
@@ -150,11 +166,11 @@ private:
 				{
 					if (_token.symbol() == ".") // me dot
 					{
-						initial = _initial_me_dot(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+						initial = _initial_me_dot(context);
 					}
 					else if (_token.symbol() == ":.") // me colon-dot
 					{
-						initial = _initial_me_colon_dot(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+						initial = _initial_me_colon_dot(context);
 					}
 				}
 				else
@@ -164,19 +180,19 @@ private:
 			}
 			else if (op == "[") // flock
 			{
-				initial = expression_flock_t<>::create_(token, _elements(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
+				initial = expression_flock_t<>::create_(token, _elements(context));
 			}
 			else if (op == "(") // block
 			{
-				initial = expression_block_t<>::create_(token, _elements(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
+				initial = expression_block_t<>::create_(token, _elements(context));
 			}
 			else if (op == "{") // shoal or herd
 			{
-				initial = _initial_shoal_or_herd(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				initial = _initial_shoal_or_herd(context);
 			}
 			else if (op == "<") // kind
 			{
-				initial = _kind(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				initial = _kind(context);
 			}
 			else
 			{
@@ -187,15 +203,10 @@ private:
 		{
 			throw dis("strange::parser unexpected token tag:") + _token.report_();
 		}
-		return _subsequent(min_precedence, initial, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+		return _subsequent(min_precedence, initial, context);
 	}
 
-	inline expression_a<> _initial_me_dot(
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+	inline expression_a<> _initial_me_dot(context_struct& context)
 	{
 		auto const token = _token;
 		if (!_next())
@@ -208,17 +219,12 @@ private:
 		}
 		if (_token.symbol_().last_character() == '_')
 		{
-			return _initial_intimate(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+			return _initial_intimate(context);
 		}
-		return _initial_attribute(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+		return _initial_attribute(context);
 	}
 
-	inline expression_a<> _initial_me_colon_dot(
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+	inline expression_a<> _initial_me_colon_dot(context_struct& context)
 	{
 		auto const token = _token;
 		if (!_next())
@@ -235,19 +241,14 @@ private:
 			throw dis("strange::parser ^:. with attribute name following it:") + token.report_();
 		}
 		_next();
-		auto const terms = flock_t<>::create_(_identifier(scope_symbol, name)); // me:._name / me:._scope_name
+		auto const terms = flock_t<>::create_(_identifier(context.scope, name)); // me:._name / me:._scope_name
 		return expression_intimate_member_t<>::create_(token, terms);
 	}
 
-	inline expression_a<> _initial_attribute(
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+	inline expression_a<> _initial_attribute(context_struct& context)
 	{
 		auto const token = _token;
-		auto terms = flock_t<>::create_(_identifier(scope_symbol, token.symbol_())); // _name / _scope_name
+		auto terms = flock_t<>::create_(_identifier(context.scope, token.symbol_())); // _name / _scope_name
 		if (_next() && _token.tag() == "punctuation" &&
 			(_token.symbol() == ":#" || _token.symbol() == ":=" ||
 				_token.symbol() == ":<" || _token.symbol() == ":("))
@@ -264,7 +265,7 @@ private:
 			}
 			else
 			{
-				any_a<> kind = _kind(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				any_a<> kind = _kind(context);
 				bool const punctuation = _previous.tag() == "punctuation";
 				if (punctuation && _previous.symbol() == "#")
 				{
@@ -285,31 +286,26 @@ private:
 				{
 					throw dis("strange::parser attribute assignment with nothing following it:") + token.report_();
 				}
-				terms.push_back(_initial(0, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)); // assignment
+				terms.push_back(_initial(0, context)); // assignment
 			}
 		}
 		return expression_intimate_attribute_t<>::create_(token, terms);
 	}
 
-	inline expression_a<> _initial_intimate(
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+	inline expression_a<> _initial_intimate(context_struct& context)
 	{
 		auto const token = _token;
-		auto terms = flock_t<>::create_(_identifier(scope_symbol, token.symbol_())); // _name_ / _scope_name_
+		auto terms = flock_t<>::create_(_identifier(context.scope, token.symbol_())); // _name_ / _scope_name_
 		if (!_next())
 		{
 			throw dis("strange::parser intimate operation with no arguments:") + token.report_();
 		}
 		if (_token.tag() == "punctuation" && _token.symbol() == "[")
 		{
-			terms.push_back(_elements(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)); // me._scope_name_[...]
+			terms.push_back(_elements(context)); // me._scope_name_[...]
 			return expression_intimate_t<>::create_(token, terms);
 		}
-		terms.push_back(_initial(100, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)); // me._scope_name_ range
+		terms.push_back(_initial(100, context)); // me._scope_name_ range
 		return expression_intimate_member_range_t<>::create_(token, terms);
 	}
 
@@ -335,13 +331,9 @@ private:
 
 	inline expression_a<> _instruction(
 		token_a<> const& token,
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+		context_struct& context)
 	{
-		auto const instruction = shared_shoal.at_string(token.symbol() + "!");
+		auto const instruction = context.shared.at_string(token.symbol() + "!");
 		if (!instruction)
 		{
 			throw dis("strange::parser instruction not recognised:") + token.report_();
@@ -351,7 +343,7 @@ private:
 			throw dis("strange::parser instruction with no arguments:") + token.report_();
 		}
 		auto const expression = instruction.operate(no(),
-			flock_t<>::create_(token, _elements(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)));
+			flock_t<>::create_(token, _elements(context)));
 		if (!check<expression_a<>>(expression))
 		{
 			throw dis("strange::parser instruction returned non-expression:") + token.report_();
@@ -359,12 +351,7 @@ private:
 		return cast<expression_a<>>(expression);
 	}
 
-	inline expression_a<> _initial_local(
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+	inline expression_a<> _initial_local(context_struct& context)
 	{
 		bool const shared = _token.tag() == "punctuation";
 		if (shared && !_next())
@@ -382,8 +369,8 @@ private:
 		}
 		if (!non_instruction)
 		{
-			auto kind = kind_shoal.at_(name);
-			bool fixed = fixed_herd.has(name);
+			auto kind = context.kind.at_(name);
+			bool fixed = context.fixed.has(name);
 			bool insert = false;
 			bool update = false;
 			bool optional = true;
@@ -430,7 +417,7 @@ private:
 				}
 				else if (op == ":<" || op == ":(")
 				{
-					kind = _kind(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+					kind = _kind(context);
 					bool const punctuation = _previous.tag() == "punctuation";
 					fixed = punctuation && _previous.symbol() == "#";
 					optional = fixed || punctuation && (_previous.symbol() == "=" || _previous.symbol() == ">=");
@@ -450,17 +437,17 @@ private:
 				{
 					throw dis("strange::parser local assignment with no right-hand side:") + token.report_();
 				}
-				fixed_herd.insert(name);
+				context.fixed.insert(name);
 				any_a<> const rhs = optional
-					? _initial(0, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)
+					? _initial(0, context)
 					: no();
 				if (!fixed)
 				{
-					fixed_herd.erase(name);
+					context.fixed.erase(name);
 				}
 				if (insert)
 				{
-					kind_shoal.insert_(name, kind);
+					context.kind.insert_(name, kind);
 					if (optional)
 					{
 						if (shared)
@@ -493,19 +480,14 @@ private:
 		{
 			return expression_shared_at_t<>::create_(token, flock_t<>::create_(name));
 		}
-		if (!non_instruction && shared_shoal.has_string(token.symbol() + "!"))
+		if (!non_instruction && context.shared.has_string(token.symbol() + "!"))
 		{
-			return _instruction(token, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+			return _instruction(token, context);
 		}
 		return expression_local_at_t<>::create_(token, flock_t<>::create_(name));
 	}
 
-	inline expression_a<> _shared_scope(
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+	inline expression_a<> _shared_scope(context_struct& context)
 	{
 		if (!_next())
 		{
@@ -516,7 +498,7 @@ private:
 		{
 			try
 			{
-				return expression_shared_scope_t<>::create_(token, flock_t<>::create_(shared_shoal, _kind(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal).evaluate_()));
+				return expression_shared_scope_t<>::create_(token, flock_t<>::create_(context.shared, _kind(context).evaluate_()));
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
@@ -525,7 +507,7 @@ private:
 		}
 		else if (token.tag() == "name")
 		{
-			return expression_shared_scope_t<>::create_(token, flock_t<>::create_(shared_shoal, _scope()));
+			return expression_shared_scope_t<>::create_(token, flock_t<>::create_(context.shared, _scope()));
 		}
 		else
 		{
@@ -560,12 +542,7 @@ private:
 		return sym(scope);
 	}
 
-	inline expression_a<> _initial_shoal_or_herd(
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+	inline expression_a<> _initial_shoal_or_herd(context_struct& context)
 	{
 		auto const token = _token;
 		if (!_next())
@@ -598,7 +575,7 @@ private:
 			}
 			else
 			{
-				key = _initial(0, shared_shoal, scope_symbol, scope_symbol, fixed_herd, kind_shoal);
+				key = _initial(0, context_struct{ context.scope, context.scope, context.shared, context.fixed, context.kind });
 			}
 			if (_it == _end)
 			{
@@ -662,23 +639,23 @@ private:
 			}
 			catch (misunderstanding_a<>&)
 			{}
-			auto const new_scope_symbol = _scope_name(scope_symbol,
+			auto const new_scope_symbol = _scope_name(context.scope,
 				check<symbol_a<>>(key_symbol) ? cast<symbol_a<>>(key_symbol) : sym("#"));
 
 			auto value = expression_t<>::create(operator_token);
 			if (operator_token.symbol() == ":")
 			{
 				// regular key/value pair
-				value = _initial(0, shared_shoal, scope_symbol, new_scope_symbol, fixed_herd, kind_shoal);
+				value = _initial(0, context_struct{ context.scope, new_scope_symbol, context.shared, context.fixed, context.kind });
 			}
 			else if (operator_token.symbol() == "::")
 			{
 				// shared scope
-				value = _initial(0, shared_shoal, scope_symbol, new_scope_symbol, _remove_herd_non_dimensions(fixed_herd), _remove_shoal_non_dimensions(kind_shoal));
+				value = _initial(0, context_struct{ context.scope, new_scope_symbol, context.shared, _remove_herd_non_dimensions(context.fixed), _remove_shoal_non_dimensions(context.kind) });
 				bool clash = false;
 				try
 				{
-					clash = !shared_shoal.insert(new_scope_symbol, value.evaluate_());
+					clash = !context.shared.insert(new_scope_symbol, value.evaluate_());
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
@@ -695,7 +672,7 @@ private:
 				bool const fixed = (operator_token.symbol() == ":#");
 				auto const kind = (fixed || operator_token.symbol() == ":=")
 					? any_a<>(kind_t<>::create_())
-					: any_a<>(_kind(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
+					: any_a<>(_kind(context));
 				auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
 				if (key_string[key_string.length() - 1] == '_')
 				{
@@ -704,7 +681,7 @@ private:
 					{
 						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
 					}
-					auto const terms = _elements(shared_shoal, scope_symbol, new_scope_symbol, _remove_herd_non_dimensions(fixed_herd), _remove_shoal_non_dimensions(kind_shoal));
+					auto const terms = _elements(context_struct{ context.scope, new_scope_symbol, context.shared, _remove_herd_non_dimensions(context.fixed), _remove_shoal_non_dimensions(context.kind) });
 					if (fixed)
 					{
 						value = expression_extraction_t<>::create_(operator_token, terms);
@@ -717,7 +694,7 @@ private:
 				else
 				{
 					// attribute extraction/mutation
-					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, shared_shoal, scope_symbol, new_scope_symbol, _remove_herd_non_dimensions(fixed_herd), _remove_shoal_non_dimensions(kind_shoal)));
+					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, context_struct{ context.scope, new_scope_symbol, context.shared, _remove_herd_non_dimensions(context.fixed), _remove_shoal_non_dimensions(context.kind) }));
 					if (fixed)
 					{
 						value = expression_attribute_extraction_t<>::create_(operator_token, terms);
@@ -789,12 +766,7 @@ private:
 		return result;
 	}
 
-	inline expression_a<> _kind(
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+	inline expression_a<> _kind(context_struct& context)
 	{
 		auto const token = _token;
 		bool const punctuation = token.tag() == "punctuation";
@@ -808,7 +780,7 @@ private:
 			{
 				throw dis("strange::parser kind :( with nothing following it:") + token.report_();
 			}
-			expression = _initial(100, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+			expression = _initial(100, context);
 		}
 		auto terms = flock_t<>::create_();
 
@@ -858,7 +830,7 @@ private:
 		bool const dimensions = !modify && _token.tag() == "punctuation" && _token.symbol() == "{";
 		if (dimensions)
 		{
-			terms.push_back(expression_flock_t<>::create_(token, _elements(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)));
+			terms.push_back(expression_flock_t<>::create_(token, _elements(context)));
 			if (_it == _end)
 			{
 				throw dis("strange::parser kind } with nothing following it:") + token.report_();
@@ -873,7 +845,7 @@ private:
 		bool const aspects = !modify && _token.tag() == "punctuation" && _token.symbol() == "[";
 		if (aspects)
 		{
-			terms.push_back(expression_flock_t<>::create_(token, _elements(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)));
+			terms.push_back(expression_flock_t<>::create_(token, _elements(context)));
 			if (_it == _end)
 			{
 				throw dis("strange::parser kind ] with nothing following it:") + token.report_();
@@ -888,7 +860,7 @@ private:
 		bool const parameters = !modify && _token.tag() == "punctuation" && _token.symbol() == "(";
 		if (parameters)
 		{
-			terms.push_back(expression_flock_t<>::create_(token, _elements(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)));
+			terms.push_back(expression_flock_t<>::create_(token, _elements(context)));
 			if (_it == _end)
 			{
 				throw dis("strange::parser kind ) with nothing following it:") + token.report_();
@@ -904,7 +876,7 @@ private:
 			(_token.symbol() == ":<" || _token.symbol() == ":(");
 		if (result)
 		{
-			terms.push_back(_kind(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)); // recurse for result
+			terms.push_back(_kind(context)); // recurse for result
 			if (_it == _end)
 			{
 				throw dis("strange::parser kind result with nothing following it:") + token.report_();
@@ -1000,11 +972,7 @@ private:
 	inline expression_a<> _subsequent(
 		int64_t const min_precedence,
 		expression_a<> const& initial,
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+		context_struct& context)
 	{
 		if (min_precedence >= 100 || _it == _end)
 		{
@@ -1018,8 +986,8 @@ private:
 			{
 				// operate with elements
 				auto terms = flock_t<>::create_(initial);
-				terms += _elements(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
-				return _subsequent(min_precedence, expression_operate_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				terms += _elements(context);
+				return _subsequent(min_precedence, expression_operate_t<>::create_(token, terms), context);
 			}
 			if (op == ".")
 			{
@@ -1028,7 +996,7 @@ private:
 				{
 					throw dis("strange::parser . with nothing following it:") + token.report_();
 				}
-				return _subsequent_dot(min_precedence, initial, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				return _subsequent_dot(min_precedence, initial, context);
 			}
 			if (op == ".:")
 			{
@@ -1037,7 +1005,7 @@ private:
 				{
 					throw dis("strange::parser .: with nothing following it:") + token.report_();
 				}
-				return _subsequent_dot_colon(min_precedence, initial, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				return _subsequent_dot_colon(min_precedence, initial, context);
 			}
 			if (op == ":.")
 			{
@@ -1046,7 +1014,7 @@ private:
 				{
 					throw dis("strange::parser :. with nothing following it:") + token.report_();
 				}
-				return _subsequent_colon_dot(min_precedence, initial, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+				return _subsequent_colon_dot(min_precedence, initial, context);
 			}
 			if (op == "," || op == ":" || op == "::" || op == ":#" || op == ":=" || op == ":<" || op == ":(" || op == ";" || op == "]" || op == "}" || op == ")")
 			{
@@ -1070,30 +1038,30 @@ private:
 					}
 					auto const terms = flock_t<>::create_(
 						initial,
-						_initial(precedence + 1, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
+						_initial(precedence + 1, context));
 					if (op == "&&")
 					{
-						return _subsequent(min_precedence, expression_and_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+						return _subsequent(min_precedence, expression_and_t<>::create_(token, terms), context);
 					}
 					if (op == "!&")
 					{
-						return _subsequent(min_precedence, expression_nand_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+						return _subsequent(min_precedence, expression_nand_t<>::create_(token, terms), context);
 					}
 					if (op == "%%")
 					{
-						return _subsequent(min_precedence, expression_xor_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+						return _subsequent(min_precedence, expression_xor_t<>::create_(token, terms), context);
 					}
 					if (op == "!%")
 					{
-						return _subsequent(min_precedence, expression_xnor_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+						return _subsequent(min_precedence, expression_xnor_t<>::create_(token, terms), context);
 					}
 					if (op == "||")
 					{
-						return _subsequent(min_precedence, expression_or_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+						return _subsequent(min_precedence, expression_or_t<>::create_(token, terms), context);
 					}
 					if (op == "!|")
 					{
-						return _subsequent(min_precedence, expression_nor_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+						return _subsequent(min_precedence, expression_nor_t<>::create_(token, terms), context);
 					}
 				}
 				auto oper = sym("");
@@ -1247,7 +1215,7 @@ private:
 					// invoke unary operator
 					_next();
 					auto const terms = flock_t<>::create_(initial, oper, flock_t<>::create_());
-					return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+					return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), context);
 				}
 				else if (count == 2)
 				{
@@ -1259,8 +1227,8 @@ private:
 					auto const terms = flock_t<>::create_(
 						initial,
 						oper,
-						flock_t<>::create_(_initial(precedence + (right_to_left ? 0 : 1), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)));
-					return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+						flock_t<>::create_(_initial(precedence + (right_to_left ? 0 : 1), context)));
+					return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), context);
 				}
 				else if (count == 3)
 				{
@@ -1269,11 +1237,11 @@ private:
 					{
 						throw dis("strange::parser ternary operator with nothing following it:") + token.report_();
 					}
-					auto const second = _initial(precedence + (right_to_left ? 0 : 1), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+					auto const second = _initial(precedence + (right_to_left ? 0 : 1), context);
 					if (!_next() || _token.tag() != "punctuation" || _token.symbol() != ":")
 					{
 						auto const terms = flock_t<>::create_(initial, oper, flock_t<>::create_(second));
-						return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+						return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), context);
 					}
 					if (!_next())
 					{
@@ -1282,29 +1250,24 @@ private:
 					auto const terms = flock_t<>::create_(
 						initial,
 						oper,
-						flock_t<>::create_(second, _initial(precedence + (right_to_left ? 0 : 1), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)));
-					return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+						flock_t<>::create_(second, _initial(precedence + (right_to_left ? 0 : 1), context)));
+					return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), context);
 				}
 				assert(count >= 1 && count <= 3);
 			}
 		}
 		// operate with range
-		auto const terms = flock_t<>::create_(initial, _initial(100, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
-		return _subsequent(min_precedence, expression_operate_range_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+		auto const terms = flock_t<>::create_(initial, _initial(100, context));
+		return _subsequent(min_precedence, expression_operate_range_t<>::create_(token, terms), context);
 	}
 
-	inline flock_a<> _elements(
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+	inline flock_a<> _elements(context_struct& context)
 	{
 		bool const square = _token.symbol() == "[";
 		bool const round = _token.symbol() == "(";
 		bool const curly = _token.symbol() == "{";
-		auto new_fixed_herd = fixed_herd;
-		auto new_kind_shoal = kind_shoal;
+		auto new_fixed_herd = context.fixed;
+		auto new_kind_shoal = context.kind;
 		if (round || curly)
 		{
 			new_fixed_herd.mutate_thing();
@@ -1324,7 +1287,7 @@ private:
 		}
 		else for (;;)
 		{
-			flock.push_back(_initial(0, shared_shoal, shoal_symbol, scope_symbol, new_fixed_herd, new_kind_shoal));
+			flock.push_back(_initial(0, context_struct{ context.shoal, context.scope, context.shared, new_fixed_herd, new_kind_shoal }));
 			if (_it == _end)
 			{
 				throw dis("strange::parser element with nothing following it:") + _token.report_();
@@ -1356,11 +1319,7 @@ private:
 	inline expression_a<> _subsequent_dot(
 		int64_t const min_precedence,
 		expression_a<> const& initial,
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+		context_struct& context)
 	{
 		auto const token = _token;
 		if (token.tag() != "name")
@@ -1377,9 +1336,9 @@ private:
 				{
 					throw dis("strange::parser attribute assignment with nothing following it:") + token.report_();
 				}
-				terms.push_back(_initial(0, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal)); // assignment
+				terms.push_back(_initial(0, context)); // assignment
 			}
-			return _subsequent(min_precedence, expression_invoke_attribute_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+			return _subsequent(min_precedence, expression_invoke_attribute_t<>::create_(token, terms), context);
 		}
 		if (!_next())
 		{
@@ -1387,24 +1346,20 @@ private:
 		}
 		if (_token.tag() == "punctuation" && _token.symbol() == "[")
 		{
-			terms.push_back(_elements(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
-			return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+			terms.push_back(_elements(context));
+			return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), context);
 		}
-		terms.push_back(_initial(100, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
-		return _subsequent(min_precedence, expression_invoke_member_range_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+		terms.push_back(_initial(100, context));
+		return _subsequent(min_precedence, expression_invoke_member_range_t<>::create_(token, terms), context);
 	}
 
 	inline expression_a<> _subsequent_dot_colon(
 		int64_t const min_precedence,
 		expression_a<> const& initial,
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+		context_struct& context)
 	{
 		auto const token = _token;
-		auto second = _initial(100, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+		auto second = _initial(100, context);
 		if (_it != _end && _token.tag() == "punctuation" && _token.symbol() == ":.")
 		{
 			// member
@@ -1412,7 +1367,7 @@ private:
 			{
 				throw dis("strange::parser :. with nothing following it:") + token.report_();
 			}
-			second = _subsequent_colon_dot(100, second, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+			second = _subsequent_colon_dot(100, second, context);
 		}
 		auto terms = flock_t<>::create_(initial, second);
 		if (!_next())
@@ -1421,21 +1376,17 @@ private:
 		}
 		if (_token.tag() == "punctuation" && _token.symbol() == "[")
 		{
-			terms += _elements(shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
-			return _subsequent(min_precedence, expression_operate_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+			terms += _elements(context);
+			return _subsequent(min_precedence, expression_operate_t<>::create_(token, terms), context);
 		}
-		terms.push_back(_initial(100, shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal));
-		return _subsequent(min_precedence, expression_operate_range_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+		terms.push_back(_initial(100, context));
+		return _subsequent(min_precedence, expression_operate_range_t<>::create_(token, terms), context);
 	}
 
 	inline expression_a<> _subsequent_colon_dot(
 		int64_t const min_precedence,
 		expression_a<> const& initial,
-		unordered_shoal_a<>& shared_shoal,
-		symbol_a<> const& shoal_symbol,
-		symbol_a<> const& scope_symbol,
-		unordered_herd_a<>& fixed_herd,
-		unordered_shoal_a<>& kind_shoal)
+		context_struct& context)
 	{
 		auto const token = _token;
 		if (token.tag() != "name")
@@ -1444,7 +1395,7 @@ private:
 		}
 		_next();
 		auto const terms = flock_t<>::create_(initial, token.symbol_());
-		return _subsequent(min_precedence, expression_member_t<>::create_(token, terms), shared_shoal, shoal_symbol, scope_symbol, fixed_herd, kind_shoal);
+		return _subsequent(min_precedence, expression_member_t<>::create_(token, terms), context);
 	}
 
 	static bool const ___share___;
