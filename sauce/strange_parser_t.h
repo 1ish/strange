@@ -85,6 +85,7 @@ private:
 			, kind{ _kind }
 			, meta{ _meta }
 			, emit{ _emit }
+			, emission{ no() }
 		{}
 
 		symbol_a<> const shoal;
@@ -94,6 +95,7 @@ private:
 		unordered_shoal_a<> kind;
 		context_ptr meta;
 		context_ptr emit;
+		any_a<> emission;
 	};
 
 	inline bool _next()
@@ -236,11 +238,19 @@ private:
 			context->meta = std::make_shared<context_struct>();
 		}
 		context->meta->emit = context;
+		context->meta->emission = expression_t<>::create(token);
 		auto expression = _initial(100, context->meta);
+		if (check<expression_a<>>(context->meta->emission))
+		{
+			expression = cast<expression_a<>>(context->meta->emission);
+			context->meta->emit.reset();
+			context->meta->emission = no();
+			return expression;
+		}
 		auto result = no();
 		try
 		{
-			result = expression.evaluate_(); //TODO operate?
+			result = expression.evaluate_();
 		}
 		catch (misunderstanding_a<>& misunderstanding)
 		{
@@ -261,7 +271,11 @@ private:
 		{
 			throw dis("strange::parser <* with nothing following it:") + token.report_();
 		}
-		//TODO emit
+		if (!context->emit)
+		{
+			throw dis("strange::parser <* without corresponding *> preceding it:") + token.report_();
+		}
+		context->emission = _initial(100, context->emit);
 		return expression_t<>::create(token);
 	}
 
