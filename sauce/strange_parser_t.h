@@ -44,7 +44,7 @@ public:
 		{
 			throw dis("strange::parser tokenizer error:") + _token.report_();
 		}
-		return _initial(0, std::make_shared<context_struct>(sym(""), sym(""), unordered_shoal_t<>::create_() += shared(), unordered_herd_t<>::create_(), unordered_shoal_t<>::create_()));
+		return _initial(0, std::make_shared<context_struct>());
 	}
 
 protected:
@@ -71,11 +71,11 @@ private:
 	struct context_struct
 	{
 		inline context_struct(
-			symbol_a<> const& _shoal,
-			symbol_a<> const& _scope,
-			unordered_shoal_a<>& _shared,
-			unordered_herd_a<>& _fixed,
-			unordered_shoal_a<>& _kind,
+			symbol_a<> const& _shoal = sym(""),
+			symbol_a<> const& _scope = sym(""),
+			unordered_shoal_a<> const& _shared = unordered_shoal_t<>::create_() += strange::shared(),
+			unordered_herd_a<> const& _fixed = unordered_herd_t<>::create_(),
+			unordered_shoal_a<> const& _kind = unordered_shoal_t<>::create_(),
 			context_ptr const& _meta = context_ptr{},
 			context_ptr const& _emit = context_ptr{})
 			: shoal{ _shoal }
@@ -87,11 +87,11 @@ private:
 			, emit{ _emit }
 		{}
 
-		symbol_a<> const& shoal;
-		symbol_a<> const& scope;
-		unordered_shoal_a<>& shared;
-		unordered_herd_a<>& fixed;
-		unordered_shoal_a<>& kind;
+		symbol_a<> const shoal;
+		symbol_a<> const scope;
+		unordered_shoal_a<> shared;
+		unordered_herd_a<> fixed;
+		unordered_shoal_a<> kind;
 		context_ptr meta;
 		context_ptr emit;
 	};
@@ -233,7 +233,7 @@ private:
 		}
 		if (!context->meta)
 		{
-			context->meta = std::make_shared<context_struct>(sym(""), sym(""), unordered_shoal_t<>::create_() += shared(), unordered_herd_t<>::create_(), unordered_shoal_t<>::create_());
+			context->meta = std::make_shared<context_struct>();
 		}
 		context->meta->emit = context;
 		auto expression = _initial(100, context->meta);
@@ -261,7 +261,7 @@ private:
 		{
 			throw dis("strange::parser <* with nothing following it:") + token.report_();
 		}
-
+		//TODO emit
 		return expression_t<>::create(token);
 	}
 
@@ -634,7 +634,7 @@ private:
 			}
 			else
 			{
-				key = _initial(0, std::make_shared<context_struct>(context->scope, context->scope, context->shared, context->fixed, context->kind));
+				key = _initial(0, std::make_shared<context_struct>(context->scope, context->scope, context->shared, context->fixed, context->kind, context->meta, context->emit));
 			}
 			if (_it == _end)
 			{
@@ -705,12 +705,12 @@ private:
 			if (operator_token.symbol() == ":")
 			{
 				// regular key/value pair
-				value = _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, context->fixed, context->kind));
+				value = _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, context->fixed, context->kind, context->meta, context->emit));
 			}
 			else if (operator_token.symbol() == "::")
 			{
 				// shared scope
-				value = _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind)));
+				value = _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
 				bool clash = false;
 				try
 				{
@@ -740,7 +740,7 @@ private:
 					{
 						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
 					}
-					auto const terms = _elements(std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind)));
+					auto const terms = _elements(std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
 					if (fixed)
 					{
 						value = expression_extraction_t<>::create_(operator_token, terms);
@@ -753,7 +753,7 @@ private:
 				else
 				{
 					// attribute extraction/mutation
-					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind))));
+					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit)));
 					if (fixed)
 					{
 						value = expression_attribute_extraction_t<>::create_(operator_token, terms);
@@ -1346,7 +1346,7 @@ private:
 		}
 		else for (;;)
 		{
-			flock.push_back(_initial(0, std::make_shared<context_struct>(context->shoal, context->scope, context->shared, new_fixed_herd, new_kind_shoal)));
+			flock.push_back(_initial(0, std::make_shared<context_struct>(context->shoal, context->scope, context->shared, new_fixed_herd, new_kind_shoal, context->meta, context->emit)));
 			if (_it == _end)
 			{
 				throw dis("strange::parser element with nothing following it:") + _token.report_();
