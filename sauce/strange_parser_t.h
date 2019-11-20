@@ -85,7 +85,7 @@ private:
 			, kind{ _kind }
 			, meta{ _meta }
 			, emit{ _emit }
-			, emission{ no() }
+			, emissions{ flock_t<>::create_() }
 		{}
 
 		symbol_a<> const shoal;
@@ -95,7 +95,7 @@ private:
 		unordered_shoal_a<> kind;
 		context_ptr meta;
 		context_ptr emit;
-		any_a<> emission;
+		flock_a<> emissions;
 	};
 
 	inline bool _next()
@@ -238,15 +238,9 @@ private:
 			context->meta = std::make_shared<context_struct>();
 		}
 		context->meta->emit = context;
-		context->meta->emission = expression_t<>::create(token);
+		auto& emissions = context->meta->emissions;
+		emissions = flock_t<>::create_();
 		auto expression = _initial(100, context->meta);
-		if (check<expression_a<>>(context->meta->emission))
-		{
-			expression = cast<expression_a<>>(context->meta->emission);
-			context->meta->emit.reset();
-			context->meta->emission = no();
-			return expression;
-		}
 		auto result = no();
 		try
 		{
@@ -259,9 +253,24 @@ private:
 		context->meta->emit.reset();
 		if (check<expression_a<>>(result))
 		{
-			return cast<expression_a<>>(result);
+			emissions.push_back(result);
 		}
-		return expression_t<>::create(token);
+		int64_t const size = emissions.size();
+		if (!size)
+		{
+			result = expression_t<>::create(token);
+		}
+		else if (size == 1)
+		{
+			result = emissions.at_index(0);
+			emissions.clear();
+		}
+		else
+		{
+			result = expression_flock_t<>::create_(token, emissions);
+			emissions.clear();
+		}
+		return cast<expression_a<>>(result);
 	}
 
 	inline expression_a<> _emit(context_ptr const& context)
@@ -275,7 +284,7 @@ private:
 		{
 			throw dis("strange::parser <* without corresponding *> preceding it:") + token.report_();
 		}
-		context->emission = _initial(100, context->emit);
+		context->emissions.push_back(_initial(100, context->emit));
 		return expression_t<>::create(token);
 	}
 
