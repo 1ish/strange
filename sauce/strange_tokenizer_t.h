@@ -341,17 +341,10 @@ class tokenizer_t : public thing_t<___ego___>
 						break;
 					case '+':
 					case '-':
+					case '*':
 					case '%':
 						token = char1;
 						if (char1 == char2 || char2 == '=')
-						{
-							second = true;
-							break;
-						}
-						return punctuation_token(token);
-					case '*':
-						token = char1;
-						if (char1 == char2 || char2 == '=' || char2 == '>')
 						{
 							second = true;
 							break;
@@ -383,7 +376,7 @@ class tokenizer_t : public thing_t<___ego___>
 						return punctuation_token(token);
 					case '<':
 						token = char1;
-						if (char2 == '=' || char2 == '@' || char2 == '*')
+						if (char2 == '=' || char2 == '@' || char2 == '~')
 						{
 							second = true;
 							break;
@@ -392,6 +385,14 @@ class tokenizer_t : public thing_t<___ego___>
 					case '>':
 						token = char1;
 						if (char2 == '=' || char2 == '@')
+						{
+							second = true;
+							break;
+						}
+						return punctuation_token(token);
+					case '~':
+						token = char1;
+						if (char2 == '>')
 						{
 							second = true;
 							break;

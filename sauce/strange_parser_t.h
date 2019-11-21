@@ -172,11 +172,11 @@ private:
 			{
 				initial = expression_shared_scope_t<>::create_(token, flock_t<>::create_(context->shared, context->shoal));
 			}
-			else if (op == "*>") // meta
+			else if (op == "~>") // meta
 			{
 				initial = _meta(context);
 			}
-			else if (op == "<*") // emit
+			else if (op == "<~") // emit
 			{
 				initial = _emit(context);
 			}
@@ -247,14 +247,14 @@ private:
 		auto const token = _token;
 		if (!_next())
 		{
-			throw dis("strange::parser *> with nothing following it:") + token.report_();
+			throw dis("strange::parser ~> with nothing following it:") + token.report_();
 		}
 		if (!context->meta)
 		{
 			context->meta = std::make_shared<context_struct>();
 		}
 		context->meta->emit = context;
-		auto& emissions = context->meta->emissions;
+		context->meta->emissions.clear();
 		auto expression = _initial(100, context->meta);
 		auto result = no();
 		try
@@ -265,14 +265,14 @@ private:
 		{
 			throw dis("strange::parser meta evaluation error:") + token.report_() + misunderstanding;
 		}
-		context->meta->emit.reset();
 		if (check<expression_a<>>(result))
 		{
-			emissions.push_back(result);
+			context->meta->emissions.push_back(result);
 		}
-		auto flock = emissions;
-		emissions.clear();
-		return flock;
+		auto emissions = context->meta->emissions;
+		context->meta->emissions.clear();
+		context->meta->emit.reset();
+		return emissions;
 	}
 	
 	inline expression_a<> _emit(context_ptr const& context)
@@ -280,11 +280,11 @@ private:
 		auto const token = _token;
 		if (!_next())
 		{
-			throw dis("strange::parser <* with nothing following it:") + token.report_();
+			throw dis("strange::parser <~ with nothing following it:") + token.report_();
 		}
 		if (!context->emit)
 		{
-			throw dis("strange::parser <* without corresponding *> preceding it:") + token.report_();
+			throw dis("strange::parser <~ without corresponding ~> preceding it:") + token.report_();
 		}
 		context->emissions.push_back(_initial(100, context->emit));
 		return expression_t<>::create(token);
@@ -1382,7 +1382,7 @@ private:
 		}
 		else for (;;)
 		{
-			if (_token.tag() == "punctuation" && _token.symbol() == "*>") // meta
+			if (_token.tag() == "punctuation" && _token.symbol() == "~>") // meta
 			{
 				flock += _meta_emissions(new_context);
 			}
