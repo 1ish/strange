@@ -80,9 +80,9 @@ private:
 			context_ptr const& _emit = context_ptr{})
 			: shoal{ _shoal }
 			, scope{ _scope }
-			, shared{ _shared }
-			, fixed{ _fixed }
-			, kind{ _kind }
+			, shared{ _shared, true }
+			, fixed{ _fixed, true }
+			, kind{ _kind, true }
 			, meta{ _meta }
 			, emit{ _emit }
 			, emissions{ flock_t<>::create_() }
@@ -637,6 +637,8 @@ private:
 		bool herd = false;
 		bool shoal = false;
 		auto key = expression_t<>::create(token);
+		context_ptr key_context;
+		context_ptr value_context;
 		if (_token.tag() == "punctuation" &&
 			(_token.symbol() == "}" || _token.symbol() == "!"))
 		{
@@ -659,7 +661,11 @@ private:
 			}
 			else
 			{
-				key = _initial(0, std::make_shared<context_struct>(context->scope, context->scope, context->shared, context->fixed, context->kind, context->meta, context->emit));
+				if (!key_context)
+				{
+					key_context = std::make_shared<context_struct>(context->scope, context->scope, context->shared, context->fixed, context->kind, context->meta, context->emit);
+				}
+				key = _initial(0, key_context);
 			}
 			if (_it == _end)
 			{
@@ -730,7 +736,11 @@ private:
 			if (operator_token.symbol() == ":")
 			{
 				// regular key/value pair
-				value = _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, context->fixed, context->kind, context->meta, context->emit));
+				if (!value_context)
+				{
+					value_context = std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, context->fixed, context->kind, context->meta, context->emit);
+				}
+				value = _initial(0, value_context);
 			}
 			else if (operator_token.symbol() == "::")
 			{
