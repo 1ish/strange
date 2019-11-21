@@ -229,6 +229,22 @@ private:
 	inline expression_a<> _meta(context_ptr const& context)
 	{
 		auto const token = _token;
+		auto const emissions = _meta_emissions(context);
+		int64_t const size = emissions.size();
+		if (!size)
+		{
+			return expression_t<>::create(token);
+		}
+		else if (size == 1)
+		{
+			return cast<expression_a<>>(emissions.at_index(0));
+		}
+		return expression_block_t<>::create_(token, emissions);
+	}
+
+	inline flock_a<> _meta_emissions(context_ptr const& context)
+	{
+		auto const token = _token;
 		if (!_next())
 		{
 			throw dis("strange::parser *> with nothing following it:") + token.report_();
@@ -239,7 +255,6 @@ private:
 		}
 		context->meta->emit = context;
 		auto& emissions = context->meta->emissions;
-		emissions = flock_t<>::create_();
 		auto expression = _initial(100, context->meta);
 		auto result = no();
 		try
@@ -255,24 +270,11 @@ private:
 		{
 			emissions.push_back(result);
 		}
-		int64_t const size = emissions.size();
-		if (!size)
-		{
-			result = expression_t<>::create(token);
-		}
-		else if (size == 1)
-		{
-			result = emissions.at_index(0);
-			emissions.clear();
-		}
-		else
-		{
-			result = expression_flock_t<>::create_(token, emissions);
-			emissions.clear();
-		}
-		return cast<expression_a<>>(result);
+		auto flock = emissions;
+		emissions.clear();
+		return flock;
 	}
-
+	
 	inline expression_a<> _emit(context_ptr const& context)
 	{
 		auto const token = _token;
@@ -1355,6 +1357,7 @@ private:
 			new_fixed_herd.mutate_thing();
 			new_kind_shoal.mutate_thing();
 		}
+		auto new_context = std::make_shared<context_struct>(context->shoal, context->scope, context->shared, new_fixed_herd, new_kind_shoal, context->meta, context->emit);
 		if (!_next())
 		{
 			throw dis("strange::parser " + _token.symbol() + " with nothing following it:") + _token.report_();
@@ -1369,7 +1372,14 @@ private:
 		}
 		else for (;;)
 		{
-			flock.push_back(_initial(0, std::make_shared<context_struct>(context->shoal, context->scope, context->shared, new_fixed_herd, new_kind_shoal, context->meta, context->emit)));
+			if (_token.tag() == "punctuation" && _token.symbol() == "*>") // meta
+			{
+				flock += _meta_emissions(new_context);
+			}
+			else
+			{
+				flock.push_back(_initial(0, new_context));
+			}
 			if (_it == _end)
 			{
 				throw dis("strange::parser element with nothing following it:") + _token.report_();
