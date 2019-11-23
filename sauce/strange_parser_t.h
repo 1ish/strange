@@ -176,7 +176,7 @@ private:
 			{
 				initial = _meta(context);
 			}
-			else if (op == "<~") // emit
+			else if (op == "(~" || op == "[~" || op == "{~") // emit
 			{
 				initial = _emit(context);
 			}
@@ -245,29 +245,27 @@ private:
 	inline flock_a<> _meta_emissions(context_ptr const& context)
 	{
 		auto const token = _token;
-		if (!_next())
-		{
-			throw dis("strange::parser ~> with nothing following it:") + token.report_();
-		}
 		if (!context->meta)
 		{
 			context->meta = std::make_shared<context_struct>();
 		}
 		context->meta->emit = context;
 		context->meta->emissions.clear();
-		auto expression = _initial(100, context->meta);
-		auto result = no();
-		try
+		for (auto const& expression : _elements(context->meta).extract())
 		{
-			result = expression.evaluate_();
-		}
-		catch (misunderstanding_a<>& misunderstanding)
-		{
-			throw dis("strange::parser meta evaluation error:") + token.report_() + misunderstanding;
-		}
-		if (check<expression_a<>>(result))
-		{
-			context->meta->emissions.push_back(result);
+			auto result = no();
+			try
+			{
+				result = cast<expression_a<>>(expression).evaluate_();
+			}
+			catch (misunderstanding_a<>& misunderstanding)
+			{
+				throw dis("strange::parser meta evaluation error:") + token.report_() + misunderstanding;
+			}
+			if (check<expression_a<>>(result))
+			{
+				context->meta->emissions.push_back(result);
+			}
 		}
 		auto emissions = context->meta->emissions;
 		context->meta->emissions.clear();
@@ -278,15 +276,22 @@ private:
 	inline expression_a<> _emit(context_ptr const& context)
 	{
 		auto const token = _token;
-		if (!_next())
-		{
-			throw dis("strange::parser <~ with nothing following it:") + token.report_();
-		}
 		if (!context->emit)
 		{
-			throw dis("strange::parser <~ without corresponding ~> preceding it:") + token.report_();
+			throw dis("strange::parser " + token.symbol() + " without corresponding ~> preceding it:") + token.report_();
 		}
-		context->emissions.push_back(_initial(100, context->emit));
+		if (token.symbol() == "(~")
+		{
+			context->emissions.push_back(expression_block_t<>::create_(token, _elements(context->emit)));
+		}
+		else if (token.symbol() == "[~")
+		{
+			context->emissions += _elements(context->emit);
+		}
+		else if (token.symbol() == "{~")
+		{
+			context->emissions.push_back(_initial_shoal_or_herd(context->emit));
+		}
 		return expression_t<>::create(token);
 	}
 
@@ -631,20 +636,22 @@ private:
 		auto const token = _token;
 		if (!_next())
 		{
-			throw dis("strange::parser { with nothing following it:") + token.report_();
+			throw dis("strange::parser " + token.symbol() + " with nothing following it:") + token.report_();
 		}
+		bool const tilda = token.symbol() == "{~";
 		auto flock = flock_t<>::create_();
 		bool herd = false;
 		bool shoal = false;
 		auto key = expression_t<>::create(token);
 		context_ptr key_context;
 		context_ptr value_context;
+		auto emissions = squad_t<>::create_();
 		if (_token.tag() == "punctuation" &&
-			(_token.symbol() == "}" || _token.symbol() == "!"))
+			(!tilda && _token.symbol() == "}" || tilda && _token.symbol() == "~}" || _token.symbol() == "!"))
 		{
 			if (_token.symbol() == "!")
 			{
-				if (!_next() || _token.symbol() != "}")
+				if (!_next() || !tilda && _token.symbol() != "}" || tilda && _token.symbol() != "~}")
 				{
 					throw dis("strange::parser {! without } immediately following it:") + token.report_();
 				}
@@ -654,170 +661,221 @@ private:
 		}
 		else for (;;)
 		{
-			if (_token.tag() == "name")
+			if (emissions.empty())
 			{
-				key = expression_literal_t<>::create_(_token, flock_t<>::create_(_token.symbol_()));
-				_next();
-			}
-			else
-			{
-				if (!key_context)
+				if (_token.tag() == "punctuation" && _token.symbol() == "~>")
 				{
-					key_context = std::make_shared<context_struct>(context->scope, context->scope, context->shared, context->fixed, context->kind, context->meta, context->emit);
+					emissions += _meta_emissions(context);
+					if (_it == _end)
+					{
+						throw dis("strange::parser meta element with nothing following it:") + _token.report_();
+					}
+					continue;
 				}
-				key = _initial(0, key_context);
-			}
-			if (_it == _end)
-			{
-				if (shoal)
+				if (_token.tag() == "name")
 				{
-					throw dis("strange::parser shoal key with nothing following it:") + _token.report_();
+					key = expression_literal_t<>::create_(_token, flock_t<>::create_(_token.symbol_()));
+					_next();
 				}
-				throw dis("strange::parser element with nothing following it:") + _token.report_();
-			}
-			if (_token.tag() != "punctuation")
-			{
-				if (shoal)
+				else
 				{
-					throw dis("strange::parser shoal key with non-punctuation following it:") + _token.report_();
-				}
-				throw dis("strange::parser element with non-punctuation following it:") + _token.report_();
-			}
-			bool comma = _token.symbol() == ",";
-			if (comma)
-			{
-				if (shoal)
-				{
-					throw dis("strange::parser shoal key without a corresponding value:") + _token.report_();
-				}
-				if (!_next())
-				{
-					throw dis("strange::parser , with nothing following it:") + _token.report_();
+					if (!key_context)
+					{
+						key_context = std::make_shared<context_struct>(context->scope, context->scope, context->shared, context->fixed, context->kind, context->meta, context->emit);
+					}
+					key = _initial(0, key_context);
 				}
 			}
-			if (_token.symbol() == "}")
+			else // emissions
 			{
-				if (shoal)
+				key = cast<expression_a<>>(emissions.pop_front_());
+				if (!shoal && key.type_() == expression_herd_t<>::type_())
 				{
-					throw dis("strange::parser shoal key without a corresponding value:") + _token.report_();
+					herd = true;
+					flock += key.terms_();
+					continue;
 				}
-				_next();
-				herd = true;
-				flock.push_back(key);
-				break;
+				if (!herd && key.type_() == expression_shoal_t<>::type_())
+				{
+					shoal = true;
+					flock += key.terms_();
+					continue;
+				}
 			}
-			if (comma)
+			if (emissions.empty())
+			{
+				if (_it == _end)
+				{
+					if (shoal)
+					{
+						throw dis("strange::parser shoal key with nothing following it:") + _token.report_();
+					}
+					throw dis("strange::parser element with nothing following it:") + _token.report_();
+				}
+				if (_token.tag() != "punctuation")
+				{
+					if (shoal)
+					{
+						throw dis("strange::parser shoal key with non-punctuation following it:") + _token.report_();
+					}
+					throw dis("strange::parser element with non-punctuation following it:") + _token.report_();
+				}
+				bool const comma = _token.symbol() == ",";
+				if (comma)
+				{
+					if (shoal)
+					{
+						throw dis("strange::parser shoal key without a corresponding value:") + _token.report_();
+					}
+					if (!_next())
+					{
+						throw dis("strange::parser , with nothing following it:") + _token.report_();
+					}
+				}
+				if (!tilda && _token.symbol() == "}" || tilda && _token.symbol() == "~}")
+				{
+					if (shoal)
+					{
+						throw dis("strange::parser shoal key without a corresponding value:") + _token.report_();
+					}
+					_next();
+					herd = true;
+					flock.push_back(key);
+					break;
+				}
+				if (comma)
+				{
+					herd = true;
+					flock.push_back(key);
+					continue;
+				}
+				if (herd)
+				{
+					throw dis("strange::parser herd element with unexpected punctuation following it:") + _token.report_();
+				}
+				shoal = true;
+			}
+			else if (!shoal) // emissions
 			{
 				herd = true;
 				flock.push_back(key);
 				continue;
 			}
-			if (herd)
+			// shoal value
+			if (emissions.empty())
 			{
-				throw dis("strange::parser herd element with unexpected punctuation following it:") + _token.report_();
-			}
-			shoal = true;
-			auto const operator_token = _token;
-			if (!_next())
-			{
-				throw dis("strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
-			}
-			auto key_symbol = no();
-			try
-			{
-				key_symbol = key.evaluate_();
-			}
-			catch (misunderstanding_a<>&)
-			{}
-			auto const new_scope_symbol = _scope_name(context->scope,
-				check<symbol_a<>>(key_symbol) ? cast<symbol_a<>>(key_symbol) : sym("#"));
-
-			auto value = expression_t<>::create(operator_token);
-			if (operator_token.symbol() == ":")
-			{
-				// regular key/value pair
-				if (!value_context)
+				auto const operator_token = _token;
+				if (!_next())
 				{
-					value_context = std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, context->fixed, context->kind, context->meta, context->emit);
+					throw dis("strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
 				}
-				value = _initial(0, value_context);
-			}
-			else if (operator_token.symbol() == "::")
-			{
-				// shared scope
-				value = _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
-				bool clash = false;
+				auto key_symbol = no();
 				try
 				{
-					clash = !context->shared.insert(new_scope_symbol, value.evaluate_());
+					key_symbol = key.evaluate_();
 				}
-				catch (misunderstanding_a<>& misunderstanding)
+				catch (misunderstanding_a<>&)
 				{
-					throw dis("strange::parser shoal :: value evaluation error:") + _token.report_() + misunderstanding;
 				}
-				if (clash)
+				auto const new_scope_symbol = _scope_name(context->scope,
+					check<symbol_a<>>(key_symbol) ? cast<symbol_a<>>(key_symbol) : sym("#"));
+
+				auto value = expression_t<>::create(operator_token);
+				if (operator_token.symbol() == ":")
 				{
-					throw dis("strange::parser shoal :: redefinition of shared name:") + _token.report_();
-				}
-			}
-			else if (operator_token.symbol() == ":#" || operator_token.symbol() == ":=" ||
-				operator_token.symbol() == ":<" || operator_token.symbol() == ":(")
-			{
-				bool const fixed = (operator_token.symbol() == ":#");
-				auto const kind = (fixed || operator_token.symbol() == ":=")
-					? any_a<>(kind_t<>::create_())
-					: any_a<>(_kind(context));
-				auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
-				if (key_string[key_string.length() - 1] == '_')
-				{
-					// extraction/mutation
-					if (_token.tag() != "punctuation" || _token.symbol() != "(")
+					// regular key/value pair
+					if (!value_context)
 					{
-						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
+						value_context = std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, context->fixed, context->kind, context->meta, context->emit);
 					}
-					auto const terms = _elements(std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
-					if (fixed)
+					value = _initial(0, value_context);
+				}
+				else if (operator_token.symbol() == "::")
+				{
+					// shared scope
+					value = _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
+					bool clash = false;
+					try
 					{
-						value = expression_extraction_t<>::create_(operator_token, terms);
+						clash = !context->shared.insert(new_scope_symbol, value.evaluate_());
+					}
+					catch (misunderstanding_a<>& misunderstanding)
+					{
+						throw dis("strange::parser shoal :: value evaluation error:") + _token.report_() + misunderstanding;
+					}
+					if (clash)
+					{
+						throw dis("strange::parser shoal :: redefinition of shared name:") + _token.report_();
+					}
+				}
+				else if (operator_token.symbol() == ":#" || operator_token.symbol() == ":=" ||
+					operator_token.symbol() == ":<" || operator_token.symbol() == ":(")
+				{
+					bool const fixed = (operator_token.symbol() == ":#");
+					auto const kind = (fixed || operator_token.symbol() == ":=")
+						? any_a<>(kind_t<>::create_())
+						: any_a<>(_kind(context));
+					auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
+					if (key_string[key_string.length() - 1] == '_')
+					{
+						// extraction/mutation
+						if (_token.tag() != "punctuation" || _token.symbol() != "(")
+						{
+							throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
+						}
+						auto const terms = _elements(std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
+						if (fixed)
+						{
+							value = expression_extraction_t<>::create_(operator_token, terms);
+						}
+						else
+						{
+							value = expression_mutation_t<>::create_(operator_token, terms);
+						}
 					}
 					else
 					{
-						value = expression_mutation_t<>::create_(operator_token, terms);
+						// attribute extraction/mutation
+						auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit)));
+						if (fixed)
+						{
+							value = expression_attribute_extraction_t<>::create_(operator_token, terms);
+						}
+						else
+						{
+							value = expression_attribute_mutation_t<>::create_(operator_token, terms);
+						}
 					}
 				}
 				else
 				{
-					// attribute extraction/mutation
-					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit)));
-					if (fixed)
-					{
-						value = expression_attribute_extraction_t<>::create_(operator_token, terms);
-					}
-					else
-					{
-						value = expression_attribute_mutation_t<>::create_(operator_token, terms);
-					}
+					throw dis("strange::parser shoal key with unexpected punctuation following it:") + _token.report_();
 				}
+				if (_it == _end)
+				{
+					throw dis("strange::parser shoal value with nothing following it:") + _token.report_();
+				}
+				flock.push_back(expression_flock_t<>::create_(operator_token, flock_t<>::create_(key, value)));
 			}
-			else
+			else // emissions
 			{
-				throw dis("strange::parser shoal key with unexpected punctuation following it:") + _token.report_();
-			}
-			if (_it == _end)
-			{
-				throw dis("strange::parser shoal value with nothing following it:") + _token.report_();
+				auto value = cast<expression_a<>>(emissions.pop_front_());
+				flock.push_back(expression_flock_t<>::create_(token, flock_t<>::create_(key, value)));
+				if (!emissions.empty())
+				{
+					continue;
+				}
 			}
 			if (_token.tag() != "punctuation")
 			{
 				throw dis("strange::parser shoal value with non-punctuation following it:") + _token.report_();
 			}
-			flock.push_back(expression_flock_t<>::create_(operator_token, flock_t<>::create_(key, value)));
-			comma = _token.symbol() == ",";
+			bool const comma = _token.symbol() == ",";
 			if (comma && !_next())
 			{
 				throw dis("strange::parser shoal , with nothing following it:") + _token.report_();
 			}
-			if (_token.symbol() == "}")
+			if (!tilda && _token.symbol() == "}" || tilda && _token.symbol() == "~}")
 			{
 				_next();
 				break;
@@ -1110,7 +1168,7 @@ private:
 				}
 				return _subsequent_colon_dot(min_precedence, initial, context);
 			}
-			if (op == "," || op == ":" || op == "::" || op == ":#" || op == ":=" || op == ":<" || op == ":(" || op == ";" || op == "]" || op == "}" || op == ")")
+			if (op == "," || op == ":" || op == "::" || op == ":#" || op == ":=" || op == ":<" || op == ":(" || op == ";" || op == "]" || op == "}" || op == ")" || op == "<~" || op == "~)" || op == "~]" || op == "~}")
 			{
 				// delimiter
 				return initial;
@@ -1357,12 +1415,13 @@ private:
 
 	inline flock_a<> _elements(context_ptr const& context)
 	{
-		bool const square = _token.symbol() == "[";
-		bool const round = _token.symbol() == "(";
-		bool const curly = _token.symbol() == "{";
+		bool const square = _token.symbol() == "[" || _token.symbol() == "[~";
+		bool const round = _token.symbol() == "(" || _token.symbol() == "(~";
+		bool const tilda = _token.symbol() == "[~" || _token.symbol() == "(~";
+		bool const angle = _token.symbol() == "~>";
 		auto new_fixed_herd = context->fixed;
 		auto new_kind_shoal = context->kind;
-		if (round || curly)
+		if (round)
 		{
 			new_fixed_herd.mutate_thing();
 			new_kind_shoal.mutate_thing();
@@ -1374,9 +1433,11 @@ private:
 		}
 		auto flock = flock_t<>::create_();
 		if (_token.tag() == "punctuation" &&
-			(square && _token.symbol() == "]" ||
-				round && _token.symbol() == ")" ||
-				curly && _token.symbol() == "}"))
+			(square && !tilda && _token.symbol() == "]" ||
+				round && !tilda && _token.symbol() == ")" ||
+				square && tilda && _token.symbol() == "~]" ||
+				round && tilda && _token.symbol() == "~)" ||
+				angle && _token.symbol() == "<~"))
 		{
 			_next();
 		}
@@ -1403,9 +1464,11 @@ private:
 			{
 				throw dis("strange::parser , with nothing following it:") + _token.report_();
 			}
-			if (square && _token.symbol() == "]" ||
-				round && _token.symbol() == ")" ||
-				curly && _token.symbol() == "}")
+			if (square && !tilda && _token.symbol() == "]" ||
+				round && !tilda && _token.symbol() == ")" ||
+				square && tilda && _token.symbol() == "~]" ||
+				round && tilda && _token.symbol() == "~)" ||
+				angle && _token.symbol() == "<~")
 			{
 				_next();
 				break;

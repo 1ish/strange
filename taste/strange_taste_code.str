@@ -10,7 +10,7 @@
 
 			<collection> :: abstraction
 			(	element~ :<<>># <>,
-				(	$$<strange::range>[element~],
+				(	$$<strange::range>[element~ ],
 					{	empty_ :# (<>),
 						size_ :# (<number_int_64>),
 						has_ :# (item, <>),
@@ -21,7 +21,7 @@
 
 			<forest> :: abstraction
 			(	element~ :<<>>,
-				(	$$<taste::collection>[element~],
+				(	$$<taste::collection>[element~ ],
 					{}
 				)
 			),
