@@ -701,6 +701,10 @@ private:
 					flock += key.terms_();
 					continue;
 				}
+				if (shoal && !emissions.empty())
+				{
+					throw dis("strange::parser invalid shoal meta emissions:") + _token.report_();
+				}
 			}
 			if (emissions.empty())
 			{
@@ -755,117 +759,106 @@ private:
 				}
 				shoal = true;
 			}
-			else if (!shoal) // emissions
+			else // emissions
 			{
 				herd = true;
 				flock.push_back(key);
 				continue;
 			}
+
 			// shoal value
-			if (emissions.empty())
+			auto const operator_token = _token;
+			if (!_next())
 			{
-				auto const operator_token = _token;
-				if (!_next())
+				throw dis("strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
+			}
+			auto key_symbol = no();
+			try
+			{
+				key_symbol = key.evaluate_();
+			}
+			catch (misunderstanding_a<>&)
+			{
+			}
+			auto const new_scope_symbol = _scope_name(context->scope,
+				check<symbol_a<>>(key_symbol) ? cast<symbol_a<>>(key_symbol) : sym("#"));
+
+			auto value = expression_t<>::create(operator_token);
+			if (operator_token.symbol() == ":")
+			{
+				// regular key/value pair
+				if (!value_context)
 				{
-					throw dis("strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
+					value_context = std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, context->fixed, context->kind, context->meta, context->emit);
 				}
-				auto key_symbol = no();
+				value = _initial(0, value_context);
+			}
+			else if (operator_token.symbol() == "::")
+			{
+				// shared scope
+				value = _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
+				bool clash = false;
 				try
 				{
-					key_symbol = key.evaluate_();
+					clash = !context->shared.insert(new_scope_symbol, value.evaluate_());
 				}
-				catch (misunderstanding_a<>&)
+				catch (misunderstanding_a<>& misunderstanding)
 				{
+					throw dis("strange::parser shoal :: value evaluation error:") + _token.report_() + misunderstanding;
 				}
-				auto const new_scope_symbol = _scope_name(context->scope,
-					check<symbol_a<>>(key_symbol) ? cast<symbol_a<>>(key_symbol) : sym("#"));
-
-				auto value = expression_t<>::create(operator_token);
-				if (operator_token.symbol() == ":")
+				if (clash)
 				{
-					// regular key/value pair
-					if (!value_context)
-					{
-						value_context = std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, context->fixed, context->kind, context->meta, context->emit);
-					}
-					value = _initial(0, value_context);
+					throw dis("strange::parser shoal :: redefinition of shared name:") + _token.report_();
 				}
-				else if (operator_token.symbol() == "::")
+			}
+			else if (operator_token.symbol() == ":#" || operator_token.symbol() == ":=" ||
+				operator_token.symbol() == ":<" || operator_token.symbol() == ":(")
+			{
+				bool const fixed = (operator_token.symbol() == ":#");
+				auto const kind = (fixed || operator_token.symbol() == ":=")
+					? any_a<>(kind_t<>::create_())
+					: any_a<>(_kind(context));
+				auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
+				if (key_string[key_string.length() - 1] == '_')
 				{
-					// shared scope
-					value = _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
-					bool clash = false;
-					try
+					// extraction/mutation
+					if (_token.tag() != "punctuation" || _token.symbol() != "(")
 					{
-						clash = !context->shared.insert(new_scope_symbol, value.evaluate_());
+						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
 					}
-					catch (misunderstanding_a<>& misunderstanding)
+					auto const terms = _elements(std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
+					if (fixed)
 					{
-						throw dis("strange::parser shoal :: value evaluation error:") + _token.report_() + misunderstanding;
-					}
-					if (clash)
-					{
-						throw dis("strange::parser shoal :: redefinition of shared name:") + _token.report_();
-					}
-				}
-				else if (operator_token.symbol() == ":#" || operator_token.symbol() == ":=" ||
-					operator_token.symbol() == ":<" || operator_token.symbol() == ":(")
-				{
-					bool const fixed = (operator_token.symbol() == ":#");
-					auto const kind = (fixed || operator_token.symbol() == ":=")
-						? any_a<>(kind_t<>::create_())
-						: any_a<>(_kind(context));
-					auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
-					if (key_string[key_string.length() - 1] == '_')
-					{
-						// extraction/mutation
-						if (_token.tag() != "punctuation" || _token.symbol() != "(")
-						{
-							throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
-						}
-						auto const terms = _elements(std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
-						if (fixed)
-						{
-							value = expression_extraction_t<>::create_(operator_token, terms);
-						}
-						else
-						{
-							value = expression_mutation_t<>::create_(operator_token, terms);
-						}
+						value = expression_extraction_t<>::create_(operator_token, terms);
 					}
 					else
 					{
-						// attribute extraction/mutation
-						auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit)));
-						if (fixed)
-						{
-							value = expression_attribute_extraction_t<>::create_(operator_token, terms);
-						}
-						else
-						{
-							value = expression_attribute_mutation_t<>::create_(operator_token, terms);
-						}
+						value = expression_mutation_t<>::create_(operator_token, terms);
 					}
 				}
 				else
 				{
-					throw dis("strange::parser shoal key with unexpected punctuation following it:") + _token.report_();
+					// attribute extraction/mutation
+					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit)));
+					if (fixed)
+					{
+						value = expression_attribute_extraction_t<>::create_(operator_token, terms);
+					}
+					else
+					{
+						value = expression_attribute_mutation_t<>::create_(operator_token, terms);
+					}
 				}
-				if (_it == _end)
-				{
-					throw dis("strange::parser shoal value with nothing following it:") + _token.report_();
-				}
-				flock.push_back(expression_flock_t<>::create_(operator_token, flock_t<>::create_(key, value)));
 			}
-			else // emissions
+			else
 			{
-				auto value = cast<expression_a<>>(emissions.pop_front_());
-				flock.push_back(expression_flock_t<>::create_(token, flock_t<>::create_(key, value)));
-				if (!emissions.empty())
-				{
-					continue;
-				}
+				throw dis("strange::parser shoal key with unexpected punctuation following it:") + _token.report_();
 			}
+			if (_it == _end)
+			{
+				throw dis("strange::parser shoal value with nothing following it:") + _token.report_();
+			}
+			flock.push_back(expression_flock_t<>::create_(operator_token, flock_t<>::create_(key, value)));
 			if (_token.tag() != "punctuation")
 			{
 				throw dis("strange::parser shoal value with non-punctuation following it:") + _token.report_();
