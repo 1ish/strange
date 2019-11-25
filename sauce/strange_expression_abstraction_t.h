@@ -63,9 +63,9 @@ public:
 			{
 				throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol dimension name");
 			}
-			if (cast<symbol_a<>>(name).last_character() != '~')
+			if (cast<symbol_a<>>(name).first_character() != '#')
 			{
-				throw dis(token.report() + "strange::expression_abstraction::create passed dimension name without ~ following it");
+				throw dis(token.report() + "strange::expression_abstraction::create passed dimension name without # preceding it");
 			}
 			dimension_names.push_back(name);
 			if (count == 1)

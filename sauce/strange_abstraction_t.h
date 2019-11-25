@@ -141,7 +141,7 @@ public:
 			}
 			_merge(cast<unordered_shoal_a<>>(parent), child, aspects_shoal);
 		}
-		child.insert_string("~", aspects_shoal);
+		child.insert_string("#", aspects_shoal);
 		return child;
 	}
 
@@ -164,14 +164,14 @@ protected:
 	static inline void _merge(unordered_shoal_a<> const& parent, unordered_shoal_a<>& child, any_a<> aspects)
 	{
 		auto& map = child.reference();
-		if (parent.has_string("~"))
+		if (parent.has_string("#"))
 		{
-			aspects = parent.at_string("~");
+			aspects = parent.at_string("#");
 		}
 		bool const aspects_unordered_shoal = check<unordered_shoal_a<>>(aspects);
 		for (auto const& member : parent.extract())
 		{
-			if (member.first.is("~"))
+			if (member.first.is("#"))
 			{
 				continue;
 			}

@@ -160,7 +160,7 @@ private:
 		{
 			auto const token = _token;
 			std::string const op = token.symbol();
-			if (op == "$") // shared local
+			if (op == "$" || op == "#") // shared local / dimension
 			{
 				initial = _initial_local(context);
 			}
@@ -442,20 +442,20 @@ private:
 
 	inline expression_a<> _initial_local(context_ptr const& context)
 	{
-		bool const shared = _token.tag() == "punctuation";
-		if (shared && !_next())
+		bool const punctuation = _token.tag() == "punctuation";
+		bool const shared = punctuation && _token.symbol() == "$";
+		bool const dimension = punctuation && _token.symbol() == "#";
+		if (punctuation && !_next())
 		{
-			throw dis("strange::parser $ with nothing following it:") + _token.report_();
+			throw dis("strange::parser " + _token.symbol() + " with nothing following it:") + _token.report_();
 		}
 		auto const token = _token;
-		auto name = _token.symbol_();
-		bool non_instruction = !_next() || _token.tag() != "punctuation";
-		bool const dimension = !non_instruction && _token.symbol() == "~";
-		if (dimension)
+		if (token.tag() != "name")
 		{
-			name = name + _token.symbol_();
-			non_instruction = !_next() || _token.tag() != "punctuation";
+			throw dis("strange::parser shared local/dimension without name:") + _token.report_();
 		}
+		auto const name = dimension ? sym("#" + token.symbol()) : token.symbol_(); //TODO fixed dimension
+		bool non_instruction = !_next() || _token.tag() != "punctuation";
 		if (!non_instruction)
 		{
 			auto kind = context->kind.at_(name);
@@ -890,7 +890,7 @@ private:
 		unordered_herd_a<> result = unordered_herd_t<>::create_();
 		for (auto const& item : herd.extract())
 		{
-			if (check<symbol_a<>>(item) && cast<symbol_a<>>(item).last_character() == '~')
+			if (check<symbol_a<>>(item) && cast<symbol_a<>>(item).first_character() == '#')
 			{
 				result.insert(item);
 			}
@@ -903,7 +903,7 @@ private:
 		unordered_shoal_a<> result = unordered_shoal_t<>::create_();
 		for (auto const& item : shoal.extract())
 		{
-			if (check<symbol_a<>>(item.first) && cast<symbol_a<>>(item.first).last_character() == '~')
+			if (check<symbol_a<>>(item.first) && cast<symbol_a<>>(item.first).first_character() == '#')
 			{
 				result.insert(item.first, item.second);
 			}
@@ -946,20 +946,24 @@ private:
 		terms.push_back(number_int_64_t<>::create(order));
 
 		// name
+		bool const dimension = !parenthesis && _token.tag() == "punctuation" && _token.symbol() == "#";
+		if (dimension && (!_next() || _token.tag() != "name"))
+		{
+			throw dis("strange::parser kind # with no name following it:") + token.report_();
+		}
 		bool const name = !parenthesis && _token.tag() == "name";
 		if (name)
 		{
-			auto const scope = _scope();
-			if (_token.tag() == "punctuation" && _token.symbol() == "~")
+			if (dimension)
 			{
 				modify = true;
-				expression = expression_local_at_t<>::create_(token, flock_t<>::create_(scope + _token.symbol_()));
+				expression = expression_local_at_t<>::create_(token, flock_t<>::create_(sym("#" + _token.symbol())));
 				_next();
 				terms.push_back(sym(""));
 			}
 			else
 			{
-				terms.push_back(scope);
+				terms.push_back(_scope());
 			}
 			if (_it == _end)
 			{
@@ -1315,11 +1319,6 @@ private:
 				else if (op == "!=")
 				{
 					oper = sym("different_");
-				}
-				else if (op == "#")
-				{
-					oper = sym("hash_");
-					count = 1;
 				}
 				else if (op == "=")
 				{
