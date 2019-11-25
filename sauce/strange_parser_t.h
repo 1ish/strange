@@ -445,6 +445,7 @@ private:
 		bool const punctuation = _token.tag() == "punctuation";
 		bool const shared = punctuation && _token.symbol() == "$";
 		bool const dimension = punctuation && _token.symbol() == "#";
+		auto const prefix = punctuation ? _token.symbol_() : sym("");
 		if (punctuation && !_next())
 		{
 			throw dis("strange::parser " + _token.symbol() + " with nothing following it:") + _token.report_();
@@ -454,7 +455,7 @@ private:
 		{
 			throw dis("strange::parser shared local/dimension without name:") + _token.report_();
 		}
-		auto const name = dimension ? sym("#" + token.symbol()) : token.symbol_(); //TODO fixed dimension
+		auto const name = punctuation ? prefix + token.symbol_() : token.symbol_();
 		bool non_instruction = !_next() || _token.tag() != "punctuation";
 		if (!non_instruction)
 		{

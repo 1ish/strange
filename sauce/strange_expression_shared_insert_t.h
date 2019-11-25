@@ -122,12 +122,13 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
-		// river.write_string(" $" + cast<symbol_a<>>(_key).to_string() + " :" + _kind.to_string() + "=");
+		// river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " :" + _kind.to_string() + "=");
 		_expression.generate(version, indent, river);
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
+		//TODO remove $ prefix
 		// river.write_string(" static " + _kind.code() + " " + cast<symbol_a<>>(_key).to_string() + " =");
 		_expression.generate_cpp(version, indent, river);
 	}

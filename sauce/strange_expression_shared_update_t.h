@@ -114,13 +114,13 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" $" + cast<symbol_a<>>(_key).to_string() + " :=");
+		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " :=");
 		_expression.generate(version, indent, river);
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " =");
+		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " ="); //TODO remove $ prefix
 		_expression.generate_cpp(version, indent, river);
 	}
 
