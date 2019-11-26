@@ -25,7 +25,26 @@
 					{}
 				)
 			),
+
 /*
+			// parameters
+			x &# 10, // any_a<> const& x = number_int_64_t<>::create(10)
+			x &#,    // any_a<> const& x
+			x &= 10, // any_a<>& x = number_int_64_t<>::create(10)
+			x &=,    // any_a<>& x
+
+			// locals
+			x :# 10,   // any_a<> const x = number_int_64_t<>::create(10)
+			x := 10,   // any_a<> x = number_int_64_t<>::create(10)
+			x :<>= 10, // any_a<> x = number_int_64_t<>::create(10)
+			x :=,      // any_a<> x
+
+			// attributes
+			_x :# 10, // any_a<> const x = number_int_64_t<>::create(10)
+			_x :#,    // any_a<> const x
+			_x := 10, // any_a<> x = number_int_64_t<>::create(10)
+			_x :=,    // any_a<> x
+
 			forest :: thing
 			(	#element :<<>># <>,
 				(	$$strange::flock[#element],
