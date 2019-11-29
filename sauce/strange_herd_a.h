@@ -217,7 +217,7 @@ namespace strange {
     	explicit inline herd_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
     		: ___derived___(handle, reference)
     	{
-    		if (!std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
+    		if (handle && !std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
     		{
     			throw dis("herd_a constructor failed to cast from base to ddderived");
     		}
@@ -227,7 +227,7 @@ namespace strange {
     	explicit inline herd_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
     		: ___derived___(handle, reference)
     	{
-    		assert(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
+    		assert(!handle || std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
     	}
     #endif
     
@@ -241,7 +241,7 @@ namespace strange {
     	template <typename ___TTT___>
     	inline herd_a& operator=(std::shared_ptr<___TTT___> const& handle)
     	{
-    		if (!std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
+    		if (handle && !std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
     		{
     			throw dis("herd_a assignment failed to cast from base to ddderived");
     		}
@@ -253,7 +253,7 @@ namespace strange {
     	template <typename ___TTT___>
     	inline herd_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
     	{
-    		assert(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
+    		assert(!handle || std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
     		handle_ = handle;
     		handle_->___weak___(handle_);
     		return *this;

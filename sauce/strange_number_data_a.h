@@ -320,7 +320,7 @@ namespace strange {
 
     	{
 
-    		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
+    		if (handle && !std::dynamic_pointer_cast<___finale_handle_base___>(handle))
 
     		{
 
@@ -340,7 +340,7 @@ namespace strange {
 
     	{
 
-    		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+    		assert(!handle || std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 
     	}
 
@@ -368,7 +368,7 @@ namespace strange {
 
     	{
 
-    		if (!std::dynamic_pointer_cast<___finale_handle_base___>(handle))
+    		if (handle && !std::dynamic_pointer_cast<___finale_handle_base___>(handle))
 
     		{
 
@@ -392,7 +392,7 @@ namespace strange {
 
     	{
 
-    		assert(std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+    		assert(!handle || std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 
     		handle_ = handle;
 

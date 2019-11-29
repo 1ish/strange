@@ -28,22 +28,26 @@
 
 /*
 			// parameters
-			x &# 10, // any_a<> const& x = number_int_64_t<>::create(10)
-			x &#,    // any_a<> const& x
-			x &= 10, // any_a<>& x = number_int_64_t<>::create(10)
-			x &=,    // any_a<>& x
+			x :# 10		// any_a<> const& x = number_int_64_t<>::create(10)
+			x :#		// any_a<> const& x
+			x			// any_a<> const& x
+			x := 10		// any_a<>& x = number_int_64_t<>::create(10)		- non-standard, but could be done with overloads
+			x :=		// any_a<>& x
 
 			// locals
-			x :# 10,   // any_a<> const x = number_int_64_t<>::create(10)
-			x := 10,   // any_a<> x = number_int_64_t<>::create(10)
-			x :<>= 10, // any_a<> x = number_int_64_t<>::create(10)
-			x :=,      // any_a<> x
+			x :# 10		// auto const x = number_int_64_t<>::create(10)
+			x := 10		// auto x = number_int_64_t<>::create(10)
+			x :=		// any_a<> x										- uninitialized
 
 			// attributes
-			_x :# 10, // any_a<> const x = number_int_64_t<>::create(10)
-			_x :#,    // any_a<> const x
-			_x := 10, // any_a<> x = number_int_64_t<>::create(10)
-			_x :=,    // any_a<> x
+			_x :# 10	// any_a<> const x = number_int_64_t<>::create(10)
+			_x :#		// any_a<> const x									- constructor
+			_x := 10	// any_a<> x = number_int_64_t<>::create(10)
+			_x :=		// any_a<> x										- constructor
+
+			//TODO change cat reference to fixed
+
+			need to distinguish context to identify syntax errors during parsing
 
 			forest :: thing
 			(	#element :<<>># <>,

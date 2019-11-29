@@ -284,9 +284,9 @@ private:
 public:
 	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
 
-	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const&) noexcept
+	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle) noexcept
 	{
-		return true;
+		return bool(handle);
 	}
 
 	inline %struct_name%() noexcept
