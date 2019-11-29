@@ -69,7 +69,7 @@ public:
 				cast<expression_a<>>(parameters),
 				cast<expression_a<>>(result));
 		}
-		any_a<> reference = *it;
+		any_a<> fixed = *it;
 		if (++it == terms.cend_())
 		{
 			return create(token, terms,
@@ -78,7 +78,7 @@ public:
 				cast<expression_a<>>(dimensions),
 				cast<expression_a<>>(parameters),
 				cast<expression_a<>>(result),
-				reference);
+				fixed);
 		}
 		return create(token, terms,
 			cast<number_data_a<int64_t>>(order),
@@ -86,7 +86,7 @@ public:
 			cast<expression_a<>>(dimensions),
 			cast<expression_a<>>(parameters),
 			cast<expression_a<>>(result),
-			reference,
+			fixed,
 			*it);
 	}
 
@@ -105,9 +105,9 @@ public:
 		return expression_substitute_t<over>::create(over{ expression_cat_t<>(token, terms, 3, order, name, dimensions, parameters, expression_t<>::create(token), no(), no()) });
 	}
 
-	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& reference = no(), any_a<> const& optional = no())
+	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed = no(), any_a<> const& optional = no())
 	{
-		return expression_substitute_t<over>::create(over{ expression_cat_t<>(token, terms, 4, order, name, dimensions, parameters, result, reference, optional) });
+		return expression_substitute_t<over>::create(over{ expression_cat_t<>(token, terms, 4, order, name, dimensions, parameters, result, fixed, optional) });
 	}
 
 	// reflection
@@ -151,7 +151,7 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_cat::operate result is not a symbol");
 		}
-		return cat_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), _reference, _optional);
+		return cat_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), _fixed, _optional);
 	}
 
 	// expression
@@ -183,7 +183,7 @@ public:
 				{
 					river.write_string(":");
 					_result.generate(version, indent, river);
-					if (_reference)
+					if (_fixed)
 					{
 						river.write_string(">& ");
 						return;
@@ -209,7 +209,7 @@ public:
 				{
 					river.write_string(",");
 					_result.generate_cpp(version, indent, river);
-					if (_reference)
+					if (_fixed)
 					{
 						river.write_string(", true");
 					}
@@ -235,10 +235,10 @@ protected:
 	expression_a<> const _dimensions;
 	expression_a<> const _parameters;
 	expression_a<> const _result;
-	any_a<> const _reference;
+	any_a<> const _fixed;
 	any_a<> const _optional;
 
-	inline expression_cat_t(token_a<> const& token, flock_a<> const& terms, int64_t count, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& reference, any_a<> const& optional)
+	inline expression_cat_t(token_a<> const& token, flock_a<> const& terms, int64_t count, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed, any_a<> const& optional)
 		: expression_t(token, dimensions.pure() && parameters.pure() && result.pure(), dimensions.literal() && parameters.literal() && result.literal()) // pure, literal
 		, _terms{ terms }
 		, _count{ count }
@@ -247,7 +247,7 @@ protected:
 		, _dimensions{ dimensions }
 		, _parameters{ parameters }
 		, _result{ result }
-		, _reference{ reference }
+		, _fixed{ fixed }
 		, _optional{ optional }
 	{}
 

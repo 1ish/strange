@@ -40,9 +40,9 @@ public:
 	inline any_a<> result__(range_a<> const& _) const;
 	inline cat_a result_() const;
 
-	inline any_a<> reference__(range_a<> const& _) const;
-	inline any_a<> reference_() const;
-	inline bool reference() const;
+	inline any_a<> fixed__(range_a<> const& _) const;
+	inline any_a<> fixed_() const;
+	inline bool fixed() const;
 
 	inline any_a<> optional__(range_a<> const& _) const;
 	inline any_a<> optional_() const;

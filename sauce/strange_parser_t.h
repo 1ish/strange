@@ -1057,9 +1057,9 @@ private:
 			_next();
 		}
 
-		// reference
-		bool const reference = _it != _end && _token.tag() == "punctuation" && _token.symbol() == "&";
-		if (reference)
+		// fixed
+		bool const fixed = _it != _end && _token.tag() == "punctuation" && _token.symbol() == "#";
+		if (fixed)
 		{
 			terms.push_back(yes());
 			_next();
@@ -1068,6 +1068,10 @@ private:
 		{
 			terms.push_back(no());
 		}
+
+		//TODO consume =
+		//TODO optional?
+		//TODO use kind.fixed instead of fixed in context
 
 		// optional
 		if (colon && assignment)
@@ -1084,7 +1088,7 @@ private:
 		{
 			terms.push_back(no());
 		}
-		else if (!reference)
+		else if (!fixed)
 		{
 			// remove redundant terms
 			terms.pop_back_();

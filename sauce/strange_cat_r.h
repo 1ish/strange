@@ -52,7 +52,7 @@ public:
 			operations.update_string("dimensions_", native_extraction_t<cat_a<>>::create(&cat_a<>::dimensions__));
 			operations.update_string("parameters_", native_extraction_t<cat_a<>>::create(&cat_a<>::parameters__));
 			operations.update_string("result_", native_extraction_t<cat_a<>>::create(&cat_a<>::result__));
-			operations.update_string("reference_", native_extraction_t<cat_a<>>::create(&cat_a<>::reference__));
+			operations.update_string("fixed_", native_extraction_t<cat_a<>>::create(&cat_a<>::fixed__));
 			operations.update_string("optional_", native_extraction_t<cat_a<>>::create(&cat_a<>::optional__));
 			operations.update_string("code_", native_extraction_t<cat_a<>>::create(&cat_a<>::code__));
 			return operations;

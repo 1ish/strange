@@ -47,8 +47,6 @@
 
 			//TODO change cat reference to fixed
 
-			need to distinguish context to identify syntax errors during parsing
-
 			forest :: thing
 			(	#element :<<>># <>,
 				(	$$strange::flock[#element],

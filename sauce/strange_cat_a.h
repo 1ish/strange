@@ -113,12 +113,12 @@ namespace strange {
      { assert(handle_); return read().result__(_ ); }
      inline cat_a result_ ( ) const
      { assert(handle_); return read().result_( ); }
-     inline any_a < > reference__ ( range_a < > const & _ ) const
-     { assert(handle_); return read().reference__(_ ); }
-     inline any_a < > reference_ ( ) const
-     { assert(handle_); return read().reference_( ); }
-     inline bool reference ( ) const
-     { assert(handle_); return read().reference( ); }
+     inline any_a < > fixed__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().fixed__(_ ); }
+     inline any_a < > fixed_ ( ) const
+     { assert(handle_); return read().fixed_( ); }
+     inline bool fixed ( ) const
+     { assert(handle_); return read().fixed( ); }
      inline any_a < > optional__ ( range_a < > const & _ ) const
      { assert(handle_); return read().optional__(_ ); }
      inline any_a < > optional_ ( ) const
@@ -149,9 +149,9 @@ namespace strange {
       virtual inline flock_a < > parameters_ ( ) const = 0;
       virtual inline any_a < > result__ ( range_a < > const & _ ) const = 0;
       virtual inline cat_a result_ ( ) const = 0;
-      virtual inline any_a < > reference__ ( range_a < > const & _ ) const = 0;
-      virtual inline any_a < > reference_ ( ) const = 0;
-      virtual inline bool reference ( ) const = 0;
+      virtual inline any_a < > fixed__ ( range_a < > const & _ ) const = 0;
+      virtual inline any_a < > fixed_ ( ) const = 0;
+      virtual inline bool fixed ( ) const = 0;
       virtual inline any_a < > optional__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > optional_ ( ) const = 0;
       virtual inline bool optional ( ) const = 0;
@@ -201,12 +201,12 @@ namespace strange {
       { return value_.result__(_ ); }
       virtual inline cat_a result_ ( ) const
       { return value_.result_( ); }
-      virtual inline any_a < > reference__ ( range_a < > const & _ ) const
-      { return value_.reference__(_ ); }
-      virtual inline any_a < > reference_ ( ) const
-      { return value_.reference_( ); }
-      virtual inline bool reference ( ) const
-      { return value_.reference( ); }
+      virtual inline any_a < > fixed__ ( range_a < > const & _ ) const
+      { return value_.fixed__(_ ); }
+      virtual inline any_a < > fixed_ ( ) const
+      { return value_.fixed_( ); }
+      virtual inline bool fixed ( ) const
+      { return value_.fixed( ); }
       virtual inline any_a < > optional__ ( range_a < > const & _ ) const
       { return value_.optional__(_ ); }
       virtual inline any_a < > optional_ ( ) const

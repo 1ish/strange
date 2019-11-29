@@ -64,12 +64,12 @@ public:
 		{
 			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
 		}
-		any_a<> reference = *it;
+		any_a<> fixed = *it;
 		if (++it == range.cend_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), reference);
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), fixed);
 		}
-		return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), reference, *it);
+		return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), fixed, *it);
 	}
 
 	static inline cat_a<> create_()
@@ -78,22 +78,22 @@ public:
 		return VAL;
 	}
 
-	static inline cat_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), any_a<> const& reference = no(), any_a<> const& optional = no())
+	static inline cat_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), any_a<> const& fixed = no(), any_a<> const& optional = no())
 	{
 		if (name.is("strange::any"))
 		{
-			return cat_a<>{ over{ cat_t<>(order.extract(), sym(""), dimensions, flock_t<>::create_(), parameters, result, reference, optional) } };
+			return cat_a<>{ over{ cat_t<>(order.extract(), sym(""), dimensions, flock_t<>::create_(), parameters, result, fixed, optional) } };
 		}
-		return cat_a<>{ over{ cat_t<>(order.extract(), name, dimensions, flock_t<>::create_(), parameters, result, reference, optional) } };
+		return cat_a<>{ over{ cat_t<>(order.extract(), name, dimensions, flock_t<>::create_(), parameters, result, fixed, optional) } };
 	}
 
-	static inline cat_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), bool reference = false, bool optional = false)
+	static inline cat_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), bool fixed = false, bool optional = false)
 	{
 		if (name == "strange::any")
 		{
-			return cat_a<>{ over{ cat_t<>(order, sym(""), dimensions, flock_t<>::create_(), parameters, result, reference, optional) } };
+			return cat_a<>{ over{ cat_t<>(order, sym(""), dimensions, flock_t<>::create_(), parameters, result, fixed, optional) } };
 		}
-		return cat_a<>{ over{ cat_t<>(order, sym(name), dimensions, flock_t<>::create_(), parameters, result, reference, optional) } };
+		return cat_a<>{ over{ cat_t<>(order, sym(name), dimensions, flock_t<>::create_(), parameters, result, fixed, optional) } };
 	}
 
 	static inline symbol_a<> any_sym()
@@ -204,19 +204,19 @@ public:
 		return check<cat_a<>>(_result) ? cast<cat_a<>>(_result) : create_();
 	}
 
-	inline any_a<> reference__(range_a<> const&) const
+	inline any_a<> fixed__(range_a<> const&) const
 	{
-		return reference_();
+		return fixed_();
 	}
 
-	inline any_a<> reference_() const
+	inline any_a<> fixed_() const
 	{
-		return boole(reference());
+		return boole(fixed());
 	}
 
-	inline bool reference() const
+	inline bool fixed() const
 	{
-		return _reference;
+		return _fixed;
 	}
 
 	inline any_a<> optional__(range_a<> const&) const
@@ -256,10 +256,10 @@ protected:
 	flock_a<> const _dimensions;
 	flock_a<> const _parameters;
 	symbol_a<> const _result;
-	bool const _reference;
+	bool const _fixed;
 	bool const _optional;
 
-	inline cat_t(int64_t order, symbol_a<> const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool reference, bool optional)
+	inline cat_t(int64_t order, symbol_a<> const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool optional)
 		: symbol_t{ _symbol_(order, name, dimensions, aspects, parameters, result) }
 		, _symbolic{ _symbolic_(dimensions, aspects, parameters, result) }
 		, _order{ order }
@@ -267,7 +267,7 @@ protected:
 		, _dimensions{ dimensions }
 		, _parameters{ parameters }
 		, _result{ _result_(result) }
-		, _reference{ reference }
+		, _fixed{ fixed }
 		, _optional{ optional }
 	{}
 
