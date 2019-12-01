@@ -354,20 +354,20 @@ private:
 			}
 			else
 			{
-				any_a<> kind = _kind(context);
-				bool const punctuation = _previous.tag() == "punctuation";
-				if (punctuation && _previous.symbol() == "#")
+				auto const kind = _kind(context);
+				if (kind.terms_().at_index(6)) // fixed
 				{
 					throw dis("strange::parser attribute cannot be immutably assigned:") + token.report_();
 				}
-				optional = punctuation && (_previous.symbol() == "=" || _previous.symbol() == ">=");
+				optional = kind.terms_().at_index(7);
+				any_a<> any_kind = kind;
 				try
 				{
-					kind = cast<expression_a<>>(kind).evaluate_();
+					any_kind = cast<expression_a<>>(kind).evaluate_();
 				}
 				catch (misunderstanding_a<>&)
 				{}
-				terms.push_back(kind);
+				terms.push_back(any_kind);
 			}
 			if (optional)
 			{
@@ -507,12 +507,11 @@ private:
 				}
 				else if (op == ":<" || op == ":(")
 				{
-					kind = _kind(context);
-					bool const punctuation = _previous.tag() == "punctuation";
-					fixed = punctuation && _previous.symbol() == "#";
-					optional = fixed || punctuation && (_previous.symbol() == "=" || _previous.symbol() == ">=");
-					fixed = fixed || dimension;
+					auto const kind_expression = _kind(context);
+					fixed = dimension || kind_expression.terms_().at_index(6);
+					optional = kind_expression.terms_().at_index(7);
 					insert = true;
+					kind = kind_expression;
 					try
 					{
 						kind = cast<expression_a<>>(kind).evaluate_();
@@ -915,7 +914,7 @@ private:
 	inline expression_a<> _kind(context_ptr const& context)
 	{
 		auto const token = _token;
-		bool const punctuation = token.tag() == "punctuation";
+		bool punctuation = token.tag() == "punctuation";
 		bool const parenthesis = punctuation && token.symbol() == ":(";
 		bool const colon = parenthesis || punctuation && token.symbol() == ":<";
 		bool modify = parenthesis;
@@ -1058,68 +1057,63 @@ private:
 		}
 
 		// fixed
-		bool const fixed = _it != _end && _token.tag() == "punctuation" && _token.symbol() == "#";
+		punctuation = !assignment && _it != _end && _token.tag() == "punctuation";
+		bool const fixed = punctuation && _token.symbol() == "#";
 		if (fixed)
 		{
 			terms.push_back(yes());
 			_next();
+			assignment = true;
+		}
+		else if (punctuation && _token.symbol() == "=")
+		{
+			terms.push_back(no());
+			_next();
+			assignment = true;
 		}
 		else
 		{
 			terms.push_back(no());
 		}
 
-		//TODO consume =
-		//TODO optional?
-		//TODO use kind.fixed instead of fixed in context
-
-		// optional
-		if (colon && assignment)
-		{
-			terms.push_back(yes());
-		}
-		else if (colon && _it != _end && _token.tag() == "punctuation" &&
-			(_token.symbol() == "#" || _token.symbol() == "="))
-		{
-			terms.push_back(yes());
-			_next();
-		}
-		else if (modify)
-		{
-			terms.push_back(no());
-		}
-		else if (!fixed)
-		{
-			// remove redundant terms
-			terms.pop_back_();
-			if (!result)
-			{
-				terms.pop_back_();
-				if (!parameters)
-				{
-					terms.pop_back_();
-					if (!aspects)
-					{
-						terms.pop_back_();
-						if (!dimensions)
-						{
-							terms.pop_back_();
-							if (!name)
-							{
-								terms.pop_back_();
-							}
-						}
-					}
-				}
-			}
-		}
+		bool const optional = colon && assignment && _it != _end &&
+			(_token.tag() != "punctuation" || !_delimiter(_token.symbol()));
+		terms.push_back(boole(optional));
 
 		// expression
 		if (modify)
 		{
 			terms.push_back(expression);
 		}
-
+		else if (!optional)
+		{
+			// remove redundant terms
+			terms.pop_back_();
+			if (!fixed)
+			{
+				terms.pop_back_();
+				if (!result)
+				{
+					terms.pop_back_();
+					if (!parameters)
+					{
+						terms.pop_back_();
+						if (!aspects)
+						{
+							terms.pop_back_();
+							if (!dimensions)
+							{
+								terms.pop_back_();
+								if (!name)
+								{
+									terms.pop_back_();
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		return expression_kind_t<>::create_(token, terms);
 	}
 	
@@ -1170,9 +1164,8 @@ private:
 				}
 				return _subsequent_colon_dot(min_precedence, initial, context);
 			}
-			if (op == "," || op == ":" || op == "::" || op == ":#" || op == ":=" || op == ":<" || op == ":(" || op == ";" || op == "]" || op == "}" || op == ")" || op == "<~" || op == "~)" || op == "~]" || op == "~}")
+			if (_delimiter(op))
 			{
-				// delimiter
 				return initial;
 			}
 			int64_t const precedence = token.precedence();
@@ -1408,6 +1401,11 @@ private:
 		// operate with range
 		auto const terms = flock_t<>::create_(initial, _initial(100, context));
 		return _subsequent(min_precedence, expression_operate_range_t<>::create_(token, terms), context);
+	}
+
+	static inline bool _delimiter(std::string const& op)
+	{
+		return op == "," || op == ":" || op == "::" || op == ":#" || op == ":=" || op == ":<" || op == ":(" || op == ";" || op == "]" || op == "}" || op == ")" || op == "<~" || op == "~)" || op == "~]" || op == "~}";
 	}
 
 	inline flock_a<> _elements(context_ptr const& context)
