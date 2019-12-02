@@ -45,7 +45,7 @@ public:
 
 	static inline bool validate(any_a<> const& literal)
 	{
-		return 
+		return !check<any_a<>>(literal) ||
 			literal.type_() == nothing_t<>::type_() ||
 			literal.type_() == something_t<>::type_() ||
 			literal.type_() == symbol_t<>::type_() ||
@@ -87,7 +87,11 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		if (_literal.type_() == nothing_t<>::type_())
+		if (!check<any_a<>>(_literal))
+		{
+			river.write_string(" null ");
+		}
+		else if (_literal.type_() == nothing_t<>::type_())
 		{
 			river.write_string(" false ");
 		}
@@ -155,7 +159,11 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		if (_literal.type_() == nothing_t<>::type_())
+		if (!check<any_a<>>(_literal))
+		{
+			river.write_string(" strange::any_a<>{} ");
+		}
+		else if (_literal.type_() == nothing_t<>::type_())
 		{
 			river.write_string(" strange::no() ");
 		}

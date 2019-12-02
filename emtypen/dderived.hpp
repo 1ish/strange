@@ -189,7 +189,9 @@ public:
 	explicit inline %struct_name%(___TTT___ value, bool reference = false) noexcept
 		: ___derived___(std::make_shared<___dderived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
 			reference)
-	{}
+	{
+		handle_->___weak___(handle_);
+	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
@@ -200,7 +202,6 @@ public:
 			throw dis("%struct_name% assignment failed to cast from base to dderived");
 		}
 		handle_ = handle;
-		handle_->___weak___(handle_);
 		return *this;
 	}
 #else
@@ -209,7 +210,6 @@ public:
 	{
 		assert(!handle || std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
 		handle_ = handle;
-		handle_->___weak___(handle_);
 		return *this;
 	}
 #endif
@@ -219,7 +219,6 @@ public:
 	{
 		%struct_name% temp{ std::move(value) };
 		std::swap(temp.handle_, handle_);
-		handle_->___weak___(handle_);
 		return *this;
 	}
 

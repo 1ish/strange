@@ -146,10 +146,15 @@ private:
 				_next();
 				initial = expression_literal_t<>::create_(_token, flock_t<>::create_(yes()));
 			}
-			else if (_token.symbol() == "false" || _token.symbol() == "null")
+			else if (_token.symbol() == "false")
 			{
 				_next();
 				initial = expression_literal_t<>::create_(_token, flock_t<>::create_(no()));
+			}
+			else if (_token.symbol() == "null")
+			{
+				_next();
+				initial = expression_literal_t<>::create_(_token, flock_t<>::create_(any_a<>{}));
 			}
 			else
 			{

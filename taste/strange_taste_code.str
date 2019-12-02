@@ -1,5 +1,6 @@
 (	out :# $$strange::river::out[],
 	out.write_["hello\n"],
+	null,
 	false &&
 	{	'a' : out.write_["value\n"],
 		2 : 'c',
@@ -37,13 +38,14 @@
 			// locals
 			x :# 10		// auto const x = number_int_64_t<>::create(10)
 			x := 10		// auto x = number_int_64_t<>::create(10)
-			x :=		// any_a<> x										- uninitialized
+			x :=		// any_a<> x										- null
+			x			// x
 
 			// attributes
-			_x :# 10	// any_a<> const x = number_int_64_t<>::create(10)
-			_x :#		// any_a<> const x									- constructor
-			_x := 10	// any_a<> x = number_int_64_t<>::create(10)
-			_x :=		// any_a<> x										- constructor
+			_x :# 10	// any_a<> const _x = number_int_64_t<>::create(10)
+			_x :#		// any_a<> const _x									- constructor
+			_x := 10	// any_a<> _x = number_int_64_t<>::create(10)
+			_x :=		// any_a<> _x										- constructor
 
 			forest :: thing
 			(	#element :<<>># <>,

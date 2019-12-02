@@ -302,42 +302,32 @@ public:
 	inline %struct_name%(%struct_name% const& other) noexcept
 		: handle_{ other.handle_ }
 		, ___reference___{ false }
-	{
-		handle_->___weak___(handle_);
-	}
+	{}
 
 	inline %struct_name%(%struct_name% const& other, bool reference) noexcept
 		: handle_{ other.handle_ }
 		, ___reference___{ reference }
-	{
-		handle_->___weak___(handle_);
-	}
+	{}
 
 	inline %struct_name%(%struct_name%&& other) noexcept
 		: handle_{ std::move(other.handle_) }
 		, ___reference___{ false }
-	{
-		handle_->___weak___(handle_);
-	}
+	{}
 
 	inline %struct_name%(%struct_name%&& other, bool reference) noexcept
 		: handle_{ std::move(other.handle_) }
 		, ___reference___{ reference }
-	{
-		handle_->___weak___(handle_);
-	}
+	{}
 
 	inline %struct_name%& operator=(%struct_name% const& other) noexcept
 	{
 		handle_ = other.handle_;
-		handle_->___weak___(handle_);
 		return *this;
 	}
 
 	inline %struct_name%& operator=(%struct_name%&& other) noexcept
 	{
 		handle_ = std::move(other.handle_);
-		handle_->___weak___(handle_);
 		return *this;
 	}
 
@@ -347,9 +337,7 @@ public:
 	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
 		: handle_{ handle }
 		, ___reference___{ reference }
-	{
-		handle_->___weak___(handle_);
-	}
+	{}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
 	explicit inline %struct_name%(___TTT___ value, bool reference = false) noexcept
@@ -363,7 +351,6 @@ public:
 	inline %struct_name%& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		handle_ = handle;
-		handle_->___weak___(handle_);
 		return *this;
 	}
 
@@ -372,7 +359,6 @@ public:
 	{
 		%struct_name% temp{ std::move(value) };
 		std::swap(temp.handle_, handle_);
-		handle_->___weak___(handle_);
 		return *this;
 	}
 

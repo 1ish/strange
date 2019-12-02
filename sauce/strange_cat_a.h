@@ -320,7 +320,9 @@ namespace strange {
     	explicit inline cat_a(___TTT___ value, bool reference = false) noexcept
     		: ___derived___(std::make_shared<___dderived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
     			reference)
-    	{}
+    	{
+    		handle_->___weak___(handle_);
+    	}
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
@@ -331,7 +333,6 @@ namespace strange {
     			throw dis("cat_a assignment failed to cast from base to dderived");
     		}
     		handle_ = handle;
-    		handle_->___weak___(handle_);
     		return *this;
     	}
     #else
@@ -340,7 +341,6 @@ namespace strange {
     	{
     		assert(!handle || std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
     		handle_ = handle;
-    		handle_->___weak___(handle_);
     		return *this;
     	}
     #endif
@@ -350,7 +350,6 @@ namespace strange {
     	{
     		cat_a temp{ std::move(value) };
     		std::swap(temp.handle_, handle_);
-    		handle_->___weak___(handle_);
     		return *this;
     	}
     

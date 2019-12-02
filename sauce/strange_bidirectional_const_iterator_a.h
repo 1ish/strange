@@ -399,7 +399,11 @@ namespace strange {
 
     			reference)
 
-    	{}
+    	{
+
+    		handle_->___weak___(handle_);
+
+    	}
 
     
 
@@ -421,8 +425,6 @@ namespace strange {
 
     		handle_ = handle;
 
-    		handle_->___weak___(handle_);
-
     		return *this;
 
     	}
@@ -438,8 +440,6 @@ namespace strange {
     		assert(!handle || std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
 
     		handle_ = handle;
-
-    		handle_->___weak___(handle_);
 
     		return *this;
 
@@ -458,8 +458,6 @@ namespace strange {
     		bidirectional_const_iterator_a temp{ std::move(value) };
 
     		std::swap(temp.handle_, handle_);
-
-    		handle_->___weak___(handle_);
 
     		return *this;
 

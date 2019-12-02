@@ -562,42 +562,32 @@ namespace strange {
     	inline any_a(any_a const& other) noexcept
     		: handle_{ other.handle_ }
     		, ___reference___{ false }
-    	{
-    		handle_->___weak___(handle_);
-    	}
+    	{}
     
     	inline any_a(any_a const& other, bool reference) noexcept
     		: handle_{ other.handle_ }
     		, ___reference___{ reference }
-    	{
-    		handle_->___weak___(handle_);
-    	}
+    	{}
     
     	inline any_a(any_a&& other) noexcept
     		: handle_{ std::move(other.handle_) }
     		, ___reference___{ false }
-    	{
-    		handle_->___weak___(handle_);
-    	}
+    	{}
     
     	inline any_a(any_a&& other, bool reference) noexcept
     		: handle_{ std::move(other.handle_) }
     		, ___reference___{ reference }
-    	{
-    		handle_->___weak___(handle_);
-    	}
+    	{}
     
     	inline any_a& operator=(any_a const& other) noexcept
     	{
     		handle_ = other.handle_;
-    		handle_->___weak___(handle_);
     		return *this;
     	}
     
     	inline any_a& operator=(any_a&& other) noexcept
     	{
     		handle_ = std::move(other.handle_);
-    		handle_->___weak___(handle_);
     		return *this;
     	}
     
@@ -607,9 +597,7 @@ namespace strange {
     	explicit inline any_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
     		: handle_{ handle }
     		, ___reference___{ reference }
-    	{
-    		handle_->___weak___(handle_);
-    	}
+    	{}
     
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
     	explicit inline any_a(___TTT___ value, bool reference = false) noexcept
@@ -623,7 +611,6 @@ namespace strange {
     	inline any_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
     	{
     		handle_ = handle;
-    		handle_->___weak___(handle_);
     		return *this;
     	}
     
@@ -632,7 +619,6 @@ namespace strange {
     	{
     		any_a temp{ std::move(value) };
     		std::swap(temp.handle_, handle_);
-    		handle_->___weak___(handle_);
     		return *this;
     	}
     
