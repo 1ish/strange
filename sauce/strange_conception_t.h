@@ -84,7 +84,7 @@ public:
 		cats.insert(cat);
 
 		auto const cats_op = parent.at_string("cats");
-		any_a<> cats_any = no();
+		any_a<> cats_any;
 		if (cats_op)
 		{
 			cats_any = cats_op.operate(no(), range_t<>::create_());
@@ -114,7 +114,7 @@ public:
 		auto const kinds_op = parent.at_string("kinds");
 		if (!kinds_op)
 		{
-			if (cats_any)
+			if (check<unordered_herd_a<>>(cats_any))
 			{
 				kinds += kinds_from_cats(cast<unordered_herd_a<>>(cats_any));
 			}

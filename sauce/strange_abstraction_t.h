@@ -126,7 +126,7 @@ public:
 		auto child = unordered_shoal_t<>::create_();
 		for (auto const& expression : _parent_expressions)
 		{
-			auto parent = no();
+			any_a<> parent;
 			try
 			{
 				parent = expression.operate(local_shoal, range);

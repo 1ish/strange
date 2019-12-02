@@ -258,7 +258,7 @@ private:
 		context->meta->emissions.clear();
 		for (auto const& expression : _elements(context->meta).extract())
 		{
-			auto result = no();
+			any_a<> result;
 			try
 			{
 				result = cast<expression_a<>>(expression).evaluate_();
@@ -771,7 +771,7 @@ private:
 			{
 				throw dis("strange::parser shoal " + operator_token.symbol() + " with nothing following it:") + operator_token.report_();
 			}
-			auto key_symbol = no();
+			any_a<> key_symbol;
 			try
 			{
 				key_symbol = key.evaluate_();
@@ -817,6 +817,10 @@ private:
 				auto const kind = (fixed || operator_token.symbol() == ":=")
 					? any_a<>(kind_t<>::create_())
 					: any_a<>(_kind(context));
+				if (!check<symbol_a<>>(key_symbol))
+				{
+					throw dis("strange::parser shoal " + operator_token.symbol() + " with non-symbol key:") + operator_token.report_();
+				}
 				auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
 				if (key_string[key_string.length() - 1] == '_')
 				{
@@ -917,7 +921,7 @@ private:
 		bool const parenthesis = punctuation && token.symbol() == ":(";
 		bool const colon = parenthesis || punctuation && token.symbol() == ":<";
 		bool modify = parenthesis;
-		auto expression = no();
+		expression_a<> expression;
 		if (parenthesis)
 		{
 			if (!_next())

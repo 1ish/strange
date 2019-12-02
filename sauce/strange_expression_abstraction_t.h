@@ -81,7 +81,7 @@ public:
 				}
 				dimension_kinds.push_back(kind);
 			}
-			auto expression = no();
+			any_a<> expression;
 			if (count == 3)
 			{
 				expression = subterms.at_index(2);
