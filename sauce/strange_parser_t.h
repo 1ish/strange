@@ -491,19 +491,13 @@ private:
 			}
 			else
 			{
-				if (op == ":=")
+				if (op == ":=" || op == ":#")
 				{
-					kind = kind_t<>::create_();
-					fixed = dimension;
-					insert = true;
 					_next();
-				}
-				else if (op == ":#")
-				{
-					kind = kind_t<>::create_();
-					fixed = true;
+					fixed = dimension || op == ":#";
+					optional = _it != _end && _token.tag() != "punctuation" || !_delimiter(_token.symbol());
 					insert = true;
-					_next();
+					kind = kind_t<>::create_();
 				}
 				else if (op == ":<" || op == ":(")
 				{

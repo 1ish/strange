@@ -45,8 +45,6 @@
 			_x := 10	// any_a<> x = number_int_64_t<>::create(10)
 			_x :=		// any_a<> x										- constructor
 
-			//TODO change cat reference to fixed
-
 			forest :: thing
 			(	#element :<<>># <>,
 				(	$$strange::flock[#element],
