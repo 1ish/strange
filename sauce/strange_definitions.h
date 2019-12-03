@@ -31,6 +31,20 @@ inline shoal_a<> shared()
 	return SHARED;
 }
 
+// pipe
+
+inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor)
+{
+	if (check<range_a<>>(thing))
+	{
+		return adaptor.operate(any_a<>{}, cast<range_a<>>(thing));
+	}
+	else
+	{
+		return adaptor.operate(any_a<>{}, thing.ranged_());
+	}
+}
+
 }
 
 #endif

@@ -126,18 +126,6 @@ namespace strange {
     		return *this;
     	}
     
-    	inline any_a operator|(any_a& adaptor) const
-    	{
-    		if (check<range_a>(*this))
-    		{
-    			return adaptor.operate(adaptor, cast<range_a>(*this));
-    		}
-    		else
-    		{
-    			return adaptor.operate(adaptor, ranged_());
-    		}
-    	}
-    
      inline one_t const & extract_thing ( ) const
      { assert(handle_); return read().extract_thing( ); }
      inline one_t & mutate_thing ( )
@@ -186,6 +174,10 @@ namespace strange {
      { assert(handle_); return read().invoke(thing, range ); }
      inline any_a operate ( any_a & thing , range_a const & range ) const
      { assert(handle_); return read().operate(thing, range ); }
+     inline any_a pipe__ ( range_a const & range ) const
+     { assert(handle_); return read().pipe__(range ); }
+     inline any_a pipe_ ( any_a const & adaptor ) const
+     { assert(handle_); return read().pipe_(adaptor ); }
      inline any_a identity__ ( range_a const & _ ) const
      { assert(handle_); return read().identity__(_ ); }
      inline number_data_a_uint64 identity_ ( ) const
@@ -289,6 +281,8 @@ namespace strange {
       virtual inline any_a visit_ ( inventory_a & inventory ) const = 0;
       virtual inline any_a invoke ( any_a & thing , range_a const & range ) const = 0;
       virtual inline any_a operate ( any_a & thing , range_a const & range ) const = 0;
+      virtual inline any_a pipe__ ( range_a const & range ) const = 0;
+      virtual inline any_a pipe_ ( any_a const & adaptor ) const = 0;
       virtual inline any_a identity__ ( range_a const & _ ) const = 0;
       virtual inline number_data_a_uint64 identity_ ( ) const = 0;
       virtual inline void const * identity ( ) const = 0;
@@ -421,6 +415,10 @@ namespace strange {
       { return value_.invoke(thing, range ); }
       virtual inline any_a operate ( any_a & thing , range_a const & range ) const
       { return value_.operate(thing, range ); }
+      virtual inline any_a pipe__ ( range_a const & range ) const
+      { return value_.pipe__(range ); }
+      virtual inline any_a pipe_ ( any_a const & adaptor ) const
+      { return value_.pipe_(adaptor ); }
       virtual inline any_a identity__ ( range_a const & _ ) const
       { return value_.identity__(_ ); }
       virtual inline number_data_a_uint64 identity_ ( ) const

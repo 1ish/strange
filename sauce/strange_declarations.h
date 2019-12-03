@@ -138,6 +138,9 @@ inline any_a<> boole(bool b);
 // shared
 inline shoal_a<> shared();
 
+// pipe
+inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor);
+
 }
 
 #endif

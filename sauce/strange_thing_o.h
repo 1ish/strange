@@ -34,6 +34,16 @@ public:
 		return eater_();
 	}
 
+	inline any_a<> pipe__(range_a<> const& range) const
+	{
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
+		{
+			throw dis("strange::thing::pipe passed empty range");
+		}
+		return pipe_(*it);
+	}
+
 	inline any_a<> same__(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin_();

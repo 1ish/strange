@@ -1321,6 +1321,10 @@ private:
 				{
 					oper = sym("different_");
 				}
+				else if (op == "|")
+				{
+					oper = sym("pipe_");
+				}
 				else if (op == "=")
 				{
 					oper = sym("self_assign_");
@@ -1533,7 +1537,7 @@ private:
 			second = _subsequent_colon_dot(100, second, context);
 		}
 		auto terms = flock_t<>::create_(initial, second);
-		if (!_next())
+		if (_it == _end)
 		{
 			throw dis("strange::parser .: with nothing following its operation:") + token.report_();
 		}

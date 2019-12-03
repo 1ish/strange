@@ -72,6 +72,9 @@ public:
 	inline any_a invoke(any_a& thing, range_a const& range) const;
 	inline any_a operate(any_a& thing, range_a const& range) const;
 
+	inline any_a pipe__(range_a const& range) const;
+	inline any_a pipe_(any_a const& adaptor) const;
+
 	// identification
 	inline any_a identity__(range_a const& _) const;
 	inline number_data_a_uint64 identity_() const;

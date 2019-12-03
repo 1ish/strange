@@ -59,6 +59,7 @@ public:
 			operations.update_string("eater_", native_extraction_t<any_a<>>::create(&any_a<>::eater__));
 			operations.update_string("feeder_", native_extraction_t<any_a<>>::create(&any_a<>::feeder__));
 			operations.update_string("visit_", native_extraction_t<any_a<>>::create(&any_a<>::visit__));
+			operations.update_string("pipe_", native_extraction_t<any_a<>>::create(&any_a<>::pipe__));
 			operations.update_string("identity_", native_extraction_t<any_a<>>::create(&any_a<>::identity__));
 			operations.update_string("identical_", native_extraction_t<any_a<>>::create(&any_a<>::identical__));
 			operations.update_string("nothing_", native_extraction_t<any_a<>>::create(&any_a<>::nothing__));

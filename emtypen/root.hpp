@@ -103,18 +103,6 @@ public:
 		return *this;
 	}
 
-	inline %struct_name% operator|(%struct_name%& adaptor) const
-	{
-		if (check<range_a>(*this))
-		{
-			return adaptor.operate(adaptor, cast<range_a>(*this));
-		}
-		else
-		{
-			return adaptor.operate(adaptor, ranged_());
-		}
-	}
-
 	%nonvirtual_members%
 
 protected:
