@@ -179,7 +179,7 @@ private:
 			}
 			else if (op == "..") // parameter range
 			{
-				initial = expression_local_at_t<>::create_(token, flock_t<>::create_(token.symbol_()));
+				initial = expression_local_at_t<>::create_(token, flock_t<>::create_(sym("&")));
 				_next();
 			}
 			else if (op == "~>") // meta

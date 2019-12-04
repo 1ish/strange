@@ -47,7 +47,7 @@ public:
 		auto kit = _kinds.extract().cbegin();
 		for (auto const& def : _defaults.extract())
 		{
-			if (nit->is(".."))
+			if (nit->is("&"))
 			{
 				if (ait == range.cbegin_())
 				{
