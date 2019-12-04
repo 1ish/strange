@@ -47,6 +47,19 @@ public:
 		auto kit = _kinds.extract().cbegin();
 		for (auto const& def : _defaults.extract())
 		{
+			if (nit->is(".."))
+			{
+				if (ait == range.cbegin_())
+				{
+					local.emplace(*nit, range);
+				}
+				else
+				{
+					local.emplace(*nit, range_t<>::create_(ait, range.cend_()));
+				}
+				break;
+			}
+
 			auto kind = *kit++;
 			if (check<expression_a<>>(kind))
 			{

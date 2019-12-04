@@ -143,18 +143,18 @@ private:
 			}
 			else if (_token.symbol() == "true")
 			{
-				_next();
 				initial = expression_literal_t<>::create_(_token, flock_t<>::create_(yes()));
+				_next();
 			}
 			else if (_token.symbol() == "false")
 			{
-				_next();
 				initial = expression_literal_t<>::create_(_token, flock_t<>::create_(no()));
+				_next();
 			}
 			else if (_token.symbol() == "null")
 			{
-				_next();
 				initial = expression_literal_t<>::create_(_token, flock_t<>::create_(any_a<>{}));
+				_next();
 			}
 			else
 			{
@@ -176,6 +176,11 @@ private:
 			else if (op == "^^") // shoal scope
 			{
 				initial = expression_shared_scope_t<>::create_(token, flock_t<>::create_(context->shared, context->shoal));
+			}
+			else if (op == "..") // parameter range
+			{
+				initial = expression_local_at_t<>::create_(token, flock_t<>::create_(token.symbol_()));
+				_next();
 			}
 			else if (op == "~>") // meta
 			{

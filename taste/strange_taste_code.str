@@ -2,8 +2,7 @@
 	out.write_["hello\n"],
 	null,
 	out.:out:.write_["member\n"],
-	cout := function(x, $$strange::river::out[].write_[x]),
-	["pipe\n"] | cout,
+	["pipe1\n", "pipe2\n", "pipe3\n"] | function(.., $$strange::river::out[].write_..),
 	false &&
 	{	'a' : out.write_["value\n"],
 		2 : 'c',
