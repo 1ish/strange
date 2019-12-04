@@ -39,10 +39,15 @@ inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor)
 	{
 		return adaptor.operate(any_a<>{}, cast<range_a<>>(thing));
 	}
-	else
+	if (check<misunderstanding_a<>>(thing))
+	{
+		return thing;
+	}
+	if (check<any_a<>>(thing))
 	{
 		return adaptor.operate(any_a<>{}, thing.ranged_());
 	}
+	return thing;
 }
 
 }
