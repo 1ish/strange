@@ -86,16 +86,6 @@ public:
 		reflection<expression_catch_t<>>::share(shoal);
 	}
 
-	inline any_a<> eater__(range_a<> const&) const
-	{
-		return eater_();
-	}
-
-	inline range_a<> eater_() const
-	{
-		return _names;
-	}
-
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
@@ -113,7 +103,7 @@ public:
 		{
 			auto kit = _kinds.extract().cbegin();
 			auto eit = _expressions.extract().cbegin();
-			for (auto const& name : _names.extract())
+			for (auto const& name : _eater.extract())
 			{
 				auto kind = *kit++;
 				if (check<expression_a<>>(kind))
@@ -171,7 +161,7 @@ public:
 		river.write_string("\n}\n");
 		forward_const_iterator_a<> kit = _kinds.cbegin_();
 		forward_const_iterator_a<> eit = _expressions.cbegin_();
-		for (auto const& name : _names)
+		for (auto const& name : _eater)
 		{
 			river.write_string("catch(" + cast<kind_a<>>(*kit++).name_().to_string() + "_a<> const& exception)\n{\n");
 			cast<expression_a<>>(*eit++).generate_cpp(version, indent, river);
@@ -182,15 +172,13 @@ public:
 protected:
 	flock_a<> const _terms;
 	expression_a<> const _try_expression;
-	flock_a<> const _names;
 	flock_a<> const _kinds;
 	flock_a<> const _expressions;
 
 	inline expression_catch_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& try_expression, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& expressions)
-		: expression_t(token, pure_literal_terms(token, terms))
+		: expression_t(token, pure_literal_terms(token, terms), names)
 		, _terms{ terms }
 		, _try_expression{ try_expression }
-		, _names{ names }
 		, _kinds{ kinds }
 		, _expressions{ expressions }
 	{}

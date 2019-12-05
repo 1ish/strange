@@ -49,18 +49,19 @@ public:
 
 	inline range_a<> eater_() const
 	{
-		return range_t<>::create_();
+		return _eater;
 	}
 
 protected:
 	bool const _pure;
 	bool const _literal;
-	//TODO range_a<> const _eater;
+	flock_a<> const _eater;
 
-	inline operation_t(bool pure = false, bool literal = false)
+	inline operation_t(bool pure = false, bool literal = false, flock_a<> const& eater = flock_t<>::create_())
 		: thing_t{}
 		, _pure(pure)
 		, _literal(literal)
+		, _eater(eater)
 	{}
 
 	static inline std::pair<kind_a<>, flock_a<>> kind_eater_params(flock_a<> const& params)

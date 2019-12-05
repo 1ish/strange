@@ -74,16 +74,6 @@ public:
 		return _kinds;
 	}
 
-	inline any_a<> eater__(range_a<> const&) const
-	{
-		return eater_();
-	}
-
-	inline range_a<> eater_() const
-	{
-		return _eater;
-	}
-
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
@@ -97,16 +87,14 @@ protected:
 	unordered_herd_a<> const _kinds;
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
-	flock_a<> const _eater;
 
 	inline native_extraction_t(const_member const fun, std::pair<kind_a<>, flock_a<>> const& kind_eater)
-		: operation_t{}
+		: operation_t{ false, false, kind_eater.second }
 		, _function{ fun }
 		, _kind{ kind_eater.first }
 		, _kinds{ kinds(_kind) }
 		, _cat{ kind_to_cat(_kind) }
 		, _cats{ cats(_cat) }
-		, _eater{ kind_eater.second }
 	{}
 };
 

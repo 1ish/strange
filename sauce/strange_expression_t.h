@@ -91,13 +91,13 @@ public:
 protected:
 	token_a<> const _token;
 
-	inline expression_t(token_a<> const& token, bool pure = false, bool literal = false)
-		: operation_t(pure, literal)
+	inline expression_t(token_a<> const& token, bool pure = false, bool literal = false, flock_a<> const& eater = flock_t<>::create_())
+		: operation_t(pure, literal, eater)
 		, _token(token)
 	{}
 
-	inline expression_t(token_a<> const& token, std::pair<bool, bool> const& pure_literal)
-		: operation_t(pure_literal.first, pure_literal.second)
+	inline expression_t(token_a<> const& token, std::pair<bool, bool> const& pure_literal, flock_a<> const& eater = flock_t<>::create_())
+		: operation_t(pure_literal.first, pure_literal.second, eater)
 		, _token(token)
 	{}
 

@@ -27,16 +27,6 @@ public:
 	static inline void share(shoal_a<>& shoal)
 	{}
 
-	inline any_a<> eater__(range_a<> const&) const
-	{
-		return eater_();
-	}
-
-	inline range_a<> eater_() const
-	{
-		return _names;
-	}
-
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
@@ -49,7 +39,7 @@ public:
 		thing.mutate_thing();
 		local.emplace(sym("^"), thing);
 		forward_const_iterator_a<> ait = range.cbegin_();
-		auto nit = _names.extract().cbegin();
+		auto nit = _eater.extract().cbegin();
 		auto kit = _kinds.extract().cbegin();
 		for (auto const& def : _defaults.extract())
 		{
@@ -113,7 +103,6 @@ public:
 
 protected:
 	token_a<> const _token;
-	flock_a<> const _names;
 	flock_a<> const _kinds;
 	flock_a<> const _defaults;
 	expression_a<> const _expression;
@@ -121,9 +110,8 @@ protected:
 	unordered_shoal_a<> const _shared;
 
 	inline mutation_t(token_a<> const& token, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& defaults, expression_a<> const& expression)
-		: operation_t(expression.pure(), expression.literal())
+		: operation_t(expression.pure(), expression.literal(), names)
 		, _token{ token }
-		, _names{ names }
 		, _kinds{ kinds }
 		, _defaults{ defaults }
 		, _expression{ expression }

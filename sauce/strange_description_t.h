@@ -67,16 +67,6 @@ public:
 		return _kinds;
 	}
 
-	inline any_a<> eater__(range_a<> const&) const
-	{
-		return eater_();
-	}
-
-	inline range_a<> eater_() const
-	{
-		return _eater;
-	}
-
 	// function
 	inline any_a<> operate(any_a<>&, range_a<> const&) const
 	{
@@ -88,7 +78,6 @@ protected:
 	unordered_herd_a<> const _kinds;
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
-	flock_a<> const _eater;
 
 	inline description_t()
 		: operation_t{}
@@ -96,7 +85,6 @@ protected:
 		, _kinds{ kinds(_kind) }
 		, _cat{ kind_to_cat(_kind) }
 		, _cats{ cats(_cat) }
-		, _eater{ flock_t<>::create_() }
 	{}
 };
 
