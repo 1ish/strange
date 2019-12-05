@@ -28,8 +28,8 @@ public:
 
 	inline void aspects(unordered_shoal_a<> const& shoal);
 
-	inline any_a<> eater__(range_a<> const& _) const;
-	inline range_a<> eater_() const; // return range of parameter names
+	inline any_a<> names__(range_a<> const& _) const;
+	inline range_a<> names_() const; // return range of parameter names
 };
 
 } // namespace strange

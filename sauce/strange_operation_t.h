@@ -42,40 +42,40 @@ public:
 	static inline void aspects(unordered_shoal_a<> const&)
 	{}
 
-	inline any_a<> eater__(range_a<> const&) const
+	inline any_a<> names__(range_a<> const&) const
 	{
-		return eater_();
+		return names_();
 	}
 
-	inline range_a<> eater_() const
+	inline range_a<> names_() const
 	{
-		return _eater;
+		return _names;
 	}
 
 protected:
 	bool const _pure;
 	bool const _literal;
-	flock_a<> const _eater;
+	flock_a<> const _names;
 
-	inline operation_t(bool pure = false, bool literal = false, flock_a<> const& eater = flock_t<>::create_())
+	inline operation_t(bool pure = false, bool literal = false, flock_a<> const& names = flock_t<>::create_())
 		: thing_t{}
 		, _pure(pure)
 		, _literal(literal)
-		, _eater(eater)
+		, _names(names)
 	{}
 
-	static inline std::pair<kind_a<>, flock_a<>> kind_eater_params(flock_a<> const& params)
+	static inline std::pair<kind_a<>, flock_a<>> kind_names_params(flock_a<> const& params)
 	{
-		std::pair<kind_a<>, flock_a<>> kind_eater(kind_t<>::create_(), flock_t<>::create_());
+		std::pair<kind_a<>, flock_a<>> kind_names(kind_t<>::create_(), flock_t<>::create_());
 		auto it = params.cbegin_();
 		if (it == params.cend_())
 		{
-			return kind_eater;
+			return kind_names;
 		}
 		auto kind = *it;
 		if (!check<kind_a<>>(kind))
 		{
-			throw dis("strange::operation::kind_eater_params passed non-kind result");
+			throw dis("strange::operation::kind_names_params passed non-kind result");
 		}
 		auto kind_result = cast<kind_a<>>(kind);
 		auto kind_params = flock_t<>::create_();
@@ -84,23 +84,23 @@ protected:
 			auto name = *it;
 			if (!check<symbol_a<>>(name))
 			{
-				throw dis("strange::operation::kind_eater_params passed non-symbol name");
+				throw dis("strange::operation::kind_names_params passed non-symbol name");
 			}
 			bool const end = (++it == params.cend_());
 			kind = end ? cast<any_a<>>(kind_t<>::create_()) : *it;
 			if (!end && !check<kind_a<>>(kind))
 			{
-				throw dis("strange::operation::kind_eater_params passed non-kind param");
+				throw dis("strange::operation::kind_names_params passed non-kind param");
 			}
-			kind_eater.second.push_back(name);
+			kind_names.second.push_back(name);
 			kind_params.push_back(kind);
 			if (end)
 			{
 				break;
 			}
 		}
-		kind_eater.first = kind_t<>::create(1, "", flock_t<>::create_(), flock_t<>::create_(), kind_params, kind_result);
-		return kind_eater;
+		kind_names.first = kind_t<>::create(1, "", flock_t<>::create_(), flock_t<>::create_(), kind_params, kind_result);
+		return kind_names;
 	}
 
 	static inline unordered_herd_a<> cats(cat_a<> const& cat)

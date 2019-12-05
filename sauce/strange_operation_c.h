@@ -183,9 +183,9 @@ public:
 	static inline void aspects(unordered_shoal_a<> const&)
 	{}
 
-	inline any_a<> eater__(range_a<> const& range) const
+	inline any_a<> names__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("eater");
+		auto const op = _operations.at_string("names");
 		if (op)
 		{
 			return op.operate(any_a<>(me_(), true), range);
@@ -193,15 +193,15 @@ public:
 		return range_t<>::create_();
 	}
 
-	inline range_a<> eater_() const
+	inline range_a<> names_() const
 	{
-		auto const op = _operations.at_string("eater");
+		auto const op = _operations.at_string("names");
 		if (op)
 		{
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<range_a<>>(result))
 			{
-				throw dis("<strange::operation>::eater returned non-range");
+				throw dis("<strange::operation>::names returned non-range");
 			}
 			return cast<range_a<>>(result);
 		}

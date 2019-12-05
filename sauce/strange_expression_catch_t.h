@@ -103,7 +103,7 @@ public:
 		{
 			auto kit = _kinds.extract().cbegin();
 			auto eit = _expressions.extract().cbegin();
-			for (auto const& name : _eater.extract())
+			for (auto const& name : _names.extract())
 			{
 				auto kind = *kit++;
 				if (check<expression_a<>>(kind))
@@ -161,7 +161,7 @@ public:
 		river.write_string("\n}\n");
 		forward_const_iterator_a<> kit = _kinds.cbegin_();
 		forward_const_iterator_a<> eit = _expressions.cbegin_();
-		for (auto const& name : _eater)
+		for (auto const& name : _names)
 		{
 			river.write_string("catch(" + cast<kind_a<>>(*kit++).name_().to_string() + "_a<> const& exception)\n{\n");
 			cast<expression_a<>>(*eit++).generate_cpp(version, indent, river);

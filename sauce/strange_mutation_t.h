@@ -39,7 +39,7 @@ public:
 		thing.mutate_thing();
 		local.emplace(sym("^"), thing);
 		forward_const_iterator_a<> ait = range.cbegin_();
-		auto nit = _eater.extract().cbegin();
+		auto nit = _names.extract().cbegin();
 		auto kit = _kinds.extract().cbegin();
 		for (auto const& def : _defaults.extract())
 		{

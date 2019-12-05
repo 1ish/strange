@@ -21,7 +21,7 @@ public:
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
 		return operation_a<>{ over{ native_mutation_t<_abstraction_>(fun,
-			kind_eater_params(flock_t<>::create(std::move(v)))) } };
+			kind_names_params(flock_t<>::create(std::move(v)))) } };
 	}
 
 	// reflection
@@ -88,10 +88,10 @@ protected:
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
 
-	inline native_mutation_t(member const fun, std::pair<kind_a<>, flock_a<>> const& kind_eater)
-		: operation_t{ false, false, kind_eater.second }
+	inline native_mutation_t(member const fun, std::pair<kind_a<>, flock_a<>> const& kind_names)
+		: operation_t{ false, false, kind_names.second }
 		, _function{ fun }
-		, _kind{ kind_eater.first }
+		, _kind{ kind_names.first }
 		, _kinds{ kinds(_kind) }
 		, _cat{ kind_to_cat(_kind) }
 		, _cats{ cats(_cat) }
