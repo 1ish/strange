@@ -80,11 +80,6 @@ public:
 		return reflection<___ego___>::operations();
 	}
 
-	static inline any_a<> eater_()
-	{
-		return no();
-	}
-
 	static inline any_a<> feeder__(range_a<> const& range)
 	{
 		return no();

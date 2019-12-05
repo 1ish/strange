@@ -42,9 +42,20 @@ public:
 	static inline void aspects(unordered_shoal_a<> const&)
 	{}
 
+	inline any_a<> eater__(range_a<> const&) const
+	{
+		return eater_();
+	}
+
+	inline range_a<> eater_() const
+	{
+		return range_t<>::create_();
+	}
+
 protected:
 	bool const _pure;
 	bool const _literal;
+	//TODO range_a<> const _eater;
 
 	inline operation_t(bool pure = false, bool literal = false)
 		: thing_t{}

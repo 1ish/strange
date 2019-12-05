@@ -118,7 +118,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<cat_a<>>(result))
 			{
-				throw dis("<strange::any>::shared returned non-cat");
+				throw dis("<strange::any>::cat returned non-cat");
 			}
 			return cast<cat_a<>>(result);
 		}
@@ -143,7 +143,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_herd_a<>>(result))
 			{
-				throw dis("<strange::any>::shared returned non-unordered-herd");
+				throw dis("<strange::any>::cats returned non-unordered-herd");
 			}
 			return cast<unordered_herd_a<>>(result);
 		}
@@ -168,7 +168,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<kind_a<>>(result))
 			{
-				throw dis("<strange::any>::shared returned non-kind");
+				throw dis("<strange::any>::kind returned non-kind");
 			}
 			return cast<kind_a<>>(result);
 		}
@@ -193,7 +193,7 @@ public:
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
 			if (!check<unordered_herd_a<>>(result))
 			{
-				throw dis("<strange::any>::shared returned non-unordered-herd");
+				throw dis("<strange::any>::kinds returned non-unordered-herd");
 			}
 			return cast<unordered_herd_a<>>(result);
 		}
@@ -208,26 +208,6 @@ public:
 	inline unordered_shoal_a<> operations_() const
 	{
 		return _operations;
-	}
-
-	inline any_a<> eater__(range_a<> const& range) const
-	{
-		auto const op = _operations.at_string("eater");
-		if (op)
-		{
-			return op.operate(any_a<>(me_(), true), range);
-		}
-		return no();
-	}
-
-	inline any_a<> eater_() const
-	{
-		auto const op = _operations.at_string("eater");
-		if (op)
-		{
-			return op.operate(any_a<>(me_(), true), range_t<>::create_());
-		}
-		return no();
 	}
 
 	inline any_a<> feeder__(range_a<> const& range) const

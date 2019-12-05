@@ -29,11 +29,6 @@ public:
 		return shoal;
 	}
 
-	inline any_a<> eater__(range_a<> const&) const
-	{
-		return eater_();
-	}
-
 	inline any_a<> pipe__(range_a<> const& range) const
 	{
 		forward_const_iterator_a<> it = range.cbegin_();

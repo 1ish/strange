@@ -67,7 +67,12 @@ public:
 		return _kinds;
 	}
 
-	inline any_a<> eater_() const
+	inline any_a<> eater__(range_a<> const&) const
+	{
+		return eater_();
+	}
+
+	inline range_a<> eater_() const
 	{
 		return _eater;
 	}

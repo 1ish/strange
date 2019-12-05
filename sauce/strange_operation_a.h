@@ -97,6 +97,10 @@ namespace strange {
      { assert(handle_); return read().literal( ); }
      inline void aspects ( unordered_shoal_a < > const & shoal )
      { assert(handle_); write().aspects(shoal ); }
+     inline any_a < > eater__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().eater__(_ ); }
+     inline range_a < > eater_ ( ) const
+     { assert(handle_); return read().eater_( ); }
     
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
@@ -108,6 +112,8 @@ namespace strange {
       virtual inline any_a < > literal_ ( ) const = 0;
       virtual inline bool literal ( ) const = 0;
       virtual inline void aspects ( unordered_shoal_a < > const & shoal ) = 0;
+      virtual inline any_a < > eater__ ( range_a < > const & _ ) const = 0;
+      virtual inline range_a < > eater_ ( ) const = 0;
     	};
     
     	template <typename ___TTT___, typename ___DHB___ = ___derived_handle_base___>
@@ -137,6 +143,10 @@ namespace strange {
       { return value_.literal( ); }
       virtual inline void aspects ( unordered_shoal_a < > const & shoal )
       { value_.aspects(shoal ); }
+      virtual inline any_a < > eater__ ( range_a < > const & _ ) const
+      { return value_.eater__(_ ); }
+      virtual inline range_a < > eater_ ( ) const
+      { return value_.eater_( ); }
     	};
     
     	template <typename ___TTT___, typename ___DHB___>

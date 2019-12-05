@@ -27,6 +27,9 @@ public:
 	inline bool literal() const;
 
 	inline void aspects(unordered_shoal_a<> const& shoal);
+
+	inline any_a<> eater__(range_a<> const& _) const;
+	inline range_a<> eater_() const; // return range of parameter names
 };
 
 } // namespace strange
