@@ -59,8 +59,6 @@ public:
 	inline any_a operations__(range_a const& _) const;
 	inline unordered_shoal_a operations_() const;
 
-	inline any_a feeder__(range_a const& range) const; // return range of parameter values
-
 	// visitor pattern
 	inline any_a visit__(range_a const& range) const;
 	inline any_a visit_(inventory_a& inventory) const;

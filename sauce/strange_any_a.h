@@ -160,8 +160,6 @@ namespace strange {
      { assert(handle_); return read().operations__(_ ); }
      inline unordered_shoal_a operations_ ( ) const
      { assert(handle_); return read().operations_( ); }
-     inline any_a feeder__ ( range_a const & range ) const
-     { assert(handle_); return read().feeder__(range ); }
      inline any_a visit__ ( range_a const & range ) const
      { assert(handle_); return read().visit__(range ); }
      inline any_a visit_ ( inventory_a & inventory ) const
@@ -270,7 +268,6 @@ namespace strange {
       virtual inline unordered_herd_a kinds_ ( ) const = 0;
       virtual inline any_a operations__ ( range_a const & _ ) const = 0;
       virtual inline unordered_shoal_a operations_ ( ) const = 0;
-      virtual inline any_a feeder__ ( range_a const & range ) const = 0;
       virtual inline any_a visit__ ( range_a const & range ) const = 0;
       virtual inline any_a visit_ ( inventory_a & inventory ) const = 0;
       virtual inline any_a invoke ( any_a & thing , range_a const & range ) const = 0;
@@ -395,8 +392,6 @@ namespace strange {
       { return value_.operations__(_ ); }
       virtual inline unordered_shoal_a operations_ ( ) const
       { return value_.operations_( ); }
-      virtual inline any_a feeder__ ( range_a const & range ) const
-      { return value_.feeder__(range ); }
       virtual inline any_a visit__ ( range_a const & range ) const
       { return value_.visit__(range ); }
       virtual inline any_a visit_ ( inventory_a & inventory ) const

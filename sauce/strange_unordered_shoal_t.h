@@ -300,17 +300,6 @@ public:
 		reflection<unordered_shoal_t<_concurrent_>>::share(shoal);
 	}
 
-	inline any_a<> feeder__(range_a<> const& range) const // return range of parameter values
-	{
-		auto values = flock_t<>::create_();
-		for (auto const& param : range)
-		{
-			auto p = at_(param);
-			values.push_back(p ? p : no());
-		}
-		return values;
-	}
-
 	// visitor pattern
 	inline any_a<> visit__(range_a<> const& range) const
 	{

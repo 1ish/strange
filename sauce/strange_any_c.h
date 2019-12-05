@@ -210,16 +210,6 @@ public:
 		return _operations;
 	}
 
-	inline any_a<> feeder__(range_a<> const& range) const
-	{
-		auto const op = _operations.at_string("feeder");
-		if (op)
-		{
-			return op.operate(any_a<>(me_(), true), range);
-		}
-		return no();
-	}
-
 	// visitor pattern
 	inline any_a<> visit__(range_a<> const& range) const
 	{
