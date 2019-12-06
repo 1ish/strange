@@ -47,7 +47,7 @@ public:
 		return names_();
 	}
 
-	inline range_a<> names_() const
+	inline flock_a<> names_() const
 	{
 		return _names;
 	}

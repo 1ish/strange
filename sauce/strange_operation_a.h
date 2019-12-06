@@ -3,6 +3,7 @@
 
  //# include "any_forward.hpp"
  //# include "range_forward.hpp"
+ //# include "flock_forward.hpp"
  //# include "cat_forward.hpp"
  //# include "unordered_shoal_forward.hpp"
 #include <algorithm>
@@ -99,7 +100,7 @@ namespace strange {
      { assert(handle_); write().aspects(shoal ); }
      inline any_a < > names__ ( range_a < > const & _ ) const
      { assert(handle_); return read().names__(_ ); }
-     inline range_a < > names_ ( ) const
+     inline flock_a < > names_ ( ) const
      { assert(handle_); return read().names_( ); }
     
     protected:
@@ -113,7 +114,7 @@ namespace strange {
       virtual inline bool literal ( ) const = 0;
       virtual inline void aspects ( unordered_shoal_a < > const & shoal ) = 0;
       virtual inline any_a < > names__ ( range_a < > const & _ ) const = 0;
-      virtual inline range_a < > names_ ( ) const = 0;
+      virtual inline flock_a < > names_ ( ) const = 0;
     	};
     
     	template <typename ___TTT___, typename ___DHB___ = ___derived_handle_base___>
@@ -145,7 +146,7 @@ namespace strange {
       { value_.aspects(shoal ); }
       virtual inline any_a < > names__ ( range_a < > const & _ ) const
       { return value_.names__(_ ); }
-      virtual inline range_a < > names_ ( ) const
+      virtual inline flock_a < > names_ ( ) const
       { return value_.names_( ); }
     	};
     

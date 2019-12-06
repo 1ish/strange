@@ -190,22 +190,22 @@ public:
 		{
 			return op.operate(any_a<>(me_(), true), range);
 		}
-		return range_t<>::create_();
+		return flock_t<>::create_();
 	}
 
-	inline range_a<> names_() const
+	inline flock_a<> names_() const
 	{
 		auto const op = _operations.at_string("names");
 		if (op)
 		{
 			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
-			if (!check<range_a<>>(result))
+			if (!check<flock_a<>>(result))
 			{
-				throw dis("<strange::operation>::names returned non-range");
+				throw dis("<strange::operation>::names returned non-flock");
 			}
-			return cast<range_a<>>(result);
+			return cast<flock_a<>>(result);
 		}
-		return range_t<>::create_();
+		return flock_t<>::create_();
 	}
 
 protected:

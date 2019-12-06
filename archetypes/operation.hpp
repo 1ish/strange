@@ -7,6 +7,7 @@
 
 #include "any_forward.hpp"
 #include "range_forward.hpp"
+#include "flock_forward.hpp"
 #include "cat_forward.hpp"
 #include "unordered_shoal_forward.hpp"
 
@@ -29,7 +30,7 @@ public:
 	inline void aspects(unordered_shoal_a<> const& shoal);
 
 	inline any_a<> names__(range_a<> const& _) const;
-	inline range_a<> names_() const; // return range of parameter names
+	inline flock_a<> names_() const;
 };
 
 } // namespace strange
