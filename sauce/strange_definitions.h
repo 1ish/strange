@@ -43,7 +43,7 @@ inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor)
 	{
 		return thing;
 	}
-	return adaptor.operate(any_a<>{}, thing.ranged_());
+	return adaptor.operate(any_a<>{}, flock_t<>::create_(thing));
 }
 
 }

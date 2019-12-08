@@ -24,13 +24,13 @@ TEST(TestCaseName, ForLoop)
 {
 	any_a<> n{ no() };
 
-	for (auto const& v : n.ranged_())
+	for (auto const& v : flock_t<>::create_(n))
 	{
 	}
 
 	any_a<> e{ yes() };
 
-	for (auto const& v : e.ranged_())
+	for (auto const& v : flock_t<>::create_(e))
 	{
 	}
 
@@ -137,7 +137,7 @@ TEST(TestCaseName, ForLoop)
 	ordered_shoal_a<> ors = ordered_shoal_t<>::create_(std::make_pair(concurrent_ordered_herd, concurrent_ordered_shoal), std::make_pair(concurrent_squad, concurrent_unordered_herd));
 	unordered_shoal_a<> uos = unordered_shoal_t<>::create_(std::make_pair(concurrent_ordered_herd, concurrent_ordered_shoal), std::make_pair(concurrent_squad, concurrent_unordered_herd));
 
-	expression_a<> exp = cast<expression_a<>>(expression_o<expression_break_t<>>::create__(token.ranged_()));
+	expression_a<> exp = cast<expression_a<>>(expression_o<expression_break_t<>>::create__(flock_t<>::create_(token)));
 	exp.shared_();
 
 	auto conception = conception_t<>::create_();

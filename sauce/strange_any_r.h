@@ -65,7 +65,6 @@ public:
 			operations.update_string("same_", native_extraction_t<any_a<>>::create(&any_a<>::same__));
 			operations.update_string("different_", native_extraction_t<any_a<>>::create(&any_a<>::different__));
 			operations.update_string("hash_", native_extraction_t<any_a<>>::create(&any_a<>::hash__));
-			operations.update_string("ranged_", native_extraction_t<any_a<>>::create(&any_a<>::ranged__));
 			return operations;
 		}();
 		return OPERATIONS;

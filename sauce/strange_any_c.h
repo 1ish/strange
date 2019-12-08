@@ -283,7 +283,7 @@ public:
 		auto const op = _operations.at_string("pipe");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), adaptor.ranged_());
+			return op.operate(any_a<>(me_(), true), flock_t<>::create_(adaptor));
 		}
 		return me_() | adaptor;
 	}
@@ -355,7 +355,7 @@ public:
 		auto const op = _operations.at_string("same");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), thing.ranged_());
+			return op.operate(any_a<>(me_(), true), flock_t<>::create_(thing));
 		}
 		return identical_(thing);
 	}
@@ -365,7 +365,7 @@ public:
 		auto const op = _operations.at_string("same");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), thing.ranged_());
+			return op.operate(any_a<>(me_(), true), flock_t<>::create_(thing));
 		}
 		return identical(thing);
 	}
@@ -428,17 +428,6 @@ public:
 			return cast<number_data_a<uint64_t>>(result).extract();
 		}
 		return std::hash<void const*>{}(identity());
-	}
-
-	// conversion
-	inline any_a<> ranged__(range_a<> const& _) const // cannot be overridden
-	{
-		return ranged_();
-	}
-
-	inline range_a<> ranged_() const
-	{
-		return range_t<>::create_(it_t<true>::create_(me_()), it_t<true>::create_());
 	}
 
 	// creature

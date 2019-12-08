@@ -82,12 +82,6 @@ public:
 		return HASH;
 	}
 
-	// conversion
-	inline range_a<> ranged_() const
-	{
-		return range_t<>::create_(it_t<true, something_t<>>::create_(no()), it_t<true, something_t<>>::create_());
-	}
-
 protected:
 	inline nothing_t()
 		: thing_t{}

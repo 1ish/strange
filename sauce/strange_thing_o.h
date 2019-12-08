@@ -83,11 +83,6 @@ public:
 	{
 		return number_uint_64_t<>::create(uint64_t(hash()));
 	}
-
-	inline any_a<> ranged__(range_a<> const& _) const
-	{
-		return ranged_();
-	}
 };
 
 } // namespace strange

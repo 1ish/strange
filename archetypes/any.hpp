@@ -101,10 +101,6 @@ public:
 	inline std::size_t hash() const;
 
 	inline bool is(std::string const& s) const;
-
-	// conversion
-	inline any_a ranged__(range_a const& _) const;
-	inline range_a ranged_() const;
 };
 
 } // namespace strange

@@ -202,12 +202,6 @@ public:
 		return yes();
 	}
 
-	// conversion
-	inline range_a<> ranged_() const
-	{
-		return range_t<>::create_(it_t<true>::create_(me_()), it_t<true>::create_());
-	}
-
 protected:
 	// construction
 	inline thing_t()

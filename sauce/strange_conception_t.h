@@ -48,8 +48,7 @@ public:
 			sym("identical"),
 			sym("nothing"),
 			sym("something"),
-			sym("different"),
-			sym("ranged"));
+			sym("different"));
 
 		auto const type_op = parent.at_string("type");
 		if (!type_op)

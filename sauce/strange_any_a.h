@@ -216,10 +216,6 @@ namespace strange {
      { assert(handle_); return read().hash( ); }
      inline bool is ( std :: string const & s ) const
      { assert(handle_); return read().is(s ); }
-     inline any_a ranged__ ( range_a const & _ ) const
-     { assert(handle_); return read().ranged__(_ ); }
-     inline range_a ranged_ ( ) const
-     { assert(handle_); return read().ranged_( ); }
     
     protected:
     	struct ___root_handle_base___
@@ -296,8 +292,6 @@ namespace strange {
       virtual inline number_data_a_uint64 hash_ ( ) const = 0;
       virtual inline std :: size_t hash ( ) const = 0;
       virtual inline bool is ( std :: string const & s ) const = 0;
-      virtual inline any_a ranged__ ( range_a const & _ ) const = 0;
-      virtual inline range_a ranged_ ( ) const = 0;
     	};
     
     	template <typename ___TTT___, typename ___BHB___ = ___root_handle_base___>
@@ -448,10 +442,6 @@ namespace strange {
       { return value_.hash( ); }
       virtual inline bool is ( std :: string const & s ) const
       { return value_.is(s ); }
-      virtual inline any_a ranged__ ( range_a const & _ ) const
-      { return value_.ranged__(_ ); }
-      virtual inline range_a ranged_ ( ) const
-      { return value_.ranged_( ); }
     
     		___TTT___ value_;
     	};
