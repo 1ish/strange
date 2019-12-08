@@ -4,12 +4,12 @@
 namespace strange
 {
 
-template <bool _const_ = false, typename _end_ = nothing_t<>, typename ___ego___ = forward_const_iterator_a<>>
+template <bool _const_ = false, typename ___ego___ = forward_const_iterator_a<>>
 class it_t : public thing_t<___ego___>
 {
 public:
 	// override
-	using over = thing_o<it_t<_const_, _end_>>;
+	using over = thing_o<it_t<_const_>>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
@@ -24,13 +24,13 @@ public:
 
 	static inline forward_const_iterator_a<> create_()
 	{
-		static forward_const_iterator_a<> VAL = it_t<_const_, _end_>::create_(_end_::create_());
+		static forward_const_iterator_a<> VAL = it_t<_const_>::create_(any_a<>{});
 		return VAL;
 	}
 
 	static inline forward_const_iterator_a<> create_(any_a<> const& thing)
 	{
-		return forward_const_iterator_a<>{ over{ it_t<_const_, _end_>{ thing } } };
+		return forward_const_iterator_a<>{ over{ it_t<_const_>{ thing } } };
 	}
 
 	// reflection
@@ -47,11 +47,7 @@ public:
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check<forward_const_iterator_a<>>(thing))
-		{
-			return false;
-		}
-		return _thing.nothing() == cast<forward_const_iterator_a<>>(thing)->nothing();
+		return check<forward_const_iterator_a<>>(thing) && check<any_a<>>(_thing) == check<any_a<>>(thing);
 	}
 
 	inline std::size_t hash() const
@@ -93,7 +89,7 @@ public:
 
 	inline it_t& operator++()
 	{
-		_thing = _end_::create_();
+		_thing = any_a<>{};
 		return *this;
 	}
 
@@ -117,11 +113,11 @@ private:
 	friend class ___it_t_share___;
 };
 
-template <bool _const_, typename _end_, typename ___ego___>
-bool const it_t<_const_, _end_, ___ego___>::___share___ = []()
+template <bool _const_, typename ___ego___>
+bool const it_t<_const_, ___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	it_t<_const_, _end_, ___ego___>::share(shoal);
+	it_t<_const_, ___ego___>::share(shoal);
 	return shoal;
 }();
 
