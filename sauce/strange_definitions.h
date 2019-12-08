@@ -43,11 +43,7 @@ inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor)
 	{
 		return thing;
 	}
-	if (check<any_a<>>(thing))
-	{
-		return adaptor.operate(any_a<>{}, thing.ranged_());
-	}
-	return thing;
+	return adaptor.operate(any_a<>{}, thing.ranged_());
 }
 
 }
