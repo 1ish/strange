@@ -7,8 +7,6 @@
 
 #define ___root___ any_a<>
 
-#include "strange_symbol_a.h"
-
 #include "strange_forward_const_iterator_a.h"
 
 #define ___derived___ forward_const_iterator_a<>
@@ -77,9 +75,6 @@
 #define ___derived___ number_a<>
 #include "strange_number_data_a.h"
 
-#define ___derived___ range_a<>
-#include "strange_river_a.h"
-
 #define ___derived___ collection_a<>
 #include "strange_inventory_a.h"
 
@@ -94,6 +89,11 @@
 
 #define ___derived___ inventory_a<>
 #include "strange_brook_a.h"
+
+#define ___derived___ range_a<>
+#include "strange_river_a.h"
+
+#include "strange_symbol_a.h"
 
 #define ___derived___ symbol_a<>
 #include "strange_cat_a.h"

@@ -72,6 +72,16 @@ public:
 	}
 
 	// symbol
+	inline any_a<> to_lake__(range_a<> const&) const
+	{
+		return to_lake_();
+	}
+
+	inline lake_a<int8_t> to_lake_() const
+	{
+		return lake_from_string(_string);
+	}
+
 	inline std::string const& to_string() const
 	{
 		return _string;

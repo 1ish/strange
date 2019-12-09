@@ -155,16 +155,16 @@ public:
 			throw dis("strange::river::file passed empty range");
 		}
 		any_a<> name = *it;
-		if (!check<symbol_a<>>(name))
+		if (!check<lake_a<int8_t>>(name))
 		{
-			throw dis("strange::river::file passed non-symbol");
+			throw dis("strange::river::file passed non-lake-int-8");
 		}
-		return file_(cast<symbol_a<>>(name));
+		return file_(cast<lake_a<int8_t>>(name));
 	}
 
-	static inline river_a<> file_(symbol_a<> const& name)
+	static inline river_a<> file_(lake_a<int8_t> const& name)
 	{
-		return file(name.to_string());
+		return file(lake_to_string(name));
 	}
 
 	static inline river_a<> file(std::string const& name)
@@ -980,9 +980,9 @@ public:
 		return filename_();
 	}
 
-	inline symbol_a<> filename_() const
+	inline lake_a<int8_t> filename_() const
 	{
-		return sym(_filename);
+		return lake_from_string(_filename);
 	}
 
 	inline std::string filename() const

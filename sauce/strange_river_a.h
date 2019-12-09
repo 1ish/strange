@@ -3,7 +3,7 @@
 
  //# include "any_forward.hpp"
  //# include "range_forward.hpp"
- //# include "symbol_forward.hpp"
+ //# include "lake_forward.hpp"
  //# include "number_data_forward.hpp"
 #include <algorithm>
 #include <cassert>
@@ -253,7 +253,7 @@ namespace strange {
      { assert(handle_); write().set_bad(value ); }
      inline any_a < > filename__ ( range_a < > const & _ ) const
      { assert(handle_); return read().filename__(_ ); }
-     inline symbol_a < > filename_ ( ) const
+     inline lake_a < int8_t > filename_ ( ) const
      { assert(handle_); return read().filename_( ); }
      inline std :: string filename ( ) const
      { assert(handle_); return read().filename( ); }
@@ -346,7 +346,7 @@ namespace strange {
       virtual inline any_a < > set_bad_ ( any_a < > const & value ) = 0;
       virtual inline void set_bad ( bool value ) = 0;
       virtual inline any_a < > filename__ ( range_a < > const & _ ) const = 0;
-      virtual inline symbol_a < > filename_ ( ) const = 0;
+      virtual inline lake_a < int8_t > filename_ ( ) const = 0;
       virtual inline std :: string filename ( ) const = 0;
     	};
     
@@ -533,7 +533,7 @@ namespace strange {
       { value_.set_bad(value ); }
       virtual inline any_a < > filename__ ( range_a < > const & _ ) const
       { return value_.filename__(_ ); }
-      virtual inline symbol_a < > filename_ ( ) const
+      virtual inline lake_a < int8_t > filename_ ( ) const
       { return value_.filename_( ); }
       virtual inline std :: string filename ( ) const
       { return value_.filename( ); }

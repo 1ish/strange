@@ -7,6 +7,7 @@
 
 #include "any_forward.hpp"
 #include "range_forward.hpp"
+#include "lake_forward.hpp"
 
 namespace strange
 {
@@ -16,7 +17,11 @@ class symbol_a
 {
 public:
 	// symbol
+	inline any_a<> to_lake__(range_a<> const& range) const;
+	inline lake_a<int8_t> to_lake_() const;
+
 	inline std::string const& to_string() const;
+
 	inline int8_t first_character() const;
 	inline int8_t last_character() const;
 

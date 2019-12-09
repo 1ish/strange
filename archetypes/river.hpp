@@ -7,7 +7,7 @@
 
 #include "any_forward.hpp"
 #include "range_forward.hpp"
-#include "symbol_forward.hpp"
+#include "lake_forward.hpp"
 #include "number_data_forward.hpp"
 
 namespace strange
@@ -133,7 +133,7 @@ public:
 	inline void set_bad(bool value);
 
 	inline any_a<> filename__(range_a<> const& _) const;
-	inline symbol_a<> filename_() const;
+	inline lake_a<int8_t> filename_() const;
 	inline std::string filename() const;
 };
 
