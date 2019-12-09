@@ -38,7 +38,7 @@ public:
 
 	static inline range_of_a<_element_> create_()
 	{
-		static range_of_a<_element_> VAL = range_of_t<_element_>::create_(it_t<true>::create_(), it_t<true>::create_());
+		static range_of_a<_element_> VAL = range_of_t<_element_>::create_(it_t<>::create_(), it_t<>::create_());
 		return VAL;
 	}
 

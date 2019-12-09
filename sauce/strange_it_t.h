@@ -4,50 +4,40 @@
 namespace strange
 {
 
-template <bool _const_ = false, typename ___ego___ = forward_const_iterator_a<>>
+template <typename ___ego___ = forward_const_iterator_a<>>
 class it_t : public thing_t<___ego___>
 {
 public:
 	// override
-	using over = thing_o<it_t<_const_>>;
+	using over = thing_o<it_t<>>;
 
 	// construction
-	static inline any_a<> create__(range_a<> const& range)
+	static inline any_a<> create__(range_a<> const&)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return create_();
-		}
-		return create_(*it);
+		return create_();
 	}
 
 	static inline forward_const_iterator_a<> create_()
 	{
-		static forward_const_iterator_a<> VAL = it_t<_const_>::create_(any_a<>{});
+		static forward_const_iterator_a<> VAL = forward_const_iterator_a<>{ over{ it_t<>{} } };
 		return VAL;
-	}
-
-	static inline forward_const_iterator_a<> create_(any_a<> const& thing)
-	{
-		return forward_const_iterator_a<>{ over{ it_t<_const_>{ thing } } };
 	}
 
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<it_t<_const_>>::type();
+		return reflection<it_t<>>::type();
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<it_t<_const_>>::share(shoal);
+		reflection<it_t<>>::share(shoal);
 	}
 
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		return check<forward_const_iterator_a<>>(thing) && check<any_a<>>(_thing) == check<any_a<>>(thing);
+		return check<forward_const_iterator_a<>>(thing);
 	}
 
 	inline std::size_t hash() const
@@ -83,29 +73,25 @@ public:
 
 	inline ___ego___ increment_()
 	{
-		operator++();
 		return me_();
 	}
 
 	inline it_t& operator++()
 	{
-		_thing = any_a<>{};
 		return *this;
 	}
 
 	inline it_t operator++(int)
 	{
-		it_t result = *this;
-		operator++();
-		return result;
+		return *this;
 	}
 
 protected:
-	mutable any_a<> _thing; // stashing iterator
+	any_a<> const _thing; // stashing iterator
 
-	inline it_t(any_a<> const& thing)
+	inline it_t()
 		: thing_t{}
-		, _thing(thing, !_const_)
+		, _thing{ no() }
 	{}
 
 private:
@@ -113,11 +99,11 @@ private:
 	friend class ___it_t_share___;
 };
 
-template <bool _const_, typename ___ego___>
-bool const it_t<_const_, ___ego___>::___share___ = []()
+template <typename ___ego___>
+bool const it_t<___ego___>::___share___ = []()
 {
 	auto shoal = shoal_a<>(shared(), true);
-	it_t<_const_, ___ego___>::share(shoal);
+	it_t<___ego___>::share(shoal);
 	return shoal;
 }();
 

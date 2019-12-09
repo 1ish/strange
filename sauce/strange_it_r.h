@@ -5,23 +5,7 @@ namespace strange
 {
 
 template<>
-class reflection<it_t<true>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::const_it");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::const_it::create", native_function_t<>::create(&it_t<true>::create__));
-	}
-};
-
-template<>
-class reflection<it_t<false>>
+class reflection<it_t<>>
 {
 public:
 	static inline symbol_a<> type()
@@ -32,7 +16,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::it::create", native_function_t<>::create(&it_t<false>::create__));
+		shoal.update_string("strange::it::create", native_function_t<>::create(&it_t<>::create__));
 	}
 };
 
@@ -40,8 +24,7 @@ class ___it_t_share___
 {
 	static inline bool ___share___()
 	{
-		return it_t<true>::___share___
-			&& it_t<false>::___share___;
+		return it_t<>::___share___;
 	}
 };
 

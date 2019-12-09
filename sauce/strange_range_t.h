@@ -38,7 +38,7 @@ public:
 
 	static inline range_a<> create_()
 	{
-		static range_a<> VAL = range_t<>::create_(it_t<true>::create_(), it_t<true>::create_());
+		static range_a<> VAL = range_t<>::create_(it_t<>::create_(), it_t<>::create_());
 		return VAL;
 	}
 
