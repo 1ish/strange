@@ -101,7 +101,7 @@ public:
 	}
 
 protected:
-	mutable any_a<> _thing; //TODO A forward iterator cannot be "stashing": it cannot return a reference to an object within itself, because such references would be invalidated by the destruction of the forward iterator.
+	mutable any_a<> _thing; // stashing iterator
 
 	inline it_t(any_a<> const& thing)
 		: thing_t{}
