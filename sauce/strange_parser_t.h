@@ -1184,16 +1184,20 @@ private:
 				{
 					return initial;
 				}
-				if (op == "&&" || op == "!&" || op == "%%" || op == "!%" || op == "||" || op == "!|")
+				if (op == "|" || op == "&&" || op == "!&" || op == "%%" || op == "!%" || op == "||" || op == "!|")
 				{
-					// logic operator
+					// pipe / logic operator
 					if (!_next())
 					{
-						throw dis("strange::parser logic operator with nothing following it:") + token.report_();
+						throw dis("strange::parser pipe / logic operator with nothing following it:") + token.report_();
 					}
 					auto const terms = flock_t<>::create_(
 						initial,
 						_initial(precedence + 1, context));
+					if (op == "|")
+					{
+						return _subsequent(min_precedence, expression_pipe_t<>::create_(token, terms), context);
+					}
 					if (op == "&&")
 					{
 						return _subsequent(min_precedence, expression_and_t<>::create_(token, terms), context);
@@ -1325,10 +1329,6 @@ private:
 				else if (op == "!=")
 				{
 					oper = sym("different_");
-				}
-				else if (op == "|")
-				{
-					oper = sym("pipe_");
 				}
 				else if (op == "=")
 				{

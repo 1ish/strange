@@ -100,5 +100,6 @@
 #include "strange_expression_nor_r.h"
 #include "strange_expression_xor_r.h"
 #include "strange_expression_xnor_r.h"
+#include "strange_expression_pipe_r.h"
 
 #endif
