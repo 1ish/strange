@@ -12,15 +12,30 @@ public:
 	using over = thing_o<symbol_t<>>;
 
 	// construction
-	static inline any_a<> create__(range_a<> const&)
+	static inline any_a<> create__(range_a<> const& range)
 	{
-		return create_();
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
+		{
+			return create_();
+		}
+		any_a<> const lake = *it;
+		if (!check<lake_a<int8_t>>(lake))
+		{
+			throw dis("strange::symbol::create passed non-lake-int-8");
+		}
+		return create_(cast<lake_a<int8_t>>(lake));
 	}
 
 	static inline symbol_a<> create_()
 	{
 		static symbol_a<> VAL = symbol_t<>::create("");
 		return VAL;
+	}
+
+	static inline symbol_a<> create_(lake_a<int8_t> const& lake)
+	{
+		return symbol_a<>{ over{ symbol_t<>{ lake_to_string(lake) } } };
 	}
 
 	template <typename F>
