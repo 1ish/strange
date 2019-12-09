@@ -121,7 +121,7 @@ public:
 	{
 		if (!check<kind_a<>>(thing))
 		{
-			return false;
+			return cat_t::operator==(thing);
 		}
 		auto const kind = cast<kind_a<>>(thing);
 		if (_symbolic != kind.symbolic() || _hash != kind.hash())

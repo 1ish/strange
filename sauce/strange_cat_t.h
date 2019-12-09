@@ -116,9 +116,9 @@ public:
 	// comparison
 	inline bool operator==(any_a<> const& thing) const
 	{
-		if (!check<cat_a<>>(thing) || check<kind_a<>>(thing))
+		if (!check<cat_a<>>(thing))
 		{
-			return false;
+			return symbol_t::operator==(thing);
 		}
 		auto const cat = cast<cat_a<>>(thing);
 		if (_symbolic != cat.symbolic() || _hash != cat.hash())
