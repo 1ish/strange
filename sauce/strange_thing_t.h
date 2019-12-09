@@ -150,11 +150,6 @@ public:
 		return operation.operate(thing, range_t<>::create_(++it, range.cend_()));
 	}
 
-	inline any_a<> pipe_(any_a<> const& adaptor) const
-	{
-		return me_() | adaptor;
-	}
-
 	// identification
 	inline any_a<> identity__(range_a<> const&) const
 	{

@@ -263,31 +263,6 @@ public:
 		return operation.operate(thing, range_t<>::create_(++it, range.cend_()));
 	}
 
-	inline any_a<> pipe__(range_a<> const& range) const
-	{
-		auto const op = _operations.at_string("pipe");
-		if (op)
-		{
-			return op.operate(any_a<>(me_(), true), range);
-		}
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			throw dis("<strange::any>::pipe passed empty range");
-		}
-		return me_() | *it;
-	}
-
-	inline any_a<> pipe_(any_a<> const& adaptor) const
-	{
-		auto const op = _operations.at_string("pipe");
-		if (op)
-		{
-			return op.operate(any_a<>(me_(), true), flock_t<>::create_(adaptor));
-		}
-		return me_() | adaptor;
-	}
-
 	// identification
 	inline any_a<> identity__(range_a<> const&) const // cannot be overridden
 	{
