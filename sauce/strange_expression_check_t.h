@@ -62,10 +62,9 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		// (left && right)
-		river.write_string(" (");
+		river.write_string(" check(");
 		_left.generate(version, indent, river);
-		river.write_string(" | "); //TODO check
+		river.write_string(", ");
 		_right.generate(version, indent, river);
 		river.write_string(") ");
 	}
