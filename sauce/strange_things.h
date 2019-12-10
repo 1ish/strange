@@ -93,5 +93,7 @@
 #include "strange_expression_xor_t.h"
 #include "strange_expression_xnor_t.h"
 #include "strange_expression_pipe_t.h"
+#include "strange_expression_check_t.h"
+#include "strange_expression_cast_t.h"
 
 #endif

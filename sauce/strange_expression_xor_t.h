@@ -50,7 +50,8 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		return boole(!_left.operate(thing, range) != !_right.operate(thing, range));
+		auto const left = _left.operate(thing, range);
+		return boole(!left != !_right.operate(thing, range));
 	}
 
 	// expression

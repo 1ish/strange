@@ -50,7 +50,8 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		return _left.operate(thing, range) | _right.operate(thing, range);
+		auto const left = _left.operate(thing, range);
+		return left | _right.operate(thing, range);
 	}
 
 	// expression
