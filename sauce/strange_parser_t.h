@@ -505,7 +505,7 @@ private:
 				{
 					_next();
 					fixed = dimension || op == ":#";
-					optional = _it != _end && _token.tag() != "punctuation" || !_delimiter(_token.symbol());
+					optional = _it != _end && (_token.tag() != "punctuation" || !_delimiter(_token.symbol()));
 					insert = true;
 					kind = kind_t<>::create_();
 				}

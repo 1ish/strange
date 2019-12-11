@@ -41,8 +41,11 @@
 
 			// locals
 			x :# 10		// auto const x = number_int_64_t<>::create(10)
+			x :# null	// auto const x = any_a{}
+			x :#		// auto const x = any_a{}
 			x := 10		// auto x = number_int_64_t<>::create(10)
-			x :=		// any_a<> x										- null
+			x := null	// auto x = any_a{}
+			x :=		// auto x = any_a{}
 			x			// x
 
 			// attributes
