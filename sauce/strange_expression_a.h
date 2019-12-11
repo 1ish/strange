@@ -109,6 +109,12 @@ namespace strange {
      { assert(handle_); return read().generate_cpp_(version, indent, river ); }
      inline void generate_cpp ( int64_t version , int64_t indent , river_a < > & river ) const
      { assert(handle_); read().generate_cpp(version, indent, river ); }
+     inline any_a < > generate_cpp_type__ ( range_a < > const & range ) const
+     { assert(handle_); return read().generate_cpp_type__(range ); }
+     inline any_a < > generate_cpp_type_ ( number_data_a_int64 const & version , number_data_a_int64 const & indent , river_a < > & river ) const
+     { assert(handle_); return read().generate_cpp_type_(version, indent, river ); }
+     inline void generate_cpp_type ( int64_t version , int64_t indent , river_a < > & river ) const
+     { assert(handle_); read().generate_cpp_type(version, indent, river ); }
     
     private:
     	struct ___finale_handle_base___ : ___derived_handle_base___
@@ -125,6 +131,9 @@ namespace strange {
       virtual inline any_a < > generate_cpp__ ( range_a < > const & range ) const = 0;
       virtual inline any_a < > generate_cpp_ ( number_data_a_int64 const & version , number_data_a_int64 const & indent , river_a < > & river ) const = 0;
       virtual inline void generate_cpp ( int64_t version , int64_t indent , river_a < > & river ) const = 0;
+      virtual inline any_a < > generate_cpp_type__ ( range_a < > const & range ) const = 0;
+      virtual inline any_a < > generate_cpp_type_ ( number_data_a_int64 const & version , number_data_a_int64 const & indent , river_a < > & river ) const = 0;
+      virtual inline void generate_cpp_type ( int64_t version , int64_t indent , river_a < > & river ) const = 0;
     	};
     
     	template <typename ___TTT___>
@@ -169,6 +178,12 @@ namespace strange {
       { return value_.generate_cpp_(version, indent, river ); }
       virtual inline void generate_cpp ( int64_t version , int64_t indent , river_a < > & river ) const
       { value_.generate_cpp(version, indent, river ); }
+      virtual inline any_a < > generate_cpp_type__ ( range_a < > const & range ) const
+      { return value_.generate_cpp_type__(range ); }
+      virtual inline any_a < > generate_cpp_type_ ( number_data_a_int64 const & version , number_data_a_int64 const & indent , river_a < > & river ) const
+      { return value_.generate_cpp_type_(version, indent, river ); }
+      virtual inline void generate_cpp_type ( int64_t version , int64_t indent , river_a < > & river ) const
+      { value_.generate_cpp_type(version, indent, river ); }
     	};
     
     	template <typename ___TTT___>

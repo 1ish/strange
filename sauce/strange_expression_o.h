@@ -155,6 +155,45 @@ public:
 		generate_cpp(version.extract(), indent.extract(), river);
 		return river;
 	}
+
+	inline any_a<> generate_cpp_type__(range_a<> const& range) const
+	{
+		forward_const_iterator_a<> it = range.cbegin_();
+		if (it == range.cend_())
+		{
+			throw dis("[expression]::generate_cpp_type passed empty range");
+		}
+		any_a<> version = *it;
+		if (!check<number_data_a<int64_t>>(version))
+		{
+			throw dis("[expression]::generate_cpp_type passed non-int-64 version");
+		}
+		if (++it == range.cend_())
+		{
+			throw dis("[expression]::generate_cpp_type passed short range");
+		}
+		any_a<> indent = *it;
+		if (!check<number_data_a<int64_t>>(indent))
+		{
+			throw dis("[expression]::generate_cpp_type passed non-int-64 indent");
+		}
+		if (++it == range.cend_())
+		{
+			throw dis("[expression]::generate_cpp_type passed short range");
+		}
+		any_a<> river = *it;
+		if (!check<river_a<>>(river))
+		{
+			throw dis("[expression]::generate_cpp_type passed non-river");
+		}
+		return generate_cpp_type_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast<river_a<>>(river, true));
+	}
+
+	inline any_a<> generate_cpp_type_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
+	{
+		generate_cpp_type(version.extract(), indent.extract(), river);
+		return river;
+	}
 };
 
 } // namespace strange

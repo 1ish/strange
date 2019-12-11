@@ -88,6 +88,11 @@ public:
 		river.write_string(" strange::no() ");
 	}
 
+	inline void generate_cpp_type(int64_t version, int64_t indent, river_a<>& river) const
+	{
+		throw dis(_token.report() + "strange::expression::generate_cpp_type called for wrong type of expression");
+	}
+
 protected:
 	token_a<> const _token;
 

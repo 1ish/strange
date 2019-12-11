@@ -78,10 +78,10 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" (");
+		river.write_string(" strange::cast<");
+		_right.generate_cpp_type(version, indent, river);
+		river.write_string(">(");
 		_left.generate_cpp(version, indent, river);
-		river.write_string(" | "); //TODO cast
-		_right.generate_cpp(version, indent, river);
 		river.write_string(") ");
 	}
 
