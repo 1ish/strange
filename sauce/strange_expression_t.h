@@ -68,6 +68,11 @@ public:
 	}
 
 	// expression
+	inline bool literal() const
+	{
+		return _literal;
+	}
+
 	inline token_a<> token_() const
 	{
 		return _token;
@@ -94,15 +99,18 @@ public:
 	}
 
 protected:
+	bool const _literal;
 	token_a<> const _token;
 
 	inline expression_t(token_a<> const& token, bool pure = false, bool literal = false, flock_a<> const& names = flock_t<>::create_())
-		: operation_t(pure, literal, names)
+		: operation_t(pure, names)
+		, _literal(literal)
 		, _token(token)
 	{}
 
 	inline expression_t(token_a<> const& token, std::pair<bool, bool> const& pure_literal, flock_a<> const& names = flock_t<>::create_())
-		: operation_t(pure_literal.first, pure_literal.second, names)
+		: operation_t(pure_literal.first, names)
+		, _literal(pure_literal.second)
 		, _token(token)
 	{}
 

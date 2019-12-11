@@ -28,8 +28,8 @@ public:
 		{
 			throw dis("strange::abstraction::create passed short range");
 		}
-		auto const dimension_names = *it;
-		if (!check<flock_a<>>(dimension_names))
+		auto const names = *it;
+		if (!check<flock_a<>>(names))
 		{
 			throw dis(cast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension names");
 		}
@@ -60,12 +60,12 @@ public:
 		{
 			throw dis(cast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock parent expressions");
 		}
-		return create_(cast<token_a<>>(token), cast<flock_a<>>(dimension_names), cast<flock_a<>>(dimension_kinds), cast<flock_a<>>(dimension_defaults), cast<flock_a<>>(parent_expressions));
+		return create_(cast<token_a<>>(token), cast<flock_a<>>(names), cast<flock_a<>>(dimension_kinds), cast<flock_a<>>(dimension_defaults), cast<flock_a<>>(parent_expressions));
 	}
 
-	static inline operation_a<> create_(token_a<> const& token, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
+	static inline operation_a<> create_(token_a<> const& token, flock_a<> const& names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
 	{
-		return operation_a<>{ over{ abstraction_t<>(token, dimension_names, dimension_kinds, dimension_defaults, parent_expressions) } };
+		return operation_a<>{ over{ abstraction_t<>(token, names, dimension_kinds, dimension_defaults, parent_expressions) } };
 	}
 
 	// reflection
@@ -88,7 +88,7 @@ public:
 		auto local_shoal = unordered_shoal_t<>::create_();
 		auto& local = local_shoal.reference();
 		forward_const_iterator_a<> ait = range.cbegin_();
-		auto nit = _dimension_names.extract().cbegin();
+		auto nit = _names.extract().cbegin();
 		auto kit = _dimension_kinds.extract().cbegin();
 		for (auto const& def : _dimension_defaults.extract())
 		{
@@ -147,15 +147,14 @@ public:
 
 protected:
 	token_a<> const _token;
-	flock_a<> const _dimension_names;
+	flock_a<> const _names;
 	flock_a<> const _dimension_kinds;
 	flock_a<> const _dimension_defaults;
 	flock_a<> const _parent_expressions;
 
-	inline abstraction_t(token_a<> const& token, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
-		: operation_t(false, false) //TODO pure/literal
+	inline abstraction_t(token_a<> const& token, flock_a<> const& names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
+		: operation_t(false, names) //TODO pure
 		, _token{ token }
-		, _dimension_names{ dimension_names }
 		, _dimension_kinds{ dimension_kinds }
 		, _dimension_defaults{ dimension_defaults }
 		, _parent_expressions{ parent_expressions }

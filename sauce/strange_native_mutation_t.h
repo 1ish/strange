@@ -89,7 +89,7 @@ protected:
 	unordered_herd_a<> const _cats;
 
 	inline native_mutation_t(member const fun, std::pair<kind_a<>, flock_a<>> const& kind_names)
-		: operation_t{ false, false, kind_names.second }
+		: operation_t{ false, kind_names.second } //TODO pure
 		, _function{ fun }
 		, _kind{ kind_names.first }
 		, _kinds{ kinds(_kind) }

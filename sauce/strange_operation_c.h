@@ -135,51 +135,6 @@ public:
 		return false;
 	}
 
-	inline any_a<> literal__(range_a<> const& range) const
-	{
-		auto const op = _operations.at_string("literal");
-		if (op)
-		{
-			return op.operate(any_a<>(me_(), true), range);
-		}
-		auto const oper = _operations.at_string("operate");
-		if (check<operation_a<>>(oper))
-		{
-			return cast<operation_a<>>(oper).literal_();
-		}
-		return no();
-	}
-
-	inline any_a<> literal_() const
-	{
-		auto const op = _operations.at_string("literal");
-		if (op)
-		{
-			return op.operate(any_a<>(me_(), true), range_t<>::create_());
-		}
-		auto const oper = _operations.at_string("operate");
-		if (check<operation_a<>>(oper))
-		{
-			return cast<operation_a<>>(oper).literal_();
-		}
-		return no();
-	}
-
-	inline bool literal() const
-	{
-		auto const op = _operations.at_string("literal");
-		if (op)
-		{
-			return op.operate(any_a<>(me_(), true), range_t<>::create_());
-		}
-		auto const oper = _operations.at_string("operate");
-		if (check<operation_a<>>(oper))
-		{
-			return cast<operation_a<>>(oper).literal();
-		}
-		return false;
-	}
-
 	static inline void aspects(unordered_shoal_a<> const&)
 	{}
 

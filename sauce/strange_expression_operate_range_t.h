@@ -107,41 +107,6 @@ protected:
 			pure_literal.second = false;
 			return pure_literal;
 		}
-		try
-		{
-			auto thing = thing_expression.evaluate_();
-			auto any_range = range_expression.evaluate_();
-			if (!check<range_a<>>(any_range))
-			{
-				throw dis(token.report() + "strange::expression_operate_range::create passed non-range");
-			}
-			auto range = cast<range_a<>>(any_range);
-			auto it = range.cbegin_();
-			if (it == range.cend_())
-			{
-				throw dis(token.report() + "strange::expression_operate_range::create passed empty range");
-			}
-			auto any_operation = *it;
-			if (!check<operation_a<>>(any_operation))
-			{
-				throw dis(token.report() + "strange::expression_operate_range::create passed non-operation");
-			}
-			auto operation = cast<operation_a<>>(any_operation);
-			if (!operation.pure())
-			{
-				pure_literal.first = false;
-				pure_literal.second = false;
-				return pure_literal;
-			}
-			if (!operation.literal())
-			{
-				pure_literal.second = false;
-			}
-		}
-		catch (misunderstanding_a<>& misunderstanding)
-		{
-			throw dis("strange::expression_operate_range::create pure literal evaluation error:") + token.report_() + misunderstanding;
-		}
 		return pure_literal;
 	}
 

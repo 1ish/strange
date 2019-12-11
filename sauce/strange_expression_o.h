@@ -56,6 +56,16 @@ public:
 		return kinds_();
 	}
 
+	inline any_a<> literal__(range_a<> const&) const
+	{
+		return literal_();
+	}
+
+	inline any_a<> literal_() const
+	{
+		return boole(literal());
+	}
+
 	inline any_a<> evaluate__(range_a<> const&) const
 	{
 		return evaluate_();

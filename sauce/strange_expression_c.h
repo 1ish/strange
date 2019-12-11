@@ -90,6 +90,36 @@ public:
 	}
 
 	// expression
+	inline any_a<> literal__(range_a<> const& range) const
+	{
+		auto const op = _operations.at_string("literal");
+		if (op)
+		{
+			return op.operate(any_a<>(me_(), true), range);
+		}
+		return no();
+	}
+
+	inline any_a<> literal_() const
+	{
+		auto const op = _operations.at_string("literal");
+		if (op)
+		{
+			return op.operate(any_a<>(me_(), true), range_t<>::create_());
+		}
+		return no();
+	}
+
+	inline bool literal() const
+	{
+		auto const op = _operations.at_string("literal");
+		if (op)
+		{
+			return op.operate(any_a<>(me_(), true), range_t<>::create_());
+		}
+		return false;
+	}
+
 	inline any_a<> evaluate__(range_a<> const& range) const
 	{
 		auto const op = _operations.at_string("evaluate");

@@ -116,7 +116,7 @@ protected:
 	unordered_shoal_a<> const _shared;
 
 	inline function_t(token_a<> const& token, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& defaults, expression_a<> const& expression)
-		: operation_t(expression.pure(), expression.literal(), names)
+		: operation_t(expression.pure(), names)
 		, _token{ token }
 		, _kinds{ kinds }
 		, _defaults{ defaults }

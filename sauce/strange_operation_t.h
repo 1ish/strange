@@ -24,21 +24,6 @@ public:
 		return _pure;
 	}
 
-	inline any_a<> literal__(range_a<> const&) const
-	{
-		return literal_();
-	}
-
-	inline any_a<> literal_() const
-	{
-		return boole(literal());
-	}
-
-	inline bool literal() const
-	{
-		return _literal;
-	}
-
 	static inline void aspects(unordered_shoal_a<> const&)
 	{}
 
@@ -54,13 +39,11 @@ public:
 
 protected:
 	bool const _pure;
-	bool const _literal;
 	flock_a<> const _names;
 
-	inline operation_t(bool pure = false, bool literal = false, flock_a<> const& names = flock_t<>::create_())
+	inline operation_t(bool pure = false, flock_a<> const& names = flock_t<>::create_())
 		: thing_t{}
 		, _pure(pure)
-		, _literal(literal)
 		, _names(names)
 	{}
 

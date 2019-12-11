@@ -23,10 +23,6 @@ public:
 	inline any_a<> pure_() const;
 	inline bool pure() const;
 
-	inline any_a<> literal__(range_a<> const& _) const;
-	inline any_a<> literal_() const;
-	inline bool literal() const;
-
 	inline void aspects(unordered_shoal_a<> const& shoal);
 
 	inline any_a<> names__(range_a<> const& _) const;

@@ -146,56 +146,6 @@ protected:
 			pure_literal.second = false;
 			return pure_literal;
 		}
-		try
-		{
-			auto thing = expression_thing.evaluate_();
-			any_operation = expression_operation.evaluate_();
-			if (!check<operation_a<>>(any_operation))
-			{
-				throw dis(token.report() + "strange::expression_operate::create passed non-operation");
-			}
-			auto operation = cast<operation_a<>>(any_operation);
-			if (!operation.pure())
-			{
-				pure_literal.first = false;
-				pure_literal.second = false;
-				return pure_literal;
-			}
-			if (!operation.literal())
-			{
-				pure_literal.second = false;
-			}
-		}
-		catch (misunderstanding_a<>& misunderstanding)
-		{
-			throw dis("strange::expression_operate::create pure literal evaluation error:") + token.report_() + misunderstanding;
-		}
-
-		while (++it != terms.cend_())
-		{
-			auto term = *it;
-			if (!check<expression_a<>>(term))
-			{
-				throw dis(token.report() + "strange::expression_operate::create passed non-expression argument");
-			}
-			auto expression = cast<expression_a<>>(term);
-			if (!expression.pure())
-			{
-				pure_literal.first = false;
-				if (!pure_literal.second)
-				{
-					return pure_literal;
-				}
-			}
-			if (!expression.literal())
-			{
-				pure_literal.second = false;
-				if (!pure_literal.first)
-				{
-					return pure_literal;
-				}
-			}
-		}
 		return pure_literal;
 	}
 

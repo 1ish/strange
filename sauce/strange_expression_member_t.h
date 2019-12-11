@@ -98,35 +98,6 @@ protected:
 			pure_literal.second = false;
 			return pure_literal;
 		}
-		try
-		{
-			auto thing = thing_expression.evaluate_();
-			if (!thing.operations_().has_(member))
-			{
-				throw dis(token.report() + "strange::expression_member::create passed non-existent member");
-			}
-			auto any_operation = thing.operations_().at_(member);
-			if (!check<operation_a<>>(any_operation))
-			{
-				throw dis(token.report() + "strange::expression_member::create passed non-operation member");
-			}
-			auto operation = cast<operation_a<>>(any_operation);
-			if (!operation.pure())
-			{
-				pure_literal.first = false;
-				pure_literal.second = false;
-				return pure_literal;
-			}
-			if (!operation.literal())
-			{
-				pure_literal.second = false;
-			}
-		}
-		catch (misunderstanding_a<>& misunderstanding)
-		{
-			throw dis("strange::expression_member::create pure literal evaluation error:") + token.report_() + misunderstanding;
-		}
-
 		return pure_literal;
 	}
 

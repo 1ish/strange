@@ -90,12 +90,6 @@ namespace strange {
      { assert(handle_); return read().pure_( ); }
      inline bool pure ( ) const
      { assert(handle_); return read().pure( ); }
-     inline any_a < > literal__ ( range_a < > const & _ ) const
-     { assert(handle_); return read().literal__(_ ); }
-     inline any_a < > literal_ ( ) const
-     { assert(handle_); return read().literal_( ); }
-     inline bool literal ( ) const
-     { assert(handle_); return read().literal( ); }
      inline void aspects ( unordered_shoal_a < > const & shoal )
      { assert(handle_); write().aspects(shoal ); }
      inline any_a < > names__ ( range_a < > const & _ ) const
@@ -109,9 +103,6 @@ namespace strange {
       virtual inline any_a < > pure__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > pure_ ( ) const = 0;
       virtual inline bool pure ( ) const = 0;
-      virtual inline any_a < > literal__ ( range_a < > const & _ ) const = 0;
-      virtual inline any_a < > literal_ ( ) const = 0;
-      virtual inline bool literal ( ) const = 0;
       virtual inline void aspects ( unordered_shoal_a < > const & shoal ) = 0;
       virtual inline any_a < > names__ ( range_a < > const & _ ) const = 0;
       virtual inline flock_a < > names_ ( ) const = 0;
@@ -136,12 +127,6 @@ namespace strange {
       { return value_.pure_( ); }
       virtual inline bool pure ( ) const
       { return value_.pure( ); }
-      virtual inline any_a < > literal__ ( range_a < > const & _ ) const
-      { return value_.literal__(_ ); }
-      virtual inline any_a < > literal_ ( ) const
-      { return value_.literal_( ); }
-      virtual inline bool literal ( ) const
-      { return value_.literal( ); }
       virtual inline void aspects ( unordered_shoal_a < > const & shoal )
       { value_.aspects(shoal ); }
       virtual inline any_a < > names__ ( range_a < > const & _ ) const
