@@ -367,7 +367,7 @@ class brook_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		brook_a<_primitive_> _brook;
-		mutable number_data_a<_primitive_> _number; // stashing iterator
+		number_data_a<_primitive_> mutable _number; // stashing iterator
 
 		template <typename F>
 		inline iterator_t(brook_a<_primitive_> const& brook, F&& it)
@@ -719,7 +719,7 @@ class brook_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		brook_a<_primitive_> _brook;
-		mutable number_data_a<_primitive_> _number; // stashing iterator
+		number_data_a<_primitive_> mutable _number; // stashing iterator
 
 		template <typename F>
 		inline const_iterator_t(brook_a<_primitive_> const& brook, F&& it)
@@ -1144,7 +1144,7 @@ public:
 	}
 
 protected:
-	mutable typename concurrent_u<_concurrent_>::mutex _mutex;
+	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
 	std_deque_number _deque;
 
 	template <typename F>

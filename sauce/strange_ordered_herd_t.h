@@ -483,7 +483,7 @@ public:
 	}
 
 protected:
-	mutable typename concurrent_u<_concurrent_>::mutex _mutex;
+	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
 	std_set_any _set;
 
 	template <typename F>

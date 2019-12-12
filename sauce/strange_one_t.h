@@ -96,7 +96,7 @@ public:
 	{}
 
 protected:
-	mutable any_a<>::___WEAK___ _meek;
+	any_a<>::___WEAK___ mutable _meek;
 
 	// construction
 	inline one_t() {};

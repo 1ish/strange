@@ -89,6 +89,8 @@ namespace strange {
      { assert(handle_); return read().recreate__(_ ); }
      inline expression_a recreate_ ( ) const
      { assert(handle_); return read().recreate_( ); }
+     inline void recreated ( expression_a const & expression ) const
+     { assert(handle_); read().recreated(expression ); }
      inline any_a < > literal__ ( range_a < > const & _ ) const
      { assert(handle_); return read().literal__(_ ); }
      inline any_a < > literal_ ( ) const
@@ -131,6 +133,7 @@ namespace strange {
     	{
       virtual inline any_a < > recreate__ ( range_a < > const & _ ) const = 0;
       virtual inline expression_a recreate_ ( ) const = 0;
+      virtual inline void recreated ( expression_a const & expression ) const = 0;
       virtual inline any_a < > literal__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > literal_ ( ) const = 0;
       virtual inline bool literal ( ) const = 0;
@@ -173,6 +176,8 @@ namespace strange {
       { return value_.recreate__(_ ); }
       virtual inline expression_a recreate_ ( ) const
       { return value_.recreate_( ); }
+      virtual inline void recreated ( expression_a const & expression ) const
+      { value_.recreated(expression ); }
       virtual inline any_a < > literal__ ( range_a < > const & _ ) const
       { return value_.literal__(_ ); }
       virtual inline any_a < > literal_ ( ) const

@@ -100,6 +100,9 @@ public:
 		return me_(); //TODO?
 	}
 
+	inline void recreated(expression_a<> const& expression) const
+	{}
+
 	inline any_a<> literal__(range_a<> const& range) const
 	{
 		auto const op = _operations.at_string("literal");

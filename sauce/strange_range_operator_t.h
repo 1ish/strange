@@ -123,7 +123,7 @@ class range_operator_t : public thing_t<___ego___>
 		range_a<> _range;
 		any_a<>& _thing_ref;
 		range_a<> const& _range_ref;
-		mutable any_a<> _result;
+		any_a<> mutable _result;
 
 		template <typename F>
 		inline const_iterator_t(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)

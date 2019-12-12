@@ -15,40 +15,47 @@ public:
 		{
 			try
 			{
-				any_a<> literal = substituted.evaluate_();
-				if (expression_literal_t<>::validate(literal))
+				any_a<> thing = substituted.evaluate_();
+				if (expression_literal_t<>::validate(thing))
 				{
 					flock_a<> terms = flock_t<>::create_();
-					terms.push_back(literal);
-					return expression_literal_t<>::create(substituted.token_(), terms, literal);
+					terms.push_back(thing);
+					return expression_literal_t<>::create(substituted.token_(), terms, thing);
 				}
-				return expression_a<>{ expression_substitute_t(std::move(substituted), literal) };
+				return expression_a<>{ expression_substitute_t(std::move(substituted), thing) };
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
-				throw dis("strange::expression_substitute::create literal evaluation error:") + substituted.token_().report_() + misunderstanding;
+				throw dis("strange::expression_substitute::create thing evaluation error:") + substituted.token_().report_() + misunderstanding;
 			}
 		}
 		return expression_a<>{ std::move(substituted) };
 	}
 
-	static inline expression_a<> create(_SUBSTITUTED_&& substituted, any_a<> const& literal)
+	static inline expression_a<> create(_SUBSTITUTED_&& substituted, any_a<> const& thing)
 	{
-		return expression_a<>{ expression_substitute_t(std::move(substituted), literal) };
+		return expression_a<>{ expression_substitute_t(std::move(substituted), thing) };
 	}
 
 	// function
 	inline any_a<> operate(any_a<>&, range_a<> const&) const
 	{
-		return _literal;
+		return _thing;
+	}
+
+	// expression
+	inline void recreated(expression_a<> const& expression) const
+	{
+		_thing = expression.operate(no(), range_t<>::create_());
+		//TODO function, extraction, mutation, abstraction, implementation
 	}
 
 protected:
-	any_a<> const _literal;
+	any_a<> mutable _thing;
 
-	inline expression_substitute_t(_SUBSTITUTED_&& substituted, any_a<> const& literal)
+	inline expression_substitute_t(_SUBSTITUTED_&& substituted, any_a<> const& thing)
 		: _SUBSTITUTED_{ std::move(substituted) }
-		, _literal{ literal }
+		, _thing{ thing }
 	{}
 };
 

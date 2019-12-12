@@ -1101,7 +1101,7 @@ public:
 	}
 
 protected:
-	mutable typename concurrent_u<_concurrent_>::mutex _mutex;
+	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
 	std_deque_any _deque;
 
 	template <typename F>

@@ -476,7 +476,7 @@ class tokenizer_t : public thing_t<___ego___>
 		int64_t _start_position;
 		bool _dot;
 		char _use;
-		mutable token_a<> _token;
+		token_a<> mutable _token;
 
 		template <typename F>
 		inline const_iterator_t(river_a<> const& river, F&& it)

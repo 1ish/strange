@@ -51,7 +51,9 @@ public:
 				term = cast<expression_a<>>(term).recreate_();
 			}
 		}
-		return create_(_token, terms);
+		auto const expression = create_(_token, terms);
+		recreated(expression);
+		return expression;
 	}
 
 	inline any_a<> cat__(range_a<> const&) const

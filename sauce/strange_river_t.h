@@ -112,7 +112,7 @@ class river_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		river_a<> _river;
-		mutable number_data_a<int8_t> _int_8;
+		number_data_a<int8_t> mutable _int_8;
 
 		template <typename F>
 		inline const_iterator_t(river_a<> const& river, F&& it)

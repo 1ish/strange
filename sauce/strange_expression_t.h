@@ -68,6 +68,9 @@ public:
 	}
 
 	// expression
+	inline void recreated(expression_a<> const& expression) const
+	{}
+
 	inline bool literal() const
 	{
 		return _literal;
