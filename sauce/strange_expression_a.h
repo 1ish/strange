@@ -85,6 +85,10 @@ namespace strange {
     		return *this;
     	}
     
+     inline any_a < > recreate__ ( range_a < > const & _ ) const
+     { assert(handle_); return read().recreate__(_ ); }
+     inline expression_a recreate_ ( ) const
+     { assert(handle_); return read().recreate_( ); }
      inline any_a < > literal__ ( range_a < > const & _ ) const
      { assert(handle_); return read().literal__(_ ); }
      inline any_a < > literal_ ( ) const
@@ -125,6 +129,8 @@ namespace strange {
     private:
     	struct ___finale_handle_base___ : ___derived_handle_base___
     	{
+      virtual inline any_a < > recreate__ ( range_a < > const & _ ) const = 0;
+      virtual inline expression_a recreate_ ( ) const = 0;
       virtual inline any_a < > literal__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > literal_ ( ) const = 0;
       virtual inline bool literal ( ) const = 0;
@@ -163,6 +169,10 @@ namespace strange {
     			return std::make_shared<___finale_handle_final___>(___derived_handle___<___TTT___, ___finale_handle_base___>::value_);
     		}
     
+      virtual inline any_a < > recreate__ ( range_a < > const & _ ) const
+      { return value_.recreate__(_ ); }
+      virtual inline expression_a recreate_ ( ) const
+      { return value_.recreate_( ); }
       virtual inline any_a < > literal__ ( range_a < > const & _ ) const
       { return value_.literal__(_ ); }
       virtual inline any_a < > literal_ ( ) const

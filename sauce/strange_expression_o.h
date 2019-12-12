@@ -36,6 +36,24 @@ public:
 		return create_(cast<token_a<>>(token), cast<flock_a<>>(terms));
 	}
 
+	inline any_a<> recreate__(range_a<> const&) const
+	{
+		return recreate_();
+	}
+
+	inline expression_a<> recreate_() const
+	{
+		auto terms = flock_a<>(terms_(), true);
+		for (auto& term : terms.reference())
+		{
+			if (check<expression_a<>>(term))
+			{
+				term = cast<expression_a<>>(term).recreate_();
+			}
+		}
+		return create_(_token, terms);
+	}
+
 	inline any_a<> cat__(range_a<> const&) const
 	{
 		return cat_();

@@ -90,6 +90,16 @@ public:
 	}
 
 	// expression
+	inline any_a<> recreate__(range_a<> const&) const // cannot be overridden
+	{
+		return recreate_();
+	}
+
+	inline expression_a<> recreate_() const // cannot be overridden
+	{
+		return me_(); //TODO?
+	}
+
 	inline any_a<> literal__(range_a<> const& range) const
 	{
 		auto const op = _operations.at_string("literal");

@@ -20,6 +20,9 @@ class expression_a
 {
 public:
 	// expression
+	inline any_a<> recreate__(range_a<> const& _) const;
+	inline expression_a recreate_() const;
+
 	inline any_a<> literal__(range_a<> const& _) const;
 	inline any_a<> literal_() const;
 	inline bool literal() const;

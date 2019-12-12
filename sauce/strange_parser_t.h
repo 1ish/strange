@@ -44,7 +44,12 @@ public:
 		{
 			throw dis("strange::parser tokenizer error:") + _token.report_();
 		}
-		return _initial(0, std::make_shared<context_struct>());
+		auto const result = _initial(0, std::make_shared<context_struct>());
+		if (_it != _end)
+		{
+			throw dis("strange::parser unparsed tokens:") + _token.report_();
+		}
+		return result.recreate_();
 	}
 
 protected:
