@@ -26,14 +26,14 @@ public:
 		}
 		if (++it == terms.cend_())
 		{
-			throw dis(token.report() + "strange::expression_cast::create not passed sufficient terms");
+			return expression_a<>{ over{ expression_cast_t<>(token, terms, cast<expression_a<>>(left), expression_kind_t<>::create_(token, flock_t<>::create_())) } };
 		}
 		any_a<> right = *it;
 		if (!check<expression_a<>>(right))
 		{
 			throw dis(token.report() + "strange::expression_cast::create passed non-expression right-hand term");
 		}
-		return expression_a<>{ over{ expression_cast_t<>( token, terms, cast<expression_a<>>(left), cast<expression_a<>>(right)) } };
+		return expression_a<>{ over{ expression_cast_t<>(token, terms, cast<expression_a<>>(left), cast<expression_a<>>(right)) } };
 	}
 
 	// reflection
