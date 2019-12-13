@@ -46,8 +46,12 @@ public:
 	// expression
 	inline void recreated(expression_a<> const& expression) const
 	{
-		_thing = expression.operate(no(), range_t<>::create_());
-		//TODO function, extraction, mutation, abstraction, implementation
+		auto const thing = expression.evaluate_();
+		if (check<operation_a<>>(_thing) && check<operation_a<>>(thing))
+		{
+			cast<operation_a<>>(_thing, true).assign(cast<operation_a<>>(thing));
+		}
+		_thing = thing;
 	}
 
 protected:

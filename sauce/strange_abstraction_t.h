@@ -145,12 +145,27 @@ public:
 		return child;
 	}
 
+	// operation
+	inline void assign(operation_a<> const& operation)
+	{
+#ifdef STRANGE_CHECK_STATIC_CASTS
+		if (operation.type_() != type_())
+		{
+			throw dis(_token.report() + "strange::abstraction::assign passed non-abstraction operation");
+		}
+#endif
+		auto const& other = static_cast<abstraction_t<> const&>(operation.extract_thing());
+		_dimension_kinds = other._dimension_kinds;
+		_dimension_defaults = other._dimension_defaults;
+		_parent_expressions = other._parent_expressions;
+	}
+
 protected:
 	token_a<> const _token;
 	flock_a<> const _names;
-	flock_a<> const _dimension_kinds;
-	flock_a<> const _dimension_defaults;
-	flock_a<> const _parent_expressions;
+	flock_a<> _dimension_kinds;
+	flock_a<> _dimension_defaults;
+	flock_a<> _parent_expressions;
 
 	inline abstraction_t(token_a<> const& token, flock_a<> const& names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
 		: operation_t(false, names) //TODO pure

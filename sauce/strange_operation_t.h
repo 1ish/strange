@@ -27,6 +27,9 @@ public:
 	static inline void aspects(unordered_shoal_a<> const&)
 	{}
 
+	static inline void assign(operation_a<> const&)
+	{}
+
 	inline any_a<> names__(range_a<> const&) const
 	{
 		return names_();

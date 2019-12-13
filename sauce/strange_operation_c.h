@@ -138,6 +138,9 @@ public:
 	static inline void aspects(unordered_shoal_a<> const&)
 	{}
 
+	static inline void assign(operation_a<> const&)
+	{}
+
 	inline any_a<> names__(range_a<> const& range) const
 	{
 		auto const op = _operations.at_string("names");

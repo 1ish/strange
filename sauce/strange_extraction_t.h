@@ -100,11 +100,25 @@ public:
 		_aspects = aspects;
 	}
 
+	inline void assign(operation_a<> const& operation)
+	{
+#ifdef STRANGE_CHECK_STATIC_CASTS
+		if (operation.type_() != type_())
+		{
+			throw dis(_token.report() + "strange::extraction::assign passed non-extraction operation");
+		}
+#endif
+		auto const& other = static_cast<extraction_t<> const&>(operation.extract_thing());
+		_kinds = other._kinds;
+		_defaults = other._defaults;
+		_expression = other._expression;
+	}
+
 protected:
 	token_a<> const _token;
-	flock_a<> const _kinds;
-	flock_a<> const _defaults;
-	expression_a<> const _expression;
+	flock_a<> _kinds;
+	flock_a<> _defaults;
+	expression_a<> _expression;
 	any_a<> _aspects;
 	unordered_shoal_a<> const _shared;
 

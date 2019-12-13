@@ -24,6 +24,7 @@ public:
 	inline bool pure() const;
 
 	inline void aspects(unordered_shoal_a<> const& shoal);
+	inline void assign(operation_a const& operation);
 
 	inline any_a<> names__(range_a<> const& _) const;
 	inline flock_a<> names_() const;
