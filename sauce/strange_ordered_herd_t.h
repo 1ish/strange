@@ -134,13 +134,13 @@ class ordered_herd_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		ordered_herd_a<> _ordered_herd;
+		ordered_herd_a<> const _ordered_herd;
 
 		template <typename F>
 		inline const_iterator_t(ordered_herd_a<> const& ordered_herd, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _ordered_herd(ordered_herd, true)
+			, _ordered_herd{ ordered_herd }
 		{}
 	};
 

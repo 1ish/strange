@@ -16,9 +16,9 @@ class squad_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<_iterator_> create(squad_a<> const& squad, F&& it)
+		static inline random_access_iterator_data_a<_iterator_> create(F&& it)
 		{
-			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(squad, std::forward<F>(it)) } };
+			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -360,13 +360,11 @@ class squad_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		squad_a<> _squad;
 
 		template <typename F>
-		inline iterator_t(squad_a<> const& squad, F&& it)
+		inline iterator_t(F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _squad(squad, true)
 		{}
 	};
 
@@ -708,13 +706,13 @@ class squad_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		squad_a<> _squad;
+		squad_a<> const _squad;
 
 		template <typename F>
 		inline const_iterator_t(squad_a<> const& squad, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _squad(squad, true)
+			, _squad{ squad }
 		{}
 	};
 
@@ -824,7 +822,7 @@ public:
 
 	inline random_access_iterator_a<> begin_()
 	{
-		return iterator_t<std_deque_any::iterator>::create(me_(), _deque.begin());
+		return iterator_t<std_deque_any::iterator>::create(_deque.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -834,7 +832,7 @@ public:
 
 	inline random_access_iterator_a<> end_()
 	{
-		return iterator_t<std_deque_any::iterator>::create(me_(), _deque.end());
+		return iterator_t<std_deque_any::iterator>::create(_deque.end());
 	}
 
 	// collection

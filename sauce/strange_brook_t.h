@@ -16,9 +16,9 @@ class brook_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<_iterator_> create(brook_a<_primitive_> const& brook, F&& it)
+		static inline random_access_iterator_data_a<_iterator_> create(F&& it)
 		{
-			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(brook, std::forward<F>(it)) } };
+			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -366,14 +366,12 @@ class brook_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		brook_a<_primitive_> _brook;
 		number_data_a<_primitive_> mutable _number; // stashing iterator
 
 		template <typename F>
-		inline iterator_t(brook_a<_primitive_> const& brook, F&& it)
+		inline iterator_t(F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _brook(brook, true)
 			, _number{ number_t<_primitive_>::create_() }
 		{}
 	};
@@ -718,14 +716,14 @@ class brook_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		brook_a<_primitive_> _brook;
+		brook_a<_primitive_> const _brook;
 		number_data_a<_primitive_> mutable _number; // stashing iterator
 
 		template <typename F>
 		inline const_iterator_t(brook_a<_primitive_> const& brook, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _brook(brook, true)
+			, _brook{ brook }
 			, _number{ number_t<_primitive_>::create_() }
 		{}
 	};
@@ -810,7 +808,7 @@ public:
 
 	inline random_access_iterator_a<> begin_()
 	{
-		return iterator_t<std_deque_number::iterator>::create(me_(), _deque.begin());
+		return iterator_t<std_deque_number::iterator>::create(_deque.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -820,7 +818,7 @@ public:
 
 	inline random_access_iterator_a<> end_()
 	{
-		return iterator_t<std_deque_number::iterator>::create(me_(), _deque.end());
+		return iterator_t<std_deque_number::iterator>::create(_deque.end());
 	}
 
 	// collection

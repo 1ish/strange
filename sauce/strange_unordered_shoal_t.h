@@ -16,9 +16,9 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline forward_iterator_data_a<_iterator_> create(unordered_shoal_a<> const& unordered_shoal, F&& it)
+		static inline forward_iterator_data_a<_iterator_> create(F&& it)
 		{
-			return forward_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(unordered_shoal, std::forward<F>(it)) } };
+			return forward_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -130,14 +130,12 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		unordered_shoal_a<> _unordered_shoal;
 		flock_a<> mutable _pair; // stashing iterator
 
 		template <typename F>
-		inline iterator_t(unordered_shoal_a<> const& unordered_shoal, F&& it)
+		inline iterator_t(F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _unordered_shoal(unordered_shoal, true)
 			, _pair{ flock_t<>::create_() }
 		{}
 	};
@@ -248,14 +246,14 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		unordered_shoal_a<> _unordered_shoal;
+		unordered_shoal_a<> const _unordered_shoal;
 		flock_a<> mutable _pair; // stashing iterator
 
 		template <typename F>
 		inline const_iterator_t(unordered_shoal_a<> const& unordered_shoal, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _unordered_shoal(unordered_shoal, true)
+			, _unordered_shoal{ unordered_shoal }
 			, _pair{ flock_t<>::create_() }
 		{}
 	};
@@ -375,7 +373,7 @@ public:
 
 	inline forward_iterator_a<> begin_()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::create(me_(), _map.begin());
+		return iterator_t<std_unordered_map_any_any::iterator>::create(_map.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -385,7 +383,7 @@ public:
 
 	inline forward_iterator_a<> end_()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::create(me_(), _map.end());
+		return iterator_t<std_unordered_map_any_any::iterator>::create(_map.end());
 	}
 
 	// collection
