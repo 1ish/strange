@@ -159,8 +159,12 @@ public:
 		river.write_string(")\n");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const //TODO
 	{
+		if (type)
+		{
+			throw dis(_token.report() + "strange::expression_abstraction::generate_cpp called for wrong type of expression");
+		}
 		river.write_string(" [](");
 		auto nit = _dimension_names.extract().cbegin();
 		auto kit = _dimension_kinds.extract().cbegin();

@@ -67,8 +67,12 @@ public:
 		river.write_string("] ");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const
 	{
+		if (type)
+		{
+			throw dis(_token.report() + "strange::expression_throw::generate_cpp called for wrong type of expression");
+		}
 		river.write_string(" throw(");
 		_exception.generate_cpp(version, indent, river);
 		river.write_string("); ");

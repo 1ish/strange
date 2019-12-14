@@ -302,79 +302,22 @@ public:
 		return river;
 	}
 
-	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
+	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& type = no()) const
 	{
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), flock_t<>::create_(version, indent, river));
+			return op.operate(any_a<>(me_(), true), flock_t<>::create_(version, indent, river, type));
 		}
 		return river;
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const
 	{
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			op.operate(any_a<>(me_(), true), flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river));
-		}
-	}
-
-	inline any_a<> generate_cpp_type__(range_a<> const& range) const
-	{
-		auto const op = _operations.at_string("generate_cpp_type");
-		if (op)
-		{
-			return op.operate(any_a<>(me_(), true), range);
-		}
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			throw dis("<strange::expression>::generate_cpp_type passed empty range");
-		}
-		any_a<> version = *it;
-		if (!check<number_data_a<int64_t>>(version))
-		{
-			throw dis("<strange::expression>::generate_cpp_type passed non-int-64 version");
-		}
-		if (++it == range.cend_())
-		{
-			throw dis("<strange::expression>::generate_cpp_type passed short range");
-		}
-		any_a<> indent = *it;
-		if (!check<number_data_a<int64_t>>(indent))
-		{
-			throw dis("<strange::expression>::generate_cpp_type passed non-int-64 indent");
-		}
-		if (++it == range.cend_())
-		{
-			throw dis("<strange::expression>::generate_cpp_type passed short range");
-		}
-		any_a<> river = *it;
-		if (!check<river_a<>>(river))
-		{
-			throw dis("<strange::expression>::generate_cpp_type passed non-river");
-		}
-		return river;
-	}
-
-	inline any_a<> generate_cpp_type_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
-	{
-		auto const op = _operations.at_string("generate_cpp_type");
-		if (op)
-		{
-			return op.operate(any_a<>(me_(), true), flock_t<>::create_(version, indent, river));
-		}
-		return river;
-	}
-
-	inline void generate_cpp_type(int64_t version, int64_t indent, river_a<>& river) const
-	{
-		auto const op = _operations.at_string("generate_cpp_type");
-		if (op)
-		{
-			op.operate(any_a<>(me_(), true), flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river));
+			op.operate(any_a<>(me_(), true), flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river, boole(type)));
 		}
 	}
 

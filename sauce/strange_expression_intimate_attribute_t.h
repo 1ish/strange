@@ -108,8 +108,12 @@ public:
 		_expression.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const //TODO
 	{
+		if (type)
+		{
+			throw dis(_token.report() + "strange::expression_intimate_attribute::generate_cpp called for wrong type of expression");
+		}
 		river.write_string("." + _member.to_string());
 		_expression.generate_cpp(version, indent, river);
 	}

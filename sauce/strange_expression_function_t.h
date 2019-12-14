@@ -132,8 +132,12 @@ public:
 		_expression.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const
 	{
+		if (type)
+		{
+			throw dis(_token.report() + "strange::expression_function::generate_cpp called for wrong type of expression");
+		}
 		river.write_string(" [](");
 		auto nit = _names.extract().cbegin();
 		auto kit = _kinds.extract().cbegin();
