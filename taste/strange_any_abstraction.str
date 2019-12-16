@@ -9,7 +9,12 @@ false &&
 					mutate_thing : "one_t& mutate_thing()",
 
 					// reflection
+					type__ :# (range :<range>#, <>),
 					type_ :# (<symbol>),
+
+					shared__ :# (range :<range>#, <>),
+					shared_ :# (<unordered_shoal>),
+					shared : "void share(shoal_a& shoal) const",
 				}
 			)
 		)
