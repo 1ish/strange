@@ -91,7 +91,9 @@ class brook_t : public thing_t<___ego___>
 			{
 				number = number_reference_t<_primitive_>::create(primitive);
 			}
-			return number; //TODO assigning to this reference won't change the collection
+			// assigning to this reference won't change the collection
+			// assigning from this reference will create a shared non-const reference
+			return number;
 		}
 
 		inline ___ego___ increment__(range_a<> const&)
@@ -446,6 +448,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				number = number_reference_t<_primitive_>::create(primitive);
 			}
+			// assigning from this reference will create a shared non-const reference
 			return number;
 		}
 
