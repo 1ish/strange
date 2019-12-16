@@ -42,7 +42,7 @@ public:
 
 	inline std::size_t hash() const
 	{
-		return _thing.hash();
+		return no().hash();
 	}
 
 	// forward iterator
@@ -53,7 +53,7 @@ public:
 	
 	inline any_a<> get_() const
 	{
-		return _thing;
+		return no();
 	}
 
 	inline any_a<> const* operator->() const
@@ -63,7 +63,8 @@ public:
 
 	inline any_a<> const& operator*() const
 	{
-		return _thing;
+		static any_a<> NO = no();
+		return NO;
 	}
 
 	inline ___ego___ increment__(range_a<> const&)
@@ -87,11 +88,8 @@ public:
 	}
 
 protected:
-	any_a<> const _thing; // stashing iterator
-
 	inline it_t()
 		: thing_t{}
-		, _thing{ no() }
 	{}
 
 private:
