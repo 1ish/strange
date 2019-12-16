@@ -54,7 +54,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			return operator*();
+			return number_t<_primitive_>::create(*_it);
 		}
 
 		inline any_a<> set__(range_a<> const& range) const
@@ -429,7 +429,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			return operator*();
+			return number_t<_primitive_>::create(*_it);
 		}
 
 		inline any_a<> const* operator->() const
