@@ -16,9 +16,9 @@ class brook_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<_iterator_> create(F&& it)
+		static inline random_access_iterator_data_a<_iterator_> create(brook_t const& brook_thing, F&& it)
 		{
-			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(std::forward<F>(it)) } };
+			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(brook_thing, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -54,7 +54,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			return number_t<_primitive_>::create(*_it);
+			return operator*();
 		}
 
 		inline any_a<> set__(range_a<> const& range) const
@@ -79,13 +79,19 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<>* operator->() const
 		{
-			_number = number_reference_t<_primitive_>::create(*_it);
-			return &_number;
+			return &operator*();
 		}
 
 		inline any_a<>& operator*() const
 		{
-			throw dis("strange::brook::iterator should not be dereferenced directly");
+			_brook_thing._shadow.resize(_brook_thing._deque.size());
+			auto& number = _brook_thing._shadow[_it - _brook_thing._deque.cbegin()];
+			auto& primitive = *_it;
+			if (!cast<any_a<>>(number) || &number.extract() != &primitive)
+			{
+				number = number_reference_t<_primitive_>::create(primitive);
+			}
+			return number; //TODO assigning to this reference won't change the collection
 		}
 
 		inline ___ego___ increment__(range_a<> const&)
@@ -366,13 +372,13 @@ class brook_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		number_data_a<_primitive_> mutable _number; // stashing iterator
+		brook_t const& _brook_thing;
 
 		template <typename F>
-		inline iterator_t(F&& it)
+		inline iterator_t(brook_t const& brook_thing, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _number{ number_t<_primitive_>::create_() }
+			, _brook_thing{ brook_thing }
 		{}
 	};
 
@@ -813,7 +819,7 @@ public:
 
 	inline random_access_iterator_a<> begin_()
 	{
-		return iterator_t<std_deque_number::iterator>::create(_deque.begin());
+		return iterator_t<std_deque_number::iterator>::create(*this, _deque.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -823,7 +829,7 @@ public:
 
 	inline random_access_iterator_a<> end_()
 	{
-		return iterator_t<std_deque_number::iterator>::create(_deque.end());
+		return iterator_t<std_deque_number::iterator>::create(*this, _deque.end());
 	}
 
 	// collection
