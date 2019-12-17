@@ -139,7 +139,7 @@ public:
 		// catch(name :<kind>= expression)
 		river.write_string(" catch(");
 		bool first = true;
-		for (auto const& term : _terms)
+		for (auto const& term : _terms.extract())
 		{
 			if (first)
 			{
@@ -165,7 +165,7 @@ public:
 		river.write_string("\n}\n");
 		forward_const_iterator_a<> kit = _kinds.cbegin_();
 		forward_const_iterator_a<> eit = _expressions.cbegin_();
-		for (auto const& name : _names)
+		for (auto const& name : _names.extract())
 		{
 			river.write_string("catch(" + cast<kind_a<>>(*kit++).name_().to_string() + "_a<> const& exception)\n{\n");
 			cast<expression_a<>>(*eit++).generate_cpp(version, indent, river);

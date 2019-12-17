@@ -44,7 +44,7 @@ public:
 	{
 		// (thing[x,y,z])
 		int64_t count = 0;
-		for (auto const& term : _terms)
+		for (auto const& term : _terms.extract())
 		{
 			if (count == 0)
 			{
@@ -86,7 +86,7 @@ public:
 			throw dis(_token.report() + "strange::expression_operate::generate_cpp called for wrong type of expression");
 		}
 		int64_t count = 0;
-		for (auto const& term : _terms)
+		for (auto const& term : _terms.extract())
 		{
 			if (count == 1)
 			{

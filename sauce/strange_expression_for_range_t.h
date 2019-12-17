@@ -79,12 +79,12 @@ public:
 		any_a<> result = no();
 		try
 		{
-			auto for_range = _range.operate(thing, range);
+			auto const for_range = _range.operate(thing, range);
 			if (!check<range_a<>>(for_range))
 			{
 				throw dis(_token.report() + "strange::expression_for_range::operate expression returned non-range");
 			}
-			for (auto const& for_thing : cast<range_a<>>(for_range))
+			for (auto const& for_thing : cast<range_a<> const>(for_range))
 			{
 				if (!for_thing.kinds_().has_(_kind))
 				{
@@ -115,7 +115,7 @@ public:
 	{
 		river.write_string(" for_range_(");
 		bool first = true;
-		for (auto const& term : _terms)
+		for (auto const& term : _terms.extract())
 		{
 			if (first)
 			{

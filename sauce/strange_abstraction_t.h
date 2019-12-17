@@ -124,7 +124,7 @@ public:
 			local.emplace(name, argument);
 		}
 		auto child = unordered_shoal_t<>::create_();
-		for (auto const& expression : _parent_expressions)
+		for (auto const& expression : _parent_expressions.extract())
 		{
 			any_a<> parent;
 			try

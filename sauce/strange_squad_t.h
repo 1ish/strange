@@ -1036,7 +1036,7 @@ public:
 			}
 			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& thing : cast<range_a<>>(range))
+			for (auto const& thing : cast<range_a<> const>(range))
 			{
 				_deque.push_back(thing);
 			}
@@ -1059,7 +1059,7 @@ public:
 			}
 			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& thing : cast<range_a<>>(range))
+			for (auto const& thing : cast<range_a<> const>(range))
 			{
 				if (_deque.empty())
 				{

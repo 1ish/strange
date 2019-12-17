@@ -52,7 +52,7 @@ public:
 		// (x,y,z)
 		river.write_string(" (");
 		bool first = true;
-		for (auto const& term : _terms)
+		for (auto const& term : _terms.extract())
 		{
 			if (first)
 			{
@@ -79,7 +79,7 @@ public:
 		}
 		river.write_string(" (");
 		bool first = true;
-		for (auto const& term : _terms)
+		for (auto const& term : _terms.extract())
 		{
 			if (first)
 			{

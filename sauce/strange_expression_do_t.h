@@ -79,7 +79,7 @@ public:
 		// do(x,y,z)
 		river.write_string(" do(");
 		bool first = true;
-		for (auto const& term : _terms)
+		for (auto const& term : _terms.extract())
 		{
 			if (first)
 			{

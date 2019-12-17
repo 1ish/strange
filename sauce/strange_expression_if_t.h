@@ -76,7 +76,7 @@ public:
 	{
 		river.write_string(" if_(");
 		bool first = true;
-		for (auto const& term : _terms)
+		for (auto const& term : _terms.extract())
 		{
 			if (first)
 			{
