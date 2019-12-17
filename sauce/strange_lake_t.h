@@ -366,7 +366,7 @@ class lake_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		number_data_a<_primitive_> mutable _number; // stashing iterator
+		number_data_a<_primitive_> mutable _number; //TODO stashing iterator
 
 		template <typename F>
 		inline iterator_t(F&& it)
@@ -717,7 +717,7 @@ class lake_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		lake_a<_primitive_> const _lake;
-		number_data_a<_primitive_> mutable _number; // stashing iterator
+		number_data_a<_primitive_> mutable _number; //TODO stashing iterator
 
 		template <typename F>
 		inline const_iterator_t(lake_a<_primitive_> const& lake, F&& it)
