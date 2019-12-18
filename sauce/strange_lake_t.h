@@ -16,9 +16,9 @@ class lake_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<_iterator_> create(F&& it)
+		static inline random_access_iterator_data_a<_iterator_> create(lake_t const& lake_thing, F&& it)
 		{
-			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(std::forward<F>(it)) } };
+			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(lake_thing, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -79,13 +79,21 @@ class lake_t : public thing_t<___ego___>
 
 		inline any_a<>* operator->() const
 		{
-			_number = number_reference_t<_primitive_>::create(*_it);
-			return &_number;
+			return &operator*();
 		}
 
 		inline any_a<>& operator*() const
 		{
-			throw dis("strange::lake::iterator should not be dereferenced directly");
+			_lake_thing._shadow.resize(_lake_thing._vector.size());
+			auto& number = _lake_thing._shadow[_it - _lake_thing._vector.begin()];
+			auto& primitive = *_it;
+			if (!cast<any_a<>>(number) || &number.extract() != &primitive)
+			{
+				number = number_reference_t<_primitive_>::create(primitive);
+			}
+			// assigning to this reference won't change the collection
+			// assigning from this reference will create a shared non-const reference
+			return number;
 		}
 
 		inline ___ego___ increment__(range_a<> const&)
@@ -366,13 +374,13 @@ class lake_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		number_data_a<_primitive_> mutable _number; //TODO stashing iterator
+		lake_t const& _lake_thing;
 
 		template <typename F>
-		inline iterator_t(F&& it)
+		inline iterator_t(lake_t const& lake_thing, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _number{ number_t<_primitive_>::create_() }
+			, _lake_thing{ lake_thing }
 		{}
 	};
 
@@ -385,9 +393,9 @@ class lake_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_const_iterator_data_a<_iterator_> create(lake_a<_primitive_> const& lake, F&& it)
+		static inline random_access_const_iterator_data_a<_iterator_> create(lake_a<_primitive_> const& lake, lake_t const& lake_thing, F&& it)
 		{
-			return random_access_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(lake, std::forward<F>(it)) } };
+			return random_access_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(lake, lake_thing, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -423,8 +431,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			_number = number_t<_primitive_>::create(*_it);
-			return _number;
+			return number_t<_primitive_>::create(*_it);
 		}
 
 		inline any_a<> const* operator->() const
@@ -434,8 +441,15 @@ class lake_t : public thing_t<___ego___>
 
 		inline any_a<> const& operator*() const
 		{
-			_number = number_t<_primitive_>::create(*_it);
-			return _number;
+			_lake_thing._shadow.resize(_lake_thing._vector.size());
+			auto& number = _lake_thing._shadow[_it - _lake_thing._vector.cbegin()];
+			auto& primitive = const_cast<_primitive_&>(*_it);
+			if (!cast<any_a<>>(number) || &number.extract() != &primitive)
+			{
+				number = number_reference_t<_primitive_>::create(primitive);
+			}
+			// assigning from this reference will create a shared non-const reference
+			return number;
 		}
 
 		inline ___ego___ increment__(range_a<> const&)
@@ -717,14 +731,14 @@ class lake_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		lake_a<_primitive_> const _lake;
-		number_data_a<_primitive_> mutable _number; //TODO stashing iterator
+		lake_t const& _lake_thing;
 
 		template <typename F>
-		inline const_iterator_t(lake_a<_primitive_> const& lake, F&& it)
+		inline const_iterator_t(lake_a<_primitive_> const& lake, lake_t const& lake_thing, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _lake{ lake }
-			, _number{ number_t<_primitive_>::create_() }
+			, _lake_thing{ lake_thing }
 		{}
 	};
 
@@ -793,12 +807,12 @@ public:
 	// range
 	inline random_access_const_iterator_a<> cbegin_() const
 	{
-		return const_iterator_t<std_vector_number::const_iterator>::create(me_(), _vector.cbegin());
+		return const_iterator_t<std_vector_number::const_iterator>::create(me_(), *this, _vector.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_vector_number::const_iterator>::create(me_(), _vector.cend());
+		return const_iterator_t<std_vector_number::const_iterator>::create(me_(), *this, _vector.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -808,7 +822,7 @@ public:
 
 	inline random_access_iterator_a<> begin_()
 	{
-		return iterator_t<std_vector_number::iterator>::create(_vector.begin());
+		return iterator_t<std_vector_number::iterator>::create(*this, _vector.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -818,7 +832,7 @@ public:
 
 	inline random_access_iterator_a<> end_()
 	{
-		return iterator_t<std_vector_number::iterator>::create(_vector.end());
+		return iterator_t<std_vector_number::iterator>::create(*this, _vector.end());
 	}
 
 	// collection
@@ -1129,11 +1143,13 @@ public:
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
 	std_vector_number _vector;
+	std::vector<number_data_a<_primitive_>> mutable _shadow;
 
 	template <typename F>
 	inline lake_t(F&& init)
 		: thing_t{}
 		, _vector{ std::forward<F>(init) }
+		, _shadow{}
 	{}
 
 public:

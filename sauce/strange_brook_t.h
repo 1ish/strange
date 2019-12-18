@@ -85,7 +85,7 @@ class brook_t : public thing_t<___ego___>
 		inline any_a<>& operator*() const
 		{
 			_brook_thing._shadow.resize(_brook_thing._deque.size());
-			auto& number = _brook_thing._shadow[_it - _brook_thing._deque.cbegin()];
+			auto& number = _brook_thing._shadow[_it - _brook_thing._deque.begin()];
 			auto& primitive = *_it;
 			if (!cast<any_a<>>(number) || &number.extract() != &primitive)
 			{
@@ -1158,7 +1158,7 @@ public:
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
 	std_deque_number _deque;
-	std::deque<number_data_a<_primitive_>> mutable _shadow;
+	std::vector<number_data_a<_primitive_>> mutable _shadow;
 
 	template <typename F>
 	inline brook_t(F&& init)
