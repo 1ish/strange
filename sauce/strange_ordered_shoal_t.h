@@ -54,6 +54,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
+			//TODO concurrent
 			_pair.update_index(0, _it->first);
 			_pair.update_index(1, _it->second);
 			return _pair;

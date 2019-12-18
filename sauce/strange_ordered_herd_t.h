@@ -54,6 +54,7 @@ class ordered_herd_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
+			//TODO concurrent
 			return *_it;
 		}
 

@@ -43,6 +43,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
@@ -54,6 +55,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			return number_t<_primitive_>::create(*_it);
 		}
 
@@ -73,6 +75,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator set passed non-number");
 			}
+			typename concurrent_u<_concurrent_>::write_lock lock(_brook_thing._mutex);
 			*_it = number_u<_primitive_>::from_number(cast<number_a<>>(thing));
 			return thing;
 		}
@@ -84,6 +87,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<>& operator*() const
 		{
+			typename concurrent_u<_concurrent_>::write_lock lock(_brook_thing._mutex);
 			_brook_thing._shadow.resize(_brook_thing._deque.size());
 			auto& number = _brook_thing._shadow[_it - _brook_thing._deque.begin()];
 			auto& primitive = *_it;
@@ -109,6 +113,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline iterator_t& operator++()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			++_it;
 			return *this;
 		}
@@ -134,6 +139,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline iterator_t& operator--()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			--_it;
 			return *this;
 		}
@@ -157,6 +163,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline ___ego___ self_add_(number_a<> const& number)
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			_it += number.to_int_64();
 			return me_();
 		}
@@ -167,6 +174,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator += passed non-number");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			_it += cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
@@ -204,6 +212,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline ___ego___ self_subtract_(number_a<> const& number)
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			_it -= number.to_int_64();
 			return me_();
 		}
@@ -214,6 +223,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator -= passed non-number");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			_it -= cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
@@ -252,6 +262,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator::less_than passed incompatible thing");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			return boole(_it < cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
 		}
 
@@ -266,6 +277,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator < passed incompatible thing");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			return _it < cast<random_access_iterator_data_a<_iterator_>>(it).extract();
 		}
 
@@ -281,6 +293,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator::greater_than passed incompatible thing");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			return boole(_it > cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
 		}
 
@@ -295,6 +308,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator > passed incompatible thing");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			return _it > cast<random_access_iterator_data_a<_iterator_>>(it).extract();
 		}
 
@@ -310,6 +324,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator::less_or_equal passed incompatible thing");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			return boole(_it <= cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
 		}
 
@@ -324,6 +339,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator <= passed incompatible thing");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			return _it <= cast<random_access_iterator_data_a<_iterator_>>(it).extract();
 		}
 
@@ -339,6 +355,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator::greater_or_equal passed incompatible thing");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			return boole(_it >= cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
 		}
 
@@ -353,6 +370,7 @@ class brook_t : public thing_t<___ego___>
 			{
 				throw dis("strange::brook::iterator >= passed incompatible thing");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			return _it >= cast<random_access_iterator_data_a<_iterator_>>(it).extract();
 		}
 
@@ -431,6 +449,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			return number_t<_primitive_>::create(*_it);
 		}
 
@@ -441,6 +460,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<> const& operator*() const
 		{
+			typename concurrent_u<_concurrent_>::write_lock lock(_brook_thing._mutex);
 			_brook_thing._shadow.resize(_brook_thing._deque.size());
 			auto& number = _brook_thing._shadow[_it - _brook_thing._deque.cbegin()];
 			auto& primitive = const_cast<_primitive_&>(*_it);
@@ -807,11 +827,13 @@ public:
 	// range
 	inline random_access_const_iterator_a<> cbegin_() const
 	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return const_iterator_t<std_deque_number::const_iterator>::create(me_(), *this, _deque.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> cend_() const
 	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return const_iterator_t<std_deque_number::const_iterator>::create(me_(), *this, _deque.cend());
 	}
 
@@ -822,6 +844,7 @@ public:
 
 	inline random_access_iterator_a<> begin_()
 	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return iterator_t<std_deque_number::iterator>::create(*this, _deque.begin());
 	}
 
@@ -832,6 +855,7 @@ public:
 
 	inline random_access_iterator_a<> end_()
 	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return iterator_t<std_deque_number::iterator>::create(*this, _deque.end());
 	}
 
