@@ -156,7 +156,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		flock_a<> mutable _pair; //TODO stashing iterator
+		flock_a<> mutable _pair; // stashing iterator
 
 		template <typename F>
 		inline iterator_t(F&& it)
@@ -298,7 +298,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		ordered_shoal_a<> const _ordered_shoal;
-		flock_a<> mutable _pair; //TODO stashing iterator
+		flock_a<> mutable _pair; // stashing iterator
 
 		template <typename F>
 		inline const_iterator_t(ordered_shoal_a<> const& ordered_shoal, F&& it)

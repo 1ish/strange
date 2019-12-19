@@ -197,6 +197,7 @@ class lake_t : public thing_t<___ego___>
 		inline random_access_iterator_a<> operator+(number_a<> const& number) const
 		{
 			___ego___ result = me_();
+			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			result.reference() += number.to_int_64();
 			return result;
 		}
@@ -246,6 +247,7 @@ class lake_t : public thing_t<___ego___>
 		inline random_access_iterator_a<> operator-(number_a<> const& number) const
 		{
 			___ego___ result = me_();
+			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			result.reference() -= number.to_int_64();
 			return result;
 		}
@@ -262,7 +264,6 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator::less_than passed incompatible thing");
 			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			return boole(_it < cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
 		}
 
@@ -277,7 +278,6 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator < passed incompatible thing");
 			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			return _it < cast<random_access_iterator_data_a<_iterator_>>(it).extract();
 		}
 
@@ -293,7 +293,6 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator::greater_than passed incompatible thing");
 			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			return boole(_it > cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
 		}
 
@@ -308,7 +307,6 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator > passed incompatible thing");
 			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			return _it > cast<random_access_iterator_data_a<_iterator_>>(it).extract();
 		}
 
@@ -324,7 +322,6 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator::less_or_equal passed incompatible thing");
 			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			return boole(_it <= cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
 		}
 
@@ -339,7 +336,6 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator <= passed incompatible thing");
 			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			return _it <= cast<random_access_iterator_data_a<_iterator_>>(it).extract();
 		}
 
@@ -355,7 +351,6 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator::greater_or_equal passed incompatible thing");
 			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			return boole(_it >= cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
 		}
 
@@ -370,7 +365,6 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator >= passed incompatible thing");
 			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			return _it >= cast<random_access_iterator_data_a<_iterator_>>(it).extract();
 		}
 
@@ -438,6 +432,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
@@ -485,6 +480,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline const_iterator_t& operator++()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			++_it;
 			return *this;
 		}
@@ -510,6 +506,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline const_iterator_t& operator--()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			--_it;
 			return *this;
 		}
@@ -533,6 +530,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline ___ego___ self_add_(number_a<> const& number)
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			_it += number.to_int_64();
 			return me_();
 		}
@@ -543,6 +541,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::const_iterator += passed non-number");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			_it += cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
@@ -565,6 +564,7 @@ class lake_t : public thing_t<___ego___>
 		inline random_access_const_iterator_a<> operator+(number_a<> const& number) const
 		{
 			___ego___ result = me_();
+			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			result.reference() += number.to_int_64();
 			return result;
 		}
@@ -580,6 +580,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline ___ego___ self_subtract_(number_a<> const& number)
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			_it -= number.to_int_64();
 			return me_();
 		}
@@ -590,6 +591,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::const_iterator -= passed non-number");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			_it -= cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
@@ -612,6 +614,7 @@ class lake_t : public thing_t<___ego___>
 		inline random_access_const_iterator_a<> operator-(number_a<> const& number) const
 		{
 			___ego___ result = me_();
+			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			result.reference() -= number.to_int_64();
 			return result;
 		}
