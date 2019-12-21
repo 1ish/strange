@@ -16,9 +16,9 @@ class unordered_herd_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<_iterator_> create(unordered_herd_a<> const& unordered_herd, F&& it)
+		static inline forward_const_iterator_data_a<_iterator_> create(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
 		{
-			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(unordered_herd, std::forward<F>(it)) } };
+			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(unordered_herd, unordered_herd_thing, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -43,6 +43,7 @@ class unordered_herd_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_herd_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
@@ -54,7 +55,7 @@ class unordered_herd_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			//TODO concurrent
+			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_herd_thing._mutex);
 			return *_it;
 		}
 
@@ -81,6 +82,7 @@ class unordered_herd_t : public thing_t<___ego___>
 
 		inline const_iterator_t& operator++()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_herd_thing._mutex);
 			++_it;
 			return *this;
 		}
@@ -111,12 +113,14 @@ class unordered_herd_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		unordered_herd_a<> const _unordered_herd;
+		unordered_herd_t const& _unordered_herd_thing;
 
 		template <typename F>
-		inline const_iterator_t(unordered_herd_a<> const& unordered_herd, F&& it)
+		inline const_iterator_t(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _unordered_herd{ unordered_herd }
+			, _unordered_herd_thing{ unordered_herd_thing }
 		{}
 	};
 
@@ -212,12 +216,14 @@ public:
 	// range
 	inline forward_const_iterator_a<> cbegin_() const
 	{
-		return const_iterator_t<std_unordered_set_any::const_iterator>::create(me_(), _set.cbegin());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return const_iterator_t<std_unordered_set_any::const_iterator>::create(me_(), *this, _set.cbegin());
 	}
 
 	inline forward_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_unordered_set_any::const_iterator>::create(me_(), _set.cend());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return const_iterator_t<std_unordered_set_any::const_iterator>::create(me_(), *this, _set.cend());
 	}
 
 	// collection
