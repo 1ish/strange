@@ -16,9 +16,9 @@ class ordered_herd_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline bidirectional_const_iterator_data_a<_iterator_> create(ordered_herd_a<> const& ordered_herd, F&& it)
+		static inline bidirectional_const_iterator_data_a<_iterator_> create(ordered_herd_a<> const& ordered_herd, ordered_herd_t const& ordered_herd_thing, F&& it)
 		{
-			return bidirectional_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(ordered_herd, std::forward<F>(it)) } };
+			return bidirectional_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(ordered_herd, ordered_herd_thing, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -43,6 +43,7 @@ class ordered_herd_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_herd_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
@@ -54,7 +55,7 @@ class ordered_herd_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			//TODO concurrent
+			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_herd_thing._mutex);
 			return *_it;
 		}
 
@@ -81,6 +82,7 @@ class ordered_herd_t : public thing_t<___ego___>
 
 		inline const_iterator_t& operator++()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_herd_thing._mutex);
 			++_it;
 			return *this;
 		}
@@ -106,6 +108,7 @@ class ordered_herd_t : public thing_t<___ego___>
 
 		inline const_iterator_t& operator--()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_herd_thing._mutex);
 			--_it;
 			return *this;
 		}
@@ -136,12 +139,14 @@ class ordered_herd_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		ordered_herd_a<> const _ordered_herd;
+		ordered_herd_t const& _ordered_herd_thing;
 
 		template <typename F>
-		inline const_iterator_t(ordered_herd_a<> const& ordered_herd, F&& it)
+		inline const_iterator_t(ordered_herd_a<> const& ordered_herd, ordered_herd_t const& ordered_herd_thing, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _ordered_herd{ ordered_herd }
+			, _ordered_herd_thing{ ordered_herd_thing }
 		{}
 	};
 
@@ -236,12 +241,14 @@ public:
 	// range
 	inline bidirectional_const_iterator_a<> cbegin_() const
 	{
-		return const_iterator_t<std_set_any::const_iterator>::create(me_(), _set.cbegin());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return const_iterator_t<std_set_any::const_iterator>::create(me_(), *this, _set.cbegin());
 	}
 
 	inline bidirectional_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_set_any::const_iterator>::create(me_(), _set.cend());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return const_iterator_t<std_set_any::const_iterator>::create(me_(), *this, _set.cend());
 	}
 
 	// collection / herd
