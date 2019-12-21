@@ -16,9 +16,9 @@ class squad_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<_iterator_> create(F&& it)
+		static inline random_access_iterator_data_a<_iterator_> create(squad_t const& squad_thing, F&& it)
 		{
-			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(std::forward<F>(it)) } };
+			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(squad_thing, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -43,6 +43,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
@@ -54,7 +55,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			//TODO concurrent
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			return *_it;
 		}
 
@@ -70,6 +71,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline any_a<> set_(any_a<> const& thing) const
 		{
+			typename concurrent_u<_concurrent_>::write_lock lock(_squad_thing._mutex);
 			return operator*() = thing;
 		}
 
@@ -96,6 +98,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline iterator_t& operator++()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			++_it;
 			return *this;
 		}
@@ -121,6 +124,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline iterator_t& operator--()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			--_it;
 			return *this;
 		}
@@ -144,6 +148,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline ___ego___ self_add_(number_a<> const& number)
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it += number.to_int_64();
 			return me_();
 		}
@@ -154,6 +159,7 @@ class squad_t : public thing_t<___ego___>
 			{
 				throw dis("strange::squad::iterator += passed non-number");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it += cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
@@ -176,6 +182,7 @@ class squad_t : public thing_t<___ego___>
 		inline random_access_iterator_a<> operator+(number_a<> const& number) const
 		{
 			___ego___ result = me_();
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.reference() += number.to_int_64();
 			return result;
 		}
@@ -191,6 +198,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline ___ego___ self_subtract_(number_a<> const& number)
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it -= number.to_int_64();
 			return me_();
 		}
@@ -201,6 +209,7 @@ class squad_t : public thing_t<___ego___>
 			{
 				throw dis("strange::squad::iterator -= passed non-number");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it -= cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
@@ -223,6 +232,7 @@ class squad_t : public thing_t<___ego___>
 		inline random_access_iterator_a<> operator-(number_a<> const& number) const
 		{
 			___ego___ result = me_();
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.reference() -= number.to_int_64();
 			return result;
 		}
@@ -361,11 +371,13 @@ class squad_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
+		squad_t const& _squad_thing;
 
 		template <typename F>
-		inline iterator_t(F&& it)
+		inline iterator_t(squad_t const& squad_thing, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
+			, _squad_thing{ squad_thing }
 		{}
 	};
 
@@ -378,9 +390,9 @@ class squad_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline random_access_const_iterator_data_a<_iterator_> create(squad_a<> const& squad, F&& it)
+		static inline random_access_const_iterator_data_a<_iterator_> create(squad_a<> const& squad, squad_t const& squad_thing, F&& it)
 		{
-			return random_access_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(squad, std::forward<F>(it)) } };
+			return random_access_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(squad, squad_thing, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -405,6 +417,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
@@ -416,6 +429,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			return *_it;
 		}
 
@@ -442,6 +456,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline const_iterator_t& operator++()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			++_it;
 			return *this;
 		}
@@ -467,6 +482,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline const_iterator_t& operator--()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			--_it;
 			return *this;
 		}
@@ -490,6 +506,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline ___ego___ self_add_(number_a<> const& number)
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it += number.to_int_64();
 			return me_();
 		}
@@ -500,6 +517,7 @@ class squad_t : public thing_t<___ego___>
 			{
 				throw dis("strange::squad::const_iterator += passed non-number");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it += cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
@@ -522,6 +540,7 @@ class squad_t : public thing_t<___ego___>
 		inline random_access_const_iterator_a<> operator+(number_a<> const& number) const
 		{
 			___ego___ result = me_();
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.reference() += number.to_int_64();
 			return result;
 		}
@@ -537,6 +556,7 @@ class squad_t : public thing_t<___ego___>
 
 		inline ___ego___ self_subtract_(number_a<> const& number)
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it -= number.to_int_64();
 			return me_();
 		}
@@ -547,6 +567,7 @@ class squad_t : public thing_t<___ego___>
 			{
 				throw dis("strange::squad::const_iterator -= passed non-number");
 			}
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it -= cast<number_a<>>(thing).to_int_64();
 			return *this;
 		}
@@ -569,6 +590,7 @@ class squad_t : public thing_t<___ego___>
 		inline random_access_const_iterator_a<> operator-(number_a<> const& number) const
 		{
 			___ego___ result = me_();
+			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.reference() -= number.to_int_64();
 			return result;
 		}
@@ -708,12 +730,14 @@ class squad_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		squad_a<> const _squad;
+		squad_t const& _squad_thing;
 
 		template <typename F>
-		inline const_iterator_t(squad_a<> const& squad, F&& it)
+		inline const_iterator_t(squad_a<> const& squad, squad_t const& squad_thing, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _squad{ squad }
+			, _squad_thing{ squad_thing }
 		{}
 	};
 
@@ -808,12 +832,14 @@ public:
 	// range
 	inline random_access_const_iterator_a<> cbegin_() const
 	{
-		return const_iterator_t<std_deque_any::const_iterator>::create(me_(), _deque.cbegin());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return const_iterator_t<std_deque_any::const_iterator>::create(me_(), *this, _deque.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_deque_any::const_iterator>::create(me_(), _deque.cend());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return const_iterator_t<std_deque_any::const_iterator>::create(me_(), *this, _deque.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -823,7 +849,8 @@ public:
 
 	inline random_access_iterator_a<> begin_()
 	{
-		return iterator_t<std_deque_any::iterator>::create(_deque.begin());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return iterator_t<std_deque_any::iterator>::create(*this, _deque.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -833,7 +860,8 @@ public:
 
 	inline random_access_iterator_a<> end_()
 	{
-		return iterator_t<std_deque_any::iterator>::create(_deque.end());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return iterator_t<std_deque_any::iterator>::create(*this, _deque.end());
 	}
 
 	// collection
