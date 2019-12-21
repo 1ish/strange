@@ -16,9 +16,9 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline forward_iterator_data_a<_iterator_> create(F&& it)
+		static inline forward_iterator_data_a<_iterator_> create(unordered_shoal_t const& unordered_shoal_thing, F&& it)
 		{
-			return forward_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(std::forward<F>(it)) } };
+			return forward_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(unordered_shoal_thing, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -43,6 +43,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
@@ -54,7 +55,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			//TODO concurrent
+			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
 			_pair.update_index(0, _it->first);
 			_pair.update_index(1, _it->second);
 			return _pair;
@@ -76,17 +77,20 @@ class unordered_shoal_t : public thing_t<___ego___>
 			{
 				throw dis("strange::unordered_shoal::iterator set passed non-flock");
 			}
+			typename concurrent_u<_concurrent_>::write_lock lock(_unordered_shoal_thing._mutex);
 			return _it->second = cast<flock_a<>>(thing).at_index(1);
 		}
 
 		inline any_a<>* operator->() const
 		{
-			throw dis("strange::unordered_shoal::iterator should not be dereferenced");
+			return &operator*();
 		}
 
 		inline any_a<>& operator*() const
 		{
-			throw dis("strange::unordered_shoal::iterator should not be dereferenced");
+			_pair.update_index(0, _it->first);
+			_pair.update_index(1, _it->second);
+			return _pair;
 		}
 
 		inline ___ego___ increment__(range_a<> const&)
@@ -102,6 +106,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		inline iterator_t& operator++()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
 			++_it;
 			return *this;
 		}
@@ -132,12 +137,14 @@ class unordered_shoal_t : public thing_t<___ego___>
 	protected:
 		_iterator_ _it;
 		flock_a<> mutable _pair; // stashing iterator
+		unordered_shoal_t const& _unordered_shoal_thing;
 
 		template <typename F>
-		inline iterator_t(F&& it)
+		inline iterator_t(unordered_shoal_t const& unordered_shoal_thing, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _pair{ flock_t<>::create_() }
+			, _unordered_shoal_thing{ unordered_shoal_thing }
 		{}
 	};
 
@@ -150,9 +157,9 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<_iterator_> create(unordered_shoal_a<> const& unordered_shoal, F&& it)
+		static inline forward_const_iterator_data_a<_iterator_> create(unordered_shoal_a<> const& unordered_shoal, unordered_shoal_t const& unordered_shoal_thing, F&& it)
 		{
-			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(unordered_shoal, std::forward<F>(it)) } };
+			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(unordered_shoal, unordered_shoal_thing, std::forward<F>(it)) } };
 		}
 
 		// reflection
@@ -177,6 +184,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		inline std::size_t hash() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
 		}
 
@@ -188,6 +196,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
 			_pair.update_index(0, _it->first);
 			_pair.update_index(1, _it->second);
 			return _pair;
@@ -218,6 +227,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		inline const_iterator_t& operator++()
 		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
 			++_it;
 			return *this;
 		}
@@ -249,13 +259,15 @@ class unordered_shoal_t : public thing_t<___ego___>
 		_iterator_ _it;
 		unordered_shoal_a<> const _unordered_shoal;
 		flock_a<> mutable _pair; // stashing iterator
+		unordered_shoal_t const& _unordered_shoal_thing;
 
 		template <typename F>
-		inline const_iterator_t(unordered_shoal_a<> const& unordered_shoal, F&& it)
+		inline const_iterator_t(unordered_shoal_a<> const& unordered_shoal, unordered_shoal_t const& unordered_shoal_thing, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
 			, _unordered_shoal{ unordered_shoal }
 			, _pair{ flock_t<>::create_() }
+			, _unordered_shoal_thing{ unordered_shoal_thing }
 		{}
 	};
 
@@ -359,12 +371,14 @@ public:
 	// range
 	inline forward_const_iterator_a<> cbegin_() const
 	{
-		return const_iterator_t<std_unordered_map_any_any::const_iterator>::create(me_(), _map.cbegin());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return const_iterator_t<std_unordered_map_any_any::const_iterator>::create(me_(), *this, _map.cbegin());
 	}
 
 	inline forward_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_unordered_map_any_any::const_iterator>::create(me_(), _map.cend());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return const_iterator_t<std_unordered_map_any_any::const_iterator>::create(me_(), *this, _map.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -374,7 +388,8 @@ public:
 
 	inline forward_iterator_a<> begin_()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::create(_map.begin());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return iterator_t<std_unordered_map_any_any::iterator>::create(*this, _map.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -384,7 +399,8 @@ public:
 
 	inline forward_iterator_a<> end_()
 	{
-		return iterator_t<std_unordered_map_any_any::iterator>::create(_map.end());
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return iterator_t<std_unordered_map_any_any::iterator>::create(*this, _map.end());
 	}
 
 	// collection
