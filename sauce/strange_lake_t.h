@@ -87,7 +87,6 @@ class lake_t : public thing_t<___ego___>
 
 		inline any_a<>& operator*() const
 		{
-			typename concurrent_u<_concurrent_>::write_lock lock(_lake_thing._mutex);
 			_lake_thing._shadow.resize(_lake_thing._vector.size());
 			auto& number = _lake_thing._shadow[_it - _lake_thing._vector.begin()];
 			auto& primitive = *_it;
@@ -455,7 +454,6 @@ class lake_t : public thing_t<___ego___>
 
 		inline any_a<> const& operator*() const
 		{
-			typename concurrent_u<_concurrent_>::write_lock lock(_lake_thing._mutex);
 			_lake_thing._shadow.resize(_lake_thing._vector.size());
 			auto& number = _lake_thing._shadow[_it - _lake_thing._vector.cbegin()];
 			auto& primitive = const_cast<_primitive_&>(*_it);

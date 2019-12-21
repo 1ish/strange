@@ -87,7 +87,6 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<>& operator*() const
 		{
-			typename concurrent_u<_concurrent_>::write_lock lock(_brook_thing._mutex);
 			_brook_thing._shadow.resize(_brook_thing._deque.size());
 			auto& number = _brook_thing._shadow[_it - _brook_thing._deque.begin()];
 			auto& primitive = *_it;
@@ -455,7 +454,6 @@ class brook_t : public thing_t<___ego___>
 
 		inline any_a<> const& operator*() const
 		{
-			typename concurrent_u<_concurrent_>::write_lock lock(_brook_thing._mutex);
 			_brook_thing._shadow.resize(_brook_thing._deque.size());
 			auto& number = _brook_thing._shadow[_it - _brook_thing._deque.cbegin()];
 			auto& primitive = const_cast<_primitive_&>(*_it);

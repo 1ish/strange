@@ -82,7 +82,6 @@ class flock_t : public thing_t<___ego___>
 
 		inline any_a<>& operator*() const
 		{
-			typename concurrent_u<_concurrent_>::write_lock lock(_flock_thing._mutex);
 			return *_it;
 		}
 
@@ -441,7 +440,6 @@ class flock_t : public thing_t<___ego___>
 
 		inline any_a<> const& operator*() const
 		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_flock_thing._mutex);
 			return *_it;
 		}
 
