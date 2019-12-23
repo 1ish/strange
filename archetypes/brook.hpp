@@ -15,9 +15,9 @@ class brook_a
 {
 public:
 	// brook
-	inline std::deque<_1_> const& extract() const;
-	inline void mutate(std::deque<_1_> const& data);
-	inline std::deque<_1_>& reference();
+	inline std::deque<_1_> const& extract() const; //TODO change to extract_deque
+	inline void mutate(std::deque<_1_> const& data); //TODO remove
+	inline std::deque<_1_>& reference(); //TODO change to mutate_deque
 };
 
 } // namespace strange

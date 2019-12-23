@@ -1397,7 +1397,7 @@ private:
 						throw dis("strange::parser ternary operator with nothing following it:") + token.report_();
 					}
 					auto const second = _initial(precedence + (right_to_left ? 0 : 1), context);
-					if (!_next() || _token.tag() != "punctuation" || _token.symbol() != ":")
+					if (_token.tag() != "punctuation" || _token.symbol() != ":")
 					{
 						auto const terms = flock_t<>::create_(initial, oper, flock_t<>::create_(second));
 						return _subsequent(min_precedence, expression_invoke_t<>::create_(token, terms), context);
