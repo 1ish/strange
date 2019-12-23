@@ -107,7 +107,8 @@ public:
 			{
 				throw dis(_token.report() + "strange::expression_for_range::operate expression returned non-range");
 			}
-			for (auto const& for_thing : cast<range_a<> const>(for_range)) //TODO mutable range?
+			//TODO concurrent lock
+			for (auto const& for_thing : cast<range_a<> const>(for_range)) //TODO mutable range
 			{
 				if (!for_thing.kinds_().has_(kind))
 				{
