@@ -90,7 +90,7 @@ class brook_t : public thing_t<___ego___>
 			_brook_thing._shadow.resize(_brook_thing._deque.size());
 			auto& number = _brook_thing._shadow[_it - _brook_thing._deque.begin()];
 			auto& primitive = *_it;
-			if (!cast<any_a<>>(number) || &number.extract() != &primitive)
+			if (!check<any_a<>>(number) || &number.extract() != &primitive)
 			{
 				number = number_reference_t<_primitive_>::create(primitive);
 			}
@@ -457,7 +457,7 @@ class brook_t : public thing_t<___ego___>
 			_brook_thing._shadow.resize(_brook_thing._deque.size());
 			auto& number = _brook_thing._shadow[_it - _brook_thing._deque.cbegin()];
 			auto& primitive = const_cast<_primitive_&>(*_it);
-			if (!cast<any_a<>>(number) || &number.extract() != &primitive)
+			if (!check<any_a<>>(number) || &number.extract() != &primitive)
 			{
 				number = number_reference_t<_primitive_>::create(primitive);
 			}

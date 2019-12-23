@@ -19,39 +19,45 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_for_range::create not passed any terms");
 		}
-		any_a<> key = *it;
-		if (!check<symbol_a<>>(key))
+		any_a<> term = *it;
+		if (!check<expression_a<>>(term))
 		{
-			throw dis(token.report() + "strange::expression_for_range::create passed non-symbol key");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-expression term");
 		}
-		if (++it == terms.cend_())
+		if (!term.type_().is("strange::expression_local_insert"))
 		{
-			throw dis(token.report() + "strange::expression_for_range::create not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_for_range::create passed invalid parameter term");
 		}
-		any_a<> kind = *it;
-		if (!check<kind_a<>>(kind))
+		auto const subterms = cast<expression_a<>>(term).terms_();
+		if (subterms.size() != 3)
 		{
-			throw dis(token.report() + "strange::expression_for_range::create passed non-kind");
+			throw dis(token.report() + "strange::expression_for_range::create passed invalid parameter term");
 		}
-		if (++it == terms.cend_())
+		auto const name = subterms.at_index(0);
+		if (!check<symbol_a<>>(name))
 		{
-			throw dis(token.report() + "strange::expression_for_range::create not passed sufficient terms");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-symbol parameter name");
 		}
-		any_a<> range = *it;
+		auto const kind = subterms.at_index(1);
+		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
+		{
+			throw dis(token.report() + "strange::expression_for_range::create passed non-kind/expression parameter kind");
+		}
+		auto const range = subterms.at_index(2);
 		if (!check<expression_a<>>(range))
 		{
-			throw dis(token.report() + "strange::expression_for_range::create passed non-expression range");
+			throw dis(token.report() + "strange::expression_for_range::create passed non-expression parameter default");
 		}
 		if (++it == terms.cend_())
 		{
 			throw dis(token.report() + "strange::expression_for_range::create not passed sufficient terms");
 		}
-		any_a<> loop = *it;
+		auto const loop = *it;
 		if (!check<expression_a<>>(loop))
 		{
 			throw dis(token.report() + "strange::expression_for_range::create passed non-expression loop");
 		}
-		return expression_a<>{ over{ expression_for_range_t<>( token, terms, cast<symbol_a<>>(key), cast<kind_a<>>(kind), cast<expression_a<>>(range), cast<expression_a<>>(loop)) } };
+		return expression_a<>{ over{ expression_for_range_t<>( token, terms, cast<symbol_a<>>(name), kind, cast<expression_a<>>(range), cast<expression_a<>>(loop)) } };
 	}
 
 	// reflection
@@ -74,8 +80,25 @@ public:
 			throw dis(_token.report() + "strange::expression_for_range::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto& local = static_cast<unordered_shoal_a<>&>(thing).reference();
-		auto it = local.emplace(_key, no()).first;
+		auto local_shoal = cast<unordered_shoal_a<>>(thing);
+		auto& local = local_shoal.reference();
+		auto kind = _kind;
+		if (check<expression_a<>>(kind))
+		{
+			try
+			{
+				kind = cast<expression_a<>>(kind).operate(local_shoal, range);
+			}
+			catch (misunderstanding_a<>& misunderstanding)
+			{
+				throw dis(_token.report() + "strange::expression_for_range::operate kind expression evaluation error") + misunderstanding;
+			}
+		}
+		if (!check<kind_a<>>(kind))
+		{
+			throw dis(_token.report() + "strange::expression_for_range::operate non-kind parameter kind");
+		}
+		auto it = local.emplace(_name, no()).first;
 		any_a<> result = no();
 		try
 		{
@@ -86,18 +109,17 @@ public:
 			}
 			for (auto const& for_thing : cast<range_a<> const>(for_range))
 			{
-				if (!for_thing.kinds_().has_(_kind))
+				if (!for_thing.kinds_().has_(kind))
 				{
 					throw dis(_token.report() + "strange::expression_for_range::operate kind does not include value");
 				}
 				it->second = for_thing;
 				try
 				{
-					result = _loop.operate(thing, range);
+					result = _loop.operate(local_shoal, range);
 				}
 				catch (continue_i&)
-				{
-				}
+				{}
 			}
 		}
 		catch (break_i&)
@@ -140,7 +162,7 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_for_range::generate_cpp called for wrong type of expression");
 		}
-		river.write_string(" for(" + _kind.code() + " const& " + _key.to_string() + " : ");
+		//river.write_string(" for(" + _kind.code() + " const& " + _name.to_string() + " : ");
 		_range.generate_cpp(version, indent, river);
 		river.write_string(")\n{\n");
 		_loop.generate_cpp(version, indent, river);
@@ -149,15 +171,15 @@ public:
 
 protected:
 	flock_a<> const _terms;
-	symbol_a<> const _key;
-	kind_a<> const _kind;
+	symbol_a<> const _name;
+	any_a<> const _kind;
 	expression_a<> const _range;
 	expression_a<> const _loop;
 
-	inline expression_for_range_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key, kind_a<> const& kind, expression_a<> const& range, expression_a<> const& loop)
-		: expression_t(token, pure_literal_terms(token, terms))
+	inline expression_for_range_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, any_a<> const& kind, expression_a<> const& range, expression_a<> const& loop)
+		: expression_t(token, pure_literal_terms(token, terms)) //TODO pure literal
 		, _terms{ terms }
-		, _key{ key }
+		, _name{ name }
 		, _kind{ kind }
 		, _range{ range }
 		, _loop{ loop }
