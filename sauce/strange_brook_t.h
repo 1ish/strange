@@ -811,7 +811,7 @@ public:
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _deque == cast<brook_a<_primitive_>>(thing).extract();
+		return _deque == cast<brook_a<_primitive_>>(thing).extract_deque();
 	}
 
 	inline std::size_t hash() const
@@ -1085,7 +1085,7 @@ public:
 			auto const other = cast<brook_a<_primitive_>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			_deque = other.extract();
+			_deque = other.extract_deque();
 		}
 		else
 		{
@@ -1106,7 +1106,7 @@ public:
 		{
 			auto const other = cast<brook_a<_primitive_>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_deque = other.extract();
+			auto const& other_deque = other.extract_deque();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_deque.insert(_deque.cend(), other_deque.cbegin(), other_deque.cend());
 		}
@@ -1164,18 +1164,12 @@ public:
 	}
 
 	// data
-	inline std_deque_number const& extract() const
+	inline std_deque_number const& extract_deque() const
 	{
 		return _deque;
 	}
 
-	inline void mutate(std_deque_number const& data)
-	{
-		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_deque = data;
-	}
-
-	inline std_deque_number& reference()
+	inline std_deque_number& mutate_deque()
 	{
 		return _deque;
 	}

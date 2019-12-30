@@ -80,19 +80,16 @@ namespace strange {
     		return *this;
     	}
     
-     inline std :: deque < _1_ > const & extract ( ) const
-     { assert(handle_); return read().extract( ); }
-     inline void mutate ( std :: deque < _1_ > const & data )
-     { assert(handle_); write().mutate(data ); }
-     inline std :: deque < _1_ > & reference ( )
-     { assert(handle_); return write().reference( ); }
+     inline std :: deque < _1_ > const & extract_deque ( ) const
+     { assert(handle_); return read().extract_deque( ); }
+     inline std :: deque < _1_ > & mutate_deque ( )
+     { assert(handle_); return write().mutate_deque( ); }
     
     private:
     	struct ___finale_handle_base___ : ___ddderived_handle_base___
     	{
-      virtual inline std :: deque < _1_ > const & extract ( ) const = 0;
-      virtual inline void mutate ( std :: deque < _1_ > const & data ) = 0;
-      virtual inline std :: deque < _1_ > & reference ( ) = 0;
+      virtual inline std :: deque < _1_ > const & extract_deque ( ) const = 0;
+      virtual inline std :: deque < _1_ > & mutate_deque ( ) = 0;
     	};
     
     	template <typename ___TTT___>
@@ -113,12 +110,10 @@ namespace strange {
     			return std::make_shared<___finale_handle_final___>(___ddderived_handle___<___TTT___, ___finale_handle_base___>::value_);
     		}
     
-      virtual inline std :: deque < _1_ > const & extract ( ) const
-      { return value_.extract( ); }
-      virtual inline void mutate ( std :: deque < _1_ > const & data )
-      { value_.mutate(data ); }
-      virtual inline std :: deque < _1_ > & reference ( )
-      { return value_.reference( ); }
+      virtual inline std :: deque < _1_ > const & extract_deque ( ) const
+      { return value_.extract_deque( ); }
+      virtual inline std :: deque < _1_ > & mutate_deque ( )
+      { return value_.mutate_deque( ); }
     	};
     
     	template <typename ___TTT___>
