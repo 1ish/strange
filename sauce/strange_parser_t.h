@@ -901,7 +901,7 @@ private:
 	static inline unordered_herd_a<> _remove_herd_non_dimensions(unordered_herd_a<> const& herd)
 	{
 		unordered_herd_a<> result = unordered_herd_t<>::create_();
-		for (auto const& item : herd.extract())
+		for (auto const& item : herd.extract_unordered_set())
 		{
 			if (check<symbol_a<>>(item) && cast<symbol_a<>>(item).first_character() == '#')
 			{

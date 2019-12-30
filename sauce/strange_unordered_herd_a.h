@@ -148,12 +148,10 @@ namespace strange {
 
     
 
-     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const
-     { assert(handle_); return read().extract( ); }
-     inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
-     { assert(handle_); write().mutate(data ); }
-     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference ( )
-     { assert(handle_); return write().reference( ); }
+     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_unordered_set ( ) const
+     { assert(handle_); return read().extract_unordered_set( ); }
+     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_unordered_set ( )
+     { assert(handle_); return write().mutate_unordered_set( ); }
     
 
     private:
@@ -162,9 +160,8 @@ namespace strange {
 
     	{
 
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const = 0;
-      virtual inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data ) = 0;
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference ( ) = 0;
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_unordered_set ( ) const = 0;
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_unordered_set ( ) = 0;
     	};
 
     
@@ -205,12 +202,10 @@ namespace strange {
 
     
 
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract ( ) const
-      { return value_.extract( ); }
-      virtual inline void mutate ( std :: unordered_set < any_a < > , any_a < > :: hash_f > const & data )
-      { value_.mutate(data ); }
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & reference ( )
-      { return value_.reference( ); }
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_unordered_set ( ) const
+      { return value_.extract_unordered_set( ); }
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_unordered_set ( )
+      { return value_.mutate_unordered_set( ); }
     	};
 
     

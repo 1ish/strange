@@ -396,7 +396,7 @@ public:
 		{
 			auto const other = cast<unordered_herd_a<>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_set = other.extract();
+			auto const& other_set = other.extract_unordered_set();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_set.clear();
 			_set.insert(other_set.cbegin(), other_set.cend());
@@ -428,7 +428,7 @@ public:
 		{
 			auto const other = cast<unordered_herd_a<>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_set = other.extract();
+			auto const& other_set = other.extract_unordered_set();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_set.insert(other_set.cbegin(), other_set.cend());
 		}

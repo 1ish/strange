@@ -198,7 +198,7 @@ public:
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _set == cast<unordered_herd_a<>>(thing).extract();
+		return _set == cast<unordered_herd_a<>>(thing).extract_unordered_set();
 	}
 
 	inline std::size_t hash() const
@@ -356,7 +356,7 @@ public:
 			auto const other = cast<unordered_herd_a<>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			_set = other.extract();
+			_set = other.extract_unordered_set();
 		}
 		else if (check<ordered_herd_a<>>(range))
 		{
@@ -386,7 +386,7 @@ public:
 		{
 			auto const other = cast<unordered_herd_a<>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_set = other.extract();
+			auto const& other_set = other.extract_unordered_set();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_set.insert(other_set.cbegin(), other_set.cend());
 		}
@@ -440,18 +440,12 @@ public:
 	}
 
 	// data
-	inline std_unordered_set_any const& extract() const
+	inline std_unordered_set_any const& extract_unordered_set() const
 	{
 		return _set;
 	}
 
-	inline void mutate(std_unordered_set_any const& data)
-	{
-		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_set = data;
-	}
-
-	inline std_unordered_set_any& reference()
+	inline std_unordered_set_any& mutate_unordered_set()
 	{
 		return _set;
 	}
