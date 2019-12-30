@@ -82,7 +82,7 @@ public:
 			{
 				throw dis(_token.report() + "strange::extraction::operate kind does not include argument");
 			}
-			local.emplace(*nit++, argument);
+			local.emplace(*nit++, argument); //TODO possible non-const references that can be assigned to
 		}
 		try
 		{

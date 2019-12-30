@@ -67,7 +67,7 @@ public:
 #endif
 		auto& local = static_cast<unordered_shoal_a<>&>(thing).reference();
 		auto it = local.find(_key);
-		if (it == local.cend())
+		if (it == local.end())
 		{
 			throw dis(_token.report() + "strange::expression_local_update::operate key not found");
 		}
