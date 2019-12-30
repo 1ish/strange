@@ -114,8 +114,8 @@ TEST_CASE("strange parse and evaluate loops", "[parse_t]")
 			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create(
 				"(xyz :# [\"x\",\"y\",\"z\"],"
 				"abc := xyz,"
-				"abc@=1:\"=\"," //TODO abc@1 should diverge from xyz@1 here but it doesn't
-				"for_range(thing := abc, thing += \"-\"),"
+				"abc@=1:\"Y\","
+				"for_range(thing := abc, thing += \"+\")," // mutation of copy only
 				"for_range(thing :# xyz, $$strange::river::out[].write_[thing]),"
 				"for_range(thing :# abc, $$strange::river::out[].write_[thing]))"
 			))).evaluate_();
@@ -124,9 +124,10 @@ TEST_CASE("strange parse and evaluate loops", "[parse_t]")
 		}
 		{
 			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create(
-				"(xyz :# [\"x\",\"y\",\"z\"],"
+				"(xyz := [\"x\",\"y\",\"z\"],"
 				"abc :# xyz,"
-				"for_range(thing :# abc, thing += \"-\")," //TODO should not be able to mutate thing
+				"xyz@=1:\"Y\","
+				"for_range(thing :# abc, thing += \"+\")," //TODO should not be able to mutate thing at all
 				"for_range(thing :# xyz, $$strange::river::out[].write_[thing]),"
 				"for_range(thing :# abc, $$strange::river::out[].write_[thing]))"
 			))).evaluate_();

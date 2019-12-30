@@ -100,57 +100,31 @@ public:
 		}
 		auto it = local.emplace(_name, no()).first;
 		any_a<> result = no();
-		auto for_range = _range.operate(thing, range);
+		auto const for_range = _range.operate(thing, range);
 		if (!check<range_a<>>(for_range))
 		{
 			throw dis(_token.report() + "strange::expression_for_range::operate expression returned non-range");
 		}
-		if (cast<kind_a<>>(kind).fixed())
+		auto read_lock = check<collection_a<>>(for_range) ? cast<collection_a<>>(for_range).read_lock_() : no();
+		try
 		{
-			try
+			for (auto const& for_thing : cast<range_a<> const>(for_range))
 			{
-				auto read_lock = check<collection_a<>>(for_range) ? cast<collection_a<>>(for_range).read_lock_() : no();
-				for (auto const& for_thing : cast<range_a<> const>(for_range))
+				if (!for_thing.kinds_().has_(kind))
 				{
-					if (!for_thing.kinds_().has_(kind))
-					{
-						throw dis(_token.report() + "strange::expression_for_range::operate kind does not include value");
-					}
-					it->second = for_thing;
-					try
-					{
-						result = _loop.operate(local_shoal, range); //TODO needs to match parser/cpp scope
-					}
-					catch (continue_i&)
-					{}
+					throw dis(_token.report() + "strange::expression_for_range::operate kind does not include value");
 				}
-			}
-			catch (break_i&)
-			{}
-		}
-		else
-		{
-			try
-			{
-				auto write_lock = check<collection_a<>>(for_range) ? cast<collection_a<>>(for_range).write_lock_() : no();
-				for (auto const& for_thing : cast<range_a<>>(for_range))
+				it->second = for_thing;
+				try
 				{
-					if (!for_thing.kinds_().has_(kind))
-					{
-						throw dis(_token.report() + "strange::expression_for_range::operate kind does not include value");
-					}
-					it->second = for_thing;
-					try
-					{
-						result = _loop.operate(local_shoal, range); //TODO needs to match parser/cpp scope
-					}
-					catch (continue_i&)
-					{}
+					result = _loop.operate(local_shoal, range); //TODO needs to match parser/cpp scope
 				}
+				catch (continue_i&)
+				{}
 			}
-			catch (break_i&)
-			{}
 		}
+		catch (break_i&)
+		{}
 		return result;
 	}
 
