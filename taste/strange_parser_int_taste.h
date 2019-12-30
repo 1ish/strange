@@ -52,7 +52,7 @@ TEST_CASE("strange parse and evaluate int", "[parse_t]")
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::create("42")));
 		auto result = expression.evaluate_();
 		REQUIRE(check<number_data_a<int64_t>>(result));
-		REQUIRE(cast<number_data_a<int64_t>>(result).extract() == 42);
+		REQUIRE(cast<number_data_a<int64_t>>(result).extract_primitive() == 42);
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -68,12 +68,12 @@ TEST_CASE("strange parse and evaluate ints", "[parse_t]")
 		{
 			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("42"))).evaluate_();
 			REQUIRE(check<number_data_a<int64_t>>(result));
-			REQUIRE(cast<number_data_a<int64_t>>(result).extract() == 42);
+			REQUIRE(cast<number_data_a<int64_t>>(result).extract_primitive() == 42);
 		}
 		{
 			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("-42"))).evaluate_();
 			REQUIRE(check<number_data_a<int64_t>>(result));
-			REQUIRE(cast<number_data_a<int64_t>>(result).extract() == -42);
+			REQUIRE(cast<number_data_a<int64_t>>(result).extract_primitive() == -42);
 		}
 	}
 	catch (misunderstanding_a<>& m)

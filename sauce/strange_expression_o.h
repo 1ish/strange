@@ -143,7 +143,7 @@ public:
 
 	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
 	{
-		generate(version.extract(), indent.extract(), river);
+		generate(version.extract_primitive(), indent.extract_primitive(), river);
 		return river;
 	}
 
@@ -186,7 +186,7 @@ public:
 
 	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& type = no()) const
 	{
-		generate_cpp(version.extract(), indent.extract(), river, type);
+		generate_cpp(version.extract_primitive(), indent.extract_primitive(), river, type);
 		return river;
 	}
 };

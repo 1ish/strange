@@ -301,14 +301,14 @@ public:
 			{
 				throw dis("strange::river::putback called with non-int-8");
 			}
-			putback(cast<number_data_a<int8_t>>(thing).extract());
+			putback(cast<number_data_a<int8_t>>(thing).extract_primitive());
 		}
 		return me_();
 	}
 
 	inline any_a<> putback_(number_data_a<int8_t> const& int_8)
 	{
-		putback(int_8.extract());
+		putback(int_8.extract_primitive());
 		return me_();
 	}
 
@@ -347,7 +347,7 @@ public:
 
 	inline lake_a<int8_t> getline_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1), number_data_a<int8_t> const& delimiter = number_int_8_t<>::create('\n'))
 	{
-		return lake_int_8_t<>::create(getline(count.extract(), delimiter.extract()));
+		return lake_int_8_t<>::create(getline(count.extract_primitive(), delimiter.extract_primitive()));
 	}
 
 	inline std::vector<int8_t> getline(int64_t count = -1, int8_t delimiter = '\n')
@@ -389,7 +389,7 @@ public:
 
 	inline any_a<> ignore_(number_data_a<int64_t> const& count = number_int_64_t<>::create(1))
 	{
-		ignore(count.extract());
+		ignore(count.extract_primitive());
 		return me_();
 	}
 
@@ -419,7 +419,7 @@ public:
 
 	inline lake_a<int8_t> read_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1))
 	{
-		return lake_int_8_t<>::create(read(count.extract()));
+		return lake_int_8_t<>::create(read(count.extract_primitive()));
 	}
 
 	inline std::vector<int8_t> read(int64_t count = -1)
@@ -498,7 +498,7 @@ public:
 
 	inline any_a<> seekg_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
-		seekg_beg(offset.extract());
+		seekg_beg(offset.extract_primitive());
 		return me_();
 	}
 
@@ -528,7 +528,7 @@ public:
 
 	inline any_a<> seekg_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
-		seekg_end(offset.extract());
+		seekg_end(offset.extract_primitive());
 		return me_();
 	}
 
@@ -558,7 +558,7 @@ public:
 
 	inline any_a<> seekg_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
-		seekg_cur(offset.extract());
+		seekg_cur(offset.extract_primitive());
 		return me_();
 	}
 
@@ -599,14 +599,14 @@ public:
 			{
 				throw dis("strange::river::put called with non-int-8");
 			}
-			put(cast<number_data_a<int8_t>>(thing).extract());
+			put(cast<number_data_a<int8_t>>(thing).extract_primitive());
 		}
 		return me_();
 	}
 
 	inline any_a<> put_(number_data_a<int8_t> const& int_8)
 	{
-		put(int_8.extract());
+		put(int_8.extract_primitive());
 		return me_();
 	}
 
@@ -700,7 +700,7 @@ public:
 
 	inline any_a<> seekp_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
-		seekp_beg(offset.extract());
+		seekp_beg(offset.extract_primitive());
 		return me_();
 	}
 
@@ -730,7 +730,7 @@ public:
 
 	inline any_a<> seekp_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
-		seekp_end(offset.extract());
+		seekp_end(offset.extract_primitive());
 		return me_();
 	}
 
@@ -760,7 +760,7 @@ public:
 
 	inline any_a<> seekp_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
-		seekp_cur(offset.extract());
+		seekp_cur(offset.extract_primitive());
 		return me_();
 	}
 

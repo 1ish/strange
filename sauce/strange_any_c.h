@@ -400,7 +400,7 @@ public:
 			{
 				throw dis("<strange::any>::hash returned non-number-uint64");
 			}
-			return cast<number_data_a<uint64_t>>(result).extract();
+			return cast<number_data_a<uint64_t>>(result).extract_primitive();
 		}
 		return std::hash<void const*>{}(identity());
 	}

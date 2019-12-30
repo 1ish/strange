@@ -177,7 +177,7 @@ public:
 				throw dis(_token.report() + "strange::expression_kind::operate expression did not return a kind");
 			}
 			auto const kind = cast<kind_a<>>(any_kind);
-			return kind_t<>::create_(number_int_64_t<>::create(kind.order() + _order.extract()), kind.name_(), kind.dimensions_(), kind.aspects_(), kind.parameters_(), kind.result_(), _fixed, _optional);
+			return kind_t<>::create_(number_int_64_t<>::create(kind.order() + _order.extract_primitive()), kind.name_(), kind.dimensions_(), kind.aspects_(), kind.parameters_(), kind.result_(), _fixed, _optional);
 		}
 		auto const dimensions = _dimensions.operate(thing, range);
 		if (!check<flock_a<>>(dimensions))

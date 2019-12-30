@@ -149,12 +149,10 @@ namespace strange {
 
     
 
-     inline _1_ const & extract ( ) const
-     { assert(handle_); return read().extract( ); }
-     inline void mutate ( _1_ const & data )
-     { assert(handle_); write().mutate(data ); }
-     inline _1_ & reference ( )
-     { assert(handle_); return write().reference( ); }
+     inline _1_ const & extract_primitive ( ) const
+     { assert(handle_); return read().extract_primitive( ); }
+     inline _1_ & mutate_primitive ( )
+     { assert(handle_); return write().mutate_primitive( ); }
     
 
     private:
@@ -163,9 +161,8 @@ namespace strange {
 
     	{
 
-      virtual inline _1_ const & extract ( ) const = 0;
-      virtual inline void mutate ( _1_ const & data ) = 0;
-      virtual inline _1_ & reference ( ) = 0;
+      virtual inline _1_ const & extract_primitive ( ) const = 0;
+      virtual inline _1_ & mutate_primitive ( ) = 0;
     	};
 
     
@@ -206,12 +203,10 @@ namespace strange {
 
     
 
-      virtual inline _1_ const & extract ( ) const
-      { return value_.extract( ); }
-      virtual inline void mutate ( _1_ const & data )
-      { value_.mutate(data ); }
-      virtual inline _1_ & reference ( )
-      { return value_.reference( ); }
+      virtual inline _1_ const & extract_primitive ( ) const
+      { return value_.extract_primitive( ); }
+      virtual inline _1_ & mutate_primitive ( )
+      { return value_.mutate_primitive( ); }
     	};
 
     

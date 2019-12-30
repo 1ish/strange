@@ -294,7 +294,7 @@ public:
 
 	inline int64_t line() const
 	{
-		return _line.extract();
+		return _line.extract_primitive();
 	}
 
 	inline any_a<> position__(range_a<> const&) const
@@ -309,7 +309,7 @@ public:
 
 	inline int64_t position() const
 	{
-		return _position.extract();
+		return _position.extract_primitive();
 	}
 
 	inline any_a<> tag__(range_a<> const&) const
@@ -364,7 +364,7 @@ public:
 
 	inline int64_t precedence() const
 	{
-		return _precedence.extract();
+		return _precedence.extract_primitive();
 	}
 
 	inline any_a<> report__(range_a<> const&) const

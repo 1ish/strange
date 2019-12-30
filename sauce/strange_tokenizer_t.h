@@ -636,7 +636,7 @@ protected:
 		auto p = PRECEDENCE.at_(sym(str));
 		if (p)
 		{
-			return cast<number_data_a<int64_t>>(p).extract();
+			return cast<number_data_a<int64_t>>(p).extract_primitive();
 		}
 		return 0;
 	}

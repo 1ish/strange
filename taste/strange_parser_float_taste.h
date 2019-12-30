@@ -52,7 +52,7 @@ TEST_CASE("strange parse and evaluate float", "[parse_t]")
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::create("29.7")));
 		auto result = expression.evaluate_();
 		REQUIRE(check<number_data_a<double>>(result));
-		REQUIRE(cast<number_data_a<double>>(result).extract() == 29.7);
+		REQUIRE(cast<number_data_a<double>>(result).extract_primitive() == 29.7);
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -68,22 +68,22 @@ TEST_CASE("strange parse and evaluate floats", "[parse_t]")
 		{
 			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("29.7"))).evaluate_();
 			REQUIRE(check<number_data_a<double>>(result));
-			REQUIRE(cast<number_data_a<double>>(result).extract() == 29.7);
+			REQUIRE(cast<number_data_a<double>>(result).extract_primitive() == 29.7);
 		}
 		{
 			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("-29.7"))).evaluate_();
 			REQUIRE(check<number_data_a<double>>(result));
-			REQUIRE(cast<number_data_a<double>>(result).extract() == -29.7);
+			REQUIRE(cast<number_data_a<double>>(result).extract_primitive() == -29.7);
 		}
 		{
 			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("-29.7e1"))).evaluate_();
 			REQUIRE(check<number_data_a<double>>(result));
-			REQUIRE(cast<number_data_a<double>>(result).extract() == -297);
+			REQUIRE(cast<number_data_a<double>>(result).extract_primitive() == -297);
 		}
 		{
 			auto result = parser.parse_(tokenizer_t<>::create_(river_t<>::create("-29.7e-1"))).evaluate_();
 			REQUIRE(check<number_data_a<double>>(result));
-			REQUIRE(cast<number_data_a<double>>(result).extract() == -2.97);
+			REQUIRE(cast<number_data_a<double>>(result).extract_primitive() == -2.97);
 		}
 	}
 	catch (misunderstanding_a<>& m)
