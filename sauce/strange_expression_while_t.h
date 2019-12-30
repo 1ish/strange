@@ -50,14 +50,15 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
+		any_a<> local = thing; // new block scope
 		any_a<> result = no();
 		try
 		{
-			while (_condition.operate(thing, range))
+			while (_condition.operate(local, range))
 			{
 				try
 				{
-					result = _loop.operate(thing, range);
+					result = _loop.operate(any_a<>{ local }, range); // new scope each time round the loop
 				}
 				catch (continue_i&)
 				{}

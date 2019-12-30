@@ -59,11 +59,12 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		if (_condition.operate(thing, range))
+		any_a<> local = thing; // new block scope
+		if (_condition.operate(local, range))
 		{
-			return _yay.operate(thing, range);
+			return _yay.operate(local, range);
 		}
-		return _nay.operate(thing, range);
+		return _nay.operate(local, range);
 	}
 
 	// expression

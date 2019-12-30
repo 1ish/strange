@@ -80,7 +80,7 @@ public:
 			throw dis(_token.report() + "strange::expression_for_range::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto local_shoal = cast<unordered_shoal_a<>>(thing);
+		auto local_shoal = cast<unordered_shoal_a<>>(thing); // new block scope
 		auto& local = local_shoal.reference();
 		auto kind = _kind;
 		if (check<expression_a<>>(kind))
@@ -100,7 +100,7 @@ public:
 		}
 		auto it = local.emplace(_name, no()).first;
 		any_a<> result = no();
-		auto const for_range = _range.operate(thing, range);
+		auto const for_range = _range.operate(local_shoal, range);
 		if (!check<range_a<>>(for_range))
 		{
 			throw dis(_token.report() + "strange::expression_for_range::operate expression returned non-range");
@@ -117,7 +117,7 @@ public:
 				it->second = for_thing;
 				try
 				{
-					result = _loop.operate(local_shoal, range); //TODO needs to match parser/cpp scope
+					result = _loop.operate(any_a<>{ local_shoal }, range); // new scope each time round the loop
 				}
 				catch (continue_i&)
 				{}
