@@ -811,7 +811,7 @@ public:
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _vector == cast<lake_a<_primitive_>>(thing).extract();
+		return _vector == cast<lake_a<_primitive_>>(thing).extract_vector();
 	}
 
 	inline std::size_t hash() const
@@ -1070,7 +1070,7 @@ public:
 			auto const other = cast<lake_a<_primitive_>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			_vector = other.extract();
+			_vector = other.extract_vector();
 		}
 		else
 		{
@@ -1091,7 +1091,7 @@ public:
 		{
 			auto const other = cast<lake_a<_primitive_>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_vector = other.extract();
+			auto const& other_vector = other.extract_vector();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_vector.insert(_vector.cend(), other_vector.cbegin(), other_vector.cend());
 		}
@@ -1149,18 +1149,12 @@ public:
 	}
 
 	// data
-	inline std_vector_number const& extract() const
+	inline std_vector_number const& extract_vector() const
 	{
 		return _vector;
 	}
 
-	inline void mutate(std_vector_number const& data)
-	{
-		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_vector = data;
-	}
-
-	inline std_vector_number& reference()
+	inline std_vector_number& mutate_vector()
 	{
 		return _vector;
 	}
@@ -1236,7 +1230,7 @@ lake_a<int8_t> lake_from_string(std::string const& str)
 
 std::string lake_to_string(lake_a<int8_t> const& lake)
 {
-	auto const& v = lake.extract();
+	auto const& v = lake.extract_vector();
 	return std::string(v.cbegin(), v.cend());
 }
 

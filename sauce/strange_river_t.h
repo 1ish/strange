@@ -632,14 +632,14 @@ public:
 			{
 				throw dis("strange::river::write called with non-lake-int-8");
 			}
-			write(cast<lake_a<int8_t>>(thing).extract());
+			write(cast<lake_a<int8_t>>(thing).extract_vector());
 		}
 		return me_();
 	}
 
 	inline any_a<> write_(lake_a<int8_t> const& lake)
 	{
-		write(lake.extract());
+		write(lake.extract_vector());
 		return me_();
 	}
 

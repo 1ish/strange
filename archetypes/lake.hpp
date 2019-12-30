@@ -15,9 +15,8 @@ class lake_a
 {
 public:
 	// lake
-	inline std::vector<_1_> const& extract() const;
-	inline void mutate(std::vector<_1_> const& data);
-	inline std::vector<_1_>& reference();
+	inline std::vector<_1_> const& extract_vector() const;
+	inline std::vector<_1_>& mutate_vector();
 };
 
 } // namespace strange
