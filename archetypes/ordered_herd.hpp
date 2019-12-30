@@ -15,9 +15,8 @@ class ordered_herd_a
 {
 public:
 	// ordered herd
-	inline std::set<any_a<>> const& extract() const;
-	inline void mutate(std::set<any_a<>> const& data);
-	inline std::set<any_a<>>& reference();
+	inline std::set<any_a<>> const& extract_ordered_set() const;
+	inline std::set<any_a<>>& mutate_ordered_set();
 };
 
 } // namespace strange

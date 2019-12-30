@@ -148,12 +148,10 @@ namespace strange {
 
     
 
-     inline std :: set < any_a < >> const & extract ( ) const
-     { assert(handle_); return read().extract( ); }
-     inline void mutate ( std :: set < any_a < >> const & data )
-     { assert(handle_); write().mutate(data ); }
-     inline std :: set < any_a < >> & reference ( )
-     { assert(handle_); return write().reference( ); }
+     inline std :: set < any_a < >> const & extract_ordered_set ( ) const
+     { assert(handle_); return read().extract_ordered_set( ); }
+     inline std :: set < any_a < >> & mutate_ordered_set ( )
+     { assert(handle_); return write().mutate_ordered_set( ); }
     
 
     private:
@@ -162,9 +160,8 @@ namespace strange {
 
     	{
 
-      virtual inline std :: set < any_a < >> const & extract ( ) const = 0;
-      virtual inline void mutate ( std :: set < any_a < >> const & data ) = 0;
-      virtual inline std :: set < any_a < >> & reference ( ) = 0;
+      virtual inline std :: set < any_a < >> const & extract_ordered_set ( ) const = 0;
+      virtual inline std :: set < any_a < >> & mutate_ordered_set ( ) = 0;
     	};
 
     
@@ -205,12 +202,10 @@ namespace strange {
 
     
 
-      virtual inline std :: set < any_a < >> const & extract ( ) const
-      { return value_.extract( ); }
-      virtual inline void mutate ( std :: set < any_a < >> const & data )
-      { value_.mutate(data ); }
-      virtual inline std :: set < any_a < >> & reference ( )
-      { return value_.reference( ); }
+      virtual inline std :: set < any_a < >> const & extract_ordered_set ( ) const
+      { return value_.extract_ordered_set( ); }
+      virtual inline std :: set < any_a < >> & mutate_ordered_set ( )
+      { return value_.mutate_ordered_set( ); }
     	};
 
     
