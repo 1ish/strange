@@ -80,19 +80,16 @@ namespace strange {
     		return *this;
     	}
     
-     inline _1_ const & extract ( ) const
-     { assert(handle_); return read().extract( ); }
-     inline void mutate ( _1_ const & data )
-     { assert(handle_); write().mutate(data ); }
-     inline _1_ & reference ( )
-     { assert(handle_); return write().reference( ); }
+     inline _1_ const & extract_data ( ) const
+     { assert(handle_); return read().extract_data( ); }
+     inline _1_ & mutate_data ( )
+     { assert(handle_); return write().mutate_data( ); }
     
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
-      virtual inline _1_ const & extract ( ) const = 0;
-      virtual inline void mutate ( _1_ const & data ) = 0;
-      virtual inline _1_ & reference ( ) = 0;
+      virtual inline _1_ const & extract_data ( ) const = 0;
+      virtual inline _1_ & mutate_data ( ) = 0;
     	};
     
     	template <typename ___TTT___, typename ___DHB___ = ___derived_handle_base___>
@@ -108,12 +105,10 @@ namespace strange {
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
-      virtual inline _1_ const & extract ( ) const
-      { return value_.extract( ); }
-      virtual inline void mutate ( _1_ const & data )
-      { value_.mutate(data ); }
-      virtual inline _1_ & reference ( )
-      { return value_.reference( ); }
+      virtual inline _1_ const & extract_data ( ) const
+      { return value_.extract_data( ); }
+      virtual inline _1_ & mutate_data ( )
+      { return value_.mutate_data( ); }
     	};
     
     	template <typename ___TTT___, typename ___DHB___>

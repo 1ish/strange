@@ -45,7 +45,7 @@ public:
 		{
 			return false;
 		}
-		return _data == cast<data_a<_data_>>(thing).extract();
+		return _data == cast<data_a<_data_>>(thing).extract_data();
 	}
 
 	inline std::size_t hash() const
@@ -54,17 +54,12 @@ public:
 	}
 
 	// data
-	inline _data_ const& extract() const
+	inline _data_ const& extract_data() const
 	{
 		return _data;
 	}
 
-	inline void mutate(_data_ const& data)
-	{
-		_data = data;
-	}
-
-	inline _data_& reference()
+	inline _data_& mutate_data()
 	{
 		return _data;
 	}

@@ -15,9 +15,8 @@ class data_a
 {
 public:
 	// data
-	inline _1_ const& extract() const;
-	inline void mutate(_1_ const& data);
-	inline _1_& reference();
+	inline _1_ const& extract_data() const;
+	inline _1_& mutate_data();
 };
 
 } // namespace strange
