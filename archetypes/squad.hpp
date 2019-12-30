@@ -15,9 +15,8 @@ class squad_a
 {
 public:
 	// squad
-	inline std::deque<any_a<>> const& extract() const;
-	inline void mutate(std::deque<any_a<>> const& data);
-	inline std::deque<any_a<>>& reference();
+	inline std::deque<any_a<>> const& extract_deque() const;
+	inline std::deque<any_a<>>& mutate_deque();
 };
 
 } // namespace strange

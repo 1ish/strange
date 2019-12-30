@@ -148,12 +148,10 @@ namespace strange {
 
     
 
-     inline std :: deque < any_a < >> const & extract ( ) const
-     { assert(handle_); return read().extract( ); }
-     inline void mutate ( std :: deque < any_a < >> const & data )
-     { assert(handle_); write().mutate(data ); }
-     inline std :: deque < any_a < >> & reference ( )
-     { assert(handle_); return write().reference( ); }
+     inline std :: deque < any_a < >> const & extract_deque ( ) const
+     { assert(handle_); return read().extract_deque( ); }
+     inline std :: deque < any_a < >> & mutate_deque ( )
+     { assert(handle_); return write().mutate_deque( ); }
     
 
     private:
@@ -162,9 +160,8 @@ namespace strange {
 
     	{
 
-      virtual inline std :: deque < any_a < >> const & extract ( ) const = 0;
-      virtual inline void mutate ( std :: deque < any_a < >> const & data ) = 0;
-      virtual inline std :: deque < any_a < >> & reference ( ) = 0;
+      virtual inline std :: deque < any_a < >> const & extract_deque ( ) const = 0;
+      virtual inline std :: deque < any_a < >> & mutate_deque ( ) = 0;
     	};
 
     
@@ -205,12 +202,10 @@ namespace strange {
 
     
 
-      virtual inline std :: deque < any_a < >> const & extract ( ) const
-      { return value_.extract( ); }
-      virtual inline void mutate ( std :: deque < any_a < >> const & data )
-      { value_.mutate(data ); }
-      virtual inline std :: deque < any_a < >> & reference ( )
-      { return value_.reference( ); }
+      virtual inline std :: deque < any_a < >> const & extract_deque ( ) const
+      { return value_.extract_deque( ); }
+      virtual inline std :: deque < any_a < >> & mutate_deque ( )
+      { return value_.mutate_deque( ); }
     	};
 
     
