@@ -15,8 +15,8 @@ class unordered_shoal_a
 {
 public:
 	// unordered shoal
-	inline std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f> const& extract_unordered_map() const;
-	inline std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>& mutate_unordered_map();
+	inline std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f> const& extract_map() const;
+	inline std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>& mutate_map();
 };
 
 } // namespace strange

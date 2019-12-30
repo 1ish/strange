@@ -128,7 +128,7 @@ public:
 			kinds += kinds_any;
 		}
 
-		for (auto const& member : parent.extract_unordered_map())
+		for (auto const& member : parent.extract_map())
 		{
 			if (!check<symbol_a<>>(member.first))
 			{

@@ -15,8 +15,8 @@ class unordered_herd_a
 {
 public:
 	// unordered herd
-	inline std::unordered_set<any_a<>, any_a<>::hash_f> const& extract_unordered_set() const;
-	inline std::unordered_set<any_a<>, any_a<>::hash_f>& mutate_unordered_set();
+	inline std::unordered_set<any_a<>, any_a<>::hash_f> const& extract_set() const;
+	inline std::unordered_set<any_a<>, any_a<>::hash_f>& mutate_set();
 };
 
 } // namespace strange

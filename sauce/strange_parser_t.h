@@ -901,7 +901,7 @@ private:
 	static inline unordered_herd_a<> _remove_herd_non_dimensions(unordered_herd_a<> const& herd)
 	{
 		unordered_herd_a<> result = unordered_herd_t<>::create_();
-		for (auto const& item : herd.extract_unordered_set())
+		for (auto const& item : herd.extract_set())
 		{
 			if (check<symbol_a<>>(item) && cast<symbol_a<>>(item).first_character() == '#')
 			{
@@ -914,7 +914,7 @@ private:
 	static inline unordered_shoal_a<> _remove_shoal_non_dimensions(unordered_shoal_a<> const& shoal)
 	{
 		unordered_shoal_a<> result = unordered_shoal_t<>::create_();
-		for (auto const& item : shoal.extract_unordered_map())
+		for (auto const& item : shoal.extract_map())
 		{
 			if (check<symbol_a<>>(item.first) && cast<symbol_a<>>(item.first).first_character() == '#')
 			{

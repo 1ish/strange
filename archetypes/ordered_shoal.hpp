@@ -15,8 +15,8 @@ class ordered_shoal_a
 {
 public:
 	// ordered shoal
-	inline std::map<any_a<>, any_a<>> const& extract_ordered_map() const;
-	inline std::map<any_a<>, any_a<>>& mutate_ordered_map();
+	inline std::map<any_a<>, any_a<>> const& extract_map() const;
+	inline std::map<any_a<>, any_a<>>& mutate_map();
 };
 
 } // namespace strange

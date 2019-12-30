@@ -389,7 +389,7 @@ public:
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _map == cast<ordered_shoal_a<>>(thing).extract_ordered_map();
+		return _map == cast<ordered_shoal_a<>>(thing).extract_map();
 	}
 
 	inline std::size_t hash() const
@@ -567,13 +567,13 @@ public:
 			auto const other = cast<ordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			_map = other.extract_ordered_map();
+			_map = other.extract_map();
 		}
 		else if (check<unordered_shoal_a<>>(range))
 		{
 			auto const other = cast<unordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_map = other.extract_unordered_map();
+			auto const& other_map = other.extract_map();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_map.clear();
 			_map.insert(other_map.cbegin(), other_map.cend());
@@ -606,7 +606,7 @@ public:
 		{
 			auto const other = cast<ordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_map = other.extract_ordered_map();
+			auto const& other_map = other.extract_map();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_map.insert(other_map.cbegin(), other_map.cend());
 		}
@@ -614,7 +614,7 @@ public:
 		{
 			auto const other = cast<unordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_map = other.extract_unordered_map();
+			auto const& other_map = other.extract_map();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_map.insert(other_map.cbegin(), other_map.cend());
 		}
@@ -650,7 +650,7 @@ public:
 			auto const other = cast<ordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& pair : other.extract_ordered_map())
+			for (auto const& pair : other.extract_map())
 			{
 				_map.erase(pair.first);
 			}
@@ -660,7 +660,7 @@ public:
 			auto const other = cast<unordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& pair : other.extract_unordered_map())
+			for (auto const& pair : other.extract_map())
 			{
 				_map.erase(pair.first);
 			}
@@ -692,12 +692,12 @@ public:
 	}
 
 	// data
-	inline std_map_any_any const& extract_ordered_map() const
+	inline std_map_any_any const& extract_map() const
 	{
 		return _map;
 	}
 
-	inline std_map_any_any& mutate_ordered_map()
+	inline std_map_any_any& mutate_map()
 	{
 		return _map;
 	}

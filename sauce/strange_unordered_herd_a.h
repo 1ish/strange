@@ -148,10 +148,10 @@ namespace strange {
 
     
 
-     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_unordered_set ( ) const
-     { assert(handle_); return read().extract_unordered_set( ); }
-     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_unordered_set ( )
-     { assert(handle_); return write().mutate_unordered_set( ); }
+     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set ( ) const
+     { assert(handle_); return read().extract_set( ); }
+     inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set ( )
+     { assert(handle_); return write().mutate_set( ); }
     
 
     private:
@@ -160,8 +160,8 @@ namespace strange {
 
     	{
 
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_unordered_set ( ) const = 0;
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_unordered_set ( ) = 0;
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set ( ) const = 0;
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set ( ) = 0;
     	};
 
     
@@ -202,10 +202,10 @@ namespace strange {
 
     
 
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_unordered_set ( ) const
-      { return value_.extract_unordered_set( ); }
-      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_unordered_set ( )
-      { return value_.mutate_unordered_set( ); }
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set ( ) const
+      { return value_.extract_set( ); }
+      virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set ( )
+      { return value_.mutate_set( ); }
     	};
 
     

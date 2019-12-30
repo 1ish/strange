@@ -148,10 +148,10 @@ namespace strange {
 
     
 
-     inline std :: map < any_a < > , any_a < >> const & extract_ordered_map ( ) const
-     { assert(handle_); return read().extract_ordered_map( ); }
-     inline std :: map < any_a < > , any_a < >> & mutate_ordered_map ( )
-     { assert(handle_); return write().mutate_ordered_map( ); }
+     inline std :: map < any_a < > , any_a < >> const & extract_map ( ) const
+     { assert(handle_); return read().extract_map( ); }
+     inline std :: map < any_a < > , any_a < >> & mutate_map ( )
+     { assert(handle_); return write().mutate_map( ); }
     
 
     private:
@@ -160,8 +160,8 @@ namespace strange {
 
     	{
 
-      virtual inline std :: map < any_a < > , any_a < >> const & extract_ordered_map ( ) const = 0;
-      virtual inline std :: map < any_a < > , any_a < >> & mutate_ordered_map ( ) = 0;
+      virtual inline std :: map < any_a < > , any_a < >> const & extract_map ( ) const = 0;
+      virtual inline std :: map < any_a < > , any_a < >> & mutate_map ( ) = 0;
     	};
 
     
@@ -202,10 +202,10 @@ namespace strange {
 
     
 
-      virtual inline std :: map < any_a < > , any_a < >> const & extract_ordered_map ( ) const
-      { return value_.extract_ordered_map( ); }
-      virtual inline std :: map < any_a < > , any_a < >> & mutate_ordered_map ( )
-      { return value_.mutate_ordered_map( ); }
+      virtual inline std :: map < any_a < > , any_a < >> const & extract_map ( ) const
+      { return value_.extract_map( ); }
+      virtual inline std :: map < any_a < > , any_a < >> & mutate_map ( )
+      { return value_.mutate_map( ); }
     	};
 
     

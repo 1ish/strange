@@ -65,7 +65,7 @@ public:
 			throw dis(_token.report() + "strange::expression_local_update::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto& local = static_cast<unordered_shoal_a<>&>(thing).mutate_unordered_map();
+		auto& local = static_cast<unordered_shoal_a<>&>(thing).mutate_map();
 		auto it = local.find(_key);
 		if (it == local.end())
 		{

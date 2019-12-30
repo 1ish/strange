@@ -80,16 +80,16 @@ namespace strange {
     		return *this;
     	}
     
-     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_unordered_map ( ) const
-     { assert(handle_); return read().extract_unordered_map( ); }
-     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_unordered_map ( )
-     { assert(handle_); return write().mutate_unordered_map( ); }
+     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_map ( ) const
+     { assert(handle_); return read().extract_map( ); }
+     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_map ( )
+     { assert(handle_); return write().mutate_map( ); }
     
     private:
     	struct ___finale_handle_base___ : ___ddderived_handle_base___
     	{
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_unordered_map ( ) const = 0;
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_unordered_map ( ) = 0;
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_map ( ) const = 0;
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_map ( ) = 0;
     	};
     
     	template <typename ___TTT___>
@@ -110,10 +110,10 @@ namespace strange {
     			return std::make_shared<___finale_handle_final___>(___ddderived_handle___<___TTT___, ___finale_handle_base___>::value_);
     		}
     
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_unordered_map ( ) const
-      { return value_.extract_unordered_map( ); }
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_unordered_map ( )
-      { return value_.mutate_unordered_map( ); }
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_map ( ) const
+      { return value_.extract_map( ); }
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_map ( )
+      { return value_.mutate_map( ); }
     	};
     
     	template <typename ___TTT___>
