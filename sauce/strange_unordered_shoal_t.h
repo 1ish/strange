@@ -527,7 +527,7 @@ public:
 		{
 			auto const other = cast<ordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_map = other.extract();
+			auto const& other_map = other.extract_ordered_map();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_map.clear();
 			_map.insert(other_map.cbegin(), other_map.cend());
@@ -568,7 +568,7 @@ public:
 		{
 			auto const other = cast<ordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_map = other.extract();
+			auto const& other_map = other.extract_ordered_map();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_map.insert(other_map.cbegin(), other_map.cend());
 		}
@@ -614,7 +614,7 @@ public:
 			auto const other = cast<ordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& pair : other.extract())
+			for (auto const& pair : other.extract_ordered_map())
 			{
 				_map.erase(pair.first);
 			}
