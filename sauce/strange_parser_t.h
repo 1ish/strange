@@ -512,7 +512,7 @@ private:
 					fixed = dimension || op == ":#";
 					optional = _it != _end && (_token.tag() != "punctuation" || !_delimiter(_token.symbol()));
 					insert = true;
-					kind = kind_t<>::create_();
+					kind = kind_t<>::create(1, "", flock_t<>::create_(), flock_t<>::create_(), flock_t<>::create_(), kind_t<>::any_sym(), fixed);
 				}
 				else if (op == ":<" || op == ":(")
 				{

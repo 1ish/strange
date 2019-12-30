@@ -59,7 +59,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto expression_thing = any_a<>(_expression.operate(thing, range), true);
+		auto expression_thing = _expression.operate(thing, range);
 		return thing_t<>::invoke_member(expression_thing, _member, range_operator_t<>::create_(_range, thing, range));
 	}
 
