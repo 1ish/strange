@@ -38,7 +38,7 @@ class tokenizer_t : public thing_t<___ego___>
 			{
 				return false;
 			}
-			return _it == cast<forward_const_iterator_data_a<_iterator_>>(thing).extract();
+			return _it == cast<forward_const_iterator_data_a<_iterator_>>(thing).extract_it();
 		}
 
 		inline std::size_t hash() const
@@ -92,17 +92,12 @@ class tokenizer_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline _iterator_ const& extract() const
+		inline _iterator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline void mutate(_iterator_ const& it)
-		{
-			_it = it;
-		}
-
-		inline _iterator_& reference()
+		inline _iterator_& mutate_it()
 		{
 			return _it;
 		}

@@ -38,7 +38,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				return false;
 			}
-			return _it == cast<random_access_iterator_data_a<_iterator_>>(thing).extract();
+			return _it == cast<random_access_iterator_data_a<_iterator_>>(thing).extract_it();
 		}
 
 		inline std::size_t hash() const
@@ -197,7 +197,7 @@ class lake_t : public thing_t<___ego___>
 		{
 			___ego___ result = me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
-			result.reference() += number.to_int_64();
+			result.mutate_it() += number.to_int_64();
 			return result;
 		}
 
@@ -247,7 +247,7 @@ class lake_t : public thing_t<___ego___>
 		{
 			___ego___ result = me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
-			result.reference() -= number.to_int_64();
+			result.mutate_it() -= number.to_int_64();
 			return result;
 		}
 
@@ -263,7 +263,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator::less_than passed incompatible thing");
 			}
-			return boole(_it < cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
+			return boole(_it < cast<random_access_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> less_than_(random_access_iterator_a<> const& it) const
@@ -277,7 +277,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator < passed incompatible thing");
 			}
-			return _it < cast<random_access_iterator_data_a<_iterator_>>(it).extract();
+			return _it < cast<random_access_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
 		inline any_a<> greater_than__(range_a<> const& range) const
@@ -292,7 +292,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator::greater_than passed incompatible thing");
 			}
-			return boole(_it > cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
+			return boole(_it > cast<random_access_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
@@ -306,7 +306,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator > passed incompatible thing");
 			}
-			return _it > cast<random_access_iterator_data_a<_iterator_>>(it).extract();
+			return _it > cast<random_access_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
 		inline any_a<> less_or_equal__(range_a<> const& range) const
@@ -321,7 +321,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator::less_or_equal passed incompatible thing");
 			}
-			return boole(_it <= cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
+			return boole(_it <= cast<random_access_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
@@ -335,7 +335,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator <= passed incompatible thing");
 			}
-			return _it <= cast<random_access_iterator_data_a<_iterator_>>(it).extract();
+			return _it <= cast<random_access_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
 		inline any_a<> greater_or_equal__(range_a<> const& range) const
@@ -350,7 +350,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator::greater_or_equal passed incompatible thing");
 			}
-			return boole(_it >= cast<random_access_iterator_data_a<_iterator_>>(thing).extract());
+			return boole(_it >= cast<random_access_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
@@ -364,21 +364,16 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::iterator >= passed incompatible thing");
 			}
-			return _it >= cast<random_access_iterator_data_a<_iterator_>>(it).extract();
+			return _it >= cast<random_access_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
 		// data
-		inline _iterator_ const& extract() const
+		inline _iterator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline void mutate(_iterator_ const& it)
-		{
-			_it = it;
-		}
-
-		inline _iterator_& reference()
+		inline _iterator_& mutate_it()
 		{
 			return _it;
 		}
@@ -426,7 +421,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				return false;
 			}
-			return _it == cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract();
+			return _it == cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract_it();
 		}
 
 		inline std::size_t hash() const
@@ -563,7 +558,7 @@ class lake_t : public thing_t<___ego___>
 		{
 			___ego___ result = me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
-			result.reference() += number.to_int_64();
+			result.mutate_it() += number.to_int_64();
 			return result;
 		}
 
@@ -613,7 +608,7 @@ class lake_t : public thing_t<___ego___>
 		{
 			___ego___ result = me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
-			result.reference() -= number.to_int_64();
+			result.mutate_it() -= number.to_int_64();
 			return result;
 		}
 
@@ -629,7 +624,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::const_iterator::less_than passed incompatible thing");
 			}
-			return boole(_it < cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract());
+			return boole(_it < cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> less_than_(random_access_const_iterator_a<> const& it) const
@@ -643,7 +638,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::const_iterator < passed incompatible thing");
 			}
-			return _it < cast<random_access_const_iterator_data_a<_iterator_>>(it).extract();
+			return _it < cast<random_access_const_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
 		inline any_a<> greater_than__(range_a<> const& range) const
@@ -658,7 +653,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::const_iterator::greater_than passed incompatible thing");
 			}
-			return boole(_it > cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract());
+			return boole(_it > cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> greater_than_(random_access_const_iterator_a<> const& it) const
@@ -672,7 +667,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::const_iterator > passed incompatible thing");
 			}
-			return _it > cast<random_access_const_iterator_data_a<_iterator_>>(it).extract();
+			return _it > cast<random_access_const_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
 		inline any_a<> less_or_equal__(range_a<> const& range) const
@@ -687,7 +682,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::const_iterator::less_or_equal passed incompatible thing");
 			}
-			return boole(_it <= cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract());
+			return boole(_it <= cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> less_or_equal_(random_access_const_iterator_a<> const& it) const
@@ -701,7 +696,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::const_iterator <= passed incompatible thing");
 			}
-			return _it <= cast<random_access_const_iterator_data_a<_iterator_>>(it).extract();
+			return _it <= cast<random_access_const_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
 		inline any_a<> greater_or_equal__(range_a<> const& range) const
@@ -716,7 +711,7 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::const_iterator::greater_or_equal passed incompatible thing");
 			}
-			return boole(_it >= cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract());
+			return boole(_it >= cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_const_iterator_a<> const& it) const
@@ -730,21 +725,16 @@ class lake_t : public thing_t<___ego___>
 			{
 				throw dis("strange::lake::const_iterator >= passed incompatible thing");
 			}
-			return _it >= cast<random_access_const_iterator_data_a<_iterator_>>(it).extract();
+			return _it >= cast<random_access_const_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
 		// data
-		inline _iterator_ const& extract() const
+		inline _iterator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline void mutate(_iterator_ const& it)
-		{
-			_it = it;
-		}
-
-		inline _iterator_& reference()
+		inline _iterator_& mutate_it()
 		{
 			return _it;
 		}

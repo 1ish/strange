@@ -15,9 +15,8 @@ class forward_iterator_data_a
 {
 public:
 	// forward iterator data
-	inline _1_ const& extract() const;
-	inline void mutate(_1_ const& data);
-	inline _1_& reference();
+	inline _1_ const& extract_it() const;
+	inline _1_& mutate_it();
 };
 
 } // namespace strange
