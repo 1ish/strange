@@ -107,11 +107,11 @@ public:
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" function(");
-		auto nit = _names.extract().cbegin();
-		auto kit = _kinds.extract().cbegin();
-		auto eit = _expressions.extract().cbegin();
+		auto nit = _names.extract_vector().cbegin();
+		auto kit = _kinds.extract_vector().cbegin();
+		auto eit = _expressions.extract_vector().cbegin();
 		bool first = true;
-		for (auto const& def : _defaults.extract())
+		for (auto const& def : _defaults.extract_vector())
 		{
 			if (first)
 			{
@@ -139,11 +139,11 @@ public:
 			throw dis(_token.report() + "strange::expression_function::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" [](");
-		auto nit = _names.extract().cbegin();
-		auto kit = _kinds.extract().cbegin();
-		auto eit = _expressions.extract().cbegin();
+		auto nit = _names.extract_vector().cbegin();
+		auto kit = _kinds.extract_vector().cbegin();
+		auto eit = _expressions.extract_vector().cbegin();
 		bool first = true;
-		for (auto const& def : _defaults.extract())
+		for (auto const& def : _defaults.extract_vector())
 		{
 			if (first)
 			{

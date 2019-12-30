@@ -79,7 +79,7 @@ public:
 	{
 		river.write_string(" while_(");
 		bool first = true;
-		for (auto const& term : _terms.extract())
+		for (auto const& term : _terms.extract_vector())
 		{
 			if (first)
 			{

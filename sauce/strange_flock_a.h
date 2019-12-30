@@ -148,12 +148,10 @@ namespace strange {
 
     
 
-     inline std :: vector < any_a < >> const & extract ( ) const
-     { assert(handle_); return read().extract( ); }
-     inline void mutate ( std :: vector < any_a < >> const & data )
-     { assert(handle_); write().mutate(data ); }
-     inline std :: vector < any_a < >> & reference ( )
-     { assert(handle_); return write().reference( ); }
+     inline std :: vector < any_a < >> const & extract_vector ( ) const
+     { assert(handle_); return read().extract_vector( ); }
+     inline std :: vector < any_a < >> & mutate_vector ( )
+     { assert(handle_); return write().mutate_vector( ); }
     
 
     private:
@@ -162,9 +160,8 @@ namespace strange {
 
     	{
 
-      virtual inline std :: vector < any_a < >> const & extract ( ) const = 0;
-      virtual inline void mutate ( std :: vector < any_a < >> const & data ) = 0;
-      virtual inline std :: vector < any_a < >> & reference ( ) = 0;
+      virtual inline std :: vector < any_a < >> const & extract_vector ( ) const = 0;
+      virtual inline std :: vector < any_a < >> & mutate_vector ( ) = 0;
     	};
 
     
@@ -205,12 +202,10 @@ namespace strange {
 
     
 
-      virtual inline std :: vector < any_a < >> const & extract ( ) const
-      { return value_.extract( ); }
-      virtual inline void mutate ( std :: vector < any_a < >> const & data )
-      { value_.mutate(data ); }
-      virtual inline std :: vector < any_a < >> & reference ( )
-      { return value_.reference( ); }
+      virtual inline std :: vector < any_a < >> const & extract_vector ( ) const
+      { return value_.extract_vector( ); }
+      virtual inline std :: vector < any_a < >> & mutate_vector ( )
+      { return value_.mutate_vector( ); }
     	};
 
     

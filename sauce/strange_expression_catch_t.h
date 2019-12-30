@@ -101,9 +101,9 @@ public:
 		}
 		catch (any_a<>& exception)
 		{
-			auto kit = _kinds.extract().cbegin();
-			auto eit = _expressions.extract().cbegin();
-			for (auto const& name : _names.extract())
+			auto kit = _kinds.extract_vector().cbegin();
+			auto eit = _expressions.extract_vector().cbegin();
+			for (auto const& name : _names.extract_vector())
 			{
 				auto kind = *kit++;
 				if (check<expression_a<>>(kind))
@@ -139,7 +139,7 @@ public:
 		// catch(name :<kind>= expression)
 		river.write_string(" catch(");
 		bool first = true;
-		for (auto const& term : _terms.extract())
+		for (auto const& term : _terms.extract_vector())
 		{
 			if (first)
 			{
@@ -165,7 +165,7 @@ public:
 		river.write_string("\n}\n");
 		forward_const_iterator_a<> kit = _kinds.cbegin_();
 		forward_const_iterator_a<> eit = _expressions.cbegin_();
-		for (auto const& name : _names.extract())
+		for (auto const& name : _names.extract_vector())
 		{
 			river.write_string("catch(" + cast<kind_a<>>(*kit++).name_().to_string() + "_a<> const& exception)\n{\n");
 			cast<expression_a<>>(*eit++).generate_cpp(version, indent, river);

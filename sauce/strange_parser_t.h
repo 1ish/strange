@@ -266,7 +266,7 @@ private:
 		}
 		context->meta->emit = context;
 		context->meta->emissions.clear();
-		for (auto const& expression : _elements(context->meta).extract())
+		for (auto const& expression : _elements(context->meta).extract_vector())
 		{
 			any_a<> result;
 			try

@@ -15,9 +15,8 @@ class flock_a
 {
 public:
 	// flock
-	inline std::vector<any_a<>> const& extract() const;
-	inline void mutate(std::vector<any_a<>> const& data);
-	inline std::vector<any_a<>>& reference();
+	inline std::vector<any_a<>> const& extract_vector() const;
+	inline std::vector<any_a<>>& mutate_vector();
 };
 
 } // namespace strange

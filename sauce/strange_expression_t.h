@@ -119,7 +119,7 @@ protected:
 	static inline std::pair<bool, bool> pure_literal_terms(token_a<> const& token, flock_a<> const& terms)
 	{
 		std::pair<bool, bool> pure_literal(true, true);
-		for (auto const& term : terms.extract())
+		for (auto const& term : terms.extract_vector())
 		{
 			if (!check<expression_a<>>(term))
 			{

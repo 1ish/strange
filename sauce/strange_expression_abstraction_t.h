@@ -128,11 +128,11 @@ public:
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const //TODO
 	{
 		river.write_string(" abstraction(");
-		auto nit = _dimension_names.extract().cbegin();
-		auto kit = _dimension_kinds.extract().cbegin();
-		auto eit = _dimension_expressions.extract().cbegin();
+		auto nit = _dimension_names.extract_vector().cbegin();
+		auto kit = _dimension_kinds.extract_vector().cbegin();
+		auto eit = _dimension_expressions.extract_vector().cbegin();
 		bool first = true;
-		for (auto const& def : _dimension_defaults.extract())
+		for (auto const& def : _dimension_defaults.extract_vector())
 		{
 			if (first)
 			{
@@ -166,11 +166,11 @@ public:
 			throw dis(_token.report() + "strange::expression_abstraction::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" [](");
-		auto nit = _dimension_names.extract().cbegin();
-		auto kit = _dimension_kinds.extract().cbegin();
-		auto eit = _dimension_expressions.extract().cbegin();
+		auto nit = _dimension_names.extract_vector().cbegin();
+		auto kit = _dimension_kinds.extract_vector().cbegin();
+		auto eit = _dimension_expressions.extract_vector().cbegin();
 		bool first = true;
-		for (auto const& def : _dimension_defaults.extract())
+		for (auto const& def : _dimension_defaults.extract_vector())
 		{
 			if (first)
 			{

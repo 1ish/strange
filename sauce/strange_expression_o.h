@@ -44,7 +44,7 @@ public:
 	inline expression_a<> recreate_() const
 	{
 		auto terms = flock_a<>(terms_(), true);
-		for (auto& term : terms.reference())
+		for (auto& term : terms.mutate_vector())
 		{
 			if (check<expression_a<>>(term))
 			{

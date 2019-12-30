@@ -37,9 +37,9 @@ public:
 		auto& local = local_shoal.reference();
 		local.emplace(sym("$"), _shared);
 		forward_const_iterator_a<> ait = range.cbegin_();
-		auto nit = _names.extract().cbegin();
-		auto kit = _kinds.extract().cbegin();
-		for (auto const& def : _defaults.extract())
+		auto nit = _names.extract_vector().cbegin();
+		auto kit = _kinds.extract_vector().cbegin();
+		for (auto const& def : _defaults.extract_vector())
 		{
 			if (nit->is("&"))
 			{

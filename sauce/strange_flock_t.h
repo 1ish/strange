@@ -815,7 +815,7 @@ public:
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _vector == cast<flock_a<>>(thing).extract();
+		return _vector == cast<flock_a<>>(thing).extract_vector();
 	}
 
 	inline std::size_t hash() const
@@ -1024,7 +1024,7 @@ public:
 			auto const other = cast<flock_a<>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			_vector = other.extract();
+			_vector = other.extract_vector();
 		}
 		else
 		{
@@ -1045,7 +1045,7 @@ public:
 		{
 			auto const other = cast<flock_a<>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_vector = other.extract();
+			auto const& other_vector = other.extract_vector();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_vector.insert(_vector.cend(), other_vector.cbegin(), other_vector.cend());
 		}
@@ -1103,18 +1103,12 @@ public:
 	}
 
 	// data
-	inline std_vector_any const& extract() const
+	inline std_vector_any const& extract_vector() const
 	{
 		return _vector;
 	}
 
-	inline void mutate(std_vector_any const& data)
-	{
-		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_vector = data;
-	}
-
-	inline std_vector_any& reference()
+	inline std_vector_any& mutate_vector()
 	{
 		return _vector;
 	}

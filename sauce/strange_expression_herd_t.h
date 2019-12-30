@@ -44,7 +44,7 @@ public:
 	{
 		river.write_string(" {");
 		bool first = true;
-		for (auto const& term : _terms.extract())
+		for (auto const& term : _terms.extract_vector())
 		{
 			if (first)
 			{
@@ -71,7 +71,7 @@ public:
 		}
 		river.write_string(" unordered_herd_t<>::create_(");
 		bool first = true;
-		for (auto const& term : _terms.extract())
+		for (auto const& term : _terms.extract_vector())
 		{
 			if (first)
 			{

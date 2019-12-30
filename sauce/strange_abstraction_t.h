@@ -88,9 +88,9 @@ public:
 		auto local_shoal = unordered_shoal_t<>::create_();
 		auto& local = local_shoal.reference();
 		forward_const_iterator_a<> ait = range.cbegin_();
-		auto nit = _names.extract().cbegin();
-		auto kit = _dimension_kinds.extract().cbegin();
-		for (auto const& def : _dimension_defaults.extract())
+		auto nit = _names.extract_vector().cbegin();
+		auto kit = _dimension_kinds.extract_vector().cbegin();
+		for (auto const& def : _dimension_defaults.extract_vector())
 		{
 			auto kind = *kit++;
 			if (check<expression_a<>>(kind))
@@ -124,7 +124,7 @@ public:
 			local.emplace(name, argument);
 		}
 		auto child = unordered_shoal_t<>::create_();
-		for (auto const& expression : _parent_expressions.extract())
+		for (auto const& expression : _parent_expressions.extract_vector())
 		{
 			any_a<> parent;
 			try
