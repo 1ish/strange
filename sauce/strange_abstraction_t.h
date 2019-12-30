@@ -84,9 +84,9 @@ public:
 	{
 		//TODO cache range -> child
 		auto aspects_shoal = unordered_shoal_t<>::create_();
-		auto& aspects = aspects_shoal.reference();
+		auto& aspects = aspects_shoal.mutate_unordered_map();
 		auto local_shoal = unordered_shoal_t<>::create_();
-		auto& local = local_shoal.reference();
+		auto& local = local_shoal.mutate_unordered_map();
 		forward_const_iterator_a<> ait = range.cbegin_();
 		auto nit = _names.extract_vector().cbegin();
 		auto kit = _dimension_kinds.extract_vector().cbegin();
@@ -177,13 +177,13 @@ protected:
 
 	static inline void _merge(unordered_shoal_a<> const& parent, unordered_shoal_a<>& child, any_a<> aspects)
 	{
-		auto& map = child.reference();
+		auto& map = child.mutate_unordered_map();
 		if (parent.has_string("#"))
 		{
 			aspects = parent.at_string("#");
 		}
 		bool const aspects_unordered_shoal = check<unordered_shoal_a<>>(aspects);
-		for (auto const& member : parent.extract())
+		for (auto const& member : parent.extract_unordered_map())
 		{
 			if (member.first.is("#"))
 			{

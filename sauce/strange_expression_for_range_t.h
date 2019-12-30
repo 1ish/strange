@@ -81,7 +81,7 @@ public:
 		}
 #endif
 		auto local_shoal = cast<unordered_shoal_a<>>(thing); // new block scope
-		auto& local = local_shoal.reference();
+		auto& local = local_shoal.mutate_unordered_map();
 		auto kind = _kind;
 		if (check<expression_a<>>(kind))
 		{

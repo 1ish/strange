@@ -347,7 +347,7 @@ public:
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _map == cast<unordered_shoal_a<>>(thing).extract();
+		return _map == cast<unordered_shoal_a<>>(thing).extract_unordered_map();
 	}
 
 	inline std::size_t hash() const
@@ -521,7 +521,7 @@ public:
 			auto const other = cast<unordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			_map = other.extract();
+			_map = other.extract_unordered_map();
 		}
 		else if (check<ordered_shoal_a<>>(range))
 		{
@@ -560,7 +560,7 @@ public:
 		{
 			auto const other = cast<unordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
-			auto const& other_map = other.extract();
+			auto const& other_map = other.extract_unordered_map();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_map.insert(other_map.cbegin(), other_map.cend());
 		}
@@ -604,7 +604,7 @@ public:
 			auto const other = cast<unordered_shoal_a<>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& pair : other.extract())
+			for (auto const& pair : other.extract_unordered_map())
 			{
 				_map.erase(pair.first);
 			}
@@ -646,18 +646,12 @@ public:
 	}
 
 	// data
-	inline std_unordered_map_any_any const& extract() const
+	inline std_unordered_map_any_any const& extract_unordered_map() const
 	{
 		return _map;
 	}
 
-	inline void mutate(std_unordered_map_any_any const& data)
-	{
-		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-		_map = data;
-	}
-
-	inline std_unordered_map_any_any& reference()
+	inline std_unordered_map_any_any& mutate_unordered_map()
 	{
 		return _map;
 	}

@@ -65,7 +65,7 @@ public:
 			throw dis(_token.report() + "strange::expression_shared_update::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto& local = static_cast<unordered_shoal_a<>&>(thing).reference();
+		auto& local = static_cast<unordered_shoal_a<>&>(thing).mutate_unordered_map();
 		auto lit = local.find(sym("$"));
 		if (lit == local.end())
 		{
@@ -95,7 +95,7 @@ public:
 			throw dis(_token.report() + "strange::expression_shared_update::operate kind does not include value");
 		}
 		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
-		auto& map = shared.reference();
+		auto& map = shared.mutate_unordered_map();
 		auto lock = shared.write_lock_();
 		auto it = map.find(_key);
 		if (it == map.end())

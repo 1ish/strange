@@ -65,7 +65,7 @@ public:
 			throw dis(_token.report() + "strange::expression_shared_insert::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto& local = static_cast<unordered_shoal_a<>&>(thing).reference();
+		auto& local = static_cast<unordered_shoal_a<>&>(thing).mutate_unordered_map();
 		auto lit = local.find(sym("$"));
 		if (lit == local.end())
 		{
@@ -78,7 +78,7 @@ public:
 		}
 #endif
 		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
-		auto& unordered_map = shared.reference();
+		auto& unordered_map = shared.mutate_unordered_map();
 		{
 			auto const read_lock = shared.read_lock_();
 			auto const read_it = unordered_map.find(_key);

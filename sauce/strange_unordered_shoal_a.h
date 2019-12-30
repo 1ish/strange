@@ -80,19 +80,16 @@ namespace strange {
     		return *this;
     	}
     
-     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract ( ) const
-     { assert(handle_); return read().extract( ); }
-     inline void mutate ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data )
-     { assert(handle_); write().mutate(data ); }
-     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference ( )
-     { assert(handle_); return write().reference( ); }
+     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_unordered_map ( ) const
+     { assert(handle_); return read().extract_unordered_map( ); }
+     inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_unordered_map ( )
+     { assert(handle_); return write().mutate_unordered_map( ); }
     
     private:
     	struct ___finale_handle_base___ : ___ddderived_handle_base___
     	{
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract ( ) const = 0;
-      virtual inline void mutate ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data ) = 0;
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference ( ) = 0;
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_unordered_map ( ) const = 0;
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_unordered_map ( ) = 0;
     	};
     
     	template <typename ___TTT___>
@@ -113,12 +110,10 @@ namespace strange {
     			return std::make_shared<___finale_handle_final___>(___ddderived_handle___<___TTT___, ___finale_handle_base___>::value_);
     		}
     
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract ( ) const
-      { return value_.extract( ); }
-      virtual inline void mutate ( std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & data )
-      { value_.mutate(data ); }
-      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & reference ( )
-      { return value_.reference( ); }
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_unordered_map ( ) const
+      { return value_.extract_unordered_map( ); }
+      virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_unordered_map ( )
+      { return value_.mutate_unordered_map( ); }
     	};
     
     	template <typename ___TTT___>

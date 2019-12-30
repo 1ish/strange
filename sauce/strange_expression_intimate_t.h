@@ -56,7 +56,7 @@ public:
 			throw dis(_token.report() + "strange::expression_intimate::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract();
+		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract_unordered_map();
 		auto it = local.find(sym("^"));
 		if (it == local.cend())
 		{

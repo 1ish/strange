@@ -65,7 +65,7 @@ public:
 			throw dis(_token.report() + "strange::expression_local_insert::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto& local = static_cast<unordered_shoal_a<>&>(thing).reference();
+		auto& local = static_cast<unordered_shoal_a<>&>(thing).mutate_unordered_map();
 		auto kind = _kind;
 		if (check<expression_a<>>(kind))
 		{

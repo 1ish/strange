@@ -34,7 +34,7 @@ public:
 			? cast<unordered_shoal_a<>>(_aspects)
 			: unordered_shoal_t<>::create_();
 		local_shoal.mutate_thing();
-		auto& local = local_shoal.reference();
+		auto& local = local_shoal.mutate_unordered_map();
 		local.emplace(sym("$"), _shared);
 		local.emplace(sym("^"), thing);
 		forward_const_iterator_a<> ait = range.cbegin_();
