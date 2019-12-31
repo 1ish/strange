@@ -512,11 +512,11 @@ private:
 					fixed = dimension || op == ":#";
 					optional = _it != _end && (_token.tag() != "punctuation" || !_delimiter(_token.symbol()));
 					insert = true;
-					kind = kind_t<>::create(1, "", flock_t<>::create_(), flock_t<>::create_(), flock_t<>::create_(), kind_t<>::any_sym(), fixed);
+					kind = kind_t<>::create(1, "", flock_t<>::create_(), flock_t<>::create_(), flock_t<>::create_(), kind_t<>::any_sym(), fixed, optional);
 				}
 				else if (op == ":<" || op == ":(")
 				{
-					auto const kind_expression = _kind(context);
+					auto const kind_expression = _kind(context, dimension);
 					fixed = dimension || kind_expression.terms_().at_index(6);
 					optional = kind_expression.terms_().at_index(7);
 					insert = true;
@@ -924,7 +924,7 @@ private:
 		return result;
 	}
 
-	inline expression_a<> _kind(context_ptr const& context)
+	inline expression_a<> _kind(context_ptr const& context, bool fixed = false)
 	{
 		auto const token = _token;
 		bool punctuation = token.tag() == "punctuation";
@@ -1071,23 +1071,18 @@ private:
 
 		// fixed
 		punctuation = !assignment && _it != _end && _token.tag() == "punctuation";
-		bool const fixed = punctuation && _token.symbol() == "#";
-		if (fixed)
+		if (punctuation && _token.symbol() == "#")
 		{
-			terms.push_back(yes());
+			fixed = true;
 			_next();
 			assignment = true;
 		}
 		else if (punctuation && _token.symbol() == "=")
 		{
-			terms.push_back(no());
 			_next();
 			assignment = true;
 		}
-		else
-		{
-			terms.push_back(no());
-		}
+		terms.push_back(boole(fixed));
 
 		bool const optional = colon && assignment && _it != _end &&
 			(_token.tag() != "punctuation" || !_delimiter(_token.symbol()));
