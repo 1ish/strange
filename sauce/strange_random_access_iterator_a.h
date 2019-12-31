@@ -348,7 +348,7 @@ namespace strange {
 
     
 
-    		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
+    		virtual inline ___SHARED___ ___clone___() const final
 
     		{
 
@@ -416,7 +416,7 @@ namespace strange {
 
     public:
 
-    	static inline bool ___check___(std::shared_ptr<___root_handle_base___>const & handle) noexcept
+    	static inline bool ___check___(___SHARED___ const& handle) noexcept
 
     	{
 
@@ -427,14 +427,6 @@ namespace strange {
     
 
     	inline random_access_iterator_a() = default;
-
-    
-
-    	explicit inline random_access_iterator_a(bool reference) noexcept
-
-    		: ___derived___{ reference }
-
-    	{}
 
     
 

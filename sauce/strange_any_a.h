@@ -35,7 +35,12 @@ namespace strange {
     template < typename range_a , typename symbol_a , typename cat_a , typename kind_a , typename inventory_a , typename unordered_herd_a , typename shoal_a , typename unordered_shoal_a , typename number_data_a_uint64 >
     class any_a
     {
+    protected:
+    	struct ___root_handle_base___;
     public:
+    	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
+    	using ___SHARED___ = std::shared_ptr<___root_handle_base___>;
+    
     	class hash_f
     	{
     	public:
@@ -223,9 +228,9 @@ namespace strange {
     		___root_handle_base___& operator=(___root_handle_base___&&) = default;
     		virtual ~___root_handle_base___() = default;
     
-    		virtual std::shared_ptr<___root_handle_base___> ___clone___() const = 0;
+    		virtual ___SHARED___ ___clone___() const = 0;
     
-    		virtual void ___weak___(std::weak_ptr<___root_handle_base___> const& weak) const = 0;
+    		virtual void ___weak___(___WEAK___ const& weak) const = 0;
     
     		virtual inline operator bool() const = 0;
     
@@ -301,7 +306,7 @@ namespace strange {
     			: value_{ std::move(value) }
     		{}
     
-    		virtual inline void ___weak___(std::weak_ptr<___root_handle_base___> const& weak) const final
+    		virtual inline void ___weak___(___WEAK___ const& weak) const final
     		{
     			value_.___weak___(weak);
     		}
@@ -445,9 +450,10 @@ namespace strange {
     		{}
     	};
     
-    	std::shared_ptr<___root_handle_base___> handle_;
+    	___SHARED___ handle_;
     
     	bool const ___reference___;
+    //	std::shared_ptr<___root_handle_base___>* const ___reference___;
     
     private:
     	template <typename ___TTT___>
@@ -463,7 +469,7 @@ namespace strange {
     			: ___root_handle___<___TTT___>{ std::move(value) }
     		{}
     
-    		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
+    		virtual inline ___SHARED___ ___clone___() const final
     		{
     			return std::make_shared<___root_handle_final___>(___root_handle___<___TTT___>::value_);
     		}
@@ -505,9 +511,7 @@ namespace strange {
     #endif
     
     public:
-    	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
-    
-    	static inline bool ___check___(std::shared_ptr<___root_handle_base___> const& handle) noexcept
+    	static inline bool ___check___(___SHARED___ const& handle) noexcept
     	{
     		return bool(handle);
     	}
@@ -515,11 +519,6 @@ namespace strange {
     	inline any_a() noexcept
     		: handle_{}
     		, ___reference___{ false }
-    	{}
-    
-    	explicit inline any_a(bool reference) noexcept
-    		: handle_{}
-    		, ___reference___{ reference }
     	{}
     
     	inline any_a(any_a const& other) noexcept

@@ -159,7 +159,7 @@ namespace strange {
     			: ___ddderived_handle___<___TTT___>{ std::move(value) }
     		{}
     
-    		virtual inline std::shared_ptr<___root_handle_base___> ___clone___() const final
+    		virtual inline ___SHARED___ ___clone___() const final
     		{
     			return std::make_shared<___ddderived_handle_final___>(___ddderived_handle___<___TTT___>::value_);
     		}
@@ -193,16 +193,12 @@ namespace strange {
     	friend inline bool check(herd_a<> const& value) noexcept;
     
     public:
-    	static inline bool ___check___(std::shared_ptr<___root_handle_base___>const & handle) noexcept
+    	static inline bool ___check___(___SHARED___ const& handle) noexcept
     	{
     		return bool(std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
     	}
     
     	inline herd_a() = default;
-    
-    	explicit inline herd_a(bool reference) noexcept
-    		: ___derived___{ reference }
-    	{}
     
     	inline herd_a(herd_a const& other, bool reference) noexcept
     		: ___derived___(other, reference)
