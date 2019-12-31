@@ -111,10 +111,23 @@ private:
 
 	inline ___finale_handle_base___& write() noexcept
 	{
-		if (!___reference___ && !handle_.unique())
+		if (!handle_.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			if (___reference___)
+			{
+				___reference___->reset();
+				if (!handle_.unique())
+				{
+					handle_ = handle_->___clone___();
+					handle_->___weak___(handle_);
+				}
+				*___reference___ = handle_;
+			}
+			else
+			{
+				handle_ = handle_->___clone___();
+				handle_->___weak___(handle_);
+			}
 		}
 		return *std::static_pointer_cast<___finale_handle_base___>(handle_);
 	}
@@ -170,6 +183,10 @@ public:
 			throw dis("%struct_name% assignment failed to cast from base to final");
 		}
 		handle_ = handle;
+		if (___reference___)
+		{
+			*___reference___ = handle_;
+		}
 		return *this;
 	}
 #else
@@ -178,6 +195,10 @@ public:
 	{
 		assert(!handle || std::dynamic_pointer_cast<___finale_handle_base___>(handle));
 		handle_ = handle;
+		if (___reference___)
+		{
+			*___reference___ = handle_;
+		}
 		return *this;
 	}
 #endif
@@ -187,6 +208,10 @@ public:
 	{
 		%struct_name% temp{ std::move(value) };
 		std::swap(temp.handle_, handle_);
+		if (___reference___)
+		{
+			*___reference___ = handle_;
+		}
 		return *this;
 	}
 

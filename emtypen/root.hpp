@@ -255,10 +255,23 @@ private:
 
 	inline ___root_handle_base___& write() noexcept
 	{
-		if (!___reference___ && !handle_.unique())
+		if (!handle_.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			if (___reference___)
+			{
+				___reference___->reset();
+				if (!handle_.unique())
+				{
+					handle_ = handle_->___clone___();
+					handle_->___weak___(handle_);
+				}
+				*___reference___ = handle_;
+			}
+			else
+			{
+				handle_ = handle_->___clone___();
+				handle_->___weak___(handle_);
+			}
 		}
 		return *handle_;
 	}
@@ -303,12 +316,20 @@ public:
 	inline %struct_name%& operator=(%struct_name% const& other) noexcept
 	{
 		handle_ = other.handle_;
+		if (___reference___)
+		{
+			*___reference___ = handle_;
+		}
 		return *this;
 	}
 
 	inline %struct_name%& operator=(%struct_name%&& other) noexcept
 	{
 		handle_ = std::move(other.handle_);
+		if (___reference___)
+		{
+			*___reference___ = handle_;
+		}
 		return *this;
 	}
 
@@ -332,6 +353,10 @@ public:
 	inline %struct_name%& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		handle_ = handle;
+		if (___reference___)
+		{
+			*___reference___ = handle_;
+		}
 		return *this;
 	}
 
@@ -340,6 +365,10 @@ public:
 	{
 		%struct_name% temp{ std::move(value) };
 		std::swap(temp.handle_, handle_);
+		if (___reference___)
+		{
+			*___reference___ = handle_;
+		}
 		return *this;
 	}
 

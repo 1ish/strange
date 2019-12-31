@@ -392,10 +392,23 @@ namespace strange {
     
     	inline ___dderived_handle_base___& write() noexcept
     	{
-    		if (!___reference___ && !handle_.unique())
+    		if (!handle_.unique())
     		{
-    			handle_ = handle_->___clone___();
-    			handle_->___weak___(handle_);
+    			if (___reference___)
+    			{
+    				___reference___->reset();
+    				if (!handle_.unique())
+    				{
+    					handle_ = handle_->___clone___();
+    					handle_->___weak___(handle_);
+    				}
+    				*___reference___ = handle_;
+    			}
+    			else
+    			{
+    				handle_ = handle_->___clone___();
+    				handle_->___weak___(handle_);
+    			}
     		}
     		return *std::static_pointer_cast<___dderived_handle_base___>(handle_);
     	}
@@ -451,6 +464,10 @@ namespace strange {
     			throw dis("collection_a assignment failed to cast from base to dderived");
     		}
     		handle_ = handle;
+    		if (___reference___)
+    		{
+    			*___reference___ = handle_;
+    		}
     		return *this;
     	}
     #else
@@ -459,6 +476,10 @@ namespace strange {
     	{
     		assert(!handle || std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
     		handle_ = handle;
+    		if (___reference___)
+    		{
+    			*___reference___ = handle_;
+    		}
     		return *this;
     	}
     #endif
@@ -468,6 +489,10 @@ namespace strange {
     	{
     		collection_a temp{ std::move(value) };
     		std::swap(temp.handle_, handle_);
+    		if (___reference___)
+    		{
+    			*___reference___ = handle_;
+    		}
     		return *this;
     	}
     
