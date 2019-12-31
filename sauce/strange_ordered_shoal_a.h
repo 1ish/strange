@@ -288,14 +288,6 @@ namespace strange {
 
     
 
-    	inline ordered_shoal_a(ordered_shoal_a&& other, bool reference) noexcept
-
-    		: ___derived___(std::move(other), reference)
-
-    	{}
-
-    
-
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
     	template <typename ___TTT___>

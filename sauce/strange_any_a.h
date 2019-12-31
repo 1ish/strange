@@ -452,8 +452,7 @@ namespace strange {
     
     	___SHARED___ handle_;
     
-    	bool const ___reference___;
-    //	std::shared_ptr<___root_handle_base___>* const ___reference___;
+    	___SHARED___*const ___reference___;
     
     private:
     	template <typename ___TTT___>
@@ -518,27 +517,22 @@ namespace strange {
     
     	inline any_a() noexcept
     		: handle_{}
-    		, ___reference___{ false }
+    		, ___reference___{ nullptr }
     	{}
     
     	inline any_a(any_a const& other) noexcept
     		: handle_{ other.handle_ }
-    		, ___reference___{ false }
+    		, ___reference___{ nullptr }
     	{}
     
     	inline any_a(any_a const& other, bool reference) noexcept
     		: handle_{ other.handle_ }
-    		, ___reference___{ reference }
+    		, ___reference___{ reference ? const_cast<___SHARED___*>(&other.handle_) : nullptr }
     	{}
     
     	inline any_a(any_a&& other) noexcept
     		: handle_{ std::move(other.handle_) }
-    		, ___reference___{ false }
-    	{}
-    
-    	inline any_a(any_a&& other, bool reference) noexcept
-    		: handle_{ std::move(other.handle_) }
-    		, ___reference___{ reference }
+    		, ___reference___{ nullptr }
     	{}
     
     	inline any_a& operator=(any_a const& other) noexcept
@@ -558,13 +552,13 @@ namespace strange {
     	template <typename ___TTT___>
     	explicit inline any_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
     		: handle_{ handle }
-    		, ___reference___{ reference }
+    		, ___reference___{ reference ? const_cast<___SHARED___*>(reinterpret_cast<___SHARED___ const*>(&handle)) : nullptr }
     	{}
     
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
-    	explicit inline any_a(___TTT___ value, bool reference = false) noexcept
+    	explicit inline any_a(___TTT___ value) noexcept
     		: handle_{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
-    		, ___reference___{ reference }
+    		, ___reference___{ nullptr }
     	{
     		handle_->___weak___(handle_);
     	}

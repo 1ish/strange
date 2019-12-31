@@ -289,10 +289,6 @@ namespace strange {
     		: ___derived___(other, reference)
     	{}
     
-    	inline cat_a(cat_a&& other, bool reference) noexcept
-    		: ___derived___(std::move(other), reference)
-    	{}
-    
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
     	explicit inline cat_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)

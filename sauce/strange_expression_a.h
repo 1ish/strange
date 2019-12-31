@@ -240,10 +240,6 @@ namespace strange {
     		: ___derived___(other, reference)
     	{}
     
-    	inline expression_a(expression_a&& other, bool reference) noexcept
-    		: ___derived___(std::move(other), reference)
-    	{}
-    
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
     	explicit inline expression_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)

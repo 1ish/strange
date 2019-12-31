@@ -288,14 +288,6 @@ namespace strange {
 
     
 
-    	inline random_access_const_iterator_data_a(random_access_const_iterator_data_a&& other, bool reference) noexcept
-
-    		: ___derived___(std::move(other), reference)
-
-    	{}
-
-    
-
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
     	template <typename ___TTT___>

@@ -155,10 +155,6 @@ namespace strange {
     		: ___derived___(other, reference)
     	{}
     
-    	inline brook_a(brook_a&& other, bool reference) noexcept
-    		: ___derived___(std::move(other), reference)
-    	{}
-    
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
     	explicit inline brook_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)

@@ -204,10 +204,6 @@ namespace strange {
     		: ___derived___(other, reference)
     	{}
     
-    	inline herd_a(herd_a&& other, bool reference) noexcept
-    		: ___derived___(std::move(other), reference)
-    	{}
-    
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
     	explicit inline herd_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)

@@ -337,14 +337,6 @@ namespace strange {
 
     
 
-    	inline bidirectional_const_iterator_a(bidirectional_const_iterator_a&& other, bool reference) noexcept
-
-    		: ___derived___(std::move(other), reference)
-
-    	{}
-
-    
-
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
     	template <typename ___TTT___>

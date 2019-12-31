@@ -158,10 +158,6 @@ public:
 		: ___derived___(other, reference)
 	{}
 
-	inline %struct_name%(%struct_name%&& other, bool reference) noexcept
-		: ___derived___(std::move(other), reference)
-	{}
-
 #ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
 	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false)

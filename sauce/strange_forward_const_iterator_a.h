@@ -200,10 +200,6 @@ namespace strange {
     		: ___root___(other, reference)
     	{}
     
-    	inline forward_const_iterator_a(forward_const_iterator_a&& other, bool reference) noexcept
-    		: ___root___(std::move(other), reference)
-    	{}
-    
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
     	explicit inline forward_const_iterator_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)

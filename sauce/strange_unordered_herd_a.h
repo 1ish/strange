@@ -288,14 +288,6 @@ namespace strange {
 
     
 
-    	inline unordered_herd_a(unordered_herd_a&& other, bool reference) noexcept
-
-    		: ___derived___(std::move(other), reference)
-
-    	{}
-
-    
-
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
     	template <typename ___TTT___>
