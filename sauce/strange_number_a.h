@@ -574,21 +574,8 @@ namespace strange {
     	{
     		if (!handle_.unique())
     		{
-    			if (___reference___)
-    			{
-    				___reference___->reset();
-    				if (!handle_.unique())
-    				{
-    					handle_ = handle_->___clone___();
-    					handle_->___weak___(handle_);
-    				}
-    				*___reference___ = handle_;
-    			}
-    			else
-    			{
-    				handle_ = handle_->___clone___();
-    				handle_->___weak___(handle_);
-    			}
+    			handle_ = handle_->___clone___();
+    			handle_->___weak___(handle_);
     		}
     		return *std::static_pointer_cast<___derived_handle_base___>(handle_);
     	}
@@ -644,10 +631,6 @@ namespace strange {
     			throw dis("number_a assignment failed to cast from base to derived");
     		}
     		handle_ = handle;
-    		if (___reference___)
-    		{
-    			*___reference___ = handle_;
-    		}
     		return *this;
     	}
     #else
@@ -656,10 +639,6 @@ namespace strange {
     	{
     		assert(!handle || std::dynamic_pointer_cast<___derived_handle_base___>(handle));
     		handle_ = handle;
-    		if (___reference___)
-    		{
-    			*___reference___ = handle_;
-    		}
     		return *this;
     	}
     #endif
@@ -669,10 +648,6 @@ namespace strange {
     	{
     		number_a temp{ std::move(value) };
     		std::swap(temp.handle_, handle_);
-    		if (___reference___)
-    		{
-    			*___reference___ = handle_;
-    		}
     		return *this;
     	}
     

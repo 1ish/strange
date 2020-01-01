@@ -396,35 +396,9 @@ namespace strange {
 
     		{
 
-    			if (___reference___)
+    			handle_ = handle_->___clone___();
 
-    			{
-
-    				___reference___->reset();
-
-    				if (!handle_.unique())
-
-    				{
-
-    					handle_ = handle_->___clone___();
-
-    					handle_->___weak___(handle_);
-
-    				}
-
-    				*___reference___ = handle_;
-
-    			}
-
-    			else
-
-    			{
-
-    				handle_ = handle_->___clone___();
-
-    				handle_->___weak___(handle_);
-
-    			}
+    			handle_->___weak___(handle_);
 
     		}
 
@@ -536,14 +510,6 @@ namespace strange {
 
     		handle_ = handle;
 
-    		if (___reference___)
-
-    		{
-
-    			*___reference___ = handle_;
-
-    		}
-
     		return *this;
 
     	}
@@ -559,14 +525,6 @@ namespace strange {
     		assert(!handle || std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
 
     		handle_ = handle;
-
-    		if (___reference___)
-
-    		{
-
-    			*___reference___ = handle_;
-
-    		}
 
     		return *this;
 
@@ -585,14 +543,6 @@ namespace strange {
     		random_access_const_iterator_a temp{ std::move(value) };
 
     		std::swap(temp.handle_, handle_);
-
-    		if (___reference___)
-
-    		{
-
-    			*___reference___ = handle_;
-
-    		}
 
     		return *this;
 
