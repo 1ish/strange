@@ -215,9 +215,9 @@ protected:
 		{}
 	};
 
-	___SHARED___& handle_;
-
 	___SHARED___ ___shared___;
+
+	___SHARED___& handle_;
 
 private:
 	template <typename ___TTT___>
@@ -281,23 +281,23 @@ public:
 	}
 
 	inline %struct_name%() noexcept
-		: handle_{ ___shared___ }
-		, ___shared___{}
+		: ___shared___{}
+		, handle_{ ___shared___ }
 	{}
 
 	inline %struct_name%(%struct_name% const& other) noexcept
-		: handle_{ ___shared___ }
-		, ___shared___{ other.handle_ }
+		: ___shared___{ other.handle_ }
+		, handle_{ ___shared___ }
 	{}
 
 	inline %struct_name%(%struct_name% const& other, bool reference) noexcept
-		: handle_{ ___shared___ }
-		, ___shared___{ other.handle_ }
+		: ___shared___{ reference ? ___SHARED___{} : other.handle_ }
+		, handle_{ reference ? other.handle_ : ___shared___ }
 	{}
 
 	inline %struct_name%(%struct_name%&& other) noexcept
-		: handle_{ ___shared___ }
-		, ___shared___{ std::move(other.handle_) }
+		: ___shared___{ std::move(other.handle_) }
+		, handle_{ ___shared___ }
 	{}
 
 	inline %struct_name%& operator=(%struct_name% const& other) noexcept
@@ -316,14 +316,14 @@ public:
 
 	template <typename ___TTT___>
 	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
-		: handle_{ ___shared___ }
-		, ___shared___{ handle }
+		: ___shared___{ reference ? ___SHARED___{} : handle }
+		, handle_{ reference ? const_cast<std::shared_ptr<___TTT___>&>(handle) : ___shared___ }
 	{}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
 	explicit inline %struct_name%(___TTT___ value) noexcept
-		: handle_{ ___shared___ }
-		, ___shared___{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+		: ___shared___{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+		, handle_{ ___shared___ }
 	{
 		handle_->___weak___(handle_);
 	}
