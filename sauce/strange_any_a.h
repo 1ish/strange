@@ -527,7 +527,7 @@ namespace strange {
     
     	inline any_a(any_a const& other, bool reference) noexcept
     		: ___shared___{ reference ? ___SHARED___{} : other.handle_ }
-    		, handle_{ reference ? other.handle_ : ___shared___ }
+    		, handle_{ reference ? const_cast<any_a&>(other).handle_ : ___shared___ }
     	{}
     
     	inline any_a(any_a&& other) noexcept

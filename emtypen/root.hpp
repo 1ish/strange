@@ -292,7 +292,7 @@ public:
 
 	inline %struct_name%(%struct_name% const& other, bool reference) noexcept
 		: ___shared___{ reference ? ___SHARED___{} : other.handle_ }
-		, handle_{ reference ? other.handle_ : ___shared___ }
+		, handle_{ reference ? const_cast<%struct_name%&>(other).handle_ : ___shared___ }
 	{}
 
 	inline %struct_name%(%struct_name%&& other) noexcept

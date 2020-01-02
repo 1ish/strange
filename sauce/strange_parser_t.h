@@ -70,7 +70,6 @@ private:
 	token_a<> _token;
 
 	struct context_struct;
-
 	using context_ptr = std::shared_ptr<context_struct>;
 
 	struct context_struct
@@ -81,13 +80,14 @@ private:
 			unordered_shoal_a<> const& _shared = unordered_shoal_t<>::create_() += strange::shared(),
 			unordered_herd_a<> const& _fixed = unordered_herd_t<>::create_(),
 			unordered_shoal_a<> const& _kind = unordered_shoal_t<>::create_(),
+			bool reference = false,
 			context_ptr const& _meta = context_ptr{},
 			context_ptr const& _emit = context_ptr{})
 			: shoal{ _shoal }
 			, scope{ _scope }
-			, shared{ _shared, true }
-			, fixed{ _fixed, true }
-			, kind{ _kind, true }
+			, shared(_shared, reference)
+			, fixed(_fixed, reference)
+			, kind(_kind, reference)
 			, meta{ _meta }
 			, emit{ _emit }
 			, emissions{ flock_t<>::create_() }
@@ -690,7 +690,7 @@ private:
 				{
 					if (!key_context)
 					{
-						key_context = std::make_shared<context_struct>(context->scope, context->scope, context->shared, context->fixed, context->kind, context->meta, context->emit);
+						key_context = std::make_shared<context_struct>(context->scope, context->scope, context->shared, context->fixed, context->kind, true, context->meta, context->emit);
 					}
 					key = _initial(0, key_context);
 				}
@@ -798,14 +798,16 @@ private:
 				// regular key/value pair
 				if (!value_context)
 				{
-					value_context = std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, context->fixed, context->kind, context->meta, context->emit);
+					value_context = std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, context->fixed, context->kind, true, context->meta, context->emit);
 				}
 				value = _initial(0, value_context);
 			}
 			else if (operator_token.symbol() == "::")
 			{
 				// shared scope
-				value = _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
+				auto new_fixed = _remove_herd_non_dimensions(context->fixed);
+				auto new_kind = _remove_shoal_non_dimensions(context->kind);
+				value = _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, new_fixed, new_kind, true, context->meta, context->emit));
 				bool clash = false;
 				try
 				{
@@ -839,7 +841,9 @@ private:
 					{
 						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
 					}
-					auto const terms = _elements(std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit));
+					auto new_fixed = _remove_herd_non_dimensions(context->fixed);
+					auto new_kind = _remove_shoal_non_dimensions(context->kind);
+					auto const terms = _elements(std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, new_fixed, new_kind, true, context->meta, context->emit));
 					if (fixed)
 					{
 						value = expression_extraction_t<>::create_(operator_token, terms);
@@ -852,7 +856,9 @@ private:
 				else
 				{
 					// attribute extraction/mutation
-					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, _remove_herd_non_dimensions(context->fixed), _remove_shoal_non_dimensions(context->kind), context->meta, context->emit)));
+					auto new_fixed = _remove_herd_non_dimensions(context->fixed);
+					auto new_kind = _remove_shoal_non_dimensions(context->kind);
+					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0, std::make_shared<context_struct>(context->scope, new_scope_symbol, context->shared, new_fixed, new_kind, true, context->meta, context->emit)));
 					if (fixed)
 					{
 						value = expression_attribute_extraction_t<>::create_(operator_token, terms);
@@ -1433,7 +1439,7 @@ private:
 			new_fixed_herd.mutate_thing();
 			new_kind_shoal.mutate_thing();
 		}
-		auto new_context = std::make_shared<context_struct>(context->shoal, context->scope, context->shared, new_fixed_herd, new_kind_shoal, context->meta, context->emit);
+		auto new_context = std::make_shared<context_struct>(context->shoal, context->scope, context->shared, new_fixed_herd, new_kind_shoal, true, context->meta, context->emit);
 		if (!_next())
 		{
 			throw dis("strange::parser " + _token.symbol() + " with nothing following it:") + _token.report_();
