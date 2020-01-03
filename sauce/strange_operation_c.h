@@ -35,7 +35,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		return reflection<operation_c<>>::type();
 	}
@@ -45,7 +45,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
+			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("<strange::operation>::type returned non-symbol");
@@ -60,7 +60,7 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
@@ -72,7 +72,7 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
+			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("<strange::operation>::shared returned non-unordered-shoal");
@@ -95,7 +95,7 @@ public:
 		auto const op = _operations.at_string("pure");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
@@ -110,7 +110,7 @@ public:
 		auto const op = _operations.at_string("pure");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range_t<>::create_());
+			return op.operate(any_a<>{ me_() }, range_t<>::create_());
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
@@ -125,7 +125,7 @@ public:
 		auto const op = _operations.at_string("pure");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range_t<>::create_());
+			return op.operate(any_a<>{ me_() }, range_t<>::create_());
 		}
 		auto const oper = _operations.at_string("operate");
 		if (check<operation_a<>>(oper))
@@ -146,7 +146,7 @@ public:
 		auto const op = _operations.at_string("names");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		return flock_t<>::create_();
 	}
@@ -156,7 +156,7 @@ public:
 		auto const op = _operations.at_string("names");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
+			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
 			if (!check<flock_a<>>(result))
 			{
 				throw dis("<strange::operation>::names returned non-flock");
@@ -180,9 +180,9 @@ private:
 template <typename ___ego___>
 bool const operation_c<___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	operation_c<___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 } // namespace strange

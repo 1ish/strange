@@ -261,9 +261,9 @@ private:
 template <typename ___ego___>
 bool const expression_literal_t<___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	expression_literal_t<___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 } // namespace strange

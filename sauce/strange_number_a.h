@@ -597,7 +597,26 @@ namespace strange {
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	explicit inline number_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
+    	explicit inline number_a(std::shared_ptr<___TTT___> const& handle)
+    		: ___root___{ handle }
+    	{
+    		if (handle && !std::dynamic_pointer_cast<___derived_handle_base___>(handle))
+    		{
+    			throw dis("number_a constructor failed to cast from base to derived");
+    		}
+    	}
+    #else
+    	template <typename ___TTT___>
+    	explicit inline number_a(std::shared_ptr<___TTT___> const& handle) noexcept
+    		: ___root___{ handle }
+    	{
+    		assert(!handle || std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+    	}
+    #endif
+    
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+    	template <typename ___TTT___>
+    	explicit inline number_a(std::shared_ptr<___TTT___> const& handle, bool reference)
     		: ___root___(handle, reference)
     	{
     		if (handle && !std::dynamic_pointer_cast<___derived_handle_base___>(handle))
@@ -607,7 +626,7 @@ namespace strange {
     	}
     #else
     	template <typename ___TTT___>
-    	explicit inline number_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
+    	explicit inline number_a(std::shared_ptr<___TTT___> const& handle, bool reference) noexcept
     		: ___root___(handle, reference)
     	{
     		assert(!handle || std::dynamic_pointer_cast<___derived_handle_base___>(handle));
@@ -615,9 +634,8 @@ namespace strange {
     #endif
     
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<number_a, std::decay_t<___TTT___>>::value>>
-    	explicit inline number_a(___TTT___ value, bool reference = false) noexcept
-    		: ___root___(std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
-    			reference)
+    	explicit inline number_a(___TTT___ value) noexcept
+    		: ___root___{ std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
     	{
     		handle_->___weak___(handle_);
     	}
@@ -665,9 +683,9 @@ namespace strange {
     template <typename ___1___, typename ___2___, typename ___3___>
     bool const number_a<___1___, ___2___, ___3___>::___share___ = []()
     {
-    	auto shoal = shoal_a<>(shared(), true);
+    	auto& shoal = shared();
     	reflection<number_a<___1___, ___2___, ___3___>>::share(shoal);
-    	return shoal;
+    	return shoal.something();
     }();
     
 

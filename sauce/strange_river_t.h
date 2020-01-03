@@ -106,14 +106,14 @@ class river_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		river_a<> _river;
-		number_data_a<int8_t> mutable _int_8;
+		river_a<> const _river;
+		number_data_a<int8_t> mutable _int_8; // stashing iterator
 
 		template <typename F>
 		inline const_iterator_t(river_a<> const& river, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _river(river, true)
+			, _river{ river }
 			, _int_8{ number_int_8_t<>::create_() }
 		{}
 	};
@@ -139,7 +139,7 @@ public:
 	static inline river_a<> create(std::string const& str = std::string())
 	{
 		std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(str);
-		return river_a<>(over{ river_t<>(stream.get(), stream.get(), stream) }, true);
+		return river_a<>{ over{ river_t<>(stream.get(), stream.get(), stream) } };
 	}
 
 	static inline any_a<> file__(range_a<> const& range)
@@ -165,7 +165,7 @@ public:
 	static inline river_a<> file(std::string const& name)
 	{
 		std::shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name, std::fstream::binary | std::fstream::in | std::fstream::out);
-		return river_a<>(over{ river_t<>(stream.get(), stream.get(), stream, name) }, true);
+		return river_a<>{ over{ river_t<>(stream.get(), stream.get(), stream, name) } };
 	}
 
 	static inline any_a<> in__(range_a<> const& _)
@@ -175,7 +175,7 @@ public:
 
 	static inline river_a<> in_()
 	{
-		return river_a<>(over{ river_t<>{ &std::cin } }, true);
+		return river_a<>{ over{ river_t<>{ &std::cin } } };
 	}
 
 	static inline any_a<> out__(range_a<> const& _)
@@ -185,7 +185,7 @@ public:
 
 	static inline river_a<> out_()
 	{
-		return river_a<>(over{ river_t<>(nullptr, &std::cout) }, true);
+		return river_a<>{ over{ river_t<>(nullptr, &std::cout) } };
 	}
 
 	static inline any_a<> err__(range_a<> const& _)
@@ -195,7 +195,7 @@ public:
 
 	static inline river_a<> err_()
 	{
-		return river_a<>(over{ river_t<>(nullptr, &std::cerr) }, true);
+		return river_a<>{ over{ river_t<>(nullptr, &std::cerr) } };
 	}
 
 	// reflection
@@ -1009,9 +1009,9 @@ private:
 template <typename ___ego___>
 bool const river_t<___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	river_t<___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 } // namespace strange

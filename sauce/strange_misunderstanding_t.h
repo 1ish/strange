@@ -101,9 +101,9 @@ private:
 template <typename ___ego___>
 bool const misunderstanding_t<___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	misunderstanding_t<___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 template <typename F>

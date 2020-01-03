@@ -761,9 +761,9 @@ private:
 template <typename _primitive_, typename ___ego___>
 bool const number_t<_primitive_, ___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	number_t<_primitive_, ___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 template <typename ___ego___ = number_data_a<int8_t>>

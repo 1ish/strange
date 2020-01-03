@@ -53,7 +53,7 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_local_at::operate key not found");
 		}
-		it->second.mutate_thing();
+		it->second.mutate_thing(); //TODO?
 		return any_a<>(it->second, true);
 	}
 
@@ -95,9 +95,9 @@ private:
 template <typename ___ego___>
 bool const expression_local_at_t<___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	expression_local_at_t<___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 } // namespace strange

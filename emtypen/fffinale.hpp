@@ -136,7 +136,26 @@ public:
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
-	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false)
+	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle)
+		: ___derived___{ handle }
+	{
+		if (handle && !std::dynamic_pointer_cast<___finale_handle_base___>(handle))
+		{
+			throw dis("%struct_name% constructor failed to cast from base to final");
+		}
+	}
+#else
+	template <typename ___TTT___>
+	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle) noexcept
+		: ___derived___{ handle }
+	{
+		assert(!handle || std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+	}
+#endif
+
+#ifdef STRANGE_CHECK_STATIC_CASTS
+	template <typename ___TTT___>
+	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference)
 		: ___derived___(handle, reference)
 	{
 		if (handle && !std::dynamic_pointer_cast<___finale_handle_base___>(handle))
@@ -146,7 +165,7 @@ public:
 	}
 #else
 	template <typename ___TTT___>
-	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
+	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference) noexcept
 		: ___derived___(handle, reference)
 	{
 		assert(!handle || std::dynamic_pointer_cast<___finale_handle_base___>(handle));
@@ -154,9 +173,8 @@ public:
 #endif
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
-	explicit inline %struct_name%(___TTT___ value, bool reference = false) noexcept
-		: ___derived___(std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
-			reference)
+	explicit inline %struct_name%(___TTT___ value) noexcept
+		: ___derived___{ std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
 		handle_->___weak___(handle_);
 	}
@@ -204,9 +222,9 @@ inline bool check(%struct_name%<> const& value) noexcept
 template <typename ___1___>
 bool const %struct_name%<___1___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	reflection<%struct_name%<___1___>>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 #undef ___derived___

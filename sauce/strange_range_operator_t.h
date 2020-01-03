@@ -115,7 +115,7 @@ class range_operator_t : public thing_t<___ego___>
 
 	protected:
 		_iterator_ _it;
-		range_a<> _range;
+		range_a<> const _range;
 		any_a<>& _thing_ref;
 		range_a<> const& _range_ref;
 		any_a<> mutable _result;
@@ -124,7 +124,7 @@ class range_operator_t : public thing_t<___ego___>
 		inline const_iterator_t(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _range(range, true)
+			, _range{ range }
 			, _thing_ref{ thing_ref }
 			, _range_ref{ range_ref }
 			, _result{ next() }
@@ -212,9 +212,9 @@ private:
 template <typename ___ego___>
 bool const range_operator_t<___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	range_operator_t<___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 } // namespace strange

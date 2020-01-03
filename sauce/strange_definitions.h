@@ -25,7 +25,7 @@ inline any_a<> boole(bool b)
 
 // shared
 
-inline shoal_a<> shared()
+inline shoal_a<>& shared()
 {
 	static shoal_a<> SHARED = unordered_shoal_t<>::create_();
 	return SHARED;

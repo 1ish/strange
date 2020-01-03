@@ -292,7 +292,7 @@ public:
 
 	inline %struct_name%(%struct_name% const& other, bool reference) noexcept
 		: ___shared___{ reference ? ___SHARED___{} : other.handle_ }
-		, handle_{ reference ? const_cast<%struct_name%&>(other).handle_ : ___shared___ }
+		, handle_{ *(reference ? &const_cast<%struct_name%&>(other).handle_ : &___shared___) }
 	{}
 
 	inline %struct_name%(%struct_name%&& other) noexcept
@@ -315,9 +315,15 @@ public:
 	virtual ~%struct_name%() = default;
 
 	template <typename ___TTT___>
-	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
+	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle) noexcept
+		: ___shared___{ handle }
+		, handle_{ ___shared___ }
+	{}
+
+	template <typename ___TTT___>
+	explicit inline %struct_name%(std::shared_ptr<___TTT___> const& handle, bool reference) noexcept
 		: ___shared___{ reference ? ___SHARED___{} : handle }
-		, handle_{ reference ? const_cast<std::shared_ptr<___TTT___>&>(handle) : ___shared___ }
+		, handle_{ *(reference ? &const_cast<___SHARED___&>(reinterpret_cast<___SHARED___ const&>(handle)) : &___shared___) }
 	{}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
@@ -377,7 +383,7 @@ inline ___TTT___ cast(%struct_name%<> const& value, bool reference) noexcept
 template <typename ___1___, typename ___2___, typename ___3___, typename ___4___, typename ___5___, typename ___6___, typename ___7___, typename ___8___, typename ___9___>
 bool const %struct_name%<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___, ___9___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	reflection<%struct_name%<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___, ___9___>>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();

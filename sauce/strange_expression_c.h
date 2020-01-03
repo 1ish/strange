@@ -35,7 +35,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		return reflection<expression_c<>>::type();
 	}
@@ -45,7 +45,7 @@ public:
 		auto const op = _operations.at_string("type");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
+			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("<strange::expression>::type returned non-symbol");
@@ -60,7 +60,7 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
@@ -72,7 +72,7 @@ public:
 		auto const op = _operations.at_string("shared");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
+			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("<strange::expression>::shared returned non-unordered-shoal");
@@ -108,7 +108,7 @@ public:
 		auto const op = _operations.at_string("literal");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		return no();
 	}
@@ -118,7 +118,7 @@ public:
 		auto const op = _operations.at_string("literal");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range_t<>::create_());
+			return op.operate(any_a<>{ me_() }, range_t<>::create_());
 		}
 		return no();
 	}
@@ -128,7 +128,7 @@ public:
 		auto const op = _operations.at_string("literal");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range_t<>::create_());
+			return op.operate(any_a<>{ me_() }, range_t<>::create_());
 		}
 		return false;
 	}
@@ -138,7 +138,7 @@ public:
 		auto const op = _operations.at_string("evaluate");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		auto local = unordered_shoal_t<>::create_();
 		local.insert_string("$", unordered_shoal_t<true>::create_());
@@ -150,7 +150,7 @@ public:
 		auto const op = _operations.at_string("evaluate");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range_t<>::create_());
+			return op.operate(any_a<>{ me_() }, range_t<>::create_());
 		}
 		auto local = unordered_shoal_t<>::create_();
 		local.insert_string("$", unordered_shoal_t<true>::create_());
@@ -162,7 +162,7 @@ public:
 		auto const op = _operations.at_string("token");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		return token_t<>::create_punctuation_();
 	}
@@ -172,7 +172,7 @@ public:
 		auto const op = _operations.at_string("token");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
+			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
 			if (!check<token_a<>>(result))
 			{
 				throw dis("<strange::expression>::token returned non-token");
@@ -187,7 +187,7 @@ public:
 		auto const op = _operations.at_string("terms");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		return flock_t<>::create_();
 	}
@@ -197,7 +197,7 @@ public:
 		auto const op = _operations.at_string("terms");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>(me_(), true), range_t<>::create_());
+			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
 			if (!check<flock_a<>>(result))
 			{
 				throw dis("<strange::expression>::terms returned non-flock");
@@ -212,7 +212,7 @@ public:
 		auto const op = _operations.at_string("generate");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -250,7 +250,7 @@ public:
 		auto const op = _operations.at_string("generate");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), flock_t<>::create_(version, indent, river));
+			return op.operate(any_a<>{ me_() }, flock_t<>::create_(version, indent, river));
 		}
 		return river;
 	}
@@ -260,7 +260,7 @@ public:
 		auto const op = _operations.at_string("generate");
 		if (op)
 		{
-			op.operate(any_a<>(me_(), true), flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river));
+			op.operate(any_a<>{ me_() }, flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river));
 		}
 	}
 
@@ -269,7 +269,7 @@ public:
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), range);
+			return op.operate(any_a<>{ me_() }, range);
 		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -307,7 +307,7 @@ public:
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			return op.operate(any_a<>(me_(), true), flock_t<>::create_(version, indent, river, type));
+			return op.operate(any_a<>{ me_() }, flock_t<>::create_(version, indent, river, type));
 		}
 		return river;
 	}
@@ -317,7 +317,7 @@ public:
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			op.operate(any_a<>(me_(), true), flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river, boole(type)));
+			op.operate(any_a<>{ me_() }, flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river, boole(type)));
 		}
 	}
 
@@ -335,9 +335,9 @@ private:
 template <typename ___ego___>
 bool const expression_c<___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	expression_c<___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 } // namespace strange

@@ -729,9 +729,9 @@ private:
 template <bool _concurrent_, typename ___ego___>
 bool const ordered_shoal_t<_concurrent_, ___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	ordered_shoal_t<_concurrent_, ___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 } // namespace strange

@@ -477,7 +477,7 @@ class tokenizer_t : public thing_t<___ego___>
 		inline const_iterator_t(river_a<> const& river, F&& it)
 			: thing_t{}
 			, _it{ std::forward<F>(it) }
-			, _river(river, true)
+			, _river{ river }
 			, _line{ 1 }
 			, _position{ 0 }
 			, _start_line{ 1 }
@@ -581,7 +581,7 @@ public:
 	}
 
 protected:
-	river_a<> _river;
+	river_a<> const _river;
 
 	inline tokenizer_t(river_a<> const& river)
 		: thing_t{}
@@ -649,9 +649,9 @@ private:
 template <typename ___ego___>
 bool const tokenizer_t<___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	tokenizer_t<___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 } // namespace strange

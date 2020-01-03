@@ -11,12 +11,12 @@ public:
 	// erasure
 	inline ___ego___ const me_() const
 	{
-		return ___ego___(_meek.lock(), true);
+		return ___ego___{ _meek.lock() };
 	}
 
 	inline ___ego___ me_()
 	{
-		return ___ego___(_meek.lock(), true);
+		return ___ego___{ _meek.lock() };
 	}
 
 	// reflection
@@ -211,9 +211,9 @@ private:
 template <typename ___ego___>
 bool const thing_t<___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	thing_t<___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 } // namespace strange

@@ -133,7 +133,7 @@ public:
 		{
 			throw dis("[expression]::generate passed short range");
 		}
-		any_a<> river = *it;
+		any_a<> river(*it, true);
 		if (!check<river_a<>>(river))
 		{
 			throw dis("[expression]::generate passed non-river");
@@ -172,7 +172,7 @@ public:
 		{
 			throw dis("[expression]::generate_cpp passed short range");
 		}
-		any_a<> river = *it;
+		any_a<> river(*it, true);
 		if (!check<river_a<>>(river))
 		{
 			throw dis("[expression]::generate_cpp passed non-river");

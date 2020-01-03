@@ -294,7 +294,45 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline kind_a(std::shared_ptr<___TTT___> const& handle, bool reference = false)
+    	explicit inline kind_a(std::shared_ptr<___TTT___> const& handle)
+
+    		: ___derived___{ handle }
+
+    	{
+
+    		if (handle && !std::dynamic_pointer_cast<___finale_handle_base___>(handle))
+
+    		{
+
+    			throw dis("kind_a constructor failed to cast from base to final");
+
+    		}
+
+    	}
+
+    #else
+
+    	template <typename ___TTT___>
+
+    	explicit inline kind_a(std::shared_ptr<___TTT___> const& handle) noexcept
+
+    		: ___derived___{ handle }
+
+    	{
+
+    		assert(!handle || std::dynamic_pointer_cast<___finale_handle_base___>(handle));
+
+    	}
+
+    #endif
+
+    
+
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+
+    	template <typename ___TTT___>
+
+    	explicit inline kind_a(std::shared_ptr<___TTT___> const& handle, bool reference)
 
     		: ___derived___(handle, reference)
 
@@ -314,7 +352,7 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline kind_a(std::shared_ptr<___TTT___> const& handle, bool reference = false) noexcept
+    	explicit inline kind_a(std::shared_ptr<___TTT___> const& handle, bool reference) noexcept
 
     		: ___derived___(handle, reference)
 
@@ -330,11 +368,9 @@ namespace strange {
 
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<kind_a, std::decay_t<___TTT___>>::value>>
 
-    	explicit inline kind_a(___TTT___ value, bool reference = false) noexcept
+    	explicit inline kind_a(___TTT___ value) noexcept
 
-    		: ___derived___(std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)),
-
-    			reference)
+    		: ___derived___{ std::make_shared<___finale_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 
     	{
 
@@ -430,11 +466,11 @@ namespace strange {
 
     {
 
-    	auto shoal = shoal_a<>(shared(), true);
+    	auto& shoal = shared();
 
     	reflection<kind_a<___1___>>::share(shoal);
 
-    	return shoal;
+    	return shoal.something();
 
     }();
 

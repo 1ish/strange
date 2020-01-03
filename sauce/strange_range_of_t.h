@@ -87,9 +87,9 @@ private:
 template <typename _element_, typename ___ego___>
 bool const range_of_t<_element_, ___ego___>::___share___ = []()
 {
-	auto shoal = shoal_a<>(shared(), true);
+	auto& shoal = shared();
 	range_of_t<_element_, ___ego___>::share(shoal);
-	return shoal;
+	return shoal.something();
 }();
 
 } // namespace strange
