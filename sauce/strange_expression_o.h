@@ -43,8 +43,9 @@ public:
 
 	inline expression_a<> recreate_() const
 	{
-		auto terms = flock_a<>(terms_(), true);
-		for (auto& term : terms.mutate_vector())
+		auto terms = terms_();
+		flock_t<>::std_vector_any& vector = const_cast<flock_t<>::std_vector_any&>(terms.extract_vector());
+		for (auto& term : vector)
 		{
 			if (check<expression_a<>>(term))
 			{
