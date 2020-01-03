@@ -54,7 +54,7 @@ class range_operator_t : public thing_t<___ego___>
 
 		inline any_a<> get_() const
 		{
-			return _result;
+			return operator*();
 		}
 
 		inline any_a<> const* operator->() const
@@ -64,7 +64,12 @@ class range_operator_t : public thing_t<___ego___>
 
 		inline any_a<> const& operator*() const
 		{
-			return _result;
+			auto& vector = _results.mutate_vector();
+			if (vector.empty())
+			{
+				vector.push_back(no());
+			}
+			return vector.back();
 		}
 
 		inline ___ego___ increment__(range_a<> const&)
@@ -81,7 +86,7 @@ class range_operator_t : public thing_t<___ego___>
 		inline const_iterator_t& operator++()
 		{
 			++_it;
-			_result = next();
+			next();
 			return *this;
 		}
 
@@ -104,13 +109,12 @@ class range_operator_t : public thing_t<___ego___>
 		}
 
 		// next thing
-		inline any_a<> next()
+		inline void next()
 		{
-			if (_it == _range.cend_())
+			if (_it != _range.cend_())
 			{
-				return no();
+				_results.push_back(_it.get_().operate(_thing_ref, _range_ref));
 			}
-			return _it.get_().operate(_thing_ref, _range_ref);
 		}
 
 	protected:
@@ -118,7 +122,7 @@ class range_operator_t : public thing_t<___ego___>
 		range_a<> const _range;
 		any_a<>& _thing_ref;
 		range_a<> const& _range_ref;
-		any_a<> mutable _result;
+		flock_a<> mutable _results;
 
 		template <typename F>
 		inline const_iterator_t(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
@@ -127,8 +131,10 @@ class range_operator_t : public thing_t<___ego___>
 			, _range{ range }
 			, _thing_ref{ thing_ref }
 			, _range_ref{ range_ref }
-			, _result{ next() }
-		{}
+			, _results{ flock_t<>::create_() }
+		{
+			next();
+		}
 	};
 
 public:
