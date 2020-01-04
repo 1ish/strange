@@ -22,6 +22,7 @@ std::stringstream discard;
 std::ostream& std__cout = discard;
 #endif
 
+#include "strange_first_taste.h"
 #include "strange_any_taste.h"
 #include "strange_range_taste.h"
 #include "strange_parser_hello_world_taste.h"
