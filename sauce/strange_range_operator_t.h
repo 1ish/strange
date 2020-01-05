@@ -65,9 +65,14 @@ class range_operator_t : public thing_t<___ego___>
 		inline any_a<> const& operator*() const
 		{
 			auto& vector = _results.mutate_vector();
-			if (vector.empty())
+			if (_it == _range.cend_())
 			{
-				vector.push_back(no());
+				vector.resize(_pos + 1);
+			}
+			else if(vector.size() != _pos + 1)
+			{
+				vector.resize(_pos);
+				vector.push_back(_it.get_().operate(_thing_ref, _range_ref));
 			}
 			return vector.back();
 		}
@@ -86,7 +91,7 @@ class range_operator_t : public thing_t<___ego___>
 		inline const_iterator_t& operator++()
 		{
 			++_it;
-			next();
+			++_pos;
 			return *this;
 		}
 
@@ -108,21 +113,13 @@ class range_operator_t : public thing_t<___ego___>
 			return _it;
 		}
 
-		// next thing
-		inline void next()
-		{
-			if (_it != _range.cend_())
-			{
-				_results.push_back(_it.get_().operate(_thing_ref, _range_ref));
-			}
-		}
-
 	protected:
 		_iterator_ _it;
 		range_a<> const _range;
 		any_a<>& _thing_ref;
 		range_a<> const& _range_ref;
 		flock_a<> mutable _results;
+		std::size_t _pos;
 
 		template <typename F>
 		inline const_iterator_t(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
@@ -132,9 +129,8 @@ class range_operator_t : public thing_t<___ego___>
 			, _thing_ref{ thing_ref }
 			, _range_ref{ range_ref }
 			, _results{ flock_t<>::create_() }
-		{
-			next();
-		}
+			, _pos{ 0 }
+		{}
 	};
 
 public:
