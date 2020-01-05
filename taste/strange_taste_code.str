@@ -18,8 +18,8 @@
 				(	$$<strange::range>[#element],
 					{	empty_ :# (<>),
 						size_ :# (<number_int_64>),
-						has_ :# (item, <>),
-						insert_ := (key, value, <>),
+						has_ :# (item :#, <>),
+						insert_ := (key :#, value :#, <>),
 					}
 				)
 			),

@@ -576,11 +576,19 @@ private:
 		}
 		if (shared)
 		{
+			if (!context->kind.has(name))
+			{
+				throw dis("strange::parser unrecognised shared variable:") + token.report_();
+			}
 			return expression_shared_at_t<>::create_(token, flock_t<>::create_(name));
 		}
 		if (!non_instruction && context->shared.has_string(token.symbol() + "!"))
 		{
 			return _instruction(token, context);
+		}
+		if (!context->kind.has(name))
+		{
+			throw dis("strange::parser unrecognised local variable:") + token.report_();
 		}
 		return expression_local_at_t<>::create_(token, flock_t<>::create_(name));
 	}

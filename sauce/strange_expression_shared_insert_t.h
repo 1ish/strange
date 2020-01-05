@@ -110,7 +110,8 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_shared_insert::operate kind does not include value");
 		}
-		unordered_map.emplace(_key, value);
+		// unordered_map.emplace(_key, value);
+		unordered_map[_key] = value;
 		return value;
 	}
 

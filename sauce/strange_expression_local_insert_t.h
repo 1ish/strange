@@ -83,10 +83,13 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::operate kind does not include value");
 		}
+		/*
 		if (!local.emplace(_key, value).second)
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::operate key exists");
 		}
+		*/
+		local[_key] = value;
 		return value;
 	}
 
