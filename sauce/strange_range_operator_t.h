@@ -154,12 +154,12 @@ public:
 		{
 			throw dis("strange::range_operator::create passed short range");
 		}
-		any_a<> thing_ref(*it, true);
+		any_a<> thing_ref = *it; //TODO reference, true);
 		if (++it == range.cend_())
 		{
 			throw dis("strange::range_operator::create passed short range");
 		}
-		any_a<> range_ref(*it, true);
+		any_a<> range_ref = *it; //TODO reference, true);
 		if (!check<range_a<>>(range_ref))
 		{
 			throw dis("strange::range_operator::create passed non-range range ref");

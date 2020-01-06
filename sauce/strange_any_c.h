@@ -413,7 +413,7 @@ public:
 		{
 			throw dis("<strange::any>::intimate passed empty range");
 		}
-		any_a<> thing(*it, true);
+		any_a<> thing = *it; //TODO reference, true);
 		if (++it == range.cend_())
 		{
 			throw dis("<strange::any>::intimate passed short range");
