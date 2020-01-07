@@ -217,25 +217,6 @@ namespace strange {
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	explicit inline parser_a(std::shared_ptr<___TTT___> const& handle, bool reference)
-    		: ___root___(handle, reference)
-    	{
-    		if (handle && !std::dynamic_pointer_cast<___derived_handle_base___>(handle))
-    		{
-    			throw dis("parser_a constructor failed to cast from base to derived");
-    		}
-    	}
-    #else
-    	template <typename ___TTT___>
-    	explicit inline parser_a(std::shared_ptr<___TTT___> const& handle, bool reference) noexcept
-    		: ___root___(handle, reference)
-    	{
-    		assert(!handle || std::dynamic_pointer_cast<___derived_handle_base___>(handle));
-    	}
-    #endif
-    
-    #ifdef STRANGE_CHECK_STATIC_CASTS
-    	template <typename ___TTT___>
     	explicit inline parser_a(std::shared_ptr<___TTT___>& handle, reference_tag)
     		: ___root___(handle, reference_tag{})
     	{

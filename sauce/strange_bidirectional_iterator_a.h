@@ -419,44 +419,6 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline bidirectional_iterator_a(std::shared_ptr<___TTT___> const& handle, bool reference)
-
-    		: ___derived___(handle, reference)
-
-    	{
-
-    		if (handle && !std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
-
-    		{
-
-    			throw dis("bidirectional_iterator_a constructor failed to cast from base to dderived");
-
-    		}
-
-    	}
-
-    #else
-
-    	template <typename ___TTT___>
-
-    	explicit inline bidirectional_iterator_a(std::shared_ptr<___TTT___> const& handle, bool reference) noexcept
-
-    		: ___derived___(handle, reference)
-
-    	{
-
-    		assert(!handle || std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
-
-    	}
-
-    #endif
-
-    
-
-    #ifdef STRANGE_CHECK_STATIC_CASTS
-
-    	template <typename ___TTT___>
-
     	explicit inline bidirectional_iterator_a(std::shared_ptr<___TTT___>& handle, reference_tag)
 
     		: ___derived___(handle, reference_tag{})

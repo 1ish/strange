@@ -606,12 +606,6 @@ namespace strange {
     	{}
     
     	template <typename ___TTT___>
-    	explicit inline any_a(std::shared_ptr<___TTT___> const& handle, bool reference) noexcept
-    		: ___shared___{ reference ? ___SHARED___{} : handle }
-    		, handle_{ *(reference ? &const_cast<___SHARED___&>(reinterpret_cast<___SHARED___ const&>(handle)) : &___shared___) }
-    	{}
-    
-    	template <typename ___TTT___>
     	explicit inline any_a(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
     		: ___shared___{ ___SHARED___{} }
     		, handle_{ reinterpret_cast<___SHARED___&>(handle) }
