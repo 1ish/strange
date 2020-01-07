@@ -49,7 +49,7 @@ public:
 		auto const thing = expression.evaluate_();
 		if (check<operation_a<>>(_thing) && check<operation_a<>>(thing))
 		{
-			cast<operation_a<>>(_thing, true).assign(cast<operation_a<>>(thing));
+			cast_ref<operation_a<>>(_thing).assign(cast<operation_a<>>(thing));
 		}
 		_thing = thing;
 	}

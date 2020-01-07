@@ -154,17 +154,17 @@ public:
 		{
 			throw dis("strange::range_operator::create passed short range");
 		}
-		any_a<> thing_ref = *it; //TODO reference, true);
+		any_a<> thing_ref = *it; //TODO ::ref(
 		if (++it == range.cend_())
 		{
 			throw dis("strange::range_operator::create passed short range");
 		}
-		any_a<> range_ref = *it; //TODO reference, true);
+		any_a<> range_ref = *it; //TODO ::ref(
 		if (!check<range_a<>>(range_ref))
 		{
 			throw dis("strange::range_operator::create passed non-range range ref");
 		}
-		return create_(cast<range_a<>>(the_range), thing_ref, cast<range_a<>>(range_ref, true));
+		return create_(cast<range_a<>>(the_range), thing_ref, cast_ref<range_a<>>(range_ref));
 	}
 
 	static inline range_a<> create_(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref)

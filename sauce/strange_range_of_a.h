@@ -249,6 +249,25 @@ namespace strange {
     	}
     #endif
     
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+    	template <typename ___TTT___>
+    	explicit inline range_of_a(std::shared_ptr<___TTT___>& handle, reference_tag)
+    		: ___root___(handle, reference_tag{})
+    	{
+    		if (handle && !std::dynamic_pointer_cast<___derived_handle_base___>(handle))
+    		{
+    			throw dis("range_of_a constructor failed to cast from base to derived");
+    		}
+    	}
+    #else
+    	template <typename ___TTT___>
+    	explicit inline range_of_a(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
+    		: ___root___(handle, reference_tag{})
+    	{
+    		assert(!handle || std::dynamic_pointer_cast<___derived_handle_base___>(handle));
+    	}
+    #endif
+    
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<range_of_a, std::decay_t<___TTT___>>::value>>
     	explicit inline range_of_a(___TTT___ value) noexcept
     		: ___root___{ std::make_shared<___derived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }

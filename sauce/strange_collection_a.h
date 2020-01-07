@@ -473,6 +473,25 @@ namespace strange {
     	}
     #endif
     
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+    	template <typename ___TTT___>
+    	explicit inline collection_a(std::shared_ptr<___TTT___>& handle, reference_tag)
+    		: ___derived___(handle, reference_tag{})
+    	{
+    		if (handle && !std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
+    		{
+    			throw dis("collection_a constructor failed to cast from base to dderived");
+    		}
+    	}
+    #else
+    	template <typename ___TTT___>
+    	explicit inline collection_a(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
+    		: ___derived___(handle, reference_tag{})
+    	{
+    		assert(!handle || std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
+    	}
+    #endif
+    
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<collection_a, std::decay_t<___TTT___>>::value>>
     	explicit inline collection_a(___TTT___ value) noexcept
     		: ___derived___{ std::make_shared<___dderived_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }

@@ -65,13 +65,12 @@ public:
 			throw dis(_token.report() + "strange::expression_intimate_attribute::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract_map();
+		auto& local = const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(sym("^"));
-		if (it == local.cend())
+		if (it == local.end())
 		{
 			throw dis(_token.report() + "strange::expression_intimate_attribute::operate ^ not found");
 		}
-		auto me_reference = any_a<>(it->second, true);
 		if (_assign)
 		{
 			auto kind = _kind;
@@ -91,9 +90,9 @@ public:
 			{
 				throw dis(_token.report() + "strange::expression_intimate_attribute::operate returned wrong kind of thing");
 			}
-			return any_c<>::intimate(me_reference, _member, flock_t<>::create_(value));
+			return any_c<>::intimate(it->second, _member, flock_t<>::create_(value));
 		}
-		return any_c<>::intimate(me_reference, _member, flock_t<>::create_());
+		return any_c<>::intimate(it->second, _member, flock_t<>::create_());
 	}
 
 	// expression

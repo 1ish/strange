@@ -166,7 +166,7 @@ public:
 		{
 			throw dis("strange::unordered_herd::visit passed non-inventory");
 		}
-		return visit_(cast<inventory_a<>>(range, true));
+		return visit_(cast<inventory_a<>>(range));
 	}
 
 	inline any_a<> visit_(inventory_a<>& inventory) const

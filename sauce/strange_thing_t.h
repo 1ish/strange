@@ -99,7 +99,7 @@ public:
 		{
 			throw dis("strange::thing::invoke passed empty range");
 		}
-		any_a<> thing = *it; //TODO reference, true);
+		any_a<> thing = *it; //TODO ::ref(
 		if (++it == range.cend_())
 		{
 			throw dis("strange::thing::invoke passed short range");
@@ -135,7 +135,7 @@ public:
 		{
 			throw dis("strange::thing::operate passed empty range");
 		}
-		any_a<> thing = *it; //TODO reference, true);
+		any_a<> thing = *it; //TODO ::ref(
 		return thing.operate(thing, range_t<>::create_(++it, range.cend_()));
 	}
 

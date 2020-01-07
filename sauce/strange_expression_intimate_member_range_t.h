@@ -56,9 +56,9 @@ public:
 			throw dis(_token.report() + "strange::expression_intimate_member_range::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract_map();
+		auto& local = const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(sym("^"));
-		if (it == local.cend())
+		if (it == local.end())
 		{
 			throw dis(_token.report() + "strange::expression_intimate_member_range::operate ^ not found");
 		}
@@ -67,7 +67,7 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_intimate_member_range::operate with non-range term");
 		}
-		return any_c<>::intimate(any_a<>(it->second, true), _member, cast<range_a<>>(range_term));
+		return any_c<>::intimate(it->second, _member, cast<range_a<>>(range_term));
 	}
 
 	// expression

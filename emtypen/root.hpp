@@ -1,13 +1,27 @@
 template <typename ___TTT___>
-inline bool check(any_a<> const& value) noexcept;
+inline bool check(%struct_name%<> const& value) noexcept;
 template <typename ___TTT___, typename ___VVV___>
 inline bool check(___VVV___ const&) noexcept;
 #ifdef STRANGE_CHECK_STATIC_CASTS
 template <typename ___TTT___>
-inline ___TTT___ cast(any_a<> const& value, bool reference = false);
+inline ___TTT___ cast(%struct_name%<> const& value);
 #else
 template <typename ___TTT___>
-inline ___TTT___ cast(any_a<> const& value, bool reference = false) noexcept;
+inline ___TTT___ cast(%struct_name%<> const& value) noexcept;
+#endif
+#ifdef STRANGE_CHECK_STATIC_CASTS
+template <typename ___TTT___>
+inline ___TTT___ cast_ref(%struct_name%<>& value);
+#else
+template <typename ___TTT___>
+inline ___TTT___ cast_ref(%struct_name%<>& value) noexcept;
+#endif
+#ifdef STRANGE_CHECK_STATIC_CASTS
+template <typename ___TTT___>
+inline ___TTT___ cast_dup(%struct_name%<>& value);
+#else
+template <typename ___TTT___>
+inline ___TTT___ cast_dup(%struct_name%<>& value) noexcept;
 #endif
 
 %struct_prefix%
@@ -29,12 +43,12 @@ public:
 		}
 	};
 
-	inline any_a operator[](range_a const& range)
+	inline %struct_name% operator[](range_a const& range)
 	{
 		return invoke(*this, range);
 	}
 
-	inline any_a operator()(range_a const& range)
+	inline %struct_name% operator()(range_a const& range)
 	{
 		return operate(*this, range);
 	}
@@ -270,10 +284,24 @@ private:
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
-	friend inline ___TTT___ cast(%struct_name%<> const& value, bool reference);
+	friend inline ___TTT___ cast(%struct_name%<> const& value);
 #else
 	template <typename ___TTT___>
-	friend inline ___TTT___ cast(%struct_name%<> const& value, bool reference) noexcept;
+	friend inline ___TTT___ cast(%struct_name%<> const& value) noexcept;
+#endif
+#ifdef STRANGE_CHECK_STATIC_CASTS
+	template <typename ___TTT___>
+	friend inline ___TTT___ cast_ref(%struct_name%<>& value);
+#else
+	template <typename ___TTT___>
+	friend inline ___TTT___ cast_ref(%struct_name%<>& value) noexcept;
+#endif
+#ifdef STRANGE_CHECK_STATIC_CASTS
+	template <typename ___TTT___>
+	friend inline ___TTT___ cast_dup(%struct_name%<>& value);
+#else
+	template <typename ___TTT___>
+	friend inline ___TTT___ cast_dup(%struct_name%<>& value) noexcept;
 #endif
 
 public:
@@ -348,6 +376,12 @@ public:
 		, handle_{ *(reference ? &const_cast<___SHARED___&>(reinterpret_cast<___SHARED___ const&>(handle)) : &___shared___) }
 	{}
 
+	template <typename ___TTT___>
+	explicit inline %struct_name%(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
+		: ___shared___{ ___SHARED___{} }
+		, handle_{ reinterpret_cast<___SHARED___&>(handle) }
+	{}
+
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<%struct_name%, std::decay_t<___TTT___>>::value>>
 	explicit inline %struct_name%(___TTT___ value) noexcept
 		: ___shared___{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
@@ -390,15 +424,57 @@ inline bool check(___VVV___ const&) noexcept
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
 template <typename ___TTT___>
-inline ___TTT___ cast(%struct_name%<> const& value, bool reference)
+inline ___TTT___ cast(%struct_name%<> const& value)
 {
-	return ___TTT___(value.handle_, reference);
+	return ___TTT___{ value.handle_ };
 }
 #else
 template <typename ___TTT___>
-inline ___TTT___ cast(%struct_name%<> const& value, bool reference) noexcept
+inline ___TTT___ cast(%struct_name%<> const& value) noexcept
 {
-	return ___TTT___(value.handle_, reference);
+	return ___TTT___{ value.handle_ };
+}
+#endif
+
+#ifdef STRANGE_CHECK_STATIC_CASTS
+template <typename ___TTT___>
+inline ___TTT___ cast_ref(%struct_name%<>& value)
+{
+	return ___TTT___(value.handle_, %struct_name%<>::reference_tag{});
+}
+#else
+template <typename ___TTT___>
+inline ___TTT___ cast_ref(%struct_name%<>& value) noexcept
+{
+	return ___TTT___(value.handle_, %struct_name%<>::reference_tag{});
+}
+#endif
+
+#ifdef STRANGE_CHECK_STATIC_CASTS
+template <typename ___TTT___>
+inline ___TTT___ cast_dup(%struct_name%<>& value)
+{
+	if (&value.handle_ == &value.___shared___)
+	{
+		return ___TTT___{ value.handle_ };
+	}
+	else
+	{
+		return ___TTT___(value.handle_, %struct_name%<>::reference_tag{});
+	}
+}
+#else
+template <typename ___TTT___>
+inline ___TTT___ cast_dup(%struct_name%<>& value) noexcept
+{
+	if (&value.handle_ == &value.___shared___)
+	{
+		return ___TTT___{ value.handle_ };
+	}
+	else
+	{
+		return ___TTT___(value.handle_, %struct_name%<>::reference_tag{});
+	}
 }
 #endif
 

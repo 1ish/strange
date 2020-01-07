@@ -85,9 +85,9 @@ private:
 			context_ptr const& _emit = context_ptr{})
 			: shoal{ _shoal }
 			, scope{ _scope }
-			, shared(_shared, reference) //TODO , true);
-			, fixed(_fixed, reference) //TODO , true);
-			, kind(_kind, reference) //TODO , true);
+			, shared(_shared, reference) //TODO ::ref(
+			, fixed(_fixed, reference) //TODO ::ref(
+			, kind(_kind, reference) //TODO ::ref(
 			, meta{ _meta }
 			, emit{ _emit }
 			, emissions{ flock_t<>::create_() }

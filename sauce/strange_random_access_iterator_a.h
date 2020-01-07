@@ -554,6 +554,44 @@ namespace strange {
 
     
 
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+
+    	template <typename ___TTT___>
+
+    	explicit inline random_access_iterator_a(std::shared_ptr<___TTT___>& handle, reference_tag)
+
+    		: ___derived___(handle, reference_tag{})
+
+    	{
+
+    		if (handle && !std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
+
+    		{
+
+    			throw dis("random_access_iterator_a constructor failed to cast from base to ddderived");
+
+    		}
+
+    	}
+
+    #else
+
+    	template <typename ___TTT___>
+
+    	explicit inline random_access_iterator_a(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
+
+    		: ___derived___(handle, reference_tag{})
+
+    	{
+
+    		assert(!handle || std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
+
+    	}
+
+    #endif
+
+    
+
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<random_access_iterator_a, std::decay_t<___TTT___>>::value>>
 
     	explicit inline random_access_iterator_a(___TTT___ value) noexcept

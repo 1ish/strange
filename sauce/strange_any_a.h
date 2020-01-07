@@ -26,10 +26,24 @@ namespace strange {
     inline bool check(___VVV___ const&) noexcept;
     #ifdef STRANGE_CHECK_STATIC_CASTS
     template <typename ___TTT___>
-    inline ___TTT___ cast(any_a<> const& value, bool reference = false);
+    inline ___TTT___ cast(any_a<> const& value);
     #else
     template <typename ___TTT___>
-    inline ___TTT___ cast(any_a<> const& value, bool reference = false) noexcept;
+    inline ___TTT___ cast(any_a<> const& value) noexcept;
+    #endif
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+    template <typename ___TTT___>
+    inline ___TTT___ cast_ref(any_a<>& value);
+    #else
+    template <typename ___TTT___>
+    inline ___TTT___ cast_ref(any_a<>& value) noexcept;
+    #endif
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+    template <typename ___TTT___>
+    inline ___TTT___ cast_dup(any_a<>& value);
+    #else
+    template <typename ___TTT___>
+    inline ___TTT___ cast_dup(any_a<>& value) noexcept;
     #endif
     
     template < typename range_a , typename symbol_a , typename cat_a , typename kind_a , typename inventory_a , typename unordered_herd_a , typename shoal_a , typename unordered_shoal_a , typename number_data_a_uint64 >
@@ -505,10 +519,24 @@ namespace strange {
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	friend inline ___TTT___ cast(any_a<> const& value, bool reference);
+    	friend inline ___TTT___ cast(any_a<> const& value);
     #else
     	template <typename ___TTT___>
-    	friend inline ___TTT___ cast(any_a<> const& value, bool reference) noexcept;
+    	friend inline ___TTT___ cast(any_a<> const& value) noexcept;
+    #endif
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+    	template <typename ___TTT___>
+    	friend inline ___TTT___ cast_ref(any_a<>& value);
+    #else
+    	template <typename ___TTT___>
+    	friend inline ___TTT___ cast_ref(any_a<>& value) noexcept;
+    #endif
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+    	template <typename ___TTT___>
+    	friend inline ___TTT___ cast_dup(any_a<>& value);
+    #else
+    	template <typename ___TTT___>
+    	friend inline ___TTT___ cast_dup(any_a<>& value) noexcept;
     #endif
     
     public:
@@ -583,6 +611,12 @@ namespace strange {
     		, handle_{ *(reference ? &const_cast<___SHARED___&>(reinterpret_cast<___SHARED___ const&>(handle)) : &___shared___) }
     	{}
     
+    	template <typename ___TTT___>
+    	explicit inline any_a(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
+    		: ___shared___{ ___SHARED___{} }
+    		, handle_{ reinterpret_cast<___SHARED___&>(handle) }
+    	{}
+    
     	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
     	explicit inline any_a(___TTT___ value) noexcept
     		: ___shared___{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
@@ -625,15 +659,57 @@ namespace strange {
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     template <typename ___TTT___>
-    inline ___TTT___ cast(any_a<> const& value, bool reference)
+    inline ___TTT___ cast(any_a<> const& value)
     {
-    	return ___TTT___(value.handle_, reference);
+    	return ___TTT___{ value.handle_ };
     }
     #else
     template <typename ___TTT___>
-    inline ___TTT___ cast(any_a<> const& value, bool reference) noexcept
+    inline ___TTT___ cast(any_a<> const& value) noexcept
     {
-    	return ___TTT___(value.handle_, reference);
+    	return ___TTT___{ value.handle_ };
+    }
+    #endif
+    
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+    template <typename ___TTT___>
+    inline ___TTT___ cast_ref(any_a<>& value)
+    {
+    	return ___TTT___(value.handle_, any_a<>::reference_tag{});
+    }
+    #else
+    template <typename ___TTT___>
+    inline ___TTT___ cast_ref(any_a<>& value) noexcept
+    {
+    	return ___TTT___(value.handle_, any_a<>::reference_tag{});
+    }
+    #endif
+    
+    #ifdef STRANGE_CHECK_STATIC_CASTS
+    template <typename ___TTT___>
+    inline ___TTT___ cast_dup(any_a<>& value)
+    {
+    	if (&value.handle_ == &value.___shared___)
+    	{
+    		return ___TTT___{ value.handle_ };
+    	}
+    	else
+    	{
+    		return ___TTT___(value.handle_, any_a<>::reference_tag{});
+    	}
+    }
+    #else
+    template <typename ___TTT___>
+    inline ___TTT___ cast_dup(any_a<>& value) noexcept
+    {
+    	if (&value.handle_ == &value.___shared___)
+    	{
+    		return ___TTT___{ value.handle_ };
+    	}
+    	else
+    	{
+    		return ___TTT___(value.handle_, any_a<>::reference_tag{});
+    	}
     }
     #endif
     
