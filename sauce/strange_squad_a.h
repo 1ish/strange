@@ -288,6 +288,46 @@ namespace strange {
 
     
 
+    	inline squad_a(squad_a& other, reference_tag) noexcept
+
+    		: ___shared___{ ___SHARED___{} }
+
+    		, handle_{ other.handle_ }
+
+    	{}
+
+    
+
+    	static inline squad_a ref(squad_a& other) noexcept
+
+    	{
+
+    		return squad_a(other, reference_tag{});
+
+    	}
+
+    
+
+    	inline squad_a(squad_a& other, duplicate_tag) noexcept
+
+    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
+
+    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+
+    	{}
+
+    
+
+    	static inline squad_a dup(squad_a& other) noexcept
+
+    	{
+
+    		return squad_a(other, duplicate_tag{});
+
+    	}
+
+    
+
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
     	template <typename ___TTT___>

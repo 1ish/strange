@@ -13,6 +13,8 @@ inline ___TTT___ cast(any_a<> const& value, bool reference = false) noexcept;
 %struct_prefix%
 {
 protected:
+	struct reference_tag {};
+	struct duplicate_tag {};
 	struct ___root_handle_base___;
 public:
 	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
@@ -294,6 +296,26 @@ public:
 		: ___shared___{ reference ? ___SHARED___{} : other.handle_ }
 		, handle_{ *(reference ? &const_cast<%struct_name%&>(other).handle_ : &___shared___) }
 	{}
+
+	inline %struct_name%(%struct_name%& other, reference_tag) noexcept
+		: ___shared___{ ___SHARED___{} }
+		, handle_{ other.handle_ }
+	{}
+
+	static inline %struct_name% ref(%struct_name%& other) noexcept
+	{
+		return %struct_name%(other, reference_tag{});
+	}
+
+	inline %struct_name%(%struct_name%& other, duplicate_tag) noexcept
+		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
+		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+	{}
+
+	static inline %struct_name% dup(%struct_name%& other) noexcept
+	{
+		return %struct_name%(other, duplicate_tag{});
+	}
 
 	inline %struct_name%(%struct_name%&& other) noexcept
 		: ___shared___{ std::move(other.handle_) }

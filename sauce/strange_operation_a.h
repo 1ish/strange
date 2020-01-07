@@ -208,6 +208,26 @@ namespace strange {
     		: ___root___(other, reference)
     	{}
     
+    	inline operation_a(operation_a& other, reference_tag) noexcept
+    		: ___shared___{ ___SHARED___{} }
+    		, handle_{ other.handle_ }
+    	{}
+    
+    	static inline operation_a ref(operation_a& other) noexcept
+    	{
+    		return operation_a(other, reference_tag{});
+    	}
+    
+    	inline operation_a(operation_a& other, duplicate_tag) noexcept
+    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
+    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+    	{}
+    
+    	static inline operation_a dup(operation_a& other) noexcept
+    	{
+    		return operation_a(other, duplicate_tag{});
+    	}
+    
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
     	explicit inline operation_a(std::shared_ptr<___TTT___> const& handle)

@@ -191,6 +191,26 @@ namespace strange {
     		: ___root___(other, reference)
     	{}
     
+    	inline range_of_a(range_of_a& other, reference_tag) noexcept
+    		: ___shared___{ ___SHARED___{} }
+    		, handle_{ other.handle_ }
+    	{}
+    
+    	static inline range_of_a ref(range_of_a& other) noexcept
+    	{
+    		return range_of_a(other, reference_tag{});
+    	}
+    
+    	inline range_of_a(range_of_a& other, duplicate_tag) noexcept
+    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
+    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+    	{}
+    
+    	static inline range_of_a dup(range_of_a& other) noexcept
+    	{
+    		return range_of_a(other, duplicate_tag{});
+    	}
+    
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
     	explicit inline range_of_a(std::shared_ptr<___TTT___> const& handle)

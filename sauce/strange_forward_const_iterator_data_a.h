@@ -155,6 +155,26 @@ namespace strange {
     		: ___derived___(other, reference)
     	{}
     
+    	inline forward_const_iterator_data_a(forward_const_iterator_data_a& other, reference_tag) noexcept
+    		: ___shared___{ ___SHARED___{} }
+    		, handle_{ other.handle_ }
+    	{}
+    
+    	static inline forward_const_iterator_data_a ref(forward_const_iterator_data_a& other) noexcept
+    	{
+    		return forward_const_iterator_data_a(other, reference_tag{});
+    	}
+    
+    	inline forward_const_iterator_data_a(forward_const_iterator_data_a& other, duplicate_tag) noexcept
+    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
+    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+    	{}
+    
+    	static inline forward_const_iterator_data_a dup(forward_const_iterator_data_a& other) noexcept
+    	{
+    		return forward_const_iterator_data_a(other, duplicate_tag{});
+    	}
+    
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
     	explicit inline forward_const_iterator_data_a(std::shared_ptr<___TTT___> const& handle)

@@ -190,6 +190,26 @@ namespace strange {
     		: ___root___(other, reference)
     	{}
     
+    	inline misunderstanding_a(misunderstanding_a& other, reference_tag) noexcept
+    		: ___shared___{ ___SHARED___{} }
+    		, handle_{ other.handle_ }
+    	{}
+    
+    	static inline misunderstanding_a ref(misunderstanding_a& other) noexcept
+    	{
+    		return misunderstanding_a(other, reference_tag{});
+    	}
+    
+    	inline misunderstanding_a(misunderstanding_a& other, duplicate_tag) noexcept
+    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
+    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+    	{}
+    
+    	static inline misunderstanding_a dup(misunderstanding_a& other) noexcept
+    	{
+    		return misunderstanding_a(other, duplicate_tag{});
+    	}
+    
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
     	explicit inline misunderstanding_a(std::shared_ptr<___TTT___> const& handle)

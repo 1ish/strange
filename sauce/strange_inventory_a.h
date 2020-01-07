@@ -216,6 +216,26 @@ namespace strange {
     		: ___derived___(other, reference)
     	{}
     
+    	inline inventory_a(inventory_a& other, reference_tag) noexcept
+    		: ___shared___{ ___SHARED___{} }
+    		, handle_{ other.handle_ }
+    	{}
+    
+    	static inline inventory_a ref(inventory_a& other) noexcept
+    	{
+    		return inventory_a(other, reference_tag{});
+    	}
+    
+    	inline inventory_a(inventory_a& other, duplicate_tag) noexcept
+    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
+    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+    	{}
+    
+    	static inline inventory_a dup(inventory_a& other) noexcept
+    	{
+    		return inventory_a(other, duplicate_tag{});
+    	}
+    
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
     	explicit inline inventory_a(std::shared_ptr<___TTT___> const& handle)

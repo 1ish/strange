@@ -36,6 +36,8 @@ namespace strange {
     class any_a
     {
     protected:
+    	struct reference_tag {};
+    	struct duplicate_tag {};
     	struct ___root_handle_base___;
     public:
     	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
@@ -529,6 +531,26 @@ namespace strange {
     		: ___shared___{ reference ? ___SHARED___{} : other.handle_ }
     		, handle_{ *(reference ? &const_cast<any_a&>(other).handle_ : &___shared___) }
     	{}
+    
+    	inline any_a(any_a& other, reference_tag) noexcept
+    		: ___shared___{ ___SHARED___{} }
+    		, handle_{ other.handle_ }
+    	{}
+    
+    	static inline any_a ref(any_a& other) noexcept
+    	{
+    		return any_a(other, reference_tag{});
+    	}
+    
+    	inline any_a(any_a& other, duplicate_tag) noexcept
+    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
+    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+    	{}
+    
+    	static inline any_a dup(any_a& other) noexcept
+    	{
+    		return any_a(other, duplicate_tag{});
+    	}
     
     	inline any_a(any_a&& other) noexcept
     		: ___shared___{ std::move(other.handle_) }

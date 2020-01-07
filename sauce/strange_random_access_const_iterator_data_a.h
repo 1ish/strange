@@ -288,6 +288,46 @@ namespace strange {
 
     
 
+    	inline random_access_const_iterator_data_a(random_access_const_iterator_data_a& other, reference_tag) noexcept
+
+    		: ___shared___{ ___SHARED___{} }
+
+    		, handle_{ other.handle_ }
+
+    	{}
+
+    
+
+    	static inline random_access_const_iterator_data_a ref(random_access_const_iterator_data_a& other) noexcept
+
+    	{
+
+    		return random_access_const_iterator_data_a(other, reference_tag{});
+
+    	}
+
+    
+
+    	inline random_access_const_iterator_data_a(random_access_const_iterator_data_a& other, duplicate_tag) noexcept
+
+    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
+
+    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+
+    	{}
+
+    
+
+    	static inline random_access_const_iterator_data_a dup(random_access_const_iterator_data_a& other) noexcept
+
+    	{
+
+    		return random_access_const_iterator_data_a(other, duplicate_tag{});
+
+    	}
+
+    
+
     #ifdef STRANGE_CHECK_STATIC_CASTS
 
     	template <typename ___TTT___>

@@ -240,6 +240,26 @@ namespace strange {
     		: ___derived___(other, reference)
     	{}
     
+    	inline expression_a(expression_a& other, reference_tag) noexcept
+    		: ___shared___{ ___SHARED___{} }
+    		, handle_{ other.handle_ }
+    	{}
+    
+    	static inline expression_a ref(expression_a& other) noexcept
+    	{
+    		return expression_a(other, reference_tag{});
+    	}
+    
+    	inline expression_a(expression_a& other, duplicate_tag) noexcept
+    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
+    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+    	{}
+    
+    	static inline expression_a dup(expression_a& other) noexcept
+    	{
+    		return expression_a(other, duplicate_tag{});
+    	}
+    
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
     	explicit inline expression_a(std::shared_ptr<___TTT___> const& handle)
