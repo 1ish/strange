@@ -73,7 +73,7 @@ protected:
 				throw dis("strange::operation::kind_names_params passed non-symbol name");
 			}
 			bool const end = (++it == params.cend_());
-			kind = end ? cast<any_a<>>(kind_t<>::create_()) : *it;
+			kind = end ? any_a<>::val(kind_t<>::create_()) : *it;
 			if (!end && !check<kind_a<>>(kind))
 			{
 				throw dis("strange::operation::kind_names_params passed non-kind param");

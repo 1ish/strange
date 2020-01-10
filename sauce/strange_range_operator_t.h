@@ -72,7 +72,7 @@ class range_operator_t : public thing_t<___ego___>
 			else if(vector.size() != _pos + 1)
 			{
 				vector.resize(_pos);
-				vector.push_back(_it.get_().operate(_thing_ref, _range_ref));
+				vector.emplace_back(_it->operate(_thing_ref, _range_ref), any_a<>::___duplicate_tag___{});
 			}
 			return vector.back();
 		}
@@ -154,17 +154,17 @@ public:
 		{
 			throw dis("strange::range_operator::create passed short range");
 		}
-		any_a<> thing_ref = *it; //TODO ::ref(
+		any_a<> thing_ref = any_a<>::dup(const_cast<any_a<>&>(*it));
 		if (++it == range.cend_())
 		{
 			throw dis("strange::range_operator::create passed short range");
 		}
-		any_a<> range_ref = *it; //TODO ::ref(
+		any_a<> range_ref = any_a<>::dup(const_cast<any_a<>&>(*it));
 		if (!check<range_a<>>(range_ref))
 		{
 			throw dis("strange::range_operator::create passed non-range range ref");
 		}
-		return create_(cast<range_a<>>(the_range), thing_ref, cast_ref<range_a<>>(range_ref));
+		return create_(cast<range_a<>>(the_range), thing_ref, cast_dup<range_a<>>(range_ref));
 	}
 
 	static inline range_a<> create_(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref)

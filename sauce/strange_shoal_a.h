@@ -212,28 +212,31 @@ namespace strange {
     
     	inline shoal_a() = default;
     
+    	static inline shoal_a val(shoal_a const& other) noexcept
+    	{
+    		return shoal_a{ other };
+    	}
+    /*
     	inline shoal_a(shoal_a const& other, bool reference) noexcept
     		: ___derived___(other, reference)
     	{}
-    
-    	inline shoal_a(shoal_a& other, reference_tag) noexcept
-    		: ___shared___{ ___SHARED___{} }
-    		, handle_{ other.handle_ }
+    */
+    	inline shoal_a(shoal_a& other, ___reference_tag___) noexcept
+    		: ___derived___(other, ___reference_tag___{})
     	{}
     
     	static inline shoal_a ref(shoal_a& other) noexcept
     	{
-    		return shoal_a(other, reference_tag{});
+    		return shoal_a(other, ___reference_tag___{});
     	}
     
-    	inline shoal_a(shoal_a& other, duplicate_tag) noexcept
-    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
-    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+    	inline shoal_a(shoal_a& other, ___duplicate_tag___) noexcept
+    		: ___derived___(other, ___duplicate_tag___{})
     	{}
     
     	static inline shoal_a dup(shoal_a& other) noexcept
     	{
-    		return shoal_a(other, duplicate_tag{});
+    		return shoal_a(other, ___duplicate_tag___{});
     	}
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -257,8 +260,8 @@ namespace strange {
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	explicit inline shoal_a(std::shared_ptr<___TTT___>& handle, reference_tag)
-    		: ___derived___(handle, reference_tag{})
+    	explicit inline shoal_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___)
+    		: ___derived___(handle, ___reference_tag___{})
     	{
     		if (handle && !std::dynamic_pointer_cast<___ddderived_handle_base___>(handle))
     		{
@@ -267,8 +270,8 @@ namespace strange {
     	}
     #else
     	template <typename ___TTT___>
-    	explicit inline shoal_a(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
-    		: ___derived___(handle, reference_tag{})
+    	explicit inline shoal_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
+    		: ___derived___(handle, ___reference_tag___{})
     	{
     		assert(!handle || std::dynamic_pointer_cast<___ddderived_handle_base___>(handle));
     	}

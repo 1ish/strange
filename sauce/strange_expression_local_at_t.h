@@ -47,13 +47,13 @@ public:
 			throw dis(_token.report() + "strange::expression_local_at::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract_map();
+		auto& local = const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(_key);
-		if (it == local.cend())
+		if (it == local.end())
 		{
 			throw dis(_token.report() + "strange::expression_local_at::operate key not found");
 		}
-		return it->second; //TODO ::ref(
+		return any_a<>::ref(it->second);
 	}
 
 	// expression

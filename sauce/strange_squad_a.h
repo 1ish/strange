@@ -280,19 +280,27 @@ namespace strange {
 
     
 
+    	static inline squad_a val(squad_a const& other) noexcept
+
+    	{
+
+    		return squad_a{ other };
+
+    	}
+
+    /*
+
     	inline squad_a(squad_a const& other, bool reference) noexcept
 
     		: ___derived___(other, reference)
 
     	{}
 
-    
+    */
 
-    	inline squad_a(squad_a& other, reference_tag) noexcept
+    	inline squad_a(squad_a& other, ___reference_tag___) noexcept
 
-    		: ___shared___{ ___SHARED___{} }
-
-    		, handle_{ other.handle_ }
+    		: ___derived___(other, ___reference_tag___{})
 
     	{}
 
@@ -302,17 +310,15 @@ namespace strange {
 
     	{
 
-    		return squad_a(other, reference_tag{});
+    		return squad_a(other, ___reference_tag___{});
 
     	}
 
     
 
-    	inline squad_a(squad_a& other, duplicate_tag) noexcept
+    	inline squad_a(squad_a& other, ___duplicate_tag___) noexcept
 
-    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
-
-    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+    		: ___derived___(other, ___duplicate_tag___{})
 
     	{}
 
@@ -322,7 +328,7 @@ namespace strange {
 
     	{
 
-    		return squad_a(other, duplicate_tag{});
+    		return squad_a(other, ___duplicate_tag___{});
 
     	}
 
@@ -370,9 +376,9 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline squad_a(std::shared_ptr<___TTT___>& handle, reference_tag)
+    	explicit inline squad_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___)
 
-    		: ___derived___(handle, reference_tag{})
+    		: ___derived___(handle, ___reference_tag___{})
 
     	{
 
@@ -390,9 +396,9 @@ namespace strange {
 
     	template <typename ___TTT___>
 
-    	explicit inline squad_a(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
+    	explicit inline squad_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
 
-    		: ___derived___(handle, reference_tag{})
+    		: ___derived___(handle, ___reference_tag___{})
 
     	{
 

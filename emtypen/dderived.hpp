@@ -154,28 +154,31 @@ public:
 
 	inline %struct_name%() = default;
 
+	static inline %struct_name% val(%struct_name% const& other) noexcept
+	{
+		return %struct_name%{ other };
+	}
+/*
 	inline %struct_name%(%struct_name% const& other, bool reference) noexcept
 		: ___derived___(other, reference)
 	{}
-
-	inline %struct_name%(%struct_name%& other, reference_tag) noexcept
-		: ___shared___{ ___SHARED___{} }
-		, handle_{ other.handle_ }
+*/
+	inline %struct_name%(%struct_name%& other, ___reference_tag___) noexcept
+		: ___derived___(other, ___reference_tag___{})
 	{}
 
 	static inline %struct_name% ref(%struct_name%& other) noexcept
 	{
-		return %struct_name%(other, reference_tag{});
+		return %struct_name%(other, ___reference_tag___{});
 	}
 
-	inline %struct_name%(%struct_name%& other, duplicate_tag) noexcept
-		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
-		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+	inline %struct_name%(%struct_name%& other, ___duplicate_tag___) noexcept
+		: ___derived___(other, ___duplicate_tag___{})
 	{}
 
 	static inline %struct_name% dup(%struct_name%& other) noexcept
 	{
-		return %struct_name%(other, duplicate_tag{});
+		return %struct_name%(other, ___duplicate_tag___{});
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -199,8 +202,8 @@ public:
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
-	explicit inline %struct_name%(std::shared_ptr<___TTT___>& handle, reference_tag)
-		: ___derived___(handle, reference_tag{})
+	explicit inline %struct_name%(std::shared_ptr<___TTT___>& handle, ___reference_tag___)
+		: ___derived___(handle, ___reference_tag___{})
 	{
 		if (handle && !std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
 		{
@@ -209,8 +212,8 @@ public:
 	}
 #else
 	template <typename ___TTT___>
-	explicit inline %struct_name%(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
-		: ___derived___(handle, reference_tag{})
+	explicit inline %struct_name%(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
+		: ___derived___(handle, ___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
 	}

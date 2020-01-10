@@ -59,7 +59,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto thing_term = _thing.operate(thing, range);
+		auto thing_term = any_a<>::dup(_thing.operate(thing, range));
 		auto const range_term = _range.operate(thing, range);
 		if (!check<range_a<>>(range_term))
 		{

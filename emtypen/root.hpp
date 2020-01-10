@@ -26,11 +26,10 @@ inline ___TTT___ cast_dup(%struct_name%<>& value) noexcept;
 
 %struct_prefix%
 {
-protected:
-	struct reference_tag {};
-	struct duplicate_tag {};
-	struct ___root_handle_base___;
 public:
+	struct ___reference_tag___ {};
+	struct ___duplicate_tag___ {};
+	struct ___root_handle_base___;
 	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
 	using ___SHARED___ = std::shared_ptr<___root_handle_base___>;
 
@@ -122,6 +121,12 @@ public:
 		assert(handle_);
 		write().operator%=(other);
 		return *this;
+	}
+
+	void mutate()
+	{
+		assert(handle_);
+		write();
 	}
 
 	%nonvirtual_members%
@@ -320,29 +325,34 @@ public:
 		, handle_{ ___shared___ }
 	{}
 
+	static inline %struct_name% val(%struct_name% const& other) noexcept
+	{
+		return %struct_name%{ other };
+	}
+/*
 	inline %struct_name%(%struct_name% const& other, bool reference) noexcept
 		: ___shared___{ reference ? ___SHARED___{} : other.handle_ }
 		, handle_{ *(reference ? &const_cast<%struct_name%&>(other).handle_ : &___shared___) }
 	{}
-
-	inline %struct_name%(%struct_name%& other, reference_tag) noexcept
+*/
+	inline %struct_name%(%struct_name%& other, ___reference_tag___) noexcept
 		: ___shared___{ ___SHARED___{} }
 		, handle_{ other.handle_ }
 	{}
 
 	static inline %struct_name% ref(%struct_name%& other) noexcept
 	{
-		return %struct_name%(other, reference_tag{});
+		return %struct_name%(other, ___reference_tag___{});
 	}
 
-	inline %struct_name%(%struct_name%& other, duplicate_tag) noexcept
+	inline %struct_name%(%struct_name%& other, ___duplicate_tag___) noexcept
 		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
 		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
 	{}
 
 	static inline %struct_name% dup(%struct_name%& other) noexcept
 	{
-		return %struct_name%(other, duplicate_tag{});
+		return %struct_name%(other, ___duplicate_tag___{});
 	}
 
 	inline %struct_name%(%struct_name%&& other) noexcept
@@ -371,7 +381,7 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	explicit inline %struct_name%(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
+	explicit inline %struct_name%(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
 		: ___shared___{ ___SHARED___{} }
 		, handle_{ reinterpret_cast<___SHARED___&>(handle) }
 	{}
@@ -434,13 +444,13 @@ inline ___TTT___ cast(%struct_name%<> const& value) noexcept
 template <typename ___TTT___>
 inline ___TTT___ cast_ref(%struct_name%<>& value)
 {
-	return ___TTT___(value.handle_, %struct_name%<>::reference_tag{});
+	return ___TTT___(value.handle_, %struct_name%<>::___reference_tag___{});
 }
 #else
 template <typename ___TTT___>
 inline ___TTT___ cast_ref(%struct_name%<>& value) noexcept
 {
-	return ___TTT___(value.handle_, %struct_name%<>::reference_tag{});
+	return ___TTT___(value.handle_, %struct_name%<>::___reference_tag___{});
 }
 #endif
 
@@ -454,7 +464,7 @@ inline ___TTT___ cast_dup(%struct_name%<>& value)
 	}
 	else
 	{
-		return ___TTT___(value.handle_, %struct_name%<>::reference_tag{});
+		return ___TTT___(value.handle_, %struct_name%<>::___reference_tag___{});
 	}
 }
 #else
@@ -467,7 +477,7 @@ inline ___TTT___ cast_dup(%struct_name%<>& value) noexcept
 	}
 	else
 	{
-		return ___TTT___(value.handle_, %struct_name%<>::reference_tag{});
+		return ___TTT___(value.handle_, %struct_name%<>::___reference_tag___{});
 	}
 }
 #endif

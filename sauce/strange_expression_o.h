@@ -134,12 +134,12 @@ public:
 		{
 			throw dis("[expression]::generate passed short range");
 		}
-		any_a<> river = *it; //TODO ::ref(
+		any_a<> river = any_a<>::dup(const_cast<any_a<>&>(*it));
 		if (!check<river_a<>>(river))
 		{
 			throw dis("[expression]::generate passed non-river");
 		}
-		return generate_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_ref<river_a<>>(river));
+		return generate_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_dup<river_a<>>(river));
 	}
 
 	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
@@ -173,16 +173,16 @@ public:
 		{
 			throw dis("[expression]::generate_cpp passed short range");
 		}
-		any_a<> river = *it; //TODO ::ref(
+		any_a<> river = any_a<>::dup(const_cast<any_a<>&>(*it));
 		if (!check<river_a<>>(river))
 		{
 			throw dis("[expression]::generate_cpp passed non-river");
 		}
 		if (++it == range.cend_())
 		{
-			return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_ref<river_a<>>(river));
+			return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_dup<river_a<>>(river));
 		}
-		return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_ref<river_a<>>(river), *it);
+		return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_dup<river_a<>>(river), *it);
 	}
 
 	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& type = no()) const

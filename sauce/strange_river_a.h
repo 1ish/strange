@@ -603,28 +603,31 @@ namespace strange {
     
     	inline river_a() = default;
     
+    	static inline river_a val(river_a const& other) noexcept
+    	{
+    		return river_a{ other };
+    	}
+    /*
     	inline river_a(river_a const& other, bool reference) noexcept
     		: ___derived___(other, reference)
     	{}
-    
-    	inline river_a(river_a& other, reference_tag) noexcept
-    		: ___shared___{ ___SHARED___{} }
-    		, handle_{ other.handle_ }
+    */
+    	inline river_a(river_a& other, ___reference_tag___) noexcept
+    		: ___derived___(other, ___reference_tag___{})
     	{}
     
     	static inline river_a ref(river_a& other) noexcept
     	{
-    		return river_a(other, reference_tag{});
+    		return river_a(other, ___reference_tag___{});
     	}
     
-    	inline river_a(river_a& other, duplicate_tag) noexcept
-    		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
-    		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+    	inline river_a(river_a& other, ___duplicate_tag___) noexcept
+    		: ___derived___(other, ___duplicate_tag___{})
     	{}
     
     	static inline river_a dup(river_a& other) noexcept
     	{
-    		return river_a(other, duplicate_tag{});
+    		return river_a(other, ___duplicate_tag___{});
     	}
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -648,8 +651,8 @@ namespace strange {
     
     #ifdef STRANGE_CHECK_STATIC_CASTS
     	template <typename ___TTT___>
-    	explicit inline river_a(std::shared_ptr<___TTT___>& handle, reference_tag)
-    		: ___derived___(handle, reference_tag{})
+    	explicit inline river_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___)
+    		: ___derived___(handle, ___reference_tag___{})
     	{
     		if (handle && !std::dynamic_pointer_cast<___dderived_handle_base___>(handle))
     		{
@@ -658,8 +661,8 @@ namespace strange {
     	}
     #else
     	template <typename ___TTT___>
-    	explicit inline river_a(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
-    		: ___derived___(handle, reference_tag{})
+    	explicit inline river_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
+    		: ___derived___(handle, ___reference_tag___{})
     	{
     		assert(!handle || std::dynamic_pointer_cast<___dderived_handle_base___>(handle));
     	}

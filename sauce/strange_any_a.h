@@ -49,11 +49,10 @@ namespace strange {
     template < typename range_a , typename symbol_a , typename cat_a , typename kind_a , typename inventory_a , typename unordered_herd_a , typename shoal_a , typename unordered_shoal_a , typename number_data_a_uint64 >
     class any_a
     {
-    protected:
-    	struct reference_tag {};
-    	struct duplicate_tag {};
-    	struct ___root_handle_base___;
     public:
+    	struct ___reference_tag___ {};
+    	struct ___duplicate_tag___ {};
+    	struct ___root_handle_base___;
     	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
     	using ___SHARED___ = std::shared_ptr<___root_handle_base___>;
     
@@ -145,6 +144,12 @@ namespace strange {
     		assert(handle_);
     		write().operator%=(other);
     		return *this;
+    	}
+    
+    	void mutate()
+    	{
+    		assert(handle_);
+    		write();
     	}
     
      inline one_t const & extract_thing ( ) const
@@ -555,29 +560,34 @@ namespace strange {
     		, handle_{ ___shared___ }
     	{}
     
+    	static inline any_a val(any_a const& other) noexcept
+    	{
+    		return any_a{ other };
+    	}
+    /*
     	inline any_a(any_a const& other, bool reference) noexcept
     		: ___shared___{ reference ? ___SHARED___{} : other.handle_ }
     		, handle_{ *(reference ? &const_cast<any_a&>(other).handle_ : &___shared___) }
     	{}
-    
-    	inline any_a(any_a& other, reference_tag) noexcept
+    */
+    	inline any_a(any_a& other, ___reference_tag___) noexcept
     		: ___shared___{ ___SHARED___{} }
     		, handle_{ other.handle_ }
     	{}
     
     	static inline any_a ref(any_a& other) noexcept
     	{
-    		return any_a(other, reference_tag{});
+    		return any_a(other, ___reference_tag___{});
     	}
     
-    	inline any_a(any_a& other, duplicate_tag) noexcept
+    	inline any_a(any_a& other, ___duplicate_tag___) noexcept
     		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
     		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
     	{}
     
     	static inline any_a dup(any_a& other) noexcept
     	{
-    		return any_a(other, duplicate_tag{});
+    		return any_a(other, ___duplicate_tag___{});
     	}
     
     	inline any_a(any_a&& other) noexcept
@@ -606,7 +616,7 @@ namespace strange {
     	{}
     
     	template <typename ___TTT___>
-    	explicit inline any_a(std::shared_ptr<___TTT___>& handle, reference_tag) noexcept
+    	explicit inline any_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
     		: ___shared___{ ___SHARED___{} }
     		, handle_{ reinterpret_cast<___SHARED___&>(handle) }
     	{}
@@ -669,13 +679,13 @@ namespace strange {
     template <typename ___TTT___>
     inline ___TTT___ cast_ref(any_a<>& value)
     {
-    	return ___TTT___(value.handle_, any_a<>::reference_tag{});
+    	return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
     }
     #else
     template <typename ___TTT___>
     inline ___TTT___ cast_ref(any_a<>& value) noexcept
     {
-    	return ___TTT___(value.handle_, any_a<>::reference_tag{});
+    	return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
     }
     #endif
     
@@ -689,7 +699,7 @@ namespace strange {
     	}
     	else
     	{
-    		return ___TTT___(value.handle_, any_a<>::reference_tag{});
+    		return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
     	}
     }
     #else
@@ -702,7 +712,7 @@ namespace strange {
     	}
     	else
     	{
-    		return ___TTT___(value.handle_, any_a<>::reference_tag{});
+    		return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
     	}
     }
     #endif

@@ -50,8 +50,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto const thing_term = _thing.operate(thing, range);
-		auto const member = thing_term.operations_().at_(_member);
+		auto const member = _thing.operate(thing, range).operations_().at_(_member);
 		if (!check<operation_a<>>(member))
 		{
 			throw dis(_token.report() + "strange::expression_member::operate with non-existent or non-operaton member");

@@ -47,9 +47,9 @@ public:
 			throw dis(_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract_map();
+		auto& local = const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto lit = local.find(sym("$"));
-		if (lit == local.cend())
+		if (lit == local.end())
 		{
 			throw dis(_token.report() + "strange::expression_shared_at::operate $ not found");
 		}
@@ -59,15 +59,15 @@ public:
 			throw dis(_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal shared");
 		}
 #endif
-		auto const& shared = static_cast<unordered_shoal_a<> const&>(lit->second);
-		auto const& map = shared.extract_map();
+		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
+		auto& map = const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(shared.extract_map());
 		auto lock = shared.read_lock_();
 		auto it = map.find(_key);
-		if (it == map.cend())
+		if (it == map.end())
 		{
 			throw dis(_token.report() + "strange::expression_shared_at::operate key not found");
 		}
-		return it->second; //TODO ::ref(
+		return any_a<>::ref(it->second);
 	}
 
 	// expression

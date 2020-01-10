@@ -78,7 +78,7 @@ public:
 				throw dis(_token.report() + "strange::expression_local_insert::operate kind expression evaluation error") + misunderstanding;
 			}
 		}
-		auto value = _expression.operate(thing, range);
+		auto value = any_a<>::val(_expression.operate(thing, range));
 		if (!value.kinds_().has_(kind))
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::operate kind does not include value");
