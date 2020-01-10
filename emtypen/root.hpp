@@ -168,12 +168,12 @@ protected:
 	struct ___root_handle___ : ___BHB___
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___root_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+		inline ___root_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: value_{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___root_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+		inline ___root_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: value_{ std::move(value) }
 		{}
 
@@ -245,12 +245,12 @@ private:
 	struct ___root_handle_final___ final : ___root_handle___<___TTT___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___root_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+		inline ___root_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: ___root_handle___<___TTT___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___root_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+		inline ___root_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___root_handle___<___TTT___>{ std::move(value) }
 		{}
 

@@ -346,12 +346,12 @@ namespace strange {
     	struct ___derived_handle___ : ___root_handle___<___TTT___, ___DHB___>
     	{
     		template <typename ___UUU___ = ___TTT___>
-    		inline ___derived_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+    		inline ___derived_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
     			: ___root_handle___<___TTT___, ___DHB___>{ value }
     		{}
     
     		template <typename ___UUU___ = ___TTT___>
-    		inline ___derived_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+    		inline ___derived_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
@@ -541,12 +541,12 @@ namespace strange {
     	struct ___derived_handle_final___ final : ___derived_handle___<___TTT___>
     	{
     		template <typename ___UUU___ = ___TTT___>
-    		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+    		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
     			: ___derived_handle___<___TTT___>{ value }
     		{}
     
     		template <typename ___UUU___ = ___TTT___>
-    		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+    		inline ___derived_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
     			: ___derived_handle___<___TTT___>{ std::move(value) }
     		{}
     

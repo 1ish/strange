@@ -78,12 +78,12 @@ protected:
 	struct ___ddderived_handle___ : ___dderived_handle___<___TTT___, ___DDDHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___ddderived_handle___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+		inline ___ddderived_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: ___dderived_handle___<___TTT___, ___DDDHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___ddderived_handle___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+		inline ___ddderived_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___dderived_handle___<___TTT___, ___DDDHB___>{ std::move(value) }
 		{}
 
@@ -104,12 +104,12 @@ private:
 	struct ___ddderived_handle_final___ final : ___ddderived_handle___<___TTT___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___ddderived_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+		inline ___ddderived_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: ___ddderived_handle___<___TTT___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___ddderived_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+		inline ___ddderived_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___ddderived_handle___<___TTT___>{ std::move(value) }
 		{}
 

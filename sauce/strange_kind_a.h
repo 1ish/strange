@@ -176,7 +176,7 @@ namespace strange {
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<std::is_reference<___UUU___>::value>::type * = 0)
+    		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 
     			: ___dderived_handle___<___TTT___, ___finale_handle_base___>{ value }
 
@@ -186,7 +186,7 @@ namespace strange {
 
     		template <typename ___UUU___ = ___TTT___>
 
-    		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if<!std::is_reference<___UUU___>::value, int>::type * = 0) noexcept
+    		inline ___finale_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 
     			: ___dderived_handle___<___TTT___, ___finale_handle_base___>{ std::move(value) }
 
