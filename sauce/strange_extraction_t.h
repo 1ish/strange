@@ -33,7 +33,6 @@ public:
 		auto local_shoal = check<unordered_shoal_a<>>(_aspects)
 			? cast<unordered_shoal_a<>>(_aspects)
 			: unordered_shoal_t<>::create_();
-		local_shoal.mutate();
 		auto& local = local_shoal.mutate_map();
 		local.emplace(sym("$"), _shared);
 		local.emplace(sym("^"), thing);
@@ -77,12 +76,23 @@ public:
 			{
 				throw dis(_token.report() + "strange::extraction::operate not passed enough arguments");
 			}
-			any_a<> const argument = more ? (*ait++) : def;
-			if (!argument.kinds_().has_(kind))
+			if (more)
 			{
-				throw dis(_token.report() + "strange::extraction::operate kind does not include argument");
+				any_a<> argument = any_a<>::dup(const_cast<any_a<>&>(*ait++));
+				if (!argument.kinds_().has_(kind))
+				{
+					throw dis(_token.report() + "strange::extraction::operate kind does not include argument");
+				}
+				local.emplace(*nit++, argument);
 			}
-			local.emplace(*nit++, argument); //TODO possible non-const references that can be assigned to
+			else
+			{
+				if (!def.kinds_().has_(kind))
+				{
+					throw dis(_token.report() + "strange::extraction::operate kind does not include default");
+				}
+				local.emplace(*nit++, def);
+			}
 		}
 		try
 		{
