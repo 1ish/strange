@@ -315,6 +315,11 @@ public:
 		return bool(handle);
 	}
 
+	inline bool reference() const
+	{
+		return &handle_ != &___shared___;
+	}
+
 	inline %struct_name%() noexcept
 		: ___shared___{}
 		, handle_{ ___shared___ }

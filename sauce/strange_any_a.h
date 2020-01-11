@@ -550,6 +550,11 @@ namespace strange {
     		return bool(handle);
     	}
     
+    	inline bool reference() const
+    	{
+    		return &handle_ != &___shared___;
+    	}
+    
     	inline any_a() noexcept
     		: ___shared___{}
     		, handle_{ ___shared___ }
