@@ -59,7 +59,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		any_a<> local = thing; // new block scope
+		any_a<> local = any_a<>::val(thing); // new block scope
 		if (_condition.operate(local, range))
 		{
 			return _yay.operate(local, range);

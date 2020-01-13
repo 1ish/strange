@@ -68,7 +68,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		any_a<> local = thing; // new block scope
+		any_a<> local = any_a<>::val(thing); // new block scope
 		any_a<> result = no();
 		try
 		{
@@ -76,7 +76,7 @@ public:
 			{
 				try
 				{
-					result = _loop.operate(any_a<>{ local }, range); // new scope each time round the loop
+					result = _loop.operate(any_a<>::val(local), range); // new scope each time round the loop
 				}
 				catch (continue_i&)
 				{}

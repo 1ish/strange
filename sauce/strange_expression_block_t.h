@@ -31,7 +31,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto result_range = range_operator_t<>::create_(_terms, any_a<>{ thing }, range); // new block scope
+		auto result_range = range_operator_t<>::create_(_terms, any_a<>::val(thing), range); // new block scope
 		auto it = result_range.cbegin_();
 		auto result = no();
 		while (it != result_range.cend_())

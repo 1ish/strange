@@ -117,7 +117,7 @@ public:
 				it->second = for_thing;
 				try
 				{
-					result = _loop.operate(any_a<>{ local_shoal }, range); // new scope each time round the loop
+					result = _loop.operate(any_a<>::val(local_shoal), range); // new scope each time round the loop
 				}
 				catch (continue_i&)
 				{}
