@@ -60,7 +60,10 @@ protected:
 		, _end{ _tokenizer.cend_() }
 		, _previous{ token_t<>::create_punctuation_() }
 		, _token{ _previous }
-	{}
+		, _shared{ unordered_shoal_t<>::create_() }
+	{
+		_shared += strange::shared();
+	}
 
 private:
 	range_a<> _tokenizer;
@@ -68,6 +71,7 @@ private:
 	forward_const_iterator_a<> _end;
 	token_a<> _previous;
 	token_a<> _token;
+	unordered_shoal_a<> _shared;
 
 	struct context_struct;
 	using context_ptr = std::shared_ptr<context_struct>;
@@ -79,7 +83,6 @@ private:
 			symbol_a<> const& _scope = sym(""))
 			: shoal{ _shoal }
 			, scope{ _scope }
-			, shared{ unordered_shoal_t<>::create_() += strange::shared() }
 			, fixed{ unordered_herd_t<>::create_() }
 			, kind{ unordered_shoal_t<>::create_() }
 			, meta{ context_ptr{} }
@@ -90,14 +93,12 @@ private:
 		inline context_struct(
 			symbol_a<> const& _shoal,
 			symbol_a<> const& _scope,
-			unordered_shoal_a<>& _shared,
 			unordered_herd_a<>& _fixed,
 			unordered_shoal_a<>& _kind,
 			context_ptr const& _meta = context_ptr{},
 			context_ptr const& _emit = context_ptr{})
 			: shoal{ _shoal }
 			, scope{ _scope }
-			, shared{ _shared, any_a<>::___duplicate_tag___{} }
 			, fixed{ _fixed, any_a<>::___duplicate_tag___{} }
 			, kind{ _kind, any_a<>::___duplicate_tag___{} }
 			, meta{ _meta }
@@ -107,7 +108,6 @@ private:
 
 		symbol_a<> const shoal;
 		symbol_a<> const scope;
-		unordered_shoal_a<> shared;
 		unordered_herd_a<> fixed;
 		unordered_shoal_a<> kind;
 		context_ptr meta;
@@ -192,7 +192,8 @@ private:
 			}
 			else if (op == "^^") // shoal scope
 			{
-				initial = expression_shared_scope_t<>::create_(token, flock_t<>::create_(context->shared, context->shoal));
+				initial = expression_shared_scope_t<>::create_(token,
+					flock_t<>::create_(_shared, context->shoal));
 			}
 			else if (op == "..") // parameter range
 			{
@@ -449,7 +450,7 @@ private:
 		token_a<> const& token,
 		context_ptr const& context)
 	{
-		auto const instruction = context->shared.at_string(token.symbol() + "!");
+		auto const instruction = _shared.at_string(token.symbol() + "!");
 		if (!instruction)
 		{
 			throw dis("strange::parser instruction not recognised:") + token.report_();
@@ -594,7 +595,7 @@ private:
 			}
 			return expression_shared_at_t<>::create_(token, flock_t<>::create_(name));
 		}
-		if (!non_instruction && context->shared.has_string(token.symbol() + "!"))
+		if (!non_instruction && _shared.has_string(token.symbol() + "!"))
 		{
 			return _instruction(token, context);
 		}
@@ -616,7 +617,7 @@ private:
 		{
 			try
 			{
-				return expression_shared_scope_t<>::create_(token, flock_t<>::create_(context->shared, _kind(context).evaluate_()));
+				return expression_shared_scope_t<>::create_(token, flock_t<>::create_(_shared, _kind(context).evaluate_()));
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
@@ -625,7 +626,7 @@ private:
 		}
 		else if (token.tag() == "name")
 		{
-			return expression_shared_scope_t<>::create_(token, flock_t<>::create_(context->shared, _scope()));
+			return expression_shared_scope_t<>::create_(token, flock_t<>::create_(_shared, _scope()));
 		}
 		else
 		{
@@ -710,9 +711,9 @@ private:
 				{
 					if (!key_context)
 					{
-						key_context = std::make_shared<context_struct>(context->scope,
+						key_context = std::make_shared<context_struct>(
 							context->scope,
-							unordered_shoal_a<>::ref(context->shared),
+							context->scope,
 							unordered_herd_a<>::ref(context->fixed),
 							unordered_shoal_a<>::ref(context->kind),
 							context->meta,
@@ -824,9 +825,9 @@ private:
 				// regular key/value pair
 				if (!value_context)
 				{
-					value_context = std::make_shared<context_struct>(context->scope,
+					value_context = std::make_shared<context_struct>(
+						context->scope,
 						new_scope_symbol,
-						unordered_shoal_a<>::ref(context->shared),
 						unordered_herd_a<>::ref(context->fixed),
 						unordered_shoal_a<>::ref(context->kind),
 						context->meta,
@@ -837,9 +838,9 @@ private:
 			else if (operator_token.symbol() == "::")
 			{
 				// shared scope
-				value = _initial(0, std::make_shared<context_struct>(context->scope,
+				value = _initial(0, std::make_shared<context_struct>(
+					context->scope,
 					new_scope_symbol,
-					unordered_shoal_a<>::ref(context->shared),
 					_remove_herd_non_dimensions(context->fixed),
 					_remove_shoal_non_dimensions(context->kind),
 					context->meta,
@@ -847,7 +848,8 @@ private:
 				bool clash = false;
 				try
 				{
-					clash = !context->shared.insert(new_scope_symbol, value.evaluate_());
+					// auto lock = _shared.write_lock_();
+					clash = !const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(_shared.extract_map()).emplace(new_scope_symbol, value.evaluate_()).second;
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
@@ -877,9 +879,9 @@ private:
 					{
 						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
 					}
-					auto const terms = _elements(std::make_shared<context_struct>(context->scope,
+					auto const terms = _elements(std::make_shared<context_struct>(
+						context->scope,
 						new_scope_symbol,
-						unordered_shoal_a<>::ref(context->shared),
 						_remove_herd_non_dimensions(context->fixed),
 						_remove_shoal_non_dimensions(context->kind),
 						context->meta,
@@ -897,9 +899,9 @@ private:
 				{
 					// attribute extraction/mutation
 					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0,
-						std::make_shared<context_struct>(context->scope,
+						std::make_shared<context_struct>(
+							context->scope,
 							new_scope_symbol,
-							unordered_shoal_a<>::ref(context->shared),
 							_remove_herd_non_dimensions(context->fixed),
 							_remove_shoal_non_dimensions(context->kind),
 							context->meta,
@@ -1484,9 +1486,9 @@ private:
 			new_fixed_herd.mutate();
 			new_kind_shoal.mutate();
 		}
-		auto new_context = std::make_shared<context_struct>(context->shoal,
+		auto new_context = std::make_shared<context_struct>(
+			context->shoal,
 			context->scope,
-			unordered_shoal_a<>::ref(context->shared),
 			new_fixed_herd,
 			new_kind_shoal,
 			context->meta,
