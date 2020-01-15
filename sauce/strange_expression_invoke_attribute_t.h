@@ -80,15 +80,15 @@ public:
 		_value.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
 	{
 		if (type)
 		{
 			throw dis(_token.report() + "strange::expression_invoke_attribute::generate_cpp called for wrong type of expression");
 		}
-		_thing.generate_cpp(version, indent, river);
+		_thing.generate_cpp(version, indent, river, def);
 		river.write_string("." + _member.to_string());
-		_value.generate_cpp(version, indent, river);
+		_value.generate_cpp(version, indent, river, def);
 	}
 
 protected:

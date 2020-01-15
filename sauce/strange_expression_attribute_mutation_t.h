@@ -91,7 +91,7 @@ public:
 		_expression.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
 	{
 		if (type)
 		{
@@ -99,7 +99,7 @@ public:
 		}
 		river.write_string(" [](");
 		river.write_string(")\n{\n");
-		_expression.generate_cpp(version, indent, river);
+		_expression.generate_cpp(version, indent, river, def);
 		river.write_string("}\n");
 	}
 

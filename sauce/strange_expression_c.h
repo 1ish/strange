@@ -302,22 +302,22 @@ public:
 		return river;
 	}
 
-	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& type = no()) const
+	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& def, any_a<> const& type = no()) const
 	{
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, flock_t<>::create_(version, indent, river, type));
+			return op.operate(any_a<>{ me_() }, flock_t<>::create_(version, indent, river, def, type));
 		}
 		return river;
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
 	{
 		auto const op = _operations.at_string("generate_cpp");
 		if (op)
 		{
-			op.operate(any_a<>{ me_() }, flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river, boole(type)));
+			op.operate(any_a<>{ me_() }, flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river, boole(def), boole(type)));
 		}
 	}
 

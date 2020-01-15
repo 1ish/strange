@@ -180,14 +180,19 @@ public:
 		}
 		if (++it == range.cend_())
 		{
-			return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_dup<river_a<>>(river));
+			throw dis("[expression]::generate_cpp passed short range");
 		}
-		return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_dup<river_a<>>(river), *it);
+		any_a<> def = *it;
+		if (++it == range.cend_())
+		{
+			return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_dup<river_a<>>(river), def);
+		}
+		return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_dup<river_a<>>(river), def, *it);
 	}
 
-	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& type = no()) const
+	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& def, any_a<> const& type = no()) const
 	{
-		generate_cpp(version.extract_primitive(), indent.extract_primitive(), river, type);
+		generate_cpp(version.extract_primitive(), indent.extract_primitive(), river, def, type);
 		return river;
 	}
 };

@@ -72,7 +72,7 @@ public:
 		_range.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
 	{
 		if (type)
 		{

@@ -96,18 +96,18 @@ public:
 		river.write_string(") ");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
 	{
 		if (type)
 		{
 			throw dis(_token.report() + "strange::expression_if::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" (");
-		_condition.generate_cpp(version, indent, river);
+		_condition.generate_cpp(version, indent, river, def);
 		river.write_string(") ? (");
-		_yay.generate_cpp(version, indent, river);
+		_yay.generate_cpp(version, indent, river, def);
 		river.write_string(") : (");
-		_nay.generate_cpp(version, indent, river);
+		_nay.generate_cpp(version, indent, river, def);
 		river.write_string(") ");
 	}
 

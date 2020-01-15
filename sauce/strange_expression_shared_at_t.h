@@ -81,7 +81,7 @@ public:
 		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " ");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
 	{
 		if (type)
 		{

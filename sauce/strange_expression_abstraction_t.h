@@ -159,7 +159,7 @@ public:
 		river.write_string(")\n");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
 	{
 		if (type)
 		{
@@ -190,9 +190,9 @@ public:
 			}
 			else
 			{
-				cast<expression_a<>>(kind).generate_cpp(version, indent, river);
+				cast<expression_a<>>(kind).generate_cpp(version, indent, river, def);
 			}
-			expression.generate_cpp(version, indent, river);
+			expression.generate_cpp(version, indent, river, def);
 		}
 		river.write_string(")\n{\n");
 		river.write_string("}\n");

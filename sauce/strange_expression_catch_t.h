@@ -154,21 +154,21 @@ public:
 		river.write_string("\n)\n");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
 	{
 		if (type)
 		{
 			throw dis(_token.report() + "strange::expression_catch::generate_cpp called for wrong type of expression");
 		}
 		river.write_string("try\n{\n");
-		_try_expression.generate_cpp(version, indent, river);
+		_try_expression.generate_cpp(version, indent, river, def);
 		river.write_string("\n}\n");
 		forward_const_iterator_a<> kit = _kinds.cbegin_();
 		forward_const_iterator_a<> eit = _expressions.cbegin_();
 		for (auto const& name : _names.extract_vector())
 		{
 			river.write_string("catch(" + cast<kind_a<>>(*kit++).name_().to_string() + "_a<> const& exception)\n{\n");
-			cast<expression_a<>>(*eit++).generate_cpp(version, indent, river);
+			cast<expression_a<>>(*eit++).generate_cpp(version, indent, river, def);
 			river.write_string("\n}\n");
 		}
 	}

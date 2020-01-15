@@ -105,14 +105,14 @@ public:
 		_expression.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
 	{
 		if (type)
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::generate_cpp called for wrong type of expression");
 		}
 		// river.write_string(" " + _kind.code() + " " + cast<symbol_a<>>(_key).to_string() + " =");
-		_expression.generate_cpp(version, indent, river);
+		_expression.generate_cpp(version, indent, river, def);
 	}
 
 protected:

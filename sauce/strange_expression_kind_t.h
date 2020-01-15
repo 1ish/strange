@@ -257,7 +257,7 @@ public:
 		river.write_string("> ");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool type = false) const //TODO _count == 9 : _expression
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO _count == 9 : _expression
 	{
 		if (type)
 		{
@@ -267,19 +267,19 @@ public:
 		if (_count >= 3)
 		{
 			river.write_string(",");
-			_dimensions.generate_cpp(version, indent, river);
+			_dimensions.generate_cpp(version, indent, river, def);
 			if (_count >= 4)
 			{
 				river.write_string(",");
-				_aspects.generate_cpp(version, indent, river);
+				_aspects.generate_cpp(version, indent, river, def);
 				if (_count >= 5)
 				{
 					river.write_string(",");
-					_parameters.generate_cpp(version, indent, river);
+					_parameters.generate_cpp(version, indent, river, def);
 					if (_count >= 6)
 					{
 						river.write_string(",");
-						_result.generate_cpp(version, indent, river);
+						_result.generate_cpp(version, indent, river, def);
 						if (_fixed)
 						{
 							river.write_string(", true");
