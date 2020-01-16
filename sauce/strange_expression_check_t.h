@@ -19,21 +19,21 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_check::create not passed any terms");
 		}
-		any_a<> left = *it;
-		if (!check<expression_a<>>(left))
+		any_a<> thing = *it;
+		if (!check<expression_a<>>(thing))
 		{
-			throw dis(token.report() + "strange::expression_check::create passed non-expression left-hand term");
+			throw dis(token.report() + "strange::expression_check::create passed non-expression thing term");
 		}
 		if (++it == terms.cend_())
 		{
-			return expression_a<>{ over{ expression_check_t<>(token, terms, cast<expression_a<>>(left), expression_kind_t<>::create_(token, flock_t<>::create_())) } };
+			return expression_a<>{ over{ expression_check_t<>(token, terms, cast<expression_a<>>(thing), expression_kind_t<>::create_(token, flock_t<>::create_())) } };
 		}
-		any_a<> right = *it;
-		if (!check<expression_a<>>(right))
+		any_a<> abstraction = *it;
+		if (!check<expression_a<>>(abstraction))
 		{
-			throw dis(token.report() + "strange::expression_check::create passed non-expression right-hand term");
+			throw dis(token.report() + "strange::expression_check::create passed non-expression abstraction term");
 		}
-		return expression_a<>{ over{ expression_check_t<>(token, terms, cast<expression_a<>>(left), cast<expression_a<>>(right)) } };
+		return expression_a<>{ over{ expression_check_t<>(token, terms, cast<expression_a<>>(thing), cast<expression_a<>>(abstraction)) } };
 	}
 
 	// reflection
@@ -50,8 +50,8 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto const left = _left.operate(thing, range);
-		return left.kinds_().has_(_right.operate(thing, range));
+		auto const evaluated = _thing.operate(thing, range);
+		return evaluated.kinds_().has_(_abstraction.operate(thing, range));
 	}
 
 	// expression
@@ -63,35 +63,41 @@ public:
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" check(");
-		_left.generate(version, indent, river);
+		_thing.generate(version, indent, river);
 		river.write_string(", ");
-		_right.generate(version, indent, river);
+		_abstraction.generate(version, indent, river);
 		river.write_string(") ");
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
 	{
+		if (def)
+		{
+			_abstraction.generate_cpp(version, indent, river, def);
+			_thing.generate_cpp(version, indent, river, def);
+			return;
+		}
 		if (type)
 		{
 			throw dis(_token.report() + "strange::expression_check::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" strange::check<");
-		_right.generate_cpp(version, indent, river, def, true); // type
+		_abstraction.generate_cpp(version, indent, river, def, true); // type
 		river.write_string(">(");
-		_left.generate_cpp(version, indent, river, def);
+		_thing.generate_cpp(version, indent, river, def);
 		river.write_string(") ");
 	}
 
 protected:
 	flock_a<> const _terms;
-	expression_a<> const _left;
-	expression_a<> const _right;
+	expression_a<> const _thing;
+	expression_a<> const _abstraction;
 
-	inline expression_check_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& left, expression_a<> const& right)
+	inline expression_check_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, expression_a<> const& abstraction)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
-		, _left{ left }
-		, _right{ right }
+		, _thing{ thing }
+		, _abstraction{ abstraction }
 	{}
 
 private:
