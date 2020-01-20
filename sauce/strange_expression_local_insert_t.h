@@ -83,13 +83,10 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::operate kind does not include value");
 		}
-		/*
 		if (!local.emplace(_key, value).second)
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::operate key exists");
 		}
-		*/
-		local[_key] = value;
 		return value;
 	}
 
@@ -107,6 +104,11 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
 	{
+		if (def)
+		{
+			_expression.generate_cpp(version, indent, river, def);
+			return;
+		}
 		if (type)
 		{
 			throw dis(_token.report() + "strange::expression_local_insert::generate_cpp called for wrong type of expression");

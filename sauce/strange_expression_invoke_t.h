@@ -97,6 +97,19 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
 	{
+		if (def)
+		{
+			_expression.generate_cpp(version, indent, river, def);
+			for (auto const& expression : _range)
+			{
+				if (!check<expression_a<>>(expression))
+				{
+					throw dis(_token.report() + "strange::expression_invoke::generate_cpp with non-expression argument");
+				}
+				cast<expression_a<>>(expression).generate_cpp(version, indent, river, def);
+			}
+			return;
+		}
 		if (type)
 		{
 			throw dis(_token.report() + "strange::expression_invoke::generate_cpp called for wrong type of expression");

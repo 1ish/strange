@@ -118,6 +118,14 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
 	{
+		if (def)
+		{
+			_initialize.generate_cpp(version, indent, river, def);
+			_condition.generate_cpp(version, indent, river, def);
+			_next.generate_cpp(version, indent, river, def);
+			_loop.generate_cpp(version, indent, river, def);
+			return;
+		}
 		if (type)
 		{
 			throw dis(_token.report() + "strange::expression_for::generate_cpp called for wrong type of expression");

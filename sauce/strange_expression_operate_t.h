@@ -81,6 +81,18 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
 	{
+		if (def)
+		{
+			for (auto const& term : _terms.extract_vector())
+			{
+				if (!check<expression_a<>>(term))
+				{
+					throw dis(_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
+				}
+				cast<expression_a<>>(term).generate_cpp(version, indent, river, def);
+			}
+			return;
+		}
 		if (type)
 		{
 			throw dis(_token.report() + "strange::expression_operate::generate_cpp called for wrong type of expression");

@@ -110,8 +110,7 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_shared_insert::operate kind does not include value");
 		}
-		// unordered_map.emplace(_key, value);
-		unordered_map[_key] = value;
+		unordered_map.emplace(_key, value);
 		return value;
 	}
 
@@ -129,6 +128,11 @@ public:
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
 	{
+		if (def)
+		{
+			_expression.generate_cpp(version, indent, river, def);
+			return;
+		}
 		if (type)
 		{
 			throw dis(_token.report() + "strange::expression_shared_insert::generate_cpp called for wrong type of expression");
