@@ -19,6 +19,15 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_cast::create not passed any terms");
 		}
+		any_a<> scope = *it;
+		if (!check<symbol_a<>>(scope))
+		{
+			throw dis(token.report() + "strange::expression_cast::create passed non-symbol scope");
+		}
+		if (++it == terms.cend_())
+		{
+			throw dis(token.report() + "strange::expression_cast::create passed too few terms");
+		}
 		any_a<> thing = *it;
 		if (!check<expression_a<>>(thing))
 		{

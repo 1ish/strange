@@ -19,6 +19,15 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_while::create not passed any terms");
 		}
+		any_a<> scope = *it;
+		if (!check<symbol_a<>>(scope))
+		{
+			throw dis(token.report() + "strange::expression_while::create passed non-symbol scope");
+		}
+		if (++it == terms.cend_())
+		{
+			throw dis(token.report() + "strange::expression_while::create passed too few terms");
+		}
 		any_a<> condition = *it;
 		if (!check<expression_a<>>(condition))
 		{
@@ -77,24 +86,11 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" while_(");
-		bool first = true;
-		for (auto const& term : _terms.extract_vector())
-		{
-			if (first)
-			{
-				first = false;
-			}
-			else
-			{
-				river.write_string(",");
-			}
-			if (!check<expression_a<>>(term))
-			{
-				throw dis(_token.report() + "strange::expression_while::generate with non-expression term");
-			}
-			cast<expression_a<>>(term).generate(version, indent, river);
-		}
+		// while(condition, loop)
+		river.write_string(" while(");
+		_condition.generate(version, indent, river);
+		river.write_string(", ");
+		_loop.generate(version, indent, river);
 		river.write_string(") ");
 	}
 

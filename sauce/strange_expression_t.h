@@ -127,7 +127,7 @@ protected:
 		{
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(token.report() + "strange::expression::pure_literal_terms passed non-expression");
+				continue;
 			}
 			auto expression = cast<expression_a<>>(term);
 			if (!expression.pure())

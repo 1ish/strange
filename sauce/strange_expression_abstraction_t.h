@@ -14,13 +14,22 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
+		auto it = terms.cbegin_();
+		if (it == terms.cend_())
+		{
+			throw dis(token.report() + "strange::expression_abstraction::create not passed any terms");
+		}
+		auto const scope = *it;
+		if (!check<symbol_a<>>(scope))
+		{
+			throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol scope");
+		}
 		auto dimension_names = flock_t<>::create_();
 		auto dimension_kinds = flock_t<>::create_();
 		auto dimension_expressions = flock_t<>::create_();
 		auto dimension_defaults = flock_t<>::create_();
 		auto parent_expressions = flock_t<>::create_();
-		auto it = terms.cbegin_();
-		bool end = it == terms.cend_();
+		bool end = ++it == terms.cend_();
 		while (!end)
 		{
 			auto const& term = *it;
@@ -104,8 +113,8 @@ public:
 				throw dis("strange::expression_abstraction::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<over>::create(over{ expression_abstraction_t<>(token, terms, dimension_names, dimension_kinds, dimension_expressions, dimension_defaults, parent_expressions) },
-			abstraction_t<>::create_(token, dimension_names, dimension_kinds, dimension_defaults, parent_expressions));
+		return expression_substitute_t<over>::create(over{ expression_abstraction_t<>(token, terms, cast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_expressions, dimension_defaults, parent_expressions) },
+			abstraction_t<>::create_(token, cast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_defaults, parent_expressions));
 	}
 
 	// reflection
@@ -163,7 +172,9 @@ public:
 	{
 		if (def)
 		{
-			river.write_string("\nclass [abstraction] {};\n");
+			river.write_string("\nclass ");
+			river.write_string(_scope.to_string());
+			river.write_string(" {}; \n");
 			return;
 		}
 		if (type)
@@ -205,15 +216,17 @@ public:
 
 protected:
 	flock_a<> const _terms;
+	symbol_a<> const _scope;
 	flock_a<> const _dimension_names;
 	flock_a<> const _dimension_kinds;
 	flock_a<> const _dimension_expressions;
 	flock_a<> const _dimension_defaults;
 	flock_a<> const _parent_expressions;
 
-	inline expression_abstraction_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_expressions, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
+	inline expression_abstraction_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& scope, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_expressions, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
+		, _scope{ scope }
 		, _dimension_names{ dimension_names }
 		, _dimension_kinds{ dimension_kinds }
 		, _dimension_expressions{ dimension_expressions }

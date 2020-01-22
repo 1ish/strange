@@ -19,6 +19,15 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_for_range::create not passed any terms");
 		}
+		any_a<> scope = *it;
+		if (!check<symbol_a<>>(scope))
+		{
+			throw dis(token.report() + "strange::expression_for_range::create passed non-symbol scope");
+		}
+		if (++it == terms.cend_())
+		{
+			throw dis(token.report() + "strange::expression_for_range::create passed too few terms");
+		}
 		any_a<> term = *it;
 		if (!check<expression_a<>>(term))
 		{
@@ -136,25 +145,20 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" for_range_(");
-		bool first = true;
-		for (auto const& term : _terms.extract_vector())
+		// for_range(x,y)
+		river.write_string(" for_range(" + _name.to_string() + " ");
+		if (check<kind_a<>>(_kind))
 		{
-			if (first)
-			{
-				first = false;
-			}
-			else
-			{
-				river.write_string(",");
-			}
-			if (!check<expression_a<>>(term))
-			{
-				throw dis(_token.report() + "strange::expression_for_range::generate with non-expression term");
-			}
-			cast<expression_a<>>(term).generate(version, indent, river);
+			river.write_string(cast<kind_a<>>(_kind).to_string());
 		}
-		river.write_string(") ");
+		else if (check<expression_a<>>(_kind))
+		{
+			cast<expression_a<>>(_kind).generate(version, indent, river);
+		}
+		_range.generate(version, indent, river);
+		river.write_string(", ");
+		_loop.generate(version, indent, river);
+		river.write_string(")\n");
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const

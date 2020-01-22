@@ -459,8 +459,9 @@ private:
 		{
 			throw dis("strange::parser instruction with no arguments:") + token.report_();
 		}
-		auto const expression = instruction.operate(no(),
-			flock_t<>::create_(token, _elements(context)));
+		auto terms = flock_t<>::create_(context->scope);
+		terms += _elements(context);
+		auto const expression = instruction.operate(no(), flock_t<>::create_(token, terms));
 		if (!check<expression_a<>>(expression))
 		{
 			throw dis("strange::parser instruction returned non-expression:") + token.report_();
@@ -879,7 +880,8 @@ private:
 					{
 						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
 					}
-					auto const terms = _elements(std::make_shared<context_struct>(
+					auto terms = flock_t<>::create_(new_scope_symbol);
+					terms += _elements(std::make_shared<context_struct>(
 						context->scope,
 						new_scope_symbol,
 						_remove_herd_non_dimensions(context->fixed),

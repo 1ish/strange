@@ -14,13 +14,22 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
+		auto it = terms.cbegin_();
+		if (it == terms.cend_())
+		{
+			throw dis(token.report() + "strange::expression_mutation::create not passed any terms");
+		}
+		auto const scope = *it;
+		if (!check<symbol_a<>>(scope))
+		{
+			throw dis(token.report() + "strange::expression_mutation::create passed non-symbol scope");
+		}
 		auto names = flock_t<>::create_();
 		auto kinds = flock_t<>::create_();
 		auto expressions = flock_t<>::create_();
 		auto defaults = flock_t<>::create_();
 		any_a<> expression = expression_t<>::create(token);
-		auto it = terms.cbegin_();
-		bool end = it == terms.cend_();
+		bool end = ++it == terms.cend_();
 		while (!end)
 		{
 			auto const& term = *it;
@@ -83,8 +92,8 @@ public:
 				throw dis("strange::expression_mutation::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<over>::create(over{ expression_mutation_t<>(token, terms, names, kinds, expressions, defaults, cast<expression_a<>>(expression)) },
-			mutation_t<>::create_(token, names, kinds, defaults, cast<expression_a<>>(expression)));
+		return expression_substitute_t<over>::create(over{ expression_mutation_t<>(token, terms, cast<symbol_a<>>(scope), names, kinds, expressions, defaults, cast<expression_a<>>(expression)) },
+			mutation_t<>::create_(token, cast<symbol_a<>>(scope), names, kinds, defaults, cast<expression_a<>>(expression)));
 	}
 
 	// reflection
@@ -173,15 +182,17 @@ public:
 
 protected:
 	flock_a<> const _terms;
+	symbol_a<> const _scope;
 	flock_a<> const _names;
 	flock_a<> const _kinds;
 	flock_a<> const _expressions;
 	flock_a<> const _defaults;
 	expression_a<> const _expression;
 
-	inline expression_mutation_t(token_a<> const& token, flock_a<> const& terms, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& expressions, flock_a<> const& defaults, expression_a<> const& expression)
+	inline expression_mutation_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& expressions, flock_a<> const& defaults, expression_a<> const& expression)
 		: expression_t(token, pure_literal_terms(token, terms))
 		, _terms{ terms }
+		, _scope{ scope }
 		, _names{ names }
 		, _kinds{ kinds }
 		, _expressions{ expressions }

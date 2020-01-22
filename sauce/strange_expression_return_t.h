@@ -17,6 +17,15 @@ public:
 		forward_const_iterator_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
+			throw dis(token.report() + "strange::expression_return::create not passed any terms");
+		}
+		any_a<> scope = *it;
+		if (!check<symbol_a<>>(scope))
+		{
+			throw dis(token.report() + "strange::expression_return::create passed non-symbol scope");
+		}
+		if (++it == terms.cend_())
+		{
 			return create(token, terms);
 		}
 		any_a<> result = *it;
@@ -62,9 +71,9 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" return[");
+		river.write_string(" return(");
 		_result.generate(version, indent, river);
-		river.write_string("] ");
+		river.write_string(") ");
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const

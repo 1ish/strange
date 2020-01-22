@@ -19,6 +19,15 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_if::create not passed any terms");
 		}
+		any_a<> scope = *it;
+		if (!check<symbol_a<>>(scope))
+		{
+			throw dis(token.report() + "strange::expression_if::create passed non-symbol scope");
+		}
+		if (++it == terms.cend_())
+		{
+			throw dis(token.report() + "strange::expression_if::create passed too few terms");
+		}
 		any_a<> condition = *it;
 		if (!check<expression_a<>>(condition))
 		{
@@ -75,25 +84,13 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" if_(");
-		bool first = true;
-		for (auto const& term : _terms.extract_vector())
-		{
-			if (first)
-			{
-				first = false;
-			}
-			else
-			{
-				river.write_string(",");
-			}
-			if (!check<expression_a<>>(term))
-			{
-				throw dis(_token.report() + "strange::expression_if::generate with non-expression term");
-			}
-			cast<expression_a<>>(term).generate(version, indent, river);
-		}
-		river.write_string(") ");
+		river.write_string(" if(");
+		_condition.generate(version, indent, river);
+		river.write_string(", ");
+		_yay.generate(version, indent, river);
+		river.write_string(", ");
+		_nay.generate(version, indent, river);
+		river.write_string(")\n");
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
