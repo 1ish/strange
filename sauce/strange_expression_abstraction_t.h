@@ -172,9 +172,31 @@ public:
 	{
 		if (def)
 		{
-			river.write_string("\nclass ");
-			river.write_string(_scope.to_string());
-			river.write_string(" {}; \n");
+			flock_a<> split_scope = _split_scope_();
+			river.write_string("\n");
+			symbol_a<> name;
+			for (auto const& scope_name : split_scope)
+			{
+				if (check<any_a<>>(name))
+				{
+					river.write_string("namespace " + name.to_string() + "\n{\n");
+				}
+				name = cast<symbol_a<>>(scope_name);
+			}
+			std::string const& name_string = name.to_string();
+			std::string const class_name =
+				(name.first_character() == '<' && name.last_character() == '>')
+				? name_string.substr(1, name_string.length() - 2)
+				: name_string;
+			river.write_string("class " + class_name + "\n");
+			river.write_string("{\n");
+			//TODO
+			river.write_string("};\n");
+			int64_t nest = split_scope.size();
+			while (--nest)
+			{
+				river.write_string("}\n");
+			}
 			return;
 		}
 		if (type)
@@ -233,6 +255,24 @@ protected:
 		, _dimension_defaults{ dimension_defaults }
 		, _parent_expressions{ parent_expressions }
 	{}
+
+	flock_a<> _split_scope_() const
+	{
+		auto split_scope = flock_t<>::create_();
+		std::string const& scope = _scope.to_string();
+		std::size_t begin = 0;
+		std::size_t pos = scope.find("::", begin);
+		int64_t nest = 1;
+		while (pos != std::string::npos)
+		{
+			split_scope.push_back(sym(scope.substr(begin, pos)));
+			++nest;
+			begin = pos + 2;
+			pos = scope.find("::", begin);
+		}
+		split_scope.push_back(sym(scope.substr(begin)));
+		return split_scope;
+	}
 
 private:
 	static bool const ___share___;
