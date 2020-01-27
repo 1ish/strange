@@ -492,6 +492,7 @@ private:
 			bool fixed = context->fixed.has(name);
 			bool insert = false;
 			bool update = false;
+			bool reference = false;
 			bool optional = true;
 			auto const op = _token.symbol();
 			if (kind)
@@ -509,6 +510,10 @@ private:
 				{
 					throw dis("strange::parser cannot reassign variable with fixed:") + _token.report_();
 				}
+				else if (op == ":&")
+				{
+					throw dis("strange::parser cannot reassign variable with reference:") + _token.report_();
+				}
 				else if (op == ":<" || op == ":(")
 				{
 					throw dis("strange::parser cannot reassign variable kind:") + _token.report_();
@@ -520,13 +525,14 @@ private:
 			}
 			else
 			{
-				if (op == ":=" || op == ":#")
+				if (op == ":=" || op == ":#" || op == ":&")
 				{
 					_next();
 					fixed = dimension || op == ":#";
 					optional = _it != _end && (_token.tag() != "punctuation" || !_delimiter(_token.symbol()));
 					insert = true;
 					kind = kind_t<>::create(1, "", flock_t<>::create_(), flock_t<>::create_(), flock_t<>::create_(), kind_t<>::any_sym(), fixed, optional);
+					reference = op == ":&";
 				}
 				else if (op == ":<" || op == ":(")
 				{
@@ -541,6 +547,11 @@ private:
 					}
 					catch (misunderstanding_a<>&)
 					{}
+					reference = _token.tag() == "punctuation" && _token.symbol() == "&";
+					if (reference)
+					{
+						_next();
+					}
 				}
 			}
 			if (insert || update)
@@ -566,6 +577,10 @@ private:
 						{
 							return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 						}
+						if (reference) //TODO
+						{
+							return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
+						}
 						return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 					}
 					else
@@ -573,6 +588,10 @@ private:
 						if (shared)
 						{
 							return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind));
+						}
+						if (reference) //TODO
+						{
+							return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind));
 						}
 						return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind));
 					}
