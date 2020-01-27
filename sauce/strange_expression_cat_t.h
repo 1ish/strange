@@ -194,13 +194,13 @@ public:
 		river.write_string("> ");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
 	{
-		if (def)
+		if (declare || define)
 		{
-			_dimensions.generate_cpp(version, indent, river, def);
-			_parameters.generate_cpp(version, indent, river, def);
-			_result.generate_cpp(version, indent, river, def);
+			_dimensions.generate_cpp(version, indent, river, declare, define);
+			_parameters.generate_cpp(version, indent, river, declare, define);
+			_result.generate_cpp(version, indent, river, declare, define);
 			return;
 		}
 		if (type)
@@ -211,15 +211,15 @@ public:
 		if (_count >= 2)
 		{
 			river.write_string(",");
-			_dimensions.generate_cpp(version, indent, river, def);
+			_dimensions.generate_cpp(version, indent, river, declare, define);
 			if (_count >= 3)
 			{
 				river.write_string(",");
-				_parameters.generate_cpp(version, indent, river, def);
+				_parameters.generate_cpp(version, indent, river, declare, define);
 				if (_count >= 4)
 				{
 					river.write_string(",");
-					_result.generate_cpp(version, indent, river, def);
+					_result.generate_cpp(version, indent, river, declare, define);
 					if (_fixed)
 					{
 						river.write_string(", true");

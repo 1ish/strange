@@ -95,18 +95,18 @@ public:
 		river.write_string("]) ");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
 	{
-		if (def)
+		if (declare || define)
 		{
-			_expression.generate_cpp(version, indent, river, def);
+			_expression.generate_cpp(version, indent, river, declare, define);
 			for (auto const& expression : _range)
 			{
 				if (!check<expression_a<>>(expression))
 				{
 					throw dis(_token.report() + "strange::expression_invoke::generate_cpp with non-expression argument");
 				}
-				cast<expression_a<>>(expression).generate_cpp(version, indent, river, def);
+				cast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
 			}
 			return;
 		}
@@ -115,7 +115,7 @@ public:
 			throw dis(_token.report() + "strange::expression_invoke::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" (");
-		_expression.generate_cpp(version, indent, river, def);
+		_expression.generate_cpp(version, indent, river, declare, define);
 		river.write_string("[flock_t<>::create_(" + _member.to_string() + ",");
 		bool first = true;
 		for (auto const& expression : _range)
@@ -132,7 +132,7 @@ public:
 			{
 				throw dis(_token.report() + "strange::expression_invoke::generate with non-expression range term");
 			}
-			cast<expression_a<>>(expression).generate_cpp(version, indent, river, def);
+			cast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
 		}
 		river.write_string(")]) ");
 	}

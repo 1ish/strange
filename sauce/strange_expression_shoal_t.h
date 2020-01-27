@@ -63,9 +63,9 @@ public:
 		river.write_string("} ");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
 	{
-		if (def)
+		if (declare || define)
 		{
 			for (auto const& term : _terms.extract_vector())
 			{
@@ -73,7 +73,7 @@ public:
 				{
 					throw dis(_token.report() + "strange::expression_shoal::generate_cpp with non-expression term");
 				}
-				cast<expression_a<>>(term).generate_cpp(version, indent, river, def);
+				cast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 			}
 			return;
 		}
@@ -97,7 +97,7 @@ public:
 			{
 				throw dis(_token.report() + "strange::expression_shoal::generate_cpp with non-expression term");
 			}
-			cast<expression_a<>>(term).generate_cpp(version, indent, river, def);
+			cast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 		}
 		river.write_string(") ");
 	}

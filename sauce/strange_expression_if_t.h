@@ -93,13 +93,13 @@ public:
 		river.write_string(")\n");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
 	{
-		if (def)
+		if (declare || define)
 		{
-			_condition.generate_cpp(version, indent, river, def);
-			_yay.generate_cpp(version, indent, river, def);
-			_nay.generate_cpp(version, indent, river, def);
+			_condition.generate_cpp(version, indent, river, declare, define);
+			_yay.generate_cpp(version, indent, river, declare, define);
+			_nay.generate_cpp(version, indent, river, declare, define);
 			return;
 		}
 		if (type)
@@ -107,11 +107,11 @@ public:
 			throw dis(_token.report() + "strange::expression_if::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" (");
-		_condition.generate_cpp(version, indent, river, def);
+		_condition.generate_cpp(version, indent, river, declare, define);
 		river.write_string(") ? (");
-		_yay.generate_cpp(version, indent, river, def);
+		_yay.generate_cpp(version, indent, river, declare, define);
 		river.write_string(") : (");
-		_nay.generate_cpp(version, indent, river, def);
+		_nay.generate_cpp(version, indent, river, declare, define);
 		river.write_string(") ");
 	}
 

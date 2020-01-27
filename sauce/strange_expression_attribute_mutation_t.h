@@ -91,11 +91,11 @@ public:
 		_expression.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const //TODO
 	{
-		if (def)
+		if (declare || define)
 		{
-			_expression.generate_cpp(version, indent, river, def);
+			_expression.generate_cpp(version, indent, river, declare, define);
 			return;
 		}
 		if (type)
@@ -104,7 +104,7 @@ public:
 		}
 		river.write_string(" [](");
 		river.write_string(")\n{\n");
-		_expression.generate_cpp(version, indent, river, def);
+		_expression.generate_cpp(version, indent, river, declare, define);
 		river.write_string("}\n");
 	}
 

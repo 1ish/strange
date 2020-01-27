@@ -167,18 +167,18 @@ public:
 		river.write_string(")\n");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const //TODO
 	{
-		if (def)
+		if (declare || define)
 		{
-			_try_expression.generate_cpp(version, indent, river, def);
+			_try_expression.generate_cpp(version, indent, river, declare, define);
 			for (auto const& expression : _expressions.extract_vector())
 			{
 				if (!check<expression_a<>>(expression))
 				{
 					throw dis(_token.report() + "strange::expression_catch::generate_cpp with non-expression");
 				}
-				cast<expression_a<>>(expression).generate_cpp(version, indent, river, def);
+				cast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
 			}
 			return;
 		}
@@ -187,14 +187,14 @@ public:
 			throw dis(_token.report() + "strange::expression_catch::generate_cpp called for wrong type of expression");
 		}
 		river.write_string("try\n{\n");
-		_try_expression.generate_cpp(version, indent, river, def);
+		_try_expression.generate_cpp(version, indent, river, declare, define);
 		river.write_string("\n}\n");
 		forward_const_iterator_a<> kit = _kinds.cbegin_();
 		forward_const_iterator_a<> eit = _expressions.cbegin_();
 		for (auto const& name : _names.extract_vector())
 		{
 			river.write_string("catch(" + cast<kind_a<>>(*kit++).name_().to_string() + "_a<> const& exception)\n{\n");
-			cast<expression_a<>>(*eit++).generate_cpp(version, indent, river, def);
+			cast<expression_a<>>(*eit++).generate_cpp(version, indent, river, declare, define);
 			river.write_string("\n}\n");
 		}
 	}

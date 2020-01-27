@@ -80,14 +80,14 @@ public:
 		_value.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const //TODO
 	{
-		if (def)
+		if (declare || define)
 		{
-			_thing.generate_cpp(version, indent, river, def);
+			_thing.generate_cpp(version, indent, river, declare, define);
 			if (_assign)
 			{
-				_value.generate_cpp(version, indent, river, def);
+				_value.generate_cpp(version, indent, river, declare, define);
 			}
 			return;
 		}
@@ -95,9 +95,9 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_invoke_attribute::generate_cpp called for wrong type of expression");
 		}
-		_thing.generate_cpp(version, indent, river, def);
+		_thing.generate_cpp(version, indent, river, declare, define);
 		river.write_string("." + _member.to_string());
-		_value.generate_cpp(version, indent, river, def);
+		_value.generate_cpp(version, indent, river, declare, define);
 	}
 
 protected:

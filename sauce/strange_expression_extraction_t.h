@@ -142,11 +142,11 @@ public:
 		_expression.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
 	{
-		if (def)
+		if (declare || define)
 		{
-			_expression.generate_cpp(version, indent, river, def);
+			_expression.generate_cpp(version, indent, river, declare, define);
 			return;
 		}
 		if (type)
@@ -173,10 +173,10 @@ public:
 			auto expression = cast<expression_a<>>(*eit++);
 			river.write_string("catch(" + kind.name_().to_string() + "_a<> const& ");
 			river.write_string(name.to_string() + " =");
-			expression.generate_cpp(version, indent, river, def);
+			expression.generate_cpp(version, indent, river, declare, define);
 		}
 		river.write_string(")\n{\n");
-		_expression.generate_cpp(version, indent, river, def);
+		_expression.generate_cpp(version, indent, river, declare, define);
 		river.write_string("}\n");
 	}
 

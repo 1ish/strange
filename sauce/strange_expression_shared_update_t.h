@@ -118,11 +118,11 @@ public:
 		_expression.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
 	{
-		if (def)
+		if (declare || define)
 		{
-			_expression.generate_cpp(version, indent, river, def);
+			_expression.generate_cpp(version, indent, river, declare, define);
 			return;
 		}
 		if (type)
@@ -130,7 +130,7 @@ public:
 			throw dis(_token.report() + "strange::expression_shared_update::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " ="); //TODO remove $ prefix
-		_expression.generate_cpp(version, indent, river, def);
+		_expression.generate_cpp(version, indent, river, declare, define);
 	}
 
 protected:

@@ -76,9 +76,9 @@ public:
 		river.write_string(" intimate ");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const //TODO
 	{
-		if (def)
+		if (declare || define)
 		{
 			for (auto const& argument : _arguments.extract_vector())
 			{
@@ -86,7 +86,7 @@ public:
 				{
 					throw dis(_token.report() + "strange::expression_intimate::generate_cpp with non-expression argument");
 				}
-				cast<expression_a<>>(argument).generate_cpp(version, indent, river, def);
+				cast<expression_a<>>(argument).generate_cpp(version, indent, river, declare, define);
 			}
 			return;
 		}

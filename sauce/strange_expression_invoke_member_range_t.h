@@ -81,21 +81,21 @@ public:
 		_range.generate(version, indent, river);
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const //TODO
 	{
-		if (def)
+		if (declare || define)
 		{
-			_thing.generate_cpp(version, indent, river, def);
-			_range.generate_cpp(version, indent, river, def);
+			_thing.generate_cpp(version, indent, river, declare, define);
+			_range.generate_cpp(version, indent, river, declare, define);
 			return;
 		}
 		if (type)
 		{
 			throw dis(_token.report() + "strange::expression_invoke_member_range::generate_cpp called for wrong type of expression");
 		}
-		_thing.generate_cpp(version, indent, river, def);
+		_thing.generate_cpp(version, indent, river, declare, define);
 		river.write_string("." + _member.to_string());
-		_range.generate_cpp(version, indent, river, def);
+		_range.generate_cpp(version, indent, river, declare, define);
 	}
 
 protected:

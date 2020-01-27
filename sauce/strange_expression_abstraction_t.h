@@ -168,9 +168,9 @@ public:
 		river.write_string(")\n");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool def, bool type = false) const //TODO
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const //TODO
 	{
-		if (def)
+		if (declare || define)
 		{
 			flock_a<> split_scope = _split_scope_();
 			river.write_string("\n");
@@ -228,9 +228,9 @@ public:
 			}
 			else
 			{
-				cast<expression_a<>>(kind).generate_cpp(version, indent, river, def);
+				cast<expression_a<>>(kind).generate_cpp(version, indent, river, declare, define);
 			}
-			expression.generate_cpp(version, indent, river, def);
+			expression.generate_cpp(version, indent, river, declare, define);
 		}
 		river.write_string(")\n{\n");
 		river.write_string("}\n");
