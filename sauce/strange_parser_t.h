@@ -529,16 +529,17 @@ private:
 				{
 					_next();
 					fixed = dimension || op == ":#";
+					reference = op == ":&";
 					optional = _it != _end && (_token.tag() != "punctuation" || !_delimiter(_token.symbol()));
 					insert = true;
-					kind = kind_t<>::create(1, "", flock_t<>::create_(), flock_t<>::create_(), flock_t<>::create_(), kind_t<>::any_sym(), fixed, optional);
-					reference = op == ":&";
+					kind = kind_t<>::create(1, "", flock_t<>::create_(), flock_t<>::create_(), flock_t<>::create_(), kind_t<>::any_sym(), fixed, reference, optional);
 				}
 				else if (op == ":<" || op == ":(")
 				{
 					auto const kind_expression = _kind(context, dimension);
 					fixed = dimension || kind_expression.terms_().at_index(6);
-					optional = kind_expression.terms_().at_index(7);
+					reference = kind_expression.terms_().at_index(7);
+					optional = kind_expression.terms_().at_index(8);
 					insert = true;
 					kind = kind_expression;
 					try
@@ -547,11 +548,6 @@ private:
 					}
 					catch (misunderstanding_a<>&)
 					{}
-					reference = _token.tag() == "punctuation" && _token.symbol() == "&";
-					if (reference)
-					{
-						_next();
-					}
 				}
 			}
 			if (insert || update)
@@ -577,10 +573,6 @@ private:
 						{
 							return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 						}
-						if (reference) //TODO
-						{
-							return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
-						}
 						return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind, rhs));
 					}
 					else
@@ -588,10 +580,6 @@ private:
 						if (shared)
 						{
 							return expression_shared_insert_t<>::create_(token, flock_t<>::create_(name, kind));
-						}
-						if (reference) //TODO
-						{
-							return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind));
 						}
 						return expression_local_insert_t<>::create_(token, flock_t<>::create_(name, kind));
 					}
@@ -1143,20 +1131,30 @@ private:
 			_next();
 		}
 
-		// fixed
-		punctuation = !assignment && _it != _end && _token.tag() == "punctuation";
-		if (punctuation && _token.symbol() == "#")
+		// fixed / reference
+		bool reference = false;
+		if (!assignment && _it != _end && _token.tag() == "punctuation")
 		{
-			fixed = true;
-			_next();
-			assignment = true;
-		}
-		else if (punctuation && _token.symbol() == "=")
-		{
-			_next();
-			assignment = true;
+			if (_token.symbol() == "#")
+			{
+				_next();
+				fixed = true;
+				assignment = true;
+			}
+			else if (_token.symbol() == "=")
+			{
+				_next();
+				assignment = true;
+			}
+			else if (_token.symbol() == "&")
+			{
+				_next();
+				reference = true;
+				assignment = true;
+			}
 		}
 		terms.push_back(boole(fixed));
+		terms.push_back(boole(reference));
 
 		bool const optional = colon && assignment && _it != _end &&
 			(_token.tag() != "punctuation" || !_delimiter(_token.symbol()));
@@ -1171,24 +1169,28 @@ private:
 		{
 			// remove redundant terms
 			terms.pop_back_();
-			if (!fixed)
+			if (!reference)
 			{
 				terms.pop_back_();
-				if (!result)
+				if (!fixed)
 				{
 					terms.pop_back_();
-					if (!parameters)
+					if (!result)
 					{
 						terms.pop_back_();
-						if (!aspects)
+						if (!parameters)
 						{
 							terms.pop_back_();
-							if (!dimensions)
+							if (!aspects)
 							{
 								terms.pop_back_();
-								if (!name)
+								if (!dimensions)
 								{
 									terms.pop_back_();
+									if (!name)
+									{
+										terms.pop_back_();
+									}
 								}
 							}
 						}
