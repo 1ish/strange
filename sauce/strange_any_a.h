@@ -550,7 +550,7 @@ namespace strange {
     		return bool(handle);
     	}
     
-    	inline bool reference() const
+    	inline bool is_ref() const
     	{
     		return &handle_ != &___shared___;
     	}
@@ -569,12 +569,7 @@ namespace strange {
     	{
     		return any_a{ other };
     	}
-    /*
-    	inline any_a(any_a const& other, bool reference) noexcept
-    		: ___shared___{ reference ? ___SHARED___{} : other.handle_ }
-    		, handle_{ *(reference ? &const_cast<any_a&>(other).handle_ : &___shared___) }
-    	{}
-    */
+    
     	inline any_a(any_a& other, ___reference_tag___) noexcept
     		: ___shared___{ ___SHARED___{} }
     		, handle_{ other.handle_ }

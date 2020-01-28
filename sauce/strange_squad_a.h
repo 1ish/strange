@@ -288,15 +288,7 @@ namespace strange {
 
     	}
 
-    /*
-
-    	inline squad_a(squad_a const& other, bool reference) noexcept
-
-    		: ___derived___(other, reference)
-
-    	{}
-
-    */
+    
 
     	inline squad_a(squad_a& other, ___reference_tag___) noexcept
 

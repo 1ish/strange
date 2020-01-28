@@ -288,15 +288,7 @@ namespace strange {
 
     	}
 
-    /*
-
-    	inline forward_iterator_data_a(forward_iterator_data_a const& other, bool reference) noexcept
-
-    		: ___derived___(other, reference)
-
-    	{}
-
-    */
+    
 
     	inline forward_iterator_data_a(forward_iterator_data_a& other, ___reference_tag___) noexcept
 

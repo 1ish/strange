@@ -288,15 +288,7 @@ namespace strange {
 
     	}
 
-    /*
-
-    	inline ordered_herd_a(ordered_herd_a const& other, bool reference) noexcept
-
-    		: ___derived___(other, reference)
-
-    	{}
-
-    */
+    
 
     	inline ordered_herd_a(ordered_herd_a& other, ___reference_tag___) noexcept
 

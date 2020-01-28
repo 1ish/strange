@@ -155,11 +155,7 @@ namespace strange {
     	{
     		return brook_a{ other };
     	}
-    /*
-    	inline brook_a(brook_a const& other, bool reference) noexcept
-    		: ___derived___(other, reference)
-    	{}
-    */
+    
     	inline brook_a(brook_a& other, ___reference_tag___) noexcept
     		: ___derived___(other, ___reference_tag___{})
     	{}

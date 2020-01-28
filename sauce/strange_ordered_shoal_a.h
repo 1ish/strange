@@ -155,11 +155,7 @@ namespace strange {
     	{
     		return ordered_shoal_a{ other };
     	}
-    /*
-    	inline ordered_shoal_a(ordered_shoal_a const& other, bool reference) noexcept
-    		: ___derived___(other, reference)
-    	{}
-    */
+    
     	inline ordered_shoal_a(ordered_shoal_a& other, ___reference_tag___) noexcept
     		: ___derived___(other, ___reference_tag___{})
     	{}

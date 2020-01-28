@@ -607,11 +607,7 @@ namespace strange {
     	{
     		return river_a{ other };
     	}
-    /*
-    	inline river_a(river_a const& other, bool reference) noexcept
-    		: ___derived___(other, reference)
-    	{}
-    */
+    
     	inline river_a(river_a& other, ___reference_tag___) noexcept
     		: ___derived___(other, ___reference_tag___{})
     	{}

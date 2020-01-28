@@ -281,11 +281,7 @@ namespace strange {
     	{
     		return random_access_const_iterator_a{ other };
     	}
-    /*
-    	inline random_access_const_iterator_a(random_access_const_iterator_a const& other, bool reference) noexcept
-    		: ___derived___(other, reference)
-    	{}
-    */
+    
     	inline random_access_const_iterator_a(random_access_const_iterator_a& other, ___reference_tag___) noexcept
     		: ___derived___(other, ___reference_tag___{})
     	{}

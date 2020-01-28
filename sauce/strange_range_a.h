@@ -190,11 +190,7 @@ namespace strange {
     	{
     		return range_a{ other };
     	}
-    /*
-    	inline range_a(range_a const& other, bool reference) noexcept
-    		: ___root___(other, reference)
-    	{}
-    */
+    
     	inline range_a(range_a& other, ___reference_tag___) noexcept
     		: ___root___(other, ___reference_tag___{})
     	{}

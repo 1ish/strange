@@ -289,15 +289,7 @@ namespace strange {
 
     	}
 
-    /*
-
-    	inline number_data_a(number_data_a const& other, bool reference) noexcept
-
-    		: ___derived___(other, reference)
-
-    	{}
-
-    */
+    
 
     	inline number_data_a(number_data_a& other, ___reference_tag___) noexcept
 

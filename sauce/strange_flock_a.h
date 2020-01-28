@@ -155,11 +155,7 @@ namespace strange {
     	{
     		return flock_a{ other };
     	}
-    /*
-    	inline flock_a(flock_a const& other, bool reference) noexcept
-    		: ___derived___(other, reference)
-    	{}
-    */
+    
     	inline flock_a(flock_a& other, ___reference_tag___) noexcept
     		: ___derived___(other, ___reference_tag___{})
     	{}

@@ -240,11 +240,7 @@ namespace strange {
     	{
     		return expression_a{ other };
     	}
-    /*
-    	inline expression_a(expression_a const& other, bool reference) noexcept
-    		: ___derived___(other, reference)
-    	{}
-    */
+    
     	inline expression_a(expression_a& other, ___reference_tag___) noexcept
     		: ___derived___(other, ___reference_tag___{})
     	{}

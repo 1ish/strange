@@ -179,11 +179,7 @@ namespace strange {
     	{
     		return data_a{ other };
     	}
-    /*
-    	inline data_a(data_a const& other, bool reference) noexcept
-    		: ___root___(other, reference)
-    	{}
-    */
+    
     	inline data_a(data_a& other, ___reference_tag___) noexcept
     		: ___root___(other, ___reference_tag___{})
     	{}

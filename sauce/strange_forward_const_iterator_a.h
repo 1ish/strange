@@ -200,11 +200,7 @@ namespace strange {
     	{
     		return forward_const_iterator_a{ other };
     	}
-    /*
-    	inline forward_const_iterator_a(forward_const_iterator_a const& other, bool reference) noexcept
-    		: ___root___(other, reference)
-    	{}
-    */
+    
     	inline forward_const_iterator_a(forward_const_iterator_a& other, ___reference_tag___) noexcept
     		: ___root___(other, ___reference_tag___{})
     	{}

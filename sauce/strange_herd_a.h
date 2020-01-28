@@ -204,11 +204,7 @@ namespace strange {
     	{
     		return herd_a{ other };
     	}
-    /*
-    	inline herd_a(herd_a const& other, bool reference) noexcept
-    		: ___derived___(other, reference)
-    	{}
-    */
+    
     	inline herd_a(herd_a& other, ___reference_tag___) noexcept
     		: ___derived___(other, ___reference_tag___{})
     	{}

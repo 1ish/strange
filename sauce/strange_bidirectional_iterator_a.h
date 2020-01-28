@@ -337,15 +337,7 @@ namespace strange {
 
     	}
 
-    /*
-
-    	inline bidirectional_iterator_a(bidirectional_iterator_a const& other, bool reference) noexcept
-
-    		: ___derived___(other, reference)
-
-    	{}
-
-    */
+    
 
     	inline bidirectional_iterator_a(bidirectional_iterator_a& other, ___reference_tag___) noexcept
 

@@ -176,11 +176,7 @@ namespace strange {
     	{
     		return parser_a{ other };
     	}
-    /*
-    	inline parser_a(parser_a const& other, bool reference) noexcept
-    		: ___root___(other, reference)
-    	{}
-    */
+    
     	inline parser_a(parser_a& other, ___reference_tag___) noexcept
     		: ___root___(other, ___reference_tag___{})
     	{}

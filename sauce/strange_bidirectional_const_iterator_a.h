@@ -180,11 +180,7 @@ namespace strange {
     	{
     		return bidirectional_const_iterator_a{ other };
     	}
-    /*
-    	inline bidirectional_const_iterator_a(bidirectional_const_iterator_a const& other, bool reference) noexcept
-    		: ___derived___(other, reference)
-    	{}
-    */
+    
     	inline bidirectional_const_iterator_a(bidirectional_const_iterator_a& other, ___reference_tag___) noexcept
     		: ___derived___(other, ___reference_tag___{})
     	{}

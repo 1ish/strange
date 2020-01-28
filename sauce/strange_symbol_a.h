@@ -211,11 +211,7 @@ namespace strange {
     	{
     		return symbol_a{ other };
     	}
-    /*
-    	inline symbol_a(symbol_a const& other, bool reference) noexcept
-    		: ___root___(other, reference)
-    	{}
-    */
+    
     	inline symbol_a(symbol_a& other, ___reference_tag___) noexcept
     		: ___root___(other, ___reference_tag___{})
     	{}

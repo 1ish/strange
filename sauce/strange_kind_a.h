@@ -290,15 +290,7 @@ namespace strange {
 
     	}
 
-    /*
-
-    	inline kind_a(kind_a const& other, bool reference) noexcept
-
-    		: ___derived___(other, reference)
-
-    	{}
-
-    */
+    
 
     	inline kind_a(kind_a& other, ___reference_tag___) noexcept
 

@@ -208,11 +208,7 @@ namespace strange {
     	{
     		return operation_a{ other };
     	}
-    /*
-    	inline operation_a(operation_a const& other, bool reference) noexcept
-    		: ___root___(other, reference)
-    	{}
-    */
+    
     	inline operation_a(operation_a& other, ___reference_tag___) noexcept
     		: ___root___(other, ___reference_tag___{})
     	{}

@@ -155,11 +155,7 @@ namespace strange {
     	{
     		return unordered_herd_a{ other };
     	}
-    /*
-    	inline unordered_herd_a(unordered_herd_a const& other, bool reference) noexcept
-    		: ___derived___(other, reference)
-    	{}
-    */
+    
     	inline unordered_herd_a(unordered_herd_a& other, ___reference_tag___) noexcept
     		: ___derived___(other, ___reference_tag___{})
     	{}

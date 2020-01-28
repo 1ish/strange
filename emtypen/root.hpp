@@ -315,7 +315,7 @@ public:
 		return bool(handle);
 	}
 
-	inline bool reference() const
+	inline bool is_ref() const
 	{
 		return &handle_ != &___shared___;
 	}
@@ -334,12 +334,7 @@ public:
 	{
 		return %struct_name%{ other };
 	}
-/*
-	inline %struct_name%(%struct_name% const& other, bool reference) noexcept
-		: ___shared___{ reference ? ___SHARED___{} : other.handle_ }
-		, handle_{ *(reference ? &const_cast<%struct_name%&>(other).handle_ : &___shared___) }
-	{}
-*/
+
 	inline %struct_name%(%struct_name%& other, ___reference_tag___) noexcept
 		: ___shared___{ ___SHARED___{} }
 		, handle_{ other.handle_ }

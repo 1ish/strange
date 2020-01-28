@@ -158,11 +158,7 @@ public:
 	{
 		return %struct_name%{ other };
 	}
-/*
-	inline %struct_name%(%struct_name% const& other, bool reference) noexcept
-		: ___derived___(other, reference)
-	{}
-*/
+
 	inline %struct_name%(%struct_name%& other, ___reference_tag___) noexcept
 		: ___derived___(other, ___reference_tag___{})
 	{}

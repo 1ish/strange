@@ -595,11 +595,7 @@ namespace strange {
     	{
     		return number_a{ other };
     	}
-    /*
-    	inline number_a(number_a const& other, bool reference) noexcept
-    		: ___root___(other, reference)
-    	{}
-    */
+    
     	inline number_a(number_a& other, ___reference_tag___) noexcept
     		: ___root___(other, ___reference_tag___{})
     	{}

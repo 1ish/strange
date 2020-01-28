@@ -287,11 +287,7 @@ namespace strange {
     	{
     		return token_a{ other };
     	}
-    /*
-    	inline token_a(token_a const& other, bool reference) noexcept
-    		: ___root___(other, reference)
-    	{}
-    */
+    
     	inline token_a(token_a& other, ___reference_tag___) noexcept
     		: ___root___(other, ___reference_tag___{})
     	{}

@@ -216,11 +216,7 @@ namespace strange {
     	{
     		return inventory_a{ other };
     	}
-    /*
-    	inline inventory_a(inventory_a const& other, bool reference) noexcept
-    		: ___derived___(other, reference)
-    	{}
-    */
+    
     	inline inventory_a(inventory_a& other, ___reference_tag___) noexcept
     		: ___derived___(other, ___reference_tag___{})
     	{}

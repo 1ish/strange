@@ -289,11 +289,7 @@ namespace strange {
     	{
     		return cat_a{ other };
     	}
-    /*
-    	inline cat_a(cat_a const& other, bool reference) noexcept
-    		: ___derived___(other, reference)
-    	{}
-    */
+    
     	inline cat_a(cat_a& other, ___reference_tag___) noexcept
     		: ___derived___(other, ___reference_tag___{})
     	{}

@@ -210,11 +210,7 @@ namespace strange {
     	{
     		return forward_iterator_a{ other };
     	}
-    /*
-    	inline forward_iterator_a(forward_iterator_a const& other, bool reference) noexcept
-    		: ___root___(other, reference)
-    	{}
-    */
+    
     	inline forward_iterator_a(forward_iterator_a& other, ___reference_tag___) noexcept
     		: ___root___(other, ___reference_tag___{})
     	{}

@@ -288,15 +288,7 @@ namespace strange {
 
     	}
 
-    /*
-
-    	inline lake_a(lake_a const& other, bool reference) noexcept
-
-    		: ___derived___(other, reference)
-
-    	{}
-
-    */
+    
 
     	inline lake_a(lake_a& other, ___reference_tag___) noexcept
 
