@@ -19,6 +19,19 @@ public:
 	// kind
 	inline any_a<> aspects__(range_a<> const& _) const;
 	inline flock_a<> aspects_() const;
+
+	inline any_a<> fixed__(range_a<> const& _) const;
+	inline any_a<> fixed_() const;
+	inline bool fixed() const;
+
+	inline any_a<> reference__(range_a<> const& _) const;
+	inline any_a<> reference_() const;
+	inline bool reference() const;
+
+	inline any_a<> optional__(range_a<> const& _) const;
+	inline any_a<> optional_() const;
+	inline bool optional() const;
+
 };
 
 } // namespace strange

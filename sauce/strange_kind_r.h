@@ -48,6 +48,9 @@ public:
 		{
 			auto operations = reflection<cat_a<>>::operations();
 			operations.update_string("aspects_", native_extraction_t<kind_a<>>::create(&kind_a<>::aspects__));
+			operations.update_string("fixed_", native_extraction_t<kind_a<>>::create(&kind_a<>::fixed__));
+			operations.update_string("reference_", native_extraction_t<kind_a<>>::create(&kind_a<>::reference__));
+			operations.update_string("optional_", native_extraction_t<kind_a<>>::create(&kind_a<>::optional__));
 			return operations;
 		}();
 		return OPERATIONS;

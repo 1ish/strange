@@ -40,14 +40,6 @@ public:
 	inline any_a<> result__(range_a<> const& _) const;
 	inline cat_a result_() const;
 
-	inline any_a<> fixed__(range_a<> const& _) const;
-	inline any_a<> fixed_() const;
-	inline bool fixed() const;
-
-	inline any_a<> optional__(range_a<> const& _) const;
-	inline any_a<> optional_() const;
-	inline bool optional() const;
-
 	inline any_a<> code__(range_a<> const& _) const;
 	inline lake_a_int8 code_() const;
 	inline std::string code() const;

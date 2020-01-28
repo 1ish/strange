@@ -91,6 +91,19 @@ public:
 				cast<expression_a<>>(result),
 				fixed);
 		}
+		auto const reference = *it;
+		if (++it == terms.cend_())
+		{
+			return create(token, terms,
+				cast<number_data_a<int64_t>>(order),
+				cast<symbol_a<>>(name),
+				cast<expression_a<>>(dimensions),
+				cast<expression_a<>>(aspects),
+				cast<expression_a<>>(parameters),
+				cast<expression_a<>>(result),
+				fixed,
+				reference);
+		}
 		auto const optional = *it;
 		if (++it == terms.cend_())
 		{
@@ -102,6 +115,7 @@ public:
 				cast<expression_a<>>(parameters),
 				cast<expression_a<>>(result),
 				fixed,
+				reference,
 				optional);
 		}
 		auto const expression = *it;
@@ -117,38 +131,39 @@ public:
 			cast<expression_a<>>(parameters),
 			cast<expression_a<>>(result),
 			fixed,
+			reference,
 			optional,
 			cast<expression_a<>>(expression));
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order = number_int_64_t<>::create(1), symbol_a<> const& name = sym(""))
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), no(), no(), expression_t<>::create(token)) });
+		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)) });
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions)
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), no(), no(), expression_t<>::create(token)) });
+		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, expression_t<>::create(token), expression_t<>::create(token), expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)) });
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects)
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, expression_t<>::create(token), expression_t<>::create(token), no(), no(), expression_t<>::create(token)) });
+		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, expression_t<>::create(token), expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)) });
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters)
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, expression_t<>::create(token), no(), no(), expression_t<>::create(token)) });
+		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, expression_t<>::create(token), no(), no(), no(), expression_t<>::create(token)) });
 	}
 
-	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed = no(), any_a<> const& optional = no())
+	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, result, fixed, optional, expression_t<>::create(token)) });
+		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, result, fixed, reference, optional, expression_t<>::create(token)) });
 	}
 
-	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed, any_a<> const& optional, expression_a<> const& expression)
+	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional, expression_a<> const& expression)
 	{
-		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, result, fixed, optional, expression) });
+		return expression_substitute_t<over>::create(over{ expression_kind_t<>(token, terms, order, name, dimensions, aspects, parameters, result, fixed, reference, optional, expression) });
 	}
 
 	// reflection
@@ -169,7 +184,7 @@ public:
 		{
 			return kind_t<>::create_(_order, _name);
 		}
-		if (_count == 9)
+		if (_count == 10)
 		{
 			auto const any_kind = _expression.operate(thing, range);
 			if (!check<kind_a<>>(any_kind))
@@ -177,7 +192,7 @@ public:
 				throw dis(_token.report() + "strange::expression_kind::operate expression did not return a kind");
 			}
 			auto const kind = cast<kind_a<>>(any_kind);
-			return kind_t<>::create_(number_int_64_t<>::create(kind.order() + _order.extract_primitive()), kind.name_(), kind.dimensions_(), kind.aspects_(), kind.parameters_(), kind.result_(), _fixed, _optional);
+			return kind_t<>::create_(number_int_64_t<>::create(kind.order() + _order.extract_primitive()), kind.name_(), kind.dimensions_(), kind.aspects_(), kind.parameters_(), kind.result_(), _fixed, _reference, _optional);
 		}
 		auto const dimensions = _dimensions.operate(thing, range);
 		if (!check<flock_a<>>(dimensions))
@@ -211,7 +226,7 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_kind::operate result is not a symbol");
 		}
-		return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), _fixed, _optional);
+		return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), _fixed, _reference, _optional);
 	}
 
 	// expression
@@ -247,7 +262,7 @@ public:
 						_result.generate(version, indent, river);
 						if (_fixed)
 						{
-							river.write_string(">& ");
+							river.write_string(">& "); //TODO reference
 							return;
 						}
 					}
@@ -288,6 +303,7 @@ public:
 					{
 						river.write_string(",");
 						_result.generate_cpp(version, indent, river, declare, define);
+						//TODO reference
 						if (_fixed)
 						{
 							river.write_string(", true");
@@ -317,10 +333,11 @@ protected:
 	expression_a<> const _parameters;
 	expression_a<> const _result;
 	any_a<> const _fixed;
+	any_a<> const _reference;
 	any_a<> const _optional;
 	expression_a<> const _expression;
 
-	inline expression_kind_t(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed, any_a<> const& optional, expression_a<> const& expression)
+	inline expression_kind_t(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional, expression_a<> const& expression)
 		: expression_t(token, dimensions.pure() && aspects.pure() && parameters.pure() && result.pure() && expression.pure(), dimensions.literal() && aspects.literal() && parameters.literal() && result.literal() && expression.literal()) // pure, literal
 		, _terms{ terms }
 		, _count{ _terms.size() }
@@ -331,6 +348,7 @@ protected:
 		, _parameters{ parameters }
 		, _result{ result }
 		, _fixed{ fixed }
+		, _reference{ reference }
 		, _optional{ optional }
 		, _expression{ expression }
 	{}

@@ -78,7 +78,12 @@ public:
 		{
 			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), fixed);
 		}
-		return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), fixed, *it);
+		any_a<> reference = *it;
+		if (++it == range.cend_())
+		{
+			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), fixed, reference);
+		}
+		return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), fixed, reference, *it);
 	}
 
 	static inline kind_a<> create_()
@@ -87,22 +92,22 @@ public:
 		return VAL;
 	}
 
-	static inline kind_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), any_a<> const& fixed = no(), any_a<> const& optional = no())
+	static inline kind_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
 	{
 		if (name.is("strange::any"))
 		{
-			return kind_a<>{ over{ kind_t<>(order.extract_primitive(), sym(""), dimensions, aspects, parameters, result, fixed, optional) } };
+			return kind_a<>{ over{ kind_t<>(order.extract_primitive(), sym(""), dimensions, aspects, parameters, result, fixed, reference, optional) } };
 		}
-		return kind_a<>{ over{ kind_t<>(order.extract_primitive(), name, dimensions, aspects, parameters, result, fixed, optional) } };
+		return kind_a<>{ over{ kind_t<>(order.extract_primitive(), name, dimensions, aspects, parameters, result, fixed, reference, optional) } };
 	}
 
-	static inline kind_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), bool fixed = false, bool optional = false)
+	static inline kind_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), bool fixed = false, bool reference = false, bool optional = false)
 	{
 		if (name == "strange::any")
 		{
-			return kind_a<>{ over{ kind_t<>(order, sym(""), dimensions, aspects, parameters, result, fixed, optional) } };
+			return kind_a<>{ over{ kind_t<>(order, sym(""), dimensions, aspects, parameters, result, fixed, reference, optional) } };
 		}
-		return kind_a<>{ over{ kind_t<>(order, sym(name), dimensions, aspects, parameters, result, fixed, optional) } };
+		return kind_a<>{ over{ kind_t<>(order, sym(name), dimensions, aspects, parameters, result, fixed, reference, optional) } };
 	}
 
 	// reflection
@@ -147,12 +152,63 @@ public:
 		return _aspects;
 	}
 
+	inline any_a<> fixed__(range_a<> const&) const
+	{
+		return fixed_();
+	}
+
+	inline any_a<> fixed_() const
+	{
+		return boole(fixed());
+	}
+
+	inline bool fixed() const
+	{
+		return _fixed;
+	}
+
+	inline any_a<> reference__(range_a<> const&) const
+	{
+		return reference_();
+	}
+
+	inline any_a<> reference_() const
+	{
+		return boole(reference());
+	}
+
+	inline bool reference() const
+	{
+		return _reference;
+	}
+
+	inline any_a<> optional__(range_a<> const&) const
+	{
+		return optional_();
+	}
+
+	inline any_a<> optional_() const
+	{
+		return boole(optional());
+	}
+
+	inline bool optional() const
+	{
+		return _optional;
+	}
+
 protected:
 	flock_a<> const _aspects;
+	bool const _fixed;
+	bool const _reference;
+	bool const _optional;
 
-	inline kind_t(int64_t order, symbol_a<> const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool optional)
-		: cat_t{ order, name, dimensions, aspects, parameters, result, fixed, optional }
+	inline kind_t(int64_t order, symbol_a<> const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
+		: cat_t{ order, name, dimensions, aspects, parameters, result }
 		, _aspects{ aspects }
+		, _fixed{ fixed }
+		, _reference{ reference }
+		, _optional{ optional }
 	{}
 
 private:
@@ -169,12 +225,12 @@ bool const kind_t<___ego___>::___share___ = []()
 }();
 
 // cat conversion
-inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects = flock_t<>::create_())
+inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects = flock_t<>::create_(), any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
 {
-	return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), aspects, cat.parameters_(), cat.result_(), cat.fixed_(), cat.optional_());
+	return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), aspects, cat.parameters_(), cat.result_(), fixed, reference, optional);
 }
 
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects = flock_t<>::create_())
+inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects = flock_t<>::create_(), any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
 {
 	auto result = unordered_herd_t<>::create_();
 	for (auto const& cat : cats)
@@ -183,14 +239,14 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 		{
 			throw dis("strange::kinds_from_cats passed non-cat");
 		}
-		result.insert(kind_from_cat(cast<cat_a<>>(cat), aspects));
+		result.insert(kind_from_cat(cast<cat_a<>>(cat), aspects, fixed, reference, optional));
 	}
 	return result;
 }
 
 inline cat_a<> kind_to_cat(kind_a<> const& kind)
 {
-	return cat_t<>::create_(kind.order_(), kind.name_(), kind.dimensions_(), kind.parameters_(), kind.result_(), kind.fixed_(), kind.optional_());
+	return cat_t<>::create_(kind.order_(), kind.name_(), kind.dimensions_(), kind.parameters_(), kind.result_());
 }
 
 inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds)
