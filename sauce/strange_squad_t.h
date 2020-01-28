@@ -871,7 +871,7 @@ public:
 		{
 			return at_index(cast<number_a<>>(key).to_int_64());
 		}
-		return misunderstanding_t<>::create("strange::squad::at index is not a number");
+		return mis("strange::squad::at index is not a number");
 	}
 
 	inline any_a<> at_index(int64_t index) const
@@ -881,7 +881,7 @@ public:
 		{
 			return _deque[std::size_t(index)];
 		}
-		return misunderstanding_t<>::create("strange::squad::at index out of bounds");
+		return mis("strange::squad::at index out of bounds");
 	}
 
 	inline void update(any_a<> const& key, any_a<> const& value)

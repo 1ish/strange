@@ -265,7 +265,7 @@ public:
 		std_set_any::const_iterator const it = _set.find(key);
 		if (it == _set.cend())
 		{
-			return misunderstanding_t<>::create("strange::ordered_herd::at key not found");
+			return mis("strange::ordered_herd::at key not found");
 		}
 		return *it;
 	}

@@ -374,7 +374,7 @@ public:
 
 	inline misunderstanding_a<> report_() const
 	{
-		return misunderstanding_t<>::create(report());
+		return mis(report());
 	}
 
 	inline std::string report() const

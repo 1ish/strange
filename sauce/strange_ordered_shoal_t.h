@@ -459,7 +459,7 @@ public:
 		std_map_any_any::const_iterator const it = _map.find(key);
 		if (it == _map.cend())
 		{
-			return misunderstanding_t<>::create("strange::ordered_shoal::at key not found");
+			return mis("strange::ordered_shoal::at key not found");
 		}
 		return it->second;
 	}
