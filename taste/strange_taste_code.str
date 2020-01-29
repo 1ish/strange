@@ -1,7 +1,7 @@
 (	out :# $$strange::river::out[],
 	out.write_["hello\n"],
 	null,
-	//out.:out:.write_["member\n"], //TODO out is null for out:.write_
+	out.:out:.write_["member\n"],
 	["pipe1\n", "pipe2\n", "pipe3\n"] | function(.., $$strange::river::out[].write_..),
 	out.write_[if(check(out, <strange::river>), "river\n", "no river\n")],
 	cast(out, <strange::river>).write_["river\n"],
