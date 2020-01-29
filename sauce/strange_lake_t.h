@@ -1157,17 +1157,24 @@ protected:
 	template <typename F>
 	inline lake_t(F&& init)
 		: thing_t{}
+		, _mutex{}
 		, _vector{ std::forward<F>(init) }
 		, _shadow{}
 	{}
 
 public:
 	inline lake_t(lake_t const& other)
-		: _vector{ other._vector }
+		: thing_t{}
+		, _mutex{}
+		, _vector{ other._vector }
+		, _shadow{}
 	{}
 
 	inline lake_t(lake_t&& other)
-		: _vector{ std::move(other._vector) }
+		: thing_t{}
+		, _mutex{}
+		, _vector{ std::move(other._vector) }
+		, _shadow{}
 	{}
 
 private:

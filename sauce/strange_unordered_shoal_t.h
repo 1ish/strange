@@ -653,16 +653,21 @@ protected:
 	template <typename F>
 	inline unordered_shoal_t(F&& init)
 		: thing_t{}
+		, _mutex{}
 		, _map{ std::forward<F>(init) }
 	{}
 
 public:
 	inline unordered_shoal_t(unordered_shoal_t const& other)
-		: _map{ other._map }
+		: thing_t{}
+		, _mutex{}
+		, _map{ other._map }
 	{}
 
 	inline unordered_shoal_t(unordered_shoal_t&& other)
-		: _map{ std::move(other._map) }
+		: thing_t{}
+		, _mutex{}
+		, _map{ std::move(other._map) }
 	{}
 
 private:

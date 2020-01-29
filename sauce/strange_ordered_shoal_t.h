@@ -709,16 +709,21 @@ protected:
 	template <typename F>
 	inline ordered_shoal_t(F&& init)
 		: thing_t{}
+		, _mutex{}
 		, _map{ std::forward<F>(init) }
 	{}
 
 public:
 	inline ordered_shoal_t(ordered_shoal_t const& other)
-		: _map{ other._map }
+		: thing_t{}
+		, _mutex{}
+		, _map{ other._map }
 	{}
 
 	inline ordered_shoal_t(ordered_shoal_t&& other)
-		: _map{ std::move(other._map) }
+		: thing_t{}
+		, _mutex{}
+		, _map{ std::move(other._map) }
 	{}
 
 private:

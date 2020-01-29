@@ -1118,16 +1118,21 @@ protected:
 	template <typename F>
 	inline squad_t(F&& init)
 		: thing_t{}
+		, _mutex{}
 		, _deque{ std::forward<F>(init) }
 	{}
 
 public:
 	inline squad_t(squad_t const& other)
-		: _deque{ other._deque }
+		: thing_t{}
+		, _mutex{}
+		, _deque{ other._deque }
 	{}
 
 	inline squad_t(squad_t&& other)
-		: _deque{ std::move(other._deque) }
+		: thing_t{}
+		, _mutex{}
+		, _deque{ std::move(other._deque) }
 	{}
 
 private:

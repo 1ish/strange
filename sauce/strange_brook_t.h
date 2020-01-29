@@ -1172,17 +1172,24 @@ protected:
 	template <typename F>
 	inline brook_t(F&& init)
 		: thing_t{}
+		, _mutex{}
 		, _deque{ std::forward<F>(init) }
 		, _shadow{}
 	{}
 
 public:
 	inline brook_t(brook_t const& other)
-		: _deque{ other._deque }
+		: thing_t{}
+		, _mutex{}
+		, _deque{ other._deque }
+		, _shadow{}
 	{}
 
 	inline brook_t(brook_t&& other)
-		: _deque{ std::move(other._deque) }
+		: thing_t{}
+		, _mutex{}
+		, _deque{ std::move(other._deque) }
+		, _shadow{}
 	{}
 
 private:

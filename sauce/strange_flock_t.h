@@ -1110,16 +1110,21 @@ protected:
 	template <typename F>
 	inline flock_t(F&& init)
 		: thing_t{}
+		, _mutex{}
 		, _vector{ std::forward<F>(init) }
 	{}
 
 public:
 	inline flock_t(flock_t const& other)
-		: _vector{ other._vector }
+		: thing_t{}
+		, _mutex{}
+		, _vector{ other._vector }
 	{}
 
 	inline flock_t(flock_t&& other)
-		: _vector{ std::move(other._vector) }
+		: thing_t{}
+		, _mutex{}
+		, _vector{ std::move(other._vector) }
 	{}
 
 private:

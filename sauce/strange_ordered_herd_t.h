@@ -486,16 +486,21 @@ protected:
 	template <typename F>
 	inline ordered_herd_t(F&& init)
 		: thing_t{}
+		, _mutex{}
 		, _set{ std::forward<F>(init) }
 	{}
 
 public:
 	inline ordered_herd_t(ordered_herd_t const& other)
-		: _set{ other._set }
+		: thing_t{}
+		, _mutex{}
+		, _set{ other._set }
 	{}
 
 	inline ordered_herd_t(ordered_herd_t&& other)
-		: _set{ std::move(other._set) }
+		: thing_t{}
+		, _mutex{}
+		, _set{ std::move(other._set) }
 	{}
 
 private:
