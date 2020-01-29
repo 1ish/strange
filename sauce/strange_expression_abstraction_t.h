@@ -193,11 +193,43 @@ public:
 			river.write_string("template <");
 			if (declare)
 			{
-				river.write_string("typename _1_ = void");
+				if (_dimension_names.empty())
+				{
+					river.write_string("typename _1_ = void");
+				}
+				else
+				{
+					bool first = true;
+					auto kit = _dimension_kinds.extract_vector().cbegin();
+					auto eit = _dimension_expressions.extract_vector().cbegin();
+					for (auto const& name : _dimension_names.extract_vector())
+					{
+						if (first)
+						{
+							first = false;
+						}
+						else
+						{
+							river.write_string(", ");
+						}
+						river.write_string("typename ");
+						river.write_string(cast<symbol_a<>>(name).to_string());
+						//TODO
+						++kit;
+						++eit;
+					}
+				}
 			}
 			else if (define)
 			{
-				river.write_string("typename _1_");
+				if (_dimension_names.empty())
+				{
+					river.write_string("typename _1_");
+				}
+				else
+				{
+
+				}
 			}
 			river.write_string(">\n");
 
