@@ -55,36 +55,48 @@ public:
 				break;
 			}
 
-			auto kind = *kit++;
-			if (check<expression_a<>>(kind))
+			auto any_kind = *kit++;
+			if (check<expression_a<>>(any_kind))
 			{
 				try
 				{
-					kind = cast<expression_a<>>(kind).operate(local_shoal, range);
+					any_kind = cast<expression_a<>>(any_kind).operate(local_shoal, range);
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
 					throw dis(_token.report() + "strange::mutation::operate kind expression evaluation error") + misunderstanding;
 				}
 			}
-			if (!check<kind_a<>>(kind))
+			if (!check<kind_a<>>(any_kind))
 			{
 				throw dis(_token.report() + "strange::mutation::operate non-kind parameter kind");
 			}
+			auto const kind = cast<kind_a<>>(any_kind);
 
-			bool const more = ait != range.cend_();
-			if (!more && !cast<kind_a<>>(kind).optional())
+			if (ait != range.cend_())
+			{
+				if (kind.fixed() || kind.reference())
+				{
+					auto const argument = any_a<>::dup(const_cast<any_a<>&>(*ait++));
+					if (!argument.kinds_().has_(kind))
+					{
+						throw dis(_token.report() + "strange::mutation::operate kind does not include argument");
+					}
+					local.emplace(*nit++, argument);
+				}
+				else
+				{
+					auto const argument = *ait++;
+					if (!argument.kinds_().has_(kind))
+					{
+						throw dis(_token.report() + "strange::mutation::operate kind does not include argument");
+					}
+					local.emplace(*nit++, argument);
+				}
+			}
+			else if (!kind.optional())
 			{
 				throw dis(_token.report() + "strange::mutation::operate not passed enough arguments");
-			}
-			if (more)
-			{
-				any_a<> argument = any_a<>::dup(const_cast<any_a<>&>(*ait++));
-				if (!argument.kinds_().has_(kind))
-				{
-					throw dis(_token.report() + "strange::mutation::operate kind does not include argument");
-				}
-				local.emplace(*nit++, argument);
 			}
 			else
 			{

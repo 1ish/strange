@@ -101,36 +101,48 @@ public:
 		auto kit = _dimension_kinds.extract_vector().cbegin();
 		for (auto const& def : _dimension_defaults.extract_vector())
 		{
-			auto kind = *kit++;
-			if (check<expression_a<>>(kind))
+			auto any_kind = *kit++;
+			if (check<expression_a<>>(any_kind))
 			{
 				try
 				{
-					kind = cast<expression_a<>>(kind).operate(local_shoal, range);
+					any_kind = cast<expression_a<>>(any_kind).operate(local_shoal, range);
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
 					throw dis(_token.report() + "strange::abstraction::operate kind expression evaluation error") + misunderstanding;
 				}
 			}
-			if (!check<kind_a<>>(kind))
+			if (!check<kind_a<>>(any_kind))
 			{
 				throw dis(_token.report() + "strange::abstraction::operate non-kind dimension kind");
 			}
+			auto const kind = cast<kind_a<>>(any_kind);
 
-			bool const more = ait != range.cend_();
-			if (!more && !cast<kind_a<>>(kind).optional())
+			auto const name = *nit++;
+			if (ait != range.cend_())
+			{
+				auto const argument = *ait++;
+				if (!argument.kinds_().has_(kind))
+				{
+					throw dis(_token.report() + "strange::abstraction::operate kind does not include argument");
+				}
+				aspects.emplace(name, argument);
+				local.emplace(name, argument);
+			}
+			else if (!kind.optional())
 			{
 				throw dis(_token.report() + "strange::abstraction::operate not passed enough arguments");
 			}
-			any_a<> const argument = more ? (*ait++) : def;
-			if (!argument.kinds_().has_(kind))
+			else
 			{
-				throw dis(_token.report() + "strange::abstraction::operate kind does not include argument");
+				if (!def.kinds_().has_(kind))
+				{
+					throw dis(_token.report() + "strange::abstraction::operate kind does not include argument");
+				}
+				aspects.emplace(name, def);
+				local.emplace(name, def);
 			}
-			auto const name = *nit++;
-			aspects.emplace(name, argument);
-			local.emplace(name, argument);
 		}
 		auto child = unordered_shoal_t<>::create_();
 		for (auto const& expression : _parent_expressions.extract_vector())
