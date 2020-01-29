@@ -356,7 +356,7 @@ public:
 	}
 
 	inline %struct_name%(%struct_name%&& other) noexcept
-		: ___shared___{ std::move(other.handle_) }
+		: ___shared___{ other.handle_ }
 		, handle_{ ___shared___ }
 	{}
 
@@ -368,7 +368,7 @@ public:
 
 	inline %struct_name%& operator=(%struct_name%&& other) noexcept
 	{
-		handle_ = std::move(other.handle_);
+		handle_ = other.handle_;
 		return *this;
 	}
 

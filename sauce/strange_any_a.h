@@ -591,7 +591,7 @@ namespace strange {
     	}
     
     	inline any_a(any_a&& other) noexcept
-    		: ___shared___{ std::move(other.handle_) }
+    		: ___shared___{ other.handle_ }
     		, handle_{ ___shared___ }
     	{}
     
@@ -603,7 +603,7 @@ namespace strange {
     
     	inline any_a& operator=(any_a&& other) noexcept
     	{
-    		handle_ = std::move(other.handle_);
+    		handle_ = other.handle_;
     		return *this;
     	}
     
