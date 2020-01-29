@@ -185,13 +185,33 @@ public:
 			}
 			std::string const& name_string = name.to_string();
 			std::string const class_name =
-				(name.first_character() == '<' && name.last_character() == '>')
-				? name_string.substr(1, name_string.length() - 2)
-				: name_string;
-			river.write_string("class " + class_name + "\n");
-			river.write_string("{\n");
-			//TODO
-			river.write_string("};\n");
+				((name.first_character() == '<' && name.last_character() == '>')
+					? name_string.substr(1, name_string.length() - 2)
+					: name_string)
+				+ "_a";
+
+			river.write_string("template <");
+			if (declare)
+			{
+				river.write_string("typename _1_ = void");
+			}
+			else if (define)
+			{
+				river.write_string("typename _1_");
+			}
+			river.write_string(">\n");
+
+			if (declare)
+			{
+				river.write_string("class " + class_name + ";\n");
+			}
+			else if (define)
+			{
+				river.write_string("class " + class_name + "\n");
+				river.write_string("{\n");
+				//TODO
+				river.write_string("};\n");
+			}
 			int64_t nest = split_scope.size();
 			while (--nest)
 			{

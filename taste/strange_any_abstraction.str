@@ -14,7 +14,7 @@ false &&
 
 					shared__ :# (range :<range>#, <>),
 					shared_ :# (<unordered_shoal>),
-					shared : "void share(shoal_a& shoal) const",
+					share : "void share(shoal_a& shoal) const",
 				}
 			)
 		)
