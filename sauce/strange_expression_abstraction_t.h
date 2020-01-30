@@ -237,13 +237,56 @@ protected:
 		flock_a<> split_scope = _split_scope_();
 		river.write_string("\n");
 		auto const name = _namespace_open_(split_scope, river);
-		std::string const& name_string = name.to_string();
-		std::string const class_name =
-			((name.first_character() == '<' && name.last_character() == '>')
-				? name_string.substr(1, name_string.length() - 2)
-				: name_string)
-			+ "_a";
+		_declare_or_define_template_(version, indent, river, declare, define);
+		_declare_or_define_class_(name, version, indent, river, declare, define);
+		_namespace_close_(split_scope, river);
+		return;
+	}
 
+	flock_a<> _split_scope_() const
+	{
+		auto split_scope = flock_t<>::create_();
+		std::string const& scope = _scope.to_string();
+		std::size_t begin = 0;
+		std::size_t pos = scope.find("::", begin);
+		int64_t nest = 1;
+		while (pos != std::string::npos)
+		{
+			split_scope.push_back(sym(scope.substr(begin, pos)));
+			++nest;
+			begin = pos + 2;
+			pos = scope.find("::", begin);
+		}
+		split_scope.push_back(sym(scope.substr(begin)));
+		return split_scope;
+	}
+
+	static symbol_a<> _namespace_open_(flock_a<> const& split_scope, river_a<>& river)
+	{
+		symbol_a<> name;
+		for (auto const& scope_name : split_scope)
+		{
+			if (check<any_a<>>(name))
+			{
+				river.write_string("namespace " + name.to_string() + "\n{\n");
+			}
+			name = cast<symbol_a<>>(scope_name);
+		}
+		return name;
+	}
+
+	static void _namespace_close_(flock_a<> const& split_scope, river_a<>& river)
+	{
+		int64_t nest = split_scope.size();
+		while (--nest)
+		{
+			river.write_string("}\n");
+		}
+		return;
+	}
+
+	void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	{
 		river.write_string("template <");
 		if (declare)
 		{
@@ -319,7 +362,16 @@ protected:
 			}
 		}
 		river.write_string(">\n");
+	}
 
+	void _declare_or_define_class_(symbol_a<> const& name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	{
+		std::string const& name_string = name.to_string();
+		std::string const class_name =
+			((name.first_character() == '<' && name.last_character() == '>')
+				? name_string.substr(1, name_string.length() - 2)
+				: name_string)
+			+ "_a";
 		if (declare)
 		{
 			river.write_string("class " + class_name + ";\n");
@@ -331,51 +383,6 @@ protected:
 			//TODO
 			river.write_string("};\n");
 		}
-
-		_namespace_close_(split_scope, river);
-		return;
-	}
-
-	flock_a<> _split_scope_() const
-	{
-		auto split_scope = flock_t<>::create_();
-		std::string const& scope = _scope.to_string();
-		std::size_t begin = 0;
-		std::size_t pos = scope.find("::", begin);
-		int64_t nest = 1;
-		while (pos != std::string::npos)
-		{
-			split_scope.push_back(sym(scope.substr(begin, pos)));
-			++nest;
-			begin = pos + 2;
-			pos = scope.find("::", begin);
-		}
-		split_scope.push_back(sym(scope.substr(begin)));
-		return split_scope;
-	}
-
-	static symbol_a<> _namespace_open_(flock_a<> const& split_scope, river_a<>& river)
-	{
-		symbol_a<> name;
-		for (auto const& scope_name : split_scope)
-		{
-			if (check<any_a<>>(name))
-			{
-				river.write_string("namespace " + name.to_string() + "\n{\n");
-			}
-			name = cast<symbol_a<>>(scope_name);
-		}
-		return name;
-	}
-
-	static void _namespace_close_(flock_a<> const& split_scope, river_a<>& river)
-	{
-		int64_t nest = split_scope.size();
-		while (--nest)
-		{
-			river.write_string("}\n");
-		}
-		return;
 	}
 
 private:
