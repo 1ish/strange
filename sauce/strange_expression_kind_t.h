@@ -284,7 +284,8 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_kind::generate_cpp called for wrong type of expression");
+			river.write_string(_name.to_string() + "_a<>");
+			return;
 		}
 		river.write_string(" strange::kind_t<>::create(\"" + _name.to_string() + "\"");
 		if (_count >= 3)

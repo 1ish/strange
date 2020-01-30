@@ -307,7 +307,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string("typename " + cast<symbol_a<>>(name).to_string());
+					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1));
 
 					auto any_kind = *kit++;
 					if (check<expression_a<>>(any_kind))
@@ -331,7 +331,7 @@ protected:
 					if (kind.optional())
 					{
 						river.write_string(" = ");
-						cast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
+						cast<expression_a<>>(expression).generate_cpp(version, indent, river, false, false, true); // declare, define, type
 					}
 				}
 			}
@@ -355,7 +355,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string("typename " + cast<symbol_a<>>(name).to_string());
+					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1));
 				}
 			}
 		}

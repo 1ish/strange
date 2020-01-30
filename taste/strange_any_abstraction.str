@@ -1,7 +1,16 @@
 false &&
 {	strange :
 	{	<any> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#range_a :<<>># <range>,
+			#symbol_a :<<>># <symbol>,
+			#cat_a :<<>># <cat>,
+			#kind_a :<<>># <kind>,
+			#inventory_a :<<>># <inventory>,
+			#unordered_herd_a :<<>># <unordered_herd>,
+			#shoal_a :<<>># <shoal>,
+			#unordered_shoal_a :<<>># <unordered_shoal>,
+			#number_data_uint64_a :<<>># <number_data_uint64>,
 			(	// no parents
 				{	
 					// exposure
