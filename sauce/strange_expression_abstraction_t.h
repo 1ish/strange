@@ -240,7 +240,6 @@ protected:
 		_declare_or_define_template_(version, indent, river, declare, define);
 		_declare_or_define_class_(name, version, indent, river, declare, define);
 		_namespace_close_(split_scope, river);
-		return;
 	}
 
 	flock_a<> _split_scope_() const
@@ -282,7 +281,6 @@ protected:
 		{
 			river.write_string("}\n");
 		}
-		return;
 	}
 
 	void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
@@ -378,11 +376,16 @@ protected:
 		}
 		else if (define)
 		{
-			river.write_string("class " + class_name + "\n");
-			river.write_string("{\n");
-			//TODO
-			river.write_string("};\n");
+			_define_class_(class_name, version, indent, river, declare, define);
 		}
+	}
+
+	void _define_class_(std::string const& class_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	{
+		river.write_string("class " + class_name + "\n");
+		river.write_string("{\n");
+		//TODO
+		river.write_string("};\n");
 	}
 
 private:
