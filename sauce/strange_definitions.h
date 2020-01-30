@@ -46,6 +46,76 @@ inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor)
 	return adaptor.operate(any_a<>{}, flock_t<>::create_(thing));
 }
 
+// check/cast
+
+template <typename ___TTT___>
+inline bool check(any_a<> const& value) noexcept
+{
+	return ___TTT___::___check___(value.handle_);
+}
+
+template <typename ___TTT___, typename ___VVV___>
+inline bool check(___VVV___ const&) noexcept
+{
+	return false;
+}
+
+#ifdef STRANGE_CHECK_STATIC_CASTS
+template <typename ___TTT___>
+inline ___TTT___ cast(any_a<> const& value)
+{
+	return ___TTT___{ value.handle_ };
+}
+#else
+template <typename ___TTT___>
+inline ___TTT___ cast(any_a<> const& value) noexcept
+{
+	return ___TTT___{ value.handle_ };
+}
+#endif
+
+#ifdef STRANGE_CHECK_STATIC_CASTS
+template <typename ___TTT___>
+inline ___TTT___ cast_ref(any_a<>& value)
+{
+	return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
+}
+#else
+template <typename ___TTT___>
+inline ___TTT___ cast_ref(any_a<>& value) noexcept
+{
+	return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
+}
+#endif
+
+#ifdef STRANGE_CHECK_STATIC_CASTS
+template <typename ___TTT___>
+inline ___TTT___ cast_dup(any_a<>& value)
+{
+	if (&value.handle_ == &value.___shared___)
+	{
+		return ___TTT___{ value.handle_ };
+	}
+	else
+	{
+		return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
+	}
+}
+#else
+template <typename ___TTT___>
+inline ___TTT___ cast_dup(any_a<>& value) noexcept
+{
+	if (&value.handle_ == &value.___shared___)
+	{
+		return ___TTT___{ value.handle_ };
+	}
+	else
+	{
+		return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
+	}
+}
+#endif
+
 }
 
 #endif

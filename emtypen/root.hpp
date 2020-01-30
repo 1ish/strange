@@ -1,29 +1,3 @@
-template <typename ___TTT___>
-inline bool check(%struct_name%<> const& value) noexcept;
-template <typename ___TTT___, typename ___VVV___>
-inline bool check(___VVV___ const&) noexcept;
-#ifdef STRANGE_CHECK_STATIC_CASTS
-template <typename ___TTT___>
-inline ___TTT___ cast(%struct_name%<> const& value);
-#else
-template <typename ___TTT___>
-inline ___TTT___ cast(%struct_name%<> const& value) noexcept;
-#endif
-#ifdef STRANGE_CHECK_STATIC_CASTS
-template <typename ___TTT___>
-inline ___TTT___ cast_ref(%struct_name%<>& value);
-#else
-template <typename ___TTT___>
-inline ___TTT___ cast_ref(%struct_name%<>& value) noexcept;
-#endif
-#ifdef STRANGE_CHECK_STATIC_CASTS
-template <typename ___TTT___>
-inline ___TTT___ cast_dup(%struct_name%<>& value);
-#else
-template <typename ___TTT___>
-inline ___TTT___ cast_dup(%struct_name%<>& value) noexcept;
-#endif
-
 %struct_prefix%
 {
 public:
@@ -413,74 +387,6 @@ private:
 	static bool const ___share___;
 	friend class ___%struct_name%_share___;
 };
-
-template <typename ___TTT___>
-inline bool check(%struct_name%<> const& value) noexcept
-{
-	return ___TTT___::___check___(value.handle_);
-}
-
-template <typename ___TTT___, typename ___VVV___>
-inline bool check(___VVV___ const&) noexcept
-{
-	return false;
-}
-
-#ifdef STRANGE_CHECK_STATIC_CASTS
-template <typename ___TTT___>
-inline ___TTT___ cast(%struct_name%<> const& value)
-{
-	return ___TTT___{ value.handle_ };
-}
-#else
-template <typename ___TTT___>
-inline ___TTT___ cast(%struct_name%<> const& value) noexcept
-{
-	return ___TTT___{ value.handle_ };
-}
-#endif
-
-#ifdef STRANGE_CHECK_STATIC_CASTS
-template <typename ___TTT___>
-inline ___TTT___ cast_ref(%struct_name%<>& value)
-{
-	return ___TTT___(value.handle_, %struct_name%<>::___reference_tag___{});
-}
-#else
-template <typename ___TTT___>
-inline ___TTT___ cast_ref(%struct_name%<>& value) noexcept
-{
-	return ___TTT___(value.handle_, %struct_name%<>::___reference_tag___{});
-}
-#endif
-
-#ifdef STRANGE_CHECK_STATIC_CASTS
-template <typename ___TTT___>
-inline ___TTT___ cast_dup(%struct_name%<>& value)
-{
-	if (&value.handle_ == &value.___shared___)
-	{
-		return ___TTT___{ value.handle_ };
-	}
-	else
-	{
-		return ___TTT___(value.handle_, %struct_name%<>::___reference_tag___{});
-	}
-}
-#else
-template <typename ___TTT___>
-inline ___TTT___ cast_dup(%struct_name%<>& value) noexcept
-{
-	if (&value.handle_ == &value.___shared___)
-	{
-		return ___TTT___{ value.handle_ };
-	}
-	else
-	{
-		return ___TTT___(value.handle_, %struct_name%<>::___reference_tag___{});
-	}
-}
-#endif
 
 template <typename ___1___, typename ___2___, typename ___3___, typename ___4___, typename ___5___, typename ___6___, typename ___7___, typename ___8___, typename ___9___>
 bool const %struct_name%<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___, ___9___>::___share___ = []()

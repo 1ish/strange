@@ -20,32 +20,6 @@
 
 
 namespace strange {
-    template <typename ___TTT___>
-    inline bool check(any_a<> const& value) noexcept;
-    template <typename ___TTT___, typename ___VVV___>
-    inline bool check(___VVV___ const&) noexcept;
-    #ifdef STRANGE_CHECK_STATIC_CASTS
-    template <typename ___TTT___>
-    inline ___TTT___ cast(any_a<> const& value);
-    #else
-    template <typename ___TTT___>
-    inline ___TTT___ cast(any_a<> const& value) noexcept;
-    #endif
-    #ifdef STRANGE_CHECK_STATIC_CASTS
-    template <typename ___TTT___>
-    inline ___TTT___ cast_ref(any_a<>& value);
-    #else
-    template <typename ___TTT___>
-    inline ___TTT___ cast_ref(any_a<>& value) noexcept;
-    #endif
-    #ifdef STRANGE_CHECK_STATIC_CASTS
-    template <typename ___TTT___>
-    inline ___TTT___ cast_dup(any_a<>& value);
-    #else
-    template <typename ___TTT___>
-    inline ___TTT___ cast_dup(any_a<>& value) noexcept;
-    #endif
-    
     template < typename range_a , typename symbol_a , typename cat_a , typename kind_a , typename inventory_a , typename unordered_herd_a , typename shoal_a , typename unordered_shoal_a , typename number_data_a_uint64 >
     class any_a
     {
@@ -648,74 +622,6 @@ namespace strange {
     	static bool const ___share___;
     	friend class ___any_a_share___;
     };
-    
-    template <typename ___TTT___>
-    inline bool check(any_a<> const& value) noexcept
-    {
-    	return ___TTT___::___check___(value.handle_);
-    }
-    
-    template <typename ___TTT___, typename ___VVV___>
-    inline bool check(___VVV___ const&) noexcept
-    {
-    	return false;
-    }
-    
-    #ifdef STRANGE_CHECK_STATIC_CASTS
-    template <typename ___TTT___>
-    inline ___TTT___ cast(any_a<> const& value)
-    {
-    	return ___TTT___{ value.handle_ };
-    }
-    #else
-    template <typename ___TTT___>
-    inline ___TTT___ cast(any_a<> const& value) noexcept
-    {
-    	return ___TTT___{ value.handle_ };
-    }
-    #endif
-    
-    #ifdef STRANGE_CHECK_STATIC_CASTS
-    template <typename ___TTT___>
-    inline ___TTT___ cast_ref(any_a<>& value)
-    {
-    	return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
-    }
-    #else
-    template <typename ___TTT___>
-    inline ___TTT___ cast_ref(any_a<>& value) noexcept
-    {
-    	return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
-    }
-    #endif
-    
-    #ifdef STRANGE_CHECK_STATIC_CASTS
-    template <typename ___TTT___>
-    inline ___TTT___ cast_dup(any_a<>& value)
-    {
-    	if (&value.handle_ == &value.___shared___)
-    	{
-    		return ___TTT___{ value.handle_ };
-    	}
-    	else
-    	{
-    		return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
-    	}
-    }
-    #else
-    template <typename ___TTT___>
-    inline ___TTT___ cast_dup(any_a<>& value) noexcept
-    {
-    	if (&value.handle_ == &value.___shared___)
-    	{
-    		return ___TTT___{ value.handle_ };
-    	}
-    	else
-    	{
-    		return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
-    	}
-    }
-    #endif
     
     template <typename ___1___, typename ___2___, typename ___3___, typename ___4___, typename ___5___, typename ___6___, typename ___7___, typename ___8___, typename ___9___>
     bool const any_a<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___, ___9___>::___share___ = []()
