@@ -172,117 +172,7 @@ public:
 	{
 		if (declare || define)
 		{
-			flock_a<> split_scope = _split_scope_();
-			river.write_string("\n");
-			symbol_a<> name;
-			for (auto const& scope_name : split_scope)
-			{
-				if (check<any_a<>>(name))
-				{
-					river.write_string("namespace " + name.to_string() + "\n{\n");
-				}
-				name = cast<symbol_a<>>(scope_name);
-			}
-			std::string const& name_string = name.to_string();
-			std::string const class_name =
-				((name.first_character() == '<' && name.last_character() == '>')
-					? name_string.substr(1, name_string.length() - 2)
-					: name_string)
-				+ "_a";
-
-			river.write_string("template <");
-			if (declare)
-			{
-				if (_dimension_names.empty())
-				{
-					river.write_string("typename _1_ = void");
-				}
-				else
-				{
-					bool first = true;
-					auto kit = _dimension_kinds.extract_vector().cbegin();
-					auto eit = _dimension_expressions.extract_vector().cbegin();
-					for (auto const& name : _dimension_names.extract_vector())
-					{
-						if (first)
-						{
-							first = false;
-						}
-						else
-						{
-							river.write_string(", ");
-						}
-						river.write_string("typename " + cast<symbol_a<>>(name).to_string());
-
-						auto any_kind = *kit++;
-						if (check<expression_a<>>(any_kind))
-						{
-							try
-							{
-								any_kind = cast<expression_a<>>(any_kind).evaluate_();
-							}
-							catch (misunderstanding_a<>& misunderstanding)
-							{
-								throw dis(_token.report() + "strange::expression_abstraction::generate_cpp kind expression evaluation error") + misunderstanding;
-							}
-						}
-						if (!check<kind_a<>>(any_kind))
-						{
-							throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-kind dimension kind");
-						}
-						auto const kind = cast<kind_a<>>(any_kind);
-
-						auto const expression = *eit++;
-						if (kind.optional())
-						{
-							river.write_string(" = ");
-							cast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
-						}
-					}
-				}
-			}
-			else if (define)
-			{
-				if (_dimension_names.empty())
-				{
-					river.write_string("typename _1_");
-				}
-				else
-				{
-					bool first = true;
-					for (auto const& name : _dimension_names.extract_vector())
-					{
-						if (first)
-						{
-							first = false;
-						}
-						else
-						{
-							river.write_string(", ");
-						}
-						river.write_string("typename " + cast<symbol_a<>>(name).to_string());
-					}
-				}
-			}
-			river.write_string(">\n");
-
-			if (declare)
-			{
-				river.write_string("class " + class_name + ";\n");
-			}
-			else if (define)
-			{
-				river.write_string("class " + class_name + "\n");
-				river.write_string("{\n");
-				//TODO
-				river.write_string("};\n");
-			}
-
-			int64_t nest = split_scope.size();
-			while (--nest)
-			{
-				river.write_string("}\n");
-			}
+			_declare_or_define_(version, indent, river, declare, define);
 			return;
 		}
 		if (type)
@@ -342,6 +232,110 @@ protected:
 		, _parent_expressions{ parent_expressions }
 	{}
 
+	void _declare_or_define_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	{
+		flock_a<> split_scope = _split_scope_();
+		river.write_string("\n");
+		auto const name = _namespace_open_(split_scope, river);
+		std::string const& name_string = name.to_string();
+		std::string const class_name =
+			((name.first_character() == '<' && name.last_character() == '>')
+				? name_string.substr(1, name_string.length() - 2)
+				: name_string)
+			+ "_a";
+
+		river.write_string("template <");
+		if (declare)
+		{
+			if (_dimension_names.empty())
+			{
+				river.write_string("typename _1_ = void");
+			}
+			else
+			{
+				bool first = true;
+				auto kit = _dimension_kinds.extract_vector().cbegin();
+				auto eit = _dimension_expressions.extract_vector().cbegin();
+				for (auto const& name : _dimension_names.extract_vector())
+				{
+					if (first)
+					{
+						first = false;
+					}
+					else
+					{
+						river.write_string(", ");
+					}
+					river.write_string("typename " + cast<symbol_a<>>(name).to_string());
+
+					auto any_kind = *kit++;
+					if (check<expression_a<>>(any_kind))
+					{
+						try
+						{
+							any_kind = cast<expression_a<>>(any_kind).evaluate_();
+						}
+						catch (misunderstanding_a<>& misunderstanding)
+						{
+							throw dis(_token.report() + "strange::expression_abstraction::generate_cpp kind expression evaluation error") + misunderstanding;
+						}
+					}
+					if (!check<kind_a<>>(any_kind))
+					{
+						throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-kind dimension kind");
+					}
+					auto const kind = cast<kind_a<>>(any_kind);
+
+					auto const expression = *eit++;
+					if (kind.optional())
+					{
+						river.write_string(" = ");
+						cast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
+					}
+				}
+			}
+		}
+		else if (define)
+		{
+			if (_dimension_names.empty())
+			{
+				river.write_string("typename _1_");
+			}
+			else
+			{
+				bool first = true;
+				for (auto const& name : _dimension_names.extract_vector())
+				{
+					if (first)
+					{
+						first = false;
+					}
+					else
+					{
+						river.write_string(", ");
+					}
+					river.write_string("typename " + cast<symbol_a<>>(name).to_string());
+				}
+			}
+		}
+		river.write_string(">\n");
+
+		if (declare)
+		{
+			river.write_string("class " + class_name + ";\n");
+		}
+		else if (define)
+		{
+			river.write_string("class " + class_name + "\n");
+			river.write_string("{\n");
+			//TODO
+			river.write_string("};\n");
+		}
+
+		_namespace_close_(split_scope, river);
+		return;
+	}
+
 	flock_a<> _split_scope_() const
 	{
 		auto split_scope = flock_t<>::create_();
@@ -358,6 +352,30 @@ protected:
 		}
 		split_scope.push_back(sym(scope.substr(begin)));
 		return split_scope;
+	}
+
+	static symbol_a<> _namespace_open_(flock_a<> const& split_scope, river_a<>& river)
+	{
+		symbol_a<> name;
+		for (auto const& scope_name : split_scope)
+		{
+			if (check<any_a<>>(name))
+			{
+				river.write_string("namespace " + name.to_string() + "\n{\n");
+			}
+			name = cast<symbol_a<>>(scope_name);
+		}
+		return name;
+	}
+
+	static void _namespace_close_(flock_a<> const& split_scope, river_a<>& river)
+	{
+		int64_t nest = split_scope.size();
+		while (--nest)
+		{
+			river.write_string("}\n");
+		}
+		return;
 	}
 
 private:
