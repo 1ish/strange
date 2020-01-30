@@ -212,11 +212,32 @@ public:
 						{
 							river.write_string(", ");
 						}
-						river.write_string("typename ");
-						river.write_string(cast<symbol_a<>>(name).to_string());
-						//TODO
-						++kit;
-						++eit;
+						river.write_string("typename " + cast<symbol_a<>>(name).to_string());
+
+						auto any_kind = *kit++;
+						if (check<expression_a<>>(any_kind))
+						{
+							try
+							{
+								any_kind = cast<expression_a<>>(any_kind).evaluate_();
+							}
+							catch (misunderstanding_a<>& misunderstanding)
+							{
+								throw dis(_token.report() + "strange::expression_abstraction::generate_cpp kind expression evaluation error") + misunderstanding;
+							}
+						}
+						if (!check<kind_a<>>(any_kind))
+						{
+							throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-kind dimension kind");
+						}
+						auto const kind = cast<kind_a<>>(any_kind);
+
+						auto const expression = *eit++;
+						if (kind.optional())
+						{
+							river.write_string(" = ");
+							cast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
+						}
 					}
 				}
 			}
@@ -228,7 +249,19 @@ public:
 				}
 				else
 				{
-
+					bool first = true;
+					for (auto const& name : _dimension_names.extract_vector())
+					{
+						if (first)
+						{
+							first = false;
+						}
+						else
+						{
+							river.write_string(", ");
+						}
+						river.write_string("typename " + cast<symbol_a<>>(name).to_string());
+					}
 				}
 			}
 			river.write_string(">\n");
@@ -244,6 +277,7 @@ public:
 				//TODO
 				river.write_string("};\n");
 			}
+
 			int64_t nest = split_scope.size();
 			while (--nest)
 			{
