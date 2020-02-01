@@ -11,7 +11,7 @@
 namespace strange
 {
 
-template <typename number_data_a_int64, typename number_data_a_uint64, typename number_data_a_double>
+template <typename number_data_int64_a, typename number_data_uint64_a, typename number_data_double_a>
 class number_a
 {
 public:
@@ -61,27 +61,27 @@ public:
 	inline number_a operator%(number_a const& number) const;
 
 	inline any_a<> to_int_64__(range_a<> const& _) const;
-	inline number_data_a_int64 to_int_64_() const;
+	inline number_data_int64_a to_int_64_() const;
 	inline int64_t to_int_64() const;
 
 	inline any_a<> from_int_64__(range_a<> const& range);
-	inline any_a<> from_int_64_(number_data_a_int64 const& int_64);
+	inline any_a<> from_int_64_(number_data_int64_a const& int_64);
 	inline void from_int_64(int64_t int_64);
 
 	inline any_a<> to_uint_64__(range_a<> const& _) const;
-	inline number_data_a_uint64 to_uint_64_() const;
+	inline number_data_uint64_a to_uint_64_() const;
 	inline uint64_t to_uint_64() const;
 
 	inline any_a<> from_uint_64__(range_a<> const& range);
-	inline any_a<> from_uint_64_(number_data_a_uint64 const& uint_64);
+	inline any_a<> from_uint_64_(number_data_uint64_a const& uint_64);
 	inline void from_uint_64(uint64_t uint_64);
 
 	inline any_a<> to_float_64__(range_a<> const& _) const;
-	inline number_data_a_double to_float_64_() const;
+	inline number_data_double_a to_float_64_() const;
 	inline double to_float_64() const;
 
 	inline any_a<> from_float_64__(range_a<> const& range);
-	inline any_a<> from_float_64_(number_data_a_double const& float_64);
+	inline any_a<> from_float_64_(number_data_double_a const& float_64);
 	inline void from_float_64(double float_64);
 
 	inline any_a<> less_than__(range_a<> const& range) const;
@@ -101,7 +101,7 @@ public:
 	inline bool operator>=(number_a const& number) const;
 
 	inline any_a<> byte_size__(range_a<> const& _) const;
-	inline number_data_a_int64 byte_size_() const;
+	inline number_data_int64_a byte_size_() const;
 	inline int64_t byte_size() const;
 
 	inline any_a<> is_int__(range_a<> const& _) const;

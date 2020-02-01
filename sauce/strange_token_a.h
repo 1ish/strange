@@ -14,7 +14,7 @@
 
 
 namespace strange {
-    template < typename number_data_a_int64 >
+    template < typename number_data_int64_a >
     class token_a : public ___root___
     {
     public:
@@ -91,13 +91,13 @@ namespace strange {
      { assert(handle_); return read().filename( ); }
      inline any_a < > line__ ( range_a < > const & _ ) const
      { assert(handle_); return read().line__(_ ); }
-     inline number_data_a_int64 line_ ( ) const
+     inline number_data_int64_a line_ ( ) const
      { assert(handle_); return read().line_( ); }
      inline int64_t line ( ) const
      { assert(handle_); return read().line( ); }
      inline any_a < > position__ ( range_a < > const & _ ) const
      { assert(handle_); return read().position__(_ ); }
-     inline number_data_a_int64 position_ ( ) const
+     inline number_data_int64_a position_ ( ) const
      { assert(handle_); return read().position_( ); }
      inline int64_t position ( ) const
      { assert(handle_); return read().position( ); }
@@ -119,7 +119,7 @@ namespace strange {
      { assert(handle_); return read().literal_( ); }
      inline any_a < > precedence__ ( range_a < > const & _ ) const
      { assert(handle_); return read().precedence__(_ ); }
-     inline number_data_a_int64 precedence_ ( ) const
+     inline number_data_int64_a precedence_ ( ) const
      { assert(handle_); return read().precedence_( ); }
      inline int64_t precedence ( ) const
      { assert(handle_); return read().precedence( ); }
@@ -137,10 +137,10 @@ namespace strange {
       virtual inline symbol_a < > filename_ ( ) const = 0;
       virtual inline std :: string filename ( ) const = 0;
       virtual inline any_a < > line__ ( range_a < > const & _ ) const = 0;
-      virtual inline number_data_a_int64 line_ ( ) const = 0;
+      virtual inline number_data_int64_a line_ ( ) const = 0;
       virtual inline int64_t line ( ) const = 0;
       virtual inline any_a < > position__ ( range_a < > const & _ ) const = 0;
-      virtual inline number_data_a_int64 position_ ( ) const = 0;
+      virtual inline number_data_int64_a position_ ( ) const = 0;
       virtual inline int64_t position ( ) const = 0;
       virtual inline any_a < > tag__ ( range_a < > const & _ ) const = 0;
       virtual inline symbol_a < > tag_ ( ) const = 0;
@@ -151,7 +151,7 @@ namespace strange {
       virtual inline any_a < > literal__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > literal_ ( ) const = 0;
       virtual inline any_a < > precedence__ ( range_a < > const & _ ) const = 0;
-      virtual inline number_data_a_int64 precedence_ ( ) const = 0;
+      virtual inline number_data_int64_a precedence_ ( ) const = 0;
       virtual inline int64_t precedence ( ) const = 0;
       virtual inline any_a < > report__ ( range_a < > const & _ ) const = 0;
       virtual inline misunderstanding_a < > report_ ( ) const = 0;
@@ -179,13 +179,13 @@ namespace strange {
       { return value_.filename( ); }
       virtual inline any_a < > line__ ( range_a < > const & _ ) const
       { return value_.line__(_ ); }
-      virtual inline number_data_a_int64 line_ ( ) const
+      virtual inline number_data_int64_a line_ ( ) const
       { return value_.line_( ); }
       virtual inline int64_t line ( ) const
       { return value_.line( ); }
       virtual inline any_a < > position__ ( range_a < > const & _ ) const
       { return value_.position__(_ ); }
-      virtual inline number_data_a_int64 position_ ( ) const
+      virtual inline number_data_int64_a position_ ( ) const
       { return value_.position_( ); }
       virtual inline int64_t position ( ) const
       { return value_.position( ); }
@@ -207,7 +207,7 @@ namespace strange {
       { return value_.literal_( ); }
       virtual inline any_a < > precedence__ ( range_a < > const & _ ) const
       { return value_.precedence__(_ ); }
-      virtual inline number_data_a_int64 precedence_ ( ) const
+      virtual inline number_data_int64_a precedence_ ( ) const
       { return value_.precedence_( ); }
       virtual inline int64_t precedence ( ) const
       { return value_.precedence( ); }

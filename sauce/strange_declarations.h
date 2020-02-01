@@ -40,7 +40,7 @@ class unordered_shoal_a;
 template <typename _1_>
 class number_data_a;
 
-template <typename range_a = range_a<>, typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename kind_a = kind_a<>, typename inventory_a = inventory_a<>, typename unordered_herd_a = unordered_herd_a<>, typename shoal_a = shoal_a<>, typename unordered_shoal_a = unordered_shoal_a<>, typename number_data_a_uint64 = number_data_a<uint64_t>>
+template <typename range_a = range_a<>, typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename kind_a = kind_a<>, typename inventory_a = inventory_a<>, typename unordered_herd_a = unordered_herd_a<>, typename shoal_a = shoal_a<>, typename unordered_shoal_a = unordered_shoal_a<>, typename number_data_uint64_a = number_data_a<uint64_t>>
 class any_a;
 template <typename _1_ = void>
 class forward_const_iterator_a;
@@ -84,7 +84,7 @@ class misunderstanding_a;
 template <typename _element_ = any_a<>>
 class range_of_a;
 
-template <typename number_data_a_int64 = number_data_a<int64_t>>
+template <typename number_data_int64_a = number_data_a<int64_t>>
 class collection_a;
 
 template <typename _1_ = void>
@@ -105,7 +105,7 @@ class ordered_herd_a;
 template <typename _1_>
 class data_a;
 
-template <typename number_data_a_int64 = number_data_a<int64_t>, typename number_data_a_uint64 = number_data_a<uint64_t>, typename number_data_a_double = number_data_a<double>>
+template <typename number_data_int64_a = number_data_a<int64_t>, typename number_data_uint64_a = number_data_a<uint64_t>, typename number_data_double_a = number_data_a<double>>
 class number_a;
 
 template <typename lake_a_int8 = lake_a<int8_t>>
@@ -114,13 +114,13 @@ class river_a;
 template <typename _1_>
 class brook_a;
 
-template <typename number_data_a_int64 = number_data_a<int64_t>>
+template <typename number_data_int64_a = number_data_a<int64_t>>
 class token_a;
 
 template <typename _1_ = void>
 class operation_a;
 
-template <typename number_data_a_int64 = number_data_a<int64_t>>
+template <typename number_data_int64_a = number_data_a<int64_t>>
 class expression_a;
 
 template <typename _1_ = void>

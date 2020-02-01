@@ -11,7 +11,7 @@
 namespace strange
 {
 
-template <typename number_data_a_int64>
+template <typename number_data_int64_a>
 class collection_a
 {
 public:
@@ -40,7 +40,7 @@ public:
 	inline void clear();
 
 	inline any_a<> size__(range_a<> const& _) const;
-	inline number_data_a_int64 size_() const;
+	inline number_data_int64_a size_() const;
 	inline int64_t size() const;
 
 	inline any_a<> empty__(range_a<> const& _) const;

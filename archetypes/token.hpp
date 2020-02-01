@@ -13,7 +13,7 @@
 namespace strange
 {
 
-template <typename number_data_a_int64>
+template <typename number_data_int64_a>
 class token_a
 {
 public:
@@ -23,11 +23,11 @@ public:
 	inline std::string filename() const;
 
 	inline any_a<> line__(range_a<> const& _) const;
-	inline number_data_a_int64 line_() const;
+	inline number_data_int64_a line_() const;
 	inline int64_t line() const;
 
 	inline any_a<> position__(range_a<> const& _) const;
-	inline number_data_a_int64 position_() const;
+	inline number_data_int64_a position_() const;
 	inline int64_t position() const;
 
 	inline any_a<> tag__(range_a<> const& _) const;
@@ -42,7 +42,7 @@ public:
 	inline any_a<> literal_() const;
 
 	inline any_a<> precedence__(range_a<> const& _) const;
-	inline number_data_a_int64 precedence_() const;
+	inline number_data_int64_a precedence_() const;
 	inline int64_t precedence() const;
 
 	inline any_a<> report__(range_a<> const& _) const;

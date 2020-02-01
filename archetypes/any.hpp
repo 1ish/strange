@@ -19,7 +19,7 @@
 namespace strange
 {
 
-template <typename range_a, typename symbol_a, typename cat_a, typename kind_a, typename inventory_a, typename unordered_herd_a, typename shoal_a, typename unordered_shoal_a, typename number_data_a_uint64>
+template <typename range_a, typename symbol_a, typename cat_a, typename kind_a, typename inventory_a, typename unordered_herd_a, typename shoal_a, typename unordered_shoal_a, typename number_data_uint64_a>
 class any_a
 {
 public:
@@ -69,7 +69,7 @@ public:
 
 	// identification
 	inline any_a identity__(range_a const& _) const;
-	inline number_data_a_uint64 identity_() const;
+	inline number_data_uint64_a identity_() const;
 	inline void const* identity() const;
 
 	inline any_a identical__(range_a const& range) const;
@@ -94,7 +94,7 @@ public:
 	inline bool operator!=(any_a const& thing) const;
 
 	inline any_a hash__(range_a const& _) const;
-	inline number_data_a_uint64 hash_() const;
+	inline number_data_uint64_a hash_() const;
 	inline std::size_t hash() const;
 
 	inline bool is(std::string const& s) const;

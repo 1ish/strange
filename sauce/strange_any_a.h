@@ -20,7 +20,7 @@
 
 
 namespace strange {
-    template < typename range_a , typename symbol_a , typename cat_a , typename kind_a , typename inventory_a , typename unordered_herd_a , typename shoal_a , typename unordered_shoal_a , typename number_data_a_uint64 >
+    template < typename range_a , typename symbol_a , typename cat_a , typename kind_a , typename inventory_a , typename unordered_herd_a , typename shoal_a , typename unordered_shoal_a , typename number_data_uint64_a >
     class any_a
     {
     public:
@@ -170,7 +170,7 @@ namespace strange {
      { assert(handle_); return read().operate(thing, range ); }
      inline any_a identity__ ( range_a const & _ ) const
      { assert(handle_); return read().identity__(_ ); }
-     inline number_data_a_uint64 identity_ ( ) const
+     inline number_data_uint64_a identity_ ( ) const
      { assert(handle_); return read().identity_( ); }
      inline void const * identity ( ) const
      { assert(handle_); return read().identity( ); }
@@ -206,7 +206,7 @@ namespace strange {
      { assert(handle_); return read().operator!=(thing ); }
      inline any_a hash__ ( range_a const & _ ) const
      { assert(handle_); return read().hash__(_ ); }
-     inline number_data_a_uint64 hash_ ( ) const
+     inline number_data_uint64_a hash_ ( ) const
      { assert(handle_); return read().hash_( ); }
      inline std :: size_t hash ( ) const
      { assert(handle_); return read().hash( ); }
@@ -265,7 +265,7 @@ namespace strange {
       virtual inline any_a invoke ( any_a & thing , range_a const & range ) const = 0;
       virtual inline any_a operate ( any_a & thing , range_a const & range ) const = 0;
       virtual inline any_a identity__ ( range_a const & _ ) const = 0;
-      virtual inline number_data_a_uint64 identity_ ( ) const = 0;
+      virtual inline number_data_uint64_a identity_ ( ) const = 0;
       virtual inline void const * identity ( ) const = 0;
       virtual inline any_a identical__ ( range_a const & range ) const = 0;
       virtual inline any_a identical_ ( any_a const & thing ) const = 0;
@@ -283,7 +283,7 @@ namespace strange {
       virtual inline any_a different_ ( any_a const & thing ) const = 0;
       virtual inline bool operator != ( any_a const & thing ) const = 0;
       virtual inline any_a hash__ ( range_a const & _ ) const = 0;
-      virtual inline number_data_a_uint64 hash_ ( ) const = 0;
+      virtual inline number_data_uint64_a hash_ ( ) const = 0;
       virtual inline std :: size_t hash ( ) const = 0;
       virtual inline bool is ( std :: string const & s ) const = 0;
     	};
@@ -390,7 +390,7 @@ namespace strange {
       { return value_.operate(thing, range ); }
       virtual inline any_a identity__ ( range_a const & _ ) const
       { return value_.identity__(_ ); }
-      virtual inline number_data_a_uint64 identity_ ( ) const
+      virtual inline number_data_uint64_a identity_ ( ) const
       { return value_.identity_( ); }
       virtual inline void const * identity ( ) const
       { return value_.identity( ); }
@@ -426,7 +426,7 @@ namespace strange {
       { return value_.operator!=(thing ); }
       virtual inline any_a hash__ ( range_a const & _ ) const
       { return value_.hash__(_ ); }
-      virtual inline number_data_a_uint64 hash_ ( ) const
+      virtual inline number_data_uint64_a hash_ ( ) const
       { return value_.hash_( ); }
       virtual inline std :: size_t hash ( ) const
       { return value_.hash( ); }

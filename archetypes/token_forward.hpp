@@ -6,7 +6,7 @@
 namespace strange
 {
 
-template <typename number_data_a_int64 = number_data_a<int64_t>>
+template <typename number_data_int64_a = number_data_a<int64_t>>
 class token_a;
 
 } // namespace strange

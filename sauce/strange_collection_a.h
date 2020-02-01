@@ -12,7 +12,7 @@
 
 
 namespace strange {
-    template < typename number_data_a_int64 >
+    template < typename number_data_int64_a >
     class collection_a : public ___derived___
     {
     public:
@@ -117,7 +117,7 @@ namespace strange {
      { assert(handle_); write().clear( ); }
      inline any_a < > size__ ( range_a < > const & _ ) const
      { assert(handle_); return read().size__(_ ); }
-     inline number_data_a_int64 size_ ( ) const
+     inline number_data_int64_a size_ ( ) const
      { assert(handle_); return read().size_( ); }
      inline int64_t size ( ) const
      { assert(handle_); return read().size( ); }
@@ -201,7 +201,7 @@ namespace strange {
       virtual inline collection_a clear_ ( ) = 0;
       virtual inline void clear ( ) = 0;
       virtual inline any_a < > size__ ( range_a < > const & _ ) const = 0;
-      virtual inline number_data_a_int64 size_ ( ) const = 0;
+      virtual inline number_data_int64_a size_ ( ) const = 0;
       virtual inline int64_t size ( ) const = 0;
       virtual inline any_a < > empty__ ( range_a < > const & _ ) const = 0;
       virtual inline any_a < > empty_ ( ) const = 0;
@@ -283,7 +283,7 @@ namespace strange {
       { value_.clear( ); }
       virtual inline any_a < > size__ ( range_a < > const & _ ) const
       { return value_.size__(_ ); }
-      virtual inline number_data_a_int64 size_ ( ) const
+      virtual inline number_data_int64_a size_ ( ) const
       { return value_.size_( ); }
       virtual inline int64_t size ( ) const
       { return value_.size( ); }
