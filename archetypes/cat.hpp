@@ -15,7 +15,7 @@
 namespace strange
 {
 
-template <typename lake_a_int8>
+template <typename lake_int8_a>
 class cat_a
 {
 public:
@@ -41,7 +41,7 @@ public:
 	inline cat_a result_() const;
 
 	inline any_a<> code__(range_a<> const& _) const;
-	inline lake_a_int8 code_() const;
+	inline lake_int8_a code_() const;
 	inline std::string code() const;
 };
 

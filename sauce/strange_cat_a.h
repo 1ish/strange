@@ -16,7 +16,7 @@
 
 
 namespace strange {
-    template < typename lake_a_int8 >
+    template < typename lake_int8_a >
     class cat_a : public ___derived___
     {
     public:
@@ -115,7 +115,7 @@ namespace strange {
      { assert(handle_); return read().result_( ); }
      inline any_a < > code__ ( range_a < > const & _ ) const
      { assert(handle_); return read().code__(_ ); }
-     inline lake_a_int8 code_ ( ) const
+     inline lake_int8_a code_ ( ) const
      { assert(handle_); return read().code_( ); }
      inline std :: string code ( ) const
      { assert(handle_); return read().code( ); }
@@ -138,7 +138,7 @@ namespace strange {
       virtual inline any_a < > result__ ( range_a < > const & _ ) const = 0;
       virtual inline cat_a result_ ( ) const = 0;
       virtual inline any_a < > code__ ( range_a < > const & _ ) const = 0;
-      virtual inline lake_a_int8 code_ ( ) const = 0;
+      virtual inline lake_int8_a code_ ( ) const = 0;
       virtual inline std :: string code ( ) const = 0;
     	};
     
@@ -185,7 +185,7 @@ namespace strange {
       { return value_.result_( ); }
       virtual inline any_a < > code__ ( range_a < > const & _ ) const
       { return value_.code__(_ ); }
-      virtual inline lake_a_int8 code_ ( ) const
+      virtual inline lake_int8_a code_ ( ) const
       { return value_.code_( ); }
       virtual inline std :: string code ( ) const
       { return value_.code( ); }
