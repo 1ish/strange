@@ -6,7 +6,7 @@
 namespace strange
 {
 
-template <typename lake_a_int8 = lake_a<int8_t>>
+template <typename lake_a_int8 = void>
 class cat_a;
 
 } // namespace strange
