@@ -22,7 +22,7 @@ class lake_a;
 template <typename _1_ = void>
 using lake_int8_a = lake_a<int8_t>;
 
-template <typename lake_int8_a = lake_int8_a<>>
+template <typename _1_ = void>
 class cat_a;
 
 template <typename _1_ = void>
@@ -123,7 +123,7 @@ class data_a;
 template <typename number_data_int64_a = number_data_int64_a<>, typename number_data_uint64_a = number_data_uint64_a<>, typename number_data_double_a = number_data_double_a<>>
 class number_a;
 
-template <typename lake_int8_a = lake_int8_a<>>
+template <typename _1_ = void>
 class river_a;
 
 template <typename _1_>

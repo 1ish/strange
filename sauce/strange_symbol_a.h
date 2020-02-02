@@ -84,7 +84,7 @@ namespace strange {
     
      inline any_a < > to_lake__ ( range_a < > const & range ) const
      { assert(handle_); return read().to_lake__(range ); }
-     inline lake_a < int8_t > to_lake_ ( ) const
+     inline lake_int8_a < > to_lake_ ( ) const
      { assert(handle_); return read().to_lake_( ); }
      inline std :: string const & to_string ( ) const
      { assert(handle_); return read().to_string( ); }
@@ -103,7 +103,7 @@ namespace strange {
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
       virtual inline any_a < > to_lake__ ( range_a < > const & range ) const = 0;
-      virtual inline lake_a < int8_t > to_lake_ ( ) const = 0;
+      virtual inline lake_int8_a < > to_lake_ ( ) const = 0;
       virtual inline std :: string const & to_string ( ) const = 0;
       virtual inline int8_t first_character ( ) const = 0;
       virtual inline int8_t last_character ( ) const = 0;
@@ -127,7 +127,7 @@ namespace strange {
     
       virtual inline any_a < > to_lake__ ( range_a < > const & range ) const
       { return value_.to_lake__(range ); }
-      virtual inline lake_a < int8_t > to_lake_ ( ) const
+      virtual inline lake_int8_a < > to_lake_ ( ) const
       { return value_.to_lake_( ); }
       virtual inline std :: string const & to_string ( ) const
       { return value_.to_string( ); }

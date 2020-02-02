@@ -11,11 +11,12 @@
 #include "flock_forward.hpp"
 #include "herd_forward.hpp"
 #include "number_forward.hpp"
+#include "lake_forward.hpp"
 
 namespace strange
 {
 
-template <typename lake_int8_a>
+template <typename _1_>
 class cat_a
 {
 public:
@@ -41,7 +42,7 @@ public:
 	inline cat_a result_() const;
 
 	inline any_a<> code__(range_a<> const& _) const;
-	inline lake_int8_a code_() const;
+	inline lake_int8_a<> code_() const;
 	inline std::string code() const;
 };
 

@@ -14,7 +14,7 @@
 
 
 namespace strange {
-    template < typename lake_int8_a >
+    template < typename _1_ >
     class river_a : public ___derived___
     {
     public:
@@ -111,7 +111,7 @@ namespace strange {
      { assert(handle_); write().putback(int_8 ); }
      inline any_a < > getline__ ( range_a < > const & range )
      { assert(handle_); return write().getline__(range ); }
-     inline lake_int8_a getline_ ( number_data_int64_a < > const & count , number_data_int8_a < > const & delimiter )
+     inline lake_int8_a < > getline_ ( number_data_int64_a < > const & count , number_data_int8_a < > const & delimiter )
      { assert(handle_); return write().getline_(count, delimiter ); }
      inline std :: vector < int8_t > getline ( int64_t count , int8_t delimiter )
      { assert(handle_); return write().getline(count, delimiter ); }
@@ -123,7 +123,7 @@ namespace strange {
      { assert(handle_); write().ignore(count ); }
      inline any_a < > read__ ( range_a < > const & range )
      { assert(handle_); return write().read__(range ); }
-     inline lake_int8_a read_ ( number_data_int64_a < > const & count )
+     inline lake_int8_a < > read_ ( number_data_int64_a < > const & count )
      { assert(handle_); return write().read_(count ); }
      inline std :: vector < int8_t > read ( int64_t count )
      { assert(handle_); return write().read(count ); }
@@ -167,7 +167,7 @@ namespace strange {
      { assert(handle_); write().put(int_8 ); }
      inline any_a < > write__ ( range_a < > const & range )
      { assert(handle_); return write().write__(range ); }
-     inline any_a < > write_ ( lake_int8_a const & lake )
+     inline any_a < > write_ ( lake_int8_a < > const & lake )
      { assert(handle_); return write().write_(lake ); }
      inline void write ( std :: vector < int8_t > const & lake )
      { assert(handle_); write().write(lake ); }
@@ -253,7 +253,7 @@ namespace strange {
      { assert(handle_); write().set_bad(value ); }
      inline any_a < > filename__ ( range_a < > const & _ ) const
      { assert(handle_); return read().filename__(_ ); }
-     inline lake_a < int8_t > filename_ ( ) const
+     inline lake_int8_a < > filename_ ( ) const
      { assert(handle_); return read().filename_( ); }
      inline std :: string filename ( ) const
      { assert(handle_); return read().filename( ); }
@@ -275,13 +275,13 @@ namespace strange {
       virtual inline any_a < > putback_ ( number_data_int8_a < > const & int_8 ) = 0;
       virtual inline void putback ( int8_t int_8 ) = 0;
       virtual inline any_a < > getline__ ( range_a < > const & range ) = 0;
-      virtual inline lake_int8_a getline_ ( number_data_int64_a < > const & count , number_data_int8_a < > const & delimiter ) = 0;
+      virtual inline lake_int8_a < > getline_ ( number_data_int64_a < > const & count , number_data_int8_a < > const & delimiter ) = 0;
       virtual inline std :: vector < int8_t > getline ( int64_t count , int8_t delimiter ) = 0;
       virtual inline any_a < > ignore__ ( range_a < > const & range ) = 0;
       virtual inline any_a < > ignore_ ( number_data_int64_a < > const & count ) = 0;
       virtual inline void ignore ( int64_t count ) = 0;
       virtual inline any_a < > read__ ( range_a < > const & range ) = 0;
-      virtual inline lake_int8_a read_ ( number_data_int64_a < > const & count ) = 0;
+      virtual inline lake_int8_a < > read_ ( number_data_int64_a < > const & count ) = 0;
       virtual inline std :: vector < int8_t > read ( int64_t count ) = 0;
       virtual inline std :: string read_string ( int64_t count ) = 0;
       virtual inline any_a < > tellg__ ( range_a < > const & _ ) const = 0;
@@ -303,7 +303,7 @@ namespace strange {
       virtual inline any_a < > put_ ( number_data_int8_a < > const & int_8 ) = 0;
       virtual inline void put ( int8_t int_8 ) = 0;
       virtual inline any_a < > write__ ( range_a < > const & range ) = 0;
-      virtual inline any_a < > write_ ( lake_int8_a const & lake ) = 0;
+      virtual inline any_a < > write_ ( lake_int8_a < > const & lake ) = 0;
       virtual inline void write ( std :: vector < int8_t > const & lake ) = 0;
       virtual inline void write_string ( std :: string const & str ) = 0;
       virtual inline any_a < > tellp__ ( range_a < > const & _ ) const = 0;
@@ -346,7 +346,7 @@ namespace strange {
       virtual inline any_a < > set_bad_ ( any_a < > const & value ) = 0;
       virtual inline void set_bad ( bool value ) = 0;
       virtual inline any_a < > filename__ ( range_a < > const & _ ) const = 0;
-      virtual inline lake_a < int8_t > filename_ ( ) const = 0;
+      virtual inline lake_int8_a < > filename_ ( ) const = 0;
       virtual inline std :: string filename ( ) const = 0;
     	};
     
@@ -391,7 +391,7 @@ namespace strange {
       { value_.putback(int_8 ); }
       virtual inline any_a < > getline__ ( range_a < > const & range )
       { return value_.getline__(range ); }
-      virtual inline lake_int8_a getline_ ( number_data_int64_a < > const & count , number_data_int8_a < > const & delimiter )
+      virtual inline lake_int8_a < > getline_ ( number_data_int64_a < > const & count , number_data_int8_a < > const & delimiter )
       { return value_.getline_(count, delimiter ); }
       virtual inline std :: vector < int8_t > getline ( int64_t count , int8_t delimiter )
       { return value_.getline(count, delimiter ); }
@@ -403,7 +403,7 @@ namespace strange {
       { value_.ignore(count ); }
       virtual inline any_a < > read__ ( range_a < > const & range )
       { return value_.read__(range ); }
-      virtual inline lake_int8_a read_ ( number_data_int64_a < > const & count )
+      virtual inline lake_int8_a < > read_ ( number_data_int64_a < > const & count )
       { return value_.read_(count ); }
       virtual inline std :: vector < int8_t > read ( int64_t count )
       { return value_.read(count ); }
@@ -447,7 +447,7 @@ namespace strange {
       { value_.put(int_8 ); }
       virtual inline any_a < > write__ ( range_a < > const & range )
       { return value_.write__(range ); }
-      virtual inline any_a < > write_ ( lake_int8_a const & lake )
+      virtual inline any_a < > write_ ( lake_int8_a < > const & lake )
       { return value_.write_(lake ); }
       virtual inline void write ( std :: vector < int8_t > const & lake )
       { value_.write(lake ); }
@@ -533,7 +533,7 @@ namespace strange {
       { value_.set_bad(value ); }
       virtual inline any_a < > filename__ ( range_a < > const & _ ) const
       { return value_.filename__(_ ); }
-      virtual inline lake_a < int8_t > filename_ ( ) const
+      virtual inline lake_int8_a < > filename_ ( ) const
       { return value_.filename_( ); }
       virtual inline std :: string filename ( ) const
       { return value_.filename( ); }

@@ -13,7 +13,7 @@
 namespace strange
 {
 
-template <typename lake_int8_a>
+template <typename _1_>
 class river_a
 {
 public:
@@ -37,7 +37,7 @@ public:
 	inline void putback(int8_t int_8);
 
 	inline any_a<> getline__(range_a<> const& range);
-	inline lake_int8_a getline_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter);
+	inline lake_int8_a<> getline_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter);
 	inline std::vector<int8_t> getline(int64_t count, int8_t delimiter);
 
 	inline any_a<> ignore__(range_a<> const& range);
@@ -45,7 +45,7 @@ public:
 	inline void ignore(int64_t count);
 
 	inline any_a<> read__(range_a<> const& range);
-	inline lake_int8_a read_(number_data_int64_a<> const& count);
+	inline lake_int8_a<> read_(number_data_int64_a<> const& count);
 	inline std::vector<int8_t> read(int64_t count);
 	inline std::string read_string(int64_t count);
 
@@ -75,7 +75,7 @@ public:
 	inline void put(int8_t int_8);
 
 	inline any_a<> write__(range_a<> const& range);
-	inline any_a<> write_(lake_int8_a const& lake);
+	inline any_a<> write_(lake_int8_a<> const& lake);
 	inline void write(std::vector<int8_t> const& lake);
 	inline void write_string(std::string const& str);
 
@@ -133,7 +133,7 @@ public:
 	inline void set_bad(bool value);
 
 	inline any_a<> filename__(range_a<> const& _) const;
-	inline lake_a<int8_t> filename_() const;
+	inline lake_int8_a<> filename_() const;
 	inline std::string filename() const;
 };
 

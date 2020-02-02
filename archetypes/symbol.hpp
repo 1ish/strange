@@ -18,7 +18,7 @@ class symbol_a
 public:
 	// symbol
 	inline any_a<> to_lake__(range_a<> const& range) const;
-	inline lake_a<int8_t> to_lake_() const;
+	inline lake_int8_a<> to_lake_() const;
 
 	inline std::string const& to_string() const;
 
