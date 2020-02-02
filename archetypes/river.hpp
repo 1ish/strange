@@ -21,11 +21,11 @@ public:
 	inline std::string to_string();
 
 	inline any_a<> get__(range_a<> const& _);
-	inline number_data_a<int8_t> get_();
+	inline number_data_int8_a<> get_();
 	inline int8_t get();
 	
 	inline any_a<> peek__(range_a<> const& _);
-	inline number_data_a<int8_t> peek_();
+	inline number_data_int8_a<> peek_();
 	inline int8_t peek();
 
 	inline any_a<> unget__(range_a<> const& _);
@@ -33,36 +33,36 @@ public:
 	inline void unget();
 
 	inline any_a<> putback__(range_a<> const& range);
-	inline any_a<> putback_(number_data_a<int8_t> const& int_8);
+	inline any_a<> putback_(number_data_int8_a<> const& int_8);
 	inline void putback(int8_t int_8);
 
 	inline any_a<> getline__(range_a<> const& range);
-	inline lake_int8_a getline_(number_data_a<int64_t> const& count, number_data_a<int8_t> const& delimiter);
+	inline lake_int8_a getline_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter);
 	inline std::vector<int8_t> getline(int64_t count, int8_t delimiter);
 
 	inline any_a<> ignore__(range_a<> const& range);
-	inline any_a<> ignore_(number_data_a<int64_t> const& count);
+	inline any_a<> ignore_(number_data_int64_a<> const& count);
 	inline void ignore(int64_t count);
 
 	inline any_a<> read__(range_a<> const& range);
-	inline lake_int8_a read_(number_data_a<int64_t> const& count);
+	inline lake_int8_a read_(number_data_int64_a<> const& count);
 	inline std::vector<int8_t> read(int64_t count);
 	inline std::string read_string(int64_t count);
 
 	inline any_a<> tellg__(range_a<> const& _) const;
-	inline number_data_a<int64_t> tellg_() const;
+	inline number_data_int64_a<> tellg_() const;
 	inline int64_t tellg() const;
 
 	inline any_a<> seekg_beg__(range_a<> const& range);
-	inline any_a<> seekg_beg_(number_data_a<int64_t> const& offset);
+	inline any_a<> seekg_beg_(number_data_int64_a<> const& offset);
 	inline void seekg_beg(int64_t offset);
 
 	inline any_a<> seekg_end__(range_a<> const& range);
-	inline any_a<> seekg_end_(number_data_a<int64_t> const& offset);
+	inline any_a<> seekg_end_(number_data_int64_a<> const& offset);
 	inline void seekg_end(int64_t offset);
 
 	inline any_a<> seekg_cur__(range_a<> const& range);
-	inline any_a<> seekg_cur_(number_data_a<int64_t> const& offset);
+	inline any_a<> seekg_cur_(number_data_int64_a<> const& offset);
 	inline void seekg_cur(int64_t offset);
 
 	inline any_a<> sync__(range_a<> const& _);
@@ -71,7 +71,7 @@ public:
 
 	// river output
 	inline any_a<> put__(range_a<> const& range);
-	inline any_a<> put_(number_data_a<int8_t> const& int_8);
+	inline any_a<> put_(number_data_int8_a<> const& int_8);
 	inline void put(int8_t int_8);
 
 	inline any_a<> write__(range_a<> const& range);
@@ -80,19 +80,19 @@ public:
 	inline void write_string(std::string const& str);
 
 	inline any_a<> tellp__(range_a<> const& _) const;
-	inline number_data_a<int64_t> tellp_() const;
+	inline number_data_int64_a<> tellp_() const;
 	inline int64_t tellp() const;
 
 	inline any_a<> seekp_beg__(range_a<> const& range);
-	inline any_a<> seekp_beg_(number_data_a<int64_t> const& offset);
+	inline any_a<> seekp_beg_(number_data_int64_a<> const& offset);
 	inline void seekp_beg(int64_t offset);
 
 	inline any_a<> seekp_end__(range_a<> const& range);
-	inline any_a<> seekp_end_(number_data_a<int64_t> const& offset);
+	inline any_a<> seekp_end_(number_data_int64_a<> const& offset);
 	inline void seekp_end(int64_t offset);
 
 	inline any_a<> seekp_cur__(range_a<> const& range);
-	inline any_a<> seekp_cur_(number_data_a<int64_t> const& offset);
+	inline any_a<> seekp_cur_(number_data_int64_a<> const& offset);
 	inline void seekp_cur(int64_t offset);
 
 	inline any_a<> flush__(range_a<> const& _);

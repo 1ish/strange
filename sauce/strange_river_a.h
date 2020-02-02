@@ -87,13 +87,13 @@ namespace strange {
      { assert(handle_); return write().to_string( ); }
      inline any_a < > get__ ( range_a < > const & _ )
      { assert(handle_); return write().get__(_ ); }
-     inline number_data_a < int8_t > get_ ( )
+     inline number_data_int8_a < > get_ ( )
      { assert(handle_); return write().get_( ); }
      inline int8_t get ( )
      { assert(handle_); return write().get( ); }
      inline any_a < > peek__ ( range_a < > const & _ )
      { assert(handle_); return write().peek__(_ ); }
-     inline number_data_a < int8_t > peek_ ( )
+     inline number_data_int8_a < > peek_ ( )
      { assert(handle_); return write().peek_( ); }
      inline int8_t peek ( )
      { assert(handle_); return write().peek( ); }
@@ -105,25 +105,25 @@ namespace strange {
      { assert(handle_); write().unget( ); }
      inline any_a < > putback__ ( range_a < > const & range )
      { assert(handle_); return write().putback__(range ); }
-     inline any_a < > putback_ ( number_data_a < int8_t > const & int_8 )
+     inline any_a < > putback_ ( number_data_int8_a < > const & int_8 )
      { assert(handle_); return write().putback_(int_8 ); }
      inline void putback ( int8_t int_8 )
      { assert(handle_); write().putback(int_8 ); }
      inline any_a < > getline__ ( range_a < > const & range )
      { assert(handle_); return write().getline__(range ); }
-     inline lake_int8_a getline_ ( number_data_a < int64_t > const & count , number_data_a < int8_t > const & delimiter )
+     inline lake_int8_a getline_ ( number_data_int64_a < > const & count , number_data_int8_a < > const & delimiter )
      { assert(handle_); return write().getline_(count, delimiter ); }
      inline std :: vector < int8_t > getline ( int64_t count , int8_t delimiter )
      { assert(handle_); return write().getline(count, delimiter ); }
      inline any_a < > ignore__ ( range_a < > const & range )
      { assert(handle_); return write().ignore__(range ); }
-     inline any_a < > ignore_ ( number_data_a < int64_t > const & count )
+     inline any_a < > ignore_ ( number_data_int64_a < > const & count )
      { assert(handle_); return write().ignore_(count ); }
      inline void ignore ( int64_t count )
      { assert(handle_); write().ignore(count ); }
      inline any_a < > read__ ( range_a < > const & range )
      { assert(handle_); return write().read__(range ); }
-     inline lake_int8_a read_ ( number_data_a < int64_t > const & count )
+     inline lake_int8_a read_ ( number_data_int64_a < > const & count )
      { assert(handle_); return write().read_(count ); }
      inline std :: vector < int8_t > read ( int64_t count )
      { assert(handle_); return write().read(count ); }
@@ -131,25 +131,25 @@ namespace strange {
      { assert(handle_); return write().read_string(count ); }
      inline any_a < > tellg__ ( range_a < > const & _ ) const
      { assert(handle_); return read().tellg__(_ ); }
-     inline number_data_a < int64_t > tellg_ ( ) const
+     inline number_data_int64_a < > tellg_ ( ) const
      { assert(handle_); return read().tellg_( ); }
      inline int64_t tellg ( ) const
      { assert(handle_); return read().tellg( ); }
      inline any_a < > seekg_beg__ ( range_a < > const & range )
      { assert(handle_); return write().seekg_beg__(range ); }
-     inline any_a < > seekg_beg_ ( number_data_a < int64_t > const & offset )
+     inline any_a < > seekg_beg_ ( number_data_int64_a < > const & offset )
      { assert(handle_); return write().seekg_beg_(offset ); }
      inline void seekg_beg ( int64_t offset )
      { assert(handle_); write().seekg_beg(offset ); }
      inline any_a < > seekg_end__ ( range_a < > const & range )
      { assert(handle_); return write().seekg_end__(range ); }
-     inline any_a < > seekg_end_ ( number_data_a < int64_t > const & offset )
+     inline any_a < > seekg_end_ ( number_data_int64_a < > const & offset )
      { assert(handle_); return write().seekg_end_(offset ); }
      inline void seekg_end ( int64_t offset )
      { assert(handle_); write().seekg_end(offset ); }
      inline any_a < > seekg_cur__ ( range_a < > const & range )
      { assert(handle_); return write().seekg_cur__(range ); }
-     inline any_a < > seekg_cur_ ( number_data_a < int64_t > const & offset )
+     inline any_a < > seekg_cur_ ( number_data_int64_a < > const & offset )
      { assert(handle_); return write().seekg_cur_(offset ); }
      inline void seekg_cur ( int64_t offset )
      { assert(handle_); write().seekg_cur(offset ); }
@@ -161,7 +161,7 @@ namespace strange {
      { assert(handle_); return write().sync( ); }
      inline any_a < > put__ ( range_a < > const & range )
      { assert(handle_); return write().put__(range ); }
-     inline any_a < > put_ ( number_data_a < int8_t > const & int_8 )
+     inline any_a < > put_ ( number_data_int8_a < > const & int_8 )
      { assert(handle_); return write().put_(int_8 ); }
      inline void put ( int8_t int_8 )
      { assert(handle_); write().put(int_8 ); }
@@ -175,25 +175,25 @@ namespace strange {
      { assert(handle_); write().write_string(str ); }
      inline any_a < > tellp__ ( range_a < > const & _ ) const
      { assert(handle_); return read().tellp__(_ ); }
-     inline number_data_a < int64_t > tellp_ ( ) const
+     inline number_data_int64_a < > tellp_ ( ) const
      { assert(handle_); return read().tellp_( ); }
      inline int64_t tellp ( ) const
      { assert(handle_); return read().tellp( ); }
      inline any_a < > seekp_beg__ ( range_a < > const & range )
      { assert(handle_); return write().seekp_beg__(range ); }
-     inline any_a < > seekp_beg_ ( number_data_a < int64_t > const & offset )
+     inline any_a < > seekp_beg_ ( number_data_int64_a < > const & offset )
      { assert(handle_); return write().seekp_beg_(offset ); }
      inline void seekp_beg ( int64_t offset )
      { assert(handle_); write().seekp_beg(offset ); }
      inline any_a < > seekp_end__ ( range_a < > const & range )
      { assert(handle_); return write().seekp_end__(range ); }
-     inline any_a < > seekp_end_ ( number_data_a < int64_t > const & offset )
+     inline any_a < > seekp_end_ ( number_data_int64_a < > const & offset )
      { assert(handle_); return write().seekp_end_(offset ); }
      inline void seekp_end ( int64_t offset )
      { assert(handle_); write().seekp_end(offset ); }
      inline any_a < > seekp_cur__ ( range_a < > const & range )
      { assert(handle_); return write().seekp_cur__(range ); }
-     inline any_a < > seekp_cur_ ( number_data_a < int64_t > const & offset )
+     inline any_a < > seekp_cur_ ( number_data_int64_a < > const & offset )
      { assert(handle_); return write().seekp_cur_(offset ); }
      inline void seekp_cur ( int64_t offset )
      { assert(handle_); write().seekp_cur(offset ); }
@@ -263,60 +263,60 @@ namespace strange {
     	{
       virtual inline std :: string to_string ( ) = 0;
       virtual inline any_a < > get__ ( range_a < > const & _ ) = 0;
-      virtual inline number_data_a < int8_t > get_ ( ) = 0;
+      virtual inline number_data_int8_a < > get_ ( ) = 0;
       virtual inline int8_t get ( ) = 0;
       virtual inline any_a < > peek__ ( range_a < > const & _ ) = 0;
-      virtual inline number_data_a < int8_t > peek_ ( ) = 0;
+      virtual inline number_data_int8_a < > peek_ ( ) = 0;
       virtual inline int8_t peek ( ) = 0;
       virtual inline any_a < > unget__ ( range_a < > const & _ ) = 0;
       virtual inline any_a < > unget_ ( ) = 0;
       virtual inline void unget ( ) = 0;
       virtual inline any_a < > putback__ ( range_a < > const & range ) = 0;
-      virtual inline any_a < > putback_ ( number_data_a < int8_t > const & int_8 ) = 0;
+      virtual inline any_a < > putback_ ( number_data_int8_a < > const & int_8 ) = 0;
       virtual inline void putback ( int8_t int_8 ) = 0;
       virtual inline any_a < > getline__ ( range_a < > const & range ) = 0;
-      virtual inline lake_int8_a getline_ ( number_data_a < int64_t > const & count , number_data_a < int8_t > const & delimiter ) = 0;
+      virtual inline lake_int8_a getline_ ( number_data_int64_a < > const & count , number_data_int8_a < > const & delimiter ) = 0;
       virtual inline std :: vector < int8_t > getline ( int64_t count , int8_t delimiter ) = 0;
       virtual inline any_a < > ignore__ ( range_a < > const & range ) = 0;
-      virtual inline any_a < > ignore_ ( number_data_a < int64_t > const & count ) = 0;
+      virtual inline any_a < > ignore_ ( number_data_int64_a < > const & count ) = 0;
       virtual inline void ignore ( int64_t count ) = 0;
       virtual inline any_a < > read__ ( range_a < > const & range ) = 0;
-      virtual inline lake_int8_a read_ ( number_data_a < int64_t > const & count ) = 0;
+      virtual inline lake_int8_a read_ ( number_data_int64_a < > const & count ) = 0;
       virtual inline std :: vector < int8_t > read ( int64_t count ) = 0;
       virtual inline std :: string read_string ( int64_t count ) = 0;
       virtual inline any_a < > tellg__ ( range_a < > const & _ ) const = 0;
-      virtual inline number_data_a < int64_t > tellg_ ( ) const = 0;
+      virtual inline number_data_int64_a < > tellg_ ( ) const = 0;
       virtual inline int64_t tellg ( ) const = 0;
       virtual inline any_a < > seekg_beg__ ( range_a < > const & range ) = 0;
-      virtual inline any_a < > seekg_beg_ ( number_data_a < int64_t > const & offset ) = 0;
+      virtual inline any_a < > seekg_beg_ ( number_data_int64_a < > const & offset ) = 0;
       virtual inline void seekg_beg ( int64_t offset ) = 0;
       virtual inline any_a < > seekg_end__ ( range_a < > const & range ) = 0;
-      virtual inline any_a < > seekg_end_ ( number_data_a < int64_t > const & offset ) = 0;
+      virtual inline any_a < > seekg_end_ ( number_data_int64_a < > const & offset ) = 0;
       virtual inline void seekg_end ( int64_t offset ) = 0;
       virtual inline any_a < > seekg_cur__ ( range_a < > const & range ) = 0;
-      virtual inline any_a < > seekg_cur_ ( number_data_a < int64_t > const & offset ) = 0;
+      virtual inline any_a < > seekg_cur_ ( number_data_int64_a < > const & offset ) = 0;
       virtual inline void seekg_cur ( int64_t offset ) = 0;
       virtual inline any_a < > sync__ ( range_a < > const & _ ) = 0;
       virtual inline any_a < > sync_ ( ) = 0;
       virtual inline bool sync ( ) = 0;
       virtual inline any_a < > put__ ( range_a < > const & range ) = 0;
-      virtual inline any_a < > put_ ( number_data_a < int8_t > const & int_8 ) = 0;
+      virtual inline any_a < > put_ ( number_data_int8_a < > const & int_8 ) = 0;
       virtual inline void put ( int8_t int_8 ) = 0;
       virtual inline any_a < > write__ ( range_a < > const & range ) = 0;
       virtual inline any_a < > write_ ( lake_int8_a const & lake ) = 0;
       virtual inline void write ( std :: vector < int8_t > const & lake ) = 0;
       virtual inline void write_string ( std :: string const & str ) = 0;
       virtual inline any_a < > tellp__ ( range_a < > const & _ ) const = 0;
-      virtual inline number_data_a < int64_t > tellp_ ( ) const = 0;
+      virtual inline number_data_int64_a < > tellp_ ( ) const = 0;
       virtual inline int64_t tellp ( ) const = 0;
       virtual inline any_a < > seekp_beg__ ( range_a < > const & range ) = 0;
-      virtual inline any_a < > seekp_beg_ ( number_data_a < int64_t > const & offset ) = 0;
+      virtual inline any_a < > seekp_beg_ ( number_data_int64_a < > const & offset ) = 0;
       virtual inline void seekp_beg ( int64_t offset ) = 0;
       virtual inline any_a < > seekp_end__ ( range_a < > const & range ) = 0;
-      virtual inline any_a < > seekp_end_ ( number_data_a < int64_t > const & offset ) = 0;
+      virtual inline any_a < > seekp_end_ ( number_data_int64_a < > const & offset ) = 0;
       virtual inline void seekp_end ( int64_t offset ) = 0;
       virtual inline any_a < > seekp_cur__ ( range_a < > const & range ) = 0;
-      virtual inline any_a < > seekp_cur_ ( number_data_a < int64_t > const & offset ) = 0;
+      virtual inline any_a < > seekp_cur_ ( number_data_int64_a < > const & offset ) = 0;
       virtual inline void seekp_cur ( int64_t offset ) = 0;
       virtual inline any_a < > flush__ ( range_a < > const & _ ) = 0;
       virtual inline any_a < > flush_ ( ) = 0;
@@ -367,13 +367,13 @@ namespace strange {
       { return value_.to_string( ); }
       virtual inline any_a < > get__ ( range_a < > const & _ )
       { return value_.get__(_ ); }
-      virtual inline number_data_a < int8_t > get_ ( )
+      virtual inline number_data_int8_a < > get_ ( )
       { return value_.get_( ); }
       virtual inline int8_t get ( )
       { return value_.get( ); }
       virtual inline any_a < > peek__ ( range_a < > const & _ )
       { return value_.peek__(_ ); }
-      virtual inline number_data_a < int8_t > peek_ ( )
+      virtual inline number_data_int8_a < > peek_ ( )
       { return value_.peek_( ); }
       virtual inline int8_t peek ( )
       { return value_.peek( ); }
@@ -385,25 +385,25 @@ namespace strange {
       { value_.unget( ); }
       virtual inline any_a < > putback__ ( range_a < > const & range )
       { return value_.putback__(range ); }
-      virtual inline any_a < > putback_ ( number_data_a < int8_t > const & int_8 )
+      virtual inline any_a < > putback_ ( number_data_int8_a < > const & int_8 )
       { return value_.putback_(int_8 ); }
       virtual inline void putback ( int8_t int_8 )
       { value_.putback(int_8 ); }
       virtual inline any_a < > getline__ ( range_a < > const & range )
       { return value_.getline__(range ); }
-      virtual inline lake_int8_a getline_ ( number_data_a < int64_t > const & count , number_data_a < int8_t > const & delimiter )
+      virtual inline lake_int8_a getline_ ( number_data_int64_a < > const & count , number_data_int8_a < > const & delimiter )
       { return value_.getline_(count, delimiter ); }
       virtual inline std :: vector < int8_t > getline ( int64_t count , int8_t delimiter )
       { return value_.getline(count, delimiter ); }
       virtual inline any_a < > ignore__ ( range_a < > const & range )
       { return value_.ignore__(range ); }
-      virtual inline any_a < > ignore_ ( number_data_a < int64_t > const & count )
+      virtual inline any_a < > ignore_ ( number_data_int64_a < > const & count )
       { return value_.ignore_(count ); }
       virtual inline void ignore ( int64_t count )
       { value_.ignore(count ); }
       virtual inline any_a < > read__ ( range_a < > const & range )
       { return value_.read__(range ); }
-      virtual inline lake_int8_a read_ ( number_data_a < int64_t > const & count )
+      virtual inline lake_int8_a read_ ( number_data_int64_a < > const & count )
       { return value_.read_(count ); }
       virtual inline std :: vector < int8_t > read ( int64_t count )
       { return value_.read(count ); }
@@ -411,25 +411,25 @@ namespace strange {
       { return value_.read_string(count ); }
       virtual inline any_a < > tellg__ ( range_a < > const & _ ) const
       { return value_.tellg__(_ ); }
-      virtual inline number_data_a < int64_t > tellg_ ( ) const
+      virtual inline number_data_int64_a < > tellg_ ( ) const
       { return value_.tellg_( ); }
       virtual inline int64_t tellg ( ) const
       { return value_.tellg( ); }
       virtual inline any_a < > seekg_beg__ ( range_a < > const & range )
       { return value_.seekg_beg__(range ); }
-      virtual inline any_a < > seekg_beg_ ( number_data_a < int64_t > const & offset )
+      virtual inline any_a < > seekg_beg_ ( number_data_int64_a < > const & offset )
       { return value_.seekg_beg_(offset ); }
       virtual inline void seekg_beg ( int64_t offset )
       { value_.seekg_beg(offset ); }
       virtual inline any_a < > seekg_end__ ( range_a < > const & range )
       { return value_.seekg_end__(range ); }
-      virtual inline any_a < > seekg_end_ ( number_data_a < int64_t > const & offset )
+      virtual inline any_a < > seekg_end_ ( number_data_int64_a < > const & offset )
       { return value_.seekg_end_(offset ); }
       virtual inline void seekg_end ( int64_t offset )
       { value_.seekg_end(offset ); }
       virtual inline any_a < > seekg_cur__ ( range_a < > const & range )
       { return value_.seekg_cur__(range ); }
-      virtual inline any_a < > seekg_cur_ ( number_data_a < int64_t > const & offset )
+      virtual inline any_a < > seekg_cur_ ( number_data_int64_a < > const & offset )
       { return value_.seekg_cur_(offset ); }
       virtual inline void seekg_cur ( int64_t offset )
       { value_.seekg_cur(offset ); }
@@ -441,7 +441,7 @@ namespace strange {
       { return value_.sync( ); }
       virtual inline any_a < > put__ ( range_a < > const & range )
       { return value_.put__(range ); }
-      virtual inline any_a < > put_ ( number_data_a < int8_t > const & int_8 )
+      virtual inline any_a < > put_ ( number_data_int8_a < > const & int_8 )
       { return value_.put_(int_8 ); }
       virtual inline void put ( int8_t int_8 )
       { value_.put(int_8 ); }
@@ -455,25 +455,25 @@ namespace strange {
       { value_.write_string(str ); }
       virtual inline any_a < > tellp__ ( range_a < > const & _ ) const
       { return value_.tellp__(_ ); }
-      virtual inline number_data_a < int64_t > tellp_ ( ) const
+      virtual inline number_data_int64_a < > tellp_ ( ) const
       { return value_.tellp_( ); }
       virtual inline int64_t tellp ( ) const
       { return value_.tellp( ); }
       virtual inline any_a < > seekp_beg__ ( range_a < > const & range )
       { return value_.seekp_beg__(range ); }
-      virtual inline any_a < > seekp_beg_ ( number_data_a < int64_t > const & offset )
+      virtual inline any_a < > seekp_beg_ ( number_data_int64_a < > const & offset )
       { return value_.seekp_beg_(offset ); }
       virtual inline void seekp_beg ( int64_t offset )
       { value_.seekp_beg(offset ); }
       virtual inline any_a < > seekp_end__ ( range_a < > const & range )
       { return value_.seekp_end__(range ); }
-      virtual inline any_a < > seekp_end_ ( number_data_a < int64_t > const & offset )
+      virtual inline any_a < > seekp_end_ ( number_data_int64_a < > const & offset )
       { return value_.seekp_end_(offset ); }
       virtual inline void seekp_end ( int64_t offset )
       { value_.seekp_end(offset ); }
       virtual inline any_a < > seekp_cur__ ( range_a < > const & range )
       { return value_.seekp_cur__(range ); }
-      virtual inline any_a < > seekp_cur_ ( number_data_a < int64_t > const & offset )
+      virtual inline any_a < > seekp_cur_ ( number_data_int64_a < > const & offset )
       { return value_.seekp_cur_(offset ); }
       virtual inline void seekp_cur ( int64_t offset )
       { value_.seekp_cur(offset ); }

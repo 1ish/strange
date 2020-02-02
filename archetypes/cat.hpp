@@ -25,7 +25,7 @@ public:
 	inline bool symbolic() const;
 
 	inline any_a<> order__(range_a<> const& _) const;
-	inline number_data_a<int64_t> order_() const;
+	inline number_data_int64_a<> order_() const;
 	inline int64_t order() const;
 
 	inline any_a<> name__(range_a<> const& _) const;

@@ -93,7 +93,7 @@ namespace strange {
      { assert(handle_); return read().symbolic( ); }
      inline any_a < > order__ ( range_a < > const & _ ) const
      { assert(handle_); return read().order__(_ ); }
-     inline number_data_a < int64_t > order_ ( ) const
+     inline number_data_int64_a < > order_ ( ) const
      { assert(handle_); return read().order_( ); }
      inline int64_t order ( ) const
      { assert(handle_); return read().order( ); }
@@ -127,7 +127,7 @@ namespace strange {
       virtual inline any_a < > symbolic_ ( ) const = 0;
       virtual inline bool symbolic ( ) const = 0;
       virtual inline any_a < > order__ ( range_a < > const & _ ) const = 0;
-      virtual inline number_data_a < int64_t > order_ ( ) const = 0;
+      virtual inline number_data_int64_a < > order_ ( ) const = 0;
       virtual inline int64_t order ( ) const = 0;
       virtual inline any_a < > name__ ( range_a < > const & _ ) const = 0;
       virtual inline symbol_a < > name_ ( ) const = 0;
@@ -163,7 +163,7 @@ namespace strange {
       { return value_.symbolic( ); }
       virtual inline any_a < > order__ ( range_a < > const & _ ) const
       { return value_.order__(_ ); }
-      virtual inline number_data_a < int64_t > order_ ( ) const
+      virtual inline number_data_int64_a < > order_ ( ) const
       { return value_.order_( ); }
       virtual inline int64_t order ( ) const
       { return value_.order( ); }
