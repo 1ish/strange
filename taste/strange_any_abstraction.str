@@ -12,7 +12,7 @@ false &&
 			#unordered_shoal_a :<<>># <unordered_shoal>,
 			#number_data_uint64_a :<<>># <number_data_uint64>,
 			(	// no parents
-				{	
+				{
 					// exposure
 					extract_thing : "one_t const& extract_thing() const",
 					mutate_thing : "one_t& mutate_thing()",

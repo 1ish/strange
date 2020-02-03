@@ -232,7 +232,7 @@ protected:
 		, _parent_expressions{ parent_expressions }
 	{}
 
-	void _declare_or_define_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _declare_or_define_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		flock_a<> split_scope = _split_scope_();
 		river.write_string("\n");
@@ -242,7 +242,7 @@ protected:
 		_namespace_close_(split_scope, river);
 	}
 
-	flock_a<> _split_scope_() const
+	inline flock_a<> _split_scope_() const
 	{
 		auto split_scope = flock_t<>::create_();
 		std::string const& scope = _scope.to_string();
@@ -260,21 +260,23 @@ protected:
 		return split_scope;
 	}
 
-	static symbol_a<> _namespace_open_(flock_a<> const& split_scope, river_a<>& river)
+	static inline symbol_a<> _namespace_open_(flock_a<> const& split_scope, river_a<>& river)
 	{
 		symbol_a<> name;
 		for (auto const& scope_name : split_scope)
 		{
 			if (check<any_a<>>(name))
 			{
-				river.write_string("namespace " + name.to_string() + "\n{\n");
+				river.write_string(
+					"namespace " + name.to_string() + "\n"
+					"{\n");
 			}
 			name = cast<symbol_a<>>(scope_name);
 		}
 		return name;
 	}
 
-	static void _namespace_close_(flock_a<> const& split_scope, river_a<>& river)
+	static inline void _namespace_close_(flock_a<> const& split_scope, river_a<>& river)
 	{
 		int64_t nest = split_scope.size();
 		while (--nest)
@@ -283,7 +285,7 @@ protected:
 		}
 	}
 
-	void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		river.write_string("template <");
 		if (declare)
@@ -362,7 +364,7 @@ protected:
 		river.write_string(">\n");
 	}
 
-	void _declare_or_define_class_(symbol_a<> const& name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _declare_or_define_class_(symbol_a<> const& name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		std::string const& name_string = name.to_string();
 		std::string const class_name =
@@ -380,12 +382,25 @@ protected:
 		}
 	}
 
-	void _define_class_(std::string const& class_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _define_class_(std::string const& class_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
-		river.write_string("class " + class_name + "\n");
-		river.write_string("{\n");
+		river.write_string(
+			"class " + class_name + "\n"
+			"{\n"
+			"public:\n");
+		_define_class_tags_and_typedefs_(version, indent, river);
 		//TODO
 		river.write_string("};\n");
+	}
+
+	static inline void _define_class_tags_and_typedefs_(int64_t version, int64_t indent, river_a<>& river)
+	{
+		river.write_string(
+			"struct ___reference_tag___ {};\n"
+			"struct ___duplicate_tag___ {};\n"
+			"struct ___root_handle_base___;\n"
+			"using ___WEAK___ = std::weak_ptr<___root_handle_base___>;\n"
+			"using ___SHARED___ = std::shared_ptr<___root_handle_base___>;\n");
 	}
 
 private:
