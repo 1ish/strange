@@ -390,8 +390,24 @@ protected:
 			"public:\n");
 		_define_root_class_boilerplate_(class_name, version, indent, river);
 		_define_common_class_boilerplate_(class_name, version, indent, river);
+		auto const class_expression_terms = _class_expression_terms_();
+		_define_common_class_nonvirtual_members_(class_name, class_expression_terms, version, indent, river);
 		//TODO
 		river.write_string("}; // class " + class_name +"\n");
+	}
+
+	inline flock_a<> _class_expression_terms_() const
+	{
+		if (_parent_expressions.empty())
+		{
+			return flock_t<>::create_();
+		}
+		auto const expression = _parent_expressions.at_index(_parent_expressions.size() - 1);
+		if (!check<expression_a<>>(expression))
+		{
+			throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-expression class definition");
+		}
+		return cast<expression_a<>>(expression).terms_();
 	}
 
 	static inline void _define_root_class_boilerplate_(std::string const& class_name, int64_t version, int64_t indent, river_a<>& river)
@@ -511,6 +527,14 @@ protected:
 			"\t\treturn *this;\n"
 			"\t}\n"
 			"\n");
+	}
+
+	void _define_common_class_nonvirtual_members_(std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	{
+		for (auto const& pair_flock : class_expression_terms.extract_vector())
+		{
+			//TODO
+		}
 	}
 
 private:
