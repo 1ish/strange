@@ -413,7 +413,25 @@ protected:
 			"\t\t{\n"
 			"\t\t\treturn thing.hash();\n"
 			"\t\t}\n"
-			"\t};\n");
+			"\t};\n"
+			"\n"
+			"\t// operator overloads\n"
+			"\tinline any_a operator[](range_a const& range)\n"
+			"\t{\n"
+			"\t\treturn invoke(*this, range);\n"
+			"\t}\n"
+			"\n"
+			"\tinline any_a operator()(range_a const& range)\n"
+			"\t{\n"
+			"\t\treturn operate(*this, range);\n"
+			"\t}\n"
+			"\n"
+			"\tinline operator bool() const\n"
+			"\t{\n"
+			"\t\tassert(handle_);\n"
+			"\t\treturn read().operator bool();\n"
+			"\t}\n"
+			"\n");
 	}
 
 private:
