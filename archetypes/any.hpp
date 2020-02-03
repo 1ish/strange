@@ -23,15 +23,6 @@ template <typename range_a, typename symbol_a, typename cat_a, typename kind_a, 
 class any_a
 {
 public:
-	class hash_f
-	{
-	public:
-		inline std::size_t operator()(any_a const& thing) const
-		{
-			return thing.hash();
-		}
-	};
-
 	// exposure
 	inline one_t const& extract_thing() const;
 	inline one_t& mutate_thing();
