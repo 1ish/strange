@@ -281,7 +281,7 @@ protected:
 		int64_t nest = split_scope.size();
 		while (--nest)
 		{
-			river.write_string("}\n");
+			river.write_string("} // namespace\n");
 		}
 	}
 
@@ -388,19 +388,32 @@ protected:
 			"class " + class_name + "\n"
 			"{\n"
 			"public:\n");
-		_define_class_tags_and_typedefs_(version, indent, river);
+		_define_root_class_boilerplate_(class_name, version, indent, river);
 		//TODO
-		river.write_string("};\n");
+		river.write_string("}; // class " + class_name +"\n");
 	}
 
-	static inline void _define_class_tags_and_typedefs_(int64_t version, int64_t indent, river_a<>& river)
+	static inline void _define_root_class_boilerplate_(std::string const& class_name, int64_t version, int64_t indent, river_a<>& river)
 	{
 		river.write_string(
-			"struct ___reference_tag___ {};\n"
-			"struct ___duplicate_tag___ {};\n"
-			"struct ___root_handle_base___;\n"
-			"using ___WEAK___ = std::weak_ptr<___root_handle_base___>;\n"
-			"using ___SHARED___ = std::shared_ptr<___root_handle_base___>;\n");
+			"\t// constructor tags\n"
+			"\tstruct ___reference_tag___ {};\n"
+			"\tstruct ___duplicate_tag___ {};\n"
+			"\n"
+			"\t// shared pointer typedefs\n"
+			"\tstruct ___root_handle_base___;\n"
+			"\tusing ___WEAK___ = std::weak_ptr<___root_handle_base___>;\n"
+			"\tusing ___SHARED___ = std::shared_ptr<___root_handle_base___>;\n"
+			"\n"
+			"\t// hash function wrapper class\n"
+			"\tclass hash_f\n"
+			"\t{\n"
+			"\tpublic:\n"
+			"\t\tinline std::size_t operator()(" + class_name + " const& thing) const\n"
+			"\t\t{\n"
+			"\t\t\treturn thing.hash();\n"
+			"\t\t}\n"
+			"\t};\n");
 	}
 
 private:
