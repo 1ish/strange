@@ -529,12 +529,57 @@ protected:
 			"\n");
 	}
 
-	void _define_common_class_nonvirtual_members_(std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	inline void _define_common_class_nonvirtual_members_(std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
-		for (auto const& pair_flock : class_expression_terms.extract_vector())
+		for (auto const& expression : class_expression_terms.extract_vector())
 		{
+			if (!check<expression_a<>>(expression) || expression.type_() != expression_flock_t<>::type_())
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-flock expression pair in class definition");
+			}
+			auto const pair = cast<expression_a<>>(expression).terms_();
+			if (pair.size() != 2)
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-pair in class definition");
+			}
+			auto any_name = pair.at_index(0);
+			if (!check<expression_a<>>(any_name) || any_name.type_() != expression_literal_t<>::type_())
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-literal expression name in class definition");
+			}
+			auto const name_flock = cast<expression_a<>>(any_name).terms_();
+			if (name_flock.size() != 1)
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-single name in class definition");
+			}
+			any_name = name_flock.at_index(0);
+			if (!check<symbol_a<>>(any_name))
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-symbol name in class definition");
+			}
+			auto const name = cast<symbol_a<>>(any_name);
+
+			auto any_value = pair.at_index(1);
+			if (!check<expression_a<>>(any_value))
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-literal expression name in class definition");
+			}
+			auto const value_expression = cast<expression_a<>>(any_value);
+			if (value_expression.type_() == expression_literal_t<>::type_() && value_expression.terms_().size() == 1)
+			{
+				auto const value = value_expression.terms_().at_index(0);
+				if (check<lake_a<int8_t>>(value))
+				{
+					_define_common_class_nonvirtual_native_member_(name, cast<lake_a<int8_t>>(value), river);
+				}
+			}
 			//TODO
 		}
+	}
+
+	inline void _define_common_class_nonvirtual_native_member_(symbol_a<> const& name, lake_a<int8_t> const& value, river_a<>& river) const
+	{
+		river.write_string("\t// native: " + name.to_string() + " " + lake_to_string(value) + "\n");
 	}
 
 private:
