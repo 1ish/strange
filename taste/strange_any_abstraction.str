@@ -14,16 +14,14 @@ false &&
 			(	// no parents
 				{
 					// exposure
-					extract_thing : "one_t const& extract_thing() const",
-					mutate_thing : "one_t& mutate_thing()",
+					extract_thing : "one_t const& () const",
+					mutate_thing : "one_t& ()",
 
 					// reflection
-					type__ :# (range :<range>#, <>),
 					type_ :# (<symbol>),
 
-					shared__ :# (range :<range>#, <>),
 					shared_ :# (<unordered_shoal>),
-					share : "void share(shoal_a& shoal) const",
+					share : "void (shoal_a& shoal) const",
 				}
 			)
 		)

@@ -562,10 +562,22 @@ protected:
 			auto any_value = pair.at_index(1);
 			if (!check<expression_a<>>(any_value))
 			{
-				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-literal expression name in class definition");
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-expression value in class definition");
 			}
 			auto const value_expression = cast<expression_a<>>(any_value);
-			if (value_expression.type_() == expression_literal_t<>::type_() && value_expression.terms_().size() == 1)
+			if (name.last_character() == '_')
+			{
+				bool const extraction = value_expression.type_() == expression_extraction_t<>::type_();
+				if (extraction || value_expression.type_() == expression_mutation_t<>::type_())
+				{
+					_define_common_class_nonvirtual_member_(name, value_expression, extraction, river);
+				}
+				else
+				{
+					throw dis(_token.report() + "strange::expression_abstraction::generate_cpp invalid expression value in class definition");
+				}
+			}
+			else if (value_expression.type_() == expression_literal_t<>::type_() && value_expression.terms_().size() == 1)
 			{
 				auto const value = value_expression.terms_().at_index(0);
 				if (check<lake_a<int8_t>>(value))
@@ -573,8 +585,16 @@ protected:
 					_define_common_class_nonvirtual_native_member_(name, cast<lake_a<int8_t>>(value), river);
 				}
 			}
-			//TODO
+			else
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp invalid expression pair in class definition");
+			}
 		}
+	}
+
+	inline void _define_common_class_nonvirtual_member_(symbol_a<> const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
+	{
+		river.write_string("\t// member: " + name.to_string() + "\n");
 	}
 
 	inline void _define_common_class_nonvirtual_native_member_(symbol_a<> const& name, lake_a<int8_t> const& value, river_a<>& river) const
