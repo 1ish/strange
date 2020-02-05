@@ -570,7 +570,7 @@ protected:
 				bool const extraction = value_expression.type_() == expression_extraction_t<>::type_();
 				if (extraction || value_expression.type_() == expression_mutation_t<>::type_())
 				{
-					_define_common_class_nonvirtual_member_(name, value_expression, extraction, river);
+					_define_common_class_nonvirtual_member_(name.to_string(), value_expression, extraction, river);
 				}
 				else
 				{
@@ -582,7 +582,7 @@ protected:
 				auto const value = value_expression.terms_().at_index(0);
 				if (check<lake_a<int8_t>>(value))
 				{
-					_define_common_class_nonvirtual_native_member_(name, cast<lake_a<int8_t>>(value), river);
+					_define_common_class_nonvirtual_native_member_(name.to_string(), lake_to_string(cast<lake_a<int8_t>>(value)), river);
 				}
 			}
 			else
@@ -592,14 +592,73 @@ protected:
 		}
 	}
 
-	inline void _define_common_class_nonvirtual_member_(symbol_a<> const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
+	inline void _define_common_class_nonvirtual_member_(std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
 	{
-		river.write_string("\t// member: " + name.to_string() + "\n");
+		river.write_string("\t// member: " + name + "\n");
 	}
 
-	inline void _define_common_class_nonvirtual_native_member_(symbol_a<> const& name, lake_a<int8_t> const& value, river_a<>& river) const
+	inline void _define_common_class_nonvirtual_native_member_(std::string const& name, std::string const& value, river_a<>& river) const
 	{
-		river.write_string("\t// native: " + name.to_string() + " " + lake_to_string(value) + "\n");
+		river.write_string("\t// native: " + name + " " + value + "\n");
+		std::string return_type;
+		std::string arguments;
+		std::string parameters;
+		std::string constness;
+		auto tokenizer = tokenizer_t<>::create_(river_t<>::create(value));
+		int64_t toke = 1;
+		std::string parameter;
+		for (auto const& any_token : tokenizer)
+		{
+			if (!check<token_a<>>(any_token))
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp invalid token in class definition");
+			}
+			auto const token = cast<token_a<>>(any_token);
+			switch (toke)
+			{
+			case 1:
+				if (token.tag() == "punctuation" && token.symbol() == "(")
+				{
+					toke = 2;
+				}
+				else
+				{
+					return_type += token.symbol() + " ";
+				}
+				break;
+			case 2:
+				if (token.tag() == "punctuation" && token.symbol() == ")")
+				{
+					parameters += parameter;
+					toke = 3;
+				}
+				else if (token.tag() == "punctuation" && token.symbol() == ",")
+				{
+					parameters += parameter;
+					arguments += ", ";
+					parameters += ", ";
+				}
+				else
+				{
+					arguments += token.symbol() + " ";
+					if (token.tag() == "name")
+					{
+						parameter = token.symbol();
+					}
+				}
+				break;
+			case 3:
+				if (token.tag() == "name" && token.symbol() == "const")
+				{
+					constness = " const";
+				}
+				break;
+			}
+		}
+		river.write_string("\t// return_type: " + return_type + "\n");
+		river.write_string("\t// arguments: " + arguments + "\n");
+		river.write_string("\t// parameters: " + parameters + "\n");
+		river.write_string("\t// constness: " + constness + "\n");
 	}
 
 private:
