@@ -570,7 +570,7 @@ protected:
 				bool const extraction = value_expression.type_() == expression_extraction_t<>::type_();
 				if (extraction || value_expression.type_() == expression_mutation_t<>::type_())
 				{
-					_define_common_class_nonvirtual_member_(name.to_string(), value_expression, extraction, river);
+					_define_common_class_nonvirtual_member_(version, name.to_string(), value_expression, extraction, river);
 				}
 				else
 				{
@@ -592,15 +592,15 @@ protected:
 		}
 	}
 
-	inline void _define_common_class_nonvirtual_member_(std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
+	inline void _define_common_class_nonvirtual_member_(int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
 	{
-		std::string return_type;
-		std::string arguments;
+		std::string result;
 		std::string parameters;
+		std::string arguments;
 		std::string constness;
-		_parse_member_definition_(expression, extraction, return_type, arguments, parameters, constness);
+		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 		river.write_string(
-			"\tinline " + return_type + name + arguments + constness + "\n"
+			"\tinline " + result + name + parameters + constness + "\n"
 			"\t{ assert(handle_); return ");
 		if (constness.empty())
 		{
@@ -610,33 +610,35 @@ protected:
 		{
 			river.write_string("read().");
 		}
-		river.write_string(name + parameters + "; }\n"
+		river.write_string(name + arguments + "; }\n"
 			"\n");
 	}
 
-	inline void _parse_member_definition_(expression_a<> const& expression, bool extraction, std::string& return_type, std::string& arguments, std::string& parameters, std::string& constness) const
+	inline void _parse_member_definition_(int64_t version, expression_a<> const& expression, bool extraction, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
 	{
 		if (extraction)
 		{
 			auto const& exp = static_cast<expression_extraction_t<> const&>(expression.extract_thing());
+			exp.abstraction(version, result, parameters, arguments, constness);
 		}
 		else
 		{
 			auto const& exp = static_cast<expression_mutation_t<> const&>(expression.extract_thing());
+			exp.abstraction(version, result, parameters, arguments, constness);
 		}
 	}
 	
 	inline void _define_common_class_nonvirtual_native_member_(std::string const& name, std::string const& value, river_a<>& river) const
 	{
-		std::string return_type;
-		std::string arguments;
+		std::string result;
 		std::string parameters;
+		std::string arguments;
 		std::string constness;
-		_parse_native_member_definition_(value, return_type, arguments, parameters, constness);
+		_parse_native_member_definition_(value, result, parameters, arguments, constness);
 		river.write_string(
-			"\tinline " + return_type + name + arguments + constness + "\n"
+			"\tinline " + result + name + parameters + constness + "\n"
 			"\t{ assert(handle_); ");
-		if (return_type != "void ")
+		if (result != "void ")
 		{
 			river.write_string("return ");
 		}
@@ -648,15 +650,15 @@ protected:
 		{
 			river.write_string("read().");
 		}
-		river.write_string(name + parameters + "; }\n"
+		river.write_string(name + arguments + "; }\n"
 			"\n");
 	}
 
-	inline void _parse_native_member_definition_(std::string const& value, std::string& return_type, std::string& arguments, std::string& parameters, std::string& constness) const
+	inline void _parse_native_member_definition_(std::string const& value, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
 	{
 		auto tokenizer = tokenizer_t<>::create_(river_t<>::create(value));
 		int64_t toke = 1;
-		std::string parameter;
+		std::string argument;
 		for (auto const& any_token : tokenizer)
 		{
 			if (!check<token_a<>>(any_token))
@@ -669,34 +671,33 @@ protected:
 			case 1:
 				if (token.tag() == "punctuation" && token.symbol() == "(")
 				{
-					arguments = "(";
 					parameters = "(";
+					arguments = "(";
 					toke = 2;
 				}
 				else
 				{
-					return_type += token.symbol() + " ";
+					result += token.symbol() + " ";
 				}
 				break;
 			case 2:
 				if (token.tag() == "punctuation" && token.symbol() == ")")
 				{
-					arguments += ")";
-					parameters += parameter + ")";
+					parameters += ")";
+					arguments += argument + ")";
 					toke = 3;
 				}
 				else if (token.tag() == "punctuation" && token.symbol() == ",")
 				{
-					parameters += parameter;
-					arguments += ", ";
 					parameters += ", ";
+					arguments += argument + ", ";
 				}
 				else
 				{
-					arguments += token.symbol() + " ";
+					parameters += token.symbol() + " ";
 					if (token.tag() == "name")
 					{
-						parameter = token.symbol();
+						argument = token.symbol();
 					}
 				}
 				break;

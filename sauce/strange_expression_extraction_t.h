@@ -180,6 +180,68 @@ public:
 		river.write_string("}\n");
 	}
 
+	void abstraction(int64_t version, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
+	{
+		if (_expression.type_() != expression_kind_t<>::type_())
+		{
+			throw dis(_token.report() + "strange::expression_extraction::abstraction called with wrong type of result expression");
+		}
+		auto river = river_t<>::create();
+		_expression.generate_cpp(version, 0, river, false, false, true);
+		result = river.to_string() + " ";
+		parameters = "(";
+		arguments = "(";
+		auto nit = _names.extract_vector().cbegin();
+		auto kit = _kinds.extract_vector().cbegin();
+		auto eit = _expressions.extract_vector().cbegin();
+		bool first = true;
+		for (auto const& def : _defaults.extract_vector())
+		{
+			if (first)
+			{
+				first = false;
+			}
+			else
+			{
+				parameters += ", ";
+				arguments += ", ";
+			}
+			auto name = cast<symbol_a<>>(*nit++);
+			auto any_kind = *kit++;
+			if (check<expression_a<>>(any_kind))
+			{
+				try
+				{
+					any_kind = cast<expression_a<>>(any_kind).evaluate_(); //TODO aspects
+				}
+				catch (misunderstanding_a<>& misunderstanding)
+				{
+					throw dis(_token.report() + "strange::expression_extraction::abstraction kind expression evaluation error") + misunderstanding;
+				}
+			}
+			if (!check<kind_a<>>(any_kind))
+			{
+				throw dis(_token.report() + "strange::expression_extraction::abstraction non-kind parameter kind");
+			}
+			auto const kind = cast<kind_a<>>(any_kind);
+			auto expression = cast<expression_a<>>(*eit++);
+			parameters += kind.name_().to_string() + "_a<>";
+			if (kind.fixed())
+			{
+				parameters += " const&";
+			}
+			else if (kind.reference())
+			{
+				parameters += "&";
+			}
+			parameters += " " + name.to_string();
+			arguments += name.to_string();
+		}
+		parameters += ")";
+		arguments += ")";
+		constness = " const";
+	}
+
 protected:
 	flock_a<> const _terms;
 	symbol_a<> const _scope;
