@@ -604,11 +604,13 @@ protected:
 		std::string parameters;
 		std::string constness;
 		_parse_native_member_definition_(value, return_type, arguments, parameters, constness);
-		river.write_string("\t// native: " + name + " " + value + "\n");
+		river.write_string("\t// native\n");
 		river.write_string("\t// return_type: " + return_type + "\n");
+		river.write_string("\t// name: " + name + "\n");
 		river.write_string("\t// arguments: " + arguments + "\n");
 		river.write_string("\t// parameters: " + parameters + "\n");
-		river.write_string("\t// constness: " + constness + "\n");
+		river.write_string("\t// constness:" + constness + "\n");
+		river.write_string("\n");
 	}
 
 	inline void _parse_native_member_definition_(std::string const& value, std::string& return_type, std::string& arguments, std::string& parameters, std::string& constness) const
@@ -628,6 +630,8 @@ protected:
 			case 1:
 				if (token.tag() == "punctuation" && token.symbol() == "(")
 				{
+					arguments = "(";
+					parameters = "(";
 					toke = 2;
 				}
 				else
@@ -638,7 +642,8 @@ protected:
 			case 2:
 				if (token.tag() == "punctuation" && token.symbol() == ")")
 				{
-					parameters += parameter;
+					arguments += ")";
+					parameters += parameter + ")";
 					toke = 3;
 				}
 				else if (token.tag() == "punctuation" && token.symbol() == ",")
