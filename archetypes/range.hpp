@@ -5,6 +5,7 @@
 ~/source/repos/type_erasure/windows/emtypen.exe --form ~/source/repos/strange/emtypen/derived.hpp -c ~/source/repos/strange/archetypes/range.hpp > ~/source/repos/strange/sauce/strange_range_a.h
 */
 
+#include "range_forward.hpp"
 #include "any_forward.hpp"
 #include "forward_const_iterator_forward.hpp"
 
@@ -16,10 +17,10 @@ class range_a
 {
 public:
 	// range
-	inline any_a<> cbegin__(range_a const& _) const;
+	inline any_a<> cbegin__(range_a<> const& _) const;
 	inline forward_const_iterator_a<> cbegin_() const;
 
-	inline any_a<> cend__(range_a const& _) const;
+	inline any_a<> cend__(range_a<> const& _) const;
 	inline forward_const_iterator_a<> cend_() const;
 };
 

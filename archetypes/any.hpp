@@ -6,6 +6,7 @@
 */
 
 #include "definitions.hpp"
+#include "any_forward_any.hpp"
 #include "range_forward.hpp"
 #include "symbol_forward.hpp"
 #include "cat_forward.hpp"
@@ -28,63 +29,63 @@ public:
 	inline one_t& mutate_thing();
 
 	// reflection
-	inline any_a type__(range_a const& _) const;
+	inline any_a<> type__(range_a const& _) const;
 	inline symbol_a type_() const;
 
-	inline any_a shared__(range_a const& _) const;
+	inline any_a<> shared__(range_a const& _) const;
 	inline unordered_shoal_a shared_() const;
 	inline void share(shoal_a& shoal) const;
 
-	inline any_a cat__(range_a const& _) const;
+	inline any_a<> cat__(range_a const& _) const;
 	inline cat_a cat_() const;
 
-	inline any_a cats__(range_a const& _) const;
+	inline any_a<> cats__(range_a const& _) const;
 	inline unordered_herd_a cats_() const;
 
-	inline any_a kind__(range_a const& _) const;
+	inline any_a<> kind__(range_a const& _) const;
 	inline kind_a kind_() const;
 
-	inline any_a kinds__(range_a const& _) const;
+	inline any_a<> kinds__(range_a const& _) const;
 	inline unordered_herd_a kinds_() const;
 
-	inline any_a operations__(range_a const& _) const;
+	inline any_a<> operations__(range_a const& _) const;
 	inline unordered_shoal_a operations_() const;
 
 	// visitor pattern
-	inline any_a visit__(range_a const& range) const;
-	inline any_a visit_(inventory_a& inventory) const;
+	inline any_a<> visit__(range_a const& range) const;
+	inline any_a<> visit_(inventory_a& inventory) const;
 
 	// function
-	inline any_a invoke(any_a& thing, range_a const& range) const;
-	inline any_a operate(any_a& thing, range_a const& range) const;
+	inline any_a<> invoke(any_a<>& thing, range_a const& range) const;
+	inline any_a<> operate(any_a<>& thing, range_a const& range) const;
 
 	// identification
-	inline any_a identity__(range_a const& _) const;
+	inline any_a<> identity__(range_a const& _) const;
 	inline number_data_uint64_a identity_() const;
 	inline void const* identity() const;
 
-	inline any_a identical__(range_a const& range) const;
-	inline any_a identical_(any_a const& thing) const;
-	inline bool identical(any_a const& thing) const;
+	inline any_a<> identical__(range_a const& range) const;
+	inline any_a<> identical_(any_a<> const& thing) const;
+	inline bool identical(any_a<> const& thing) const;
 
 	// comparison
-	inline any_a nothing__(range_a const& _) const;
-	inline any_a nothing_() const;
+	inline any_a<> nothing__(range_a const& _) const;
+	inline any_a<> nothing_() const;
 	inline bool nothing() const;
 
-	inline any_a something__(range_a const& _) const;
-	inline any_a something_() const;
+	inline any_a<> something__(range_a const& _) const;
+	inline any_a<> something_() const;
 	inline bool something() const;
 
-	inline any_a same__(range_a const& range) const;
-	inline any_a same_(any_a const& thing) const;
-	inline bool operator==(any_a const& thing) const;
+	inline any_a<> same__(range_a const& range) const;
+	inline any_a<> same_(any_a<> const& thing) const;
+	inline bool operator==(any_a<> const& thing) const;
 
-	inline any_a different__(range_a const& range) const;
-	inline any_a different_(any_a const& thing) const;
-	inline bool operator!=(any_a const& thing) const;
+	inline any_a<> different__(range_a const& range) const;
+	inline any_a<> different_(any_a<> const& thing) const;
+	inline bool operator!=(any_a<> const& thing) const;
 
-	inline any_a hash__(range_a const& _) const;
+	inline any_a<> hash__(range_a const& _) const;
 	inline number_data_uint64_a hash_() const;
 	inline std::size_t hash() const;
 

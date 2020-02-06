@@ -1,6 +1,7 @@
 #ifndef COM_ONEISH_STRANGE_RANGE_A_H
 #define COM_ONEISH_STRANGE_RANGE_A_H
 
+ //# include "range_forward.hpp"
  //# include "any_forward.hpp"
  //# include "forward_const_iterator_forward.hpp"
 #include <algorithm>
@@ -81,11 +82,11 @@ namespace strange {
     		return *this;
     	}
     
-     inline any_a < > cbegin__ ( range_a const & _ ) const
+     inline any_a < > cbegin__ ( range_a < > const & _ ) const
      { assert(handle_); return read().cbegin__(_ ); }
      inline forward_const_iterator_a < > cbegin_ ( ) const
      { assert(handle_); return read().cbegin_( ); }
-     inline any_a < > cend__ ( range_a const & _ ) const
+     inline any_a < > cend__ ( range_a < > const & _ ) const
      { assert(handle_); return read().cend__(_ ); }
      inline forward_const_iterator_a < > cend_ ( ) const
      { assert(handle_); return read().cend_( ); }
@@ -93,9 +94,9 @@ namespace strange {
     protected:
     	struct ___derived_handle_base___ : ___root_handle_base___
     	{
-      virtual inline any_a < > cbegin__ ( range_a const & _ ) const = 0;
+      virtual inline any_a < > cbegin__ ( range_a < > const & _ ) const = 0;
       virtual inline forward_const_iterator_a < > cbegin_ ( ) const = 0;
-      virtual inline any_a < > cend__ ( range_a const & _ ) const = 0;
+      virtual inline any_a < > cend__ ( range_a < > const & _ ) const = 0;
       virtual inline forward_const_iterator_a < > cend_ ( ) const = 0;
     	};
     
@@ -112,11 +113,11 @@ namespace strange {
     			: ___root_handle___<___TTT___, ___DHB___>{ std::move(value) }
     		{}
     
-      virtual inline any_a < > cbegin__ ( range_a const & _ ) const
+      virtual inline any_a < > cbegin__ ( range_a < > const & _ ) const
       { return value_.cbegin__(_ ); }
       virtual inline forward_const_iterator_a < > cbegin_ ( ) const
       { return value_.cbegin_( ); }
-      virtual inline any_a < > cend__ ( range_a const & _ ) const
+      virtual inline any_a < > cend__ ( range_a < > const & _ ) const
       { return value_.cend__(_ ); }
       virtual inline forward_const_iterator_a < > cend_ ( ) const
       { return value_.cend_( ); }
