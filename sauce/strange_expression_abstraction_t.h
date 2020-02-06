@@ -391,7 +391,8 @@ protected:
 		_define_root_class_boilerplate_(class_name, version, indent, river);
 		_define_common_class_boilerplate_(class_name, version, indent, river);
 		auto const class_expression_terms = _class_expression_terms_();
-		_define_common_class_nonvirtual_members_(class_name, class_expression_terms, version, indent, river);
+		_define_common_class_nonvirtual_members_(true, //TODO root
+			class_name, class_expression_terms, version, indent, river);
 		//TODO
 		river.write_string("}; // class " + class_name +"\n");
 	}
@@ -529,7 +530,7 @@ protected:
 			"\n");
 	}
 
-	inline void _define_common_class_nonvirtual_members_(std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	inline void _define_common_class_nonvirtual_members_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
 		for (auto const& expression : class_expression_terms.extract_vector())
 		{
@@ -570,7 +571,7 @@ protected:
 				bool const extraction = value_expression.type_() == expression_extraction_t<>::type_();
 				if (extraction || value_expression.type_() == expression_mutation_t<>::type_())
 				{
-					_define_common_class_nonvirtual_member_(version, name.to_string(), value_expression, extraction, river);
+					_define_common_class_nonvirtual_member_(root, version, name.to_string(), value_expression, extraction, river);
 				}
 				else
 				{
@@ -592,7 +593,7 @@ protected:
 		}
 	}
 
-	inline void _define_common_class_nonvirtual_member_(int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
+	inline void _define_common_class_nonvirtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
 	{
 		std::string result;
 		std::string parameters;
@@ -601,7 +602,8 @@ protected:
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\tinline any_a " + name + "_(range_a const& range)" + constness + "\n"
+			"\tinline any_a " + name + "_(range_a" +
+				(root ? "" : "<>") + " const& range)" + constness + "\n"
 			"\t{ assert(handle_); return ");
 		if (constness.empty())
 		{
