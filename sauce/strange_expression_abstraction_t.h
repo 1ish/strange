@@ -599,6 +599,20 @@ protected:
 		std::string arguments;
 		std::string constness;
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
+
+		river.write_string(
+			"\tinline any_a " + name + "_(range_a const& range)" + constness + "\n"
+			"\t{ assert(handle_); return ");
+		if (constness.empty())
+		{
+			river.write_string("write().");
+		}
+		else
+		{
+			river.write_string("read().");
+		}
+		river.write_string(name + "_(range); }\n\n");
+
 		river.write_string(
 			"\tinline " + result + name + parameters + constness + "\n"
 			"\t{ assert(handle_); return ");
@@ -610,8 +624,7 @@ protected:
 		{
 			river.write_string("read().");
 		}
-		river.write_string(name + arguments + "; }\n"
-			"\n");
+		river.write_string(name + arguments + "; }\n\n");
 	}
 
 	inline void _parse_member_definition_(int64_t version, expression_a<> const& expression, bool extraction, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
