@@ -284,7 +284,14 @@ public:
 		}
 		if (type)
 		{
-			river.write_string(_name.to_string() + "_a<>");
+			if (_expression.type_() == expression_local_at_t<>::type_())
+			{
+				_expression.generate_cpp(version, 0, river, false, false);
+			}
+			else
+			{
+				river.write_string(" " + _name.to_string() + "_a<> ");
+			}
 			return;
 		}
 		river.write_string(" strange::kind_t<>::create(\"" + _name.to_string() + "\"");

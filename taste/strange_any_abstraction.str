@@ -18,9 +18,9 @@ false &&
 					mutate_thing : "one_t& ()",
 
 					// reflection
-					type_ :# (<symbol>),
+					type_ :# (<#symbol_a>),
 
-					shared_ :# (<unordered_shoal>),
+					shared_ :# (<#unordered_shoal_a>),
 					share : "void (shoal_a& shoal) const",
 				}
 			)

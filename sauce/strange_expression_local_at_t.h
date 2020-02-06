@@ -77,7 +77,15 @@ public:
 		{
 			throw dis(_token.report() + "strange::expression_local_at::generate_cpp called for wrong type of expression");
 		}
-		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " ");
+		auto const name = cast<symbol_a<>>(_key);
+		if (name.first_character() == '#')
+		{
+			river.write_string(" " + name.to_string().substr(1) + " ");
+		}
+		else
+		{
+			river.write_string(" " + name.to_string() + " ");
+		}
 	}
 
 protected:
