@@ -602,7 +602,7 @@ protected:
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\tinline any_a " + name + "_(range_a" +
+			"\tinline any_a<> " + name + "_(range_a" +
 				(root ? "" : "<>") + " const& range)" + constness + "\n"
 			"\t{ assert(handle_); return ");
 		if (constness.empty())
