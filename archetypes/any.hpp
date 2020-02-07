@@ -51,7 +51,7 @@ public:
 	inline any_a<> operations__(range_a const& _) const;
 	inline unordered_shoal_a operations_() const;
 
-	// visitor pattern
+	// visitor
 	inline any_a<> visit__(range_a const& range) const;
 	inline any_a<> visit_(inventory_a& inventory) const;
 

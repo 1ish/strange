@@ -22,6 +22,48 @@ false &&
 
 					shared_ :# (<#unordered_shoal_a>),
 					share : "void (shoal_a& shoal) const",
+
+					cat_ :# (<#cat_a>),
+
+					cats_ :# (<#unordered_herd_a>),
+
+					kind_ :# (<#kind_a>),
+
+					kinds_ :# (<#unordered_herd_a>),
+
+					operations_ :# (<#unordered_shoal_a>),
+
+					// visitor
+					visit_ :# (inventory :(#inventory_a)&, <any>),
+
+					// function
+					invoke : "any_a<> (any_a<>& thing, range_a const& range) const",
+					operate : "any_a<> (any_a<>& thing, range_a const& range) const",
+
+					// identification
+					identity_ :# (<#number_data_uint64_a>),
+					identity : "void const* () const",
+
+					identical_ :# (thing :<any>#, <any>),
+					identical : "bool (any_a<> const& thing) const",
+
+					// comparison
+					nothing_ :# (<any>),
+					nothing : "bool () const",
+
+					something_ :# (<any>),
+					something : "bool () const",
+
+					same_ :# (thing :<any>#, <any>),
+					'operator==' : "bool (any_a<> const& thing) const",
+
+					different_ :# (thing :<any>#, <any>),
+					'operator!=' : "bool (any_a<> const& thing) const",
+
+					hash_ :# (<#number_data_uint64_a>),
+					hash : "std::size_t () const",
+
+					is : "bool (std::string const& s) const",
 				}
 			)
 		)

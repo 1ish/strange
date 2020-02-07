@@ -208,33 +208,31 @@ public:
 			}
 			auto name = cast<symbol_a<>>(*nit++);
 			auto any_kind = *kit++;
+			auto expression = cast<expression_a<>>(*eit++);
 			if (check<expression_a<>>(any_kind))
 			{
-				try
+				river = river_t<>::create();
+				cast<expression_a<>>(any_kind).generate_cpp(version, 0, river, false, false, true);
+				parameters += river.to_string().substr(1);
+			}
+			else
+			{
+				if (!check<kind_a<>>(any_kind))
 				{
-					any_kind = cast<expression_a<>>(any_kind).evaluate_(); //TODO aspects
+					throw dis(_token.report() + "strange::expression_mutation::abstraction non-kind parameter kind");
 				}
-				catch (misunderstanding_a<>& misunderstanding)
+				auto const kind = cast<kind_a<>>(any_kind);
+				parameters += kind.name_().to_string() + "_a<> ";
+				if (kind.fixed())
 				{
-					throw dis(_token.report() + "strange::expression_mutation::abstraction kind expression evaluation error") + misunderstanding;
+					parameters += "const& ";
+				}
+				else if (kind.reference())
+				{
+					parameters += "& ";
 				}
 			}
-			if (!check<kind_a<>>(any_kind))
-			{
-				throw dis(_token.report() + "strange::expression_mutation::abstraction non-kind parameter kind");
-			}
-			auto const kind = cast<kind_a<>>(any_kind);
-			auto expression = cast<expression_a<>>(*eit++);
-			parameters += kind.name_().to_string() + "_a<>";
-			if (kind.fixed())
-			{
-				parameters += " const&";
-			}
-			else if (kind.reference())
-			{
-				parameters += "&";
-			}
-			parameters += " " + name.to_string();
+			parameters += name.to_string();
 			arguments += name.to_string();
 		}
 		parameters += ")";

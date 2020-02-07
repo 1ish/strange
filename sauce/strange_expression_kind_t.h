@@ -292,6 +292,14 @@ public:
 			{
 				river.write_string(" " + _name.to_string() + "_a<> ");
 			}
+			if (_fixed)
+			{
+				river.write_string("const& ");
+			}
+			else if (_reference)
+			{
+				river.write_string("& ");
+			}
 			return;
 		}
 		river.write_string(" strange::kind_t<>::create(\"" + _name.to_string() + "\"");
