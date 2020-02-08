@@ -388,10 +388,12 @@ protected:
 			"class " + class_name + "\n"
 			"{\n"
 			"public:\n");
-		_define_root_class_boilerplate_(class_name, version, indent, river);
-		_define_common_class_boilerplate_(class_name, version, indent, river);
+		_define_class_boilerplate_(true, // root
+			class_name, version, indent, river);
 		auto const class_expression_terms = _class_expression_terms_();
-		_define_common_class_nonvirtual_members_(true, //TODO root
+		_define_class_nonvirtual_members_(true, // root
+			class_name, class_expression_terms, version, indent, river);
+		_define_class_handle_(true, // root
 			class_name, class_expression_terms, version, indent, river);
 		//TODO
 		river.write_string("}; // class " + class_name +"\n");
@@ -411,56 +413,55 @@ protected:
 		return cast<expression_a<>>(expression).terms_();
 	}
 
-	static inline void _define_root_class_boilerplate_(std::string const& class_name, int64_t version, int64_t indent, river_a<>& river)
+	static inline void _define_class_boilerplate_(bool root, std::string const& class_name, int64_t version, int64_t indent, river_a<>& river)
 	{
-		river.write_string(
-			"\t// constructor tags\n"
-			"\tstruct ___reference_tag___ {};\n"
-			"\tstruct ___duplicate_tag___ {};\n"
-			"\n"
-			"\t// shared pointer typedefs\n"
-			"\tstruct ___root_handle_base___;\n"
-			"\tusing ___WEAK___ = std::weak_ptr<___root_handle_base___>;\n"
-			"\tusing ___SHARED___ = std::shared_ptr<___root_handle_base___>;\n"
-			"\n"
-			"\t// hash function wrapper class\n"
-			"\tclass hash_f\n"
-			"\t{\n"
-			"\tpublic:\n"
-			"\t\tinline std::size_t operator()(" + class_name + " const& thing) const\n"
-			"\t\t{\n"
-			"\t\t\treturn thing.hash();\n"
-			"\t\t}\n"
-			"\t};\n"
-			"\n"
-			"\t// operator overloads\n"
-			"\tinline any_a operator[](range_a const& range)\n"
-			"\t{\n"
-			"\t\treturn invoke(*this, range);\n"
-			"\t}\n"
-			"\n"
-			"\tinline any_a operator()(range_a const& range)\n"
-			"\t{\n"
-			"\t\treturn operate(*this, range);\n"
-			"\t}\n"
-			"\n"
-			"\tinline operator bool() const\n"
-			"\t{\n"
-			"\t\tassert(handle_);\n"
-			"\t\treturn read().operator bool();\n"
-			"\t}\n"
-			"\n"
-			"\t// trigger copy on write\n"
-			"\tvoid mutate()\n"
-			"\t{\n"
-			"\t\tassert(handle_);\n"
-			"\t\twrite();\n"
-			"\t}\n"
-			"\n");
-	}
-
-	static inline void _define_common_class_boilerplate_(std::string const& class_name, int64_t version, int64_t indent, river_a<>& river)
-	{
+		if (root)
+		{
+			river.write_string(
+				"\t// constructor tags\n"
+				"\tstruct ___reference_tag___ {};\n"
+				"\tstruct ___duplicate_tag___ {};\n"
+				"\n"
+				"\t// shared pointer typedefs\n"
+				"\tstruct ___root_handle_base___;\n"
+				"\tusing ___WEAK___ = std::weak_ptr<___root_handle_base___>;\n"
+				"\tusing ___SHARED___ = std::shared_ptr<___root_handle_base___>;\n"
+				"\n"
+				"\t// hash function wrapper class\n"
+				"\tclass hash_f\n"
+				"\t{\n"
+				"\tpublic:\n"
+				"\t\tinline std::size_t operator()(" + class_name + " const& thing) const\n"
+				"\t\t{\n"
+				"\t\t\treturn thing.hash();\n"
+				"\t\t}\n"
+				"\t};\n"
+				"\n"
+				"\t// operator overloads\n"
+				"\tinline any_a operator[](range_a const& range)\n"
+				"\t{\n"
+				"\t\treturn invoke(*this, range);\n"
+				"\t}\n"
+				"\n"
+				"\tinline any_a operator()(range_a const& range)\n"
+				"\t{\n"
+				"\t\treturn operate(*this, range);\n"
+				"\t}\n"
+				"\n"
+				"\tinline operator bool() const\n"
+				"\t{\n"
+				"\t\tassert(handle_);\n"
+				"\t\treturn read().operator bool();\n"
+				"\t}\n"
+				"\n"
+				"\t// trigger copy on write\n"
+				"\tvoid mutate()\n"
+				"\t{\n"
+				"\t\tassert(handle_);\n"
+				"\t\twrite();\n"
+				"\t}\n"
+				"\n");
+		}
 		river.write_string(
 			"\t// arithmetic operator overloads\n"
 			"\tinline " + class_name + "& operator++()\n"
@@ -530,7 +531,7 @@ protected:
 			"\n");
 	}
 
-	inline void _define_common_class_nonvirtual_members_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	inline void _define_class_nonvirtual_members_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
 		for (auto const& expression : class_expression_terms.extract_vector())
 		{
@@ -571,7 +572,7 @@ protected:
 				bool const extraction = value_expression.type_() == expression_extraction_t<>::type_();
 				if (extraction || value_expression.type_() == expression_mutation_t<>::type_())
 				{
-					_define_common_class_nonvirtual_member_(root, version, name.to_string(), value_expression, extraction, river);
+					_define_class_nonvirtual_member_(root, version, name.to_string(), value_expression, extraction, river);
 				}
 				else
 				{
@@ -583,7 +584,7 @@ protected:
 				auto const value = value_expression.terms_().at_index(0);
 				if (check<lake_a<int8_t>>(value))
 				{
-					_define_common_class_nonvirtual_native_member_(name.to_string(), lake_to_string(cast<lake_a<int8_t>>(value)), river);
+					_define_class_nonvirtual_native_member_(name.to_string(), lake_to_string(cast<lake_a<int8_t>>(value)), river);
 				}
 			}
 			else
@@ -593,7 +594,7 @@ protected:
 		}
 	}
 
-	inline void _define_common_class_nonvirtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
+	inline void _define_class_nonvirtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
 	{
 		std::string result;
 		std::string parameters;
@@ -629,21 +630,7 @@ protected:
 		river.write_string(name + arguments + "; }\n\n");
 	}
 
-	inline void _parse_member_definition_(int64_t version, expression_a<> const& expression, bool extraction, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
-	{
-		if (extraction)
-		{
-			auto const& exp = static_cast<expression_extraction_t<> const&>(expression.extract_thing());
-			exp.abstraction(version, result, parameters, arguments, constness);
-		}
-		else
-		{
-			auto const& exp = static_cast<expression_mutation_t<> const&>(expression.extract_thing());
-			exp.abstraction(version, result, parameters, arguments, constness);
-		}
-	}
-	
-	inline void _define_common_class_nonvirtual_native_member_(std::string const& name, std::string const& value, river_a<>& river) const
+	inline void _define_class_nonvirtual_native_member_(std::string const& name, std::string const& value, river_a<>& river) const
 	{
 		std::string result;
 		std::string parameters;
@@ -667,6 +654,131 @@ protected:
 		}
 		river.write_string(name + arguments + "; }\n"
 			"\n");
+	}
+
+	inline void _define_class_handle_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	{
+		river.write_string(
+			"protected:\n"
+			"\tstruct ___root_handle_base___\n"
+			"\t{\n"
+			"\t\t___root_handle_base___() = default;\n"
+			"\t\t___root_handle_base___(___root_handle_base___ const&) = default;\n"
+			"\t\t___root_handle_base___(___root_handle_base___&&) = default;\n"
+			"\t\t___root_handle_base___& operator=(___root_handle_base___ const&) = default;\n"
+			"\t\t___root_handle_base___& operator=(___root_handle_base___&&) = default;\n"
+			"\t\tvirtual ~___root_handle_base___() = default;\n"
+			"\t\tvirtual ___SHARED___ ___clone___() const = 0;\n"
+			"\t\tvirtual void ___weak___(___WEAK___ const& weak) const = 0;\n"
+			"\t\tvirtual inline operator bool() const = 0;\n"
+			"\t\tvirtual inline void operator++() = 0;\n"
+			"\t\tvirtual inline void operator--() = 0;\n"
+			"\t\tvirtual inline void operator+=(any_a const& other) = 0;\n"
+			"\t\tvirtual inline void operator-=(any_a const& other) = 0;\n"
+			"\t\tvirtual inline void operator*=(any_a const& other) = 0;\n"
+			"\t\tvirtual inline void operator/=(any_a const& other) = 0;\n"
+			"\t\tvirtual inline void operator%=(any_a const& other) = 0;\n");
+		for (auto const& expression : class_expression_terms.extract_vector())
+		{
+			if (!check<expression_a<>>(expression) || expression.type_() != expression_flock_t<>::type_())
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-flock expression pair in class definition");
+			}
+			auto const pair = cast<expression_a<>>(expression).terms_();
+			if (pair.size() != 2)
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-pair in class definition");
+			}
+			auto any_name = pair.at_index(0);
+			if (!check<expression_a<>>(any_name) || any_name.type_() != expression_literal_t<>::type_())
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-literal expression name in class definition");
+			}
+			auto const name_flock = cast<expression_a<>>(any_name).terms_();
+			if (name_flock.size() != 1)
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-single name in class definition");
+			}
+			any_name = name_flock.at_index(0);
+			if (!check<symbol_a<>>(any_name))
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-symbol name in class definition");
+			}
+			auto const name = cast<symbol_a<>>(any_name);
+
+			auto any_value = pair.at_index(1);
+			if (!check<expression_a<>>(any_value))
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-expression value in class definition");
+			}
+			auto const value_expression = cast<expression_a<>>(any_value);
+			if (name.last_character() == '_')
+			{
+				bool const extraction = value_expression.type_() == expression_extraction_t<>::type_();
+				if (extraction || value_expression.type_() == expression_mutation_t<>::type_())
+				{
+					_define_class_pure_virtual_member_(root, version, name.to_string(), value_expression, extraction, river);
+				}
+				else
+				{
+					throw dis(_token.report() + "strange::expression_abstraction::generate_cpp invalid expression value in class definition");
+				}
+			}
+			else if (value_expression.type_() == expression_literal_t<>::type_() && value_expression.terms_().size() == 1)
+			{
+				auto const value = value_expression.terms_().at_index(0);
+				if (check<lake_a<int8_t>>(value))
+				{
+					_define_class_pure_virtual_native_member_(name.to_string(), lake_to_string(cast<lake_a<int8_t>>(value)), river);
+				}
+			}
+			else
+			{
+				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp invalid expression pair in class definition");
+			}
+		}
+		river.write_string(
+			"\t};\n\n");
+	}
+
+	inline void _define_class_pure_virtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
+	{
+		std::string result;
+		std::string parameters;
+		std::string arguments;
+		std::string constness;
+		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
+
+		river.write_string(
+			"\t\tvirtual inline any_a<> " + name + "_(range_a" +
+			(root ? "" : "<>") + " const& range)" + constness + " = 0;\n");
+		river.write_string(
+			"\t\tvirtual inline " + result + name + parameters + constness + " = 0;\n");
+	}
+
+	inline void _define_class_pure_virtual_native_member_(std::string const& name, std::string const& value, river_a<>& river) const
+	{
+		std::string result;
+		std::string parameters;
+		std::string arguments;
+		std::string constness;
+		_parse_native_member_definition_(value, result, parameters, arguments, constness);
+		river.write_string(
+			"\t\tvirtual inline " + result + name + parameters + constness + " = 0;\n");
+	}
+
+	inline void _parse_member_definition_(int64_t version, expression_a<> const& expression, bool extraction, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
+	{
+		if (extraction)
+		{
+			auto const& exp = static_cast<expression_extraction_t<> const&>(expression.extract_thing());
+			exp.abstraction(version, result, parameters, arguments, constness);
+		}
+		else
+		{
+			auto const& exp = static_cast<expression_mutation_t<> const&>(expression.extract_thing());
+			exp.abstraction(version, result, parameters, arguments, constness);
+		}
 	}
 
 	inline void _parse_native_member_definition_(std::string const& value, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
