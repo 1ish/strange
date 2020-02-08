@@ -758,7 +758,49 @@ protected:
 
 		river.write_string(
 			"\t\t___TTT___ value_;\n"
-			"\t}\n\n");
+			"\t}\n\n"
+
+		"\ttemplate <typename ___TTT___, typename ___BHB___>\n"
+		"\tstruct ___root_handle___<std::reference_wrapper<___TTT___>, ___BHB___>\n"
+			"\t\t: ___root_handle___<___TTT___&, ___BHB___>\n"
+		"\t{\n"
+			"\t\tinline ___root_handle___(std::reference_wrapper<___TTT___> ref)\n"
+				"\t\t\t: ___root_handle___<___TTT___&, ___BHB___>{ ref.get() }\n"
+			"\t\t{}\n"
+		"\t};\n\n"
+
+		"\t___SHARED___ ___shared___;\n\n"
+
+		"\t___SHARED___& handle_;\n\n"
+
+	"private:\n"
+		"\ttemplate <typename ___TTT___>\n"
+		"\tstruct ___root_handle_final___ final : ___root_handle___<___TTT___>\n"
+		"\t{\n"
+			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+			"\t\tinline ___root_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+				"\t\t\t: ___root_handle___<___TTT___>{ value }\n"
+			"\t\t{}\n\n"
+
+			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+			"\t\tinline ___root_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+				"\t\t\t: ___root_handle___<___TTT___>{ std::move(value) }\n"
+			"\t\t{}\n\n"
+
+			"\t\tvirtual inline ___SHARED___ ___clone___() const final\n"
+			"\t\t{\n"
+				"\t\t\treturn std::make_shared<___root_handle_final___>(___root_handle___<___TTT___>::value_);\n"
+			"\t\t}\n"
+		"\t};\n\n"
+
+		"\ttemplate <typename ___TTT___>\n"
+		"\tstruct ___root_handle_final___<std::reference_wrapper<___TTT___>> final\n"
+			"\t\t: ___root_handle_final___<___TTT___&>\n"
+		"\t{\n"
+			"\t\tinline ___root_handle_final___(std::reference_wrapper<___TTT___> ref)\n"
+				"\t\t\t: ___root_handle_final___<___TTT___&>{ ref.get() }\n"
+			"\t\t{}\n"
+		"\t};\n\n");
 	}
 
 	inline void _define_class_pure_virtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
