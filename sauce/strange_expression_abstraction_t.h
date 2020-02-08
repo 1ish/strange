@@ -420,13 +420,13 @@ protected:
 			river.write_string(
 				"\t// constructor tags\n"
 				"\tstruct ___reference_tag___ {};\n"
-				"\tstruct ___duplicate_tag___ {};\n"
-				"\n"
+				"\tstruct ___duplicate_tag___ {};\n\n"
+
 				"\t// shared pointer typedefs\n"
 				"\tstruct ___root_handle_base___;\n"
 				"\tusing ___WEAK___ = std::weak_ptr<___root_handle_base___>;\n"
-				"\tusing ___SHARED___ = std::shared_ptr<___root_handle_base___>;\n"
-				"\n"
+				"\tusing ___SHARED___ = std::shared_ptr<___root_handle_base___>;\n\n"
+
 				"\t// hash function wrapper class\n"
 				"\tclass hash_f\n"
 				"\t{\n"
@@ -435,32 +435,31 @@ protected:
 				"\t\t{\n"
 				"\t\t\treturn thing.hash();\n"
 				"\t\t}\n"
-				"\t};\n"
-				"\n"
+				"\t};\n\n"
+
 				"\t// operator overloads\n"
 				"\tinline any_a operator[](range_a const& range)\n"
 				"\t{\n"
 				"\t\treturn invoke(*this, range);\n"
-				"\t}\n"
-				"\n"
+				"\t}\n\n"
+
 				"\tinline any_a operator()(range_a const& range)\n"
 				"\t{\n"
 				"\t\treturn operate(*this, range);\n"
-				"\t}\n"
-				"\n"
+				"\t}\n\n"
+
 				"\tinline operator bool() const\n"
 				"\t{\n"
 				"\t\tassert(handle_);\n"
 				"\t\treturn read().operator bool();\n"
-				"\t}\n"
-				"\n"
+				"\t}\n\n"
+
 				"\t// trigger copy on write\n"
 				"\tvoid mutate()\n"
 				"\t{\n"
 				"\t\tassert(handle_);\n"
 				"\t\twrite();\n"
-				"\t}\n"
-				"\n");
+				"\t}\n\n");
 		}
 		river.write_string(
 			"\t// arithmetic operator overloads\n"
@@ -469,66 +468,65 @@ protected:
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator++();\n"
 			"\t\treturn *this;\n"
-			"\t}\n"
-			"\n"
+			"\t}\n\n"
+
 			"\tinline " + class_name + " operator++(int)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\tany_a result = *this;\n"
 			"\t\twrite().operator++();\n"
 			"\t\treturn result;\n"
-			"\t}\n"
-			"\n"
+			"\t}\n\n"
+
 			"\tinline " + class_name + "& operator--()\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator--();\n"
 			"\t\treturn *this;\n"
-			"\t}\n"
-			"\n"
+			"\t}\n\n"
+
 			"\tinline " + class_name + " operator--(int)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\tany_a result = *this;\n"
 			"\t\twrite().operator--();\n"
 			"\t\treturn result;\n"
-			"\t}\n"
-			"\n"
+			"\t}\n\n"
+
 			"\tinline " + class_name + "& operator+=(any_a const& other)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator+=(other);\n"
 			"\t\treturn *this;\n"
-			"\t}\n"
-			"\n"
+			"\t}\n\n"
+
 			"\tinline " + class_name + "& operator-=(any_a const& other)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator-=(other);\n"
 			"\t\treturn *this;\n"
-			"\t}\n"
-			"\n"
+			"\t}\n\n"
+
 			"\tinline " + class_name + "& operator*=(any_a const& other)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator*=(other);\n"
 			"\t\treturn *this;\n"
-			"\t}\n"
-			"\n"
+			"\t}\n\n"
+
 			"\tinline " + class_name + "& operator/=(any_a const& other)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator/=(other);\n"
 			"\t\treturn *this;\n"
-			"\t}\n"
-			"\n"
+			"\t}\n\n"
+
 			"\tinline " + class_name + "& operator%=(any_a const& other)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator%=(other);\n"
 			"\t\treturn *this;\n"
-			"\t}\n"
-			"\n");
+			"\t}\n\n");
 	}
 
 	using _define_member_p = void (expression_abstraction_t::*)(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<> & river) const;
@@ -664,8 +662,7 @@ protected:
 		{
 			river.write_string("read().");
 		}
-		river.write_string(name + arguments + "; }\n"
-			"\n");
+		river.write_string(name + arguments + "; }\n\n");
 	}
 
 	inline void _define_class_handle_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
@@ -695,6 +692,73 @@ protected:
 			&expression_abstraction_t::_define_class_pure_virtual_native_member_);
 		river.write_string(
 			"\t};\n\n");
+
+		river.write_string(
+			"\ttemplate <typename ___TTT___, typename ___BHB___ = ___root_handle_base___>\n"
+			"\tstruct ___root_handle___ : ___BHB___\n"
+			"\t{\n"
+			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+			"\t\tinline ___root_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+			"\t\t\t: value_{ value }\n"
+			"\t\t{}\n\n"
+
+			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+			"\t\tinline ___root_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+			"\t\t\t: value_{ std::move(value) }\n"
+			"\t\t{}\n\n"
+
+			"\t\tvirtual inline void ___weak___(___WEAK___ const& weak) const final\n"
+			"\t\t{\n"
+			"\t\t\tvalue_.___weak___(weak);\n"
+			"\t\t}\n\n"
+
+			"\t\tvirtual inline operator bool() const final\n"
+			"\t\t{\n"
+			"\t\t\treturn value_.operator bool();\n"
+			"\t\t}\n\n"
+
+			"\t\tvirtual inline void operator++() final\n"
+			"\t\t{\n"
+			"\t\t\tvalue_.operator++();\n"
+			"\t\t}\n\n"
+
+			"\t\tvirtual inline void operator--() final\n"
+			"\t\t{\n"
+			"\t\t\tvalue_.operator--();\n"
+			"\t\t}\n\n"
+
+			"\t\tvirtual inline void operator+=(any_a const& other) final\n"
+			"\t\t{\n"
+			"\t\t\tvalue_.operator+=(other);\n"
+			"\t\t}\n\n"
+
+			"\t\tvirtual inline void operator-=(any_a const& other) final\n"
+			"\t\t{\n"
+			"\t\t\tvalue_.operator-=(other);\n"
+			"\t\t}\n\n"
+
+			"\t\tvirtual inline void operator*=(any_a const& other) final\n"
+			"\t\t{\n"
+			"\t\t\tvalue_.operator*=(other);\n"
+			"\t\t}\n\n"
+
+			"\t\tvirtual inline void operator/=(any_a const& other) final\n"
+			"\t\t{\n"
+			"\t\t\tvalue_.operator/=(other);\n"
+			"\t\t}\n\n"
+
+			"\t\tvirtual inline void operator%=(any_a const& other) final\n"
+			"\t\t{\n"
+			"\t\t\tvalue_.operator%=(other);\n"
+			"\t\t}\n\n");
+
+		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
+			&expression_abstraction_t::_define_class_virtual_member_,
+			&expression_abstraction_t::_define_class_virtual_native_member_);
+
+		river.write_string(
+			"\t\t___TTT___ value_;\n"
+			"\t}\n\n");
 	}
 
 	inline void _define_class_pure_virtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
@@ -721,6 +785,41 @@ protected:
 		_parse_native_member_definition_(value, result, parameters, arguments, constness);
 		river.write_string(
 			"\t\tvirtual inline " + result + name + parameters + constness + " = 0;\n");
+	}
+
+	inline void _define_class_virtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
+	{
+		std::string result;
+		std::string parameters;
+		std::string arguments;
+		std::string constness;
+		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
+
+		river.write_string(
+			"\t\tvirtual inline any_a<> " + name + "_(range_a" +
+			(root ? "" : "<>") + " const& range)" + constness + " final\n"
+			"\t\t{ return value_." + name + "_(range); }\n\n");
+
+		river.write_string(
+			"\t\tvirtual inline " + result + name + parameters + constness + " final\n"
+			"\t\t{ return value_." + name + arguments + "; }\n\n");
+	}
+
+	inline void _define_class_virtual_native_member_(std::string const& name, std::string const& value, river_a<>& river) const
+	{
+		std::string result;
+		std::string parameters;
+		std::string arguments;
+		std::string constness;
+		_parse_native_member_definition_(value, result, parameters, arguments, constness);
+		river.write_string(
+			"\t\tvirtual inline " + result + name + parameters + constness + " final\n"
+			"\t\t{ ");
+		if (result != "void ")
+		{
+			river.write_string("return ");
+		}
+		river.write_string("value_." + name + arguments + "; }\n\n");
 	}
 
 	inline void _parse_member_definition_(int64_t version, expression_a<> const& expression, bool extraction, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
