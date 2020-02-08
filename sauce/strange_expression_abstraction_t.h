@@ -239,6 +239,10 @@ protected:
 		auto const name = _namespace_open_(split_scope, river);
 		_declare_or_define_template_(version, indent, river, declare, define);
 		_declare_or_define_class_(name, version, indent, river, declare, define);
+		if (define)
+		{
+			_define_class_share_(name.to_string(), version, river);
+		}
 		_namespace_close_(split_scope, river);
 	}
 
@@ -287,9 +291,9 @@ protected:
 
 	inline void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
-		river.write_string("template <");
 		if (declare)
 		{
+			river.write_string("template <");
 			if (_dimension_names.empty())
 			{
 				river.write_string("typename _1_ = void");
@@ -337,9 +341,11 @@ protected:
 					}
 				}
 			}
+			river.write_string(">\n");
 		}
 		else if (define)
 		{
+			river.write_string("template <");
 			if (_dimension_names.empty())
 			{
 				river.write_string("typename _1_");
@@ -360,8 +366,33 @@ protected:
 					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1));
 				}
 			}
+			river.write_string(">\n");
 		}
-		river.write_string(">\n");
+		else
+		{
+			river.write_string("<");
+			if (_dimension_names.empty())
+			{
+				river.write_string("_1_>");
+			}
+			else
+			{
+				bool first = true;
+				for (auto const& name : _dimension_names.extract_vector())
+				{
+					if (first)
+					{
+						first = false;
+					}
+					else
+					{
+						river.write_string(", ");
+					}
+					river.write_string(cast<symbol_a<>>(name).to_string().substr(1));
+				}
+			}
+			river.write_string(">");
+		}
 	}
 
 	inline void _declare_or_define_class_(symbol_a<> const& name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
@@ -397,8 +428,7 @@ protected:
 			class_name, class_expression_terms, version, indent, river);
 		_define_class_implementation_(true, // root
 			class_name, class_expression_terms, version, indent, river);
-		//TODO
-		river.write_string("}; // class " + class_name +"\n");
+		river.write_string("}; // class " + class_name +"\n\n");
 	}
 
 	inline flock_a<> _class_expression_terms_() const
@@ -1013,6 +1043,14 @@ protected:
 			"\tstatic bool const ___share___;\n"
 			"\tfriend class ___" + class_name + "_share___;\n"
 			"};\n\n");
+	}
+
+	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const
+	{
+		_declare_or_define_template_(version, 0, river, false, false);
+		river.write_string(
+			"...\n\n");
+		//TODO
 	}
 	
 	inline void _parse_member_definition_(int64_t version, expression_a<> const& expression, bool extraction, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
