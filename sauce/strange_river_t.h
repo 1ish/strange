@@ -149,22 +149,40 @@ public:
 		{
 			throw dis("strange::river::file passed empty range");
 		}
-		any_a<> name = *it;
+		any_a<> const name = *it;
 		if (!check<lake_a<int8_t>>(name))
 		{
 			throw dis("strange::river::file passed non-lake-int-8");
 		}
-		return file_(cast<lake_a<int8_t>>(name));
+		if (++it == range.cend_())
+		{
+			return file_(cast<lake_a<int8_t>>(name));
+		}
+		any_a<> const in = *it;
+		if (++it == range.cend_())
+		{
+			return file_(cast<lake_a<int8_t>>(name), in);
+		}
+		any_a<> const out = *it;
+		if (++it == range.cend_())
+		{
+			return file_(cast<lake_a<int8_t>>(name), in, out);
+		}
+		return file_(cast<lake_a<int8_t>>(name), in, out, *it);
 	}
 
-	static inline river_a<> file_(lake_a<int8_t> const& name)
+	static inline river_a<> file_(lake_a<int8_t> const& name, any_a<> const& in = yes(), any_a<> const& out = no(), any_a<> const& trunc = no())
 	{
 		return file(lake_to_string(name));
 	}
 
-	static inline river_a<> file(std::string const& name)
+	static inline river_a<> file(std::string const& name, bool in = true, bool out = false, bool trunc = false)
 	{
-		std::shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name, std::fstream::binary | std::fstream::in | std::fstream::out);
+		std::shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name,
+			std::fstream::binary |
+			(in ? std::fstream::in : 0) | 
+			(out ? std::fstream::out : 0) |
+			(trunc ? std::fstream::trunc : 0));
 		return river_a<>{ over{ river_t<>(stream.get(), stream.get(), stream, name) } };
 	}
 
