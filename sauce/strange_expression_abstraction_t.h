@@ -274,7 +274,7 @@ protected:
 			{
 				river.write_string(
 					"namespace " + name.to_string() + "\n"
-					"{\n");
+					"{\n\n");
 			}
 			name = cast<symbol_a<>>(scope_name);
 		}
@@ -406,7 +406,7 @@ protected:
 			+ "_a";
 		if (declare)
 		{
-			river.write_string("class " + class_name + ";\n");
+			river.write_string("class " + class_name + ";\n\n");
 		}
 		else if (define)
 		{
@@ -421,7 +421,7 @@ protected:
 			"{\n"
 			"public:\n");
 		_define_class_boilerplate_(true, // root
-			class_name, version, indent, river);
+			class_name, class_name, version, indent, river);
 		auto const class_expression_terms = _class_expression_terms_();
 		_define_class_nonvirtual_members_(true, // root
 			class_name, class_expression_terms, version, indent, river);
@@ -446,7 +446,7 @@ protected:
 		return cast<expression_a<>>(expression).terms_();
 	}
 
-	static inline void _define_class_boilerplate_(bool root, std::string const& class_name, int64_t version, int64_t indent, river_a<>& river)
+	static inline void _define_class_boilerplate_(bool root, std::string const& root_name, std::string const& class_name, int64_t version, int64_t indent, river_a<>& river)
 	{
 		if (root)
 		{
@@ -471,12 +471,12 @@ protected:
 				"\t};\n\n"
 
 				"\t// operator overloads\n"
-				"\tinline any_a operator[](range_a const& range)\n"
+				"\tinline " + class_name + "<> operator[](range_a const& range)\n"
 				"\t{\n"
 				"\t\treturn invoke(*this, range);\n"
 				"\t}\n\n"
 
-				"\tinline any_a operator()(range_a const& range)\n"
+				"\tinline " + class_name + "<> operator()(range_a const& range)\n"
 				"\t{\n"
 				"\t\treturn operate(*this, range);\n"
 				"\t}\n\n"
@@ -506,7 +506,7 @@ protected:
 			"\tinline " + class_name + " operator++(int)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
-			"\t\tany_a result = *this;\n"
+			"\t\t" + class_name + " result = *this;\n"
 			"\t\twrite().operator++();\n"
 			"\t\treturn result;\n"
 			"\t}\n\n"
@@ -521,40 +521,40 @@ protected:
 			"\tinline " + class_name + " operator--(int)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
-			"\t\tany_a result = *this;\n"
+			"\t\t" + class_name + " result = *this;\n"
 			"\t\twrite().operator--();\n"
 			"\t\treturn result;\n"
 			"\t}\n\n"
 
-			"\tinline " + class_name + "& operator+=(any_a const& other)\n"
+			"\tinline " + class_name + "& operator+=(" + root_name + "<> const& other)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator+=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
-			"\tinline " + class_name + "& operator-=(any_a const& other)\n"
+			"\tinline " + class_name + "& operator-=(" + root_name + "<> const& other)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator-=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
-			"\tinline " + class_name + "& operator*=(any_a const& other)\n"
+			"\tinline " + class_name + "& operator*=(" + root_name + "<> const& other)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator*=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
-			"\tinline " + class_name + "& operator/=(any_a const& other)\n"
+			"\tinline " + class_name + "& operator/=(" + root_name + "<> const& other)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator/=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
-			"\tinline " + class_name + "& operator%=(any_a const& other)\n"
+			"\tinline " + class_name + "& operator%=(" + root_name + "<> const& other)\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
 			"\t\twrite().operator%=(other);\n"
@@ -715,11 +715,11 @@ protected:
 			"\t\tvirtual inline operator bool() const = 0;\n"
 			"\t\tvirtual inline void operator++() = 0;\n"
 			"\t\tvirtual inline void operator--() = 0;\n"
-			"\t\tvirtual inline void operator+=(any_a const& other) = 0;\n"
-			"\t\tvirtual inline void operator-=(any_a const& other) = 0;\n"
-			"\t\tvirtual inline void operator*=(any_a const& other) = 0;\n"
-			"\t\tvirtual inline void operator/=(any_a const& other) = 0;\n"
-			"\t\tvirtual inline void operator%=(any_a const& other) = 0;\n");
+			"\t\tvirtual inline void operator+=(" + class_name + "<> const& other) = 0;\n"
+			"\t\tvirtual inline void operator-=(" + class_name + "<> const& other) = 0;\n"
+			"\t\tvirtual inline void operator*=(" + class_name + "<> const& other) = 0;\n"
+			"\t\tvirtual inline void operator/=(" + class_name + "<> const& other) = 0;\n"
+			"\t\tvirtual inline void operator%=(" + class_name + "<> const& other) = 0;\n");
 		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
 			&expression_abstraction_t::_define_class_pure_virtual_member_,
 			&expression_abstraction_t::_define_class_pure_virtual_native_member_);
@@ -760,27 +760,27 @@ protected:
 			"\t\t\tvalue_.operator--();\n"
 			"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator+=(any_a const& other) final\n"
+			"\t\tvirtual inline void operator+=(" + class_name + "<> const& other) final\n"
 			"\t\t{\n"
 			"\t\t\tvalue_.operator+=(other);\n"
 			"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator-=(any_a const& other) final\n"
+			"\t\tvirtual inline void operator-=(" + class_name + "<> const& other) final\n"
 			"\t\t{\n"
 			"\t\t\tvalue_.operator-=(other);\n"
 			"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator*=(any_a const& other) final\n"
+			"\t\tvirtual inline void operator*=(" + class_name + "<> const& other) final\n"
 			"\t\t{\n"
 			"\t\t\tvalue_.operator*=(other);\n"
 			"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator/=(any_a const& other) final\n"
+			"\t\tvirtual inline void operator/=(" + class_name + "<> const& other) final\n"
 			"\t\t{\n"
 			"\t\t\tvalue_.operator/=(other);\n"
 			"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator%=(any_a const& other) final\n"
+			"\t\tvirtual inline void operator%=(" + class_name + "<> const& other) final\n"
 			"\t\t{\n"
 			"\t\t\tvalue_.operator%=(other);\n"
 			"\t\t}\n\n");

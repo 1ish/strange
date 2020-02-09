@@ -16,12 +16,12 @@ public:
 		}
 	};
 
-	inline %struct_name% operator[](range_a const& range)
+	inline %struct_name%<> operator[](range_a const& range)
 	{
 		return invoke(*this, range);
 	}
 
-	inline %struct_name% operator()(range_a const& range)
+	inline %struct_name%<> operator()(range_a const& range)
 	{
 		return operate(*this, range);
 	}
@@ -62,35 +62,35 @@ public:
 		return result;
 	}
 
-	inline %struct_name%& operator+=(%struct_name% const& other)
+	inline %struct_name%& operator+=(%struct_name%<> const& other)
 	{
 		assert(handle_);
 		write().operator+=(other);
 		return *this;
 	}
 
-	inline %struct_name%& operator-=(%struct_name% const& other)
+	inline %struct_name%& operator-=(%struct_name%<> const& other)
 	{
 		assert(handle_);
 		write().operator-=(other);
 		return *this;
 	}
 
-	inline %struct_name%& operator*=(%struct_name% const& other)
+	inline %struct_name%& operator*=(%struct_name%<> const& other)
 	{
 		assert(handle_);
 		write().operator*=(other);
 		return *this;
 	}
 
-	inline %struct_name%& operator/=(%struct_name% const& other)
+	inline %struct_name%& operator/=(%struct_name%<> const& other)
 	{
 		assert(handle_);
 		write().operator/=(other);
 		return *this;
 	}
 
-	inline %struct_name%& operator%=(%struct_name% const& other)
+	inline %struct_name%& operator%=(%struct_name%<> const& other)
 	{
 		assert(handle_);
 		write().operator%=(other);
@@ -125,15 +125,15 @@ protected:
 
 		virtual inline void operator--() = 0;
 
-		virtual inline void operator+=(%struct_name% const& other) = 0;
+		virtual inline void operator+=(%struct_name%<> const& other) = 0;
 
-		virtual inline void operator-=(%struct_name% const& other) = 0;
+		virtual inline void operator-=(%struct_name%<> const& other) = 0;
 
-		virtual inline void operator*=(%struct_name% const& other) = 0;
+		virtual inline void operator*=(%struct_name%<> const& other) = 0;
 
-		virtual inline void operator/=(%struct_name% const& other) = 0;
+		virtual inline void operator/=(%struct_name%<> const& other) = 0;
 
-		virtual inline void operator%=(%struct_name% const& other) = 0;
+		virtual inline void operator%=(%struct_name%<> const& other) = 0;
 
 		%pure_virtual_members%
 	};
@@ -171,32 +171,32 @@ protected:
 			value_.operator--();
 		}
 
-		virtual inline void operator+=(%struct_name% const& other) final
+		virtual inline void operator+=(%struct_name%<> const& other) final
 		{
 			value_.operator+=(other);
 		}
 
-		virtual inline void operator-=(%struct_name% const& other) final
+		virtual inline void operator-=(%struct_name%<> const& other) final
 		{
 			value_.operator-=(other);
 		}
 
-		virtual inline void operator*=(%struct_name% const& other) final
+		virtual inline void operator*=(%struct_name%<> const& other) final
 		{
 			value_.operator*=(other);
 		}
 
-		virtual inline void operator/=(%struct_name% const& other) final
+		virtual inline void operator/=(%struct_name%<> const& other) final
 		{
 			value_.operator/=(other);
 		}
 
-		virtual inline void operator%=(%struct_name% const& other) final
+		virtual inline void operator%=(%struct_name%<> const& other) final
 		{
 			value_.operator%=(other);
 		}
 
-		%virtual_members% //TODO final
+		%virtual_members% // final
 
 		___TTT___ value_;
 	};

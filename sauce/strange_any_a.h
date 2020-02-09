@@ -40,12 +40,12 @@ namespace strange {
     		}
     	};
     
-    	inline any_a operator[](range_a const& range)
+    	inline any_a<> operator[](range_a const& range)
     	{
     		return invoke(*this, range);
     	}
     
-    	inline any_a operator()(range_a const& range)
+    	inline any_a<> operator()(range_a const& range)
     	{
     		return operate(*this, range);
     	}
@@ -86,35 +86,35 @@ namespace strange {
     		return result;
     	}
     
-    	inline any_a& operator+=(any_a const& other)
+    	inline any_a& operator+=(any_a<> const& other)
     	{
     		assert(handle_);
     		write().operator+=(other);
     		return *this;
     	}
     
-    	inline any_a& operator-=(any_a const& other)
+    	inline any_a& operator-=(any_a<> const& other)
     	{
     		assert(handle_);
     		write().operator-=(other);
     		return *this;
     	}
     
-    	inline any_a& operator*=(any_a const& other)
+    	inline any_a& operator*=(any_a<> const& other)
     	{
     		assert(handle_);
     		write().operator*=(other);
     		return *this;
     	}
     
-    	inline any_a& operator/=(any_a const& other)
+    	inline any_a& operator/=(any_a<> const& other)
     	{
     		assert(handle_);
     		write().operator/=(other);
     		return *this;
     	}
     
-    	inline any_a& operator%=(any_a const& other)
+    	inline any_a& operator%=(any_a<> const& other)
     	{
     		assert(handle_);
     		write().operator%=(other);
@@ -234,15 +234,15 @@ namespace strange {
     
     		virtual inline void operator--() = 0;
     
-    		virtual inline void operator+=(any_a const& other) = 0;
+    		virtual inline void operator+=(any_a<> const& other) = 0;
     
-    		virtual inline void operator-=(any_a const& other) = 0;
+    		virtual inline void operator-=(any_a<> const& other) = 0;
     
-    		virtual inline void operator*=(any_a const& other) = 0;
+    		virtual inline void operator*=(any_a<> const& other) = 0;
     
-    		virtual inline void operator/=(any_a const& other) = 0;
+    		virtual inline void operator/=(any_a<> const& other) = 0;
     
-    		virtual inline void operator%=(any_a const& other) = 0;
+    		virtual inline void operator%=(any_a<> const& other) = 0;
     
       virtual inline one_t const & extract_thing ( ) const = 0;
       virtual inline one_t & mutate_thing ( ) = 0;
@@ -322,27 +322,27 @@ namespace strange {
     			value_.operator--();
     		}
     
-    		virtual inline void operator+=(any_a const& other) final
+    		virtual inline void operator+=(any_a<> const& other) final
     		{
     			value_.operator+=(other);
     		}
     
-    		virtual inline void operator-=(any_a const& other) final
+    		virtual inline void operator-=(any_a<> const& other) final
     		{
     			value_.operator-=(other);
     		}
     
-    		virtual inline void operator*=(any_a const& other) final
+    		virtual inline void operator*=(any_a<> const& other) final
     		{
     			value_.operator*=(other);
     		}
     
-    		virtual inline void operator/=(any_a const& other) final
+    		virtual inline void operator/=(any_a<> const& other) final
     		{
     			value_.operator/=(other);
     		}
     
-    		virtual inline void operator%=(any_a const& other) final
+    		virtual inline void operator%=(any_a<> const& other) final
     		{
     			value_.operator%=(other);
     		}
