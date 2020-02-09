@@ -3,7 +3,7 @@
 
 // abstractions
 
-#include "strange_any_a.h"
+#include "generated/define_strange_any_a.hpp"
 
 #define ___root___ any_a<>
 
