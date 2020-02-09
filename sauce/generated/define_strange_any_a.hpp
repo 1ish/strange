@@ -652,7 +652,7 @@ public:
 	{}
 
 	template <typename ___TTT___>
-	explicit inline any_a(std::shared_ptr<___TTT___> & handle, ___reference_tag___) noexcept
+	explicit inline any_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
 		: ___shared___{ ___SHARED___{} }
 		, handle_{ reinterpret_cast<___SHARED___&>(handle) }
 	{}
@@ -689,7 +689,7 @@ template <typename range_a, typename symbol_a, typename cat_a, typename kind_a, 
 bool const any_a<range_a, symbol_a, cat_a, kind_a, inventory_a, unordered_herd_a, shoal_a, unordered_shoal_a, number_data_uint64_a>::___share___ = []()
 {
 	auto& shoal = shared();
-	reflection <any_a<range_a, symbol_a, cat_a, kind_a, inventory_a, unordered_herd_a, shoal_a, unordered_shoal_a, number_data_uint64_a>>::share(shoal);
+	reflection<any_a<range_a, symbol_a, cat_a, kind_a, inventory_a, unordered_herd_a, shoal_a, unordered_shoal_a, number_data_uint64_a>>::share(shoal);
 	return shoal.something();
 }();
 

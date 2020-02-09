@@ -1012,7 +1012,7 @@ protected:
 			"\t{}\n\n"
 
 			"\ttemplate <typename ___TTT___>\n"
-			"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___> & handle, ___reference_tag___) noexcept\n"
+			"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept\n"
 			"\t\t: ___shared___{ ___SHARED___{} }\n"
 			"\t\t, handle_{ reinterpret_cast<___SHARED___&>(handle) }\n"
 			"\t{}\n\n"
@@ -1053,7 +1053,7 @@ protected:
 		river.write_string("::___share___ = []()\n"
 			"{\n"
 			"\tauto& shoal = shared();\n"
-			"\treflection <" + class_name);
+			"\treflection<" + class_name);
 		_declare_or_define_template_(version, 0, river, false, false);
 		river.write_string(">::share(shoal);\n"
 			"\treturn shoal.something();\n"
