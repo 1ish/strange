@@ -234,14 +234,15 @@ protected:
 
 	inline void _declare_or_define_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
-		flock_a<> split_scope = _split_scope_();
 		river.write_string("\n");
-		auto const name = _namespace_open_(split_scope, river);
 		_declare_or_define_template_(version, indent, river, declare, define);
-		_declare_or_define_class_(name, version, indent, river, declare, define);
+		flock_a<> split_scope = _split_scope_();
+		auto const name = _namespace_open_(split_scope, river);
+		std::string class_name;
+		_declare_or_define_class_(name, class_name, version, indent, river, declare, define);
 		if (define)
 		{
-			_define_class_share_(name.to_string(), version, river);
+			_define_class_share_(class_name, version, river);
 		}
 		_namespace_close_(split_scope, river);
 	}
@@ -395,10 +396,10 @@ protected:
 		}
 	}
 
-	inline void _declare_or_define_class_(symbol_a<> const& name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _declare_or_define_class_(symbol_a<> const& name, std::string& class_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		std::string const& name_string = name.to_string();
-		std::string const class_name =
+		class_name =
 			((name.first_character() == '<' && name.last_character() == '>')
 				? name_string.substr(1, name_string.length() - 2)
 				: name_string)
@@ -1047,10 +1048,17 @@ protected:
 
 	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const
 	{
+		_declare_or_define_template_(version, 0, river, false, true);
+		river.write_string("bool const " + class_name);
 		_declare_or_define_template_(version, 0, river, false, false);
-		river.write_string(
-			"...\n\n");
-		//TODO
+		river.write_string("::___share___ = []()\n"
+			"{\n"
+			"\tauto& shoal = shared();\n"
+			"\treflection <" + class_name);
+		_declare_or_define_template_(version, 0, river, false, false);
+		river.write_string(">::share(shoal);\n"
+			"\treturn shoal.something();\n"
+			"}();\n\n");
 	}
 	
 	inline void _parse_member_definition_(int64_t version, expression_a<> const& expression, bool extraction, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
