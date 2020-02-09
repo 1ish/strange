@@ -235,9 +235,9 @@ protected:
 	inline void _declare_or_define_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		river.write_string("\n");
-		_declare_or_define_template_(version, indent, river, declare, define);
 		flock_a<> split_scope = _split_scope_();
 		auto const name = _namespace_open_(split_scope, river);
+		_declare_or_define_template_(version, indent, river, declare, define);
 		std::string class_name;
 		_declare_or_define_class_(name, class_name, version, indent, river, declare, define);
 		if (define)
