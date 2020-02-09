@@ -1,69 +1,19 @@
 false &&
 {	strange :
 	{	<symbol> :: abstraction
-		(	// dimensions
-			#range_a :<<>># <range>,
-			#symbol_a :<<>># <symbol>,
-			#cat_a :<<>># <cat>,
-			#kind_a :<<>># <kind>,
-			#inventory_a :<<>># <inventory>,
-			#unordered_herd_a :<<>># <unordered_herd>,
-			#shoal_a :<<>># <shoal>,
-			#unordered_shoal_a :<<>># <unordered_shoal>,
-			#number_data_uint64_a :<<>># <number_data_uint64>,
-			(	// no parents
+		(	// no dimensions
+			(	// parents
 				{
-					// exposure
-					extract_thing : "one_t const& () const",
-					mutate_thing : "one_t& ()",
+					// symbol
+					to_lake_ :# (<lake_int8>),
 
-					// reflection
-					type_ :# (<#symbol_a>),
+					to_string : "std::string const& () const",
 
-					shared_ :# (<#unordered_shoal_a>),
-					share : "void (shoal_a& shoal) const",
+					first_character : "int8_t () const",
+					last_character : "int8_t () const",
 
-					cat_ :# (<#cat_a>),
-
-					cats_ :# (<#unordered_herd_a>),
-
-					kind_ :# (<#kind_a>),
-
-					kinds_ :# (<#unordered_herd_a>),
-
-					operations_ :# (<#unordered_shoal_a>),
-
-					// visitor
-					visit_ :# (inventory :(#inventory_a)&, <any>),
-
-					// function
-					invoke : "any_a<> (any_a<>& thing, range_a const& range) const",
-					operate : "any_a<> (any_a<>& thing, range_a const& range) const",
-
-					// identification
-					identity_ :# (<#number_data_uint64_a>),
-					identity : "void const* () const",
-
-					identical_ :# (thing :<any>#, <any>),
-					identical : "bool (any_a<> const& thing) const",
-
-					// comparison
-					nothing_ :# (<any>),
-					nothing : "bool () const",
-
-					something_ :# (<any>),
-					something : "bool () const",
-
-					same_ :# (thing :<any>#, <any>),
-					'operator==' : "bool (any_a<> const& thing) const",
-
-					different_ :# (thing :<any>#, <any>),
-					'operator!=' : "bool (any_a<> const& thing) const",
-
-					hash_ :# (<#number_data_uint64_a>),
-					hash : "std::size_t () const",
-
-					is : "bool (std::string const& s) const",
+					add_ :# (symbol :<symbol>#, <symbol>),
+					'operator+' : "symbol_a<> (symbol_a<> const& symbol) const",
 				}
 			)
 		)
