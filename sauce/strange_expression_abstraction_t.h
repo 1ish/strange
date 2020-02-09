@@ -791,7 +791,7 @@ protected:
 
 		river.write_string(
 			"\t\t___TTT___ value_;\n"
-			"\t}\n\n"
+			"\t};\n\n"
 
 			"\ttemplate <typename ___TTT___, typename ___BHB___>\n"
 			"\tstruct ___root_handle___<std::reference_wrapper<___TTT___>, ___BHB___>\n"
@@ -1042,8 +1042,7 @@ protected:
 
 			"private:\n"
 			"\tstatic bool const ___share___;\n"
-			"\tfriend class ___" + class_name + "_share___;\n"
-			"};\n\n");
+			"\tfriend class ___" + class_name + "_share___;\n");
 	}
 
 	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const
