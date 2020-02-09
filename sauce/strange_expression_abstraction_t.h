@@ -417,19 +417,46 @@ protected:
 	inline void _define_class_(std::string const& class_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		river.write_string(
-			"class " + class_name + "\n"
+			"class " + class_name);
+		int64_t const bases = _parent_expressions.size() - 1;
+		bool const root = bases < 1;
+		std::string root_name = class_name;
+		if (!root)
+		{
+			root_name = _class_root_name_(version);
+			river.write_string(" : public " + root_name + "<>");
+		}
+		river.write_string("\n"
 			"{\n"
 			"public:\n");
-		_define_class_boilerplate_(true, // root
-			class_name, class_name, version, indent, river);
+		_define_class_boilerplate_(root, root_name, class_name, version, indent, river);
 		auto const class_expression_terms = _class_expression_terms_();
-		_define_class_nonvirtual_members_(true, // root
-			class_name, class_expression_terms, version, indent, river);
-		_define_class_handle_(true, // root
-			class_name, class_expression_terms, version, indent, river);
-		_define_class_implementation_(true, // root
-			class_name, class_expression_terms, version, indent, river);
+		_define_class_nonvirtual_members_(root, class_name, class_expression_terms, version, indent, river);
+		_define_class_handle_(root, class_name, class_expression_terms, version, indent, river);
+		_define_class_implementation_(root, class_name, class_expression_terms, version, indent, river);
 		river.write_string("}; // class " + class_name +"\n\n");
+	}
+
+	inline std::string _class_root_name_(int64_t version) const
+	{
+		auto const expression = _parent_expressions.at_index(0);
+		if (expression.type_() != expression_operate_t<>::type_())
+		{
+			throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-expression-operate base class definition");
+		}
+		auto const terms = cast<expression_a<>>(expression).terms_();
+		if (terms.size() < 1)
+		{
+			throw dis(_token.report() + "strange::expression_abstraction::generate_cpp expression-operate base class definition with too few terms");
+		}
+		auto abs = river_t<>::create();
+		cast<expression_a<>>(terms.at_index(0)).generate_cpp(version, 0, abs, false, false);
+		abs.seekg_beg(0);
+		auto exp = parser_t<>::create_().parse_(tokenizer_t<>::create_(abs));
+		auto river = river_t<>::create();
+		exp.generate_cpp(version, 0, river, false, false, true);
+		std::string str = river.to_string();
+		return str.substr(1, str.length() - 4);
 	}
 
 	inline flock_a<> _class_expression_terms_() const
