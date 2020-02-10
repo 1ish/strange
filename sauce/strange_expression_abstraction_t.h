@@ -1000,11 +1000,11 @@ protected:
 
 	inline void _define_class_implementation_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
-		//TODO
 		river.write_string(
 			"\tinline ___" + class_name + "_handle_base___ const& read() const noexcept\n"
-			"\t{\n"
-			"\t\treturn *handle_;\n"
+			"\t{\n" + (root
+				? std::string{ "\t\treturn *handle_;\n" }
+				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___ const>(handle_);\n")) +
 			"\t}\n\n"
 
 			"\tinline ___" + class_name + "_handle_base___& write() noexcept\n"
@@ -1013,10 +1013,13 @@ protected:
 			"\t\t{\n"
 			"\t\t\thandle_ = handle_->___clone___();\n"
 			"\t\t\thandle_->___weak___(handle_);\n"
-			"\t\t}\n"
-			"\t\treturn *handle_;\n"
-			"\t}\n\n"
+			"\t\t}\n" + (root
+				? std::string{ "\t\treturn *handle_;\n" }
+				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___>(handle_);\n")) +
+			"\t}\n\n");
 
+		//TODO
+		river.write_string(
 			"\ttemplate <typename ___TTT___>\n"
 			"\tfriend inline bool check(" + class_name + "<> const& value) noexcept;\n\n"
 

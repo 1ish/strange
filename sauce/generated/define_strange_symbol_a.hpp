@@ -188,7 +188,7 @@ private:
 
 	inline ___symbol_a_handle_base___ const& read() const noexcept
 	{
-		return *handle_;
+		return *std::static_pointer_cast<___symbol_a_handle_base___ const>(handle_);
 	}
 
 	inline ___symbol_a_handle_base___& write() noexcept
@@ -198,7 +198,7 @@ private:
 			handle_ = handle_->___clone___();
 			handle_->___weak___(handle_);
 		}
-		return *handle_;
+		return *std::static_pointer_cast<___symbol_a_handle_base___>(handle_);
 	}
 
 	template <typename ___TTT___>
