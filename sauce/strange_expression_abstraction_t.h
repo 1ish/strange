@@ -483,9 +483,9 @@ protected:
 				"\tstruct ___duplicate_tag___ {};\n\n"
 
 				"\t// shared pointer typedefs\n"
-				"\tstruct ___root_handle_base___;\n"
-				"\tusing ___WEAK___ = std::weak_ptr<___root_handle_base___>;\n"
-				"\tusing ___SHARED___ = std::shared_ptr<___root_handle_base___>;\n\n"
+				"\tstruct ___" + class_name + "_handle_base___;\n"
+				"\tusing ___WEAK___ = std::weak_ptr<___" + class_name + "_handle_base___>;\n"
+				"\tusing ___SHARED___ = std::shared_ptr<___" + class_name + "_handle_base___>;\n\n"
 
 				"\t// hash function wrapper class\n"
 				"\tclass hash_f\n"
@@ -729,14 +729,14 @@ protected:
 	{
 		river.write_string(
 			"protected:\n"
-			"\tstruct ___root_handle_base___\n"
+			"\tstruct ___" + class_name + "_handle_base___\n"
 			"\t{\n"
-			"\t\t___root_handle_base___() = default;\n"
-			"\t\t___root_handle_base___(___root_handle_base___ const&) = default;\n"
-			"\t\t___root_handle_base___(___root_handle_base___&&) = default;\n"
-			"\t\t___root_handle_base___& operator=(___root_handle_base___ const&) = default;\n"
-			"\t\t___root_handle_base___& operator=(___root_handle_base___&&) = default;\n"
-			"\t\tvirtual ~___root_handle_base___() = default;\n"
+			"\t\t___" + class_name + "_handle_base___() = default;\n"
+			"\t\t___" + class_name + "_handle_base___(___" + class_name + "_handle_base___ const&) = default;\n"
+			"\t\t___" + class_name + "_handle_base___(___" + class_name + "_handle_base___&&) = default;\n"
+			"\t\t___" + class_name + "_handle_base___& operator=(___" + class_name + "_handle_base___ const&) = default;\n"
+			"\t\t___" + class_name + "_handle_base___& operator=(___" + class_name + "_handle_base___&&) = default;\n"
+			"\t\tvirtual ~___" + class_name + "_handle_base___() = default;\n"
 			"\t\tvirtual ___SHARED___ ___clone___() const = 0;\n"
 			"\t\tvirtual void ___weak___(___WEAK___ const& weak) const = 0;\n"
 			"\t\tvirtual inline operator bool() const = 0;\n"
@@ -754,16 +754,16 @@ protected:
 			"\t};\n\n");
 
 		river.write_string(
-			"\ttemplate <typename ___TTT___, typename ___BHB___ = ___root_handle_base___>\n"
-			"\tstruct ___root_handle___ : ___BHB___\n"
+			"\ttemplate <typename ___TTT___, typename ___BHB___ = ___" + class_name + "_handle_base___>\n"
+			"\tstruct ___" + class_name + "_handle___ : ___BHB___\n"
 			"\t{\n"
 			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-			"\t\tinline ___root_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+			"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
 			"\t\t\t: value_{ value }\n"
 			"\t\t{}\n\n"
 
 			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-			"\t\tinline ___root_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+			"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
 			"\t\t\t: value_{ std::move(value) }\n"
 			"\t\t{}\n\n"
 
@@ -821,11 +821,11 @@ protected:
 			"\t};\n\n"
 
 			"\ttemplate <typename ___TTT___, typename ___BHB___>\n"
-			"\tstruct ___root_handle___<std::reference_wrapper<___TTT___>, ___BHB___>\n"
-			"\t\t: ___root_handle___<___TTT___&, ___BHB___>\n"
+			"\tstruct ___" + class_name + "_handle___<std::reference_wrapper<___TTT___>, ___BHB___>\n"
+			"\t\t: ___" + class_name + "_handle___<___TTT___&, ___BHB___>\n"
 			"\t{\n"
-			"\t\tinline ___root_handle___(std::reference_wrapper<___TTT___> ref)\n"
-			"\t\t\t: ___root_handle___<___TTT___&, ___BHB___>{ ref.get() }\n"
+			"\t\tinline ___" + class_name + "_handle___(std::reference_wrapper<___TTT___> ref)\n"
+			"\t\t\t: ___" + class_name + "_handle___<___TTT___&, ___BHB___>{ ref.get() }\n"
 			"\t\t{}\n"
 			"\t};\n\n"
 
@@ -835,30 +835,30 @@ protected:
 
 			"private:\n"
 			"\ttemplate <typename ___TTT___>\n"
-			"\tstruct ___root_handle_final___ final : ___root_handle___<___TTT___>\n"
+			"\tstruct ___" + class_name + "_handle_final___ final : ___" + class_name + "_handle___<___TTT___>\n"
 			"\t{\n"
 			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-			"\t\tinline ___root_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
-			"\t\t\t: ___root_handle___<___TTT___>{ value }\n"
+			"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+			"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ value }\n"
 			"\t\t{}\n\n"
 
 			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-			"\t\tinline ___root_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
-			"\t\t\t: ___root_handle___<___TTT___>{ std::move(value) }\n"
+			"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+			"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ std::move(value) }\n"
 			"\t\t{}\n\n"
 
 			"\t\tvirtual inline ___SHARED___ ___clone___() const final\n"
 			"\t\t{\n"
-			"\t\t\treturn std::make_shared<___root_handle_final___>(___root_handle___<___TTT___>::value_);\n"
+			"\t\t\treturn std::make_shared<___" + class_name + "_handle_final___>(___" + class_name + "_handle___<___TTT___>::value_);\n"
 			"\t\t}\n"
 			"\t};\n\n"
 
 			"\ttemplate <typename ___TTT___>\n"
-			"\tstruct ___root_handle_final___<std::reference_wrapper<___TTT___>> final\n"
-			"\t\t: ___root_handle_final___<___TTT___&>\n"
+			"\tstruct ___" + class_name + "_handle_final___<std::reference_wrapper<___TTT___>> final\n"
+			"\t\t: ___" + class_name + "_handle_final___<___TTT___&>\n"
 			"\t{\n"
-			"\t\tinline ___root_handle_final___(std::reference_wrapper<___TTT___> ref)\n"
-			"\t\t\t: ___root_handle_final___<___TTT___&>{ ref.get() }\n"
+			"\t\tinline ___" + class_name + "_handle_final___(std::reference_wrapper<___TTT___> ref)\n"
+			"\t\t\t: ___" + class_name + "_handle_final___<___TTT___&>{ ref.get() }\n"
 			"\t\t{}\n"
 			"\t};\n\n");
 	}
@@ -927,12 +927,12 @@ protected:
 	inline void _define_class_implementation_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(
-			"\tinline ___root_handle_base___ const& read() const noexcept\n"
+			"\tinline ___" + class_name + "_handle_base___ const& read() const noexcept\n"
 			"\t{\n"
 			"\t\treturn *handle_;\n"
 			"\t}\n\n"
 
-			"\tinline ___root_handle_base___& write() noexcept\n"
+			"\tinline ___" + class_name + "_handle_base___& write() noexcept\n"
 			"\t{\n"
 			"\t\tif (!handle_.unique())\n"
 			"\t\t{\n"
@@ -1046,7 +1046,7 @@ protected:
 
 			"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
 			"\texplicit inline " + class_name + "(___TTT___ value) noexcept\n"
-			"\t\t: ___shared___{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }\n"
+			"\t\t: ___shared___{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }\n"
 			"\t\t, handle_{ ___shared___ }\n"
 			"\t{\n"
 			"\t\thandle_->___weak___(handle_);\n"
