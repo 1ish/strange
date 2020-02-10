@@ -764,114 +764,177 @@ protected:
 		river.write_string(
 			"\t};\n\n");
 
-		river.write_string(
-			"\ttemplate <typename ___TTT___, typename ___BHB___ = ___" + class_name + "_handle_base___>\n"
-			"\tstruct ___" + class_name + "_handle___ : ___BHB___\n"
-			"\t{\n"
-			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-			"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
-			"\t\t\t: value_{ value }\n"
-			"\t\t{}\n\n"
+		if (root)
+		{
+			river.write_string(
+				"\ttemplate <typename ___TTT___, typename ___BHB___ = ___" + class_name + "_handle_base___>\n"
+				"\tstruct ___" + class_name + "_handle___ : ___BHB___\n"
+				"\t{\n"
+				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+				"\t\t\t: value_{ value }\n"
+				"\t\t{}\n\n"
 
-			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-			"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
-			"\t\t\t: value_{ std::move(value) }\n"
-			"\t\t{}\n\n"
+				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+				"\t\t\t: value_{ std::move(value) }\n"
+				"\t\t{}\n\n"
 
-			"\t\tvirtual inline void ___weak___(___WEAK___ const& weak) const final\n"
-			"\t\t{\n"
-			"\t\t\tvalue_.___weak___(weak);\n"
-			"\t\t}\n\n"
+				"\t\tvirtual inline void ___weak___(___WEAK___ const& weak) const final\n"
+				"\t\t{\n"
+				"\t\t\tvalue_.___weak___(weak);\n"
+				"\t\t}\n\n"
 
-			"\t\tvirtual inline operator bool() const final\n"
-			"\t\t{\n"
-			"\t\t\treturn value_.operator bool();\n"
-			"\t\t}\n\n"
+				"\t\tvirtual inline operator bool() const final\n"
+				"\t\t{\n"
+				"\t\t\treturn value_.operator bool();\n"
+				"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator++() final\n"
-			"\t\t{\n"
-			"\t\t\tvalue_.operator++();\n"
-			"\t\t}\n\n"
+				"\t\tvirtual inline void operator++() final\n"
+				"\t\t{\n"
+				"\t\t\tvalue_.operator++();\n"
+				"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator--() final\n"
-			"\t\t{\n"
-			"\t\t\tvalue_.operator--();\n"
-			"\t\t}\n\n"
+				"\t\tvirtual inline void operator--() final\n"
+				"\t\t{\n"
+				"\t\t\tvalue_.operator--();\n"
+				"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator+=(any_a<> const& other) final\n"
-			"\t\t{\n"
-			"\t\t\tvalue_.operator+=(other);\n"
-			"\t\t}\n\n"
+				"\t\tvirtual inline void operator+=(any_a<> const& other) final\n"
+				"\t\t{\n"
+				"\t\t\tvalue_.operator+=(other);\n"
+				"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator-=(any_a<> const& other) final\n"
-			"\t\t{\n"
-			"\t\t\tvalue_.operator-=(other);\n"
-			"\t\t}\n\n"
+				"\t\tvirtual inline void operator-=(any_a<> const& other) final\n"
+				"\t\t{\n"
+				"\t\t\tvalue_.operator-=(other);\n"
+				"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator*=(any_a<> const& other) final\n"
-			"\t\t{\n"
-			"\t\t\tvalue_.operator*=(other);\n"
-			"\t\t}\n\n"
+				"\t\tvirtual inline void operator*=(any_a<> const& other) final\n"
+				"\t\t{\n"
+				"\t\t\tvalue_.operator*=(other);\n"
+				"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator/=(any_a<> const& other) final\n"
-			"\t\t{\n"
-			"\t\t\tvalue_.operator/=(other);\n"
-			"\t\t}\n\n"
+				"\t\tvirtual inline void operator/=(any_a<> const& other) final\n"
+				"\t\t{\n"
+				"\t\t\tvalue_.operator/=(other);\n"
+				"\t\t}\n\n"
 
-			"\t\tvirtual inline void operator%=(any_a<> const& other) final\n"
-			"\t\t{\n"
-			"\t\t\tvalue_.operator%=(other);\n"
-			"\t\t}\n\n");
+				"\t\tvirtual inline void operator%=(any_a<> const& other) final\n"
+				"\t\t{\n"
+				"\t\t\tvalue_.operator%=(other);\n"
+				"\t\t}\n\n");
+		}
+		else
+		{
+			river.write_string(
+				"\ttemplate <typename ___TTT___, typename ___DHB___ = ___" + class_name + "_handle_base___>\n"
+				"\tstruct ___" + class_name + "_handle___ : ___" + base_name + "_handle___<___TTT___, ___DHB___>\n"
+				"\t{\n"
+				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+				"\t\t\t: ___" + base_name + "_handle___<___TTT___, ___DHB___>{ value }\n"
+				"\t\t{}\n\n"
 
+				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+				"\t\t\t: ___" + base_name + "_handle___<___TTT___, ___DHB___>{ std::move(value) }\n"
+				"\t\t{}\n\n");
+		}
 		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
 			&expression_abstraction_t::_define_class_virtual_member_,
 			&expression_abstraction_t::_define_class_virtual_native_member_);
+		if (root)
+		{
+			river.write_string(
+				"\t\t___TTT___ value_;\n"
+				"\t};\n\n"
 
-		river.write_string(
-			"\t\t___TTT___ value_;\n"
-			"\t};\n\n"
+				"\ttemplate <typename ___TTT___, typename ___BHB___>\n"
+				"\tstruct ___" + class_name + "_handle___<std::reference_wrapper<___TTT___>, ___BHB___>\n"
+				"\t\t: ___" + class_name + "_handle___<___TTT___&, ___BHB___>\n"
+				"\t{\n"
+				"\t\tinline ___" + class_name + "_handle___(std::reference_wrapper<___TTT___> ref)\n"
+				"\t\t\t: ___" + class_name + "_handle___<___TTT___&, ___BHB___>{ ref.get() }\n"
+				"\t\t{}\n"
+				"\t};\n\n"
 
-			"\ttemplate <typename ___TTT___, typename ___BHB___>\n"
-			"\tstruct ___" + class_name + "_handle___<std::reference_wrapper<___TTT___>, ___BHB___>\n"
-			"\t\t: ___" + class_name + "_handle___<___TTT___&, ___BHB___>\n"
-			"\t{\n"
-			"\t\tinline ___" + class_name + "_handle___(std::reference_wrapper<___TTT___> ref)\n"
-			"\t\t\t: ___" + class_name + "_handle___<___TTT___&, ___BHB___>{ ref.get() }\n"
-			"\t\t{}\n"
-			"\t};\n\n"
+				"\t___SHARED___ ___shared___;\n\n"
 
-			"\t___SHARED___ ___shared___;\n\n"
+				"\t___SHARED___& handle_;\n\n"
 
-			"\t___SHARED___& handle_;\n\n"
+				"private:\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\tstruct ___" + class_name + "_handle_final___ final : ___" + class_name + "_handle___<___TTT___>\n"
+				"\t{\n"
+				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+				"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ value }\n"
+				"\t\t{}\n\n"
 
-			"private:\n"
-			"\ttemplate <typename ___TTT___>\n"
-			"\tstruct ___" + class_name + "_handle_final___ final : ___" + class_name + "_handle___<___TTT___>\n"
-			"\t{\n"
-			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-			"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
-			"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ value }\n"
-			"\t\t{}\n\n"
+				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+				"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ std::move(value) }\n"
+				"\t\t{}\n\n"
 
-			"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
-			"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
-			"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ std::move(value) }\n"
-			"\t\t{}\n\n"
+				"\t\tvirtual inline ___SHARED___ ___clone___() const final\n"
+				"\t\t{\n"
+				"\t\t\treturn std::make_shared<___" + class_name + "_handle_final___>(___" + class_name + "_handle___<___TTT___>::value_);\n"
+				"\t\t}\n"
+				"\t};\n\n"
 
-			"\t\tvirtual inline ___SHARED___ ___clone___() const final\n"
-			"\t\t{\n"
-			"\t\t\treturn std::make_shared<___" + class_name + "_handle_final___>(___" + class_name + "_handle___<___TTT___>::value_);\n"
-			"\t\t}\n"
-			"\t};\n\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\tstruct ___" + class_name + "_handle_final___<std::reference_wrapper<___TTT___>> final\n"
+				"\t\t: ___" + class_name + "_handle_final___<___TTT___&>\n"
+				"\t{\n"
+				"\t\tinline ___" + class_name + "_handle_final___(std::reference_wrapper<___TTT___> ref)\n"
+				"\t\t\t: ___" + class_name + "_handle_final___<___TTT___&>{ ref.get() }\n"
+				"\t\t{}\n"
+				"\t};\n\n");
+		}
+		else
+		{
+			river.write_string(
+				"\t};\n\n"
 
-			"\ttemplate <typename ___TTT___>\n"
-			"\tstruct ___" + class_name + "_handle_final___<std::reference_wrapper<___TTT___>> final\n"
-			"\t\t: ___" + class_name + "_handle_final___<___TTT___&>\n"
-			"\t{\n"
-			"\t\tinline ___" + class_name + "_handle_final___(std::reference_wrapper<___TTT___> ref)\n"
-			"\t\t\t: ___" + class_name + "_handle_final___<___TTT___&>{ ref.get() }\n"
-			"\t\t{}\n"
-			"\t};\n\n");
+				"\ttemplate <typename ___TTT___, typename ___DHB___>\n"
+				"\tstruct ___" + class_name + "_handle___<std::reference_wrapper<___TTT___>, ___DHB___>\n"
+				"\t\t: ___" + class_name + "_handle___<___TTT___&, ___DHB___>\n"
+				"\t{\n"
+				"\t\tinline ___" + class_name + "_handle___(std::reference_wrapper<___TTT___> ref)\n"
+				"\t\t\t: ___" + class_name + "_handle___<___TTT___&, ___DHB___>{ ref.get() }\n"
+				"\t\t{}\n"
+				"\t};\n\n"
+
+				"private:\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\tstruct ___" + class_name + "_handle_final___ final : ___" + class_name + "_handle___<___TTT___>\n"
+				"\t{\n"
+				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
+				"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ value }\n"
+				"\t\t{}\n\n"
+
+				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
+				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
+				"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ std::move(value) }\n"
+				"\t\t{}\n\n"
+
+				"\t\tvirtual inline ___SHARED___ ___clone___() const final\n"
+				"\t\t{\n"
+				"\t\t\treturn std::make_shared<___" + class_name + "_handle_final___>(___" + class_name + "_handle___<___TTT___>::value_);\n"
+				"\t\t}\n"
+				"\t};\n\n"
+
+				"\ttemplate <typename ___TTT___>\n"
+				"\tstruct ___" + class_name + "_handle_final___<std::reference_wrapper<___TTT___>> final\n"
+				"\t\t: ___" + class_name + "_handle_final___<___TTT___&>\n"
+				"\t{\n"
+				"\t\tinline ___" + class_name + "_handle_final___(std::reference_wrapper<___TTT___> ref)\n"
+				"\t\t\t: ___" + class_name + "_handle_final___<___TTT___&>{ ref.get() }\n"
+				"\t\t{}\n"
+				"\t};\n\n");
+		}
 	}
 
 	inline void _define_class_pure_virtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
@@ -937,6 +1000,7 @@ protected:
 
 	inline void _define_class_implementation_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
+		//TODO
 		river.write_string(
 			"\tinline ___" + class_name + "_handle_base___ const& read() const noexcept\n"
 			"\t{\n"

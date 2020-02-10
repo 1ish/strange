@@ -109,63 +109,18 @@ protected:
 		virtual inline symbol_a < > operator+(symbol_a < > const & symbol ) const = 0;
 	};
 
-	template <typename ___TTT___, typename ___BHB___ = ___symbol_a_handle_base___>
-	struct ___symbol_a_handle___ : ___BHB___
+	template <typename ___TTT___, typename ___DHB___ = ___symbol_a_handle_base___>
+	struct ___symbol_a_handle___ : ___any_a_handle___<___TTT___, ___DHB___>
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___symbol_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: value_{ value }
+			: ___any_a_handle___<___TTT___, ___DHB___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___symbol_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: value_{ std::move(value) }
+			: ___any_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
-
-		virtual inline void ___weak___(___WEAK___ const& weak) const final
-		{
-			value_.___weak___(weak);
-		}
-
-		virtual inline operator bool() const final
-		{
-			return value_.operator bool();
-		}
-
-		virtual inline void operator++() final
-		{
-			value_.operator++();
-		}
-
-		virtual inline void operator--() final
-		{
-			value_.operator--();
-		}
-
-		virtual inline void operator+=(any_a<> const& other) final
-		{
-			value_.operator+=(other);
-		}
-
-		virtual inline void operator-=(any_a<> const& other) final
-		{
-			value_.operator-=(other);
-		}
-
-		virtual inline void operator*=(any_a<> const& other) final
-		{
-			value_.operator*=(other);
-		}
-
-		virtual inline void operator/=(any_a<> const& other) final
-		{
-			value_.operator/=(other);
-		}
-
-		virtual inline void operator%=(any_a<> const& other) final
-		{
-			value_.operator%=(other);
-		}
 
 		virtual inline any_a<> to_lake__(range_a<> const& range) const final
 		{ return value_.to_lake__(range); }
@@ -191,21 +146,16 @@ protected:
 		virtual inline symbol_a < > operator+(symbol_a < > const & symbol ) const final
 		{ return value_.operator+(symbol); }
 
-		___TTT___ value_;
 	};
 
-	template <typename ___TTT___, typename ___BHB___>
-	struct ___symbol_a_handle___<std::reference_wrapper<___TTT___>, ___BHB___>
-		: ___symbol_a_handle___<___TTT___&, ___BHB___>
+	template <typename ___TTT___, typename ___DHB___>
+	struct ___symbol_a_handle___<std::reference_wrapper<___TTT___>, ___DHB___>
+		: ___symbol_a_handle___<___TTT___&, ___DHB___>
 	{
 		inline ___symbol_a_handle___(std::reference_wrapper<___TTT___> ref)
-			: ___symbol_a_handle___<___TTT___&, ___BHB___>{ ref.get() }
+			: ___symbol_a_handle___<___TTT___&, ___DHB___>{ ref.get() }
 		{}
 	};
-
-	___SHARED___ ___shared___;
-
-	___SHARED___& handle_;
 
 private:
 	template <typename ___TTT___>
