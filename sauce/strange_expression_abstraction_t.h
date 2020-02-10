@@ -420,11 +420,11 @@ protected:
 			"class " + class_name);
 		int64_t const bases = _parent_expressions.size() - 1;
 		bool const root = bases < 1;
-		std::string root_name = class_name;
+		std::string base_name;
 		if (!root)
 		{
-			root_name = _class_root_name_(version);
-			river.write_string(" : public " + root_name + "<>");
+			base_name = _class_base_name_(version);
+			river.write_string(" : public " + base_name + "<>");
 		}
 		river.write_string("\n"
 			"{\n"
@@ -437,7 +437,7 @@ protected:
 		river.write_string("}; // class " + class_name +"\n\n");
 	}
 
-	inline std::string _class_root_name_(int64_t version) const
+	inline std::string _class_base_name_(int64_t version) const
 	{
 		auto const expression = _parent_expressions.at_index(0);
 		if (expression.type_() != expression_operate_t<>::type_())
