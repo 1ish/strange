@@ -432,7 +432,7 @@ protected:
 		_define_class_boilerplate_(root, class_name, version, indent, river);
 		auto const class_expression_terms = _class_expression_terms_();
 		_define_class_nonvirtual_members_(root, class_name, class_expression_terms, version, indent, river);
-		_define_class_handle_(root, class_name, class_expression_terms, version, indent, river);
+		_define_class_handle_(root, class_name, base_name, class_expression_terms, version, indent, river);
 		_define_class_implementation_(root, class_name, class_expression_terms, version, indent, river);
 		river.write_string("}; // class " + class_name +"\n\n");
 	}
@@ -725,28 +725,39 @@ protected:
 		river.write_string(name + arguments + "; }\n\n");
 	}
 
-	inline void _define_class_handle_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	inline void _define_class_handle_(bool root, std::string const& class_name, std::string const& base_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(
 			"protected:\n"
-			"\tstruct ___" + class_name + "_handle_base___\n"
-			"\t{\n"
-			"\t\t___" + class_name + "_handle_base___() = default;\n"
-			"\t\t___" + class_name + "_handle_base___(___" + class_name + "_handle_base___ const&) = default;\n"
-			"\t\t___" + class_name + "_handle_base___(___" + class_name + "_handle_base___&&) = default;\n"
-			"\t\t___" + class_name + "_handle_base___& operator=(___" + class_name + "_handle_base___ const&) = default;\n"
-			"\t\t___" + class_name + "_handle_base___& operator=(___" + class_name + "_handle_base___&&) = default;\n"
-			"\t\tvirtual ~___" + class_name + "_handle_base___() = default;\n"
-			"\t\tvirtual ___SHARED___ ___clone___() const = 0;\n"
-			"\t\tvirtual void ___weak___(___WEAK___ const& weak) const = 0;\n"
-			"\t\tvirtual inline operator bool() const = 0;\n"
-			"\t\tvirtual inline void operator++() = 0;\n"
-			"\t\tvirtual inline void operator--() = 0;\n"
-			"\t\tvirtual inline void operator+=(any_a<> const& other) = 0;\n"
-			"\t\tvirtual inline void operator-=(any_a<> const& other) = 0;\n"
-			"\t\tvirtual inline void operator*=(any_a<> const& other) = 0;\n"
-			"\t\tvirtual inline void operator/=(any_a<> const& other) = 0;\n"
-			"\t\tvirtual inline void operator%=(any_a<> const& other) = 0;\n");
+			"\tstruct ___" + class_name + "_handle_base___");
+		if (root)
+		{
+			river.write_string(
+				"\n"
+				"\t{\n"
+				"\t\t___" + class_name + "_handle_base___() = default;\n"
+				"\t\t___" + class_name + "_handle_base___(___" + class_name + "_handle_base___ const&) = default;\n"
+				"\t\t___" + class_name + "_handle_base___(___" + class_name + "_handle_base___&&) = default;\n"
+				"\t\t___" + class_name + "_handle_base___& operator=(___" + class_name + "_handle_base___ const&) = default;\n"
+				"\t\t___" + class_name + "_handle_base___& operator=(___" + class_name + "_handle_base___&&) = default;\n"
+				"\t\tvirtual ~___" + class_name + "_handle_base___() = default;\n"
+				"\t\tvirtual ___SHARED___ ___clone___() const = 0;\n"
+				"\t\tvirtual void ___weak___(___WEAK___ const& weak) const = 0;\n"
+				"\t\tvirtual inline operator bool() const = 0;\n"
+				"\t\tvirtual inline void operator++() = 0;\n"
+				"\t\tvirtual inline void operator--() = 0;\n"
+				"\t\tvirtual inline void operator+=(any_a<> const& other) = 0;\n"
+				"\t\tvirtual inline void operator-=(any_a<> const& other) = 0;\n"
+				"\t\tvirtual inline void operator*=(any_a<> const& other) = 0;\n"
+				"\t\tvirtual inline void operator/=(any_a<> const& other) = 0;\n"
+				"\t\tvirtual inline void operator%=(any_a<> const& other) = 0;\n");
+		}
+		else
+		{
+			river.write_string(
+				" : ___" + base_name + "_handle_base___\n"
+				"\t{\n");
+		}
 		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
 			&expression_abstraction_t::_define_class_pure_virtual_member_,
 			&expression_abstraction_t::_define_class_pure_virtual_native_member_);

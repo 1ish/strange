@@ -97,24 +97,8 @@ public:
 	{ assert(handle_); return read().operator+(symbol); }
 
 protected:
-	struct ___symbol_a_handle_base___
+	struct ___symbol_a_handle_base___ : ___any_a_handle_base___
 	{
-		___symbol_a_handle_base___() = default;
-		___symbol_a_handle_base___(___symbol_a_handle_base___ const&) = default;
-		___symbol_a_handle_base___(___symbol_a_handle_base___&&) = default;
-		___symbol_a_handle_base___& operator=(___symbol_a_handle_base___ const&) = default;
-		___symbol_a_handle_base___& operator=(___symbol_a_handle_base___&&) = default;
-		virtual ~___symbol_a_handle_base___() = default;
-		virtual ___SHARED___ ___clone___() const = 0;
-		virtual void ___weak___(___WEAK___ const& weak) const = 0;
-		virtual inline operator bool() const = 0;
-		virtual inline void operator++() = 0;
-		virtual inline void operator--() = 0;
-		virtual inline void operator+=(any_a<> const& other) = 0;
-		virtual inline void operator-=(any_a<> const& other) = 0;
-		virtual inline void operator*=(any_a<> const& other) = 0;
-		virtual inline void operator/=(any_a<> const& other) = 0;
-		virtual inline void operator%=(any_a<> const& other) = 0;
 		virtual inline any_a<> to_lake__(range_a<> const& range) const = 0;
 		virtual inline lake_int8_a<> to_lake_() const = 0;
 		virtual inline std :: string const & to_string() const = 0;
