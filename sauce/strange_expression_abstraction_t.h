@@ -243,7 +243,7 @@ protected:
 				? name_string.substr(1, name_string.length() - 2)
 				: name_string)
 			+ "_a";
-		if (define && _parent_expressions.size() > 1) //TODO
+		if (define)
 		{
 			_define_class_check_(true, // declare
 				class_name, version, river);
@@ -451,11 +451,8 @@ protected:
 		_define_class_handle_(root, class_name, base_name, class_expression_terms, version, indent, river);
 		_define_class_implementation_(root, class_name, base_name, class_expression_terms, version, indent, river);
 		river.write_string("}; // class " + class_name +"\n\n");
-		if (!root) //TODO
-		{
-			_define_class_check_(false, // declare
-				class_name, version, river);
-		}
+		_define_class_check_(false, // declare
+			class_name, version, river);
 	}
 
 	inline std::string _class_base_name_(int64_t version) const

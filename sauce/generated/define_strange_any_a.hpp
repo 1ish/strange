@@ -2,6 +2,9 @@
 namespace strange
 {
 
+template <typename ___TTT___, typename range_a = range_a<>, typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename kind_a = kind_a<>, typename inventory_a = inventory_a<>, typename unordered_herd_a = unordered_herd_a<>, typename shoal_a = shoal_a<>, typename unordered_shoal_a = unordered_shoal_a<>, typename number_data_uint64_a = number_data_uint64_a<> >
+inline bool check(any_a<range_a, symbol_a, cat_a, kind_a, inventory_a, unordered_herd_a, shoal_a, unordered_shoal_a, number_data_uint64_a> const& value) noexcept;
+
 template <typename range_a, typename symbol_a, typename cat_a, typename kind_a, typename inventory_a, typename unordered_herd_a, typename shoal_a, typename unordered_shoal_a, typename number_data_uint64_a>
 class any_a
 {
@@ -555,8 +558,8 @@ private:
 		return *handle_;
 	}
 
-	template <typename ___TTT___>
-	friend inline bool check(any_a<> const& value) noexcept;
+	template <typename ___TTT___, typename range_a, typename symbol_a, typename cat_a, typename kind_a, typename inventory_a, typename unordered_herd_a, typename shoal_a, typename unordered_shoal_a, typename number_data_uint64_a>
+	friend inline bool check(any_a<range_a, symbol_a, cat_a, kind_a, inventory_a, unordered_herd_a, shoal_a, unordered_shoal_a, number_data_uint64_a> const& value) noexcept;
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
@@ -684,6 +687,12 @@ private:
 	static bool const ___share___;
 	friend class ___any_a_share___;
 }; // class any_a
+
+template <typename ___TTT___, typename range_a, typename symbol_a, typename cat_a, typename kind_a, typename inventory_a, typename unordered_herd_a, typename shoal_a, typename unordered_shoal_a, typename number_data_uint64_a>
+inline bool check(any_a<range_a, symbol_a, cat_a, kind_a, inventory_a, unordered_herd_a, shoal_a, unordered_shoal_a, number_data_uint64_a> const& value) noexcept
+{
+	return ___TTT___::___check___(value.handle_);
+}
 
 template <typename range_a, typename symbol_a, typename cat_a, typename kind_a, typename inventory_a, typename unordered_herd_a, typename shoal_a, typename unordered_shoal_a, typename number_data_uint64_a>
 bool const any_a<range_a, symbol_a, cat_a, kind_a, inventory_a, unordered_herd_a, shoal_a, unordered_shoal_a, number_data_uint64_a>::___share___ = []()

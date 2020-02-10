@@ -48,12 +48,6 @@ inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor)
 
 // check/cast
 
-template <typename ___TTT___>
-inline bool check(any_a<> const& value) noexcept
-{
-	return ___TTT___::___check___(value.handle_);
-}
-
 template <typename ___TTT___, typename ___VVV___>
 inline bool check(___VVV___ const&) noexcept
 {
