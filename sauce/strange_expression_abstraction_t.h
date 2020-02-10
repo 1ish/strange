@@ -1016,46 +1016,55 @@ protected:
 			"\t\t}\n" + (root
 				? std::string{ "\t\treturn *handle_;\n" }
 				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___>(handle_);\n")) +
-			"\t}\n\n");
+			"\t}\n\n"
 
-		//TODO
+			"\ttemplate <typename ___TTT___>\n"
+			"\tfriend inline bool check(" + class_name + "<> const& value) noexcept;\n\n");
+
+		if (root)
+		{
+			river.write_string(
+				"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\tfriend inline ___TTT___ cast(" + class_name + "<> const& value);\n"
+				"#else\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\tfriend inline ___TTT___ cast(" + class_name + "<> const& value) noexcept;\n"
+				"#endif\n"
+				"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\tfriend inline ___TTT___ cast_ref(" + class_name + "<>& value);\n"
+				"#else\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\tfriend inline ___TTT___ cast_ref(" + class_name + "<>& value) noexcept;\n"
+				"#endif\n"
+				"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\tfriend inline ___TTT___ cast_dup(" + class_name + "<>& value);\n"
+				"#else\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\tfriend inline ___TTT___ cast_dup(" + class_name + "<>& value) noexcept;\n"
+				"#endif\n\n");
+		}
+
 		river.write_string(
-			"\ttemplate <typename ___TTT___>\n"
-			"\tfriend inline bool check(" + class_name + "<> const& value) noexcept;\n\n"
-
-			"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
-			"\ttemplate <typename ___TTT___>\n"
-			"\tfriend inline ___TTT___ cast(" + class_name + "<> const& value);\n"
-			"#else\n"
-			"\ttemplate <typename ___TTT___>\n"
-			"\tfriend inline ___TTT___ cast(" + class_name + "<> const& value) noexcept;\n"
-			"#endif\n"
-			"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
-			"\ttemplate <typename ___TTT___>\n"
-			"\tfriend inline ___TTT___ cast_ref(" + class_name + "<>& value);\n"
-			"#else\n"
-			"\ttemplate <typename ___TTT___>\n"
-			"\tfriend inline ___TTT___ cast_ref(" + class_name + "<>& value) noexcept;\n"
-			"#endif\n"
-			"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
-			"\ttemplate <typename ___TTT___>\n"
-			"\tfriend inline ___TTT___ cast_dup(" + class_name + "<>& value);\n"
-			"#else\n"
-			"\ttemplate <typename ___TTT___>\n"
-			"\tfriend inline ___TTT___ cast_dup(" + class_name + "<>& value) noexcept;\n"
-			"#endif\n\n"
-
 			"public:\n"
 			"\tstatic inline bool ___check___(___SHARED___ const& handle) noexcept\n"
-			"\t{\n"
-			"\t\treturn bool(handle);\n"
-			"\t}\n\n"
+			"\t{\n" + (root
+				? std::string{ "\t\treturn bool(handle);\n" }
+				: ("\t\treturn bool(std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n")) +
+			"\t}\n\n");
 
-			"\tinline bool is_ref() const\n"
-			"\t{\n"
-			"\t\treturn &handle_ != &___shared___;\n"
-			"\t}\n\n"
+		if (root)
+		{
+			river.write_string(
+				"\tinline bool is_ref() const\n"
+				"\t{\n"
+				"\t\treturn &handle_ != &___shared___;\n"
+				"\t}\n\n");
+		}
 
+		river.write_string(
 			"\tinline " + class_name + "() noexcept\n"
 			"\t\t: ___shared___{}\n"
 			"\t\t, handle_{ ___shared___ }\n"

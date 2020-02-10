@@ -204,37 +204,10 @@ private:
 	template <typename ___TTT___>
 	friend inline bool check(symbol_a<> const& value) noexcept;
 
-#ifdef STRANGE_CHECK_STATIC_CASTS
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast(symbol_a<> const& value);
-#else
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast(symbol_a<> const& value) noexcept;
-#endif
-#ifdef STRANGE_CHECK_STATIC_CASTS
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast_ref(symbol_a<>& value);
-#else
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast_ref(symbol_a<>& value) noexcept;
-#endif
-#ifdef STRANGE_CHECK_STATIC_CASTS
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast_dup(symbol_a<>& value);
-#else
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast_dup(symbol_a<>& value) noexcept;
-#endif
-
 public:
 	static inline bool ___check___(___SHARED___ const& handle) noexcept
 	{
-		return bool(handle);
-	}
-
-	inline bool is_ref() const
-	{
-		return &handle_ != &___shared___;
+		return bool(std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle));
 	}
 
 	inline symbol_a() noexcept
