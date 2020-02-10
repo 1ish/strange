@@ -210,86 +210,96 @@ public:
 		return bool(std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle));
 	}
 
-	inline symbol_a() noexcept
-		: ___shared___{}
-		, handle_{ ___shared___ }
-	{}
-
-	inline symbol_a(symbol_a const& other) noexcept
-		: ___shared___{ other.handle_ }
-		, handle_{ ___shared___ }
-	{}
-
 	static inline symbol_a val(symbol_a const& other) noexcept
 	{
 		return symbol_a{ other };
 	}
-
-	inline symbol_a(symbol_a& other, ___reference_tag___) noexcept
-		: ___shared___{ ___SHARED___{} }
-		, handle_{ other.handle_ }
-	{}
 
 	static inline symbol_a ref(symbol_a& other) noexcept
 	{
 		return symbol_a(other, ___reference_tag___{});
 	}
 
-	inline symbol_a(symbol_a& other, ___duplicate_tag___) noexcept
-		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
-		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
-	{}
-
 	static inline symbol_a dup(symbol_a& other) noexcept
 	{
 		return symbol_a(other, ___duplicate_tag___{});
 	}
 
-	inline symbol_a(symbol_a&& other) noexcept
-	: ___shared___{ other.handle_ }
-	, handle_{ ___shared___ }
+	inline symbol_a() = default;
+
+	inline symbol_a(symbol_a& other, ___reference_tag___) noexcept
+		: any_a(other, ___reference_tag___{})
 	{}
 
-	inline symbol_a& operator=(symbol_a const& other) noexcept
+	inline symbol_a(symbol_a& other, ___duplicate_tag___) noexcept
+		: any_a(other, ___duplicate_tag___{})
+	{}
+
+#ifdef STRANGE_CHECK_STATIC_CASTS
+	template <typename ___TTT___>
+	explicit inline symbol_a(std::shared_ptr<___TTT___> const& handle)
+		: any_a{ handle }
 	{
-		handle_ = other.handle_;
-		return *this;
+		if (handle && !std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle))
+		{
+			throw dis("symbol_a constructor failed to cast from base to symbol_a");
+		}
 	}
-
-	inline symbol_a& operator=(symbol_a&& other) noexcept
-	{
-		handle_ = other.handle_;
-		return *this;
-	}
-
-	virtual ~symbol_a() = default;
-
+#else
 	template <typename ___TTT___>
 	explicit inline symbol_a(std::shared_ptr<___TTT___> const& handle) noexcept
-		: ___shared___{ handle }
-		, handle_{ ___shared___ }
-	{}
+		: any_a{ handle }
+	{
+		assert(!handle || std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle));
+	}
+#endif
 
+#ifdef STRANGE_CHECK_STATIC_CASTS
+	template <typename ___TTT___>
+	explicit inline symbol_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___)
+		: any_a(handle, ___reference_tag___{})
+	{
+		if (handle && !std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle))
+		{
+			throw dis("symbol_a constructor failed to cast from base to symbol_a");
+		}
+	}
+#else
 	template <typename ___TTT___>
 	explicit inline symbol_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
-		: ___shared___{ ___SHARED___{} }
-		, handle_{ reinterpret_cast<___SHARED___&>(handle) }
-	{}
+		: any_a(handle, ___reference_tag___{})
+	{
+		assert(!handle || std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle));
+	}
+#endif
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<symbol_a, std::decay_t<___TTT___>>::value>>
 	explicit inline symbol_a(___TTT___ value) noexcept
-		: ___shared___{ std::make_shared<___symbol_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
-		, handle_{ ___shared___ }
+		: any_a{ std::make_shared<___symbol_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
 		handle_->___weak___(handle_);
 	}
 
+#ifdef STRANGE_CHECK_STATIC_CASTS
 	template <typename ___TTT___>
-	inline symbol_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+	inline symbol_a& operator=(std::shared_ptr<___TTT___> const& handle)
 	{
+		if (handle && !std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle))
+		{
+			throw dis("symbol_a assignment failed to cast from base to symbol_a");
+		}
 		handle_ = handle;
 		return *this;
 	}
+#else
+	template <typename ___TTT___>
+	inline symbol_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
+	{
+		assert(!handle || std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle));
+		handle_ = handle;
+		return *this;
+	}
+#endif
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<symbol_a, std::decay_t<___TTT___>>::value>>
 	inline symbol_a& operator=(___TTT___ value) noexcept
@@ -304,11 +314,17 @@ private:
 	friend class ___symbol_a_share___;
 }; // class symbol_a
 
+template <typename ___TTT___>
+inline bool check(symbol_a<> const& value) noexcept
+{
+	return ___TTT___::___check___(value.handle_);
+}
+
 template <typename _1_>
-bool const symbol_a<_1_>>::___share___ = []()
+bool const symbol_a<_1_>::___share___ = []()
 {
 	auto& shoal = shared();
-	reflection<symbol_a<_1_>>>::share(shoal);
+	reflection<symbol_a<_1_>>::share(shoal);
 	return shoal.something();
 }();
 

@@ -374,7 +374,7 @@ protected:
 			river.write_string("<");
 			if (_dimension_names.empty())
 			{
-				river.write_string("_1_>");
+				river.write_string("_1_");
 			}
 			else
 			{
@@ -433,8 +433,12 @@ protected:
 		auto const class_expression_terms = _class_expression_terms_();
 		_define_class_nonvirtual_members_(root, class_name, class_expression_terms, version, indent, river);
 		_define_class_handle_(root, class_name, base_name, class_expression_terms, version, indent, river);
-		_define_class_implementation_(root, class_name, class_expression_terms, version, indent, river);
+		_define_class_implementation_(root, class_name, base_name, class_expression_terms, version, indent, river);
 		river.write_string("}; // class " + class_name +"\n\n");
+		if (!root) //TODO
+		{
+			_define_class_check_(class_name, version, river);
+		}
 	}
 
 	inline std::string _class_base_name_(int64_t version) const
@@ -998,7 +1002,7 @@ protected:
 		river.write_string("value_." + name + arguments + "; }\n\n");
 	}
 
-	inline void _define_class_implementation_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	inline void _define_class_implementation_(bool root, std::string const& class_name, std::string const& base_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(
 			"\tinline ___" + class_name + "_handle_base___ const& read() const noexcept\n"
@@ -1065,98 +1069,200 @@ protected:
 		}
 
 		river.write_string(
-			"\tinline " + class_name + "() noexcept\n"
-			"\t\t: ___shared___{}\n"
-			"\t\t, handle_{ ___shared___ }\n"
-			"\t{}\n\n"
-
-			"\tinline " + class_name + "(" + class_name + " const& other) noexcept\n"
-			"\t\t: ___shared___{ other.handle_ }\n"
-			"\t\t, handle_{ ___shared___ }\n"
-			"\t{}\n\n"
-
 			"\tstatic inline " + class_name + " val(" + class_name + " const& other) noexcept\n"
 			"\t{\n"
 			"\t\treturn " + class_name + "{ other };\n"
 			"\t}\n\n"
-
-			"\tinline " + class_name + "(" + class_name + "& other, ___reference_tag___) noexcept\n"
-			"\t\t: ___shared___{ ___SHARED___{} }\n"
-			"\t\t, handle_{ other.handle_ }\n"
-			"\t{}\n\n"
 
 			"\tstatic inline " + class_name + " ref(" + class_name + "& other) noexcept\n"
 			"\t{\n"
 			"\t\treturn " + class_name + "(other, ___reference_tag___{});\n"
 			"\t}\n\n"
 
-			"\tinline " + class_name + "(" + class_name + "& other, ___duplicate_tag___) noexcept\n"
-			"\t\t: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }\n"
-			"\t\t, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }\n"
-			"\t{}\n\n"
-
 			"\tstatic inline " + class_name + " dup(" + class_name + "& other) noexcept\n"
 			"\t{\n"
 			"\t\treturn " + class_name + "(other, ___duplicate_tag___{});\n"
-			"\t}\n\n"
+			"\t}\n\n");
 
-			"\tinline " + class_name + "(" + class_name + "&& other) noexcept\n"
-			"\t: ___shared___{ other.handle_ }\n"
-			"\t, handle_{ ___shared___ }\n"
-			"\t{}\n\n"
+		if (root)
+		{
+			river.write_string(
+				"\tinline " + class_name + "() noexcept\n"
+				"\t\t: ___shared___{}\n"
+				"\t\t, handle_{ ___shared___ }\n"
+				"\t{}\n\n"
 
-			"\tinline " + class_name + "& operator=(" + class_name + " const& other) noexcept\n"
-			"\t{\n"
-			"\t\thandle_ = other.handle_;\n"
-			"\t\treturn *this;\n"
-			"\t}\n\n"
+				"\tinline " + class_name + "(" + class_name + " const& other) noexcept\n"
+				"\t\t: ___shared___{ other.handle_ }\n"
+				"\t\t, handle_{ ___shared___ }\n"
+				"\t{}\n\n"
 
-			"\tinline " + class_name + "& operator=(" + class_name + "&& other) noexcept\n"
-			"\t{\n"
-			"\t\thandle_ = other.handle_;\n"
-			"\t\treturn *this;\n"
-			"\t}\n\n"
+				"\tinline " + class_name + "(" + class_name + "& other, ___reference_tag___) noexcept\n"
+				"\t\t: ___shared___{ ___SHARED___{} }\n"
+				"\t\t, handle_{ other.handle_ }\n"
+				"\t{}\n\n"
 
-			"\tvirtual ~" + class_name + "() = default;\n\n"
+				"\tinline " + class_name + "(" + class_name + "& other, ___duplicate_tag___) noexcept\n"
+				"\t\t: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }\n"
+				"\t\t, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }\n"
+				"\t{}\n\n"
 
-			"\ttemplate <typename ___TTT___>\n"
-			"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___> const& handle) noexcept\n"
-			"\t\t: ___shared___{ handle }\n"
-			"\t\t, handle_{ ___shared___ }\n"
-			"\t{}\n\n"
+				"\tinline " + class_name + "(" + class_name + "&& other) noexcept\n"
+				"\t: ___shared___{ other.handle_ }\n"
+				"\t, handle_{ ___shared___ }\n"
+				"\t{}\n\n"
 
-			"\ttemplate <typename ___TTT___>\n"
-			"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept\n"
-			"\t\t: ___shared___{ ___SHARED___{} }\n"
-			"\t\t, handle_{ reinterpret_cast<___SHARED___&>(handle) }\n"
-			"\t{}\n\n"
+				"\tinline " + class_name + "& operator=(" + class_name + " const& other) noexcept\n"
+				"\t{\n"
+				"\t\thandle_ = other.handle_;\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n"
 
-			"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
-			"\texplicit inline " + class_name + "(___TTT___ value) noexcept\n"
-			"\t\t: ___shared___{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }\n"
-			"\t\t, handle_{ ___shared___ }\n"
-			"\t{\n"
-			"\t\thandle_->___weak___(handle_);\n"
-			"\t}\n\n"
+				"\tinline " + class_name + "& operator=(" + class_name + "&& other) noexcept\n"
+				"\t{\n"
+				"\t\thandle_ = other.handle_;\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n"
 
-			"\ttemplate <typename ___TTT___>\n"
-			"\tinline " + class_name + "& operator=(std::shared_ptr<___TTT___> const& handle) noexcept\n"
-			"\t{\n"
-			"\t\thandle_ = handle;\n"
-			"\t\treturn *this;\n"
-			"\t}\n\n"
+				"\tvirtual ~" + class_name + "() = default;\n\n"
 
-			"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
-			"\tinline " + class_name + "& operator=(___TTT___ value) noexcept\n"
-			"\t{\n"
-			"\t\t" + class_name + " temp{ std::move(value) };\n"
-			"\t\tstd::swap(temp.handle_, handle_);\n"
-			"\t\treturn *this;\n"
-			"\t}\n\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___> const& handle) noexcept\n"
+				"\t\t: ___shared___{ handle }\n"
+				"\t\t, handle_{ ___shared___ }\n"
+				"\t{}\n\n"
 
+				"\ttemplate <typename ___TTT___>\n"
+				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept\n"
+				"\t\t: ___shared___{ ___SHARED___{} }\n"
+				"\t\t, handle_{ reinterpret_cast<___SHARED___&>(handle) }\n"
+				"\t{}\n\n"
+
+				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
+				"\texplicit inline " + class_name + "(___TTT___ value) noexcept\n"
+				"\t\t: ___shared___{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }\n"
+				"\t\t, handle_{ ___shared___ }\n"
+				"\t{\n"
+				"\t\thandle_->___weak___(handle_);\n"
+				"\t}\n\n"
+
+				"\ttemplate <typename ___TTT___>\n"
+				"\tinline " + class_name + "& operator=(std::shared_ptr<___TTT___> const& handle) noexcept\n"
+				"\t{\n"
+				"\t\thandle_ = handle;\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n"
+
+				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
+				"\tinline " + class_name + "& operator=(___TTT___ value) noexcept\n"
+				"\t{\n"
+				"\t\t" + class_name + " temp{ std::move(value) };\n"
+				"\t\tstd::swap(temp.handle_, handle_);\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n");
+		}
+		else
+		{
+			river.write_string(
+				"\tinline " + class_name + "() = default;\n\n"
+
+				"\tinline " + class_name + "(" + class_name + "& other, ___reference_tag___) noexcept\n"
+				"\t\t: " + base_name + "(other, ___reference_tag___{})\n"
+				"\t{}\n\n"
+
+				"\tinline " + class_name + "(" + class_name + "& other, ___duplicate_tag___) noexcept\n"
+				"\t\t: " + base_name + "(other, ___duplicate_tag___{})\n"
+				"\t{}\n\n"
+
+				"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___> const& handle)\n"
+				"\t\t: " + base_name + "{ handle }\n"
+				"\t{\n"
+				"\t\tif (handle && !std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle))\n"
+				"\t\t{\n"
+				"\t\t\tthrow dis(\"" + class_name + " constructor failed to cast from base to " + class_name + "\");\n"
+				"\t\t}\n"
+				"\t}\n"
+				"#else\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___> const& handle) noexcept\n"
+				"\t\t: " + base_name + "{ handle }\n"
+				"\t{\n"
+				"\t\tassert(!handle || std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n"
+				"\t}\n"
+				"#endif\n\n"
+
+				"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___>& handle, ___reference_tag___)\n"
+				"\t\t: " + base_name + "(handle, ___reference_tag___{})\n"
+				"\t{\n"
+				"\t\tif (handle && !std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle))\n"
+				"\t\t{\n"
+				"\t\t\tthrow dis(\"" + class_name + " constructor failed to cast from base to " + class_name + "\");\n"
+				"\t\t}\n"
+				"\t}\n"
+				"#else\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept\n"
+				"\t\t: " + base_name + "(handle, ___reference_tag___{})\n"
+				"\t{\n"
+				"\t\tassert(!handle || std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n"
+				"\t}\n"
+				"#endif\n\n"
+
+				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
+				"\texplicit inline " + class_name + "(___TTT___ value) noexcept\n"
+				"\t\t: " + base_name + "{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }\n"
+				"\t{\n"
+				"\t\thandle_->___weak___(handle_);\n"
+				"\t}\n\n"
+
+				"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\tinline " + class_name + "& operator=(std::shared_ptr<___TTT___> const& handle)\n"
+				"\t{\n"
+				"\t\tif (handle && !std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle))\n"
+				"\t\t{\n"
+				"\t\t\tthrow dis(\"" + class_name + " assignment failed to cast from base to " + class_name + "\");\n"
+				"\t\t}\n"
+				"\t\thandle_ = handle;\n"
+				"\t\treturn *this;\n"
+				"\t}\n"
+				"#else\n"
+				"\ttemplate <typename ___TTT___>\n"
+				"\tinline " + class_name + "& operator=(std::shared_ptr<___TTT___> const& handle) noexcept\n"
+				"\t{\n"
+				"\t\tassert(!handle || std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n"
+				"\t\thandle_ = handle;\n"
+				"\t\treturn *this;\n"
+				"\t}\n"
+				"#endif\n\n"
+
+				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
+				"\tinline " + class_name + "& operator=(___TTT___ value) noexcept\n"
+				"\t{\n"
+				"\t\t" + class_name + " temp{ std::move(value) };\n"
+				"\t\tstd::swap(temp.handle_, handle_);\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n");
+		}
+
+		river.write_string(
 			"private:\n"
 			"\tstatic bool const ___share___;\n"
 			"\tfriend class ___" + class_name + "_share___;\n");
+	}
+
+	inline void _define_class_check_(std::string const& class_name, int64_t version, river_a<>& river) const
+	{
+		river.write_string(
+			"template <typename ___TTT___>\n"
+			"inline bool check(" + class_name + "<> const& value) noexcept\n"
+			"{\n"
+			"\treturn ___TTT___::___check___(value.handle_);\n"
+			"}\n\n");
 	}
 
 	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const
@@ -1173,7 +1279,7 @@ protected:
 			"\treturn shoal.something();\n"
 			"}();\n\n");
 	}
-	
+
 	inline void _parse_member_definition_(int64_t version, expression_a<> const& expression, bool extraction, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
 	{
 		if (extraction)
