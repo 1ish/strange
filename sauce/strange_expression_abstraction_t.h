@@ -237,9 +237,19 @@ protected:
 		river.write_string("\n");
 		flock_a<> split_scope = _split_scope_();
 		auto const name = _namespace_open_(split_scope, river);
+		std::string const& name_string = name.to_string();
+		std::string const class_name =
+			((name.first_character() == '<' && name.last_character() == '>')
+				? name_string.substr(1, name_string.length() - 2)
+				: name_string)
+			+ "_a";
+		if (define && _parent_expressions.size() > 1) //TODO
+		{
+			_define_class_check_(true, // declare
+				class_name, version, river);
+		}
 		_declare_or_define_template_(version, indent, river, declare, define);
-		std::string class_name;
-		_declare_or_define_class_(name, class_name, version, indent, river, declare, define);
+		_declare_or_define_class_(class_name, version, indent, river, declare, define);
 		if (define)
 		{
 			_define_class_share_(class_name, version, river);
@@ -290,11 +300,15 @@ protected:
 		}
 	}
 
-	inline void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool preface = false) const
 	{
 		if (declare)
 		{
 			river.write_string("template <");
+			if (preface)
+			{
+				river.write_string("typename ___TTT___, ");
+			}
 			if (_dimension_names.empty())
 			{
 				river.write_string("typename _1_ = void");
@@ -347,6 +361,10 @@ protected:
 		else if (define)
 		{
 			river.write_string("template <");
+			if (preface)
+			{
+				river.write_string("typename ___TTT___, ");
+			}
 			if (_dimension_names.empty())
 			{
 				river.write_string("typename _1_");
@@ -372,6 +390,10 @@ protected:
 		else
 		{
 			river.write_string("<");
+			if (preface)
+			{
+				river.write_string("___TTT___, ");
+			}
 			if (_dimension_names.empty())
 			{
 				river.write_string("_1_");
@@ -396,14 +418,8 @@ protected:
 		}
 	}
 
-	inline void _declare_or_define_class_(symbol_a<> const& name, std::string& class_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _declare_or_define_class_(std::string const& class_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
-		std::string const& name_string = name.to_string();
-		class_name =
-			((name.first_character() == '<' && name.last_character() == '>')
-				? name_string.substr(1, name_string.length() - 2)
-				: name_string)
-			+ "_a";
 		if (declare)
 		{
 			river.write_string("class " + class_name + ";\n\n");
@@ -437,7 +453,8 @@ protected:
 		river.write_string("}; // class " + class_name +"\n\n");
 		if (!root) //TODO
 		{
-			_define_class_check_(class_name, version, river);
+			_define_class_check_(false, // declare
+				class_name, version, river);
 		}
 	}
 
@@ -1020,10 +1037,15 @@ protected:
 			"\t\t}\n" + (root
 				? std::string{ "\t\treturn *handle_;\n" }
 				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___>(handle_);\n")) +
-			"\t}\n\n"
+			"\t}\n\n");
 
-			"\ttemplate <typename ___TTT___>\n"
-			"\tfriend inline bool check(" + class_name + "<> const& value) noexcept;\n\n");
+		river.write_string(
+			"\t");
+		_declare_or_define_template_(version, 0, river, false, true, true);
+		river.write_string(
+			"\tfriend inline bool check(" + class_name);
+		_declare_or_define_template_(version, 0, river, false, false);
+		river.write_string(" const& value) noexcept;\n\n");
 
 		if (root)
 		{
@@ -1255,14 +1277,24 @@ protected:
 			"\tfriend class ___" + class_name + "_share___;\n");
 	}
 
-	inline void _define_class_check_(std::string const& class_name, int64_t version, river_a<>& river) const
+	inline void _define_class_check_(bool declare, std::string const& class_name, int64_t version, river_a<>& river) const
 	{
+		_declare_or_define_template_(version, 0, river, declare, !declare, true);
 		river.write_string(
-			"template <typename ___TTT___>\n"
-			"inline bool check(" + class_name + "<> const& value) noexcept\n"
-			"{\n"
-			"\treturn ___TTT___::___check___(value.handle_);\n"
-			"}\n\n");
+			"inline bool check(" + class_name);
+		_declare_or_define_template_(version, 0, river, false, false);
+		river.write_string(" const& value) noexcept");
+		if (declare)
+		{
+			river.write_string(";\n\n");
+		}
+		else
+		{
+			river.write_string("\n"
+				"{\n"
+				"\treturn ___TTT___::___check___(value.handle_);\n"
+				"}\n\n");
+		}
 	}
 
 	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const

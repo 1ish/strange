@@ -2,6 +2,9 @@
 namespace strange
 {
 
+template <typename ___TTT___, typename _1_ = void>
+inline bool check(symbol_a<_1_> const& value) noexcept;
+
 template <typename _1_>
 class symbol_a : public any_a<>
 {
@@ -201,8 +204,8 @@ private:
 		return *std::static_pointer_cast<___symbol_a_handle_base___>(handle_);
 	}
 
-	template <typename ___TTT___>
-	friend inline bool check(symbol_a<> const& value) noexcept;
+	template <typename ___TTT___, typename _1_>
+	friend inline bool check(symbol_a<_1_> const& value) noexcept;
 
 public:
 	static inline bool ___check___(___SHARED___ const& handle) noexcept
@@ -314,8 +317,8 @@ private:
 	friend class ___symbol_a_share___;
 }; // class symbol_a
 
-template <typename ___TTT___>
-inline bool check(symbol_a<> const& value) noexcept
+template <typename ___TTT___, typename _1_>
+inline bool check(symbol_a<_1_> const& value) noexcept
 {
 	return ___TTT___::___check___(value.handle_);
 }
