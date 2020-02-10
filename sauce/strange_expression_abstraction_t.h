@@ -246,6 +246,7 @@ protected:
 		if (define)
 		{
 			_define_class_check_(true, // declare
+				false, // friend
 				class_name, version, river);
 		}
 		_declare_or_define_template_(version, indent, river, declare, define);
@@ -452,6 +453,7 @@ protected:
 		_define_class_implementation_(root, class_name, base_name, class_expression_terms, version, indent, river);
 		river.write_string("}; // class " + class_name +"\n\n");
 		_define_class_check_(false, // declare
+			false, // friend
 			class_name, version, river);
 	}
 
@@ -1036,13 +1038,9 @@ protected:
 				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___>(handle_);\n")) +
 			"\t}\n\n");
 
-		river.write_string(
-			"\t");
-		_declare_or_define_template_(version, 0, river, false, true, true);
-		river.write_string(
-			"\tfriend inline bool check(" + class_name);
-		_declare_or_define_template_(version, 0, river, false, false);
-		river.write_string(" const& value) noexcept;\n\n");
+		_define_class_check_(true, // declare
+			true, // friend
+			class_name, version, river);
 
 		if (root)
 		{
@@ -1274,11 +1272,18 @@ protected:
 			"\tfriend class ___" + class_name + "_share___;\n");
 	}
 
-	inline void _define_class_check_(bool declare, std::string const& class_name, int64_t version, river_a<>& river) const
+	inline void _define_class_check_(bool declare, bool mate, std::string const& class_name, int64_t version, river_a<>& river) const
 	{
-		_declare_or_define_template_(version, 0, river, declare, !declare, true);
-		river.write_string(
-			"inline bool check(" + class_name);
+		if (mate)
+		{
+			river.write_string("\t");
+		}
+		_declare_or_define_template_(version, 0, river, declare && !mate, !declare || mate, true);
+		if (mate)
+		{
+			river.write_string("\tfriend ");
+		}
+		river.write_string("inline bool check(" + class_name);
 		_declare_or_define_template_(version, 0, river, false, false);
 		river.write_string(" const& value) noexcept");
 		if (declare)
