@@ -117,8 +117,8 @@ namespace strange {
      { assert(handle_); read().generate(version, indent, river ); }
      inline any_a < > generate_cpp__ ( range_a < > const & range ) const
      { assert(handle_); return read().generate_cpp__(range ); }
-     inline any_a < > generate_cpp_ ( number_data_int64_a const & version , number_data_int64_a const & indent , river_a < > & river , any_a < > const & def , any_a < > const & type = no ( ) ) const
-     { assert(handle_); return read().generate_cpp_(version, indent, river, def, type ); }
+     inline any_a < > generate_cpp_ ( number_data_int64_a const & version , number_data_int64_a const & indent , river_a < > & river , any_a < > const & declare , any_a < > const & define , any_a < > const & type = no ( ) ) const
+     { assert(handle_); return read().generate_cpp_(version, indent, river, declare, define, type ); }
      inline void generate_cpp ( int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const
      { assert(handle_); read().generate_cpp(version, indent, river, declare, define, type ); }
     
@@ -141,7 +141,7 @@ namespace strange {
       virtual inline any_a < > generate_ ( number_data_int64_a const & version , number_data_int64_a const & indent , river_a < > & river ) const = 0;
       virtual inline void generate ( int64_t version , int64_t indent , river_a < > & river ) const = 0;
       virtual inline any_a < > generate_cpp__ ( range_a < > const & range ) const = 0;
-      virtual inline any_a < > generate_cpp_ ( number_data_int64_a const & version , number_data_int64_a const & indent , river_a < > & river , any_a < > const & def , any_a < > const & type = no ( ) ) const = 0;
+      virtual inline any_a < > generate_cpp_ ( number_data_int64_a const & version , number_data_int64_a const & indent , river_a < > & river , any_a < > const & declare , any_a < > const & define , any_a < > const & type = no ( ) ) const = 0;
       virtual inline void generate_cpp ( int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const = 0;
     	};
     
@@ -195,8 +195,8 @@ namespace strange {
       { value_.generate(version, indent, river ); }
       virtual inline any_a < > generate_cpp__ ( range_a < > const & range ) const
       { return value_.generate_cpp__(range ); }
-      virtual inline any_a < > generate_cpp_ ( number_data_int64_a const & version , number_data_int64_a const & indent , river_a < > & river , any_a < > const & def , any_a < > const & type = no ( ) ) const
-      { return value_.generate_cpp_(version, indent, river, def, type ); }
+      virtual inline any_a < > generate_cpp_ ( number_data_int64_a const & version , number_data_int64_a const & indent , river_a < > & river , any_a < > const & declare , any_a < > const & define , any_a < > const & type = no ( ) ) const
+      { return value_.generate_cpp_(version, indent, river, declare, define, type ); }
       virtual inline void generate_cpp ( int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const
       { value_.generate_cpp(version, indent, river, declare, define, type ); }
     	};

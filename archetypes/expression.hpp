@@ -42,7 +42,7 @@ public:
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const;
 
 	inline any_a<> generate_cpp__(range_a<> const& range) const;
-	inline any_a<> generate_cpp_(number_data_int64_a const& version, number_data_int64_a const& indent, river_a<>& river, any_a<> const& def, any_a<> const& type = no()) const;
+	inline any_a<> generate_cpp_(number_data_int64_a const& version, number_data_int64_a const& indent, river_a<>& river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = no()) const;
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const;
 };
 
