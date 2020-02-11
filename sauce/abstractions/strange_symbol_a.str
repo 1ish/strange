@@ -4,8 +4,7 @@ false &&
 		(	// no dimensions
 			(	// parent
 				$$<>[],
-				{
-					// symbol
+				{	// symbol
 					to_lake_ :# (<lake_int8>),
 
 					to_string : "std::string const& () const",

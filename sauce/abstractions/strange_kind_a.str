@@ -1,0 +1,22 @@
+false &&
+{	strange :
+	{	<kind> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<cat>[],
+				{	// kind
+					aspects_ :# (<flock>),
+
+					fixed_ :# (<>),
+					fixed : "bool () const",
+
+					reference_ :# (<>),
+					reference : "bool () const",
+
+					optional_ :# (<>),
+					optional : "bool () const",
+				}
+			)
+		)
+	}
+}

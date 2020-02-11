@@ -31,7 +31,6 @@ public:
 	inline any_a<> optional__(range_a<> const& _) const;
 	inline any_a<> optional_() const;
 	inline bool optional() const;
-
 };
 
 } // namespace strange
