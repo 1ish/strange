@@ -1,0 +1,16 @@
+false &&
+{	strange :
+	{	<misunderstanding> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<>[],
+				{	// misunderstanding
+					to_string : "std::string () const",
+
+					add_ :# (misunderstanding :<misunderstanding>#, <misunderstanding>),
+					'operator+' : "misunderstanding_a<> (misunderstanding_a<> const& misunderstanding) const",
+				}
+			)
+		)
+	}
+}

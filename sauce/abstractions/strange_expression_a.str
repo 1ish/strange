@@ -22,7 +22,6 @@ false &&
 
 					generate_cpp_ :# (version :<number_data_int64>#, indent :<number_data_int64>#, river :<river>&, declare :<>#, define :<>#, type :<># false, <>),
 					generate_cpp : "void (int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const",
-					//TODO native & non-native defaults
 				}
 			)
 		)
