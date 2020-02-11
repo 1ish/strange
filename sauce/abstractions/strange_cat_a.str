@@ -1,0 +1,30 @@
+false &&
+{	strange :
+	{	<cat> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<symbol>[],
+				{
+					// cat
+					symbolic_ :# (<>),
+					symbolic : "bool () const",
+
+					order_ :# (<number_data_int64_a>),
+					order : "int64_t () const",
+
+					name_ :# (<symbol>),
+					//TODO name : "std::string () const",
+
+					dimensions_ :# (<flock>),
+
+					parameters_ :# (<flock>),
+
+					result_ :# (<cat>),
+
+					code_ :# (<lake_int8_a>),
+					code : "std::string () const",
+				}
+			)
+		)
+	}
+}
