@@ -209,11 +209,14 @@ public:
 			auto name = cast<symbol_a<>>(*nit++);
 			auto any_kind = *kit++;
 			auto expression = cast<expression_a<>>(*eit++);
+			bool optional = false;
 			if (check<expression_a<>>(any_kind))
 			{
+				auto const exp = cast<expression_a<>>(any_kind);
 				river = river_t<>::create();
-				cast<expression_a<>>(any_kind).generate_cpp(version, 0, river, false, false, true);
+				exp.generate_cpp(version, 0, river, false, false, true);
 				parameters += river.to_string().substr(1);
+				optional = exp.terms_().at_index(8);
 			}
 			else
 			{
@@ -222,7 +225,14 @@ public:
 					throw dis(_token.report() + "strange::expression_mutation::abstraction non-kind parameter kind");
 				}
 				auto const kind = cast<kind_a<>>(any_kind);
-				parameters += kind.name_().to_string() + "_a<> ";
+				if (kind.name_().to_string().empty())
+				{
+					parameters += "any_a<> ";
+				}
+				else
+				{
+					parameters += kind.name_().to_string() + "_a<> ";
+				}
 				if (kind.fixed())
 				{
 					parameters += "const& ";
@@ -231,9 +241,17 @@ public:
 				{
 					parameters += "& ";
 				}
+				optional = kind.optional();
 			}
 			parameters += name.to_string();
 			arguments += name.to_string();
+			if (optional)
+			{
+				parameters += " =";
+				river = river_t<>::create();
+				expression.generate_cpp(version, 0, river, false, false);
+				parameters += river.to_string();
+			}
 		}
 		parameters += ")";
 		arguments += ")";

@@ -1,0 +1,30 @@
+false &&
+{	strange :
+	{	<expression> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<operation>[],
+				{	// expression
+					recreate_ :# (<expression>),
+					recreated : "void (expression_a const& expression) const",
+
+					literal_ :# (<>),
+					literal : "bool () const",
+
+					evaluate_ :# (<>),
+
+					token_ :# (<token>),
+
+					terms_ :# (<flock>),
+
+					generate_ :# (version :<number_data_int64>#, indent :<number_data_int64>#, river :<river>&, <>),
+					generate : "void (int64_t version, int64_t indent, river_a<>& river) const",
+
+					generate_cpp_ :# (version :<number_data_int64>#, indent :<number_data_int64>#, river :<river>&, declare :<>#, define :<>#, type :<># false, <>),
+					generate_cpp : "void (int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const",
+					//TODO native & non-native defaults
+				}
+			)
+		)
+	}
+}

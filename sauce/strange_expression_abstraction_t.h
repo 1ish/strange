@@ -1333,6 +1333,7 @@ protected:
 		auto tokenizer = tokenizer_t<>::create_(river_t<>::create(value));
 		int64_t toke = 1;
 		std::string argument;
+		bool optional = false;
 		for (auto const& any_token : tokenizer)
 		{
 			if (!check<token_a<>>(any_token))
@@ -1366,10 +1367,15 @@ protected:
 					parameters += ", ";
 					arguments += argument + ", ";
 				}
+				else if (token.tag() == "punctuation" && token.symbol() == "=")
+				{
+					parameters += "= ";
+					optional = true;
+				}
 				else
 				{
 					parameters += token.symbol() + " ";
-					if (token.tag() == "name")
+					if (!optional && token.tag() == "name")
 					{
 						argument = token.symbol();
 					}
