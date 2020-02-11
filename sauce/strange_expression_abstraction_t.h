@@ -352,7 +352,7 @@ protected:
 					auto const expression = *eit++;
 					if (kind.optional())
 					{
-						river.write_string(" = ");
+						river.write_string(" =");
 						cast<expression_a<>>(expression).generate_cpp(version, indent, river, false, false, true); // declare, define, type
 					}
 				}
