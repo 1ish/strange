@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename ___TTT___, typename _1_ = void>
+template <typename ___TTT___, typename _1_>
 inline bool check(brook_a<_1_> const& value) noexcept;
 
 template <typename _1_>

@@ -1,7 +1,8 @@
 false &&
 {	strange :
 	{	<brook> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#_1_ :<<>>#,
 			(	// parent
 				$$<inventory>[],
 				{	// brook

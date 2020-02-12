@@ -1,0 +1,15 @@
+false &&
+{	strange :
+	{	<lake> :: abstraction
+		(	// dimensions
+			#_1_ :<<>>#,
+			(	// parent
+				$$<inventory>[],
+				{	// lake
+					extract_vector : "std::vector<_1_> const& () const",
+					mutate_vector : "std::vector<_1_>& ()",
+				}
+			)
+		)
+	}
+}
