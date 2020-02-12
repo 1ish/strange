@@ -1,0 +1,14 @@
+false &&
+{	strange :
+	{	<ordered_herd> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<herd>[],
+				{	// ordered herd
+					extract_set : "std::set<any_a<>> const& () const",
+					mutate_set : "std::set<any_a<>>& ()",
+				}
+			)
+		)
+	}
+}
