@@ -1,0 +1,15 @@
+false &&
+{	strange :
+	{	<number_data> :: abstraction
+		(	// dimensions
+			#_1_ :<<>>#,
+			(	// parent
+				$$<number>[],
+				{	// number data
+					extract_primitive : "_1_ const& () const",
+					mutate_primitive : "_1_& ()",
+				}
+			)
+		)
+	}
+}
