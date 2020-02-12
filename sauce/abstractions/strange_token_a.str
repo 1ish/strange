@@ -1,0 +1,35 @@
+false &&
+{	strange :
+	{	<token> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<>[],
+				{	// token
+					filename_ :# (<symbol>),
+					filename : "std::string () const",
+
+					line_ :# (<number_data_int64>),
+					line : "int64_t () const",
+
+					position_ :# (<number_data_int64>),
+					position : "int64_t () const",
+
+					tag_ :# (<symbol>),
+					tag : "std::string () const",
+
+					symbol_ :# (<symbol>),
+					symbol : "std::string () const",
+
+					literal_ :# (<>),
+					//TODO literal : "bool () const",
+
+					precedence_ :# (<number_data_int64>),
+					precedence : "int64_t () const",
+
+					report_ :# (<misunderstanding>),
+					report : "std::string () const",
+				}
+			)
+		)
+	}
+}
