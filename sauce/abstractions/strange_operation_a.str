@@ -1,0 +1,19 @@
+false &&
+{	strange :
+	{	<operation> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<>[],
+				{	// operation
+					pure_ :# (<>),
+					pure : "bool () const",
+
+					aspects : "void (unordered_shoal_a<> const& shoal)",
+					assign : "void (operation_a const& operation)",
+
+					names_ :# (<flock>),
+				}
+			)
+		)
+	}
+}
