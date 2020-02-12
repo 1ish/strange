@@ -37,3 +37,4 @@ std::ostream& std__cout = discard;
 #include "strange_parser_code_taste.h"
 #include "strange_code_generate.h"
 #include "strange_code_generate_cpp.h"
+#include "strange_collections_generate_cpp.h"

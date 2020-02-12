@@ -1,0 +1,14 @@
+false &&
+{	strange :
+	{	<brook> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<inventory>[],
+				{	// brook
+					extract_deque : "std::deque<_1_> const& () const",
+					mutate_deque : "std::deque<_1_>& ()",
+				}
+			)
+		)
+	}
+}
