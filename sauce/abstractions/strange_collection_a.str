@@ -1,0 +1,61 @@
+false &&
+{	strange :
+	{	<collection> :: abstraction
+		(	// dimensions
+			#number_data_int64_a :<<>># <number_data_int64>,
+			(	// parent
+				$$<range>[],
+				{	// collection
+					has_ :# (key :#, <>),
+					has : "bool (any_a<> const& key) const",
+
+					at_ :# (key :#, <>),
+
+					update_ := (key :#, value :# false, <>),
+					update : "void (any_a<> const& key, any_a<> const& value)",
+
+					insert_ := (key :#, value :# false, <>),
+					insert : "void (any_a<> const& key, any_a<> const& value)",
+
+					erase_ := (key :#, <>),
+					erase : "bool (any_a<> const& key)",
+
+					clear_ := (<collection>),
+					clear : "void ()",
+
+					size_ :# (<#number_data_int64_a>),
+					size : "int64_t () const",
+
+					empty_ :# (<>),
+					empty : "bool () const",
+
+					push_front_ := (thing :#, <collection>),
+					push_front : "void (any_a<> const& thing)",
+
+					pop_front_ := (<>),
+
+					push_back_ := (thing :#, <collection>),
+					push_back : "void (any_a<> const& thing)",
+
+					pop_back_ := (<>),
+
+					self_assign_ := (range :<range>#, <collection>),
+
+					self_add_ := (range :<range>#, <collection>),
+
+					add_ :# (range :<range>#, <collection>),
+					'operator+' : "collection_a (range_a<> const& range) const",
+
+					self_subtract_ := (range :<range>#, <collection>),
+
+					subtract_ :# (range :<range>#, <collection>),
+					'operator-' : "collection_a (range_a<> const& range) const",
+
+					read_lock_ :# (<>),
+
+					write_lock_ :# (<>),
+				}
+			)
+		)
+	}
+}
