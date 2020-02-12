@@ -1,0 +1,13 @@
+false &&
+{	strange :
+	{	<parser> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<>[],
+				{	// parser
+					parse_ := (tokenizer :<range>#, <expression>),
+				}
+			)
+		)
+	}
+}
