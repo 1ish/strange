@@ -1,0 +1,14 @@
+false &&
+{	strange :
+	{	<flock> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<inventory>[],
+				{	// flock
+					extract_vector : "std::vector<any_a<>> const& () const",
+					mutate_vector : "std::vector<any_a<>>& ()",
+				}
+			)
+		)
+	}
+}
