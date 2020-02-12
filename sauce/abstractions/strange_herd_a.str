@@ -1,0 +1,23 @@
+false &&
+{	strange :
+	{	<herd> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<collection>[],
+				{	// herd
+					has_string : "bool (std::string const& s) const",
+
+					at_string : "bool (std::string const& s) const", //TODO same as has_string?
+
+					update : "void (any_a<> const& thing)",
+					update_string : "void (std::string const& s)",
+
+					insert : "bool (any_a<> const& thing)",
+					insert_string : "bool (std::string const& s)",
+
+					erase_string : "bool (std::string const& s)",
+				}
+			)
+		)
+	}
+}
