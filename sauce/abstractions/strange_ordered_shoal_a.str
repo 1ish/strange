@@ -1,0 +1,14 @@
+false &&
+{	strange :
+	{	<ordered_shoal> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<shoal>[],
+				{	// ordered shoal
+					extract_map : "std::map<any_a<>, any_a<>> const& () const",
+					mutate_map : "std::map<any_a<>, any_a<>>& ()",
+				}
+			)
+		)
+	}
+}
