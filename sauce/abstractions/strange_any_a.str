@@ -60,6 +60,11 @@ false &&
 					different_ :# (thing :<any>#, <any>),
 					'operator!=' : "bool (any_a<> const& thing) const",
 
+					//TODO 'operator<' : "bool (any_a<> const& thing) const",
+					//TODO 'operator>' : "bool (any_a<> const& thing) const",
+					//TODO 'operator<=' : "bool (any_a<> const& thing) const",
+					//TODO 'operator>=' : "bool (any_a<> const& thing) const",
+
 					hash_ :# (<#number_data_uint64_a>),
 					hash : "std::size_t () const",
 

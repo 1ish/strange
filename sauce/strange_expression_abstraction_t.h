@@ -534,30 +534,6 @@ protected:
 				"\t\treturn read().operator bool();\n"
 				"\t}\n\n"
 
-				"\t/*inline bool operator<(" + class_name + "<> const& other) const\n"
-				"\t{\n"
-				"\t\tassert(handle_);\n"
-				"\t\treturn read().operator<(other);\n"
-				"\t}\n\n"
-
-				"\tinline bool operator>(" + class_name + "<> const& other) const\n"
-				"\t{\n"
-				"\t\tassert(handle_);\n"
-				"\t\treturn read().operator>(other);\n"
-				"\t}\n\n"
-
-				"\tinline bool operator<=(" + class_name + "<> const& other) const\n"
-				"\t{\n"
-				"\t\tassert(handle_);\n"
-				"\t\treturn read().operator<=(other);\n"
-				"\t}\n\n"
-
-				"\tinline bool operator>=(" + class_name + "<> const& other) const\n"
-				"\t{\n"
-				"\t\tassert(handle_);\n"
-				"\t\treturn read().operator>=(other);\n"
-				"\t}\n*/\n"
-
 				"\t// trigger copy on write\n"
 				"\tvoid mutate()\n"
 				"\t{\n"
