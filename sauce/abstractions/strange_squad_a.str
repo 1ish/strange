@@ -1,0 +1,14 @@
+false &&
+{	strange :
+	{	<squad> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<inventory>[],
+				{	// squad
+					extract_deque : "std::deque<any_a<>> const& () const",
+					mutate_deque : "std::deque<any_a<>>& ()",
+				}
+			)
+		)
+	}
+}
