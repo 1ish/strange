@@ -241,3 +241,23 @@ TEST_CASE("strange parse and generate cpp file unordered_herd abstraction", "[pa
 		throw std::runtime_error(m.to_string());
 	}
 }
+
+TEST_CASE("strange parse and generate cpp file unordered_shoal abstraction", "[parse_t]")
+{
+	try
+	{
+		auto parser = parser_t<>::create_();
+		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
+			"strange_unordered_shoal_a.str")));
+		auto river = river_t<>::file(generate_cpp_dir +
+			"declare_strange_unordered_shoal_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, true, false); // declare
+		river = river_t<>::file(generate_cpp_dir +
+			"define_strange_unordered_shoal_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // define
+	}
+	catch (misunderstanding_a<>& m)
+	{
+		throw std::runtime_error(m.to_string());
+	}
+}

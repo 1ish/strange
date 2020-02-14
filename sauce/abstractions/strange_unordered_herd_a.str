@@ -5,8 +5,8 @@ false &&
 			(	// parent
 				$$<herd>[],
 				{	// unordered herd
-					extract_set : "std::unordered_set<any_a<>> const& () const",
-					mutate_set : "std::unordered_set<any_a<>>& ()",
+					extract_set : "std::unordered_set<any_a<>, any_a<>::hash_f> const& () const",
+					mutate_set : "std::unordered_set<any_a<>, any_a<>::hash_f>& ()",
 				}
 			)
 		)

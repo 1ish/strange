@@ -1,0 +1,14 @@
+false &&
+{	strange :
+	{	<unordered_shoal> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<shoal>[],
+				{	// unordered shoal
+					extract_map : "std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f> const& () const",
+					mutate_map : "std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>& ()",
+				}
+			)
+		)
+	}
+}

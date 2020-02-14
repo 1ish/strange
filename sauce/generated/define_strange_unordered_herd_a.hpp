@@ -75,17 +75,17 @@ public:
 		return *this;
 	}
 
-	inline std :: unordered_set < any_a < > > const & extract_set() const
+	inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set() const
 	{ assert(handle_); return read().extract_set(); }
 
-	inline std :: unordered_set < any_a < > > & mutate_set()
+	inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set()
 	{ assert(handle_); return write().mutate_set(); }
 
 protected:
 	struct ___unordered_herd_a_handle_base___ : ___herd_a_handle_base___
 	{
-		virtual inline std :: unordered_set < any_a < > > const & extract_set() const = 0;
-		virtual inline std :: unordered_set < any_a < > > & mutate_set() = 0;
+		virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set() const = 0;
+		virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___unordered_herd_a_handle_base___>
@@ -101,10 +101,10 @@ protected:
 			: ___herd_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
-		virtual inline std :: unordered_set < any_a < > > const & extract_set() const final
+		virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set() const final
 		{ return value_.extract_set(); }
 
-		virtual inline std :: unordered_set < any_a < > > & mutate_set() final
+		virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set() final
 		{ return value_.mutate_set(); }
 
 	};
