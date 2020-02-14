@@ -387,7 +387,7 @@ private:
 				{
 					throw dis("strange::parser attribute cannot be immutably assigned:") + token.report_();
 				}
-				optional = kind.terms_().at_index(7);
+				optional = kind.terms_().at_index(8);
 				any_a<> any_kind = kind;
 				try
 				{
@@ -868,61 +868,122 @@ private:
 					throw dis("strange::parser shoal :: redefinition of shared name:") + _token.report_();
 				}
 			}
-			else if (operator_token.symbol() == ":#" || operator_token.symbol() == ":=" ||
+			else if (check<symbol_a<>>(key_symbol) && cast<symbol_a<>>(key_symbol).last_character() == '_' &&
+				(operator_token.symbol() == ":#" || operator_token.symbol() == ":=" || operator_token.symbol() == ":&"))
+			{
+				bool const fixed = operator_token.symbol() == ":#";
+				bool const reference = !fixed && operator_token.symbol() == ":&";
+				any_a<> instruction;
+				if (reference)
+				{
+					if (_token.tag() != "name")
+					{
+						throw dis("strange::parser shoal member instruction without name following it:") + _token.report_();
+					}
+					instruction = _shared.at_string(_token.symbol() + "!");
+					if (!instruction)
+					{
+						throw dis("strange::parser shoal member instruction not recognised:") + _token.report_();
+					}
+					if (!_next() || _token.tag() != "punctuation" || _token.symbol() != "(")
+					{
+						throw dis("strange::parser shoal member instruction with no arguments:") + _token.report_();
+					}
+				}
+				else if (_token.tag() != "punctuation" || _token.symbol() != "(")
+				{
+					throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
+				}
+				// reference/extraction/mutation
+				auto terms = flock_t<>::create_(new_scope_symbol);
+				terms += _elements(std::make_shared<context_struct>(
+					context->scope,
+					new_scope_symbol,
+					_remove_herd_non_dimensions(context->fixed),
+					_remove_shoal_non_dimensions(context->kind),
+					context->meta,
+					context->emit));
+				if (reference)
+				{
+					auto const expression = instruction.operate(no(), flock_t<>::create_(operator_token, terms));
+					if (!check<expression_a<>>(expression))
+					{
+						throw dis("strange::parser shoal member instruction returned non-expression:") + operator_token.report_();
+					}
+					value = cast<expression_a<>>(expression);
+				}
+				else if (fixed)
+				{
+					value = expression_extraction_t<>::create_(operator_token, terms);
+				}
+				else
+				{
+					value = expression_mutation_t<>::create_(operator_token, terms);
+				}
+			}
+			else if (operator_token.symbol() == ":#" || operator_token.symbol() == ":=" || operator_token.symbol() == ":&" ||
 				operator_token.symbol() == ":<" || operator_token.symbol() == ":(")
 			{
-				bool const fixed = (operator_token.symbol() == ":#");
-				auto const kind = (fixed || operator_token.symbol() == ":=")
-					? any_a<>(kind_t<>::create_())
-					: any_a<>(_kind(context));
 				if (!check<symbol_a<>>(key_symbol))
 				{
 					throw dis("strange::parser shoal " + operator_token.symbol() + " with non-symbol key:") + operator_token.report_();
 				}
-				auto const key_string = cast<symbol_a<>>(key_symbol).to_string();
-				if (key_string[key_string.length() - 1] == '_')
+				any_a<> kind;
+				bool fixed = (operator_token.symbol() == ":#");
+				bool reference = !fixed && operator_token.symbol() == ":&";
+				if (fixed || reference || operator_token.symbol() == ":=")
 				{
-					// extraction/mutation
-					if (_token.tag() != "punctuation" || _token.symbol() != "(")
+					kind = kind_t<>::create(1, "", flock_t<>::create_(), flock_t<>::create_(), flock_t<>::create_(), kind_t<>::any_sym(), fixed, reference);
+				}
+				else
+				{
+					auto const expression = _kind(context);
+					kind = expression;
+					fixed = expression.terms_().at_index(6);
+					reference = expression.terms_().at_index(7);
+				}
+				any_a<> instruction;
+				if (reference)
+				{
+					if (_token.tag() != "name")
 					{
-						throw dis("strange::parser shoal " + operator_token.symbol() + " without ( following it:") + _token.report_();
+						throw dis("strange::parser shoal attribute instruction without name following it:") + _token.report_();
 					}
-					auto terms = flock_t<>::create_(new_scope_symbol);
-					terms += _elements(std::make_shared<context_struct>(
+					instruction = _shared.at_string(_token.symbol() + "!");
+					if (!instruction)
+					{
+						throw dis("strange::parser shoal attribute instruction not recognised:") + _token.report_();
+					}
+					if (!_next())
+					{
+						throw dis("strange::parser shoal attribute instruction with no arguments:") + _token.report_();
+					}
+				}
+				// attribute reference/extraction/mutation
+				auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0,
+					std::make_shared<context_struct>(
 						context->scope,
 						new_scope_symbol,
 						_remove_herd_non_dimensions(context->fixed),
 						_remove_shoal_non_dimensions(context->kind),
 						context->meta,
-						context->emit));
-					if (fixed)
+						context->emit)));
+				if (reference)
+				{
+					auto const expression = instruction.operate(no(), flock_t<>::create_(operator_token, terms));
+					if (!check<expression_a<>>(expression))
 					{
-						value = expression_extraction_t<>::create_(operator_token, terms);
+						throw dis("strange::parser shoal attribute instruction returned non-expression:") + operator_token.report_();
 					}
-					else
-					{
-						value = expression_mutation_t<>::create_(operator_token, terms);
-					}
+					value = cast<expression_a<>>(expression);
+				}
+				else if (fixed)
+				{
+					value = expression_attribute_extraction_t<>::create_(operator_token, terms);
 				}
 				else
 				{
-					// attribute extraction/mutation
-					auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0,
-						std::make_shared<context_struct>(
-							context->scope,
-							new_scope_symbol,
-							_remove_herd_non_dimensions(context->fixed),
-							_remove_shoal_non_dimensions(context->kind),
-							context->meta,
-							context->emit)));
-					if (fixed)
-					{
-						value = expression_attribute_extraction_t<>::create_(operator_token, terms);
-					}
-					else
-					{
-						value = expression_attribute_mutation_t<>::create_(operator_token, terms);
-					}
+					value = expression_attribute_mutation_t<>::create_(operator_token, terms);
 				}
 			}
 			else
