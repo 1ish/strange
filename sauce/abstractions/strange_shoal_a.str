@@ -1,0 +1,21 @@
+false &&
+{	strange :
+	{	<shoal> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<collection>[],
+				{	// shoal
+					has_string : "bool (std::string const& s) const",
+					at_string : "any_a<> (std::string const& s) const",
+					update_string : "void (std::string const& s, any_a<> const& value)",
+					insert_string : "bool (std::string const& s, any_a<> const& value)",
+					erase_string : "bool (std::string const& s)",
+
+					// mutable range
+					begin_ := (<forward_iterator>),
+					end_ := (<forward_iterator>),
+				}
+			)
+		)
+	}
+}

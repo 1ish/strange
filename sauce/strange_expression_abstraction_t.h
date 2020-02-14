@@ -652,6 +652,7 @@ protected:
 			auto const value_expression = cast<expression_a<>>(any_value);
 			if (name.last_character() == '_')
 			{
+				//TODO custom reference
 				bool const extraction = value_expression.type_() == expression_extraction_t<>::type_();
 				if (extraction || value_expression.type_() == expression_mutation_t<>::type_())
 				{
