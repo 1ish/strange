@@ -21,7 +21,7 @@ TEST_CASE("strange parse and generate cpp abstraction", "[parse_t]")
 		throw std::runtime_error(m.to_string());
 	}
 }
-/*
+
 TEST_CASE("strange parse and generate cpp file any abstraction", "[parse_t]")
 {
 	try
@@ -41,7 +41,7 @@ TEST_CASE("strange parse and generate cpp file any abstraction", "[parse_t]")
 		throw std::runtime_error(m.to_string());
 	}
 }
-*/
+
 TEST_CASE("strange parse and generate cpp file cat abstraction", "[parse_t]")
 {
 	try

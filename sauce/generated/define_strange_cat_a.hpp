@@ -87,7 +87,7 @@ public:
 	inline any_a<> order__(range_a<> const& range) const
 	{ assert(handle_); return read().order__(range); }
 
-	inline number_data_int64_a_a<> order_() const
+	inline number_data_int64_a<> order_() const
 	{ assert(handle_); return read().order_(); }
 
 	inline int64_t order() const
@@ -120,7 +120,7 @@ public:
 	inline any_a<> code__(range_a<> const& range) const
 	{ assert(handle_); return read().code__(range); }
 
-	inline lake_int8_a_a<> code_() const
+	inline lake_int8_a<> code_() const
 	{ assert(handle_); return read().code_(); }
 
 	inline std :: string code() const
@@ -133,7 +133,7 @@ protected:
 		virtual inline any_a<> symbolic_() const = 0;
 		virtual inline bool symbolic() const = 0;
 		virtual inline any_a<> order__(range_a<> const& range) const = 0;
-		virtual inline number_data_int64_a_a<> order_() const = 0;
+		virtual inline number_data_int64_a<> order_() const = 0;
 		virtual inline int64_t order() const = 0;
 		virtual inline any_a<> name__(range_a<> const& range) const = 0;
 		virtual inline symbol_a<> name_() const = 0;
@@ -144,7 +144,7 @@ protected:
 		virtual inline any_a<> result__(range_a<> const& range) const = 0;
 		virtual inline cat_a<> result_() const = 0;
 		virtual inline any_a<> code__(range_a<> const& range) const = 0;
-		virtual inline lake_int8_a_a<> code_() const = 0;
+		virtual inline lake_int8_a<> code_() const = 0;
 		virtual inline std :: string code() const = 0;
 	};
 
@@ -173,7 +173,7 @@ protected:
 		virtual inline any_a<> order__(range_a<> const& range) const final
 		{ return value_.order__(range); }
 
-		virtual inline number_data_int64_a_a<> order_() const final
+		virtual inline number_data_int64_a<> order_() const final
 		{ return value_.order_(); }
 
 		virtual inline int64_t order() const final
@@ -206,7 +206,7 @@ protected:
 		virtual inline any_a<> code__(range_a<> const& range) const final
 		{ return value_.code__(range); }
 
-		virtual inline lake_int8_a_a<> code_() const final
+		virtual inline lake_int8_a<> code_() const final
 		{ return value_.code_(); }
 
 		virtual inline std :: string code() const final

@@ -8,7 +8,7 @@ false &&
 					symbolic_ :# (<>),
 					symbolic : "bool () const",
 
-					order_ :# (<number_data_int64_a>),
+					order_ :# (<number_data_int64>),
 					order : "int64_t () const",
 
 					name_ :# (<symbol>),
@@ -20,7 +20,7 @@ false &&
 
 					result_ :# (<cat>),
 
-					code_ :# (<lake_int8_a>),
+					code_ :# (<lake_int8>),
 					code : "std::string () const",
 				}
 			)

@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename ___TTT___, typename range_a = range_a<>, typename symbol_a = symbol_a<>, typename cat_a = cat_a<>, typename kind_a = kind_a<>, typename inventory_a = inventory_a<>, typename unordered_herd_a = unordered_herd_a<>, typename shoal_a = shoal_a<>, typename unordered_shoal_a = unordered_shoal_a<>, typename number_data_uint64_a = number_data_uint64_a<> >
+template <typename ___TTT___, typename range_a = range_a<> , typename symbol_a = symbol_a<> , typename cat_a = cat_a<> , typename kind_a = kind_a<> , typename inventory_a = inventory_a<> , typename unordered_herd_a = unordered_herd_a<> , typename shoal_a = shoal_a<> , typename unordered_shoal_a = unordered_shoal_a<> , typename number_data_uint64_a = number_data_uint64_a<> >
 inline bool check(any_a<range_a, symbol_a, cat_a, kind_a, inventory_a, unordered_herd_a, shoal_a, unordered_shoal_a, number_data_uint64_a> const& value) noexcept;
 
 template <typename range_a, typename symbol_a, typename cat_a, typename kind_a, typename inventory_a, typename unordered_herd_a, typename shoal_a, typename unordered_shoal_a, typename number_data_uint64_a>
@@ -14,9 +14,9 @@ public:
 	struct ___duplicate_tag___ {};
 
 	// shared pointer typedefs
-	struct ___root_handle_base___;
-	using ___WEAK___ = std::weak_ptr<___root_handle_base___>;
-	using ___SHARED___ = std::shared_ptr<___root_handle_base___>;
+	struct ___any_a_handle_base___;
+	using ___WEAK___ = std::weak_ptr<___any_a_handle_base___>;
+	using ___SHARED___ = std::shared_ptr<___any_a_handle_base___>;
 
 	// hash function wrapper class
 	class hash_f
@@ -248,14 +248,14 @@ public:
 	{ assert(handle_); return read().is(s); }
 
 protected:
-	struct ___root_handle_base___
+	struct ___any_a_handle_base___
 	{
-		___root_handle_base___() = default;
-		___root_handle_base___(___root_handle_base___ const&) = default;
-		___root_handle_base___(___root_handle_base___&&) = default;
-		___root_handle_base___& operator=(___root_handle_base___ const&) = default;
-		___root_handle_base___& operator=(___root_handle_base___&&) = default;
-		virtual ~___root_handle_base___() = default;
+		___any_a_handle_base___() = default;
+		___any_a_handle_base___(___any_a_handle_base___ const&) = default;
+		___any_a_handle_base___(___any_a_handle_base___&&) = default;
+		___any_a_handle_base___& operator=(___any_a_handle_base___ const&) = default;
+		___any_a_handle_base___& operator=(___any_a_handle_base___&&) = default;
+		virtual ~___any_a_handle_base___() = default;
 		virtual ___SHARED___ ___clone___() const = 0;
 		virtual void ___weak___(___WEAK___ const& weak) const = 0;
 		virtual inline operator bool() const = 0;
@@ -311,16 +311,16 @@ protected:
 		virtual inline bool is(std :: string const & s ) const = 0;
 	};
 
-	template <typename ___TTT___, typename ___BHB___ = ___root_handle_base___>
-	struct ___root_handle___ : ___BHB___
+	template <typename ___TTT___, typename ___BHB___ = ___any_a_handle_base___>
+	struct ___any_a_handle___ : ___BHB___
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___root_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+		inline ___any_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
 			: value_{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___root_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+		inline ___any_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: value_{ std::move(value) }
 		{}
 
@@ -502,11 +502,11 @@ protected:
 	};
 
 	template <typename ___TTT___, typename ___BHB___>
-	struct ___root_handle___<std::reference_wrapper<___TTT___>, ___BHB___>
-		: ___root_handle___<___TTT___&, ___BHB___>
+	struct ___any_a_handle___<std::reference_wrapper<___TTT___>, ___BHB___>
+		: ___any_a_handle___<___TTT___&, ___BHB___>
 	{
-		inline ___root_handle___(std::reference_wrapper<___TTT___> ref)
-			: ___root_handle___<___TTT___&, ___BHB___>{ ref.get() }
+		inline ___any_a_handle___(std::reference_wrapper<___TTT___> ref)
+			: ___any_a_handle___<___TTT___&, ___BHB___>{ ref.get() }
 		{}
 	};
 
@@ -516,39 +516,39 @@ protected:
 
 private:
 	template <typename ___TTT___>
-	struct ___root_handle_final___ final : ___root_handle___<___TTT___>
+	struct ___any_a_handle_final___ final : ___any_a_handle___<___TTT___>
 	{
 		template <typename ___UUU___ = ___TTT___>
-		inline ___root_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: ___root_handle___<___TTT___>{ value }
+		inline ___any_a_handle_final___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
+			: ___any_a_handle___<___TTT___>{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
-		inline ___root_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: ___root_handle___<___TTT___>{ std::move(value) }
+		inline ___any_a_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
+			: ___any_a_handle___<___TTT___>{ std::move(value) }
 		{}
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___root_handle_final___>(___root_handle___<___TTT___>::value_);
+			return std::make_shared<___any_a_handle_final___>(___any_a_handle___<___TTT___>::value_);
 		}
 	};
 
 	template <typename ___TTT___>
-	struct ___root_handle_final___<std::reference_wrapper<___TTT___>> final
-		: ___root_handle_final___<___TTT___&>
+	struct ___any_a_handle_final___<std::reference_wrapper<___TTT___>> final
+		: ___any_a_handle_final___<___TTT___&>
 	{
-		inline ___root_handle_final___(std::reference_wrapper<___TTT___> ref)
-			: ___root_handle_final___<___TTT___&>{ ref.get() }
+		inline ___any_a_handle_final___(std::reference_wrapper<___TTT___> ref)
+			: ___any_a_handle_final___<___TTT___&>{ ref.get() }
 		{}
 	};
 
-	inline ___root_handle_base___ const& read() const noexcept
+	inline ___any_a_handle_base___ const& read() const noexcept
 	{
 		return *handle_;
 	}
 
-	inline ___root_handle_base___& write() noexcept
+	inline ___any_a_handle_base___& write() noexcept
 	{
 		if (!handle_.unique())
 		{
@@ -594,6 +594,21 @@ public:
 		return &handle_ != &___shared___;
 	}
 
+	static inline any_a val(any_a const& other) noexcept
+	{
+		return any_a{ other };
+	}
+
+	static inline any_a ref(any_a& other) noexcept
+	{
+		return any_a(other, ___reference_tag___{});
+	}
+
+	static inline any_a dup(any_a& other) noexcept
+	{
+		return any_a(other, ___duplicate_tag___{});
+	}
+
 	inline any_a() noexcept
 		: ___shared___{}
 		, handle_{ ___shared___ }
@@ -604,30 +619,15 @@ public:
 		, handle_{ ___shared___ }
 	{}
 
-	static inline any_a val(any_a const& other) noexcept
-	{
-		return any_a{ other };
-	}
-
 	inline any_a(any_a& other, ___reference_tag___) noexcept
 		: ___shared___{ ___SHARED___{} }
 		, handle_{ other.handle_ }
 	{}
 
-	static inline any_a ref(any_a& other) noexcept
-	{
-		return any_a(other, ___reference_tag___{});
-	}
-
 	inline any_a(any_a& other, ___duplicate_tag___) noexcept
 		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
 		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
 	{}
-
-	static inline any_a dup(any_a& other) noexcept
-	{
-		return any_a(other, ___duplicate_tag___{});
-	}
 
 	inline any_a(any_a&& other) noexcept
 	: ___shared___{ other.handle_ }
@@ -662,7 +662,7 @@ public:
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
 	explicit inline any_a(___TTT___ value) noexcept
-		: ___shared___{ std::make_shared<___root_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+		: ___shared___{ std::make_shared<___any_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 		, handle_{ ___shared___ }
 	{
 		handle_->___weak___(handle_);

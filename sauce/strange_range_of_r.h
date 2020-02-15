@@ -65,7 +65,7 @@ class ___range_of_a_share___
 {
 	static inline bool ___share___()
 	{
-		return range_of_a<>::___share___;
+		return range_of_a<any_a<>>::___share___;
 	}
 };
 
