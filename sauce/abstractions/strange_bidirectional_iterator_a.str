@@ -1,0 +1,13 @@
+false &&
+{	strange :
+	{	<bidirectional_iterator> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<forward_iterator>[],
+				{	// bidirectional iterator
+					decrement_ := (<bidirectional_iterator>),
+				}
+			)
+		)
+	}
+}

@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename ___TTT___, typename _1_ = void>
+template <typename ___TTT___, typename _1_>
 inline bool check(bidirectional_const_iterator_data_a<_1_> const& value) noexcept;
 
 template <typename _1_>
