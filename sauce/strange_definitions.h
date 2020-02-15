@@ -37,13 +37,15 @@ inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor)
 {
 	if (check<range_a<>>(thing))
 	{
-		return adaptor.operate(any_a<>{}, cast<range_a<>>(thing));
+		any_a<> _;
+		return adaptor.operate(_, cast<range_a<>>(thing));
 	}
 	if (check<misunderstanding_a<>>(thing))
 	{
 		return thing;
 	}
-	return adaptor.operate(any_a<>{}, flock_t<>::create_(thing));
+	any_a<> _;
+	return adaptor.operate(_, flock_t<>::create_(thing));
 }
 
 // check/cast

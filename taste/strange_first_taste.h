@@ -27,6 +27,8 @@ TEST_CASE("first", "[first]")
 {
 	std__cout << "first taste" << std::endl;
 	A a{ "a" };
-	fun(make("1"), make("2"));
+	auto x = make("1");
+	auto y = make("2");
+	fun(x, y);
 	A b{ "b" };
 }
