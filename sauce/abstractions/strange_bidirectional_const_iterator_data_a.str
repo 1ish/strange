@@ -1,0 +1,14 @@
+false &&
+{	strange :
+	{	<bidirectional_const_iterator_data> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<bidirectional_const_iterator>[],
+				{	// bidirectional const iterator data
+					extract_it : "_1_ const& () const",
+					mutate_it : "_1_& ()",
+				}
+			)
+		)
+	}
+}
