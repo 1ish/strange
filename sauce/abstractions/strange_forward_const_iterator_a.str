@@ -1,0 +1,17 @@
+false &&
+{	strange :
+	{	<forward_const_iterator> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<>[],
+				{	// forward const iterator
+					get_ :# (<>),
+					'operator*' : "any_a<> const& () const",
+					'operator->' : "any_a<> const* () const",
+
+					increment_ := (<forward_const_iterator>),
+				}
+			)
+		)
+	}
+}
