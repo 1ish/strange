@@ -228,7 +228,7 @@ public:
 	inline any_a<> less_than_(number_a<> const& number) const
 	{ assert(handle_); return read().less_than_(number); }
 
-	inline bool operator<(number < > const & number ) const
+	inline bool operator<(number_a < > const & number ) const
 	{ assert(handle_); return read().operator<(number); }
 
 	inline any_a<> greater_than__(range_a<> const& range) const
@@ -237,7 +237,7 @@ public:
 	inline any_a<> greater_than_(number_a<> const& number) const
 	{ assert(handle_); return read().greater_than_(number); }
 
-	inline bool operator>(number < > const & number ) const
+	inline bool operator>(number_a < > const & number ) const
 	{ assert(handle_); return read().operator>(number); }
 
 	inline any_a<> less_or_equal__(range_a<> const& range) const
@@ -246,7 +246,7 @@ public:
 	inline any_a<> less_or_equal_(number_a<> const& number) const
 	{ assert(handle_); return read().less_or_equal_(number); }
 
-	inline bool operator<=(number < > const & number ) const
+	inline bool operator<=(number_a < > const & number ) const
 	{ assert(handle_); return read().operator<=(number); }
 
 	inline any_a<> greater_or_equal__(range_a<> const& range) const
@@ -255,7 +255,7 @@ public:
 	inline any_a<> greater_or_equal_(number_a<> const& number) const
 	{ assert(handle_); return read().greater_or_equal_(number); }
 
-	inline bool operator>=(number < > const & number ) const
+	inline bool operator>=(number_a < > const & number ) const
 	{ assert(handle_); return read().operator>=(number); }
 
 	inline any_a<> byte_size__(range_a<> const& range) const
@@ -384,16 +384,16 @@ protected:
 		virtual inline void from_float_64(double int_64 ) = 0;
 		virtual inline any_a<> less_than__(range_a<> const& range) const = 0;
 		virtual inline any_a<> less_than_(number_a<> const& number) const = 0;
-		virtual inline bool operator<(number < > const & number ) const = 0;
+		virtual inline bool operator<(number_a < > const & number ) const = 0;
 		virtual inline any_a<> greater_than__(range_a<> const& range) const = 0;
 		virtual inline any_a<> greater_than_(number_a<> const& number) const = 0;
-		virtual inline bool operator>(number < > const & number ) const = 0;
+		virtual inline bool operator>(number_a < > const & number ) const = 0;
 		virtual inline any_a<> less_or_equal__(range_a<> const& range) const = 0;
 		virtual inline any_a<> less_or_equal_(number_a<> const& number) const = 0;
-		virtual inline bool operator<=(number < > const & number ) const = 0;
+		virtual inline bool operator<=(number_a < > const & number ) const = 0;
 		virtual inline any_a<> greater_or_equal__(range_a<> const& range) const = 0;
 		virtual inline any_a<> greater_or_equal_(number_a<> const& number) const = 0;
-		virtual inline bool operator>=(number < > const & number ) const = 0;
+		virtual inline bool operator>=(number_a < > const & number ) const = 0;
 		virtual inline any_a<> byte_size__(range_a<> const& range) const = 0;
 		virtual inline number_data_int64_a byte_size_() const = 0;
 		virtual inline int64_t byte_size() const = 0;
@@ -586,7 +586,7 @@ protected:
 		virtual inline any_a<> less_than_(number_a<> const& number) const final
 		{ return value_.less_than_(number); }
 
-		virtual inline bool operator<(number < > const & number ) const final
+		virtual inline bool operator<(number_a < > const & number ) const final
 		{ return value_.operator<(number); }
 
 		virtual inline any_a<> greater_than__(range_a<> const& range) const final
@@ -595,7 +595,7 @@ protected:
 		virtual inline any_a<> greater_than_(number_a<> const& number) const final
 		{ return value_.greater_than_(number); }
 
-		virtual inline bool operator>(number < > const & number ) const final
+		virtual inline bool operator>(number_a < > const & number ) const final
 		{ return value_.operator>(number); }
 
 		virtual inline any_a<> less_or_equal__(range_a<> const& range) const final
@@ -604,7 +604,7 @@ protected:
 		virtual inline any_a<> less_or_equal_(number_a<> const& number) const final
 		{ return value_.less_or_equal_(number); }
 
-		virtual inline bool operator<=(number < > const & number ) const final
+		virtual inline bool operator<=(number_a < > const & number ) const final
 		{ return value_.operator<=(number); }
 
 		virtual inline any_a<> greater_or_equal__(range_a<> const& range) const final
@@ -613,7 +613,7 @@ protected:
 		virtual inline any_a<> greater_or_equal_(number_a<> const& number) const final
 		{ return value_.greater_or_equal_(number); }
 
-		virtual inline bool operator>=(number < > const & number ) const final
+		virtual inline bool operator>=(number_a < > const & number ) const final
 		{ return value_.operator>=(number); }
 
 		virtual inline any_a<> byte_size__(range_a<> const& range) const final

@@ -1,0 +1,33 @@
+false &&
+{	strange :
+	{	<random_access_iterator> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<bidirectional_iterator>[],
+				{	// random access iterator
+					self_add_ := (number :<number>#, <random_access_iterator>),
+
+					add_ :# (number :<number>#, <random_access_iterator>),
+					'operator+' : "random_access_iterator_a (number_a<> const& number) const",
+
+					self_subtract_ := (number :<number>#, <random_access_iterator>),
+
+					subtract_ :# (number :<number>#, <random_access_iterator>),
+					'operator-' : "random_access_iterator_a (number_a<> const& number) const",
+
+					less_than_ :# (it :<random_access_iterator>#, <>),
+					'operator<' : "bool (random_access_iterator_a<> const& it) const",
+
+					greater_than_ :# (it :<random_access_iterator>#, <>),
+					'operator>' : "bool (random_access_iterator_a<> const& it) const",
+
+					less_or_equal_ :# (it :<random_access_iterator>#, <>),
+					'operator<=' : "bool (random_access_iterator_a<> const& it) const",
+
+					greater_or_equal_ :# (it :<random_access_iterator>#, <>),
+					'operator>=' : "bool (random_access_iterator_a<> const& it) const",
+				}
+			)
+		)
+	}
+}
