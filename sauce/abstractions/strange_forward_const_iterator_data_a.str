@@ -1,0 +1,15 @@
+false &&
+{	strange :
+	{	<forward_const_iterator_data> :: abstraction
+		(	// dimensions
+			#_1_ :<<>>#,
+			(	// parent
+				$$<forward_const_iterator>[],
+				{	// forward const iterator data
+					extract_it : "_1_ const& () const",
+					mutate_it : "_1_& ()",
+				}
+			)
+		)
+	}
+}
