@@ -615,7 +615,7 @@ bool const collection_a<number_data_int64_a>::___share___ = []()
 {
 	auto& shoal = shared();
 	reflection<collection_a<number_data_int64_a>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace

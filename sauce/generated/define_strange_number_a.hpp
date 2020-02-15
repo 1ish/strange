@@ -867,7 +867,7 @@ bool const number_a<number_data_int64_a, number_data_uint64_a, number_data_doubl
 {
 	auto& shoal = shared();
 	reflection<number_a<number_data_int64_a, number_data_uint64_a, number_data_double_a>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace

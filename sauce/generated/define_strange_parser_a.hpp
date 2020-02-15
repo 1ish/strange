@@ -286,7 +286,7 @@ bool const parser_a<_1_>::___share___ = []()
 {
 	auto& shoal = shared();
 	reflection<parser_a<_1_>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace

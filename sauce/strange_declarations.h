@@ -90,6 +90,18 @@ inline shoal_a<>& shared();
 // pipe
 inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor);
 
+// symbol
+template <typename F>
+inline symbol_a<> sym(F&& s);
+
+// misunderstanding
+template <typename F>
+inline misunderstanding_a<> mis(F&& s);
+
+// disagreement
+template <typename F>
+inline misunderstanding_a<> dis(F&& s);
+
 // check/cast
 template <typename ___TTT___, typename ___VVV___>
 inline bool check(___VVV___ const&) noexcept;

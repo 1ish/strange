@@ -300,7 +300,7 @@ bool const range_of_a<element>::___share___ = []()
 {
 	auto& shoal = shared();
 	reflection<range_of_a<element>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace

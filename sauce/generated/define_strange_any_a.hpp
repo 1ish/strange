@@ -699,7 +699,7 @@ bool const any_a<range_a, symbol_a, cat_a, kind_a, inventory_a, unordered_herd_a
 {
 	auto& shoal = shared();
 	reflection<any_a<range_a, symbol_a, cat_a, kind_a, inventory_a, unordered_herd_a, shoal_a, unordered_shoal_a, number_data_uint64_a>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace

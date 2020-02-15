@@ -349,7 +349,7 @@ bool const kind_a<_1_>::___share___ = []()
 {
 	auto& shoal = shared();
 	reflection<kind_a<_1_>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace

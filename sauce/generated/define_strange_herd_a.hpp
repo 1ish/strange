@@ -321,7 +321,7 @@ bool const herd_a<_1_>::___share___ = []()
 {
 	auto& shoal = shared();
 	reflection<herd_a<_1_>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace

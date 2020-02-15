@@ -286,7 +286,7 @@ bool const ordered_herd_a<_1_>::___share___ = []()
 {
 	auto& shoal = shared();
 	reflection<ordered_herd_a<_1_>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace

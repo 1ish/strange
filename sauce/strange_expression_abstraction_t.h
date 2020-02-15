@@ -1316,7 +1316,7 @@ protected:
 			"\treflection<" + class_name);
 		_declare_or_define_template_(version, 0, river, false, false);
 		river.write_string(">::share(shoal);\n"
-			"\treturn shoal.something();\n"
+			"\treturn shoal;\n"
 			"}();\n\n");
 	}
 

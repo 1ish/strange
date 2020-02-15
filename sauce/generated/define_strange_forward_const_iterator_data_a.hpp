@@ -286,7 +286,7 @@ bool const forward_const_iterator_data_a<_1_>::___share___ = []()
 {
 	auto& shoal = shared();
 	reflection<forward_const_iterator_data_a<_1_>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace

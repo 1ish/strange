@@ -335,7 +335,7 @@ bool const shoal_a<_1_>::___share___ = []()
 {
 	auto& shoal = shared();
 	reflection<shoal_a<_1_>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace

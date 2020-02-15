@@ -286,7 +286,7 @@ bool const brook_a<_1_>::___share___ = []()
 {
 	auto& shoal = shared();
 	reflection<brook_a<_1_>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace

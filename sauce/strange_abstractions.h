@@ -3,6 +3,7 @@
 
 // abstractions
 #include "generated/define_strange_any_a.hpp"
+#include "generated/define_strange_misunderstanding_a.hpp"
 #include "generated/define_strange_forward_const_iterator_a.hpp"
 #include "generated/define_strange_forward_const_iterator_data_a.hpp"
 #include "generated/define_strange_forward_iterator_a.hpp"
@@ -15,7 +16,6 @@
 #include "generated/define_strange_random_access_const_iterator_data_a.hpp"
 #include "generated/define_strange_random_access_iterator_a.hpp"
 #include "generated/define_strange_random_access_iterator_data_a.hpp"
-#include "generated/define_strange_misunderstanding_a.hpp"
 #include "generated/define_strange_range_a.hpp"
 #include "generated/define_strange_range_of_a.hpp"
 #include "generated/define_strange_collection_a.hpp"
