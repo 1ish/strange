@@ -102,10 +102,10 @@ protected:
 		{}
 
 		virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_map() const final
-		{ return value_.extract_map(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.extract_map(); }
 
 		virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_map() final
-		{ return value_.mutate_map(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.mutate_map(); }
 
 	};
 

@@ -122,25 +122,25 @@ protected:
 		{}
 
 		virtual inline bool has_string(std :: string const & s ) const final
-		{ return value_.has_string(s); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.has_string(s); }
 
 		virtual inline bool at_string(std :: string const & s ) const final
-		{ return value_.at_string(s); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.at_string(s); }
 
 		virtual inline void update(any_a < > const & thing ) final
-		{ value_.update(thing); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.update(thing); }
 
 		virtual inline void update_string(std :: string const & s ) final
-		{ value_.update_string(s); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.update_string(s); }
 
 		virtual inline bool insert(any_a < > const & thing ) final
-		{ return value_.insert(thing); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.insert(thing); }
 
 		virtual inline bool insert_string(std :: string const & s ) final
-		{ return value_.insert_string(s); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.insert_string(s); }
 
 		virtual inline bool erase_string(std :: string const & s ) final
-		{ return value_.erase_string(s); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.erase_string(s); }
 
 	};
 

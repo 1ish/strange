@@ -130,31 +130,31 @@ protected:
 		{}
 
 		virtual inline bool has_index(int64_t index ) const final
-		{ return value_.has_index(index); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.has_index(index); }
 
 		virtual inline any_a < > at_index(int64_t index ) const final
-		{ return value_.at_index(index); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.at_index(index); }
 
 		virtual inline void update_index(int64_t index , any_a < > const & value ) final
-		{ value_.update_index(index, value); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.update_index(index, value); }
 
 		virtual inline bool insert_index(int64_t index , any_a < > const & value ) final
-		{ return value_.insert_index(index, value); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.insert_index(index, value); }
 
 		virtual inline bool erase_index(int64_t index ) final
-		{ return value_.erase_index(index); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.erase_index(index); }
 
 		virtual inline any_a<> begin__(range_a<> const& range) final
-		{ return value_.begin__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.begin__(range); }
 
 		virtual inline random_access_iterator_a<> begin_() final
-		{ return value_.begin_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.begin_(); }
 
 		virtual inline any_a<> end__(range_a<> const& range) final
-		{ return value_.end__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.end__(range); }
 
 		virtual inline random_access_iterator_a<> end_() final
-		{ return value_.end_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.end_(); }
 
 	};
 

@@ -102,10 +102,10 @@ protected:
 		{}
 
 		virtual inline any_a<> parse__(range_a<> const& range) final
-		{ return value_.parse__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.parse__(range); }
 
 		virtual inline expression_a<> parse_(range_a<> const& tokenizer) final
-		{ return value_.parse_(tokenizer); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.parse_(tokenizer); }
 
 	};
 

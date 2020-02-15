@@ -166,58 +166,58 @@ protected:
 		{}
 
 		virtual inline any_a<> recreate__(range_a<> const& range) const final
-		{ return value_.recreate__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.recreate__(range); }
 
 		virtual inline expression_a<> recreate_() const final
-		{ return value_.recreate_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.recreate_(); }
 
 		virtual inline void recreated(expression_a const & expression ) const final
-		{ value_.recreated(expression); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.recreated(expression); }
 
 		virtual inline any_a<> literal__(range_a<> const& range) const final
-		{ return value_.literal__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.literal__(range); }
 
 		virtual inline any_a<> literal_() const final
-		{ return value_.literal_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.literal_(); }
 
 		virtual inline bool literal() const final
-		{ return value_.literal(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.literal(); }
 
 		virtual inline any_a<> evaluate__(range_a<> const& range) const final
-		{ return value_.evaluate__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.evaluate__(range); }
 
 		virtual inline any_a<> evaluate_() const final
-		{ return value_.evaluate_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.evaluate_(); }
 
 		virtual inline any_a<> token__(range_a<> const& range) const final
-		{ return value_.token__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.token__(range); }
 
 		virtual inline token_a<> token_() const final
-		{ return value_.token_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.token_(); }
 
 		virtual inline any_a<> terms__(range_a<> const& range) const final
-		{ return value_.terms__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.terms__(range); }
 
 		virtual inline flock_a<> terms_() const final
-		{ return value_.terms_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.terms_(); }
 
 		virtual inline any_a<> generate__(range_a<> const& range) const final
-		{ return value_.generate__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.generate__(range); }
 
 		virtual inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const final
-		{ return value_.generate_(version, indent, river); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.generate_(version, indent, river); }
 
 		virtual inline void generate(int64_t version , int64_t indent , river_a < > & river ) const final
-		{ value_.generate(version, indent, river); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.generate(version, indent, river); }
 
 		virtual inline any_a<> generate_cpp__(range_a<> const& range) const final
-		{ return value_.generate_cpp__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.generate_cpp__(range); }
 
 		virtual inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const final
-		{ return value_.generate_cpp_(version, indent, river, declare, define, type); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.generate_cpp_(version, indent, river, declare, define, type); }
 
 		virtual inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const final
-		{ value_.generate_cpp(version, indent, river, declare, define, type); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.generate_cpp(version, indent, river, declare, define, type); }
 
 	};
 

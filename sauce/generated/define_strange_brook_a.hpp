@@ -102,10 +102,10 @@ protected:
 		{}
 
 		virtual inline std :: deque < _1_ > const & extract_deque() const final
-		{ return value_.extract_deque(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.extract_deque(); }
 
 		virtual inline std :: deque < _1_ > & mutate_deque() final
-		{ return value_.mutate_deque(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.mutate_deque(); }
 
 	};
 

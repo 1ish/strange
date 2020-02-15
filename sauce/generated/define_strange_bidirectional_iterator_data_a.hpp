@@ -102,10 +102,10 @@ protected:
 		{}
 
 		virtual inline _1_ const & extract_it() const final
-		{ return value_.extract_it(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.extract_it(); }
 
 		virtual inline _1_ & mutate_it() final
-		{ return value_.mutate_it(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.mutate_it(); }
 
 	};
 

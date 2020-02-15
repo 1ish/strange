@@ -102,10 +102,10 @@ protected:
 		{}
 
 		virtual inline std :: vector < _1_ > const & extract_vector() const final
-		{ return value_.extract_vector(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.extract_vector(); }
 
 		virtual inline std :: vector < _1_ > & mutate_vector() final
-		{ return value_.mutate_vector(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.mutate_vector(); }
 
 	};
 

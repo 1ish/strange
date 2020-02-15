@@ -126,28 +126,28 @@ protected:
 		{}
 
 		virtual inline any_a<> get__(range_a<> const& range) const final
-		{ return value_.get__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.get__(range); }
 
 		virtual inline any_a<> get_() const final
-		{ return value_.get_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.get_(); }
 
 		virtual inline any_a<> set__(range_a<> const& range) const final
-		{ return value_.set__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.set__(range); }
 
 		virtual inline any_a<> set_(any_a<> const& thing) const final
-		{ return value_.set_(thing); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.set_(thing); }
 
 		virtual inline any_a < > & operator*() const final
-		{ return value_.operator*(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator*(); }
 
 		virtual inline any_a < > * operator->() const final
-		{ return value_.operator->(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator->(); }
 
 		virtual inline any_a<> increment__(range_a<> const& range) final
-		{ return value_.increment__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.increment__(range); }
 
 		virtual inline forward_iterator_a<> increment_() final
-		{ return value_.increment_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.increment_(); }
 
 	};
 

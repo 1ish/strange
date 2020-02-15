@@ -102,10 +102,10 @@ protected:
 		{}
 
 		virtual inline std :: set < any_a < > > const & extract_set() const final
-		{ return value_.extract_set(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.extract_set(); }
 
 		virtual inline std :: set < any_a < > > & mutate_set() final
-		{ return value_.mutate_set(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.mutate_set(); }
 
 	};
 

@@ -102,10 +102,10 @@ protected:
 		{}
 
 		virtual inline any_a<> decrement__(range_a<> const& range) final
-		{ return value_.decrement__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.decrement__(range); }
 
 		virtual inline bidirectional_iterator_a<> decrement_() final
-		{ return value_.decrement_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.decrement_(); }
 
 	};
 

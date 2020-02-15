@@ -110,16 +110,16 @@ protected:
 		{}
 
 		virtual inline std :: string to_string() const final
-		{ return value_.to_string(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_string(); }
 
 		virtual inline any_a<> add__(range_a<> const& range) const final
-		{ return value_.add__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.add__(range); }
 
 		virtual inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const final
-		{ return value_.add_(misunderstanding); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.add_(misunderstanding); }
 
 		virtual inline misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const final
-		{ return value_.operator+(misunderstanding); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator+(misunderstanding); }
 
 	};
 

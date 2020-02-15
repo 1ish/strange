@@ -186,73 +186,73 @@ protected:
 		{}
 
 		virtual inline any_a<> filename__(range_a<> const& range) const final
-		{ return value_.filename__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.filename__(range); }
 
 		virtual inline symbol_a<> filename_() const final
-		{ return value_.filename_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.filename_(); }
 
 		virtual inline std :: string filename() const final
-		{ return value_.filename(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.filename(); }
 
 		virtual inline any_a<> line__(range_a<> const& range) const final
-		{ return value_.line__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.line__(range); }
 
 		virtual inline number_data_int64_a<> line_() const final
-		{ return value_.line_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.line_(); }
 
 		virtual inline int64_t line() const final
-		{ return value_.line(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.line(); }
 
 		virtual inline any_a<> position__(range_a<> const& range) const final
-		{ return value_.position__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.position__(range); }
 
 		virtual inline number_data_int64_a<> position_() const final
-		{ return value_.position_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.position_(); }
 
 		virtual inline int64_t position() const final
-		{ return value_.position(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.position(); }
 
 		virtual inline any_a<> tag__(range_a<> const& range) const final
-		{ return value_.tag__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.tag__(range); }
 
 		virtual inline symbol_a<> tag_() const final
-		{ return value_.tag_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.tag_(); }
 
 		virtual inline std :: string tag() const final
-		{ return value_.tag(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.tag(); }
 
 		virtual inline any_a<> symbol__(range_a<> const& range) const final
-		{ return value_.symbol__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.symbol__(range); }
 
 		virtual inline symbol_a<> symbol_() const final
-		{ return value_.symbol_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.symbol_(); }
 
 		virtual inline std :: string symbol() const final
-		{ return value_.symbol(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.symbol(); }
 
 		virtual inline any_a<> literal__(range_a<> const& range) const final
-		{ return value_.literal__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.literal__(range); }
 
 		virtual inline any_a<> literal_() const final
-		{ return value_.literal_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.literal_(); }
 
 		virtual inline any_a<> precedence__(range_a<> const& range) const final
-		{ return value_.precedence__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.precedence__(range); }
 
 		virtual inline number_data_int64_a<> precedence_() const final
-		{ return value_.precedence_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.precedence_(); }
 
 		virtual inline int64_t precedence() const final
-		{ return value_.precedence(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.precedence(); }
 
 		virtual inline any_a<> report__(range_a<> const& range) const final
-		{ return value_.report__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.report__(range); }
 
 		virtual inline misunderstanding_a<> report_() const final
-		{ return value_.report_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.report_(); }
 
 		virtual inline std :: string report() const final
-		{ return value_.report(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.report(); }
 
 	};
 

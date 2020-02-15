@@ -122,25 +122,25 @@ protected:
 		{}
 
 		virtual inline any_a<> pure__(range_a<> const& range) const final
-		{ return value_.pure__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.pure__(range); }
 
 		virtual inline any_a<> pure_() const final
-		{ return value_.pure_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.pure_(); }
 
 		virtual inline bool pure() const final
-		{ return value_.pure(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.pure(); }
 
 		virtual inline void aspects(unordered_shoal_a < > const & shoal ) final
-		{ value_.aspects(shoal); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.aspects(shoal); }
 
 		virtual inline void assign(operation_a const & operation ) final
-		{ value_.assign(operation); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.assign(operation); }
 
 		virtual inline any_a<> names__(range_a<> const& range) const final
-		{ return value_.names__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.names__(range); }
 
 		virtual inline flock_a<> names_() const final
-		{ return value_.names_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.names_(); }
 
 	};
 

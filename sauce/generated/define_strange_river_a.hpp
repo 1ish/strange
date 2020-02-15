@@ -442,265 +442,265 @@ protected:
 		{}
 
 		virtual inline std :: string to_string() final
-		{ return value_.to_string(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_string(); }
 
 		virtual inline any_a<> get__(range_a<> const& range) final
-		{ return value_.get__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.get__(range); }
 
 		virtual inline number_data_int8_a<> get_() final
-		{ return value_.get_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.get_(); }
 
 		virtual inline int8_t get() final
-		{ return value_.get(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.get(); }
 
 		virtual inline any_a<> peek__(range_a<> const& range) final
-		{ return value_.peek__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.peek__(range); }
 
 		virtual inline number_data_int8_a<> peek_() final
-		{ return value_.peek_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.peek_(); }
 
 		virtual inline int8_t peek() final
-		{ return value_.peek(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.peek(); }
 
 		virtual inline any_a<> unget__(range_a<> const& range) final
-		{ return value_.unget__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.unget__(range); }
 
 		virtual inline any_a<> unget_() final
-		{ return value_.unget_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.unget_(); }
 
 		virtual inline void unget() final
-		{ value_.unget(); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.unget(); }
 
 		virtual inline any_a<> putback__(range_a<> const& range) final
-		{ return value_.putback__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.putback__(range); }
 
 		virtual inline any_a<> putback_(number_data_int8_a<> const& int_8) final
-		{ return value_.putback_(int_8); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.putback_(int_8); }
 
 		virtual inline void putback(int8_t int_8 ) final
-		{ value_.putback(int_8); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.putback(int_8); }
 
 		virtual inline any_a<> getline__(range_a<> const& range) final
-		{ return value_.getline__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.getline__(range); }
 
 		virtual inline lake_int8_a<> getline_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter) final
-		{ return value_.getline_(count, delimiter); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.getline_(count, delimiter); }
 
 		virtual inline std :: vector < int8_t > getline(int64_t count , int8_t delimiter ) final
-		{ return value_.getline(count, delimiter); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.getline(count, delimiter); }
 
 		virtual inline any_a<> ignore__(range_a<> const& range) final
-		{ return value_.ignore__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.ignore__(range); }
 
 		virtual inline any_a<> ignore_(number_data_int64_a<> const& count) final
-		{ return value_.ignore_(count); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.ignore_(count); }
 
 		virtual inline void ignore(int64_t count ) final
-		{ value_.ignore(count); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.ignore(count); }
 
 		virtual inline any_a<> read__(range_a<> const& range) final
-		{ return value_.read__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.read__(range); }
 
 		virtual inline lake_int8_a<> read_(number_data_int64_a<> const& count) final
-		{ return value_.read_(count); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.read_(count); }
 
 		virtual inline std :: vector < int8_t > read(int64_t count ) final
-		{ return value_.read(count); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.read(count); }
 
 		virtual inline std :: string read_string(int64_t count ) final
-		{ return value_.read_string(count); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.read_string(count); }
 
 		virtual inline any_a<> tellg__(range_a<> const& range) const final
-		{ return value_.tellg__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.tellg__(range); }
 
 		virtual inline number_data_int64_a<> tellg_() const final
-		{ return value_.tellg_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.tellg_(); }
 
 		virtual inline int64_t tellg() const final
-		{ return value_.tellg(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.tellg(); }
 
 		virtual inline any_a<> seekg_beg__(range_a<> const& range) final
-		{ return value_.seekg_beg__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekg_beg__(range); }
 
 		virtual inline any_a<> seekg_beg_(number_data_int64_a<> const& offset) final
-		{ return value_.seekg_beg_(offset); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekg_beg_(offset); }
 
 		virtual inline void seekg_beg(int64_t offset ) final
-		{ value_.seekg_beg(offset); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.seekg_beg(offset); }
 
 		virtual inline any_a<> seekg_end__(range_a<> const& range) final
-		{ return value_.seekg_end__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekg_end__(range); }
 
 		virtual inline any_a<> seekg_end_(number_data_int64_a<> const& offset) final
-		{ return value_.seekg_end_(offset); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekg_end_(offset); }
 
 		virtual inline void seekg_end(int64_t offset ) final
-		{ value_.seekg_end(offset); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.seekg_end(offset); }
 
 		virtual inline any_a<> seekg_cur__(range_a<> const& range) final
-		{ return value_.seekg_cur__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekg_cur__(range); }
 
 		virtual inline any_a<> seekg_cur_(number_data_int64_a<> const& offset) final
-		{ return value_.seekg_cur_(offset); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekg_cur_(offset); }
 
 		virtual inline void seekg_cur(int64_t offset ) final
-		{ value_.seekg_cur(offset); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.seekg_cur(offset); }
 
 		virtual inline any_a<> sync__(range_a<> const& range) final
-		{ return value_.sync__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.sync__(range); }
 
 		virtual inline any_a<> sync_() final
-		{ return value_.sync_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.sync_(); }
 
 		virtual inline bool sync() final
-		{ return value_.sync(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.sync(); }
 
 		virtual inline any_a<> put__(range_a<> const& range) final
-		{ return value_.put__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.put__(range); }
 
 		virtual inline any_a<> put_(number_data_int8_a<> const& int_8) final
-		{ return value_.put_(int_8); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.put_(int_8); }
 
 		virtual inline void put(int8_t int_8 ) final
-		{ value_.put(int_8); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.put(int_8); }
 
 		virtual inline any_a<> write__(range_a<> const& range) final
-		{ return value_.write__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.write__(range); }
 
 		virtual inline any_a<> write_(lake_int8_a<> const& lake) final
-		{ return value_.write_(lake); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.write_(lake); }
 
 		virtual inline void write(std :: vector < int8_t > const & lake ) final
-		{ value_.write(lake); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.write(lake); }
 
 		virtual inline void write_string(std :: string const & str ) final
-		{ value_.write_string(str); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.write_string(str); }
 
 		virtual inline any_a<> tellp__(range_a<> const& range) const final
-		{ return value_.tellp__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.tellp__(range); }
 
 		virtual inline number_data_int64_a<> tellp_() const final
-		{ return value_.tellp_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.tellp_(); }
 
 		virtual inline int64_t tellp() const final
-		{ return value_.tellp(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.tellp(); }
 
 		virtual inline any_a<> seekp_beg__(range_a<> const& range) final
-		{ return value_.seekp_beg__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekp_beg__(range); }
 
 		virtual inline any_a<> seekp_beg_(number_data_int64_a<> const& offset) final
-		{ return value_.seekp_beg_(offset); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekp_beg_(offset); }
 
 		virtual inline void seekp_beg(int64_t offset ) final
-		{ value_.seekp_beg(offset); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.seekp_beg(offset); }
 
 		virtual inline any_a<> seekp_end__(range_a<> const& range) final
-		{ return value_.seekp_end__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekp_end__(range); }
 
 		virtual inline any_a<> seekp_end_(number_data_int64_a<> const& offset) final
-		{ return value_.seekp_end_(offset); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekp_end_(offset); }
 
 		virtual inline void seekp_end(int64_t offset ) final
-		{ value_.seekp_end(offset); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.seekp_end(offset); }
 
 		virtual inline any_a<> seekp_cur__(range_a<> const& range) final
-		{ return value_.seekp_cur__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekp_cur__(range); }
 
 		virtual inline any_a<> seekp_cur_(number_data_int64_a<> const& offset) final
-		{ return value_.seekp_cur_(offset); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.seekp_cur_(offset); }
 
 		virtual inline void seekp_cur(int64_t offset ) final
-		{ value_.seekp_cur(offset); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.seekp_cur(offset); }
 
 		virtual inline any_a<> flush__(range_a<> const& range) final
-		{ return value_.flush__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.flush__(range); }
 
 		virtual inline any_a<> flush_() final
-		{ return value_.flush_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.flush_(); }
 
 		virtual inline void flush() final
-		{ value_.flush(); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.flush(); }
 
 		virtual inline any_a<> good__(range_a<> const& range) const final
-		{ return value_.good__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.good__(range); }
 
 		virtual inline any_a<> good_() const final
-		{ return value_.good_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.good_(); }
 
 		virtual inline bool good() const final
-		{ return value_.good(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.good(); }
 
 		virtual inline any_a<> eof__(range_a<> const& range) const final
-		{ return value_.eof__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.eof__(range); }
 
 		virtual inline any_a<> eof_() const final
-		{ return value_.eof_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.eof_(); }
 
 		virtual inline bool eof() const final
-		{ return value_.eof(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.eof(); }
 
 		virtual inline any_a<> fail__(range_a<> const& range) const final
-		{ return value_.fail__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.fail__(range); }
 
 		virtual inline any_a<> fail_() const final
-		{ return value_.fail_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.fail_(); }
 
 		virtual inline bool fail() const final
-		{ return value_.fail(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.fail(); }
 
 		virtual inline any_a<> bad__(range_a<> const& range) const final
-		{ return value_.bad__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.bad__(range); }
 
 		virtual inline any_a<> bad_() const final
-		{ return value_.bad_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.bad_(); }
 
 		virtual inline bool bad() const final
-		{ return value_.bad(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.bad(); }
 
 		virtual inline any_a<> set_good__(range_a<> const& range) final
-		{ return value_.set_good__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.set_good__(range); }
 
 		virtual inline any_a<> set_good_(any_a<> const& value) final
-		{ return value_.set_good_(value); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.set_good_(value); }
 
 		virtual inline void set_good(bool value ) final
-		{ value_.set_good(value); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.set_good(value); }
 
 		virtual inline any_a<> set_eof__(range_a<> const& range) final
-		{ return value_.set_eof__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.set_eof__(range); }
 
 		virtual inline any_a<> set_eof_(any_a<> const& value) final
-		{ return value_.set_eof_(value); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.set_eof_(value); }
 
 		virtual inline void set_eof(bool value ) final
-		{ value_.set_eof(value); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.set_eof(value); }
 
 		virtual inline any_a<> set_fail__(range_a<> const& range) final
-		{ return value_.set_fail__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.set_fail__(range); }
 
 		virtual inline any_a<> set_fail_(any_a<> const& value) final
-		{ return value_.set_fail_(value); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.set_fail_(value); }
 
 		virtual inline void set_fail(bool value ) final
-		{ value_.set_fail(value); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.set_fail(value); }
 
 		virtual inline any_a<> set_bad__(range_a<> const& range) final
-		{ return value_.set_bad__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.set_bad__(range); }
 
 		virtual inline any_a<> set_bad_(any_a<> const& value) final
-		{ return value_.set_bad_(value); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.set_bad_(value); }
 
 		virtual inline void set_bad(bool value ) final
-		{ value_.set_bad(value); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.set_bad(value); }
 
 		virtual inline any_a<> filename__(range_a<> const& range) const final
-		{ return value_.filename__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.filename__(range); }
 
 		virtual inline lake_int8_a<> filename_() const final
-		{ return value_.filename_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.filename_(); }
 
 		virtual inline std :: string filename() const final
-		{ return value_.filename(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.filename(); }
 
 	};
 

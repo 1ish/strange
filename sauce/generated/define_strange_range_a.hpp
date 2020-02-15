@@ -110,16 +110,16 @@ protected:
 		{}
 
 		virtual inline any_a<> cbegin__(range_a<> const& range) const final
-		{ return value_.cbegin__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.cbegin__(range); }
 
 		virtual inline forward_const_iterator_a<> cbegin_() const final
-		{ return value_.cbegin_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.cbegin_(); }
 
 		virtual inline any_a<> cend__(range_a<> const& range) const final
-		{ return value_.cend__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.cend__(range); }
 
 		virtual inline forward_const_iterator_a<> cend_() const final
-		{ return value_.cend_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.cend_(); }
 
 	};
 

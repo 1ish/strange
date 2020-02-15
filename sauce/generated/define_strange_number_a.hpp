@@ -434,259 +434,259 @@ protected:
 		{}
 
 		virtual inline any_a<> increment__(range_a<> const& range) final
-		{ return value_.increment__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.increment__(range); }
 
 		virtual inline number_a<> increment_() final
-		{ return value_.increment_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.increment_(); }
 
 		virtual inline any_a<> decrement__(range_a<> const& range) final
-		{ return value_.decrement__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.decrement__(range); }
 
 		virtual inline number_a<> decrement_() final
-		{ return value_.decrement_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.decrement_(); }
 
 		virtual inline any_a<> self_assign__(range_a<> const& range) final
-		{ return value_.self_assign__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_assign__(range); }
 
 		virtual inline number_a<> self_assign_(number_a<> const& number) final
-		{ return value_.self_assign_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_assign_(number); }
 
 		virtual inline any_a<> self_add__(range_a<> const& range) final
-		{ return value_.self_add__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_add__(range); }
 
 		virtual inline number_a<> self_add_(number_a<> const& number) final
-		{ return value_.self_add_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_add_(number); }
 
 		virtual inline any_a<> add__(range_a<> const& range) const final
-		{ return value_.add__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.add__(range); }
 
 		virtual inline number_a<> add_(number_a<> const& number) const final
-		{ return value_.add_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.add_(number); }
 
 		virtual inline number_a < > operator+(number_a < > const & number ) const final
-		{ return value_.operator+(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator+(number); }
 
 		virtual inline any_a<> self_subtract__(range_a<> const& range) final
-		{ return value_.self_subtract__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_subtract__(range); }
 
 		virtual inline number_a<> self_subtract_(number_a<> const& number) final
-		{ return value_.self_subtract_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_subtract_(number); }
 
 		virtual inline any_a<> subtract__(range_a<> const& range) const final
-		{ return value_.subtract__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.subtract__(range); }
 
 		virtual inline number_a<> subtract_(number_a<> const& number) const final
-		{ return value_.subtract_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.subtract_(number); }
 
 		virtual inline number_a < > operator-(number_a < > const & number ) const final
-		{ return value_.operator-(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator-(number); }
 
 		virtual inline any_a<> self_multiply__(range_a<> const& range) final
-		{ return value_.self_multiply__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_multiply__(range); }
 
 		virtual inline number_a<> self_multiply_(number_a<> const& number) final
-		{ return value_.self_multiply_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_multiply_(number); }
 
 		virtual inline any_a<> multiply__(range_a<> const& range) const final
-		{ return value_.multiply__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.multiply__(range); }
 
 		virtual inline number_a<> multiply_(number_a<> const& number) const final
-		{ return value_.multiply_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.multiply_(number); }
 
 		virtual inline number_a < > operator*(number_a < > const & number ) const final
-		{ return value_.operator*(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator*(number); }
 
 		virtual inline any_a<> self_divide__(range_a<> const& range) final
-		{ return value_.self_divide__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_divide__(range); }
 
 		virtual inline number_a<> self_divide_(number_a<> const& number) final
-		{ return value_.self_divide_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_divide_(number); }
 
 		virtual inline any_a<> divide__(range_a<> const& range) const final
-		{ return value_.divide__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.divide__(range); }
 
 		virtual inline number_a<> divide_(number_a<> const& number) const final
-		{ return value_.divide_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.divide_(number); }
 
 		virtual inline number_a < > operator/(number_a < > const & number ) const final
-		{ return value_.operator/(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator/(number); }
 
 		virtual inline any_a<> self_modulo__(range_a<> const& range) final
-		{ return value_.self_modulo__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_modulo__(range); }
 
 		virtual inline number_a<> self_modulo_(number_a<> const& number) final
-		{ return value_.self_modulo_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_modulo_(number); }
 
 		virtual inline any_a<> modulo__(range_a<> const& range) const final
-		{ return value_.modulo__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.modulo__(range); }
 
 		virtual inline number_a<> modulo_(number_a<> const& number) const final
-		{ return value_.modulo_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.modulo_(number); }
 
 		virtual inline number_a < > operator%(number_a < > const & number ) const final
-		{ return value_.operator%(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator%(number); }
 
 		virtual inline any_a<> to_int_64__(range_a<> const& range) const final
-		{ return value_.to_int_64__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_int_64__(range); }
 
 		virtual inline number_data_int64_a to_int_64_() const final
-		{ return value_.to_int_64_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_int_64_(); }
 
 		virtual inline int64_t to_int_64() const final
-		{ return value_.to_int_64(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_int_64(); }
 
 		virtual inline any_a<> from_int_64__(range_a<> const& range) final
-		{ return value_.from_int_64__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.from_int_64__(range); }
 
 		virtual inline any_a<> from_int_64_(number_data_int64_a const& int_64) final
-		{ return value_.from_int_64_(int_64); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.from_int_64_(int_64); }
 
 		virtual inline void from_int_64(int64_t int_64 ) final
-		{ value_.from_int_64(int_64); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.from_int_64(int_64); }
 
 		virtual inline any_a<> to_uint_64__(range_a<> const& range) const final
-		{ return value_.to_uint_64__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_uint_64__(range); }
 
 		virtual inline number_data_uint64_a to_uint_64_() const final
-		{ return value_.to_uint_64_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_uint_64_(); }
 
 		virtual inline uint64_t to_uint_64() const final
-		{ return value_.to_uint_64(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_uint_64(); }
 
 		virtual inline any_a<> from_uint_64__(range_a<> const& range) final
-		{ return value_.from_uint_64__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.from_uint_64__(range); }
 
 		virtual inline any_a<> from_uint_64_(number_data_uint64_a const& uint_64) final
-		{ return value_.from_uint_64_(uint_64); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.from_uint_64_(uint_64); }
 
 		virtual inline void from_uint_64(uint64_t uint_64 ) final
-		{ value_.from_uint_64(uint_64); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.from_uint_64(uint_64); }
 
 		virtual inline any_a<> to_float_64__(range_a<> const& range) const final
-		{ return value_.to_float_64__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_float_64__(range); }
 
 		virtual inline number_data_double_a to_float_64_() const final
-		{ return value_.to_float_64_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_float_64_(); }
 
 		virtual inline double to_float_64() const final
-		{ return value_.to_float_64(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_float_64(); }
 
 		virtual inline any_a<> from_float_64__(range_a<> const& range) final
-		{ return value_.from_float_64__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.from_float_64__(range); }
 
 		virtual inline any_a<> from_float_64_(number_data_double_a const& int_64) final
-		{ return value_.from_float_64_(int_64); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.from_float_64_(int_64); }
 
 		virtual inline void from_float_64(double int_64 ) final
-		{ value_.from_float_64(int_64); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.from_float_64(int_64); }
 
 		virtual inline any_a<> less_than__(range_a<> const& range) const final
-		{ return value_.less_than__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.less_than__(range); }
 
 		virtual inline any_a<> less_than_(number_a<> const& number) const final
-		{ return value_.less_than_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.less_than_(number); }
 
 		virtual inline bool operator<(number_a < > const & number ) const final
-		{ return value_.operator<(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator<(number); }
 
 		virtual inline any_a<> greater_than__(range_a<> const& range) const final
-		{ return value_.greater_than__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.greater_than__(range); }
 
 		virtual inline any_a<> greater_than_(number_a<> const& number) const final
-		{ return value_.greater_than_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.greater_than_(number); }
 
 		virtual inline bool operator>(number_a < > const & number ) const final
-		{ return value_.operator>(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator>(number); }
 
 		virtual inline any_a<> less_or_equal__(range_a<> const& range) const final
-		{ return value_.less_or_equal__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.less_or_equal__(range); }
 
 		virtual inline any_a<> less_or_equal_(number_a<> const& number) const final
-		{ return value_.less_or_equal_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.less_or_equal_(number); }
 
 		virtual inline bool operator<=(number_a < > const & number ) const final
-		{ return value_.operator<=(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator<=(number); }
 
 		virtual inline any_a<> greater_or_equal__(range_a<> const& range) const final
-		{ return value_.greater_or_equal__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.greater_or_equal__(range); }
 
 		virtual inline any_a<> greater_or_equal_(number_a<> const& number) const final
-		{ return value_.greater_or_equal_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.greater_or_equal_(number); }
 
 		virtual inline bool operator>=(number_a < > const & number ) const final
-		{ return value_.operator>=(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator>=(number); }
 
 		virtual inline any_a<> byte_size__(range_a<> const& range) const final
-		{ return value_.byte_size__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.byte_size__(range); }
 
 		virtual inline number_data_int64_a byte_size_() const final
-		{ return value_.byte_size_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.byte_size_(); }
 
 		virtual inline int64_t byte_size() const final
-		{ return value_.byte_size(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.byte_size(); }
 
 		virtual inline any_a<> is_int__(range_a<> const& range) const final
-		{ return value_.is_int__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_int__(range); }
 
 		virtual inline any_a<> is_int_() const final
-		{ return value_.is_int_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_int_(); }
 
 		virtual inline bool is_int() const final
-		{ return value_.is_int(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_int(); }
 
 		virtual inline any_a<> is_signed__(range_a<> const& range) const final
-		{ return value_.is_signed__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_signed__(range); }
 
 		virtual inline any_a<> is_signed_() const final
-		{ return value_.is_signed_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_signed_(); }
 
 		virtual inline bool is_signed() const final
-		{ return value_.is_signed(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_signed(); }
 
 		virtual inline any_a<> is_nan__(range_a<> const& range) const final
-		{ return value_.is_nan__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_nan__(range); }
 
 		virtual inline any_a<> is_nan_() const final
-		{ return value_.is_nan_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_nan_(); }
 
 		virtual inline bool is_nan() const final
-		{ return value_.is_nan(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_nan(); }
 
 		virtual inline any_a<> is_inf__(range_a<> const& range) const final
-		{ return value_.is_inf__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_inf__(range); }
 
 		virtual inline any_a<> is_inf_() const final
-		{ return value_.is_inf_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_inf_(); }
 
 		virtual inline bool is_inf() const final
-		{ return value_.is_inf(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_inf(); }
 
 		virtual inline any_a<> is_finite__(range_a<> const& range) const final
-		{ return value_.is_finite__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_finite__(range); }
 
 		virtual inline any_a<> is_finite_() const final
-		{ return value_.is_finite_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_finite_(); }
 
 		virtual inline bool is_finite() const final
-		{ return value_.is_finite(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_finite(); }
 
 		virtual inline any_a<> is_normal__(range_a<> const& range) const final
-		{ return value_.is_normal__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_normal__(range); }
 
 		virtual inline any_a<> is_normal_() const final
-		{ return value_.is_normal_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_normal_(); }
 
 		virtual inline bool is_normal() const final
-		{ return value_.is_normal(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.is_normal(); }
 
 		virtual inline any_a<> little_endian__(range_a<> const& range) const final
-		{ return value_.little_endian__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.little_endian__(range); }
 
 		virtual inline any_a<> little_endian_() const final
-		{ return value_.little_endian_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.little_endian_(); }
 
 		virtual inline bool little_endian() const final
-		{ return value_.little_endian(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.little_endian(); }
 
 	};
 
