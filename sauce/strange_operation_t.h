@@ -47,7 +47,7 @@ protected:
 	inline operation_t(bool pure = false)
 		: thing_t<___ego___>{}
 		, _pure(pure)
-		, _names(flock_t<>::create_())
+		, _names(flock_create<>())
 	{}
 
 	inline operation_t(bool pure, flock_a<> const& names)
@@ -58,7 +58,7 @@ protected:
 
 	static inline std::pair<kind_a<>, flock_a<>> kind_names_params(flock_a<> const& params)
 	{
-		std::pair<kind_a<>, flock_a<>> kind_names(kind_t<>::create_(), flock_t<>::create_());
+		std::pair<kind_a<>, flock_a<>> kind_names(kind_create(), flock_create<>());
 		auto it = params.cbegin_();
 		if (it == params.cend_())
 		{
@@ -70,7 +70,7 @@ protected:
 			throw dis("strange::operation::kind_names_params passed non-kind result");
 		}
 		auto kind_result = cast<kind_a<>>(kind);
-		auto kind_params = flock_t<>::create_();
+		auto kind_params = flock_create<>();
 		while (++it != params.cend_())
 		{
 			auto name = *it;
@@ -79,7 +79,7 @@ protected:
 				throw dis("strange::operation::kind_names_params passed non-symbol name");
 			}
 			bool const end = (++it == params.cend_());
-			kind = end ? any_a<>::val(kind_t<>::create_()) : *it;
+			kind = end ? any_a<>::val(kind_create()) : *it;
 			if (!end && !check<kind_a<>>(kind))
 			{
 				throw dis("strange::operation::kind_names_params passed non-kind param");
@@ -91,7 +91,7 @@ protected:
 				break;
 			}
 		}
-		kind_names.first = kind_t<>::create(1, "", flock_t<>::create_(), flock_t<>::create_(), kind_params, kind_result);
+		kind_names.first = kind_create(1, "", flock_create<>(), flock_create<>(), kind_params, kind_result);
 		return kind_names;
 	}
 

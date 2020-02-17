@@ -251,16 +251,6 @@ inline misunderstanding_a<> mis(F&& s);
 template <typename F>
 inline misunderstanding_a<> dis(F&& s);
 
-// kind
-inline kind_a<> kind_from_cat(cat_a<> const& cat);
-inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects);
-inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional);
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats);
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects);
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional);
-inline cat_a<> kind_to_cat(kind_a<> const& kind);
-inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds);
-
 // native function
 using native_function_pointer = any_a<>(*)(range_a<> const&);
 
@@ -319,6 +309,18 @@ inline unordered_herd_a<> unordered_herd_create();
 // unordered shoal
 template <bool _concurrent_ = false>
 inline unordered_shoal_a<> unordered_shoal_create();
+
+// kind
+inline kind_a<> kind_create();
+inline kind_a<> kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
+inline kind_a<> kind_from_cat(cat_a<> const& cat);
+inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects);
+inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional);
+inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats);
+inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects);
+inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional);
+inline cat_a<> kind_to_cat(kind_a<> const& kind);
+inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds);
 
 // check/cast
 template <typename ___TTT___, typename ___VVV___>

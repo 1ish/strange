@@ -93,7 +93,7 @@ public:
 		return VAL;
 	}
 
-	static inline kind_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
+	static inline kind_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_create<>(), flock_a<> const& aspects = flock_create<>(), flock_a<> const& parameters = flock_create<>(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
 	{
 		if (name.is("strange::any"))
 		{
@@ -102,7 +102,7 @@ public:
 		return kind_a<>{ over{ kind_t<>(order.extract_primitive(), name, dimensions, aspects, parameters, result, fixed, reference, optional) } };
 	}
 
-	static inline kind_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), bool fixed = false, bool reference = false, bool optional = false)
+	static inline kind_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_create<>(), flock_a<> const& aspects = flock_create<>(), flock_a<> const& parameters = flock_create<>(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), bool fixed = false, bool reference = false, bool optional = false)
 	{
 		if (name == "strange::any")
 		{
@@ -224,6 +224,17 @@ bool const kind_t<___ego___>::___share___ = []()
 	kind_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+inline kind_a<> kind_create()
+{
+	return kind_t<>::create_();
+}
+
+// inline kind_a<> kind_create(int64_t order, std::string const& name = "", flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false)
+inline kind_a<> kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
+{
+	return kind_t<>::create(order, name, dimensions, aspects, parameters, result, fixed, reference, optional);
+}
 
 // cat conversion
 inline kind_a<> kind_from_cat(cat_a<> const& cat)
