@@ -2,8 +2,8 @@
 namespace strange
 {
 
-template <typename ___TTT___, typename _1_ = void>
-inline bool check(squad_a<_1_> const& value) noexcept;
+template <typename ___TTT___, typename _1__chk = void>
+inline bool check(squad_a<_1__chk> const& value) noexcept;
 
 template <typename _1_>
 class squad_a : public inventory_a<>
@@ -162,8 +162,8 @@ private:
 		return *std::static_pointer_cast<___squad_a_handle_base___>(handle_);
 	}
 
-	template <typename ___TTT___, typename _1_>
-	friend inline bool check(squad_a<_1_> const& value) noexcept;
+	template <typename ___TTT___, typename _1__chk>
+	friend inline bool check(squad_a<_1__chk> const& value) noexcept;
 
 public:
 	static inline bool ___check___(___SHARED___ const& handle) noexcept
@@ -275,8 +275,8 @@ private:
 	friend class ___squad_a_share___;
 }; // class squad_a
 
-template <typename ___TTT___, typename _1_>
-inline bool check(squad_a<_1_> const& value) noexcept
+template <typename ___TTT___, typename _1__chk>
+inline bool check(squad_a<_1__chk> const& value) noexcept
 {
 	return ___TTT___::___check___(value.handle_);
 }

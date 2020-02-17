@@ -2,8 +2,8 @@
 namespace strange
 {
 
-template <typename ___TTT___, typename number_data_int64_a = number_data_int64_a<> >
-inline bool check(collection_a<number_data_int64_a> const& value) noexcept;
+template <typename ___TTT___, typename number_data_int64_a_chk = number_data_int64_a<> >
+inline bool check(collection_a<number_data_int64_a_chk> const& value) noexcept;
 
 template <typename number_data_int64_a>
 class collection_a : public range_a<>
@@ -491,8 +491,8 @@ private:
 		return *std::static_pointer_cast<___collection_a_handle_base___>(handle_);
 	}
 
-	template <typename ___TTT___, typename number_data_int64_a>
-	friend inline bool check(collection_a<number_data_int64_a> const& value) noexcept;
+	template <typename ___TTT___, typename number_data_int64_a_chk>
+	friend inline bool check(collection_a<number_data_int64_a_chk> const& value) noexcept;
 
 public:
 	static inline bool ___check___(___SHARED___ const& handle) noexcept
@@ -604,8 +604,8 @@ private:
 	friend class ___collection_a_share___;
 }; // class collection_a
 
-template <typename ___TTT___, typename number_data_int64_a>
-inline bool check(collection_a<number_data_int64_a> const& value) noexcept
+template <typename ___TTT___, typename number_data_int64_a_chk>
+inline bool check(collection_a<number_data_int64_a_chk> const& value) noexcept
 {
 	return ___TTT___::___check___(value.handle_);
 }

@@ -301,7 +301,7 @@ protected:
 		}
 	}
 
-	inline void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool preface = false) const
+	inline void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool preface = false, std::string const postfix = "") const
 	{
 		if (declare)
 		{
@@ -312,7 +312,7 @@ protected:
 			}
 			if (_dimension_names.empty())
 			{
-				river.write_string("typename _1_ = void");
+				river.write_string("typename _1_" + postfix + " = void");
 			}
 			else
 			{
@@ -329,7 +329,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1));
+					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1) + postfix);
 
 					auto any_kind = *kit++;
 					if (check<expression_a<>>(any_kind))
@@ -368,7 +368,7 @@ protected:
 			}
 			if (_dimension_names.empty())
 			{
-				river.write_string("typename _1_");
+				river.write_string("typename _1_" + postfix);
 			}
 			else
 			{
@@ -383,7 +383,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1));
+					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1) + postfix);
 				}
 			}
 			river.write_string(">\n");
@@ -397,7 +397,7 @@ protected:
 			}
 			if (_dimension_names.empty())
 			{
-				river.write_string("_1_");
+				river.write_string("_1_" + postfix);
 			}
 			else
 			{
@@ -412,7 +412,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string(cast<symbol_a<>>(name).to_string().substr(1));
+					river.write_string(cast<symbol_a<>>(name).to_string().substr(1) + postfix);
 				}
 			}
 			river.write_string(">");
@@ -1291,13 +1291,13 @@ protected:
 		{
 			river.write_string("\t");
 		}
-		_declare_or_define_template_(version, 0, river, declare && !mate, !declare || mate, true);
+		_declare_or_define_template_(version, 0, river, declare && !mate, !declare || mate, true, "_chk");
 		if (mate)
 		{
 			river.write_string("\tfriend ");
 		}
 		river.write_string("inline bool check(" + class_name);
-		_declare_or_define_template_(version, 0, river, false, false);
+		_declare_or_define_template_(version, 0, river, false, false, false, "_chk");
 		river.write_string(" const& value) noexcept");
 		if (declare)
 		{

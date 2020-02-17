@@ -2,8 +2,8 @@
 namespace strange
 {
 
-template <typename ___TTT___, typename element>
-inline bool check(range_of_a<element> const& value) noexcept;
+template <typename ___TTT___, typename element_chk>
+inline bool check(range_of_a<element_chk> const& value) noexcept;
 
 template <typename element>
 class range_of_a : public any_a<>
@@ -176,8 +176,8 @@ private:
 		return *std::static_pointer_cast<___range_of_a_handle_base___>(handle_);
 	}
 
-	template <typename ___TTT___, typename element>
-	friend inline bool check(range_of_a<element> const& value) noexcept;
+	template <typename ___TTT___, typename element_chk>
+	friend inline bool check(range_of_a<element_chk> const& value) noexcept;
 
 public:
 	static inline bool ___check___(___SHARED___ const& handle) noexcept
@@ -289,8 +289,8 @@ private:
 	friend class ___range_of_a_share___;
 }; // class range_of_a
 
-template <typename ___TTT___, typename element>
-inline bool check(range_of_a<element> const& value) noexcept
+template <typename ___TTT___, typename element_chk>
+inline bool check(range_of_a<element_chk> const& value) noexcept
 {
 	return ___TTT___::___check___(value.handle_);
 }
