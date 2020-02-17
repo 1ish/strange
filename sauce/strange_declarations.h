@@ -266,7 +266,7 @@ inline number_data_a<int64_t> int_64_from_string(std::string const& str);
 inline number_data_a<double> float_64_from_string(std::string const& str);
 
 template <typename _primitive_>
-inline number_data_a<_primitive_> number_from_primitive(_primitive_ primitive);
+inline number_data_a<_primitive_> num(_primitive_ primitive);
 
 // lake
 inline lake_a<int8_t> lake_from_string(std::string const& str);

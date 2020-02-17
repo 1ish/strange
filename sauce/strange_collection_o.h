@@ -114,7 +114,7 @@ public:
 
 	inline number_data_a<int64_t> size_() const
 	{
-		return number_from_primitive(_OVERRIDDEN_::size());
+		return num(_OVERRIDDEN_::size());
 	}
 
 	inline any_a<> empty__(range_a<> const&) const

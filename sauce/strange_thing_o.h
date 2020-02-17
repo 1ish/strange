@@ -71,7 +71,7 @@ public:
 
 	inline number_data_a<uint64_t> hash_() const
 	{
-		return number_from_primitive(uint64_t(_OVERRIDDEN_::hash()));
+		return num(uint64_t(_OVERRIDDEN_::hash()));
 	}
 };
 

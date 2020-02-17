@@ -160,7 +160,7 @@ public:
 
 	inline number_data_a<uint64_t> identity_() const
 	{
-		return number_from_primitive(uint64_t(identity()));
+		return num(uint64_t(identity()));
 	}
 
 	inline any_a<> identical__(range_a<> const& range) const

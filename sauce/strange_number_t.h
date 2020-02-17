@@ -808,7 +808,7 @@ inline number_data_a<double> float_64_from_string(std::string const& str)
 }
 
 template <typename _primitive_>
-inline number_data_a<_primitive_> number_from_primitive(_primitive_ primitive)
+inline number_data_a<_primitive_> num(_primitive_ primitive)
 {
 	return number_t<_primitive_>::create(primitive);
 }
