@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = operation_a<>>
+// template <typename ___ego___ = operation_a<>>
+template <typename ___ego___>
 class native_function_t : public operation_t<___ego___>
 {
 	using function = any_a<>(*)(range_a<> const&);

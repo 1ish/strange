@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename _abstraction_, typename ___ego___ = operation_a<>>
+// template <typename _abstraction_, typename ___ego___ = operation_a<>>
+template <typename _abstraction_, typename ___ego___>
 class native_extraction_t : public operation_t<___ego___>
 {
 	using const_member = any_a<>(_abstraction_::*)(range_a<> const&) const;

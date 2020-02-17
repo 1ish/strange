@@ -85,6 +85,15 @@ class kind_t;
 template <typename _data_, typename ___ego___ = data_a<_data_>>
 class data_t;
 
+template <typename ___ego___ = operation_a<>>
+class native_function_t;
+
+template <typename _abstraction_, typename ___ego___ = operation_a<>>
+class native_extraction_t;
+
+template <typename _abstraction_, typename ___ego___ = operation_a<>>
+class native_mutation_t;
+
 template <typename ___ego___ = range_a<>>
 class range_t;
 

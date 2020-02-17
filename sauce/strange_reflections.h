@@ -4,7 +4,6 @@
 // reflections
 
 #include "strange_any_r.h"
-#include "strange_thing_r.h"
 #include "strange_symbol_r.h"
 #include "strange_cat_r.h"
 #include "strange_kind_r.h"

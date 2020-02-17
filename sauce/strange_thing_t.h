@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename ___ego___ = any_a<>>
+template <typename ___ego___ = any_a<>, typename _native_function_ = native_function_t<>>
 class thing_t : public one_t
 {
 public:
@@ -22,12 +22,14 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<thing_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::thing");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<thing_t<>>::share(shoal);
+		shoal.update_string("strange::thing::invoke", _native_function_::create(&thing_t<>::invoke__));
+		shoal.update_string("strange::thing::operate", _native_function_::create(&thing_t<>::operate__));
 	}
 
 	static inline any_a<> cat__(range_a<> const&)
@@ -208,13 +210,21 @@ private:
 	friend class ___thing_t_share___;
 };
 
-template <typename ___ego___>
-bool const thing_t<___ego___>::___share___ = []()
+template <typename ___ego___, typename _native_function_>
+bool const thing_t<___ego___, _native_function_>::___share___ = []()
 {
 	auto& shoal = shared();
-	thing_t<___ego___>::share(shoal);
+	thing_t<___ego___, _native_function_>::share(shoal);
 	return shoal;
 }();
+
+class ___thing_t_share___
+{
+	static inline bool ___share___()
+	{
+		return thing_t<>::___share___;
+	}
+};
 
 } // namespace strange
 
