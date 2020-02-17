@@ -94,7 +94,7 @@ public:
 
 	inline any_a<> evaluate_() const
 	{
-		auto local = unordered_shoal_create<>();
+		auto local = unordered_shoal_create();
 		local.insert_string("$", unordered_shoal_create<true>());
 		return _OVERRIDDEN_::operate(local, range_create());
 	}

@@ -24,7 +24,7 @@ public:
 
 	inline unordered_shoal_a<> shared_() const
 	{
-		unordered_shoal_a<> shoal = unordered_shoal_create<>();
+		unordered_shoal_a<> shoal = unordered_shoal_create();
 		_OVERRIDDEN_::share(shoal);
 		return shoal;
 	}
