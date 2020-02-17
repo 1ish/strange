@@ -267,6 +267,20 @@ using native_function_pointer = any_a<>(*)(range_a<> const&);
 template <typename... Args>
 inline operation_a<> native_function_create(native_function_pointer const fun, Args&&... args);
 
+// native extraction
+template <typename _abstraction_>
+using native_const_member_pointer = any_a<>(_abstraction_::*)(range_a<> const&) const;
+
+template <typename _abstraction_, typename... Args>
+inline operation_a<> native_extraction_create(native_const_member_pointer<_abstraction_> const fun, Args&&... args);
+
+// native mutation
+template <typename _abstraction_>
+using native_member_pointer = any_a<>(_abstraction_::*)(range_a<> const&);
+
+template <typename _abstraction_, typename... Args>
+inline operation_a<> native_mutation_create(native_member_pointer<_abstraction_> const fun, Args&&... args);
+
 // number
 inline number_data_a<int64_t> int_64_from_string(std::string const& str);
 inline number_data_a<double> float_64_from_string(std::string const& str);

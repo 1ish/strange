@@ -8,15 +8,13 @@ namespace strange
 template <typename _abstraction_, typename ___ego___>
 class native_extraction_t : public operation_t<___ego___>
 {
-	using const_member = any_a<>(_abstraction_::*)(range_a<> const&) const;
-
 public:
 	// override
 	using over = thing_o<native_extraction_t<_abstraction_>>;
 
 	// construction
 	template <typename... Args>
-	static inline operation_a<> create(const_member const fun, Args&&... args)
+	static inline operation_a<> create(native_const_member_pointer<_abstraction_> const fun, Args&&... args)
 	{
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
@@ -83,13 +81,13 @@ public:
 	}
 
 protected:
-	const_member const _function;
+	native_const_member_pointer<_abstraction_> const _function;
 	kind_a<> const _kind;
 	unordered_herd_a<> const _kinds;
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
 
-	inline native_extraction_t(const_member const fun, std::pair<kind_a<>, flock_a<>> const& kind_names)
+	inline native_extraction_t(native_const_member_pointer<_abstraction_> const fun, std::pair<kind_a<>, flock_a<>> const& kind_names)
 		: operation_t<___ego___>{ false, kind_names.second } //TODO pure
 		, _function{ fun }
 		, _kind{ kind_names.first }
@@ -98,6 +96,12 @@ protected:
 		, _cats{ operation_t<___ego___>::cats(_cat) }
 	{}
 };
+
+template <typename _abstraction_, typename... Args>
+inline operation_a<> native_extraction_create(native_const_member_pointer<_abstraction_> const fun, Args&&... args)
+{
+	return native_extraction_t<_abstraction_>::create(fun, std::forward<Args>(args)...);
+}
 
 } // namespace strange
 

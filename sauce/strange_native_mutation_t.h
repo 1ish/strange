@@ -8,15 +8,13 @@ namespace strange
 template <typename _abstraction_, typename ___ego___>
 class native_mutation_t : public operation_t<___ego___>
 {
-	using member = any_a<>(_abstraction_::*)(range_a<> const&);
-
 public:
 	// override
 	using over = thing_o<native_mutation_t<_abstraction_>>;
 
 	// construction
 	template <typename... Args>
-	static inline operation_a<> create(member const fun, Args&&... args)
+	static inline operation_a<> create(native_member_pointer<_abstraction_> const fun, Args&&... args)
 	{
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
@@ -83,13 +81,13 @@ public:
 	}
 
 protected:
-	member const _function;
+	native_member_pointer<_abstraction_> const _function;
 	kind_a<> const _kind;
 	unordered_herd_a<> const _kinds;
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
 
-	inline native_mutation_t(member const fun, std::pair<kind_a<>, flock_a<>> const& kind_names)
+	inline native_mutation_t(native_member_pointer<_abstraction_> const fun, std::pair<kind_a<>, flock_a<>> const& kind_names)
 		: operation_t<___ego___>{ false, kind_names.second } //TODO pure
 		, _function{ fun }
 		, _kind{ kind_names.first }
@@ -98,6 +96,12 @@ protected:
 		, _cats{ operation_t<___ego___>::cats(_cat) }
 	{}
 };
+
+template <typename _abstraction_, typename... Args>
+inline operation_a<> native_mutation_create(native_member_pointer<_abstraction_> const fun, Args&&... args)
+{
+	return native_mutation_t<_abstraction_>::create(fun, std::forward<Args>(args)...);
+}
 
 } // namespace strange
 

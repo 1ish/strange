@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename ___ego___ = any_a<>, typename _native_function_ = native_function_t<>>
+template <typename ___ego___ = any_a<>>
 class thing_t : public one_t
 {
 public:
@@ -210,11 +210,11 @@ private:
 	friend class ___thing_t_share___;
 };
 
-template <typename ___ego___, typename _native_function_>
-bool const thing_t<___ego___, _native_function_>::___share___ = []()
+template <typename ___ego___>
+bool const thing_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
-	thing_t<___ego___, _native_function_>::share(shoal);
+	thing_t<___ego___>::share(shoal);
 	return shoal;
 }();
 
