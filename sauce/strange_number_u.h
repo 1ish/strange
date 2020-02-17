@@ -807,7 +807,7 @@ public:
 
 	static inline float modulo(float x, float y)
 	{
-		return std::fmodf(x, y);
+		return std::fmod(x, y);
 	}
 
 	static inline bool is_int()
