@@ -797,14 +797,20 @@ using number_float_32_t = number_t<float, ___ego___>;
 template <typename ___ego___ = number_data_a<double>>
 using number_float_64_t = number_t<double, ___ego___>;
 
-number_data_a<int64_t> int_64_from_string(std::string const& str)
+inline number_data_a<int64_t> int_64_from_string(std::string const& str)
 {
 	return number_int_64_t<>::create(std::stoll(str));
 }
 
-number_data_a<double> float_64_from_string(std::string const& str)
+inline number_data_a<double> float_64_from_string(std::string const& str)
 {
 	return number_float_64_t<>::create(std::stod(str));
+}
+
+template <typename _primitive_>
+inline number_data_a<_primitive_> number_from_primitive(_primitive_ primitive)
+{
+	return number_t<_primitive_>::create(primitive);
 }
 
 } // namespace strange

@@ -1220,12 +1220,12 @@ using lake_float_32_t = lake_t<float, _concurrent_, ___ego___>;
 template <bool _concurrent_ = false, typename ___ego___ = lake_a<double>>
 using lake_float_64_t = lake_t<double, _concurrent_, ___ego___>;
 
-lake_a<int8_t> lake_from_string(std::string const& str)
+inline lake_a<int8_t> lake_from_string(std::string const& str)
 {
 	return lake_int_8_t<>::create(lake_int_8_t<>::std_vector_number(str.cbegin(), str.cend()));
 }
 
-std::string lake_to_string(lake_a<int8_t> const& lake)
+inline std::string lake_to_string(lake_a<int8_t> const& lake)
 {
 	auto const& v = lake.extract_vector();
 	return std::string(v.cbegin(), v.cend());

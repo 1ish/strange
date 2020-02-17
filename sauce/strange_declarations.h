@@ -261,9 +261,16 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 inline cat_a<> kind_to_cat(kind_a<> const& kind);
 inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds);
 
+// number
+inline number_data_a<int64_t> int_64_from_string(std::string const& str);
+inline number_data_a<double> float_64_from_string(std::string const& str);
+
+template <typename _primitive_>
+inline number_data_a<_primitive_> number_from_primitive(_primitive_ primitive);
+
 // lake
-lake_a<int8_t> lake_from_string(std::string const& str);
-std::string lake_to_string(lake_a<int8_t> const& lake);
+inline lake_a<int8_t> lake_from_string(std::string const& str);
+inline std::string lake_to_string(lake_a<int8_t> const& lake);
 
 // check/cast
 template <typename ___TTT___, typename ___VVV___>
