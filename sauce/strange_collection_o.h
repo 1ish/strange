@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _OVERRIDDEN_>
+template <typename _OVERRIDDEN_, typename _number_int64_ = number_t<int64_t>>
 class collection_o : public range_o<_OVERRIDDEN_>
 {
 public:
@@ -114,7 +114,7 @@ public:
 
 	inline number_data_a<int64_t> size_() const
 	{
-		return number_t<int64_t>::create(_OVERRIDDEN_::size());
+		return _number_int64_::create(_OVERRIDDEN_::size());
 	}
 
 	inline any_a<> empty__(range_a<> const&) const

@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _OVERRIDDEN_, typename _unordered_shoal_ = unordered_shoal_t<>, typename _unordered_shoal_concurrent_ = unordered_shoal_t<true>>
+template <typename _OVERRIDDEN_, typename _unordered_shoal_ = unordered_shoal_t<>, typename _unordered_shoal_concurrent_ = unordered_shoal_t<true>, typename _range_ = range_t<>>
 class expression_o : public thing_o<_OVERRIDDEN_>
 {
 public:
@@ -96,7 +96,7 @@ public:
 	{
 		auto local = _unordered_shoal_::create_();
 		local.insert_string("$", _unordered_shoal_concurrent_::create_());
-		return _OVERRIDDEN_::operate(local, range_t<>::create_());
+		return _OVERRIDDEN_::operate(local, _range_::create_());
 	}
 
 	inline any_a<> token__(range_a<> const&) const
