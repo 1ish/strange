@@ -28,8 +28,8 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		shoal.update_string("strange::thing::invoke", _native_function_::create(&thing_t<>::invoke__));
-		shoal.update_string("strange::thing::operate", _native_function_::create(&thing_t<>::operate__));
+		shoal.update_string("strange::thing::invoke", native_function_create(&thing_t<>::invoke__));
+		shoal.update_string("strange::thing::operate", native_function_create(&thing_t<>::operate__));
 	}
 
 	static inline any_a<> cat__(range_a<> const&)

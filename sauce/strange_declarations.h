@@ -261,6 +261,12 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 inline cat_a<> kind_to_cat(kind_a<> const& kind);
 inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds);
 
+// native function
+using native_function_pointer = any_a<>(*)(range_a<> const&);
+
+template <typename... Args>
+inline operation_a<> native_function_create(native_function_pointer const fun, Args&&... args);
+
 // number
 inline number_data_a<int64_t> int_64_from_string(std::string const& str);
 inline number_data_a<double> float_64_from_string(std::string const& str);

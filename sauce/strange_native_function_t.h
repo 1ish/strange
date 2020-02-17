@@ -8,15 +8,13 @@ namespace strange
 template <typename ___ego___>
 class native_function_t : public operation_t<___ego___>
 {
-	using function = any_a<>(*)(range_a<> const&);
-
 public:
 	// override
 	using over = thing_o<native_function_t<>>;
 
 	// construction
 	template <typename... Args>
-	static inline operation_a<> create(function const fun, Args&&... args)
+	static inline operation_a<> create(native_function_pointer const fun, Args&&... args)
 	{
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
@@ -82,13 +80,13 @@ public:
 	}
 
 protected:
-	function const _function;
+	native_function_pointer const _function;
 	kind_a<> const _kind;
 	unordered_herd_a<> const _kinds;
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
 
-	inline native_function_t(function const fun, std::pair<kind_a<>, flock_a<>> const& kind_names)
+	inline native_function_t(native_function_pointer const fun, std::pair<kind_a<>, flock_a<>> const& kind_names)
 		: operation_t<___ego___>{ false, kind_names.second } //TODO pure
 		, _function{ fun }
 		, _kind{ kind_names.first }
@@ -97,6 +95,12 @@ protected:
 		, _cats{ operation_t<___ego___>::cats(_cat) }
 	{}
 };
+
+template <typename... Args>
+inline operation_a<> native_function_create(native_function_pointer const fun, Args&&... args)
+{
+	return native_function_t<>::create(fun, std::forward<Args>(args)...);
+}
 
 } // namespace strange
 
