@@ -93,6 +93,16 @@ bool const range_t<___ego___>::___share___ = []()
 	return shoal;
 }();
 
+inline range_a<> range_create()
+{
+	return range_t<>::create_();
+}
+
+inline range_a<> range_create(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
+{
+	return range_t<>::create_(begin, end);
+}
+
 } // namespace strange
 
 #endif

@@ -268,9 +268,37 @@ inline number_data_a<double> float_64_from_string(std::string const& str);
 template <typename _primitive_>
 inline number_data_a<_primitive_> num(_primitive_ primitive);
 
+// range
+inline range_a<> range_create();
+inline range_a<> range_create(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end);
+
+// flock
+template <bool _concurrent_ = false>
+inline flock_a<> flock_create();
+
 // lake
 inline lake_a<int8_t> lake_from_string(std::string const& str);
 inline std::string lake_to_string(lake_a<int8_t> const& lake);
+
+// ordered herd
+template <bool _concurrent_ = false>
+inline ordered_herd_a<> ordered_herd_create();
+
+// ordered shoal
+template <bool _concurrent_ = false>
+inline ordered_shoal_a<> ordered_shoal_create();
+
+// squad
+template <bool _concurrent_ = false>
+inline squad_a<> squad_create();
+
+// unordered herd
+template <bool _concurrent_ = false>
+inline unordered_herd_a<> unordered_herd_create();
+
+// unordered shoal
+template <bool _concurrent_ = false>
+inline unordered_shoal_a<> unordered_shoal_create();
 
 // check/cast
 template <typename ___TTT___, typename ___VVV___>

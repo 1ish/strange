@@ -1149,6 +1149,13 @@ bool const squad_t<_concurrent_, ___ego___>::___share___ = []()
 	return shoal;
 }();
 
+// template <bool _concurrent_ = false>
+template <bool _concurrent_>
+inline squad_a<> squad_create()
+{
+	return squad_t<_concurrent_>::create_();
+}
+
 } // namespace strange
 
 #endif

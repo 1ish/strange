@@ -3,8 +3,8 @@
 
 namespace strange
 {
-
-template <typename _OVERRIDDEN_, typename _unordered_shoal_ = unordered_shoal_t<>>
+	
+template <typename _OVERRIDDEN_>
 class thing_o : public _OVERRIDDEN_
 {
 public:
@@ -24,7 +24,7 @@ public:
 
 	inline unordered_shoal_a<> shared_() const
 	{
-		unordered_shoal_a<> shoal = _unordered_shoal_::create_();
+		unordered_shoal_a<> shoal = unordered_shoal_create<>();
 		_OVERRIDDEN_::share(shoal);
 		return shoal;
 	}

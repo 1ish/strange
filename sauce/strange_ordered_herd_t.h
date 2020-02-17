@@ -517,6 +517,13 @@ bool const ordered_herd_t<_concurrent_, ___ego___>::___share___ = []()
 	return shoal;
 }();
 
+// template <bool _concurrent_ = false>
+template <bool _concurrent_>
+inline ordered_herd_a<> ordered_herd_create()
+{
+	return ordered_herd_t<_concurrent_>::create_();
+}
+
 } // namespace strange
 
 #endif

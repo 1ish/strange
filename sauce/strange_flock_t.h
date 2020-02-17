@@ -1142,6 +1142,13 @@ bool const flock_t<_concurrent_, ___ego___>::___share___ = []()
 	return shoal;
 }();
 
+// template <bool _concurrent_ = false>
+template <bool _concurrent_>
+inline flock_a<> flock_create()
+{
+	return flock_t<_concurrent_>::create_();
+}
+
 } // namespace strange
 
 #endif

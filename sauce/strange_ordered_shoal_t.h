@@ -740,6 +740,13 @@ bool const ordered_shoal_t<_concurrent_, ___ego___>::___share___ = []()
 	return shoal;
 }();
 
+// template <bool _concurrent_ = false>
+template <bool _concurrent_>
+inline ordered_shoal_a<> ordered_shoal_create()
+{
+	return ordered_shoal_t<_concurrent_>::create_();
+}
+
 } // namespace strange
 
 #endif
