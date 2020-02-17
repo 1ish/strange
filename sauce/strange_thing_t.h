@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename ___ego___ = any_a<>, typename _native_function_ = native_function_t<>>
+template <typename ___ego___ = any_a<>, typename _native_function_ = native_function_t<>, typename _range_ = range_t<>, typename _number_uint64_ = number_t<uint64_t>>
 class thing_t : public one_t
 {
 public:
@@ -107,7 +107,7 @@ public:
 			throw dis("strange::thing::invoke passed short range");
 		}
 		any_a<> member = *it;
-		return invoke_member(thing, member, range_t<>::create_(++it, range.cend_()));
+		return invoke_member(thing, member, _range_::create_(++it, range.cend_()));
 	}
 
 	static inline any_a<> invoke(any_a<>& thing, range_a<> const& range)
@@ -118,7 +118,7 @@ public:
 			throw dis("strange::thing::invoke passed short range");
 		}
 		any_a<> member = *it;
-		return invoke_member(thing, member, range_t<>::create_(++it, range.cend_()));
+		return invoke_member(thing, member, _range_::create_(++it, range.cend_()));
 	}
 
 	static inline any_a<> invoke_member(any_a<>& thing, any_a<> const& member, range_a<> const& range)
@@ -138,7 +138,7 @@ public:
 			throw dis("strange::thing::operate passed empty range");
 		}
 		any_a<> thing = any_a<>::dup(const_cast<any_a<>&>(*it));
-		return thing.operate(thing, range_t<>::create_(++it, range.cend_()));
+		return thing.operate(thing, _range_::create_(++it, range.cend_()));
 	}
 
 	static inline any_a<> operate(any_a<>& thing, range_a<> const& range)
@@ -149,7 +149,7 @@ public:
 			throw dis("strange::thing::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operation.operate(thing, range_t<>::create_(++it, range.cend_()));
+		return operation.operate(thing, _range_::create_(++it, range.cend_()));
 	}
 
 	// identification
@@ -160,7 +160,7 @@ public:
 
 	inline number_data_a<uint64_t> identity_() const
 	{
-		return number_t<uint64_t>::create(uint64_t(identity()));
+		return _number_uint64_::create(uint64_t(identity()));
 	}
 
 	inline any_a<> identical__(range_a<> const& range) const
@@ -210,11 +210,11 @@ private:
 	friend class ___thing_t_share___;
 };
 
-template <typename ___ego___, typename _native_function_>
-bool const thing_t<___ego___, _native_function_>::___share___ = []()
+template <typename ___ego___, typename _native_function_, typename _range_, typename _number_uint64_>
+bool const thing_t<___ego___, _native_function_, _range_, _number_uint64_>::___share___ = []()
 {
 	auto& shoal = shared();
-	thing_t<___ego___, _native_function_>::share(shoal);
+	thing_t<___ego___, _native_function_, _range_, _number_uint64_>::share(shoal);
 	return shoal;
 }();
 
