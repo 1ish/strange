@@ -506,7 +506,7 @@ namespace strange {
 
     	reflection<ordered_herd_a<___1___>>::share(shoal);
 
-    	return shoal.something();
+    	return shoal;
 
     }();
 

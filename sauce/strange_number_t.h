@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename _primitive_, typename ___ego___ = number_data_a<_primitive_>>
+// template <typename _primitive_, typename ___ego___ = number_data_a<_primitive_>>
+template <typename _primitive_, typename ___ego___>
 class number_t : public thing_t<___ego___>
 {
 public:
@@ -62,7 +63,7 @@ public:
 	inline ___ego___ increment_()
 	{
 		operator++();
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_t& operator++()
@@ -86,7 +87,7 @@ public:
 	inline number_a<> decrement_()
 	{
 		operator--();
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_t& operator--()
@@ -120,7 +121,7 @@ public:
 	inline number_a<> self_assign_(number_a<> const& number)
 	{
 		_number = number_u<_primitive_>::from_number(number);
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> self_add__(range_a<> const& range)
@@ -129,13 +130,13 @@ public:
 		{
 			operator+=(thing);
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_a<> self_add_(number_a<> const& number)
 	{
 		_number += number_u<_primitive_>::from_number(number);
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_t& operator+=(any_a<> const& thing)
@@ -150,7 +151,7 @@ public:
 
 	inline any_a<> add__(range_a<> const& range) const
 	{
-		number_a<> result = me_();
+		number_a<> result = thing_t<___ego___>::me_();
 		for (auto const& thing : range)
 		{
 			result += thing;
@@ -165,7 +166,7 @@ public:
 
 	inline number_a<> operator+(number_a<> const& number) const
 	{
-		___ego___ result = me_();
+		___ego___ result = thing_t<___ego___>::me_();
 		result.mutate_primitive() += number_u<_primitive_>::from_number(number);
 		return result;
 	}
@@ -176,13 +177,13 @@ public:
 		{
 			operator-=(thing);
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_a<> self_subtract_(number_a<> const& number)
 	{
 		_number -= number_u<_primitive_>::from_number(number);
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_t& operator-=(any_a<> const& thing)
@@ -197,7 +198,7 @@ public:
 
 	inline any_a<> subtract__(range_a<> const& range) const
 	{
-		number_a<> result = me_();
+		number_a<> result = thing_t<___ego___>::me_();
 		for (auto const& thing : range)
 		{
 			result -= thing;
@@ -212,7 +213,7 @@ public:
 
 	inline number_a<> operator-(number_a<> const& number) const
 	{
-		___ego___ result = me_();
+		___ego___ result = thing_t<___ego___>::me_();
 		result.mutate_primitive() -= number_u<_primitive_>::from_number(number);
 		return result;
 	}
@@ -223,13 +224,13 @@ public:
 		{
 			operator*=(thing);
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_a<> self_multiply_(number_a<> const& number)
 	{
 		_number *= number_u<_primitive_>::from_number(number);
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_t& operator*=(any_a<> const& thing)
@@ -244,7 +245,7 @@ public:
 
 	inline any_a<> multiply__(range_a<> const& range) const
 	{
-		number_a<> result = me_();
+		number_a<> result = thing_t<___ego___>::me_();
 		for (auto const& thing : range)
 		{
 			result *= thing;
@@ -259,7 +260,7 @@ public:
 
 	inline number_a<> operator*(number_a<> const& number) const
 	{
-		___ego___ result = me_();
+		___ego___ result = thing_t<___ego___>::me_();
 		result.mutate_primitive() *= number_u<_primitive_>::from_number(number);
 		return result;
 	}
@@ -270,7 +271,7 @@ public:
 		{
 			operator/=(thing);
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_a<> self_divide_(number_a<> const& number)
@@ -281,7 +282,7 @@ public:
 			throw dis("strange::number self_divide division by zero");
 		}
 		_number /= num;
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_t& operator/=(any_a<> const& thing)
@@ -301,7 +302,7 @@ public:
 
 	inline any_a<> divide__(range_a<> const& range) const
 	{
-		number_a<> result = me_();
+		number_a<> result = thing_t<___ego___>::me_();
 		for (auto const& thing : range)
 		{
 			result /= thing;
@@ -321,7 +322,7 @@ public:
 		{
 			throw dis("strange::number / division by zero");
 		}
-		___ego___ result = me_();
+		___ego___ result = thing_t<___ego___>::me_();
 		result.mutate_primitive() /= num;
 		return result;
 	}
@@ -332,7 +333,7 @@ public:
 		{
 			operator%=(thing);
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_a<> self_modulo_(number_a<> const& number)
@@ -343,7 +344,7 @@ public:
 			throw dis("strange::number self_modulo division by zero");
 		}
 		_number = number_u<_primitive_>::modulo(_number, num);
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_t& operator%=(any_a<> const& thing)
@@ -363,7 +364,7 @@ public:
 
 	inline any_a<> modulo__(range_a<> const& range) const
 	{
-		number_a<> result = me_();
+		number_a<> result = thing_t<___ego___>::me_();
 		for (auto const& thing : range)
 		{
 			result %= thing;
@@ -419,7 +420,7 @@ public:
 	inline any_a<> from_int_64_(number_data_a<int64_t> const& int_64)
 	{
 		from_int_64(int_64.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void from_int_64(int64_t int_64)
@@ -460,7 +461,7 @@ public:
 	inline any_a<> from_uint_64_(number_data_a<uint64_t> const& uint_64)
 	{
 		from_uint_64(uint_64.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void from_uint_64(uint64_t uint_64)
@@ -501,7 +502,7 @@ public:
 	inline any_a<> from_float_64_(number_data_a<double> const& float_64)
 	{
 		from_float_64(float_64.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void from_float_64(double float_64)
@@ -749,7 +750,7 @@ protected:
 	_primitive_ _number;
 
 	inline number_t(_primitive_ number)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _number(number)
 	{}
 
@@ -763,7 +764,7 @@ bool const number_t<_primitive_, ___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	number_t<_primitive_, ___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 template <typename ___ego___ = number_data_a<int8_t>>

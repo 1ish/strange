@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_and_t : public expression_t<___ego___>
 {
 public:
@@ -79,7 +80,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_and::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_and::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" (");
 		_left.generate_cpp(version, indent, river, declare, define);
@@ -94,7 +95,7 @@ protected:
 	expression_a<> const _right;
 
 	inline expression_and_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& left, expression_a<> const& right)
-		: expression_t(token, pure_literal_terms(token, terms))
+		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _left{ left }
 		, _right{ right }
@@ -110,7 +111,7 @@ bool const expression_and_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_and_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

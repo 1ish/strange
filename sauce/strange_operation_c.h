@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = operation_a<>>
+// template <typename ___ego___ = operation_a<>>
+template <typename ___ego___>
 class operation_c : public any_c<___ego___>
 {
 public:
@@ -32,20 +33,22 @@ public:
 	// reflection
 	inline any_a<> type__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("type");
+		auto const op = any_c<___ego___>::_operations.at_string("type");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = any_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
 		return reflection<operation_c<>>::type();
 	}
 
 	inline symbol_a<> type_() const
 	{
-		auto const op = _operations.at_string("type");
+		auto const op = any_c<___ego___>::_operations.at_string("type");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = any_c<___ego___>::me_();
+			auto const result = op.operate(thing, range_t<>::create_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("<strange::operation>::type returned non-symbol");
@@ -57,10 +60,11 @@ public:
 
 	inline any_a<> shared__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("shared");
+		auto const op = any_c<___ego___>::_operations.at_string("shared");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = any_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
@@ -69,10 +73,11 @@ public:
 
 	inline unordered_shoal_a<> shared_() const
 	{
-		auto const op = _operations.at_string("shared");
+		auto const op = any_c<___ego___>::_operations.at_string("shared");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = any_c<___ego___>::me_();
+			auto const result = op.operate(thing, range_t<>::create_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("<strange::operation>::shared returned non-unordered-shoal");
@@ -92,12 +97,13 @@ public:
 	// operation
 	inline any_a<> pure__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("pure");
+		auto const op = any_c<___ego___>::_operations.at_string("pure");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = any_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
-		auto const oper = _operations.at_string("operate");
+		auto const oper = any_c<___ego___>::_operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
 			return cast<operation_a<>>(oper).pure_();
@@ -107,12 +113,13 @@ public:
 
 	inline any_a<> pure_() const
 	{
-		auto const op = _operations.at_string("pure");
+		auto const op = any_c<___ego___>::_operations.at_string("pure");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = any_c<___ego___>::me_();
+			return op.operate(thing, range_t<>::create_());
 		}
-		auto const oper = _operations.at_string("operate");
+		auto const oper = any_c<___ego___>::_operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
 			return cast<operation_a<>>(oper).pure_();
@@ -122,12 +129,13 @@ public:
 
 	inline bool pure() const
 	{
-		auto const op = _operations.at_string("pure");
+		auto const op = any_c<___ego___>::_operations.at_string("pure");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = any_c<___ego___>::me_();
+			return op.operate(thing, range_t<>::create_());
 		}
-		auto const oper = _operations.at_string("operate");
+		auto const oper = any_c<___ego___>::_operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
 			return cast<operation_a<>>(oper).pure();
@@ -143,20 +151,22 @@ public:
 
 	inline any_a<> names__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("names");
+		auto const op = any_c<___ego___>::_operations.at_string("names");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = any_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
 		return flock_t<>::create_();
 	}
 
 	inline flock_a<> names_() const
 	{
-		auto const op = _operations.at_string("names");
+		auto const op = any_c<___ego___>::_operations.at_string("names");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = any_c<___ego___>::me_();
+			auto const result = op.operate(thing, range_t<>::create_());
 			if (!check<flock_a<>>(result))
 			{
 				throw dis("<strange::operation>::names returned non-flock");
@@ -169,7 +179,7 @@ public:
 protected:
 	// construction
 	inline operation_c(shoal_a<> const& conception)
-		: any_c{ conception }
+		: any_c<___ego___>{ conception }
 	{}
 
 private:
@@ -182,7 +192,7 @@ bool const operation_c<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	operation_c<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

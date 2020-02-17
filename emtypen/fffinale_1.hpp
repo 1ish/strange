@@ -243,7 +243,7 @@ bool const %struct_name%<___1___>::___share___ = []()
 {
 	auto& shoal = shared();
 	reflection<%struct_name%<___1___>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 #undef ___derived___

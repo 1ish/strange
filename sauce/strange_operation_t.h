@@ -44,8 +44,14 @@ protected:
 	bool const _pure;
 	flock_a<> const _names;
 
-	inline operation_t(bool pure = false, flock_a<> const& names = flock_t<>::create_())
-		: thing_t{}
+	inline operation_t(bool pure = false)
+		: thing_t<___ego___>{}
+		, _pure(pure)
+		, _names(flock_t<>::create_())
+	{}
+
+	inline operation_t(bool pure, flock_a<> const& names)
+		: thing_t<___ego___>{}
 		, _pure(pure)
 		, _names(names)
 	{}

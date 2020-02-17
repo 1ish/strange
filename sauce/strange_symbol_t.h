@@ -127,7 +127,7 @@ protected:
 
 	template <typename F>
 	inline symbol_t(F&& s)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _string{ std::forward<F>(s) }
 		, _hash{ std::hash<std::string>{}(_string) }
 	{}
@@ -142,7 +142,7 @@ bool const symbol_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	symbol_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 template <typename F>

@@ -36,7 +36,7 @@ public:
 		auto& local = local_shoal.mutate_map();
 		local.emplace(sym("$"), _shared);
 		forward_const_iterator_a<> ait = range.cbegin_();
-		auto nit = _names.extract_vector().cbegin();
+		auto nit = operation_t<___ego___>::_names.extract_vector().cbegin();
 		auto kit = _kinds.extract_vector().cbegin();
 		for (auto const& def : _defaults.extract_vector())
 		{
@@ -109,15 +109,15 @@ public:
 		{
 			return _expression.operate(local_shoal, range);
 		}
-		catch (expression_t<>::return_i& ret)
+		catch (typename expression_t<>::return_i& ret)
 		{
 			return ret.result;
 		}
-		catch (expression_t<>::break_i&)
+		catch (typename expression_t<>::break_i&)
 		{
 			throw dis(_token.report() + "strange::function::operate break caught trying to escape");
 		}
-		catch (expression_t<>::continue_i&)
+		catch (typename expression_t<>::continue_i&)
 		{
 			throw dis(_token.report() + "strange::function::operate continue caught trying to escape");
 		}
@@ -153,7 +153,7 @@ protected:
 	unordered_shoal_a<> const _shared;
 
 	inline function_t(token_a<> const& token, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& defaults, expression_a<> const& expression)
-		: operation_t(expression.pure(), names)
+		: operation_t<___ego___>(expression.pure(), names)
 		, _token{ token }
 		, _scope{ scope }
 		, _kinds{ kinds }

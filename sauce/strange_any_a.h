@@ -629,7 +629,7 @@ namespace strange {
     {
     	auto& shoal = shared();
     	reflection<any_a<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___, ___9___>>::share(shoal);
-    	return shoal.something();
+    	return shoal;
     }();
     
 

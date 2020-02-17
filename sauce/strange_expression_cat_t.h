@@ -109,7 +109,7 @@ public:
 		auto dimensions = _dimensions.operate(thing, range);
 		if (!check<flock_a<>>(dimensions))
 		{
-			throw dis(_token.report() + "strange::expression_cat::operate dimensions are not a flock");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_cat::operate dimensions are not a flock");
 		}
 		if (_count == 2)
 		{
@@ -118,7 +118,7 @@ public:
 		auto parameters = _parameters.operate(thing, range);
 		if (!check<flock_a<>>(parameters))
 		{
-			throw dis(_token.report() + "strange::expression_cat::operate parameters are not a flock");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_cat::operate parameters are not a flock");
 		}
 		if (_count == 3)
 		{
@@ -127,7 +127,7 @@ public:
 		auto result = _result.operate(thing, range);
 		if (!check<symbol_a<>>(result))
 		{
-			throw dis(_token.report() + "strange::expression_cat::operate result is not a symbol");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_cat::operate result is not a symbol");
 		}
 		return cat_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
 	}
@@ -178,7 +178,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_cat::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_cat::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" strange::cat_t<>::create(\"" + _name.to_string() + "\"");
 		if (_count >= 2)
@@ -209,7 +209,7 @@ protected:
 	expression_a<> const _result;
 
 	inline expression_cat_t(token_a<> const& token, flock_a<> const& terms, int64_t count, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& parameters, expression_a<> const& result)
-		: expression_t(token, dimensions.pure() && parameters.pure() && result.pure(), dimensions.literal() && parameters.literal() && result.literal()) // pure, literal
+		: expression_t<___ego___>(token, dimensions.pure() && parameters.pure() && result.pure(), dimensions.literal() && parameters.literal() && result.literal()) // pure, literal
 		, _terms{ terms }
 		, _count{ count }
 		, _order{ order }
@@ -229,7 +229,7 @@ bool const expression_cat_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_cat_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_me_t : public expression_t<___ego___>
 {
 public:
@@ -39,14 +40,14 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(_token.report() + "strange::expression_me::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_me::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto const& local = static_cast<unordered_shoal_a<>&>(thing).extract_map();
 		auto it = local.find(sym("^"));
 		if (it == local.cend())
 		{
-			throw dis(_token.report() + "strange::expression_me::operate ^ not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_me::operate ^ not found");
 		}
 		return it->second;
 	}
@@ -65,14 +66,14 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_me::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_me::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" me_() ");
 	}
 
 protected:
 	inline expression_me_t(token_a<> const& token)
-		: expression_t{ token }
+		: expression_t<___ego___>{ token }
 	{}
 
 private:
@@ -85,7 +86,7 @@ bool const expression_me_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_me_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

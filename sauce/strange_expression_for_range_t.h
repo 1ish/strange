@@ -86,7 +86,7 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(_token.report() + "strange::expression_for_range::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto local_shoal = cast<unordered_shoal_a<>>(thing); // new block scope
@@ -100,19 +100,19 @@ public:
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
-				throw dis(_token.report() + "strange::expression_for_range::operate kind expression evaluation error") + misunderstanding;
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate kind expression evaluation error") + misunderstanding;
 			}
 		}
 		if (!check<kind_a<>>(kind))
 		{
-			throw dis(_token.report() + "strange::expression_for_range::operate non-kind parameter kind");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate non-kind parameter kind");
 		}
 		auto it = local.emplace(_name, no()).first;
 		any_a<> result = no();
 		auto const for_range = _range.operate(local_shoal, range);
 		if (!check<range_a<>>(for_range))
 		{
-			throw dis(_token.report() + "strange::expression_for_range::operate expression returned non-range");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate expression returned non-range");
 		}
 		auto read_lock = check<collection_a<>>(for_range) ? cast<collection_a<>>(for_range).read_lock_() : no();
 		try
@@ -121,18 +121,19 @@ public:
 			{
 				if (!for_thing.kinds_().has_(kind))
 				{
-					throw dis(_token.report() + "strange::expression_for_range::operate kind does not include value");
+					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate kind does not include value");
 				}
 				it->second = for_thing;
 				try
 				{
-					result = _loop.operate(any_a<>::val(local_shoal), range); // new scope each time round the loop
+					auto thing = any_a<>::val(local_shoal); // new scope each time round the loop
+					result = _loop.operate(thing, range);
 				}
-				catch (continue_i&)
+				catch (typename expression_t<___ego___>::continue_i&)
 				{}
 			}
 		}
-		catch (break_i&)
+		catch (typename expression_t<___ego___>::break_i&)
 		{}
 		return result;
 	}
@@ -171,7 +172,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_for_range::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::generate_cpp called for wrong type of expression");
 		}
 		//river.write_string(" for(" + _kind.code() + " const& " + _name.to_string() + " : ");
 		_range.generate_cpp(version, indent, river, declare, define);
@@ -188,7 +189,7 @@ protected:
 	expression_a<> const _loop;
 
 	inline expression_for_range_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, any_a<> const& kind, expression_a<> const& range, expression_a<> const& loop)
-		: expression_t(token, pure_literal_terms(token, terms)) //TODO pure literal
+		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms)) //TODO pure literal
 		, _terms{ terms }
 		, _name{ name }
 		, _kind{ kind }
@@ -206,7 +207,7 @@ bool const expression_for_range_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_for_range_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

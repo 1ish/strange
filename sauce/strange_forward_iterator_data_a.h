@@ -506,7 +506,7 @@ namespace strange {
 
     	reflection<forward_iterator_data_a<___1___>>::share(shoal);
 
-    	return shoal.something();
+    	return shoal;
 
     }();
 

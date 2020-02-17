@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_t : public operation_t<___ego___>
 {
 public:
@@ -109,13 +110,13 @@ protected:
 	token_a<> const _token;
 
 	inline expression_t(token_a<> const& token, bool pure = false, bool literal = false, flock_a<> const& names = flock_t<>::create_())
-		: operation_t(pure, names)
+		: operation_t<___ego___>(pure, names)
 		, _literal(literal)
 		, _token(token)
 	{}
 
 	inline expression_t(token_a<> const& token, std::pair<bool, bool> const& pure_literal, flock_a<> const& names = flock_t<>::create_())
-		: operation_t(pure_literal.first, names)
+		: operation_t<___ego___>(pure_literal.first, names)
 		, _literal(pure_literal.second)
 		, _token(token)
 	{}
@@ -160,7 +161,7 @@ bool const expression_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

@@ -64,14 +64,14 @@ public:
 	template <typename... Args>
 	static inline void variadic(std::set<_1_>& collection, int64_t i, Args&&... args)
 	{
-		collection.insert(number_int_64_t<>::create(i));
+		collection.insert(number_t<int64_t>::create(i));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::set<_1_>& collection, double f, Args&&... args)
 	{
-		collection.insert(number_float_64_t<>::create(f));
+		collection.insert(number_t<double>::create(f));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
@@ -103,14 +103,14 @@ public:
 	template <typename... Args>
 	static inline void variadic(std::unordered_set<_1_, _2_>& collection, int64_t i, Args&&... args)
 	{
-		collection.insert(number_int_64_t<>::create(i));
+		collection.insert(number_t<int64_t>::create(i));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::unordered_set<_1_, _2_>& collection, double f, Args&&... args)
 	{
-		collection.insert(number_float_64_t<>::create(f));
+		collection.insert(number_t<double>::create(f));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 

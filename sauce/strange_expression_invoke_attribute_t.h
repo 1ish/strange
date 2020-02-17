@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_invoke_attribute_t : public expression_t<___ego___>
 {
 public:
@@ -93,7 +94,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_invoke_attribute::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke_attribute::generate_cpp called for wrong type of expression");
 		}
 		_thing.generate_cpp(version, indent, river, declare, define);
 		river.write_string("." + _member.to_string());
@@ -108,7 +109,7 @@ protected:
 	bool const _assign;
 
 	inline expression_invoke_attribute_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, symbol_a<> const& member)
-		: expression_t(token, is_pure_literal(token, terms, thing, member, expression_t<>::create(token)))
+		: expression_t<___ego___>(token, is_pure_literal(token, terms, thing, member, expression_t<>::create(token)))
 		, _terms{ terms }
 		, _thing{ thing }
 		, _member{ member }
@@ -117,7 +118,7 @@ protected:
 	{}
 
 	inline expression_invoke_attribute_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, symbol_a<> const& member, expression_a<> const& value)
-		: expression_t(token, is_pure_literal(token, terms, thing, member, value))
+		: expression_t<___ego___>(token, is_pure_literal(token, terms, thing, member, value))
 		, _terms{ terms }
 		, _thing{ thing }
 		, _member{ member }
@@ -147,7 +148,7 @@ bool const expression_invoke_attribute_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_invoke_attribute_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

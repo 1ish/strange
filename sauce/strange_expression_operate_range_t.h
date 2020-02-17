@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_operate_range_t : public expression_t<___ego___>
 {
 public:
@@ -50,11 +51,11 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto thing_term = any_a<>::dup(_thing.operate(thing, range));
-		auto const range_term = any_a<>::val(_range.operate(thing, range));
+		auto thing_term = _thing.operate(thing, range);
+		auto const range_term = _range.operate(thing, range);
 		if (!check<range_a<>>(range_term))
 		{
-			throw dis(_token.report() + "strange::expression_operate_range::operate with non-range term");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate_range::operate with non-range term");
 		}
 		return thing_term.operate(thing_term, cast<range_a<>>(range_term));
 	}
@@ -82,7 +83,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_operate_range::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate_range::generate_cpp called for wrong type of expression");
 		}
 		_thing.generate(version, indent, river);
 		river.write_string("(");
@@ -96,7 +97,7 @@ protected:
 	expression_a<> const _range;
 
 	inline expression_operate_range_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, expression_a<> const& range)
-		: expression_t(token, is_pure_literal(token, thing, range))
+		: expression_t<___ego___>(token, is_pure_literal(token, thing, range))
 		, _terms{ terms }
 		, _thing{ thing }
 		, _range{ range }
@@ -130,7 +131,7 @@ bool const expression_operate_range_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_operate_range_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

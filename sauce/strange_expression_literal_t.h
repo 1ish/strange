@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_literal_t : public expression_t<___ego___>
 {
 public:
@@ -107,9 +108,9 @@ public:
 		{
 			river.write_string(" \"" + lake_to_string(cast<lake_a<int8_t>>(_thing)) + "\" ");
 		}
-		else if (_token.literal_() == _thing)
+		else if (expression_t<___ego___>::_token.literal_() == _thing)
 		{
-			river.write_string(" " + _token.symbol() + " ");
+			river.write_string(" " + expression_t<___ego___>::_token.symbol() + " ");
 		}
 		else if (_thing.type_() == number_int_8_t<>::type_())
 		{
@@ -153,7 +154,7 @@ public:
 		}
 		else
 		{
-			throw dis(_token.report() + "strange::expression_literal::generate with invalid thing");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_literal::generate with invalid thing");
 		}
 	}
 
@@ -165,7 +166,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_literal::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_literal::generate_cpp called for wrong type of expression");
 		}
 		if (!check<any_a<>>(_thing))
 		{
@@ -213,9 +214,9 @@ public:
 		}
 		else if (_thing.type_() == number_int_64_t<>::type_())
 		{
-			if (_token.literal_() == _thing)
+			if (expression_t<___ego___>::_token.literal_() == _thing)
 			{
-				river.write_string(" strange::number_int_64::create(" + _token.symbol() + ") ");
+				river.write_string(" strange::number_int_64::create(" + expression_t<___ego___>::_token.symbol() + ") ");
 			}
 			else
 			{
@@ -232,9 +233,9 @@ public:
 		}
 		else if (_thing.type_() == number_float_64_t<>::type_())
 		{
-			if (_token.literal_() == _thing)
+			if (expression_t<___ego___>::_token.literal_() == _thing)
 			{
-				river.write_string(" strange::number_float_64::create(" + _token.symbol() + ") ");
+				river.write_string(" strange::number_float_64::create(" + expression_t<___ego___>::_token.symbol() + ") ");
 			}
 			else
 			{
@@ -243,7 +244,7 @@ public:
 		}
 		else
 		{
-			throw dis(_token.report() + "strange::expression_literal::generate_cpp with invalid thing");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_literal::generate_cpp with invalid thing");
 		}
 	}
 
@@ -252,7 +253,7 @@ protected:
 	any_a<> const _thing;
 
 	inline expression_literal_t(token_a<> const& token, flock_a<> const& terms, any_a<> const& thing)
-		: expression_t(token, true, true) // pure, literal
+		: expression_t<___ego___>(token, true, true) // pure, literal
 		, _terms{ terms }
 		, _thing{ thing }
 	{}
@@ -267,7 +268,7 @@ bool const expression_literal_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_literal_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

@@ -31,7 +31,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>&, range_a<> const&) const
 	{
-		throw break_i{};
+		throw expression_t<___ego___>::break_i{};
 	}
 
 	// expression
@@ -49,14 +49,14 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_break::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_break::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" break; ");
 	}
 
 protected:
 	inline expression_break_t(token_a<> const& token)
-		: expression_t(token, true, true) // pure, literal
+		: expression_t<___ego___>(token, true, true) // pure, literal
 	{}
 
 private:
@@ -69,7 +69,7 @@ bool const expression_break_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_break_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

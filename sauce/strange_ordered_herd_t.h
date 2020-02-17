@@ -77,7 +77,7 @@ class ordered_herd_t : public thing_t<___ego___>
 		inline ___ego___ increment_()
 		{
 			operator++();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline const_iterator_t& operator++()
@@ -103,7 +103,7 @@ class ordered_herd_t : public thing_t<___ego___>
 		inline ___ego___ decrement_()
 		{
 			operator--();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline const_iterator_t& operator--()
@@ -138,7 +138,7 @@ class ordered_herd_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline const_iterator_t(ordered_herd_a<> const& ordered_herd, ordered_herd_t const& ordered_herd_thing, F&& it)
-			: thing_t{}
+			: thing_t<___ego___>{}
 			, _it{ std::forward<F>(it) }
 			, _ordered_herd{ ordered_herd }
 			, _ordered_herd_thing{ ordered_herd_thing }
@@ -192,7 +192,8 @@ public:
 		{
 			throw dis("strange::ordered_herd::visit passed non-inventory");
 		}
-		return visit_(cast_dup<inventory_a<>>(const_cast<range_a<>&>(range)));
+		auto inventory = cast_dup<inventory_a<>>(const_cast<range_a<>&>(range));
+		return visit_(inventory);
 	}
 
 	inline any_a<> visit_(inventory_a<>& inventory) const
@@ -237,13 +238,13 @@ public:
 	inline bidirectional_const_iterator_a<> cbegin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_set_any::const_iterator>::create(me_(), *this, _set.cbegin());
+		return const_iterator_t<std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
 	}
 
 	inline bidirectional_const_iterator_a<> cend_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_set_any::const_iterator>::create(me_(), *this, _set.cend());
+		return const_iterator_t<std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
 	}
 
 	// collection / herd
@@ -406,7 +407,7 @@ public:
 				_set.insert(thing);
 			}
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline ordered_herd_t& operator+=(any_a<> const& range)
@@ -485,20 +486,20 @@ protected:
 
 	template <typename F>
 	inline ordered_herd_t(F&& init)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _mutex{}
 		, _set{ std::forward<F>(init) }
 	{}
 
 public:
 	inline ordered_herd_t(ordered_herd_t const& other)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _mutex{}
 		, _set{ other._set }
 	{}
 
 	inline ordered_herd_t(ordered_herd_t&& other)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _mutex{}
 		, _set{ std::move(other._set) }
 	{}
@@ -513,7 +514,7 @@ bool const ordered_herd_t<_concurrent_, ___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	ordered_herd_t<_concurrent_, ___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

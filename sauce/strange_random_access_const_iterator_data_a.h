@@ -506,7 +506,7 @@ namespace strange {
 
     	reflection<random_access_const_iterator_data_a<___1___>>::share(shoal);
 
-    	return shoal.something();
+    	return shoal;
 
     }();
 

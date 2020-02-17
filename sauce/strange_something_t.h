@@ -48,7 +48,7 @@ public:
 
 protected:
 	inline something_t()
-		: thing_t{}
+		: thing_t<___ego___>{}
 	{}
 
 private:
@@ -61,7 +61,7 @@ bool const something_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	something_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

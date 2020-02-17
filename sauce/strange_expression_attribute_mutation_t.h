@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_attribute_mutation_t : public expression_t<___ego___>
 {
 public:
@@ -74,7 +75,7 @@ public:
 		}
 		catch (misunderstanding_a<>& misunderstanding)
 		{
-			throw dis(_token.report() + "strange::expression_attribute_mutation::operate value evaluation error") + misunderstanding;
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_attribute_mutation::operate value evaluation error") + misunderstanding;
 		}
 	}
 
@@ -100,7 +101,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_attribute_mutation::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_attribute_mutation::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" [](");
 		river.write_string(")\n{\n");
@@ -115,7 +116,7 @@ protected:
 	expression_a<> const _expression;
 
 	inline expression_attribute_mutation_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& name, any_a<> const& kind, expression_a<> const& expression)
-		: expression_t(token, pure_literal_terms(token, terms))
+		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _name{ name }
 		, _kind{ kind }
@@ -132,7 +133,7 @@ bool const expression_attribute_mutation_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_attribute_mutation_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

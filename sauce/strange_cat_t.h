@@ -109,14 +109,14 @@ public:
 	{
 		if (!check<cat_a<>>(thing))
 		{
-			return symbol_t::operator==(thing);
+			return symbol_t<___ego___>::operator==(thing);
 		}
 		auto const cat = cast<cat_a<>>(thing);
-		if (_symbolic != cat.symbolic() || _hash != cat.hash())
+		if (_symbolic != cat.symbolic() || symbol_t<___ego___>::_hash != cat.hash())
 		{
 			return false;
 		}
-		bool const same = cat.to_string() == _string;
+		bool const same = cat.to_string() == symbol_t<___ego___>::_string;
 		if (_symbolic || !same)
 		{
 			return same;
@@ -219,7 +219,7 @@ protected:
 	symbol_a<> const _result;
 
 	inline cat_t(int64_t order, symbol_a<> const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result)
-		: symbol_t{ _symbol_(order, name, dimensions, aspects, parameters, result) }
+		: symbol_t<___ego___>{ _symbol_(order, name, dimensions, aspects, parameters, result) }
 		, _symbolic{ _symbolic_(dimensions, aspects, parameters, result) }
 		, _order{ order }
 		, _name{ name }
@@ -407,7 +407,7 @@ bool const cat_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	cat_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

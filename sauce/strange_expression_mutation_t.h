@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_mutation_t : public expression_t<___ego___>
 {
 public:
@@ -151,7 +152,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_mutation::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_mutation::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" [](");
 		auto nit = _names.extract_vector().cbegin();
@@ -184,7 +185,7 @@ public:
 	{
 		if (_expression.type_() != expression_kind_t<>::type_())
 		{
-			throw dis(_token.report() + "strange::expression_mutation::abstraction called with wrong type of result expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_mutation::abstraction called with wrong type of result expression");
 		}
 		auto river = river_t<>::create();
 		_expression.generate_cpp(version, 0, river, false, false, true);
@@ -222,7 +223,7 @@ public:
 			{
 				if (!check<kind_a<>>(any_kind))
 				{
-					throw dis(_token.report() + "strange::expression_mutation::abstraction non-kind parameter kind");
+					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_mutation::abstraction non-kind parameter kind");
 				}
 				auto const kind = cast<kind_a<>>(any_kind);
 				if (kind.name_().to_string().empty())
@@ -268,7 +269,7 @@ protected:
 	expression_a<> const _expression;
 
 	inline expression_mutation_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& expressions, flock_a<> const& defaults, expression_a<> const& expression)
-		: expression_t(token, pure_literal_terms(token, terms))
+		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _scope{ scope }
 		, _names{ names }
@@ -288,7 +289,7 @@ bool const expression_mutation_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_mutation_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

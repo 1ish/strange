@@ -190,7 +190,7 @@ protected:
 	flock_a<> _parent_expressions;
 
 	inline abstraction_t(token_a<> const& token, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
-		: operation_t(false, names) //TODO pure
+		: operation_t<___ego___>(false, names) //TODO pure
 		, _token{ token }
 		, _scope{ scope }
 		, _dimension_kinds{ dimension_kinds }
@@ -240,7 +240,7 @@ bool const abstraction_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	abstraction_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

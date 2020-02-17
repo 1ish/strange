@@ -507,7 +507,7 @@ namespace strange {
 
     	reflection<number_data_a<___1___>>::share(shoal);
 
-    	return shoal.something();
+    	return shoal;
 
     }();
 

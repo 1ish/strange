@@ -82,9 +82,9 @@ protected:
 	inline description_t()
 		: operation_t{}
 		, _kind{ kind_t<>::create_() }
-		, _kinds{ kinds(_kind) }
+		, _kinds{ operation_t<___ego___>::kinds(_kind) }
 		, _cat{ kind_to_cat(_kind) }
-		, _cats{ cats(_cat) }
+		, _cats{ operation_t<___ego___>::cats(_cat) }
 	{}
 };
 

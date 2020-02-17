@@ -59,7 +59,7 @@ public:
 
 protected:
 	inline parser_t()
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _tokenizer{ tokenizer_t<>::create_(river_t<>::create_()) }
 		, _it{ _tokenizer.cbegin_() }
 		, _end{ _tokenizer.cend_() }
@@ -466,7 +466,8 @@ private:
 		}
 		auto terms = flock_t<>::create_(context->scope);
 		terms += _elements(context);
-		auto const expression = instruction.operate(no(), flock_t<>::create_(token, terms));
+		auto _ = no();
+		auto const expression = instruction.operate(_, flock_t<>::create_(token, terms));
 		if (!check<expression_a<>>(expression))
 		{
 			throw dis("strange::parser instruction returned non-expression:") + token.report_();
@@ -910,7 +911,8 @@ private:
 					context->emit));
 				if (reference)
 				{
-					auto const expression = instruction.operate(no(), flock_t<>::create_(operator_token, terms));
+					auto _ = no();
+					auto const expression = instruction.operate(_, flock_t<>::create_(operator_token, terms));
 					if (!check<expression_a<>>(expression))
 					{
 						throw dis("strange::parser shoal member instruction returned non-expression:") + operator_token.report_();
@@ -975,7 +977,8 @@ private:
 						context->emit)));
 				if (reference)
 				{
-					auto const expression = instruction.operate(no(), flock_t<>::create_(operator_token, terms));
+					auto _ = no();
+					auto const expression = instruction.operate(_, flock_t<>::create_(operator_token, terms));
 					if (!check<expression_a<>>(expression))
 					{
 						throw dis("strange::parser shoal attribute instruction returned non-expression:") + operator_token.report_();
@@ -1727,7 +1730,7 @@ bool const parser_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	parser_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

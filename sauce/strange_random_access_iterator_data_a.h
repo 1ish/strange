@@ -264,7 +264,7 @@ namespace strange {
     {
     	auto& shoal = shared();
     	reflection<random_access_iterator_data_a<___1___>>::share(shoal);
-    	return shoal.something();
+    	return shoal;
     }();
     
     #undef ___derived___

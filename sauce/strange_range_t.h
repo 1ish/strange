@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = range_a<>>
+// template <typename ___ego___ = range_a<>>
+template <typename ___ego___>
 class range_t : public thing_t<___ego___>
 {
 public:
@@ -74,7 +75,7 @@ protected:
 	forward_const_iterator_a<> _end;
 
 	inline range_t(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _begin(begin)
 		, _end(end)
 	{}
@@ -89,7 +90,7 @@ bool const range_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	range_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

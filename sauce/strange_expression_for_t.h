@@ -85,13 +85,14 @@ public:
 			{
 				try
 				{
-					result = _loop.operate(any_a<>::val(local), range); // new scope each time round the loop
+					auto thing = any_a<>::val(local); // new scope each time round the loop
+					result = _loop.operate(thing, range);
 				}
-				catch (continue_i&)
+				catch (typename expression_t<___ego___>::continue_i&)
 				{}
 			}
 		}
-		catch (break_i&)
+		catch (typename expression_t<___ego___>::break_i&)
 		{}
 		return result;
 	}
@@ -127,7 +128,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_for::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" for(");
 		_initialize.generate_cpp(version, indent, river, declare, define);
@@ -148,7 +149,7 @@ protected:
 	expression_a<> const _loop;
 
 	inline expression_for_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& initialize, expression_a<> const& condition, expression_a<> const& next, expression_a<> const& loop)
-		: expression_t(token, pure_literal_terms(token, terms))
+		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _initialize{ initialize }
 		, _condition{ condition }
@@ -166,7 +167,7 @@ bool const expression_for_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_for_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

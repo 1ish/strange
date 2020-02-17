@@ -57,7 +57,8 @@ public:
 		}
 		else
 		{
-			auto const type_any = type_op.operate(no(), range_t<>::create_());
+			auto _ = no();
+			auto const type_any = type_op.operate(_, range_t<>::create_());
 			if (!check<symbol_a<>>(type_any))
 			{
 				throw dis("strange::conception::create merge parent type returned non-symbol");
@@ -73,7 +74,8 @@ public:
 		}
 		else
 		{
-			auto const cat_any = cat_op.operate(no(), range_t<>::create_());
+			auto _ = no();
+			auto const cat_any = cat_op.operate(_, range_t<>::create_());
 			if (!check<cat_a<>>(cat_any))
 			{
 				throw dis("strange::conception::create merge parent cat returned non-cat");
@@ -86,7 +88,8 @@ public:
 		any_a<> cats_any;
 		if (cats_op)
 		{
-			cats_any = cats_op.operate(no(), range_t<>::create_());
+			auto _ = no();
+			cats_any = cats_op.operate(_, range_t<>::create_());
 			if (!check<unordered_herd_a<>>(cats_any))
 			{
 				throw dis("strange::conception::create merge parent cats returned non-unordered-herd");
@@ -101,7 +104,8 @@ public:
 		}
 		else
 		{
-			auto const kind_any = kind_op.operate(no(), range_t<>::create_());
+			auto _ = no();
+			auto const kind_any = kind_op.operate(_, range_t<>::create_());
 			if (!check<kind_a<>>(kind_any))
 			{
 				throw dis("strange::conception::create merge parent kind returned non-kind");
@@ -120,7 +124,8 @@ public:
 		}
 		else
 		{
-			auto const kinds_any = kinds_op.operate(no(), range_t<>::create_());
+			auto _ = no();
+			auto const kinds_any = kinds_op.operate(_, range_t<>::create_());
 			if (!check<unordered_herd_a<>>(kinds_any))
 			{
 				throw dis("strange::conception::create merge parent kinds returned non-unordered-herd");
@@ -144,8 +149,8 @@ public:
 			{
 				continue;
 			}
-			auto const it = _map.find(key);
-			if (it != _map.cend())
+			auto const it = unordered_shoal_t<false, ___ego___>::_map.find(key);
+			if (it != unordered_shoal_t<false, ___ego___>::_map.cend())
 			{
 				// check overrides
 				if (intimate || !member.second.kinds_().has_(it->second.kind_()))
@@ -156,14 +161,14 @@ public:
 			}
 			else
 			{
-				_map.emplace(key, member.second);
+				unordered_shoal_t<false, ___ego___>::_map.emplace(key, member.second);
 			}
 		}
 	}
 
 protected:
 	inline conception_t(range_a<> const& parents)
-		: unordered_shoal_t{ std_unordered_map_any_any{} }
+		: unordered_shoal_t<false, ___ego___>{ std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>{} }
 	{
 		symbol_a<> type = sym("");
 		cat_a<> cat = cat_t<>::create_();
@@ -180,11 +185,11 @@ protected:
 			merge(cast<unordered_shoal_a<>>(parent), type, cat, cats, kind, kinds);
 		}
 		// add operations for type, cat, cats, kind and kinds
-		_map.emplace(sym("type"), attribute_extraction_t<>::create_(type));
-		_map.emplace(sym("cat"), attribute_extraction_t<>::create_(cat));
-		_map.emplace(sym("cats"), attribute_extraction_t<>::create_(cats));
-		_map.emplace(sym("kind"), attribute_extraction_t<>::create_(kind));
-		_map.emplace(sym("kinds"), attribute_extraction_t<>::create_(kinds));
+		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("type"), attribute_extraction_t<>::create_(type));
+		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("cat"), attribute_extraction_t<>::create_(cat));
+		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("cats"), attribute_extraction_t<>::create_(cats));
+		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("kind"), attribute_extraction_t<>::create_(kind));
+		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("kinds"), attribute_extraction_t<>::create_(kinds));
 	}
 
 private:
@@ -197,7 +202,7 @@ bool const conception_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	conception_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

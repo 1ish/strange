@@ -89,7 +89,7 @@ protected:
 
 	template <typename F>
 	inline disagreement_t(F&& s)
-		: nothing_t{}
+		: nothing_t<___ego___>{}
 		, _string{ std::forward<F>(s) }
 	{}
 
@@ -103,7 +103,7 @@ bool const disagreement_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	disagreement_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 template <typename F>

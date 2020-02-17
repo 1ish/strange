@@ -392,7 +392,7 @@ protected:
 	number_data_a<int64_t> const _precedence;
 
 	inline token_t(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& tag, symbol_a<> const& symbol, any_a<> const& literal, number_data_a<int64_t> const& precedence)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _filename{ filename }
 		, _line{ line }
 		, _position{ position }
@@ -412,7 +412,7 @@ bool const token_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	token_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

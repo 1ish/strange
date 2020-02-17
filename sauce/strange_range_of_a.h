@@ -300,7 +300,7 @@ namespace strange {
     {
     	auto& shoal = shared();
     	reflection<range_of_a<___1___>>::share(shoal);
-    	return shoal.something();
+    	return shoal;
     }();
     
 

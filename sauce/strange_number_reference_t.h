@@ -50,7 +50,7 @@ public:
 	inline ___ego___ increment_()
 	{
 		operator++();
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_reference_t& operator++()
@@ -72,7 +72,7 @@ public:
 	inline number_a<> decrement_()
 	{
 		operator--();
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_reference_t& operator--()
@@ -104,7 +104,7 @@ public:
 	inline number_a<> self_assign_(number_a<> const& number)
 	{
 		_number = number_u<_primitive_>::from_number(number);
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> self_add__(range_a<> const& range)
@@ -113,13 +113,13 @@ public:
 		{
 			operator+=(thing);
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_a<> self_add_(number_a<> const& number)
 	{
 		_number += number_u<_primitive_>::from_number(number);
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_reference_t& operator+=(any_a<> const& thing)
@@ -160,13 +160,13 @@ public:
 		{
 			operator-=(thing);
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_a<> self_subtract_(number_a<> const& number)
 	{
 		_number -= number_u<_primitive_>::from_number(number);
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_reference_t& operator-=(any_a<> const& thing)
@@ -207,13 +207,13 @@ public:
 		{
 			operator*=(thing);
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_a<> self_multiply_(number_a<> const& number)
 	{
 		_number *= number_u<_primitive_>::from_number(number);
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_reference_t& operator*=(any_a<> const& thing)
@@ -254,7 +254,7 @@ public:
 		{
 			operator/=(thing);
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_a<> self_divide_(number_a<> const& number)
@@ -265,7 +265,7 @@ public:
 			throw dis("strange::number_reference self_divide division by zero");
 		}
 		_number /= num;
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_reference_t& operator/=(any_a<> const& thing)
@@ -316,7 +316,7 @@ public:
 		{
 			operator%=(thing);
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_a<> self_modulo_(number_a<> const& number)
@@ -327,7 +327,7 @@ public:
 			throw dis("strange::number_reference self_modulo division by zero");
 		}
 		_number = number_u<_primitive_>::modulo(_number, num);
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline number_reference_t& operator%=(any_a<> const& thing)
@@ -403,7 +403,7 @@ public:
 	inline any_a<> from_int_64_(number_data_a<int64_t> const& int_64)
 	{
 		from_int_64(int_64.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void from_int_64(int64_t int_64)
@@ -444,7 +444,7 @@ public:
 	inline any_a<> from_uint_64_(number_data_a<uint64_t> const& uint_64)
 	{
 		from_uint_64(uint_64.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void from_uint_64(uint64_t uint_64)
@@ -485,7 +485,7 @@ public:
 	inline any_a<> from_float_64_(number_data_a<double> const& float_64)
 	{
 		from_float_64(float_64.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void from_float_64(double float_64)

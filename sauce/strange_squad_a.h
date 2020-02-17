@@ -506,7 +506,7 @@ namespace strange {
 
     	reflection<squad_a<___1___>>::share(shoal);
 
-    	return shoal.something();
+    	return shoal;
 
     }();
 

@@ -43,16 +43,16 @@ public:
 			{
 				if (value == defaults.cend_())
 				{
-					_map.emplace(name, attribute_extraction_t<>::create_(no()));
+					unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_t<>::create_(no()));
 				}
 				else
 				{
-					_map.emplace(name, attribute_extraction_t<>::create_(*value++));
+					unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_t<>::create_(*value++));
 				}
 			}
 			else
 			{
-				_map.emplace(name, attribute_extraction_t<>::create_(*aspect++));
+				unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_t<>::create_(*aspect++));
 				if (value != defaults.cend_())
 				{
 					++value;
@@ -78,7 +78,7 @@ bool const incarnation_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	incarnation_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

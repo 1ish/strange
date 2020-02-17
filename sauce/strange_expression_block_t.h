@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_block_t : public expression_t<___ego___>
 {
 public:
@@ -31,7 +32,8 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto result_range = range_operator_t<>::create_(_terms, any_a<>::val(thing), range); // new block scope
+		auto thing_val = any_a<>::val(thing); // new block scope
+		auto result_range = range_operator_t<>::create_(_terms, thing_val, range);
 		auto it = result_range.cbegin_();
 		auto result = no();
 		while (it != result_range.cend_())
@@ -64,7 +66,7 @@ public:
 			}
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(_token.report() + "strange::expression_block::generate with non-expression term");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_block::generate with non-expression term");
 			}
 			cast<expression_a<>>(term).generate(version, indent, river);
 		}
@@ -79,7 +81,7 @@ public:
 			{
 				if (!check<expression_a<>>(term))
 				{
-					throw dis(_token.report() + "strange::expression_block::generate_cpp with non-expression term");
+					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_block::generate_cpp with non-expression term");
 				}
 				cast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 			}
@@ -87,7 +89,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_block::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_block::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" (");
 		bool first = true;
@@ -103,7 +105,7 @@ public:
 			}
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(_token.report() + "strange::expression_block::generate_cpp with non-expression term");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_block::generate_cpp with non-expression term");
 			}
 			cast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 		}
@@ -114,7 +116,7 @@ protected:
 	flock_a<> const _terms;
 
 	inline expression_block_t(token_a<> const& token, flock_a<> const& terms)
-		: expression_t(token, pure_literal_terms(token, terms))
+		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))
 		, _terms{ terms }
 	{}
 
@@ -128,7 +130,7 @@ bool const expression_block_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_block_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

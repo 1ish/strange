@@ -267,5 +267,5 @@ bool const %struct_name%<___1___, ___2___, ___3___>::___share___ = []()
 {
 	auto& shoal = shared();
 	reflection<%struct_name%<___1___, ___2___, ___3___>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();

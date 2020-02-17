@@ -74,7 +74,7 @@ protected:
 	forward_const_iterator_a<> _end;
 
 	inline range_of_t(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _begin(begin)
 		, _end(end)
 	{}
@@ -89,7 +89,7 @@ bool const range_of_t<_element_, ___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	range_of_t<_element_, ___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

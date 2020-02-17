@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = kind_a<>>
+// template <typename ___ego___ = kind_a<>>
+template <typename ___ego___>
 class kind_t : public cat_t<___ego___>
 {
 public:
@@ -92,7 +93,7 @@ public:
 		return VAL;
 	}
 
-	static inline kind_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
+	static inline kind_a<> create_(number_data_a<int64_t> const& order, symbol_a<> const& name = sym(""), flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
 	{
 		if (name.is("strange::any"))
 		{
@@ -101,7 +102,7 @@ public:
 		return kind_a<>{ over{ kind_t<>(order.extract_primitive(), name, dimensions, aspects, parameters, result, fixed, reference, optional) } };
 	}
 
-	static inline kind_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym(), bool fixed = false, bool reference = false, bool optional = false)
+	static inline kind_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& aspects = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), bool fixed = false, bool reference = false, bool optional = false)
 	{
 		if (name == "strange::any")
 		{
@@ -126,19 +127,19 @@ public:
 	{
 		if (!check<kind_a<>>(thing))
 		{
-			return cat_t::operator==(thing);
+			return cat_t<___ego___>::operator==(thing);
 		}
 		auto const kind = cast<kind_a<>>(thing);
-		if (_symbolic != kind.symbolic() || _hash != kind.hash())
+		if (cat_t<___ego___>::_symbolic != kind.symbolic() || cat_t<___ego___>::_hash != kind.hash())
 		{
 			return false;
 		}
-		bool const same = kind.to_string() == _string;
-		if (_symbolic || !same)
+		bool const same = kind.to_string() == cat_t<___ego___>::_string;
+		if (cat_t<___ego___>::_symbolic || !same)
 		{
 			return same;
 		}
-		return _dimensions == kind.dimensions_() && _aspects == kind.aspects_() && _parameters == kind.parameters_() && result_() == kind.result_();
+		return cat_t<___ego___>::_dimensions == kind.dimensions_() && _aspects == kind.aspects_() && cat_t<___ego___>::_parameters == kind.parameters_() && cat_t<___ego___>::result_() == kind.result_();
 	}
 
 	// kind
@@ -204,7 +205,7 @@ protected:
 	bool const _optional;
 
 	inline kind_t(int64_t order, symbol_a<> const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
-		: cat_t{ order, name, dimensions, aspects, parameters, result }
+		: cat_t<___ego___>{ order, name, dimensions, aspects, parameters, result }
 		, _aspects{ aspects }
 		, _fixed{ fixed }
 		, _reference{ reference }
@@ -221,16 +222,40 @@ bool const kind_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	kind_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 // cat conversion
-inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects = flock_t<>::create_(), any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
+inline kind_a<> kind_from_cat(cat_a<> const& cat)
+{
+	return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), flock_t<>::create_(), cat.parameters_(), cat.result_(), no(), no(), no());
+}
+
+inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects)
+{
+	return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), aspects, cat.parameters_(), cat.result_(), no(), no(), no());
+}
+
+inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional)
 {
 	return kind_t<>::create_(cat.order_(), cat.name_(), cat.dimensions_(), aspects, cat.parameters_(), cat.result_(), fixed, reference, optional);
 }
 
-inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects = flock_t<>::create_(), any_a<> const& fixed = no(), any_a<> const& reference = no(), any_a<> const& optional = no())
+inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats)
+{
+	auto result = unordered_herd_t<>::create_();
+	for (auto const& cat : cats)
+	{
+		if (!check<cat_a<>>(cat))
+		{
+			throw dis("strange::kinds_from_cats passed non-cat");
+		}
+		result.insert(kind_from_cat(cast<cat_a<>>(cat)));
+	}
+	return result;
+}
+
+inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional)
 {
 	auto result = unordered_herd_t<>::create_();
 	for (auto const& cat : cats)
@@ -240,6 +265,20 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 			throw dis("strange::kinds_from_cats passed non-cat");
 		}
 		result.insert(kind_from_cat(cast<cat_a<>>(cat), aspects, fixed, reference, optional));
+	}
+	return result;
+}
+
+inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_a<> const& aspects)
+{
+	auto result = unordered_herd_t<>::create_();
+	for (auto const& cat : cats)
+	{
+		if (!check<cat_a<>>(cat))
+		{
+			throw dis("strange::kinds_from_cats passed non-cat");
+		}
+		result.insert(kind_from_cat(cast<cat_a<>>(cat), aspects));
 	}
 	return result;
 }

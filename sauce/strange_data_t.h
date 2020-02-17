@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename _data_, typename ___ego___ = data_a<_data_>>
+// template <typename _data_, typename ___ego___ = data_a<_data_>>
+template <typename _data_, typename ___ego___>
 class data_t : public thing_t<___ego___>
 {
 public:
@@ -68,7 +69,7 @@ protected:
 	_data_ _data;
 
 	inline data_t(_data_ data)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _data(data)
 	{}
 
@@ -82,7 +83,7 @@ bool const data_t<_data_, ___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	data_t<_data_, ___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_shared_at_t : public expression_t<___ego___>
 {
 public:
@@ -44,19 +45,19 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto lit = local.find(sym("$"));
 		if (lit == local.end())
 		{
-			throw dis(_token.report() + "strange::expression_shared_at::operate $ not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate $ not found");
 		}
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(lit->second))
 		{
-			throw dis(_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal shared");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate passed non-unordered-shoal shared");
 		}
 #endif
 		auto& shared = static_cast<unordered_shoal_a<>&>(lit->second);
@@ -65,7 +66,7 @@ public:
 		auto it = map.find(_key);
 		if (it == map.end())
 		{
-			throw dis(_token.report() + "strange::expression_shared_at::operate key not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::operate key not found");
 		}
 		return any_a<>::ref(it->second);
 	}
@@ -89,7 +90,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_shared_at::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " "); //TODO remove $ prefix
 	}
@@ -99,7 +100,7 @@ protected:
 	symbol_a<> const _key;
 
 	inline expression_shared_at_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key)
-		: expression_t{ token }
+		: expression_t<___ego___>{ token }
 		, _terms{ terms }
 		, _key{ key }
 	{}
@@ -114,7 +115,7 @@ bool const expression_shared_at_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_shared_at_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

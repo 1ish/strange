@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_kind_t : public expression_t<___ego___>
 {
 public:
@@ -189,7 +190,7 @@ public:
 			auto const any_kind = _expression.operate(thing, range);
 			if (!check<kind_a<>>(any_kind))
 			{
-				throw dis(_token.report() + "strange::expression_kind::operate expression did not return a kind");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate expression did not return a kind");
 			}
 			auto const kind = cast<kind_a<>>(any_kind);
 			return kind_t<>::create_(number_int_64_t<>::create(kind.order() + _order.extract_primitive()), kind.name_(), kind.dimensions_(), kind.aspects_(), kind.parameters_(), kind.result_(), _fixed, _reference, _optional);
@@ -197,7 +198,7 @@ public:
 		auto const dimensions = _dimensions.operate(thing, range);
 		if (!check<flock_a<>>(dimensions))
 		{
-			throw dis(_token.report() + "strange::expression_kind::operate dimensions are not a flock");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate dimensions are not a flock");
 		}
 		if (_count == 3)
 		{
@@ -206,7 +207,7 @@ public:
 		auto const aspects = _aspects.operate(thing, range);
 		if (!check<flock_a<>>(aspects))
 		{
-			throw dis(_token.report() + "strange::expression_kind::operate aspects are not a flock");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate aspects are not a flock");
 		}
 		if (_count == 4)
 		{
@@ -215,7 +216,7 @@ public:
 		auto const parameters = _parameters.operate(thing, range);
 		if (!check<flock_a<>>(parameters))
 		{
-			throw dis(_token.report() + "strange::expression_kind::operate parameters are not a flock");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate parameters are not a flock");
 		}
 		if (_count == 5)
 		{
@@ -224,7 +225,7 @@ public:
 		auto const result = _result.operate(thing, range);
 		if (!check<symbol_a<>>(result))
 		{
-			throw dis(_token.report() + "strange::expression_kind::operate result is not a symbol");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate result is not a symbol");
 		}
 		return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), _fixed, _reference, _optional);
 	}
@@ -359,7 +360,7 @@ protected:
 	expression_a<> const _expression;
 
 	inline expression_kind_t(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order, symbol_a<> const& name, expression_a<> const& dimensions, expression_a<> const& aspects, expression_a<> const& parameters, expression_a<> const& result, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional, expression_a<> const& expression)
-		: expression_t(token, dimensions.pure() && aspects.pure() && parameters.pure() && result.pure() && expression.pure(), dimensions.literal() && aspects.literal() && parameters.literal() && result.literal() && expression.literal()) // pure, literal
+		: expression_t<___ego___>(token, dimensions.pure() && aspects.pure() && parameters.pure() && result.pure() && expression.pure(), dimensions.literal() && aspects.literal() && parameters.literal() && result.literal() && expression.literal()) // pure, literal
 		, _terms{ terms }
 		, _count{ _terms.size() }
 		, _order{ order }
@@ -384,7 +385,7 @@ bool const expression_kind_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_kind_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

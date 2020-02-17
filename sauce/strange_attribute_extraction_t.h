@@ -41,7 +41,7 @@ protected:
 	any_a<> const _thing;
 
 	inline attribute_extraction_t(any_a<> const& thing)
-		: operation_t{}
+		: operation_t<___ego___>{}
 		, _thing{ thing }
 	{}
 };

@@ -24,7 +24,7 @@ public:
 
 	inline any_a<> has_(any_a<> const& key) const
 	{
-		return boole(has(key));
+		return boole(_OVERRIDDEN_::has(key));
 	}
 
 	inline any_a<> at__(range_a<> const& range) const
@@ -34,7 +34,7 @@ public:
 		{
 			throw dis("[collection] at passed empty range");
 		}
-		return at_(*it);
+		return _OVERRIDDEN_::at_(*it);
 	}
 
 	inline any_a<> update__(range_a<> const& range)
@@ -54,7 +54,7 @@ public:
 
 	inline any_a<> update_(any_a<> const& key, any_a<> const& value = no())
 	{
-		update(key, value);
+		_OVERRIDDEN_::update(key, value);
 		return value;
 	}
 
@@ -75,7 +75,7 @@ public:
 
 	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = no())
 	{
-		return boole(insert(key, value));
+		return boole(_OVERRIDDEN_::insert(key, value));
 	}
 
 	inline any_a<> erase__(range_a<> const& range)
@@ -83,7 +83,7 @@ public:
 		bool erased = false;
 		for (auto const& key : range)
 		{
-			if (erase(key))
+			if (_OVERRIDDEN_::erase(key))
 			{
 				erased = true;
 			}
@@ -93,7 +93,7 @@ public:
 
 	inline any_a<> erase_(any_a<> const& key)
 	{
-		return boole(erase(key));
+		return boole(_OVERRIDDEN_::erase(key));
 	}
 
 	inline any_a<> clear__(range_a<> const&)
@@ -103,8 +103,8 @@ public:
 
 	inline collection_a<> clear_()
 	{
-		clear();
-		return me_();
+		_OVERRIDDEN_::clear();
+		return _OVERRIDDEN_::me_();
 	}
 
 	inline any_a<> size__(range_a<> const&) const
@@ -114,7 +114,7 @@ public:
 
 	inline number_data_a<int64_t> size_() const
 	{
-		return number_int_64_t<>::create(size());
+		return number_t<int64_t>::create(_OVERRIDDEN_::size());
 	}
 
 	inline any_a<> empty__(range_a<> const&) const
@@ -124,72 +124,72 @@ public:
 
 	inline any_a<> empty_() const
 	{
-		return boole(empty());
+		return boole(_OVERRIDDEN_::empty());
 	}
 
 	inline any_a<> push_front__(range_a<> const& range)
 	{
 		for (auto const& value : range)
 		{
-			push_front(value);
+			_OVERRIDDEN_::push_front(value);
 		}
-		return me_();
+		return _OVERRIDDEN_::me_();
 	}
 
 	inline collection_a<> push_front_(any_a<> const& value)
 	{
-		push_front(value);
-		return me_();
+		_OVERRIDDEN_::push_front(value);
+		return _OVERRIDDEN_::me_();
 	}
 
 	inline any_a<> pop_front__(range_a<> const&)
 	{
-		return pop_front_();
+		return _OVERRIDDEN_::pop_front_();
 	}
 
 	inline any_a<> push_back__(range_a<> const& range)
 	{
 		for (auto const& value : range)
 		{
-			push_back(value);
+			_OVERRIDDEN_::push_back(value);
 		}
-		return me_();
+		return _OVERRIDDEN_::me_();
 	}
 
 	inline collection_a<> push_back_(any_a<> const& value)
 	{
-		push_back(value);
-		return me_();
+		_OVERRIDDEN_::push_back(value);
+		return _OVERRIDDEN_::me_();
 	}
 
 	inline any_a<> pop_back__(range_a<> const&)
 	{
-		return pop_back_();
+		return _OVERRIDDEN_::pop_back_();
 	}
 
 	inline any_a<> self_assign__(range_a<> const& range)
 	{
-		return self_assign_(range);
+		return _OVERRIDDEN_::self_assign_(range);
 	}
 	
 	inline any_a<> self_add__(range_a<> const& range)
 	{
 		for (auto const& rng : range)
 		{
-			operator+=(rng);
+			_OVERRIDDEN_::operator+=(rng);
 		}
-		return me_();
+		return _OVERRIDDEN_::me_();
 	}
 
 	inline collection_a<> self_add_(range_a<> const& range)
 	{
-		operator+=(range);
-		return me_();
+		_OVERRIDDEN_::operator+=(range);
+		return _OVERRIDDEN_::me_();
 	}
 
 	inline any_a<> add__(range_a<> const& range) const
 	{
-		auto result = me_();
+		auto result = _OVERRIDDEN_::me_();
 		for (auto const& rng : range)
 		{
 			result += rng;
@@ -204,7 +204,7 @@ public:
 
 	inline collection_a<> operator+(range_a<> const& range) const
 	{
-		auto result = me_();
+		auto result = _OVERRIDDEN_::me_();
 		result += range;
 		return result;
 	}
@@ -213,20 +213,20 @@ public:
 	{
 		for (auto const& rng : range)
 		{
-			operator-=(rng);
+			_OVERRIDDEN_::operator-=(rng);
 		}
-		return me_();
+		return _OVERRIDDEN_::me_();
 	}
 
 	inline collection_a<> self_subtract_(range_a<> const& range)
 	{
-		operator-=(range);
-		return me_();
+		_OVERRIDDEN_::operator-=(range);
+		return _OVERRIDDEN_::me_();
 	}
 
 	inline any_a<> subtract__(range_a<> const& range) const
 	{
-		auto result = me_();
+		auto result = _OVERRIDDEN_::me_();
 		for (auto const& rng : range)
 		{
 			result -= rng;
@@ -241,19 +241,19 @@ public:
 
 	inline collection_a<> operator-(range_a<> const& range) const
 	{
-		auto result = me_();
+		auto result = _OVERRIDDEN_::me_();
 		result -= range;
 		return result;
 	}
 
 	inline any_a<> read_lock__(range_a<> const& _) const
 	{
-		return read_lock_();
+		return _OVERRIDDEN_::read_lock_();
 	}
 
 	inline any_a<> write_lock__(range_a<> const& _) const
 	{
-		return write_lock_();
+		return _OVERRIDDEN_::write_lock_();
 	}
 };
 

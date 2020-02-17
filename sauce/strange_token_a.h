@@ -396,7 +396,7 @@ namespace strange {
     {
     	auto& shoal = shared();
     	reflection<token_a<___1___>>::share(shoal);
-    	return shoal.something();
+    	return shoal;
     }();
     
 

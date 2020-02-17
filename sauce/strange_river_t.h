@@ -77,7 +77,7 @@ class river_t : public thing_t<___ego___>
 		inline ___ego___ increment_()
 		{
 			operator++();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline const_iterator_t& operator++()
@@ -111,7 +111,7 @@ class river_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline const_iterator_t(river_a<> const& river, F&& it)
-			: thing_t{}
+			: thing_t<___ego___>{}
 			, _it{ std::forward<F>(it) }
 			, _river{ river }
 			, _int_8{ number_int_8_t<>::create_() }
@@ -234,12 +234,12 @@ public:
 		{
 			throw dis("strange::river::cbegin can only be called on input rivers");
 		}
-		return const_iterator_t<std_istreambuf_iterator_char>::create(me_(), std_istreambuf_iterator_char{ *_istream });
+		return const_iterator_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
 	}
 
 	inline forward_const_iterator_a<> cend_() const
 	{
-		return const_iterator_t<std_istreambuf_iterator_char>::create(me_(), std_istreambuf_iterator_char{});
+		return const_iterator_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{});
 	}
 
 	// river input
@@ -299,7 +299,7 @@ public:
 	inline any_a<> unget_()
 	{
 		unget();
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void unget()
@@ -321,13 +321,13 @@ public:
 			}
 			putback(cast<number_data_a<int8_t>>(thing).extract_primitive());
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> putback_(number_data_a<int8_t> const& int_8)
 	{
 		putback(int_8.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void putback(int8_t int_8)
@@ -408,7 +408,7 @@ public:
 	inline any_a<> ignore_(number_data_a<int64_t> const& count = number_int_64_t<>::create(1))
 	{
 		ignore(count.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void ignore(int64_t count = 1)
@@ -517,7 +517,7 @@ public:
 	inline any_a<> seekg_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekg_beg(offset.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void seekg_beg(int64_t offset = 0)
@@ -547,7 +547,7 @@ public:
 	inline any_a<> seekg_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekg_end(offset.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void seekg_end(int64_t offset = 0)
@@ -577,7 +577,7 @@ public:
 	inline any_a<> seekg_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekg_cur(offset.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void seekg_cur(int64_t offset = 0)
@@ -619,13 +619,13 @@ public:
 			}
 			put(cast<number_data_a<int8_t>>(thing).extract_primitive());
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> put_(number_data_a<int8_t> const& int_8)
 	{
 		put(int_8.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void put(int8_t int_8)
@@ -647,13 +647,13 @@ public:
 			}
 			write(cast<lake_a<int8_t>>(thing).extract_vector());
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> write_(lake_a<int8_t> const& lake)
 	{
 		write(lake.extract_vector());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void write(std::vector<int8_t> const& lake)
@@ -719,7 +719,7 @@ public:
 	inline any_a<> seekp_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekp_beg(offset.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void seekp_beg(int64_t offset = 0)
@@ -749,7 +749,7 @@ public:
 	inline any_a<> seekp_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekp_end(offset.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void seekp_end(int64_t offset = 0)
@@ -779,7 +779,7 @@ public:
 	inline any_a<> seekp_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekp_cur(offset.extract_primitive());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void seekp_cur(int64_t offset = 0)
@@ -799,7 +799,7 @@ public:
 	inline any_a<> flush_()
 	{
 		flush();
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void flush()
@@ -885,7 +885,7 @@ public:
 	inline any_a<> set_good_(any_a<> const& value = yes())
 	{
 		set_good(value.something());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void set_good(bool value = true)
@@ -914,7 +914,7 @@ public:
 	inline any_a<> set_eof_(any_a<> const& value = yes())
 	{
 		set_eof(value.something());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void set_eof(bool value = true)
@@ -943,7 +943,7 @@ public:
 	inline any_a<> set_fail_(any_a<> const& value = yes())
 	{
 		set_fail(value.something());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void set_fail(bool value = true)
@@ -972,7 +972,7 @@ public:
 	inline any_a<> set_bad_(any_a<> const& value = yes())
 	{
 		set_bad(value.something());
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void set_bad(bool value = true)
@@ -1010,7 +1010,7 @@ protected:
 	std::string const _filename;
 
 	inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_ios_base const& stream = std_shared_ios_base{}, std::string const& filename = std::string{})
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _istream{ is }
 		, _ostream{ os }
 		, _stream{ stream }
@@ -1029,7 +1029,7 @@ bool const river_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	river_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

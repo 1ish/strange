@@ -85,7 +85,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_throw::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_throw::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" throw(");
 		_exception.generate_cpp(version, indent, river, declare, define);
@@ -97,7 +97,7 @@ protected:
 	expression_a<> const _exception;
 
 	inline expression_throw_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& exception)
-		: expression_t(token, exception.pure(), exception.literal()) // pure, literal
+		: expression_t<___ego___>(token, exception.pure(), exception.literal()) // pure, literal
 		, _terms{ terms }
 		, _exception{ exception }
 	{}
@@ -112,7 +112,7 @@ bool const expression_throw_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_throw_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

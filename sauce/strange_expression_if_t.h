@@ -104,7 +104,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_if::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_if::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" (");
 		_condition.generate_cpp(version, indent, river, declare, define);
@@ -122,7 +122,7 @@ protected:
 	expression_a<> const _nay;
 
 	inline expression_if_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& condition, expression_a<> const& yay, expression_a<> const& nay)
-		: expression_t(token, pure_literal_terms(token, terms))
+		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _condition{ condition }
 		, _yay{ yay }
@@ -139,7 +139,7 @@ bool const expression_if_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_if_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_shared_scope_t : public expression_t<___ego___>
 {
 public:
@@ -59,7 +60,7 @@ public:
 		auto value = _shared.at_(_key);
 		if (!value)
 		{
-			throw dis(_token.report() + "strange::expression_shared_scope::operate key not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_scope::operate key not found");
 		}
 		return value;
 	}
@@ -83,7 +84,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_shared_scope::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_scope::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " ");
 	}
@@ -94,7 +95,7 @@ protected:
 	symbol_a<> const _key;
 
 	inline expression_shared_scope_t(token_a<> const& token, flock_a<> const& terms, shoal_a<> const& shared, symbol_a<> const& key)
-		: expression_t{ token }
+		: expression_t<___ego___>{ token }
 		, _terms{ terms }
 		, _shared{ shared }
 		, _key{ key }
@@ -110,7 +111,7 @@ bool const expression_shared_scope_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_shared_scope_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

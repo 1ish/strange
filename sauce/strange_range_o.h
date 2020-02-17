@@ -14,12 +14,12 @@ public:
 
 	inline any_a<> cbegin__(range_a<> const&) const
 	{
-		return cbegin_();
+		return _OVERRIDDEN_::cbegin_();
 	}
 
 	inline any_a<> cend__(range_a<> const&) const
 	{
-		return cend_();
+		return _OVERRIDDEN_::cend_();
 	}
 };
 

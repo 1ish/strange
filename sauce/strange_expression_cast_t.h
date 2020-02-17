@@ -64,7 +64,7 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!evaluated.kinds_().has_(abstraction))
 		{
-			throw dis(_token.report() + "strange::expression_cast::operate check failed");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_cast::operate check failed");
 		}
 #endif
 		return evaluated;
@@ -95,7 +95,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_cast::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_cast::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" strange::cast<");
 		_abstraction.generate_cpp(version, indent, river, declare, define, true); // type
@@ -110,7 +110,7 @@ protected:
 	expression_a<> const _abstraction;
 
 	inline expression_cast_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& thing, expression_a<> const& abstraction)
-		: expression_t(token, pure_literal_terms(token, terms))
+		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _thing{ thing }
 		, _abstraction{ abstraction }
@@ -126,7 +126,7 @@ bool const expression_cast_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_cast_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_operate_t : public expression_t<___ego___>
 {
 public:
@@ -60,14 +61,14 @@ public:
 			}
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(_token.report() + "strange::expression_operate::generate with non-expression term");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate with non-expression term");
 			}
 			cast<expression_a<>>(term).generate(version, indent, river);
 			++count;
 		}
 		if (!count)
 		{
-			throw dis(_token.report() + "strange::expression_operate::generate with no terms");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate with no terms");
 		}
 		else if (count == 1)
 		{
@@ -87,7 +88,7 @@ public:
 			{
 				if (!check<expression_a<>>(term))
 				{
-					throw dis(_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
+					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
 				}
 				cast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 			}
@@ -95,7 +96,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_operate::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate_cpp called for wrong type of expression");
 		}
 		int64_t count = 0;
 		for (auto const& term : _terms.extract_vector())
@@ -110,7 +111,7 @@ public:
 			}
 			if (!check<expression_a<>>(term))
 			{
-				throw dis(_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
 			}
 			cast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 			++count;
@@ -122,7 +123,7 @@ protected:
 	flock_a<> const _terms;
 
 	inline expression_operate_t(token_a<> const& token, flock_a<> const& terms)
-		: expression_t(token, is_pure_literal(token, terms))
+		: expression_t<___ego___>(token, is_pure_literal(token, terms))
 		, _terms{ terms }
 	{}
 
@@ -175,7 +176,7 @@ bool const expression_operate_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_operate_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

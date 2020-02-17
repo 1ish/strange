@@ -177,7 +177,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_abstraction::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" [](");
 		auto nit = _dimension_names.extract_vector().cbegin();
@@ -222,7 +222,7 @@ protected:
 	flock_a<> const _parent_expressions;
 
 	inline expression_abstraction_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& scope, flock_a<> const& dimension_names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_expressions, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
-		: expression_t(token, pure_literal_terms(token, terms))
+		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _scope{ scope }
 		, _dimension_names{ dimension_names }
@@ -340,12 +340,12 @@ protected:
 						}
 						catch (misunderstanding_a<>& misunderstanding)
 						{
-							throw dis(_token.report() + "strange::expression_abstraction::generate_cpp kind expression evaluation error") + misunderstanding;
+							throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp kind expression evaluation error") + misunderstanding;
 						}
 					}
 					if (!check<kind_a<>>(any_kind))
 					{
-						throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-kind dimension kind");
+						throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-kind dimension kind");
 					}
 					auto const kind = cast<kind_a<>>(any_kind);
 
@@ -462,12 +462,12 @@ protected:
 		auto const expression = _parent_expressions.at_index(0);
 		if (expression.type_() != expression_operate_t<>::type_())
 		{
-			throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-expression-operate base class definition");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-expression-operate base class definition");
 		}
 		auto const terms = cast<expression_a<>>(expression).terms_();
 		if (terms.size() < 1)
 		{
-			throw dis(_token.report() + "strange::expression_abstraction::generate_cpp expression-operate base class definition with too few terms");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp expression-operate base class definition with too few terms");
 		}
 		auto abs = river_t<>::create();
 		cast<expression_a<>>(terms.at_index(0)).generate_cpp(version, 0, abs, false, false);
@@ -488,7 +488,7 @@ protected:
 		auto const expression = _parent_expressions.at_index(_parent_expressions.size() - 1);
 		if (!check<expression_a<>>(expression))
 		{
-			throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-expression class definition");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-expression class definition");
 		}
 		return cast<expression_a<>>(expression).terms_();
 	}
@@ -620,34 +620,34 @@ protected:
 		{
 			if (!check<expression_a<>>(expression) || expression.type_() != expression_flock_t<>::type_())
 			{
-				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-flock expression pair in class definition");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-flock expression pair in class definition");
 			}
 			auto const pair = cast<expression_a<>>(expression).terms_();
 			if (pair.size() != 2)
 			{
-				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-pair in class definition");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-pair in class definition");
 			}
 			auto any_name = pair.at_index(0);
 			if (!check<expression_a<>>(any_name) || any_name.type_() != expression_literal_t<>::type_())
 			{
-				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-literal expression name in class definition");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-literal expression name in class definition");
 			}
 			auto const name_flock = cast<expression_a<>>(any_name).terms_();
 			if (name_flock.size() != 1)
 			{
-				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-single name in class definition");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-single name in class definition");
 			}
 			any_name = name_flock.at_index(0);
 			if (!check<symbol_a<>>(any_name))
 			{
-				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-symbol name in class definition");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-symbol name in class definition");
 			}
 			auto const name = cast<symbol_a<>>(any_name);
 
 			auto any_value = pair.at_index(1);
 			if (!check<expression_a<>>(any_value))
 			{
-				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp non-expression value in class definition");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-expression value in class definition");
 			}
 			auto const value_expression = cast<expression_a<>>(any_value);
 			if (name.last_character() == '_')
@@ -660,7 +660,7 @@ protected:
 				}
 				else
 				{
-					throw dis(_token.report() + "strange::expression_abstraction::generate_cpp invalid expression value in class definition");
+					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp invalid expression value in class definition");
 				}
 			}
 			else if (value_expression.type_() == expression_literal_t<>::type_() && value_expression.terms_().size() == 1)
@@ -673,7 +673,7 @@ protected:
 			}
 			else
 			{
-				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp invalid expression pair in class definition");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp invalid expression pair in class definition");
 			}
 		}
 	}
@@ -1344,7 +1344,7 @@ protected:
 		{
 			if (!check<token_a<>>(any_token))
 			{
-				throw dis(_token.report() + "strange::expression_abstraction::generate_cpp invalid token in class definition");
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp invalid token in class definition");
 			}
 			auto const token = cast<token_a<>>(any_token);
 			switch (toke)
@@ -1407,7 +1407,7 @@ bool const expression_abstraction_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_abstraction_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

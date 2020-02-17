@@ -390,7 +390,7 @@ namespace strange {
     {
     	auto& shoal = shared();
     	reflection<random_access_const_iterator_a<___1___>>::share(shoal);
-    	return shoal.something();
+    	return shoal;
     }();
     
     #undef ___derived___

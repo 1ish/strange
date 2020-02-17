@@ -393,5 +393,5 @@ bool const %struct_name%<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, _
 {
 	auto& shoal = shared();
 	reflection<%struct_name%<___1___, ___2___, ___3___, ___4___, ___5___, ___6___, ___7___, ___8___, ___9___>>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();

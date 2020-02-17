@@ -65,7 +65,7 @@ protected:
 	any_a<> mutable _thing;
 
 	inline attribute_mutation_t(symbol_a<> const& name, any_a<> const& kind, any_a<> const& thing)
-		: operation_t{}
+		: operation_t<___ego___>{}
 		, _name{ name }
 		, _kind{ kind }
 		, _thing{ thing }

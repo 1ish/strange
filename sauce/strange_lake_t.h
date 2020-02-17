@@ -107,7 +107,7 @@ class lake_t : public thing_t<___ego___>
 		inline ___ego___ increment_()
 		{
 			operator++();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline iterator_t& operator++()
@@ -133,7 +133,7 @@ class lake_t : public thing_t<___ego___>
 		inline ___ego___ decrement_()
 		{
 			operator--();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline iterator_t& operator--()
@@ -157,14 +157,14 @@ class lake_t : public thing_t<___ego___>
 			{
 				operator+=(thing);
 			}
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline ___ego___ self_add_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			_it += number.to_int_64();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline iterator_t& operator+=(any_a<> const& thing)
@@ -180,7 +180,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline random_access_iterator_a<> add__(range_a<> const& range) const
 		{
-			random_access_iterator_a<> result = me_();
+			random_access_iterator_a<> result = thing_t<___ego___>::me_();
 			for (auto const& thing : range)
 			{
 				result += thing;
@@ -195,7 +195,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline random_access_iterator_a<> operator+(number_a<> const& number) const
 		{
-			___ego___ result = me_();
+			___ego___ result = thing_t<___ego___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			result.mutate_it() += number.to_int_64();
 			return result;
@@ -207,14 +207,14 @@ class lake_t : public thing_t<___ego___>
 			{
 				operator-=(thing);
 			}
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline ___ego___ self_subtract_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			_it -= number.to_int_64();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline iterator_t& operator-=(any_a<> const& thing)
@@ -230,7 +230,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline random_access_iterator_a<> subtract__(range_a<> const& range) const
 		{
-			random_access_iterator_a<> result = me_();
+			random_access_iterator_a<> result = thing_t<___ego___>::me_();
 			for (auto const& thing : range)
 			{
 				result -= thing;
@@ -245,7 +245,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline random_access_iterator_a<> operator-(number_a<> const& number) const
 		{
-			___ego___ result = me_();
+			___ego___ result = thing_t<___ego___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			result.mutate_it() -= number.to_int_64();
 			return result;
@@ -384,7 +384,7 @@ class lake_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline iterator_t(lake_t const& lake_thing, F&& it)
-			: thing_t{}
+			: thing_t<___ego___>{}
 			, _it{ std::forward<F>(it) }
 			, _lake_thing{ lake_thing }
 		{}
@@ -468,7 +468,7 @@ class lake_t : public thing_t<___ego___>
 		inline ___ego___ increment_()
 		{
 			operator++();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline const_iterator_t& operator++()
@@ -494,7 +494,7 @@ class lake_t : public thing_t<___ego___>
 		inline ___ego___ decrement_()
 		{
 			operator--();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline const_iterator_t& operator--()
@@ -518,14 +518,14 @@ class lake_t : public thing_t<___ego___>
 			{
 				operator+=(thing);
 			}
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline ___ego___ self_add_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			_it += number.to_int_64();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline const_iterator_t& operator+=(any_a<> const& thing)
@@ -541,7 +541,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline random_access_const_iterator_a<> add__(range_a<> const& range) const
 		{
-			random_access_const_iterator_a<> result = me_();
+			random_access_const_iterator_a<> result = thing_t<___ego___>::me_();
 			for (auto const& thing : range)
 			{
 				result += thing;
@@ -556,7 +556,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline random_access_const_iterator_a<> operator+(number_a<> const& number) const
 		{
-			___ego___ result = me_();
+			___ego___ result = thing_t<___ego___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			result.mutate_it() += number.to_int_64();
 			return result;
@@ -568,14 +568,14 @@ class lake_t : public thing_t<___ego___>
 			{
 				operator-=(thing);
 			}
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline ___ego___ self_subtract_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			_it -= number.to_int_64();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline const_iterator_t& operator-=(any_a<> const& thing)
@@ -591,7 +591,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline random_access_const_iterator_a<> subtract__(range_a<> const& range) const
 		{
-			random_access_const_iterator_a<> result = me_();
+			random_access_const_iterator_a<> result = thing_t<___ego___>::me_();
 			for (auto const& thing : range)
 			{
 				result -= thing;
@@ -606,7 +606,7 @@ class lake_t : public thing_t<___ego___>
 
 		inline random_access_const_iterator_a<> operator-(number_a<> const& number) const
 		{
-			___ego___ result = me_();
+			___ego___ result = thing_t<___ego___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_lake_thing._mutex);
 			result.mutate_it() -= number.to_int_64();
 			return result;
@@ -746,7 +746,7 @@ class lake_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline const_iterator_t(lake_a<_primitive_> const& lake, lake_t const& lake_thing, F&& it)
-			: thing_t{}
+			: thing_t<___ego___>{}
 			, _it{ std::forward<F>(it) }
 			, _lake{ lake }
 			, _lake_thing{ lake_thing }
@@ -819,13 +819,13 @@ public:
 	inline random_access_const_iterator_a<> cbegin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_vector_number::const_iterator>::create(me_(), *this, _vector.cbegin());
+		return const_iterator_t<std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> cend_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_vector_number::const_iterator>::create(me_(), *this, _vector.cend());
+		return const_iterator_t<std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -1072,7 +1072,7 @@ public:
 				_vector.push_back(thing);
 			}
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 	
 	inline lake_t& operator+=(any_a<> const& range)
@@ -1156,7 +1156,7 @@ protected:
 
 	template <typename F>
 	inline lake_t(F&& init)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _mutex{}
 		, _vector{ std::forward<F>(init) }
 		, _shadow{}
@@ -1164,14 +1164,14 @@ protected:
 
 public:
 	inline lake_t(lake_t const& other)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _mutex{}
 		, _vector{ other._vector }
 		, _shadow{}
 	{}
 
 	inline lake_t(lake_t&& other)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _mutex{}
 		, _vector{ std::move(other._vector) }
 		, _shadow{}
@@ -1187,7 +1187,7 @@ bool const lake_t<_primitive_, _concurrent_, ___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	lake_t<_primitive_, _concurrent_, ___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 template <bool _concurrent_ = false, typename ___ego___ = lake_a<int8_t>>

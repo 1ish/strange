@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = range_a<>>
+// template <typename ___ego___ = range_a<>>
+template <typename ___ego___>
 class range_operator_t : public thing_t<___ego___>
 {
 	template <typename _iterator_, typename ___ego___ = forward_const_iterator_data_a<_iterator_>>
@@ -85,7 +86,7 @@ class range_operator_t : public thing_t<___ego___>
 		inline ___ego___ increment_()
 		{
 			operator++();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline const_iterator_t& operator++()
@@ -123,7 +124,7 @@ class range_operator_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline const_iterator_t(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
-			: thing_t{}
+			: thing_t<___ego___>{}
 			, _it{ std::forward<F>(it) }
 			, _range{ range }
 			, _thing_ref{ thing_ref }
@@ -200,7 +201,7 @@ protected:
 	range_a<> const& _range_ref;
 
 	inline range_operator_t(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _range(range)
 		, _thing_ref(thing_ref)
 		, _range_ref(range_ref)
@@ -216,7 +217,7 @@ bool const range_operator_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	range_operator_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

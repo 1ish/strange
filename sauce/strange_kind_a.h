@@ -553,7 +553,7 @@ namespace strange {
 
     	reflection<kind_a<___1___>>::share(shoal);
 
-    	return shoal.something();
+    	return shoal;
 
     }();
 

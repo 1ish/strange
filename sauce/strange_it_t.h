@@ -74,7 +74,7 @@ public:
 
 	inline ___ego___ increment_()
 	{
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 
 	inline it_t& operator++()
@@ -89,7 +89,7 @@ public:
 
 protected:
 	inline it_t()
-		: thing_t{}
+		: thing_t<___ego___>{}
 	{}
 
 private:
@@ -102,7 +102,7 @@ bool const it_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	it_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

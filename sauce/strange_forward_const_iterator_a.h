@@ -309,7 +309,7 @@ namespace strange {
     {
     	auto& shoal = shared();
     	reflection<forward_const_iterator_a<___1___>>::share(shoal);
-    	return shoal.something();
+    	return shoal;
     }();
     
 

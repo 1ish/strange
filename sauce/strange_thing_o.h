@@ -14,7 +14,7 @@ public:
 
 	inline any_a<> type__(range_a<> const&) const
 	{
-		return type_();
+		return _OVERRIDDEN_::type_();
 	}
 
 	inline any_a<> shared__(range_a<> const&) const
@@ -25,7 +25,7 @@ public:
 	inline unordered_shoal_a<> shared_() const
 	{
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
-		share(shoal);
+		_OVERRIDDEN_::share(shoal);
 		return shoal;
 	}
 
@@ -41,7 +41,7 @@ public:
 
 	inline any_a<> same_(any_a<> const& thing) const
 	{
-		return boole(operator==(thing));
+		return boole(_OVERRIDDEN_::operator==(thing));
 	}
 
 	inline any_a<> different__(range_a<> const& range) const
@@ -61,7 +61,7 @@ public:
 
 	inline bool operator!=(any_a<> const& thing) const
 	{
-		return !operator==(thing);
+		return !_OVERRIDDEN_::operator==(thing);
 	}
 
 	inline any_a<> hash__(range_a<> const&) const
@@ -71,7 +71,7 @@ public:
 
 	inline number_data_a<uint64_t> hash_() const
 	{
-		return number_uint_64_t<>::create(uint64_t(hash()));
+		return number_t<uint64_t>::create(uint64_t(_OVERRIDDEN_::hash()));
 	}
 };
 

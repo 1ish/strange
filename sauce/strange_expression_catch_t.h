@@ -101,7 +101,7 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(_token.report() + "strange::expression_catch::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_catch::operate passed non-unordered-shoal local");
 		}
 #endif
 		try
@@ -112,7 +112,7 @@ public:
 		{
 			auto kit = _kinds.extract_vector().cbegin();
 			auto eit = _expressions.extract_vector().cbegin();
-			for (auto const& name : _names.extract_vector())
+			for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 			{
 				auto kind = *kit++;
 				if (check<expression_a<>>(kind))
@@ -123,7 +123,7 @@ public:
 					}
 					catch (misunderstanding_a<>& misunderstanding)
 					{
-						throw dis(_token.report() + "strange::expression_catch::operate kind expression returned non-kind") + misunderstanding;
+						throw dis(expression_t<___ego___>::_token.report() + "strange::expression_catch::operate kind expression returned non-kind") + misunderstanding;
 					}
 				}
 				if (exception.kinds_().has_(kind))
@@ -150,7 +150,7 @@ public:
 		_try_expression.generate(version, indent, river);
 		forward_const_iterator_a<> kit = _kinds.cbegin_();
 		forward_const_iterator_a<> eit = _expressions.cbegin_();
-		for (auto const& name : _names.extract_vector())
+		for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 		{
 			river.write_string(", " + cast<symbol_a<>>(name).to_string());
 			auto kind = *kit++;
@@ -176,7 +176,7 @@ public:
 			{
 				if (!check<expression_a<>>(expression))
 				{
-					throw dis(_token.report() + "strange::expression_catch::generate_cpp with non-expression");
+					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_catch::generate_cpp with non-expression");
 				}
 				cast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
 			}
@@ -184,14 +184,14 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_catch::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_catch::generate_cpp called for wrong type of expression");
 		}
 		river.write_string("try\n{\n");
 		_try_expression.generate_cpp(version, indent, river, declare, define);
 		river.write_string("\n}\n");
 		forward_const_iterator_a<> kit = _kinds.cbegin_();
 		forward_const_iterator_a<> eit = _expressions.cbegin_();
-		for (auto const& name : _names.extract_vector())
+		for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 		{
 			river.write_string("catch(" + cast<kind_a<>>(*kit++).name_().to_string() + "_a<> const& exception)\n{\n");
 			cast<expression_a<>>(*eit++).generate_cpp(version, indent, river, declare, define);
@@ -206,7 +206,7 @@ protected:
 	flock_a<> const _expressions;
 
 	inline expression_catch_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& try_expression, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& expressions)
-		: expression_t(token, pure_literal_terms(token, terms), names)
+		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms), names)
 		, _terms{ terms }
 		, _try_expression{ try_expression }
 		, _kinds{ kinds }
@@ -223,7 +223,7 @@ bool const expression_catch_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_catch_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

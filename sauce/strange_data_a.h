@@ -288,7 +288,7 @@ namespace strange {
     {
     	auto& shoal = shared();
     	reflection<data_a<___1___>>::share(shoal);
-    	return shoal.something();
+    	return shoal;
     }();
     
 

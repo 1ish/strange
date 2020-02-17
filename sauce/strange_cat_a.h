@@ -369,7 +369,7 @@ namespace strange {
     {
     	auto& shoal = shared();
     	reflection<cat_a<___1___>>::share(shoal);
-    	return shoal.something();
+    	return shoal;
     }();
     
     #undef ___derived___

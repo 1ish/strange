@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_c : public operation_c<___ego___>
 {
 public:
@@ -32,20 +33,22 @@ public:
 	// reflection
 	inline any_a<> type__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("type");
+		auto const op = operation_c<___ego___>::_operations.at_string("type");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
 		return reflection<expression_c<>>::type();
 	}
 
 	inline symbol_a<> type_() const
 	{
-		auto const op = _operations.at_string("type");
+		auto const op = operation_c<___ego___>::_operations.at_string("type");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = operation_c<___ego___>::me_();
+			auto const result = op.operate(thing, range_t<>::create_());
 			if (!check<symbol_a<>>(result))
 			{
 				throw dis("<strange::expression>::type returned non-symbol");
@@ -57,10 +60,11 @@ public:
 
 	inline any_a<> shared__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("shared");
+		auto const op = operation_c<___ego___>::_operations.at_string("shared");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
@@ -69,10 +73,11 @@ public:
 
 	inline unordered_shoal_a<> shared_() const
 	{
-		auto const op = _operations.at_string("shared");
+		auto const op = operation_c<___ego___>::_operations.at_string("shared");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = operation_c<___ego___>::me_();
+			auto const result = op.operate(thing, range_t<>::create_());
 			if (!check<unordered_shoal_a<>>(result))
 			{
 				throw dis("<strange::expression>::shared returned non-unordered-shoal");
@@ -97,7 +102,7 @@ public:
 
 	inline expression_a<> recreate_() const // cannot be overridden
 	{
-		return me_(); //TODO?
+		return operation_c<___ego___>::me_(); //TODO?
 	}
 
 	inline void recreated(expression_a<> const& expression) const
@@ -105,74 +110,81 @@ public:
 
 	inline any_a<> literal__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("literal");
+		auto const op = operation_c<___ego___>::_operations.at_string("literal");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
 		return no();
 	}
 
 	inline any_a<> literal_() const
 	{
-		auto const op = _operations.at_string("literal");
+		auto const op = operation_c<___ego___>::_operations.at_string("literal");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, range_t<>::create_());
 		}
 		return no();
 	}
 
 	inline bool literal() const
 	{
-		auto const op = _operations.at_string("literal");
+		auto const op = operation_c<___ego___>::_operations.at_string("literal");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, range_t<>::create_());
 		}
 		return false;
 	}
 
 	inline any_a<> evaluate__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("evaluate");
+		auto const op = operation_c<___ego___>::_operations.at_string("evaluate");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
 		auto local = unordered_shoal_t<>::create_();
 		local.insert_string("$", unordered_shoal_t<true>::create_());
-		return operate(local, range_t<>::create_());
+		return operation_c<___ego___>::operate(local, range_t<>::create_());
 	}
 
 	inline any_a<> evaluate_() const
 	{
-		auto const op = _operations.at_string("evaluate");
+		auto const op = operation_c<___ego___>::_operations.at_string("evaluate");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, range_t<>::create_());
 		}
 		auto local = unordered_shoal_t<>::create_();
 		local.insert_string("$", unordered_shoal_t<true>::create_());
-		return operate(local, range_t<>::create_());
+		return operation_c<___ego___>::operate(local, range_t<>::create_());
 	}
 
 	inline any_a<> token__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("token");
+		auto const op = operation_c<___ego___>::_operations.at_string("token");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
 		return token_t<>::create_punctuation_();
 	}
 
 	inline token_a<> token_() const
 	{
-		auto const op = _operations.at_string("token");
+		auto const op = operation_c<___ego___>::_operations.at_string("token");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = operation_c<___ego___>::me_();
+			auto const result = op.operate(thing, range_t<>::create_());
 			if (!check<token_a<>>(result))
 			{
 				throw dis("<strange::expression>::token returned non-token");
@@ -184,20 +196,22 @@ public:
 
 	inline any_a<> terms__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("terms");
+		auto const op = operation_c<___ego___>::_operations.at_string("terms");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
 		return flock_t<>::create_();
 	}
 
 	inline flock_a<> terms_() const
 	{
-		auto const op = _operations.at_string("terms");
+		auto const op = operation_c<___ego___>::_operations.at_string("terms");
 		if (op)
 		{
-			auto const result = op.operate(any_a<>{ me_() }, range_t<>::create_());
+			any_a<> thing = operation_c<___ego___>::me_();
+			auto const result = op.operate(thing, range_t<>::create_());
 			if (!check<flock_a<>>(result))
 			{
 				throw dis("<strange::expression>::terms returned non-flock");
@@ -209,10 +223,11 @@ public:
 
 	inline any_a<> generate__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("generate");
+		auto const op = operation_c<___ego___>::_operations.at_string("generate");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -247,29 +262,32 @@ public:
 
 	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
 	{
-		auto const op = _operations.at_string("generate");
+		auto const op = operation_c<___ego___>::_operations.at_string("generate");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, flock_t<>::create_(version, indent, river));
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, flock_t<>::create_(version, indent, river));
 		}
 		return river;
 	}
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		auto const op = _operations.at_string("generate");
+		auto const op = operation_c<___ego___>::_operations.at_string("generate");
 		if (op)
 		{
-			op.operate(any_a<>{ me_() }, flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river));
+			any_a<> thing = operation_c<___ego___>::me_();
+			op.operate(thing, flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river));
 		}
 	}
 
 	inline any_a<> generate_cpp__(range_a<> const& range) const
 	{
-		auto const op = _operations.at_string("generate_cpp");
+		auto const op = operation_c<___ego___>::_operations.at_string("generate_cpp");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, range);
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, range);
 		}
 		forward_const_iterator_a<> it = range.cbegin_();
 		if (it == range.cend_())
@@ -304,27 +322,29 @@ public:
 
 	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = no()) const
 	{
-		auto const op = _operations.at_string("generate_cpp");
+		auto const op = operation_c<___ego___>::_operations.at_string("generate_cpp");
 		if (op)
 		{
-			return op.operate(any_a<>{ me_() }, flock_t<>::create_(version, indent, river, declare, define, type));
+			any_a<> thing = operation_c<___ego___>::me_();
+			return op.operate(thing, flock_t<>::create_(version, indent, river, declare, define, type));
 		}
 		return river;
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
 	{
-		auto const op = _operations.at_string("generate_cpp");
+		auto const op = operation_c<___ego___>::_operations.at_string("generate_cpp");
 		if (op)
 		{
-			op.operate(any_a<>{ me_() }, flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river, boole(declare), boole(define), boole(type)));
+			any_a<> thing = operation_c<___ego___>::me_();
+			op.operate(thing, flock_t<>::create_(number_int_64_t<>::create(version), number_int_64_t<>::create(indent), river, boole(declare), boole(define), boole(type)));
 		}
 	}
 
 protected:
 	// construction
 	inline expression_c(shoal_a<> const& conception)
-		: operation_c{ conception }
+		: operation_c<___ego___>{ conception }
 	{}
 
 private:
@@ -337,7 +357,7 @@ bool const expression_c<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_c<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

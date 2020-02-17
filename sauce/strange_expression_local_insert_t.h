@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_local_insert_t : public expression_t<___ego___>
 {
 public:
@@ -62,7 +63,7 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(_token.report() + "strange::expression_local_insert::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = static_cast<unordered_shoal_a<>&>(thing).mutate_map();
@@ -75,17 +76,17 @@ public:
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
-				throw dis(_token.report() + "strange::expression_local_insert::operate kind expression evaluation error") + misunderstanding;
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate kind expression evaluation error") + misunderstanding;
 			}
 		}
 		auto value = any_a<>::val(_expression.operate(thing, range));
 		if (!value.kinds_().has_(kind))
 		{
-			throw dis(_token.report() + "strange::expression_local_insert::operate kind does not include value");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate kind does not include value");
 		}
 		if (!local.emplace(_key, value).second)
 		{
-			throw dis(_token.report() + "strange::expression_local_insert::operate key exists");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_insert::operate key exists");
 		}
 		return value;
 	}
@@ -111,7 +112,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_local_insert::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_local_insert::generate_cpp called for wrong type of expression");
 		}
 		// river.write_string(" " + _kind.code() + " " + cast<symbol_a<>>(_key).to_string() + " =");
 		_expression.generate_cpp(version, indent, river, declare, define);
@@ -124,7 +125,7 @@ protected:
 	expression_a<> const _expression;
 
 	inline expression_local_insert_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& key, any_a<> const& kind, expression_a<> const& expression)
-		: expression_t{ token }
+		: expression_t<___ego___>{ token }
 		, _terms{ terms }
 		, _key{ key }
 		, _kind{ kind }
@@ -141,7 +142,7 @@ bool const expression_local_insert_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_local_insert_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

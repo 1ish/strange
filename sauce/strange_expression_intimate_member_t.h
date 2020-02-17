@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_intimate_member_t : public expression_t<___ego___>
 {
 public:
@@ -44,14 +45,14 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(_token.report() + "strange::expression_intimate_member::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(sym("^"));
 		if (it == local.end())
 		{
-			throw dis(_token.report() + "strange::expression_intimate_member::operate ^ not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member::operate ^ not found");
 		}
 		return any_c<>::intimate_member(it->second, _member);
 	}
@@ -75,7 +76,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_intimate_member::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member::generate_cpp called for wrong type of expression");
 		}
 		river.write_string("." + _member.to_string());
 	}
@@ -85,7 +86,7 @@ protected:
 	symbol_a<> const _member;
 
 	inline expression_intimate_member_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& member)
-		: expression_t(token, is_pure_literal(token, member))
+		: expression_t<___ego___>(token, is_pure_literal(token, member))
 		, _terms{ terms }
 		, _member{ member }
 	{}
@@ -106,7 +107,7 @@ bool const expression_intimate_member_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_intimate_member_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

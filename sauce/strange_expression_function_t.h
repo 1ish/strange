@@ -150,7 +150,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_function::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_function::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" [](");
 		auto nit = _names.extract_vector().cbegin();
@@ -189,7 +189,7 @@ protected:
 	expression_a<> const _expression;
 
 	inline expression_function_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& expressions, flock_a<> const& defaults, expression_a<> const& expression)
-		: expression_t(token, pure_literal_terms(token, terms))
+		: expression_t<___ego___>(token, expression_t<___ego___>::pure_literal_terms(token, terms))
 		, _terms{ terms }
 		, _scope{ scope }
 		, _names{ names }
@@ -209,7 +209,7 @@ bool const expression_function_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_function_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

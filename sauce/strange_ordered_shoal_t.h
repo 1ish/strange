@@ -101,7 +101,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 		inline ___ego___ increment_()
 		{
 			operator++();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline iterator_t& operator++()
@@ -127,7 +127,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 		inline ___ego___ decrement_()
 		{
 			operator--();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline iterator_t& operator--()
@@ -162,7 +162,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline iterator_t(ordered_shoal_t const& ordered_shoal_thing, F&& it)
-			: thing_t{}
+			: thing_t<___ego___>{}
 			, _it{ std::forward<F>(it) }
 			, _pair{ flock_t<>::create_() }
 			, _ordered_shoal_thing{ ordered_shoal_thing }
@@ -243,7 +243,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 		inline ___ego___ increment_()
 		{
 			operator++();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline const_iterator_t& operator++()
@@ -269,7 +269,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 		inline ___ego___ decrement_()
 		{
 			operator--();
-			return me_();
+			return thing_t<___ego___>::me_();
 		}
 
 		inline const_iterator_t& operator--()
@@ -305,7 +305,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline const_iterator_t(ordered_shoal_a<> const& ordered_shoal, ordered_shoal_t const& ordered_shoal_thing, F&& it)
-			: thing_t{}
+			: thing_t<___ego___>{}
 			, _it{ std::forward<F>(it) }
 			, _ordered_shoal{ ordered_shoal }
 			, _pair{ flock_t<>::create_() }
@@ -360,7 +360,8 @@ public:
 		{
 			throw dis("strange::ordered_shoal::visit passed non-inventory");
 		}
-		return visit_(cast_dup<inventory_a<>>(const_cast<range_a<>&>(range)));
+		auto inventory = cast_dup<inventory_a<>>(const_cast<range_a<>&>(range));
+		return visit_(inventory);
 	}
 
 	inline any_a<> visit_(inventory_a<>& inventory) const
@@ -409,13 +410,13 @@ public:
 	inline bidirectional_const_iterator_a<> cbegin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_map_any_any::const_iterator>::create(me_(), *this, _map.cbegin());
+		return const_iterator_t<std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
 	}
 
 	inline bidirectional_const_iterator_a<> cend_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_map_any_any::const_iterator>::create(me_(), *this, _map.cend());
+		return const_iterator_t<std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -597,7 +598,7 @@ public:
 				_map.emplace(pair.at_index(0), pair.at_index(1));
 			}
 		}
-		return me_();
+		return thing_t<___ego___>::me_();
 	}
 	
 	inline ordered_shoal_t& operator+=(any_a<> const& range)
@@ -708,20 +709,20 @@ protected:
 
 	template <typename F>
 	inline ordered_shoal_t(F&& init)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _mutex{}
 		, _map{ std::forward<F>(init) }
 	{}
 
 public:
 	inline ordered_shoal_t(ordered_shoal_t const& other)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _mutex{}
 		, _map{ other._map }
 	{}
 
 	inline ordered_shoal_t(ordered_shoal_t&& other)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _mutex{}
 		, _map{ std::move(other._map) }
 	{}
@@ -736,7 +737,7 @@ bool const ordered_shoal_t<_concurrent_, ___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	ordered_shoal_t<_concurrent_, ___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

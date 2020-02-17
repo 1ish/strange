@@ -313,7 +313,7 @@ namespace strange {
     {
     	auto& shoal = shared();
     	reflection<herd_a<___1___>>::share(shoal);
-    	return shoal.something();
+    	return shoal;
     }();
     
     #undef ___derived___

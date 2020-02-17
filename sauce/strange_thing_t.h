@@ -158,7 +158,7 @@ public:
 
 	inline number_data_a<uint64_t> identity_() const
 	{
-		return number_uint_64_t<>::create(uint64_t(identity()));
+		return number_t<uint64_t>::create(uint64_t(identity()));
 	}
 
 	inline any_a<> identical__(range_a<> const& range) const
@@ -213,7 +213,7 @@ bool const thing_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	thing_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

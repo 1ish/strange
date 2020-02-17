@@ -60,7 +60,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		throw return_i{ _result.operate(thing, range) };
+		throw expression_t<___ego___>::return_i{ _result.operate(thing, range) };
 	}
 
 	// expression
@@ -85,7 +85,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_return::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_return::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" return(");
 		_result.generate_cpp(version, indent, river, declare, define);
@@ -97,7 +97,7 @@ protected:
 	expression_a<> const _result;
 
 	inline expression_return_t(token_a<> const& token, flock_a<> const& terms, expression_a<> const& result)
-		: expression_t(token, result.pure(), result.literal()) // pure, literal
+		: expression_t<___ego___>(token, result.pure(), result.literal()) // pure, literal
 		, _terms{ terms }
 		, _result{ result }
 	{}
@@ -112,7 +112,7 @@ bool const expression_return_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_return_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

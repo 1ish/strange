@@ -33,7 +33,7 @@ public:
 		{
 			throw dis("[expression] create passed non-flock terms");
 		}
-		return create_(cast<token_a<>>(token), cast<flock_a<>>(terms));
+		return _OVERRIDDEN_::create_(cast<token_a<>>(token), cast<flock_a<>>(terms));
 	}
 
 	inline any_a<> recreate__(range_a<> const&) const
@@ -43,8 +43,8 @@ public:
 
 	inline expression_a<> recreate_() const
 	{
-		auto terms = terms_();
-		flock_t<>::std_vector_any& vector = const_cast<flock_t<>::std_vector_any&>(terms.extract_vector());
+		auto terms = _OVERRIDDEN_::terms_();
+		std::vector<any_a<>>& vector = const_cast<std::vector<any_a<>>&>(terms.extract_vector());
 		for (auto& term : vector)
 		{
 			if (check<expression_a<>>(term))
@@ -52,29 +52,29 @@ public:
 				term = cast<expression_a<>>(term).recreate_();
 			}
 		}
-		auto const expression = create_(_token, terms);
-		recreated(expression);
+		auto const expression = _OVERRIDDEN_::create_(_OVERRIDDEN_::_token, terms);
+		_OVERRIDDEN_::recreated(expression);
 		return expression;
 	}
 
 	inline any_a<> cat__(range_a<> const&) const
 	{
-		return cat_();
+		return _OVERRIDDEN_::cat_();
 	}
 
 	inline any_a<> cats__(range_a<> const&) const
 	{
-		return cats_();
+		return _OVERRIDDEN_::cats_();
 	}
 
 	inline any_a<> kind__(range_a<> const&) const
 	{
-		return kind_();
+		return _OVERRIDDEN_::kind_();
 	}
 
 	inline any_a<> kinds__(range_a<> const&) const
 	{
-		return kinds_();
+		return _OVERRIDDEN_::kinds_();
 	}
 
 	inline any_a<> literal__(range_a<> const&) const
@@ -84,7 +84,7 @@ public:
 
 	inline any_a<> literal_() const
 	{
-		return boole(literal());
+		return boole(_OVERRIDDEN_::literal());
 	}
 
 	inline any_a<> evaluate__(range_a<> const&) const
@@ -96,17 +96,17 @@ public:
 	{
 		auto local = unordered_shoal_t<>::create_();
 		local.insert_string("$", unordered_shoal_t<true>::create_());
-		return operate(local, range_t<>::create_());
+		return _OVERRIDDEN_::operate(local, range_t<>::create_());
 	}
 
 	inline any_a<> token__(range_a<> const&) const
 	{
-		return token_();
+		return _OVERRIDDEN_::token_();
 	}
 
 	inline any_a<> terms__(range_a<> const&) const
 	{
-		return terms_();
+		return _OVERRIDDEN_::terms_();
 	}
 
 	inline any_a<> generate__(range_a<> const& range) const
@@ -134,17 +134,18 @@ public:
 		{
 			throw dis("[expression]::generate passed short range");
 		}
-		any_a<> river = any_a<>::dup(const_cast<any_a<>&>(*it));
-		if (!check<river_a<>>(river))
+		any_a<> any_river = any_a<>::dup(const_cast<any_a<>&>(*it));
+		if (!check<river_a<>>(any_river))
 		{
 			throw dis("[expression]::generate passed non-river");
 		}
-		return generate_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_dup<river_a<>>(river));
+		auto river = cast_dup<river_a<>>(any_river);
+		return generate_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), river);
 	}
 
 	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
 	{
-		generate(version.extract_primitive(), indent.extract_primitive(), river);
+		_OVERRIDDEN_::generate(version.extract_primitive(), indent.extract_primitive(), river);
 		return river;
 	}
 
@@ -173,11 +174,12 @@ public:
 		{
 			throw dis("[expression]::generate_cpp passed short range");
 		}
-		any_a<> river = any_a<>::dup(const_cast<any_a<>&>(*it));
-		if (!check<river_a<>>(river))
+		any_a<> any_river = any_a<>::dup(const_cast<any_a<>&>(*it));
+		if (!check<river_a<>>(any_river))
 		{
 			throw dis("[expression]::generate_cpp passed non-river");
 		}
+		auto river = cast_dup<river_a<>>(any_river);
 		if (++it == range.cend_())
 		{
 			throw dis("[expression]::generate_cpp passed short range");
@@ -190,14 +192,14 @@ public:
 		any_a<> define = *it;
 		if (++it == range.cend_())
 		{
-			return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_dup<river_a<>>(river), declare, define);
+			return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), river, declare, define);
 		}
-		return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), cast_dup<river_a<>>(river), declare, define, *it);
+		return generate_cpp_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), river, declare, define, *it);
 	}
 
 	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = no()) const
 	{
-		generate_cpp(version.extract_primitive(), indent.extract_primitive(), river, declare, define, type);
+		_OVERRIDDEN_::generate_cpp(version.extract_primitive(), indent.extract_primitive(), river, declare, define, type);
 		return river;
 	}
 };

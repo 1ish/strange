@@ -4,7 +4,8 @@
 namespace strange
 {
 
-template <typename ___ego___ = expression_a<>>
+// template <typename ___ego___ = expression_a<>>
+template <typename ___ego___>
 class expression_intimate_t : public expression_t<___ego___>
 {
 public:
@@ -53,14 +54,14 @@ public:
 #ifdef STRANGE_CHECK_STATIC_CASTS
 		if (!check<unordered_shoal_a<>>(thing))
 		{
-			throw dis(_token.report() + "strange::expression_intimate::operate passed non-unordered-shoal local");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate::operate passed non-unordered-shoal local");
 		}
 #endif
 		auto& local = const_cast<unordered_shoal_t<>::std_unordered_map_any_any&>(static_cast<unordered_shoal_a<>&>(thing).extract_map());
 		auto it = local.find(sym("^"));
 		if (it == local.end())
 		{
-			throw dis(_token.report() + "strange::expression_intimate::operate ^ not found");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate::operate ^ not found");
 		}
 		return any_c<>::intimate(it->second, _member, range_operator_t<>::create_(_arguments, thing, range));
 	}
@@ -84,7 +85,7 @@ public:
 			{
 				if (!check<expression_a<>>(argument))
 				{
-					throw dis(_token.report() + "strange::expression_intimate::generate_cpp with non-expression argument");
+					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate::generate_cpp with non-expression argument");
 				}
 				cast<expression_a<>>(argument).generate_cpp(version, indent, river, declare, define);
 			}
@@ -92,7 +93,7 @@ public:
 		}
 		if (type)
 		{
-			throw dis(_token.report() + "strange::expression_intimate::generate_cpp called for wrong type of expression");
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate::generate_cpp called for wrong type of expression");
 		}
 		river.write_string(" intimate ");
 	}
@@ -103,7 +104,7 @@ protected:
 	flock_a<> const _arguments;
 
 	inline expression_intimate_t(token_a<> const& token, flock_a<> const& terms, symbol_a<> const& member, flock_a<> const& arguments)
-		: expression_t(token, is_pure_literal(token, member, arguments))
+		: expression_t<___ego___>(token, is_pure_literal(token, member, arguments))
 		, _terms{ terms }
 		, _member{ member }
 		, _arguments{ arguments }
@@ -125,7 +126,7 @@ bool const expression_intimate_t<___ego___>::___share___ = []()
 {
 	auto& shoal = shared();
 	expression_intimate_t<___ego___>::share(shoal);
-	return shoal.something();
+	return shoal;
 }();
 
 } // namespace strange

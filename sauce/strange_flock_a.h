@@ -264,7 +264,7 @@ namespace strange {
     {
     	auto& shoal = shared();
     	reflection<flock_a<___1___>>::share(shoal);
-    	return shoal.something();
+    	return shoal;
     }();
     
     #undef ___derived___

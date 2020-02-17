@@ -320,7 +320,7 @@ namespace strange {
     {
     	auto& shoal = shared();
     	reflection<symbol_a<___1___>>::share(shoal);
-    	return shoal.something();
+    	return shoal;
     }();
     
 
