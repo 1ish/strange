@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _OVERRIDDEN_, typename _unordered_shoal_ = unordered_shoal_t<>, typename _number_uint64_ = number_t<uint64_t>>
+template <typename _OVERRIDDEN_, typename _unordered_shoal_ = unordered_shoal_t<>>
 class thing_o : public _OVERRIDDEN_
 {
 public:
@@ -71,7 +71,7 @@ public:
 
 	inline number_data_a<uint64_t> hash_() const
 	{
-		return _number_uint64_::create(uint64_t(_OVERRIDDEN_::hash()));
+		return number_from_primitive(uint64_t(_OVERRIDDEN_::hash()));
 	}
 };
 

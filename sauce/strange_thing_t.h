@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename ___ego___ = any_a<>, typename _native_function_ = native_function_t<>, typename _range_ = range_t<>, typename _number_uint64_ = number_t<uint64_t>>
+template <typename ___ego___ = any_a<>, typename _native_function_ = native_function_t<>, typename _range_ = range_t<>>
 class thing_t : public one_t
 {
 public:
@@ -160,7 +160,7 @@ public:
 
 	inline number_data_a<uint64_t> identity_() const
 	{
-		return _number_uint64_::create(uint64_t(identity()));
+		return number_from_primitive(uint64_t(identity()));
 	}
 
 	inline any_a<> identical__(range_a<> const& range) const
@@ -210,11 +210,11 @@ private:
 	friend class ___thing_t_share___;
 };
 
-template <typename ___ego___, typename _native_function_, typename _range_, typename _number_uint64_>
-bool const thing_t<___ego___, _native_function_, _range_, _number_uint64_>::___share___ = []()
+template <typename ___ego___, typename _native_function_, typename _range_>
+bool const thing_t<___ego___, _native_function_, _range_>::___share___ = []()
 {
 	auto& shoal = shared();
-	thing_t<___ego___, _native_function_, _range_, _number_uint64_>::share(shoal);
+	thing_t<___ego___, _native_function_, _range_>::share(shoal);
 	return shoal;
 }();
 
