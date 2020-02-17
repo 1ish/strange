@@ -8,13 +8,15 @@ inline bool check(any_a<range_a, symbol_a, cat_a, kind_a, inventory_a, unordered
 template <typename range_a, typename symbol_a, typename cat_a, typename kind_a, typename inventory_a, typename unordered_herd_a, typename shoal_a, typename unordered_shoal_a, typename number_data_uint64_a>
 class any_a
 {
+protected:
+	struct ___any_a_handle_base___;
+
 public:
 	// constructor tags
 	struct ___reference_tag___ {};
 	struct ___duplicate_tag___ {};
 
 	// shared pointer typedefs
-	struct ___any_a_handle_base___;
 	using ___WEAK___ = std::weak_ptr<___any_a_handle_base___>;
 	using ___SHARED___ = std::shared_ptr<___any_a_handle_base___>;
 

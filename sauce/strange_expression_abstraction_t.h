@@ -444,8 +444,7 @@ protected:
 			river.write_string(" : public " + base_name + "<>");
 		}
 		river.write_string("\n"
-			"{\n"
-			"public:\n");
+			"{\n");
 		_define_class_boilerplate_(root, class_name, version, indent, river);
 		auto const class_expression_terms = _class_expression_terms_();
 		_define_class_nonvirtual_members_(root, class_name, class_expression_terms, version, indent, river);
@@ -498,12 +497,15 @@ protected:
 		if (root)
 		{
 			river.write_string(
+				"protected:\n"
+				"\tstruct ___" + class_name + "_handle_base___;\n\n"
+
+				"public:\n"
 				"\t// constructor tags\n"
 				"\tstruct ___reference_tag___ {};\n"
 				"\tstruct ___duplicate_tag___ {};\n\n"
 
 				"\t// shared pointer typedefs\n"
-				"\tstruct ___" + class_name + "_handle_base___;\n"
 				"\tusing ___WEAK___ = std::weak_ptr<___" + class_name + "_handle_base___>;\n"
 				"\tusing ___SHARED___ = std::shared_ptr<___" + class_name + "_handle_base___>;\n\n"
 
@@ -540,6 +542,11 @@ protected:
 				"\t\tassert(handle_);\n"
 				"\t\twrite();\n"
 				"\t}\n\n");
+		}
+		else
+		{
+			river.write_string(
+				"public:\n");
 		}
 		river.write_string(
 			"\t// arithmetic operator overloads\n"
