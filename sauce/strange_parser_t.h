@@ -725,11 +725,13 @@ private:
 				{
 					if (!key_context)
 					{
+						auto context_fixed = unordered_herd_a<>::ref(context->fixed);
+						auto context_kind = unordered_shoal_a<>::ref(context->kind);
 						key_context = std::make_shared<context_struct>(
 							context->scope,
 							context->scope,
-							unordered_herd_a<>::ref(context->fixed),
-							unordered_shoal_a<>::ref(context->kind),
+							context_fixed,
+							context_kind,
 							context->meta,
 							context->emit);
 					}
@@ -839,11 +841,13 @@ private:
 				// regular key/value pair
 				if (!value_context)
 				{
+					auto context_fixed = unordered_herd_a<>::ref(context->fixed);
+					auto context_kind = unordered_shoal_a<>::ref(context->kind);
 					value_context = std::make_shared<context_struct>(
 						context->scope,
 						new_scope_symbol,
-						unordered_herd_a<>::ref(context->fixed),
-						unordered_shoal_a<>::ref(context->kind),
+						context_fixed,
+						context_kind,
 						context->meta,
 						context->emit);
 				}
@@ -852,11 +856,13 @@ private:
 			else if (operator_token.symbol() == "::")
 			{
 				// shared scope
+				auto new_fixed = _remove_herd_non_dimensions(context->fixed);
+				auto new_kind = _remove_shoal_non_dimensions(context->kind);
 				value = _initial(0, std::make_shared<context_struct>(
 					context->scope,
 					new_scope_symbol,
-					_remove_herd_non_dimensions(context->fixed),
-					_remove_shoal_non_dimensions(context->kind),
+					new_fixed,
+					new_kind,
 					context->meta,
 					context->emit));
 				bool clash = false;
@@ -902,11 +908,13 @@ private:
 				}
 				// reference/extraction/mutation
 				auto terms = flock_t<>::create_(new_scope_symbol);
+				auto new_fixed = _remove_herd_non_dimensions(context->fixed);
+				auto new_kind = _remove_shoal_non_dimensions(context->kind);
 				terms += _elements(std::make_shared<context_struct>(
 					context->scope,
 					new_scope_symbol,
-					_remove_herd_non_dimensions(context->fixed),
-					_remove_shoal_non_dimensions(context->kind),
+					new_fixed,
+					new_kind,
 					context->meta,
 					context->emit));
 				if (reference)
@@ -967,12 +975,14 @@ private:
 					}
 				}
 				// attribute reference/extraction/mutation
+				auto new_fixed = _remove_herd_non_dimensions(context->fixed);
+				auto new_kind = _remove_shoal_non_dimensions(context->kind);
 				auto const terms = flock_t<>::create_(key_symbol, kind, _initial(0,
 					std::make_shared<context_struct>(
 						context->scope,
 						new_scope_symbol,
-						_remove_herd_non_dimensions(context->fixed),
-						_remove_shoal_non_dimensions(context->kind),
+						new_fixed,
+						new_kind,
 						context->meta,
 						context->emit)));
 				if (reference)

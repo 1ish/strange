@@ -73,7 +73,8 @@ class range_operator_t : public thing_t<___ego___>
 			else if(vector.size() != _pos + 1)
 			{
 				vector.resize(_pos);
-				vector.emplace_back(_it->operate(_thing_ref, _range_ref), any_a<>::___duplicate_tag___{});
+				auto thing = _it->operate(_thing_ref, _range_ref);
+				vector.emplace_back(thing, any_a<>::___duplicate_tag___{});
 			}
 			return vector.back();
 		}

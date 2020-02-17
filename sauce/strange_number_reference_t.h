@@ -733,7 +733,7 @@ protected:
 	_primitive_& _number;
 
 	inline number_reference_t(_primitive_& number)
-		: thing_t{}
+		: thing_t<___ego___>{}
 		, _number(number)
 	{}
 };
