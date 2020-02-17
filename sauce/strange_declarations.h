@@ -286,6 +286,9 @@ inline range_a<> range_create(forward_const_iterator_a<> const& begin, forward_c
 template <bool _concurrent_ = false>
 inline flock_a<> flock_create();
 
+template <typename F>
+inline flock_a<> flock_create(F&& init);
+
 // lake
 inline lake_a<int8_t> lake_from_string(std::string const& str);
 inline std::string lake_to_string(lake_a<int8_t> const& lake);

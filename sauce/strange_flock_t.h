@@ -1149,6 +1149,12 @@ inline flock_a<> flock_create()
 	return flock_t<_concurrent_>::create_();
 }
 
+template <typename F>
+inline flock_a<> flock_create(F&& init)
+{
+	return flock_t<>::create(std::forward<F>(init));
+}
+
 } // namespace strange
 
 #endif
