@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename _1_ = any_a<>, typename _2_ = std::hash<_1_>>
+template <typename _1_ = any_a<>, typename _2_ = std::hash<_1_>, typename _number_int64_ = number_t<int64_t>, typename _number_double_ = number_t<double>>
 class variadic_u
 {
 public:
@@ -64,14 +64,14 @@ public:
 	template <typename... Args>
 	static inline void variadic(std::set<_1_>& collection, int64_t i, Args&&... args)
 	{
-		collection.insert(number_t<int64_t>::create(i));
+		collection.insert(_number_int64_::create(i));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::set<_1_>& collection, double f, Args&&... args)
 	{
-		collection.insert(number_t<double>::create(f));
+		collection.insert(_number_double_::create(f));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
@@ -103,14 +103,14 @@ public:
 	template <typename... Args>
 	static inline void variadic(std::unordered_set<_1_, _2_>& collection, int64_t i, Args&&... args)
 	{
-		collection.insert(number_t<int64_t>::create(i));
+		collection.insert(_number_int64_::create(i));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::unordered_set<_1_, _2_>& collection, double f, Args&&... args)
 	{
-		collection.insert(number_t<double>::create(f));
+		collection.insert(_number_double_::create(f));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
