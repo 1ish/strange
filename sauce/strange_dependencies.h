@@ -21,5 +21,6 @@
 #include <mutex>
 #include <shared_mutex>
 #include <iostream>
+#include <cmath>
 
 #endif
