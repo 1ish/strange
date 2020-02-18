@@ -47,12 +47,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<symbol_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::symbol");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<symbol_t<>>::share(shoal);
+		shoal.update_string("strange::symbol::create", native_function_create(&symbol_t<>::create__));
 	}
 
 	// comparison
@@ -150,6 +151,14 @@ inline symbol_a<> sym(F&& s)
 {
 	return symbol_t<>::create(std::forward<F>(s));
 }
+
+class ___symbol_t_share___
+{
+	static inline bool ___share___()
+	{
+		return symbol_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

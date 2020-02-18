@@ -67,30 +67,6 @@ class ___symbol_a_share___
 	}
 };
 
-template<>
-class reflection<symbol_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::symbol");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::symbol::create", native_function_t<>::create(&symbol_t<>::create__));
-	}
-};
-
-class ___symbol_t_share___
-{
-	static inline bool ___share___()
-	{
-		return symbol_t<>::___share___;
-	}
-};
-
 }
 
 #endif
