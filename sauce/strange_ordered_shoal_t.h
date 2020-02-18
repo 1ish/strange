@@ -164,7 +164,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 		inline iterator_t(ordered_shoal_t const& ordered_shoal_thing, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
-			, _pair{ flock_t<>::create_() }
+			, _pair{ flock_create() }
 			, _ordered_shoal_thing{ ordered_shoal_thing }
 		{}
 	};
@@ -308,7 +308,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _ordered_shoal{ ordered_shoal }
-			, _pair{ flock_t<>::create_() }
+			, _pair{ flock_create() }
 			, _ordered_shoal_thing{ ordered_shoal_thing }
 		{}
 	};
