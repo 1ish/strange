@@ -80,8 +80,8 @@ protected:
 	unordered_herd_a<> const _cats;
 
 	inline description_t()
-		: operation_t{}
-		, _kind{ kind_t<>::create_() }
+		: operation_t<___ego___>{}
+		, _kind{ kind_create() }
 		, _kinds{ operation_t<___ego___>::kinds(_kind) }
 		, _cat{ kind_to_cat(_kind) }
 		, _cats{ operation_t<___ego___>::cats(_cat) }
