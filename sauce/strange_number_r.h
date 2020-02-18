@@ -97,39 +97,6 @@ class ___number_a_share___
 	}
 };
 
-template<typename _primitive_>
-class reflection<number_t<_primitive_>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::number_" + number_u<_primitive_>::category());
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string(type().to_string() + "::create", native_function_t<>::create(&number_t<_primitive_>::create__));
-	}
-};
-
-class ___number_t_share___
-{
-	static inline bool ___share___()
-	{
-		return number_int_8_t<>::___share___
-			&& number_uint_8_t<>::___share___
-			&& number_int_16_t<>::___share___
-			&& number_uint_16_t<>::___share___
-			&& number_int_32_t<>::___share___
-			&& number_uint_32_t<>::___share___
-			&& number_int_64_t<>::___share___
-			&& number_uint_64_t<>::___share___
-			&& number_float_32_t<>::___share___
-			&& number_float_64_t<>::___share___;
-	}
-};
-
 }
 
 #endif

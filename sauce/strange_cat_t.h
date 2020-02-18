@@ -96,12 +96,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<cat_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::cat");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<cat_t<>>::share(shoal);
+		shoal.update_string("strange::cat::create", native_function_create(&cat_t<>::create__));
 	}
 
 	// comparison
@@ -409,6 +410,14 @@ bool const cat_t<___ego___>::___share___ = []()
 	cat_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___cat_t_share___
+{
+	static inline bool ___share___()
+	{
+		return cat_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

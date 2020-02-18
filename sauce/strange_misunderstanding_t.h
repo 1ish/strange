@@ -36,12 +36,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<misunderstanding_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::misunderstanding");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<misunderstanding_t<>>::share(shoal);
+		shoal.update_string("strange::misunderstanding::create", native_function_create(&misunderstanding_t<>::create__));
 	}
 
 	// comparison
@@ -105,6 +106,14 @@ bool const misunderstanding_t<___ego___>::___share___ = []()
 	misunderstanding_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___misunderstanding_t_share___
+{
+	static inline bool ___share___()
+	{
+		return misunderstanding_t<>::___share___;
+	}
+};
 
 template <typename F>
 inline misunderstanding_a<> mis(F&& s)

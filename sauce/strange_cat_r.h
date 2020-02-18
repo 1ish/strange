@@ -72,30 +72,6 @@ class ___cat_a_share___
 	}
 };
 
-template<>
-class reflection<cat_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::cat");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::cat::create", native_function_t<>::create(&cat_t<>::create__));
-	}
-};
-
-class ___cat_t_share___
-{
-	static inline bool ___share___()
-	{
-		return cat_t<>::___share___;
-	}
-};
-
 }
 
 #endif

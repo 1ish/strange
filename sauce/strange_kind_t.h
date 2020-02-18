@@ -114,12 +114,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<kind_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::kind");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<kind_t<>>::share(shoal);
+		shoal.update_string("strange::kind::create", native_function_create(&kind_t<>::create__));
 	}
 
 	// comparison
@@ -224,6 +225,14 @@ bool const kind_t<___ego___>::___share___ = []()
 	kind_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___kind_t_share___
+{
+	static inline bool ___share___()
+	{
+		return kind_t<>::___share___;
+	}
+};
 
 inline kind_a<> kind_create()
 {

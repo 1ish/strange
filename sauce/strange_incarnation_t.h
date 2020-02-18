@@ -20,12 +20,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<incarnation_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::incarnation");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<incarnation_t<>>::share(shoal);
+		shoal.update_string("strange::incarnation::create", native_function_create(&incarnation_t<>::create__));
 	}
 
 	// incarnation
@@ -80,6 +81,14 @@ bool const incarnation_t<___ego___>::___share___ = []()
 	incarnation_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___incarnation_t_share___
+{
+	static inline bool ___share___()
+	{
+		return incarnation_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

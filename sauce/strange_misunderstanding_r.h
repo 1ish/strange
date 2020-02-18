@@ -67,30 +67,6 @@ class ___misunderstanding_a_share___
 	}
 };
 
-template<>
-class reflection<misunderstanding_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::misunderstanding");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::misunderstanding::create", native_function_t<>::create(&misunderstanding_t<>::create__));
-	}
-};
-
-class ___misunderstanding_t_share___
-{
-	static inline bool ___share___()
-	{
-		return misunderstanding_t<>::___share___;
-	}
-};
-
 }
 
 #endif

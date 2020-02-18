@@ -31,12 +31,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<number_t<_primitive_>>::type();
+		static symbol_a<> TYPE = sym("strange::number_" + number_u<_primitive_>::category());
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<number_t<_primitive_>>::share(shoal);
+		shoal.update_string(type_().to_string() + "::create", native_function_create(&number_t<_primitive_>::create__));
 	}
 
 	// comparison
@@ -796,6 +797,23 @@ using number_float_32_t = number_t<float, ___ego___>;
 
 template <typename ___ego___ = number_data_a<double>>
 using number_float_64_t = number_t<double, ___ego___>;
+
+class ___number_t_share___
+{
+	static inline bool ___share___()
+	{
+		return number_int_8_t<>::___share___
+			&& number_uint_8_t<>::___share___
+			&& number_int_16_t<>::___share___
+			&& number_uint_16_t<>::___share___
+			&& number_int_32_t<>::___share___
+			&& number_uint_32_t<>::___share___
+			&& number_int_64_t<>::___share___
+			&& number_uint_64_t<>::___share___
+			&& number_float_32_t<>::___share___
+			&& number_float_64_t<>::___share___;
+	}
+};
 
 inline number_data_a<int64_t> int_64_from_string(std::string const& str)
 {

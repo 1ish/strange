@@ -20,7 +20,8 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<number_reference_t<_primitive_>>::type();
+		static symbol_a<> TYPE = sym("strange::number_reference_" + number_u<_primitive_>::category());
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)

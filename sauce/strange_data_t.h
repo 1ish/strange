@@ -31,12 +31,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<data_t<_data_>>::type();
+		static symbol_a<> TYPE = sym("strange::data");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<data_t<_data_>>::share(shoal);
+		// nope: shoal.update_string(type_().to_string() + "::create", native_function_create(&data_t<std::shared_ptr<strange::concurrent_u<false>::read_lock>>::create__));
 	}
 
 	// comparison
@@ -85,6 +86,17 @@ bool const data_t<_data_, ___ego___>::___share___ = []()
 	data_t<_data_, ___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___data_t_share___
+{
+	static inline bool ___share___()
+	{
+		return data_t<std::shared_ptr<strange::concurrent_u<false>::read_lock>>::___share___
+			&& data_t<std::shared_ptr<strange::concurrent_u<true>::read_lock>>::___share___
+			&& data_t<std::shared_ptr<strange::concurrent_u<false>::write_lock>>::___share___
+			&& data_t<std::shared_ptr<strange::concurrent_u<true>::write_lock>>::___share___;
+	}
+};
 
 } // namespace strange
 

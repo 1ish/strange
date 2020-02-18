@@ -80,12 +80,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<abstraction_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::abstraction");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<abstraction_t<>>::share(shoal);
+		shoal.update_string("strange::abstraction::create", native_function_create(&abstraction_t<>::create__));
 	}
 
 	// function
@@ -242,6 +243,14 @@ bool const abstraction_t<___ego___>::___share___ = []()
 	abstraction_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___abstraction_t_share___
+{
+	static inline bool ___share___()
+	{
+		return abstraction_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

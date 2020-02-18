@@ -32,12 +32,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<nothing_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::nothing");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<nothing_t<>>::share(shoal);
+		shoal.update_string("strange::nothing::create", native_function_create(&nothing_t<>::create__));
 	}
 
 	// comparison
@@ -99,6 +100,14 @@ bool const nothing_t<___ego___>::___share___ = []()
 	nothing_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___nothing_t_share___
+{
+	static inline bool ___share___()
+	{
+		return nothing_t<>::___share___;
+	}
+};
 
 } // namespace strange
 
