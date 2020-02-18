@@ -61,47 +61,6 @@ class ___ordered_herd_a_share___
 	}
 };
 
-template<>
-class reflection<ordered_herd_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::ordered_herd");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::ordered_herd::create", native_function_t<>::create(&ordered_herd_t<>::create__));
-	}
-};
-
-template<>
-class reflection<ordered_herd_t<true>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::ordered_herd_concurrent");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::ordered_herd_concurrent::create", native_function_t<>::create(&ordered_herd_t<true>::create__));
-	}
-};
-
-class ___ordered_herd_t_share___
-{
-	static inline bool ___share___()
-	{
-		return ordered_herd_t<>::___share___
-			&& ordered_herd_t<true>::___share___;
-	}
-};
-
 }
 
 #endif

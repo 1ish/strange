@@ -785,12 +785,14 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<brook_t<_primitive_, _concurrent_>>::type();
+		static symbol_a<> TYPE = sym("strange::brook_" + number_u<_primitive_>::category() +
+			(_concurrent_ ? "_concurrent" : ""));
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<brook_t<_primitive_, _concurrent_>>::share(shoal);
+		shoal.update_string(type_().to_string() + "::create", native_function_create(&brook_t<_primitive_, _concurrent_>::create__));
 	}
 
 	// comparison
@@ -1234,6 +1236,33 @@ using brook_float_32_t = brook_t<float, _concurrent_, ___ego___>;
 
 template <bool _concurrent_ = false, typename ___ego___ = brook_a<double>>
 using brook_float_64_t = brook_t<double, _concurrent_, ___ego___>;
+
+class ___brook_t_share___
+{
+	static inline bool ___share___()
+	{
+		return brook_int_8_t<>::___share___
+			&& brook_uint_8_t<>::___share___
+			&& brook_int_16_t<>::___share___
+			&& brook_uint_16_t<>::___share___
+			&& brook_int_32_t<>::___share___
+			&& brook_uint_32_t<>::___share___
+			&& brook_int_64_t<>::___share___
+			&& brook_uint_64_t<>::___share___
+			&& brook_float_32_t<>::___share___
+			&& brook_float_64_t<>::___share___
+			&& brook_int_8_t<true>::___share___
+			&& brook_uint_8_t<true>::___share___
+			&& brook_int_16_t<true>::___share___
+			&& brook_uint_16_t<true>::___share___
+			&& brook_int_32_t<true>::___share___
+			&& brook_uint_32_t<true>::___share___
+			&& brook_int_64_t<true>::___share___
+			&& brook_uint_64_t<true>::___share___
+			&& brook_float_32_t<true>::___share___
+			&& brook_float_64_t<true>::___share___;
+	}
+};
 
 } // namespace strange
 

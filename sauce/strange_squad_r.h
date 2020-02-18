@@ -61,47 +61,6 @@ class ___squad_a_share___
 	}
 };
 
-template<>
-class reflection<squad_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::squad");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::squad::create", native_function_t<>::create(&squad_t<>::create__));
-	}
-};
-
-template<>
-class reflection<squad_t<true>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::squad_concurrent");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::squad_concurrent::create", native_function_t<>::create(&squad_t<true>::create__));
-	}
-};
-
-class ___squad_t_share___
-{
-	static inline bool ___share___()
-	{
-		return squad_t<>::___share___
-			&& squad_t<true>::___share___;
-	}
-};
-
 }
 
 #endif

@@ -151,12 +151,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<unordered_herd_t<_concurrent_>>::type();
+		static symbol_a<> TYPE = sym("strange::unordered_herd" + std::string{ _concurrent_ ? "_concurrent" : "" });
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<unordered_herd_t<_concurrent_>>::share(shoal);
+		shoal.update_string(type_().to_string() + "::create", native_function_create(&unordered_herd_t<_concurrent_>::create__));
 	}
 
 	// visitor pattern
@@ -482,6 +483,15 @@ bool const unordered_herd_t<_concurrent_, ___ego___>::___share___ = []()
 	unordered_herd_t<_concurrent_, ___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___unordered_herd_t_share___
+{
+	static inline bool ___share___()
+	{
+		return unordered_herd_t<>::___share___
+			&& unordered_herd_t<true>::___share___;
+	}
+};
 
 // template <bool _concurrent_ = false>
 template <bool _concurrent_>

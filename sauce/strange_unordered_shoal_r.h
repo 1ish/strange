@@ -61,47 +61,6 @@ class ___unordered_shoal_a_share___
 	}
 };
 
-template<>
-class reflection<unordered_shoal_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::unordered_shoal");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::unordered_shoal::create", native_function_t<>::create(&unordered_shoal_t<>::create__));
-	}
-};
-
-template<>
-class reflection<unordered_shoal_t<true>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::unordered_shoal_concurrent");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::unordered_shoal_concurrent::create", native_function_t<>::create(&unordered_shoal_t<true>::create__));
-	}
-};
-
-class ___unordered_shoal_t_share___
-{
-	static inline bool ___share___()
-	{
-		return unordered_shoal_t<>::___share___
-			&& unordered_shoal_t<true>::___share___;
-	}
-};
-
 }
 
 #endif

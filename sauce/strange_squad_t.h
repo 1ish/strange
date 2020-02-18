@@ -763,12 +763,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<squad_t<_concurrent_>>::type();
+		static symbol_a<> TYPE = sym("strange::squad" + std::string{ _concurrent_ ? "_concurrent" : "" });
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<squad_t<_concurrent_>>::share(shoal);
+		shoal.update_string(type_().to_string() + "::create", native_function_create(&squad_t<_concurrent_>::create__));
 	}
 
 	// visitor pattern
@@ -1148,6 +1149,15 @@ bool const squad_t<_concurrent_, ___ego___>::___share___ = []()
 	squad_t<_concurrent_, ___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___squad_t_share___
+{
+	static inline bool ___share___()
+	{
+		return squad_t<>::___share___
+			&& squad_t<true>::___share___;
+	}
+};
 
 // template <bool _concurrent_ = false>
 template <bool _concurrent_>

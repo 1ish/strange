@@ -61,47 +61,6 @@ class ___unordered_herd_a_share___
 	}
 };
 
-template<>
-class reflection<unordered_herd_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::unordered_herd");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::unordered_herd::create", native_function_t<>::create(&unordered_herd_t<>::create__));
-	}
-};
-
-template<>
-class reflection<unordered_herd_t<true>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::unordered_herd_concurrent");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::unordered_herd_concurrent::create", native_function_t<>::create(&unordered_herd_t<true>::create__));
-	}
-};
-
-class ___unordered_herd_t_share___
-{
-	static inline bool ___share___()
-	{
-		return unordered_herd_t<>::___share___
-			&& unordered_herd_t<true>::___share___;
-	}
-};
-
 }
 
 #endif

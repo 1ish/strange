@@ -61,47 +61,6 @@ class ___flock_a_share___
 	}
 };
 
-template<>
-class reflection<flock_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::flock");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::flock::create", native_function_t<>::create(&flock_t<>::create__));
-	}
-};
-
-template<>
-class reflection<flock_t<true>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::flock_concurrent");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::flock_concurrent::create", native_function_t<>::create(&flock_t<true>::create__));
-	}
-};
-
-class ___flock_t_share___
-{
-	static inline bool ___share___()
-	{
-		return flock_t<>::___share___
-			&& flock_t<true>::___share___;
-	}
-};
-
 }
 
 #endif
