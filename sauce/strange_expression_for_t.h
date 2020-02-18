@@ -66,12 +66,14 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<expression_for_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::expression_for");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<expression_for_t<>>::share(shoal);
+		shoal.update_string("strange::expression_for::create", native_function_create(&expression_for_t<>::over::create__));
+		shoal.update_string("for!", native_function_create(&expression_for_t<>::over::create__));
 	}
 
 	// function
@@ -169,6 +171,14 @@ bool const expression_for_t<___ego___>::___share___ = []()
 	expression_for_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___expression_for_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_for_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

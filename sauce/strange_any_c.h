@@ -50,7 +50,8 @@ public:
 			any_a<> thing = me_();
 			return op.operate(thing, range);
 		}
-		return reflection<any_c<>>::type();
+		static symbol_a<> TYPE = sym("<strange::any>");
+		return TYPE;
 	}
 
 	inline symbol_a<> type_() const
@@ -66,7 +67,8 @@ public:
 			}
 			return cast<symbol_a<>>(result);
 		}
-		return reflection<any_c<>>::type();
+		static symbol_a<> TYPE = sym("<strange::any>");
+		return TYPE;
 	}
 
 	inline any_a<> shared__(range_a<> const& range) const
@@ -102,7 +104,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<any_c<>>::share(shoal);
+		shoal.update_string("<strange::any>::animate", native_function_create(&any_c<>::animate__));
 	}
 
 	inline any_a<> cat__(range_a<> const& range) const
@@ -527,6 +529,14 @@ bool const any_c<___ego___>::___share___ = []()
 	any_c<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___any_c_share___
+{
+	static inline bool ___share___()
+	{
+		return any_c<>::___share___;
+	}
+};
 
 } // namespace strange
 

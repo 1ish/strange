@@ -26,12 +26,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<expression_flock_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::expression_flock");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<expression_flock_t<>>::share(shoal);
+		shoal.update_string("strange::expression_flock::create", native_function_create(&expression_flock_t<>::over::create__));
 	}
 
 	// function
@@ -128,6 +129,14 @@ bool const expression_flock_t<___ego___>::___share___ = []()
 	expression_flock_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___expression_flock_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_flock_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

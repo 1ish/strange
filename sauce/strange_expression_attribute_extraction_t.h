@@ -52,12 +52,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<expression_attribute_extraction_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::expression_attribute_extraction");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<expression_attribute_extraction_t<>>::share(shoal);
+		shoal.update_string("strange::expression_attribute_extraction::create", native_function_create(&expression_attribute_extraction_t<>::over::create__));
 	}
 
 	// function
@@ -135,6 +136,14 @@ bool const expression_attribute_extraction_t<___ego___>::___share___ = []()
 	expression_attribute_extraction_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___expression_attribute_extraction_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_attribute_extraction_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

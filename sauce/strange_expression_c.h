@@ -39,7 +39,8 @@ public:
 			any_a<> thing = operation_c<___ego___>::me_();
 			return op.operate(thing, range);
 		}
-		return reflection<expression_c<>>::type();
+		static symbol_a<> TYPE = sym("<strange::expression>");
+		return TYPE;
 	}
 
 	inline symbol_a<> type_() const
@@ -55,7 +56,8 @@ public:
 			}
 			return cast<symbol_a<>>(result);
 		}
-		return reflection<expression_c<>>::type();
+		static symbol_a<> TYPE = sym("<strange::expression>");
+		return TYPE;
 	}
 
 	inline any_a<> shared__(range_a<> const& range) const
@@ -91,7 +93,7 @@ public:
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<expression_c<>>::share(shoal);
+		shoal.update_string("<strange::expression>::animate", native_function_create(&expression_c<>::animate__));
 	}
 
 	// expression
@@ -359,6 +361,14 @@ bool const expression_c<___ego___>::___share___ = []()
 	expression_c<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___expression_c_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_c<>::___share___;
+	}
+};
 
 } // namespace strange
 

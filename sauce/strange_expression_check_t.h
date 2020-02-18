@@ -48,12 +48,14 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<expression_check_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::expression_check");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<expression_check_t<>>::share(shoal);
+		shoal.update_string("strange::expression_check::create", native_function_create(&expression_check_t<>::over::create__));
+		shoal.update_string("check!", native_function_create(&expression_check_t<>::over::create__));
 	}
 
 	// function
@@ -121,6 +123,14 @@ bool const expression_check_t<___ego___>::___share___ = []()
 	expression_check_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___expression_check_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_check_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

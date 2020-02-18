@@ -72,54 +72,6 @@ class ___expression_a_share___
 	}
 };
 
-template<>
-class reflection<expression_c<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("<strange::expression>");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("<strange::expression>::animate", native_function_t<>::create(&expression_c<>::animate__));
-	}
-};
-
-class ___expression_c_share___
-{
-	static inline bool ___share___()
-	{
-		return expression_c<>::___share___;
-	}
-};
-
-template<>
-class reflection<expression_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::expression");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::expression::create", native_function_t<>::create(&expression_t<>::over::create__));
-	}
-};
-
-class ___expression_t_share___
-{
-	static inline bool ___share___()
-	{
-		return expression_t<>::___share___;
-	}
-};
-
 }
 
 #endif

@@ -21,12 +21,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<expression_herd_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::expression_herd");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<expression_herd_t<>>::share(shoal);
+		shoal.update_string("strange::expression_herd::create", native_function_create(&expression_herd_t<>::over::create__));
 	}
 
 	// function
@@ -123,6 +124,14 @@ bool const expression_herd_t<___ego___>::___share___ = []()
 	expression_herd_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___expression_herd_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_herd_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

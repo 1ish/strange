@@ -40,12 +40,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<expression_intimate_member_range_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::expression_intimate_member_range");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<expression_intimate_member_range_t<>>::share(shoal);
+		// nope: shoal.update_string("strange::expression_intimate_member_range::create", native_function_create(&expression_intimate_member_range_t<>::over::create__));
 	}
 
 	// function
@@ -134,6 +135,14 @@ bool const expression_intimate_member_range_t<___ego___>::___share___ = []()
 	expression_intimate_member_range_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___expression_intimate_member_range_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_intimate_member_range_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

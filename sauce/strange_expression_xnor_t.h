@@ -40,12 +40,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<expression_xnor_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::expression_xnor");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<expression_xnor_t<>>::share(shoal);
+		shoal.update_string("strange::expression_xnor::create", native_function_create(&expression_xnor_t<>::over::create__));
 	}
 
 	// function
@@ -113,6 +114,14 @@ bool const expression_xnor_t<___ego___>::___share___ = []()
 	expression_xnor_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___expression_xnor_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_xnor_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

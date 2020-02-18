@@ -40,12 +40,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<expression_pipe_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::expression_pipe");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<expression_pipe_t<>>::share(shoal);
+		shoal.update_string("strange::expression_pipe::create", native_function_create(&expression_pipe_t<>::over::create__));
 	}
 
 	// function
@@ -114,6 +115,14 @@ bool const expression_pipe_t<___ego___>::___share___ = []()
 	expression_pipe_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___expression_pipe_t_share___
+{
+	static inline bool ___share___()
+	{
+		return expression_pipe_t<>::___share___;
+	}
+};
 
 } // namespace strange
 
