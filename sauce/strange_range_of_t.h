@@ -50,12 +50,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<range_of_t<_element_>>::type();
+		static symbol_a<> TYPE = sym("strange::range_of" + reflection<_element_>::cat().to_string());
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<range_of_t<_element_>>::share(shoal);
+		shoal.update_string(type_().to_string() + "::create", native_function_create(&range_of_t<_element_>::create__));
 	}
 
 	// range
@@ -91,6 +92,14 @@ bool const range_of_t<_element_, ___ego___>::___share___ = []()
 	range_of_t<_element_, ___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___range_of_t_share___
+{
+	static inline bool ___share___()
+	{
+		return range_of_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

@@ -69,30 +69,6 @@ class ___range_of_a_share___
 	}
 };
 
-template<typename _element_>
-class reflection<range_of_t<_element_>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::range_of" + reflection<_element_>::cat().to_string());
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string(type().to_string() + "::create", native_function_t<>::create(&range_of_t<_element_>::create__));
-	}
-};
-
-class ___range_of_t_share___
-{
-	static inline bool ___share___()
-	{
-		return range_of_t<>::___share___;
-	}
-};
-
 }
 
 #endif

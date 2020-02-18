@@ -258,12 +258,20 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<token_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::token");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<token_t<>>::share(shoal);
+		shoal.update_string("strange::token::create", native_function_create(&token_t<>::create__));
+		shoal.update_string("strange::token::create_symbol", native_function_create(&token_t<>::create_symbol__));
+		shoal.update_string("strange::token::create_lake", native_function_create(&token_t<>::create_lake__));
+		shoal.update_string("strange::token::create_int", native_function_create(&token_t<>::create_int__));
+		shoal.update_string("strange::token::create_float", native_function_create(&token_t<>::create_float__));
+		shoal.update_string("strange::token::create_name", native_function_create(&token_t<>::create_name__));
+		shoal.update_string("strange::token::create_punctuation", native_function_create(&token_t<>::create_punctuation__));
+		shoal.update_string("strange::token::create_error", native_function_create(&token_t<>::create_error__));
 	}
 
 	// token
@@ -414,6 +422,14 @@ bool const token_t<___ego___>::___share___ = []()
 	token_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___token_t_share___
+{
+	static inline bool ___share___()
+	{
+		return token_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

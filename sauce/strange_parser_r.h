@@ -67,30 +67,6 @@ class ___parser_a_share___
 	}
 };
 
-template<>
-class reflection<parser_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::parser");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-//TODO		shoal.update_string("strange::parser::create", native_function_t<>::create(&parser_t<>::create__));
-	}
-};
-
-class ___parser_t_share___
-{
-	static inline bool ___share___()
-	{
-		return parser_t<>::___share___;
-	}
-};
-
 }
 
 #endif

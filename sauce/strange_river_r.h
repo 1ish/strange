@@ -94,34 +94,6 @@ class ___river_a_share___
 	}
 };
 
-template<>
-class reflection<river_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::river");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::river::create", native_function_t<>::create(&river_t<>::create__));
-		shoal.update_string("strange::river::file", native_function_t<>::create(&river_t<>::file__));
-		shoal.update_string("strange::river::in", native_function_t<>::create(&river_t<>::in__));
-		shoal.update_string("strange::river::out", native_function_t<>::create(&river_t<>::out__));
-		shoal.update_string("strange::river::err", native_function_t<>::create(&river_t<>::err__));
-	}
-};
-
-class ___river_t_share___
-{
-	static inline bool ___share___()
-	{
-		return river_t<>::___share___;
-	}
-};
-
 }
 
 #endif

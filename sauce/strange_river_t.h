@@ -219,12 +219,17 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<river_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::river");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<river_t<>>::share(shoal);
+		shoal.update_string("strange::river::create", native_function_create(&river_t<>::create__));
+		shoal.update_string("strange::river::file", native_function_create(&river_t<>::file__));
+		shoal.update_string("strange::river::in", native_function_create(&river_t<>::in__));
+		shoal.update_string("strange::river::out", native_function_create(&river_t<>::out__));
+		shoal.update_string("strange::river::err", native_function_create(&river_t<>::err__));
 	}
 
 	// range
@@ -1031,6 +1036,14 @@ bool const river_t<___ego___>::___share___ = []()
 	river_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___river_t_share___
+{
+	static inline bool ___share___()
+	{
+		return river_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

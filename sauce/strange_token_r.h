@@ -74,37 +74,6 @@ class ___token_a_share___
 	}
 };
 
-template<>
-class reflection<token_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::token");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::token::create", native_function_t<>::create(&token_t<>::create__));
-		shoal.update_string("strange::token::create_symbol", native_function_t<>::create(&token_t<>::create_symbol__));
-		shoal.update_string("strange::token::create_lake", native_function_t<>::create(&token_t<>::create_lake__));
-		shoal.update_string("strange::token::create_int", native_function_t<>::create(&token_t<>::create_int__));
-		shoal.update_string("strange::token::create_float", native_function_t<>::create(&token_t<>::create_float__));
-		shoal.update_string("strange::token::create_name", native_function_t<>::create(&token_t<>::create_name__));
-		shoal.update_string("strange::token::create_punctuation", native_function_t<>::create(&token_t<>::create_punctuation__));
-		shoal.update_string("strange::token::create_error", native_function_t<>::create(&token_t<>::create_error__));
-	}
-};
-
-class ___token_t_share___
-{
-	static inline bool ___share___()
-	{
-		return token_t<>::___share___;
-	}
-};
-
 }
 
 #endif

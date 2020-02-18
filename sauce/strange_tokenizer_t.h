@@ -561,12 +561,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<tokenizer_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::tokenizer");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<tokenizer_t<>>::share(shoal);
+		shoal.update_string("strange::tokenizer::create", native_function_create(&tokenizer_t<>::create__));
 	}
 
 	// range
@@ -653,6 +654,14 @@ bool const tokenizer_t<___ego___>::___share___ = []()
 	tokenizer_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___tokenizer_t_share___
+{
+	static inline bool ___share___()
+	{
+		return tokenizer_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

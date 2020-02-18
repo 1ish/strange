@@ -20,12 +20,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<parser_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::parser");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<parser_t<>>::share(shoal);
+		//TODO		shoal.update_string("strange::parser::create", native_function_t<>::create(&parser_t<>::create__));
 	}
 
 	// parser
@@ -1742,6 +1743,14 @@ bool const parser_t<___ego___>::___share___ = []()
 	parser_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___parser_t_share___
+{
+	static inline bool ___share___()
+	{
+		return parser_t<>::___share___;
+	}
+};
 
 } // namespace strange
 

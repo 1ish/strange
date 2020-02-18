@@ -51,12 +51,13 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		return reflection<range_t<>>::type();
+		static symbol_a<> TYPE = sym("strange::range");
+		return TYPE;
 	}
 
 	static inline void share(shoal_a<>& shoal)
 	{
-		reflection<range_t<>>::share(shoal);
+		shoal.update_string("strange::range::create", native_function_create(&range_t<>::create__));
 	}
 
 	// range
@@ -92,6 +93,14 @@ bool const range_t<___ego___>::___share___ = []()
 	range_t<___ego___>::share(shoal);
 	return shoal;
 }();
+
+class ___range_t_share___
+{
+	static inline bool ___share___()
+	{
+		return range_t<>::___share___;
+	}
+};
 
 inline range_a<> range_create()
 {

@@ -68,30 +68,6 @@ class ___range_a_share___
 	}
 };
 
-template<>
-class reflection<range_t<>>
-{
-public:
-	static inline symbol_a<> type()
-	{
-		static symbol_a<> TYPE = sym("strange::range");
-		return TYPE;
-	}
-
-	static inline void share(shoal_a<>& shoal)
-	{
-		shoal.update_string("strange::range::create", native_function_t<>::create(&range_t<>::create__));
-	}
-};
-
-class ___range_t_share___
-{
-	static inline bool ___share___()
-	{
-		return range_t<>::___share___;
-	}
-};
-
 }
 
 #endif
