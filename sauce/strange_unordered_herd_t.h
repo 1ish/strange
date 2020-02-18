@@ -7,8 +7,8 @@ namespace strange
 template <bool _concurrent_ = false, typename ___ego___ = unordered_herd_a<>>
 class unordered_herd_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego___ = forward_const_iterator_data_a<_iterator_>>
-	class const_iterator_t : public thing_t<___ego___>
+	template <typename _iterator_, typename ___ego_it___ = forward_const_iterator_data_a<_iterator_>>
+	class const_iterator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
@@ -69,15 +69,15 @@ class unordered_herd_t : public thing_t<___ego___>
 			return *_it;
 		}
 
-		inline ___ego___ increment__(range_a<> const&)
+		inline ___ego_it___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline ___ego___ increment_()
+		inline ___ego_it___ increment_()
 		{
 			operator++();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline const_iterator_t& operator++()
@@ -112,7 +112,7 @@ class unordered_herd_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline const_iterator_t(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
-			: thing_t<___ego___>{}
+			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _unordered_herd{ unordered_herd }
 			, _unordered_herd_thing{ unordered_herd_thing }

@@ -7,8 +7,8 @@ namespace strange
 template <bool _concurrent_ = false, typename ___ego___ = ordered_herd_a<>>
 class ordered_herd_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego___ = bidirectional_const_iterator_data_a<_iterator_>>
-	class const_iterator_t : public thing_t<___ego___>
+	template <typename _iterator_, typename ___ego_it___ = bidirectional_const_iterator_data_a<_iterator_>>
+	class const_iterator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
@@ -69,15 +69,15 @@ class ordered_herd_t : public thing_t<___ego___>
 			return *_it;
 		}
 
-		inline ___ego___ increment__(range_a<> const&)
+		inline ___ego_it___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline ___ego___ increment_()
+		inline ___ego_it___ increment_()
 		{
 			operator++();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline const_iterator_t& operator++()
@@ -95,15 +95,15 @@ class ordered_herd_t : public thing_t<___ego___>
 		}
 
 		// bidirectional iterator
-		inline ___ego___ decrement__(range_a<> const& _)
+		inline ___ego_it___ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}
 
-		inline ___ego___ decrement_()
+		inline ___ego_it___ decrement_()
 		{
 			operator--();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline const_iterator_t& operator--()
@@ -138,7 +138,7 @@ class ordered_herd_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline const_iterator_t(ordered_herd_a<> const& ordered_herd, ordered_herd_t const& ordered_herd_thing, F&& it)
-			: thing_t<___ego___>{}
+			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _ordered_herd{ ordered_herd }
 			, _ordered_herd_thing{ ordered_herd_thing }

@@ -8,8 +8,8 @@ namespace strange
 template <bool _concurrent_, typename ___ego___>
 class unordered_shoal_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego___ = forward_iterator_data_a<_iterator_>>
-	class iterator_t : public thing_t<___ego___>
+	template <typename _iterator_, typename ___ego_it___ = forward_iterator_data_a<_iterator_>>
+	class iterator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
@@ -94,15 +94,15 @@ class unordered_shoal_t : public thing_t<___ego___>
 			return _pair;
 		}
 
-		inline ___ego___ increment__(range_a<> const&)
+		inline ___ego_it___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline ___ego___ increment_()
+		inline ___ego_it___ increment_()
 		{
 			operator++();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline iterator_t& operator++()
@@ -137,15 +137,15 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline iterator_t(unordered_shoal_t const& unordered_shoal_thing, F&& it)
-			: thing_t<___ego___>{}
+			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _pair{ flock_t<>::create_() }
 			, _unordered_shoal_thing{ unordered_shoal_thing }
 		{}
 	};
 
-	template <typename _iterator_, typename ___ego___ = forward_const_iterator_data_a<_iterator_>>
-	class const_iterator_t : public thing_t<___ego___>
+	template <typename _iterator_, typename ___ego_it___ = forward_const_iterator_data_a<_iterator_>>
+	class const_iterator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
@@ -210,15 +210,15 @@ class unordered_shoal_t : public thing_t<___ego___>
 			return _pair;
 		}
 
-		inline ___ego___ increment__(range_a<> const&)
+		inline ___ego_it___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline ___ego___ increment_()
+		inline ___ego_it___ increment_()
 		{
 			operator++();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline const_iterator_t& operator++()
@@ -254,7 +254,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline const_iterator_t(unordered_shoal_a<> const& unordered_shoal, unordered_shoal_t const& unordered_shoal_thing, F&& it)
-			: thing_t<___ego___>{}
+			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _unordered_shoal{ unordered_shoal }
 			, _pair{ flock_t<>::create_() }

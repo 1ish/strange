@@ -7,8 +7,8 @@ namespace strange
 template <typename _primitive_, bool _concurrent_ = false, typename ___ego___ = brook_a<_primitive_>>
 class brook_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego___ = random_access_iterator_data_a<_iterator_>>
-	class iterator_t : public thing_t<___ego___>
+	template <typename _iterator_, typename ___ego_it___ = random_access_iterator_data_a<_iterator_>>
+	class iterator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
@@ -99,15 +99,15 @@ class brook_t : public thing_t<___ego___>
 			return number;
 		}
 
-		inline ___ego___ increment__(range_a<> const&)
+		inline ___ego_it___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline ___ego___ increment_()
+		inline ___ego_it___ increment_()
 		{
 			operator++();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline iterator_t& operator++()
@@ -125,15 +125,15 @@ class brook_t : public thing_t<___ego___>
 		}
 
 		// bidirectional iterator
-		inline ___ego___ decrement__(range_a<> const& _)
+		inline ___ego_it___ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}
 
-		inline ___ego___ decrement_()
+		inline ___ego_it___ decrement_()
 		{
 			operator--();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline iterator_t& operator--()
@@ -151,20 +151,20 @@ class brook_t : public thing_t<___ego___>
 		}
 
 		// random access iterator
-		inline ___ego___ self_add__(range_a<> const& range)
+		inline ___ego_it___ self_add__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
 				operator+=(thing);
 			}
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
-		inline ___ego___ self_add_(number_a<> const& number)
+		inline ___ego_it___ self_add_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			_it += number.to_int_64();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline iterator_t& operator+=(any_a<> const& thing)
@@ -180,7 +180,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline random_access_iterator_a<> add__(range_a<> const& range) const
 		{
-			random_access_iterator_a<> result = thing_t<___ego___>::me_();
+			random_access_iterator_a<> result = thing_t<___ego_it___>::me_();
 			for (auto const& thing : range)
 			{
 				result += thing;
@@ -195,26 +195,26 @@ class brook_t : public thing_t<___ego___>
 
 		inline random_access_iterator_a<> operator+(number_a<> const& number) const
 		{
-			___ego___ result = thing_t<___ego___>::me_();
+			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			result.mutate_it() += number.to_int_64();
 			return result;
 		}
 
-		inline ___ego___ self_subtract__(range_a<> const& range)
+		inline ___ego_it___ self_subtract__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
 				operator-=(thing);
 			}
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
-		inline ___ego___ self_subtract_(number_a<> const& number)
+		inline ___ego_it___ self_subtract_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			_it -= number.to_int_64();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline iterator_t& operator-=(any_a<> const& thing)
@@ -230,7 +230,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline random_access_iterator_a<> subtract__(range_a<> const& range) const
 		{
-			random_access_iterator_a<> result = thing_t<___ego___>::me_();
+			random_access_iterator_a<> result = thing_t<___ego_it___>::me_();
 			for (auto const& thing : range)
 			{
 				result -= thing;
@@ -245,7 +245,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline random_access_iterator_a<> operator-(number_a<> const& number) const
 		{
-			___ego___ result = thing_t<___ego___>::me_();
+			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			result.mutate_it() -= number.to_int_64();
 			return result;
@@ -384,14 +384,14 @@ class brook_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline iterator_t(brook_t const& brook_thing, F&& it)
-			: thing_t<___ego___>{}
+			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _brook_thing{ brook_thing }
 		{}
 	};
 
-	template <typename _iterator_, typename ___ego___ = random_access_const_iterator_data_a<_iterator_>>
-	class const_iterator_t : public thing_t<___ego___>
+	template <typename _iterator_, typename ___ego_it___ = random_access_const_iterator_data_a<_iterator_>>
+	class const_iterator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
@@ -460,15 +460,15 @@ class brook_t : public thing_t<___ego___>
 			return number;
 		}
 
-		inline ___ego___ increment__(range_a<> const&)
+		inline ___ego_it___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline ___ego___ increment_()
+		inline ___ego_it___ increment_()
 		{
 			operator++();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline const_iterator_t& operator++()
@@ -486,15 +486,15 @@ class brook_t : public thing_t<___ego___>
 		}
 
 		// bidirectional iterator
-		inline ___ego___ decrement__(range_a<> const& _)
+		inline ___ego_it___ decrement__(range_a<> const& _)
 		{
 			return decrement_();
 		}
 
-		inline ___ego___ decrement_()
+		inline ___ego_it___ decrement_()
 		{
 			operator--();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline const_iterator_t& operator--()
@@ -512,20 +512,20 @@ class brook_t : public thing_t<___ego___>
 		}
 
 		// random access iterator
-		inline ___ego___ self_add__(range_a<> const& range)
+		inline ___ego_it___ self_add__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
 				operator+=(thing);
 			}
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
-		inline ___ego___ self_add_(number_a<> const& number)
+		inline ___ego_it___ self_add_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			_it += number.to_int_64();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline const_iterator_t& operator+=(any_a<> const& thing)
@@ -541,7 +541,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline random_access_const_iterator_a<> add__(range_a<> const& range) const
 		{
-			random_access_const_iterator_a<> result = thing_t<___ego___>::me_();
+			random_access_const_iterator_a<> result = thing_t<___ego_it___>::me_();
 			for (auto const& thing : range)
 			{
 				result += thing;
@@ -556,26 +556,26 @@ class brook_t : public thing_t<___ego___>
 
 		inline random_access_const_iterator_a<> operator+(number_a<> const& number) const
 		{
-			___ego___ result = thing_t<___ego___>::me_();
+			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			result.mutate_it() += number.to_int_64();
 			return result;
 		}
 
-		inline ___ego___ self_subtract__(range_a<> const& range)
+		inline ___ego_it___ self_subtract__(range_a<> const& range)
 		{
 			for (auto const& thing : range)
 			{
 				operator-=(thing);
 			}
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
-		inline ___ego___ self_subtract_(number_a<> const& number)
+		inline ___ego_it___ self_subtract_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			_it -= number.to_int_64();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline const_iterator_t& operator-=(any_a<> const& thing)
@@ -591,7 +591,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline random_access_const_iterator_a<> subtract__(range_a<> const& range) const
 		{
-			random_access_const_iterator_a<> result = thing_t<___ego___>::me_();
+			random_access_const_iterator_a<> result = thing_t<___ego_it___>::me_();
 			for (auto const& thing : range)
 			{
 				result -= thing;
@@ -606,7 +606,7 @@ class brook_t : public thing_t<___ego___>
 
 		inline random_access_const_iterator_a<> operator-(number_a<> const& number) const
 		{
-			___ego___ result = thing_t<___ego___>::me_();
+			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			result.mutate_it() -= number.to_int_64();
 			return result;
@@ -746,7 +746,7 @@ class brook_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline const_iterator_t(brook_a<_primitive_> const& brook, brook_t const& brook_thing, F&& it)
-			: thing_t<___ego___>{}
+			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _brook{ brook }
 			, _brook_thing{ brook_thing }
