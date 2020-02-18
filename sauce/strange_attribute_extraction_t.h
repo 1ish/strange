@@ -46,6 +46,11 @@ protected:
 	{}
 };
 
+inline operation_a<> attribute_extraction_create(any_a<> const& thing)
+{
+	return attribute_extraction_t<>::create_(thing);
+}
+
 } // namespace strange
 
 #endif

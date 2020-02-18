@@ -8,8 +8,6 @@
 #include "strange_native_function_t.h"
 #include "strange_native_extraction_t.h"
 #include "strange_native_mutation_t.h"
-#include "strange_attribute_mutation_t.h"
-#include "strange_attribute_extraction_t.h"
 #include "strange_description_t.h"
 #include "strange_something_t.h"
 #include "strange_nothing_t.h"
@@ -95,5 +93,12 @@
 #include "strange_expression_pipe_t.h"
 #include "strange_expression_check_t.h"
 #include "strange_expression_cast_t.h"
+
+// creatures
+#include "strange_creatures.h"
+
+// other things
+#include "strange_attribute_mutation_t.h"
+#include "strange_attribute_extraction_t.h"
 
 #endif

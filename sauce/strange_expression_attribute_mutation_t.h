@@ -71,7 +71,7 @@ public:
 			{
 				throw dis("wrong kind of thing");
 			}
-			return attribute_mutation_t<>::create_(_name, kind, value);
+			return attribute_mutation_create(_name, kind, value);
 		}
 		catch (misunderstanding_a<>& misunderstanding)
 		{

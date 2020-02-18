@@ -185,11 +185,11 @@ protected:
 			merge(cast<unordered_shoal_a<>>(parent), type, cat, cats, kind, kinds);
 		}
 		// add operations for type, cat, cats, kind and kinds
-		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("type"), attribute_extraction_t<>::create_(type));
-		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("cat"), attribute_extraction_t<>::create_(cat));
-		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("cats"), attribute_extraction_t<>::create_(cats));
-		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("kind"), attribute_extraction_t<>::create_(kind));
-		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("kinds"), attribute_extraction_t<>::create_(kinds));
+		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("type"), attribute_extraction_create(type));
+		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("cat"), attribute_extraction_create(cat));
+		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("cats"), attribute_extraction_create(cats));
+		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("kind"), attribute_extraction_create(kind));
+		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("kinds"), attribute_extraction_create(kinds));
 	}
 
 private:

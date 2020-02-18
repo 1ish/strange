@@ -71,7 +71,7 @@ public:
 			{
 				throw dis("wrong kind of thing");
 			}
-			return attribute_extraction_t<>::create_(value);
+			return attribute_extraction_create(value);
 		}
 		catch (misunderstanding_a<>& misunderstanding)
 		{

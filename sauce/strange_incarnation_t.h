@@ -43,16 +43,16 @@ public:
 			{
 				if (value == defaults.cend_())
 				{
-					unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_t<>::create_(no()));
+					unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(no()));
 				}
 				else
 				{
-					unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_t<>::create_(*value++));
+					unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(*value++));
 				}
 			}
 			else
 			{
-				unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_t<>::create_(*aspect++));
+				unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(*aspect++));
 				if (value != defaults.cend_())
 				{
 					++value;

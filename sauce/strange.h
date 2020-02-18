@@ -25,9 +25,6 @@
 // things
 #include "strange_things.h"
 
-// creatures
-#include "strange_creatures.h"
-
 // reflections
 #include "strange_reflections.h"
 

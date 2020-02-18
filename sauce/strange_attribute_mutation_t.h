@@ -72,6 +72,11 @@ protected:
 	{}
 };
 
+inline operation_a<> attribute_mutation_create(symbol_a<> const& name, any_a<> const& kind, any_a<> const& thing)
+{
+	return attribute_mutation_t<>::create_(name, kind, thing);
+}
+
 } // namespace strange
 
 #endif
