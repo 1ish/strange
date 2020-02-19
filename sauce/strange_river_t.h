@@ -119,7 +119,7 @@ class river_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_shared_ios_base = std::shared_ptr<std::ios_base>;
+	using std_shared_basic_ios_char = std::shared_ptr<std::basic_ios<char>>;
 	using std_istreambuf_iterator_char = std::istreambuf_iterator<char>;
 
 	// override
@@ -829,7 +829,7 @@ public:
 
 	inline bool good() const
 	{
-		return (_istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream))->good();
+		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->good();
 	}
 
 	inline any_a<> eof__(range_a<> const& _) const
@@ -844,7 +844,7 @@ public:
 
 	inline bool eof() const
 	{
-		return (_istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream))->eof();
+		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->eof();
 	}
 
 	inline any_a<> fail__(range_a<> const& _) const
@@ -859,7 +859,7 @@ public:
 
 	inline bool fail() const
 	{
-		return (_istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream))->fail();
+		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->fail();
 	}
 
 	inline any_a<> bad__(range_a<> const& _) const
@@ -874,7 +874,7 @@ public:
 
 	inline bool bad() const
 	{
-		return (_istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream))->bad();
+		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->bad();
 	}
 
 	inline any_a<> set_good__(range_a<> const& range)
@@ -895,7 +895,7 @@ public:
 
 	inline void set_good(bool value = true)
 	{
-		std::ios_base* const ios = _istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream);
+		std::basic_ios<char>* const ios = _istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream);
 		if (value)
 		{
 			ios->clear();
@@ -924,7 +924,7 @@ public:
 
 	inline void set_eof(bool value = true)
 	{
-		std::ios_base* const ios = _istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream);
+		std::basic_ios<char>* const ios = _istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream);
 		if (value)
 		{
 			ios->setstate(std::ios_base::eofbit);
@@ -953,7 +953,7 @@ public:
 
 	inline void set_fail(bool value = true)
 	{
-		std::ios_base* const ios = _istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream);
+		std::basic_ios<char>* const ios = _istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream);
 		if (value)
 		{
 			ios->setstate(std::ios_base::failbit);
@@ -982,7 +982,7 @@ public:
 
 	inline void set_bad(bool value = true)
 	{
-		std::ios_base* const ios = _istream ? static_cast<std::ios_base*>(_istream) : static_cast<std::ios_base*>(_ostream);
+		std::basic_ios<char>* const ios = _istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream);
 		if (value)
 		{
 			ios->setstate(std::ios_base::badbit);
@@ -1011,10 +1011,10 @@ public:
 protected:
 	std::istream* const _istream;
 	std::ostream* const _ostream;
-	std_shared_ios_base const _stream;
+	std_shared_basic_ios_char const _stream;
 	std::string const _filename;
 
-	inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_ios_base const& stream = std_shared_ios_base{}, std::string const& filename = std::string{})
+	inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_basic_ios_char const& stream = std_shared_basic_ios_char{}, std::string const& filename = std::string{})
 		: thing_t<___ego___>{}
 		, _istream{ is }
 		, _ostream{ os }
