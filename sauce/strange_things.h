@@ -34,7 +34,6 @@
 #include "strange_range_operator_t.h"
 #include "strange_token_t.h"
 #include "strange_tokenizer_t.h"
-#include "strange_parser_t.h"
 #include "strange_conception_t.h"
 #include "strange_abstraction_t.h"
 #include "strange_incarnation_t.h"
@@ -93,6 +92,7 @@
 #include "strange_expression_pipe_t.h"
 #include "strange_expression_check_t.h"
 #include "strange_expression_cast_t.h"
+#include "strange_parser_t.h"
 
 // creatures
 #include "strange_creatures.h"
