@@ -8,8 +8,8 @@ namespace strange
 template <typename ___ego___>
 class range_operator_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego___ = forward_const_iterator_data_a<_iterator_>>
-	class const_iterator_t : public thing_t<___ego___>
+	template <typename _iterator_, typename ___ego_it___ = forward_const_iterator_data_a<_iterator_>>
+	class const_iterator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
@@ -79,15 +79,15 @@ class range_operator_t : public thing_t<___ego___>
 			return vector.back();
 		}
 
-		inline ___ego___ increment__(range_a<> const&)
+		inline ___ego_it___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline ___ego___ increment_()
+		inline ___ego_it___ increment_()
 		{
 			operator++();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline const_iterator_t& operator++()
@@ -125,7 +125,7 @@ class range_operator_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline const_iterator_t(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
-			: thing_t<___ego___>{}
+			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _range{ range }
 			, _thing_ref{ thing_ref }
