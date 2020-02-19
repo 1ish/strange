@@ -64,7 +64,7 @@ public:
 
 protected:
 	inline incarnation_t(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects, flock_a<> const& defaults)
-		: unordered_shoal_t{ inspiration.extract_map() }
+		: unordered_shoal_t<false, ___ego___>{ inspiration.extract_map() }
 	{
 		incarnate(mention, aspects, defaults);
 	}
