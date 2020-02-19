@@ -64,7 +64,6 @@
 #include "strange_expression_mutation_t.h"
 #include "strange_expression_attribute_extraction_t.h"
 #include "strange_expression_attribute_mutation_t.h"
-#include "strange_expression_abstraction_t.h"
 #include "strange_expression_shared_scope_t.h"
 #include "strange_expression_flock_t.h"
 #include "strange_expression_shoal_t.h"
@@ -93,6 +92,7 @@
 #include "strange_expression_check_t.h"
 #include "strange_expression_cast_t.h"
 #include "strange_parser_t.h"
+#include "strange_expression_abstraction_t.h"
 
 // creatures
 #include "strange_creatures.h"
