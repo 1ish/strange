@@ -84,8 +84,8 @@ public:
 protected:
 	struct ___ordered_herd_a_handle_base___ : ___herd_a_handle_base___
 	{
-		virtual inline std :: set < any_a < > > const & extract_set() const = 0;
-		virtual inline std :: set < any_a < > > & mutate_set() = 0;
+		virtual std :: set < any_a < > > const & extract_set() const = 0;
+		virtual std :: set < any_a < > > & mutate_set() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___ordered_herd_a_handle_base___>

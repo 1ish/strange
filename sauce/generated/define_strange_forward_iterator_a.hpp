@@ -102,14 +102,14 @@ public:
 protected:
 	struct ___forward_iterator_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual inline any_a<> get__(range_a<> const& range) const = 0;
-		virtual inline any_a<> get_() const = 0;
-		virtual inline any_a<> set__(range_a<> const& range) const = 0;
-		virtual inline any_a<> set_(any_a<> const& thing) const = 0;
-		virtual inline any_a < > & operator*() const = 0;
-		virtual inline any_a < > * operator->() const = 0;
-		virtual inline any_a<> increment__(range_a<> const& range) = 0;
-		virtual inline forward_iterator_a<> increment_() = 0;
+		virtual any_a<> get__(range_a<> const& range) const = 0;
+		virtual any_a<> get_() const = 0;
+		virtual any_a<> set__(range_a<> const& range) const = 0;
+		virtual any_a<> set_(any_a<> const& thing) const = 0;
+		virtual any_a < > & operator*() const = 0;
+		virtual any_a < > * operator->() const = 0;
+		virtual any_a<> increment__(range_a<> const& range) = 0;
+		virtual forward_iterator_a<> increment_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___forward_iterator_a_handle_base___>

@@ -84,8 +84,8 @@ public:
 protected:
 	struct ___bidirectional_const_iterator_a_handle_base___ : ___forward_const_iterator_a_handle_base___
 	{
-		virtual inline any_a<> decrement__(range_a<> const& range) = 0;
-		virtual inline bidirectional_const_iterator_a<> decrement_() = 0;
+		virtual any_a<> decrement__(range_a<> const& range) = 0;
+		virtual bidirectional_const_iterator_a<> decrement_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___bidirectional_const_iterator_a_handle_base___>

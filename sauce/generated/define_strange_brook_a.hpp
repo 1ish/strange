@@ -84,8 +84,8 @@ public:
 protected:
 	struct ___brook_a_handle_base___ : ___inventory_a_handle_base___
 	{
-		virtual inline std :: deque < _1_ > const & extract_deque() const = 0;
-		virtual inline std :: deque < _1_ > & mutate_deque() = 0;
+		virtual std :: deque < _1_ > const & extract_deque() const = 0;
+		virtual std :: deque < _1_ > & mutate_deque() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___brook_a_handle_base___>

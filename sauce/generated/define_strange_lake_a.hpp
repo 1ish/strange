@@ -84,8 +84,8 @@ public:
 protected:
 	struct ___lake_a_handle_base___ : ___inventory_a_handle_base___
 	{
-		virtual inline std :: vector < _1_ > const & extract_vector() const = 0;
-		virtual inline std :: vector < _1_ > & mutate_vector() = 0;
+		virtual std :: vector < _1_ > const & extract_vector() const = 0;
+		virtual std :: vector < _1_ > & mutate_vector() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___lake_a_handle_base___>

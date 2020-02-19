@@ -96,12 +96,12 @@ public:
 protected:
 	struct ___forward_const_iterator_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual inline any_a<> get__(range_a<> const& range) const = 0;
-		virtual inline any_a<> get_() const = 0;
-		virtual inline any_a < > const & operator*() const = 0;
-		virtual inline any_a < > const * operator->() const = 0;
-		virtual inline any_a<> increment__(range_a<> const& range) = 0;
-		virtual inline forward_const_iterator_a<> increment_() = 0;
+		virtual any_a<> get__(range_a<> const& range) const = 0;
+		virtual any_a<> get_() const = 0;
+		virtual any_a < > const & operator*() const = 0;
+		virtual any_a < > const * operator->() const = 0;
+		virtual any_a<> increment__(range_a<> const& range) = 0;
+		virtual forward_const_iterator_a<> increment_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___forward_const_iterator_a_handle_base___>

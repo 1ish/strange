@@ -132,24 +132,24 @@ public:
 protected:
 	struct ___expression_a_handle_base___ : ___operation_a_handle_base___
 	{
-		virtual inline any_a<> recreate__(range_a<> const& range) const = 0;
-		virtual inline expression_a<> recreate_() const = 0;
-		virtual inline void recreated(expression_a const & expression ) const = 0;
-		virtual inline any_a<> literal__(range_a<> const& range) const = 0;
-		virtual inline any_a<> literal_() const = 0;
-		virtual inline bool literal() const = 0;
-		virtual inline any_a<> evaluate__(range_a<> const& range) const = 0;
-		virtual inline any_a<> evaluate_() const = 0;
-		virtual inline any_a<> token__(range_a<> const& range) const = 0;
-		virtual inline token_a<> token_() const = 0;
-		virtual inline any_a<> terms__(range_a<> const& range) const = 0;
-		virtual inline flock_a<> terms_() const = 0;
-		virtual inline any_a<> generate__(range_a<> const& range) const = 0;
-		virtual inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const = 0;
-		virtual inline void generate(int64_t version , int64_t indent , river_a < > & river ) const = 0;
-		virtual inline any_a<> generate_cpp__(range_a<> const& range) const = 0;
-		virtual inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const = 0;
-		virtual inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const = 0;
+		virtual any_a<> recreate__(range_a<> const& range) const = 0;
+		virtual expression_a<> recreate_() const = 0;
+		virtual void recreated(expression_a const & expression ) const = 0;
+		virtual any_a<> literal__(range_a<> const& range) const = 0;
+		virtual any_a<> literal_() const = 0;
+		virtual bool literal() const = 0;
+		virtual any_a<> evaluate__(range_a<> const& range) const = 0;
+		virtual any_a<> evaluate_() const = 0;
+		virtual any_a<> token__(range_a<> const& range) const = 0;
+		virtual token_a<> token_() const = 0;
+		virtual any_a<> terms__(range_a<> const& range) const = 0;
+		virtual flock_a<> terms_() const = 0;
+		virtual any_a<> generate__(range_a<> const& range) const = 0;
+		virtual any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const = 0;
+		virtual void generate(int64_t version , int64_t indent , river_a < > & river ) const = 0;
+		virtual any_a<> generate_cpp__(range_a<> const& range) const = 0;
+		virtual any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const = 0;
+		virtual void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___expression_a_handle_base___>

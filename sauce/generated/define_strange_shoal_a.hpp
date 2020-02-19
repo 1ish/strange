@@ -105,15 +105,15 @@ public:
 protected:
 	struct ___shoal_a_handle_base___ : ___collection_a_handle_base___
 	{
-		virtual inline bool has_string(std :: string const & s ) const = 0;
-		virtual inline any_a < > at_string(std :: string const & s ) const = 0;
-		virtual inline void update_string(std :: string const & s , any_a < > const & value ) = 0;
-		virtual inline bool insert_string(std :: string const & s , any_a < > const & value ) = 0;
-		virtual inline bool erase_string(std :: string const & s ) = 0;
-		virtual inline any_a<> begin__(range_a<> const& range) = 0;
-		virtual inline forward_iterator_a<> begin_() = 0;
-		virtual inline any_a<> end__(range_a<> const& range) = 0;
-		virtual inline forward_iterator_a<> end_() = 0;
+		virtual bool has_string(std :: string const & s ) const = 0;
+		virtual any_a < > at_string(std :: string const & s ) const = 0;
+		virtual void update_string(std :: string const & s , any_a < > const & value ) = 0;
+		virtual bool insert_string(std :: string const & s , any_a < > const & value ) = 0;
+		virtual bool erase_string(std :: string const & s ) = 0;
+		virtual any_a<> begin__(range_a<> const& range) = 0;
+		virtual forward_iterator_a<> begin_() = 0;
+		virtual any_a<> end__(range_a<> const& range) = 0;
+		virtual forward_iterator_a<> end_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___shoal_a_handle_base___>

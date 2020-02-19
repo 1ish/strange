@@ -84,8 +84,8 @@ public:
 protected:
 	struct ___parser_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual inline any_a<> parse__(range_a<> const& range) = 0;
-		virtual inline expression_a<> parse_(range_a<> const& tokenizer) = 0;
+		virtual any_a<> parse__(range_a<> const& range) = 0;
+		virtual expression_a<> parse_(range_a<> const& tokenizer) = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___parser_a_handle_base___>

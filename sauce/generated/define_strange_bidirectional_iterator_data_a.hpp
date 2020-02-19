@@ -84,8 +84,8 @@ public:
 protected:
 	struct ___bidirectional_iterator_data_a_handle_base___ : ___bidirectional_iterator_a_handle_base___
 	{
-		virtual inline _1_ const & extract_it() const = 0;
-		virtual inline _1_ & mutate_it() = 0;
+		virtual _1_ const & extract_it() const = 0;
+		virtual _1_ & mutate_it() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___bidirectional_iterator_data_a_handle_base___>

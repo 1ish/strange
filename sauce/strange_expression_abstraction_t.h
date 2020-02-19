@@ -773,14 +773,14 @@ protected:
 				"\t\tvirtual ~___" + class_name + "_handle_base___() = default;\n"
 				"\t\tvirtual ___SHARED___ ___clone___() const = 0;\n"
 				"\t\tvirtual void ___weak___(___WEAK___ const& weak) const = 0;\n"
-				"\t\tvirtual inline operator bool() const = 0;\n"
-				"\t\tvirtual inline void operator++() = 0;\n"
-				"\t\tvirtual inline void operator--() = 0;\n"
-				"\t\tvirtual inline void operator+=(any_a<> const& other) = 0;\n"
-				"\t\tvirtual inline void operator-=(any_a<> const& other) = 0;\n"
-				"\t\tvirtual inline void operator*=(any_a<> const& other) = 0;\n"
-				"\t\tvirtual inline void operator/=(any_a<> const& other) = 0;\n"
-				"\t\tvirtual inline void operator%=(any_a<> const& other) = 0;\n");
+				"\t\tvirtual operator bool() const = 0;\n"
+				"\t\tvirtual void operator++() = 0;\n"
+				"\t\tvirtual void operator--() = 0;\n"
+				"\t\tvirtual void operator+=(any_a<> const& other) = 0;\n"
+				"\t\tvirtual void operator-=(any_a<> const& other) = 0;\n"
+				"\t\tvirtual void operator*=(any_a<> const& other) = 0;\n"
+				"\t\tvirtual void operator/=(any_a<> const& other) = 0;\n"
+				"\t\tvirtual void operator%=(any_a<> const& other) = 0;\n");
 		}
 		else
 		{
@@ -976,10 +976,10 @@ protected:
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\t\tvirtual inline any_a<> " + name + "_(range_a" +
+			"\t\tvirtual any_a<> " + name + "_(range_a" +
 			(root ? "" : "<>") + " const& range)" + constness + " = 0;\n");
 		river.write_string(
-			"\t\tvirtual inline " + result + name + parameters + constness + " = 0;\n");
+			"\t\tvirtual " + result + name + parameters + constness + " = 0;\n");
 	}
 
 	inline void _define_class_pure_virtual_native_member_(bool root, std::string const& name, std::string const& value, river_a<>& river) const
@@ -990,7 +990,7 @@ protected:
 		std::string constness;
 		_parse_native_member_definition_(value, result, parameters, arguments, constness);
 		river.write_string(
-			"\t\tvirtual inline " + result + name + parameters + constness + " = 0;\n");
+			"\t\tvirtual " + result + name + parameters + constness + " = 0;\n");
 	}
 
 	inline void _define_class_virtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const

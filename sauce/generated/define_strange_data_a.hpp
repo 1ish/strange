@@ -84,8 +84,8 @@ public:
 protected:
 	struct ___data_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual inline _1_ const & extract_data() const = 0;
-		virtual inline _1_ & mutate_data() = 0;
+		virtual _1_ const & extract_data() const = 0;
+		virtual _1_ & mutate_data() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___data_a_handle_base___>

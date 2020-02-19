@@ -111,17 +111,17 @@ public:
 protected:
 	struct ___kind_a_handle_base___ : ___cat_a_handle_base___
 	{
-		virtual inline any_a<> aspects__(range_a<> const& range) const = 0;
-		virtual inline flock_a<> aspects_() const = 0;
-		virtual inline any_a<> fixed__(range_a<> const& range) const = 0;
-		virtual inline any_a<> fixed_() const = 0;
-		virtual inline bool fixed() const = 0;
-		virtual inline any_a<> reference__(range_a<> const& range) const = 0;
-		virtual inline any_a<> reference_() const = 0;
-		virtual inline bool reference() const = 0;
-		virtual inline any_a<> optional__(range_a<> const& range) const = 0;
-		virtual inline any_a<> optional_() const = 0;
-		virtual inline bool optional() const = 0;
+		virtual any_a<> aspects__(range_a<> const& range) const = 0;
+		virtual flock_a<> aspects_() const = 0;
+		virtual any_a<> fixed__(range_a<> const& range) const = 0;
+		virtual any_a<> fixed_() const = 0;
+		virtual bool fixed() const = 0;
+		virtual any_a<> reference__(range_a<> const& range) const = 0;
+		virtual any_a<> reference_() const = 0;
+		virtual bool reference() const = 0;
+		virtual any_a<> optional__(range_a<> const& range) const = 0;
+		virtual any_a<> optional_() const = 0;
+		virtual bool optional() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___kind_a_handle_base___>

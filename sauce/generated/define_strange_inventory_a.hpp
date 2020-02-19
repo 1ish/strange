@@ -105,15 +105,15 @@ public:
 protected:
 	struct ___inventory_a_handle_base___ : ___collection_a_handle_base___
 	{
-		virtual inline bool has_index(int64_t index ) const = 0;
-		virtual inline any_a < > at_index(int64_t index ) const = 0;
-		virtual inline void update_index(int64_t index , any_a < > const & value ) = 0;
-		virtual inline bool insert_index(int64_t index , any_a < > const & value ) = 0;
-		virtual inline bool erase_index(int64_t index ) = 0;
-		virtual inline any_a<> begin__(range_a<> const& range) = 0;
-		virtual inline random_access_iterator_a<> begin_() = 0;
-		virtual inline any_a<> end__(range_a<> const& range) = 0;
-		virtual inline random_access_iterator_a<> end_() = 0;
+		virtual bool has_index(int64_t index ) const = 0;
+		virtual any_a < > at_index(int64_t index ) const = 0;
+		virtual void update_index(int64_t index , any_a < > const & value ) = 0;
+		virtual bool insert_index(int64_t index , any_a < > const & value ) = 0;
+		virtual bool erase_index(int64_t index ) = 0;
+		virtual any_a<> begin__(range_a<> const& range) = 0;
+		virtual random_access_iterator_a<> begin_() = 0;
+		virtual any_a<> end__(range_a<> const& range) = 0;
+		virtual random_access_iterator_a<> end_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___inventory_a_handle_base___>

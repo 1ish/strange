@@ -90,10 +90,10 @@ public:
 protected:
 	struct ___misunderstanding_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual inline std :: string to_string() const = 0;
-		virtual inline any_a<> add__(range_a<> const& range) const = 0;
-		virtual inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const = 0;
-		virtual inline misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const = 0;
+		virtual std :: string to_string() const = 0;
+		virtual any_a<> add__(range_a<> const& range) const = 0;
+		virtual misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const = 0;
+		virtual misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___misunderstanding_a_handle_base___>

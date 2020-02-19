@@ -144,28 +144,28 @@ public:
 protected:
 	struct ___random_access_iterator_a_handle_base___ : ___bidirectional_iterator_a_handle_base___
 	{
-		virtual inline any_a<> self_add__(range_a<> const& range) = 0;
-		virtual inline random_access_iterator_a<> self_add_(number_a<> const& number) = 0;
-		virtual inline any_a<> add__(range_a<> const& range) const = 0;
-		virtual inline random_access_iterator_a<> add_(number_a<> const& number) const = 0;
-		virtual inline random_access_iterator_a operator+(number_a < > const & number ) const = 0;
-		virtual inline any_a<> self_subtract__(range_a<> const& range) = 0;
-		virtual inline random_access_iterator_a<> self_subtract_(number_a<> const& number) = 0;
-		virtual inline any_a<> subtract__(range_a<> const& range) const = 0;
-		virtual inline random_access_iterator_a<> subtract_(number_a<> const& number) const = 0;
-		virtual inline random_access_iterator_a operator-(number_a < > const & number ) const = 0;
-		virtual inline any_a<> less_than__(range_a<> const& range) const = 0;
-		virtual inline any_a<> less_than_(random_access_iterator_a<> const& it) const = 0;
-		virtual inline bool operator<(random_access_iterator_a < > const & it ) const = 0;
-		virtual inline any_a<> greater_than__(range_a<> const& range) const = 0;
-		virtual inline any_a<> greater_than_(random_access_iterator_a<> const& it) const = 0;
-		virtual inline bool operator>(random_access_iterator_a < > const & it ) const = 0;
-		virtual inline any_a<> less_or_equal__(range_a<> const& range) const = 0;
-		virtual inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const = 0;
-		virtual inline bool operator<=(random_access_iterator_a < > const & it ) const = 0;
-		virtual inline any_a<> greater_or_equal__(range_a<> const& range) const = 0;
-		virtual inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const = 0;
-		virtual inline bool operator>=(random_access_iterator_a < > const & it ) const = 0;
+		virtual any_a<> self_add__(range_a<> const& range) = 0;
+		virtual random_access_iterator_a<> self_add_(number_a<> const& number) = 0;
+		virtual any_a<> add__(range_a<> const& range) const = 0;
+		virtual random_access_iterator_a<> add_(number_a<> const& number) const = 0;
+		virtual random_access_iterator_a operator+(number_a < > const & number ) const = 0;
+		virtual any_a<> self_subtract__(range_a<> const& range) = 0;
+		virtual random_access_iterator_a<> self_subtract_(number_a<> const& number) = 0;
+		virtual any_a<> subtract__(range_a<> const& range) const = 0;
+		virtual random_access_iterator_a<> subtract_(number_a<> const& number) const = 0;
+		virtual random_access_iterator_a operator-(number_a < > const & number ) const = 0;
+		virtual any_a<> less_than__(range_a<> const& range) const = 0;
+		virtual any_a<> less_than_(random_access_iterator_a<> const& it) const = 0;
+		virtual bool operator<(random_access_iterator_a < > const & it ) const = 0;
+		virtual any_a<> greater_than__(range_a<> const& range) const = 0;
+		virtual any_a<> greater_than_(random_access_iterator_a<> const& it) const = 0;
+		virtual bool operator>(random_access_iterator_a < > const & it ) const = 0;
+		virtual any_a<> less_or_equal__(range_a<> const& range) const = 0;
+		virtual any_a<> less_or_equal_(random_access_iterator_a<> const& it) const = 0;
+		virtual bool operator<=(random_access_iterator_a < > const & it ) const = 0;
+		virtual any_a<> greater_or_equal__(range_a<> const& range) const = 0;
+		virtual any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const = 0;
+		virtual bool operator>=(random_access_iterator_a < > const & it ) const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___random_access_iterator_a_handle_base___>

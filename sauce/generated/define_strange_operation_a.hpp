@@ -99,13 +99,13 @@ public:
 protected:
 	struct ___operation_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual inline any_a<> pure__(range_a<> const& range) const = 0;
-		virtual inline any_a<> pure_() const = 0;
-		virtual inline bool pure() const = 0;
-		virtual inline void aspects(unordered_shoal_a < > const & shoal ) = 0;
-		virtual inline void assign(operation_a const & operation ) = 0;
-		virtual inline any_a<> names__(range_a<> const& range) const = 0;
-		virtual inline flock_a<> names_() const = 0;
+		virtual any_a<> pure__(range_a<> const& range) const = 0;
+		virtual any_a<> pure_() const = 0;
+		virtual bool pure() const = 0;
+		virtual void aspects(unordered_shoal_a < > const & shoal ) = 0;
+		virtual void assign(operation_a const & operation ) = 0;
+		virtual any_a<> names__(range_a<> const& range) const = 0;
+		virtual flock_a<> names_() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___operation_a_handle_base___>

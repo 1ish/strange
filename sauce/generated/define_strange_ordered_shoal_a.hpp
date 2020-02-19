@@ -84,8 +84,8 @@ public:
 protected:
 	struct ___ordered_shoal_a_handle_base___ : ___shoal_a_handle_base___
 	{
-		virtual inline std :: map < any_a < > , any_a < > > const & extract_map() const = 0;
-		virtual inline std :: map < any_a < > , any_a < > > & mutate_map() = 0;
+		virtual std :: map < any_a < > , any_a < > > const & extract_map() const = 0;
+		virtual std :: map < any_a < > , any_a < > > & mutate_map() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___ordered_shoal_a_handle_base___>

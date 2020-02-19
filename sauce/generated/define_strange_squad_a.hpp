@@ -84,8 +84,8 @@ public:
 protected:
 	struct ___squad_a_handle_base___ : ___inventory_a_handle_base___
 	{
-		virtual inline std :: deque < any_a < > > const & extract_deque() const = 0;
-		virtual inline std :: deque < any_a < > > & mutate_deque() = 0;
+		virtual std :: deque < any_a < > > const & extract_deque() const = 0;
+		virtual std :: deque < any_a < > > & mutate_deque() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___squad_a_handle_base___>

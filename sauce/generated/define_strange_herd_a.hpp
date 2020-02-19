@@ -99,13 +99,13 @@ public:
 protected:
 	struct ___herd_a_handle_base___ : ___collection_a_handle_base___
 	{
-		virtual inline bool has_string(std :: string const & s ) const = 0;
-		virtual inline bool at_string(std :: string const & s ) const = 0;
-		virtual inline void update(any_a < > const & thing ) = 0;
-		virtual inline void update_string(std :: string const & s ) = 0;
-		virtual inline bool insert(any_a < > const & thing ) = 0;
-		virtual inline bool insert_string(std :: string const & s ) = 0;
-		virtual inline bool erase_string(std :: string const & s ) = 0;
+		virtual bool has_string(std :: string const & s ) const = 0;
+		virtual bool at_string(std :: string const & s ) const = 0;
+		virtual void update(any_a < > const & thing ) = 0;
+		virtual void update_string(std :: string const & s ) = 0;
+		virtual bool insert(any_a < > const & thing ) = 0;
+		virtual bool insert_string(std :: string const & s ) = 0;
+		virtual bool erase_string(std :: string const & s ) = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___herd_a_handle_base___>

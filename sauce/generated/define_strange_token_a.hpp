@@ -147,29 +147,29 @@ public:
 protected:
 	struct ___token_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual inline any_a<> filename__(range_a<> const& range) const = 0;
-		virtual inline symbol_a<> filename_() const = 0;
-		virtual inline std :: string filename() const = 0;
-		virtual inline any_a<> line__(range_a<> const& range) const = 0;
-		virtual inline number_data_int64_a<> line_() const = 0;
-		virtual inline int64_t line() const = 0;
-		virtual inline any_a<> position__(range_a<> const& range) const = 0;
-		virtual inline number_data_int64_a<> position_() const = 0;
-		virtual inline int64_t position() const = 0;
-		virtual inline any_a<> tag__(range_a<> const& range) const = 0;
-		virtual inline symbol_a<> tag_() const = 0;
-		virtual inline std :: string tag() const = 0;
-		virtual inline any_a<> symbol__(range_a<> const& range) const = 0;
-		virtual inline symbol_a<> symbol_() const = 0;
-		virtual inline std :: string symbol() const = 0;
-		virtual inline any_a<> literal__(range_a<> const& range) const = 0;
-		virtual inline any_a<> literal_() const = 0;
-		virtual inline any_a<> precedence__(range_a<> const& range) const = 0;
-		virtual inline number_data_int64_a<> precedence_() const = 0;
-		virtual inline int64_t precedence() const = 0;
-		virtual inline any_a<> report__(range_a<> const& range) const = 0;
-		virtual inline misunderstanding_a<> report_() const = 0;
-		virtual inline std :: string report() const = 0;
+		virtual any_a<> filename__(range_a<> const& range) const = 0;
+		virtual symbol_a<> filename_() const = 0;
+		virtual std :: string filename() const = 0;
+		virtual any_a<> line__(range_a<> const& range) const = 0;
+		virtual number_data_int64_a<> line_() const = 0;
+		virtual int64_t line() const = 0;
+		virtual any_a<> position__(range_a<> const& range) const = 0;
+		virtual number_data_int64_a<> position_() const = 0;
+		virtual int64_t position() const = 0;
+		virtual any_a<> tag__(range_a<> const& range) const = 0;
+		virtual symbol_a<> tag_() const = 0;
+		virtual std :: string tag() const = 0;
+		virtual any_a<> symbol__(range_a<> const& range) const = 0;
+		virtual symbol_a<> symbol_() const = 0;
+		virtual std :: string symbol() const = 0;
+		virtual any_a<> literal__(range_a<> const& range) const = 0;
+		virtual any_a<> literal_() const = 0;
+		virtual any_a<> precedence__(range_a<> const& range) const = 0;
+		virtual number_data_int64_a<> precedence_() const = 0;
+		virtual int64_t precedence() const = 0;
+		virtual any_a<> report__(range_a<> const& range) const = 0;
+		virtual misunderstanding_a<> report_() const = 0;
+		virtual std :: string report() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___token_a_handle_base___>
