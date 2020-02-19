@@ -180,9 +180,9 @@ public:
 	{
 		std::shared_ptr<std::fstream> stream = std::make_shared<std::fstream>(name,
 			std::fstream::binary |
-			(in ? std::fstream::in : 0) | 
-			(out ? std::fstream::out : 0) |
-			(trunc ? std::fstream::trunc : 0));
+			(in ? std::fstream::in : static_cast<std::fstream::openmode>(0)) |
+			(out ? std::fstream::out : static_cast<std::fstream::openmode>(0)) |
+			(trunc ? std::fstream::trunc : static_cast<std::fstream::openmode>(0)));
 		return river_a<>{ over{ river_t<>(stream.get(), stream.get(), stream, name) } };
 	}
 
