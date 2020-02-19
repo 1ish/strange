@@ -33,7 +33,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>&, range_a<> const&) const
 	{
-		throw expression_t<___ego___>::continue_i{};
+		throw typename expression_t<___ego___>::continue_i{};
 	}
 
 	// expression

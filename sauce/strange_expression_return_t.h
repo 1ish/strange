@@ -62,7 +62,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		throw expression_t<___ego___>::return_i{ _result.operate(thing, range) };
+		throw typename expression_t<___ego___>::return_i{ _result.operate(thing, range) };
 	}
 
 	// expression
