@@ -7,8 +7,8 @@ namespace strange
 template <typename ___ego___ = range_a<>>
 class tokenizer_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego___ = forward_const_iterator_data_a<_iterator_>>
-	class const_iterator_t : public thing_t<___ego___>
+	template <typename _iterator_, typename ___ego_it___ = forward_const_iterator_data_a<_iterator_>>
+	class const_iterator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
@@ -67,15 +67,15 @@ class tokenizer_t : public thing_t<___ego___>
 			return _token;
 		}
 
-		inline ___ego___ increment__(range_a<> const&)
+		inline ___ego_it___ increment__(range_a<> const&)
 		{
 			return increment_();
 		}
 
-		inline ___ego___ increment_()
+		inline ___ego_it___ increment_()
 		{
 			operator++();
-			return thing_t<___ego___>::me_();
+			return thing_t<___ego_it___>::me_();
 		}
 
 		inline const_iterator_t& operator++()
@@ -475,7 +475,7 @@ class tokenizer_t : public thing_t<___ego___>
 
 		template <typename F>
 		inline const_iterator_t(river_a<> const& river, F&& it)
-			: thing_t<___ego___>{}
+			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _river{ river }
 			, _line{ 1 }
