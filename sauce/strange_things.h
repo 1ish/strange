@@ -70,10 +70,6 @@
 #include "strange_expression_herd_t.h"
 #include "strange_expression_throw_t.h"
 #include "strange_expression_catch_t.h"
-#include "strange_expression_intimate_t.h"
-#include "strange_expression_intimate_member_t.h"
-#include "strange_expression_intimate_member_range_t.h"
-#include "strange_expression_intimate_attribute_t.h"
 #include "strange_expression_invoke_attribute_t.h"
 #include "strange_expression_member_t.h"
 #include "strange_expression_block_t.h"
@@ -98,6 +94,10 @@
 #include "strange_creatures.h"
 
 // other things
+#include "strange_expression_intimate_t.h"
+#include "strange_expression_intimate_member_t.h"
+#include "strange_expression_intimate_member_range_t.h"
+#include "strange_expression_intimate_attribute_t.h"
 #include "strange_attribute_mutation_t.h"
 #include "strange_attribute_extraction_t.h"
 

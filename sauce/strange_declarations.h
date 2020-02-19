@@ -325,11 +325,15 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 inline cat_a<> kind_to_cat(kind_a<> const& kind);
 inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds);
 
-// attribute extraction
+// attributes
 inline operation_a<> attribute_extraction_create(any_a<> const& thing);
-
-// attribute mutation
 inline operation_a<> attribute_mutation_create(symbol_a<> const& name, any_a<> const& kind, any_a<> const& thing);
+
+// expressions
+inline expression_a<> expression_intimate_create(token_a<> const& token, flock_a<> const& terms);
+inline expression_a<> expression_intimate_member_create(token_a<> const& token, flock_a<> const& terms);
+inline expression_a<> expression_intimate_member_range_create(token_a<> const& token, flock_a<> const& terms);
+inline expression_a<> expression_intimate_attribute_create(token_a<> const& token, flock_a<> const& terms);
 
 // check/cast
 template <typename ___TTT___, typename ___VVV___>

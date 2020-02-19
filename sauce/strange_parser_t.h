@@ -365,7 +365,7 @@ private:
 		}
 		_next();
 		auto const terms = flock_t<>::create_(_identifier(context->scope, name)); // me:._name / me:._scope_name
-		return expression_intimate_member_t<>::create_(token, terms);
+		return expression_intimate_member_create(token, terms);
 	}
 
 	inline expression_a<> _initial_attribute(context_ptr const& context)
@@ -412,7 +412,7 @@ private:
 				terms.push_back(_initial(0, context)); // assignment
 			}
 		}
-		return expression_intimate_attribute_t<>::create_(token, terms);
+		return expression_intimate_attribute_create(token, terms);
 	}
 
 	inline expression_a<> _initial_intimate(context_ptr const& context)
@@ -426,10 +426,10 @@ private:
 		if (_token.tag() == "punctuation" && _token.symbol() == "[")
 		{
 			terms.push_back(_elements(context)); // me._scope_name_[...]
-			return expression_intimate_t<>::create_(token, terms);
+			return expression_intimate_create(token, terms);
 		}
 		terms.push_back(_initial(100, context)); // me._scope_name_ range
-		return expression_intimate_member_range_t<>::create_(token, terms);
+		return expression_intimate_member_range_create(token, terms);
 	}
 
 	static inline symbol_a<> _identifier(

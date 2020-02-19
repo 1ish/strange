@@ -182,6 +182,11 @@ class ___expression_intimate_attribute_t_share___
 	}
 };
 
+inline expression_a<> expression_intimate_attribute_create(token_a<> const& token, flock_a<> const& terms)
+{
+	return expression_intimate_attribute_t<>::create_(token, terms);
+}
+
 } // namespace strange
 
 #endif
