@@ -411,13 +411,13 @@ public:
 	inline bidirectional_const_iterator_a<> cbegin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
+		return const_iterator_t<typename std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
 	}
 
 	inline bidirectional_const_iterator_a<> cend_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
+		return const_iterator_t<typename std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -428,7 +428,7 @@ public:
 	inline bidirectional_iterator_a<> begin_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return iterator_t<std_map_any_any::iterator>::create(*this, _map.begin());
+		return iterator_t<typename std_map_any_any::iterator>::create(*this, _map.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -439,7 +439,7 @@ public:
 	inline bidirectional_iterator_a<> end_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return iterator_t<std_map_any_any::iterator>::create(*this, _map.end());
+		return iterator_t<typename std_map_any_any::iterator>::create(*this, _map.end());
 	}
 
 	// collection

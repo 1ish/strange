@@ -239,13 +239,13 @@ public:
 	inline bidirectional_const_iterator_a<> cbegin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
+		return const_iterator_t<typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
 	}
 
 	inline bidirectional_const_iterator_a<> cend_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
+		return const_iterator_t<typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
 	}
 
 	// collection / herd

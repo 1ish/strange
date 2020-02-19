@@ -826,13 +826,13 @@ public:
 	inline random_access_const_iterator_a<> cbegin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
+		return const_iterator_t<typename std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
 	}
 
 	inline random_access_const_iterator_a<> cend_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
+		return const_iterator_t<typename std_vector_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
 	}
 
 	inline any_a<> begin__(range_a<> const&)
@@ -843,7 +843,7 @@ public:
 	inline random_access_iterator_a<> begin_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return iterator_t<std_vector_any::iterator>::create(*this, _vector.begin());
+		return iterator_t<typename std_vector_any::iterator>::create(*this, _vector.begin());
 	}
 
 	inline any_a<> end__(range_a<> const&)
@@ -854,7 +854,7 @@ public:
 	inline random_access_iterator_a<> end_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return iterator_t<std_vector_any::iterator>::create(*this, _vector.end());
+		return iterator_t<typename std_vector_any::iterator>::create(*this, _vector.end());
 	}
 
 	// collection
