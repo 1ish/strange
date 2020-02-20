@@ -692,11 +692,11 @@ private:
 		context_ptr value_context;
 		auto emissions = squad_t<>::create_();
 		if (_token.tag() == "punctuation" &&
-			(!tilda && _token.symbol() == "}" || tilda && _token.symbol() == "~}" || _token.symbol() == "!"))
+			((!tilda && _token.symbol() == "}") || (tilda && _token.symbol() == "~}") || _token.symbol() == "!"))
 		{
 			if (_token.symbol() == "!")
 			{
-				if (!_next() || !tilda && _token.symbol() != "}" || tilda && _token.symbol() != "~}")
+				if (!_next() || (!tilda && _token.symbol() != "}") || (tilda && _token.symbol() != "~}"))
 				{
 					throw dis("strange::parser {! without } immediately following it:") + token.report_();
 				}
@@ -789,7 +789,7 @@ private:
 						throw dis("strange::parser , with nothing following it:") + _token.report_();
 					}
 				}
-				if (!tilda && _token.symbol() == "}" || tilda && _token.symbol() == "~}")
+				if ((!tilda && _token.symbol() == "}") || (tilda && _token.symbol() == "~}"))
 				{
 					if (shoal)
 					{
@@ -1023,7 +1023,7 @@ private:
 			{
 				throw dis("strange::parser shoal , with nothing following it:") + _token.report_();
 			}
-			if (!tilda && _token.symbol() == "}" || tilda && _token.symbol() == "~}")
+			if ((!tilda && _token.symbol() == "}") || (tilda && _token.symbol() == "~}"))
 			{
 				_next();
 				break;
@@ -1071,7 +1071,7 @@ private:
 		auto const token = _token;
 		bool punctuation = token.tag() == "punctuation";
 		bool const parenthesis = punctuation && token.symbol() == ":(";
-		bool const colon = parenthesis || punctuation && token.symbol() == ":<";
+		bool const colon = parenthesis || (punctuation && token.symbol() == ":<");
 		bool modify = parenthesis;
 		expression_a<> expression;
 		if (parenthesis)
@@ -1088,8 +1088,8 @@ private:
 		int64_t order = 0;
 		if (!parenthesis)
 		{
-			while (!order && colon ||
-				_token.tag() == "punctuation" && _token.symbol() == "<")
+			while ((!order && colon) ||
+				(_token.tag() == "punctuation" && _token.symbol() == "<"))
 			{
 				++order;
 				if (!_next())
@@ -1602,11 +1602,11 @@ private:
 		}
 		auto flock = flock_t<>::create_();
 		if (_token.tag() == "punctuation" &&
-			(square && !tilda && _token.symbol() == "]" ||
-				round && !tilda && _token.symbol() == ")" ||
-				square && tilda && _token.symbol() == "~]" ||
-				round && tilda && _token.symbol() == "~)" ||
-				angle && _token.symbol() == "<~"))
+			((square && !tilda && _token.symbol() == "]") ||
+				(round && !tilda && _token.symbol() == ")") ||
+				(square && tilda && _token.symbol() == "~]") ||
+				(round && tilda && _token.symbol() == "~)") ||
+				(angle && _token.symbol() == "<~")))
 		{
 			_next();
 		}
@@ -1633,11 +1633,11 @@ private:
 			{
 				throw dis("strange::parser , with nothing following it:") + _token.report_();
 			}
-			if (square && !tilda && _token.symbol() == "]" ||
-				round && !tilda && _token.symbol() == ")" ||
-				square && tilda && _token.symbol() == "~]" ||
-				round && tilda && _token.symbol() == "~)" ||
-				angle && _token.symbol() == "<~")
+			if ((square && !tilda && _token.symbol() == "]") ||
+				(round && !tilda && _token.symbol() == ")") ||
+				(square && tilda && _token.symbol() == "~]") ||
+				(round && tilda && _token.symbol() == "~)") ||
+				(angle && _token.symbol() == "<~"))
 			{
 				_next();
 				break;

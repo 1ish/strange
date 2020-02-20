@@ -252,7 +252,7 @@ class tokenizer_t : public thing_t<___ego___>
 					bool const num2 = numeric_char(char2);
 					if (first)
 					{
-						if (char1 == '-' && num2 || numeric_char(char1))
+						if ((char1 == '-' && num2) || numeric_char(char1))
 						{
 							numeric = true;
 						}
