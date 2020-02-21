@@ -17,13 +17,13 @@ public:
 		return *this;
 	}
 
-	inline ordered_shoal_a operator++(int)
-	{
-		assert(handle_);
-		ordered_shoal_a result = *this;
-		write().operator++();
-		return result;
-	}
+//	inline ordered_shoal_a operator++(int)
+//	{
+//		assert(handle_);
+//		ordered_shoal_a result = *this;
+//		write().operator++();
+//		return result;
+//	}
 
 	inline ordered_shoal_a& operator--()
 	{
@@ -32,13 +32,13 @@ public:
 		return *this;
 	}
 
-	inline ordered_shoal_a operator--(int)
-	{
-		assert(handle_);
-		ordered_shoal_a result = *this;
-		write().operator--();
-		return result;
-	}
+//	inline ordered_shoal_a operator--(int)
+//	{
+//		assert(handle_);
+//		ordered_shoal_a result = *this;
+//		write().operator--();
+//		return result;
+//	}
 
 	inline ordered_shoal_a& operator+=(any_a<> const& other)
 	{

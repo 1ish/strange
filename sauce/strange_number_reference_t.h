@@ -60,10 +60,10 @@ public:
 		return *this;
 	}
 
-	inline void operator++(int)
-	{
-		++_number;
-	}
+//	inline void operator++(int)
+//	{
+//		++_number;
+//	}
 
 	inline any_a<> decrement__(range_a<> const& _)
 	{
@@ -82,10 +82,10 @@ public:
 		return *this;
 	}
 
-	inline void operator--(int)
-	{
-		--_number;
-	}
+//	inline void operator--(int)
+//	{
+//		--_number;
+//	}
 
 	inline any_a<> self_assign__(range_a<> const& range)
 	{

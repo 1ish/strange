@@ -155,7 +155,8 @@ public:
 		for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 		{
 			river.write_string(", " + cast<symbol_a<>>(name).to_string());
-			auto kind = *kit++;
+			auto kind = *kit;
+			++kit;
 			if (check<kind_a<>>(kind))
 			{
 				river.write_string(cast<kind_a<>>(kind).to_string());
@@ -164,7 +165,8 @@ public:
 			{
 				cast<expression_a<>>(kind).generate(version, indent, river);
 			}
-			cast<expression_a<>>(*eit++).generate(version, indent, river);
+			cast<expression_a<>>(*eit).generate(version, indent, river);
+			++eit;
 		}
 		river.write_string(")\n");
 	}
@@ -195,8 +197,10 @@ public:
 		forward_const_iterator_a<> eit = _expressions.cbegin_();
 		for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 		{
-			river.write_string("catch(" + cast<kind_a<>>(*kit++).name_().to_string() + "_a<> const& exception)\n{\n");
-			cast<expression_a<>>(*eit++).generate_cpp(version, indent, river, declare, define);
+			river.write_string("catch(" + cast<kind_a<>>(*kit).name_().to_string() + "_a<> const& exception)\n{\n");
+			++kit;
+			cast<expression_a<>>(*eit).generate_cpp(version, indent, river, declare, define);
+			++eit;
 			river.write_string("\n}\n");
 		}
 	}

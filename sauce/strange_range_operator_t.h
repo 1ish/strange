@@ -97,12 +97,12 @@ class range_operator_t : public thing_t<___ego___>
 			return *this;
 		}
 
-		inline const_iterator_t operator++(int)
-		{
-			const_iterator_t result = *this;
-			operator++();
-			return result;
-		}
+//		inline const_iterator_t operator++(int)
+//		{
+//			const_iterator_t result = *this;
+//			operator++();
+//			return result;
+//		}
 
 		// data
 		inline _iterator_ const& extract_it() const

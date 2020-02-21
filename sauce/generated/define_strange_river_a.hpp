@@ -17,13 +17,13 @@ public:
 		return *this;
 	}
 
-	inline river_a operator++(int)
-	{
-		assert(handle_);
-		river_a result = *this;
-		write().operator++();
-		return result;
-	}
+//	inline river_a operator++(int)
+//	{
+//		assert(handle_);
+//		river_a result = *this;
+//		write().operator++();
+//		return result;
+//	}
 
 	inline river_a& operator--()
 	{
@@ -32,13 +32,13 @@ public:
 		return *this;
 	}
 
-	inline river_a operator--(int)
-	{
-		assert(handle_);
-		river_a result = *this;
-		write().operator--();
-		return result;
-	}
+//	inline river_a operator--(int)
+//	{
+//		assert(handle_);
+//		river_a result = *this;
+//		write().operator--();
+//		return result;
+//	}
 
 	inline river_a& operator+=(any_a<> const& other)
 	{

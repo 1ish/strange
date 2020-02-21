@@ -73,12 +73,12 @@ public:
 		return *this;
 	}
 
-	inline number_t operator++(int)
-	{
-		number_t result = *this;
-		operator++();
-		return result;
-	}
+//	inline number_t operator++(int)
+//	{
+//		number_t result = *this;
+//		operator++();
+//		return result;
+//	}
 
 	inline any_a<> decrement__(range_a<> const& _)
 	{
@@ -97,12 +97,12 @@ public:
 		return *this;
 	}
 
-	inline number_t operator--(int)
-	{
-		number_t result = *this;
-		operator--();
-		return result;
-	}
+//	inline number_t operator--(int)
+//	{
+//		number_t result = *this;
+//		operator--();
+//		return result;
+//	}
 
 	inline any_a<> self_assign__(range_a<> const& range)
 	{

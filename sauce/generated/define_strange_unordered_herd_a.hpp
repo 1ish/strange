@@ -17,13 +17,13 @@ public:
 		return *this;
 	}
 
-	inline unordered_herd_a operator++(int)
-	{
-		assert(handle_);
-		unordered_herd_a result = *this;
-		write().operator++();
-		return result;
-	}
+//	inline unordered_herd_a operator++(int)
+//	{
+//		assert(handle_);
+//		unordered_herd_a result = *this;
+//		write().operator++();
+//		return result;
+//	}
 
 	inline unordered_herd_a& operator--()
 	{
@@ -32,13 +32,13 @@ public:
 		return *this;
 	}
 
-	inline unordered_herd_a operator--(int)
-	{
-		assert(handle_);
-		unordered_herd_a result = *this;
-		write().operator--();
-		return result;
-	}
+//	inline unordered_herd_a operator--(int)
+//	{
+//		assert(handle_);
+//		unordered_herd_a result = *this;
+//		write().operator--();
+//		return result;
+//	}
 
 	inline unordered_herd_a& operator+=(any_a<> const& other)
 	{

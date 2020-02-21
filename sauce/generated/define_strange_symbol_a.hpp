@@ -17,13 +17,13 @@ public:
 		return *this;
 	}
 
-	inline symbol_a operator++(int)
-	{
-		assert(handle_);
-		symbol_a result = *this;
-		write().operator++();
-		return result;
-	}
+//	inline symbol_a operator++(int)
+//	{
+//		assert(handle_);
+//		symbol_a result = *this;
+//		write().operator++();
+//		return result;
+//	}
 
 	inline symbol_a& operator--()
 	{
@@ -32,13 +32,13 @@ public:
 		return *this;
 	}
 
-	inline symbol_a operator--(int)
-	{
-		assert(handle_);
-		symbol_a result = *this;
-		write().operator--();
-		return result;
-	}
+//	inline symbol_a operator--(int)
+//	{
+//		assert(handle_);
+//		symbol_a result = *this;
+//		write().operator--();
+//		return result;
+//	}
 
 	inline symbol_a& operator+=(any_a<> const& other)
 	{

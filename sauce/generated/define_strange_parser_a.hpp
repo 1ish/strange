@@ -17,13 +17,13 @@ public:
 		return *this;
 	}
 
-	inline parser_a operator++(int)
-	{
-		assert(handle_);
-		parser_a result = *this;
-		write().operator++();
-		return result;
-	}
+//	inline parser_a operator++(int)
+//	{
+//		assert(handle_);
+//		parser_a result = *this;
+//		write().operator++();
+//		return result;
+//	}
 
 	inline parser_a& operator--()
 	{
@@ -32,13 +32,13 @@ public:
 		return *this;
 	}
 
-	inline parser_a operator--(int)
-	{
-		assert(handle_);
-		parser_a result = *this;
-		write().operator--();
-		return result;
-	}
+//	inline parser_a operator--(int)
+//	{
+//		assert(handle_);
+//		parser_a result = *this;
+//		write().operator--();
+//		return result;
+//	}
 
 	inline parser_a& operator+=(any_a<> const& other)
 	{

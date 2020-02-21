@@ -71,14 +71,14 @@ public:
 	inline void operator++()
 	{}
 
-	inline void operator++(int)
-	{}
+//	inline void operator++(int)
+//	{}
 
 	inline void operator--()
 	{}
 
-	inline void operator--(int)
-	{}
+//	inline void operator--(int)
+//	{}
 
 	inline void operator+=(any_a<> const& other)
 	{}

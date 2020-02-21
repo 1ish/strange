@@ -48,12 +48,14 @@ public:
 				}
 				else
 				{
-					unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(*value++));
+					unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(*value));
+					++value;
 				}
 			}
 			else
 			{
-				unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(*aspect++));
+				unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(*aspect));
+				++aspect;
 				if (value != defaults.cend_())
 				{
 					++value;

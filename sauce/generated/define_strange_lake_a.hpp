@@ -17,13 +17,13 @@ public:
 		return *this;
 	}
 
-	inline lake_a operator++(int)
-	{
-		assert(handle_);
-		lake_a result = *this;
-		write().operator++();
-		return result;
-	}
+//	inline lake_a operator++(int)
+//	{
+//		assert(handle_);
+//		lake_a result = *this;
+//		write().operator++();
+//		return result;
+//	}
 
 	inline lake_a& operator--()
 	{
@@ -32,13 +32,13 @@ public:
 		return *this;
 	}
 
-	inline lake_a operator--(int)
-	{
-		assert(handle_);
-		lake_a result = *this;
-		write().operator--();
-		return result;
-	}
+//	inline lake_a operator--(int)
+//	{
+//		assert(handle_);
+//		lake_a result = *this;
+//		write().operator--();
+//		return result;
+//	}
 
 	inline lake_a& operator+=(any_a<> const& other)
 	{

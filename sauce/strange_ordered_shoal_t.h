@@ -111,12 +111,12 @@ class ordered_shoal_t : public thing_t<___ego___>
 			return *this;
 		}
 
-		inline iterator_t operator++(int)
-		{
-			iterator_t result = *this;
-			operator++();
-			return result;
-		}
+//		inline iterator_t operator++(int)
+//		{
+//			iterator_t result = *this;
+//			operator++();
+//			return result;
+//		}
 
 		// bidirectional iterator
 		inline ___ego_it___ decrement__(range_a<> const& _)
@@ -137,12 +137,12 @@ class ordered_shoal_t : public thing_t<___ego___>
 			return *this;
 		}
 
-		inline iterator_t operator--(int)
-		{
-			iterator_t result = *this;
-			operator--();
-			return result;
-		}
+//		inline iterator_t operator--(int)
+//		{
+//			iterator_t result = *this;
+//			operator--();
+//			return result;
+//		}
 
 		// data
 		inline _iterator_ const& extract_it() const
@@ -253,12 +253,12 @@ class ordered_shoal_t : public thing_t<___ego___>
 			return *this;
 		}
 
-		inline const_iterator_t operator++(int)
-		{
-			const_iterator_t result = *this;
-			operator++();
-			return result;
-		}
+//		inline const_iterator_t operator++(int)
+//		{
+//			const_iterator_t result = *this;
+//			operator++();
+//			return result;
+//		}
 
 		// bidirectional iterator
 		inline ___ego_it___ decrement__(range_a<> const& _)
@@ -279,12 +279,12 @@ class ordered_shoal_t : public thing_t<___ego___>
 			return *this;
 		}
 
-		inline const_iterator_t operator--(int)
-		{
-			const_iterator_t result = *this;
-			operator--();
-			return result;
-		}
+//		inline const_iterator_t operator--(int)
+//		{
+//			const_iterator_t result = *this;
+//			operator--();
+//			return result;
+//		}
 
 		// data
 		inline _iterator_ const& extract_it() const

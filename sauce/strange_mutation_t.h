@@ -77,7 +77,8 @@ public:
 			{
 				if (kind.fixed() || kind.reference())
 				{
-					auto const argument = any_a<>::dup(const_cast<any_a<>&>(*ait++));
+					auto const argument = any_a<>::dup(const_cast<any_a<>&>(*ait));
+					++ait;
 					if (!argument.kinds_().has_(kind))
 					{
 						throw dis(_token.report() + "strange::mutation::operate kind does not include argument");
@@ -86,7 +87,8 @@ public:
 				}
 				else
 				{
-					auto const argument = *ait++;
+					auto const argument = *ait;
+					++ait;
 					if (!argument.kinds_().has_(kind))
 					{
 						throw dis(_token.report() + "strange::mutation::operate kind does not include argument");

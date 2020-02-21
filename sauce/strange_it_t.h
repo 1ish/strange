@@ -83,10 +83,10 @@ public:
 		return *this;
 	}
 
-	inline it_t operator++(int)
-	{
-		return *this;
-	}
+//	inline it_t operator++(int)
+//	{
+//		return *this;
+//	}
 
 protected:
 	inline it_t()

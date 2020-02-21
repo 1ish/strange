@@ -17,13 +17,13 @@ public:
 		return *this;
 	}
 
-	inline cat_a operator++(int)
-	{
-		assert(handle_);
-		cat_a result = *this;
-		write().operator++();
-		return result;
-	}
+//	inline cat_a operator++(int)
+//	{
+//		assert(handle_);
+//		cat_a result = *this;
+//		write().operator++();
+//		return result;
+//	}
 
 	inline cat_a& operator--()
 	{
@@ -32,13 +32,13 @@ public:
 		return *this;
 	}
 
-	inline cat_a operator--(int)
-	{
-		assert(handle_);
-		cat_a result = *this;
-		write().operator--();
-		return result;
-	}
+//	inline cat_a operator--(int)
+//	{
+//		assert(handle_);
+//		cat_a result = *this;
+//		write().operator--();
+//		return result;
+//	}
 
 	inline cat_a& operator+=(any_a<> const& other)
 	{

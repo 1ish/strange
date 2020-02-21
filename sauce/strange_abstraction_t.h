@@ -123,7 +123,8 @@ public:
 			auto const name = *nit++;
 			if (ait != range.cend_())
 			{
-				auto const argument = *ait++;
+				auto const argument = *ait;
+				++ait;
 				if (!argument.kinds_().has_(kind))
 				{
 					throw dis(_token.report() + "strange::abstraction::operate kind does not include argument");

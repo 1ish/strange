@@ -17,13 +17,13 @@ public:
 		return *this;
 	}
 
-	inline herd_a operator++(int)
-	{
-		assert(handle_);
-		herd_a result = *this;
-		write().operator++();
-		return result;
-	}
+//	inline herd_a operator++(int)
+//	{
+//		assert(handle_);
+//		herd_a result = *this;
+//		write().operator++();
+//		return result;
+//	}
 
 	inline herd_a& operator--()
 	{
@@ -32,13 +32,13 @@ public:
 		return *this;
 	}
 
-	inline herd_a operator--(int)
-	{
-		assert(handle_);
-		herd_a result = *this;
-		write().operator--();
-		return result;
-	}
+//	inline herd_a operator--(int)
+//	{
+//		assert(handle_);
+//		herd_a result = *this;
+//		write().operator--();
+//		return result;
+//	}
 
 	inline herd_a& operator+=(any_a<> const& other)
 	{

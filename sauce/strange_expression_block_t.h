@@ -39,7 +39,8 @@ public:
 		auto result = no();
 		while (it != result_range.cend_())
 		{
-			result = *it++;
+			result = *it;
+			++it;
 		}
 		return result;
 	}

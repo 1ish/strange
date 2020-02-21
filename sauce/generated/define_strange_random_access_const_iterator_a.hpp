@@ -17,13 +17,13 @@ public:
 		return *this;
 	}
 
-	inline random_access_const_iterator_a operator++(int)
-	{
-		assert(handle_);
-		random_access_const_iterator_a result = *this;
-		write().operator++();
-		return result;
-	}
+//	inline random_access_const_iterator_a operator++(int)
+//	{
+//		assert(handle_);
+//		random_access_const_iterator_a result = *this;
+//		write().operator++();
+//		return result;
+//	}
 
 	inline random_access_const_iterator_a& operator--()
 	{
@@ -32,13 +32,13 @@ public:
 		return *this;
 	}
 
-	inline random_access_const_iterator_a operator--(int)
-	{
-		assert(handle_);
-		random_access_const_iterator_a result = *this;
-		write().operator--();
-		return result;
-	}
+//	inline random_access_const_iterator_a operator--(int)
+//	{
+//		assert(handle_);
+//		random_access_const_iterator_a result = *this;
+//		write().operator--();
+//		return result;
+//	}
 
 	inline random_access_const_iterator_a& operator+=(any_a<> const& other)
 	{
