@@ -72,14 +72,14 @@ public:
 		++_number;
 		return *this;
 	}
-
-//	inline number_t operator++(int)
-//	{
-//		number_t result = *this;
-//		operator++();
-//		return result;
-//	}
-
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline number_t operator++(int)
+	{
+		number_t result = *this;
+		operator++();
+		return result;
+	}
+#endif
 	inline any_a<> decrement__(range_a<> const& _)
 	{
 		return decrement_();
@@ -96,14 +96,14 @@ public:
 		--_number;
 		return *this;
 	}
-
-//	inline number_t operator--(int)
-//	{
-//		number_t result = *this;
-//		operator--();
-//		return result;
-//	}
-
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline number_t operator--(int)
+	{
+		number_t result = *this;
+		operator--();
+		return result;
+	}
+#endif
 	inline any_a<> self_assign__(range_a<> const& range)
 	{
 		auto const it = range.cbegin_();

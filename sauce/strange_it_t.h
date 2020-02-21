@@ -82,12 +82,12 @@ public:
 	{
 		return *this;
 	}
-
-//	inline it_t operator++(int)
-//	{
-//		return *this;
-//	}
-
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline it_t operator++(int)
+	{
+		return *this;
+	}
+#endif
 protected:
 	inline it_t()
 		: thing_t<___ego___>{}

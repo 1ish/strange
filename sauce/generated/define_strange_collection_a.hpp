@@ -17,13 +17,15 @@ public:
 		return *this;
 	}
 
-//	inline collection_a operator++(int)
-//	{
-//		assert(handle_);
-//		collection_a result = *this;
-//		write().operator++();
-//		return result;
-//	}
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline collection_a operator++(int)
+	{
+		assert(handle_);
+		collection_a result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
 
 	inline collection_a& operator--()
 	{
@@ -32,13 +34,15 @@ public:
 		return *this;
 	}
 
-//	inline collection_a operator--(int)
-//	{
-//		assert(handle_);
-//		collection_a result = *this;
-//		write().operator--();
-//		return result;
-//	}
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline collection_a operator--(int)
+	{
+		assert(handle_);
+		collection_a result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
 
 	inline collection_a& operator+=(any_a<> const& other)
 	{

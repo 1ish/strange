@@ -70,16 +70,16 @@ public:
 	// operators
 	inline void operator++()
 	{}
-
-//	inline void operator++(int)
-//	{}
-
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline void operator++(int)
+	{}
+#endif
 	inline void operator--()
 	{}
-
-//	inline void operator--(int)
-//	{}
-
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline void operator--(int)
+	{}
+#endif
 	inline void operator+=(any_a<> const& other)
 	{}
 

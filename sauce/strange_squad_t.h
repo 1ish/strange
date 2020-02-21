@@ -102,14 +102,14 @@ class squad_t : public thing_t<___ego___>
 			++_it;
 			return *this;
 		}
-
-//		inline iterator_t operator++(int)
-//		{
-//			iterator_t result = *this;
-//			operator++();
-//			return result;
-//		}
-
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+		inline iterator_t operator++(int)
+		{
+			iterator_t result = *this;
+			operator++();
+			return result;
+		}
+#endif
 		// bidirectional iterator
 		inline ___ego_it___ decrement__(range_a<> const& _)
 		{
@@ -128,14 +128,14 @@ class squad_t : public thing_t<___ego___>
 			--_it;
 			return *this;
 		}
-
-//		inline iterator_t operator--(int)
-//		{
-//			iterator_t result = *this;
-//			operator--();
-//			return result;
-//		}
-
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+		inline iterator_t operator--(int)
+		{
+			iterator_t result = *this;
+			operator--();
+			return result;
+		}
+#endif
 		// random access iterator
 		inline ___ego_it___ self_add__(range_a<> const& range)
 		{
@@ -455,14 +455,14 @@ class squad_t : public thing_t<___ego___>
 			++_it;
 			return *this;
 		}
-
-//		inline const_iterator_t operator++(int)
-//		{
-//			const_iterator_t result = *this;
-//			operator++();
-//			return result;
-//		}
-
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+		inline const_iterator_t operator++(int)
+		{
+			const_iterator_t result = *this;
+			operator++();
+			return result;
+		}
+#endif
 		// bidirectional iterator
 		inline ___ego_it___ decrement__(range_a<> const& _)
 		{
@@ -481,14 +481,14 @@ class squad_t : public thing_t<___ego___>
 			--_it;
 			return *this;
 		}
-
-//		inline const_iterator_t operator--(int)
-//		{
-//			const_iterator_t result = *this;
-//			operator--();
-//			return result;
-//		}
-
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+		inline const_iterator_t operator--(int)
+		{
+			const_iterator_t result = *this;
+			operator--();
+			return result;
+		}
+#endif
 		// random access iterator
 		inline ___ego_it___ self_add__(range_a<> const& range)
 		{

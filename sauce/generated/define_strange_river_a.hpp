@@ -17,13 +17,15 @@ public:
 		return *this;
 	}
 
-//	inline river_a operator++(int)
-//	{
-//		assert(handle_);
-//		river_a result = *this;
-//		write().operator++();
-//		return result;
-//	}
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline river_a operator++(int)
+	{
+		assert(handle_);
+		river_a result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
 
 	inline river_a& operator--()
 	{
@@ -32,13 +34,15 @@ public:
 		return *this;
 	}
 
-//	inline river_a operator--(int)
-//	{
-//		assert(handle_);
-//		river_a result = *this;
-//		write().operator--();
-//		return result;
-//	}
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline river_a operator--(int)
+	{
+		assert(handle_);
+		river_a result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
 
 	inline river_a& operator+=(any_a<> const& other)
 	{

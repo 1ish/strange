@@ -17,13 +17,15 @@ public:
 		return *this;
 	}
 
-//	inline herd_a operator++(int)
-//	{
-//		assert(handle_);
-//		herd_a result = *this;
-//		write().operator++();
-//		return result;
-//	}
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline herd_a operator++(int)
+	{
+		assert(handle_);
+		herd_a result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
 
 	inline herd_a& operator--()
 	{
@@ -32,13 +34,15 @@ public:
 		return *this;
 	}
 
-//	inline herd_a operator--(int)
-//	{
-//		assert(handle_);
-//		herd_a result = *this;
-//		write().operator--();
-//		return result;
-//	}
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline herd_a operator--(int)
+	{
+		assert(handle_);
+		herd_a result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
 
 	inline herd_a& operator+=(any_a<> const& other)
 	{

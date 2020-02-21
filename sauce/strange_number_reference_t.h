@@ -59,12 +59,12 @@ public:
 		++_number;
 		return *this;
 	}
-
-//	inline void operator++(int)
-//	{
-//		++_number;
-//	}
-
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline void operator++(int)
+	{
+		++_number;
+	}
+#endif
 	inline any_a<> decrement__(range_a<> const& _)
 	{
 		return decrement_();
@@ -81,12 +81,12 @@ public:
 		--_number;
 		return *this;
 	}
-
-//	inline void operator--(int)
-//	{
-//		--_number;
-//	}
-
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline void operator--(int)
+	{
+		--_number;
+	}
+#endif
 	inline any_a<> self_assign__(range_a<> const& range)
 	{
 		auto const it = range.cbegin_();

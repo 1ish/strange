@@ -17,13 +17,15 @@ public:
 		return *this;
 	}
 
-//	inline number_a operator++(int)
-//	{
-//		assert(handle_);
-//		number_a result = *this;
-//		write().operator++();
-//		return result;
-//	}
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline number_a operator++(int)
+	{
+		assert(handle_);
+		number_a result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
 
 	inline number_a& operator--()
 	{
@@ -32,13 +34,15 @@ public:
 		return *this;
 	}
 
-//	inline number_a operator--(int)
-//	{
-//		assert(handle_);
-//		number_a result = *this;
-//		write().operator--();
-//		return result;
-//	}
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline number_a operator--(int)
+	{
+		assert(handle_);
+		number_a result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
 
 	inline number_a& operator+=(any_a<> const& other)
 	{
