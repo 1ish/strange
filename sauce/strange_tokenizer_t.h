@@ -86,6 +86,11 @@ class tokenizer_t : public thing_t<___ego___>
 				else
 				{
 					_token = next();
+					if (!_dot && !_use && _it == _river.cend_() &&
+						_token.tag() == "punctuation" && _token.symbol() == "")
+					{
+						_end = true;
+					}
 				}
 			}
 			return *this;

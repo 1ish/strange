@@ -137,10 +137,6 @@ private:
 		{
 			throw dis("strange::parser tokenizer error:") + _token.report_();
 		}
-		if (_token.tag() == "punctuation" && _token.symbol() == "" && ++_it == _end)
-		{
-			return false;
-		}
 		return true;
 	}
 
