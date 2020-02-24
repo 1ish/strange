@@ -328,4 +328,101 @@ bool const herd_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class herd_d : public collection_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline herd_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline herd_d operator++(int)
+	{
+		assert(handle_);
+		herd_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline herd_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline herd_d operator--(int)
+	{
+		assert(handle_);
+		herd_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline herd_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline herd_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline herd_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline herd_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline herd_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline bool has_string(std :: string const & s ) const
+	{ throw dis("dynamic herd_d::has_string(s) not available"); }
+
+	inline bool at_string(std :: string const & s ) const
+	{ throw dis("dynamic herd_d::at_string(s) not available"); }
+
+	inline void update(any_a < > const & thing )
+	{ throw dis("dynamic herd_d::update(thing) not available"); }
+
+	inline void update_string(std :: string const & s )
+	{ throw dis("dynamic herd_d::update_string(s) not available"); }
+
+	inline bool insert(any_a < > const & thing )
+	{ throw dis("dynamic herd_d::insert(thing) not available"); }
+
+	inline bool insert_string(std :: string const & s )
+	{ throw dis("dynamic herd_d::insert_string(s) not available"); }
+
+	inline bool erase_string(std :: string const & s )
+	{ throw dis("dynamic herd_d::erase_string(s) not available"); }
+
+};
+
 } // namespace

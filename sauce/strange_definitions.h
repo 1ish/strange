@@ -48,6 +48,12 @@ inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor)
 	return adaptor.operate(_, flock_t<>::create_(thing));
 }
 
+template <typename... Args>
+inline any_a<> variadic_operate(any_a<> const& op, any_a<>& thing, Args&&... args)
+{
+	return no(); //TODO
+}
+
 // check/cast
 
 template <typename ___TTT___, typename ___VVV___>

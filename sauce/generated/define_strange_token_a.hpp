@@ -440,4 +440,277 @@ bool const token_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class token_d : public any_a<>
+{
+public:
+	// arithmetic operator overloads
+	inline token_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline token_d operator++(int)
+	{
+		assert(handle_);
+		token_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline token_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline token_d operator--(int)
+	{
+		assert(handle_);
+		token_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline token_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline token_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline token_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline token_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline token_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> filename__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("filename_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::filename_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline symbol_a<> filename_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("filename_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::filename_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline std :: string filename() const
+	{ throw dis("dynamic token_d::filename() not available"); }
+
+	inline any_a<> line__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("line_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::line_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_data_int64_a<> line_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("line_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::line_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline int64_t line() const
+	{ throw dis("dynamic token_d::line() not available"); }
+
+	inline any_a<> position__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("position_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::position_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_data_int64_a<> position_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("position_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::position_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline int64_t position() const
+	{ throw dis("dynamic token_d::position() not available"); }
+
+	inline any_a<> tag__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("tag_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::tag_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline symbol_a<> tag_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("tag_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::tag_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline std :: string tag() const
+	{ throw dis("dynamic token_d::tag() not available"); }
+
+	inline any_a<> symbol__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("symbol_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::symbol_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline symbol_a<> symbol_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("symbol_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::symbol_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline std :: string symbol() const
+	{ throw dis("dynamic token_d::symbol() not available"); }
+
+	inline any_a<> literal__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("literal_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::literal_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> literal_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("literal_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::literal_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline any_a<> precedence__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("precedence_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::precedence_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_data_int64_a<> precedence_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("precedence_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::precedence_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline int64_t precedence() const
+	{ throw dis("dynamic token_d::precedence() not available"); }
+
+	inline any_a<> report__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("report_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::report_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline misunderstanding_a<> report_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("report_");
+		if (!op)
+		{
+			throw dis("dynamic token_d::report_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline std :: string report() const
+	{ throw dis("dynamic token_d::report() not available"); }
+
+};
+
 } // namespace

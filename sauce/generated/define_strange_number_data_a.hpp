@@ -293,4 +293,86 @@ bool const number_data_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_>
+class number_data_d : public number_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline number_data_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline number_data_d operator++(int)
+	{
+		assert(handle_);
+		number_data_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline number_data_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline number_data_d operator--(int)
+	{
+		assert(handle_);
+		number_data_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline number_data_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline number_data_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline number_data_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline number_data_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline number_data_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline _1_ const & extract_primitive() const
+	{ throw dis("dynamic number_data_d::extract_primitive() not available"); }
+
+	inline _1_ & mutate_primitive()
+	{ throw dis("dynamic number_data_d::mutate_primitive() not available"); }
+
+};
+
 } // namespace

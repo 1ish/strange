@@ -191,6 +191,7 @@ public:
 		auto river = river_t<>::create();
 		_expression.generate_cpp(version, 0, river, false, false, true);
 		result = river.to_string().substr(1);
+		result = result.substr(0, result.length() - 1);
 		parameters = "(";
 		arguments = "(";
 		auto nit = _names.extract_vector().cbegin();

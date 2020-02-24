@@ -293,4 +293,86 @@ bool const ordered_shoal_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class ordered_shoal_d : public shoal_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline ordered_shoal_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline ordered_shoal_d operator++(int)
+	{
+		assert(handle_);
+		ordered_shoal_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline ordered_shoal_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline ordered_shoal_d operator--(int)
+	{
+		assert(handle_);
+		ordered_shoal_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline ordered_shoal_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline ordered_shoal_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline ordered_shoal_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline ordered_shoal_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline ordered_shoal_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline std :: map < any_a < > , any_a < > > const & extract_map() const
+	{ throw dis("dynamic ordered_shoal_d::extract_map() not available"); }
+
+	inline std :: map < any_a < > , any_a < > > & mutate_map()
+	{ throw dis("dynamic ordered_shoal_d::mutate_map() not available"); }
+
+};
+
 } // namespace

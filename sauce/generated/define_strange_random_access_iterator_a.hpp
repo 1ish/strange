@@ -433,4 +433,274 @@ bool const random_access_iterator_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class random_access_iterator_d : public bidirectional_iterator_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline random_access_iterator_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline random_access_iterator_d operator++(int)
+	{
+		assert(handle_);
+		random_access_iterator_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline random_access_iterator_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline random_access_iterator_d operator--(int)
+	{
+		assert(handle_);
+		random_access_iterator_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline random_access_iterator_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline random_access_iterator_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline random_access_iterator_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline random_access_iterator_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline random_access_iterator_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> self_add__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_add_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::self_add_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline random_access_iterator_a<> self_add_(number_a<> const& number)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_add_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::self_add_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, number);
+	}
+
+	inline any_a<> add__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("add_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::add_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline random_access_iterator_a<> add_(number_a<> const& number) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("add_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::add_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+	}
+
+	inline random_access_iterator_a<_1_> operator+(number_a < > const & number ) const
+	{ throw dis("dynamic random_access_iterator_d::operator+(number) not available"); }
+
+	inline any_a<> self_subtract__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_subtract_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::self_subtract_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline random_access_iterator_a<> self_subtract_(number_a<> const& number)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_subtract_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::self_subtract_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, number);
+	}
+
+	inline any_a<> subtract__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("subtract_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::subtract_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline random_access_iterator_a<> subtract_(number_a<> const& number) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("subtract_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::subtract_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+	}
+
+	inline random_access_iterator_a<_1_> operator-(number_a < > const & number ) const
+	{ throw dis("dynamic random_access_iterator_d::operator-(number) not available"); }
+
+	inline any_a<> less_than__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("less_than_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::less_than_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> less_than_(random_access_iterator_a<> const& it) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("less_than_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::less_than_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), it);
+	}
+
+	inline bool operator<(random_access_iterator_a < > const & it ) const
+	{ throw dis("dynamic random_access_iterator_d::operator<(it) not available"); }
+
+	inline any_a<> greater_than__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("greater_than_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::greater_than_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("greater_than_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::greater_than_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), it);
+	}
+
+	inline bool operator>(random_access_iterator_a < > const & it ) const
+	{ throw dis("dynamic random_access_iterator_d::operator>(it) not available"); }
+
+	inline any_a<> less_or_equal__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("less_or_equal_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::less_or_equal_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("less_or_equal_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::less_or_equal_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), it);
+	}
+
+	inline bool operator<=(random_access_iterator_a < > const & it ) const
+	{ throw dis("dynamic random_access_iterator_d::operator<=(it) not available"); }
+
+	inline any_a<> greater_or_equal__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("greater_or_equal_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::greater_or_equal_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("greater_or_equal_");
+		if (!op)
+		{
+			throw dis("dynamic random_access_iterator_d::greater_or_equal_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), it);
+	}
+
+	inline bool operator>=(random_access_iterator_a < > const & it ) const
+	{ throw dis("dynamic random_access_iterator_d::operator>=(it) not available"); }
+
+};
+
 } // namespace

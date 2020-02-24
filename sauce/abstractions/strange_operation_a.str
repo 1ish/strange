@@ -9,7 +9,7 @@ false &&
 					pure : "bool () const",
 
 					aspects : "void (unordered_shoal_a<> const& shoal)",
-					assign : "void (operation_a const& operation)",
+					assign : "void (operation_a<> const& operation)",
 
 					names_ :# (<flock>),
 				}

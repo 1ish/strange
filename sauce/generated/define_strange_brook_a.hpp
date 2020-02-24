@@ -293,4 +293,86 @@ bool const brook_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_>
+class brook_d : public inventory_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline brook_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline brook_d operator++(int)
+	{
+		assert(handle_);
+		brook_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline brook_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline brook_d operator--(int)
+	{
+		assert(handle_);
+		brook_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline brook_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline brook_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline brook_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline brook_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline brook_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline std :: deque < _1_ > const & extract_deque() const
+	{ throw dis("dynamic brook_d::extract_deque() not available"); }
+
+	inline std :: deque < _1_ > & mutate_deque()
+	{ throw dis("dynamic brook_d::mutate_deque() not available"); }
+
+};
+
 } // namespace

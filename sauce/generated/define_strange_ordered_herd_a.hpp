@@ -293,4 +293,86 @@ bool const ordered_herd_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class ordered_herd_d : public herd_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline ordered_herd_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline ordered_herd_d operator++(int)
+	{
+		assert(handle_);
+		ordered_herd_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline ordered_herd_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline ordered_herd_d operator--(int)
+	{
+		assert(handle_);
+		ordered_herd_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline ordered_herd_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline ordered_herd_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline ordered_herd_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline ordered_herd_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline ordered_herd_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline std :: set < any_a < > > const & extract_set() const
+	{ throw dis("dynamic ordered_herd_d::extract_set() not available"); }
+
+	inline std :: set < any_a < > > & mutate_set()
+	{ throw dis("dynamic ordered_herd_d::mutate_set() not available"); }
+
+};
+
 } // namespace

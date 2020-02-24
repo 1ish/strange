@@ -293,4 +293,86 @@ bool const squad_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class squad_d : public inventory_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline squad_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline squad_d operator++(int)
+	{
+		assert(handle_);
+		squad_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline squad_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline squad_d operator--(int)
+	{
+		assert(handle_);
+		squad_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline squad_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline squad_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline squad_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline squad_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline squad_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline std :: deque < any_a < > > const & extract_deque() const
+	{ throw dis("dynamic squad_d::extract_deque() not available"); }
+
+	inline std :: deque < any_a < > > & mutate_deque()
+	{ throw dis("dynamic squad_d::mutate_deque() not available"); }
+
+};
+
 } // namespace

@@ -356,4 +356,177 @@ bool const kind_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class kind_d : public cat_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline kind_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline kind_d operator++(int)
+	{
+		assert(handle_);
+		kind_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline kind_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline kind_d operator--(int)
+	{
+		assert(handle_);
+		kind_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline kind_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline kind_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline kind_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline kind_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline kind_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> aspects__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("aspects_");
+		if (!op)
+		{
+			throw dis("dynamic kind_d::aspects_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline flock_a<> aspects_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("aspects_");
+		if (!op)
+		{
+			throw dis("dynamic kind_d::aspects_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline any_a<> fixed__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("fixed_");
+		if (!op)
+		{
+			throw dis("dynamic kind_d::fixed_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> fixed_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("fixed_");
+		if (!op)
+		{
+			throw dis("dynamic kind_d::fixed_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool fixed() const
+	{ throw dis("dynamic kind_d::fixed() not available"); }
+
+	inline any_a<> reference__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("reference_");
+		if (!op)
+		{
+			throw dis("dynamic kind_d::reference_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> reference_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("reference_");
+		if (!op)
+		{
+			throw dis("dynamic kind_d::reference_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool reference() const
+	{ throw dis("dynamic kind_d::reference() not available"); }
+
+	inline any_a<> optional__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("optional_");
+		if (!op)
+		{
+			throw dis("dynamic kind_d::optional_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> optional_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("optional_");
+		if (!op)
+		{
+			throw dis("dynamic kind_d::optional_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool optional() const
+	{ throw dis("dynamic kind_d::optional() not available"); }
+
+};
+
 } // namespace

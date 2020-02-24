@@ -245,6 +245,12 @@ protected:
 				? name_string.substr(1, name_string.length() - 2)
 				: name_string)
 			+ "_a";
+		bool const root = _parent_expressions.size() <= 1;
+		std::string base_name;
+		if (!root)
+		{
+			base_name = _class_base_name_(version);
+		}
 		if (define)
 		{
 			_define_class_check_(true, // declare
@@ -252,10 +258,14 @@ protected:
 				class_name, version, river);
 		}
 		_declare_or_define_template_(version, indent, river, declare, define);
-		_declare_or_define_class_(class_name, version, indent, river, declare, define);
+		_declare_or_define_class_(root, class_name, base_name, version, indent, river, declare, define);
 		if (define)
 		{
 			_define_class_share_(class_name, version, river);
+			if (!root)
+			{
+				_define_class_dynamic_(class_name, base_name, version, river);
+			}
 		}
 		_namespace_close_(split_scope, river);
 	}
@@ -421,7 +431,7 @@ protected:
 		}
 	}
 
-	inline void _declare_or_define_class_(std::string const& class_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _declare_or_define_class_(bool root, std::string const& class_name, std::string const& base_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		if (declare)
 		{
@@ -429,20 +439,34 @@ protected:
 		}
 		else if (define)
 		{
-			_define_class_(class_name, version, indent, river, declare, define);
+			_define_class_(root, class_name, base_name, version, indent, river, declare, define);
 		}
 	}
 
-	inline void _define_class_(std::string const& class_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _define_class_dynamic_(std::string class_name, std::string base_name, int64_t version, river_a<>& river) const
+	{
+		_declare_or_define_template_(version, 0, river, true, false);
+		class_name[class_name.length() - 1] = 'd';
+		if (base_name != "any_a")
+		{
+			base_name[base_name.length() - 1] = 'd';
+		}
+		river.write_string(
+			"class " + class_name + " : public " + base_name + "<>\n"
+			"{\n");
+		_define_class_boilerplate_(false, class_name, version, 0, river);
+		auto const class_expression_terms = _class_expression_terms_();
+		_define_class_dynamic_members_(false, class_name, class_expression_terms, version, 0, river);
+		river.write_string(
+			"};\n\n");
+	}
+
+	inline void _define_class_(bool root, std::string const& class_name, std::string const& base_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		river.write_string(
 			"class " + class_name);
-		int64_t const bases = _parent_expressions.size() - 1;
-		bool const root = bases < 1;
-		std::string base_name;
 		if (!root)
 		{
-			base_name = _class_base_name_(version);
 			river.write_string(" : public " + base_name + "<>");
 		}
 		river.write_string("\n"
@@ -622,8 +646,8 @@ protected:
 			"\t}\n\n");
 	}
 
-	using _define_member_p = void (expression_abstraction_t::*)(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<> & river) const;
-	using _define_native_member_p = void (expression_abstraction_t::*)(bool root, std::string const& name, std::string const& value, river_a<>& river) const;
+	using _define_member_p = void (expression_abstraction_t::*)(bool root, std::string const& class_name, std::string const& name, expression_a<> const& expression, bool extraction, int64_t version, river_a<> & river) const;
+	using _define_native_member_p = void (expression_abstraction_t::*)(bool root, std::string const& class_name, std::string const& name, std::string const& value, int64_t version, river_a<>& river) const;
 
 	inline void _define_class_members_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river,
 		_define_member_p define_member_p,
@@ -669,7 +693,7 @@ protected:
 				bool const extraction = value_expression.type_() == expression_extraction_t<>::type_();
 				if (extraction || value_expression.type_() == expression_mutation_t<>::type_())
 				{
-					(this->*define_member_p)(root, version, name.to_string(), value_expression, extraction, river);
+					(this->*define_member_p)(root, class_name, name.to_string(), value_expression, extraction, version, river);
 				}
 				else
 				{
@@ -681,7 +705,7 @@ protected:
 				auto const value = value_expression.terms_().at_index(0);
 				if (check<lake_a<int8_t>>(value))
 				{
-					(this->*define_native_member_p)(root, name.to_string(), lake_to_string(cast<lake_a<int8_t>>(value)), river);
+					(this->*define_native_member_p)(root, class_name, name.to_string(), lake_to_string(cast<lake_a<int8_t>>(value)), version, river);
 				}
 			}
 			else
@@ -691,6 +715,95 @@ protected:
 		}
 	}
 
+	inline void _define_class_dynamic_members_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	{
+		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
+			&expression_abstraction_t::_define_class_dynamic_member_,
+			&expression_abstraction_t::_define_class_dynamic_native_member_);
+	}
+
+	inline void _define_class_dynamic_member_(bool root, std::string const& class_name, std::string const& name, expression_a<> const& expression, bool extraction, int64_t version, river_a<>& river) const
+	{
+		std::string result;
+		std::string parameters;
+		std::string arguments;
+		std::string constness;
+		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
+
+		river.write_string(
+			"\tinline any_a<> " + name + "_(range_a" +
+			(root ? "" : "<>") + " const& range)" + constness + "\n"
+			"\t{\n"
+			"\t\tassert(handle_);\n"
+			"\t\tauto const op = read().operations_().at_string(\"" + name + "\");\n"
+			"\t\tif (!op)\n"
+			"\t\t{\n"
+			"\t\t\tthrow dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
+			"\t\t}\n"
+			"\t\treturn op.operate(");
+		if (constness.empty())
+		{
+			river.write_string("*this");
+		}
+		else
+		{
+			river.write_string("const_cast<any_a<>&>(*this)");
+		}
+		river.write_string(", range);\n"
+			"\t}\n\n");
+
+		river.write_string(
+			"\tinline " + result);
+		if (result == class_name.substr(0, class_name.length() - 1) + "a")
+		{
+			_declare_or_define_template_(version, 0, river, false, false);
+		}
+		river.write_string(" " + name + parameters + constness + "\n"
+			"\t{\n"
+			"\t\tassert(handle_);\n"
+			"\t\tauto const op = read().operations_().at_string(\"" + name + "\");\n"
+			"\t\tif (!op)\n"
+			"\t\t{\n"
+			"\t\t\tthrow dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
+			"\t\t}\n"
+			"\t\treturn variadic_operate(op, ");
+		if (constness.empty())
+		{
+			river.write_string("*this");
+		}
+		else
+		{
+			river.write_string("const_cast<any_a<>&>(*this)");
+		}
+		if (arguments.length() > 2)
+		{
+			river.write_string(", " + arguments.substr(1) + ";\n");
+		}
+		else
+		{
+			river.write_string(");\n");
+		}
+		river.write_string(
+			"\t}\n\n");
+	}
+
+	inline void _define_class_dynamic_native_member_(bool root, std::string const& class_name, std::string const& name, std::string const& value, int64_t version, river_a<>& river) const
+	{
+		std::string result;
+		std::string parameters;
+		std::string arguments;
+		std::string constness;
+		_parse_native_member_definition_(value, result, parameters, arguments, constness);
+		river.write_string(
+			"\tinline " + result);
+		if (result == class_name.substr(0, class_name.length() - 1) + "a")
+		{
+			_declare_or_define_template_(version, 0, river, false, false);
+		}
+		river.write_string(" " + name + parameters + constness + "\n"
+			"\t{ throw dis(\"dynamic " + class_name + "::" + name + arguments + " not available\"); }\n\n");
+	}
+
 	inline void _define_class_nonvirtual_members_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
 		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
@@ -698,7 +811,7 @@ protected:
 			&expression_abstraction_t::_define_class_nonvirtual_native_member_);
 	}
 
-	inline void _define_class_nonvirtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
+	inline void _define_class_nonvirtual_member_(bool root, std::string const& class_name, std::string const& name, expression_a<> const& expression, bool extraction, int64_t version, river_a<>& river) const
 	{
 		std::string result;
 		std::string parameters;
@@ -721,7 +834,7 @@ protected:
 		river.write_string(name + "_(range); }\n\n");
 
 		river.write_string(
-			"\tinline " + result + name + parameters + constness + "\n"
+			"\tinline " + result + " " + name + parameters + constness + "\n"
 			"\t{ assert(handle_); return ");
 		if (constness.empty())
 		{
@@ -734,7 +847,7 @@ protected:
 		river.write_string(name + arguments + "; }\n\n");
 	}
 
-	inline void _define_class_nonvirtual_native_member_(bool root, std::string const& name, std::string const& value, river_a<>& river) const
+	inline void _define_class_nonvirtual_native_member_(bool root, std::string const& class_name, std::string const& name, std::string const& value, int64_t version, river_a<>& river) const
 	{
 		std::string result;
 		std::string parameters;
@@ -742,9 +855,9 @@ protected:
 		std::string constness;
 		_parse_native_member_definition_(value, result, parameters, arguments, constness);
 		river.write_string(
-			"\tinline " + result + name + parameters + constness + "\n"
+			"\tinline " + result + " " + name + parameters + constness + "\n"
 			"\t{ assert(handle_); ");
-		if (result != "void ")
+		if (result != "void")
 		{
 			river.write_string("return ");
 		}
@@ -971,7 +1084,7 @@ protected:
 		}
 	}
 
-	inline void _define_class_pure_virtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
+	inline void _define_class_pure_virtual_member_(bool root, std::string const& class_name, std::string const& name, expression_a<> const& expression, bool extraction, int64_t version, river_a<>& river) const
 	{
 		std::string result;
 		std::string parameters;
@@ -983,10 +1096,10 @@ protected:
 			"\t\tvirtual any_a<> " + name + "_(range_a" +
 			(root ? "" : "<>") + " const& range)" + constness + " = 0;\n");
 		river.write_string(
-			"\t\tvirtual " + result + name + parameters + constness + " = 0;\n");
+			"\t\tvirtual " + result + " " + name + parameters + constness + " = 0;\n");
 	}
 
-	inline void _define_class_pure_virtual_native_member_(bool root, std::string const& name, std::string const& value, river_a<>& river) const
+	inline void _define_class_pure_virtual_native_member_(bool root, std::string const& class_name, std::string const& name, std::string const& value, int64_t version, river_a<>& river) const
 	{
 		std::string result;
 		std::string parameters;
@@ -994,10 +1107,10 @@ protected:
 		std::string constness;
 		_parse_native_member_definition_(value, result, parameters, arguments, constness);
 		river.write_string(
-			"\t\tvirtual " + result + name + parameters + constness + " = 0;\n");
+			"\t\tvirtual " + result + " " + name + parameters + constness + " = 0;\n");
 	}
 
-	inline void _define_class_virtual_member_(bool root, int64_t version, std::string const& name, expression_a<> const& expression, bool extraction, river_a<>& river) const
+	inline void _define_class_virtual_member_(bool root, std::string const& class_name, std::string const& name, expression_a<> const& expression, bool extraction, int64_t version, river_a<>& river) const
 	{
 		std::string result;
 		std::string parameters;
@@ -1013,11 +1126,11 @@ protected:
 			"\t\t{ return " + scope + "value_." + name + "_(range); }\n\n");
 
 		river.write_string(
-			"\t\tvirtual inline " + result + name + parameters + constness + " final\n"
+			"\t\tvirtual inline " + result + " " + name + parameters + constness + " final\n"
 			"\t\t{ return " + scope + "value_." + name + arguments + "; }\n\n");
 	}
 
-	inline void _define_class_virtual_native_member_(bool root, std::string const& name, std::string const& value, river_a<>& river) const
+	inline void _define_class_virtual_native_member_(bool root, std::string const& class_name, std::string const& name, std::string const& value, int64_t version, river_a<>& river) const
 	{
 		std::string result;
 		std::string parameters;
@@ -1028,9 +1141,9 @@ protected:
 		std::string const scope = root ? "" : "___any_a_handle___<___TTT___, ___DHB___>::";
 
 		river.write_string(
-			"\t\tvirtual inline " + result + name + parameters + constness + " final\n"
+			"\t\tvirtual inline " + result + " " + name + parameters + constness + " final\n"
 			"\t\t{ ");
-		if (result != "void ")
+		if (result != "void")
 		{
 			river.write_string("return ");
 		}
@@ -1371,7 +1484,11 @@ protected:
 				}
 				else
 				{
-					result += token.symbol() + " ";
+					if (!result.empty())
+					{
+						result += " ";
+					}
+					result += token.symbol();
 				}
 				break;
 			case 2:

@@ -91,7 +91,7 @@ public:
 	inline void aspects(unordered_shoal_a < > const & shoal )
 	{ assert(handle_); write().aspects(shoal); }
 
-	inline void assign(operation_a const & operation )
+	inline void assign(operation_a < > const & operation )
 	{ assert(handle_); write().assign(operation); }
 
 	inline any_a<> names__(range_a<> const& range) const
@@ -107,7 +107,7 @@ protected:
 		virtual any_a<> pure_() const = 0;
 		virtual bool pure() const = 0;
 		virtual void aspects(unordered_shoal_a < > const & shoal ) = 0;
-		virtual void assign(operation_a const & operation ) = 0;
+		virtual void assign(operation_a < > const & operation ) = 0;
 		virtual any_a<> names__(range_a<> const& range) const = 0;
 		virtual flock_a<> names_() const = 0;
 	};
@@ -137,7 +137,7 @@ protected:
 		virtual inline void aspects(unordered_shoal_a < > const & shoal ) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.aspects(shoal); }
 
-		virtual inline void assign(operation_a const & operation ) final
+		virtual inline void assign(operation_a < > const & operation ) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.assign(operation); }
 
 		virtual inline any_a<> names__(range_a<> const& range) const final
@@ -327,5 +327,134 @@ bool const operation_a<_1_>::___share___ = []()
 	reflection<operation_a<_1_>>::share(shoal);
 	return shoal;
 }();
+
+template <typename _1_ = void>
+class operation_d : public any_a<>
+{
+public:
+	// arithmetic operator overloads
+	inline operation_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline operation_d operator++(int)
+	{
+		assert(handle_);
+		operation_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline operation_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline operation_d operator--(int)
+	{
+		assert(handle_);
+		operation_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline operation_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline operation_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline operation_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline operation_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline operation_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> pure__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("pure_");
+		if (!op)
+		{
+			throw dis("dynamic operation_d::pure_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> pure_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("pure_");
+		if (!op)
+		{
+			throw dis("dynamic operation_d::pure_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool pure() const
+	{ throw dis("dynamic operation_d::pure() not available"); }
+
+	inline void aspects(unordered_shoal_a < > const & shoal )
+	{ throw dis("dynamic operation_d::aspects(shoal) not available"); }
+
+	inline void assign(operation_a < > const & operation )
+	{ throw dis("dynamic operation_d::assign(operation) not available"); }
+
+	inline any_a<> names__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("names_");
+		if (!op)
+		{
+			throw dis("dynamic operation_d::names_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline flock_a<> names_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("names_");
+		if (!op)
+		{
+			throw dis("dynamic operation_d::names_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+};
 
 } // namespace

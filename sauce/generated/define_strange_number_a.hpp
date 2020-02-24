@@ -874,4 +874,831 @@ bool const number_a<number_data_int64_a, number_data_uint64_a, number_data_doubl
 	return shoal;
 }();
 
+template <typename number_data_int64_a = number_data_int64_a<> , typename number_data_uint64_a = number_data_uint64_a<> , typename number_data_double_a = number_data_double_a<> >
+class number_d : public any_a<>
+{
+public:
+	// arithmetic operator overloads
+	inline number_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline number_d operator++(int)
+	{
+		assert(handle_);
+		number_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline number_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline number_d operator--(int)
+	{
+		assert(handle_);
+		number_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline number_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline number_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline number_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline number_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline number_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> increment__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("increment_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::increment_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline number_a<> increment_()
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("increment_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::increment_ passed non-existent member");
+		}
+		return variadic_operate(op, *this);
+	}
+
+	inline any_a<> decrement__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("decrement_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::decrement_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline number_a<> decrement_()
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("decrement_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::decrement_ passed non-existent member");
+		}
+		return variadic_operate(op, *this);
+	}
+
+	inline any_a<> self_assign__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_assign_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_assign_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline number_a<> self_assign_(number_a<> const& number)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_assign_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_assign_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, number);
+	}
+
+	inline any_a<> self_add__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_add_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_add_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline number_a<> self_add_(number_a<> const& number)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_add_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_add_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, number);
+	}
+
+	inline any_a<> add__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("add_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::add_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_a<> add_(number_a<> const& number) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("add_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::add_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+	}
+
+	inline number_a < > operator+(number_a < > const & number ) const
+	{ throw dis("dynamic number_d::operator+(number) not available"); }
+
+	inline any_a<> self_subtract__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_subtract_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_subtract_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline number_a<> self_subtract_(number_a<> const& number)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_subtract_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_subtract_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, number);
+	}
+
+	inline any_a<> subtract__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("subtract_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::subtract_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_a<> subtract_(number_a<> const& number) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("subtract_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::subtract_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+	}
+
+	inline number_a < > operator-(number_a < > const & number ) const
+	{ throw dis("dynamic number_d::operator-(number) not available"); }
+
+	inline any_a<> self_multiply__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_multiply_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_multiply_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline number_a<> self_multiply_(number_a<> const& number)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_multiply_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_multiply_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, number);
+	}
+
+	inline any_a<> multiply__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("multiply_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::multiply_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_a<> multiply_(number_a<> const& number) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("multiply_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::multiply_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+	}
+
+	inline number_a < > operator*(number_a < > const & number ) const
+	{ throw dis("dynamic number_d::operator*(number) not available"); }
+
+	inline any_a<> self_divide__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_divide_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_divide_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline number_a<> self_divide_(number_a<> const& number)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_divide_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_divide_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, number);
+	}
+
+	inline any_a<> divide__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("divide_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::divide_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_a<> divide_(number_a<> const& number) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("divide_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::divide_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+	}
+
+	inline number_a < > operator/(number_a < > const & number ) const
+	{ throw dis("dynamic number_d::operator/(number) not available"); }
+
+	inline any_a<> self_modulo__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_modulo_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_modulo_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline number_a<> self_modulo_(number_a<> const& number)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_modulo_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::self_modulo_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, number);
+	}
+
+	inline any_a<> modulo__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("modulo_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::modulo_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_a<> modulo_(number_a<> const& number) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("modulo_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::modulo_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+	}
+
+	inline number_a < > operator%(number_a < > const & number ) const
+	{ throw dis("dynamic number_d::operator%(number) not available"); }
+
+	inline any_a<> to_int_64__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("to_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::to_int_64_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_data_int64_a to_int_64_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("to_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::to_int_64_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline int64_t to_int_64() const
+	{ throw dis("dynamic number_d::to_int_64() not available"); }
+
+	inline any_a<> from_int_64__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("from_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::from_int_64_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline any_a<> from_int_64_(number_data_int64_a const& int_64)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("from_int_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::from_int_64_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, int_64);
+	}
+
+	inline void from_int_64(int64_t int_64 )
+	{ throw dis("dynamic number_d::from_int_64(int_64) not available"); }
+
+	inline any_a<> to_uint_64__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("to_uint_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::to_uint_64_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_data_uint64_a to_uint_64_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("to_uint_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::to_uint_64_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline uint64_t to_uint_64() const
+	{ throw dis("dynamic number_d::to_uint_64() not available"); }
+
+	inline any_a<> from_uint_64__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("from_uint_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::from_uint_64_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline any_a<> from_uint_64_(number_data_uint64_a const& uint_64)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("from_uint_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::from_uint_64_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, uint_64);
+	}
+
+	inline void from_uint_64(uint64_t uint_64 )
+	{ throw dis("dynamic number_d::from_uint_64(uint_64) not available"); }
+
+	inline any_a<> to_float_64__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("to_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::to_float_64_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_data_double_a to_float_64_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("to_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::to_float_64_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline double to_float_64() const
+	{ throw dis("dynamic number_d::to_float_64() not available"); }
+
+	inline any_a<> from_float_64__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("from_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::from_float_64_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline any_a<> from_float_64_(number_data_double_a const& int_64)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("from_float_64_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::from_float_64_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, int_64);
+	}
+
+	inline void from_float_64(double int_64 )
+	{ throw dis("dynamic number_d::from_float_64(int_64) not available"); }
+
+	inline any_a<> less_than__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("less_than_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::less_than_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> less_than_(number_a<> const& number) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("less_than_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::less_than_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+	}
+
+	inline bool operator<(number_a < > const & number ) const
+	{ throw dis("dynamic number_d::operator<(number) not available"); }
+
+	inline any_a<> greater_than__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("greater_than_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::greater_than_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> greater_than_(number_a<> const& number) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("greater_than_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::greater_than_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+	}
+
+	inline bool operator>(number_a < > const & number ) const
+	{ throw dis("dynamic number_d::operator>(number) not available"); }
+
+	inline any_a<> less_or_equal__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("less_or_equal_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::less_or_equal_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> less_or_equal_(number_a<> const& number) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("less_or_equal_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::less_or_equal_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+	}
+
+	inline bool operator<=(number_a < > const & number ) const
+	{ throw dis("dynamic number_d::operator<=(number) not available"); }
+
+	inline any_a<> greater_or_equal__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("greater_or_equal_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::greater_or_equal_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> greater_or_equal_(number_a<> const& number) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("greater_or_equal_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::greater_or_equal_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+	}
+
+	inline bool operator>=(number_a < > const & number ) const
+	{ throw dis("dynamic number_d::operator>=(number) not available"); }
+
+	inline any_a<> byte_size__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("byte_size_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::byte_size_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_data_int64_a byte_size_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("byte_size_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::byte_size_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline int64_t byte_size() const
+	{ throw dis("dynamic number_d::byte_size() not available"); }
+
+	inline any_a<> is_int__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_int_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_int_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> is_int_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_int_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_int_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool is_int() const
+	{ throw dis("dynamic number_d::is_int() not available"); }
+
+	inline any_a<> is_signed__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_signed_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_signed_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> is_signed_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_signed_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_signed_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool is_signed() const
+	{ throw dis("dynamic number_d::is_signed() not available"); }
+
+	inline any_a<> is_nan__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_nan_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_nan_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> is_nan_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_nan_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_nan_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool is_nan() const
+	{ throw dis("dynamic number_d::is_nan() not available"); }
+
+	inline any_a<> is_inf__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_inf_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_inf_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> is_inf_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_inf_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_inf_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool is_inf() const
+	{ throw dis("dynamic number_d::is_inf() not available"); }
+
+	inline any_a<> is_finite__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_finite_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_finite_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> is_finite_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_finite_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_finite_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool is_finite() const
+	{ throw dis("dynamic number_d::is_finite() not available"); }
+
+	inline any_a<> is_normal__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_normal_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_normal_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> is_normal_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("is_normal_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::is_normal_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool is_normal() const
+	{ throw dis("dynamic number_d::is_normal() not available"); }
+
+	inline any_a<> little_endian__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("little_endian_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::little_endian_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> little_endian_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("little_endian_");
+		if (!op)
+		{
+			throw dis("dynamic number_d::little_endian_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool little_endian() const
+	{ throw dis("dynamic number_d::little_endian() not available"); }
+
+};
+
 } // namespace

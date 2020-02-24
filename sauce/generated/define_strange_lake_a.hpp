@@ -293,4 +293,86 @@ bool const lake_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_>
+class lake_d : public inventory_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline lake_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline lake_d operator++(int)
+	{
+		assert(handle_);
+		lake_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline lake_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline lake_d operator--(int)
+	{
+		assert(handle_);
+		lake_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline lake_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline lake_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline lake_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline lake_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline lake_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline std :: vector < _1_ > const & extract_vector() const
+	{ throw dis("dynamic lake_d::extract_vector() not available"); }
+
+	inline std :: vector < _1_ > & mutate_vector()
+	{ throw dis("dynamic lake_d::mutate_vector() not available"); }
+
+};
+
 } // namespace

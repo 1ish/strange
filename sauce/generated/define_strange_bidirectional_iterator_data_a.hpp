@@ -293,4 +293,86 @@ bool const bidirectional_iterator_data_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_>
+class bidirectional_iterator_data_d : public bidirectional_iterator_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline bidirectional_iterator_data_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline bidirectional_iterator_data_d operator++(int)
+	{
+		assert(handle_);
+		bidirectional_iterator_data_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline bidirectional_iterator_data_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline bidirectional_iterator_data_d operator--(int)
+	{
+		assert(handle_);
+		bidirectional_iterator_data_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline bidirectional_iterator_data_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline bidirectional_iterator_data_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline bidirectional_iterator_data_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline bidirectional_iterator_data_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline bidirectional_iterator_data_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline _1_ const & extract_it() const
+	{ throw dis("dynamic bidirectional_iterator_data_d::extract_it() not available"); }
+
+	inline _1_ & mutate_it()
+	{ throw dis("dynamic bidirectional_iterator_data_d::mutate_it() not available"); }
+
+};
+
 } // namespace

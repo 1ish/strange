@@ -293,4 +293,86 @@ bool const forward_const_iterator_data_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_>
+class forward_const_iterator_data_d : public forward_const_iterator_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline forward_const_iterator_data_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline forward_const_iterator_data_d operator++(int)
+	{
+		assert(handle_);
+		forward_const_iterator_data_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline forward_const_iterator_data_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline forward_const_iterator_data_d operator--(int)
+	{
+		assert(handle_);
+		forward_const_iterator_data_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline forward_const_iterator_data_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline forward_const_iterator_data_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline forward_const_iterator_data_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline forward_const_iterator_data_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline forward_const_iterator_data_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline _1_ const & extract_it() const
+	{ throw dis("dynamic forward_const_iterator_data_d::extract_it() not available"); }
+
+	inline _1_ & mutate_it()
+	{ throw dis("dynamic forward_const_iterator_data_d::mutate_it() not available"); }
+
+};
+
 } // namespace

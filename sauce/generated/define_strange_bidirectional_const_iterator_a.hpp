@@ -293,4 +293,102 @@ bool const bidirectional_const_iterator_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class bidirectional_const_iterator_d : public forward_const_iterator_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline bidirectional_const_iterator_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline bidirectional_const_iterator_d operator++(int)
+	{
+		assert(handle_);
+		bidirectional_const_iterator_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline bidirectional_const_iterator_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline bidirectional_const_iterator_d operator--(int)
+	{
+		assert(handle_);
+		bidirectional_const_iterator_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline bidirectional_const_iterator_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline bidirectional_const_iterator_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline bidirectional_const_iterator_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline bidirectional_const_iterator_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline bidirectional_const_iterator_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> decrement__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("decrement_");
+		if (!op)
+		{
+			throw dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline bidirectional_const_iterator_a<> decrement_()
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("decrement_");
+		if (!op)
+		{
+			throw dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
+		}
+		return variadic_operate(op, *this);
+	}
+
+};
+
 } // namespace

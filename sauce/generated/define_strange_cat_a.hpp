@@ -398,4 +398,243 @@ bool const cat_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class cat_d : public symbol_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline cat_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline cat_d operator++(int)
+	{
+		assert(handle_);
+		cat_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline cat_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline cat_d operator--(int)
+	{
+		assert(handle_);
+		cat_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline cat_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline cat_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline cat_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline cat_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline cat_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> symbolic__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("symbolic_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::symbolic_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> symbolic_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("symbolic_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::symbolic_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool symbolic() const
+	{ throw dis("dynamic cat_d::symbolic() not available"); }
+
+	inline any_a<> order__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("order_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::order_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_data_int64_a<> order_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("order_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::order_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline int64_t order() const
+	{ throw dis("dynamic cat_d::order() not available"); }
+
+	inline any_a<> name__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("name_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::name_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline symbol_a<> name_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("name_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::name_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline any_a<> dimensions__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("dimensions_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::dimensions_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline flock_a<> dimensions_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("dimensions_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::dimensions_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline any_a<> parameters__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("parameters_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::parameters_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline flock_a<> parameters_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("parameters_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::parameters_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline any_a<> result__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("result_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::result_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline cat_a<> result_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("result_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::result_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline any_a<> code__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("code_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::code_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline lake_int8_a<> code_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("code_");
+		if (!op)
+		{
+			throw dis("dynamic cat_d::code_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline std :: string code() const
+	{ throw dis("dynamic cat_d::code() not available"); }
+
+};
+
 } // namespace

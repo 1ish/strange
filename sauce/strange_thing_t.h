@@ -123,11 +123,12 @@ public:
 
 	static inline any_a<> invoke_member(any_a<>& thing, any_a<> const& member, range_a<> const& range)
 	{
-		if (!thing.operations_().has_(member))
+		auto const op = thing.operations_().at_(member);
+		if (!op)
 		{
 			throw dis("strange::thing::invoke passed non-existent member");
 		}
-		return thing.operations_().at_(member).operate(thing, range);
+		return op.operate(thing, range);
 	}
 
 	static inline any_a<> operate__(range_a<> const& range)

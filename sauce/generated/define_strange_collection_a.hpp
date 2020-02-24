@@ -622,4 +622,531 @@ bool const collection_a<number_data_int64_a>::___share___ = []()
 	return shoal;
 }();
 
+template <typename number_data_int64_a = number_data_int64_a<> >
+class collection_d : public range_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline collection_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline collection_d operator++(int)
+	{
+		assert(handle_);
+		collection_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline collection_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline collection_d operator--(int)
+	{
+		assert(handle_);
+		collection_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline collection_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline collection_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline collection_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline collection_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline collection_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> has__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("has_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::has_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> has_(any_a<> const& key) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("has_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::has_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), key);
+	}
+
+	inline bool has(any_a < > const & key ) const
+	{ throw dis("dynamic collection_d::has(key) not available"); }
+
+	inline any_a<> at__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("at_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::at_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> at_(any_a<> const& key) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("at_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::at_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), key);
+	}
+
+	inline any_a<> update__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("update_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::update_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() )
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("update_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::update_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, key, value);
+	}
+
+	inline void update(any_a < > const & key , any_a < > const & value )
+	{ throw dis("dynamic collection_d::update(key, value) not available"); }
+
+	inline any_a<> insert__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("insert_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::insert_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() )
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("insert_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::insert_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, key, value);
+	}
+
+	inline void insert(any_a < > const & key , any_a < > const & value )
+	{ throw dis("dynamic collection_d::insert(key, value) not available"); }
+
+	inline any_a<> erase__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("erase_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::erase_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline any_a<> erase_(any_a<> const& key)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("erase_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::erase_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, key);
+	}
+
+	inline bool erase(any_a < > const & key )
+	{ throw dis("dynamic collection_d::erase(key) not available"); }
+
+	inline any_a<> clear__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("clear_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::clear_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline collection_a<> clear_()
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("clear_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::clear_ passed non-existent member");
+		}
+		return variadic_operate(op, *this);
+	}
+
+	inline void clear()
+	{ throw dis("dynamic collection_d::clear() not available"); }
+
+	inline any_a<> size__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("size_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::size_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline number_data_int64_a size_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("size_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::size_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline int64_t size() const
+	{ throw dis("dynamic collection_d::size() not available"); }
+
+	inline any_a<> empty__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("empty_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::empty_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> empty_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("empty_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::empty_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline bool empty() const
+	{ throw dis("dynamic collection_d::empty() not available"); }
+
+	inline any_a<> push_front__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("push_front_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::push_front_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline collection_a<> push_front_(any_a<> const& thing)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("push_front_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::push_front_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, thing);
+	}
+
+	inline void push_front(any_a < > const & thing )
+	{ throw dis("dynamic collection_d::push_front(thing) not available"); }
+
+	inline any_a<> pop_front__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("pop_front_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::pop_front_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline any_a<> pop_front_()
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("pop_front_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::pop_front_ passed non-existent member");
+		}
+		return variadic_operate(op, *this);
+	}
+
+	inline any_a<> push_back__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("push_back_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::push_back_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline collection_a<> push_back_(any_a<> const& thing)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("push_back_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::push_back_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, thing);
+	}
+
+	inline void push_back(any_a < > const & thing )
+	{ throw dis("dynamic collection_d::push_back(thing) not available"); }
+
+	inline any_a<> pop_back__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("pop_back_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::pop_back_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline any_a<> pop_back_()
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("pop_back_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::pop_back_ passed non-existent member");
+		}
+		return variadic_operate(op, *this);
+	}
+
+	inline any_a<> self_assign__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_assign_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::self_assign_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline collection_a<> self_assign_(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_assign_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::self_assign_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, range);
+	}
+
+	inline any_a<> self_add__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_add_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::self_add_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline collection_a<> self_add_(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_add_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::self_add_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, range);
+	}
+
+	inline any_a<> add__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("add_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::add_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline collection_a<> add_(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("add_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::add_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), range);
+	}
+
+	inline collection_a<number_data_int64_a> operator+(range_a < > const & range ) const
+	{ throw dis("dynamic collection_d::operator+(range) not available"); }
+
+	inline any_a<> self_subtract__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_subtract_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::self_subtract_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline collection_a<> self_subtract_(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("self_subtract_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::self_subtract_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, range);
+	}
+
+	inline any_a<> subtract__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("subtract_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::subtract_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline collection_a<> subtract_(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("subtract_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::subtract_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), range);
+	}
+
+	inline collection_a<number_data_int64_a> operator-(range_a < > const & range ) const
+	{ throw dis("dynamic collection_d::operator-(range) not available"); }
+
+	inline any_a<> read_lock__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("read_lock_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> read_lock_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("read_lock_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline any_a<> write_lock__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("write_lock_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::write_lock_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> write_lock_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("write_lock_");
+		if (!op)
+		{
+			throw dis("dynamic collection_d::write_lock_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+};
+
 } // namespace

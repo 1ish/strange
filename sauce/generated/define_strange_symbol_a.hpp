@@ -335,4 +335,136 @@ bool const symbol_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class symbol_d : public any_a<>
+{
+public:
+	// arithmetic operator overloads
+	inline symbol_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline symbol_d operator++(int)
+	{
+		assert(handle_);
+		symbol_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline symbol_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline symbol_d operator--(int)
+	{
+		assert(handle_);
+		symbol_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline symbol_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline symbol_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline symbol_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline symbol_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline symbol_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> to_lake__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("to_lake_");
+		if (!op)
+		{
+			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline lake_int8_a<> to_lake_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("to_lake_");
+		if (!op)
+		{
+			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline std :: string const & to_string() const
+	{ throw dis("dynamic symbol_d::to_string() not available"); }
+
+	inline int8_t first_character() const
+	{ throw dis("dynamic symbol_d::first_character() not available"); }
+
+	inline int8_t last_character() const
+	{ throw dis("dynamic symbol_d::last_character() not available"); }
+
+	inline any_a<> add__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("add_");
+		if (!op)
+		{
+			throw dis("dynamic symbol_d::add_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline symbol_a<> add_(symbol_a<> const& symbol) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("add_");
+		if (!op)
+		{
+			throw dis("dynamic symbol_d::add_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), symbol);
+	}
+
+	inline symbol_a < > operator+(symbol_a < > const & symbol ) const
+	{ throw dis("dynamic symbol_d::operator+(symbol) not available"); }
+
+};
+
 } // namespace

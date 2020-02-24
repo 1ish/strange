@@ -293,4 +293,102 @@ bool const parser_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class parser_d : public any_a<>
+{
+public:
+	// arithmetic operator overloads
+	inline parser_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline parser_d operator++(int)
+	{
+		assert(handle_);
+		parser_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline parser_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline parser_d operator--(int)
+	{
+		assert(handle_);
+		parser_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline parser_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline parser_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline parser_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline parser_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline parser_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> parse__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("parse_");
+		if (!op)
+		{
+			throw dis("dynamic parser_d::parse_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline expression_a<> parse_(range_a<> const& tokenizer)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("parse_");
+		if (!op)
+		{
+			throw dis("dynamic parser_d::parse_ passed non-existent member");
+		}
+		return variadic_operate(op, *this, tokenizer);
+	}
+
+};
+
 } // namespace

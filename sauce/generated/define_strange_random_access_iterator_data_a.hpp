@@ -293,4 +293,86 @@ bool const random_access_iterator_data_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_>
+class random_access_iterator_data_d : public random_access_iterator_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline random_access_iterator_data_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline random_access_iterator_data_d operator++(int)
+	{
+		assert(handle_);
+		random_access_iterator_data_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline random_access_iterator_data_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline random_access_iterator_data_d operator--(int)
+	{
+		assert(handle_);
+		random_access_iterator_data_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline random_access_iterator_data_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline random_access_iterator_data_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline random_access_iterator_data_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline random_access_iterator_data_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline random_access_iterator_data_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline _1_ const & extract_it() const
+	{ throw dis("dynamic random_access_iterator_data_d::extract_it() not available"); }
+
+	inline _1_ & mutate_it()
+	{ throw dis("dynamic random_access_iterator_data_d::mutate_it() not available"); }
+
+};
+
 } // namespace

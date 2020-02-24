@@ -307,4 +307,124 @@ bool const range_of_a<element>::___share___ = []()
 	return shoal;
 }();
 
+template <typename element>
+class range_of_d : public any_a<>
+{
+public:
+	// arithmetic operator overloads
+	inline range_of_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline range_of_d operator++(int)
+	{
+		assert(handle_);
+		range_of_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline range_of_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline range_of_d operator--(int)
+	{
+		assert(handle_);
+		range_of_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline range_of_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline range_of_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline range_of_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline range_of_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline range_of_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> cbegin__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("cbegin_");
+		if (!op)
+		{
+			throw dis("dynamic range_of_d::cbegin_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline forward_const_iterator_a<> cbegin_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("cbegin_");
+		if (!op)
+		{
+			throw dis("dynamic range_of_d::cbegin_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline any_a<> cend__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("cend_");
+		if (!op)
+		{
+			throw dis("dynamic range_of_d::cend_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline forward_const_iterator_a<> cend_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("cend_");
+		if (!op)
+		{
+			throw dis("dynamic range_of_d::cend_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+};
+
 } // namespace

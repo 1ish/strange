@@ -307,4 +307,108 @@ bool const misunderstanding_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class misunderstanding_d : public any_a<>
+{
+public:
+	// arithmetic operator overloads
+	inline misunderstanding_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline misunderstanding_d operator++(int)
+	{
+		assert(handle_);
+		misunderstanding_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline misunderstanding_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline misunderstanding_d operator--(int)
+	{
+		assert(handle_);
+		misunderstanding_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline misunderstanding_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline misunderstanding_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline misunderstanding_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline misunderstanding_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline misunderstanding_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline std :: string to_string() const
+	{ throw dis("dynamic misunderstanding_d::to_string() not available"); }
+
+	inline any_a<> add__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("add_");
+		if (!op)
+		{
+			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("add_");
+		if (!op)
+		{
+			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), misunderstanding);
+	}
+
+	inline misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const
+	{ throw dis("dynamic misunderstanding_d::operator+(misunderstanding) not available"); }
+
+};
+
 } // namespace

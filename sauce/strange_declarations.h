@@ -335,6 +335,9 @@ inline expression_a<> expression_intimate_member_create(token_a<> const& token, 
 inline expression_a<> expression_intimate_member_range_create(token_a<> const& token, flock_a<> const& terms);
 inline expression_a<> expression_intimate_attribute_create(token_a<> const& token, flock_a<> const& terms);
 
+template <typename... Args>
+inline any_a<> variadic_operate(any_a<> const& op, any_a<>& thing, Args&&... args);
+
 // check/cast
 template <typename ___TTT___, typename ___VVV___>
 inline bool check(___VVV___ const&) noexcept;

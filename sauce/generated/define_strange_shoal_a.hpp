@@ -342,4 +342,139 @@ bool const shoal_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class shoal_d : public collection_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline shoal_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline shoal_d operator++(int)
+	{
+		assert(handle_);
+		shoal_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline shoal_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline shoal_d operator--(int)
+	{
+		assert(handle_);
+		shoal_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline shoal_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline shoal_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline shoal_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline shoal_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline shoal_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline bool has_string(std :: string const & s ) const
+	{ throw dis("dynamic shoal_d::has_string(s) not available"); }
+
+	inline any_a < > at_string(std :: string const & s ) const
+	{ throw dis("dynamic shoal_d::at_string(s) not available"); }
+
+	inline void update_string(std :: string const & s , any_a < > const & value )
+	{ throw dis("dynamic shoal_d::update_string(s, value) not available"); }
+
+	inline bool insert_string(std :: string const & s , any_a < > const & value )
+	{ throw dis("dynamic shoal_d::insert_string(s, value) not available"); }
+
+	inline bool erase_string(std :: string const & s )
+	{ throw dis("dynamic shoal_d::erase_string(s) not available"); }
+
+	inline any_a<> begin__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("begin_");
+		if (!op)
+		{
+			throw dis("dynamic shoal_d::begin_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline forward_iterator_a<> begin_()
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("begin_");
+		if (!op)
+		{
+			throw dis("dynamic shoal_d::begin_ passed non-existent member");
+		}
+		return variadic_operate(op, *this);
+	}
+
+	inline any_a<> end__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("end_");
+		if (!op)
+		{
+			throw dis("dynamic shoal_d::end_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline forward_iterator_a<> end_()
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("end_");
+		if (!op)
+		{
+			throw dis("dynamic shoal_d::end_ passed non-existent member");
+		}
+		return variadic_operate(op, *this);
+	}
+
+};
+
 } // namespace

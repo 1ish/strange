@@ -335,4 +335,152 @@ bool const forward_iterator_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class forward_iterator_d : public any_a<>
+{
+public:
+	// arithmetic operator overloads
+	inline forward_iterator_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline forward_iterator_d operator++(int)
+	{
+		assert(handle_);
+		forward_iterator_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline forward_iterator_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline forward_iterator_d operator--(int)
+	{
+		assert(handle_);
+		forward_iterator_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline forward_iterator_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline forward_iterator_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline forward_iterator_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline forward_iterator_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline forward_iterator_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline any_a<> get__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("get_");
+		if (!op)
+		{
+			throw dis("dynamic forward_iterator_d::get_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> get_() const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("get_");
+		if (!op)
+		{
+			throw dis("dynamic forward_iterator_d::get_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this));
+	}
+
+	inline any_a<> set__(range_a<> const& range) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("set_");
+		if (!op)
+		{
+			throw dis("dynamic forward_iterator_d::set_ passed non-existent member");
+		}
+		return op.operate(const_cast<any_a<>&>(*this), range);
+	}
+
+	inline any_a<> set_(any_a<> const& thing) const
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("set_");
+		if (!op)
+		{
+			throw dis("dynamic forward_iterator_d::set_ passed non-existent member");
+		}
+		return variadic_operate(op, const_cast<any_a<>&>(*this), thing);
+	}
+
+	inline any_a < > & operator*() const
+	{ throw dis("dynamic forward_iterator_d::operator*() not available"); }
+
+	inline any_a < > * operator->() const
+	{ throw dis("dynamic forward_iterator_d::operator->() not available"); }
+
+	inline any_a<> increment__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("increment_");
+		if (!op)
+		{
+			throw dis("dynamic forward_iterator_d::increment_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline forward_iterator_a<> increment_()
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("increment_");
+		if (!op)
+		{
+			throw dis("dynamic forward_iterator_d::increment_ passed non-existent member");
+		}
+		return variadic_operate(op, *this);
+	}
+
+};
+
 } // namespace

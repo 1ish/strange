@@ -342,4 +342,139 @@ bool const inventory_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class inventory_d : public collection_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline inventory_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline inventory_d operator++(int)
+	{
+		assert(handle_);
+		inventory_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline inventory_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline inventory_d operator--(int)
+	{
+		assert(handle_);
+		inventory_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline inventory_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline inventory_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline inventory_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline inventory_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline inventory_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline bool has_index(int64_t index ) const
+	{ throw dis("dynamic inventory_d::has_index(index) not available"); }
+
+	inline any_a < > at_index(int64_t index ) const
+	{ throw dis("dynamic inventory_d::at_index(index) not available"); }
+
+	inline void update_index(int64_t index , any_a < > const & value )
+	{ throw dis("dynamic inventory_d::update_index(index, value) not available"); }
+
+	inline bool insert_index(int64_t index , any_a < > const & value )
+	{ throw dis("dynamic inventory_d::insert_index(index, value) not available"); }
+
+	inline bool erase_index(int64_t index )
+	{ throw dis("dynamic inventory_d::erase_index(index) not available"); }
+
+	inline any_a<> begin__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("begin_");
+		if (!op)
+		{
+			throw dis("dynamic inventory_d::begin_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline random_access_iterator_a<> begin_()
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("begin_");
+		if (!op)
+		{
+			throw dis("dynamic inventory_d::begin_ passed non-existent member");
+		}
+		return variadic_operate(op, *this);
+	}
+
+	inline any_a<> end__(range_a<> const& range)
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("end_");
+		if (!op)
+		{
+			throw dis("dynamic inventory_d::end_ passed non-existent member");
+		}
+		return op.operate(*this, range);
+	}
+
+	inline random_access_iterator_a<> end_()
+	{
+		assert(handle_);
+		auto const op = read().operations_().at_string("end_");
+		if (!op)
+		{
+			throw dis("dynamic inventory_d::end_ passed non-existent member");
+		}
+		return variadic_operate(op, *this);
+	}
+
+};
+
 } // namespace

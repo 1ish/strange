@@ -293,4 +293,86 @@ bool const unordered_herd_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class unordered_herd_d : public herd_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline unordered_herd_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline unordered_herd_d operator++(int)
+	{
+		assert(handle_);
+		unordered_herd_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline unordered_herd_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline unordered_herd_d operator--(int)
+	{
+		assert(handle_);
+		unordered_herd_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline unordered_herd_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline unordered_herd_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline unordered_herd_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline unordered_herd_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline unordered_herd_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set() const
+	{ throw dis("dynamic unordered_herd_d::extract_set() not available"); }
+
+	inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set()
+	{ throw dis("dynamic unordered_herd_d::mutate_set() not available"); }
+
+};
+
 } // namespace

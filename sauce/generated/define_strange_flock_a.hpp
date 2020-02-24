@@ -293,4 +293,86 @@ bool const flock_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_ = void>
+class flock_d : public inventory_d<>
+{
+public:
+	// arithmetic operator overloads
+	inline flock_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline flock_d operator++(int)
+	{
+		assert(handle_);
+		flock_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline flock_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline flock_d operator--(int)
+	{
+		assert(handle_);
+		flock_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline flock_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline flock_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline flock_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline flock_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline flock_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline std :: vector < any_a < > > const & extract_vector() const
+	{ throw dis("dynamic flock_d::extract_vector() not available"); }
+
+	inline std :: vector < any_a < > > & mutate_vector()
+	{ throw dis("dynamic flock_d::mutate_vector() not available"); }
+
+};
+
 } // namespace

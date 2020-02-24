@@ -293,4 +293,86 @@ bool const data_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
+template <typename _1_>
+class data_d : public any_a<>
+{
+public:
+	// arithmetic operator overloads
+	inline data_d& operator++()
+	{
+		assert(handle_);
+		write().operator++();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline data_d operator++(int)
+	{
+		assert(handle_);
+		data_d result = *this;
+		write().operator++();
+		return result;
+	}
+#endif
+
+	inline data_d& operator--()
+	{
+		assert(handle_);
+		write().operator--();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline data_d operator--(int)
+	{
+		assert(handle_);
+		data_d result = *this;
+		write().operator--();
+		return result;
+	}
+#endif
+
+	inline data_d& operator+=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator+=(other);
+		return *this;
+	}
+
+	inline data_d& operator-=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator-=(other);
+		return *this;
+	}
+
+	inline data_d& operator*=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator*=(other);
+		return *this;
+	}
+
+	inline data_d& operator/=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator/=(other);
+		return *this;
+	}
+
+	inline data_d& operator%=(any_a<> const& other)
+	{
+		assert(handle_);
+		write().operator%=(other);
+		return *this;
+	}
+
+	inline _1_ const & extract_data() const
+	{ throw dis("dynamic data_d::extract_data() not available"); }
+
+	inline _1_ & mutate_data()
+	{ throw dis("dynamic data_d::mutate_data() not available"); }
+
+};
+
 } // namespace
