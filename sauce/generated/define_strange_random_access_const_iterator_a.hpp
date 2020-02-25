@@ -703,6 +703,9 @@ public:
 	inline bool operator>=(random_access_const_iterator_a < > const & it ) const
 	{ throw dis("dynamic random_access_const_iterator_d::operator>=(it) not available"); }
 
+	explicit random_access_const_iterator_d(any_a<> const& thing)
+		: bidirectional_const_iterator_d{ thing }
+	{}
 };
 
 } // namespace

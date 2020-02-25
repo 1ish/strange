@@ -375,6 +375,9 @@ public:
 	inline _1_ & mutate_it()
 	{ throw dis("dynamic random_access_const_iterator_data_d::mutate_it() not available"); }
 
+	explicit random_access_const_iterator_data_d(any_a<> const& thing)
+		: random_access_const_iterator_d{ thing }
+	{}
 };
 
 } // namespace

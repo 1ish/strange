@@ -391,6 +391,9 @@ public:
 		return variadic_operate(op, *this);
 	}
 
+	explicit bidirectional_iterator_d(any_a<> const& thing)
+		: forward_iterator_d{ thing }
+	{}
 };
 
 } // namespace

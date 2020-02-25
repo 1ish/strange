@@ -637,6 +637,9 @@ public:
 	inline std :: string code() const
 	{ throw dis("dynamic cat_d::code() not available"); }
 
+	explicit cat_d(any_a<> const& thing)
+		: symbol_d{ thing }
+	{}
 };
 
 } // namespace

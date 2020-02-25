@@ -447,6 +447,9 @@ public:
 		return variadic_operate(op, *this);
 	}
 
+	explicit forward_const_iterator_d(any_a<> const& thing)
+		: any_a{ thing }
+	{}
 };
 
 } // namespace

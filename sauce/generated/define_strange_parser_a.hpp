@@ -391,6 +391,9 @@ public:
 		return variadic_operate(op, *this, tokenizer);
 	}
 
+	explicit parser_d(any_a<> const& thing)
+		: any_a{ thing }
+	{}
 };
 
 } // namespace

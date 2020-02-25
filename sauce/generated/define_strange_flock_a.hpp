@@ -375,6 +375,9 @@ public:
 	inline std :: vector < any_a < > > & mutate_vector()
 	{ throw dis("dynamic flock_d::mutate_vector() not available"); }
 
+	explicit flock_d(any_a<> const& thing)
+		: inventory_d{ thing }
+	{}
 };
 
 } // namespace

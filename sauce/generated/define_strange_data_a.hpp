@@ -375,6 +375,9 @@ public:
 	inline _1_ & mutate_data()
 	{ throw dis("dynamic data_d::mutate_data() not available"); }
 
+	explicit data_d(any_a<> const& thing)
+		: any_a{ thing }
+	{}
 };
 
 } // namespace

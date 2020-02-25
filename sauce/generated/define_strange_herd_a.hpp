@@ -425,6 +425,9 @@ public:
 	inline bool erase_string(std :: string const & s )
 	{ throw dis("dynamic herd_d::erase_string(s) not available"); }
 
+	explicit herd_d(any_a<> const& thing)
+		: collection_d{ thing }
+	{}
 };
 
 } // namespace

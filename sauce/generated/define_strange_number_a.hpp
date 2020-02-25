@@ -1701,6 +1701,9 @@ public:
 	inline bool little_endian() const
 	{ throw dis("dynamic number_d::little_endian() not available"); }
 
+	explicit number_d(any_a<> const& thing)
+		: any_a{ thing }
+	{}
 };
 
 } // namespace

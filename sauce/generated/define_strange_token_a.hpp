@@ -713,6 +713,9 @@ public:
 	inline std :: string report() const
 	{ throw dis("dynamic token_d::report() not available"); }
 
+	explicit token_d(any_a<> const& thing)
+		: any_a{ thing }
+	{}
 };
 
 } // namespace

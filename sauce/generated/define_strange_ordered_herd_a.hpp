@@ -375,6 +375,9 @@ public:
 	inline std :: set < any_a < > > & mutate_set()
 	{ throw dis("dynamic ordered_herd_d::mutate_set() not available"); }
 
+	explicit ordered_herd_d(any_a<> const& thing)
+		: herd_d{ thing }
+	{}
 };
 
 } // namespace

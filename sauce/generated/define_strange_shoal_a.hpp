@@ -477,6 +477,9 @@ public:
 		return variadic_operate(op, *this);
 	}
 
+	explicit shoal_d(any_a<> const& thing)
+		: collection_d{ thing }
+	{}
 };
 
 } // namespace

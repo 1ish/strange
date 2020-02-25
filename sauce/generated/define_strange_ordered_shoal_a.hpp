@@ -375,6 +375,9 @@ public:
 	inline std :: map < any_a < > , any_a < > > & mutate_map()
 	{ throw dis("dynamic ordered_shoal_d::mutate_map() not available"); }
 
+	explicit ordered_shoal_d(any_a<> const& thing)
+		: shoal_d{ thing }
+	{}
 };
 
 } // namespace

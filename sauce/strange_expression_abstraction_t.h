@@ -458,6 +458,9 @@ protected:
 		auto const class_expression_terms = _class_expression_terms_();
 		_define_class_dynamic_members_(false, class_name, class_expression_terms, version, 0, river);
 		river.write_string(
+			"\texplicit " + class_name + "(any_a<> const& thing)\n"
+			"\t\t: " + base_name + "{ thing }\n"
+			"\t{}\n"
 			"};\n\n");
 	}
 
@@ -1227,7 +1230,23 @@ protected:
 				"\t{\n"
 				"\t\treturn &handle_ != &___shared___;\n"
 				"\t}\n\n");
+/*
+			river.write_string(
+				"\tstatic inline any_a<> cast(any_a<> const& thing)\n"
+				"\t{\n"
+				"\t\treturn thing;\n
+				"\t}\n\n");
 		}
+		else
+		{
+			river.write_string(
+				"\tstatic inline " + class_name + " cast(any_a<> const& thing)\n"
+				"\t{\n"
+				"\t\tif (thing.handle_ && !std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.handle))\n"
+				"\t\t{\n"
+			);
+			//TODO
+*/		}
 
 		river.write_string(
 			"\tstatic inline " + class_name + " val(" + class_name + " const& other) noexcept\n"

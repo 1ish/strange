@@ -1149,6 +1149,9 @@ public:
 		return variadic_operate(op, const_cast<any_a<>&>(*this));
 	}
 
+	explicit collection_d(any_a<> const& thing)
+		: range_d{ thing }
+	{}
 };
 
 } // namespace

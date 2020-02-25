@@ -427,6 +427,9 @@ public:
 		return variadic_operate(op, const_cast<any_a<>&>(*this));
 	}
 
+	explicit range_of_d(any_a<> const& thing)
+		: any_a{ thing }
+	{}
 };
 
 } // namespace

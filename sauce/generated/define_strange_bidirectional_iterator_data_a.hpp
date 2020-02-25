@@ -375,6 +375,9 @@ public:
 	inline _1_ & mutate_it()
 	{ throw dis("dynamic bidirectional_iterator_data_d::mutate_it() not available"); }
 
+	explicit bidirectional_iterator_data_d(any_a<> const& thing)
+		: bidirectional_iterator_d{ thing }
+	{}
 };
 
 } // namespace

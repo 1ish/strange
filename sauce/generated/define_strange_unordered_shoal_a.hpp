@@ -375,6 +375,9 @@ public:
 	inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_map()
 	{ throw dis("dynamic unordered_shoal_d::mutate_map() not available"); }
 
+	explicit unordered_shoal_d(any_a<> const& thing)
+		: shoal_d{ thing }
+	{}
 };
 
 } // namespace

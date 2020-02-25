@@ -375,6 +375,9 @@ public:
 	inline std :: deque < any_a < > > & mutate_deque()
 	{ throw dis("dynamic squad_d::mutate_deque() not available"); }
 
+	explicit squad_d(any_a<> const& thing)
+		: inventory_d{ thing }
+	{}
 };
 
 } // namespace

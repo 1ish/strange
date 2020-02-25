@@ -467,6 +467,9 @@ public:
 	inline symbol_a < > operator+(symbol_a < > const & symbol ) const
 	{ throw dis("dynamic symbol_d::operator+(symbol) not available"); }
 
+	explicit symbol_d(any_a<> const& thing)
+		: any_a{ thing }
+	{}
 };
 
 } // namespace

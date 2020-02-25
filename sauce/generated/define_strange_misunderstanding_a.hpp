@@ -411,6 +411,9 @@ public:
 	inline misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const
 	{ throw dis("dynamic misunderstanding_d::operator+(misunderstanding) not available"); }
 
+	explicit misunderstanding_d(any_a<> const& thing)
+		: any_a{ thing }
+	{}
 };
 
 } // namespace

@@ -1673,6 +1673,9 @@ public:
 	inline std :: string filename() const
 	{ throw dis("dynamic river_d::filename() not available"); }
 
+	explicit river_d(any_a<> const& thing)
+		: range_d{ thing }
+	{}
 };
 
 } // namespace

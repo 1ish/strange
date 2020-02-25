@@ -375,6 +375,9 @@ public:
 	inline std :: deque < _1_ > & mutate_deque()
 	{ throw dis("dynamic brook_d::mutate_deque() not available"); }
 
+	explicit brook_d(any_a<> const& thing)
+		: inventory_d{ thing }
+	{}
 };
 
 } // namespace

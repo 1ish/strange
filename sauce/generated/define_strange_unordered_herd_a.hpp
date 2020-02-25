@@ -375,6 +375,9 @@ public:
 	inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set()
 	{ throw dis("dynamic unordered_herd_d::mutate_set() not available"); }
 
+	explicit unordered_herd_d(any_a<> const& thing)
+		: herd_d{ thing }
+	{}
 };
 
 } // namespace

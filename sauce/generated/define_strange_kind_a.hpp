@@ -529,6 +529,9 @@ public:
 	inline bool optional() const
 	{ throw dis("dynamic kind_d::optional() not available"); }
 
+	explicit kind_d(any_a<> const& thing)
+		: cat_d{ thing }
+	{}
 };
 
 } // namespace
