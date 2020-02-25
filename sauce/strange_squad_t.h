@@ -754,6 +754,18 @@ public:
 		return create(variadic_u<>::deque(std::forward<Args>(args)...));
 	}
 
+	template <typename... Args>
+	static inline squad_a<> create_ref_(Args&&... args)
+	{
+		return create(variadic_u<>::deque_ref(std::forward<Args>(args)...));
+	}
+
+	template <typename... Args>
+	static inline squad_a<> create_dup_(Args&&... args)
+	{
+		return create(variadic_u<>::deque_dup(std::forward<Args>(args)...));
+	}
+
 	template <typename F>
 	static inline squad_a<> create(F&& init)
 	{

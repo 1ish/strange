@@ -755,6 +755,18 @@ public:
 		return create(variadic_u<>::vector(std::forward<Args>(args)...));
 	}
 
+	template <typename... Args>
+	static inline flock_a<> create_ref_(Args&&... args)
+	{
+		return create(variadic_u<>::vector_ref(std::forward<Args>(args)...));
+	}
+
+	template <typename... Args>
+	static inline flock_a<> create_dup_(Args&&... args)
+	{
+		return create(variadic_u<>::vector_dup(std::forward<Args>(args)...));
+	}
+
 	template <typename F>
 	static inline flock_a<> create(F&& init)
 	{

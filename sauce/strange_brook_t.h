@@ -776,6 +776,18 @@ public:
 		return create(variadic_u<_primitive_>::deque(std::forward<Args>(args)...));
 	}
 
+	template <typename... Args>
+	static inline brook_a<_primitive_> create_ref_(Args&&... args)
+	{
+		return create(variadic_u<_primitive_>::deque_ref(std::forward<Args>(args)...));
+	}
+
+	template <typename... Args>
+	static inline brook_a<_primitive_> create_dup_(Args&&... args)
+	{
+		return create(variadic_u<_primitive_>::deque_dup(std::forward<Args>(args)...));
+	}
+
 	template <typename F>
 	static inline brook_a<_primitive_> create(F&& init)
 	{

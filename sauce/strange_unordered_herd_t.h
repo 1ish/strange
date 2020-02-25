@@ -142,6 +142,18 @@ public:
 		return create(variadic_u<any_a<>, any_a<>::hash_f>::unordered_set(std::forward<Args>(args)...));
 	}
 
+	template <typename... Args>
+	static inline unordered_herd_a<> create_ref_(Args&&... args)
+	{
+		return create(variadic_u<any_a<>, any_a<>::hash_f>::unordered_set_ref(std::forward<Args>(args)...));
+	}
+
+	template <typename... Args>
+	static inline unordered_herd_a<> create_dup_(Args&&... args)
+	{
+		return create(variadic_u<any_a<>, any_a<>::hash_f>::unordered_set_dup(std::forward<Args>(args)...));
+	}
+
 	template <typename F>
 	static inline unordered_herd_a<> create(F&& init)
 	{

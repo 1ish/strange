@@ -776,6 +776,18 @@ public:
 		return create(variadic_u<_primitive_>::vector(std::forward<Args>(args)...));
 	}
 
+	template <typename... Args>
+	static inline lake_a<_primitive_> create_ref_(Args&&... args)
+	{
+		return create(variadic_u<_primitive_>::vector_ref(std::forward<Args>(args)...));
+	}
+
+	template <typename... Args>
+	static inline lake_a<_primitive_> create_dup_(Args&&... args)
+	{
+		return create(variadic_u<_primitive_>::vector_dup(std::forward<Args>(args)...));
+	}
+
 	template <typename F>
 	static inline lake_a<_primitive_> create(F&& init)
 	{

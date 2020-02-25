@@ -168,6 +168,18 @@ public:
 		return create(variadic_u<>::set(std::forward<Args>(args)...));
 	}
 
+	template <typename... Args>
+	static inline ordered_herd_a<> create_ref_(Args&&... args)
+	{
+		return create(variadic_u<>::set_ref(std::forward<Args>(args)...));
+	}
+
+	template <typename... Args>
+	static inline ordered_herd_a<> create_dup_(Args&&... args)
+	{
+		return create(variadic_u<>::set_dup(std::forward<Args>(args)...));
+	}
+
 	template <typename F>
 	static inline ordered_herd_a<> create(F&& init)
 	{
