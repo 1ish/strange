@@ -14,14 +14,14 @@ public:
 	template <typename... Args>
 	static inline void variadic(std::vector<_1_>& collection, std::string const& s, Args&&... args)
 	{
-		collection.push_back(sym(s));
+		collection.emplace_back(sym(s));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::vector<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.push_back(thing);
+		collection.emplace_back(thing);
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
@@ -39,14 +39,14 @@ public:
 	template <typename... Args>
 	static inline void variadic(std::deque<_1_>& collection, std::string const& s, Args&&... args)
 	{
-		collection.push_back(sym(s));
+		collection.emplace_back(sym(s));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::deque<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.push_back(thing);
+		collection.emplace_back(thing);
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
@@ -64,28 +64,28 @@ public:
 	template <typename... Args>
 	static inline void variadic(std::set<_1_>& collection, int64_t i, Args&&... args)
 	{
-		collection.insert(num(i));
+		collection.emplace(num(i));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::set<_1_>& collection, double f, Args&&... args)
 	{
-		collection.insert(num(f));
+		collection.emplace(num(f));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::set<_1_>& collection, std::string const& s, Args&&... args)
 	{
-		collection.insert(sym(s));
+		collection.emplace(sym(s));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::set<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.insert(thing);
+		collection.emplace(thing);
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
@@ -103,28 +103,28 @@ public:
 	template <typename... Args>
 	static inline void variadic(std::unordered_set<_1_, _2_>& collection, int64_t i, Args&&... args)
 	{
-		collection.insert(num(i));
+		collection.emplace(num(i));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::unordered_set<_1_, _2_>& collection, double f, Args&&... args)
 	{
-		collection.insert(num(f));
+		collection.emplace(num(f));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::unordered_set<_1_, _2_>& collection, std::string const& s, Args&&... args)
 	{
-		collection.insert(sym(s));
+		collection.emplace(sym(s));
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
 	template <typename... Args>
 	static inline void variadic(std::unordered_set<_1_, _2_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.insert(thing);
+		collection.emplace(thing);
 		variadic(collection, std::forward<Args>(args)...);
 	}
 
