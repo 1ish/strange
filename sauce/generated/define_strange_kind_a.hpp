@@ -435,7 +435,7 @@ public:
 	inline any_a<> aspects__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("aspects_");
+		auto const op = operation("aspects_");
 		if (!op)
 		{
 			throw dis("dynamic kind_d::aspects_ passed non-existent member");
@@ -446,7 +446,7 @@ public:
 	inline flock_a<> aspects_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("aspects_");
+		auto const op = operation("aspects_");
 		if (!op)
 		{
 			throw dis("dynamic kind_d::aspects_ passed non-existent member");
@@ -457,7 +457,7 @@ public:
 	inline any_a<> fixed__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("fixed_");
+		auto const op = operation("fixed_");
 		if (!op)
 		{
 			throw dis("dynamic kind_d::fixed_ passed non-existent member");
@@ -468,7 +468,7 @@ public:
 	inline any_a<> fixed_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("fixed_");
+		auto const op = operation("fixed_");
 		if (!op)
 		{
 			throw dis("dynamic kind_d::fixed_ passed non-existent member");
@@ -482,7 +482,7 @@ public:
 	inline any_a<> reference__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("reference_");
+		auto const op = operation("reference_");
 		if (!op)
 		{
 			throw dis("dynamic kind_d::reference_ passed non-existent member");
@@ -493,7 +493,7 @@ public:
 	inline any_a<> reference_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("reference_");
+		auto const op = operation("reference_");
 		if (!op)
 		{
 			throw dis("dynamic kind_d::reference_ passed non-existent member");
@@ -507,7 +507,7 @@ public:
 	inline any_a<> optional__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("optional_");
+		auto const op = operation("optional_");
 		if (!op)
 		{
 			throw dis("dynamic kind_d::optional_ passed non-existent member");
@@ -518,7 +518,7 @@ public:
 	inline any_a<> optional_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("optional_");
+		auto const op = operation("optional_");
 		if (!op)
 		{
 			throw dis("dynamic kind_d::optional_ passed non-existent member");

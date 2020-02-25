@@ -735,7 +735,7 @@ protected:
 			(root ? "" : "<>") + " const& range)" + constness + "\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
-			"\t\tauto const op = read().operations_().at_string(\"" + name + "\");\n"
+			"\t\tauto const op = operation(\"" + name + "\");\n"
 			"\t\tif (!op)\n"
 			"\t\t{\n"
 			"\t\t\tthrow dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
@@ -761,7 +761,7 @@ protected:
 		river.write_string(" " + name + parameters + constness + "\n"
 			"\t{\n"
 			"\t\tassert(handle_);\n"
-			"\t\tauto const op = read().operations_().at_string(\"" + name + "\");\n"
+			"\t\tauto const op = operation(\"" + name + "\");\n"
 			"\t\tif (!op)\n"
 			"\t\t{\n"
 			"\t\t\tthrow dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
@@ -1170,6 +1170,15 @@ protected:
 				? std::string{ "\t\treturn *handle_;\n" }
 				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___>(handle_);\n")) +
 			"\t}\n\n");
+
+		if (root)
+		{
+			river.write_string(
+				"\tinline any_a<> operation(std::string const& name) const\n"
+				"\t{\n"
+				"\t\treturn read().operations_().at_string(name);\n"
+				"\t}\n\n");
+		}
 
 		river.write_string(
 			"private:\n");

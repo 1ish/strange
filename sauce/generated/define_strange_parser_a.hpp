@@ -372,7 +372,7 @@ public:
 	inline any_a<> parse__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("parse_");
+		auto const op = operation("parse_");
 		if (!op)
 		{
 			throw dis("dynamic parser_d::parse_ passed non-existent member");
@@ -383,7 +383,7 @@ public:
 	inline expression_a<> parse_(range_a<> const& tokenizer)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("parse_");
+		auto const op = operation("parse_");
 		if (!op)
 		{
 			throw dis("dynamic parser_d::parse_ passed non-existent member");

@@ -372,7 +372,7 @@ public:
 	inline any_a<> decrement__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("decrement_");
+		auto const op = operation("decrement_");
 		if (!op)
 		{
 			throw dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
@@ -383,7 +383,7 @@ public:
 	inline bidirectional_const_iterator_a<> decrement_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("decrement_");
+		auto const op = operation("decrement_");
 		if (!op)
 		{
 			throw dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");

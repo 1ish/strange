@@ -414,7 +414,7 @@ public:
 	inline any_a<> to_lake__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("to_lake_");
+		auto const op = operation("to_lake_");
 		if (!op)
 		{
 			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
@@ -425,7 +425,7 @@ public:
 	inline lake_int8_a<> to_lake_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("to_lake_");
+		auto const op = operation("to_lake_");
 		if (!op)
 		{
 			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
@@ -445,7 +445,7 @@ public:
 	inline any_a<> add__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("add_");
+		auto const op = operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic symbol_d::add_ passed non-existent member");
@@ -456,7 +456,7 @@ public:
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("add_");
+		auto const op = operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic symbol_d::add_ passed non-existent member");

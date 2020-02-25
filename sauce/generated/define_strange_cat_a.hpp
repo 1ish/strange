@@ -477,7 +477,7 @@ public:
 	inline any_a<> symbolic__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("symbolic_");
+		auto const op = operation("symbolic_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::symbolic_ passed non-existent member");
@@ -488,7 +488,7 @@ public:
 	inline any_a<> symbolic_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("symbolic_");
+		auto const op = operation("symbolic_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::symbolic_ passed non-existent member");
@@ -502,7 +502,7 @@ public:
 	inline any_a<> order__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("order_");
+		auto const op = operation("order_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::order_ passed non-existent member");
@@ -513,7 +513,7 @@ public:
 	inline number_data_int64_a<> order_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("order_");
+		auto const op = operation("order_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::order_ passed non-existent member");
@@ -527,7 +527,7 @@ public:
 	inline any_a<> name__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("name_");
+		auto const op = operation("name_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::name_ passed non-existent member");
@@ -538,7 +538,7 @@ public:
 	inline symbol_a<> name_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("name_");
+		auto const op = operation("name_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::name_ passed non-existent member");
@@ -549,7 +549,7 @@ public:
 	inline any_a<> dimensions__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("dimensions_");
+		auto const op = operation("dimensions_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::dimensions_ passed non-existent member");
@@ -560,7 +560,7 @@ public:
 	inline flock_a<> dimensions_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("dimensions_");
+		auto const op = operation("dimensions_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::dimensions_ passed non-existent member");
@@ -571,7 +571,7 @@ public:
 	inline any_a<> parameters__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("parameters_");
+		auto const op = operation("parameters_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::parameters_ passed non-existent member");
@@ -582,7 +582,7 @@ public:
 	inline flock_a<> parameters_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("parameters_");
+		auto const op = operation("parameters_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::parameters_ passed non-existent member");
@@ -593,7 +593,7 @@ public:
 	inline any_a<> result__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("result_");
+		auto const op = operation("result_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::result_ passed non-existent member");
@@ -604,7 +604,7 @@ public:
 	inline cat_a<> result_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("result_");
+		auto const op = operation("result_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::result_ passed non-existent member");
@@ -615,7 +615,7 @@ public:
 	inline any_a<> code__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("code_");
+		auto const op = operation("code_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::code_ passed non-existent member");
@@ -626,7 +626,7 @@ public:
 	inline lake_int8_a<> code_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("code_");
+		auto const op = operation("code_");
 		if (!op)
 		{
 			throw dis("dynamic cat_d::code_ passed non-existent member");

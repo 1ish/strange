@@ -436,7 +436,7 @@ public:
 	inline any_a<> begin__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("begin_");
+		auto const op = operation("begin_");
 		if (!op)
 		{
 			throw dis("dynamic shoal_d::begin_ passed non-existent member");
@@ -447,7 +447,7 @@ public:
 	inline forward_iterator_a<> begin_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("begin_");
+		auto const op = operation("begin_");
 		if (!op)
 		{
 			throw dis("dynamic shoal_d::begin_ passed non-existent member");
@@ -458,7 +458,7 @@ public:
 	inline any_a<> end__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("end_");
+		auto const op = operation("end_");
 		if (!op)
 		{
 			throw dis("dynamic shoal_d::end_ passed non-existent member");
@@ -469,7 +469,7 @@ public:
 	inline forward_iterator_a<> end_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("end_");
+		auto const op = operation("end_");
 		if (!op)
 		{
 			throw dis("dynamic shoal_d::end_ passed non-existent member");

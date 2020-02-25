@@ -414,7 +414,7 @@ public:
 	inline any_a<> get__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("get_");
+		auto const op = operation("get_");
 		if (!op)
 		{
 			throw dis("dynamic forward_iterator_d::get_ passed non-existent member");
@@ -425,7 +425,7 @@ public:
 	inline any_a<> get_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("get_");
+		auto const op = operation("get_");
 		if (!op)
 		{
 			throw dis("dynamic forward_iterator_d::get_ passed non-existent member");
@@ -436,7 +436,7 @@ public:
 	inline any_a<> set__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("set_");
+		auto const op = operation("set_");
 		if (!op)
 		{
 			throw dis("dynamic forward_iterator_d::set_ passed non-existent member");
@@ -447,7 +447,7 @@ public:
 	inline any_a<> set_(any_a<> const& thing) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("set_");
+		auto const op = operation("set_");
 		if (!op)
 		{
 			throw dis("dynamic forward_iterator_d::set_ passed non-existent member");
@@ -464,7 +464,7 @@ public:
 	inline any_a<> increment__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("increment_");
+		auto const op = operation("increment_");
 		if (!op)
 		{
 			throw dis("dynamic forward_iterator_d::increment_ passed non-existent member");
@@ -475,7 +475,7 @@ public:
 	inline forward_iterator_a<> increment_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("increment_");
+		auto const op = operation("increment_");
 		if (!op)
 		{
 			throw dis("dynamic forward_iterator_d::increment_ passed non-existent member");

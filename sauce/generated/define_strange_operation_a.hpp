@@ -407,7 +407,7 @@ public:
 	inline any_a<> pure__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("pure_");
+		auto const op = operation("pure_");
 		if (!op)
 		{
 			throw dis("dynamic operation_d::pure_ passed non-existent member");
@@ -418,7 +418,7 @@ public:
 	inline any_a<> pure_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("pure_");
+		auto const op = operation("pure_");
 		if (!op)
 		{
 			throw dis("dynamic operation_d::pure_ passed non-existent member");
@@ -438,7 +438,7 @@ public:
 	inline any_a<> names__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("names_");
+		auto const op = operation("names_");
 		if (!op)
 		{
 			throw dis("dynamic operation_d::names_ passed non-existent member");
@@ -449,7 +449,7 @@ public:
 	inline flock_a<> names_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("names_");
+		auto const op = operation("names_");
 		if (!op)
 		{
 			throw dis("dynamic operation_d::names_ passed non-existent member");

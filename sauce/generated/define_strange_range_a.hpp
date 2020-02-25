@@ -386,7 +386,7 @@ public:
 	inline any_a<> cbegin__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("cbegin_");
+		auto const op = operation("cbegin_");
 		if (!op)
 		{
 			throw dis("dynamic range_d::cbegin_ passed non-existent member");
@@ -397,7 +397,7 @@ public:
 	inline forward_const_iterator_a<> cbegin_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("cbegin_");
+		auto const op = operation("cbegin_");
 		if (!op)
 		{
 			throw dis("dynamic range_d::cbegin_ passed non-existent member");
@@ -408,7 +408,7 @@ public:
 	inline any_a<> cend__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("cend_");
+		auto const op = operation("cend_");
 		if (!op)
 		{
 			throw dis("dynamic range_d::cend_ passed non-existent member");
@@ -419,7 +419,7 @@ public:
 	inline forward_const_iterator_a<> cend_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("cend_");
+		auto const op = operation("cend_");
 		if (!op)
 		{
 			throw dis("dynamic range_d::cend_ passed non-existent member");

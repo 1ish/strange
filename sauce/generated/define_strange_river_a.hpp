@@ -970,7 +970,7 @@ public:
 	inline any_a<> get__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("get_");
+		auto const op = operation("get_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::get_ passed non-existent member");
@@ -981,7 +981,7 @@ public:
 	inline number_data_int8_a<> get_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("get_");
+		auto const op = operation("get_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::get_ passed non-existent member");
@@ -995,7 +995,7 @@ public:
 	inline any_a<> peek__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("peek_");
+		auto const op = operation("peek_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::peek_ passed non-existent member");
@@ -1006,7 +1006,7 @@ public:
 	inline number_data_int8_a<> peek_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("peek_");
+		auto const op = operation("peek_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::peek_ passed non-existent member");
@@ -1020,7 +1020,7 @@ public:
 	inline any_a<> unget__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("unget_");
+		auto const op = operation("unget_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::unget_ passed non-existent member");
@@ -1031,7 +1031,7 @@ public:
 	inline any_a<> unget_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("unget_");
+		auto const op = operation("unget_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::unget_ passed non-existent member");
@@ -1045,7 +1045,7 @@ public:
 	inline any_a<> putback__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("putback_");
+		auto const op = operation("putback_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::putback_ passed non-existent member");
@@ -1056,7 +1056,7 @@ public:
 	inline any_a<> putback_(number_data_int8_a<> const& int_8)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("putback_");
+		auto const op = operation("putback_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::putback_ passed non-existent member");
@@ -1070,7 +1070,7 @@ public:
 	inline any_a<> getline__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("getline_");
+		auto const op = operation("getline_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::getline_ passed non-existent member");
@@ -1081,7 +1081,7 @@ public:
 	inline lake_int8_a<> getline_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("getline_");
+		auto const op = operation("getline_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::getline_ passed non-existent member");
@@ -1095,7 +1095,7 @@ public:
 	inline any_a<> ignore__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("ignore_");
+		auto const op = operation("ignore_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::ignore_ passed non-existent member");
@@ -1106,7 +1106,7 @@ public:
 	inline any_a<> ignore_(number_data_int64_a<> const& count)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("ignore_");
+		auto const op = operation("ignore_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::ignore_ passed non-existent member");
@@ -1120,7 +1120,7 @@ public:
 	inline any_a<> read__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("read_");
+		auto const op = operation("read_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::read_ passed non-existent member");
@@ -1131,7 +1131,7 @@ public:
 	inline lake_int8_a<> read_(number_data_int64_a<> const& count)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("read_");
+		auto const op = operation("read_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::read_ passed non-existent member");
@@ -1148,7 +1148,7 @@ public:
 	inline any_a<> tellg__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("tellg_");
+		auto const op = operation("tellg_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::tellg_ passed non-existent member");
@@ -1159,7 +1159,7 @@ public:
 	inline number_data_int64_a<> tellg_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("tellg_");
+		auto const op = operation("tellg_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::tellg_ passed non-existent member");
@@ -1173,7 +1173,7 @@ public:
 	inline any_a<> seekg_beg__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekg_beg_");
+		auto const op = operation("seekg_beg_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekg_beg_ passed non-existent member");
@@ -1184,7 +1184,7 @@ public:
 	inline any_a<> seekg_beg_(number_data_int64_a<> const& offset)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekg_beg_");
+		auto const op = operation("seekg_beg_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekg_beg_ passed non-existent member");
@@ -1198,7 +1198,7 @@ public:
 	inline any_a<> seekg_end__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekg_end_");
+		auto const op = operation("seekg_end_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekg_end_ passed non-existent member");
@@ -1209,7 +1209,7 @@ public:
 	inline any_a<> seekg_end_(number_data_int64_a<> const& offset)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekg_end_");
+		auto const op = operation("seekg_end_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekg_end_ passed non-existent member");
@@ -1223,7 +1223,7 @@ public:
 	inline any_a<> seekg_cur__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekg_cur_");
+		auto const op = operation("seekg_cur_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekg_cur_ passed non-existent member");
@@ -1234,7 +1234,7 @@ public:
 	inline any_a<> seekg_cur_(number_data_int64_a<> const& offset)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekg_cur_");
+		auto const op = operation("seekg_cur_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekg_cur_ passed non-existent member");
@@ -1248,7 +1248,7 @@ public:
 	inline any_a<> sync__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("sync_");
+		auto const op = operation("sync_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::sync_ passed non-existent member");
@@ -1259,7 +1259,7 @@ public:
 	inline any_a<> sync_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("sync_");
+		auto const op = operation("sync_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::sync_ passed non-existent member");
@@ -1273,7 +1273,7 @@ public:
 	inline any_a<> put__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("put_");
+		auto const op = operation("put_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::put_ passed non-existent member");
@@ -1284,7 +1284,7 @@ public:
 	inline any_a<> put_(number_data_int8_a<> const& int_8)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("put_");
+		auto const op = operation("put_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::put_ passed non-existent member");
@@ -1298,7 +1298,7 @@ public:
 	inline any_a<> write__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("write_");
+		auto const op = operation("write_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::write_ passed non-existent member");
@@ -1309,7 +1309,7 @@ public:
 	inline any_a<> write_(lake_int8_a<> const& lake)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("write_");
+		auto const op = operation("write_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::write_ passed non-existent member");
@@ -1326,7 +1326,7 @@ public:
 	inline any_a<> tellp__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("tellp_");
+		auto const op = operation("tellp_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::tellp_ passed non-existent member");
@@ -1337,7 +1337,7 @@ public:
 	inline number_data_int64_a<> tellp_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("tellp_");
+		auto const op = operation("tellp_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::tellp_ passed non-existent member");
@@ -1351,7 +1351,7 @@ public:
 	inline any_a<> seekp_beg__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekp_beg_");
+		auto const op = operation("seekp_beg_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekp_beg_ passed non-existent member");
@@ -1362,7 +1362,7 @@ public:
 	inline any_a<> seekp_beg_(number_data_int64_a<> const& offset)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekp_beg_");
+		auto const op = operation("seekp_beg_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekp_beg_ passed non-existent member");
@@ -1376,7 +1376,7 @@ public:
 	inline any_a<> seekp_end__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekp_end_");
+		auto const op = operation("seekp_end_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekp_end_ passed non-existent member");
@@ -1387,7 +1387,7 @@ public:
 	inline any_a<> seekp_end_(number_data_int64_a<> const& offset)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekp_end_");
+		auto const op = operation("seekp_end_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekp_end_ passed non-existent member");
@@ -1401,7 +1401,7 @@ public:
 	inline any_a<> seekp_cur__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekp_cur_");
+		auto const op = operation("seekp_cur_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekp_cur_ passed non-existent member");
@@ -1412,7 +1412,7 @@ public:
 	inline any_a<> seekp_cur_(number_data_int64_a<> const& offset)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("seekp_cur_");
+		auto const op = operation("seekp_cur_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::seekp_cur_ passed non-existent member");
@@ -1426,7 +1426,7 @@ public:
 	inline any_a<> flush__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("flush_");
+		auto const op = operation("flush_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::flush_ passed non-existent member");
@@ -1437,7 +1437,7 @@ public:
 	inline any_a<> flush_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("flush_");
+		auto const op = operation("flush_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::flush_ passed non-existent member");
@@ -1451,7 +1451,7 @@ public:
 	inline any_a<> good__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("good_");
+		auto const op = operation("good_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::good_ passed non-existent member");
@@ -1462,7 +1462,7 @@ public:
 	inline any_a<> good_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("good_");
+		auto const op = operation("good_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::good_ passed non-existent member");
@@ -1476,7 +1476,7 @@ public:
 	inline any_a<> eof__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("eof_");
+		auto const op = operation("eof_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::eof_ passed non-existent member");
@@ -1487,7 +1487,7 @@ public:
 	inline any_a<> eof_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("eof_");
+		auto const op = operation("eof_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::eof_ passed non-existent member");
@@ -1501,7 +1501,7 @@ public:
 	inline any_a<> fail__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("fail_");
+		auto const op = operation("fail_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::fail_ passed non-existent member");
@@ -1512,7 +1512,7 @@ public:
 	inline any_a<> fail_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("fail_");
+		auto const op = operation("fail_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::fail_ passed non-existent member");
@@ -1526,7 +1526,7 @@ public:
 	inline any_a<> bad__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("bad_");
+		auto const op = operation("bad_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::bad_ passed non-existent member");
@@ -1537,7 +1537,7 @@ public:
 	inline any_a<> bad_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("bad_");
+		auto const op = operation("bad_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::bad_ passed non-existent member");
@@ -1551,7 +1551,7 @@ public:
 	inline any_a<> set_good__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("set_good_");
+		auto const op = operation("set_good_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::set_good_ passed non-existent member");
@@ -1562,7 +1562,7 @@ public:
 	inline any_a<> set_good_(any_a<> const& value)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("set_good_");
+		auto const op = operation("set_good_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::set_good_ passed non-existent member");
@@ -1576,7 +1576,7 @@ public:
 	inline any_a<> set_eof__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("set_eof_");
+		auto const op = operation("set_eof_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::set_eof_ passed non-existent member");
@@ -1587,7 +1587,7 @@ public:
 	inline any_a<> set_eof_(any_a<> const& value)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("set_eof_");
+		auto const op = operation("set_eof_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::set_eof_ passed non-existent member");
@@ -1601,7 +1601,7 @@ public:
 	inline any_a<> set_fail__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("set_fail_");
+		auto const op = operation("set_fail_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::set_fail_ passed non-existent member");
@@ -1612,7 +1612,7 @@ public:
 	inline any_a<> set_fail_(any_a<> const& value)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("set_fail_");
+		auto const op = operation("set_fail_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::set_fail_ passed non-existent member");
@@ -1626,7 +1626,7 @@ public:
 	inline any_a<> set_bad__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("set_bad_");
+		auto const op = operation("set_bad_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::set_bad_ passed non-existent member");
@@ -1637,7 +1637,7 @@ public:
 	inline any_a<> set_bad_(any_a<> const& value)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("set_bad_");
+		auto const op = operation("set_bad_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::set_bad_ passed non-existent member");
@@ -1651,7 +1651,7 @@ public:
 	inline any_a<> filename__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("filename_");
+		auto const op = operation("filename_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::filename_ passed non-existent member");
@@ -1662,7 +1662,7 @@ public:
 	inline lake_int8_a<> filename_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("filename_");
+		auto const op = operation("filename_");
 		if (!op)
 		{
 			throw dis("dynamic river_d::filename_ passed non-existent member");

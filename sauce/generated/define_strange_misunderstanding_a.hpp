@@ -389,7 +389,7 @@ public:
 	inline any_a<> add__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("add_");
+		auto const op = operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");
@@ -400,7 +400,7 @@ public:
 	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("add_");
+		auto const op = operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");

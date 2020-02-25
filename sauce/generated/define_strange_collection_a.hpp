@@ -701,7 +701,7 @@ public:
 	inline any_a<> has__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("has_");
+		auto const op = operation("has_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::has_ passed non-existent member");
@@ -712,7 +712,7 @@ public:
 	inline any_a<> has_(any_a<> const& key) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("has_");
+		auto const op = operation("has_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::has_ passed non-existent member");
@@ -726,7 +726,7 @@ public:
 	inline any_a<> at__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("at_");
+		auto const op = operation("at_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::at_ passed non-existent member");
@@ -737,7 +737,7 @@ public:
 	inline any_a<> at_(any_a<> const& key) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("at_");
+		auto const op = operation("at_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::at_ passed non-existent member");
@@ -748,7 +748,7 @@ public:
 	inline any_a<> update__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("update_");
+		auto const op = operation("update_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::update_ passed non-existent member");
@@ -759,7 +759,7 @@ public:
 	inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() )
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("update_");
+		auto const op = operation("update_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::update_ passed non-existent member");
@@ -773,7 +773,7 @@ public:
 	inline any_a<> insert__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("insert_");
+		auto const op = operation("insert_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::insert_ passed non-existent member");
@@ -784,7 +784,7 @@ public:
 	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() )
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("insert_");
+		auto const op = operation("insert_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::insert_ passed non-existent member");
@@ -798,7 +798,7 @@ public:
 	inline any_a<> erase__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("erase_");
+		auto const op = operation("erase_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::erase_ passed non-existent member");
@@ -809,7 +809,7 @@ public:
 	inline any_a<> erase_(any_a<> const& key)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("erase_");
+		auto const op = operation("erase_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::erase_ passed non-existent member");
@@ -823,7 +823,7 @@ public:
 	inline any_a<> clear__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("clear_");
+		auto const op = operation("clear_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::clear_ passed non-existent member");
@@ -834,7 +834,7 @@ public:
 	inline collection_a<> clear_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("clear_");
+		auto const op = operation("clear_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::clear_ passed non-existent member");
@@ -848,7 +848,7 @@ public:
 	inline any_a<> size__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("size_");
+		auto const op = operation("size_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::size_ passed non-existent member");
@@ -859,7 +859,7 @@ public:
 	inline number_data_int64_a size_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("size_");
+		auto const op = operation("size_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::size_ passed non-existent member");
@@ -873,7 +873,7 @@ public:
 	inline any_a<> empty__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("empty_");
+		auto const op = operation("empty_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::empty_ passed non-existent member");
@@ -884,7 +884,7 @@ public:
 	inline any_a<> empty_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("empty_");
+		auto const op = operation("empty_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::empty_ passed non-existent member");
@@ -898,7 +898,7 @@ public:
 	inline any_a<> push_front__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("push_front_");
+		auto const op = operation("push_front_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::push_front_ passed non-existent member");
@@ -909,7 +909,7 @@ public:
 	inline collection_a<> push_front_(any_a<> const& thing)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("push_front_");
+		auto const op = operation("push_front_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::push_front_ passed non-existent member");
@@ -923,7 +923,7 @@ public:
 	inline any_a<> pop_front__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("pop_front_");
+		auto const op = operation("pop_front_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::pop_front_ passed non-existent member");
@@ -934,7 +934,7 @@ public:
 	inline any_a<> pop_front_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("pop_front_");
+		auto const op = operation("pop_front_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::pop_front_ passed non-existent member");
@@ -945,7 +945,7 @@ public:
 	inline any_a<> push_back__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("push_back_");
+		auto const op = operation("push_back_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::push_back_ passed non-existent member");
@@ -956,7 +956,7 @@ public:
 	inline collection_a<> push_back_(any_a<> const& thing)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("push_back_");
+		auto const op = operation("push_back_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::push_back_ passed non-existent member");
@@ -970,7 +970,7 @@ public:
 	inline any_a<> pop_back__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("pop_back_");
+		auto const op = operation("pop_back_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::pop_back_ passed non-existent member");
@@ -981,7 +981,7 @@ public:
 	inline any_a<> pop_back_()
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("pop_back_");
+		auto const op = operation("pop_back_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::pop_back_ passed non-existent member");
@@ -992,7 +992,7 @@ public:
 	inline any_a<> self_assign__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("self_assign_");
+		auto const op = operation("self_assign_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::self_assign_ passed non-existent member");
@@ -1003,7 +1003,7 @@ public:
 	inline collection_a<> self_assign_(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("self_assign_");
+		auto const op = operation("self_assign_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::self_assign_ passed non-existent member");
@@ -1014,7 +1014,7 @@ public:
 	inline any_a<> self_add__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("self_add_");
+		auto const op = operation("self_add_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::self_add_ passed non-existent member");
@@ -1025,7 +1025,7 @@ public:
 	inline collection_a<> self_add_(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("self_add_");
+		auto const op = operation("self_add_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::self_add_ passed non-existent member");
@@ -1036,7 +1036,7 @@ public:
 	inline any_a<> add__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("add_");
+		auto const op = operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::add_ passed non-existent member");
@@ -1047,7 +1047,7 @@ public:
 	inline collection_a<> add_(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("add_");
+		auto const op = operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::add_ passed non-existent member");
@@ -1061,7 +1061,7 @@ public:
 	inline any_a<> self_subtract__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("self_subtract_");
+		auto const op = operation("self_subtract_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::self_subtract_ passed non-existent member");
@@ -1072,7 +1072,7 @@ public:
 	inline collection_a<> self_subtract_(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("self_subtract_");
+		auto const op = operation("self_subtract_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::self_subtract_ passed non-existent member");
@@ -1083,7 +1083,7 @@ public:
 	inline any_a<> subtract__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("subtract_");
+		auto const op = operation("subtract_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::subtract_ passed non-existent member");
@@ -1094,7 +1094,7 @@ public:
 	inline collection_a<> subtract_(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("subtract_");
+		auto const op = operation("subtract_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::subtract_ passed non-existent member");
@@ -1108,7 +1108,7 @@ public:
 	inline any_a<> read_lock__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("read_lock_");
+		auto const op = operation("read_lock_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
@@ -1119,7 +1119,7 @@ public:
 	inline any_a<> read_lock_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("read_lock_");
+		auto const op = operation("read_lock_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
@@ -1130,7 +1130,7 @@ public:
 	inline any_a<> write_lock__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("write_lock_");
+		auto const op = operation("write_lock_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::write_lock_ passed non-existent member");
@@ -1141,7 +1141,7 @@ public:
 	inline any_a<> write_lock_() const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("write_lock_");
+		auto const op = operation("write_lock_");
 		if (!op)
 		{
 			throw dis("dynamic collection_d::write_lock_ passed non-existent member");

@@ -512,7 +512,7 @@ public:
 	inline any_a<> self_add__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("self_add_");
+		auto const op = operation("self_add_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::self_add_ passed non-existent member");
@@ -523,7 +523,7 @@ public:
 	inline random_access_iterator_a<> self_add_(number_a<> const& number)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("self_add_");
+		auto const op = operation("self_add_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::self_add_ passed non-existent member");
@@ -534,7 +534,7 @@ public:
 	inline any_a<> add__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("add_");
+		auto const op = operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::add_ passed non-existent member");
@@ -545,7 +545,7 @@ public:
 	inline random_access_iterator_a<> add_(number_a<> const& number) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("add_");
+		auto const op = operation("add_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::add_ passed non-existent member");
@@ -559,7 +559,7 @@ public:
 	inline any_a<> self_subtract__(range_a<> const& range)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("self_subtract_");
+		auto const op = operation("self_subtract_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::self_subtract_ passed non-existent member");
@@ -570,7 +570,7 @@ public:
 	inline random_access_iterator_a<> self_subtract_(number_a<> const& number)
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("self_subtract_");
+		auto const op = operation("self_subtract_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::self_subtract_ passed non-existent member");
@@ -581,7 +581,7 @@ public:
 	inline any_a<> subtract__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("subtract_");
+		auto const op = operation("subtract_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::subtract_ passed non-existent member");
@@ -592,7 +592,7 @@ public:
 	inline random_access_iterator_a<> subtract_(number_a<> const& number) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("subtract_");
+		auto const op = operation("subtract_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::subtract_ passed non-existent member");
@@ -606,7 +606,7 @@ public:
 	inline any_a<> less_than__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("less_than_");
+		auto const op = operation("less_than_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::less_than_ passed non-existent member");
@@ -617,7 +617,7 @@ public:
 	inline any_a<> less_than_(random_access_iterator_a<> const& it) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("less_than_");
+		auto const op = operation("less_than_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::less_than_ passed non-existent member");
@@ -631,7 +631,7 @@ public:
 	inline any_a<> greater_than__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("greater_than_");
+		auto const op = operation("greater_than_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::greater_than_ passed non-existent member");
@@ -642,7 +642,7 @@ public:
 	inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("greater_than_");
+		auto const op = operation("greater_than_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::greater_than_ passed non-existent member");
@@ -656,7 +656,7 @@ public:
 	inline any_a<> less_or_equal__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("less_or_equal_");
+		auto const op = operation("less_or_equal_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::less_or_equal_ passed non-existent member");
@@ -667,7 +667,7 @@ public:
 	inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("less_or_equal_");
+		auto const op = operation("less_or_equal_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::less_or_equal_ passed non-existent member");
@@ -681,7 +681,7 @@ public:
 	inline any_a<> greater_or_equal__(range_a<> const& range) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("greater_or_equal_");
+		auto const op = operation("greater_or_equal_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::greater_or_equal_ passed non-existent member");
@@ -692,7 +692,7 @@ public:
 	inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
 	{
 		assert(handle_);
-		auto const op = read().operations_().at_string("greater_or_equal_");
+		auto const op = operation("greater_or_equal_");
 		if (!op)
 		{
 			throw dis("dynamic random_access_iterator_d::greater_or_equal_ passed non-existent member");
