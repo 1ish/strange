@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename _1_>
+class data_d;
+
+template <typename _1_>
+inline data_d<_1_> ___data_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename _1__chk>
 inline bool check(data_a<_1__chk> const& value) noexcept;
 
@@ -379,5 +385,11 @@ public:
 		: any_a{ thing }
 	{}
 };
+
+template <typename _1_>
+inline data_d<_1_> ___data_dynamic___(any_a<> const& thing)
+{
+	return data_d<_1_>{ thing };
+}
 
 } // namespace

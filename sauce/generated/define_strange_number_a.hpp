@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename number_data_int64_a = number_data_int64_a<> , typename number_data_uint64_a = number_data_uint64_a<> , typename number_data_double_a = number_data_double_a<> >
+class number_d;
+
+template <typename number_data_int64_a = number_data_int64_a<> , typename number_data_uint64_a = number_data_uint64_a<> , typename number_data_double_a = number_data_double_a<> >
+inline number_d<number_data_int64_a, number_data_uint64_a, number_data_double_a> ___number_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename number_data_int64_a_chk = number_data_int64_a<> , typename number_data_uint64_a_chk = number_data_uint64_a<> , typename number_data_double_a_chk = number_data_double_a<> >
 inline bool check(number_a<number_data_int64_a_chk, number_data_uint64_a_chk, number_data_double_a_chk> const& value) noexcept;
 
@@ -876,7 +882,7 @@ bool const number_a<number_data_int64_a, number_data_uint64_a, number_data_doubl
 	return shoal;
 }();
 
-template <typename number_data_int64_a = number_data_int64_a<> , typename number_data_uint64_a = number_data_uint64_a<> , typename number_data_double_a = number_data_double_a<> >
+template <typename number_data_int64_a, typename number_data_uint64_a, typename number_data_double_a>
 class number_d : public any_a<>
 {
 public:
@@ -1705,5 +1711,11 @@ public:
 		: any_a{ thing }
 	{}
 };
+
+template <typename number_data_int64_a, typename number_data_uint64_a, typename number_data_double_a>
+inline number_d<number_data_int64_a, number_data_uint64_a, number_data_double_a> ___number_dynamic___(any_a<> const& thing)
+{
+	return number_d<number_data_int64_a, number_data_uint64_a, number_data_double_a>{ thing };
+}
 
 } // namespace

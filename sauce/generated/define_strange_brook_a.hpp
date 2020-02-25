@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename _1_>
+class brook_d;
+
+template <typename _1_>
+inline brook_d<_1_> ___brook_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename _1__chk>
 inline bool check(brook_a<_1__chk> const& value) noexcept;
 
@@ -379,5 +385,11 @@ public:
 		: inventory_d{ thing }
 	{}
 };
+
+template <typename _1_>
+inline brook_d<_1_> ___brook_dynamic___(any_a<> const& thing)
+{
+	return brook_d<_1_>{ thing };
+}
 
 } // namespace

@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename _1_ = void>
+class expression_d;
+
+template <typename _1_ = void>
+inline expression_d<_1_> ___expression_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename _1__chk = void>
 inline bool check(expression_a<_1__chk> const& value) noexcept;
 
@@ -407,7 +413,7 @@ bool const expression_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
-template <typename _1_ = void>
+template <typename _1_>
 class expression_d : public operation_d<>
 {
 public:
@@ -651,5 +657,11 @@ public:
 		: operation_d{ thing }
 	{}
 };
+
+template <typename _1_>
+inline expression_d<_1_> ___expression_dynamic___(any_a<> const& thing)
+{
+	return expression_d<_1_>{ thing };
+}
 
 } // namespace

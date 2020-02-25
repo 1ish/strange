@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename _1_ = void>
+class river_d;
+
+template <typename _1_ = void>
+inline river_d<_1_> ___river_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename _1__chk = void>
 inline bool check(river_a<_1__chk> const& value) noexcept;
 
@@ -890,7 +896,7 @@ bool const river_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
-template <typename _1_ = void>
+template <typename _1_>
 class river_d : public range_d<>
 {
 public:
@@ -1677,5 +1683,11 @@ public:
 		: range_d{ thing }
 	{}
 };
+
+template <typename _1_>
+inline river_d<_1_> ___river_dynamic___(any_a<> const& thing)
+{
+	return river_d<_1_>{ thing };
+}
 
 } // namespace

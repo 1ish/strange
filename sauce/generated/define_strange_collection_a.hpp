@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename number_data_int64_a = number_data_int64_a<> >
+class collection_d;
+
+template <typename number_data_int64_a = number_data_int64_a<> >
+inline collection_d<number_data_int64_a> ___collection_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename number_data_int64_a_chk = number_data_int64_a<> >
 inline bool check(collection_a<number_data_int64_a_chk> const& value) noexcept;
 
@@ -624,7 +630,7 @@ bool const collection_a<number_data_int64_a>::___share___ = []()
 	return shoal;
 }();
 
-template <typename number_data_int64_a = number_data_int64_a<> >
+template <typename number_data_int64_a>
 class collection_d : public range_d<>
 {
 public:
@@ -1153,5 +1159,11 @@ public:
 		: range_d{ thing }
 	{}
 };
+
+template <typename number_data_int64_a>
+inline collection_d<number_data_int64_a> ___collection_dynamic___(any_a<> const& thing)
+{
+	return collection_d<number_data_int64_a>{ thing };
+}
 
 } // namespace

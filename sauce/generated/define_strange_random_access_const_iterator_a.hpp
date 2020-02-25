@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename _1_ = void>
+class random_access_const_iterator_d;
+
+template <typename _1_ = void>
+inline random_access_const_iterator_d<_1_> ___random_access_const_iterator_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename _1__chk = void>
 inline bool check(random_access_const_iterator_a<_1__chk> const& value) noexcept;
 
@@ -435,7 +441,7 @@ bool const random_access_const_iterator_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
-template <typename _1_ = void>
+template <typename _1_>
 class random_access_const_iterator_d : public bidirectional_const_iterator_d<>
 {
 public:
@@ -707,5 +713,11 @@ public:
 		: bidirectional_const_iterator_d{ thing }
 	{}
 };
+
+template <typename _1_>
+inline random_access_const_iterator_d<_1_> ___random_access_const_iterator_dynamic___(any_a<> const& thing)
+{
+	return random_access_const_iterator_d<_1_>{ thing };
+}
 
 } // namespace

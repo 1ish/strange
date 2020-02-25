@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename _1_ = void>
+class token_d;
+
+template <typename _1_ = void>
+inline token_d<_1_> ___token_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename _1__chk = void>
 inline bool check(token_a<_1__chk> const& value) noexcept;
 
@@ -442,7 +448,7 @@ bool const token_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
-template <typename _1_ = void>
+template <typename _1_>
 class token_d : public any_a<>
 {
 public:
@@ -717,5 +723,11 @@ public:
 		: any_a{ thing }
 	{}
 };
+
+template <typename _1_>
+inline token_d<_1_> ___token_dynamic___(any_a<> const& thing)
+{
+	return token_d<_1_>{ thing };
+}
 
 } // namespace

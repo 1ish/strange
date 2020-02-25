@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename _1_ = void>
+class unordered_shoal_d;
+
+template <typename _1_ = void>
+inline unordered_shoal_d<_1_> ___unordered_shoal_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename _1__chk = void>
 inline bool check(unordered_shoal_a<_1__chk> const& value) noexcept;
 
@@ -295,7 +301,7 @@ bool const unordered_shoal_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
-template <typename _1_ = void>
+template <typename _1_>
 class unordered_shoal_d : public shoal_d<>
 {
 public:
@@ -379,5 +385,11 @@ public:
 		: shoal_d{ thing }
 	{}
 };
+
+template <typename _1_>
+inline unordered_shoal_d<_1_> ___unordered_shoal_dynamic___(any_a<> const& thing)
+{
+	return unordered_shoal_d<_1_>{ thing };
+}
 
 } // namespace

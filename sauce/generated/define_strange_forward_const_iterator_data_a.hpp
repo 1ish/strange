@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename _1_>
+class forward_const_iterator_data_d;
+
+template <typename _1_>
+inline forward_const_iterator_data_d<_1_> ___forward_const_iterator_data_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename _1__chk>
 inline bool check(forward_const_iterator_data_a<_1__chk> const& value) noexcept;
 
@@ -379,5 +385,11 @@ public:
 		: forward_const_iterator_d{ thing }
 	{}
 };
+
+template <typename _1_>
+inline forward_const_iterator_data_d<_1_> ___forward_const_iterator_data_dynamic___(any_a<> const& thing)
+{
+	return forward_const_iterator_data_d<_1_>{ thing };
+}
 
 } // namespace

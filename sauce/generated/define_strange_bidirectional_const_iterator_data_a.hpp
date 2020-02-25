@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename _1_>
+class bidirectional_const_iterator_data_d;
+
+template <typename _1_>
+inline bidirectional_const_iterator_data_d<_1_> ___bidirectional_const_iterator_data_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename _1__chk>
 inline bool check(bidirectional_const_iterator_data_a<_1__chk> const& value) noexcept;
 
@@ -379,5 +385,11 @@ public:
 		: bidirectional_const_iterator_d{ thing }
 	{}
 };
+
+template <typename _1_>
+inline bidirectional_const_iterator_data_d<_1_> ___bidirectional_const_iterator_data_dynamic___(any_a<> const& thing)
+{
+	return bidirectional_const_iterator_data_d<_1_>{ thing };
+}
 
 } // namespace

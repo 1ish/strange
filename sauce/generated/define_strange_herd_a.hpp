@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename _1_ = void>
+class herd_d;
+
+template <typename _1_ = void>
+inline herd_d<_1_> ___herd_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename _1__chk = void>
 inline bool check(herd_a<_1__chk> const& value) noexcept;
 
@@ -330,7 +336,7 @@ bool const herd_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
-template <typename _1_ = void>
+template <typename _1_>
 class herd_d : public collection_d<>
 {
 public:
@@ -429,5 +435,11 @@ public:
 		: collection_d{ thing }
 	{}
 };
+
+template <typename _1_>
+inline herd_d<_1_> ___herd_dynamic___(any_a<> const& thing)
+{
+	return herd_d<_1_>{ thing };
+}
 
 } // namespace

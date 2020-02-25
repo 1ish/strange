@@ -2,6 +2,12 @@
 namespace strange
 {
 
+template <typename _1_ = void>
+class inventory_d;
+
+template <typename _1_ = void>
+inline inventory_d<_1_> ___inventory_dynamic___(any_a<> const& thing); 
+
 template <typename ___TTT___, typename _1__chk = void>
 inline bool check(inventory_a<_1__chk> const& value) noexcept;
 
@@ -344,7 +350,7 @@ bool const inventory_a<_1_>::___share___ = []()
 	return shoal;
 }();
 
-template <typename _1_ = void>
+template <typename _1_>
 class inventory_d : public collection_d<>
 {
 public:
@@ -481,5 +487,11 @@ public:
 		: collection_d{ thing }
 	{}
 };
+
+template <typename _1_>
+inline inventory_d<_1_> ___inventory_dynamic___(any_a<> const& thing)
+{
+	return inventory_d<_1_>{ thing };
+}
 
 } // namespace
