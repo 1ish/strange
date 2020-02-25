@@ -549,6 +549,7 @@ private:
 		{}
 	};
 
+protected:
 	inline ___any_a_handle_base___ const& read() const noexcept
 	{
 		return *handle_;
@@ -564,6 +565,7 @@ private:
 		return *handle_;
 	}
 
+private:
 	template <typename ___TTT___, typename range_a_chk, typename symbol_a_chk, typename cat_a_chk, typename kind_a_chk, typename inventory_a_chk, typename unordered_herd_a_chk, typename shoal_a_chk, typename unordered_shoal_a_chk, typename number_data_uint64_a_chk>
 	friend inline bool check(any_a<range_a_chk, symbol_a_chk, cat_a_chk, kind_a_chk, inventory_a_chk, unordered_herd_a_chk, shoal_a_chk, unordered_shoal_a_chk, number_data_uint64_a_chk> const& value) noexcept;
 

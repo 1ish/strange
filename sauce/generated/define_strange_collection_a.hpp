@@ -480,6 +480,7 @@ private:
 		{}
 	};
 
+protected:
 	inline ___collection_a_handle_base___ const& read() const noexcept
 	{
 		return *std::static_pointer_cast<___collection_a_handle_base___ const>(handle_);
@@ -495,6 +496,7 @@ private:
 		return *std::static_pointer_cast<___collection_a_handle_base___>(handle_);
 	}
 
+private:
 	template <typename ___TTT___, typename number_data_int64_a_chk>
 	friend inline bool check(collection_a<number_data_int64_a_chk> const& value) noexcept;
 

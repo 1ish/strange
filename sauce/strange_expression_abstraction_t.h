@@ -1153,6 +1153,7 @@ protected:
 	inline void _define_class_implementation_(bool root, std::string const& class_name, std::string const& base_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(
+			"protected:\n"
 			"\tinline ___" + class_name + "_handle_base___ const& read() const noexcept\n"
 			"\t{\n" + (root
 				? std::string{ "\t\treturn *handle_;\n" }
@@ -1170,6 +1171,8 @@ protected:
 				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___>(handle_);\n")) +
 			"\t}\n\n");
 
+		river.write_string(
+			"private:\n");
 		_define_class_check_(true, // declare
 			true, // friend
 			class_name, version, river);

@@ -186,6 +186,7 @@ private:
 		{}
 	};
 
+protected:
 	inline ___herd_a_handle_base___ const& read() const noexcept
 	{
 		return *std::static_pointer_cast<___herd_a_handle_base___ const>(handle_);
@@ -201,6 +202,7 @@ private:
 		return *std::static_pointer_cast<___herd_a_handle_base___>(handle_);
 	}
 
+private:
 	template <typename ___TTT___, typename _1__chk>
 	friend inline bool check(herd_a<_1__chk> const& value) noexcept;
 
