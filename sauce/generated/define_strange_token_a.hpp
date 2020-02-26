@@ -545,7 +545,7 @@ public:
 	}
 
 	inline std :: string filename() const
-	{ throw dis("dynamic token_d::filename() not available"); }
+	{ return filename_().to_string(); }
 
 	inline any_a<> line__(range_a<> const& range) const
 	{
@@ -570,7 +570,7 @@ public:
 	}
 
 	inline int64_t line() const
-	{ throw dis("dynamic token_d::line() not available"); }
+	{ return line_().extract_primitive(); }
 
 	inline any_a<> position__(range_a<> const& range) const
 	{
@@ -595,7 +595,7 @@ public:
 	}
 
 	inline int64_t position() const
-	{ throw dis("dynamic token_d::position() not available"); }
+	{ return position_().extract_primitive(); }
 
 	inline any_a<> tag__(range_a<> const& range) const
 	{
@@ -620,7 +620,7 @@ public:
 	}
 
 	inline std :: string tag() const
-	{ throw dis("dynamic token_d::tag() not available"); }
+	{ return tag_().to_string(); }
 
 	inline any_a<> symbol__(range_a<> const& range) const
 	{
@@ -645,7 +645,7 @@ public:
 	}
 
 	inline std :: string symbol() const
-	{ throw dis("dynamic token_d::symbol() not available"); }
+	{ return symbol_().to_string(); }
 
 	inline any_a<> literal__(range_a<> const& range) const
 	{
@@ -692,7 +692,7 @@ public:
 	}
 
 	inline int64_t precedence() const
-	{ throw dis("dynamic token_d::precedence() not available"); }
+	{ return precedence_().extract_primitive(); }
 
 	inline any_a<> report__(range_a<> const& range) const
 	{
@@ -717,7 +717,7 @@ public:
 	}
 
 	inline std :: string report() const
-	{ throw dis("dynamic token_d::report() not available"); }
+	{ return report_().to_string(); }
 
 	explicit token_d(any_a<> const& thing)
 		: any_a{ thing }

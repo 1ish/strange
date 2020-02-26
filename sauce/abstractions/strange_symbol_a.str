@@ -7,13 +7,13 @@ false &&
 				{	// symbol
 					to_lake_ :# (<lake_int8>),
 
-					to_string : "std::string const& () const",
+					to_string : "std::string const& () const { return lake_to_string(to_lake_()); }",
 
-					first_character : "int8_t () const",
-					last_character : "int8_t () const",
+					first_character : "int8_t () const { return to_lake_().at_index(0).extract_primitive(); }",
+					last_character : "int8_t () const { auto const lake = to_lake_(); return lake.at_index(lake.size() - 1).extract_primitive(); }",
 
 					add_ :# (symbol :<symbol>#, <symbol>),
-					'operator+' : "symbol_a<> (symbol_a<> const& symbol) const",
+					'operator+' : "symbol_a<> (symbol_a<> const& symbol) const { return add_(symbol); }",
 				}
 			)
 		)

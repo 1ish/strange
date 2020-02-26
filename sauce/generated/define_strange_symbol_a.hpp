@@ -440,13 +440,13 @@ public:
 	}
 
 	inline std :: string const & to_string() const
-	{ throw dis("dynamic symbol_d::to_string() not available"); }
+	{ return lake_to_string(to_lake_()); }
 
 	inline int8_t first_character() const
-	{ throw dis("dynamic symbol_d::first_character() not available"); }
+	{ return to_lake_().at_index(0).extract_primitive(); }
 
 	inline int8_t last_character() const
-	{ throw dis("dynamic symbol_d::last_character() not available"); }
+	{ auto const lake = to_lake_(); return lake.at_index(lake.size() - 1).extract_primitive(); }
 
 	inline any_a<> add__(range_a<> const& range) const
 	{
@@ -471,7 +471,7 @@ public:
 	}
 
 	inline symbol_a < > operator+(symbol_a < > const & symbol ) const
-	{ throw dis("dynamic symbol_d::operator+(symbol) not available"); }
+	{ return add_(symbol); }
 
 	explicit symbol_d(any_a<> const& thing)
 		: any_a{ thing }
