@@ -1272,6 +1272,12 @@ inline std::string lake_to_string(lake_a<int8_t> const& lake)
 	return std::string(v.cbegin(), v.cend());
 }
 
+template <typename F>
+inline lake_a<int8_t> lake_int8_create(F&& init)
+{
+	return lake_int_8_t<>::create(std::forward<F>(init));
+}
+
 } // namespace strange
 
 #endif

@@ -996,7 +996,7 @@ public:
 	}
 
 	inline int8_t get()
-	{ throw dis("dynamic river_d::get() not available"); }
+	{ return get_().extract_primitive(); }
 
 	inline any_a<> peek__(range_a<> const& range)
 	{
@@ -1021,7 +1021,7 @@ public:
 	}
 
 	inline int8_t peek()
-	{ throw dis("dynamic river_d::peek() not available"); }
+	{ return peek_().extract_primitive(); }
 
 	inline any_a<> unget__(range_a<> const& range)
 	{
@@ -1046,7 +1046,7 @@ public:
 	}
 
 	inline void unget()
-	{ throw dis("dynamic river_d::unget() not available"); }
+	{ unget_(); }
 
 	inline any_a<> putback__(range_a<> const& range)
 	{
@@ -1071,7 +1071,7 @@ public:
 	}
 
 	inline void putback(int8_t int_8 )
-	{ throw dis("dynamic river_d::putback(int_8) not available"); }
+	{ putback_(num(int_8)); }
 
 	inline any_a<> getline__(range_a<> const& range)
 	{
@@ -1096,7 +1096,7 @@ public:
 	}
 
 	inline std :: vector < int8_t > getline(int64_t count , int8_t delimiter )
-	{ throw dis("dynamic river_d::getline(count, delimiter) not available"); }
+	{ return getline_(num(count), num(delimiter)).extract_vector(); }
 
 	inline any_a<> ignore__(range_a<> const& range)
 	{
@@ -1121,7 +1121,7 @@ public:
 	}
 
 	inline void ignore(int64_t count )
-	{ throw dis("dynamic river_d::ignore(count) not available"); }
+	{ ignore_(num(count)); }
 
 	inline any_a<> read__(range_a<> const& range)
 	{
@@ -1146,10 +1146,10 @@ public:
 	}
 
 	inline std :: vector < int8_t > read(int64_t count )
-	{ throw dis("dynamic river_d::read(count) not available"); }
+	{ return read_(num(count)).extract_vector(); }
 
 	inline std :: string read_string(int64_t count )
-	{ throw dis("dynamic river_d::read_string(count) not available"); }
+	{ return lake_to_string(read_(num(count))); }
 
 	inline any_a<> tellg__(range_a<> const& range) const
 	{
@@ -1174,7 +1174,7 @@ public:
 	}
 
 	inline int64_t tellg() const
-	{ throw dis("dynamic river_d::tellg() not available"); }
+	{ return tellg_().extract_primitive(); }
 
 	inline any_a<> seekg_beg__(range_a<> const& range)
 	{
@@ -1199,7 +1199,7 @@ public:
 	}
 
 	inline void seekg_beg(int64_t offset )
-	{ throw dis("dynamic river_d::seekg_beg(offset) not available"); }
+	{ seekg_beg_(num(offset)); }
 
 	inline any_a<> seekg_end__(range_a<> const& range)
 	{
@@ -1224,7 +1224,7 @@ public:
 	}
 
 	inline void seekg_end(int64_t offset )
-	{ throw dis("dynamic river_d::seekg_end(offset) not available"); }
+	{ seekg_end_(num(offset)); }
 
 	inline any_a<> seekg_cur__(range_a<> const& range)
 	{
@@ -1249,7 +1249,7 @@ public:
 	}
 
 	inline void seekg_cur(int64_t offset )
-	{ throw dis("dynamic river_d::seekg_cur(offset) not available"); }
+	{ seekg_cur_(num(offset)); }
 
 	inline any_a<> sync__(range_a<> const& range)
 	{
@@ -1274,7 +1274,7 @@ public:
 	}
 
 	inline bool sync()
-	{ throw dis("dynamic river_d::sync() not available"); }
+	{ return sync_(); }
 
 	inline any_a<> put__(range_a<> const& range)
 	{
@@ -1299,7 +1299,7 @@ public:
 	}
 
 	inline void put(int8_t int_8 )
-	{ throw dis("dynamic river_d::put(int_8) not available"); }
+	{ put_(num(int_8)); }
 
 	inline any_a<> write__(range_a<> const& range)
 	{
@@ -1324,10 +1324,10 @@ public:
 	}
 
 	inline void write(std :: vector < int8_t > const & lake )
-	{ throw dis("dynamic river_d::write(lake) not available"); }
+	{ write_(lake_int8_create(lake)); }
 
 	inline void write_string(std :: string const & str )
-	{ throw dis("dynamic river_d::write_string(str) not available"); }
+	{ write_(lake_from_string(str)); }
 
 	inline any_a<> tellp__(range_a<> const& range) const
 	{
@@ -1352,7 +1352,7 @@ public:
 	}
 
 	inline int64_t tellp() const
-	{ throw dis("dynamic river_d::tellp() not available"); }
+	{ return tellp_().extract_primitive(); }
 
 	inline any_a<> seekp_beg__(range_a<> const& range)
 	{
@@ -1377,7 +1377,7 @@ public:
 	}
 
 	inline void seekp_beg(int64_t offset )
-	{ throw dis("dynamic river_d::seekp_beg(offset) not available"); }
+	{ seekp_beg_(num(offset)); }
 
 	inline any_a<> seekp_end__(range_a<> const& range)
 	{
@@ -1402,7 +1402,7 @@ public:
 	}
 
 	inline void seekp_end(int64_t offset )
-	{ throw dis("dynamic river_d::seekp_end(offset) not available"); }
+	{ seekp_end_(num(offset)); }
 
 	inline any_a<> seekp_cur__(range_a<> const& range)
 	{
@@ -1427,7 +1427,7 @@ public:
 	}
 
 	inline void seekp_cur(int64_t offset )
-	{ throw dis("dynamic river_d::seekp_cur(offset) not available"); }
+	{ seekp_cur_(num(offset)); }
 
 	inline any_a<> flush__(range_a<> const& range)
 	{
@@ -1452,7 +1452,7 @@ public:
 	}
 
 	inline void flush()
-	{ throw dis("dynamic river_d::flush() not available"); }
+	{ flush_(); }
 
 	inline any_a<> good__(range_a<> const& range) const
 	{
@@ -1477,7 +1477,7 @@ public:
 	}
 
 	inline bool good() const
-	{ throw dis("dynamic river_d::good() not available"); }
+	{ return good_(); }
 
 	inline any_a<> eof__(range_a<> const& range) const
 	{
@@ -1502,7 +1502,7 @@ public:
 	}
 
 	inline bool eof() const
-	{ throw dis("dynamic river_d::eof() not available"); }
+	{ return eof_(); }
 
 	inline any_a<> fail__(range_a<> const& range) const
 	{
@@ -1527,7 +1527,7 @@ public:
 	}
 
 	inline bool fail() const
-	{ throw dis("dynamic river_d::fail() not available"); }
+	{ return fail_(); }
 
 	inline any_a<> bad__(range_a<> const& range) const
 	{
@@ -1552,7 +1552,7 @@ public:
 	}
 
 	inline bool bad() const
-	{ throw dis("dynamic river_d::bad() not available"); }
+	{ return bad_(); }
 
 	inline any_a<> set_good__(range_a<> const& range)
 	{
@@ -1577,7 +1577,7 @@ public:
 	}
 
 	inline void set_good(bool value )
-	{ throw dis("dynamic river_d::set_good(value) not available"); }
+	{ set_good_(); }
 
 	inline any_a<> set_eof__(range_a<> const& range)
 	{
@@ -1602,7 +1602,7 @@ public:
 	}
 
 	inline void set_eof(bool value )
-	{ throw dis("dynamic river_d::set_eof(value) not available"); }
+	{ set_eof_(); }
 
 	inline any_a<> set_fail__(range_a<> const& range)
 	{
@@ -1627,7 +1627,7 @@ public:
 	}
 
 	inline void set_fail(bool value )
-	{ throw dis("dynamic river_d::set_fail(value) not available"); }
+	{ set_fail_(); }
 
 	inline any_a<> set_bad__(range_a<> const& range)
 	{
@@ -1652,7 +1652,7 @@ public:
 	}
 
 	inline void set_bad(bool value )
-	{ throw dis("dynamic river_d::set_bad(value) not available"); }
+	{ set_bad_(); }
 
 	inline any_a<> filename__(range_a<> const& range) const
 	{
@@ -1677,7 +1677,7 @@ public:
 	}
 
 	inline std :: string filename() const
-	{ throw dis("dynamic river_d::filename() not available"); }
+	{ return lake_to_string(filename_()); }
 
 	explicit river_d(any_a<> const& thing)
 		: range_d{ thing }

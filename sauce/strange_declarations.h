@@ -293,6 +293,9 @@ inline flock_a<> flock_create(F&& init);
 inline lake_a<int8_t> lake_from_string(std::string const& str);
 inline std::string lake_to_string(lake_a<int8_t> const& lake);
 
+template <typename F>
+inline lake_a<int8_t> lake_int8_create(F&& init);
+
 // ordered herd
 template <bool _concurrent_ = false>
 inline ordered_herd_a<> ordered_herd_create();

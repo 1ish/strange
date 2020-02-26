@@ -433,7 +433,7 @@ public:
 	}
 
 	inline bool pure() const
-	{ throw dis("dynamic operation_d::pure() not available"); }
+	{ return pure_(); }
 
 	inline void aspects(unordered_shoal_a < > const & shoal )
 	{ throw dis("dynamic operation_d::aspects(shoal) not available"); }

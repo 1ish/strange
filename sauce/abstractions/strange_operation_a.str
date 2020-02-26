@@ -6,7 +6,7 @@ false &&
 				$$<>[],
 				{	// operation
 					pure_ :# (<>),
-					pure : "bool () const",
+					pure : "bool () const { return pure_(); }",
 
 					aspects : "void (unordered_shoal_a<> const& shoal)",
 					assign : "void (operation_a<> const& operation)",

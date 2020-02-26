@@ -5,95 +5,96 @@ false &&
 			(	// parent
 				$$<range>[],
 				{	// river input
-					to_string : "std::string ()",
+					//TODO to_lake_
+					to_string : "std::string ()", //TODO { return lake_to_string(to_lake_()); }
 
 					get_ := (<number_data_int8>),
-					get : "int8_t ()",
+					get : "int8_t () { return get_().extract_primitive(); }",
 	
 					peek_ := (<number_data_int8>),
-					peek : "int8_t ()",
+					peek : "int8_t () { return peek_().extract_primitive(); }",
 
 					unget_ := (<>),
-					unget : "void ()",
+					unget : "void () { unget_(); }",
 
 					putback_ := (int_8 :<number_data_int8>#, <>),
-					putback : "void (int8_t int_8)",
+					putback : "void (int8_t int_8) { putback_(num(int_8)); }",
 
 					getline_ := (count :<number_data_int64>#, delimiter :<number_data_int8>#, <lake_int8>),
-					getline : "std::vector<int8_t> (int64_t count, int8_t delimiter)",
+					getline : "std::vector<int8_t> (int64_t count, int8_t delimiter) { return getline_(num(count), num(delimiter)).extract_vector(); }",
 
 					ignore_ := (count :<number_data_int64>#, <>),
-					ignore : "void (int64_t count)",
+					ignore : "void (int64_t count) { ignore_(num(count)); }",
 
 					read_ := (count :<number_data_int64>#, <lake_int8>),
-					read : "std::vector<int8_t> (int64_t count)",
-					read_string : "std::string (int64_t count)",
+					read : "std::vector<int8_t> (int64_t count) { return read_(num(count)).extract_vector(); }",
+					read_string : "std::string (int64_t count) { return lake_to_string(read_(num(count))); }",
 
 					tellg_ :# (<number_data_int64>),
-					tellg : "int64_t () const",
+					tellg : "int64_t () const { return tellg_().extract_primitive(); }",
 
 					seekg_beg_ := (offset :<number_data_int64>#, <>),
-					seekg_beg : "void (int64_t offset)",
+					seekg_beg : "void (int64_t offset) { seekg_beg_(num(offset)); }",
 
 					seekg_end_ := (offset :<number_data_int64>#, <>),
-					seekg_end : "void (int64_t offset)",
+					seekg_end : "void (int64_t offset) { seekg_end_(num(offset)); }",
 
 					seekg_cur_ := (offset :<number_data_int64>#, <>),
-					seekg_cur : "void (int64_t offset)",
+					seekg_cur : "void (int64_t offset) { seekg_cur_(num(offset)); }",
 
 					sync_ := (<>),
-					sync : "bool ()",
+					sync : "bool () { return sync_(); }",
 
 					// river output
 					put_ := (int_8 :<number_data_int8>#, <>),
-					put : "void (int8_t int_8)",
+					put : "void (int8_t int_8) { put_(num(int_8)); }",
 
 					write_ := (lake :<lake_int8>#, <>),
-					write : "void (std::vector<int8_t> const& lake)",
-					write_string : "void (std::string const& str)",
+					write : "void (std::vector<int8_t> const& lake) { write_(lake_int8_create(lake)); }",
+					write_string : "void (std::string const& str) { write_(lake_from_string(str)); }",
 
 					tellp_ :# (<number_data_int64>),
-					tellp : "int64_t () const",
+					tellp : "int64_t () const { return tellp_().extract_primitive(); }",
 
 					seekp_beg_ := (offset :<number_data_int64>#, <>),
-					seekp_beg : "void (int64_t offset)",
+					seekp_beg : "void (int64_t offset) { seekp_beg_(num(offset)); }",
 
 					seekp_end_ := (offset :<number_data_int64>#, <>),
-					seekp_end : "void (int64_t offset)",
+					seekp_end : "void (int64_t offset) { seekp_end_(num(offset)); }",
 
 					seekp_cur_ := (offset :<number_data_int64>#, <>),
-					seekp_cur : "void (int64_t offset)",
+					seekp_cur : "void (int64_t offset) { seekp_cur_(num(offset)); }",
 
 					flush_ := (<>),
-					flush : "void ()",
+					flush : "void () { flush_(); }",
 
 					// river
 					good_ :# (<>),
-					good : "bool () const",
+					good : "bool () const { return good_(); }",
 
 					eof_ :# (<>),
-					eof : "bool () const",
+					eof : "bool () const { return eof_(); }",
 
 					fail_ :# (<>),
-					fail : "bool () const",
+					fail : "bool () const { return fail_(); }",
 
 					bad_ :# (<>),
-					bad : "bool () const",
+					bad : "bool () const { return bad_(); }",
 
 					set_good_ := (value :#, <>),
-					set_good : "void (bool value)",
+					set_good : "void (bool value) { set_good_(); }",
 
 					set_eof_ := (value :#, <>),
-					set_eof : "void (bool value)",
+					set_eof : "void (bool value) { set_eof_(); }",
 
 					set_fail_ := (value :#, <>),
-					set_fail : "void (bool value)",
+					set_fail : "void (bool value) { set_fail_(); }",
 
 					set_bad_ := (value :#, <>),
-					set_bad : "void (bool value)",
+					set_bad : "void (bool value) { set_bad_(); }",
 
 					filename_ :# (<lake_int8>),
-					filename : "std::string () const",
+					filename : "std::string () const { return lake_to_string(filename_()); }",
 				}
 			)
 		)
