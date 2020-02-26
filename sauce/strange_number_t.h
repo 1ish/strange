@@ -825,8 +825,8 @@ inline number_data_a<double> float_64_from_string(std::string const& str)
 	return number_float_64_t<>::create(std::stod(str));
 }
 
-template <typename _primitive_>
-inline number_data_a<_primitive_> num(_primitive_ primitive)
+template <typename _primitive_, typename _result_>
+inline _result_ num(_primitive_ primitive)
 {
 	return number_t<_primitive_>::create(primitive);
 }

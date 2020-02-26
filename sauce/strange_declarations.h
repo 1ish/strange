@@ -275,8 +275,8 @@ inline operation_a<> native_mutation_create(native_member_pointer<_abstraction_>
 inline number_data_a<int64_t> int_64_from_string(std::string const& str);
 inline number_data_a<double> float_64_from_string(std::string const& str);
 
-template <typename _primitive_>
-inline number_data_a<_primitive_> num(_primitive_ primitive);
+template <typename _primitive_, typename _result_ = number_data_a<_primitive_>>
+inline _result_ num(_primitive_ primitive);
 
 // range
 inline range_a<> range_create();

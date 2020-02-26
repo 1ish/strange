@@ -226,11 +226,11 @@ public:
 	inline any_a<> from_float_64__(range_a<> const& range)
 	{ assert(handle_); return write().from_float_64__(range); }
 
-	inline any_a<> from_float_64_(number_data_double_a const& int_64)
-	{ assert(handle_); return write().from_float_64_(int_64); }
+	inline any_a<> from_float_64_(number_data_double_a const& float_64)
+	{ assert(handle_); return write().from_float_64_(float_64); }
 
-	inline void from_float_64(double int_64 )
-	{ assert(handle_); write().from_float_64(int_64); }
+	inline void from_float_64(double float_64 )
+	{ assert(handle_); write().from_float_64(float_64); }
 
 	inline any_a<> less_than__(range_a<> const& range) const
 	{ assert(handle_); return read().less_than__(range); }
@@ -390,8 +390,8 @@ protected:
 		virtual number_data_double_a to_float_64_() const = 0;
 		virtual double to_float_64() const = 0;
 		virtual any_a<> from_float_64__(range_a<> const& range) = 0;
-		virtual any_a<> from_float_64_(number_data_double_a const& int_64) = 0;
-		virtual void from_float_64(double int_64 ) = 0;
+		virtual any_a<> from_float_64_(number_data_double_a const& float_64) = 0;
+		virtual void from_float_64(double float_64 ) = 0;
 		virtual any_a<> less_than__(range_a<> const& range) const = 0;
 		virtual any_a<> less_than_(number_a<> const& number) const = 0;
 		virtual bool operator<(number_a < > const & number ) const = 0;
@@ -584,11 +584,11 @@ protected:
 		virtual inline any_a<> from_float_64__(range_a<> const& range) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.from_float_64__(range); }
 
-		virtual inline any_a<> from_float_64_(number_data_double_a const& int_64) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.from_float_64_(int_64); }
+		virtual inline any_a<> from_float_64_(number_data_double_a const& float_64) final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.from_float_64_(float_64); }
 
-		virtual inline void from_float_64(double int_64 ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.from_float_64(int_64); }
+		virtual inline void from_float_64(double float_64 ) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.from_float_64(float_64); }
 
 		virtual inline any_a<> less_than__(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.less_than__(range); }
@@ -1067,7 +1067,7 @@ public:
 	}
 
 	inline number_a < > operator+(number_a < > const & number ) const
-	{ throw dis("dynamic number_d::operator+(number) not available"); }
+	{ return add_(number); }
 
 	inline any_a<> self_subtract__(range_a<> const& range)
 	{
@@ -1114,7 +1114,7 @@ public:
 	}
 
 	inline number_a < > operator-(number_a < > const & number ) const
-	{ throw dis("dynamic number_d::operator-(number) not available"); }
+	{ return subtract_(number); }
 
 	inline any_a<> self_multiply__(range_a<> const& range)
 	{
@@ -1161,7 +1161,7 @@ public:
 	}
 
 	inline number_a < > operator*(number_a < > const & number ) const
-	{ throw dis("dynamic number_d::operator*(number) not available"); }
+	{ return multiply_(number); }
 
 	inline any_a<> self_divide__(range_a<> const& range)
 	{
@@ -1208,7 +1208,7 @@ public:
 	}
 
 	inline number_a < > operator/(number_a < > const & number ) const
-	{ throw dis("dynamic number_d::operator/(number) not available"); }
+	{ return divide_(number); }
 
 	inline any_a<> self_modulo__(range_a<> const& range)
 	{
@@ -1255,7 +1255,7 @@ public:
 	}
 
 	inline number_a < > operator%(number_a < > const & number ) const
-	{ throw dis("dynamic number_d::operator%(number) not available"); }
+	{ return modulo_(number); }
 
 	inline any_a<> to_int_64__(range_a<> const& range) const
 	{
@@ -1280,7 +1280,7 @@ public:
 	}
 
 	inline int64_t to_int_64() const
-	{ throw dis("dynamic number_d::to_int_64() not available"); }
+	{ return to_int_64_().extract_primitive(); }
 
 	inline any_a<> from_int_64__(range_a<> const& range)
 	{
@@ -1305,7 +1305,7 @@ public:
 	}
 
 	inline void from_int_64(int64_t int_64 )
-	{ throw dis("dynamic number_d::from_int_64(int_64) not available"); }
+	{ from_int_64_(num<int64_t, number_data_int64_a>(int_64)); }
 
 	inline any_a<> to_uint_64__(range_a<> const& range) const
 	{
@@ -1330,7 +1330,7 @@ public:
 	}
 
 	inline uint64_t to_uint_64() const
-	{ throw dis("dynamic number_d::to_uint_64() not available"); }
+	{ return to_uint_64_().extract_primitive(); }
 
 	inline any_a<> from_uint_64__(range_a<> const& range)
 	{
@@ -1355,7 +1355,7 @@ public:
 	}
 
 	inline void from_uint_64(uint64_t uint_64 )
-	{ throw dis("dynamic number_d::from_uint_64(uint_64) not available"); }
+	{ from_uint_64_(num<uint64_t, number_data_uint64_a>(uint_64)); }
 
 	inline any_a<> to_float_64__(range_a<> const& range) const
 	{
@@ -1380,7 +1380,7 @@ public:
 	}
 
 	inline double to_float_64() const
-	{ throw dis("dynamic number_d::to_float_64() not available"); }
+	{ return to_float_64_().extract_primitive(); }
 
 	inline any_a<> from_float_64__(range_a<> const& range)
 	{
@@ -1393,7 +1393,7 @@ public:
 		return op.operate(*this, range);
 	}
 
-	inline any_a<> from_float_64_(number_data_double_a const& int_64)
+	inline any_a<> from_float_64_(number_data_double_a const& float_64)
 	{
 		assert(handle_);
 		auto const op = operation("from_float_64_");
@@ -1401,11 +1401,11 @@ public:
 		{
 			throw dis("dynamic number_d::from_float_64_ passed non-existent member");
 		}
-		return variadic_operate(op, *this, int_64);
+		return variadic_operate(op, *this, float_64);
 	}
 
-	inline void from_float_64(double int_64 )
-	{ throw dis("dynamic number_d::from_float_64(int_64) not available"); }
+	inline void from_float_64(double float_64 )
+	{ from_float_64_(num<double, number_data_double_a>(float_64)); }
 
 	inline any_a<> less_than__(range_a<> const& range) const
 	{
@@ -1430,7 +1430,7 @@ public:
 	}
 
 	inline bool operator<(number_a < > const & number ) const
-	{ throw dis("dynamic number_d::operator<(number) not available"); }
+	{ return less_than_(number); }
 
 	inline any_a<> greater_than__(range_a<> const& range) const
 	{
@@ -1455,7 +1455,7 @@ public:
 	}
 
 	inline bool operator>(number_a < > const & number ) const
-	{ throw dis("dynamic number_d::operator>(number) not available"); }
+	{ return greater_than_(number); }
 
 	inline any_a<> less_or_equal__(range_a<> const& range) const
 	{
@@ -1480,7 +1480,7 @@ public:
 	}
 
 	inline bool operator<=(number_a < > const & number ) const
-	{ throw dis("dynamic number_d::operator<=(number) not available"); }
+	{ return less_or_equal_(number); }
 
 	inline any_a<> greater_or_equal__(range_a<> const& range) const
 	{
@@ -1505,7 +1505,7 @@ public:
 	}
 
 	inline bool operator>=(number_a < > const & number ) const
-	{ throw dis("dynamic number_d::operator>=(number) not available"); }
+	{ return greater_or_equal_(number); }
 
 	inline any_a<> byte_size__(range_a<> const& range) const
 	{
@@ -1530,7 +1530,7 @@ public:
 	}
 
 	inline int64_t byte_size() const
-	{ throw dis("dynamic number_d::byte_size() not available"); }
+	{ return byte_size_().extract_primitive(); }
 
 	inline any_a<> is_int__(range_a<> const& range) const
 	{
@@ -1555,7 +1555,7 @@ public:
 	}
 
 	inline bool is_int() const
-	{ throw dis("dynamic number_d::is_int() not available"); }
+	{ return is_int_(); }
 
 	inline any_a<> is_signed__(range_a<> const& range) const
 	{
@@ -1580,7 +1580,7 @@ public:
 	}
 
 	inline bool is_signed() const
-	{ throw dis("dynamic number_d::is_signed() not available"); }
+	{ return is_signed_(); }
 
 	inline any_a<> is_nan__(range_a<> const& range) const
 	{
@@ -1605,7 +1605,7 @@ public:
 	}
 
 	inline bool is_nan() const
-	{ throw dis("dynamic number_d::is_nan() not available"); }
+	{ return is_nan_(); }
 
 	inline any_a<> is_inf__(range_a<> const& range) const
 	{
@@ -1630,7 +1630,7 @@ public:
 	}
 
 	inline bool is_inf() const
-	{ throw dis("dynamic number_d::is_inf() not available"); }
+	{ return is_inf_(); }
 
 	inline any_a<> is_finite__(range_a<> const& range) const
 	{
@@ -1655,7 +1655,7 @@ public:
 	}
 
 	inline bool is_finite() const
-	{ throw dis("dynamic number_d::is_finite() not available"); }
+	{ return is_finite_(); }
 
 	inline any_a<> is_normal__(range_a<> const& range) const
 	{
@@ -1680,7 +1680,7 @@ public:
 	}
 
 	inline bool is_normal() const
-	{ throw dis("dynamic number_d::is_normal() not available"); }
+	{ return is_normal_(); }
 
 	inline any_a<> little_endian__(range_a<> const& range) const
 	{
@@ -1705,7 +1705,7 @@ public:
 	}
 
 	inline bool little_endian() const
-	{ throw dis("dynamic number_d::little_endian() not available"); }
+	{ return little_endian_(); }
 
 	explicit number_d(any_a<> const& thing)
 		: any_a{ thing }

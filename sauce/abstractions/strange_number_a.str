@@ -17,81 +17,81 @@ false &&
 					self_add_ := (number :<number>#, <number>),
 
 					add_ :# (number :<number>#, <number>),
-					'operator+' : "number_a<> (number_a<> const& number) const",
+					'operator+' : "number_a<> (number_a<> const& number) const { return add_(number); }",
 
 					self_subtract_ := (number :<number>#, <number>),
 
 					subtract_ :# (number :<number>#, <number>),
-					'operator-' : "number_a<> (number_a<> const& number) const",
+					'operator-' : "number_a<> (number_a<> const& number) const { return subtract_(number); }",
 
 					self_multiply_ := (number :<number>#, <number>),
 
 					multiply_ :# (number :<number>#, <number>),
-					'operator*' : "number_a<> (number_a<> const& number) const",
+					'operator*' : "number_a<> (number_a<> const& number) const { return multiply_(number); }",
 
 					self_divide_ := (number :<number>#, <number>),
 
 					divide_ :# (number :<number>#, <number>),
-					'operator/' : "number_a<> (number_a<> const& number) const",
+					'operator/' : "number_a<> (number_a<> const& number) const { return divide_(number); }",
 
 					self_modulo_ := (number :<number>#, <number>),
 
 					modulo_ :# (number :<number>#, <number>),
-					'operator%' : "number_a<> (number_a<> const& number) const",
+					'operator%' : "number_a<> (number_a<> const& number) const { return modulo_(number); }",
 
 					to_int_64_ :# (<#number_data_int64_a>),
-					to_int_64 : "int64_t () const",
+					to_int_64 : "int64_t () const { return to_int_64_().extract_primitive(); }",
 
 					from_int_64_ := (int_64 :<#number_data_int64_a>#, <>),
-					from_int_64 : "void (int64_t int_64)",
+					from_int_64 : "void (int64_t int_64) { from_int_64_(num<int64_t, number_data_int64_a>(int_64)); }",
 
 					to_uint_64_ :# (<#number_data_uint64_a>),
-					to_uint_64 : "uint64_t () const",
+					to_uint_64 : "uint64_t () const { return to_uint_64_().extract_primitive(); }",
 
 					from_uint_64_ := (uint_64 :<#number_data_uint64_a>#, <>),
-					from_uint_64 : "void (uint64_t uint_64)",
+					from_uint_64 : "void (uint64_t uint_64) { from_uint_64_(num<uint64_t, number_data_uint64_a>(uint_64)); }",
 
 					to_float_64_ :# (<#number_data_double_a>),
-					to_float_64 : "double () const",
+					to_float_64 : "double () const { return to_float_64_().extract_primitive(); }",
 
-					from_float_64_ := (int_64 :<#number_data_double_a>#, <>),
-					from_float_64 : "void (double int_64)",
+					from_float_64_ := (float_64 :<#number_data_double_a>#, <>),
+					from_float_64 : "void (double float_64) { from_float_64_(num<double, number_data_double_a>(float_64)); }",
 
 					less_than_ :# (number :<number>#, <>),
-					'operator<' : "bool (number_a<> const& number) const",
+					'operator<' : "bool (number_a<> const& number) const { return less_than_(number); }",
 
 					greater_than_ :# (number :<number>#, <>),
-					'operator>' : "bool (number_a<> const& number) const",
+					'operator>' : "bool (number_a<> const& number) const { return greater_than_(number); }",
 
 					less_or_equal_ :# (number :<number>#, <>),
-					'operator<=' : "bool (number_a<> const& number) const",
+					'operator<=' : "bool (number_a<> const& number) const { return less_or_equal_(number); }",
 
 					greater_or_equal_ :# (number :<number>#, <>),
-					'operator>=' : "bool (number_a<> const& number) const",
+					'operator>=' : "bool (number_a<> const& number) const { return greater_or_equal_(number); }",
 
 					byte_size_ :# (<#number_data_int64_a>),
-					byte_size : "int64_t () const",
+					byte_size : "int64_t () const { return byte_size_().extract_primitive(); }",
 
 					is_int_ :# (<>),
-					is_int : "bool () const",
+					is_int : "bool () const { return is_int_(); }",
 
 					is_signed_ :# (<>),
-					is_signed : "bool () const",
+					is_signed : "bool () const { return is_signed_(); }",
 
 					is_nan_ :# (<>),
-					is_nan : "bool () const",
+					is_nan : "bool () const { return is_nan_(); }",
 
 					is_inf_ :# (<>),
-					is_inf : "bool () const",
+					is_inf : "bool () const { return is_inf_(); }",
 
 					is_finite_ :# (<>),
-					is_finite : "bool () const",
+					is_finite : "bool () const { return is_finite_(); }",
 
 					is_normal_ :# (<>),
-					is_normal : "bool () const",
+					is_normal : "bool () const { return is_normal_(); }",
 
 					little_endian_ :# (<>),
-					little_endian : "bool () const",
+					little_endian : "bool () const { return little_endian_(); }",
 				}
 			)
 		)
