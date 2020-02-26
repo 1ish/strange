@@ -6,10 +6,10 @@ false &&
 				$$<operation>[],
 				{	// expression
 					recreate_ :# (<expression>),
-					recreated : "void (expression_a<> const& expression) const",
+					recreated : "void (expression_a<> const& expression) const {}",
 
 					literal_ :# (<>),
-					literal : "bool () const",
+					literal : "bool () const { return literal_(); }",
 
 					evaluate_ :# (<>),
 
@@ -18,10 +18,10 @@ false &&
 					terms_ :# (<flock>),
 
 					generate_ :# (version :<number_data_int64>#, indent :<number_data_int64>#, river :<river>&, <>),
-					generate : "void (int64_t version, int64_t indent, river_a<>& river) const",
+					generate : "void (int64_t version, int64_t indent, river_a<>& river) const { generate_(num(version), num(indent), river); }",
 
 					generate_cpp_ :# (version :<number_data_int64>#, indent :<number_data_int64>#, river :<river>&, declare :<>#, define :<>#, type :<># false, <>),
-					generate_cpp : "void (int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const",
+					generate_cpp : "void (int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const { generate_cpp_(num(version), num(indent), river, boole(declare), boole(define), boole(type)); }",
 				}
 			)
 		)

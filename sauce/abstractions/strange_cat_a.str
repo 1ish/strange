@@ -6,13 +6,13 @@ false &&
 				$$<symbol>[],
 				{	// cat
 					symbolic_ :# (<>),
-					symbolic : "bool () const",
+					symbolic : "bool () const { return symbolic_(); }",
 
 					order_ :# (<number_data_int64>),
-					order : "int64_t () const",
+					order : "int64_t () const { return order_().to_int_64(); }",
 
 					name_ :# (<symbol>),
-					//TODO name : "std::string () const",
+					//TODO name : "std::string () const { return name_().to_string(); }",
 
 					dimensions_ :# (<flock>),
 
@@ -21,7 +21,7 @@ false &&
 					result_ :# (<cat>),
 
 					code_ :# (<lake_int8>),
-					code : "std::string () const",
+					code : "std::string () const { return lake_to_string(code_()); }",
 				}
 			)
 		)

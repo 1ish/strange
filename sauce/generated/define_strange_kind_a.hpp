@@ -483,7 +483,7 @@ public:
 	}
 
 	inline bool fixed() const
-	{ throw dis("dynamic kind_d::fixed() not available"); }
+	{ return fixed_(); }
 
 	inline any_a<> reference__(range_a<> const& range) const
 	{
@@ -508,7 +508,7 @@ public:
 	}
 
 	inline bool reference() const
-	{ throw dis("dynamic kind_d::reference() not available"); }
+	{ return reference_(); }
 
 	inline any_a<> optional__(range_a<> const& range) const
 	{
@@ -533,7 +533,7 @@ public:
 	}
 
 	inline bool optional() const
-	{ throw dis("dynamic kind_d::optional() not available"); }
+	{ return optional_(); }
 
 	explicit kind_d(any_a<> const& thing)
 		: cat_d{ thing }

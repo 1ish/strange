@@ -510,7 +510,7 @@ public:
 	}
 
 	inline void recreated(expression_a < > const & expression ) const
-	{ throw dis("dynamic expression_d::recreated(expression) not available"); }
+	{}
 
 	inline any_a<> literal__(range_a<> const& range) const
 	{
@@ -535,7 +535,7 @@ public:
 	}
 
 	inline bool literal() const
-	{ throw dis("dynamic expression_d::literal() not available"); }
+	{ return literal_(); }
 
 	inline any_a<> evaluate__(range_a<> const& range) const
 	{
@@ -626,7 +626,7 @@ public:
 	}
 
 	inline void generate(int64_t version , int64_t indent , river_a < > & river ) const
-	{ throw dis("dynamic expression_d::generate(version, indent, river) not available"); }
+	{ generate_(num(version), num(indent), river); }
 
 	inline any_a<> generate_cpp__(range_a<> const& range) const
 	{
@@ -651,7 +651,7 @@ public:
 	}
 
 	inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const
-	{ throw dis("dynamic expression_d::generate_cpp(version, indent, river, declare, define, type) not available"); }
+	{ generate_cpp_(num(version), num(indent), river, boole(declare), boole(define), boole(type)); }
 
 	explicit expression_d(any_a<> const& thing)
 		: operation_d{ thing }

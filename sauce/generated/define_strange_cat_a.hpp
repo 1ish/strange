@@ -503,7 +503,7 @@ public:
 	}
 
 	inline bool symbolic() const
-	{ throw dis("dynamic cat_d::symbolic() not available"); }
+	{ return symbolic_(); }
 
 	inline any_a<> order__(range_a<> const& range) const
 	{
@@ -528,7 +528,7 @@ public:
 	}
 
 	inline int64_t order() const
-	{ throw dis("dynamic cat_d::order() not available"); }
+	{ return order_().to_int_64(); }
 
 	inline any_a<> name__(range_a<> const& range) const
 	{
@@ -641,7 +641,7 @@ public:
 	}
 
 	inline std :: string code() const
-	{ throw dis("dynamic cat_d::code() not available"); }
+	{ return lake_to_string(code_()); }
 
 	explicit cat_d(any_a<> const& thing)
 		: symbol_d{ thing }

@@ -8,13 +8,13 @@ false &&
 					aspects_ :# (<flock>),
 
 					fixed_ :# (<>),
-					fixed : "bool () const",
+					fixed : "bool () const { return fixed_(); }",
 
 					reference_ :# (<>),
-					reference : "bool () const",
+					reference : "bool () const { return reference_(); }",
 
 					optional_ :# (<>),
-					optional : "bool () const",
+					optional : "bool () const { return optional_(); }",
 				}
 			)
 		)

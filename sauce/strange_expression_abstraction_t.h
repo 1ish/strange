@@ -820,7 +820,8 @@ protected:
 		std::string parameters;
 		std::string arguments;
 		std::string constness;
-		_parse_native_member_definition_(value, result, parameters, arguments, constness);
+		std::string dynamic;
+		_parse_native_member_definition_(class_name, name, value, result, parameters, arguments, constness, dynamic);
 		river.write_string(
 			"\tinline " + result);
 		if (result == class_name.substr(0, class_name.length() - 1) + "a")
@@ -828,7 +829,7 @@ protected:
 			_declare_or_define_template_(version, 0, river, false, false);
 		}
 		river.write_string(" " + name + parameters + constness + "\n"
-			"\t{ throw dis(\"dynamic " + class_name + "::" + name + arguments + " not available\"); }\n\n");
+			"\t" + dynamic + "\n\n");
 	}
 
 	inline void _define_class_nonvirtual_members_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
@@ -880,7 +881,8 @@ protected:
 		std::string parameters;
 		std::string arguments;
 		std::string constness;
-		_parse_native_member_definition_(value, result, parameters, arguments, constness);
+		std::string dynamic;
+		_parse_native_member_definition_(class_name, name, value, result, parameters, arguments, constness, dynamic);
 		river.write_string(
 			"\tinline " + result + " " + name + parameters + constness + "\n"
 			"\t{ assert(handle_); ");
@@ -1132,7 +1134,8 @@ protected:
 		std::string parameters;
 		std::string arguments;
 		std::string constness;
-		_parse_native_member_definition_(value, result, parameters, arguments, constness);
+		std::string dynamic;
+		_parse_native_member_definition_(class_name, name, value, result, parameters, arguments, constness, dynamic);
 		river.write_string(
 			"\t\tvirtual " + result + " " + name + parameters + constness + " = 0;\n");
 	}
@@ -1163,7 +1166,8 @@ protected:
 		std::string parameters;
 		std::string arguments;
 		std::string constness;
-		_parse_native_member_definition_(value, result, parameters, arguments, constness);
+		std::string dynamic;
+		_parse_native_member_definition_(class_name, name, value, result, parameters, arguments, constness, dynamic);
 
 		std::string const scope = root ? "" : "___any_a_handle___<___TTT___, ___DHB___>::";
 
@@ -1515,7 +1519,7 @@ protected:
 		}
 	}
 
-	inline void _parse_native_member_definition_(std::string const& value, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const
+	inline void _parse_native_member_definition_(std::string const& class_name, std::string const& name, std::string const& value, std::string& result, std::string& parameters, std::string& arguments, std::string& constness, std::string& dynamic) const
 	{
 		auto tokenizer = tokenizer_t<>::create_(river_t<>::create(value));
 		int64_t toke = 1;
@@ -1528,6 +1532,10 @@ protected:
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp invalid token in class definition");
 			}
 			auto const token = cast<token_a<>>(any_token);
+			if (token.tag() == "punctuation" && token.symbol() == "{")
+			{
+				break;
+			}
 			switch (toke)
 			{
 			case 1:
@@ -1579,6 +1587,15 @@ protected:
 				}
 				break;
 			}
+		}
+		auto const pos = value.find('{');
+		if (pos == std::string::npos)
+		{
+			dynamic = "{ throw dis(\"dynamic " + class_name + "::" + name + arguments + " not available\"); }";
+		}
+		else
+		{
+			dynamic = value.substr(pos);
 		}
 	}
 
