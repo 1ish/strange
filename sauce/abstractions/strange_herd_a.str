@@ -7,7 +7,7 @@ false &&
 				{	// herd
 					has_string : "bool (std::string const& s) const",
 
-					at_string : "bool (std::string const& s) const", //TODO same as has_string?
+					at_string : "any_a<> (std::string const& s) const",
 
 					update : "void (any_a<> const& thing)",
 					update_string : "void (std::string const& s)",

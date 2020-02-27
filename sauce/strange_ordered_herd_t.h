@@ -205,7 +205,7 @@ public:
 		{
 			throw dis("strange::ordered_herd::visit passed non-inventory");
 		}
-		auto inventory = cast_dup<inventory_a<>>(const_cast<range_a<>&>(range));
+		auto inventory = cast_dup<inventory_a<>>(const_cast<range_a<>&>(range)); //TODO
 		return visit_(inventory);
 	}
 
@@ -284,11 +284,9 @@ public:
 		return *it;
 	}
 
-	inline bool at_string(std::string const& s) const
+	inline any_a<> at_string(std::string const& s) const
 	{
-		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		std_set_any::const_iterator const it = _set.find(sym(s));
-		return it != _set.cend();
+		return at_(sym(s));
 	}
 
 	inline void update(any_a<> const& key, any_a<> const&)

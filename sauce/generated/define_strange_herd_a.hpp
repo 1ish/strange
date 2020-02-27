@@ -88,7 +88,7 @@ public:
 	inline bool has_string(std :: string const & s ) const
 	{ assert(handle_); return read().has_string(s); }
 
-	inline bool at_string(std :: string const & s ) const
+	inline any_a < > at_string(std :: string const & s ) const
 	{ assert(handle_); return read().at_string(s); }
 
 	inline void update(any_a < > const & thing )
@@ -110,7 +110,7 @@ protected:
 	struct ___herd_a_handle_base___ : ___collection_a_handle_base___
 	{
 		virtual bool has_string(std :: string const & s ) const = 0;
-		virtual bool at_string(std :: string const & s ) const = 0;
+		virtual any_a < > at_string(std :: string const & s ) const = 0;
 		virtual void update(any_a < > const & thing ) = 0;
 		virtual void update_string(std :: string const & s ) = 0;
 		virtual bool insert(any_a < > const & thing ) = 0;
@@ -134,7 +134,7 @@ protected:
 		virtual inline bool has_string(std :: string const & s ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.has_string(s); }
 
-		virtual inline bool at_string(std :: string const & s ) const final
+		virtual inline any_a < > at_string(std :: string const & s ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.at_string(s); }
 
 		virtual inline void update(any_a < > const & thing ) final
@@ -413,7 +413,7 @@ public:
 	inline bool has_string(std :: string const & s ) const
 	{ throw dis("dynamic herd_d::has_string(s) not available"); }
 
-	inline bool at_string(std :: string const & s ) const
+	inline any_a < > at_string(std :: string const & s ) const
 	{ throw dis("dynamic herd_d::at_string(s) not available"); }
 
 	inline void update(any_a < > const & thing )

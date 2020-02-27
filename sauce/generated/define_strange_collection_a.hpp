@@ -727,7 +727,7 @@ public:
 	}
 
 	inline bool has(any_a < > const & key ) const
-	{ throw dis("dynamic collection_d::has(key) not available"); }
+	{ return has_(key); }
 
 	inline any_a<> at__(range_a<> const& range) const
 	{
@@ -774,7 +774,7 @@ public:
 	}
 
 	inline void update(any_a < > const & key , any_a < > const & value )
-	{ throw dis("dynamic collection_d::update(key, value) not available"); }
+	{ update_(key, value); }
 
 	inline any_a<> insert__(range_a<> const& range)
 	{
@@ -799,7 +799,7 @@ public:
 	}
 
 	inline void insert(any_a < > const & key , any_a < > const & value )
-	{ throw dis("dynamic collection_d::insert(key, value) not available"); }
+	{ insert_(key, value); }
 
 	inline any_a<> erase__(range_a<> const& range)
 	{
@@ -824,7 +824,7 @@ public:
 	}
 
 	inline bool erase(any_a < > const & key )
-	{ throw dis("dynamic collection_d::erase(key) not available"); }
+	{ return erase_(key); }
 
 	inline any_a<> clear__(range_a<> const& range)
 	{
@@ -849,7 +849,7 @@ public:
 	}
 
 	inline void clear()
-	{ throw dis("dynamic collection_d::clear() not available"); }
+	{ clear_(); }
 
 	inline any_a<> size__(range_a<> const& range) const
 	{
@@ -874,7 +874,7 @@ public:
 	}
 
 	inline int64_t size() const
-	{ throw dis("dynamic collection_d::size() not available"); }
+	{ return size_().extract_primitive(); }
 
 	inline any_a<> empty__(range_a<> const& range) const
 	{
@@ -899,7 +899,7 @@ public:
 	}
 
 	inline bool empty() const
-	{ throw dis("dynamic collection_d::empty() not available"); }
+	{ return empty_(); }
 
 	inline any_a<> push_front__(range_a<> const& range)
 	{
@@ -924,7 +924,7 @@ public:
 	}
 
 	inline void push_front(any_a < > const & thing )
-	{ throw dis("dynamic collection_d::push_front(thing) not available"); }
+	{ push_front_(thing); }
 
 	inline any_a<> pop_front__(range_a<> const& range)
 	{
@@ -971,7 +971,7 @@ public:
 	}
 
 	inline void push_back(any_a < > const & thing )
-	{ throw dis("dynamic collection_d::push_back(thing) not available"); }
+	{ push_back_(thing); }
 
 	inline any_a<> pop_back__(range_a<> const& range)
 	{
@@ -1062,7 +1062,7 @@ public:
 	}
 
 	inline collection_a<number_data_int64_a> operator+(range_a < > const & range ) const
-	{ throw dis("dynamic collection_d::operator+(range) not available"); }
+	{ return add_(range); }
 
 	inline any_a<> self_subtract__(range_a<> const& range)
 	{
@@ -1109,7 +1109,7 @@ public:
 	}
 
 	inline collection_a<number_data_int64_a> operator-(range_a < > const & range ) const
-	{ throw dis("dynamic collection_d::operator-(range) not available"); }
+	{ return subtract_(range); }
 
 	inline any_a<> read_lock__(range_a<> const& range) const
 	{

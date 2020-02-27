@@ -791,7 +791,7 @@ public:
 		{
 			throw dis("strange::squad::visit passed non-inventory");
 		}
-		auto inventory = cast_dup<inventory_a<>>(const_cast<range_a<>&>(range));
+		auto inventory = cast_dup<inventory_a<>>(const_cast<range_a<>&>(range)); //TODO
 		return visit_(inventory);
 	}
 

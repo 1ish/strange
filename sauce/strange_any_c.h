@@ -234,12 +234,12 @@ public:
 			any_a<> thing = me_();
 			return op.operate(thing, range);
 		}
-		return thing_t<>::operate__(range);
+		return thing_t<>::operate__(range); //TODO
 	}
 
 	inline any_a<> visit_(inventory_a<>& inventory) const
 	{
-		return visit__(inventory);
+		return visit__(inventory); //TODO
 	}
 
 	// function

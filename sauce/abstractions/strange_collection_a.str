@@ -7,35 +7,35 @@ false &&
 				$$<range>[],
 				{	// collection
 					has_ :# (key :#, <>),
-					has : "bool (any_a<> const& key) const",
+					has : "bool (any_a<> const& key) const { return has_(key); }",
 
 					at_ :# (key :#, <>),
 
 					update_ := (key :#, value :# false, <>),
-					update : "void (any_a<> const& key, any_a<> const& value)",
+					update : "void (any_a<> const& key, any_a<> const& value) { update_(key, value); }",
 
 					insert_ := (key :#, value :# false, <>),
-					insert : "void (any_a<> const& key, any_a<> const& value)",
+					insert : "void (any_a<> const& key, any_a<> const& value) { insert_(key, value); }",
 
 					erase_ := (key :#, <>),
-					erase : "bool (any_a<> const& key)",
+					erase : "bool (any_a<> const& key) { return erase_(key); }",
 
 					clear_ := (<collection>),
-					clear : "void ()",
+					clear : "void () { clear_(); }",
 
 					size_ :# (<#number_data_int64_a>),
-					size : "int64_t () const",
+					size : "int64_t () const { return size_().extract_primitive(); }",
 
 					empty_ :# (<>),
-					empty : "bool () const",
+					empty : "bool () const { return empty_(); }",
 
 					push_front_ := (thing :#, <collection>),
-					push_front : "void (any_a<> const& thing)",
+					push_front : "void (any_a<> const& thing) { push_front_(thing); }",
 
 					pop_front_ := (<>),
 
 					push_back_ := (thing :#, <collection>),
-					push_back : "void (any_a<> const& thing)",
+					push_back : "void (any_a<> const& thing) { push_back_(thing); }",
 
 					pop_back_ := (<>),
 
@@ -44,12 +44,12 @@ false &&
 					self_add_ := (range :<range>#, <collection>),
 
 					add_ :# (range :<range>#, <collection>),
-					'operator+' : "collection_a (range_a<> const& range) const",
+					'operator+' : "collection_a (range_a<> const& range) const { return add_(range); }",
 
 					self_subtract_ := (range :<range>#, <collection>),
 
 					subtract_ :# (range :<range>#, <collection>),
-					'operator-' : "collection_a (range_a<> const& range) const",
+					'operator-' : "collection_a (range_a<> const& range) const { return subtract_(range); }",
 
 					read_lock_ :# (<>),
 

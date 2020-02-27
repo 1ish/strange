@@ -7,7 +7,6 @@ false &&
 				$$<>[],
 				{	// range
 					cbegin_ :# (<forward_const_iterator>),
-
 					cend_ :# (<forward_const_iterator>),
 				}
 			)

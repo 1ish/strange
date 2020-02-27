@@ -85,7 +85,7 @@ public:
 	// visitor pattern
 	static inline any_a<> visit__(range_a<> const& range)
 	{
-		return operate__(range);
+		return operate__(range); //TODO
 	}
 
 	static inline any_a<> visit_(inventory_a<>& inventory)

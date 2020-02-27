@@ -8,8 +8,8 @@ false &&
 					pure_ :# (<>),
 					pure : "bool () const { return pure_(); }",
 
-					aspects : "void (unordered_shoal_a<> const& shoal)",
-					assign : "void (operation_a<> const& operation)",
+					aspects : "void (unordered_shoal_a<> const& shoal)", //TODO
+					assign : "void (operation_a<> const& operation)", //TODO
 
 					names_ :# (<flock>),
 				}
