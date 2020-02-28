@@ -5,17 +5,17 @@ false &&
 			(	// parent
 				$$<collection>[],
 				{	// herd
-					has_string : "bool (std::string const& s) const",
+					has_string : "bool (std::string const& s) const { return has(sym(s)); }",
 
-					at_string : "any_a<> (std::string const& s) const",
+					at_string : "any_a<> (std::string const& s) const { return at_(sym(s)); }",
 
-					update : "void (any_a<> const& thing)",
-					update_string : "void (std::string const& s)",
+					update : "void (any_a<> const& thing) { update_(thing, no()); }",
+					update_string : "void (std::string const& s) { update(sym(s)); }",
 
-					insert : "bool (any_a<> const& thing)",
-					insert_string : "bool (std::string const& s)",
+					insert : "bool (any_a<> const& thing) { return insert_(thing, no()); }",
+					insert_string : "bool (std::string const& s) { return insert(sym(s)); }",
 
-					erase_string : "bool (std::string const& s)",
+					erase_string : "bool (std::string const& s) { return erase(sym(s)); }",
 				}
 			)
 		)

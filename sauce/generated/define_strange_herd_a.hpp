@@ -411,25 +411,25 @@ public:
 	}
 
 	inline bool has_string(std :: string const & s ) const
-	{ throw dis("dynamic herd_d::has_string(s) not available"); }
+	{ return has(sym(s)); }
 
 	inline any_a < > at_string(std :: string const & s ) const
-	{ throw dis("dynamic herd_d::at_string(s) not available"); }
+	{ return at_(sym(s)); }
 
 	inline void update(any_a < > const & thing )
-	{ throw dis("dynamic herd_d::update(thing) not available"); }
+	{ update_(thing, no()); }
 
 	inline void update_string(std :: string const & s )
-	{ throw dis("dynamic herd_d::update_string(s) not available"); }
+	{ update(sym(s)); }
 
 	inline bool insert(any_a < > const & thing )
-	{ throw dis("dynamic herd_d::insert(thing) not available"); }
+	{ return insert_(thing, no()); }
 
 	inline bool insert_string(std :: string const & s )
-	{ throw dis("dynamic herd_d::insert_string(s) not available"); }
+	{ return insert(sym(s)); }
 
 	inline bool erase_string(std :: string const & s )
-	{ throw dis("dynamic herd_d::erase_string(s) not available"); }
+	{ return erase(sym(s)); }
 
 	explicit herd_d(any_a<> const& thing)
 		: collection_d{ thing }
