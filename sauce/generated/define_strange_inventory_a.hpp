@@ -425,19 +425,19 @@ public:
 	}
 
 	inline bool has_index(int64_t index ) const
-	{ throw dis("dynamic inventory_d::has_index(index) not available"); }
+	{ return has_(num(index)); }
 
 	inline any_a < > at_index(int64_t index ) const
-	{ throw dis("dynamic inventory_d::at_index(index) not available"); }
+	{ return at_(num(index)); }
 
 	inline void update_index(int64_t index , any_a < > const & value )
-	{ throw dis("dynamic inventory_d::update_index(index, value) not available"); }
+	{ update_(num(index), value); }
 
 	inline bool insert_index(int64_t index , any_a < > const & value )
-	{ throw dis("dynamic inventory_d::insert_index(index, value) not available"); }
+	{ return insert_(num(index), value); }
 
 	inline bool erase_index(int64_t index )
-	{ throw dis("dynamic inventory_d::erase_index(index) not available"); }
+	{ return erase_(num(index)); }
 
 	inline any_a<> begin__(range_a<> const& range)
 	{

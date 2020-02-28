@@ -5,11 +5,11 @@ false &&
 			(	// parent
 				$$<collection>[],
 				{	// inventory
-					has_index : "bool (int64_t index) const",
-					at_index : "any_a<> (int64_t index) const",
-					update_index : "void (int64_t index, any_a<> const& value)",
-					insert_index : "bool (int64_t index, any_a<> const& value)",
-					erase_index : "bool (int64_t index)",
+					has_index : "bool (int64_t index) const { return has_(num(index)); }",
+					at_index : "any_a<> (int64_t index) const { return at_(num(index)); }",
+					update_index : "void (int64_t index, any_a<> const& value) { update_(num(index), value); }",
+					insert_index : "bool (int64_t index, any_a<> const& value) { return insert_(num(index), value); }",
+					erase_index : "bool (int64_t index) { return erase_(num(index)); }",
 
 					// mutable range
 					begin_ := (<random_access_iterator>),
