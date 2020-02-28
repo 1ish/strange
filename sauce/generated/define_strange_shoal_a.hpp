@@ -425,19 +425,19 @@ public:
 	}
 
 	inline bool has_string(std :: string const & s ) const
-	{ throw dis("dynamic shoal_d::has_string(s) not available"); }
+	{ return has(sym(s)); }
 
 	inline any_a < > at_string(std :: string const & s ) const
-	{ throw dis("dynamic shoal_d::at_string(s) not available"); }
+	{ return at_(sym(s)); }
 
 	inline void update_string(std :: string const & s , any_a < > const & value )
-	{ throw dis("dynamic shoal_d::update_string(s, value) not available"); }
+	{ update_(sym(s), value); }
 
 	inline bool insert_string(std :: string const & s , any_a < > const & value )
-	{ throw dis("dynamic shoal_d::insert_string(s, value) not available"); }
+	{ return insert_(sym(s), value); }
 
 	inline bool erase_string(std :: string const & s )
-	{ throw dis("dynamic shoal_d::erase_string(s) not available"); }
+	{ return erase_(sym(s)); }
 
 	inline any_a<> begin__(range_a<> const& range)
 	{
