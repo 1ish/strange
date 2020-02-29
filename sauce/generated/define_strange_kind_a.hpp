@@ -148,37 +148,37 @@ protected:
 		{}
 
 		virtual inline any_a<> aspects__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.aspects__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects__(range); }
 
 		virtual inline flock_a<> aspects_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.aspects_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects_(); }
 
 		virtual inline any_a<> fixed__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.fixed__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed__(range); }
 
 		virtual inline any_a<> fixed_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.fixed_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed_(); }
 
 		virtual inline bool fixed() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.fixed(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed(); }
 
 		virtual inline any_a<> reference__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.reference__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference__(range); }
 
 		virtual inline any_a<> reference_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.reference_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference_(); }
 
 		virtual inline bool reference() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.reference(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference(); }
 
 		virtual inline any_a<> optional__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.optional__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.optional__(range); }
 
 		virtual inline any_a<> optional_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.optional_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.optional_(); }
 
 		virtual inline bool optional() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.optional(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.optional(); }
 
 	};
 
@@ -207,7 +207,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___kind_a_handle_final___>(___kind_a_handle___<___TTT___>::value_);
+			return std::make_shared<___kind_a_handle_final___>(___kind_a_handle___<___TTT___>::___value___);
 		}
 	};
 

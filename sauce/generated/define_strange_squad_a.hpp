@@ -112,10 +112,10 @@ protected:
 		{}
 
 		virtual inline std :: deque < any_a < > > const & extract_deque() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.extract_deque(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_deque(); }
 
 		virtual inline std :: deque < any_a < > > & mutate_deque() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.mutate_deque(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_deque(); }
 
 	};
 
@@ -144,7 +144,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___squad_a_handle_final___>(___squad_a_handle___<___TTT___>::value_);
+			return std::make_shared<___squad_a_handle_final___>(___squad_a_handle___<___TTT___>::___value___);
 		}
 	};
 

@@ -112,10 +112,10 @@ protected:
 		{}
 
 		virtual inline _1_ const & extract_data() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.extract_data(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_data(); }
 
 		virtual inline _1_ & mutate_data() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.mutate_data(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_data(); }
 
 	};
 
@@ -144,7 +144,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___data_a_handle_final___>(___data_a_handle___<___TTT___>::value_);
+			return std::make_shared<___data_a_handle_final___>(___data_a_handle___<___TTT___>::___value___);
 		}
 	};
 

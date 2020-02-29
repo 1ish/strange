@@ -948,57 +948,57 @@ protected:
 				"\t{\n"
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
 				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)\n"
-				"\t\t\t: value_{ value }\n"
+				"\t\t\t: ___value___{ value }\n"
 				"\t\t{}\n\n"
 
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
 				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
-				"\t\t\t: value_{ std::move(value) }\n"
+				"\t\t\t: ___value___{ std::move(value) }\n"
 				"\t\t{}\n\n"
 
 				"\t\tvirtual inline void ___weak___(___WEAK___ const& weak) const final\n"
 				"\t\t{\n"
-				"\t\t\tvalue_.___weak___(weak);\n"
+				"\t\t\t___value___.___weak___(weak);\n"
 				"\t\t}\n\n"
 
 				"\t\tvirtual inline operator bool() const final\n"
 				"\t\t{\n"
-				"\t\t\treturn value_.operator bool();\n"
+				"\t\t\treturn ___value___.operator bool();\n"
 				"\t\t}\n\n"
 
 				"\t\tvirtual inline void operator++() final\n"
 				"\t\t{\n"
-				"\t\t\tvalue_.operator++();\n"
+				"\t\t\t___value___.operator++();\n"
 				"\t\t}\n\n"
 
 				"\t\tvirtual inline void operator--() final\n"
 				"\t\t{\n"
-				"\t\t\tvalue_.operator--();\n"
+				"\t\t\t___value___.operator--();\n"
 				"\t\t}\n\n"
 
 				"\t\tvirtual inline void operator+=(any_a<> const& other) final\n"
 				"\t\t{\n"
-				"\t\t\tvalue_.operator+=(other);\n"
+				"\t\t\t___value___.operator+=(other);\n"
 				"\t\t}\n\n"
 
 				"\t\tvirtual inline void operator-=(any_a<> const& other) final\n"
 				"\t\t{\n"
-				"\t\t\tvalue_.operator-=(other);\n"
+				"\t\t\t___value___.operator-=(other);\n"
 				"\t\t}\n\n"
 
 				"\t\tvirtual inline void operator*=(any_a<> const& other) final\n"
 				"\t\t{\n"
-				"\t\t\tvalue_.operator*=(other);\n"
+				"\t\t\t___value___.operator*=(other);\n"
 				"\t\t}\n\n"
 
 				"\t\tvirtual inline void operator/=(any_a<> const& other) final\n"
 				"\t\t{\n"
-				"\t\t\tvalue_.operator/=(other);\n"
+				"\t\t\t___value___.operator/=(other);\n"
 				"\t\t}\n\n"
 
 				"\t\tvirtual inline void operator%=(any_a<> const& other) final\n"
 				"\t\t{\n"
-				"\t\t\tvalue_.operator%=(other);\n"
+				"\t\t\t___value___.operator%=(other);\n"
 				"\t\t}\n\n");
 		}
 		else
@@ -1023,7 +1023,7 @@ protected:
 		if (root)
 		{
 			river.write_string(
-				"\t\t___TTT___ value_;\n"
+				"\t\t___TTT___ ___value___;\n"
 				"\t};\n\n"
 
 				"\ttemplate <typename ___TTT___, typename ___BHB___>\n"
@@ -1056,7 +1056,7 @@ protected:
 
 				"\t\tvirtual inline ___SHARED___ ___clone___() const final\n"
 				"\t\t{\n"
-				"\t\t\treturn std::make_shared<___" + class_name + "_handle_final___>(___" + class_name + "_handle___<___TTT___>::value_);\n"
+				"\t\t\treturn std::make_shared<___" + class_name + "_handle_final___>(___" + class_name + "_handle___<___TTT___>::___value___);\n"
 				"\t\t}\n"
 				"\t};\n\n"
 
@@ -1099,7 +1099,7 @@ protected:
 
 				"\t\tvirtual inline ___SHARED___ ___clone___() const final\n"
 				"\t\t{\n"
-				"\t\t\treturn std::make_shared<___" + class_name + "_handle_final___>(___" + class_name + "_handle___<___TTT___>::value_);\n"
+				"\t\t\treturn std::make_shared<___" + class_name + "_handle_final___>(___" + class_name + "_handle___<___TTT___>::___value___);\n"
 				"\t\t}\n"
 				"\t};\n\n"
 
@@ -1154,11 +1154,11 @@ protected:
 		river.write_string(
 			"\t\tvirtual inline any_a<> " + name + "_(range_a" +
 			(root ? "" : "<>") + " const& range)" + constness + " final\n"
-			"\t\t{ return " + scope + "value_." + name + "_(range); }\n\n");
+			"\t\t{ return " + scope + "___value___." + name + "_(range); }\n\n");
 
 		river.write_string(
 			"\t\tvirtual inline " + result + " " + name + parameters + constness + " final\n"
-			"\t\t{ return " + scope + "value_." + name + arguments + "; }\n\n");
+			"\t\t{ return " + scope + "___value___." + name + arguments + "; }\n\n");
 	}
 
 	inline void _define_class_virtual_native_member_(bool root, std::string const& class_name, std::string const& name, std::string const& value, int64_t version, river_a<>& river) const
@@ -1179,7 +1179,7 @@ protected:
 		{
 			river.write_string("return ");
 		}
-		river.write_string(scope + "value_." + name + arguments + "; }\n\n");
+		river.write_string(scope + "___value___." + name + arguments + "; }\n\n");
 	}
 
 	inline void _define_class_implementation_(bool root, std::string const& class_name, std::string const& base_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const

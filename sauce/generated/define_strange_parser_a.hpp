@@ -112,10 +112,10 @@ protected:
 		{}
 
 		virtual inline any_a<> parse__(range_a<> const& range) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.parse__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parse__(range); }
 
 		virtual inline expression_a<> parse_(range_a<> const& tokenizer) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.parse_(tokenizer); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parse_(tokenizer); }
 
 	};
 
@@ -144,7 +144,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___parser_a_handle_final___>(___parser_a_handle___<___TTT___>::value_);
+			return std::make_shared<___parser_a_handle_final___>(___parser_a_handle___<___TTT___>::___value___);
 		}
 	};
 

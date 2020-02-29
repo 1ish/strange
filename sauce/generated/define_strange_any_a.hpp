@@ -322,189 +322,189 @@ protected:
 	{
 		template <typename ___UUU___ = ___TTT___>
 		inline ___any_a_handle___(___TTT___ value, typename std::enable_if_t<std::is_reference<___UUU___>::value>* = 0)
-			: value_{ value }
+			: ___value___{ value }
 		{}
 
 		template <typename ___UUU___ = ___TTT___>
 		inline ___any_a_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
-			: value_{ std::move(value) }
+			: ___value___{ std::move(value) }
 		{}
 
 		virtual inline void ___weak___(___WEAK___ const& weak) const final
 		{
-			value_.___weak___(weak);
+			___value___.___weak___(weak);
 		}
 
 		virtual inline operator bool() const final
 		{
-			return value_.operator bool();
+			return ___value___.operator bool();
 		}
 
 		virtual inline void operator++() final
 		{
-			value_.operator++();
+			___value___.operator++();
 		}
 
 		virtual inline void operator--() final
 		{
-			value_.operator--();
+			___value___.operator--();
 		}
 
 		virtual inline void operator+=(any_a<> const& other) final
 		{
-			value_.operator+=(other);
+			___value___.operator+=(other);
 		}
 
 		virtual inline void operator-=(any_a<> const& other) final
 		{
-			value_.operator-=(other);
+			___value___.operator-=(other);
 		}
 
 		virtual inline void operator*=(any_a<> const& other) final
 		{
-			value_.operator*=(other);
+			___value___.operator*=(other);
 		}
 
 		virtual inline void operator/=(any_a<> const& other) final
 		{
-			value_.operator/=(other);
+			___value___.operator/=(other);
 		}
 
 		virtual inline void operator%=(any_a<> const& other) final
 		{
-			value_.operator%=(other);
+			___value___.operator%=(other);
 		}
 
 		virtual inline one_t const & extract_thing() const final
-		{ return value_.extract_thing(); }
+		{ return ___value___.extract_thing(); }
 
 		virtual inline one_t & mutate_thing() final
-		{ return value_.mutate_thing(); }
+		{ return ___value___.mutate_thing(); }
 
 		virtual inline any_a<> type__(range_a const& range) const final
-		{ return value_.type__(range); }
+		{ return ___value___.type__(range); }
 
 		virtual inline symbol_a type_() const final
-		{ return value_.type_(); }
+		{ return ___value___.type_(); }
 
 		virtual inline any_a<> shared__(range_a const& range) const final
-		{ return value_.shared__(range); }
+		{ return ___value___.shared__(range); }
 
 		virtual inline unordered_shoal_a shared_() const final
-		{ return value_.shared_(); }
+		{ return ___value___.shared_(); }
 
 		virtual inline void share(shoal_a & shoal ) const final
-		{ value_.share(shoal); }
+		{ ___value___.share(shoal); }
 
 		virtual inline any_a<> cat__(range_a const& range) const final
-		{ return value_.cat__(range); }
+		{ return ___value___.cat__(range); }
 
 		virtual inline cat_a cat_() const final
-		{ return value_.cat_(); }
+		{ return ___value___.cat_(); }
 
 		virtual inline any_a<> cats__(range_a const& range) const final
-		{ return value_.cats__(range); }
+		{ return ___value___.cats__(range); }
 
 		virtual inline unordered_herd_a cats_() const final
-		{ return value_.cats_(); }
+		{ return ___value___.cats_(); }
 
 		virtual inline any_a<> kind__(range_a const& range) const final
-		{ return value_.kind__(range); }
+		{ return ___value___.kind__(range); }
 
 		virtual inline kind_a kind_() const final
-		{ return value_.kind_(); }
+		{ return ___value___.kind_(); }
 
 		virtual inline any_a<> kinds__(range_a const& range) const final
-		{ return value_.kinds__(range); }
+		{ return ___value___.kinds__(range); }
 
 		virtual inline unordered_herd_a kinds_() const final
-		{ return value_.kinds_(); }
+		{ return ___value___.kinds_(); }
 
 		virtual inline any_a<> operations__(range_a const& range) const final
-		{ return value_.operations__(range); }
+		{ return ___value___.operations__(range); }
 
 		virtual inline unordered_shoal_a operations_() const final
-		{ return value_.operations_(); }
+		{ return ___value___.operations_(); }
 
 		virtual inline any_a<> visit__(range_a const& range) const final
-		{ return value_.visit__(range); }
+		{ return ___value___.visit__(range); }
 
 		virtual inline any_a<> visit_(inventory_a & inventory) const final
-		{ return value_.visit_(inventory); }
+		{ return ___value___.visit_(inventory); }
 
 		virtual inline any_a < > invoke(any_a < > & thing , range_a const & range ) const final
-		{ return value_.invoke(thing, range); }
+		{ return ___value___.invoke(thing, range); }
 
 		virtual inline any_a < > operate(any_a < > & thing , range_a const & range ) const final
-		{ return value_.operate(thing, range); }
+		{ return ___value___.operate(thing, range); }
 
 		virtual inline any_a<> identity__(range_a const& range) const final
-		{ return value_.identity__(range); }
+		{ return ___value___.identity__(range); }
 
 		virtual inline number_data_uint64_a identity_() const final
-		{ return value_.identity_(); }
+		{ return ___value___.identity_(); }
 
 		virtual inline void const * identity() const final
-		{ return value_.identity(); }
+		{ return ___value___.identity(); }
 
 		virtual inline any_a<> identical__(range_a const& range) const final
-		{ return value_.identical__(range); }
+		{ return ___value___.identical__(range); }
 
 		virtual inline any_a<> identical_(any_a<> const& thing) const final
-		{ return value_.identical_(thing); }
+		{ return ___value___.identical_(thing); }
 
 		virtual inline bool identical(any_a < > const & thing ) const final
-		{ return value_.identical(thing); }
+		{ return ___value___.identical(thing); }
 
 		virtual inline any_a<> nothing__(range_a const& range) const final
-		{ return value_.nothing__(range); }
+		{ return ___value___.nothing__(range); }
 
 		virtual inline any_a<> nothing_() const final
-		{ return value_.nothing_(); }
+		{ return ___value___.nothing_(); }
 
 		virtual inline bool nothing() const final
-		{ return value_.nothing(); }
+		{ return ___value___.nothing(); }
 
 		virtual inline any_a<> something__(range_a const& range) const final
-		{ return value_.something__(range); }
+		{ return ___value___.something__(range); }
 
 		virtual inline any_a<> something_() const final
-		{ return value_.something_(); }
+		{ return ___value___.something_(); }
 
 		virtual inline bool something() const final
-		{ return value_.something(); }
+		{ return ___value___.something(); }
 
 		virtual inline any_a<> same__(range_a const& range) const final
-		{ return value_.same__(range); }
+		{ return ___value___.same__(range); }
 
 		virtual inline any_a<> same_(any_a<> const& thing) const final
-		{ return value_.same_(thing); }
+		{ return ___value___.same_(thing); }
 
 		virtual inline bool operator==(any_a < > const & thing ) const final
-		{ return value_.operator==(thing); }
+		{ return ___value___.operator==(thing); }
 
 		virtual inline any_a<> different__(range_a const& range) const final
-		{ return value_.different__(range); }
+		{ return ___value___.different__(range); }
 
 		virtual inline any_a<> different_(any_a<> const& thing) const final
-		{ return value_.different_(thing); }
+		{ return ___value___.different_(thing); }
 
 		virtual inline bool operator!=(any_a < > const & thing ) const final
-		{ return value_.operator!=(thing); }
+		{ return ___value___.operator!=(thing); }
 
 		virtual inline any_a<> hash__(range_a const& range) const final
-		{ return value_.hash__(range); }
+		{ return ___value___.hash__(range); }
 
 		virtual inline number_data_uint64_a hash_() const final
-		{ return value_.hash_(); }
+		{ return ___value___.hash_(); }
 
 		virtual inline std :: size_t hash() const final
-		{ return value_.hash(); }
+		{ return ___value___.hash(); }
 
 		virtual inline bool is(std :: string const & s ) const final
-		{ return value_.is(s); }
+		{ return ___value___.is(s); }
 
-		___TTT___ value_;
+		___TTT___ ___value___;
 	};
 
 	template <typename ___TTT___, typename ___BHB___>
@@ -537,7 +537,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___any_a_handle_final___>(___any_a_handle___<___TTT___>::value_);
+			return std::make_shared<___any_a_handle_final___>(___any_a_handle___<___TTT___>::___value___);
 		}
 	};
 

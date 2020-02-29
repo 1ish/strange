@@ -112,10 +112,10 @@ protected:
 		{}
 
 		virtual inline std :: map < any_a < > , any_a < > > const & extract_map() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.extract_map(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_map(); }
 
 		virtual inline std :: map < any_a < > , any_a < > > & mutate_map() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.mutate_map(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_map(); }
 
 	};
 
@@ -144,7 +144,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___ordered_shoal_a_handle_final___>(___ordered_shoal_a_handle___<___TTT___>::value_);
+			return std::make_shared<___ordered_shoal_a_handle_final___>(___ordered_shoal_a_handle___<___TTT___>::___value___);
 		}
 	};
 

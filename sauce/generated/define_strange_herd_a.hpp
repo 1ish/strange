@@ -132,25 +132,25 @@ protected:
 		{}
 
 		virtual inline bool has_string(std :: string const & s ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.has_string(s); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.has_string(s); }
 
 		virtual inline any_a < > at_string(std :: string const & s ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.at_string(s); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.at_string(s); }
 
 		virtual inline void update(any_a < > const & thing ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.update(thing); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.update(thing); }
 
 		virtual inline void update_string(std :: string const & s ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::value_.update_string(s); }
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.update_string(s); }
 
 		virtual inline bool insert(any_a < > const & thing ) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.insert(thing); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.insert(thing); }
 
 		virtual inline bool insert_string(std :: string const & s ) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.insert_string(s); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_string(s); }
 
 		virtual inline bool erase_string(std :: string const & s ) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.erase_string(s); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_string(s); }
 
 	};
 
@@ -179,7 +179,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___herd_a_handle_final___>(___herd_a_handle___<___TTT___>::value_);
+			return std::make_shared<___herd_a_handle_final___>(___herd_a_handle___<___TTT___>::___value___);
 		}
 	};
 

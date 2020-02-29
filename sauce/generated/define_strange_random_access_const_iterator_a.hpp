@@ -192,70 +192,70 @@ protected:
 		{}
 
 		virtual inline any_a<> self_add__(range_a<> const& range) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_add__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add__(range); }
 
 		virtual inline random_access_const_iterator_a<> self_add_(number_a<> const& number) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_add_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }
 
 		virtual inline any_a<> add__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.add__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add__(range); }
 
 		virtual inline random_access_const_iterator_a<> add_(number_a<> const& number) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.add_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(number); }
 
 		virtual inline random_access_const_iterator_a operator+(number_a < > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator+(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(number); }
 
 		virtual inline any_a<> self_subtract__(range_a<> const& range) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_subtract__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract__(range); }
 
 		virtual inline random_access_const_iterator_a<> self_subtract_(number_a<> const& number) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.self_subtract_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
 
 		virtual inline any_a<> subtract__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.subtract__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract__(range); }
 
 		virtual inline random_access_const_iterator_a<> subtract_(number_a<> const& number) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.subtract_(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
 
 		virtual inline random_access_const_iterator_a operator-(number_a < > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator-(number); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator-(number); }
 
 		virtual inline any_a<> less_than__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.less_than__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_than__(range); }
 
 		virtual inline any_a<> less_than_(random_access_const_iterator_a<> const& it) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.less_than_(it); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_than_(it); }
 
 		virtual inline bool operator<(random_access_const_iterator_a < > const & it ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator<(it); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(it); }
 
 		virtual inline any_a<> greater_than__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.greater_than__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_than__(range); }
 
 		virtual inline any_a<> greater_than_(random_access_const_iterator_a<> const& it) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.greater_than_(it); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_than_(it); }
 
 		virtual inline bool operator>(random_access_const_iterator_a < > const & it ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator>(it); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(it); }
 
 		virtual inline any_a<> less_or_equal__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.less_or_equal__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_or_equal__(range); }
 
 		virtual inline any_a<> less_or_equal_(random_access_const_iterator_a<> const& it) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.less_or_equal_(it); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_or_equal_(it); }
 
 		virtual inline bool operator<=(random_access_const_iterator_a < > const & it ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator<=(it); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(it); }
 
 		virtual inline any_a<> greater_or_equal__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.greater_or_equal__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_or_equal__(range); }
 
 		virtual inline any_a<> greater_or_equal_(random_access_const_iterator_a<> const& it) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.greater_or_equal_(it); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_or_equal_(it); }
 
 		virtual inline bool operator>=(random_access_const_iterator_a < > const & it ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator>=(it); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(it); }
 
 	};
 
@@ -284,7 +284,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___random_access_const_iterator_a_handle_final___>(___random_access_const_iterator_a_handle___<___TTT___>::value_);
+			return std::make_shared<___random_access_const_iterator_a_handle_final___>(___random_access_const_iterator_a_handle___<___TTT___>::___value___);
 		}
 	};
 

@@ -112,10 +112,10 @@ protected:
 		{}
 
 		virtual inline _1_ const & extract_it() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.extract_it(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_it(); }
 
 		virtual inline _1_ & mutate_it() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.mutate_it(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_it(); }
 
 	};
 
@@ -144,7 +144,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___bidirectional_iterator_data_a_handle_final___>(___bidirectional_iterator_data_a_handle___<___TTT___>::value_);
+			return std::make_shared<___bidirectional_iterator_data_a_handle_final___>(___bidirectional_iterator_data_a_handle___<___TTT___>::___value___);
 		}
 	};
 

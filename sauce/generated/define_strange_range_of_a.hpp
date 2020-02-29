@@ -120,16 +120,16 @@ protected:
 		{}
 
 		virtual inline any_a<> cbegin__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.cbegin__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cbegin__(range); }
 
 		virtual inline forward_const_iterator_a<> cbegin_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.cbegin_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cbegin_(); }
 
 		virtual inline any_a<> cend__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.cend__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cend__(range); }
 
 		virtual inline forward_const_iterator_a<> cend_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.cend_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cend_(); }
 
 	};
 
@@ -158,7 +158,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___range_of_a_handle_final___>(___range_of_a_handle___<___TTT___>::value_);
+			return std::make_shared<___range_of_a_handle_final___>(___range_of_a_handle___<___TTT___>::___value___);
 		}
 	};
 

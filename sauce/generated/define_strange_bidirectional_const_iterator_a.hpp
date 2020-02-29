@@ -112,10 +112,10 @@ protected:
 		{}
 
 		virtual inline any_a<> decrement__(range_a<> const& range) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.decrement__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement__(range); }
 
 		virtual inline bidirectional_const_iterator_a<> decrement_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.decrement_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement_(); }
 
 	};
 
@@ -144,7 +144,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___bidirectional_const_iterator_a_handle_final___>(___bidirectional_const_iterator_a_handle___<___TTT___>::value_);
+			return std::make_shared<___bidirectional_const_iterator_a_handle_final___>(___bidirectional_const_iterator_a_handle___<___TTT___>::___value___);
 		}
 	};
 

@@ -112,10 +112,10 @@ protected:
 		{}
 
 		virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.extract_set(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_set(); }
 
 		virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.mutate_set(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_set(); }
 
 	};
 
@@ -144,7 +144,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___unordered_herd_a_handle_final___>(___unordered_herd_a_handle___<___TTT___>::value_);
+			return std::make_shared<___unordered_herd_a_handle_final___>(___unordered_herd_a_handle___<___TTT___>::___value___);
 		}
 	};
 

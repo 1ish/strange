@@ -112,10 +112,10 @@ protected:
 		{}
 
 		virtual inline std :: vector < any_a < > > const & extract_vector() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.extract_vector(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_vector(); }
 
 		virtual inline std :: vector < any_a < > > & mutate_vector() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.mutate_vector(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_vector(); }
 
 	};
 
@@ -144,7 +144,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___flock_a_handle_final___>(___flock_a_handle___<___TTT___>::value_);
+			return std::make_shared<___flock_a_handle_final___>(___flock_a_handle___<___TTT___>::___value___);
 		}
 	};
 

@@ -136,28 +136,28 @@ protected:
 		{}
 
 		virtual inline any_a<> to_lake__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_lake__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake__(range); }
 
 		virtual inline lake_int8_a<> to_lake_() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_lake_(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
 
 		virtual inline std :: string const & to_string() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.to_string(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
 
 		virtual inline int8_t first_character() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.first_character(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.first_character(); }
 
 		virtual inline int8_t last_character() const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.last_character(); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.last_character(); }
 
 		virtual inline any_a<> add__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.add__(range); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add__(range); }
 
 		virtual inline symbol_a<> add_(symbol_a<> const& symbol) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.add_(symbol); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(symbol); }
 
 		virtual inline symbol_a < > operator+(symbol_a < > const & symbol ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::value_.operator+(symbol); }
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(symbol); }
 
 	};
 
@@ -186,7 +186,7 @@ private:
 
 		virtual inline ___SHARED___ ___clone___() const final
 		{
-			return std::make_shared<___symbol_a_handle_final___>(___symbol_a_handle___<___TTT___>::value_);
+			return std::make_shared<___symbol_a_handle_final___>(___symbol_a_handle___<___TTT___>::___value___);
 		}
 	};
 
