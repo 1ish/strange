@@ -91,7 +91,7 @@ public:
 	inline lake_int8_a<> to_lake_() const
 	{ assert(___handle___); return ___read___().to_lake_(); }
 
-	inline std :: string const & to_string() const
+	inline std :: string to_string() const
 	{ assert(___handle___); return ___read___().to_string(); }
 
 	inline int8_t first_character() const
@@ -114,7 +114,7 @@ protected:
 	{
 		virtual any_a<> to_lake__(range_a<> const& range) const = 0;
 		virtual lake_int8_a<> to_lake_() const = 0;
-		virtual std :: string const & to_string() const = 0;
+		virtual std :: string to_string() const = 0;
 		virtual int8_t first_character() const = 0;
 		virtual int8_t last_character() const = 0;
 		virtual any_a<> add__(range_a<> const& range) const = 0;
@@ -141,7 +141,7 @@ protected:
 		virtual inline lake_int8_a<> to_lake_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
 
-		virtual inline std :: string const & to_string() const final
+		virtual inline std :: string to_string() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
 
 		virtual inline int8_t first_character() const final
@@ -449,7 +449,7 @@ public:
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<symbol_d*>(this)));
 	}
 
-	inline std :: string const & to_string() const
+	inline std :: string to_string() const
 	{ return lake_to_string(to_lake_()); }
 
 	inline int8_t first_character() const

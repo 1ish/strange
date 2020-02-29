@@ -345,6 +345,7 @@ inline any_a<> variadic_operate(any_a<> const& op, any_a<>& thing, Args&&... arg
 // check/cast
 template <typename ___TTT___, typename ___VVV___>
 inline bool check(___VVV___ const&) noexcept;
+/*
 #ifdef STRANGE_CHECK_STATIC_CASTS
 template <typename ___TTT___>
 inline ___TTT___ cast(any_a<> const& value);
@@ -352,6 +353,11 @@ inline ___TTT___ cast(any_a<> const& value);
 template <typename ___TTT___>
 inline ___TTT___ cast(any_a<> const& value) noexcept;
 #endif
+*/
+///*
+template <typename ___TTT___>
+inline ___TTT___ cast(any_a<> const& value) noexcept;
+//*/
 #ifdef STRANGE_CHECK_STATIC_CASTS
 template <typename ___TTT___>
 inline ___TTT___ cast_ref(any_a<>& value);

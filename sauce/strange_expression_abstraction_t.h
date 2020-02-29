@@ -1228,6 +1228,7 @@ protected:
 		if (root)
 		{
 			river.write_string(
+				"/*\n"
 				"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
 				"\ttemplate <typename ___TTT___>\n"
 				"\tfriend inline ___TTT___ cast(" + class_name + "<> const& value);\n"
@@ -1235,6 +1236,7 @@ protected:
 				"\ttemplate <typename ___TTT___>\n"
 				"\tfriend inline ___TTT___ cast(" + class_name + "<> const& value) noexcept;\n"
 				"#endif\n"
+				"*/\n"
 				"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
 				"\ttemplate <typename ___TTT___>\n"
 				"\tfriend inline ___TTT___ cast_ref(" + class_name + "<>& value);\n"

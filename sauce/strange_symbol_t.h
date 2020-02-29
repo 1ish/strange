@@ -83,7 +83,7 @@ public:
 		return lake_from_string(_string);
 	}
 
-	inline std::string const& to_string() const
+	inline std::string to_string() const
 	{
 		return _string;
 	}
