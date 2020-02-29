@@ -270,7 +270,7 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats)
 		{
 			throw dis("strange::kinds_from_cats passed non-cat");
 		}
-		result.insert(kind_from_cat(cast<cat_a<>>(cat)));
+		result.insert_thing(kind_from_cat(cast<cat_a<>>(cat)));
 	}
 	return result;
 }
@@ -284,7 +284,7 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 		{
 			throw dis("strange::kinds_from_cats passed non-cat");
 		}
-		result.insert(kind_from_cat(cast<cat_a<>>(cat), aspects, fixed, reference, optional));
+		result.insert_thing(kind_from_cat(cast<cat_a<>>(cat), aspects, fixed, reference, optional));
 	}
 	return result;
 }
@@ -298,7 +298,7 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 		{
 			throw dis("strange::kinds_from_cats passed non-cat");
 		}
-		result.insert(kind_from_cat(cast<cat_a<>>(cat), aspects));
+		result.insert_thing(kind_from_cat(cast<cat_a<>>(cat), aspects));
 	}
 	return result;
 }
@@ -317,7 +317,7 @@ inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds)
 		{
 			throw dis("strange::kinds_to_cats passed non-kind");
 		}
-		result.insert(kind_to_cat(cast<kind_a<>>(kind)));
+		result.insert_thing(kind_to_cat(cast<kind_a<>>(kind)));
 	}
 	return result;
 }

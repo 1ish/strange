@@ -19,7 +19,7 @@ public:
 		static unordered_herd_a<> CATS = []()
 		{
 			auto cats = reflection<forward_const_iterator_a<>>::cats();
-			cats.insert(cat());
+			cats.insert_thing(cat());
 			return cats;
 		}();
 		return CATS;
@@ -36,7 +36,7 @@ public:
 		static unordered_herd_a<> KINDS = []()
 		{
 			auto kinds = reflection<forward_const_iterator_a<>>::kinds();
-			kinds.insert(kind());
+			kinds.insert_thing(kind());
 			return kinds;
 		}();
 		return KINDS;
@@ -68,7 +68,7 @@ public:
 		static unordered_herd_a<> CATS = []()
 		{
 			auto cats = reflection<forward_const_iterator_a<>>::cats();
-			cats.insert(cat());
+			cats.insert_thing(cat());
 			return cats;
 		}();
 		return CATS;
@@ -85,7 +85,7 @@ public:
 		static unordered_herd_a<> KINDS = []()
 		{
 			auto kinds = reflection<forward_const_iterator_a<>>::kinds();
-			kinds.insert(kind());
+			kinds.insert_thing(kind());
 			return kinds;
 		}();
 		return KINDS;
@@ -117,7 +117,7 @@ public:
 		static unordered_herd_a<> CATS = []()
 		{
 			auto cats = reflection<forward_const_iterator_a<>>::cats();
-			cats.insert(cat());
+			cats.insert_thing(cat());
 			return cats;
 		}();
 		return CATS;
@@ -134,7 +134,7 @@ public:
 		static unordered_herd_a<> KINDS = []()
 		{
 			auto kinds = reflection<forward_const_iterator_a<>>::kinds();
-			kinds.insert(kind());
+			kinds.insert_thing(kind());
 			return kinds;
 		}();
 		return KINDS;
@@ -166,7 +166,7 @@ public:
 		static unordered_herd_a<> CATS = []()
 		{
 			auto cats = reflection<forward_const_iterator_a<>>::cats();
-			cats.insert(cat());
+			cats.insert_thing(cat());
 			return cats;
 		}();
 		return CATS;
@@ -183,7 +183,7 @@ public:
 		static unordered_herd_a<> KINDS = []()
 		{
 			auto kinds = reflection<forward_const_iterator_a<>>::kinds();
-			kinds.insert(kind());
+			kinds.insert_thing(kind());
 			return kinds;
 		}();
 		return KINDS;

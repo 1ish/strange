@@ -19,7 +19,7 @@ public:
 		static unordered_herd_a<> CATS = []()
 		{
 			auto cats = unordered_herd_t<>::create_();
-			cats.insert(cat());
+			cats.insert_thing(cat());
 			return cats;
 		}();
 		return CATS;
@@ -36,7 +36,7 @@ public:
 		static unordered_herd_a<> KINDS = []()
 		{
 			auto kinds = unordered_herd_t<>::create_();
-			kinds.insert(kind());
+			kinds.insert_thing(kind());
 			return kinds;
 		}();
 		return KINDS;

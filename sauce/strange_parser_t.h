@@ -563,7 +563,7 @@ private:
 				{
 					throw dis("strange::parser local assignment with no right-hand side:") + token.report_();
 				}
-				context->fixed.insert(name);
+				context->fixed.insert_thing(name);
 				any_a<> const rhs = optional
 					? _initial(0, context)
 					: no();
@@ -1047,7 +1047,7 @@ private:
 		{
 			if (check<symbol_a<>>(item) && cast<symbol_a<>>(item).first_character() == '#')
 			{
-				result.insert(item);
+				result.insert_thing(item);
 			}
 		}
 		return result;

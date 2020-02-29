@@ -91,14 +91,14 @@ public:
 	inline any_a < > at_string(std :: string const & s ) const
 	{ assert(___handle___); return read().at_string(s); }
 
-	inline void update(any_a < > const & thing )
-	{ assert(___handle___); write().update(thing); }
+	inline void update_thing(any_a < > const & thing )
+	{ assert(___handle___); write().update_thing(thing); }
 
 	inline void update_string(std :: string const & s )
 	{ assert(___handle___); write().update_string(s); }
 
-	inline bool insert(any_a < > const & thing )
-	{ assert(___handle___); return write().insert(thing); }
+	inline bool insert_thing(any_a < > const & thing )
+	{ assert(___handle___); return write().insert_thing(thing); }
 
 	inline bool insert_string(std :: string const & s )
 	{ assert(___handle___); return write().insert_string(s); }
@@ -111,9 +111,9 @@ protected:
 	{
 		virtual bool has_string(std :: string const & s ) const = 0;
 		virtual any_a < > at_string(std :: string const & s ) const = 0;
-		virtual void update(any_a < > const & thing ) = 0;
+		virtual void update_thing(any_a < > const & thing ) = 0;
 		virtual void update_string(std :: string const & s ) = 0;
-		virtual bool insert(any_a < > const & thing ) = 0;
+		virtual bool insert_thing(any_a < > const & thing ) = 0;
 		virtual bool insert_string(std :: string const & s ) = 0;
 		virtual bool erase_string(std :: string const & s ) = 0;
 	};
@@ -137,14 +137,14 @@ protected:
 		virtual inline any_a < > at_string(std :: string const & s ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.at_string(s); }
 
-		virtual inline void update(any_a < > const & thing ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.update(thing); }
+		virtual inline void update_thing(any_a < > const & thing ) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.update_thing(thing); }
 
 		virtual inline void update_string(std :: string const & s ) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.update_string(s); }
 
-		virtual inline bool insert(any_a < > const & thing ) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.insert(thing); }
+		virtual inline bool insert_thing(any_a < > const & thing ) final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_thing(thing); }
 
 		virtual inline bool insert_string(std :: string const & s ) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_string(s); }
@@ -426,13 +426,13 @@ public:
 	inline any_a < > at_string(std :: string const & s ) const
 	{ return at_(sym(s)); }
 
-	inline void update(any_a < > const & thing )
+	inline void update_thing(any_a < > const & thing )
 	{ update_(thing, no()); }
 
 	inline void update_string(std :: string const & s )
 	{ update(sym(s)); }
 
-	inline bool insert(any_a < > const & thing )
+	inline bool insert_thing(any_a < > const & thing )
 	{ return insert_(thing, no()); }
 
 	inline bool insert_string(std :: string const & s )

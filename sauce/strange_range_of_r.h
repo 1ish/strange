@@ -20,7 +20,7 @@ public:
 		static unordered_herd_a<> CATS = []()
 		{
 			auto cats = reflection<any_a<>>::cats();
-			cats.insert(cat());
+			cats.insert_thing(cat());
 			return cats;
 		}();
 		return CATS;
@@ -37,7 +37,7 @@ public:
 		static unordered_herd_a<> KINDS = []()
 		{
 			auto kinds = reflection<any_a<>>::kinds();
-			kinds.insert(kind());
+			kinds.insert_thing(kind());
 			return kinds;
 		}();
 		return KINDS;

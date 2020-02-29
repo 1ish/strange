@@ -291,10 +291,10 @@ public:
 
 	inline void update(any_a<> const& key, any_a<> const&)
 	{
-		update(key);
+		update_thing(key);
 	}
 
-	inline void update(any_a<> const& key)
+	inline void update_thing(any_a<> const& key)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_set.erase(key);
@@ -303,15 +303,15 @@ public:
 
 	inline void update_string(std::string const& s)
 	{
-		update(sym(s));
+		update_thing(sym(s));
 	}
 
 	inline bool insert(any_a<> const& key, any_a<> const&)
 	{
-		return insert(key);
+		return insert_thing(key);
 	}
 
-	inline bool insert(any_a<> const& key)
+	inline bool insert_thing(any_a<> const& key)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		return _set.insert(key).second;
@@ -319,7 +319,7 @@ public:
 
 	inline bool insert_string(std::string const& s)
 	{
-		return insert(sym(s));
+		return insert_thing(sym(s));
 	}
 
 	inline bool erase(any_a<> const& key)

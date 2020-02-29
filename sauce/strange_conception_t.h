@@ -83,7 +83,7 @@ public:
 			}
 			cat = cast<cat_a<>>(cat_any);
 		}
-		cats.insert(cat);
+		cats.insert_thing(cat);
 
 		auto const cats_op = parent.at_string("cats");
 		any_a<> cats_any;
@@ -113,7 +113,7 @@ public:
 			}
 			kind = cast<kind_a<>>(kind_any);
 		}
-		kinds.insert(kind);
+		kinds.insert_thing(kind);
 
 		auto const kinds_op = parent.at_string("kinds");
 		if (!kinds_op)
