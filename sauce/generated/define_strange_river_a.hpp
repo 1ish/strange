@@ -1587,7 +1587,7 @@ public:
 	}
 
 	inline void set_good(bool value )
-	{ set_good_(); }
+	{ set_good_(boole(value)); }
 
 	inline any_a<> set_eof__(range_a<> const& range)
 	{
@@ -1612,7 +1612,7 @@ public:
 	}
 
 	inline void set_eof(bool value )
-	{ set_eof_(); }
+	{ set_eof_(boole(value)); }
 
 	inline any_a<> set_fail__(range_a<> const& range)
 	{
@@ -1637,7 +1637,7 @@ public:
 	}
 
 	inline void set_fail(bool value )
-	{ set_fail_(); }
+	{ set_fail_(boole(value)); }
 
 	inline any_a<> set_bad__(range_a<> const& range)
 	{
@@ -1662,7 +1662,7 @@ public:
 	}
 
 	inline void set_bad(bool value )
-	{ set_bad_(); }
+	{ set_bad_(boole(value)); }
 
 	inline any_a<> filename__(range_a<> const& range) const
 	{

@@ -82,16 +82,16 @@ false &&
 					bad : "bool () const { return bad_(); }",
 
 					set_good_ := (value :#, <>),
-					set_good : "void (bool value) { set_good_(); }",
+					set_good : "void (bool value) { set_good_(boole(value)); }",
 
 					set_eof_ := (value :#, <>),
-					set_eof : "void (bool value) { set_eof_(); }",
+					set_eof : "void (bool value) { set_eof_(boole(value)); }",
 
 					set_fail_ := (value :#, <>),
-					set_fail : "void (bool value) { set_fail_(); }",
+					set_fail : "void (bool value) { set_fail_(boole(value)); }",
 
 					set_bad_ := (value :#, <>),
-					set_bad : "void (bool value) { set_bad_(); }",
+					set_bad : "void (bool value) { set_bad_(boole(value)); }",
 
 					filename_ :# (<lake_int8>),
 					filename : "std::string () const { return lake_to_string(filename_()); }",
