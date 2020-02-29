@@ -234,7 +234,7 @@ public:
 
 	static inline inventory_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___inventory_a_handle_base___>(static_cast<inventory_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___inventory_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return inventory_a{ ptr };

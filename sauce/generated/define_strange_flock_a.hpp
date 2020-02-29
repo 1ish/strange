@@ -185,7 +185,7 @@ public:
 
 	static inline flock_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___flock_a_handle_base___>(static_cast<flock_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___flock_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return flock_a{ ptr };

@@ -185,7 +185,7 @@ public:
 
 	static inline brook_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___brook_a_handle_base___>(static_cast<brook_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___brook_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return brook_a{ ptr };

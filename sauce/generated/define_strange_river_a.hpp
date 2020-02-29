@@ -780,7 +780,7 @@ public:
 
 	static inline river_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___river_a_handle_base___>(static_cast<river_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___river_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return river_a{ ptr };

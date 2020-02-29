@@ -185,7 +185,7 @@ public:
 
 	static inline number_data_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___number_data_a_handle_base___>(static_cast<number_data_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___number_data_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return number_data_a{ ptr };

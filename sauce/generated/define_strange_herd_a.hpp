@@ -220,7 +220,7 @@ public:
 
 	static inline herd_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___herd_a_handle_base___>(static_cast<herd_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___herd_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return herd_a{ ptr };

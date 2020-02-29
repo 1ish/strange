@@ -518,6 +518,7 @@ protected:
 
 	___SHARED___ ___shared___;
 
+public:
 	___SHARED___& handle_;
 
 private:

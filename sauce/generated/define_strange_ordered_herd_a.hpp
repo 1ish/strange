@@ -185,7 +185,7 @@ public:
 
 	static inline ordered_herd_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___ordered_herd_a_handle_base___>(static_cast<ordered_herd_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___ordered_herd_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return ordered_herd_a{ ptr };

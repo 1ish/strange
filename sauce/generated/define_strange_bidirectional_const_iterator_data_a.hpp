@@ -185,7 +185,7 @@ public:
 
 	static inline bidirectional_const_iterator_data_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___bidirectional_const_iterator_data_a_handle_base___>(static_cast<bidirectional_const_iterator_data_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___bidirectional_const_iterator_data_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return bidirectional_const_iterator_data_a{ ptr };

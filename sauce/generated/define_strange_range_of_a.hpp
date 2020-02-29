@@ -199,7 +199,7 @@ public:
 
 	static inline range_of_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___range_of_a_handle_base___>(static_cast<range_of_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___range_of_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return range_of_a{ ptr };

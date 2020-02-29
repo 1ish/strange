@@ -325,7 +325,7 @@ public:
 
 	static inline random_access_const_iterator_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___random_access_const_iterator_a_handle_base___>(static_cast<random_access_const_iterator_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___random_access_const_iterator_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return random_access_const_iterator_a{ ptr };

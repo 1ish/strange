@@ -332,7 +332,7 @@ public:
 
 	static inline token_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___token_a_handle_base___>(static_cast<token_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___token_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return token_a{ ptr };

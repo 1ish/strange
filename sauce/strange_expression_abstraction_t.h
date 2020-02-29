@@ -1037,6 +1037,7 @@ protected:
 
 				"\t___SHARED___ ___shared___;\n\n"
 
+				"public:\n"
 				"\t___SHARED___& handle_;\n\n"
 
 				"private:\n"
@@ -1270,7 +1271,7 @@ protected:
 			river.write_string(
 				"\tstatic inline " + class_name + " cast(any_a<> const& thing)\n"
 				"\t{\n"
-				"\t\tauto const ptr = std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(static_cast<" + class_name + " const&>(thing).handle_);\n"
+				"\t\tauto const ptr = std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.handle_);\n"
 				"\t\tif (ptr)\n"
 				"\t\t{\n"
 				"\t\t\treturn " + class_name + "{ ptr };\n"

@@ -213,7 +213,7 @@ public:
 
 	static inline forward_const_iterator_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___forward_const_iterator_a_handle_base___>(static_cast<forward_const_iterator_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___forward_const_iterator_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return forward_const_iterator_a{ ptr };

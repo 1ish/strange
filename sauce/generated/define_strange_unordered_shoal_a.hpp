@@ -185,7 +185,7 @@ public:
 
 	static inline unordered_shoal_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___unordered_shoal_a_handle_base___>(static_cast<unordered_shoal_a const&>(thing).handle_);
+		auto const ptr = std::dynamic_pointer_cast<___unordered_shoal_a_handle_base___>(thing.handle_);
 		if (ptr)
 		{
 			return unordered_shoal_a{ ptr };
