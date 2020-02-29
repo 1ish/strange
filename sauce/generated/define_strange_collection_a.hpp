@@ -722,7 +722,7 @@ public:
 		{
 			throw dis("dynamic collection_d::has_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<collection_d*>(this), range);
 	}
 
 	inline any_a<> has_(any_a<> const& key) const
@@ -733,7 +733,7 @@ public:
 		{
 			throw dis("dynamic collection_d::has_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), key);
+		return variadic_operate(op, *const_cast<collection_d*>(this), key);
 	}
 
 	inline bool has(any_a < > const & key ) const
@@ -747,7 +747,7 @@ public:
 		{
 			throw dis("dynamic collection_d::at_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<collection_d*>(this), range);
 	}
 
 	inline any_a<> at_(any_a<> const& key) const
@@ -758,7 +758,7 @@ public:
 		{
 			throw dis("dynamic collection_d::at_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), key);
+		return variadic_operate(op, *const_cast<collection_d*>(this), key);
 	}
 
 	inline any_a<> update__(range_a<> const& range)
@@ -869,7 +869,7 @@ public:
 		{
 			throw dis("dynamic collection_d::size_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<collection_d*>(this), range);
 	}
 
 	inline number_data_int64_a size_() const
@@ -880,7 +880,7 @@ public:
 		{
 			throw dis("dynamic collection_d::size_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<collection_d*>(this));
 	}
 
 	inline int64_t size() const
@@ -894,7 +894,7 @@ public:
 		{
 			throw dis("dynamic collection_d::empty_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<collection_d*>(this), range);
 	}
 
 	inline any_a<> empty_() const
@@ -905,7 +905,7 @@ public:
 		{
 			throw dis("dynamic collection_d::empty_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<collection_d*>(this));
 	}
 
 	inline bool empty() const
@@ -1057,7 +1057,7 @@ public:
 		{
 			throw dis("dynamic collection_d::add_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<collection_d*>(this), range);
 	}
 
 	inline collection_a<> add_(range_a<> const& range) const
@@ -1068,7 +1068,7 @@ public:
 		{
 			throw dis("dynamic collection_d::add_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), range);
+		return variadic_operate(op, *const_cast<collection_d*>(this), range);
 	}
 
 	inline collection_a<number_data_int64_a> operator+(range_a < > const & range ) const
@@ -1104,7 +1104,7 @@ public:
 		{
 			throw dis("dynamic collection_d::subtract_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<collection_d*>(this), range);
 	}
 
 	inline collection_a<> subtract_(range_a<> const& range) const
@@ -1115,7 +1115,7 @@ public:
 		{
 			throw dis("dynamic collection_d::subtract_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), range);
+		return variadic_operate(op, *const_cast<collection_d*>(this), range);
 	}
 
 	inline collection_a<number_data_int64_a> operator-(range_a < > const & range ) const
@@ -1129,7 +1129,7 @@ public:
 		{
 			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<collection_d*>(this), range);
 	}
 
 	inline any_a<> read_lock_() const
@@ -1140,7 +1140,7 @@ public:
 		{
 			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<collection_d*>(this));
 	}
 
 	inline any_a<> write_lock__(range_a<> const& range) const
@@ -1151,7 +1151,7 @@ public:
 		{
 			throw dis("dynamic collection_d::write_lock_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<collection_d*>(this), range);
 	}
 
 	inline any_a<> write_lock_() const
@@ -1162,7 +1162,7 @@ public:
 		{
 			throw dis("dynamic collection_d::write_lock_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<collection_d*>(this));
 	}
 
 	void ___weak___(range_d<>::___WEAK___ const& weak) const {}

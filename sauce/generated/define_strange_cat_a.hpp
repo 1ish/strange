@@ -498,7 +498,7 @@ public:
 		{
 			throw dis("dynamic cat_d::symbolic_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<cat_d*>(this), range);
 	}
 
 	inline any_a<> symbolic_() const
@@ -509,7 +509,7 @@ public:
 		{
 			throw dis("dynamic cat_d::symbolic_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<cat_d*>(this));
 	}
 
 	inline bool symbolic() const
@@ -523,7 +523,7 @@ public:
 		{
 			throw dis("dynamic cat_d::order_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<cat_d*>(this), range);
 	}
 
 	inline number_data_int64_a<> order_() const
@@ -534,7 +534,7 @@ public:
 		{
 			throw dis("dynamic cat_d::order_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<cat_d*>(this));
 	}
 
 	inline int64_t order() const
@@ -548,7 +548,7 @@ public:
 		{
 			throw dis("dynamic cat_d::name_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<cat_d*>(this), range);
 	}
 
 	inline symbol_a<> name_() const
@@ -559,7 +559,7 @@ public:
 		{
 			throw dis("dynamic cat_d::name_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<cat_d*>(this));
 	}
 
 	inline any_a<> dimensions__(range_a<> const& range) const
@@ -570,7 +570,7 @@ public:
 		{
 			throw dis("dynamic cat_d::dimensions_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<cat_d*>(this), range);
 	}
 
 	inline flock_a<> dimensions_() const
@@ -581,7 +581,7 @@ public:
 		{
 			throw dis("dynamic cat_d::dimensions_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<cat_d*>(this));
 	}
 
 	inline any_a<> parameters__(range_a<> const& range) const
@@ -592,7 +592,7 @@ public:
 		{
 			throw dis("dynamic cat_d::parameters_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<cat_d*>(this), range);
 	}
 
 	inline flock_a<> parameters_() const
@@ -603,7 +603,7 @@ public:
 		{
 			throw dis("dynamic cat_d::parameters_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<cat_d*>(this));
 	}
 
 	inline any_a<> result__(range_a<> const& range) const
@@ -614,7 +614,7 @@ public:
 		{
 			throw dis("dynamic cat_d::result_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<cat_d*>(this), range);
 	}
 
 	inline cat_a<> result_() const
@@ -625,7 +625,7 @@ public:
 		{
 			throw dis("dynamic cat_d::result_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<cat_d*>(this));
 	}
 
 	inline any_a<> code__(range_a<> const& range) const
@@ -636,7 +636,7 @@ public:
 		{
 			throw dis("dynamic cat_d::code_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<cat_d*>(this), range);
 	}
 
 	inline lake_int8_a<> code_() const
@@ -647,7 +647,7 @@ public:
 		{
 			throw dis("dynamic cat_d::code_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<cat_d*>(this));
 	}
 
 	inline std :: string code() const

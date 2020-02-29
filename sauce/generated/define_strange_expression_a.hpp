@@ -505,7 +505,7 @@ public:
 		{
 			throw dis("dynamic expression_d::recreate_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<expression_d*>(this), range);
 	}
 
 	inline expression_a<> recreate_() const
@@ -516,7 +516,7 @@ public:
 		{
 			throw dis("dynamic expression_d::recreate_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<expression_d*>(this));
 	}
 
 	inline void recreated(expression_a < > const & expression ) const
@@ -530,7 +530,7 @@ public:
 		{
 			throw dis("dynamic expression_d::literal_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<expression_d*>(this), range);
 	}
 
 	inline any_a<> literal_() const
@@ -541,7 +541,7 @@ public:
 		{
 			throw dis("dynamic expression_d::literal_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<expression_d*>(this));
 	}
 
 	inline bool literal() const
@@ -555,7 +555,7 @@ public:
 		{
 			throw dis("dynamic expression_d::evaluate_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<expression_d*>(this), range);
 	}
 
 	inline any_a<> evaluate_() const
@@ -566,7 +566,7 @@ public:
 		{
 			throw dis("dynamic expression_d::evaluate_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<expression_d*>(this));
 	}
 
 	inline any_a<> token__(range_a<> const& range) const
@@ -577,7 +577,7 @@ public:
 		{
 			throw dis("dynamic expression_d::token_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<expression_d*>(this), range);
 	}
 
 	inline token_a<> token_() const
@@ -588,7 +588,7 @@ public:
 		{
 			throw dis("dynamic expression_d::token_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<expression_d*>(this));
 	}
 
 	inline any_a<> terms__(range_a<> const& range) const
@@ -599,7 +599,7 @@ public:
 		{
 			throw dis("dynamic expression_d::terms_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<expression_d*>(this), range);
 	}
 
 	inline flock_a<> terms_() const
@@ -610,7 +610,7 @@ public:
 		{
 			throw dis("dynamic expression_d::terms_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<expression_d*>(this));
 	}
 
 	inline any_a<> generate__(range_a<> const& range) const
@@ -621,7 +621,7 @@ public:
 		{
 			throw dis("dynamic expression_d::generate_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<expression_d*>(this), range);
 	}
 
 	inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const
@@ -632,7 +632,7 @@ public:
 		{
 			throw dis("dynamic expression_d::generate_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), version, indent, river);
+		return variadic_operate(op, *const_cast<expression_d*>(this), version, indent, river);
 	}
 
 	inline void generate(int64_t version , int64_t indent , river_a < > & river ) const
@@ -646,7 +646,7 @@ public:
 		{
 			throw dis("dynamic expression_d::generate_cpp_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<expression_d*>(this), range);
 	}
 
 	inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const
@@ -657,7 +657,7 @@ public:
 		{
 			throw dis("dynamic expression_d::generate_cpp_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), version, indent, river, declare, define, type);
+		return variadic_operate(op, *const_cast<expression_d*>(this), version, indent, river, declare, define, type);
 	}
 
 	inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const

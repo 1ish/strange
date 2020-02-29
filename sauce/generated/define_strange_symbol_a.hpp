@@ -435,7 +435,7 @@ public:
 		{
 			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<symbol_d*>(this), range);
 	}
 
 	inline lake_int8_a<> to_lake_() const
@@ -446,7 +446,7 @@ public:
 		{
 			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<symbol_d*>(this));
 	}
 
 	inline std :: string const & to_string() const
@@ -466,7 +466,7 @@ public:
 		{
 			throw dis("dynamic symbol_d::add_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<symbol_d*>(this), range);
 	}
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
@@ -477,7 +477,7 @@ public:
 		{
 			throw dis("dynamic symbol_d::add_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), symbol);
+		return variadic_operate(op, *const_cast<symbol_d*>(this), symbol);
 	}
 
 	inline symbol_a < > operator+(symbol_a < > const & symbol ) const

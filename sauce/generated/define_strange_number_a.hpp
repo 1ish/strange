@@ -1062,7 +1062,7 @@ public:
 		{
 			throw dis("dynamic number_d::add_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline number_a<> add_(number_a<> const& number) const
@@ -1073,7 +1073,7 @@ public:
 		{
 			throw dis("dynamic number_d::add_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+		return variadic_operate(op, *const_cast<number_d*>(this), number);
 	}
 
 	inline number_a < > operator+(number_a < > const & number ) const
@@ -1109,7 +1109,7 @@ public:
 		{
 			throw dis("dynamic number_d::subtract_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline number_a<> subtract_(number_a<> const& number) const
@@ -1120,7 +1120,7 @@ public:
 		{
 			throw dis("dynamic number_d::subtract_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+		return variadic_operate(op, *const_cast<number_d*>(this), number);
 	}
 
 	inline number_a < > operator-(number_a < > const & number ) const
@@ -1156,7 +1156,7 @@ public:
 		{
 			throw dis("dynamic number_d::multiply_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline number_a<> multiply_(number_a<> const& number) const
@@ -1167,7 +1167,7 @@ public:
 		{
 			throw dis("dynamic number_d::multiply_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+		return variadic_operate(op, *const_cast<number_d*>(this), number);
 	}
 
 	inline number_a < > operator*(number_a < > const & number ) const
@@ -1203,7 +1203,7 @@ public:
 		{
 			throw dis("dynamic number_d::divide_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline number_a<> divide_(number_a<> const& number) const
@@ -1214,7 +1214,7 @@ public:
 		{
 			throw dis("dynamic number_d::divide_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+		return variadic_operate(op, *const_cast<number_d*>(this), number);
 	}
 
 	inline number_a < > operator/(number_a < > const & number ) const
@@ -1250,7 +1250,7 @@ public:
 		{
 			throw dis("dynamic number_d::modulo_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline number_a<> modulo_(number_a<> const& number) const
@@ -1261,7 +1261,7 @@ public:
 		{
 			throw dis("dynamic number_d::modulo_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+		return variadic_operate(op, *const_cast<number_d*>(this), number);
 	}
 
 	inline number_a < > operator%(number_a < > const & number ) const
@@ -1275,7 +1275,7 @@ public:
 		{
 			throw dis("dynamic number_d::to_int_64_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline number_data_int64_a to_int_64_() const
@@ -1286,7 +1286,7 @@ public:
 		{
 			throw dis("dynamic number_d::to_int_64_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<number_d*>(this));
 	}
 
 	inline int64_t to_int_64() const
@@ -1325,7 +1325,7 @@ public:
 		{
 			throw dis("dynamic number_d::to_uint_64_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline number_data_uint64_a to_uint_64_() const
@@ -1336,7 +1336,7 @@ public:
 		{
 			throw dis("dynamic number_d::to_uint_64_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<number_d*>(this));
 	}
 
 	inline uint64_t to_uint_64() const
@@ -1375,7 +1375,7 @@ public:
 		{
 			throw dis("dynamic number_d::to_float_64_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline number_data_double_a to_float_64_() const
@@ -1386,7 +1386,7 @@ public:
 		{
 			throw dis("dynamic number_d::to_float_64_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<number_d*>(this));
 	}
 
 	inline double to_float_64() const
@@ -1425,7 +1425,7 @@ public:
 		{
 			throw dis("dynamic number_d::less_than_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline any_a<> less_than_(number_a<> const& number) const
@@ -1436,7 +1436,7 @@ public:
 		{
 			throw dis("dynamic number_d::less_than_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+		return variadic_operate(op, *const_cast<number_d*>(this), number);
 	}
 
 	inline bool operator<(number_a < > const & number ) const
@@ -1450,7 +1450,7 @@ public:
 		{
 			throw dis("dynamic number_d::greater_than_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline any_a<> greater_than_(number_a<> const& number) const
@@ -1461,7 +1461,7 @@ public:
 		{
 			throw dis("dynamic number_d::greater_than_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+		return variadic_operate(op, *const_cast<number_d*>(this), number);
 	}
 
 	inline bool operator>(number_a < > const & number ) const
@@ -1475,7 +1475,7 @@ public:
 		{
 			throw dis("dynamic number_d::less_or_equal_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline any_a<> less_or_equal_(number_a<> const& number) const
@@ -1486,7 +1486,7 @@ public:
 		{
 			throw dis("dynamic number_d::less_or_equal_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+		return variadic_operate(op, *const_cast<number_d*>(this), number);
 	}
 
 	inline bool operator<=(number_a < > const & number ) const
@@ -1500,7 +1500,7 @@ public:
 		{
 			throw dis("dynamic number_d::greater_or_equal_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline any_a<> greater_or_equal_(number_a<> const& number) const
@@ -1511,7 +1511,7 @@ public:
 		{
 			throw dis("dynamic number_d::greater_or_equal_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+		return variadic_operate(op, *const_cast<number_d*>(this), number);
 	}
 
 	inline bool operator>=(number_a < > const & number ) const
@@ -1525,7 +1525,7 @@ public:
 		{
 			throw dis("dynamic number_d::byte_size_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline number_data_int64_a byte_size_() const
@@ -1536,7 +1536,7 @@ public:
 		{
 			throw dis("dynamic number_d::byte_size_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<number_d*>(this));
 	}
 
 	inline int64_t byte_size() const
@@ -1550,7 +1550,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_int_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline any_a<> is_int_() const
@@ -1561,7 +1561,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_int_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<number_d*>(this));
 	}
 
 	inline bool is_int() const
@@ -1575,7 +1575,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_signed_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline any_a<> is_signed_() const
@@ -1586,7 +1586,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_signed_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<number_d*>(this));
 	}
 
 	inline bool is_signed() const
@@ -1600,7 +1600,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_nan_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline any_a<> is_nan_() const
@@ -1611,7 +1611,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_nan_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<number_d*>(this));
 	}
 
 	inline bool is_nan() const
@@ -1625,7 +1625,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_inf_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline any_a<> is_inf_() const
@@ -1636,7 +1636,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_inf_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<number_d*>(this));
 	}
 
 	inline bool is_inf() const
@@ -1650,7 +1650,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_finite_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline any_a<> is_finite_() const
@@ -1661,7 +1661,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_finite_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<number_d*>(this));
 	}
 
 	inline bool is_finite() const
@@ -1675,7 +1675,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_normal_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline any_a<> is_normal_() const
@@ -1686,7 +1686,7 @@ public:
 		{
 			throw dis("dynamic number_d::is_normal_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<number_d*>(this));
 	}
 
 	inline bool is_normal() const
@@ -1700,7 +1700,7 @@ public:
 		{
 			throw dis("dynamic number_d::little_endian_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
 	inline any_a<> little_endian_() const
@@ -1711,7 +1711,7 @@ public:
 		{
 			throw dis("dynamic number_d::little_endian_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<number_d*>(this));
 	}
 
 	inline bool little_endian() const

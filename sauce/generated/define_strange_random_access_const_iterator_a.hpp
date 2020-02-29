@@ -555,7 +555,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::add_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<random_access_const_iterator_d*>(this), range);
 	}
 
 	inline random_access_const_iterator_a<> add_(number_a<> const& number) const
@@ -566,7 +566,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::add_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+		return variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), number);
 	}
 
 	inline random_access_const_iterator_a<_1_> operator+(number_a < > const & number ) const
@@ -602,7 +602,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::subtract_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<random_access_const_iterator_d*>(this), range);
 	}
 
 	inline random_access_const_iterator_a<> subtract_(number_a<> const& number) const
@@ -613,7 +613,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::subtract_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), number);
+		return variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), number);
 	}
 
 	inline random_access_const_iterator_a<_1_> operator-(number_a < > const & number ) const
@@ -627,7 +627,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::less_than_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<random_access_const_iterator_d*>(this), range);
 	}
 
 	inline any_a<> less_than_(random_access_const_iterator_a<> const& it) const
@@ -638,7 +638,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::less_than_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), it);
+		return variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), it);
 	}
 
 	inline bool operator<(random_access_const_iterator_a < > const & it ) const
@@ -652,7 +652,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::greater_than_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<random_access_const_iterator_d*>(this), range);
 	}
 
 	inline any_a<> greater_than_(random_access_const_iterator_a<> const& it) const
@@ -663,7 +663,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::greater_than_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), it);
+		return variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), it);
 	}
 
 	inline bool operator>(random_access_const_iterator_a < > const & it ) const
@@ -677,7 +677,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::less_or_equal_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<random_access_const_iterator_d*>(this), range);
 	}
 
 	inline any_a<> less_or_equal_(random_access_const_iterator_a<> const& it) const
@@ -688,7 +688,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::less_or_equal_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), it);
+		return variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), it);
 	}
 
 	inline bool operator<=(random_access_const_iterator_a < > const & it ) const
@@ -702,7 +702,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::greater_or_equal_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<random_access_const_iterator_d*>(this), range);
 	}
 
 	inline any_a<> greater_or_equal_(random_access_const_iterator_a<> const& it) const
@@ -713,7 +713,7 @@ public:
 		{
 			throw dis("dynamic random_access_const_iterator_d::greater_or_equal_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), it);
+		return variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), it);
 	}
 
 	inline bool operator>=(random_access_const_iterator_a < > const & it ) const

@@ -428,7 +428,7 @@ public:
 		{
 			throw dis("dynamic operation_d::pure_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<operation_d*>(this), range);
 	}
 
 	inline any_a<> pure_() const
@@ -439,7 +439,7 @@ public:
 		{
 			throw dis("dynamic operation_d::pure_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<operation_d*>(this));
 	}
 
 	inline bool pure() const
@@ -459,7 +459,7 @@ public:
 		{
 			throw dis("dynamic operation_d::names_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<operation_d*>(this), range);
 	}
 
 	inline flock_a<> names_() const
@@ -470,7 +470,7 @@ public:
 		{
 			throw dis("dynamic operation_d::names_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<operation_d*>(this));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

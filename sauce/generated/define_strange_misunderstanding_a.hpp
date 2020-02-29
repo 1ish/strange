@@ -410,7 +410,7 @@ public:
 		{
 			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<misunderstanding_d*>(this), range);
 	}
 
 	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
@@ -421,7 +421,7 @@ public:
 		{
 			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), misunderstanding);
+		return variadic_operate(op, *const_cast<misunderstanding_d*>(this), misunderstanding);
 	}
 
 	inline misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const

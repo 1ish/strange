@@ -421,7 +421,7 @@ public:
 		{
 			throw dis("dynamic forward_const_iterator_d::get_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<forward_const_iterator_d*>(this), range);
 	}
 
 	inline any_a<> get_() const
@@ -432,7 +432,7 @@ public:
 		{
 			throw dis("dynamic forward_const_iterator_d::get_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<forward_const_iterator_d*>(this));
 	}
 
 	inline any_a < > const & operator*() const

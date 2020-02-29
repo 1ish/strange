@@ -456,7 +456,7 @@ public:
 		{
 			throw dis("dynamic kind_d::aspects_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<kind_d*>(this), range);
 	}
 
 	inline flock_a<> aspects_() const
@@ -467,7 +467,7 @@ public:
 		{
 			throw dis("dynamic kind_d::aspects_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<kind_d*>(this));
 	}
 
 	inline any_a<> fixed__(range_a<> const& range) const
@@ -478,7 +478,7 @@ public:
 		{
 			throw dis("dynamic kind_d::fixed_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<kind_d*>(this), range);
 	}
 
 	inline any_a<> fixed_() const
@@ -489,7 +489,7 @@ public:
 		{
 			throw dis("dynamic kind_d::fixed_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<kind_d*>(this));
 	}
 
 	inline bool fixed() const
@@ -503,7 +503,7 @@ public:
 		{
 			throw dis("dynamic kind_d::reference_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<kind_d*>(this), range);
 	}
 
 	inline any_a<> reference_() const
@@ -514,7 +514,7 @@ public:
 		{
 			throw dis("dynamic kind_d::reference_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<kind_d*>(this));
 	}
 
 	inline bool reference() const
@@ -528,7 +528,7 @@ public:
 		{
 			throw dis("dynamic kind_d::optional_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<kind_d*>(this), range);
 	}
 
 	inline any_a<> optional_() const
@@ -539,7 +539,7 @@ public:
 		{
 			throw dis("dynamic kind_d::optional_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<kind_d*>(this));
 	}
 
 	inline bool optional() const

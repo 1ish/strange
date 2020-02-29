@@ -775,7 +775,7 @@ protected:
 		}
 		else
 		{
-			river.write_string("const_cast<any_a<>&>(*this)");
+			river.write_string("*const_cast<" + class_name + "*>(this)");
 		}
 		river.write_string(", range);\n"
 			"\t}\n\n");
@@ -801,7 +801,7 @@ protected:
 		}
 		else
 		{
-			river.write_string("const_cast<any_a<>&>(*this)");
+			river.write_string("*const_cast<" + class_name + "*>(this)");
 		}
 		if (arguments.length() > 2)
 		{

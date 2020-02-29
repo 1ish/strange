@@ -435,7 +435,7 @@ public:
 		{
 			throw dis("dynamic forward_iterator_d::get_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<forward_iterator_d*>(this), range);
 	}
 
 	inline any_a<> get_() const
@@ -446,7 +446,7 @@ public:
 		{
 			throw dis("dynamic forward_iterator_d::get_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<forward_iterator_d*>(this));
 	}
 
 	inline any_a<> set__(range_a<> const& range) const
@@ -457,7 +457,7 @@ public:
 		{
 			throw dis("dynamic forward_iterator_d::set_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<forward_iterator_d*>(this), range);
 	}
 
 	inline any_a<> set_(any_a<> const& thing) const
@@ -468,7 +468,7 @@ public:
 		{
 			throw dis("dynamic forward_iterator_d::set_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this), thing);
+		return variadic_operate(op, *const_cast<forward_iterator_d*>(this), thing);
 	}
 
 	inline any_a < > & operator*() const

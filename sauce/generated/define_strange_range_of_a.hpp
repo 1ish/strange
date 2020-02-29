@@ -407,7 +407,7 @@ public:
 		{
 			throw dis("dynamic range_of_d::cbegin_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<range_of_d*>(this), range);
 	}
 
 	inline forward_const_iterator_a<> cbegin_() const
@@ -418,7 +418,7 @@ public:
 		{
 			throw dis("dynamic range_of_d::cbegin_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<range_of_d*>(this));
 	}
 
 	inline any_a<> cend__(range_a<> const& range) const
@@ -429,7 +429,7 @@ public:
 		{
 			throw dis("dynamic range_of_d::cend_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<range_of_d*>(this), range);
 	}
 
 	inline forward_const_iterator_a<> cend_() const
@@ -440,7 +440,7 @@ public:
 		{
 			throw dis("dynamic range_of_d::cend_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<range_of_d*>(this));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

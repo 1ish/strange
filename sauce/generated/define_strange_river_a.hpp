@@ -1169,7 +1169,7 @@ public:
 		{
 			throw dis("dynamic river_d::tellg_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<river_d*>(this), range);
 	}
 
 	inline number_data_int64_a<> tellg_() const
@@ -1180,7 +1180,7 @@ public:
 		{
 			throw dis("dynamic river_d::tellg_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<river_d*>(this));
 	}
 
 	inline int64_t tellg() const
@@ -1347,7 +1347,7 @@ public:
 		{
 			throw dis("dynamic river_d::tellp_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<river_d*>(this), range);
 	}
 
 	inline number_data_int64_a<> tellp_() const
@@ -1358,7 +1358,7 @@ public:
 		{
 			throw dis("dynamic river_d::tellp_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<river_d*>(this));
 	}
 
 	inline int64_t tellp() const
@@ -1472,7 +1472,7 @@ public:
 		{
 			throw dis("dynamic river_d::good_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<river_d*>(this), range);
 	}
 
 	inline any_a<> good_() const
@@ -1483,7 +1483,7 @@ public:
 		{
 			throw dis("dynamic river_d::good_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<river_d*>(this));
 	}
 
 	inline bool good() const
@@ -1497,7 +1497,7 @@ public:
 		{
 			throw dis("dynamic river_d::eof_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<river_d*>(this), range);
 	}
 
 	inline any_a<> eof_() const
@@ -1508,7 +1508,7 @@ public:
 		{
 			throw dis("dynamic river_d::eof_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<river_d*>(this));
 	}
 
 	inline bool eof() const
@@ -1522,7 +1522,7 @@ public:
 		{
 			throw dis("dynamic river_d::fail_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<river_d*>(this), range);
 	}
 
 	inline any_a<> fail_() const
@@ -1533,7 +1533,7 @@ public:
 		{
 			throw dis("dynamic river_d::fail_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<river_d*>(this));
 	}
 
 	inline bool fail() const
@@ -1547,7 +1547,7 @@ public:
 		{
 			throw dis("dynamic river_d::bad_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<river_d*>(this), range);
 	}
 
 	inline any_a<> bad_() const
@@ -1558,7 +1558,7 @@ public:
 		{
 			throw dis("dynamic river_d::bad_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<river_d*>(this));
 	}
 
 	inline bool bad() const
@@ -1672,7 +1672,7 @@ public:
 		{
 			throw dis("dynamic river_d::filename_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<river_d*>(this), range);
 	}
 
 	inline lake_int8_a<> filename_() const
@@ -1683,7 +1683,7 @@ public:
 		{
 			throw dis("dynamic river_d::filename_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<river_d*>(this));
 	}
 
 	inline std :: string filename() const

@@ -540,7 +540,7 @@ public:
 		{
 			throw dis("dynamic token_d::filename_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<token_d*>(this), range);
 	}
 
 	inline symbol_a<> filename_() const
@@ -551,7 +551,7 @@ public:
 		{
 			throw dis("dynamic token_d::filename_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<token_d*>(this));
 	}
 
 	inline std :: string filename() const
@@ -565,7 +565,7 @@ public:
 		{
 			throw dis("dynamic token_d::line_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<token_d*>(this), range);
 	}
 
 	inline number_data_int64_a<> line_() const
@@ -576,7 +576,7 @@ public:
 		{
 			throw dis("dynamic token_d::line_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<token_d*>(this));
 	}
 
 	inline int64_t line() const
@@ -590,7 +590,7 @@ public:
 		{
 			throw dis("dynamic token_d::position_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<token_d*>(this), range);
 	}
 
 	inline number_data_int64_a<> position_() const
@@ -601,7 +601,7 @@ public:
 		{
 			throw dis("dynamic token_d::position_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<token_d*>(this));
 	}
 
 	inline int64_t position() const
@@ -615,7 +615,7 @@ public:
 		{
 			throw dis("dynamic token_d::tag_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<token_d*>(this), range);
 	}
 
 	inline symbol_a<> tag_() const
@@ -626,7 +626,7 @@ public:
 		{
 			throw dis("dynamic token_d::tag_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<token_d*>(this));
 	}
 
 	inline std :: string tag() const
@@ -640,7 +640,7 @@ public:
 		{
 			throw dis("dynamic token_d::symbol_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<token_d*>(this), range);
 	}
 
 	inline symbol_a<> symbol_() const
@@ -651,7 +651,7 @@ public:
 		{
 			throw dis("dynamic token_d::symbol_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<token_d*>(this));
 	}
 
 	inline std :: string symbol() const
@@ -665,7 +665,7 @@ public:
 		{
 			throw dis("dynamic token_d::literal_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<token_d*>(this), range);
 	}
 
 	inline any_a<> literal_() const
@@ -676,7 +676,7 @@ public:
 		{
 			throw dis("dynamic token_d::literal_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<token_d*>(this));
 	}
 
 	inline any_a<> precedence__(range_a<> const& range) const
@@ -687,7 +687,7 @@ public:
 		{
 			throw dis("dynamic token_d::precedence_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<token_d*>(this), range);
 	}
 
 	inline number_data_int64_a<> precedence_() const
@@ -698,7 +698,7 @@ public:
 		{
 			throw dis("dynamic token_d::precedence_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<token_d*>(this));
 	}
 
 	inline int64_t precedence() const
@@ -712,7 +712,7 @@ public:
 		{
 			throw dis("dynamic token_d::report_ passed non-existent member");
 		}
-		return op.operate(const_cast<any_a<>&>(*this), range);
+		return op.operate(*const_cast<token_d*>(this), range);
 	}
 
 	inline misunderstanding_a<> report_() const
@@ -723,7 +723,7 @@ public:
 		{
 			throw dis("dynamic token_d::report_ passed non-existent member");
 		}
-		return variadic_operate(op, const_cast<any_a<>&>(*this));
+		return variadic_operate(op, *const_cast<token_d*>(this));
 	}
 
 	inline std :: string report() const
