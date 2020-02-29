@@ -18,7 +18,7 @@ public:
 	// arithmetic operator overloads
 	inline collection_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -26,7 +26,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline collection_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		collection_a result = *this;
 		write().operator++();
 		return result;
@@ -35,7 +35,7 @@ public:
 
 	inline collection_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -43,7 +43,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline collection_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		collection_a result = *this;
 		write().operator--();
 		return result;
@@ -52,185 +52,185 @@ public:
 
 	inline collection_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline collection_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline collection_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline collection_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline collection_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> has__(range_a<> const& range) const
-	{ assert(handle_); return read().has__(range); }
+	{ assert(___handle___); return read().has__(range); }
 
 	inline any_a<> has_(any_a<> const& key) const
-	{ assert(handle_); return read().has_(key); }
+	{ assert(___handle___); return read().has_(key); }
 
 	inline bool has(any_a < > const & key ) const
-	{ assert(handle_); return read().has(key); }
+	{ assert(___handle___); return read().has(key); }
 
 	inline any_a<> at__(range_a<> const& range) const
-	{ assert(handle_); return read().at__(range); }
+	{ assert(___handle___); return read().at__(range); }
 
 	inline any_a<> at_(any_a<> const& key) const
-	{ assert(handle_); return read().at_(key); }
+	{ assert(___handle___); return read().at_(key); }
 
 	inline any_a<> update__(range_a<> const& range)
-	{ assert(handle_); return write().update__(range); }
+	{ assert(___handle___); return write().update__(range); }
 
 	inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() )
-	{ assert(handle_); return write().update_(key, value); }
+	{ assert(___handle___); return write().update_(key, value); }
 
 	inline void update(any_a < > const & key , any_a < > const & value )
-	{ assert(handle_); write().update(key, value); }
+	{ assert(___handle___); write().update(key, value); }
 
 	inline any_a<> insert__(range_a<> const& range)
-	{ assert(handle_); return write().insert__(range); }
+	{ assert(___handle___); return write().insert__(range); }
 
 	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() )
-	{ assert(handle_); return write().insert_(key, value); }
+	{ assert(___handle___); return write().insert_(key, value); }
 
 	inline void insert(any_a < > const & key , any_a < > const & value )
-	{ assert(handle_); write().insert(key, value); }
+	{ assert(___handle___); write().insert(key, value); }
 
 	inline any_a<> erase__(range_a<> const& range)
-	{ assert(handle_); return write().erase__(range); }
+	{ assert(___handle___); return write().erase__(range); }
 
 	inline any_a<> erase_(any_a<> const& key)
-	{ assert(handle_); return write().erase_(key); }
+	{ assert(___handle___); return write().erase_(key); }
 
 	inline bool erase(any_a < > const & key )
-	{ assert(handle_); return write().erase(key); }
+	{ assert(___handle___); return write().erase(key); }
 
 	inline any_a<> clear__(range_a<> const& range)
-	{ assert(handle_); return write().clear__(range); }
+	{ assert(___handle___); return write().clear__(range); }
 
 	inline collection_a<> clear_()
-	{ assert(handle_); return write().clear_(); }
+	{ assert(___handle___); return write().clear_(); }
 
 	inline void clear()
-	{ assert(handle_); write().clear(); }
+	{ assert(___handle___); write().clear(); }
 
 	inline any_a<> size__(range_a<> const& range) const
-	{ assert(handle_); return read().size__(range); }
+	{ assert(___handle___); return read().size__(range); }
 
 	inline number_data_int64_a size_() const
-	{ assert(handle_); return read().size_(); }
+	{ assert(___handle___); return read().size_(); }
 
 	inline int64_t size() const
-	{ assert(handle_); return read().size(); }
+	{ assert(___handle___); return read().size(); }
 
 	inline any_a<> empty__(range_a<> const& range) const
-	{ assert(handle_); return read().empty__(range); }
+	{ assert(___handle___); return read().empty__(range); }
 
 	inline any_a<> empty_() const
-	{ assert(handle_); return read().empty_(); }
+	{ assert(___handle___); return read().empty_(); }
 
 	inline bool empty() const
-	{ assert(handle_); return read().empty(); }
+	{ assert(___handle___); return read().empty(); }
 
 	inline any_a<> push_front__(range_a<> const& range)
-	{ assert(handle_); return write().push_front__(range); }
+	{ assert(___handle___); return write().push_front__(range); }
 
 	inline collection_a<> push_front_(any_a<> const& thing)
-	{ assert(handle_); return write().push_front_(thing); }
+	{ assert(___handle___); return write().push_front_(thing); }
 
 	inline void push_front(any_a < > const & thing )
-	{ assert(handle_); write().push_front(thing); }
+	{ assert(___handle___); write().push_front(thing); }
 
 	inline any_a<> pop_front__(range_a<> const& range)
-	{ assert(handle_); return write().pop_front__(range); }
+	{ assert(___handle___); return write().pop_front__(range); }
 
 	inline any_a<> pop_front_()
-	{ assert(handle_); return write().pop_front_(); }
+	{ assert(___handle___); return write().pop_front_(); }
 
 	inline any_a<> push_back__(range_a<> const& range)
-	{ assert(handle_); return write().push_back__(range); }
+	{ assert(___handle___); return write().push_back__(range); }
 
 	inline collection_a<> push_back_(any_a<> const& thing)
-	{ assert(handle_); return write().push_back_(thing); }
+	{ assert(___handle___); return write().push_back_(thing); }
 
 	inline void push_back(any_a < > const & thing )
-	{ assert(handle_); write().push_back(thing); }
+	{ assert(___handle___); write().push_back(thing); }
 
 	inline any_a<> pop_back__(range_a<> const& range)
-	{ assert(handle_); return write().pop_back__(range); }
+	{ assert(___handle___); return write().pop_back__(range); }
 
 	inline any_a<> pop_back_()
-	{ assert(handle_); return write().pop_back_(); }
+	{ assert(___handle___); return write().pop_back_(); }
 
 	inline any_a<> self_assign__(range_a<> const& range)
-	{ assert(handle_); return write().self_assign__(range); }
+	{ assert(___handle___); return write().self_assign__(range); }
 
 	inline collection_a<> self_assign_(range_a<> const& range)
-	{ assert(handle_); return write().self_assign_(range); }
+	{ assert(___handle___); return write().self_assign_(range); }
 
 	inline any_a<> self_add__(range_a<> const& range)
-	{ assert(handle_); return write().self_add__(range); }
+	{ assert(___handle___); return write().self_add__(range); }
 
 	inline collection_a<> self_add_(range_a<> const& range)
-	{ assert(handle_); return write().self_add_(range); }
+	{ assert(___handle___); return write().self_add_(range); }
 
 	inline any_a<> add__(range_a<> const& range) const
-	{ assert(handle_); return read().add__(range); }
+	{ assert(___handle___); return read().add__(range); }
 
 	inline collection_a<> add_(range_a<> const& range) const
-	{ assert(handle_); return read().add_(range); }
+	{ assert(___handle___); return read().add_(range); }
 
 	inline collection_a operator+(range_a < > const & range ) const
-	{ assert(handle_); return read().operator+(range); }
+	{ assert(___handle___); return read().operator+(range); }
 
 	inline any_a<> self_subtract__(range_a<> const& range)
-	{ assert(handle_); return write().self_subtract__(range); }
+	{ assert(___handle___); return write().self_subtract__(range); }
 
 	inline collection_a<> self_subtract_(range_a<> const& range)
-	{ assert(handle_); return write().self_subtract_(range); }
+	{ assert(___handle___); return write().self_subtract_(range); }
 
 	inline any_a<> subtract__(range_a<> const& range) const
-	{ assert(handle_); return read().subtract__(range); }
+	{ assert(___handle___); return read().subtract__(range); }
 
 	inline collection_a<> subtract_(range_a<> const& range) const
-	{ assert(handle_); return read().subtract_(range); }
+	{ assert(___handle___); return read().subtract_(range); }
 
 	inline collection_a operator-(range_a < > const & range ) const
-	{ assert(handle_); return read().operator-(range); }
+	{ assert(___handle___); return read().operator-(range); }
 
 	inline any_a<> read_lock__(range_a<> const& range) const
-	{ assert(handle_); return read().read_lock__(range); }
+	{ assert(___handle___); return read().read_lock__(range); }
 
 	inline any_a<> read_lock_() const
-	{ assert(handle_); return read().read_lock_(); }
+	{ assert(___handle___); return read().read_lock_(); }
 
 	inline any_a<> write_lock__(range_a<> const& range) const
-	{ assert(handle_); return read().write_lock__(range); }
+	{ assert(___handle___); return read().write_lock__(range); }
 
 	inline any_a<> write_lock_() const
-	{ assert(handle_); return read().write_lock_(); }
+	{ assert(___handle___); return read().write_lock_(); }
 
 protected:
 	struct ___collection_a_handle_base___ : ___range_a_handle_base___
@@ -489,17 +489,17 @@ private:
 protected:
 	inline ___collection_a_handle_base___ const& read() const noexcept
 	{
-		return *std::static_pointer_cast<___collection_a_handle_base___ const>(handle_);
+		return *std::static_pointer_cast<___collection_a_handle_base___ const>(___handle___);
 	}
 
 	inline ___collection_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *std::static_pointer_cast<___collection_a_handle_base___>(handle_);
+		return *std::static_pointer_cast<___collection_a_handle_base___>(___handle___);
 	}
 
 private:
@@ -514,7 +514,7 @@ public:
 
 	static inline collection_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___collection_a_handle_base___>(thing.handle_);
+		auto const ptr = std::dynamic_pointer_cast<___collection_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
 			return collection_a{ ptr };
@@ -589,7 +589,7 @@ public:
 	explicit inline collection_a(___TTT___ value) noexcept
 		: range_a{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -600,7 +600,7 @@ public:
 		{
 			throw dis("collection_a assignment failed to cast from base to collection_a");
 		}
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #else
@@ -608,7 +608,7 @@ public:
 	inline collection_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___collection_a_handle_base___>(handle));
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #endif
@@ -617,7 +617,7 @@ public:
 	inline collection_a& operator=(___TTT___ value) noexcept
 	{
 		collection_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -629,7 +629,7 @@ private:
 template <typename ___TTT___, typename number_data_int64_a_chk>
 inline bool check(collection_a<number_data_int64_a_chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename number_data_int64_a>
@@ -647,7 +647,7 @@ public:
 	// arithmetic operator overloads
 	inline collection_d& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -655,7 +655,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline collection_d operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		collection_d result = *this;
 		write().operator++();
 		return result;
@@ -664,7 +664,7 @@ public:
 
 	inline collection_d& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -672,7 +672,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline collection_d operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		collection_d result = *this;
 		write().operator--();
 		return result;
@@ -681,42 +681,42 @@ public:
 
 	inline collection_d& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline collection_d& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline collection_d& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline collection_d& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline collection_d& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> has__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("has_");
 		if (!op)
 		{
@@ -727,7 +727,7 @@ public:
 
 	inline any_a<> has_(any_a<> const& key) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("has_");
 		if (!op)
 		{
@@ -741,7 +741,7 @@ public:
 
 	inline any_a<> at__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("at_");
 		if (!op)
 		{
@@ -752,7 +752,7 @@ public:
 
 	inline any_a<> at_(any_a<> const& key) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("at_");
 		if (!op)
 		{
@@ -763,7 +763,7 @@ public:
 
 	inline any_a<> update__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("update_");
 		if (!op)
 		{
@@ -774,7 +774,7 @@ public:
 
 	inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() )
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("update_");
 		if (!op)
 		{
@@ -788,7 +788,7 @@ public:
 
 	inline any_a<> insert__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("insert_");
 		if (!op)
 		{
@@ -799,7 +799,7 @@ public:
 
 	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() )
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("insert_");
 		if (!op)
 		{
@@ -813,7 +813,7 @@ public:
 
 	inline any_a<> erase__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("erase_");
 		if (!op)
 		{
@@ -824,7 +824,7 @@ public:
 
 	inline any_a<> erase_(any_a<> const& key)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("erase_");
 		if (!op)
 		{
@@ -838,7 +838,7 @@ public:
 
 	inline any_a<> clear__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("clear_");
 		if (!op)
 		{
@@ -849,7 +849,7 @@ public:
 
 	inline collection_a<> clear_()
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("clear_");
 		if (!op)
 		{
@@ -863,7 +863,7 @@ public:
 
 	inline any_a<> size__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("size_");
 		if (!op)
 		{
@@ -874,7 +874,7 @@ public:
 
 	inline number_data_int64_a size_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("size_");
 		if (!op)
 		{
@@ -888,7 +888,7 @@ public:
 
 	inline any_a<> empty__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("empty_");
 		if (!op)
 		{
@@ -899,7 +899,7 @@ public:
 
 	inline any_a<> empty_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("empty_");
 		if (!op)
 		{
@@ -913,7 +913,7 @@ public:
 
 	inline any_a<> push_front__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("push_front_");
 		if (!op)
 		{
@@ -924,7 +924,7 @@ public:
 
 	inline collection_a<> push_front_(any_a<> const& thing)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("push_front_");
 		if (!op)
 		{
@@ -938,7 +938,7 @@ public:
 
 	inline any_a<> pop_front__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("pop_front_");
 		if (!op)
 		{
@@ -949,7 +949,7 @@ public:
 
 	inline any_a<> pop_front_()
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("pop_front_");
 		if (!op)
 		{
@@ -960,7 +960,7 @@ public:
 
 	inline any_a<> push_back__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("push_back_");
 		if (!op)
 		{
@@ -971,7 +971,7 @@ public:
 
 	inline collection_a<> push_back_(any_a<> const& thing)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("push_back_");
 		if (!op)
 		{
@@ -985,7 +985,7 @@ public:
 
 	inline any_a<> pop_back__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("pop_back_");
 		if (!op)
 		{
@@ -996,7 +996,7 @@ public:
 
 	inline any_a<> pop_back_()
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("pop_back_");
 		if (!op)
 		{
@@ -1007,7 +1007,7 @@ public:
 
 	inline any_a<> self_assign__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
@@ -1018,7 +1018,7 @@ public:
 
 	inline collection_a<> self_assign_(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
@@ -1029,7 +1029,7 @@ public:
 
 	inline any_a<> self_add__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_add_");
 		if (!op)
 		{
@@ -1040,7 +1040,7 @@ public:
 
 	inline collection_a<> self_add_(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_add_");
 		if (!op)
 		{
@@ -1051,7 +1051,7 @@ public:
 
 	inline any_a<> add__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("add_");
 		if (!op)
 		{
@@ -1062,7 +1062,7 @@ public:
 
 	inline collection_a<> add_(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("add_");
 		if (!op)
 		{
@@ -1076,7 +1076,7 @@ public:
 
 	inline any_a<> self_subtract__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
@@ -1087,7 +1087,7 @@ public:
 
 	inline collection_a<> self_subtract_(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
@@ -1098,7 +1098,7 @@ public:
 
 	inline any_a<> subtract__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("subtract_");
 		if (!op)
 		{
@@ -1109,7 +1109,7 @@ public:
 
 	inline collection_a<> subtract_(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("subtract_");
 		if (!op)
 		{
@@ -1123,7 +1123,7 @@ public:
 
 	inline any_a<> read_lock__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("read_lock_");
 		if (!op)
 		{
@@ -1134,7 +1134,7 @@ public:
 
 	inline any_a<> read_lock_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("read_lock_");
 		if (!op)
 		{
@@ -1145,7 +1145,7 @@ public:
 
 	inline any_a<> write_lock__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("write_lock_");
 		if (!op)
 		{
@@ -1156,7 +1156,7 @@ public:
 
 	inline any_a<> write_lock_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("write_lock_");
 		if (!op)
 		{

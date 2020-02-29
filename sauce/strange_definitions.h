@@ -68,13 +68,13 @@ inline bool check(___VVV___ const&) noexcept
 template <typename ___TTT___>
 inline ___TTT___ cast(any_a<> const& value)
 {
-	return ___TTT___{ value.handle_ };
+	return ___TTT___{ value.___handle___ };
 }
 #else
 template <typename ___TTT___>
 inline ___TTT___ cast(any_a<> const& value) noexcept
 {
-	return ___TTT___{ value.handle_ };
+	return ___TTT___{ value.___handle___ };
 }
 #endif
 
@@ -82,13 +82,13 @@ inline ___TTT___ cast(any_a<> const& value) noexcept
 template <typename ___TTT___>
 inline ___TTT___ cast_ref(any_a<>& value)
 {
-	return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
+	return ___TTT___(value.___handle___, any_a<>::___reference_tag___{});
 }
 #else
 template <typename ___TTT___>
 inline ___TTT___ cast_ref(any_a<>& value) noexcept
 {
-	return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
+	return ___TTT___(value.___handle___, any_a<>::___reference_tag___{});
 }
 #endif
 
@@ -96,26 +96,26 @@ inline ___TTT___ cast_ref(any_a<>& value) noexcept
 template <typename ___TTT___>
 inline ___TTT___ cast_dup(any_a<>& value)
 {
-	if (&value.handle_ == &value.___shared___)
+	if (&value.___handle___ == &value.___shared___)
 	{
-		return ___TTT___{ value.handle_ };
+		return ___TTT___{ value.___handle___ };
 	}
 	else
 	{
-		return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
+		return ___TTT___(value.___handle___, any_a<>::___reference_tag___{});
 	}
 }
 #else
 template <typename ___TTT___>
 inline ___TTT___ cast_dup(any_a<>& value) noexcept
 {
-	if (&value.handle_ == &value.___shared___)
+	if (&value.___handle___ == &value.___shared___)
 	{
-		return ___TTT___{ value.handle_ };
+		return ___TTT___{ value.___handle___ };
 	}
 	else
 	{
-		return ___TTT___(value.handle_, any_a<>::___reference_tag___{});
+		return ___TTT___(value.___handle___, any_a<>::___reference_tag___{});
 	}
 }
 #endif

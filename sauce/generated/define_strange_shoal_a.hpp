@@ -18,7 +18,7 @@ public:
 	// arithmetic operator overloads
 	inline shoal_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -26,7 +26,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline shoal_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		shoal_a result = *this;
 		write().operator++();
 		return result;
@@ -35,7 +35,7 @@ public:
 
 	inline shoal_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -43,7 +43,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline shoal_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		shoal_a result = *this;
 		write().operator--();
 		return result;
@@ -52,65 +52,65 @@ public:
 
 	inline shoal_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline shoal_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline shoal_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline shoal_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline shoal_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline bool has_string(std :: string const & s ) const
-	{ assert(handle_); return read().has_string(s); }
+	{ assert(___handle___); return read().has_string(s); }
 
 	inline any_a < > at_string(std :: string const & s ) const
-	{ assert(handle_); return read().at_string(s); }
+	{ assert(___handle___); return read().at_string(s); }
 
 	inline void update_string(std :: string const & s , any_a < > const & value )
-	{ assert(handle_); write().update_string(s, value); }
+	{ assert(___handle___); write().update_string(s, value); }
 
 	inline bool insert_string(std :: string const & s , any_a < > const & value )
-	{ assert(handle_); return write().insert_string(s, value); }
+	{ assert(___handle___); return write().insert_string(s, value); }
 
 	inline bool erase_string(std :: string const & s )
-	{ assert(handle_); return write().erase_string(s); }
+	{ assert(___handle___); return write().erase_string(s); }
 
 	inline any_a<> begin__(range_a<> const& range)
-	{ assert(handle_); return write().begin__(range); }
+	{ assert(___handle___); return write().begin__(range); }
 
 	inline forward_iterator_a<> begin_()
-	{ assert(handle_); return write().begin_(); }
+	{ assert(___handle___); return write().begin_(); }
 
 	inline any_a<> end__(range_a<> const& range)
-	{ assert(handle_); return write().end__(range); }
+	{ assert(___handle___); return write().end__(range); }
 
 	inline forward_iterator_a<> end_()
-	{ assert(handle_); return write().end_(); }
+	{ assert(___handle___); return write().end_(); }
 
 protected:
 	struct ___shoal_a_handle_base___ : ___collection_a_handle_base___
@@ -209,17 +209,17 @@ private:
 protected:
 	inline ___shoal_a_handle_base___ const& read() const noexcept
 	{
-		return *std::static_pointer_cast<___shoal_a_handle_base___ const>(handle_);
+		return *std::static_pointer_cast<___shoal_a_handle_base___ const>(___handle___);
 	}
 
 	inline ___shoal_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *std::static_pointer_cast<___shoal_a_handle_base___>(handle_);
+		return *std::static_pointer_cast<___shoal_a_handle_base___>(___handle___);
 	}
 
 private:
@@ -234,7 +234,7 @@ public:
 
 	static inline shoal_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___shoal_a_handle_base___>(thing.handle_);
+		auto const ptr = std::dynamic_pointer_cast<___shoal_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
 			return shoal_a{ ptr };
@@ -309,7 +309,7 @@ public:
 	explicit inline shoal_a(___TTT___ value) noexcept
 		: collection_a{ std::make_shared<___shoal_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -320,7 +320,7 @@ public:
 		{
 			throw dis("shoal_a assignment failed to cast from base to shoal_a");
 		}
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #else
@@ -328,7 +328,7 @@ public:
 	inline shoal_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___shoal_a_handle_base___>(handle));
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #endif
@@ -337,7 +337,7 @@ public:
 	inline shoal_a& operator=(___TTT___ value) noexcept
 	{
 		shoal_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -349,7 +349,7 @@ private:
 template <typename ___TTT___, typename _1__chk>
 inline bool check(shoal_a<_1__chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename _1_>
@@ -367,7 +367,7 @@ public:
 	// arithmetic operator overloads
 	inline shoal_d& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -375,7 +375,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline shoal_d operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		shoal_d result = *this;
 		write().operator++();
 		return result;
@@ -384,7 +384,7 @@ public:
 
 	inline shoal_d& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -392,7 +392,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline shoal_d operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		shoal_d result = *this;
 		write().operator--();
 		return result;
@@ -401,35 +401,35 @@ public:
 
 	inline shoal_d& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline shoal_d& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline shoal_d& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline shoal_d& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline shoal_d& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
@@ -451,7 +451,7 @@ public:
 
 	inline any_a<> begin__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("begin_");
 		if (!op)
 		{
@@ -462,7 +462,7 @@ public:
 
 	inline forward_iterator_a<> begin_()
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("begin_");
 		if (!op)
 		{
@@ -473,7 +473,7 @@ public:
 
 	inline any_a<> end__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("end_");
 		if (!op)
 		{
@@ -484,7 +484,7 @@ public:
 
 	inline forward_iterator_a<> end_()
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("end_");
 		if (!op)
 		{

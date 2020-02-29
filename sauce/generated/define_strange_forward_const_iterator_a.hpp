@@ -18,7 +18,7 @@ public:
 	// arithmetic operator overloads
 	inline forward_const_iterator_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -26,7 +26,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline forward_const_iterator_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		forward_const_iterator_a result = *this;
 		write().operator++();
 		return result;
@@ -35,7 +35,7 @@ public:
 
 	inline forward_const_iterator_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -43,7 +43,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline forward_const_iterator_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		forward_const_iterator_a result = *this;
 		write().operator--();
 		return result;
@@ -52,56 +52,56 @@ public:
 
 	inline forward_const_iterator_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> get__(range_a<> const& range) const
-	{ assert(handle_); return read().get__(range); }
+	{ assert(___handle___); return read().get__(range); }
 
 	inline any_a<> get_() const
-	{ assert(handle_); return read().get_(); }
+	{ assert(___handle___); return read().get_(); }
 
 	inline any_a < > const & operator*() const
-	{ assert(handle_); return read().operator*(); }
+	{ assert(___handle___); return read().operator*(); }
 
 	inline any_a < > const * operator->() const
-	{ assert(handle_); return read().operator->(); }
+	{ assert(___handle___); return read().operator->(); }
 
 	inline any_a<> increment__(range_a<> const& range)
-	{ assert(handle_); return write().increment__(range); }
+	{ assert(___handle___); return write().increment__(range); }
 
 	inline forward_const_iterator_a<> increment_()
-	{ assert(handle_); return write().increment_(); }
+	{ assert(___handle___); return write().increment_(); }
 
 protected:
 	struct ___forward_const_iterator_a_handle_base___ : ___any_a_handle_base___
@@ -188,17 +188,17 @@ private:
 protected:
 	inline ___forward_const_iterator_a_handle_base___ const& read() const noexcept
 	{
-		return *std::static_pointer_cast<___forward_const_iterator_a_handle_base___ const>(handle_);
+		return *std::static_pointer_cast<___forward_const_iterator_a_handle_base___ const>(___handle___);
 	}
 
 	inline ___forward_const_iterator_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *std::static_pointer_cast<___forward_const_iterator_a_handle_base___>(handle_);
+		return *std::static_pointer_cast<___forward_const_iterator_a_handle_base___>(___handle___);
 	}
 
 private:
@@ -213,7 +213,7 @@ public:
 
 	static inline forward_const_iterator_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___forward_const_iterator_a_handle_base___>(thing.handle_);
+		auto const ptr = std::dynamic_pointer_cast<___forward_const_iterator_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
 			return forward_const_iterator_a{ ptr };
@@ -288,7 +288,7 @@ public:
 	explicit inline forward_const_iterator_a(___TTT___ value) noexcept
 		: any_a{ std::make_shared<___forward_const_iterator_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -299,7 +299,7 @@ public:
 		{
 			throw dis("forward_const_iterator_a assignment failed to cast from base to forward_const_iterator_a");
 		}
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #else
@@ -307,7 +307,7 @@ public:
 	inline forward_const_iterator_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___forward_const_iterator_a_handle_base___>(handle));
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #endif
@@ -316,7 +316,7 @@ public:
 	inline forward_const_iterator_a& operator=(___TTT___ value) noexcept
 	{
 		forward_const_iterator_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -328,7 +328,7 @@ private:
 template <typename ___TTT___, typename _1__chk>
 inline bool check(forward_const_iterator_a<_1__chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename _1_>
@@ -346,7 +346,7 @@ public:
 	// arithmetic operator overloads
 	inline forward_const_iterator_d& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -354,7 +354,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline forward_const_iterator_d operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		forward_const_iterator_d result = *this;
 		write().operator++();
 		return result;
@@ -363,7 +363,7 @@ public:
 
 	inline forward_const_iterator_d& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -371,7 +371,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline forward_const_iterator_d operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		forward_const_iterator_d result = *this;
 		write().operator--();
 		return result;
@@ -380,42 +380,42 @@ public:
 
 	inline forward_const_iterator_d& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_d& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_d& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_d& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_d& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> get__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("get_");
 		if (!op)
 		{
@@ -426,7 +426,7 @@ public:
 
 	inline any_a<> get_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("get_");
 		if (!op)
 		{
@@ -443,7 +443,7 @@ public:
 
 	inline any_a<> increment__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("increment_");
 		if (!op)
 		{
@@ -454,7 +454,7 @@ public:
 
 	inline forward_const_iterator_a<> increment_()
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("increment_");
 		if (!op)
 		{

@@ -18,7 +18,7 @@ public:
 	// arithmetic operator overloads
 	inline range_of_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -26,7 +26,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline range_of_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		range_of_a result = *this;
 		write().operator++();
 		return result;
@@ -35,7 +35,7 @@ public:
 
 	inline range_of_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -43,7 +43,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline range_of_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		range_of_a result = *this;
 		write().operator--();
 		return result;
@@ -52,50 +52,50 @@ public:
 
 	inline range_of_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline range_of_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline range_of_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline range_of_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline range_of_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> cbegin__(range_a<> const& range) const
-	{ assert(handle_); return read().cbegin__(range); }
+	{ assert(___handle___); return read().cbegin__(range); }
 
 	inline forward_const_iterator_a<> cbegin_() const
-	{ assert(handle_); return read().cbegin_(); }
+	{ assert(___handle___); return read().cbegin_(); }
 
 	inline any_a<> cend__(range_a<> const& range) const
-	{ assert(handle_); return read().cend__(range); }
+	{ assert(___handle___); return read().cend__(range); }
 
 	inline forward_const_iterator_a<> cend_() const
-	{ assert(handle_); return read().cend_(); }
+	{ assert(___handle___); return read().cend_(); }
 
 protected:
 	struct ___range_of_a_handle_base___ : ___any_a_handle_base___
@@ -174,17 +174,17 @@ private:
 protected:
 	inline ___range_of_a_handle_base___ const& read() const noexcept
 	{
-		return *std::static_pointer_cast<___range_of_a_handle_base___ const>(handle_);
+		return *std::static_pointer_cast<___range_of_a_handle_base___ const>(___handle___);
 	}
 
 	inline ___range_of_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *std::static_pointer_cast<___range_of_a_handle_base___>(handle_);
+		return *std::static_pointer_cast<___range_of_a_handle_base___>(___handle___);
 	}
 
 private:
@@ -199,7 +199,7 @@ public:
 
 	static inline range_of_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___range_of_a_handle_base___>(thing.handle_);
+		auto const ptr = std::dynamic_pointer_cast<___range_of_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
 			return range_of_a{ ptr };
@@ -274,7 +274,7 @@ public:
 	explicit inline range_of_a(___TTT___ value) noexcept
 		: any_a{ std::make_shared<___range_of_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -285,7 +285,7 @@ public:
 		{
 			throw dis("range_of_a assignment failed to cast from base to range_of_a");
 		}
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #else
@@ -293,7 +293,7 @@ public:
 	inline range_of_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___range_of_a_handle_base___>(handle));
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #endif
@@ -302,7 +302,7 @@ public:
 	inline range_of_a& operator=(___TTT___ value) noexcept
 	{
 		range_of_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -314,7 +314,7 @@ private:
 template <typename ___TTT___, typename element_chk>
 inline bool check(range_of_a<element_chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename element>
@@ -332,7 +332,7 @@ public:
 	// arithmetic operator overloads
 	inline range_of_d& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -340,7 +340,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline range_of_d operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		range_of_d result = *this;
 		write().operator++();
 		return result;
@@ -349,7 +349,7 @@ public:
 
 	inline range_of_d& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -357,7 +357,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline range_of_d operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		range_of_d result = *this;
 		write().operator--();
 		return result;
@@ -366,42 +366,42 @@ public:
 
 	inline range_of_d& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline range_of_d& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline range_of_d& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline range_of_d& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline range_of_d& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> cbegin__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("cbegin_");
 		if (!op)
 		{
@@ -412,7 +412,7 @@ public:
 
 	inline forward_const_iterator_a<> cbegin_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("cbegin_");
 		if (!op)
 		{
@@ -423,7 +423,7 @@ public:
 
 	inline any_a<> cend__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("cend_");
 		if (!op)
 		{
@@ -434,7 +434,7 @@ public:
 
 	inline forward_const_iterator_a<> cend_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("cend_");
 		if (!op)
 		{

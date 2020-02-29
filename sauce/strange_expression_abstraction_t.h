@@ -585,14 +585,14 @@ protected:
 
 				"\tinline operator bool() const\n"
 				"\t{\n"
-				"\t\tassert(handle_);\n"
+				"\t\tassert(___handle___);\n"
 				"\t\treturn read().operator bool();\n"
 				"\t}\n\n"
 
 				"\t// trigger copy on write\n"
 				"\tvoid mutate()\n"
 				"\t{\n"
-				"\t\tassert(handle_);\n"
+				"\t\tassert(___handle___);\n"
 				"\t\twrite();\n"
 				"\t}\n\n");
 		}
@@ -605,7 +605,7 @@ protected:
 			"\t// arithmetic operator overloads\n"
 			"\tinline " + class_name + "& operator++()\n"
 			"\t{\n"
-			"\t\tassert(handle_);\n"
+			"\t\tassert(___handle___);\n"
 			"\t\twrite().operator++();\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
@@ -613,7 +613,7 @@ protected:
 			"#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS\n"
 			"\tinline " + class_name + " operator++(int)\n"
 			"\t{\n"
-			"\t\tassert(handle_);\n"
+			"\t\tassert(___handle___);\n"
 			"\t\t" + class_name + " result = *this;\n"
 			"\t\twrite().operator++();\n"
 			"\t\treturn result;\n"
@@ -622,7 +622,7 @@ protected:
 
 			"\tinline " + class_name + "& operator--()\n"
 			"\t{\n"
-			"\t\tassert(handle_);\n"
+			"\t\tassert(___handle___);\n"
 			"\t\twrite().operator--();\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
@@ -630,7 +630,7 @@ protected:
 			"#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS\n"
 			"\tinline " + class_name + " operator--(int)\n"
 			"\t{\n"
-			"\t\tassert(handle_);\n"
+			"\t\tassert(___handle___);\n"
 			"\t\t" + class_name + " result = *this;\n"
 			"\t\twrite().operator--();\n"
 			"\t\treturn result;\n"
@@ -639,35 +639,35 @@ protected:
 
 			"\tinline " + class_name + "& operator+=(any_a<> const& other)\n"
 			"\t{\n"
-			"\t\tassert(handle_);\n"
+			"\t\tassert(___handle___);\n"
 			"\t\twrite().operator+=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
 			"\tinline " + class_name + "& operator-=(any_a<> const& other)\n"
 			"\t{\n"
-			"\t\tassert(handle_);\n"
+			"\t\tassert(___handle___);\n"
 			"\t\twrite().operator-=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
 			"\tinline " + class_name + "& operator*=(any_a<> const& other)\n"
 			"\t{\n"
-			"\t\tassert(handle_);\n"
+			"\t\tassert(___handle___);\n"
 			"\t\twrite().operator*=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
 			"\tinline " + class_name + "& operator/=(any_a<> const& other)\n"
 			"\t{\n"
-			"\t\tassert(handle_);\n"
+			"\t\tassert(___handle___);\n"
 			"\t\twrite().operator/=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
 			"\tinline " + class_name + "& operator%=(any_a<> const& other)\n"
 			"\t{\n"
-			"\t\tassert(handle_);\n"
+			"\t\tassert(___handle___);\n"
 			"\t\twrite().operator%=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n");
@@ -761,7 +761,7 @@ protected:
 			"\tinline any_a<> " + name + "_(range_a" +
 			(root ? "" : "<>") + " const& range)" + constness + "\n"
 			"\t{\n"
-			"\t\tassert(handle_);\n"
+			"\t\tassert(___handle___);\n"
 			"\t\tauto const op = operation(\"" + name + "\");\n"
 			"\t\tif (!op)\n"
 			"\t\t{\n"
@@ -787,7 +787,7 @@ protected:
 		}
 		river.write_string(" " + name + parameters + constness + "\n"
 			"\t{\n"
-			"\t\tassert(handle_);\n"
+			"\t\tassert(___handle___);\n"
 			"\t\tauto const op = operation(\"" + name + "\");\n"
 			"\t\tif (!op)\n"
 			"\t\t{\n"
@@ -850,7 +850,7 @@ protected:
 		river.write_string(
 			"\tinline any_a<> " + name + "_(range_a" +
 				(root ? "" : "<>") + " const& range)" + constness + "\n"
-			"\t{ assert(handle_); return ");
+			"\t{ assert(___handle___); return ");
 		if (constness.empty())
 		{
 			river.write_string("write().");
@@ -863,7 +863,7 @@ protected:
 
 		river.write_string(
 			"\tinline " + result + " " + name + parameters + constness + "\n"
-			"\t{ assert(handle_); return ");
+			"\t{ assert(___handle___); return ");
 		if (constness.empty())
 		{
 			river.write_string("write().");
@@ -885,7 +885,7 @@ protected:
 		_parse_native_member_definition_(class_name, name, value, result, parameters, arguments, constness, dynamic);
 		river.write_string(
 			"\tinline " + result + " " + name + parameters + constness + "\n"
-			"\t{ assert(handle_); ");
+			"\t{ assert(___handle___); ");
 		if (result != "void")
 		{
 			river.write_string("return ");
@@ -1038,7 +1038,7 @@ protected:
 				"\t___SHARED___ ___shared___;\n\n"
 
 				"public:\n"
-				"\t___SHARED___& handle_;\n\n"
+				"\t___SHARED___& ___handle___;\n\n"
 
 				"private:\n"
 				"\ttemplate <typename ___TTT___>\n"
@@ -1188,19 +1188,19 @@ protected:
 			"protected:\n"
 			"\tinline ___" + class_name + "_handle_base___ const& read() const noexcept\n"
 			"\t{\n" + (root
-				? std::string{ "\t\treturn *handle_;\n" }
-				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___ const>(handle_);\n")) +
+				? std::string{ "\t\treturn *___handle___;\n" }
+				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___ const>(___handle___);\n")) +
 			"\t}\n\n"
 
 			"\tinline ___" + class_name + "_handle_base___& write() noexcept\n"
 			"\t{\n"
-			"\t\tif (!handle_.unique())\n"
+			"\t\tif (!___handle___.unique())\n"
 			"\t\t{\n"
-			"\t\t\thandle_ = handle_->___clone___();\n"
-			"\t\t\thandle_->___weak___(handle_);\n"
+			"\t\t\t___handle___ = ___handle___->___clone___();\n"
+			"\t\t\t___handle___->___weak___(___handle___);\n"
 			"\t\t}\n" + (root
-				? std::string{ "\t\treturn *handle_;\n" }
-				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___>(handle_);\n")) +
+				? std::string{ "\t\treturn *___handle___;\n" }
+				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___>(___handle___);\n")) +
 			"\t}\n\n");
 
 		if (root)
@@ -1257,7 +1257,7 @@ protected:
 			river.write_string(
 				"\tinline bool is_ref() const\n"
 				"\t{\n"
-				"\t\treturn &handle_ != &___shared___;\n"
+				"\t\treturn &___handle___ != &___shared___;\n"
 				"\t}\n\n");
 
 			river.write_string(
@@ -1271,7 +1271,7 @@ protected:
 			river.write_string(
 				"\tstatic inline " + class_name + " cast(any_a<> const& thing)\n"
 				"\t{\n"
-				"\t\tauto const ptr = std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.handle_);\n"
+				"\t\tauto const ptr = std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.___handle___);\n"
 				"\t\tif (ptr)\n"
 				"\t\t{\n"
 				"\t\t\treturn " + class_name + "{ ptr };\n"
@@ -1303,38 +1303,38 @@ protected:
 			river.write_string(
 				"\tinline " + class_name + "() noexcept\n"
 				"\t\t: ___shared___{}\n"
-				"\t\t, handle_{ ___shared___ }\n"
+				"\t\t, ___handle___{ ___shared___ }\n"
 				"\t{}\n\n"
 
 				"\tinline " + class_name + "(" + class_name + " const& other) noexcept\n"
-				"\t\t: ___shared___{ other.handle_ }\n"
-				"\t\t, handle_{ ___shared___ }\n"
+				"\t\t: ___shared___{ other.___handle___ }\n"
+				"\t\t, ___handle___{ ___shared___ }\n"
 				"\t{}\n\n"
 
 				"\tinline " + class_name + "(" + class_name + "& other, ___reference_tag___) noexcept\n"
 				"\t\t: ___shared___{ ___SHARED___{} }\n"
-				"\t\t, handle_{ other.handle_ }\n"
+				"\t\t, ___handle___{ other.___handle___ }\n"
 				"\t{}\n\n"
 
 				"\tinline " + class_name + "(" + class_name + "& other, ___duplicate_tag___) noexcept\n"
-				"\t\t: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }\n"
-				"\t\t, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }\n"
+				"\t\t: ___shared___{ &other.___handle___ == &other.___shared___ ? other.___handle___ : ___SHARED___{} }\n"
+				"\t\t, ___handle___{ *(&other.___handle___ == &other.___shared___ ? &___shared___ : &other.___handle___) }\n"
 				"\t{}\n\n"
 
 				"\tinline " + class_name + "(" + class_name + "&& other) noexcept\n"
-				"\t: ___shared___{ other.handle_ }\n"
-				"\t, handle_{ ___shared___ }\n"
+				"\t: ___shared___{ other.___handle___ }\n"
+				"\t, ___handle___{ ___shared___ }\n"
 				"\t{}\n\n"
 
 				"\tinline " + class_name + "& operator=(" + class_name + " const& other) noexcept\n"
 				"\t{\n"
-				"\t\thandle_ = other.handle_;\n"
+				"\t\t___handle___ = other.___handle___;\n"
 				"\t\treturn *this;\n"
 				"\t}\n\n"
 
 				"\tinline " + class_name + "& operator=(" + class_name + "&& other) noexcept\n"
 				"\t{\n"
-				"\t\thandle_ = other.handle_;\n"
+				"\t\t___handle___ = other.___handle___;\n"
 				"\t\treturn *this;\n"
 				"\t}\n\n"
 
@@ -1343,27 +1343,27 @@ protected:
 				"\ttemplate <typename ___TTT___>\n"
 				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___> const& handle) noexcept\n"
 				"\t\t: ___shared___{ handle }\n"
-				"\t\t, handle_{ ___shared___ }\n"
+				"\t\t, ___handle___{ ___shared___ }\n"
 				"\t{}\n\n"
 
 				"\ttemplate <typename ___TTT___>\n"
 				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept\n"
 				"\t\t: ___shared___{ ___SHARED___{} }\n"
-				"\t\t, handle_{ reinterpret_cast<___SHARED___&>(handle) }\n"
+				"\t\t, ___handle___{ reinterpret_cast<___SHARED___&>(handle) }\n"
 				"\t{}\n\n"
 
 				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
 				"\texplicit inline " + class_name + "(___TTT___ value) noexcept\n"
 				"\t\t: ___shared___{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }\n"
-				"\t\t, handle_{ ___shared___ }\n"
+				"\t\t, ___handle___{ ___shared___ }\n"
 				"\t{\n"
-				"\t\thandle_->___weak___(handle_);\n"
+				"\t\t___handle___->___weak___(___handle___);\n"
 				"\t}\n\n"
 
 				"\ttemplate <typename ___TTT___>\n"
 				"\tinline " + class_name + "& operator=(std::shared_ptr<___TTT___> const& handle) noexcept\n"
 				"\t{\n"
-				"\t\thandle_ = handle;\n"
+				"\t\t___handle___ = handle;\n"
 				"\t\treturn *this;\n"
 				"\t}\n\n"
 
@@ -1371,7 +1371,7 @@ protected:
 				"\tinline " + class_name + "& operator=(___TTT___ value) noexcept\n"
 				"\t{\n"
 				"\t\t" + class_name + " temp{ std::move(value) };\n"
-				"\t\tstd::swap(temp.handle_, handle_);\n"
+				"\t\tstd::swap(temp.___handle___, ___handle___);\n"
 				"\t\treturn *this;\n"
 				"\t}\n\n");
 		}
@@ -1430,7 +1430,7 @@ protected:
 				"\texplicit inline " + class_name + "(___TTT___ value) noexcept\n"
 				"\t\t: " + base_name + "{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }\n"
 				"\t{\n"
-				"\t\thandle_->___weak___(handle_);\n"
+				"\t\t___handle___->___weak___(___handle___);\n"
 				"\t}\n\n"
 
 				"#ifdef STRANGE_CHECK_STATIC_CASTS\n"
@@ -1441,7 +1441,7 @@ protected:
 				"\t\t{\n"
 				"\t\t\tthrow dis(\"" + class_name + " assignment failed to cast from base to " + class_name + "\");\n"
 				"\t\t}\n"
-				"\t\thandle_ = handle;\n"
+				"\t\t___handle___ = handle;\n"
 				"\t\treturn *this;\n"
 				"\t}\n"
 				"#else\n"
@@ -1449,7 +1449,7 @@ protected:
 				"\tinline " + class_name + "& operator=(std::shared_ptr<___TTT___> const& handle) noexcept\n"
 				"\t{\n"
 				"\t\tassert(!handle || std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n"
-				"\t\thandle_ = handle;\n"
+				"\t\t___handle___ = handle;\n"
 				"\t\treturn *this;\n"
 				"\t}\n"
 				"#endif\n\n"
@@ -1458,7 +1458,7 @@ protected:
 				"\tinline " + class_name + "& operator=(___TTT___ value) noexcept\n"
 				"\t{\n"
 				"\t\t" + class_name + " temp{ std::move(value) };\n"
-				"\t\tstd::swap(temp.handle_, handle_);\n"
+				"\t\tstd::swap(temp.___handle___, ___handle___);\n"
 				"\t\treturn *this;\n"
 				"\t}\n\n");
 		}
@@ -1491,7 +1491,7 @@ protected:
 		{
 			river.write_string("\n"
 				"{\n"
-				"\treturn ___TTT___::___check___(value.handle_);\n"
+				"\treturn ___TTT___::___check___(value.___handle___);\n"
 				"}\n\n");
 		}
 	}

@@ -18,7 +18,7 @@ public:
 	// arithmetic operator overloads
 	inline expression_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -26,7 +26,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline expression_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		expression_a result = *this;
 		write().operator++();
 		return result;
@@ -35,7 +35,7 @@ public:
 
 	inline expression_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -43,7 +43,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline expression_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		expression_a result = *this;
 		write().operator--();
 		return result;
@@ -52,92 +52,92 @@ public:
 
 	inline expression_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline expression_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline expression_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline expression_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline expression_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> recreate__(range_a<> const& range) const
-	{ assert(handle_); return read().recreate__(range); }
+	{ assert(___handle___); return read().recreate__(range); }
 
 	inline expression_a<> recreate_() const
-	{ assert(handle_); return read().recreate_(); }
+	{ assert(___handle___); return read().recreate_(); }
 
 	inline void recreated(expression_a < > const & expression ) const
-	{ assert(handle_); read().recreated(expression); }
+	{ assert(___handle___); read().recreated(expression); }
 
 	inline any_a<> literal__(range_a<> const& range) const
-	{ assert(handle_); return read().literal__(range); }
+	{ assert(___handle___); return read().literal__(range); }
 
 	inline any_a<> literal_() const
-	{ assert(handle_); return read().literal_(); }
+	{ assert(___handle___); return read().literal_(); }
 
 	inline bool literal() const
-	{ assert(handle_); return read().literal(); }
+	{ assert(___handle___); return read().literal(); }
 
 	inline any_a<> evaluate__(range_a<> const& range) const
-	{ assert(handle_); return read().evaluate__(range); }
+	{ assert(___handle___); return read().evaluate__(range); }
 
 	inline any_a<> evaluate_() const
-	{ assert(handle_); return read().evaluate_(); }
+	{ assert(___handle___); return read().evaluate_(); }
 
 	inline any_a<> token__(range_a<> const& range) const
-	{ assert(handle_); return read().token__(range); }
+	{ assert(___handle___); return read().token__(range); }
 
 	inline token_a<> token_() const
-	{ assert(handle_); return read().token_(); }
+	{ assert(___handle___); return read().token_(); }
 
 	inline any_a<> terms__(range_a<> const& range) const
-	{ assert(handle_); return read().terms__(range); }
+	{ assert(___handle___); return read().terms__(range); }
 
 	inline flock_a<> terms_() const
-	{ assert(handle_); return read().terms_(); }
+	{ assert(___handle___); return read().terms_(); }
 
 	inline any_a<> generate__(range_a<> const& range) const
-	{ assert(handle_); return read().generate__(range); }
+	{ assert(___handle___); return read().generate__(range); }
 
 	inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const
-	{ assert(handle_); return read().generate_(version, indent, river); }
+	{ assert(___handle___); return read().generate_(version, indent, river); }
 
 	inline void generate(int64_t version , int64_t indent , river_a < > & river ) const
-	{ assert(handle_); read().generate(version, indent, river); }
+	{ assert(___handle___); read().generate(version, indent, river); }
 
 	inline any_a<> generate_cpp__(range_a<> const& range) const
-	{ assert(handle_); return read().generate_cpp__(range); }
+	{ assert(___handle___); return read().generate_cpp__(range); }
 
 	inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const
-	{ assert(handle_); return read().generate_cpp_(version, indent, river, declare, define, type); }
+	{ assert(___handle___); return read().generate_cpp_(version, indent, river, declare, define, type); }
 
 	inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const
-	{ assert(handle_); read().generate_cpp(version, indent, river, declare, define, type); }
+	{ assert(___handle___); read().generate_cpp(version, indent, river, declare, define, type); }
 
 protected:
 	struct ___expression_a_handle_base___ : ___operation_a_handle_base___
@@ -272,17 +272,17 @@ private:
 protected:
 	inline ___expression_a_handle_base___ const& read() const noexcept
 	{
-		return *std::static_pointer_cast<___expression_a_handle_base___ const>(handle_);
+		return *std::static_pointer_cast<___expression_a_handle_base___ const>(___handle___);
 	}
 
 	inline ___expression_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *std::static_pointer_cast<___expression_a_handle_base___>(handle_);
+		return *std::static_pointer_cast<___expression_a_handle_base___>(___handle___);
 	}
 
 private:
@@ -297,7 +297,7 @@ public:
 
 	static inline expression_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(thing.handle_);
+		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
 			return expression_a{ ptr };
@@ -372,7 +372,7 @@ public:
 	explicit inline expression_a(___TTT___ value) noexcept
 		: operation_a{ std::make_shared<___expression_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -383,7 +383,7 @@ public:
 		{
 			throw dis("expression_a assignment failed to cast from base to expression_a");
 		}
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #else
@@ -391,7 +391,7 @@ public:
 	inline expression_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___expression_a_handle_base___>(handle));
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #endif
@@ -400,7 +400,7 @@ public:
 	inline expression_a& operator=(___TTT___ value) noexcept
 	{
 		expression_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -412,7 +412,7 @@ private:
 template <typename ___TTT___, typename _1__chk>
 inline bool check(expression_a<_1__chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename _1_>
@@ -430,7 +430,7 @@ public:
 	// arithmetic operator overloads
 	inline expression_d& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -438,7 +438,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline expression_d operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		expression_d result = *this;
 		write().operator++();
 		return result;
@@ -447,7 +447,7 @@ public:
 
 	inline expression_d& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -455,7 +455,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline expression_d operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		expression_d result = *this;
 		write().operator--();
 		return result;
@@ -464,42 +464,42 @@ public:
 
 	inline expression_d& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline expression_d& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline expression_d& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline expression_d& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline expression_d& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> recreate__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("recreate_");
 		if (!op)
 		{
@@ -510,7 +510,7 @@ public:
 
 	inline expression_a<> recreate_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("recreate_");
 		if (!op)
 		{
@@ -524,7 +524,7 @@ public:
 
 	inline any_a<> literal__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("literal_");
 		if (!op)
 		{
@@ -535,7 +535,7 @@ public:
 
 	inline any_a<> literal_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("literal_");
 		if (!op)
 		{
@@ -549,7 +549,7 @@ public:
 
 	inline any_a<> evaluate__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("evaluate_");
 		if (!op)
 		{
@@ -560,7 +560,7 @@ public:
 
 	inline any_a<> evaluate_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("evaluate_");
 		if (!op)
 		{
@@ -571,7 +571,7 @@ public:
 
 	inline any_a<> token__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("token_");
 		if (!op)
 		{
@@ -582,7 +582,7 @@ public:
 
 	inline token_a<> token_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("token_");
 		if (!op)
 		{
@@ -593,7 +593,7 @@ public:
 
 	inline any_a<> terms__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("terms_");
 		if (!op)
 		{
@@ -604,7 +604,7 @@ public:
 
 	inline flock_a<> terms_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("terms_");
 		if (!op)
 		{
@@ -615,7 +615,7 @@ public:
 
 	inline any_a<> generate__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("generate_");
 		if (!op)
 		{
@@ -626,7 +626,7 @@ public:
 
 	inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("generate_");
 		if (!op)
 		{
@@ -640,7 +640,7 @@ public:
 
 	inline any_a<> generate_cpp__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("generate_cpp_");
 		if (!op)
 		{
@@ -651,7 +651,7 @@ public:
 
 	inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("generate_cpp_");
 		if (!op)
 		{

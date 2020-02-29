@@ -18,7 +18,7 @@ public:
 	// arithmetic operator overloads
 	inline symbol_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -26,7 +26,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline symbol_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		symbol_a result = *this;
 		write().operator++();
 		return result;
@@ -35,7 +35,7 @@ public:
 
 	inline symbol_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -43,7 +43,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline symbol_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		symbol_a result = *this;
 		write().operator--();
 		return result;
@@ -52,62 +52,62 @@ public:
 
 	inline symbol_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline symbol_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline symbol_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline symbol_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline symbol_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> to_lake__(range_a<> const& range) const
-	{ assert(handle_); return read().to_lake__(range); }
+	{ assert(___handle___); return read().to_lake__(range); }
 
 	inline lake_int8_a<> to_lake_() const
-	{ assert(handle_); return read().to_lake_(); }
+	{ assert(___handle___); return read().to_lake_(); }
 
 	inline std :: string const & to_string() const
-	{ assert(handle_); return read().to_string(); }
+	{ assert(___handle___); return read().to_string(); }
 
 	inline int8_t first_character() const
-	{ assert(handle_); return read().first_character(); }
+	{ assert(___handle___); return read().first_character(); }
 
 	inline int8_t last_character() const
-	{ assert(handle_); return read().last_character(); }
+	{ assert(___handle___); return read().last_character(); }
 
 	inline any_a<> add__(range_a<> const& range) const
-	{ assert(handle_); return read().add__(range); }
+	{ assert(___handle___); return read().add__(range); }
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
-	{ assert(handle_); return read().add_(symbol); }
+	{ assert(___handle___); return read().add_(symbol); }
 
 	inline symbol_a < > operator+(symbol_a < > const & symbol ) const
-	{ assert(handle_); return read().operator+(symbol); }
+	{ assert(___handle___); return read().operator+(symbol); }
 
 protected:
 	struct ___symbol_a_handle_base___ : ___any_a_handle_base___
@@ -202,17 +202,17 @@ private:
 protected:
 	inline ___symbol_a_handle_base___ const& read() const noexcept
 	{
-		return *std::static_pointer_cast<___symbol_a_handle_base___ const>(handle_);
+		return *std::static_pointer_cast<___symbol_a_handle_base___ const>(___handle___);
 	}
 
 	inline ___symbol_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *std::static_pointer_cast<___symbol_a_handle_base___>(handle_);
+		return *std::static_pointer_cast<___symbol_a_handle_base___>(___handle___);
 	}
 
 private:
@@ -227,7 +227,7 @@ public:
 
 	static inline symbol_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___symbol_a_handle_base___>(thing.handle_);
+		auto const ptr = std::dynamic_pointer_cast<___symbol_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
 			return symbol_a{ ptr };
@@ -302,7 +302,7 @@ public:
 	explicit inline symbol_a(___TTT___ value) noexcept
 		: any_a{ std::make_shared<___symbol_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -313,7 +313,7 @@ public:
 		{
 			throw dis("symbol_a assignment failed to cast from base to symbol_a");
 		}
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #else
@@ -321,7 +321,7 @@ public:
 	inline symbol_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle));
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #endif
@@ -330,7 +330,7 @@ public:
 	inline symbol_a& operator=(___TTT___ value) noexcept
 	{
 		symbol_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -342,7 +342,7 @@ private:
 template <typename ___TTT___, typename _1__chk>
 inline bool check(symbol_a<_1__chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename _1_>
@@ -360,7 +360,7 @@ public:
 	// arithmetic operator overloads
 	inline symbol_d& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -368,7 +368,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline symbol_d operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		symbol_d result = *this;
 		write().operator++();
 		return result;
@@ -377,7 +377,7 @@ public:
 
 	inline symbol_d& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -385,7 +385,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline symbol_d operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		symbol_d result = *this;
 		write().operator--();
 		return result;
@@ -394,42 +394,42 @@ public:
 
 	inline symbol_d& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline symbol_d& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline symbol_d& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline symbol_d& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline symbol_d& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> to_lake__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("to_lake_");
 		if (!op)
 		{
@@ -440,7 +440,7 @@ public:
 
 	inline lake_int8_a<> to_lake_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("to_lake_");
 		if (!op)
 		{
@@ -460,7 +460,7 @@ public:
 
 	inline any_a<> add__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("add_");
 		if (!op)
 		{
@@ -471,7 +471,7 @@ public:
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("add_");
 		if (!op)
 		{

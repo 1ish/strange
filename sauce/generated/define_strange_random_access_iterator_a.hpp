@@ -18,7 +18,7 @@ public:
 	// arithmetic operator overloads
 	inline random_access_iterator_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -26,7 +26,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline random_access_iterator_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		random_access_iterator_a result = *this;
 		write().operator++();
 		return result;
@@ -35,7 +35,7 @@ public:
 
 	inline random_access_iterator_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -43,7 +43,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline random_access_iterator_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		random_access_iterator_a result = *this;
 		write().operator--();
 		return result;
@@ -52,104 +52,104 @@ public:
 
 	inline random_access_iterator_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline random_access_iterator_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline random_access_iterator_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline random_access_iterator_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline random_access_iterator_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> self_add__(range_a<> const& range)
-	{ assert(handle_); return write().self_add__(range); }
+	{ assert(___handle___); return write().self_add__(range); }
 
 	inline random_access_iterator_a<> self_add_(number_a<> const& number)
-	{ assert(handle_); return write().self_add_(number); }
+	{ assert(___handle___); return write().self_add_(number); }
 
 	inline any_a<> add__(range_a<> const& range) const
-	{ assert(handle_); return read().add__(range); }
+	{ assert(___handle___); return read().add__(range); }
 
 	inline random_access_iterator_a<> add_(number_a<> const& number) const
-	{ assert(handle_); return read().add_(number); }
+	{ assert(___handle___); return read().add_(number); }
 
 	inline random_access_iterator_a operator+(number_a < > const & number ) const
-	{ assert(handle_); return read().operator+(number); }
+	{ assert(___handle___); return read().operator+(number); }
 
 	inline any_a<> self_subtract__(range_a<> const& range)
-	{ assert(handle_); return write().self_subtract__(range); }
+	{ assert(___handle___); return write().self_subtract__(range); }
 
 	inline random_access_iterator_a<> self_subtract_(number_a<> const& number)
-	{ assert(handle_); return write().self_subtract_(number); }
+	{ assert(___handle___); return write().self_subtract_(number); }
 
 	inline any_a<> subtract__(range_a<> const& range) const
-	{ assert(handle_); return read().subtract__(range); }
+	{ assert(___handle___); return read().subtract__(range); }
 
 	inline random_access_iterator_a<> subtract_(number_a<> const& number) const
-	{ assert(handle_); return read().subtract_(number); }
+	{ assert(___handle___); return read().subtract_(number); }
 
 	inline random_access_iterator_a operator-(number_a < > const & number ) const
-	{ assert(handle_); return read().operator-(number); }
+	{ assert(___handle___); return read().operator-(number); }
 
 	inline any_a<> less_than__(range_a<> const& range) const
-	{ assert(handle_); return read().less_than__(range); }
+	{ assert(___handle___); return read().less_than__(range); }
 
 	inline any_a<> less_than_(random_access_iterator_a<> const& it) const
-	{ assert(handle_); return read().less_than_(it); }
+	{ assert(___handle___); return read().less_than_(it); }
 
 	inline bool operator<(random_access_iterator_a < > const & it ) const
-	{ assert(handle_); return read().operator<(it); }
+	{ assert(___handle___); return read().operator<(it); }
 
 	inline any_a<> greater_than__(range_a<> const& range) const
-	{ assert(handle_); return read().greater_than__(range); }
+	{ assert(___handle___); return read().greater_than__(range); }
 
 	inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
-	{ assert(handle_); return read().greater_than_(it); }
+	{ assert(___handle___); return read().greater_than_(it); }
 
 	inline bool operator>(random_access_iterator_a < > const & it ) const
-	{ assert(handle_); return read().operator>(it); }
+	{ assert(___handle___); return read().operator>(it); }
 
 	inline any_a<> less_or_equal__(range_a<> const& range) const
-	{ assert(handle_); return read().less_or_equal__(range); }
+	{ assert(___handle___); return read().less_or_equal__(range); }
 
 	inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
-	{ assert(handle_); return read().less_or_equal_(it); }
+	{ assert(___handle___); return read().less_or_equal_(it); }
 
 	inline bool operator<=(random_access_iterator_a < > const & it ) const
-	{ assert(handle_); return read().operator<=(it); }
+	{ assert(___handle___); return read().operator<=(it); }
 
 	inline any_a<> greater_or_equal__(range_a<> const& range) const
-	{ assert(handle_); return read().greater_or_equal__(range); }
+	{ assert(___handle___); return read().greater_or_equal__(range); }
 
 	inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
-	{ assert(handle_); return read().greater_or_equal_(it); }
+	{ assert(___handle___); return read().greater_or_equal_(it); }
 
 	inline bool operator>=(random_access_iterator_a < > const & it ) const
-	{ assert(handle_); return read().operator>=(it); }
+	{ assert(___handle___); return read().operator>=(it); }
 
 protected:
 	struct ___random_access_iterator_a_handle_base___ : ___bidirectional_iterator_a_handle_base___
@@ -300,17 +300,17 @@ private:
 protected:
 	inline ___random_access_iterator_a_handle_base___ const& read() const noexcept
 	{
-		return *std::static_pointer_cast<___random_access_iterator_a_handle_base___ const>(handle_);
+		return *std::static_pointer_cast<___random_access_iterator_a_handle_base___ const>(___handle___);
 	}
 
 	inline ___random_access_iterator_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *std::static_pointer_cast<___random_access_iterator_a_handle_base___>(handle_);
+		return *std::static_pointer_cast<___random_access_iterator_a_handle_base___>(___handle___);
 	}
 
 private:
@@ -325,7 +325,7 @@ public:
 
 	static inline random_access_iterator_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___random_access_iterator_a_handle_base___>(thing.handle_);
+		auto const ptr = std::dynamic_pointer_cast<___random_access_iterator_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
 			return random_access_iterator_a{ ptr };
@@ -400,7 +400,7 @@ public:
 	explicit inline random_access_iterator_a(___TTT___ value) noexcept
 		: bidirectional_iterator_a{ std::make_shared<___random_access_iterator_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -411,7 +411,7 @@ public:
 		{
 			throw dis("random_access_iterator_a assignment failed to cast from base to random_access_iterator_a");
 		}
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #else
@@ -419,7 +419,7 @@ public:
 	inline random_access_iterator_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___random_access_iterator_a_handle_base___>(handle));
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #endif
@@ -428,7 +428,7 @@ public:
 	inline random_access_iterator_a& operator=(___TTT___ value) noexcept
 	{
 		random_access_iterator_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -440,7 +440,7 @@ private:
 template <typename ___TTT___, typename _1__chk>
 inline bool check(random_access_iterator_a<_1__chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename _1_>
@@ -458,7 +458,7 @@ public:
 	// arithmetic operator overloads
 	inline random_access_iterator_d& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -466,7 +466,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline random_access_iterator_d operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		random_access_iterator_d result = *this;
 		write().operator++();
 		return result;
@@ -475,7 +475,7 @@ public:
 
 	inline random_access_iterator_d& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -483,7 +483,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline random_access_iterator_d operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		random_access_iterator_d result = *this;
 		write().operator--();
 		return result;
@@ -492,42 +492,42 @@ public:
 
 	inline random_access_iterator_d& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline random_access_iterator_d& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline random_access_iterator_d& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline random_access_iterator_d& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline random_access_iterator_d& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> self_add__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_add_");
 		if (!op)
 		{
@@ -538,7 +538,7 @@ public:
 
 	inline random_access_iterator_a<> self_add_(number_a<> const& number)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_add_");
 		if (!op)
 		{
@@ -549,7 +549,7 @@ public:
 
 	inline any_a<> add__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("add_");
 		if (!op)
 		{
@@ -560,7 +560,7 @@ public:
 
 	inline random_access_iterator_a<> add_(number_a<> const& number) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("add_");
 		if (!op)
 		{
@@ -574,7 +574,7 @@ public:
 
 	inline any_a<> self_subtract__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
@@ -585,7 +585,7 @@ public:
 
 	inline random_access_iterator_a<> self_subtract_(number_a<> const& number)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
@@ -596,7 +596,7 @@ public:
 
 	inline any_a<> subtract__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("subtract_");
 		if (!op)
 		{
@@ -607,7 +607,7 @@ public:
 
 	inline random_access_iterator_a<> subtract_(number_a<> const& number) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("subtract_");
 		if (!op)
 		{
@@ -621,7 +621,7 @@ public:
 
 	inline any_a<> less_than__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("less_than_");
 		if (!op)
 		{
@@ -632,7 +632,7 @@ public:
 
 	inline any_a<> less_than_(random_access_iterator_a<> const& it) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("less_than_");
 		if (!op)
 		{
@@ -646,7 +646,7 @@ public:
 
 	inline any_a<> greater_than__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("greater_than_");
 		if (!op)
 		{
@@ -657,7 +657,7 @@ public:
 
 	inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("greater_than_");
 		if (!op)
 		{
@@ -671,7 +671,7 @@ public:
 
 	inline any_a<> less_or_equal__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("less_or_equal_");
 		if (!op)
 		{
@@ -682,7 +682,7 @@ public:
 
 	inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("less_or_equal_");
 		if (!op)
 		{
@@ -696,7 +696,7 @@ public:
 
 	inline any_a<> greater_or_equal__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("greater_or_equal_");
 		if (!op)
 		{
@@ -707,7 +707,7 @@ public:
 
 	inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("greater_or_equal_");
 		if (!op)
 		{

@@ -18,7 +18,7 @@ public:
 	// arithmetic operator overloads
 	inline token_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -26,7 +26,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline token_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		token_a result = *this;
 		write().operator++();
 		return result;
@@ -35,7 +35,7 @@ public:
 
 	inline token_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -43,7 +43,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline token_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		token_a result = *this;
 		write().operator--();
 		return result;
@@ -52,107 +52,107 @@ public:
 
 	inline token_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline token_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline token_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline token_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline token_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> filename__(range_a<> const& range) const
-	{ assert(handle_); return read().filename__(range); }
+	{ assert(___handle___); return read().filename__(range); }
 
 	inline symbol_a<> filename_() const
-	{ assert(handle_); return read().filename_(); }
+	{ assert(___handle___); return read().filename_(); }
 
 	inline std :: string filename() const
-	{ assert(handle_); return read().filename(); }
+	{ assert(___handle___); return read().filename(); }
 
 	inline any_a<> line__(range_a<> const& range) const
-	{ assert(handle_); return read().line__(range); }
+	{ assert(___handle___); return read().line__(range); }
 
 	inline number_data_int64_a<> line_() const
-	{ assert(handle_); return read().line_(); }
+	{ assert(___handle___); return read().line_(); }
 
 	inline int64_t line() const
-	{ assert(handle_); return read().line(); }
+	{ assert(___handle___); return read().line(); }
 
 	inline any_a<> position__(range_a<> const& range) const
-	{ assert(handle_); return read().position__(range); }
+	{ assert(___handle___); return read().position__(range); }
 
 	inline number_data_int64_a<> position_() const
-	{ assert(handle_); return read().position_(); }
+	{ assert(___handle___); return read().position_(); }
 
 	inline int64_t position() const
-	{ assert(handle_); return read().position(); }
+	{ assert(___handle___); return read().position(); }
 
 	inline any_a<> tag__(range_a<> const& range) const
-	{ assert(handle_); return read().tag__(range); }
+	{ assert(___handle___); return read().tag__(range); }
 
 	inline symbol_a<> tag_() const
-	{ assert(handle_); return read().tag_(); }
+	{ assert(___handle___); return read().tag_(); }
 
 	inline std :: string tag() const
-	{ assert(handle_); return read().tag(); }
+	{ assert(___handle___); return read().tag(); }
 
 	inline any_a<> symbol__(range_a<> const& range) const
-	{ assert(handle_); return read().symbol__(range); }
+	{ assert(___handle___); return read().symbol__(range); }
 
 	inline symbol_a<> symbol_() const
-	{ assert(handle_); return read().symbol_(); }
+	{ assert(___handle___); return read().symbol_(); }
 
 	inline std :: string symbol() const
-	{ assert(handle_); return read().symbol(); }
+	{ assert(___handle___); return read().symbol(); }
 
 	inline any_a<> literal__(range_a<> const& range) const
-	{ assert(handle_); return read().literal__(range); }
+	{ assert(___handle___); return read().literal__(range); }
 
 	inline any_a<> literal_() const
-	{ assert(handle_); return read().literal_(); }
+	{ assert(___handle___); return read().literal_(); }
 
 	inline any_a<> precedence__(range_a<> const& range) const
-	{ assert(handle_); return read().precedence__(range); }
+	{ assert(___handle___); return read().precedence__(range); }
 
 	inline number_data_int64_a<> precedence_() const
-	{ assert(handle_); return read().precedence_(); }
+	{ assert(___handle___); return read().precedence_(); }
 
 	inline int64_t precedence() const
-	{ assert(handle_); return read().precedence(); }
+	{ assert(___handle___); return read().precedence(); }
 
 	inline any_a<> report__(range_a<> const& range) const
-	{ assert(handle_); return read().report__(range); }
+	{ assert(___handle___); return read().report__(range); }
 
 	inline misunderstanding_a<> report_() const
-	{ assert(handle_); return read().report_(); }
+	{ assert(___handle___); return read().report_(); }
 
 	inline std :: string report() const
-	{ assert(handle_); return read().report(); }
+	{ assert(___handle___); return read().report(); }
 
 protected:
 	struct ___token_a_handle_base___ : ___any_a_handle_base___
@@ -307,17 +307,17 @@ private:
 protected:
 	inline ___token_a_handle_base___ const& read() const noexcept
 	{
-		return *std::static_pointer_cast<___token_a_handle_base___ const>(handle_);
+		return *std::static_pointer_cast<___token_a_handle_base___ const>(___handle___);
 	}
 
 	inline ___token_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *std::static_pointer_cast<___token_a_handle_base___>(handle_);
+		return *std::static_pointer_cast<___token_a_handle_base___>(___handle___);
 	}
 
 private:
@@ -332,7 +332,7 @@ public:
 
 	static inline token_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___token_a_handle_base___>(thing.handle_);
+		auto const ptr = std::dynamic_pointer_cast<___token_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
 			return token_a{ ptr };
@@ -407,7 +407,7 @@ public:
 	explicit inline token_a(___TTT___ value) noexcept
 		: any_a{ std::make_shared<___token_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -418,7 +418,7 @@ public:
 		{
 			throw dis("token_a assignment failed to cast from base to token_a");
 		}
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #else
@@ -426,7 +426,7 @@ public:
 	inline token_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___token_a_handle_base___>(handle));
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #endif
@@ -435,7 +435,7 @@ public:
 	inline token_a& operator=(___TTT___ value) noexcept
 	{
 		token_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -447,7 +447,7 @@ private:
 template <typename ___TTT___, typename _1__chk>
 inline bool check(token_a<_1__chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename _1_>
@@ -465,7 +465,7 @@ public:
 	// arithmetic operator overloads
 	inline token_d& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -473,7 +473,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline token_d operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		token_d result = *this;
 		write().operator++();
 		return result;
@@ -482,7 +482,7 @@ public:
 
 	inline token_d& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -490,7 +490,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline token_d operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		token_d result = *this;
 		write().operator--();
 		return result;
@@ -499,42 +499,42 @@ public:
 
 	inline token_d& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline token_d& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline token_d& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline token_d& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline token_d& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> filename__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("filename_");
 		if (!op)
 		{
@@ -545,7 +545,7 @@ public:
 
 	inline symbol_a<> filename_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("filename_");
 		if (!op)
 		{
@@ -559,7 +559,7 @@ public:
 
 	inline any_a<> line__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("line_");
 		if (!op)
 		{
@@ -570,7 +570,7 @@ public:
 
 	inline number_data_int64_a<> line_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("line_");
 		if (!op)
 		{
@@ -584,7 +584,7 @@ public:
 
 	inline any_a<> position__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("position_");
 		if (!op)
 		{
@@ -595,7 +595,7 @@ public:
 
 	inline number_data_int64_a<> position_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("position_");
 		if (!op)
 		{
@@ -609,7 +609,7 @@ public:
 
 	inline any_a<> tag__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("tag_");
 		if (!op)
 		{
@@ -620,7 +620,7 @@ public:
 
 	inline symbol_a<> tag_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("tag_");
 		if (!op)
 		{
@@ -634,7 +634,7 @@ public:
 
 	inline any_a<> symbol__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("symbol_");
 		if (!op)
 		{
@@ -645,7 +645,7 @@ public:
 
 	inline symbol_a<> symbol_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("symbol_");
 		if (!op)
 		{
@@ -659,7 +659,7 @@ public:
 
 	inline any_a<> literal__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("literal_");
 		if (!op)
 		{
@@ -670,7 +670,7 @@ public:
 
 	inline any_a<> literal_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("literal_");
 		if (!op)
 		{
@@ -681,7 +681,7 @@ public:
 
 	inline any_a<> precedence__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("precedence_");
 		if (!op)
 		{
@@ -692,7 +692,7 @@ public:
 
 	inline number_data_int64_a<> precedence_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("precedence_");
 		if (!op)
 		{
@@ -706,7 +706,7 @@ public:
 
 	inline any_a<> report__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("report_");
 		if (!op)
 		{
@@ -717,7 +717,7 @@ public:
 
 	inline misunderstanding_a<> report_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("report_");
 		if (!op)
 		{

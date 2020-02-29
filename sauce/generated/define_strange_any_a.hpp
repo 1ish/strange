@@ -43,21 +43,21 @@ public:
 
 	inline operator bool() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		return read().operator bool();
 	}
 
 	// trigger copy on write
 	void mutate()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write();
 	}
 
 	// arithmetic operator overloads
 	inline any_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -65,7 +65,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline any_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		any_a result = *this;
 		write().operator++();
 		return result;
@@ -74,7 +74,7 @@ public:
 
 	inline any_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -82,7 +82,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline any_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		any_a result = *this;
 		write().operator--();
 		return result;
@@ -91,167 +91,167 @@ public:
 
 	inline any_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline any_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline any_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline any_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline any_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline one_t const & extract_thing() const
-	{ assert(handle_); return read().extract_thing(); }
+	{ assert(___handle___); return read().extract_thing(); }
 
 	inline one_t & mutate_thing()
-	{ assert(handle_); return write().mutate_thing(); }
+	{ assert(___handle___); return write().mutate_thing(); }
 
 	inline any_a<> type__(range_a const& range) const
-	{ assert(handle_); return read().type__(range); }
+	{ assert(___handle___); return read().type__(range); }
 
 	inline symbol_a type_() const
-	{ assert(handle_); return read().type_(); }
+	{ assert(___handle___); return read().type_(); }
 
 	inline any_a<> shared__(range_a const& range) const
-	{ assert(handle_); return read().shared__(range); }
+	{ assert(___handle___); return read().shared__(range); }
 
 	inline unordered_shoal_a shared_() const
-	{ assert(handle_); return read().shared_(); }
+	{ assert(___handle___); return read().shared_(); }
 
 	inline void share(shoal_a & shoal ) const
-	{ assert(handle_); read().share(shoal); }
+	{ assert(___handle___); read().share(shoal); }
 
 	inline any_a<> cat__(range_a const& range) const
-	{ assert(handle_); return read().cat__(range); }
+	{ assert(___handle___); return read().cat__(range); }
 
 	inline cat_a cat_() const
-	{ assert(handle_); return read().cat_(); }
+	{ assert(___handle___); return read().cat_(); }
 
 	inline any_a<> cats__(range_a const& range) const
-	{ assert(handle_); return read().cats__(range); }
+	{ assert(___handle___); return read().cats__(range); }
 
 	inline unordered_herd_a cats_() const
-	{ assert(handle_); return read().cats_(); }
+	{ assert(___handle___); return read().cats_(); }
 
 	inline any_a<> kind__(range_a const& range) const
-	{ assert(handle_); return read().kind__(range); }
+	{ assert(___handle___); return read().kind__(range); }
 
 	inline kind_a kind_() const
-	{ assert(handle_); return read().kind_(); }
+	{ assert(___handle___); return read().kind_(); }
 
 	inline any_a<> kinds__(range_a const& range) const
-	{ assert(handle_); return read().kinds__(range); }
+	{ assert(___handle___); return read().kinds__(range); }
 
 	inline unordered_herd_a kinds_() const
-	{ assert(handle_); return read().kinds_(); }
+	{ assert(___handle___); return read().kinds_(); }
 
 	inline any_a<> operations__(range_a const& range) const
-	{ assert(handle_); return read().operations__(range); }
+	{ assert(___handle___); return read().operations__(range); }
 
 	inline unordered_shoal_a operations_() const
-	{ assert(handle_); return read().operations_(); }
+	{ assert(___handle___); return read().operations_(); }
 
 	inline any_a<> visit__(range_a const& range) const
-	{ assert(handle_); return read().visit__(range); }
+	{ assert(___handle___); return read().visit__(range); }
 
 	inline any_a<> visit_(inventory_a & inventory) const
-	{ assert(handle_); return read().visit_(inventory); }
+	{ assert(___handle___); return read().visit_(inventory); }
 
 	inline any_a < > invoke(any_a < > & thing , range_a const & range ) const
-	{ assert(handle_); return read().invoke(thing, range); }
+	{ assert(___handle___); return read().invoke(thing, range); }
 
 	inline any_a < > operate(any_a < > & thing , range_a const & range ) const
-	{ assert(handle_); return read().operate(thing, range); }
+	{ assert(___handle___); return read().operate(thing, range); }
 
 	inline any_a<> identity__(range_a const& range) const
-	{ assert(handle_); return read().identity__(range); }
+	{ assert(___handle___); return read().identity__(range); }
 
 	inline number_data_uint64_a identity_() const
-	{ assert(handle_); return read().identity_(); }
+	{ assert(___handle___); return read().identity_(); }
 
 	inline void const * identity() const
-	{ assert(handle_); return read().identity(); }
+	{ assert(___handle___); return read().identity(); }
 
 	inline any_a<> identical__(range_a const& range) const
-	{ assert(handle_); return read().identical__(range); }
+	{ assert(___handle___); return read().identical__(range); }
 
 	inline any_a<> identical_(any_a<> const& thing) const
-	{ assert(handle_); return read().identical_(thing); }
+	{ assert(___handle___); return read().identical_(thing); }
 
 	inline bool identical(any_a < > const & thing ) const
-	{ assert(handle_); return read().identical(thing); }
+	{ assert(___handle___); return read().identical(thing); }
 
 	inline any_a<> nothing__(range_a const& range) const
-	{ assert(handle_); return read().nothing__(range); }
+	{ assert(___handle___); return read().nothing__(range); }
 
 	inline any_a<> nothing_() const
-	{ assert(handle_); return read().nothing_(); }
+	{ assert(___handle___); return read().nothing_(); }
 
 	inline bool nothing() const
-	{ assert(handle_); return read().nothing(); }
+	{ assert(___handle___); return read().nothing(); }
 
 	inline any_a<> something__(range_a const& range) const
-	{ assert(handle_); return read().something__(range); }
+	{ assert(___handle___); return read().something__(range); }
 
 	inline any_a<> something_() const
-	{ assert(handle_); return read().something_(); }
+	{ assert(___handle___); return read().something_(); }
 
 	inline bool something() const
-	{ assert(handle_); return read().something(); }
+	{ assert(___handle___); return read().something(); }
 
 	inline any_a<> same__(range_a const& range) const
-	{ assert(handle_); return read().same__(range); }
+	{ assert(___handle___); return read().same__(range); }
 
 	inline any_a<> same_(any_a<> const& thing) const
-	{ assert(handle_); return read().same_(thing); }
+	{ assert(___handle___); return read().same_(thing); }
 
 	inline bool operator==(any_a < > const & thing ) const
-	{ assert(handle_); return read().operator==(thing); }
+	{ assert(___handle___); return read().operator==(thing); }
 
 	inline any_a<> different__(range_a const& range) const
-	{ assert(handle_); return read().different__(range); }
+	{ assert(___handle___); return read().different__(range); }
 
 	inline any_a<> different_(any_a<> const& thing) const
-	{ assert(handle_); return read().different_(thing); }
+	{ assert(___handle___); return read().different_(thing); }
 
 	inline bool operator!=(any_a < > const & thing ) const
-	{ assert(handle_); return read().operator!=(thing); }
+	{ assert(___handle___); return read().operator!=(thing); }
 
 	inline any_a<> hash__(range_a const& range) const
-	{ assert(handle_); return read().hash__(range); }
+	{ assert(___handle___); return read().hash__(range); }
 
 	inline number_data_uint64_a hash_() const
-	{ assert(handle_); return read().hash_(); }
+	{ assert(___handle___); return read().hash_(); }
 
 	inline std :: size_t hash() const
-	{ assert(handle_); return read().hash(); }
+	{ assert(___handle___); return read().hash(); }
 
 	inline bool is(std :: string const & s ) const
-	{ assert(handle_); return read().is(s); }
+	{ assert(___handle___); return read().is(s); }
 
 protected:
 	struct ___any_a_handle_base___
@@ -519,7 +519,7 @@ protected:
 	___SHARED___ ___shared___;
 
 public:
-	___SHARED___& handle_;
+	___SHARED___& ___handle___;
 
 private:
 	template <typename ___TTT___>
@@ -553,17 +553,17 @@ private:
 protected:
 	inline ___any_a_handle_base___ const& read() const noexcept
 	{
-		return *handle_;
+		return *___handle___;
 	}
 
 	inline ___any_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *handle_;
+		return *___handle___;
 	}
 
 	inline any_a<> operation(std::string const& name) const
@@ -605,7 +605,7 @@ public:
 
 	inline bool is_ref() const
 	{
-		return &handle_ != &___shared___;
+		return &___handle___ != &___shared___;
 	}
 
 	static inline any_a<> cast(any_a<> const& thing)
@@ -630,38 +630,38 @@ public:
 
 	inline any_a() noexcept
 		: ___shared___{}
-		, handle_{ ___shared___ }
+		, ___handle___{ ___shared___ }
 	{}
 
 	inline any_a(any_a const& other) noexcept
-		: ___shared___{ other.handle_ }
-		, handle_{ ___shared___ }
+		: ___shared___{ other.___handle___ }
+		, ___handle___{ ___shared___ }
 	{}
 
 	inline any_a(any_a& other, ___reference_tag___) noexcept
 		: ___shared___{ ___SHARED___{} }
-		, handle_{ other.handle_ }
+		, ___handle___{ other.___handle___ }
 	{}
 
 	inline any_a(any_a& other, ___duplicate_tag___) noexcept
-		: ___shared___{ &other.handle_ == &other.___shared___ ? other.handle_ : ___SHARED___{} }
-		, handle_{ *(&other.handle_ == &other.___shared___ ? &___shared___ : &other.handle_) }
+		: ___shared___{ &other.___handle___ == &other.___shared___ ? other.___handle___ : ___SHARED___{} }
+		, ___handle___{ *(&other.___handle___ == &other.___shared___ ? &___shared___ : &other.___handle___) }
 	{}
 
 	inline any_a(any_a&& other) noexcept
-	: ___shared___{ other.handle_ }
-	, handle_{ ___shared___ }
+	: ___shared___{ other.___handle___ }
+	, ___handle___{ ___shared___ }
 	{}
 
 	inline any_a& operator=(any_a const& other) noexcept
 	{
-		handle_ = other.handle_;
+		___handle___ = other.___handle___;
 		return *this;
 	}
 
 	inline any_a& operator=(any_a&& other) noexcept
 	{
-		handle_ = other.handle_;
+		___handle___ = other.___handle___;
 		return *this;
 	}
 
@@ -670,27 +670,27 @@ public:
 	template <typename ___TTT___>
 	explicit inline any_a(std::shared_ptr<___TTT___> const& handle) noexcept
 		: ___shared___{ handle }
-		, handle_{ ___shared___ }
+		, ___handle___{ ___shared___ }
 	{}
 
 	template <typename ___TTT___>
 	explicit inline any_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
 		: ___shared___{ ___SHARED___{} }
-		, handle_{ reinterpret_cast<___SHARED___&>(handle) }
+		, ___handle___{ reinterpret_cast<___SHARED___&>(handle) }
 	{}
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<any_a, std::decay_t<___TTT___>>::value>>
 	explicit inline any_a(___TTT___ value) noexcept
 		: ___shared___{ std::make_shared<___any_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
-		, handle_{ ___shared___ }
+		, ___handle___{ ___shared___ }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 	template <typename ___TTT___>
 	inline any_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 
@@ -698,7 +698,7 @@ public:
 	inline any_a& operator=(___TTT___ value) noexcept
 	{
 		any_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -710,7 +710,7 @@ private:
 template <typename ___TTT___, typename range_a_chk, typename symbol_a_chk, typename cat_a_chk, typename kind_a_chk, typename inventory_a_chk, typename unordered_herd_a_chk, typename shoal_a_chk, typename unordered_shoal_a_chk, typename number_data_uint64_a_chk>
 inline bool check(any_a<range_a_chk, symbol_a_chk, cat_a_chk, kind_a_chk, inventory_a_chk, unordered_herd_a_chk, shoal_a_chk, unordered_shoal_a_chk, number_data_uint64_a_chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename range_a, typename symbol_a, typename cat_a, typename kind_a, typename inventory_a, typename unordered_herd_a, typename shoal_a, typename unordered_shoal_a, typename number_data_uint64_a>

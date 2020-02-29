@@ -18,7 +18,7 @@ public:
 	// arithmetic operator overloads
 	inline number_data_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -26,7 +26,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline number_data_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		number_data_a result = *this;
 		write().operator++();
 		return result;
@@ -35,7 +35,7 @@ public:
 
 	inline number_data_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -43,7 +43,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline number_data_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		number_data_a result = *this;
 		write().operator--();
 		return result;
@@ -52,44 +52,44 @@ public:
 
 	inline number_data_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline number_data_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline number_data_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline number_data_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline number_data_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline _1_ const & extract_primitive() const
-	{ assert(handle_); return read().extract_primitive(); }
+	{ assert(___handle___); return read().extract_primitive(); }
 
 	inline _1_ & mutate_primitive()
-	{ assert(handle_); return write().mutate_primitive(); }
+	{ assert(___handle___); return write().mutate_primitive(); }
 
 protected:
 	struct ___number_data_a_handle_base___ : ___number_a_handle_base___
@@ -160,17 +160,17 @@ private:
 protected:
 	inline ___number_data_a_handle_base___ const& read() const noexcept
 	{
-		return *std::static_pointer_cast<___number_data_a_handle_base___ const>(handle_);
+		return *std::static_pointer_cast<___number_data_a_handle_base___ const>(___handle___);
 	}
 
 	inline ___number_data_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *std::static_pointer_cast<___number_data_a_handle_base___>(handle_);
+		return *std::static_pointer_cast<___number_data_a_handle_base___>(___handle___);
 	}
 
 private:
@@ -185,7 +185,7 @@ public:
 
 	static inline number_data_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___number_data_a_handle_base___>(thing.handle_);
+		auto const ptr = std::dynamic_pointer_cast<___number_data_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
 			return number_data_a{ ptr };
@@ -260,7 +260,7 @@ public:
 	explicit inline number_data_a(___TTT___ value) noexcept
 		: number_a{ std::make_shared<___number_data_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -271,7 +271,7 @@ public:
 		{
 			throw dis("number_data_a assignment failed to cast from base to number_data_a");
 		}
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #else
@@ -279,7 +279,7 @@ public:
 	inline number_data_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___number_data_a_handle_base___>(handle));
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #endif
@@ -288,7 +288,7 @@ public:
 	inline number_data_a& operator=(___TTT___ value) noexcept
 	{
 		number_data_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -300,7 +300,7 @@ private:
 template <typename ___TTT___, typename _1__chk>
 inline bool check(number_data_a<_1__chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename _1_>
@@ -318,7 +318,7 @@ public:
 	// arithmetic operator overloads
 	inline number_data_d& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -326,7 +326,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline number_data_d operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		number_data_d result = *this;
 		write().operator++();
 		return result;
@@ -335,7 +335,7 @@ public:
 
 	inline number_data_d& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -343,7 +343,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline number_data_d operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		number_data_d result = *this;
 		write().operator--();
 		return result;
@@ -352,35 +352,35 @@ public:
 
 	inline number_data_d& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline number_data_d& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline number_data_d& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline number_data_d& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline number_data_d& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}

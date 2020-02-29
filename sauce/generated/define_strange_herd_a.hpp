@@ -18,7 +18,7 @@ public:
 	// arithmetic operator overloads
 	inline herd_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -26,7 +26,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline herd_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		herd_a result = *this;
 		write().operator++();
 		return result;
@@ -35,7 +35,7 @@ public:
 
 	inline herd_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -43,7 +43,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline herd_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		herd_a result = *this;
 		write().operator--();
 		return result;
@@ -52,59 +52,59 @@ public:
 
 	inline herd_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline herd_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline herd_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline herd_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline herd_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline bool has_string(std :: string const & s ) const
-	{ assert(handle_); return read().has_string(s); }
+	{ assert(___handle___); return read().has_string(s); }
 
 	inline any_a < > at_string(std :: string const & s ) const
-	{ assert(handle_); return read().at_string(s); }
+	{ assert(___handle___); return read().at_string(s); }
 
 	inline void update(any_a < > const & thing )
-	{ assert(handle_); write().update(thing); }
+	{ assert(___handle___); write().update(thing); }
 
 	inline void update_string(std :: string const & s )
-	{ assert(handle_); write().update_string(s); }
+	{ assert(___handle___); write().update_string(s); }
 
 	inline bool insert(any_a < > const & thing )
-	{ assert(handle_); return write().insert(thing); }
+	{ assert(___handle___); return write().insert(thing); }
 
 	inline bool insert_string(std :: string const & s )
-	{ assert(handle_); return write().insert_string(s); }
+	{ assert(___handle___); return write().insert_string(s); }
 
 	inline bool erase_string(std :: string const & s )
-	{ assert(handle_); return write().erase_string(s); }
+	{ assert(___handle___); return write().erase_string(s); }
 
 protected:
 	struct ___herd_a_handle_base___ : ___collection_a_handle_base___
@@ -195,17 +195,17 @@ private:
 protected:
 	inline ___herd_a_handle_base___ const& read() const noexcept
 	{
-		return *std::static_pointer_cast<___herd_a_handle_base___ const>(handle_);
+		return *std::static_pointer_cast<___herd_a_handle_base___ const>(___handle___);
 	}
 
 	inline ___herd_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *std::static_pointer_cast<___herd_a_handle_base___>(handle_);
+		return *std::static_pointer_cast<___herd_a_handle_base___>(___handle___);
 	}
 
 private:
@@ -220,7 +220,7 @@ public:
 
 	static inline herd_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___herd_a_handle_base___>(thing.handle_);
+		auto const ptr = std::dynamic_pointer_cast<___herd_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
 			return herd_a{ ptr };
@@ -295,7 +295,7 @@ public:
 	explicit inline herd_a(___TTT___ value) noexcept
 		: collection_a{ std::make_shared<___herd_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -306,7 +306,7 @@ public:
 		{
 			throw dis("herd_a assignment failed to cast from base to herd_a");
 		}
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #else
@@ -314,7 +314,7 @@ public:
 	inline herd_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___herd_a_handle_base___>(handle));
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #endif
@@ -323,7 +323,7 @@ public:
 	inline herd_a& operator=(___TTT___ value) noexcept
 	{
 		herd_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -335,7 +335,7 @@ private:
 template <typename ___TTT___, typename _1__chk>
 inline bool check(herd_a<_1__chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename _1_>
@@ -353,7 +353,7 @@ public:
 	// arithmetic operator overloads
 	inline herd_d& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -361,7 +361,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline herd_d operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		herd_d result = *this;
 		write().operator++();
 		return result;
@@ -370,7 +370,7 @@ public:
 
 	inline herd_d& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -378,7 +378,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline herd_d operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		herd_d result = *this;
 		write().operator--();
 		return result;
@@ -387,35 +387,35 @@ public:
 
 	inline herd_d& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline herd_d& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline herd_d& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline herd_d& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline herd_d& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}

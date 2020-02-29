@@ -18,7 +18,7 @@ public:
 	// arithmetic operator overloads
 	inline number_a& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -26,7 +26,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline number_a operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		number_a result = *this;
 		write().operator++();
 		return result;
@@ -35,7 +35,7 @@ public:
 
 	inline number_a& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -43,7 +43,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline number_a operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		number_a result = *this;
 		write().operator--();
 		return result;
@@ -52,293 +52,293 @@ public:
 
 	inline number_a& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline number_a& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline number_a& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline number_a& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline number_a& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> increment__(range_a<> const& range)
-	{ assert(handle_); return write().increment__(range); }
+	{ assert(___handle___); return write().increment__(range); }
 
 	inline number_a<> increment_()
-	{ assert(handle_); return write().increment_(); }
+	{ assert(___handle___); return write().increment_(); }
 
 	inline any_a<> decrement__(range_a<> const& range)
-	{ assert(handle_); return write().decrement__(range); }
+	{ assert(___handle___); return write().decrement__(range); }
 
 	inline number_a<> decrement_()
-	{ assert(handle_); return write().decrement_(); }
+	{ assert(___handle___); return write().decrement_(); }
 
 	inline any_a<> self_assign__(range_a<> const& range)
-	{ assert(handle_); return write().self_assign__(range); }
+	{ assert(___handle___); return write().self_assign__(range); }
 
 	inline number_a<> self_assign_(number_a<> const& number)
-	{ assert(handle_); return write().self_assign_(number); }
+	{ assert(___handle___); return write().self_assign_(number); }
 
 	inline any_a<> self_add__(range_a<> const& range)
-	{ assert(handle_); return write().self_add__(range); }
+	{ assert(___handle___); return write().self_add__(range); }
 
 	inline number_a<> self_add_(number_a<> const& number)
-	{ assert(handle_); return write().self_add_(number); }
+	{ assert(___handle___); return write().self_add_(number); }
 
 	inline any_a<> add__(range_a<> const& range) const
-	{ assert(handle_); return read().add__(range); }
+	{ assert(___handle___); return read().add__(range); }
 
 	inline number_a<> add_(number_a<> const& number) const
-	{ assert(handle_); return read().add_(number); }
+	{ assert(___handle___); return read().add_(number); }
 
 	inline number_a < > operator+(number_a < > const & number ) const
-	{ assert(handle_); return read().operator+(number); }
+	{ assert(___handle___); return read().operator+(number); }
 
 	inline any_a<> self_subtract__(range_a<> const& range)
-	{ assert(handle_); return write().self_subtract__(range); }
+	{ assert(___handle___); return write().self_subtract__(range); }
 
 	inline number_a<> self_subtract_(number_a<> const& number)
-	{ assert(handle_); return write().self_subtract_(number); }
+	{ assert(___handle___); return write().self_subtract_(number); }
 
 	inline any_a<> subtract__(range_a<> const& range) const
-	{ assert(handle_); return read().subtract__(range); }
+	{ assert(___handle___); return read().subtract__(range); }
 
 	inline number_a<> subtract_(number_a<> const& number) const
-	{ assert(handle_); return read().subtract_(number); }
+	{ assert(___handle___); return read().subtract_(number); }
 
 	inline number_a < > operator-(number_a < > const & number ) const
-	{ assert(handle_); return read().operator-(number); }
+	{ assert(___handle___); return read().operator-(number); }
 
 	inline any_a<> self_multiply__(range_a<> const& range)
-	{ assert(handle_); return write().self_multiply__(range); }
+	{ assert(___handle___); return write().self_multiply__(range); }
 
 	inline number_a<> self_multiply_(number_a<> const& number)
-	{ assert(handle_); return write().self_multiply_(number); }
+	{ assert(___handle___); return write().self_multiply_(number); }
 
 	inline any_a<> multiply__(range_a<> const& range) const
-	{ assert(handle_); return read().multiply__(range); }
+	{ assert(___handle___); return read().multiply__(range); }
 
 	inline number_a<> multiply_(number_a<> const& number) const
-	{ assert(handle_); return read().multiply_(number); }
+	{ assert(___handle___); return read().multiply_(number); }
 
 	inline number_a < > operator*(number_a < > const & number ) const
-	{ assert(handle_); return read().operator*(number); }
+	{ assert(___handle___); return read().operator*(number); }
 
 	inline any_a<> self_divide__(range_a<> const& range)
-	{ assert(handle_); return write().self_divide__(range); }
+	{ assert(___handle___); return write().self_divide__(range); }
 
 	inline number_a<> self_divide_(number_a<> const& number)
-	{ assert(handle_); return write().self_divide_(number); }
+	{ assert(___handle___); return write().self_divide_(number); }
 
 	inline any_a<> divide__(range_a<> const& range) const
-	{ assert(handle_); return read().divide__(range); }
+	{ assert(___handle___); return read().divide__(range); }
 
 	inline number_a<> divide_(number_a<> const& number) const
-	{ assert(handle_); return read().divide_(number); }
+	{ assert(___handle___); return read().divide_(number); }
 
 	inline number_a < > operator/(number_a < > const & number ) const
-	{ assert(handle_); return read().operator/(number); }
+	{ assert(___handle___); return read().operator/(number); }
 
 	inline any_a<> self_modulo__(range_a<> const& range)
-	{ assert(handle_); return write().self_modulo__(range); }
+	{ assert(___handle___); return write().self_modulo__(range); }
 
 	inline number_a<> self_modulo_(number_a<> const& number)
-	{ assert(handle_); return write().self_modulo_(number); }
+	{ assert(___handle___); return write().self_modulo_(number); }
 
 	inline any_a<> modulo__(range_a<> const& range) const
-	{ assert(handle_); return read().modulo__(range); }
+	{ assert(___handle___); return read().modulo__(range); }
 
 	inline number_a<> modulo_(number_a<> const& number) const
-	{ assert(handle_); return read().modulo_(number); }
+	{ assert(___handle___); return read().modulo_(number); }
 
 	inline number_a < > operator%(number_a < > const & number ) const
-	{ assert(handle_); return read().operator%(number); }
+	{ assert(___handle___); return read().operator%(number); }
 
 	inline any_a<> to_int_64__(range_a<> const& range) const
-	{ assert(handle_); return read().to_int_64__(range); }
+	{ assert(___handle___); return read().to_int_64__(range); }
 
 	inline number_data_int64_a to_int_64_() const
-	{ assert(handle_); return read().to_int_64_(); }
+	{ assert(___handle___); return read().to_int_64_(); }
 
 	inline int64_t to_int_64() const
-	{ assert(handle_); return read().to_int_64(); }
+	{ assert(___handle___); return read().to_int_64(); }
 
 	inline any_a<> from_int_64__(range_a<> const& range)
-	{ assert(handle_); return write().from_int_64__(range); }
+	{ assert(___handle___); return write().from_int_64__(range); }
 
 	inline any_a<> from_int_64_(number_data_int64_a const& int_64)
-	{ assert(handle_); return write().from_int_64_(int_64); }
+	{ assert(___handle___); return write().from_int_64_(int_64); }
 
 	inline void from_int_64(int64_t int_64 )
-	{ assert(handle_); write().from_int_64(int_64); }
+	{ assert(___handle___); write().from_int_64(int_64); }
 
 	inline any_a<> to_uint_64__(range_a<> const& range) const
-	{ assert(handle_); return read().to_uint_64__(range); }
+	{ assert(___handle___); return read().to_uint_64__(range); }
 
 	inline number_data_uint64_a to_uint_64_() const
-	{ assert(handle_); return read().to_uint_64_(); }
+	{ assert(___handle___); return read().to_uint_64_(); }
 
 	inline uint64_t to_uint_64() const
-	{ assert(handle_); return read().to_uint_64(); }
+	{ assert(___handle___); return read().to_uint_64(); }
 
 	inline any_a<> from_uint_64__(range_a<> const& range)
-	{ assert(handle_); return write().from_uint_64__(range); }
+	{ assert(___handle___); return write().from_uint_64__(range); }
 
 	inline any_a<> from_uint_64_(number_data_uint64_a const& uint_64)
-	{ assert(handle_); return write().from_uint_64_(uint_64); }
+	{ assert(___handle___); return write().from_uint_64_(uint_64); }
 
 	inline void from_uint_64(uint64_t uint_64 )
-	{ assert(handle_); write().from_uint_64(uint_64); }
+	{ assert(___handle___); write().from_uint_64(uint_64); }
 
 	inline any_a<> to_float_64__(range_a<> const& range) const
-	{ assert(handle_); return read().to_float_64__(range); }
+	{ assert(___handle___); return read().to_float_64__(range); }
 
 	inline number_data_double_a to_float_64_() const
-	{ assert(handle_); return read().to_float_64_(); }
+	{ assert(___handle___); return read().to_float_64_(); }
 
 	inline double to_float_64() const
-	{ assert(handle_); return read().to_float_64(); }
+	{ assert(___handle___); return read().to_float_64(); }
 
 	inline any_a<> from_float_64__(range_a<> const& range)
-	{ assert(handle_); return write().from_float_64__(range); }
+	{ assert(___handle___); return write().from_float_64__(range); }
 
 	inline any_a<> from_float_64_(number_data_double_a const& float_64)
-	{ assert(handle_); return write().from_float_64_(float_64); }
+	{ assert(___handle___); return write().from_float_64_(float_64); }
 
 	inline void from_float_64(double float_64 )
-	{ assert(handle_); write().from_float_64(float_64); }
+	{ assert(___handle___); write().from_float_64(float_64); }
 
 	inline any_a<> less_than__(range_a<> const& range) const
-	{ assert(handle_); return read().less_than__(range); }
+	{ assert(___handle___); return read().less_than__(range); }
 
 	inline any_a<> less_than_(number_a<> const& number) const
-	{ assert(handle_); return read().less_than_(number); }
+	{ assert(___handle___); return read().less_than_(number); }
 
 	inline bool operator<(number_a < > const & number ) const
-	{ assert(handle_); return read().operator<(number); }
+	{ assert(___handle___); return read().operator<(number); }
 
 	inline any_a<> greater_than__(range_a<> const& range) const
-	{ assert(handle_); return read().greater_than__(range); }
+	{ assert(___handle___); return read().greater_than__(range); }
 
 	inline any_a<> greater_than_(number_a<> const& number) const
-	{ assert(handle_); return read().greater_than_(number); }
+	{ assert(___handle___); return read().greater_than_(number); }
 
 	inline bool operator>(number_a < > const & number ) const
-	{ assert(handle_); return read().operator>(number); }
+	{ assert(___handle___); return read().operator>(number); }
 
 	inline any_a<> less_or_equal__(range_a<> const& range) const
-	{ assert(handle_); return read().less_or_equal__(range); }
+	{ assert(___handle___); return read().less_or_equal__(range); }
 
 	inline any_a<> less_or_equal_(number_a<> const& number) const
-	{ assert(handle_); return read().less_or_equal_(number); }
+	{ assert(___handle___); return read().less_or_equal_(number); }
 
 	inline bool operator<=(number_a < > const & number ) const
-	{ assert(handle_); return read().operator<=(number); }
+	{ assert(___handle___); return read().operator<=(number); }
 
 	inline any_a<> greater_or_equal__(range_a<> const& range) const
-	{ assert(handle_); return read().greater_or_equal__(range); }
+	{ assert(___handle___); return read().greater_or_equal__(range); }
 
 	inline any_a<> greater_or_equal_(number_a<> const& number) const
-	{ assert(handle_); return read().greater_or_equal_(number); }
+	{ assert(___handle___); return read().greater_or_equal_(number); }
 
 	inline bool operator>=(number_a < > const & number ) const
-	{ assert(handle_); return read().operator>=(number); }
+	{ assert(___handle___); return read().operator>=(number); }
 
 	inline any_a<> byte_size__(range_a<> const& range) const
-	{ assert(handle_); return read().byte_size__(range); }
+	{ assert(___handle___); return read().byte_size__(range); }
 
 	inline number_data_int64_a byte_size_() const
-	{ assert(handle_); return read().byte_size_(); }
+	{ assert(___handle___); return read().byte_size_(); }
 
 	inline int64_t byte_size() const
-	{ assert(handle_); return read().byte_size(); }
+	{ assert(___handle___); return read().byte_size(); }
 
 	inline any_a<> is_int__(range_a<> const& range) const
-	{ assert(handle_); return read().is_int__(range); }
+	{ assert(___handle___); return read().is_int__(range); }
 
 	inline any_a<> is_int_() const
-	{ assert(handle_); return read().is_int_(); }
+	{ assert(___handle___); return read().is_int_(); }
 
 	inline bool is_int() const
-	{ assert(handle_); return read().is_int(); }
+	{ assert(___handle___); return read().is_int(); }
 
 	inline any_a<> is_signed__(range_a<> const& range) const
-	{ assert(handle_); return read().is_signed__(range); }
+	{ assert(___handle___); return read().is_signed__(range); }
 
 	inline any_a<> is_signed_() const
-	{ assert(handle_); return read().is_signed_(); }
+	{ assert(___handle___); return read().is_signed_(); }
 
 	inline bool is_signed() const
-	{ assert(handle_); return read().is_signed(); }
+	{ assert(___handle___); return read().is_signed(); }
 
 	inline any_a<> is_nan__(range_a<> const& range) const
-	{ assert(handle_); return read().is_nan__(range); }
+	{ assert(___handle___); return read().is_nan__(range); }
 
 	inline any_a<> is_nan_() const
-	{ assert(handle_); return read().is_nan_(); }
+	{ assert(___handle___); return read().is_nan_(); }
 
 	inline bool is_nan() const
-	{ assert(handle_); return read().is_nan(); }
+	{ assert(___handle___); return read().is_nan(); }
 
 	inline any_a<> is_inf__(range_a<> const& range) const
-	{ assert(handle_); return read().is_inf__(range); }
+	{ assert(___handle___); return read().is_inf__(range); }
 
 	inline any_a<> is_inf_() const
-	{ assert(handle_); return read().is_inf_(); }
+	{ assert(___handle___); return read().is_inf_(); }
 
 	inline bool is_inf() const
-	{ assert(handle_); return read().is_inf(); }
+	{ assert(___handle___); return read().is_inf(); }
 
 	inline any_a<> is_finite__(range_a<> const& range) const
-	{ assert(handle_); return read().is_finite__(range); }
+	{ assert(___handle___); return read().is_finite__(range); }
 
 	inline any_a<> is_finite_() const
-	{ assert(handle_); return read().is_finite_(); }
+	{ assert(___handle___); return read().is_finite_(); }
 
 	inline bool is_finite() const
-	{ assert(handle_); return read().is_finite(); }
+	{ assert(___handle___); return read().is_finite(); }
 
 	inline any_a<> is_normal__(range_a<> const& range) const
-	{ assert(handle_); return read().is_normal__(range); }
+	{ assert(___handle___); return read().is_normal__(range); }
 
 	inline any_a<> is_normal_() const
-	{ assert(handle_); return read().is_normal_(); }
+	{ assert(___handle___); return read().is_normal_(); }
 
 	inline bool is_normal() const
-	{ assert(handle_); return read().is_normal(); }
+	{ assert(___handle___); return read().is_normal(); }
 
 	inline any_a<> little_endian__(range_a<> const& range) const
-	{ assert(handle_); return read().little_endian__(range); }
+	{ assert(___handle___); return read().little_endian__(range); }
 
 	inline any_a<> little_endian_() const
-	{ assert(handle_); return read().little_endian_(); }
+	{ assert(___handle___); return read().little_endian_(); }
 
 	inline bool little_endian() const
-	{ assert(handle_); return read().little_endian(); }
+	{ assert(___handle___); return read().little_endian(); }
 
 protected:
 	struct ___number_a_handle_base___ : ___any_a_handle_base___
@@ -741,17 +741,17 @@ private:
 protected:
 	inline ___number_a_handle_base___ const& read() const noexcept
 	{
-		return *std::static_pointer_cast<___number_a_handle_base___ const>(handle_);
+		return *std::static_pointer_cast<___number_a_handle_base___ const>(___handle___);
 	}
 
 	inline ___number_a_handle_base___& write() noexcept
 	{
-		if (!handle_.unique())
+		if (!___handle___.unique())
 		{
-			handle_ = handle_->___clone___();
-			handle_->___weak___(handle_);
+			___handle___ = ___handle___->___clone___();
+			___handle___->___weak___(___handle___);
 		}
-		return *std::static_pointer_cast<___number_a_handle_base___>(handle_);
+		return *std::static_pointer_cast<___number_a_handle_base___>(___handle___);
 	}
 
 private:
@@ -766,7 +766,7 @@ public:
 
 	static inline number_a cast(any_a<> const& thing)
 	{
-		auto const ptr = std::dynamic_pointer_cast<___number_a_handle_base___>(thing.handle_);
+		auto const ptr = std::dynamic_pointer_cast<___number_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
 			return number_a{ ptr };
@@ -841,7 +841,7 @@ public:
 	explicit inline number_a(___TTT___ value) noexcept
 		: any_a{ std::make_shared<___number_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
 	{
-		handle_->___weak___(handle_);
+		___handle___->___weak___(___handle___);
 	}
 
 #ifdef STRANGE_CHECK_STATIC_CASTS
@@ -852,7 +852,7 @@ public:
 		{
 			throw dis("number_a assignment failed to cast from base to number_a");
 		}
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #else
@@ -860,7 +860,7 @@ public:
 	inline number_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
 		assert(!handle || std::dynamic_pointer_cast<___number_a_handle_base___>(handle));
-		handle_ = handle;
+		___handle___ = handle;
 		return *this;
 	}
 #endif
@@ -869,7 +869,7 @@ public:
 	inline number_a& operator=(___TTT___ value) noexcept
 	{
 		number_a temp{ std::move(value) };
-		std::swap(temp.handle_, handle_);
+		std::swap(temp.___handle___, ___handle___);
 		return *this;
 	}
 
@@ -881,7 +881,7 @@ private:
 template <typename ___TTT___, typename number_data_int64_a_chk, typename number_data_uint64_a_chk, typename number_data_double_a_chk>
 inline bool check(number_a<number_data_int64_a_chk, number_data_uint64_a_chk, number_data_double_a_chk> const& value) noexcept
 {
-	return ___TTT___::___check___(value.handle_);
+	return ___TTT___::___check___(value.___handle___);
 }
 
 template <typename number_data_int64_a, typename number_data_uint64_a, typename number_data_double_a>
@@ -899,7 +899,7 @@ public:
 	// arithmetic operator overloads
 	inline number_d& operator++()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator++();
 		return *this;
 	}
@@ -907,7 +907,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline number_d operator++(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		number_d result = *this;
 		write().operator++();
 		return result;
@@ -916,7 +916,7 @@ public:
 
 	inline number_d& operator--()
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator--();
 		return *this;
 	}
@@ -924,7 +924,7 @@ public:
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline number_d operator--(int)
 	{
-		assert(handle_);
+		assert(___handle___);
 		number_d result = *this;
 		write().operator--();
 		return result;
@@ -933,42 +933,42 @@ public:
 
 	inline number_d& operator+=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator+=(other);
 		return *this;
 	}
 
 	inline number_d& operator-=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator-=(other);
 		return *this;
 	}
 
 	inline number_d& operator*=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator*=(other);
 		return *this;
 	}
 
 	inline number_d& operator/=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator/=(other);
 		return *this;
 	}
 
 	inline number_d& operator%=(any_a<> const& other)
 	{
-		assert(handle_);
+		assert(___handle___);
 		write().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> increment__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("increment_");
 		if (!op)
 		{
@@ -979,7 +979,7 @@ public:
 
 	inline number_a<> increment_()
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("increment_");
 		if (!op)
 		{
@@ -990,7 +990,7 @@ public:
 
 	inline any_a<> decrement__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("decrement_");
 		if (!op)
 		{
@@ -1001,7 +1001,7 @@ public:
 
 	inline number_a<> decrement_()
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("decrement_");
 		if (!op)
 		{
@@ -1012,7 +1012,7 @@ public:
 
 	inline any_a<> self_assign__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
@@ -1023,7 +1023,7 @@ public:
 
 	inline number_a<> self_assign_(number_a<> const& number)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
@@ -1034,7 +1034,7 @@ public:
 
 	inline any_a<> self_add__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_add_");
 		if (!op)
 		{
@@ -1045,7 +1045,7 @@ public:
 
 	inline number_a<> self_add_(number_a<> const& number)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_add_");
 		if (!op)
 		{
@@ -1056,7 +1056,7 @@ public:
 
 	inline any_a<> add__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("add_");
 		if (!op)
 		{
@@ -1067,7 +1067,7 @@ public:
 
 	inline number_a<> add_(number_a<> const& number) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("add_");
 		if (!op)
 		{
@@ -1081,7 +1081,7 @@ public:
 
 	inline any_a<> self_subtract__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
@@ -1092,7 +1092,7 @@ public:
 
 	inline number_a<> self_subtract_(number_a<> const& number)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
@@ -1103,7 +1103,7 @@ public:
 
 	inline any_a<> subtract__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("subtract_");
 		if (!op)
 		{
@@ -1114,7 +1114,7 @@ public:
 
 	inline number_a<> subtract_(number_a<> const& number) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("subtract_");
 		if (!op)
 		{
@@ -1128,7 +1128,7 @@ public:
 
 	inline any_a<> self_multiply__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_multiply_");
 		if (!op)
 		{
@@ -1139,7 +1139,7 @@ public:
 
 	inline number_a<> self_multiply_(number_a<> const& number)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_multiply_");
 		if (!op)
 		{
@@ -1150,7 +1150,7 @@ public:
 
 	inline any_a<> multiply__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("multiply_");
 		if (!op)
 		{
@@ -1161,7 +1161,7 @@ public:
 
 	inline number_a<> multiply_(number_a<> const& number) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("multiply_");
 		if (!op)
 		{
@@ -1175,7 +1175,7 @@ public:
 
 	inline any_a<> self_divide__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_divide_");
 		if (!op)
 		{
@@ -1186,7 +1186,7 @@ public:
 
 	inline number_a<> self_divide_(number_a<> const& number)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_divide_");
 		if (!op)
 		{
@@ -1197,7 +1197,7 @@ public:
 
 	inline any_a<> divide__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("divide_");
 		if (!op)
 		{
@@ -1208,7 +1208,7 @@ public:
 
 	inline number_a<> divide_(number_a<> const& number) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("divide_");
 		if (!op)
 		{
@@ -1222,7 +1222,7 @@ public:
 
 	inline any_a<> self_modulo__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_modulo_");
 		if (!op)
 		{
@@ -1233,7 +1233,7 @@ public:
 
 	inline number_a<> self_modulo_(number_a<> const& number)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("self_modulo_");
 		if (!op)
 		{
@@ -1244,7 +1244,7 @@ public:
 
 	inline any_a<> modulo__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("modulo_");
 		if (!op)
 		{
@@ -1255,7 +1255,7 @@ public:
 
 	inline number_a<> modulo_(number_a<> const& number) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("modulo_");
 		if (!op)
 		{
@@ -1269,7 +1269,7 @@ public:
 
 	inline any_a<> to_int_64__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("to_int_64_");
 		if (!op)
 		{
@@ -1280,7 +1280,7 @@ public:
 
 	inline number_data_int64_a to_int_64_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("to_int_64_");
 		if (!op)
 		{
@@ -1294,7 +1294,7 @@ public:
 
 	inline any_a<> from_int_64__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("from_int_64_");
 		if (!op)
 		{
@@ -1305,7 +1305,7 @@ public:
 
 	inline any_a<> from_int_64_(number_data_int64_a const& int_64)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("from_int_64_");
 		if (!op)
 		{
@@ -1319,7 +1319,7 @@ public:
 
 	inline any_a<> to_uint_64__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("to_uint_64_");
 		if (!op)
 		{
@@ -1330,7 +1330,7 @@ public:
 
 	inline number_data_uint64_a to_uint_64_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("to_uint_64_");
 		if (!op)
 		{
@@ -1344,7 +1344,7 @@ public:
 
 	inline any_a<> from_uint_64__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("from_uint_64_");
 		if (!op)
 		{
@@ -1355,7 +1355,7 @@ public:
 
 	inline any_a<> from_uint_64_(number_data_uint64_a const& uint_64)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("from_uint_64_");
 		if (!op)
 		{
@@ -1369,7 +1369,7 @@ public:
 
 	inline any_a<> to_float_64__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("to_float_64_");
 		if (!op)
 		{
@@ -1380,7 +1380,7 @@ public:
 
 	inline number_data_double_a to_float_64_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("to_float_64_");
 		if (!op)
 		{
@@ -1394,7 +1394,7 @@ public:
 
 	inline any_a<> from_float_64__(range_a<> const& range)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("from_float_64_");
 		if (!op)
 		{
@@ -1405,7 +1405,7 @@ public:
 
 	inline any_a<> from_float_64_(number_data_double_a const& float_64)
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("from_float_64_");
 		if (!op)
 		{
@@ -1419,7 +1419,7 @@ public:
 
 	inline any_a<> less_than__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("less_than_");
 		if (!op)
 		{
@@ -1430,7 +1430,7 @@ public:
 
 	inline any_a<> less_than_(number_a<> const& number) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("less_than_");
 		if (!op)
 		{
@@ -1444,7 +1444,7 @@ public:
 
 	inline any_a<> greater_than__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("greater_than_");
 		if (!op)
 		{
@@ -1455,7 +1455,7 @@ public:
 
 	inline any_a<> greater_than_(number_a<> const& number) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("greater_than_");
 		if (!op)
 		{
@@ -1469,7 +1469,7 @@ public:
 
 	inline any_a<> less_or_equal__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("less_or_equal_");
 		if (!op)
 		{
@@ -1480,7 +1480,7 @@ public:
 
 	inline any_a<> less_or_equal_(number_a<> const& number) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("less_or_equal_");
 		if (!op)
 		{
@@ -1494,7 +1494,7 @@ public:
 
 	inline any_a<> greater_or_equal__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("greater_or_equal_");
 		if (!op)
 		{
@@ -1505,7 +1505,7 @@ public:
 
 	inline any_a<> greater_or_equal_(number_a<> const& number) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("greater_or_equal_");
 		if (!op)
 		{
@@ -1519,7 +1519,7 @@ public:
 
 	inline any_a<> byte_size__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("byte_size_");
 		if (!op)
 		{
@@ -1530,7 +1530,7 @@ public:
 
 	inline number_data_int64_a byte_size_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("byte_size_");
 		if (!op)
 		{
@@ -1544,7 +1544,7 @@ public:
 
 	inline any_a<> is_int__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_int_");
 		if (!op)
 		{
@@ -1555,7 +1555,7 @@ public:
 
 	inline any_a<> is_int_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_int_");
 		if (!op)
 		{
@@ -1569,7 +1569,7 @@ public:
 
 	inline any_a<> is_signed__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_signed_");
 		if (!op)
 		{
@@ -1580,7 +1580,7 @@ public:
 
 	inline any_a<> is_signed_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_signed_");
 		if (!op)
 		{
@@ -1594,7 +1594,7 @@ public:
 
 	inline any_a<> is_nan__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_nan_");
 		if (!op)
 		{
@@ -1605,7 +1605,7 @@ public:
 
 	inline any_a<> is_nan_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_nan_");
 		if (!op)
 		{
@@ -1619,7 +1619,7 @@ public:
 
 	inline any_a<> is_inf__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_inf_");
 		if (!op)
 		{
@@ -1630,7 +1630,7 @@ public:
 
 	inline any_a<> is_inf_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_inf_");
 		if (!op)
 		{
@@ -1644,7 +1644,7 @@ public:
 
 	inline any_a<> is_finite__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_finite_");
 		if (!op)
 		{
@@ -1655,7 +1655,7 @@ public:
 
 	inline any_a<> is_finite_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_finite_");
 		if (!op)
 		{
@@ -1669,7 +1669,7 @@ public:
 
 	inline any_a<> is_normal__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_normal_");
 		if (!op)
 		{
@@ -1680,7 +1680,7 @@ public:
 
 	inline any_a<> is_normal_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("is_normal_");
 		if (!op)
 		{
@@ -1694,7 +1694,7 @@ public:
 
 	inline any_a<> little_endian__(range_a<> const& range) const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("little_endian_");
 		if (!op)
 		{
@@ -1705,7 +1705,7 @@ public:
 
 	inline any_a<> little_endian_() const
 	{
-		assert(handle_);
+		assert(___handle___);
 		auto const op = operation("little_endian_");
 		if (!op)
 		{
