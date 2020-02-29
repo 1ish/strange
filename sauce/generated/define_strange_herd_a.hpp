@@ -430,13 +430,13 @@ public:
 	{ update_(thing, no()); }
 
 	inline void update_string(std :: string const & s )
-	{ update(sym(s)); }
+	{ update_thing(sym(s)); }
 
 	inline bool insert_thing(any_a < > const & thing )
 	{ return insert_(thing, no()); }
 
 	inline bool insert_string(std :: string const & s )
-	{ return insert(sym(s)); }
+	{ return insert_thing(sym(s)); }
 
 	inline bool erase_string(std :: string const & s )
 	{ return erase(sym(s)); }
