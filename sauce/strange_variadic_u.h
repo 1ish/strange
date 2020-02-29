@@ -46,7 +46,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_ref(std::vector<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.emplace_back(thing, typename _1_::reference_tag{});
+		collection.emplace_back(const_cast<_1_&>(thing), typename _1_::___reference_tag___{});
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
@@ -71,7 +71,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_dup(std::vector<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.emplace_back(thing, typename _1_::duplicate_tag{});
+		collection.emplace_back(const_cast<_1_&>(thing), typename _1_::___duplicate_tag___{});
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
@@ -121,7 +121,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_ref(std::deque<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.emplace_back(thing, typename _1_::reference_tag{});
+		collection.emplace_back(const_cast<_1_&>(thing), typename _1_::___reference_tag___{});
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
@@ -146,7 +146,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_dup(std::deque<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.emplace_back(thing, typename _1_::duplicate_tag{});
+		collection.emplace_back(const_cast<_1_&>(thing), typename _1_::___duplicate_tag___{});
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
@@ -224,7 +224,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_ref(std::set<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.emplace(thing, typename _1_::reference_tag{});
+		collection.emplace(const_cast<_1_&>(thing), typename _1_::___reference_tag___{});
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
@@ -263,7 +263,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_dup(std::set<_1_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.emplace(thing, typename _1_::duplicate_tag{});
+		collection.emplace(const_cast<_1_&>(thing), typename _1_::___duplicate_tag___{});
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
@@ -341,7 +341,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_ref(std::unordered_set<_1_, _2_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.emplace(thing, typename _1_::reference_tag{});
+		collection.emplace(const_cast<_1_&>(thing), typename _1_::___reference_tag___{});
 		variadic_ref(collection, std::forward<Args>(args)...);
 	}
 
@@ -380,7 +380,7 @@ public:
 	template <typename... Args>
 	static inline void variadic_dup(std::unordered_set<_1_, _2_>& collection, _1_ const& thing, Args&&... args)
 	{
-		collection.emplace(thing, typename _1_::duplicate_tag{});
+		collection.emplace(const_cast<_1_&>(thing), typename _1_::___duplicate_tag___{});
 		variadic_dup(collection, std::forward<Args>(args)...);
 	}
 
