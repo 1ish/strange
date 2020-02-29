@@ -663,8 +663,10 @@ public:
 	inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const
 	{ generate_cpp_(num(version), num(indent), river, boole(declare), boole(define), boole(type)); }
 
+	void ___weak___(operation_d<>::___WEAK___ const& weak) const {}
+
 	explicit expression_d(any_a<> const& thing)
-		: operation_d{ thing }
+		: operation_d<>{ thing }
 	{}
 };
 

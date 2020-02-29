@@ -482,8 +482,9 @@ protected:
 		auto const class_expression_terms = _class_expression_terms_();
 		_define_class_dynamic_members_(false, class_name, class_expression_terms, version, 0, river);
 		river.write_string(
+			"\tvoid ___weak___(" + base_name + "<>::___WEAK___ const& weak) const {}\n\n"
 			"\texplicit " + class_name + "(any_a<> const& thing)\n"
-			"\t\t: " + base_name + "{ thing }\n"
+			"\t\t: " + base_name + "<>{ thing }\n"
 			"\t{}\n"
 			"};\n\n");
 	}

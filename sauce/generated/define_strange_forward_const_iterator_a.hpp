@@ -463,8 +463,10 @@ public:
 		return variadic_operate(op, *this);
 	}
 
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
+
 	explicit forward_const_iterator_d(any_a<> const& thing)
-		: any_a{ thing }
+		: any_a<>{ thing }
 	{}
 };
 

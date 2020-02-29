@@ -407,8 +407,10 @@ public:
 		return variadic_operate(op, *this);
 	}
 
+	void ___weak___(forward_iterator_d<>::___WEAK___ const& weak) const {}
+
 	explicit bidirectional_iterator_d(any_a<> const& thing)
-		: forward_iterator_d{ thing }
+		: forward_iterator_d<>{ thing }
 	{}
 };
 

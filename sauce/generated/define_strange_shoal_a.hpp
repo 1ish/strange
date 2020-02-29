@@ -493,8 +493,10 @@ public:
 		return variadic_operate(op, *this);
 	}
 
+	void ___weak___(collection_d<>::___WEAK___ const& weak) const {}
+
 	explicit shoal_d(any_a<> const& thing)
-		: collection_d{ thing }
+		: collection_d<>{ thing }
 	{}
 };
 

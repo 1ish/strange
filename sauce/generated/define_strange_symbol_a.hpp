@@ -483,8 +483,10 @@ public:
 	inline symbol_a < > operator+(symbol_a < > const & symbol ) const
 	{ return add_(symbol); }
 
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
+
 	explicit symbol_d(any_a<> const& thing)
-		: any_a{ thing }
+		: any_a<>{ thing }
 	{}
 };
 

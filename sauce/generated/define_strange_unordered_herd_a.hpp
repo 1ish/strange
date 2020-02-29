@@ -391,8 +391,10 @@ public:
 	inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set()
 	{ throw dis("dynamic unordered_herd_d::mutate_set() not available"); }
 
+	void ___weak___(herd_d<>::___WEAK___ const& weak) const {}
+
 	explicit unordered_herd_d(any_a<> const& thing)
-		: herd_d{ thing }
+		: herd_d<>{ thing }
 	{}
 };
 

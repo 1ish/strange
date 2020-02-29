@@ -545,8 +545,10 @@ public:
 	inline bool optional() const
 	{ return optional_(); }
 
+	void ___weak___(cat_d<>::___WEAK___ const& weak) const {}
+
 	explicit kind_d(any_a<> const& thing)
-		: cat_d{ thing }
+		: cat_d<>{ thing }
 	{}
 };
 

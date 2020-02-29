@@ -427,8 +427,10 @@ public:
 	inline misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const
 	{ return add_(misunderstanding); }
 
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
+
 	explicit misunderstanding_d(any_a<> const& thing)
-		: any_a{ thing }
+		: any_a<>{ thing }
 	{}
 };
 

@@ -391,8 +391,10 @@ public:
 	inline _1_ & mutate_it()
 	{ throw dis("dynamic bidirectional_const_iterator_data_d::mutate_it() not available"); }
 
+	void ___weak___(bidirectional_const_iterator_d<>::___WEAK___ const& weak) const {}
+
 	explicit bidirectional_const_iterator_data_d(any_a<> const& thing)
-		: bidirectional_const_iterator_d{ thing }
+		: bidirectional_const_iterator_d<>{ thing }
 	{}
 };
 

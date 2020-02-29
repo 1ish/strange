@@ -1689,8 +1689,10 @@ public:
 	inline std :: string filename() const
 	{ return lake_to_string(filename_()); }
 
+	void ___weak___(range_d<>::___WEAK___ const& weak) const {}
+
 	explicit river_d(any_a<> const& thing)
-		: range_d{ thing }
+		: range_d<>{ thing }
 	{}
 };
 

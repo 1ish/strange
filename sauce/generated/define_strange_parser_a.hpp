@@ -407,8 +407,10 @@ public:
 		return variadic_operate(op, *this, tokenizer);
 	}
 
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
+
 	explicit parser_d(any_a<> const& thing)
-		: any_a{ thing }
+		: any_a<>{ thing }
 	{}
 };
 

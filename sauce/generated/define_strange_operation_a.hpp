@@ -473,8 +473,10 @@ public:
 		return variadic_operate(op, const_cast<any_a<>&>(*this));
 	}
 
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
+
 	explicit operation_d(any_a<> const& thing)
-		: any_a{ thing }
+		: any_a<>{ thing }
 	{}
 };
 

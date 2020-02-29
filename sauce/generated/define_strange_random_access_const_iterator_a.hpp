@@ -719,8 +719,10 @@ public:
 	inline bool operator>=(random_access_const_iterator_a < > const & it ) const
 	{ return greater_or_equal_(it); }
 
+	void ___weak___(bidirectional_const_iterator_d<>::___WEAK___ const& weak) const {}
+
 	explicit random_access_const_iterator_d(any_a<> const& thing)
-		: bidirectional_const_iterator_d{ thing }
+		: bidirectional_const_iterator_d<>{ thing }
 	{}
 };
 

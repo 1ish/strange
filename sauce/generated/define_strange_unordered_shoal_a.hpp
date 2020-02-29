@@ -391,8 +391,10 @@ public:
 	inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_map()
 	{ throw dis("dynamic unordered_shoal_d::mutate_map() not available"); }
 
+	void ___weak___(shoal_d<>::___WEAK___ const& weak) const {}
+
 	explicit unordered_shoal_d(any_a<> const& thing)
-		: shoal_d{ thing }
+		: shoal_d<>{ thing }
 	{}
 };
 

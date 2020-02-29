@@ -391,8 +391,10 @@ public:
 	inline _1_ & mutate_it()
 	{ throw dis("dynamic forward_const_iterator_data_d::mutate_it() not available"); }
 
+	void ___weak___(forward_const_iterator_d<>::___WEAK___ const& weak) const {}
+
 	explicit forward_const_iterator_data_d(any_a<> const& thing)
-		: forward_const_iterator_d{ thing }
+		: forward_const_iterator_d<>{ thing }
 	{}
 };
 

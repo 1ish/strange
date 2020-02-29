@@ -391,8 +391,10 @@ public:
 	inline std :: deque < _1_ > & mutate_deque()
 	{ throw dis("dynamic brook_d::mutate_deque() not available"); }
 
+	void ___weak___(inventory_d<>::___WEAK___ const& weak) const {}
+
 	explicit brook_d(any_a<> const& thing)
-		: inventory_d{ thing }
+		: inventory_d<>{ thing }
 	{}
 };
 

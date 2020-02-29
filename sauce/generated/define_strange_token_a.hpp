@@ -729,8 +729,10 @@ public:
 	inline std :: string report() const
 	{ return report_().to_string(); }
 
+	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
+
 	explicit token_d(any_a<> const& thing)
-		: any_a{ thing }
+		: any_a<>{ thing }
 	{}
 };
 

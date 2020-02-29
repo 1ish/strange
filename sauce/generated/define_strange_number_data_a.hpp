@@ -391,8 +391,10 @@ public:
 	inline _1_ & mutate_primitive()
 	{ throw dis("dynamic number_data_d::mutate_primitive() not available"); }
 
+	void ___weak___(number_d<>::___WEAK___ const& weak) const {}
+
 	explicit number_data_d(any_a<> const& thing)
-		: number_d{ thing }
+		: number_d<>{ thing }
 	{}
 };
 

@@ -77,7 +77,13 @@ inline ___TTT___ cast(any_a<> const& value) noexcept
 	return ___TTT___{ value.___handle___ };
 }
 #endif
-
+/*
+template <typename ___TTT___>
+inline ___TTT___ cast(any_a<> const& value)
+{
+	return typename ___TTT___::cast(value);
+}
+*/
 #ifdef STRANGE_CHECK_STATIC_CASTS
 template <typename ___TTT___>
 inline ___TTT___ cast_ref(any_a<>& value)

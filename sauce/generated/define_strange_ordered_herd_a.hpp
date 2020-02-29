@@ -391,8 +391,10 @@ public:
 	inline std :: set < any_a < > > & mutate_set()
 	{ throw dis("dynamic ordered_herd_d::mutate_set() not available"); }
 
+	void ___weak___(herd_d<>::___WEAK___ const& weak) const {}
+
 	explicit ordered_herd_d(any_a<> const& thing)
-		: herd_d{ thing }
+		: herd_d<>{ thing }
 	{}
 };
 

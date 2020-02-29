@@ -391,8 +391,10 @@ public:
 	inline std :: vector < _1_ > & mutate_vector()
 	{ throw dis("dynamic lake_d::mutate_vector() not available"); }
 
+	void ___weak___(inventory_d<>::___WEAK___ const& weak) const {}
+
 	explicit lake_d(any_a<> const& thing)
-		: inventory_d{ thing }
+		: inventory_d<>{ thing }
 	{}
 };
 
