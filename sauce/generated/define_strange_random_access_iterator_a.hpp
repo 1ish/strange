@@ -560,7 +560,7 @@ public:
 	}
 
 	inline random_access_iterator_a<_1_> operator+(number_a < > const & number ) const
-	{ throw dis("dynamic random_access_iterator_d::operator+(number) not available"); }
+	{ return add_(number); }
 
 	inline any_a<> self_subtract__(range_a<> const& range)
 	{
@@ -607,7 +607,7 @@ public:
 	}
 
 	inline random_access_iterator_a<_1_> operator-(number_a < > const & number ) const
-	{ throw dis("dynamic random_access_iterator_d::operator-(number) not available"); }
+	{ return subtract_(number); }
 
 	inline any_a<> less_than__(range_a<> const& range) const
 	{
@@ -632,7 +632,7 @@ public:
 	}
 
 	inline bool operator<(random_access_iterator_a < > const & it ) const
-	{ throw dis("dynamic random_access_iterator_d::operator<(it) not available"); }
+	{ return less_than_(it); }
 
 	inline any_a<> greater_than__(range_a<> const& range) const
 	{
@@ -657,7 +657,7 @@ public:
 	}
 
 	inline bool operator>(random_access_iterator_a < > const & it ) const
-	{ throw dis("dynamic random_access_iterator_d::operator>(it) not available"); }
+	{ return greater_than_(it); }
 
 	inline any_a<> less_or_equal__(range_a<> const& range) const
 	{
@@ -682,7 +682,7 @@ public:
 	}
 
 	inline bool operator<=(random_access_iterator_a < > const & it ) const
-	{ throw dis("dynamic random_access_iterator_d::operator<=(it) not available"); }
+	{ return less_or_equal_(it); }
 
 	inline any_a<> greater_or_equal__(range_a<> const& range) const
 	{
@@ -707,7 +707,7 @@ public:
 	}
 
 	inline bool operator>=(random_access_iterator_a < > const & it ) const
-	{ throw dis("dynamic random_access_iterator_d::operator>=(it) not available"); }
+	{ return greater_or_equal_(it); }
 
 	explicit random_access_iterator_d(any_a<> const& thing)
 		: bidirectional_iterator_d{ thing }
