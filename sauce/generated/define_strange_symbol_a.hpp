@@ -453,10 +453,10 @@ public:
 	{ return lake_to_string(to_lake_()); }
 
 	inline int8_t first_character() const
-	{ return to_lake_().at_index(0).extract_primitive(); }
+	{ return to_lake_().extract_vector()[0]; }
 
 	inline int8_t last_character() const
-	{ auto const lake = to_lake_(); return lake.at_index(lake.size() - 1).extract_primitive(); }
+	{ auto const lake = to_lake_(); return lake.extract_vector()[lake.size() - 1]; }
 
 	inline any_a<> add__(range_a<> const& range) const
 	{
