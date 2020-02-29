@@ -587,14 +587,14 @@ protected:
 				"\tinline operator bool() const\n"
 				"\t{\n"
 				"\t\tassert(___handle___);\n"
-				"\t\treturn read().operator bool();\n"
+				"\t\treturn ___read___().operator bool();\n"
 				"\t}\n\n"
 
 				"\t// trigger copy on write\n"
 				"\tvoid mutate()\n"
 				"\t{\n"
 				"\t\tassert(___handle___);\n"
-				"\t\twrite();\n"
+				"\t\t___write___();\n"
 				"\t}\n\n");
 		}
 		else
@@ -607,7 +607,7 @@ protected:
 			"\tinline " + class_name + "& operator++()\n"
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
-			"\t\twrite().operator++();\n"
+			"\t\t___write___().operator++();\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
@@ -616,7 +616,7 @@ protected:
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
 			"\t\t" + class_name + " result = *this;\n"
-			"\t\twrite().operator++();\n"
+			"\t\t___write___().operator++();\n"
 			"\t\treturn result;\n"
 			"\t}\n"
 			"#endif\n\n"
@@ -624,7 +624,7 @@ protected:
 			"\tinline " + class_name + "& operator--()\n"
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
-			"\t\twrite().operator--();\n"
+			"\t\t___write___().operator--();\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
@@ -633,7 +633,7 @@ protected:
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
 			"\t\t" + class_name + " result = *this;\n"
-			"\t\twrite().operator--();\n"
+			"\t\t___write___().operator--();\n"
 			"\t\treturn result;\n"
 			"\t}\n"
 			"#endif\n\n"
@@ -641,35 +641,35 @@ protected:
 			"\tinline " + class_name + "& operator+=(any_a<> const& other)\n"
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
-			"\t\twrite().operator+=(other);\n"
+			"\t\t___write___().operator+=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
 			"\tinline " + class_name + "& operator-=(any_a<> const& other)\n"
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
-			"\t\twrite().operator-=(other);\n"
+			"\t\t___write___().operator-=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
 			"\tinline " + class_name + "& operator*=(any_a<> const& other)\n"
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
-			"\t\twrite().operator*=(other);\n"
+			"\t\t___write___().operator*=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
 			"\tinline " + class_name + "& operator/=(any_a<> const& other)\n"
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
-			"\t\twrite().operator/=(other);\n"
+			"\t\t___write___().operator/=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n"
 
 			"\tinline " + class_name + "& operator%=(any_a<> const& other)\n"
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
-			"\t\twrite().operator%=(other);\n"
+			"\t\t___write___().operator%=(other);\n"
 			"\t\treturn *this;\n"
 			"\t}\n\n");
 	}
@@ -860,11 +860,11 @@ protected:
 			"\t{ assert(___handle___); return ");
 		if (constness.empty())
 		{
-			river.write_string("write().");
+			river.write_string("___write___().");
 		}
 		else
 		{
-			river.write_string("read().");
+			river.write_string("___read___().");
 		}
 		river.write_string(name + "_(range); }\n\n");
 
@@ -873,11 +873,11 @@ protected:
 			"\t{ assert(___handle___); return ");
 		if (constness.empty())
 		{
-			river.write_string("write().");
+			river.write_string("___write___().");
 		}
 		else
 		{
-			river.write_string("read().");
+			river.write_string("___read___().");
 		}
 		river.write_string(name + arguments + "; }\n\n");
 	}
@@ -899,11 +899,11 @@ protected:
 		}
 		if (constness.empty())
 		{
-			river.write_string("write().");
+			river.write_string("___write___().");
 		}
 		else
 		{
-			river.write_string("read().");
+			river.write_string("___read___().");
 		}
 		river.write_string(name + arguments + "; }\n\n");
 	}
@@ -1193,13 +1193,13 @@ protected:
 	{
 		river.write_string(
 			"protected:\n"
-			"\tinline ___" + class_name + "_handle_base___ const& read() const noexcept\n"
+			"\tinline ___" + class_name + "_handle_base___ const& ___read___() const noexcept\n"
 			"\t{\n" + (root
 				? std::string{ "\t\treturn *___handle___;\n" }
 				: ("\t\treturn *std::static_pointer_cast<___" + class_name + "_handle_base___ const>(___handle___);\n")) +
 			"\t}\n\n"
 
-			"\tinline ___" + class_name + "_handle_base___& write() noexcept\n"
+			"\tinline ___" + class_name + "_handle_base___& ___write___() noexcept\n"
 			"\t{\n"
 			"\t\tif (!___handle___.unique())\n"
 			"\t\t{\n"
@@ -1215,7 +1215,7 @@ protected:
 			river.write_string(
 				"\tinline any_a<> operation(std::string const& name) const\n"
 				"\t{\n"
-				"\t\treturn read().operations_().at_string(name);\n"
+				"\t\treturn ___read___().operations_().at_string(name);\n"
 				"\t}\n\n");
 		}
 

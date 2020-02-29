@@ -19,7 +19,7 @@ public:
 	inline misunderstanding_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		misunderstanding_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline misunderstanding_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		misunderstanding_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,49 +53,49 @@ public:
 	inline misunderstanding_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline misunderstanding_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline misunderstanding_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline misunderstanding_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline misunderstanding_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline std :: string to_string() const
-	{ assert(___handle___); return read().to_string(); }
+	{ assert(___handle___); return ___read___().to_string(); }
 
 	inline any_a<> add__(range_a<> const& range) const
-	{ assert(___handle___); return read().add__(range); }
+	{ assert(___handle___); return ___read___().add__(range); }
 
 	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
-	{ assert(___handle___); return read().add_(misunderstanding); }
+	{ assert(___handle___); return ___read___().add_(misunderstanding); }
 
 	inline misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const
-	{ assert(___handle___); return read().operator+(misunderstanding); }
+	{ assert(___handle___); return ___read___().operator+(misunderstanding); }
 
 protected:
 	struct ___misunderstanding_a_handle_base___ : ___any_a_handle_base___
@@ -172,12 +172,12 @@ private:
 	};
 
 protected:
-	inline ___misunderstanding_a_handle_base___ const& read() const noexcept
+	inline ___misunderstanding_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___misunderstanding_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___misunderstanding_a_handle_base___& write() noexcept
+	inline ___misunderstanding_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -333,7 +333,7 @@ public:
 	inline misunderstanding_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -342,7 +342,7 @@ public:
 	{
 		assert(___handle___);
 		misunderstanding_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -350,7 +350,7 @@ public:
 	inline misunderstanding_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -359,7 +359,7 @@ public:
 	{
 		assert(___handle___);
 		misunderstanding_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -367,35 +367,35 @@ public:
 	inline misunderstanding_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline misunderstanding_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline misunderstanding_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline misunderstanding_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline misunderstanding_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

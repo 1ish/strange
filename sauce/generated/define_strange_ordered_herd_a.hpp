@@ -19,7 +19,7 @@ public:
 	inline ordered_herd_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		ordered_herd_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline ordered_herd_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		ordered_herd_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,43 +53,43 @@ public:
 	inline ordered_herd_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline ordered_herd_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline ordered_herd_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline ordered_herd_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline ordered_herd_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline std :: set < any_a < > > const & extract_set() const
-	{ assert(___handle___); return read().extract_set(); }
+	{ assert(___handle___); return ___read___().extract_set(); }
 
 	inline std :: set < any_a < > > & mutate_set()
-	{ assert(___handle___); return write().mutate_set(); }
+	{ assert(___handle___); return ___write___().mutate_set(); }
 
 protected:
 	struct ___ordered_herd_a_handle_base___ : ___herd_a_handle_base___
@@ -158,12 +158,12 @@ private:
 	};
 
 protected:
-	inline ___ordered_herd_a_handle_base___ const& read() const noexcept
+	inline ___ordered_herd_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___ordered_herd_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___ordered_herd_a_handle_base___& write() noexcept
+	inline ___ordered_herd_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -319,7 +319,7 @@ public:
 	inline ordered_herd_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -328,7 +328,7 @@ public:
 	{
 		assert(___handle___);
 		ordered_herd_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -336,7 +336,7 @@ public:
 	inline ordered_herd_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -345,7 +345,7 @@ public:
 	{
 		assert(___handle___);
 		ordered_herd_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -353,35 +353,35 @@ public:
 	inline ordered_herd_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline ordered_herd_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline ordered_herd_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline ordered_herd_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline ordered_herd_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

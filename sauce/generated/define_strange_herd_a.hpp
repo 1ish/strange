@@ -19,7 +19,7 @@ public:
 	inline herd_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		herd_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline herd_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		herd_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,58 +53,58 @@ public:
 	inline herd_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline herd_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline herd_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline herd_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline herd_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline bool has_string(std :: string const & s ) const
-	{ assert(___handle___); return read().has_string(s); }
+	{ assert(___handle___); return ___read___().has_string(s); }
 
 	inline any_a < > at_string(std :: string const & s ) const
-	{ assert(___handle___); return read().at_string(s); }
+	{ assert(___handle___); return ___read___().at_string(s); }
 
 	inline void update_thing(any_a < > const & thing )
-	{ assert(___handle___); write().update_thing(thing); }
+	{ assert(___handle___); ___write___().update_thing(thing); }
 
 	inline void update_string(std :: string const & s )
-	{ assert(___handle___); write().update_string(s); }
+	{ assert(___handle___); ___write___().update_string(s); }
 
 	inline bool insert_thing(any_a < > const & thing )
-	{ assert(___handle___); return write().insert_thing(thing); }
+	{ assert(___handle___); return ___write___().insert_thing(thing); }
 
 	inline bool insert_string(std :: string const & s )
-	{ assert(___handle___); return write().insert_string(s); }
+	{ assert(___handle___); return ___write___().insert_string(s); }
 
 	inline bool erase_string(std :: string const & s )
-	{ assert(___handle___); return write().erase_string(s); }
+	{ assert(___handle___); return ___write___().erase_string(s); }
 
 protected:
 	struct ___herd_a_handle_base___ : ___collection_a_handle_base___
@@ -193,12 +193,12 @@ private:
 	};
 
 protected:
-	inline ___herd_a_handle_base___ const& read() const noexcept
+	inline ___herd_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___herd_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___herd_a_handle_base___& write() noexcept
+	inline ___herd_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -354,7 +354,7 @@ public:
 	inline herd_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -363,7 +363,7 @@ public:
 	{
 		assert(___handle___);
 		herd_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -371,7 +371,7 @@ public:
 	inline herd_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -380,7 +380,7 @@ public:
 	{
 		assert(___handle___);
 		herd_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -388,35 +388,35 @@ public:
 	inline herd_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline herd_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline herd_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline herd_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline herd_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

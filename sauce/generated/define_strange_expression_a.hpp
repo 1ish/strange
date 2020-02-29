@@ -19,7 +19,7 @@ public:
 	inline expression_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		expression_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline expression_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		expression_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,91 +53,91 @@ public:
 	inline expression_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline expression_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline expression_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline expression_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline expression_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> recreate__(range_a<> const& range) const
-	{ assert(___handle___); return read().recreate__(range); }
+	{ assert(___handle___); return ___read___().recreate__(range); }
 
 	inline expression_a<> recreate_() const
-	{ assert(___handle___); return read().recreate_(); }
+	{ assert(___handle___); return ___read___().recreate_(); }
 
 	inline void recreated(expression_a < > const & expression ) const
-	{ assert(___handle___); read().recreated(expression); }
+	{ assert(___handle___); ___read___().recreated(expression); }
 
 	inline any_a<> literal__(range_a<> const& range) const
-	{ assert(___handle___); return read().literal__(range); }
+	{ assert(___handle___); return ___read___().literal__(range); }
 
 	inline any_a<> literal_() const
-	{ assert(___handle___); return read().literal_(); }
+	{ assert(___handle___); return ___read___().literal_(); }
 
 	inline bool literal() const
-	{ assert(___handle___); return read().literal(); }
+	{ assert(___handle___); return ___read___().literal(); }
 
 	inline any_a<> evaluate__(range_a<> const& range) const
-	{ assert(___handle___); return read().evaluate__(range); }
+	{ assert(___handle___); return ___read___().evaluate__(range); }
 
 	inline any_a<> evaluate_() const
-	{ assert(___handle___); return read().evaluate_(); }
+	{ assert(___handle___); return ___read___().evaluate_(); }
 
 	inline any_a<> token__(range_a<> const& range) const
-	{ assert(___handle___); return read().token__(range); }
+	{ assert(___handle___); return ___read___().token__(range); }
 
 	inline token_a<> token_() const
-	{ assert(___handle___); return read().token_(); }
+	{ assert(___handle___); return ___read___().token_(); }
 
 	inline any_a<> terms__(range_a<> const& range) const
-	{ assert(___handle___); return read().terms__(range); }
+	{ assert(___handle___); return ___read___().terms__(range); }
 
 	inline flock_a<> terms_() const
-	{ assert(___handle___); return read().terms_(); }
+	{ assert(___handle___); return ___read___().terms_(); }
 
 	inline any_a<> generate__(range_a<> const& range) const
-	{ assert(___handle___); return read().generate__(range); }
+	{ assert(___handle___); return ___read___().generate__(range); }
 
 	inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const
-	{ assert(___handle___); return read().generate_(version, indent, river); }
+	{ assert(___handle___); return ___read___().generate_(version, indent, river); }
 
 	inline void generate(int64_t version , int64_t indent , river_a < > & river ) const
-	{ assert(___handle___); read().generate(version, indent, river); }
+	{ assert(___handle___); ___read___().generate(version, indent, river); }
 
 	inline any_a<> generate_cpp__(range_a<> const& range) const
-	{ assert(___handle___); return read().generate_cpp__(range); }
+	{ assert(___handle___); return ___read___().generate_cpp__(range); }
 
 	inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const
-	{ assert(___handle___); return read().generate_cpp_(version, indent, river, declare, define, type); }
+	{ assert(___handle___); return ___read___().generate_cpp_(version, indent, river, declare, define, type); }
 
 	inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const
-	{ assert(___handle___); read().generate_cpp(version, indent, river, declare, define, type); }
+	{ assert(___handle___); ___read___().generate_cpp(version, indent, river, declare, define, type); }
 
 protected:
 	struct ___expression_a_handle_base___ : ___operation_a_handle_base___
@@ -270,12 +270,12 @@ private:
 	};
 
 protected:
-	inline ___expression_a_handle_base___ const& read() const noexcept
+	inline ___expression_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___expression_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___expression_a_handle_base___& write() noexcept
+	inline ___expression_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -431,7 +431,7 @@ public:
 	inline expression_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -440,7 +440,7 @@ public:
 	{
 		assert(___handle___);
 		expression_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -448,7 +448,7 @@ public:
 	inline expression_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -457,7 +457,7 @@ public:
 	{
 		assert(___handle___);
 		expression_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -465,35 +465,35 @@ public:
 	inline expression_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline expression_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline expression_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline expression_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline expression_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

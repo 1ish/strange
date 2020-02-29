@@ -19,7 +19,7 @@ public:
 	inline symbol_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		symbol_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline symbol_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		symbol_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,61 +53,61 @@ public:
 	inline symbol_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline symbol_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline symbol_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline symbol_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline symbol_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> to_lake__(range_a<> const& range) const
-	{ assert(___handle___); return read().to_lake__(range); }
+	{ assert(___handle___); return ___read___().to_lake__(range); }
 
 	inline lake_int8_a<> to_lake_() const
-	{ assert(___handle___); return read().to_lake_(); }
+	{ assert(___handle___); return ___read___().to_lake_(); }
 
 	inline std :: string const & to_string() const
-	{ assert(___handle___); return read().to_string(); }
+	{ assert(___handle___); return ___read___().to_string(); }
 
 	inline int8_t first_character() const
-	{ assert(___handle___); return read().first_character(); }
+	{ assert(___handle___); return ___read___().first_character(); }
 
 	inline int8_t last_character() const
-	{ assert(___handle___); return read().last_character(); }
+	{ assert(___handle___); return ___read___().last_character(); }
 
 	inline any_a<> add__(range_a<> const& range) const
-	{ assert(___handle___); return read().add__(range); }
+	{ assert(___handle___); return ___read___().add__(range); }
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
-	{ assert(___handle___); return read().add_(symbol); }
+	{ assert(___handle___); return ___read___().add_(symbol); }
 
 	inline symbol_a < > operator+(symbol_a < > const & symbol ) const
-	{ assert(___handle___); return read().operator+(symbol); }
+	{ assert(___handle___); return ___read___().operator+(symbol); }
 
 protected:
 	struct ___symbol_a_handle_base___ : ___any_a_handle_base___
@@ -200,12 +200,12 @@ private:
 	};
 
 protected:
-	inline ___symbol_a_handle_base___ const& read() const noexcept
+	inline ___symbol_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___symbol_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___symbol_a_handle_base___& write() noexcept
+	inline ___symbol_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -361,7 +361,7 @@ public:
 	inline symbol_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -370,7 +370,7 @@ public:
 	{
 		assert(___handle___);
 		symbol_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -378,7 +378,7 @@ public:
 	inline symbol_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -387,7 +387,7 @@ public:
 	{
 		assert(___handle___);
 		symbol_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -395,35 +395,35 @@ public:
 	inline symbol_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline symbol_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline symbol_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline symbol_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline symbol_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

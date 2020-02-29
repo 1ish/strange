@@ -19,7 +19,7 @@ public:
 	inline operation_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		operation_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline operation_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		operation_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,58 +53,58 @@ public:
 	inline operation_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline operation_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline operation_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline operation_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline operation_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> pure__(range_a<> const& range) const
-	{ assert(___handle___); return read().pure__(range); }
+	{ assert(___handle___); return ___read___().pure__(range); }
 
 	inline any_a<> pure_() const
-	{ assert(___handle___); return read().pure_(); }
+	{ assert(___handle___); return ___read___().pure_(); }
 
 	inline bool pure() const
-	{ assert(___handle___); return read().pure(); }
+	{ assert(___handle___); return ___read___().pure(); }
 
 	inline void aspects(unordered_shoal_a < > const & shoal )
-	{ assert(___handle___); write().aspects(shoal); }
+	{ assert(___handle___); ___write___().aspects(shoal); }
 
 	inline void assign(operation_a < > const & operation )
-	{ assert(___handle___); write().assign(operation); }
+	{ assert(___handle___); ___write___().assign(operation); }
 
 	inline any_a<> names__(range_a<> const& range) const
-	{ assert(___handle___); return read().names__(range); }
+	{ assert(___handle___); return ___read___().names__(range); }
 
 	inline flock_a<> names_() const
-	{ assert(___handle___); return read().names_(); }
+	{ assert(___handle___); return ___read___().names_(); }
 
 protected:
 	struct ___operation_a_handle_base___ : ___any_a_handle_base___
@@ -193,12 +193,12 @@ private:
 	};
 
 protected:
-	inline ___operation_a_handle_base___ const& read() const noexcept
+	inline ___operation_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___operation_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___operation_a_handle_base___& write() noexcept
+	inline ___operation_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -354,7 +354,7 @@ public:
 	inline operation_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -363,7 +363,7 @@ public:
 	{
 		assert(___handle___);
 		operation_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -371,7 +371,7 @@ public:
 	inline operation_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -380,7 +380,7 @@ public:
 	{
 		assert(___handle___);
 		operation_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -388,35 +388,35 @@ public:
 	inline operation_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline operation_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline operation_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline operation_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline operation_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

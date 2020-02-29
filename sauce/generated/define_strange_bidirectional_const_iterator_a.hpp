@@ -19,7 +19,7 @@ public:
 	inline bidirectional_const_iterator_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		bidirectional_const_iterator_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline bidirectional_const_iterator_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		bidirectional_const_iterator_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,43 +53,43 @@ public:
 	inline bidirectional_const_iterator_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline bidirectional_const_iterator_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline bidirectional_const_iterator_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline bidirectional_const_iterator_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline bidirectional_const_iterator_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> decrement__(range_a<> const& range)
-	{ assert(___handle___); return write().decrement__(range); }
+	{ assert(___handle___); return ___write___().decrement__(range); }
 
 	inline bidirectional_const_iterator_a<> decrement_()
-	{ assert(___handle___); return write().decrement_(); }
+	{ assert(___handle___); return ___write___().decrement_(); }
 
 protected:
 	struct ___bidirectional_const_iterator_a_handle_base___ : ___forward_const_iterator_a_handle_base___
@@ -158,12 +158,12 @@ private:
 	};
 
 protected:
-	inline ___bidirectional_const_iterator_a_handle_base___ const& read() const noexcept
+	inline ___bidirectional_const_iterator_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___bidirectional_const_iterator_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___bidirectional_const_iterator_a_handle_base___& write() noexcept
+	inline ___bidirectional_const_iterator_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -319,7 +319,7 @@ public:
 	inline bidirectional_const_iterator_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -328,7 +328,7 @@ public:
 	{
 		assert(___handle___);
 		bidirectional_const_iterator_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -336,7 +336,7 @@ public:
 	inline bidirectional_const_iterator_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -345,7 +345,7 @@ public:
 	{
 		assert(___handle___);
 		bidirectional_const_iterator_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -353,35 +353,35 @@ public:
 	inline bidirectional_const_iterator_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline bidirectional_const_iterator_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline bidirectional_const_iterator_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline bidirectional_const_iterator_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline bidirectional_const_iterator_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

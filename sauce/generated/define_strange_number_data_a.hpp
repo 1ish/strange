@@ -19,7 +19,7 @@ public:
 	inline number_data_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		number_data_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline number_data_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		number_data_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,43 +53,43 @@ public:
 	inline number_data_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline number_data_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline number_data_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline number_data_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline number_data_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline _1_ const & extract_primitive() const
-	{ assert(___handle___); return read().extract_primitive(); }
+	{ assert(___handle___); return ___read___().extract_primitive(); }
 
 	inline _1_ & mutate_primitive()
-	{ assert(___handle___); return write().mutate_primitive(); }
+	{ assert(___handle___); return ___write___().mutate_primitive(); }
 
 protected:
 	struct ___number_data_a_handle_base___ : ___number_a_handle_base___
@@ -158,12 +158,12 @@ private:
 	};
 
 protected:
-	inline ___number_data_a_handle_base___ const& read() const noexcept
+	inline ___number_data_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___number_data_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___number_data_a_handle_base___& write() noexcept
+	inline ___number_data_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -319,7 +319,7 @@ public:
 	inline number_data_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -328,7 +328,7 @@ public:
 	{
 		assert(___handle___);
 		number_data_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -336,7 +336,7 @@ public:
 	inline number_data_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -345,7 +345,7 @@ public:
 	{
 		assert(___handle___);
 		number_data_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -353,35 +353,35 @@ public:
 	inline number_data_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline number_data_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline number_data_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline number_data_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline number_data_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

@@ -19,7 +19,7 @@ public:
 	inline inventory_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		inventory_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline inventory_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		inventory_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,64 +53,64 @@ public:
 	inline inventory_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline inventory_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline inventory_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline inventory_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline inventory_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline bool has_index(int64_t index ) const
-	{ assert(___handle___); return read().has_index(index); }
+	{ assert(___handle___); return ___read___().has_index(index); }
 
 	inline any_a < > at_index(int64_t index ) const
-	{ assert(___handle___); return read().at_index(index); }
+	{ assert(___handle___); return ___read___().at_index(index); }
 
 	inline void update_index(int64_t index , any_a < > const & value )
-	{ assert(___handle___); write().update_index(index, value); }
+	{ assert(___handle___); ___write___().update_index(index, value); }
 
 	inline bool insert_index(int64_t index , any_a < > const & value )
-	{ assert(___handle___); return write().insert_index(index, value); }
+	{ assert(___handle___); return ___write___().insert_index(index, value); }
 
 	inline bool erase_index(int64_t index )
-	{ assert(___handle___); return write().erase_index(index); }
+	{ assert(___handle___); return ___write___().erase_index(index); }
 
 	inline any_a<> begin__(range_a<> const& range)
-	{ assert(___handle___); return write().begin__(range); }
+	{ assert(___handle___); return ___write___().begin__(range); }
 
 	inline random_access_iterator_a<> begin_()
-	{ assert(___handle___); return write().begin_(); }
+	{ assert(___handle___); return ___write___().begin_(); }
 
 	inline any_a<> end__(range_a<> const& range)
-	{ assert(___handle___); return write().end__(range); }
+	{ assert(___handle___); return ___write___().end__(range); }
 
 	inline random_access_iterator_a<> end_()
-	{ assert(___handle___); return write().end_(); }
+	{ assert(___handle___); return ___write___().end_(); }
 
 protected:
 	struct ___inventory_a_handle_base___ : ___collection_a_handle_base___
@@ -207,12 +207,12 @@ private:
 	};
 
 protected:
-	inline ___inventory_a_handle_base___ const& read() const noexcept
+	inline ___inventory_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___inventory_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___inventory_a_handle_base___& write() noexcept
+	inline ___inventory_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -368,7 +368,7 @@ public:
 	inline inventory_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -377,7 +377,7 @@ public:
 	{
 		assert(___handle___);
 		inventory_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -385,7 +385,7 @@ public:
 	inline inventory_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -394,7 +394,7 @@ public:
 	{
 		assert(___handle___);
 		inventory_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -402,35 +402,35 @@ public:
 	inline inventory_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline inventory_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline inventory_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline inventory_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline inventory_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

@@ -19,7 +19,7 @@ public:
 	inline forward_const_iterator_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		forward_const_iterator_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline forward_const_iterator_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		forward_const_iterator_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,55 +53,55 @@ public:
 	inline forward_const_iterator_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> get__(range_a<> const& range) const
-	{ assert(___handle___); return read().get__(range); }
+	{ assert(___handle___); return ___read___().get__(range); }
 
 	inline any_a<> get_() const
-	{ assert(___handle___); return read().get_(); }
+	{ assert(___handle___); return ___read___().get_(); }
 
 	inline any_a < > const & operator*() const
-	{ assert(___handle___); return read().operator*(); }
+	{ assert(___handle___); return ___read___().operator*(); }
 
 	inline any_a < > const * operator->() const
-	{ assert(___handle___); return read().operator->(); }
+	{ assert(___handle___); return ___read___().operator->(); }
 
 	inline any_a<> increment__(range_a<> const& range)
-	{ assert(___handle___); return write().increment__(range); }
+	{ assert(___handle___); return ___write___().increment__(range); }
 
 	inline forward_const_iterator_a<> increment_()
-	{ assert(___handle___); return write().increment_(); }
+	{ assert(___handle___); return ___write___().increment_(); }
 
 protected:
 	struct ___forward_const_iterator_a_handle_base___ : ___any_a_handle_base___
@@ -186,12 +186,12 @@ private:
 	};
 
 protected:
-	inline ___forward_const_iterator_a_handle_base___ const& read() const noexcept
+	inline ___forward_const_iterator_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___forward_const_iterator_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___forward_const_iterator_a_handle_base___& write() noexcept
+	inline ___forward_const_iterator_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -347,7 +347,7 @@ public:
 	inline forward_const_iterator_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -356,7 +356,7 @@ public:
 	{
 		assert(___handle___);
 		forward_const_iterator_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -364,7 +364,7 @@ public:
 	inline forward_const_iterator_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -373,7 +373,7 @@ public:
 	{
 		assert(___handle___);
 		forward_const_iterator_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -381,35 +381,35 @@ public:
 	inline forward_const_iterator_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline forward_const_iterator_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

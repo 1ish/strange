@@ -19,7 +19,7 @@ public:
 	inline kind_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		kind_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline kind_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		kind_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,70 +53,70 @@ public:
 	inline kind_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline kind_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline kind_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline kind_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline kind_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> aspects__(range_a<> const& range) const
-	{ assert(___handle___); return read().aspects__(range); }
+	{ assert(___handle___); return ___read___().aspects__(range); }
 
 	inline flock_a<> aspects_() const
-	{ assert(___handle___); return read().aspects_(); }
+	{ assert(___handle___); return ___read___().aspects_(); }
 
 	inline any_a<> fixed__(range_a<> const& range) const
-	{ assert(___handle___); return read().fixed__(range); }
+	{ assert(___handle___); return ___read___().fixed__(range); }
 
 	inline any_a<> fixed_() const
-	{ assert(___handle___); return read().fixed_(); }
+	{ assert(___handle___); return ___read___().fixed_(); }
 
 	inline bool fixed() const
-	{ assert(___handle___); return read().fixed(); }
+	{ assert(___handle___); return ___read___().fixed(); }
 
 	inline any_a<> reference__(range_a<> const& range) const
-	{ assert(___handle___); return read().reference__(range); }
+	{ assert(___handle___); return ___read___().reference__(range); }
 
 	inline any_a<> reference_() const
-	{ assert(___handle___); return read().reference_(); }
+	{ assert(___handle___); return ___read___().reference_(); }
 
 	inline bool reference() const
-	{ assert(___handle___); return read().reference(); }
+	{ assert(___handle___); return ___read___().reference(); }
 
 	inline any_a<> optional__(range_a<> const& range) const
-	{ assert(___handle___); return read().optional__(range); }
+	{ assert(___handle___); return ___read___().optional__(range); }
 
 	inline any_a<> optional_() const
-	{ assert(___handle___); return read().optional_(); }
+	{ assert(___handle___); return ___read___().optional_(); }
 
 	inline bool optional() const
-	{ assert(___handle___); return read().optional(); }
+	{ assert(___handle___); return ___read___().optional(); }
 
 protected:
 	struct ___kind_a_handle_base___ : ___cat_a_handle_base___
@@ -221,12 +221,12 @@ private:
 	};
 
 protected:
-	inline ___kind_a_handle_base___ const& read() const noexcept
+	inline ___kind_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___kind_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___kind_a_handle_base___& write() noexcept
+	inline ___kind_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -382,7 +382,7 @@ public:
 	inline kind_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -391,7 +391,7 @@ public:
 	{
 		assert(___handle___);
 		kind_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -399,7 +399,7 @@ public:
 	inline kind_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -408,7 +408,7 @@ public:
 	{
 		assert(___handle___);
 		kind_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -416,35 +416,35 @@ public:
 	inline kind_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline kind_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline kind_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline kind_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline kind_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

@@ -19,7 +19,7 @@ public:
 	inline collection_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		collection_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline collection_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		collection_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,184 +53,184 @@ public:
 	inline collection_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline collection_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline collection_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline collection_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline collection_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> has__(range_a<> const& range) const
-	{ assert(___handle___); return read().has__(range); }
+	{ assert(___handle___); return ___read___().has__(range); }
 
 	inline any_a<> has_(any_a<> const& key) const
-	{ assert(___handle___); return read().has_(key); }
+	{ assert(___handle___); return ___read___().has_(key); }
 
 	inline bool has(any_a < > const & key ) const
-	{ assert(___handle___); return read().has(key); }
+	{ assert(___handle___); return ___read___().has(key); }
 
 	inline any_a<> at__(range_a<> const& range) const
-	{ assert(___handle___); return read().at__(range); }
+	{ assert(___handle___); return ___read___().at__(range); }
 
 	inline any_a<> at_(any_a<> const& key) const
-	{ assert(___handle___); return read().at_(key); }
+	{ assert(___handle___); return ___read___().at_(key); }
 
 	inline any_a<> update__(range_a<> const& range)
-	{ assert(___handle___); return write().update__(range); }
+	{ assert(___handle___); return ___write___().update__(range); }
 
 	inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() )
-	{ assert(___handle___); return write().update_(key, value); }
+	{ assert(___handle___); return ___write___().update_(key, value); }
 
 	inline void update(any_a < > const & key , any_a < > const & value )
-	{ assert(___handle___); write().update(key, value); }
+	{ assert(___handle___); ___write___().update(key, value); }
 
 	inline any_a<> insert__(range_a<> const& range)
-	{ assert(___handle___); return write().insert__(range); }
+	{ assert(___handle___); return ___write___().insert__(range); }
 
 	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() )
-	{ assert(___handle___); return write().insert_(key, value); }
+	{ assert(___handle___); return ___write___().insert_(key, value); }
 
 	inline void insert(any_a < > const & key , any_a < > const & value )
-	{ assert(___handle___); write().insert(key, value); }
+	{ assert(___handle___); ___write___().insert(key, value); }
 
 	inline any_a<> erase__(range_a<> const& range)
-	{ assert(___handle___); return write().erase__(range); }
+	{ assert(___handle___); return ___write___().erase__(range); }
 
 	inline any_a<> erase_(any_a<> const& key)
-	{ assert(___handle___); return write().erase_(key); }
+	{ assert(___handle___); return ___write___().erase_(key); }
 
 	inline bool erase(any_a < > const & key )
-	{ assert(___handle___); return write().erase(key); }
+	{ assert(___handle___); return ___write___().erase(key); }
 
 	inline any_a<> clear__(range_a<> const& range)
-	{ assert(___handle___); return write().clear__(range); }
+	{ assert(___handle___); return ___write___().clear__(range); }
 
 	inline collection_a<> clear_()
-	{ assert(___handle___); return write().clear_(); }
+	{ assert(___handle___); return ___write___().clear_(); }
 
 	inline void clear()
-	{ assert(___handle___); write().clear(); }
+	{ assert(___handle___); ___write___().clear(); }
 
 	inline any_a<> size__(range_a<> const& range) const
-	{ assert(___handle___); return read().size__(range); }
+	{ assert(___handle___); return ___read___().size__(range); }
 
 	inline number_data_int64_a size_() const
-	{ assert(___handle___); return read().size_(); }
+	{ assert(___handle___); return ___read___().size_(); }
 
 	inline int64_t size() const
-	{ assert(___handle___); return read().size(); }
+	{ assert(___handle___); return ___read___().size(); }
 
 	inline any_a<> empty__(range_a<> const& range) const
-	{ assert(___handle___); return read().empty__(range); }
+	{ assert(___handle___); return ___read___().empty__(range); }
 
 	inline any_a<> empty_() const
-	{ assert(___handle___); return read().empty_(); }
+	{ assert(___handle___); return ___read___().empty_(); }
 
 	inline bool empty() const
-	{ assert(___handle___); return read().empty(); }
+	{ assert(___handle___); return ___read___().empty(); }
 
 	inline any_a<> push_front__(range_a<> const& range)
-	{ assert(___handle___); return write().push_front__(range); }
+	{ assert(___handle___); return ___write___().push_front__(range); }
 
 	inline collection_a<> push_front_(any_a<> const& thing)
-	{ assert(___handle___); return write().push_front_(thing); }
+	{ assert(___handle___); return ___write___().push_front_(thing); }
 
 	inline void push_front(any_a < > const & thing )
-	{ assert(___handle___); write().push_front(thing); }
+	{ assert(___handle___); ___write___().push_front(thing); }
 
 	inline any_a<> pop_front__(range_a<> const& range)
-	{ assert(___handle___); return write().pop_front__(range); }
+	{ assert(___handle___); return ___write___().pop_front__(range); }
 
 	inline any_a<> pop_front_()
-	{ assert(___handle___); return write().pop_front_(); }
+	{ assert(___handle___); return ___write___().pop_front_(); }
 
 	inline any_a<> push_back__(range_a<> const& range)
-	{ assert(___handle___); return write().push_back__(range); }
+	{ assert(___handle___); return ___write___().push_back__(range); }
 
 	inline collection_a<> push_back_(any_a<> const& thing)
-	{ assert(___handle___); return write().push_back_(thing); }
+	{ assert(___handle___); return ___write___().push_back_(thing); }
 
 	inline void push_back(any_a < > const & thing )
-	{ assert(___handle___); write().push_back(thing); }
+	{ assert(___handle___); ___write___().push_back(thing); }
 
 	inline any_a<> pop_back__(range_a<> const& range)
-	{ assert(___handle___); return write().pop_back__(range); }
+	{ assert(___handle___); return ___write___().pop_back__(range); }
 
 	inline any_a<> pop_back_()
-	{ assert(___handle___); return write().pop_back_(); }
+	{ assert(___handle___); return ___write___().pop_back_(); }
 
 	inline any_a<> self_assign__(range_a<> const& range)
-	{ assert(___handle___); return write().self_assign__(range); }
+	{ assert(___handle___); return ___write___().self_assign__(range); }
 
 	inline collection_a<> self_assign_(range_a<> const& range)
-	{ assert(___handle___); return write().self_assign_(range); }
+	{ assert(___handle___); return ___write___().self_assign_(range); }
 
 	inline any_a<> self_add__(range_a<> const& range)
-	{ assert(___handle___); return write().self_add__(range); }
+	{ assert(___handle___); return ___write___().self_add__(range); }
 
 	inline collection_a<> self_add_(range_a<> const& range)
-	{ assert(___handle___); return write().self_add_(range); }
+	{ assert(___handle___); return ___write___().self_add_(range); }
 
 	inline any_a<> add__(range_a<> const& range) const
-	{ assert(___handle___); return read().add__(range); }
+	{ assert(___handle___); return ___read___().add__(range); }
 
 	inline collection_a<> add_(range_a<> const& range) const
-	{ assert(___handle___); return read().add_(range); }
+	{ assert(___handle___); return ___read___().add_(range); }
 
 	inline collection_a operator+(range_a < > const & range ) const
-	{ assert(___handle___); return read().operator+(range); }
+	{ assert(___handle___); return ___read___().operator+(range); }
 
 	inline any_a<> self_subtract__(range_a<> const& range)
-	{ assert(___handle___); return write().self_subtract__(range); }
+	{ assert(___handle___); return ___write___().self_subtract__(range); }
 
 	inline collection_a<> self_subtract_(range_a<> const& range)
-	{ assert(___handle___); return write().self_subtract_(range); }
+	{ assert(___handle___); return ___write___().self_subtract_(range); }
 
 	inline any_a<> subtract__(range_a<> const& range) const
-	{ assert(___handle___); return read().subtract__(range); }
+	{ assert(___handle___); return ___read___().subtract__(range); }
 
 	inline collection_a<> subtract_(range_a<> const& range) const
-	{ assert(___handle___); return read().subtract_(range); }
+	{ assert(___handle___); return ___read___().subtract_(range); }
 
 	inline collection_a operator-(range_a < > const & range ) const
-	{ assert(___handle___); return read().operator-(range); }
+	{ assert(___handle___); return ___read___().operator-(range); }
 
 	inline any_a<> read_lock__(range_a<> const& range) const
-	{ assert(___handle___); return read().read_lock__(range); }
+	{ assert(___handle___); return ___read___().read_lock__(range); }
 
 	inline any_a<> read_lock_() const
-	{ assert(___handle___); return read().read_lock_(); }
+	{ assert(___handle___); return ___read___().read_lock_(); }
 
 	inline any_a<> write_lock__(range_a<> const& range) const
-	{ assert(___handle___); return read().write_lock__(range); }
+	{ assert(___handle___); return ___read___().write_lock__(range); }
 
 	inline any_a<> write_lock_() const
-	{ assert(___handle___); return read().write_lock_(); }
+	{ assert(___handle___); return ___read___().write_lock_(); }
 
 protected:
 	struct ___collection_a_handle_base___ : ___range_a_handle_base___
@@ -487,12 +487,12 @@ private:
 	};
 
 protected:
-	inline ___collection_a_handle_base___ const& read() const noexcept
+	inline ___collection_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___collection_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___collection_a_handle_base___& write() noexcept
+	inline ___collection_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -648,7 +648,7 @@ public:
 	inline collection_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -657,7 +657,7 @@ public:
 	{
 		assert(___handle___);
 		collection_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -665,7 +665,7 @@ public:
 	inline collection_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -674,7 +674,7 @@ public:
 	{
 		assert(___handle___);
 		collection_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -682,35 +682,35 @@ public:
 	inline collection_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline collection_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline collection_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline collection_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline collection_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

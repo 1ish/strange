@@ -19,7 +19,7 @@ public:
 	inline range_of_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		range_of_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline range_of_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		range_of_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,49 +53,49 @@ public:
 	inline range_of_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline range_of_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline range_of_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline range_of_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline range_of_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> cbegin__(range_a<> const& range) const
-	{ assert(___handle___); return read().cbegin__(range); }
+	{ assert(___handle___); return ___read___().cbegin__(range); }
 
 	inline forward_const_iterator_a<> cbegin_() const
-	{ assert(___handle___); return read().cbegin_(); }
+	{ assert(___handle___); return ___read___().cbegin_(); }
 
 	inline any_a<> cend__(range_a<> const& range) const
-	{ assert(___handle___); return read().cend__(range); }
+	{ assert(___handle___); return ___read___().cend__(range); }
 
 	inline forward_const_iterator_a<> cend_() const
-	{ assert(___handle___); return read().cend_(); }
+	{ assert(___handle___); return ___read___().cend_(); }
 
 protected:
 	struct ___range_of_a_handle_base___ : ___any_a_handle_base___
@@ -172,12 +172,12 @@ private:
 	};
 
 protected:
-	inline ___range_of_a_handle_base___ const& read() const noexcept
+	inline ___range_of_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___range_of_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___range_of_a_handle_base___& write() noexcept
+	inline ___range_of_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -333,7 +333,7 @@ public:
 	inline range_of_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -342,7 +342,7 @@ public:
 	{
 		assert(___handle___);
 		range_of_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -350,7 +350,7 @@ public:
 	inline range_of_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -359,7 +359,7 @@ public:
 	{
 		assert(___handle___);
 		range_of_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -367,35 +367,35 @@ public:
 	inline range_of_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline range_of_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline range_of_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline range_of_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline range_of_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

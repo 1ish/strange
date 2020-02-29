@@ -19,7 +19,7 @@ public:
 	inline token_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		token_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline token_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		token_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,106 +53,106 @@ public:
 	inline token_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline token_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline token_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline token_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline token_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> filename__(range_a<> const& range) const
-	{ assert(___handle___); return read().filename__(range); }
+	{ assert(___handle___); return ___read___().filename__(range); }
 
 	inline symbol_a<> filename_() const
-	{ assert(___handle___); return read().filename_(); }
+	{ assert(___handle___); return ___read___().filename_(); }
 
 	inline std :: string filename() const
-	{ assert(___handle___); return read().filename(); }
+	{ assert(___handle___); return ___read___().filename(); }
 
 	inline any_a<> line__(range_a<> const& range) const
-	{ assert(___handle___); return read().line__(range); }
+	{ assert(___handle___); return ___read___().line__(range); }
 
 	inline number_data_int64_a<> line_() const
-	{ assert(___handle___); return read().line_(); }
+	{ assert(___handle___); return ___read___().line_(); }
 
 	inline int64_t line() const
-	{ assert(___handle___); return read().line(); }
+	{ assert(___handle___); return ___read___().line(); }
 
 	inline any_a<> position__(range_a<> const& range) const
-	{ assert(___handle___); return read().position__(range); }
+	{ assert(___handle___); return ___read___().position__(range); }
 
 	inline number_data_int64_a<> position_() const
-	{ assert(___handle___); return read().position_(); }
+	{ assert(___handle___); return ___read___().position_(); }
 
 	inline int64_t position() const
-	{ assert(___handle___); return read().position(); }
+	{ assert(___handle___); return ___read___().position(); }
 
 	inline any_a<> tag__(range_a<> const& range) const
-	{ assert(___handle___); return read().tag__(range); }
+	{ assert(___handle___); return ___read___().tag__(range); }
 
 	inline symbol_a<> tag_() const
-	{ assert(___handle___); return read().tag_(); }
+	{ assert(___handle___); return ___read___().tag_(); }
 
 	inline std :: string tag() const
-	{ assert(___handle___); return read().tag(); }
+	{ assert(___handle___); return ___read___().tag(); }
 
 	inline any_a<> symbol__(range_a<> const& range) const
-	{ assert(___handle___); return read().symbol__(range); }
+	{ assert(___handle___); return ___read___().symbol__(range); }
 
 	inline symbol_a<> symbol_() const
-	{ assert(___handle___); return read().symbol_(); }
+	{ assert(___handle___); return ___read___().symbol_(); }
 
 	inline std :: string symbol() const
-	{ assert(___handle___); return read().symbol(); }
+	{ assert(___handle___); return ___read___().symbol(); }
 
 	inline any_a<> literal__(range_a<> const& range) const
-	{ assert(___handle___); return read().literal__(range); }
+	{ assert(___handle___); return ___read___().literal__(range); }
 
 	inline any_a<> literal_() const
-	{ assert(___handle___); return read().literal_(); }
+	{ assert(___handle___); return ___read___().literal_(); }
 
 	inline any_a<> precedence__(range_a<> const& range) const
-	{ assert(___handle___); return read().precedence__(range); }
+	{ assert(___handle___); return ___read___().precedence__(range); }
 
 	inline number_data_int64_a<> precedence_() const
-	{ assert(___handle___); return read().precedence_(); }
+	{ assert(___handle___); return ___read___().precedence_(); }
 
 	inline int64_t precedence() const
-	{ assert(___handle___); return read().precedence(); }
+	{ assert(___handle___); return ___read___().precedence(); }
 
 	inline any_a<> report__(range_a<> const& range) const
-	{ assert(___handle___); return read().report__(range); }
+	{ assert(___handle___); return ___read___().report__(range); }
 
 	inline misunderstanding_a<> report_() const
-	{ assert(___handle___); return read().report_(); }
+	{ assert(___handle___); return ___read___().report_(); }
 
 	inline std :: string report() const
-	{ assert(___handle___); return read().report(); }
+	{ assert(___handle___); return ___read___().report(); }
 
 protected:
 	struct ___token_a_handle_base___ : ___any_a_handle_base___
@@ -305,12 +305,12 @@ private:
 	};
 
 protected:
-	inline ___token_a_handle_base___ const& read() const noexcept
+	inline ___token_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___token_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___token_a_handle_base___& write() noexcept
+	inline ___token_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -466,7 +466,7 @@ public:
 	inline token_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -475,7 +475,7 @@ public:
 	{
 		assert(___handle___);
 		token_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -483,7 +483,7 @@ public:
 	inline token_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -492,7 +492,7 @@ public:
 	{
 		assert(___handle___);
 		token_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -500,35 +500,35 @@ public:
 	inline token_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline token_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline token_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline token_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline token_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 

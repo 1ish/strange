@@ -19,7 +19,7 @@ public:
 	inline cat_a& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -28,7 +28,7 @@ public:
 	{
 		assert(___handle___);
 		cat_a result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -36,7 +36,7 @@ public:
 	inline cat_a& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -45,7 +45,7 @@ public:
 	{
 		assert(___handle___);
 		cat_a result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -53,88 +53,88 @@ public:
 	inline cat_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline cat_a& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline cat_a& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline cat_a& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline cat_a& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
 	inline any_a<> symbolic__(range_a<> const& range) const
-	{ assert(___handle___); return read().symbolic__(range); }
+	{ assert(___handle___); return ___read___().symbolic__(range); }
 
 	inline any_a<> symbolic_() const
-	{ assert(___handle___); return read().symbolic_(); }
+	{ assert(___handle___); return ___read___().symbolic_(); }
 
 	inline bool symbolic() const
-	{ assert(___handle___); return read().symbolic(); }
+	{ assert(___handle___); return ___read___().symbolic(); }
 
 	inline any_a<> order__(range_a<> const& range) const
-	{ assert(___handle___); return read().order__(range); }
+	{ assert(___handle___); return ___read___().order__(range); }
 
 	inline number_data_int64_a<> order_() const
-	{ assert(___handle___); return read().order_(); }
+	{ assert(___handle___); return ___read___().order_(); }
 
 	inline int64_t order() const
-	{ assert(___handle___); return read().order(); }
+	{ assert(___handle___); return ___read___().order(); }
 
 	inline any_a<> name__(range_a<> const& range) const
-	{ assert(___handle___); return read().name__(range); }
+	{ assert(___handle___); return ___read___().name__(range); }
 
 	inline symbol_a<> name_() const
-	{ assert(___handle___); return read().name_(); }
+	{ assert(___handle___); return ___read___().name_(); }
 
 	inline any_a<> dimensions__(range_a<> const& range) const
-	{ assert(___handle___); return read().dimensions__(range); }
+	{ assert(___handle___); return ___read___().dimensions__(range); }
 
 	inline flock_a<> dimensions_() const
-	{ assert(___handle___); return read().dimensions_(); }
+	{ assert(___handle___); return ___read___().dimensions_(); }
 
 	inline any_a<> parameters__(range_a<> const& range) const
-	{ assert(___handle___); return read().parameters__(range); }
+	{ assert(___handle___); return ___read___().parameters__(range); }
 
 	inline flock_a<> parameters_() const
-	{ assert(___handle___); return read().parameters_(); }
+	{ assert(___handle___); return ___read___().parameters_(); }
 
 	inline any_a<> result__(range_a<> const& range) const
-	{ assert(___handle___); return read().result__(range); }
+	{ assert(___handle___); return ___read___().result__(range); }
 
 	inline cat_a<> result_() const
-	{ assert(___handle___); return read().result_(); }
+	{ assert(___handle___); return ___read___().result_(); }
 
 	inline any_a<> code__(range_a<> const& range) const
-	{ assert(___handle___); return read().code__(range); }
+	{ assert(___handle___); return ___read___().code__(range); }
 
 	inline lake_int8_a<> code_() const
-	{ assert(___handle___); return read().code_(); }
+	{ assert(___handle___); return ___read___().code_(); }
 
 	inline std :: string code() const
-	{ assert(___handle___); return read().code(); }
+	{ assert(___handle___); return ___read___().code(); }
 
 protected:
 	struct ___cat_a_handle_base___ : ___symbol_a_handle_base___
@@ -263,12 +263,12 @@ private:
 	};
 
 protected:
-	inline ___cat_a_handle_base___ const& read() const noexcept
+	inline ___cat_a_handle_base___ const& ___read___() const noexcept
 	{
 		return *std::static_pointer_cast<___cat_a_handle_base___ const>(___handle___);
 	}
 
-	inline ___cat_a_handle_base___& write() noexcept
+	inline ___cat_a_handle_base___& ___write___() noexcept
 	{
 		if (!___handle___.unique())
 		{
@@ -424,7 +424,7 @@ public:
 	inline cat_d& operator++()
 	{
 		assert(___handle___);
-		write().operator++();
+		___write___().operator++();
 		return *this;
 	}
 
@@ -433,7 +433,7 @@ public:
 	{
 		assert(___handle___);
 		cat_d result = *this;
-		write().operator++();
+		___write___().operator++();
 		return result;
 	}
 #endif
@@ -441,7 +441,7 @@ public:
 	inline cat_d& operator--()
 	{
 		assert(___handle___);
-		write().operator--();
+		___write___().operator--();
 		return *this;
 	}
 
@@ -450,7 +450,7 @@ public:
 	{
 		assert(___handle___);
 		cat_d result = *this;
-		write().operator--();
+		___write___().operator--();
 		return result;
 	}
 #endif
@@ -458,35 +458,35 @@ public:
 	inline cat_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator+=(other);
+		___write___().operator+=(other);
 		return *this;
 	}
 
 	inline cat_d& operator-=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator-=(other);
+		___write___().operator-=(other);
 		return *this;
 	}
 
 	inline cat_d& operator*=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator*=(other);
+		___write___().operator*=(other);
 		return *this;
 	}
 
 	inline cat_d& operator/=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator/=(other);
+		___write___().operator/=(other);
 		return *this;
 	}
 
 	inline cat_d& operator%=(any_a<> const& other)
 	{
 		assert(___handle___);
-		write().operator%=(other);
+		___write___().operator%=(other);
 		return *this;
 	}
 
