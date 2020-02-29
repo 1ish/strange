@@ -183,6 +183,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___ordered_herd_a_handle_base___>(handle));
 	}
 
+	static inline ordered_herd_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___ordered_herd_a_handle_base___>(static_cast<ordered_herd_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return ordered_herd_a{ ptr };
+		}
+		return ordered_herd_a{ ordered_herd_d<_1_>{ thing } };
+	}
+
 	static inline ordered_herd_a val(ordered_herd_a const& other) noexcept
 	{
 		return ordered_herd_a{ other };

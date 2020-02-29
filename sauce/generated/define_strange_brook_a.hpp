@@ -183,6 +183,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___brook_a_handle_base___>(handle));
 	}
 
+	static inline brook_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___brook_a_handle_base___>(static_cast<brook_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return brook_a{ ptr };
+		}
+		return brook_a{ brook_d<_1_>{ thing } };
+	}
+
 	static inline brook_a val(brook_a const& other) noexcept
 	{
 		return brook_a{ other };

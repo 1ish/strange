@@ -218,6 +218,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___operation_a_handle_base___>(handle));
 	}
 
+	static inline operation_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___operation_a_handle_base___>(static_cast<operation_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return operation_a{ ptr };
+		}
+		return operation_a{ operation_d<_1_>{ thing } };
+	}
+
 	static inline operation_a val(operation_a const& other) noexcept
 	{
 		return operation_a{ other };

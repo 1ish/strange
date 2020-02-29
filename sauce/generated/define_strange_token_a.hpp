@@ -330,6 +330,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___token_a_handle_base___>(handle));
 	}
 
+	static inline token_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___token_a_handle_base___>(static_cast<token_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return token_a{ ptr };
+		}
+		return token_a{ token_d<_1_>{ thing } };
+	}
+
 	static inline token_a val(token_a const& other) noexcept
 	{
 		return token_a{ other };

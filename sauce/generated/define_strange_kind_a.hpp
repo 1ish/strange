@@ -246,6 +246,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___kind_a_handle_base___>(handle));
 	}
 
+	static inline kind_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___kind_a_handle_base___>(static_cast<kind_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return kind_a{ ptr };
+		}
+		return kind_a{ kind_d<_1_>{ thing } };
+	}
+
 	static inline kind_a val(kind_a const& other) noexcept
 	{
 		return kind_a{ other };

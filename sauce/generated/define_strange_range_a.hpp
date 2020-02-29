@@ -197,6 +197,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___range_a_handle_base___>(handle));
 	}
 
+	static inline range_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___range_a_handle_base___>(static_cast<range_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return range_a{ ptr };
+		}
+		return range_a{ range_d<_1_>{ thing } };
+	}
+
 	static inline range_a val(range_a const& other) noexcept
 	{
 		return range_a{ other };

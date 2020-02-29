@@ -607,6 +607,11 @@ public:
 		return &handle_ != &___shared___;
 	}
 
+	static inline any_a<> cast(any_a<> const& thing)
+	{
+		return thing;
+	}
+
 	static inline any_a val(any_a const& other) noexcept
 	{
 		return any_a{ other };

@@ -183,6 +183,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___ordered_shoal_a_handle_base___>(handle));
 	}
 
+	static inline ordered_shoal_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___ordered_shoal_a_handle_base___>(static_cast<ordered_shoal_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return ordered_shoal_a{ ptr };
+		}
+		return ordered_shoal_a{ ordered_shoal_d<_1_>{ thing } };
+	}
+
 	static inline ordered_shoal_a val(ordered_shoal_a const& other) noexcept
 	{
 		return ordered_shoal_a{ other };

@@ -295,6 +295,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___expression_a_handle_base___>(handle));
 	}
 
+	static inline expression_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(static_cast<expression_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return expression_a{ ptr };
+		}
+		return expression_a{ expression_d<_1_>{ thing } };
+	}
+
 	static inline expression_a val(expression_a const& other) noexcept
 	{
 		return expression_a{ other };

@@ -183,6 +183,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___parser_a_handle_base___>(handle));
 	}
 
+	static inline parser_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___parser_a_handle_base___>(static_cast<parser_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return parser_a{ ptr };
+		}
+		return parser_a{ parser_d<_1_>{ thing } };
+	}
+
 	static inline parser_a val(parser_a const& other) noexcept
 	{
 		return parser_a{ other };

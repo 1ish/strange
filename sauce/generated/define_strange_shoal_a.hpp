@@ -232,6 +232,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___shoal_a_handle_base___>(handle));
 	}
 
+	static inline shoal_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___shoal_a_handle_base___>(static_cast<shoal_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return shoal_a{ ptr };
+		}
+		return shoal_a{ shoal_d<_1_>{ thing } };
+	}
+
 	static inline shoal_a val(shoal_a const& other) noexcept
 	{
 		return shoal_a{ other };

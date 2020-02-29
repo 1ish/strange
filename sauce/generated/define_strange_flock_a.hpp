@@ -183,6 +183,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___flock_a_handle_base___>(handle));
 	}
 
+	static inline flock_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___flock_a_handle_base___>(static_cast<flock_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return flock_a{ ptr };
+		}
+		return flock_a{ flock_d<_1_>{ thing } };
+	}
+
 	static inline flock_a val(flock_a const& other) noexcept
 	{
 		return flock_a{ other };

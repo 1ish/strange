@@ -288,6 +288,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___cat_a_handle_base___>(handle));
 	}
 
+	static inline cat_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___cat_a_handle_base___>(static_cast<cat_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return cat_a{ ptr };
+		}
+		return cat_a{ cat_d<_1_>{ thing } };
+	}
+
 	static inline cat_a val(cat_a const& other) noexcept
 	{
 		return cat_a{ other };

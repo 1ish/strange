@@ -764,6 +764,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___number_a_handle_base___>(handle));
 	}
 
+	static inline number_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___number_a_handle_base___>(static_cast<number_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return number_a{ ptr };
+		}
+		return number_a{ number_d<number_data_int64_a, number_data_uint64_a, number_data_double_a>{ thing } };
+	}
+
 	static inline number_a val(number_a const& other) noexcept
 	{
 		return number_a{ other };

@@ -197,6 +197,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___misunderstanding_a_handle_base___>(handle));
 	}
 
+	static inline misunderstanding_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___misunderstanding_a_handle_base___>(static_cast<misunderstanding_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return misunderstanding_a{ ptr };
+		}
+		return misunderstanding_a{ misunderstanding_d<_1_>{ thing } };
+	}
+
 	static inline misunderstanding_a val(misunderstanding_a const& other) noexcept
 	{
 		return misunderstanding_a{ other };

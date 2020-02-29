@@ -778,6 +778,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___river_a_handle_base___>(handle));
 	}
 
+	static inline river_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___river_a_handle_base___>(static_cast<river_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return river_a{ ptr };
+		}
+		return river_a{ river_d<_1_>{ thing } };
+	}
+
 	static inline river_a val(river_a const& other) noexcept
 	{
 		return river_a{ other };

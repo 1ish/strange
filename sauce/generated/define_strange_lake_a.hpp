@@ -183,6 +183,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___lake_a_handle_base___>(handle));
 	}
 
+	static inline lake_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___lake_a_handle_base___>(static_cast<lake_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return lake_a{ ptr };
+		}
+		return lake_a{ lake_d<_1_>{ thing } };
+	}
+
 	static inline lake_a val(lake_a const& other) noexcept
 	{
 		return lake_a{ other };

@@ -225,6 +225,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle));
 	}
 
+	static inline symbol_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___symbol_a_handle_base___>(static_cast<symbol_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return symbol_a{ ptr };
+		}
+		return symbol_a{ symbol_d<_1_>{ thing } };
+	}
+
 	static inline symbol_a val(symbol_a const& other) noexcept
 	{
 		return symbol_a{ other };

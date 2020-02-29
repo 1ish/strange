@@ -183,6 +183,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___bidirectional_const_iterator_a_handle_base___>(handle));
 	}
 
+	static inline bidirectional_const_iterator_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___bidirectional_const_iterator_a_handle_base___>(static_cast<bidirectional_const_iterator_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return bidirectional_const_iterator_a{ ptr };
+		}
+		return bidirectional_const_iterator_a{ bidirectional_const_iterator_d<_1_>{ thing } };
+	}
+
 	static inline bidirectional_const_iterator_a val(bidirectional_const_iterator_a const& other) noexcept
 	{
 		return bidirectional_const_iterator_a{ other };

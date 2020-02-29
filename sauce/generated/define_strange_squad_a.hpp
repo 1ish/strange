@@ -183,6 +183,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___squad_a_handle_base___>(handle));
 	}
 
+	static inline squad_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___squad_a_handle_base___>(static_cast<squad_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return squad_a{ ptr };
+		}
+		return squad_a{ squad_d<_1_>{ thing } };
+	}
+
 	static inline squad_a val(squad_a const& other) noexcept
 	{
 		return squad_a{ other };

@@ -183,6 +183,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___data_a_handle_base___>(handle));
 	}
 
+	static inline data_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___data_a_handle_base___>(static_cast<data_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return data_a{ ptr };
+		}
+		return data_a{ data_d<_1_>{ thing } };
+	}
+
 	static inline data_a val(data_a const& other) noexcept
 	{
 		return data_a{ other };

@@ -232,6 +232,16 @@ public:
 		return bool(std::dynamic_pointer_cast<___inventory_a_handle_base___>(handle));
 	}
 
+	static inline inventory_a cast(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___inventory_a_handle_base___>(static_cast<inventory_a const&>(thing).handle_);
+		if (ptr)
+		{
+			return inventory_a{ ptr };
+		}
+		return inventory_a{ inventory_d<_1_>{ thing } };
+	}
+
 	static inline inventory_a val(inventory_a const& other) noexcept
 	{
 		return inventory_a{ other };
