@@ -295,7 +295,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___expression_a_handle_base___>(handle));
 	}
 
-	static inline expression_a cast(any_a<> const& thing)
+	static inline expression_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(thing.___handle___);
 		if (ptr)
@@ -516,7 +516,7 @@ public:
 		{
 			throw dis("dynamic expression_d::recreate_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<expression_d*>(this));
+		return cast<expression_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
 
 	inline void recreated(expression_a < > const & expression ) const
@@ -541,7 +541,7 @@ public:
 		{
 			throw dis("dynamic expression_d::literal_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<expression_d*>(this));
+		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
 
 	inline bool literal() const
@@ -566,7 +566,7 @@ public:
 		{
 			throw dis("dynamic expression_d::evaluate_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<expression_d*>(this));
+		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
 
 	inline any_a<> token__(range_a<> const& range) const
@@ -588,7 +588,7 @@ public:
 		{
 			throw dis("dynamic expression_d::token_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<expression_d*>(this));
+		return cast<token_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
 
 	inline any_a<> terms__(range_a<> const& range) const
@@ -610,7 +610,7 @@ public:
 		{
 			throw dis("dynamic expression_d::terms_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<expression_d*>(this));
+		return cast<flock_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
 
 	inline any_a<> generate__(range_a<> const& range) const
@@ -632,7 +632,7 @@ public:
 		{
 			throw dis("dynamic expression_d::generate_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<expression_d*>(this), version, indent, river);
+		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this), version, indent, river));
 	}
 
 	inline void generate(int64_t version , int64_t indent , river_a < > & river ) const
@@ -657,7 +657,7 @@ public:
 		{
 			throw dis("dynamic expression_d::generate_cpp_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<expression_d*>(this), version, indent, river, declare, define, type);
+		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this), version, indent, river, declare, define, type));
 	}
 
 	inline void generate_cpp(int64_t version , int64_t indent , river_a < > & river , bool declare , bool define , bool type = false ) const

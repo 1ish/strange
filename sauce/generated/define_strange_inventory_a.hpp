@@ -232,7 +232,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___inventory_a_handle_base___>(handle));
 	}
 
-	static inline inventory_a cast(any_a<> const& thing)
+	static inline inventory_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___inventory_a_handle_base___>(thing.___handle___);
 		if (ptr)
@@ -468,7 +468,7 @@ public:
 		{
 			throw dis("dynamic inventory_d::begin_ passed non-existent member");
 		}
-		return variadic_operate(op, *this);
+		return cast<random_access_iterator_a<>>(variadic_operate(op, *this));
 	}
 
 	inline any_a<> end__(range_a<> const& range)
@@ -490,7 +490,7 @@ public:
 		{
 			throw dis("dynamic inventory_d::end_ passed non-existent member");
 		}
-		return variadic_operate(op, *this);
+		return cast<random_access_iterator_a<>>(variadic_operate(op, *this));
 	}
 
 	void ___weak___(collection_d<>::___WEAK___ const& weak) const {}

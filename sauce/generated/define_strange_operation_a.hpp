@@ -218,7 +218,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___operation_a_handle_base___>(handle));
 	}
 
-	static inline operation_a cast(any_a<> const& thing)
+	static inline operation_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___operation_a_handle_base___>(thing.___handle___);
 		if (ptr)
@@ -439,7 +439,7 @@ public:
 		{
 			throw dis("dynamic operation_d::pure_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<operation_d*>(this));
+		return cast<any_a<>>(variadic_operate(op, *const_cast<operation_d*>(this)));
 	}
 
 	inline bool pure() const
@@ -470,7 +470,7 @@ public:
 		{
 			throw dis("dynamic operation_d::names_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<operation_d*>(this));
+		return cast<flock_a<>>(variadic_operate(op, *const_cast<operation_d*>(this)));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

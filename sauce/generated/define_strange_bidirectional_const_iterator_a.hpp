@@ -183,7 +183,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___bidirectional_const_iterator_a_handle_base___>(handle));
 	}
 
-	static inline bidirectional_const_iterator_a cast(any_a<> const& thing)
+	static inline bidirectional_const_iterator_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___bidirectional_const_iterator_a_handle_base___>(thing.___handle___);
 		if (ptr)
@@ -404,7 +404,7 @@ public:
 		{
 			throw dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
 		}
-		return variadic_operate(op, *this);
+		return cast<bidirectional_const_iterator_a<>>(variadic_operate(op, *this));
 	}
 
 	void ___weak___(forward_const_iterator_d<>::___WEAK___ const& weak) const {}

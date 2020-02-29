@@ -288,7 +288,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___cat_a_handle_base___>(handle));
 	}
 
-	static inline cat_a cast(any_a<> const& thing)
+	static inline cat_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___cat_a_handle_base___>(thing.___handle___);
 		if (ptr)
@@ -509,7 +509,7 @@ public:
 		{
 			throw dis("dynamic cat_d::symbolic_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<cat_d*>(this));
+		return cast<any_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
 	inline bool symbolic() const
@@ -534,7 +534,7 @@ public:
 		{
 			throw dis("dynamic cat_d::order_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<cat_d*>(this));
+		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
 	inline int64_t order() const
@@ -559,7 +559,7 @@ public:
 		{
 			throw dis("dynamic cat_d::name_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<cat_d*>(this));
+		return cast<symbol_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
 	inline any_a<> dimensions__(range_a<> const& range) const
@@ -581,7 +581,7 @@ public:
 		{
 			throw dis("dynamic cat_d::dimensions_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<cat_d*>(this));
+		return cast<flock_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
 	inline any_a<> parameters__(range_a<> const& range) const
@@ -603,7 +603,7 @@ public:
 		{
 			throw dis("dynamic cat_d::parameters_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<cat_d*>(this));
+		return cast<flock_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
 	inline any_a<> result__(range_a<> const& range) const
@@ -625,7 +625,7 @@ public:
 		{
 			throw dis("dynamic cat_d::result_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<cat_d*>(this));
+		return cast<cat_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
 	inline any_a<> code__(range_a<> const& range) const
@@ -647,7 +647,7 @@ public:
 		{
 			throw dis("dynamic cat_d::code_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<cat_d*>(this));
+		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
 	inline std :: string code() const

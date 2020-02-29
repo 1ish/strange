@@ -183,7 +183,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___unordered_herd_a_handle_base___>(handle));
 	}
 
-	static inline unordered_herd_a cast(any_a<> const& thing)
+	static inline unordered_herd_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___unordered_herd_a_handle_base___>(thing.___handle___);
 		if (ptr)

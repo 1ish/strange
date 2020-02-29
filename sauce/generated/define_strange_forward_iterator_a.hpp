@@ -225,7 +225,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___forward_iterator_a_handle_base___>(handle));
 	}
 
-	static inline forward_iterator_a cast(any_a<> const& thing)
+	static inline forward_iterator_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___forward_iterator_a_handle_base___>(thing.___handle___);
 		if (ptr)
@@ -446,7 +446,7 @@ public:
 		{
 			throw dis("dynamic forward_iterator_d::get_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<forward_iterator_d*>(this));
+		return cast<any_a<>>(variadic_operate(op, *const_cast<forward_iterator_d*>(this)));
 	}
 
 	inline any_a<> set__(range_a<> const& range) const
@@ -468,7 +468,7 @@ public:
 		{
 			throw dis("dynamic forward_iterator_d::set_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<forward_iterator_d*>(this), thing);
+		return cast<any_a<>>(variadic_operate(op, *const_cast<forward_iterator_d*>(this), thing));
 	}
 
 	inline any_a < > & operator*() const
@@ -496,7 +496,7 @@ public:
 		{
 			throw dis("dynamic forward_iterator_d::increment_ passed non-existent member");
 		}
-		return variadic_operate(op, *this);
+		return cast<forward_iterator_a<>>(variadic_operate(op, *this));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

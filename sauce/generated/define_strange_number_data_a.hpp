@@ -183,7 +183,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___number_data_a_handle_base___>(handle));
 	}
 
-	static inline number_data_a cast(any_a<> const& thing)
+	static inline number_data_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___number_data_a_handle_base___>(thing.___handle___);
 		if (ptr)

@@ -197,7 +197,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___misunderstanding_a_handle_base___>(handle));
 	}
 
-	static inline misunderstanding_a cast(any_a<> const& thing)
+	static inline misunderstanding_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___misunderstanding_a_handle_base___>(thing.___handle___);
 		if (ptr)
@@ -421,7 +421,7 @@ public:
 		{
 			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<misunderstanding_d*>(this), misunderstanding);
+		return cast<misunderstanding_a<>>(variadic_operate(op, *const_cast<misunderstanding_d*>(this), misunderstanding));
 	}
 
 	inline misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const

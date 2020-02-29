@@ -608,7 +608,7 @@ public:
 		return &___handle___ != &___shared___;
 	}
 
-	static inline any_a<> cast(any_a<> const& thing)
+	static inline any_a<> ___cast___(any_a<> const& thing)
 	{
 		return thing;
 	}

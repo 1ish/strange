@@ -782,7 +782,8 @@ protected:
 
 		river.write_string(
 			"\tinline " + result);
-		if (result == class_name.substr(0, class_name.length() - 1) + "a")
+		bool const template_result = result == class_name.substr(0, class_name.length() - 1) + "a";
+		if (template_result)
 		{
 			_declare_or_define_template_(version, 0, river, false, false);
 		}
@@ -794,7 +795,12 @@ protected:
 			"\t\t{\n"
 			"\t\t\tthrow dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
 			"\t\t}\n"
-			"\t\treturn variadic_operate(op, ");
+			"\t\treturn cast<" + result);
+		if (template_result)
+		{
+			_declare_or_define_template_(version, 0, river, false, false);
+		}
+		river.write_string(">(variadic_operate(op, ");
 		if (constness.empty())
 		{
 			river.write_string("*this");
@@ -805,11 +811,11 @@ protected:
 		}
 		if (arguments.length() > 2)
 		{
-			river.write_string(", " + arguments.substr(1) + ";\n");
+			river.write_string(", " + arguments.substr(1) + ");\n");
 		}
 		else
 		{
-			river.write_string(");\n");
+			river.write_string("));\n");
 		}
 		river.write_string(
 			"\t}\n\n");
@@ -1262,7 +1268,7 @@ protected:
 				"\t}\n\n");
 
 			river.write_string(
-				"\tstatic inline any_a<> cast(any_a<> const& thing)\n"
+				"\tstatic inline any_a<> ___cast___(any_a<> const& thing)\n"
 				"\t{\n"
 				"\t\treturn thing;\n"
 				"\t}\n\n");
@@ -1270,7 +1276,7 @@ protected:
 		else
 		{
 			river.write_string(
-				"\tstatic inline " + class_name + " cast(any_a<> const& thing)\n"
+				"\tstatic inline " + class_name + " ___cast___(any_a<> const& thing)\n"
 				"\t{\n"
 				"\t\tauto const ptr = std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.___handle___);\n"
 				"\t\tif (ptr)\n"

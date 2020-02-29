@@ -81,7 +81,7 @@ inline ___TTT___ cast(any_a<> const& value) noexcept
 template <typename ___TTT___>
 inline ___TTT___ cast(any_a<> const& value)
 {
-	return typename ___TTT___::cast(value);
+	return typename ___TTT___::___cast___(value);
 }
 */
 #ifdef STRANGE_CHECK_STATIC_CASTS

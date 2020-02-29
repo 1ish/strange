@@ -225,7 +225,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle));
 	}
 
-	static inline symbol_a cast(any_a<> const& thing)
+	static inline symbol_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___symbol_a_handle_base___>(thing.___handle___);
 		if (ptr)
@@ -446,7 +446,7 @@ public:
 		{
 			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<symbol_d*>(this));
+		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<symbol_d*>(this)));
 	}
 
 	inline std :: string const & to_string() const
@@ -477,7 +477,7 @@ public:
 		{
 			throw dis("dynamic symbol_d::add_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<symbol_d*>(this), symbol);
+		return cast<symbol_a<>>(variadic_operate(op, *const_cast<symbol_d*>(this), symbol));
 	}
 
 	inline symbol_a < > operator+(symbol_a < > const & symbol ) const

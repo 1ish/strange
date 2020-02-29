@@ -197,7 +197,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___range_a_handle_base___>(handle));
 	}
 
-	static inline range_a cast(any_a<> const& thing)
+	static inline range_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___range_a_handle_base___>(thing.___handle___);
 		if (ptr)
@@ -418,7 +418,7 @@ public:
 		{
 			throw dis("dynamic range_d::cbegin_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<range_d*>(this));
+		return cast<forward_const_iterator_a<>>(variadic_operate(op, *const_cast<range_d*>(this)));
 	}
 
 	inline any_a<> cend__(range_a<> const& range) const
@@ -440,7 +440,7 @@ public:
 		{
 			throw dis("dynamic range_d::cend_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<range_d*>(this));
+		return cast<forward_const_iterator_a<>>(variadic_operate(op, *const_cast<range_d*>(this)));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

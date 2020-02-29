@@ -183,7 +183,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___parser_a_handle_base___>(handle));
 	}
 
-	static inline parser_a cast(any_a<> const& thing)
+	static inline parser_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___parser_a_handle_base___>(thing.___handle___);
 		if (ptr)
@@ -404,7 +404,7 @@ public:
 		{
 			throw dis("dynamic parser_d::parse_ passed non-existent member");
 		}
-		return variadic_operate(op, *this, tokenizer);
+		return cast<expression_a<>>(variadic_operate(op, *this, tokenizer));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

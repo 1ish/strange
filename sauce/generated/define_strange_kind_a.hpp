@@ -246,7 +246,7 @@ public:
 		return bool(std::dynamic_pointer_cast<___kind_a_handle_base___>(handle));
 	}
 
-	static inline kind_a cast(any_a<> const& thing)
+	static inline kind_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___kind_a_handle_base___>(thing.___handle___);
 		if (ptr)
@@ -467,7 +467,7 @@ public:
 		{
 			throw dis("dynamic kind_d::aspects_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<kind_d*>(this));
+		return cast<flock_a<>>(variadic_operate(op, *const_cast<kind_d*>(this)));
 	}
 
 	inline any_a<> fixed__(range_a<> const& range) const
@@ -489,7 +489,7 @@ public:
 		{
 			throw dis("dynamic kind_d::fixed_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<kind_d*>(this));
+		return cast<any_a<>>(variadic_operate(op, *const_cast<kind_d*>(this)));
 	}
 
 	inline bool fixed() const
@@ -514,7 +514,7 @@ public:
 		{
 			throw dis("dynamic kind_d::reference_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<kind_d*>(this));
+		return cast<any_a<>>(variadic_operate(op, *const_cast<kind_d*>(this)));
 	}
 
 	inline bool reference() const
@@ -539,7 +539,7 @@ public:
 		{
 			throw dis("dynamic kind_d::optional_ passed non-existent member");
 		}
-		return variadic_operate(op, *const_cast<kind_d*>(this));
+		return cast<any_a<>>(variadic_operate(op, *const_cast<kind_d*>(this)));
 	}
 
 	inline bool optional() const
