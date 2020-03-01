@@ -651,20 +651,10 @@ public:
 
 	virtual ~any_a() = default;
 
-	explicit inline any_a(___SHARED___ const& handle) noexcept
-		: ___shared___{ handle }
-		, ___handle___{ ___shared___ }
-	{}
-
 	template <typename ___TTT___>
 	explicit inline any_a(std::shared_ptr<___TTT___> const& handle) noexcept
 		: ___shared___{ handle }
 		, ___handle___{ ___shared___ }
-	{}
-
-	explicit inline any_a(___SHARED___& handle, ___reference_tag___) noexcept
-		: ___shared___{ ___SHARED___{} }
-		, ___handle___{ reinterpret_cast<___SHARED___&>(handle) }
 	{}
 
 	template <typename ___TTT___>
@@ -703,7 +693,7 @@ public:
 
 	static inline any_a<> ___cast_ref___(any_a<>& thing)
 	{
-		return any_a<>{ thing, ___reference_tag___{} };
+		return any_a<>(thing, ___reference_tag___{});
 	}
 
 private:

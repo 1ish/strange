@@ -537,14 +537,6 @@ public:
 		: range_a(other, ___duplicate_tag___{})
 	{}
 
-	explicit inline collection_a(std::shared_ptr<___collection_a_handle_base___> const& handle) noexcept
-		: range_a{ handle }
-	{}
-
-	explicit inline collection_a(std::shared_ptr<___collection_a_handle_base___>& handle, ___reference_tag___) noexcept
-		: range_a(handle, ___reference_tag___{})
-	{}
-
 	template <typename ___TTT___>
 	explicit inline collection_a(std::shared_ptr<___TTT___> const& handle) noexcept
 		: range_a{ handle }
@@ -558,10 +550,6 @@ public:
 	{
 		assert(!handle || std::dynamic_pointer_cast<___collection_a_handle_base___>(handle));
 	}
-/*
-#endif
-
-*/
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<collection_a, std::decay_t<___TTT___>>::value>>
 	explicit inline collection_a(___TTT___ value) noexcept
 		: range_a{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
@@ -602,7 +590,7 @@ public:
 		{
 			return collection_a(ptr, ___reference_tag___{});
 		}
-		return collection_a{ collection_d<number_data_int64_a>{ thing, ___reference_tag___{} } };
+		return collection_a{ collection_d<number_data_int64_a>(thing, ___reference_tag___{}) };
 	}
 
 private:

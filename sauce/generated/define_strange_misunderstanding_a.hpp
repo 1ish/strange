@@ -222,14 +222,6 @@ public:
 		: any_a(other, ___duplicate_tag___{})
 	{}
 
-	explicit inline misunderstanding_a(std::shared_ptr<___misunderstanding_a_handle_base___> const& handle) noexcept
-		: any_a{ handle }
-	{}
-
-	explicit inline misunderstanding_a(std::shared_ptr<___misunderstanding_a_handle_base___>& handle, ___reference_tag___) noexcept
-		: any_a(handle, ___reference_tag___{})
-	{}
-
 	template <typename ___TTT___>
 	explicit inline misunderstanding_a(std::shared_ptr<___TTT___> const& handle) noexcept
 		: any_a{ handle }
@@ -243,10 +235,6 @@ public:
 	{
 		assert(!handle || std::dynamic_pointer_cast<___misunderstanding_a_handle_base___>(handle));
 	}
-/*
-#endif
-
-*/
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<misunderstanding_a, std::decay_t<___TTT___>>::value>>
 	explicit inline misunderstanding_a(___TTT___ value) noexcept
 		: any_a{ std::make_shared<___misunderstanding_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
@@ -287,7 +275,7 @@ public:
 		{
 			return misunderstanding_a(ptr, ___reference_tag___{});
 		}
-		return misunderstanding_a{ misunderstanding_d<_1_>{ thing, ___reference_tag___{} } };
+		return misunderstanding_a{ misunderstanding_d<_1_>(thing, ___reference_tag___{}) };
 	}
 
 private:

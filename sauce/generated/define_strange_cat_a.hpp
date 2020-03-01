@@ -313,14 +313,6 @@ public:
 		: symbol_a(other, ___duplicate_tag___{})
 	{}
 
-	explicit inline cat_a(std::shared_ptr<___cat_a_handle_base___> const& handle) noexcept
-		: symbol_a{ handle }
-	{}
-
-	explicit inline cat_a(std::shared_ptr<___cat_a_handle_base___>& handle, ___reference_tag___) noexcept
-		: symbol_a(handle, ___reference_tag___{})
-	{}
-
 	template <typename ___TTT___>
 	explicit inline cat_a(std::shared_ptr<___TTT___> const& handle) noexcept
 		: symbol_a{ handle }
@@ -334,10 +326,6 @@ public:
 	{
 		assert(!handle || std::dynamic_pointer_cast<___cat_a_handle_base___>(handle));
 	}
-/*
-#endif
-
-*/
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<cat_a, std::decay_t<___TTT___>>::value>>
 	explicit inline cat_a(___TTT___ value) noexcept
 		: symbol_a{ std::make_shared<___cat_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
@@ -378,7 +366,7 @@ public:
 		{
 			return cat_a(ptr, ___reference_tag___{});
 		}
-		return cat_a{ cat_d<_1_>{ thing, ___reference_tag___{} } };
+		return cat_a{ cat_d<_1_>(thing, ___reference_tag___{}) };
 	}
 
 private:

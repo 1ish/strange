@@ -1325,20 +1325,10 @@ protected:
 
 				"\tvirtual ~" + class_name + "() = default;\n\n"
 
-				"\texplicit inline " + class_name + "(___SHARED___ const& handle) noexcept\n"
-				"\t\t: ___shared___{ handle }\n"
-				"\t\t, ___handle___{ ___shared___ }\n"
-				"\t{}\n\n"
-
 				"\ttemplate <typename ___TTT___>\n"
 				"\texplicit inline " + class_name + "(std::shared_ptr<___TTT___> const& handle) noexcept\n"
 				"\t\t: ___shared___{ handle }\n"
 				"\t\t, ___handle___{ ___shared___ }\n"
-				"\t{}\n\n"
-
-				"\texplicit inline " + class_name + "(___SHARED___& handle, ___reference_tag___) noexcept\n"
-				"\t\t: ___shared___{ ___SHARED___{} }\n"
-				"\t\t, ___handle___{ reinterpret_cast<___SHARED___&>(handle) }\n"
 				"\t{}\n\n"
 
 				"\ttemplate <typename ___TTT___>\n"
@@ -1379,15 +1369,8 @@ protected:
 			river.write_string(
 				"\tstatic inline any_a<> ___cast_ref___(any_a<>& thing)\n"
 				"\t{\n"
-				"\t\treturn any_a<>{ thing, ___reference_tag___{} };\n"
+				"\t\treturn any_a<>(thing, ___reference_tag___{});\n"
 				"\t}\n\n");
-			/*
-			river.write_string(
-				"\tstatic inline any_a<> ___cast_dup___(any_a<> const& thing)\n"
-				"\t{\n"
-				"\t\treturn any_a<>{ thing, ___duplicate_tag___{} };\n"
-				"\t}\n\n");
-			*/
 		}
 		else
 		{
@@ -1400,14 +1383,6 @@ protected:
 
 				"\tinline " + class_name + "(" + class_name + "& other, ___duplicate_tag___) noexcept\n"
 				"\t\t: " + base_name + "(other, ___duplicate_tag___{})\n"
-				"\t{}\n\n"
-
-				"\texplicit inline " + class_name + "(std::shared_ptr<___" + class_name + "_handle_base___> const& handle) noexcept\n"
-				"\t\t: " + base_name + "{ handle }\n"
-				"\t{}\n\n"
-
-				"\texplicit inline " + class_name + "(std::shared_ptr<___" + class_name + "_handle_base___>& handle, ___reference_tag___) noexcept\n"
-				"\t\t: " + base_name + "(handle, ___reference_tag___{})\n"
 				"\t{}\n\n"
 
 				"\ttemplate <typename ___TTT___>\n"
@@ -1423,9 +1398,6 @@ protected:
 				"\t{\n"
 				"\t\tassert(!handle || std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n"
 				"\t}\n"
-				"/*\n"
-				"#endif\n\n"
-				"*/\n"
 
 				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
 				"\texplicit inline " + class_name + "(___TTT___ value) noexcept\n"
@@ -1473,22 +1445,8 @@ protected:
 				"\t\t}\n"
 				"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
 			_declare_or_define_template_(version, 0, river, false, false);
-			river.write_string("{ thing, ___reference_tag___{} } };\n" //TODO
+			river.write_string("(thing, ___reference_tag___{}) };\n"
 				"\t}\n\n");
-			/*
-						river.write_string(
-							"\tstatic inline " + class_name + " ___cast_dup___(any_a<> const& thing)\n"
-							"\t{\n"
-							"\t\tauto const ptr = std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.___handle___);\n"
-							"\t\tif (ptr)\n"
-							"\t\t{\n"
-							"\t\t\treturn " + class_name + "(ptr, ___duplicate_tag___{});\n"
-							"\t\t}\n"
-							"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
-						_declare_or_define_template_(version, 0, river, false, false);
-						river.write_string("{ thing, ___duplicate_tag___{} } };\n" //TODO
-							"\t}\n\n");
-			*/
 		}
 
 		river.write_string(
