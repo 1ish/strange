@@ -249,7 +249,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___ordered_shoal_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return ordered_shoal_a{ ptr };
+			return ordered_shoal_a{ thing.___handle___ };
 		}
 		return ordered_shoal_a{ ordered_shoal_d<_1_>{ thing } };
 	}
@@ -259,7 +259,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___ordered_shoal_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return ordered_shoal_a(ptr, ___reference_tag___{});
+			return ordered_shoal_a(thing.___handle___, ___reference_tag___{});
 		}
 		return ordered_shoal_a{ ordered_shoal_d<_1_>(thing, ___reference_tag___{}) };
 	}

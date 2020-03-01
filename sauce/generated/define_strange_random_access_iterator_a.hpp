@@ -389,7 +389,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___random_access_iterator_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return random_access_iterator_a{ ptr };
+			return random_access_iterator_a{ thing.___handle___ };
 		}
 		return random_access_iterator_a{ random_access_iterator_d<_1_>{ thing } };
 	}
@@ -399,7 +399,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___random_access_iterator_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return random_access_iterator_a(ptr, ___reference_tag___{});
+			return random_access_iterator_a(thing.___handle___, ___reference_tag___{});
 		}
 		return random_access_iterator_a{ random_access_iterator_d<_1_>(thing, ___reference_tag___{}) };
 	}

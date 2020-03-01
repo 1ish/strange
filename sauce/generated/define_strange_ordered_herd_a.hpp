@@ -249,7 +249,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___ordered_herd_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return ordered_herd_a{ ptr };
+			return ordered_herd_a{ thing.___handle___ };
 		}
 		return ordered_herd_a{ ordered_herd_d<_1_>{ thing } };
 	}
@@ -259,7 +259,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___ordered_herd_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return ordered_herd_a(ptr, ___reference_tag___{});
+			return ordered_herd_a(thing.___handle___, ___reference_tag___{});
 		}
 		return ordered_herd_a{ ordered_herd_d<_1_>(thing, ___reference_tag___{}) };
 	}

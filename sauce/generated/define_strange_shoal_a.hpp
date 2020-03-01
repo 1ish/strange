@@ -298,7 +298,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___shoal_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return shoal_a{ ptr };
+			return shoal_a{ thing.___handle___ };
 		}
 		return shoal_a{ shoal_d<_1_>{ thing } };
 	}
@@ -308,7 +308,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___shoal_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return shoal_a(ptr, ___reference_tag___{});
+			return shoal_a(thing.___handle___, ___reference_tag___{});
 		}
 		return shoal_a{ shoal_d<_1_>(thing, ___reference_tag___{}) };
 	}

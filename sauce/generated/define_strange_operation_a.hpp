@@ -284,7 +284,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___operation_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return operation_a{ ptr };
+			return operation_a{ thing.___handle___ };
 		}
 		return operation_a{ operation_d<_1_>{ thing } };
 	}
@@ -294,7 +294,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___operation_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return operation_a(ptr, ___reference_tag___{});
+			return operation_a(thing.___handle___, ___reference_tag___{});
 		}
 		return operation_a{ operation_d<_1_>(thing, ___reference_tag___{}) };
 	}

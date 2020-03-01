@@ -396,7 +396,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___token_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return token_a{ ptr };
+			return token_a{ thing.___handle___ };
 		}
 		return token_a{ token_d<_1_>{ thing } };
 	}
@@ -406,7 +406,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___token_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return token_a(ptr, ___reference_tag___{});
+			return token_a(thing.___handle___, ___reference_tag___{});
 		}
 		return token_a{ token_d<_1_>(thing, ___reference_tag___{}) };
 	}

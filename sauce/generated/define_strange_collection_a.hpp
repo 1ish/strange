@@ -578,7 +578,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___collection_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return collection_a{ ptr };
+			return collection_a{ thing.___handle___ };
 		}
 		return collection_a{ collection_d<number_data_int64_a>{ thing } };
 	}
@@ -588,7 +588,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___collection_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return collection_a(ptr, ___reference_tag___{});
+			return collection_a(thing.___handle___, ___reference_tag___{});
 		}
 		return collection_a{ collection_d<number_data_int64_a>(thing, ___reference_tag___{}) };
 	}

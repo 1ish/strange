@@ -298,7 +298,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___inventory_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return inventory_a{ ptr };
+			return inventory_a{ thing.___handle___ };
 		}
 		return inventory_a{ inventory_d<_1_>{ thing } };
 	}
@@ -308,7 +308,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___inventory_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return inventory_a(ptr, ___reference_tag___{});
+			return inventory_a(thing.___handle___, ___reference_tag___{});
 		}
 		return inventory_a{ inventory_d<_1_>(thing, ___reference_tag___{}) };
 	}

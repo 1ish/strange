@@ -249,7 +249,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___parser_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return parser_a{ ptr };
+			return parser_a{ thing.___handle___ };
 		}
 		return parser_a{ parser_d<_1_>{ thing } };
 	}
@@ -259,7 +259,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___parser_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return parser_a(ptr, ___reference_tag___{});
+			return parser_a(thing.___handle___, ___reference_tag___{});
 		}
 		return parser_a{ parser_d<_1_>(thing, ___reference_tag___{}) };
 	}

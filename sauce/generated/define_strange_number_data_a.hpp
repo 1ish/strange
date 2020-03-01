@@ -249,7 +249,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___number_data_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return number_data_a{ ptr };
+			return number_data_a{ thing.___handle___ };
 		}
 		return number_data_a{ number_data_d<_1_>{ thing } };
 	}
@@ -259,7 +259,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___number_data_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return number_data_a(ptr, ___reference_tag___{});
+			return number_data_a(thing.___handle___, ___reference_tag___{});
 		}
 		return number_data_a{ number_data_d<_1_>(thing, ___reference_tag___{}) };
 	}

@@ -263,7 +263,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___range_of_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return range_of_a{ ptr };
+			return range_of_a{ thing.___handle___ };
 		}
 		return range_of_a{ range_of_d<element>{ thing } };
 	}
@@ -273,7 +273,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___range_of_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return range_of_a(ptr, ___reference_tag___{});
+			return range_of_a(thing.___handle___, ___reference_tag___{});
 		}
 		return range_of_a{ range_of_d<element>(thing, ___reference_tag___{}) };
 	}

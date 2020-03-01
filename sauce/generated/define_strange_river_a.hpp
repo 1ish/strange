@@ -844,7 +844,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___river_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return river_a{ ptr };
+			return river_a{ thing.___handle___ };
 		}
 		return river_a{ river_d<_1_>{ thing } };
 	}
@@ -854,7 +854,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___river_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return river_a(ptr, ___reference_tag___{});
+			return river_a(thing.___handle___, ___reference_tag___{});
 		}
 		return river_a{ river_d<_1_>(thing, ___reference_tag___{}) };
 	}

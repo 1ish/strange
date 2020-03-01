@@ -1428,7 +1428,7 @@ protected:
 				"\t\tauto const ptr = std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.___handle___);\n"
 				"\t\tif (ptr)\n"
 				"\t\t{\n"
-				"\t\t\treturn " + class_name + "{ ptr };\n"
+				"\t\t\treturn " + class_name + "{ thing.___handle___ };\n"
 				"\t\t}\n"
 				"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
 			_declare_or_define_template_(version, 0, river, false, false);
@@ -1441,7 +1441,7 @@ protected:
 				"\t\tauto const ptr = std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.___handle___);\n"
 				"\t\tif (ptr)\n"
 				"\t\t{\n"
-				"\t\t\treturn " + class_name + "(ptr, ___reference_tag___{});\n"
+				"\t\t\treturn " + class_name + "(thing.___handle___, ___reference_tag___{});\n"
 				"\t\t}\n"
 				"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
 			_declare_or_define_template_(version, 0, river, false, false);

@@ -277,7 +277,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___forward_const_iterator_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return forward_const_iterator_a{ ptr };
+			return forward_const_iterator_a{ thing.___handle___ };
 		}
 		return forward_const_iterator_a{ forward_const_iterator_d<_1_>{ thing } };
 	}
@@ -287,7 +287,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___forward_const_iterator_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return forward_const_iterator_a(ptr, ___reference_tag___{});
+			return forward_const_iterator_a(thing.___handle___, ___reference_tag___{});
 		}
 		return forward_const_iterator_a{ forward_const_iterator_d<_1_>(thing, ___reference_tag___{}) };
 	}

@@ -361,7 +361,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return expression_a{ ptr };
+			return expression_a{ thing.___handle___ };
 		}
 		return expression_a{ expression_d<_1_>{ thing } };
 	}
@@ -371,7 +371,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return expression_a(ptr, ___reference_tag___{});
+			return expression_a(thing.___handle___, ___reference_tag___{});
 		}
 		return expression_a{ expression_d<_1_>(thing, ___reference_tag___{}) };
 	}

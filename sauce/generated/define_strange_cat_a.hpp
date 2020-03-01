@@ -354,7 +354,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___cat_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return cat_a{ ptr };
+			return cat_a{ thing.___handle___ };
 		}
 		return cat_a{ cat_d<_1_>{ thing } };
 	}
@@ -364,7 +364,7 @@ public:
 		auto const ptr = std::dynamic_pointer_cast<___cat_a_handle_base___>(thing.___handle___);
 		if (ptr)
 		{
-			return cat_a(ptr, ___reference_tag___{});
+			return cat_a(thing.___handle___, ___reference_tag___{});
 		}
 		return cat_a{ cat_d<_1_>(thing, ___reference_tag___{}) };
 	}
