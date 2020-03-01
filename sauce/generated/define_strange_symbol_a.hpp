@@ -235,6 +235,26 @@ public:
 		return symbol_a{ symbol_d<_1_>{ thing } };
 	}
 
+	static inline symbol_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___symbol_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return symbol_a{ ptr, ___reference_tag___{} };
+		}
+		return symbol_a{ symbol_d<_1_>{ thing } };
+	}
+
+	static inline symbol_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___symbol_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return symbol_a{ ptr, ___duplicate_tag___{} };
+		}
+		return symbol_a{ symbol_d<_1_>{ thing } };
+	}
+
 	static inline symbol_a val(symbol_a const& other) noexcept
 	{
 		return symbol_a{ other };

@@ -207,6 +207,26 @@ public:
 		return misunderstanding_a{ misunderstanding_d<_1_>{ thing } };
 	}
 
+	static inline misunderstanding_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___misunderstanding_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return misunderstanding_a{ ptr, ___reference_tag___{} };
+		}
+		return misunderstanding_a{ misunderstanding_d<_1_>{ thing } };
+	}
+
+	static inline misunderstanding_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___misunderstanding_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return misunderstanding_a{ ptr, ___duplicate_tag___{} };
+		}
+		return misunderstanding_a{ misunderstanding_d<_1_>{ thing } };
+	}
+
 	static inline misunderstanding_a val(misunderstanding_a const& other) noexcept
 	{
 		return misunderstanding_a{ other };

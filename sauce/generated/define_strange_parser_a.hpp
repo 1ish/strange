@@ -193,6 +193,26 @@ public:
 		return parser_a{ parser_d<_1_>{ thing } };
 	}
 
+	static inline parser_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___parser_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return parser_a{ ptr, ___reference_tag___{} };
+		}
+		return parser_a{ parser_d<_1_>{ thing } };
+	}
+
+	static inline parser_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___parser_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return parser_a{ ptr, ___duplicate_tag___{} };
+		}
+		return parser_a{ parser_d<_1_>{ thing } };
+	}
+
 	static inline parser_a val(parser_a const& other) noexcept
 	{
 		return parser_a{ other };

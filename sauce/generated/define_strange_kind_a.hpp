@@ -256,6 +256,26 @@ public:
 		return kind_a{ kind_d<_1_>{ thing } };
 	}
 
+	static inline kind_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___kind_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return kind_a{ ptr, ___reference_tag___{} };
+		}
+		return kind_a{ kind_d<_1_>{ thing } };
+	}
+
+	static inline kind_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___kind_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return kind_a{ ptr, ___duplicate_tag___{} };
+		}
+		return kind_a{ kind_d<_1_>{ thing } };
+	}
+
 	static inline kind_a val(kind_a const& other) noexcept
 	{
 		return kind_a{ other };

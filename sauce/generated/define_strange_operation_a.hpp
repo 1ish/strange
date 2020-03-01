@@ -228,6 +228,26 @@ public:
 		return operation_a{ operation_d<_1_>{ thing } };
 	}
 
+	static inline operation_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___operation_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return operation_a{ ptr, ___reference_tag___{} };
+		}
+		return operation_a{ operation_d<_1_>{ thing } };
+	}
+
+	static inline operation_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___operation_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return operation_a{ ptr, ___duplicate_tag___{} };
+		}
+		return operation_a{ operation_d<_1_>{ thing } };
+	}
+
 	static inline operation_a val(operation_a const& other) noexcept
 	{
 		return operation_a{ other };

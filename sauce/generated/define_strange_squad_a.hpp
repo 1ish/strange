@@ -193,6 +193,26 @@ public:
 		return squad_a{ squad_d<_1_>{ thing } };
 	}
 
+	static inline squad_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___squad_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return squad_a{ ptr, ___reference_tag___{} };
+		}
+		return squad_a{ squad_d<_1_>{ thing } };
+	}
+
+	static inline squad_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___squad_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return squad_a{ ptr, ___duplicate_tag___{} };
+		}
+		return squad_a{ squad_d<_1_>{ thing } };
+	}
+
 	static inline squad_a val(squad_a const& other) noexcept
 	{
 		return squad_a{ other };

@@ -333,6 +333,26 @@ public:
 		return random_access_iterator_a{ random_access_iterator_d<_1_>{ thing } };
 	}
 
+	static inline random_access_iterator_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___random_access_iterator_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return random_access_iterator_a{ ptr, ___reference_tag___{} };
+		}
+		return random_access_iterator_a{ random_access_iterator_d<_1_>{ thing } };
+	}
+
+	static inline random_access_iterator_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___random_access_iterator_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return random_access_iterator_a{ ptr, ___duplicate_tag___{} };
+		}
+		return random_access_iterator_a{ random_access_iterator_d<_1_>{ thing } };
+	}
+
 	static inline random_access_iterator_a val(random_access_iterator_a const& other) noexcept
 	{
 		return random_access_iterator_a{ other };

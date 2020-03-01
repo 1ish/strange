@@ -242,6 +242,26 @@ public:
 		return inventory_a{ inventory_d<_1_>{ thing } };
 	}
 
+	static inline inventory_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___inventory_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return inventory_a{ ptr, ___reference_tag___{} };
+		}
+		return inventory_a{ inventory_d<_1_>{ thing } };
+	}
+
+	static inline inventory_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___inventory_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return inventory_a{ ptr, ___duplicate_tag___{} };
+		}
+		return inventory_a{ inventory_d<_1_>{ thing } };
+	}
+
 	static inline inventory_a val(inventory_a const& other) noexcept
 	{
 		return inventory_a{ other };

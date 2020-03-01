@@ -193,6 +193,26 @@ public:
 		return bidirectional_const_iterator_a{ bidirectional_const_iterator_d<_1_>{ thing } };
 	}
 
+	static inline bidirectional_const_iterator_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___bidirectional_const_iterator_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return bidirectional_const_iterator_a{ ptr, ___reference_tag___{} };
+		}
+		return bidirectional_const_iterator_a{ bidirectional_const_iterator_d<_1_>{ thing } };
+	}
+
+	static inline bidirectional_const_iterator_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___bidirectional_const_iterator_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return bidirectional_const_iterator_a{ ptr, ___duplicate_tag___{} };
+		}
+		return bidirectional_const_iterator_a{ bidirectional_const_iterator_d<_1_>{ thing } };
+	}
+
 	static inline bidirectional_const_iterator_a val(bidirectional_const_iterator_a const& other) noexcept
 	{
 		return bidirectional_const_iterator_a{ other };

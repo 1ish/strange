@@ -228,6 +228,26 @@ public:
 		return herd_a{ herd_d<_1_>{ thing } };
 	}
 
+	static inline herd_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___herd_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return herd_a{ ptr, ___reference_tag___{} };
+		}
+		return herd_a{ herd_d<_1_>{ thing } };
+	}
+
+	static inline herd_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___herd_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return herd_a{ ptr, ___duplicate_tag___{} };
+		}
+		return herd_a{ herd_d<_1_>{ thing } };
+	}
+
 	static inline herd_a val(herd_a const& other) noexcept
 	{
 		return herd_a{ other };

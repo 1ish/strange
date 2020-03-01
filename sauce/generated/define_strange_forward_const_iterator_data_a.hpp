@@ -193,6 +193,26 @@ public:
 		return forward_const_iterator_data_a{ forward_const_iterator_data_d<_1_>{ thing } };
 	}
 
+	static inline forward_const_iterator_data_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___forward_const_iterator_data_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return forward_const_iterator_data_a{ ptr, ___reference_tag___{} };
+		}
+		return forward_const_iterator_data_a{ forward_const_iterator_data_d<_1_>{ thing } };
+	}
+
+	static inline forward_const_iterator_data_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___forward_const_iterator_data_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return forward_const_iterator_data_a{ ptr, ___duplicate_tag___{} };
+		}
+		return forward_const_iterator_data_a{ forward_const_iterator_data_d<_1_>{ thing } };
+	}
+
 	static inline forward_const_iterator_data_a val(forward_const_iterator_data_a const& other) noexcept
 	{
 		return forward_const_iterator_data_a{ other };

@@ -1274,6 +1274,18 @@ protected:
 				"\t{\n"
 				"\t\treturn thing;\n"
 				"\t}\n\n");
+
+			river.write_string(
+				"\tstatic inline any_a<> ___cast_ref___(any_a<> const& thing)\n"
+				"\t{\n"
+				"\t\treturn any_a<>{ thing, ___reference_tag___{} };\n"
+				"\t}\n\n");
+
+			river.write_string(
+				"\tstatic inline any_a<> ___cast_dup___(any_a<> const& thing)\n"
+				"\t{\n"
+				"\t\treturn any_a<>{ thing, ___duplicate_tag___{} };\n"
+				"\t}\n\n");
 		}
 		else
 		{
@@ -1288,6 +1300,32 @@ protected:
 				"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
 			_declare_or_define_template_(version, 0, river, false, false);
 			river.write_string("{ thing } };\n"
+				"\t}\n\n");
+
+			river.write_string(
+				"\tstatic inline " + class_name + " ___cast_ref___(any_a<> const& thing)\n"
+				"\t{\n"
+				"\t\tauto const ptr = std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.___handle___);\n"
+				"\t\tif (ptr)\n"
+				"\t\t{\n"
+				"\t\t\treturn " + class_name + "{ ptr, ___reference_tag___{} };\n"
+				"\t\t}\n"
+				"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
+			_declare_or_define_template_(version, 0, river, false, false);
+			river.write_string("{ thing } };\n" //TODO
+				"\t}\n\n");
+
+			river.write_string(
+				"\tstatic inline " + class_name + " ___cast_dup___(any_a<> const& thing)\n"
+				"\t{\n"
+				"\t\tauto const ptr = std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.___handle___);\n"
+				"\t\tif (ptr)\n"
+				"\t\t{\n"
+				"\t\t\treturn " + class_name + "{ ptr, ___duplicate_tag___{} };\n"
+				"\t\t}\n"
+				"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
+			_declare_or_define_template_(version, 0, river, false, false);
+			river.write_string("{ thing } };\n" //TODO
 				"\t}\n\n");
 		}
 

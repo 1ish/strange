@@ -615,6 +615,16 @@ public:
 		return thing;
 	}
 
+	static inline any_a<> ___cast_ref___(any_a<> const& thing)
+	{
+		return any_a<>{ thing, ___reference_tag___{} };
+	}
+
+	static inline any_a<> ___cast_dup___(any_a<> const& thing)
+	{
+		return any_a<>{ thing, ___duplicate_tag___{} };
+	}
+
 	static inline any_a val(any_a const& other) noexcept
 	{
 		return any_a{ other };

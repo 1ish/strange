@@ -193,6 +193,26 @@ public:
 		return data_a{ data_d<_1_>{ thing } };
 	}
 
+	static inline data_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___data_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return data_a{ ptr, ___reference_tag___{} };
+		}
+		return data_a{ data_d<_1_>{ thing } };
+	}
+
+	static inline data_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___data_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return data_a{ ptr, ___duplicate_tag___{} };
+		}
+		return data_a{ data_d<_1_>{ thing } };
+	}
+
 	static inline data_a val(data_a const& other) noexcept
 	{
 		return data_a{ other };

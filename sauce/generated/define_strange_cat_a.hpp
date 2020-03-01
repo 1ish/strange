@@ -298,6 +298,26 @@ public:
 		return cat_a{ cat_d<_1_>{ thing } };
 	}
 
+	static inline cat_a ___cast_ref___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___cat_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return cat_a{ ptr, ___reference_tag___{} };
+		}
+		return cat_a{ cat_d<_1_>{ thing } };
+	}
+
+	static inline cat_a ___cast_dup___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___cat_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return cat_a{ ptr, ___duplicate_tag___{} };
+		}
+		return cat_a{ cat_d<_1_>{ thing } };
+	}
+
 	static inline cat_a val(cat_a const& other) noexcept
 	{
 		return cat_a{ other };
