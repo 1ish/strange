@@ -795,7 +795,7 @@ public:
 		{
 			return river_a{ ptr, ___reference_tag___{} };
 		}
-		return river_a{ river_d<_1_>{ thing } };
+		return river_a{ river_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline river_a ___cast_dup___(any_a<> const& thing)
@@ -805,7 +805,7 @@ public:
 		{
 			return river_a{ ptr, ___duplicate_tag___{} };
 		}
-		return river_a{ river_d<_1_>{ thing } };
+		return river_a{ river_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline river_a val(river_a const& other) noexcept

@@ -200,7 +200,7 @@ public:
 		{
 			return parser_a{ ptr, ___reference_tag___{} };
 		}
-		return parser_a{ parser_d<_1_>{ thing } };
+		return parser_a{ parser_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline parser_a ___cast_dup___(any_a<> const& thing)
@@ -210,7 +210,7 @@ public:
 		{
 			return parser_a{ ptr, ___duplicate_tag___{} };
 		}
-		return parser_a{ parser_d<_1_>{ thing } };
+		return parser_a{ parser_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline parser_a val(parser_a const& other) noexcept

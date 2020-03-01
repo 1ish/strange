@@ -242,7 +242,7 @@ public:
 		{
 			return symbol_a{ ptr, ___reference_tag___{} };
 		}
-		return symbol_a{ symbol_d<_1_>{ thing } };
+		return symbol_a{ symbol_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline symbol_a ___cast_dup___(any_a<> const& thing)
@@ -252,7 +252,7 @@ public:
 		{
 			return symbol_a{ ptr, ___duplicate_tag___{} };
 		}
-		return symbol_a{ symbol_d<_1_>{ thing } };
+		return symbol_a{ symbol_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline symbol_a val(symbol_a const& other) noexcept

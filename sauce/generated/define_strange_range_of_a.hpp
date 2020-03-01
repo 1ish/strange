@@ -214,7 +214,7 @@ public:
 		{
 			return range_of_a{ ptr, ___reference_tag___{} };
 		}
-		return range_of_a{ range_of_d<element>{ thing } };
+		return range_of_a{ range_of_d<element>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline range_of_a ___cast_dup___(any_a<> const& thing)
@@ -224,7 +224,7 @@ public:
 		{
 			return range_of_a{ ptr, ___duplicate_tag___{} };
 		}
-		return range_of_a{ range_of_d<element>{ thing } };
+		return range_of_a{ range_of_d<element>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline range_of_a val(range_of_a const& other) noexcept

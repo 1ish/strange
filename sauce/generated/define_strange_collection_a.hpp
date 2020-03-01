@@ -529,7 +529,7 @@ public:
 		{
 			return collection_a{ ptr, ___reference_tag___{} };
 		}
-		return collection_a{ collection_d<number_data_int64_a>{ thing } };
+		return collection_a{ collection_d<number_data_int64_a>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline collection_a ___cast_dup___(any_a<> const& thing)
@@ -539,7 +539,7 @@ public:
 		{
 			return collection_a{ ptr, ___duplicate_tag___{} };
 		}
-		return collection_a{ collection_d<number_data_int64_a>{ thing } };
+		return collection_a{ collection_d<number_data_int64_a>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline collection_a val(collection_a const& other) noexcept

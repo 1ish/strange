@@ -200,7 +200,7 @@ public:
 		{
 			return squad_a{ ptr, ___reference_tag___{} };
 		}
-		return squad_a{ squad_d<_1_>{ thing } };
+		return squad_a{ squad_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline squad_a ___cast_dup___(any_a<> const& thing)
@@ -210,7 +210,7 @@ public:
 		{
 			return squad_a{ ptr, ___duplicate_tag___{} };
 		}
-		return squad_a{ squad_d<_1_>{ thing } };
+		return squad_a{ squad_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline squad_a val(squad_a const& other) noexcept

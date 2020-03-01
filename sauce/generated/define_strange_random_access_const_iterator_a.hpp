@@ -340,7 +340,7 @@ public:
 		{
 			return random_access_const_iterator_a{ ptr, ___reference_tag___{} };
 		}
-		return random_access_const_iterator_a{ random_access_const_iterator_d<_1_>{ thing } };
+		return random_access_const_iterator_a{ random_access_const_iterator_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline random_access_const_iterator_a ___cast_dup___(any_a<> const& thing)
@@ -350,7 +350,7 @@ public:
 		{
 			return random_access_const_iterator_a{ ptr, ___duplicate_tag___{} };
 		}
-		return random_access_const_iterator_a{ random_access_const_iterator_d<_1_>{ thing } };
+		return random_access_const_iterator_a{ random_access_const_iterator_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline random_access_const_iterator_a val(random_access_const_iterator_a const& other) noexcept

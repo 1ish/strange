@@ -305,7 +305,7 @@ public:
 		{
 			return cat_a{ ptr, ___reference_tag___{} };
 		}
-		return cat_a{ cat_d<_1_>{ thing } };
+		return cat_a{ cat_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline cat_a ___cast_dup___(any_a<> const& thing)
@@ -315,7 +315,7 @@ public:
 		{
 			return cat_a{ ptr, ___duplicate_tag___{} };
 		}
-		return cat_a{ cat_d<_1_>{ thing } };
+		return cat_a{ cat_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline cat_a val(cat_a const& other) noexcept

@@ -1322,7 +1322,7 @@ protected:
 				"\t\t}\n"
 				"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
 			_declare_or_define_template_(version, 0, river, false, false);
-			river.write_string("{ thing } };\n" //TODO
+			river.write_string("{ thing, ___reference_tag___{} } };\n" //TODO
 				"\t}\n\n");
 
 			river.write_string(
@@ -1335,7 +1335,7 @@ protected:
 				"\t\t}\n"
 				"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
 			_declare_or_define_template_(version, 0, river, false, false);
-			river.write_string("{ thing } };\n" //TODO
+			river.write_string("{ thing, ___duplicate_tag___{} } };\n" //TODO
 				"\t}\n\n");
 		}
 

@@ -347,7 +347,7 @@ public:
 		{
 			return token_a{ ptr, ___reference_tag___{} };
 		}
-		return token_a{ token_d<_1_>{ thing } };
+		return token_a{ token_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline token_a ___cast_dup___(any_a<> const& thing)
@@ -357,7 +357,7 @@ public:
 		{
 			return token_a{ ptr, ___duplicate_tag___{} };
 		}
-		return token_a{ token_d<_1_>{ thing } };
+		return token_a{ token_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline token_a val(token_a const& other) noexcept

@@ -200,7 +200,7 @@ public:
 		{
 			return forward_const_iterator_data_a{ ptr, ___reference_tag___{} };
 		}
-		return forward_const_iterator_data_a{ forward_const_iterator_data_d<_1_>{ thing } };
+		return forward_const_iterator_data_a{ forward_const_iterator_data_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline forward_const_iterator_data_a ___cast_dup___(any_a<> const& thing)
@@ -210,7 +210,7 @@ public:
 		{
 			return forward_const_iterator_data_a{ ptr, ___duplicate_tag___{} };
 		}
-		return forward_const_iterator_data_a{ forward_const_iterator_data_d<_1_>{ thing } };
+		return forward_const_iterator_data_a{ forward_const_iterator_data_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline forward_const_iterator_data_a val(forward_const_iterator_data_a const& other) noexcept

@@ -200,7 +200,7 @@ public:
 		{
 			return lake_a{ ptr, ___reference_tag___{} };
 		}
-		return lake_a{ lake_d<_1_>{ thing } };
+		return lake_a{ lake_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline lake_a ___cast_dup___(any_a<> const& thing)
@@ -210,7 +210,7 @@ public:
 		{
 			return lake_a{ ptr, ___duplicate_tag___{} };
 		}
-		return lake_a{ lake_d<_1_>{ thing } };
+		return lake_a{ lake_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline lake_a val(lake_a const& other) noexcept

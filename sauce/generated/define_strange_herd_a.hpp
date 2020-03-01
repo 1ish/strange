@@ -235,7 +235,7 @@ public:
 		{
 			return herd_a{ ptr, ___reference_tag___{} };
 		}
-		return herd_a{ herd_d<_1_>{ thing } };
+		return herd_a{ herd_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline herd_a ___cast_dup___(any_a<> const& thing)
@@ -245,7 +245,7 @@ public:
 		{
 			return herd_a{ ptr, ___duplicate_tag___{} };
 		}
-		return herd_a{ herd_d<_1_>{ thing } };
+		return herd_a{ herd_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline herd_a val(herd_a const& other) noexcept

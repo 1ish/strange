@@ -249,7 +249,7 @@ public:
 		{
 			return shoal_a{ ptr, ___reference_tag___{} };
 		}
-		return shoal_a{ shoal_d<_1_>{ thing } };
+		return shoal_a{ shoal_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline shoal_a ___cast_dup___(any_a<> const& thing)
@@ -259,7 +259,7 @@ public:
 		{
 			return shoal_a{ ptr, ___duplicate_tag___{} };
 		}
-		return shoal_a{ shoal_d<_1_>{ thing } };
+		return shoal_a{ shoal_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline shoal_a val(shoal_a const& other) noexcept

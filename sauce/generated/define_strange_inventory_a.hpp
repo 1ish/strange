@@ -249,7 +249,7 @@ public:
 		{
 			return inventory_a{ ptr, ___reference_tag___{} };
 		}
-		return inventory_a{ inventory_d<_1_>{ thing } };
+		return inventory_a{ inventory_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline inventory_a ___cast_dup___(any_a<> const& thing)
@@ -259,7 +259,7 @@ public:
 		{
 			return inventory_a{ ptr, ___duplicate_tag___{} };
 		}
-		return inventory_a{ inventory_d<_1_>{ thing } };
+		return inventory_a{ inventory_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline inventory_a val(inventory_a const& other) noexcept

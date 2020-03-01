@@ -200,7 +200,7 @@ public:
 		{
 			return flock_a{ ptr, ___reference_tag___{} };
 		}
-		return flock_a{ flock_d<_1_>{ thing } };
+		return flock_a{ flock_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline flock_a ___cast_dup___(any_a<> const& thing)
@@ -210,7 +210,7 @@ public:
 		{
 			return flock_a{ ptr, ___duplicate_tag___{} };
 		}
-		return flock_a{ flock_d<_1_>{ thing } };
+		return flock_a{ flock_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline flock_a val(flock_a const& other) noexcept

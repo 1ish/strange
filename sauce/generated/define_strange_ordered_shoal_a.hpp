@@ -200,7 +200,7 @@ public:
 		{
 			return ordered_shoal_a{ ptr, ___reference_tag___{} };
 		}
-		return ordered_shoal_a{ ordered_shoal_d<_1_>{ thing } };
+		return ordered_shoal_a{ ordered_shoal_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 	static inline ordered_shoal_a ___cast_dup___(any_a<> const& thing)
@@ -210,7 +210,7 @@ public:
 		{
 			return ordered_shoal_a{ ptr, ___duplicate_tag___{} };
 		}
-		return ordered_shoal_a{ ordered_shoal_d<_1_>{ thing } };
+		return ordered_shoal_a{ ordered_shoal_d<_1_>{ thing, ___duplicate_tag___{} } };
 	}
 
 	static inline ordered_shoal_a val(ordered_shoal_a const& other) noexcept
