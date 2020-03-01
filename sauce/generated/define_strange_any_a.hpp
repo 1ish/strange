@@ -575,30 +575,17 @@ private:
 	template <typename ___TTT___, typename range_a_chk, typename symbol_a_chk, typename cat_a_chk, typename kind_a_chk, typename inventory_a_chk, typename unordered_herd_a_chk, typename shoal_a_chk, typename unordered_shoal_a_chk, typename number_data_uint64_a_chk>
 	friend inline bool check(any_a<range_a_chk, symbol_a_chk, cat_a_chk, kind_a_chk, inventory_a_chk, unordered_herd_a_chk, shoal_a_chk, unordered_shoal_a_chk, number_data_uint64_a_chk> const& value) noexcept;
 
-/*
-#ifdef STRANGE_CHECK_STATIC_CASTS
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast(any_a<> const& value);
-#else
+///*
 	template <typename ___TTT___>
 	friend inline ___TTT___ cast(any_a<> const& value) noexcept;
-#endif
-*/
-#ifdef STRANGE_CHECK_STATIC_CASTS
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast_ref(any_a<>& value);
-#else
+
 	template <typename ___TTT___>
 	friend inline ___TTT___ cast_ref(any_a<>& value) noexcept;
-#endif
-#ifdef STRANGE_CHECK_STATIC_CASTS
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast_dup(any_a<>& value);
-#else
+
 	template <typename ___TTT___>
 	friend inline ___TTT___ cast_dup(any_a<>& value) noexcept;
-#endif
 
+//*/
 public:
 	static inline bool ___check___(___SHARED___ const& handle) noexcept
 	{
@@ -608,21 +595,6 @@ public:
 	inline bool is_ref() const
 	{
 		return &___handle___ != &___shared___;
-	}
-
-	static inline any_a<> ___cast___(any_a<> const& thing)
-	{
-		return thing;
-	}
-
-	static inline any_a<> ___cast_ref___(any_a<> const& thing)
-	{
-		return any_a<>{ thing, ___reference_tag___{} };
-	}
-
-	static inline any_a<> ___cast_dup___(any_a<> const& thing)
-	{
-		return any_a<>{ thing, ___duplicate_tag___{} };
 	}
 
 	static inline any_a val(any_a const& other) noexcept
@@ -679,10 +651,20 @@ public:
 
 	virtual ~any_a() = default;
 
+	explicit inline any_a(___SHARED___ const& handle) noexcept
+		: ___shared___{ handle }
+		, ___handle___{ ___shared___ }
+	{}
+
 	template <typename ___TTT___>
 	explicit inline any_a(std::shared_ptr<___TTT___> const& handle) noexcept
 		: ___shared___{ handle }
 		, ___handle___{ ___shared___ }
+	{}
+
+	explicit inline any_a(___SHARED___& handle, ___reference_tag___) noexcept
+		: ___shared___{ ___SHARED___{} }
+		, ___handle___{ reinterpret_cast<___SHARED___&>(handle) }
 	{}
 
 	template <typename ___TTT___>
@@ -712,6 +694,16 @@ public:
 		any_a temp{ std::move(value) };
 		std::swap(temp.___handle___, ___handle___);
 		return *this;
+	}
+
+	static inline any_a<> ___cast___(any_a<> const& thing)
+	{
+		return thing;
+	}
+
+	static inline any_a<> ___cast_ref___(any_a<>& thing)
+	{
+		return any_a<>{ thing, ___reference_tag___{} };
 	}
 
 private:

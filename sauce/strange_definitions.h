@@ -63,56 +63,19 @@ inline bool check(___VVV___ const&) noexcept
 {
 	return false;
 }
-/*
-#ifdef STRANGE_CHECK_STATIC_CASTS
-template <typename ___TTT___>
-inline ___TTT___ cast(any_a<> const& value)
-{
-	return ___TTT___{ value.___handle___ };
-}
-#else
-template <typename ___TTT___>
-inline ___TTT___ cast(any_a<> const& value) noexcept
-{
-	return ___TTT___{ value.___handle___ };
-}
-#endif
-*/
 ///*
 template <typename ___TTT___>
 inline ___TTT___ cast(any_a<> const& value) noexcept
 {
-	return ___TTT___::___cast___(value);
+	return ___TTT___{ value.___handle___ };
 }
-//*/
-#ifdef STRANGE_CHECK_STATIC_CASTS
-template <typename ___TTT___>
-inline ___TTT___ cast_ref(any_a<>& value)
-{
-	return ___TTT___(value.___handle___, any_a<>::___reference_tag___{});
-}
-#else
+
 template <typename ___TTT___>
 inline ___TTT___ cast_ref(any_a<>& value) noexcept
 {
 	return ___TTT___(value.___handle___, any_a<>::___reference_tag___{});
 }
-#endif
 
-#ifdef STRANGE_CHECK_STATIC_CASTS
-template <typename ___TTT___>
-inline ___TTT___ cast_dup(any_a<>& value)
-{
-	if (&value.___handle___ == &value.___shared___)
-	{
-		return ___TTT___{ value.___handle___ };
-	}
-	else
-	{
-		return ___TTT___(value.___handle___, any_a<>::___reference_tag___{});
-	}
-}
-#else
 template <typename ___TTT___>
 inline ___TTT___ cast_dup(any_a<>& value) noexcept
 {
@@ -125,8 +88,30 @@ inline ___TTT___ cast_dup(any_a<>& value) noexcept
 		return ___TTT___(value.___handle___, any_a<>::___reference_tag___{});
 	}
 }
-#endif
+//*/
+/*
+template <typename ___TTT___>
+inline ___TTT___ cast(any_a<> const& value) noexcept
+{
+	return ___TTT___::___cast___(value);
+}
 
+template <typename ___TTT___>
+inline ___TTT___ cast_ref(any_a<>& value) noexcept
+{
+	return ___TTT___::___cast_ref___(value);
+}
+
+template <typename ___TTT___>
+inline ___TTT___ cast_dup(any_a<>& value) noexcept
+{
+	if (value.is_ref())
+	{
+		return ___TTT___::___cast_ref___(value);
+	}
+	return ___TTT___::___cast___(value);
+}
+*/
 }
 
 #endif

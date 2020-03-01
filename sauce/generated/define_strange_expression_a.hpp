@@ -295,36 +295,6 @@ public:
 		return bool(std::dynamic_pointer_cast<___expression_a_handle_base___>(handle));
 	}
 
-	static inline expression_a ___cast___(any_a<> const& thing)
-	{
-		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(thing.___handle___);
-		if (ptr)
-		{
-			return expression_a{ ptr };
-		}
-		return expression_a{ expression_d<_1_>{ thing } };
-	}
-
-	static inline expression_a ___cast_ref___(any_a<> const& thing)
-	{
-		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(thing.___handle___);
-		if (ptr)
-		{
-			return expression_a{ ptr, ___reference_tag___{} };
-		}
-		return expression_a{ expression_d<_1_>{ thing, ___reference_tag___{} } };
-	}
-
-	static inline expression_a ___cast_dup___(any_a<> const& thing)
-	{
-		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(thing.___handle___);
-		if (ptr)
-		{
-			return expression_a{ ptr, ___duplicate_tag___{} };
-		}
-		return expression_a{ expression_d<_1_>{ thing, ___duplicate_tag___{} } };
-	}
-
 	static inline expression_a val(expression_a const& other) noexcept
 	{
 		return expression_a{ other };
@@ -350,44 +320,31 @@ public:
 		: operation_a(other, ___duplicate_tag___{})
 	{}
 
-#ifdef STRANGE_CHECK_STATIC_CASTS
-	template <typename ___TTT___>
-	explicit inline expression_a(std::shared_ptr<___TTT___> const& handle)
+	explicit inline expression_a(std::shared_ptr<___expression_a_handle_base___> const& handle) noexcept
 		: operation_a{ handle }
-	{
-		if (handle && !std::dynamic_pointer_cast<___expression_a_handle_base___>(handle))
-		{
-			throw dis("expression_a constructor failed to cast from base to expression_a");
-		}
-	}
-#else
+	{}
+
+	explicit inline expression_a(std::shared_ptr<___expression_a_handle_base___>& handle, ___reference_tag___) noexcept
+		: operation_a(handle, ___reference_tag___{})
+	{}
+
 	template <typename ___TTT___>
 	explicit inline expression_a(std::shared_ptr<___TTT___> const& handle) noexcept
 		: operation_a{ handle }
 	{
 		assert(!handle || std::dynamic_pointer_cast<___expression_a_handle_base___>(handle));
 	}
-#endif
 
-#ifdef STRANGE_CHECK_STATIC_CASTS
-	template <typename ___TTT___>
-	explicit inline expression_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___)
-		: operation_a(handle, ___reference_tag___{})
-	{
-		if (handle && !std::dynamic_pointer_cast<___expression_a_handle_base___>(handle))
-		{
-			throw dis("expression_a constructor failed to cast from base to expression_a");
-		}
-	}
-#else
 	template <typename ___TTT___>
 	explicit inline expression_a(std::shared_ptr<___TTT___>& handle, ___reference_tag___) noexcept
 		: operation_a(handle, ___reference_tag___{})
 	{
 		assert(!handle || std::dynamic_pointer_cast<___expression_a_handle_base___>(handle));
 	}
+/*
 #endif
 
+*/
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<expression_a, std::decay_t<___TTT___>>::value>>
 	explicit inline expression_a(___TTT___ value) noexcept
 		: operation_a{ std::make_shared<___expression_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
@@ -395,18 +352,6 @@ public:
 		___handle___->___weak___(___handle___);
 	}
 
-#ifdef STRANGE_CHECK_STATIC_CASTS
-	template <typename ___TTT___>
-	inline expression_a& operator=(std::shared_ptr<___TTT___> const& handle)
-	{
-		if (handle && !std::dynamic_pointer_cast<___expression_a_handle_base___>(handle))
-		{
-			throw dis("expression_a assignment failed to cast from base to expression_a");
-		}
-		___handle___ = handle;
-		return *this;
-	}
-#else
 	template <typename ___TTT___>
 	inline expression_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
@@ -414,7 +359,6 @@ public:
 		___handle___ = handle;
 		return *this;
 	}
-#endif
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<expression_a, std::decay_t<___TTT___>>::value>>
 	inline expression_a& operator=(___TTT___ value) noexcept
@@ -422,6 +366,26 @@ public:
 		expression_a temp{ std::move(value) };
 		std::swap(temp.___handle___, ___handle___);
 		return *this;
+	}
+
+	static inline expression_a ___cast___(any_a<> const& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return expression_a{ ptr };
+		}
+		return expression_a{ expression_d<_1_>{ thing } };
+	}
+
+	static inline expression_a ___cast_ref___(any_a<>& thing)
+	{
+		auto const ptr = std::dynamic_pointer_cast<___expression_a_handle_base___>(thing.___handle___);
+		if (ptr)
+		{
+			return expression_a(ptr, ___reference_tag___{});
+		}
+		return expression_a{ expression_d<_1_>{ thing, ___reference_tag___{} } };
 	}
 
 private:
