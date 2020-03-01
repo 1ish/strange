@@ -89,7 +89,6 @@ inline ___TTT___ cast_dup(any_a<>& value) noexcept
 	}
 }
 */
-///*
 template <typename ___TTT___>
 inline ___TTT___ cast(any_a<> const& value) noexcept
 {
@@ -111,7 +110,7 @@ inline ___TTT___ cast_dup(any_a<>& value) noexcept
 	}
 	return ___TTT___::___cast___(value);
 }
-//*/
+
 }
 
 #endif
