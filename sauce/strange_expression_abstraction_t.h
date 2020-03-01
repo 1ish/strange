@@ -1238,7 +1238,7 @@ protected:
 		if (root)
 		{
 			river.write_string(
-				"///*\n"
+				"/*\n"
 				"\ttemplate <typename ___TTT___>\n"
 				"\tfriend inline ___TTT___ cast(" + class_name + "<> const& value) noexcept;\n\n"
 
@@ -1247,7 +1247,7 @@ protected:
 
 				"\ttemplate <typename ___TTT___>\n"
 				"\tfriend inline ___TTT___ cast_dup(" + class_name + "<>& value) noexcept;\n\n"
-				"//*/\n");
+				"*/\n");
 		}
 
 		river.write_string(
@@ -1397,7 +1397,7 @@ protected:
 				"\t\t: " + base_name + "(handle, ___reference_tag___{})\n"
 				"\t{\n"
 				"\t\tassert(!handle || std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n"
-				"\t}\n"
+				"\t}\n\n"
 
 				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
 				"\texplicit inline " + class_name + "(___TTT___ value) noexcept\n"

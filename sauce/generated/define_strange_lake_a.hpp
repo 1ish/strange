@@ -221,6 +221,7 @@ public:
 	{
 		assert(!handle || std::dynamic_pointer_cast<___lake_a_handle_base___>(handle));
 	}
+
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<lake_a, std::decay_t<___TTT___>>::value>>
 	explicit inline lake_a(___TTT___ value) noexcept
 		: inventory_a{ std::make_shared<___lake_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }

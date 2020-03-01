@@ -63,7 +63,7 @@ inline bool check(___VVV___ const&) noexcept
 {
 	return false;
 }
-///*
+/*
 template <typename ___TTT___>
 inline ___TTT___ cast(any_a<> const& value) noexcept
 {
@@ -88,8 +88,8 @@ inline ___TTT___ cast_dup(any_a<>& value) noexcept
 		return ___TTT___(value.___handle___, any_a<>::___reference_tag___{});
 	}
 }
-//*/
-/*
+*/
+///*
 template <typename ___TTT___>
 inline ___TTT___ cast(any_a<> const& value) noexcept
 {
@@ -111,7 +111,7 @@ inline ___TTT___ cast_dup(any_a<>& value) noexcept
 	}
 	return ___TTT___::___cast___(value);
 }
-*/
+//*/
 }
 
 #endif
