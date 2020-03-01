@@ -466,6 +466,14 @@ public:
 	explicit herd_d(any_a<> const& thing)
 		: collection_d<>{ thing }
 	{}
+
+	explicit herd_d(any_a<>& thing, ___reference_tag___)
+		: collection_d<>{ thing, ___reference_tag___{} }
+	{}
+
+	explicit herd_d(any_a<>& thing, ___duplicate_tag___)
+		: collection_d<>{ thing, ___duplicate_tag___{} }
+	{}
 };
 
 template <typename _1_>

@@ -688,6 +688,14 @@ public:
 	explicit expression_d(any_a<> const& thing)
 		: operation_d<>{ thing }
 	{}
+
+	explicit expression_d(any_a<>& thing, ___reference_tag___)
+		: operation_d<>{ thing, ___reference_tag___{} }
+	{}
+
+	explicit expression_d(any_a<>& thing, ___duplicate_tag___)
+		: operation_d<>{ thing, ___duplicate_tag___{} }
+	{}
 };
 
 template <typename _1_>

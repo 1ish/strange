@@ -416,6 +416,14 @@ public:
 	explicit ordered_shoal_d(any_a<> const& thing)
 		: shoal_d<>{ thing }
 	{}
+
+	explicit ordered_shoal_d(any_a<>& thing, ___reference_tag___)
+		: shoal_d<>{ thing, ___reference_tag___{} }
+	{}
+
+	explicit ordered_shoal_d(any_a<>& thing, ___duplicate_tag___)
+		: shoal_d<>{ thing, ___duplicate_tag___{} }
+	{}
 };
 
 template <typename _1_>

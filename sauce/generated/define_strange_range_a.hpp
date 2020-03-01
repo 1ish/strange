@@ -468,6 +468,14 @@ public:
 	explicit range_d(any_a<> const& thing)
 		: any_a<>{ thing }
 	{}
+
+	explicit range_d(any_a<>& thing, ___reference_tag___)
+		: any_a<>{ thing, ___reference_tag___{} }
+	{}
+
+	explicit range_d(any_a<>& thing, ___duplicate_tag___)
+		: any_a<>{ thing, ___duplicate_tag___{} }
+	{}
 };
 
 template <typename _1_>

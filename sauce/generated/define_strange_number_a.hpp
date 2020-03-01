@@ -1742,6 +1742,14 @@ public:
 	explicit number_d(any_a<> const& thing)
 		: any_a<>{ thing }
 	{}
+
+	explicit number_d(any_a<>& thing, ___reference_tag___)
+		: any_a<>{ thing, ___reference_tag___{} }
+	{}
+
+	explicit number_d(any_a<>& thing, ___duplicate_tag___)
+		: any_a<>{ thing, ___duplicate_tag___{} }
+	{}
 };
 
 template <typename number_data_int64_a, typename number_data_uint64_a, typename number_data_double_a>

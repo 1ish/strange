@@ -416,6 +416,14 @@ public:
 	explicit flock_d(any_a<> const& thing)
 		: inventory_d<>{ thing }
 	{}
+
+	explicit flock_d(any_a<>& thing, ___reference_tag___)
+		: inventory_d<>{ thing, ___reference_tag___{} }
+	{}
+
+	explicit flock_d(any_a<>& thing, ___duplicate_tag___)
+		: inventory_d<>{ thing, ___duplicate_tag___{} }
+	{}
 };
 
 template <typename _1_>

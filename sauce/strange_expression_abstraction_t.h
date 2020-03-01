@@ -483,10 +483,20 @@ protected:
 		_define_class_dynamic_members_(false, class_name, class_expression_terms, version, 0, river);
 		river.write_string(
 			"\tvoid ___weak___(" + base_name + "<>::___WEAK___ const& weak) const {}\n\n"
+
 			"\texplicit " + class_name + "(any_a<> const& thing)\n"
 			"\t\t: " + base_name + "<>{ thing }\n"
+			"\t{}\n\n"
+
+			"\texplicit " + class_name + "(any_a<>& thing, ___reference_tag___)\n"
+			"\t\t: " + base_name + "<>{ thing, ___reference_tag___{} }\n"
+			"\t{}\n\n"
+
+			"\texplicit " + class_name + "(any_a<>& thing, ___duplicate_tag___)\n"
+			"\t\t: " + base_name + "<>{ thing, ___duplicate_tag___{} }\n"
 			"\t{}\n"
-			"};\n\n");
+			"};\n\n"		
+		);
 	}
 
 	inline void _define_class_(bool root, std::string const& class_name, std::string const& base_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const

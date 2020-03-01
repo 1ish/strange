@@ -416,6 +416,14 @@ public:
 	explicit bidirectional_iterator_data_d(any_a<> const& thing)
 		: bidirectional_iterator_d<>{ thing }
 	{}
+
+	explicit bidirectional_iterator_data_d(any_a<>& thing, ___reference_tag___)
+		: bidirectional_iterator_d<>{ thing, ___reference_tag___{} }
+	{}
+
+	explicit bidirectional_iterator_data_d(any_a<>& thing, ___duplicate_tag___)
+		: bidirectional_iterator_d<>{ thing, ___duplicate_tag___{} }
+	{}
 };
 
 template <typename _1_>

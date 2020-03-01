@@ -518,6 +518,14 @@ public:
 	explicit inventory_d(any_a<> const& thing)
 		: collection_d<>{ thing }
 	{}
+
+	explicit inventory_d(any_a<>& thing, ___reference_tag___)
+		: collection_d<>{ thing, ___reference_tag___{} }
+	{}
+
+	explicit inventory_d(any_a<>& thing, ___duplicate_tag___)
+		: collection_d<>{ thing, ___duplicate_tag___{} }
+	{}
 };
 
 template <typename _1_>
