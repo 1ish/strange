@@ -65,6 +65,28 @@ inline bool check(any_a<> const& value) noexcept
 }
 
 template <typename ___TTT___>
+inline ___TTT___ fast(any_a<> const& value) noexcept
+{
+	return ___TTT___{ value.___handle___ };
+}
+
+template <typename ___TTT___>
+inline ___TTT___ fast_ref(any_a<>& value) noexcept
+{
+	return ___TTT___(value.___handle___, typename ___TTT___::___reference_tag___{});
+}
+
+template <typename ___TTT___>
+inline ___TTT___ fast_dup(any_a<>& value) noexcept
+{
+	if (value.is_ref())
+	{
+		return ___TTT___(value.___handle___, typename ___TTT___::___reference_tag___{});
+	}
+	return ___TTT___{ value.___handle___ };
+}
+
+template <typename ___TTT___>
 inline ___TTT___ cast(any_a<> const& value) noexcept
 {
 	return ___TTT___::___cast___(value);

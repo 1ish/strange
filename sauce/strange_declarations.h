@@ -348,6 +348,15 @@ template <typename ___TTT___ = any_a<>>
 inline bool check(any_a<> const& value) noexcept;
 
 template <typename ___TTT___ = any_a<>>
+inline ___TTT___ fast(any_a<> const& value) noexcept;
+
+template <typename ___TTT___ = any_a<>>
+inline ___TTT___ fast_ref(any_a<>& value) noexcept;
+
+template <typename ___TTT___ = any_a<>>
+inline ___TTT___ fast_dup(any_a<>& value) noexcept;
+
+template <typename ___TTT___ = any_a<>>
 inline ___TTT___ cast(any_a<> const& value) noexcept;
 
 template <typename ___TTT___ = any_a<>>
