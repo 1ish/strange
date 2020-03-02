@@ -45,7 +45,7 @@ public:
 			return expression_t<>::create(token_t<>::create_punctuation_());
 		}
 		_previous = token_t<>::create_punctuation_();
-		_token = cast<token_a<>>(*_it);
+		_token = fast<token_a<>>(*_it);
 		if (_token.tag() == "error")
 		{
 			throw dis("strange::parser tokenizer error:") + _token.report_();
@@ -132,7 +132,7 @@ private:
 			return false;
 		}
 		_previous = _token;
-		_token = cast<token_a<>>(*_it);
+		_token = fast<token_a<>>(*_it);
 		if (_token.tag() == "error")
 		{
 			throw dis("strange::parser tokenizer error:") + _token.report_();
@@ -271,7 +271,7 @@ private:
 		}
 		else if (size == 1)
 		{
-			return cast<expression_a<>>(emissions.at_index(0));
+			return fast<expression_a<>>(emissions.at_index(0));
 		}
 		return expression_block_t<>::create_(token, emissions);
 	}
@@ -290,7 +290,7 @@ private:
 			any_a<> result;
 			try
 			{
-				result = cast<expression_a<>>(expression).evaluate_();
+				result = fast<expression_a<>>(expression).evaluate_();
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
@@ -397,7 +397,7 @@ private:
 				any_a<> any_kind = kind;
 				try
 				{
-					any_kind = cast<expression_a<>>(kind).evaluate_();
+					any_kind = fast<expression_a<>>(kind).evaluate_();
 				}
 				catch (misunderstanding_a<>&)
 				{}
@@ -473,7 +473,7 @@ private:
 		{
 			throw dis("strange::parser instruction returned non-expression:") + token.report_();
 		}
-		return cast<expression_a<>>(expression);
+		return fast<expression_a<>>(expression);
 	}
 
 	inline expression_a<> _initial_local(context_ptr const& context)
@@ -551,7 +551,7 @@ private:
 					kind = kind_expression;
 					try
 					{
-						kind = cast<expression_a<>>(kind).evaluate_();
+						kind = kind_expression.evaluate_();
 					}
 					catch (misunderstanding_a<>&)
 					{}
@@ -741,7 +741,7 @@ private:
 			}
 			else // emissions
 			{
-				key = cast<expression_a<>>(emissions.pop_front_());
+				key = fast<expression_a<>>(emissions.pop_front_());
 				if (!shoal && key.type_() == expression_herd_t<>::type_())
 				{
 					herd = true;
@@ -834,7 +834,7 @@ private:
 			{
 			}
 			auto const new_scope_symbol = _scope_name(context->scope,
-				check<symbol_a<>>(key_symbol) ? cast<symbol_a<>>(key_symbol) : sym("#"));
+				check<symbol_a<>>(key_symbol) ? fast<symbol_a<>>(key_symbol) : sym("#"));
 
 			auto value = expression_t<>::create(operator_token);
 			if (operator_token.symbol() == ":")
@@ -881,7 +881,7 @@ private:
 					throw dis("strange::parser shoal :: redefinition of shared name:") + _token.report_();
 				}
 			}
-			else if (check<symbol_a<>>(key_symbol) && cast<symbol_a<>>(key_symbol).last_character() == '_' &&
+			else if (check<symbol_a<>>(key_symbol) && fast<symbol_a<>>(key_symbol).last_character() == '_' &&
 				(operator_token.symbol() == ":#" || operator_token.symbol() == ":=" || operator_token.symbol() == ":&"))
 			{
 				bool const fixed = operator_token.symbol() == ":#";
@@ -926,7 +926,7 @@ private:
 					{
 						throw dis("strange::parser shoal member instruction returned non-expression:") + operator_token.report_();
 					}
-					value = cast<expression_a<>>(expression);
+					value = fast<expression_a<>>(expression);
 				}
 				else if (fixed)
 				{
@@ -994,7 +994,7 @@ private:
 					{
 						throw dis("strange::parser shoal attribute instruction returned non-expression:") + operator_token.report_();
 					}
-					value = cast<expression_a<>>(expression);
+					value = fast<expression_a<>>(expression);
 				}
 				else if (fixed)
 				{
@@ -1045,7 +1045,7 @@ private:
 		unordered_herd_a<> result = unordered_herd_t<>::create_();
 		for (auto const& item : herd.extract_set())
 		{
-			if (check<symbol_a<>>(item) && cast<symbol_a<>>(item).first_character() == '#')
+			if (check<symbol_a<>>(item) && fast<symbol_a<>>(item).first_character() == '#')
 			{
 				result.insert_thing(item);
 			}
@@ -1058,7 +1058,7 @@ private:
 		unordered_shoal_a<> result = unordered_shoal_t<>::create_();
 		for (auto const& item : shoal.extract_map())
 		{
-			if (check<symbol_a<>>(item.first) && cast<symbol_a<>>(item.first).first_character() == '#')
+			if (check<symbol_a<>>(item.first) && fast<symbol_a<>>(item.first).first_character() == '#')
 			{
 				result.insert(item.first, item.second);
 			}
