@@ -139,7 +139,7 @@ public:
 		{
 			throw dis("[expression]::generate passed non-river");
 		}
-		auto river = cast_dup<river_a<>>(any_river);
+		auto river = fast_dup<river_a<>>(any_river);
 		return generate_(cast<number_data_a<int64_t>>(version), cast<number_data_a<int64_t>>(indent), river);
 	}
 
@@ -179,7 +179,7 @@ public:
 		{
 			throw dis("[expression]::generate_cpp passed non-river");
 		}
-		auto river = cast_dup<river_a<>>(any_river);
+		auto river = fast_dup<river_a<>>(any_river);
 		if (++it == range.cend_())
 		{
 			throw dis("[expression]::generate_cpp passed short range");
