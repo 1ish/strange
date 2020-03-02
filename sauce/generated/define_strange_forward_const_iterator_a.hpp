@@ -8,9 +8,6 @@ class forward_const_iterator_d;
 template <typename _1_ = void>
 inline forward_const_iterator_d<_1_> ___forward_const_iterator_dynamic___(any_a<> const& thing); 
 
-template <typename ___TTT___, typename _1__chk = void>
-inline bool check(forward_const_iterator_a<_1__chk> const& value) noexcept;
-
 template <typename _1_>
 class forward_const_iterator_a : public any_a<>
 {
@@ -202,15 +199,7 @@ protected:
 	}
 
 private:
-	template <typename ___TTT___, typename _1__chk>
-	friend inline bool check(forward_const_iterator_a<_1__chk> const& value) noexcept;
-
 public:
-	static inline bool ___check___(___SHARED___ const& handle) noexcept
-	{
-		return bool(std::dynamic_pointer_cast<___forward_const_iterator_a_handle_base___>(handle));
-	}
-
 	static inline forward_const_iterator_a val(forward_const_iterator_a const& other) noexcept
 	{
 		return forward_const_iterator_a{ other };
@@ -273,6 +262,11 @@ public:
 		return *this;
 	}
 
+	static inline bool ___check___(any_a<> const& thing)
+	{
+		return bool{ std::dynamic_pointer_cast<___forward_const_iterator_a_handle_base___>(thing.___handle___) };
+	}
+
 	static inline forward_const_iterator_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___forward_const_iterator_a_handle_base___>(thing.___handle___);
@@ -297,12 +291,6 @@ private:
 	static bool const ___share___;
 	friend class ___forward_const_iterator_a_share___;
 }; // class forward_const_iterator_a
-
-template <typename ___TTT___, typename _1__chk>
-inline bool check(forward_const_iterator_a<_1__chk> const& value) noexcept
-{
-	return ___TTT___::___check___(value.___handle___);
-}
 
 template <typename _1_>
 bool const forward_const_iterator_a<_1_>::___share___ = []()

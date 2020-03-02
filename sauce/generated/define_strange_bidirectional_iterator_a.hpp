@@ -8,9 +8,6 @@ class bidirectional_iterator_d;
 template <typename _1_ = void>
 inline bidirectional_iterator_d<_1_> ___bidirectional_iterator_dynamic___(any_a<> const& thing); 
 
-template <typename ___TTT___, typename _1__chk = void>
-inline bool check(bidirectional_iterator_a<_1__chk> const& value) noexcept;
-
 template <typename _1_>
 class bidirectional_iterator_a : public forward_iterator_a<>
 {
@@ -174,15 +171,7 @@ protected:
 	}
 
 private:
-	template <typename ___TTT___, typename _1__chk>
-	friend inline bool check(bidirectional_iterator_a<_1__chk> const& value) noexcept;
-
 public:
-	static inline bool ___check___(___SHARED___ const& handle) noexcept
-	{
-		return bool(std::dynamic_pointer_cast<___bidirectional_iterator_a_handle_base___>(handle));
-	}
-
 	static inline bidirectional_iterator_a val(bidirectional_iterator_a const& other) noexcept
 	{
 		return bidirectional_iterator_a{ other };
@@ -245,6 +234,11 @@ public:
 		return *this;
 	}
 
+	static inline bool ___check___(any_a<> const& thing)
+	{
+		return bool{ std::dynamic_pointer_cast<___bidirectional_iterator_a_handle_base___>(thing.___handle___) };
+	}
+
 	static inline bidirectional_iterator_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___bidirectional_iterator_a_handle_base___>(thing.___handle___);
@@ -269,12 +263,6 @@ private:
 	static bool const ___share___;
 	friend class ___bidirectional_iterator_a_share___;
 }; // class bidirectional_iterator_a
-
-template <typename ___TTT___, typename _1__chk>
-inline bool check(bidirectional_iterator_a<_1__chk> const& value) noexcept
-{
-	return ___TTT___::___check___(value.___handle___);
-}
 
 template <typename _1_>
 bool const bidirectional_iterator_a<_1_>::___share___ = []()

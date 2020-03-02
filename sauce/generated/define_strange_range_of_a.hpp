@@ -8,9 +8,6 @@ class range_of_d;
 template <typename element>
 inline range_of_d<element> ___range_of_dynamic___(any_a<> const& thing); 
 
-template <typename ___TTT___, typename element_chk>
-inline bool check(range_of_a<element_chk> const& value) noexcept;
-
 template <typename element>
 class range_of_a : public any_a<>
 {
@@ -188,15 +185,7 @@ protected:
 	}
 
 private:
-	template <typename ___TTT___, typename element_chk>
-	friend inline bool check(range_of_a<element_chk> const& value) noexcept;
-
 public:
-	static inline bool ___check___(___SHARED___ const& handle) noexcept
-	{
-		return bool(std::dynamic_pointer_cast<___range_of_a_handle_base___>(handle));
-	}
-
 	static inline range_of_a val(range_of_a const& other) noexcept
 	{
 		return range_of_a{ other };
@@ -259,6 +248,11 @@ public:
 		return *this;
 	}
 
+	static inline bool ___check___(any_a<> const& thing)
+	{
+		return bool{ std::dynamic_pointer_cast<___range_of_a_handle_base___>(thing.___handle___) };
+	}
+
 	static inline range_of_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___range_of_a_handle_base___>(thing.___handle___);
@@ -283,12 +277,6 @@ private:
 	static bool const ___share___;
 	friend class ___range_of_a_share___;
 }; // class range_of_a
-
-template <typename ___TTT___, typename element_chk>
-inline bool check(range_of_a<element_chk> const& value) noexcept
-{
-	return ___TTT___::___check___(value.___handle___);
-}
 
 template <typename element>
 bool const range_of_a<element>::___share___ = []()

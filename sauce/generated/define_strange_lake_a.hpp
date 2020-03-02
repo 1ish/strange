@@ -8,9 +8,6 @@ class lake_d;
 template <typename _1_>
 inline lake_d<_1_> ___lake_dynamic___(any_a<> const& thing); 
 
-template <typename ___TTT___, typename _1__chk>
-inline bool check(lake_a<_1__chk> const& value) noexcept;
-
 template <typename _1_>
 class lake_a : public inventory_a<>
 {
@@ -174,15 +171,7 @@ protected:
 	}
 
 private:
-	template <typename ___TTT___, typename _1__chk>
-	friend inline bool check(lake_a<_1__chk> const& value) noexcept;
-
 public:
-	static inline bool ___check___(___SHARED___ const& handle) noexcept
-	{
-		return bool(std::dynamic_pointer_cast<___lake_a_handle_base___>(handle));
-	}
-
 	static inline lake_a val(lake_a const& other) noexcept
 	{
 		return lake_a{ other };
@@ -245,6 +234,11 @@ public:
 		return *this;
 	}
 
+	static inline bool ___check___(any_a<> const& thing)
+	{
+		return bool{ std::dynamic_pointer_cast<___lake_a_handle_base___>(thing.___handle___) };
+	}
+
 	static inline lake_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___lake_a_handle_base___>(thing.___handle___);
@@ -269,12 +263,6 @@ private:
 	static bool const ___share___;
 	friend class ___lake_a_share___;
 }; // class lake_a
-
-template <typename ___TTT___, typename _1__chk>
-inline bool check(lake_a<_1__chk> const& value) noexcept
-{
-	return ___TTT___::___check___(value.___handle___);
-}
 
 template <typename _1_>
 bool const lake_a<_1_>::___share___ = []()

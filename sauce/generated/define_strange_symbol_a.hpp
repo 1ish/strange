@@ -8,9 +8,6 @@ class symbol_d;
 template <typename _1_ = void>
 inline symbol_d<_1_> ___symbol_dynamic___(any_a<> const& thing); 
 
-template <typename ___TTT___, typename _1__chk = void>
-inline bool check(symbol_a<_1__chk> const& value) noexcept;
-
 template <typename _1_>
 class symbol_a : public any_a<>
 {
@@ -216,15 +213,7 @@ protected:
 	}
 
 private:
-	template <typename ___TTT___, typename _1__chk>
-	friend inline bool check(symbol_a<_1__chk> const& value) noexcept;
-
 public:
-	static inline bool ___check___(___SHARED___ const& handle) noexcept
-	{
-		return bool(std::dynamic_pointer_cast<___symbol_a_handle_base___>(handle));
-	}
-
 	static inline symbol_a val(symbol_a const& other) noexcept
 	{
 		return symbol_a{ other };
@@ -287,6 +276,11 @@ public:
 		return *this;
 	}
 
+	static inline bool ___check___(any_a<> const& thing)
+	{
+		return bool{ std::dynamic_pointer_cast<___symbol_a_handle_base___>(thing.___handle___) };
+	}
+
 	static inline symbol_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___symbol_a_handle_base___>(thing.___handle___);
@@ -311,12 +305,6 @@ private:
 	static bool const ___share___;
 	friend class ___symbol_a_share___;
 }; // class symbol_a
-
-template <typename ___TTT___, typename _1__chk>
-inline bool check(symbol_a<_1__chk> const& value) noexcept
-{
-	return ___TTT___::___check___(value.___handle___);
-}
 
 template <typename _1_>
 bool const symbol_a<_1_>::___share___ = []()

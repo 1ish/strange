@@ -1238,6 +1238,7 @@ protected:
 		if (root)
 		{
 			river.write_string(
+				//TODO
 				"/*\n"
 				"\ttemplate <typename ___TTT___>\n"
 				"\tfriend inline ___TTT___ cast(" + class_name + "<> const& value) noexcept;\n\n"
@@ -1249,14 +1250,14 @@ protected:
 				"\tfriend inline ___TTT___ cast_dup(" + class_name + "<>& value) noexcept;\n\n"
 				"*/\n");
 		}
-
+		//TODO
 		river.write_string(
 			"public:\n"
-			"\tstatic inline bool ___check___(___SHARED___ const& handle) noexcept\n"
+			/*"\tstatic inline bool ___check___(___SHARED___ const& handle) noexcept\n"
 			"\t{\n" + (root
 				? std::string{ "\t\treturn bool(handle);\n" }
 				: ("\t\treturn bool(std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n")) +
-			"\t}\n\n");
+			"\t}\n\n"*/);
 
 		if (root)
 		{
@@ -1361,6 +1362,12 @@ protected:
 				"\t}\n\n");
 
 			river.write_string(
+				"\tstatic inline bool ___check___(any_a<> const& thing)\n"
+				"\t{\n"
+				"\t\treturn bool{ thing.___handle___ };\n"
+				"\t}\n\n");
+
+			river.write_string(
 				"\tstatic inline any_a<> ___cast___(any_a<> const& thing)\n"
 				"\t{\n"
 				"\t\treturn thing;\n"
@@ -1423,6 +1430,12 @@ protected:
 				"\t}\n\n");
 
 			river.write_string(
+				"\tstatic inline bool ___check___(any_a<> const& thing)\n"
+				"\t{\n"
+				"\t\treturn bool{ std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.___handle___) };\n"
+				"\t}\n\n");
+
+			river.write_string(
 				"\tstatic inline " + class_name + " ___cast___(any_a<> const& thing)\n"
 				"\t{\n"
 				"\t\tauto const ptr = std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(thing.___handle___);\n"
@@ -1457,6 +1470,8 @@ protected:
 
 	inline void _define_class_check_(bool declare, bool mate, std::string const& class_name, int64_t version, river_a<>& river) const
 	{
+		//TODO
+		/*
 		if (mate)
 		{
 			river.write_string("\t");
@@ -1480,6 +1495,7 @@ protected:
 				"\treturn ___TTT___::___check___(value.___handle___);\n"
 				"}\n\n");
 		}
+		*/
 	}
 
 	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const

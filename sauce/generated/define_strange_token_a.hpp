@@ -8,9 +8,6 @@ class token_d;
 template <typename _1_ = void>
 inline token_d<_1_> ___token_dynamic___(any_a<> const& thing); 
 
-template <typename ___TTT___, typename _1__chk = void>
-inline bool check(token_a<_1__chk> const& value) noexcept;
-
 template <typename _1_>
 class token_a : public any_a<>
 {
@@ -321,15 +318,7 @@ protected:
 	}
 
 private:
-	template <typename ___TTT___, typename _1__chk>
-	friend inline bool check(token_a<_1__chk> const& value) noexcept;
-
 public:
-	static inline bool ___check___(___SHARED___ const& handle) noexcept
-	{
-		return bool(std::dynamic_pointer_cast<___token_a_handle_base___>(handle));
-	}
-
 	static inline token_a val(token_a const& other) noexcept
 	{
 		return token_a{ other };
@@ -392,6 +381,11 @@ public:
 		return *this;
 	}
 
+	static inline bool ___check___(any_a<> const& thing)
+	{
+		return bool{ std::dynamic_pointer_cast<___token_a_handle_base___>(thing.___handle___) };
+	}
+
 	static inline token_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___token_a_handle_base___>(thing.___handle___);
@@ -416,12 +410,6 @@ private:
 	static bool const ___share___;
 	friend class ___token_a_share___;
 }; // class token_a
-
-template <typename ___TTT___, typename _1__chk>
-inline bool check(token_a<_1__chk> const& value) noexcept
-{
-	return ___TTT___::___check___(value.___handle___);
-}
 
 template <typename _1_>
 bool const token_a<_1_>::___share___ = []()

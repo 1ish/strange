@@ -8,9 +8,6 @@ class collection_d;
 template <typename number_data_int64_a = number_data_int64_a<> >
 inline collection_d<number_data_int64_a> ___collection_dynamic___(any_a<> const& thing); 
 
-template <typename ___TTT___, typename number_data_int64_a_chk = number_data_int64_a<> >
-inline bool check(collection_a<number_data_int64_a_chk> const& value) noexcept;
-
 template <typename number_data_int64_a>
 class collection_a : public range_a<>
 {
@@ -503,15 +500,7 @@ protected:
 	}
 
 private:
-	template <typename ___TTT___, typename number_data_int64_a_chk>
-	friend inline bool check(collection_a<number_data_int64_a_chk> const& value) noexcept;
-
 public:
-	static inline bool ___check___(___SHARED___ const& handle) noexcept
-	{
-		return bool(std::dynamic_pointer_cast<___collection_a_handle_base___>(handle));
-	}
-
 	static inline collection_a val(collection_a const& other) noexcept
 	{
 		return collection_a{ other };
@@ -574,6 +563,11 @@ public:
 		return *this;
 	}
 
+	static inline bool ___check___(any_a<> const& thing)
+	{
+		return bool{ std::dynamic_pointer_cast<___collection_a_handle_base___>(thing.___handle___) };
+	}
+
 	static inline collection_a ___cast___(any_a<> const& thing)
 	{
 		auto const ptr = std::dynamic_pointer_cast<___collection_a_handle_base___>(thing.___handle___);
@@ -598,12 +592,6 @@ private:
 	static bool const ___share___;
 	friend class ___collection_a_share___;
 }; // class collection_a
-
-template <typename ___TTT___, typename number_data_int64_a_chk>
-inline bool check(collection_a<number_data_int64_a_chk> const& value) noexcept
-{
-	return ___TTT___::___check___(value.___handle___);
-}
 
 template <typename number_data_int64_a>
 bool const collection_a<number_data_int64_a>::___share___ = []()
