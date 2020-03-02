@@ -219,7 +219,6 @@ protected:
 		return *std::static_pointer_cast<___shoal_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline shoal_a val(shoal_a const& other) noexcept
 	{

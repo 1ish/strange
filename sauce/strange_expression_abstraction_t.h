@@ -265,12 +265,6 @@ protected:
 				river.write_string(" ___" + dynamic_name + "ynamic___(any_a<> const& thing); \n\n");
 			}
 		}
-		if (define)
-		{
-			_define_class_check_(true, // declare
-				false, // friend
-				class_name, version, river);
-		}
 		_declare_or_define_template_(version, indent, river, declare, define);
 		_declare_or_define_class_(root, class_name, base_name, version, indent, river, declare, define);
 		if (define)
@@ -337,18 +331,14 @@ protected:
 		}
 	}
 
-	inline void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool preface = false, std::string const postfix = "") const
+	inline void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		if (declare)
 		{
 			river.write_string("template <");
-			if (preface)
-			{
-				river.write_string("typename ___TTT___, ");
-			}
 			if (_dimension_names.empty())
 			{
-				river.write_string("typename _1_" + postfix + " = void");
+				river.write_string("typename _1_ = void");
 			}
 			else
 			{
@@ -365,7 +355,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1) + postfix);
+					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1));
 
 					auto any_kind = *kit++;
 					if (check<expression_a<>>(any_kind))
@@ -398,13 +388,9 @@ protected:
 		else if (define)
 		{
 			river.write_string("template <");
-			if (preface)
-			{
-				river.write_string("typename ___TTT___, ");
-			}
 			if (_dimension_names.empty())
 			{
-				river.write_string("typename _1_" + postfix);
+				river.write_string("typename _1_");
 			}
 			else
 			{
@@ -419,7 +405,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1) + postfix);
+					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1));
 				}
 			}
 			river.write_string(">\n");
@@ -427,13 +413,9 @@ protected:
 		else
 		{
 			river.write_string("<");
-			if (preface)
-			{
-				river.write_string("___TTT___, ");
-			}
 			if (_dimension_names.empty())
 			{
-				river.write_string("_1_" + postfix);
+				river.write_string("_1_");
 			}
 			else
 			{
@@ -448,7 +430,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string(cast<symbol_a<>>(name).to_string().substr(1) + postfix);
+					river.write_string(cast<symbol_a<>>(name).to_string().substr(1));
 				}
 			}
 			river.write_string(">");
@@ -515,9 +497,6 @@ protected:
 		_define_class_handle_(root, class_name, base_name, class_expression_terms, version, indent, river);
 		_define_class_implementation_(root, class_name, base_name, class_expression_terms, version, indent, river);
 		river.write_string("}; // class " + class_name +"\n\n");
-		_define_class_check_(false, // declare
-			false, // friend
-			class_name, version, river);
 	}
 
 	inline std::string _class_base_name_(int64_t version) const
@@ -1230,34 +1209,7 @@ protected:
 		}
 
 		river.write_string(
-			"private:\n");
-		_define_class_check_(true, // declare
-			true, // friend
-			class_name, version, river);
-
-		if (root)
-		{
-			river.write_string(
-				//TODO
-				"/*\n"
-				"\ttemplate <typename ___TTT___>\n"
-				"\tfriend inline ___TTT___ cast(" + class_name + "<> const& value) noexcept;\n\n"
-
-				"\ttemplate <typename ___TTT___>\n"
-				"\tfriend inline ___TTT___ cast_ref(" + class_name + "<>& value) noexcept;\n\n"
-
-				"\ttemplate <typename ___TTT___>\n"
-				"\tfriend inline ___TTT___ cast_dup(" + class_name + "<>& value) noexcept;\n\n"
-				"*/\n");
-		}
-		//TODO
-		river.write_string(
-			"public:\n"
-			/*"\tstatic inline bool ___check___(___SHARED___ const& handle) noexcept\n"
-			"\t{\n" + (root
-				? std::string{ "\t\treturn bool(handle);\n" }
-				: ("\t\treturn bool(std::dynamic_pointer_cast<___" + class_name + "_handle_base___>(handle));\n")) +
-			"\t}\n\n"*/);
+			"public:\n");
 
 		if (root)
 		{
@@ -1466,36 +1418,6 @@ protected:
 			"private:\n"
 			"\tstatic bool const ___share___;\n"
 			"\tfriend class ___" + class_name + "_share___;\n");
-	}
-
-	inline void _define_class_check_(bool declare, bool mate, std::string const& class_name, int64_t version, river_a<>& river) const
-	{
-		//TODO
-		/*
-		if (mate)
-		{
-			river.write_string("\t");
-		}
-		_declare_or_define_template_(version, 0, river, declare && !mate, !declare || mate, true, "_chk");
-		if (mate)
-		{
-			river.write_string("\tfriend ");
-		}
-		river.write_string("inline bool check(" + class_name);
-		_declare_or_define_template_(version, 0, river, false, false, false, "_chk");
-		river.write_string(" const& value) noexcept");
-		if (declare)
-		{
-			river.write_string(";\n\n");
-		}
-		else
-		{
-			river.write_string("\n"
-				"{\n"
-				"\treturn ___TTT___::___check___(value.___handle___);\n"
-				"}\n\n");
-		}
-		*/
 	}
 
 	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const

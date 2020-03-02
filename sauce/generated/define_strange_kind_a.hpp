@@ -233,7 +233,6 @@ protected:
 		return *std::static_pointer_cast<___kind_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline kind_a val(kind_a const& other) noexcept
 	{

@@ -765,7 +765,6 @@ protected:
 		return *std::static_pointer_cast<___river_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline river_a val(river_a const& other) noexcept
 	{

@@ -205,7 +205,6 @@ protected:
 		return *std::static_pointer_cast<___herd_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline herd_a val(herd_a const& other) noexcept
 	{

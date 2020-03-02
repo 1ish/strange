@@ -205,7 +205,6 @@ protected:
 		return *std::static_pointer_cast<___operation_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline operation_a val(operation_a const& other) noexcept
 	{

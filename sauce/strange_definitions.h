@@ -57,47 +57,13 @@ inline any_a<> variadic_operate(any_a<> const& op, any_a<>& thing, Args&&... arg
 }
 
 // check/cast
-//TODO
-/*
-template <typename ___TTT___, typename ___VVV___>
-inline bool check(___VVV___ const&) noexcept
-{
-	return false;
-}
-*/
-/*
-template <typename ___TTT___>
-inline ___TTT___ cast(any_a<> const& value) noexcept
-{
-	return ___TTT___{ value.___handle___ };
-}
 
-template <typename ___TTT___>
-inline ___TTT___ cast_ref(any_a<>& value) noexcept
-{
-	return ___TTT___(value.___handle___, any_a<>::___reference_tag___{});
-}
-
-template <typename ___TTT___>
-inline ___TTT___ cast_dup(any_a<>& value) noexcept
-{
-	if (&value.___handle___ == &value.___shared___)
-	{
-		return ___TTT___{ value.___handle___ };
-	}
-	else
-	{
-		return ___TTT___(value.___handle___, any_a<>::___reference_tag___{});
-	}
-}
-*/
-///*
 template <typename ___TTT___>
 inline bool check(any_a<> const& value) noexcept
 {
 	return ___TTT___::___check___(value);
 }
-//*/
+
 template <typename ___TTT___>
 inline ___TTT___ cast(any_a<> const& value) noexcept
 {

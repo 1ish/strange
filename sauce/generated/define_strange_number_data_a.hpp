@@ -170,7 +170,6 @@ protected:
 		return *std::static_pointer_cast<___number_data_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline number_data_a val(number_data_a const& other) noexcept
 	{

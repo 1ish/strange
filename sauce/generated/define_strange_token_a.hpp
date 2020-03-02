@@ -317,7 +317,6 @@ protected:
 		return *std::static_pointer_cast<___token_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline token_a val(token_a const& other) noexcept
 	{

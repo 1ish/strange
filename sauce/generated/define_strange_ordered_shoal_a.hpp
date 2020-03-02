@@ -170,7 +170,6 @@ protected:
 		return *std::static_pointer_cast<___ordered_shoal_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline ordered_shoal_a val(ordered_shoal_a const& other) noexcept
 	{

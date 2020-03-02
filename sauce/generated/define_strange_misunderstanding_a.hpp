@@ -184,7 +184,6 @@ protected:
 		return *std::static_pointer_cast<___misunderstanding_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline misunderstanding_a val(misunderstanding_a const& other) noexcept
 	{

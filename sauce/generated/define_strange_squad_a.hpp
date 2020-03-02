@@ -170,7 +170,6 @@ protected:
 		return *std::static_pointer_cast<___squad_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline squad_a val(squad_a const& other) noexcept
 	{

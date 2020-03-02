@@ -568,18 +568,6 @@ protected:
 		return ___read___().operations_().at_string(name);
 	}
 
-private:
-/*
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast(any_a<> const& value) noexcept;
-
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast_ref(any_a<>& value) noexcept;
-
-	template <typename ___TTT___>
-	friend inline ___TTT___ cast_dup(any_a<>& value) noexcept;
-
-*/
 public:
 	inline bool is_ref() const
 	{

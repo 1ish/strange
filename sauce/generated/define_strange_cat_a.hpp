@@ -275,7 +275,6 @@ protected:
 		return *std::static_pointer_cast<___cat_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline cat_a val(cat_a const& other) noexcept
 	{

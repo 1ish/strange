@@ -170,7 +170,6 @@ protected:
 		return *std::static_pointer_cast<___bidirectional_const_iterator_data_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline bidirectional_const_iterator_data_a val(bidirectional_const_iterator_data_a const& other) noexcept
 	{

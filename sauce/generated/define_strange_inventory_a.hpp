@@ -219,7 +219,6 @@ protected:
 		return *std::static_pointer_cast<___inventory_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline inventory_a val(inventory_a const& other) noexcept
 	{

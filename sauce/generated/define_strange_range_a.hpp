@@ -184,7 +184,6 @@ protected:
 		return *std::static_pointer_cast<___range_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline range_a val(range_a const& other) noexcept
 	{

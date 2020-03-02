@@ -170,7 +170,6 @@ protected:
 		return *std::static_pointer_cast<___flock_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline flock_a val(flock_a const& other) noexcept
 	{

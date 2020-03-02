@@ -499,7 +499,6 @@ protected:
 		return *std::static_pointer_cast<___collection_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline collection_a val(collection_a const& other) noexcept
 	{

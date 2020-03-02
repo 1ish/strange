@@ -170,7 +170,6 @@ protected:
 		return *std::static_pointer_cast<___forward_iterator_data_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline forward_iterator_data_a val(forward_iterator_data_a const& other) noexcept
 	{

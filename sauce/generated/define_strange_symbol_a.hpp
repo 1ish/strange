@@ -212,7 +212,6 @@ protected:
 		return *std::static_pointer_cast<___symbol_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline symbol_a val(symbol_a const& other) noexcept
 	{

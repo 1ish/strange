@@ -170,7 +170,6 @@ protected:
 		return *std::static_pointer_cast<___ordered_herd_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline ordered_herd_a val(ordered_herd_a const& other) noexcept
 	{

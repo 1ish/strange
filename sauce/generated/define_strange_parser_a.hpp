@@ -170,7 +170,6 @@ protected:
 		return *std::static_pointer_cast<___parser_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline parser_a val(parser_a const& other) noexcept
 	{

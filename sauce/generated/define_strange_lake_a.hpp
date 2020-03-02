@@ -170,7 +170,6 @@ protected:
 		return *std::static_pointer_cast<___lake_a_handle_base___>(___handle___);
 	}
 
-private:
 public:
 	static inline lake_a val(lake_a const& other) noexcept
 	{
