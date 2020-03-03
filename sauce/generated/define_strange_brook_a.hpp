@@ -222,14 +222,14 @@ public:
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<brook_a, std::decay_t<___TTT___>>::value>>
 	explicit inline brook_a(___TTT___ value) noexcept
-		: inventory_a{ std::make_shared<___brook_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+		: inventory_a{ std::make_shared<___brook_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		___handle___->___weak___(___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline brook_a(___variadic_tag___, Args&&... args)
-		: inventory_a{ std::make_shared<___brook_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+		: inventory_a{ std::make_shared<___brook_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		___handle___->___weak___(___handle___);
 	}

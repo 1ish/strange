@@ -222,14 +222,14 @@ public:
 
 	template <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<random_access_const_iterator_data_a, std::decay_t<___TTT___>>::value>>
 	explicit inline random_access_const_iterator_data_a(___TTT___ value) noexcept
-		: random_access_const_iterator_a{ std::make_shared<___random_access_const_iterator_data_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }
+		: random_access_const_iterator_a{ std::make_shared<___random_access_const_iterator_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(std::move(value)) }
 	{
 		___handle___->___weak___(___handle___);
 	}
 
 	template <typename ___TTT___, typename... Args>
 	explicit inline random_access_const_iterator_data_a(___variadic_tag___, Args&&... args)
-		: random_access_const_iterator_a{ std::make_shared<___random_access_const_iterator_data_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+		: random_access_const_iterator_a{ std::make_shared<___random_access_const_iterator_data_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		___handle___->___weak___(___handle___);
 	}
