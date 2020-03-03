@@ -128,6 +128,11 @@ protected:
 			: ___collection_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
+		template <typename... Args>
+		inline ___herd_a_handle___(___variadic_tag___, Args&&... args)
+			: ___collection_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		{}
+
 		virtual inline bool has_string(std :: string const & s ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.has_string(s); }
 
@@ -172,6 +177,11 @@ private:
 		template <typename ___UUU___ = ___TTT___>
 		inline ___herd_a_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___herd_a_handle___<___TTT___>{ std::move(value) }
+		{}
+
+		template <typename... Args>
+		inline ___herd_a_handle_final___(___variadic_tag___, Args&&... args)
+			: ___herd_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline ___SHARED___ ___clone___() const final

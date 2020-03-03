@@ -188,6 +188,11 @@ protected:
 			: ___bidirectional_const_iterator_a_handle___<___TTT___, ___DHB___>{ std::move(value) }
 		{}
 
+		template <typename... Args>
+		inline ___random_access_const_iterator_a_handle___(___variadic_tag___, Args&&... args)
+			: ___bidirectional_const_iterator_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
+		{}
+
 		virtual inline any_a<> self_add__(range_a<> const& range) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add__(range); }
 
@@ -277,6 +282,11 @@ private:
 		template <typename ___UUU___ = ___TTT___>
 		inline ___random_access_const_iterator_a_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___random_access_const_iterator_a_handle___<___TTT___>{ std::move(value) }
+		{}
+
+		template <typename... Args>
+		inline ___random_access_const_iterator_a_handle_final___(___variadic_tag___, Args&&... args)
+			: ___random_access_const_iterator_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline ___SHARED___ ___clone___() const final

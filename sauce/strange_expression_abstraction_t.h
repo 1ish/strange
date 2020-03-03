@@ -1017,6 +1017,11 @@ protected:
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
 				"\t\tinline ___" + class_name + "_handle___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
 				"\t\t\t: ___" + base_name + "_handle___<___TTT___, ___DHB___>{ std::move(value) }\n"
+				"\t\t{}\n\n"
+
+				"\t\ttemplate <typename... Args>\n"
+				"\t\tinline ___" + class_name + "_handle___(___variadic_tag___, Args&&... args)\n"
+				"\t\t\t: ___" + base_name + "_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)\n"
 				"\t\t{}\n\n");
 		}
 		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
@@ -1103,6 +1108,11 @@ protected:
 				"\t\ttemplate <typename ___UUU___ = ___TTT___>\n"
 				"\t\tinline ___" + class_name + "_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept\n"
 				"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ std::move(value) }\n"
+				"\t\t{}\n\n"
+
+				"\t\ttemplate <typename... Args>\n"
+				"\t\tinline ___" + class_name + "_handle_final___(___variadic_tag___, Args&&... args)\n"
+				"\t\t\t: ___" + class_name + "_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)\n"
 				"\t\t{}\n\n"
 
 				"\t\tvirtual inline ___SHARED___ ___clone___() const final\n"
