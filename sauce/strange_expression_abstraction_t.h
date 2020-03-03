@@ -1180,6 +1180,12 @@ protected:
 
 	inline void _define_class_implementation_(bool root, std::string const& class_name, std::string const& base_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
+		std::string scope = _scope.to_string();
+		std::size_t pos = scope.rfind("::");
+		scope = pos == std::string::npos
+			? std::string{}
+			: scope.substr(0, pos + 2);
+
 		river.write_string(
 			"protected:\n"
 			"\tinline ___" + class_name + "_handle_base___ const& ___read___() const noexcept\n"
@@ -1330,6 +1336,16 @@ protected:
 				"\t{\n"
 				"\t\treturn any_a<>(thing, ___reference_tag___{});\n"
 				"\t}\n\n");
+
+			river.write_string(
+				//TODO dimensions
+				"\ttemplate <typename ___cat_a___ = cat_a>\n"
+				"\t___cat_a___ ___cat___() const\n"
+				"\t{\n"
+				"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\");\n"
+				"\t\treturn CAT;\n"
+				"\t}\n\n"
+			);
 		}
 		else
 		{
@@ -1411,6 +1427,15 @@ protected:
 				"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
 			_declare_or_define_template_(version, 0, river, false, false);
 			river.write_string("(thing, ___reference_tag___{}) };\n"
+				"\t}\n\n");
+
+			river.write_string(
+				//TODO dimensions
+				"\ttemplate <typename ___cat_a___ = cat_a<>>\n"
+				"\t___cat_a___ ___cat___() const\n"
+				"\t{\n"
+				"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\");\n"
+				"\t\treturn CAT;\n"
 				"\t}\n\n");
 		}
 

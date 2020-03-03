@@ -272,6 +272,13 @@ public:
 		return range_of_a{ range_of_d<element>(thing, ___reference_tag___{}) };
 	}
 
+	template <typename ___cat_a___ = cat_a<>>
+	___cat_a___ ___cat___() const
+	{
+		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::range_of");
+		return CAT;
+	}
+
 private:
 	static bool const ___share___;
 	friend class ___range_of_a_share___;

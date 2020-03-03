@@ -316,6 +316,13 @@ inline unordered_herd_a<> unordered_herd_create();
 template <bool _concurrent_ = false>
 inline unordered_shoal_a<> unordered_shoal_create();
 
+// cat
+template <typename ___cat_a___ = cat_a<>>
+inline ___cat_a___ cat_create(int64_t order = 1, std::string const& name = "");
+
+template <typename ___cat_a___ = cat_a<>>
+inline ___cat_a___ cat_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result);
+
 // kind
 inline kind_a<> kind_create();
 inline kind_a<> kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);

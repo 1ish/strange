@@ -363,6 +363,13 @@ public:
 		return cat_a{ cat_d<_1_>(thing, ___reference_tag___{}) };
 	}
 
+	template <typename ___cat_a___ = cat_a<>>
+	___cat_a___ ___cat___() const
+	{
+		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::cat");
+		return CAT;
+	}
+
 private:
 	static bool const ___share___;
 	friend class ___cat_a_share___;
