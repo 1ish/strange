@@ -1326,6 +1326,14 @@ protected:
 				"\t\t___handle___->___weak___(___handle___);\n"
 				"\t}\n\n"
 
+				"\ttemplate <typename ___TTT___, typename... Args>\n"
+				"\texplicit inline " + class_name + "(___variadic_tag___, Args&&... args)\n"
+				"\t\t: ___shared___{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference<___TTT___>::type>>(___variadic_tag___{}, std::forward<Args>(args)...) }\n"
+				"\t\t, ___handle___{ ___shared___ }\n"
+				"\t{\n"
+				"\t\t___handle___->___weak___(___handle___);\n"
+				"\t}\n\n"
+
 				"\ttemplate <typename ___TTT___>\n"
 				"\tinline " + class_name + "& operator=(std::shared_ptr<___TTT___> const& handle) noexcept\n"
 				"\t{\n"
@@ -1399,6 +1407,13 @@ protected:
 				"\ttemplate <typename ___TTT___, typename = typename std::enable_if_t<!std::is_base_of<" + class_name + ", std::decay_t<___TTT___>>::value>>\n"
 				"\texplicit inline " + class_name + "(___TTT___ value) noexcept\n"
 				"\t\t: " + base_name + "{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference<___TTT___>::type>>(std::move(value)) }\n"
+				"\t{\n"
+				"\t\t___handle___->___weak___(___handle___);\n"
+				"\t}\n\n"
+
+				"\ttemplate <typename ___TTT___, typename... Args>\n"
+				"\texplicit inline " + class_name + "(___variadic_tag___, Args&&... args)\n"
+				"\t\t: " + base_name + "{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference<___TTT___>::type>>(___variadic_tag___{}, std::forward<Args>(args)...) }\n"
 				"\t{\n"
 				"\t\t___handle___->___weak___(___handle___);\n"
 				"\t}\n\n"

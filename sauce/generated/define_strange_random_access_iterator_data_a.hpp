@@ -227,6 +227,13 @@ public:
 		___handle___->___weak___(___handle___);
 	}
 
+	template <typename ___TTT___, typename... Args>
+	explicit inline random_access_iterator_data_a(___variadic_tag___, Args&&... args)
+		: random_access_iterator_a{ std::make_shared<___random_access_iterator_data_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+	{
+		___handle___->___weak___(___handle___);
+	}
+
 	template <typename ___TTT___>
 	inline random_access_iterator_data_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{

@@ -556,6 +556,13 @@ public:
 		___handle___->___weak___(___handle___);
 	}
 
+	template <typename ___TTT___, typename... Args>
+	explicit inline collection_a(___variadic_tag___, Args&&... args)
+		: range_a{ std::make_shared<___collection_a_handle_final___<typename std::remove_reference<___TTT___>::type>>(___variadic_tag___{}, std::forward<Args>(args)...) }
+	{
+		___handle___->___weak___(___handle___);
+	}
+
 	template <typename ___TTT___>
 	inline collection_a& operator=(std::shared_ptr<___TTT___> const& handle) noexcept
 	{
