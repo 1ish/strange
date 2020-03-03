@@ -661,7 +661,7 @@ public:
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline any_a(___variadic_tag___, Args&&... args)
+	explicit inline any_a(___variadic_tag___, ___TTT___*, Args&&... args)
 		: ___shared___{ std::make_shared<___any_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
 		, ___handle___{ ___shared___ }
 	{
@@ -703,6 +703,12 @@ public:
 	{
 		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::any");
 		return CAT;
+	}
+
+	template <typename ___TTT___, typename... Args>
+	static inline any_a create(Args &&... args)
+	{
+		return any_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 
 private:

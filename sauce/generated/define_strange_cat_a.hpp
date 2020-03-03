@@ -333,7 +333,7 @@ public:
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline cat_a(___variadic_tag___, Args&&... args)
+	explicit inline cat_a(___variadic_tag___, ___TTT___*, Args&&... args)
 		: symbol_a{ std::make_shared<___cat_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		___handle___->___weak___(___handle___);
@@ -385,6 +385,12 @@ public:
 	{
 		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::cat");
 		return CAT;
+	}
+
+	template <typename ___TTT___, typename... Args>
+	static inline cat_a create(Args &&... args)
+	{
+		return cat_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 
 private:

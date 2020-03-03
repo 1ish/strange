@@ -291,7 +291,7 @@ public:
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline kind_a(___variadic_tag___, Args&&... args)
+	explicit inline kind_a(___variadic_tag___, ___TTT___*, Args&&... args)
 		: cat_a{ std::make_shared<___kind_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		___handle___->___weak___(___handle___);
@@ -343,6 +343,12 @@ public:
 	{
 		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::kind");
 		return CAT;
+	}
+
+	template <typename ___TTT___, typename... Args>
+	static inline kind_a create(Args &&... args)
+	{
+		return kind_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 
 private:

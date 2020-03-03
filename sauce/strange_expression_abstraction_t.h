@@ -1327,13 +1327,13 @@ protected:
 				"\t}\n\n"
 
 				"\ttemplate <typename ___TTT___, typename... Args>\n"
-				"\texplicit inline " + class_name + "(___variadic_tag___, Args&&... args)\n"
+				"\texplicit inline " + class_name + "(___variadic_tag___, ___TTT___*, Args&&... args)\n"
 				"\t\t: ___shared___{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }\n"
 				"\t\t, ___handle___{ ___shared___ }\n"
 				"\t{\n"
 				"\t\t___handle___->___weak___(___handle___);\n"
 				"\t}\n\n"
-
+				
 				"\ttemplate <typename ___TTT___>\n"
 				"\tinline " + class_name + "& operator=(std::shared_ptr<___TTT___> const& handle) noexcept\n"
 				"\t{\n"
@@ -1412,7 +1412,7 @@ protected:
 				"\t}\n\n"
 
 				"\ttemplate <typename ___TTT___, typename... Args>\n"
-				"\texplicit inline " + class_name + "(___variadic_tag___, Args&&... args)\n"
+				"\texplicit inline " + class_name + "(___variadic_tag___, ___TTT___*, Args&&... args)\n"
 				"\t\t: " + base_name + "{ std::make_shared<___" + class_name + "_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }\n"
 				"\t{\n"
 				"\t\t___handle___->___weak___(___handle___);\n"
@@ -1477,6 +1477,12 @@ protected:
 		}
 
 		river.write_string(
+			"\ttemplate <typename ___TTT___, typename... Args>\n"
+			"\tstatic inline " + class_name + " create(Args &&... args)\n"
+			"\t{\n"
+			"\t\treturn " + class_name + "(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);\n"
+			"\t}\n\n"
+
 			"private:\n"
 			"\tstatic bool const ___share___;\n"
 			"\tfriend class ___" + class_name + "_share___;\n");

@@ -823,7 +823,7 @@ public:
 	}
 
 	template <typename ___TTT___, typename... Args>
-	explicit inline river_a(___variadic_tag___, Args&&... args)
+	explicit inline river_a(___variadic_tag___, ___TTT___*, Args&&... args)
 		: range_a{ std::make_shared<___river_a_handle_final___<typename std::remove_reference_t<___TTT___>>>(___variadic_tag___{}, std::forward<Args>(args)...) }
 	{
 		___handle___->___weak___(___handle___);
@@ -875,6 +875,12 @@ public:
 	{
 		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::river");
 		return CAT;
+	}
+
+	template <typename ___TTT___, typename... Args>
+	static inline river_a create(Args &&... args)
+	{
+		return river_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 
 private:
