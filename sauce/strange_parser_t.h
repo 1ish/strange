@@ -14,7 +14,7 @@ public:
 	// construction
 	static inline parser_a<> create_()
 	{
-		return parser_a<>{ over{ parser_t<>{} } };
+		return parser_a<>::create<over>(parser_t<>{});
 	}
 
 	// reflection

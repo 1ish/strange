@@ -45,7 +45,7 @@ public:
 
 	static inline range_a<> create_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
 	{
-		return range_a<>{ over{ range_t<>(begin, end) } };
+		return range_a<>::create<over>(range_t<>(begin, end));
 	}
 
 	// reflection

@@ -14,7 +14,7 @@ public:
 	// construction
 	static inline unordered_shoal_a<> create_(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects, flock_a<> const& defaults)
 	{
-		return unordered_shoal_a<>{ over{ incarnation_t<>(inspiration, mention, aspects, defaults) } };
+		return unordered_shoal_a<>::create<over>(incarnation_t<>(inspiration, mention, aspects, defaults));
 	}
 
 	// reflection

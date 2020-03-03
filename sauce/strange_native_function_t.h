@@ -19,8 +19,8 @@ public:
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
-		return operation_a<>{ over{ native_function_t<>(fun,
-			operation_t<___ego___>::kind_names_params(flock_create(std::move(v)))) } };
+		return operation_a<>::create<over>(native_function_t<>(fun,
+			operation_t<___ego___>::kind_names_params(flock_create(std::move(v)))));
 	}
 
 	// reflection

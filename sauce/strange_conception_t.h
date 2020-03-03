@@ -20,7 +20,7 @@ public:
 	template <typename... Args>
 	static inline unordered_shoal_a<> create_(Args&&... args)
 	{
-		return unordered_shoal_a<>{ over{ conception_t<>{ flock_t<>::create_(std::forward<Args>(args)...) } } };
+		return unordered_shoal_a<>::create<over>(conception_t<>{ flock_t<>::create_(std::forward<Args>(args)...) });
 	}
 
 	// reflection

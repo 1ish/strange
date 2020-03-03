@@ -25,7 +25,7 @@ public:
 
 	static inline number_data_a<_primitive_> create(_primitive_ primitive)
 	{
-		return number_data_a<_primitive_>{ over{ number_t<_primitive_>{ primitive } } };
+		return number_data_a<_primitive_>::template create<over>(number_t<_primitive_>{ primitive });
 	}
 
 	// reflection

@@ -86,12 +86,12 @@ public:
 
 	static inline token_a<> create_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& tag, symbol_a<> const& symbol, any_a<> const& literal)
 	{
-		return token_a<>{ over{ token_t<>(filename, line, position, tag, symbol, literal, number_int_64_t<>::create(-1)) } };
+		return token_a<>::create<over>(token_t<>(filename, line, position, tag, symbol, literal, number_int_64_t<>::create(-1)));
 	}
 
 	static inline token_a<> create_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& tag, symbol_a<> const& symbol, any_a<> const& literal, number_data_a<int64_t> const& precedence)
 	{
-		return token_a<>{ over{ token_t<>(filename, line, position, tag, symbol, literal, precedence) } };
+		return token_a<>::create<over>(token_t<>(filename, line, position, tag, symbol, literal, precedence));
 	}
 
 	static inline token_a<> create(std::string const& tag, range_a<> const& range, create_member member)

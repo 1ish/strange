@@ -25,7 +25,7 @@ public:
 
 	static inline data_a<_data_> create(_data_ primitive)
 	{
-		return data_a<_data_>{ over{ data_t<_data_>{ primitive } } };
+		return data_a<_data_>::template create<over>(data_t<_data_>{ primitive });
 	}
 
 	// reflection

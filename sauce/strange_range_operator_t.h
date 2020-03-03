@@ -171,7 +171,7 @@ public:
 
 	static inline range_a<> create_(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref)
 	{
-		return range_a<>{ over{ range_operator_t<>(range, thing_ref, range_ref) } };
+		return range_a<>::create<over>(range_operator_t<>(range, thing_ref, range_ref));
 	}
 
 	// reflection

@@ -14,7 +14,7 @@ public:
 	// construction
 	static inline operation_a<> create_(token_a<> const& token, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& defaults, expression_a<> const& expression)
 	{
-		return operation_a<>{ over{ function_t<>(token, scope, names, kinds, defaults, expression) } };
+		return operation_a<>::create<over>(function_t<>(token, scope, names, kinds, defaults, expression));
 	}
 
 	// reflection

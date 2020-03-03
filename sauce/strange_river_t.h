@@ -18,7 +18,7 @@ class river_t : public thing_t<___ego___>
 		template <typename F>
 		static inline forward_const_iterator_data_a<_iterator_> create(river_a<> const& river, F&& it)
 		{
-			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(river, std::forward<F>(it)) } };
+			return forward_const_iterator_data_a<_iterator_>::template create<over>(const_iterator_t<_iterator_>(river, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -139,7 +139,7 @@ public:
 	static inline river_a<> create(std::string const& str = std::string())
 	{
 		std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(str);
-		return river_a<>{ over{ river_t<>(stream.get(), stream.get(), stream) } };
+		return river_a<>::create<over>(river_t<>(stream.get(), stream.get(), stream));
 	}
 
 	static inline any_a<> file__(range_a<> const& range)
@@ -183,7 +183,7 @@ public:
 			(in ? std::fstream::in : static_cast<std::fstream::openmode>(0)) |
 			(out ? std::fstream::out : static_cast<std::fstream::openmode>(0)) |
 			(trunc ? std::fstream::trunc : static_cast<std::fstream::openmode>(0)));
-		return river_a<>{ over{ river_t<>(stream.get(), stream.get(), stream, name) } };
+		return river_a<>::create<over>(river_t<>(stream.get(), stream.get(), stream, name));
 	}
 
 	static inline any_a<> in__(range_a<> const& _)
@@ -193,7 +193,7 @@ public:
 
 	static inline river_a<> in_()
 	{
-		return river_a<>{ over{ river_t<>{ &std::cin } } };
+		return river_a<>::create<over>(river_t<>{ &std::cin });
 	}
 
 	static inline any_a<> out__(range_a<> const& _)
@@ -203,7 +203,7 @@ public:
 
 	static inline river_a<> out_()
 	{
-		return river_a<>{ over{ river_t<>(nullptr, &std::cout) } };
+		return river_a<>::create<over>(river_t<>(nullptr, &std::cout));
 	}
 
 	static inline any_a<> err__(range_a<> const& _)
@@ -213,7 +213,7 @@ public:
 
 	static inline river_a<> err_()
 	{
-		return river_a<>{ over{ river_t<>(nullptr, &std::cerr) } };
+		return river_a<>::create<over>(river_t<>(nullptr, &std::cerr));
 	}
 
 	// reflection
@@ -265,7 +265,7 @@ public:
 
 	inline number_data_a<int8_t> get_()
 	{
-		return number_int_8_t<>::create(get());
+		return num(get());
 	}
 
 	inline int8_t get()
@@ -284,7 +284,7 @@ public:
 
 	inline number_data_a<int8_t> peek_()
 	{
-		return number_int_8_t<>::create(peek());
+		return num(peek());
 	}
 
 	inline int8_t peek()

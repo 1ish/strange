@@ -44,7 +44,7 @@ public:
 
 	static inline range_of_a<_element_> create_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
 	{
-		return range_of_a<_element_>{ over{ range_of_t<_element_>(begin, end) } };
+		return range_of_a<_element_>::template create<over>(range_of_t<_element_>(begin, end));
 	}
 
 	// reflection

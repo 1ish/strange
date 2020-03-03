@@ -35,13 +35,13 @@ public:
 
 	static inline symbol_a<> create_(lake_a<int8_t> const& lake)
 	{
-		return symbol_a<>{ over{ symbol_t<>{ lake_to_string(lake) } } };
+		return symbol_a<>::create<over>(symbol_t<>{ lake_to_string(lake) });
 	}
 
 	template <typename F>
 	static inline symbol_a<> create(F&& s)
 	{
-		return symbol_a<>{ over{ symbol_t<>{ std::forward<F>(s) } } };
+		return symbol_a<>::create<over>(symbol_t<>{ std::forward<F>(s) });
 	}
 
 	// reflection

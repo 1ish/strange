@@ -74,7 +74,7 @@ public:
 
 	static inline operation_a<> create_(token_a<> const& token, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
 	{
-		return operation_a<>{ over{ abstraction_t<>(token, scope, names, dimension_kinds, dimension_defaults, parent_expressions) } };
+		return operation_a<>::create<over>(abstraction_t<>(token, scope, names, dimension_kinds, dimension_defaults, parent_expressions));
 	}
 
 	// reflection

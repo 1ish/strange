@@ -18,7 +18,7 @@ class tokenizer_t : public thing_t<___ego___>
 		template <typename F>
 		static inline forward_const_iterator_data_a<_iterator_> create(river_a<> const& river, F&& it)
 		{
-			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(river, std::forward<F>(it)) } };
+			return forward_const_iterator_data_a<_iterator_>::template create<over>(const_iterator_t<_iterator_>(river, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -554,7 +554,7 @@ public:
 
 	static inline range_a<> create_(river_a<> const& river)
 	{
-		return range_a<>{ over{ tokenizer_t<>(river) } };
+		return range_a<>::create<over>(tokenizer_t<>(river));
 	}
 
 	// reflection

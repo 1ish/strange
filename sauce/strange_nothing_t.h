@@ -19,7 +19,7 @@ public:
 
 	static inline any_a<> create_()
 	{
-		static any_a<> VAL = any_a<>{ over{ nothing_t<>{} } };
+		static any_a<> VAL = any_a<>::create<over>(nothing_t<>{});
 		return VAL;
 	}
 

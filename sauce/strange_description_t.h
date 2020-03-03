@@ -14,7 +14,7 @@ public:
 	// construction
 	static inline operation_a<> create_()
 	{
-		return operation_a<>{ over{ description_t<>() } };
+		return operation_a<>::create<over>(description_t<>());
 	}
 
 	// reflection

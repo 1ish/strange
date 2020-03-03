@@ -14,7 +14,7 @@ public:
 	// construction
 	static inline operation_a<> create_(symbol_a<> const& name, any_a<> const& kind, any_a<> const& thing)
 	{
-		return operation_a<>{ over{ attribute_mutation_t<>(name, kind, thing) } };
+		return operation_a<>::create<over>(attribute_mutation_t<>(name, kind, thing));
 	}
 
 	// reflection

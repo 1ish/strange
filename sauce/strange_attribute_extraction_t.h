@@ -14,7 +14,7 @@ public:
 	// construction
 	static inline operation_a<> create_(any_a<> const& thing)
 	{
-		return operation_a<>{ over{ attribute_extraction_t<>(thing) } };
+		return operation_a<>::create<over>(attribute_extraction_t<>(thing));
 	}
 
 	// reflection

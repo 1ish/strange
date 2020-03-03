@@ -30,7 +30,7 @@ public:
 	template <typename F>
 	static inline misunderstanding_a<> create(F&& s)
 	{
-		return misunderstanding_a<>{ over{ misunderstanding_t<>{ std::forward<F>(s) } } };
+		return misunderstanding_a<>::create<over>(misunderstanding_t<>{ std::forward<F>(s) });
 	}
 
 	// reflection

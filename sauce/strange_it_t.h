@@ -19,7 +19,7 @@ public:
 
 	static inline forward_const_iterator_a<> create_()
 	{
-		static forward_const_iterator_a<> VAL = forward_const_iterator_a<>{ over{ it_t<>{} } };
+		static forward_const_iterator_a<> VAL = forward_const_iterator_a<>::create<over>(it_t<>{});
 		return VAL;
 	}
 

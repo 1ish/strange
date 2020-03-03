@@ -73,18 +73,18 @@ public:
 	{
 		if (name.is("strange::any"))
 		{
-			return cat_a<>{ over{ cat_t<>(order.extract_primitive(), sym(""), dimensions, flock_t<>::create_(), parameters, result) } };
+			return cat_a<>::create<over>(cat_t<>(order.extract_primitive(), sym(""), dimensions, flock_t<>::create_(), parameters, result));
 		}
-		return cat_a<>{ over{ cat_t<>(order.extract_primitive(), name, dimensions, flock_t<>::create_(), parameters, result) } };
+		return cat_a<>::create<over>(cat_t<>(order.extract_primitive(), name, dimensions, flock_t<>::create_(), parameters, result));
 	}
 
 	static inline cat_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym())
 	{
 		if (name == "strange::any")
 		{
-			return cat_a<>{ over{ cat_t<>(order, sym(""), dimensions, flock_t<>::create_(), parameters, result) } };
+			return cat_a<>::create<over>(cat_t<>(order, sym(""), dimensions, flock_t<>::create_(), parameters, result));
 		}
-		return cat_a<>{ over{ cat_t<>(order, sym(name), dimensions, flock_t<>::create_(), parameters, result) } };
+		return cat_a<>::create<over>(cat_t<>(order, sym(name), dimensions, flock_t<>::create_(), parameters, result));
 	}
 
 	static inline symbol_a<> any_sym()
