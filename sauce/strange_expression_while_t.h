@@ -42,7 +42,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_while::create passed non-expression loop");
 		}
-		return expression_a<>{ over{ expression_while_t<>( token, terms, cast<expression_a<>>(condition), cast<expression_a<>>(loop)) } };
+		return expression_a<>::create<over>(expression_while_t<>(token, terms, cast<expression_a<>>(condition), cast<expression_a<>>(loop)));
 	}
 
 	// reflection

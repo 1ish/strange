@@ -38,12 +38,12 @@ public:
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_a<>{ over{ expression_return_t<>(token, terms, expression_t<>::create(token)) } };
+		return expression_a<>::create<over>(expression_return_t<>(token, terms, expression_t<>::create(token)));
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, expression_a<> const& result)
 	{
-		return expression_a<>{ over{ expression_return_t<>(token, terms, result) } };
+		return expression_a<>::create<over>(expression_return_t<>(token, terms, result));
 	}
 
 	// reflection

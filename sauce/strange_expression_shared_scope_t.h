@@ -40,7 +40,7 @@ public:
 		{
 			return expression_substitute_t<over>::create(over{ expression_shared_scope_t<>(token, terms, shared_shoal, cast<symbol_a<>>(key)) }, value);
 		}
-		return expression_a<>{ over{ expression_shared_scope_t<>(token, terms, shared_shoal, cast<symbol_a<>>(key)) } };
+		return expression_a<>::create<over>(expression_shared_scope_t<>(token, terms, shared_shoal, cast<symbol_a<>>(key)));
 	}
 
 	// reflection

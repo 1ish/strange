@@ -36,14 +36,14 @@ public:
 		}
 		if (++it == terms.cend_())
 		{
-			return expression_a<>{ over{ expression_local_insert_t<>{ token, terms, cast<symbol_a<>>(key), kind, expression_t<>::create(token) } } };
+			return expression_a<>::create<over>(expression_local_insert_t<>(token, terms, cast<symbol_a<>>(key), kind, expression_t<>::create(token)));
 		}
 		any_a<> expression = *it;
 		if (!check<expression_a<>>(expression))
 		{
 			throw dis(token.report() + "strange::expression_local_insert::create passed non-expression");
 		}
-		return expression_a<>{ over{ expression_local_insert_t<>{ token, terms, cast<symbol_a<>>(key), kind, cast<expression_a<>>(expression) } } };
+		return expression_a<>::create<over>(expression_local_insert_t<>(token, terms, cast<symbol_a<>>(key), kind, cast<expression_a<>>(expression)));
 	}
 
 	// reflection

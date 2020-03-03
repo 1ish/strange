@@ -25,7 +25,7 @@ public:
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, any_a<> const& thing)
 	{
-		return expression_a<>{ over{ expression_literal_t<>{ token, terms, thing } } };
+		return expression_a<>::create<over>(expression_literal_t<>{ token, terms, thing });
 	}
 
 	// validation

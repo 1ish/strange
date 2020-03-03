@@ -43,7 +43,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_shared_insert::create passed non-expression");
 		}
-		return expression_a<>{ over{ expression_shared_insert_t<>{ token, terms, cast<symbol_a<>>(key), kind, cast<expression_a<>>(expression) } } };
+		return expression_a<>::create<over>(expression_shared_insert_t<>(token, terms, cast<symbol_a<>>(key), kind, cast<expression_a<>>(expression)));
 	}
 
 	// reflection

@@ -22,7 +22,7 @@ public:
 					terms.push_back(thing);
 					return expression_literal_t<>::create(substituted.token_(), terms, thing);
 				}
-				return expression_a<>{ expression_substitute_t(std::move(substituted), thing) };
+				return expression_a<>::create<expression_substitute_t>(std::move(substituted), thing);
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
@@ -54,13 +54,14 @@ public:
 		_thing = thing;
 	}
 
-protected:
-	any_a<> mutable _thing;
-
+	// public constructor
 	inline expression_substitute_t(_SUBSTITUTED_&& substituted, any_a<> const& thing)
 		: _SUBSTITUTED_{ std::move(substituted) }
 		, _thing{ thing }
 	{}
+
+protected:
+	any_a<> mutable _thing;
 };
 
 } // namespace strange

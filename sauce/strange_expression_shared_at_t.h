@@ -25,7 +25,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_shared_at::create passed non-symbol key");
 		}
-		return expression_a<>{ over{ expression_shared_at_t<>{ token, terms, cast<symbol_a<>>(key) } } };
+		return expression_a<>::create<over>(expression_shared_at_t<>(token, terms, cast<symbol_a<>>(key)));
 	}
 
 	// reflection

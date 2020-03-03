@@ -48,7 +48,7 @@ public:
 
 	static inline expression_a<> create(token_a<> const& token)
 	{
-		return expression_a<>{ over{ expression_t<>{token} } };
+		return expression_a<>::create<over>(expression_t<>{token});
 	}
 
 	// reflection

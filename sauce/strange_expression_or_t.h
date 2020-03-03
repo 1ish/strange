@@ -34,7 +34,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_or::create passed non-expression right-hand term");
 		}
-		return expression_a<>{ over{ expression_or_t<>( token, terms, cast<expression_a<>>(left), cast<expression_a<>>(right)) } };
+		return expression_a<>::create<over>(expression_or_t<>(token, terms, cast<expression_a<>>(left), cast<expression_a<>>(right)));
 	}
 
 	// reflection

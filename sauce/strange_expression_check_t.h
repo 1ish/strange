@@ -42,7 +42,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_check::create passed non-expression abstraction term");
 		}
-		return expression_a<>{ over{ expression_check_t<>(token, terms, cast<expression_a<>>(thing), cast<expression_a<>>(abstraction)) } };
+		return expression_a<>::create<over>(expression_check_t<>(token, terms, cast<expression_a<>>(thing), cast<expression_a<>>(abstraction)));
 	}
 
 	// reflection

@@ -43,7 +43,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_local_update::create passed non-expression");
 		}
-		return expression_a<>{ over{ expression_local_update_t<>{ token, terms, cast<symbol_a<>>(key), kind, cast<expression_a<>>(expression) } } };
+		return expression_a<>::create<over>(expression_local_update_t<>(token, terms, cast<symbol_a<>>(key), kind, cast<expression_a<>>(expression)));
 	}
 
 	// reflection

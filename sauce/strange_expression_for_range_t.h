@@ -66,7 +66,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_for_range::create passed non-expression loop");
 		}
-		return expression_a<>{ over{ expression_for_range_t<>( token, terms, cast<symbol_a<>>(name), kind, cast<expression_a<>>(range), cast<expression_a<>>(loop)) } };
+		return expression_a<>::create<over>(expression_for_range_t<>( token, terms, cast<symbol_a<>>(name), kind, cast<expression_a<>>(range), cast<expression_a<>>(loop)));
 	}
 
 	// reflection

@@ -14,7 +14,7 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		return expression_a<>{ over{ expression_continue_t<>{ token } } };
+		return expression_a<>::create<over>(expression_continue_t<>{ token });
 	}
 
 	// reflection
