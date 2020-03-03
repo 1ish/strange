@@ -283,7 +283,7 @@ public:
 	}
 
 	template <typename ___TTT___, typename... Args>
-	static inline data_a create(Args &&... args)
+	static inline data_a create(Args&&... args)
 	{
 		return data_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}

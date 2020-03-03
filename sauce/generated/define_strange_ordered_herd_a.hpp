@@ -283,7 +283,7 @@ public:
 	}
 
 	template <typename ___TTT___, typename... Args>
-	static inline ordered_herd_a create(Args &&... args)
+	static inline ordered_herd_a create(Args&&... args)
 	{
 		return ordered_herd_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}

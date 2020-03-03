@@ -1478,7 +1478,7 @@ protected:
 
 		river.write_string(
 			"\ttemplate <typename ___TTT___, typename... Args>\n"
-			"\tstatic inline " + class_name + " create(Args &&... args)\n"
+			"\tstatic inline " + class_name + " create(Args&&... args)\n"
 			"\t{\n"
 			"\t\treturn " + class_name + "(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);\n"
 			"\t}\n\n"
