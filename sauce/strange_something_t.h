@@ -19,8 +19,7 @@ public:
 
 	static inline any_a<> create_()
 	{
-		static any_a<> VAL = any_a<>{ over{ something_t<>{} } };
-//TODO		static any_a<> VAL = any_a<><over>(any_a<>::___variadic_tag___{}, something_t<>{});
+		static any_a<> VAL = any_a<>::template create<over>(something_t<>{});
 		return VAL;
 	}
 

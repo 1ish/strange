@@ -18,7 +18,7 @@ class brook_t : public thing_t<___ego___>
 		template <typename F>
 		static inline random_access_iterator_data_a<_iterator_> create(brook_t const& brook_thing, F&& it)
 		{
-			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(brook_thing, std::forward<F>(it)) } };
+			return random_access_iterator_data_a<_iterator_>::template create<over>(iterator_t<_iterator_>(brook_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -56,7 +56,7 @@ class brook_t : public thing_t<___ego___>
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
-			return number_t<_primitive_>::create(*_it);
+			return num(*_it);
 		}
 
 		inline any_a<> set__(range_a<> const& range) const
@@ -401,7 +401,7 @@ class brook_t : public thing_t<___ego___>
 		template <typename F>
 		static inline random_access_const_iterator_data_a<_iterator_> create(brook_a<_primitive_> const& brook, brook_t const& brook_thing, F&& it)
 		{
-			return random_access_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(brook, brook_thing, std::forward<F>(it)) } };
+			return random_access_const_iterator_data_a<_iterator_>::template create<over>(const_iterator_t<_iterator_>(brook, brook_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -439,7 +439,7 @@ class brook_t : public thing_t<___ego___>
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
-			return number_t<_primitive_>::create(*_it);
+			return num(*_it);
 		}
 
 		inline any_a<> const* operator->() const
@@ -791,7 +791,7 @@ public:
 	template <typename F>
 	static inline brook_a<_primitive_> create(F&& init)
 	{
-		return brook_a<_primitive_>{ over{ brook_t<_primitive_, _concurrent_>{ std::forward<F>(init) } } };
+		return brook_a<_primitive_>::template create<over>(brook_t<_primitive_, _concurrent_>{ std::forward<F>(init) });
 	}
 
 	// reflection
@@ -886,7 +886,7 @@ public:
 
 	inline any_a<> at_index(int64_t index) const
 	{
-		return number_t<_primitive_>::create(pat(index));
+		return num(pat(index));
 	}
 
 	inline _primitive_ pat(int64_t index) const
@@ -1036,7 +1036,7 @@ public:
 		}
 		_primitive_ number = _deque.front();
 		_deque.pop_front();
-		return number_t<_primitive_>::create(number);
+		return num(number);
 	}
 
 	inline _primitive_ pop_front()
@@ -1071,7 +1071,7 @@ public:
 		}
 		_primitive_ number = _deque.back();
 		_deque.pop_back();
-		return number_t<_primitive_>::create(number);
+		return num(number);
 	}
 
 	inline _primitive_ pop_back()
