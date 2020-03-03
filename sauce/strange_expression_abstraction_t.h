@@ -547,6 +547,7 @@ protected:
 				"\t// constructor tags\n"
 				"\tstruct ___reference_tag___ {};\n"
 				"\tstruct ___duplicate_tag___ {};\n\n"
+				"\tstruct ___variadic_tag___ {};\n\n"
 
 				"\t// shared pointer typedefs\n"
 				"\tusing ___WEAK___ = std::weak_ptr<___" + class_name + "_handle_base___>;\n"
@@ -952,6 +953,11 @@ protected:
 				"\t\t\t: ___value___{ std::move(value) }\n"
 				"\t\t{}\n\n"
 
+				"\t\ttemplate <typename... Args>\n"
+				"\t\tinline ___" + class_name + "_handle___(___variadic_tag___, Args&&... args)\n"
+				"\t\t\t: ___value___(std::forward<Args>(args)...)\n"
+				"\t\t{}\n\n"
+
 				"\t\tvirtual inline void ___weak___(___WEAK___ const& weak) const final\n"
 				"\t\t{\n"
 				"\t\t\t___value___.___weak___(weak);\n"
@@ -1050,10 +1056,16 @@ protected:
 				"\t\t\t: ___" + class_name + "_handle___<___TTT___>{ std::move(value) }\n"
 				"\t\t{}\n\n"
 
+				"\t\ttemplate <typename... Args>\n"
+				"\t\tinline ___" + class_name + "_handle_final___(___variadic_tag___, Args&&... args)\n"
+				"\t\t\t: ___" + class_name + "_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)\n"
+				"\t\t{}\n\n"
+
 				"\t\tvirtual inline ___SHARED___ ___clone___() const final\n"
 				"\t\t{\n"
 				"\t\t\treturn std::make_shared<___" + class_name + "_handle_final___>(___" + class_name + "_handle___<___TTT___>::___value___);\n"
 				"\t\t}\n"
+
 				"\t};\n\n"
 
 				"\ttemplate <typename ___TTT___>\n"

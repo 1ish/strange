@@ -13,6 +13,8 @@ public:
 	struct ___reference_tag___ {};
 	struct ___duplicate_tag___ {};
 
+	struct ___variadic_tag___ {};
+
 	// shared pointer typedefs
 	using ___WEAK___ = std::weak_ptr<___any_a_handle_base___>;
 	using ___SHARED___ = std::shared_ptr<___any_a_handle_base___>;
@@ -327,6 +329,11 @@ protected:
 			: ___value___{ std::move(value) }
 		{}
 
+		template <typename... Args>
+		inline ___any_a_handle___(___variadic_tag___, Args&&... args)
+			: ___value___(std::forward<Args>(args)...)
+		{}
+
 		virtual inline void ___weak___(___WEAK___ const& weak) const final
 		{
 			___value___.___weak___(weak);
@@ -530,6 +537,11 @@ private:
 		template <typename ___UUU___ = ___TTT___>
 		inline ___any_a_handle_final___(___TTT___ value, typename std::enable_if_t<!std::is_reference<___UUU___>::value, int>* = 0) noexcept
 			: ___any_a_handle___<___TTT___>{ std::move(value) }
+		{}
+
+		template <typename... Args>
+		inline ___any_a_handle_final___(___variadic_tag___, Args&&... args)
+			: ___any_a_handle___<___TTT___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
 		virtual inline ___SHARED___ ___clone___() const final
