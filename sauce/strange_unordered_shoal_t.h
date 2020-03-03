@@ -19,7 +19,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 		template <typename F>
 		static inline forward_iterator_data_a<_iterator_> create(unordered_shoal_t const& unordered_shoal_thing, F&& it)
 		{
-			return forward_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(unordered_shoal_thing, std::forward<F>(it)) } };
+			return forward_iterator_data_a<_iterator_>::template create<over>(iterator_t<_iterator_>(unordered_shoal_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -155,7 +155,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 		template <typename F>
 		static inline forward_const_iterator_data_a<_iterator_> create(unordered_shoal_a<> const& unordered_shoal, unordered_shoal_t const& unordered_shoal_thing, F&& it)
 		{
-			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(unordered_shoal, unordered_shoal_thing, std::forward<F>(it)) } };
+			return forward_const_iterator_data_a<_iterator_>::template create<over>(const_iterator_t<_iterator_>(unordered_shoal, unordered_shoal_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -288,7 +288,7 @@ public:
 	template <typename F>
 	static inline unordered_shoal_a<> create(F&& init)
 	{
-		return unordered_shoal_a<>{ over{ unordered_shoal_t<_concurrent_>{ std::forward<F>(init) } } };
+		return unordered_shoal_a<>::create<over>(unordered_shoal_t<_concurrent_>{ std::forward<F>(init) });
 	}
 
 	// reflection

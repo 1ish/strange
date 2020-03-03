@@ -18,7 +18,7 @@ class squad_t : public thing_t<___ego___>
 		template <typename F>
 		static inline random_access_iterator_data_a<_iterator_> create(squad_t const& squad_thing, F&& it)
 		{
-			return random_access_iterator_data_a<_iterator_>{ over{ iterator_t<_iterator_>(squad_thing, std::forward<F>(it)) } };
+			return random_access_iterator_data_a<_iterator_>::template create<over>(iterator_t<_iterator_>(squad_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -387,7 +387,7 @@ class squad_t : public thing_t<___ego___>
 		template <typename F>
 		static inline random_access_const_iterator_data_a<_iterator_> create(squad_a<> const& squad, squad_t const& squad_thing, F&& it)
 		{
-			return random_access_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(squad, squad_thing, std::forward<F>(it)) } };
+			return random_access_const_iterator_data_a<_iterator_>::template create<over>(const_iterator_t<_iterator_>(squad, squad_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -769,7 +769,7 @@ public:
 	template <typename F>
 	static inline squad_a<> create(F&& init)
 	{
-		return squad_a<>{ over{ squad_t<_concurrent_>{ std::forward<F>(init) } } };
+		return squad_a<>::create<over>(squad_t<_concurrent_>{ std::forward<F>(init) });
 	}
 
 	// reflection

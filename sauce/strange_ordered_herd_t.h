@@ -18,7 +18,7 @@ class ordered_herd_t : public thing_t<___ego___>
 		template <typename F>
 		static inline bidirectional_const_iterator_data_a<_iterator_> create(ordered_herd_a<> const& ordered_herd, ordered_herd_t const& ordered_herd_thing, F&& it)
 		{
-			return bidirectional_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(ordered_herd, ordered_herd_thing, std::forward<F>(it)) } };
+			return bidirectional_const_iterator_data_a<_iterator_>::template create<over>(const_iterator_t<_iterator_>(ordered_herd, ordered_herd_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -183,7 +183,7 @@ public:
 	template <typename F>
 	static inline ordered_herd_a<> create(F&& init)
 	{
-		return ordered_herd_a<>{ over{ ordered_herd_t<_concurrent_>{ std::forward<F>(init) } } };
+		return ordered_herd_a<>::create<over>(ordered_herd_t<_concurrent_>{ std::forward<F>(init) });
 	}
 
 	// reflection

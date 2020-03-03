@@ -18,7 +18,7 @@ class unordered_herd_t : public thing_t<___ego___>
 		template <typename F>
 		static inline forward_const_iterator_data_a<_iterator_> create(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
 		{
-			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(unordered_herd, unordered_herd_thing, std::forward<F>(it)) } };
+			return forward_const_iterator_data_a<_iterator_>::template create<over>(const_iterator_t<_iterator_>(unordered_herd, unordered_herd_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -157,7 +157,7 @@ public:
 	template <typename F>
 	static inline unordered_herd_a<> create(F&& init)
 	{
-		return unordered_herd_a<>{ over{ unordered_herd_t<_concurrent_>{ std::forward<F>(init) } } };
+		return unordered_herd_a<>::create<over>(unordered_herd_t<_concurrent_>{ std::forward<F>(init) });
 	}
 
 	// reflection
