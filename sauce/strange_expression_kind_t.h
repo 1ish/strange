@@ -274,7 +274,7 @@ public:
 		river.write_string("> ");
 	}
 
-	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const //TODO _count == 9 : _expression
+	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
 	{
 		if (declare || define)
 		{
@@ -326,18 +326,21 @@ public:
 					{
 						river.write_string(",");
 						_result.generate_cpp(version, indent, river, declare, define);
-						//TODO reference
-						if (_fixed)
+						if (_count >= 7)
 						{
-							river.write_string(", true");
-						}
-						else if (_optional)
-						{
-							river.write_string(", false");
-						}
-						if (_optional)
-						{
-							river.write_string(", true");
+							river.write_string(_fixed ? ", true" : ", false");
+							if (_count >= 8)
+							{
+								river.write_string(_reference ? ", true" : ", false");
+								if (_count >= 9)
+								{
+									river.write_string(_optional ? ", true" : ", false");
+									if (_count == 10)
+									{
+										//TODO _count == 10 : _expression
+									}
+								}
+							}
 						}
 					}
 				}
