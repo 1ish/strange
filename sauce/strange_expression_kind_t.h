@@ -309,7 +309,12 @@ public:
 			}
 			return;
 		}
-		river.write_string(" strange::kind_t<>::create(\"" + _name.to_string() + "\"");
+		if (_count == 10)
+		{
+			//TODO _count == 10 : _expression
+			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::generate_cpp expression kind expression not implemented yet");
+		}
+		river.write_string(" strange::kind_t<>::create(\"" + std::to_string(_order) + ", " + _name.to_string() + "\"");
 		if (_count >= 3)
 		{
 			river.write_string(",");
@@ -335,10 +340,6 @@ public:
 								if (_count >= 9)
 								{
 									river.write_string(_optional ? ", true" : ", false");
-									if (_count == 10)
-									{
-										//TODO _count == 10 : _expression
-									}
 								}
 							}
 						}
