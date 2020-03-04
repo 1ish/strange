@@ -1486,7 +1486,10 @@ protected:
 			"\t___cat_a___ ___cat___() const\n"
 			"\t{\n"
 			"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
-		_define_class_relfection_dimensions_(_dimension_kinds, version, river);
+		if (!root)
+		{
+			_define_class_relfection_dimensions_(_dimension_kinds, version, river);
+		}
 		river.write_string(");\n"
 			"\t\treturn CAT;\n"
 			"\t}\n\n");
@@ -1494,6 +1497,7 @@ protected:
 
 	inline void _define_class_relfection_dimensions_(flock_a<> const& dimension_kinds, int64_t version, river_a<>& river) const
 	{
+		static kind_a<> ANY_KIND = kind_create();
 		if (dimension_kinds.empty())
 		{
 			return;
@@ -1516,8 +1520,11 @@ protected:
 				river.write_string("kind_create<___kind_a___>(" +
 					std::to_string(kind.order()) + ", \"" +
 					kind.name_().to_string() + "\"");
-				// recurse for dimensions
-				_define_class_relfection_dimensions_(kind.dimensions_(), version, river);
+				if (kind != ANY_KIND)
+				{
+					// recurse for dimensions
+					_define_class_relfection_dimensions_(kind.dimensions_(), version, river);
+				}
 				river.write_string(")");
 			}
 			else if (check<expression_a<>>(dimension_kind))

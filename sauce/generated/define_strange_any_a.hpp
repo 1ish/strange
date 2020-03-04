@@ -701,7 +701,7 @@ public:
 	template <typename ___cat_a___ = cat_a, typename ___kind_a___ = kind_a>
 	___cat_a___ ___cat___() const
 	{
-		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::any", flock_val(kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, "")));
+		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::any");
 		return CAT;
 	}
 
