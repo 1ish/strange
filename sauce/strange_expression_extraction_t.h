@@ -173,7 +173,7 @@ public:
 			auto name = cast<symbol_a<>>(*nit++);
 			auto kind = cast<kind_a<>>(*kit++);
 			auto expression = cast<expression_a<>>(*eit++);
-			river.write_string("catch(" + kind.name_().to_string() + "_a<> const& ");
+			river.write_string("catch(" + kind.code() + " const& ");
 			river.write_string(name.to_string() + " =");
 			expression.generate_cpp(version, indent, river, declare, define);
 		}
@@ -234,7 +234,7 @@ public:
 				}
 				else
 				{
-					parameters += kind.name_().to_string() + "_a<> ";
+					parameters += kind.code() + " ";
 				}
 				if (kind.fixed())
 				{

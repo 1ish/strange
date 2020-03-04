@@ -292,12 +292,8 @@ public:
 			}
 			else
 			{
-				std::string name = _name.to_string();
-				if (name.empty())
-				{
-					name = "any";
-				}
-				river.write_string(" " + name + "_a<> ");
+				std::string const name = _name.to_string();
+				river.write_string(" " + (name.empty() ? std::string("any") : name) + "_a<> "); //TODO
 			}
 			if (_fixed)
 			{

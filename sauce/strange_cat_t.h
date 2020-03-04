@@ -112,7 +112,7 @@ public:
 		{
 			return symbol_t<___ego___>::operator==(thing);
 		}
-		auto const cat = cast<cat_a<>>(thing);
+		auto const cat = fast<cat_a<>>(thing);
 		if (_symbolic != cat.symbolic() || symbol_t<___ego___>::_hash != cat.hash())
 		{
 			return false;
@@ -208,7 +208,8 @@ public:
 
 	inline std::string code() const
 	{
-		return _name.to_string() + "_a<>";
+		auto const name = _name.to_string();
+		return (name.empty() ? std::string("strange::any") : name) + "_a<>"; //TODO
 	}
 
 protected:
@@ -349,7 +350,7 @@ protected:
 
 		if (check<cat_a<>>(result))
 		{
-			std::string const& str = result.to_string();
+			std::string const str = result.to_string();
 			if (str != "<>")
 			{
 				symbol += ":" + str;

@@ -201,7 +201,7 @@ public:
 			auto const expression = cast<expression_a<>>(*eit++);
 			if (check<kind_a<>>(kind))
 			{
-				river.write_string("catch(" + cast<kind_a<>>(kind).name_().to_string() + "_a<> const& ");
+				river.write_string("catch(" + cast<kind_a<>>(kind).code() + " const& ");
 				river.write_string(cast<kind_a<>>(kind).to_string() + " =");
 			}
 			else
@@ -239,7 +239,7 @@ protected:
 		river.write_string("\n");
 		flock_a<> split_scope = _split_scope_();
 		auto const name = _namespace_open_(split_scope, river);
-		std::string const& name_string = name.to_string();
+		std::string const name_string = name.to_string();
 		std::string const class_name =
 			((name.first_character() == '<' && name.last_character() == '>')
 				? name_string.substr(1, name_string.length() - 2)
@@ -291,7 +291,7 @@ protected:
 	inline flock_a<> _split_scope_() const
 	{
 		auto split_scope = flock_t<>::create_();
-		std::string const& scope = _scope.to_string();
+		std::string const scope = _scope.to_string();
 		std::size_t begin = 0;
 		std::size_t pos = scope.find("::", begin);
 		int64_t nest = 1;

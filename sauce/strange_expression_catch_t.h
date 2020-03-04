@@ -197,7 +197,7 @@ public:
 		forward_const_iterator_a<> eit = _expressions.cbegin_();
 		for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 		{
-			river.write_string("catch(" + cast<kind_a<>>(*kit).name_().to_string() + "_a<> const& exception)\n{\n");
+			river.write_string("catch(" + cast<kind_a<>>(*kit).code() + " const& exception)\n{\n");
 			++kit;
 			cast<expression_a<>>(*eit).generate_cpp(version, indent, river, declare, define);
 			++eit;

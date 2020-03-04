@@ -66,7 +66,7 @@ public:
 			}
 			type = cast<symbol_a<>>(type_any);
 		}
-		auto const& type_string = type.to_string();
+		auto const type_string = type.to_string();
 
 		auto const cat_op = parent.at_string("cat");
 		if (!cat_op)
