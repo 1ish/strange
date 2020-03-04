@@ -336,8 +336,21 @@ template <typename ___cat_a___ = cat_a<>>
 inline ___cat_a___ cat_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& parameters, symbol_a<> const& result);
 
 // kind
-inline kind_a<> kind_create();
-inline kind_a<> kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
+template <typename ___kind_a___ = kind_a<>>
+inline ___kind_a___ kind_create(int64_t order = 1, std::string const& name = "");
+
+template <typename ___kind_a___ = kind_a<>>
+inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions);
+
+template <typename ___kind_a___ = kind_a<>>
+inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects);
+
+template <typename ___kind_a___ = kind_a<>>
+inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters);
+
+template <typename ___kind_a___ = kind_a<>>
+inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
+
 inline kind_a<> kind_from_cat(cat_a<> const& cat);
 inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects);
 inline kind_a<> kind_from_cat(cat_a<> const& cat, flock_a<> const& aspects, any_a<> const& fixed, any_a<> const& reference, any_a<> const& optional);

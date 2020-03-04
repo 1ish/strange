@@ -415,7 +415,7 @@ public:
 		return random_access_iterator_a{ random_access_iterator_d<_1_>(thing, ___reference_tag___{}) };
 	}
 
-	template <typename ___cat_a___ = cat_a<>>
+	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	___cat_a___ ___cat___() const
 	{
 		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::random_access_iterator");

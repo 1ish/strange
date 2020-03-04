@@ -856,10 +856,10 @@ public:
 		return number_a{ number_d<number_data_int64_a, number_data_uint64_a, number_data_double_a>(thing, ___reference_tag___{}) };
 	}
 
-	template <typename ___cat_a___ = cat_a<>>
+	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	___cat_a___ ___cat___() const
 	{
-		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::number");
+		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::number", flock_val(kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, "")));
 		return CAT;
 	}
 

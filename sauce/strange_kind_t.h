@@ -234,13 +234,34 @@ class ___kind_t_share___
 	}
 };
 
-inline kind_a<> kind_create()
+//inline kind_a<> kind_create(int64_t order = 1, std::string const& name = "");
+template <typename ___kind_a___>
+inline ___kind_a___ kind_create(int64_t order, std::string const& name)
 {
-	return kind_t<>::create_();
+	return kind_t<>::create(order, name);
 }
 
-// inline kind_a<> kind_create(int64_t order, std::string const& name = "", flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false)
-inline kind_a<> kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
+template <typename ___kind_a___>
+inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions)
+{
+	return kind_t<>::create(order, name, dimensions);
+}
+
+template <typename ___kind_a___>
+inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects)
+{
+	return kind_t<>::create(order, name, dimensions, aspects);
+}
+
+template <typename ___kind_a___>
+inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters)
+{
+	return kind_t<>::create(order, name, dimensions, aspects, parameters);
+}
+
+//inline kind_a<> kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed = false, bool reference = false, bool optional = false);
+template <typename ___kind_a___>
+inline ___kind_a___ kind_create(int64_t order, std::string const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
 {
 	return kind_t<>::create(order, name, dimensions, aspects, parameters, result, fixed, reference, optional);
 }

@@ -1475,47 +1475,59 @@ protected:
 
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat_a>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = cat_a, typename ___kind_a___ = kind_a>\n");
 		}
 		else
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>\n");
 		}
-		//TODO dimensions
+		// dimensions
 		river.write_string(
 			"\t___cat_a___ ___cat___() const\n"
 			"\t{\n"
 			"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
-		if (!_dimension_kinds.empty())
-		{
-//			river.write_string(", flock_val(");
-			bool first = true;
-			for (auto const& dimension_kind : _dimension_kinds.extract_vector())
-			{
-				if (first)
-				{
-					first = false;
-				}
-				else
-				{
-//					river.write_string(", ");
-				}
-				if (check<kind_a<>>(dimension_kind))
-				{
-//					river.write_string(fast<kind_a<>>(dimension_kind).code());
-				}
-				else if (check<expression_a<>>(dimension_kind))
-				{
-//					fast<expression_a<>>(dimension_kind).generate_cpp(version, 0, river, false, false);
-				}
-			}
-//			river.write_string(")");
-		}
+		_define_class_relfection_dimensions_(_dimension_kinds, version, river);
 		river.write_string(");\n"
 			"\t\treturn CAT;\n"
 			"\t}\n\n");
 	}
 
+	inline void _define_class_relfection_dimensions_(flock_a<> const& dimension_kinds, int64_t version, river_a<>& river) const
+	{
+		if (dimension_kinds.empty())
+		{
+			return;
+		}
+		river.write_string(", flock_val(");
+		bool first = true;
+		for (auto const& dimension_kind : dimension_kinds.extract_vector())
+		{
+			if (first)
+			{
+				first = false;
+			}
+			else
+			{
+				river.write_string(", ");
+			}
+			if (check<kind_a<>>(dimension_kind))
+			{
+				auto const kind = fast<kind_a<>>(dimension_kind);
+				river.write_string("kind_create<___kind_a___>(" +
+					std::to_string(kind.order()) + ", \"" +
+					kind.name_().to_string() + "\"");
+				// recurse for dimensions
+				_define_class_relfection_dimensions_(kind.dimensions_(), version, river);
+				river.write_string(")");
+			}
+			else if (check<expression_a<>>(dimension_kind))
+			{
+				fast<expression_a<>>(dimension_kind).generate_cpp(version, 0, river, false, false);
+			}
+		}
+		river.write_string(")");
+	}
+	
 	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const
 	{
 		_declare_or_define_template_(version, 0, river, false, true);
