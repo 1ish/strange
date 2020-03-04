@@ -1202,12 +1202,6 @@ protected:
 
 	inline void _define_class_implementation_(bool root, std::string const& class_name, std::string const& base_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{
-		std::string scope = _scope.to_string();
-		std::size_t pos = scope.rfind("::");
-		scope = pos == std::string::npos
-			? std::string{}
-			: scope.substr(0, pos + 2);
-
 		river.write_string(
 			"protected:\n"
 			"\tinline ___" + class_name + "_handle_base___ const& ___read___() const noexcept\n"
@@ -1366,16 +1360,6 @@ protected:
 				"\t{\n"
 				"\t\treturn any_a<>(thing, ___reference_tag___{});\n"
 				"\t}\n\n");
-
-			river.write_string(
-				//TODO dimensions
-				"\ttemplate <typename ___cat_a___ = cat_a>\n"
-				"\t___cat_a___ ___cat___() const\n"
-				"\t{\n"
-				"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\");\n"
-				"\t\treturn CAT;\n"
-				"\t}\n\n"
-			);
 		}
 		else
 		{
@@ -1465,16 +1449,9 @@ protected:
 			_declare_or_define_template_(version, 0, river, false, false);
 			river.write_string("(thing, ___reference_tag___{}) };\n"
 				"\t}\n\n");
-
-			river.write_string(
-				//TODO dimensions
-				"\ttemplate <typename ___cat_a___ = cat_a<>>\n"
-				"\t___cat_a___ ___cat___() const\n"
-				"\t{\n"
-				"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\");\n"
-				"\t\treturn CAT;\n"
-				"\t}\n\n");
 		}
+
+		_define_class_relfection_(root, class_name, base_name, class_expression_terms, version, indent, river);
 
 		river.write_string(
 			"\ttemplate <typename ___TTT___, typename... Args>\n"
@@ -1486,6 +1463,57 @@ protected:
 			"private:\n"
 			"\tstatic bool const ___share___;\n"
 			"\tfriend class ___" + class_name + "_share___;\n");
+	}
+
+	inline void _define_class_relfection_(bool root, std::string const& class_name, std::string const& base_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	{
+		std::string scope = _scope.to_string();
+		std::size_t const pos = scope.rfind("::");
+		scope = pos == std::string::npos
+			? std::string{}
+			: scope.substr(0, pos + 2);
+
+		if (root)
+		{
+			river.write_string("\ttemplate <typename ___cat_a___ = cat_a>\n");
+		}
+		else
+		{
+			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>>\n");
+		}
+		//TODO dimensions
+		river.write_string(
+			"\t___cat_a___ ___cat___() const\n"
+			"\t{\n"
+			"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
+		if (!_dimension_kinds.empty())
+		{
+//			river.write_string(", flock_val(");
+			bool first = true;
+			for (auto const& dimension_kind : _dimension_kinds.extract_vector())
+			{
+				if (first)
+				{
+					first = false;
+				}
+				else
+				{
+//					river.write_string(", ");
+				}
+				if (check<kind_a<>>(dimension_kind))
+				{
+//					river.write_string(fast<kind_a<>>(dimension_kind).code());
+				}
+				else if (check<expression_a<>>(dimension_kind))
+				{
+//					fast<expression_a<>>(dimension_kind).generate_cpp(version, 0, river, false, false);
+				}
+			}
+//			river.write_string(")");
+		}
+		river.write_string(");\n"
+			"\t\treturn CAT;\n"
+			"\t}\n\n");
 	}
 
 	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const

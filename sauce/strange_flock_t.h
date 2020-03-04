@@ -1177,6 +1177,24 @@ inline flock_a<> flock_create(F&& init)
 	return flock_t<>::create(std::forward<F>(init));
 }
 
+template <typename... Args>
+inline flock_a<> flock_val(Args&&... args)
+{
+	return flock_t<>::create_(std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+inline flock_a<> flock_ref(Args&&... args)
+{
+	return flock_t<>::create_ref_(std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+inline flock_a<> flock_dup(Args&&... args)
+{
+	return flock_t<>::create_dup_(std::forward<Args>(args)...);
+}
+
 } // namespace strange
 
 #endif

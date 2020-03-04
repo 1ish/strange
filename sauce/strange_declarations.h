@@ -289,6 +289,15 @@ inline flock_a<> flock_create();
 template <typename F>
 inline flock_a<> flock_create(F&& init);
 
+template <typename... Args>
+inline flock_a<> flock_val(Args&&... args);
+
+template <typename... Args>
+inline flock_a<> flock_ref(Args&&... args);
+
+template <typename... Args>
+inline flock_a<> flock_dup(Args&&... args);
+
 // lake
 inline lake_a<int8_t> lake_from_string(std::string const& str);
 inline std::string lake_to_string(lake_a<int8_t> const& lake);
