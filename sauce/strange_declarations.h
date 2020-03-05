@@ -290,13 +290,13 @@ template <typename F>
 inline flock_a<> flock_create(F&& init);
 
 template <typename... Args>
-inline flock_a<> flock_val(Args&&... args);
+inline flock_a<> flock_vals(Args&&... args);
 
 template <typename... Args>
-inline flock_a<> flock_ref(Args&&... args);
+inline flock_a<> flock_refs(Args&&... args);
 
 template <typename... Args>
-inline flock_a<> flock_dup(Args&&... args);
+inline flock_a<> flock_dups(Args&&... args);
 
 // lake
 inline lake_a<int8_t> lake_from_string(std::string const& str);
@@ -309,9 +309,27 @@ inline lake_a<int8_t> lake_int8_create(F&& init);
 template <bool _concurrent_ = false>
 inline ordered_herd_a<> ordered_herd_create();
 
+template <typename... Args>
+inline ordered_herd_a<> ordered_herd_vals(Args&&... args);
+
+template <typename... Args>
+inline ordered_herd_a<> ordered_herd_refs(Args&&... args);
+
+template <typename... Args>
+inline ordered_herd_a<> ordered_herd_dups(Args&&... args);
+
 // ordered shoal
 template <bool _concurrent_ = false>
 inline ordered_shoal_a<> ordered_shoal_create();
+
+template <typename... Args>
+inline ordered_shoal_a<> ordered_shoal_vals(Args&&... args);
+
+template <typename... Args>
+inline ordered_shoal_a<> ordered_shoal_refs(Args&&... args);
+
+template <typename... Args>
+inline ordered_shoal_a<> ordered_shoal_dups(Args&&... args);
 
 // squad
 template <bool _concurrent_ = false>
@@ -321,9 +339,27 @@ inline squad_a<> squad_create();
 template <bool _concurrent_ = false>
 inline unordered_herd_a<> unordered_herd_create();
 
+template <typename... Args>
+inline unordered_herd_a<> unordered_herd_vals(Args&&... args);
+
+template <typename... Args>
+inline unordered_herd_a<> unordered_herd_refs(Args&&... args);
+
+template <typename... Args>
+inline unordered_herd_a<> unordered_herd_dups(Args&&... args);
+
 // unordered shoal
 template <bool _concurrent_ = false>
 inline unordered_shoal_a<> unordered_shoal_create();
+
+template <typename... Args>
+inline unordered_shoal_a<> unordered_shoal_vals(Args&&... args);
+
+template <typename... Args>
+inline unordered_shoal_a<> unordered_shoal_refs(Args&&... args);
+
+template <typename... Args>
+inline unordered_shoal_a<> unordered_shoal_dups(Args&&... args);
 
 // cat
 template <typename ___cat_a___ = cat_a<>>

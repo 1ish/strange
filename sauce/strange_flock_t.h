@@ -1178,19 +1178,19 @@ inline flock_a<> flock_create(F&& init)
 }
 
 template <typename... Args>
-inline flock_a<> flock_val(Args&&... args)
+inline flock_a<> flock_vals(Args&&... args)
 {
 	return flock_t<>::create_(std::forward<Args>(args)...);
 }
 
 template <typename... Args>
-inline flock_a<> flock_ref(Args&&... args)
+inline flock_a<> flock_refs(Args&&... args)
 {
 	return flock_t<>::create_ref_(std::forward<Args>(args)...);
 }
 
 template <typename... Args>
-inline flock_a<> flock_dup(Args&&... args)
+inline flock_a<> flock_dups(Args&&... args)
 {
 	return flock_t<>::create_dup_(std::forward<Args>(args)...);
 }

@@ -278,7 +278,7 @@ public:
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	static inline ___cat_a___ ___cat___()
 	{
-		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::brook", flock_val(kind_create<___kind_a___>(2, "")));
+		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::brook", flock_vals(kind_create<___kind_a___>(2, "")));
 		return CAT;
 	}
 

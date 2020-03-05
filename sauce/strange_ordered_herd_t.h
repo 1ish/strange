@@ -544,6 +544,24 @@ inline ordered_herd_a<> ordered_herd_create()
 	return ordered_herd_t<_concurrent_>::create_();
 }
 
+template <typename... Args>
+inline ordered_herd_a<> ordered_herd_vals(Args&&... args)
+{
+	return ordered_herd_t<>::create_(std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+inline ordered_herd_a<> ordered_herd_refs(Args&&... args)
+{
+	return ordered_herd_t<>::create_ref_(std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+inline ordered_herd_a<> ordered_herd_dups(Args&&... args)
+{
+	return ordered_herd_t<>::create_dup_(std::forward<Args>(args)...);
+}
+
 } // namespace strange
 
 #endif

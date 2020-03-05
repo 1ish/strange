@@ -702,6 +702,24 @@ inline unordered_shoal_a<> unordered_shoal_create()
 	return unordered_shoal_t<_concurrent_>::create_();
 }
 
+template <typename... Args>
+inline unordered_shoal_a<> unordered_shoal_vals(Args&&... args)
+{
+	return unordered_shoal_t<>::create_(std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+inline unordered_shoal_a<> unordered_shoal_refs(Args&&... args)
+{
+	return unordered_shoal_t<>::create_ref_(std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+inline unordered_shoal_a<> unordered_shoal_dups(Args&&... args)
+{
+	return unordered_shoal_t<>::create_dup_(std::forward<Args>(args)...);
+}
+
 } // namespace strange
 
 #endif

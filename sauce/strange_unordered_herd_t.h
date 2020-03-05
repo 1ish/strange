@@ -510,6 +510,24 @@ inline unordered_herd_a<> unordered_herd_create()
 	return unordered_herd_t<_concurrent_>::create_();
 }
 
+template <typename... Args>
+inline unordered_herd_a<> unordered_herd_vals(Args&&... args)
+{
+	return unordered_herd_t<>::create_(std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+inline unordered_herd_a<> unordered_herd_refs(Args&&... args)
+{
+	return unordered_herd_t<>::create_ref_(std::forward<Args>(args)...);
+}
+
+template <typename... Args>
+inline unordered_herd_a<> unordered_herd_dups(Args&&... args)
+{
+	return unordered_herd_t<>::create_dup_(std::forward<Args>(args)...);
+}
+
 } // namespace strange
 
 #endif

@@ -1508,16 +1508,18 @@ protected:
 		/*
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal>\n");
+			river.write_string("\ttemplate <typename ___unordered_herd_a___ = unordered_herd>\n");
 		}
 		else
 		{
-			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal_a<>>\n");
+			river.write_string("\ttemplate <typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
 		}
 		river.write_string(
-			"\tstatic inline ___unordered_shoal_a___ ___cats___()\n"
+			"\tstatic inline ___unordered_herd_a___ ___cats___()\n"
 			"\t{\n"
-			"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
+			"\t\tstatic ___unordered_herd_a___ CATS = unordered_herd_vals<___unordered_herd_a___>(cat_());\n"
+			"\t\treturn CATS;\n"
+			"\t}\n\n");
 		*/
 	}
 
@@ -1528,7 +1530,7 @@ protected:
 		{
 			return;
 		}
-		river.write_string(", flock_val(");
+		river.write_string(", flock_vals(");
 		bool first = true;
 		for (auto const& dimension_kind : dimension_kinds.extract_vector())
 		{
