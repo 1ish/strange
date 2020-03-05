@@ -325,12 +325,6 @@ inline ordered_shoal_a<> ordered_shoal_create();
 template <typename... Args>
 inline ordered_shoal_a<> ordered_shoal_vals(Args&&... args);
 
-template <typename... Args>
-inline ordered_shoal_a<> ordered_shoal_refs(Args&&... args);
-
-template <typename... Args>
-inline ordered_shoal_a<> ordered_shoal_dups(Args&&... args);
-
 // squad
 template <bool _concurrent_ = false>
 inline squad_a<> squad_create();
@@ -354,12 +348,6 @@ inline unordered_shoal_a<> unordered_shoal_create();
 
 template <typename... Args>
 inline unordered_shoal_a<> unordered_shoal_vals(Args&&... args);
-
-template <typename... Args>
-inline unordered_shoal_a<> unordered_shoal_refs(Args&&... args);
-
-template <typename... Args>
-inline unordered_shoal_a<> unordered_shoal_dups(Args&&... args);
 
 // cat
 template <typename ___cat_a___ = cat_a<>>

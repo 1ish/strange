@@ -708,18 +708,6 @@ inline unordered_shoal_a<> unordered_shoal_vals(Args&&... args)
 	return unordered_shoal_t<>::create_(std::forward<Args>(args)...);
 }
 
-template <typename... Args>
-inline unordered_shoal_a<> unordered_shoal_refs(Args&&... args)
-{
-	return unordered_shoal_t<>::create_refs_(std::forward<Args>(args)...);
-}
-
-template <typename... Args>
-inline unordered_shoal_a<> unordered_shoal_dups(Args&&... args)
-{
-	return unordered_shoal_t<>::create_dups_(std::forward<Args>(args)...);
-}
-
 } // namespace strange
 
 #endif

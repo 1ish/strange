@@ -49,7 +49,7 @@ public:
 
 	static inline unordered_herd_a<> cats_()
 	{
-		return reflection<___ego___>::cats();
+		return ___ego___::___cats___();
 	}
 
 	static inline any_a<> kind__(range_a<> const&)

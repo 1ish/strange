@@ -282,6 +282,18 @@ public:
 		return CAT;
 	}
 
+	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>
+	static inline ___unordered_herd_a___ ___cats___()
+	{
+		static ___unordered_herd_a___ CATS = []()
+		{
+			auto cats = forward_const_iterator_a::___cats___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			cats.update_thing(___cat___<___cat_a___, ___kind_a___>());
+			return cats;
+		}();
+		return CATS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline bidirectional_const_iterator_a create(Args&&... args)
 	{
