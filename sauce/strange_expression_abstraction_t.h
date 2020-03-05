@@ -1488,17 +1488,32 @@ protected:
 			"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
 		if (!root)
 		{
-			_define_class_relfection_dimensions_(_dimension_kinds, version, river);
+			int64_t count = _dimension_kinds.size();
+			while (count != 0)
+			{
+				--count;
+				auto const name = _dimension_names.at_index(count);
+				auto const kind = _dimension_kinds.at_index(count);
+				auto const def = _dimension_defaults.at_index(count);
+				if (!check<kind_a<>>(kind) || !check<kind_a<>>(def) ||
+					sym("#") + fast<kind_a<>>(kind).name_() != name ||
+					sym("#") + fast<kind_a<>>(def).name_() != name)
+				{
+					++count;
+					break;
+				}
+			}
+			_define_class_relfection_dimensions_(count, _dimension_kinds, version, river);
 		}
 		river.write_string(");\n"
 			"\t\treturn CAT;\n"
 			"\t}\n\n");
 	}
 
-	inline void _define_class_relfection_dimensions_(flock_a<> const& dimension_kinds, int64_t version, river_a<>& river) const
+	inline void _define_class_relfection_dimensions_(int64_t count, flock_a<> const& dimension_kinds, int64_t version, river_a<>& river) const
 	{
 		static kind_a<> ANY_KIND = kind_create();
-		if (dimension_kinds.empty())
+		if (!count)
 		{
 			return;
 		}
@@ -1523,13 +1538,17 @@ protected:
 				if (kind != ANY_KIND)
 				{
 					// recurse for dimensions
-					_define_class_relfection_dimensions_(kind.dimensions_(), version, river);
+					_define_class_relfection_dimensions_(kind.dimensions_().size(), kind.dimensions_(), version, river);
 				}
 				river.write_string(")");
 			}
 			else if (check<expression_a<>>(dimension_kind))
 			{
 				fast<expression_a<>>(dimension_kind).generate_cpp(version, 0, river, false, false);
+			}
+			if (!--count)
+			{
+				break;
 			}
 		}
 		river.write_string(")");
