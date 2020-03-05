@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename number_data_int64_a = number_data_int64_a<> , typename number_data_uint64_a = number_data_uint64_a<> , typename number_data_double_a = number_data_double_a<> >
+template <typename number_data_int64 = number_data_int64_a<> , typename number_data_uint64 = number_data_uint64_a<> , typename number_data_double = number_data_double_a<> >
 class number_d;
 
-template <typename number_data_int64_a = number_data_int64_a<> , typename number_data_uint64_a = number_data_uint64_a<> , typename number_data_double_a = number_data_double_a<> >
-inline number_d<number_data_int64_a, number_data_uint64_a, number_data_double_a> ___number_dynamic___(any_a<> const& thing); 
+template <typename number_data_int64 = number_data_int64_a<> , typename number_data_uint64 = number_data_uint64_a<> , typename number_data_double = number_data_double_a<> >
+inline number_d<number_data_int64, number_data_uint64, number_data_double> ___number_dynamic___(any_a<> const& thing); 
 
-template <typename number_data_int64_a, typename number_data_uint64_a, typename number_data_double_a>
+template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 class number_a : public any_a<>
 {
 public:
@@ -178,7 +178,7 @@ public:
 	inline any_a<> to_int_64__(range_a<> const& range) const
 	{ assert(___handle___); return ___read___().to_int_64__(range); }
 
-	inline number_data_int64_a to_int_64_() const
+	inline number_data_int64 to_int_64_() const
 	{ assert(___handle___); return ___read___().to_int_64_(); }
 
 	inline int64_t to_int_64() const
@@ -187,7 +187,7 @@ public:
 	inline any_a<> from_int_64__(range_a<> const& range)
 	{ assert(___handle___); return ___write___().from_int_64__(range); }
 
-	inline any_a<> from_int_64_(number_data_int64_a const& int_64)
+	inline any_a<> from_int_64_(number_data_int64 const& int_64)
 	{ assert(___handle___); return ___write___().from_int_64_(int_64); }
 
 	inline void from_int_64(int64_t int_64 )
@@ -196,7 +196,7 @@ public:
 	inline any_a<> to_uint_64__(range_a<> const& range) const
 	{ assert(___handle___); return ___read___().to_uint_64__(range); }
 
-	inline number_data_uint64_a to_uint_64_() const
+	inline number_data_uint64 to_uint_64_() const
 	{ assert(___handle___); return ___read___().to_uint_64_(); }
 
 	inline uint64_t to_uint_64() const
@@ -205,7 +205,7 @@ public:
 	inline any_a<> from_uint_64__(range_a<> const& range)
 	{ assert(___handle___); return ___write___().from_uint_64__(range); }
 
-	inline any_a<> from_uint_64_(number_data_uint64_a const& uint_64)
+	inline any_a<> from_uint_64_(number_data_uint64 const& uint_64)
 	{ assert(___handle___); return ___write___().from_uint_64_(uint_64); }
 
 	inline void from_uint_64(uint64_t uint_64 )
@@ -214,7 +214,7 @@ public:
 	inline any_a<> to_float_64__(range_a<> const& range) const
 	{ assert(___handle___); return ___read___().to_float_64__(range); }
 
-	inline number_data_double_a to_float_64_() const
+	inline number_data_double to_float_64_() const
 	{ assert(___handle___); return ___read___().to_float_64_(); }
 
 	inline double to_float_64() const
@@ -223,7 +223,7 @@ public:
 	inline any_a<> from_float_64__(range_a<> const& range)
 	{ assert(___handle___); return ___write___().from_float_64__(range); }
 
-	inline any_a<> from_float_64_(number_data_double_a const& float_64)
+	inline any_a<> from_float_64_(number_data_double const& float_64)
 	{ assert(___handle___); return ___write___().from_float_64_(float_64); }
 
 	inline void from_float_64(double float_64 )
@@ -268,7 +268,7 @@ public:
 	inline any_a<> byte_size__(range_a<> const& range) const
 	{ assert(___handle___); return ___read___().byte_size__(range); }
 
-	inline number_data_int64_a byte_size_() const
+	inline number_data_int64 byte_size_() const
 	{ assert(___handle___); return ___read___().byte_size_(); }
 
 	inline int64_t byte_size() const
@@ -372,22 +372,22 @@ protected:
 		virtual number_a<> modulo_(number_a<> const& number) const = 0;
 		virtual number_a < > operator%(number_a < > const & number ) const = 0;
 		virtual any_a<> to_int_64__(range_a<> const& range) const = 0;
-		virtual number_data_int64_a to_int_64_() const = 0;
+		virtual number_data_int64 to_int_64_() const = 0;
 		virtual int64_t to_int_64() const = 0;
 		virtual any_a<> from_int_64__(range_a<> const& range) = 0;
-		virtual any_a<> from_int_64_(number_data_int64_a const& int_64) = 0;
+		virtual any_a<> from_int_64_(number_data_int64 const& int_64) = 0;
 		virtual void from_int_64(int64_t int_64 ) = 0;
 		virtual any_a<> to_uint_64__(range_a<> const& range) const = 0;
-		virtual number_data_uint64_a to_uint_64_() const = 0;
+		virtual number_data_uint64 to_uint_64_() const = 0;
 		virtual uint64_t to_uint_64() const = 0;
 		virtual any_a<> from_uint_64__(range_a<> const& range) = 0;
-		virtual any_a<> from_uint_64_(number_data_uint64_a const& uint_64) = 0;
+		virtual any_a<> from_uint_64_(number_data_uint64 const& uint_64) = 0;
 		virtual void from_uint_64(uint64_t uint_64 ) = 0;
 		virtual any_a<> to_float_64__(range_a<> const& range) const = 0;
-		virtual number_data_double_a to_float_64_() const = 0;
+		virtual number_data_double to_float_64_() const = 0;
 		virtual double to_float_64() const = 0;
 		virtual any_a<> from_float_64__(range_a<> const& range) = 0;
-		virtual any_a<> from_float_64_(number_data_double_a const& float_64) = 0;
+		virtual any_a<> from_float_64_(number_data_double const& float_64) = 0;
 		virtual void from_float_64(double float_64 ) = 0;
 		virtual any_a<> less_than__(range_a<> const& range) const = 0;
 		virtual any_a<> less_than_(number_a<> const& number) const = 0;
@@ -402,7 +402,7 @@ protected:
 		virtual any_a<> greater_or_equal_(number_a<> const& number) const = 0;
 		virtual bool operator>=(number_a < > const & number ) const = 0;
 		virtual any_a<> byte_size__(range_a<> const& range) const = 0;
-		virtual number_data_int64_a byte_size_() const = 0;
+		virtual number_data_int64 byte_size_() const = 0;
 		virtual int64_t byte_size() const = 0;
 		virtual any_a<> is_int__(range_a<> const& range) const = 0;
 		virtual any_a<> is_int_() const = 0;
@@ -541,7 +541,7 @@ protected:
 		virtual inline any_a<> to_int_64__(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64__(range); }
 
-		virtual inline number_data_int64_a to_int_64_() const final
+		virtual inline number_data_int64 to_int_64_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64_(); }
 
 		virtual inline int64_t to_int_64() const final
@@ -550,7 +550,7 @@ protected:
 		virtual inline any_a<> from_int_64__(range_a<> const& range) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.from_int_64__(range); }
 
-		virtual inline any_a<> from_int_64_(number_data_int64_a const& int_64) final
+		virtual inline any_a<> from_int_64_(number_data_int64 const& int_64) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.from_int_64_(int_64); }
 
 		virtual inline void from_int_64(int64_t int_64 ) final
@@ -559,7 +559,7 @@ protected:
 		virtual inline any_a<> to_uint_64__(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_uint_64__(range); }
 
-		virtual inline number_data_uint64_a to_uint_64_() const final
+		virtual inline number_data_uint64 to_uint_64_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_uint_64_(); }
 
 		virtual inline uint64_t to_uint_64() const final
@@ -568,7 +568,7 @@ protected:
 		virtual inline any_a<> from_uint_64__(range_a<> const& range) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.from_uint_64__(range); }
 
-		virtual inline any_a<> from_uint_64_(number_data_uint64_a const& uint_64) final
+		virtual inline any_a<> from_uint_64_(number_data_uint64 const& uint_64) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.from_uint_64_(uint_64); }
 
 		virtual inline void from_uint_64(uint64_t uint_64 ) final
@@ -577,7 +577,7 @@ protected:
 		virtual inline any_a<> to_float_64__(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64__(range); }
 
-		virtual inline number_data_double_a to_float_64_() const final
+		virtual inline number_data_double to_float_64_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_float_64_(); }
 
 		virtual inline double to_float_64() const final
@@ -586,7 +586,7 @@ protected:
 		virtual inline any_a<> from_float_64__(range_a<> const& range) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.from_float_64__(range); }
 
-		virtual inline any_a<> from_float_64_(number_data_double_a const& float_64) final
+		virtual inline any_a<> from_float_64_(number_data_double const& float_64) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.from_float_64_(float_64); }
 
 		virtual inline void from_float_64(double float_64 ) final
@@ -631,7 +631,7 @@ protected:
 		virtual inline any_a<> byte_size__(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.byte_size__(range); }
 
-		virtual inline number_data_int64_a byte_size_() const final
+		virtual inline number_data_int64 byte_size_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.byte_size_(); }
 
 		virtual inline int64_t byte_size() const final
@@ -843,7 +843,7 @@ public:
 		{
 			return number_a{ thing.___handle___ };
 		}
-		return number_a{ number_d<number_data_int64_a, number_data_uint64_a, number_data_double_a>{ thing } };
+		return number_a{ number_d<number_data_int64, number_data_uint64, number_data_double>{ thing } };
 	}
 
 	static inline number_a ___cast_ref___(any_a<>& thing)
@@ -853,13 +853,13 @@ public:
 		{
 			return number_a(thing.___handle___, ___reference_tag___{});
 		}
-		return number_a{ number_d<number_data_int64_a, number_data_uint64_a, number_data_double_a>(thing, ___reference_tag___{}) };
+		return number_a{ number_d<number_data_int64, number_data_uint64, number_data_double>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	___cat_a___ ___cat___() const
 	{
-		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::number", flock_val(kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, ""), kind_create<___kind_a___>(2, "")));
+		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::number", flock_val(kind_create<___kind_a___>(2, "number_data_int64"), kind_create<___kind_a___>(2, "number_data_uint64"), kind_create<___kind_a___>(2, "number_data_double")));
 		return CAT;
 	}
 
@@ -874,15 +874,15 @@ private:
 	friend class ___number_a_share___;
 }; // class number_a
 
-template <typename number_data_int64_a, typename number_data_uint64_a, typename number_data_double_a>
-bool const number_a<number_data_int64_a, number_data_uint64_a, number_data_double_a>::___share___ = []()
+template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
+bool const number_a<number_data_int64, number_data_uint64, number_data_double>::___share___ = []()
 {
 	auto& shoal = shared();
-	reflection<number_a<number_data_int64_a, number_data_uint64_a, number_data_double_a>>::share(shoal);
+	reflection<number_a<number_data_int64, number_data_uint64, number_data_double>>::share(shoal);
 	return shoal;
 }();
 
-template <typename number_data_int64_a, typename number_data_uint64_a, typename number_data_double_a>
+template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 class number_d : public any_a<>
 {
 public:
@@ -1268,7 +1268,7 @@ public:
 		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
-	inline number_data_int64_a to_int_64_() const
+	inline number_data_int64 to_int_64_() const
 	{
 		assert(___handle___);
 		auto const op = operation("to_int_64_");
@@ -1276,7 +1276,7 @@ public:
 		{
 			throw dis("dynamic number_d::to_int_64_ passed non-existent member");
 		}
-		return cast<number_data_int64_a>(variadic_operate(op, *const_cast<number_d*>(this)));
+		return cast<number_data_int64>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
 
 	inline int64_t to_int_64() const
@@ -1293,7 +1293,7 @@ public:
 		return op.operate(*this, range);
 	}
 
-	inline any_a<> from_int_64_(number_data_int64_a const& int_64)
+	inline any_a<> from_int_64_(number_data_int64 const& int_64)
 	{
 		assert(___handle___);
 		auto const op = operation("from_int_64_");
@@ -1305,7 +1305,7 @@ public:
 	}
 
 	inline void from_int_64(int64_t int_64 )
-	{ from_int_64_(num<int64_t, number_data_int64_a>(int_64)); }
+	{ from_int_64_(num<int64_t, number_data_int64>(int_64)); }
 
 	inline any_a<> to_uint_64__(range_a<> const& range) const
 	{
@@ -1318,7 +1318,7 @@ public:
 		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
-	inline number_data_uint64_a to_uint_64_() const
+	inline number_data_uint64 to_uint_64_() const
 	{
 		assert(___handle___);
 		auto const op = operation("to_uint_64_");
@@ -1326,7 +1326,7 @@ public:
 		{
 			throw dis("dynamic number_d::to_uint_64_ passed non-existent member");
 		}
-		return cast<number_data_uint64_a>(variadic_operate(op, *const_cast<number_d*>(this)));
+		return cast<number_data_uint64>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
 
 	inline uint64_t to_uint_64() const
@@ -1343,7 +1343,7 @@ public:
 		return op.operate(*this, range);
 	}
 
-	inline any_a<> from_uint_64_(number_data_uint64_a const& uint_64)
+	inline any_a<> from_uint_64_(number_data_uint64 const& uint_64)
 	{
 		assert(___handle___);
 		auto const op = operation("from_uint_64_");
@@ -1355,7 +1355,7 @@ public:
 	}
 
 	inline void from_uint_64(uint64_t uint_64 )
-	{ from_uint_64_(num<uint64_t, number_data_uint64_a>(uint_64)); }
+	{ from_uint_64_(num<uint64_t, number_data_uint64>(uint_64)); }
 
 	inline any_a<> to_float_64__(range_a<> const& range) const
 	{
@@ -1368,7 +1368,7 @@ public:
 		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
-	inline number_data_double_a to_float_64_() const
+	inline number_data_double to_float_64_() const
 	{
 		assert(___handle___);
 		auto const op = operation("to_float_64_");
@@ -1376,7 +1376,7 @@ public:
 		{
 			throw dis("dynamic number_d::to_float_64_ passed non-existent member");
 		}
-		return cast<number_data_double_a>(variadic_operate(op, *const_cast<number_d*>(this)));
+		return cast<number_data_double>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
 
 	inline double to_float_64() const
@@ -1393,7 +1393,7 @@ public:
 		return op.operate(*this, range);
 	}
 
-	inline any_a<> from_float_64_(number_data_double_a const& float_64)
+	inline any_a<> from_float_64_(number_data_double const& float_64)
 	{
 		assert(___handle___);
 		auto const op = operation("from_float_64_");
@@ -1405,7 +1405,7 @@ public:
 	}
 
 	inline void from_float_64(double float_64 )
-	{ from_float_64_(num<double, number_data_double_a>(float_64)); }
+	{ from_float_64_(num<double, number_data_double>(float_64)); }
 
 	inline any_a<> less_than__(range_a<> const& range) const
 	{
@@ -1518,7 +1518,7 @@ public:
 		return op.operate(*const_cast<number_d*>(this), range);
 	}
 
-	inline number_data_int64_a byte_size_() const
+	inline number_data_int64 byte_size_() const
 	{
 		assert(___handle___);
 		auto const op = operation("byte_size_");
@@ -1526,7 +1526,7 @@ public:
 		{
 			throw dis("dynamic number_d::byte_size_ passed non-existent member");
 		}
-		return cast<number_data_int64_a>(variadic_operate(op, *const_cast<number_d*>(this)));
+		return cast<number_data_int64>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
 
 	inline int64_t byte_size() const
@@ -1722,10 +1722,10 @@ public:
 	{}
 };
 
-template <typename number_data_int64_a, typename number_data_uint64_a, typename number_data_double_a>
-inline number_d<number_data_int64_a, number_data_uint64_a, number_data_double_a> ___number_dynamic___(any_a<> const& thing)
+template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
+inline number_d<number_data_int64, number_data_uint64, number_data_double> ___number_dynamic___(any_a<> const& thing)
 {
-	return number_d<number_data_int64_a, number_data_uint64_a, number_data_double_a>{ thing };
+	return number_d<number_data_int64, number_data_uint64, number_data_double>{ thing };
 }
 
 } // namespace
