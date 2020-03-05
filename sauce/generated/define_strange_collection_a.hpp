@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename number_data_int64_a = number_data_int64_a<> >
+template <typename _1_ = void>
 class collection_d;
 
-template <typename number_data_int64_a = number_data_int64_a<> >
-inline collection_d<number_data_int64_a> ___collection_dynamic___(any_a<> const& thing); 
+template <typename _1_ = void>
+inline collection_d<_1_> ___collection_dynamic___(any_a<> const& thing); 
 
-template <typename number_data_int64_a>
+template <typename _1_>
 class collection_a : public range_a<>
 {
 public:
@@ -136,7 +136,7 @@ public:
 	inline any_a<> size__(range_a<> const& range) const
 	{ assert(___handle___); return ___read___().size__(range); }
 
-	inline number_data_int64_a size_() const
+	inline number_data_int64_a<> size_() const
 	{ assert(___handle___); return ___read___().size_(); }
 
 	inline int64_t size() const
@@ -250,7 +250,7 @@ protected:
 		virtual collection_a<> clear_() = 0;
 		virtual void clear() = 0;
 		virtual any_a<> size__(range_a<> const& range) const = 0;
-		virtual number_data_int64_a size_() const = 0;
+		virtual number_data_int64_a<> size_() const = 0;
 		virtual int64_t size() const = 0;
 		virtual any_a<> empty__(range_a<> const& range) const = 0;
 		virtual any_a<> empty_() const = 0;
@@ -355,7 +355,7 @@ protected:
 		virtual inline any_a<> size__(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.size__(range); }
 
-		virtual inline number_data_int64_a size_() const final
+		virtual inline number_data_int64_a<> size_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.size_(); }
 
 		virtual inline int64_t size() const final
@@ -591,7 +591,7 @@ public:
 		{
 			return collection_a{ thing.___handle___ };
 		}
-		return collection_a{ collection_d<number_data_int64_a>{ thing } };
+		return collection_a{ collection_d<_1_>{ thing } };
 	}
 
 	static inline collection_a ___cast_ref___(any_a<>& thing)
@@ -601,13 +601,13 @@ public:
 		{
 			return collection_a(thing.___handle___, ___reference_tag___{});
 		}
-		return collection_a{ collection_d<number_data_int64_a>(thing, ___reference_tag___{}) };
+		return collection_a{ collection_d<_1_>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
 	___cat_a___ ___cat___() const
 	{
-		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::collection", flock_val(kind_create<___kind_a___>(2, "")));
+		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::collection");
 		return CAT;
 	}
 
@@ -622,15 +622,15 @@ private:
 	friend class ___collection_a_share___;
 }; // class collection_a
 
-template <typename number_data_int64_a>
-bool const collection_a<number_data_int64_a>::___share___ = []()
+template <typename _1_>
+bool const collection_a<_1_>::___share___ = []()
 {
 	auto& shoal = shared();
-	reflection<collection_a<number_data_int64_a>>::share(shoal);
+	reflection<collection_a<_1_>>::share(shoal);
 	return shoal;
 }();
 
-template <typename number_data_int64_a>
+template <typename _1_>
 class collection_d : public range_d<>
 {
 public:
@@ -862,7 +862,7 @@ public:
 		return op.operate(*const_cast<collection_d*>(this), range);
 	}
 
-	inline number_data_int64_a size_() const
+	inline number_data_int64_a<> size_() const
 	{
 		assert(___handle___);
 		auto const op = operation("size_");
@@ -870,7 +870,7 @@ public:
 		{
 			throw dis("dynamic collection_d::size_ passed non-existent member");
 		}
-		return cast<number_data_int64_a>(variadic_operate(op, *const_cast<collection_d*>(this)));
+		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
 
 	inline int64_t size() const
@@ -1061,7 +1061,7 @@ public:
 		return cast<collection_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
 
-	inline collection_a<number_data_int64_a> operator+(range_a < > const & range ) const
+	inline collection_a<_1_> operator+(range_a < > const & range ) const
 	{ return add_(range); }
 
 	inline any_a<> self_subtract__(range_a<> const& range)
@@ -1108,7 +1108,7 @@ public:
 		return cast<collection_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
 
-	inline collection_a<number_data_int64_a> operator-(range_a < > const & range ) const
+	inline collection_a<_1_> operator-(range_a < > const & range ) const
 	{ return subtract_(range); }
 
 	inline any_a<> read_lock__(range_a<> const& range) const
@@ -1170,10 +1170,10 @@ public:
 	{}
 };
 
-template <typename number_data_int64_a>
-inline collection_d<number_data_int64_a> ___collection_dynamic___(any_a<> const& thing)
+template <typename _1_>
+inline collection_d<_1_> ___collection_dynamic___(any_a<> const& thing)
 {
-	return collection_d<number_data_int64_a>{ thing };
+	return collection_d<_1_>{ thing };
 }
 
 } // namespace

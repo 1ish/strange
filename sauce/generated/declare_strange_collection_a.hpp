@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename number_data_int64_a = number_data_int64_a<> >
+template <typename _1_ = void>
 class collection_a;
 
 } // namespace
