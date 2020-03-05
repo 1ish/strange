@@ -871,7 +871,7 @@ public:
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
-	___cat_a___ ___cat___() const
+	static inline ___cat_a___ ___cat___()
 	{
 		static ___cat_a___ CAT = cat_create<___cat_a___>(1, "strange::river");
 		return CAT;

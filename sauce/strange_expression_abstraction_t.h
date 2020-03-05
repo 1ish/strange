@@ -1483,7 +1483,7 @@ protected:
 		}
 		// dimensions
 		river.write_string(
-			"\t___cat_a___ ___cat___() const\n"
+			"\tstatic inline ___cat_a___ ___cat___()\n"
 			"\t{\n"
 			"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
 		if (!root)

@@ -39,7 +39,7 @@ public:
 	
 	static inline cat_a<> cat_()
 	{
-		return reflection<___ego___>::cat();
+		return ___ego___::___cat___();
 	}
 
 	static inline any_a<> cats__(range_a<> const&)
