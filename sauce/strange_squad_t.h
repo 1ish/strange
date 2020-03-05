@@ -755,13 +755,13 @@ public:
 	}
 
 	template <typename... Args>
-	static inline squad_a<> create_ref_(Args&&... args)
+	static inline squad_a<> create_refs_(Args&&... args)
 	{
 		return create(variadic_u<>::deque_ref(std::forward<Args>(args)...));
 	}
 
 	template <typename... Args>
-	static inline squad_a<> create_dup_(Args&&... args)
+	static inline squad_a<> create_dups_(Args&&... args)
 	{
 		return create(variadic_u<>::deque_dup(std::forward<Args>(args)...));
 	}

@@ -53,7 +53,7 @@ inline any_a<> operator|(any_a<> const& thing, any_a<> const& adaptor)
 template <typename... Args>
 inline any_a<> variadic_operate(any_a<> const& op, any_a<>& thing, Args&&... args)
 {
-	return op.operate(thing, flock_t<>::create_dup_(std::forward<Args>(args)...));
+	return op.operate(thing, flock_t<>::create_dups_(std::forward<Args>(args)...));
 }
 
 // check/cast

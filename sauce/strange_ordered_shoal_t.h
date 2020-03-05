@@ -766,13 +766,13 @@ inline ordered_shoal_a<> ordered_shoal_vals(Args&&... args)
 template <typename... Args>
 inline ordered_shoal_a<> ordered_shoal_refs(Args&&... args)
 {
-	return ordered_shoal_t<>::create_ref_(std::forward<Args>(args)...);
+	return ordered_shoal_t<>::create_refs_(std::forward<Args>(args)...);
 }
 
 template <typename... Args>
 inline ordered_shoal_a<> ordered_shoal_dups(Args&&... args)
 {
-	return ordered_shoal_t<>::create_dup_(std::forward<Args>(args)...);
+	return ordered_shoal_t<>::create_dups_(std::forward<Args>(args)...);
 }
 
 } // namespace strange

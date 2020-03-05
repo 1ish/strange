@@ -169,13 +169,13 @@ public:
 	}
 
 	template <typename... Args>
-	static inline ordered_herd_a<> create_ref_(Args&&... args)
+	static inline ordered_herd_a<> create_refs_(Args&&... args)
 	{
 		return create(variadic_u<>::set_ref(std::forward<Args>(args)...));
 	}
 
 	template <typename... Args>
-	static inline ordered_herd_a<> create_dup_(Args&&... args)
+	static inline ordered_herd_a<> create_dups_(Args&&... args)
 	{
 		return create(variadic_u<>::set_dup(std::forward<Args>(args)...));
 	}
@@ -553,13 +553,13 @@ inline ordered_herd_a<> ordered_herd_vals(Args&&... args)
 template <typename... Args>
 inline ordered_herd_a<> ordered_herd_refs(Args&&... args)
 {
-	return ordered_herd_t<>::create_ref_(std::forward<Args>(args)...);
+	return ordered_herd_t<>::create_refs_(std::forward<Args>(args)...);
 }
 
 template <typename... Args>
 inline ordered_herd_a<> ordered_herd_dups(Args&&... args)
 {
-	return ordered_herd_t<>::create_dup_(std::forward<Args>(args)...);
+	return ordered_herd_t<>::create_dups_(std::forward<Args>(args)...);
 }
 
 } // namespace strange

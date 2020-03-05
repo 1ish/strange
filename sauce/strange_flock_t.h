@@ -756,13 +756,13 @@ public:
 	}
 
 	template <typename... Args>
-	static inline flock_a<> create_ref_(Args&&... args)
+	static inline flock_a<> create_refs_(Args&&... args)
 	{
 		return create(variadic_u<>::vector_ref(std::forward<Args>(args)...));
 	}
 
 	template <typename... Args>
-	static inline flock_a<> create_dup_(Args&&... args)
+	static inline flock_a<> create_dups_(Args&&... args)
 	{
 		return create(variadic_u<>::vector_dup(std::forward<Args>(args)...));
 	}
@@ -1186,13 +1186,13 @@ inline flock_a<> flock_vals(Args&&... args)
 template <typename... Args>
 inline flock_a<> flock_refs(Args&&... args)
 {
-	return flock_t<>::create_ref_(std::forward<Args>(args)...);
+	return flock_t<>::create_refs_(std::forward<Args>(args)...);
 }
 
 template <typename... Args>
 inline flock_a<> flock_dups(Args&&... args)
 {
-	return flock_t<>::create_dup_(std::forward<Args>(args)...);
+	return flock_t<>::create_dups_(std::forward<Args>(args)...);
 }
 
 } // namespace strange
