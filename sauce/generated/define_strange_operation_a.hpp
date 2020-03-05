@@ -82,8 +82,8 @@ public:
 		return *this;
 	}
 
-	inline any_a<> pure__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().pure__(range); }
+	inline any_a<> pure__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().pure__(arguments); }
 
 	inline any_a<> pure_() const
 	{ assert(___handle___); return ___read___().pure_(); }
@@ -97,8 +97,8 @@ public:
 	inline void assign(operation_a < > const & operation )
 	{ assert(___handle___); ___write___().assign(operation); }
 
-	inline any_a<> names__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().names__(range); }
+	inline any_a<> names__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().names__(arguments); }
 
 	inline flock_a<> names_() const
 	{ assert(___handle___); return ___read___().names_(); }
@@ -106,12 +106,12 @@ public:
 protected:
 	struct ___operation_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual any_a<> pure__(range_a<> const& range) const = 0;
+		virtual any_a<> pure__(range_a<> const& arguments) const = 0;
 		virtual any_a<> pure_() const = 0;
 		virtual bool pure() const = 0;
 		virtual void aspects(unordered_shoal_a < > const & shoal ) = 0;
 		virtual void assign(operation_a < > const & operation ) = 0;
-		virtual any_a<> names__(range_a<> const& range) const = 0;
+		virtual any_a<> names__(range_a<> const& arguments) const = 0;
 		virtual flock_a<> names_() const = 0;
 	};
 
@@ -133,8 +133,8 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> pure__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pure__(range); }
+		virtual inline any_a<> pure__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pure__(arguments); }
 
 		virtual inline any_a<> pure_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pure_(); }
@@ -148,8 +148,8 @@ protected:
 		virtual inline void assign(operation_a < > const & operation ) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.assign(operation); }
 
-		virtual inline any_a<> names__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.names__(range); }
+		virtual inline any_a<> names__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.names__(arguments); }
 
 		virtual inline flock_a<> names_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.names_(); }
@@ -331,9 +331,9 @@ private:
 template <typename _1_>
 bool const operation_a<_1_>::___share___ = []()
 {
-	auto& shoal = shared();
-	reflection<operation_a<_1_>>::share(shoal);
-	return shoal;
+	auto& shared_shoal = shared();
+	reflection<operation_a<_1_>>::share(shared_shoal);
+	return shared_shoal;
 }();
 
 template <typename _1_>
@@ -410,7 +410,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> pure__(range_a<> const& range) const
+	inline any_a<> pure__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("pure_");
@@ -418,7 +418,7 @@ public:
 		{
 			throw dis("dynamic operation_d::pure_ passed non-existent member");
 		}
-		return op.operate(*const_cast<operation_d*>(this), range);
+		return op.operate(*const_cast<operation_d*>(this), arguments);
 	}
 
 	inline any_a<> pure_() const
@@ -441,7 +441,7 @@ public:
 	inline void assign(operation_a < > const & operation )
 	{ throw dis("dynamic operation_d::assign(operation) not available"); }
 
-	inline any_a<> names__(range_a<> const& range) const
+	inline any_a<> names__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("names_");
@@ -449,7 +449,7 @@ public:
 		{
 			throw dis("dynamic operation_d::names_ passed non-existent member");
 		}
-		return op.operate(*const_cast<operation_d*>(this), range);
+		return op.operate(*const_cast<operation_d*>(this), arguments);
 	}
 
 	inline flock_a<> names_() const

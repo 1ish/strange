@@ -296,9 +296,9 @@ private:
 template <typename _1_>
 bool const forward_iterator_data_a<_1_>::___share___ = []()
 {
-	auto& shoal = shared();
-	reflection<forward_iterator_data_a<_1_>>::share(shoal);
-	return shoal;
+	auto& shared_shoal = shared();
+	reflection<forward_iterator_data_a<_1_>>::share(shared_shoal);
+	return shared_shoal;
 }();
 
 template <typename _1_>

@@ -564,14 +564,14 @@ protected:
 				"\t};\n\n"
 
 				"\t// operator overloads\n"
-				"\tinline " + class_name + "<> operator[](range_a const& range)\n"
+				"\tinline " + class_name + "<> operator[](range const& arguments)\n"
 				"\t{\n"
-				"\t\treturn invoke(*this, range);\n"
+				"\t\treturn invoke(*this, arguments);\n"
 				"\t}\n\n"
 
-				"\tinline " + class_name + "<> operator()(range_a const& range)\n"
+				"\tinline " + class_name + "<> operator()(range const& arguments)\n"
 				"\t{\n"
-				"\t\treturn operate(*this, range);\n"
+				"\t\treturn operate(*this, arguments);\n"
 				"\t}\n\n"
 
 				"\tinline operator bool() const\n"
@@ -749,8 +749,8 @@ protected:
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\tinline any_a<> " + name + "_(range_a" +
-			(root ? "" : "<>") + " const& range)" + constness + "\n"
+			"\tinline any_a<> " + name + "_(range" +
+			(root ? "" : "_a<>") + " const& arguments)" + constness + "\n"
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
 			"\t\tauto const op = operation(\"" + name + "\");\n"
@@ -767,7 +767,7 @@ protected:
 		{
 			river.write_string("*const_cast<" + class_name + "*>(this)");
 		}
-		river.write_string(", range);\n"
+		river.write_string(", arguments);\n"
 			"\t}\n\n");
 
 		river.write_string(
@@ -845,8 +845,8 @@ protected:
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\tinline any_a<> " + name + "_(range_a" +
-				(root ? "" : "<>") + " const& range)" + constness + "\n"
+			"\tinline any_a<> " + name + "_(range" +
+				(root ? "" : "_a<>") + " const& arguments)" + constness + "\n"
 			"\t{ assert(___handle___); return ");
 		if (constness.empty())
 		{
@@ -856,7 +856,7 @@ protected:
 		{
 			river.write_string("___read___().");
 		}
-		river.write_string(name + "_(range); }\n\n");
+		river.write_string(name + "_(arguments); }\n\n");
 
 		river.write_string(
 			"\tinline " + result + " " + name + parameters + constness + "\n"
@@ -1141,8 +1141,8 @@ protected:
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
 		river.write_string(
-			"\t\tvirtual any_a<> " + name + "_(range_a" +
-			(root ? "" : "<>") + " const& range)" + constness + " = 0;\n");
+			"\t\tvirtual any_a<> " + name + "_(range" +
+			(root ? "" : "_a<>") + " const& arguments)" + constness + " = 0;\n");
 		river.write_string(
 			"\t\tvirtual " + result + " " + name + parameters + constness + " = 0;\n");
 	}
@@ -1170,9 +1170,9 @@ protected:
 		std::string const scope = root ? "" : "___any_a_handle___<___TTT___, ___DHB___>::";
 
 		river.write_string(
-			"\t\tvirtual inline any_a<> " + name + "_(range_a" +
-			(root ? "" : "<>") + " const& range)" + constness + " final\n"
-			"\t\t{ return " + scope + "___value___." + name + "_(range); }\n\n");
+			"\t\tvirtual inline any_a<> " + name + "_(range" +
+			(root ? "" : "_a<>") + " const& arguments)" + constness + " final\n"
+			"\t\t{ return " + scope + "___value___." + name + "_(arguments); }\n\n");
 
 		river.write_string(
 			"\t\tvirtual inline " + result + " " + name + parameters + constness + " final\n"
@@ -1475,39 +1475,50 @@ protected:
 
 		if (root)
 		{
-			river.write_string("\ttemplate <typename ___cat_a___ = cat_a, typename ___kind_a___ = kind_a>\n");
+			river.write_string("\ttemplate <typename ___cat_a___ = cat, typename ___kind_a___ = kind>\n");
 		}
 		else
 		{
 			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>\n");
 		}
-		// dimensions
 		river.write_string(
 			"\tstatic inline ___cat_a___ ___cat___()\n"
 			"\t{\n"
 			"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
-		if (!root)
+		// dimensions
+		int64_t count = _dimension_kinds.size();
+		while (count != 0)
 		{
-			int64_t count = _dimension_kinds.size();
-			while (count != 0)
+			--count;
+			auto const name = _dimension_names.at_index(count);
+			auto const kind = _dimension_kinds.at_index(count);
+			auto const def = _dimension_defaults.at_index(count);
+			if (!check<kind_a<>>(kind) || !check<kind_a<>>(def) ||
+				sym("#") + fast<kind_a<>>(kind).name_() != name ||
+				sym("#") + fast<kind_a<>>(def).name_() != name)
 			{
-				--count;
-				auto const name = _dimension_names.at_index(count);
-				auto const kind = _dimension_kinds.at_index(count);
-				auto const def = _dimension_defaults.at_index(count);
-				if (!check<kind_a<>>(kind) || !check<kind_a<>>(def) ||
-					sym("#") + fast<kind_a<>>(kind).name_() != name ||
-					sym("#") + fast<kind_a<>>(def).name_() != name)
-				{
-					++count;
-					break;
-				}
+				++count;
+				break;
 			}
-			_define_class_relfection_dimensions_(count, _dimension_kinds, version, river);
 		}
+		_define_class_relfection_dimensions_(count, _dimension_kinds, version, river);
 		river.write_string(");\n"
 			"\t\treturn CAT;\n"
 			"\t}\n\n");
+		/*
+		if (root)
+		{
+			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal>\n");
+		}
+		else
+		{
+			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal_a<>>\n");
+		}
+		river.write_string(
+			"\tstatic inline ___unordered_shoal_a___ ___cats___()\n"
+			"\t{\n"
+			"\t\tstatic ___cat_a___ CAT = cat_create<___cat_a___>(1, \"" + scope + class_name.substr(0, class_name.length() - 2) + "\"");
+		*/
 	}
 
 	inline void _define_class_relfection_dimensions_(int64_t count, flock_a<> const& dimension_kinds, int64_t version, river_a<>& river) const
@@ -1561,11 +1572,11 @@ protected:
 		_declare_or_define_template_(version, 0, river, false, false);
 		river.write_string("::___share___ = []()\n"
 			"{\n"
-			"\tauto& shoal = shared();\n"
+			"\tauto& shared_shoal = shared();\n"
 			"\treflection<" + class_name);
 		_declare_or_define_template_(version, 0, river, false, false);
-		river.write_string(">::share(shoal);\n"
-			"\treturn shoal;\n"
+		river.write_string(">::share(shared_shoal);\n"
+			"\treturn shared_shoal;\n"
 			"}();\n\n");
 	}
 

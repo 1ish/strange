@@ -82,8 +82,8 @@ public:
 		return *this;
 	}
 
-	inline any_a<> symbolic__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().symbolic__(range); }
+	inline any_a<> symbolic__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().symbolic__(arguments); }
 
 	inline any_a<> symbolic_() const
 	{ assert(___handle___); return ___read___().symbolic_(); }
@@ -91,8 +91,8 @@ public:
 	inline bool symbolic() const
 	{ assert(___handle___); return ___read___().symbolic(); }
 
-	inline any_a<> order__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().order__(range); }
+	inline any_a<> order__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().order__(arguments); }
 
 	inline number_data_int64_a<> order_() const
 	{ assert(___handle___); return ___read___().order_(); }
@@ -100,32 +100,32 @@ public:
 	inline int64_t order() const
 	{ assert(___handle___); return ___read___().order(); }
 
-	inline any_a<> name__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().name__(range); }
+	inline any_a<> name__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().name__(arguments); }
 
 	inline symbol_a<> name_() const
 	{ assert(___handle___); return ___read___().name_(); }
 
-	inline any_a<> dimensions__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().dimensions__(range); }
+	inline any_a<> dimensions__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().dimensions__(arguments); }
 
 	inline flock_a<> dimensions_() const
 	{ assert(___handle___); return ___read___().dimensions_(); }
 
-	inline any_a<> parameters__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().parameters__(range); }
+	inline any_a<> parameters__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().parameters__(arguments); }
 
 	inline flock_a<> parameters_() const
 	{ assert(___handle___); return ___read___().parameters_(); }
 
-	inline any_a<> result__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().result__(range); }
+	inline any_a<> result__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().result__(arguments); }
 
 	inline cat_a<> result_() const
 	{ assert(___handle___); return ___read___().result_(); }
 
-	inline any_a<> code__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().code__(range); }
+	inline any_a<> code__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().code__(arguments); }
 
 	inline lake_int8_a<> code_() const
 	{ assert(___handle___); return ___read___().code_(); }
@@ -136,21 +136,21 @@ public:
 protected:
 	struct ___cat_a_handle_base___ : ___symbol_a_handle_base___
 	{
-		virtual any_a<> symbolic__(range_a<> const& range) const = 0;
+		virtual any_a<> symbolic__(range_a<> const& arguments) const = 0;
 		virtual any_a<> symbolic_() const = 0;
 		virtual bool symbolic() const = 0;
-		virtual any_a<> order__(range_a<> const& range) const = 0;
+		virtual any_a<> order__(range_a<> const& arguments) const = 0;
 		virtual number_data_int64_a<> order_() const = 0;
 		virtual int64_t order() const = 0;
-		virtual any_a<> name__(range_a<> const& range) const = 0;
+		virtual any_a<> name__(range_a<> const& arguments) const = 0;
 		virtual symbol_a<> name_() const = 0;
-		virtual any_a<> dimensions__(range_a<> const& range) const = 0;
+		virtual any_a<> dimensions__(range_a<> const& arguments) const = 0;
 		virtual flock_a<> dimensions_() const = 0;
-		virtual any_a<> parameters__(range_a<> const& range) const = 0;
+		virtual any_a<> parameters__(range_a<> const& arguments) const = 0;
 		virtual flock_a<> parameters_() const = 0;
-		virtual any_a<> result__(range_a<> const& range) const = 0;
+		virtual any_a<> result__(range_a<> const& arguments) const = 0;
 		virtual cat_a<> result_() const = 0;
-		virtual any_a<> code__(range_a<> const& range) const = 0;
+		virtual any_a<> code__(range_a<> const& arguments) const = 0;
 		virtual lake_int8_a<> code_() const = 0;
 		virtual std :: string code() const = 0;
 	};
@@ -173,8 +173,8 @@ protected:
 			: ___symbol_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> symbolic__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic__(range); }
+		virtual inline any_a<> symbolic__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic__(arguments); }
 
 		virtual inline any_a<> symbolic_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic_(); }
@@ -182,8 +182,8 @@ protected:
 		virtual inline bool symbolic() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic(); }
 
-		virtual inline any_a<> order__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.order__(range); }
+		virtual inline any_a<> order__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.order__(arguments); }
 
 		virtual inline number_data_int64_a<> order_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.order_(); }
@@ -191,32 +191,32 @@ protected:
 		virtual inline int64_t order() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.order(); }
 
-		virtual inline any_a<> name__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.name__(range); }
+		virtual inline any_a<> name__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.name__(arguments); }
 
 		virtual inline symbol_a<> name_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.name_(); }
 
-		virtual inline any_a<> dimensions__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.dimensions__(range); }
+		virtual inline any_a<> dimensions__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.dimensions__(arguments); }
 
 		virtual inline flock_a<> dimensions_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.dimensions_(); }
 
-		virtual inline any_a<> parameters__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parameters__(range); }
+		virtual inline any_a<> parameters__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parameters__(arguments); }
 
 		virtual inline flock_a<> parameters_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parameters_(); }
 
-		virtual inline any_a<> result__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.result__(range); }
+		virtual inline any_a<> result__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.result__(arguments); }
 
 		virtual inline cat_a<> result_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.result_(); }
 
-		virtual inline any_a<> code__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.code__(range); }
+		virtual inline any_a<> code__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.code__(arguments); }
 
 		virtual inline lake_int8_a<> code_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.code_(); }
@@ -401,9 +401,9 @@ private:
 template <typename _1_>
 bool const cat_a<_1_>::___share___ = []()
 {
-	auto& shoal = shared();
-	reflection<cat_a<_1_>>::share(shoal);
-	return shoal;
+	auto& shared_shoal = shared();
+	reflection<cat_a<_1_>>::share(shared_shoal);
+	return shared_shoal;
 }();
 
 template <typename _1_>
@@ -480,7 +480,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> symbolic__(range_a<> const& range) const
+	inline any_a<> symbolic__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("symbolic_");
@@ -488,7 +488,7 @@ public:
 		{
 			throw dis("dynamic cat_d::symbolic_ passed non-existent member");
 		}
-		return op.operate(*const_cast<cat_d*>(this), range);
+		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
 
 	inline any_a<> symbolic_() const
@@ -505,7 +505,7 @@ public:
 	inline bool symbolic() const
 	{ return symbolic_(); }
 
-	inline any_a<> order__(range_a<> const& range) const
+	inline any_a<> order__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("order_");
@@ -513,7 +513,7 @@ public:
 		{
 			throw dis("dynamic cat_d::order_ passed non-existent member");
 		}
-		return op.operate(*const_cast<cat_d*>(this), range);
+		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
 
 	inline number_data_int64_a<> order_() const
@@ -530,7 +530,7 @@ public:
 	inline int64_t order() const
 	{ return order_().to_int_64(); }
 
-	inline any_a<> name__(range_a<> const& range) const
+	inline any_a<> name__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("name_");
@@ -538,7 +538,7 @@ public:
 		{
 			throw dis("dynamic cat_d::name_ passed non-existent member");
 		}
-		return op.operate(*const_cast<cat_d*>(this), range);
+		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
 
 	inline symbol_a<> name_() const
@@ -552,7 +552,7 @@ public:
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
-	inline any_a<> dimensions__(range_a<> const& range) const
+	inline any_a<> dimensions__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("dimensions_");
@@ -560,7 +560,7 @@ public:
 		{
 			throw dis("dynamic cat_d::dimensions_ passed non-existent member");
 		}
-		return op.operate(*const_cast<cat_d*>(this), range);
+		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
 
 	inline flock_a<> dimensions_() const
@@ -574,7 +574,7 @@ public:
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
-	inline any_a<> parameters__(range_a<> const& range) const
+	inline any_a<> parameters__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("parameters_");
@@ -582,7 +582,7 @@ public:
 		{
 			throw dis("dynamic cat_d::parameters_ passed non-existent member");
 		}
-		return op.operate(*const_cast<cat_d*>(this), range);
+		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
 
 	inline flock_a<> parameters_() const
@@ -596,7 +596,7 @@ public:
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
-	inline any_a<> result__(range_a<> const& range) const
+	inline any_a<> result__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("result_");
@@ -604,7 +604,7 @@ public:
 		{
 			throw dis("dynamic cat_d::result_ passed non-existent member");
 		}
-		return op.operate(*const_cast<cat_d*>(this), range);
+		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
 
 	inline cat_a<> result_() const
@@ -618,7 +618,7 @@ public:
 		return cast<cat_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
 
-	inline any_a<> code__(range_a<> const& range) const
+	inline any_a<> code__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("code_");
@@ -626,7 +626,7 @@ public:
 		{
 			throw dis("dynamic cat_d::code_ passed non-existent member");
 		}
-		return op.operate(*const_cast<cat_d*>(this), range);
+		return op.operate(*const_cast<cat_d*>(this), arguments);
 	}
 
 	inline lake_int8_a<> code_() const

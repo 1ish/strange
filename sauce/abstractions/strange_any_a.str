@@ -2,15 +2,15 @@ false &&
 {	strange :
 	{	<any> :: abstraction
 		(	// dimensions
-			#range_a :<<>># <range>,
-			#symbol_a :<<>># <symbol>,
-			#cat_a :<<>># <cat>,
-			#kind_a :<<>># <kind>,
-			#inventory_a :<<>># <inventory>,
-			#unordered_herd_a :<<>># <unordered_herd>,
-			#shoal_a :<<>># <shoal>,
-			#unordered_shoal_a :<<>># <unordered_shoal>,
-			#number_data_uint64_a :<<>># <number_data_uint64>,
+			#range :<<range>># <range>,
+			#symbol :<<symbol>># <symbol>,
+			#cat :<<cat>># <cat>,
+			#kind :<<kind>># <kind>,
+			#inventory :<<inventory>># <inventory>,
+			#unordered_herd :<<unordered_herd>># <unordered_herd>,
+			#shoal :<<shoal>># <shoal>,
+			#unordered_shoal :<<unordered_shoal>># <unordered_shoal>,
+			#number_data_uint64 :<<number_data_uint64>># <number_data_uint64>,
 			(	// no parent
 				{
 					// exposure
@@ -18,30 +18,30 @@ false &&
 					mutate_thing : "one_t& ()",
 
 					// reflection
-					type_ :# (<#symbol_a>),
+					type_ :# (<#symbol>),
 
-					shared_ :# (<#unordered_shoal_a>),
-					share : "void (shoal_a& shoal) const",
+					shared_ :# (<#unordered_shoal>),
+					share : "void (shoal& shared_shoal) const",
 
-					cat_ :# (<#cat_a>),
+					cat_ :# (<#cat>),
 
-					cats_ :# (<#unordered_herd_a>),
+					cats_ :# (<#unordered_herd>),
 
-					kind_ :# (<#kind_a>),
+					kind_ :# (<#kind>),
 
-					kinds_ :# (<#unordered_herd_a>),
+					kinds_ :# (<#unordered_herd>),
 
-					operations_ :# (<#unordered_shoal_a>),
+					operations_ :# (<#unordered_shoal>),
 
 					// visitor
-					visit_ :# (inventory :(#inventory_a)&, <any>),
+					visit_ :# (arguments :(#inventory)&, <any>),
 
 					// function
-					invoke : "any_a<> (any_a<>& thing, range_a const& range) const",
-					operate : "any_a<> (any_a<>& thing, range_a const& range) const",
+					invoke : "any_a<> (any_a<>& thing, range const& arguments) const",
+					operate : "any_a<> (any_a<>& thing, range const& arguments) const",
 
 					// identification
-					identity_ :# (<#number_data_uint64_a>),
+					identity_ :# (<#number_data_uint64>),
 					identity : "void const* () const",
 
 					identical_ :# (thing :<any>#, <any>),
@@ -65,7 +65,7 @@ false &&
 					//TODO 'operator<=' : "bool (any_a<> const& thing) const",
 					//TODO 'operator>=' : "bool (any_a<> const& thing) const",
 
-					hash_ :# (<#number_data_uint64_a>),
+					hash_ :# (<#number_data_uint64>),
 					hash : "std::size_t () const",
 
 					is : "bool (std::string const& s) const",

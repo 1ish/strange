@@ -82,14 +82,14 @@ public:
 		return *this;
 	}
 
-	inline any_a<> aspects__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().aspects__(range); }
+	inline any_a<> aspects__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().aspects__(arguments); }
 
 	inline flock_a<> aspects_() const
 	{ assert(___handle___); return ___read___().aspects_(); }
 
-	inline any_a<> fixed__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().fixed__(range); }
+	inline any_a<> fixed__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().fixed__(arguments); }
 
 	inline any_a<> fixed_() const
 	{ assert(___handle___); return ___read___().fixed_(); }
@@ -97,8 +97,8 @@ public:
 	inline bool fixed() const
 	{ assert(___handle___); return ___read___().fixed(); }
 
-	inline any_a<> reference__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().reference__(range); }
+	inline any_a<> reference__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().reference__(arguments); }
 
 	inline any_a<> reference_() const
 	{ assert(___handle___); return ___read___().reference_(); }
@@ -106,8 +106,8 @@ public:
 	inline bool reference() const
 	{ assert(___handle___); return ___read___().reference(); }
 
-	inline any_a<> optional__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().optional__(range); }
+	inline any_a<> optional__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().optional__(arguments); }
 
 	inline any_a<> optional_() const
 	{ assert(___handle___); return ___read___().optional_(); }
@@ -118,15 +118,15 @@ public:
 protected:
 	struct ___kind_a_handle_base___ : ___cat_a_handle_base___
 	{
-		virtual any_a<> aspects__(range_a<> const& range) const = 0;
+		virtual any_a<> aspects__(range_a<> const& arguments) const = 0;
 		virtual flock_a<> aspects_() const = 0;
-		virtual any_a<> fixed__(range_a<> const& range) const = 0;
+		virtual any_a<> fixed__(range_a<> const& arguments) const = 0;
 		virtual any_a<> fixed_() const = 0;
 		virtual bool fixed() const = 0;
-		virtual any_a<> reference__(range_a<> const& range) const = 0;
+		virtual any_a<> reference__(range_a<> const& arguments) const = 0;
 		virtual any_a<> reference_() const = 0;
 		virtual bool reference() const = 0;
-		virtual any_a<> optional__(range_a<> const& range) const = 0;
+		virtual any_a<> optional__(range_a<> const& arguments) const = 0;
 		virtual any_a<> optional_() const = 0;
 		virtual bool optional() const = 0;
 	};
@@ -149,14 +149,14 @@ protected:
 			: ___cat_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> aspects__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects__(range); }
+		virtual inline any_a<> aspects__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects__(arguments); }
 
 		virtual inline flock_a<> aspects_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects_(); }
 
-		virtual inline any_a<> fixed__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed__(range); }
+		virtual inline any_a<> fixed__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed__(arguments); }
 
 		virtual inline any_a<> fixed_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed_(); }
@@ -164,8 +164,8 @@ protected:
 		virtual inline bool fixed() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed(); }
 
-		virtual inline any_a<> reference__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference__(range); }
+		virtual inline any_a<> reference__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference__(arguments); }
 
 		virtual inline any_a<> reference_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference_(); }
@@ -173,8 +173,8 @@ protected:
 		virtual inline bool reference() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference(); }
 
-		virtual inline any_a<> optional__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.optional__(range); }
+		virtual inline any_a<> optional__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.optional__(arguments); }
 
 		virtual inline any_a<> optional_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.optional_(); }
@@ -359,9 +359,9 @@ private:
 template <typename _1_>
 bool const kind_a<_1_>::___share___ = []()
 {
-	auto& shoal = shared();
-	reflection<kind_a<_1_>>::share(shoal);
-	return shoal;
+	auto& shared_shoal = shared();
+	reflection<kind_a<_1_>>::share(shared_shoal);
+	return shared_shoal;
 }();
 
 template <typename _1_>
@@ -438,7 +438,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> aspects__(range_a<> const& range) const
+	inline any_a<> aspects__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("aspects_");
@@ -446,7 +446,7 @@ public:
 		{
 			throw dis("dynamic kind_d::aspects_ passed non-existent member");
 		}
-		return op.operate(*const_cast<kind_d*>(this), range);
+		return op.operate(*const_cast<kind_d*>(this), arguments);
 	}
 
 	inline flock_a<> aspects_() const
@@ -460,7 +460,7 @@ public:
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<kind_d*>(this)));
 	}
 
-	inline any_a<> fixed__(range_a<> const& range) const
+	inline any_a<> fixed__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("fixed_");
@@ -468,7 +468,7 @@ public:
 		{
 			throw dis("dynamic kind_d::fixed_ passed non-existent member");
 		}
-		return op.operate(*const_cast<kind_d*>(this), range);
+		return op.operate(*const_cast<kind_d*>(this), arguments);
 	}
 
 	inline any_a<> fixed_() const
@@ -485,7 +485,7 @@ public:
 	inline bool fixed() const
 	{ return fixed_(); }
 
-	inline any_a<> reference__(range_a<> const& range) const
+	inline any_a<> reference__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("reference_");
@@ -493,7 +493,7 @@ public:
 		{
 			throw dis("dynamic kind_d::reference_ passed non-existent member");
 		}
-		return op.operate(*const_cast<kind_d*>(this), range);
+		return op.operate(*const_cast<kind_d*>(this), arguments);
 	}
 
 	inline any_a<> reference_() const
@@ -510,7 +510,7 @@ public:
 	inline bool reference() const
 	{ return reference_(); }
 
-	inline any_a<> optional__(range_a<> const& range) const
+	inline any_a<> optional__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("optional_");
@@ -518,7 +518,7 @@ public:
 		{
 			throw dis("dynamic kind_d::optional_ passed non-existent member");
 		}
-		return op.operate(*const_cast<kind_d*>(this), range);
+		return op.operate(*const_cast<kind_d*>(this), arguments);
 	}
 
 	inline any_a<> optional_() const

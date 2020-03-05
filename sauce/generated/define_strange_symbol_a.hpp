@@ -82,8 +82,8 @@ public:
 		return *this;
 	}
 
-	inline any_a<> to_lake__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().to_lake__(range); }
+	inline any_a<> to_lake__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().to_lake__(arguments); }
 
 	inline lake_int8_a<> to_lake_() const
 	{ assert(___handle___); return ___read___().to_lake_(); }
@@ -97,8 +97,8 @@ public:
 	inline int8_t last_character() const
 	{ assert(___handle___); return ___read___().last_character(); }
 
-	inline any_a<> add__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().add__(range); }
+	inline any_a<> add__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().add__(arguments); }
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
 	{ assert(___handle___); return ___read___().add_(symbol); }
@@ -109,12 +109,12 @@ public:
 protected:
 	struct ___symbol_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual any_a<> to_lake__(range_a<> const& range) const = 0;
+		virtual any_a<> to_lake__(range_a<> const& arguments) const = 0;
 		virtual lake_int8_a<> to_lake_() const = 0;
 		virtual std :: string to_string() const = 0;
 		virtual int8_t first_character() const = 0;
 		virtual int8_t last_character() const = 0;
-		virtual any_a<> add__(range_a<> const& range) const = 0;
+		virtual any_a<> add__(range_a<> const& arguments) const = 0;
 		virtual symbol_a<> add_(symbol_a<> const& symbol) const = 0;
 		virtual symbol_a < > operator+(symbol_a < > const & symbol ) const = 0;
 	};
@@ -137,8 +137,8 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> to_lake__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake__(range); }
+		virtual inline any_a<> to_lake__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake__(arguments); }
 
 		virtual inline lake_int8_a<> to_lake_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
@@ -152,8 +152,8 @@ protected:
 		virtual inline int8_t last_character() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.last_character(); }
 
-		virtual inline any_a<> add__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add__(range); }
+		virtual inline any_a<> add__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add__(arguments); }
 
 		virtual inline symbol_a<> add_(symbol_a<> const& symbol) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(symbol); }
@@ -338,9 +338,9 @@ private:
 template <typename _1_>
 bool const symbol_a<_1_>::___share___ = []()
 {
-	auto& shoal = shared();
-	reflection<symbol_a<_1_>>::share(shoal);
-	return shoal;
+	auto& shared_shoal = shared();
+	reflection<symbol_a<_1_>>::share(shared_shoal);
+	return shared_shoal;
 }();
 
 template <typename _1_>
@@ -417,7 +417,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> to_lake__(range_a<> const& range) const
+	inline any_a<> to_lake__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("to_lake_");
@@ -425,7 +425,7 @@ public:
 		{
 			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
 		}
-		return op.operate(*const_cast<symbol_d*>(this), range);
+		return op.operate(*const_cast<symbol_d*>(this), arguments);
 	}
 
 	inline lake_int8_a<> to_lake_() const
@@ -448,7 +448,7 @@ public:
 	inline int8_t last_character() const
 	{ auto const lake = to_lake_(); return lake.extract_vector()[lake.size() - 1]; }
 
-	inline any_a<> add__(range_a<> const& range) const
+	inline any_a<> add__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("add_");
@@ -456,7 +456,7 @@ public:
 		{
 			throw dis("dynamic symbol_d::add_ passed non-existent member");
 		}
-		return op.operate(*const_cast<symbol_d*>(this), range);
+		return op.operate(*const_cast<symbol_d*>(this), arguments);
 	}
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const

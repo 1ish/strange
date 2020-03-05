@@ -82,8 +82,8 @@ public:
 		return *this;
 	}
 
-	inline any_a<> parse__(range_a<> const& range)
-	{ assert(___handle___); return ___write___().parse__(range); }
+	inline any_a<> parse__(range_a<> const& arguments)
+	{ assert(___handle___); return ___write___().parse__(arguments); }
 
 	inline expression_a<> parse_(range_a<> const& tokenizer)
 	{ assert(___handle___); return ___write___().parse_(tokenizer); }
@@ -91,7 +91,7 @@ public:
 protected:
 	struct ___parser_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual any_a<> parse__(range_a<> const& range) = 0;
+		virtual any_a<> parse__(range_a<> const& arguments) = 0;
 		virtual expression_a<> parse_(range_a<> const& tokenizer) = 0;
 	};
 
@@ -113,8 +113,8 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> parse__(range_a<> const& range) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parse__(range); }
+		virtual inline any_a<> parse__(range_a<> const& arguments) final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parse__(arguments); }
 
 		virtual inline expression_a<> parse_(range_a<> const& tokenizer) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parse_(tokenizer); }
@@ -296,9 +296,9 @@ private:
 template <typename _1_>
 bool const parser_a<_1_>::___share___ = []()
 {
-	auto& shoal = shared();
-	reflection<parser_a<_1_>>::share(shoal);
-	return shoal;
+	auto& shared_shoal = shared();
+	reflection<parser_a<_1_>>::share(shared_shoal);
+	return shared_shoal;
 }();
 
 template <typename _1_>
@@ -375,7 +375,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> parse__(range_a<> const& range)
+	inline any_a<> parse__(range_a<> const& arguments)
 	{
 		assert(___handle___);
 		auto const op = operation("parse_");
@@ -383,7 +383,7 @@ public:
 		{
 			throw dis("dynamic parser_d::parse_ passed non-existent member");
 		}
-		return op.operate(*this, range);
+		return op.operate(*this, arguments);
 	}
 
 	inline expression_a<> parse_(range_a<> const& tokenizer)

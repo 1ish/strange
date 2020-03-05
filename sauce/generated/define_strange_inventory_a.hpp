@@ -97,14 +97,14 @@ public:
 	inline bool erase_index(int64_t index )
 	{ assert(___handle___); return ___write___().erase_index(index); }
 
-	inline any_a<> begin__(range_a<> const& range)
-	{ assert(___handle___); return ___write___().begin__(range); }
+	inline any_a<> begin__(range_a<> const& arguments)
+	{ assert(___handle___); return ___write___().begin__(arguments); }
 
 	inline random_access_iterator_a<> begin_()
 	{ assert(___handle___); return ___write___().begin_(); }
 
-	inline any_a<> end__(range_a<> const& range)
-	{ assert(___handle___); return ___write___().end__(range); }
+	inline any_a<> end__(range_a<> const& arguments)
+	{ assert(___handle___); return ___write___().end__(arguments); }
 
 	inline random_access_iterator_a<> end_()
 	{ assert(___handle___); return ___write___().end_(); }
@@ -117,9 +117,9 @@ protected:
 		virtual void update_index(int64_t index , any_a < > const & value ) = 0;
 		virtual bool insert_index(int64_t index , any_a < > const & value ) = 0;
 		virtual bool erase_index(int64_t index ) = 0;
-		virtual any_a<> begin__(range_a<> const& range) = 0;
+		virtual any_a<> begin__(range_a<> const& arguments) = 0;
 		virtual random_access_iterator_a<> begin_() = 0;
-		virtual any_a<> end__(range_a<> const& range) = 0;
+		virtual any_a<> end__(range_a<> const& arguments) = 0;
 		virtual random_access_iterator_a<> end_() = 0;
 	};
 
@@ -156,14 +156,14 @@ protected:
 		virtual inline bool erase_index(int64_t index ) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_index(index); }
 
-		virtual inline any_a<> begin__(range_a<> const& range) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.begin__(range); }
+		virtual inline any_a<> begin__(range_a<> const& arguments) final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.begin__(arguments); }
 
 		virtual inline random_access_iterator_a<> begin_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.begin_(); }
 
-		virtual inline any_a<> end__(range_a<> const& range) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.end__(range); }
+		virtual inline any_a<> end__(range_a<> const& arguments) final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.end__(arguments); }
 
 		virtual inline random_access_iterator_a<> end_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.end_(); }
@@ -345,9 +345,9 @@ private:
 template <typename _1_>
 bool const inventory_a<_1_>::___share___ = []()
 {
-	auto& shoal = shared();
-	reflection<inventory_a<_1_>>::share(shoal);
-	return shoal;
+	auto& shared_shoal = shared();
+	reflection<inventory_a<_1_>>::share(shared_shoal);
+	return shared_shoal;
 }();
 
 template <typename _1_>
@@ -439,7 +439,7 @@ public:
 	inline bool erase_index(int64_t index )
 	{ return erase_(num(index)); }
 
-	inline any_a<> begin__(range_a<> const& range)
+	inline any_a<> begin__(range_a<> const& arguments)
 	{
 		assert(___handle___);
 		auto const op = operation("begin_");
@@ -447,7 +447,7 @@ public:
 		{
 			throw dis("dynamic inventory_d::begin_ passed non-existent member");
 		}
-		return op.operate(*this, range);
+		return op.operate(*this, arguments);
 	}
 
 	inline random_access_iterator_a<> begin_()
@@ -461,7 +461,7 @@ public:
 		return cast<random_access_iterator_a<>>(variadic_operate(op, *this));
 	}
 
-	inline any_a<> end__(range_a<> const& range)
+	inline any_a<> end__(range_a<> const& arguments)
 	{
 		assert(___handle___);
 		auto const op = operation("end_");
@@ -469,7 +469,7 @@ public:
 		{
 			throw dis("dynamic inventory_d::end_ passed non-existent member");
 		}
-		return op.operate(*this, range);
+		return op.operate(*this, arguments);
 	}
 
 	inline random_access_iterator_a<> end_()

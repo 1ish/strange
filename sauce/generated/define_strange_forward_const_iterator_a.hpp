@@ -82,8 +82,8 @@ public:
 		return *this;
 	}
 
-	inline any_a<> get__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().get__(range); }
+	inline any_a<> get__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().get__(arguments); }
 
 	inline any_a<> get_() const
 	{ assert(___handle___); return ___read___().get_(); }
@@ -94,8 +94,8 @@ public:
 	inline any_a < > const * operator->() const
 	{ assert(___handle___); return ___read___().operator->(); }
 
-	inline any_a<> increment__(range_a<> const& range)
-	{ assert(___handle___); return ___write___().increment__(range); }
+	inline any_a<> increment__(range_a<> const& arguments)
+	{ assert(___handle___); return ___write___().increment__(arguments); }
 
 	inline forward_const_iterator_a<> increment_()
 	{ assert(___handle___); return ___write___().increment_(); }
@@ -103,11 +103,11 @@ public:
 protected:
 	struct ___forward_const_iterator_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual any_a<> get__(range_a<> const& range) const = 0;
+		virtual any_a<> get__(range_a<> const& arguments) const = 0;
 		virtual any_a<> get_() const = 0;
 		virtual any_a < > const & operator*() const = 0;
 		virtual any_a < > const * operator->() const = 0;
-		virtual any_a<> increment__(range_a<> const& range) = 0;
+		virtual any_a<> increment__(range_a<> const& arguments) = 0;
 		virtual forward_const_iterator_a<> increment_() = 0;
 	};
 
@@ -129,8 +129,8 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> get__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get__(range); }
+		virtual inline any_a<> get__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get__(arguments); }
 
 		virtual inline any_a<> get_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get_(); }
@@ -141,8 +141,8 @@ protected:
 		virtual inline any_a < > const * operator->() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator->(); }
 
-		virtual inline any_a<> increment__(range_a<> const& range) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.increment__(range); }
+		virtual inline any_a<> increment__(range_a<> const& arguments) final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.increment__(arguments); }
 
 		virtual inline forward_const_iterator_a<> increment_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
@@ -324,9 +324,9 @@ private:
 template <typename _1_>
 bool const forward_const_iterator_a<_1_>::___share___ = []()
 {
-	auto& shoal = shared();
-	reflection<forward_const_iterator_a<_1_>>::share(shoal);
-	return shoal;
+	auto& shared_shoal = shared();
+	reflection<forward_const_iterator_a<_1_>>::share(shared_shoal);
+	return shared_shoal;
 }();
 
 template <typename _1_>
@@ -403,7 +403,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> get__(range_a<> const& range) const
+	inline any_a<> get__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("get_");
@@ -411,7 +411,7 @@ public:
 		{
 			throw dis("dynamic forward_const_iterator_d::get_ passed non-existent member");
 		}
-		return op.operate(*const_cast<forward_const_iterator_d*>(this), range);
+		return op.operate(*const_cast<forward_const_iterator_d*>(this), arguments);
 	}
 
 	inline any_a<> get_() const
@@ -431,7 +431,7 @@ public:
 	inline any_a < > const * operator->() const
 	{ throw dis("dynamic forward_const_iterator_d::operator->() not available"); }
 
-	inline any_a<> increment__(range_a<> const& range)
+	inline any_a<> increment__(range_a<> const& arguments)
 	{
 		assert(___handle___);
 		auto const op = operation("increment_");
@@ -439,7 +439,7 @@ public:
 		{
 			throw dis("dynamic forward_const_iterator_d::increment_ passed non-existent member");
 		}
-		return op.operate(*this, range);
+		return op.operate(*this, arguments);
 	}
 
 	inline forward_const_iterator_a<> increment_()

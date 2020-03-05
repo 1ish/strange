@@ -82,8 +82,8 @@ public:
 		return *this;
 	}
 
-	inline any_a<> filename__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().filename__(range); }
+	inline any_a<> filename__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().filename__(arguments); }
 
 	inline symbol_a<> filename_() const
 	{ assert(___handle___); return ___read___().filename_(); }
@@ -91,8 +91,8 @@ public:
 	inline std :: string filename() const
 	{ assert(___handle___); return ___read___().filename(); }
 
-	inline any_a<> line__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().line__(range); }
+	inline any_a<> line__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().line__(arguments); }
 
 	inline number_data_int64_a<> line_() const
 	{ assert(___handle___); return ___read___().line_(); }
@@ -100,8 +100,8 @@ public:
 	inline int64_t line() const
 	{ assert(___handle___); return ___read___().line(); }
 
-	inline any_a<> position__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().position__(range); }
+	inline any_a<> position__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().position__(arguments); }
 
 	inline number_data_int64_a<> position_() const
 	{ assert(___handle___); return ___read___().position_(); }
@@ -109,8 +109,8 @@ public:
 	inline int64_t position() const
 	{ assert(___handle___); return ___read___().position(); }
 
-	inline any_a<> tag__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().tag__(range); }
+	inline any_a<> tag__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().tag__(arguments); }
 
 	inline symbol_a<> tag_() const
 	{ assert(___handle___); return ___read___().tag_(); }
@@ -118,8 +118,8 @@ public:
 	inline std :: string tag() const
 	{ assert(___handle___); return ___read___().tag(); }
 
-	inline any_a<> symbol__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().symbol__(range); }
+	inline any_a<> symbol__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().symbol__(arguments); }
 
 	inline symbol_a<> symbol_() const
 	{ assert(___handle___); return ___read___().symbol_(); }
@@ -127,14 +127,14 @@ public:
 	inline std :: string symbol() const
 	{ assert(___handle___); return ___read___().symbol(); }
 
-	inline any_a<> literal__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().literal__(range); }
+	inline any_a<> literal__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().literal__(arguments); }
 
 	inline any_a<> literal_() const
 	{ assert(___handle___); return ___read___().literal_(); }
 
-	inline any_a<> precedence__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().precedence__(range); }
+	inline any_a<> precedence__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().precedence__(arguments); }
 
 	inline number_data_int64_a<> precedence_() const
 	{ assert(___handle___); return ___read___().precedence_(); }
@@ -142,8 +142,8 @@ public:
 	inline int64_t precedence() const
 	{ assert(___handle___); return ___read___().precedence(); }
 
-	inline any_a<> report__(range_a<> const& range) const
-	{ assert(___handle___); return ___read___().report__(range); }
+	inline any_a<> report__(range_a<> const& arguments) const
+	{ assert(___handle___); return ___read___().report__(arguments); }
 
 	inline misunderstanding_a<> report_() const
 	{ assert(___handle___); return ___read___().report_(); }
@@ -154,27 +154,27 @@ public:
 protected:
 	struct ___token_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual any_a<> filename__(range_a<> const& range) const = 0;
+		virtual any_a<> filename__(range_a<> const& arguments) const = 0;
 		virtual symbol_a<> filename_() const = 0;
 		virtual std :: string filename() const = 0;
-		virtual any_a<> line__(range_a<> const& range) const = 0;
+		virtual any_a<> line__(range_a<> const& arguments) const = 0;
 		virtual number_data_int64_a<> line_() const = 0;
 		virtual int64_t line() const = 0;
-		virtual any_a<> position__(range_a<> const& range) const = 0;
+		virtual any_a<> position__(range_a<> const& arguments) const = 0;
 		virtual number_data_int64_a<> position_() const = 0;
 		virtual int64_t position() const = 0;
-		virtual any_a<> tag__(range_a<> const& range) const = 0;
+		virtual any_a<> tag__(range_a<> const& arguments) const = 0;
 		virtual symbol_a<> tag_() const = 0;
 		virtual std :: string tag() const = 0;
-		virtual any_a<> symbol__(range_a<> const& range) const = 0;
+		virtual any_a<> symbol__(range_a<> const& arguments) const = 0;
 		virtual symbol_a<> symbol_() const = 0;
 		virtual std :: string symbol() const = 0;
-		virtual any_a<> literal__(range_a<> const& range) const = 0;
+		virtual any_a<> literal__(range_a<> const& arguments) const = 0;
 		virtual any_a<> literal_() const = 0;
-		virtual any_a<> precedence__(range_a<> const& range) const = 0;
+		virtual any_a<> precedence__(range_a<> const& arguments) const = 0;
 		virtual number_data_int64_a<> precedence_() const = 0;
 		virtual int64_t precedence() const = 0;
-		virtual any_a<> report__(range_a<> const& range) const = 0;
+		virtual any_a<> report__(range_a<> const& arguments) const = 0;
 		virtual misunderstanding_a<> report_() const = 0;
 		virtual std :: string report() const = 0;
 	};
@@ -197,8 +197,8 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> filename__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.filename__(range); }
+		virtual inline any_a<> filename__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.filename__(arguments); }
 
 		virtual inline symbol_a<> filename_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.filename_(); }
@@ -206,8 +206,8 @@ protected:
 		virtual inline std :: string filename() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.filename(); }
 
-		virtual inline any_a<> line__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.line__(range); }
+		virtual inline any_a<> line__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.line__(arguments); }
 
 		virtual inline number_data_int64_a<> line_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.line_(); }
@@ -215,8 +215,8 @@ protected:
 		virtual inline int64_t line() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.line(); }
 
-		virtual inline any_a<> position__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.position__(range); }
+		virtual inline any_a<> position__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.position__(arguments); }
 
 		virtual inline number_data_int64_a<> position_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.position_(); }
@@ -224,8 +224,8 @@ protected:
 		virtual inline int64_t position() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.position(); }
 
-		virtual inline any_a<> tag__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.tag__(range); }
+		virtual inline any_a<> tag__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.tag__(arguments); }
 
 		virtual inline symbol_a<> tag_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.tag_(); }
@@ -233,8 +233,8 @@ protected:
 		virtual inline std :: string tag() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.tag(); }
 
-		virtual inline any_a<> symbol__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol__(range); }
+		virtual inline any_a<> symbol__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol__(arguments); }
 
 		virtual inline symbol_a<> symbol_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol_(); }
@@ -242,14 +242,14 @@ protected:
 		virtual inline std :: string symbol() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol(); }
 
-		virtual inline any_a<> literal__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.literal__(range); }
+		virtual inline any_a<> literal__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.literal__(arguments); }
 
 		virtual inline any_a<> literal_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.literal_(); }
 
-		virtual inline any_a<> precedence__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence__(range); }
+		virtual inline any_a<> precedence__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence__(arguments); }
 
 		virtual inline number_data_int64_a<> precedence_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence_(); }
@@ -257,8 +257,8 @@ protected:
 		virtual inline int64_t precedence() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence(); }
 
-		virtual inline any_a<> report__(range_a<> const& range) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.report__(range); }
+		virtual inline any_a<> report__(range_a<> const& arguments) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.report__(arguments); }
 
 		virtual inline misunderstanding_a<> report_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.report_(); }
@@ -443,9 +443,9 @@ private:
 template <typename _1_>
 bool const token_a<_1_>::___share___ = []()
 {
-	auto& shoal = shared();
-	reflection<token_a<_1_>>::share(shoal);
-	return shoal;
+	auto& shared_shoal = shared();
+	reflection<token_a<_1_>>::share(shared_shoal);
+	return shared_shoal;
 }();
 
 template <typename _1_>
@@ -522,7 +522,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> filename__(range_a<> const& range) const
+	inline any_a<> filename__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("filename_");
@@ -530,7 +530,7 @@ public:
 		{
 			throw dis("dynamic token_d::filename_ passed non-existent member");
 		}
-		return op.operate(*const_cast<token_d*>(this), range);
+		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
 
 	inline symbol_a<> filename_() const
@@ -547,7 +547,7 @@ public:
 	inline std :: string filename() const
 	{ return filename_().to_string(); }
 
-	inline any_a<> line__(range_a<> const& range) const
+	inline any_a<> line__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("line_");
@@ -555,7 +555,7 @@ public:
 		{
 			throw dis("dynamic token_d::line_ passed non-existent member");
 		}
-		return op.operate(*const_cast<token_d*>(this), range);
+		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
 
 	inline number_data_int64_a<> line_() const
@@ -572,7 +572,7 @@ public:
 	inline int64_t line() const
 	{ return line_().extract_primitive(); }
 
-	inline any_a<> position__(range_a<> const& range) const
+	inline any_a<> position__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("position_");
@@ -580,7 +580,7 @@ public:
 		{
 			throw dis("dynamic token_d::position_ passed non-existent member");
 		}
-		return op.operate(*const_cast<token_d*>(this), range);
+		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
 
 	inline number_data_int64_a<> position_() const
@@ -597,7 +597,7 @@ public:
 	inline int64_t position() const
 	{ return position_().extract_primitive(); }
 
-	inline any_a<> tag__(range_a<> const& range) const
+	inline any_a<> tag__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("tag_");
@@ -605,7 +605,7 @@ public:
 		{
 			throw dis("dynamic token_d::tag_ passed non-existent member");
 		}
-		return op.operate(*const_cast<token_d*>(this), range);
+		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
 
 	inline symbol_a<> tag_() const
@@ -622,7 +622,7 @@ public:
 	inline std :: string tag() const
 	{ return tag_().to_string(); }
 
-	inline any_a<> symbol__(range_a<> const& range) const
+	inline any_a<> symbol__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("symbol_");
@@ -630,7 +630,7 @@ public:
 		{
 			throw dis("dynamic token_d::symbol_ passed non-existent member");
 		}
-		return op.operate(*const_cast<token_d*>(this), range);
+		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
 
 	inline symbol_a<> symbol_() const
@@ -647,7 +647,7 @@ public:
 	inline std :: string symbol() const
 	{ return symbol_().to_string(); }
 
-	inline any_a<> literal__(range_a<> const& range) const
+	inline any_a<> literal__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("literal_");
@@ -655,7 +655,7 @@ public:
 		{
 			throw dis("dynamic token_d::literal_ passed non-existent member");
 		}
-		return op.operate(*const_cast<token_d*>(this), range);
+		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
 
 	inline any_a<> literal_() const
@@ -669,7 +669,7 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
 
-	inline any_a<> precedence__(range_a<> const& range) const
+	inline any_a<> precedence__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("precedence_");
@@ -677,7 +677,7 @@ public:
 		{
 			throw dis("dynamic token_d::precedence_ passed non-existent member");
 		}
-		return op.operate(*const_cast<token_d*>(this), range);
+		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
 
 	inline number_data_int64_a<> precedence_() const
@@ -694,7 +694,7 @@ public:
 	inline int64_t precedence() const
 	{ return precedence_().extract_primitive(); }
 
-	inline any_a<> report__(range_a<> const& range) const
+	inline any_a<> report__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
 		auto const op = operation("report_");
@@ -702,7 +702,7 @@ public:
 		{
 			throw dis("dynamic token_d::report_ passed non-existent member");
 		}
-		return op.operate(*const_cast<token_d*>(this), range);
+		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
 
 	inline misunderstanding_a<> report_() const
