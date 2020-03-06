@@ -343,6 +343,72 @@ inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds)
 	return result;
 }
 
+template <typename ___TTT___>
+inline kind_a<> kind_of()
+{
+	return ___TTT___::___kind___();
+}
+
+template <>
+inline kind_a<> kind_of<int8_t>()
+{
+	return kind_create(1, "primitive_int_8");
+}
+
+template <>
+inline kind_a<> kind_of<uint8_t>()
+{
+	return kind_create(1, "primitive_uint_8");
+}
+
+template <>
+inline kind_a<> kind_of<int16_t>()
+{
+	return kind_create(1, "primitive_int_16");
+}
+
+template <>
+inline kind_a<> kind_of<uint16_t>()
+{
+	return kind_create(1, "primitive_uint_16");
+}
+
+template <>
+inline kind_a<> kind_of<int32_t>()
+{
+	return kind_create(1, "primitive_int_32");
+}
+
+template <>
+inline kind_a<> kind_of<uint32_t>()
+{
+	return kind_create(1, "primitive_uint_32");
+}
+
+template <>
+inline kind_a<> kind_of<int64_t>()
+{
+	return kind_create(1, "primitive_int_64");
+}
+
+template <>
+inline kind_a<> kind_of<uint64_t>()
+{
+	return kind_create(1, "primitive_uint_64");
+}
+
+template <>
+inline kind_a<> kind_of<float>()
+{
+	return kind_create(1, "primitive_float_32");
+}
+
+template <>
+inline kind_a<> kind_of<double>()
+{
+	return kind_create(1, "primitive_float_64");
+}
+
 } // namespace strange
 
 #endif

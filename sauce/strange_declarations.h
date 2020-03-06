@@ -384,6 +384,29 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 inline cat_a<> kind_to_cat(kind_a<> const& kind);
 inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds);
 
+template <typename ___TTT___>
+inline kind_a<> kind_of();
+template <>
+inline kind_a<> kind_of<int8_t>();
+template <>
+inline kind_a<> kind_of<uint8_t>();
+template <>
+inline kind_a<> kind_of<int16_t>();
+template <>
+inline kind_a<> kind_of<uint16_t>();
+template <>
+inline kind_a<> kind_of<int32_t>();
+template <>
+inline kind_a<> kind_of<uint32_t>();
+template <>
+inline kind_a<> kind_of<int64_t>();
+template <>
+inline kind_a<> kind_of<uint64_t>();
+template <>
+inline kind_a<> kind_of<float>();
+template <>
+inline kind_a<> kind_of<double>();
+
 // attributes
 inline operation_a<> attribute_extraction_create(any_a<> const& thing);
 inline operation_a<> attribute_mutation_create(symbol_a<> const& name, any_a<> const& kind, any_a<> const& thing);

@@ -1536,6 +1536,43 @@ protected:
 		river.write_string(
 			"\t\treturn CATS;\n"
 			"\t}\n\n");
+
+		// ___kind___()
+		if (root)
+		{
+			river.write_string("\ttemplate <typename ___cat_a___ = cat, typename ___kind_a___ = kind>\n");
+		}
+		else
+		{
+			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>\n");
+		}
+		river.write_string(
+			"\tstatic inline ___kind_a___ ___kind___()\n"
+			"\t{\n"
+			"\t\tstatic ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>()");
+		// aspects
+/*		if (count)
+		{
+			river.write_string(", flock_vals(");
+			bool first = true;
+			while (count)
+			{
+				if (first)
+				{
+					first = false;
+				}
+				else
+				{
+					river.write_string(", ");
+				}
+				river.write_string("kind_of<" + fast<symbol_a<>>(_dimension_names.at_index(count)).to_string().substr(1) + ">()");
+				--count;
+			}
+			river.write_string(")");
+		}
+*/		river.write_string(");\n"
+			"\t\treturn KIND;\n"
+			"\t}\n\n");
 	}
 
 	inline void _define_class_relfection_dimensions_(int64_t count, flock_a<> const& dimension_kinds, int64_t version, river_a<>& river) const

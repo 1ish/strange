@@ -343,6 +343,13 @@ public:
 		return CATS;
 	}
 
+	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
+	static inline ___kind_a___ ___kind___()
+	{
+		static ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>());
+		return KIND;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline shoal_a create(Args&&... args)
 	{
