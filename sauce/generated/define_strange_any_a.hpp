@@ -19,16 +19,6 @@ public:
 	using ___WEAK___ = std::weak_ptr<___any_a_handle_base___>;
 	using ___SHARED___ = std::shared_ptr<___any_a_handle_base___>;
 
-	// hash function wrapper class
-	class hash_f
-	{
-	public:
-		inline std::size_t operator()(any_a const& thing) const
-		{
-			return thing.hash();
-		}
-	};
-
 	// operator overloads
 	inline any_a<> operator[](range const& arguments)
 	{

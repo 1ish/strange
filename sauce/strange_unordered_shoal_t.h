@@ -263,7 +263,7 @@ class unordered_shoal_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_unordered_map_any_any = std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>;
+	using std_unordered_map_any_any = std::unordered_map<any_a<>, any_a<>>;
 
 	// override
 	using over = collection_o<unordered_shoal_t<_concurrent_>>;

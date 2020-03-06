@@ -5,8 +5,8 @@ false &&
 			(	// parent
 				$$<shoal>[],
 				{	// unordered shoal
-					extract_map : "std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f> const& () const",
-					mutate_map : "std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>& ()",
+					extract_map : "std::unordered_map<any_a<>, any_a<>> const& () const",
+					mutate_map : "std::unordered_map<any_a<>, any_a<>>& ()",
 				}
 			)
 		)

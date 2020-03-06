@@ -169,7 +169,7 @@ public:
 
 protected:
 	inline conception_t(range_a<> const& parents)
-		: unordered_shoal_t<false, ___ego___>{ std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>{} }
+		: unordered_shoal_t<false, ___ego___>{ std::unordered_map<any_a<>, any_a<>>{} }
 	{
 		symbol_a<> type = sym("");
 		cat_a<> cat = cat_t<>::create_();

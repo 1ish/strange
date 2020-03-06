@@ -82,17 +82,17 @@ public:
 		return *this;
 	}
 
-	inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set() const
+	inline std :: unordered_set < any_a < > > const & extract_set() const
 	{ assert(___handle___); return ___read___().extract_set(); }
 
-	inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set()
+	inline std :: unordered_set < any_a < > > & mutate_set()
 	{ assert(___handle___); return ___write___().mutate_set(); }
 
 protected:
 	struct ___unordered_herd_a_handle_base___ : ___herd_a_handle_base___
 	{
-		virtual std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set() const = 0;
-		virtual std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set() = 0;
+		virtual std :: unordered_set < any_a < > > const & extract_set() const = 0;
+		virtual std :: unordered_set < any_a < > > & mutate_set() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___unordered_herd_a_handle_base___>
@@ -113,10 +113,10 @@ protected:
 			: ___herd_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set() const final
+		virtual inline std :: unordered_set < any_a < > > const & extract_set() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_set(); }
 
-		virtual inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set() final
+		virtual inline std :: unordered_set < any_a < > > & mutate_set() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_set(); }
 
 	};
@@ -394,10 +394,10 @@ public:
 		return *this;
 	}
 
-	inline std :: unordered_set < any_a < > , any_a < > :: hash_f > const & extract_set() const
+	inline std :: unordered_set < any_a < > > const & extract_set() const
 	{ throw dis("dynamic unordered_herd_d::extract_set() not available"); }
 
-	inline std :: unordered_set < any_a < > , any_a < > :: hash_f > & mutate_set()
+	inline std :: unordered_set < any_a < > > & mutate_set()
 	{ throw dis("dynamic unordered_herd_d::mutate_set() not available"); }
 
 	void ___weak___(herd_d<>::___WEAK___ const& weak) const {}

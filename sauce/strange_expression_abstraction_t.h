@@ -553,16 +553,6 @@ protected:
 				"\tusing ___WEAK___ = std::weak_ptr<___" + class_name + "_handle_base___>;\n"
 				"\tusing ___SHARED___ = std::shared_ptr<___" + class_name + "_handle_base___>;\n\n"
 
-				"\t// hash function wrapper class\n"
-				"\tclass hash_f\n"
-				"\t{\n"
-				"\tpublic:\n"
-				"\t\tinline std::size_t operator()(" + class_name + " const& thing) const\n"
-				"\t\t{\n"
-				"\t\t\treturn thing.hash();\n"
-				"\t\t}\n"
-				"\t};\n\n"
-
 				"\t// operator overloads\n"
 				"\tinline " + class_name + "<> operator[](range const& arguments)\n"
 				"\t{\n"

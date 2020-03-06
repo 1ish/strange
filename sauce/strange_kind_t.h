@@ -452,15 +452,15 @@ inline kind_a<> kind_of<std::istreambuf_iterator<char>>()
 }
 /*
 template <>
-inline kind_a<> kind_of<std::unordered_set<any_a<>, any_a<>::hash_f>::const_iterator>()
+inline kind_a<> kind_of<std::unordered_set<any_a<>>::const_iterator>()
 {
-	return kind_create(1, "\"std::unordered_set<any_a<>, any_a<>::hash_f>::const_iterator\"");
+	return kind_create(1, "\"std::unordered_set<any_a<>>::const_iterator\"");
 }
 
 template <>
-inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::const_iterator>()
+inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::const_iterator>()
 {
-	return kind_create(1, "\"std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::const_iterator\"");
+	return kind_create(1, "\"std::unordered_map<any_a<>, any_a<>>::const_iterator\"");
 }
 */
 template <>
@@ -470,9 +470,9 @@ inline kind_a<> kind_of<forward_const_iterator_a<>>()
 }
 /*
 template <>
-inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::iterator>()
+inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::iterator>()
 {
-	return kind_create(1, "\"std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::iterator\"");
+	return kind_create(1, "\"std::unordered_map<any_a<>, any_a<>>::iterator\"");
 }
 
 template <>

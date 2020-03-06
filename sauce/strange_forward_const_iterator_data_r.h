@@ -54,7 +54,7 @@ public:
 };
 
 template<>
-class reflection<forward_const_iterator_data_a<std::unordered_set<any_a<>, any_a<>::hash_f>::const_iterator>>
+class reflection<forward_const_iterator_data_a<std::unordered_set<any_a<>>::const_iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -103,7 +103,7 @@ public:
 };
 
 template<>
-class reflection<forward_const_iterator_data_a<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::const_iterator>>
+class reflection<forward_const_iterator_data_a<std::unordered_map<any_a<>, any_a<>>::const_iterator>>
 {
 public:
 	static inline cat_a<> cat()
@@ -205,8 +205,8 @@ class ___forward_const_iterator_data_a_share___
 	static inline bool ___share___()
 	{
 		return forward_const_iterator_data_a<std::istreambuf_iterator<char>>::___share___
-			&& forward_const_iterator_data_a<std::unordered_set<any_a<>, any_a<>::hash_f>::const_iterator>::___share___
-			&& forward_const_iterator_data_a<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::const_iterator>::___share___
+			&& forward_const_iterator_data_a<std::unordered_set<any_a<>>::const_iterator>::___share___
+			&& forward_const_iterator_data_a<std::unordered_map<any_a<>, any_a<>>::const_iterator>::___share___
 			&& forward_const_iterator_data_a<forward_const_iterator_a<>>::___share___;
 	}
 };

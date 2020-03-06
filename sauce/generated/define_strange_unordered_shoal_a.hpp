@@ -82,17 +82,17 @@ public:
 		return *this;
 	}
 
-	inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_map() const
+	inline std :: unordered_map < any_a < > , any_a < > > const & extract_map() const
 	{ assert(___handle___); return ___read___().extract_map(); }
 
-	inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_map()
+	inline std :: unordered_map < any_a < > , any_a < > > & mutate_map()
 	{ assert(___handle___); return ___write___().mutate_map(); }
 
 protected:
 	struct ___unordered_shoal_a_handle_base___ : ___shoal_a_handle_base___
 	{
-		virtual std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_map() const = 0;
-		virtual std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_map() = 0;
+		virtual std :: unordered_map < any_a < > , any_a < > > const & extract_map() const = 0;
+		virtual std :: unordered_map < any_a < > , any_a < > > & mutate_map() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___unordered_shoal_a_handle_base___>
@@ -113,10 +113,10 @@ protected:
 			: ___shoal_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_map() const final
+		virtual inline std :: unordered_map < any_a < > , any_a < > > const & extract_map() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_map(); }
 
-		virtual inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_map() final
+		virtual inline std :: unordered_map < any_a < > , any_a < > > & mutate_map() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_map(); }
 
 	};
@@ -394,10 +394,10 @@ public:
 		return *this;
 	}
 
-	inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > const & extract_map() const
+	inline std :: unordered_map < any_a < > , any_a < > > const & extract_map() const
 	{ throw dis("dynamic unordered_shoal_d::extract_map() not available"); }
 
-	inline std :: unordered_map < any_a < > , any_a < > , any_a < > :: hash_f > & mutate_map()
+	inline std :: unordered_map < any_a < > , any_a < > > & mutate_map()
 	{ throw dis("dynamic unordered_shoal_d::mutate_map() not available"); }
 
 	void ___weak___(shoal_d<>::___WEAK___ const& weak) const {}

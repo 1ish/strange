@@ -46,6 +46,9 @@ using number_data_double_a = number_data_a<double>;
 }
 
 #include "generated/declare_strange_any_a.hpp"
+
+template <> struct std::hash<strange::any_a<>>;
+
 #include "generated/declare_strange_forward_const_iterator_a.hpp"
 #include "generated/declare_strange_forward_const_iterator_data_a.hpp"
 #include "generated/declare_strange_forward_iterator_a.hpp"
@@ -423,13 +426,13 @@ inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::istreambuf_iterator<char>>();
 //template <>
-//inline kind_a<> kind_of<std::unordered_set<any_a<>, any_a<>::hash_f>::const_iterator>();
+//inline kind_a<> kind_of<std::unordered_set<any_a<>>::const_iterator>();
 //template <>
-//inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::const_iterator>();
+//inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::const_iterator>();
 template <>
 inline kind_a<> kind_of<forward_const_iterator_a<>>();
 //template <>
-//inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::iterator>();
+//inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::iterator>();
 //template <>
 //inline kind_a<> kind_of<std::vector<any_a<>>::const_iterator>();
 //template <>

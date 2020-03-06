@@ -120,7 +120,7 @@ class unordered_herd_t : public thing_t<___ego___>
 	};
 
 public:
-	using std_unordered_set_any = std::unordered_set<any_a<>, any_a<>::hash_f>;
+	using std_unordered_set_any = std::unordered_set<any_a<>>;
 
 	// override
 	using over = collection_o<unordered_herd_t<_concurrent_>>;
@@ -139,19 +139,19 @@ public:
 	template <typename... Args>
 	static inline unordered_herd_a<> create_(Args&&... args)
 	{
-		return create(variadic_u<any_a<>, any_a<>::hash_f>::unordered_set(std::forward<Args>(args)...));
+		return create(variadic_u<any_a<>>::unordered_set(std::forward<Args>(args)...));
 	}
 
 	template <typename... Args>
 	static inline unordered_herd_a<> create_refs_(Args&&... args)
 	{
-		return create(variadic_u<any_a<>, any_a<>::hash_f>::unordered_set_ref(std::forward<Args>(args)...));
+		return create(variadic_u<any_a<>>::unordered_set_ref(std::forward<Args>(args)...));
 	}
 
 	template <typename... Args>
 	static inline unordered_herd_a<> create_dups_(Args&&... args)
 	{
-		return create(variadic_u<any_a<>, any_a<>::hash_f>::unordered_set_dup(std::forward<Args>(args)...));
+		return create(variadic_u<any_a<>>::unordered_set_dup(std::forward<Args>(args)...));
 	}
 
 	template <typename F>
