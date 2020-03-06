@@ -47,7 +47,18 @@ using number_data_double_a = number_data_a<double>;
 
 #include "generated/declare_strange_any_a.hpp"
 
-template <> struct std::hash<strange::any_a<>>;
+namespace strange
+{
+	inline std::size_t hash_of(any_a<> const& thing);
+}
+
+template <> struct std::hash<strange::any_a<>>
+{
+	inline std::size_t operator()(strange::any_a<> const& thing) const
+	{
+		return strange::hash_of(thing);
+	}
+};
 
 #include "generated/declare_strange_forward_const_iterator_a.hpp"
 #include "generated/declare_strange_forward_const_iterator_data_a.hpp"

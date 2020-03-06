@@ -4,13 +4,13 @@
 // abstractions
 #include "generated/define_strange_any_a.hpp"
 
-template <> struct std::hash<strange::any_a<>>
+namespace strange
 {
-	inline std::size_t operator()(strange::any_a<> const& thing) const
+	inline std::size_t hash_of(any_a<> const& thing)
 	{
 		return thing.hash();
 	}
-};
+}
 
 #include "generated/define_strange_misunderstanding_a.hpp"
 #include "generated/define_strange_forward_const_iterator_a.hpp"
