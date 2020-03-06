@@ -352,61 +352,391 @@ inline kind_a<> kind_of()
 template <>
 inline kind_a<> kind_of<int8_t>()
 {
-	return kind_create(1, "primitive_int_8");
+	return kind_create(1, "\"int8_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<uint8_t>()
 {
-	return kind_create(1, "primitive_uint_8");
+	return kind_create(1, "\"uint8_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<int16_t>()
 {
-	return kind_create(1, "primitive_int_16");
+	return kind_create(1, "\"int16_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<uint16_t>()
 {
-	return kind_create(1, "primitive_uint_16");
+	return kind_create(1, "\"uint16_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<int32_t>()
 {
-	return kind_create(1, "primitive_int_32");
+	return kind_create(1, "\"int32_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<uint32_t>()
 {
-	return kind_create(1, "primitive_uint_32");
+	return kind_create(1, "\"uint32_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<int64_t>()
 {
-	return kind_create(1, "primitive_int_64");
+	return kind_create(1, "\"int64_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<uint64_t>()
 {
-	return kind_create(1, "primitive_uint_64");
+	return kind_create(1, "\"uint64_t\"");
 }
 
 template <>
 inline kind_a<> kind_of<float>()
 {
-	return kind_create(1, "primitive_float_32");
+	return kind_create(1, "\"float\"");
 }
 
 template <>
 inline kind_a<> kind_of<double>()
 {
-	return kind_create(1, "primitive_float_64");
+	return kind_create(1, "\"double\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<false>::read_lock>>()
+{
+	return kind_create(1, "\"std::shared_ptr<strange::concurrent_u<false>::read_lock>\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<false>::write_lock>>()
+{
+	return kind_create(1, "\"std::shared_ptr<strange::concurrent_u<false>::write_lock>\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::read_lock>>()
+{
+	return kind_create(1, "\"std::shared_ptr<strange::concurrent_u<true>::read_lock>\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::write_lock>>()
+{
+	return kind_create(1, "\"std::shared_ptr<strange::concurrent_u<true>::write_lock>\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::set<any_a<>>::const_iterator>()
+{
+	return kind_create(1, "\"std::set<any_a<>>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::const_iterator>()
+{
+	return kind_create(1, "\"std::map<any_a<>, any_a<>>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::istreambuf_iterator<char>>()
+{
+	return kind_create(1, "\"std::istreambuf_iterator<char>\"");
+}
+/*
+template <>
+inline kind_a<> kind_of<std::unordered_set<any_a<>, any_a<>::hash_f>::const_iterator>()
+{
+	return kind_create(1, "\"std::unordered_set<any_a<>, any_a<>::hash_f>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::const_iterator>()
+{
+	return kind_create(1, "\"std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::const_iterator\"");
+}
+*/
+template <>
+inline kind_a<> kind_of<forward_const_iterator_a<>>()
+{
+	return kind_create(1, "\"forward_const_iterator_a<>\"");
+}
+/*
+template <>
+inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::iterator>()
+{
+	return kind_create(1, "\"std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<any_a<>>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<any_a<>>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<any_a<>>::const_iterator>()
+{
+	return kind_create(1, "\"<std::deque<any_a<>>::const_iterator\"");
+}
+*/
+template <>
+inline kind_a<> kind_of<std::vector<int8_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<int8_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<int8_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::deque<int8_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<uint8_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<uint8_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<uint8_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::deque<uint8_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<int16_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<int16_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<int16_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::deque<int16_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<uint16_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<uint16_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<uint16_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::deque<uint16_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<int32_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<int32_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<int32_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::deque<int32_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<uint32_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<uint32_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<uint32_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::deque<uint32_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<int64_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<int64_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<int64_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::deque<int64_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<uint64_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<uint64_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<uint64_t>::const_iterator>()
+{
+	return kind_create(1, "\"std::deque<uint64_t>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<float>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<float>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<float>::const_iterator>()
+{
+	return kind_create(1, "\"std::deque<float>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<double>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<double>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<double>::const_iterator>()
+{
+	return kind_create(1, "\"std::deque<double>::const_iterator\"");
+}
+/*
+template <>
+inline kind_a<> kind_of<std::vector<any_a<>>::iterator>()
+{
+	return kind_create(1, "\"std::vector<any_a<>>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<any_a<>>::iterator>()
+{
+	return kind_create(1, "\"std::deque<any_a<>>::iterator\"");
+}
+*/
+template <>
+inline kind_a<> kind_of<std::vector<int8_t>::iterator>()
+{
+	return kind_create(1, "\"std::vector<int8_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<int8_t>::iterator>()
+{
+	return kind_create(1, "\"std::deque<int8_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<uint8_t>::iterator>()
+{
+	return kind_create(1, "\"std::vector<uint8_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<uint8_t>::iterator>()
+{
+	return kind_create(1, "\"std::deque<uint8_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<int16_t>::iterator>()
+{
+	return kind_create(1, "\"std::vector<int16_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<int16_t>::iterator>()
+{
+	return kind_create(1, "\"std::deque<int16_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<uint16_t>::iterator>()
+{
+	return kind_create(1, "\"std::vector<uint16_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<uint16_t>::iterator>()
+{
+	return kind_create(1, "\"std::deque<uint16_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<int32_t>::iterator>()
+{
+	return kind_create(1, "\"std::vector<int32_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<int32_t>::iterator>()
+{
+	return kind_create(1, "\"std::deque<int32_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<uint32_t>::iterator>()
+{
+	return kind_create(1, "\"std::vector<uint32_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<uint32_t>::iterator>()
+{
+	return kind_create(1, "\"std::deque<uint32_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<int64_t>::iterator>()
+{
+	return kind_create(1, "\"std::vector<int64_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<int64_t>::iterator>()
+{
+	return kind_create(1, "\"std::deque<int64_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<uint64_t>::iterator>()
+{
+	return kind_create(1, "\"std::vector<uint64_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<uint64_t>::iterator>()
+{
+	return kind_create(1, "\"std::deque<uint64_t>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<float>::iterator>()
+{
+	return kind_create(1, "\"std::vector<float>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<float>::iterator>()
+{
+	return kind_create(1, "\"std::deque<float>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<double>::iterator>()
+{
+	return kind_create(1, "\"std::vector<double>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<double>::iterator>()
+{
+	return kind_create(1, "\"std::deque<double>::iterator\"");
 }
 
 } // namespace strange

@@ -1551,7 +1551,7 @@ protected:
 			"\t{\n"
 			"\t\tstatic ___kind_a___ KIND = kind_from_cat(___cat___<___cat_a___, ___kind_a___>()");
 		// aspects
-/*		if (count)
+		if (count)
 		{
 			river.write_string(", flock_vals(");
 			bool first = true;
@@ -1565,12 +1565,11 @@ protected:
 				{
 					river.write_string(", ");
 				}
-				river.write_string("kind_of<" + fast<symbol_a<>>(_dimension_names.at_index(count)).to_string().substr(1) + ">()");
-				--count;
+				river.write_string("kind_of<" + fast<symbol_a<>>(_dimension_names.at_index(--count)).to_string().substr(1) + ">()");
 			}
 			river.write_string(")");
 		}
-*/		river.write_string(");\n"
+		river.write_string(");\n"
 			"\t\treturn KIND;\n"
 			"\t}\n\n");
 	}

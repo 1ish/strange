@@ -59,7 +59,8 @@ public:
 
 	static inline kind_a<> kind_()
 	{
-		return ___ego___::___kind___();
+		return reflection<___ego___>::kind();
+//TODO		return ___ego___::___kind___();
 	}
 
 	static inline any_a<> kinds__(range_a<> const&)

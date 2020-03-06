@@ -1,6 +1,8 @@
 #ifndef COM_ONEISH_STRANGE_DECLARATIONS_H
 #define COM_ONEISH_STRANGE_DECLARATIONS_H
 
+#include "strange_concurrent_u.h"
+
 // forward declarations
 
 namespace strange
@@ -406,6 +408,116 @@ template <>
 inline kind_a<> kind_of<float>();
 template <>
 inline kind_a<> kind_of<double>();
+template <>
+inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<false>::read_lock>>();
+template <>
+inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<false>::write_lock>>();
+template <>
+inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::read_lock>>();
+template <>
+inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::write_lock>>();
+template <>
+inline kind_a<> kind_of<std::set<any_a<>>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::istreambuf_iterator<char>>();
+//template <>
+//inline kind_a<> kind_of<std::unordered_set<any_a<>, any_a<>::hash_f>::const_iterator>();
+//template <>
+//inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::const_iterator>();
+template <>
+inline kind_a<> kind_of<forward_const_iterator_a<>>();
+//template <>
+//inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>, any_a<>::hash_f>::iterator>();
+//template <>
+//inline kind_a<> kind_of<std::vector<any_a<>>::const_iterator>();
+//template <>
+//inline kind_a<> kind_of<std::deque<any_a<>>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<int8_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<int8_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<uint8_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<uint8_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<int16_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<int16_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<uint16_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<uint16_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<int32_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<int32_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<uint32_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<uint32_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<int64_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<int64_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<uint64_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<uint64_t>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<float>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<float>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<double>::const_iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<double>::const_iterator>();
+//template <>
+//inline kind_a<> kind_of<std::vector<any_a<>>::iterator>();
+//template <>
+//inline kind_a<> kind_of<std::deque<any_a<>>::iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<int8_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<int8_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<uint8_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<uint8_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<int16_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<int16_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<uint16_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<uint16_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<int32_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<int32_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<uint32_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<uint32_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<int64_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<int64_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<uint64_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<uint64_t>::iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<float>::iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<float>::iterator>();
+template <>
+inline kind_a<> kind_of<std::vector<double>::iterator>();
+template <>
+inline kind_a<> kind_of<std::deque<double>::iterator>();
 
 // attributes
 inline operation_a<> attribute_extraction_create(any_a<> const& thing);
