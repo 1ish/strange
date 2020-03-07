@@ -722,6 +722,8 @@ public:
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
 			___unordered_shoal_a___ operations = unordered_shoal_create<false, ___unordered_shoal_a___>();
+			operations.update_string("call_", native_mutation_t<any_a>::create(&any_a::operator[]));
+			operations.update_string("perform_", native_mutation_t<any_a>::create(&any_a::operator()));
 			operations.update_string("type_", native_extraction_t<any_a>::create(&any_a::type__));
 			operations.update_string("shared_", native_extraction_t<any_a>::create(&any_a::shared__));
 			operations.update_string("cat_", native_extraction_t<any_a>::create(&any_a::cat__));
