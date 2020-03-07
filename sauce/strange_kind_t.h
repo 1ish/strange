@@ -474,13 +474,13 @@ inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::iterator>()
 {
 	return kind_create(1, "\"std::unordered_map<any_a<>, any_a<>>::iterator\"");
 }
-
+*/
 template <>
 inline kind_a<> kind_of<std::vector<any_a<>>::const_iterator>()
 {
 	return kind_create(1, "\"std::vector<any_a<>>::const_iterator\"");
 }
-
+/*
 template <>
 inline kind_a<> kind_of<std::deque<any_a<>>::const_iterator>()
 {
