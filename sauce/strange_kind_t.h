@@ -434,59 +434,17 @@ inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::write_lock>
 }
 
 template <>
-inline kind_a<> kind_of<std::set<any_a<>>::const_iterator>()
-{
-	return kind_create(1, "\"std::set<any_a<>>::const_iterator\"");
-}
-
-template <>
-inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::const_iterator>()
-{
-	return kind_create(1, "\"std::map<any_a<>, any_a<>>::const_iterator\"");
-}
-
-template <>
 inline kind_a<> kind_of<std::istreambuf_iterator<char>>()
 {
 	return kind_create(1, "\"std::istreambuf_iterator<char>\"");
 }
-/*
-template <>
-inline kind_a<> kind_of<std::unordered_set<any_a<>>::const_iterator>()
-{
-	return kind_create(1, "\"std::unordered_set<any_a<>>::const_iterator\"");
-}
 
-template <>
-inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::const_iterator>()
-{
-	return kind_create(1, "\"std::unordered_map<any_a<>, any_a<>>::const_iterator\"");
-}
-*/
 template <>
 inline kind_a<> kind_of<forward_const_iterator_a<>>()
 {
 	return kind_create(1, "\"forward_const_iterator_a<>\"");
 }
-/*
-template <>
-inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::iterator>()
-{
-	return kind_create(1, "\"std::unordered_map<any_a<>, any_a<>>::iterator\"");
-}
-*/
-template <>
-inline kind_a<> kind_of<std::vector<any_a<>>::const_iterator>()
-{
-	return kind_create(1, "\"std::vector<any_a<>>::const_iterator\"");
-}
-/*
-template <>
-inline kind_a<> kind_of<std::deque<any_a<>>::const_iterator>()
-{
-	return kind_create(1, "\"<std::deque<any_a<>>::const_iterator\"");
-}
-*/
+
 template <>
 inline kind_a<> kind_of<std::vector<int8_t>::const_iterator>()
 {
@@ -606,19 +564,7 @@ inline kind_a<> kind_of<std::deque<double>::const_iterator>()
 {
 	return kind_create(1, "\"std::deque<double>::const_iterator\"");
 }
-/*
-template <>
-inline kind_a<> kind_of<std::vector<any_a<>>::iterator>()
-{
-	return kind_create(1, "\"std::vector<any_a<>>::iterator\"");
-}
 
-template <>
-inline kind_a<> kind_of<std::deque<any_a<>>::iterator>()
-{
-	return kind_create(1, "\"std::deque<any_a<>>::iterator\"");
-}
-*/
 template <>
 inline kind_a<> kind_of<std::vector<int8_t>::iterator>()
 {
@@ -737,6 +683,66 @@ template <>
 inline kind_a<> kind_of<std::deque<double>::iterator>()
 {
 	return kind_create(1, "\"std::deque<double>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::set<any_a<>>::const_iterator>()
+{
+	return kind_create(1, "\"std::set<any_a<>>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::const_iterator>()
+{
+	return kind_create(1, "\"std::map<any_a<>, any_a<>>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::iterator>()
+{
+	return kind_create(1, "\"std::map<any_a<>, any_a<>>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::unordered_set<any_a<>>::const_iterator>()
+{
+	return kind_create(1, "\"std::unordered_set<any_a<>>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::const_iterator>()
+{
+	return kind_create(1, "\"std::unordered_map<any_a<>, any_a<>>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::iterator>()
+{
+	return kind_create(1, "\"std::unordered_map<any_a<>, any_a<>>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<any_a<>>::const_iterator>()
+{
+	return kind_create(1, "\"std::vector<any_a<>>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<any_a<>>::const_iterator>()
+{
+	return kind_create(1, "\"<std::deque<any_a<>>::const_iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::vector<any_a<>>::iterator>()
+{
+	return kind_create(1, "\"std::vector<any_a<>>::iterator\"");
+}
+
+template <>
+inline kind_a<> kind_of<std::deque<any_a<>>::iterator>()
+{
+	return kind_create(1, "\"std::deque<any_a<>>::iterator\"");
 }
 
 } // namespace strange

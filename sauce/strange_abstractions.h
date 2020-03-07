@@ -10,6 +10,26 @@ namespace strange
 	{
 		return thing.hash();
 	}
+	template <>
+	inline kind_a<> kind_of<std::set<any_a<>>::const_iterator>();
+	template <>
+	inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::const_iterator>();
+	template <>
+	inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::iterator>();
+	template <>
+	inline kind_a<> kind_of<std::unordered_set<any_a<>>::const_iterator>();
+	template <>
+	inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::const_iterator>();
+	template <>
+	inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::iterator>();
+	template <>
+	inline kind_a<> kind_of<std::vector<any_a<>>::const_iterator>();
+	template <>
+	inline kind_a<> kind_of<std::deque<any_a<>>::const_iterator>();
+	template <>
+	inline kind_a<> kind_of<std::vector<any_a<>>::iterator>();
+	template <>
+	inline kind_a<> kind_of<std::deque<any_a<>>::iterator>();
 }
 
 #include "generated/define_strange_misunderstanding_a.hpp"

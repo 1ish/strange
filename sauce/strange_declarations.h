@@ -431,23 +431,9 @@ inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::read_lock>>
 template <>
 inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::write_lock>>();
 template <>
-inline kind_a<> kind_of<std::set<any_a<>>::const_iterator>();
-template <>
-inline kind_a<> kind_of<std::map<any_a<>, any_a<>>::const_iterator>();
-template <>
 inline kind_a<> kind_of<std::istreambuf_iterator<char>>();
-//template <>
-//inline kind_a<> kind_of<std::unordered_set<any_a<>>::const_iterator>();
-//template <>
-//inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::const_iterator>();
 template <>
 inline kind_a<> kind_of<forward_const_iterator_a<>>();
-template <>
-//inline kind_a<> kind_of<std::unordered_map<any_a<>, any_a<>>::iterator>();
-//template <>
-inline kind_a<> kind_of<std::vector<any_a<>>::const_iterator>();
-//template <>
-//inline kind_a<> kind_of<std::deque<any_a<>>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<int8_t>::const_iterator>();
 template <>
@@ -488,10 +474,6 @@ template <>
 inline kind_a<> kind_of<std::vector<double>::const_iterator>();
 template <>
 inline kind_a<> kind_of<std::deque<double>::const_iterator>();
-//template <>
-//inline kind_a<> kind_of<std::vector<any_a<>>::iterator>();
-//template <>
-//inline kind_a<> kind_of<std::deque<any_a<>>::iterator>();
 template <>
 inline kind_a<> kind_of<std::vector<int8_t>::iterator>();
 template <>
