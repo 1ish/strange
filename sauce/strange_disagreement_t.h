@@ -121,6 +121,13 @@ inline misunderstanding_a<> dis(F&& s)
 	return disagreement_t<>::create(std::forward<F>(s));
 }
 
+template <typename F>
+inline bool throw_dis(F&& s)
+{
+	throw disagreement_t<>::create(std::forward<F>(s));
+	return false;
+}
+
 inline misunderstanding_a<> operator+(std::exception const& e, misunderstanding_a<> const& m)
 {
 	return dis(e.what()) + m;

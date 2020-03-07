@@ -418,10 +418,10 @@ public:
 	}
 
 	inline _1_ const & extract_data() const
-	{ throw dis("dynamic data_d::extract_data() not available"); }
+	{ throw throw_dis("dynamic data_d::extract_data() not available"); }
 
 	inline _1_ & mutate_data()
-	{ throw dis("dynamic data_d::mutate_data() not available"); }
+	{ throw throw_dis("dynamic data_d::mutate_data() not available"); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

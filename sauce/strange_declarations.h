@@ -12,6 +12,18 @@ class one_t;
 }
 
 // abstractions
+#include "generated/declare_strange_forward_const_iterator_a.hpp"
+#include "generated/declare_strange_forward_const_iterator_data_a.hpp"
+#include "generated/declare_strange_forward_iterator_a.hpp"
+#include "generated/declare_strange_forward_iterator_data_a.hpp"
+#include "generated/declare_strange_bidirectional_const_iterator_a.hpp"
+#include "generated/declare_strange_bidirectional_const_iterator_data_a.hpp"
+#include "generated/declare_strange_bidirectional_iterator_a.hpp"
+#include "generated/declare_strange_bidirectional_iterator_data_a.hpp"
+#include "generated/declare_strange_random_access_const_iterator_a.hpp"
+#include "generated/declare_strange_random_access_const_iterator_data_a.hpp"
+#include "generated/declare_strange_random_access_iterator_a.hpp"
+#include "generated/declare_strange_random_access_iterator_data_a.hpp"
 #include "generated/declare_strange_range_a.hpp"
 #include "generated/declare_strange_symbol_a.hpp"
 #include "generated/declare_strange_lake_a.hpp"
@@ -60,18 +72,6 @@ template <> struct std::hash<strange::any_a<>>
 	}
 };
 
-#include "generated/declare_strange_forward_const_iterator_a.hpp"
-#include "generated/declare_strange_forward_const_iterator_data_a.hpp"
-#include "generated/declare_strange_forward_iterator_a.hpp"
-#include "generated/declare_strange_forward_iterator_data_a.hpp"
-#include "generated/declare_strange_bidirectional_const_iterator_a.hpp"
-#include "generated/declare_strange_bidirectional_const_iterator_data_a.hpp"
-#include "generated/declare_strange_bidirectional_iterator_a.hpp"
-#include "generated/declare_strange_bidirectional_iterator_data_a.hpp"
-#include "generated/declare_strange_random_access_const_iterator_a.hpp"
-#include "generated/declare_strange_random_access_const_iterator_data_a.hpp"
-#include "generated/declare_strange_random_access_iterator_a.hpp"
-#include "generated/declare_strange_random_access_iterator_data_a.hpp"
 #include "generated/declare_strange_misunderstanding_a.hpp"
 #include "generated/declare_strange_range_of_a.hpp"
 #include "generated/declare_strange_collection_a.hpp"
@@ -266,6 +266,8 @@ inline misunderstanding_a<> mis(F&& s);
 // disagreement
 template <typename F>
 inline misunderstanding_a<> dis(F&& s);
+template <typename F>
+inline bool throw_dis(F&& s);
 
 // native function
 using native_function_pointer = any_a<>(*)(range_a<> const&);

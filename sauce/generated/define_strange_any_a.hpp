@@ -119,14 +119,26 @@ public:
 	inline one_t & mutate_thing()
 	{ assert(___handle___); return ___write___().mutate_thing(); }
 
-	inline any_a<> type__(range const& arguments) const
-	{ assert(___handle___); return ___read___().type__(arguments); }
+	inline any_a<> type__(range const& ___arguments___) const
+	{
+//		return type_();
+//	}
+
+		assert(___handle___);
+		return ___read___().type__(___arguments___);
+	}
 
 	inline symbol type_() const
 	{ assert(___handle___); return ___read___().type_(); }
 
-	inline any_a<> shared__(range const& arguments) const
-	{ assert(___handle___); return ___read___().shared__(arguments); }
+	inline any_a<> shared__(range const& ___arguments___) const
+	{
+//		return shared_();
+//	}
+
+		assert(___handle___);
+		return ___read___().shared__(___arguments___);
+	}
 
 	inline unordered_shoal shared_() const
 	{ assert(___handle___); return ___read___().shared_(); }
@@ -134,38 +146,75 @@ public:
 	inline void share(shoal & shared_shoal ) const
 	{ assert(___handle___); ___read___().share(shared_shoal); }
 
-	inline any_a<> cat__(range const& arguments) const
-	{ assert(___handle___); return ___read___().cat__(arguments); }
+	inline any_a<> cat__(range const& ___arguments___) const
+	{
+//		return cat_();
+//	}
+
+		assert(___handle___);
+		return ___read___().cat__(___arguments___);
+	}
 
 	inline cat cat_() const
 	{ assert(___handle___); return ___read___().cat_(); }
 
-	inline any_a<> cats__(range const& arguments) const
-	{ assert(___handle___); return ___read___().cats__(arguments); }
+	inline any_a<> cats__(range const& ___arguments___) const
+	{
+//		return cats_();
+//	}
+
+		assert(___handle___);
+		return ___read___().cats__(___arguments___);
+	}
 
 	inline unordered_herd cats_() const
 	{ assert(___handle___); return ___read___().cats_(); }
 
-	inline any_a<> kind__(range const& arguments) const
-	{ assert(___handle___); return ___read___().kind__(arguments); }
+	inline any_a<> kind__(range const& ___arguments___) const
+	{
+//		return kind_();
+//	}
+
+		assert(___handle___);
+		return ___read___().kind__(___arguments___);
+	}
 
 	inline kind kind_() const
 	{ assert(___handle___); return ___read___().kind_(); }
 
-	inline any_a<> kinds__(range const& arguments) const
-	{ assert(___handle___); return ___read___().kinds__(arguments); }
+	inline any_a<> kinds__(range const& ___arguments___) const
+	{
+//		return kinds_();
+//	}
+
+		assert(___handle___);
+		return ___read___().kinds__(___arguments___);
+	}
 
 	inline unordered_herd kinds_() const
 	{ assert(___handle___); return ___read___().kinds_(); }
 
-	inline any_a<> operations__(range const& arguments) const
-	{ assert(___handle___); return ___read___().operations__(arguments); }
+	inline any_a<> operations__(range const& ___arguments___) const
+	{
+//		return operations_();
+//	}
+
+		assert(___handle___);
+		return ___read___().operations__(___arguments___);
+	}
 
 	inline unordered_shoal operations_() const
 	{ assert(___handle___); return ___read___().operations_(); }
 
-	inline any_a<> visit__(range const& arguments) const
-	{ assert(___handle___); return ___read___().visit__(arguments); }
+	inline any_a<> visit__(range const& ___arguments___) const
+	{
+//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
+//		return visit_(arguments);
+//	}
+
+		assert(___handle___);
+		return ___read___().visit__(___arguments___);
+	}
 
 	inline any_a<> visit_(inventory & arguments) const
 	{ assert(___handle___); return ___read___().visit_(arguments); }
@@ -176,8 +225,14 @@ public:
 	inline any_a < > operate(any_a < > & thing , range const & arguments ) const
 	{ assert(___handle___); return ___read___().operate(thing, arguments); }
 
-	inline any_a<> identity__(range const& arguments) const
-	{ assert(___handle___); return ___read___().identity__(arguments); }
+	inline any_a<> identity__(range const& ___arguments___) const
+	{
+//		return identity_();
+//	}
+
+		assert(___handle___);
+		return ___read___().identity__(___arguments___);
+	}
 
 	inline number_data_uint64 identity_() const
 	{ assert(___handle___); return ___read___().identity_(); }
@@ -185,8 +240,15 @@ public:
 	inline void const * identity() const
 	{ assert(___handle___); return ___read___().identity(); }
 
-	inline any_a<> identical__(range const& arguments) const
-	{ assert(___handle___); return ___read___().identical__(arguments); }
+	inline any_a<> identical__(range const& ___arguments___) const
+	{
+//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
+//		return identical_(thing);
+//	}
+
+		assert(___handle___);
+		return ___read___().identical__(___arguments___);
+	}
 
 	inline any_a<> identical_(any_a<> const& thing) const
 	{ assert(___handle___); return ___read___().identical_(thing); }
@@ -194,8 +256,14 @@ public:
 	inline bool identical(any_a < > const & thing ) const
 	{ assert(___handle___); return ___read___().identical(thing); }
 
-	inline any_a<> nothing__(range const& arguments) const
-	{ assert(___handle___); return ___read___().nothing__(arguments); }
+	inline any_a<> nothing__(range const& ___arguments___) const
+	{
+//		return nothing_();
+//	}
+
+		assert(___handle___);
+		return ___read___().nothing__(___arguments___);
+	}
 
 	inline any_a<> nothing_() const
 	{ assert(___handle___); return ___read___().nothing_(); }
@@ -203,8 +271,14 @@ public:
 	inline bool nothing() const
 	{ assert(___handle___); return ___read___().nothing(); }
 
-	inline any_a<> something__(range const& arguments) const
-	{ assert(___handle___); return ___read___().something__(arguments); }
+	inline any_a<> something__(range const& ___arguments___) const
+	{
+//		return something_();
+//	}
+
+		assert(___handle___);
+		return ___read___().something__(___arguments___);
+	}
 
 	inline any_a<> something_() const
 	{ assert(___handle___); return ___read___().something_(); }
@@ -212,8 +286,15 @@ public:
 	inline bool something() const
 	{ assert(___handle___); return ___read___().something(); }
 
-	inline any_a<> same__(range const& arguments) const
-	{ assert(___handle___); return ___read___().same__(arguments); }
+	inline any_a<> same__(range const& ___arguments___) const
+	{
+//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
+//		return same_(thing);
+//	}
+
+		assert(___handle___);
+		return ___read___().same__(___arguments___);
+	}
 
 	inline any_a<> same_(any_a<> const& thing) const
 	{ assert(___handle___); return ___read___().same_(thing); }
@@ -221,8 +302,15 @@ public:
 	inline bool operator==(any_a < > const & thing ) const
 	{ assert(___handle___); return ___read___().operator==(thing); }
 
-	inline any_a<> different__(range const& arguments) const
-	{ assert(___handle___); return ___read___().different__(arguments); }
+	inline any_a<> different__(range const& ___arguments___) const
+	{
+//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
+//		return different_(thing);
+//	}
+
+		assert(___handle___);
+		return ___read___().different__(___arguments___);
+	}
 
 	inline any_a<> different_(any_a<> const& thing) const
 	{ assert(___handle___); return ___read___().different_(thing); }
@@ -230,8 +318,14 @@ public:
 	inline bool operator!=(any_a < > const & thing ) const
 	{ assert(___handle___); return ___read___().operator!=(thing); }
 
-	inline any_a<> hash__(range const& arguments) const
-	{ assert(___handle___); return ___read___().hash__(arguments); }
+	inline any_a<> hash__(range const& ___arguments___) const
+	{
+//		return hash_();
+//	}
+
+		assert(___handle___);
+		return ___read___().hash__(___arguments___);
+	}
 
 	inline number_data_uint64 hash_() const
 	{ assert(___handle___); return ___read___().hash_(); }

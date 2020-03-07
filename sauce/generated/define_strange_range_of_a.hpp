@@ -82,14 +82,26 @@ public:
 		return *this;
 	}
 
-	inline any_a<> cbegin__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().cbegin__(arguments); }
+	inline any_a<> cbegin__(range_a<> const& ___arguments___) const
+	{
+//		return cbegin_();
+//	}
+
+		assert(___handle___);
+		return ___read___().cbegin__(___arguments___);
+	}
 
 	inline forward_const_iterator_a<> cbegin_() const
 	{ assert(___handle___); return ___read___().cbegin_(); }
 
-	inline any_a<> cend__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().cend__(arguments); }
+	inline any_a<> cend__(range_a<> const& ___arguments___) const
+	{
+//		return cend_();
+//	}
+
+		assert(___handle___);
+		return ___read___().cend__(___arguments___);
+	}
 
 	inline forward_const_iterator_a<> cend_() const
 	{ assert(___handle___); return ___read___().cend_(); }
@@ -439,7 +451,7 @@ public:
 		auto const op = operation("cbegin_");
 		if (!op)
 		{
-			throw dis("dynamic range_of_d::cbegin_ passed non-existent member");
+			throw throw_dis("dynamic range_of_d::cbegin_ passed non-existent member");
 		}
 		return op.operate(*const_cast<range_of_d*>(this), arguments);
 	}
@@ -450,7 +462,7 @@ public:
 		auto const op = operation("cbegin_");
 		if (!op)
 		{
-			throw dis("dynamic range_of_d::cbegin_ passed non-existent member");
+			throw throw_dis("dynamic range_of_d::cbegin_ passed non-existent member");
 		}
 		return cast<forward_const_iterator_a<>>(variadic_operate(op, *const_cast<range_of_d*>(this)));
 	}
@@ -461,7 +473,7 @@ public:
 		auto const op = operation("cend_");
 		if (!op)
 		{
-			throw dis("dynamic range_of_d::cend_ passed non-existent member");
+			throw throw_dis("dynamic range_of_d::cend_ passed non-existent member");
 		}
 		return op.operate(*const_cast<range_of_d*>(this), arguments);
 	}
@@ -472,7 +484,7 @@ public:
 		auto const op = operation("cend_");
 		if (!op)
 		{
-			throw dis("dynamic range_of_d::cend_ passed non-existent member");
+			throw throw_dis("dynamic range_of_d::cend_ passed non-existent member");
 		}
 		return cast<forward_const_iterator_a<>>(variadic_operate(op, *const_cast<range_of_d*>(this)));
 	}

@@ -82,8 +82,14 @@ public:
 		return *this;
 	}
 
-	inline any_a<> to_lake__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().to_lake__(arguments); }
+	inline any_a<> to_lake__(range_a<> const& ___arguments___) const
+	{
+//		return to_lake_();
+//	}
+
+		assert(___handle___);
+		return ___read___().to_lake__(___arguments___);
+	}
 
 	inline lake_int8_a<> to_lake_() const
 	{ assert(___handle___); return ___read___().to_lake_(); }
@@ -97,8 +103,15 @@ public:
 	inline int8_t last_character() const
 	{ assert(___handle___); return ___read___().last_character(); }
 
-	inline any_a<> add__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().add__(arguments); }
+	inline any_a<> add__(range_a<> const& ___arguments___) const
+	{
+//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
+//		return add_(symbol);
+//	}
+
+		assert(___handle___);
+		return ___read___().add__(___arguments___);
+	}
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
 	{ assert(___handle___); return ___read___().add_(symbol); }
@@ -467,7 +480,7 @@ public:
 		auto const op = operation("to_lake_");
 		if (!op)
 		{
-			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
+			throw throw_dis("dynamic symbol_d::to_lake_ passed non-existent member");
 		}
 		return op.operate(*const_cast<symbol_d*>(this), arguments);
 	}
@@ -478,7 +491,7 @@ public:
 		auto const op = operation("to_lake_");
 		if (!op)
 		{
-			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
+			throw throw_dis("dynamic symbol_d::to_lake_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<symbol_d*>(this)));
 	}
@@ -498,7 +511,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic symbol_d::add_ passed non-existent member");
+			throw throw_dis("dynamic symbol_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<symbol_d*>(this), arguments);
 	}
@@ -509,7 +522,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic symbol_d::add_ passed non-existent member");
+			throw throw_dis("dynamic symbol_d::add_ passed non-existent member");
 		}
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<symbol_d*>(this), symbol));
 	}

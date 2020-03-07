@@ -418,10 +418,10 @@ public:
 	}
 
 	inline std :: set < any_a < > > const & extract_set() const
-	{ throw dis("dynamic ordered_herd_d::extract_set() not available"); }
+	{ throw throw_dis("dynamic ordered_herd_d::extract_set() not available"); }
 
 	inline std :: set < any_a < > > & mutate_set()
-	{ throw dis("dynamic ordered_herd_d::mutate_set() not available"); }
+	{ throw throw_dis("dynamic ordered_herd_d::mutate_set() not available"); }
 
 	void ___weak___(herd_d<>::___WEAK___ const& weak) const {}
 

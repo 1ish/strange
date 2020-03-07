@@ -418,10 +418,10 @@ public:
 	}
 
 	inline std :: vector < any_a < > > const & extract_vector() const
-	{ throw dis("dynamic flock_d::extract_vector() not available"); }
+	{ throw throw_dis("dynamic flock_d::extract_vector() not available"); }
 
 	inline std :: vector < any_a < > > & mutate_vector()
-	{ throw dis("dynamic flock_d::mutate_vector() not available"); }
+	{ throw throw_dis("dynamic flock_d::mutate_vector() not available"); }
 
 	void ___weak___(inventory_d<>::___WEAK___ const& weak) const {}
 

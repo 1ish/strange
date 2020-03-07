@@ -82,8 +82,14 @@ public:
 		return *this;
 	}
 
-	inline any_a<> parse__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().parse__(arguments); }
+	inline any_a<> parse__(range_a<> const& ___arguments___)
+	{
+//		return parse_(tokenizer);
+//	}
+
+		assert(___handle___);
+		return ___write___().parse__(___arguments___);
+	}
 
 	inline expression_a<> parse_(range_a<> const& tokenizer)
 	{ assert(___handle___); return ___write___().parse_(tokenizer); }
@@ -424,7 +430,7 @@ public:
 		auto const op = operation("parse_");
 		if (!op)
 		{
-			throw dis("dynamic parser_d::parse_ passed non-existent member");
+			throw throw_dis("dynamic parser_d::parse_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -435,7 +441,7 @@ public:
 		auto const op = operation("parse_");
 		if (!op)
 		{
-			throw dis("dynamic parser_d::parse_ passed non-existent member");
+			throw throw_dis("dynamic parser_d::parse_ passed non-existent member");
 		}
 		return cast<expression_a<>>(variadic_operate(op, *this, tokenizer));
 	}

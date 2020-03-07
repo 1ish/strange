@@ -418,10 +418,10 @@ public:
 	}
 
 	inline std :: unordered_map < any_a < > , any_a < > > const & extract_map() const
-	{ throw dis("dynamic unordered_shoal_d::extract_map() not available"); }
+	{ throw throw_dis("dynamic unordered_shoal_d::extract_map() not available"); }
 
 	inline std :: unordered_map < any_a < > , any_a < > > & mutate_map()
-	{ throw dis("dynamic unordered_shoal_d::mutate_map() not available"); }
+	{ throw throw_dis("dynamic unordered_shoal_d::mutate_map() not available"); }
 
 	void ___weak___(shoal_d<>::___WEAK___ const& weak) const {}
 

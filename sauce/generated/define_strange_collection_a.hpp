@@ -82,8 +82,15 @@ public:
 		return *this;
 	}
 
-	inline any_a<> has__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().has__(arguments); }
+	inline any_a<> has__(range_a<> const& ___arguments___) const
+	{
+//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
+//		return has_(key);
+//	}
+
+		assert(___handle___);
+		return ___read___().has__(___arguments___);
+	}
 
 	inline any_a<> has_(any_a<> const& key) const
 	{ assert(___handle___); return ___read___().has_(key); }
@@ -91,14 +98,27 @@ public:
 	inline bool has(any_a < > const & key ) const
 	{ assert(___handle___); return ___read___().has(key); }
 
-	inline any_a<> at__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().at__(arguments); }
+	inline any_a<> at__(range_a<> const& ___arguments___) const
+	{
+//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
+//		return at_(key);
+//	}
+
+		assert(___handle___);
+		return ___read___().at__(___arguments___);
+	}
 
 	inline any_a<> at_(any_a<> const& key) const
 	{ assert(___handle___); return ___read___().at_(key); }
 
-	inline any_a<> update__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().update__(arguments); }
+	inline any_a<> update__(range_a<> const& ___arguments___)
+	{
+//		return update_(key, value);
+//	}
+
+		assert(___handle___);
+		return ___write___().update__(___arguments___);
+	}
 
 	inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() )
 	{ assert(___handle___); return ___write___().update_(key, value); }
@@ -106,8 +126,14 @@ public:
 	inline void update(any_a < > const & key , any_a < > const & value )
 	{ assert(___handle___); ___write___().update(key, value); }
 
-	inline any_a<> insert__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().insert__(arguments); }
+	inline any_a<> insert__(range_a<> const& ___arguments___)
+	{
+//		return insert_(key, value);
+//	}
+
+		assert(___handle___);
+		return ___write___().insert__(___arguments___);
+	}
 
 	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() )
 	{ assert(___handle___); return ___write___().insert_(key, value); }
@@ -115,8 +141,14 @@ public:
 	inline void insert(any_a < > const & key , any_a < > const & value )
 	{ assert(___handle___); ___write___().insert(key, value); }
 
-	inline any_a<> erase__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().erase__(arguments); }
+	inline any_a<> erase__(range_a<> const& ___arguments___)
+	{
+//		return erase_(key);
+//	}
+
+		assert(___handle___);
+		return ___write___().erase__(___arguments___);
+	}
 
 	inline any_a<> erase_(any_a<> const& key)
 	{ assert(___handle___); return ___write___().erase_(key); }
@@ -124,8 +156,14 @@ public:
 	inline bool erase(any_a < > const & key )
 	{ assert(___handle___); return ___write___().erase(key); }
 
-	inline any_a<> clear__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().clear__(arguments); }
+	inline any_a<> clear__(range_a<> const& ___arguments___)
+	{
+//		return clear_();
+//	}
+
+		assert(___handle___);
+		return ___write___().clear__(___arguments___);
+	}
 
 	inline collection_a<> clear_()
 	{ assert(___handle___); return ___write___().clear_(); }
@@ -133,8 +171,14 @@ public:
 	inline void clear()
 	{ assert(___handle___); ___write___().clear(); }
 
-	inline any_a<> size__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().size__(arguments); }
+	inline any_a<> size__(range_a<> const& ___arguments___) const
+	{
+//		return size_();
+//	}
+
+		assert(___handle___);
+		return ___read___().size__(___arguments___);
+	}
 
 	inline number_data_int64_a<> size_() const
 	{ assert(___handle___); return ___read___().size_(); }
@@ -142,8 +186,14 @@ public:
 	inline int64_t size() const
 	{ assert(___handle___); return ___read___().size(); }
 
-	inline any_a<> empty__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().empty__(arguments); }
+	inline any_a<> empty__(range_a<> const& ___arguments___) const
+	{
+//		return empty_();
+//	}
+
+		assert(___handle___);
+		return ___read___().empty__(___arguments___);
+	}
 
 	inline any_a<> empty_() const
 	{ assert(___handle___); return ___read___().empty_(); }
@@ -151,8 +201,14 @@ public:
 	inline bool empty() const
 	{ assert(___handle___); return ___read___().empty(); }
 
-	inline any_a<> push_front__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().push_front__(arguments); }
+	inline any_a<> push_front__(range_a<> const& ___arguments___)
+	{
+//		return push_front_(thing);
+//	}
+
+		assert(___handle___);
+		return ___write___().push_front__(___arguments___);
+	}
 
 	inline collection_a<> push_front_(any_a<> const& thing)
 	{ assert(___handle___); return ___write___().push_front_(thing); }
@@ -160,14 +216,26 @@ public:
 	inline void push_front(any_a < > const & thing )
 	{ assert(___handle___); ___write___().push_front(thing); }
 
-	inline any_a<> pop_front__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().pop_front__(arguments); }
+	inline any_a<> pop_front__(range_a<> const& ___arguments___)
+	{
+//		return pop_front_();
+//	}
+
+		assert(___handle___);
+		return ___write___().pop_front__(___arguments___);
+	}
 
 	inline any_a<> pop_front_()
 	{ assert(___handle___); return ___write___().pop_front_(); }
 
-	inline any_a<> push_back__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().push_back__(arguments); }
+	inline any_a<> push_back__(range_a<> const& ___arguments___)
+	{
+//		return push_back_(thing);
+//	}
+
+		assert(___handle___);
+		return ___write___().push_back__(___arguments___);
+	}
 
 	inline collection_a<> push_back_(any_a<> const& thing)
 	{ assert(___handle___); return ___write___().push_back_(thing); }
@@ -175,26 +243,51 @@ public:
 	inline void push_back(any_a < > const & thing )
 	{ assert(___handle___); ___write___().push_back(thing); }
 
-	inline any_a<> pop_back__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().pop_back__(arguments); }
+	inline any_a<> pop_back__(range_a<> const& ___arguments___)
+	{
+//		return pop_back_();
+//	}
+
+		assert(___handle___);
+		return ___write___().pop_back__(___arguments___);
+	}
 
 	inline any_a<> pop_back_()
 	{ assert(___handle___); return ___write___().pop_back_(); }
 
-	inline any_a<> self_assign__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().self_assign__(arguments); }
+	inline any_a<> self_assign__(range_a<> const& ___arguments___)
+	{
+//		return self_assign_(range);
+//	}
+
+		assert(___handle___);
+		return ___write___().self_assign__(___arguments___);
+	}
 
 	inline collection_a<> self_assign_(range_a<> const& range)
 	{ assert(___handle___); return ___write___().self_assign_(range); }
 
-	inline any_a<> self_add__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().self_add__(arguments); }
+	inline any_a<> self_add__(range_a<> const& ___arguments___)
+	{
+//		return self_add_(range);
+//	}
+
+		assert(___handle___);
+		return ___write___().self_add__(___arguments___);
+	}
 
 	inline collection_a<> self_add_(range_a<> const& range)
 	{ assert(___handle___); return ___write___().self_add_(range); }
 
-	inline any_a<> add__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().add__(arguments); }
+	inline any_a<> add__(range_a<> const& ___arguments___) const
+	{
+//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
+//		return add_(range);
+//	}
+
+		assert(___handle___);
+		return ___read___().add__(___arguments___);
+	}
 
 	inline collection_a<> add_(range_a<> const& range) const
 	{ assert(___handle___); return ___read___().add_(range); }
@@ -202,14 +295,27 @@ public:
 	inline collection_a operator+(range_a < > const & range ) const
 	{ assert(___handle___); return ___read___().operator+(range); }
 
-	inline any_a<> self_subtract__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().self_subtract__(arguments); }
+	inline any_a<> self_subtract__(range_a<> const& ___arguments___)
+	{
+//		return self_subtract_(range);
+//	}
+
+		assert(___handle___);
+		return ___write___().self_subtract__(___arguments___);
+	}
 
 	inline collection_a<> self_subtract_(range_a<> const& range)
 	{ assert(___handle___); return ___write___().self_subtract_(range); }
 
-	inline any_a<> subtract__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().subtract__(arguments); }
+	inline any_a<> subtract__(range_a<> const& ___arguments___) const
+	{
+//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
+//		return subtract_(range);
+//	}
+
+		assert(___handle___);
+		return ___read___().subtract__(___arguments___);
+	}
 
 	inline collection_a<> subtract_(range_a<> const& range) const
 	{ assert(___handle___); return ___read___().subtract_(range); }
@@ -217,14 +323,26 @@ public:
 	inline collection_a operator-(range_a < > const & range ) const
 	{ assert(___handle___); return ___read___().operator-(range); }
 
-	inline any_a<> read_lock__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().read_lock__(arguments); }
+	inline any_a<> read_lock__(range_a<> const& ___arguments___) const
+	{
+//		return read_lock_();
+//	}
+
+		assert(___handle___);
+		return ___read___().read_lock__(___arguments___);
+	}
 
 	inline any_a<> read_lock_() const
 	{ assert(___handle___); return ___read___().read_lock_(); }
 
-	inline any_a<> write_lock__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().write_lock__(arguments); }
+	inline any_a<> write_lock__(range_a<> const& ___arguments___) const
+	{
+//		return write_lock_();
+//	}
+
+		assert(___handle___);
+		return ___read___().write_lock__(___arguments___);
+	}
 
 	inline any_a<> write_lock_() const
 	{ assert(___handle___); return ___read___().write_lock_(); }
@@ -771,7 +889,7 @@ public:
 		auto const op = operation("has_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::has_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::has_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -782,7 +900,7 @@ public:
 		auto const op = operation("has_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::has_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::has_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), key));
 	}
@@ -796,7 +914,7 @@ public:
 		auto const op = operation("at_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::at_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::at_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -807,7 +925,7 @@ public:
 		auto const op = operation("at_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::at_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::at_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), key));
 	}
@@ -818,7 +936,7 @@ public:
 		auto const op = operation("update_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::update_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::update_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -829,7 +947,7 @@ public:
 		auto const op = operation("update_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::update_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::update_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, key, value));
 	}
@@ -843,7 +961,7 @@ public:
 		auto const op = operation("insert_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::insert_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::insert_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -854,7 +972,7 @@ public:
 		auto const op = operation("insert_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::insert_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::insert_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, key, value));
 	}
@@ -868,7 +986,7 @@ public:
 		auto const op = operation("erase_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::erase_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::erase_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -879,7 +997,7 @@ public:
 		auto const op = operation("erase_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::erase_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::erase_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, key));
 	}
@@ -893,7 +1011,7 @@ public:
 		auto const op = operation("clear_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::clear_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::clear_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -904,7 +1022,7 @@ public:
 		auto const op = operation("clear_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::clear_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::clear_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this));
 	}
@@ -918,7 +1036,7 @@ public:
 		auto const op = operation("size_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::size_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::size_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -929,7 +1047,7 @@ public:
 		auto const op = operation("size_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::size_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::size_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
@@ -943,7 +1061,7 @@ public:
 		auto const op = operation("empty_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::empty_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::empty_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -954,7 +1072,7 @@ public:
 		auto const op = operation("empty_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::empty_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::empty_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
@@ -968,7 +1086,7 @@ public:
 		auto const op = operation("push_front_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::push_front_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::push_front_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -979,7 +1097,7 @@ public:
 		auto const op = operation("push_front_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::push_front_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::push_front_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this, thing));
 	}
@@ -993,7 +1111,7 @@ public:
 		auto const op = operation("pop_front_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::pop_front_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::pop_front_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1004,7 +1122,7 @@ public:
 		auto const op = operation("pop_front_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::pop_front_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::pop_front_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -1015,7 +1133,7 @@ public:
 		auto const op = operation("push_back_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::push_back_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::push_back_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1026,7 +1144,7 @@ public:
 		auto const op = operation("push_back_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::push_back_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::push_back_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this, thing));
 	}
@@ -1040,7 +1158,7 @@ public:
 		auto const op = operation("pop_back_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::pop_back_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::pop_back_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1051,7 +1169,7 @@ public:
 		auto const op = operation("pop_back_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::pop_back_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::pop_back_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -1062,7 +1180,7 @@ public:
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_assign_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::self_assign_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1073,7 +1191,7 @@ public:
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_assign_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::self_assign_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this, range));
 	}
@@ -1084,7 +1202,7 @@ public:
 		auto const op = operation("self_add_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_add_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::self_add_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1095,7 +1213,7 @@ public:
 		auto const op = operation("self_add_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_add_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::self_add_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this, range));
 	}
@@ -1106,7 +1224,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::add_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1117,7 +1235,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::add_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::add_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
@@ -1131,7 +1249,7 @@ public:
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_subtract_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::self_subtract_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1142,7 +1260,7 @@ public:
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::self_subtract_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::self_subtract_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this, range));
 	}
@@ -1153,7 +1271,7 @@ public:
 		auto const op = operation("subtract_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::subtract_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::subtract_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1164,7 +1282,7 @@ public:
 		auto const op = operation("subtract_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::subtract_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::subtract_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
@@ -1178,7 +1296,7 @@ public:
 		auto const op = operation("read_lock_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::read_lock_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1189,7 +1307,7 @@ public:
 		auto const op = operation("read_lock_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::read_lock_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
@@ -1200,7 +1318,7 @@ public:
 		auto const op = operation("write_lock_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::write_lock_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::write_lock_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1211,7 +1329,7 @@ public:
 		auto const op = operation("write_lock_");
 		if (!op)
 		{
-			throw dis("dynamic collection_d::write_lock_ passed non-existent member");
+			throw throw_dis("dynamic collection_d::write_lock_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}

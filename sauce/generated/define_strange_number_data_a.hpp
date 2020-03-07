@@ -418,10 +418,10 @@ public:
 	}
 
 	inline _1_ const & extract_primitive() const
-	{ throw dis("dynamic number_data_d::extract_primitive() not available"); }
+	{ throw throw_dis("dynamic number_data_d::extract_primitive() not available"); }
 
 	inline _1_ & mutate_primitive()
-	{ throw dis("dynamic number_data_d::mutate_primitive() not available"); }
+	{ throw throw_dis("dynamic number_data_d::mutate_primitive() not available"); }
 
 	void ___weak___(number_d<>::___WEAK___ const& weak) const {}
 

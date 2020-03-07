@@ -1,12 +1,13 @@
 false &&
 {	strange :
 	{	<range> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#forward_const_iterator :<<forward_const_iterator>># <forward_const_iterator>,
 			(	// parent
 				$$<>[],
 				{	// range
-					cbegin_ :# (<forward_const_iterator>),
-					cend_ :# (<forward_const_iterator>),
+					cbegin_ :# (<#forward_const_iterator>),
+					cend_ :# (<#forward_const_iterator>),
 				}
 			)
 		)

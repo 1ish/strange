@@ -261,6 +261,15 @@ public:
 		constness = "";
 	}
 
+	void abstraction_arguments(int64_t version, river_a<>& river) const
+	{
+		if (_names.empty())
+		{
+			return;
+		}
+		river.write_string("");
+	}
+
 protected:
 	flock_a<> const _terms;
 	symbol_a<> const _scope;

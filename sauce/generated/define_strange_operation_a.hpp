@@ -82,8 +82,14 @@ public:
 		return *this;
 	}
 
-	inline any_a<> pure__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().pure__(arguments); }
+	inline any_a<> pure__(range_a<> const& ___arguments___) const
+	{
+//		return pure_();
+//	}
+
+		assert(___handle___);
+		return ___read___().pure__(___arguments___);
+	}
 
 	inline any_a<> pure_() const
 	{ assert(___handle___); return ___read___().pure_(); }
@@ -97,8 +103,14 @@ public:
 	inline void assign(operation_a < > const & operation )
 	{ assert(___handle___); ___write___().assign(operation); }
 
-	inline any_a<> names__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().names__(arguments); }
+	inline any_a<> names__(range_a<> const& ___arguments___) const
+	{
+//		return names_();
+//	}
+
+		assert(___handle___);
+		return ___read___().names__(___arguments___);
+	}
 
 	inline flock_a<> names_() const
 	{ assert(___handle___); return ___read___().names_(); }
@@ -460,7 +472,7 @@ public:
 		auto const op = operation("pure_");
 		if (!op)
 		{
-			throw dis("dynamic operation_d::pure_ passed non-existent member");
+			throw throw_dis("dynamic operation_d::pure_ passed non-existent member");
 		}
 		return op.operate(*const_cast<operation_d*>(this), arguments);
 	}
@@ -471,7 +483,7 @@ public:
 		auto const op = operation("pure_");
 		if (!op)
 		{
-			throw dis("dynamic operation_d::pure_ passed non-existent member");
+			throw throw_dis("dynamic operation_d::pure_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<operation_d*>(this)));
 	}
@@ -480,10 +492,10 @@ public:
 	{ return pure_(); }
 
 	inline void aspects(unordered_shoal_a < > const & shoal )
-	{ throw dis("dynamic operation_d::aspects(shoal) not available"); }
+	{ throw throw_dis("dynamic operation_d::aspects(shoal) not available"); }
 
 	inline void assign(operation_a < > const & operation )
-	{ throw dis("dynamic operation_d::assign(operation) not available"); }
+	{ throw throw_dis("dynamic operation_d::assign(operation) not available"); }
 
 	inline any_a<> names__(range_a<> const& arguments) const
 	{
@@ -491,7 +503,7 @@ public:
 		auto const op = operation("names_");
 		if (!op)
 		{
-			throw dis("dynamic operation_d::names_ passed non-existent member");
+			throw throw_dis("dynamic operation_d::names_ passed non-existent member");
 		}
 		return op.operate(*const_cast<operation_d*>(this), arguments);
 	}
@@ -502,7 +514,7 @@ public:
 		auto const op = operation("names_");
 		if (!op)
 		{
-			throw dis("dynamic operation_d::names_ passed non-existent member");
+			throw throw_dis("dynamic operation_d::names_ passed non-existent member");
 		}
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<operation_d*>(this)));
 	}

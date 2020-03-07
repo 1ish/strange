@@ -746,7 +746,7 @@ protected:
 			"\t\tauto const op = operation(\"" + name + "\");\n"
 			"\t\tif (!op)\n"
 			"\t\t{\n"
-			"\t\t\tthrow dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
+			"\t\t\tthrow throw_dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
 			"\t\t}\n"
 			"\t\treturn op.operate(" +
 				(extraction ? "*const_cast<" + class_name + "*>(this)" : std::string("*this")) +
@@ -766,7 +766,7 @@ protected:
 			"\t\tauto const op = operation(\"" + name + "\");\n"
 			"\t\tif (!op)\n"
 			"\t\t{\n"
-			"\t\t\tthrow dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
+			"\t\t\tthrow throw_dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
 			"\t\t}\n"
 			"\t\treturn cast<" + result);
 		if (template_result)
@@ -814,18 +814,33 @@ protected:
 
 		river.write_string(
 			"\tinline any_a<> " + name + "_(range" +
-				(root ? "" : "_a<>") + " const& arguments)" + constness + "\n"
-/*
 				(root ? "" : "_a<>") + " const& ___arguments___)" + constness + "\n"
-			"\t{\n"
-			"\t\treturn " + name + arguments + ";\n"
+			"\t{\n");
+		if (extraction)
+		{
+			auto const& exp = static_cast<expression_extraction_t<> const&>(expression.extract_thing());
+			exp.abstraction_arguments(version, river);
+		}
+		else
+		{
+			auto const& exp = static_cast<expression_mutation_t<> const&>(expression.extract_thing());
+			exp.abstraction_arguments(version, river);
+		}
+		river.write_string(
+			"//\t\treturn " + name + arguments + ";\n"
+			"//\t}\n\n");
+		river.write_string(
+			"\t\tassert(___handle___);\n"
+			"\t\treturn " +
+				std::string(extraction ? "___read___()." : "___write___().") +
+				name + "_(___arguments___);\n"
 			"\t}\n\n");
-*/
-///*
+/*
+				(root ? "" : "_a<>") + " const& arguments)" + constness + "\n"
 			"\t{ assert(___handle___); return " +
 				(extraction ? "___read___()." : "___write___().") +
 				name + "_(arguments); }\n\n");
-//*/
+*/
 		river.write_string(
 			"\tinline " + result + " " + name + parameters + constness + "\n"
 			"\t{ assert(___handle___); return " +
@@ -1746,7 +1761,7 @@ protected:
 		auto const pos = value.find('{');
 		if (pos == std::string::npos)
 		{
-			dynamic = "{ throw dis(\"dynamic " + class_name + "::" + name + arguments + " not available\"); }";
+			dynamic = "{ throw throw_dis(\"dynamic " + class_name + "::" + name + arguments + " not available\"); }";
 		}
 		else
 		{

@@ -85,8 +85,14 @@ public:
 	inline std :: string to_string()
 	{ assert(___handle___); return ___write___().to_string(); }
 
-	inline any_a<> get__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().get__(arguments); }
+	inline any_a<> get__(range_a<> const& ___arguments___)
+	{
+//		return get_();
+//	}
+
+		assert(___handle___);
+		return ___write___().get__(___arguments___);
+	}
 
 	inline number_data_int8_a<> get_()
 	{ assert(___handle___); return ___write___().get_(); }
@@ -94,8 +100,14 @@ public:
 	inline int8_t get()
 	{ assert(___handle___); return ___write___().get(); }
 
-	inline any_a<> peek__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().peek__(arguments); }
+	inline any_a<> peek__(range_a<> const& ___arguments___)
+	{
+//		return peek_();
+//	}
+
+		assert(___handle___);
+		return ___write___().peek__(___arguments___);
+	}
 
 	inline number_data_int8_a<> peek_()
 	{ assert(___handle___); return ___write___().peek_(); }
@@ -103,8 +115,14 @@ public:
 	inline int8_t peek()
 	{ assert(___handle___); return ___write___().peek(); }
 
-	inline any_a<> unget__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().unget__(arguments); }
+	inline any_a<> unget__(range_a<> const& ___arguments___)
+	{
+//		return unget_();
+//	}
+
+		assert(___handle___);
+		return ___write___().unget__(___arguments___);
+	}
 
 	inline any_a<> unget_()
 	{ assert(___handle___); return ___write___().unget_(); }
@@ -112,8 +130,14 @@ public:
 	inline void unget()
 	{ assert(___handle___); ___write___().unget(); }
 
-	inline any_a<> putback__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().putback__(arguments); }
+	inline any_a<> putback__(range_a<> const& ___arguments___)
+	{
+//		return putback_(int_8);
+//	}
+
+		assert(___handle___);
+		return ___write___().putback__(___arguments___);
+	}
 
 	inline any_a<> putback_(number_data_int8_a<> const& int_8)
 	{ assert(___handle___); return ___write___().putback_(int_8); }
@@ -121,8 +145,14 @@ public:
 	inline void putback(int8_t int_8 )
 	{ assert(___handle___); ___write___().putback(int_8); }
 
-	inline any_a<> getline__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().getline__(arguments); }
+	inline any_a<> getline__(range_a<> const& ___arguments___)
+	{
+//		return getline_(count, delimiter);
+//	}
+
+		assert(___handle___);
+		return ___write___().getline__(___arguments___);
+	}
 
 	inline lake_int8_a<> getline_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter)
 	{ assert(___handle___); return ___write___().getline_(count, delimiter); }
@@ -130,8 +160,14 @@ public:
 	inline std :: vector < int8_t > getline(int64_t count , int8_t delimiter )
 	{ assert(___handle___); return ___write___().getline(count, delimiter); }
 
-	inline any_a<> ignore__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().ignore__(arguments); }
+	inline any_a<> ignore__(range_a<> const& ___arguments___)
+	{
+//		return ignore_(count);
+//	}
+
+		assert(___handle___);
+		return ___write___().ignore__(___arguments___);
+	}
 
 	inline any_a<> ignore_(number_data_int64_a<> const& count)
 	{ assert(___handle___); return ___write___().ignore_(count); }
@@ -139,8 +175,14 @@ public:
 	inline void ignore(int64_t count )
 	{ assert(___handle___); ___write___().ignore(count); }
 
-	inline any_a<> read__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().read__(arguments); }
+	inline any_a<> read__(range_a<> const& ___arguments___)
+	{
+//		return read_(count);
+//	}
+
+		assert(___handle___);
+		return ___write___().read__(___arguments___);
+	}
 
 	inline lake_int8_a<> read_(number_data_int64_a<> const& count)
 	{ assert(___handle___); return ___write___().read_(count); }
@@ -151,8 +193,14 @@ public:
 	inline std :: string read_string(int64_t count )
 	{ assert(___handle___); return ___write___().read_string(count); }
 
-	inline any_a<> tellg__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().tellg__(arguments); }
+	inline any_a<> tellg__(range_a<> const& ___arguments___) const
+	{
+//		return tellg_();
+//	}
+
+		assert(___handle___);
+		return ___read___().tellg__(___arguments___);
+	}
 
 	inline number_data_int64_a<> tellg_() const
 	{ assert(___handle___); return ___read___().tellg_(); }
@@ -160,8 +208,14 @@ public:
 	inline int64_t tellg() const
 	{ assert(___handle___); return ___read___().tellg(); }
 
-	inline any_a<> seekg_beg__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().seekg_beg__(arguments); }
+	inline any_a<> seekg_beg__(range_a<> const& ___arguments___)
+	{
+//		return seekg_beg_(offset);
+//	}
+
+		assert(___handle___);
+		return ___write___().seekg_beg__(___arguments___);
+	}
 
 	inline any_a<> seekg_beg_(number_data_int64_a<> const& offset)
 	{ assert(___handle___); return ___write___().seekg_beg_(offset); }
@@ -169,8 +223,14 @@ public:
 	inline void seekg_beg(int64_t offset )
 	{ assert(___handle___); ___write___().seekg_beg(offset); }
 
-	inline any_a<> seekg_end__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().seekg_end__(arguments); }
+	inline any_a<> seekg_end__(range_a<> const& ___arguments___)
+	{
+//		return seekg_end_(offset);
+//	}
+
+		assert(___handle___);
+		return ___write___().seekg_end__(___arguments___);
+	}
 
 	inline any_a<> seekg_end_(number_data_int64_a<> const& offset)
 	{ assert(___handle___); return ___write___().seekg_end_(offset); }
@@ -178,8 +238,14 @@ public:
 	inline void seekg_end(int64_t offset )
 	{ assert(___handle___); ___write___().seekg_end(offset); }
 
-	inline any_a<> seekg_cur__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().seekg_cur__(arguments); }
+	inline any_a<> seekg_cur__(range_a<> const& ___arguments___)
+	{
+//		return seekg_cur_(offset);
+//	}
+
+		assert(___handle___);
+		return ___write___().seekg_cur__(___arguments___);
+	}
 
 	inline any_a<> seekg_cur_(number_data_int64_a<> const& offset)
 	{ assert(___handle___); return ___write___().seekg_cur_(offset); }
@@ -187,8 +253,14 @@ public:
 	inline void seekg_cur(int64_t offset )
 	{ assert(___handle___); ___write___().seekg_cur(offset); }
 
-	inline any_a<> sync__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().sync__(arguments); }
+	inline any_a<> sync__(range_a<> const& ___arguments___)
+	{
+//		return sync_();
+//	}
+
+		assert(___handle___);
+		return ___write___().sync__(___arguments___);
+	}
 
 	inline any_a<> sync_()
 	{ assert(___handle___); return ___write___().sync_(); }
@@ -196,8 +268,14 @@ public:
 	inline bool sync()
 	{ assert(___handle___); return ___write___().sync(); }
 
-	inline any_a<> put__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().put__(arguments); }
+	inline any_a<> put__(range_a<> const& ___arguments___)
+	{
+//		return put_(int_8);
+//	}
+
+		assert(___handle___);
+		return ___write___().put__(___arguments___);
+	}
 
 	inline any_a<> put_(number_data_int8_a<> const& int_8)
 	{ assert(___handle___); return ___write___().put_(int_8); }
@@ -205,8 +283,14 @@ public:
 	inline void put(int8_t int_8 )
 	{ assert(___handle___); ___write___().put(int_8); }
 
-	inline any_a<> write__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().write__(arguments); }
+	inline any_a<> write__(range_a<> const& ___arguments___)
+	{
+//		return write_(lake);
+//	}
+
+		assert(___handle___);
+		return ___write___().write__(___arguments___);
+	}
 
 	inline any_a<> write_(lake_int8_a<> const& lake)
 	{ assert(___handle___); return ___write___().write_(lake); }
@@ -217,8 +301,14 @@ public:
 	inline void write_string(std :: string const & str )
 	{ assert(___handle___); ___write___().write_string(str); }
 
-	inline any_a<> tellp__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().tellp__(arguments); }
+	inline any_a<> tellp__(range_a<> const& ___arguments___) const
+	{
+//		return tellp_();
+//	}
+
+		assert(___handle___);
+		return ___read___().tellp__(___arguments___);
+	}
 
 	inline number_data_int64_a<> tellp_() const
 	{ assert(___handle___); return ___read___().tellp_(); }
@@ -226,8 +316,14 @@ public:
 	inline int64_t tellp() const
 	{ assert(___handle___); return ___read___().tellp(); }
 
-	inline any_a<> seekp_beg__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().seekp_beg__(arguments); }
+	inline any_a<> seekp_beg__(range_a<> const& ___arguments___)
+	{
+//		return seekp_beg_(offset);
+//	}
+
+		assert(___handle___);
+		return ___write___().seekp_beg__(___arguments___);
+	}
 
 	inline any_a<> seekp_beg_(number_data_int64_a<> const& offset)
 	{ assert(___handle___); return ___write___().seekp_beg_(offset); }
@@ -235,8 +331,14 @@ public:
 	inline void seekp_beg(int64_t offset )
 	{ assert(___handle___); ___write___().seekp_beg(offset); }
 
-	inline any_a<> seekp_end__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().seekp_end__(arguments); }
+	inline any_a<> seekp_end__(range_a<> const& ___arguments___)
+	{
+//		return seekp_end_(offset);
+//	}
+
+		assert(___handle___);
+		return ___write___().seekp_end__(___arguments___);
+	}
 
 	inline any_a<> seekp_end_(number_data_int64_a<> const& offset)
 	{ assert(___handle___); return ___write___().seekp_end_(offset); }
@@ -244,8 +346,14 @@ public:
 	inline void seekp_end(int64_t offset )
 	{ assert(___handle___); ___write___().seekp_end(offset); }
 
-	inline any_a<> seekp_cur__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().seekp_cur__(arguments); }
+	inline any_a<> seekp_cur__(range_a<> const& ___arguments___)
+	{
+//		return seekp_cur_(offset);
+//	}
+
+		assert(___handle___);
+		return ___write___().seekp_cur__(___arguments___);
+	}
 
 	inline any_a<> seekp_cur_(number_data_int64_a<> const& offset)
 	{ assert(___handle___); return ___write___().seekp_cur_(offset); }
@@ -253,8 +361,14 @@ public:
 	inline void seekp_cur(int64_t offset )
 	{ assert(___handle___); ___write___().seekp_cur(offset); }
 
-	inline any_a<> flush__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().flush__(arguments); }
+	inline any_a<> flush__(range_a<> const& ___arguments___)
+	{
+//		return flush_();
+//	}
+
+		assert(___handle___);
+		return ___write___().flush__(___arguments___);
+	}
 
 	inline any_a<> flush_()
 	{ assert(___handle___); return ___write___().flush_(); }
@@ -262,8 +376,14 @@ public:
 	inline void flush()
 	{ assert(___handle___); ___write___().flush(); }
 
-	inline any_a<> good__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().good__(arguments); }
+	inline any_a<> good__(range_a<> const& ___arguments___) const
+	{
+//		return good_();
+//	}
+
+		assert(___handle___);
+		return ___read___().good__(___arguments___);
+	}
 
 	inline any_a<> good_() const
 	{ assert(___handle___); return ___read___().good_(); }
@@ -271,8 +391,14 @@ public:
 	inline bool good() const
 	{ assert(___handle___); return ___read___().good(); }
 
-	inline any_a<> eof__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().eof__(arguments); }
+	inline any_a<> eof__(range_a<> const& ___arguments___) const
+	{
+//		return eof_();
+//	}
+
+		assert(___handle___);
+		return ___read___().eof__(___arguments___);
+	}
 
 	inline any_a<> eof_() const
 	{ assert(___handle___); return ___read___().eof_(); }
@@ -280,8 +406,14 @@ public:
 	inline bool eof() const
 	{ assert(___handle___); return ___read___().eof(); }
 
-	inline any_a<> fail__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().fail__(arguments); }
+	inline any_a<> fail__(range_a<> const& ___arguments___) const
+	{
+//		return fail_();
+//	}
+
+		assert(___handle___);
+		return ___read___().fail__(___arguments___);
+	}
 
 	inline any_a<> fail_() const
 	{ assert(___handle___); return ___read___().fail_(); }
@@ -289,8 +421,14 @@ public:
 	inline bool fail() const
 	{ assert(___handle___); return ___read___().fail(); }
 
-	inline any_a<> bad__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().bad__(arguments); }
+	inline any_a<> bad__(range_a<> const& ___arguments___) const
+	{
+//		return bad_();
+//	}
+
+		assert(___handle___);
+		return ___read___().bad__(___arguments___);
+	}
 
 	inline any_a<> bad_() const
 	{ assert(___handle___); return ___read___().bad_(); }
@@ -298,8 +436,14 @@ public:
 	inline bool bad() const
 	{ assert(___handle___); return ___read___().bad(); }
 
-	inline any_a<> set_good__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().set_good__(arguments); }
+	inline any_a<> set_good__(range_a<> const& ___arguments___)
+	{
+//		return set_good_(value);
+//	}
+
+		assert(___handle___);
+		return ___write___().set_good__(___arguments___);
+	}
 
 	inline any_a<> set_good_(any_a<> const& value)
 	{ assert(___handle___); return ___write___().set_good_(value); }
@@ -307,8 +451,14 @@ public:
 	inline void set_good(bool value )
 	{ assert(___handle___); ___write___().set_good(value); }
 
-	inline any_a<> set_eof__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().set_eof__(arguments); }
+	inline any_a<> set_eof__(range_a<> const& ___arguments___)
+	{
+//		return set_eof_(value);
+//	}
+
+		assert(___handle___);
+		return ___write___().set_eof__(___arguments___);
+	}
 
 	inline any_a<> set_eof_(any_a<> const& value)
 	{ assert(___handle___); return ___write___().set_eof_(value); }
@@ -316,8 +466,14 @@ public:
 	inline void set_eof(bool value )
 	{ assert(___handle___); ___write___().set_eof(value); }
 
-	inline any_a<> set_fail__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().set_fail__(arguments); }
+	inline any_a<> set_fail__(range_a<> const& ___arguments___)
+	{
+//		return set_fail_(value);
+//	}
+
+		assert(___handle___);
+		return ___write___().set_fail__(___arguments___);
+	}
 
 	inline any_a<> set_fail_(any_a<> const& value)
 	{ assert(___handle___); return ___write___().set_fail_(value); }
@@ -325,8 +481,14 @@ public:
 	inline void set_fail(bool value )
 	{ assert(___handle___); ___write___().set_fail(value); }
 
-	inline any_a<> set_bad__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().set_bad__(arguments); }
+	inline any_a<> set_bad__(range_a<> const& ___arguments___)
+	{
+//		return set_bad_(value);
+//	}
+
+		assert(___handle___);
+		return ___write___().set_bad__(___arguments___);
+	}
 
 	inline any_a<> set_bad_(any_a<> const& value)
 	{ assert(___handle___); return ___write___().set_bad_(value); }
@@ -334,8 +496,14 @@ public:
 	inline void set_bad(bool value )
 	{ assert(___handle___); ___write___().set_bad(value); }
 
-	inline any_a<> filename__(range_a<> const& arguments) const
-	{ assert(___handle___); return ___read___().filename__(arguments); }
+	inline any_a<> filename__(range_a<> const& ___arguments___) const
+	{
+//		return filename_();
+//	}
+
+		assert(___handle___);
+		return ___read___().filename__(___arguments___);
+	}
 
 	inline lake_int8_a<> filename_() const
 	{ assert(___handle___); return ___read___().filename_(); }
@@ -1041,7 +1209,7 @@ public:
 	}
 
 	inline std :: string to_string()
-	{ throw dis("dynamic river_d::to_string() not available"); }
+	{ throw throw_dis("dynamic river_d::to_string() not available"); }
 
 	inline any_a<> get__(range_a<> const& arguments)
 	{
@@ -1049,7 +1217,7 @@ public:
 		auto const op = operation("get_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::get_ passed non-existent member");
+			throw throw_dis("dynamic river_d::get_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1060,7 +1228,7 @@ public:
 		auto const op = operation("get_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::get_ passed non-existent member");
+			throw throw_dis("dynamic river_d::get_ passed non-existent member");
 		}
 		return cast<number_data_int8_a<>>(variadic_operate(op, *this));
 	}
@@ -1074,7 +1242,7 @@ public:
 		auto const op = operation("peek_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::peek_ passed non-existent member");
+			throw throw_dis("dynamic river_d::peek_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1085,7 +1253,7 @@ public:
 		auto const op = operation("peek_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::peek_ passed non-existent member");
+			throw throw_dis("dynamic river_d::peek_ passed non-existent member");
 		}
 		return cast<number_data_int8_a<>>(variadic_operate(op, *this));
 	}
@@ -1099,7 +1267,7 @@ public:
 		auto const op = operation("unget_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::unget_ passed non-existent member");
+			throw throw_dis("dynamic river_d::unget_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1110,7 +1278,7 @@ public:
 		auto const op = operation("unget_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::unget_ passed non-existent member");
+			throw throw_dis("dynamic river_d::unget_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -1124,7 +1292,7 @@ public:
 		auto const op = operation("putback_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::putback_ passed non-existent member");
+			throw throw_dis("dynamic river_d::putback_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1135,7 +1303,7 @@ public:
 		auto const op = operation("putback_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::putback_ passed non-existent member");
+			throw throw_dis("dynamic river_d::putback_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, int_8));
 	}
@@ -1149,7 +1317,7 @@ public:
 		auto const op = operation("getline_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::getline_ passed non-existent member");
+			throw throw_dis("dynamic river_d::getline_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1160,7 +1328,7 @@ public:
 		auto const op = operation("getline_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::getline_ passed non-existent member");
+			throw throw_dis("dynamic river_d::getline_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *this, count, delimiter));
 	}
@@ -1174,7 +1342,7 @@ public:
 		auto const op = operation("ignore_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::ignore_ passed non-existent member");
+			throw throw_dis("dynamic river_d::ignore_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1185,7 +1353,7 @@ public:
 		auto const op = operation("ignore_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::ignore_ passed non-existent member");
+			throw throw_dis("dynamic river_d::ignore_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, count));
 	}
@@ -1199,7 +1367,7 @@ public:
 		auto const op = operation("read_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::read_ passed non-existent member");
+			throw throw_dis("dynamic river_d::read_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1210,7 +1378,7 @@ public:
 		auto const op = operation("read_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::read_ passed non-existent member");
+			throw throw_dis("dynamic river_d::read_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *this, count));
 	}
@@ -1227,7 +1395,7 @@ public:
 		auto const op = operation("tellg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::tellg_ passed non-existent member");
+			throw throw_dis("dynamic river_d::tellg_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1238,7 +1406,7 @@ public:
 		auto const op = operation("tellg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::tellg_ passed non-existent member");
+			throw throw_dis("dynamic river_d::tellg_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1252,7 +1420,7 @@ public:
 		auto const op = operation("seekg_beg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_beg_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekg_beg_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1263,7 +1431,7 @@ public:
 		auto const op = operation("seekg_beg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_beg_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekg_beg_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1277,7 +1445,7 @@ public:
 		auto const op = operation("seekg_end_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_end_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekg_end_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1288,7 +1456,7 @@ public:
 		auto const op = operation("seekg_end_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_end_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekg_end_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1302,7 +1470,7 @@ public:
 		auto const op = operation("seekg_cur_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_cur_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekg_cur_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1313,7 +1481,7 @@ public:
 		auto const op = operation("seekg_cur_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekg_cur_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekg_cur_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1327,7 +1495,7 @@ public:
 		auto const op = operation("sync_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::sync_ passed non-existent member");
+			throw throw_dis("dynamic river_d::sync_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1338,7 +1506,7 @@ public:
 		auto const op = operation("sync_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::sync_ passed non-existent member");
+			throw throw_dis("dynamic river_d::sync_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -1352,7 +1520,7 @@ public:
 		auto const op = operation("put_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::put_ passed non-existent member");
+			throw throw_dis("dynamic river_d::put_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1363,7 +1531,7 @@ public:
 		auto const op = operation("put_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::put_ passed non-existent member");
+			throw throw_dis("dynamic river_d::put_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, int_8));
 	}
@@ -1377,7 +1545,7 @@ public:
 		auto const op = operation("write_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::write_ passed non-existent member");
+			throw throw_dis("dynamic river_d::write_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1388,7 +1556,7 @@ public:
 		auto const op = operation("write_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::write_ passed non-existent member");
+			throw throw_dis("dynamic river_d::write_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, lake));
 	}
@@ -1405,7 +1573,7 @@ public:
 		auto const op = operation("tellp_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::tellp_ passed non-existent member");
+			throw throw_dis("dynamic river_d::tellp_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1416,7 +1584,7 @@ public:
 		auto const op = operation("tellp_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::tellp_ passed non-existent member");
+			throw throw_dis("dynamic river_d::tellp_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1430,7 +1598,7 @@ public:
 		auto const op = operation("seekp_beg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_beg_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekp_beg_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1441,7 +1609,7 @@ public:
 		auto const op = operation("seekp_beg_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_beg_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekp_beg_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1455,7 +1623,7 @@ public:
 		auto const op = operation("seekp_end_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_end_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekp_end_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1466,7 +1634,7 @@ public:
 		auto const op = operation("seekp_end_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_end_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekp_end_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1480,7 +1648,7 @@ public:
 		auto const op = operation("seekp_cur_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_cur_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekp_cur_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1491,7 +1659,7 @@ public:
 		auto const op = operation("seekp_cur_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::seekp_cur_ passed non-existent member");
+			throw throw_dis("dynamic river_d::seekp_cur_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1505,7 +1673,7 @@ public:
 		auto const op = operation("flush_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::flush_ passed non-existent member");
+			throw throw_dis("dynamic river_d::flush_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1516,7 +1684,7 @@ public:
 		auto const op = operation("flush_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::flush_ passed non-existent member");
+			throw throw_dis("dynamic river_d::flush_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -1530,7 +1698,7 @@ public:
 		auto const op = operation("good_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::good_ passed non-existent member");
+			throw throw_dis("dynamic river_d::good_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1541,7 +1709,7 @@ public:
 		auto const op = operation("good_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::good_ passed non-existent member");
+			throw throw_dis("dynamic river_d::good_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1555,7 +1723,7 @@ public:
 		auto const op = operation("eof_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::eof_ passed non-existent member");
+			throw throw_dis("dynamic river_d::eof_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1566,7 +1734,7 @@ public:
 		auto const op = operation("eof_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::eof_ passed non-existent member");
+			throw throw_dis("dynamic river_d::eof_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1580,7 +1748,7 @@ public:
 		auto const op = operation("fail_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::fail_ passed non-existent member");
+			throw throw_dis("dynamic river_d::fail_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1591,7 +1759,7 @@ public:
 		auto const op = operation("fail_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::fail_ passed non-existent member");
+			throw throw_dis("dynamic river_d::fail_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1605,7 +1773,7 @@ public:
 		auto const op = operation("bad_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::bad_ passed non-existent member");
+			throw throw_dis("dynamic river_d::bad_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1616,7 +1784,7 @@ public:
 		auto const op = operation("bad_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::bad_ passed non-existent member");
+			throw throw_dis("dynamic river_d::bad_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1630,7 +1798,7 @@ public:
 		auto const op = operation("set_good_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_good_ passed non-existent member");
+			throw throw_dis("dynamic river_d::set_good_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1641,7 +1809,7 @@ public:
 		auto const op = operation("set_good_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_good_ passed non-existent member");
+			throw throw_dis("dynamic river_d::set_good_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, value));
 	}
@@ -1655,7 +1823,7 @@ public:
 		auto const op = operation("set_eof_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_eof_ passed non-existent member");
+			throw throw_dis("dynamic river_d::set_eof_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1666,7 +1834,7 @@ public:
 		auto const op = operation("set_eof_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_eof_ passed non-existent member");
+			throw throw_dis("dynamic river_d::set_eof_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, value));
 	}
@@ -1680,7 +1848,7 @@ public:
 		auto const op = operation("set_fail_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_fail_ passed non-existent member");
+			throw throw_dis("dynamic river_d::set_fail_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1691,7 +1859,7 @@ public:
 		auto const op = operation("set_fail_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_fail_ passed non-existent member");
+			throw throw_dis("dynamic river_d::set_fail_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, value));
 	}
@@ -1705,7 +1873,7 @@ public:
 		auto const op = operation("set_bad_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_bad_ passed non-existent member");
+			throw throw_dis("dynamic river_d::set_bad_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1716,7 +1884,7 @@ public:
 		auto const op = operation("set_bad_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::set_bad_ passed non-existent member");
+			throw throw_dis("dynamic river_d::set_bad_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, value));
 	}
@@ -1730,7 +1898,7 @@ public:
 		auto const op = operation("filename_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::filename_ passed non-existent member");
+			throw throw_dis("dynamic river_d::filename_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1741,7 +1909,7 @@ public:
 		auto const op = operation("filename_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::filename_ passed non-existent member");
+			throw throw_dis("dynamic river_d::filename_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}

@@ -82,8 +82,14 @@ public:
 		return *this;
 	}
 
-	inline any_a<> decrement__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().decrement__(arguments); }
+	inline any_a<> decrement__(range_a<> const& ___arguments___)
+	{
+//		return decrement_();
+//	}
+
+		assert(___handle___);
+		return ___write___().decrement__(___arguments___);
+	}
 
 	inline bidirectional_const_iterator_a<> decrement_()
 	{ assert(___handle___); return ___write___().decrement_(); }
@@ -424,7 +430,7 @@ public:
 		auto const op = operation("decrement_");
 		if (!op)
 		{
-			throw dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
+			throw throw_dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -435,7 +441,7 @@ public:
 		auto const op = operation("decrement_");
 		if (!op)
 		{
-			throw dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
+			throw throw_dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
 		}
 		return cast<bidirectional_const_iterator_a<>>(variadic_operate(op, *this));
 	}

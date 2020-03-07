@@ -97,14 +97,26 @@ public:
 	inline bool erase_string(std :: string const & s )
 	{ assert(___handle___); return ___write___().erase_string(s); }
 
-	inline any_a<> begin__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().begin__(arguments); }
+	inline any_a<> begin__(range_a<> const& ___arguments___)
+	{
+//		return begin_();
+//	}
+
+		assert(___handle___);
+		return ___write___().begin__(___arguments___);
+	}
 
 	inline forward_iterator_a<> begin_()
 	{ assert(___handle___); return ___write___().begin_(); }
 
-	inline any_a<> end__(range_a<> const& arguments)
-	{ assert(___handle___); return ___write___().end__(arguments); }
+	inline any_a<> end__(range_a<> const& ___arguments___)
+	{
+//		return end_();
+//	}
+
+		assert(___handle___);
+		return ___write___().end__(___arguments___);
+	}
 
 	inline forward_iterator_a<> end_()
 	{ assert(___handle___); return ___write___().end_(); }
@@ -489,7 +501,7 @@ public:
 		auto const op = operation("begin_");
 		if (!op)
 		{
-			throw dis("dynamic shoal_d::begin_ passed non-existent member");
+			throw throw_dis("dynamic shoal_d::begin_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -500,7 +512,7 @@ public:
 		auto const op = operation("begin_");
 		if (!op)
 		{
-			throw dis("dynamic shoal_d::begin_ passed non-existent member");
+			throw throw_dis("dynamic shoal_d::begin_ passed non-existent member");
 		}
 		return cast<forward_iterator_a<>>(variadic_operate(op, *this));
 	}
@@ -511,7 +523,7 @@ public:
 		auto const op = operation("end_");
 		if (!op)
 		{
-			throw dis("dynamic shoal_d::end_ passed non-existent member");
+			throw throw_dis("dynamic shoal_d::end_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -522,7 +534,7 @@ public:
 		auto const op = operation("end_");
 		if (!op)
 		{
-			throw dis("dynamic shoal_d::end_ passed non-existent member");
+			throw throw_dis("dynamic shoal_d::end_ passed non-existent member");
 		}
 		return cast<forward_iterator_a<>>(variadic_operate(op, *this));
 	}
