@@ -79,7 +79,7 @@ public:
 	
 	static inline unordered_shoal_a<> operations_()
 	{
-		return reflection<___ego___>::operations();
+		return ___ego___::___operations___();
 	}
 
 	// visitor pattern

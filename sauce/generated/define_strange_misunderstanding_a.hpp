@@ -327,6 +327,18 @@ public:
 		return KINDS;
 	}
 
+	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
+	static inline ___unordered_shoal_a___ ___operations___()
+	{
+		static ___unordered_shoal_a___ OPERATIONS = []()
+		{
+			___unordered_shoal_a___ operations = any_a::___operations___<___unordered_shoal_a___>();
+			operations.update_string("add_", native_extraction_t<misunderstanding_a>::create(&misunderstanding_a::add__));
+			return operations;
+		}();
+		return OPERATIONS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline misunderstanding_a create(Args&&... args)
 	{

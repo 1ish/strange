@@ -425,6 +425,24 @@ public:
 		return KINDS;
 	}
 
+	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
+	static inline ___unordered_shoal_a___ ___operations___()
+	{
+		static ___unordered_shoal_a___ OPERATIONS = []()
+		{
+			___unordered_shoal_a___ operations = operation_a::___operations___<___unordered_shoal_a___>();
+			operations.update_string("recreate_", native_extraction_t<expression_a>::create(&expression_a::recreate__));
+			operations.update_string("literal_", native_extraction_t<expression_a>::create(&expression_a::literal__));
+			operations.update_string("evaluate_", native_extraction_t<expression_a>::create(&expression_a::evaluate__));
+			operations.update_string("token_", native_extraction_t<expression_a>::create(&expression_a::token__));
+			operations.update_string("terms_", native_extraction_t<expression_a>::create(&expression_a::terms__));
+			operations.update_string("generate_", native_extraction_t<expression_a>::create(&expression_a::generate__));
+			operations.update_string("generate_cpp_", native_extraction_t<expression_a>::create(&expression_a::generate_cpp__));
+			return operations;
+		}();
+		return OPERATIONS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline expression_a create(Args&&... args)
 	{

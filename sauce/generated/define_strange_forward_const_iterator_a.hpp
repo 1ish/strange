@@ -341,6 +341,19 @@ public:
 		return KINDS;
 	}
 
+	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
+	static inline ___unordered_shoal_a___ ___operations___()
+	{
+		static ___unordered_shoal_a___ OPERATIONS = []()
+		{
+			___unordered_shoal_a___ operations = any_a::___operations___<___unordered_shoal_a___>();
+			operations.update_string("get_", native_extraction_t<forward_const_iterator_a>::create(&forward_const_iterator_a::get__));
+			operations.update_string("increment_", native_mutation_t<forward_const_iterator_a>::create(&forward_const_iterator_a::increment__));
+			return operations;
+		}();
+		return OPERATIONS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline forward_const_iterator_a create(Args&&... args)
 	{

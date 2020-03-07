@@ -348,6 +348,19 @@ public:
 		return KINDS;
 	}
 
+	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
+	static inline ___unordered_shoal_a___ ___operations___()
+	{
+		static ___unordered_shoal_a___ OPERATIONS = []()
+		{
+			___unordered_shoal_a___ operations = any_a::___operations___<___unordered_shoal_a___>();
+			operations.update_string("pure_", native_extraction_t<operation_a>::create(&operation_a::pure__));
+			operations.update_string("names_", native_extraction_t<operation_a>::create(&operation_a::names__));
+			return operations;
+		}();
+		return OPERATIONS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline operation_a create(Args&&... args)
 	{

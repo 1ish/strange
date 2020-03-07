@@ -313,6 +313,18 @@ public:
 		return KINDS;
 	}
 
+	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
+	static inline ___unordered_shoal_a___ ___operations___()
+	{
+		static ___unordered_shoal_a___ OPERATIONS = []()
+		{
+			___unordered_shoal_a___ operations = forward_iterator_a::___operations___<___unordered_shoal_a___>();
+			operations.update_string("decrement_", native_mutation_t<bidirectional_iterator_a>::create(&bidirectional_iterator_a::decrement__));
+			return operations;
+		}();
+		return OPERATIONS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline bidirectional_iterator_a create(Args&&... args)
 	{

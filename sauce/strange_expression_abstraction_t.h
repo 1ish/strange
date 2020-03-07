@@ -1592,6 +1592,38 @@ protected:
 		river.write_string(
 			"\t\treturn KINDS;\n"
 			"\t}\n\n");
+
+		// ___operations___()
+		if (root)
+		{
+			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal>\n");
+		}
+		else
+		{
+			river.write_string("\ttemplate <typename ___unordered_shoal_a___ = unordered_shoal_a<>>\n");
+		}
+		river.write_string(
+			"\tstatic inline ___unordered_shoal_a___ ___operations___()\n"
+			"\t{\n"
+			"\t\tstatic ___unordered_shoal_a___ OPERATIONS = []()\n"
+			"\t\t{\n"
+			"\t\t\t___unordered_shoal_a___ operations = ");
+		if (root)
+		{
+			river.write_string("unordered_shoal_create<false, ___unordered_shoal_a___>();\n");
+		}
+		else
+		{
+			river.write_string(base_name + "::___operations___<___unordered_shoal_a___>();\n");
+		}
+		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
+			&expression_abstraction_t::_define_class_operation_,
+			&expression_abstraction_t::_define_class_operation_native_);
+		river.write_string(
+			"\t\t\treturn operations;\n"
+			"\t\t}();\n"
+			"\t\treturn OPERATIONS;\n"
+			"\t}\n\n");
 	}
 
 	inline void _define_class_relfection_dimensions_(int64_t count, flock_a<> const& dimension_kinds, int64_t version, river_a<>& river) const
@@ -1638,6 +1670,23 @@ protected:
 		river.write_string(")");
 	}
 	
+	inline void _define_class_operation_(bool root, std::string const& class_name, std::string const& name, expression_a<> const& expression, bool extraction, int64_t version, river_a<>& river) const
+	{
+		std::string result;
+		std::string parameters;
+		std::string arguments;
+		std::string constness;
+		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
+
+		river.write_string(
+			"\t\t\toperations.update_string(\"" + name + "\", " +
+			(constness.empty() ? "native_mutation_t<" : "native_extraction_t<") +
+			class_name + ">::create(&" + class_name + "::" + name + "_));\n");
+	}
+
+	inline void _define_class_operation_native_(bool root, std::string const& class_name, std::string const& name, std::string const& value, int64_t version, river_a<>& river) const
+	{}
+
 	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const
 	{
 		_declare_or_define_template_(version, 0, river, false, true);

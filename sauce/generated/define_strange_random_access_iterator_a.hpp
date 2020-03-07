@@ -453,6 +453,25 @@ public:
 		return KINDS;
 	}
 
+	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
+	static inline ___unordered_shoal_a___ ___operations___()
+	{
+		static ___unordered_shoal_a___ OPERATIONS = []()
+		{
+			___unordered_shoal_a___ operations = bidirectional_iterator_a::___operations___<___unordered_shoal_a___>();
+			operations.update_string("self_add_", native_mutation_t<random_access_iterator_a>::create(&random_access_iterator_a::self_add__));
+			operations.update_string("add_", native_extraction_t<random_access_iterator_a>::create(&random_access_iterator_a::add__));
+			operations.update_string("self_subtract_", native_mutation_t<random_access_iterator_a>::create(&random_access_iterator_a::self_subtract__));
+			operations.update_string("subtract_", native_extraction_t<random_access_iterator_a>::create(&random_access_iterator_a::subtract__));
+			operations.update_string("less_than_", native_extraction_t<random_access_iterator_a>::create(&random_access_iterator_a::less_than__));
+			operations.update_string("greater_than_", native_extraction_t<random_access_iterator_a>::create(&random_access_iterator_a::greater_than__));
+			operations.update_string("less_or_equal_", native_extraction_t<random_access_iterator_a>::create(&random_access_iterator_a::less_or_equal__));
+			operations.update_string("greater_or_equal_", native_extraction_t<random_access_iterator_a>::create(&random_access_iterator_a::greater_or_equal__));
+			return operations;
+		}();
+		return OPERATIONS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline random_access_iterator_a create(Args&&... args)
 	{

@@ -695,9 +695,9 @@ class ___unordered_shoal_t_share___
 	}
 };
 
-// template <bool _concurrent_ = false>
-template <bool _concurrent_>
-inline unordered_shoal_a<> unordered_shoal_create()
+// template <bool _concurrent_ = false, typename ___unordered_shoal_a___ = unordered_shoal_a<>>
+template <bool _concurrent_, typename ___unordered_shoal_a___>
+inline ___unordered_shoal_a___ unordered_shoal_create()
 {
 	return unordered_shoal_t<_concurrent_>::create_();
 }

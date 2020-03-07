@@ -359,8 +359,8 @@ template <typename... Args>
 inline unordered_herd_a<> unordered_herd_dups(Args&&... args);
 
 // unordered shoal
-template <bool _concurrent_ = false>
-inline unordered_shoal_a<> unordered_shoal_create();
+template <bool _concurrent_ = false, typename ___unordered_shoal_a___ = unordered_shoal_a<>>
+inline ___unordered_shoal_a___ unordered_shoal_create();
 
 template <typename... Args>
 inline unordered_shoal_a<> unordered_shoal_vals(Args&&... args);

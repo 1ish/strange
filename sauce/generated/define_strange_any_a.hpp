@@ -716,6 +716,32 @@ public:
 		return KINDS;
 	}
 
+	template <typename ___unordered_shoal_a___ = unordered_shoal>
+	static inline ___unordered_shoal_a___ ___operations___()
+	{
+		static ___unordered_shoal_a___ OPERATIONS = []()
+		{
+			___unordered_shoal_a___ operations = unordered_shoal_create<false, ___unordered_shoal_a___>();
+			operations.update_string("type_", native_extraction_t<any_a>::create(&any_a::type__));
+			operations.update_string("shared_", native_extraction_t<any_a>::create(&any_a::shared__));
+			operations.update_string("cat_", native_extraction_t<any_a>::create(&any_a::cat__));
+			operations.update_string("cats_", native_extraction_t<any_a>::create(&any_a::cats__));
+			operations.update_string("kind_", native_extraction_t<any_a>::create(&any_a::kind__));
+			operations.update_string("kinds_", native_extraction_t<any_a>::create(&any_a::kinds__));
+			operations.update_string("operations_", native_extraction_t<any_a>::create(&any_a::operations__));
+			operations.update_string("visit_", native_extraction_t<any_a>::create(&any_a::visit__));
+			operations.update_string("identity_", native_extraction_t<any_a>::create(&any_a::identity__));
+			operations.update_string("identical_", native_extraction_t<any_a>::create(&any_a::identical__));
+			operations.update_string("nothing_", native_extraction_t<any_a>::create(&any_a::nothing__));
+			operations.update_string("something_", native_extraction_t<any_a>::create(&any_a::something__));
+			operations.update_string("same_", native_extraction_t<any_a>::create(&any_a::same__));
+			operations.update_string("different_", native_extraction_t<any_a>::create(&any_a::different__));
+			operations.update_string("hash_", native_extraction_t<any_a>::create(&any_a::hash__));
+			return operations;
+		}();
+		return OPERATIONS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline any_a create(Args&&... args)
 	{

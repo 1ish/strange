@@ -908,6 +908,45 @@ public:
 		return KINDS;
 	}
 
+	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
+	static inline ___unordered_shoal_a___ ___operations___()
+	{
+		static ___unordered_shoal_a___ OPERATIONS = []()
+		{
+			___unordered_shoal_a___ operations = range_a::___operations___<___unordered_shoal_a___>();
+			operations.update_string("get_", native_mutation_t<river_a>::create(&river_a::get__));
+			operations.update_string("peek_", native_mutation_t<river_a>::create(&river_a::peek__));
+			operations.update_string("unget_", native_mutation_t<river_a>::create(&river_a::unget__));
+			operations.update_string("putback_", native_mutation_t<river_a>::create(&river_a::putback__));
+			operations.update_string("getline_", native_mutation_t<river_a>::create(&river_a::getline__));
+			operations.update_string("ignore_", native_mutation_t<river_a>::create(&river_a::ignore__));
+			operations.update_string("read_", native_mutation_t<river_a>::create(&river_a::read__));
+			operations.update_string("tellg_", native_extraction_t<river_a>::create(&river_a::tellg__));
+			operations.update_string("seekg_beg_", native_mutation_t<river_a>::create(&river_a::seekg_beg__));
+			operations.update_string("seekg_end_", native_mutation_t<river_a>::create(&river_a::seekg_end__));
+			operations.update_string("seekg_cur_", native_mutation_t<river_a>::create(&river_a::seekg_cur__));
+			operations.update_string("sync_", native_mutation_t<river_a>::create(&river_a::sync__));
+			operations.update_string("put_", native_mutation_t<river_a>::create(&river_a::put__));
+			operations.update_string("write_", native_mutation_t<river_a>::create(&river_a::write__));
+			operations.update_string("tellp_", native_extraction_t<river_a>::create(&river_a::tellp__));
+			operations.update_string("seekp_beg_", native_mutation_t<river_a>::create(&river_a::seekp_beg__));
+			operations.update_string("seekp_end_", native_mutation_t<river_a>::create(&river_a::seekp_end__));
+			operations.update_string("seekp_cur_", native_mutation_t<river_a>::create(&river_a::seekp_cur__));
+			operations.update_string("flush_", native_mutation_t<river_a>::create(&river_a::flush__));
+			operations.update_string("good_", native_extraction_t<river_a>::create(&river_a::good__));
+			operations.update_string("eof_", native_extraction_t<river_a>::create(&river_a::eof__));
+			operations.update_string("fail_", native_extraction_t<river_a>::create(&river_a::fail__));
+			operations.update_string("bad_", native_extraction_t<river_a>::create(&river_a::bad__));
+			operations.update_string("set_good_", native_mutation_t<river_a>::create(&river_a::set_good__));
+			operations.update_string("set_eof_", native_mutation_t<river_a>::create(&river_a::set_eof__));
+			operations.update_string("set_fail_", native_mutation_t<river_a>::create(&river_a::set_fail__));
+			operations.update_string("set_bad_", native_mutation_t<river_a>::create(&river_a::set_bad__));
+			operations.update_string("filename_", native_extraction_t<river_a>::create(&river_a::filename__));
+			return operations;
+		}();
+		return OPERATIONS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline river_a create(Args&&... args)
 	{

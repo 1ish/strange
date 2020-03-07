@@ -642,6 +642,36 @@ public:
 		return KINDS;
 	}
 
+	template <typename ___unordered_shoal_a___ = unordered_shoal_a<>>
+	static inline ___unordered_shoal_a___ ___operations___()
+	{
+		static ___unordered_shoal_a___ OPERATIONS = []()
+		{
+			___unordered_shoal_a___ operations = range_a::___operations___<___unordered_shoal_a___>();
+			operations.update_string("has_", native_extraction_t<collection_a>::create(&collection_a::has__));
+			operations.update_string("at_", native_extraction_t<collection_a>::create(&collection_a::at__));
+			operations.update_string("update_", native_mutation_t<collection_a>::create(&collection_a::update__));
+			operations.update_string("insert_", native_mutation_t<collection_a>::create(&collection_a::insert__));
+			operations.update_string("erase_", native_mutation_t<collection_a>::create(&collection_a::erase__));
+			operations.update_string("clear_", native_mutation_t<collection_a>::create(&collection_a::clear__));
+			operations.update_string("size_", native_extraction_t<collection_a>::create(&collection_a::size__));
+			operations.update_string("empty_", native_extraction_t<collection_a>::create(&collection_a::empty__));
+			operations.update_string("push_front_", native_mutation_t<collection_a>::create(&collection_a::push_front__));
+			operations.update_string("pop_front_", native_mutation_t<collection_a>::create(&collection_a::pop_front__));
+			operations.update_string("push_back_", native_mutation_t<collection_a>::create(&collection_a::push_back__));
+			operations.update_string("pop_back_", native_mutation_t<collection_a>::create(&collection_a::pop_back__));
+			operations.update_string("self_assign_", native_mutation_t<collection_a>::create(&collection_a::self_assign__));
+			operations.update_string("self_add_", native_mutation_t<collection_a>::create(&collection_a::self_add__));
+			operations.update_string("add_", native_extraction_t<collection_a>::create(&collection_a::add__));
+			operations.update_string("self_subtract_", native_mutation_t<collection_a>::create(&collection_a::self_subtract__));
+			operations.update_string("subtract_", native_extraction_t<collection_a>::create(&collection_a::subtract__));
+			operations.update_string("read_lock_", native_extraction_t<collection_a>::create(&collection_a::read_lock__));
+			operations.update_string("write_lock_", native_extraction_t<collection_a>::create(&collection_a::write_lock__));
+			return operations;
+		}();
+		return OPERATIONS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline collection_a create(Args&&... args)
 	{
