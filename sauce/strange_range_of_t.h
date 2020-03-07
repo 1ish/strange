@@ -50,7 +50,7 @@ public:
 	// reflection
 	static inline symbol_a<> type_()
 	{
-		static symbol_a<> TYPE = sym("strange::range_of" + reflection<_element_>::cat().to_string());
+		static symbol_a<> TYPE = sym("strange::range_of" + kind_of<_element_>().to_string());
 		return TYPE;
 	}
 

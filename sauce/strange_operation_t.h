@@ -97,14 +97,14 @@ protected:
 
 	static inline unordered_herd_a<> cats(cat_a<> const& cat)
 	{
-		auto result = reflection<___ego___>::cats();
+		auto result = ___ego___::___cats___();
 		result.insert_thing(cat);
 		return result;
 	}
 
 	static inline unordered_herd_a<> kinds(kind_a<> const& kind)
 	{
-		auto result = reflection<___ego___>::kinds();
+		auto result = ___ego___::___kinds___();
 		result.insert_thing(kind);
 		return result;
 	}

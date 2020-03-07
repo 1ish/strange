@@ -115,7 +115,7 @@ public:
 			any_a<> thing = me_();
 			return op.operate(thing, range);
 		}
-		return reflection<___ego___>::cat();
+		return ___ego___::___cat___();
 	}
 	
 	inline cat_a<> cat_() const
@@ -131,7 +131,7 @@ public:
 			}
 			return cast<cat_a<>>(result);
 		}
-		return reflection<___ego___>::cat();
+		return ___ego___::___cat___();
 	}
 
 	inline any_a<> cats__(range_a<> const& range) const
@@ -142,7 +142,7 @@ public:
 			any_a<> thing = me_();
 			return op.operate(thing, range);
 		}
-		return reflection<___ego___>::cats();
+		return ___ego___::___cats___();
 	}
 
 	inline unordered_herd_a<> cats_() const
@@ -158,7 +158,7 @@ public:
 			}
 			return cast<unordered_herd_a<>>(result);
 		}
-		return reflection<___ego___>::cats();
+		return ___ego___::___cats___();
 	}
 
 	inline any_a<> kind__(range_a<> const& range) const
@@ -169,7 +169,7 @@ public:
 			any_a<> thing = me_();
 			return op.operate(thing, range);
 		}
-		return reflection<___ego___>::kind();
+		return ___ego___::___kind___();
 	}
 
 	inline kind_a<> kind_() const
@@ -185,7 +185,7 @@ public:
 			}
 			return cast<kind_a<>>(result);
 		}
-		return reflection<___ego___>::kind();
+		return ___ego___::___kind___();
 	}
 
 	inline any_a<> kinds__(range_a<> const& range) const
@@ -196,7 +196,7 @@ public:
 			any_a<> thing = me_();
 			return op.operate(thing, range);
 		}
-		return reflection<___ego___>::kinds();
+		return ___ego___::___kinds___();
 	}
 
 	inline unordered_herd_a<> kinds_() const
@@ -212,7 +212,7 @@ public:
 			}
 			return cast<unordered_herd_a<>>(result);
 		}
-		return reflection<___ego___>::kinds();
+		return ___ego___::___kinds___();
 	}
 
 	inline any_a<> operations__(range_a<> const& range) const // cannot be overridden
@@ -499,7 +499,7 @@ protected:
 
 	static inline unordered_shoal_a<> _operations_(shoal_a<> const& conception)
 	{
-		unordered_shoal_a<> operations = reflection<___ego___>::operations();
+		unordered_shoal_a<> operations = ___ego___::___operations___();
 		for (auto const& op : conception)
 		{
 			auto const flop = cast<flock_a<>>(op);
