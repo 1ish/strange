@@ -748,16 +748,9 @@ protected:
 			"\t\t{\n"
 			"\t\t\tthrow dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
 			"\t\t}\n"
-			"\t\treturn op.operate(");
-		if (constness.empty())
-		{
-			river.write_string("*this");
-		}
-		else
-		{
-			river.write_string("*const_cast<" + class_name + "*>(this)");
-		}
-		river.write_string(", arguments);\n"
+			"\t\treturn op.operate(" +
+				(extraction ? "*const_cast<" + class_name + "*>(this)" : std::string("*this")) +
+				", arguments);\n"
 			"\t}\n\n");
 
 		river.write_string(
@@ -780,24 +773,9 @@ protected:
 		{
 			_declare_or_define_template_(version, 0, river, false, false);
 		}
-		river.write_string(">(variadic_operate(op, ");
-		if (constness.empty())
-		{
-			river.write_string("*this");
-		}
-		else
-		{
-			river.write_string("*const_cast<" + class_name + "*>(this)");
-		}
-		if (arguments.length() > 2)
-		{
-			river.write_string(", " + arguments.substr(1) + ");\n");
-		}
-		else
-		{
-			river.write_string("));\n");
-		}
-		river.write_string(
+		river.write_string(">(variadic_operate(op, " +
+			(extraction ? "*const_cast<" + class_name + "*>(this)" : std::string("*this")) +
+			(arguments.length() > 2 ? ", " + arguments.substr(1) + ");\n" : std::string("));\n")) +
 			"\t}\n\n");
 	}
 
@@ -837,29 +815,22 @@ protected:
 		river.write_string(
 			"\tinline any_a<> " + name + "_(range" +
 				(root ? "" : "_a<>") + " const& arguments)" + constness + "\n"
-			"\t{ assert(___handle___); return ");
-		if (constness.empty())
-		{
-			river.write_string("___write___().");
-		}
-		else
-		{
-			river.write_string("___read___().");
-		}
-		river.write_string(name + "_(arguments); }\n\n");
-
+/*
+				(root ? "" : "_a<>") + " const& ___arguments___)" + constness + "\n"
+			"\t{\n"
+			"\t\treturn " + name + arguments + ";\n"
+			"\t}\n\n");
+*/
+///*
+			"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + "_(arguments); }\n\n");
+//*/
 		river.write_string(
 			"\tinline " + result + " " + name + parameters + constness + "\n"
-			"\t{ assert(___handle___); return ");
-		if (constness.empty())
-		{
-			river.write_string("___write___().");
-		}
-		else
-		{
-			river.write_string("___read___().");
-		}
-		river.write_string(name + arguments + "; }\n\n");
+			"\t{ assert(___handle___); return " +
+			(extraction ? "___read___()." : "___write___().") +
+			name + arguments + "; }\n\n");
 	}
 
 	inline void _define_class_nonvirtual_native_member_(bool root, std::string const& class_name, std::string const& name, std::string const& value, int64_t version, river_a<>& river) const
@@ -872,20 +843,10 @@ protected:
 		_parse_native_member_definition_(class_name, name, value, result, parameters, arguments, constness, dynamic);
 		river.write_string(
 			"\tinline " + result + " " + name + parameters + constness + "\n"
-			"\t{ assert(___handle___); ");
-		if (result != "void")
-		{
-			river.write_string("return ");
-		}
-		if (constness.empty())
-		{
-			river.write_string("___write___().");
-		}
-		else
-		{
-			river.write_string("___read___().");
-		}
-		river.write_string(name + arguments + "; }\n\n");
+			"\t{ assert(___handle___); " +
+			(result == "void" ? "" : "return ") +
+			(constness.empty() ? "___write___()." : "___read___().") +
+			name + arguments + "; }\n\n");
 	}
 
 	inline void _define_class_handle_(bool root, std::string const& class_name, std::string const& base_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
@@ -1130,10 +1091,9 @@ protected:
 		std::string constness;
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
-		river.write_string(
+		river.write_string( //TODO remove __
 			"\t\tvirtual any_a<> " + name + "_(range" +
-			(root ? "" : "_a<>") + " const& arguments)" + constness + " = 0;\n");
-		river.write_string(
+				(root ? "" : "_a<>") + " const& arguments)" + constness + " = 0;\n"
 			"\t\tvirtual " + result + " " + name + parameters + constness + " = 0;\n");
 	}
 
@@ -1159,12 +1119,11 @@ protected:
 	
 		std::string const scope = root ? "" : "___any_a_handle___<___TTT___, ___DHB___>::";
 
-		river.write_string(
+		river.write_string( //TODO remove __
 			"\t\tvirtual inline any_a<> " + name + "_(range" +
 			(root ? "" : "_a<>") + " const& arguments)" + constness + " final\n"
-			"\t\t{ return " + scope + "___value___." + name + "_(arguments); }\n\n");
-
-		river.write_string(
+			"\t\t{ return " + scope + "___value___." + name + "_(arguments); }\n\n"
+			
 			"\t\tvirtual inline " + result + " " + name + parameters + constness + " final\n"
 			"\t\t{ return " + scope + "___value___." + name + arguments + "; }\n\n");
 	}
@@ -1182,12 +1141,9 @@ protected:
 
 		river.write_string(
 			"\t\tvirtual inline " + result + " " + name + parameters + constness + " final\n"
-			"\t\t{ ");
-		if (result != "void")
-		{
-			river.write_string("return ");
-		}
-		river.write_string(scope + "___value___." + name + arguments + "; }\n\n");
+			"\t\t{ " +
+				(result == "void" ? "" : "return ") +
+				scope + "___value___." + name + arguments + "; }\n\n");
 	}
 
 	inline void _define_class_implementation_(bool root, std::string const& class_name, std::string const& base_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
@@ -1682,7 +1638,7 @@ protected:
 
 		river.write_string(
 			"\t\t\toperations.update_string(\"" + name + "\", " +
-			(constness.empty() ? "native_mutation_t<" : "native_extraction_t<") +
+			(extraction ? "native_extraction_t<" : "native_mutation_t<") +
 			class_name + ">::create(&" + class_name + "::" + name + "_));\n");
 	}
 
