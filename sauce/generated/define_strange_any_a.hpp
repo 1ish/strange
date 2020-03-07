@@ -709,6 +709,13 @@ public:
 		return KIND;
 	}
 
+	template <typename ___cat_a___ = cat, typename ___kind_a___ = kind, typename ___unordered_herd_a___ = unordered_herd>
+	static inline ___unordered_herd_a___ ___kinds___()
+	{
+		static ___unordered_herd_a___ KINDS = unordered_herd_vals(___kind___<___cat_a___, ___kind_a___>());
+		return KINDS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline any_a create(Args&&... args)
 	{

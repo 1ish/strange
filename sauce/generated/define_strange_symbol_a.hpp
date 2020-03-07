@@ -343,6 +343,18 @@ public:
 		return KIND;
 	}
 
+	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>
+	static inline ___unordered_herd_a___ ___kinds___()
+	{
+		static ___unordered_herd_a___ KINDS = []()
+		{
+			auto kinds = any_a::___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();
+			kinds.update_thing(___cat___<___cat_a___, ___kind_a___>());
+			return kinds;
+		}();
+		return KINDS;
+	}
+
 	template <typename ___TTT___, typename... Args>
 	static inline symbol_a create(Args&&... args)
 	{

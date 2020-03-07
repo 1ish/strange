@@ -69,7 +69,7 @@ public:
 
 	static inline unordered_herd_a<> kinds_()
 	{
-		return reflection<___ego___>::kinds();
+		return ___ego___::___kinds___();
 	}
 
 	static inline any_a<> operations__(range_a<> const&)

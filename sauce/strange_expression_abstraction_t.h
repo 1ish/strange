@@ -1562,6 +1562,36 @@ protected:
 		river.write_string(");\n"
 			"\t\treturn KIND;\n"
 			"\t}\n\n");
+
+		// ___kinds___()
+		if (root)
+		{
+			river.write_string("\ttemplate <typename ___cat_a___ = cat, typename ___kind_a___ = kind, typename ___unordered_herd_a___ = unordered_herd>\n");
+		}
+		else
+		{
+			river.write_string("\ttemplate <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>, typename ___unordered_herd_a___ = unordered_herd_a<>>\n");
+		}
+		river.write_string(
+			"\tstatic inline ___unordered_herd_a___ ___kinds___()\n"
+			"\t{\n"
+			"\t\tstatic ___unordered_herd_a___ KINDS = ");
+		if (root)
+		{
+			river.write_string("unordered_herd_vals(___kind___<___cat_a___, ___kind_a___>());\n");
+		}
+		else
+		{
+			river.write_string("[]()\n"
+				"\t\t{\n"
+				"\t\t\tauto kinds = " + base_name + "::___kinds___<___cat_a___, ___kind_a___, ___unordered_herd_a___>();\n"
+				"\t\t\tkinds.update_thing(___cat___<___cat_a___, ___kind_a___>());\n"
+				"\t\t\treturn kinds;\n"
+				"\t\t}();\n");
+		}
+		river.write_string(
+			"\t\treturn KINDS;\n"
+			"\t}\n\n");
 	}
 
 	inline void _define_class_relfection_dimensions_(int64_t count, flock_a<> const& dimension_kinds, int64_t version, river_a<>& river) const
