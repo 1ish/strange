@@ -90,7 +90,6 @@ public:
 protected:
 	struct ___parser_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual any_a<> parse__(range_a<> const& arguments) = 0;
 		virtual expression_a<> parse_(range_a<> const& tokenizer) = 0;
 	};
 
@@ -111,9 +110,6 @@ protected:
 		inline ___parser_a_handle___(___variadic_tag___, Args&&... args)
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
-
-		virtual inline any_a<> parse__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parse__(arguments); }
 
 		virtual inline expression_a<> parse_(range_a<> const& tokenizer) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parse_(tokenizer); }

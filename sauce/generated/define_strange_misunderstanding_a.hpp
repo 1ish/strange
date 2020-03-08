@@ -97,7 +97,6 @@ protected:
 	struct ___misunderstanding_a_handle_base___ : ___any_a_handle_base___
 	{
 		virtual std :: string to_string() const = 0;
-		virtual any_a<> add__(range_a<> const& arguments) const = 0;
 		virtual misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const = 0;
 		virtual misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const = 0;
 	};
@@ -122,9 +121,6 @@ protected:
 
 		virtual inline std :: string to_string() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
-
-		virtual inline any_a<> add__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add__(arguments); }
 
 		virtual inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(misunderstanding); }

@@ -95,9 +95,7 @@ public:
 protected:
 	struct ___range_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual any_a<> cbegin__(range_a<> const& arguments) const = 0;
 		virtual forward_const_iterator_a<> cbegin_() const = 0;
-		virtual any_a<> cend__(range_a<> const& arguments) const = 0;
 		virtual forward_const_iterator_a<> cend_() const = 0;
 	};
 
@@ -119,14 +117,8 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> cbegin__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cbegin__(arguments); }
-
 		virtual inline forward_const_iterator_a<> cbegin_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cbegin_(); }
-
-		virtual inline any_a<> cend__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cend__(arguments); }
 
 		virtual inline forward_const_iterator_a<> cend_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cend_(); }

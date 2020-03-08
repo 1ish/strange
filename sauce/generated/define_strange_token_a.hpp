@@ -146,27 +146,19 @@ public:
 protected:
 	struct ___token_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual any_a<> filename__(range_a<> const& arguments) const = 0;
 		virtual symbol_a<> filename_() const = 0;
 		virtual std :: string filename() const = 0;
-		virtual any_a<> line__(range_a<> const& arguments) const = 0;
 		virtual number_data_int64_a<> line_() const = 0;
 		virtual int64_t line() const = 0;
-		virtual any_a<> position__(range_a<> const& arguments) const = 0;
 		virtual number_data_int64_a<> position_() const = 0;
 		virtual int64_t position() const = 0;
-		virtual any_a<> tag__(range_a<> const& arguments) const = 0;
 		virtual symbol_a<> tag_() const = 0;
 		virtual std :: string tag() const = 0;
-		virtual any_a<> symbol__(range_a<> const& arguments) const = 0;
 		virtual symbol_a<> symbol_() const = 0;
 		virtual std :: string symbol() const = 0;
-		virtual any_a<> literal__(range_a<> const& arguments) const = 0;
 		virtual any_a<> literal_() const = 0;
-		virtual any_a<> precedence__(range_a<> const& arguments) const = 0;
 		virtual number_data_int64_a<> precedence_() const = 0;
 		virtual int64_t precedence() const = 0;
-		virtual any_a<> report__(range_a<> const& arguments) const = 0;
 		virtual misunderstanding_a<> report_() const = 0;
 		virtual std :: string report() const = 0;
 	};
@@ -189,17 +181,11 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> filename__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.filename__(arguments); }
-
 		virtual inline symbol_a<> filename_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.filename_(); }
 
 		virtual inline std :: string filename() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.filename(); }
-
-		virtual inline any_a<> line__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.line__(arguments); }
 
 		virtual inline number_data_int64_a<> line_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.line_(); }
@@ -207,17 +193,11 @@ protected:
 		virtual inline int64_t line() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.line(); }
 
-		virtual inline any_a<> position__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.position__(arguments); }
-
 		virtual inline number_data_int64_a<> position_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.position_(); }
 
 		virtual inline int64_t position() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.position(); }
-
-		virtual inline any_a<> tag__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.tag__(arguments); }
 
 		virtual inline symbol_a<> tag_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.tag_(); }
@@ -225,32 +205,20 @@ protected:
 		virtual inline std :: string tag() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.tag(); }
 
-		virtual inline any_a<> symbol__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol__(arguments); }
-
 		virtual inline symbol_a<> symbol_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol_(); }
 
 		virtual inline std :: string symbol() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbol(); }
 
-		virtual inline any_a<> literal__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.literal__(arguments); }
-
 		virtual inline any_a<> literal_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.literal_(); }
-
-		virtual inline any_a<> precedence__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence__(arguments); }
 
 		virtual inline number_data_int64_a<> precedence_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence_(); }
 
 		virtual inline int64_t precedence() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence(); }
-
-		virtual inline any_a<> report__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.report__(arguments); }
 
 		virtual inline misunderstanding_a<> report_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.report_(); }

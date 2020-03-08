@@ -129,21 +129,14 @@ public:
 protected:
 	struct ___cat_a_handle_base___ : ___symbol_a_handle_base___
 	{
-		virtual any_a<> symbolic__(range_a<> const& arguments) const = 0;
 		virtual any_a<> symbolic_() const = 0;
 		virtual bool symbolic() const = 0;
-		virtual any_a<> order__(range_a<> const& arguments) const = 0;
 		virtual number_data_int64_a<> order_() const = 0;
 		virtual int64_t order() const = 0;
-		virtual any_a<> name__(range_a<> const& arguments) const = 0;
 		virtual symbol_a<> name_() const = 0;
-		virtual any_a<> dimensions__(range_a<> const& arguments) const = 0;
 		virtual flock_a<> dimensions_() const = 0;
-		virtual any_a<> parameters__(range_a<> const& arguments) const = 0;
 		virtual flock_a<> parameters_() const = 0;
-		virtual any_a<> result__(range_a<> const& arguments) const = 0;
 		virtual cat_a<> result_() const = 0;
-		virtual any_a<> code__(range_a<> const& arguments) const = 0;
 		virtual lake_int8_a<> code_() const = 0;
 		virtual std :: string code() const = 0;
 	};
@@ -166,17 +159,11 @@ protected:
 			: ___symbol_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> symbolic__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic__(arguments); }
-
 		virtual inline any_a<> symbolic_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic_(); }
 
 		virtual inline bool symbolic() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.symbolic(); }
-
-		virtual inline any_a<> order__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.order__(arguments); }
 
 		virtual inline number_data_int64_a<> order_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.order_(); }
@@ -184,32 +171,17 @@ protected:
 		virtual inline int64_t order() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.order(); }
 
-		virtual inline any_a<> name__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.name__(arguments); }
-
 		virtual inline symbol_a<> name_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.name_(); }
-
-		virtual inline any_a<> dimensions__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.dimensions__(arguments); }
 
 		virtual inline flock_a<> dimensions_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.dimensions_(); }
 
-		virtual inline any_a<> parameters__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parameters__(arguments); }
-
 		virtual inline flock_a<> parameters_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.parameters_(); }
 
-		virtual inline any_a<> result__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.result__(arguments); }
-
 		virtual inline cat_a<> result_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.result_(); }
-
-		virtual inline any_a<> code__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.code__(arguments); }
 
 		virtual inline lake_int8_a<> code_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.code_(); }

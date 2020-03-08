@@ -90,7 +90,6 @@ public:
 protected:
 	struct ___bidirectional_const_iterator_a_handle_base___ : ___forward_const_iterator_a_handle_base___
 	{
-		virtual any_a<> decrement__(range_a<> const& arguments) = 0;
 		virtual bidirectional_const_iterator_a<> decrement_() = 0;
 	};
 
@@ -111,9 +110,6 @@ protected:
 		inline ___bidirectional_const_iterator_a_handle___(___variadic_tag___, Args&&... args)
 			: ___forward_const_iterator_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
-
-		virtual inline any_a<> decrement__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement__(arguments); }
 
 		virtual inline bidirectional_const_iterator_a<> decrement_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement_(); }

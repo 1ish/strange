@@ -143,26 +143,18 @@ public:
 protected:
 	struct ___random_access_iterator_a_handle_base___ : ___bidirectional_iterator_a_handle_base___
 	{
-		virtual any_a<> self_add__(range_a<> const& arguments) = 0;
 		virtual random_access_iterator_a<> self_add_(number_a<> const& number) = 0;
-		virtual any_a<> add__(range_a<> const& arguments) const = 0;
 		virtual random_access_iterator_a<> add_(number_a<> const& number) const = 0;
 		virtual random_access_iterator_a operator+(number_a < > const & number ) const = 0;
-		virtual any_a<> self_subtract__(range_a<> const& arguments) = 0;
 		virtual random_access_iterator_a<> self_subtract_(number_a<> const& number) = 0;
-		virtual any_a<> subtract__(range_a<> const& arguments) const = 0;
 		virtual random_access_iterator_a<> subtract_(number_a<> const& number) const = 0;
 		virtual random_access_iterator_a operator-(number_a < > const & number ) const = 0;
-		virtual any_a<> less_than__(range_a<> const& arguments) const = 0;
 		virtual any_a<> less_than_(random_access_iterator_a<> const& it) const = 0;
 		virtual bool operator<(random_access_iterator_a < > const & it ) const = 0;
-		virtual any_a<> greater_than__(range_a<> const& arguments) const = 0;
 		virtual any_a<> greater_than_(random_access_iterator_a<> const& it) const = 0;
 		virtual bool operator>(random_access_iterator_a < > const & it ) const = 0;
-		virtual any_a<> less_or_equal__(range_a<> const& arguments) const = 0;
 		virtual any_a<> less_or_equal_(random_access_iterator_a<> const& it) const = 0;
 		virtual bool operator<=(random_access_iterator_a < > const & it ) const = 0;
-		virtual any_a<> greater_or_equal__(range_a<> const& arguments) const = 0;
 		virtual any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const = 0;
 		virtual bool operator>=(random_access_iterator_a < > const & it ) const = 0;
 	};
@@ -185,14 +177,8 @@ protected:
 			: ___bidirectional_iterator_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> self_add__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add__(arguments); }
-
 		virtual inline random_access_iterator_a<> self_add_(number_a<> const& number) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }
-
-		virtual inline any_a<> add__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add__(arguments); }
 
 		virtual inline random_access_iterator_a<> add_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(number); }
@@ -200,14 +186,8 @@ protected:
 		virtual inline random_access_iterator_a operator+(number_a < > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(number); }
 
-		virtual inline any_a<> self_subtract__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract__(arguments); }
-
 		virtual inline random_access_iterator_a<> self_subtract_(number_a<> const& number) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
-
-		virtual inline any_a<> subtract__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract__(arguments); }
 
 		virtual inline random_access_iterator_a<> subtract_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
@@ -215,17 +195,11 @@ protected:
 		virtual inline random_access_iterator_a operator-(number_a < > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator-(number); }
 
-		virtual inline any_a<> less_than__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_than__(arguments); }
-
 		virtual inline any_a<> less_than_(random_access_iterator_a<> const& it) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_than_(it); }
 
 		virtual inline bool operator<(random_access_iterator_a < > const & it ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(it); }
-
-		virtual inline any_a<> greater_than__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_than__(arguments); }
 
 		virtual inline any_a<> greater_than_(random_access_iterator_a<> const& it) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_than_(it); }
@@ -233,17 +207,11 @@ protected:
 		virtual inline bool operator>(random_access_iterator_a < > const & it ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(it); }
 
-		virtual inline any_a<> less_or_equal__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_or_equal__(arguments); }
-
 		virtual inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_or_equal_(it); }
 
 		virtual inline bool operator<=(random_access_iterator_a < > const & it ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(it); }
-
-		virtual inline any_a<> greater_or_equal__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_or_equal__(arguments); }
 
 		virtual inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_or_equal_(it); }

@@ -248,44 +248,29 @@ protected:
 		virtual void operator%=(any_a<> const& other) = 0;
 		virtual one_t const & extract_thing() const = 0;
 		virtual one_t & mutate_thing() = 0;
-		virtual any_a<> type__(range const& arguments) const = 0;
 		virtual symbol type_() const = 0;
-		virtual any_a<> shared__(range const& arguments) const = 0;
 		virtual unordered_shoal shared_() const = 0;
 		virtual void share(shoal & shared_shoal ) const = 0;
-		virtual any_a<> cat__(range const& arguments) const = 0;
 		virtual cat cat_() const = 0;
-		virtual any_a<> cats__(range const& arguments) const = 0;
 		virtual unordered_herd cats_() const = 0;
-		virtual any_a<> kind__(range const& arguments) const = 0;
 		virtual kind kind_() const = 0;
-		virtual any_a<> kinds__(range const& arguments) const = 0;
 		virtual unordered_herd kinds_() const = 0;
-		virtual any_a<> operations__(range const& arguments) const = 0;
 		virtual unordered_shoal operations_() const = 0;
-		virtual any_a<> visit__(range const& arguments) const = 0;
 		virtual any_a<> visit_(inventory & arguments) const = 0;
 		virtual any_a < > invoke(any_a < > & thing , range const & arguments ) const = 0;
 		virtual any_a < > operate(any_a < > & thing , range const & arguments ) const = 0;
-		virtual any_a<> identity__(range const& arguments) const = 0;
 		virtual number_data_uint64 identity_() const = 0;
 		virtual void const * identity() const = 0;
-		virtual any_a<> identical__(range const& arguments) const = 0;
 		virtual any_a<> identical_(any_a<> const& thing) const = 0;
 		virtual bool identical(any_a < > const & thing ) const = 0;
-		virtual any_a<> nothing__(range const& arguments) const = 0;
 		virtual any_a<> nothing_() const = 0;
 		virtual bool nothing() const = 0;
-		virtual any_a<> something__(range const& arguments) const = 0;
 		virtual any_a<> something_() const = 0;
 		virtual bool something() const = 0;
-		virtual any_a<> same__(range const& arguments) const = 0;
 		virtual any_a<> same_(any_a<> const& thing) const = 0;
 		virtual bool operator==(any_a < > const & thing ) const = 0;
-		virtual any_a<> different__(range const& arguments) const = 0;
 		virtual any_a<> different_(any_a<> const& thing) const = 0;
 		virtual bool operator!=(any_a < > const & thing ) const = 0;
-		virtual any_a<> hash__(range const& arguments) const = 0;
 		virtual number_data_uint64 hash_() const = 0;
 		virtual std :: size_t hash() const = 0;
 		virtual bool is(std :: string const & s ) const = 0;
@@ -360,14 +345,8 @@ protected:
 		virtual inline one_t & mutate_thing() final
 		{ return ___value___.mutate_thing(); }
 
-		virtual inline any_a<> type__(range const& arguments) const final
-		{ return ___value___.type__(arguments); }
-
 		virtual inline symbol type_() const final
 		{ return ___value___.type_(); }
-
-		virtual inline any_a<> shared__(range const& arguments) const final
-		{ return ___value___.shared__(arguments); }
 
 		virtual inline unordered_shoal shared_() const final
 		{ return ___value___.shared_(); }
@@ -375,38 +354,20 @@ protected:
 		virtual inline void share(shoal & shared_shoal ) const final
 		{ ___value___.share(shared_shoal); }
 
-		virtual inline any_a<> cat__(range const& arguments) const final
-		{ return ___value___.cat__(arguments); }
-
 		virtual inline cat cat_() const final
 		{ return ___value___.cat_(); }
-
-		virtual inline any_a<> cats__(range const& arguments) const final
-		{ return ___value___.cats__(arguments); }
 
 		virtual inline unordered_herd cats_() const final
 		{ return ___value___.cats_(); }
 
-		virtual inline any_a<> kind__(range const& arguments) const final
-		{ return ___value___.kind__(arguments); }
-
 		virtual inline kind kind_() const final
 		{ return ___value___.kind_(); }
-
-		virtual inline any_a<> kinds__(range const& arguments) const final
-		{ return ___value___.kinds__(arguments); }
 
 		virtual inline unordered_herd kinds_() const final
 		{ return ___value___.kinds_(); }
 
-		virtual inline any_a<> operations__(range const& arguments) const final
-		{ return ___value___.operations__(arguments); }
-
 		virtual inline unordered_shoal operations_() const final
 		{ return ___value___.operations_(); }
-
-		virtual inline any_a<> visit__(range const& arguments) const final
-		{ return ___value___.visit__(arguments); }
 
 		virtual inline any_a<> visit_(inventory & arguments) const final
 		{ return ___value___.visit_(arguments); }
@@ -417,17 +378,11 @@ protected:
 		virtual inline any_a < > operate(any_a < > & thing , range const & arguments ) const final
 		{ return ___value___.operate(thing, arguments); }
 
-		virtual inline any_a<> identity__(range const& arguments) const final
-		{ return ___value___.identity__(arguments); }
-
 		virtual inline number_data_uint64 identity_() const final
 		{ return ___value___.identity_(); }
 
 		virtual inline void const * identity() const final
 		{ return ___value___.identity(); }
-
-		virtual inline any_a<> identical__(range const& arguments) const final
-		{ return ___value___.identical__(arguments); }
 
 		virtual inline any_a<> identical_(any_a<> const& thing) const final
 		{ return ___value___.identical_(thing); }
@@ -435,17 +390,11 @@ protected:
 		virtual inline bool identical(any_a < > const & thing ) const final
 		{ return ___value___.identical(thing); }
 
-		virtual inline any_a<> nothing__(range const& arguments) const final
-		{ return ___value___.nothing__(arguments); }
-
 		virtual inline any_a<> nothing_() const final
 		{ return ___value___.nothing_(); }
 
 		virtual inline bool nothing() const final
 		{ return ___value___.nothing(); }
-
-		virtual inline any_a<> something__(range const& arguments) const final
-		{ return ___value___.something__(arguments); }
 
 		virtual inline any_a<> something_() const final
 		{ return ___value___.something_(); }
@@ -453,26 +402,17 @@ protected:
 		virtual inline bool something() const final
 		{ return ___value___.something(); }
 
-		virtual inline any_a<> same__(range const& arguments) const final
-		{ return ___value___.same__(arguments); }
-
 		virtual inline any_a<> same_(any_a<> const& thing) const final
 		{ return ___value___.same_(thing); }
 
 		virtual inline bool operator==(any_a < > const & thing ) const final
 		{ return ___value___.operator==(thing); }
 
-		virtual inline any_a<> different__(range const& arguments) const final
-		{ return ___value___.different__(arguments); }
-
 		virtual inline any_a<> different_(any_a<> const& thing) const final
 		{ return ___value___.different_(thing); }
 
 		virtual inline bool operator!=(any_a < > const & thing ) const final
 		{ return ___value___.operator!=(thing); }
-
-		virtual inline any_a<> hash__(range const& arguments) const final
-		{ return ___value___.hash__(arguments); }
 
 		virtual inline number_data_uint64 hash_() const final
 		{ return ___value___.hash_(); }

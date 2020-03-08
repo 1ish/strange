@@ -114,15 +114,11 @@ public:
 protected:
 	struct ___kind_a_handle_base___ : ___cat_a_handle_base___
 	{
-		virtual any_a<> aspects__(range_a<> const& arguments) const = 0;
 		virtual flock_a<> aspects_() const = 0;
-		virtual any_a<> fixed__(range_a<> const& arguments) const = 0;
 		virtual any_a<> fixed_() const = 0;
 		virtual bool fixed() const = 0;
-		virtual any_a<> reference__(range_a<> const& arguments) const = 0;
 		virtual any_a<> reference_() const = 0;
 		virtual bool reference() const = 0;
-		virtual any_a<> optional__(range_a<> const& arguments) const = 0;
 		virtual any_a<> optional_() const = 0;
 		virtual bool optional() const = 0;
 	};
@@ -145,14 +141,8 @@ protected:
 			: ___cat_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> aspects__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects__(arguments); }
-
 		virtual inline flock_a<> aspects_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.aspects_(); }
-
-		virtual inline any_a<> fixed__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed__(arguments); }
 
 		virtual inline any_a<> fixed_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed_(); }
@@ -160,17 +150,11 @@ protected:
 		virtual inline bool fixed() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.fixed(); }
 
-		virtual inline any_a<> reference__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference__(arguments); }
-
 		virtual inline any_a<> reference_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference_(); }
 
 		virtual inline bool reference() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.reference(); }
-
-		virtual inline any_a<> optional__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.optional__(arguments); }
 
 		virtual inline any_a<> optional_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.optional_(); }

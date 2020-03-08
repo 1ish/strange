@@ -825,31 +825,8 @@ protected:
 
 		river.write_string(
 			"\tinline any_a<> " + name + "_(range" +
-				(root ? "" : "_a<>") + " const& ___arguments___)" + constness + ";\n\n");
-/*			"\t{\n"
-			"\n");
-		if (extraction)
-		{
-			auto const& exp = static_cast<expression_extraction_t<> const&>(expression.extract_thing());
-			exp.abstraction_arguments(class_name, name, version, river);
-		}
-		else
-		{
-			auto const& exp = static_cast<expression_mutation_t<> const&>(expression.extract_thing());
-			exp.abstraction_arguments(class_name, name, version, river);
-		}
-		river.write_string(
-			"\t}\n\n"
-			"\n");
-
-		river.write_string(
-			"\t\tassert(___handle___);\n"
-			"\t\treturn " +
-				std::string(extraction ? "___read___()." : "___write___().") +
-				name + "_(___arguments___);\n"
-			"\t}\n\n");
-*/
-		river.write_string(
+				(root ? "" : "_a<>") + " const& ___arguments___)" + constness + ";\n\n"
+			
 			"\tinline " + result + " " + name + parameters + constness + "\n"
 			"\t{ assert(___handle___); return " +
 			(extraction ? "___read___()." : "___write___().") +
@@ -1148,9 +1125,7 @@ protected:
 		std::string constness;
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
-		river.write_string( //TODO remove __
-			"\t\tvirtual any_a<> " + name + "_(range" +
-				(root ? "" : "_a<>") + " const& arguments)" + constness + " = 0;\n"
+		river.write_string(
 			"\t\tvirtual " + result + " " + name + parameters + constness + " = 0;\n");
 	}
 
@@ -1176,11 +1151,7 @@ protected:
 	
 		std::string const scope = root ? "" : "___any_a_handle___<___TTT___, ___DHB___>::";
 
-		river.write_string( //TODO remove __
-			"\t\tvirtual inline any_a<> " + name + "_(range" +
-			(root ? "" : "_a<>") + " const& arguments)" + constness + " final\n"
-			"\t\t{ return " + scope + "___value___." + name + "_(arguments); }\n\n"
-			
+		river.write_string(
 			"\t\tvirtual inline " + result + " " + name + parameters + constness + " final\n"
 			"\t\t{ return " + scope + "___value___." + name + arguments + "; }\n\n");
 	}

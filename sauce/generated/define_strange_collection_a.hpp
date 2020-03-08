@@ -213,54 +213,35 @@ public:
 protected:
 	struct ___collection_a_handle_base___ : ___range_a_handle_base___
 	{
-		virtual any_a<> has__(range_a<> const& arguments) const = 0;
 		virtual any_a<> has_(any_a<> const& key) const = 0;
 		virtual bool has(any_a < > const & key ) const = 0;
-		virtual any_a<> at__(range_a<> const& arguments) const = 0;
 		virtual any_a<> at_(any_a<> const& key) const = 0;
-		virtual any_a<> update__(range_a<> const& arguments) = 0;
 		virtual any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() ) = 0;
 		virtual void update(any_a < > const & key , any_a < > const & value ) = 0;
-		virtual any_a<> insert__(range_a<> const& arguments) = 0;
 		virtual any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() ) = 0;
 		virtual void insert(any_a < > const & key , any_a < > const & value ) = 0;
-		virtual any_a<> erase__(range_a<> const& arguments) = 0;
 		virtual any_a<> erase_(any_a<> const& key) = 0;
 		virtual bool erase(any_a < > const & key ) = 0;
-		virtual any_a<> clear__(range_a<> const& arguments) = 0;
 		virtual collection_a<> clear_() = 0;
 		virtual void clear() = 0;
-		virtual any_a<> size__(range_a<> const& arguments) const = 0;
 		virtual number_data_int64_a<> size_() const = 0;
 		virtual int64_t size() const = 0;
-		virtual any_a<> empty__(range_a<> const& arguments) const = 0;
 		virtual any_a<> empty_() const = 0;
 		virtual bool empty() const = 0;
-		virtual any_a<> push_front__(range_a<> const& arguments) = 0;
 		virtual collection_a<> push_front_(any_a<> const& thing) = 0;
 		virtual void push_front(any_a < > const & thing ) = 0;
-		virtual any_a<> pop_front__(range_a<> const& arguments) = 0;
 		virtual any_a<> pop_front_() = 0;
-		virtual any_a<> push_back__(range_a<> const& arguments) = 0;
 		virtual collection_a<> push_back_(any_a<> const& thing) = 0;
 		virtual void push_back(any_a < > const & thing ) = 0;
-		virtual any_a<> pop_back__(range_a<> const& arguments) = 0;
 		virtual any_a<> pop_back_() = 0;
-		virtual any_a<> self_assign__(range_a<> const& arguments) = 0;
 		virtual collection_a<> self_assign_(range_a<> const& range) = 0;
-		virtual any_a<> self_add__(range_a<> const& arguments) = 0;
 		virtual collection_a<> self_add_(range_a<> const& range) = 0;
-		virtual any_a<> add__(range_a<> const& arguments) const = 0;
 		virtual collection_a<> add_(range_a<> const& range) const = 0;
 		virtual collection_a operator+(range_a < > const & range ) const = 0;
-		virtual any_a<> self_subtract__(range_a<> const& arguments) = 0;
 		virtual collection_a<> self_subtract_(range_a<> const& range) = 0;
-		virtual any_a<> subtract__(range_a<> const& arguments) const = 0;
 		virtual collection_a<> subtract_(range_a<> const& range) const = 0;
 		virtual collection_a operator-(range_a < > const & range ) const = 0;
-		virtual any_a<> read_lock__(range_a<> const& arguments) const = 0;
 		virtual any_a<> read_lock_() const = 0;
-		virtual any_a<> write_lock__(range_a<> const& arguments) const = 0;
 		virtual any_a<> write_lock_() const = 0;
 	};
 
@@ -282,23 +263,14 @@ protected:
 			: ___range_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> has__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.has__(arguments); }
-
 		virtual inline any_a<> has_(any_a<> const& key) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.has_(key); }
 
 		virtual inline bool has(any_a < > const & key ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.has(key); }
 
-		virtual inline any_a<> at__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.at__(arguments); }
-
 		virtual inline any_a<> at_(any_a<> const& key) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.at_(key); }
-
-		virtual inline any_a<> update__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.update__(arguments); }
 
 		virtual inline any_a<> update_(any_a<> const& key, any_a<> const& value = strange::no() ) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.update_(key, value); }
@@ -306,17 +278,11 @@ protected:
 		virtual inline void update(any_a < > const & key , any_a < > const & value ) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.update(key, value); }
 
-		virtual inline any_a<> insert__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.insert__(arguments); }
-
 		virtual inline any_a<> insert_(any_a<> const& key, any_a<> const& value = strange::no() ) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.insert_(key, value); }
 
 		virtual inline void insert(any_a < > const & key , any_a < > const & value ) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.insert(key, value); }
-
-		virtual inline any_a<> erase__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase__(arguments); }
 
 		virtual inline any_a<> erase_(any_a<> const& key) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_(key); }
@@ -324,17 +290,11 @@ protected:
 		virtual inline bool erase(any_a < > const & key ) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase(key); }
 
-		virtual inline any_a<> clear__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.clear__(arguments); }
-
 		virtual inline collection_a<> clear_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.clear_(); }
 
 		virtual inline void clear() final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.clear(); }
-
-		virtual inline any_a<> size__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.size__(arguments); }
 
 		virtual inline number_data_int64_a<> size_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.size_(); }
@@ -342,17 +302,11 @@ protected:
 		virtual inline int64_t size() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.size(); }
 
-		virtual inline any_a<> empty__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.empty__(arguments); }
-
 		virtual inline any_a<> empty_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.empty_(); }
 
 		virtual inline bool empty() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.empty(); }
-
-		virtual inline any_a<> push_front__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.push_front__(arguments); }
 
 		virtual inline collection_a<> push_front_(any_a<> const& thing) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.push_front_(thing); }
@@ -360,14 +314,8 @@ protected:
 		virtual inline void push_front(any_a < > const & thing ) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.push_front(thing); }
 
-		virtual inline any_a<> pop_front__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pop_front__(arguments); }
-
 		virtual inline any_a<> pop_front_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pop_front_(); }
-
-		virtual inline any_a<> push_back__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.push_back__(arguments); }
 
 		virtual inline collection_a<> push_back_(any_a<> const& thing) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.push_back_(thing); }
@@ -375,26 +323,14 @@ protected:
 		virtual inline void push_back(any_a < > const & thing ) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.push_back(thing); }
 
-		virtual inline any_a<> pop_back__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pop_back__(arguments); }
-
 		virtual inline any_a<> pop_back_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pop_back_(); }
-
-		virtual inline any_a<> self_assign__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign__(arguments); }
 
 		virtual inline collection_a<> self_assign_(range_a<> const& range) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(range); }
 
-		virtual inline any_a<> self_add__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add__(arguments); }
-
 		virtual inline collection_a<> self_add_(range_a<> const& range) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(range); }
-
-		virtual inline any_a<> add__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add__(arguments); }
 
 		virtual inline collection_a<> add_(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(range); }
@@ -402,14 +338,8 @@ protected:
 		virtual inline collection_a operator+(range_a < > const & range ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(range); }
 
-		virtual inline any_a<> self_subtract__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract__(arguments); }
-
 		virtual inline collection_a<> self_subtract_(range_a<> const& range) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(range); }
-
-		virtual inline any_a<> subtract__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract__(arguments); }
 
 		virtual inline collection_a<> subtract_(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(range); }
@@ -417,14 +347,8 @@ protected:
 		virtual inline collection_a operator-(range_a < > const & range ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator-(range); }
 
-		virtual inline any_a<> read_lock__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.read_lock__(arguments); }
-
 		virtual inline any_a<> read_lock_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.read_lock_(); }
-
-		virtual inline any_a<> write_lock__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.write_lock__(arguments); }
 
 		virtual inline any_a<> write_lock_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.write_lock_(); }

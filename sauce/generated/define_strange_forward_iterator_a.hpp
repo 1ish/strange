@@ -106,13 +106,10 @@ public:
 protected:
 	struct ___forward_iterator_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual any_a<> get__(range_a<> const& arguments) const = 0;
 		virtual any_a<> get_() const = 0;
-		virtual any_a<> set__(range_a<> const& arguments) const = 0;
 		virtual any_a<> set_(any_a<> const& thing) const = 0;
 		virtual any_a < > & operator*() const = 0;
 		virtual any_a < > * operator->() const = 0;
-		virtual any_a<> increment__(range_a<> const& arguments) = 0;
 		virtual forward_iterator_a<> increment_() = 0;
 	};
 
@@ -134,14 +131,8 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline any_a<> get__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get__(arguments); }
-
 		virtual inline any_a<> get_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get_(); }
-
-		virtual inline any_a<> set__(range_a<> const& arguments) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.set__(arguments); }
 
 		virtual inline any_a<> set_(any_a<> const& thing) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.set_(thing); }
@@ -151,9 +142,6 @@ protected:
 
 		virtual inline any_a < > * operator->() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator->(); }
-
-		virtual inline any_a<> increment__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.increment__(arguments); }
 
 		virtual inline forward_iterator_a<> increment_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }

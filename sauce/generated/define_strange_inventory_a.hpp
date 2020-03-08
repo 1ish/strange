@@ -115,9 +115,7 @@ protected:
 		virtual void update_index(int64_t index , any_a < > const & value ) = 0;
 		virtual bool insert_index(int64_t index , any_a < > const & value ) = 0;
 		virtual bool erase_index(int64_t index ) = 0;
-		virtual any_a<> begin__(range_a<> const& arguments) = 0;
 		virtual random_access_iterator_a<> begin_() = 0;
-		virtual any_a<> end__(range_a<> const& arguments) = 0;
 		virtual random_access_iterator_a<> end_() = 0;
 	};
 
@@ -154,14 +152,8 @@ protected:
 		virtual inline bool erase_index(int64_t index ) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_index(index); }
 
-		virtual inline any_a<> begin__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.begin__(arguments); }
-
 		virtual inline random_access_iterator_a<> begin_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.begin_(); }
-
-		virtual inline any_a<> end__(range_a<> const& arguments) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.end__(arguments); }
 
 		virtual inline random_access_iterator_a<> end_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.end_(); }
