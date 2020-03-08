@@ -2,13 +2,13 @@
 namespace strange
 {
 
-template <typename forward_const_iterator = forward_const_iterator_a<> >
+template <typename _1_ = void>
 class range_d;
 
-template <typename forward_const_iterator = forward_const_iterator_a<> >
-inline range_d<forward_const_iterator> ___range_dynamic___(any_a<> const& thing); 
+template <typename _1_ = void>
+inline range_d<_1_> ___range_dynamic___(any_a<> const& thing); 
 
-template <typename forward_const_iterator>
+template <typename _1_>
 class range_a : public any_a<>
 {
 public:
@@ -93,7 +93,7 @@ public:
 		return ___read___().cbegin__(___arguments___);
 	}
 
-	inline forward_const_iterator cbegin_() const
+	inline forward_const_iterator_a<> cbegin_() const
 	{ assert(___handle___); return ___read___().cbegin_(); }
 
 	inline any_a<> cend__(range_a<> const& ___arguments___) const
@@ -107,16 +107,16 @@ public:
 		return ___read___().cend__(___arguments___);
 	}
 
-	inline forward_const_iterator cend_() const
+	inline forward_const_iterator_a<> cend_() const
 	{ assert(___handle___); return ___read___().cend_(); }
 
 protected:
 	struct ___range_a_handle_base___ : ___any_a_handle_base___
 	{
 		virtual any_a<> cbegin__(range_a<> const& arguments) const = 0;
-		virtual forward_const_iterator cbegin_() const = 0;
+		virtual forward_const_iterator_a<> cbegin_() const = 0;
 		virtual any_a<> cend__(range_a<> const& arguments) const = 0;
-		virtual forward_const_iterator cend_() const = 0;
+		virtual forward_const_iterator_a<> cend_() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___range_a_handle_base___>
@@ -140,13 +140,13 @@ protected:
 		virtual inline any_a<> cbegin__(range_a<> const& arguments) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cbegin__(arguments); }
 
-		virtual inline forward_const_iterator cbegin_() const final
+		virtual inline forward_const_iterator_a<> cbegin_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cbegin_(); }
 
 		virtual inline any_a<> cend__(range_a<> const& arguments) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cend__(arguments); }
 
-		virtual inline forward_const_iterator cend_() const final
+		virtual inline forward_const_iterator_a<> cend_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cend_(); }
 
 	};
@@ -292,7 +292,7 @@ public:
 		{
 			return range_a{ thing.___handle___ };
 		}
-		return range_a{ range_d<forward_const_iterator>{ thing } };
+		return range_a{ range_d<_1_>{ thing } };
 	}
 
 	static inline range_a ___cast_ref___(any_a<>& thing)
@@ -302,7 +302,7 @@ public:
 		{
 			return range_a(thing.___handle___, ___reference_tag___{});
 		}
-		return range_a{ range_d<forward_const_iterator>(thing, ___reference_tag___{}) };
+		return range_a{ range_d<_1_>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -367,15 +367,15 @@ private:
 	friend class ___range_a_share___;
 }; // class range_a
 
-template <typename forward_const_iterator>
-bool const range_a<forward_const_iterator>::___share___ = []()
+template <typename _1_>
+bool const range_a<_1_>::___share___ = []()
 {
 	auto& shared_shoal = shared();
-	reflection<range_a<forward_const_iterator>>::share(shared_shoal);
+	reflection<range_a<_1_>>::share(shared_shoal);
 	return shared_shoal;
 }();
 
-template <typename forward_const_iterator>
+template <typename _1_>
 class range_d : public any_a<>
 {
 public:
@@ -460,7 +460,7 @@ public:
 		return op.operate(*const_cast<range_d*>(this), arguments);
 	}
 
-	inline forward_const_iterator cbegin_() const
+	inline forward_const_iterator_a<> cbegin_() const
 	{
 		assert(___handle___);
 		auto const op = operation("cbegin_");
@@ -468,7 +468,7 @@ public:
 		{
 			throw throw_dis("dynamic range_d::cbegin_ passed non-existent member");
 		}
-		return cast<forward_const_iterator>(variadic_operate(op, *const_cast<range_d*>(this)));
+		return cast<forward_const_iterator_a<>>(variadic_operate(op, *const_cast<range_d*>(this)));
 	}
 
 	inline any_a<> cend__(range_a<> const& arguments) const
@@ -482,7 +482,7 @@ public:
 		return op.operate(*const_cast<range_d*>(this), arguments);
 	}
 
-	inline forward_const_iterator cend_() const
+	inline forward_const_iterator_a<> cend_() const
 	{
 		assert(___handle___);
 		auto const op = operation("cend_");
@@ -490,7 +490,7 @@ public:
 		{
 			throw throw_dis("dynamic range_d::cend_ passed non-existent member");
 		}
-		return cast<forward_const_iterator>(variadic_operate(op, *const_cast<range_d*>(this)));
+		return cast<forward_const_iterator_a<>>(variadic_operate(op, *const_cast<range_d*>(this)));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
@@ -508,10 +508,10 @@ public:
 	{}
 };
 
-template <typename forward_const_iterator>
-inline range_d<forward_const_iterator> ___range_dynamic___(any_a<> const& thing)
+template <typename _1_>
+inline range_d<_1_> ___range_dynamic___(any_a<> const& thing)
 {
-	return range_d<forward_const_iterator>{ thing };
+	return range_d<_1_>{ thing };
 }
 
 } // namespace

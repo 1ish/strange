@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename forward_const_iterator = forward_const_iterator_a<> >
+template <typename _1_ = void>
 class range_a;
 
 } // namespace
