@@ -437,7 +437,7 @@ public:
 		{
 			throw dis("<strange::any>::intimate passed empty range");
 		}
-		any_a<> thing = any_a<>::dup(const_cast<any_a<>&>(*it));
+		any_a<> thing = cast_dup(*it);
 		if (++it == range.cend_())
 		{
 			throw dis("<strange::any>::intimate passed short range");

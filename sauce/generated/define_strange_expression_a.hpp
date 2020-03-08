@@ -176,7 +176,7 @@ public:
 		{
 			throw throw_dis("expression_a::generate_ passed short range");
 		}
-		auto river = cast_dup<river_a<>>(const_cast<any_a<>&>(*___it___));
+		auto river = cast_dup<river_a<>>(*___it___);
 		return generate_(version, indent, river);
 	}
 
@@ -209,7 +209,7 @@ public:
 		{
 			throw throw_dis("expression_a::generate_cpp_ passed short range");
 		}
-		auto river = cast_dup<river_a<>>(const_cast<any_a<>&>(*___it___));
+		auto river = cast_dup<river_a<>>(*___it___);
 		if (++___it___ == ___arguments___.cend_())
 		{
 			throw throw_dis("expression_a::generate_cpp_ passed short range");

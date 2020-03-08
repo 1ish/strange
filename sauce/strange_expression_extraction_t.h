@@ -314,15 +314,13 @@ public:
 			river.write_string(
 				"\t\tif (" + std::string(first ? "___it___" : "++___it___") + " == ___arguments___.cend_())\n"
 				"\t\t{\n" +
-					(optional
-						? "\t\t\treturn " + member + arguments + ");\n"
-						: std::string("\t\t\tthrow throw_dis(\"" + class_name + "::" + member +
-							" passed short range\");\n")) +
+				(optional
+					? "\t\t\treturn " + member + arguments + ");\n"
+					: std::string("\t\t\tthrow throw_dis(\"" + class_name + "::" + member +
+						" passed short range\");\n")) +
 				"\t\t}\n"
 				"\t\tauto " + name_string +
-					(reference
-						? " = cast_dup<" + type + ">(const_cast<any_a<>&>(*___it___));\n"
-						: " = cast<" + type + ">(*___it___);\n"));
+				(reference ? " = cast_dup<" : " = cast<") + type + ">(*___it___);\n");
 			if (first)
 			{
 				first = false;

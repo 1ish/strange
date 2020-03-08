@@ -254,7 +254,7 @@ public:
 		{
 			throw dis("<strange::expression>::generate passed short range");
 		}
-		any_a<> river = any_a<>::dup(const_cast<any_a<>&>(*it));
+		any_a<> river = cast_dup(*it);
 		if (!check<river_a<>>(river))
 		{
 			throw dis("<strange::expression>::generate passed non-river");
@@ -314,7 +314,7 @@ public:
 		{
 			throw dis("<strange::expression>::generate_cpp passed short range");
 		}
-		any_a<> river = any_a<>::dup(const_cast<any_a<>&>(*it));
+		any_a<> river = cast_dup(*it);
 		if (!check<river_a<>>(river))
 		{
 			throw dis("<strange::expression>::generate_cpp passed non-river");

@@ -228,7 +228,7 @@ public:
 		{
 			throw throw_dis("any_a::visit_ passed short range");
 		}
-		auto arguments = cast_dup< inventory>(const_cast<any_a<>&>(*___it___));
+		auto arguments = cast_dup< inventory>(*___it___);
 		return visit_(arguments);
 	}
 

@@ -76,7 +76,7 @@ public:
 			{
 				if (kind.fixed() || kind.reference())
 				{
-					auto const argument = any_a<>::dup(const_cast<any_a<>&>(*ait));
+					auto const argument = cast_dup(*ait);
 					++ait;
 					if (!argument.kinds_().has_(kind))
 					{

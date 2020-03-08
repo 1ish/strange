@@ -320,9 +320,7 @@ public:
 						" passed short range\");\n")) +
 				"\t\t}\n"
 				"\t\tauto " + name_string +
-				(reference
-					? " = cast_dup<" + type + ">(const_cast<any_a<>&>(*___it___));\n"
-					: " = cast<" + type + ">(*___it___);\n"));
+				(reference ? " = cast_dup<" : " = cast<") + type + ">(*___it___);\n");
 			if (first)
 			{
 				first = false;
