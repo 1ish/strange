@@ -209,25 +209,25 @@ public:
 				parameters += ", ";
 				arguments += ", ";
 			}
-			auto name = cast<symbol_a<>>(*nit++);
+			auto name = fast<symbol_a<>>(*nit++);
 			auto any_kind = *kit++;
-			auto expression = cast<expression_a<>>(*eit++);
+			auto expression = fast<expression_a<>>(*eit++);
 			bool optional = false;
 			if (check<expression_a<>>(any_kind))
 			{
-				auto const exp = cast<expression_a<>>(any_kind);
+				auto const exp = fast<expression_a<>>(any_kind);
 				river = river_t<>::create();
 				exp.generate_cpp(version, 0, river, false, false, true);
 				parameters += river.to_string().substr(1);
 				optional = exp.terms_().at_index(8);
 			}
+			else if (!check<kind_a<>>(any_kind))
+			{
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_mutation::abstraction non-kind parameter kind");
+			}
 			else
 			{
-				if (!check<kind_a<>>(any_kind))
-				{
-					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_mutation::abstraction non-kind parameter kind");
-				}
-				auto const kind = cast<kind_a<>>(any_kind);
+				auto const kind = fast<kind_a<>>(any_kind);
 				if (kind.name_().to_string().empty())
 				{
 					parameters += "any_a<> ";
@@ -261,13 +261,80 @@ public:
 		constness = "";
 	}
 
-	void abstraction_arguments(int64_t version, river_a<>& river) const
+	void abstraction_arguments(std::string const& class_name, std::string const& member, int64_t version, river_a<>& river) const
 	{
 		if (_names.empty())
 		{
+			river.write_string(
+				"\t\treturn " + member + "();\n");
 			return;
 		}
-		river.write_string("");
+		river.write_string("\t\tforward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();\n");
+		auto temp = river_t<>::create();
+		std::string arguments = "(";
+		auto kit = _kinds.extract_vector().cbegin();
+		bool first = true;
+		for (auto const& name : _names.extract_vector())
+		{
+			auto const name_string = fast<symbol_a<>>(name).to_string();
+			auto const any_kind = *kit++;
+			std::string type;
+			bool fixed = false;
+			bool reference = false;
+			bool optional = false;
+			if (check<expression_a<>>(any_kind))
+			{
+				auto const exp = fast<expression_a<>>(any_kind);
+				exp.generate_cpp(version, 0, temp, false, false, true);
+				type = temp.to_string();
+				type = type.substr(0, type.find(' ', 1));
+				fixed = exp.terms_().at_index(6);
+				reference = exp.terms_().at_index(7);
+				optional = exp.terms_().at_index(8);
+			}
+			else if (!check<kind_a<>>(any_kind))
+			{
+				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_extraction::abstraction_arguments non-kind parameter kind");
+			}
+			else
+			{
+				auto const kind = fast<kind_a<>>(any_kind);
+				if (kind.name_().to_string().empty())
+				{
+					type = "any_a<>";
+				}
+				else
+				{
+					type = kind.code();
+				}
+				fixed = kind.fixed();
+				reference = kind.reference();
+				optional = kind.optional();
+			}
+			river.write_string(
+				"\t\tif (" + std::string(first ? "___it___" : "++___it___") + " == ___arguments___.cend_())\n"
+				"\t\t{\n" +
+				(optional
+					? "\t\t\treturn " + member + arguments + ");\n"
+					: std::string("\t\t\tthrow throw_dis(\"" + class_name + "::" + member +
+						" passed short range\");\n")) +
+				"\t\t}\n"
+				"\t\tauto " + name_string +
+				(reference
+					? " = cast_dup<" + type + ">(const_cast<any_a<>&>(*___it___));\n"
+					: " = cast<" + type + ">(*___it___);\n"));
+			if (first)
+			{
+				first = false;
+			}
+			else
+			{
+				arguments += ", ";
+			}
+			arguments += name_string;
+		}
+		river.write_string(
+			"\t\treturn " + member + arguments + ");\n");
 	}
 
 protected:

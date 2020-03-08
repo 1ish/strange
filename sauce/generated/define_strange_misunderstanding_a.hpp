@@ -87,10 +87,17 @@ public:
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return add_(misunderstanding);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("misunderstanding_a::add_ passed short range");
+		}
+		auto misunderstanding = cast<misunderstanding_a<>>(*___it___);
+		return add_(misunderstanding);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().add__(___arguments___);
 	}

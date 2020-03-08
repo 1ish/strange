@@ -84,9 +84,11 @@ public:
 
 	inline any_a<> symbolic__(range_a<> const& ___arguments___) const
 	{
-//		return symbolic_();
-//	}
+/*
+		return symbolic_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().symbolic__(___arguments___);
 	}
@@ -99,9 +101,11 @@ public:
 
 	inline any_a<> order__(range_a<> const& ___arguments___) const
 	{
-//		return order_();
-//	}
+/*
+		return order_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().order__(___arguments___);
 	}
@@ -114,9 +118,11 @@ public:
 
 	inline any_a<> name__(range_a<> const& ___arguments___) const
 	{
-//		return name_();
-//	}
+/*
+		return name_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().name__(___arguments___);
 	}
@@ -126,9 +132,11 @@ public:
 
 	inline any_a<> dimensions__(range_a<> const& ___arguments___) const
 	{
-//		return dimensions_();
-//	}
+/*
+		return dimensions_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().dimensions__(___arguments___);
 	}
@@ -138,9 +146,11 @@ public:
 
 	inline any_a<> parameters__(range_a<> const& ___arguments___) const
 	{
-//		return parameters_();
-//	}
+/*
+		return parameters_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().parameters__(___arguments___);
 	}
@@ -150,9 +160,11 @@ public:
 
 	inline any_a<> result__(range_a<> const& ___arguments___) const
 	{
-//		return result_();
-//	}
+/*
+		return result_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().result__(___arguments___);
 	}
@@ -162,9 +174,11 @@ public:
 
 	inline any_a<> code__(range_a<> const& ___arguments___) const
 	{
-//		return code_();
-//	}
+/*
+		return code_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().code__(___arguments___);
 	}

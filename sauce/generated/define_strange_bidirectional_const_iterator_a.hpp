@@ -84,9 +84,11 @@ public:
 
 	inline any_a<> decrement__(range_a<> const& ___arguments___)
 	{
-//		return decrement_();
-//	}
+/*
+		return decrement_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().decrement__(___arguments___);
 	}

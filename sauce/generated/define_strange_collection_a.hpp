@@ -84,10 +84,17 @@ public:
 
 	inline any_a<> has__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return has_(key);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::has_ passed short range");
+		}
+		auto key = cast<any_a<>>(*___it___);
+		return has_(key);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().has__(___arguments___);
 	}
@@ -100,10 +107,17 @@ public:
 
 	inline any_a<> at__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return at_(key);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::at_ passed short range");
+		}
+		auto key = cast<any_a<>>(*___it___);
+		return at_(key);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().at__(___arguments___);
 	}
@@ -113,9 +127,22 @@ public:
 
 	inline any_a<> update__(range_a<> const& ___arguments___)
 	{
-//		return update_(key, value);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::update_ passed short range");
+		}
+		auto key = cast<any_a<>>(*___it___);
+		if (++___it___ == ___arguments___.cend_())
+		{
+			return update_(key);
+		}
+		auto value = cast<any_a<>>(*___it___);
+		return update_(key, value);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().update__(___arguments___);
 	}
@@ -128,9 +155,22 @@ public:
 
 	inline any_a<> insert__(range_a<> const& ___arguments___)
 	{
-//		return insert_(key, value);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::insert_ passed short range");
+		}
+		auto key = cast<any_a<>>(*___it___);
+		if (++___it___ == ___arguments___.cend_())
+		{
+			return insert_(key);
+		}
+		auto value = cast<any_a<>>(*___it___);
+		return insert_(key, value);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().insert__(___arguments___);
 	}
@@ -143,9 +183,17 @@ public:
 
 	inline any_a<> erase__(range_a<> const& ___arguments___)
 	{
-//		return erase_(key);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::erase_ passed short range");
+		}
+		auto key = cast<any_a<>>(*___it___);
+		return erase_(key);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().erase__(___arguments___);
 	}
@@ -158,9 +206,11 @@ public:
 
 	inline any_a<> clear__(range_a<> const& ___arguments___)
 	{
-//		return clear_();
-//	}
+/*
+		return clear_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().clear__(___arguments___);
 	}
@@ -173,9 +223,11 @@ public:
 
 	inline any_a<> size__(range_a<> const& ___arguments___) const
 	{
-//		return size_();
-//	}
+/*
+		return size_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().size__(___arguments___);
 	}
@@ -188,9 +240,11 @@ public:
 
 	inline any_a<> empty__(range_a<> const& ___arguments___) const
 	{
-//		return empty_();
-//	}
+/*
+		return empty_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().empty__(___arguments___);
 	}
@@ -203,9 +257,17 @@ public:
 
 	inline any_a<> push_front__(range_a<> const& ___arguments___)
 	{
-//		return push_front_(thing);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::push_front_ passed short range");
+		}
+		auto thing = cast<any_a<>>(*___it___);
+		return push_front_(thing);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().push_front__(___arguments___);
 	}
@@ -218,9 +280,11 @@ public:
 
 	inline any_a<> pop_front__(range_a<> const& ___arguments___)
 	{
-//		return pop_front_();
-//	}
+/*
+		return pop_front_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().pop_front__(___arguments___);
 	}
@@ -230,9 +294,17 @@ public:
 
 	inline any_a<> push_back__(range_a<> const& ___arguments___)
 	{
-//		return push_back_(thing);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::push_back_ passed short range");
+		}
+		auto thing = cast<any_a<>>(*___it___);
+		return push_back_(thing);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().push_back__(___arguments___);
 	}
@@ -245,9 +317,11 @@ public:
 
 	inline any_a<> pop_back__(range_a<> const& ___arguments___)
 	{
-//		return pop_back_();
-//	}
+/*
+		return pop_back_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().pop_back__(___arguments___);
 	}
@@ -257,9 +331,17 @@ public:
 
 	inline any_a<> self_assign__(range_a<> const& ___arguments___)
 	{
-//		return self_assign_(range);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::self_assign_ passed short range");
+		}
+		auto range = cast<range_a<>>(*___it___);
+		return self_assign_(range);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().self_assign__(___arguments___);
 	}
@@ -269,9 +351,17 @@ public:
 
 	inline any_a<> self_add__(range_a<> const& ___arguments___)
 	{
-//		return self_add_(range);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::self_add_ passed short range");
+		}
+		auto range = cast<range_a<>>(*___it___);
+		return self_add_(range);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().self_add__(___arguments___);
 	}
@@ -281,10 +371,17 @@ public:
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return add_(range);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::add_ passed short range");
+		}
+		auto range = cast<range_a<>>(*___it___);
+		return add_(range);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().add__(___arguments___);
 	}
@@ -297,9 +394,17 @@ public:
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___)
 	{
-//		return self_subtract_(range);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::self_subtract_ passed short range");
+		}
+		auto range = cast<range_a<>>(*___it___);
+		return self_subtract_(range);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().self_subtract__(___arguments___);
 	}
@@ -309,10 +414,17 @@ public:
 
 	inline any_a<> subtract__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return subtract_(range);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("collection_a::subtract_ passed short range");
+		}
+		auto range = cast<range_a<>>(*___it___);
+		return subtract_(range);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().subtract__(___arguments___);
 	}
@@ -325,9 +437,11 @@ public:
 
 	inline any_a<> read_lock__(range_a<> const& ___arguments___) const
 	{
-//		return read_lock_();
-//	}
+/*
+		return read_lock_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().read_lock__(___arguments___);
 	}
@@ -337,9 +451,11 @@ public:
 
 	inline any_a<> write_lock__(range_a<> const& ___arguments___) const
 	{
-//		return write_lock_();
-//	}
+/*
+		return write_lock_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().write_lock__(___arguments___);
 	}

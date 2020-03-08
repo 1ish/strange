@@ -84,9 +84,11 @@ public:
 
 	inline any_a<> to_lake__(range_a<> const& ___arguments___) const
 	{
-//		return to_lake_();
-//	}
+/*
+		return to_lake_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().to_lake__(___arguments___);
 	}
@@ -105,10 +107,17 @@ public:
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return add_(symbol);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("symbol_a::add_ passed short range");
+		}
+		auto symbol = cast<symbol_a<>>(*___it___);
+		return add_(symbol);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().add__(___arguments___);
 	}

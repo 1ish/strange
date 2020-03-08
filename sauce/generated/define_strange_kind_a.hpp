@@ -84,9 +84,11 @@ public:
 
 	inline any_a<> aspects__(range_a<> const& ___arguments___) const
 	{
-//		return aspects_();
-//	}
+/*
+		return aspects_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().aspects__(___arguments___);
 	}
@@ -96,9 +98,11 @@ public:
 
 	inline any_a<> fixed__(range_a<> const& ___arguments___) const
 	{
-//		return fixed_();
-//	}
+/*
+		return fixed_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().fixed__(___arguments___);
 	}
@@ -111,9 +115,11 @@ public:
 
 	inline any_a<> reference__(range_a<> const& ___arguments___) const
 	{
-//		return reference_();
-//	}
+/*
+		return reference_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().reference__(___arguments___);
 	}
@@ -126,9 +132,11 @@ public:
 
 	inline any_a<> optional__(range_a<> const& ___arguments___) const
 	{
-//		return optional_();
-//	}
+/*
+		return optional_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().optional__(___arguments___);
 	}

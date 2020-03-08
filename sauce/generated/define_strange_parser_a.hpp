@@ -84,9 +84,17 @@ public:
 
 	inline any_a<> parse__(range_a<> const& ___arguments___)
 	{
-//		return parse_(tokenizer);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("parser_a::parse_ passed short range");
+		}
+		auto tokenizer = cast<range_a<>>(*___it___);
+		return parse_(tokenizer);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().parse__(___arguments___);
 	}

@@ -87,9 +87,11 @@ public:
 
 	inline any_a<> get__(range_a<> const& ___arguments___)
 	{
-//		return get_();
-//	}
+/*
+		return get_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().get__(___arguments___);
 	}
@@ -102,9 +104,11 @@ public:
 
 	inline any_a<> peek__(range_a<> const& ___arguments___)
 	{
-//		return peek_();
-//	}
+/*
+		return peek_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().peek__(___arguments___);
 	}
@@ -117,9 +121,11 @@ public:
 
 	inline any_a<> unget__(range_a<> const& ___arguments___)
 	{
-//		return unget_();
-//	}
+/*
+		return unget_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().unget__(___arguments___);
 	}
@@ -132,9 +138,17 @@ public:
 
 	inline any_a<> putback__(range_a<> const& ___arguments___)
 	{
-//		return putback_(int_8);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::putback_ passed short range");
+		}
+		auto int_8 = cast<number_data_int8_a<>>(*___it___);
+		return putback_(int_8);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().putback__(___arguments___);
 	}
@@ -147,9 +161,22 @@ public:
 
 	inline any_a<> getline__(range_a<> const& ___arguments___)
 	{
-//		return getline_(count, delimiter);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::getline_ passed short range");
+		}
+		auto count = cast<number_data_int64_a<>>(*___it___);
+		if (++___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::getline_ passed short range");
+		}
+		auto delimiter = cast<number_data_int8_a<>>(*___it___);
+		return getline_(count, delimiter);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().getline__(___arguments___);
 	}
@@ -162,9 +189,17 @@ public:
 
 	inline any_a<> ignore__(range_a<> const& ___arguments___)
 	{
-//		return ignore_(count);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::ignore_ passed short range");
+		}
+		auto count = cast<number_data_int64_a<>>(*___it___);
+		return ignore_(count);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().ignore__(___arguments___);
 	}
@@ -177,9 +212,17 @@ public:
 
 	inline any_a<> read__(range_a<> const& ___arguments___)
 	{
-//		return read_(count);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::read_ passed short range");
+		}
+		auto count = cast<number_data_int64_a<>>(*___it___);
+		return read_(count);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().read__(___arguments___);
 	}
@@ -195,9 +238,11 @@ public:
 
 	inline any_a<> tellg__(range_a<> const& ___arguments___) const
 	{
-//		return tellg_();
-//	}
+/*
+		return tellg_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().tellg__(___arguments___);
 	}
@@ -210,9 +255,17 @@ public:
 
 	inline any_a<> seekg_beg__(range_a<> const& ___arguments___)
 	{
-//		return seekg_beg_(offset);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::seekg_beg_ passed short range");
+		}
+		auto offset = cast<number_data_int64_a<>>(*___it___);
+		return seekg_beg_(offset);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().seekg_beg__(___arguments___);
 	}
@@ -225,9 +278,17 @@ public:
 
 	inline any_a<> seekg_end__(range_a<> const& ___arguments___)
 	{
-//		return seekg_end_(offset);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::seekg_end_ passed short range");
+		}
+		auto offset = cast<number_data_int64_a<>>(*___it___);
+		return seekg_end_(offset);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().seekg_end__(___arguments___);
 	}
@@ -240,9 +301,17 @@ public:
 
 	inline any_a<> seekg_cur__(range_a<> const& ___arguments___)
 	{
-//		return seekg_cur_(offset);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::seekg_cur_ passed short range");
+		}
+		auto offset = cast<number_data_int64_a<>>(*___it___);
+		return seekg_cur_(offset);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().seekg_cur__(___arguments___);
 	}
@@ -255,9 +324,11 @@ public:
 
 	inline any_a<> sync__(range_a<> const& ___arguments___)
 	{
-//		return sync_();
-//	}
+/*
+		return sync_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().sync__(___arguments___);
 	}
@@ -270,9 +341,17 @@ public:
 
 	inline any_a<> put__(range_a<> const& ___arguments___)
 	{
-//		return put_(int_8);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::put_ passed short range");
+		}
+		auto int_8 = cast<number_data_int8_a<>>(*___it___);
+		return put_(int_8);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().put__(___arguments___);
 	}
@@ -285,9 +364,17 @@ public:
 
 	inline any_a<> write__(range_a<> const& ___arguments___)
 	{
-//		return write_(lake);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::write_ passed short range");
+		}
+		auto lake = cast<lake_int8_a<>>(*___it___);
+		return write_(lake);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().write__(___arguments___);
 	}
@@ -303,9 +390,11 @@ public:
 
 	inline any_a<> tellp__(range_a<> const& ___arguments___) const
 	{
-//		return tellp_();
-//	}
+/*
+		return tellp_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().tellp__(___arguments___);
 	}
@@ -318,9 +407,17 @@ public:
 
 	inline any_a<> seekp_beg__(range_a<> const& ___arguments___)
 	{
-//		return seekp_beg_(offset);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::seekp_beg_ passed short range");
+		}
+		auto offset = cast<number_data_int64_a<>>(*___it___);
+		return seekp_beg_(offset);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().seekp_beg__(___arguments___);
 	}
@@ -333,9 +430,17 @@ public:
 
 	inline any_a<> seekp_end__(range_a<> const& ___arguments___)
 	{
-//		return seekp_end_(offset);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::seekp_end_ passed short range");
+		}
+		auto offset = cast<number_data_int64_a<>>(*___it___);
+		return seekp_end_(offset);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().seekp_end__(___arguments___);
 	}
@@ -348,9 +453,17 @@ public:
 
 	inline any_a<> seekp_cur__(range_a<> const& ___arguments___)
 	{
-//		return seekp_cur_(offset);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::seekp_cur_ passed short range");
+		}
+		auto offset = cast<number_data_int64_a<>>(*___it___);
+		return seekp_cur_(offset);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().seekp_cur__(___arguments___);
 	}
@@ -363,9 +476,11 @@ public:
 
 	inline any_a<> flush__(range_a<> const& ___arguments___)
 	{
-//		return flush_();
-//	}
+/*
+		return flush_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().flush__(___arguments___);
 	}
@@ -378,9 +493,11 @@ public:
 
 	inline any_a<> good__(range_a<> const& ___arguments___) const
 	{
-//		return good_();
-//	}
+/*
+		return good_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().good__(___arguments___);
 	}
@@ -393,9 +510,11 @@ public:
 
 	inline any_a<> eof__(range_a<> const& ___arguments___) const
 	{
-//		return eof_();
-//	}
+/*
+		return eof_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().eof__(___arguments___);
 	}
@@ -408,9 +527,11 @@ public:
 
 	inline any_a<> fail__(range_a<> const& ___arguments___) const
 	{
-//		return fail_();
-//	}
+/*
+		return fail_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().fail__(___arguments___);
 	}
@@ -423,9 +544,11 @@ public:
 
 	inline any_a<> bad__(range_a<> const& ___arguments___) const
 	{
-//		return bad_();
-//	}
+/*
+		return bad_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().bad__(___arguments___);
 	}
@@ -438,9 +561,17 @@ public:
 
 	inline any_a<> set_good__(range_a<> const& ___arguments___)
 	{
-//		return set_good_(value);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::set_good_ passed short range");
+		}
+		auto value = cast<any_a<>>(*___it___);
+		return set_good_(value);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().set_good__(___arguments___);
 	}
@@ -453,9 +584,17 @@ public:
 
 	inline any_a<> set_eof__(range_a<> const& ___arguments___)
 	{
-//		return set_eof_(value);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::set_eof_ passed short range");
+		}
+		auto value = cast<any_a<>>(*___it___);
+		return set_eof_(value);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().set_eof__(___arguments___);
 	}
@@ -468,9 +607,17 @@ public:
 
 	inline any_a<> set_fail__(range_a<> const& ___arguments___)
 	{
-//		return set_fail_(value);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::set_fail_ passed short range");
+		}
+		auto value = cast<any_a<>>(*___it___);
+		return set_fail_(value);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().set_fail__(___arguments___);
 	}
@@ -483,9 +630,17 @@ public:
 
 	inline any_a<> set_bad__(range_a<> const& ___arguments___)
 	{
-//		return set_bad_(value);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("river_a::set_bad_ passed short range");
+		}
+		auto value = cast<any_a<>>(*___it___);
+		return set_bad_(value);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().set_bad__(___arguments___);
 	}
@@ -498,9 +653,11 @@ public:
 
 	inline any_a<> filename__(range_a<> const& ___arguments___) const
 	{
-//		return filename_();
-//	}
+/*
+		return filename_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().filename__(___arguments___);
 	}

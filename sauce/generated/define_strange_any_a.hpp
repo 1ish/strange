@@ -121,9 +121,11 @@ public:
 
 	inline any_a<> type__(range const& ___arguments___) const
 	{
-//		return type_();
-//	}
+/*
+		return type_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().type__(___arguments___);
 	}
@@ -133,9 +135,11 @@ public:
 
 	inline any_a<> shared__(range const& ___arguments___) const
 	{
-//		return shared_();
-//	}
+/*
+		return shared_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().shared__(___arguments___);
 	}
@@ -148,9 +152,11 @@ public:
 
 	inline any_a<> cat__(range const& ___arguments___) const
 	{
-//		return cat_();
-//	}
+/*
+		return cat_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().cat__(___arguments___);
 	}
@@ -160,9 +166,11 @@ public:
 
 	inline any_a<> cats__(range const& ___arguments___) const
 	{
-//		return cats_();
-//	}
+/*
+		return cats_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().cats__(___arguments___);
 	}
@@ -172,9 +180,11 @@ public:
 
 	inline any_a<> kind__(range const& ___arguments___) const
 	{
-//		return kind_();
-//	}
+/*
+		return kind_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().kind__(___arguments___);
 	}
@@ -184,9 +194,11 @@ public:
 
 	inline any_a<> kinds__(range const& ___arguments___) const
 	{
-//		return kinds_();
-//	}
+/*
+		return kinds_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().kinds__(___arguments___);
 	}
@@ -196,9 +208,11 @@ public:
 
 	inline any_a<> operations__(range const& ___arguments___) const
 	{
-//		return operations_();
-//	}
+/*
+		return operations_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().operations__(___arguments___);
 	}
@@ -208,10 +222,17 @@ public:
 
 	inline any_a<> visit__(range const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return visit_(arguments);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("any_a::visit_ passed short range");
+		}
+		auto arguments = cast_dup< inventory>(const_cast<any_a<>&>(*___it___));
+		return visit_(arguments);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().visit__(___arguments___);
 	}
@@ -227,9 +248,11 @@ public:
 
 	inline any_a<> identity__(range const& ___arguments___) const
 	{
-//		return identity_();
-//	}
+/*
+		return identity_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().identity__(___arguments___);
 	}
@@ -242,10 +265,17 @@ public:
 
 	inline any_a<> identical__(range const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return identical_(thing);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("any_a::identical_ passed short range");
+		}
+		auto thing = cast<any_a<>>(*___it___);
+		return identical_(thing);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().identical__(___arguments___);
 	}
@@ -258,9 +288,11 @@ public:
 
 	inline any_a<> nothing__(range const& ___arguments___) const
 	{
-//		return nothing_();
-//	}
+/*
+		return nothing_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().nothing__(___arguments___);
 	}
@@ -273,9 +305,11 @@ public:
 
 	inline any_a<> something__(range const& ___arguments___) const
 	{
-//		return something_();
-//	}
+/*
+		return something_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().something__(___arguments___);
 	}
@@ -288,10 +322,17 @@ public:
 
 	inline any_a<> same__(range const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return same_(thing);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("any_a::same_ passed short range");
+		}
+		auto thing = cast<any_a<>>(*___it___);
+		return same_(thing);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().same__(___arguments___);
 	}
@@ -304,10 +345,17 @@ public:
 
 	inline any_a<> different__(range const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return different_(thing);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("any_a::different_ passed short range");
+		}
+		auto thing = cast<any_a<>>(*___it___);
+		return different_(thing);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().different__(___arguments___);
 	}
@@ -320,9 +368,11 @@ public:
 
 	inline any_a<> hash__(range const& ___arguments___) const
 	{
-//		return hash_();
-//	}
+/*
+		return hash_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().hash__(___arguments___);
 	}

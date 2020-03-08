@@ -84,9 +84,11 @@ public:
 
 	inline any_a<> recreate__(range_a<> const& ___arguments___) const
 	{
-//		return recreate_();
-//	}
+/*
+		return recreate_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().recreate__(___arguments___);
 	}
@@ -99,9 +101,11 @@ public:
 
 	inline any_a<> literal__(range_a<> const& ___arguments___) const
 	{
-//		return literal_();
-//	}
+/*
+		return literal_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().literal__(___arguments___);
 	}
@@ -114,9 +118,11 @@ public:
 
 	inline any_a<> evaluate__(range_a<> const& ___arguments___) const
 	{
-//		return evaluate_();
-//	}
+/*
+		return evaluate_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().evaluate__(___arguments___);
 	}
@@ -126,9 +132,11 @@ public:
 
 	inline any_a<> token__(range_a<> const& ___arguments___) const
 	{
-//		return token_();
-//	}
+/*
+		return token_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().token__(___arguments___);
 	}
@@ -138,9 +146,11 @@ public:
 
 	inline any_a<> terms__(range_a<> const& ___arguments___) const
 	{
-//		return terms_();
-//	}
+/*
+		return terms_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().terms__(___arguments___);
 	}
@@ -150,10 +160,27 @@ public:
 
 	inline any_a<> generate__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return generate_(version, indent, river);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("expression_a::generate_ passed short range");
+		}
+		auto version = cast<number_data_int64_a<>>(*___it___);
+		if (++___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("expression_a::generate_ passed short range");
+		}
+		auto indent = cast<number_data_int64_a<>>(*___it___);
+		if (++___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("expression_a::generate_ passed short range");
+		}
+		auto river = cast_dup<river_a<>>(const_cast<any_a<>&>(*___it___));
+		return generate_(version, indent, river);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().generate__(___arguments___);
 	}
@@ -166,10 +193,42 @@ public:
 
 	inline any_a<> generate_cpp__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return generate_cpp_(version, indent, river, declare, define, type);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("expression_a::generate_cpp_ passed short range");
+		}
+		auto version = cast<number_data_int64_a<>>(*___it___);
+		if (++___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("expression_a::generate_cpp_ passed short range");
+		}
+		auto indent = cast<number_data_int64_a<>>(*___it___);
+		if (++___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("expression_a::generate_cpp_ passed short range");
+		}
+		auto river = cast_dup<river_a<>>(const_cast<any_a<>&>(*___it___));
+		if (++___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("expression_a::generate_cpp_ passed short range");
+		}
+		auto declare = cast<any_a<>>(*___it___);
+		if (++___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("expression_a::generate_cpp_ passed short range");
+		}
+		auto define = cast<any_a<>>(*___it___);
+		if (++___it___ == ___arguments___.cend_())
+		{
+			return generate_cpp_(version, indent, river, declare, define);
+		}
+		auto type = cast<any_a<>>(*___it___);
+		return generate_cpp_(version, indent, river, declare, define, type);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().generate_cpp__(___arguments___);
 	}

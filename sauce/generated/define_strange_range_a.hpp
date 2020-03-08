@@ -84,9 +84,11 @@ public:
 
 	inline any_a<> cbegin__(range_a<> const& ___arguments___) const
 	{
-//		return cbegin_();
-//	}
+/*
+		return cbegin_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().cbegin__(___arguments___);
 	}
@@ -96,9 +98,11 @@ public:
 
 	inline any_a<> cend__(range_a<> const& ___arguments___) const
 	{
-//		return cend_();
-//	}
+/*
+		return cend_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().cend__(___arguments___);
 	}

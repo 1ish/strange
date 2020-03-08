@@ -99,9 +99,11 @@ public:
 
 	inline any_a<> begin__(range_a<> const& ___arguments___)
 	{
-//		return begin_();
-//	}
+/*
+		return begin_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().begin__(___arguments___);
 	}
@@ -111,9 +113,11 @@ public:
 
 	inline any_a<> end__(range_a<> const& ___arguments___)
 	{
-//		return end_();
-//	}
+/*
+		return end_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().end__(___arguments___);
 	}

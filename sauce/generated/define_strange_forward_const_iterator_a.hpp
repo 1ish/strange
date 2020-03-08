@@ -84,9 +84,11 @@ public:
 
 	inline any_a<> get__(range_a<> const& ___arguments___) const
 	{
-//		return get_();
-//	}
+/*
+		return get_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().get__(___arguments___);
 	}
@@ -102,9 +104,11 @@ public:
 
 	inline any_a<> increment__(range_a<> const& ___arguments___)
 	{
-//		return increment_();
-//	}
+/*
+		return increment_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().increment__(___arguments___);
 	}

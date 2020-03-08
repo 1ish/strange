@@ -84,9 +84,11 @@ public:
 
 	inline any_a<> increment__(range_a<> const& ___arguments___)
 	{
-//		return increment_();
-//	}
+/*
+		return increment_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().increment__(___arguments___);
 	}
@@ -96,9 +98,11 @@ public:
 
 	inline any_a<> decrement__(range_a<> const& ___arguments___)
 	{
-//		return decrement_();
-//	}
+/*
+		return decrement_();
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().decrement__(___arguments___);
 	}
@@ -108,9 +112,17 @@ public:
 
 	inline any_a<> self_assign__(range_a<> const& ___arguments___)
 	{
-//		return self_assign_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::self_assign_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return self_assign_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().self_assign__(___arguments___);
 	}
@@ -120,9 +132,17 @@ public:
 
 	inline any_a<> self_add__(range_a<> const& ___arguments___)
 	{
-//		return self_add_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::self_add_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return self_add_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().self_add__(___arguments___);
 	}
@@ -132,10 +152,17 @@ public:
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return add_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::add_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return add_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().add__(___arguments___);
 	}
@@ -148,9 +175,17 @@ public:
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___)
 	{
-//		return self_subtract_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::self_subtract_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return self_subtract_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().self_subtract__(___arguments___);
 	}
@@ -160,10 +195,17 @@ public:
 
 	inline any_a<> subtract__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return subtract_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::subtract_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return subtract_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().subtract__(___arguments___);
 	}
@@ -176,9 +218,17 @@ public:
 
 	inline any_a<> self_multiply__(range_a<> const& ___arguments___)
 	{
-//		return self_multiply_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::self_multiply_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return self_multiply_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().self_multiply__(___arguments___);
 	}
@@ -188,10 +238,17 @@ public:
 
 	inline any_a<> multiply__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return multiply_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::multiply_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return multiply_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().multiply__(___arguments___);
 	}
@@ -204,9 +261,17 @@ public:
 
 	inline any_a<> self_divide__(range_a<> const& ___arguments___)
 	{
-//		return self_divide_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::self_divide_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return self_divide_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().self_divide__(___arguments___);
 	}
@@ -216,10 +281,17 @@ public:
 
 	inline any_a<> divide__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return divide_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::divide_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return divide_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().divide__(___arguments___);
 	}
@@ -232,9 +304,17 @@ public:
 
 	inline any_a<> self_modulo__(range_a<> const& ___arguments___)
 	{
-//		return self_modulo_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::self_modulo_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return self_modulo_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().self_modulo__(___arguments___);
 	}
@@ -244,10 +324,17 @@ public:
 
 	inline any_a<> modulo__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return modulo_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::modulo_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return modulo_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().modulo__(___arguments___);
 	}
@@ -260,9 +347,11 @@ public:
 
 	inline any_a<> to_int_64__(range_a<> const& ___arguments___) const
 	{
-//		return to_int_64_();
-//	}
+/*
+		return to_int_64_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().to_int_64__(___arguments___);
 	}
@@ -275,9 +364,17 @@ public:
 
 	inline any_a<> from_int_64__(range_a<> const& ___arguments___)
 	{
-//		return from_int_64_(int_64);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::from_int_64_ passed short range");
+		}
+		auto int_64 = cast< number_data_int64>(*___it___);
+		return from_int_64_(int_64);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().from_int_64__(___arguments___);
 	}
@@ -290,9 +387,11 @@ public:
 
 	inline any_a<> to_uint_64__(range_a<> const& ___arguments___) const
 	{
-//		return to_uint_64_();
-//	}
+/*
+		return to_uint_64_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().to_uint_64__(___arguments___);
 	}
@@ -305,9 +404,17 @@ public:
 
 	inline any_a<> from_uint_64__(range_a<> const& ___arguments___)
 	{
-//		return from_uint_64_(uint_64);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::from_uint_64_ passed short range");
+		}
+		auto uint_64 = cast< number_data_uint64>(*___it___);
+		return from_uint_64_(uint_64);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().from_uint_64__(___arguments___);
 	}
@@ -320,9 +427,11 @@ public:
 
 	inline any_a<> to_float_64__(range_a<> const& ___arguments___) const
 	{
-//		return to_float_64_();
-//	}
+/*
+		return to_float_64_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().to_float_64__(___arguments___);
 	}
@@ -335,9 +444,17 @@ public:
 
 	inline any_a<> from_float_64__(range_a<> const& ___arguments___)
 	{
-//		return from_float_64_(float_64);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::from_float_64_ passed short range");
+		}
+		auto float_64 = cast< number_data_double>(*___it___);
+		return from_float_64_(float_64);
+	}
 
+*/
 		assert(___handle___);
 		return ___write___().from_float_64__(___arguments___);
 	}
@@ -350,10 +467,17 @@ public:
 
 	inline any_a<> less_than__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return less_than_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::less_than_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return less_than_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().less_than__(___arguments___);
 	}
@@ -366,10 +490,17 @@ public:
 
 	inline any_a<> greater_than__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return greater_than_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::greater_than_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return greater_than_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().greater_than__(___arguments___);
 	}
@@ -382,10 +513,17 @@ public:
 
 	inline any_a<> less_or_equal__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return less_or_equal_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::less_or_equal_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return less_or_equal_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().less_or_equal__(___arguments___);
 	}
@@ -398,10 +536,17 @@ public:
 
 	inline any_a<> greater_or_equal__(range_a<> const& ___arguments___) const
 	{
-//		forward_const_iterator_a<> it = ___arguments___.cbegin_();
-//		return greater_or_equal_(number);
-//	}
+/*
+		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+		if (___it___ == ___arguments___.cend_())
+		{
+			throw throw_dis("number_a::greater_or_equal_ passed short range");
+		}
+		auto number = cast<number_a<>>(*___it___);
+		return greater_or_equal_(number);
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().greater_or_equal__(___arguments___);
 	}
@@ -414,9 +559,11 @@ public:
 
 	inline any_a<> byte_size__(range_a<> const& ___arguments___) const
 	{
-//		return byte_size_();
-//	}
+/*
+		return byte_size_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().byte_size__(___arguments___);
 	}
@@ -429,9 +576,11 @@ public:
 
 	inline any_a<> is_int__(range_a<> const& ___arguments___) const
 	{
-//		return is_int_();
-//	}
+/*
+		return is_int_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().is_int__(___arguments___);
 	}
@@ -444,9 +593,11 @@ public:
 
 	inline any_a<> is_signed__(range_a<> const& ___arguments___) const
 	{
-//		return is_signed_();
-//	}
+/*
+		return is_signed_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().is_signed__(___arguments___);
 	}
@@ -459,9 +610,11 @@ public:
 
 	inline any_a<> is_nan__(range_a<> const& ___arguments___) const
 	{
-//		return is_nan_();
-//	}
+/*
+		return is_nan_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().is_nan__(___arguments___);
 	}
@@ -474,9 +627,11 @@ public:
 
 	inline any_a<> is_inf__(range_a<> const& ___arguments___) const
 	{
-//		return is_inf_();
-//	}
+/*
+		return is_inf_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().is_inf__(___arguments___);
 	}
@@ -489,9 +644,11 @@ public:
 
 	inline any_a<> is_finite__(range_a<> const& ___arguments___) const
 	{
-//		return is_finite_();
-//	}
+/*
+		return is_finite_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().is_finite__(___arguments___);
 	}
@@ -504,9 +661,11 @@ public:
 
 	inline any_a<> is_normal__(range_a<> const& ___arguments___) const
 	{
-//		return is_normal_();
-//	}
+/*
+		return is_normal_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().is_normal__(___arguments___);
 	}
@@ -519,9 +678,11 @@ public:
 
 	inline any_a<> little_endian__(range_a<> const& ___arguments___) const
 	{
-//		return little_endian_();
-//	}
+/*
+		return little_endian_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().little_endian__(___arguments___);
 	}

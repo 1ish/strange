@@ -815,32 +815,29 @@ protected:
 		river.write_string(
 			"\tinline any_a<> " + name + "_(range" +
 				(root ? "" : "_a<>") + " const& ___arguments___)" + constness + "\n"
-			"\t{\n");
+			"\t{\n"
+			"/*\n");
 		if (extraction)
 		{
 			auto const& exp = static_cast<expression_extraction_t<> const&>(expression.extract_thing());
-			exp.abstraction_arguments(version, river);
+			exp.abstraction_arguments(class_name, name, version, river);
 		}
 		else
 		{
 			auto const& exp = static_cast<expression_mutation_t<> const&>(expression.extract_thing());
-			exp.abstraction_arguments(version, river);
+			exp.abstraction_arguments(class_name, name, version, river);
 		}
 		river.write_string(
-			"//\t\treturn " + name + arguments + ";\n"
-			"//\t}\n\n");
+			"\t}\n\n"
+			"*/\n");
+
 		river.write_string(
 			"\t\tassert(___handle___);\n"
 			"\t\treturn " +
 				std::string(extraction ? "___read___()." : "___write___().") +
 				name + "_(___arguments___);\n"
 			"\t}\n\n");
-/*
-				(root ? "" : "_a<>") + " const& arguments)" + constness + "\n"
-			"\t{ assert(___handle___); return " +
-				(extraction ? "___read___()." : "___write___().") +
-				name + "_(arguments); }\n\n");
-*/
+
 		river.write_string(
 			"\tinline " + result + " " + name + parameters + constness + "\n"
 			"\t{ assert(___handle___); return " +

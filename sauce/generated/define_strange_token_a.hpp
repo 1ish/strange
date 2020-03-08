@@ -84,9 +84,11 @@ public:
 
 	inline any_a<> filename__(range_a<> const& ___arguments___) const
 	{
-//		return filename_();
-//	}
+/*
+		return filename_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().filename__(___arguments___);
 	}
@@ -99,9 +101,11 @@ public:
 
 	inline any_a<> line__(range_a<> const& ___arguments___) const
 	{
-//		return line_();
-//	}
+/*
+		return line_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().line__(___arguments___);
 	}
@@ -114,9 +118,11 @@ public:
 
 	inline any_a<> position__(range_a<> const& ___arguments___) const
 	{
-//		return position_();
-//	}
+/*
+		return position_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().position__(___arguments___);
 	}
@@ -129,9 +135,11 @@ public:
 
 	inline any_a<> tag__(range_a<> const& ___arguments___) const
 	{
-//		return tag_();
-//	}
+/*
+		return tag_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().tag__(___arguments___);
 	}
@@ -144,9 +152,11 @@ public:
 
 	inline any_a<> symbol__(range_a<> const& ___arguments___) const
 	{
-//		return symbol_();
-//	}
+/*
+		return symbol_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().symbol__(___arguments___);
 	}
@@ -159,9 +169,11 @@ public:
 
 	inline any_a<> literal__(range_a<> const& ___arguments___) const
 	{
-//		return literal_();
-//	}
+/*
+		return literal_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().literal__(___arguments___);
 	}
@@ -171,9 +183,11 @@ public:
 
 	inline any_a<> precedence__(range_a<> const& ___arguments___) const
 	{
-//		return precedence_();
-//	}
+/*
+		return precedence_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().precedence__(___arguments___);
 	}
@@ -186,9 +200,11 @@ public:
 
 	inline any_a<> report__(range_a<> const& ___arguments___) const
 	{
-//		return report_();
-//	}
+/*
+		return report_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().report__(___arguments___);
 	}

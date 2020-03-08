@@ -84,9 +84,11 @@ public:
 
 	inline any_a<> pure__(range_a<> const& ___arguments___) const
 	{
-//		return pure_();
-//	}
+/*
+		return pure_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().pure__(___arguments___);
 	}
@@ -105,9 +107,11 @@ public:
 
 	inline any_a<> names__(range_a<> const& ___arguments___) const
 	{
-//		return names_();
-//	}
+/*
+		return names_();
+	}
 
+*/
 		assert(___handle___);
 		return ___read___().names__(___arguments___);
 	}
