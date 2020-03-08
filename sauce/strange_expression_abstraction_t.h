@@ -174,7 +174,7 @@ public:
 	{
 		if (declare || define)
 		{
-			_declare_or_define_(version, indent, river, declare, define);
+			_declare_and_define_(version, indent, river, declare, define);
 			return;
 		}
 		if (type)
@@ -234,7 +234,7 @@ protected:
 		, _parent_expressions{ parent_expressions }
 	{}
 
-	inline void _declare_or_define_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _declare_and_define_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
 		river.write_string("\n");
 		flock_a<> split_scope = _split_scope_();
@@ -251,36 +251,36 @@ protected:
 		if (!root)
 		{
 			base_name = _class_base_name_(version);
-			if (define)
+			if (declare && define)
 			{
-				_declare_or_define_template_(version, indent, river, true, false);
+				_declare_and_define_template_(version, indent, river, true, false);
 				dynamic_name = class_name;
 				dynamic_name[dynamic_name.length() - 1] = 'd';
 				river.write_string(
 					"class " + dynamic_name + ";\n\n");
-				_declare_or_define_template_(version, indent, river, true, false);
+				_declare_and_define_template_(version, indent, river, true, false);
 				river.write_string(
 					"inline " + dynamic_name);
-				_declare_or_define_template_(version, indent, river, false, false);
+				_declare_and_define_template_(version, indent, river, false, false);
 				river.write_string(" ___" + dynamic_name + "ynamic___(any_a<> const& thing); \n\n");
 			}
 		}
-		_declare_or_define_template_(version, indent, river, declare, define);
-		_declare_or_define_class_(root, class_name, base_name, version, indent, river, declare, define);
-		if (define)
+		_declare_and_define_template_(version, indent, river, declare, define);
+		_declare_and_define_class_(root, class_name, base_name, version, indent, river, declare, define);
+		if (declare && define)
 		{
 			_define_class_share_(class_name, version, river);
 			if (!root)
 			{
 				_define_class_dynamic_(class_name, base_name, version, river);
-				_declare_or_define_template_(version, indent, river, false, true);
+				_declare_and_define_template_(version, indent, river, true, true);
 				river.write_string(
 					"inline " + dynamic_name);
-				_declare_or_define_template_(version, indent, river, false, false);
+				_declare_and_define_template_(version, indent, river, false, false);
 				river.write_string(" ___" + dynamic_name + "ynamic___(any_a<> const& thing)\n"
 					"{\n"
 					"\treturn " + dynamic_name);
-				_declare_or_define_template_(version, 0, river, false, false);
+				_declare_and_define_template_(version, 0, river, false, false);
 				river.write_string("{ thing };\n"
 					"}\n\n");
 			}
@@ -331,9 +331,9 @@ protected:
 		}
 	}
 
-	inline void _declare_or_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _declare_and_define_template_(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
-		if (declare)
+		if (declare && !define)
 		{
 			river.write_string("template <");
 			if (_dimension_names.empty())
@@ -385,7 +385,7 @@ protected:
 			}
 			river.write_string(">\n");
 		}
-		else if (define)
+		else if (declare && define)
 		{
 			river.write_string("template <");
 			if (_dimension_names.empty())
@@ -410,7 +410,7 @@ protected:
 			}
 			river.write_string(">\n");
 		}
-		else
+		else if (!declare && !define)
 		{
 			river.write_string("<");
 			if (_dimension_names.empty())
@@ -437,13 +437,13 @@ protected:
 		}
 	}
 
-	inline void _declare_or_define_class_(bool root, std::string const& class_name, std::string const& base_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
+	inline void _declare_and_define_class_(bool root, std::string const& class_name, std::string const& base_name, int64_t version, int64_t indent, river_a<>& river, bool declare, bool define) const
 	{
-		if (declare)
+		if (declare && !define)
 		{
 			river.write_string("class " + class_name + ";\n\n");
 		}
-		else if (define)
+		else if (declare && define)
 		{
 			_define_class_(root, class_name, base_name, version, indent, river, declare, define);
 		}
@@ -451,7 +451,7 @@ protected:
 
 	inline void _define_class_dynamic_(std::string class_name, std::string base_name, int64_t version, river_a<>& river) const
 	{
-		_declare_or_define_template_(version, 0, river, false, true);
+		_declare_and_define_template_(version, 0, river, true, true);
 		class_name[class_name.length() - 1] = 'd';
 		if (base_name != "any_a")
 		{
@@ -758,7 +758,7 @@ protected:
 		bool const template_result = result == class_name.substr(0, class_name.length() - 1) + "a";
 		if (template_result)
 		{
-			_declare_or_define_template_(version, 0, river, false, false);
+			_declare_and_define_template_(version, 0, river, false, false);
 		}
 		river.write_string(" " + name + parameters + constness + "\n"
 			"\t{\n"
@@ -771,7 +771,7 @@ protected:
 			"\t\treturn cast<" + result);
 		if (template_result)
 		{
-			_declare_or_define_template_(version, 0, river, false, false);
+			_declare_and_define_template_(version, 0, river, false, false);
 		}
 		river.write_string(">(variadic_operate(op, " +
 			(extraction ? "*const_cast<" + class_name + "*>(this)" : std::string("*this")) +
@@ -791,7 +791,7 @@ protected:
 			"\tinline " + result);
 		if (result == class_name.substr(0, class_name.length() - 1) + "a")
 		{
-			_declare_or_define_template_(version, 0, river, false, false);
+			_declare_and_define_template_(version, 0, river, false, false);
 		}
 		river.write_string(" " + name + parameters + constness + "\n"
 			"\t" + dynamic + "\n\n");
@@ -1391,7 +1391,7 @@ protected:
 				"\t\t\treturn " + class_name + "{ thing.___handle___ };\n"
 				"\t\t}\n"
 				"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
-			_declare_or_define_template_(version, 0, river, false, false);
+			_declare_and_define_template_(version, 0, river, false, false);
 			river.write_string("{ thing } };\n"
 				"\t}\n\n");
 
@@ -1404,7 +1404,7 @@ protected:
 				"\t\t\treturn " + class_name + "(thing.___handle___, ___reference_tag___{});\n"
 				"\t\t}\n"
 				"\t\treturn " + class_name + "{ " + class_name.substr(0, class_name.length() - 1) + "d");
-			_declare_or_define_template_(version, 0, river, false, false);
+			_declare_and_define_template_(version, 0, river, false, false);
 			river.write_string("(thing, ___reference_tag___{}) };\n"
 				"\t}\n\n");
 		}
@@ -1659,14 +1659,14 @@ protected:
 
 	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const
 	{
-		_declare_or_define_template_(version, 0, river, false, true);
+		_declare_and_define_template_(version, 0, river, true, true);
 		river.write_string("bool const " + class_name);
-		_declare_or_define_template_(version, 0, river, false, false);
+		_declare_and_define_template_(version, 0, river, false, false);
 		river.write_string("::___share___ = []()\n"
 			"{\n"
 			"\tauto& shared_shoal = shared();\n"
 			"\treflection<" + class_name);
-		_declare_or_define_template_(version, 0, river, false, false);
+		_declare_and_define_template_(version, 0, river, false, false);
 		river.write_string(">::share(shared_shoal);\n"
 			"\treturn shared_shoal;\n"
 			"}();\n\n");
