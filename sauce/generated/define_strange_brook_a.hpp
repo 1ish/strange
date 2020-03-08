@@ -336,14 +336,6 @@ private:
 }; // class brook_a
 
 template <typename _1_>
-bool const brook_a<_1_>::___share___ = []()
-{
-	auto& shared_shoal = shared();
-	reflection<brook_a<_1_>>::share(shared_shoal);
-	return shared_shoal;
-}();
-
-template <typename _1_>
 class brook_d : public inventory_d<>
 {
 public:

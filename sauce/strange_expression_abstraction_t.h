@@ -267,23 +267,23 @@ protected:
 		}
 		_declare_and_define_template_(version, indent, river, declare, define);
 		_declare_and_define_class_(root, class_name, base_name, version, indent, river, declare, define);
-		if (declare && define)
+		if (declare && define && !root)
+		{
+			_define_class_dynamic_(class_name, base_name, version, river);
+			_declare_and_define_template_(version, indent, river, true, true);
+			river.write_string(
+				"inline " + dynamic_name);
+			_declare_and_define_template_(version, indent, river, false, false);
+			river.write_string(" ___" + dynamic_name + "ynamic___(any_a<> const& thing)\n"
+				"{\n"
+				"\treturn " + dynamic_name);
+			_declare_and_define_template_(version, 0, river, false, false);
+			river.write_string("{ thing };\n"
+				"}\n\n");
+		}
+		else if (!declare && define)
 		{
 			_define_class_share_(class_name, version, river);
-			if (!root)
-			{
-				_define_class_dynamic_(class_name, base_name, version, river);
-				_declare_and_define_template_(version, indent, river, true, true);
-				river.write_string(
-					"inline " + dynamic_name);
-				_declare_and_define_template_(version, indent, river, false, false);
-				river.write_string(" ___" + dynamic_name + "ynamic___(any_a<> const& thing)\n"
-					"{\n"
-					"\treturn " + dynamic_name);
-				_declare_and_define_template_(version, 0, river, false, false);
-				river.write_string("{ thing };\n"
-					"}\n\n");
-			}
 		}
 		_namespace_close_(split_scope, river);
 	}

@@ -336,14 +336,6 @@ private:
 }; // class lake_a
 
 template <typename _1_>
-bool const lake_a<_1_>::___share___ = []()
-{
-	auto& shared_shoal = shared();
-	reflection<lake_a<_1_>>::share(shared_shoal);
-	return shared_shoal;
-}();
-
-template <typename _1_>
 class lake_d : public inventory_d<>
 {
 public:

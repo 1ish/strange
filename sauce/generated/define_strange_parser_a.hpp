@@ -351,14 +351,6 @@ private:
 }; // class parser_a
 
 template <typename _1_>
-bool const parser_a<_1_>::___share___ = []()
-{
-	auto& shared_shoal = shared();
-	reflection<parser_a<_1_>>::share(shared_shoal);
-	return shared_shoal;
-}();
-
-template <typename _1_>
 class parser_d : public any_a<>
 {
 public:

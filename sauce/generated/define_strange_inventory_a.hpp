@@ -403,14 +403,6 @@ private:
 }; // class inventory_a
 
 template <typename _1_>
-bool const inventory_a<_1_>::___share___ = []()
-{
-	auto& shared_shoal = shared();
-	reflection<inventory_a<_1_>>::share(shared_shoal);
-	return shared_shoal;
-}();
-
-template <typename _1_>
 class inventory_d : public collection_d<>
 {
 public:
