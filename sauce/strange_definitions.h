@@ -71,13 +71,13 @@ inline ___TTT___ fast(any_a<> const& value) noexcept
 }
 
 template <typename ___TTT___>
-inline ___TTT___ fast_ref(any_a<>& value) noexcept
+inline ___TTT___ fast_ref(any_a<> const& value) noexcept
 {
 	return ___TTT___(value.___handle___, typename ___TTT___::___reference_tag___{});
 }
 
 template <typename ___TTT___>
-inline ___TTT___ fast_dup(any_a<>& value) noexcept
+inline ___TTT___ fast_dup(any_a<> const& value) noexcept
 {
 	if (value.is_ref())
 	{
@@ -93,17 +93,17 @@ inline ___TTT___ cast(any_a<> const& value) noexcept
 }
 
 template <typename ___TTT___>
-inline ___TTT___ cast_ref(any_a<>& value) noexcept
+inline ___TTT___ cast_ref(any_a<> const& value) noexcept
 {
-	return ___TTT___::___cast_ref___(value);
+	return ___TTT___::___cast_ref___(const_cast<any_a<>&>(value));
 }
 
 template <typename ___TTT___>
-inline ___TTT___ cast_dup(any_a<>& value) noexcept
+inline ___TTT___ cast_dup(any_a<> const& value) noexcept
 {
 	if (value.is_ref())
 	{
-		return ___TTT___::___cast_ref___(value);
+		return ___TTT___::___cast_ref___(const_cast<any_a<>&>(value));
 	}
 	return ___TTT___::___cast___(value);
 }

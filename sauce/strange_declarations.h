@@ -540,19 +540,19 @@ template <typename ___TTT___ = any_a<>>
 inline ___TTT___ fast(any_a<> const& value) noexcept;
 
 template <typename ___TTT___ = any_a<>>
-inline ___TTT___ fast_ref(any_a<>& value) noexcept;
+inline ___TTT___ fast_ref(any_a<> const& value) noexcept;
 
 template <typename ___TTT___ = any_a<>>
-inline ___TTT___ fast_dup(any_a<>& value) noexcept;
+inline ___TTT___ fast_dup(any_a<> const& value) noexcept;
 
 template <typename ___TTT___ = any_a<>>
 inline ___TTT___ cast(any_a<> const& value) noexcept;
 
 template <typename ___TTT___ = any_a<>>
-inline ___TTT___ cast_ref(any_a<>& value) noexcept;
+inline ___TTT___ cast_ref(any_a<> const& value) noexcept;
 
 template <typename ___TTT___ = any_a<>>
-inline ___TTT___ cast_dup(any_a<>& value) noexcept;
+inline ___TTT___ cast_dup(any_a<> const& value) noexcept;
 }
 
 #endif
