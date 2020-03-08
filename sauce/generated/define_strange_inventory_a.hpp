@@ -505,7 +505,7 @@ public:
 		auto const op = operation("begin_");
 		if (!op)
 		{
-			throw throw_dis("dynamic inventory_d::begin_ passed non-existent member");
+			throw dis("dynamic inventory_d::begin_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -516,7 +516,7 @@ public:
 		auto const op = operation("begin_");
 		if (!op)
 		{
-			throw throw_dis("dynamic inventory_d::begin_ passed non-existent member");
+			throw dis("dynamic inventory_d::begin_ passed non-existent member");
 		}
 		return cast<random_access_iterator_a<>>(variadic_operate(op, *this));
 	}
@@ -527,7 +527,7 @@ public:
 		auto const op = operation("end_");
 		if (!op)
 		{
-			throw throw_dis("dynamic inventory_d::end_ passed non-existent member");
+			throw dis("dynamic inventory_d::end_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -538,7 +538,7 @@ public:
 		auto const op = operation("end_");
 		if (!op)
 		{
-			throw throw_dis("dynamic inventory_d::end_ passed non-existent member");
+			throw dis("dynamic inventory_d::end_ passed non-existent member");
 		}
 		return cast<random_access_iterator_a<>>(variadic_operate(op, *this));
 	}

@@ -116,7 +116,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::self_assign_ passed short range");
+			throw dis("number_a::self_assign_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return self_assign_(number);
@@ -136,7 +136,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::self_add_ passed short range");
+			throw dis("number_a::self_add_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return self_add_(number);
@@ -156,7 +156,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::add_ passed short range");
+			throw dis("number_a::add_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return add_(number);
@@ -179,7 +179,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::self_subtract_ passed short range");
+			throw dis("number_a::self_subtract_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return self_subtract_(number);
@@ -199,7 +199,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::subtract_ passed short range");
+			throw dis("number_a::subtract_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return subtract_(number);
@@ -222,7 +222,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::self_multiply_ passed short range");
+			throw dis("number_a::self_multiply_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return self_multiply_(number);
@@ -242,7 +242,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::multiply_ passed short range");
+			throw dis("number_a::multiply_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return multiply_(number);
@@ -265,7 +265,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::self_divide_ passed short range");
+			throw dis("number_a::self_divide_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return self_divide_(number);
@@ -285,7 +285,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::divide_ passed short range");
+			throw dis("number_a::divide_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return divide_(number);
@@ -308,7 +308,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::self_modulo_ passed short range");
+			throw dis("number_a::self_modulo_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return self_modulo_(number);
@@ -328,7 +328,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::modulo_ passed short range");
+			throw dis("number_a::modulo_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return modulo_(number);
@@ -368,7 +368,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::from_int_64_ passed short range");
+			throw dis("number_a::from_int_64_ passed short range");
 		}
 		auto int_64 = cast< number_data_int64>(*___it___);
 		return from_int_64_(int_64);
@@ -408,7 +408,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::from_uint_64_ passed short range");
+			throw dis("number_a::from_uint_64_ passed short range");
 		}
 		auto uint_64 = cast< number_data_uint64>(*___it___);
 		return from_uint_64_(uint_64);
@@ -448,7 +448,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::from_float_64_ passed short range");
+			throw dis("number_a::from_float_64_ passed short range");
 		}
 		auto float_64 = cast< number_data_double>(*___it___);
 		return from_float_64_(float_64);
@@ -471,7 +471,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::less_than_ passed short range");
+			throw dis("number_a::less_than_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return less_than_(number);
@@ -494,7 +494,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::greater_than_ passed short range");
+			throw dis("number_a::greater_than_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return greater_than_(number);
@@ -517,7 +517,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::less_or_equal_ passed short range");
+			throw dis("number_a::less_or_equal_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return less_or_equal_(number);
@@ -540,7 +540,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("number_a::greater_or_equal_ passed short range");
+			throw dis("number_a::greater_or_equal_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return greater_or_equal_(number);
@@ -1391,7 +1391,7 @@ public:
 		auto const op = operation("increment_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::increment_ passed non-existent member");
+			throw dis("dynamic number_d::increment_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1402,7 +1402,7 @@ public:
 		auto const op = operation("increment_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::increment_ passed non-existent member");
+			throw dis("dynamic number_d::increment_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this));
 	}
@@ -1413,7 +1413,7 @@ public:
 		auto const op = operation("decrement_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::decrement_ passed non-existent member");
+			throw dis("dynamic number_d::decrement_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1424,7 +1424,7 @@ public:
 		auto const op = operation("decrement_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::decrement_ passed non-existent member");
+			throw dis("dynamic number_d::decrement_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this));
 	}
@@ -1435,7 +1435,7 @@ public:
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_assign_ passed non-existent member");
+			throw dis("dynamic number_d::self_assign_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1446,7 +1446,7 @@ public:
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_assign_ passed non-existent member");
+			throw dis("dynamic number_d::self_assign_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -1457,7 +1457,7 @@ public:
 		auto const op = operation("self_add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_add_ passed non-existent member");
+			throw dis("dynamic number_d::self_add_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1468,7 +1468,7 @@ public:
 		auto const op = operation("self_add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_add_ passed non-existent member");
+			throw dis("dynamic number_d::self_add_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -1479,7 +1479,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::add_ passed non-existent member");
+			throw dis("dynamic number_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1490,7 +1490,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::add_ passed non-existent member");
+			throw dis("dynamic number_d::add_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -1504,7 +1504,7 @@ public:
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_subtract_ passed non-existent member");
+			throw dis("dynamic number_d::self_subtract_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1515,7 +1515,7 @@ public:
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_subtract_ passed non-existent member");
+			throw dis("dynamic number_d::self_subtract_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -1526,7 +1526,7 @@ public:
 		auto const op = operation("subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::subtract_ passed non-existent member");
+			throw dis("dynamic number_d::subtract_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1537,7 +1537,7 @@ public:
 		auto const op = operation("subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::subtract_ passed non-existent member");
+			throw dis("dynamic number_d::subtract_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -1551,7 +1551,7 @@ public:
 		auto const op = operation("self_multiply_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_multiply_ passed non-existent member");
+			throw dis("dynamic number_d::self_multiply_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1562,7 +1562,7 @@ public:
 		auto const op = operation("self_multiply_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_multiply_ passed non-existent member");
+			throw dis("dynamic number_d::self_multiply_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -1573,7 +1573,7 @@ public:
 		auto const op = operation("multiply_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::multiply_ passed non-existent member");
+			throw dis("dynamic number_d::multiply_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1584,7 +1584,7 @@ public:
 		auto const op = operation("multiply_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::multiply_ passed non-existent member");
+			throw dis("dynamic number_d::multiply_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -1598,7 +1598,7 @@ public:
 		auto const op = operation("self_divide_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_divide_ passed non-existent member");
+			throw dis("dynamic number_d::self_divide_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1609,7 +1609,7 @@ public:
 		auto const op = operation("self_divide_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_divide_ passed non-existent member");
+			throw dis("dynamic number_d::self_divide_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -1620,7 +1620,7 @@ public:
 		auto const op = operation("divide_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::divide_ passed non-existent member");
+			throw dis("dynamic number_d::divide_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1631,7 +1631,7 @@ public:
 		auto const op = operation("divide_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::divide_ passed non-existent member");
+			throw dis("dynamic number_d::divide_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -1645,7 +1645,7 @@ public:
 		auto const op = operation("self_modulo_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_modulo_ passed non-existent member");
+			throw dis("dynamic number_d::self_modulo_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1656,7 +1656,7 @@ public:
 		auto const op = operation("self_modulo_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::self_modulo_ passed non-existent member");
+			throw dis("dynamic number_d::self_modulo_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *this, number));
 	}
@@ -1667,7 +1667,7 @@ public:
 		auto const op = operation("modulo_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::modulo_ passed non-existent member");
+			throw dis("dynamic number_d::modulo_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1678,7 +1678,7 @@ public:
 		auto const op = operation("modulo_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::modulo_ passed non-existent member");
+			throw dis("dynamic number_d::modulo_ passed non-existent member");
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -1692,7 +1692,7 @@ public:
 		auto const op = operation("to_int_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::to_int_64_ passed non-existent member");
+			throw dis("dynamic number_d::to_int_64_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1703,7 +1703,7 @@ public:
 		auto const op = operation("to_int_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::to_int_64_ passed non-existent member");
+			throw dis("dynamic number_d::to_int_64_ passed non-existent member");
 		}
 		return cast<number_data_int64>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -1717,7 +1717,7 @@ public:
 		auto const op = operation("from_int_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::from_int_64_ passed non-existent member");
+			throw dis("dynamic number_d::from_int_64_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1728,7 +1728,7 @@ public:
 		auto const op = operation("from_int_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::from_int_64_ passed non-existent member");
+			throw dis("dynamic number_d::from_int_64_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, int_64));
 	}
@@ -1742,7 +1742,7 @@ public:
 		auto const op = operation("to_uint_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::to_uint_64_ passed non-existent member");
+			throw dis("dynamic number_d::to_uint_64_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1753,7 +1753,7 @@ public:
 		auto const op = operation("to_uint_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::to_uint_64_ passed non-existent member");
+			throw dis("dynamic number_d::to_uint_64_ passed non-existent member");
 		}
 		return cast<number_data_uint64>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -1767,7 +1767,7 @@ public:
 		auto const op = operation("from_uint_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::from_uint_64_ passed non-existent member");
+			throw dis("dynamic number_d::from_uint_64_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1778,7 +1778,7 @@ public:
 		auto const op = operation("from_uint_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::from_uint_64_ passed non-existent member");
+			throw dis("dynamic number_d::from_uint_64_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, uint_64));
 	}
@@ -1792,7 +1792,7 @@ public:
 		auto const op = operation("to_float_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::to_float_64_ passed non-existent member");
+			throw dis("dynamic number_d::to_float_64_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1803,7 +1803,7 @@ public:
 		auto const op = operation("to_float_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::to_float_64_ passed non-existent member");
+			throw dis("dynamic number_d::to_float_64_ passed non-existent member");
 		}
 		return cast<number_data_double>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -1817,7 +1817,7 @@ public:
 		auto const op = operation("from_float_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::from_float_64_ passed non-existent member");
+			throw dis("dynamic number_d::from_float_64_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1828,7 +1828,7 @@ public:
 		auto const op = operation("from_float_64_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::from_float_64_ passed non-existent member");
+			throw dis("dynamic number_d::from_float_64_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, float_64));
 	}
@@ -1842,7 +1842,7 @@ public:
 		auto const op = operation("less_than_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::less_than_ passed non-existent member");
+			throw dis("dynamic number_d::less_than_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1853,7 +1853,7 @@ public:
 		auto const op = operation("less_than_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::less_than_ passed non-existent member");
+			throw dis("dynamic number_d::less_than_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -1867,7 +1867,7 @@ public:
 		auto const op = operation("greater_than_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::greater_than_ passed non-existent member");
+			throw dis("dynamic number_d::greater_than_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1878,7 +1878,7 @@ public:
 		auto const op = operation("greater_than_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::greater_than_ passed non-existent member");
+			throw dis("dynamic number_d::greater_than_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -1892,7 +1892,7 @@ public:
 		auto const op = operation("less_or_equal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::less_or_equal_ passed non-existent member");
+			throw dis("dynamic number_d::less_or_equal_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1903,7 +1903,7 @@ public:
 		auto const op = operation("less_or_equal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::less_or_equal_ passed non-existent member");
+			throw dis("dynamic number_d::less_or_equal_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -1917,7 +1917,7 @@ public:
 		auto const op = operation("greater_or_equal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::greater_or_equal_ passed non-existent member");
+			throw dis("dynamic number_d::greater_or_equal_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1928,7 +1928,7 @@ public:
 		auto const op = operation("greater_or_equal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::greater_or_equal_ passed non-existent member");
+			throw dis("dynamic number_d::greater_or_equal_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
@@ -1942,7 +1942,7 @@ public:
 		auto const op = operation("byte_size_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::byte_size_ passed non-existent member");
+			throw dis("dynamic number_d::byte_size_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1953,7 +1953,7 @@ public:
 		auto const op = operation("byte_size_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::byte_size_ passed non-existent member");
+			throw dis("dynamic number_d::byte_size_ passed non-existent member");
 		}
 		return cast<number_data_int64>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -1967,7 +1967,7 @@ public:
 		auto const op = operation("is_int_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_int_ passed non-existent member");
+			throw dis("dynamic number_d::is_int_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -1978,7 +1978,7 @@ public:
 		auto const op = operation("is_int_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_int_ passed non-existent member");
+			throw dis("dynamic number_d::is_int_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -1992,7 +1992,7 @@ public:
 		auto const op = operation("is_signed_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_signed_ passed non-existent member");
+			throw dis("dynamic number_d::is_signed_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -2003,7 +2003,7 @@ public:
 		auto const op = operation("is_signed_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_signed_ passed non-existent member");
+			throw dis("dynamic number_d::is_signed_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -2017,7 +2017,7 @@ public:
 		auto const op = operation("is_nan_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_nan_ passed non-existent member");
+			throw dis("dynamic number_d::is_nan_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -2028,7 +2028,7 @@ public:
 		auto const op = operation("is_nan_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_nan_ passed non-existent member");
+			throw dis("dynamic number_d::is_nan_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -2042,7 +2042,7 @@ public:
 		auto const op = operation("is_inf_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_inf_ passed non-existent member");
+			throw dis("dynamic number_d::is_inf_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -2053,7 +2053,7 @@ public:
 		auto const op = operation("is_inf_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_inf_ passed non-existent member");
+			throw dis("dynamic number_d::is_inf_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -2067,7 +2067,7 @@ public:
 		auto const op = operation("is_finite_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_finite_ passed non-existent member");
+			throw dis("dynamic number_d::is_finite_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -2078,7 +2078,7 @@ public:
 		auto const op = operation("is_finite_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_finite_ passed non-existent member");
+			throw dis("dynamic number_d::is_finite_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -2092,7 +2092,7 @@ public:
 		auto const op = operation("is_normal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_normal_ passed non-existent member");
+			throw dis("dynamic number_d::is_normal_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -2103,7 +2103,7 @@ public:
 		auto const op = operation("is_normal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::is_normal_ passed non-existent member");
+			throw dis("dynamic number_d::is_normal_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}
@@ -2117,7 +2117,7 @@ public:
 		auto const op = operation("little_endian_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::little_endian_ passed non-existent member");
+			throw dis("dynamic number_d::little_endian_ passed non-existent member");
 		}
 		return op.operate(*const_cast<number_d*>(this), arguments);
 	}
@@ -2128,7 +2128,7 @@ public:
 		auto const op = operation("little_endian_");
 		if (!op)
 		{
-			throw throw_dis("dynamic number_d::little_endian_ passed non-existent member");
+			throw dis("dynamic number_d::little_endian_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this)));
 	}

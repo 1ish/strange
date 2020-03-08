@@ -32,6 +32,7 @@ namespace strange
 	inline kind_a<> kind_of<std::deque<any_a<>>::iterator>();
 }
 
+#include "generated/define_strange_misunderstanding_a.hpp"
 #include "generated/define_strange_forward_const_iterator_a.hpp"
 #include "generated/define_strange_forward_const_iterator_data_a.hpp"
 #include "generated/define_strange_forward_iterator_a.hpp"
@@ -46,7 +47,6 @@ namespace strange
 #include "generated/define_strange_random_access_iterator_data_a.hpp"
 #include "generated/define_strange_range_a.hpp"
 #include "generated/define_strange_range_of_a.hpp"
-#include "generated/define_strange_misunderstanding_a.hpp"
 #include "generated/define_strange_data_a.hpp"
 #include "generated/define_strange_number_a.hpp"
 #include "generated/define_strange_number_data_a.hpp"

@@ -88,7 +88,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::has_ passed short range");
+			throw dis("collection_a::has_ passed short range");
 		}
 		auto key = cast<any_a<>>(*___it___);
 		return has_(key);
@@ -111,7 +111,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::at_ passed short range");
+			throw dis("collection_a::at_ passed short range");
 		}
 		auto key = cast<any_a<>>(*___it___);
 		return at_(key);
@@ -131,7 +131,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::update_ passed short range");
+			throw dis("collection_a::update_ passed short range");
 		}
 		auto key = cast<any_a<>>(*___it___);
 		if (++___it___ == ___arguments___.cend_())
@@ -159,7 +159,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::insert_ passed short range");
+			throw dis("collection_a::insert_ passed short range");
 		}
 		auto key = cast<any_a<>>(*___it___);
 		if (++___it___ == ___arguments___.cend_())
@@ -187,7 +187,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::erase_ passed short range");
+			throw dis("collection_a::erase_ passed short range");
 		}
 		auto key = cast<any_a<>>(*___it___);
 		return erase_(key);
@@ -261,7 +261,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::push_front_ passed short range");
+			throw dis("collection_a::push_front_ passed short range");
 		}
 		auto thing = cast<any_a<>>(*___it___);
 		return push_front_(thing);
@@ -298,7 +298,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::push_back_ passed short range");
+			throw dis("collection_a::push_back_ passed short range");
 		}
 		auto thing = cast<any_a<>>(*___it___);
 		return push_back_(thing);
@@ -335,7 +335,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::self_assign_ passed short range");
+			throw dis("collection_a::self_assign_ passed short range");
 		}
 		auto range = cast<range_a<>>(*___it___);
 		return self_assign_(range);
@@ -355,7 +355,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::self_add_ passed short range");
+			throw dis("collection_a::self_add_ passed short range");
 		}
 		auto range = cast<range_a<>>(*___it___);
 		return self_add_(range);
@@ -375,7 +375,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::add_ passed short range");
+			throw dis("collection_a::add_ passed short range");
 		}
 		auto range = cast<range_a<>>(*___it___);
 		return add_(range);
@@ -398,7 +398,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::self_subtract_ passed short range");
+			throw dis("collection_a::self_subtract_ passed short range");
 		}
 		auto range = cast<range_a<>>(*___it___);
 		return self_subtract_(range);
@@ -418,7 +418,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("collection_a::subtract_ passed short range");
+			throw dis("collection_a::subtract_ passed short range");
 		}
 		auto range = cast<range_a<>>(*___it___);
 		return subtract_(range);
@@ -1005,7 +1005,7 @@ public:
 		auto const op = operation("has_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::has_ passed non-existent member");
+			throw dis("dynamic collection_d::has_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1016,7 +1016,7 @@ public:
 		auto const op = operation("has_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::has_ passed non-existent member");
+			throw dis("dynamic collection_d::has_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), key));
 	}
@@ -1030,7 +1030,7 @@ public:
 		auto const op = operation("at_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::at_ passed non-existent member");
+			throw dis("dynamic collection_d::at_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1041,7 +1041,7 @@ public:
 		auto const op = operation("at_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::at_ passed non-existent member");
+			throw dis("dynamic collection_d::at_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), key));
 	}
@@ -1052,7 +1052,7 @@ public:
 		auto const op = operation("update_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::update_ passed non-existent member");
+			throw dis("dynamic collection_d::update_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1063,7 +1063,7 @@ public:
 		auto const op = operation("update_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::update_ passed non-existent member");
+			throw dis("dynamic collection_d::update_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, key, value));
 	}
@@ -1077,7 +1077,7 @@ public:
 		auto const op = operation("insert_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::insert_ passed non-existent member");
+			throw dis("dynamic collection_d::insert_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1088,7 +1088,7 @@ public:
 		auto const op = operation("insert_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::insert_ passed non-existent member");
+			throw dis("dynamic collection_d::insert_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, key, value));
 	}
@@ -1102,7 +1102,7 @@ public:
 		auto const op = operation("erase_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::erase_ passed non-existent member");
+			throw dis("dynamic collection_d::erase_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1113,7 +1113,7 @@ public:
 		auto const op = operation("erase_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::erase_ passed non-existent member");
+			throw dis("dynamic collection_d::erase_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, key));
 	}
@@ -1127,7 +1127,7 @@ public:
 		auto const op = operation("clear_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::clear_ passed non-existent member");
+			throw dis("dynamic collection_d::clear_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1138,7 +1138,7 @@ public:
 		auto const op = operation("clear_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::clear_ passed non-existent member");
+			throw dis("dynamic collection_d::clear_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this));
 	}
@@ -1152,7 +1152,7 @@ public:
 		auto const op = operation("size_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::size_ passed non-existent member");
+			throw dis("dynamic collection_d::size_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1163,7 +1163,7 @@ public:
 		auto const op = operation("size_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::size_ passed non-existent member");
+			throw dis("dynamic collection_d::size_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
@@ -1177,7 +1177,7 @@ public:
 		auto const op = operation("empty_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::empty_ passed non-existent member");
+			throw dis("dynamic collection_d::empty_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1188,7 +1188,7 @@ public:
 		auto const op = operation("empty_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::empty_ passed non-existent member");
+			throw dis("dynamic collection_d::empty_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
@@ -1202,7 +1202,7 @@ public:
 		auto const op = operation("push_front_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::push_front_ passed non-existent member");
+			throw dis("dynamic collection_d::push_front_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1213,7 +1213,7 @@ public:
 		auto const op = operation("push_front_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::push_front_ passed non-existent member");
+			throw dis("dynamic collection_d::push_front_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this, thing));
 	}
@@ -1227,7 +1227,7 @@ public:
 		auto const op = operation("pop_front_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::pop_front_ passed non-existent member");
+			throw dis("dynamic collection_d::pop_front_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1238,7 +1238,7 @@ public:
 		auto const op = operation("pop_front_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::pop_front_ passed non-existent member");
+			throw dis("dynamic collection_d::pop_front_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -1249,7 +1249,7 @@ public:
 		auto const op = operation("push_back_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::push_back_ passed non-existent member");
+			throw dis("dynamic collection_d::push_back_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1260,7 +1260,7 @@ public:
 		auto const op = operation("push_back_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::push_back_ passed non-existent member");
+			throw dis("dynamic collection_d::push_back_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this, thing));
 	}
@@ -1274,7 +1274,7 @@ public:
 		auto const op = operation("pop_back_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::pop_back_ passed non-existent member");
+			throw dis("dynamic collection_d::pop_back_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1285,7 +1285,7 @@ public:
 		auto const op = operation("pop_back_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::pop_back_ passed non-existent member");
+			throw dis("dynamic collection_d::pop_back_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -1296,7 +1296,7 @@ public:
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::self_assign_ passed non-existent member");
+			throw dis("dynamic collection_d::self_assign_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1307,7 +1307,7 @@ public:
 		auto const op = operation("self_assign_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::self_assign_ passed non-existent member");
+			throw dis("dynamic collection_d::self_assign_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this, range));
 	}
@@ -1318,7 +1318,7 @@ public:
 		auto const op = operation("self_add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::self_add_ passed non-existent member");
+			throw dis("dynamic collection_d::self_add_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1329,7 +1329,7 @@ public:
 		auto const op = operation("self_add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::self_add_ passed non-existent member");
+			throw dis("dynamic collection_d::self_add_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this, range));
 	}
@@ -1340,7 +1340,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::add_ passed non-existent member");
+			throw dis("dynamic collection_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1351,7 +1351,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::add_ passed non-existent member");
+			throw dis("dynamic collection_d::add_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
@@ -1365,7 +1365,7 @@ public:
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::self_subtract_ passed non-existent member");
+			throw dis("dynamic collection_d::self_subtract_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1376,7 +1376,7 @@ public:
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::self_subtract_ passed non-existent member");
+			throw dis("dynamic collection_d::self_subtract_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *this, range));
 	}
@@ -1387,7 +1387,7 @@ public:
 		auto const op = operation("subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::subtract_ passed non-existent member");
+			throw dis("dynamic collection_d::subtract_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1398,7 +1398,7 @@ public:
 		auto const op = operation("subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::subtract_ passed non-existent member");
+			throw dis("dynamic collection_d::subtract_ passed non-existent member");
 		}
 		return cast<collection_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
@@ -1412,7 +1412,7 @@ public:
 		auto const op = operation("read_lock_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::read_lock_ passed non-existent member");
+			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1423,7 +1423,7 @@ public:
 		auto const op = operation("read_lock_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::read_lock_ passed non-existent member");
+			throw dis("dynamic collection_d::read_lock_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}
@@ -1434,7 +1434,7 @@ public:
 		auto const op = operation("write_lock_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::write_lock_ passed non-existent member");
+			throw dis("dynamic collection_d::write_lock_ passed non-existent member");
 		}
 		return op.operate(*const_cast<collection_d*>(this), arguments);
 	}
@@ -1445,7 +1445,7 @@ public:
 		auto const op = operation("write_lock_");
 		if (!op)
 		{
-			throw throw_dis("dynamic collection_d::write_lock_ passed non-existent member");
+			throw dis("dynamic collection_d::write_lock_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<collection_d*>(this)));
 	}

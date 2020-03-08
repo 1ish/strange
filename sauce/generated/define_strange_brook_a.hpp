@@ -418,10 +418,10 @@ public:
 	}
 
 	inline std :: deque < _1_ > const & extract_deque() const
-	{ throw throw_dis("dynamic brook_d::extract_deque() not available"); }
+	{ throw dis("dynamic brook_d::extract_deque() not available"); }
 
 	inline std :: deque < _1_ > & mutate_deque()
-	{ throw throw_dis("dynamic brook_d::mutate_deque() not available"); }
+	{ throw dis("dynamic brook_d::mutate_deque() not available"); }
 
 	void ___weak___(inventory_d<>::___WEAK___ const& weak) const {}
 

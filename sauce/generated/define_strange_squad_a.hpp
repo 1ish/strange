@@ -418,10 +418,10 @@ public:
 	}
 
 	inline std :: deque < any_a < > > const & extract_deque() const
-	{ throw throw_dis("dynamic squad_d::extract_deque() not available"); }
+	{ throw dis("dynamic squad_d::extract_deque() not available"); }
 
 	inline std :: deque < any_a < > > & mutate_deque()
-	{ throw throw_dis("dynamic squad_d::mutate_deque() not available"); }
+	{ throw dis("dynamic squad_d::mutate_deque() not available"); }
 
 	void ___weak___(inventory_d<>::___WEAK___ const& weak) const {}
 

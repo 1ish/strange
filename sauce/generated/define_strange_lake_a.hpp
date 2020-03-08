@@ -418,10 +418,10 @@ public:
 	}
 
 	inline std :: vector < _1_ > const & extract_vector() const
-	{ throw throw_dis("dynamic lake_d::extract_vector() not available"); }
+	{ throw dis("dynamic lake_d::extract_vector() not available"); }
 
 	inline std :: vector < _1_ > & mutate_vector()
-	{ throw throw_dis("dynamic lake_d::mutate_vector() not available"); }
+	{ throw dis("dynamic lake_d::mutate_vector() not available"); }
 
 	void ___weak___(inventory_d<>::___WEAK___ const& weak) const {}
 

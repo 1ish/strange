@@ -164,17 +164,17 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("expression_a::generate_ passed short range");
+			throw dis("expression_a::generate_ passed short range");
 		}
 		auto version = cast<number_data_int64_a<>>(*___it___);
 		if (++___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("expression_a::generate_ passed short range");
+			throw dis("expression_a::generate_ passed short range");
 		}
 		auto indent = cast<number_data_int64_a<>>(*___it___);
 		if (++___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("expression_a::generate_ passed short range");
+			throw dis("expression_a::generate_ passed short range");
 		}
 		auto river = cast_dup<river_a<>>(*___it___);
 		return generate_(version, indent, river);
@@ -197,27 +197,27 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("expression_a::generate_cpp_ passed short range");
+			throw dis("expression_a::generate_cpp_ passed short range");
 		}
 		auto version = cast<number_data_int64_a<>>(*___it___);
 		if (++___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("expression_a::generate_cpp_ passed short range");
+			throw dis("expression_a::generate_cpp_ passed short range");
 		}
 		auto indent = cast<number_data_int64_a<>>(*___it___);
 		if (++___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("expression_a::generate_cpp_ passed short range");
+			throw dis("expression_a::generate_cpp_ passed short range");
 		}
 		auto river = cast_dup<river_a<>>(*___it___);
 		if (++___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("expression_a::generate_cpp_ passed short range");
+			throw dis("expression_a::generate_cpp_ passed short range");
 		}
 		auto declare = cast<any_a<>>(*___it___);
 		if (++___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("expression_a::generate_cpp_ passed short range");
+			throw dis("expression_a::generate_cpp_ passed short range");
 		}
 		auto define = cast<any_a<>>(*___it___);
 		if (++___it___ == ___arguments___.cend_())
@@ -645,7 +645,7 @@ public:
 		auto const op = operation("recreate_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::recreate_ passed non-existent member");
+			throw dis("dynamic expression_d::recreate_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -656,7 +656,7 @@ public:
 		auto const op = operation("recreate_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::recreate_ passed non-existent member");
+			throw dis("dynamic expression_d::recreate_ passed non-existent member");
 		}
 		return cast<expression_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
@@ -670,7 +670,7 @@ public:
 		auto const op = operation("literal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::literal_ passed non-existent member");
+			throw dis("dynamic expression_d::literal_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -681,7 +681,7 @@ public:
 		auto const op = operation("literal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::literal_ passed non-existent member");
+			throw dis("dynamic expression_d::literal_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
@@ -695,7 +695,7 @@ public:
 		auto const op = operation("evaluate_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::evaluate_ passed non-existent member");
+			throw dis("dynamic expression_d::evaluate_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -706,7 +706,7 @@ public:
 		auto const op = operation("evaluate_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::evaluate_ passed non-existent member");
+			throw dis("dynamic expression_d::evaluate_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
@@ -717,7 +717,7 @@ public:
 		auto const op = operation("token_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::token_ passed non-existent member");
+			throw dis("dynamic expression_d::token_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -728,7 +728,7 @@ public:
 		auto const op = operation("token_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::token_ passed non-existent member");
+			throw dis("dynamic expression_d::token_ passed non-existent member");
 		}
 		return cast<token_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
@@ -739,7 +739,7 @@ public:
 		auto const op = operation("terms_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::terms_ passed non-existent member");
+			throw dis("dynamic expression_d::terms_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -750,7 +750,7 @@ public:
 		auto const op = operation("terms_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::terms_ passed non-existent member");
+			throw dis("dynamic expression_d::terms_ passed non-existent member");
 		}
 		return cast<flock_a<>>(variadic_operate(op, *const_cast<expression_d*>(this)));
 	}
@@ -761,7 +761,7 @@ public:
 		auto const op = operation("generate_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::generate_ passed non-existent member");
+			throw dis("dynamic expression_d::generate_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -772,7 +772,7 @@ public:
 		auto const op = operation("generate_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::generate_ passed non-existent member");
+			throw dis("dynamic expression_d::generate_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this), version, indent, river));
 	}
@@ -786,7 +786,7 @@ public:
 		auto const op = operation("generate_cpp_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::generate_cpp_ passed non-existent member");
+			throw dis("dynamic expression_d::generate_cpp_ passed non-existent member");
 		}
 		return op.operate(*const_cast<expression_d*>(this), arguments);
 	}
@@ -797,7 +797,7 @@ public:
 		auto const op = operation("generate_cpp_");
 		if (!op)
 		{
-			throw throw_dis("dynamic expression_d::generate_cpp_ passed non-existent member");
+			throw dis("dynamic expression_d::generate_cpp_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<expression_d*>(this), version, indent, river, declare, define, type));
 	}

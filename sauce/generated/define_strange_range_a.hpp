@@ -455,7 +455,7 @@ public:
 		auto const op = operation("cbegin_");
 		if (!op)
 		{
-			throw throw_dis("dynamic range_d::cbegin_ passed non-existent member");
+			throw dis("dynamic range_d::cbegin_ passed non-existent member");
 		}
 		return op.operate(*const_cast<range_d*>(this), arguments);
 	}
@@ -466,7 +466,7 @@ public:
 		auto const op = operation("cbegin_");
 		if (!op)
 		{
-			throw throw_dis("dynamic range_d::cbegin_ passed non-existent member");
+			throw dis("dynamic range_d::cbegin_ passed non-existent member");
 		}
 		return cast<forward_const_iterator_a<>>(variadic_operate(op, *const_cast<range_d*>(this)));
 	}
@@ -477,7 +477,7 @@ public:
 		auto const op = operation("cend_");
 		if (!op)
 		{
-			throw throw_dis("dynamic range_d::cend_ passed non-existent member");
+			throw dis("dynamic range_d::cend_ passed non-existent member");
 		}
 		return op.operate(*const_cast<range_d*>(this), arguments);
 	}
@@ -488,7 +488,7 @@ public:
 		auto const op = operation("cend_");
 		if (!op)
 		{
-			throw throw_dis("dynamic range_d::cend_ passed non-existent member");
+			throw dis("dynamic range_d::cend_ passed non-existent member");
 		}
 		return cast<forward_const_iterator_a<>>(variadic_operate(op, *const_cast<range_d*>(this)));
 	}

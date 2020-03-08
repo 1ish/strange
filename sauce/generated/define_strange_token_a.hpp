@@ -642,7 +642,7 @@ public:
 		auto const op = operation("filename_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::filename_ passed non-existent member");
+			throw dis("dynamic token_d::filename_ passed non-existent member");
 		}
 		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
@@ -653,7 +653,7 @@ public:
 		auto const op = operation("filename_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::filename_ passed non-existent member");
+			throw dis("dynamic token_d::filename_ passed non-existent member");
 		}
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
@@ -667,7 +667,7 @@ public:
 		auto const op = operation("line_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::line_ passed non-existent member");
+			throw dis("dynamic token_d::line_ passed non-existent member");
 		}
 		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
@@ -678,7 +678,7 @@ public:
 		auto const op = operation("line_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::line_ passed non-existent member");
+			throw dis("dynamic token_d::line_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
@@ -692,7 +692,7 @@ public:
 		auto const op = operation("position_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::position_ passed non-existent member");
+			throw dis("dynamic token_d::position_ passed non-existent member");
 		}
 		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
@@ -703,7 +703,7 @@ public:
 		auto const op = operation("position_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::position_ passed non-existent member");
+			throw dis("dynamic token_d::position_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
@@ -717,7 +717,7 @@ public:
 		auto const op = operation("tag_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::tag_ passed non-existent member");
+			throw dis("dynamic token_d::tag_ passed non-existent member");
 		}
 		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
@@ -728,7 +728,7 @@ public:
 		auto const op = operation("tag_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::tag_ passed non-existent member");
+			throw dis("dynamic token_d::tag_ passed non-existent member");
 		}
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
@@ -742,7 +742,7 @@ public:
 		auto const op = operation("symbol_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::symbol_ passed non-existent member");
+			throw dis("dynamic token_d::symbol_ passed non-existent member");
 		}
 		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
@@ -753,7 +753,7 @@ public:
 		auto const op = operation("symbol_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::symbol_ passed non-existent member");
+			throw dis("dynamic token_d::symbol_ passed non-existent member");
 		}
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
@@ -767,7 +767,7 @@ public:
 		auto const op = operation("literal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::literal_ passed non-existent member");
+			throw dis("dynamic token_d::literal_ passed non-existent member");
 		}
 		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
@@ -778,7 +778,7 @@ public:
 		auto const op = operation("literal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::literal_ passed non-existent member");
+			throw dis("dynamic token_d::literal_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
@@ -789,7 +789,7 @@ public:
 		auto const op = operation("precedence_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::precedence_ passed non-existent member");
+			throw dis("dynamic token_d::precedence_ passed non-existent member");
 		}
 		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
@@ -800,7 +800,7 @@ public:
 		auto const op = operation("precedence_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::precedence_ passed non-existent member");
+			throw dis("dynamic token_d::precedence_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
@@ -814,7 +814,7 @@ public:
 		auto const op = operation("report_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::report_ passed non-existent member");
+			throw dis("dynamic token_d::report_ passed non-existent member");
 		}
 		return op.operate(*const_cast<token_d*>(this), arguments);
 	}
@@ -825,7 +825,7 @@ public:
 		auto const op = operation("report_");
 		if (!op)
 		{
-			throw throw_dis("dynamic token_d::report_ passed non-existent member");
+			throw dis("dynamic token_d::report_ passed non-existent member");
 		}
 		return cast<misunderstanding_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}

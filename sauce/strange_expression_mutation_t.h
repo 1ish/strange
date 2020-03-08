@@ -316,7 +316,7 @@ public:
 				"\t\t{\n" +
 				(optional
 					? "\t\t\treturn " + member + arguments + ");\n"
-					: std::string("\t\t\tthrow throw_dis(\"" + class_name + "::" + member +
+					: std::string("\t\t\tthrow dis(\"" + class_name + "::" + member +
 						" passed short range\");\n")) +
 				"\t\t}\n"
 				"\t\tauto " + name_string +

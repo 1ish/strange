@@ -418,10 +418,10 @@ public:
 	}
 
 	inline _1_ const & extract_it() const
-	{ throw throw_dis("dynamic bidirectional_const_iterator_data_d::extract_it() not available"); }
+	{ throw dis("dynamic bidirectional_const_iterator_data_d::extract_it() not available"); }
 
 	inline _1_ & mutate_it()
-	{ throw throw_dis("dynamic bidirectional_const_iterator_data_d::mutate_it() not available"); }
+	{ throw dis("dynamic bidirectional_const_iterator_data_d::mutate_it() not available"); }
 
 	void ___weak___(bidirectional_const_iterator_d<>::___WEAK___ const& weak) const {}
 

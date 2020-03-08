@@ -226,7 +226,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("any_a::visit_ passed short range");
+			throw dis("any_a::visit_ passed short range");
 		}
 		auto arguments = cast_dup< inventory>(*___it___);
 		return visit_(arguments);
@@ -269,7 +269,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("any_a::identical_ passed short range");
+			throw dis("any_a::identical_ passed short range");
 		}
 		auto thing = cast<any_a<>>(*___it___);
 		return identical_(thing);
@@ -326,7 +326,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("any_a::same_ passed short range");
+			throw dis("any_a::same_ passed short range");
 		}
 		auto thing = cast<any_a<>>(*___it___);
 		return same_(thing);
@@ -349,7 +349,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("any_a::different_ passed short range");
+			throw dis("any_a::different_ passed short range");
 		}
 		auto thing = cast<any_a<>>(*___it___);
 		return different_(thing);

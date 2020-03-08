@@ -746,7 +746,7 @@ protected:
 			"\t\tauto const op = operation(\"" + name + "\");\n"
 			"\t\tif (!op)\n"
 			"\t\t{\n"
-			"\t\t\tthrow throw_dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
+			"\t\t\tthrow dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
 			"\t\t}\n"
 			"\t\treturn op.operate(" +
 				(extraction ? "*const_cast<" + class_name + "*>(this)" : std::string("*this")) +
@@ -766,7 +766,7 @@ protected:
 			"\t\tauto const op = operation(\"" + name + "\");\n"
 			"\t\tif (!op)\n"
 			"\t\t{\n"
-			"\t\t\tthrow throw_dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
+			"\t\t\tthrow dis(\"dynamic " + class_name + "::" + name + " passed non-existent member\");\n"
 			"\t\t}\n"
 			"\t\treturn cast<" + result);
 		if (template_result)
@@ -1758,7 +1758,7 @@ protected:
 		auto const pos = value.find('{');
 		if (pos == std::string::npos)
 		{
-			dynamic = "{ throw throw_dis(\"dynamic " + class_name + "::" + name + arguments + " not available\"); }";
+			dynamic = "{ throw dis(\"dynamic " + class_name + "::" + name + arguments + " not available\"); }";
 		}
 		else
 		{

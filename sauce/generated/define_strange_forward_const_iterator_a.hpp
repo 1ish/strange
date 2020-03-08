@@ -469,7 +469,7 @@ public:
 		auto const op = operation("get_");
 		if (!op)
 		{
-			throw throw_dis("dynamic forward_const_iterator_d::get_ passed non-existent member");
+			throw dis("dynamic forward_const_iterator_d::get_ passed non-existent member");
 		}
 		return op.operate(*const_cast<forward_const_iterator_d*>(this), arguments);
 	}
@@ -480,16 +480,16 @@ public:
 		auto const op = operation("get_");
 		if (!op)
 		{
-			throw throw_dis("dynamic forward_const_iterator_d::get_ passed non-existent member");
+			throw dis("dynamic forward_const_iterator_d::get_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<forward_const_iterator_d*>(this)));
 	}
 
 	inline any_a < > const & operator*() const
-	{ throw throw_dis("dynamic forward_const_iterator_d::operator*() not available"); }
+	{ throw dis("dynamic forward_const_iterator_d::operator*() not available"); }
 
 	inline any_a < > const * operator->() const
-	{ throw throw_dis("dynamic forward_const_iterator_d::operator->() not available"); }
+	{ throw dis("dynamic forward_const_iterator_d::operator->() not available"); }
 
 	inline any_a<> increment__(range_a<> const& arguments)
 	{
@@ -497,7 +497,7 @@ public:
 		auto const op = operation("increment_");
 		if (!op)
 		{
-			throw throw_dis("dynamic forward_const_iterator_d::increment_ passed non-existent member");
+			throw dis("dynamic forward_const_iterator_d::increment_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -508,7 +508,7 @@ public:
 		auto const op = operation("increment_");
 		if (!op)
 		{
-			throw throw_dis("dynamic forward_const_iterator_d::increment_ passed non-existent member");
+			throw dis("dynamic forward_const_iterator_d::increment_ passed non-existent member");
 		}
 		return cast<forward_const_iterator_a<>>(variadic_operate(op, *this));
 	}

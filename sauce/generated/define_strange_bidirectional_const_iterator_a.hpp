@@ -432,7 +432,7 @@ public:
 		auto const op = operation("decrement_");
 		if (!op)
 		{
-			throw throw_dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
+			throw dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -443,7 +443,7 @@ public:
 		auto const op = operation("decrement_");
 		if (!op)
 		{
-			throw throw_dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
+			throw dis("dynamic bidirectional_const_iterator_d::decrement_ passed non-existent member");
 		}
 		return cast<bidirectional_const_iterator_a<>>(variadic_operate(op, *this));
 	}

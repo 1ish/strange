@@ -88,7 +88,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("random_access_const_iterator_a::self_add_ passed short range");
+			throw dis("random_access_const_iterator_a::self_add_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return self_add_(number);
@@ -108,7 +108,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("random_access_const_iterator_a::add_ passed short range");
+			throw dis("random_access_const_iterator_a::add_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return add_(number);
@@ -131,7 +131,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("random_access_const_iterator_a::self_subtract_ passed short range");
+			throw dis("random_access_const_iterator_a::self_subtract_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return self_subtract_(number);
@@ -151,7 +151,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("random_access_const_iterator_a::subtract_ passed short range");
+			throw dis("random_access_const_iterator_a::subtract_ passed short range");
 		}
 		auto number = cast<number_a<>>(*___it___);
 		return subtract_(number);
@@ -174,7 +174,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("random_access_const_iterator_a::less_than_ passed short range");
+			throw dis("random_access_const_iterator_a::less_than_ passed short range");
 		}
 		auto it = cast<random_access_const_iterator_a<>>(*___it___);
 		return less_than_(it);
@@ -197,7 +197,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("random_access_const_iterator_a::greater_than_ passed short range");
+			throw dis("random_access_const_iterator_a::greater_than_ passed short range");
 		}
 		auto it = cast<random_access_const_iterator_a<>>(*___it___);
 		return greater_than_(it);
@@ -220,7 +220,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("random_access_const_iterator_a::less_or_equal_ passed short range");
+			throw dis("random_access_const_iterator_a::less_or_equal_ passed short range");
 		}
 		auto it = cast<random_access_const_iterator_a<>>(*___it___);
 		return less_or_equal_(it);
@@ -243,7 +243,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("random_access_const_iterator_a::greater_or_equal_ passed short range");
+			throw dis("random_access_const_iterator_a::greater_or_equal_ passed short range");
 		}
 		auto it = cast<random_access_const_iterator_a<>>(*___it___);
 		return greater_or_equal_(it);
@@ -683,7 +683,7 @@ public:
 		auto const op = operation("self_add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::self_add_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::self_add_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -694,7 +694,7 @@ public:
 		auto const op = operation("self_add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::self_add_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::self_add_ passed non-existent member");
 		}
 		return cast<random_access_const_iterator_a<>>(variadic_operate(op, *this, number));
 	}
@@ -705,7 +705,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::add_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<random_access_const_iterator_d*>(this), arguments);
 	}
@@ -716,7 +716,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::add_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::add_ passed non-existent member");
 		}
 		return cast<random_access_const_iterator_a<>>(variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), number));
 	}
@@ -730,7 +730,7 @@ public:
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::self_subtract_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::self_subtract_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -741,7 +741,7 @@ public:
 		auto const op = operation("self_subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::self_subtract_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::self_subtract_ passed non-existent member");
 		}
 		return cast<random_access_const_iterator_a<>>(variadic_operate(op, *this, number));
 	}
@@ -752,7 +752,7 @@ public:
 		auto const op = operation("subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::subtract_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::subtract_ passed non-existent member");
 		}
 		return op.operate(*const_cast<random_access_const_iterator_d*>(this), arguments);
 	}
@@ -763,7 +763,7 @@ public:
 		auto const op = operation("subtract_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::subtract_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::subtract_ passed non-existent member");
 		}
 		return cast<random_access_const_iterator_a<>>(variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), number));
 	}
@@ -777,7 +777,7 @@ public:
 		auto const op = operation("less_than_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::less_than_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::less_than_ passed non-existent member");
 		}
 		return op.operate(*const_cast<random_access_const_iterator_d*>(this), arguments);
 	}
@@ -788,7 +788,7 @@ public:
 		auto const op = operation("less_than_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::less_than_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::less_than_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), it));
 	}
@@ -802,7 +802,7 @@ public:
 		auto const op = operation("greater_than_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::greater_than_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::greater_than_ passed non-existent member");
 		}
 		return op.operate(*const_cast<random_access_const_iterator_d*>(this), arguments);
 	}
@@ -813,7 +813,7 @@ public:
 		auto const op = operation("greater_than_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::greater_than_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::greater_than_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), it));
 	}
@@ -827,7 +827,7 @@ public:
 		auto const op = operation("less_or_equal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::less_or_equal_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::less_or_equal_ passed non-existent member");
 		}
 		return op.operate(*const_cast<random_access_const_iterator_d*>(this), arguments);
 	}
@@ -838,7 +838,7 @@ public:
 		auto const op = operation("less_or_equal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::less_or_equal_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::less_or_equal_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), it));
 	}
@@ -852,7 +852,7 @@ public:
 		auto const op = operation("greater_or_equal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::greater_or_equal_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::greater_or_equal_ passed non-existent member");
 		}
 		return op.operate(*const_cast<random_access_const_iterator_d*>(this), arguments);
 	}
@@ -863,7 +863,7 @@ public:
 		auto const op = operation("greater_or_equal_");
 		if (!op)
 		{
-			throw throw_dis("dynamic random_access_const_iterator_d::greater_or_equal_ passed non-existent member");
+			throw dis("dynamic random_access_const_iterator_d::greater_or_equal_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<random_access_const_iterator_d*>(this), it));
 	}

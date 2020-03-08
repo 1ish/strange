@@ -142,7 +142,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::putback_ passed short range");
+			throw dis("river_a::putback_ passed short range");
 		}
 		auto int_8 = cast<number_data_int8_a<>>(*___it___);
 		return putback_(int_8);
@@ -165,12 +165,12 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::getline_ passed short range");
+			throw dis("river_a::getline_ passed short range");
 		}
 		auto count = cast<number_data_int64_a<>>(*___it___);
 		if (++___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::getline_ passed short range");
+			throw dis("river_a::getline_ passed short range");
 		}
 		auto delimiter = cast<number_data_int8_a<>>(*___it___);
 		return getline_(count, delimiter);
@@ -193,7 +193,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::ignore_ passed short range");
+			throw dis("river_a::ignore_ passed short range");
 		}
 		auto count = cast<number_data_int64_a<>>(*___it___);
 		return ignore_(count);
@@ -216,7 +216,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::read_ passed short range");
+			throw dis("river_a::read_ passed short range");
 		}
 		auto count = cast<number_data_int64_a<>>(*___it___);
 		return read_(count);
@@ -259,7 +259,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::seekg_beg_ passed short range");
+			throw dis("river_a::seekg_beg_ passed short range");
 		}
 		auto offset = cast<number_data_int64_a<>>(*___it___);
 		return seekg_beg_(offset);
@@ -282,7 +282,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::seekg_end_ passed short range");
+			throw dis("river_a::seekg_end_ passed short range");
 		}
 		auto offset = cast<number_data_int64_a<>>(*___it___);
 		return seekg_end_(offset);
@@ -305,7 +305,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::seekg_cur_ passed short range");
+			throw dis("river_a::seekg_cur_ passed short range");
 		}
 		auto offset = cast<number_data_int64_a<>>(*___it___);
 		return seekg_cur_(offset);
@@ -345,7 +345,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::put_ passed short range");
+			throw dis("river_a::put_ passed short range");
 		}
 		auto int_8 = cast<number_data_int8_a<>>(*___it___);
 		return put_(int_8);
@@ -368,7 +368,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::write_ passed short range");
+			throw dis("river_a::write_ passed short range");
 		}
 		auto lake = cast<lake_int8_a<>>(*___it___);
 		return write_(lake);
@@ -411,7 +411,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::seekp_beg_ passed short range");
+			throw dis("river_a::seekp_beg_ passed short range");
 		}
 		auto offset = cast<number_data_int64_a<>>(*___it___);
 		return seekp_beg_(offset);
@@ -434,7 +434,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::seekp_end_ passed short range");
+			throw dis("river_a::seekp_end_ passed short range");
 		}
 		auto offset = cast<number_data_int64_a<>>(*___it___);
 		return seekp_end_(offset);
@@ -457,7 +457,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::seekp_cur_ passed short range");
+			throw dis("river_a::seekp_cur_ passed short range");
 		}
 		auto offset = cast<number_data_int64_a<>>(*___it___);
 		return seekp_cur_(offset);
@@ -565,7 +565,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::set_good_ passed short range");
+			throw dis("river_a::set_good_ passed short range");
 		}
 		auto value = cast<any_a<>>(*___it___);
 		return set_good_(value);
@@ -588,7 +588,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::set_eof_ passed short range");
+			throw dis("river_a::set_eof_ passed short range");
 		}
 		auto value = cast<any_a<>>(*___it___);
 		return set_eof_(value);
@@ -611,7 +611,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::set_fail_ passed short range");
+			throw dis("river_a::set_fail_ passed short range");
 		}
 		auto value = cast<any_a<>>(*___it___);
 		return set_fail_(value);
@@ -634,7 +634,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("river_a::set_bad_ passed short range");
+			throw dis("river_a::set_bad_ passed short range");
 		}
 		auto value = cast<any_a<>>(*___it___);
 		return set_bad_(value);
@@ -1366,7 +1366,7 @@ public:
 	}
 
 	inline std :: string to_string()
-	{ throw throw_dis("dynamic river_d::to_string() not available"); }
+	{ throw dis("dynamic river_d::to_string() not available"); }
 
 	inline any_a<> get__(range_a<> const& arguments)
 	{
@@ -1374,7 +1374,7 @@ public:
 		auto const op = operation("get_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::get_ passed non-existent member");
+			throw dis("dynamic river_d::get_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1385,7 +1385,7 @@ public:
 		auto const op = operation("get_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::get_ passed non-existent member");
+			throw dis("dynamic river_d::get_ passed non-existent member");
 		}
 		return cast<number_data_int8_a<>>(variadic_operate(op, *this));
 	}
@@ -1399,7 +1399,7 @@ public:
 		auto const op = operation("peek_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::peek_ passed non-existent member");
+			throw dis("dynamic river_d::peek_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1410,7 +1410,7 @@ public:
 		auto const op = operation("peek_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::peek_ passed non-existent member");
+			throw dis("dynamic river_d::peek_ passed non-existent member");
 		}
 		return cast<number_data_int8_a<>>(variadic_operate(op, *this));
 	}
@@ -1424,7 +1424,7 @@ public:
 		auto const op = operation("unget_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::unget_ passed non-existent member");
+			throw dis("dynamic river_d::unget_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1435,7 +1435,7 @@ public:
 		auto const op = operation("unget_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::unget_ passed non-existent member");
+			throw dis("dynamic river_d::unget_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -1449,7 +1449,7 @@ public:
 		auto const op = operation("putback_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::putback_ passed non-existent member");
+			throw dis("dynamic river_d::putback_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1460,7 +1460,7 @@ public:
 		auto const op = operation("putback_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::putback_ passed non-existent member");
+			throw dis("dynamic river_d::putback_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, int_8));
 	}
@@ -1474,7 +1474,7 @@ public:
 		auto const op = operation("getline_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::getline_ passed non-existent member");
+			throw dis("dynamic river_d::getline_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1485,7 +1485,7 @@ public:
 		auto const op = operation("getline_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::getline_ passed non-existent member");
+			throw dis("dynamic river_d::getline_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *this, count, delimiter));
 	}
@@ -1499,7 +1499,7 @@ public:
 		auto const op = operation("ignore_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::ignore_ passed non-existent member");
+			throw dis("dynamic river_d::ignore_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1510,7 +1510,7 @@ public:
 		auto const op = operation("ignore_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::ignore_ passed non-existent member");
+			throw dis("dynamic river_d::ignore_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, count));
 	}
@@ -1524,7 +1524,7 @@ public:
 		auto const op = operation("read_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::read_ passed non-existent member");
+			throw dis("dynamic river_d::read_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1535,7 +1535,7 @@ public:
 		auto const op = operation("read_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::read_ passed non-existent member");
+			throw dis("dynamic river_d::read_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *this, count));
 	}
@@ -1552,7 +1552,7 @@ public:
 		auto const op = operation("tellg_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::tellg_ passed non-existent member");
+			throw dis("dynamic river_d::tellg_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1563,7 +1563,7 @@ public:
 		auto const op = operation("tellg_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::tellg_ passed non-existent member");
+			throw dis("dynamic river_d::tellg_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1577,7 +1577,7 @@ public:
 		auto const op = operation("seekg_beg_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekg_beg_ passed non-existent member");
+			throw dis("dynamic river_d::seekg_beg_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1588,7 +1588,7 @@ public:
 		auto const op = operation("seekg_beg_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekg_beg_ passed non-existent member");
+			throw dis("dynamic river_d::seekg_beg_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1602,7 +1602,7 @@ public:
 		auto const op = operation("seekg_end_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekg_end_ passed non-existent member");
+			throw dis("dynamic river_d::seekg_end_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1613,7 +1613,7 @@ public:
 		auto const op = operation("seekg_end_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekg_end_ passed non-existent member");
+			throw dis("dynamic river_d::seekg_end_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1627,7 +1627,7 @@ public:
 		auto const op = operation("seekg_cur_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekg_cur_ passed non-existent member");
+			throw dis("dynamic river_d::seekg_cur_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1638,7 +1638,7 @@ public:
 		auto const op = operation("seekg_cur_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekg_cur_ passed non-existent member");
+			throw dis("dynamic river_d::seekg_cur_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1652,7 +1652,7 @@ public:
 		auto const op = operation("sync_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::sync_ passed non-existent member");
+			throw dis("dynamic river_d::sync_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1663,7 +1663,7 @@ public:
 		auto const op = operation("sync_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::sync_ passed non-existent member");
+			throw dis("dynamic river_d::sync_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -1677,7 +1677,7 @@ public:
 		auto const op = operation("put_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::put_ passed non-existent member");
+			throw dis("dynamic river_d::put_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1688,7 +1688,7 @@ public:
 		auto const op = operation("put_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::put_ passed non-existent member");
+			throw dis("dynamic river_d::put_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, int_8));
 	}
@@ -1702,7 +1702,7 @@ public:
 		auto const op = operation("write_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::write_ passed non-existent member");
+			throw dis("dynamic river_d::write_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1713,7 +1713,7 @@ public:
 		auto const op = operation("write_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::write_ passed non-existent member");
+			throw dis("dynamic river_d::write_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, lake));
 	}
@@ -1730,7 +1730,7 @@ public:
 		auto const op = operation("tellp_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::tellp_ passed non-existent member");
+			throw dis("dynamic river_d::tellp_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1741,7 +1741,7 @@ public:
 		auto const op = operation("tellp_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::tellp_ passed non-existent member");
+			throw dis("dynamic river_d::tellp_ passed non-existent member");
 		}
 		return cast<number_data_int64_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1755,7 +1755,7 @@ public:
 		auto const op = operation("seekp_beg_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekp_beg_ passed non-existent member");
+			throw dis("dynamic river_d::seekp_beg_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1766,7 +1766,7 @@ public:
 		auto const op = operation("seekp_beg_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekp_beg_ passed non-existent member");
+			throw dis("dynamic river_d::seekp_beg_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1780,7 +1780,7 @@ public:
 		auto const op = operation("seekp_end_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekp_end_ passed non-existent member");
+			throw dis("dynamic river_d::seekp_end_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1791,7 +1791,7 @@ public:
 		auto const op = operation("seekp_end_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekp_end_ passed non-existent member");
+			throw dis("dynamic river_d::seekp_end_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1805,7 +1805,7 @@ public:
 		auto const op = operation("seekp_cur_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekp_cur_ passed non-existent member");
+			throw dis("dynamic river_d::seekp_cur_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1816,7 +1816,7 @@ public:
 		auto const op = operation("seekp_cur_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::seekp_cur_ passed non-existent member");
+			throw dis("dynamic river_d::seekp_cur_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, offset));
 	}
@@ -1830,7 +1830,7 @@ public:
 		auto const op = operation("flush_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::flush_ passed non-existent member");
+			throw dis("dynamic river_d::flush_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1841,7 +1841,7 @@ public:
 		auto const op = operation("flush_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::flush_ passed non-existent member");
+			throw dis("dynamic river_d::flush_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
@@ -1855,7 +1855,7 @@ public:
 		auto const op = operation("good_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::good_ passed non-existent member");
+			throw dis("dynamic river_d::good_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1866,7 +1866,7 @@ public:
 		auto const op = operation("good_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::good_ passed non-existent member");
+			throw dis("dynamic river_d::good_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1880,7 +1880,7 @@ public:
 		auto const op = operation("eof_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::eof_ passed non-existent member");
+			throw dis("dynamic river_d::eof_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1891,7 +1891,7 @@ public:
 		auto const op = operation("eof_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::eof_ passed non-existent member");
+			throw dis("dynamic river_d::eof_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1905,7 +1905,7 @@ public:
 		auto const op = operation("fail_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::fail_ passed non-existent member");
+			throw dis("dynamic river_d::fail_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1916,7 +1916,7 @@ public:
 		auto const op = operation("fail_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::fail_ passed non-existent member");
+			throw dis("dynamic river_d::fail_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1930,7 +1930,7 @@ public:
 		auto const op = operation("bad_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::bad_ passed non-existent member");
+			throw dis("dynamic river_d::bad_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -1941,7 +1941,7 @@ public:
 		auto const op = operation("bad_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::bad_ passed non-existent member");
+			throw dis("dynamic river_d::bad_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}
@@ -1955,7 +1955,7 @@ public:
 		auto const op = operation("set_good_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::set_good_ passed non-existent member");
+			throw dis("dynamic river_d::set_good_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1966,7 +1966,7 @@ public:
 		auto const op = operation("set_good_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::set_good_ passed non-existent member");
+			throw dis("dynamic river_d::set_good_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, value));
 	}
@@ -1980,7 +1980,7 @@ public:
 		auto const op = operation("set_eof_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::set_eof_ passed non-existent member");
+			throw dis("dynamic river_d::set_eof_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -1991,7 +1991,7 @@ public:
 		auto const op = operation("set_eof_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::set_eof_ passed non-existent member");
+			throw dis("dynamic river_d::set_eof_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, value));
 	}
@@ -2005,7 +2005,7 @@ public:
 		auto const op = operation("set_fail_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::set_fail_ passed non-existent member");
+			throw dis("dynamic river_d::set_fail_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -2016,7 +2016,7 @@ public:
 		auto const op = operation("set_fail_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::set_fail_ passed non-existent member");
+			throw dis("dynamic river_d::set_fail_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, value));
 	}
@@ -2030,7 +2030,7 @@ public:
 		auto const op = operation("set_bad_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::set_bad_ passed non-existent member");
+			throw dis("dynamic river_d::set_bad_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -2041,7 +2041,7 @@ public:
 		auto const op = operation("set_bad_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::set_bad_ passed non-existent member");
+			throw dis("dynamic river_d::set_bad_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, value));
 	}
@@ -2055,7 +2055,7 @@ public:
 		auto const op = operation("filename_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::filename_ passed non-existent member");
+			throw dis("dynamic river_d::filename_ passed non-existent member");
 		}
 		return op.operate(*const_cast<river_d*>(this), arguments);
 	}
@@ -2066,7 +2066,7 @@ public:
 		auto const op = operation("filename_");
 		if (!op)
 		{
-			throw throw_dis("dynamic river_d::filename_ passed non-existent member");
+			throw dis("dynamic river_d::filename_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<river_d*>(this)));
 	}

@@ -88,7 +88,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("parser_a::parse_ passed short range");
+			throw dis("parser_a::parse_ passed short range");
 		}
 		auto tokenizer = cast<range_a<>>(*___it___);
 		return parse_(tokenizer);
@@ -438,7 +438,7 @@ public:
 		auto const op = operation("parse_");
 		if (!op)
 		{
-			throw throw_dis("dynamic parser_d::parse_ passed non-existent member");
+			throw dis("dynamic parser_d::parse_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
@@ -449,7 +449,7 @@ public:
 		auto const op = operation("parse_");
 		if (!op)
 		{
-			throw throw_dis("dynamic parser_d::parse_ passed non-existent member");
+			throw dis("dynamic parser_d::parse_ passed non-existent member");
 		}
 		return cast<expression_a<>>(variadic_operate(op, *this, tokenizer));
 	}

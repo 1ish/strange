@@ -91,7 +91,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("misunderstanding_a::add_ passed short range");
+			throw dis("misunderstanding_a::add_ passed short range");
 		}
 		auto misunderstanding = cast<misunderstanding_a<>>(*___it___);
 		return add_(misunderstanding);
@@ -447,7 +447,7 @@ public:
 	}
 
 	inline std :: string to_string() const
-	{ throw throw_dis("dynamic misunderstanding_d::to_string() not available"); }
+	{ throw dis("dynamic misunderstanding_d::to_string() not available"); }
 
 	inline any_a<> add__(range_a<> const& arguments) const
 	{
@@ -455,7 +455,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic misunderstanding_d::add_ passed non-existent member");
+			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<misunderstanding_d*>(this), arguments);
 	}
@@ -466,7 +466,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic misunderstanding_d::add_ passed non-existent member");
+			throw dis("dynamic misunderstanding_d::add_ passed non-existent member");
 		}
 		return cast<misunderstanding_a<>>(variadic_operate(op, *const_cast<misunderstanding_d*>(this), misunderstanding));
 	}

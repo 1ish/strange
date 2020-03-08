@@ -111,7 +111,7 @@ public:
 		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
 		if (___it___ == ___arguments___.cend_())
 		{
-			throw throw_dis("symbol_a::add_ passed short range");
+			throw dis("symbol_a::add_ passed short range");
 		}
 		auto symbol = cast<symbol_a<>>(*___it___);
 		return add_(symbol);
@@ -489,7 +489,7 @@ public:
 		auto const op = operation("to_lake_");
 		if (!op)
 		{
-			throw throw_dis("dynamic symbol_d::to_lake_ passed non-existent member");
+			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
 		}
 		return op.operate(*const_cast<symbol_d*>(this), arguments);
 	}
@@ -500,7 +500,7 @@ public:
 		auto const op = operation("to_lake_");
 		if (!op)
 		{
-			throw throw_dis("dynamic symbol_d::to_lake_ passed non-existent member");
+			throw dis("dynamic symbol_d::to_lake_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *const_cast<symbol_d*>(this)));
 	}
@@ -520,7 +520,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic symbol_d::add_ passed non-existent member");
+			throw dis("dynamic symbol_d::add_ passed non-existent member");
 		}
 		return op.operate(*const_cast<symbol_d*>(this), arguments);
 	}
@@ -531,7 +531,7 @@ public:
 		auto const op = operation("add_");
 		if (!op)
 		{
-			throw throw_dis("dynamic symbol_d::add_ passed non-existent member");
+			throw dis("dynamic symbol_d::add_ passed non-existent member");
 		}
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<symbol_d*>(this), symbol));
 	}

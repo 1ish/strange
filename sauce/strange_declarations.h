@@ -266,8 +266,6 @@ inline misunderstanding_a<> mis(F&& s);
 // disagreement
 template <typename F>
 inline misunderstanding_a<> dis(F&& s);
-template <typename F>
-inline bool throw_dis(F&& s);
 
 // native function
 using native_function_pointer = any_a<>(*)(range_a<> const&);
