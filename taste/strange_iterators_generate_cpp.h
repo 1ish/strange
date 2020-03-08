@@ -13,6 +13,9 @@ TEST_CASE("strange parse and generate cpp brook", "[parse_t]")
 		expression.generate_cpp(1, 1, river, true, true); // define
 		std__cout << "generated cpp define: " << river.to_string() << std::endl;
 		river = river_t<>::create();
+		expression.generate_cpp(1, 1, river, false, true); // implement
+		std__cout << "generated cpp implement: " << river.to_string() << std::endl;
+		river = river_t<>::create();
 		expression.generate_cpp(1, 1, river, false, false);
 		std__cout << "generated cpp execute: " << river.to_string() << std::endl;
 	}
@@ -35,6 +38,9 @@ TEST_CASE("strange parse and generate cpp file bidirectional_const_iterator abst
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_bidirectional_const_iterator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_bidirectional_const_iterator_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -55,6 +61,9 @@ TEST_CASE("strange parse and generate cpp file bidirectional_const_iterator_data
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_bidirectional_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_bidirectional_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -75,6 +84,9 @@ TEST_CASE("strange parse and generate cpp file bidirectional_iterator abstractio
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_bidirectional_iterator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_bidirectional_iterator_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -95,6 +107,9 @@ TEST_CASE("strange parse and generate cpp file bidirectional_iterator_data abstr
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_bidirectional_iterator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_bidirectional_iterator_data_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -115,6 +130,9 @@ TEST_CASE("strange parse and generate cpp file forward_const_iterator abstractio
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_forward_const_iterator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_forward_const_iterator_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -135,6 +153,9 @@ TEST_CASE("strange parse and generate cpp file forward_const_iterator_data abstr
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_forward_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_forward_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -155,6 +176,9 @@ TEST_CASE("strange parse and generate cpp file forward_iterator abstraction", "[
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_forward_iterator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_forward_iterator_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -175,6 +199,9 @@ TEST_CASE("strange parse and generate cpp file forward_iterator_data abstraction
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_forward_iterator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_forward_iterator_data_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -195,6 +222,9 @@ TEST_CASE("strange parse and generate cpp file random_access_const_iterator abst
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_random_access_const_iterator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_random_access_const_iterator_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -215,6 +245,9 @@ TEST_CASE("strange parse and generate cpp file random_access_const_iterator_data
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_random_access_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_random_access_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -235,6 +268,9 @@ TEST_CASE("strange parse and generate cpp file random_access_iterator abstractio
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_random_access_iterator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_random_access_iterator_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -255,6 +291,9 @@ TEST_CASE("strange parse and generate cpp file random_access_iterator_data abstr
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_random_access_iterator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_random_access_iterator_data_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{

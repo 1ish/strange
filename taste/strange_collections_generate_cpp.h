@@ -13,6 +13,9 @@ TEST_CASE("strange parse and generate cpp brook", "[parse_t]")
 		expression.generate_cpp(1, 1, river, true, true); // define
 		std__cout << "generated cpp define: " << river.to_string() << std::endl;
 		river = river_t<>::create();
+		expression.generate_cpp(1, 1, river, false, true); // implement
+		std__cout << "generated cpp implement: " << river.to_string() << std::endl;
+		river = river_t<>::create();
 		expression.generate_cpp(1, 1, river, false, false);
 		std__cout << "generated cpp execute: " << river.to_string() << std::endl;
 	}
@@ -35,6 +38,9 @@ TEST_CASE("strange parse and generate cpp file brook abstraction", "[parse_t]")
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_brook_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_brook_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -55,6 +61,9 @@ TEST_CASE("strange parse and generate cpp file collection abstraction", "[parse_
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_collection_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_collection_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -75,6 +84,9 @@ TEST_CASE("strange parse and generate cpp file flock abstraction", "[parse_t]")
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_flock_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_flock_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -95,6 +107,9 @@ TEST_CASE("strange parse and generate cpp file herd abstraction", "[parse_t]")
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_herd_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_herd_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -115,6 +130,9 @@ TEST_CASE("strange parse and generate cpp file inventory abstraction", "[parse_t
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_inventory_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_inventory_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -135,6 +153,9 @@ TEST_CASE("strange parse and generate cpp file lake abstraction", "[parse_t]")
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_lake_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_lake_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -155,6 +176,9 @@ TEST_CASE("strange parse and generate cpp file ordered_herd abstraction", "[pars
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_ordered_herd_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_ordered_herd_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -175,6 +199,9 @@ TEST_CASE("strange parse and generate cpp file ordered_shoal abstraction", "[par
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_ordered_shoal_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_ordered_shoal_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -195,6 +222,9 @@ TEST_CASE("strange parse and generate cpp file shoal abstraction", "[parse_t]")
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_shoal_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_shoal_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -215,6 +245,9 @@ TEST_CASE("strange parse and generate cpp file squad abstraction", "[parse_t]")
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_squad_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_squad_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -235,6 +268,9 @@ TEST_CASE("strange parse and generate cpp file unordered_herd abstraction", "[pa
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_unordered_herd_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_unordered_herd_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
@@ -255,6 +291,9 @@ TEST_CASE("strange parse and generate cpp file unordered_shoal abstraction", "[p
 		river = river_t<>::file(generate_cpp_dir +
 			"define_strange_unordered_shoal_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
+		river = river_t<>::file(generate_cpp_dir +
+			"implement_strange_unordered_shoal_a.hpp", false, true, true); // in, out, trunc
+		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
 	{
