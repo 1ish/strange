@@ -430,10 +430,4 @@ public:
 	{}
 };
 
-template <typename _1_>
-inline bidirectional_const_iterator_data_d<_1_> ___bidirectional_const_iterator_data_dynamic___(any_a<> const& thing)
-{
-	return bidirectional_const_iterator_data_d<_1_>{ thing };
-}
-
 } // namespace

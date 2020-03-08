@@ -10,4 +10,10 @@ bool const river_a<_1_>::___share___ = []()
 	return shared_shoal;
 }();
 
+template <typename _1_>
+inline river_d<_1_> ___river_dynamic___(any_a<> const& thing)
+{
+	return river_d<_1_>{ thing };
+}
+
 } // namespace

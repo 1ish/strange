@@ -10,4 +10,10 @@ bool const token_a<_1_>::___share___ = []()
 	return shared_shoal;
 }();
 
+template <typename _1_>
+inline token_d<_1_> ___token_dynamic___(any_a<> const& thing)
+{
+	return token_d<_1_>{ thing };
+}
+
 } // namespace

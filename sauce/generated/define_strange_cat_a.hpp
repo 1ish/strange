@@ -755,10 +755,4 @@ public:
 	{}
 };
 
-template <typename _1_>
-inline cat_d<_1_> ___cat_dynamic___(any_a<> const& thing)
-{
-	return cat_d<_1_>{ thing };
-}
-
 } // namespace

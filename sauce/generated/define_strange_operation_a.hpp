@@ -530,10 +530,4 @@ public:
 	{}
 };
 
-template <typename _1_>
-inline operation_d<_1_> ___operation_dynamic___(any_a<> const& thing)
-{
-	return operation_d<_1_>{ thing };
-}
-
 } // namespace

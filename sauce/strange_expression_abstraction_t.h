@@ -251,11 +251,14 @@ protected:
 		if (!root)
 		{
 			base_name = _class_base_name_(version);
+			if (define)
+			{
+				dynamic_name = class_name;
+				dynamic_name[dynamic_name.length() - 1] = 'd';
+			}
 			if (declare && define)
 			{
 				_declare_and_define_template_(version, indent, river, true, false);
-				dynamic_name = class_name;
-				dynamic_name[dynamic_name.length() - 1] = 'd';
 				river.write_string(
 					"class " + dynamic_name + ";\n\n");
 				_declare_and_define_template_(version, indent, river, true, false);
@@ -270,20 +273,23 @@ protected:
 		if (declare && define && !root)
 		{
 			_define_class_dynamic_(class_name, base_name, version, river);
-			_declare_and_define_template_(version, indent, river, true, true);
-			river.write_string(
-				"inline " + dynamic_name);
-			_declare_and_define_template_(version, indent, river, false, false);
-			river.write_string(" ___" + dynamic_name + "ynamic___(any_a<> const& thing)\n"
-				"{\n"
-				"\treturn " + dynamic_name);
-			_declare_and_define_template_(version, 0, river, false, false);
-			river.write_string("{ thing };\n"
-				"}\n\n");
 		}
 		else if (!declare && define)
 		{
 			_define_class_share_(class_name, version, river);
+			if (!root)
+			{
+				_declare_and_define_template_(version, indent, river, true, true);
+				river.write_string(
+					"inline " + dynamic_name);
+				_declare_and_define_template_(version, indent, river, false, false);
+				river.write_string(" ___" + dynamic_name + "ynamic___(any_a<> const& thing)\n"
+					"{\n"
+					"\treturn " + dynamic_name);
+				_declare_and_define_template_(version, 0, river, false, false);
+				river.write_string("{ thing };\n"
+					"}\n\n");
+			}
 		}
 		_namespace_close_(split_scope, river);
 	}

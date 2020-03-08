@@ -620,10 +620,4 @@ public:
 	{}
 };
 
-template <typename _1_>
-inline kind_d<_1_> ___kind_dynamic___(any_a<> const& thing)
-{
-	return kind_d<_1_>{ thing };
-}
-
 } // namespace

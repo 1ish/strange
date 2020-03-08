@@ -550,10 +550,4 @@ public:
 	{}
 };
 
-template <typename _1_>
-inline shoal_d<_1_> ___shoal_dynamic___(any_a<> const& thing)
-{
-	return shoal_d<_1_>{ thing };
-}
-
 } // namespace

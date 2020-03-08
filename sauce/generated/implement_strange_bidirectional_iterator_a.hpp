@@ -10,4 +10,10 @@ bool const bidirectional_iterator_a<_1_>::___share___ = []()
 	return shared_shoal;
 }();
 
+template <typename _1_>
+inline bidirectional_iterator_d<_1_> ___bidirectional_iterator_dynamic___(any_a<> const& thing)
+{
+	return bidirectional_iterator_d<_1_>{ thing };
+}
+
 } // namespace

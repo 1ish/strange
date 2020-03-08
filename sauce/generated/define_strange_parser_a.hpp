@@ -461,10 +461,4 @@ public:
 	{}
 };
 
-template <typename _1_>
-inline parser_d<_1_> ___parser_dynamic___(any_a<> const& thing)
-{
-	return parser_d<_1_>{ thing };
-}
-
 } // namespace

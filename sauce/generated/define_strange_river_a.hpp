@@ -2081,10 +2081,4 @@ public:
 	{}
 };
 
-template <typename _1_>
-inline river_d<_1_> ___river_dynamic___(any_a<> const& thing)
-{
-	return river_d<_1_>{ thing };
-}
-
 } // namespace

@@ -840,10 +840,4 @@ public:
 	{}
 };
 
-template <typename _1_>
-inline token_d<_1_> ___token_dynamic___(any_a<> const& thing)
-{
-	return token_d<_1_>{ thing };
-}
-
 } // namespace

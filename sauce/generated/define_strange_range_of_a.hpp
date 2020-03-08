@@ -500,10 +500,4 @@ public:
 	{}
 };
 
-template <typename element>
-inline range_of_d<element> ___range_of_dynamic___(any_a<> const& thing)
-{
-	return range_of_d<element>{ thing };
-}
-
 } // namespace

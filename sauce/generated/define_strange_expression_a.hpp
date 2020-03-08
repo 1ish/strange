@@ -812,10 +812,4 @@ public:
 	{}
 };
 
-template <typename _1_>
-inline expression_d<_1_> ___expression_dynamic___(any_a<> const& thing)
-{
-	return expression_d<_1_>{ thing };
-}
-
 } // namespace

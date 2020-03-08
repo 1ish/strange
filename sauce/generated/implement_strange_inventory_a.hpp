@@ -10,4 +10,10 @@ bool const inventory_a<_1_>::___share___ = []()
 	return shared_shoal;
 }();
 
+template <typename _1_>
+inline inventory_d<_1_> ___inventory_dynamic___(any_a<> const& thing)
+{
+	return inventory_d<_1_>{ thing };
+}
+
 } // namespace

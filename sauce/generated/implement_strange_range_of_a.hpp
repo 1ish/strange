@@ -10,4 +10,10 @@ bool const range_of_a<element>::___share___ = []()
 	return shared_shoal;
 }();
 
+template <typename element>
+inline range_of_d<element> ___range_of_dynamic___(any_a<> const& thing)
+{
+	return range_of_d<element>{ thing };
+}
+
 } // namespace

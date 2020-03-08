@@ -10,4 +10,10 @@ bool const random_access_const_iterator_a<_1_>::___share___ = []()
 	return shared_shoal;
 }();
 
+template <typename _1_>
+inline random_access_const_iterator_d<_1_> ___random_access_const_iterator_dynamic___(any_a<> const& thing)
+{
+	return random_access_const_iterator_d<_1_>{ thing };
+}
+
 } // namespace

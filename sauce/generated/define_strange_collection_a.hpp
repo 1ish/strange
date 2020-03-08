@@ -1457,10 +1457,4 @@ public:
 	{}
 };
 
-template <typename _1_>
-inline collection_d<_1_> ___collection_dynamic___(any_a<> const& thing)
-{
-	return collection_d<_1_>{ thing };
-}
-
 } // namespace

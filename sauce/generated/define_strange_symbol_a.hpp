@@ -546,10 +546,4 @@ public:
 	{}
 };
 
-template <typename _1_>
-inline symbol_d<_1_> ___symbol_dynamic___(any_a<> const& thing)
-{
-	return symbol_d<_1_>{ thing };
-}
-
 } // namespace

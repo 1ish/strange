@@ -10,4 +10,10 @@ bool const shoal_a<_1_>::___share___ = []()
 	return shared_shoal;
 }();
 
+template <typename _1_>
+inline shoal_d<_1_> ___shoal_dynamic___(any_a<> const& thing)
+{
+	return shoal_d<_1_>{ thing };
+}
+
 } // namespace
