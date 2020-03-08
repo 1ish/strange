@@ -82,22 +82,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> parse__(range_a<> const& ___arguments___)
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("parser_a::parse_ passed short range");
-		}
-		auto tokenizer = cast<range_a<>>(*___it___);
-		return parse_(tokenizer);
-	}
-
-*/
-		assert(___handle___);
-		return ___write___().parse__(___arguments___);
-	}
+	inline any_a<> parse__(range_a<> const& ___arguments___);
 
 	inline expression_a<> parse_(range_a<> const& tokenizer)
 	{ assert(___handle___); return ___write___().parse_(tokenizer); }

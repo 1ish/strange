@@ -82,30 +82,12 @@ public:
 		return *this;
 	}
 
-	inline any_a<> cbegin__(range_a<> const& ___arguments___) const
-	{
-/*
-		return cbegin_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().cbegin__(___arguments___);
-	}
+	inline any_a<> cbegin__(range_a<> const& ___arguments___) const;
 
 	inline forward_const_iterator_a<> cbegin_() const
 	{ assert(___handle___); return ___read___().cbegin_(); }
 
-	inline any_a<> cend__(range_a<> const& ___arguments___) const
-	{
-/*
-		return cend_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().cend__(___arguments___);
-	}
+	inline any_a<> cend__(range_a<> const& ___arguments___) const;
 
 	inline forward_const_iterator_a<> cend_() const
 	{ assert(___handle___); return ___read___().cend_(); }

@@ -82,16 +82,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> pure__(range_a<> const& ___arguments___) const
-	{
-/*
-		return pure_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().pure__(___arguments___);
-	}
+	inline any_a<> pure__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> pure_() const
 	{ assert(___handle___); return ___read___().pure_(); }
@@ -105,16 +96,7 @@ public:
 	inline void assign(operation_a < > const & operation )
 	{ assert(___handle___); ___write___().assign(operation); }
 
-	inline any_a<> names__(range_a<> const& ___arguments___) const
-	{
-/*
-		return names_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().names__(___arguments___);
-	}
+	inline any_a<> names__(range_a<> const& ___arguments___) const;
 
 	inline flock_a<> names_() const
 	{ assert(___handle___); return ___read___().names_(); }

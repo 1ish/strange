@@ -266,10 +266,10 @@ public:
 		if (_names.empty())
 		{
 			river.write_string(
-				"\t\treturn " + member + "();\n");
+				"\treturn " + member + "();\n");
 			return;
 		}
-		river.write_string("\t\tforward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();\n");
+		river.write_string("\tforward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();\n");
 		auto temp = river_t<>::create();
 		std::string arguments = "(";
 		auto kit = _kinds.extract_vector().cbegin();
@@ -312,14 +312,14 @@ public:
 				optional = kind.optional();
 			}
 			river.write_string(
-				"\t\tif (" + std::string(first ? "___it___" : "++___it___") + " == ___arguments___.cend_())\n"
-				"\t\t{\n" +
+				"\tif (" + std::string(first ? "___it___" : "++___it___") + " == ___arguments___.cend_())\n"
+				"\t{\n" +
 				(optional
-					? "\t\t\treturn " + member + arguments + ");\n"
-					: std::string("\t\t\tthrow dis(\"" + class_name + "::" + member +
+					? "\t\treturn " + member + arguments + ");\n"
+					: std::string("\t\tthrow dis(\"" + class_name + "::" + member +
 						" passed short range\");\n")) +
-				"\t\t}\n"
-				"\t\tauto " + name_string +
+				"\t}\n"
+				"\tauto " + name_string +
 				(reference ? " = cast_dup<" : " = cast<") + type + ">(*___it___);\n");
 			if (first)
 			{
@@ -332,7 +332,7 @@ public:
 			arguments += name_string;
 		}
 		river.write_string(
-			"\t\treturn " + member + arguments + ");\n");
+			"\treturn " + member + arguments + ");\n");
 	}
 
 protected:

@@ -97,30 +97,12 @@ public:
 	inline bool erase_index(int64_t index )
 	{ assert(___handle___); return ___write___().erase_index(index); }
 
-	inline any_a<> begin__(range_a<> const& ___arguments___)
-	{
-/*
-		return begin_();
-	}
-
-*/
-		assert(___handle___);
-		return ___write___().begin__(___arguments___);
-	}
+	inline any_a<> begin__(range_a<> const& ___arguments___);
 
 	inline random_access_iterator_a<> begin_()
 	{ assert(___handle___); return ___write___().begin_(); }
 
-	inline any_a<> end__(range_a<> const& ___arguments___)
-	{
-/*
-		return end_();
-	}
-
-*/
-		assert(___handle___);
-		return ___write___().end__(___arguments___);
-	}
+	inline any_a<> end__(range_a<> const& ___arguments___);
 
 	inline random_access_iterator_a<> end_()
 	{ assert(___handle___); return ___write___().end_(); }

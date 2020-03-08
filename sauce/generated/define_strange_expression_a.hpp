@@ -82,16 +82,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> recreate__(range_a<> const& ___arguments___) const
-	{
-/*
-		return recreate_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().recreate__(___arguments___);
-	}
+	inline any_a<> recreate__(range_a<> const& ___arguments___) const;
 
 	inline expression_a<> recreate_() const
 	{ assert(___handle___); return ___read___().recreate_(); }
@@ -99,16 +90,7 @@ public:
 	inline void recreated(expression_a < > const & expression ) const
 	{ assert(___handle___); ___read___().recreated(expression); }
 
-	inline any_a<> literal__(range_a<> const& ___arguments___) const
-	{
-/*
-		return literal_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().literal__(___arguments___);
-	}
+	inline any_a<> literal__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> literal_() const
 	{ assert(___handle___); return ___read___().literal_(); }
@@ -116,74 +98,22 @@ public:
 	inline bool literal() const
 	{ assert(___handle___); return ___read___().literal(); }
 
-	inline any_a<> evaluate__(range_a<> const& ___arguments___) const
-	{
-/*
-		return evaluate_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().evaluate__(___arguments___);
-	}
+	inline any_a<> evaluate__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> evaluate_() const
 	{ assert(___handle___); return ___read___().evaluate_(); }
 
-	inline any_a<> token__(range_a<> const& ___arguments___) const
-	{
-/*
-		return token_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().token__(___arguments___);
-	}
+	inline any_a<> token__(range_a<> const& ___arguments___) const;
 
 	inline token_a<> token_() const
 	{ assert(___handle___); return ___read___().token_(); }
 
-	inline any_a<> terms__(range_a<> const& ___arguments___) const
-	{
-/*
-		return terms_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().terms__(___arguments___);
-	}
+	inline any_a<> terms__(range_a<> const& ___arguments___) const;
 
 	inline flock_a<> terms_() const
 	{ assert(___handle___); return ___read___().terms_(); }
 
-	inline any_a<> generate__(range_a<> const& ___arguments___) const
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("expression_a::generate_ passed short range");
-		}
-		auto version = cast<number_data_int64_a<>>(*___it___);
-		if (++___it___ == ___arguments___.cend_())
-		{
-			throw dis("expression_a::generate_ passed short range");
-		}
-		auto indent = cast<number_data_int64_a<>>(*___it___);
-		if (++___it___ == ___arguments___.cend_())
-		{
-			throw dis("expression_a::generate_ passed short range");
-		}
-		auto river = cast_dup<river_a<>>(*___it___);
-		return generate_(version, indent, river);
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().generate__(___arguments___);
-	}
+	inline any_a<> generate__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> generate_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river) const
 	{ assert(___handle___); return ___read___().generate_(version, indent, river); }
@@ -191,47 +121,7 @@ public:
 	inline void generate(int64_t version , int64_t indent , river_a < > & river ) const
 	{ assert(___handle___); ___read___().generate(version, indent, river); }
 
-	inline any_a<> generate_cpp__(range_a<> const& ___arguments___) const
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("expression_a::generate_cpp_ passed short range");
-		}
-		auto version = cast<number_data_int64_a<>>(*___it___);
-		if (++___it___ == ___arguments___.cend_())
-		{
-			throw dis("expression_a::generate_cpp_ passed short range");
-		}
-		auto indent = cast<number_data_int64_a<>>(*___it___);
-		if (++___it___ == ___arguments___.cend_())
-		{
-			throw dis("expression_a::generate_cpp_ passed short range");
-		}
-		auto river = cast_dup<river_a<>>(*___it___);
-		if (++___it___ == ___arguments___.cend_())
-		{
-			throw dis("expression_a::generate_cpp_ passed short range");
-		}
-		auto declare = cast<any_a<>>(*___it___);
-		if (++___it___ == ___arguments___.cend_())
-		{
-			throw dis("expression_a::generate_cpp_ passed short range");
-		}
-		auto define = cast<any_a<>>(*___it___);
-		if (++___it___ == ___arguments___.cend_())
-		{
-			return generate_cpp_(version, indent, river, declare, define);
-		}
-		auto type = cast<any_a<>>(*___it___);
-		return generate_cpp_(version, indent, river, declare, define, type);
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().generate_cpp__(___arguments___);
-	}
+	inline any_a<> generate_cpp__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> generate_cpp_(number_data_int64_a<> const& version, number_data_int64_a<> const& indent, river_a<> & river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = strange::no() ) const
 	{ assert(___handle___); return ___read___().generate_cpp_(version, indent, river, declare, define, type); }

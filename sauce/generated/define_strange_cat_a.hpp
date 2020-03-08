@@ -82,16 +82,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> symbolic__(range_a<> const& ___arguments___) const
-	{
-/*
-		return symbolic_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().symbolic__(___arguments___);
-	}
+	inline any_a<> symbolic__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> symbolic_() const
 	{ assert(___handle___); return ___read___().symbolic_(); }
@@ -99,16 +90,7 @@ public:
 	inline bool symbolic() const
 	{ assert(___handle___); return ___read___().symbolic(); }
 
-	inline any_a<> order__(range_a<> const& ___arguments___) const
-	{
-/*
-		return order_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().order__(___arguments___);
-	}
+	inline any_a<> order__(range_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> order_() const
 	{ assert(___handle___); return ___read___().order_(); }
@@ -116,72 +98,27 @@ public:
 	inline int64_t order() const
 	{ assert(___handle___); return ___read___().order(); }
 
-	inline any_a<> name__(range_a<> const& ___arguments___) const
-	{
-/*
-		return name_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().name__(___arguments___);
-	}
+	inline any_a<> name__(range_a<> const& ___arguments___) const;
 
 	inline symbol_a<> name_() const
 	{ assert(___handle___); return ___read___().name_(); }
 
-	inline any_a<> dimensions__(range_a<> const& ___arguments___) const
-	{
-/*
-		return dimensions_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().dimensions__(___arguments___);
-	}
+	inline any_a<> dimensions__(range_a<> const& ___arguments___) const;
 
 	inline flock_a<> dimensions_() const
 	{ assert(___handle___); return ___read___().dimensions_(); }
 
-	inline any_a<> parameters__(range_a<> const& ___arguments___) const
-	{
-/*
-		return parameters_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().parameters__(___arguments___);
-	}
+	inline any_a<> parameters__(range_a<> const& ___arguments___) const;
 
 	inline flock_a<> parameters_() const
 	{ assert(___handle___); return ___read___().parameters_(); }
 
-	inline any_a<> result__(range_a<> const& ___arguments___) const
-	{
-/*
-		return result_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().result__(___arguments___);
-	}
+	inline any_a<> result__(range_a<> const& ___arguments___) const;
 
 	inline cat_a<> result_() const
 	{ assert(___handle___); return ___read___().result_(); }
 
-	inline any_a<> code__(range_a<> const& ___arguments___) const
-	{
-/*
-		return code_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().code__(___arguments___);
-	}
+	inline any_a<> code__(range_a<> const& ___arguments___) const;
 
 	inline lake_int8_a<> code_() const
 	{ assert(___handle___); return ___read___().code_(); }

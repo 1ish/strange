@@ -3,6 +3,18 @@ namespace strange
 {
 
 template <typename _1_>
+inline any_a<> forward_const_iterator_a<_1_>::get__(range_a<> const& ___arguments___) const
+{
+	return get_();
+}
+
+template <typename _1_>
+inline any_a<> forward_const_iterator_a<_1_>::increment__(range_a<> const& ___arguments___)
+{
+	return increment_();
+}
+
+template <typename _1_>
 bool const forward_const_iterator_a<_1_>::___share___ = []()
 {
 	auto& shared_shoal = shared();

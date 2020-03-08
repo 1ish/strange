@@ -3,6 +3,18 @@ namespace strange
 {
 
 template <typename _1_>
+inline any_a<> shoal_a<_1_>::begin__(range_a<> const& ___arguments___)
+{
+	return begin_();
+}
+
+template <typename _1_>
+inline any_a<> shoal_a<_1_>::end__(range_a<> const& ___arguments___)
+{
+	return end_();
+}
+
+template <typename _1_>
 bool const shoal_a<_1_>::___share___ = []()
 {
 	auto& shared_shoal = shared();

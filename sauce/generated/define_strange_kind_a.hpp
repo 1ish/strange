@@ -82,30 +82,12 @@ public:
 		return *this;
 	}
 
-	inline any_a<> aspects__(range_a<> const& ___arguments___) const
-	{
-/*
-		return aspects_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().aspects__(___arguments___);
-	}
+	inline any_a<> aspects__(range_a<> const& ___arguments___) const;
 
 	inline flock_a<> aspects_() const
 	{ assert(___handle___); return ___read___().aspects_(); }
 
-	inline any_a<> fixed__(range_a<> const& ___arguments___) const
-	{
-/*
-		return fixed_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().fixed__(___arguments___);
-	}
+	inline any_a<> fixed__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> fixed_() const
 	{ assert(___handle___); return ___read___().fixed_(); }
@@ -113,16 +95,7 @@ public:
 	inline bool fixed() const
 	{ assert(___handle___); return ___read___().fixed(); }
 
-	inline any_a<> reference__(range_a<> const& ___arguments___) const
-	{
-/*
-		return reference_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().reference__(___arguments___);
-	}
+	inline any_a<> reference__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> reference_() const
 	{ assert(___handle___); return ___read___().reference_(); }
@@ -130,16 +103,7 @@ public:
 	inline bool reference() const
 	{ assert(___handle___); return ___read___().reference(); }
 
-	inline any_a<> optional__(range_a<> const& ___arguments___) const
-	{
-/*
-		return optional_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().optional__(___arguments___);
-	}
+	inline any_a<> optional__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> optional_() const
 	{ assert(___handle___); return ___read___().optional_(); }

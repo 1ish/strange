@@ -82,36 +82,12 @@ public:
 		return *this;
 	}
 
-	inline any_a<> get__(range_a<> const& ___arguments___) const
-	{
-/*
-		return get_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().get__(___arguments___);
-	}
+	inline any_a<> get__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> get_() const
 	{ assert(___handle___); return ___read___().get_(); }
 
-	inline any_a<> set__(range_a<> const& ___arguments___) const
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("forward_iterator_a::set_ passed short range");
-		}
-		auto thing = cast<any_a<>>(*___it___);
-		return set_(thing);
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().set__(___arguments___);
-	}
+	inline any_a<> set__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> set_(any_a<> const& thing) const
 	{ assert(___handle___); return ___read___().set_(thing); }
@@ -122,16 +98,7 @@ public:
 	inline any_a < > * operator->() const
 	{ assert(___handle___); return ___read___().operator->(); }
 
-	inline any_a<> increment__(range_a<> const& ___arguments___)
-	{
-/*
-		return increment_();
-	}
-
-*/
-		assert(___handle___);
-		return ___write___().increment__(___arguments___);
-	}
+	inline any_a<> increment__(range_a<> const& ___arguments___);
 
 	inline forward_iterator_a<> increment_()
 	{ assert(___handle___); return ___write___().increment_(); }

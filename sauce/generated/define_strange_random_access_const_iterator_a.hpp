@@ -82,42 +82,12 @@ public:
 		return *this;
 	}
 
-	inline any_a<> self_add__(range_a<> const& ___arguments___)
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("random_access_const_iterator_a::self_add_ passed short range");
-		}
-		auto number = cast<number_a<>>(*___it___);
-		return self_add_(number);
-	}
-
-*/
-		assert(___handle___);
-		return ___write___().self_add__(___arguments___);
-	}
+	inline any_a<> self_add__(range_a<> const& ___arguments___);
 
 	inline random_access_const_iterator_a<> self_add_(number_a<> const& number)
 	{ assert(___handle___); return ___write___().self_add_(number); }
 
-	inline any_a<> add__(range_a<> const& ___arguments___) const
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("random_access_const_iterator_a::add_ passed short range");
-		}
-		auto number = cast<number_a<>>(*___it___);
-		return add_(number);
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().add__(___arguments___);
-	}
+	inline any_a<> add__(range_a<> const& ___arguments___) const;
 
 	inline random_access_const_iterator_a<> add_(number_a<> const& number) const
 	{ assert(___handle___); return ___read___().add_(number); }
@@ -125,42 +95,12 @@ public:
 	inline random_access_const_iterator_a operator+(number_a < > const & number ) const
 	{ assert(___handle___); return ___read___().operator+(number); }
 
-	inline any_a<> self_subtract__(range_a<> const& ___arguments___)
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("random_access_const_iterator_a::self_subtract_ passed short range");
-		}
-		auto number = cast<number_a<>>(*___it___);
-		return self_subtract_(number);
-	}
-
-*/
-		assert(___handle___);
-		return ___write___().self_subtract__(___arguments___);
-	}
+	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
 
 	inline random_access_const_iterator_a<> self_subtract_(number_a<> const& number)
 	{ assert(___handle___); return ___write___().self_subtract_(number); }
 
-	inline any_a<> subtract__(range_a<> const& ___arguments___) const
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("random_access_const_iterator_a::subtract_ passed short range");
-		}
-		auto number = cast<number_a<>>(*___it___);
-		return subtract_(number);
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().subtract__(___arguments___);
-	}
+	inline any_a<> subtract__(range_a<> const& ___arguments___) const;
 
 	inline random_access_const_iterator_a<> subtract_(number_a<> const& number) const
 	{ assert(___handle___); return ___read___().subtract_(number); }
@@ -168,22 +108,7 @@ public:
 	inline random_access_const_iterator_a operator-(number_a < > const & number ) const
 	{ assert(___handle___); return ___read___().operator-(number); }
 
-	inline any_a<> less_than__(range_a<> const& ___arguments___) const
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("random_access_const_iterator_a::less_than_ passed short range");
-		}
-		auto it = cast<random_access_const_iterator_a<>>(*___it___);
-		return less_than_(it);
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().less_than__(___arguments___);
-	}
+	inline any_a<> less_than__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> less_than_(random_access_const_iterator_a<> const& it) const
 	{ assert(___handle___); return ___read___().less_than_(it); }
@@ -191,22 +116,7 @@ public:
 	inline bool operator<(random_access_const_iterator_a < > const & it ) const
 	{ assert(___handle___); return ___read___().operator<(it); }
 
-	inline any_a<> greater_than__(range_a<> const& ___arguments___) const
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("random_access_const_iterator_a::greater_than_ passed short range");
-		}
-		auto it = cast<random_access_const_iterator_a<>>(*___it___);
-		return greater_than_(it);
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().greater_than__(___arguments___);
-	}
+	inline any_a<> greater_than__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> greater_than_(random_access_const_iterator_a<> const& it) const
 	{ assert(___handle___); return ___read___().greater_than_(it); }
@@ -214,22 +124,7 @@ public:
 	inline bool operator>(random_access_const_iterator_a < > const & it ) const
 	{ assert(___handle___); return ___read___().operator>(it); }
 
-	inline any_a<> less_or_equal__(range_a<> const& ___arguments___) const
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("random_access_const_iterator_a::less_or_equal_ passed short range");
-		}
-		auto it = cast<random_access_const_iterator_a<>>(*___it___);
-		return less_or_equal_(it);
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().less_or_equal__(___arguments___);
-	}
+	inline any_a<> less_or_equal__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> less_or_equal_(random_access_const_iterator_a<> const& it) const
 	{ assert(___handle___); return ___read___().less_or_equal_(it); }
@@ -237,22 +132,7 @@ public:
 	inline bool operator<=(random_access_const_iterator_a < > const & it ) const
 	{ assert(___handle___); return ___read___().operator<=(it); }
 
-	inline any_a<> greater_or_equal__(range_a<> const& ___arguments___) const
-	{
-/*
-		forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
-		if (___it___ == ___arguments___.cend_())
-		{
-			throw dis("random_access_const_iterator_a::greater_or_equal_ passed short range");
-		}
-		auto it = cast<random_access_const_iterator_a<>>(*___it___);
-		return greater_or_equal_(it);
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().greater_or_equal__(___arguments___);
-	}
+	inline any_a<> greater_or_equal__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> greater_or_equal_(random_access_const_iterator_a<> const& it) const
 	{ assert(___handle___); return ___read___().greater_or_equal_(it); }

@@ -453,6 +453,11 @@ protected:
 		{
 			_define_class_(root, class_name, base_name, version, indent, river, declare, define);
 		}
+		else if (!declare && define)
+		{
+			auto const class_expression_terms = _class_expression_terms_();
+			_implement_class_nonvirtual_members_(root, class_name, class_expression_terms, version, indent, river);
+		}
 	}
 
 	inline void _define_class_dynamic_(std::string class_name, std::string base_name, int64_t version, river_a<>& river) const
@@ -820,9 +825,9 @@ protected:
 
 		river.write_string(
 			"\tinline any_a<> " + name + "_(range" +
-				(root ? "" : "_a<>") + " const& ___arguments___)" + constness + "\n"
-			"\t{\n"
-			"/*\n");
+				(root ? "" : "_a<>") + " const& ___arguments___)" + constness + ";\n\n");
+/*			"\t{\n"
+			"\n");
 		if (extraction)
 		{
 			auto const& exp = static_cast<expression_extraction_t<> const&>(expression.extract_thing());
@@ -835,7 +840,7 @@ protected:
 		}
 		river.write_string(
 			"\t}\n\n"
-			"*/\n");
+			"\n");
 
 		river.write_string(
 			"\t\tassert(___handle___);\n"
@@ -843,7 +848,7 @@ protected:
 				std::string(extraction ? "___read___()." : "___write___().") +
 				name + "_(___arguments___);\n"
 			"\t}\n\n");
-
+*/
 		river.write_string(
 			"\tinline " + result + " " + name + parameters + constness + "\n"
 			"\t{ assert(___handle___); return " +
@@ -866,6 +871,40 @@ protected:
 			(constness.empty() ? "___write___()." : "___read___().") +
 			name + arguments + "; }\n\n");
 	}
+
+	inline void _implement_class_nonvirtual_members_(bool root, std::string const& class_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
+	{
+		_define_class_members_(root, class_name, class_expression_terms, version, indent, river,
+			&expression_abstraction_t::_implement_class_nonvirtual_member_,
+			&expression_abstraction_t::_implement_class_nonvirtual_native_member_);
+	}
+
+	inline void _implement_class_nonvirtual_member_(bool root, std::string const& class_name, std::string const& name, expression_a<> const& expression, bool extraction, int64_t version, river_a<>& river) const
+	{
+		_declare_and_define_template_(version, 0, river, true, true);
+		river.write_string(
+			"inline any_a<> " + class_name);
+		_declare_and_define_template_(version, 0, river, false, false);
+		river.write_string("::" + name + "_(range" +
+				(root ? "" : "_a<>") + " const& ___arguments___)" +
+				std::string(extraction ? " const" : "") + "\n"
+			"{\n");
+		if (extraction)
+		{
+			auto const& exp = static_cast<expression_extraction_t<> const&>(expression.extract_thing());
+			exp.abstraction_arguments(class_name, name, version, river);
+		}
+		else
+		{
+			auto const& exp = static_cast<expression_mutation_t<> const&>(expression.extract_thing());
+			exp.abstraction_arguments(class_name, name, version, river);
+		}
+		river.write_string(
+			"}\n\n");
+	}
+
+	inline void _implement_class_nonvirtual_native_member_(bool root, std::string const& class_name, std::string const& name, std::string const& value, int64_t version, river_a<>& river) const
+	{}
 
 	inline void _define_class_handle_(bool root, std::string const& class_name, std::string const& base_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
 	{

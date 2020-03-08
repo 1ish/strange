@@ -3,6 +3,12 @@ namespace strange
 {
 
 template <typename _1_>
+inline any_a<> bidirectional_const_iterator_a<_1_>::decrement__(range_a<> const& ___arguments___)
+{
+	return decrement_();
+}
+
+template <typename _1_>
 bool const bidirectional_const_iterator_a<_1_>::___share___ = []()
 {
 	auto& shared_shoal = shared();

@@ -82,16 +82,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> decrement__(range_a<> const& ___arguments___)
-	{
-/*
-		return decrement_();
-	}
-
-*/
-		assert(___handle___);
-		return ___write___().decrement__(___arguments___);
-	}
+	inline any_a<> decrement__(range_a<> const& ___arguments___);
 
 	inline bidirectional_iterator_a<> decrement_()
 	{ assert(___handle___); return ___write___().decrement_(); }

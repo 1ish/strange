@@ -82,16 +82,7 @@ public:
 		return *this;
 	}
 
-	inline any_a<> filename__(range_a<> const& ___arguments___) const
-	{
-/*
-		return filename_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().filename__(___arguments___);
-	}
+	inline any_a<> filename__(range_a<> const& ___arguments___) const;
 
 	inline symbol_a<> filename_() const
 	{ assert(___handle___); return ___read___().filename_(); }
@@ -99,16 +90,7 @@ public:
 	inline std :: string filename() const
 	{ assert(___handle___); return ___read___().filename(); }
 
-	inline any_a<> line__(range_a<> const& ___arguments___) const
-	{
-/*
-		return line_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().line__(___arguments___);
-	}
+	inline any_a<> line__(range_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> line_() const
 	{ assert(___handle___); return ___read___().line_(); }
@@ -116,16 +98,7 @@ public:
 	inline int64_t line() const
 	{ assert(___handle___); return ___read___().line(); }
 
-	inline any_a<> position__(range_a<> const& ___arguments___) const
-	{
-/*
-		return position_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().position__(___arguments___);
-	}
+	inline any_a<> position__(range_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> position_() const
 	{ assert(___handle___); return ___read___().position_(); }
@@ -133,16 +106,7 @@ public:
 	inline int64_t position() const
 	{ assert(___handle___); return ___read___().position(); }
 
-	inline any_a<> tag__(range_a<> const& ___arguments___) const
-	{
-/*
-		return tag_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().tag__(___arguments___);
-	}
+	inline any_a<> tag__(range_a<> const& ___arguments___) const;
 
 	inline symbol_a<> tag_() const
 	{ assert(___handle___); return ___read___().tag_(); }
@@ -150,16 +114,7 @@ public:
 	inline std :: string tag() const
 	{ assert(___handle___); return ___read___().tag(); }
 
-	inline any_a<> symbol__(range_a<> const& ___arguments___) const
-	{
-/*
-		return symbol_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().symbol__(___arguments___);
-	}
+	inline any_a<> symbol__(range_a<> const& ___arguments___) const;
 
 	inline symbol_a<> symbol_() const
 	{ assert(___handle___); return ___read___().symbol_(); }
@@ -167,30 +122,12 @@ public:
 	inline std :: string symbol() const
 	{ assert(___handle___); return ___read___().symbol(); }
 
-	inline any_a<> literal__(range_a<> const& ___arguments___) const
-	{
-/*
-		return literal_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().literal__(___arguments___);
-	}
+	inline any_a<> literal__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> literal_() const
 	{ assert(___handle___); return ___read___().literal_(); }
 
-	inline any_a<> precedence__(range_a<> const& ___arguments___) const
-	{
-/*
-		return precedence_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().precedence__(___arguments___);
-	}
+	inline any_a<> precedence__(range_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> precedence_() const
 	{ assert(___handle___); return ___read___().precedence_(); }
@@ -198,16 +135,7 @@ public:
 	inline int64_t precedence() const
 	{ assert(___handle___); return ___read___().precedence(); }
 
-	inline any_a<> report__(range_a<> const& ___arguments___) const
-	{
-/*
-		return report_();
-	}
-
-*/
-		assert(___handle___);
-		return ___read___().report__(___arguments___);
-	}
+	inline any_a<> report__(range_a<> const& ___arguments___) const;
 
 	inline misunderstanding_a<> report_() const
 	{ assert(___handle___); return ___read___().report_(); }
