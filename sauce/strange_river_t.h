@@ -123,7 +123,7 @@ public:
 	using std_istreambuf_iterator_char = std::istreambuf_iterator<char>;
 
 	// override
-	using over = range_o<river_t<>>;
+	using over = thing_o<river_t<>>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& _)

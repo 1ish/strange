@@ -534,7 +534,7 @@ class tokenizer_t : public thing_t<___ego___>
 
 public:
 	// override
-	using over = range_o<tokenizer_t<>>;
+	using over = thing_o<tokenizer_t<>>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)

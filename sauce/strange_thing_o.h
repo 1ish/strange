@@ -12,16 +12,6 @@ public:
 		: _OVERRIDDEN_{ std::move(overridden) }
 	{}
 
-	inline any_a<> type__(range_a<> const&) const
-	{
-		return _OVERRIDDEN_::type_();
-	}
-
-	inline any_a<> shared__(range_a<> const&) const
-	{
-		return shared_();
-	}
-
 	inline unordered_shoal_a<> shared_() const
 	{
 		unordered_shoal_a<> shoal = unordered_shoal_create();
@@ -29,29 +19,9 @@ public:
 		return shoal;
 	}
 
-	inline any_a<> same__(range_a<> const& range) const
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			throw dis("[thing] same passed empty range");
-		}
-		return same_(*it);
-	}
-
 	inline any_a<> same_(any_a<> const& thing) const
 	{
 		return boole(_OVERRIDDEN_::operator==(thing));
-	}
-
-	inline any_a<> different__(range_a<> const& range) const
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			throw dis("[thing] different passed empty range");
-		}
-		return different_(*it);
 	}
 
 	inline any_a<> different_(any_a<> const& thing) const
@@ -62,11 +32,6 @@ public:
 	inline bool operator!=(any_a<> const& thing) const
 	{
 		return !_OVERRIDDEN_::operator==(thing);
-	}
-
-	inline any_a<> hash__(range_a<> const&) const
-	{
-		return hash_();
 	}
 
 	inline number_data_a<uint64_t> hash_() const

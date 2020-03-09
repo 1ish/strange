@@ -9,7 +9,7 @@ class range_of_t : public thing_t<___ego___>
 {
 public:
 	// override
-	using over = range_o<range_of_t<_element_>>;
+	using over = thing_o<range_of_t<_element_>>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
