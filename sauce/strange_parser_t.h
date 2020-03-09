@@ -30,11 +30,6 @@ public:
 	}
 
 	// parser
-	inline any_a<> parse__(range_a<> const& range)
-	{
-		return parse_(range); //TODO
-	}
-	
 	inline expression_a<> parse_(range_a<> const& tokenizer)
 	{
 		_tokenizer = tokenizer;

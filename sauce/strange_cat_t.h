@@ -126,11 +126,6 @@ public:
 	}
 
 	// cat
-	inline any_a<> symbolic__(range_a<> const&) const
-	{
-		return symbolic_();
-	}
-
 	inline any_a<> symbolic_() const
 	{
 		return boole(symbolic());
@@ -139,11 +134,6 @@ public:
 	inline bool symbolic() const
 	{
 		return _symbolic;
-	}
-
-	inline any_a<> order__(range_a<> const&) const
-	{
-		return order_();
 	}
 
 	inline number_data_a<int64_t> order_() const
@@ -156,19 +146,9 @@ public:
 		return _order;
 	}
 
-	inline any_a<> name__(range_a<> const&) const
-	{
-		return name_();
-	}
-
 	inline symbol_a<> name_() const
 	{
 		return _name;
-	}
-
-	inline any_a<> dimensions__(range_a<> const&) const
-	{
-		return dimensions_();
 	}
 
 	inline flock_a<> dimensions_() const
@@ -176,29 +156,14 @@ public:
 		return _dimensions;
 	}
 
-	inline any_a<> parameters__(range_a<> const&) const
-	{
-		return parameters_();
-	}
-
 	inline flock_a<> parameters_() const
 	{
 		return _parameters;
 	}
 
-	inline any_a<> result__(range_a<> const&) const
-	{
-		return result_();
-	}
-
 	inline cat_a<> result_() const
 	{
 		return check<cat_a<>>(_result) ? cast<cat_a<>>(_result) : create_();
-	}
-
-	inline any_a<> code__(range_a<> const&) const
-	{
-		return code_();
 	}
 
 	inline lake_a<int8_t> code_() const

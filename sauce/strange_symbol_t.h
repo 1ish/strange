@@ -73,11 +73,6 @@ public:
 	}
 
 	// symbol
-	inline any_a<> to_lake__(range_a<> const&) const
-	{
-		return to_lake_();
-	}
-
 	inline lake_a<int8_t> to_lake_() const
 	{
 		return lake_from_string(_string);
@@ -97,19 +92,6 @@ public:
 	{
 		auto const length = _string.length();
 		return length ? _string[length - 1] : 0;
-	}
-
-	inline symbol_a<> add__(range_a<> const& range) const
-	{
-		std::string s = _string;
-		for (any_a<> const& thing : range)
-		{
-			if (check<symbol_a<>>(thing))
-			{
-				s += cast<symbol_a<>>(thing).to_string();
-			}
-		}
-		return symbol_t<>::create(std::move(s));
 	}
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const

@@ -42,11 +42,6 @@ public:
 	}
 
 	// comparison
-	static inline any_a<> nothing__(range_a<> const&)
-	{
-		return nothing_();
-	}
-
 	static inline any_a<> nothing_()
 	{
 		return yes();
@@ -55,11 +50,6 @@ public:
 	static inline bool nothing()
 	{
 		return true;
-	}
-
-	static inline any_a<> something__(range_a<> const&)
-	{
-		return something_();
 	}
 
 	static inline any_a<> something_()

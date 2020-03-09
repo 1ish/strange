@@ -47,11 +47,6 @@ class river_t : public thing_t<___ego___>
 		}
 
 		// forward iterator
-		inline any_a<> get__(range_a<> const&) const
-		{
-			return get_();
-		}
-
 		inline any_a<> get_() const
 		{
 			_int_8 = number_int_8_t<>::create(*_it);
@@ -67,11 +62,6 @@ class river_t : public thing_t<___ego___>
 		{
 			_int_8 = number_int_8_t<>::create(*_it);
 			return _int_8;
-		}
-
-		inline ___ego_it___ increment__(range_a<> const&)
-		{
-			return increment_();
 		}
 
 		inline ___ego_it___ increment_()
@@ -258,11 +248,6 @@ public:
 		return result;
 	}
 
-	inline any_a<> get__(range_a<> const& _)
-	{
-		return get_();
-	}
-
 	inline number_data_a<int8_t> get_()
 	{
 		return num(get());
@@ -277,11 +262,6 @@ public:
 		return int8_t(_istream->get());
 	}
 
-	inline any_a<> peek__(range_a<> const& _)
-	{
-		return peek_();
-	}
-
 	inline number_data_a<int8_t> peek_()
 	{
 		return num(peek());
@@ -294,11 +274,6 @@ public:
 			throw dis("strange::river::peek can only be called on input rivers");
 		}
 		return int8_t(_istream->peek());
-	}
-
-	inline any_a<> unget__(range_a<> const& _)
-	{
-		return unget_();
 	}
 
 	inline any_a<> unget_()
@@ -316,19 +291,6 @@ public:
 		_istream->unget();
 	}
 
-	inline any_a<> putback__(range_a<> const& range)
-	{
-		for (auto const& thing : range)
-		{
-			if (!check<number_data_a<int8_t>>(thing))
-			{
-				throw dis("strange::river::putback called with non-int-8");
-			}
-			putback(cast<number_data_a<int8_t>>(thing).extract_primitive());
-		}
-		return thing_t<___ego___>::me_();
-	}
-
 	inline any_a<> putback_(number_data_a<int8_t> const& int_8)
 	{
 		putback(int_8.extract_primitive());
@@ -342,30 +304,6 @@ public:
 			throw dis("strange::river::unget can only be called on input rivers");
 		}
 		_istream->putback(char(int_8));
-	}
-
-	inline any_a<> getline__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return getline_();
-		}
-		any_a<> thing = *it;
-		if (!check<number_data_a<int64_t>>(thing))
-		{
-			throw dis("strange::river::getline passed non-int-64 count");
-		}
-		if (++it == range.cend_())
-		{
-			return getline_(cast<number_data_a<int64_t>>(thing));
-		}
-		any_a<> delimiter = *it;
-		if (!check<number_data_a<int8_t>>(delimiter))
-		{
-			throw dis("strange::river::getline passed non-int-8 delimiter");
-		}
-		return getline_(cast<number_data_a<int64_t>>(thing), cast<number_data_a<int8_t>>(delimiter));
 	}
 
 	inline lake_a<int8_t> getline_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1), number_data_a<int8_t> const& delimiter = number_int_8_t<>::create('\n'))
@@ -395,21 +333,6 @@ public:
 		return v;
 	}
 
-	inline any_a<> ignore__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return ignore_();
-		}
-		any_a<> thing = *it;
-		if (!check<number_data_a<int64_t>>(thing))
-		{
-			throw dis("strange::river::ignore passed non-int-64 count");
-		}
-		return ignore_(cast<number_data_a<int64_t>>(thing));
-	}
-
 	inline any_a<> ignore_(number_data_a<int64_t> const& count = number_int_64_t<>::create(1))
 	{
 		ignore(count.extract_primitive());
@@ -423,21 +346,6 @@ public:
 			throw dis("strange::river::ignore can only be called on input rivers");
 		}
 		_istream->ignore(count);
-	}
-
-	inline any_a<> read__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return read_();
-		}
-		any_a<> thing = *it;
-		if (!check<number_data_a<int64_t>>(thing))
-		{
-			throw dis("strange::river::read passed non-int-64 count");
-		}
-		return read_(cast<number_data_a<int64_t>>(thing));
 	}
 
 	inline lake_a<int8_t> read_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1))
@@ -485,11 +393,6 @@ public:
 		return s;
 	}
 
-	inline any_a<> tellg__(range_a<> const& _) const
-	{
-		return tellg_();
-	}
-
 	inline number_data_a<int64_t> tellg_() const
 	{
 		return number_int_64_t<>::create(tellg());
@@ -502,21 +405,6 @@ public:
 			throw dis("strange::river::tellg can only be called on input rivers");
 		}
 		return _istream->tellg();
-	}
-
-	inline any_a<> seekg_beg__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return seekg_beg_();
-		}
-		any_a<> thing = *it;
-		if (!check<number_data_a<int64_t>>(thing))
-		{
-			throw dis("strange::river::seekg_beg passed non-int-64 offset");
-		}
-		return seekg_beg_(cast<number_data_a<int64_t>>(thing));
 	}
 
 	inline any_a<> seekg_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
@@ -534,21 +422,6 @@ public:
 		_istream->seekg(offset, std::ios_base::beg);
 	}
 
-	inline any_a<> seekg_end__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return seekg_end_();
-		}
-		any_a<> thing = *it;
-		if (!check<number_data_a<int64_t>>(thing))
-		{
-			throw dis("strange::river::seekg_end passed non-int-64 offset");
-		}
-		return seekg_end_(cast<number_data_a<int64_t>>(thing));
-	}
-
 	inline any_a<> seekg_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekg_end(offset.extract_primitive());
@@ -562,21 +435,6 @@ public:
 			throw dis("strange::river::seekg_end can only be called on input rivers");
 		}
 		_istream->seekg(offset, std::ios_base::end);
-	}
-
-	inline any_a<> seekg_cur__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return seekg_cur_();
-		}
-		any_a<> thing = *it;
-		if (!check<number_data_a<int64_t>>(thing))
-		{
-			throw dis("strange::river::seekg_cur passed non-int-64 offset");
-		}
-		return seekg_cur_(cast<number_data_a<int64_t>>(thing));
 	}
 
 	inline any_a<> seekg_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
@@ -594,11 +452,6 @@ public:
 		_istream->seekg(offset, std::ios_base::cur);
 	}
 
-	inline any_a<> sync__(range_a<> const& _)
-	{
-		return sync_();
-	}
-
 	inline any_a<> sync_()
 	{
 		return boole(sync());
@@ -614,19 +467,6 @@ public:
 	}
 
 	// river output
-	inline any_a<> put__(range_a<> const& range)
-	{
-		for (auto const& thing : range)
-		{
-			if (!check<number_data_a<int8_t>>(thing))
-			{
-				throw dis("strange::river::put called with non-int-8");
-			}
-			put(cast<number_data_a<int8_t>>(thing).extract_primitive());
-		}
-		return thing_t<___ego___>::me_();
-	}
-
 	inline any_a<> put_(number_data_a<int8_t> const& int_8)
 	{
 		put(int_8.extract_primitive());
@@ -640,19 +480,6 @@ public:
 			throw dis("strange::river::put can only be called on output rivers");
 		}
 		_ostream->put(char(int_8));
-	}
-
-	inline any_a<> write__(range_a<> const& range)
-	{
-		for (auto const& thing : range)
-		{
-			if (!check<lake_a<int8_t>>(thing))
-			{
-				throw dis("strange::river::write called with non-lake-int-8");
-			}
-			write(cast<lake_a<int8_t>>(thing).extract_vector());
-		}
-		return thing_t<___ego___>::me_();
 	}
 
 	inline any_a<> write_(lake_a<int8_t> const& lake)
@@ -687,11 +514,6 @@ public:
 		_ostream->write(&str[0], int64_t(str.length()));
 	}
 
-	inline any_a<> tellp__(range_a<> const& _) const
-	{
-		return tellp_();
-	}
-
 	inline number_data_a<int64_t> tellp_() const
 	{
 		return number_int_64_t<>::create(tellp());
@@ -704,21 +526,6 @@ public:
 			throw dis("strange::river::tellp can only be called on output rivers");
 		}
 		return _ostream->tellp();
-	}
-
-	inline any_a<> seekp_beg__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return seekp_beg_();
-		}
-		any_a<> thing = *it;
-		if (!check<number_data_a<int64_t>>(thing))
-		{
-			throw dis("strange::river::seekp_beg passed non-int-64 offset");
-		}
-		return seekp_beg_(cast<number_data_a<int64_t>>(thing));
 	}
 
 	inline any_a<> seekp_beg_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
@@ -736,21 +543,6 @@ public:
 		_ostream->seekp(offset, std::ios_base::beg);
 	}
 
-	inline any_a<> seekp_end__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return seekp_end_();
-		}
-		any_a<> thing = *it;
-		if (!check<number_data_a<int64_t>>(thing))
-		{
-			throw dis("strange::river::seekp_end passed non-int-64 offset");
-		}
-		return seekp_end_(cast<number_data_a<int64_t>>(thing));
-	}
-
 	inline any_a<> seekp_end_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekp_end(offset.extract_primitive());
@@ -766,21 +558,6 @@ public:
 		_ostream->seekp(offset, std::ios_base::end);
 	}
 
-	inline any_a<> seekp_cur__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return seekp_cur_();
-		}
-		any_a<> thing = *it;
-		if (!check<number_data_a<int64_t>>(thing))
-		{
-			throw dis("strange::river::seekp_cur passed non-int-64 offset");
-		}
-		return seekp_cur_(cast<number_data_a<int64_t>>(thing));
-	}
-
 	inline any_a<> seekp_cur_(number_data_a<int64_t> const& offset = number_int_64_t<>::create_())
 	{
 		seekp_cur(offset.extract_primitive());
@@ -794,11 +571,6 @@ public:
 			throw dis("strange::river::seekp_cur can only be called on output rivers");
 		}
 		_ostream->seekp(offset, std::ios_base::cur);
-	}
-
-	inline any_a<> flush__(range_a<> const& _)
-	{
-		return flush_();
 	}
 
 	inline any_a<> flush_()
@@ -817,11 +589,6 @@ public:
 	}
 
 	// river
-	inline any_a<> good__(range_a<> const& _) const
-	{
-		return good_();
-	}
-
 	inline any_a<> good_() const
 	{
 		return boole(good());
@@ -830,11 +597,6 @@ public:
 	inline bool good() const
 	{
 		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->good();
-	}
-
-	inline any_a<> eof__(range_a<> const& _) const
-	{
-		return eof_();
 	}
 
 	inline any_a<> eof_() const
@@ -847,11 +609,6 @@ public:
 		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->eof();
 	}
 
-	inline any_a<> fail__(range_a<> const& _) const
-	{
-		return fail_();
-	}
-
 	inline any_a<> fail_() const
 	{
 		return boole(fail());
@@ -862,11 +619,6 @@ public:
 		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->fail();
 	}
 
-	inline any_a<> bad__(range_a<> const& _) const
-	{
-		return bad_();
-	}
-
 	inline any_a<> bad_() const
 	{
 		return boole(bad());
@@ -875,16 +627,6 @@ public:
 	inline bool bad() const
 	{
 		return (_istream ? static_cast<std::basic_ios<char>*>(_istream) : static_cast<std::basic_ios<char>*>(_ostream))->bad();
-	}
-
-	inline any_a<> set_good__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return set_good_();
-		}
-		return set_good_(*it);
 	}
 
 	inline any_a<> set_good_(any_a<> const& value = yes())
@@ -906,16 +648,6 @@ public:
 		}
 	}
 
-	inline any_a<> set_eof__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return set_eof_();
-		}
-		return set_eof_(*it);
-	}
-
 	inline any_a<> set_eof_(any_a<> const& value = yes())
 	{
 		set_eof(value.something());
@@ -933,16 +665,6 @@ public:
 		{
 			ios->clear((ios->fail() ? std::ios_base::failbit : std::ios_base::goodbit) | (ios->bad() ? std::ios_base::badbit : std::ios_base::goodbit));
 		}
-	}
-
-	inline any_a<> set_fail__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return set_fail_();
-		}
-		return set_fail_(*it);
 	}
 
 	inline any_a<> set_fail_(any_a<> const& value = yes())
@@ -964,16 +686,6 @@ public:
 		}
 	}
 
-	inline any_a<> set_bad__(range_a<> const& range)
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			return set_bad_();
-		}
-		return set_bad_(*it);
-	}
-
 	inline any_a<> set_bad_(any_a<> const& value = yes())
 	{
 		set_bad(value.something());
@@ -991,11 +703,6 @@ public:
 		{
 			ios->clear((ios->eof() ? std::ios_base::eofbit : std::ios_base::goodbit) | (ios->fail() ? std::ios_base::failbit : std::ios_base::goodbit));
 		}
-	}
-
-	inline any_a<> filename__(range_a<> const& _) const
-	{
-		return filename_();
 	}
 
 	inline lake_a<int8_t> filename_() const

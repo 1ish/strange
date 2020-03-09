@@ -44,11 +44,6 @@ class tokenizer_t : public thing_t<___ego___>
 		}
 
 		// forward iterator
-		inline any_a<> get__(range_a<> const&) const
-		{
-			return get_();
-		}
-
 		inline any_a<> get_() const
 		{
 			return _token;
@@ -62,11 +57,6 @@ class tokenizer_t : public thing_t<___ego___>
 		inline any_a<> const& operator*() const
 		{
 			return _token;
-		}
-
-		inline ___ego_it___ increment__(range_a<> const&)
-		{
-			return increment_();
 		}
 
 		inline ___ego_it___ increment_()

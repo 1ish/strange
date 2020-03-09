@@ -62,19 +62,6 @@ public:
 		return _string;
 	}
 
-	inline misunderstanding_a<> add__(range_a<> const& range) const
-	{
-		std::string s = _string;
-		for (any_a<> const& thing : range)
-		{
-			if (check<misunderstanding_a<>>(thing))
-			{
-				s += cast<misunderstanding_a<>>(thing).to_string();
-			}
-		}
-		return misunderstanding_t<>::create(std::move(s));
-	}
-
 	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
 	{
 		return operator+(misunderstanding);

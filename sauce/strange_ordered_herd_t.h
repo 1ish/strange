@@ -48,11 +48,6 @@ class ordered_herd_t : public thing_t<___ego___>
 		}
 
 		// forward iterator
-		inline any_a<> get__(range_a<> const&) const
-		{
-			return get_();
-		}
-
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_herd_thing._mutex);
@@ -67,11 +62,6 @@ class ordered_herd_t : public thing_t<___ego___>
 		inline any_a<> const& operator*() const
 		{
 			return *_it;
-		}
-
-		inline ___ego_it___ increment__(range_a<> const&)
-		{
-			return increment_();
 		}
 
 		inline ___ego_it___ increment_()
@@ -95,11 +85,6 @@ class ordered_herd_t : public thing_t<___ego___>
 		}
 #endif
 		// bidirectional iterator
-		inline ___ego_it___ decrement__(range_a<> const& _)
-		{
-			return decrement_();
-		}
-
 		inline ___ego_it___ decrement_()
 		{
 			operator--();
@@ -199,16 +184,6 @@ public:
 	}
 
 	// visitor pattern
-	inline any_a<> visit__(range_a<> const& range) const
-	{
-		if (!check<inventory_a<>>(range))
-		{
-			throw dis("strange::ordered_herd::visit passed non-inventory");
-		}
-		auto inventory = cast_dup<inventory_a<>>(range); //TODO
-		return visit_(inventory);
-	}
-
 	inline any_a<> visit_(inventory_a<>& inventory) const
 	{
 		auto result = thing_t<>::visit_(inventory);

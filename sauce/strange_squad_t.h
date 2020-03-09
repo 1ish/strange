@@ -48,25 +48,10 @@ class squad_t : public thing_t<___ego___>
 		}
 
 		// forward iterator
-		inline any_a<> get__(range_a<> const&) const
-		{
-			return get_();
-		}
-
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			return *_it;
-		}
-
-		inline any_a<> set__(range_a<> const& range) const
-		{
-			forward_const_iterator_a<> it = range.cbegin_();
-			if (it == range.cend_())
-			{
-				throw dis("strange::squad::iterator set passed empty range");
-			}
-			return set_(*it);
 		}
 
 		inline any_a<> set_(any_a<> const& thing) const
@@ -83,11 +68,6 @@ class squad_t : public thing_t<___ego___>
 		inline any_a<>& operator*() const
 		{
 			return *_it;
-		}
-
-		inline ___ego_it___ increment__(range_a<> const&)
-		{
-			return increment_();
 		}
 
 		inline ___ego_it___ increment_()
@@ -111,11 +91,6 @@ class squad_t : public thing_t<___ego___>
 		}
 #endif
 		// bidirectional iterator
-		inline ___ego_it___ decrement__(range_a<> const& _)
-		{
-			return decrement_();
-		}
-
 		inline ___ego_it___ decrement_()
 		{
 			operator--();
@@ -137,15 +112,6 @@ class squad_t : public thing_t<___ego___>
 		}
 #endif
 		// random access iterator
-		inline ___ego_it___ self_add__(range_a<> const& range)
-		{
-			for (auto const& thing : range)
-			{
-				operator+=(thing);
-			}
-			return thing_t<___ego_it___>::me_();
-		}
-
 		inline ___ego_it___ self_add_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
@@ -164,16 +130,6 @@ class squad_t : public thing_t<___ego___>
 			return *this;
 		}
 
-		inline random_access_iterator_a<> add__(range_a<> const& range) const
-		{
-			random_access_iterator_a<> result = thing_t<___ego_it___>::me_();
-			for (auto const& thing : range)
-			{
-				result += thing;
-			}
-			return result;
-		}
-
 		inline random_access_iterator_a<> add_(number_a<> const& number) const
 		{
 			return operator+(number);
@@ -185,15 +141,6 @@ class squad_t : public thing_t<___ego___>
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.mutate_it() += number.to_int_64();
 			return result;
-		}
-
-		inline ___ego_it___ self_subtract__(range_a<> const& range)
-		{
-			for (auto const& thing : range)
-			{
-				operator-=(thing);
-			}
-			return thing_t<___ego_it___>::me_();
 		}
 
 		inline ___ego_it___ self_subtract_(number_a<> const& number)
@@ -214,16 +161,6 @@ class squad_t : public thing_t<___ego___>
 			return *this;
 		}
 
-		inline random_access_iterator_a<> subtract__(range_a<> const& range) const
-		{
-			random_access_iterator_a<> result = thing_t<___ego_it___>::me_();
-			for (auto const& thing : range)
-			{
-				result -= thing;
-			}
-			return result;
-		}
-
 		inline random_access_iterator_a<> subtract_(number_a<> const& number) const
 		{
 			return operator-(number);
@@ -235,21 +172,6 @@ class squad_t : public thing_t<___ego___>
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.mutate_it() -= number.to_int_64();
 			return result;
-		}
-
-		inline any_a<> less_than__(range_a<> const& range) const
-		{
-			forward_const_iterator_a<> it = range.cbegin_();
-			if (it == range.cend_())
-			{
-				throw dis("strange::squad::iterator::less_than passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check<random_access_iterator_data_a<_iterator_>>(thing))
-			{
-				throw dis("strange::squad::iterator::less_than passed incompatible thing");
-			}
-			return boole(_it < cast<random_access_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> less_than_(random_access_iterator_a<> const& it) const
@@ -266,21 +188,6 @@ class squad_t : public thing_t<___ego___>
 			return _it < cast<random_access_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
-		inline any_a<> greater_than__(range_a<> const& range) const
-		{
-			forward_const_iterator_a<> it = range.cbegin_();
-			if (it == range.cend_())
-			{
-				throw dis("strange::squad::iterator::greater_than passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check<random_access_iterator_data_a<_iterator_>>(thing))
-			{
-				throw dis("strange::squad::iterator::greater_than passed incompatible thing");
-			}
-			return boole(_it > cast<random_access_iterator_data_a<_iterator_>>(thing).extract_it());
-		}
-
 		inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
 		{
 			return boole(operator>(it));
@@ -295,21 +202,6 @@ class squad_t : public thing_t<___ego___>
 			return _it > cast<random_access_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
-		inline any_a<> less_or_equal__(range_a<> const& range) const
-		{
-			forward_const_iterator_a<> it = range.cbegin_();
-			if (it == range.cend_())
-			{
-				throw dis("strange::squad::iterator::less_or_equal passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check<random_access_iterator_data_a<_iterator_>>(thing))
-			{
-				throw dis("strange::squad::iterator::less_or_equal passed incompatible thing");
-			}
-			return boole(_it <= cast<random_access_iterator_data_a<_iterator_>>(thing).extract_it());
-		}
-
 		inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
 		{
 			return boole(operator<=(it));
@@ -322,21 +214,6 @@ class squad_t : public thing_t<___ego___>
 				throw dis("strange::squad::iterator <= passed incompatible thing");
 			}
 			return _it <= cast<random_access_iterator_data_a<_iterator_>>(it).extract_it();
-		}
-
-		inline any_a<> greater_or_equal__(range_a<> const& range) const
-		{
-			forward_const_iterator_a<> it = range.cbegin_();
-			if (it == range.cend_())
-			{
-				throw dis("strange::squad::iterator::greater_or_equal passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check<random_access_iterator_data_a<_iterator_>>(thing))
-			{
-				throw dis("strange::squad::iterator::greater_or_equal passed incompatible thing");
-			}
-			return boole(_it >= cast<random_access_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
@@ -417,11 +294,6 @@ class squad_t : public thing_t<___ego___>
 		}
 
 		// forward iterator
-		inline any_a<> get__(range_a<> const&) const
-		{
-			return get_();
-		}
-
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
@@ -436,11 +308,6 @@ class squad_t : public thing_t<___ego___>
 		inline any_a<> const& operator*() const
 		{
 			return *_it;
-		}
-
-		inline ___ego_it___ increment__(range_a<> const&)
-		{
-			return increment_();
 		}
 
 		inline ___ego_it___ increment_()
@@ -464,11 +331,6 @@ class squad_t : public thing_t<___ego___>
 		}
 #endif
 		// bidirectional iterator
-		inline ___ego_it___ decrement__(range_a<> const& _)
-		{
-			return decrement_();
-		}
-
 		inline ___ego_it___ decrement_()
 		{
 			operator--();
@@ -490,15 +352,6 @@ class squad_t : public thing_t<___ego___>
 		}
 #endif
 		// random access iterator
-		inline ___ego_it___ self_add__(range_a<> const& range)
-		{
-			for (auto const& thing : range)
-			{
-				operator+=(thing);
-			}
-			return thing_t<___ego_it___>::me_();
-		}
-
 		inline ___ego_it___ self_add_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
@@ -517,16 +370,6 @@ class squad_t : public thing_t<___ego___>
 			return *this;
 		}
 
-		inline random_access_const_iterator_a<> add__(range_a<> const& range) const
-		{
-			random_access_const_iterator_a<> result = thing_t<___ego_it___>::me_();
-			for (auto const& thing : range)
-			{
-				result += thing;
-			}
-			return result;
-		}
-
 		inline random_access_const_iterator_a<> add_(number_a<> const& number) const
 		{
 			return operator+(number);
@@ -538,15 +381,6 @@ class squad_t : public thing_t<___ego___>
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.mutate_it() += number.to_int_64();
 			return result;
-		}
-
-		inline ___ego_it___ self_subtract__(range_a<> const& range)
-		{
-			for (auto const& thing : range)
-			{
-				operator-=(thing);
-			}
-			return thing_t<___ego_it___>::me_();
 		}
 
 		inline ___ego_it___ self_subtract_(number_a<> const& number)
@@ -567,16 +401,6 @@ class squad_t : public thing_t<___ego___>
 			return *this;
 		}
 
-		inline random_access_const_iterator_a<> subtract__(range_a<> const& range) const
-		{
-			random_access_const_iterator_a<> result = thing_t<___ego_it___>::me_();
-			for (auto const& thing : range)
-			{
-				result -= thing;
-			}
-			return result;
-		}
-
 		inline random_access_const_iterator_a<> subtract_(number_a<> const& number) const
 		{
 			return operator-(number);
@@ -588,21 +412,6 @@ class squad_t : public thing_t<___ego___>
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			result.mutate_it() -= number.to_int_64();
 			return result;
-		}
-
-		inline any_a<> less_than__(range_a<> const& range) const
-		{
-			forward_const_iterator_a<> it = range.cbegin_();
-			if (it == range.cend_())
-			{
-				throw dis("strange::squad::const_iterator::less_than passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check<random_access_const_iterator_data_a<_iterator_>>(thing))
-			{
-				throw dis("strange::squad::const_iterator::less_than passed incompatible thing");
-			}
-			return boole(_it < cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> less_than_(random_access_const_iterator_a<> const& it) const
@@ -619,21 +428,6 @@ class squad_t : public thing_t<___ego___>
 			return _it < cast<random_access_const_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
-		inline any_a<> greater_than__(range_a<> const& range) const
-		{
-			forward_const_iterator_a<> it = range.cbegin_();
-			if (it == range.cend_())
-			{
-				throw dis("strange::squad::const_iterator::greater_than passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check<random_access_const_iterator_data_a<_iterator_>>(thing))
-			{
-				throw dis("strange::squad::const_iterator::greater_than passed incompatible thing");
-			}
-			return boole(_it > cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract_it());
-		}
-
 		inline any_a<> greater_than_(random_access_const_iterator_a<> const& it) const
 		{
 			return boole(operator>(it));
@@ -648,21 +442,6 @@ class squad_t : public thing_t<___ego___>
 			return _it > cast<random_access_const_iterator_data_a<_iterator_>>(it).extract_it();
 		}
 
-		inline any_a<> less_or_equal__(range_a<> const& range) const
-		{
-			forward_const_iterator_a<> it = range.cbegin_();
-			if (it == range.cend_())
-			{
-				throw dis("strange::squad::const_iterator::less_or_equal passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check<random_access_const_iterator_data_a<_iterator_>>(thing))
-			{
-				throw dis("strange::squad::const_iterator::less_or_equal passed incompatible thing");
-			}
-			return boole(_it <= cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract_it());
-		}
-
 		inline any_a<> less_or_equal_(random_access_const_iterator_a<> const& it) const
 		{
 			return boole(operator<=(it));
@@ -675,21 +454,6 @@ class squad_t : public thing_t<___ego___>
 				throw dis("strange::squad::const_iterator <= passed incompatible thing");
 			}
 			return _it <= cast<random_access_const_iterator_data_a<_iterator_>>(it).extract_it();
-		}
-
-		inline any_a<> greater_or_equal__(range_a<> const& range) const
-		{
-			forward_const_iterator_a<> it = range.cbegin_();
-			if (it == range.cend_())
-			{
-				throw dis("strange::squad::const_iterator::greater_or_equal passed empty range");
-			}
-			any_a<> thing = *it;
-			if (!check<random_access_const_iterator_data_a<_iterator_>>(thing))
-			{
-				throw dis("strange::squad::const_iterator::greater_or_equal passed incompatible thing");
-			}
-			return boole(_it >= cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract_it());
 		}
 
 		inline any_a<> greater_or_equal_(random_access_const_iterator_a<> const& it) const
@@ -785,16 +549,6 @@ public:
 	}
 
 	// visitor pattern
-	inline any_a<> visit__(range_a<> const& range) const
-	{
-		if (!check<inventory_a<>>(range))
-		{
-			throw dis("strange::squad::visit passed non-inventory");
-		}
-		auto inventory = cast_dup<inventory_a<>>(range); //TODO
-		return visit_(inventory);
-	}
-
 	inline any_a<> visit_(inventory_a<>& inventory) const
 	{
 		auto result = thing_t<>::visit_(inventory);
@@ -846,20 +600,10 @@ public:
 		return const_iterator_t<typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
 	}
 
-	inline any_a<> begin__(range_a<> const&)
-	{
-		return begin_();
-	}
-
 	inline random_access_iterator_a<> begin_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return iterator_t<typename std_deque_any::iterator>::create(*this, _deque.begin());
-	}
-
-	inline any_a<> end__(range_a<> const&)
-	{
-		return end_();
 	}
 
 	inline random_access_iterator_a<> end_()

@@ -9,11 +9,6 @@ class operation_t : public thing_t<___ego___>
 {
 public:
 	// operation
-	inline any_a<> pure__(range_a<> const&) const
-	{
-		return pure_();
-	}
-
 	inline any_a<> pure_() const
 	{
 		return boole(pure());
@@ -29,11 +24,6 @@ public:
 
 	static inline void assign(operation_a<> const&)
 	{}
-
-	inline any_a<> names__(range_a<> const&) const
-	{
-		return names_();
-	}
 
 	inline flock_a<> names_() const
 	{

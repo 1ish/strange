@@ -144,19 +144,9 @@ public:
 	}
 
 	// kind
-	inline any_a<> aspects__(range_a<> const&) const
-	{
-		return aspects_();
-	}
-
 	inline flock_a<> aspects_() const
 	{
 		return _aspects;
-	}
-
-	inline any_a<> fixed__(range_a<> const&) const
-	{
-		return fixed_();
 	}
 
 	inline any_a<> fixed_() const
@@ -169,11 +159,6 @@ public:
 		return _fixed;
 	}
 
-	inline any_a<> reference__(range_a<> const&) const
-	{
-		return reference_();
-	}
-
 	inline any_a<> reference_() const
 	{
 		return boole(reference());
@@ -182,11 +167,6 @@ public:
 	inline bool reference() const
 	{
 		return _reference;
-	}
-
-	inline any_a<> optional__(range_a<> const&) const
-	{
-		return optional_();
 	}
 
 	inline any_a<> optional_() const

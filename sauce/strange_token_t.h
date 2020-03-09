@@ -275,11 +275,6 @@ public:
 	}
 
 	// token
-	inline any_a<> filename__(range_a<> const&) const
-	{
-		return filename_();
-	}
-
 	inline symbol_a<> filename_() const
 	{
 		return _filename;
@@ -288,11 +283,6 @@ public:
 	inline std::string filename() const
 	{
 		return _filename.to_string();
-	}
-
-	inline any_a<> line__(range_a<> const&) const
-	{
-		return line_();
 	}
 
 	inline number_data_a<int64_t> line_() const
@@ -305,11 +295,6 @@ public:
 		return _line.extract_primitive();
 	}
 
-	inline any_a<> position__(range_a<> const&) const
-	{
-		return position_();
-	}
-
 	inline number_data_a<int64_t> position_() const
 	{
 		return _position;
@@ -318,11 +303,6 @@ public:
 	inline int64_t position() const
 	{
 		return _position.extract_primitive();
-	}
-
-	inline any_a<> tag__(range_a<> const&) const
-	{
-		return tag_();
 	}
 
 	inline symbol_a<> tag_() const
@@ -335,11 +315,6 @@ public:
 		return _tag.to_string();
 	}
 
-	inline any_a<> symbol__(range_a<> const&) const
-	{
-		return symbol_();
-	}
-
 	inline symbol_a<> symbol_() const
 	{
 		return _symbol;
@@ -350,19 +325,9 @@ public:
 		return _symbol.to_string();
 	}
 
-	inline any_a<> literal__(range_a<> const&) const
-	{
-		return literal_();
-	}
-
 	inline any_a<> literal_() const
 	{
 		return _literal;
-	}
-
-	inline any_a<> precedence__(range_a<> const&) const
-	{
-		return precedence_();
 	}
 
 	inline number_data_a<int64_t> precedence_() const
@@ -373,11 +338,6 @@ public:
 	inline int64_t precedence() const
 	{
 		return _precedence.extract_primitive();
-	}
-
-	inline any_a<> report__(range_a<> const&) const
-	{
-		return report_();
 	}
 
 	inline misunderstanding_a<> report_() const

@@ -33,19 +33,9 @@ public:
 	static inline void share(shoal_a<>&)
 	{}
 
-	inline any_a<> cat__(range_a<> const&) const
-	{
-		return cat_();
-	}
-
 	inline cat_a<> cat_() const
 	{
 		return _cat;
-	}
-
-	inline any_a<> cats__(range_a<> const&) const
-	{
-		return cats_();
 	}
 
 	inline unordered_herd_a<> cats_() const
@@ -53,19 +43,9 @@ public:
 		return _cats;
 	}
 
-	inline any_a<> kind__(range_a<> const&) const
-	{
-		return kind_();
-	}
-
 	inline kind_a<> kind_() const
 	{
 		return _kind;
-	}
-
-	inline any_a<> kinds__(range_a<> const&) const
-	{
-		return kinds_();
 	}
 
 	inline unordered_herd_a<> kinds_() const

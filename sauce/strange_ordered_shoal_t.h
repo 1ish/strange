@@ -48,27 +48,12 @@ class ordered_shoal_t : public thing_t<___ego___>
 		}
 
 		// forward iterator
-		inline any_a<> get__(range_a<> const&) const
-		{
-			return get_();
-		}
-
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_shoal_thing._mutex);
 			_pair.update_index(0, _it->first);
 			_pair.update_index(1, _it->second);
 			return _pair;
-		}
-
-		inline any_a<> set__(range_a<> const& range) const
-		{
-			forward_const_iterator_a<> it = range.cbegin_();
-			if (it == range.cend_())
-			{
-				throw dis("strange::ordered_shoal::iterator set passed empty range");
-			}
-			return set_(*it);
 		}
 
 		inline any_a<> set_(any_a<> const& thing) const
@@ -93,11 +78,6 @@ class ordered_shoal_t : public thing_t<___ego___>
 			return _pair;
 		}
 
-		inline ___ego_it___ increment__(range_a<> const&)
-		{
-			return increment_();
-		}
-
 		inline ___ego_it___ increment_()
 		{
 			operator++();
@@ -119,11 +99,6 @@ class ordered_shoal_t : public thing_t<___ego___>
 		}
 #endif
 		// bidirectional iterator
-		inline ___ego_it___ decrement__(range_a<> const& _)
-		{
-			return decrement_();
-		}
-
 		inline ___ego_it___ decrement_()
 		{
 			operator--();
@@ -210,11 +185,6 @@ class ordered_shoal_t : public thing_t<___ego___>
 		}
 
 		// forward iterator
-		inline any_a<> get__(range_a<> const&) const
-		{
-			return get_();
-		}
-
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_shoal_thing._mutex);
@@ -233,11 +203,6 @@ class ordered_shoal_t : public thing_t<___ego___>
 			_pair.update_index(0, _it->first);
 			_pair.update_index(1, _it->second);
 			return _pair;
-		}
-
-		inline ___ego_it___ increment__(range_a<> const&)
-		{
-			return increment_();
 		}
 
 		inline ___ego_it___ increment_()
@@ -261,11 +226,6 @@ class ordered_shoal_t : public thing_t<___ego___>
 		}
 #endif
 		// bidirectional iterator
-		inline ___ego_it___ decrement__(range_a<> const& _)
-		{
-			return decrement_();
-		}
-
 		inline ___ego_it___ decrement_()
 		{
 			operator--();
@@ -355,16 +315,6 @@ public:
 	}
 
 	// visitor pattern
-	inline any_a<> visit__(range_a<> const& range) const
-	{
-		if (!check<inventory_a<>>(range))
-		{
-			throw dis("strange::ordered_shoal::visit passed non-inventory");
-		}
-		auto inventory = cast_dup<inventory_a<>>(range); //TODO
-		return visit_(inventory);
-	}
-
 	inline any_a<> visit_(inventory_a<>& inventory) const
 	{
 		auto result = thing_t<>::visit_(inventory);
@@ -420,20 +370,10 @@ public:
 		return const_iterator_t<typename std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
 	}
 
-	inline any_a<> begin__(range_a<> const&)
-	{
-		return begin_();
-	}
-
 	inline bidirectional_iterator_a<> begin_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return iterator_t<typename std_map_any_any::iterator>::create(*this, _map.begin());
-	}
-
-	inline any_a<> end__(range_a<> const&)
-	{
-		return end_();
 	}
 
 	inline bidirectional_iterator_a<> end_()

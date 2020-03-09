@@ -47,11 +47,6 @@ public:
 	}
 
 	// forward iterator
-	inline any_a<> get__(range_a<> const&) const
-	{
-		return get_();
-	}
-	
 	inline any_a<> get_() const
 	{
 		return no();
@@ -66,11 +61,6 @@ public:
 	{
 		static any_a<> NO = no();
 		return NO;
-	}
-
-	inline ___ego___ increment__(range_a<> const&)
-	{
-		return increment_();
 	}
 
 	inline ___ego___ increment_()

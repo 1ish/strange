@@ -32,19 +32,9 @@ public:
 		shoal.update_string("strange::thing::operate", native_function_create(&thing_t<>::operate__));
 	}
 
-	static inline any_a<> cat__(range_a<> const&)
-	{
-		return cat_();
-	}
-	
 	static inline cat_a<> cat_()
 	{
 		return ___ego___::___cat___();
-	}
-
-	static inline any_a<> cats__(range_a<> const&)
-	{
-		return cats_();
 	}
 
 	static inline unordered_herd_a<> cats_()
@@ -52,19 +42,9 @@ public:
 		return ___ego___::___cats___();
 	}
 
-	static inline any_a<> kind__(range_a<> const&)
-	{
-		return kind_();
-	}
-
 	static inline kind_a<> kind_()
 	{
 		return ___ego___::___kind___();
-	}
-
-	static inline any_a<> kinds__(range_a<> const&)
-	{
-		return kinds_();
 	}
 
 	static inline unordered_herd_a<> kinds_()
@@ -72,22 +52,12 @@ public:
 		return ___ego___::___kinds___();
 	}
 
-	static inline any_a<> operations__(range_a<> const&)
-	{
-		return operations_();
-	}
-	
 	static inline unordered_shoal_a<> operations_()
 	{
 		return ___ego___::___operations___();
 	}
 
 	// visitor pattern
-	static inline any_a<> visit__(range_a<> const& range)
-	{
-		return operate__(range); //TODO
-	}
-
 	static inline any_a<> visit_(inventory_a<>& inventory)
 	{
 		return operate__(inventory);
@@ -154,24 +124,9 @@ public:
 	}
 
 	// identification
-	inline any_a<> identity__(range_a<> const&) const
-	{
-		return identity_();
-	}
-
 	inline number_data_a<uint64_t> identity_() const
 	{
 		return num(uint64_t(identity()));
-	}
-
-	inline any_a<> identical__(range_a<> const& range) const
-	{
-		forward_const_iterator_a<> it = range.cbegin_();
-		if (it == range.cend_())
-		{
-			throw dis("strange::thing::identical passed empty range");
-		}
-		return identical_(*it);
 	}
 
 	inline any_a<> identical_(any_a<> const& thing) const
@@ -180,19 +135,9 @@ public:
 	}
 
 	// comparison
-	static inline any_a<> nothing__(range_a<> const&)
-	{
-		return nothing_();
-	}
-
 	static inline any_a<> nothing_()
 	{
 		return no();
-	}
-
-	static inline any_a<> something__(range_a<> const&)
-	{
-		return something_();
 	}
 
 	static inline any_a<> something_()
