@@ -12,24 +12,6 @@ template <typename _1_>
 class ordered_shoal_a : public shoal_a<>
 {
 public:
-	// arithmetic operator overloads
-	inline ordered_shoal_a& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline ordered_shoal_a operator++(int)
-	{
-		assert(___handle___);
-		ordered_shoal_a result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline ordered_shoal_a& operator--()
 	{
 		assert(___handle___);
@@ -339,24 +321,6 @@ template <typename _1_>
 class ordered_shoal_d : public shoal_d<>
 {
 public:
-	// arithmetic operator overloads
-	inline ordered_shoal_d& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline ordered_shoal_d operator++(int)
-	{
-		assert(___handle___);
-		ordered_shoal_d result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline ordered_shoal_d& operator--()
 	{
 		assert(___handle___);

@@ -63,21 +63,9 @@ public:
 		return NO;
 	}
 
-	inline ___ego___ increment_()
-	{
-		return thing_t<___ego___>::me_();
-	}
+	inline void increment_()
+	{}
 
-	inline it_t& operator++()
-	{
-		return *this;
-	}
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline it_t operator++(int)
-	{
-		return *this;
-	}
-#endif
 protected:
 	inline it_t()
 		: thing_t<___ego___>{}

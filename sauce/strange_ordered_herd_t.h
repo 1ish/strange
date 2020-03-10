@@ -64,26 +64,12 @@ class ordered_herd_t : public thing_t<___ego___>
 			return *_it;
 		}
 
-		inline ___ego_it___ increment_()
-		{
-			operator++();
-			return thing_t<___ego_it___>::me_();
-		}
-
-		inline const_iterator_t& operator++()
+		inline void increment_()
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_herd_thing._mutex);
 			++_it;
-			return *this;
 		}
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-		inline const_iterator_t operator++(int)
-		{
-			const_iterator_t result = *this;
-			operator++();
-			return result;
-		}
-#endif
+
 		// bidirectional iterator
 		inline ___ego_it___ decrement_()
 		{

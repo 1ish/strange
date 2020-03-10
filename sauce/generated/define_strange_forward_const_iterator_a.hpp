@@ -12,24 +12,6 @@ template <typename _1_>
 class forward_const_iterator_a : public any_a<>
 {
 public:
-	// arithmetic operator overloads
-	inline forward_const_iterator_a& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline forward_const_iterator_a operator++(int)
-	{
-		assert(___handle___);
-		forward_const_iterator_a result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline forward_const_iterator_a& operator--()
 	{
 		assert(___handle___);
@@ -95,8 +77,27 @@ public:
 
 	inline any_a<> increment__(range_a<> const& ___arguments___);
 
-	inline forward_const_iterator_a<> increment_()
-	{ assert(___handle___); return ___write___().increment_(); }
+	inline forward_const_iterator_a increment_()
+	{
+		assert(___handle___);
+		___write___().increment_();
+		return *this;
+	}
+
+	inline forward_const_iterator_a& operator++()
+	{
+		increment_();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline forward_const_iterator_a operator++(int)
+	{
+		forward_const_iterator_a result = *this;
+		increment_();
+		return result;
+	}
+#endif
 
 protected:
 	struct ___forward_const_iterator_a_handle_base___ : ___any_a_handle_base___
@@ -104,7 +105,7 @@ protected:
 		virtual any_a<> get_() const = 0;
 		virtual any_a < > const & operator*() const = 0;
 		virtual any_a < > const * operator->() const = 0;
-		virtual forward_const_iterator_a<> increment_() = 0;
+		virtual void increment_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___forward_const_iterator_a_handle_base___>
@@ -134,8 +135,8 @@ protected:
 		virtual inline any_a < > const * operator->() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator->(); }
 
-		virtual inline forward_const_iterator_a<> increment_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
+		virtual inline void increment_() final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
 
 	};
 
@@ -359,24 +360,6 @@ template <typename _1_>
 class forward_const_iterator_d : public any_a<>
 {
 public:
-	// arithmetic operator overloads
-	inline forward_const_iterator_d& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline forward_const_iterator_d operator++(int)
-	{
-		assert(___handle___);
-		forward_const_iterator_d result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline forward_const_iterator_d& operator--()
 	{
 		assert(___handle___);

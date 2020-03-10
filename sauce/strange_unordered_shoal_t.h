@@ -79,26 +79,12 @@ class unordered_shoal_t : public thing_t<___ego___>
 			return _pair;
 		}
 
-		inline ___ego_it___ increment_()
-		{
-			operator++();
-			return thing_t<___ego_it___>::me_();
-		}
-
-		inline iterator_t& operator++()
+		inline void increment_()
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
 			++_it;
-			return *this;
 		}
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-		inline iterator_t operator++(int)
-		{
-			iterator_t result = *this;
-			operator++();
-			return result;
-		}
-#endif
+
 		// data
 		inline _iterator_ const& extract_it() const
 		{
@@ -185,26 +171,12 @@ class unordered_shoal_t : public thing_t<___ego___>
 			return _pair;
 		}
 
-		inline ___ego_it___ increment_()
-		{
-			operator++();
-			return thing_t<___ego_it___>::me_();
-		}
-
-		inline const_iterator_t& operator++()
+		inline void increment_()
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
 			++_it;
-			return *this;
 		}
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-		inline const_iterator_t operator++(int)
-		{
-			const_iterator_t result = *this;
-			operator++();
-			return result;
-		}
-#endif
+
 		// data
 		inline _iterator_ const& extract_it() const
 		{

@@ -43,24 +43,6 @@ public:
 		___write___();
 	}
 
-	// arithmetic operator overloads
-	inline any_a& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline any_a operator++(int)
-	{
-		assert(___handle___);
-		any_a result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline any_a& operator--()
 	{
 		assert(___handle___);
@@ -239,7 +221,6 @@ protected:
 		virtual ___SHARED___ ___clone___() const = 0;
 		virtual void ___weak___(___WEAK___ const& weak) const = 0;
 		virtual operator bool() const = 0;
-		virtual void operator++() = 0;
 		virtual void operator--() = 0;
 		virtual void operator+=(any_a<> const& other) = 0;
 		virtual void operator-=(any_a<> const& other) = 0;
@@ -302,11 +283,6 @@ protected:
 		virtual inline operator bool() const final
 		{
 			return ___value___.operator bool();
-		}
-
-		virtual inline void operator++() final
-		{
-			___value___.operator++();
 		}
 
 		virtual inline void operator--() final

@@ -12,24 +12,6 @@ template <typename _1_>
 class bidirectional_iterator_a : public forward_iterator_a<>
 {
 public:
-	// arithmetic operator overloads
-	inline bidirectional_iterator_a& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline bidirectional_iterator_a operator++(int)
-	{
-		assert(___handle___);
-		bidirectional_iterator_a result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline bidirectional_iterator_a& operator--()
 	{
 		assert(___handle___);
@@ -335,24 +317,6 @@ template <typename _1_>
 class bidirectional_iterator_d : public forward_iterator_d<>
 {
 public:
-	// arithmetic operator overloads
-	inline bidirectional_iterator_d& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline bidirectional_iterator_d operator++(int)
-	{
-		assert(___handle___);
-		bidirectional_iterator_d result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline bidirectional_iterator_d& operator--()
 	{
 		assert(___handle___);

@@ -74,26 +74,12 @@ class range_operator_t : public thing_t<___ego___>
 			return vector.back();
 		}
 
-		inline ___ego_it___ increment_()
-		{
-			operator++();
-			return thing_t<___ego_it___>::me_();
-		}
-
-		inline const_iterator_t& operator++()
+		inline void increment_()
 		{
 			++_it;
 			++_pos;
-			return *this;
 		}
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-		inline const_iterator_t operator++(int)
-		{
-			const_iterator_t result = *this;
-			operator++();
-			return result;
-		}
-#endif
+
 		// data
 		inline _iterator_ const& extract_it() const
 		{

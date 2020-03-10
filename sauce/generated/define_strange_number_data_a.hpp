@@ -12,24 +12,6 @@ template <typename _1_>
 class number_data_a : public number_a<>
 {
 public:
-	// arithmetic operator overloads
-	inline number_data_a& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline number_data_a operator++(int)
-	{
-		assert(___handle___);
-		number_data_a result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline number_data_a& operator--()
 	{
 		assert(___handle___);
@@ -339,24 +321,6 @@ template <typename _1_>
 class number_data_d : public number_d<>
 {
 public:
-	// arithmetic operator overloads
-	inline number_data_d& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline number_data_d operator++(int)
-	{
-		assert(___handle___);
-		number_data_d result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline number_data_d& operator--()
 	{
 		assert(___handle___);

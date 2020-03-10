@@ -12,24 +12,6 @@ template <typename element>
 class range_of_a : public any_a<>
 {
 public:
-	// arithmetic operator overloads
-	inline range_of_a& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline range_of_a operator++(int)
-	{
-		assert(___handle___);
-		range_of_a result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline range_of_a& operator--()
 	{
 		assert(___handle___);
@@ -345,24 +327,6 @@ template <typename element>
 class range_of_d : public any_a<>
 {
 public:
-	// arithmetic operator overloads
-	inline range_of_d& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline range_of_d operator++(int)
-	{
-		assert(___handle___);
-		range_of_d result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline range_of_d& operator--()
 	{
 		assert(___handle___);

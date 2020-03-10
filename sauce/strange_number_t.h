@@ -56,25 +56,11 @@ public:
 	}
 
 	// number
-	inline ___ego___ increment_()
-	{
-		operator++();
-		return thing_t<___ego___>::me_();
-	}
-
-	inline number_t& operator++()
+	inline void increment_()
 	{
 		++_number;
-		return *this;
 	}
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline number_t operator++(int)
-	{
-		number_t result = *this;
-		operator++();
-		return result;
-	}
-#endif
+
 	inline number_a<> decrement_()
 	{
 		operator--();

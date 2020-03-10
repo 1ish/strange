@@ -12,24 +12,6 @@ template <typename number_data_int64, typename number_data_uint64, typename numb
 class number_a : public any_a<>
 {
 public:
-	// arithmetic operator overloads
-	inline number_a& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline number_a operator++(int)
-	{
-		assert(___handle___);
-		number_a result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline number_a& operator--()
 	{
 		assert(___handle___);
@@ -84,8 +66,27 @@ public:
 
 	inline any_a<> increment__(range_a<> const& ___arguments___);
 
-	inline number_a<> increment_()
-	{ assert(___handle___); return ___write___().increment_(); }
+	inline number_a increment_()
+	{
+		assert(___handle___);
+		___write___().increment_();
+		return *this;
+	}
+
+	inline number_a& operator++()
+	{
+		increment_();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline number_a operator++(int)
+	{
+		number_a result = *this;
+		increment_();
+		return result;
+	}
+#endif
 
 	inline any_a<> decrement__(range_a<> const& ___arguments___);
 
@@ -309,7 +310,7 @@ public:
 protected:
 	struct ___number_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual number_a<> increment_() = 0;
+		virtual void increment_() = 0;
 		virtual number_a<> decrement_() = 0;
 		virtual number_a<> self_assign_(number_a<> const& number) = 0;
 		virtual number_a<> self_add_(number_a<> const& number) = 0;
@@ -383,8 +384,8 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline number_a<> increment_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
+		virtual inline void increment_() final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.increment_(); }
 
 		virtual inline number_a<> decrement_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement_(); }
@@ -796,24 +797,6 @@ template <typename number_data_int64, typename number_data_uint64, typename numb
 class number_d : public any_a<>
 {
 public:
-	// arithmetic operator overloads
-	inline number_d& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline number_d operator++(int)
-	{
-		assert(___handle___);
-		number_d result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline number_d& operator--()
 	{
 		assert(___handle___);

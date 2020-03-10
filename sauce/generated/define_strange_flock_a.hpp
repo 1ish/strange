@@ -12,24 +12,6 @@ template <typename _1_>
 class flock_a : public inventory_a<>
 {
 public:
-	// arithmetic operator overloads
-	inline flock_a& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline flock_a operator++(int)
-	{
-		assert(___handle___);
-		flock_a result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline flock_a& operator--()
 	{
 		assert(___handle___);
@@ -339,24 +321,6 @@ template <typename _1_>
 class flock_d : public inventory_d<>
 {
 public:
-	// arithmetic operator overloads
-	inline flock_d& operator++()
-	{
-		assert(___handle___);
-		___write___().operator++();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline flock_d operator++(int)
-	{
-		assert(___handle___);
-		flock_d result = *this;
-		___write___().operator++();
-		return result;
-	}
-#endif
-
 	inline flock_d& operator--()
 	{
 		assert(___handle___);
