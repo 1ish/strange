@@ -12,23 +12,6 @@ template <typename _1_>
 class bidirectional_const_iterator_data_a : public bidirectional_const_iterator_a<>
 {
 public:
-	inline bidirectional_const_iterator_data_a& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline bidirectional_const_iterator_data_a operator--(int)
-	{
-		assert(___handle___);
-		bidirectional_const_iterator_data_a result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline bidirectional_const_iterator_data_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
@@ -321,23 +304,6 @@ template <typename _1_>
 class bidirectional_const_iterator_data_d : public bidirectional_const_iterator_d<>
 {
 public:
-	inline bidirectional_const_iterator_data_d& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline bidirectional_const_iterator_data_d operator--(int)
-	{
-		assert(___handle___);
-		bidirectional_const_iterator_data_d result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline bidirectional_const_iterator_data_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);

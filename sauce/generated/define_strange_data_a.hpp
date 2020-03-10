@@ -12,23 +12,6 @@ template <typename _1_>
 class data_a : public any_a<>
 {
 public:
-	inline data_a& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline data_a operator--(int)
-	{
-		assert(___handle___);
-		data_a result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline data_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
@@ -321,23 +304,6 @@ template <typename _1_>
 class data_d : public any_a<>
 {
 public:
-	inline data_d& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline data_d operator--(int)
-	{
-		assert(___handle___);
-		data_d result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline data_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);

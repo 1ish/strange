@@ -12,23 +12,6 @@ template <typename _1_>
 class forward_iterator_a : public any_a<>
 {
 public:
-	inline forward_iterator_a& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline forward_iterator_a operator--(int)
-	{
-		assert(___handle___);
-		forward_iterator_a result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline forward_iterator_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
@@ -370,23 +353,6 @@ template <typename _1_>
 class forward_iterator_d : public any_a<>
 {
 public:
-	inline forward_iterator_d& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline forward_iterator_d operator--(int)
-	{
-		assert(___handle___);
-		forward_iterator_d result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline forward_iterator_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);

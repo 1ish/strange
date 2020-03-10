@@ -12,23 +12,6 @@ template <typename _1_>
 class brook_a : public inventory_a<>
 {
 public:
-	inline brook_a& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline brook_a operator--(int)
-	{
-		assert(___handle___);
-		brook_a result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline brook_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
@@ -321,23 +304,6 @@ template <typename _1_>
 class brook_d : public inventory_d<>
 {
 public:
-	inline brook_d& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline brook_d operator--(int)
-	{
-		assert(___handle___);
-		brook_d result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline brook_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);

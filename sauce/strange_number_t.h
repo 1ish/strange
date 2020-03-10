@@ -61,25 +61,11 @@ public:
 		++_number;
 	}
 
-	inline number_a<> decrement_()
-	{
-		operator--();
-		return thing_t<___ego___>::me_();
-	}
-
-	inline number_t& operator--()
+	inline void decrement_()
 	{
 		--_number;
-		return *this;
 	}
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline number_t operator--(int)
-	{
-		number_t result = *this;
-		operator--();
-		return result;
-	}
-#endif
+
 	inline number_a<> self_assign_(number_a<> const& number)
 	{
 		_number = number_u<_primitive_>::from_number(number);

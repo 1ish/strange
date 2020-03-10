@@ -12,23 +12,6 @@ template <typename _1_>
 class herd_a : public collection_a<>
 {
 public:
-	inline herd_a& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline herd_a operator--(int)
-	{
-		assert(___handle___);
-		herd_a result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline herd_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
@@ -356,23 +339,6 @@ template <typename _1_>
 class herd_d : public collection_d<>
 {
 public:
-	inline herd_d& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline herd_d operator--(int)
-	{
-		assert(___handle___);
-		herd_d result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline herd_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);

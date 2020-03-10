@@ -12,23 +12,6 @@ template <typename _1_>
 class range_a : public any_a<>
 {
 public:
-	inline range_a& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline range_a operator--(int)
-	{
-		assert(___handle___);
-		range_a result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline range_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
@@ -327,23 +310,6 @@ template <typename _1_>
 class range_d : public any_a<>
 {
 public:
-	inline range_d& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline range_d operator--(int)
-	{
-		assert(___handle___);
-		range_d result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline range_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);

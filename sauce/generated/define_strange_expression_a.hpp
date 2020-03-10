@@ -12,23 +12,6 @@ template <typename _1_>
 class expression_a : public operation_a<>
 {
 public:
-	inline expression_a& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline expression_a operator--(int)
-	{
-		assert(___handle___);
-		expression_a result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline expression_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
@@ -405,23 +388,6 @@ template <typename _1_>
 class expression_d : public operation_d<>
 {
 public:
-	inline expression_d& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline expression_d operator--(int)
-	{
-		assert(___handle___);
-		expression_d result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline expression_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);

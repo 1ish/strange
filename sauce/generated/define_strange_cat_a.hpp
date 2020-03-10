@@ -12,23 +12,6 @@ template <typename _1_>
 class cat_a : public symbol_a<>
 {
 public:
-	inline cat_a& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline cat_a operator--(int)
-	{
-		assert(___handle___);
-		cat_a result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline cat_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
@@ -398,23 +381,6 @@ template <typename _1_>
 class cat_d : public symbol_d<>
 {
 public:
-	inline cat_d& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline cat_d operator--(int)
-	{
-		assert(___handle___);
-		cat_d result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline cat_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);

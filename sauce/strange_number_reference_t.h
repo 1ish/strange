@@ -48,23 +48,11 @@ public:
 		++_number;
 	}
 
-	inline number_a<> decrement_()
+	inline void decrement_()
 	{
-		operator--();
-		return thing_t<___ego___>::me_();
+		--_number;
 	}
 
-	inline number_reference_t& operator--()
-	{
-		--_number;
-		return *this;
-	}
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline void operator--(int)
-	{
-		--_number;
-	}
-#endif
 	inline number_a<> self_assign_(number_a<> const& number)
 	{
 		_number = number_u<_primitive_>::from_number(number);

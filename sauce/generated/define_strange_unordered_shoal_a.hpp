@@ -12,23 +12,6 @@ template <typename _1_>
 class unordered_shoal_a : public shoal_a<>
 {
 public:
-	inline unordered_shoal_a& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline unordered_shoal_a operator--(int)
-	{
-		assert(___handle___);
-		unordered_shoal_a result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline unordered_shoal_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
@@ -321,23 +304,6 @@ template <typename _1_>
 class unordered_shoal_d : public shoal_d<>
 {
 public:
-	inline unordered_shoal_d& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline unordered_shoal_d operator--(int)
-	{
-		assert(___handle___);
-		unordered_shoal_d result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline unordered_shoal_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);

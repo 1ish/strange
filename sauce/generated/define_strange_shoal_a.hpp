@@ -12,23 +12,6 @@ template <typename _1_>
 class shoal_a : public collection_a<>
 {
 public:
-	inline shoal_a& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline shoal_a operator--(int)
-	{
-		assert(___handle___);
-		shoal_a result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline shoal_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
@@ -362,23 +345,6 @@ template <typename _1_>
 class shoal_d : public collection_d<>
 {
 public:
-	inline shoal_d& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline shoal_d operator--(int)
-	{
-		assert(___handle___);
-		shoal_d result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline shoal_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);

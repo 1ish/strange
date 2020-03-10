@@ -594,23 +594,6 @@ protected:
 				"public:\n");
 		}
 		river.write_string(
-			"\tinline " + class_name + "& operator--()\n"
-			"\t{\n"
-			"\t\tassert(___handle___);\n"
-			"\t\t___write___().operator--();\n"
-			"\t\treturn *this;\n"
-			"\t}\n\n"
-
-			"#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS\n"
-			"\tinline " + class_name + " operator--(int)\n"
-			"\t{\n"
-			"\t\tassert(___handle___);\n"
-			"\t\t" + class_name + " result = *this;\n"
-			"\t\t___write___().operator--();\n"
-			"\t\treturn result;\n"
-			"\t}\n"
-			"#endif\n\n"
-
 			"\tinline " + class_name + "& operator+=(any_a<> const& other)\n"
 			"\t{\n"
 			"\t\tassert(___handle___);\n"
@@ -834,6 +817,31 @@ protected:
 				"\t}\n"
 				"#endif\n\n");
 		}
+		else if (name == "decrement_")
+		{
+			river.write_string(
+				"\tinline " + class_name + " " + name + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n"
+
+				"\tinline " + class_name + "& operator--()\n"
+				"\t{\n"
+				"\t\t" + name + "();\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n"
+
+				"#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS\n"
+				"\tinline " + class_name + " operator--(int)\n"
+				"\t{\n"
+				"\t\t" + class_name + " result = *this;\n"
+				"\t\t" + name + "();\n"
+				"\t\treturn result;\n"
+				"\t}\n"
+				"#endif\n\n");
+		}
 		//TODO
 		else
 		{
@@ -914,7 +922,6 @@ protected:
 				"\t\tvirtual ___SHARED___ ___clone___() const = 0;\n"
 				"\t\tvirtual void ___weak___(___WEAK___ const& weak) const = 0;\n"
 				"\t\tvirtual operator bool() const = 0;\n"
-				"\t\tvirtual void operator--() = 0;\n"
 				"\t\tvirtual void operator+=(any_a<> const& other) = 0;\n"
 				"\t\tvirtual void operator-=(any_a<> const& other) = 0;\n"
 				"\t\tvirtual void operator*=(any_a<> const& other) = 0;\n"
@@ -962,11 +969,6 @@ protected:
 				"\t\tvirtual inline operator bool() const final\n"
 				"\t\t{\n"
 				"\t\t\treturn ___value___.operator bool();\n"
-				"\t\t}\n\n"
-
-				"\t\tvirtual inline void operator--() final\n"
-				"\t\t{\n"
-				"\t\t\t___value___.operator--();\n"
 				"\t\t}\n\n"
 
 				"\t\tvirtual inline void operator+=(any_a<> const& other) final\n"
@@ -1131,7 +1133,7 @@ protected:
 		std::string constness;
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
-		if (name == "increment_")
+		if (name == "increment_" || name == "decrement_")
 		{
 			river.write_string(
 				"\t\tvirtual void " + name + parameters + constness + " = 0;\n");
@@ -1165,7 +1167,7 @@ protected:
 	
 		std::string const scope = root ? "" : "___any_a_handle___<___TTT___, ___DHB___>::";
 
-		if (name == "increment_")
+		if (name == "increment_" || name == "decrement_")
 		{
 			river.write_string(
 				"\t\tvirtual inline void " + name + parameters + constness + " final\n"

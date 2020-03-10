@@ -12,23 +12,6 @@ template <typename _1_>
 class bidirectional_const_iterator_a : public forward_const_iterator_a<>
 {
 public:
-	inline bidirectional_const_iterator_a& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline bidirectional_const_iterator_a operator--(int)
-	{
-		assert(___handle___);
-		bidirectional_const_iterator_a result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline bidirectional_const_iterator_a& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
@@ -66,13 +49,32 @@ public:
 
 	inline any_a<> decrement__(range_a<> const& ___arguments___);
 
-	inline bidirectional_const_iterator_a<> decrement_()
-	{ assert(___handle___); return ___write___().decrement_(); }
+	inline bidirectional_const_iterator_a decrement_()
+	{
+		assert(___handle___);
+		___write___().decrement_();
+		return *this;
+	}
+
+	inline bidirectional_const_iterator_a& operator--()
+	{
+		decrement_();
+		return *this;
+	}
+
+#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
+	inline bidirectional_const_iterator_a operator--(int)
+	{
+		bidirectional_const_iterator_a result = *this;
+		decrement_();
+		return result;
+	}
+#endif
 
 protected:
 	struct ___bidirectional_const_iterator_a_handle_base___ : ___forward_const_iterator_a_handle_base___
 	{
-		virtual bidirectional_const_iterator_a<> decrement_() = 0;
+		virtual void decrement_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___bidirectional_const_iterator_a_handle_base___>
@@ -93,8 +95,8 @@ protected:
 			: ___forward_const_iterator_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline bidirectional_const_iterator_a<> decrement_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement_(); }
+		virtual inline void decrement_() final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement_(); }
 
 	};
 
@@ -317,23 +319,6 @@ template <typename _1_>
 class bidirectional_const_iterator_d : public forward_const_iterator_d<>
 {
 public:
-	inline bidirectional_const_iterator_d& operator--()
-	{
-		assert(___handle___);
-		___write___().operator--();
-		return *this;
-	}
-
-#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
-	inline bidirectional_const_iterator_d operator--(int)
-	{
-		assert(___handle___);
-		bidirectional_const_iterator_d result = *this;
-		___write___().operator--();
-		return result;
-	}
-#endif
-
 	inline bidirectional_const_iterator_d& operator+=(any_a<> const& other)
 	{
 		assert(___handle___);
