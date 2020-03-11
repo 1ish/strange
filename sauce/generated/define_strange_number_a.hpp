@@ -58,15 +58,17 @@ public:
 
 	inline number_a& operator++()
 	{
-		increment_();
+		assert(___handle___);
+		___write___().increment_();
 		return *this;
 	}
 
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline number_a operator++(int)
 	{
+		assert(___handle___);
 		number_a result = *this;
-		increment_();
+		___write___().increment_();
 		return result;
 	}
 #endif
@@ -82,15 +84,17 @@ public:
 
 	inline number_a& operator--()
 	{
-		decrement_();
+		assert(___handle___);
+		___write___().decrement_();
 		return *this;
 	}
 
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline number_a operator--(int)
 	{
+		assert(___handle___);
 		number_a result = *this;
-		decrement_();
+		___write___().decrement_();
 		return result;
 	}
 #endif

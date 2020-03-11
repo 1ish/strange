@@ -69,15 +69,17 @@ public:
 
 	inline forward_const_iterator_a& operator++()
 	{
-		increment_();
+		assert(___handle___);
+		___write___().increment_();
 		return *this;
 	}
 
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline forward_const_iterator_a operator++(int)
 	{
+		assert(___handle___);
 		forward_const_iterator_a result = *this;
-		increment_();
+		___write___().increment_();
 		return result;
 	}
 #endif

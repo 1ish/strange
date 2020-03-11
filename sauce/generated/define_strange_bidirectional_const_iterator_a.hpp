@@ -58,15 +58,17 @@ public:
 
 	inline bidirectional_const_iterator_a& operator--()
 	{
-		decrement_();
+		assert(___handle___);
+		___write___().decrement_();
 		return *this;
 	}
 
 #ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS
 	inline bidirectional_const_iterator_a operator--(int)
 	{
+		assert(___handle___);
 		bidirectional_const_iterator_a result = *this;
-		decrement_();
+		___write___().decrement_();
 		return result;
 	}
 #endif

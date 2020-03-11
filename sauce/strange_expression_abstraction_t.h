@@ -804,15 +804,17 @@ protected:
 
 				"\tinline " + class_name + "& operator++()\n"
 				"\t{\n"
-				"\t\t" + name + "();\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
 				"\t\treturn *this;\n"
 				"\t}\n\n"
 
 				"#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS\n"
 				"\tinline " + class_name + " operator++(int)\n"
 				"\t{\n"
+				"\t\tassert(___handle___);\n"
 				"\t\t" + class_name + " result = *this;\n"
-				"\t\t" + name + "();\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
 				"\t\treturn result;\n"
 				"\t}\n"
 				"#endif\n\n");
@@ -829,15 +831,17 @@ protected:
 
 				"\tinline " + class_name + "& operator--()\n"
 				"\t{\n"
-				"\t\t" + name + "();\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
 				"\t\treturn *this;\n"
 				"\t}\n\n"
 
 				"#ifdef STRANGE_IMPLEMENT_POST_INCREMENT_AND_DECREMENT_OPERATORS\n"
 				"\tinline " + class_name + " operator--(int)\n"
 				"\t{\n"
+				"\t\tassert(___handle___);\n"
 				"\t\t" + class_name + " result = *this;\n"
-				"\t\t" + name + "();\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
 				"\t\treturn result;\n"
 				"\t}\n"
 				"#endif\n\n");
