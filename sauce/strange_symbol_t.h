@@ -96,11 +96,6 @@ public:
 
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
 	{
-		return operator+(symbol);
-	}
-
-	inline symbol_a<> operator+(symbol_a<> const& symbol) const
-	{
 		return symbol_t<>::create(_string + symbol.to_string());
 	}
 

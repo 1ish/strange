@@ -20,15 +20,14 @@ public:
 	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
 	{ assert(___handle___); return ___read___().add_(misunderstanding); }
 
-	inline misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const
-	{ assert(___handle___); return ___read___().operator+(misunderstanding); }
+	inline misunderstanding_a<> operator+(misunderstanding_a<> const& misunderstanding) const
+	{ assert(___handle___); return ___read___().add_(misunderstanding); }
 
 protected:
 	struct ___misunderstanding_a_handle_base___ : ___any_a_handle_base___
 	{
 		virtual std :: string to_string() const = 0;
 		virtual misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const = 0;
-		virtual misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___misunderstanding_a_handle_base___>
@@ -54,9 +53,6 @@ protected:
 
 		virtual inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(misunderstanding); }
-
-		virtual inline misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(misunderstanding); }
 
 	};
 
@@ -303,9 +299,6 @@ public:
 		}
 		return cast<misunderstanding_a<>>(variadic_operate(op, *const_cast<misunderstanding_d*>(this), misunderstanding));
 	}
-
-	inline misunderstanding_a < > operator+(misunderstanding_a < > const & misunderstanding ) const
-	{ return add_(misunderstanding); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

@@ -8,12 +8,10 @@ false &&
 					self_add_ := (number :<number>#, <random_access_iterator>),
 
 					add_ :# (number :<number>#, <random_access_iterator>),
-					'operator+' : "random_access_iterator_a (number_a<> const& number) const { return add_(number); }",
 
 					self_subtract_ := (number :<number>#, <random_access_iterator>),
 
 					subtract_ :# (number :<number>#, <random_access_iterator>),
-					'operator-' : "random_access_iterator_a (number_a<> const& number) const { return subtract_(number); }",
 
 					less_than_ :# (it :<random_access_iterator>#, <>),
 					'operator<' : "bool (random_access_iterator_a<> const& it) const { return less_than_(it); }",

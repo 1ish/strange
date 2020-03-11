@@ -93,11 +93,6 @@ class flock_t : public thing_t<___ego___>
 
 		inline random_access_iterator_a<> add_(number_a<> const& number) const
 		{
-			return operator+(number);
-		}
-
-		inline random_access_iterator_a<> operator+(number_a<> const& number) const
-		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_flock_thing._mutex);
 			result.mutate_it() += number.to_int_64();
@@ -111,11 +106,6 @@ class flock_t : public thing_t<___ego___>
 		}
 
 		inline random_access_iterator_a<> subtract_(number_a<> const& number) const
-		{
-			return operator-(number);
-		}
-
-		inline random_access_iterator_a<> operator-(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_flock_thing._mutex);
@@ -281,11 +271,6 @@ class flock_t : public thing_t<___ego___>
 
 		inline random_access_const_iterator_a<> add_(number_a<> const& number) const
 		{
-			return operator+(number);
-		}
-
-		inline random_access_const_iterator_a<> operator+(number_a<> const& number) const
-		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_flock_thing._mutex);
 			result.mutate_it() += number.to_int_64();
@@ -299,11 +284,6 @@ class flock_t : public thing_t<___ego___>
 		}
 
 		inline random_access_const_iterator_a<> subtract_(number_a<> const& number) const
-		{
-			return operator-(number);
-		}
-
-		inline random_access_const_iterator_a<> operator-(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_flock_thing._mutex);

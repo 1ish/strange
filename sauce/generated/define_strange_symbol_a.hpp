@@ -31,8 +31,8 @@ public:
 	inline symbol_a<> add_(symbol_a<> const& symbol) const
 	{ assert(___handle___); return ___read___().add_(symbol); }
 
-	inline symbol_a < > operator+(symbol_a < > const & symbol ) const
-	{ assert(___handle___); return ___read___().operator+(symbol); }
+	inline symbol_a<> operator+(symbol_a<> const& symbol) const
+	{ assert(___handle___); return ___read___().add_(symbol); }
 
 protected:
 	struct ___symbol_a_handle_base___ : ___any_a_handle_base___
@@ -42,7 +42,6 @@ protected:
 		virtual int8_t first_character() const = 0;
 		virtual int8_t last_character() const = 0;
 		virtual symbol_a<> add_(symbol_a<> const& symbol) const = 0;
-		virtual symbol_a < > operator+(symbol_a < > const & symbol ) const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___symbol_a_handle_base___>
@@ -77,9 +76,6 @@ protected:
 
 		virtual inline symbol_a<> add_(symbol_a<> const& symbol) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(symbol); }
-
-		virtual inline symbol_a < > operator+(symbol_a < > const & symbol ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(symbol); }
 
 	};
 
@@ -355,9 +351,6 @@ public:
 		}
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<symbol_d*>(this), symbol));
 	}
-
-	inline symbol_a < > operator+(symbol_a < > const & symbol ) const
-	{ return add_(symbol); }
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}
 

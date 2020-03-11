@@ -906,6 +906,71 @@ protected:
 				"\t\treturn *this;\n"
 				"\t}\n\n");
 		}
+		else if (name == "add_")
+		{
+			river.write_string(
+				"\tinline " + result + " " + name + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n"
+		
+				"\tinline " + result + " operator+" + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "subtract_")
+		{
+			river.write_string(
+				"\tinline " + result + " " + name + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n"
+
+				"\tinline " + result + " operator-" + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "multiply_")
+		{
+			river.write_string(
+				"\tinline " + result + " " + name + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n"
+		
+				"\tinline " + result + " operator*" + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "divide_")
+		{
+			river.write_string(
+				"\tinline " + result + " " + name + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n"
+
+				"\tinline " + result + " operator/" + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "modulo_")
+		{
+			river.write_string(
+				"\tinline " + result + " " + name + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n"
+
+				"\tinline " + result + " operator%" + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
 		//TODO
 		else
 		{

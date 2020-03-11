@@ -33,8 +33,8 @@ public:
 	inline random_access_iterator_a<> add_(number_a<> const& number) const
 	{ assert(___handle___); return ___read___().add_(number); }
 
-	inline random_access_iterator_a operator+(number_a < > const & number ) const
-	{ assert(___handle___); return ___read___().operator+(number); }
+	inline random_access_iterator_a<> operator+(number_a<> const& number) const
+	{ assert(___handle___); return ___read___().add_(number); }
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
 
@@ -57,8 +57,8 @@ public:
 	inline random_access_iterator_a<> subtract_(number_a<> const& number) const
 	{ assert(___handle___); return ___read___().subtract_(number); }
 
-	inline random_access_iterator_a operator-(number_a < > const & number ) const
-	{ assert(___handle___); return ___read___().operator-(number); }
+	inline random_access_iterator_a<> operator-(number_a<> const& number) const
+	{ assert(___handle___); return ___read___().subtract_(number); }
 
 	inline any_a<> less_than__(range_a<> const& ___arguments___) const;
 
@@ -97,10 +97,8 @@ protected:
 	{
 		virtual void self_add_(number_a<> const& number) = 0;
 		virtual random_access_iterator_a<> add_(number_a<> const& number) const = 0;
-		virtual random_access_iterator_a operator+(number_a < > const & number ) const = 0;
 		virtual void self_subtract_(number_a<> const& number) = 0;
 		virtual random_access_iterator_a<> subtract_(number_a<> const& number) const = 0;
-		virtual random_access_iterator_a operator-(number_a < > const & number ) const = 0;
 		virtual any_a<> less_than_(random_access_iterator_a<> const& it) const = 0;
 		virtual bool operator<(random_access_iterator_a < > const & it ) const = 0;
 		virtual any_a<> greater_than_(random_access_iterator_a<> const& it) const = 0;
@@ -135,17 +133,11 @@ protected:
 		virtual inline random_access_iterator_a<> add_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(number); }
 
-		virtual inline random_access_iterator_a operator+(number_a < > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(number); }
-
 		virtual inline void self_subtract_(number_a<> const& number) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
 
 		virtual inline random_access_iterator_a<> subtract_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
-
-		virtual inline random_access_iterator_a operator-(number_a < > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator-(number); }
 
 		virtual inline any_a<> less_than_(random_access_iterator_a<> const& it) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_than_(it); }
@@ -443,9 +435,6 @@ public:
 		return cast<random_access_iterator_a<>>(variadic_operate(op, *const_cast<random_access_iterator_d*>(this), number));
 	}
 
-	inline random_access_iterator_a<_1_> operator+(number_a < > const & number ) const
-	{ return add_(number); }
-
 	inline any_a<> self_subtract__(range_a<> const& arguments)
 	{
 		assert(___handle___);
@@ -489,9 +478,6 @@ public:
 		}
 		return cast<random_access_iterator_a<>>(variadic_operate(op, *const_cast<random_access_iterator_d*>(this), number));
 	}
-
-	inline random_access_iterator_a<_1_> operator-(number_a < > const & number ) const
-	{ return subtract_(number); }
 
 	inline any_a<> less_than__(range_a<> const& arguments) const
 	{

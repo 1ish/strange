@@ -43,12 +43,10 @@ false &&
 					self_add_ := (range :<range>#, <collection>),
 
 					add_ :# (range :<range>#, <collection>),
-					'operator+' : "collection_a (range_a<> const& range) const { return add_(range); }",
 
 					self_subtract_ := (range :<range>#, <collection>),
 
 					subtract_ :# (range :<range>#, <collection>),
-					'operator-' : "collection_a (range_a<> const& range) const { return subtract_(range); }",
 
 					read_lock_ :# (<>),
 

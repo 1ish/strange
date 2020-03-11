@@ -9,7 +9,6 @@ false &&
 					to_string : "std::string () const", //TODO { return lake_to_string(to_lake_()); }
 
 					add_ :# (misunderstanding :<misunderstanding>#, <misunderstanding>),
-					'operator+' : "misunderstanding_a<> (misunderstanding_a<> const& misunderstanding) const { return add_(misunderstanding); }",
 				}
 			)
 		)

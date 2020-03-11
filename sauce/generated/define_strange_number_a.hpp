@@ -94,8 +94,8 @@ public:
 	inline number_a<> add_(number_a<> const& number) const
 	{ assert(___handle___); return ___read___().add_(number); }
 
-	inline number_a < > operator+(number_a < > const & number ) const
-	{ assert(___handle___); return ___read___().operator+(number); }
+	inline number_a<> operator+(number_a<> const& number) const
+	{ assert(___handle___); return ___read___().add_(number); }
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
 
@@ -118,8 +118,8 @@ public:
 	inline number_a<> subtract_(number_a<> const& number) const
 	{ assert(___handle___); return ___read___().subtract_(number); }
 
-	inline number_a < > operator-(number_a < > const & number ) const
-	{ assert(___handle___); return ___read___().operator-(number); }
+	inline number_a<> operator-(number_a<> const& number) const
+	{ assert(___handle___); return ___read___().subtract_(number); }
 
 	inline any_a<> self_multiply__(range_a<> const& ___arguments___);
 
@@ -142,8 +142,8 @@ public:
 	inline number_a<> multiply_(number_a<> const& number) const
 	{ assert(___handle___); return ___read___().multiply_(number); }
 
-	inline number_a < > operator*(number_a < > const & number ) const
-	{ assert(___handle___); return ___read___().operator*(number); }
+	inline number_a<> operator*(number_a<> const& number) const
+	{ assert(___handle___); return ___read___().multiply_(number); }
 
 	inline any_a<> self_divide__(range_a<> const& ___arguments___);
 
@@ -166,8 +166,8 @@ public:
 	inline number_a<> divide_(number_a<> const& number) const
 	{ assert(___handle___); return ___read___().divide_(number); }
 
-	inline number_a < > operator/(number_a < > const & number ) const
-	{ assert(___handle___); return ___read___().operator/(number); }
+	inline number_a<> operator/(number_a<> const& number) const
+	{ assert(___handle___); return ___read___().divide_(number); }
 
 	inline any_a<> self_modulo__(range_a<> const& ___arguments___);
 
@@ -190,8 +190,8 @@ public:
 	inline number_a<> modulo_(number_a<> const& number) const
 	{ assert(___handle___); return ___read___().modulo_(number); }
 
-	inline number_a < > operator%(number_a < > const & number ) const
-	{ assert(___handle___); return ___read___().operator%(number); }
+	inline number_a<> operator%(number_a<> const& number) const
+	{ assert(___handle___); return ___read___().modulo_(number); }
 
 	inline any_a<> to_int_64__(range_a<> const& ___arguments___) const;
 
@@ -345,19 +345,14 @@ protected:
 		virtual void self_assign_(number_a<> const& number) = 0;
 		virtual void self_add_(number_a<> const& number) = 0;
 		virtual number_a<> add_(number_a<> const& number) const = 0;
-		virtual number_a < > operator+(number_a < > const & number ) const = 0;
 		virtual void self_subtract_(number_a<> const& number) = 0;
 		virtual number_a<> subtract_(number_a<> const& number) const = 0;
-		virtual number_a < > operator-(number_a < > const & number ) const = 0;
 		virtual void self_multiply_(number_a<> const& number) = 0;
 		virtual number_a<> multiply_(number_a<> const& number) const = 0;
-		virtual number_a < > operator*(number_a < > const & number ) const = 0;
 		virtual void self_divide_(number_a<> const& number) = 0;
 		virtual number_a<> divide_(number_a<> const& number) const = 0;
-		virtual number_a < > operator/(number_a < > const & number ) const = 0;
 		virtual void self_modulo_(number_a<> const& number) = 0;
 		virtual number_a<> modulo_(number_a<> const& number) const = 0;
-		virtual number_a < > operator%(number_a < > const & number ) const = 0;
 		virtual number_data_int64 to_int_64_() const = 0;
 		virtual int64_t to_int_64() const = 0;
 		virtual any_a<> from_int_64_(number_data_int64 const& int_64) = 0;
@@ -429,17 +424,11 @@ protected:
 		virtual inline number_a<> add_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(number); }
 
-		virtual inline number_a < > operator+(number_a < > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(number); }
-
 		virtual inline void self_subtract_(number_a<> const& number) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
 
 		virtual inline number_a<> subtract_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
-
-		virtual inline number_a < > operator-(number_a < > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator-(number); }
 
 		virtual inline void self_multiply_(number_a<> const& number) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_multiply_(number); }
@@ -447,26 +436,17 @@ protected:
 		virtual inline number_a<> multiply_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.multiply_(number); }
 
-		virtual inline number_a < > operator*(number_a < > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator*(number); }
-
 		virtual inline void self_divide_(number_a<> const& number) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_divide_(number); }
 
 		virtual inline number_a<> divide_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.divide_(number); }
 
-		virtual inline number_a < > operator/(number_a < > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator/(number); }
-
 		virtual inline void self_modulo_(number_a<> const& number) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_modulo_(number); }
 
 		virtual inline number_a<> modulo_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.modulo_(number); }
-
-		virtual inline number_a < > operator%(number_a < > const & number ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator%(number); }
 
 		virtual inline number_data_int64 to_int_64_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_int_64_(); }
@@ -937,9 +917,6 @@ public:
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
 
-	inline number_a < > operator+(number_a < > const & number ) const
-	{ return add_(number); }
-
 	inline any_a<> self_subtract__(range_a<> const& arguments)
 	{
 		assert(___handle___);
@@ -983,9 +960,6 @@ public:
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
-
-	inline number_a < > operator-(number_a < > const & number ) const
-	{ return subtract_(number); }
 
 	inline any_a<> self_multiply__(range_a<> const& arguments)
 	{
@@ -1031,9 +1005,6 @@ public:
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
 
-	inline number_a < > operator*(number_a < > const & number ) const
-	{ return multiply_(number); }
-
 	inline any_a<> self_divide__(range_a<> const& arguments)
 	{
 		assert(___handle___);
@@ -1078,9 +1049,6 @@ public:
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
 
-	inline number_a < > operator/(number_a < > const & number ) const
-	{ return divide_(number); }
-
 	inline any_a<> self_modulo__(range_a<> const& arguments)
 	{
 		assert(___handle___);
@@ -1124,9 +1092,6 @@ public:
 		}
 		return cast<number_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
 	}
-
-	inline number_a < > operator%(number_a < > const & number ) const
-	{ return modulo_(number); }
 
 	inline any_a<> to_int_64__(range_a<> const& arguments) const
 	{

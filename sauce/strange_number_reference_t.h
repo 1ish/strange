@@ -65,11 +65,6 @@ public:
 
 	inline number_a<> add_(number_a<> const& number) const
 	{
-		return operator+(number);
-	}
-
-	inline number_a<> operator+(number_a<> const& number) const
-	{
 		number_data_a<_primitive_> result = number_t<_primitive_>::create(_number);
 		result.mutate_primitive() += number_u<_primitive_>::from_number(number);
 		return result;
@@ -82,11 +77,6 @@ public:
 
 	inline number_a<> subtract_(number_a<> const& number) const
 	{
-		return operator-(number);
-	}
-
-	inline number_a<> operator-(number_a<> const& number) const
-	{
 		number_data_a<_primitive_> result = number_t<_primitive_>::create(_number);
 		result.mutate_primitive() -= number_u<_primitive_>::from_number(number);
 		return result;
@@ -98,11 +88,6 @@ public:
 	}
 
 	inline number_a<> multiply_(number_a<> const& number) const
-	{
-		return operator*(number);
-	}
-
-	inline number_a<> operator*(number_a<> const& number) const
 	{
 		number_data_a<_primitive_> result = number_t<_primitive_>::create(_number);
 		result.mutate_primitive() *= number_u<_primitive_>::from_number(number);
@@ -120,11 +105,6 @@ public:
 	}
 
 	inline number_a<> divide_(number_a<> const& number) const
-	{
-		return operator/(number);
-	}
-
-	inline number_a<> operator/(number_a<> const& number) const
 	{
 		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)
@@ -147,11 +127,6 @@ public:
 	}
 
 	inline number_a<> modulo_(number_a<> const& number) const
-	{
-		return operator%(number);
-	}
-
-	inline number_a<> operator%(number_a<> const& number) const
 	{
 		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)

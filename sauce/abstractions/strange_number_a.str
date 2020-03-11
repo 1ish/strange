@@ -17,27 +17,22 @@ false &&
 					self_add_ := (number :<number>#, <number>),
 
 					add_ :# (number :<number>#, <number>),
-					'operator+' : "number_a<> (number_a<> const& number) const { return add_(number); }",
 
 					self_subtract_ := (number :<number>#, <number>),
 
 					subtract_ :# (number :<number>#, <number>),
-					'operator-' : "number_a<> (number_a<> const& number) const { return subtract_(number); }",
 
 					self_multiply_ := (number :<number>#, <number>),
 
 					multiply_ :# (number :<number>#, <number>),
-					'operator*' : "number_a<> (number_a<> const& number) const { return multiply_(number); }",
 
 					self_divide_ := (number :<number>#, <number>),
 
 					divide_ :# (number :<number>#, <number>),
-					'operator/' : "number_a<> (number_a<> const& number) const { return divide_(number); }",
 
 					self_modulo_ := (number :<number>#, <number>),
 
 					modulo_ :# (number :<number>#, <number>),
-					'operator%' : "number_a<> (number_a<> const& number) const { return modulo_(number); }",
 
 					to_int_64_ :# (<#number_data_int64>),
 					to_int_64 : "int64_t () const { return to_int_64_().extract_primitive(); }",

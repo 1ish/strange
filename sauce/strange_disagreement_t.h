@@ -64,11 +64,6 @@ public:
 
 	inline misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const
 	{
-		return operator+(misunderstanding);
-	}
-
-	inline misunderstanding_a<> operator+(misunderstanding_a<> const& misunderstanding) const
-	{
 		return disagreement_t<>::create(to_string() + "\n" + misunderstanding.to_string());
 	}
 

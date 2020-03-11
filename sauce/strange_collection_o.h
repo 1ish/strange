@@ -63,22 +63,12 @@ public:
 
 	inline collection_a<> add_(range_a<> const& range) const
 	{
-		return operator+(range);
-	}
-
-	inline collection_a<> operator+(range_a<> const& range) const
-	{
 		auto result = _OVERRIDDEN_::me_();
 		result += range;
 		return result;
 	}
 
 	inline collection_a<> subtract_(range_a<> const& range) const
-	{
-		return operator-(range);
-	}
-
-	inline collection_a<> operator-(range_a<> const& range) const
 	{
 		auto result = _OVERRIDDEN_::me_();
 		result -= range;

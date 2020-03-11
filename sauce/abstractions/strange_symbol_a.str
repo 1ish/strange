@@ -12,7 +12,6 @@ false &&
 					last_character : "int8_t () const { auto const lake = to_lake_(); return lake.extract_vector()[lake.size() - 1]; }",
 
 					add_ :# (symbol :<symbol>#, <symbol>),
-					'operator+' : "symbol_a<> (symbol_a<> const& symbol) const { return add_(symbol); }",
 				}
 			)
 		)

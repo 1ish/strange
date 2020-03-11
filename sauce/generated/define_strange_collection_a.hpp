@@ -129,8 +129,8 @@ public:
 	inline collection_a<> add_(range_a<> const& range) const
 	{ assert(___handle___); return ___read___().add_(range); }
 
-	inline collection_a operator+(range_a < > const & range ) const
-	{ assert(___handle___); return ___read___().operator+(range); }
+	inline collection_a<> operator+(range_a<> const& range) const
+	{ assert(___handle___); return ___read___().add_(range); }
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
 
@@ -153,8 +153,8 @@ public:
 	inline collection_a<> subtract_(range_a<> const& range) const
 	{ assert(___handle___); return ___read___().subtract_(range); }
 
-	inline collection_a operator-(range_a < > const & range ) const
-	{ assert(___handle___); return ___read___().operator-(range); }
+	inline collection_a<> operator-(range_a<> const& range) const
+	{ assert(___handle___); return ___read___().subtract_(range); }
 
 	inline any_a<> read_lock__(range_a<> const& ___arguments___) const;
 
@@ -193,10 +193,8 @@ protected:
 		virtual void self_assign_(range_a<> const& range) = 0;
 		virtual void self_add_(range_a<> const& range) = 0;
 		virtual collection_a<> add_(range_a<> const& range) const = 0;
-		virtual collection_a operator+(range_a < > const & range ) const = 0;
 		virtual void self_subtract_(range_a<> const& range) = 0;
 		virtual collection_a<> subtract_(range_a<> const& range) const = 0;
-		virtual collection_a operator-(range_a < > const & range ) const = 0;
 		virtual any_a<> read_lock_() const = 0;
 		virtual any_a<> write_lock_() const = 0;
 	};
@@ -291,17 +289,11 @@ protected:
 		virtual inline collection_a<> add_(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(range); }
 
-		virtual inline collection_a operator+(range_a < > const & range ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(range); }
-
 		virtual inline void self_subtract_(range_a<> const& range) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(range); }
 
 		virtual inline collection_a<> subtract_(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(range); }
-
-		virtual inline collection_a operator-(range_a < > const & range ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator-(range); }
 
 		virtual inline any_a<> read_lock_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.read_lock_(); }
@@ -905,9 +897,6 @@ public:
 		return cast<collection_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
 
-	inline collection_a<_1_> operator+(range_a < > const & range ) const
-	{ return add_(range); }
-
 	inline any_a<> self_subtract__(range_a<> const& arguments)
 	{
 		assert(___handle___);
@@ -951,9 +940,6 @@ public:
 		}
 		return cast<collection_a<>>(variadic_operate(op, *const_cast<collection_d*>(this), range));
 	}
-
-	inline collection_a<_1_> operator-(range_a < > const & range ) const
-	{ return subtract_(range); }
 
 	inline any_a<> read_lock__(range_a<> const& arguments) const
 	{
