@@ -53,10 +53,9 @@ public:
 		--_number;
 	}
 
-	inline number_a<> self_assign_(number_a<> const& number)
+	inline void self_assign_(number_a<> const& number)
 	{
 		_number = number_u<_primitive_>::from_number(number);
-		return thing_t<___ego___>::me_();
 	}
 
 	inline void self_add_(number_a<> const& number)

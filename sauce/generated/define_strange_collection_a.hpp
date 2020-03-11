@@ -101,8 +101,12 @@ public:
 
 	inline any_a<> self_assign__(range_a<> const& ___arguments___);
 
-	inline collection_a<> self_assign_(range_a<> const& range)
-	{ assert(___handle___); return ___write___().self_assign_(range); }
+	inline collection_a self_assign_(range_a<> const& range)
+	{
+		assert(___handle___);
+		___write___().self_assign_(range);
+		return *this;
+	}
 
 	inline any_a<> self_add__(range_a<> const& ___arguments___);
 
@@ -186,7 +190,7 @@ protected:
 		virtual collection_a<> push_back_(any_a<> const& thing) = 0;
 		virtual void push_back(any_a < > const & thing ) = 0;
 		virtual any_a<> pop_back_() = 0;
-		virtual collection_a<> self_assign_(range_a<> const& range) = 0;
+		virtual void self_assign_(range_a<> const& range) = 0;
 		virtual void self_add_(range_a<> const& range) = 0;
 		virtual collection_a<> add_(range_a<> const& range) const = 0;
 		virtual collection_a operator+(range_a < > const & range ) const = 0;
@@ -278,8 +282,8 @@ protected:
 		virtual inline any_a<> pop_back_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.pop_back_(); }
 
-		virtual inline collection_a<> self_assign_(range_a<> const& range) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(range); }
+		virtual inline void self_assign_(range_a<> const& range) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(range); }
 
 		virtual inline void self_add_(range_a<> const& range) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(range); }

@@ -811,6 +811,16 @@ protected:
 				"\t}\n"
 				"#endif\n\n");
 		}
+		else if (name == "self_assign_")
+		{
+			river.write_string(
+				"\tinline " + class_name + " " + name + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n");
+		}
 		else if (name == "self_add_")
 		{
 			river.write_string(
@@ -1157,8 +1167,8 @@ protected:
 		std::string constness;
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
-		if (name == "increment_" || name == "decrement_" ||
-			name == "self_add_" || name == "self_subtract_" || name == "self_multiply_" || name == "self_divide_" || name == "self_modulo_")
+		if (name == "increment_" || name == "decrement_" || name == "self_add_" || name == "self_subtract_" ||
+			name == "self_multiply_" || name == "self_divide_" || name == "self_modulo_" || name == "self_assign_")
 		{
 			river.write_string(
 				"\t\tvirtual void " + name + parameters + constness + " = 0;\n");
@@ -1192,8 +1202,8 @@ protected:
 	
 		std::string const scope = root ? "" : "___any_a_handle___<___TTT___, ___DHB___>::";
 
-		if (name == "increment_" || name == "decrement_" ||
-			name == "self_add_" || name == "self_subtract_" || name == "self_multiply_" || name == "self_divide_" || name == "self_modulo_")
+		if (name == "increment_" || name == "decrement_" || name == "self_add_" || name == "self_subtract_" ||
+			name == "self_multiply_" || name == "self_divide_" || name == "self_modulo_" || name == "self_assign_")
 		{
 			river.write_string(
 				"\t\tvirtual inline void " + name + parameters + constness + " final\n"

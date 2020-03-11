@@ -717,18 +717,18 @@ public:
 		return number;
 	}
 
-	inline lake_a<_primitive_> self_assign_(range_a<> const& range)
+	inline void self_assign_(range_a<> const& range)
 	{
 		if (check<lake_a<_primitive_>>(range))
 		{
-			auto const other = cast<lake_a<_primitive_>>(range);
+			auto const other = fast<lake_a<_primitive_>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_vector = other.extract_vector();
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_vector.clear();
 			for (auto const& thing : range)
@@ -736,7 +736,6 @@ public:
 				_vector.push_back(thing);
 			}
 		}
-		return thing_t<___ego___>::me_();
 	}
 	
 	inline void self_add_(range_a<> const& range)

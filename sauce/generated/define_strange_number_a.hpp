@@ -66,8 +66,12 @@ public:
 
 	inline any_a<> self_assign__(range_a<> const& ___arguments___);
 
-	inline number_a<> self_assign_(number_a<> const& number)
-	{ assert(___handle___); return ___write___().self_assign_(number); }
+	inline number_a self_assign_(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_assign_(number);
+		return *this;
+	}
 
 	inline any_a<> self_add__(range_a<> const& ___arguments___);
 
@@ -338,7 +342,7 @@ protected:
 	{
 		virtual void increment_() = 0;
 		virtual void decrement_() = 0;
-		virtual number_a<> self_assign_(number_a<> const& number) = 0;
+		virtual void self_assign_(number_a<> const& number) = 0;
 		virtual void self_add_(number_a<> const& number) = 0;
 		virtual number_a<> add_(number_a<> const& number) const = 0;
 		virtual number_a < > operator+(number_a < > const & number ) const = 0;
@@ -416,8 +420,8 @@ protected:
 		virtual inline void decrement_() final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.decrement_(); }
 
-		virtual inline number_a<> self_assign_(number_a<> const& number) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(number); }
+		virtual inline void self_assign_(number_a<> const& number) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(number); }
 
 		virtual inline void self_add_(number_a<> const& number) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }

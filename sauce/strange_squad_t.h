@@ -669,18 +669,18 @@ public:
 		return result;
 	}
 
-	inline squad_a<> self_assign_(range_a<> const& range)
+	inline void self_assign_(range_a<> const& range)
 	{
 		if (check<squad_a<>>(range))
 		{
-			auto const other = cast<squad_a<>>(range);
+			auto const other = fast<squad_a<>>(range);
 			auto read_lock = other.read_lock_();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_deque = other.extract_deque();
 		}
 		else
 		{
-			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
 			_deque.clear();
 			for (auto const& thing : range)
@@ -688,7 +688,6 @@ public:
 				_deque.push_back(thing);
 			}
 		}
-		return thing_t<___ego___>::me_();
 	}
 
 	inline void self_add_(range_a<> const& range)
