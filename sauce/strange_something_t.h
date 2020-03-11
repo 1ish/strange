@@ -36,7 +36,7 @@ public:
 	}
 
 	// comparison
-	inline bool operator==(any_a<> const& thing) const
+	inline bool same_(any_a<> const& thing) const
 	{
 		return thing.something();
 	}

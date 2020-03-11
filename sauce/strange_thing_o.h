@@ -19,19 +19,9 @@ public:
 		return shoal;
 	}
 
-	inline any_a<> same_(any_a<> const& thing) const
+	inline bool different_(any_a<> const& thing) const
 	{
-		return boole(_OVERRIDDEN_::operator==(thing));
-	}
-
-	inline any_a<> different_(any_a<> const& thing) const
-	{
-		return boole(operator!=(thing));
-	}
-
-	inline bool operator!=(any_a<> const& thing) const
-	{
-		return !_OVERRIDDEN_::operator==(thing);
+		return !_OVERRIDDEN_::same_(thing);
 	}
 
 	inline number_data_a<uint64_t> hash_() const

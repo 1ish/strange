@@ -55,15 +55,13 @@ false &&
 					something : "bool () const",
 
 					same_ :# (thing :<any>#, <any>),
-					'operator==' : "bool (any_a<> const& thing) const",
 
 					different_ :# (thing :<any>#, <any>),
-					'operator!=' : "bool (any_a<> const& thing) const",
 
-					//TODO 'operator<' : "bool (any_a<> const& thing) const",
-					//TODO 'operator>' : "bool (any_a<> const& thing) const",
-					//TODO 'operator<=' : "bool (any_a<> const& thing) const",
-					//TODO 'operator>=' : "bool (any_a<> const& thing) const",
+					//TODO for set/map 'operator<' : "bool (any_a<> const& thing) const",
+					//TODO for set/map 'operator>' : "bool (any_a<> const& thing) const",
+					//TODO for set/map 'operator<=' : "bool (any_a<> const& thing) const",
+					//TODO for set/map 'operator>=' : "bool (any_a<> const& thing) const",
 
 					hash_ :# (<#number_data_uint64>),
 					hash : "std::size_t () const",

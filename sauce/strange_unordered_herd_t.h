@@ -32,7 +32,7 @@ class unordered_herd_t : public thing_t<___ego___>
 		{}
 
 		// comparison
-		inline bool operator==(any_a<> const& thing) const
+		inline bool same_(any_a<> const& thing) const
 		{
 			if (!check<forward_const_iterator_data_a<_iterator_>>(thing))
 			{
@@ -166,7 +166,7 @@ public:
 	}
 
 	// comparison
-	inline bool operator==(any_a<> const& thing) const
+	inline bool same_(any_a<> const& thing) const
 	{
 		if (!check<unordered_herd_a<>>(thing))
 		{

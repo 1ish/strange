@@ -32,7 +32,7 @@ class tokenizer_t : public thing_t<___ego___>
 		{}
 
 		// comparison
-		inline bool operator==(any_a<> const& thing) const
+		inline bool same_(any_a<> const& thing) const
 		{
 			return thing.type_() == type_() &&
 				static_cast<const_iterator_t const&>(thing.extract_thing())._end == _end;

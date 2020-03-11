@@ -344,7 +344,7 @@ public:
 		return identical_(*it);
 	}
 
-	inline any_a<> same_(any_a<> const& thing) const
+	inline bool same_(any_a<> const& thing) const
 	{
 		auto const op = _operations.at_string("same");
 		if (op)
@@ -355,17 +355,6 @@ public:
 		return identical_(thing);
 	}
 
-	inline bool operator==(any_a<> const& thing) const
-	{
-		auto const op = _operations.at_string("same");
-		if (op)
-		{
-			any_a<> thing = me_();
-			return op.operate(thing, flock_t<>::create_(thing));
-		}
-		return identical(thing);
-	}
-
 	inline any_a<> different__(range_a<> const& range) const // cannot be overridden
 	{
 		forward_const_iterator_a<> it = range.cbegin_();
@@ -373,17 +362,12 @@ public:
 		{
 			throw dis("<strange::any>::different passed empty range");
 		}
-		return different_(*it);
+		return boole(different_(*it));
 	}
 
-	inline any_a<> different_(any_a<> const& thing) const
+	inline bool different_(any_a<> const& thing) const
 	{
-		return boole(operator!=(thing));
-	}
-
-	inline bool operator!=(any_a<> const& thing) const
-	{
-		return !operator==(thing);
+		return !same_(thing);
 	}
 
 	inline any_a<> hash__(range_a<> const& range) const

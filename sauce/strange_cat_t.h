@@ -106,11 +106,11 @@ public:
 	}
 
 	// comparison
-	inline bool operator==(any_a<> const& thing) const
+	inline bool same_(any_a<> const& thing) const
 	{
 		if (!check<cat_a<>>(thing))
 		{
-			return symbol_t<___ego___>::operator==(thing);
+			return symbol_t<___ego___>::same_(thing);
 		}
 		auto const cat = fast<cat_a<>>(thing);
 		if (_symbolic != cat.symbolic() || symbol_t<___ego___>::_hash != cat.hash())

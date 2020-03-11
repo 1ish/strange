@@ -133,18 +133,18 @@ public:
 	inline any_a<> same__(range const& ___arguments___) const;
 
 	inline any_a<> same_(any_a<> const& thing) const
-	{ assert(___handle___); return ___read___().same_(thing); }
+	{ assert(___handle___); return boole(___read___().same_(thing)); }
 
-	inline bool operator==(any_a < > const & thing ) const
-	{ assert(___handle___); return ___read___().operator==(thing); }
+	inline bool operator==(any_a<> const& thing) const
+	{ assert(___handle___); return ___read___().same_(thing); }
 
 	inline any_a<> different__(range const& ___arguments___) const;
 
 	inline any_a<> different_(any_a<> const& thing) const
-	{ assert(___handle___); return ___read___().different_(thing); }
+	{ assert(___handle___); return boole(___read___().different_(thing)); }
 
-	inline bool operator!=(any_a < > const & thing ) const
-	{ assert(___handle___); return ___read___().operator!=(thing); }
+	inline bool operator!=(any_a<> const& thing) const
+	{ assert(___handle___); return ___read___().different_(thing); }
 
 	inline any_a<> hash__(range const& ___arguments___) const;
 
@@ -190,10 +190,8 @@ protected:
 		virtual bool nothing() const = 0;
 		virtual any_a<> something_() const = 0;
 		virtual bool something() const = 0;
-		virtual any_a<> same_(any_a<> const& thing) const = 0;
-		virtual bool operator==(any_a < > const & thing ) const = 0;
-		virtual any_a<> different_(any_a<> const& thing) const = 0;
-		virtual bool operator!=(any_a < > const & thing ) const = 0;
+		virtual bool same_(any_a<> const& thing) const = 0;
+		virtual bool different_(any_a<> const& thing) const = 0;
 		virtual number_data_uint64 hash_() const = 0;
 		virtual std :: size_t hash() const = 0;
 		virtual bool is(std :: string const & s ) const = 0;
@@ -290,17 +288,11 @@ protected:
 		virtual inline bool something() const final
 		{ return ___value___.something(); }
 
-		virtual inline any_a<> same_(any_a<> const& thing) const final
-		{ return ___value___.same_(thing); }
+		virtual inline bool same_(any_a<> const& thing) const final
+		{ return bool{ ___value___.same_(thing) }; }
 
-		virtual inline bool operator==(any_a < > const & thing ) const final
-		{ return ___value___.operator==(thing); }
-
-		virtual inline any_a<> different_(any_a<> const& thing) const final
-		{ return ___value___.different_(thing); }
-
-		virtual inline bool operator!=(any_a < > const & thing ) const final
-		{ return ___value___.operator!=(thing); }
+		virtual inline bool different_(any_a<> const& thing) const final
+		{ return bool{ ___value___.different_(thing) }; }
 
 		virtual inline number_data_uint64 hash_() const final
 		{ return ___value___.hash_(); }

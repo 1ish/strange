@@ -124,11 +124,11 @@ public:
 	}
 
 	// comparison
-	inline bool operator==(any_a<> const& thing) const
+	inline bool same_(any_a<> const& thing) const
 	{
 		if (!check<kind_a<>>(thing))
 		{
-			return cat_t<___ego___>::operator==(thing);
+			return cat_t<___ego___>::same_(thing);
 		}
 		auto const kind = cast<kind_a<>>(thing);
 		if (cat_t<___ego___>::_symbolic != kind.symbolic() || cat_t<___ego___>::_hash != kind.hash())
