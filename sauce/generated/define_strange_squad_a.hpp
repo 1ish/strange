@@ -12,41 +12,6 @@ template <typename _1_>
 class squad_a : public inventory_a<>
 {
 public:
-	inline squad_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline squad_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline squad_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline squad_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline squad_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline std :: deque < any_a < > > const & extract_deque() const
 	{ assert(___handle___); return ___read___().extract_deque(); }
 
@@ -304,41 +269,6 @@ template <typename _1_>
 class squad_d : public inventory_d<>
 {
 public:
-	inline squad_d& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline squad_d& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline squad_d& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline squad_d& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline squad_d& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline std :: deque < any_a < > > const & extract_deque() const
 	{ throw dis("dynamic squad_d::extract_deque() not available"); }
 

@@ -12,41 +12,6 @@ template <typename _1_>
 class range_a : public any_a<>
 {
 public:
-	inline range_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline range_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline range_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline range_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline range_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline any_a<> cbegin__(range_a<> const& ___arguments___) const;
 
 	inline forward_const_iterator_a<> cbegin_() const
@@ -310,41 +275,6 @@ template <typename _1_>
 class range_d : public any_a<>
 {
 public:
-	inline range_d& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline range_d& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline range_d& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline range_d& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline range_d& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline any_a<> cbegin__(range_a<> const& arguments) const
 	{
 		assert(___handle___);

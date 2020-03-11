@@ -12,41 +12,6 @@ template <typename number_data_int64, typename number_data_uint64, typename numb
 class number_a : public any_a<>
 {
 public:
-	inline number_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline number_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline number_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline number_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline number_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline any_a<> increment__(range_a<> const& ___arguments___);
 
 	inline number_a increment_()
@@ -106,8 +71,19 @@ public:
 
 	inline any_a<> self_add__(range_a<> const& ___arguments___);
 
-	inline number_a<> self_add_(number_a<> const& number)
-	{ assert(___handle___); return ___write___().self_add_(number); }
+	inline number_a self_add_(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_add_(number);
+		return *this;
+	}
+
+	inline number_a& operator+=(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_add_(number);
+		return *this;
+	}
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const;
 
@@ -119,8 +95,19 @@ public:
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
 
-	inline number_a<> self_subtract_(number_a<> const& number)
-	{ assert(___handle___); return ___write___().self_subtract_(number); }
+	inline number_a self_subtract_(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_subtract_(number);
+		return *this;
+	}
+
+	inline number_a& operator-=(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_subtract_(number);
+		return *this;
+	}
 
 	inline any_a<> subtract__(range_a<> const& ___arguments___) const;
 
@@ -132,8 +119,19 @@ public:
 
 	inline any_a<> self_multiply__(range_a<> const& ___arguments___);
 
-	inline number_a<> self_multiply_(number_a<> const& number)
-	{ assert(___handle___); return ___write___().self_multiply_(number); }
+	inline number_a self_multiply_(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_multiply_(number);
+		return *this;
+	}
+
+	inline number_a& operator*=(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_multiply_(number);
+		return *this;
+	}
 
 	inline any_a<> multiply__(range_a<> const& ___arguments___) const;
 
@@ -145,8 +143,19 @@ public:
 
 	inline any_a<> self_divide__(range_a<> const& ___arguments___);
 
-	inline number_a<> self_divide_(number_a<> const& number)
-	{ assert(___handle___); return ___write___().self_divide_(number); }
+	inline number_a self_divide_(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_divide_(number);
+		return *this;
+	}
+
+	inline number_a& operator/=(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_divide_(number);
+		return *this;
+	}
 
 	inline any_a<> divide__(range_a<> const& ___arguments___) const;
 
@@ -158,8 +167,19 @@ public:
 
 	inline any_a<> self_modulo__(range_a<> const& ___arguments___);
 
-	inline number_a<> self_modulo_(number_a<> const& number)
-	{ assert(___handle___); return ___write___().self_modulo_(number); }
+	inline number_a self_modulo_(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_modulo_(number);
+		return *this;
+	}
+
+	inline number_a& operator%=(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_modulo_(number);
+		return *this;
+	}
 
 	inline any_a<> modulo__(range_a<> const& ___arguments___) const;
 
@@ -319,19 +339,19 @@ protected:
 		virtual void increment_() = 0;
 		virtual void decrement_() = 0;
 		virtual number_a<> self_assign_(number_a<> const& number) = 0;
-		virtual number_a<> self_add_(number_a<> const& number) = 0;
+		virtual void self_add_(number_a<> const& number) = 0;
 		virtual number_a<> add_(number_a<> const& number) const = 0;
 		virtual number_a < > operator+(number_a < > const & number ) const = 0;
-		virtual number_a<> self_subtract_(number_a<> const& number) = 0;
+		virtual void self_subtract_(number_a<> const& number) = 0;
 		virtual number_a<> subtract_(number_a<> const& number) const = 0;
 		virtual number_a < > operator-(number_a < > const & number ) const = 0;
-		virtual number_a<> self_multiply_(number_a<> const& number) = 0;
+		virtual void self_multiply_(number_a<> const& number) = 0;
 		virtual number_a<> multiply_(number_a<> const& number) const = 0;
 		virtual number_a < > operator*(number_a < > const & number ) const = 0;
-		virtual number_a<> self_divide_(number_a<> const& number) = 0;
+		virtual void self_divide_(number_a<> const& number) = 0;
 		virtual number_a<> divide_(number_a<> const& number) const = 0;
 		virtual number_a < > operator/(number_a < > const & number ) const = 0;
-		virtual number_a<> self_modulo_(number_a<> const& number) = 0;
+		virtual void self_modulo_(number_a<> const& number) = 0;
 		virtual number_a<> modulo_(number_a<> const& number) const = 0;
 		virtual number_a < > operator%(number_a < > const & number ) const = 0;
 		virtual number_data_int64 to_int_64_() const = 0;
@@ -399,8 +419,8 @@ protected:
 		virtual inline number_a<> self_assign_(number_a<> const& number) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(number); }
 
-		virtual inline number_a<> self_add_(number_a<> const& number) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }
+		virtual inline void self_add_(number_a<> const& number) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }
 
 		virtual inline number_a<> add_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(number); }
@@ -408,8 +428,8 @@ protected:
 		virtual inline number_a < > operator+(number_a < > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(number); }
 
-		virtual inline number_a<> self_subtract_(number_a<> const& number) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
+		virtual inline void self_subtract_(number_a<> const& number) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
 
 		virtual inline number_a<> subtract_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
@@ -417,8 +437,8 @@ protected:
 		virtual inline number_a < > operator-(number_a < > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator-(number); }
 
-		virtual inline number_a<> self_multiply_(number_a<> const& number) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_multiply_(number); }
+		virtual inline void self_multiply_(number_a<> const& number) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_multiply_(number); }
 
 		virtual inline number_a<> multiply_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.multiply_(number); }
@@ -426,8 +446,8 @@ protected:
 		virtual inline number_a < > operator*(number_a < > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator*(number); }
 
-		virtual inline number_a<> self_divide_(number_a<> const& number) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_divide_(number); }
+		virtual inline void self_divide_(number_a<> const& number) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_divide_(number); }
 
 		virtual inline number_a<> divide_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.divide_(number); }
@@ -435,8 +455,8 @@ protected:
 		virtual inline number_a < > operator/(number_a < > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator/(number); }
 
-		virtual inline number_a<> self_modulo_(number_a<> const& number) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_modulo_(number); }
+		virtual inline void self_modulo_(number_a<> const& number) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_modulo_(number); }
 
 		virtual inline number_a<> modulo_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.modulo_(number); }
@@ -803,41 +823,6 @@ template <typename number_data_int64, typename number_data_uint64, typename numb
 class number_d : public any_a<>
 {
 public:
-	inline number_d& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline number_d& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline number_d& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline number_d& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline number_d& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline any_a<> increment__(range_a<> const& arguments)
 	{
 		assert(___handle___);

@@ -353,11 +353,11 @@ public:
 		return thing_t<___ego___>::me_();
 	}
 
-	inline unordered_herd_t& operator+=(any_a<> const& range)
+	inline void self_add_(range_a<> const& range)
 	{
 		if (check<unordered_herd_a<>>(range))
 		{
-			auto const other = cast<unordered_herd_a<>>(range);
+			auto const other = fast<unordered_herd_a<>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_set = other.extract_set();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -365,7 +365,7 @@ public:
 		}
 		else if (check<ordered_herd_a<>>(range))
 		{
-			auto const other = cast<ordered_herd_a<>>(range);
+			auto const other = fast<ordered_herd_a<>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_set = other.extract_set();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -373,33 +373,23 @@ public:
 		}
 		else
 		{
-			if (!check<range_a<>>(range))
-			{
-				throw dis("strange::unordered_herd += passed non-range");
-			}
-			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& thing : cast<range_a<> const>(range))
+			for (auto const& thing : range)
 			{
 				_set.insert(thing);
 			}
 		}
-		return *this;
 	}
 
-	inline unordered_herd_t& operator-=(any_a<> const& range)
+	inline void self_subtract_(range_a<> const& range)
 	{
-		if (!check<range_a<>>(range))
-		{
-			throw dis("strange::unordered_herd -= passed non-range");
-		}
-		auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+		auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
 		typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-		for (auto const& thing : cast<range_a<> const>(range))
+		for (auto const& thing : range)
 		{
 			_set.erase(thing);
 		}
-		return *this;
 	}
 
 	inline any_a<> read_lock_() const

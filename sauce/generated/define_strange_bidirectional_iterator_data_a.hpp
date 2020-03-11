@@ -12,41 +12,6 @@ template <typename _1_>
 class bidirectional_iterator_data_a : public bidirectional_iterator_a<>
 {
 public:
-	inline bidirectional_iterator_data_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_data_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_data_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_data_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_data_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline _1_ const & extract_it() const
 	{ assert(___handle___); return ___read___().extract_it(); }
 
@@ -304,41 +269,6 @@ template <typename _1_>
 class bidirectional_iterator_data_d : public bidirectional_iterator_d<>
 {
 public:
-	inline bidirectional_iterator_data_d& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_data_d& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_data_d& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_data_d& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_data_d& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline _1_ const & extract_it() const
 	{ throw dis("dynamic bidirectional_iterator_data_d::extract_it() not available"); }
 

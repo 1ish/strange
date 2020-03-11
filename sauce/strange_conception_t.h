@@ -95,7 +95,7 @@ public:
 			{
 				throw dis("strange::conception::create merge parent cats returned non-unordered-herd");
 			}
-			cats += cats_any;
+			cats += fast<unordered_herd_a<>>(cats_any);
 		}
 
 		auto const kind_op = parent.at_string("kind");
@@ -131,7 +131,7 @@ public:
 			{
 				throw dis("strange::conception::create merge parent kinds returned non-unordered-herd");
 			}
-			kinds += kinds_any;
+			kinds += fast<unordered_herd_a<>>(kinds_any);
 		}
 
 		for (auto const& member : parent.extract_map())

@@ -12,41 +12,6 @@ template <typename _1_>
 class data_a : public any_a<>
 {
 public:
-	inline data_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline data_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline data_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline data_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline data_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline _1_ const & extract_data() const
 	{ assert(___handle___); return ___read___().extract_data(); }
 
@@ -304,41 +269,6 @@ template <typename _1_>
 class data_d : public any_a<>
 {
 public:
-	inline data_d& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline data_d& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline data_d& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline data_d& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline data_d& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline _1_ const & extract_data() const
 	{ throw dis("dynamic data_d::extract_data() not available"); }
 

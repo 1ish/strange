@@ -72,20 +72,9 @@ public:
 		return thing_t<___ego___>::me_();
 	}
 
-	inline number_a<> self_add_(number_a<> const& number)
+	inline void self_add_(number_a<> const& number)
 	{
 		_number += number_u<_primitive_>::from_number(number);
-		return thing_t<___ego___>::me_();
-	}
-
-	inline number_t& operator+=(any_a<> const& thing)
-	{
-		if (!check<number_a<>>(thing))
-		{
-			throw dis("strange::number += passed non-number");
-		}
-		_number += number_u<_primitive_>::from_number(cast<number_a<>>(thing));
-		return *this;
 	}
 
 	inline number_a<> add_(number_a<> const& number) const
@@ -100,20 +89,9 @@ public:
 		return result;
 	}
 
-	inline number_a<> self_subtract_(number_a<> const& number)
+	inline void self_subtract_(number_a<> const& number)
 	{
 		_number -= number_u<_primitive_>::from_number(number);
-		return thing_t<___ego___>::me_();
-	}
-
-	inline number_t& operator-=(any_a<> const& thing)
-	{
-		if (!check<number_a<>>(thing))
-		{
-			throw dis("strange::number -= passed non-number");
-		}
-		_number -= number_u<_primitive_>::from_number(cast<number_a<>>(thing));
-		return *this;
 	}
 
 	inline number_a<> subtract_(number_a<> const& number) const
@@ -128,20 +106,9 @@ public:
 		return result;
 	}
 
-	inline number_a<> self_multiply_(number_a<> const& number)
+	inline void self_multiply_(number_a<> const& number)
 	{
 		_number *= number_u<_primitive_>::from_number(number);
-		return thing_t<___ego___>::me_();
-	}
-
-	inline number_t& operator*=(any_a<> const& thing)
-	{
-		if (!check<number_a<>>(thing))
-		{
-			throw dis("strange::number *= passed non-number");
-		}
-		_number *= number_u<_primitive_>::from_number(cast<number_a<>>(thing));
-		return *this;
 	}
 
 	inline number_a<> multiply_(number_a<> const& number) const
@@ -156,7 +123,7 @@ public:
 		return result;
 	}
 
-	inline number_a<> self_divide_(number_a<> const& number)
+	inline void self_divide_(number_a<> const& number)
 	{
 		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)
@@ -164,22 +131,6 @@ public:
 			throw dis("strange::number self_divide division by zero");
 		}
 		_number /= num;
-		return thing_t<___ego___>::me_();
-	}
-
-	inline number_t& operator/=(any_a<> const& thing)
-	{
-		if (!check<number_a<>>(thing))
-		{
-			throw dis("strange::number /= passed non-number");
-		}
-		_primitive_ num = number_u<_primitive_>::from_number(cast<number_a<>>(thing));
-		if (num == 0)
-		{
-			throw dis("strange::number /= division by zero");
-		}
-		_number /= num;
-		return *this;
 	}
 
 	inline number_a<> divide_(number_a<> const& number) const
@@ -199,7 +150,7 @@ public:
 		return result;
 	}
 
-	inline number_a<> self_modulo_(number_a<> const& number)
+	inline void self_modulo_(number_a<> const& number)
 	{
 		_primitive_ num = number_u<_primitive_>::from_number(number);
 		if (num == 0)
@@ -207,22 +158,6 @@ public:
 			throw dis("strange::number self_modulo division by zero");
 		}
 		_number = number_u<_primitive_>::modulo(_number, num);
-		return thing_t<___ego___>::me_();
-	}
-
-	inline number_t& operator%=(any_a<> const& thing)
-	{
-		if (!check<number_a<>>(thing))
-		{
-			throw dis("strange::number %= passed non-number");
-		}
-		_primitive_ num = number_u<_primitive_>::from_number(cast<number_a<>>(thing));
-		if (num == 0)
-		{
-			throw dis("strange::number %= division by zero");
-		}
-		_number = number_u<_primitive_>::modulo(_number, num);
-		return *this;
 	}
 
 	inline number_a<> modulo_(number_a<> const& number) const

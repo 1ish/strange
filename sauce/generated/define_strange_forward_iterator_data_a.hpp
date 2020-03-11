@@ -12,41 +12,6 @@ template <typename _1_>
 class forward_iterator_data_a : public forward_iterator_a<>
 {
 public:
-	inline forward_iterator_data_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline forward_iterator_data_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline forward_iterator_data_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline forward_iterator_data_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline forward_iterator_data_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline _1_ const & extract_it() const
 	{ assert(___handle___); return ___read___().extract_it(); }
 
@@ -304,41 +269,6 @@ template <typename _1_>
 class forward_iterator_data_d : public forward_iterator_d<>
 {
 public:
-	inline forward_iterator_data_d& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline forward_iterator_data_d& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline forward_iterator_data_d& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline forward_iterator_data_d& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline forward_iterator_data_d& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline _1_ const & extract_it() const
 	{ throw dis("dynamic forward_iterator_data_d::extract_it() not available"); }
 

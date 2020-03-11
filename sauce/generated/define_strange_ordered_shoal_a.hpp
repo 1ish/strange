@@ -12,41 +12,6 @@ template <typename _1_>
 class ordered_shoal_a : public shoal_a<>
 {
 public:
-	inline ordered_shoal_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline ordered_shoal_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline ordered_shoal_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline ordered_shoal_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline ordered_shoal_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline std :: map < any_a < > , any_a < > > const & extract_map() const
 	{ assert(___handle___); return ___read___().extract_map(); }
 
@@ -304,41 +269,6 @@ template <typename _1_>
 class ordered_shoal_d : public shoal_d<>
 {
 public:
-	inline ordered_shoal_d& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline ordered_shoal_d& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline ordered_shoal_d& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline ordered_shoal_d& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline ordered_shoal_d& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline std :: map < any_a < > , any_a < > > const & extract_map() const
 	{ throw dis("dynamic ordered_shoal_d::extract_map() not available"); }
 

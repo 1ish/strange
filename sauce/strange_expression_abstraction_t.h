@@ -593,41 +593,6 @@ protected:
 			river.write_string(
 				"public:\n");
 		}
-		river.write_string(
-			"\tinline " + class_name + "& operator+=(any_a<> const& other)\n"
-			"\t{\n"
-			"\t\tassert(___handle___);\n"
-			"\t\t___write___().operator+=(other);\n"
-			"\t\treturn *this;\n"
-			"\t}\n\n"
-
-			"\tinline " + class_name + "& operator-=(any_a<> const& other)\n"
-			"\t{\n"
-			"\t\tassert(___handle___);\n"
-			"\t\t___write___().operator-=(other);\n"
-			"\t\treturn *this;\n"
-			"\t}\n\n"
-
-			"\tinline " + class_name + "& operator*=(any_a<> const& other)\n"
-			"\t{\n"
-			"\t\tassert(___handle___);\n"
-			"\t\t___write___().operator*=(other);\n"
-			"\t\treturn *this;\n"
-			"\t}\n\n"
-
-			"\tinline " + class_name + "& operator/=(any_a<> const& other)\n"
-			"\t{\n"
-			"\t\tassert(___handle___);\n"
-			"\t\t___write___().operator/=(other);\n"
-			"\t\treturn *this;\n"
-			"\t}\n\n"
-
-			"\tinline " + class_name + "& operator%=(any_a<> const& other)\n"
-			"\t{\n"
-			"\t\tassert(___handle___);\n"
-			"\t\t___write___().operator%=(other);\n"
-			"\t\treturn *this;\n"
-			"\t}\n\n");
 	}
 
 	using _define_member_p = void (expression_abstraction_t::*)(bool root, std::string const& class_name, std::string const& name, expression_a<> const& expression, bool extraction, int64_t version, river_a<> & river) const;
@@ -802,7 +767,7 @@ protected:
 				"\t\treturn *this;\n"
 				"\t}\n\n"
 
-				"\tinline " + class_name + "& operator++()\n"
+				"\tinline " + class_name + "& operator++" + parameters + constness + "\n"
 				"\t{\n"
 				"\t\tassert(___handle___);\n"
 				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
@@ -829,7 +794,7 @@ protected:
 				"\t\treturn *this;\n"
 				"\t}\n\n"
 
-				"\tinline " + class_name + "& operator--()\n"
+				"\tinline " + class_name + "& operator--" + parameters + constness + "\n"
 				"\t{\n"
 				"\t\tassert(___handle___);\n"
 				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
@@ -845,6 +810,91 @@ protected:
 				"\t\treturn result;\n"
 				"\t}\n"
 				"#endif\n\n");
+		}
+		else if (name == "self_add_")
+		{
+			river.write_string(
+				"\tinline " + class_name + " " + name + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n"
+
+				"\tinline " + class_name + "& operator+=" + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n");
+		}
+		else if (name == "self_subtract_")
+		{
+			river.write_string(
+				"\tinline " + class_name + " " + name + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n"
+
+				"\tinline " + class_name + "& operator-=" + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n");
+		}
+		else if (name == "self_multiply_")
+		{
+			river.write_string(
+				"\tinline " + class_name + " " + name + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n"
+
+				"\tinline " + class_name + "& operator*=" + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n");
+		}
+		else if (name == "self_divide_")
+		{
+			river.write_string(
+				"\tinline " + class_name + " " + name + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n"
+
+				"\tinline " + class_name + "& operator/=" + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n");
+		}
+		else if (name == "self_modulo_")
+		{
+			river.write_string(
+				"\tinline " + class_name + " " + name + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n"
+
+				"\tinline " + class_name + "& operator%=" + parameters + constness + "\n"
+				"\t{\n"
+				"\t\tassert(___handle___);\n"
+				"\t\t" + (extraction ? "___read___()." : "___write___().") + name + arguments + ";\n"
+				"\t\treturn *this;\n"
+				"\t}\n\n");
 		}
 		//TODO
 		else
@@ -925,12 +975,7 @@ protected:
 				"\t\tvirtual ~___" + class_name + "_handle_base___() = default;\n"
 				"\t\tvirtual ___SHARED___ ___clone___() const = 0;\n"
 				"\t\tvirtual void ___weak___(___WEAK___ const& weak) const = 0;\n"
-				"\t\tvirtual operator bool() const = 0;\n"
-				"\t\tvirtual void operator+=(any_a<> const& other) = 0;\n"
-				"\t\tvirtual void operator-=(any_a<> const& other) = 0;\n"
-				"\t\tvirtual void operator*=(any_a<> const& other) = 0;\n"
-				"\t\tvirtual void operator/=(any_a<> const& other) = 0;\n"
-				"\t\tvirtual void operator%=(any_a<> const& other) = 0;\n");
+				"\t\tvirtual operator bool() const = 0;\n");
 		}
 		else
 		{
@@ -973,31 +1018,6 @@ protected:
 				"\t\tvirtual inline operator bool() const final\n"
 				"\t\t{\n"
 				"\t\t\treturn ___value___.operator bool();\n"
-				"\t\t}\n\n"
-
-				"\t\tvirtual inline void operator+=(any_a<> const& other) final\n"
-				"\t\t{\n"
-				"\t\t\t___value___.operator+=(other);\n"
-				"\t\t}\n\n"
-
-				"\t\tvirtual inline void operator-=(any_a<> const& other) final\n"
-				"\t\t{\n"
-				"\t\t\t___value___.operator-=(other);\n"
-				"\t\t}\n\n"
-
-				"\t\tvirtual inline void operator*=(any_a<> const& other) final\n"
-				"\t\t{\n"
-				"\t\t\t___value___.operator*=(other);\n"
-				"\t\t}\n\n"
-
-				"\t\tvirtual inline void operator/=(any_a<> const& other) final\n"
-				"\t\t{\n"
-				"\t\t\t___value___.operator/=(other);\n"
-				"\t\t}\n\n"
-
-				"\t\tvirtual inline void operator%=(any_a<> const& other) final\n"
-				"\t\t{\n"
-				"\t\t\t___value___.operator%=(other);\n"
 				"\t\t}\n\n");
 		}
 		else
@@ -1137,7 +1157,8 @@ protected:
 		std::string constness;
 		_parse_member_definition_(version, expression, extraction, result, parameters, arguments, constness);
 
-		if (name == "increment_" || name == "decrement_")
+		if (name == "increment_" || name == "decrement_" ||
+			name == "self_add_" || name == "self_subtract_" || name == "self_multiply_" || name == "self_divide_" || name == "self_modulo_")
 		{
 			river.write_string(
 				"\t\tvirtual void " + name + parameters + constness + " = 0;\n");
@@ -1171,7 +1192,8 @@ protected:
 	
 		std::string const scope = root ? "" : "___any_a_handle___<___TTT___, ___DHB___>::";
 
-		if (name == "increment_" || name == "decrement_")
+		if (name == "increment_" || name == "decrement_" ||
+			name == "self_add_" || name == "self_subtract_" || name == "self_multiply_" || name == "self_divide_" || name == "self_modulo_")
 		{
 			river.write_string(
 				"\t\tvirtual inline void " + name + parameters + constness + " final\n"

@@ -61,12 +61,6 @@ public:
 		return _OVERRIDDEN_::me_();
 	}
 
-	inline collection_a<> self_add_(range_a<> const& range)
-	{
-		_OVERRIDDEN_::operator+=(range);
-		return _OVERRIDDEN_::me_();
-	}
-
 	inline collection_a<> add_(range_a<> const& range) const
 	{
 		return operator+(range);
@@ -77,12 +71,6 @@ public:
 		auto result = _OVERRIDDEN_::me_();
 		result += range;
 		return result;
-	}
-
-	inline collection_a<> self_subtract_(range_a<> const& range)
-	{
-		_OVERRIDDEN_::operator-=(range);
-		return _OVERRIDDEN_::me_();
 	}
 
 	inline collection_a<> subtract_(range_a<> const& range) const

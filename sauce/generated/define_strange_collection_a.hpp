@@ -12,41 +12,6 @@ template <typename _1_>
 class collection_a : public range_a<>
 {
 public:
-	inline collection_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline collection_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline collection_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline collection_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline collection_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline any_a<> has__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> has_(any_a<> const& key) const
@@ -141,8 +106,19 @@ public:
 
 	inline any_a<> self_add__(range_a<> const& ___arguments___);
 
-	inline collection_a<> self_add_(range_a<> const& range)
-	{ assert(___handle___); return ___write___().self_add_(range); }
+	inline collection_a self_add_(range_a<> const& range)
+	{
+		assert(___handle___);
+		___write___().self_add_(range);
+		return *this;
+	}
+
+	inline collection_a& operator+=(range_a<> const& range)
+	{
+		assert(___handle___);
+		___write___().self_add_(range);
+		return *this;
+	}
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const;
 
@@ -154,8 +130,19 @@ public:
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
 
-	inline collection_a<> self_subtract_(range_a<> const& range)
-	{ assert(___handle___); return ___write___().self_subtract_(range); }
+	inline collection_a self_subtract_(range_a<> const& range)
+	{
+		assert(___handle___);
+		___write___().self_subtract_(range);
+		return *this;
+	}
+
+	inline collection_a& operator-=(range_a<> const& range)
+	{
+		assert(___handle___);
+		___write___().self_subtract_(range);
+		return *this;
+	}
 
 	inline any_a<> subtract__(range_a<> const& ___arguments___) const;
 
@@ -200,10 +187,10 @@ protected:
 		virtual void push_back(any_a < > const & thing ) = 0;
 		virtual any_a<> pop_back_() = 0;
 		virtual collection_a<> self_assign_(range_a<> const& range) = 0;
-		virtual collection_a<> self_add_(range_a<> const& range) = 0;
+		virtual void self_add_(range_a<> const& range) = 0;
 		virtual collection_a<> add_(range_a<> const& range) const = 0;
 		virtual collection_a operator+(range_a < > const & range ) const = 0;
-		virtual collection_a<> self_subtract_(range_a<> const& range) = 0;
+		virtual void self_subtract_(range_a<> const& range) = 0;
 		virtual collection_a<> subtract_(range_a<> const& range) const = 0;
 		virtual collection_a operator-(range_a < > const & range ) const = 0;
 		virtual any_a<> read_lock_() const = 0;
@@ -294,8 +281,8 @@ protected:
 		virtual inline collection_a<> self_assign_(range_a<> const& range) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_assign_(range); }
 
-		virtual inline collection_a<> self_add_(range_a<> const& range) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(range); }
+		virtual inline void self_add_(range_a<> const& range) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(range); }
 
 		virtual inline collection_a<> add_(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(range); }
@@ -303,8 +290,8 @@ protected:
 		virtual inline collection_a operator+(range_a < > const & range ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(range); }
 
-		virtual inline collection_a<> self_subtract_(range_a<> const& range) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(range); }
+		virtual inline void self_subtract_(range_a<> const& range) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(range); }
 
 		virtual inline collection_a<> subtract_(range_a<> const& range) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(range); }
@@ -557,41 +544,6 @@ template <typename _1_>
 class collection_d : public range_d<>
 {
 public:
-	inline collection_d& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline collection_d& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline collection_d& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline collection_d& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline collection_d& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline any_a<> has__(range_a<> const& arguments) const
 	{
 		assert(___handle___);

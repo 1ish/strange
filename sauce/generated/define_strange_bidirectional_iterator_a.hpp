@@ -12,41 +12,6 @@ template <typename _1_>
 class bidirectional_iterator_a : public forward_iterator_a<>
 {
 public:
-	inline bidirectional_iterator_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline any_a<> decrement__(range_a<> const& ___arguments___);
 
 	inline bidirectional_iterator_a decrement_()
@@ -321,41 +286,6 @@ template <typename _1_>
 class bidirectional_iterator_d : public forward_iterator_d<>
 {
 public:
-	inline bidirectional_iterator_d& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_d& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_d& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_d& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline bidirectional_iterator_d& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline any_a<> decrement__(range_a<> const& arguments)
 	{
 		assert(___handle___);

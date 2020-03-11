@@ -43,41 +43,6 @@ public:
 		___write___();
 	}
 
-	inline any_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline any_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline any_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline any_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline any_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline one_t const & extract_thing() const
 	{ assert(___handle___); return ___read___().extract_thing(); }
 
@@ -204,11 +169,6 @@ protected:
 		virtual ___SHARED___ ___clone___() const = 0;
 		virtual void ___weak___(___WEAK___ const& weak) const = 0;
 		virtual operator bool() const = 0;
-		virtual void operator+=(any_a<> const& other) = 0;
-		virtual void operator-=(any_a<> const& other) = 0;
-		virtual void operator*=(any_a<> const& other) = 0;
-		virtual void operator/=(any_a<> const& other) = 0;
-		virtual void operator%=(any_a<> const& other) = 0;
 		virtual one_t const & extract_thing() const = 0;
 		virtual one_t & mutate_thing() = 0;
 		virtual symbol type_() const = 0;
@@ -265,31 +225,6 @@ protected:
 		virtual inline operator bool() const final
 		{
 			return ___value___.operator bool();
-		}
-
-		virtual inline void operator+=(any_a<> const& other) final
-		{
-			___value___.operator+=(other);
-		}
-
-		virtual inline void operator-=(any_a<> const& other) final
-		{
-			___value___.operator-=(other);
-		}
-
-		virtual inline void operator*=(any_a<> const& other) final
-		{
-			___value___.operator*=(other);
-		}
-
-		virtual inline void operator/=(any_a<> const& other) final
-		{
-			___value___.operator/=(other);
-		}
-
-		virtual inline void operator%=(any_a<> const& other) final
-		{
-			___value___.operator%=(other);
 		}
 
 		virtual inline one_t const & extract_thing() const final

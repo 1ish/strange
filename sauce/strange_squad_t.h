@@ -84,22 +84,10 @@ class squad_t : public thing_t<___ego___>
 		}
 
 		// random access iterator
-		inline ___ego_it___ self_add_(number_a<> const& number)
+		inline void self_add_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it += number.to_int_64();
-			return thing_t<___ego_it___>::me_();
-		}
-
-		inline iterator_t& operator+=(any_a<> const& thing)
-		{
-			if (!check<number_a<>>(thing))
-			{
-				throw dis("strange::squad::iterator += passed non-number");
-			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
-			_it += cast<number_a<>>(thing).to_int_64();
-			return *this;
 		}
 
 		inline random_access_iterator_a<> add_(number_a<> const& number) const
@@ -115,22 +103,10 @@ class squad_t : public thing_t<___ego___>
 			return result;
 		}
 
-		inline ___ego_it___ self_subtract_(number_a<> const& number)
+		inline void self_subtract_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it -= number.to_int_64();
-			return thing_t<___ego_it___>::me_();
-		}
-
-		inline iterator_t& operator-=(any_a<> const& thing)
-		{
-			if (!check<number_a<>>(thing))
-			{
-				throw dis("strange::squad::iterator -= passed non-number");
-			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
-			_it -= cast<number_a<>>(thing).to_int_64();
-			return *this;
 		}
 
 		inline random_access_iterator_a<> subtract_(number_a<> const& number) const
@@ -296,22 +272,10 @@ class squad_t : public thing_t<___ego___>
 		}
 
 		// random access iterator
-		inline ___ego_it___ self_add_(number_a<> const& number)
+		inline void self_add_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it += number.to_int_64();
-			return thing_t<___ego_it___>::me_();
-		}
-
-		inline const_iterator_t& operator+=(any_a<> const& thing)
-		{
-			if (!check<number_a<>>(thing))
-			{
-				throw dis("strange::squad::const_iterator += passed non-number");
-			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
-			_it += cast<number_a<>>(thing).to_int_64();
-			return *this;
 		}
 
 		inline random_access_const_iterator_a<> add_(number_a<> const& number) const
@@ -327,22 +291,10 @@ class squad_t : public thing_t<___ego___>
 			return result;
 		}
 
-		inline ___ego_it___ self_subtract_(number_a<> const& number)
+		inline void self_subtract_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			_it -= number.to_int_64();
-			return thing_t<___ego_it___>::me_();
-		}
-
-		inline const_iterator_t& operator-=(any_a<> const& thing)
-		{
-			if (!check<number_a<>>(thing))
-			{
-				throw dis("strange::squad::const_iterator -= passed non-number");
-			}
-			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
-			_it -= cast<number_a<>>(thing).to_int_64();
-			return *this;
 		}
 
 		inline random_access_const_iterator_a<> subtract_(number_a<> const& number) const
@@ -739,11 +691,11 @@ public:
 		return thing_t<___ego___>::me_();
 	}
 
-	inline squad_t& operator+=(any_a<> const& range)
+	inline void self_add_(range_a<> const& range)
 	{
 		if (check<squad_a<>>(range))
 		{
-			auto const other = cast<squad_a<>>(range);
+			auto const other = fast<squad_a<>>(range);
 			auto read_lock = other.read_lock_();
 			auto const& other_deque = other.extract_deque();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
@@ -751,36 +703,27 @@ public:
 		}
 		else
 		{
-			if (!check<range_a<>>(range))
-			{
-				throw dis("strange::squad += passed non-range");
-			}
-			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& thing : cast<range_a<> const>(range))
+			for (auto const& thing : range)
 			{
 				_deque.push_back(thing);
 			}
 		}
-		return *this;
 	}
 
-	inline squad_t& operator-=(any_a<> const& range)
+	inline void self_subtract_(range_a<> const& range)
 	{
 		if (check<collection_a<>>(range))
 		{
 			typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
-			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - cast<collection_a<>>(range).size())));
+			_deque.resize(std::size_t(std::max<int64_t>(0, int64_t(_deque.size()) - fast<collection_a<>>(range).size())));
 		}
 		else
 		{
-			if (!check<range_a<>>(range))
-			{
-				throw dis("strange::squad -= passed non-range");
-			}
-			auto read_lock = check<collection_a<>>(range) ? cast<collection_a<>>(range).read_lock_() : no();
+			auto read_lock = check<collection_a<>>(range) ? fast<collection_a<>>(range).read_lock_() : no();
 			typename concurrent_u<_concurrent_>::write_lock write_lock(_mutex);
-			for (auto const& thing : cast<range_a<> const>(range))
+			for (auto const& thing : range)
 			{
 				if (_deque.empty())
 				{
@@ -789,7 +732,6 @@ public:
 				_deque.pop_back();
 			}
 		}
-		return *this;
 	}
 
 	inline any_a<> read_lock_() const

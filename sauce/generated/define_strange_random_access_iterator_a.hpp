@@ -12,45 +12,21 @@ template <typename _1_>
 class random_access_iterator_a : public bidirectional_iterator_a<>
 {
 public:
-	inline random_access_iterator_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline any_a<> self_add__(range_a<> const& ___arguments___);
 
-	inline random_access_iterator_a<> self_add_(number_a<> const& number)
-	{ assert(___handle___); return ___write___().self_add_(number); }
+	inline random_access_iterator_a self_add_(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_add_(number);
+		return *this;
+	}
+
+	inline random_access_iterator_a& operator+=(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_add_(number);
+		return *this;
+	}
 
 	inline any_a<> add__(range_a<> const& ___arguments___) const;
 
@@ -62,8 +38,19 @@ public:
 
 	inline any_a<> self_subtract__(range_a<> const& ___arguments___);
 
-	inline random_access_iterator_a<> self_subtract_(number_a<> const& number)
-	{ assert(___handle___); return ___write___().self_subtract_(number); }
+	inline random_access_iterator_a self_subtract_(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_subtract_(number);
+		return *this;
+	}
+
+	inline random_access_iterator_a& operator-=(number_a<> const& number)
+	{
+		assert(___handle___);
+		___write___().self_subtract_(number);
+		return *this;
+	}
 
 	inline any_a<> subtract__(range_a<> const& ___arguments___) const;
 
@@ -108,10 +95,10 @@ public:
 protected:
 	struct ___random_access_iterator_a_handle_base___ : ___bidirectional_iterator_a_handle_base___
 	{
-		virtual random_access_iterator_a<> self_add_(number_a<> const& number) = 0;
+		virtual void self_add_(number_a<> const& number) = 0;
 		virtual random_access_iterator_a<> add_(number_a<> const& number) const = 0;
 		virtual random_access_iterator_a operator+(number_a < > const & number ) const = 0;
-		virtual random_access_iterator_a<> self_subtract_(number_a<> const& number) = 0;
+		virtual void self_subtract_(number_a<> const& number) = 0;
 		virtual random_access_iterator_a<> subtract_(number_a<> const& number) const = 0;
 		virtual random_access_iterator_a operator-(number_a < > const & number ) const = 0;
 		virtual any_a<> less_than_(random_access_iterator_a<> const& it) const = 0;
@@ -142,8 +129,8 @@ protected:
 			: ___bidirectional_iterator_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline random_access_iterator_a<> self_add_(number_a<> const& number) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }
+		virtual inline void self_add_(number_a<> const& number) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_add_(number); }
 
 		virtual inline random_access_iterator_a<> add_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.add_(number); }
@@ -151,8 +138,8 @@ protected:
 		virtual inline random_access_iterator_a operator+(number_a < > const & number ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator+(number); }
 
-		virtual inline random_access_iterator_a<> self_subtract_(number_a<> const& number) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
+		virtual inline void self_subtract_(number_a<> const& number) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.self_subtract_(number); }
 
 		virtual inline random_access_iterator_a<> subtract_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
@@ -412,41 +399,6 @@ template <typename _1_>
 class random_access_iterator_d : public bidirectional_iterator_d<>
 {
 public:
-	inline random_access_iterator_d& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_d& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_d& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_d& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_d& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline any_a<> self_add__(range_a<> const& arguments)
 	{
 		assert(___handle___);

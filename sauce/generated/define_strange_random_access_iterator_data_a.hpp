@@ -12,41 +12,6 @@ template <typename _1_>
 class random_access_iterator_data_a : public random_access_iterator_a<>
 {
 public:
-	inline random_access_iterator_data_a& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_data_a& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_data_a& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_data_a& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_data_a& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline _1_ const & extract_it() const
 	{ assert(___handle___); return ___read___().extract_it(); }
 
@@ -304,41 +269,6 @@ template <typename _1_>
 class random_access_iterator_data_d : public random_access_iterator_d<>
 {
 public:
-	inline random_access_iterator_data_d& operator+=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator+=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_data_d& operator-=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator-=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_data_d& operator*=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator*=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_data_d& operator/=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator/=(other);
-		return *this;
-	}
-
-	inline random_access_iterator_data_d& operator%=(any_a<> const& other)
-	{
-		assert(___handle___);
-		___write___().operator%=(other);
-		return *this;
-	}
-
 	inline _1_ const & extract_it() const
 	{ throw dis("dynamic random_access_iterator_data_d::extract_it() not available"); }
 
