@@ -3,50 +3,50 @@ namespace strange
 {
 
 template <typename _1_>
-inline any_a<> river_a<_1_>::get__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1_>::get_char__(range_a<> const& ___arguments___)
 {
-	return get_();
+	return get_char_();
 }
 
 template <typename _1_>
-inline any_a<> river_a<_1_>::peek__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1_>::peek_char__(range_a<> const& ___arguments___)
 {
-	return peek_();
+	return peek_char_();
 }
 
 template <typename _1_>
-inline any_a<> river_a<_1_>::unget__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1_>::unget_char__(range_a<> const& ___arguments___)
 {
-	return unget_();
+	return unget_char_();
 }
 
 template <typename _1_>
-inline any_a<> river_a<_1_>::putback__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1_>::put_back_char__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("river_a::putback_ passed short range");
+		throw dis("river_a::put_back_char_ passed short range");
 	}
 	auto int_8 = cast<number_data_int8_a<>>(*___it___);
-	return putback_(int_8);
+	return put_back_char_(int_8);
 }
 
 template <typename _1_>
-inline any_a<> river_a<_1_>::getline__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1_>::get_line__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("river_a::getline_ passed short range");
+		throw dis("river_a::get_line_ passed short range");
 	}
 	auto count = cast<number_data_int64_a<>>(*___it___);
 	if (++___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("river_a::getline_ passed short range");
+		throw dis("river_a::get_line_ passed short range");
 	}
 	auto delimiter = cast<number_data_int8_a<>>(*___it___);
-	return getline_(count, delimiter);
+	return get_line_(count, delimiter);
 }
 
 template <typename _1_>
@@ -122,15 +122,15 @@ inline any_a<> river_a<_1_>::sync__(range_a<> const& ___arguments___)
 }
 
 template <typename _1_>
-inline any_a<> river_a<_1_>::put__(range_a<> const& ___arguments___)
+inline any_a<> river_a<_1_>::put_char__(range_a<> const& ___arguments___)
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
 	{
-		throw dis("river_a::put_ passed short range");
+		throw dis("river_a::put_char_ passed short range");
 	}
 	auto int_8 = cast<number_data_int8_a<>>(*___it___);
-	return put_(int_8);
+	return put_char_(int_8);
 }
 
 template <typename _1_>

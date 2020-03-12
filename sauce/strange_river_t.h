@@ -234,12 +234,12 @@ public:
 		return result;
 	}
 
-	inline number_data_a<int8_t> get_()
+	inline number_data_a<int8_t> get_char_()
 	{
-		return num(get());
+		return num(get_char());
 	}
 
-	inline int8_t get()
+	inline int8_t get_char()
 	{
 		if (!_istream)
 		{
@@ -248,12 +248,12 @@ public:
 		return int8_t(_istream->get());
 	}
 
-	inline number_data_a<int8_t> peek_()
+	inline number_data_a<int8_t> peek_char_()
 	{
-		return num(peek());
+		return num(peek_char());
 	}
 
-	inline int8_t peek()
+	inline int8_t peek_char()
 	{
 		if (!_istream)
 		{
@@ -262,13 +262,13 @@ public:
 		return int8_t(_istream->peek());
 	}
 
-	inline any_a<> unget_()
+	inline any_a<> unget_char_()
 	{
-		unget();
+		unget_char();
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void unget()
+	inline void unget_char()
 	{
 		if (!_istream)
 		{
@@ -277,13 +277,13 @@ public:
 		_istream->unget();
 	}
 
-	inline any_a<> putback_(number_data_a<int8_t> const& int_8)
+	inline any_a<> put_back_char_(number_data_a<int8_t> const& int_8)
 	{
-		putback(int_8.extract_primitive());
+		put_back_char(int_8.extract_primitive());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void putback(int8_t int_8)
+	inline void put_back_char(int8_t int_8)
 	{
 		if (!_istream)
 		{
@@ -292,12 +292,12 @@ public:
 		_istream->putback(char(int_8));
 	}
 
-	inline lake_a<int8_t> getline_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1), number_data_a<int8_t> const& delimiter = number_int_8_t<>::create('\n'))
+	inline lake_a<int8_t> get_line_(number_data_a<int64_t> const& count = number_int_64_t<>::create(-1), number_data_a<int8_t> const& delimiter = number_int_8_t<>::create('\n'))
 	{
-		return lake_int_8_t<>::create(getline(count.extract_primitive(), delimiter.extract_primitive()));
+		return lake_int_8_t<>::create(get_line(count.extract_primitive(), delimiter.extract_primitive()));
 	}
 
-	inline std::vector<int8_t> getline(int64_t count = -1, int8_t delimiter = '\n')
+	inline std::vector<int8_t> get_line(int64_t count = -1, int8_t delimiter = '\n')
 	{
 		if (!count)
 		{
@@ -453,13 +453,13 @@ public:
 	}
 
 	// river output
-	inline any_a<> put_(number_data_a<int8_t> const& int_8)
+	inline any_a<> put_char_(number_data_a<int8_t> const& int_8)
 	{
-		put(int_8.extract_primitive());
+		put_char(int_8.extract_primitive());
 		return thing_t<___ego___>::me_();
 	}
 
-	inline void put(int8_t int_8)
+	inline void put_char(int8_t int_8)
 	{
 		if (!_ostream)
 		{

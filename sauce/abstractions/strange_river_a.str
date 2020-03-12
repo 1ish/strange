@@ -8,20 +8,20 @@ false &&
 					//TODO to_lake_
 					to_string : "std::string ()", //TODO { return lake_to_string(to_lake_()); }
 
-					get_ := (<number_data_int8>),
-					get : "int8_t () { return get_().extract_primitive(); }",
+					get_char_ := (<number_data_int8>),
+					get_char : "int8_t () { return get_char_().extract_primitive(); }",
 	
-					peek_ := (<number_data_int8>),
-					peek : "int8_t () { return peek_().extract_primitive(); }",
+					peek_char_ := (<number_data_int8>),
+					peek_char : "int8_t () { return peek_char_().extract_primitive(); }",
 
-					unget_ := (<>),
-					unget : "void () { unget_(); }",
+					unget_char_ := (<>),
+					unget_char : "void () { unget_char_(); }",
 
-					putback_ := (int_8 :<number_data_int8>#, <>),
-					putback : "void (int8_t int_8) { putback_(num(int_8)); }",
+					put_back_char_ := (int_8 :<number_data_int8>#, <>),
+					put_back_char : "void (int8_t int_8) { put_back_char_(num(int_8)); }",
 
-					getline_ := (count :<number_data_int64>#, delimiter :<number_data_int8>#, <lake_int8>),
-					getline : "std::vector<int8_t> (int64_t count, int8_t delimiter) { return getline_(num(count), num(delimiter)).extract_vector(); }",
+					get_line_ := (count :<number_data_int64>#, delimiter :<number_data_int8>#, <lake_int8>),
+					get_line : "std::vector<int8_t> (int64_t count, int8_t delimiter) { return get_line_(num(count), num(delimiter)).extract_vector(); }",
 
 					ignore_ := (count :<number_data_int64>#, <>),
 					ignore : "void (int64_t count) { ignore_(num(count)); }",
@@ -46,8 +46,8 @@ false &&
 					sync : "bool () { return sync_(); }",
 
 					// river output
-					put_ := (int_8 :<number_data_int8>#, <>),
-					put : "void (int8_t int_8) { put_(num(int_8)); }",
+					put_char_ := (int_8 :<number_data_int8>#, <>),
+					put_char : "void (int8_t int_8) { put_char_(num(int_8)); }",
 
 					write_ := (lake :<lake_int8>#, <>),
 					write : "void (std::vector<int8_t> const& lake) { write_(lake_int8_create(lake)); }",

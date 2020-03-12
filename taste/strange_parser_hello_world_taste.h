@@ -42,7 +42,7 @@ TEST_CASE("strange river read hello world get", "[river_t]")
 		auto it = river.extract_begin_();
 		while (river.good())
 		{
-			std__cout << "'" << char(river.get()) << "'"
+			std__cout << "'" << char{ river.get_char() } << "'"
 				<< (it == river.extract_end_() ? " end" : " not end")
 				<< std::endl;
 		}

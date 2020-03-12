@@ -15,45 +15,45 @@ public:
 	inline std :: string to_string()
 	{ assert(___handle___); return ___write___().to_string(); }
 
-	inline any_a<> get__(range_a<> const& ___arguments___);
+	inline any_a<> get_char__(range_a<> const& ___arguments___);
 
-	inline number_data_int8_a<> get_()
-	{ assert(___handle___); return ___write___().get_(); }
+	inline number_data_int8_a<> get_char_()
+	{ assert(___handle___); return ___write___().get_char_(); }
 
-	inline int8_t get()
-	{ assert(___handle___); return ___write___().get(); }
+	inline int8_t get_char()
+	{ assert(___handle___); return ___write___().get_char(); }
 
-	inline any_a<> peek__(range_a<> const& ___arguments___);
+	inline any_a<> peek_char__(range_a<> const& ___arguments___);
 
-	inline number_data_int8_a<> peek_()
-	{ assert(___handle___); return ___write___().peek_(); }
+	inline number_data_int8_a<> peek_char_()
+	{ assert(___handle___); return ___write___().peek_char_(); }
 
-	inline int8_t peek()
-	{ assert(___handle___); return ___write___().peek(); }
+	inline int8_t peek_char()
+	{ assert(___handle___); return ___write___().peek_char(); }
 
-	inline any_a<> unget__(range_a<> const& ___arguments___);
+	inline any_a<> unget_char__(range_a<> const& ___arguments___);
 
-	inline any_a<> unget_()
-	{ assert(___handle___); return ___write___().unget_(); }
+	inline any_a<> unget_char_()
+	{ assert(___handle___); return ___write___().unget_char_(); }
 
-	inline void unget()
-	{ assert(___handle___); ___write___().unget(); }
+	inline void unget_char()
+	{ assert(___handle___); ___write___().unget_char(); }
 
-	inline any_a<> putback__(range_a<> const& ___arguments___);
+	inline any_a<> put_back_char__(range_a<> const& ___arguments___);
 
-	inline any_a<> putback_(number_data_int8_a<> const& int_8)
-	{ assert(___handle___); return ___write___().putback_(int_8); }
+	inline any_a<> put_back_char_(number_data_int8_a<> const& int_8)
+	{ assert(___handle___); return ___write___().put_back_char_(int_8); }
 
-	inline void putback(int8_t int_8 )
-	{ assert(___handle___); ___write___().putback(int_8); }
+	inline void put_back_char(int8_t int_8 )
+	{ assert(___handle___); ___write___().put_back_char(int_8); }
 
-	inline any_a<> getline__(range_a<> const& ___arguments___);
+	inline any_a<> get_line__(range_a<> const& ___arguments___);
 
-	inline lake_int8_a<> getline_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter)
-	{ assert(___handle___); return ___write___().getline_(count, delimiter); }
+	inline lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter)
+	{ assert(___handle___); return ___write___().get_line_(count, delimiter); }
 
-	inline std :: vector < int8_t > getline(int64_t count , int8_t delimiter )
-	{ assert(___handle___); return ___write___().getline(count, delimiter); }
+	inline std :: vector < int8_t > get_line(int64_t count , int8_t delimiter )
+	{ assert(___handle___); return ___write___().get_line(count, delimiter); }
 
 	inline any_a<> ignore__(range_a<> const& ___arguments___);
 
@@ -114,13 +114,13 @@ public:
 	inline bool sync()
 	{ assert(___handle___); return ___write___().sync(); }
 
-	inline any_a<> put__(range_a<> const& ___arguments___);
+	inline any_a<> put_char__(range_a<> const& ___arguments___);
 
-	inline any_a<> put_(number_data_int8_a<> const& int_8)
-	{ assert(___handle___); return ___write___().put_(int_8); }
+	inline any_a<> put_char_(number_data_int8_a<> const& int_8)
+	{ assert(___handle___); return ___write___().put_char_(int_8); }
 
-	inline void put(int8_t int_8 )
-	{ assert(___handle___); ___write___().put(int_8); }
+	inline void put_char(int8_t int_8 )
+	{ assert(___handle___); ___write___().put_char(int_8); }
 
 	inline any_a<> write__(range_a<> const& ___arguments___);
 
@@ -249,16 +249,16 @@ protected:
 	struct ___river_a_handle_base___ : ___range_a_handle_base___
 	{
 		virtual std :: string to_string() = 0;
-		virtual number_data_int8_a<> get_() = 0;
-		virtual int8_t get() = 0;
-		virtual number_data_int8_a<> peek_() = 0;
-		virtual int8_t peek() = 0;
-		virtual any_a<> unget_() = 0;
-		virtual void unget() = 0;
-		virtual any_a<> putback_(number_data_int8_a<> const& int_8) = 0;
-		virtual void putback(int8_t int_8 ) = 0;
-		virtual lake_int8_a<> getline_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter) = 0;
-		virtual std :: vector < int8_t > getline(int64_t count , int8_t delimiter ) = 0;
+		virtual number_data_int8_a<> get_char_() = 0;
+		virtual int8_t get_char() = 0;
+		virtual number_data_int8_a<> peek_char_() = 0;
+		virtual int8_t peek_char() = 0;
+		virtual any_a<> unget_char_() = 0;
+		virtual void unget_char() = 0;
+		virtual any_a<> put_back_char_(number_data_int8_a<> const& int_8) = 0;
+		virtual void put_back_char(int8_t int_8 ) = 0;
+		virtual lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter) = 0;
+		virtual std :: vector < int8_t > get_line(int64_t count , int8_t delimiter ) = 0;
 		virtual any_a<> ignore_(number_data_int64_a<> const& count) = 0;
 		virtual void ignore(int64_t count ) = 0;
 		virtual lake_int8_a<> read_(number_data_int64_a<> const& count) = 0;
@@ -274,8 +274,8 @@ protected:
 		virtual void seekg_cur(int64_t offset ) = 0;
 		virtual any_a<> sync_() = 0;
 		virtual bool sync() = 0;
-		virtual any_a<> put_(number_data_int8_a<> const& int_8) = 0;
-		virtual void put(int8_t int_8 ) = 0;
+		virtual any_a<> put_char_(number_data_int8_a<> const& int_8) = 0;
+		virtual void put_char(int8_t int_8 ) = 0;
 		virtual any_a<> write_(lake_int8_a<> const& lake) = 0;
 		virtual void write(std :: vector < int8_t > const & lake ) = 0;
 		virtual void write_string(std :: string const & str ) = 0;
@@ -330,35 +330,35 @@ protected:
 		virtual inline std :: string to_string() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
 
-		virtual inline number_data_int8_a<> get_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get_(); }
+		virtual inline number_data_int8_a<> get_char_() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get_char_(); }
 
-		virtual inline int8_t get() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get(); }
+		virtual inline int8_t get_char() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get_char(); }
 
-		virtual inline number_data_int8_a<> peek_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.peek_(); }
+		virtual inline number_data_int8_a<> peek_char_() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.peek_char_(); }
 
-		virtual inline int8_t peek() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.peek(); }
+		virtual inline int8_t peek_char() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.peek_char(); }
 
-		virtual inline any_a<> unget_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.unget_(); }
+		virtual inline any_a<> unget_char_() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.unget_char_(); }
 
-		virtual inline void unget() final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.unget(); }
+		virtual inline void unget_char() final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.unget_char(); }
 
-		virtual inline any_a<> putback_(number_data_int8_a<> const& int_8) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.putback_(int_8); }
+		virtual inline any_a<> put_back_char_(number_data_int8_a<> const& int_8) final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.put_back_char_(int_8); }
 
-		virtual inline void putback(int8_t int_8 ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.putback(int_8); }
+		virtual inline void put_back_char(int8_t int_8 ) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.put_back_char(int_8); }
 
-		virtual inline lake_int8_a<> getline_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.getline_(count, delimiter); }
+		virtual inline lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter) final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get_line_(count, delimiter); }
 
-		virtual inline std :: vector < int8_t > getline(int64_t count , int8_t delimiter ) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.getline(count, delimiter); }
+		virtual inline std :: vector < int8_t > get_line(int64_t count , int8_t delimiter ) final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.get_line(count, delimiter); }
 
 		virtual inline any_a<> ignore_(number_data_int64_a<> const& count) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.ignore_(count); }
@@ -405,11 +405,11 @@ protected:
 		virtual inline bool sync() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.sync(); }
 
-		virtual inline any_a<> put_(number_data_int8_a<> const& int_8) final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.put_(int_8); }
+		virtual inline any_a<> put_char_(number_data_int8_a<> const& int_8) final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.put_char_(int_8); }
 
-		virtual inline void put(int8_t int_8 ) final
-		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.put(int_8); }
+		virtual inline void put_char(int8_t int_8 ) final
+		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.put_char(int_8); }
 
 		virtual inline any_a<> write_(lake_int8_a<> const& lake) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.write_(lake); }
@@ -704,11 +704,11 @@ public:
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
 			___unordered_shoal_a___ operations = range_a::___operations___<___unordered_shoal_a___>();
-			operations.update_string("get_", native_mutation_t<river_a>::create(&river_a::get__));
-			operations.update_string("peek_", native_mutation_t<river_a>::create(&river_a::peek__));
-			operations.update_string("unget_", native_mutation_t<river_a>::create(&river_a::unget__));
-			operations.update_string("putback_", native_mutation_t<river_a>::create(&river_a::putback__));
-			operations.update_string("getline_", native_mutation_t<river_a>::create(&river_a::getline__));
+			operations.update_string("get_char_", native_mutation_t<river_a>::create(&river_a::get_char__));
+			operations.update_string("peek_char_", native_mutation_t<river_a>::create(&river_a::peek_char__));
+			operations.update_string("unget_char_", native_mutation_t<river_a>::create(&river_a::unget_char__));
+			operations.update_string("put_back_char_", native_mutation_t<river_a>::create(&river_a::put_back_char__));
+			operations.update_string("get_line_", native_mutation_t<river_a>::create(&river_a::get_line__));
 			operations.update_string("ignore_", native_mutation_t<river_a>::create(&river_a::ignore__));
 			operations.update_string("read_", native_mutation_t<river_a>::create(&river_a::read__));
 			operations.update_string("tellg_", native_extraction_t<river_a>::create(&river_a::tellg__));
@@ -716,7 +716,7 @@ public:
 			operations.update_string("seekg_end_", native_mutation_t<river_a>::create(&river_a::seekg_end__));
 			operations.update_string("seekg_cur_", native_mutation_t<river_a>::create(&river_a::seekg_cur__));
 			operations.update_string("sync_", native_mutation_t<river_a>::create(&river_a::sync__));
-			operations.update_string("put_", native_mutation_t<river_a>::create(&river_a::put__));
+			operations.update_string("put_char_", native_mutation_t<river_a>::create(&river_a::put_char__));
 			operations.update_string("write_", native_mutation_t<river_a>::create(&river_a::write__));
 			operations.update_string("tellp_", native_extraction_t<river_a>::create(&river_a::tellp__));
 			operations.update_string("seekp_beg_", native_mutation_t<river_a>::create(&river_a::seekp_beg__));
@@ -755,130 +755,130 @@ public:
 	inline std :: string to_string()
 	{ throw dis("dynamic river_d::to_string() not available"); }
 
-	inline any_a<> get__(range_a<> const& arguments)
+	inline any_a<> get_char__(range_a<> const& arguments)
 	{
 		assert(___handle___);
-		auto const op = operation("get_");
+		auto const op = operation("get_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::get_ passed non-existent member");
+			throw dis("dynamic river_d::get_char_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
 
-	inline number_data_int8_a<> get_()
+	inline number_data_int8_a<> get_char_()
 	{
 		assert(___handle___);
-		auto const op = operation("get_");
+		auto const op = operation("get_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::get_ passed non-existent member");
+			throw dis("dynamic river_d::get_char_ passed non-existent member");
 		}
 		return cast<number_data_int8_a<>>(variadic_operate(op, *this));
 	}
 
-	inline int8_t get()
-	{ return get_().extract_primitive(); }
+	inline int8_t get_char()
+	{ return get_char_().extract_primitive(); }
 
-	inline any_a<> peek__(range_a<> const& arguments)
+	inline any_a<> peek_char__(range_a<> const& arguments)
 	{
 		assert(___handle___);
-		auto const op = operation("peek_");
+		auto const op = operation("peek_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::peek_ passed non-existent member");
+			throw dis("dynamic river_d::peek_char_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
 
-	inline number_data_int8_a<> peek_()
+	inline number_data_int8_a<> peek_char_()
 	{
 		assert(___handle___);
-		auto const op = operation("peek_");
+		auto const op = operation("peek_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::peek_ passed non-existent member");
+			throw dis("dynamic river_d::peek_char_ passed non-existent member");
 		}
 		return cast<number_data_int8_a<>>(variadic_operate(op, *this));
 	}
 
-	inline int8_t peek()
-	{ return peek_().extract_primitive(); }
+	inline int8_t peek_char()
+	{ return peek_char_().extract_primitive(); }
 
-	inline any_a<> unget__(range_a<> const& arguments)
+	inline any_a<> unget_char__(range_a<> const& arguments)
 	{
 		assert(___handle___);
-		auto const op = operation("unget_");
+		auto const op = operation("unget_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::unget_ passed non-existent member");
+			throw dis("dynamic river_d::unget_char_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> unget_()
+	inline any_a<> unget_char_()
 	{
 		assert(___handle___);
-		auto const op = operation("unget_");
+		auto const op = operation("unget_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::unget_ passed non-existent member");
+			throw dis("dynamic river_d::unget_char_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this));
 	}
 
-	inline void unget()
-	{ unget_(); }
+	inline void unget_char()
+	{ unget_char_(); }
 
-	inline any_a<> putback__(range_a<> const& arguments)
+	inline any_a<> put_back_char__(range_a<> const& arguments)
 	{
 		assert(___handle___);
-		auto const op = operation("putback_");
+		auto const op = operation("put_back_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::putback_ passed non-existent member");
+			throw dis("dynamic river_d::put_back_char_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> putback_(number_data_int8_a<> const& int_8)
+	inline any_a<> put_back_char_(number_data_int8_a<> const& int_8)
 	{
 		assert(___handle___);
-		auto const op = operation("putback_");
+		auto const op = operation("put_back_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::putback_ passed non-existent member");
+			throw dis("dynamic river_d::put_back_char_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, int_8));
 	}
 
-	inline void putback(int8_t int_8 )
-	{ putback_(num(int_8)); }
+	inline void put_back_char(int8_t int_8 )
+	{ put_back_char_(num(int_8)); }
 
-	inline any_a<> getline__(range_a<> const& arguments)
+	inline any_a<> get_line__(range_a<> const& arguments)
 	{
 		assert(___handle___);
-		auto const op = operation("getline_");
+		auto const op = operation("get_line_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::getline_ passed non-existent member");
+			throw dis("dynamic river_d::get_line_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
 
-	inline lake_int8_a<> getline_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter)
+	inline lake_int8_a<> get_line_(number_data_int64_a<> const& count, number_data_int8_a<> const& delimiter)
 	{
 		assert(___handle___);
-		auto const op = operation("getline_");
+		auto const op = operation("get_line_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::getline_ passed non-existent member");
+			throw dis("dynamic river_d::get_line_ passed non-existent member");
 		}
 		return cast<lake_int8_a<>>(variadic_operate(op, *this, count, delimiter));
 	}
 
-	inline std :: vector < int8_t > getline(int64_t count , int8_t delimiter )
-	{ return getline_(num(count), num(delimiter)).extract_vector(); }
+	inline std :: vector < int8_t > get_line(int64_t count , int8_t delimiter )
+	{ return get_line_(num(count), num(delimiter)).extract_vector(); }
 
 	inline any_a<> ignore__(range_a<> const& arguments)
 	{
@@ -1058,30 +1058,30 @@ public:
 	inline bool sync()
 	{ return sync_(); }
 
-	inline any_a<> put__(range_a<> const& arguments)
+	inline any_a<> put_char__(range_a<> const& arguments)
 	{
 		assert(___handle___);
-		auto const op = operation("put_");
+		auto const op = operation("put_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::put_ passed non-existent member");
+			throw dis("dynamic river_d::put_char_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
 
-	inline any_a<> put_(number_data_int8_a<> const& int_8)
+	inline any_a<> put_char_(number_data_int8_a<> const& int_8)
 	{
 		assert(___handle___);
-		auto const op = operation("put_");
+		auto const op = operation("put_char_");
 		if (!op)
 		{
-			throw dis("dynamic river_d::put_ passed non-existent member");
+			throw dis("dynamic river_d::put_char_ passed non-existent member");
 		}
 		return cast<any_a<>>(variadic_operate(op, *this, int_8));
 	}
 
-	inline void put(int8_t int_8 )
-	{ put_(num(int_8)); }
+	inline void put_char(int8_t int_8 )
+	{ put_char_(num(int_8)); }
 
 	inline any_a<> write__(range_a<> const& arguments)
 	{
