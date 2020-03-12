@@ -66,29 +66,29 @@ public:
 	// function
 	static inline any_a<> invoke__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("strange::thing::invoke passed empty range");
 		}
 		any_a<> thing = cast_dup(*it);
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("strange::thing::invoke passed short range");
 		}
 		any_a<> member = *it;
-		return invoke_member(thing, member, range_create(++it, range.cend_()));
+		return invoke_member(thing, member, range_create(++it, range.extract_end_()));
 	}
 
 	static inline any_a<> invoke(any_a<>& thing, range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("strange::thing::invoke passed short range");
 		}
 		any_a<> member = *it;
-		return invoke_member(thing, member, range_create(++it, range.cend_()));
+		return invoke_member(thing, member, range_create(++it, range.extract_end_()));
 	}
 
 	static inline any_a<> invoke_member(any_a<>& thing, any_a<> const& member, range_a<> const& range)
@@ -103,24 +103,24 @@ public:
 
 	static inline any_a<> operate__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("strange::thing::operate passed empty range");
 		}
 		any_a<> thing = cast_dup(*it);
-		return thing.operate(thing, range_create(++it, range.cend_()));
+		return thing.operate(thing, range_create(++it, range.extract_end_()));
 	}
 
 	static inline any_a<> operate(any_a<>& thing, range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("strange::thing::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operation.operate(thing, range_create(++it, range.cend_()));
+		return operation.operate(thing, range_create(++it, range.extract_end_()));
 	}
 
 	// identification

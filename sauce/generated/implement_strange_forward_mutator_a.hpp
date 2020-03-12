@@ -11,8 +11,8 @@ inline any_a<> forward_mutator_a<_1_>::get__(range_a<> const& ___arguments___) c
 template <typename _1_>
 inline any_a<> forward_mutator_a<_1_>::set__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("forward_mutator_a::set_ passed short range");
 	}

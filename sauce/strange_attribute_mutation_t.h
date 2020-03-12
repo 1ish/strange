@@ -30,8 +30,8 @@ public:
 	// function
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
-		auto const it = range.cbegin_();
-		if (it != range.cend_()) // assign
+		auto const it = range.extract_begin_();
+		if (it != range.extract_end_()) // assign
 		{
 			auto const value = *it;
 			if (!_thing.identical(value))

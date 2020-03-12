@@ -15,8 +15,8 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		auto it = terms.cbegin_();
-		if (it == terms.cend_())
+		auto it = terms.extract_begin_();
+		if (it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_invoke_attribute::create passed empty range");
 		}
@@ -25,7 +25,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_invoke_attribute::create passed non-expression thing term");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_invoke_attribute::create passed short range");
 		}
@@ -34,7 +34,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_invoke_attribute::create passed non-symbol member term");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			return expression_substitute_t<over>::create(over{ expression_invoke_attribute_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member)) });
 		}

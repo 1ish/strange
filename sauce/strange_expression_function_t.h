@@ -14,8 +14,8 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		auto it = terms.cbegin_();
-		if (it == terms.cend_())
+		auto it = terms.extract_begin_();
+		if (it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_function::create not passed any terms");
 		}
@@ -29,11 +29,11 @@ public:
 		auto expressions = flock_t<>::create_();
 		auto defaults = flock_t<>::create_();
 		any_a<> expression = expression_t<>::create(token);
-		bool end = ++it == terms.cend_();
+		bool end = ++it == terms.extract_end_();
 		while (!end)
 		{
 			auto const& term = *it;
-			end = ++it == terms.cend_();
+			end = ++it == terms.extract_end_();
 			if (!check<expression_a<>>(term))
 			{
 				throw dis(token.report() + "strange::expression_function::create passed non-expression term");

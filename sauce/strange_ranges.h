@@ -7,52 +7,52 @@ namespace strange
 {
 	inline forward_extractor_a<> begin(range_a<> const& range)
 	{
-		return range.cbegin_();
+		return range.extract_begin_();
 	}
 
 	inline forward_extractor_a<> end(range_a<> const& range)
 	{
-		return range.cend_();
+		return range.extract_end_();
 	}
 
 	inline forward_extractor_a<> begin(shoal_a<> const& shoal)
 	{
-		return shoal.cbegin_();
+		return shoal.extract_begin_();
 	}
 
 	inline forward_extractor_a<> end(shoal_a<> const& shoal)
 	{
-		return shoal.cend_();
+		return shoal.extract_end_();
 	}
 
 	inline forward_mutator_a<> begin(shoal_a<>& shoal)
 	{
-		return shoal.begin_();
+		return shoal.mutate_begin_();
 	}
 
 	inline forward_mutator_a<> end(shoal_a<>& shoal)
 	{
-		return shoal.end_();
+		return shoal.mutate_end_();
 	}
 
 	inline forward_extractor_a<> begin(inventory_a<> const& inventory)
 	{
-		return inventory.cbegin_();
+		return inventory.extract_begin_();
 	}
 
 	inline forward_extractor_a<> end(inventory_a<> const& inventory)
 	{
-		return inventory.cend_();
+		return inventory.extract_end_();
 	}
 
 	inline random_access_mutator_a<> begin(inventory_a<>& inventory)
 	{
-		return inventory.begin_();
+		return inventory.mutate_begin_();
 	}
 
 	inline random_access_mutator_a<> end(inventory_a<>& inventory)
 	{
-		return inventory.end_();
+		return inventory.mutate_end_();
 	}
 }
 

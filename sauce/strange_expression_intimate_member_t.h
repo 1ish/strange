@@ -15,8 +15,8 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		auto it = terms.cbegin_();
-		if (it == terms.cend_())
+		auto it = terms.extract_begin_();
+		if (it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_intimate_member_range::create passed empty range");
 		}

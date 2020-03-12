@@ -35,20 +35,20 @@ public:
 			: unordered_shoal_t<>::create_();
 		auto& local = local_shoal.mutate_map();
 		local.emplace(sym("$"), _shared);
-		forward_extractor_a<> ait = range.cbegin_();
+		forward_extractor_a<> ait = range.extract_begin_();
 		auto nit = operation_t<___ego___>::_names.extract_vector().cbegin();
 		auto kit = _kinds.extract_vector().cbegin();
 		for (auto const& def : _defaults.extract_vector())
 		{
 			if (nit->is("&"))
 			{
-				if (ait == range.cbegin_())
+				if (ait == range.extract_begin_())
 				{
 					local.emplace(*nit, range);
 				}
 				else
 				{
-					local.emplace(*nit, range_t<>::create_(ait, range.cend_()));
+					local.emplace(*nit, range_t<>::create_(ait, range.extract_end_()));
 				}
 				break;
 			}
@@ -71,7 +71,7 @@ public:
 			}
 			auto const kind = cast<kind_a<>>(any_kind);
 
-			if (ait != range.cend_())
+			if (ait != range.extract_end_())
 			{
 				if (kind.fixed() || kind.reference())
 				{

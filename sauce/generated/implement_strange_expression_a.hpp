@@ -35,18 +35,18 @@ inline any_a<> expression_a<_1_>::terms__(range_a<> const& ___arguments___) cons
 template <typename _1_>
 inline any_a<> expression_a<_1_>::generate__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("expression_a::generate_ passed short range");
 	}
 	auto version = cast<number_data_int64_a<>>(*___it___);
-	if (++___it___ == ___arguments___.cend_())
+	if (++___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("expression_a::generate_ passed short range");
 	}
 	auto indent = cast<number_data_int64_a<>>(*___it___);
-	if (++___it___ == ___arguments___.cend_())
+	if (++___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("expression_a::generate_ passed short range");
 	}
@@ -57,33 +57,33 @@ inline any_a<> expression_a<_1_>::generate__(range_a<> const& ___arguments___) c
 template <typename _1_>
 inline any_a<> expression_a<_1_>::generate_cpp__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("expression_a::generate_cpp_ passed short range");
 	}
 	auto version = cast<number_data_int64_a<>>(*___it___);
-	if (++___it___ == ___arguments___.cend_())
+	if (++___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("expression_a::generate_cpp_ passed short range");
 	}
 	auto indent = cast<number_data_int64_a<>>(*___it___);
-	if (++___it___ == ___arguments___.cend_())
+	if (++___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("expression_a::generate_cpp_ passed short range");
 	}
 	auto river = cast_dup<river_a<>>(*___it___);
-	if (++___it___ == ___arguments___.cend_())
+	if (++___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("expression_a::generate_cpp_ passed short range");
 	}
 	auto declare = cast<any_a<>>(*___it___);
-	if (++___it___ == ___arguments___.cend_())
+	if (++___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("expression_a::generate_cpp_ passed short range");
 	}
 	auto define = cast<any_a<>>(*___it___);
-	if (++___it___ == ___arguments___.cend_())
+	if (++___it___ == ___arguments___.extract_end_())
 	{
 		return generate_cpp_(version, indent, river, declare, define);
 	}

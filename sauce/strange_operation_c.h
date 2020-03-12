@@ -12,8 +12,8 @@ public:
 	// construction
 	static inline any_a<> animate__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("<strange::operation>::animate passed empty range");
 		}

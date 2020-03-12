@@ -61,7 +61,7 @@ class range_operator_t : public thing_t<___ego___>
 		inline any_a<> const& operator*() const
 		{
 			auto& vector = _results.mutate_vector();
-			if (_it == _range.cend_())
+			if (_it == _range.extract_end_())
 			{
 				vector.resize(_pos + 1);
 			}
@@ -118,8 +118,8 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("strange::range_operator::create passed empty range");
 		}
@@ -128,12 +128,12 @@ public:
 		{
 			throw dis("strange::range_operator::create passed non-range");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("strange::range_operator::create passed short range");
 		}
 		any_a<> thing_ref = cast_dup(*it);
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("strange::range_operator::create passed short range");
 		}
@@ -163,14 +163,14 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<> cbegin_() const
+	inline forward_extractor_a<> extract_begin_() const
 	{
-		return extractor_t<forward_extractor_a<>>::create(_range, _range.cbegin_(), _thing_ref, _range_ref);
+		return extractor_t<forward_extractor_a<>>::create(_range, _range.extract_begin_(), _thing_ref, _range_ref);
 	}
 
-	inline forward_extractor_a<> cend_() const
+	inline forward_extractor_a<> extract_end_() const
 	{
-		return extractor_t<forward_extractor_a<>>::create(_range, _range.cend_(), _thing_ref, _range_ref);
+		return extractor_t<forward_extractor_a<>>::create(_range, _range.extract_end_(), _thing_ref, _range_ref);
 	}
 
 protected:

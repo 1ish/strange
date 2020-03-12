@@ -32,17 +32,17 @@ public:
 	// incarnation
 	inline void incarnate(flock_a<> const& mention, flock_a<> const& aspects, flock_a<> const& defaults)
 	{
-		auto aspect = aspects.cbegin_();
-		auto value = defaults.cbegin_();
+		auto aspect = aspects.extract_begin_();
+		auto value = defaults.extract_begin_();
 		for (auto const& name : mention)
 		{
 			if (!check<symbol_a<>>(name))
 			{
 				throw dis("strange::incarnation::create passed non-symbol dimension name");
 			}
-			if (aspect == aspects.cend_())
+			if (aspect == aspects.extract_end_())
 			{
-				if (value == defaults.cend_())
+				if (value == defaults.extract_end_())
 				{
 					unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(no()));
 				}
@@ -56,7 +56,7 @@ public:
 			{
 				unordered_shoal_t<false, ___ego___>::_map.emplace(name, attribute_extraction_create(*aspect));
 				++aspect;
-				if (value != defaults.cend_())
+				if (value != defaults.extract_end_())
 				{
 					++value;
 				}

@@ -15,8 +15,8 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		forward_extractor_a<> it = terms.cbegin_();
-		if (it == terms.cend_())
+		forward_extractor_a<> it = terms.extract_begin_();
+		if (it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_literal::create not passed any terms");
 		}
@@ -31,8 +31,8 @@ public:
 	// validation
 	static inline any_a<> validate__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("strange::expression_literal::validate passed empty range");
 		}

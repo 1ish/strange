@@ -120,8 +120,8 @@ public:
 
 	static inline any_a<> file__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("strange::river::file passed empty range");
 		}
@@ -130,17 +130,17 @@ public:
 		{
 			throw dis("strange::river::file passed non-lake-int-8");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			return file_(cast<lake_a<int8_t>>(name));
 		}
 		any_a<> const in = *it;
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			return file_(cast<lake_a<int8_t>>(name), in);
 		}
 		any_a<> const out = *it;
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			return file_(cast<lake_a<int8_t>>(name), in, out);
 		}
@@ -209,16 +209,16 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<> cbegin_() const
+	inline forward_extractor_a<> extract_begin_() const
 	{
 		if (!_istream)
 		{
-			throw dis("strange::river::cbegin can only be called on input rivers");
+			throw dis("strange::river::extract_begin can only be called on input rivers");
 		}
 		return extractor_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
 	}
 
-	inline forward_extractor_a<> cend_() const
+	inline forward_extractor_a<> extract_end_() const
 	{
 		return extractor_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{});
 	}

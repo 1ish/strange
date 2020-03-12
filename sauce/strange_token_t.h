@@ -16,8 +16,8 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("strange::token::create passed empty range");
 		}
@@ -26,7 +26,7 @@ public:
 		{
 			throw dis("strange::token::create passed non-symbol filename");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("strange::token::create passed short range");
 		}
@@ -35,7 +35,7 @@ public:
 		{
 			throw dis("strange::token::create passed non-number-int-64 line");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("strange::token::create passed short range");
 		}
@@ -44,7 +44,7 @@ public:
 		{
 			throw dis("strange::token::create passed non-number-int-64 position");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("strange::token::create passed short range");
 		}
@@ -53,7 +53,7 @@ public:
 		{
 			throw dis("strange::token::create passed non-symbol tag");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("strange::token::create passed short range");
 		}
@@ -62,12 +62,12 @@ public:
 		{
 			throw dis("strange::token::create passed non-symbol symbol");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			return create_(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(tag), cast<symbol_a<>>(symbol));
 		}
 		any_a<> literal = *it;
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			return create_(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(tag), cast<symbol_a<>>(symbol), literal);
 		}
@@ -96,8 +96,8 @@ public:
 
 	static inline token_a<> create(std::string const& tag, range_a<> const& range, create_member member)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("strange::token::create_" + tag + " passed empty range");
 		}
@@ -106,7 +106,7 @@ public:
 		{
 			throw dis("strange::token::create_" + tag + " passed non-symbol filename");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("strange::token::create_" + tag + "passed short range");
 		}
@@ -115,7 +115,7 @@ public:
 		{
 			throw dis("strange::token::create_" + tag + " passed non-number-int-64 line");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("strange::token::create_" + tag + " passed short range");
 		}
@@ -124,7 +124,7 @@ public:
 		{
 			throw dis("strange::token::create_" + tag + " passed non-number-int-64 position");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("strange::token::create_" + tag + " passed short range");
 		}
@@ -133,7 +133,7 @@ public:
 		{
 			throw dis("strange::token::create_" + tag + " passed non-symbol symbol");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			return member(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(symbol), number_int_64_t<>::create(-1));
 		}

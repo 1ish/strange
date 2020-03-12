@@ -63,14 +63,14 @@ class tokenizer_t : public thing_t<___ego___>
 		{
 			if (!_end)
 			{
-				if (!_dot && !_use && _it == _river.cend_())
+				if (!_dot && !_use && _it == _river.extract_end_())
 				{
 					_end = true;
 				}
 				else
 				{
 					_token = next();
-					if (!_dot && !_use && _it == _river.cend_() &&
+					if (!_dot && !_use && _it == _river.extract_end_() &&
 						_token.tag() == "punctuation" && _token.symbol() == "")
 					{
 						_end = true;
@@ -125,7 +125,7 @@ class tokenizer_t : public thing_t<___ego___>
 					char1 = _use;
 					_use = 0;
 				}
-				else if (_it == _river.cend_())
+				else if (_it == _river.extract_end_())
 				{
 					break;
 				}
@@ -135,7 +135,7 @@ class tokenizer_t : public thing_t<___ego___>
 					++_it;
 					++_position;
 				}
-				char2 = _it != _river.cend_() ? cast<number_data_a<int8_t>>(*_it).extract_primitive() : 0;
+				char2 = _it != _river.extract_end_() ? cast<number_data_a<int8_t>>(*_it).extract_primitive() : 0;
 
 				if (char1 == '\n')
 				{
@@ -452,7 +452,7 @@ class tokenizer_t : public thing_t<___ego___>
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _river{ river }
-			, _end{ _it == _river.cend_() }
+			, _end{ _it == _river.extract_end_() }
 			, _line{ 1 }
 			, _position{ 0 }
 			, _start_line{ 1 }
@@ -515,8 +515,8 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("strange::tokenizer::create passed empty range");
 		}
@@ -546,14 +546,14 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<> cbegin_() const
+	inline forward_extractor_a<> extract_begin_() const
 	{
-		return extractor_t<forward_extractor_a<>>::create(_river, _river.cbegin_());
+		return extractor_t<forward_extractor_a<>>::create(_river, _river.extract_begin_());
 	}
 
-	inline forward_extractor_a<> cend_() const
+	inline forward_extractor_a<> extract_end_() const
 	{
-		return extractor_t<forward_extractor_a<>>::create(_river, _river.cend_());
+		return extractor_t<forward_extractor_a<>>::create(_river, _river.extract_end_());
 	}
 
 protected:

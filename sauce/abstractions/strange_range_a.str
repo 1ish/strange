@@ -5,8 +5,8 @@ false &&
 			(	// parent
 				$$<>[],
 				{	// range
-					cbegin_ :# (<forward_extractor>),
-					cend_ :# (<forward_extractor>),
+					extract_begin_ :# (<forward_extractor>),
+					extract_end_ :# (<forward_extractor>),
 				}
 			)
 		)

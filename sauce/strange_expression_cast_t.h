@@ -14,8 +14,8 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		forward_extractor_a<> it = terms.cbegin_();
-		if (it == terms.cend_())
+		forward_extractor_a<> it = terms.extract_begin_();
+		if (it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_cast::create not passed any terms");
 		}
@@ -24,7 +24,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_cast::create passed non-symbol scope");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_cast::create passed too few terms");
 		}
@@ -33,7 +33,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_cast::create passed non-expression thing term");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			return expression_a<>{ over{ expression_cast_t<>(token, terms, cast<expression_a<>>(thing), expression_kind_t<>::create_(token, flock_t<>::create_())) } };
 		}

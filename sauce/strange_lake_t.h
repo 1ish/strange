@@ -470,25 +470,25 @@ public:
 	}
 
 	// range
-	inline random_access_extractor_a<> cbegin_() const
+	inline random_access_extractor_a<> extract_begin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cbegin());
 	}
 
-	inline random_access_extractor_a<> cend_() const
+	inline random_access_extractor_a<> extract_end_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<typename std_vector_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _vector.cend());
 	}
 
-	inline random_access_mutator_a<> begin_()
+	inline random_access_mutator_a<> mutate_begin_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return mutator_t<typename std_vector_number::iterator>::create(*this, _vector.begin());
 	}
 
-	inline random_access_mutator_a<> end_()
+	inline random_access_mutator_a<> mutate_end_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return mutator_t<typename std_vector_number::iterator>::create(*this, _vector.end());

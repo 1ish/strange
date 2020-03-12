@@ -14,8 +14,8 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		forward_extractor_a<> it = terms.cbegin_();
-		if (it == terms.cend_())
+		forward_extractor_a<> it = terms.extract_begin_();
+		if (it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_catch::create not passed any terms");
 		}
@@ -24,7 +24,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_catch::create passed non-symbol scope");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_catch::create passed too few terms");
 		}
@@ -36,7 +36,7 @@ public:
 		auto names = flock_t<>::create_();
 		auto kinds = flock_t<>::create_();
 		auto expressions = flock_t<>::create_();
-		while (++it != terms.cend_())
+		while (++it != terms.extract_end_())
 		{
 			auto const& term = *it;
 			if (!check<expression_a<>>(term))
@@ -150,8 +150,8 @@ public:
 		// catch(name :<kind>= expression)
 		river.write_string(" catch\n(\n");
 		_try_expression.generate(version, indent, river);
-		forward_extractor_a<> kit = _kinds.cbegin_();
-		forward_extractor_a<> eit = _expressions.cbegin_();
+		forward_extractor_a<> kit = _kinds.extract_begin_();
+		forward_extractor_a<> eit = _expressions.extract_begin_();
 		for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 		{
 			river.write_string(", " + cast<symbol_a<>>(name).to_string());
@@ -193,8 +193,8 @@ public:
 		river.write_string("try\n{\n");
 		_try_expression.generate_cpp(version, indent, river, declare, define);
 		river.write_string("\n}\n");
-		forward_extractor_a<> kit = _kinds.cbegin_();
-		forward_extractor_a<> eit = _expressions.cbegin_();
+		forward_extractor_a<> kit = _kinds.extract_begin_();
+		forward_extractor_a<> eit = _expressions.extract_begin_();
 		for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 		{
 			river.write_string("catch(" + cast<kind_a<>>(*kit).code() + " const& exception)\n{\n");

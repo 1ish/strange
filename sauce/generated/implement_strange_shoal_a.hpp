@@ -3,15 +3,15 @@ namespace strange
 {
 
 template <typename _1_>
-inline any_a<> shoal_a<_1_>::begin__(range_a<> const& ___arguments___)
+inline any_a<> shoal_a<_1_>::mutate_begin__(range_a<> const& ___arguments___)
 {
-	return begin_();
+	return mutate_begin_();
 }
 
 template <typename _1_>
-inline any_a<> shoal_a<_1_>::end__(range_a<> const& ___arguments___)
+inline any_a<> shoal_a<_1_>::mutate_end__(range_a<> const& ___arguments___)
 {
-	return end_();
+	return mutate_end_();
 }
 
 template <typename _1_>

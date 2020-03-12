@@ -14,8 +14,8 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		forward_extractor_a<> it = terms.cbegin_();
-		if (it == terms.cend_())
+		forward_extractor_a<> it = terms.extract_begin_();
+		if (it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_while::create not passed any terms");
 		}
@@ -24,7 +24,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_while::create passed non-symbol scope");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_while::create passed too few terms");
 		}
@@ -33,7 +33,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_while::create passed non-expression condition");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_while::create not passed sufficient terms");
 		}

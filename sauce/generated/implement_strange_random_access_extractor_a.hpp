@@ -5,8 +5,8 @@ namespace strange
 template <typename _1_>
 inline any_a<> random_access_extractor_a<_1_>::self_add__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_extractor_a::self_add_ passed short range");
 	}
@@ -17,8 +17,8 @@ inline any_a<> random_access_extractor_a<_1_>::self_add__(range_a<> const& ___ar
 template <typename _1_>
 inline any_a<> random_access_extractor_a<_1_>::add__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_extractor_a::add_ passed short range");
 	}
@@ -29,8 +29,8 @@ inline any_a<> random_access_extractor_a<_1_>::add__(range_a<> const& ___argumen
 template <typename _1_>
 inline any_a<> random_access_extractor_a<_1_>::self_subtract__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_extractor_a::self_subtract_ passed short range");
 	}
@@ -41,8 +41,8 @@ inline any_a<> random_access_extractor_a<_1_>::self_subtract__(range_a<> const& 
 template <typename _1_>
 inline any_a<> random_access_extractor_a<_1_>::subtract__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_extractor_a::subtract_ passed short range");
 	}
@@ -53,8 +53,8 @@ inline any_a<> random_access_extractor_a<_1_>::subtract__(range_a<> const& ___ar
 template <typename _1_>
 inline any_a<> random_access_extractor_a<_1_>::less_than__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_extractor_a::less_than_ passed short range");
 	}
@@ -65,8 +65,8 @@ inline any_a<> random_access_extractor_a<_1_>::less_than__(range_a<> const& ___a
 template <typename _1_>
 inline any_a<> random_access_extractor_a<_1_>::greater_than__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_extractor_a::greater_than_ passed short range");
 	}
@@ -77,8 +77,8 @@ inline any_a<> random_access_extractor_a<_1_>::greater_than__(range_a<> const& _
 template <typename _1_>
 inline any_a<> random_access_extractor_a<_1_>::less_or_equal__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_extractor_a::less_or_equal_ passed short range");
 	}
@@ -89,8 +89,8 @@ inline any_a<> random_access_extractor_a<_1_>::less_or_equal__(range_a<> const& 
 template <typename _1_>
 inline any_a<> random_access_extractor_a<_1_>::greater_or_equal__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("random_access_extractor_a::greater_or_equal_ passed short range");
 	}

@@ -27,15 +27,15 @@ public:
 	inline bool erase_index(int64_t index )
 	{ assert(___handle___); return ___write___().erase_index(index); }
 
-	inline any_a<> begin__(range_a<> const& ___arguments___);
+	inline any_a<> mutate_begin__(range_a<> const& ___arguments___);
 
-	inline random_access_mutator_a<> begin_()
-	{ assert(___handle___); return ___write___().begin_(); }
+	inline random_access_mutator_a<> mutate_begin_()
+	{ assert(___handle___); return ___write___().mutate_begin_(); }
 
-	inline any_a<> end__(range_a<> const& ___arguments___);
+	inline any_a<> mutate_end__(range_a<> const& ___arguments___);
 
-	inline random_access_mutator_a<> end_()
-	{ assert(___handle___); return ___write___().end_(); }
+	inline random_access_mutator_a<> mutate_end_()
+	{ assert(___handle___); return ___write___().mutate_end_(); }
 
 protected:
 	struct ___inventory_a_handle_base___ : ___collection_a_handle_base___
@@ -45,8 +45,8 @@ protected:
 		virtual void update_index(int64_t index , any_a < > const & value ) = 0;
 		virtual bool insert_index(int64_t index , any_a < > const & value ) = 0;
 		virtual bool erase_index(int64_t index ) = 0;
-		virtual random_access_mutator_a<> begin_() = 0;
-		virtual random_access_mutator_a<> end_() = 0;
+		virtual random_access_mutator_a<> mutate_begin_() = 0;
+		virtual random_access_mutator_a<> mutate_end_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___inventory_a_handle_base___>
@@ -82,11 +82,11 @@ protected:
 		virtual inline bool erase_index(int64_t index ) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_index(index); }
 
-		virtual inline random_access_mutator_a<> begin_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.begin_(); }
+		virtual inline random_access_mutator_a<> mutate_begin_() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin_(); }
 
-		virtual inline random_access_mutator_a<> end_() final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.end_(); }
+		virtual inline random_access_mutator_a<> mutate_end_() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end_(); }
 
 	};
 
@@ -288,8 +288,8 @@ public:
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
 			___unordered_shoal_a___ operations = collection_a::___operations___<___unordered_shoal_a___>();
-			operations.update_string("begin_", native_mutation_t<inventory_a>::create(&inventory_a::begin__));
-			operations.update_string("end_", native_mutation_t<inventory_a>::create(&inventory_a::end__));
+			operations.update_string("mutate_begin_", native_mutation_t<inventory_a>::create(&inventory_a::mutate_begin__));
+			operations.update_string("mutate_end_", native_mutation_t<inventory_a>::create(&inventory_a::mutate_end__));
 			return operations;
 		}();
 		return OPERATIONS;
@@ -325,46 +325,46 @@ public:
 	inline bool erase_index(int64_t index )
 	{ return erase_(num(index)); }
 
-	inline any_a<> begin__(range_a<> const& arguments)
+	inline any_a<> mutate_begin__(range_a<> const& arguments)
 	{
 		assert(___handle___);
-		auto const op = operation("begin_");
+		auto const op = operation("mutate_begin_");
 		if (!op)
 		{
-			throw dis("dynamic inventory_d::begin_ passed non-existent member");
+			throw dis("dynamic inventory_d::mutate_begin_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
 
-	inline random_access_mutator_a<> begin_()
+	inline random_access_mutator_a<> mutate_begin_()
 	{
 		assert(___handle___);
-		auto const op = operation("begin_");
+		auto const op = operation("mutate_begin_");
 		if (!op)
 		{
-			throw dis("dynamic inventory_d::begin_ passed non-existent member");
+			throw dis("dynamic inventory_d::mutate_begin_ passed non-existent member");
 		}
 		return cast<random_access_mutator_a<>>(variadic_operate(op, *this));
 	}
 
-	inline any_a<> end__(range_a<> const& arguments)
+	inline any_a<> mutate_end__(range_a<> const& arguments)
 	{
 		assert(___handle___);
-		auto const op = operation("end_");
+		auto const op = operation("mutate_end_");
 		if (!op)
 		{
-			throw dis("dynamic inventory_d::end_ passed non-existent member");
+			throw dis("dynamic inventory_d::mutate_end_ passed non-existent member");
 		}
 		return op.operate(*this, arguments);
 	}
 
-	inline random_access_mutator_a<> end_()
+	inline random_access_mutator_a<> mutate_end_()
 	{
 		assert(___handle___);
-		auto const op = operation("end_");
+		auto const op = operation("mutate_end_");
 		if (!op)
 		{
-			throw dis("dynamic inventory_d::end_ passed non-existent member");
+			throw dis("dynamic inventory_d::mutate_end_ passed non-existent member");
 		}
 		return cast<random_access_mutator_a<>>(variadic_operate(op, *this));
 	}

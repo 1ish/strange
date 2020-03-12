@@ -189,13 +189,13 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<> cbegin_() const
+	inline forward_extractor_a<> extract_begin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<typename std_unordered_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
 	}
 
-	inline forward_extractor_a<> cend_() const
+	inline forward_extractor_a<> extract_end_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<typename std_unordered_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());

@@ -15,8 +15,8 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		forward_extractor_a<> it = terms.cbegin_();
-		if (it == terms.cend_())
+		forward_extractor_a<> it = terms.extract_begin_();
+		if (it == terms.extract_end_())
 		{
 			return create(token, terms);
 		}
@@ -25,7 +25,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_kind::create passed non-int-64 order");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			return create(token, terms, cast<number_data_a<int64_t>>(order));
 		}
@@ -34,7 +34,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_kind::create passed non-symbol name");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name));
 		}
@@ -43,7 +43,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_kind::create passed non-expression dimensions");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions));
 		}
@@ -52,7 +52,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_kind::create passed non-expression aspects");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions), cast<expression_a<>>(aspects));
 		}
@@ -61,7 +61,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_kind::create passed non-expression parameters");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions), cast<expression_a<>>(aspects), cast<expression_a<>>(parameters));
 		}
@@ -70,7 +70,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_kind::create passed non-expression result");
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			return create(token, terms,
 				cast<number_data_a<int64_t>>(order),
@@ -81,7 +81,7 @@ public:
 				cast<expression_a<>>(result));
 		}
 		auto const fixed = *it;
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			return create(token, terms,
 				cast<number_data_a<int64_t>>(order),
@@ -93,7 +93,7 @@ public:
 				fixed);
 		}
 		auto const reference = *it;
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			return create(token, terms,
 				cast<number_data_a<int64_t>>(order),
@@ -106,7 +106,7 @@ public:
 				reference);
 		}
 		auto const optional = *it;
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			return create(token, terms,
 				cast<number_data_a<int64_t>>(order),

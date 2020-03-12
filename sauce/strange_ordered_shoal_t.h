@@ -302,25 +302,25 @@ public:
 	}
 
 	// range
-	inline bidirectional_extractor_a<> cbegin_() const
+	inline bidirectional_extractor_a<> extract_begin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<typename std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
 	}
 
-	inline bidirectional_extractor_a<> cend_() const
+	inline bidirectional_extractor_a<> extract_end_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<typename std_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
 	}
 
-	inline bidirectional_mutator_a<> begin_()
+	inline bidirectional_mutator_a<> mutate_begin_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return mutator_t<typename std_map_any_any::iterator>::create(*this, _map.begin());
 	}
 
-	inline bidirectional_mutator_a<> end_()
+	inline bidirectional_mutator_a<> mutate_end_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return mutator_t<typename std_map_any_any::iterator>::create(*this, _map.end());

@@ -3,15 +3,15 @@ namespace strange
 {
 
 template <typename element>
-inline any_a<> range_of_a<element>::cbegin__(range_a<> const& ___arguments___) const
+inline any_a<> range_of_a<element>::extract_begin__(range_a<> const& ___arguments___) const
 {
-	return cbegin_();
+	return extract_begin_();
 }
 
 template <typename element>
-inline any_a<> range_of_a<element>::cend__(range_a<> const& ___arguments___) const
+inline any_a<> range_of_a<element>::extract_end__(range_a<> const& ___arguments___) const
 {
-	return cend_();
+	return extract_end_();
 }
 
 template <typename element>

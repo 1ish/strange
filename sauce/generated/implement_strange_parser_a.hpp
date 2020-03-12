@@ -5,8 +5,8 @@ namespace strange
 template <typename _1_>
 inline any_a<> parser_a<_1_>::parse__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("parser_a::parse_ passed short range");
 	}

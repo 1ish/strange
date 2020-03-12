@@ -23,8 +23,8 @@ inline any_a<> river_a<_1_>::unget__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::putback__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::putback_ passed short range");
 	}
@@ -35,13 +35,13 @@ inline any_a<> river_a<_1_>::putback__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::getline__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::getline_ passed short range");
 	}
 	auto count = cast<number_data_int64_a<>>(*___it___);
-	if (++___it___ == ___arguments___.cend_())
+	if (++___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::getline_ passed short range");
 	}
@@ -52,8 +52,8 @@ inline any_a<> river_a<_1_>::getline__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::ignore__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::ignore_ passed short range");
 	}
@@ -64,8 +64,8 @@ inline any_a<> river_a<_1_>::ignore__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::read__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::read_ passed short range");
 	}
@@ -82,8 +82,8 @@ inline any_a<> river_a<_1_>::tellg__(range_a<> const& ___arguments___) const
 template <typename _1_>
 inline any_a<> river_a<_1_>::seekg_beg__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::seekg_beg_ passed short range");
 	}
@@ -94,8 +94,8 @@ inline any_a<> river_a<_1_>::seekg_beg__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::seekg_end__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::seekg_end_ passed short range");
 	}
@@ -106,8 +106,8 @@ inline any_a<> river_a<_1_>::seekg_end__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::seekg_cur__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::seekg_cur_ passed short range");
 	}
@@ -124,8 +124,8 @@ inline any_a<> river_a<_1_>::sync__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::put__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::put_ passed short range");
 	}
@@ -136,8 +136,8 @@ inline any_a<> river_a<_1_>::put__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::write__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::write_ passed short range");
 	}
@@ -154,8 +154,8 @@ inline any_a<> river_a<_1_>::tellp__(range_a<> const& ___arguments___) const
 template <typename _1_>
 inline any_a<> river_a<_1_>::seekp_beg__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::seekp_beg_ passed short range");
 	}
@@ -166,8 +166,8 @@ inline any_a<> river_a<_1_>::seekp_beg__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::seekp_end__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::seekp_end_ passed short range");
 	}
@@ -178,8 +178,8 @@ inline any_a<> river_a<_1_>::seekp_end__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::seekp_cur__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::seekp_cur_ passed short range");
 	}
@@ -220,8 +220,8 @@ inline any_a<> river_a<_1_>::bad__(range_a<> const& ___arguments___) const
 template <typename _1_>
 inline any_a<> river_a<_1_>::set_good__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::set_good_ passed short range");
 	}
@@ -232,8 +232,8 @@ inline any_a<> river_a<_1_>::set_good__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::set_eof__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::set_eof_ passed short range");
 	}
@@ -244,8 +244,8 @@ inline any_a<> river_a<_1_>::set_eof__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::set_fail__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::set_fail_ passed short range");
 	}
@@ -256,8 +256,8 @@ inline any_a<> river_a<_1_>::set_fail__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> river_a<_1_>::set_bad__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("river_a::set_bad_ passed short range");
 	}

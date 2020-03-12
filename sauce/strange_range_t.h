@@ -15,8 +15,8 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			return create_();
 		}
@@ -25,7 +25,7 @@ public:
 		{
 			throw dis("strange::range::create passed non-mutator begin");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("strange::range::create passed short range");
 		}
@@ -61,12 +61,12 @@ public:
 	}
 
 	// range
-	inline forward_extractor_a<> cbegin_() const
+	inline forward_extractor_a<> extract_begin_() const
 	{
 		return _begin;
 	}
 
-	inline forward_extractor_a<> cend_() const
+	inline forward_extractor_a<> extract_end_() const
 	{
 		return _end;
 	}

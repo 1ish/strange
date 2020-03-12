@@ -5,8 +5,8 @@ namespace strange
 template <typename _1_>
 inline any_a<> collection_a<_1_>::has__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::has_ passed short range");
 	}
@@ -17,8 +17,8 @@ inline any_a<> collection_a<_1_>::has__(range_a<> const& ___arguments___) const
 template <typename _1_>
 inline any_a<> collection_a<_1_>::at__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::at_ passed short range");
 	}
@@ -29,13 +29,13 @@ inline any_a<> collection_a<_1_>::at__(range_a<> const& ___arguments___) const
 template <typename _1_>
 inline any_a<> collection_a<_1_>::update__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::update_ passed short range");
 	}
 	auto key = cast<any_a<>>(*___it___);
-	if (++___it___ == ___arguments___.cend_())
+	if (++___it___ == ___arguments___.extract_end_())
 	{
 		return update_(key);
 	}
@@ -46,13 +46,13 @@ inline any_a<> collection_a<_1_>::update__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> collection_a<_1_>::insert__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::insert_ passed short range");
 	}
 	auto key = cast<any_a<>>(*___it___);
-	if (++___it___ == ___arguments___.cend_())
+	if (++___it___ == ___arguments___.extract_end_())
 	{
 		return insert_(key);
 	}
@@ -63,8 +63,8 @@ inline any_a<> collection_a<_1_>::insert__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> collection_a<_1_>::erase__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::erase_ passed short range");
 	}
@@ -93,8 +93,8 @@ inline any_a<> collection_a<_1_>::empty__(range_a<> const& ___arguments___) cons
 template <typename _1_>
 inline any_a<> collection_a<_1_>::push_front__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::push_front_ passed short range");
 	}
@@ -111,8 +111,8 @@ inline any_a<> collection_a<_1_>::pop_front__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> collection_a<_1_>::push_back__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::push_back_ passed short range");
 	}
@@ -129,8 +129,8 @@ inline any_a<> collection_a<_1_>::pop_back__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> collection_a<_1_>::self_assign__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::self_assign_ passed short range");
 	}
@@ -141,8 +141,8 @@ inline any_a<> collection_a<_1_>::self_assign__(range_a<> const& ___arguments___
 template <typename _1_>
 inline any_a<> collection_a<_1_>::self_add__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::self_add_ passed short range");
 	}
@@ -153,8 +153,8 @@ inline any_a<> collection_a<_1_>::self_add__(range_a<> const& ___arguments___)
 template <typename _1_>
 inline any_a<> collection_a<_1_>::add__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::add_ passed short range");
 	}
@@ -165,8 +165,8 @@ inline any_a<> collection_a<_1_>::add__(range_a<> const& ___arguments___) const
 template <typename _1_>
 inline any_a<> collection_a<_1_>::self_subtract__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::self_subtract_ passed short range");
 	}
@@ -177,8 +177,8 @@ inline any_a<> collection_a<_1_>::self_subtract__(range_a<> const& ___arguments_
 template <typename _1_>
 inline any_a<> collection_a<_1_>::subtract__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("collection_a::subtract_ passed short range");
 	}

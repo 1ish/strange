@@ -17,8 +17,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::self_assign__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::self_assign_ passed short range");
 	}
@@ -29,8 +29,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::self_add__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::self_add_ passed short range");
 	}
@@ -41,8 +41,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::add__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::add_ passed short range");
 	}
@@ -53,8 +53,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::self_subtract__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::self_subtract_ passed short range");
 	}
@@ -65,8 +65,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::subtract__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::subtract_ passed short range");
 	}
@@ -77,8 +77,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::self_multiply__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::self_multiply_ passed short range");
 	}
@@ -89,8 +89,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::multiply__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::multiply_ passed short range");
 	}
@@ -101,8 +101,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::self_divide__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::self_divide_ passed short range");
 	}
@@ -113,8 +113,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::divide__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::divide_ passed short range");
 	}
@@ -125,8 +125,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::self_modulo__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::self_modulo_ passed short range");
 	}
@@ -137,8 +137,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::modulo__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::modulo_ passed short range");
 	}
@@ -155,8 +155,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::from_int_64__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::from_int_64_ passed short range");
 	}
@@ -173,8 +173,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::from_uint_64__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::from_uint_64_ passed short range");
 	}
@@ -191,8 +191,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::from_float_64__(range_a<> const& ___arguments___)
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::from_float_64_ passed short range");
 	}
@@ -203,8 +203,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::less_than__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::less_than_ passed short range");
 	}
@@ -215,8 +215,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::greater_than__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::greater_than_ passed short range");
 	}
@@ -227,8 +227,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::less_or_equal__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::less_or_equal_ passed short range");
 	}
@@ -239,8 +239,8 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::greater_or_equal__(range_a<> const& ___arguments___) const
 {
-	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
-	if (___it___ == ___arguments___.cend_())
+	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
+	if (___it___ == ___arguments___.extract_end_())
 	{
 		throw dis("number_a::greater_or_equal_ passed short range");
 	}

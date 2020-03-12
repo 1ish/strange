@@ -30,7 +30,7 @@ public:
 	// function
 	inline any_a<> operate(any_a<>&, range_a<> const& range) const
 	{
-		if (range.cbegin_() != range.cend_()) //TODO check when parsing instead
+		if (range.extract_begin_() != range.extract_end_()) //TODO check when parsing instead
 		{
 			throw dis("strange::attribute_extraction passed non-empty range");
 		}

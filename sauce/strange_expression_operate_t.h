@@ -131,8 +131,8 @@ protected:
 	static inline std::pair<bool, bool> is_pure_literal(token_a<> const& token, flock_a<> const& terms)
 	{
 		std::pair<bool, bool> pure_literal(false, false); //TODO pure literal
-		auto it = terms.cbegin_();
-		if (it == terms.cend_())
+		auto it = terms.extract_begin_();
+		if (it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_operate::create passed no terms");
 		}
@@ -148,7 +148,7 @@ protected:
 			pure_literal.second = false;
 			return pure_literal;
 		}
-		if (++it == terms.cend_())
+		if (++it == terms.extract_end_())
 		{
 			throw dis(token.report() + "strange::expression_operate::create passed too few terms");
 		}

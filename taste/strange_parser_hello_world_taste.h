@@ -39,11 +39,11 @@ TEST_CASE("strange river read hello world get", "[river_t]")
 	{
 		auto river = river_t<>::file(taste_dir + "strange_taste_hello_world.str");
 		REQUIRE(river.good());
-		auto it = river.cbegin_();
+		auto it = river.extract_begin_();
 		while (river.good())
 		{
 			std__cout << "'" << char(river.get()) << "'"
-				<< (it == river.cend_() ? " end" : " not end")
+				<< (it == river.extract_end_() ? " end" : " not end")
 				<< std::endl;
 		}
 	}

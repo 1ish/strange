@@ -12,8 +12,8 @@ false &&
 					erase_string : "bool (std::string const& s) { return erase_(sym(s)); }",
 
 					// mutable range
-					begin_ := (<forward_mutator>),
-					end_ := (<forward_mutator>),
+					mutate_begin_ := (<forward_mutator>),
+					mutate_end_ := (<forward_mutator>),
 				}
 			)
 		)

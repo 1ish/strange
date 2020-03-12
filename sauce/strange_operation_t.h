@@ -49,8 +49,8 @@ protected:
 	static inline std::pair<kind_a<>, flock_a<>> kind_names_params(flock_a<> const& params)
 	{
 		std::pair<kind_a<>, flock_a<>> kind_names(kind_create(), flock_create());
-		auto it = params.cbegin_();
-		if (it == params.cend_())
+		auto it = params.extract_begin_();
+		if (it == params.extract_end_())
 		{
 			return kind_names;
 		}
@@ -61,14 +61,14 @@ protected:
 		}
 		auto kind_result = cast<kind_a<>>(kind);
 		auto kind_params = flock_create();
-		while (++it != params.cend_())
+		while (++it != params.extract_end_())
 		{
 			auto name = *it;
 			if (!check<symbol_a<>>(name))
 			{
 				throw dis("strange::operation::kind_names_params passed non-symbol name");
 			}
-			bool const end = (++it == params.cend_());
+			bool const end = (++it == params.extract_end_());
 			kind = end ? any_a<>::val(kind_create()) : *it;
 			if (!end && !check<kind_a<>>(kind))
 			{

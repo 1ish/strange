@@ -12,8 +12,8 @@ public:
 	// construction
 	static inline any_a<> animate__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("<strange::any>::animate passed empty range");
 		}
@@ -251,8 +251,8 @@ public:
 			any_a<> thing = me_();
 			op.operate(thing, flock_t<>::create_(thing) += range);
 		}
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("<strange::any>::invoke passed short range");
 		}
@@ -261,7 +261,7 @@ public:
 		{
 			throw dis("<strange::any>::invoke passed non-existent member");
 		}
-		return thing.operations_().at_(member).operate(thing, range_t<>::create_(++it, range.cend_()));
+		return thing.operations_().at_(member).operate(thing, range_t<>::create_(++it, range.extract_end_()));
 	}
 
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
@@ -272,13 +272,13 @@ public:
 			any_a<> thing = me_();
 			op.operate(thing, flock_t<>::create_(thing) += range);
 		}
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("<strange::any>::operate passed short range");
 		}
 		any_a<> operation = *it;
-		return operation.operate(thing, range_t<>::create_(++it, range.cend_()));
+		return operation.operate(thing, range_t<>::create_(++it, range.extract_end_()));
 	}
 
 	// identification
@@ -294,8 +294,8 @@ public:
 
 	inline any_a<> identical__(range_a<> const& range) const // cannot be overridden
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("<strange::any>::identical passed empty range");
 		}
@@ -336,8 +336,8 @@ public:
 			any_a<> thing = me_();
 			return op.operate(thing, range);
 		}
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("<strange::any>::same passed empty range");
 		}
@@ -357,8 +357,8 @@ public:
 
 	inline any_a<> different__(range_a<> const& range) const // cannot be overridden
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("<strange::any>::different passed empty range");
 		}
@@ -416,29 +416,29 @@ public:
 	// creature
 	static inline any_a<> intimate__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("<strange::any>::intimate passed empty range");
 		}
 		any_a<> thing = cast_dup(*it);
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("<strange::any>::intimate passed short range");
 		}
 		any_a<> member = *it;
-		return intimate(thing, member, range_t<>::create_(++it, range.cend_()));
+		return intimate(thing, member, range_t<>::create_(++it, range.extract_end_()));
 	}
 
 	static inline any_a<> intimate_(any_a<>& thing, range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("<strange::any>::intimate passed short range");
 		}
 		any_a<> member = *it;
-		return intimate(thing, member, range_t<>::create_(++it, range.cend_()));
+		return intimate(thing, member, range_t<>::create_(++it, range.extract_end_()));
 	}
 
 	static inline any_a<> intimate(any_a<>& thing, any_a<> const& member, range_a<> const& range)

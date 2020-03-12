@@ -35,9 +35,9 @@ public:
 	{
 		auto thing_val = any_a<>::val(thing); // new block scope
 		auto result_range = range_operator_t<>::create_(_terms, thing_val, range);
-		auto it = result_range.cbegin_();
+		auto it = result_range.extract_begin_();
 		auto result = no();
-		while (it != result_range.cend_())
+		while (it != result_range.extract_end_())
 		{
 			result = *it;
 			++it;

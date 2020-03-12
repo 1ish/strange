@@ -14,8 +14,8 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			return create_();
 		}
@@ -24,7 +24,7 @@ public:
 		{
 			throw dis("strange::cat::create passed non-int-64 order");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			return create_(cast<number_data_a<int64_t>>(order));
 		}
@@ -33,7 +33,7 @@ public:
 		{
 			throw dis("strange::cat::create passed non-symbol name");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name));
 		}
@@ -42,7 +42,7 @@ public:
 		{
 			throw dis("strange::cat::create passed non-flock dimensions");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions));
 		}
@@ -51,7 +51,7 @@ public:
 		{
 			throw dis("strange::cat::create passed non-flock parameters");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters));
 		}

@@ -14,8 +14,8 @@ public:
 
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_extractor_a<> it = range.cbegin_();
-		if (it == range.cend_())
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
 		{
 			throw dis("[expression] create passed empty range");
 		}
@@ -24,7 +24,7 @@ public:
 		{
 			throw dis("[expression] create passed non-token");
 		}
-		if (++it == range.cend_())
+		if (++it == range.extract_end_())
 		{
 			throw dis("[expression] create passed short range");
 		}
