@@ -8,24 +8,24 @@ namespace strange
 template <typename ___ego___>
 class range_operator_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego_it___ = forward_const_iterator_data_a<_iterator_>>
-	class const_iterator_t : public thing_t<___ego_it___>
+	template <typename _mutator_, typename ___ego_it___ = forward_extractor_data_a<_mutator_>>
+	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<const_iterator_t<_iterator_>>;
+		using over = thing_o<extractor_t<_mutator_>>;
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<_iterator_> create(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
+		static inline forward_extractor_data_a<_mutator_> create(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
 		{
-			return forward_const_iterator_data_a<_iterator_>{ over{ const_iterator_t<_iterator_>(range, std::forward<F>(it), thing_ref, range_ref) } };
+			return forward_extractor_data_a<_mutator_>{ over{ extractor_t<_mutator_>(range, std::forward<F>(it), thing_ref, range_ref) } };
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::range_operator::const_iterator");
+			static symbol_a<> TYPE = sym("strange::range_operator::extractor");
 			return TYPE;
 		}
 
@@ -35,11 +35,11 @@ class range_operator_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			if (!check<forward_const_iterator_data_a<_iterator_>>(thing))
+			if (!check<forward_extractor_data_a<_mutator_>>(thing))
 			{
 				return false;
 			}
-			return _it == cast<forward_const_iterator_data_a<_iterator_>>(thing).extract_it();
+			return _it == cast<forward_extractor_data_a<_mutator_>>(thing).extract_it();
 		}
 
 		inline std::size_t hash() const
@@ -47,7 +47,7 @@ class range_operator_t : public thing_t<___ego___>
 			return std::hash<void const*>{}(&*_it);
 		}
 
-		// forward iterator
+		// forward mutator
 		inline any_a<> get_() const
 		{
 			return operator*();
@@ -81,18 +81,18 @@ class range_operator_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline _iterator_ const& extract_it() const
+		inline _mutator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _iterator_& mutate_it()
+		inline _mutator_& mutate_it()
 		{
 			return _it;
 		}
 
 	protected:
-		_iterator_ _it;
+		_mutator_ _it;
 		range_a<> const _range;
 		any_a<>& _thing_ref;
 		range_a<> const& _range_ref;
@@ -100,7 +100,7 @@ class range_operator_t : public thing_t<___ego___>
 		std::size_t _pos;
 
 		template <typename F>
-		inline const_iterator_t(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
+		inline extractor_t(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _range{ range }
@@ -118,7 +118,7 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
+		forward_extractor_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
 			throw dis("strange::range_operator::create passed empty range");
@@ -163,14 +163,14 @@ public:
 	}
 
 	// range
-	inline forward_const_iterator_a<> cbegin_() const
+	inline forward_extractor_a<> cbegin_() const
 	{
-		return const_iterator_t<forward_const_iterator_a<>>::create(_range, _range.cbegin_(), _thing_ref, _range_ref);
+		return extractor_t<forward_extractor_a<>>::create(_range, _range.cbegin_(), _thing_ref, _range_ref);
 	}
 
-	inline forward_const_iterator_a<> cend_() const
+	inline forward_extractor_a<> cend_() const
 	{
-		return const_iterator_t<forward_const_iterator_a<>>::create(_range, _range.cend_(), _thing_ref, _range_ref);
+		return extractor_t<forward_extractor_a<>>::create(_range, _range.cend_(), _thing_ref, _range_ref);
 	}
 
 protected:

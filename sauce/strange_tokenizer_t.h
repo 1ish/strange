@@ -7,24 +7,24 @@ namespace strange
 template <typename ___ego___ = range_a<>>
 class tokenizer_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego_it___ = forward_const_iterator_data_a<_iterator_>>
-	class const_iterator_t : public thing_t<___ego_it___>
+	template <typename _mutator_, typename ___ego_it___ = forward_extractor_data_a<_mutator_>>
+	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<const_iterator_t<_iterator_>>;
+		using over = thing_o<extractor_t<_mutator_>>;
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<_iterator_> create(river_a<> const& river, F&& it)
+		static inline forward_extractor_data_a<_mutator_> create(river_a<> const& river, F&& it)
 		{
-			return forward_const_iterator_data_a<_iterator_>::template create<over>(const_iterator_t<_iterator_>(river, std::forward<F>(it)));
+			return forward_extractor_data_a<_mutator_>::template create<over>(extractor_t<_mutator_>(river, std::forward<F>(it)));
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::tokenizer::const_iterator");
+			static symbol_a<> TYPE = sym("strange::tokenizer::extractor");
 			return TYPE;
 		}
 
@@ -35,7 +35,7 @@ class tokenizer_t : public thing_t<___ego___>
 		inline bool same_(any_a<> const& thing) const
 		{
 			return thing.type_() == type_() &&
-				static_cast<const_iterator_t const&>(thing.extract_thing())._end == _end;
+				static_cast<extractor_t const&>(thing.extract_thing())._end == _end;
 		}
 
 		inline std::size_t hash() const
@@ -43,7 +43,7 @@ class tokenizer_t : public thing_t<___ego___>
 			return std::hash<void const*>{}(&*_it);
 		}
 
-		// forward iterator
+		// forward mutator
 		inline any_a<> get_() const
 		{
 			return _token;
@@ -80,12 +80,12 @@ class tokenizer_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline _iterator_ const& extract_it() const
+		inline _mutator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _iterator_& mutate_it()
+		inline _mutator_& mutate_it()
 		{
 			return _it;
 		}
@@ -436,7 +436,7 @@ class tokenizer_t : public thing_t<___ego___>
 		}
 
 	protected:
-		_iterator_ _it;
+		_mutator_ _it;
 		river_a<> _river;
 		bool _end;
 		int64_t _line;
@@ -448,7 +448,7 @@ class tokenizer_t : public thing_t<___ego___>
 		token_a<> mutable _token;
 
 		template <typename F>
-		inline const_iterator_t(river_a<> const& river, F&& it)
+		inline extractor_t(river_a<> const& river, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _river{ river }
@@ -515,7 +515,7 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
+		forward_extractor_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
 			throw dis("strange::tokenizer::create passed empty range");
@@ -546,14 +546,14 @@ public:
 	}
 
 	// range
-	inline forward_const_iterator_a<> cbegin_() const
+	inline forward_extractor_a<> cbegin_() const
 	{
-		return const_iterator_t<forward_const_iterator_a<>>::create(_river, _river.cbegin_());
+		return extractor_t<forward_extractor_a<>>::create(_river, _river.cbegin_());
 	}
 
-	inline forward_const_iterator_a<> cend_() const
+	inline forward_extractor_a<> cend_() const
 	{
-		return const_iterator_t<forward_const_iterator_a<>>::create(_river, _river.cend_());
+		return extractor_t<forward_extractor_a<>>::create(_river, _river.cend_());
 	}
 
 protected:

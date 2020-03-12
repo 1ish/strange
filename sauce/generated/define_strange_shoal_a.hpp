@@ -29,12 +29,12 @@ public:
 
 	inline any_a<> begin__(range_a<> const& ___arguments___);
 
-	inline forward_iterator_a<> begin_()
+	inline forward_mutator_a<> begin_()
 	{ assert(___handle___); return ___write___().begin_(); }
 
 	inline any_a<> end__(range_a<> const& ___arguments___);
 
-	inline forward_iterator_a<> end_()
+	inline forward_mutator_a<> end_()
 	{ assert(___handle___); return ___write___().end_(); }
 
 protected:
@@ -45,8 +45,8 @@ protected:
 		virtual void update_string(std :: string const & s , any_a < > const & value ) = 0;
 		virtual bool insert_string(std :: string const & s , any_a < > const & value ) = 0;
 		virtual bool erase_string(std :: string const & s ) = 0;
-		virtual forward_iterator_a<> begin_() = 0;
-		virtual forward_iterator_a<> end_() = 0;
+		virtual forward_mutator_a<> begin_() = 0;
+		virtual forward_mutator_a<> end_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___shoal_a_handle_base___>
@@ -82,10 +82,10 @@ protected:
 		virtual inline bool erase_string(std :: string const & s ) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_string(s); }
 
-		virtual inline forward_iterator_a<> begin_() final
+		virtual inline forward_mutator_a<> begin_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.begin_(); }
 
-		virtual inline forward_iterator_a<> end_() final
+		virtual inline forward_mutator_a<> end_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.end_(); }
 
 	};
@@ -336,7 +336,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline forward_iterator_a<> begin_()
+	inline forward_mutator_a<> begin_()
 	{
 		assert(___handle___);
 		auto const op = operation("begin_");
@@ -344,7 +344,7 @@ public:
 		{
 			throw dis("dynamic shoal_d::begin_ passed non-existent member");
 		}
-		return cast<forward_iterator_a<>>(variadic_operate(op, *this));
+		return cast<forward_mutator_a<>>(variadic_operate(op, *this));
 	}
 
 	inline any_a<> end__(range_a<> const& arguments)
@@ -358,7 +358,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline forward_iterator_a<> end_()
+	inline forward_mutator_a<> end_()
 	{
 		assert(___handle___);
 		auto const op = operation("end_");
@@ -366,7 +366,7 @@ public:
 		{
 			throw dis("dynamic shoal_d::end_ passed non-existent member");
 		}
-		return cast<forward_iterator_a<>>(variadic_operate(op, *this));
+		return cast<forward_mutator_a<>>(variadic_operate(op, *this));
 	}
 
 	void ___weak___(collection_d<>::___WEAK___ const& weak) const {}

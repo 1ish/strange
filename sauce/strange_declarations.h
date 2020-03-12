@@ -12,18 +12,18 @@ class one_t;
 }
 
 // abstractions
-#include "generated/declare_strange_forward_const_iterator_a.hpp"
-#include "generated/declare_strange_forward_const_iterator_data_a.hpp"
-#include "generated/declare_strange_forward_iterator_a.hpp"
-#include "generated/declare_strange_forward_iterator_data_a.hpp"
-#include "generated/declare_strange_bidirectional_const_iterator_a.hpp"
-#include "generated/declare_strange_bidirectional_const_iterator_data_a.hpp"
-#include "generated/declare_strange_bidirectional_iterator_a.hpp"
-#include "generated/declare_strange_bidirectional_iterator_data_a.hpp"
-#include "generated/declare_strange_random_access_const_iterator_a.hpp"
-#include "generated/declare_strange_random_access_const_iterator_data_a.hpp"
-#include "generated/declare_strange_random_access_iterator_a.hpp"
-#include "generated/declare_strange_random_access_iterator_data_a.hpp"
+#include "generated/declare_strange_forward_extractor_a.hpp"
+#include "generated/declare_strange_forward_extractor_data_a.hpp"
+#include "generated/declare_strange_forward_mutator_a.hpp"
+#include "generated/declare_strange_forward_mutator_data_a.hpp"
+#include "generated/declare_strange_bidirectional_extractor_a.hpp"
+#include "generated/declare_strange_bidirectional_extractor_data_a.hpp"
+#include "generated/declare_strange_bidirectional_mutator_a.hpp"
+#include "generated/declare_strange_bidirectional_mutator_data_a.hpp"
+#include "generated/declare_strange_random_access_extractor_a.hpp"
+#include "generated/declare_strange_random_access_extractor_data_a.hpp"
+#include "generated/declare_strange_random_access_mutator_a.hpp"
+#include "generated/declare_strange_random_access_mutator_data_a.hpp"
 #include "generated/declare_strange_range_a.hpp"
 #include "generated/declare_strange_symbol_a.hpp"
 #include "generated/declare_strange_lake_a.hpp"
@@ -296,7 +296,7 @@ inline _result_ num(_primitive_ primitive);
 
 // range
 inline range_a<> range_create();
-inline range_a<> range_create(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end);
+inline range_a<> range_create(forward_extractor_a<> const& begin, forward_extractor_a<> const& end);
 
 // flock
 template <bool _concurrent_ = false>
@@ -432,8 +432,6 @@ template <>
 inline kind_a<> kind_of<std::shared_ptr<strange::concurrent_u<true>::write_lock>>();
 template <>
 inline kind_a<> kind_of<std::istreambuf_iterator<char>>();
-template <>
-inline kind_a<> kind_of<forward_const_iterator_a<>>();
 template <>
 inline kind_a<> kind_of<std::vector<int8_t>::const_iterator>();
 template <>

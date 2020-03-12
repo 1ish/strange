@@ -14,7 +14,7 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
+		forward_extractor_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
 			throw dis("strange::abstraction::create passed empty range");
@@ -97,7 +97,7 @@ public:
 		auto& aspects = aspects_shoal.mutate_map();
 		auto local_shoal = unordered_shoal_t<>::create_();
 		auto& local = local_shoal.mutate_map();
-		forward_const_iterator_a<> ait = range.cbegin_();
+		forward_extractor_a<> ait = range.cbegin_();
 		auto nit = _names.extract_vector().cbegin();
 		auto kit = _dimension_kinds.extract_vector().cbegin();
 		for (auto const& def : _dimension_defaults.extract_vector())

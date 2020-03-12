@@ -269,7 +269,7 @@ public:
 				"\treturn " + member + "();\n");
 			return;
 		}
-		river.write_string("\tforward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();\n");
+		river.write_string("\tforward_extractor_a<> ___it___ = ___arguments___.cbegin_();\n");
 		auto temp = river_t<>::create();
 		std::string arguments = "(";
 		auto kit = _kinds.extract_vector().cbegin();

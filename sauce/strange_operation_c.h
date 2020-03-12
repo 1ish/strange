@@ -12,7 +12,7 @@ public:
 	// construction
 	static inline any_a<> animate__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
+		forward_extractor_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
 			throw dis("<strange::operation>::animate passed empty range");

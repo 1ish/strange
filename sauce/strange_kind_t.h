@@ -15,7 +15,7 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
+		forward_extractor_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
 			return create_();
@@ -417,12 +417,6 @@ template <>
 inline kind_a<> kind_of<std::istreambuf_iterator<char>>()
 {
 	return kind_create(1, "\"std::istreambuf_iterator<char>\"");
-}
-
-template <>
-inline kind_a<> kind_of<forward_const_iterator_a<>>()
-{
-	return kind_create(1, "\"forward_const_iterator_a<>\"");
 }
 
 template <>

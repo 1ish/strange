@@ -14,7 +14,7 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		forward_const_iterator_a<> it = terms.cbegin_();
+		forward_extractor_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
 			throw dis(token.report() + "strange::expression_catch::create not passed any terms");
@@ -150,8 +150,8 @@ public:
 		// catch(name :<kind>= expression)
 		river.write_string(" catch\n(\n");
 		_try_expression.generate(version, indent, river);
-		forward_const_iterator_a<> kit = _kinds.cbegin_();
-		forward_const_iterator_a<> eit = _expressions.cbegin_();
+		forward_extractor_a<> kit = _kinds.cbegin_();
+		forward_extractor_a<> eit = _expressions.cbegin_();
 		for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 		{
 			river.write_string(", " + cast<symbol_a<>>(name).to_string());
@@ -193,8 +193,8 @@ public:
 		river.write_string("try\n{\n");
 		_try_expression.generate_cpp(version, indent, river, declare, define);
 		river.write_string("\n}\n");
-		forward_const_iterator_a<> kit = _kinds.cbegin_();
-		forward_const_iterator_a<> eit = _expressions.cbegin_();
+		forward_extractor_a<> kit = _kinds.cbegin_();
+		forward_extractor_a<> eit = _expressions.cbegin_();
 		for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 		{
 			river.write_string("catch(" + cast<kind_a<>>(*kit).code() + " const& exception)\n{\n");

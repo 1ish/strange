@@ -7,24 +7,24 @@ namespace strange
 template <typename _primitive_, bool _concurrent_ = false, typename ___ego___ = brook_a<_primitive_>>
 class brook_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego_it___ = random_access_iterator_data_a<_iterator_>>
-	class iterator_t : public thing_t<___ego_it___>
+	template <typename _mutator_, typename ___ego_it___ = random_access_mutator_data_a<_mutator_>>
+	class mutator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<iterator_t<_iterator_>>;
+		using over = thing_o<mutator_t<_mutator_>>;
 
 		// construction
 		template <typename F>
-		static inline random_access_iterator_data_a<_iterator_> create(brook_t const& brook_thing, F&& it)
+		static inline random_access_mutator_data_a<_mutator_> create(brook_t const& brook_thing, F&& it)
 		{
-			return random_access_iterator_data_a<_iterator_>::template create<over>(iterator_t<_iterator_>(brook_thing, std::forward<F>(it)));
+			return random_access_mutator_data_a<_mutator_>::template create<over>(mutator_t<_mutator_>(brook_thing, std::forward<F>(it)));
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::brook::iterator");
+			static symbol_a<> TYPE = sym("strange::brook::mutator");
 			return TYPE;
 		}
 
@@ -34,11 +34,11 @@ class brook_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			if (!check<random_access_iterator_data_a<_iterator_>>(thing))
+			if (!check<random_access_mutator_data_a<_mutator_>>(thing))
 			{
 				return false;
 			}
-			return _it == cast<random_access_iterator_data_a<_iterator_>>(thing).extract_it();
+			return _it == cast<random_access_mutator_data_a<_mutator_>>(thing).extract_it();
 		}
 
 		inline std::size_t hash() const
@@ -47,7 +47,7 @@ class brook_t : public thing_t<___ego___>
 			return std::hash<void const*>{}(&*_it);
 		}
 
-		// forward iterator
+		// forward mutator
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
@@ -58,7 +58,7 @@ class brook_t : public thing_t<___ego___>
 		{
 			if (!check<number_a<>>(thing))
 			{
-				throw dis("strange::brook::iterator set passed non-number");
+				throw dis("strange::brook::mutator set passed non-number");
 			}
 			typename concurrent_u<_concurrent_>::write_lock lock(_brook_thing._mutex);
 			*_it = number_u<_primitive_>::from_number(cast<number_a<>>(thing));
@@ -90,21 +90,21 @@ class brook_t : public thing_t<___ego___>
 			++_it;
 		}
 
-		// bidirectional iterator
+		// bidirectional mutator
 		inline void decrement_()
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			--_it;
 		}
 
-		// random access iterator
+		// random access mutator
 		inline void self_add_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			_it += number.to_int_64();
 		}
 
-		inline random_access_iterator_a<> add_(number_a<> const& number) const
+		inline random_access_mutator_a<> add_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
@@ -118,7 +118,7 @@ class brook_t : public thing_t<___ego___>
 			_it -= number.to_int_64();
 		}
 
-		inline random_access_iterator_a<> subtract_(number_a<> const& number) const
+		inline random_access_mutator_a<> subtract_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
@@ -126,103 +126,103 @@ class brook_t : public thing_t<___ego___>
 			return result;
 		}
 
-		inline any_a<> less_than_(random_access_iterator_a<> const& it) const
+		inline any_a<> less_than_(random_access_mutator_a<> const& it) const
 		{
 			return boole(operator<(it));
 		}
 
-		inline bool operator<(random_access_iterator_a<> const& it) const
+		inline bool operator<(random_access_mutator_a<> const& it) const
 		{
-			if (!check<random_access_iterator_data_a<_iterator_>>(it))
+			if (!check<random_access_mutator_data_a<_mutator_>>(it))
 			{
-				throw dis("strange::brook::iterator < passed incompatible thing");
+				throw dis("strange::brook::mutator < passed incompatible thing");
 			}
-			return _it < cast<random_access_iterator_data_a<_iterator_>>(it).extract_it();
+			return _it < cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> greater_than_(random_access_iterator_a<> const& it) const
+		inline any_a<> greater_than_(random_access_mutator_a<> const& it) const
 		{
 			return boole(operator>(it));
 		}
 
-		inline bool operator>(random_access_iterator_a<> const& it) const
+		inline bool operator>(random_access_mutator_a<> const& it) const
 		{
-			if (!check<random_access_iterator_data_a<_iterator_>>(it))
+			if (!check<random_access_mutator_data_a<_mutator_>>(it))
 			{
-				throw dis("strange::brook::iterator > passed incompatible thing");
+				throw dis("strange::brook::mutator > passed incompatible thing");
 			}
-			return _it > cast<random_access_iterator_data_a<_iterator_>>(it).extract_it();
+			return _it > cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> less_or_equal_(random_access_iterator_a<> const& it) const
+		inline any_a<> less_or_equal_(random_access_mutator_a<> const& it) const
 		{
 			return boole(operator<=(it));
 		}
 
-		inline bool operator<=(random_access_iterator_a<> const& it) const
+		inline bool operator<=(random_access_mutator_a<> const& it) const
 		{
-			if (!check<random_access_iterator_data_a<_iterator_>>(it))
+			if (!check<random_access_mutator_data_a<_mutator_>>(it))
 			{
-				throw dis("strange::brook::iterator <= passed incompatible thing");
+				throw dis("strange::brook::mutator <= passed incompatible thing");
 			}
-			return _it <= cast<random_access_iterator_data_a<_iterator_>>(it).extract_it();
+			return _it <= cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> greater_or_equal_(random_access_iterator_a<> const& it) const
+		inline any_a<> greater_or_equal_(random_access_mutator_a<> const& it) const
 		{
 			return boole(operator>=(it));
 		}
 
-		inline bool operator>=(random_access_iterator_a<> const& it) const
+		inline bool operator>=(random_access_mutator_a<> const& it) const
 		{
-			if (!check<random_access_iterator_data_a<_iterator_>>(it))
+			if (!check<random_access_mutator_data_a<_mutator_>>(it))
 			{
-				throw dis("strange::brook::iterator >= passed incompatible thing");
+				throw dis("strange::brook::mutator >= passed incompatible thing");
 			}
-			return _it >= cast<random_access_iterator_data_a<_iterator_>>(it).extract_it();
+			return _it >= cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
 		}
 
 		// data
-		inline _iterator_ const& extract_it() const
+		inline _mutator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _iterator_& mutate_it()
+		inline _mutator_& mutate_it()
 		{
 			return _it;
 		}
 
 	protected:
-		_iterator_ _it;
+		_mutator_ _it;
 		brook_t const& _brook_thing;
 
 		template <typename F>
-		inline iterator_t(brook_t const& brook_thing, F&& it)
+		inline mutator_t(brook_t const& brook_thing, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _brook_thing{ brook_thing }
 		{}
 	};
 
-	template <typename _iterator_, typename ___ego_it___ = random_access_const_iterator_data_a<_iterator_>>
-	class const_iterator_t : public thing_t<___ego_it___>
+	template <typename _mutator_, typename ___ego_it___ = random_access_extractor_data_a<_mutator_>>
+	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<const_iterator_t<_iterator_>>;
+		using over = thing_o<extractor_t<_mutator_>>;
 
 		// construction
 		template <typename F>
-		static inline random_access_const_iterator_data_a<_iterator_> create(brook_a<_primitive_> const& brook, brook_t const& brook_thing, F&& it)
+		static inline random_access_extractor_data_a<_mutator_> create(brook_a<_primitive_> const& brook, brook_t const& brook_thing, F&& it)
 		{
-			return random_access_const_iterator_data_a<_iterator_>::template create<over>(const_iterator_t<_iterator_>(brook, brook_thing, std::forward<F>(it)));
+			return random_access_extractor_data_a<_mutator_>::template create<over>(extractor_t<_mutator_>(brook, brook_thing, std::forward<F>(it)));
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::brook::const_iterator");
+			static symbol_a<> TYPE = sym("strange::brook::extractor");
 			return TYPE;
 		}
 
@@ -232,11 +232,11 @@ class brook_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			if (!check<random_access_const_iterator_data_a<_iterator_>>(thing))
+			if (!check<random_access_extractor_data_a<_mutator_>>(thing))
 			{
 				return false;
 			}
-			return _it == cast<random_access_const_iterator_data_a<_iterator_>>(thing).extract_it();
+			return _it == cast<random_access_extractor_data_a<_mutator_>>(thing).extract_it();
 		}
 
 		inline std::size_t hash() const
@@ -245,7 +245,7 @@ class brook_t : public thing_t<___ego___>
 			return std::hash<void const*>{}(&*_it);
 		}
 
-		// forward iterator
+		// forward mutator
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
@@ -276,21 +276,21 @@ class brook_t : public thing_t<___ego___>
 			++_it;
 		}
 
-		// bidirectional iterator
+		// bidirectional mutator
 		inline void decrement_()
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			--_it;
 		}
 
-		// random access iterator
+		// random access mutator
 		inline void self_add_(number_a<> const& number)
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
 			_it += number.to_int_64();
 		}
 
-		inline random_access_const_iterator_a<> add_(number_a<> const& number) const
+		inline random_access_extractor_a<> add_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
@@ -304,7 +304,7 @@ class brook_t : public thing_t<___ego___>
 			_it -= number.to_int_64();
 		}
 
-		inline random_access_const_iterator_a<> subtract_(number_a<> const& number) const
+		inline random_access_extractor_a<> subtract_(number_a<> const& number) const
 		{
 			___ego_it___ result = thing_t<___ego_it___>::me_();
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
@@ -312,80 +312,80 @@ class brook_t : public thing_t<___ego___>
 			return result;
 		}
 
-		inline any_a<> less_than_(random_access_const_iterator_a<> const& it) const
+		inline any_a<> less_than_(random_access_extractor_a<> const& it) const
 		{
 			return boole(operator<(it));
 		}
 
-		inline bool operator<(random_access_const_iterator_a<> const& it) const
+		inline bool operator<(random_access_extractor_a<> const& it) const
 		{
-			if (!check<random_access_const_iterator_data_a<_iterator_>>(it))
+			if (!check<random_access_extractor_data_a<_mutator_>>(it))
 			{
-				throw dis("strange::brook::const_iterator < passed incompatible thing");
+				throw dis("strange::brook::extractor < passed incompatible thing");
 			}
-			return _it < cast<random_access_const_iterator_data_a<_iterator_>>(it).extract_it();
+			return _it < cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> greater_than_(random_access_const_iterator_a<> const& it) const
+		inline any_a<> greater_than_(random_access_extractor_a<> const& it) const
 		{
 			return boole(operator>(it));
 		}
 
-		inline bool operator>(random_access_const_iterator_a<> const& it) const
+		inline bool operator>(random_access_extractor_a<> const& it) const
 		{
-			if (!check<random_access_const_iterator_data_a<_iterator_>>(it))
+			if (!check<random_access_extractor_data_a<_mutator_>>(it))
 			{
-				throw dis("strange::brook::const_iterator > passed incompatible thing");
+				throw dis("strange::brook::extractor > passed incompatible thing");
 			}
-			return _it > cast<random_access_const_iterator_data_a<_iterator_>>(it).extract_it();
+			return _it > cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> less_or_equal_(random_access_const_iterator_a<> const& it) const
+		inline any_a<> less_or_equal_(random_access_extractor_a<> const& it) const
 		{
 			return boole(operator<=(it));
 		}
 
-		inline bool operator<=(random_access_const_iterator_a<> const& it) const
+		inline bool operator<=(random_access_extractor_a<> const& it) const
 		{
-			if (!check<random_access_const_iterator_data_a<_iterator_>>(it))
+			if (!check<random_access_extractor_data_a<_mutator_>>(it))
 			{
-				throw dis("strange::brook::const_iterator <= passed incompatible thing");
+				throw dis("strange::brook::extractor <= passed incompatible thing");
 			}
-			return _it <= cast<random_access_const_iterator_data_a<_iterator_>>(it).extract_it();
+			return _it <= cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> greater_or_equal_(random_access_const_iterator_a<> const& it) const
+		inline any_a<> greater_or_equal_(random_access_extractor_a<> const& it) const
 		{
 			return boole(operator>=(it));
 		}
 
-		inline bool operator>=(random_access_const_iterator_a<> const& it) const
+		inline bool operator>=(random_access_extractor_a<> const& it) const
 		{
-			if (!check<random_access_const_iterator_data_a<_iterator_>>(it))
+			if (!check<random_access_extractor_data_a<_mutator_>>(it))
 			{
-				throw dis("strange::brook::const_iterator >= passed incompatible thing");
+				throw dis("strange::brook::extractor >= passed incompatible thing");
 			}
-			return _it >= cast<random_access_const_iterator_data_a<_iterator_>>(it).extract_it();
+			return _it >= cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
 		}
 
 		// data
-		inline _iterator_ const& extract_it() const
+		inline _mutator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _iterator_& mutate_it()
+		inline _mutator_& mutate_it()
 		{
 			return _it;
 		}
 
 	protected:
-		_iterator_ _it;
+		_mutator_ _it;
 		brook_a<_primitive_> const _brook;
 		brook_t const& _brook_thing;
 
 		template <typename F>
-		inline const_iterator_t(brook_a<_primitive_> const& brook, brook_t const& brook_thing, F&& it)
+		inline extractor_t(brook_a<_primitive_> const& brook, brook_t const& brook_thing, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _brook{ brook }
@@ -470,28 +470,28 @@ public:
 	}
 
 	// range
-	inline random_access_const_iterator_a<> cbegin_() const
+	inline random_access_extractor_a<> cbegin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<typename std_deque_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
+		return extractor_t<typename std_deque_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
 	}
 
-	inline random_access_const_iterator_a<> cend_() const
+	inline random_access_extractor_a<> cend_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<typename std_deque_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
+		return extractor_t<typename std_deque_number::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
 	}
 
-	inline random_access_iterator_a<> begin_()
+	inline random_access_mutator_a<> begin_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return iterator_t<typename std_deque_number::iterator>::create(*this, _deque.begin());
+		return mutator_t<typename std_deque_number::iterator>::create(*this, _deque.begin());
 	}
 
-	inline random_access_iterator_a<> end_()
+	inline random_access_mutator_a<> end_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return iterator_t<typename std_deque_number::iterator>::create(*this, _deque.end());
+		return mutator_t<typename std_deque_number::iterator>::create(*this, _deque.end());
 	}
 
 	// collection

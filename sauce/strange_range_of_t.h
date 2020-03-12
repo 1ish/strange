@@ -14,26 +14,26 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
+		forward_extractor_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
 			return create_();
 		}
 		any_a<> begin = *it;
-		if (!check<forward_const_iterator_a<>>(begin))
+		if (!check<forward_extractor_a<>>(begin))
 		{
-			throw dis("strange::range_of::create passed non-iterator begin");
+			throw dis("strange::range_of::create passed non-mutator begin");
 		}
 		if (++it == range.cend_())
 		{
 			throw dis("strange::range_of::create passed short range");
 		}
 		any_a<> end = *it;
-		if (!check<forward_const_iterator_a<>>(end))
+		if (!check<forward_extractor_a<>>(end))
 		{
-			throw dis("strange::range_of::create passed non-iterator end");
+			throw dis("strange::range_of::create passed non-mutator end");
 		}
-		return create_(cast<forward_const_iterator_a<>>(begin), cast<forward_const_iterator_a<>>(end));
+		return create_(cast<forward_extractor_a<>>(begin), cast<forward_extractor_a<>>(end));
 	}
 
 	static inline range_of_a<_element_> create_()
@@ -42,7 +42,7 @@ public:
 		return VAL;
 	}
 
-	static inline range_of_a<_element_> create_(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
+	static inline range_of_a<_element_> create_(forward_extractor_a<> const& begin, forward_extractor_a<> const& end)
 	{
 		return range_of_a<_element_>::template create<over>(range_of_t<_element_>(begin, end));
 	}
@@ -60,21 +60,21 @@ public:
 	}
 
 	// range
-	inline forward_const_iterator_a<> cbegin_() const
+	inline forward_extractor_a<> cbegin_() const
 	{
 		return _begin;
 	}
 
-	inline forward_const_iterator_a<> cend_() const
+	inline forward_extractor_a<> cend_() const
 	{
 		return _end;
 	}
 
 protected:
-	forward_const_iterator_a<> _begin;
-	forward_const_iterator_a<> _end;
+	forward_extractor_a<> _begin;
+	forward_extractor_a<> _end;
 
-	inline range_of_t(forward_const_iterator_a<> const& begin, forward_const_iterator_a<> const& end)
+	inline range_of_t(forward_extractor_a<> const& begin, forward_extractor_a<> const& end)
 		: thing_t<___ego___>{}
 		, _begin(begin)
 		, _end(end)

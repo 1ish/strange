@@ -25,21 +25,21 @@ TEST_CASE("strange parse and generate cpp brook", "[parse_t]")
 	}
 }
 */
-TEST_CASE("strange parse and generate cpp file bidirectional_const_iterator abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file bidirectional_extractor abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_bidirectional_const_iterator_a.str")));
+			"strange_bidirectional_extractor_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_bidirectional_const_iterator_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_bidirectional_extractor_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_bidirectional_const_iterator_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_bidirectional_extractor_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_bidirectional_const_iterator_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_bidirectional_extractor_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
@@ -48,21 +48,21 @@ TEST_CASE("strange parse and generate cpp file bidirectional_const_iterator abst
 	}
 }
 
-TEST_CASE("strange parse and generate cpp file bidirectional_const_iterator_data abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file bidirectional_extractor_data abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_bidirectional_const_iterator_data_a.str")));
+			"strange_bidirectional_extractor_data_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_bidirectional_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_bidirectional_extractor_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_bidirectional_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_bidirectional_extractor_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_bidirectional_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_bidirectional_extractor_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
@@ -71,21 +71,21 @@ TEST_CASE("strange parse and generate cpp file bidirectional_const_iterator_data
 	}
 }
 
-TEST_CASE("strange parse and generate cpp file bidirectional_iterator abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file bidirectional_mutator abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_bidirectional_iterator_a.str")));
+			"strange_bidirectional_mutator_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_bidirectional_iterator_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_bidirectional_mutator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_bidirectional_iterator_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_bidirectional_mutator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_bidirectional_iterator_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_bidirectional_mutator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
@@ -94,21 +94,21 @@ TEST_CASE("strange parse and generate cpp file bidirectional_iterator abstractio
 	}
 }
 
-TEST_CASE("strange parse and generate cpp file bidirectional_iterator_data abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file bidirectional_mutator_data abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_bidirectional_iterator_data_a.str")));
+			"strange_bidirectional_mutator_data_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_bidirectional_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_bidirectional_mutator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_bidirectional_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_bidirectional_mutator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_bidirectional_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_bidirectional_mutator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
@@ -117,21 +117,21 @@ TEST_CASE("strange parse and generate cpp file bidirectional_iterator_data abstr
 	}
 }
 
-TEST_CASE("strange parse and generate cpp file forward_const_iterator abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file forward_extractor abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_forward_const_iterator_a.str")));
+			"strange_forward_extractor_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_forward_const_iterator_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_forward_extractor_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_forward_const_iterator_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_forward_extractor_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_forward_const_iterator_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_forward_extractor_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
@@ -140,21 +140,21 @@ TEST_CASE("strange parse and generate cpp file forward_const_iterator abstractio
 	}
 }
 
-TEST_CASE("strange parse and generate cpp file forward_const_iterator_data abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file forward_extractor_data abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_forward_const_iterator_data_a.str")));
+			"strange_forward_extractor_data_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_forward_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_forward_extractor_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_forward_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_forward_extractor_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_forward_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_forward_extractor_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
@@ -163,21 +163,21 @@ TEST_CASE("strange parse and generate cpp file forward_const_iterator_data abstr
 	}
 }
 
-TEST_CASE("strange parse and generate cpp file forward_iterator abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file forward_mutator abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_forward_iterator_a.str")));
+			"strange_forward_mutator_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_forward_iterator_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_forward_mutator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_forward_iterator_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_forward_mutator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_forward_iterator_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_forward_mutator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
@@ -186,21 +186,21 @@ TEST_CASE("strange parse and generate cpp file forward_iterator abstraction", "[
 	}
 }
 
-TEST_CASE("strange parse and generate cpp file forward_iterator_data abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file forward_mutator_data abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_forward_iterator_data_a.str")));
+			"strange_forward_mutator_data_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_forward_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_forward_mutator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_forward_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_forward_mutator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_forward_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_forward_mutator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
@@ -209,21 +209,21 @@ TEST_CASE("strange parse and generate cpp file forward_iterator_data abstraction
 	}
 }
 
-TEST_CASE("strange parse and generate cpp file random_access_const_iterator abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file random_access_extractor abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_random_access_const_iterator_a.str")));
+			"strange_random_access_extractor_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_random_access_const_iterator_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_random_access_extractor_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_random_access_const_iterator_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_random_access_extractor_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_random_access_const_iterator_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_random_access_extractor_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
@@ -232,21 +232,21 @@ TEST_CASE("strange parse and generate cpp file random_access_const_iterator abst
 	}
 }
 
-TEST_CASE("strange parse and generate cpp file random_access_const_iterator_data abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file random_access_extractor_data abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_random_access_const_iterator_data_a.str")));
+			"strange_random_access_extractor_data_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_random_access_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_random_access_extractor_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_random_access_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_random_access_extractor_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_random_access_const_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_random_access_extractor_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
@@ -255,21 +255,21 @@ TEST_CASE("strange parse and generate cpp file random_access_const_iterator_data
 	}
 }
 
-TEST_CASE("strange parse and generate cpp file random_access_iterator abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file random_access_mutator abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_random_access_iterator_a.str")));
+			"strange_random_access_mutator_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_random_access_iterator_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_random_access_mutator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_random_access_iterator_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_random_access_mutator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_random_access_iterator_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_random_access_mutator_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)
@@ -278,21 +278,21 @@ TEST_CASE("strange parse and generate cpp file random_access_iterator abstractio
 	}
 }
 
-TEST_CASE("strange parse and generate cpp file random_access_iterator_data abstraction", "[parse_t]")
+TEST_CASE("strange parse and generate cpp file random_access_mutator_data abstraction", "[parse_t]")
 {
 	try
 	{
 		auto parser = parser_t<>::create_();
 		auto expression = parser.parse_(tokenizer_t<>::create_(river_t<>::file(abstractions_dir +
-			"strange_random_access_iterator_data_a.str")));
+			"strange_random_access_mutator_data_a.str")));
 		auto river = river_t<>::file(generate_cpp_dir +
-			"declare_strange_random_access_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"declare_strange_random_access_mutator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, false); // declare
 		river = river_t<>::file(generate_cpp_dir +
-			"define_strange_random_access_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"define_strange_random_access_mutator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, true, true); // define
 		river = river_t<>::file(generate_cpp_dir +
-			"implement_strange_random_access_iterator_data_a.hpp", false, true, true); // in, out, trunc
+			"implement_strange_random_access_mutator_data_a.hpp", false, true, true); // in, out, trunc
 		expression.generate_cpp(1, 1, river, false, true); // implement
 	}
 	catch (misunderstanding_a<>& m)

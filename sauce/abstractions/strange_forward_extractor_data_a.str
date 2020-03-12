@@ -1,0 +1,15 @@
+false &&
+{	strange :
+	{	<forward_extractor_data> :: abstraction
+		(	// dimensions
+			#_1_ :<<>>#,
+			(	// parent
+				$$<forward_extractor>[],
+				{	// forward extractor data
+					extract_it : "_1_ const& () const",
+					mutate_it : "_1_& ()",
+				}
+			)
+		)
+	}
+}

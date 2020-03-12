@@ -7,24 +7,24 @@ namespace strange
 template <typename ___ego___ = river_a<>>
 class river_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego_it___ = forward_const_iterator_data_a<_iterator_>>
-	class const_iterator_t : public thing_t<___ego_it___>
+	template <typename _mutator_, typename ___ego_it___ = forward_extractor_data_a<_mutator_>>
+	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<const_iterator_t<_iterator_>>;
+		using over = thing_o<extractor_t<_mutator_>>;
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<_iterator_> create(river_a<> const& river, F&& it)
+		static inline forward_extractor_data_a<_mutator_> create(river_a<> const& river, F&& it)
 		{
-			return forward_const_iterator_data_a<_iterator_>::template create<over>(const_iterator_t<_iterator_>(river, std::forward<F>(it)));
+			return forward_extractor_data_a<_mutator_>::template create<over>(extractor_t<_mutator_>(river, std::forward<F>(it)));
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::river::const_iterator");
+			static symbol_a<> TYPE = sym("strange::river::extractor");
 			return TYPE;
 		}
 
@@ -34,19 +34,19 @@ class river_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			if (!check<forward_const_iterator_data_a<_iterator_>>(thing))
+			if (!check<forward_extractor_data_a<_mutator_>>(thing))
 			{
 				return false;
 			}
-			return _it == cast<forward_const_iterator_data_a<_iterator_>>(thing).extract_it();
+			return _it == cast<forward_extractor_data_a<_mutator_>>(thing).extract_it();
 		}
 
 		inline std::size_t hash() const
 		{
-			return std::hash<int64_t>{}(_it == _iterator_{});
+			return std::hash<int64_t>{}(_it == _mutator_{});
 		}
 
-		// forward iterator
+		// forward mutator
 		inline any_a<> get_() const
 		{
 			_int_8 = number_int_8_t<>::create(*_it);
@@ -70,23 +70,23 @@ class river_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline _iterator_ const& extract_it() const
+		inline _mutator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _iterator_& mutate_it()
+		inline _mutator_& mutate_it()
 		{
 			return _it;
 		}
 
 	protected:
-		_iterator_ _it;
+		_mutator_ _it;
 		river_a<> const _river;
-		number_data_a<int8_t> mutable _int_8; // stashing iterator
+		number_data_a<int8_t> mutable _int_8; // stashing mutator
 
 		template <typename F>
-		inline const_iterator_t(river_a<> const& river, F&& it)
+		inline extractor_t(river_a<> const& river, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _river{ river }
@@ -120,7 +120,7 @@ public:
 
 	static inline any_a<> file__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
+		forward_extractor_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
 			throw dis("strange::river::file passed empty range");
@@ -209,18 +209,18 @@ public:
 	}
 
 	// range
-	inline forward_const_iterator_a<> cbegin_() const
+	inline forward_extractor_a<> cbegin_() const
 	{
 		if (!_istream)
 		{
 			throw dis("strange::river::cbegin can only be called on input rivers");
 		}
-		return const_iterator_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
+		return extractor_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{ *_istream });
 	}
 
-	inline forward_const_iterator_a<> cend_() const
+	inline forward_extractor_a<> cend_() const
 	{
-		return const_iterator_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{});
+		return extractor_t<std_istreambuf_iterator_char>::create(thing_t<___ego___>::me_(), std_istreambuf_iterator_char{});
 	}
 
 	// river input

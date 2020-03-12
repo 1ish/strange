@@ -29,12 +29,12 @@ public:
 
 	inline any_a<> begin__(range_a<> const& ___arguments___);
 
-	inline random_access_iterator_a<> begin_()
+	inline random_access_mutator_a<> begin_()
 	{ assert(___handle___); return ___write___().begin_(); }
 
 	inline any_a<> end__(range_a<> const& ___arguments___);
 
-	inline random_access_iterator_a<> end_()
+	inline random_access_mutator_a<> end_()
 	{ assert(___handle___); return ___write___().end_(); }
 
 protected:
@@ -45,8 +45,8 @@ protected:
 		virtual void update_index(int64_t index , any_a < > const & value ) = 0;
 		virtual bool insert_index(int64_t index , any_a < > const & value ) = 0;
 		virtual bool erase_index(int64_t index ) = 0;
-		virtual random_access_iterator_a<> begin_() = 0;
-		virtual random_access_iterator_a<> end_() = 0;
+		virtual random_access_mutator_a<> begin_() = 0;
+		virtual random_access_mutator_a<> end_() = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___inventory_a_handle_base___>
@@ -82,10 +82,10 @@ protected:
 		virtual inline bool erase_index(int64_t index ) final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.erase_index(index); }
 
-		virtual inline random_access_iterator_a<> begin_() final
+		virtual inline random_access_mutator_a<> begin_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.begin_(); }
 
-		virtual inline random_access_iterator_a<> end_() final
+		virtual inline random_access_mutator_a<> end_() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.end_(); }
 
 	};
@@ -336,7 +336,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline random_access_iterator_a<> begin_()
+	inline random_access_mutator_a<> begin_()
 	{
 		assert(___handle___);
 		auto const op = operation("begin_");
@@ -344,7 +344,7 @@ public:
 		{
 			throw dis("dynamic inventory_d::begin_ passed non-existent member");
 		}
-		return cast<random_access_iterator_a<>>(variadic_operate(op, *this));
+		return cast<random_access_mutator_a<>>(variadic_operate(op, *this));
 	}
 
 	inline any_a<> end__(range_a<> const& arguments)
@@ -358,7 +358,7 @@ public:
 		return op.operate(*this, arguments);
 	}
 
-	inline random_access_iterator_a<> end_()
+	inline random_access_mutator_a<> end_()
 	{
 		assert(___handle___);
 		auto const op = operation("end_");
@@ -366,7 +366,7 @@ public:
 		{
 			throw dis("dynamic inventory_d::end_ passed non-existent member");
 		}
-		return cast<random_access_iterator_a<>>(variadic_operate(op, *this));
+		return cast<random_access_mutator_a<>>(variadic_operate(op, *this));
 	}
 
 	void ___weak___(collection_d<>::___WEAK___ const& weak) const {}

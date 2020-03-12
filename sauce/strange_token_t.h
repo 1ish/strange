@@ -16,7 +16,7 @@ public:
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
+		forward_extractor_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
 			throw dis("strange::token::create passed empty range");
@@ -96,7 +96,7 @@ public:
 
 	static inline token_a<> create(std::string const& tag, range_a<> const& range, create_member member)
 	{
-		forward_const_iterator_a<> it = range.cbegin_();
+		forward_extractor_a<> it = range.cbegin_();
 		if (it == range.cend_())
 		{
 			throw dis("strange::token::create_" + tag + " passed empty range");

@@ -15,7 +15,7 @@ public:
 	// construction
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
-		forward_const_iterator_a<> it = terms.cbegin_();
+		forward_extractor_a<> it = terms.cbegin_();
 		if (it == terms.cend_())
 		{
 			throw dis(token.report() + "strange::expression_and::create not passed any terms");

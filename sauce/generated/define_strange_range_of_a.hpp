@@ -14,19 +14,19 @@ class range_of_a : public any_a<>
 public:
 	inline any_a<> cbegin__(range_a<> const& ___arguments___) const;
 
-	inline forward_const_iterator_a<> cbegin_() const
+	inline forward_extractor_a<> cbegin_() const
 	{ assert(___handle___); return ___read___().cbegin_(); }
 
 	inline any_a<> cend__(range_a<> const& ___arguments___) const;
 
-	inline forward_const_iterator_a<> cend_() const
+	inline forward_extractor_a<> cend_() const
 	{ assert(___handle___); return ___read___().cend_(); }
 
 protected:
 	struct ___range_of_a_handle_base___ : ___any_a_handle_base___
 	{
-		virtual forward_const_iterator_a<> cbegin_() const = 0;
-		virtual forward_const_iterator_a<> cend_() const = 0;
+		virtual forward_extractor_a<> cbegin_() const = 0;
+		virtual forward_extractor_a<> cend_() const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___range_of_a_handle_base___>
@@ -47,10 +47,10 @@ protected:
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
 
-		virtual inline forward_const_iterator_a<> cbegin_() const final
+		virtual inline forward_extractor_a<> cbegin_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cbegin_(); }
 
-		virtual inline forward_const_iterator_a<> cend_() const final
+		virtual inline forward_extractor_a<> cend_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.cend_(); }
 
 	};
@@ -286,7 +286,7 @@ public:
 		return op.operate(*const_cast<range_of_d*>(this), arguments);
 	}
 
-	inline forward_const_iterator_a<> cbegin_() const
+	inline forward_extractor_a<> cbegin_() const
 	{
 		assert(___handle___);
 		auto const op = operation("cbegin_");
@@ -294,7 +294,7 @@ public:
 		{
 			throw dis("dynamic range_of_d::cbegin_ passed non-existent member");
 		}
-		return cast<forward_const_iterator_a<>>(variadic_operate(op, *const_cast<range_of_d*>(this)));
+		return cast<forward_extractor_a<>>(variadic_operate(op, *const_cast<range_of_d*>(this)));
 	}
 
 	inline any_a<> cend__(range_a<> const& arguments) const
@@ -308,7 +308,7 @@ public:
 		return op.operate(*const_cast<range_of_d*>(this), arguments);
 	}
 
-	inline forward_const_iterator_a<> cend_() const
+	inline forward_extractor_a<> cend_() const
 	{
 		assert(___handle___);
 		auto const op = operation("cend_");
@@ -316,7 +316,7 @@ public:
 		{
 			throw dis("dynamic range_of_d::cend_ passed non-existent member");
 		}
-		return cast<forward_const_iterator_a<>>(variadic_operate(op, *const_cast<range_of_d*>(this)));
+		return cast<forward_extractor_a<>>(variadic_operate(op, *const_cast<range_of_d*>(this)));
 	}
 
 	void ___weak___(any_a<>::___WEAK___ const& weak) const {}

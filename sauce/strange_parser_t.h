@@ -68,8 +68,8 @@ protected:
 
 private:
 	range_a<> _tokenizer;
-	forward_const_iterator_a<> _it;
-	forward_const_iterator_a<> _end;
+	forward_extractor_a<> _it;
+	forward_extractor_a<> _end;
 	token_a<> _previous;
 	token_a<> _token;
 	unordered_shoal_a<> _shared;

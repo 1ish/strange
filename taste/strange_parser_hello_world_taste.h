@@ -11,7 +11,7 @@ TEST_CASE("strange river create_file input hello world", "[river_t]")
 	}
 }
 
-TEST_CASE("strange river read hello world iterator", "[river_t]")
+TEST_CASE("strange river read hello world mutator", "[river_t]")
 {
 	try
 	{

@@ -1,0 +1,31 @@
+false &&
+{	strange :
+	{	<random_access_extractor> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<bidirectional_extractor>[],
+				{	// random access extractor
+					self_add_ := (number :<number>#, <random_access_extractor>),
+
+					add_ :# (number :<number>#, <random_access_extractor>),
+
+					self_subtract_ := (number :<number>#, <random_access_extractor>),
+
+					subtract_ :# (number :<number>#, <random_access_extractor>),
+
+					less_than_ :# (it :<random_access_extractor>#, <>),
+					'operator<' : "bool (random_access_extractor_a<> const& it) const { return less_than_(it); }",
+
+					greater_than_ :# (it :<random_access_extractor>#, <>),
+					'operator>' : "bool (random_access_extractor_a<> const& it) const { return greater_than_(it); }",
+
+					less_or_equal_ :# (it :<random_access_extractor>#, <>),
+					'operator<=' : "bool (random_access_extractor_a<> const& it) const { return less_or_equal_(it); }",
+
+					greater_or_equal_ :# (it :<random_access_extractor>#, <>),
+					'operator>=' : "bool (random_access_extractor_a<> const& it) const { return greater_or_equal_(it); }",
+				}
+			)
+		)
+	}
+}

@@ -4,7 +4,7 @@
 namespace strange
 {
 
-template <typename ___ego___ = forward_const_iterator_a<>>
+template <typename ___ego___ = forward_extractor_a<>>
 class it_t : public thing_t<___ego___>
 {
 public:
@@ -17,9 +17,9 @@ public:
 		return create_();
 	}
 
-	static inline forward_const_iterator_a<> create_()
+	static inline forward_extractor_a<> create_()
 	{
-		static forward_const_iterator_a<> VAL = forward_const_iterator_a<>::create<over>(it_t<>{});
+		static forward_extractor_a<> VAL = forward_extractor_a<>::create<over>(it_t<>{});
 		return VAL;
 	}
 
@@ -38,7 +38,7 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		return check<forward_const_iterator_a<>>(thing);
+		return check<forward_extractor_a<>>(thing);
 	}
 
 	inline std::size_t hash() const
@@ -46,7 +46,7 @@ public:
 		return no().hash();
 	}
 
-	// forward iterator
+	// forward mutator
 	inline any_a<> get_() const
 	{
 		return no();

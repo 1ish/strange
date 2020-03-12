@@ -36,7 +36,7 @@ public:
 		auto& local = local_shoal.mutate_map();
 		local.emplace(sym("$"), _shared);
 		local.emplace(sym("^"), thing);
-		forward_const_iterator_a<> ait = range.cbegin_();
+		forward_extractor_a<> ait = range.cbegin_();
 		auto nit = operation_t<___ego___>::_names.extract_vector().cbegin();
 		auto kit = _kinds.extract_vector().cbegin();
 		for (auto const& def : _defaults.extract_vector())

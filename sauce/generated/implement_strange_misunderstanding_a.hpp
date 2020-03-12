@@ -5,7 +5,7 @@ namespace strange
 template <typename _1_>
 inline any_a<> misunderstanding_a<_1_>::add__(range_a<> const& ___arguments___) const
 {
-	forward_const_iterator_a<> ___it___ = ___arguments___.cbegin_();
+	forward_extractor_a<> ___it___ = ___arguments___.cbegin_();
 	if (___it___ == ___arguments___.cend_())
 	{
 		throw dis("misunderstanding_a::add_ passed short range");

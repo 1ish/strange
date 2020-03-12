@@ -1,0 +1,15 @@
+false &&
+{	strange :
+	{	<random_access_mutator_data> :: abstraction
+		(	// dimensions
+			#_1_ :<<>>#,
+			(	// parent
+				$$<random_access_mutator>[],
+				{	// random access mutator data
+					extract_it : "_1_ const& () const",
+					mutate_it : "_1_& ()",
+				}
+			)
+		)
+	}
+}

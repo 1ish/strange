@@ -1,0 +1,18 @@
+false &&
+{	strange :
+	{	<forward_mutator> :: abstraction
+		(	// no dimensions
+			(	// parent
+				$$<>[],
+				{	// forward mutator
+					get_ :# (<>),
+					set_ :# (thing :#, <>),
+					'operator*' : "any_a<>& () const",
+					'operator->' : "any_a<>* () const",
+
+					increment_ := (<forward_mutator>),
+				}
+			)
+		)
+	}
+}

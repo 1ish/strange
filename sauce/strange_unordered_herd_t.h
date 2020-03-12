@@ -7,24 +7,24 @@ namespace strange
 template <bool _concurrent_ = false, typename ___ego___ = unordered_herd_a<>>
 class unordered_herd_t : public thing_t<___ego___>
 {
-	template <typename _iterator_, typename ___ego_it___ = forward_const_iterator_data_a<_iterator_>>
-	class const_iterator_t : public thing_t<___ego_it___>
+	template <typename _mutator_, typename ___ego_it___ = forward_extractor_data_a<_mutator_>>
+	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<const_iterator_t<_iterator_>>;
+		using over = thing_o<extractor_t<_mutator_>>;
 
 		// construction
 		template <typename F>
-		static inline forward_const_iterator_data_a<_iterator_> create(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
+		static inline forward_extractor_data_a<_mutator_> create(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
 		{
-			return forward_const_iterator_data_a<_iterator_>::template create<over>(const_iterator_t<_iterator_>(unordered_herd, unordered_herd_thing, std::forward<F>(it)));
+			return forward_extractor_data_a<_mutator_>::template create<over>(extractor_t<_mutator_>(unordered_herd, unordered_herd_thing, std::forward<F>(it)));
 		}
 
 		// reflection
 		static inline symbol_a<> type_()
 		{
-			static symbol_a<> TYPE = sym("strange::unordered_herd::const_iterator");
+			static symbol_a<> TYPE = sym("strange::unordered_herd::extractor");
 			return TYPE;
 		}
 
@@ -34,11 +34,11 @@ class unordered_herd_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			if (!check<forward_const_iterator_data_a<_iterator_>>(thing))
+			if (!check<forward_extractor_data_a<_mutator_>>(thing))
 			{
 				return false;
 			}
-			return _it == cast<forward_const_iterator_data_a<_iterator_>>(thing).extract_it();
+			return _it == cast<forward_extractor_data_a<_mutator_>>(thing).extract_it();
 		}
 
 		inline std::size_t hash() const
@@ -47,7 +47,7 @@ class unordered_herd_t : public thing_t<___ego___>
 			return std::hash<void const*>{}(&*_it);
 		}
 
-		// forward iterator
+		// forward mutator
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_herd_thing._mutex);
@@ -71,23 +71,23 @@ class unordered_herd_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline _iterator_ const& extract_it() const
+		inline _mutator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _iterator_& mutate_it()
+		inline _mutator_& mutate_it()
 		{
 			return _it;
 		}
 
 	protected:
-		_iterator_ _it;
+		_mutator_ _it;
 		unordered_herd_a<> const _unordered_herd;
 		unordered_herd_t const& _unordered_herd_thing;
 
 		template <typename F>
-		inline const_iterator_t(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
+		inline extractor_t(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
 			: thing_t<___ego_it___>{}
 			, _it{ std::forward<F>(it) }
 			, _unordered_herd{ unordered_herd }
@@ -189,16 +189,16 @@ public:
 	}
 
 	// range
-	inline forward_const_iterator_a<> cbegin_() const
+	inline forward_extractor_a<> cbegin_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<typename std_unordered_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
+		return extractor_t<typename std_unordered_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
 	}
 
-	inline forward_const_iterator_a<> cend_() const
+	inline forward_extractor_a<> cend_() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return const_iterator_t<typename std_unordered_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
+		return extractor_t<typename std_unordered_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
 	}
 
 	// collection
