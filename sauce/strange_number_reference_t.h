@@ -199,42 +199,22 @@ public:
 		_number = number_u<_primitive_>::from_float_64(float_64);
 	}
 
-	inline any_a<> less_than_(number_a<> const& number) const
-	{
-		return boole(operator<(number));
-	}
-
-	inline bool operator<(number_a<> const& number) const
+	inline bool less_than_(number_a<> const& number) const
 	{
 		return _number < number_u<_primitive_>::from_number(number);
 	}
 
-	inline any_a<> greater_than_(number_a<> const& number) const
-	{
-		return boole(operator>(number));
-	}
-
-	inline bool operator>(number_a<> const& number) const
+	inline bool greater_than_(number_a<> const& number) const
 	{
 		return _number > number_u<_primitive_>::from_number(number);
 	}
 
-	inline any_a<> less_or_equal_(number_a<> const& number) const
-	{
-		return boole(operator<=(number));
-	}
-
-	inline bool operator<=(number_a<> const& number) const
+	inline bool less_or_equal_(number_a<> const& number) const
 	{
 		return _number <= number_u<_primitive_>::from_number(number);
 	}
 
-	inline any_a<> greater_or_equal_(number_a<> const& number) const
-	{
-		return boole(operator>=(number));
-	}
-
-	inline bool operator>=(number_a<> const& number) const
+	inline bool greater_or_equal_(number_a<> const& number) const
 	{
 		return _number >= number_u<_primitive_>::from_number(number);
 	}

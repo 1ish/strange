@@ -997,6 +997,58 @@ protected:
 				(extraction ? "___read___()." : "___write___().") +
 				name + arguments + "; }\n\n");
 		}
+		else if (name == "less_than_")
+		{
+			river.write_string(
+				"\tinline " + result + " " + name + parameters + constness + "\n"
+				"\t{ assert(___handle___); return boole(" +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "); }\n\n"
+			
+				"\tinline bool operator<" + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "greater_than_")
+		{
+			river.write_string(
+				"\tinline " + result + " " + name + parameters + constness + "\n"
+				"\t{ assert(___handle___); return boole(" +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "); }\n\n"
+			
+				"\tinline bool operator>" + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "less_or_equal_")
+		{
+			river.write_string(
+				"\tinline " + result + " " + name + parameters + constness + "\n"
+				"\t{ assert(___handle___); return boole(" +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "); }\n\n"
+			
+				"\tinline bool operator<=" + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
+		else if (name == "greater_or_equal_")
+		{
+			river.write_string(
+				"\tinline " + result + " " + name + parameters + constness + "\n"
+				"\t{ assert(___handle___); return boole(" +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "); }\n\n"
+			
+				"\tinline bool operator>=" + parameters + constness + "\n"
+				"\t{ assert(___handle___); return " +
+				(extraction ? "___read___()." : "___write___().") +
+				name + arguments + "; }\n\n");
+		}
 		//TODO
 		else
 		{
@@ -1264,7 +1316,8 @@ protected:
 			river.write_string(
 				"\t\tvirtual void " + name + parameters + constness + " = 0;\n");
 		}
-		else if (name == "same_" || name == "different_")
+		else if (name == "same_" || name == "different_" || name == "less_than_" || name == "greater_than_" ||
+			name == "less_or_equal_" || name == "greater_or_equal_")
 		{
 			river.write_string(
 				"\t\tvirtual bool " + name + parameters + constness + " = 0;\n");
@@ -1305,7 +1358,8 @@ protected:
 				"\t\tvirtual inline void " + name + parameters + constness + " final\n"
 				"\t\t{ " + scope + "___value___." + name + arguments + "; }\n\n");
 		}
-		else if (name == "same_" || name == "different_")
+		else if (name == "same_" || name == "different_" || name == "less_than_" || name == "greater_than_" ||
+			name == "less_or_equal_" || name == "greater_or_equal_")
 		{
 			river.write_string(
 				"\t\tvirtual inline bool " + name + parameters + constness + " final\n"

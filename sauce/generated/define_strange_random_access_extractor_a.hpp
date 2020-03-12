@@ -63,34 +63,34 @@ public:
 	inline any_a<> less_than__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> less_than_(random_access_extractor_a<> const& it) const
-	{ assert(___handle___); return ___read___().less_than_(it); }
+	{ assert(___handle___); return boole(___read___().less_than_(it)); }
 
-	inline bool operator<(random_access_extractor_a < > const & it ) const
-	{ assert(___handle___); return ___read___().operator<(it); }
+	inline bool operator<(random_access_extractor_a<> const& it) const
+	{ assert(___handle___); return ___read___().less_than_(it); }
 
 	inline any_a<> greater_than__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> greater_than_(random_access_extractor_a<> const& it) const
-	{ assert(___handle___); return ___read___().greater_than_(it); }
+	{ assert(___handle___); return boole(___read___().greater_than_(it)); }
 
-	inline bool operator>(random_access_extractor_a < > const & it ) const
-	{ assert(___handle___); return ___read___().operator>(it); }
+	inline bool operator>(random_access_extractor_a<> const& it) const
+	{ assert(___handle___); return ___read___().greater_than_(it); }
 
 	inline any_a<> less_or_equal__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> less_or_equal_(random_access_extractor_a<> const& it) const
-	{ assert(___handle___); return ___read___().less_or_equal_(it); }
+	{ assert(___handle___); return boole(___read___().less_or_equal_(it)); }
 
-	inline bool operator<=(random_access_extractor_a < > const & it ) const
-	{ assert(___handle___); return ___read___().operator<=(it); }
+	inline bool operator<=(random_access_extractor_a<> const& it) const
+	{ assert(___handle___); return ___read___().less_or_equal_(it); }
 
 	inline any_a<> greater_or_equal__(range_a<> const& ___arguments___) const;
 
 	inline any_a<> greater_or_equal_(random_access_extractor_a<> const& it) const
-	{ assert(___handle___); return ___read___().greater_or_equal_(it); }
+	{ assert(___handle___); return boole(___read___().greater_or_equal_(it)); }
 
-	inline bool operator>=(random_access_extractor_a < > const & it ) const
-	{ assert(___handle___); return ___read___().operator>=(it); }
+	inline bool operator>=(random_access_extractor_a<> const& it) const
+	{ assert(___handle___); return ___read___().greater_or_equal_(it); }
 
 protected:
 	struct ___random_access_extractor_a_handle_base___ : ___bidirectional_extractor_a_handle_base___
@@ -99,14 +99,10 @@ protected:
 		virtual random_access_extractor_a<> add_(number_a<> const& number) const = 0;
 		virtual void self_subtract_(number_a<> const& number) = 0;
 		virtual random_access_extractor_a<> subtract_(number_a<> const& number) const = 0;
-		virtual any_a<> less_than_(random_access_extractor_a<> const& it) const = 0;
-		virtual bool operator<(random_access_extractor_a < > const & it ) const = 0;
-		virtual any_a<> greater_than_(random_access_extractor_a<> const& it) const = 0;
-		virtual bool operator>(random_access_extractor_a < > const & it ) const = 0;
-		virtual any_a<> less_or_equal_(random_access_extractor_a<> const& it) const = 0;
-		virtual bool operator<=(random_access_extractor_a < > const & it ) const = 0;
-		virtual any_a<> greater_or_equal_(random_access_extractor_a<> const& it) const = 0;
-		virtual bool operator>=(random_access_extractor_a < > const & it ) const = 0;
+		virtual bool less_than_(random_access_extractor_a<> const& it) const = 0;
+		virtual bool greater_than_(random_access_extractor_a<> const& it) const = 0;
+		virtual bool less_or_equal_(random_access_extractor_a<> const& it) const = 0;
+		virtual bool greater_or_equal_(random_access_extractor_a<> const& it) const = 0;
 	};
 
 	template <typename ___TTT___, typename ___DHB___ = ___random_access_extractor_a_handle_base___>
@@ -139,29 +135,17 @@ protected:
 		virtual inline random_access_extractor_a<> subtract_(number_a<> const& number) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.subtract_(number); }
 
-		virtual inline any_a<> less_than_(random_access_extractor_a<> const& it) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_than_(it); }
+		virtual inline bool less_than_(random_access_extractor_a<> const& it) const final
+		{ return bool{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_than_(it) }; }
 
-		virtual inline bool operator<(random_access_extractor_a < > const & it ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(it); }
+		virtual inline bool greater_than_(random_access_extractor_a<> const& it) const final
+		{ return bool{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_than_(it) }; }
 
-		virtual inline any_a<> greater_than_(random_access_extractor_a<> const& it) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_than_(it); }
+		virtual inline bool less_or_equal_(random_access_extractor_a<> const& it) const final
+		{ return bool{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_or_equal_(it) }; }
 
-		virtual inline bool operator>(random_access_extractor_a < > const & it ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(it); }
-
-		virtual inline any_a<> less_or_equal_(random_access_extractor_a<> const& it) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_or_equal_(it); }
-
-		virtual inline bool operator<=(random_access_extractor_a < > const & it ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(it); }
-
-		virtual inline any_a<> greater_or_equal_(random_access_extractor_a<> const& it) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_or_equal_(it); }
-
-		virtual inline bool operator>=(random_access_extractor_a < > const & it ) const final
-		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(it); }
+		virtual inline bool greater_or_equal_(random_access_extractor_a<> const& it) const final
+		{ return bool{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_or_equal_(it) }; }
 
 	};
 
@@ -501,9 +485,6 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<random_access_extractor_d*>(this), it));
 	}
 
-	inline bool operator<(random_access_extractor_a < > const & it ) const
-	{ return less_than_(it); }
-
 	inline any_a<> greater_than__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
@@ -525,9 +506,6 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<random_access_extractor_d*>(this), it));
 	}
-
-	inline bool operator>(random_access_extractor_a < > const & it ) const
-	{ return greater_than_(it); }
 
 	inline any_a<> less_or_equal__(range_a<> const& arguments) const
 	{
@@ -551,9 +529,6 @@ public:
 		return cast<any_a<>>(variadic_operate(op, *const_cast<random_access_extractor_d*>(this), it));
 	}
 
-	inline bool operator<=(random_access_extractor_a < > const & it ) const
-	{ return less_or_equal_(it); }
-
 	inline any_a<> greater_or_equal__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
@@ -575,9 +550,6 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<random_access_extractor_d*>(this), it));
 	}
-
-	inline bool operator>=(random_access_extractor_a < > const & it ) const
-	{ return greater_or_equal_(it); }
 
 	void ___weak___(bidirectional_extractor_d<>::___WEAK___ const& weak) const {}
 

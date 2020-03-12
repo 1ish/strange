@@ -113,12 +113,7 @@ class flock_t : public thing_t<___ego___>
 			return result;
 		}
 
-		inline any_a<> less_than_(random_access_mutator_a<> const& it) const
-		{
-			return boole(operator<(it));
-		}
-
-		inline bool operator<(random_access_mutator_a<> const& it) const
+		inline bool less_than_(random_access_mutator_a<> const& it) const
 		{
 			if (!check<random_access_mutator_data_a<_mutator_>>(it))
 			{
@@ -127,12 +122,7 @@ class flock_t : public thing_t<___ego___>
 			return _it < cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> greater_than_(random_access_mutator_a<> const& it) const
-		{
-			return boole(operator>(it));
-		}
-
-		inline bool operator>(random_access_mutator_a<> const& it) const
+		inline bool greater_than_(random_access_mutator_a<> const& it) const
 		{
 			if (!check<random_access_mutator_data_a<_mutator_>>(it))
 			{
@@ -141,12 +131,7 @@ class flock_t : public thing_t<___ego___>
 			return _it > cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> less_or_equal_(random_access_mutator_a<> const& it) const
-		{
-			return boole(operator<=(it));
-		}
-
-		inline bool operator<=(random_access_mutator_a<> const& it) const
+		inline bool less_or_equal_(random_access_mutator_a<> const& it) const
 		{
 			if (!check<random_access_mutator_data_a<_mutator_>>(it))
 			{
@@ -155,12 +140,7 @@ class flock_t : public thing_t<___ego___>
 			return _it <= cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> greater_or_equal_(random_access_mutator_a<> const& it) const
-		{
-			return boole(operator>=(it));
-		}
-
-		inline bool operator>=(random_access_mutator_a<> const& it) const
+		inline bool greater_or_equal_(random_access_mutator_a<> const& it) const
 		{
 			if (!check<random_access_mutator_data_a<_mutator_>>(it))
 			{
@@ -291,12 +271,7 @@ class flock_t : public thing_t<___ego___>
 			return result;
 		}
 
-		inline any_a<> less_than_(random_access_extractor_a<> const& it) const
-		{
-			return boole(operator<(it));
-		}
-
-		inline bool operator<(random_access_extractor_a<> const& it) const
+		inline bool less_than_(random_access_extractor_a<> const& it) const
 		{
 			if (!check<random_access_extractor_data_a<_mutator_>>(it))
 			{
@@ -305,12 +280,7 @@ class flock_t : public thing_t<___ego___>
 			return _it < cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> greater_than_(random_access_extractor_a<> const& it) const
-		{
-			return boole(operator>(it));
-		}
-
-		inline bool operator>(random_access_extractor_a<> const& it) const
+		inline bool greater_than_(random_access_extractor_a<> const& it) const
 		{
 			if (!check<random_access_extractor_data_a<_mutator_>>(it))
 			{
@@ -319,12 +289,7 @@ class flock_t : public thing_t<___ego___>
 			return _it > cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> less_or_equal_(random_access_extractor_a<> const& it) const
-		{
-			return boole(operator<=(it));
-		}
-
-		inline bool operator<=(random_access_extractor_a<> const& it) const
+		inline bool less_or_equal_(random_access_extractor_a<> const& it) const
 		{
 			if (!check<random_access_extractor_data_a<_mutator_>>(it))
 			{
@@ -333,12 +298,7 @@ class flock_t : public thing_t<___ego___>
 			return _it <= cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline any_a<> greater_or_equal_(random_access_extractor_a<> const& it) const
-		{
-			return boole(operator>=(it));
-		}
-
-		inline bool operator>=(random_access_extractor_a<> const& it) const
+		inline bool greater_or_equal_(random_access_extractor_a<> const& it) const
 		{
 			if (!check<random_access_extractor_data_a<_mutator_>>(it))
 			{
