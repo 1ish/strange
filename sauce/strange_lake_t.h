@@ -126,39 +126,23 @@ class lake_t : public thing_t<___ego___>
 			return result;
 		}
 
-		inline bool less_than_(random_access_mutator_a<> const& it) const
+		inline bool less_than_(any_a<> const& it) const
 		{
-			if (!check<random_access_mutator_data_a<_mutator_>>(it))
-			{
-				throw dis("strange::lake::mutator < passed incompatible thing");
-			}
 			return _it < cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline bool greater_than_(random_access_mutator_a<> const& it) const
+		inline bool greater_than_(any_a<> const& it) const
 		{
-			if (!check<random_access_mutator_data_a<_mutator_>>(it))
-			{
-				throw dis("strange::lake::mutator > passed incompatible thing");
-			}
 			return _it > cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline bool less_or_equal_(random_access_mutator_a<> const& it) const
+		inline bool less_or_equal_(any_a<> const& it) const
 		{
-			if (!check<random_access_mutator_data_a<_mutator_>>(it))
-			{
-				throw dis("strange::lake::mutator <= passed incompatible thing");
-			}
 			return _it <= cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline bool greater_or_equal_(random_access_mutator_a<> const& it) const
+		inline bool greater_or_equal_(any_a<> const& it) const
 		{
-			if (!check<random_access_mutator_data_a<_mutator_>>(it))
-			{
-				throw dis("strange::lake::mutator >= passed incompatible thing");
-			}
 			return _it >= cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
 		}
 
@@ -292,39 +276,23 @@ class lake_t : public thing_t<___ego___>
 			return result;
 		}
 
-		inline bool less_than_(random_access_extractor_a<> const& it) const
+		inline bool less_than_(any_a<> const& it) const
 		{
-			if (!check<random_access_extractor_data_a<_mutator_>>(it))
-			{
-				throw dis("strange::lake::extractor < passed incompatible thing");
-			}
 			return _it < cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline bool greater_than_(random_access_extractor_a<> const& it) const
+		inline bool greater_than_(any_a<> const& it) const
 		{
-			if (!check<random_access_extractor_data_a<_mutator_>>(it))
-			{
-				throw dis("strange::lake::extractor > passed incompatible thing");
-			}
 			return _it > cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline bool less_or_equal_(random_access_extractor_a<> const& it) const
+		inline bool less_or_equal_(any_a<> const& it) const
 		{
-			if (!check<random_access_extractor_data_a<_mutator_>>(it))
-			{
-				throw dis("strange::lake::extractor <= passed incompatible thing");
-			}
 			return _it <= cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
 		}
 
-		inline bool greater_or_equal_(random_access_extractor_a<> const& it) const
+		inline bool greater_or_equal_(any_a<> const& it) const
 		{
-			if (!check<random_access_extractor_data_a<_mutator_>>(it))
-			{
-				throw dis("strange::lake::extractor >= passed incompatible thing");
-			}
 			return _it >= cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
 		}
 

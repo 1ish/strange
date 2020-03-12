@@ -58,10 +58,13 @@ false &&
 
 					different_ :# (thing :<any>#, <any>),
 
-					//TODO for set/map 'operator<' : "bool (any_a<> const& thing) const",
-					//TODO for set/map 'operator>' : "bool (any_a<> const& thing) const",
-					//TODO for set/map 'operator<=' : "bool (any_a<> const& thing) const",
-					//TODO for set/map 'operator>=' : "bool (any_a<> const& thing) const",
+					less_than_ :# (thing :<any>#, <any>),
+
+					greater_than_ :# (thing :<any>#, <any>),
+
+					less_or_equal_ :# (thing :<any>#, <any>),
+
+					greater_or_equal_ :# (thing :<any>#, <any>),
 
 					hash_ :# (<#number_data_uint64>),
 					hash : "std::size_t () const",

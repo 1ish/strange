@@ -51,54 +51,6 @@ inline any_a<> random_access_mutator_a<_1_>::subtract__(range_a<> const& ___argu
 }
 
 template <typename _1_>
-inline any_a<> random_access_mutator_a<_1_>::less_than__(range_a<> const& ___arguments___) const
-{
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
-	{
-		throw dis("random_access_mutator_a::less_than_ passed short range");
-	}
-	auto it = cast<random_access_mutator_a<>>(*___it___);
-	return less_than_(it);
-}
-
-template <typename _1_>
-inline any_a<> random_access_mutator_a<_1_>::greater_than__(range_a<> const& ___arguments___) const
-{
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
-	{
-		throw dis("random_access_mutator_a::greater_than_ passed short range");
-	}
-	auto it = cast<random_access_mutator_a<>>(*___it___);
-	return greater_than_(it);
-}
-
-template <typename _1_>
-inline any_a<> random_access_mutator_a<_1_>::less_or_equal__(range_a<> const& ___arguments___) const
-{
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
-	{
-		throw dis("random_access_mutator_a::less_or_equal_ passed short range");
-	}
-	auto it = cast<random_access_mutator_a<>>(*___it___);
-	return less_or_equal_(it);
-}
-
-template <typename _1_>
-inline any_a<> random_access_mutator_a<_1_>::greater_or_equal__(range_a<> const& ___arguments___) const
-{
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
-	{
-		throw dis("random_access_mutator_a::greater_or_equal_ passed short range");
-	}
-	auto it = cast<random_access_mutator_a<>>(*___it___);
-	return greater_or_equal_(it);
-}
-
-template <typename _1_>
 bool const random_access_mutator_a<_1_>::___share___ = []()
 {
 	auto& shared_shoal = shared();

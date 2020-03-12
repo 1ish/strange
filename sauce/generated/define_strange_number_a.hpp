@@ -241,38 +241,6 @@ public:
 	inline void from_float_64(double float_64 )
 	{ assert(___handle___); ___write___().from_float_64(float_64); }
 
-	inline any_a<> less_than__(range_a<> const& ___arguments___) const;
-
-	inline any_a<> less_than_(number_a<> const& number) const
-	{ assert(___handle___); return boole(___read___().less_than_(number)); }
-
-	inline bool operator<(number_a<> const& number) const
-	{ assert(___handle___); return ___read___().less_than_(number); }
-
-	inline any_a<> greater_than__(range_a<> const& ___arguments___) const;
-
-	inline any_a<> greater_than_(number_a<> const& number) const
-	{ assert(___handle___); return boole(___read___().greater_than_(number)); }
-
-	inline bool operator>(number_a<> const& number) const
-	{ assert(___handle___); return ___read___().greater_than_(number); }
-
-	inline any_a<> less_or_equal__(range_a<> const& ___arguments___) const;
-
-	inline any_a<> less_or_equal_(number_a<> const& number) const
-	{ assert(___handle___); return boole(___read___().less_or_equal_(number)); }
-
-	inline bool operator<=(number_a<> const& number) const
-	{ assert(___handle___); return ___read___().less_or_equal_(number); }
-
-	inline any_a<> greater_or_equal__(range_a<> const& ___arguments___) const;
-
-	inline any_a<> greater_or_equal_(number_a<> const& number) const
-	{ assert(___handle___); return boole(___read___().greater_or_equal_(number)); }
-
-	inline bool operator>=(number_a<> const& number) const
-	{ assert(___handle___); return ___read___().greater_or_equal_(number); }
-
 	inline any_a<> byte_size__(range_a<> const& ___arguments___) const;
 
 	inline number_data_int64 byte_size_() const
@@ -365,10 +333,6 @@ protected:
 		virtual double to_float_64() const = 0;
 		virtual any_a<> from_float_64_(number_data_double const& float_64) = 0;
 		virtual void from_float_64(double float_64 ) = 0;
-		virtual bool less_than_(number_a<> const& number) const = 0;
-		virtual bool greater_than_(number_a<> const& number) const = 0;
-		virtual bool less_or_equal_(number_a<> const& number) const = 0;
-		virtual bool greater_or_equal_(number_a<> const& number) const = 0;
 		virtual number_data_int64 byte_size_() const = 0;
 		virtual int64_t byte_size() const = 0;
 		virtual any_a<> is_int_() const = 0;
@@ -479,18 +443,6 @@ protected:
 
 		virtual inline void from_float_64(double float_64 ) final
 		{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.from_float_64(float_64); }
-
-		virtual inline bool less_than_(number_a<> const& number) const final
-		{ return bool{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_than_(number) }; }
-
-		virtual inline bool greater_than_(number_a<> const& number) const final
-		{ return bool{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_than_(number) }; }
-
-		virtual inline bool less_or_equal_(number_a<> const& number) const final
-		{ return bool{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.less_or_equal_(number) }; }
-
-		virtual inline bool greater_or_equal_(number_a<> const& number) const final
-		{ return bool{ ___any_a_handle___<___TTT___, ___DHB___>::___value___.greater_or_equal_(number) }; }
 
 		virtual inline number_data_int64 byte_size_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.byte_size_(); }
@@ -759,10 +711,6 @@ public:
 			operations.update_string("from_uint_64_", native_mutation_t<number_a>::create(&number_a::from_uint_64__));
 			operations.update_string("to_float_64_", native_extraction_t<number_a>::create(&number_a::to_float_64__));
 			operations.update_string("from_float_64_", native_mutation_t<number_a>::create(&number_a::from_float_64__));
-			operations.update_string("less_than_", native_extraction_t<number_a>::create(&number_a::less_than__));
-			operations.update_string("greater_than_", native_extraction_t<number_a>::create(&number_a::greater_than__));
-			operations.update_string("less_or_equal_", native_extraction_t<number_a>::create(&number_a::less_or_equal__));
-			operations.update_string("greater_or_equal_", native_extraction_t<number_a>::create(&number_a::greater_or_equal__));
 			operations.update_string("byte_size_", native_extraction_t<number_a>::create(&number_a::byte_size__));
 			operations.update_string("is_int_", native_extraction_t<number_a>::create(&number_a::is_int__));
 			operations.update_string("is_signed_", native_extraction_t<number_a>::create(&number_a::is_signed__));
@@ -1226,94 +1174,6 @@ public:
 
 	inline void from_float_64(double float_64 )
 	{ from_float_64_(num<double, number_data_double>(float_64)); }
-
-	inline any_a<> less_than__(range_a<> const& arguments) const
-	{
-		assert(___handle___);
-		auto const op = operation("less_than_");
-		if (!op)
-		{
-			throw dis("dynamic number_d::less_than_ passed non-existent member");
-		}
-		return op.operate(*const_cast<number_d*>(this), arguments);
-	}
-
-	inline any_a<> less_than_(number_a<> const& number) const
-	{
-		assert(___handle___);
-		auto const op = operation("less_than_");
-		if (!op)
-		{
-			throw dis("dynamic number_d::less_than_ passed non-existent member");
-		}
-		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
-	}
-
-	inline any_a<> greater_than__(range_a<> const& arguments) const
-	{
-		assert(___handle___);
-		auto const op = operation("greater_than_");
-		if (!op)
-		{
-			throw dis("dynamic number_d::greater_than_ passed non-existent member");
-		}
-		return op.operate(*const_cast<number_d*>(this), arguments);
-	}
-
-	inline any_a<> greater_than_(number_a<> const& number) const
-	{
-		assert(___handle___);
-		auto const op = operation("greater_than_");
-		if (!op)
-		{
-			throw dis("dynamic number_d::greater_than_ passed non-existent member");
-		}
-		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
-	}
-
-	inline any_a<> less_or_equal__(range_a<> const& arguments) const
-	{
-		assert(___handle___);
-		auto const op = operation("less_or_equal_");
-		if (!op)
-		{
-			throw dis("dynamic number_d::less_or_equal_ passed non-existent member");
-		}
-		return op.operate(*const_cast<number_d*>(this), arguments);
-	}
-
-	inline any_a<> less_or_equal_(number_a<> const& number) const
-	{
-		assert(___handle___);
-		auto const op = operation("less_or_equal_");
-		if (!op)
-		{
-			throw dis("dynamic number_d::less_or_equal_ passed non-existent member");
-		}
-		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
-	}
-
-	inline any_a<> greater_or_equal__(range_a<> const& arguments) const
-	{
-		assert(___handle___);
-		auto const op = operation("greater_or_equal_");
-		if (!op)
-		{
-			throw dis("dynamic number_d::greater_or_equal_ passed non-existent member");
-		}
-		return op.operate(*const_cast<number_d*>(this), arguments);
-	}
-
-	inline any_a<> greater_or_equal_(number_a<> const& number) const
-	{
-		assert(___handle___);
-		auto const op = operation("greater_or_equal_");
-		if (!op)
-		{
-			throw dis("dynamic number_d::greater_or_equal_ passed non-existent member");
-		}
-		return cast<any_a<>>(variadic_operate(op, *const_cast<number_d*>(this), number));
-	}
 
 	inline any_a<> byte_size__(range_a<> const& arguments) const
 	{

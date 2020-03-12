@@ -199,24 +199,24 @@ public:
 		_number = number_u<_primitive_>::from_float_64(float_64);
 	}
 
-	inline bool less_than_(number_a<> const& number) const
+	inline bool less_than_(any_a<> const& number) const
 	{
-		return _number < number_u<_primitive_>::from_number(number);
+		return _number < number_u<_primitive_>::from_number(cast<number_a<>>(number));
 	}
 
-	inline bool greater_than_(number_a<> const& number) const
+	inline bool greater_than_(any_a<> const& number) const
 	{
-		return _number > number_u<_primitive_>::from_number(number);
+		return _number > number_u<_primitive_>::from_number(cast<number_a<>>(number));
 	}
 
-	inline bool less_or_equal_(number_a<> const& number) const
+	inline bool less_or_equal_(any_a<> const& number) const
 	{
-		return _number <= number_u<_primitive_>::from_number(number);
+		return _number <= number_u<_primitive_>::from_number(cast<number_a<>>(number));
 	}
 
-	inline bool greater_or_equal_(number_a<> const& number) const
+	inline bool greater_or_equal_(any_a<> const& number) const
 	{
-		return _number >= number_u<_primitive_>::from_number(number);
+		return _number >= number_u<_primitive_>::from_number(cast<number_a<>>(number));
 	}
 
 	static inline number_data_a<int64_t> byte_size_()

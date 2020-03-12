@@ -146,6 +146,38 @@ public:
 	inline bool operator!=(any_a<> const& thing) const
 	{ assert(___handle___); return ___read___().different_(thing); }
 
+	inline any_a<> less_than__(range const& ___arguments___) const;
+
+	inline any_a<> less_than_(any_a<> const& thing) const
+	{ assert(___handle___); return boole(___read___().less_than_(thing)); }
+
+	inline bool operator<(any_a<> const& thing) const
+	{ assert(___handle___); return ___read___().less_than_(thing); }
+
+	inline any_a<> greater_than__(range const& ___arguments___) const;
+
+	inline any_a<> greater_than_(any_a<> const& thing) const
+	{ assert(___handle___); return boole(___read___().greater_than_(thing)); }
+
+	inline bool operator>(any_a<> const& thing) const
+	{ assert(___handle___); return ___read___().greater_than_(thing); }
+
+	inline any_a<> less_or_equal__(range const& ___arguments___) const;
+
+	inline any_a<> less_or_equal_(any_a<> const& thing) const
+	{ assert(___handle___); return boole(___read___().less_or_equal_(thing)); }
+
+	inline bool operator<=(any_a<> const& thing) const
+	{ assert(___handle___); return ___read___().less_or_equal_(thing); }
+
+	inline any_a<> greater_or_equal__(range const& ___arguments___) const;
+
+	inline any_a<> greater_or_equal_(any_a<> const& thing) const
+	{ assert(___handle___); return boole(___read___().greater_or_equal_(thing)); }
+
+	inline bool operator>=(any_a<> const& thing) const
+	{ assert(___handle___); return ___read___().greater_or_equal_(thing); }
+
 	inline any_a<> hash__(range const& ___arguments___) const;
 
 	inline number_data_uint64 hash_() const
@@ -192,6 +224,10 @@ protected:
 		virtual bool something() const = 0;
 		virtual bool same_(any_a<> const& thing) const = 0;
 		virtual bool different_(any_a<> const& thing) const = 0;
+		virtual bool less_than_(any_a<> const& thing) const = 0;
+		virtual bool greater_than_(any_a<> const& thing) const = 0;
+		virtual bool less_or_equal_(any_a<> const& thing) const = 0;
+		virtual bool greater_or_equal_(any_a<> const& thing) const = 0;
 		virtual number_data_uint64 hash_() const = 0;
 		virtual std :: size_t hash() const = 0;
 		virtual bool is(std :: string const & s ) const = 0;
@@ -293,6 +329,18 @@ protected:
 
 		virtual inline bool different_(any_a<> const& thing) const final
 		{ return bool{ ___value___.different_(thing) }; }
+
+		virtual inline bool less_than_(any_a<> const& thing) const final
+		{ return bool{ ___value___.less_than_(thing) }; }
+
+		virtual inline bool greater_than_(any_a<> const& thing) const final
+		{ return bool{ ___value___.greater_than_(thing) }; }
+
+		virtual inline bool less_or_equal_(any_a<> const& thing) const final
+		{ return bool{ ___value___.less_or_equal_(thing) }; }
+
+		virtual inline bool greater_or_equal_(any_a<> const& thing) const final
+		{ return bool{ ___value___.greater_or_equal_(thing) }; }
 
 		virtual inline number_data_uint64 hash_() const final
 		{ return ___value___.hash_(); }
@@ -543,6 +591,10 @@ public:
 			operations.update_string("something_", native_extraction_t<any_a>::create(&any_a::something__));
 			operations.update_string("same_", native_extraction_t<any_a>::create(&any_a::same__));
 			operations.update_string("different_", native_extraction_t<any_a>::create(&any_a::different__));
+			operations.update_string("less_than_", native_extraction_t<any_a>::create(&any_a::less_than__));
+			operations.update_string("greater_than_", native_extraction_t<any_a>::create(&any_a::greater_than__));
+			operations.update_string("less_or_equal_", native_extraction_t<any_a>::create(&any_a::less_or_equal__));
+			operations.update_string("greater_or_equal_", native_extraction_t<any_a>::create(&any_a::greater_or_equal__));
 			operations.update_string("hash_", native_extraction_t<any_a>::create(&any_a::hash__));
 			return operations;
 		}();

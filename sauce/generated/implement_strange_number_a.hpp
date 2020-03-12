@@ -201,54 +201,6 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 }
 
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
-inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::less_than__(range_a<> const& ___arguments___) const
-{
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
-	{
-		throw dis("number_a::less_than_ passed short range");
-	}
-	auto number = cast<number_a<>>(*___it___);
-	return less_than_(number);
-}
-
-template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
-inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::greater_than__(range_a<> const& ___arguments___) const
-{
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
-	{
-		throw dis("number_a::greater_than_ passed short range");
-	}
-	auto number = cast<number_a<>>(*___it___);
-	return greater_than_(number);
-}
-
-template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
-inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::less_or_equal__(range_a<> const& ___arguments___) const
-{
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
-	{
-		throw dis("number_a::less_or_equal_ passed short range");
-	}
-	auto number = cast<number_a<>>(*___it___);
-	return less_or_equal_(number);
-}
-
-template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
-inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::greater_or_equal__(range_a<> const& ___arguments___) const
-{
-	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
-	if (___it___ == ___arguments___.extract_end_())
-	{
-		throw dis("number_a::greater_or_equal_ passed short range");
-	}
-	auto number = cast<number_a<>>(*___it___);
-	return greater_or_equal_(number);
-}
-
-template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_double>::byte_size__(range_a<> const& ___arguments___) const
 {
 	return byte_size_();

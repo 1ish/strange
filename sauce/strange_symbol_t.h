@@ -59,7 +59,7 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		return check<symbol_a<>>(thing) && cast<symbol_a<>>(thing).to_string() == _string;
+		return check<symbol_a<>>(thing) && _string == fast<symbol_a<>>(thing).to_string();
 	}
 
 	inline std::size_t hash() const
@@ -69,7 +69,35 @@ public:
 
 	inline bool is(std::string const& s) const
 	{
-		return s == _string;
+		return _string == s;
+	}
+
+	inline bool less_than_(any_a<> const& thing) const
+	{
+		return check<symbol_a<>>(thing)
+			? _string < fast<symbol_a<>>(thing).to_string()
+			: one_t::less_than_(thing);
+	}
+
+	inline bool greater_than_(any_a<> const& thing) const
+	{
+		return check<symbol_a<>>(thing)
+			? _string > fast<symbol_a<>>(thing).to_string()
+			: one_t::greater_than_(thing);
+	}
+
+	inline bool less_or_equal_(any_a<> const& thing) const
+	{
+		return check<symbol_a<>>(thing)
+			? _string <= fast<symbol_a<>>(thing).to_string()
+			: one_t::less_or_equal_(thing);
+	}
+
+	inline bool greater_or_equal_(any_a<> const& thing) const
+	{
+		return check<symbol_a<>>(thing)
+			? _string >= fast<symbol_a<>>(thing).to_string()
+			: one_t::greater_or_equal_(thing);
 	}
 
 	// symbol

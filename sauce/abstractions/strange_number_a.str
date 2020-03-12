@@ -52,14 +52,6 @@ false &&
 					from_float_64_ := (float_64 :<#number_data_double>#, <>),
 					from_float_64 : "void (double float_64) { from_float_64_(num<double, number_data_double>(float_64)); }",
 
-					less_than_ :# (number :<number>#, <>),
-
-					greater_than_ :# (number :<number>#, <>),
-
-					less_or_equal_ :# (number :<number>#, <>),
-
-					greater_or_equal_ :# (number :<number>#, <>),
-
 					byte_size_ :# (<#number_data_int64>),
 					byte_size : "int64_t () const { return byte_size_().extract_primitive(); }",
 

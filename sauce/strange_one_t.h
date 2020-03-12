@@ -38,7 +38,7 @@ public:
 
 	inline bool identical(any_a<> const& thing) const
 	{
-		return thing.identity() == identity();
+		return identity() == thing.identity();
 	}
 
 	// comparison
@@ -65,6 +65,26 @@ public:
 	static inline bool is(std::string const& s)
 	{
 		return false;
+	}
+
+	inline bool less_than_(any_a<> const& thing) const
+	{
+		return identity() < thing.identity();
+	}
+
+	inline bool greater_than_(any_a<> const& thing) const
+	{
+		return identity() > thing.identity();
+	}
+
+	inline bool less_or_equal_(any_a<> const& thing) const
+	{
+		return identity() <= thing.identity();
+	}
+
+	inline bool greater_or_equal_(any_a<> const& thing) const
+	{
+		return identity() >= thing.identity();
 	}
 
 protected:

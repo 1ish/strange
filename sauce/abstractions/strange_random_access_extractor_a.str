@@ -12,14 +12,6 @@ false &&
 					self_subtract_ := (number :<number>#, <random_access_extractor>),
 
 					subtract_ :# (number :<number>#, <random_access_extractor>),
-
-					less_than_ :# (it :<random_access_extractor>#, <>),
-
-					greater_than_ :# (it :<random_access_extractor>#, <>),
-
-					less_or_equal_ :# (it :<random_access_extractor>#, <>),
-
-					greater_or_equal_ :# (it :<random_access_extractor>#, <>),
 				}
 			)
 		)
