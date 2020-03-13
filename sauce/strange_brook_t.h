@@ -393,7 +393,19 @@ public:
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _deque == cast<brook_a<_primitive_>>(thing).extract_deque();
+		return _deque == fast<brook_a<_primitive_>>(thing).extract_deque();
+	}
+
+	inline bool operator==(brook_a<_primitive_> const& brook) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque == brook.extract_deque();
+	}
+
+	inline bool operator!=(brook_a<_primitive_> const& brook) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque != brook.extract_deque();
 	}
 
 	inline std::size_t hash() const
@@ -405,6 +417,70 @@ public:
 			seed ^= std::hash<_primitive_>{}(item) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 		}
 		return seed;
+	}
+
+	inline bool less_than_(any_a<> const& thing) const
+	{
+		if (!check<brook_a<_primitive_>>(thing))
+		{
+			return one_t::less_than_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque < fast<brook_a<_primitive_>>(thing).extract_deque();
+	}
+
+	inline bool operator<(brook_a<_primitive_> const& brook) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque < brook.extract_deque();
+	}
+
+	inline bool greater_than_(any_a<> const& thing) const
+	{
+		if (!check<brook_a<_primitive_>>(thing))
+		{
+			return one_t::greater_than_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque > fast<brook_a<_primitive_>>(thing).extract_deque();
+	}
+
+	inline bool operator>(brook_a<_primitive_> const& brook) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque > brook.extract_deque();
+	}
+
+	inline bool less_or_equal_(any_a<> const& thing) const
+	{
+		if (!check<brook_a<_primitive_>>(thing))
+		{
+			return one_t::less_or_equal_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque <= fast<brook_a<_primitive_>>(thing).extract_deque();
+	}
+
+	inline bool operator<=(brook_a<_primitive_> const& brook) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque <= brook.extract_deque();
+	}
+
+	inline bool greater_or_equal_(any_a<> const& thing) const
+	{
+		if (!check<brook_a<_primitive_>>(thing))
+		{
+			return one_t::greater_or_equal_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque >= fast<brook_a<_primitive_>>(thing).extract_deque();
+	}
+
+	inline bool operator>=(brook_a<_primitive_> const& brook) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque >= brook.extract_deque();
 	}
 
 	// range

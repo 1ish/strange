@@ -12,6 +12,24 @@ template <typename _1_>
 class brook_a : public inventory_a<>
 {
 public:
+	inline bool operator==(brook_a < _1_ > const & brook ) const
+	{ assert(___handle___); return ___read___().operator==(brook); }
+
+	inline bool operator!=(brook_a < _1_ > const & brook ) const
+	{ assert(___handle___); return ___read___().operator!=(brook); }
+
+	inline bool operator<(brook_a < _1_ > const & brook ) const
+	{ assert(___handle___); return ___read___().operator<(brook); }
+
+	inline bool operator>(brook_a < _1_ > const & brook ) const
+	{ assert(___handle___); return ___read___().operator>(brook); }
+
+	inline bool operator<=(brook_a < _1_ > const & brook ) const
+	{ assert(___handle___); return ___read___().operator<=(brook); }
+
+	inline bool operator>=(brook_a < _1_ > const & brook ) const
+	{ assert(___handle___); return ___read___().operator>=(brook); }
+
 	inline std :: deque < _1_ > const & extract_deque() const
 	{ assert(___handle___); return ___read___().extract_deque(); }
 
@@ -21,6 +39,12 @@ public:
 protected:
 	struct ___brook_a_handle_base___ : ___inventory_a_handle_base___
 	{
+		virtual bool operator==(brook_a < _1_ > const & brook ) const = 0;
+		virtual bool operator!=(brook_a < _1_ > const & brook ) const = 0;
+		virtual bool operator<(brook_a < _1_ > const & brook ) const = 0;
+		virtual bool operator>(brook_a < _1_ > const & brook ) const = 0;
+		virtual bool operator<=(brook_a < _1_ > const & brook ) const = 0;
+		virtual bool operator>=(brook_a < _1_ > const & brook ) const = 0;
 		virtual std :: deque < _1_ > const & extract_deque() const = 0;
 		virtual std :: deque < _1_ > & mutate_deque() = 0;
 	};
@@ -42,6 +66,24 @@ protected:
 		inline ___brook_a_handle___(___variadic_tag___, Args&&... args)
 			: ___inventory_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline bool operator==(brook_a < _1_ > const & brook ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(brook); }
+
+		virtual inline bool operator!=(brook_a < _1_ > const & brook ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(brook); }
+
+		virtual inline bool operator<(brook_a < _1_ > const & brook ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(brook); }
+
+		virtual inline bool operator>(brook_a < _1_ > const & brook ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(brook); }
+
+		virtual inline bool operator<=(brook_a < _1_ > const & brook ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(brook); }
+
+		virtual inline bool operator>=(brook_a < _1_ > const & brook ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(brook); }
 
 		virtual inline std :: deque < _1_ > const & extract_deque() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_deque(); }
@@ -269,6 +311,24 @@ template <typename _1_>
 class brook_d : public inventory_d<>
 {
 public:
+	inline bool operator==(brook_a < _1_ > const & brook ) const
+	{ return same_(brook); }
+
+	inline bool operator!=(brook_a < _1_ > const & brook ) const
+	{ return different_(brook); }
+
+	inline bool operator<(brook_a < _1_ > const & brook ) const
+	{ return less_than_(brook); }
+
+	inline bool operator>(brook_a < _1_ > const & brook ) const
+	{ return greater_than_(brook); }
+
+	inline bool operator<=(brook_a < _1_ > const & brook ) const
+	{ return less_or_equal_(brook); }
+
+	inline bool operator>=(brook_a < _1_ > const & brook ) const
+	{ return greater_or_equal_(brook); }
+
 	inline std :: deque < _1_ > const & extract_deque() const
 	{ throw dis("dynamic brook_d::extract_deque() not available"); }
 

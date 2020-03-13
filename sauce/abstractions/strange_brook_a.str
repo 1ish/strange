@@ -6,6 +6,13 @@ false &&
 			(	// parent
 				$$<inventory>[],
 				{	// brook
+					'operator==' : "bool (brook_a<_1_> const& brook) const { return same_(brook); }",
+					'operator!=' : "bool (brook_a<_1_> const& brook) const { return different_(brook); }",
+					'operator<' : "bool (brook_a<_1_> const& brook) const { return less_than_(brook); }",
+					'operator>' : "bool (brook_a<_1_> const& brook) const { return greater_than_(brook); }",
+					'operator<=' : "bool (brook_a<_1_> const& brook) const { return less_or_equal_(brook); }",
+					'operator>=' : "bool (brook_a<_1_> const& brook) const { return greater_or_equal_(brook); }",
+
 					extract_deque : "std::deque<_1_> const& () const",
 					mutate_deque : "std::deque<_1_>& ()",
 				}
