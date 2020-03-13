@@ -340,22 +340,22 @@ class brook_d : public inventory_d<>
 {
 public:
 	inline bool operator==(brook_a < _1_ > const & brook ) const
-	{ return same_(brook); }
+	{ throw dis("dynamic brook_d::operator==(brook) not available"); }
 
 	inline bool operator!=(brook_a < _1_ > const & brook ) const
-	{ return different_(brook); }
+	{ throw dis("dynamic brook_d::operator!=(brook) not available"); }
 
 	inline bool operator<(brook_a < _1_ > const & brook ) const
-	{ return less_than_(brook); }
+	{ throw dis("dynamic brook_d::operator<(brook) not available"); }
 
 	inline bool operator>(brook_a < _1_ > const & brook ) const
-	{ return greater_than_(brook); }
+	{ throw dis("dynamic brook_d::operator>(brook) not available"); }
 
 	inline bool operator<=(brook_a < _1_ > const & brook ) const
-	{ return less_or_equal_(brook); }
+	{ throw dis("dynamic brook_d::operator<=(brook) not available"); }
 
 	inline bool operator>=(brook_a < _1_ > const & brook ) const
-	{ return greater_or_equal_(brook); }
+	{ throw dis("dynamic brook_d::operator>=(brook) not available"); }
 
 	inline random_access_extractor_data_a < typename std :: deque < _1_ > :: const_iterator > extract_begin() const
 	{ throw dis("dynamic brook_d::extract_begin() not available"); }

@@ -340,22 +340,22 @@ class flock_d : public inventory_d<>
 {
 public:
 	inline bool operator==(flock_a < > const & flock ) const
-	{ return same_(flock); }
+	{ throw dis("dynamic flock_d::operator==(flock) not available"); }
 
 	inline bool operator!=(flock_a < > const & flock ) const
-	{ return different_(flock); }
+	{ throw dis("dynamic flock_d::operator!=(flock) not available"); }
 
 	inline bool operator<(flock_a < > const & flock ) const
-	{ return less_than_(flock); }
+	{ throw dis("dynamic flock_d::operator<(flock) not available"); }
 
 	inline bool operator>(flock_a < > const & flock ) const
-	{ return greater_than_(flock); }
+	{ throw dis("dynamic flock_d::operator>(flock) not available"); }
 
 	inline bool operator<=(flock_a < > const & flock ) const
-	{ return less_or_equal_(flock); }
+	{ throw dis("dynamic flock_d::operator<=(flock) not available"); }
 
 	inline bool operator>=(flock_a < > const & flock ) const
-	{ return greater_or_equal_(flock); }
+	{ throw dis("dynamic flock_d::operator>=(flock) not available"); }
 
 	inline random_access_extractor_data_a < typename std :: vector < any_a < > > :: const_iterator > extract_begin() const
 	{ throw dis("dynamic flock_d::extract_begin() not available"); }
