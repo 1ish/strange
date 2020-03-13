@@ -312,22 +312,22 @@ class number_data_d : public number_d<>
 {
 public:
 	inline bool operator==(number_data_a < _1_ > const & number ) const
-	{ throw dis("dynamic number_data_d::operator==(number) not available"); }
+	{ return same_(number); }
 
 	inline bool operator!=(number_data_a < _1_ > const & number ) const
-	{ throw dis("dynamic number_data_d::operator!=(number) not available"); }
+	{ return different_(number); }
 
 	inline bool operator<(number_data_a < _1_ > const & number ) const
-	{ throw dis("dynamic number_data_d::operator<(number) not available"); }
+	{ return less_than_(number); }
 
 	inline bool operator>(number_data_a < _1_ > const & number ) const
-	{ throw dis("dynamic number_data_d::operator>(number) not available"); }
+	{ return greater_than_(number); }
 
 	inline bool operator<=(number_data_a < _1_ > const & number ) const
-	{ throw dis("dynamic number_data_d::operator<=(number) not available"); }
+	{ return less_or_equal_(number); }
 
 	inline bool operator>=(number_data_a < _1_ > const & number ) const
-	{ throw dis("dynamic number_data_d::operator>=(number) not available"); }
+	{ return greater_or_equal_(number); }
 
 	inline _1_ const & extract_primitive() const
 	{ throw dis("dynamic number_data_d::extract_primitive() not available"); }
