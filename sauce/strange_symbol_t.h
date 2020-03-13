@@ -62,6 +62,16 @@ public:
 		return check<symbol_a<>>(thing) && _string == fast<symbol_a<>>(thing).to_string();
 	}
 
+	inline bool operator==(symbol_a<> const& symbol) const
+	{
+		return _string == symbol.to_string();
+	}
+
+	inline bool operator!=(symbol_a<> const& symbol) const
+	{
+		return _string != symbol.to_string();
+	}
+
 	inline std::size_t hash() const
 	{
 		return _hash;
@@ -79,11 +89,21 @@ public:
 			: one_t::less_than_(thing);
 	}
 
+	inline bool operator<(symbol_a<> const& symbol) const
+	{
+		return _string < symbol.to_string();
+	}
+
 	inline bool greater_than_(any_a<> const& thing) const
 	{
 		return check<symbol_a<>>(thing)
 			? _string > fast<symbol_a<>>(thing).to_string()
 			: one_t::greater_than_(thing);
+	}
+
+	inline bool operator>(symbol_a<> const& symbol) const
+	{
+		return _string > symbol.to_string();
 	}
 
 	inline bool less_or_equal_(any_a<> const& thing) const
@@ -93,11 +113,21 @@ public:
 			: one_t::less_or_equal_(thing);
 	}
 
+	inline bool operator<=(symbol_a<> const& symbol) const
+	{
+		return _string <= symbol.to_string();
+	}
+
 	inline bool greater_or_equal_(any_a<> const& thing) const
 	{
 		return check<symbol_a<>>(thing)
 			? _string >= fast<symbol_a<>>(thing).to_string()
 			: one_t::greater_or_equal_(thing);
+	}
+
+	inline bool operator>=(symbol_a<> const& symbol) const
+	{
+		return _string >= symbol.to_string();
 	}
 
 	// symbol

@@ -12,6 +12,24 @@ template <typename _1_>
 class symbol_a : public any_a<>
 {
 public:
+	inline bool operator==(symbol_a < > const & symbol ) const
+	{ assert(___handle___); return ___read___().operator==(symbol); }
+
+	inline bool operator!=(symbol_a < > const & symbol ) const
+	{ assert(___handle___); return ___read___().operator!=(symbol); }
+
+	inline bool operator<(symbol_a < > const & symbol ) const
+	{ assert(___handle___); return ___read___().operator<(symbol); }
+
+	inline bool operator>(symbol_a < > const & symbol ) const
+	{ assert(___handle___); return ___read___().operator>(symbol); }
+
+	inline bool operator<=(symbol_a < > const & symbol ) const
+	{ assert(___handle___); return ___read___().operator<=(symbol); }
+
+	inline bool operator>=(symbol_a < > const & symbol ) const
+	{ assert(___handle___); return ___read___().operator>=(symbol); }
+
 	inline any_a<> to_lake__(range_a<> const& ___arguments___) const;
 
 	inline lake_int8_a<> to_lake_() const
@@ -37,6 +55,12 @@ public:
 protected:
 	struct ___symbol_a_handle_base___ : ___any_a_handle_base___
 	{
+		virtual bool operator==(symbol_a < > const & symbol ) const = 0;
+		virtual bool operator!=(symbol_a < > const & symbol ) const = 0;
+		virtual bool operator<(symbol_a < > const & symbol ) const = 0;
+		virtual bool operator>(symbol_a < > const & symbol ) const = 0;
+		virtual bool operator<=(symbol_a < > const & symbol ) const = 0;
+		virtual bool operator>=(symbol_a < > const & symbol ) const = 0;
 		virtual lake_int8_a<> to_lake_() const = 0;
 		virtual std :: string to_string() const = 0;
 		virtual int8_t first_character() const = 0;
@@ -61,6 +85,24 @@ protected:
 		inline ___symbol_a_handle___(___variadic_tag___, Args&&... args)
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline bool operator==(symbol_a < > const & symbol ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(symbol); }
+
+		virtual inline bool operator!=(symbol_a < > const & symbol ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(symbol); }
+
+		virtual inline bool operator<(symbol_a < > const & symbol ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(symbol); }
+
+		virtual inline bool operator>(symbol_a < > const & symbol ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(symbol); }
+
+		virtual inline bool operator<=(symbol_a < > const & symbol ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(symbol); }
+
+		virtual inline bool operator>=(symbol_a < > const & symbol ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(symbol); }
 
 		virtual inline lake_int8_a<> to_lake_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
@@ -299,6 +341,24 @@ template <typename _1_>
 class symbol_d : public any_a<>
 {
 public:
+	inline bool operator==(symbol_a < > const & symbol ) const
+	{ return same_(symbol); }
+
+	inline bool operator!=(symbol_a < > const & symbol ) const
+	{ return different_(symbol); }
+
+	inline bool operator<(symbol_a < > const & symbol ) const
+	{ return less_than_(symbol); }
+
+	inline bool operator>(symbol_a < > const & symbol ) const
+	{ return greater_than_(symbol); }
+
+	inline bool operator<=(symbol_a < > const & symbol ) const
+	{ return less_or_equal_(symbol); }
+
+	inline bool operator>=(symbol_a < > const & symbol ) const
+	{ return greater_or_equal_(symbol); }
+
 	inline any_a<> to_lake__(range_a<> const& arguments) const
 	{
 		assert(___handle___);
