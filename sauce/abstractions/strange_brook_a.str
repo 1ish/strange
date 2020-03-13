@@ -13,6 +13,11 @@ false &&
 					'operator<=' : "bool (brook_a<_1_> const& brook) const { return less_or_equal_(brook); }",
 					'operator>=' : "bool (brook_a<_1_> const& brook) const { return greater_or_equal_(brook); }",
 
+					extract_begin : "random_access_extractor_data_a<typename std::deque<_1_>::const_iterator> () const",
+					extract_end : "random_access_extractor_data_a<typename std::deque<_1_>::const_iterator> () const",
+					mutate_begin : "random_access_mutator_data_a<typename std::deque<_1_>::iterator> ()",
+					mutate_end : "random_access_mutator_data_a<typename std::deque<_1_>::iterator> ()",
+
 					extract_deque : "std::deque<_1_> const& () const",
 					mutate_deque : "std::deque<_1_>& ()",
 				}

@@ -30,6 +30,18 @@ public:
 	inline bool operator>=(brook_a < _1_ > const & brook ) const
 	{ assert(___handle___); return ___read___().operator>=(brook); }
 
+	inline random_access_extractor_data_a < typename std :: deque < _1_ > :: const_iterator > extract_begin() const
+	{ assert(___handle___); return ___read___().extract_begin(); }
+
+	inline random_access_extractor_data_a < typename std :: deque < _1_ > :: const_iterator > extract_end() const
+	{ assert(___handle___); return ___read___().extract_end(); }
+
+	inline random_access_mutator_data_a < typename std :: deque < _1_ > :: iterator > mutate_begin()
+	{ assert(___handle___); return ___write___().mutate_begin(); }
+
+	inline random_access_mutator_data_a < typename std :: deque < _1_ > :: iterator > mutate_end()
+	{ assert(___handle___); return ___write___().mutate_end(); }
+
 	inline std :: deque < _1_ > const & extract_deque() const
 	{ assert(___handle___); return ___read___().extract_deque(); }
 
@@ -45,6 +57,10 @@ protected:
 		virtual bool operator>(brook_a < _1_ > const & brook ) const = 0;
 		virtual bool operator<=(brook_a < _1_ > const & brook ) const = 0;
 		virtual bool operator>=(brook_a < _1_ > const & brook ) const = 0;
+		virtual random_access_extractor_data_a < typename std :: deque < _1_ > :: const_iterator > extract_begin() const = 0;
+		virtual random_access_extractor_data_a < typename std :: deque < _1_ > :: const_iterator > extract_end() const = 0;
+		virtual random_access_mutator_data_a < typename std :: deque < _1_ > :: iterator > mutate_begin() = 0;
+		virtual random_access_mutator_data_a < typename std :: deque < _1_ > :: iterator > mutate_end() = 0;
 		virtual std :: deque < _1_ > const & extract_deque() const = 0;
 		virtual std :: deque < _1_ > & mutate_deque() = 0;
 	};
@@ -84,6 +100,18 @@ protected:
 
 		virtual inline bool operator>=(brook_a < _1_ > const & brook ) const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(brook); }
+
+		virtual inline random_access_extractor_data_a < typename std :: deque < _1_ > :: const_iterator > extract_begin() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
+
+		virtual inline random_access_extractor_data_a < typename std :: deque < _1_ > :: const_iterator > extract_end() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
+
+		virtual inline random_access_mutator_data_a < typename std :: deque < _1_ > :: iterator > mutate_begin() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
+
+		virtual inline random_access_mutator_data_a < typename std :: deque < _1_ > :: iterator > mutate_end() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
 
 		virtual inline std :: deque < _1_ > const & extract_deque() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_deque(); }
@@ -328,6 +356,18 @@ public:
 
 	inline bool operator>=(brook_a < _1_ > const & brook ) const
 	{ return greater_or_equal_(brook); }
+
+	inline random_access_extractor_data_a < typename std :: deque < _1_ > :: const_iterator > extract_begin() const
+	{ throw dis("dynamic brook_d::extract_begin() not available"); }
+
+	inline random_access_extractor_data_a < typename std :: deque < _1_ > :: const_iterator > extract_end() const
+	{ throw dis("dynamic brook_d::extract_end() not available"); }
+
+	inline random_access_mutator_data_a < typename std :: deque < _1_ > :: iterator > mutate_begin()
+	{ throw dis("dynamic brook_d::mutate_begin() not available"); }
+
+	inline random_access_mutator_data_a < typename std :: deque < _1_ > :: iterator > mutate_end()
+	{ throw dis("dynamic brook_d::mutate_end() not available"); }
 
 	inline std :: deque < _1_ > const & extract_deque() const
 	{ throw dis("dynamic brook_d::extract_deque() not available"); }
