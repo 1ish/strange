@@ -12,6 +12,24 @@ template <typename _1_>
 class number_data_a : public number_a<>
 {
 public:
+	inline bool operator==(number_data_a < _1_ > const & number ) const
+	{ assert(___handle___); return ___read___().operator==(number); }
+
+	inline bool operator!=(number_data_a < _1_ > const & number ) const
+	{ assert(___handle___); return ___read___().operator!=(number); }
+
+	inline bool operator<(number_data_a < _1_ > const & number ) const
+	{ assert(___handle___); return ___read___().operator<(number); }
+
+	inline bool operator>(number_data_a < _1_ > const & number ) const
+	{ assert(___handle___); return ___read___().operator>(number); }
+
+	inline bool operator<=(number_data_a < _1_ > const & number ) const
+	{ assert(___handle___); return ___read___().operator<=(number); }
+
+	inline bool operator>=(number_data_a < _1_ > const & number ) const
+	{ assert(___handle___); return ___read___().operator>=(number); }
+
 	inline _1_ const & extract_primitive() const
 	{ assert(___handle___); return ___read___().extract_primitive(); }
 
@@ -21,6 +39,12 @@ public:
 protected:
 	struct ___number_data_a_handle_base___ : ___number_a_handle_base___
 	{
+		virtual bool operator==(number_data_a < _1_ > const & number ) const = 0;
+		virtual bool operator!=(number_data_a < _1_ > const & number ) const = 0;
+		virtual bool operator<(number_data_a < _1_ > const & number ) const = 0;
+		virtual bool operator>(number_data_a < _1_ > const & number ) const = 0;
+		virtual bool operator<=(number_data_a < _1_ > const & number ) const = 0;
+		virtual bool operator>=(number_data_a < _1_ > const & number ) const = 0;
 		virtual _1_ const & extract_primitive() const = 0;
 		virtual _1_ & mutate_primitive() = 0;
 	};
@@ -42,6 +66,24 @@ protected:
 		inline ___number_data_a_handle___(___variadic_tag___, Args&&... args)
 			: ___number_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline bool operator==(number_data_a < _1_ > const & number ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(number); }
+
+		virtual inline bool operator!=(number_data_a < _1_ > const & number ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(number); }
+
+		virtual inline bool operator<(number_data_a < _1_ > const & number ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(number); }
+
+		virtual inline bool operator>(number_data_a < _1_ > const & number ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(number); }
+
+		virtual inline bool operator<=(number_data_a < _1_ > const & number ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(number); }
+
+		virtual inline bool operator>=(number_data_a < _1_ > const & number ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(number); }
 
 		virtual inline _1_ const & extract_primitive() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_primitive(); }
@@ -269,6 +311,24 @@ template <typename _1_>
 class number_data_d : public number_d<>
 {
 public:
+	inline bool operator==(number_data_a < _1_ > const & number ) const
+	{ throw dis("dynamic number_data_d::operator==(number) not available"); }
+
+	inline bool operator!=(number_data_a < _1_ > const & number ) const
+	{ throw dis("dynamic number_data_d::operator!=(number) not available"); }
+
+	inline bool operator<(number_data_a < _1_ > const & number ) const
+	{ throw dis("dynamic number_data_d::operator<(number) not available"); }
+
+	inline bool operator>(number_data_a < _1_ > const & number ) const
+	{ throw dis("dynamic number_data_d::operator>(number) not available"); }
+
+	inline bool operator<=(number_data_a < _1_ > const & number ) const
+	{ throw dis("dynamic number_data_d::operator<=(number) not available"); }
+
+	inline bool operator>=(number_data_a < _1_ > const & number ) const
+	{ throw dis("dynamic number_data_d::operator>=(number) not available"); }
+
 	inline _1_ const & extract_primitive() const
 	{ throw dis("dynamic number_data_d::extract_primitive() not available"); }
 

@@ -43,16 +43,71 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		if (!check<number_a<>>(thing))
-		{
-			return false;
-		}
-		return _number == number_u<_primitive_>::from_number(cast<number_a<>>(thing));
+		return check<number_a<>>(thing) &&
+			_number == number_u<_primitive_>::from_number(fast<number_a<>>(thing));
+	}
+
+	inline bool operator==(number_data_a<_primitive_> const& number) const
+	{
+		return _number == number.extract_primitive();
+	}
+
+	inline bool operator!=(number_data_a<_primitive_> const& number) const
+	{
+		return _number != number.extract_primitive();
 	}
 
 	inline std::size_t hash() const
 	{
 		return std::hash<_primitive_>{}(_number);
+	}
+
+	inline bool less_than_(any_a<> const& thing) const
+	{
+		return check<number_a<>>(thing)
+			? _number < number_u<_primitive_>::from_number(fast<number_a<>>(thing))
+			: one_t::less_than_(thing);
+	}
+
+	inline bool operator<(number_data_a<_primitive_> const& number) const
+	{
+		return _number < number.extract_primitive();
+	}
+
+	inline bool greater_than_(any_a<> const& thing) const
+	{
+		return check<number_a<>>(thing)
+			? _number > number_u<_primitive_>::from_number(fast<number_a<>>(thing))
+			: one_t::greater_than_(thing);
+	}
+
+	inline bool operator>(number_data_a<_primitive_> const& number) const
+	{
+		return _number > number.extract_primitive();
+	}
+
+	inline bool less_or_equal_(any_a<> const& thing) const
+	{
+		return check<number_a<>>(thing)
+			? _number <= number_u<_primitive_>::from_number(fast<number_a<>>(thing))
+			: one_t::less_or_equal_(thing);
+	}
+
+	inline bool operator<=(number_data_a<_primitive_> const& number) const
+	{
+		return _number <= number.extract_primitive();
+	}
+
+	inline bool greater_or_equal_(any_a<> const& thing) const
+	{
+		return check<number_a<>>(thing)
+			? _number >= number_u<_primitive_>::from_number(fast<number_a<>>(thing))
+			: one_t::greater_or_equal_(thing);
+	}
+
+	inline bool operator>=(number_data_a<_primitive_> const& number) const
+	{
+		return _number >= number.extract_primitive();
 	}
 
 	// number
@@ -78,9 +133,7 @@ public:
 
 	inline number_a<> add_(number_a<> const& number) const
 	{
-		___ego___ result = thing_t<___ego___>::me_();
-		result.mutate_primitive() += number_u<_primitive_>::from_number(number);
-		return result;
+		return create(_number + number_u<_primitive_>::from_number(number));
 	}
 
 	inline void self_subtract_(number_a<> const& number)
@@ -90,9 +143,7 @@ public:
 
 	inline number_a<> subtract_(number_a<> const& number) const
 	{
-		___ego___ result = thing_t<___ego___>::me_();
-		result.mutate_primitive() -= number_u<_primitive_>::from_number(number);
-		return result;
+		return create(_number - number_u<_primitive_>::from_number(number));
 	}
 
 	inline void self_multiply_(number_a<> const& number)
@@ -102,9 +153,7 @@ public:
 
 	inline number_a<> multiply_(number_a<> const& number) const
 	{
-		___ego___ result = thing_t<___ego___>::me_();
-		result.mutate_primitive() *= number_u<_primitive_>::from_number(number);
-		return result;
+		return create(_number * number_u<_primitive_>::from_number(number));
 	}
 
 	inline void self_divide_(number_a<> const& number)
@@ -124,9 +173,7 @@ public:
 		{
 			throw dis("strange::number / division by zero");
 		}
-		___ego___ result = thing_t<___ego___>::me_();
-		result.mutate_primitive() /= num;
-		return result;
+		return create(_number / num);
 	}
 
 	inline void self_modulo_(number_a<> const& number)
@@ -210,26 +257,6 @@ public:
 	inline void from_float_64(double float_64)
 	{
 		_number = number_u<_primitive_>::from_float_64(float_64);
-	}
-
-	inline bool less_than_(any_a<> const& number) const
-	{
-		return _number < number_u<_primitive_>::from_number(cast<number_a<>>(number));
-	}
-
-	inline bool greater_than_(any_a<> const& number) const
-	{
-		return _number > number_u<_primitive_>::from_number(cast<number_a<>>(number));
-	}
-
-	inline bool less_or_equal_(any_a<> const& number) const
-	{
-		return _number <= number_u<_primitive_>::from_number(cast<number_a<>>(number));
-	}
-
-	inline bool greater_or_equal_(any_a<> const& number) const
-	{
-		return _number >= number_u<_primitive_>::from_number(cast<number_a<>>(number));
 	}
 
 	static inline number_data_a<int64_t> byte_size_()

@@ -6,6 +6,13 @@ false &&
 			(	// parent
 				$$<number>[],
 				{	// number data
+					'operator==' : "bool (number_data_a<_1_> const& number) const",
+					'operator!=' : "bool (number_data_a<_1_> const& number) const",
+					'operator<' : "bool (number_data_a<_1_> const& number) const",
+					'operator>' : "bool (number_data_a<_1_> const& number) const",
+					'operator<=' : "bool (number_data_a<_1_> const& number) const",
+					'operator>=' : "bool (number_data_a<_1_> const& number) const",
+
 					extract_primitive : "_1_ const& () const",
 					mutate_primitive : "_1_& ()",
 				}
