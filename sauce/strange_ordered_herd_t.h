@@ -7,18 +7,18 @@ namespace strange
 template <bool _concurrent_ = false, typename ___ego___ = ordered_herd_a<>>
 class ordered_herd_t : public thing_t<___ego___>
 {
-	template <typename _mutator_, typename ___ego_it___ = bidirectional_extractor_data_a<_mutator_>>
+	template <typename _iterator_, typename ___ego_it___ = bidirectional_extractor_data_a<_iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<extractor_t<_mutator_>>;
+		using over = thing_o<extractor_t<_iterator_>>;
 
 		// construction
 		template <typename F>
-		static inline bidirectional_extractor_data_a<_mutator_> create(ordered_herd_a<> const& ordered_herd, ordered_herd_t const& ordered_herd_thing, F&& it)
+		static inline bidirectional_extractor_data_a<_iterator_> create(ordered_herd_a<> const& ordered_herd, ordered_herd_t const& ordered_herd_thing, F&& it)
 		{
-			return bidirectional_extractor_data_a<_mutator_>::template create<over>(extractor_t<_mutator_>(ordered_herd, ordered_herd_thing, std::forward<F>(it)));
+			return bidirectional_extractor_data_a<_iterator_>::template create<over>(extractor_t<_iterator_>(ordered_herd, ordered_herd_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -34,11 +34,18 @@ class ordered_herd_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			if (!check<bidirectional_extractor_data_a<_mutator_>>(thing))
-			{
-				return false;
-			}
-			return _it == cast<bidirectional_extractor_data_a<_mutator_>>(thing).extract_it();
+			return check<bidirectional_extractor_data_a<_iterator_>>(thing) &&
+				_it == fast<bidirectional_extractor_data_a<_iterator_>>(thing).extract_it();
+		}
+
+		inline bool operator==(bidirectional_extractor_data_a<_iterator_> const& it) const
+		{
+			return _it == it.extract_it();
+		}
+
+		inline bool operator!=(bidirectional_extractor_data_a<_iterator_> const& it) const
+		{
+			return _it != it.extract_it();
 		}
 
 		inline std::size_t hash() const
@@ -78,18 +85,18 @@ class ordered_herd_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline _mutator_ const& extract_it() const
+		inline _iterator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _mutator_& mutate_it()
+		inline _iterator_& mutate_it()
 		{
 			return _it;
 		}
 
 	protected:
-		_mutator_ _it;
+		_iterator_ _it;
 		ordered_herd_a<> const _ordered_herd;
 		ordered_herd_t const& _ordered_herd_thing;
 
@@ -180,7 +187,19 @@ public:
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _set == cast<ordered_herd_a<>>(thing).extract_set();
+		return _set == fast<ordered_herd_a<>>(thing).extract_set();
+	}
+
+	inline bool operator==(ordered_herd_a<> const& herd) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _set == herd.extract_set();
+	}
+
+	inline bool operator!=(ordered_herd_a<> const& herd) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _set != herd.extract_set();
 	}
 
 	inline std::size_t hash() const
@@ -194,6 +213,70 @@ public:
 		return seed;
 	}
 
+	inline bool less_than_(any_a<> const& thing) const
+	{
+		if (!check<ordered_herd_a<>>(thing))
+		{
+			return one_t::less_than_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _set < fast<ordered_herd_a<>>(thing).extract_set();
+	}
+
+	inline bool operator<(ordered_herd_a<> const& herd) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _set < herd.extract_set();
+	}
+
+	inline bool greater_than_(any_a<> const& thing) const
+	{
+		if (!check<ordered_herd_a<>>(thing))
+		{
+			return one_t::greater_than_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _set > fast<ordered_herd_a<>>(thing).extract_set();
+	}
+
+	inline bool operator>(ordered_herd_a<> const& herd) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _set > herd.extract_set();
+	}
+
+	inline bool less_or_equal_(any_a<> const& thing) const
+	{
+		if (!check<ordered_herd_a<>>(thing))
+		{
+			return one_t::less_or_equal_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _set <= fast<ordered_herd_a<>>(thing).extract_set();
+	}
+
+	inline bool operator<=(ordered_herd_a<> const& herd) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _set <= herd.extract_set();
+	}
+
+	inline bool greater_or_equal_(any_a<> const& thing) const
+	{
+		if (!check<ordered_herd_a<>>(thing))
+		{
+			return one_t::greater_or_equal_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _set >= fast<ordered_herd_a<>>(thing).extract_set();
+	}
+
+	inline bool operator>=(ordered_herd_a<> const& herd) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _set >= herd.extract_set();
+	}
+
 	// range
 	inline bidirectional_extractor_a<> extract_begin_() const
 	{
@@ -201,7 +284,19 @@ public:
 		return extractor_t<typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
 	}
 
+	inline bidirectional_extractor_data_a<typename std_set_any::const_iterator> extract_begin() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return extractor_t<typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cbegin());
+	}
+
 	inline bidirectional_extractor_a<> extract_end_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return extractor_t<typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());
+	}
+
+	inline bidirectional_extractor_data_a<typename std_set_any::const_iterator> extract_end() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<typename std_set_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _set.cend());

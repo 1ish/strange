@@ -122,6 +122,16 @@ namespace strange
 	{
 		return lake.mutate_end();
 	}
+
+	inline bidirectional_extractor_data_a<typename std::set<any_a<>>::const_iterator> begin(ordered_herd_a<> const& herd)
+	{
+		return herd.extract_begin();
+	}
+
+	inline bidirectional_extractor_data_a<typename std::set<any_a<>>::const_iterator> end(ordered_herd_a<> const& herd)
+	{
+		return herd.extract_end();
+	}
 }
 
 #endif

@@ -12,6 +12,30 @@ template <typename _1_>
 class ordered_herd_a : public herd_a<>
 {
 public:
+	inline bool operator==(ordered_herd_a < > const & herd ) const
+	{ assert(___handle___); return ___read___().operator==(herd); }
+
+	inline bool operator!=(ordered_herd_a < > const & herd ) const
+	{ assert(___handle___); return ___read___().operator!=(herd); }
+
+	inline bool operator<(ordered_herd_a < > const & herd ) const
+	{ assert(___handle___); return ___read___().operator<(herd); }
+
+	inline bool operator>(ordered_herd_a < > const & herd ) const
+	{ assert(___handle___); return ___read___().operator>(herd); }
+
+	inline bool operator<=(ordered_herd_a < > const & herd ) const
+	{ assert(___handle___); return ___read___().operator<=(herd); }
+
+	inline bool operator>=(ordered_herd_a < > const & herd ) const
+	{ assert(___handle___); return ___read___().operator>=(herd); }
+
+	inline bidirectional_extractor_data_a < typename std :: set < any_a < > > :: const_iterator > extract_begin() const
+	{ assert(___handle___); return ___read___().extract_begin(); }
+
+	inline bidirectional_extractor_data_a < typename std :: set < any_a < > > :: const_iterator > extract_end() const
+	{ assert(___handle___); return ___read___().extract_end(); }
+
 	inline std :: set < any_a < > > const & extract_set() const
 	{ assert(___handle___); return ___read___().extract_set(); }
 
@@ -21,6 +45,14 @@ public:
 protected:
 	struct ___ordered_herd_a_handle_base___ : ___herd_a_handle_base___
 	{
+		virtual bool operator==(ordered_herd_a < > const & herd ) const = 0;
+		virtual bool operator!=(ordered_herd_a < > const & herd ) const = 0;
+		virtual bool operator<(ordered_herd_a < > const & herd ) const = 0;
+		virtual bool operator>(ordered_herd_a < > const & herd ) const = 0;
+		virtual bool operator<=(ordered_herd_a < > const & herd ) const = 0;
+		virtual bool operator>=(ordered_herd_a < > const & herd ) const = 0;
+		virtual bidirectional_extractor_data_a < typename std :: set < any_a < > > :: const_iterator > extract_begin() const = 0;
+		virtual bidirectional_extractor_data_a < typename std :: set < any_a < > > :: const_iterator > extract_end() const = 0;
 		virtual std :: set < any_a < > > const & extract_set() const = 0;
 		virtual std :: set < any_a < > > & mutate_set() = 0;
 	};
@@ -42,6 +74,30 @@ protected:
 		inline ___ordered_herd_a_handle___(___variadic_tag___, Args&&... args)
 			: ___herd_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline bool operator==(ordered_herd_a < > const & herd ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(herd); }
+
+		virtual inline bool operator!=(ordered_herd_a < > const & herd ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(herd); }
+
+		virtual inline bool operator<(ordered_herd_a < > const & herd ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(herd); }
+
+		virtual inline bool operator>(ordered_herd_a < > const & herd ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(herd); }
+
+		virtual inline bool operator<=(ordered_herd_a < > const & herd ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(herd); }
+
+		virtual inline bool operator>=(ordered_herd_a < > const & herd ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(herd); }
+
+		virtual inline bidirectional_extractor_data_a < typename std :: set < any_a < > > :: const_iterator > extract_begin() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
+
+		virtual inline bidirectional_extractor_data_a < typename std :: set < any_a < > > :: const_iterator > extract_end() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
 		virtual inline std :: set < any_a < > > const & extract_set() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_set(); }
@@ -269,6 +325,30 @@ template <typename _1_>
 class ordered_herd_d : public herd_d<>
 {
 public:
+	inline bool operator==(ordered_herd_a < > const & herd ) const
+	{ throw dis("dynamic ordered_herd_d::operator==(herd) not available"); }
+
+	inline bool operator!=(ordered_herd_a < > const & herd ) const
+	{ throw dis("dynamic ordered_herd_d::operator!=(herd) not available"); }
+
+	inline bool operator<(ordered_herd_a < > const & herd ) const
+	{ throw dis("dynamic ordered_herd_d::operator<(herd) not available"); }
+
+	inline bool operator>(ordered_herd_a < > const & herd ) const
+	{ throw dis("dynamic ordered_herd_d::operator>(herd) not available"); }
+
+	inline bool operator<=(ordered_herd_a < > const & herd ) const
+	{ throw dis("dynamic ordered_herd_d::operator<=(herd) not available"); }
+
+	inline bool operator>=(ordered_herd_a < > const & herd ) const
+	{ throw dis("dynamic ordered_herd_d::operator>=(herd) not available"); }
+
+	inline bidirectional_extractor_data_a < typename std :: set < any_a < > > :: const_iterator > extract_begin() const
+	{ throw dis("dynamic ordered_herd_d::extract_begin() not available"); }
+
+	inline bidirectional_extractor_data_a < typename std :: set < any_a < > > :: const_iterator > extract_end() const
+	{ throw dis("dynamic ordered_herd_d::extract_end() not available"); }
+
 	inline std :: set < any_a < > > const & extract_set() const
 	{ throw dis("dynamic ordered_herd_d::extract_set() not available"); }
 
