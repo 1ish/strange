@@ -31,6 +31,11 @@ TEST_CASE("first", "[first]")
 	auto y = make("2");
 	fun(x, y);
 	A b{ "b" };
+	auto const brook = brook_t<int64_t>::create_();
+	for (auto const& b : brook)
+	{
+		b.something();
+	}
 }
 
 TEST_CASE("strange parse and generate cpp cat abstraction", "[parse_t]")

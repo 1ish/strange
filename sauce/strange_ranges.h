@@ -54,6 +54,30 @@ namespace strange
 	{
 		return inventory.mutate_end_();
 	}
+
+	template <typename _primitive_>
+	inline random_access_extractor_data_a<typename std::deque<_primitive_>::const_iterator> begin(brook_a<_primitive_> const& brook)
+	{
+		return brook.extract_begin();
+	}
+
+	template <typename _primitive_>
+	inline random_access_extractor_data_a<typename std::deque<_primitive_>::const_iterator> end(brook_a<_primitive_> const& brook)
+	{
+		return brook.extract_end();
+	}
+
+	template <typename _primitive_>
+	inline random_access_mutator_data_a<typename std::deque<_primitive_>::iterator> begin(brook_a<_primitive_>& brook)
+	{
+		return brook.mutate_begin();
+	}
+
+	template <typename _primitive_>
+	inline random_access_mutator_data_a<typename std::deque<_primitive_>::iterator> end(brook_a<_primitive_>& brook)
+	{
+		return brook.mutate_end();
+	}
 }
 
 #endif
