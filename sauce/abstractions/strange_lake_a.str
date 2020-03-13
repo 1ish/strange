@@ -6,6 +6,18 @@ false &&
 			(	// parent
 				$$<inventory>[],
 				{	// lake
+					'operator==' : "bool (lake_a<_1_> const& lake) const",
+					'operator!=' : "bool (lake_a<_1_> const& lake) const",
+					'operator<' : "bool (lake_a<_1_> const& lake) const",
+					'operator>' : "bool (lake_a<_1_> const& lake) const",
+					'operator<=' : "bool (lake_a<_1_> const& lake) const",
+					'operator>=' : "bool (lake_a<_1_> const& lake) const",
+
+					extract_begin : "random_access_extractor_data_a<typename std::vector<_1_>::const_iterator> () const",
+					extract_end : "random_access_extractor_data_a<typename std::vector<_1_>::const_iterator> () const",
+					mutate_begin : "random_access_mutator_data_a<typename std::vector<_1_>::iterator> ()",
+					mutate_end : "random_access_mutator_data_a<typename std::vector<_1_>::iterator> ()",
+
 					extract_vector : "std::vector<_1_> const& () const",
 					mutate_vector : "std::vector<_1_>& ()",
 				}
