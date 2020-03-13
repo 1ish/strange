@@ -78,6 +78,26 @@ namespace strange
 	{
 		return brook.mutate_end();
 	}
+
+	inline random_access_extractor_data_a<typename std::vector<any_a<>>::const_iterator> begin(flock_a<> const& flock)
+	{
+		return flock.extract_begin();
+	}
+
+	inline random_access_extractor_data_a<typename std::vector<any_a<>>::const_iterator> end(flock_a<> const& flock)
+	{
+		return flock.extract_end();
+	}
+
+	inline random_access_mutator_data_a<typename std::vector<any_a<>>::iterator> begin(flock_a<>& flock)
+	{
+		return flock.mutate_begin();
+	}
+
+	inline random_access_mutator_data_a<typename std::vector<any_a<>>::iterator> end(flock_a<>& flock)
+	{
+		return flock.mutate_end();
+	}
 }
 
 #endif

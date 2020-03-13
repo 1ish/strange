@@ -5,6 +5,18 @@ false &&
 			(	// parent
 				$$<inventory>[],
 				{	// flock
+					'operator==' : "bool (flock_a<> const& flock) const { return same_(flock); }",
+					'operator!=' : "bool (flock_a<> const& flock) const { return different_(flock); }",
+					'operator<' : "bool (flock_a<> const& flock) const { return less_than_(flock); }",
+					'operator>' : "bool (flock_a<> const& flock) const { return greater_than_(flock); }",
+					'operator<=' : "bool (flock_a<> const& flock) const { return less_or_equal_(flock); }",
+					'operator>=' : "bool (flock_a<> const& flock) const { return greater_or_equal_(flock); }",
+
+					extract_begin : "random_access_extractor_data_a<typename std::vector<any_a<>>::const_iterator> () const",
+					extract_end : "random_access_extractor_data_a<typename std::vector<any_a<>>::const_iterator> () const",
+					mutate_begin : "random_access_mutator_data_a<typename std::vector<any_a<>>::iterator> ()",
+					mutate_end : "random_access_mutator_data_a<typename std::vector<any_a<>>::iterator> ()",
+
 					extract_vector : "std::vector<any_a<>> const& () const",
 					mutate_vector : "std::vector<any_a<>>& ()",
 				}
