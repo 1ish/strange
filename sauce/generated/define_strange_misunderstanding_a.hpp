@@ -2,16 +2,21 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename lake_int8 = lake_int8_a<> >
 class misunderstanding_d;
 
-template <typename _1_ = void>
-inline misunderstanding_d<_1_> ___misunderstanding_dynamic___(any_a<> const& thing); 
+template <typename lake_int8 = lake_int8_a<> >
+inline misunderstanding_d<lake_int8> ___misunderstanding_dynamic___(any_a<> const& thing); 
 
-template <typename _1_>
+template <typename lake_int8>
 class misunderstanding_a : public any_a<>
 {
 public:
+	inline any_a<> to_lake__(range_a<> const& ___arguments___) const;
+
+	inline lake_int8 to_lake_() const
+	{ assert(___handle___); return ___read___().to_lake_(); }
+
 	inline std :: string to_string() const
 	{ assert(___handle___); return ___read___().to_string(); }
 
@@ -26,6 +31,7 @@ public:
 protected:
 	struct ___misunderstanding_a_handle_base___ : ___any_a_handle_base___
 	{
+		virtual lake_int8 to_lake_() const = 0;
 		virtual std :: string to_string() const = 0;
 		virtual misunderstanding_a<> add_(misunderstanding_a<> const& misunderstanding) const = 0;
 	};
@@ -47,6 +53,9 @@ protected:
 		inline ___misunderstanding_a_handle___(___variadic_tag___, Args&&... args)
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline lake_int8 to_lake_() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
 
 		virtual inline std :: string to_string() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
@@ -197,7 +206,7 @@ public:
 		{
 			return misunderstanding_a{ thing.___handle___ };
 		}
-		return misunderstanding_a{ misunderstanding_d<_1_>{ thing } };
+		return misunderstanding_a{ misunderstanding_d<lake_int8>{ thing } };
 	}
 
 	static inline misunderstanding_a ___cast_ref___(any_a<>& thing)
@@ -207,7 +216,7 @@ public:
 		{
 			return misunderstanding_a(thing.___handle___, ___reference_tag___{});
 		}
-		return misunderstanding_a{ misunderstanding_d<_1_>(thing, ___reference_tag___{}) };
+		return misunderstanding_a{ misunderstanding_d<lake_int8>(thing, ___reference_tag___{}) };
 	}
 
 	template <typename ___cat_a___ = cat_a<>, typename ___kind_a___ = kind_a<>>
@@ -254,6 +263,7 @@ public:
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
 			___unordered_shoal_a___ operations = any_a::___operations___<___unordered_shoal_a___>();
+			operations.update_string("to_lake_", native_extraction_t<misunderstanding_a>::create(&misunderstanding_a::to_lake__));
 			operations.update_string("add_", native_extraction_t<misunderstanding_a>::create(&misunderstanding_a::add__));
 			return operations;
 		}();
@@ -271,12 +281,34 @@ private:
 	friend class ___misunderstanding_a_share___;
 }; // class misunderstanding_a
 
-template <typename _1_>
+template <typename lake_int8>
 class misunderstanding_d : public any_a<>
 {
 public:
+	inline any_a<> to_lake__(range_a<> const& arguments) const
+	{
+		assert(___handle___);
+		auto const op = operation("to_lake_");
+		if (!op)
+		{
+			throw dis("dynamic misunderstanding_d::to_lake_ passed non-existent member");
+		}
+		return op.operate(*const_cast<misunderstanding_d*>(this), arguments);
+	}
+
+	inline lake_int8 to_lake_() const
+	{
+		assert(___handle___);
+		auto const op = operation("to_lake_");
+		if (!op)
+		{
+			throw dis("dynamic misunderstanding_d::to_lake_ passed non-existent member");
+		}
+		return cast<lake_int8>(variadic_operate(op, *const_cast<misunderstanding_d*>(this)));
+	}
+
 	inline std :: string to_string() const
-	{ throw dis("dynamic misunderstanding_d::to_string() not available"); }
+	{ return lake_to_string(to_lake_()); }
 
 	inline any_a<> add__(range_a<> const& arguments) const
 	{

@@ -1,12 +1,13 @@
 false &&
 {	strange :
 	{	<misunderstanding> :: abstraction
-		(	// no dimensions
+		(	// dimensions
+			#lake_int8 :<<lake_int8>># <lake_int8>,
 			(	// parent
 				$$<>[],
 				{	// misunderstanding
-					//TODO to_lake_
-					to_string : "std::string () const", //TODO { return lake_to_string(to_lake_()); }
+					to_lake_ :# (<#lake_int8>),
+					to_string : "std::string () const { return lake_to_string(to_lake_()); }",
 
 					add_ :# (misunderstanding :<misunderstanding>#, <misunderstanding>),
 				}

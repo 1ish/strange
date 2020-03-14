@@ -2,7 +2,7 @@
 namespace strange
 {
 
-template <typename _1_ = void>
+template <typename lake_int8 = lake_int8_a<> >
 class misunderstanding_a;
 
 } // namespace

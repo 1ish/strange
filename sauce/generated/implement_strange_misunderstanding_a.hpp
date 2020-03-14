@@ -2,8 +2,14 @@
 namespace strange
 {
 
-template <typename _1_>
-inline any_a<> misunderstanding_a<_1_>::add__(range_a<> const& ___arguments___) const
+template <typename lake_int8>
+inline any_a<> misunderstanding_a<lake_int8>::to_lake__(range_a<> const& ___arguments___) const
+{
+	return to_lake_();
+}
+
+template <typename lake_int8>
+inline any_a<> misunderstanding_a<lake_int8>::add__(range_a<> const& ___arguments___) const
 {
 	forward_extractor_a<> ___it___ = ___arguments___.extract_begin_();
 	if (___it___ == ___arguments___.extract_end_())
@@ -14,18 +20,18 @@ inline any_a<> misunderstanding_a<_1_>::add__(range_a<> const& ___arguments___) 
 	return add_(misunderstanding);
 }
 
-template <typename _1_>
-bool const misunderstanding_a<_1_>::___share___ = []()
+template <typename lake_int8>
+bool const misunderstanding_a<lake_int8>::___share___ = []()
 {
 	auto& shared_shoal = shared();
-	reflection<misunderstanding_a<_1_>>::share(shared_shoal);
+	reflection<misunderstanding_a<lake_int8>>::share(shared_shoal);
 	return shared_shoal;
 }();
 
-template <typename _1_>
-inline misunderstanding_d<_1_> ___misunderstanding_dynamic___(any_a<> const& thing)
+template <typename lake_int8>
+inline misunderstanding_d<lake_int8> ___misunderstanding_dynamic___(any_a<> const& thing)
 {
-	return misunderstanding_d<_1_>{ thing };
+	return misunderstanding_d<lake_int8>{ thing };
 }
 
 } // namespace
