@@ -46,7 +46,7 @@ public:
 		return no().hash();
 	}
 
-	// forward mutator
+	// forward extractor
 	inline any_a<> get_() const
 	{
 		return no();

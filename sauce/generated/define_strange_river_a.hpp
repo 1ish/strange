@@ -12,6 +12,12 @@ template <typename _1_>
 class river_a : public range_a<>
 {
 public:
+	inline forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_begin() const
+	{ assert(___handle___); return ___read___().extract_begin(); }
+
+	inline forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_end() const
+	{ assert(___handle___); return ___read___().extract_end(); }
+
 	inline std :: string to_string()
 	{ assert(___handle___); return ___write___().to_string(); }
 
@@ -248,6 +254,8 @@ public:
 protected:
 	struct ___river_a_handle_base___ : ___range_a_handle_base___
 	{
+		virtual forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_begin() const = 0;
+		virtual forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_end() const = 0;
 		virtual std :: string to_string() = 0;
 		virtual number_data_int8_a<> get_char_() = 0;
 		virtual int8_t get_char() = 0;
@@ -326,6 +334,12 @@ protected:
 		inline ___river_a_handle___(___variadic_tag___, Args&&... args)
 			: ___range_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_begin() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
+
+		virtual inline forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_end() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
 
 		virtual inline std :: string to_string() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
@@ -752,6 +766,12 @@ template <typename _1_>
 class river_d : public range_d<>
 {
 public:
+	inline forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_begin() const
+	{ throw dis("dynamic river_d::extract_begin() not available"); }
+
+	inline forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_end() const
+	{ throw dis("dynamic river_d::extract_end() not available"); }
+
 	inline std :: string to_string()
 	{ throw dis("dynamic river_d::to_string() not available"); }
 

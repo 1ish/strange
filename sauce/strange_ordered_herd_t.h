@@ -54,7 +54,7 @@ class ordered_herd_t : public thing_t<___ego___>
 			return std::hash<void const*>{}(&*_it);
 		}
 
-		// forward mutator
+		// forward extractor
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_ordered_herd_thing._mutex);

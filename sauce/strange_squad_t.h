@@ -285,7 +285,7 @@ class squad_t : public thing_t<___ego___>
 			return _it >= it.extract_it();
 		}
 
-		// forward mutator
+		// forward extractor
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);

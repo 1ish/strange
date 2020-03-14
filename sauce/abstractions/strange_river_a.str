@@ -5,6 +5,9 @@ false &&
 			(	// parent
 				$$<range>[],
 				{	// river input
+					extract_begin : "forward_extractor_data_a<std::istreambuf_iterator<char>> () const",
+					extract_end : "forward_extractor_data_a<std::istreambuf_iterator<char>> () const",
+
 					//TODO to_lake_
 					to_string : "std::string ()", //TODO { return lake_to_string(to_lake_()); }
 

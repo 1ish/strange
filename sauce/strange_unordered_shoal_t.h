@@ -148,12 +148,6 @@ class unordered_shoal_t : public thing_t<___ego___>
 				_it == fast<forward_extractor_data_a<_iterator_>>(thing).extract_it();
 		}
 
-		inline std::size_t hash() const
-		{
-			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
-			return std::hash<void const*>{}(&*_it);
-		}
-
 		inline bool operator==(forward_extractor_data_a<_iterator_> const& it) const
 		{
 			return _it == it.extract_it();
@@ -164,7 +158,13 @@ class unordered_shoal_t : public thing_t<___ego___>
 			return _it != it.extract_it();
 		}
 
-		// forward mutator
+		inline std::size_t hash() const
+		{
+			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
+			return std::hash<void const*>{}(&*_it);
+		}
+
+		// forward extractor
 		inline any_a<> get_() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);

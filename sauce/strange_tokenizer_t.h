@@ -7,18 +7,18 @@ namespace strange
 template <typename ___ego___ = range_a<>>
 class tokenizer_t : public thing_t<___ego___>
 {
-	template <typename _mutator_, typename ___ego_it___ = forward_extractor_data_a<_mutator_>>
+	template <typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<extractor_t<_mutator_>>;
+		using over = thing_o<extractor_t<_iterator_>>;
 
 		// construction
 		template <typename F>
-		static inline forward_extractor_data_a<_mutator_> create(river_a<> const& river, F&& it)
+		static inline forward_extractor_data_a<_iterator_> create(river_a<> const& river, F&& it)
 		{
-			return forward_extractor_data_a<_mutator_>::template create<over>(extractor_t<_mutator_>(river, std::forward<F>(it)));
+			return forward_extractor_data_a<_iterator_>::template create<over>(extractor_t<_iterator_>(river, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -43,7 +43,7 @@ class tokenizer_t : public thing_t<___ego___>
 			return std::hash<void const*>{}(&*_it);
 		}
 
-		// forward mutator
+		// forward extractor
 		inline any_a<> get_() const
 		{
 			return _token;
@@ -80,12 +80,12 @@ class tokenizer_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline _mutator_ const& extract_it() const
+		inline _iterator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _mutator_& mutate_it()
+		inline _iterator_& mutate_it()
 		{
 			return _it;
 		}
@@ -436,7 +436,7 @@ class tokenizer_t : public thing_t<___ego___>
 		}
 
 	protected:
-		_mutator_ _it;
+		_iterator_ _it;
 		river_a<> _river;
 		bool _end;
 		int64_t _line;
