@@ -12,6 +12,36 @@ template <typename _1_>
 class ordered_shoal_a : public shoal_a<>
 {
 public:
+	inline bool operator==(ordered_shoal_a < > const & shoal ) const
+	{ assert(___handle___); return ___read___().operator==(shoal); }
+
+	inline bool operator!=(ordered_shoal_a < > const & shoal ) const
+	{ assert(___handle___); return ___read___().operator!=(shoal); }
+
+	inline bool operator<(ordered_shoal_a < > const & shoal ) const
+	{ assert(___handle___); return ___read___().operator<(shoal); }
+
+	inline bool operator>(ordered_shoal_a < > const & shoal ) const
+	{ assert(___handle___); return ___read___().operator>(shoal); }
+
+	inline bool operator<=(ordered_shoal_a < > const & shoal ) const
+	{ assert(___handle___); return ___read___().operator<=(shoal); }
+
+	inline bool operator>=(ordered_shoal_a < > const & shoal ) const
+	{ assert(___handle___); return ___read___().operator>=(shoal); }
+
+	inline bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_begin() const
+	{ assert(___handle___); return ___read___().extract_begin(); }
+
+	inline bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_end() const
+	{ assert(___handle___); return ___read___().extract_end(); }
+
+	inline bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_begin()
+	{ assert(___handle___); return ___write___().mutate_begin(); }
+
+	inline bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_end()
+	{ assert(___handle___); return ___write___().mutate_end(); }
+
 	inline std :: map < any_a < > , any_a < > > const & extract_map() const
 	{ assert(___handle___); return ___read___().extract_map(); }
 
@@ -21,6 +51,16 @@ public:
 protected:
 	struct ___ordered_shoal_a_handle_base___ : ___shoal_a_handle_base___
 	{
+		virtual bool operator==(ordered_shoal_a < > const & shoal ) const = 0;
+		virtual bool operator!=(ordered_shoal_a < > const & shoal ) const = 0;
+		virtual bool operator<(ordered_shoal_a < > const & shoal ) const = 0;
+		virtual bool operator>(ordered_shoal_a < > const & shoal ) const = 0;
+		virtual bool operator<=(ordered_shoal_a < > const & shoal ) const = 0;
+		virtual bool operator>=(ordered_shoal_a < > const & shoal ) const = 0;
+		virtual bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_begin() const = 0;
+		virtual bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_end() const = 0;
+		virtual bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_begin() = 0;
+		virtual bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_end() = 0;
 		virtual std :: map < any_a < > , any_a < > > const & extract_map() const = 0;
 		virtual std :: map < any_a < > , any_a < > > & mutate_map() = 0;
 	};
@@ -42,6 +82,36 @@ protected:
 		inline ___ordered_shoal_a_handle___(___variadic_tag___, Args&&... args)
 			: ___shoal_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline bool operator==(ordered_shoal_a < > const & shoal ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(shoal); }
+
+		virtual inline bool operator!=(ordered_shoal_a < > const & shoal ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(shoal); }
+
+		virtual inline bool operator<(ordered_shoal_a < > const & shoal ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(shoal); }
+
+		virtual inline bool operator>(ordered_shoal_a < > const & shoal ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(shoal); }
+
+		virtual inline bool operator<=(ordered_shoal_a < > const & shoal ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(shoal); }
+
+		virtual inline bool operator>=(ordered_shoal_a < > const & shoal ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(shoal); }
+
+		virtual inline bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_begin() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
+
+		virtual inline bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_end() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
+
+		virtual inline bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_begin() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
+
+		virtual inline bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_end() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
 
 		virtual inline std :: map < any_a < > , any_a < > > const & extract_map() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_map(); }
@@ -269,6 +339,36 @@ template <typename _1_>
 class ordered_shoal_d : public shoal_d<>
 {
 public:
+	inline bool operator==(ordered_shoal_a < > const & shoal ) const
+	{ throw dis("dynamic ordered_shoal_d::operator==(shoal) not available"); }
+
+	inline bool operator!=(ordered_shoal_a < > const & shoal ) const
+	{ throw dis("dynamic ordered_shoal_d::operator!=(shoal) not available"); }
+
+	inline bool operator<(ordered_shoal_a < > const & shoal ) const
+	{ throw dis("dynamic ordered_shoal_d::operator<(shoal) not available"); }
+
+	inline bool operator>(ordered_shoal_a < > const & shoal ) const
+	{ throw dis("dynamic ordered_shoal_d::operator>(shoal) not available"); }
+
+	inline bool operator<=(ordered_shoal_a < > const & shoal ) const
+	{ throw dis("dynamic ordered_shoal_d::operator<=(shoal) not available"); }
+
+	inline bool operator>=(ordered_shoal_a < > const & shoal ) const
+	{ throw dis("dynamic ordered_shoal_d::operator>=(shoal) not available"); }
+
+	inline bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_begin() const
+	{ throw dis("dynamic ordered_shoal_d::extract_begin() not available"); }
+
+	inline bidirectional_extractor_data_a < typename std :: map < any_a < > , any_a < > > :: const_iterator > extract_end() const
+	{ throw dis("dynamic ordered_shoal_d::extract_end() not available"); }
+
+	inline bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_begin()
+	{ throw dis("dynamic ordered_shoal_d::mutate_begin() not available"); }
+
+	inline bidirectional_mutator_data_a < typename std :: map < any_a < > , any_a < > > :: iterator > mutate_end()
+	{ throw dis("dynamic ordered_shoal_d::mutate_end() not available"); }
+
 	inline std :: map < any_a < > , any_a < > > const & extract_map() const
 	{ throw dis("dynamic ordered_shoal_d::extract_map() not available"); }
 

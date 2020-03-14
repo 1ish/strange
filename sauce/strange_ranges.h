@@ -132,6 +132,26 @@ namespace strange
 	{
 		return herd.extract_end();
 	}
+
+	inline bidirectional_extractor_data_a<typename std::map<any_a<>, any_a<>>::const_iterator> begin(ordered_shoal_a<> const& shoal)
+	{
+		return shoal.extract_begin();
+	}
+
+	inline bidirectional_extractor_data_a<typename std::map<any_a<>, any_a<>>::const_iterator> end(ordered_shoal_a<> const& shoal)
+	{
+		return shoal.extract_end();
+	}
+
+	inline bidirectional_mutator_data_a<typename std::map<any_a<>, any_a<>>::iterator> begin(ordered_shoal_a<>& shoal)
+	{
+		return shoal.mutate_begin();
+	}
+
+	inline bidirectional_mutator_data_a<typename std::map<any_a<>, any_a<>>::iterator> end(ordered_shoal_a<>& shoal)
+	{
+		return shoal.mutate_end();
+	}
 }
 
 #endif

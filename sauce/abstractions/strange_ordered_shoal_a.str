@@ -5,6 +5,18 @@ false &&
 			(	// parent
 				$$<shoal>[],
 				{	// ordered shoal
+					'operator==' : "bool (ordered_shoal_a<> const& shoal) const",
+					'operator!=' : "bool (ordered_shoal_a<> const& shoal) const",
+					'operator<' : "bool (ordered_shoal_a<> const& shoal) const",
+					'operator>' : "bool (ordered_shoal_a<> const& shoal) const",
+					'operator<=' : "bool (ordered_shoal_a<> const& shoal) const",
+					'operator>=' : "bool (ordered_shoal_a<> const& shoal) const",
+
+					extract_begin : "bidirectional_extractor_data_a<typename std::map<any_a<>, any_a<>>::const_iterator> () const",
+					extract_end : "bidirectional_extractor_data_a<typename std::map<any_a<>, any_a<>>::const_iterator> () const",
+					mutate_begin : "bidirectional_mutator_data_a<typename std::map<any_a<>, any_a<>>::iterator> ()",
+					mutate_end : "bidirectional_mutator_data_a<typename std::map<any_a<>, any_a<>>::iterator> ()",
+
 					extract_map : "std::map<any_a<>, any_a<>> const& () const",
 					mutate_map : "std::map<any_a<>, any_a<>>& ()",
 				}
