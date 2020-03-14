@@ -33,6 +33,9 @@ public:
 	inline symbol_a<> name_() const
 	{ assert(___handle___); return ___read___().name_(); }
 
+	inline std :: string name() const
+	{ assert(___handle___); return ___read___().name(); }
+
 	inline any_a<> dimensions__(range_a<> const& ___arguments___) const;
 
 	inline flock_a<> dimensions_() const
@@ -64,6 +67,7 @@ protected:
 		virtual number_data_int64_a<> order_() const = 0;
 		virtual int64_t order() const = 0;
 		virtual symbol_a<> name_() const = 0;
+		virtual std :: string name() const = 0;
 		virtual flock_a<> dimensions_() const = 0;
 		virtual flock_a<> parameters_() const = 0;
 		virtual cat_a<> result_() const = 0;
@@ -103,6 +107,9 @@ protected:
 
 		virtual inline symbol_a<> name_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.name_(); }
+
+		virtual inline std :: string name() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.name(); }
 
 		virtual inline flock_a<> dimensions_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.dimensions_(); }
@@ -417,6 +424,9 @@ public:
 		}
 		return cast<symbol_a<>>(variadic_operate(op, *const_cast<cat_d*>(this)));
 	}
+
+	inline std :: string name() const
+	{ return name_().to_string(); }
 
 	inline any_a<> dimensions__(range_a<> const& arguments) const
 	{

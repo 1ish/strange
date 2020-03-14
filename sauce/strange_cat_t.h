@@ -151,6 +151,11 @@ public:
 		return _name;
 	}
 
+	inline std::string name() const
+	{
+		return _name.to_string();
+	}
+
 	inline flock_a<> dimensions_() const
 	{
 		return _dimensions;

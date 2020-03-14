@@ -12,7 +12,7 @@ false &&
 					order : "int64_t () const { return order_().to_int_64(); }",
 
 					name_ :# (<symbol>),
-					//TODO name : "std::string () const { return name_().to_string(); }",
+					name : "std::string () const { return name_().to_string(); }",
 
 					dimensions_ :# (<flock>),
 
