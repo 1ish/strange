@@ -34,8 +34,18 @@ class tokenizer_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			return thing.type_() == type_() &&
-				static_cast<extractor_t const&>(thing.extract_thing())._end == _end;
+			return type_() == thing.type_() &&
+				_end == static_cast<extractor_t const&>(thing.extract_thing())._end;
+		}
+
+		inline bool operator==(forward_extractor_data_a<_iterator_> const& it) const
+		{
+			return same_(it);
+		}
+
+		inline bool operator!=(forward_extractor_data_a<_iterator_> const& it) const
+		{
+			return same_(it);
 		}
 
 		inline std::size_t hash() const

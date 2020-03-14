@@ -6,6 +6,9 @@ false &&
 			(	// parent
 				$$<bidirectional_extractor>[],
 				{	// bidirectional extractor data
+					'operator==' : "bool (bidirectional_extractor_data_a<_1_> const& it) const",
+					'operator!=' : "bool (bidirectional_extractor_data_a<_1_> const& it) const",
+
 					extract_it : "_1_ const& () const",
 					mutate_it : "_1_& ()",
 				}

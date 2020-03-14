@@ -6,6 +6,13 @@ false &&
 			(	// parent
 				$$<random_access_mutator>[],
 				{	// random access mutator data
+					'operator==' : "bool (random_access_mutator_data_a<_1_> const& it) const",
+					'operator!=' : "bool (random_access_mutator_data_a<_1_> const& it) const",
+					'operator<' : "bool (random_access_mutator_data_a<_1_> const& it) const",
+					'operator>' : "bool (random_access_mutator_data_a<_1_> const& it) const",
+					'operator<=' : "bool (random_access_mutator_data_a<_1_> const& it) const",
+					'operator>=' : "bool (random_access_mutator_data_a<_1_> const& it) const",
+
 					extract_it : "_1_ const& () const",
 					mutate_it : "_1_& ()",
 				}

@@ -12,6 +12,24 @@ template <typename _1_>
 class random_access_mutator_data_a : public random_access_mutator_a<>
 {
 public:
+	inline bool operator==(random_access_mutator_data_a < _1_ > const & it ) const
+	{ assert(___handle___); return ___read___().operator==(it); }
+
+	inline bool operator!=(random_access_mutator_data_a < _1_ > const & it ) const
+	{ assert(___handle___); return ___read___().operator!=(it); }
+
+	inline bool operator<(random_access_mutator_data_a < _1_ > const & it ) const
+	{ assert(___handle___); return ___read___().operator<(it); }
+
+	inline bool operator>(random_access_mutator_data_a < _1_ > const & it ) const
+	{ assert(___handle___); return ___read___().operator>(it); }
+
+	inline bool operator<=(random_access_mutator_data_a < _1_ > const & it ) const
+	{ assert(___handle___); return ___read___().operator<=(it); }
+
+	inline bool operator>=(random_access_mutator_data_a < _1_ > const & it ) const
+	{ assert(___handle___); return ___read___().operator>=(it); }
+
 	inline _1_ const & extract_it() const
 	{ assert(___handle___); return ___read___().extract_it(); }
 
@@ -21,6 +39,12 @@ public:
 protected:
 	struct ___random_access_mutator_data_a_handle_base___ : ___random_access_mutator_a_handle_base___
 	{
+		virtual bool operator==(random_access_mutator_data_a < _1_ > const & it ) const = 0;
+		virtual bool operator!=(random_access_mutator_data_a < _1_ > const & it ) const = 0;
+		virtual bool operator<(random_access_mutator_data_a < _1_ > const & it ) const = 0;
+		virtual bool operator>(random_access_mutator_data_a < _1_ > const & it ) const = 0;
+		virtual bool operator<=(random_access_mutator_data_a < _1_ > const & it ) const = 0;
+		virtual bool operator>=(random_access_mutator_data_a < _1_ > const & it ) const = 0;
 		virtual _1_ const & extract_it() const = 0;
 		virtual _1_ & mutate_it() = 0;
 	};
@@ -42,6 +66,24 @@ protected:
 		inline ___random_access_mutator_data_a_handle___(___variadic_tag___, Args&&... args)
 			: ___random_access_mutator_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline bool operator==(random_access_mutator_data_a < _1_ > const & it ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(it); }
+
+		virtual inline bool operator!=(random_access_mutator_data_a < _1_ > const & it ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(it); }
+
+		virtual inline bool operator<(random_access_mutator_data_a < _1_ > const & it ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<(it); }
+
+		virtual inline bool operator>(random_access_mutator_data_a < _1_ > const & it ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>(it); }
+
+		virtual inline bool operator<=(random_access_mutator_data_a < _1_ > const & it ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator<=(it); }
+
+		virtual inline bool operator>=(random_access_mutator_data_a < _1_ > const & it ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator>=(it); }
 
 		virtual inline _1_ const & extract_it() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_it(); }
@@ -269,6 +311,24 @@ template <typename _1_>
 class random_access_mutator_data_d : public random_access_mutator_d<>
 {
 public:
+	inline bool operator==(random_access_mutator_data_a < _1_ > const & it ) const
+	{ throw dis("dynamic random_access_mutator_data_d::operator==(it) not available"); }
+
+	inline bool operator!=(random_access_mutator_data_a < _1_ > const & it ) const
+	{ throw dis("dynamic random_access_mutator_data_d::operator!=(it) not available"); }
+
+	inline bool operator<(random_access_mutator_data_a < _1_ > const & it ) const
+	{ throw dis("dynamic random_access_mutator_data_d::operator<(it) not available"); }
+
+	inline bool operator>(random_access_mutator_data_a < _1_ > const & it ) const
+	{ throw dis("dynamic random_access_mutator_data_d::operator>(it) not available"); }
+
+	inline bool operator<=(random_access_mutator_data_a < _1_ > const & it ) const
+	{ throw dis("dynamic random_access_mutator_data_d::operator<=(it) not available"); }
+
+	inline bool operator>=(random_access_mutator_data_a < _1_ > const & it ) const
+	{ throw dis("dynamic random_access_mutator_data_d::operator>=(it) not available"); }
+
 	inline _1_ const & extract_it() const
 	{ throw dis("dynamic random_access_mutator_data_d::extract_it() not available"); }
 

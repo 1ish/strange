@@ -12,6 +12,12 @@ template <typename _1_>
 class forward_extractor_data_a : public forward_extractor_a<>
 {
 public:
+	inline bool operator==(forward_extractor_data_a < _1_ > const & it ) const
+	{ assert(___handle___); return ___read___().operator==(it); }
+
+	inline bool operator!=(forward_extractor_data_a < _1_ > const & it ) const
+	{ assert(___handle___); return ___read___().operator!=(it); }
+
 	inline _1_ const & extract_it() const
 	{ assert(___handle___); return ___read___().extract_it(); }
 
@@ -21,6 +27,8 @@ public:
 protected:
 	struct ___forward_extractor_data_a_handle_base___ : ___forward_extractor_a_handle_base___
 	{
+		virtual bool operator==(forward_extractor_data_a < _1_ > const & it ) const = 0;
+		virtual bool operator!=(forward_extractor_data_a < _1_ > const & it ) const = 0;
 		virtual _1_ const & extract_it() const = 0;
 		virtual _1_ & mutate_it() = 0;
 	};
@@ -42,6 +50,12 @@ protected:
 		inline ___forward_extractor_data_a_handle___(___variadic_tag___, Args&&... args)
 			: ___forward_extractor_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline bool operator==(forward_extractor_data_a < _1_ > const & it ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(it); }
+
+		virtual inline bool operator!=(forward_extractor_data_a < _1_ > const & it ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(it); }
 
 		virtual inline _1_ const & extract_it() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_it(); }
@@ -269,6 +283,12 @@ template <typename _1_>
 class forward_extractor_data_d : public forward_extractor_d<>
 {
 public:
+	inline bool operator==(forward_extractor_data_a < _1_ > const & it ) const
+	{ throw dis("dynamic forward_extractor_data_d::operator==(it) not available"); }
+
+	inline bool operator!=(forward_extractor_data_a < _1_ > const & it ) const
+	{ throw dis("dynamic forward_extractor_data_d::operator!=(it) not available"); }
+
 	inline _1_ const & extract_it() const
 	{ throw dis("dynamic forward_extractor_data_d::extract_it() not available"); }
 
