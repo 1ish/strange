@@ -21,7 +21,7 @@ false &&
 					symbol : "std::string () const { return symbol_().to_string(); }",
 
 					literal_ :# (<>),
-					//TODO literal : "bool () const { return literal_(); }",
+					literal : "bool () const { return literal_(); }",
 
 					precedence_ :# (<number_data_int64>),
 					precedence : "int64_t () const { return precedence_().extract_primitive(); }",

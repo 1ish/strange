@@ -57,6 +57,9 @@ public:
 	inline any_a<> literal_() const
 	{ assert(___handle___); return ___read___().literal_(); }
 
+	inline bool literal() const
+	{ assert(___handle___); return ___read___().literal(); }
+
 	inline any_a<> precedence__(range_a<> const& ___arguments___) const;
 
 	inline number_data_int64_a<> precedence_() const
@@ -87,6 +90,7 @@ protected:
 		virtual symbol_a<> symbol_() const = 0;
 		virtual std :: string symbol() const = 0;
 		virtual any_a<> literal_() const = 0;
+		virtual bool literal() const = 0;
 		virtual number_data_int64_a<> precedence_() const = 0;
 		virtual int64_t precedence() const = 0;
 		virtual misunderstanding_a<> report_() const = 0;
@@ -143,6 +147,9 @@ protected:
 
 		virtual inline any_a<> literal_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.literal_(); }
+
+		virtual inline bool literal() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.literal(); }
 
 		virtual inline number_data_int64_a<> precedence_() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.precedence_(); }
@@ -530,6 +537,9 @@ public:
 		}
 		return cast<any_a<>>(variadic_operate(op, *const_cast<token_d*>(this)));
 	}
+
+	inline bool literal() const
+	{ return literal_(); }
 
 	inline any_a<> precedence__(range_a<> const& arguments) const
 	{

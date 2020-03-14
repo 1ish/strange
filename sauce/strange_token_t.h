@@ -330,6 +330,11 @@ public:
 		return _literal;
 	}
 
+	inline bool literal() const
+	{
+		return bool{ _literal };
+	}
+
 	inline number_data_a<int64_t> precedence_() const
 	{
 		return _precedence;
