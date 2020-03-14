@@ -172,6 +172,16 @@ namespace strange
 	{
 		return squad.mutate_end();
 	}
+
+	inline forward_extractor_data_a<typename std::unordered_set<any_a<>>::const_iterator> begin(unordered_herd_a<> const& herd)
+	{
+		return herd.extract_begin();
+	}
+
+	inline forward_extractor_data_a<typename std::unordered_set<any_a<>>::const_iterator> end(unordered_herd_a<> const& herd)
+	{
+		return herd.extract_end();
+	}
 }
 
 #endif
