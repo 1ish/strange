@@ -22,7 +22,7 @@ public:
 		{
 			throw dis("<strange::operation>::animate passed non-shoal conception");
 		}
-		return animate_(cast<shoal_a<>>(conception));
+		return animate_(fast<shoal_a<>>(conception));
 	}
 
 	static inline operation_a<> animate_(shoal_a<> const& conception)
@@ -54,7 +54,7 @@ public:
 			{
 				throw dis("<strange::operation>::type returned non-symbol");
 			}
-			return cast<symbol_a<>>(result);
+			return fast<symbol_a<>>(result);
 		}
 		static symbol_a<> TYPE = sym("<strange::operation>");
 		return TYPE;
@@ -84,7 +84,7 @@ public:
 			{
 				throw dis("<strange::operation>::shared returned non-unordered-shoal");
 			}
-			return cast<unordered_shoal_a<>>(result);
+			return fast<unordered_shoal_a<>>(result);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
@@ -108,7 +108,7 @@ public:
 		auto const oper = any_c<___ego___>::_operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
-			return cast<operation_a<>>(oper).pure_();
+			return fast<operation_a<>>(oper).pure_();
 		}
 		return no();
 	}
@@ -124,7 +124,7 @@ public:
 		auto const oper = any_c<___ego___>::_operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
-			return cast<operation_a<>>(oper).pure_();
+			return fast<operation_a<>>(oper).pure_();
 		}
 		return no();
 	}
@@ -140,7 +140,7 @@ public:
 		auto const oper = any_c<___ego___>::_operations.at_string("operate");
 		if (check<operation_a<>>(oper))
 		{
-			return cast<operation_a<>>(oper).pure();
+			return fast<operation_a<>>(oper).pure();
 		}
 		return false;
 	}
@@ -173,7 +173,7 @@ public:
 			{
 				throw dis("<strange::operation>::names returned non-flock");
 			}
-			return cast<flock_a<>>(result);
+			return fast<flock_a<>>(result);
 		}
 		return flock_t<>::create_();
 	}

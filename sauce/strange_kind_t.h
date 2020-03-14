@@ -27,7 +27,7 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order));
+			return create_(fast<number_data_a<int64_t>>(order));
 		}
 		any_a<> name = *it;
 		if (!check<symbol_a<>>(name))
@@ -36,7 +36,7 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name));
+			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name));
 		}
 		any_a<> dimensions = *it;
 		if (!check<flock_a<>>(dimensions))
@@ -45,7 +45,7 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions));
+			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions));
 		}
 		any_a<> aspects = *it;
 		if (!check<flock_a<>>(aspects))
@@ -54,7 +54,7 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects));
+			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects));
 		}
 		any_a<> parameters = *it;
 		if (!check<flock_a<>>(parameters))
@@ -63,7 +63,7 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters));
+			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters));
 		}
 		any_a<> result = *it;
 		if (!check<symbol_a<>>(result))
@@ -72,19 +72,19 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
+			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters), fast<symbol_a<>>(result));
 		}
 		any_a<> fixed = *it;
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), fixed);
+			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters), fast<symbol_a<>>(result), fixed);
 		}
 		any_a<> reference = *it;
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), fixed, reference);
+			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters), fast<symbol_a<>>(result), fixed, reference);
 		}
-		return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), fixed, reference, *it);
+		return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters), fast<symbol_a<>>(result), fixed, reference, *it);
 	}
 
 	static inline kind_a<> create_()
@@ -130,7 +130,7 @@ public:
 		{
 			return cat_t<___ego___>::same_(thing);
 		}
-		auto const kind = cast<kind_a<>>(thing);
+		auto const kind = fast<kind_a<>>(thing);
 		if (cat_t<___ego___>::_symbolic != kind.symbolic() || cat_t<___ego___>::_hash != kind.hash())
 		{
 			return false;
@@ -271,7 +271,7 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats)
 		{
 			throw dis("strange::kinds_from_cats passed non-cat");
 		}
-		result.insert_thing(kind_from_cat(cast<cat_a<>>(cat)));
+		result.insert_thing(kind_from_cat(fast<cat_a<>>(cat)));
 	}
 	return result;
 }
@@ -285,7 +285,7 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 		{
 			throw dis("strange::kinds_from_cats passed non-cat");
 		}
-		result.insert_thing(kind_from_cat(cast<cat_a<>>(cat), aspects, fixed, reference, optional));
+		result.insert_thing(kind_from_cat(fast<cat_a<>>(cat), aspects, fixed, reference, optional));
 	}
 	return result;
 }
@@ -299,7 +299,7 @@ inline unordered_herd_a<> kinds_from_cats(unordered_herd_a<> const& cats, flock_
 		{
 			throw dis("strange::kinds_from_cats passed non-cat");
 		}
-		result.insert_thing(kind_from_cat(cast<cat_a<>>(cat), aspects));
+		result.insert_thing(kind_from_cat(fast<cat_a<>>(cat), aspects));
 	}
 	return result;
 }
@@ -318,7 +318,7 @@ inline unordered_herd_a<> kinds_to_cats(unordered_herd_a<> const& kinds)
 		{
 			throw dis("strange::kinds_to_cats passed non-kind");
 		}
-		result.insert_thing(kind_to_cat(cast<kind_a<>>(kind)));
+		result.insert_thing(kind_to_cat(fast<kind_a<>>(kind)));
 	}
 	return result;
 }

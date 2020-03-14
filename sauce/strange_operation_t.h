@@ -59,7 +59,7 @@ protected:
 		{
 			throw dis("strange::operation::kind_names_params passed non-kind result");
 		}
-		auto kind_result = cast<kind_a<>>(kind);
+		auto kind_result = fast<kind_a<>>(kind);
 		auto kind_params = flock_create();
 		while (++it != params.extract_end_())
 		{

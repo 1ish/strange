@@ -64,19 +64,19 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(tag), cast<symbol_a<>>(symbol));
+			return create_(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(tag), fast<symbol_a<>>(symbol));
 		}
 		any_a<> literal = *it;
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(tag), cast<symbol_a<>>(symbol), literal);
+			return create_(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(tag), fast<symbol_a<>>(symbol), literal);
 		}
 		any_a<> precedence = *it;
 		if (!check<number_data_a<int64_t>>(precedence))
 		{
 			throw dis("strange::token::create passed non-int-64 precedence");
 		}
-		return create_(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(tag), cast<symbol_a<>>(symbol), literal, cast<number_data_a<int64_t>>(precedence));
+		return create_(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(tag), fast<symbol_a<>>(symbol), literal, fast<number_data_a<int64_t>>(precedence));
 	}
 
 	static inline token_a<> create_(symbol_a<> const& filename, number_data_a<int64_t> const& line, number_data_a<int64_t> const& position, symbol_a<> const& tag, symbol_a<> const& symbol)
@@ -135,14 +135,14 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return member(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(symbol), number_int_64_t<>::create(-1));
+			return member(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(symbol), number_int_64_t<>::create(-1));
 		}
 		auto const precedence = *it;
 		if (!check<number_data_a<int64_t>>(precedence))
 		{
 			throw dis("strange::token::create_" + tag + " passed non-int-64 precedence");
 		}
-		return member(cast<symbol_a<>>(filename), cast<number_data_a<int64_t>>(line), cast<number_data_a<int64_t>>(position), cast<symbol_a<>>(symbol), cast<number_data_a<int64_t>>(precedence));
+		return member(fast<symbol_a<>>(filename), fast<number_data_a<int64_t>>(line), fast<number_data_a<int64_t>>(position), fast<symbol_a<>>(symbol), fast<number_data_a<int64_t>>(precedence));
 	}
 
 	static inline any_a<> create_symbol__(range_a<> const& range)

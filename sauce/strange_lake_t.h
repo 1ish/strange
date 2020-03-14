@@ -116,7 +116,7 @@ class lake_t : public thing_t<___ego___>
 				throw dis("strange::lake::mutator set passed non-number");
 			}
 			typename concurrent_u<_concurrent_>::write_lock lock(_lake_thing._mutex);
-			*_it = number_u<_primitive_>::from_number(cast<number_a<>>(thing));
+			*_it = number_u<_primitive_>::from_number(fast<number_a<>>(thing));
 			return thing;
 		}
 
@@ -595,7 +595,7 @@ public:
 	// collection
 	inline bool has(any_a<> const& key) const
 	{
-		return check<number_a<>>(key) && has_index(cast<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && has_index(fast<number_a<>>(key).to_int_64());
 	}
 
 	inline bool has_index(int64_t index) const
@@ -607,7 +607,7 @@ public:
 	{
 		if (check<number_a<>>(key))
 		{
-			return at_index(cast<number_a<>>(key).to_int_64());
+			return at_index(fast<number_a<>>(key).to_int_64());
 		}
 		return at_index(-1);
 	}
@@ -631,7 +631,7 @@ public:
 	{
 		if (check<number_a<>>(key))
 		{
-			update_index(cast<number_a<>>(key).to_int_64(), value);
+			update_index(fast<number_a<>>(key).to_int_64(), value);
 		}
 	}
 
@@ -641,7 +641,7 @@ public:
 		{
 			throw dis("strange::lake::update passed non-number value");
 		}
-		return pupdate(index, number_u<_primitive_>::from_number(cast<number_a<>>(value)));
+		return pupdate(index, number_u<_primitive_>::from_number(fast<number_a<>>(value)));
 	}
 
 	inline void pupdate(int64_t index, _primitive_ number)
@@ -667,7 +667,7 @@ public:
 
 	inline bool insert(any_a<> const& key, any_a<> const& value)
 	{
-		return check<number_a<>>(key) && insert_index(cast<number_a<>>(key).to_int_64(), value);
+		return check<number_a<>>(key) && insert_index(fast<number_a<>>(key).to_int_64(), value);
 	}
 
 	inline bool insert_index(int64_t index, any_a<> const& value)
@@ -676,7 +676,7 @@ public:
 		{
 			throw dis("strange::lake::insert passed non-number value");
 		}
-		return pinsert(index, number_u<_primitive_>::from_number(cast<number_a<>>(value)));
+		return pinsert(index, number_u<_primitive_>::from_number(fast<number_a<>>(value)));
 	}
 
 	inline bool pinsert(int64_t index, _primitive_ number)
@@ -708,7 +708,7 @@ public:
 
 	inline bool erase(any_a<> const& key)
 	{
-		return check<number_a<>>(key) && erase_index(cast<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && erase_index(fast<number_a<>>(key).to_int_64());
 	}
 
 	inline bool erase_index(int64_t index)
@@ -766,7 +766,7 @@ public:
 		{
 			throw dis("strange::lake::push_back passed non-number");
 		}
-		push_back(number_u<_primitive_>::from_number(cast<number_a<>>(thing)));
+		push_back(number_u<_primitive_>::from_number(fast<number_a<>>(thing)));
 	}
 
 	inline void push_back(_primitive_ number)

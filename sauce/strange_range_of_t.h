@@ -33,7 +33,7 @@ public:
 		{
 			throw dis("strange::range_of::create passed non-mutator end");
 		}
-		return create_(cast<forward_extractor_a<>>(begin), cast<forward_extractor_a<>>(end));
+		return create_(fast<forward_extractor_a<>>(begin), fast<forward_extractor_a<>>(end));
 	}
 
 	static inline range_of_a<_element_> create_()

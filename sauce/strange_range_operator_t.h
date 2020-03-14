@@ -139,17 +139,17 @@ public:
 		{
 			throw dis("strange::range_operator::create passed short range");
 		}
-		any_a<> thing_ref = cast_dup(*it);
+		any_a<> thing_ref = fast_dup(*it);
 		if (++it == range.extract_end_())
 		{
 			throw dis("strange::range_operator::create passed short range");
 		}
-		any_a<> range_ref = cast_dup(*it);
+		any_a<> range_ref = fast_dup(*it);
 		if (!check<range_a<>>(range_ref))
 		{
 			throw dis("strange::range_operator::create passed non-range range ref");
 		}
-		return create_(cast<range_a<>>(the_range), thing_ref, fast_dup<range_a<>>(range_ref));
+		return create_(fast<range_a<>>(the_range), thing_ref, fast_dup<range_a<>>(range_ref));
 	}
 
 	static inline range_a<> create_(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref)

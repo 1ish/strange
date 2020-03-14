@@ -31,7 +31,7 @@ public:
 	inline any_a<> operate(any_a<>& thing, range_a<> const& range) const
 	{
 		auto local_shoal = check<unordered_shoal_a<>>(_aspects)
-			? cast<unordered_shoal_a<>>(_aspects)
+			? fast<unordered_shoal_a<>>(_aspects)
 			: unordered_shoal_t<>::create_();
 		auto& local = local_shoal.mutate_map();
 		local.emplace(sym("$"), _shared);
@@ -59,7 +59,7 @@ public:
 			{
 				try
 				{
-					any_kind = cast<expression_a<>>(any_kind).operate(local_shoal, range);
+					any_kind = fast<expression_a<>>(any_kind).operate(local_shoal, range);
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
@@ -70,13 +70,13 @@ public:
 			{
 				throw dis(_token.report() + "strange::extraction::operate non-kind parameter kind");
 			}
-			auto const kind = cast<kind_a<>>(any_kind);
+			auto const kind = fast<kind_a<>>(any_kind);
 
 			if (ait != range.extract_end_())
 			{
 				if (kind.fixed() || kind.reference())
 				{
-					auto const argument = cast_dup(*ait);
+					auto const argument = fast_dup(*ait);
 					++ait;
 					if (!argument.kinds_().has_(kind))
 					{

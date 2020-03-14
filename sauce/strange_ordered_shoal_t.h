@@ -70,7 +70,7 @@ class ordered_shoal_t : public thing_t<___ego___>
 				throw dis("strange::ordered_shoal::mutator set passed non-flock");
 			}
 			typename concurrent_u<_concurrent_>::write_lock lock(_ordered_shoal_thing._mutex);
-			return _it->second = cast<flock_a<>>(thing).at_index(1);
+			return _it->second = fast<flock_a<>>(thing).at_index(1);
 		}
 
 		inline any_a<>* operator->() const
@@ -589,7 +589,7 @@ public:
 				{
 					throw dis("strange::ordered_shoal self_assign passed range containing non-flock");
 				}
-				flock_a<> pair = cast<flock_a<>>(thing);
+				flock_a<> pair = fast<flock_a<>>(thing);
 				if (pair.size() != 2)
 				{
 					throw dis("strange::ordered_shoal self_assign passed range containing flock of wrong size");

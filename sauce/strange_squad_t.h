@@ -589,7 +589,7 @@ public:
 	// collection
 	inline bool has(any_a<> const& key) const
 	{
-		return check<number_a<>>(key) && has_index(cast<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && has_index(fast<number_a<>>(key).to_int_64());
 	}
 
 	inline bool has_index(int64_t index) const
@@ -601,7 +601,7 @@ public:
 	{
 		if (check<number_a<>>(key))
 		{
-			return at_index(cast<number_a<>>(key).to_int_64());
+			return at_index(fast<number_a<>>(key).to_int_64());
 		}
 		return mis("strange::squad::at index is not a number");
 	}
@@ -620,7 +620,7 @@ public:
 	{
 		if (check<number_a<>>(key))
 		{
-			update_index(cast<number_a<>>(key).to_int_64(), value);
+			update_index(fast<number_a<>>(key).to_int_64(), value);
 		}
 	}
 
@@ -647,7 +647,7 @@ public:
 
 	inline bool insert(any_a<> const& key, any_a<> const& value)
 	{
-		return check<number_a<>>(key) && insert_index(cast<number_a<>>(key).to_int_64(), value);
+		return check<number_a<>>(key) && insert_index(fast<number_a<>>(key).to_int_64(), value);
 	}
 
 	inline bool insert_index(int64_t index, any_a<> const& value)
@@ -679,7 +679,7 @@ public:
 
 	inline bool erase(any_a<> const& key)
 	{
-		return check<number_a<>>(key) && erase_index(cast<number_a<>>(key).to_int_64());
+		return check<number_a<>>(key) && erase_index(fast<number_a<>>(key).to_int_64());
 	}
 
 	inline bool erase_index(int64_t index)

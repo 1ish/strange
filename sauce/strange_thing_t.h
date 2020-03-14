@@ -71,7 +71,7 @@ public:
 		{
 			throw dis("strange::thing::invoke passed empty range");
 		}
-		any_a<> thing = cast_dup(*it);
+		any_a<> thing = fast_dup(*it);
 		if (++it == range.extract_end_())
 		{
 			throw dis("strange::thing::invoke passed short range");
@@ -108,7 +108,7 @@ public:
 		{
 			throw dis("strange::thing::operate passed empty range");
 		}
-		any_a<> thing = cast_dup(*it);
+		any_a<> thing = fast_dup(*it);
 		return thing.operate(thing, range_create(++it, range.extract_end_()));
 	}
 

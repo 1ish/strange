@@ -24,7 +24,7 @@ public:
 		{
 			throw dis("strange::symbol::create passed non-lake-int-8");
 		}
-		return create_(cast<lake_a<int8_t>>(lake));
+		return create_(fast<lake_a<int8_t>>(lake));
 	}
 
 	static inline symbol_a<> create_()

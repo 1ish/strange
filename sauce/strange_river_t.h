@@ -139,19 +139,19 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return file_(cast<lake_a<int8_t>>(name));
+			return file_(fast<lake_a<int8_t>>(name));
 		}
 		any_a<> const in = *it;
 		if (++it == range.extract_end_())
 		{
-			return file_(cast<lake_a<int8_t>>(name), in);
+			return file_(fast<lake_a<int8_t>>(name), in);
 		}
 		any_a<> const out = *it;
 		if (++it == range.extract_end_())
 		{
-			return file_(cast<lake_a<int8_t>>(name), in, out);
+			return file_(fast<lake_a<int8_t>>(name), in, out);
 		}
-		return file_(cast<lake_a<int8_t>>(name), in, out, *it);
+		return file_(fast<lake_a<int8_t>>(name), in, out, *it);
 	}
 
 	static inline river_a<> file_(lake_a<int8_t> const& name, any_a<> const& in = yes(), any_a<> const& out = no(), any_a<> const& trunc = no())

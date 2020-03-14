@@ -141,11 +141,11 @@ class tokenizer_t : public thing_t<___ego___>
 				}
 				else
 				{
-					char1 = cast<number_data_a<int8_t>>(*_it).extract_primitive();
+					char1 = fast<number_data_a<int8_t>>(*_it).extract_primitive();
 					++_it;
 					++_position;
 				}
-				char2 = _it != _river.extract_end_() ? cast<number_data_a<int8_t>>(*_it).extract_primitive() : 0;
+				char2 = _it != _river.extract_end_() ? fast<number_data_a<int8_t>>(*_it).extract_primitive() : 0;
 
 				if (char1 == '\n')
 				{
@@ -535,7 +535,7 @@ public:
 		{
 			throw dis("strange::tokenizer::create passed non-river");
 		}
-		return create_(cast<river_a<>>(river));
+		return create_(fast<river_a<>>(river));
 	}
 
 	static inline range_a<> create_(river_a<> const& river)
@@ -622,7 +622,7 @@ protected:
 		auto p = PRECEDENCE.at_(sym(str));
 		if (p)
 		{
-			return cast<number_data_a<int64_t>>(p).extract_primitive();
+			return fast<number_data_a<int64_t>>(p).extract_primitive();
 		}
 		return 0;
 	}
