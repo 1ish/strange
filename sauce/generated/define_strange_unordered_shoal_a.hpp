@@ -12,6 +12,24 @@ template <typename _1_>
 class unordered_shoal_a : public shoal_a<>
 {
 public:
+	inline bool operator==(unordered_shoal_a < > const & shoal ) const
+	{ assert(___handle___); return ___read___().operator==(shoal); }
+
+	inline bool operator!=(unordered_shoal_a < > const & shoal ) const
+	{ assert(___handle___); return ___read___().operator!=(shoal); }
+
+	inline forward_extractor_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: const_iterator > extract_begin() const
+	{ assert(___handle___); return ___read___().extract_begin(); }
+
+	inline forward_extractor_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: const_iterator > extract_end() const
+	{ assert(___handle___); return ___read___().extract_end(); }
+
+	inline forward_mutator_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: iterator > mutate_begin()
+	{ assert(___handle___); return ___write___().mutate_begin(); }
+
+	inline forward_mutator_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: iterator > mutate_end()
+	{ assert(___handle___); return ___write___().mutate_end(); }
+
 	inline std :: unordered_map < any_a < > , any_a < > > const & extract_map() const
 	{ assert(___handle___); return ___read___().extract_map(); }
 
@@ -21,6 +39,12 @@ public:
 protected:
 	struct ___unordered_shoal_a_handle_base___ : ___shoal_a_handle_base___
 	{
+		virtual bool operator==(unordered_shoal_a < > const & shoal ) const = 0;
+		virtual bool operator!=(unordered_shoal_a < > const & shoal ) const = 0;
+		virtual forward_extractor_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: const_iterator > extract_begin() const = 0;
+		virtual forward_extractor_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: const_iterator > extract_end() const = 0;
+		virtual forward_mutator_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: iterator > mutate_begin() = 0;
+		virtual forward_mutator_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: iterator > mutate_end() = 0;
 		virtual std :: unordered_map < any_a < > , any_a < > > const & extract_map() const = 0;
 		virtual std :: unordered_map < any_a < > , any_a < > > & mutate_map() = 0;
 	};
@@ -42,6 +66,24 @@ protected:
 		inline ___unordered_shoal_a_handle___(___variadic_tag___, Args&&... args)
 			: ___shoal_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline bool operator==(unordered_shoal_a < > const & shoal ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(shoal); }
+
+		virtual inline bool operator!=(unordered_shoal_a < > const & shoal ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(shoal); }
+
+		virtual inline forward_extractor_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: const_iterator > extract_begin() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_begin(); }
+
+		virtual inline forward_extractor_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: const_iterator > extract_end() const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
+
+		virtual inline forward_mutator_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: iterator > mutate_begin() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_begin(); }
+
+		virtual inline forward_mutator_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: iterator > mutate_end() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.mutate_end(); }
 
 		virtual inline std :: unordered_map < any_a < > , any_a < > > const & extract_map() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_map(); }
@@ -269,6 +311,24 @@ template <typename _1_>
 class unordered_shoal_d : public shoal_d<>
 {
 public:
+	inline bool operator==(unordered_shoal_a < > const & shoal ) const
+	{ throw dis("dynamic unordered_shoal_d::operator==(shoal) not available"); }
+
+	inline bool operator!=(unordered_shoal_a < > const & shoal ) const
+	{ throw dis("dynamic unordered_shoal_d::operator!=(shoal) not available"); }
+
+	inline forward_extractor_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: const_iterator > extract_begin() const
+	{ throw dis("dynamic unordered_shoal_d::extract_begin() not available"); }
+
+	inline forward_extractor_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: const_iterator > extract_end() const
+	{ throw dis("dynamic unordered_shoal_d::extract_end() not available"); }
+
+	inline forward_mutator_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: iterator > mutate_begin()
+	{ throw dis("dynamic unordered_shoal_d::mutate_begin() not available"); }
+
+	inline forward_mutator_data_a < typename std :: unordered_map < any_a < > , any_a < > > :: iterator > mutate_end()
+	{ throw dis("dynamic unordered_shoal_d::mutate_end() not available"); }
+
 	inline std :: unordered_map < any_a < > , any_a < > > const & extract_map() const
 	{ throw dis("dynamic unordered_shoal_d::extract_map() not available"); }
 

@@ -182,6 +182,26 @@ namespace strange
 	{
 		return herd.extract_end();
 	}
+
+	inline forward_extractor_data_a<typename std::unordered_map<any_a<>, any_a<>>::const_iterator> begin(unordered_shoal_a<> const& shoal)
+	{
+		return shoal.extract_begin();
+	}
+
+	inline forward_extractor_data_a<typename std::unordered_map<any_a<>, any_a<>>::const_iterator> end(unordered_shoal_a<> const& shoal)
+	{
+		return shoal.extract_end();
+	}
+
+	inline forward_mutator_data_a<typename std::unordered_map<any_a<>, any_a<>>::iterator> begin(unordered_shoal_a<>& shoal)
+	{
+		return shoal.mutate_begin();
+	}
+
+	inline forward_mutator_data_a<typename std::unordered_map<any_a<>, any_a<>>::iterator> end(unordered_shoal_a<>& shoal)
+	{
+		return shoal.mutate_end();
+	}
 }
 
 #endif

@@ -8,18 +8,18 @@ namespace strange
 template <bool _concurrent_, typename ___ego___>
 class unordered_shoal_t : public thing_t<___ego___>
 {
-	template <typename _mutator_, typename ___ego_it___ = forward_mutator_data_a<_mutator_>>
+	template <typename _iterator_, typename ___ego_it___ = forward_mutator_data_a<_iterator_>>
 	class mutator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<mutator_t<_mutator_>>;
+		using over = thing_o<mutator_t<_iterator_>>;
 
 		// construction
 		template <typename F>
-		static inline forward_mutator_data_a<_mutator_> create(unordered_shoal_t const& unordered_shoal_thing, F&& it)
+		static inline forward_mutator_data_a<_iterator_> create(unordered_shoal_t const& unordered_shoal_thing, F&& it)
 		{
-			return forward_mutator_data_a<_mutator_>::template create<over>(mutator_t<_mutator_>(unordered_shoal_thing, std::forward<F>(it)));
+			return forward_mutator_data_a<_iterator_>::template create<over>(mutator_t<_iterator_>(unordered_shoal_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -35,11 +35,18 @@ class unordered_shoal_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			if (!check<forward_mutator_data_a<_mutator_>>(thing))
-			{
-				return false;
-			}
-			return _it == cast<forward_mutator_data_a<_mutator_>>(thing).extract_it();
+			return check<forward_mutator_data_a<_iterator_>>(thing) &&
+				_it == fast<forward_mutator_data_a<_iterator_>>(thing).extract_it();
+		}
+
+		inline bool operator==(forward_mutator_data_a<_iterator_> const& it) const
+		{
+			return _it == it.extract_it();
+		}
+
+		inline bool operator!=(forward_mutator_data_a<_iterator_> const& it) const
+		{
+			return _it != it.extract_it();
 		}
 
 		inline std::size_t hash() const
@@ -86,18 +93,18 @@ class unordered_shoal_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline _mutator_ const& extract_it() const
+		inline _iterator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _mutator_& mutate_it()
+		inline _iterator_& mutate_it()
 		{
 			return _it;
 		}
 
 	protected:
-		_mutator_ _it;
+		_iterator_ _it;
 		flock_a<> mutable _pair; // stashing mutator
 		unordered_shoal_t const& _unordered_shoal_thing;
 
@@ -110,18 +117,18 @@ class unordered_shoal_t : public thing_t<___ego___>
 		{}
 	};
 
-	template <typename _mutator_, typename ___ego_it___ = forward_extractor_data_a<_mutator_>>
+	template <typename _iterator_, typename ___ego_it___ = forward_extractor_data_a<_iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<extractor_t<_mutator_>>;
+		using over = thing_o<extractor_t<_iterator_>>;
 
 		// construction
 		template <typename F>
-		static inline forward_extractor_data_a<_mutator_> create(unordered_shoal_a<> const& unordered_shoal, unordered_shoal_t const& unordered_shoal_thing, F&& it)
+		static inline forward_extractor_data_a<_iterator_> create(unordered_shoal_a<> const& unordered_shoal, unordered_shoal_t const& unordered_shoal_thing, F&& it)
 		{
-			return forward_extractor_data_a<_mutator_>::template create<over>(extractor_t<_mutator_>(unordered_shoal, unordered_shoal_thing, std::forward<F>(it)));
+			return forward_extractor_data_a<_iterator_>::template create<over>(extractor_t<_iterator_>(unordered_shoal, unordered_shoal_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -137,17 +144,24 @@ class unordered_shoal_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			if (!check<forward_extractor_data_a<_mutator_>>(thing))
-			{
-				return false;
-			}
-			return _it == cast<forward_extractor_data_a<_mutator_>>(thing).extract_it();
+			return check<forward_extractor_data_a<_iterator_>>(thing) &&
+				_it == fast<forward_extractor_data_a<_iterator_>>(thing).extract_it();
 		}
 
 		inline std::size_t hash() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_shoal_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
+		}
+
+		inline bool operator==(forward_extractor_data_a<_iterator_> const& it) const
+		{
+			return _it == it.extract_it();
+		}
+
+		inline bool operator!=(forward_extractor_data_a<_iterator_> const& it) const
+		{
+			return _it != it.extract_it();
 		}
 
 		// forward mutator
@@ -178,18 +192,18 @@ class unordered_shoal_t : public thing_t<___ego___>
 		}
 
 		// data
-		inline _mutator_ const& extract_it() const
+		inline _iterator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _mutator_& mutate_it()
+		inline _iterator_& mutate_it()
 		{
 			return _it;
 		}
 
 	protected:
-		_mutator_ _it;
+		_iterator_ _it;
 		unordered_shoal_a<> const _unordered_shoal;
 		flock_a<> mutable _pair; // stashing mutator
 		unordered_shoal_t const& _unordered_shoal_thing;
@@ -272,7 +286,19 @@ public:
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _map == cast<unordered_shoal_a<>>(thing).extract_map();
+		return _map == fast<unordered_shoal_a<>>(thing).extract_map();
+	}
+
+	inline bool operator==(unordered_shoal_a<> const& shoal) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _map == shoal.extract_map();
+	}
+
+	inline bool operator!=(unordered_shoal_a<> const& shoal) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _map != shoal.extract_map();
 	}
 
 	inline std::size_t hash() const
@@ -300,7 +326,19 @@ public:
 		return extractor_t<typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
 	}
 
+	inline forward_extractor_data_a<typename std_unordered_map_any_any::const_iterator> extract_begin() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return extractor_t<typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cbegin());
+	}
+
 	inline forward_extractor_a<> extract_end_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return extractor_t<typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
+	}
+
+	inline forward_extractor_data_a<typename std_unordered_map_any_any::const_iterator> extract_end() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<typename std_unordered_map_any_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _map.cend());
@@ -312,7 +350,19 @@ public:
 		return mutator_t<typename std_unordered_map_any_any::iterator>::create(*this, _map.begin());
 	}
 
+	inline forward_mutator_data_a<typename std_unordered_map_any_any::iterator> mutate_begin()
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return mutator_t<typename std_unordered_map_any_any::iterator>::create(*this, _map.begin());
+	}
+
 	inline forward_mutator_a<> mutate_end_()
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return mutator_t<typename std_unordered_map_any_any::iterator>::create(*this, _map.end());
+	}
+
+	inline forward_mutator_data_a<typename std_unordered_map_any_any::iterator> mutate_end()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return mutator_t<typename std_unordered_map_any_any::iterator>::create(*this, _map.end());
