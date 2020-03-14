@@ -43,7 +43,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_invoke_member_range::create passed non-expression range term");
 		}
-		return expression_substitute_t<over>::create(over{ expression_invoke_member_range_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member), cast<expression_a<>>(range)) });
+		return expression_substitute_t<over>::create(over{ expression_invoke_member_range_t<>(token, terms, fast<expression_a<>>(thing), fast<symbol_a<>>(member), fast<expression_a<>>(range)) });
 	}
 
 	// reflection
@@ -67,7 +67,7 @@ public:
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke_member_range::operate with non-range term");
 		}
-		return thing_t<>::invoke_member(thing_term, _member, cast<range_a<>>(range_term));
+		return thing_t<>::invoke_member(thing_term, _member, fast<range_a<>>(range_term));
 	}
 
 	// expression

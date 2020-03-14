@@ -37,7 +37,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_for_range::create passed invalid parameter term");
 		}
-		auto const subterms = cast<expression_a<>>(term).terms_();
+		auto const subterms = fast<expression_a<>>(term).terms_();
 		if (subterms.size() != 3)
 		{
 			throw dis(token.report() + "strange::expression_for_range::create passed invalid parameter term");
@@ -66,7 +66,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_for_range::create passed non-expression loop");
 		}
-		return expression_a<>::create<over>(expression_for_range_t<>( token, terms, cast<symbol_a<>>(name), kind, cast<expression_a<>>(range), cast<expression_a<>>(loop)));
+		return expression_a<>::create<over>(expression_for_range_t<>( token, terms, fast<symbol_a<>>(name), kind, fast<expression_a<>>(range), fast<expression_a<>>(loop)));
 	}
 
 	// reflection
@@ -91,14 +91,14 @@ public:
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate passed non-unordered-shoal local");
 		}
 #endif
-		auto local_shoal = cast<unordered_shoal_a<>>(thing); // new block scope
+		auto local_shoal = fast<unordered_shoal_a<>>(thing); // new block scope
 		auto& local = local_shoal.mutate_map();
 		auto kind = _kind;
 		if (check<expression_a<>>(kind))
 		{
 			try
 			{
-				kind = cast<expression_a<>>(kind).operate(local_shoal, range);
+				kind = fast<expression_a<>>(kind).operate(local_shoal, range);
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
@@ -116,10 +116,10 @@ public:
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_for_range::operate expression returned non-range");
 		}
-		auto read_lock = check<collection_a<>>(for_range) ? cast<collection_a<>>(for_range).read_lock_() : no();
+		auto read_lock = check<collection_a<>>(for_range) ? fast<collection_a<>>(for_range).read_lock_() : no();
 		try
 		{
-			for (auto const& for_thing : cast<range_a<> const>(for_range))
+			for (auto const& for_thing : fast<range_a<> const>(for_range))
 			{
 				if (!for_thing.kinds_().has_(kind))
 				{
@@ -152,11 +152,11 @@ public:
 		river.write_string(" for_range(" + _name.to_string() + " ");
 		if (check<kind_a<>>(_kind))
 		{
-			river.write_string(cast<kind_a<>>(_kind).to_string());
+			river.write_string(fast<kind_a<>>(_kind).to_string());
 		}
 		else if (check<expression_a<>>(_kind))
 		{
-			cast<expression_a<>>(_kind).generate(version, indent, river);
+			fast<expression_a<>>(_kind).generate(version, indent, river);
 		}
 		_range.generate(version, indent, river);
 		river.write_string(", ");

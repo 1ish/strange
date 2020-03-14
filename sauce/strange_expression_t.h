@@ -131,7 +131,7 @@ protected:
 			{
 				continue;
 			}
-			auto expression = cast<expression_a<>>(term);
+			auto expression = fast<expression_a<>>(term);
 			if (!expression.pure())
 			{
 				pure_literal.first = false;

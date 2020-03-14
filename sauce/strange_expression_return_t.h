@@ -33,7 +33,7 @@ public:
 		{
 			throw dis("strange::expression_return::create passed non-expression result");
 		}
-		return create(token, terms, cast<expression_a<>>(result));
+		return create(token, terms, fast<expression_a<>>(result));
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms)

@@ -27,7 +27,7 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return create(token, terms, cast<number_data_a<int64_t>>(order));
+			return create(token, terms, fast<number_data_a<int64_t>>(order));
 		}
 		auto const name = *it;
 		if (!check<symbol_a<>>(name))
@@ -36,7 +36,7 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name));
+			return create(token, terms, fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name));
 		}
 		auto const dimensions = *it;
 		if (!check<expression_a<>>(dimensions))
@@ -45,7 +45,7 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions));
+			return create(token, terms, fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<expression_a<>>(dimensions));
 		}
 		auto const aspects = *it;
 		if (!check<expression_a<>>(aspects))
@@ -54,7 +54,7 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions), cast<expression_a<>>(aspects));
+			return create(token, terms, fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<expression_a<>>(dimensions), fast<expression_a<>>(aspects));
 		}
 		auto const parameters = *it;
 		if (!check<expression_a<>>(parameters))
@@ -63,7 +63,7 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return create(token, terms, cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<expression_a<>>(dimensions), cast<expression_a<>>(aspects), cast<expression_a<>>(parameters));
+			return create(token, terms, fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<expression_a<>>(dimensions), fast<expression_a<>>(aspects), fast<expression_a<>>(parameters));
 		}
 		auto const result = *it;
 		if (!check<expression_a<>>(result))
@@ -73,35 +73,35 @@ public:
 		if (++it == terms.extract_end_())
 		{
 			return create(token, terms,
-				cast<number_data_a<int64_t>>(order),
-				cast<symbol_a<>>(name),
-				cast<expression_a<>>(dimensions),
-				cast<expression_a<>>(aspects),
-				cast<expression_a<>>(parameters),
-				cast<expression_a<>>(result));
+				fast<number_data_a<int64_t>>(order),
+				fast<symbol_a<>>(name),
+				fast<expression_a<>>(dimensions),
+				fast<expression_a<>>(aspects),
+				fast<expression_a<>>(parameters),
+				fast<expression_a<>>(result));
 		}
 		auto const fixed = *it;
 		if (++it == terms.extract_end_())
 		{
 			return create(token, terms,
-				cast<number_data_a<int64_t>>(order),
-				cast<symbol_a<>>(name),
-				cast<expression_a<>>(dimensions),
-				cast<expression_a<>>(aspects),
-				cast<expression_a<>>(parameters),
-				cast<expression_a<>>(result),
+				fast<number_data_a<int64_t>>(order),
+				fast<symbol_a<>>(name),
+				fast<expression_a<>>(dimensions),
+				fast<expression_a<>>(aspects),
+				fast<expression_a<>>(parameters),
+				fast<expression_a<>>(result),
 				fixed);
 		}
 		auto const reference = *it;
 		if (++it == terms.extract_end_())
 		{
 			return create(token, terms,
-				cast<number_data_a<int64_t>>(order),
-				cast<symbol_a<>>(name),
-				cast<expression_a<>>(dimensions),
-				cast<expression_a<>>(aspects),
-				cast<expression_a<>>(parameters),
-				cast<expression_a<>>(result),
+				fast<number_data_a<int64_t>>(order),
+				fast<symbol_a<>>(name),
+				fast<expression_a<>>(dimensions),
+				fast<expression_a<>>(aspects),
+				fast<expression_a<>>(parameters),
+				fast<expression_a<>>(result),
 				fixed,
 				reference);
 		}
@@ -109,12 +109,12 @@ public:
 		if (++it == terms.extract_end_())
 		{
 			return create(token, terms,
-				cast<number_data_a<int64_t>>(order),
-				cast<symbol_a<>>(name),
-				cast<expression_a<>>(dimensions),
-				cast<expression_a<>>(aspects),
-				cast<expression_a<>>(parameters),
-				cast<expression_a<>>(result),
+				fast<number_data_a<int64_t>>(order),
+				fast<symbol_a<>>(name),
+				fast<expression_a<>>(dimensions),
+				fast<expression_a<>>(aspects),
+				fast<expression_a<>>(parameters),
+				fast<expression_a<>>(result),
 				fixed,
 				reference,
 				optional);
@@ -125,16 +125,16 @@ public:
 			throw dis(token.report() + "strange::expression_kind::create passed non-expression");
 		}
 		return create(token, terms,
-			cast<number_data_a<int64_t>>(order),
-			cast<symbol_a<>>(name),
-			cast<expression_a<>>(dimensions),
-			cast<expression_a<>>(aspects),
-			cast<expression_a<>>(parameters),
-			cast<expression_a<>>(result),
+			fast<number_data_a<int64_t>>(order),
+			fast<symbol_a<>>(name),
+			fast<expression_a<>>(dimensions),
+			fast<expression_a<>>(aspects),
+			fast<expression_a<>>(parameters),
+			fast<expression_a<>>(result),
 			fixed,
 			reference,
 			optional,
-			cast<expression_a<>>(expression));
+			fast<expression_a<>>(expression));
 	}
 
 	static inline expression_a<> create(token_a<> const& token, flock_a<> const& terms, number_data_a<int64_t> const& order = number_int_64_t<>::create(1), symbol_a<> const& name = sym(""))
@@ -193,7 +193,7 @@ public:
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate expression did not return a kind");
 			}
-			auto const kind = cast<kind_a<>>(any_kind);
+			auto const kind = fast<kind_a<>>(any_kind);
 			return kind_t<>::create_(number_int_64_t<>::create(kind.order() + _order.extract_primitive()), kind.name_(), kind.dimensions_(), kind.aspects_(), kind.parameters_(), kind.result_(), _fixed, _reference, _optional);
 		}
 		auto const dimensions = _dimensions.operate(thing, range);
@@ -203,7 +203,7 @@ public:
 		}
 		if (_count == 3)
 		{
-			return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions));
+			return kind_t<>::create_(_order, _name, fast<flock_a<>>(dimensions));
 		}
 		auto const aspects = _aspects.operate(thing, range);
 		if (!check<flock_a<>>(aspects))
@@ -212,7 +212,7 @@ public:
 		}
 		if (_count == 4)
 		{
-			return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects));
+			return kind_t<>::create_(_order, _name, fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects));
 		}
 		auto const parameters = _parameters.operate(thing, range);
 		if (!check<flock_a<>>(parameters))
@@ -221,14 +221,14 @@ public:
 		}
 		if (_count == 5)
 		{
-			return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters));
+			return kind_t<>::create_(_order, _name, fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters));
 		}
 		auto const result = _result.operate(thing, range);
 		if (!check<symbol_a<>>(result))
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_kind::operate result is not a symbol");
 		}
-		return kind_t<>::create_(_order, _name, cast<flock_a<>>(dimensions), cast<flock_a<>>(aspects), cast<flock_a<>>(parameters), cast<symbol_a<>>(result), _fixed, _reference, _optional);
+		return kind_t<>::create_(_order, _name, fast<flock_a<>>(dimensions), fast<flock_a<>>(aspects), fast<flock_a<>>(parameters), fast<symbol_a<>>(result), _fixed, _reference, _optional);
 	}
 
 	// expression

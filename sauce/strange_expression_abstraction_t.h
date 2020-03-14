@@ -44,7 +44,7 @@ public:
 				{
 					throw dis(token.report() + "strange::expression_abstraction::create passed non-block last term");
 				}
-				auto const subterms = cast<expression_a<>>(term).terms_();
+				auto const subterms = fast<expression_a<>>(term).terms_();
 				if (subterms.empty())
 				{
 					throw dis(token.report() + "strange::expression_abstraction::create passed no subterms");
@@ -65,14 +65,14 @@ public:
 			{
 				throw dis(token.report() + "strange::expression_abstraction::create passed invalid dimension term");
 			}
-			auto const subterms = cast<expression_a<>>(term).terms_();
+			auto const subterms = fast<expression_a<>>(term).terms_();
 			int64_t const count = subterms.size();
 			auto const name = subterms.at_index(0);
 			if (!check<symbol_a<>>(name))
 			{
 				throw dis(token.report() + "strange::expression_abstraction::create passed non-symbol dimension name");
 			}
-			if (cast<symbol_a<>>(name).first_character() != '#')
+			if (fast<symbol_a<>>(name).first_character() != '#')
 			{
 				throw dis(token.report() + "strange::expression_abstraction::create passed dimension name without # preceding it");
 			}
@@ -106,15 +106,15 @@ public:
 			dimension_expressions.push_back(expression);
 			try
 			{
-				dimension_defaults.push_back(cast<expression_a<>>(expression).evaluate_());
+				dimension_defaults.push_back(fast<expression_a<>>(expression).evaluate_());
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
 				throw dis("strange::expression_abstraction::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<over>::create(over{ expression_abstraction_t<>(token, terms, cast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_expressions, dimension_defaults, parent_expressions) },
-			abstraction_t<>::create_(token, cast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_defaults, parent_expressions));
+		return expression_substitute_t<over>::create(over{ expression_abstraction_t<>(token, terms, fast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_expressions, dimension_defaults, parent_expressions) },
+			abstraction_t<>::create_(token, fast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_defaults, parent_expressions));
 	}
 
 	// reflection
@@ -153,17 +153,17 @@ public:
 			{
 				river.write_string(",");
 			}
-			auto const name = cast<symbol_a<>>(*nit++);
+			auto const name = fast<symbol_a<>>(*nit++);
 			auto const kind = *kit++;
-			auto const expression = cast<expression_a<>>(*eit++);
+			auto const expression = fast<expression_a<>>(*eit++);
 			river.write_string(name.to_string() + ":");
 			if (check<kind_a<>>(kind))
 			{
-				river.write_string(cast<kind_a<>>(kind).to_string() + "=");
+				river.write_string(fast<kind_a<>>(kind).to_string() + "=");
 			}
 			else
 			{
-				cast<expression_a<>>(kind).generate(version, indent, river);
+				fast<expression_a<>>(kind).generate(version, indent, river);
 			}
 			expression.generate(version, indent, river);
 		}
@@ -196,17 +196,17 @@ public:
 			{
 				river.write_string(",");
 			}
-			auto const name = cast<symbol_a<>>(*nit++);
+			auto const name = fast<symbol_a<>>(*nit++);
 			auto const kind = *kit++;
-			auto const expression = cast<expression_a<>>(*eit++);
+			auto const expression = fast<expression_a<>>(*eit++);
 			if (check<kind_a<>>(kind))
 			{
-				river.write_string("catch(" + cast<kind_a<>>(kind).code() + " const& ");
-				river.write_string(cast<kind_a<>>(kind).to_string() + " =");
+				river.write_string("catch(" + fast<kind_a<>>(kind).code() + " const& ");
+				river.write_string(fast<kind_a<>>(kind).to_string() + " =");
 			}
 			else
 			{
-				cast<expression_a<>>(kind).generate_cpp(version, indent, river, declare, define);
+				fast<expression_a<>>(kind).generate_cpp(version, indent, river, declare, define);
 			}
 			expression.generate_cpp(version, indent, river, declare, define);
 		}
@@ -323,7 +323,7 @@ protected:
 					"namespace " + name.to_string() + "\n"
 					"{\n\n");
 			}
-			name = cast<symbol_a<>>(scope_name);
+			name = fast<symbol_a<>>(scope_name);
 		}
 		return name;
 	}
@@ -361,14 +361,14 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1));
+					river.write_string("typename " + fast<symbol_a<>>(name).to_string().substr(1));
 
 					auto any_kind = *kit++;
 					if (check<expression_a<>>(any_kind))
 					{
 						try
 						{
-							any_kind = cast<expression_a<>>(any_kind).evaluate_();
+							any_kind = fast<expression_a<>>(any_kind).evaluate_();
 						}
 						catch (misunderstanding_a<>& misunderstanding)
 						{
@@ -379,13 +379,13 @@ protected:
 					{
 						throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-kind dimension kind");
 					}
-					auto const kind = cast<kind_a<>>(any_kind);
+					auto const kind = fast<kind_a<>>(any_kind);
 
 					auto const expression = *eit++;
 					if (kind.optional())
 					{
 						river.write_string(" =");
-						cast<expression_a<>>(expression).generate_cpp(version, indent, river, false, false, true); // declare, define, type
+						fast<expression_a<>>(expression).generate_cpp(version, indent, river, false, false, true); // declare, define, type
 					}
 				}
 			}
@@ -411,7 +411,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string("typename " + cast<symbol_a<>>(name).to_string().substr(1));
+					river.write_string("typename " + fast<symbol_a<>>(name).to_string().substr(1));
 				}
 			}
 			river.write_string(">\n");
@@ -436,7 +436,7 @@ protected:
 					{
 						river.write_string(", ");
 					}
-					river.write_string(cast<symbol_a<>>(name).to_string().substr(1));
+					river.write_string(fast<symbol_a<>>(name).to_string().substr(1));
 				}
 			}
 			river.write_string(">");
@@ -517,13 +517,13 @@ protected:
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-expression-operate base class definition");
 		}
-		auto const terms = cast<expression_a<>>(expression).terms_();
+		auto const terms = fast<expression_a<>>(expression).terms_();
 		if (terms.size() < 1)
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp expression-operate base class definition with too few terms");
 		}
 		auto abs = river_t<>::create();
-		cast<expression_a<>>(terms.at_index(0)).generate_cpp(version, 0, abs, false, false);
+		fast<expression_a<>>(terms.at_index(0)).generate_cpp(version, 0, abs, false, false);
 		abs.seekg_beg(0);
 		auto exp = parser_t<>::create_().parse_(tokenizer_t<>::create_(abs));
 		auto river = river_t<>::create();
@@ -543,7 +543,7 @@ protected:
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-expression class definition");
 		}
-		return cast<expression_a<>>(expression).terms_();
+		return fast<expression_a<>>(expression).terms_();
 	}
 
 	static inline void _define_class_boilerplate_(bool root, std::string const& class_name, int64_t version, int64_t indent, river_a<>& river)
@@ -608,7 +608,7 @@ protected:
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-flock expression pair in class definition");
 			}
-			auto const pair = cast<expression_a<>>(expression).terms_();
+			auto const pair = fast<expression_a<>>(expression).terms_();
 			if (pair.size() != 2)
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-pair in class definition");
@@ -618,7 +618,7 @@ protected:
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-literal expression name in class definition");
 			}
-			auto const name_flock = cast<expression_a<>>(any_name).terms_();
+			auto const name_flock = fast<expression_a<>>(any_name).terms_();
 			if (name_flock.size() != 1)
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-single name in class definition");
@@ -628,14 +628,14 @@ protected:
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-symbol name in class definition");
 			}
-			auto const name = cast<symbol_a<>>(any_name);
+			auto const name = fast<symbol_a<>>(any_name);
 
 			auto any_value = pair.at_index(1);
 			if (!check<expression_a<>>(any_value))
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp non-expression value in class definition");
 			}
-			auto const value_expression = cast<expression_a<>>(any_value);
+			auto const value_expression = fast<expression_a<>>(any_value);
 			if (name.last_character() == '_')
 			{
 				//TODO custom reference
@@ -654,7 +654,7 @@ protected:
 				auto const value = value_expression.terms_().at_index(0);
 				if (check<lake_a<int8_t>>(value))
 				{
-					(this->*define_native_member_p)(root, class_name, name.to_string(), lake_to_string(cast<lake_a<int8_t>>(value)), version, river);
+					(this->*define_native_member_p)(root, class_name, name.to_string(), lake_to_string(fast<lake_a<int8_t>>(value)), version, river);
 				}
 			}
 			else
@@ -1931,7 +1931,7 @@ protected:
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_abstraction::generate_cpp invalid token in class definition");
 			}
-			auto const token = cast<token_a<>>(any_token);
+			auto const token = fast<token_a<>>(any_token);
 			if (token.tag() == "punctuation" && token.symbol() == "{")
 			{
 				break;

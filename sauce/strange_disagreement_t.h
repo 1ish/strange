@@ -48,7 +48,8 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		return check<misunderstanding_a<>>(thing) && cast<misunderstanding_a<>>(thing).to_string() == to_string();
+		return check<misunderstanding_a<>>(thing) &&
+			fast<misunderstanding_a<>>(thing).to_string() == to_string();
 	}
 
 	inline std::size_t hash() const

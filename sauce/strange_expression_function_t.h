@@ -49,7 +49,7 @@ public:
 			{
 				throw dis(token.report() + "strange::expression_function::create passed invalid parameter term");
 			}
-			auto const subterms = cast<expression_a<>>(term).terms_();
+			auto const subterms = fast<expression_a<>>(term).terms_();
 			int64_t const count = subterms.size();
 			auto const name = subterms.at_index(0);
 			if (!check<symbol_a<>>(name))
@@ -85,15 +85,15 @@ public:
 			expressions.push_back(expression);
 			try
 			{
-				defaults.push_back(cast<expression_a<>>(expression).evaluate_());
+				defaults.push_back(fast<expression_a<>>(expression).evaluate_());
 			}
 			catch (misunderstanding_a<>& misunderstanding)
 			{
 				throw dis("strange::expression_function::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<over>::create(over{ expression_function_t<>(token, terms, cast<symbol_a<>>(scope), names, kinds, expressions, defaults, cast<expression_a<>>(expression)) },
-			function_t<>::create_(token, cast<symbol_a<>>(scope), names, kinds, defaults, cast<expression_a<>>(expression)));
+		return expression_substitute_t<over>::create(over{ expression_function_t<>(token, terms, fast<symbol_a<>>(scope), names, kinds, expressions, defaults, fast<expression_a<>>(expression)) },
+			function_t<>::create_(token, fast<symbol_a<>>(scope), names, kinds, defaults, fast<expression_a<>>(expression)));
 	}
 
 	// reflection
@@ -132,9 +132,9 @@ public:
 			{
 				river.write_string(",");
 			}
-			auto name = cast<symbol_a<>>(*nit++);
-			auto kind = cast<kind_a<>>(*kit++);
-			auto expression = cast<expression_a<>>(*eit++);
+			auto name = fast<symbol_a<>>(*nit++);
+			auto kind = fast<kind_a<>>(*kit++);
+			auto expression = fast<expression_a<>>(*eit++);
 			river.write_string(name.to_string() + ":");
 			river.write_string(kind.to_string() + "=");
 			expression.generate(version, indent, river);
@@ -169,9 +169,9 @@ public:
 			{
 				river.write_string(",");
 			}
-			auto name = cast<symbol_a<>>(*nit++);
-			auto kind = cast<kind_a<>>(*kit++);
-			auto expression = cast<expression_a<>>(*eit++);
+			auto name = fast<symbol_a<>>(*nit++);
+			auto kind = fast<kind_a<>>(*kit++);
+			auto expression = fast<expression_a<>>(*eit++);
 			river.write_string("catch(" + kind.code() + " const& ");
 			river.write_string(name.to_string() + " =");
 			expression.generate_cpp(version, indent, river, declare, define);

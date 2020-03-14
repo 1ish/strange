@@ -33,7 +33,7 @@ public:
 		{
 			throw dis("[expression] create passed non-flock terms");
 		}
-		return _OVERRIDDEN_::create_(cast<token_a<>>(token), cast<flock_a<>>(terms));
+		return _OVERRIDDEN_::create_(fast<token_a<>>(token), fast<flock_a<>>(terms));
 	}
 
 	inline expression_a<> recreate_() const
@@ -44,7 +44,7 @@ public:
 		{
 			if (check<expression_a<>>(term))
 			{
-				term = cast<expression_a<>>(term).recreate_();
+				term = fast<expression_a<>>(term).recreate_();
 			}
 		}
 		auto const expression = _OVERRIDDEN_::create_(_OVERRIDDEN_::_token, terms);

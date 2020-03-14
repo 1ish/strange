@@ -27,7 +27,7 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, cast<symbol_a<>>(member)) });
+			return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, fast<symbol_a<>>(member)) });
 		}
 		auto const kind = *it;
 		if (!check<kind_a<>>(kind) && !check<expression_a<>>(kind))
@@ -36,14 +36,14 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, cast<symbol_a<>>(member), cast<kind_a<>>(kind)) });
+			return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, fast<symbol_a<>>(member), fast<kind_a<>>(kind)) });
 		}
 		auto const expression = *it;
 		if (!check<expression_a<>>(expression))
 		{
 			throw dis(token.report() + "strange::expression_intimate_attribute::create passed non-expression value term");
 		}
-		return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, cast<symbol_a<>>(member), kind, cast<expression_a<>>(expression)) });
+		return expression_substitute_t<over>::create(over{ expression_intimate_attribute_t<>(token, terms, fast<symbol_a<>>(member), kind, fast<expression_a<>>(expression)) });
 	}
 
 	// reflection
@@ -80,7 +80,7 @@ public:
 			{
 				try
 				{
-					kind = cast<expression_a<>>(kind).operate(thing, range);
+					kind = fast<expression_a<>>(kind).operate(thing, range);
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{

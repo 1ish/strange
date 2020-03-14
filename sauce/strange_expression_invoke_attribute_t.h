@@ -36,14 +36,14 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return expression_substitute_t<over>::create(over{ expression_invoke_attribute_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member)) });
+			return expression_substitute_t<over>::create(over{ expression_invoke_attribute_t<>(token, terms, fast<expression_a<>>(thing), fast<symbol_a<>>(member)) });
 		}
 		auto value = *it;
 		if (!check<expression_a<>>(value))
 		{
 			throw dis(token.report() + "strange::expression_invoke_attribute::create passed non-expression value term");
 		}
-		return expression_substitute_t<over>::create(over{ expression_invoke_attribute_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member), cast<expression_a<>>(value)) });
+		return expression_substitute_t<over>::create(over{ expression_invoke_attribute_t<>(token, terms, fast<expression_a<>>(thing), fast<symbol_a<>>(member), fast<expression_a<>>(value)) });
 	}
 
 	// reflection

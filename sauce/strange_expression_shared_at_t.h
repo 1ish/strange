@@ -25,7 +25,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_shared_at::create passed non-symbol key");
 		}
-		return expression_a<>::create<over>(expression_shared_at_t<>(token, terms, cast<symbol_a<>>(key)));
+		return expression_a<>::create<over>(expression_shared_at_t<>(token, terms, fast<symbol_a<>>(key)));
 	}
 
 	// reflection
@@ -80,7 +80,7 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " ");
+		river.write_string(" " + fast<symbol_a<>>(_key).to_string() + " ");
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
@@ -93,7 +93,7 @@ public:
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_at::generate_cpp called for wrong type of expression");
 		}
-		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " "); //TODO remove $ prefix
+		river.write_string(" " + fast<symbol_a<>>(_key).to_string() + " "); //TODO remove $ prefix
 	}
 
 protected:

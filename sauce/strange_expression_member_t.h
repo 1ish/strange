@@ -34,7 +34,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_member::create passed non-expression member term");
 		}
-		return expression_substitute_t<over>::create(over{ expression_member_t<>(token, terms, cast<expression_a<>>(thing), cast<symbol_a<>>(member)) });
+		return expression_substitute_t<over>::create(over{ expression_member_t<>(token, terms, fast<expression_a<>>(thing), fast<symbol_a<>>(member)) });
 	}
 
 	// reflection

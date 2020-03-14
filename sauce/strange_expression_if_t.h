@@ -44,14 +44,14 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return expression_a<>::create<over>(expression_if_t<>( token, terms, cast<expression_a<>>(condition), cast<expression_a<>>(yay), expression_t<>::create(token)));
+			return expression_a<>::create<over>(expression_if_t<>( token, terms, fast<expression_a<>>(condition), fast<expression_a<>>(yay), expression_t<>::create(token)));
 		}
 		any_a<> nay = *it;
 		if (!check<expression_a<>>(nay))
 		{
 			throw dis(token.report() + "strange::expression_if::create passed non-expression");
 		}
-		return expression_a<>::create<over>(expression_if_t<>( token, terms, cast<expression_a<>>(condition), cast<expression_a<>>(yay), cast<expression_a<>>(nay)));
+		return expression_a<>::create<over>(expression_if_t<>( token, terms, fast<expression_a<>>(condition), fast<expression_a<>>(yay), fast<expression_a<>>(nay)));
 	}
 
 	// reflection

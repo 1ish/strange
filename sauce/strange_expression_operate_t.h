@@ -64,7 +64,7 @@ public:
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate with non-expression term");
 			}
-			cast<expression_a<>>(term).generate(version, indent, river);
+			fast<expression_a<>>(term).generate(version, indent, river);
 			++count;
 		}
 		if (!count)
@@ -91,7 +91,7 @@ public:
 				{
 					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
 				}
-				cast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
+				fast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 			}
 			return;
 		}
@@ -114,7 +114,7 @@ public:
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_operate::generate_cpp with non-expression term");
 			}
-			cast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
+			fast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 			++count;
 		}
 		river.write_string(")) ");
@@ -141,7 +141,7 @@ protected:
 		{
 			throw dis(token.report() + "strange::expression_operate::create passed non-expression thing");
 		}
-		auto expression_thing = cast<expression_a<>>(any_thing);
+		auto expression_thing = fast<expression_a<>>(any_thing);
 		if (!expression_thing.literal())
 		{
 			pure_literal.first = false;
@@ -157,7 +157,7 @@ protected:
 		{
 			throw dis(token.report() + "strange::expression_operate::create passed non-expression operation");
 		}
-		auto expression_operation = cast<expression_a<>>(any_operation);
+		auto expression_operation = fast<expression_a<>>(any_operation);
 		if (!expression_operation.literal())
 		{
 			pure_literal.first = false;

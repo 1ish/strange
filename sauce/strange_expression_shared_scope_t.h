@@ -29,7 +29,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_shared_scope::create passed too few terms");
 		}
-		auto shared_shoal = cast<shoal_a<>>(shared);
+		auto shared_shoal = fast<shoal_a<>>(shared);
 		auto key = *it;
 		if (!check<symbol_a<>>(key))
 		{
@@ -38,9 +38,9 @@ public:
 		auto value = shared_shoal.at_(key);
 		if (value)
 		{
-			return expression_substitute_t<over>::create(over{ expression_shared_scope_t<>(token, terms, shared_shoal, cast<symbol_a<>>(key)) }, value);
+			return expression_substitute_t<over>::create(over{ expression_shared_scope_t<>(token, terms, shared_shoal, fast<symbol_a<>>(key)) }, value);
 		}
-		return expression_a<>::create<over>(expression_shared_scope_t<>(token, terms, shared_shoal, cast<symbol_a<>>(key)));
+		return expression_a<>::create<over>(expression_shared_scope_t<>(token, terms, shared_shoal, fast<symbol_a<>>(key)));
 	}
 
 	// reflection
@@ -74,7 +74,7 @@ public:
 
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
-		river.write_string(" $$" + cast<symbol_a<>>(_key).to_string() + " ");
+		river.write_string(" $$" + fast<symbol_a<>>(_key).to_string() + " ");
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
@@ -87,7 +87,7 @@ public:
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_shared_scope::generate_cpp called for wrong type of expression");
 		}
-		river.write_string(" " + cast<symbol_a<>>(_key).to_string() + " ");
+		river.write_string(" " + fast<symbol_a<>>(_key).to_string() + " ");
 	}
 
 protected:

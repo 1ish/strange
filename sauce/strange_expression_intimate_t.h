@@ -34,7 +34,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_intimate::create passed non-flock arguments");
 		}
-		return expression_substitute_t<over>::create(over{ expression_intimate_t<>(token, terms, cast<symbol_a<>>(member), cast<flock_a<>>(arguments)) });
+		return expression_substitute_t<over>::create(over{ expression_intimate_t<>(token, terms, fast<symbol_a<>>(member), fast<flock_a<>>(arguments)) });
 	}
 
 	// reflection
@@ -88,7 +88,7 @@ public:
 				{
 					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate::generate_cpp with non-expression argument");
 				}
-				cast<expression_a<>>(argument).generate_cpp(version, indent, river, declare, define);
+				fast<expression_a<>>(argument).generate_cpp(version, indent, river, declare, define);
 			}
 			return;
 		}

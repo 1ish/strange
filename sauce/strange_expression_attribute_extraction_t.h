@@ -46,7 +46,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_attribute_extraction::create passed non-expression value");
 		}
-		return expression_substitute_t<over>::create(over{ expression_attribute_extraction_t<>(token, terms, cast<symbol_a<>>(name), kind, cast<expression_a<>>(expression)) });
+		return expression_substitute_t<over>::create(over{ expression_attribute_extraction_t<>(token, terms, fast<symbol_a<>>(name), kind, fast<expression_a<>>(expression)) });
 	}
 
 	// reflection

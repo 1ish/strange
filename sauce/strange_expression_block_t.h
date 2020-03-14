@@ -70,7 +70,7 @@ public:
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_block::generate with non-expression term");
 			}
-			cast<expression_a<>>(term).generate(version, indent, river);
+			fast<expression_a<>>(term).generate(version, indent, river);
 		}
 		river.write_string(") ");
 	}
@@ -85,7 +85,7 @@ public:
 				{
 					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_block::generate_cpp with non-expression term");
 				}
-				cast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
+				fast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 			}
 			return;
 		}
@@ -109,7 +109,7 @@ public:
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_block::generate_cpp with non-expression term");
 			}
-			cast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
+			fast<expression_a<>>(term).generate_cpp(version, indent, river, declare, define);
 		}
 		river.write_string(") ");
 	}

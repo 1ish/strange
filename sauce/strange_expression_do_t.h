@@ -42,7 +42,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_do::create passed non-expression condition");
 		}
-		return expression_a<>::create<over>(expression_do_t<>( token, terms, cast<expression_a<>>(loop), cast<expression_a<>>(condition)));
+		return expression_a<>::create<over>(expression_do_t<>( token, terms, fast<expression_a<>>(loop), fast<expression_a<>>(condition)));
 	}
 
 	// reflection

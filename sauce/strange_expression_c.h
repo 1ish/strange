@@ -22,7 +22,7 @@ public:
 		{
 			throw dis("<strange::expression>::animate passed non-shoal conception");
 		}
-		return animate_(cast<shoal_a<>>(conception));
+		return animate_(fast<shoal_a<>>(conception));
 	}
 
 	static inline expression_a<> animate_(shoal_a<> const& conception)
@@ -54,7 +54,7 @@ public:
 			{
 				throw dis("<strange::expression>::type returned non-symbol");
 			}
-			return cast<symbol_a<>>(result);
+			return fast<symbol_a<>>(result);
 		}
 		static symbol_a<> TYPE = sym("<strange::expression>");
 		return TYPE;
@@ -84,7 +84,7 @@ public:
 			{
 				throw dis("<strange::expression>::shared returned non-unordered-shoal");
 			}
-			return cast<unordered_shoal_a<>>(result);
+			return fast<unordered_shoal_a<>>(result);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
@@ -191,7 +191,7 @@ public:
 			{
 				throw dis("<strange::expression>::token returned non-token");
 			}
-			return cast<token_a<>>(result);
+			return fast<token_a<>>(result);
 		}
 		return token_t<>::create_punctuation_();
 	}
@@ -218,7 +218,7 @@ public:
 			{
 				throw dis("<strange::expression>::terms returned non-flock");
 			}
-			return cast<flock_a<>>(result);
+			return fast<flock_a<>>(result);
 		}
 		return flock_t<>::create_();
 	}
@@ -254,7 +254,7 @@ public:
 		{
 			throw dis("<strange::expression>::generate passed short range");
 		}
-		any_a<> river = cast_dup(*it);
+		any_a<> river = fast_dup(*it);
 		if (!check<river_a<>>(river))
 		{
 			throw dis("<strange::expression>::generate passed non-river");
@@ -314,7 +314,7 @@ public:
 		{
 			throw dis("<strange::expression>::generate_cpp passed short range");
 		}
-		any_a<> river = cast_dup(*it);
+		any_a<> river = fast_dup(*it);
 		if (!check<river_a<>>(river))
 		{
 			throw dis("<strange::expression>::generate_cpp passed non-river");

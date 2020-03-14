@@ -43,7 +43,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_invoke::create passed non-range");
 		}
-		return expression_substitute_t<over>::create(over{ expression_invoke_t<>(token, terms, cast<expression_a<>>(expression), cast<symbol_a<>>(member), cast<range_a<>>(range)) });
+		return expression_substitute_t<over>::create(over{ expression_invoke_t<>(token, terms, fast<expression_a<>>(expression), fast<symbol_a<>>(member), fast<range_a<>>(range)) });
 	}
 
 	// reflection
@@ -92,7 +92,7 @@ public:
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate with non-expression range term");
 			}
-			cast<expression_a<>>(expression).generate(version, indent, river);
+			fast<expression_a<>>(expression).generate(version, indent, river);
 		}
 		river.write_string("]) ");
 	}
@@ -108,7 +108,7 @@ public:
 				{
 					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate_cpp with non-expression argument");
 				}
-				cast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
+				fast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
 			}
 			return;
 		}
@@ -134,7 +134,7 @@ public:
 			{
 				throw dis(expression_t<___ego___>::_token.report() + "strange::expression_invoke::generate with non-expression range term");
 			}
-			cast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
+			fast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
 		}
 		river.write_string(")]) ");
 	}

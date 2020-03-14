@@ -47,7 +47,7 @@ public:
 			{
 				throw dis(token.report() + "strange::expression_catch::create passed invalid catch term");
 			}
-			auto subterms = cast<expression_a<>>(term).terms_();
+			auto subterms = fast<expression_a<>>(term).terms_();
 			if (subterms.size() != 3)
 			{
 				throw dis(token.report() + "strange::expression_catch::create passed wrong number of subterms");
@@ -81,7 +81,7 @@ public:
 				expressions.push_back(expression_t<>::create(token));
 			}
 		}
-		return expression_substitute_t<over>::create(over{ expression_catch_t<>(token, terms, cast<expression_a<>>(try_expression), names, kinds, expressions) });
+		return expression_substitute_t<over>::create(over{ expression_catch_t<>(token, terms, fast<expression_a<>>(try_expression), names, kinds, expressions) });
 	}
 
 	// reflection
@@ -121,7 +121,7 @@ public:
 				{
 					try
 					{
-						kind = cast<expression_a<>>(kind).operate(thing, range);
+						kind = fast<expression_a<>>(kind).operate(thing, range);
 					}
 					catch (misunderstanding_a<>& misunderstanding)
 					{
@@ -130,7 +130,7 @@ public:
 				}
 				if (exception.kinds_().has_(kind))
 				{
-					cast<unordered_shoal_a<>>(thing).update_(name, exception);
+					fast<unordered_shoal_a<>>(thing).update_(name, exception);
 					return eit->operate(thing, range);
 				}
 				++eit;
@@ -154,18 +154,18 @@ public:
 		forward_extractor_a<> eit = _expressions.extract_begin_();
 		for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 		{
-			river.write_string(", " + cast<symbol_a<>>(name).to_string());
+			river.write_string(", " + fast<symbol_a<>>(name).to_string());
 			auto kind = *kit;
 			++kit;
 			if (check<kind_a<>>(kind))
 			{
-				river.write_string(cast<kind_a<>>(kind).to_string());
+				river.write_string(fast<kind_a<>>(kind).to_string());
 			}
 			else if (check<expression_a<>>(kind))
 			{
-				cast<expression_a<>>(kind).generate(version, indent, river);
+				fast<expression_a<>>(kind).generate(version, indent, river);
 			}
-			cast<expression_a<>>(*eit).generate(version, indent, river);
+			fast<expression_a<>>(*eit).generate(version, indent, river);
 			++eit;
 		}
 		river.write_string(")\n");
@@ -182,7 +182,7 @@ public:
 				{
 					throw dis(expression_t<___ego___>::_token.report() + "strange::expression_catch::generate_cpp with non-expression");
 				}
-				cast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
+				fast<expression_a<>>(expression).generate_cpp(version, indent, river, declare, define);
 			}
 			return;
 		}
@@ -197,9 +197,9 @@ public:
 		forward_extractor_a<> eit = _expressions.extract_begin_();
 		for (auto const& name : expression_t<___ego___>::_names.extract_vector())
 		{
-			river.write_string("catch(" + cast<kind_a<>>(*kit).code() + " const& exception)\n{\n");
+			river.write_string("catch(" + fast<kind_a<>>(*kit).code() + " const& exception)\n{\n");
 			++kit;
-			cast<expression_a<>>(*eit).generate_cpp(version, indent, river, declare, define);
+			fast<expression_a<>>(*eit).generate_cpp(version, indent, river, declare, define);
 			++eit;
 			river.write_string("\n}\n");
 		}

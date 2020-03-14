@@ -25,7 +25,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_intimate_member_range::create passed non-symbol member term");
 		}
-		return expression_substitute_t<over>::create(over{ expression_intimate_member_t<>(token, terms, cast<symbol_a<>>(member)) });
+		return expression_substitute_t<over>::create(over{ expression_intimate_member_t<>(token, terms, fast<symbol_a<>>(member)) });
 	}
 
 	// reflection

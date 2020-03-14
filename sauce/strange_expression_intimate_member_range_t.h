@@ -34,7 +34,7 @@ public:
 		{
 			throw dis(token.report() + "strange::expression_intimate_member_range::create passed non-expression range term");
 		}
-		return expression_substitute_t<over>::create(over{ expression_intimate_member_range_t<>(token, terms, cast<symbol_a<>>(member), cast<expression_a<>>(range)) });
+		return expression_substitute_t<over>::create(over{ expression_intimate_member_range_t<>(token, terms, fast<symbol_a<>>(member), fast<expression_a<>>(range)) });
 	}
 
 	// reflection
@@ -69,7 +69,7 @@ public:
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_intimate_member_range::operate with non-range term");
 		}
-		return any_c<>::intimate(it->second, _member, cast<range_a<>>(range_term));
+		return any_c<>::intimate(it->second, _member, fast<range_a<>>(range_term));
 	}
 
 	// expression

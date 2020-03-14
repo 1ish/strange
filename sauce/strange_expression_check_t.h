@@ -35,14 +35,14 @@ public:
 		}
 		if (++it == terms.extract_end_())
 		{
-			return expression_a<>{ over{ expression_check_t<>(token, terms, cast<expression_a<>>(thing), expression_kind_t<>::create_(token, flock_t<>::create_())) } };
+			return expression_a<>{ over{ expression_check_t<>(token, terms, fast<expression_a<>>(thing), expression_kind_t<>::create_(token, flock_t<>::create_())) } };
 		}
 		any_a<> abstraction = *it;
 		if (!check<expression_a<>>(abstraction))
 		{
 			throw dis(token.report() + "strange::expression_check::create passed non-expression abstraction term");
 		}
-		return expression_a<>::create<over>(expression_check_t<>(token, terms, cast<expression_a<>>(thing), cast<expression_a<>>(abstraction)));
+		return expression_a<>::create<over>(expression_check_t<>(token, terms, fast<expression_a<>>(thing), fast<expression_a<>>(abstraction)));
 	}
 
 	// reflection
