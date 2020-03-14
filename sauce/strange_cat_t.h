@@ -26,7 +26,7 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order));
+			return create_(fast<number_data_a<int64_t>>(order));
 		}
 		any_a<> name = *it;
 		if (!check<symbol_a<>>(name))
@@ -35,7 +35,7 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name));
+			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name));
 		}
 		any_a<> dimensions = *it;
 		if (!check<flock_a<>>(dimensions))
@@ -44,7 +44,7 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions));
+			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions));
 		}
 		any_a<> parameters = *it;
 		if (!check<flock_a<>>(parameters))
@@ -53,14 +53,14 @@ public:
 		}
 		if (++it == range.extract_end_())
 		{
-			return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters));
+			return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(parameters));
 		}
 		any_a<> result = *it;
 		if (!check<symbol_a<>>(result))
 		{
 			throw dis("strange::cat::create passed non-symbol result");
 		}
-		return create_(cast<number_data_a<int64_t>>(order), cast<symbol_a<>>(name), cast<flock_a<>>(dimensions), cast<flock_a<>>(parameters), cast<symbol_a<>>(result));
+		return create_(fast<number_data_a<int64_t>>(order), fast<symbol_a<>>(name), fast<flock_a<>>(dimensions), fast<flock_a<>>(parameters), fast<symbol_a<>>(result));
 	}
 
 	static inline cat_a<> create_()
@@ -163,7 +163,7 @@ public:
 
 	inline cat_a<> result_() const
 	{
-		return check<cat_a<>>(_result) ? cast<cat_a<>>(_result) : create_();
+		return check<cat_a<>>(_result) ? fast<cat_a<>>(_result) : create_();
 	}
 
 	inline lake_a<int8_t> code_() const
@@ -209,7 +209,7 @@ protected:
 		int64_t anys = 0;
 		for (auto const& dimension : dimensions)
 		{
-			cat_a<> const cat = cast<cat_a<>>(dimension);
+			cat_a<> const cat = fast<cat_a<>>(dimension);
 			std::string const str = cat.to_string();
 			if (str == "<>")
 			{
@@ -245,7 +245,7 @@ protected:
 			cat_a<> cat;
 			if (is_cat)
 			{
-				cat = cast<cat_a<>>(aspect);
+				cat = fast<cat_a<>>(aspect);
 			}
 			std::string str;
 			if (is_cat && (str = cat.to_string()) == "<>")
@@ -285,7 +285,7 @@ protected:
 		anys = 0;
 		for (auto const& parameter : parameters)
 		{
-			cat_a<> const cat = cast<cat_a<>>(parameter);
+			cat_a<> const cat = fast<cat_a<>>(parameter);
 			std::string const str = cat.to_string();
 			if (str == "<>")
 			{
@@ -331,27 +331,27 @@ protected:
 
 	static inline bool _symbolic_(flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result)
 	{
-		if (check<cat_a<>>(result) && !cast<cat_a<>>(result).symbolic())
+		if (check<cat_a<>>(result) && !fast<cat_a<>>(result).symbolic())
 		{
 			return false;
 		}
 		for (auto const& dimension : dimensions)
 		{
-			if (!cast<cat_a<>>(dimension).symbolic())
+			if (!fast<cat_a<>>(dimension).symbolic())
 			{
 				return false;
 			}
 		}
 		for (auto const& aspect : aspects)
 		{
-			if (!check<cat_a<>>(aspect) || !cast<cat_a<>>(aspect).symbolic())
+			if (!check<cat_a<>>(aspect) || !fast<cat_a<>>(aspect).symbolic())
 			{
 				return false;
 			}
 		}
 		for (auto const& parameter : parameters)
 		{
-			if (!cast<cat_a<>>(parameter).symbolic())
+			if (!fast<cat_a<>>(parameter).symbolic())
 			{
 				return false;
 			}

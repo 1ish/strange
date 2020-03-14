@@ -43,11 +43,18 @@ public:
 	// comparison
 	inline bool same_(any_a<> const& thing) const
 	{
-		if (!check<data_a<_data_>>(thing))
-		{
-			return false;
-		}
-		return _data == cast<data_a<_data_>>(thing).extract_data();
+		return check<data_a<_data_>>(thing) &&
+			_data == fast<data_a<_data_>>(thing).extract_data();
+	}
+
+	inline bool operator==(data_a<_data_> const& data) const
+	{
+		return _data == data.extract_data();
+	}
+
+	inline bool operator!=(data_a<_data_> const& data) const
+	{
+		return _data != data.extract_data();
 	}
 
 	inline std::size_t hash() const

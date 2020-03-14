@@ -12,6 +12,12 @@ template <typename _1_>
 class data_a : public any_a<>
 {
 public:
+	inline bool operator==(data_a < _1_ > const & data ) const
+	{ assert(___handle___); return ___read___().operator==(data); }
+
+	inline bool operator!=(data_a < _1_ > const & data ) const
+	{ assert(___handle___); return ___read___().operator!=(data); }
+
 	inline _1_ const & extract_data() const
 	{ assert(___handle___); return ___read___().extract_data(); }
 
@@ -21,6 +27,8 @@ public:
 protected:
 	struct ___data_a_handle_base___ : ___any_a_handle_base___
 	{
+		virtual bool operator==(data_a < _1_ > const & data ) const = 0;
+		virtual bool operator!=(data_a < _1_ > const & data ) const = 0;
 		virtual _1_ const & extract_data() const = 0;
 		virtual _1_ & mutate_data() = 0;
 	};
@@ -42,6 +50,12 @@ protected:
 		inline ___data_a_handle___(___variadic_tag___, Args&&... args)
 			: ___any_a_handle___<___TTT___, ___DHB___>(___variadic_tag___{}, std::forward<Args>(args)...)
 		{}
+
+		virtual inline bool operator==(data_a < _1_ > const & data ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator==(data); }
+
+		virtual inline bool operator!=(data_a < _1_ > const & data ) const final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.operator!=(data); }
 
 		virtual inline _1_ const & extract_data() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_data(); }
@@ -269,6 +283,12 @@ template <typename _1_>
 class data_d : public any_a<>
 {
 public:
+	inline bool operator==(data_a < _1_ > const & data ) const
+	{ throw dis("dynamic data_d::operator==(data) not available"); }
+
+	inline bool operator!=(data_a < _1_ > const & data ) const
+	{ throw dis("dynamic data_d::operator!=(data) not available"); }
+
 	inline _1_ const & extract_data() const
 	{ throw dis("dynamic data_d::extract_data() not available"); }
 

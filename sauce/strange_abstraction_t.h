@@ -31,7 +31,7 @@ public:
 		auto const scope = *it;
 		if (!check<symbol_a<>>(scope))
 		{
-			throw dis(cast<token_a<>>(token).report() + "strange::abstraction::create passed non-symbol scope");
+			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-symbol scope");
 		}
 		if (++it == range.extract_end_())
 		{
@@ -40,7 +40,7 @@ public:
 		auto const names = *it;
 		if (!check<flock_a<>>(names))
 		{
-			throw dis(cast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension names");
+			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension names");
 		}
 		if (++it == range.extract_end_())
 		{
@@ -49,7 +49,7 @@ public:
 		auto const dimension_kinds = *it;
 		if (!check<flock_a<>>(dimension_kinds))
 		{
-			throw dis(cast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension kinds");
+			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension kinds");
 		}
 		if (++it == range.extract_end_())
 		{
@@ -58,7 +58,7 @@ public:
 		auto const dimension_defaults = *it;
 		if (!check<flock_a<>>(dimension_defaults))
 		{
-			throw dis(cast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension defaults");
+			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock dimension defaults");
 		}
 		if (++it == range.extract_end_())
 		{
@@ -67,9 +67,9 @@ public:
 		auto const parent_expressions = *it;
 		if (!check<flock_a<>>(parent_expressions))
 		{
-			throw dis(cast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock parent expressions");
+			throw dis(fast<token_a<>>(token).report() + "strange::abstraction::create passed non-flock parent expressions");
 		}
-		return create_(cast<token_a<>>(token), cast<symbol_a<>>(scope), cast<flock_a<>>(names), cast<flock_a<>>(dimension_kinds), cast<flock_a<>>(dimension_defaults), cast<flock_a<>>(parent_expressions));
+		return create_(fast<token_a<>>(token), fast<symbol_a<>>(scope), fast<flock_a<>>(names), fast<flock_a<>>(dimension_kinds), fast<flock_a<>>(dimension_defaults), fast<flock_a<>>(parent_expressions));
 	}
 
 	static inline operation_a<> create_(token_a<> const& token, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
@@ -107,7 +107,7 @@ public:
 			{
 				try
 				{
-					any_kind = cast<expression_a<>>(any_kind).operate(local_shoal, range);
+					any_kind = fast<expression_a<>>(any_kind).operate(local_shoal, range);
 				}
 				catch (misunderstanding_a<>& misunderstanding)
 				{
@@ -118,7 +118,7 @@ public:
 			{
 				throw dis(_token.report() + "strange::abstraction::operate non-kind dimension kind");
 			}
-			auto const kind = cast<kind_a<>>(any_kind);
+			auto const kind = fast<kind_a<>>(any_kind);
 
 			auto const name = *nit++;
 			if (ait != range.extract_end_())
@@ -162,7 +162,7 @@ public:
 			{
 				throw dis("strange::abstraction::operate parent expression returned non-unordered-shoal");
 			}
-			_merge(cast<unordered_shoal_a<>>(parent), child, aspects_shoal);
+			_merge(fast<unordered_shoal_a<>>(parent), child, aspects_shoal);
 		}
 		child.insert_string("#", aspects_shoal);
 		return child;
@@ -221,8 +221,8 @@ protected:
 			}
 			if (aspects_unordered_shoal && check<operation_a<>>(member.second))
 			{
-				auto operation = cast<operation_a<>>(member.second);
-				operation.aspects(cast<unordered_shoal_a<>>(aspects));
+				auto operation = fast<operation_a<>>(member.second);
+				operation.aspects(fast<unordered_shoal_a<>>(aspects));
 				map.emplace(member.first, operation);
 			}
 			else

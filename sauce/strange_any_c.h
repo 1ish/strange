@@ -22,7 +22,7 @@ public:
 		{
 			throw dis("<strange::any>::animate passed non-shoal conception");
 		}
-		return animate_(cast<shoal_a<>>(conception));
+		return animate_(fast<shoal_a<>>(conception));
 	}
 
 	static inline any_a<> animate_(shoal_a<> const& conception)
@@ -65,7 +65,7 @@ public:
 			{
 				throw dis("<strange::any>::type returned non-symbol");
 			}
-			return cast<symbol_a<>>(result);
+			return fast<symbol_a<>>(result);
 		}
 		static symbol_a<> TYPE = sym("<strange::any>");
 		return TYPE;
@@ -95,7 +95,7 @@ public:
 			{
 				throw dis("<strange::any>::shared returned non-unordered-shoal");
 			}
-			return cast<unordered_shoal_a<>>(result);
+			return fast<unordered_shoal_a<>>(result);
 		}
 		unordered_shoal_a<> shoal = unordered_shoal_t<>::create_();
 		share(shoal);
@@ -129,7 +129,7 @@ public:
 			{
 				throw dis("<strange::any>::cat returned non-cat");
 			}
-			return cast<cat_a<>>(result);
+			return fast<cat_a<>>(result);
 		}
 		return ___ego___::___cat___();
 	}
@@ -156,7 +156,7 @@ public:
 			{
 				throw dis("<strange::any>::cats returned non-unordered-herd");
 			}
-			return cast<unordered_herd_a<>>(result);
+			return fast<unordered_herd_a<>>(result);
 		}
 		return ___ego___::___cats___();
 	}
@@ -183,7 +183,7 @@ public:
 			{
 				throw dis("<strange::any>::kind returned non-kind");
 			}
-			return cast<kind_a<>>(result);
+			return fast<kind_a<>>(result);
 		}
 		return ___ego___::___kind___();
 	}
@@ -210,7 +210,7 @@ public:
 			{
 				throw dis("<strange::any>::kinds returned non-unordered-herd");
 			}
-			return cast<unordered_herd_a<>>(result);
+			return fast<unordered_herd_a<>>(result);
 		}
 		return ___ego___::___kinds___();
 	}
@@ -392,7 +392,7 @@ public:
 			{
 				throw dis("<strange::any>::hash returned non-number-uint64");
 			}
-			return cast<number_data_a<uint64_t>>(result);
+			return fast<number_data_a<uint64_t>>(result);
 		}
 		return number_uint_64_t<>::create(uint64_t(std::hash<void const*>{}(identity())));
 	}
@@ -408,7 +408,7 @@ public:
 			{
 				throw dis("<strange::any>::hash returned non-number-uint64");
 			}
-			return cast<number_data_a<uint64_t>>(result).extract_primitive();
+			return fast<number_data_a<uint64_t>>(result).extract_primitive();
 		}
 		return std::hash<void const*>{}(identity());
 	}
@@ -421,7 +421,7 @@ public:
 		{
 			throw dis("<strange::any>::intimate passed empty range");
 		}
-		any_a<> thing = cast_dup(*it);
+		any_a<> thing = fast_dup(*it);
 		if (++it == range.extract_end_())
 		{
 			throw dis("<strange::any>::intimate passed short range");
@@ -486,13 +486,13 @@ protected:
 		unordered_shoal_a<> operations = ___ego___::___operations___();
 		for (auto const& op : conception)
 		{
-			auto const flop = cast<flock_a<>>(op);
+			auto const flop = fast<flock_a<>>(op);
 			auto const key = flop.at_index(0);
 			if (!check<symbol_a<>>(key))
 			{
 				throw dis("<strange::any>::animate passed conception with non-symbol key");
 			}
-			if (cast<symbol_a<>>(key).first_character() == '_')
+			if (fast<symbol_a<>>(key).first_character() == '_')
 			{
 				continue;
 			}

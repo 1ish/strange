@@ -6,6 +6,9 @@ false &&
 			(	// parent
 				$$<>[],
 				{	// data
+					'operator==' : "bool (data_a<_1_> const& data) const",
+					'operator!=' : "bool (data_a<_1_> const& data) const",
+
 					extract_data : "_1_ const& () const",
 					mutate_data : "_1_& ()",
 				}

@@ -64,7 +64,7 @@ public:
 			{
 				throw dis("strange::conception::create merge parent type returned non-symbol");
 			}
-			type = cast<symbol_a<>>(type_any);
+			type = fast<symbol_a<>>(type_any);
 		}
 		auto const type_string = type.to_string();
 
@@ -81,7 +81,7 @@ public:
 			{
 				throw dis("strange::conception::create merge parent cat returned non-cat");
 			}
-			cat = cast<cat_a<>>(cat_any);
+			cat = fast<cat_a<>>(cat_any);
 		}
 		cats.insert_thing(cat);
 
@@ -111,7 +111,7 @@ public:
 			{
 				throw dis("strange::conception::create merge parent kind returned non-kind");
 			}
-			kind = cast<kind_a<>>(kind_any);
+			kind = fast<kind_a<>>(kind_any);
 		}
 		kinds.insert_thing(kind);
 
@@ -120,7 +120,7 @@ public:
 		{
 			if (check<unordered_herd_a<>>(cats_any))
 			{
-				kinds += kinds_from_cats(cast<unordered_herd_a<>>(cats_any));
+				kinds += kinds_from_cats(fast<unordered_herd_a<>>(cats_any));
 			}
 		}
 		else
@@ -140,7 +140,7 @@ public:
 			{
 				throw dis("strange::conception::create merge passed non-symbol key");
 			}
-			auto key = cast<symbol_a<>>(member.first);
+			auto key = fast<symbol_a<>>(member.first);
 			bool const intimate = key.first_character() == '_';
 			if (intimate)
 			{
@@ -183,7 +183,7 @@ protected:
 			{
 				throw dis("strange::conception::create passed non-unordered-shoal parent");
 			}
-			merge(cast<unordered_shoal_a<>>(parent), type, cat, cats, kind, kinds);
+			merge(fast<unordered_shoal_a<>>(parent), type, cat, cats, kind, kinds);
 		}
 		// add operations for type, cat, cats, kind and kinds
 		unordered_shoal_t<false, ___ego___>::_map.emplace(sym("type"), attribute_extraction_create(type));
