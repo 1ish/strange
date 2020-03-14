@@ -245,6 +245,16 @@ public:
 	}
 
 	// river input
+	inline lake_a<int8_t> to_lake_()
+	{
+		auto result = lake_t<int8_t>::create_();
+		while (good())
+		{
+			result += read_();
+		}
+		return result;
+	}
+
 	inline std::string to_string()
 	{
 		std::string result;

@@ -8,8 +8,8 @@ false &&
 					extract_begin : "forward_extractor_data_a<std::istreambuf_iterator<char>> () const",
 					extract_end : "forward_extractor_data_a<std::istreambuf_iterator<char>> () const",
 
-					//TODO to_lake_
-					to_string : "std::string ()", //TODO { return lake_to_string(to_lake_()); }
+					to_lake_ := (<lake_int8>),
+					to_string : "std::string () { return lake_to_string(to_lake_()); }",
 
 					get_char_ := (<number_data_int8>),
 					get_char : "int8_t () { return get_char_().extract_primitive(); }",

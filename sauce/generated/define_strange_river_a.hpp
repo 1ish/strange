@@ -18,6 +18,11 @@ public:
 	inline forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_end() const
 	{ assert(___handle___); return ___read___().extract_end(); }
 
+	inline any_a<> to_lake__(range_a<> const& ___arguments___);
+
+	inline lake_int8_a<> to_lake_()
+	{ assert(___handle___); return ___write___().to_lake_(); }
+
 	inline std :: string to_string()
 	{ assert(___handle___); return ___write___().to_string(); }
 
@@ -256,6 +261,7 @@ protected:
 	{
 		virtual forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_begin() const = 0;
 		virtual forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_end() const = 0;
+		virtual lake_int8_a<> to_lake_() = 0;
 		virtual std :: string to_string() = 0;
 		virtual number_data_int8_a<> get_char_() = 0;
 		virtual int8_t get_char() = 0;
@@ -340,6 +346,9 @@ protected:
 
 		virtual inline forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_end() const final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.extract_end(); }
+
+		virtual inline lake_int8_a<> to_lake_() final
+		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_lake_(); }
 
 		virtual inline std :: string to_string() final
 		{ return ___any_a_handle___<___TTT___, ___DHB___>::___value___.to_string(); }
@@ -718,6 +727,7 @@ public:
 		static ___unordered_shoal_a___ OPERATIONS = []()
 		{
 			___unordered_shoal_a___ operations = range_a::___operations___<___unordered_shoal_a___>();
+			operations.update_string("to_lake_", native_mutation_t<river_a>::create(&river_a::to_lake__));
 			operations.update_string("get_char_", native_mutation_t<river_a>::create(&river_a::get_char__));
 			operations.update_string("peek_char_", native_mutation_t<river_a>::create(&river_a::peek_char__));
 			operations.update_string("unget_char_", native_mutation_t<river_a>::create(&river_a::unget_char__));
@@ -772,8 +782,30 @@ public:
 	inline forward_extractor_data_a < std :: istreambuf_iterator < char > > extract_end() const
 	{ throw dis("dynamic river_d::extract_end() not available"); }
 
+	inline any_a<> to_lake__(range_a<> const& arguments)
+	{
+		assert(___handle___);
+		auto const op = operation("to_lake_");
+		if (!op)
+		{
+			throw dis("dynamic river_d::to_lake_ passed non-existent member");
+		}
+		return op.operate(*this, arguments);
+	}
+
+	inline lake_int8_a<> to_lake_()
+	{
+		assert(___handle___);
+		auto const op = operation("to_lake_");
+		if (!op)
+		{
+			throw dis("dynamic river_d::to_lake_ passed non-existent member");
+		}
+		return cast<lake_int8_a<>>(variadic_operate(op, *this));
+	}
+
 	inline std :: string to_string()
-	{ throw dis("dynamic river_d::to_string() not available"); }
+	{ return lake_to_string(to_lake_()); }
 
 	inline any_a<> get_char__(range_a<> const& arguments)
 	{

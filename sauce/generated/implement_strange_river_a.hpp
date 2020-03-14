@@ -3,6 +3,12 @@ namespace strange
 {
 
 template <typename _1_>
+inline any_a<> river_a<_1_>::to_lake__(range_a<> const& ___arguments___)
+{
+	return to_lake_();
+}
+
+template <typename _1_>
 inline any_a<> river_a<_1_>::get_char__(range_a<> const& ___arguments___)
 {
 	return get_char_();
