@@ -7,18 +7,18 @@ namespace strange
 template <bool _concurrent_ = false, typename ___ego___ = squad_a<>>
 class squad_t : public thing_t<___ego___>
 {
-	template <typename _mutator_, typename ___ego_it___ = random_access_mutator_data_a<_mutator_>>
+	template <typename _iterator_, typename ___ego_it___ = random_access_mutator_data_a<_iterator_>>
 	class mutator_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<mutator_t<_mutator_>>;
+		using over = thing_o<mutator_t<_iterator_>>;
 
 		// construction
 		template <typename F>
-		static inline random_access_mutator_data_a<_mutator_> create(squad_t const& squad_thing, F&& it)
+		static inline random_access_mutator_data_a<_iterator_> create(squad_t const& squad_thing, F&& it)
 		{
-			return random_access_mutator_data_a<_mutator_>::template create<over>(mutator_t<_mutator_>(squad_thing, std::forward<F>(it)));
+			return random_access_mutator_data_a<_iterator_>::template create<over>(mutator_t<_iterator_>(squad_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -34,17 +34,72 @@ class squad_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			if (!check<random_access_mutator_data_a<_mutator_>>(thing))
-			{
-				return false;
-			}
-			return _it == cast<random_access_mutator_data_a<_mutator_>>(thing).extract_it();
+			return check<random_access_mutator_data_a<_iterator_>>(thing) &&
+				_it == fast<random_access_mutator_data_a<_iterator_>>(thing).extract_it();
+		}
+
+		inline bool operator==(random_access_mutator_data_a<_iterator_> const& it) const
+		{
+			return _it == it.extract_it();
+		}
+
+		inline bool operator!=(random_access_mutator_data_a<_iterator_> const& it) const
+		{
+			return _it != it.extract_it();
 		}
 
 		inline std::size_t hash() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
+		}
+
+		inline bool less_than_(any_a<> const& thing) const
+		{
+			return check<random_access_mutator_data_a<_iterator_>>(thing)
+				? _it < fast<random_access_mutator_data_a<_iterator_>>(thing).extract_it()
+				: one_t::less_than_(thing);
+		}
+
+		inline bool operator<(random_access_mutator_data_a<_iterator_> const& it) const
+		{
+			return _it < it.extract_it();
+		}
+
+		inline bool greater_than_(any_a<> const& thing) const
+		{
+			return check<random_access_mutator_data_a<_iterator_>>(thing)
+				? _it > fast<random_access_mutator_data_a<_iterator_>>(thing).extract_it()
+				: one_t::greater_than_(thing);
+		}
+
+		inline bool operator>(random_access_mutator_data_a<_iterator_> const& it) const
+		{
+			return _it > it.extract_it();
+		}
+
+		inline bool less_or_equal_(any_a<> const& thing) const
+		{
+			return check<random_access_mutator_data_a<_iterator_>>(thing)
+				? _it <= fast<random_access_mutator_data_a<_iterator_>>(thing).extract_it()
+				: one_t::less_or_equal_(thing);
+		}
+
+		inline bool operator<=(random_access_mutator_data_a<_iterator_> const& it) const
+		{
+			return _it <= it.extract_it();
+		}
+
+		inline bool greater_or_equal_(any_a<> const& thing) const
+		{
+			return check<random_access_mutator_data_a<_iterator_>>(thing)
+				? _it >= fast<random_access_mutator_data_a<_iterator_>>(thing).extract_it()
+				: one_t::greater_or_equal_(thing);
+		}
+
+		inline bool operator>=(random_access_mutator_data_a<_iterator_> const& it) const
+		{
+			return _it >= it.extract_it();
 		}
 
 		// forward mutator
@@ -112,39 +167,19 @@ class squad_t : public thing_t<___ego___>
 			return result;
 		}
 
-		inline bool less_than_(any_a<> const& it) const
-		{
-			return _it < cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
-		}
-
-		inline bool greater_than_(any_a<> const& it) const
-		{
-			return _it > cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
-		}
-
-		inline bool less_or_equal_(any_a<> const& it) const
-		{
-			return _it <= cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
-		}
-
-		inline bool greater_or_equal_(any_a<> const& it) const
-		{
-			return _it >= cast<random_access_mutator_data_a<_mutator_>>(it).extract_it();
-		}
-
 		// data
-		inline _mutator_ const& extract_it() const
+		inline _iterator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _mutator_& mutate_it()
+		inline _iterator_& mutate_it()
 		{
 			return _it;
 		}
 
 	protected:
-		_mutator_ _it;
+		_iterator_ _it;
 		squad_t const& _squad_thing;
 
 		template <typename F>
@@ -155,18 +190,18 @@ class squad_t : public thing_t<___ego___>
 		{}
 	};
 
-	template <typename _mutator_, typename ___ego_it___ = random_access_extractor_data_a<_mutator_>>
+	template <typename _iterator_, typename ___ego_it___ = random_access_extractor_data_a<_iterator_>>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
 		// override
-		using over = thing_o<extractor_t<_mutator_>>;
+		using over = thing_o<extractor_t<_iterator_>>;
 
 		// construction
 		template <typename F>
-		static inline random_access_extractor_data_a<_mutator_> create(squad_a<> const& squad, squad_t const& squad_thing, F&& it)
+		static inline random_access_extractor_data_a<_iterator_> create(squad_a<> const& squad, squad_t const& squad_thing, F&& it)
 		{
-			return random_access_extractor_data_a<_mutator_>::template create<over>(extractor_t<_mutator_>(squad, squad_thing, std::forward<F>(it)));
+			return random_access_extractor_data_a<_iterator_>::template create<over>(extractor_t<_iterator_>(squad, squad_thing, std::forward<F>(it)));
 		}
 
 		// reflection
@@ -182,17 +217,72 @@ class squad_t : public thing_t<___ego___>
 		// comparison
 		inline bool same_(any_a<> const& thing) const
 		{
-			if (!check<random_access_extractor_data_a<_mutator_>>(thing))
-			{
-				return false;
-			}
-			return _it == cast<random_access_extractor_data_a<_mutator_>>(thing).extract_it();
+			return check<random_access_extractor_data_a<_iterator_>>(thing) &&
+				_it == fast<random_access_extractor_data_a<_iterator_>>(thing).extract_it();
+		}
+
+		inline bool operator==(random_access_extractor_data_a<_iterator_> const& it) const
+		{
+			return _it == it.extract_it();
+		}
+
+		inline bool operator!=(random_access_extractor_data_a<_iterator_> const& it) const
+		{
+			return _it != it.extract_it();
 		}
 
 		inline std::size_t hash() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_squad_thing._mutex);
 			return std::hash<void const*>{}(&*_it);
+		}
+
+		inline bool less_than_(any_a<> const& thing) const
+		{
+			return check<random_access_extractor_data_a<_iterator_>>(thing)
+				? _it < fast<random_access_extractor_data_a<_iterator_>>(thing).extract_it()
+				: one_t::less_than_(thing);
+		}
+
+		inline bool operator<(random_access_extractor_data_a<_iterator_> const& it) const
+		{
+			return _it < it.extract_it();
+		}
+
+		inline bool greater_than_(any_a<> const& thing) const
+		{
+			return check<random_access_extractor_data_a<_iterator_>>(thing)
+				? _it > fast<random_access_extractor_data_a<_iterator_>>(thing).extract_it()
+				: one_t::greater_than_(thing);
+		}
+
+		inline bool operator>(random_access_extractor_data_a<_iterator_> const& it) const
+		{
+			return _it > it.extract_it();
+		}
+
+		inline bool less_or_equal_(any_a<> const& thing) const
+		{
+			return check<random_access_extractor_data_a<_iterator_>>(thing)
+				? _it <= fast<random_access_extractor_data_a<_iterator_>>(thing).extract_it()
+				: one_t::less_or_equal_(thing);
+		}
+
+		inline bool operator<=(random_access_extractor_data_a<_iterator_> const& it) const
+		{
+			return _it <= it.extract_it();
+		}
+
+		inline bool greater_or_equal_(any_a<> const& thing) const
+		{
+			return check<random_access_extractor_data_a<_iterator_>>(thing)
+				? _it >= fast<random_access_extractor_data_a<_iterator_>>(thing).extract_it()
+				: one_t::greater_or_equal_(thing);
+		}
+
+		inline bool operator>=(random_access_extractor_data_a<_iterator_> const& it) const
+		{
+			return _it >= it.extract_it();
 		}
 
 		// forward mutator
@@ -254,39 +344,19 @@ class squad_t : public thing_t<___ego___>
 			return result;
 		}
 
-		inline bool less_than_(any_a<> const& it) const
-		{
-			return _it < cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
-		}
-
-		inline bool greater_than_(any_a<> const& it) const
-		{
-			return _it > cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
-		}
-
-		inline bool less_or_equal_(any_a<> const& it) const
-		{
-			return _it <= cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
-		}
-
-		inline bool greater_or_equal_(any_a<> const& it) const
-		{
-			return _it >= cast<random_access_extractor_data_a<_mutator_>>(it).extract_it();
-		}
-
 		// data
-		inline _mutator_ const& extract_it() const
+		inline _iterator_ const& extract_it() const
 		{
 			return _it;
 		}
 
-		inline _mutator_& mutate_it()
+		inline _iterator_& mutate_it()
 		{
 			return _it;
 		}
 
 	protected:
-		_mutator_ _it;
+		_iterator_ _it;
 		squad_a<> const _squad;
 		squad_t const& _squad_thing;
 
@@ -377,7 +447,19 @@ public:
 			return false;
 		}
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
-		return _deque == cast<squad_a<>>(thing).extract_deque();
+		return _deque == fast<squad_a<>>(thing).extract_deque();
+	}
+
+	inline bool operator==(squad_a<> const& squad) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque == squad.extract_deque();
+	}
+
+	inline bool operator!=(squad_a<> const& squad) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque != squad.extract_deque();
 	}
 
 	inline std::size_t hash() const
@@ -391,8 +473,78 @@ public:
 		return seed;
 	}
 
+	inline bool less_than_(any_a<> const& thing) const
+	{
+		if (!check<squad_a<>>(thing))
+		{
+			return one_t::less_than_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque < fast<squad_a<>>(thing).extract_deque();
+	}
+
+	inline bool operator<(squad_a<> const& squad) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque < squad.extract_deque();
+	}
+
+	inline bool greater_than_(any_a<> const& thing) const
+	{
+		if (!check<squad_a<>>(thing))
+		{
+			return one_t::greater_than_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque > fast<squad_a<>>(thing).extract_deque();
+	}
+
+	inline bool operator>(squad_a<> const& squad) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque > squad.extract_deque();
+	}
+
+	inline bool less_or_equal_(any_a<> const& thing) const
+	{
+		if (!check<squad_a<>>(thing))
+		{
+			return one_t::less_or_equal_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque <= fast<squad_a<>>(thing).extract_deque();
+	}
+
+	inline bool operator<=(squad_a<> const& squad) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque <= squad.extract_deque();
+	}
+
+	inline bool greater_or_equal_(any_a<> const& thing) const
+	{
+		if (!check<squad_a<>>(thing))
+		{
+			return one_t::greater_or_equal_(thing);
+		}
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque >= fast<squad_a<>>(thing).extract_deque();
+	}
+
+	inline bool operator>=(squad_a<> const& squad) const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return _deque >= squad.extract_deque();
+	}
+
 	// range
 	inline random_access_extractor_a<> extract_begin_() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return extractor_t<typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
+	}
+
+	inline random_access_extractor_data_a<typename std_deque_any::const_iterator> extract_begin() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return extractor_t<typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cbegin());
@@ -404,13 +556,31 @@ public:
 		return extractor_t<typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
 	}
 
+	inline random_access_extractor_data_a<typename std_deque_any::const_iterator> extract_end() const
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return extractor_t<typename std_deque_any::const_iterator>::create(thing_t<___ego___>::me_(), *this, _deque.cend());
+	}
+
 	inline random_access_mutator_a<> mutate_begin_()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return mutator_t<typename std_deque_any::iterator>::create(*this, _deque.begin());
 	}
 
+	inline random_access_mutator_data_a<typename std_deque_any::iterator> mutate_begin()
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return mutator_t<typename std_deque_any::iterator>::create(*this, _deque.begin());
+	}
+
 	inline random_access_mutator_a<> mutate_end_()
+	{
+		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
+		return mutator_t<typename std_deque_any::iterator>::create(*this, _deque.end());
+	}
+
+	inline random_access_mutator_data_a<typename std_deque_any::iterator> mutate_end()
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return mutator_t<typename std_deque_any::iterator>::create(*this, _deque.end());

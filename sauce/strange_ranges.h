@@ -152,6 +152,26 @@ namespace strange
 	{
 		return shoal.mutate_end();
 	}
+
+	inline random_access_extractor_data_a<typename std::deque<any_a<>>::const_iterator> begin(squad_a<> const& squad)
+	{
+		return squad.extract_begin();
+	}
+
+	inline random_access_extractor_data_a<typename std::deque<any_a<>>::const_iterator> end(squad_a<> const& squad)
+	{
+		return squad.extract_end();
+	}
+
+	inline random_access_mutator_data_a<typename std::deque<any_a<>>::iterator> begin(squad_a<>& squad)
+	{
+		return squad.mutate_begin();
+	}
+
+	inline random_access_mutator_data_a<typename std::deque<any_a<>>::iterator> end(squad_a<>& squad)
+	{
+		return squad.mutate_end();
+	}
 }
 
 #endif
