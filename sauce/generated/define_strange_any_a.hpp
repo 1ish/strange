@@ -133,10 +133,10 @@ public:
 	inline any_a<> different__(range const& ___arguments___) const;
 
 	inline any_a<> different_(any_a<> const& thing) const
-	{ assert(___handle___); return boole(___read___().different_(thing)); }
+	{ assert(___handle___); return boole(!___read___().same_(thing)); }
 
 	inline bool operator!=(any_a<> const& thing) const
-	{ assert(___handle___); return ___read___().different_(thing); }
+	{ assert(___handle___); return !___read___().same_(thing); }
 
 	inline any_a<> less_than__(range const& ___arguments___) const;
 
@@ -213,7 +213,6 @@ protected:
 		virtual any_a<> something_() const = 0;
 		virtual bool something() const = 0;
 		virtual bool same_(any_a<> const& thing) const = 0;
-		virtual bool different_(any_a<> const& thing) const = 0;
 		virtual bool less_than_(any_a<> const& thing) const = 0;
 		virtual bool greater_than_(any_a<> const& thing) const = 0;
 		virtual bool less_or_equal_(any_a<> const& thing) const = 0;
@@ -310,9 +309,6 @@ protected:
 
 		virtual inline bool same_(any_a<> const& thing) const final
 		{ return bool{ ___value___.same_(thing) }; }
-
-		virtual inline bool different_(any_a<> const& thing) const final
-		{ return bool{ ___value___.different_(thing) }; }
 
 		virtual inline bool less_than_(any_a<> const& thing) const final
 		{ return bool{ ___value___.less_than_(thing) }; }

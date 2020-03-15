@@ -12,11 +12,6 @@ public:
 		: _OVERRIDDEN_{ std::move(overridden) }
 	{}
 
-	inline bool different_(any_a<> const& thing) const
-	{
-		return !_OVERRIDDEN_::same_(thing);
-	}
-
 	inline number_data_a<uint64_t> hash_() const
 	{
 		return num(uint64_t(_OVERRIDDEN_::hash()));
