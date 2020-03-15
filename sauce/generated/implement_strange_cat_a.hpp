@@ -44,21 +44,18 @@ inline any_a<> cat_a<_1_>::code__(range_a<> const& ___arguments___) const
 	return code_();
 }
 
-template <typename _1_>
-bool const cat_a<_1_>::___share___ = []()
+class ___cat_a_share___
+{
+	static bool const share;
+	static inline bool initialize() { return share; }
+};
+
+bool const ___cat_a_share___::share = []()
 {
 	auto& shared_shoal = shared();
 	// register abstraction
 	return shared_shoal;
 }();
-
-class ___cat_a_share___
-{
-	static inline bool ___share___()
-	{
-		return false; // cat_a<>::___share___;
-	}
-};
 
 template <typename _1_>
 inline cat_d<_1_> ___cat_dynamic___(any_a<> const& thing)

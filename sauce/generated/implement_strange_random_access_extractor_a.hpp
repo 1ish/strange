@@ -50,21 +50,18 @@ inline any_a<> random_access_extractor_a<_1_>::subtract__(range_a<> const& ___ar
 	return subtract_(number);
 }
 
-template <typename _1_>
-bool const random_access_extractor_a<_1_>::___share___ = []()
+class ___random_access_extractor_a_share___
+{
+	static bool const share;
+	static inline bool initialize() { return share; }
+};
+
+bool const ___random_access_extractor_a_share___::share = []()
 {
 	auto& shared_shoal = shared();
 	// register abstraction
 	return shared_shoal;
 }();
-
-class ___random_access_extractor_a_share___
-{
-	static inline bool ___share___()
-	{
-		return false; // random_access_extractor_a<>::___share___;
-	}
-};
 
 template <typename _1_>
 inline random_access_extractor_d<_1_> ___random_access_extractor_dynamic___(any_a<> const& thing)

@@ -766,10 +766,6 @@ public:
 	{
 		return river_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
-
-private:
-	static bool const ___share___;
-	friend class ___river_a_share___;
 }; // class river_a
 
 template <typename _1_>

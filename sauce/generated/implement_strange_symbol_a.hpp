@@ -20,21 +20,18 @@ inline any_a<> symbol_a<_1_>::add__(range_a<> const& ___arguments___) const
 	return add_(symbol);
 }
 
-template <typename _1_>
-bool const symbol_a<_1_>::___share___ = []()
+class ___symbol_a_share___
+{
+	static bool const share;
+	static inline bool initialize() { return share; }
+};
+
+bool const ___symbol_a_share___::share = []()
 {
 	auto& shared_shoal = shared();
 	// register abstraction
 	return shared_shoal;
 }();
-
-class ___symbol_a_share___
-{
-	static inline bool ___share___()
-	{
-		return false; // symbol_a<>::___share___;
-	}
-};
 
 template <typename _1_>
 inline symbol_d<_1_> ___symbol_dynamic___(any_a<> const& thing)

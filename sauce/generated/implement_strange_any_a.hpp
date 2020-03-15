@@ -158,20 +158,17 @@ inline any_a<> any_a<range, symbol, cat, kind, inventory, unordered_herd, shoal,
 	return hash_();
 }
 
-template <typename range, typename symbol, typename cat, typename kind, typename inventory, typename unordered_herd, typename shoal, typename unordered_shoal, typename number_data_uint64>
-bool const any_a<range, symbol, cat, kind, inventory, unordered_herd, shoal, unordered_shoal, number_data_uint64>::___share___ = []()
+class ___any_a_share___
+{
+	static bool const share;
+	static inline bool initialize() { return share; }
+};
+
+bool const ___any_a_share___::share = []()
 {
 	auto& shared_shoal = shared();
 	// register abstraction
 	return shared_shoal;
 }();
-
-class ___any_a_share___
-{
-	static inline bool ___share___()
-	{
-		return false; // any_a<>::___share___;
-	}
-};
 
 } // namespace

@@ -1649,11 +1649,7 @@ protected:
 			"\tstatic inline " + class_name + " create(Args&&... args)\n"
 			"\t{\n"
 			"\t\treturn " + class_name + "(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);\n"
-			"\t}\n\n"
-
-			"private:\n"
-			"\tstatic bool const ___share___;\n"
-			"\tfriend class ___" + class_name + "_share___;\n");
+			"\t}\n");
 	}
 
 	inline void _define_class_relfection_(bool root, std::string const& class_name, std::string const& base_name, flock_a<> const& class_expression_terms, int64_t version, int64_t indent, river_a<>& river) const
@@ -1892,24 +1888,20 @@ protected:
 
 	inline void _define_class_share_(std::string const& class_name, int64_t version, river_a<>& river) const
 	{
-		_declare_and_define_template_(version, 0, river, true, true);
-		river.write_string("bool const " + class_name);
-		_declare_and_define_template_(version, 0, river, false, false);
-		river.write_string("::___share___ = []()\n"
+		river.write_string(
+			"class ___" + class_name + "_share___\n"
+			"{\n"
+			"\tstatic bool const share;\n"
+			"\tstatic inline bool initialize() { return share; }\n"
+			"};\n\n"
+		
+			"bool const ___" + class_name + "_share___::share = []()\n"
 			"{\n"
 			"\tauto& shared_shoal = shared();\n"
 			"\t// register abstraction\n"
 			"\treturn shared_shoal;\n"
-			"}();\n\n");
-		
-		river.write_string(
-			"class ___" + class_name + "_share___\n"
-			"{\n"
-			"\tstatic inline bool ___share___()\n"
-			"\t{\n"
-			"\t\treturn false; // " + class_name + "<>::___share___;\n"
-			"\t}\n"
-			"};\n\n");
+			"}();\n\n"
+		);
 	}
 
 	inline void _parse_member_definition_(int64_t version, expression_a<> const& expression, bool extraction, std::string& result, std::string& parameters, std::string& arguments, std::string& constness) const

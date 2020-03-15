@@ -14,21 +14,18 @@ inline any_a<> shoal_a<_1_>::mutate_end__(range_a<> const& ___arguments___)
 	return mutate_end_();
 }
 
-template <typename _1_>
-bool const shoal_a<_1_>::___share___ = []()
+class ___shoal_a_share___
+{
+	static bool const share;
+	static inline bool initialize() { return share; }
+};
+
+bool const ___shoal_a_share___::share = []()
 {
 	auto& shared_shoal = shared();
 	// register abstraction
 	return shared_shoal;
 }();
-
-class ___shoal_a_share___
-{
-	static inline bool ___share___()
-	{
-		return false; // shoal_a<>::___share___;
-	}
-};
 
 template <typename _1_>
 inline shoal_d<_1_> ___shoal_dynamic___(any_a<> const& thing)

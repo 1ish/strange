@@ -198,21 +198,18 @@ inline any_a<> collection_a<_1_>::write_lock__(range_a<> const& ___arguments___)
 	return write_lock_();
 }
 
-template <typename _1_>
-bool const collection_a<_1_>::___share___ = []()
+class ___collection_a_share___
+{
+	static bool const share;
+	static inline bool initialize() { return share; }
+};
+
+bool const ___collection_a_share___::share = []()
 {
 	auto& shared_shoal = shared();
 	// register abstraction
 	return shared_shoal;
 }();
-
-class ___collection_a_share___
-{
-	static inline bool ___share___()
-	{
-		return false; // collection_a<>::___share___;
-	}
-};
 
 template <typename _1_>
 inline collection_d<_1_> ___collection_dynamic___(any_a<> const& thing)
