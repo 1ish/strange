@@ -54,11 +54,6 @@ public:
 	inline symbol type_() const
 	{ assert(___handle___); return ___read___().type_(); }
 
-	inline any_a<> shared__(range const& ___arguments___) const;
-
-	inline unordered_shoal shared_() const
-	{ assert(___handle___); return ___read___().shared_(); }
-
 	inline void share(shoal & shared_shoal ) const
 	{ assert(___handle___); ___read___().share(shared_shoal); }
 
@@ -204,7 +199,6 @@ protected:
 		virtual one_t const & extract_thing() const = 0;
 		virtual one_t & mutate_thing() = 0;
 		virtual symbol type_() const = 0;
-		virtual unordered_shoal shared_() const = 0;
 		virtual void share(shoal & shared_shoal ) const = 0;
 		virtual cat cat_() const = 0;
 		virtual unordered_herd cats_() const = 0;
@@ -269,9 +263,6 @@ protected:
 
 		virtual inline symbol type_() const final
 		{ return ___value___.type_(); }
-
-		virtual inline unordered_shoal shared_() const final
-		{ return ___value___.shared_(); }
 
 		virtual inline void share(shoal & shared_shoal ) const final
 		{ ___value___.share(shared_shoal); }
@@ -578,7 +569,6 @@ public:
 			operations.update_string("call_", native_mutation_t<any_a>::create(&any_a::operator[]));
 			operations.update_string("perform_", native_mutation_t<any_a>::create(&any_a::operator()));
 			operations.update_string("type_", native_extraction_t<any_a>::create(&any_a::type__));
-			operations.update_string("shared_", native_extraction_t<any_a>::create(&any_a::shared__));
 			operations.update_string("cat_", native_extraction_t<any_a>::create(&any_a::cat__));
 			operations.update_string("cats_", native_extraction_t<any_a>::create(&any_a::cats__));
 			operations.update_string("kind_", native_extraction_t<any_a>::create(&any_a::kind__));

@@ -20,7 +20,6 @@ false &&
 					// reflection
 					type_ :# (<#symbol>),
 
-					shared_ :# (<#unordered_shoal>),
 					share : "void (shoal& shared_shoal) const",
 
 					cat_ :# (<#cat>),

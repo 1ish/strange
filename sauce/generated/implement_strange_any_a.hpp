@@ -9,12 +9,6 @@ inline any_a<> any_a<range, symbol, cat, kind, inventory, unordered_herd, shoal,
 }
 
 template <typename range, typename symbol, typename cat, typename kind, typename inventory, typename unordered_herd, typename shoal, typename unordered_shoal, typename number_data_uint64>
-inline any_a<> any_a<range, symbol, cat, kind, inventory, unordered_herd, shoal, unordered_shoal, number_data_uint64>::shared__(range const& ___arguments___) const
-{
-	return shared_();
-}
-
-template <typename range, typename symbol, typename cat, typename kind, typename inventory, typename unordered_herd, typename shoal, typename unordered_shoal, typename number_data_uint64>
 inline any_a<> any_a<range, symbol, cat, kind, inventory, unordered_herd, shoal, unordered_shoal, number_data_uint64>::cat__(range const& ___arguments___) const
 {
 	return cat_();

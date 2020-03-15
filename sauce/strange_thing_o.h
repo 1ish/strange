@@ -12,13 +12,6 @@ public:
 		: _OVERRIDDEN_{ std::move(overridden) }
 	{}
 
-	inline unordered_shoal_a<> shared_() const
-	{
-		unordered_shoal_a<> shoal = unordered_shoal_create();
-		_OVERRIDDEN_::share(shoal);
-		return shoal;
-	}
-
 	inline bool different_(any_a<> const& thing) const
 	{
 		return !_OVERRIDDEN_::same_(thing);
