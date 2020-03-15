@@ -8,9 +8,6 @@ template <typename ___ego___ = operation_a<>>
 class abstraction_t : public operation_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<abstraction_t<>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
@@ -74,7 +71,7 @@ public:
 
 	static inline operation_a<> create_(token_a<> const& token, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
 	{
-		return operation_a<>::create<over>(abstraction_t<>(token, scope, names, dimension_kinds, dimension_defaults, parent_expressions));
+		return operation_a<>::create<abstraction_t<>>(token, scope, names, dimension_kinds, dimension_defaults, parent_expressions);
 	}
 
 	// reflection
@@ -190,6 +187,8 @@ protected:
 	flock_a<> _dimension_kinds;
 	flock_a<> _dimension_defaults;
 	flock_a<> _parent_expressions;
+
+	friend class any_a<>;
 
 	inline abstraction_t(token_a<> const& token, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& dimension_kinds, flock_a<> const& dimension_defaults, flock_a<> const& parent_expressions)
 		: operation_t<___ego___>(false, names) //TODO pure

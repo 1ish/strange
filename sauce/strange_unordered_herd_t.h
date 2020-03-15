@@ -11,14 +11,11 @@ class unordered_herd_t : public thing_t<___ego___>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
-		// override
-		using over = thing_o<extractor_t<_iterator_>>;
-
 		// construction
 		template <typename F>
 		static inline forward_extractor_data_a<_iterator_> create(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)
 		{
-			return forward_extractor_data_a<_iterator_>::template create<over>(extractor_t<_iterator_>(unordered_herd, unordered_herd_thing, std::forward<F>(it)));
+			return forward_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(unordered_herd, unordered_herd_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -97,6 +94,8 @@ class unordered_herd_t : public thing_t<___ego___>
 		_iterator_ _it;
 		unordered_herd_a<> const _unordered_herd;
 		unordered_herd_t const& _unordered_herd_thing;
+
+		friend class any_a<>;
 
 		template <typename F>
 		inline extractor_t(unordered_herd_a<> const& unordered_herd, unordered_herd_t const& unordered_herd_thing, F&& it)

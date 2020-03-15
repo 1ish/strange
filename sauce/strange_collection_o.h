@@ -5,11 +5,11 @@ namespace strange
 {
 
 template <typename _OVERRIDDEN_>
-class collection_o : public thing_o<_OVERRIDDEN_>
+class collection_o : public _OVERRIDDEN_
 {
 public:
 	inline collection_o(_OVERRIDDEN_&& overridden)
-		: thing_o<_OVERRIDDEN_>{ std::move(overridden) }
+		: _OVERRIDDEN_{ std::move(overridden) }
 	{}
 
 	inline any_a<> has_(any_a<> const& key) const

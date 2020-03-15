@@ -8,9 +8,6 @@ template <typename _element_ = any_a<>, typename ___ego___ = range_of_a<_element
 class range_of_t : public thing_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<range_of_t<_element_>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
@@ -44,7 +41,7 @@ public:
 
 	static inline range_of_a<_element_> create_(forward_extractor_a<> const& begin, forward_extractor_a<> const& end)
 	{
-		return range_of_a<_element_>::template create<over>(range_of_t<_element_>(begin, end));
+		return range_of_a<_element_>::template create<range_of_t<_element_>>(begin, end);
 	}
 
 	// reflection
@@ -73,6 +70,8 @@ public:
 protected:
 	forward_extractor_a<> _begin;
 	forward_extractor_a<> _end;
+
+	friend class any_a<>;
 
 	inline range_of_t(forward_extractor_a<> const& begin, forward_extractor_a<> const& end)
 		: thing_t<___ego___>{}

@@ -12,14 +12,11 @@ class range_operator_t : public thing_t<___ego___>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
-		// override
-		using over = thing_o<extractor_t<_iterator_>>;
-
 		// construction
 		template <typename F>
 		static inline forward_extractor_data_a<_iterator_> create(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
 		{
-			return forward_extractor_data_a<_iterator_>{ over{ extractor_t<_iterator_>(range, std::forward<F>(it), thing_ref, range_ref) } };
+			return forward_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(range, std::forward<F>(it), thing_ref, range_ref);
 		}
 
 		// reflection
@@ -111,6 +108,8 @@ class range_operator_t : public thing_t<___ego___>
 		flock_a<> mutable _results;
 		std::size_t _pos;
 
+		friend class any_a<>;
+
 		template <typename F>
 		inline extractor_t(range_a<> const& range, F&& it, any_a<>& thing_ref, range_a<> const& range_ref)
 			: thing_t<___ego_it___>{}
@@ -124,9 +123,6 @@ class range_operator_t : public thing_t<___ego___>
 	};
 
 public:
-	// override
-	using over = thing_o<range_operator_t<>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
@@ -159,7 +155,7 @@ public:
 
 	static inline range_a<> create_(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref)
 	{
-		return range_a<>::create<over>(range_operator_t<>(range, thing_ref, range_ref));
+		return range_a<>::create<range_operator_t<>>(range, thing_ref, range_ref);
 	}
 
 	// reflection
@@ -199,6 +195,8 @@ protected:
 	range_a<> const _range;
 	any_a<>& _thing_ref;
 	range_a<> const& _range_ref;
+
+	friend class any_a<>;
 
 	inline range_operator_t(range_a<> const& range, any_a<>& thing_ref, range_a<> const& range_ref)
 		: thing_t<___ego___>{}

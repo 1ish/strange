@@ -11,14 +11,11 @@ class river_t : public thing_t<___ego___>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
-		// override
-		using over = thing_o<extractor_t<_iterator_>>;
-
 		// construction
 		template <typename F>
 		static inline forward_extractor_data_a<_iterator_> create(river_a<> const& river, F&& it)
 		{
-			return forward_extractor_data_a<_iterator_>::template create<over>(extractor_t<_iterator_>(river, std::forward<F>(it)));
+			return forward_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(river, std::forward<F>(it));
 		}
 
 		// reflection
@@ -97,6 +94,8 @@ class river_t : public thing_t<___ego___>
 		river_a<> const _river;
 		number_data_a<int8_t> mutable _int_8; // stashing mutator
 
+		friend class any_a<>;
+
 		template <typename F>
 		inline extractor_t(river_a<> const& river, F&& it)
 			: thing_t<___ego_it___>{}
@@ -109,9 +108,6 @@ class river_t : public thing_t<___ego___>
 public:
 	using std_shared_basic_ios_char = std::shared_ptr<std::basic_ios<char>>;
 	using std_istreambuf_iterator_char = std::istreambuf_iterator<char>;
-
-	// override
-	using over = thing_o<river_t<>>;
 
 	// construction
 	static inline any_a<> create__(range_a<> const& _)
@@ -127,7 +123,7 @@ public:
 	static inline river_a<> create(std::string const& str = std::string())
 	{
 		std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(str);
-		return river_a<>::create<over>(river_t<>(stream.get(), stream.get(), stream));
+		return river_a<>::create<river_t<>>(stream.get(), stream.get(), stream);
 	}
 
 	static inline any_a<> file__(range_a<> const& range)
@@ -171,7 +167,7 @@ public:
 			(in ? std::fstream::in : static_cast<std::fstream::openmode>(0)) |
 			(out ? std::fstream::out : static_cast<std::fstream::openmode>(0)) |
 			(trunc ? std::fstream::trunc : static_cast<std::fstream::openmode>(0)));
-		return river_a<>::create<over>(river_t<>(stream.get(), stream.get(), stream, name));
+		return river_a<>::create<river_t<>>(stream.get(), stream.get(), stream, name);
 	}
 
 	static inline any_a<> in__(range_a<> const& _)
@@ -181,7 +177,7 @@ public:
 
 	static inline river_a<> in_()
 	{
-		return river_a<>::create<over>(river_t<>{ &std::cin });
+		return river_a<>::create<river_t<>>(&std::cin);
 	}
 
 	static inline any_a<> out__(range_a<> const& _)
@@ -191,7 +187,7 @@ public:
 
 	static inline river_a<> out_()
 	{
-		return river_a<>::create<over>(river_t<>(nullptr, &std::cout));
+		return river_a<>::create<river_t<>>(nullptr, &std::cout);
 	}
 
 	static inline any_a<> err__(range_a<> const& _)
@@ -201,7 +197,7 @@ public:
 
 	static inline river_a<> err_()
 	{
-		return river_a<>::create<over>(river_t<>(nullptr, &std::cerr));
+		return river_a<>::create<river_t<>>(nullptr, &std::cerr);
 	}
 
 	// reflection
@@ -742,6 +738,8 @@ protected:
 	std::ostream* const _ostream;
 	std_shared_basic_ios_char const _stream;
 	std::string const _filename;
+
+	friend class any_a<>;
 
 	inline river_t(std::istream* const is = nullptr, std::ostream* const os = nullptr, std_shared_basic_ios_char const& stream = std_shared_basic_ios_char{}, std::string const& filename = std::string{})
 		: thing_t<___ego___>{}

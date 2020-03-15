@@ -8,9 +8,6 @@ template <typename ___ego___ = cat_a<>>
 class cat_t : public symbol_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<cat_t<>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
@@ -73,18 +70,18 @@ public:
 	{
 		if (name.is("strange::any"))
 		{
-			return cat_a<>::create<over>(cat_t<>(order.extract_primitive(), sym(""), dimensions, flock_t<>::create_(), parameters, result));
+			return cat_a<>::create<cat_t<>>(order.extract_primitive(), sym(""), dimensions, flock_t<>::create_(), parameters, result);
 		}
-		return cat_a<>::create<over>(cat_t<>(order.extract_primitive(), name, dimensions, flock_t<>::create_(), parameters, result));
+		return cat_a<>::create<cat_t<>>(order.extract_primitive(), name, dimensions, flock_t<>::create_(), parameters, result);
 	}
 
 	static inline cat_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_t<>::create_(), flock_a<> const& parameters = flock_t<>::create_(), symbol_a<> const& result = any_sym())
 	{
 		if (name == "strange::any")
 		{
-			return cat_a<>::create<over>(cat_t<>(order, sym(""), dimensions, flock_t<>::create_(), parameters, result));
+			return cat_a<>::create<cat_t<>>(order, sym(""), dimensions, flock_t<>::create_(), parameters, result);
 		}
-		return cat_a<>::create<over>(cat_t<>(order, sym(name), dimensions, flock_t<>::create_(), parameters, result));
+		return cat_a<>::create<cat_t<>>(order, sym(name), dimensions, flock_t<>::create_(), parameters, result);
 	}
 
 	static inline symbol_a<> any_sym()
@@ -189,6 +186,8 @@ protected:
 	flock_a<> const _dimensions;
 	flock_a<> const _parameters;
 	symbol_a<> const _result;
+
+	friend class any_a<>;
 
 	inline cat_t(int64_t order, symbol_a<> const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result)
 		: symbol_t<___ego___>{ _symbol_(order, name, dimensions, aspects, parameters, result) }

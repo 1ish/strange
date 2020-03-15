@@ -8,13 +8,10 @@ template <typename ___ego___ = operation_a<>>
 class attribute_extraction_t : public operation_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<attribute_extraction_t<>>;
-
 	// construction
 	static inline operation_a<> create_(any_a<> const& thing)
 	{
-		return operation_a<>::create<over>(attribute_extraction_t<>(thing));
+		return operation_a<>::create<attribute_extraction_t<>>(thing);
 	}
 
 	// reflection
@@ -39,6 +36,8 @@ public:
 
 protected:
 	any_a<> const _thing;
+
+	friend class any_a<>;
 
 	inline attribute_extraction_t(any_a<> const& thing)
 		: operation_t<___ego___>{}

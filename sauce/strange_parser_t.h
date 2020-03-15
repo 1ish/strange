@@ -8,13 +8,10 @@ template <typename ___ego___ = parser_a<>>
 class parser_t : public thing_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<parser_t<>>;
-
 	// construction
 	static inline parser_a<> create_()
 	{
-		return parser_a<>::create<over>(parser_t<>{});
+		return parser_a<>::create<parser_t<>>();
 	}
 
 	// reflection
@@ -54,6 +51,8 @@ public:
 	}
 
 protected:
+	friend class any_a<>;
+
 	inline parser_t()
 		: thing_t<___ego___>{}
 		, _tokenizer{ tokenizer_t<>::create_(river_t<>::create_()) }

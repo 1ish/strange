@@ -8,13 +8,10 @@ template <typename ___ego___ = operation_a<>>
 class mutation_t : public operation_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<mutation_t<>>;
-
 	// construction
 	static inline operation_a<> create_(token_a<> const& token, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& defaults, expression_a<> const& expression)
 	{
-		return operation_a<>::create<over>(mutation_t<>(token, scope, names, kinds, defaults, expression));
+		return operation_a<>::create<mutation_t<>>(token, scope, names, kinds, defaults, expression);
 	}
 
 	// reflection
@@ -147,6 +144,8 @@ protected:
 	expression_a<> _expression;
 	any_a<> _aspects;
 	unordered_shoal_a<> const _shared;
+
+	friend class any_a<>;
 
 	inline mutation_t(token_a<> const& token, symbol_a<> const& scope, flock_a<> const& names, flock_a<> const& kinds, flock_a<> const& defaults, expression_a<> const& expression)
 		: operation_t<___ego___>(expression.pure(), names)

@@ -8,13 +8,10 @@ template <typename ___ego___ = operation_a<>>
 class description_t : public operation_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<description_t<>>;
-
 	// construction
 	static inline operation_a<> create_()
 	{
-		return operation_a<>::create<over>(description_t<>());
+		return operation_a<>::create<description_t<>>();
 	}
 
 	// reflection
@@ -58,6 +55,8 @@ protected:
 	unordered_herd_a<> const _kinds;
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
+
+	friend class any_a<>;
 
 	inline description_t()
 		: operation_t<___ego___>{}

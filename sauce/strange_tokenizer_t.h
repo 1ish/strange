@@ -11,14 +11,11 @@ class tokenizer_t : public thing_t<___ego___>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
-		// override
-		using over = thing_o<extractor_t<_iterator_>>;
-
 		// construction
 		template <typename F>
 		static inline forward_extractor_data_a<_iterator_> create(river_a<> const& river, F&& it)
 		{
-			return forward_extractor_data_a<_iterator_>::template create<over>(extractor_t<_iterator_>(river, std::forward<F>(it)));
+			return forward_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(river, std::forward<F>(it));
 		}
 
 		// reflection
@@ -462,6 +459,8 @@ class tokenizer_t : public thing_t<___ego___>
 		char _use;
 		token_a<> mutable _token;
 
+		friend class any_a<>;
+
 		template <typename F>
 		inline extractor_t(river_a<> const& river, F&& it)
 			: thing_t<___ego_it___>{}
@@ -524,9 +523,6 @@ class tokenizer_t : public thing_t<___ego___>
 	};
 
 public:
-	// override
-	using over = thing_o<tokenizer_t<>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
@@ -545,7 +541,7 @@ public:
 
 	static inline range_a<> create_(river_a<> const& river)
 	{
-		return range_a<>::create<over>(tokenizer_t<>(river));
+		return range_a<>::create<tokenizer_t<>>(river);
 	}
 
 	// reflection
@@ -573,6 +569,8 @@ public:
 
 protected:
 	river_a<> const _river;
+
+	friend class any_a<>;
 
 	inline tokenizer_t(river_a<> const& river)
 		: thing_t<___ego___>{}

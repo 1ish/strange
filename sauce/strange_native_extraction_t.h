@@ -9,9 +9,6 @@ template <typename _abstraction_, typename ___ego___>
 class native_extraction_t : public operation_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<native_extraction_t<_abstraction_>>;
-
 	// construction
 	template <typename... Args>
 	static inline operation_a<> create(native_const_member_pointer<_abstraction_> const fun, Args&&... args)
@@ -19,8 +16,8 @@ public:
 		std::vector<any_a<>> v;
 		v.reserve(sizeof...(Args));
 		variadic_u<>::variadic(v, std::forward<Args>(args)...);
-		return operation_a<>::create<over>(native_extraction_t<_abstraction_>(fun,
-			operation_t<___ego___>::kind_names_params(flock_create(std::move(v)))));
+		return operation_a<>::create<native_extraction_t<_abstraction_>>(fun,
+			operation_t<___ego___>::kind_names_params(flock_create(std::move(v))));
 	}
 
 	// reflection
@@ -66,6 +63,8 @@ protected:
 	unordered_herd_a<> const _kinds;
 	cat_a<> const _cat;
 	unordered_herd_a<> const _cats;
+
+	friend class any_a<>;
 
 	inline native_extraction_t(native_const_member_pointer<_abstraction_> const fun, std::pair<kind_a<>, flock_a<>> const& kind_names)
 		: operation_t<___ego___>{ false, kind_names.second } //TODO pure

@@ -9,9 +9,6 @@ template <typename _primitive_, typename ___ego___>
 class number_t : public thing_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<number_t<_primitive_>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& _)
 	{
@@ -25,7 +22,7 @@ public:
 
 	static inline number_data_a<_primitive_> create(_primitive_ primitive)
 	{
-		return number_data_a<_primitive_>::template create<over>(number_t<_primitive_>{ primitive });
+		return number_data_a<_primitive_>::template create<number_t<_primitive_>>(primitive);
 	}
 
 	// reflection
@@ -362,6 +359,8 @@ public:
 
 protected:
 	_primitive_ _number;
+
+	friend class any_a<>;
 
 	inline number_t(_primitive_ number)
 		: thing_t<___ego___>{}

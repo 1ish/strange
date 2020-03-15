@@ -8,9 +8,6 @@ template <typename ___ego___ = any_a<>>
 class nothing_t : public thing_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<nothing_t<>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& _)
 	{
@@ -19,7 +16,7 @@ public:
 
 	static inline any_a<> create_()
 	{
-		static any_a<> VAL = any_a<>::create<over>(nothing_t<>{});
+		static any_a<> VAL = any_a<>::create<nothing_t<>>();
 		return VAL;
 	}
 
@@ -79,6 +76,8 @@ public:
 	}
 
 protected:
+	friend class any_a<>;
+
 	inline nothing_t()
 		: thing_t<___ego___>{}
 	{}

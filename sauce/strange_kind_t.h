@@ -9,9 +9,6 @@ template <typename ___ego___>
 class kind_t : public cat_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<kind_t<>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
@@ -97,18 +94,18 @@ public:
 	{
 		if (name.is("strange::any"))
 		{
-			return kind_a<>::create<over>(kind_t<>(order.extract_primitive(), sym(""), dimensions, aspects, parameters, result, fixed, reference, optional));
+			return kind_a<>::create<kind_t<>>(order.extract_primitive(), sym(""), dimensions, aspects, parameters, result, fixed, reference, optional);
 		}
-		return kind_a<>::create<over>(kind_t<>(order.extract_primitive(), name, dimensions, aspects, parameters, result, fixed, reference, optional));
+		return kind_a<>::create<kind_t<>>(order.extract_primitive(), name, dimensions, aspects, parameters, result, fixed, reference, optional);
 	}
 
 	static inline kind_a<> create(int64_t order, std::string const& name = "", flock_a<> const& dimensions = flock_create(), flock_a<> const& aspects = flock_create(), flock_a<> const& parameters = flock_create(), symbol_a<> const& result = cat_t<___ego___>::any_sym(), bool fixed = false, bool reference = false, bool optional = false)
 	{
 		if (name == "strange::any")
 		{
-			return kind_a<>::create<over>(kind_t<>(order, sym(""), dimensions, aspects, parameters, result, fixed, reference, optional));
+			return kind_a<>::create<kind_t<>>(order, sym(""), dimensions, aspects, parameters, result, fixed, reference, optional);
 		}
-		return kind_a<>::create<over>(kind_t<>(order, sym(name), dimensions, aspects, parameters, result, fixed, reference, optional));
+		return kind_a<>::create<kind_t<>>(order, sym(name), dimensions, aspects, parameters, result, fixed, reference, optional);
 	}
 
 	// reflection
@@ -184,6 +181,8 @@ protected:
 	bool const _fixed;
 	bool const _reference;
 	bool const _optional;
+
+	friend class any_a<>;
 
 	inline kind_t(int64_t order, symbol_a<> const& name, flock_a<> const& dimensions, flock_a<> const& aspects, flock_a<> const& parameters, symbol_a<> const& result, bool fixed, bool reference, bool optional)
 		: cat_t<___ego___>{ order, name, dimensions, aspects, parameters, result }

@@ -8,9 +8,6 @@ template <typename ___ego___ = misunderstanding_a<>>
 class disagreement_t : public nothing_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<disagreement_t<>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
@@ -30,7 +27,7 @@ public:
 	template <typename F>
 	static inline misunderstanding_a<> create(F&& s)
 	{
-		return misunderstanding_a<>::create<over>(disagreement_t<>{ std::forward<F>(s) });
+		return misunderstanding_a<>::create<disagreement_t<>>(std::forward<F>(s));
 	}
 
 	// reflection
@@ -80,6 +77,8 @@ public:
 
 protected:
 	std::string const _string;
+
+	friend class any_a<>;
 
 	template <typename F>
 	inline disagreement_t(F&& s)

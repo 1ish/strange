@@ -12,14 +12,11 @@ class flock_t : public thing_t<___ego___>
 	class mutator_t : public thing_t<___ego_it___>
 	{
 	public:
-		// override
-		using over = thing_o<mutator_t<_iterator_>>;
-
 		// construction
 		template <typename F>
 		static inline random_access_mutator_data_a<_iterator_> create(flock_t const& flock_thing, F&& it)
 		{
-			return random_access_mutator_data_a<_iterator_>::template create<over>(mutator_t<_iterator_>(flock_thing, std::forward<F>(it)));
+			return random_access_mutator_data_a<_iterator_>::template create<mutator_t<_iterator_>>(flock_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -188,6 +185,8 @@ class flock_t : public thing_t<___ego___>
 		_iterator_ _it;
 		flock_t const& _flock_thing;
 
+		friend class any_a<>;
+
 		template <typename F>
 		inline mutator_t(flock_t const& flock_thing, F&& it)
 			: thing_t<___ego_it___>{}
@@ -200,14 +199,11 @@ class flock_t : public thing_t<___ego___>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
-		// override
-		using over = thing_o<extractor_t<_iterator_>>;
-
 		// construction
 		template <typename F>
 		static inline random_access_extractor_data_a<_iterator_> create(flock_a<> const& flock, flock_t const& flock_thing, F&& it)
 		{
-			return random_access_extractor_data_a<_iterator_>::template create<over>(extractor_t<_iterator_>(flock, flock_thing, std::forward<F>(it)));
+			return random_access_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(flock, flock_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -370,6 +366,8 @@ class flock_t : public thing_t<___ego___>
 		_iterator_ _it;
 		flock_a<> const _flock;
 		flock_t const& _flock_thing;
+
+		friend class any_a<>;
 
 		template <typename F>
 		inline extractor_t(flock_a<> const& flock, flock_t const& flock_thing, F&& it)

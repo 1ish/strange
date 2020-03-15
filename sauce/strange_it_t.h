@@ -8,9 +8,6 @@ template <typename ___ego___ = forward_extractor_a<>>
 class it_t : public thing_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<it_t<>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const&)
 	{
@@ -19,7 +16,7 @@ public:
 
 	static inline forward_extractor_a<> create_()
 	{
-		static forward_extractor_a<> VAL = forward_extractor_a<>::create<over>(it_t<>{});
+		static forward_extractor_a<> VAL = forward_extractor_a<>::create<it_t<>>();
 		return VAL;
 	}
 
@@ -72,6 +69,8 @@ public:
 	{}
 
 protected:
+	friend class any_a<>;
+
 	inline it_t()
 		: thing_t<___ego___>{}
 	{}

@@ -8,13 +8,10 @@ template <typename ___ego___ = operation_a<>>
 class attribute_mutation_t : public operation_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<attribute_mutation_t<>>;
-
 	// construction
 	static inline operation_a<> create_(symbol_a<> const& name, any_a<> const& kind, any_a<> const& thing)
 	{
-		return operation_a<>::create<over>(attribute_mutation_t<>(name, kind, thing));
+		return operation_a<>::create<attribute_mutation_t<>>(name, kind, thing);
 	}
 
 	// reflection
@@ -63,6 +60,8 @@ protected:
 	symbol_a<> const _name;
 	any_a<> const _kind;
 	any_a<> mutable _thing;
+
+	friend class any_a<>;
 
 	inline attribute_mutation_t(symbol_a<> const& name, any_a<> const& kind, any_a<> const& thing)
 		: operation_t<___ego___>{}

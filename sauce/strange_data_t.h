@@ -9,9 +9,6 @@ template <typename _data_, typename ___ego___>
 class data_t : public thing_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<data_t<_data_>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& _)
 	{
@@ -25,7 +22,7 @@ public:
 
 	static inline data_a<_data_> create(_data_ primitive)
 	{
-		return data_a<_data_>::template create<over>(data_t<_data_>{ primitive });
+		return data_a<_data_>::template create<data_t<_data_>>(primitive);
 	}
 
 	// reflection
@@ -80,6 +77,8 @@ public:
 
 protected:
 	_data_ _data;
+
+	friend class any_a<>;
 
 	inline data_t(_data_ data)
 		: thing_t<___ego___>{}

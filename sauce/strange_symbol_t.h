@@ -8,9 +8,6 @@ template <typename ___ego___ = symbol_a<>>
 class symbol_t : public thing_t<___ego___>
 {
 public:
-	// override
-	using over = thing_o<symbol_t<>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
@@ -35,13 +32,13 @@ public:
 
 	static inline symbol_a<> create_(lake_a<int8_t> const& lake)
 	{
-		return symbol_a<>::create<over>(symbol_t<>{ lake_to_string(lake) });
+		return symbol_a<>::create<symbol_t<>>(lake_to_string(lake));
 	}
 
 	template <typename F>
 	static inline symbol_a<> create(F&& s)
 	{
-		return symbol_a<>::create<over>(symbol_t<>{ std::forward<F>(s) });
+		return symbol_a<>::create<symbol_t<>>(std::forward<F>(s));
 	}
 
 	// reflection
@@ -165,6 +162,8 @@ public:
 protected:
 	std::string const _string;
 	std::size_t const _hash;
+
+	friend class any_a<>;
 
 	template <typename F>
 	inline symbol_t(F&& s)

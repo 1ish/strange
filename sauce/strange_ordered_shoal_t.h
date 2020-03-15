@@ -11,14 +11,11 @@ class ordered_shoal_t : public thing_t<___ego___>
 	class mutator_t : public thing_t<___ego_it___>
 	{
 	public:
-		// override
-		using over = thing_o<mutator_t<_iterator_>>;
-
 		// construction
 		template <typename F>
 		static inline bidirectional_mutator_data_a<_iterator_> create(ordered_shoal_t const& ordered_shoal_thing, F&& it)
 		{
-			return bidirectional_mutator_data_a<_iterator_>::template create<over>(mutator_t<_iterator_>(ordered_shoal_thing, std::forward<F>(it)));
+			return bidirectional_mutator_data_a<_iterator_>::template create<mutator_t<_iterator_>>(ordered_shoal_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -119,6 +116,8 @@ class ordered_shoal_t : public thing_t<___ego___>
 		flock_a<> mutable _pair; // stashing mutator
 		ordered_shoal_t const& _ordered_shoal_thing;
 
+		friend class any_a<>;
+
 		template <typename F>
 		inline mutator_t(ordered_shoal_t const& ordered_shoal_thing, F&& it)
 			: thing_t<___ego_it___>{}
@@ -132,14 +131,11 @@ class ordered_shoal_t : public thing_t<___ego___>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
-		// override
-		using over = thing_o<extractor_t<_iterator_>>;
-
 		// construction
 		template <typename F>
 		static inline bidirectional_extractor_data_a<_iterator_> create(ordered_shoal_a<> const& ordered_shoal, ordered_shoal_t const& ordered_shoal_thing, F&& it)
 		{
-			return bidirectional_extractor_data_a<_iterator_>::template create<over>(extractor_t<_iterator_>(ordered_shoal, ordered_shoal_thing, std::forward<F>(it)));
+			return bidirectional_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(ordered_shoal, ordered_shoal_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -230,6 +226,8 @@ class ordered_shoal_t : public thing_t<___ego___>
 		ordered_shoal_a<> const _ordered_shoal;
 		flock_a<> mutable _pair; // stashing mutator
 		ordered_shoal_t const& _ordered_shoal_thing;
+
+		friend class any_a<>;
 
 		template <typename F>
 		inline extractor_t(ordered_shoal_a<> const& ordered_shoal, ordered_shoal_t const& ordered_shoal_thing, F&& it)

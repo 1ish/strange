@@ -11,14 +11,11 @@ class ordered_herd_t : public thing_t<___ego___>
 	class extractor_t : public thing_t<___ego_it___>
 	{
 	public:
-		// override
-		using over = thing_o<extractor_t<_iterator_>>;
-
 		// construction
 		template <typename F>
 		static inline bidirectional_extractor_data_a<_iterator_> create(ordered_herd_a<> const& ordered_herd, ordered_herd_t const& ordered_herd_thing, F&& it)
 		{
-			return bidirectional_extractor_data_a<_iterator_>::template create<over>(extractor_t<_iterator_>(ordered_herd, ordered_herd_thing, std::forward<F>(it)));
+			return bidirectional_extractor_data_a<_iterator_>::template create<extractor_t<_iterator_>>(ordered_herd, ordered_herd_thing, std::forward<F>(it));
 		}
 
 		// reflection
@@ -104,6 +101,8 @@ class ordered_herd_t : public thing_t<___ego___>
 		_iterator_ _it;
 		ordered_herd_a<> const _ordered_herd;
 		ordered_herd_t const& _ordered_herd_thing;
+
+		friend class any_a<>;
 
 		template <typename F>
 		inline extractor_t(ordered_herd_a<> const& ordered_herd, ordered_herd_t const& ordered_herd_thing, F&& it)
