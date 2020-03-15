@@ -249,6 +249,22 @@ inline any_a<> number_a<number_data_int64, number_data_uint64, number_data_doubl
 }
 
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
+bool const number_a<number_data_int64, number_data_uint64, number_data_double>::___share___ = []()
+{
+	auto& shared_shoal = shared();
+	// register abstraction
+	return shared_shoal;
+}();
+
+class ___number_a_share___
+{
+	static inline bool ___share___()
+	{
+		return false; // number_a<>::___share___;
+	}
+};
+
+template <typename number_data_int64, typename number_data_uint64, typename number_data_double>
 inline number_d<number_data_int64, number_data_uint64, number_data_double> ___number_dynamic___(any_a<> const& thing)
 {
 	return number_d<number_data_int64, number_data_uint64, number_data_double>{ thing };

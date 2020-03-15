@@ -302,6 +302,9 @@ public:
 		return random_access_extractor_data_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 
+private:
+	static bool const ___share___;
+	friend class ___random_access_extractor_data_a_share___;
 }; // class random_access_extractor_data_a
 
 template <typename _1_>

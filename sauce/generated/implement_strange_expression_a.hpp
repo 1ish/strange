@@ -92,6 +92,22 @@ inline any_a<> expression_a<_1_>::generate_cpp__(range_a<> const& ___arguments__
 }
 
 template <typename _1_>
+bool const expression_a<_1_>::___share___ = []()
+{
+	auto& shared_shoal = shared();
+	// register abstraction
+	return shared_shoal;
+}();
+
+class ___expression_a_share___
+{
+	static inline bool ___share___()
+	{
+		return false; // expression_a<>::___share___;
+	}
+};
+
+template <typename _1_>
 inline expression_d<_1_> ___expression_dynamic___(any_a<> const& thing)
 {
 	return expression_d<_1_>{ thing };

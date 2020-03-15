@@ -21,6 +21,22 @@ inline any_a<> misunderstanding_a<lake_int8>::add__(range_a<> const& ___argument
 }
 
 template <typename lake_int8>
+bool const misunderstanding_a<lake_int8>::___share___ = []()
+{
+	auto& shared_shoal = shared();
+	// register abstraction
+	return shared_shoal;
+}();
+
+class ___misunderstanding_a_share___
+{
+	static inline bool ___share___()
+	{
+		return false; // misunderstanding_a<>::___share___;
+	}
+};
+
+template <typename lake_int8>
 inline misunderstanding_d<lake_int8> ___misunderstanding_dynamic___(any_a<> const& thing)
 {
 	return misunderstanding_d<lake_int8>{ thing };

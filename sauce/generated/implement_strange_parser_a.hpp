@@ -15,6 +15,22 @@ inline any_a<> parser_a<_1_>::parse__(range_a<> const& ___arguments___)
 }
 
 template <typename _1_>
+bool const parser_a<_1_>::___share___ = []()
+{
+	auto& shared_shoal = shared();
+	// register abstraction
+	return shared_shoal;
+}();
+
+class ___parser_a_share___
+{
+	static inline bool ___share___()
+	{
+		return false; // parser_a<>::___share___;
+	}
+};
+
+template <typename _1_>
 inline parser_d<_1_> ___parser_dynamic___(any_a<> const& thing)
 {
 	return parser_d<_1_>{ thing };

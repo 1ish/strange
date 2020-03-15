@@ -278,6 +278,22 @@ inline any_a<> river_a<_1_>::filename__(range_a<> const& ___arguments___) const
 }
 
 template <typename _1_>
+bool const river_a<_1_>::___share___ = []()
+{
+	auto& shared_shoal = shared();
+	// register abstraction
+	return shared_shoal;
+}();
+
+class ___river_a_share___
+{
+	static inline bool ___share___()
+	{
+		return false; // river_a<>::___share___;
+	}
+};
+
+template <typename _1_>
 inline river_d<_1_> ___river_dynamic___(any_a<> const& thing)
 {
 	return river_d<_1_>{ thing };
