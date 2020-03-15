@@ -21,14 +21,6 @@ inline any_a<> misunderstanding_a<lake_int8>::add__(range_a<> const& ___argument
 }
 
 template <typename lake_int8>
-bool const misunderstanding_a<lake_int8>::___share___ = []()
-{
-	auto& shared_shoal = shared();
-	reflection<misunderstanding_a<lake_int8>>::share(shared_shoal);
-	return shared_shoal;
-}();
-
-template <typename lake_int8>
 inline misunderstanding_d<lake_int8> ___misunderstanding_dynamic___(any_a<> const& thing)
 {
 	return misunderstanding_d<lake_int8>{ thing };

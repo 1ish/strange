@@ -240,10 +240,6 @@ class operation_c;
 template <typename ___ego___ = expression_a<>>
 class expression_c;
 
-// reflection
-template<typename _abstraction_or_thing_>
-class reflection;
-
 // logic
 inline any_a<> yes();
 inline any_a<> no();

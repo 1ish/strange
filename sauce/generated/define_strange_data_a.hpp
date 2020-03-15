@@ -274,9 +274,6 @@ public:
 		return data_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 
-private:
-	static bool const ___share___;
-	friend class ___data_a_share___;
 }; // class data_a
 
 template <typename _1_>

@@ -730,9 +730,6 @@ public:
 		return number_a(___variadic_tag___{}, static_cast<___TTT___*>(nullptr), std::forward<Args>(args)...);
 	}
 
-private:
-	static bool const ___share___;
-	friend class ___number_a_share___;
 }; // class number_a
 
 template <typename number_data_int64, typename number_data_uint64, typename number_data_double>

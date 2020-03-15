@@ -27,14 +27,6 @@ inline any_a<> kind_a<_1_>::optional__(range_a<> const& ___arguments___) const
 }
 
 template <typename _1_>
-bool const kind_a<_1_>::___share___ = []()
-{
-	auto& shared_shoal = shared();
-	reflection<kind_a<_1_>>::share(shared_shoal);
-	return shared_shoal;
-}();
-
-template <typename _1_>
 inline kind_d<_1_> ___kind_dynamic___(any_a<> const& thing)
 {
 	return kind_d<_1_>{ thing };

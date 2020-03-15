@@ -27,14 +27,6 @@ inline any_a<> forward_mutator_a<_1_>::increment__(range_a<> const& ___arguments
 }
 
 template <typename _1_>
-bool const forward_mutator_a<_1_>::___share___ = []()
-{
-	auto& shared_shoal = shared();
-	reflection<forward_mutator_a<_1_>>::share(shared_shoal);
-	return shared_shoal;
-}();
-
-template <typename _1_>
 inline forward_mutator_d<_1_> ___forward_mutator_dynamic___(any_a<> const& thing)
 {
 	return forward_mutator_d<_1_>{ thing };
