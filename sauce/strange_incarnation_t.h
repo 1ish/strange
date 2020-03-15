@@ -8,13 +8,10 @@ template <typename ___ego___ = unordered_shoal_a<>>
 class incarnation_t : public unordered_shoal_t<false, ___ego___>
 {
 public:
-	// override
-	using over = collection_o<incarnation_t<>>;
-
 	// construction
 	static inline unordered_shoal_a<> create_(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects, flock_a<> const& defaults)
 	{
-		return unordered_shoal_a<>::create<over>(incarnation_t<>(inspiration, mention, aspects, defaults));
+		return unordered_shoal_a<>::create<incarnation_t<>>(inspiration, mention, aspects, defaults);
 	}
 
 	// reflection
@@ -65,6 +62,8 @@ public:
 	}
 
 protected:
+	friend class any_a<>;
+
 	inline incarnation_t(unordered_shoal_a<> const& inspiration, flock_a<> const& mention, flock_a<> const& aspects, flock_a<> const& defaults)
 		: unordered_shoal_t<false, ___ego___>{ inspiration.extract_map() }
 	{

@@ -380,9 +380,6 @@ class squad_t : public thing_t<___ego___>
 public:
 	using std_deque_any = std::deque<any_a<>>;
 
-	// override
-	using over = collection_o<squad_t<_concurrent_>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
@@ -415,7 +412,7 @@ public:
 	template <typename F>
 	static inline squad_a<> create(F&& init)
 	{
-		return squad_a<>::create<over>(squad_t<_concurrent_>{ std::forward<F>(init) });
+		return squad_a<>::create<squad_t<_concurrent_>>(std::forward<F>(init));
 	}
 
 	// reflection
@@ -600,6 +597,11 @@ public:
 	}
 
 	// collection
+	inline any_a<> has_(any_a<> const& key) const
+	{
+		return boole(has(key));
+	}
+
 	inline bool has(any_a<> const& key) const
 	{
 		return check<number_a<>>(key) && has_index(fast<number_a<>>(key).to_int_64());
@@ -629,6 +631,12 @@ public:
 		return mis("strange::squad::at index out of bounds");
 	}
 
+	inline any_a<> update_(any_a<> const& key, any_a<> const& value = no())
+	{
+		update(key, value);
+		return value;
+	}
+
 	inline void update(any_a<> const& key, any_a<> const& value)
 	{
 		if (check<number_a<>>(key))
@@ -656,6 +664,11 @@ public:
 				_deque[std::size_t(index)] = value;
 			}
 		}
+	}
+
+	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = no())
+	{
+		return boole(insert(key, value));
 	}
 
 	inline bool insert(any_a<> const& key, any_a<> const& value)
@@ -690,6 +703,11 @@ public:
 		return false;
 	}
 
+	inline any_a<> erase_(any_a<> const& key)
+	{
+		return boole(erase(key));
+	}
+
 	inline bool erase(any_a<> const& key)
 	{
 		return check<number_a<>>(key) && erase_index(fast<number_a<>>(key).to_int_64());
@@ -706,10 +724,21 @@ public:
 		return false;
 	}
 
+	inline collection_a<> clear_()
+	{
+		clear();
+		return thing_t<___ego___>::me_();
+	}
+
 	inline void clear()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_deque.clear();
+	}
+
+	inline number_data_a<int64_t> size_() const
+	{
+		return num(size());
 	}
 
 	inline int64_t size() const
@@ -718,10 +747,21 @@ public:
 		return int64_t(_deque.size());
 	}
 
+	inline any_a<> empty_() const
+	{
+		return boole(empty());
+	}
+
 	inline bool empty() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _deque.empty();
+	}
+
+	inline collection_a<> push_front_(any_a<> const& value)
+	{
+		push_front(value);
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void push_front(any_a<> const& thing)
@@ -740,6 +780,12 @@ public:
 		any_a<> result = _deque.front();
 		_deque.pop_front();
 		return result;
+	}
+
+	inline collection_a<> push_back_(any_a<> const& value)
+	{
+		push_back(value);
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void push_back(any_a<> const& thing)
@@ -802,6 +848,13 @@ public:
 		}
 	}
 
+	inline collection_a<> add_(range_a<> const& range) const
+	{
+		auto result = thing_t<___ego___>::me_();
+		result += range;
+		return result;
+	}
+
 	inline void self_subtract_(range_a<> const& range)
 	{
 		if (check<collection_a<>>(range))
@@ -822,6 +875,13 @@ public:
 				_deque.pop_back();
 			}
 		}
+	}
+
+	inline collection_a<> subtract_(range_a<> const& range) const
+	{
+		auto result = thing_t<___ego___>::me_();
+		result -= range;
+		return result;
 	}
 
 	inline any_a<> read_lock_() const
@@ -848,6 +908,8 @@ public:
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
 	std_deque_any _deque;
+
+	friend class any_a<>;
 
 	template <typename F>
 	inline squad_t(F&& init)

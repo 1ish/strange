@@ -8,19 +8,16 @@ template <typename ___ego___ = unordered_shoal_a<>>
 class conception_t : public unordered_shoal_t<false, ___ego___>
 {
 public:
-	// override
-	using over = collection_o<conception_t<>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
-		return unordered_shoal_a<>{ over{ conception_t<>{ range } } };
+		return unordered_shoal_a<>::create<conception_t<>>(range);
 	}
 
 	template <typename... Args>
 	static inline unordered_shoal_a<> create_(Args&&... args)
 	{
-		return unordered_shoal_a<>::create<over>(conception_t<>{ flock_t<>::create_(std::forward<Args>(args)...) });
+		return unordered_shoal_a<>::create<conception_t<>>(flock_t<>::create_(std::forward<Args>(args)...));
 	}
 
 	// reflection
@@ -168,6 +165,8 @@ public:
 	}
 
 protected:
+	friend class any_a<>;
+
 	inline conception_t(range_a<> const& parents)
 		: unordered_shoal_t<false, ___ego___>{ std::unordered_map<any_a<>, any_a<>>{} }
 	{

@@ -242,9 +242,6 @@ class ordered_shoal_t : public thing_t<___ego___>
 public:
 	using std_map_any_any = std::map<any_a<>, any_a<>>;
 
-	// override
-	using over = collection_o<ordered_shoal_t<_concurrent_>>;
-
 	// construction
 	static inline any_a<> create__(range_a<> const& range)
 	{
@@ -265,7 +262,7 @@ public:
 	template <typename F>
 	static inline ordered_shoal_a<> create(F&& init)
 	{
-		return ordered_shoal_a<>::create<over>(ordered_shoal_t<_concurrent_>{ std::forward<F>(init) });
+		return ordered_shoal_a<>::create<ordered_shoal_t<_concurrent_>>(std::forward<F>(init));
 	}
 
 	// reflection
@@ -454,6 +451,11 @@ public:
 	}
 
 	// collection
+	inline any_a<> has_(any_a<> const& key) const
+	{
+		return boole(has(key));
+	}
+
 	inline bool has(any_a<> const& key) const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
@@ -482,6 +484,12 @@ public:
 		return at_(sym(s));
 	}
 
+	inline any_a<> update_(any_a<> const& key, any_a<> const& value = no())
+	{
+		update(key, value);
+		return value;
+	}
+
 	inline void update(any_a<> const& key, any_a<> const& value)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
@@ -494,6 +502,11 @@ public:
 		_map[sym(s)] = value;
 	}
 
+	inline any_a<> insert_(any_a<> const& key, any_a<> const& value = no())
+	{
+		return boole(insert(key, value));
+	}
+
 	inline bool insert(any_a<> const& key, any_a<> const& value)
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
@@ -503,6 +516,11 @@ public:
 	inline bool insert_string(std::string const& s, any_a<> const& value)
 	{
 		return insert(sym(s), value);
+	}
+
+	inline any_a<> erase_(any_a<> const& key)
+	{
+		return boole(erase(key));
 	}
 
 	inline bool erase(any_a<> const& key)
@@ -517,10 +535,21 @@ public:
 		return _map.erase(sym(s));
 	}
 
+	inline collection_a<> clear_()
+	{
+		clear();
+		return thing_t<___ego___>::me_();
+	}
+
 	inline void clear()
 	{
 		typename concurrent_u<_concurrent_>::write_lock lock(_mutex);
 		_map.clear();
+	}
+
+	inline number_data_a<int64_t> size_() const
+	{
+		return num(size());
 	}
 
 	inline int64_t size() const
@@ -529,10 +558,21 @@ public:
 		return int64_t(_map.size());
 	}
 
+	inline any_a<> empty_() const
+	{
+		return boole(empty());
+	}
+
 	inline bool empty() const
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _map.empty();
+	}
+
+	inline collection_a<> push_front_(any_a<> const& value)
+	{
+		push_front(value);
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void push_front(any_a<> const& thing)
@@ -552,6 +592,12 @@ public:
 		any_a<> result = it->second;
 		_map.erase(it);
 		return result;
+	}
+
+	inline collection_a<> push_back_(any_a<> const& value)
+	{
+		push_back(value);
+		return thing_t<___ego___>::me_();
 	}
 
 	inline void push_back(any_a<> const& thing)
@@ -650,6 +696,13 @@ public:
 		}
 	}
 
+	inline collection_a<> add_(range_a<> const& range) const
+	{
+		auto result = thing_t<___ego___>::me_();
+		result += range;
+		return result;
+	}
+
 	inline void self_subtract_(range_a<> const& range)
 	{
 		if (check<ordered_shoal_a<>>(range))
@@ -683,6 +736,13 @@ public:
 		}
 	}
 
+	inline collection_a<> subtract_(range_a<> const& range) const
+	{
+		auto result = thing_t<___ego___>::me_();
+		result -= range;
+		return result;
+	}
+
 	inline any_a<> read_lock_() const
 	{
 		return data_t<read_lock_ptr<_concurrent_>>::create(make_read_lock_ptr<_concurrent_>(_mutex));
@@ -707,6 +767,8 @@ public:
 protected:
 	typename concurrent_u<_concurrent_>::mutex mutable _mutex;
 	std_map_any_any _map;
+
+	friend class any_a<>;
 
 	template <typename F>
 	inline ordered_shoal_t(F&& init)

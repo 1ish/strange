@@ -3,6 +3,5 @@
 
 // overrides
 #include "strange_expression_o.h"
-#include "strange_collection_o.h"
 
 #endif
