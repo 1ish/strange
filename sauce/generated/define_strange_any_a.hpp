@@ -54,9 +54,6 @@ public:
 	inline symbol type_() const
 	{ assert(___handle___); return ___read___().type_(); }
 
-	inline void share(shoal & shared_shoal ) const
-	{ assert(___handle___); ___read___().share(shared_shoal); }
-
 	inline any_a<> cat__(range const& ___arguments___) const;
 
 	inline cat cat_() const
@@ -199,7 +196,6 @@ protected:
 		virtual one_t const & extract_thing() const = 0;
 		virtual one_t & mutate_thing() = 0;
 		virtual symbol type_() const = 0;
-		virtual void share(shoal & shared_shoal ) const = 0;
 		virtual cat cat_() const = 0;
 		virtual unordered_herd cats_() const = 0;
 		virtual kind kind_() const = 0;
@@ -263,9 +259,6 @@ protected:
 
 		virtual inline symbol type_() const final
 		{ return ___value___.type_(); }
-
-		virtual inline void share(shoal & shared_shoal ) const final
-		{ ___value___.share(shared_shoal); }
 
 		virtual inline cat cat_() const final
 		{ return ___value___.cat_(); }
