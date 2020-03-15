@@ -57,6 +57,11 @@ public:
 		return _data != data.extract_data();
 	}
 
+	inline number_data_a<uint64_t> hash_() const
+	{
+		return num(uint64_t(hash()));
+	}
+
 	inline std::size_t hash() const
 	{
 		return std::hash<_data_>{}(_data);

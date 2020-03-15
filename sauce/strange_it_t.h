@@ -41,6 +41,11 @@ public:
 		return check<forward_extractor_a<>>(thing);
 	}
 
+	inline number_data_a<uint64_t> hash_() const
+	{
+		return num(uint64_t(hash()));
+	}
+
 	inline std::size_t hash() const
 	{
 		return no().hash();

@@ -48,6 +48,11 @@ class river_t : public thing_t<___ego___>
 			return _it != it.extract_it();
 		}
 
+		inline number_data_a<uint64_t> hash_() const
+		{
+			return num(uint64_t(hash()));
+		}
+
 		inline std::size_t hash() const
 		{
 			return std::hash<int64_t>{}(_it == _iterator_{});

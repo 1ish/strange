@@ -51,6 +51,11 @@ public:
 		return check<misunderstanding_a<>>(thing) && fast<misunderstanding_a<>>(thing).to_string() == _string;
 	}
 
+	inline number_data_a<uint64_t> hash_() const
+	{
+		return num(uint64_t(hash()));
+	}
+
 	inline std::size_t hash() const
 	{
 		return std::hash<std::string>{}(_string);

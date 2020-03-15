@@ -48,6 +48,11 @@ class brook_t : public thing_t<___ego___>
 			return _it != it.extract_it();
 		}
 
+		inline number_data_a<uint64_t> hash_() const
+		{
+			return num(uint64_t(hash()));
+		}
+
 		inline std::size_t hash() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_brook_thing._mutex);
@@ -243,6 +248,11 @@ class brook_t : public thing_t<___ego___>
 		inline bool operator!=(random_access_extractor_data_a<_iterator_> const& it) const
 		{
 			return _it != it.extract_it();
+		}
+
+		inline number_data_a<uint64_t> hash_() const
+		{
+			return num(uint64_t(hash()));
 		}
 
 		inline std::size_t hash() const
@@ -466,6 +476,11 @@ public:
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _deque != brook.extract_deque();
+	}
+
+	inline number_data_a<uint64_t> hash_() const
+	{
+		return num(uint64_t(hash()));
 	}
 
 	inline std::size_t hash() const

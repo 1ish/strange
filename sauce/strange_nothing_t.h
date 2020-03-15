@@ -67,6 +67,11 @@ public:
 		return thing.nothing();
 	}
 
+	inline number_data_a<uint64_t> hash_() const
+	{
+		return num(uint64_t(hash()));
+	}
+
 	inline std::size_t hash() const
 	{
 		static std::size_t const HASH = std::hash<int64_t>{}(0);

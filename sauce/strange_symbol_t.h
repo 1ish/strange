@@ -72,6 +72,11 @@ public:
 		return _string != symbol.to_string();
 	}
 
+	inline number_data_a<uint64_t> hash_() const
+	{
+		return num(uint64_t(hash()));
+	}
+
 	inline std::size_t hash() const
 	{
 		return _hash;

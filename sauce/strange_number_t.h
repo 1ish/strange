@@ -57,6 +57,11 @@ public:
 		return _number != number.extract_primitive();
 	}
 
+	inline number_data_a<uint64_t> hash_() const
+	{
+		return num(uint64_t(hash()));
+	}
+
 	inline std::size_t hash() const
 	{
 		return std::hash<_primitive_>{}(_number);

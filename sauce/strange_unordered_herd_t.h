@@ -48,6 +48,11 @@ class unordered_herd_t : public thing_t<___ego___>
 			return _it != it.extract_it();
 		}
 
+		inline number_data_a<uint64_t> hash_() const
+		{
+			return num(uint64_t(hash()));
+		}
+
 		inline std::size_t hash() const
 		{
 			typename concurrent_u<_concurrent_>::read_lock lock(_unordered_herd_thing._mutex);
@@ -193,6 +198,11 @@ public:
 	{
 		typename concurrent_u<_concurrent_>::read_lock lock(_mutex);
 		return _set != herd.extract_set();
+	}
+
+	inline number_data_a<uint64_t> hash_() const
+	{
+		return num(uint64_t(hash()));
 	}
 
 	inline std::size_t hash() const

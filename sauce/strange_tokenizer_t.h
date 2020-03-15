@@ -45,7 +45,12 @@ class tokenizer_t : public thing_t<___ego___>
 
 		inline bool operator!=(forward_extractor_data_a<_iterator_> const& it) const
 		{
-			return same_(it);
+			return !same_(it);
+		}
+
+		inline number_data_a<uint64_t> hash_() const
+		{
+			return num(uint64_t(hash()));
 		}
 
 		inline std::size_t hash() const
