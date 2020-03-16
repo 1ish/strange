@@ -51,18 +51,6 @@ public:
 		_OVERRIDDEN_::recreated(expression);
 		return expression;
 	}
-
-	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
-	{
-		_OVERRIDDEN_::generate(version.extract_primitive(), indent.extract_primitive(), river);
-		return river;
-	}
-
-	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = no()) const
-	{
-		_OVERRIDDEN_::generate_cpp(version.extract_primitive(), indent.extract_primitive(), river, declare, define, type);
-		return river;
-	}
 };
 
 } // namespace strange

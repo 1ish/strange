@@ -74,11 +74,23 @@ public:
 		return _terms;
 	}
 
+	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
+	{
+		generate(version.extract_primitive(), indent.extract_primitive(), river);
+		return river;
+	}
+
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		_thing.generate(version, indent, river);
 		river.write_string(".perform");
 		_range.generate(version, indent, river);
+	}
+
+	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = no()) const
+	{
+		generate_cpp(version.extract_primitive(), indent.extract_primitive(), river, declare, define, type);
+		return river;
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const

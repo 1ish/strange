@@ -94,6 +94,12 @@ public:
 		return _terms;
 	}
 
+	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
+	{
+		generate(version.extract_primitive(), indent.extract_primitive(), river);
+		return river;
+	}
+
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		if (!check<any_a<>>(_thing))
@@ -164,6 +170,12 @@ public:
 		{
 			throw dis(expression_t<___ego___>::_token.report() + "strange::expression_literal::generate with invalid thing");
 		}
+	}
+
+	inline any_a<> generate_cpp_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river, any_a<> const& declare, any_a<> const& define, any_a<> const& type = no()) const
+	{
+		generate_cpp(version.extract_primitive(), indent.extract_primitive(), river, declare, define, type);
+		return river;
 	}
 
 	inline void generate_cpp(int64_t version, int64_t indent, river_a<>& river, bool declare, bool define, bool type = false) const
