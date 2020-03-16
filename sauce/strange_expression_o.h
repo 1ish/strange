@@ -52,18 +52,6 @@ public:
 		return expression;
 	}
 
-	inline any_a<> literal_() const
-	{
-		return boole(_OVERRIDDEN_::literal());
-	}
-
-	inline any_a<> evaluate_() const
-	{
-		auto local = unordered_shoal_create();
-		local.insert_string("$", unordered_shoal_create<true>());
-		return _OVERRIDDEN_::operate(local, range_create());
-	}
-
 	inline any_a<> generate_(number_data_a<int64_t> const& version, number_data_a<int64_t> const& indent, river_a<>& river) const
 	{
 		_OVERRIDDEN_::generate(version.extract_primitive(), indent.extract_primitive(), river);

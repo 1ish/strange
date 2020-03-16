@@ -44,6 +44,12 @@ public:
 	}
 
 	// expression
+	inline any_a<> evaluate_() const
+	{
+		any_a<> null;
+		return operate(null, range_a<>{});
+	}
+
 	inline void recreated(expression_a<> const& expression) const
 	{
 		auto const thing = expression.evaluate_();

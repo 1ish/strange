@@ -54,6 +54,13 @@ public:
 	}
 
 	// expression
+	inline any_a<> evaluate_() const
+	{
+		auto local = unordered_shoal_create();
+		local.insert_string("$", unordered_shoal_create<true>());
+		return operate(local, range_create());
+	}
+
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		river.write_string(" ^ ");

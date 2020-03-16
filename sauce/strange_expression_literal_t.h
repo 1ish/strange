@@ -83,6 +83,12 @@ public:
 	}
 
 	// expression
+	inline any_a<> evaluate_() const
+	{
+		any_a<> null;
+		return operate(null, range_a<>{});
+	}
+
 	inline flock_a<> terms_() const
 	{
 		return _terms;

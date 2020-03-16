@@ -41,6 +41,48 @@ public:
 	using over = expression_o<expression_t<>>;
 
 	// construction
+	template <typename _expression_>
+	static inline any_a<> create_expression(range_a<> const& range)
+	{
+		forward_extractor_a<> it = range.extract_begin_();
+		if (it == range.extract_end_())
+		{
+			throw dis("[expression] create passed empty range");
+		}
+		any_a<> token = *it;
+		if (!check<token_a<>>(token))
+		{
+			throw dis("[expression] create passed non-token");
+		}
+		if (++it == range.extract_end_())
+		{
+			throw dis("[expression] create passed short range");
+		}
+		any_a<> terms = *it;
+		if (!check<flock_a<>>(terms))
+		{
+			throw dis("[expression] create passed non-flock terms");
+		}
+		return _expression_::create_(fast<token_a<>>(token), fast<flock_a<>>(terms));
+	}
+
+	template <typename _expression_>
+	static inline expression_a<> recreate_expression(expression_a<> const& expression)
+	{
+		auto const terms = expression.terms_();
+		std::vector<any_a<>>& vector = const_cast<std::vector<any_a<>>&>(terms.extract_vector());
+		for (auto& term : vector)
+		{
+			if (check<expression_a<>>(term))
+			{
+				term = fast<expression_a<>>(term).recreate_();
+			}
+		}
+		auto const recreated_expression = _expression_::create_(expression.token_(), terms);
+		expression.recreated(recreated_expression);
+		return recreated_expression;
+	}
+
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		return create(token);
@@ -70,8 +112,19 @@ public:
 	}
 
 	// expression
+	inline any_a<> evaluate_() const
+	{
+		any_a<> null;
+		return operate(null, range_a<>{});
+	}
+
 	inline void recreated(expression_a<> const& expression) const
 	{}
+
+	inline any_a<> literal_() const
+	{
+		return boole(literal());
+	}
 
 	inline bool literal() const
 	{

@@ -57,6 +57,13 @@ public:
 	}
 
 	// expression
+	inline any_a<> evaluate_() const
+	{
+		auto local = unordered_shoal_create();
+		local.insert_string("$", unordered_shoal_create<true>());
+		return operate(local, range_create());
+	}
+
 	inline flock_a<> terms_() const
 	{
 		return _terms;

@@ -37,6 +37,12 @@ public:
 	}
 
 	// expression
+	inline any_a<> evaluate_() const
+	{
+		any_a<> null;
+		return operate(null, range_a<>{});
+	}
+
 	inline void generate(int64_t version, int64_t indent, river_a<>& river) const
 	{
 		// break()
