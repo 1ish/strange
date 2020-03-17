@@ -95,8 +95,9 @@ public:
 				throw dis("strange::expression_extraction::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<expression_extraction_t<>>::create(expression_extraction_t<>(token, terms, fast<symbol_a<>>(scope), names, kinds, expressions, defaults, fast<expression_a<>>(expression)),
-			extraction_t<>::create_(token, fast<symbol_a<>>(scope), names, kinds, defaults, fast<expression_a<>>(expression)));
+		return expression_substitute_t<expression_extraction_t<>>::create(
+			extraction_t<>::create_(token, fast<symbol_a<>>(scope), names, kinds, defaults, fast<expression_a<>>(expression)),
+			token, terms, fast<symbol_a<>>(scope), names, kinds, expressions, defaults, fast<expression_a<>>(expression));
 	}
 
 	// reflection

@@ -95,8 +95,9 @@ public:
 				throw dis("strange::expression_mutation::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<expression_mutation_t<>>::create(expression_mutation_t<>(token, terms, fast<symbol_a<>>(scope), names, kinds, expressions, defaults, fast<expression_a<>>(expression)),
-			mutation_t<>::create_(token, fast<symbol_a<>>(scope), names, kinds, defaults, fast<expression_a<>>(expression)));
+		return expression_substitute_t<expression_mutation_t<>>::create(
+			mutation_t<>::create_(token, fast<symbol_a<>>(scope), names, kinds, defaults, fast<expression_a<>>(expression)),
+			expression_mutation_t<>(token, terms, fast<symbol_a<>>(scope), names, kinds, expressions, defaults, fast<expression_a<>>(expression)));
 	}
 
 	// reflection

@@ -40,7 +40,9 @@ public:
 		auto value = shared_shoal.at_(key);
 		if (value)
 		{
-			return expression_substitute_t<expression_shared_scope_t<>>::create(expression_shared_scope_t<>(token, terms, shared_shoal, fast<symbol_a<>>(key)), value);
+			return expression_substitute_t<expression_shared_scope_t<>>::create(
+				value,
+				token, terms, shared_shoal, fast<symbol_a<>>(key));
 		}
 		return expression_a<>::create<expression_shared_scope_t<>>(token, terms, shared_shoal, fast<symbol_a<>>(key));
 	}

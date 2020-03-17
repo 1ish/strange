@@ -115,8 +115,9 @@ public:
 				throw dis("strange::expression_abstraction::create parameter default evaluation error:") + token.report_() + misunderstanding;
 			}
 		}
-		return expression_substitute_t<expression_abstraction_t<>>::create(expression_abstraction_t<>(token, terms, fast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_expressions, dimension_defaults, parent_expressions),
-			abstraction_t<>::create_(token, fast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_defaults, parent_expressions));
+		return expression_substitute_t<expression_abstraction_t<>>::create(
+			abstraction_t<>::create_(token, fast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_defaults, parent_expressions),
+			token, terms, fast<symbol_a<>>(scope), dimension_names, dimension_kinds, dimension_expressions, dimension_defaults, parent_expressions);
 	}
 
 	// reflection

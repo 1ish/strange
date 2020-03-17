@@ -32,9 +32,10 @@ public:
 		return expression_a<>{ std::move(substituted) };
 	}
 
-	static inline expression_a<> create(_SUBSTITUTED_&& substituted, any_a<> const& thing)
+	template <typename... Args>
+	static inline expression_a<> create(any_a<> const& thing, Args&&... args)
 	{
-		return expression_a<>{ expression_substitute_t(std::move(substituted), thing) };
+		return expression_a<>::create<expression_substitute_t<_SUBSTITUTED_>>(thing, std::forward<Args>(args)...);
 	}
 
 	// function
@@ -68,6 +69,12 @@ public:
 	// public constructor
 	inline expression_substitute_t(_SUBSTITUTED_&& substituted, any_a<> const& thing)
 		: _SUBSTITUTED_{ std::move(substituted) }
+		, _thing{ thing }
+	{}
+
+	template <typename... Args>
+	inline expression_substitute_t(any_a<> const& thing, Args&&... args)
+		: _SUBSTITUTED_(std::forward<Args>(args)...)
 		, _thing{ thing }
 	{}
 
