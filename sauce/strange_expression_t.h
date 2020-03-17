@@ -66,23 +66,6 @@ public:
 		return _expression_::create_(fast<token_a<>>(token), fast<flock_a<>>(terms));
 	}
 
-	template <typename _expression_>
-	static inline expression_a<> recreate_expression(expression_a<> const& expression)
-	{
-		auto const terms = expression.terms_();
-		std::vector<any_a<>>& vector = const_cast<std::vector<any_a<>>&>(terms.extract_vector());
-		for (auto& term : vector)
-		{
-			if (check<expression_a<>>(term))
-			{
-				term = fast<expression_a<>>(term).recreate_();
-			}
-		}
-		auto const recreated_expression = _expression_::create_(expression.token_(), terms);
-		expression.recreated(recreated_expression);
-		return recreated_expression;
-	}
-
 	static inline expression_a<> create_(token_a<> const& token, flock_a<> const& terms)
 	{
 		return create(token);
@@ -112,6 +95,34 @@ public:
 	}
 
 	// expression
+	inline expression_a<> recreate_() const
+	{
+		return recreate_expression<expression_t<___ego___>>(operation_t<___ego___>::me_());
+	}
+
+	template <typename _expression_>
+	static inline expression_a<> recreate_expression(expression_a<> const& expression)
+	{
+		std::vector<any_a<>> const& vector = expression.terms_().extract_vector();
+		auto recreated_terms = flock_create();
+		std::vector<any_a<>>& recreated_vector = recreated_terms.mutate_vector();
+		recreated_vector.reserve(vector.size());
+		for (auto const& term : vector)
+		{
+			if (check<expression_a<>>(term))
+			{
+				recreated_vector.emplace_back(fast<expression_a<>>(term).recreate_());
+			}
+			else
+			{
+				recreated_vector.emplace_back(term);
+			}
+		}
+		auto const recreated_expression = _expression_::create_(expression.token_(), recreated_terms);
+		expression.recreated(recreated_expression);
+		return recreated_expression;
+	}
+
 	inline any_a<> evaluate_() const
 	{
 		any_a<> null;

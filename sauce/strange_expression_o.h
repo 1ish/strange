@@ -35,22 +35,6 @@ public:
 		}
 		return _OVERRIDDEN_::create_(fast<token_a<>>(token), fast<flock_a<>>(terms));
 	}
-
-	inline expression_a<> recreate_() const
-	{
-		auto terms = _OVERRIDDEN_::terms_();
-		std::vector<any_a<>>& vector = const_cast<std::vector<any_a<>>&>(terms.extract_vector());
-		for (auto& term : vector)
-		{
-			if (check<expression_a<>>(term))
-			{
-				term = fast<expression_a<>>(term).recreate_();
-			}
-		}
-		auto const expression = _OVERRIDDEN_::create_(_OVERRIDDEN_::_token, terms);
-		_OVERRIDDEN_::recreated(expression);
-		return expression;
-	}
 };
 
 } // namespace strange

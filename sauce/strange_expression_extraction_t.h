@@ -110,6 +110,11 @@ public:
 	}
 
 	// expression
+	inline expression_a<> recreate_() const
+	{
+		return expression_t<___ego___>::template recreate_expression<expression_extraction_t<___ego___>>(expression_t<___ego___>::me_());
+	}
+
 	inline flock_a<> terms_() const
 	{
 		return _terms;

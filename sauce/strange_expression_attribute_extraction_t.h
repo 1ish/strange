@@ -81,6 +81,11 @@ public:
 	}
 	
 	// expression
+	inline expression_a<> recreate_() const
+	{
+		return expression_t<___ego___>::template recreate_expression<expression_attribute_extraction_t<___ego___>>(expression_t<___ego___>::me_());
+	}
+
 	inline any_a<> evaluate_() const
 	{
 		auto local = unordered_shoal_create();

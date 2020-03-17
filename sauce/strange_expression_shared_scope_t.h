@@ -67,6 +67,11 @@ public:
 	}
 
 	// expression
+	inline expression_a<> recreate_() const
+	{
+		return expression_t<___ego___>::template recreate_expression<expression_shared_scope_t<___ego___>>(expression_t<___ego___>::me_());
+	}
+
 	inline any_a<> evaluate_() const
 	{
 		any_a<> null;

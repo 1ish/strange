@@ -44,6 +44,11 @@ public:
 	}
 
 	// expression
+	inline expression_a<> recreate_() const
+	{
+		return _SUBSTITUTED_::template recreate_expression<_SUBSTITUTED_>(_SUBSTITUTED_::me_());
+	}
+
 	inline any_a<> evaluate_() const
 	{
 		any_a<> null;
